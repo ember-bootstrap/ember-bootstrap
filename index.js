@@ -11,23 +11,8 @@ var defaultOptions = {
     importBootstrapFont: true
 };
 
-function unwatchedTree(dir) {
-    return {
-        read:    function() { return dir; },
-        cleanup: function() { }
-    };
-}
-
 module.exports = {
     name: 'ember-bootstrap',
-
-    treeFor: function(name) {
-        if (name === 'vendor') {
-            // Map 'node_modules' to 'vendor', so that we can import Font Awesome assets later.
-            var treePath = path.join(__dirname, 'node_modules');
-            return unwatchedTree(treePath);
-        }
-    },
 
     included: function included(app) {
         this._super.included(app);
@@ -38,7 +23,7 @@ module.exports = {
         }
 
         var options         = extend(defaultOptions, app.options['ember-bootstrap']);
-        var bootstrapPath   = 'vendor/bootstrap/dist';
+        var bootstrapPath   = path.join(app.bowerDirectory, 'bootstrap/dist');
 
         // Import css from bootstrap
         if (options.importBootstrapTheme) {
@@ -50,10 +35,6 @@ module.exports = {
             app.import(path.join(bootstrapPath, 'css/bootstrap.css.map'), { destDir: 'assets' });
         }
 
-//        if (options.importBootstrapJS) {
-//            app.import(path.join(bootstrapPath, 'js/bootstrap.js'));
-//        }
-
         // Import glyphicons
         if (options.importBootstrapFont) {
             app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.eot'), { destDir: '/fonts' });
@@ -62,10 +43,5 @@ module.exports = {
             app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff'), { destDir: '/fonts' });
         }
 
-//        // import bootstrap module
-//        app.import(path.join('vendor/ember-cli-bootstrap/shim.js'), {
-//            type: 'vendor',
-//            exports: { 'bootstrap': ['default'] }
-//        });
     }
 };
