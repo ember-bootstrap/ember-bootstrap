@@ -24,11 +24,13 @@ test('it renders', function() {
 
 test('button has correct CSS classes', function() {
     var component = this.subject({
-        type: 'primary'
+        type: 'primary',
+        size: 'lg'
     });
 
-    equal(this.$().hasClass('btn'),true);
-    equal(this.$().hasClass('btn-primary'),true);
+    equal(this.$().hasClass('btn'),true, 'button has btn class');
+    equal(this.$().hasClass('btn-primary'),true, 'button has type class');
+    equal(this.$().hasClass('btn-lg'),true, 'button has size class');
 });
 
 
