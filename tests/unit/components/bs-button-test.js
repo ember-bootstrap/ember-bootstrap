@@ -25,12 +25,16 @@ test('it renders', function() {
 test('button has correct CSS classes', function() {
     var component = this.subject({
         type: 'primary',
-        size: 'lg'
+        size: 'lg',
+        active: true,
+        block: true
     });
 
     equal(this.$().hasClass('btn'),true, 'button has btn class');
     equal(this.$().hasClass('btn-primary'),true, 'button has type class');
     equal(this.$().hasClass('btn-lg'),true, 'button has size class');
+    equal(this.$().hasClass('active'),true, 'button has active class');
+    equal(this.$().hasClass('btn-block'),true, 'button has block class');
 });
 
 
@@ -49,6 +53,13 @@ test('button has HTML attributes', function() {
 
 });
 
+test('button has label', function() {
+    var component = this.subject({
+        label: 'test'
+    });
+    equal(this.$().text(),'test');
+});
+
 test('button has default type "button"', function() {
     var component = this.subject();
     equal(this.$().attr('type'),'button');
@@ -59,4 +70,17 @@ test('buttonType property allows changing button type', function() {
         buttonType: 'submit'
     });
     equal(this.$().attr('type'),'submit');
+});
+
+
+test('toggle button toggles active state when clicked', function() {
+    var component = this.subject({
+        toggle: true
+    });
+    equal(component.get('active'), false);
+    this.$().click();
+    equal(component.get('active'), true);
+    this.$().click();
+    equal(component.get('active'), false);
+
 });
