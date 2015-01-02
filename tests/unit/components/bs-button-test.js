@@ -2,6 +2,7 @@ import {
   moduleForComponent,
   test
 } from 'ember-qunit';
+import Ember from 'ember';
 
 moduleForComponent('bs-button', 'BsButtonComponent', {
   // specify the other units that are required for this test
@@ -116,4 +117,24 @@ test('button with iconActive and iconInactive properties shows icon depending on
 
     equal(this.$().find('i').hasClass('fa'),true);
     equal(this.$().find('i').hasClass('fa-plus'),true);
+});
+
+test('clicking a button sends default action with "value" property as a parameter', function() {
+    var value = 'dummy';
+    var testController = Ember.Controller.extend({
+        actions: {
+            testAction: function(actionParam) {
+                equal(actionParam, value, 'action parameter matches value property');
+            }
+        }
+    }).create();
+
+    var component = this.subject({
+        action: 'testAction',
+        value: value,
+        targetObject: testController
+    });
+
+    expect(1);
+    this.$().click();
 });

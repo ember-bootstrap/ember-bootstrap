@@ -50,6 +50,26 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      */
     toggle: false,
 
+    /**
+     * If button is active and this is set, the icon property will match this property
+     *
+     * @property iconActive
+     */
+    iconActive: null,
+
+    /**
+     * If button is inactive and this is set, the icon property will match this property
+     *
+     * @property iconInctive
+     */
+    iconInactive: null,
+
+    /**
+     * Class(es) (e.g. glyphicons or font awesome) to use as a button icon
+     * This will render a <i class="{{icon}}"></i> element in front of the button's label
+     *
+     * @property icon
+     */
     icon: (function() {
         if (this.get('active')) {
             return this.get('iconActive');
@@ -59,10 +79,19 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
     }).property('active'),
 
 
-    click: function() {
+    /**
+     * Supply a value that will be associated with this button. This will be send
+     * as a parameter of the default action triggered when clicking the button
+     *
+     * @property value
+     */
+    value: null,
+
+    click: function(evt) {
         if (this.get('toggle')) {
             this.toggleProperty('active');
         }
+        this.sendAction('action', this.get('value'), evt);
     }
 
 
