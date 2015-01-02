@@ -54,9 +54,9 @@ test('button has HTML attributes', function() {
 
 });
 
-test('button has label', function() {
+test('button has default label', function() {
     var component = this.subject({
-        label: 'test'
+        defaultText: 'test'
     });
     equal(this.$().text(),'test');
 });
@@ -137,4 +137,78 @@ test('clicking a button sends default action with "value" property as a paramete
 
     expect(1);
     this.$().click();
+});
+
+test('button text is changed according to button state', function() {
+    var component = this.subject({
+        defaultText: 'text1',
+        loadingText: 'text2'
+    });
+
+    equal(this.$().text(),'text1');
+
+    Ember.run(function(){
+        component.set('textState', 'loading');
+    });
+
+    equal(this.$().text(),'text2');
+
+    Ember.run(function(){
+        component.resetState();
+    });
+
+    equal(this.$().text(),'text1');
+});
+
+test('setting reset to true resets button state', function() {
+    var component = this.subject({
+        defaultText: 'text1',
+        loadingText: 'text2',
+        textState: 'loading'
+    });
+
+    equal(this.$().text(),'text2');
+
+    Ember.run(function(){
+        component.set('reset', 1);
+    });
+
+    equal(this.$().text(),'text1');
+});
+
+test('clicking a button sends default action with callback, if promise is returned button state is changed according to promise state', function() {
+    var promise,
+        resolvePromise;
+    var testController = Ember.Controller.extend({
+        actions: {
+            testAction: function(actionParam, evt, cb) {
+                promise = new Ember.RSVP.Promise(function(resolve){
+                    resolvePromise = resolve;
+                });
+                cb(promise);
+            }
+        }
+    }).create();
+
+    var component = this.subject({
+        action: 'testAction',
+        targetObject: testController,
+        defaultText: 'default',
+        pendingText: 'pending',
+        resolvedText: 'resolved',
+        rejectedText: 'rejected'
+    });
+
+    expect();
+    this.$().click();
+    equal(component.get('textState'), 'pending');
+    equal(this.$().text(),'pending');
+
+    Ember.run(function(){
+        resolvePromise();
+    });
+
+    equal(component.get('textState'), 'resolved');
+    equal(this.$().text(),'resolved');
+
 });

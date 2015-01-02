@@ -10,9 +10,11 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
     attributeBindings: ['id', 'disabled', 'buttonType:type'],
 
     /**
-     * Label of the button. Not need if used as a block component
+     * Default label of the button. Not need if used as a block component
+     *
+     * @property defaultText
      */
-    label: null,
+    defaultText: null,
 
     /**
      * Property to disable the button
@@ -70,13 +72,13 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      *
      * @property icon
      */
-    icon: (function() {
+    icon: Ember.computed('active', function() {
         if (this.get('active')) {
             return this.get('iconActive');
         } else {
             return this.get('iconInactive');
         }
-    }).property('active'),
+    }),
 
 
     /**
@@ -87,11 +89,67 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      */
     value: null,
 
+    /**
+     * State of the button. The button's label (if not used as a block component) will be set to the
+     * <state>Text property.
+     * This property will automatically be set when using a click action that supplies the callback with an promise
+     *
+     * @property textState
+     */
+    textState: 'default',
+
+    /**
+     * Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.
+     *
+     * @property reset
+     * @see resetState
+     */
+    reset: null,
+
+    /**
+     * This will reset the state property to 'default', and with that the button's label to defaultText
+     */
+    resetState: function() {
+        this.set('textState', 'default');
+    },
+
+    resetObserver: Ember.observer('reset', function(){
+        if(this.get('reset')){
+            this.resetState();
+        }
+    }),
+
+    text: Ember.computed('textState', 'defaultText', 'pendingText', 'resolvedText', 'rejectedText', function() {
+        return this.getWithDefault(this.get('textState') + 'Text', this.get('defaultText'));
+    }),
+
+    /**
+     * Click handler. This will send the default "action" action, with the following parameters:
+     * * value of the button (that is the value of the "value" property)
+     * * original event object of the click event
+     * * callback: call that with a promise object, and the buttons state will automatically set to "pending", "resolved" and/or "rejected"
+     *
+     * @param evt
+     */
     click: function(evt) {
         if (this.get('toggle')) {
             this.toggleProperty('active');
         }
-        this.sendAction('action', this.get('value'), evt);
+        var that = this;
+        var callback = function(promise) {
+            if (promise) {
+                that.set('textState', 'pending');
+                promise.then(
+                    function(){
+                        that.set('textState', 'resolved');
+                    },
+                    function(){
+                        that.set('textState', 'rejected');
+                    }
+                );
+            }
+        };
+        this.sendAction('action', this.get('value'), evt, callback);
     }
 
 

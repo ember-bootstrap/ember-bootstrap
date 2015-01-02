@@ -98,3 +98,4 @@ module.exports = app.toTree();
 * http://getbootstrap.com/
 * https://github.com/ember-addons/bootstrap-for-ember
 * https://github.com/dockyard/ember-cli-bootstrap
+* https://github.com/dockyard/ember-cli-async-button
