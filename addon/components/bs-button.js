@@ -50,6 +50,14 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      */
     toggle: false,
 
+    icon: (function() {
+        if (this.get('active')) {
+            return this.get('iconActive');
+        } else {
+            return this.get('iconInactive');
+        }
+    }).property('active'),
+
 
     click: function() {
         if (this.get('toggle')) {

@@ -84,3 +84,36 @@ test('toggle button toggles active state when clicked', function() {
     equal(component.get('active'), false);
 
 });
+
+
+test('button with icon property shows icon', function() {
+    var component = this.subject({
+        icon: 'fa fa-check'
+    });
+    equal(this.$().find('i').hasClass('fa'),true);
+    equal(this.$().find('i').hasClass('fa-check'),true);
+});
+
+
+test('button with iconActive and iconInactive properties shows icon depending on active state', function() {
+    var component = this.subject({
+        iconInactive: 'fa fa-plus',
+        iconActive: 'fa fa-minus'
+    });
+    equal(this.$().find('i').hasClass('fa'),true);
+    equal(this.$().find('i').hasClass('fa-plus'),true);
+
+    Ember.run(function(){
+        component.set('active', true);
+    });
+
+    equal(this.$().find('i').hasClass('fa'),true);
+    equal(this.$().find('i').hasClass('fa-minus'),true);
+
+    Ember.run(function(){
+        component.set('active', false);
+    });
+
+    equal(this.$().find('i').hasClass('fa'),true);
+    equal(this.$().find('i').hasClass('fa-plus'),true);
+});
