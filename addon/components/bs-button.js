@@ -141,10 +141,14 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
                 that.set('textState', 'pending');
                 promise.then(
                     function(){
-                        that.set('textState', 'resolved');
+                        if (!that.get('isDestroyed')) {
+                            that.set('textState', 'resolved');
+                        }
                     },
                     function(){
-                        that.set('textState', 'rejected');
+                        if (!that.get('isDestroyed')) {
+                            that.set('textState', 'rejected');
+                        }
                     }
                 );
             }
