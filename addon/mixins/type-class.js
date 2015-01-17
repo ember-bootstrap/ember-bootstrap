@@ -1,5 +1,8 @@
 import Ember from 'ember';
 
+/**
+ * @class Bootstrap.TypeClass
+ */
 export default Ember.Mixin.create({
     classTypePrefix: Ember.required(String),
     classNameBindings: ['typeClass'],
@@ -13,8 +16,11 @@ export default Ember.Mixin.create({
     /**
      * Property for type styling
      *
-     * @see http://getbootstrap.com/css/#buttons-options
+     * For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without "btn-" prefix)
+     *
      * @property type
+     * @type String
+     * @default 'default'
      */
     type: 'default'
 });

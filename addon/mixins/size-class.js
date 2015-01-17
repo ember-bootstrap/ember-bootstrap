@@ -1,5 +1,8 @@
 import Ember from 'ember';
 
+/**
+ * @class Bootstrap.SizeClass
+ */
 export default Ember.Mixin.create({
     classTypePrefix: Ember.required(String),
     classNameBindings: ['sizeClass'],
@@ -13,8 +16,10 @@ export default Ember.Mixin.create({
     /**
      * Property for size styling, set to 'lg', 'sm' or 'xs'
      *
-     * @see http://getbootstrap.com/css/#buttons-sizes
-     * @property block
+     * Also see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)
+     *
+     * @property size
+     * @type String
      */
     size: null
 });
