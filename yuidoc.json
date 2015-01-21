@@ -7,7 +7,7 @@
       "addon"
     ],
     "exclude": "vendor",
-    "outdir": "docs",
+    "outdir": "docs/api",
     "themedir": "node_modules/yuidoc-bootstrap-theme",
     "helpers" : [ "node_modules/yuidoc-bootstrap-theme/helpers/helpers.js" ]
   }
