@@ -2,7 +2,7 @@
   "name": "ember-bootstrap",
   "version": "0.0.2",
   "directories": {
-    "doc": "doc",
+    "doc": "docs",
     "test": "tests"
   },
   "scripts": {
@@ -10,7 +10,10 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "https://github.com/kaliber5/ember-bootstrap",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaliber5/ember-bootstrap"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -42,5 +45,9 @@
   ],
   "ember-addon": {
     "configPath": "tests/dummy/config"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/kaliber5/ember-bootstrap/issues"
+  },
+  "homepage": "http://kaliber5.github.io/ember-bootstrap/"
 }
