@@ -1,154 +1,49 @@
-<!DOCTYPE html>
-<html>
+---
+hide_sidebar: true
+---
+        
+        
+<div class="jumbotron">
+    <h1>ember-bootstrap</h1>
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Ember-bootstrap : ">
+    <p>An <a href="http://www.ember-cli.com">ember-cli</a> addon for using <a href="http://getbootstrap.com/">Twitter Bootstrap</a> in
+        <a href="http://www.emberjs.com"></a>Ember.js applications.</p>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <p>The addon includes the Bootstrap assets (CSS, Icons) in your project (<a href="{{ "/getting-started" | prepend:site.baseurl }}">can be disabled</a>). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
 
-    <title>Ember-bootstrap</title>
-  </head>
+    <!--<p>The motivation for this addon is to replace the [bootstrap_for_ember](https://github.com/ember-addons/bootstrap-for-ember) library, which does not seem to be actively developed, and is not up to date with current ember.js developments (ember-cli, no support for Ember's Run Loop).</p>-->
+</div>        
+        
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>For instruction on installing and configuring the addon, see the the Getting Started Guide...</p>
+        <p><a class="btn btn-primary" href="{{ "/getting-started" | prepend:site.baseurl }}">Getting Started</a></p>
 
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/kaliber5/ember-bootstrap">View on GitHub</a>
-
-          <h1 id="project_title">Ember-bootstrap</h1>
-          <h2 id="project_tagline"></h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/kaliber5/ember-bootstrap/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/kaliber5/ember-bootstrap/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a id="ember-bootstrap" class="anchor" href="#ember-bootstrap" aria-hidden="true"><span class="octicon octicon-link"></span></a>ember-bootstrap</h1>
+    <div class="col-md-4">
+        <h2>Components</h2>
 
-<p>An <a href="http://www.ember-cli.com">ember-cli</a> addon for using <a href="http://getbootstrap.com/">Twitter Bootstrap</a> in Ember applications.</p>
+        <p>An overview of the available Ember.js Bootstrap components...</p>
+        <p><a class="btn btn-primary" href="{{ "/components" | prepend:site.baseurl }}">Component Overview</a></p>
+    </div>
+    
+    <div class="col-md-4">
+        <h2>API</h2>
 
-<p>The motivation for this addon is to replace the <a href="https://github.com/ember-addons/bootstrap-for-ember">bootstrap_for_ember</a> library, which does not seem to be actively developed, and is not up to date with current ember.js developments (components, ember-cli, no support for Ember's Run Loop).</p>
+        <p>An overview of all components, their usage and detailed API can be found in the API documentation...</p>
+        <p><a class="btn btn-primary" href="{{ "/api" | prepend:site.baseurl }}">API Docs</a></p>
 
-<h2>
-<a id="install-in-ember-cli-application" class="anchor" href="#install-in-ember-cli-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install in ember-cli application</h2>
-
-<p>In your application's directory:</p>
-
-<pre><code>npm install --save-dev ember-bootstrap
-</code></pre>
-
-<h2>
-<a id="addon-options" class="anchor" href="#addon-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Addon Options</h2>
-
-<h3>
-<a id="importing-specific-components" class="anchor" href="#importing-specific-components" aria-hidden="true"><span class="octicon octicon-link"></span></a>Importing specific components</h3>
-
-<p>By default, all of the components will be imported into the project. You can optionally specify exactly which components
-should be imported into the project via the <code>component</code> option, which accepts an array of component names:</p>
-
-<div class="highlight highlight-javascript"><pre><span class="pl-c">//your-bootstrap-app/Brocfile.js</span>
-
-<span class="pl-c">/* global require, module */</span>
-
-<span class="pl-s">var</span> EmberApp <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>ember-cli/lib/broccoli/ember-app<span class="pl-pds">'</span></span>);
-
-<span class="pl-s">var</span> app <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">EmberApp</span>({
-  <span class="pl-s1"><span class="pl-pds">'</span>ember-cli-bootstrap<span class="pl-pds">'</span></span><span class="pl-k">:</span> {
-    <span class="pl-s1"><span class="pl-pds">'</span>components<span class="pl-pds">'</span></span><span class="pl-k">:</span> [<span class="pl-s1"><span class="pl-pds">'</span>bs-alert<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>bs-notifications<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>bs-nav<span class="pl-pds">'</span></span>]
-  }
-});
-
-<span class="pl-sv">module</span>.exports <span class="pl-k">=</span> app.toTree();</pre></div>
-
-<h3>
-<a id="importing-twitter-bootstrap-theme" class="anchor" href="#importing-twitter-bootstrap-theme" aria-hidden="true"><span class="octicon octicon-link"></span></a>Importing Twitter Bootstrap Theme</h3>
-
-<p>Bootstrap comes with an optional theme CSS with various visual enhancements.  To include this file you can import it by setting <code>importBootstrapTheme</code> to true in your <code>Brocfile.js</code>:</p>
-
-<div class="highlight highlight-javascript"><pre><span class="pl-c">//your-bootstrap-app/Brocfile.js</span>
-
-<span class="pl-c">/* global require, module */</span>
-
-<span class="pl-s">var</span> EmberApp <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>ember-cli/lib/broccoli/ember-app<span class="pl-pds">'</span></span>);
-
-<span class="pl-s">var</span> app <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">EmberApp</span>({
-  <span class="pl-s1"><span class="pl-pds">'</span>ember-bootstrap<span class="pl-pds">'</span></span><span class="pl-k">:</span> {
-    <span class="pl-s1"><span class="pl-pds">'</span>importBootstrapTheme<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">true</span>
-  }
-});
-
-<span class="pl-sv">module</span>.exports <span class="pl-k">=</span> app.toTree();</pre></div>
-
-<h3>
-<a id="opting-out-of-bootstrap-css" class="anchor" href="#opting-out-of-bootstrap-css" aria-hidden="true"><span class="octicon octicon-link"></span></a>Opting out of Bootstrap CSS</h3>
-
-<p>In situations where you prefer to use another strategy for importing Bootstrap CSS,
-you can opt out of CSS import by setting the <code>importBootstrapCSS</code> option to false in your <code>Brocfile.js</code>:</p>
-
-<div class="highlight highlight-javascript"><pre><span class="pl-c">//your-bootstrap-app/Brocfile.js</span>
-
-<span class="pl-c">/* global require, module */</span>
-
-<span class="pl-s">var</span> EmberApp <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>ember-cli/lib/broccoli/ember-app<span class="pl-pds">'</span></span>);
-
-<span class="pl-s">var</span> app <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">EmberApp</span>({
-  <span class="pl-s1"><span class="pl-pds">'</span>ember-bootstrap<span class="pl-pds">'</span></span><span class="pl-k">:</span> {
-    <span class="pl-s1"><span class="pl-pds">'</span>importBootstrapCSS<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">false</span>
-  }
-});
-
-<span class="pl-sv">module</span>.exports <span class="pl-k">=</span> app.toTree();</pre></div>
-
-<h3>
-<a id="opting-out-of-bootstrap-font" class="anchor" href="#opting-out-of-bootstrap-font" aria-hidden="true"><span class="octicon octicon-link"></span></a>Opting out of Bootstrap Font</h3>
-
-<p>In situations where you prefer to use another strategy for importing the Bootstrap font,
-you can opt out of the font import by setting the <code>importBootstrapFont</code> option to false in your <code>Brocfile.js</code>:</p>
-
-<div class="highlight highlight-javascript"><pre><span class="pl-c">//your-bootstrap-app/Brocfile.js</span>
-
-<span class="pl-c">/* global require, module */</span>
-
-<span class="pl-s">var</span> EmberApp <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>ember-cli/lib/broccoli/ember-app<span class="pl-pds">'</span></span>);
-
-<span class="pl-s">var</span> app <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">EmberApp</span>({
-  <span class="pl-s1"><span class="pl-pds">'</span>ember-bootstrap<span class="pl-pds">'</span></span><span class="pl-k">:</span> {
-    <span class="pl-s1"><span class="pl-pds">'</span>importBootstrapFont<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">false</span>
-  }
-});
-
-<span class="pl-sv">module</span>.exports <span class="pl-k">=</span> app.toTree();</pre></div>
-
-<h2>
-<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits</h2>
-
-<ul>
-<li><a href="http://getbootstrap.com/">http://getbootstrap.com/</a></li>
-<li><a href="https://github.com/ember-addons/bootstrap-for-ember">https://github.com/ember-addons/bootstrap-for-ember</a></li>
-<li><a href="https://github.com/dockyard/ember-cli-bootstrap">https://github.com/dockyard/ember-cli-bootstrap</a></li>
-<li><a href="https://github.com/dockyard/ember-cli-async-button">https://github.com/dockyard/ember-cli-async-button</a></li>
-</ul>
-      </section>
     </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Ember-bootstrap maintained by <a href="https://github.com/kaliber5">kaliber5</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
 
     
+</div>
 
-  </body>
-</html>
+<hr/>
+
+{% include author.html %}
+{% include copyright.html %}
+
+

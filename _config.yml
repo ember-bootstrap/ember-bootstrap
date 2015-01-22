@@ -1,0 +1,29 @@
+url: "http://kaliber5.github.io/ember-bootstrap/" # the base hostname & protocol for your site
+title: "ember-bootstrap"
+repository: "http://github.com/kaliber5/ember-bootstrap"
+
+# This is used by feed.xml. Uncomment if you want to use it.
+# description: "..."
+
+gems:
+  - jemoji
+exclude:
+  - "README.md"
+  - "CHANGELOG.md"
+  - "CNAME"
+  - "Gemfile"
+  - "Gemfile.lock"
+permalink: :title
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
