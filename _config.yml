@@ -1,6 +1,6 @@
 url: "http://kaliber5.github.io/ember-bootstrap/" # the base hostname & protocol for your site
+baseurl: "/ember-bootstrap"
 title: "ember-bootstrap"
-repository: "http://github.com/kaliber5/ember-bootstrap"
 
 # This is used by feed.xml. Uncomment if you want to use it.
 # description: "..."
