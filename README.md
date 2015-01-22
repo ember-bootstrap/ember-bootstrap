@@ -4,6 +4,8 @@ An [ember-cli](http://www.ember-cli.com) addon for using [Twitter Bootstrap](htt
 
 The motivation for this addon is to replace the [bootstrap_for_ember](https://github.com/ember-addons/bootstrap-for-ember) library, which does not seem to be actively developed, and is not up to date with current ember.js developments (components, ember-cli, no support for Ember's Run Loop).
 
+See http://kaliber5.github.io/ember-bootstrap/ for full documentation.
+
 ## Install in ember-cli application
 
 In your application's directory:
@@ -93,9 +95,18 @@ var app = new EmberApp({
 module.exports = app.toTree();
 ```
 
-## Credits
+## Authors
+
+[Simon Ihmig](https://github.com/simonihmig) @ [kaliber5](http://www.kaliber5.de)
+
+Credits:
 
 * http://getbootstrap.com/
 * https://github.com/ember-addons/bootstrap-for-ember
 * https://github.com/dockyard/ember-cli-bootstrap
 * https://github.com/dockyard/ember-cli-async-button
+
+
+## Copyright and license
+
+Code and documentation copyright 2015 kaliber5 GmbH. Code released under [the MIT license](LICENSE).
