@@ -1,12 +1,8 @@
 var gulp = require('gulp');
-var deploy = require('gulp-gh-pages');
+var ghpages = require('gh-pages');
+var path = require('path');
 
 gulp.task('docs', ['docs:publish']);
-
-gulp.task('docs:readme', function (cb) {
-    return gulp.src('README.md')
-        .pipe(gulp.dest('docs'));
-});
 
 
 gulp.task('docs:generate', function (cb) {
@@ -16,9 +12,8 @@ gulp.task('docs:generate', function (cb) {
     });
 });
 
-gulp.task('docs:publish', ['docs:generate','docs:readme'], function () {
-    return gulp.src('./docs/**/*')
-        .pipe(deploy({
-
-        }));
+gulp.task('docs:publish', ['docs:generate'], function () {
+    ghpages.publish(path.join(__dirname, 'docs'), {
+        add: true
+    });
 });

@@ -10,7 +10,7 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": "https://github.com/kaliber5/ember-bootstrap",
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -30,9 +30,9 @@
     "ember-data": "1.0.0-beta.12",
     "ember-export-application-global": "^1.0.0",
     "express": "^4.8.5",
+    "gh-pages": "^0.2.0",
     "glob": "^4.0.5",
     "gulp": "^3.8.10",
-    "gulp-gh-pages": "^0.4.0",
     "gulp-rename": "^1.2.0",
     "yuidoc-bootstrap-theme": "^1.0.4"
   },
