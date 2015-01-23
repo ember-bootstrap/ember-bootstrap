@@ -1,12 +1,36 @@
 ---
 ---
 
+$brand-primary: #EF5A31;
+$navbar-inverse-color: #fff;
+$navbar-inverse-bg: #EF5A31;
+$navbar-inverse-border: #7BBA1D;
+$navbar-inverse-link-color: #fff;
+$navbar-inverse-toggle-border-color: #fff;
+$navbar-inverse-toggle-hover-bg: darken($navbar-inverse-bg, 10%);
+
 
 $font-family-sans-serif: 'myriad-pro', sans-serif;
 
 
+
+
+
+
 @import "custom-bootstrap-variables";
 @import "bootstrap-sass/bootstrap";
+
+
+.navbar-static-top {
+  border-width: 0 0 3px;
+}
+
+.logo {
+  margin-top: 20px;
+}
+
+
+/*
 
 $space-xs: $line-height-computed * 1;
 $space-sm: $line-height-computed * 1.5;
@@ -140,3 +164,5 @@ h3 {
 }
 
 @import "custom-scss";
+
+*/

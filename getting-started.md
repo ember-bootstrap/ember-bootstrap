@@ -9,7 +9,12 @@ layout: page
 
 In your application's directory:
 
+    ember install:addon ember-bootstrap
+    
+If you are using an ember-cli version prior to 0.1.5, use the following commands instead:
+    
     npm install --save-dev ember-bootstrap
+    ember g ember-bootstrap
 
 ## Addon Options
 

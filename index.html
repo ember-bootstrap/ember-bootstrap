@@ -2,34 +2,52 @@
 hide_sidebar: true
 ---
         
-        
-<div class="jumbotron">
-    <h1>ember-bootstrap</h1>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="jumbotron">
+            <h1>ember-bootstrap</h1>
 
-    <p>An <a href="http://www.ember-cli.com">ember-cli</a> addon for using <a href="http://getbootstrap.com/">Twitter Bootstrap</a> in
-        <a href="http://www.emberjs.com"></a>Ember.js applications.</p>
+            <p>An <a href="http://www.ember-cli.com">ember-cli</a> addon for using <a href="http://getbootstrap.com/">Twitter Bootstrap</a> in
+                <a href="http://www.emberjs.com"></a>Ember.js applications.</p>
 
-    <p>The addon includes the Bootstrap assets (CSS, Icons) in your project (<a href="{{ "/getting-started" | prepend:site.baseurl }}">can be disabled</a>). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
+            <p>The addon includes the Bootstrap assets (CSS, Icons) in your project (<a href="{{ "/getting-started" | prepend:site.baseurl }}">can be disabled</a>). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
 
-    <!--<p>The motivation for this addon is to replace the [bootstrap_for_ember](https://github.com/ember-addons/bootstrap-for-ember) library, which does not seem to be actively developed, and is not up to date with current ember.js developments (ember-cli, no support for Ember's Run Loop).</p>-->
-</div>        
+            <!--<p>The motivation for this addon is to replace the [bootstrap_for_ember](https://github.com/ember-addons/bootstrap-for-ember) library, which does not seem to be actively developed, and is not up to date with current ember.js developments (ember-cli, no support for Ember's Run Loop).</p>-->
+        </div>
+    </div>
+
+    <div class="col-sm-4 hidden-xs">
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3"><a href="http://www.kaliber5.de"><img src="{{site.baseurl}}/images/kaliber5.png" class="img-responsive logo" alt=""/></a></div>
+        </div>
+
+
+        {% include author.html %}
+        {% include copyright.html %}
+    </div>
+
+</div>
+
+
+
         
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-sm-4">
         <h2>Getting started</h2>
         <p>For instruction on installing and configuring the addon, see the the Getting Started Guide...</p>
         <p><a class="btn btn-primary" href="{{ "/getting-started" | prepend:site.baseurl }}">Getting Started</a></p>
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-sm-4">
         <h2>Components</h2>
 
         <p>An overview of the available Ember.js Bootstrap components...</p>
         <p><a class="btn btn-primary" href="{{ "/components" | prepend:site.baseurl }}">Component Overview</a></p>
     </div>
     
-    <div class="col-md-4">
+    <div class="col-sm-4">
         <h2>API</h2>
 
         <p>An overview of all components, their usage and detailed API can be found in the API documentation...</p>
@@ -41,9 +59,16 @@ hide_sidebar: true
     
 </div>
 
-<hr/>
 
-{% include author.html %}
-{% include copyright.html %}
+<div class="visible-xs">
+
+    <hr/>
+    {% include author.html %}
+    {% include copyright.html %}
+</div>
+
+
+
+
 
 
