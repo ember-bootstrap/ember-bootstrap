@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "0.0.2"
+        "version": "0.0.3"
     },
     "files": {
         "addon/components/bs-button.js": {
