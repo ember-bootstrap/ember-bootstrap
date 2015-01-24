@@ -3,12 +3,75 @@ import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
 
 /**
- * @class Button
- * @namespace Bootstrap
- * @extends Ember.Component
- * @uses Bootstrap.TypeClass
- * @uses Bootstrap.SizeClass
- */
+ Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
+ as well as advanced functionality such as button states.
+
+ ### Basic Usage
+
+ ```handlebars
+ \{{#bs-button type="primary" icon="glyphicon glyphicon-download"}}Download{{/bs-button}}
+ ```
+
+ ### Actions
+
+ Set the action property of the component to send an action to your controller. The following parameters will be sent:
+ * value: the button's value, see the `value` property
+ * event: the browsers event object
+ * callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling
+
+ ```handlebars
+ \{{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
+    Download
+ {{/bs-button}}
+ ```
+
+ ### States
+
+ Use the `textState` property to change the label of the button. You can bind it to a controller property to set a "loading" state for example.
+ The label of the button will be taken from the `<state>Text` property.
+
+ ```handlebars
+ {{bs-button type="primary" icon="glyphicon glyphicon-download" textState=buttonState defaultText="Download" loadingText="Loading..." action="download"}}
+ ```
+
+ ```js
+ App.ApplicationController = Ember.Controller.extend({
+   buttonState: "default"
+   actions: {
+     download: function() {
+       this.set("buttonState", "loading");
+     }
+   }
+ });
+ ```
+
+ ### Promise support for automatic state change
+
+ When using the callback function of the click action to supply a Promise for any asynchronous operation the button will
+ manage its `textState` property automatically, changing its value according to the state of the promise:
+ "default" > "pending" > "resolved"/"rejected"
+
+ ```handlebars
+ {{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" action="download"}}
+ ```
+
+ ```js
+ App.ApplicationController = Ember.Controller.extend({
+   actions: {
+     download: function(actionParam, evt, cb) {
+       promise = new Ember.RSVP.Promise(...);
+       cb(promise);
+     }
+   }
+ });
+ ```
+
+ @class Button
+ @namespace Bootstrap
+ @extends Ember.Component
+ @uses Bootstrap.TypeClass
+ @uses Bootstrap.SizeClass
+*/
 export default Ember.Component.extend(TypeClass, SizeClass, {
     tagName: 'button',
 
@@ -138,7 +201,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
 
     /**
      * State of the button. The button's label (if not used as a block component) will be set to the
-     * <state>Text property.
+     * `<state>Text` property.
      * This property will automatically be set when using a click action that supplies the callback with an promise
      *
      * @property textState
