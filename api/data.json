@@ -1,0 +1,307 @@
+{
+    "project": {
+        "name": "ember-bootstrap",
+        "description": "Twitter Bootstrap components for Ember.js",
+        "version": "0.0.3"
+    },
+    "files": {
+        "addon/components/bs-button.js": {
+            "name": "addon/components/bs-button.js",
+            "modules": {},
+            "classes": {
+                "Bootstrap.Button": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Bootstrap": 1
+            }
+        },
+        "addon/mixins/size-class.js": {
+            "name": "addon/mixins/size-class.js",
+            "modules": {},
+            "classes": {
+                "Bootstrap.SizeClass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/mixins/type-class.js": {
+            "name": "addon/mixins/type-class.js",
+            "modules": {},
+            "classes": {
+                "Bootstrap.TypeClass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Bootstrap.Button": {
+            "name": "Bootstrap.Button",
+            "shortname": "Bootstrap.Button",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Bootstrap",
+            "file": "addon/components/bs-button.js",
+            "line": 5,
+            "extends": "Ember.Component",
+            "uses": [
+                "Bootstrap.TypeClass",
+                "Bootstrap.SizeClass"
+            ]
+        },
+        "Bootstrap.SizeClass": {
+            "name": "Bootstrap.SizeClass",
+            "shortname": "Bootstrap.SizeClass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "Bootstrap.Button"
+            ],
+            "namespace": "Bootstrap",
+            "file": "addon/mixins/size-class.js",
+            "line": 3
+        },
+        "Bootstrap.TypeClass": {
+            "name": "Bootstrap.TypeClass",
+            "shortname": "Bootstrap.TypeClass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "Bootstrap.Button"
+            ],
+            "namespace": "Bootstrap",
+            "file": "addon/mixins/type-class.js",
+            "line": 3
+        }
+    },
+    "classitems": [
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 15,
+            "itemtype": "property",
+            "name": "classNames",
+            "type": "array",
+            "default": "['btn']",
+            "access": "protected",
+            "tagname": "",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 23,
+            "itemtype": "property",
+            "name": "classNameBindings",
+            "type": "array",
+            "default": "['active', 'block:btn-block']",
+            "access": "protected",
+            "tagname": "",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 31,
+            "itemtype": "property",
+            "name": "classTypePrefix",
+            "type": "String",
+            "default": "'btn'",
+            "access": "protected",
+            "tagname": "",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 39,
+            "itemtype": "property",
+            "name": "attributeBindings",
+            "type": "array",
+            "default": "['id', 'disabled', 'buttonType:type']",
+            "access": "protected",
+            "tagname": "",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 47,
+            "description": "Default label of the button. Not need if used as a block component",
+            "itemtype": "property",
+            "name": "defaultText",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 54,
+            "description": "Property to disable the button",
+            "itemtype": "property",
+            "name": "disabled",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 61,
+            "description": "Set the type of the button, either 'button' or 'submit'",
+            "itemtype": "property",
+            "name": "buttonType",
+            "type": "String",
+            "default": "'button'",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 70,
+            "description": "Set the 'active' class to apply active/pressed CSS styling",
+            "itemtype": "property",
+            "name": "active",
+            "type": "boolean",
+            "default": "false",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 79,
+            "description": "Property for block level buttons\n\nSee the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)",
+            "itemtype": "property",
+            "name": "block",
+            "type": "boolean",
+            "default": "false",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 89,
+            "description": "If toggle property is true, clicking the button will toggle the active state",
+            "itemtype": "property",
+            "name": "toggle",
+            "type": "boolean",
+            "default": "false",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 98,
+            "description": "If button is active and this is set, the icon property will match this property",
+            "itemtype": "property",
+            "name": "iconActive",
+            "type": "String",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 106,
+            "description": "If button is inactive and this is set, the icon property will match this property",
+            "itemtype": "property",
+            "name": "iconInactive",
+            "type": "String",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 114,
+            "description": "Class(es) (e.g. glyphicons or font awesome) to use as a button icon\nThis will render a <i class=\"{{icon}}\"></i> element in front of the button's label",
+            "itemtype": "property",
+            "name": "icon",
+            "type": "String",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 130,
+            "description": "Supply a value that will be associated with this button. This will be send\nas a parameter of the default action triggered when clicking the button",
+            "itemtype": "property",
+            "name": "value",
+            "type": "any",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 139,
+            "description": "State of the button. The button's label (if not used as a block component) will be set to the\n<state>Text property.\nThis property will automatically be set when using a click action that supplies the callback with an promise",
+            "itemtype": "property",
+            "name": "textState",
+            "type": "String",
+            "default": "'default'",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 150,
+            "description": "Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.",
+            "itemtype": "property",
+            "name": "reset",
+            "type": "boolean",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 158,
+            "description": "This will reset the state property to 'default', and with that the button's label to defaultText",
+            "itemtype": "method",
+            "name": "resetState",
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button.js",
+            "line": 177,
+            "description": "Click handler. This will send the default \"action\" action, with the following parameters:\n* value of the button (that is the value of the \"value\" property)\n* original event object of the click event\n* callback: call that with a promise object, and the buttons state will automatically set to \"pending\", \"resolved\" and/or \"rejected\"",
+            "itemtype": "method",
+            "name": "click",
+            "access": "protected",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": ""
+                }
+            ],
+            "class": "Bootstrap.Button",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/mixins/size-class.js",
+            "line": 16,
+            "description": "Property for size styling, set to 'lg', 'sm' or 'xs'\n\nAlso see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)",
+            "itemtype": "property",
+            "name": "size",
+            "type": "String",
+            "class": "Bootstrap.SizeClass",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/mixins/type-class.js",
+            "line": 16,
+            "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without \"btn-\" prefix)",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "default": "'default'",
+            "class": "Bootstrap.TypeClass",
+            "namespace": "Bootstrap"
+        }
+    ],
+    "warnings": []
+}

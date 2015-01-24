@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/components/bs-button.js - ember-bootstrap</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="ember-bootstrap" src="../assets/css/logo.png" style="max-height: 65%;" title="ember-bootstrap">
+        
+            ember-bootstrap
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.0.3</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/Bootstrap.Button", "classes/Bootstrap.SizeClass", "classes/Bootstrap.TypeClass"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+            <li><a href="#modules" data-toggle="tab">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/Bootstrap.Button.html">Bootstrap.Button</a></li>
+                    
+                        <li><a href="../classes/Bootstrap.SizeClass.html">Bootstrap.SizeClass</a></li>
+                    
+                        <li><a href="../classes/Bootstrap.TypeClass.html">Bootstrap.TypeClass</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>addon/components/bs-button.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
+import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
+
+/**
+ * @class Button
+ * @namespace Bootstrap
+ * @extends Ember.Component
+ * @uses Bootstrap.TypeClass
+ * @uses Bootstrap.SizeClass
+ */
+export default Ember.Component.extend(TypeClass, SizeClass, {
+    tagName: &#x27;button&#x27;,
+
+    /**
+     * @property classNames
+     * @type array
+     * @default [&#x27;btn&#x27;]
+     * @protected
+     */
+    classNames: [&#x27;btn&#x27;],
+
+    /**
+     * @property classNameBindings
+     * @type array
+     * @default [&#x27;active&#x27;, &#x27;block:btn-block&#x27;]
+     * @protected
+     */
+    classNameBindings: [&#x27;active&#x27;, &#x27;block:btn-block&#x27;],
+
+    /**
+     * @property classTypePrefix
+     * @type String
+     * @default &#x27;btn&#x27;
+     * @protected
+     */
+    classTypePrefix: &#x27;btn&#x27;,
+
+    /**
+     * @property attributeBindings
+     * @type array
+     * @default [&#x27;id&#x27;, &#x27;disabled&#x27;, &#x27;buttonType:type&#x27;]
+     * @protected
+     */
+    attributeBindings: [&#x27;id&#x27;, &#x27;disabled&#x27;, &#x27;buttonType:type&#x27;],
+
+    /**
+     * Default label of the button. Not need if used as a block component
+     *
+     * @property defaultText
+     */
+    defaultText: null,
+
+    /**
+     * Property to disable the button
+     *
+     * @property disabled
+     */
+    disabled: false,
+
+    /**
+     * Set the type of the button, either &#x27;button&#x27; or &#x27;submit&#x27;
+     *
+     * @property buttonType
+     * @type String
+     * @default &#x27;button&#x27;
+     */
+    buttonType: &#x27;button&#x27;,
+
+    /**
+     * Set the &#x27;active&#x27; class to apply active/pressed CSS styling
+     *
+     * @property active
+     * @type boolean
+     * @default false
+     */
+    active: false,
+
+    /**
+     * Property for block level buttons
+     *
+     * See the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)
+     * @property block
+     * @type boolean
+     * @default false
+     */
+    block: false,
+
+    /**
+     * If toggle property is true, clicking the button will toggle the active state
+     *
+     * @property toggle
+     * @type boolean
+     * @default false
+     */
+    toggle: false,
+
+    /**
+     * If button is active and this is set, the icon property will match this property
+     *
+     * @property iconActive
+     * @type String
+     */
+    iconActive: null,
+
+    /**
+     * If button is inactive and this is set, the icon property will match this property
+     *
+     * @property iconInactive
+     * @type String
+     */
+    iconInactive: null,
+
+    /**
+     * Class(es) (e.g. glyphicons or font awesome) to use as a button icon
+     * This will render a &lt;i class=&quot;{{icon}}&quot;&gt;&lt;/i&gt; element in front of the button&#x27;s label
+     *
+     * @property icon
+     * @type String
+     */
+    icon: Ember.computed(&#x27;active&#x27;, function() {
+        if (this.get(&#x27;active&#x27;)) {
+            return this.get(&#x27;iconActive&#x27;);
+        } else {
+            return this.get(&#x27;iconInactive&#x27;);
+        }
+    }),
+
+
+    /**
+     * Supply a value that will be associated with this button. This will be send
+     * as a parameter of the default action triggered when clicking the button
+     *
+     * @property value
+     * @type any
+     */
+    value: null,
+
+    /**
+     * State of the button. The button&#x27;s label (if not used as a block component) will be set to the
+     * &lt;state&gt;Text property.
+     * This property will automatically be set when using a click action that supplies the callback with an promise
+     *
+     * @property textState
+     * @type String
+     * @default &#x27;default&#x27;
+     */
+    textState: &#x27;default&#x27;,
+
+    /**
+     * Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.
+     *
+     * @property reset
+     * @type boolean
+     */
+    reset: null,
+
+    /**
+     * This will reset the state property to &#x27;default&#x27;, and with that the button&#x27;s label to defaultText
+     *
+     * @method resetState
+     */
+    resetState: function() {
+        this.set(&#x27;textState&#x27;, &#x27;default&#x27;);
+    },
+
+    resetObserver: Ember.observer(&#x27;reset&#x27;, function(){
+        if(this.get(&#x27;reset&#x27;)){
+            this.resetState();
+        }
+    }),
+
+    text: Ember.computed(&#x27;textState&#x27;, &#x27;defaultText&#x27;, &#x27;pendingText&#x27;, &#x27;resolvedText&#x27;, &#x27;rejectedText&#x27;, function() {
+        return this.getWithDefault(this.get(&#x27;textState&#x27;) + &#x27;Text&#x27;, this.get(&#x27;defaultText&#x27;));
+    }),
+
+    /**
+     * Click handler. This will send the default &quot;action&quot; action, with the following parameters:
+     * * value of the button (that is the value of the &quot;value&quot; property)
+     * * original event object of the click event
+     * * callback: call that with a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;
+     *
+     * @method click
+     * @protected
+     * @param evt
+     */
+    click: function(evt) {
+        if (this.get(&#x27;toggle&#x27;)) {
+            this.toggleProperty(&#x27;active&#x27;);
+        }
+        var that = this;
+        var callback = function(promise) {
+            if (promise) {
+                that.set(&#x27;textState&#x27;, &#x27;pending&#x27;);
+                promise.then(
+                    function(){
+                        if (!that.get(&#x27;isDestroyed&#x27;)) {
+                            that.set(&#x27;textState&#x27;, &#x27;resolved&#x27;);
+                        }
+                    },
+                    function(){
+                        if (!that.get(&#x27;isDestroyed&#x27;)) {
+                            that.set(&#x27;textState&#x27;, &#x27;rejected&#x27;);
+                        }
+                    }
+                );
+            }
+        };
+        this.sendAction(&#x27;action&#x27;, this.get(&#x27;value&#x27;), evt, callback);
+    }
+
+
+});
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
