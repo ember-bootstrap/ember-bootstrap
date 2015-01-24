@@ -48,6 +48,7 @@
             "namespace": "Bootstrap",
             "file": "addon/components/bs-button.js",
             "line": 5,
+            "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```handlebars\n\\{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\"}}Download{{/bs-button}}\n```\n\n### Actions\n\nSet the action property of the component to send an action to your controller. The following parameters will be sent:\n* value: the button's value, see the `value` property\n* event: the browsers event object\n* callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling\n\n```handlebars\n\\{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" action=\"download\"}}\n   Download\n{{/bs-button}}\n```\n\n### States\n\nUse the `textState` property to change the label of the button. You can bind it to a controller property to set a \"loading\" state for example.\nThe label of the button will be taken from the `<state>Text` property.\n\n```handlebars\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" textState=buttonState defaultText=\"Download\" loadingText=\"Loading...\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  buttonState: \"default\"\n  actions: {\n    download: function() {\n      this.set(\"buttonState\", \"loading\");\n    }\n  }\n});\n```\n\n### Promise support for automatic state change\n\nWhen using the callback function of the click action to supply a Promise for any asynchronous operation the button will\nmanage its `textState` property automatically, changing its value according to the state of the promise:\n\"default\" > \"pending\" > \"resolved\"/\"rejected\"\n\n```handlebars\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" defaultText=\"Download\" pendingText=\"Loading...\" resolvedText=\"Completed!\" rejectedText=\"Oups!?\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  actions: {\n    download: function(actionParam, evt, cb) {\n      promise = new Ember.RSVP.Promise(...);\n      cb(promise);\n    }\n  }\n});\n```",
             "extends": "Ember.Component",
             "uses": [
                 "Bootstrap.TypeClass",
@@ -86,7 +87,7 @@
     "classitems": [
         {
             "file": "addon/components/bs-button.js",
-            "line": 15,
+            "line": 78,
             "itemtype": "property",
             "name": "classNames",
             "type": "array",
@@ -98,7 +99,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 23,
+            "line": 86,
             "itemtype": "property",
             "name": "classNameBindings",
             "type": "array",
@@ -110,7 +111,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 31,
+            "line": 94,
             "itemtype": "property",
             "name": "classTypePrefix",
             "type": "String",
@@ -122,7 +123,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 39,
+            "line": 102,
             "itemtype": "property",
             "name": "attributeBindings",
             "type": "array",
@@ -134,7 +135,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 47,
+            "line": 110,
             "description": "Default label of the button. Not need if used as a block component",
             "itemtype": "property",
             "name": "defaultText",
@@ -143,7 +144,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 54,
+            "line": 117,
             "description": "Property to disable the button",
             "itemtype": "property",
             "name": "disabled",
@@ -152,7 +153,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 61,
+            "line": 124,
             "description": "Set the type of the button, either 'button' or 'submit'",
             "itemtype": "property",
             "name": "buttonType",
@@ -163,7 +164,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 70,
+            "line": 133,
             "description": "Set the 'active' class to apply active/pressed CSS styling",
             "itemtype": "property",
             "name": "active",
@@ -174,7 +175,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 79,
+            "line": 142,
             "description": "Property for block level buttons\n\nSee the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)",
             "itemtype": "property",
             "name": "block",
@@ -185,7 +186,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 89,
+            "line": 152,
             "description": "If toggle property is true, clicking the button will toggle the active state",
             "itemtype": "property",
             "name": "toggle",
@@ -196,7 +197,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 98,
+            "line": 161,
             "description": "If button is active and this is set, the icon property will match this property",
             "itemtype": "property",
             "name": "iconActive",
@@ -206,7 +207,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 106,
+            "line": 169,
             "description": "If button is inactive and this is set, the icon property will match this property",
             "itemtype": "property",
             "name": "iconInactive",
@@ -216,7 +217,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 114,
+            "line": 177,
             "description": "Class(es) (e.g. glyphicons or font awesome) to use as a button icon\nThis will render a <i class=\"{{icon}}\"></i> element in front of the button's label",
             "itemtype": "property",
             "name": "icon",
@@ -226,7 +227,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 130,
+            "line": 193,
             "description": "Supply a value that will be associated with this button. This will be send\nas a parameter of the default action triggered when clicking the button",
             "itemtype": "property",
             "name": "value",
@@ -236,8 +237,8 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 139,
-            "description": "State of the button. The button's label (if not used as a block component) will be set to the\n<state>Text property.\nThis property will automatically be set when using a click action that supplies the callback with an promise",
+            "line": 202,
+            "description": "State of the button. The button's label (if not used as a block component) will be set to the\n`<state>Text` property.\nThis property will automatically be set when using a click action that supplies the callback with an promise",
             "itemtype": "property",
             "name": "textState",
             "type": "String",
@@ -247,7 +248,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 150,
+            "line": 213,
             "description": "Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.",
             "itemtype": "property",
             "name": "reset",
@@ -257,7 +258,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 158,
+            "line": 221,
             "description": "This will reset the state property to 'default', and with that the button's label to defaultText",
             "itemtype": "method",
             "name": "resetState",
@@ -266,7 +267,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 177,
+            "line": 240,
             "description": "Click handler. This will send the default \"action\" action, with the following parameters:\n* value of the button (that is the value of the \"value\" property)\n* original event object of the click event\n* callback: call that with a promise object, and the buttons state will automatically set to \"pending\", \"resolved\" and/or \"rejected\"",
             "itemtype": "method",
             "name": "click",

@@ -109,12 +109,75 @@ import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
 import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
 
 /**
- * @class Button
- * @namespace Bootstrap
- * @extends Ember.Component
- * @uses Bootstrap.TypeClass
- * @uses Bootstrap.SizeClass
- */
+ Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
+ as well as advanced functionality such as button states.
+
+ ### Basic Usage
+
+ &#x60;&#x60;&#x60;handlebars
+ \{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}Download{{/bs-button}}
+ &#x60;&#x60;&#x60;
+
+ ### Actions
+
+ Set the action property of the component to send an action to your controller. The following parameters will be sent:
+ * value: the button&#x27;s value, see the &#x60;value&#x60; property
+ * event: the browsers event object
+ * callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling
+
+ &#x60;&#x60;&#x60;handlebars
+ \{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
+    Download
+ {{/bs-button}}
+ &#x60;&#x60;&#x60;
+
+ ### States
+
+ Use the &#x60;textState&#x60; property to change the label of the button. You can bind it to a controller property to set a &quot;loading&quot; state for example.
+ The label of the button will be taken from the &#x60;&lt;state&gt;Text&#x60; property.
+
+ &#x60;&#x60;&#x60;handlebars
+ {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
+ &#x60;&#x60;&#x60;
+
+ &#x60;&#x60;&#x60;js
+ App.ApplicationController = Ember.Controller.extend({
+   buttonState: &quot;default&quot;
+   actions: {
+     download: function() {
+       this.set(&quot;buttonState&quot;, &quot;loading&quot;);
+     }
+   }
+ });
+ &#x60;&#x60;&#x60;
+
+ ### Promise support for automatic state change
+
+ When using the callback function of the click action to supply a Promise for any asynchronous operation the button will
+ manage its &#x60;textState&#x60; property automatically, changing its value according to the state of the promise:
+ &quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;
+
+ &#x60;&#x60;&#x60;handlebars
+ {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=&quot;download&quot;}}
+ &#x60;&#x60;&#x60;
+
+ &#x60;&#x60;&#x60;js
+ App.ApplicationController = Ember.Controller.extend({
+   actions: {
+     download: function(actionParam, evt, cb) {
+       promise = new Ember.RSVP.Promise(...);
+       cb(promise);
+     }
+   }
+ });
+ &#x60;&#x60;&#x60;
+
+ @class Button
+ @namespace Bootstrap
+ @extends Ember.Component
+ @uses Bootstrap.TypeClass
+ @uses Bootstrap.SizeClass
+*/
 export default Ember.Component.extend(TypeClass, SizeClass, {
     tagName: &#x27;button&#x27;,
 
@@ -244,7 +307,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
 
     /**
      * State of the button. The button&#x27;s label (if not used as a block component) will be set to the
-     * &lt;state&gt;Text property.
+     * &#x60;&lt;state&gt;Text&#x60; property.
      * This property will automatically be set when using a click action that supplies the callback with an promise
      *
      * @property textState

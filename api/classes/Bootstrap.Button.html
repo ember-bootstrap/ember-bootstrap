@@ -136,7 +136,46 @@
 
 
 <div class="well well-small">
-    
+    <p>Implements a HTML button element, with support for all <a href="http://getbootstrap.com/css/#buttons">Bootstrap button CSS styles</a>
+as well as advanced functionality such as button states.</p>
+<h3 id="basic-usage">Basic Usage</h3>
+<pre class="code prettyprint"><code class="lang-handlebars">{{#bs-button type="primary" icon="glyphicon glyphicon-download"}}Download{{/bs-button}}</code></pre>
+<h3 id="actions">Actions</h3>
+<p>Set the action property of the component to send an action to your controller. The following parameters will be sent:</p>
+<ul>
+<li>value: the button&#39;s value, see the <code>value</code> property</li>
+<li>event: the browsers event object</li>
+<li>callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling</li>
+</ul>
+<pre class="code prettyprint"><code class="lang-handlebars">{{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
+   Download
+{{/bs-button}}</code></pre>
+<h3 id="states">States</h3>
+<p>Use the <code>textState</code> property to change the label of the button. You can bind it to a controller property to set a "loading" state for example.
+The label of the button will be taken from the <code>&lt;state&gt;Text</code> property.</p>
+<pre class="code prettyprint"><code class="lang-handlebars">{{bs-button type="primary" icon="glyphicon glyphicon-download" textState=buttonState defaultText="Download" loadingText="Loading..." action="download"}}</code></pre>
+<pre class="code prettyprint"><code class="lang-js">App.ApplicationController = Ember.Controller.extend({
+  buttonState: "default"
+  actions: {
+    download: function() {
+      this.set("buttonState", "loading");
+    }
+  }
+});</code></pre>
+<h3 id="promise-support-for-automatic-state-change">Promise support for automatic state change</h3>
+<p>When using the callback function of the click action to supply a Promise for any asynchronous operation the button will
+manage its <code>textState</code> property automatically, changing its value according to the state of the promise:
+"default" &gt; "pending" &gt; "resolved"/"rejected"</p>
+<pre class="code prettyprint"><code class="lang-handlebars">{{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" action="download"}}</code></pre>
+<pre class="code prettyprint"><code class="lang-js">App.ApplicationController = Ember.Controller.extend({
+  actions: {
+    download: function(actionParam, evt, cb) {
+      promise = new Ember.RSVP.Promise(...);
+      cb(promise);
+    }
+  }
+});</code></pre>
+
 </div>
 
 
@@ -373,7 +412,7 @@
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l177"><code>addon&#x2F;components&#x2F;bs-button.js:177</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l240"><code>addon&#x2F;components&#x2F;bs-button.js:240</code></a>
         
         </p>
 
@@ -456,7 +495,7 @@
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l158"><code>addon&#x2F;components&#x2F;bs-button.js:158</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l221"><code>addon&#x2F;components&#x2F;bs-button.js:221</code></a>
         
         </p>
 
@@ -510,7 +549,7 @@
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l70"><code>addon&#x2F;components&#x2F;bs-button.js:70</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l133"><code>addon&#x2F;components&#x2F;bs-button.js:133</code></a>
         
         </p>
 
@@ -559,7 +598,7 @@
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l39"><code>addon&#x2F;components&#x2F;bs-button.js:39</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l102"><code>addon&#x2F;components&#x2F;bs-button.js:102</code></a>
         
         </p>
 
@@ -605,7 +644,7 @@
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l79"><code>addon&#x2F;components&#x2F;bs-button.js:79</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l142"><code>addon&#x2F;components&#x2F;bs-button.js:142</code></a>
         
         </p>
 
@@ -653,7 +692,7 @@
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l61"><code>addon&#x2F;components&#x2F;bs-button.js:61</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l124"><code>addon&#x2F;components&#x2F;bs-button.js:124</code></a>
         
         </p>
 
@@ -702,7 +741,7 @@
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l23"><code>addon&#x2F;components&#x2F;bs-button.js:23</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l86"><code>addon&#x2F;components&#x2F;bs-button.js:86</code></a>
         
         </p>
 
@@ -750,7 +789,7 @@
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l15"><code>addon&#x2F;components&#x2F;bs-button.js:15</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l78"><code>addon&#x2F;components&#x2F;bs-button.js:78</code></a>
         
         </p>
 
@@ -798,7 +837,7 @@
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l31"><code>addon&#x2F;components&#x2F;bs-button.js:31</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l94"><code>addon&#x2F;components&#x2F;bs-button.js:94</code></a>
         
         </p>
 
@@ -844,7 +883,7 @@
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l47"><code>addon&#x2F;components&#x2F;bs-button.js:47</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l110"><code>addon&#x2F;components&#x2F;bs-button.js:110</code></a>
         
         </p>
 
@@ -889,7 +928,7 @@
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l54"><code>addon&#x2F;components&#x2F;bs-button.js:54</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l117"><code>addon&#x2F;components&#x2F;bs-button.js:117</code></a>
         
         </p>
 
@@ -934,7 +973,7 @@
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l114"><code>addon&#x2F;components&#x2F;bs-button.js:114</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l177"><code>addon&#x2F;components&#x2F;bs-button.js:177</code></a>
         
         </p>
 
@@ -980,7 +1019,7 @@ This will render a <i class=""></i> element in front of the button&#39;s label</
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l98"><code>addon&#x2F;components&#x2F;bs-button.js:98</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l161"><code>addon&#x2F;components&#x2F;bs-button.js:161</code></a>
         
         </p>
 
@@ -1025,7 +1064,7 @@ This will render a <i class=""></i> element in front of the button&#39;s label</
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l106"><code>addon&#x2F;components&#x2F;bs-button.js:106</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l169"><code>addon&#x2F;components&#x2F;bs-button.js:169</code></a>
         
         </p>
 
@@ -1070,7 +1109,7 @@ This will render a <i class=""></i> element in front of the button&#39;s label</
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l150"><code>addon&#x2F;components&#x2F;bs-button.js:150</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l213"><code>addon&#x2F;components&#x2F;bs-button.js:213</code></a>
         
         </p>
 
@@ -1158,7 +1197,7 @@ This will render a <i class=""></i> element in front of the button&#39;s label</
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l139"><code>addon&#x2F;components&#x2F;bs-button.js:139</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l202"><code>addon&#x2F;components&#x2F;bs-button.js:202</code></a>
         
         </p>
 
@@ -1168,8 +1207,8 @@ This will render a <i class=""></i> element in front of the button&#39;s label</
     </div>
 
     <div class="description">
-        <p>State of the button. The button&#39;s label (if not used as a block component) will be set to the</p>
-<p><state>Text property.
+        <p>State of the button. The button&#39;s label (if not used as a block component) will be set to the
+<code>&lt;state&gt;Text</code> property.
 This property will automatically be set when using a click action that supplies the callback with an promise</p>
 
     </div>
@@ -1207,7 +1246,7 @@ This property will automatically be set when using a click action that supplies 
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l89"><code>addon&#x2F;components&#x2F;bs-button.js:89</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l152"><code>addon&#x2F;components&#x2F;bs-button.js:152</code></a>
         
         </p>
 
@@ -1299,7 +1338,7 @@ This property will automatically be set when using a click action that supplies 
             
         
         
-        <a href="../files/addon_components_bs-button.js.html#l130"><code>addon&#x2F;components&#x2F;bs-button.js:130</code></a>
+        <a href="../files/addon_components_bs-button.js.html#l193"><code>addon&#x2F;components&#x2F;bs-button.js:193</code></a>
         
         </p>
 
