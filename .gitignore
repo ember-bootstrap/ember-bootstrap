@@ -11,6 +11,7 @@
 
 # misc
 /.sass-cache
+/_site
 /connect.lock
 /coverage/*
 /libpeerconnection.log
