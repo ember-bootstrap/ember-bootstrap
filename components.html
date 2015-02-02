@@ -8,9 +8,27 @@ layout: page
 
 <p>The following components are available:</p>
 
-
-        <ul>
-            <li>
-                <a href="{{ "/api/classes/Bootstrap.Button.html" | prepend:site.baseurl }}">Button</a>
-            </li>
-        </ul>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Component</th>
+            <th>Usage</th>
+            <th>API Docs</th>
+            <th>Bootstrap Docs</th>
+        </tr>
+        <tbody>
+        <tr>
+            <th scope="row">Button</th>
+            <td><code>{% raw %}{{bs-button}}{% endraw %}</code></td>
+            <td><a href="{{site.baseurl}}/api/classes/Bootstrap.Button.html">API Docs</a></td>
+            <td><a href="http://getbootstrap.com/css/#buttons">Bootstrap Docs</a></td>
+        </tr>
+        <tr>
+            <th scope="row">Button-Group</th>
+            <td><code>{% raw %}{{#bs-button-group}}...{{/bs-button-group}}{% endraw %}</code></td>
+            <td><a href="{{site.baseurl}}/api/classes/Bootstrap.Button-Group.html">API Docs</a></td>
+            <td><a href="http://getbootstrap.com/components/#btn-groups">Bootstrap Docs</a></td>
+        </tr>
+        </tbody>
+        </thead>
+    </table>

@@ -13,6 +13,9 @@ exclude:
   - "CNAME"
   - "Gemfile"
   - "Gemfile.lock"
+  - "tmp/"
+  - "node_modules/"
+  - "bower_components/"
 permalink: :title
 defaults:
   -
