@@ -2,9 +2,20 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "0.0.4"
+        "version": "0.0.5"
     },
     "files": {
+        "addon/components/bs-button-group.js": {
+            "name": "addon/components/bs-button-group.js",
+            "modules": {},
+            "classes": {
+                "Bootstrap.Button-Group": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Bootstrap": 1
+            }
+        },
         "addon/components/bs-button.js": {
             "name": "addon/components/bs-button.js",
             "modules": {},
@@ -37,6 +48,23 @@
     },
     "modules": {},
     "classes": {
+        "Bootstrap.Button-Group": {
+            "name": "Bootstrap.Button-Group",
+            "shortname": "Bootstrap.Button-Group",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Bootstrap",
+            "file": "addon/components/bs-button-group.js",
+            "line": 5,
+            "description": "Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.\nSee http://getbootstrap.com/components/#btn-groups\n\nUse as a block level component with any number of Button components as children:\n\n```handlebars\n\\{{#bs-button-group}}\n   \\{{#bs-button}}1\\{{/bs-button}}\n   \\{{#bs-button}}2\\{{/bs-button}}\n   \\{{#bs-button}}3\\{{/bs-button}}\n\\{{/bs-button-group}}\n```\n\n### Radio-like behaviour\n\nUse the `type` property set to \"radio\" to make the child buttons toggle like radio buttons, i.e. only one button can be active.\nSet the `value` property of the buttons to something meaningful. The `value` property of the button group will then reflect\nthe value of the active button:\n\n```handlebars\n\\{{#bs-button-group value=buttonGroupValue type=\"radio\"}}\n   \\{{#bs-button value=1}}1\\{{/bs-button}}\n   \\{{#bs-button value=2}}2\\{{/bs-button}}\n   \\{{#bs-button value=3}}3\\{{/bs-button}}\n\\{{/bs-button-group}}\n\nYou selected: \\{{buttonGroupValue}}!\n```\n\n### Checkbox-like behaviour\n\nSet `type` to \"checkbox\" to make any number of child buttons selectable. The `value` property will be an array\nof all the values of the active buttons:\n\n```handlebars\n\\{{#bs-button-group value=buttonGroupValue type=\"checkbox\"}}\n   \\{{#bs-button value=1}}1\\{{/bs-button}}\n   \\{{#bs-button value=2}}2\\{{/bs-button}}\n   \\{{#bs-button value=3}}3\\{{/bs-button}}\n\\{{/bs-button-group}}\n\nYou selected:\n<ul>\n\\{{#each value in buttonGroupValue}}\n   <li>\\{{value}}</li>\n\\{{/each}}\n</ul>\n```",
+            "extends": "Ember.Component",
+            "uses": [
+                "Bootstrap.SizeClass"
+            ]
+        },
         "Bootstrap.Button": {
             "name": "Bootstrap.Button",
             "shortname": "Bootstrap.Button",
@@ -63,6 +91,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [
+                "Bootstrap.Button-Group",
                 "Bootstrap.Button"
             ],
             "namespace": "Bootstrap",
@@ -85,6 +114,128 @@
         }
     },
     "classitems": [
+        {
+            "file": "addon/components/bs-button-group.js",
+            "line": 62,
+            "type": "string",
+            "itemtype": "property",
+            "name": "ariaRole",
+            "default": "'group'",
+            "access": "protected",
+            "tagname": "",
+            "class": "Bootstrap.Button-Group",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button-group.js",
+            "line": 70,
+            "itemtype": "property",
+            "name": "classNames",
+            "type": "array",
+            "default": "['btn-group']",
+            "access": "protected",
+            "tagname": "",
+            "class": "Bootstrap.Button-Group",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button-group.js",
+            "line": 78,
+            "itemtype": "property",
+            "name": "classNameBindings",
+            "type": "array",
+            "access": "protected",
+            "tagname": "",
+            "class": "Bootstrap.Button-Group",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button-group.js",
+            "line": 85,
+            "itemtype": "property",
+            "name": "classTypePrefix",
+            "type": "String",
+            "default": "'btn-group'",
+            "access": "protected",
+            "tagname": "",
+            "class": "Bootstrap.Button-Group",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button-group.js",
+            "line": 93,
+            "description": "Set to true for a vertically stacked button group, see http://getbootstrap.com/components/#btn-groups-vertical",
+            "itemtype": "property",
+            "name": "vertical",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Bootstrap.Button-Group",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button-group.js",
+            "line": 103,
+            "description": "Set to true for the buttons to stretch at equal sizes to span the entire width of its parent.\n\n*Important*: You have to wrap every button component in a `div class=\"btn-group\">`:\n\n```handlebars\n<div class=\"btn-group\" role=\"group\">\n\\{{#bs-button}}My Button{{/bs-button}}\n</div>\n```\n\nSee http://getbootstrap.com/components/#btn-groups-justified",
+            "itemtype": "property",
+            "name": "justified",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Bootstrap.Button-Group",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button-group.js",
+            "line": 123,
+            "description": "The type of the button group specifies how child buttons behave and how the `value` property will be computed:\n\n### null\nIf `type` is not set (null), the button group will add no functionality besides Bootstrap styling\n\n### radio\nif `type` is set to \"radio\", the buttons will behave like radio buttons:\n* the buttons will toggle (`toggle` property of the child buttons will be set to true)\n* only one button may be active\n* the `value` property of the button group will reflect the `value` property of the active button\n\n### checkbox\nif `type` is set to \"checkbox\", the buttons will behave like checkboxes:\n* the buttons will toggle (`toggle` property of the child buttons will be set to true)\n* any number of buttons may be active\n* the `value` property of the button group will be an array containing the `value` properties of all active buttons",
+            "itemtype": "property",
+            "name": "type",
+            "type": "string",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Bootstrap.Button-Group",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button-group.js",
+            "line": 149,
+            "description": "The value of the button group, computed by its child buttons.\nSee the {{#crossLink \"Button-Group/type:attribute\"}}`type` property{{/crossLink}} for how the value property is constructed.\n\nWhen you set the value, the corresponding buttons will be activated:\n* use a single value for a radio button group to activate the button with the same value\n* use an aray of values for a checkbox button group to activate all the buttons with values contained in the array",
+            "itemtype": "property",
+            "name": "value",
+            "type": "array|any",
+            "access": "public",
+            "tagname": "",
+            "class": "Bootstrap.Button-Group",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button-group.js",
+            "line": 179,
+            "description": "Array of all child buttons (instances of Bootstrap.Button)",
+            "itemtype": "property",
+            "name": "childButtons",
+            "type": "array",
+            "access": "protected",
+            "tagname": "",
+            "class": "Bootstrap.Button-Group",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-button-group.js",
+            "line": 190,
+            "description": "Child buttons that are active (pressed)",
+            "itemtype": "property",
+            "name": "activeChildren",
+            "type": "array",
+            "access": "protected",
+            "tagname": "",
+            "class": "Bootstrap.Button-Group",
+            "namespace": "Bootstrap"
+        },
         {
             "file": "addon/components/bs-button.js",
             "line": 78,
