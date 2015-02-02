@@ -2,17 +2,56 @@ import Ember from 'ember';
 import Button from 'ember-bootstrap/components/bs-button';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
 
-function initType() {
-    if (this.get('type') === 'radio' || this.get('type') === 'checkbox') {
-        // set all child buttons to toggle
-        this.get('childButtons').forEach(function(button) {
-            button.set('toggle', true);
-        });
-    }
-}
-
-
 /**
+ Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
+ See http://getbootstrap.com/components/#btn-groups
+
+ Use as a block level component with any number of Button components as children:
+
+ ```handlebars
+ \{{#bs-button-group}}
+    \{{#bs-button}}1\{{/bs-button}}
+    \{{#bs-button}}2\{{/bs-button}}
+    \{{#bs-button}}3\{{/bs-button}}
+ \{{/bs-button-group}}
+ ```
+
+ ### Radio-like behaviour
+
+ Use the `type` property set to "radio" to make the child buttons toggle like radio buttons, i.e. only one button can be active.
+ Set the `value` property of the buttons to something meaningful. The `value` property of the button group will then reflect
+ the value of the active button:
+
+ ```handlebars
+ \{{#bs-button-group value=buttonGroupValue type="radio"}}
+    \{{#bs-button value=1}}1\{{/bs-button}}
+    \{{#bs-button value=2}}2\{{/bs-button}}
+    \{{#bs-button value=3}}3\{{/bs-button}}
+ \{{/bs-button-group}}
+
+ You selected: \{{buttonGroupValue}}!
+ ```
+
+ ### Checkbox-like behaviour
+
+ Set `type` to "checkbox" to make any number of child buttons selectable. The `value` property will be an array
+ of all the values of the active buttons:
+
+ ```handlebars
+ \{{#bs-button-group value=buttonGroupValue type="checkbox"}}
+    \{{#bs-button value=1}}1\{{/bs-button}}
+    \{{#bs-button value=2}}2\{{/bs-button}}
+    \{{#bs-button value=3}}3\{{/bs-button}}
+ \{{/bs-button-group}}
+
+ You selected:
+ <ul>
+ \{{#each value in buttonGroupValue}}
+    <li>\{{value}}</li>
+ \{{/each}}
+ </ul>
+ ```
+
  @class Button-Group
  @namespace Bootstrap
  @extends Ember.Component
@@ -131,7 +170,6 @@ export default Ember.Component.extend(SizeClass, {
         switch (this.get('type')) {
             case 'radio':
                 return this.get('activeChildren.firstObject.value');
-                break;
             case 'checkbox':
                 return this.get('activeChildren').mapBy('value');
         }
@@ -184,8 +222,14 @@ export default Ember.Component.extend(SizeClass, {
         });
     }),
 
-    _observeType: Ember.observer('type','childButtons.[]', initType),
-//    _initType: Ember.on('init', initType),
+    _observeType: Ember.observer('type','childButtons.[]', function() {
+        if (this.get('type') === 'radio' || this.get('type') === 'checkbox') {
+            // set all child buttons to toggle
+            this.get('childButtons').forEach(function(button) {
+                button.set('toggle', true);
+            });
+        }
+    }),
 
     init: function() {
         this._super();

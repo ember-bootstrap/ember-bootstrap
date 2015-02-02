@@ -86,6 +86,7 @@ test('setting radio button group value activates button with same value', functi
     this.append();
 
     for (var i=0;i<3;i++) {
+        /*jshint loopfunc: true */
         Ember.run(function(){
             component.set('value', i+1);
         });
