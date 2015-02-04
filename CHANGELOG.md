@@ -1,3 +1,11 @@
+<a name"0.0.9"></a>
+### 0.0.9 (2015-04-08)
+
+#### Bug Fixes
+
+* **ButtonGroup:**
+  * initial value did not set active buttons properly
+
 <a name"0.0.8"></a>
 ### 0.0.8 (2015-04-08)
 
