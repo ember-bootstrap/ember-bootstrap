@@ -74,6 +74,45 @@ test('checkbox button group has value of all selected button', function(assert) 
     }
 });
 
+
+test('radio button group with value set activates button with same value', function(assert) {
+    var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
+        component = this.subject({
+            template: Ember.Handlebars.compile(template),
+            type: 'radio',
+            value: 1
+        });
+
+    this.append();
+
+    assert.equal(component.get('value'), 1, 'value must match set value');
+
+    // check button's active property
+    for (var k=0;k<3;k++) {
+        assert.equal(component.get('childButtons').objectAt(k).get('active'), 0===k, 'only button with same value is active');
+    }
+});
+
+
+test('checkbox button group with value set activates buttons with same value', function(assert) {
+    var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
+        value = [1,3],
+        component = this.subject({
+            template: Ember.Handlebars.compile(template),
+            type: 'checkbox',
+            value: value
+        });
+
+    this.append();
+
+    assert.deepEqual(component.get('value'), value, 'value must match set value');
+
+    // check button's active property
+    for (var k=0;k<3;k++) {
+        assert.equal(component.get('childButtons').objectAt(k).get('active'), value.contains(k+1), 'only buttons with value contained in set value are active');
+    }
+});
+
 test('setting radio button group value activates button with same value', function(assert) {
     var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
         component = this.subject({
