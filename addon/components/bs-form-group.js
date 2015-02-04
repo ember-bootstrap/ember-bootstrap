@@ -107,10 +107,10 @@ export default Ember.Component.extend({
      */
     infoIcon: 'glyphicon glyphicon-info-sign',
 
-    iconName: function() {
+    iconName: Ember.computed('validation', function() {
         var validation = this.get('validation') || 'success';
         return this.get(validation + 'Icon');
-    }.property('validation'),
+    }),
 
     /**
      * Set to a validation stat to render the form-group with a validation style.
@@ -126,10 +126,10 @@ export default Ember.Component.extend({
      */
     validation: null,
 
-    validationClass: function() {
+    validationClass: Ember.computed('validation', function() {
         var validation = this.get('validation');
         if (!Ember.isBlank(validation)) {
             return 'has-' + this.get('validation');
         }
-    }.property('validation')
+    })
 });

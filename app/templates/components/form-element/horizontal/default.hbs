@@ -1,0 +1,10 @@
+{{#if hasLabel}}
+    <label {{bind-attr class=":control-label horizontalLabelGridClass"}}>{{label}}</label>
+    <div {{bind-attr class="horizontalInputGridClass"}}>
+        {{bs-input type=inputType value=value placeholder=placeholder}}
+    </div>
+{{else}}
+    <div {{bind-attr class="horizontalInputGridClass horizontalInputOffsetGridClass"}}>
+        {{bs-input type=inputType value=value placeholder=placeholder}}
+    </div>
+{{/if}}

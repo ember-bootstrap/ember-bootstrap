@@ -1,0 +1,31 @@
+<h1>Forms</h1>
+
+<p>Layout:</p>
+{{#bs-button-group value=formLayout type="radio"}}
+    {{#bs-button value="vertical"}}Vertical{{/bs-button}}
+    {{#bs-button value="horizontal"}}Horizontal{{/bs-button}}
+    {{#bs-button value="inline"}}Inline{{/bs-button}}
+{{/bs-button-group}}
+
+
+<h2>Fully automatically generated form</h2>
+
+<p>todo</p>
+
+{{bs-form formLayout=formLayout}}
+
+<h2>Manually selected, automatically bound fields, automatic markup</h2>
+
+<p>todo</p>
+
+<h2>Manually selected, manually bound fields, automatic markup</h2>
+
+{{#bs-form formLayout=formLayout}}
+    {{bs-form-element inputType="email" label="Email" placeholder="Email" value=""}}
+    {{bs-form-element inputType="password" label="Password" placeholder="Password" value=""}}
+    {{bs-form-element inputType="checkbox" label="Remember me" value=false}}
+{{/bs-form}}
+
+<h2>Manually built form</h2>
+
+<p>todo</p>

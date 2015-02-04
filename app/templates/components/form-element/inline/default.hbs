@@ -1,0 +1,7 @@
+{{#if hasLabel}}
+    <label class="control-label">{{label}}</label>
+{{/if}}
+{{bs-input type=inputType value=value placeholder=placeholder}}
+{{#if hasFeedback}}
+    <span {{bind-attr class=":form-control-feedback iconName"}} aria-hidden="true"></span>
+{{/if}}
