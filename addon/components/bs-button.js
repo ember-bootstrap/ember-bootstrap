@@ -74,21 +74,7 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
 */
 export default Ember.Component.extend(TypeClass, SizeClass, {
     tagName: 'button',
-
-    /**
-     * @property classNames
-     * @type array
-     * @default ['btn']
-     * @protected
-     */
     classNames: ['btn'],
-
-    /**
-     * @property classNameBindings
-     * @type array
-     * @default ['active', 'block:btn-block']
-     * @protected
-     */
     classNameBindings: ['active', 'block:btn-block'],
 
     /**
@@ -99,12 +85,6 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      */
     classTypePrefix: 'btn',
 
-    /**
-     * @property attributeBindings
-     * @type array
-     * @default ['id', 'disabled', 'buttonType:type']
-     * @protected
-     */
     attributeBindings: ['id', 'disabled', 'buttonType:type'],
 
     /**

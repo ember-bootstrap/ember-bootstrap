@@ -52,34 +52,14 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  </ul>
  ```
 
- @class Button-Group
+ @class ButtonGroup
  @namespace Bootstrap
  @extends Ember.Component
  @uses Bootstrap.SizeClass
  */
 export default Ember.Component.extend(SizeClass, {
-
-    /**
-     * @type string
-     * @property ariaRole
-     * @default 'group'
-     * @protected
-     */
     ariaRole: 'group',
-
-    /**
-     * @property classNames
-     * @type array
-     * @default ['btn-group']
-     * @protected
-     */
     classNames: ['btn-group'],
-
-    /**
-     * @property classNameBindings
-     * @type array
-     * @protected
-     */
     classNameBindings: ['vertical:btn-group-vertical','justified:btn-group-justified'],
 
     /**
