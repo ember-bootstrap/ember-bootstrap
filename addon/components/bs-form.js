@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import FormElement from 'ember-bootstrap/components/bs-form-element';
+
 
 export default Ember.Component.extend({
     tagName: 'form',
@@ -11,23 +13,32 @@ export default Ember.Component.extend({
     model: null,
     formLayout: 'vertical',
 
+    hasValidator: Ember.computed.notEmpty('model.validate'),
+
+    childFormElements: Ember.computed.filter('childViews', function(view) {
+        return view instanceof FormElement;
+    }),
+
     submit: function(e) {
         var that = this;
         if (e) {
             e.preventDefault();
         }
-        if (Ember.isNone(this.get('model.validate'))) {
-            return this.sendAction('action');
+        if (!this.get('hasValidator')) {
+            return this.sendAction();
         } else {
-            promise = this.get('model').validate();
-            return this.get('model')
+            return this
+                .get('model')
                 .validate()
                 .then(function() {
                     if (that.get('model.isValid')) {
-                        return that.sendAction('action')
+                        return that.sendAction();
                     }
-                }
-            );
+                })
+                .catch(function(){
+                    that.get('childFormElements').setEach('showValidation', true);
+                    return that.sendAction('invalid');
+                });
         }
     }
 });

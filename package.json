@@ -32,6 +32,7 @@
     "ember-cli-yuidoc": "^0.3.1",
     "ember-data": "1.0.0-beta.12",
     "ember-export-application-global": "^1.0.0",
+    "ember-validations": "^2.0.0-alpha.2",
     "express": "^4.8.5",
     "gh-pages": "^0.2.0",
     "glob": "^4.0.5",

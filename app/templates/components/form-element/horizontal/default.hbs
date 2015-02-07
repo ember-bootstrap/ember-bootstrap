@@ -2,9 +2,13 @@
     <label {{bind-attr class=":control-label horizontalLabelGridClass"}}>{{label}}</label>
     <div {{bind-attr class="horizontalInputGridClass"}}>
         {{bs-input type=inputType value=value placeholder=placeholder}}
+        {{partial "components/form-element/feedback-icon"}}
+        {{partial "components/form-element/errors"}}
     </div>
 {{else}}
     <div {{bind-attr class="horizontalInputGridClass horizontalInputOffsetGridClass"}}>
         {{bs-input type=inputType value=value placeholder=placeholder}}
+        {{partial "components/form-element/feedback-icon"}}
+        {{partial "components/form-element/errors"}}
     </div>
 {{/if}}

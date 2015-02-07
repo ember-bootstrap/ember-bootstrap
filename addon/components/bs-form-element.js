@@ -8,8 +8,23 @@ export default FormGroup.extend({
     inputType: 'text',
 
     value: null,
+    property: null,
 
     placeholder: null,
+
+    model: Ember.computed.alias('form.model'),
+
+    errors: null,
+    hasErrors: Ember.computed.gt('errors.length',0),
+    hasValidator: Ember.computed.notEmpty('model.validate'),
+    showValidation: false,
+    showErrors: Ember.computed.and('showValidation','hasErrors'),
+    validation: Ember.computed('hasErrors','hasValidator','showValidation',function(){
+        if (!this.get('showValidation') || !this.get('hasValidator')) {
+            return null;
+        }
+        return this.get('hasErrors') ? 'error' : 'success';
+    }),
 
     hasLabel: Ember.computed.notEmpty('label'),
 
@@ -56,10 +71,17 @@ export default FormGroup.extend({
 
     _rerender: Ember.observer('layoutName', function() {
         this.rerender();
-    })
+    }),
 
-//    defaultLayout: Ember.computed('formLayout', function() {
-//        var formLayout = this.get('formLayout');
-//        return this.container.lookup('template:components/form-element/' + formLayout + '/default');
-//    })
+    focusOut: function() {
+        this.set('showValidation', true);
+    },
+
+    init: function() {
+        this._super();
+        if (!Ember.isBlank(this.get('property'))) {
+            Ember.Binding.from("model." + this.get('property')).to('value').connect(this);
+            Ember.Binding.from("model.errors." + this.get('property')).to('errors').connect(this);
+        }
+    }
 });
