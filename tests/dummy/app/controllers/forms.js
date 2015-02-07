@@ -21,7 +21,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin,{
 
     actions: {
         submit: function() {
-            alert('Successfully submitted form data!');
+            window.alert('Successfully submitted form data!');
         }
     }
 
