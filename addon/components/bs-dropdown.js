@@ -14,6 +14,8 @@ export default Ember.Component.extend({
 
     closeOnMenuClick: true,
 
+    clickEventName: undefined,
+
     actions: {
         toggleDropdown: function () {
             this.toggleProperty('open');
@@ -30,20 +32,26 @@ export default Ember.Component.extend({
 
     handleClickEvents: Ember.observer('open', function() {
         if (this.get('open')) {
-            Ember.$(document).on('click.dropdown', Ember.run.bind(this, this.closeOnClickHandler));
+            Ember.$(document).on(this.clickEventName, Ember.run.bind(this, this.closeOnClickHandler));
         }
         else {
-            Ember.$(document).off('click.dropdown');
+            Ember.$(document).off(this.clickEventName);
         }
     }),
 
     willDestroyElement: function(){
-        Ember.$(document).off('click.dropdown');
+        Ember.$(document).off(this.clickEventName);
+    },
+
+    init: function() {
+        this._super();
+        // click event name that is namespaced to our component instance, so multiple dropdowns do not interfere
+        // with each other
+        this.clickEventName = 'click.' + this.get('elementId');
     },
 
     closeOnClickHandler: function(e) {
         var $target = Ember.$(e.target);
-        debugger;
         if(!this.get('isDestroyed') &&
             $target.closest(this.$().find('.dropdown-toggle')).length === 0 &&
             ($target.closest(this.$().find('.dropdown-menu')).length === 0 || this.get('closeOnMenuClick'))) {
