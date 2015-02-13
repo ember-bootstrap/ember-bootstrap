@@ -1,10 +1,5 @@
 import Ember from 'ember';
 
-
-function subscribeToClickEvent() {
-
-}
-
 export default Ember.Component.extend({
     classNames: ['dropdown'],
 
