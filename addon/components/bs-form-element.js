@@ -3,9 +3,27 @@ import FormGroup from 'ember-bootstrap/components/bs-form-group';
 import Form from 'ember-bootstrap/components/bs-form';
 
 export default FormGroup.extend({
+    /**
+     * Text to display within a `<label>` tag.
+     *
+     * @property label
+     * @type string
+     * @public
+     */
     label: null,
 
-    inputType: 'text',
+    /**
+     * The type of the control widget.
+     * Supported types:
+     *
+     * * 'text'
+     * * 'checkbox'
+     *
+     * @property controlType
+     * @type string
+     * @public
+     */
+    controlType: 'text',
 
     value: null,
     property: null,
@@ -53,14 +71,14 @@ export default FormGroup.extend({
         return this.nearestOfType(Form);
     }),
 
-    layoutName: Ember.computed('formLayout','inputType',function() {
-        var formLayout = this.get('formLayout'),
+    layoutName: Ember.computed('formLayout','controlType',function() {
+        var formLayout = this.getWithDefault('formLayout','vertical'),
             inputLayout,
-            inputType = this.get('inputType');
+            controlType = this.get('controlType');
 
-        switch (inputType) {
+        switch (controlType) {
             case 'checkbox':
-                inputLayout = inputType;
+                inputLayout = controlType;
                 break;
             default:
                 inputLayout = 'default';

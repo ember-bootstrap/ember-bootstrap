@@ -76,7 +76,7 @@ test('Submitting the form calls default action', function() {
  Cannot test validations as expected in unit tests.
  See https://github.com/dockyard/ember-validations/issues/247
 
-test('Submitting the form with successfull validation calls default action', function() {
+test('Submitting the form with successful validation calls default action', function() {
     var testController = Ember.Controller.extend({
             actions: {
                 success: function() {
