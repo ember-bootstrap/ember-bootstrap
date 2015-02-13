@@ -6,7 +6,11 @@ export default Ember.Component.extend({
     attributeBindings: ['data-toggle','href'],
     ariaRole: 'button',
     'data-toggle': 'dropdown',
-    href: '#',
+    href: Ember.computed('tagName', function(){
+        if (this.get('tagName').toUpperCase() === 'A') {
+            return '#';
+        }
+    }),
 
     targetObject: Ember.computed.alias('parentView'),
 
