@@ -1,20 +1,15 @@
 import Ember from 'ember';
+import DropdownToggle from 'ember-bootstrap/mixins/dropdown-toggle';
 
-export default Ember.Component.extend({
+
+export default Ember.Component.extend(DropdownToggle, {
     tagName: 'a',
-    classNames: ['dropdown-toggle'],
-    attributeBindings: ['data-toggle','href'],
-    ariaRole: 'button',
-    'data-toggle': 'dropdown',
+    attributeBindings: ['href'],
     href: Ember.computed('tagName', function(){
         if (this.get('tagName').toUpperCase() === 'A') {
             return '#';
         }
     }),
-
-    targetObject: Ember.computed.alias('parentView'),
-
-    action: 'toggleDropdown',
 
     click: function (e) {
         e.preventDefault();
