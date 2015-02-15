@@ -7,7 +7,7 @@ import Ember from 'ember';
 
 moduleForComponent('bs-dropdown', 'BsDropdownComponent', {
   // specify the other units that are required for this test
-  // needs: ['component:foo', 'helper:bar']
+  needs: ['component:bs-dropdown-button']
 });
 
 test('it renders', function() {
@@ -24,8 +24,15 @@ test('it renders', function() {
 
 
 
-test('dropdown container has bootstrap class', function() {
+test('dropdown container has dropdown class', function() {
     equal(this.$().hasClass('dropdown'), true, 'has dropdown class');
+});
+
+test('dropdown container with dropdown button has btn-group class', function() {
+    var component = this.subject({
+        template: Ember.Handlebars.compile('{{#bs-dropdown-button}}Dropdown <span class="caret"></span>{{/bs-dropdown-button}}')
+    });
+    equal(this.$().hasClass('btn-group'), true, 'has btn-group class');
 });
 
 test('openDropdown action opens dropdown, closeDropdown closes it', function() {
