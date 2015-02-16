@@ -6,7 +6,10 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-    this.route('modal');
+    this.route('modal', function() {
+        this.route('from-action');
+        this.route('from-route');
+    });
 });
 
 export default Router;

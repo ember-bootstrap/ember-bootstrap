@@ -88,7 +88,7 @@ export default Ember.Component.extend({
 
     actions: {
         close: function() {
-            this.set('open', false);
+            this.$().modal('hide');
         }
     },
 
@@ -98,7 +98,6 @@ export default Ember.Component.extend({
         }
         else {
             this.$().modal('hide');
-            this.sendAction();
         }
 
     }),
@@ -111,7 +110,12 @@ export default Ember.Component.extend({
             backdrop: this.get('backdrop')
         });
 
-        modal.on('hide.bs.modal', Ember.run.bind( this, 'set', 'open', false));
+        modal.on('hidden.bs.modal', Ember.run.bind(this, function(){
+            if (!this.get('isDestroyed')) {
+                this.set('open', false);
+            }
+            this.sendAction();
+        }));
     }
 
 });

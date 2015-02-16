@@ -9,7 +9,7 @@
     Hi there
 {{/bs-modal}}
 
-{{input type="checkbox" checked=modal1}}
+<label>{{input type="checkbox" checked=modal1}} Open </label>
 
 <h3>Explicit markup</h3>
 
@@ -23,7 +23,7 @@
     {{/bs-modal-footer}}
 {{/bs-modal}}
 
-{{input type="checkbox" checked=modal2}}
+<label>{{input type="checkbox" checked=modal2}} Open </label>
 
 
 <h2>Dynamic modal creation</h2>
@@ -32,3 +32,6 @@
 
 {{#bs-button action="open"}}Open{{/bs-button}}
 
+<h3>Using dedicated modal route</h3>
+
+{{#link-to "modal.from-route" class="btn btn-default"}}Open{{/link-to}}
