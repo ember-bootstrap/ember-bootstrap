@@ -5,8 +5,8 @@ export default Ember.Controller.extend({
     modal2: false,
 
     actions: {
-        closeDialog: function() {
-            this.set('modal2', false);
+        open: function() {
+            this.send('openModal', 'modal.from-action');
         }
     }
 })

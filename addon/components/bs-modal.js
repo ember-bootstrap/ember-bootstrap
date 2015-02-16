@@ -3,22 +3,6 @@ import HeaderComponent from 'ember-bootstrap/components/bs-modal-header';
 import BodyComponent from 'ember-bootstrap/components/bs-modal-body';
 import FooterComponent from 'ember-bootstrap/components/bs-modal-footer';
 
-
-
-var Modal = {};
-
-Modal.TRANSITION_DURATION = 300;
-Modal.BACKDROP_TRANSITION_DURATION = 150;
-
-/*
-
- @todo escape handling
- @todo scrollbar adjust?
- @todo mobile backdrop
- @todo resize?
-
-
- */
 export default Ember.Component.extend({
 
     classNames: ['modal'],
@@ -109,7 +93,14 @@ export default Ember.Component.extend({
     },
 
     observeOpen: Ember.observer('open', function() {
-        this.$().modal( this.get( 'open' ) ? 'show' : 'hide' );
+        if (this.get('open')) {
+            this.$().modal('show');
+        }
+        else {
+            this.$().modal('hide');
+            this.sendAction();
+        }
+
     }),
 
     didInsertElement: function() {

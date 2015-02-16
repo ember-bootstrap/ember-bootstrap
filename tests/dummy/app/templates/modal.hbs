@@ -1,13 +1,17 @@
 <h1>Modals</h1>
 
-<h2>Minimal markup</h2>
+<h2>Modal creation</h2>
+
+<p>Note: the following modal components add permanent modal markup to the DOM. So dynamic modal creation below for alternatives.</p>
+
+<h3>Minimal markup</h3>
 {{#bs-modal open=modal1 title="Simple Dialog" size="sm"}}
     Hi there
 {{/bs-modal}}
 
 {{input type="checkbox" checked=modal1}}
 
-<h2>Explicit markup</h2>
+<h3>Explicit markup</h3>
 
 {{#bs-modal open=modal2 header=false body=false footer=false}}
     {{#bs-modal-header}}
@@ -20,3 +24,11 @@
 {{/bs-modal}}
 
 {{input type="checkbox" checked=modal2}}
+
+
+<h2>Dynamic modal creation</h2>
+
+<h3>Using modal creation action</h3>
+
+{{#bs-button action="open"}}Open{{/bs-button}}
+
