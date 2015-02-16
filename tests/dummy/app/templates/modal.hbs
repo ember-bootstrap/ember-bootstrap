@@ -1,0 +1,22 @@
+<h1>Modals</h1>
+
+<h2>Minimal markup</h2>
+{{#bs-modal open=modal1 title="Simple Dialog" size="sm"}}
+    Hi there
+{{/bs-modal}}
+
+{{input type="checkbox" checked=modal1}}
+
+<h2>Explicit markup</h2>
+
+{{#bs-modal open=modal2 header=false body=false footer=false}}
+    {{#bs-modal-header}}
+        <h4 class="modal-title">Dialog</h4>
+    {{/bs-modal-header}}
+    {{#bs-modal-body}}Hi there{{/bs-modal-body}}
+    {{#bs-modal-footer}}
+        {{#bs-button type="primary" action="closeDialog"}}Ok{{/bs-button}}
+    {{/bs-modal-footer}}
+{{/bs-modal}}
+
+{{input type="checkbox" checked=modal2}}
