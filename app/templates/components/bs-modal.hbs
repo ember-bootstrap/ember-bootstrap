@@ -1,7 +1,4 @@
-{{#if showBackdrop}}
-<div {{bind-attr class=":modal-backdrop fade in"}}></div>
-{{/if}}
-<div class="modal-dialog">
+<div {{bind-attr class=":modal-dialog sizeClass"}}>
     <div class="modal-content">
         {{#if header}}
             {{bs-modal-header title=title closeButton=closeButton}}
