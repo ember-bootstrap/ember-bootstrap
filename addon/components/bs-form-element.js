@@ -2,6 +2,13 @@ import Ember from 'ember';
 import FormGroup from 'ember-bootstrap/components/bs-form-group';
 import Form from 'ember-bootstrap/components/bs-form';
 
+
+var nonTextFieldControlTypes = [
+    'checkbox',
+    'select',
+    'textarea'
+];
+
 export default FormGroup.extend({
     /**
      * Text to display within a `<label>` tag.
@@ -30,6 +37,23 @@ export default FormGroup.extend({
 
     placeholder: null,
 
+    choices: [],
+    choiceValueProperty: null,
+    choiceLabelProperty: null,
+
+    selectValueProperty: Ember.computed('choiceValueProperty', function(){
+        var valuePath = this.get('choiceValueProperty');
+        if (Ember.isPresent(valuePath)) {
+            return valuePath.match(/^content\..*/) ? valuePath : 'content.' + valuePath;
+        }
+    }),
+    selectLabelProperty: Ember.computed('choiceLabelProperty', function(){
+        var labelPath = this.get('choiceLabelProperty');
+        if (Ember.isPresent(labelPath)) {
+            return labelPath.match(/^content\..*/) ? labelPath : 'content.' + labelPath;
+        }
+    }),
+
     model: Ember.computed.alias('form.model'),
 
     errors: null,
@@ -45,6 +69,9 @@ export default FormGroup.extend({
     }),
 
     hasLabel: Ember.computed.notEmpty('label'),
+    useIcons: Ember.computed('controlType', function() {
+        return !nonTextFieldControlTypes.contains(this.get('controlType'))
+    }),
 
     formLayout: Ember.computed.alias('form.formLayout'),
     isVertical: Ember.computed.equal('formLayout','vertical'),
@@ -76,9 +103,8 @@ export default FormGroup.extend({
             inputLayout,
             controlType = this.get('controlType');
 
-        switch (controlType) {
-            case 'checkbox':
-            case 'textarea':
+        switch (true) {
+            case nonTextFieldControlTypes.contains(controlType):
                 inputLayout = controlType;
                 break;
             default:

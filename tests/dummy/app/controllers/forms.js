@@ -22,6 +22,17 @@ export default Ember.Controller.extend(EmberValidations.Mixin,{
         }
     },
 
+    genderChoices: [
+        {
+            id: 'f',
+            label: 'Female'
+        },
+        {
+            id: 'm',
+            label: 'Male'
+        }
+    ],
+
     actions: {
         submit: function() {
             window.alert('Successfully submitted form data!');

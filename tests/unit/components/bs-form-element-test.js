@@ -10,16 +10,20 @@ moduleForComponent('bs-form-element', 'BsFormElementComponent', {
         'template:components/form-element/vertical/default',
         'template:components/form-element/vertical/textarea',
         'template:components/form-element/vertical/checkbox',
+        'template:components/form-element/vertical/select',
         'template:components/form-element/horizontal/default',
         'template:components/form-element/horizontal/textarea',
         'template:components/form-element/horizontal/checkbox',
+        'template:components/form-element/horizontal/select',
         'template:components/form-element/inline/default',
         'template:components/form-element/inline/textarea',
         'template:components/form-element/inline/checkbox',
+        'template:components/form-element/inline/select',
         'template:components/form-element/errors',
         'template:components/form-element/feedback-icon',
         'component:bs-input',
-        'component:bs-textarea'
+        'component:bs-textarea',
+        'component:bs-select'
     ]
 });
 
@@ -49,10 +53,10 @@ test('setting label property displays label tag', function() {
     equal(this.$().find('label').text().trim(), 'myLabel', 'label has text');
 });
 
-function controlTypeSupportTest(controlType, selector, values, getValueFn) {
-    var component = this.subject({
+function controlTypeSupportTest(controlType, selector, values, getValueFn, componentOptions) {
+    var component = this.subject(Ember.merge({
             controlType: controlType
-        }),
+        }, componentOptions)),
         control = this.$().find(selector);
 
     if (!Ember.isArray(values)) {
@@ -78,4 +82,23 @@ test('controlType "checkbox" is supported', function() {
 
 test('controlType "textarea" is supported', function() {
     controlTypeSupportTest.call(this, 'textarea', 'textarea', 'myValue');
+});
+
+
+test('controlType "select" is supported', function() {
+    var options = {
+        choices: [
+            {
+                id: 'f',
+                label: 'Female'
+            },
+            {
+                id: 'm',
+                label: 'Male'
+            }
+        ],
+        choiceLabelProperty: 'label',
+        choiceValueProperty: 'id'
+    };
+    controlTypeSupportTest.call(this, 'select', 'select', ['m','f'], null, options);
 });
