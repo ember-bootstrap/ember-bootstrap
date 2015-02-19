@@ -16,6 +16,9 @@ export default Ember.Controller.extend(EmberValidations.Mixin,{
         password: {
             presence: true,
             length: { minimum: 6, maximum: 10}
+        },
+        comments: {
+            length: { minimum: 5, maximum: 20}
         }
     },
 

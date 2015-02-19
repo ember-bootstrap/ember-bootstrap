@@ -62,6 +62,7 @@ export default Ember.Component.extend({
      *
      * @property successIcon
      * @type string
+     * @default 'glyphicon glyphicon-ok'
      * @public
      */
     successIcon: 'glyphicon glyphicon-ok',

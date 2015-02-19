@@ -78,6 +78,7 @@ export default FormGroup.extend({
 
         switch (controlType) {
             case 'checkbox':
+            case 'textarea':
                 inputLayout = controlType;
                 break;
             default:

@@ -8,14 +8,18 @@ moduleForComponent('bs-form-element', 'BsFormElementComponent', {
     // specify the other units that are required for this test
     needs: [
         'template:components/form-element/vertical/default',
+        'template:components/form-element/vertical/textarea',
         'template:components/form-element/vertical/checkbox',
         'template:components/form-element/horizontal/default',
+        'template:components/form-element/horizontal/textarea',
         'template:components/form-element/horizontal/checkbox',
         'template:components/form-element/inline/default',
+        'template:components/form-element/inline/textarea',
         'template:components/form-element/inline/checkbox',
         'template:components/form-element/errors',
         'template:components/form-element/feedback-icon',
-        'component:bs-input'
+        'component:bs-input',
+        'component:bs-textarea'
     ]
 });
 
@@ -70,4 +74,8 @@ test('controlType "text" is supported', function() {
 
 test('controlType "checkbox" is supported', function() {
     controlTypeSupportTest.call(this, 'checkbox', 'input[type=checkbox]', [true, false], function(){ return this.is(':checked'); });
+});
+
+test('controlType "textarea" is supported', function() {
+    controlTypeSupportTest.call(this, 'textarea', 'textarea', 'myValue');
 });
