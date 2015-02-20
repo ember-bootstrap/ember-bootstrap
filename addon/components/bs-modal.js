@@ -89,7 +89,21 @@ export default Ember.Component.extend({
     actions: {
         close: function() {
             this.$().modal('hide');
+        },
+        submit: function() {
+            var form = this.$().find('.modal-body form');
+            if (form.length > 0) {
+                console.log('form');
+                // trigger submit event on body form
+                this.$().find('.modal-body form').trigger('submit');
+            }
+            else {
+                console.log('no form');
+                // if we have no form, we send a submit action
+                this.sendAction('submit');
+            }
         }
+
     },
 
     observeOpen: Ember.observer('open', function() {

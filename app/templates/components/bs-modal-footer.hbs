@@ -1,5 +1,7 @@
+<form {{action "submit" on "submit"}}>
 {{#if template}}
     {{yield}}
 {{else}}
     {{#bs-button type="primary" action="close"}}{{buttonTitle}}{{/bs-button}}
 {{/if}}
+</form>
