@@ -13,3 +13,9 @@
 <h2>Not dismissible</h2>
 
 {{#bs-alert type="warning" dismissible=false}}<strong>Warning!</strong> Better check yourself, you're not looking too good.{{/bs-alert}}
+
+<h2>Bound visibility</h2>
+
+<label>{{input type="checkbox" checked=visible}} Show/Hide</label>
+{{#bs-alert type="danger" visible=visible}}<strong>Oh snap!</strong> Change a few things up and try submitting again.{{/bs-alert}}
+
