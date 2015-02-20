@@ -10,7 +10,6 @@ export default Ember.Component.extend(ModalCloser, {
     actions: {
         submit: function() {
             // send to parent bs-modal component
-            console.log('submit');
             this.triggerAction({
                 action: 'submit'
             });
