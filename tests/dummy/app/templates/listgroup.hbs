@@ -1,0 +1,11 @@
+<h1>List group</h1>
+
+{{#bs-list-group selectable=true selected=selected}}
+    {{#bs-list-group-item value="First" type="info"}}First{{/bs-list-group-item}}
+    {{#bs-list-group-item value="Second"}}Second{{/bs-list-group-item}}
+    {{#bs-list-group-item value="Third"}}Third{{/bs-list-group-item}}
+    {{#bs-list-group-item value="Fourth"}}Fourth{{/bs-list-group-item}}
+    {{#bs-list-group-item value="Fifth" disabled=true}}Fifth{{/bs-list-group-item}}
+{{/bs-list-group}}
+
+<p>Selected: {{selected}}</p>
