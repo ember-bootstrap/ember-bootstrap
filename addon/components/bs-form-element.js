@@ -37,6 +37,8 @@ export default FormGroup.extend({
 
     placeholder: null,
 
+    name: null,
+
     choices: [],
     choiceValueProperty: null,
     choiceLabelProperty: null,
