@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import Config from 'ember-bootstrap/config';
 
 /**
  This component renders a `<div class="form-group">` element, with support for validation states and feedback icons.
@@ -58,41 +59,81 @@ export default Ember.Component.extend({
     /**
      * The icon classes to be used for a feedback icon in a "success" validation state.
      * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-     * rendered is `useIcons` is false.
+     * rendered if `useIcons` is false.
+     *
+     * You can change this globally by setting the `formValidationSuccessIcon` property of
+     * the ember-bootstrap configuration in your config/environment.js file. If your are
+     * using FontAwesome for example:
+     *
+     * ```js
+     * ENV['ember-bootstrap'] = {
+     *   formValidationSuccessIcon: 'fa fa-check'
+     * }
+     * ```
      *
      * @property successIcon
      * @type string
      * @default 'glyphicon glyphicon-ok'
      * @public
      */
-    successIcon: 'glyphicon glyphicon-ok',
+    successIcon: Config.formValidationSuccessIcon,
 
     /**
      * The icon classes to be used for a feedback icon in a "error" validation state.
      * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-     * rendered is `useIcons` is false.
+     * rendered if `useIcons` is false.
+     *
+     * You can change this globally by setting the `formValidationErrorIcon` property of
+     * the ember-bootstrap configuration in your config/environment.js file. If your are
+     * using FontAwesome for example:
+     *
+     * ```js
+     * ENV['ember-bootstrap'] = {
+     *   formValidationErrorIcon: 'fa fa-times'
+     * }
+     * ```
      *
      * @property errorIcon
      * @type string
      * @public
      */
-    errorIcon: 'glyphicon glyphicon-remove',
+    errorIcon: Config.formValidationErrorIcon,
 
     /**
      * The icon classes to be used for a feedback icon in a "warning" validation state.
      * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-     * rendered is `useIcons` is false.
+     * rendered if `useIcons` is false.
+     *
+     * You can change this globally by setting the `formValidationWarningIcon` property of
+     * the ember-bootstrap configuration in your config/environment.js file. If your are
+     * using FontAwesome for example:
+     *
+     * ```js
+     * ENV['ember-bootstrap'] = {
+     *   formValidationWarningIcon: 'fa fa-warning'
+     * }
+     * ```
      *
      * @property warningIcon
      * @type string
      * @public
      */
-    warningIcon: 'glyphicon glyphicon-warning-sign',
+    warningIcon: Config.formValidationWarningIcon,
 
     /**
      * The icon classes to be used for a feedback icon in a "info" validation state.
      * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-     * rendered is `useIcons` is false.
+     * rendered if `useIcons` is false.
+     *
+     * You can change this globally by setting the `formValidationInfoIcon` property of
+     * the ember-bootstrap configuration in your config/environment.js file. If your are
+     * using FontAwesome for example:
+     *
+     * ```js
+     * ENV['ember-bootstrap'] = {
+     *   formValidationInfoIcon: 'fa fa-info-circle
+     * }
+     * ```
      *
      * The "info" validation state is not supported in Bootstrap CSS, but can be easily added
      * using the following LESS style:
@@ -106,7 +147,7 @@ export default Ember.Component.extend({
      * @type string
      * @public
      */
-    infoIcon: 'glyphicon glyphicon-info-sign',
+    infoIcon: Config.formValidationInfoIcon,
 
     iconName: Ember.computed('validation', function() {
         var validation = this.get('validation') || 'success';
