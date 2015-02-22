@@ -1,7 +1,10 @@
-<form {{action "submit" on "submit"}}>
 {{#if template}}
     {{yield}}
 {{else}}
-    {{#bs-button type="primary" action="close"}}{{buttonTitle}}{{/bs-button}}
+    {{#if hasSubmitButton}}
+        {{#bs-button type="default" action="close"}}{{closeTitle}}{{/bs-button}}
+        {{#bs-button type="primary" buttonType="submit" disabled=submitDisabled}}{{submitTitle}}{{/bs-button}}
+    {{else}}
+        {{#bs-button type="primary" action="close"}}{{closeTitle}}{{/bs-button}}
+    {{/if}}
 {{/if}}
-</form>
