@@ -1,11 +1,14 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
+import SubComponent from 'ember-bootstrap/mixins/sub-component';
 
 
-export default Ember.Component.extend(TypeClass, {
+export default Ember.Component.extend(TypeClass, SubComponent, {
     tagName: 'li',
-    classNames: ['list-group-item'],
-    classNameBindings: ['active','disabled'],
+    classNameBindings: ['active','disabled','list-group-item'],
+
+    'list-group-item': Ember.computed.alias('applyDefaultStyle'),
+
 
     /**
      * @property classTypePrefix
@@ -25,9 +28,18 @@ export default Ember.Component.extend(TypeClass, {
 
     selected: Ember.computed.alias('parentView.selected'),
     selectable: Ember.computed.alias('parentView.selectable'),
+    applyDefaultStyle: Ember.computed.alias('parentView.applyDefaultStyle'),
+
+    action: 'selected',
+
     click: function() {
+        var value,
+            previous;
         if (this.get('selectable') && !this.get('disabled')) {
-            this.set('selected', this.get('value'));
+            value = this.get('value');
+            previous = this.get('selected');
+            this.set('selected', value);
+            this.sendAction('action', value, previous);
         }
     }
 

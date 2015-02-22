@@ -1,11 +1,46 @@
 <h1>List group</h1>
 
-{{#bs-list-group selectable=true selected=selected}}
+<h2>Simple list group</h2>
+
+{{#bs-list-group}}
     {{#bs-list-group-item value="First" type="info"}}First{{/bs-list-group-item}}
+    {{#bs-list-group-item value="Second"}}Second{{/bs-list-group-item}}
+    {{#bs-list-group-item value="Third"}}Third{{/bs-list-group-item}}
+    {{#bs-list-group-item value="Fourth"}}Fourth{{/bs-list-group-item}}
+    {{#bs-list-group-item value="Fifth"}}Fifth{{/bs-list-group-item}}
+{{/bs-list-group}}
+
+<h2>Selectable list group</h2>
+
+{{#bs-list-group selectable=true selected=selected}}
+    {{#bs-list-group-item value="First"}}First{{/bs-list-group-item}}
     {{#bs-list-group-item value="Second"}}Second{{/bs-list-group-item}}
     {{#bs-list-group-item value="Third"}}Third{{/bs-list-group-item}}
     {{#bs-list-group-item value="Fourth"}}Fourth{{/bs-list-group-item}}
     {{#bs-list-group-item value="Fifth" disabled=true}}Fifth{{/bs-list-group-item}}
 {{/bs-list-group}}
+
+<p>Selected: {{selected}}</p>
+
+<h2>Custom markup, without default style</h2>
+
+<p>Use <code>applyDefaultStyle=false</code> to apply list group behaviours (i.e. selectable items) without its defaulting styling (CSS classes) on a table for example:</p>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+    </tr>
+    </thead>
+    {{#bs-list-group action="selected" selectable=true selected=selected tagName="tbody" applyDefaultStyle=false}}
+        {{#bs-list-group-item tagName="tr" value="First"}}<td>1</td><td>First</td>{{/bs-list-group-item}}
+        {{#bs-list-group-item tagName="tr" value="Second"}}<td>2</td><td>Second</td>{{/bs-list-group-item}}
+        {{#bs-list-group-item tagName="tr" value="Third"}}<td>3</td><td>Third</td>{{/bs-list-group-item}}
+        {{#bs-list-group-item tagName="tr" value="Fourth"}}<td>4</td><td>Fourth</td>{{/bs-list-group-item}}
+        {{#bs-list-group-item tagName="tr" value="Fifth"}}<td>5</td><td>Fifth</td>{{/bs-list-group-item}}
+    {{/bs-list-group}}
+</table>
 
 <p>Selected: {{selected}}</p>

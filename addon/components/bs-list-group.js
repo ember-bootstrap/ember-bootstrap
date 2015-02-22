@@ -2,10 +2,20 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     tagName: 'ul',
-    classNames: ['list-group'],
+    classNameBindings: ['list-group'],
 
     selected: null,
 
-    selectable: false
+    selectable: false,
+
+    applyDefaultStyle: true,
+
+    'list-group': Ember.computed.alias('applyDefaultStyle'),
+
+    actions: {
+        selected: function(currentValue, previousValue) {
+            this.sendAction('action', currentValue, previousValue);
+        }
+    }
 
 });
