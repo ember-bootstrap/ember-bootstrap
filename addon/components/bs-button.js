@@ -175,6 +175,18 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
     iconInactive: null,
 
     /**
+     * Property for type styling
+     *
+     * For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without "btn-" prefix)
+     * A button has the default type 'default'.
+     *
+     * @property type
+     * @type String
+     * @default 'default'
+     */
+    type: 'default',
+
+    /**
      * Class(es) (e.g. glyphicons or font awesome) to use as a button icon
      * This will render a <i class="{{icon}}"></i> element in front of the button's label
      *

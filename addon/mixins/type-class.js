@@ -8,19 +8,20 @@ export default Ember.Mixin.create({
     classNameBindings: ['typeClass'],
     typeClass: (function() {
         var prefix = this.get('classTypePrefix'),
-            type = this.get('type') || 'default';
-        return prefix + '-' + type;
+            type = this.get('type');
+        if (Ember.isPresent(type)) {
+            return prefix + '-' + type;
+        }
     }).property('type'),
 
 
     /**
      * Property for type styling
      *
-     * For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without "btn-" prefix)
+     * For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without prefix, e.g. only "warning")
      *
      * @property type
      * @type String
-     * @default 'default'
      */
-    type: 'default'
+    type: null
 });
