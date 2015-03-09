@@ -2,9 +2,20 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "0.0.5"
+        "version": "0.0.6"
     },
     "files": {
+        "addon/components/bs-alert.js": {
+            "name": "addon/components/bs-alert.js",
+            "modules": {},
+            "classes": {
+                "Bootstrap.Alert": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Bootstrap": 1
+            }
+        },
         "addon/components/bs-button-group.js": {
             "name": "addon/components/bs-button-group.js",
             "modules": {},
@@ -48,6 +59,23 @@
     },
     "modules": {},
     "classes": {
+        "Bootstrap.Alert": {
+            "name": "Bootstrap.Alert",
+            "shortname": "Bootstrap.Alert",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Bootstrap",
+            "file": "addon/components/bs-alert.js",
+            "line": 5,
+            "description": "Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts\n\nBy default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the\n`type` property for proper styling.\n\n```hbs\n\\{{#bs-alert type=\"success\"}}<strong>Well done!</strong> You successfully read this important alert message.{{/bs-alert}}\n```",
+            "extends": "Ember.Component",
+            "uses": [
+                "Bootstrap.TypeClass"
+            ]
+        },
         "Bootstrap.Button-Group": {
             "name": "Bootstrap.Button-Group",
             "shortname": "Bootstrap.Button-Group",
@@ -106,6 +134,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [
+                "Bootstrap.Alert",
                 "Bootstrap.Button"
             ],
             "namespace": "Bootstrap",
@@ -114,6 +143,118 @@
         }
     },
     "classitems": [
+        {
+            "file": "addon/components/bs-alert.js",
+            "line": 23,
+            "description": "A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss\nthe alert.",
+            "itemtype": "property",
+            "name": "dismissible",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Bootstrap.Alert",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-alert.js",
+            "line": 34,
+            "description": "If true the alert is completely hidden. Will be set when the fade animation has finished.",
+            "itemtype": "property",
+            "name": "dismissed",
+            "type": "boolean",
+            "default": "false",
+            "readonly": "",
+            "access": "protected",
+            "tagname": "",
+            "class": "Bootstrap.Alert",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-alert.js",
+            "line": 45,
+            "description": "This property indicates if the alert is visible. If false it might still be in the DOM until the fade animation\nhas completed. Can be set to change the visibility of the alert box.",
+            "itemtype": "property",
+            "name": "visible",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Bootstrap.Alert",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-alert.js",
+            "line": 56,
+            "description": "Set to false to disable the fade out animation when hiding the alert.",
+            "itemtype": "property",
+            "name": "fade",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Bootstrap.Alert",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-alert.js",
+            "line": 66,
+            "description": "Computed property to set the alert class to the component div. Will be false when dismissed to have the component\ndiv (which cannot be removed form DOM by the component itself) without any markup.",
+            "itemtype": "property",
+            "name": "alert",
+            "type": "boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Bootstrap.Alert",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-alert.js",
+            "line": 77,
+            "itemtype": "property",
+            "name": "classTypePrefix",
+            "type": "String",
+            "default": "'alert'",
+            "access": "protected",
+            "tagname": "",
+            "class": "Bootstrap.Alert",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-alert.js",
+            "line": 85,
+            "description": "The duration of the fade out animation",
+            "itemtype": "property",
+            "name": "fadeDuration",
+            "type": "integer",
+            "default": "150",
+            "access": "public",
+            "tagname": "",
+            "class": "Bootstrap.Alert",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-alert.js",
+            "line": 110,
+            "description": "Call to make the alert visible again after it has been hidden",
+            "itemtype": "method",
+            "name": "show",
+            "access": "public",
+            "tagname": "",
+            "class": "Bootstrap.Alert",
+            "namespace": "Bootstrap"
+        },
+        {
+            "file": "addon/components/bs-alert.js",
+            "line": 123,
+            "description": "Call to hide the alert. If the `fade` property is true, this will fade out the alert before being finally\ndismissed.",
+            "itemtype": "method",
+            "name": "hide",
+            "access": "public",
+            "tagname": "",
+            "class": "Bootstrap.Alert",
+            "namespace": "Bootstrap"
+        },
         {
             "file": "addon/components/bs-button-group.js",
             "line": 62,

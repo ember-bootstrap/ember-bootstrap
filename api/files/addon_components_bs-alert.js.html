@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Bootstrap.TypeClass - ember-bootstrap</title>
+    <title>addon/components/bs-alert.js - ember-bootstrap</title>
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -103,135 +103,161 @@
                 <div id="docs-main">
                     <div class="content">
                         <div class="page-header">
-    <h1>Bootstrap.TypeClass <small>Class</small></h1>
+    <h1>addon/components/bs-alert.js <small>File</small></h1>
 </div>
 
-<div class="well well-small">
-    
-
-    
-
-    
-        <div class="foundat">
-            Defined in: <a href="../files/addon_mixins_type-class.js.html#l3"><code>addon&#x2F;mixins&#x2F;type-class.js:3</code></a>
-        </div>
-    
-
-    
-
-    
-</div>
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
 
 
+/**
+ Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts
 
-<div class="well well-small">
-    
-</div>
+ By default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
+ &#x60;type&#x60; property for proper styling.
+
+ &#x60;&#x60;&#x60;hbs
+ \{{#bs-alert type=&quot;success&quot;}}&lt;strong&gt;Well done!&lt;/strong&gt; You successfully read this important alert message.{{/bs-alert}}
+ &#x60;&#x60;&#x60;
+
+ @class Alert
+ @namespace Bootstrap
+ @extends Ember.Component
+ @uses Bootstrap.TypeClass
+ */
+export default Ember.Component.extend(TypeClass, {
+    classNameBindings: [&#x27;alert&#x27;,&#x27;fade&#x27;,&#x27;in&#x27;],
+
+    /**
+     * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
+     * the alert.
+     *
+     * @property dismissible
+     * @type boolean
+     * @default true
+     * @public
+     */
+    dismissible: true,
+
+    /**
+     * If true the alert is completely hidden. Will be set when the fade animation has finished.
+     *
+     * @property dismissed
+     * @type boolean
+     * @default false
+     * @readonly
+     * @protected
+     */
+    dismissed: false,
+
+    /**
+     * This property indicates if the alert is visible. If false it might still be in the DOM until the fade animation
+     * has completed. Can be set to change the visibility of the alert box.
+     *
+     * @property visible
+     * @type boolean
+     * @default true
+     * @public
+     */
+    visible: true,
+
+    /**
+     * Set to false to disable the fade out animation when hiding the alert.
+     *
+     * @property fade
+     * @type boolean
+     * @default true
+     * @public
+     */
+    fade: true,
+
+    /**
+     * Computed property to set the alert class to the component div. Will be false when dismissed to have the component
+     * div (which cannot be removed form DOM by the component itself) without any markup.
+     *
+     * @property alert
+     * @type boolean
+     * @private
+     */
+    alert: Ember.computed.not(&#x27;dismissed&#x27;),
+    in: Ember.computed.and(&#x27;visible&#x27;,&#x27;fade&#x27;),
+
+    /**
+     * @property classTypePrefix
+     * @type String
+     * @default &#x27;alert&#x27;
+     * @protected
+     */
+    classTypePrefix: &#x27;alert&#x27;,
+
+    /**
+     * The duration of the fade out animation
+     *
+     * @property fadeDuration
+     * @type integer
+     * @default 150
+     * @public
+     */
+    fadeDuration: 150,
+
+    actions: {
+        dismiss: function() {
+            this.hide();
+        }
+    },
+
+    _onVisibleChange: Ember.observer(&#x27;visible&#x27;, function() {
+        if (this.get(&#x27;visible&#x27;)) {
+            this.show();
+        }
+        else {
+            this.hide();
+        }
+    }),
+
+    /**
+     * Call to make the alert visible again after it has been hidden
+     *
+     * @method show
+     * @public
+     */
+    show: function() {
+        this.setProperties({
+            dismissed: false,
+            visible: true
+        });
+    },
+
+    /**
+     * Call to hide the alert. If the &#x60;fade&#x60; property is true, this will fade out the alert before being finally
+     * dismissed.
+     *
+     * @method hide
+     * @public
+     */
+    hide: function() {
+        if (this.get(&#x27;fade&#x27;)) {
+            this.set(&#x27;visible&#x27;, false);
+            Ember.run.later(this,function() {
+                if (!this.get(&#x27;isDestroyed&#x27;)) {
+                    this.set(&#x27;dismissed&#x27;, true);
+                }
+            },this.get(&#x27;fadeDuration&#x27;));
+        }
+        else {
+            this.setProperties({
+                dismissed: true,
+                visible: false
+            });
+        }
+    }
 
 
+});
 
-<div>
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
-
-        
-        
-            <li><a data-toggle="tab" href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
-
-    <div class="tab-content">
-        <div id="index" class="tab-pane active">
-            <h2 class="off-left">Item Index</h2>
-
-            
-
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_type" data-tablink="type">type</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-        </div>
-
-        
-
-        
-            <div id="properties" class="tab-pane">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_type" class="property item">
-    <h3 class="name"><code>type</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/addon_mixins_type-class.js.html#l16"><code>addon&#x2F;mixins&#x2F;type-class.js:16</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Property for type styling</p>
-<p>For the available types see the <a href="http://getbootstrap.com/css/#buttons-options">Bootstrap docs</a> (use without "btn-" prefix)</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &#x27;default&#x27;</p>
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+    </pre>
 </div>
 
                     </div>
