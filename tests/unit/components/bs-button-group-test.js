@@ -4,39 +4,38 @@ import {
   test
 } from 'ember-qunit';
 
-moduleForComponent('bs-button-group', 'BsButtonGroupComponent', {
+moduleForComponent('bs-button-group', {
   // specify the other units that are required for this test
   needs: ['component:bs-button', 'template:components/bs-button']
 });
 
-test('it renders', function() {
-  expect(2);
+test('it renders', function(assert) {
+    assert.expect(2);
 
-  // creates the component instance
-  var component = this.subject();
-  equal(component._state, 'preRender');
+    // creates the component instance
+    var component = this.subject();
+    assert.equal(component._state, 'preRender');
 
-  // appends the component to the page
-  this.append();
-  equal(component._state, 'inDOM');
+    // renders the component to the page
+    this.render();
+    assert.equal(component._state, 'inDOM');
 });
 
-
-test('button group has correct CSS classes', function() {
+test('button group has correct CSS classes', function(assert) {
     var component = this.subject({
         size: 'lg',
         vertical: true,
         justified: true
     });
 
-    equal(this.$().hasClass('btn-group'),true, 'has btn-group class');
-    equal(this.$().hasClass('btn-group-lg'),true, 'has size class');
-    equal(this.$().hasClass('btn-group-vertical'),true, 'has vertical class');
-    equal(this.$().hasClass('btn-group-justified'),true, 'has justified class');
+    assert.equal(this.$().hasClass('btn-group'),true, 'has btn-group class');
+    assert.equal(this.$().hasClass('btn-group-lg'),true, 'has size class');
+    assert.equal(this.$().hasClass('btn-group-vertical'),true, 'has vertical class');
+    assert.equal(this.$().hasClass('btn-group-justified'),true, 'has justified class');
 });
 
 
-test('radio button group has value of selected button', function() {
+test('radio button group has value of selected button', function(assert) {
     var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
         component = this.subject({
             template: Ember.Handlebars.compile(template),
@@ -45,17 +44,17 @@ test('radio button group has value of selected button', function() {
 
     for (var i=0;i<3;i++) {
         this.$().find('button').eq(i).click();
-        equal(component.get('value'), i+1, 'value of button group must match that of clicked button');
+        assert.equal(component.get('value'), i+1, 'value of button group must match that of clicked button');
 
         // check button's active property
         for (var k=0;k<3;k++) {
-            equal(component.get('childButtons').objectAt(k).get('active'), i===k, 'only clicked button is active');
+            assert.equal(component.get('childButtons').objectAt(k).get('active'), i===k, 'only clicked button is active');
         }
     }
 });
 
 
-test('checkbox button group has value of all selected button', function() {
+test('checkbox button group has value of all selected button', function(assert) {
     var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
         component = this.subject({
             template: Ember.Handlebars.compile(template),
@@ -66,17 +65,17 @@ test('checkbox button group has value of all selected button', function() {
     for (var i=0;i<3;i++) {
         this.$().find('button').eq(i).click();
         expectedValue.push(i+1);
-        deepEqual(component.get('value'), expectedValue, 'value of button group must match array of values of all active buttons');
+        assert.deepEqual(component.get('value'), expectedValue, 'value of button group must match array of values of all active buttons');
 
         // check button's active property
         for (var k=0;k<3;k++) {
-            equal(component.get('childButtons').objectAt(k).get('active'), k<=i, 'every clicked button is active');
+            assert.equal(component.get('childButtons').objectAt(k).get('active'), k<=i, 'every clicked button is active');
         }
     }
 });
 
 
-test('setting radio button group value activates button with same value', function() {
+test('setting radio button group value activates button with same value', function(assert) {
     var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
         component = this.subject({
             template: Ember.Handlebars.compile(template),
@@ -90,18 +89,18 @@ test('setting radio button group value activates button with same value', functi
         Ember.run(function(){
             component.set('value', i+1);
         });
-        equal(component.get('value'), i+1, 'value must match set value');
+        assert.equal(component.get('value'), i+1, 'value must match set value');
 
         // check button's active property
         for (var k=0;k<3;k++) {
-            equal(component.get('childButtons').objectAt(k).get('active'), i===k, 'only button with same value is active');
+            assert.equal(component.get('childButtons').objectAt(k).get('active'), i===k, 'only button with same value is active');
         }
     }
 });
 
 
 
-test('setting checkbox button group value with array of values activates buttons with same value', function() {
+test('setting checkbox button group value with array of values activates buttons with same value', function(assert) {
     var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
         component = this.subject({
             template: Ember.Handlebars.compile(template),
@@ -114,10 +113,10 @@ test('setting checkbox button group value with array of values activates buttons
     Ember.run(function(){
         component.set('value', value);
     });
-    deepEqual(component.get('value'), value, 'value must match set value');
+    assert.deepEqual(component.get('value'), value, 'value must match set value');
 
     // check button's active property
     for (var k=0;k<3;k++) {
-        equal(component.get('childButtons').objectAt(k).get('active'), value.contains(k+1), 'only buttons with value contained in set value is active');
+        assert.equal(component.get('childButtons').objectAt(k).get('active'), value.contains(k+1), 'only buttons with value contained in set value is active');
     }
 });
