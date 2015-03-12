@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var ghpages = require('gh-pages');
 var path = require('path');
+var file = require('gulp-file');
 
 gulp.task('docs', ['docs:publish']);
 
@@ -15,5 +16,14 @@ gulp.task('docs:generate', function (cb) {
 gulp.task('docs:publish', ['docs:generate'], function () {
     ghpages.publish(path.join(__dirname, 'docs'), {
         add: true
+    });
+});
+
+gulp.task('docs:changelog', function (done) {
+    require('conventional-changelog')({
+    }, function(err, log) {
+        file('CHANGELOG.md', log, { src: true })
+            .pipe(gulp.dest('./'))
+            .on('end', done);
     });
 });
