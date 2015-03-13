@@ -14,6 +14,8 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
      */
     classTypePrefix: 'panel',
 
+    type: 'default',
+
     active: false,
 
     title: null,
