@@ -67,10 +67,10 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  ```
 
  @class Button
- @namespace Bootstrap
+ @namespace Components
  @extends Ember.Component
- @uses Bootstrap.TypeClass
- @uses Bootstrap.SizeClass
+ @uses Mixins.TypeClass
+ @uses Mixins.SizeClass
 */
 export default Ember.Component.extend(TypeClass, SizeClass, {
     tagName: 'button',

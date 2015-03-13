@@ -58,7 +58,7 @@ import toggleButton from 'ember-bootstrap/components/bs-dropdown-button';
  ```
 
  @class Dropdown
- @namespace Bootstrap
+ @namespace Components
  @extends Ember.Component
  */
 export default Ember.Component.extend({

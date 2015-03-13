@@ -13,9 +13,9 @@ import TypeClass from 'ember-bootstrap/mixins/type-class';
  ```
 
  @class Alert
- @namespace Bootstrap
+ @namespace Components
  @extends Ember.Component
- @uses Bootstrap.TypeClass
+ @uses Mixins.TypeClass
  */
 export default Ember.Component.extend(TypeClass, {
     classNameBindings: ['alert','fade','in'],
