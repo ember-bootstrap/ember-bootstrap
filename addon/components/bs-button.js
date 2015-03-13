@@ -9,7 +9,7 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  ### Basic Usage
 
  ```handlebars
- \{{#bs-button type="primary" icon="glyphicon glyphicon-download"}}Download{{/bs-button}}
+ {{#bs-button type="primary" icon="glyphicon glyphicon-download"}}Download{{/bs-button}}
  ```
 
  ### Actions
@@ -20,7 +20,7 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  * callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling
 
  ```handlebars
- \{{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
+ {{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
     Download
  {{/bs-button}}
  ```

@@ -6,14 +6,14 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
  See http://getbootstrap.com/components/#btn-groups
 
- Use as a block level component with any number of Button components as children:
+ Use as a block level component with any number of {{#crossLink "Components.Button"}}{{/crossLink}} components as children:
 
  ```handlebars
- \{{#bs-button-group}}
-    \{{#bs-button}}1\{{/bs-button}}
-    \{{#bs-button}}2\{{/bs-button}}
-    \{{#bs-button}}3\{{/bs-button}}
- \{{/bs-button-group}}
+ {{#bs-button-group}}
+    {{#bs-button}}1{{/bs-button}}
+    {{#bs-button}}2{{/bs-button}}
+    {{#bs-button}}3{{/bs-button}}
+ {{/bs-button-group}}
  ```
 
  ### Radio-like behaviour
@@ -23,13 +23,13 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  the value of the active button:
 
  ```handlebars
- \{{#bs-button-group value=buttonGroupValue type="radio"}}
-    \{{#bs-button value=1}}1\{{/bs-button}}
-    \{{#bs-button value=2}}2\{{/bs-button}}
-    \{{#bs-button value=3}}3\{{/bs-button}}
- \{{/bs-button-group}}
+ {{#bs-button-group value=buttonGroupValue type="radio"}}
+    {{#bs-button value=1}}1{{/bs-button}}
+    {{#bs-button value=2}}2{{/bs-button}}
+    {{#bs-button value=3}}3{{/bs-button}}
+ {{/bs-button-group}}
 
- You selected: \{{buttonGroupValue}}!
+ You selected: {{buttonGroupValue}}!
  ```
 
  ### Checkbox-like behaviour
@@ -38,17 +38,17 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  of all the values of the active buttons:
 
  ```handlebars
- \{{#bs-button-group value=buttonGroupValue type="checkbox"}}
-    \{{#bs-button value=1}}1\{{/bs-button}}
-    \{{#bs-button value=2}}2\{{/bs-button}}
-    \{{#bs-button value=3}}3\{{/bs-button}}
- \{{/bs-button-group}}
+ {{#bs-button-group value=buttonGroupValue type="checkbox"}}
+    {{#bs-button value=1}}1{{/bs-button}}
+    {{#bs-button value=2}}2{{/bs-button}}
+    {{#bs-button value=3}}3{{/bs-button}}
+ {{/bs-button-group}}
 
  You selected:
  <ul>
- \{{#each value in buttonGroupValue}}
-    <li>\{{value}}</li>
- \{{/each}}
+ {{#each value in buttonGroupValue}}
+    <li>{{value}}</li>
+ {{/each}}
  </ul>
  ```
 
@@ -107,7 +107,7 @@ export default Ember.Component.extend(SizeClass, {
      *
      * ```handlebars
      * <div class="btn-group" role="group">
-     * \{{#bs-button}}My Button{{/bs-button}}
+     * {{#bs-button}}My Button{{/bs-button}}
      * </div>
      * ```
      *

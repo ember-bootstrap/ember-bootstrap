@@ -2,7 +2,10 @@ import Ember from 'ember';
 import DropdownToggle from 'ember-bootstrap/mixins/dropdown-toggle';
 
 /**
+ Anchor element that triggers the parent dropdown to open.
+ Use {{#crossLink "Components.DropdownButton"}}{{/crossLink}} if you want a button instead of an anchor tag.
 
+ See {{#crossLink "Components.Dropdown"}}{{/crossLink}} for examples.
 
 
  @class DropdownToggle
@@ -16,11 +19,10 @@ export default Ember.Component.extend(DropdownToggle, {
      *
      * @property tagName
      * @type string
-     * @default "a"s
+     * @default a
      * @public
      */
     tagName: 'a',
-
 
     attributeBindings: ['href'],
 

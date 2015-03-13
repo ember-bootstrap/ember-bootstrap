@@ -8,6 +8,15 @@
     ],
     "exclude": "vendor",
     "outdir": "docs/api",
-    "themedir": "node_modules/yuidoc-bootstrap"
-  }
+    "themedir": "node_modules/yuidoc-bootstrap-theme",
+    "helpers" : [ "node_modules/yuidoc-bootstrap-theme/helpers/helpers.js" ]
+  },
+    "external": {
+        "data": [
+            {
+                "base": "http://emberjs.com/api/",
+                "json": "http://builds.emberjs.com/tags/v1.5.1/ember-docs.json"
+            }
+        ]
+    }
 }

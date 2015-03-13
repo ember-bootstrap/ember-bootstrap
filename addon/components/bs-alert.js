@@ -9,7 +9,7 @@ import TypeClass from 'ember-bootstrap/mixins/type-class';
  `type` property for proper styling.
 
  ```hbs
- \{{#bs-alert type="success"}}<strong>Well done!</strong> You successfully read this important alert message.{{/bs-alert}}
+ {{#bs-alert type="success"}}<strong>Well done!</strong> You successfully read this important alert message.{{/bs-alert}}
  ```
 
  @class Alert
