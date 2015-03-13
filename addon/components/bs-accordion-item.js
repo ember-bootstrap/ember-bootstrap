@@ -58,9 +58,8 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
         collapseElement
             .one('bsTransitionEnd', Ember.run.bind(this, complete))
             // @todo: make duration configurable
-            //.emulateTransitionEnd(350)
+            .emulateTransitionEnd(350)
         ;
-        console.log("show");
 
         Ember.run.next(this, function(){
             this.set('collapseHeight', collapseElement[0].scrollHeight);
@@ -90,9 +89,8 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
         collapseElement
             .one('bsTransitionEnd', Ember.run.bind(this, complete))
             // @todo: make duration configurable
-            //.emulateTransitionEnd(350)
+            .emulateTransitionEnd(350)
         ;
-        console.log("hide");
 
         Ember.run.next(this, function(){
             this.set('collapseHeight', 0);
