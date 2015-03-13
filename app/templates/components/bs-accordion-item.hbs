@@ -1,0 +1,13 @@
+<div class="panel-heading" role="tab" {{action "toggleActive"}} {{bind-attr class="collapsed"}}>
+    <h4 class="panel-title">
+        <a href="#">
+            {{title}}
+        </a>
+    </h4>
+</div>
+<div {{bind-attr class=":panel-collapse collapse in collapsing"}} {{bind-attr style=collapseStyle}} role="tabpanel">
+    <div class="panel-body">
+        {{yield}}
+    </div>
+</div>
+
