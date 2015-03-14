@@ -39,8 +39,7 @@
     "glob": "^4.0.5",
     "gulp": "^3.8.10",
     "gulp-file": "^0.2.0",
-    "gulp-rename": "^1.2.0",
-    "yuidoc-bootstrap-theme": "^1.0.4"
+    "gulp-rename": "^1.2.0"
   },
   "description": "Twitter Bootstrap components for Ember.js",
   "keywords": [

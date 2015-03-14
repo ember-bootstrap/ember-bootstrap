@@ -8,8 +8,7 @@
     ],
     "exclude": "vendor",
     "outdir": "docs/api",
-    "themedir": "node_modules/yuidoc-bootstrap-theme",
-    "helpers" : [ "node_modules/yuidoc-bootstrap-theme/helpers/helpers.js" ]
+    "themedir": "docs/yuidoc-theme"
   },
     "external": {
         "data": [

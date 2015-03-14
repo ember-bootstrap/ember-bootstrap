@@ -5,8 +5,8 @@ import toggleButton from 'ember-bootstrap/components/bs-dropdown-button';
  Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.
  See http://getbootstrap.com/components/#dropdowns
 
- Use this component together with two sub components, a dropdown toggle ({{#crossLink "Components.DropdownToggle"}}{{/crossLink}} or
- {{#crossLink "Components.DropdownButton"}}{{/crossLink}} component) and a dropdown menu ({{#crossLink "Components.DropdownMenu"}}{{/crossLink}}) component:
+ Use this component together with two sub components, a dropdown toggle (`Components.DropdownToggle` or
+ `Components.DropdownButton` component) and a dropdown menu (`Components.DropdownMenu`) component:
 
  ```hbs
  <nav class="navbar navbar-default navbar-static">
@@ -27,7 +27,7 @@ import toggleButton from 'ember-bootstrap/components/bs-dropdown-button';
  ### Button dropdowns
 
  To use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the
- {{#crossLink "Components.DropdownButton"}}{{/crossLink}} component as the toggle:
+ `Components.DropdownButton` component as the toggle:
 
  ```hbs
  {{#bs-dropdown}}
@@ -39,12 +39,12 @@ import toggleButton from 'ember-bootstrap/components/bs-dropdown-button';
  {{/bs-dropdown}}
  ```
 
- It has all the functionality of a {{#crossLink "Components.Button"}}{{/crossLink}} with additional dropdown support.
+ It has all the functionality of a `Components.Button` with additional dropdown support.
 
  ### Split button dropdowns
 
  To have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a
- {{#crossLink "Components.Button"}}{{/crossLink}} component and a {{#crossLink "Components.DropdownButton"}}{{/crossLink}}:
+ `Components.Button` component and a `Components.DropdownButton`:
 
  ```hbs
  {{#bs-dropdown}}

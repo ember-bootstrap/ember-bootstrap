@@ -9,7 +9,9 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  ### Basic Usage
 
  ```handlebars
- {{#bs-button type="primary" icon="glyphicon glyphicon-download"}}Download{{/bs-button}}
+ {{#bs-button type="primary" icon="glyphicon glyphicon-download"}}
+    Download
+ {{/bs-button}}
  ```
 
  ### Actions
