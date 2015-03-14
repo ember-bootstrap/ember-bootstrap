@@ -13,11 +13,15 @@ gulp.task('docs:generate', function (cb) {
     });
 });
 
-gulp.task('docs:publish', ['docs:generate'], function () {
+gulp.task('docs:copyChangelog', function () {
+    return gulp.src('CHANGELOG.md')
+        .pipe(gulp.dest('docs'))
+});
+
+gulp.task('docs:publish', ['docs:generate','docs:copyChangelog'], function () {
     ghpages.publish(path.join(__dirname, 'docs'), {
-        src: 'api/**/*',
-        add: true,
-        push: false
+        src: '!{yuidoc-theme,yuidoc-theme/**}',
+        add: true
     });
 });
 
