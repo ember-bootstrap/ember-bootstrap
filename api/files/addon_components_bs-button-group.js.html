@@ -3,106 +3,52 @@
 <head>
     <meta charset="utf-8">
     <title>addon/components/bs-button-group.js - ember-bootstrap</title>
-    <link rel="stylesheet" href="">
+    <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
+    <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
+    <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="stylesheet" href="../assets/css/custom.css">
-    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
 </head>
 <body class="yui3-skin-sam">
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-        
-	    <img alt="ember-bootstrap" src="../assets/css/logo.png" style="max-height: 65%;" title="ember-bootstrap">
-        
-            ember-bootstrap
-        </h1>
-	<div class="nav">
-            <li class="divider-vertical"></li>
-            <li>
-                <p class="navbar-text">
-                    API Docs for Version: <b>0.0.6</b>
-                </p>
-            </li>
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-toggle-wrapper visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
         </div>
-        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/Bootstrap.Alert", "classes/Bootstrap.Button", "classes/Bootstrap.Button-Group", "classes/Bootstrap.SizeClass", "classes/Bootstrap.TypeClass"]'>
-        </form>
+        <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="navbar-nav nav">
+                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
+                <li><a href="/ember-bootstrap/components">Components</a></li>
+                <li><a href="/ember-bootstrap/api">API</a></li>
+
+            </ul>
+            <ul class="navbar-nav nav navbar-right">
+                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+
+            </ul>
+        </div>
     </div>
 </div>
 <div class="container">
+    <h1>API Docs <span class="small">0.0.7</span></h1>
     <div class="row">
-        <div class="span3">
-	    <div>
-    <h3>APIs</h3>
-    <div id="sidebar">
-        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
-            <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
-            <li><a href="#modules" data-toggle="tab">Modules</a></li>
-        </ul>
-
-        <div id="api-tabview-filter">
-            <input type="search" placeholder="Type to filter APIs">
-        </div>
-
-        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
-            <div class="tab-pane active" id="classes">
-                <ul id="api-classes" class="nav nav-list">
-                    
-                        <li><a href="../classes/Bootstrap.Alert.html">Bootstrap.Alert</a></li>
-                    
-                        <li><a href="../classes/Bootstrap.Button.html">Bootstrap.Button</a></li>
-                    
-                        <li><a href="../classes/Bootstrap.Button-Group.html">Bootstrap.Button-Group</a></li>
-                    
-                        <li><a href="../classes/Bootstrap.SizeClass.html">Bootstrap.SizeClass</a></li>
-                    
-                        <li><a href="../classes/Bootstrap.TypeClass.html">Bootstrap.TypeClass</a></li>
-                    
-                </ul>
-            </div>
-
-            <div class="tab-pane" id="modules">
-                <ul id="api-modules" class="nav nav-list">
-                    
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-        </div>
-        <div class="span9">
-                <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
-
+        <div class="col-sm-8">
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <div class="page-header">
+<div class="page-header">
     <h1>addon/components/bs-button-group.js <small>File</small></h1>
 </div>
 
@@ -116,14 +62,14 @@ import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
  Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
  See http://getbootstrap.com/components/#btn-groups
 
- Use as a block level component with any number of Button components as children:
+ Use as a block level component with any number of {{#crossLink &quot;Components.Button&quot;}}{{/crossLink}} components as children:
 
  &#x60;&#x60;&#x60;handlebars
- \{{#bs-button-group}}
-    \{{#bs-button}}1\{{/bs-button}}
-    \{{#bs-button}}2\{{/bs-button}}
-    \{{#bs-button}}3\{{/bs-button}}
- \{{/bs-button-group}}
+ {{#bs-button-group}}
+    {{#bs-button}}1{{/bs-button}}
+    {{#bs-button}}2{{/bs-button}}
+    {{#bs-button}}3{{/bs-button}}
+ {{/bs-button-group}}
  &#x60;&#x60;&#x60;
 
  ### Radio-like behaviour
@@ -133,13 +79,13 @@ import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
  the value of the active button:
 
  &#x60;&#x60;&#x60;handlebars
- \{{#bs-button-group value=buttonGroupValue type=&quot;radio&quot;}}
-    \{{#bs-button value=1}}1\{{/bs-button}}
-    \{{#bs-button value=2}}2\{{/bs-button}}
-    \{{#bs-button value=3}}3\{{/bs-button}}
- \{{/bs-button-group}}
+ {{#bs-button-group value=buttonGroupValue type=&quot;radio&quot;}}
+    {{#bs-button value=1}}1{{/bs-button}}
+    {{#bs-button value=2}}2{{/bs-button}}
+    {{#bs-button value=3}}3{{/bs-button}}
+ {{/bs-button-group}}
 
- You selected: \{{buttonGroupValue}}!
+ You selected: {{buttonGroupValue}}!
  &#x60;&#x60;&#x60;
 
  ### Checkbox-like behaviour
@@ -148,24 +94,24 @@ import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
  of all the values of the active buttons:
 
  &#x60;&#x60;&#x60;handlebars
- \{{#bs-button-group value=buttonGroupValue type=&quot;checkbox&quot;}}
-    \{{#bs-button value=1}}1\{{/bs-button}}
-    \{{#bs-button value=2}}2\{{/bs-button}}
-    \{{#bs-button value=3}}3\{{/bs-button}}
- \{{/bs-button-group}}
+ {{#bs-button-group value=buttonGroupValue type=&quot;checkbox&quot;}}
+    {{#bs-button value=1}}1{{/bs-button}}
+    {{#bs-button value=2}}2{{/bs-button}}
+    {{#bs-button value=3}}3{{/bs-button}}
+ {{/bs-button-group}}
 
  You selected:
  &lt;ul&gt;
- \{{#each value in buttonGroupValue}}
-    &lt;li&gt;\{{value}}&lt;/li&gt;
- \{{/each}}
+ {{#each value in buttonGroupValue}}
+    &lt;li&gt;{{value}}&lt;/li&gt;
+ {{/each}}
  &lt;/ul&gt;
  &#x60;&#x60;&#x60;
 
- @class Button-Group
- @namespace Bootstrap
+ @class ButtonGroup
+ @namespace Components
  @extends Ember.Component
- @uses Bootstrap.SizeClass
+ @uses Mixins.SizeClass
  */
 export default Ember.Component.extend(SizeClass, {
 
@@ -217,7 +163,7 @@ export default Ember.Component.extend(SizeClass, {
      *
      * &#x60;&#x60;&#x60;handlebars
      * &lt;div class=&quot;btn-group&quot; role=&quot;group&quot;&gt;
-     * \{{#bs-button}}My Button{{/bs-button}}
+     * {{#bs-button}}My Button{{/bs-button}}
      * &lt;/div&gt;
      * &#x60;&#x60;&#x60;
      *
@@ -353,15 +299,29 @@ export default Ember.Component.extend(SizeClass, {
 
     </pre>
 </div>
-
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-sm-4">
+            <h3>Classes</h3>
+            
+            <ul id="api-classes" class="nav nav-pills nav-stacked">
+                    <li><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+            </ul>        </div>
     </div>
 </div>
-<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script src="../assets/js/yuidoc-bootstrap.js"></script>
 <script>prettyPrint();</script>

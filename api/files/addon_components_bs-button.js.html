@@ -3,106 +3,52 @@
 <head>
     <meta charset="utf-8">
     <title>addon/components/bs-button.js - ember-bootstrap</title>
-    <link rel="stylesheet" href="">
+    <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
+    <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
+    <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="stylesheet" href="../assets/css/custom.css">
-    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
 </head>
 <body class="yui3-skin-sam">
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
-        
-	    <img alt="ember-bootstrap" src="../assets/css/logo.png" style="max-height: 65%;" title="ember-bootstrap">
-        
-            ember-bootstrap
-        </h1>
-	<div class="nav">
-            <li class="divider-vertical"></li>
-            <li>
-                <p class="navbar-text">
-                    API Docs for Version: <b>0.0.6</b>
-                </p>
-            </li>
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-toggle-wrapper visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
         </div>
-        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/Bootstrap.Alert", "classes/Bootstrap.Button", "classes/Bootstrap.Button-Group", "classes/Bootstrap.SizeClass", "classes/Bootstrap.TypeClass"]'>
-        </form>
+        <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="navbar-nav nav">
+                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
+                <li><a href="/ember-bootstrap/components">Components</a></li>
+                <li><a href="/ember-bootstrap/api">API</a></li>
+
+            </ul>
+            <ul class="navbar-nav nav navbar-right">
+                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+
+            </ul>
+        </div>
     </div>
 </div>
 <div class="container">
+    <h1>API Docs <span class="small">0.0.7</span></h1>
     <div class="row">
-        <div class="span3">
-	    <div>
-    <h3>APIs</h3>
-    <div id="sidebar">
-        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
-            <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
-            <li><a href="#modules" data-toggle="tab">Modules</a></li>
-        </ul>
-
-        <div id="api-tabview-filter">
-            <input type="search" placeholder="Type to filter APIs">
-        </div>
-
-        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
-            <div class="tab-pane active" id="classes">
-                <ul id="api-classes" class="nav nav-list">
-                    
-                        <li><a href="../classes/Bootstrap.Alert.html">Bootstrap.Alert</a></li>
-                    
-                        <li><a href="../classes/Bootstrap.Button.html">Bootstrap.Button</a></li>
-                    
-                        <li><a href="../classes/Bootstrap.Button-Group.html">Bootstrap.Button-Group</a></li>
-                    
-                        <li><a href="../classes/Bootstrap.SizeClass.html">Bootstrap.SizeClass</a></li>
-                    
-                        <li><a href="../classes/Bootstrap.TypeClass.html">Bootstrap.TypeClass</a></li>
-                    
-                </ul>
-            </div>
-
-            <div class="tab-pane" id="modules">
-                <ul id="api-modules" class="nav nav-list">
-                    
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-        </div>
-        <div class="span9">
-                <form id="options-form" class="form-inline pull-right">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </form>
-
-
+        <div class="col-sm-8">
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <div class="page-header">
+<div class="page-header">
     <h1>addon/components/bs-button.js <small>File</small></h1>
 </div>
 
@@ -119,7 +65,9 @@ import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
  ### Basic Usage
 
  &#x60;&#x60;&#x60;handlebars
- \{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}Download{{/bs-button}}
+ {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
+    Download
+ {{/bs-button}}
  &#x60;&#x60;&#x60;
 
  ### Actions
@@ -130,7 +78,7 @@ import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
  * callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling
 
  &#x60;&#x60;&#x60;handlebars
- \{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
+ {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
     Download
  {{/bs-button}}
  &#x60;&#x60;&#x60;
@@ -177,10 +125,10 @@ import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
  &#x60;&#x60;&#x60;
 
  @class Button
- @namespace Bootstrap
+ @namespace Components
  @extends Ember.Component
- @uses Bootstrap.TypeClass
- @uses Bootstrap.SizeClass
+ @uses Mixins.TypeClass
+ @uses Mixins.SizeClass
 */
 export default Ember.Component.extend(TypeClass, SizeClass, {
     tagName: &#x27;button&#x27;,
@@ -221,6 +169,8 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * Default label of the button. Not need if used as a block component
      *
      * @property defaultText
+     * @type string
+     * @public
      */
     defaultText: null,
 
@@ -228,6 +178,9 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * Property to disable the button
      *
      * @property disabled
+     * @type boolaen
+     * @default false
+     * @public
      */
     disabled: false,
 
@@ -237,6 +190,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * @property buttonType
      * @type String
      * @default &#x27;button&#x27;
+     * @public
      */
     buttonType: &#x27;button&#x27;,
 
@@ -246,6 +200,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * @property active
      * @type boolean
      * @default false
+     * @public
      */
     active: false,
 
@@ -256,6 +211,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * @property block
      * @type boolean
      * @default false
+     * @public
      */
     block: false,
 
@@ -265,6 +221,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * @property toggle
      * @type boolean
      * @default false
+     * @public
      */
     toggle: false,
 
@@ -273,6 +230,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      *
      * @property iconActive
      * @type String
+     * @public
      */
     iconActive: null,
 
@@ -281,6 +239,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      *
      * @property iconInactive
      * @type String
+     * @public
      */
     iconInactive: null,
 
@@ -290,6 +249,8 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      *
      * @property icon
      * @type String
+     * @readonly
+     * @protected
      */
     icon: Ember.computed(&#x27;active&#x27;, function() {
         if (this.get(&#x27;active&#x27;)) {
@@ -306,6 +267,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      *
      * @property value
      * @type any
+     * @public
      */
     value: null,
 
@@ -317,6 +279,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * @property textState
      * @type String
      * @default &#x27;default&#x27;
+     * @protected
      */
     textState: &#x27;default&#x27;,
 
@@ -325,6 +288,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      *
      * @property reset
      * @type boolean
+     * @public
      */
     reset: null,
 
@@ -332,6 +296,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * This will reset the state property to &#x27;default&#x27;, and with that the button&#x27;s label to defaultText
      *
      * @method resetState
+     * @protected
      */
     resetState: function() {
         this.set(&#x27;textState&#x27;, &#x27;default&#x27;);
@@ -387,15 +352,29 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
 
     </pre>
 </div>
-
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-sm-4">
+            <h3>Classes</h3>
+            
+            <ul id="api-classes" class="nav nav-pills nav-stacked">
+                    <li><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+            </ul>        </div>
     </div>
 </div>
-<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script src="../assets/js/yuidoc-bootstrap.js"></script>
 <script>prettyPrint();</script>

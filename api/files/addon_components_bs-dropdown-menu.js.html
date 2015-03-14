@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/mixins/size-class.js - ember-bootstrap</title>
+    <title>addon/components/bs-dropdown-menu.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,7 +49,7 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/size-class.js <small>File</small></h1>
+    <h1>addon/components/bs-dropdown-menu.js <small>File</small></h1>
 </div>
 
 <div class="file">
@@ -57,39 +57,53 @@
 import Ember from &#x27;ember&#x27;;
 
 /**
- * Mixin to set the appropriate class for components with different sizes.
- *
- *
- * @class SizeClass
- * @namespace Mixins
+ Component for the dropdown menu.
+
+ See {{#crossLink &quot;Components.Dropdown&quot;}}{{/crossLink}} for examples.
+
+ @class DropdownMenu
+ @namespace Components
+ @extends Ember.Component
  */
-export default Ember.Mixin.create({
-    /**
-     * Prefix for the size class, e.g. &quot;btn&quot; for button size classes (&quot;btn-lg&quot;, &quot;btn-sm&quot; etc.)
-     *
-     * @property classTypePrefix
-     * @type string
-     * @required
-     * @protected
-     */
-    classTypePrefix: Ember.required(String),
-    classNameBindings: [&#x27;sizeClass&#x27;],
-    sizeClass: Ember.computed(&#x27;size&#x27;, function() {
-        var prefix = this.get(&#x27;classTypePrefix&#x27;),
-            size = this.get(&#x27;size&#x27;);
-        return Ember.isBlank(size) ? null : prefix + &#x27;-&#x27; + size;
-    }),
+export default Ember.Component.extend({
 
     /**
-     * Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27;
+     * Defaults to a &#x60;&lt;ul&gt;&#x60; tag. Change for other types of dropdown menus.
      *
-     * Also see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)
-     *
-     * @property size
-     * @type String
+     * @property tagName
+     * @type string
+     * @default ul
      * @public
      */
-    size: null
+    tagName: &#x27;ul&#x27;,
+    classNames: [&#x27;dropdown-menu&#x27;],
+    classNameBindings: [&#x27;alignClass&#x27;],
+
+    /**
+     * @property ariaRole
+     * @default menu
+     * @type string
+     * @protected
+     */
+    ariaRole: &#x27;menu&#x27;,
+
+    /**
+     * Alignment of the menu, either &quot;left&quot; or &quot;right&quot;
+     *
+     * @property align
+     * @type string
+     * @default left
+     * @public
+     */
+    align: &#x27;left&#x27;,
+
+    alignClass: Ember.computed(&#x27;align&#x27;, function() {
+        if (this.get(&#x27;align&#x27;) !== &#x27;left&#x27;) {
+            return &#x27;dropdown-menu-&#x27; + this.get(&#x27;align&#x27;);
+        }
+    })
+
+
 });
 
     </pre>

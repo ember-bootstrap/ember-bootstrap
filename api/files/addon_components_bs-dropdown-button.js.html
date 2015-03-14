@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ember-bootstrap</title>
-    <!--<link rel="stylesheet" href="./assets/css/main.css" id="site_styles">-->
-    <!--<link rel="stylesheet" href="./assets/css/custom.css">-->
+    <title>addon/components/bs-dropdown-button.js - ember-bootstrap</title>
+    <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
+    <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
 </head>
 <body class="yui3-skin-sam">
@@ -48,27 +48,29 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-    <div class="apidocs">
-        <div id="docs-main" class="content">
-            <p>
-            Browse to a module or class using the sidebar to view its API documentation.
-            </p>
+<div class="page-header">
+    <h1>addon/components/bs-dropdown-button.js <small>File</small></h1>
+</div>
 
-            <h2>Keyboard Shortcuts</h2>
+<div class="file">
+    <pre class="prettyprint linenums">
+import Button from &#x27;ember-bootstrap/components/bs-button&#x27;;
+import DropdownToggle from &#x27;ember-bootstrap/mixins/dropdown-toggle&#x27;;
 
-            <ul>
-                <li><p>Press <kbd>s</kbd> to focus the API search box.</p></li>
+/**
+ Button component with that can act as a dropdown toggler.
 
-                <li><p>Use <kbd>Up</kbd> and <kbd>Down</kbd> to select classes, modules, and search results.</p></li>
+ See {{#crossLink &quot;Components.Dropdown&quot;}}{{/crossLink}} for examples.
 
-                <li class="mac-only"><p>With the API search box or sidebar focused, use <kbd><span class="cmd">&#x2318;</span>-Left</kbd> or <kbd><span class="cmd">&#x2318;</span>-Right</kbd> to switch sidebar tabs.</p></li>
+ @class DropdownButton
+ @namespace Components
+ @extends Components.Button
+ @uses Mixins.DropdownToggle
+ */
+export default Button.extend(DropdownToggle);
 
-                <li class="pc-only"><p>With the API search box or sidebar focused, use <kbd>Ctrl+Left</kbd> and <kbd>Ctrl+Right</kbd> to switch sidebar tabs.</p></li>
-            </ul>
-        </div>
-    </div>
-
-
+    </pre>
+</div>
                     </div>
                 </div>
             </div>
@@ -77,23 +79,23 @@
             <h3>Classes</h3>
             
             <ul id="api-classes" class="nav nav-pills nav-stacked">
-                    <li><a href="./classes/Components.Alert.html">Components.Alert</a></li>
-                    <li><a href="./classes/Components.Button.html">Components.Button</a></li>
-                    <li><a href="./classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
-                    <li><a href="./classes/Components.Dropdown.html">Components.Dropdown</a></li>
-                    <li><a href="./classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
-                    <li><a href="./classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
-                    <li><a href="./classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
-                    <li><a href="./classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li><a href="./classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-                    <li><a href="./classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+                    <li><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>
     </div>
 </div>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="./assets/vendor/prettify/prettify-min.js"></script>
-<script src="./assets/js/yuidoc-bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
 <script>prettyPrint();</script>
 </body>
 </html>

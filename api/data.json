@@ -2,150 +2,297 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "0.0.6"
+        "version": "0.0.7",
+        "external": {
+            "data": [
+                {
+                    "base": "http://emberjs.com/api/",
+                    "json": "http://builds.emberjs.com/tags/v1.5.1/ember-docs.json"
+                }
+            ]
+        }
     },
     "files": {
         "addon/components/bs-alert.js": {
             "name": "addon/components/bs-alert.js",
             "modules": {},
             "classes": {
-                "Bootstrap.Alert": 1
+                "Components.Alert": 1
             },
             "fors": {},
             "namespaces": {
-                "Bootstrap": 1
+                "Components": 1
             }
         },
         "addon/components/bs-button-group.js": {
             "name": "addon/components/bs-button-group.js",
             "modules": {},
             "classes": {
-                "Bootstrap.Button-Group": 1
+                "Components.ButtonGroup": 1
             },
             "fors": {},
             "namespaces": {
-                "Bootstrap": 1
+                "Components": 1
             }
         },
         "addon/components/bs-button.js": {
             "name": "addon/components/bs-button.js",
             "modules": {},
             "classes": {
-                "Bootstrap.Button": 1
+                "Components.Button": 1
             },
             "fors": {},
             "namespaces": {
-                "Bootstrap": 1
+                "Components": 1
+            }
+        },
+        "addon/components/bs-dropdown-button.js": {
+            "name": "addon/components/bs-dropdown-button.js",
+            "modules": {},
+            "classes": {
+                "Components.DropdownButton": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-dropdown-menu.js": {
+            "name": "addon/components/bs-dropdown-menu.js",
+            "modules": {},
+            "classes": {
+                "Components.DropdownMenu": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-dropdown-toggle.js": {
+            "name": "addon/components/bs-dropdown-toggle.js",
+            "modules": {},
+            "classes": {
+                "Components.DropdownToggle": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-dropdown.js": {
+            "name": "addon/components/bs-dropdown.js",
+            "modules": {},
+            "classes": {
+                "Components.Dropdown": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/mixins/dropdown-toggle.js": {
+            "name": "addon/mixins/dropdown-toggle.js",
+            "modules": {},
+            "classes": {
+                "Mixins.DropdownToggle": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Mixins": 1
             }
         },
         "addon/mixins/size-class.js": {
             "name": "addon/mixins/size-class.js",
             "modules": {},
             "classes": {
-                "Bootstrap.SizeClass": 1
+                "Mixins.SizeClass": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "Mixins": 1
+            }
         },
         "addon/mixins/type-class.js": {
             "name": "addon/mixins/type-class.js",
             "modules": {},
             "classes": {
-                "Bootstrap.TypeClass": 1
+                "Mixins.TypeClass": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "Mixins": 1
+            }
         }
     },
     "modules": {},
     "classes": {
-        "Bootstrap.Alert": {
-            "name": "Bootstrap.Alert",
-            "shortname": "Bootstrap.Alert",
+        "Components.Alert": {
+            "name": "Components.Alert",
+            "shortname": "Components.Alert",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "namespace": "Bootstrap",
+            "namespace": "Components",
             "file": "addon/components/bs-alert.js",
             "line": 5,
-            "description": "Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts\n\nBy default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the\n`type` property for proper styling.\n\n```hbs\n\\{{#bs-alert type=\"success\"}}<strong>Well done!</strong> You successfully read this important alert message.{{/bs-alert}}\n```",
+            "description": "Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts\n\nBy default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the\n`type` property for proper styling.\n\n```hbs\n{{#bs-alert type=\"success\"}}\n   <strong>Well done!</strong> You successfully read this important alert message.\n{{/bs-alert}}\n```",
             "extends": "Ember.Component",
             "uses": [
-                "Bootstrap.TypeClass"
+                "Mixins.TypeClass"
             ]
         },
-        "Bootstrap.Button-Group": {
-            "name": "Bootstrap.Button-Group",
-            "shortname": "Bootstrap.Button-Group",
+        "Components.ButtonGroup": {
+            "name": "Components.ButtonGroup",
+            "shortname": "Components.ButtonGroup",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "namespace": "Bootstrap",
+            "namespace": "Components",
             "file": "addon/components/bs-button-group.js",
             "line": 5,
-            "description": "Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.\nSee http://getbootstrap.com/components/#btn-groups\n\nUse as a block level component with any number of Button components as children:\n\n```handlebars\n\\{{#bs-button-group}}\n   \\{{#bs-button}}1\\{{/bs-button}}\n   \\{{#bs-button}}2\\{{/bs-button}}\n   \\{{#bs-button}}3\\{{/bs-button}}\n\\{{/bs-button-group}}\n```\n\n### Radio-like behaviour\n\nUse the `type` property set to \"radio\" to make the child buttons toggle like radio buttons, i.e. only one button can be active.\nSet the `value` property of the buttons to something meaningful. The `value` property of the button group will then reflect\nthe value of the active button:\n\n```handlebars\n\\{{#bs-button-group value=buttonGroupValue type=\"radio\"}}\n   \\{{#bs-button value=1}}1\\{{/bs-button}}\n   \\{{#bs-button value=2}}2\\{{/bs-button}}\n   \\{{#bs-button value=3}}3\\{{/bs-button}}\n\\{{/bs-button-group}}\n\nYou selected: \\{{buttonGroupValue}}!\n```\n\n### Checkbox-like behaviour\n\nSet `type` to \"checkbox\" to make any number of child buttons selectable. The `value` property will be an array\nof all the values of the active buttons:\n\n```handlebars\n\\{{#bs-button-group value=buttonGroupValue type=\"checkbox\"}}\n   \\{{#bs-button value=1}}1\\{{/bs-button}}\n   \\{{#bs-button value=2}}2\\{{/bs-button}}\n   \\{{#bs-button value=3}}3\\{{/bs-button}}\n\\{{/bs-button-group}}\n\nYou selected:\n<ul>\n\\{{#each value in buttonGroupValue}}\n   <li>\\{{value}}</li>\n\\{{/each}}\n</ul>\n```",
+            "description": "Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.\nSee http://getbootstrap.com/components/#btn-groups\n\nUse as a block level component with any number of {{#crossLink \"Components.Button\"}}{{/crossLink}} components as children:\n\n```handlebars\n{{#bs-button-group}}\n   {{#bs-button}}1{{/bs-button}}\n   {{#bs-button}}2{{/bs-button}}\n   {{#bs-button}}3{{/bs-button}}\n{{/bs-button-group}}\n```\n\n### Radio-like behaviour\n\nUse the `type` property set to \"radio\" to make the child buttons toggle like radio buttons, i.e. only one button can be active.\nSet the `value` property of the buttons to something meaningful. The `value` property of the button group will then reflect\nthe value of the active button:\n\n```handlebars\n{{#bs-button-group value=buttonGroupValue type=\"radio\"}}\n   {{#bs-button value=1}}1{{/bs-button}}\n   {{#bs-button value=2}}2{{/bs-button}}\n   {{#bs-button value=3}}3{{/bs-button}}\n{{/bs-button-group}}\n\nYou selected: {{buttonGroupValue}}!\n```\n\n### Checkbox-like behaviour\n\nSet `type` to \"checkbox\" to make any number of child buttons selectable. The `value` property will be an array\nof all the values of the active buttons:\n\n```handlebars\n{{#bs-button-group value=buttonGroupValue type=\"checkbox\"}}\n   {{#bs-button value=1}}1{{/bs-button}}\n   {{#bs-button value=2}}2{{/bs-button}}\n   {{#bs-button value=3}}3{{/bs-button}}\n{{/bs-button-group}}\n\nYou selected:\n<ul>\n{{#each value in buttonGroupValue}}\n   <li>{{value}}</li>\n{{/each}}\n</ul>\n```",
             "extends": "Ember.Component",
             "uses": [
-                "Bootstrap.SizeClass"
+                "Mixins.SizeClass"
             ]
         },
-        "Bootstrap.Button": {
-            "name": "Bootstrap.Button",
-            "shortname": "Bootstrap.Button",
+        "Components.Button": {
+            "name": "Components.Button",
+            "shortname": "Components.Button",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "namespace": "Bootstrap",
+            "namespace": "Components",
             "file": "addon/components/bs-button.js",
             "line": 5,
-            "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```handlebars\n\\{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\"}}Download{{/bs-button}}\n```\n\n### Actions\n\nSet the action property of the component to send an action to your controller. The following parameters will be sent:\n* value: the button's value, see the `value` property\n* event: the browsers event object\n* callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling\n\n```handlebars\n\\{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" action=\"download\"}}\n   Download\n{{/bs-button}}\n```\n\n### States\n\nUse the `textState` property to change the label of the button. You can bind it to a controller property to set a \"loading\" state for example.\nThe label of the button will be taken from the `<state>Text` property.\n\n```handlebars\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" textState=buttonState defaultText=\"Download\" loadingText=\"Loading...\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  buttonState: \"default\"\n  actions: {\n    download: function() {\n      this.set(\"buttonState\", \"loading\");\n    }\n  }\n});\n```\n\n### Promise support for automatic state change\n\nWhen using the callback function of the click action to supply a Promise for any asynchronous operation the button will\nmanage its `textState` property automatically, changing its value according to the state of the promise:\n\"default\" > \"pending\" > \"resolved\"/\"rejected\"\n\n```handlebars\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" defaultText=\"Download\" pendingText=\"Loading...\" resolvedText=\"Completed!\" rejectedText=\"Oups!?\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  actions: {\n    download: function(actionParam, evt, cb) {\n      promise = new Ember.RSVP.Promise(...);\n      cb(promise);\n    }\n  }\n});\n```",
+            "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```handlebars\n{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\"}}\n   Download\n{{/bs-button}}\n```\n\n### Actions\n\nSet the action property of the component to send an action to your controller. The following parameters will be sent:\n* value: the button's value, see the `value` property\n* event: the browsers event object\n* callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling\n\n```handlebars\n{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" action=\"download\"}}\n   Download\n{{/bs-button}}\n```\n\n### States\n\nUse the `textState` property to change the label of the button. You can bind it to a controller property to set a \"loading\" state for example.\nThe label of the button will be taken from the `<state>Text` property.\n\n```handlebars\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" textState=buttonState defaultText=\"Download\" loadingText=\"Loading...\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  buttonState: \"default\"\n  actions: {\n    download: function() {\n      this.set(\"buttonState\", \"loading\");\n    }\n  }\n});\n```\n\n### Promise support for automatic state change\n\nWhen using the callback function of the click action to supply a Promise for any asynchronous operation the button will\nmanage its `textState` property automatically, changing its value according to the state of the promise:\n\"default\" > \"pending\" > \"resolved\"/\"rejected\"\n\n```handlebars\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" defaultText=\"Download\" pendingText=\"Loading...\" resolvedText=\"Completed!\" rejectedText=\"Oups!?\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  actions: {\n    download: function(actionParam, evt, cb) {\n      promise = new Ember.RSVP.Promise(...);\n      cb(promise);\n    }\n  }\n});\n```",
             "extends": "Ember.Component",
             "uses": [
-                "Bootstrap.TypeClass",
-                "Bootstrap.SizeClass"
+                "Mixins.TypeClass",
+                "Mixins.SizeClass"
             ]
         },
-        "Bootstrap.SizeClass": {
-            "name": "Bootstrap.SizeClass",
-            "shortname": "Bootstrap.SizeClass",
+        "Components.DropdownButton": {
+            "name": "Components.DropdownButton",
+            "shortname": "Components.DropdownButton",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
-            "extension_for": [
-                "Bootstrap.Button-Group",
-                "Bootstrap.Button"
-            ],
-            "namespace": "Bootstrap",
-            "file": "addon/mixins/size-class.js",
-            "line": 3
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-dropdown-button.js",
+            "line": 4,
+            "description": "Button component with that can act as a dropdown toggler.\n\nSee {{#crossLink \"Components.Dropdown\"}}{{/crossLink}} for examples.",
+            "extends": "Components.Button",
+            "uses": [
+                "Mixins.DropdownToggle"
+            ]
         },
-        "Bootstrap.TypeClass": {
-            "name": "Bootstrap.TypeClass",
-            "shortname": "Bootstrap.TypeClass",
+        "Components.DropdownMenu": {
+            "name": "Components.DropdownMenu",
+            "shortname": "Components.DropdownMenu",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-dropdown-menu.js",
+            "line": 3,
+            "description": "Component for the dropdown menu.\n\nSee {{#crossLink \"Components.Dropdown\"}}{{/crossLink}} for examples.",
+            "extends": "Ember.Component"
+        },
+        "Components.DropdownToggle": {
+            "name": "Components.DropdownToggle",
+            "shortname": "Components.DropdownToggle",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-dropdown-toggle.js",
+            "line": 4,
+            "description": "Anchor element that triggers the parent dropdown to open.\nUse {{#crossLink \"Components.DropdownButton\"}}{{/crossLink}} if you want a button instead of an anchor tag.\n\nSee {{#crossLink \"Components.Dropdown\"}}{{/crossLink}} for examples.",
+            "extends": "Ember.Component",
+            "uses": [
+                "Mixins.DropdownToggle"
+            ]
+        },
+        "Components.Dropdown": {
+            "name": "Components.Dropdown",
+            "shortname": "Components.Dropdown",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-dropdown.js",
+            "line": 4,
+            "description": "Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.\nSee http://getbootstrap.com/components/#dropdowns\n\nUse this component together with two sub components, a dropdown toggle (`Components.DropdownToggle` or\n`Components.DropdownButton` component) and a dropdown menu (`Components.DropdownMenu`) component:\n\n```hbs\n<nav class=\"navbar navbar-default navbar-static\">\n  <div class=\"container-fluid\">\n    <ul class=\"nav navbar-nav\">\n      {{#bs-dropdown tagName=\"li\"}}\n        {{#bs-dropdown-toggle}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-toggle}}\n        {{#bs-dropdown-menu}}\n          <li>{{#link-to \"index\"}}Something{{/link-to}}</li>\n          <li>{{#link-to \"index\"}}Something different{{/link-to}}</li>\n        {{/bs-dropdown-menu}}\n      {{/bs-dropdown}}\n    </ul>\n  </div>\n</nav>\n```\n\n### Button dropdowns\n\nTo use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the\n`Components.DropdownButton` component as the toggle:\n\n```hbs\n{{#bs-dropdown}}\n  {{#bs-dropdown-button}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-button}}\n  {{#bs-dropdown-menu}}\n    <li>{{#link-to \"index\"}}Something{{/link-to}}</li>\n    <li>{{#link-to \"index\"}}Something different{{/link-to}}</li>\n  {{/bs-dropdown-menu}}\n{{/bs-dropdown}}\n```\n\nIt has all the functionality of a `Components.Button` with additional dropdown support.\n\n### Split button dropdowns\n\nTo have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a\n`Components.Button` component and a `Components.DropdownButton`:\n\n```hbs\n{{#bs-dropdown}}\n  {{#bs-button}}Dropdown{{/bs-button}}\n  {{#bs-dropdown-button}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-button}}\n  {{#bs-dropdown-menu}}\n    <li>{{#link-to \"index\"}}Something{{/link-to}}</li>\n    <li>{{#link-to \"index\"}}Something different{{/link-to}}</li>\n  {{/bs-dropdown-menu}}\n{{/bs-dropdown}}\n```",
+            "extends": "Ember.Component"
+        },
+        "Mixins.DropdownToggle": {
+            "name": "Mixins.DropdownToggle",
+            "shortname": "Mixins.DropdownToggle",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [
-                "Bootstrap.Alert",
-                "Bootstrap.Button"
+                "Components.DropdownButton",
+                "Components.DropdownToggle"
             ],
-            "namespace": "Bootstrap",
+            "namespace": "Mixins",
+            "file": "addon/mixins/dropdown-toggle.js",
+            "line": 3,
+            "description": "Mixin for components that act as dropdown toggles."
+        },
+        "Mixins.SizeClass": {
+            "name": "Mixins.SizeClass",
+            "shortname": "Mixins.SizeClass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "Components.ButtonGroup",
+                "Components.Button"
+            ],
+            "namespace": "Mixins",
+            "file": "addon/mixins/size-class.js",
+            "line": 3,
+            "description": "Mixin to set the appropriate class for components with different sizes."
+        },
+        "Mixins.TypeClass": {
+            "name": "Mixins.TypeClass",
+            "shortname": "Mixins.TypeClass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "Components.Alert",
+                "Components.Button"
+            ],
+            "namespace": "Mixins",
             "file": "addon/mixins/type-class.js",
-            "line": 3
+            "line": 3,
+            "description": "Mixin to set the appropriate class for components with differently styled types (\"success\", \"danger\" etc.)"
         }
     },
     "classitems": [
         {
             "file": "addon/components/bs-alert.js",
-            "line": 23,
+            "line": 25,
             "description": "A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss\nthe alert.",
             "itemtype": "property",
             "name": "dismissible",
@@ -153,12 +300,12 @@
             "default": "true",
             "access": "public",
             "tagname": "",
-            "class": "Bootstrap.Alert",
-            "namespace": "Bootstrap"
+            "class": "Components.Alert",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 34,
+            "line": 36,
             "description": "If true the alert is completely hidden. Will be set when the fade animation has finished.",
             "itemtype": "property",
             "name": "dismissed",
@@ -167,12 +314,12 @@
             "readonly": "",
             "access": "protected",
             "tagname": "",
-            "class": "Bootstrap.Alert",
-            "namespace": "Bootstrap"
+            "class": "Components.Alert",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 45,
+            "line": 47,
             "description": "This property indicates if the alert is visible. If false it might still be in the DOM until the fade animation\nhas completed. Can be set to change the visibility of the alert box.",
             "itemtype": "property",
             "name": "visible",
@@ -180,12 +327,12 @@
             "default": "true",
             "access": "public",
             "tagname": "",
-            "class": "Bootstrap.Alert",
-            "namespace": "Bootstrap"
+            "class": "Components.Alert",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 56,
+            "line": 58,
             "description": "Set to false to disable the fade out animation when hiding the alert.",
             "itemtype": "property",
             "name": "fade",
@@ -193,36 +340,36 @@
             "default": "true",
             "access": "public",
             "tagname": "",
-            "class": "Bootstrap.Alert",
-            "namespace": "Bootstrap"
+            "class": "Components.Alert",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 66,
+            "line": 68,
             "description": "Computed property to set the alert class to the component div. Will be false when dismissed to have the component\ndiv (which cannot be removed form DOM by the component itself) without any markup.",
             "itemtype": "property",
             "name": "alert",
             "type": "boolean",
             "access": "private",
             "tagname": "",
-            "class": "Bootstrap.Alert",
-            "namespace": "Bootstrap"
+            "class": "Components.Alert",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 77,
+            "line": 79,
             "itemtype": "property",
             "name": "classTypePrefix",
             "type": "String",
             "default": "'alert'",
             "access": "protected",
             "tagname": "",
-            "class": "Bootstrap.Alert",
-            "namespace": "Bootstrap"
+            "class": "Components.Alert",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 85,
+            "line": 87,
             "description": "The duration of the fade out animation",
             "itemtype": "property",
             "name": "fadeDuration",
@@ -230,30 +377,30 @@
             "default": "150",
             "access": "public",
             "tagname": "",
-            "class": "Bootstrap.Alert",
-            "namespace": "Bootstrap"
+            "class": "Components.Alert",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 110,
+            "line": 112,
             "description": "Call to make the alert visible again after it has been hidden",
             "itemtype": "method",
             "name": "show",
             "access": "public",
             "tagname": "",
-            "class": "Bootstrap.Alert",
-            "namespace": "Bootstrap"
+            "class": "Components.Alert",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 123,
+            "line": 125,
             "description": "Call to hide the alert. If the `fade` property is true, this will fade out the alert before being finally\ndismissed.",
             "itemtype": "method",
             "name": "hide",
             "access": "public",
             "tagname": "",
-            "class": "Bootstrap.Alert",
-            "namespace": "Bootstrap"
+            "class": "Components.Alert",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button-group.js",
@@ -264,8 +411,8 @@
             "default": "'group'",
             "access": "protected",
             "tagname": "",
-            "class": "Bootstrap.Button-Group",
-            "namespace": "Bootstrap"
+            "class": "Components.ButtonGroup",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button-group.js",
@@ -276,8 +423,8 @@
             "default": "['btn-group']",
             "access": "protected",
             "tagname": "",
-            "class": "Bootstrap.Button-Group",
-            "namespace": "Bootstrap"
+            "class": "Components.ButtonGroup",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button-group.js",
@@ -287,8 +434,8 @@
             "type": "array",
             "access": "protected",
             "tagname": "",
-            "class": "Bootstrap.Button-Group",
-            "namespace": "Bootstrap"
+            "class": "Components.ButtonGroup",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button-group.js",
@@ -299,8 +446,8 @@
             "default": "'btn-group'",
             "access": "protected",
             "tagname": "",
-            "class": "Bootstrap.Button-Group",
-            "namespace": "Bootstrap"
+            "class": "Components.ButtonGroup",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button-group.js",
@@ -312,21 +459,21 @@
             "default": "false",
             "access": "public",
             "tagname": "",
-            "class": "Bootstrap.Button-Group",
-            "namespace": "Bootstrap"
+            "class": "Components.ButtonGroup",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button-group.js",
             "line": 103,
-            "description": "Set to true for the buttons to stretch at equal sizes to span the entire width of its parent.\n\n*Important*: You have to wrap every button component in a `div class=\"btn-group\">`:\n\n```handlebars\n<div class=\"btn-group\" role=\"group\">\n\\{{#bs-button}}My Button{{/bs-button}}\n</div>\n```\n\nSee http://getbootstrap.com/components/#btn-groups-justified",
+            "description": "Set to true for the buttons to stretch at equal sizes to span the entire width of its parent.\n\n*Important*: You have to wrap every button component in a `div class=\"btn-group\">`:\n\n```handlebars\n<div class=\"btn-group\" role=\"group\">\n{{#bs-button}}My Button{{/bs-button}}\n</div>\n```\n\nSee http://getbootstrap.com/components/#btn-groups-justified",
             "itemtype": "property",
             "name": "justified",
             "type": "boolean",
             "default": "false",
             "access": "public",
             "tagname": "",
-            "class": "Bootstrap.Button-Group",
-            "namespace": "Bootstrap"
+            "class": "Components.ButtonGroup",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button-group.js",
@@ -338,8 +485,8 @@
             "default": "null",
             "access": "public",
             "tagname": "",
-            "class": "Bootstrap.Button-Group",
-            "namespace": "Bootstrap"
+            "class": "Components.ButtonGroup",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button-group.js",
@@ -350,8 +497,8 @@
             "type": "array|any",
             "access": "public",
             "tagname": "",
-            "class": "Bootstrap.Button-Group",
-            "namespace": "Bootstrap"
+            "class": "Components.ButtonGroup",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button-group.js",
@@ -362,8 +509,8 @@
             "type": "array",
             "access": "protected",
             "tagname": "",
-            "class": "Bootstrap.Button-Group",
-            "namespace": "Bootstrap"
+            "class": "Components.ButtonGroup",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button-group.js",
@@ -374,192 +521,222 @@
             "type": "array",
             "access": "protected",
             "tagname": "",
-            "class": "Bootstrap.Button-Group",
-            "namespace": "Bootstrap"
+            "class": "Components.ButtonGroup",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 78,
+            "line": 80,
             "itemtype": "property",
             "name": "classNames",
             "type": "array",
             "default": "['btn']",
             "access": "protected",
             "tagname": "",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 86,
+            "line": 88,
             "itemtype": "property",
             "name": "classNameBindings",
             "type": "array",
             "default": "['active', 'block:btn-block']",
             "access": "protected",
             "tagname": "",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 94,
+            "line": 96,
             "itemtype": "property",
             "name": "classTypePrefix",
             "type": "String",
             "default": "'btn'",
             "access": "protected",
             "tagname": "",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 102,
+            "line": 104,
             "itemtype": "property",
             "name": "attributeBindings",
             "type": "array",
             "default": "['id', 'disabled', 'buttonType:type']",
             "access": "protected",
             "tagname": "",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 110,
+            "line": 112,
             "description": "Default label of the button. Not need if used as a block component",
             "itemtype": "property",
             "name": "defaultText",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 117,
+            "line": 121,
             "description": "Property to disable the button",
             "itemtype": "property",
             "name": "disabled",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "type": "boolaen",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 124,
+            "line": 131,
             "description": "Set the type of the button, either 'button' or 'submit'",
             "itemtype": "property",
             "name": "buttonType",
             "type": "String",
             "default": "'button'",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 133,
+            "line": 141,
             "description": "Set the 'active' class to apply active/pressed CSS styling",
             "itemtype": "property",
             "name": "active",
             "type": "boolean",
             "default": "false",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 142,
+            "line": 151,
             "description": "Property for block level buttons\n\nSee the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)",
             "itemtype": "property",
             "name": "block",
             "type": "boolean",
             "default": "false",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 152,
+            "line": 162,
             "description": "If toggle property is true, clicking the button will toggle the active state",
             "itemtype": "property",
             "name": "toggle",
             "type": "boolean",
             "default": "false",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 161,
+            "line": 172,
             "description": "If button is active and this is set, the icon property will match this property",
             "itemtype": "property",
             "name": "iconActive",
             "type": "String",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 169,
+            "line": 181,
             "description": "If button is inactive and this is set, the icon property will match this property",
             "itemtype": "property",
             "name": "iconInactive",
             "type": "String",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 177,
+            "line": 190,
             "description": "Class(es) (e.g. glyphicons or font awesome) to use as a button icon\nThis will render a <i class=\"{{icon}}\"></i> element in front of the button's label",
             "itemtype": "property",
             "name": "icon",
             "type": "String",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "readonly": "",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 193,
+            "line": 208,
             "description": "Supply a value that will be associated with this button. This will be send\nas a parameter of the default action triggered when clicking the button",
             "itemtype": "property",
             "name": "value",
             "type": "any",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 202,
+            "line": 218,
             "description": "State of the button. The button's label (if not used as a block component) will be set to the\n`<state>Text` property.\nThis property will automatically be set when using a click action that supplies the callback with an promise",
             "itemtype": "property",
             "name": "textState",
             "type": "String",
             "default": "'default'",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 213,
+            "line": 230,
             "description": "Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.",
             "itemtype": "property",
             "name": "reset",
             "type": "boolean",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 221,
+            "line": 239,
             "description": "This will reset the state property to 'default', and with that the button's label to defaultText",
             "itemtype": "method",
             "name": "resetState",
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Button",
+            "namespace": "Components"
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 240,
+            "line": 259,
             "description": "Click handler. This will send the default \"action\" action, with the following parameters:\n* value of the button (that is the value of the \"value\" property)\n* original event object of the click event\n* callback: call that with a promise object, and the buttons state will automatically set to \"pending\", \"resolved\" and/or \"rejected\"",
             "itemtype": "method",
             "name": "click",
@@ -571,29 +748,229 @@
                     "description": ""
                 }
             ],
-            "class": "Bootstrap.Button",
-            "namespace": "Bootstrap"
+            "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-dropdown-menu.js",
+            "line": 14,
+            "description": "Defaults to a `<ul>` tag. Change for other types of dropdown menus.",
+            "itemtype": "property",
+            "name": "tagName",
+            "type": "string",
+            "default": "ul",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.DropdownMenu",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-dropdown-menu.js",
+            "line": 26,
+            "itemtype": "property",
+            "name": "ariaRole",
+            "default": "menu",
+            "type": "string",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.DropdownMenu",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-dropdown-menu.js",
+            "line": 34,
+            "description": "Alignment of the menu, either \"left\" or \"right\"",
+            "itemtype": "property",
+            "name": "align",
+            "type": "string",
+            "default": "left",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.DropdownMenu",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-dropdown-toggle.js",
+            "line": 17,
+            "description": "Defaults to a `<a>` tag. Change for other types of dropdown toggles.",
+            "itemtype": "property",
+            "name": "tagName",
+            "type": "string",
+            "default": "a",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.DropdownToggle",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-dropdown-toggle.js",
+            "line": 29,
+            "description": "Computed property to generate a `href=\"#\"` attribute when `tagName` is \"a\".",
+            "itemtype": "property",
+            "name": "href",
+            "type": "string",
+            "readonly": "",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.DropdownToggle",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-dropdown.js",
+            "line": 67,
+            "description": "This property reflects the state of the dropdown, whether it is open or closed.",
+            "itemtype": "property",
+            "name": "open",
+            "default": "false",
+            "type": "boolean",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Dropdown",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-dropdown.js",
+            "line": 77,
+            "description": "By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.",
+            "itemtype": "property",
+            "name": "closeOnMenuClick",
+            "default": "true",
+            "type": "boolean",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Dropdown",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-dropdown.js",
+            "line": 87,
+            "description": "jQuery click event name, namespaced to this component's instance to prevent interference between multiple dropdowns.",
+            "itemtype": "property",
+            "name": "clickEventName",
+            "type": "string",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Dropdown",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-dropdown.js",
+            "line": 96,
+            "description": "A computed property to generate the suiting class for the dropdown container, either \"dropdown\" or \"btn-group\".",
+            "itemtype": "property",
+            "name": "containerClass",
+            "type": "string",
+            "readonly": "",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Dropdown",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-dropdown.js",
+            "line": 108,
+            "description": "This property is \"button\" if the toggle element is an instance of {{#crossLink \"Components.DropdownButton\"}}{{/crossLink}}, otherwise \"toggle\".",
+            "itemtype": "property",
+            "name": "toggleType",
+            "type": "string",
+            "readonly": "",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Dropdown",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-dropdown.js",
+            "line": 159,
+            "description": "Handler for click events to close the dropdown",
+            "itemtype": "method",
+            "name": "closeOnClickHandler",
+            "params": [
+                {
+                    "name": "e",
+                    "description": ""
+                }
+            ],
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Dropdown",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/mixins/dropdown-toggle.js",
+            "line": 12,
+            "itemtype": "property",
+            "name": "ariaRole",
+            "default": "button",
+            "type": "string",
+            "access": "protected",
+            "tagname": "",
+            "class": "Mixins.DropdownToggle",
+            "namespace": "Mixins"
+        },
+        {
+            "file": "addon/mixins/dropdown-toggle.js",
+            "line": 24,
+            "description": "The default action is set to \"toggleDropdown\" on the parent {{#crossLink \"Components.Dropdown\"}}{{/crossLink}}",
+            "itemtype": "property",
+            "name": "action",
+            "default": "toggleDropdown",
+            "type": "string",
+            "access": "protected",
+            "tagname": "",
+            "class": "Mixins.DropdownToggle",
+            "namespace": "Mixins"
         },
         {
             "file": "addon/mixins/size-class.js",
-            "line": 16,
+            "line": 11,
+            "description": "Prefix for the size class, e.g. \"btn\" for button size classes (\"btn-lg\", \"btn-sm\" etc.)",
+            "itemtype": "property",
+            "name": "classTypePrefix",
+            "type": "string",
+            "required": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Mixins.SizeClass",
+            "namespace": "Mixins"
+        },
+        {
+            "file": "addon/mixins/size-class.js",
+            "line": 27,
             "description": "Property for size styling, set to 'lg', 'sm' or 'xs'\n\nAlso see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)",
             "itemtype": "property",
             "name": "size",
             "type": "String",
-            "class": "Bootstrap.SizeClass",
-            "namespace": "Bootstrap"
+            "access": "public",
+            "tagname": "",
+            "class": "Mixins.SizeClass",
+            "namespace": "Mixins"
         },
         {
             "file": "addon/mixins/type-class.js",
-            "line": 16,
+            "line": 10,
+            "description": "Prefix for the type class, e.g. \"btn\" for button type classes (\"btn-primary2 etc.)",
+            "itemtype": "property",
+            "name": "classTypePrefix",
+            "type": "string",
+            "required": 1,
+            "access": "protected",
+            "tagname": "",
+            "class": "Mixins.TypeClass",
+            "namespace": "Mixins"
+        },
+        {
+            "file": "addon/mixins/type-class.js",
+            "line": 27,
             "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without \"btn-\" prefix)",
             "itemtype": "property",
             "name": "type",
             "type": "String",
             "default": "'default'",
-            "class": "Bootstrap.TypeClass",
-            "namespace": "Bootstrap"
+            "access": "public",
+            "tagname": "",
+            "class": "Mixins.TypeClass",
+            "namespace": "Mixins"
         }
     ],
     "warnings": []
