@@ -15,7 +15,8 @@ gulp.task('docs:generate', function (cb) {
 
 gulp.task('docs:publish', ['docs:generate'], function () {
     ghpages.publish(path.join(__dirname, 'docs'), {
-        add: true
+        add: true,
+        push: false
     });
 });
 
