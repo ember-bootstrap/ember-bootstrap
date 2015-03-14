@@ -20,7 +20,7 @@ gulp.task('docs:copyChangelog', function () {
 
 gulp.task('docs:publish', ['docs:generate','docs:copyChangelog'], function () {
     ghpages.publish(path.join(__dirname, 'docs'), {
-        src: '!{yuidoc-theme,yuidoc-theme/**}',
+        src: '{api/**/*,CHANGELOG.md}',
         add: true
     });
 });
