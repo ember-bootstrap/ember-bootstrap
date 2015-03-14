@@ -9,45 +9,45 @@ moduleForComponent('bs-dropdown-toggle', 'BsDropdownToggleComponent', {
   // needs: ['component:foo', 'helper:bar']
 });
 
-test('it renders', function() {
-  expect(2);
+test('it renders', function(assert) {
+    assert.expect(2);
 
-  // creates the component instance
-  var component = this.subject();
-  equal(component._state, 'preRender');
+    // creates the component instance
+    var component = this.subject();
+    assert.equal(component._state, 'preRender');
 
-  // appends the component to the page
-  this.append();
-  equal(component._state, 'inDOM');
+    // appends the component to the page
+    this.append();
+    assert.equal(component._state, 'inDOM');
 });
 
-test('toggle has correct default markup', function() {
-    equal(this.$().prop('tagName'), 'A', 'toggle is an anchor tag by default');
-    equal(this.$().attr('href'), '#', 'has href attribute');
-    equal(this.$().hasClass('dropdown-toggle'), true, 'has dropdown-toggle class');
-    equal(this.$().attr('data-toggle'), 'dropdown', 'has data-toggle=dropdown attribute');
-    equal(this.$().attr('role'), 'button', 'has role=button');
+test('toggle has correct default markup', function(assert) {
+    assert.equal(this.$().prop('tagName'), 'A', 'toggle is an anchor tag by default');
+    assert.equal(this.$().attr('href'), '#', 'has href attribute');
+    assert.equal(this.$().hasClass('dropdown-toggle'), true, 'has dropdown-toggle class');
+    assert.equal(this.$().attr('data-toggle'), 'dropdown', 'has data-toggle=dropdown attribute');
+    assert.equal(this.$().attr('role'), 'button', 'has role=button');
 });
 
-test('toggle as button does not have href', function() {
+test('toggle as button does not have href', function(assert) {
     var component = this.subject({
         tagName: 'button'
     });
-    equal(this.$().prop('tagName'), 'BUTTON', 'toggle is a button');
-    equal(this.$().is('[href]'), false, 'does not have href attribute');
+    assert.equal(this.$().prop('tagName'), 'BUTTON', 'toggle is a button');
+    assert.equal(this.$().is('[href]'), false, 'does not have href attribute');
 });
 
-test('clicking toggle sends toggleDropdown action', function() {
+test('clicking toggle sends toggleDropdown action', function(assert) {
     var actionHandler = Ember.Controller.extend({
             actions: {
                 toggleDropdown: function() {
-                    ok(true, 'toggleDropdown action has been called');
+                    assert.ok(true, 'toggleDropdown action has been called');
                 }
             }
         }).create(),
         component = this.subject({
             targetObject: actionHandler
         });
-    expect(1);
+    assert.expect(1);
     this.$().click();
 });

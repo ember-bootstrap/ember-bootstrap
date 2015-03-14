@@ -8,28 +8,28 @@ moduleForComponent('bs-dropdown-menu', 'BsDropdownMenuComponent', {
   // needs: ['component:foo', 'helper:bar']
 });
 
-test('it renders', function() {
-  expect(2);
+test('it renders', function(assert) {
+    assert.expect(2);
 
-  // creates the component instance
-  var component = this.subject();
-  equal(component._state, 'preRender');
+    // creates the component instance
+    var component = this.subject();
+    assert.equal(component._state, 'preRender');
 
-  // appends the component to the page
-  this.append();
-  equal(component._state, 'inDOM');
+    // appends the component to the page
+    this.append();
+    assert.equal(component._state, 'inDOM');
 });
 
 
-test('dropdown menu has correct markup', function() {
-    equal(this.$().prop("tagName"),'UL','menu is an unordered list (<ul>) by default');
-    equal(this.$().hasClass('dropdown-menu'),true,'menu has dropdown-menu class');
+test('dropdown menu has correct markup', function(assert) {
+    assert.equal(this.$().prop("tagName"),'UL','menu is an unordered list (<ul>) by default');
+    assert.equal(this.$().hasClass('dropdown-menu'),true,'menu has dropdown-menu class');
 });
 
 
-test('dropdown menu has correct markup', function() {
+test('dropdown menu has correct markup', function(assert) {
     var component = this.subject({
         align: 'right'
     });
-    equal(this.$().hasClass('dropdown-menu-right'),true,'menu has dropdown-menu-right class');
+    assert.equal(this.$().hasClass('dropdown-menu-right'),true,'menu has dropdown-menu-right class');
 });
