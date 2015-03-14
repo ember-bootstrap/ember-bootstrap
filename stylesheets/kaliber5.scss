@@ -30,6 +30,25 @@ $font-family-sans-serif: 'myriad-pro', sans-serif;
 }
 
 
+
+
+/**
+* API labels
+*/
+
+.label-public {
+  @extend .label-success;
+}
+
+.label-protected {
+  @extend .label-warning;
+}
+
+.label-private {
+  @extend .label-danger;
+}
+
+
 /*
 
 $space-xs: $line-height-computed * 1;
