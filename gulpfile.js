@@ -8,13 +8,14 @@ gulp.task('docs', ['docs:publish']);
 
 gulp.task('docs:generate', function (cb) {
     var exec = require('child_process').exec;
-    exec('ember yuidoc', function (err, stdout, stderr) {
+    exec('ember ember-cli-yuidoc', function (err, stdout, stderr) {
         cb(err);
     });
 });
 
 gulp.task('docs:publish', ['docs:generate'], function () {
     ghpages.publish(path.join(__dirname, 'docs'), {
+        src: 'api/**/*',
         add: true,
         push: false
     });
