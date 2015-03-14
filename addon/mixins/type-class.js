@@ -32,6 +32,7 @@ export default Ember.Mixin.create({
      * @property type
      * @type String
      * @default 'default'
+     * @public
      */
     type: 'default'
 });
