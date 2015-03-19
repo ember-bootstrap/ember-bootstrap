@@ -9,7 +9,9 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  ### Basic Usage
 
  ```handlebars
- \{{#bs-button type="primary" icon="glyphicon glyphicon-download"}}Download{{/bs-button}}
+ {{#bs-button type="primary" icon="glyphicon glyphicon-download"}}
+    Download
+ {{/bs-button}}
  ```
 
  ### Actions
@@ -20,7 +22,7 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  * callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling
 
  ```handlebars
- \{{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
+ {{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
     Download
  {{/bs-button}}
  ```
@@ -67,10 +69,10 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  ```
 
  @class Button
- @namespace Bootstrap
+ @namespace Components
  @extends Ember.Component
- @uses Bootstrap.TypeClass
- @uses Bootstrap.SizeClass
+ @uses Mixins.TypeClass
+ @uses Mixins.SizeClass
 */
 export default Ember.Component.extend(TypeClass, SizeClass, {
     tagName: 'button',
@@ -111,6 +113,8 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * Default label of the button. Not need if used as a block component
      *
      * @property defaultText
+     * @type string
+     * @public
      */
     defaultText: null,
 
@@ -118,6 +122,9 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * Property to disable the button
      *
      * @property disabled
+     * @type boolaen
+     * @default false
+     * @public
      */
     disabled: false,
 
@@ -127,6 +134,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * @property buttonType
      * @type String
      * @default 'button'
+     * @public
      */
     buttonType: 'button',
 
@@ -136,6 +144,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * @property active
      * @type boolean
      * @default false
+     * @public
      */
     active: false,
 
@@ -146,6 +155,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * @property block
      * @type boolean
      * @default false
+     * @public
      */
     block: false,
 
@@ -155,6 +165,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * @property toggle
      * @type boolean
      * @default false
+     * @public
      */
     toggle: false,
 
@@ -163,6 +174,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      *
      * @property iconActive
      * @type String
+     * @public
      */
     iconActive: null,
 
@@ -171,6 +183,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      *
      * @property iconInactive
      * @type String
+     * @public
      */
     iconInactive: null,
 
@@ -180,6 +193,8 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      *
      * @property icon
      * @type String
+     * @readonly
+     * @protected
      */
     icon: Ember.computed('active', function() {
         if (this.get('active')) {
@@ -196,6 +211,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      *
      * @property value
      * @type any
+     * @public
      */
     value: null,
 
@@ -207,6 +223,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * @property textState
      * @type String
      * @default 'default'
+     * @protected
      */
     textState: 'default',
 
@@ -215,6 +232,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      *
      * @property reset
      * @type boolean
+     * @public
      */
     reset: null,
 
@@ -222,6 +240,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
      * This will reset the state property to 'default', and with that the button's label to defaultText
      *
      * @method resetState
+     * @protected
      */
     resetState: function() {
         this.set('textState', 'default');
