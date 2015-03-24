@@ -2,7 +2,6 @@ import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SubComponent from 'ember-bootstrap/mixins/sub-component';
 
-
 export default Ember.Component.extend(TypeClass, SubComponent, {
     classNames: ['panel'],
 
@@ -20,7 +19,7 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
 
     title: null,
 
-    value: null,
+    value: Ember.computed.oneWay('elementId'),
 
     collapse: Ember.computed.not('transitioning'),
     collapsing: Ember.computed.alias('transitioning'),
@@ -124,6 +123,11 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
         }
         else if (active) {
             this.hide();
+        }
+    }),
+    _onInit: Ember.on('init', function(){
+        if (this.get('selected') === this.get('value')) {
+            this.set('active', true);
         }
     })
 
