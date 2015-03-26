@@ -6,6 +6,7 @@ import Form from 'ember-bootstrap/components/bs-form';
 var nonTextFieldControlTypes = [
     'checkbox',
     'select',
+    'select2',
     'textarea'
 ];
 
@@ -42,6 +43,9 @@ export default FormGroup.extend({
     choices: [],
     choiceValueProperty: null,
     choiceLabelProperty: null,
+
+    rows: 5,
+    cols: null,
 
     selectValueProperty: Ember.computed('choiceValueProperty', function(){
         var valuePath = this.get('choiceValueProperty');
