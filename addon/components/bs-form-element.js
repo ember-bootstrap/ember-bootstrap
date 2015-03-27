@@ -337,7 +337,7 @@ export default FormGroup.extend({
      */
     isInline: Ember.computed.equal('formLayout','inline'),
 
-    horizontalLabelGridClass: 'col-sm-2',
+    horizontalLabelGridClass: Ember.computed.oneWay('form.horizontalLabelGridClass'),
 
     horizontalInputGridClass: Ember.computed('horizontalLabelGridClass', function() {
         var parts = this.get('horizontalLabelGridClass').split('-');
