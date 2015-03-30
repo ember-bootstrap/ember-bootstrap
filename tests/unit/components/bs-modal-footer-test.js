@@ -5,7 +5,7 @@ import {
 
 moduleForComponent('bs-modal-footer', 'BsModalFooterComponent', {
   // specify the other units that are required for this test
-  // needs: ['component:foo', 'helper:bar']
+  needs: ['component:bs-button']
 });
 
 test('it renders', function() {
