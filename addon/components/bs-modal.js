@@ -116,6 +116,11 @@ export default Ember.Component.extend({
             }
             this.sendAction();
         }));
+    },
+
+
+    willDestroyElement: function() {
+        this.$().modal('hide');
     }
 
 });
