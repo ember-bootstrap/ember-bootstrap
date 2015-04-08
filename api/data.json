@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "0.0.7",
+        "version": "0.0.9",
         "external": {
             "data": [
                 {
@@ -491,7 +491,7 @@
         {
             "file": "addon/components/bs-button-group.js",
             "line": 149,
-            "description": "The value of the button group, computed by its child buttons.\nSee the {{#crossLink \"Button-Group/type:attribute\"}}`type` property{{/crossLink}} for how the value property is constructed.\n\nWhen you set the value, the corresponding buttons will be activated:\n* use a single value for a radio button group to activate the button with the same value\n* use an aray of values for a checkbox button group to activate all the buttons with values contained in the array",
+            "description": "The value of the button group, computed by its child buttons.\nSee the {{#crossLink \"Button-Group/type:attribute\"}}`type` property{{/crossLink}} for how the value property is constructed.\n\nWhen you set the value, the corresponding buttons will be activated:\n* use a single value for a radio button group to activate the button with the same value\n* use an array of values for a checkbox button group to activate all the buttons with values contained in the array",
             "itemtype": "property",
             "name": "value",
             "type": "array|any",
@@ -502,7 +502,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 179,
+            "line": 175,
             "description": "Array of all child buttons (instances of Bootstrap.Button)",
             "itemtype": "property",
             "name": "childButtons",
@@ -514,7 +514,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 190,
+            "line": 186,
             "description": "Child buttons that are active (pressed)",
             "itemtype": "property",
             "name": "activeChildren",

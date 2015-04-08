@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.0.7</span></h1>
+    <h1>API Docs <span class="small">0.0.9</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -208,28 +208,24 @@ export default Ember.Component.extend(SizeClass, {
      *
      * When you set the value, the corresponding buttons will be activated:
      * * use a single value for a radio button group to activate the button with the same value
-     * * use an aray of values for a checkbox button group to activate all the buttons with values contained in the array
+     * * use an array of values for a checkbox button group to activate all the buttons with values contained in the array
      *
      * @property value
      * @type array|any
      * @public
      */
-    value: Ember.computed(&#x27;activeChildren.@each.value&#x27;,&#x27;type&#x27;,function(key, value){
-        if (arguments.length&gt;1) {
-            var values = !Ember.isArray(value) ? [value] : value;
-            this.get(&#x27;childButtons&#x27;)
-                .forEach(function(button) {
-                    button.set(&#x27;active&#x27;, values.contains(button.get(&#x27;value&#x27;)));
-                });
-            return value;
+    value: undefined,
+
+    _syncValueToActiveButtons: Ember.observer(&#x27;value&#x27;,&#x27;childButtons.@each.value&#x27;,function(){
+        if (!this._inDOM) {
+            return;
         }
-        switch (this.get(&#x27;type&#x27;)) {
-            case &#x27;radio&#x27;:
-                return this.get(&#x27;activeChildren.firstObject.value&#x27;);
-            case &#x27;checkbox&#x27;:
-                return this.get(&#x27;activeChildren&#x27;).mapBy(&#x27;value&#x27;);
-        }
-        return 1;
+        var value = this.get(&#x27;value&#x27;),
+            values = !Ember.isArray(value) ? [value] : value;
+        this.get(&#x27;childButtons&#x27;)
+            .forEach(function(button) {
+                button.set(&#x27;active&#x27;, values.contains(button.get(&#x27;value&#x27;)));
+            });
     }),
 
     /**
@@ -255,23 +251,38 @@ export default Ember.Component.extend(SizeClass, {
     lastActiveChildren: [],
     newActiveChildren: Ember.computed.setDiff(&#x27;activeChildren&#x27;,&#x27;lastActiveChildren&#x27;),
     _observeButtons: Ember.observer(&#x27;activeChildren.[]&#x27;,&#x27;type&#x27;, function() {
-        if (this.get(&#x27;type&#x27;) !== &#x27;radio&#x27;) {
+        var type = this.get(&#x27;type&#x27;);
+        if (!this._inDOM || (type !== &#x27;radio&#x27; &amp;&amp; type !== &#x27;checkbox&#x27;)) {
             return;
         }
 
+        //var lastActiveChild = this.get(&#x27;lastActiveChildren.firstObject&#x27;)
+
         Ember.run.scheduleOnce(&#x27;actions&#x27;,this, function(){
             // the button that just became active
-            var newActive = this.get(&#x27;newActiveChildren.firstObject&#x27;);
+            var newActive,
+                lastActive,
+                value;
 
-            if (newActive) {
-                this.beginPropertyChanges();
-                this.get(&#x27;childButtons&#x27;).forEach(function(button){
-                    if (button !== newActive) {
-                        button.set(&#x27;active&#x27;, false);
+            switch (type) {
+                case &#x27;radio&#x27;:
+                    newActive = this.get(&#x27;newActiveChildren&#x27;).objectAt(0);
+                    if (newActive) {
+                        value = newActive.get(&#x27;value&#x27;);
                     }
-                });
-
-                this.endPropertyChanges();
+                    else {
+                        lastActive = this.get(&#x27;lastActiveChildren.firstObject&#x27;);
+                        if (lastActive) {
+                            lastActive.set(&#x27;active&#x27;, true);
+                        }
+                    }
+                    break;
+                case &#x27;checkbox&#x27;:
+                    value = this.get(&#x27;activeChildren&#x27;).mapBy(&#x27;value&#x27;);
+                    break;
+            }
+            if (value) {
+                this.set(&#x27;value&#x27;, value);
             }
             // remember activeChildren, used as a replacement for a before observer as they will be deprecated in the future...
             this.set(&#x27;lastActiveChildren&#x27;, this.get(&#x27;activeChildren&#x27;).slice());
@@ -290,9 +301,13 @@ export default Ember.Component.extend(SizeClass, {
     init: function() {
         this._super();
         this.get(&#x27;activeChildren&#x27;);
+    },
+
+    _inDOM: false,
+
+    didInsertElement: function() {
+        this._inDOM = true;
     }
-
-
 
 
 });
