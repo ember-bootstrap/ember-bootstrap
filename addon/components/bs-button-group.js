@@ -152,13 +152,13 @@ export default Ember.Component.extend(SizeClass, {
      *
      * When you set the value, the corresponding buttons will be activated:
      * * use a single value for a radio button group to activate the button with the same value
-     * * use an aray of values for a checkbox button group to activate all the buttons with values contained in the array
+     * * use an array of values for a checkbox button group to activate all the buttons with values contained in the array
      *
      * @property value
      * @type array|any
      * @public
      */
-    value: Ember.computed('activeChildren.@each.value','type',function(key, value){
+    value: Ember.computed('activeChildren.@each.value','activeChildren.firstObject.value','type',function(key, value){
         if (arguments.length>1) {
             var values = !Ember.isArray(value) ? [value] : value;
             this.get('childButtons')
@@ -173,7 +173,6 @@ export default Ember.Component.extend(SizeClass, {
             case 'checkbox':
                 return this.get('activeChildren').mapBy('value');
         }
-        return 1;
     }),
 
     /**
@@ -202,6 +201,8 @@ export default Ember.Component.extend(SizeClass, {
         if (this.get('type') !== 'radio') {
             return;
         }
+
+        //var lastActiveChild = this.get('lastActiveChildren.firstObject')
 
         Ember.run.scheduleOnce('actions',this, function(){
             // the button that just became active
