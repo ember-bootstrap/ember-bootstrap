@@ -206,7 +206,8 @@ export default Ember.Component.extend(SizeClass, {
 
         Ember.run.scheduleOnce('actions',this, function(){
             // the button that just became active
-            var newActive = this.get('newActiveChildren.firstObject');
+            var lastActive,
+                newActive = this.get('newActiveChildren.firstObject');
 
             if (newActive) {
                 this.beginPropertyChanges();
@@ -217,6 +218,13 @@ export default Ember.Component.extend(SizeClass, {
                 });
 
                 this.endPropertyChanges();
+            }
+            else {
+                lastActive = this.get('lastActiveChildren.firstObject');
+                if (lastActive) {
+                    lastActive.set('active', true);
+                }
+
             }
             // remember activeChildren, used as a replacement for a before observer as they will be deprecated in the future...
             this.set('lastActiveChildren', this.get('activeChildren').slice());
