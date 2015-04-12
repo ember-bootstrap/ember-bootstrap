@@ -150,23 +150,70 @@ export default FormGroup.extend({
      */
     property: null,
 
+    /**
+     * Control element's HTML5 placeholder attribute
+     *
+     * @property placeholder
+     * @type string
+     * @public
+     */
     placeholder: null,
 
+    /**
+     * Control element's name attribute
+     *
+     * @property name
+     * @type string
+     * @public
+     */
     name: null,
 
     choices: [],
     choiceValueProperty: null,
     choiceLabelProperty: null,
 
+    /**
+     * Textarea's rows attribute (ignored for other `controlType`s)
+     *
+     * @property rows
+     * @type integer
+     * @default 5
+     * @public
+     */
     rows: 5,
+
+    /**
+     * Textarea's cols attribute (ignored for other `controlType`s)
+     *
+     * @property cols
+     * @type integer
+     * @public
+     */
     cols: null,
 
+    /**
+     * `choiceValueProperty` prefixed with 'content.' for 'select' `controlType`
+     *
+     * @property selectValueProperty
+     * @type string
+     * @readonly
+     * @private
+     */
     selectValueProperty: Ember.computed('choiceValueProperty', function(){
         var valuePath = this.get('choiceValueProperty');
         if (Ember.isPresent(valuePath)) {
             return valuePath.match(/^content\..*/) ? valuePath : 'content.' + valuePath;
         }
     }),
+
+    /**
+     * `choiceLabelProperty` prefixed with 'content.' for 'select' `controlType`
+     *
+     * @property selectLabelProperty
+     * @type string
+     * @readonly
+     * @private
+     */
     selectLabelProperty: Ember.computed('choiceLabelProperty', function(){
         var labelPath = this.get('choiceLabelProperty');
         if (Ember.isPresent(labelPath)) {
@@ -174,10 +221,37 @@ export default FormGroup.extend({
         }
     }),
 
+    /**
+     * The model used for validation. Defaults to the parent `Components.Form`'s `model`
+     *
+     * @property model
+     * @public
+     */
     model: Ember.computed.alias('form.model'),
 
+    /**
+     * The array of error messages from the `model`'s validation.
+     *
+     * @property errors
+     * @type array
+     * @protected
+     */
     errors: null,
+
+    /**
+     * @property hasErrors
+     * @type boolean
+     * @readonly
+     * @protected
+     */
     hasErrors: Ember.computed.gt('errors.length',0),
+
+    /**
+     * @property hasValidator
+     * @type boolean
+     * @readonly
+     * @protected
+     */
     hasValidator: Ember.computed.notEmpty('model.validate'),
 
     /**
@@ -189,6 +263,13 @@ export default FormGroup.extend({
      * @public
      */
     showValidation: false,
+
+    /**
+     * @property showErrors
+     * @type boolean
+     * @readonly
+     * @protected
+     */
     showErrors: Ember.computed.and('showValidation','hasErrors'),
     validation: Ember.computed('hasErrors','hasValidator','showValidation',function(){
         if (!this.get('showValidation') || !this.get('hasValidator')) {
@@ -197,7 +278,22 @@ export default FormGroup.extend({
         return this.get('hasErrors') ? 'error' : 'success';
     }),
 
+    /**
+     * @property hasLabel
+     * @type boolean
+     * @readonly
+     * @protected
+     */
     hasLabel: Ember.computed.notEmpty('label'),
+
+    /**
+     * True for text field `controlType`s
+     *
+     * @property useIcons
+     * @type boolean
+     * @readonly
+     * @public
+     */
     useIcons: Ember.computed('controlType', function() {
         return !nonTextFieldControlTypes.contains(this.get('controlType'));
     }),
@@ -216,8 +312,29 @@ export default FormGroup.extend({
      * @public
      */
     formLayout: Ember.computed.alias('form.formLayout'),
+
+    /**
+     * @property isVertical
+     * @type boolean
+     * @readonly
+     * @protected
+     */
     isVertical: Ember.computed.equal('formLayout','vertical'),
+
+    /**
+     * @property isHorizontal
+     * @type boolean
+     * @readonly
+     * @protected
+     */
     isHorizontal: Ember.computed.equal('formLayout','horizontal'),
+
+    /**
+     * @property isInline
+     * @type boolean
+     * @readonly
+     * @protected
+     */
     isInline: Ember.computed.equal('formLayout','inline'),
 
     horizontalLabelGridClass: 'col-sm-2',
