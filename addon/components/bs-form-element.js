@@ -199,7 +199,7 @@ export default FormGroup.extend({
 
     hasLabel: Ember.computed.notEmpty('label'),
     useIcons: Ember.computed('controlType', function() {
-        return !nonTextFieldControlTypes.contains(this.get('controlType'))
+        return !nonTextFieldControlTypes.contains(this.get('controlType'));
     }),
 
     /**
@@ -223,8 +223,7 @@ export default FormGroup.extend({
     horizontalLabelGridClass: 'col-sm-2',
 
     horizontalInputGridClass: Ember.computed('horizontalLabelGridClass', function() {
-        var parts = this.get('horizontalLabelGridClass').split('-'),
-            columns;
+        var parts = this.get('horizontalLabelGridClass').split('-');
         Ember.assert('horizontalInputGridClass must match format bootstrap grid column class', parts.length===3);
         parts[2] = 12 - parts[2];
         return parts.join('-');

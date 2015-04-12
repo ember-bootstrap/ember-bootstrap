@@ -17,22 +17,22 @@ moduleForComponent('bs-form', 'BsFormComponent', {
     ]
 });
 
-test('it renders', function() {
-  expect(2);
+test('it renders', function(assert) {
+  assert.expect(2);
 
   // creates the component instance
   var component = this.subject();
-  equal(component._state, 'preRender');
+  assert.equal(component._state, 'preRender');
 
   // appends the component to the page
   this.append();
-  equal(component._state, 'inDOM');
+  assert.equal(component._state, 'inDOM');
 });
 
 
 
 
-test('form has correct CSS class', function() {
+test('form has correct CSS class', function(assert) {
     var component = this.subject(),
         classSpec = {
             vertical: 'form',
@@ -45,18 +45,18 @@ test('form has correct CSS class', function() {
         Ember.run(function(){
             component.set('formLayout', layout);
         });
-        equal(this.$().hasClass(classSpec[layout]), true, 'form has expected class.');
+        assert.equal(this.$().hasClass(classSpec[layout]), true, 'form has expected class.');
     }
 
 });
 
 
 
-test('Submitting the form calls default action', function() {
+test('Submitting the form calls default action', function(assert) {
     var testController = Ember.Controller.extend({
             actions: {
                 testAction: function() {
-                    ok(true, 'Default action has been called.');
+                    assert.ok(true, 'Default action has been called.');
                 }
             }
         }).create(),
@@ -65,7 +65,7 @@ test('Submitting the form calls default action', function() {
             action: 'testAction'
         });
 
-    expect(1);
+    assert.expect(1);
 
     this.$().submit();
 });
@@ -76,7 +76,7 @@ test('Submitting the form calls default action', function() {
  Cannot test validations as expected in unit tests.
  See https://github.com/dockyard/ember-validations/issues/247
 
-test('Submitting the form with successful validation calls default action', function() {
+test('Submitting the form with successful validation calls default action', function(assert) {
     var testController = Ember.Controller.extend({
             actions: {
                 success: function() {
@@ -110,7 +110,7 @@ test('Submitting the form with successful validation calls default action', func
 
 
 
-test('Submitting the form with invalid validation calls invalid action', function() {
+test('Submitting the form with invalid validation calls invalid action', function(assert) {
     var testController = Ember.Controller.extend({
             actions: {
                 success: function() {

@@ -27,33 +27,33 @@ moduleForComponent('bs-form-element', 'BsFormElementComponent', {
     ]
 });
 
-test('it renders', function() {
-    expect(2);
+test('it renders', function(assert) {
+    assert.expect(2);
 
     // creates the component instance
     var component = this.subject();
-    equal(component._state, 'preRender');
+    assert.equal(component._state, 'preRender');
 
     // appends the component to the page
     this.append();
-    equal(component._state, 'inDOM');
+    assert.equal(component._state, 'inDOM');
 });
 
 
-test('component has form-group bootstrap class', function() {
+test('component has form-group bootstrap class', function(assert) {
     var component = this.subject();
-    equal(component.get('classNames').contains('form-group'), true, 'component has form-group class');
+    assert.equal(component.get('classNames').contains('form-group'), true, 'component has form-group class');
 });
 
-test('setting label property displays label tag', function() {
+test('setting label property displays label tag', function(assert) {
     var component = this.subject({
         label: 'myLabel'
     });
-    equal(this.$().find('label').length, 1, 'component has label tag');
-    equal(this.$().find('label').text().trim(), 'myLabel', 'label has text');
+    assert.equal(this.$().find('label').length, 1, 'component has label tag');
+    assert.equal(this.$().find('label').text().trim(), 'myLabel', 'label has text');
 });
 
-function controlTypeSupportTest(controlType, selector, values, getValueFn, componentOptions) {
+function controlTypeSupportTest(assert, controlType, selector, values, getValueFn, componentOptions) {
     var component = this.subject(Ember.merge({
             controlType: controlType
         }, componentOptions)),
@@ -63,29 +63,29 @@ function controlTypeSupportTest(controlType, selector, values, getValueFn, compo
         values = [values];
     }
 
-    equal(control.length, 1, 'component has ' + controlType + ' control');
+    assert.equal(control.length, 1, 'component has ' + controlType + ' control');
 
     values.forEach(function(value) {
         Ember.run(component, 'set', 'value', value);
         var hasValue = typeof getValueFn === 'function' ? getValueFn.call(control) : control.val();
-        equal(hasValue, value, controlType + ' control has correct values');
+        assert.equal(hasValue, value, controlType + ' control has correct values');
     });
 }
 
-test('controlType "text" is supported', function() {
-    controlTypeSupportTest.call(this, 'text', 'input[type=text]', 'myValue');
+test('controlType "text" is supported', function(assert) {
+    controlTypeSupportTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
 });
 
-test('controlType "checkbox" is supported', function() {
-    controlTypeSupportTest.call(this, 'checkbox', 'input[type=checkbox]', [true, false], function(){ return this.is(':checked'); });
+test('controlType "checkbox" is supported', function(assert) {
+    controlTypeSupportTest.call(this, assert, 'checkbox', 'input[type=checkbox]', [true, false], function(){ return this.is(':checked'); });
 });
 
-test('controlType "textarea" is supported', function() {
-    controlTypeSupportTest.call(this, 'textarea', 'textarea', 'myValue');
+test('controlType "textarea" is supported', function(assert) {
+    controlTypeSupportTest.call(this, assert, 'textarea', 'textarea', 'myValue');
 });
 
 
-test('controlType "select" is supported', function() {
+test('controlType "select" is supported', function(assert) {
     var options = {
         choices: [
             {
@@ -100,5 +100,5 @@ test('controlType "select" is supported', function() {
         choiceLabelProperty: 'label',
         choiceValueProperty: 'id'
     };
-    controlTypeSupportTest.call(this, 'select', 'select', ['m','f'], null, options);
+    controlTypeSupportTest.call(this, assert, 'select', 'select', ['m','f'], null, options);
 });
