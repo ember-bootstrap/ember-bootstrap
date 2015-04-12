@@ -8,13 +8,7 @@
 {{/bs-button-group}}
 
 
-<h2>Fully automatically generated form</h2>
-
-<p>todo</p>
-
-{{bs-form formLayout=formLayout}}
-
-<h2>Manually selected, automatically bound fields, automatic markup</h2>
+<h2>Automatically bound fields, automatic markup, with validation</h2>
 
 {{#bs-form formLayout=formLayout model=this action="submit"}}
     {{bs-form-element controlType="email" label="Email" placeholder="Email" property="email"}}
@@ -25,7 +19,7 @@
     {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
 {{/bs-form}}
 
-<h2>Manually selected, manually bound fields, automatic markup, no validations</h2>
+<h2>Manually bound fields, automatic markup, no validations</h2>
 
 {{#bs-form formLayout=formLayout}}
     {{bs-form-element controlType="email" label="Email" placeholder="Email" value=email}}
@@ -33,7 +27,6 @@
     {{bs-form-element controlType="select" choices=genderChoices choiceLabelProperty="label" choiceValueProperty="id" label="Gender" value=gender}}
     {{bs-form-element controlType="checkbox" label="Remember me" value=rememberMe}}
     {{bs-form-element controlType="textarea" label="Comments" value=comments}}
-
 {{/bs-form}}
 
 <h2>Manually built form</h2>

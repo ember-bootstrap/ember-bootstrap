@@ -29,21 +29,20 @@ import FormElement from 'ember-bootstrap/components/bs-form-element';
 
  ### Use with Bootstrap.FormElement
 
- When using `Bootstrap.FormElement`s with their `property` set to properties names of the form's validation enabled
+ When using `Bootstrap.FormElement`s with their `property` set to property names of the form's validation enabled
  `model`, you gain some additional powerful features:
- * the appropriate Bootstrap markup for the given `formLayout` and the form element's `inputType` is automatically generated
+ * the appropriate Bootstrap markup for the given `formLayout` and the form element's `controlType` is automatically generated
  * markup for validation states and error messages is generated based on the model's validation, when submitting the form
  with an invalid validation, or when focusing out of invalid inputs
 
  ```hbs
- \{{#bs-form formLayout="horizontal" model=this action="submit"}}
-   \{{bs-form-element inputType="email" label="Email" placeholder="Email" property="email"}}
-   \{{bs-form-element inputType="password" label="Password" placeholder="Password" property="password"}}
-   \{{bs-form-element inputType="checkbox" label="Remember me" property="rememberMe"}}
-   \{{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
- \{{/bs-form}}
+ {{#bs-form formLayout="horizontal" model=this action="submit"}}
+   {{bs-form-element controlType="email" label="Email" placeholder="Email" property="email"}}
+   {{bs-form-element controlType="password" label="Password" placeholder="Password" property="password"}}
+   {{bs-form-element controlType="checkbox" label="Remember me" property="rememberMe"}}
+   {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+ {{/bs-form}}
  ```
-
 
  See the `Bootstrap.FormElement` API docs for further information.
 
