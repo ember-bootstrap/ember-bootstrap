@@ -11,7 +11,7 @@ var nonTextFieldControlTypes = [
 ];
 
 /**
- Sub class of `Bootstrap.FormGroup` that adds automatic form layout markup and form validation features.
+ Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.
 
  ### Form layout
 
@@ -74,7 +74,7 @@ var nonTextFieldControlTypes = [
  ```
 
  If the `showValidation` property is `true` (which is automatically the case if a `focusOut` event is captured from the
- control element or the containing `Bootstrap.Form` was submitted with its `model` failing validation) and there are
+ control element or the containing `Components.Form` was submitted with its `model` failing validation) and there are
  validation errors for the `model`'s `property`, the appropriate Bootstrap validation markup (see
  http://getbootstrap.com/css/#forms-control-validation) is applied:
 
@@ -89,8 +89,8 @@ var nonTextFieldControlTypes = [
  * the validation messages are removed
 
  @class FormElement
- @namespace Bootstrap
- @extends Bootstrap.FormGroup
+ @namespace Components
+ @extends Components.FormGroup
  */
 export default FormGroup.extend({
     /**
@@ -138,7 +138,7 @@ export default FormGroup.extend({
     value: null,
 
     /**
-     The property name of the form element's `model` (by default the `model` of its parent `Bootstrap.Form`) that this
+     The property name of the form element's `model` (by default the `model` of its parent `Components.Form`) that this
      form element should represent. The control element's value will automatically be bound to the model property's
      value.
 

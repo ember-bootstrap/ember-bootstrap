@@ -3,21 +3,21 @@ import FormElement from 'ember-bootstrap/components/bs-form-element';
 
 /**
  Render a form with the appropriate Bootstrap layout class (see `formLayout`).
- Allows setting a `model` that nested `Bootstrap.FormElement`s can access, and that can provide form validation through
+ Allows setting a `model` that nested `Components.FormElement`s can access, and that can provide form validation through
  [ember-validations](https://github.com/dockyard/ember-validations)
 
  You can use whatever markup you like within the form:
 
  ```hbs
- \{{#bs-form action="submit"}}
-   \{{#bs-form-group validation=firstNameValidation}}
+ {{#bs-form action="submit"}}
+   {{#bs-form-group validation=firstNameValidation}}
      <label class="control-label">First name</label>
-     \{{bs-input type="text" value=firstname}}
-   \{{/bs-form-group}}
- \{{/bs-form}}
+     {{bs-input type="text" value=firstname}}
+   {{/bs-form-group}}
+ {{/bs-form}}
  ```
 
- However to benefit from features such as automatic form markup, validations and validation markup, use `Bootstrap.FormElement`
+ However to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`
  as nested components. See below for an example.
 
  ### Submitting the form
@@ -27,9 +27,9 @@ import FormElement from 'ember-bootstrap/components/bs-form-element';
  When an [ember-validations](https://github.com/dockyard/ember-validations) validated model is supplied, validations
  rules are evaluated before, and if those fail, the "invalid" action is sent instead of the default "action".
 
- ### Use with Bootstrap.FormElement
+ ### Use with Components.FormElement
 
- When using `Bootstrap.FormElement`s with their `property` set to property names of the form's validation enabled
+ When using `Components.FormElement`s with their `property` set to property names of the form's validation enabled
  `model`, you gain some additional powerful features:
  * the appropriate Bootstrap markup for the given `formLayout` and the form element's `controlType` is automatically generated
  * markup for validation states and error messages is generated based on the model's validation, when submitting the form
@@ -44,10 +44,10 @@ import FormElement from 'ember-bootstrap/components/bs-form-element';
  {{/bs-form}}
  ```
 
- See the `Bootstrap.FormElement` API docs for further information.
+ See the `Components.FormElement` API docs for further information.
 
  @class Form
- @namespace Bootstrap
+ @namespace Components
  @extends Ember.Component
 */
 export default Ember.Component.extend({
@@ -72,9 +72,9 @@ export default Ember.Component.extend({
     /**
      * Set a model that this form should represent. This serves several purposes:
      *
-     * * child `Bootstrap.FormElement`s can access and bind to this model by their `property`
+     * * child `Components.FormElement`s can access and bind to this model by their `property`
      * * when the model supports validation by using the [ember-validations](https://github.com/dockyard/ember-validations) mixin,
-     * child `Bootstrap.FormElement`s will look at the validation information of their `property` and render their form group accordingly.
+     * child `Components.FormElement`s will look at the validation information of their `property` and render their form group accordingly.
      * Moreover the form's `submit` event handler will validate the model and deny submitting if the model is not validated successfully.
      *
      * @property model
@@ -103,7 +103,7 @@ export default Ember.Component.extend({
     hasValidator: Ember.computed.notEmpty('model.validate'),
 
     /**
-     * An array of `Bootstrap.FormElement`s that are children of this form.
+     * An array of `Components.FormElement`s that are children of this form.
      *
      * @property childFormElements
      * @type Array
@@ -119,7 +119,7 @@ export default Ember.Component.extend({
      *
      * If there is a supplied `model` that supports validation (`hasValidator`) the model will be validated before, and
      * only if validation is successful the default action will be sent. Otherwise an "invalid" action will be sent, and
-     * all the `showValidation` property of all child `Bootstrap.FormElement`s will be set to true, so error state and
+     * all the `showValidation` property of all child `Components.FormElement`s will be set to true, so error state and
      * messages will be shown automatically.
      *
      * @event submit

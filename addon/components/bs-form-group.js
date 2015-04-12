@@ -6,10 +6,10 @@ import Config from 'ember-bootstrap/config';
  Use as a block level component:
 
  ```hbs
- \{{#bs-form-group validation=firstNameValidation}}
+ {{#bs-form-group validation=firstNameValidation}}
     <label class="control-label">First name</label>
-    \{{bs-input type="text" value=firstname}}
- \{{/bs-form-group}}
+    {{bs-input type="text" value=firstname}}
+ {{/bs-form-group}}
  ```
 
  If the `validation` property is set to some state (usually Bootstrap's predefined states "success",
@@ -17,7 +17,7 @@ import Config from 'ember-bootstrap/config';
  See http://getbootstrap.com/css/#forms-control-validation
 
  @class FormGroup
- @namespace Bootstrap
+ @namespace Components
  @extends Ember.Component
 */
 export default Ember.Component.extend({
