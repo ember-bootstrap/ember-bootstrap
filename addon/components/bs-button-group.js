@@ -6,14 +6,14 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
  See http://getbootstrap.com/components/#btn-groups
 
- Use as a block level component with any number of Button components as children:
+ Use as a block level component with any number of {{#crossLink "Components.Button"}}{{/crossLink}} components as children:
 
  ```handlebars
- \{{#bs-button-group}}
-    \{{#bs-button}}1\{{/bs-button}}
-    \{{#bs-button}}2\{{/bs-button}}
-    \{{#bs-button}}3\{{/bs-button}}
- \{{/bs-button-group}}
+ {{#bs-button-group}}
+    {{#bs-button}}1{{/bs-button}}
+    {{#bs-button}}2{{/bs-button}}
+    {{#bs-button}}3{{/bs-button}}
+ {{/bs-button-group}}
  ```
 
  ### Radio-like behaviour
@@ -23,13 +23,13 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  the value of the active button:
 
  ```handlebars
- \{{#bs-button-group value=buttonGroupValue type="radio"}}
-    \{{#bs-button value=1}}1\{{/bs-button}}
-    \{{#bs-button value=2}}2\{{/bs-button}}
-    \{{#bs-button value=3}}3\{{/bs-button}}
- \{{/bs-button-group}}
+ {{#bs-button-group value=buttonGroupValue type="radio"}}
+    {{#bs-button value=1}}1{{/bs-button}}
+    {{#bs-button value=2}}2{{/bs-button}}
+    {{#bs-button value=3}}3{{/bs-button}}
+ {{/bs-button-group}}
 
- You selected: \{{buttonGroupValue}}!
+ You selected: {{buttonGroupValue}}!
  ```
 
  ### Checkbox-like behaviour
@@ -38,28 +38,48 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  of all the values of the active buttons:
 
  ```handlebars
- \{{#bs-button-group value=buttonGroupValue type="checkbox"}}
-    \{{#bs-button value=1}}1\{{/bs-button}}
-    \{{#bs-button value=2}}2\{{/bs-button}}
-    \{{#bs-button value=3}}3\{{/bs-button}}
- \{{/bs-button-group}}
+ {{#bs-button-group value=buttonGroupValue type="checkbox"}}
+    {{#bs-button value=1}}1{{/bs-button}}
+    {{#bs-button value=2}}2{{/bs-button}}
+    {{#bs-button value=3}}3{{/bs-button}}
+ {{/bs-button-group}}
 
  You selected:
  <ul>
- \{{#each value in buttonGroupValue}}
-    <li>\{{value}}</li>
- \{{/each}}
+ {{#each value in buttonGroupValue}}
+    <li>{{value}}</li>
+ {{/each}}
  </ul>
  ```
 
  @class ButtonGroup
- @namespace Bootstrap
+ @namespace Components
  @extends Ember.Component
- @uses Bootstrap.SizeClass
+ @uses Mixins.SizeClass
  */
 export default Ember.Component.extend(SizeClass, {
+
+    /**
+     * @type string
+     * @property ariaRole
+     * @default 'group'
+     * @protected
+     */
     ariaRole: 'group',
+
+    /**
+     * @property classNames
+     * @type array
+     * @default ['btn-group']
+     * @protected
+     */
     classNames: ['btn-group'],
+
+    /**
+     * @property classNameBindings
+     * @type array
+     * @protected
+     */
     classNameBindings: ['vertical:btn-group-vertical','justified:btn-group-justified'],
 
     /**
@@ -87,7 +107,7 @@ export default Ember.Component.extend(SizeClass, {
      *
      * ```handlebars
      * <div class="btn-group" role="group">
-     * \{{#bs-button}}My Button{{/bs-button}}
+     * {{#bs-button}}My Button{{/bs-button}}
      * </div>
      * ```
      *
@@ -132,7 +152,7 @@ export default Ember.Component.extend(SizeClass, {
      *
      * When you set the value, the corresponding buttons will be activated:
      * * use a single value for a radio button group to activate the button with the same value
-     * * use an aray of values for a checkbox button group to activate all the buttons with values contained in the array
+     * * use an array of values for a checkbox button group to activate all the buttons with values contained in the array
      *
      * @property value
      * @type array|any
@@ -180,9 +200,12 @@ export default Ember.Component.extend(SizeClass, {
             return;
         }
 
+        //var lastActiveChild = this.get('lastActiveChildren.firstObject')
+
         Ember.run.scheduleOnce('actions',this, function(){
             // the button that just became active
             var newActive,
+                lastActive,
                 value;
 
             switch (type) {
@@ -190,6 +213,12 @@ export default Ember.Component.extend(SizeClass, {
                     newActive = this.get('newActiveChildren').objectAt(0);
                     if (newActive) {
                         value = newActive.get('value');
+                    }
+                    else {
+                        lastActive = this.get('lastActiveChildren.firstObject');
+                        if (lastActive) {
+                            lastActive.set('active', true);
+                        }
                     }
                     break;
                 case 'checkbox':

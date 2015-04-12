@@ -1,0 +1,29 @@
+{{#bs-button active=active toggle=true type="primary" icon="glyphicon glyphicon-download"}}Download{{/bs-button}}
+
+<hr>
+
+<h2>Button group</h2>
+
+{{#bs-button-group value=buttonGroupValue type="checkbox"}}
+    {{#bs-button value=1}}1{{/bs-button}}
+    {{#bs-button value=2}}2{{/bs-button}}
+    {{#bs-button value=3}}3{{/bs-button}}
+{{/bs-button-group}}
+
+<p>You selected:</p>
+<ul>
+    {{#each value in buttonGroupValue}}
+        <li>{{value}}</li>
+    {{/each}}
+</ul>
+
+
+<h3>Radio-style button group</h3>
+
+{{#bs-button-group value=buttonGroupValue2 type="radio"}}
+    {{#bs-button value=1}}1{{/bs-button}}
+    {{#bs-button value=2}}2{{/bs-button}}
+    {{#bs-button value=3}}3{{/bs-button}}
+{{/bs-button-group}}
+
+<p>You selected: {{buttonGroupValue2}}</p>
