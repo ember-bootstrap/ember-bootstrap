@@ -168,8 +168,38 @@ export default FormGroup.extend({
      */
     name: null,
 
+    /**
+     * An array of objects containing the selection of choices for multiple choice style form controls, e.g. select
+     * boxes.
+     *
+     * ```hbs
+     *     {{bs-form-element controlType="select" choices=countries choiceLabelProperty="name" choiceValueProperty="id" label="Country" value=selectedCountry}}
+     * ```
+     *
+     * Be sure to also set the `choiceValueProperty` and `choiceLabelProperty` properties.
+     *
+     * @property choices
+     * @type array
+     * @public
+     */
     choices: [],
+
+    /**
+     * The property of the `choices` array of objects, containing the value of the choice, e.g. the select box option.
+     *
+     * @property choiceValueProperty
+     * @type string
+     * @public
+     */
     choiceValueProperty: null,
+
+    /**
+     * The property of the `choices` array of objects, containing the label of the choice, e.g. the select box option.
+     *
+     * @property choiceLabelProperty
+     * @type string
+     * @public
+     */
     choiceLabelProperty: null,
 
     /**
@@ -271,6 +301,16 @@ export default FormGroup.extend({
      * @protected
      */
     showErrors: Ember.computed.and('showValidation','hasErrors'),
+
+    /**
+     * The validation ("error" or "success") or null if no validation is to be shown. Automatically computed from the
+     * models validation state.
+     *
+     * @property validation
+     * @readonly
+     * @type string
+     * @protected
+     */
     validation: Ember.computed('hasErrors','hasValidator','showValidation',function(){
         if (!this.get('showValidation') || !this.get('hasValidator')) {
             return null;
@@ -337,8 +377,25 @@ export default FormGroup.extend({
      */
     isInline: Ember.computed.equal('formLayout','inline'),
 
+    /**
+     * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
+     * property of the parent form. The corresponding grid class for form controls is automatically computed.
+     *
+     * @property horizontalLabelGridClass
+     * @type string
+     * @default 'col-md-4'
+     * @public
+     */
     horizontalLabelGridClass: Ember.computed.oneWay('form.horizontalLabelGridClass'),
 
+    /**
+     * Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.
+     *
+     * @property horizontalInputGridClass
+     * @type string
+     * @readonly
+     * @protected
+     */
     horizontalInputGridClass: Ember.computed('horizontalLabelGridClass', function() {
         var parts = this.get('horizontalLabelGridClass').split('-');
         Ember.assert('horizontalInputGridClass must match format bootstrap grid column class', parts.length===3);
@@ -346,12 +403,27 @@ export default FormGroup.extend({
         return parts.join('-');
     }),
 
+    /**
+     * Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout
+     * form, that have no label.
+     *
+     * @property horizontalInputOffsetGridClass
+     * @type string
+     * @readonly
+     * @protected
+     */
     horizontalInputOffsetGridClass: Ember.computed('horizontalLabelGridClass', function() {
         var parts = this.get('horizontalLabelGridClass').split('-');
         parts.splice(2,0,'offset');
         return parts.join('-');
     }),
 
+    /**
+     * Reference to the parent `Components.Form` class.
+     *
+     * @property form
+     * @protected
+     */
     form: Ember.computed(function(){
         return this.nearestOfType(Form);
     }),
