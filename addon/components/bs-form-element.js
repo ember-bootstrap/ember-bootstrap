@@ -173,7 +173,7 @@ export default FormGroup.extend({
      * boxes.
      *
      * ```hbs
-     *     {{bs-form-element controlType="select" choices=countries choiceLabelProperty="name" choiceValueProperty="id" label="Country" value=selectedCountry}}
+     * {{bs-form-element controlType="select" choices=countries choiceLabelProperty="name" choiceValueProperty="id" label="Country" value=selectedCountry}}
      * ```
      *
      * Be sure to also set the `choiceValueProperty` and `choiceLabelProperty` properties.
