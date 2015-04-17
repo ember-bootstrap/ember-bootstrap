@@ -4,6 +4,7 @@
 #### Features
 
 New form classes to support creating powerful forms:
+
 * **Form:** base form class
 * **FormGroup:** component for Bootstrap form-group elements with validation rendering
 * **FormElement:** extends FormGroup to implement automatic markup generation and model based validations
