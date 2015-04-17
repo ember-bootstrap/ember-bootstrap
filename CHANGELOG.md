@@ -1,3 +1,14 @@
+<a name"0.1.0"></a>
+## 0.1.0 (2015-04-17)
+
+#### Features
+
+New form classes to support creating powerful forms:
+
+* **Form:** base form class
+* **FormGroup:** component for Bootstrap form-group elements with validation rendering
+* **FormElement:** extends FormGroup to implement automatic markup generation and model based validations
+
 <a name"0.0.9"></a>
 ### 0.0.9 (2015-04-08)
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/mixins/type-class.js - ember-bootstrap</title>
+    <title>addon/components/bs-input.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,7 +49,7 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/type-class.js <small>File</small></h1>
+    <h1>addon/components/bs-input.js <small>File</small></h1>
 </div>
 
 <div class="file">
@@ -57,42 +57,15 @@
 import Ember from &#x27;ember&#x27;;
 
 /**
- * Mixin to set the appropriate class for components with differently styled types (&quot;success&quot;, &quot;danger&quot; etc.)
- *
- * @class TypeClass
- * @namespace Mixins
+ Extends Ember.TextField to add Bootstrap&#x27;s &#x27;form-control&#x27; class.
+
+ @class Input
+ @namespace Components
+ @extends Ember.TextField
  */
-export default Ember.Mixin.create({
-    /**
-     * Prefix for the type class, e.g. &quot;btn&quot; for button type classes (&quot;btn-primary2 etc.)
-     *
-     * @property classTypePrefix
-     * @type string
-     * @required
-     * @protected
-     */
-    classTypePrefix: Ember.required(String),
-    classNameBindings: [&#x27;typeClass&#x27;],
-    typeClass: (function() {
-        var prefix = this.get(&#x27;classTypePrefix&#x27;),
-            type = this.get(&#x27;type&#x27;) || &#x27;default&#x27;;
-        return prefix + &#x27;-&#x27; + type;
-    }).property(&#x27;type&#x27;),
-
-
-    /**
-     * Property for type styling
-     *
-     * For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without &quot;btn-&quot; prefix)
-     *
-     * @property type
-     * @type String
-     * @default &#x27;default&#x27;
-     * @public
-     */
-    type: &#x27;default&#x27;
+export default Ember.TextField.extend({
+    classNames: [&#x27;form-control&#x27;]
 });
-
     </pre>
 </div>
                     </div>

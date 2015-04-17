@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.Button - ember-bootstrap</title>
+    <title>Components.FormElement - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,24 +49,17 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.Button <small>Class</small></h1>
+    <h1>Components.FormElement <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
-        <div class="uses">
-            Uses
-            <ul class="inline commas">
-                    <li><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
-                    <li><a href="Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-            </ul>
-        </div>
 
         <div class="extends">
-            Extends <a href="http://emberjs.com/api/classes/Ember.Component.html" class="crosslink external" target="_blank">Ember.Component</a>
+            Extends <a href="../classes/Components.FormGroup.html" class="crosslink">Components.FormGroup</a>
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-button.js.html#l5"><code>addon&#x2F;components&#x2F;bs-button.js:5</code></a>
+            Defined in: <a href="../files/addon_components_bs-form-element.js.html#l13"><code>addon&#x2F;components&#x2F;bs-form-element.js:13</code></a>
         </div>
 
 
@@ -74,53 +67,70 @@
 
 
 <div class="well well-small">
-    <p>Implements a HTML button element, with support for all <a href="http://getbootstrap.com/css/#buttons">Bootstrap button CSS styles</a>
-as well as advanced functionality such as button states.</p>
-<h3>Basic Usage</h3>
-<pre class="code prettyprint"><code class="language-handlebars">{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
-   Download
-{{/bs-button}}
+    <p>Sub class of <code>Components.FormGroup</code> that adds automatic form layout markup and form validation features.</p>
+<h3>Form layout</h3>
+<p>The appropriate Bootstrap markup for the given <code>formLayout</code> and <code>controlType</code> is automatically generated to easily
+create forms without coding the default Bootstrap form markup by hand:</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; action=&quot;submit&quot;}}
+  {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+  {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
+  {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
+  {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+{{/bs-form}}
 </code></pre>
-<h3>Actions</h3>
-<p>Set the action property of the component to send an action to your controller. The following parameters will be sent:</p>
+<h3>Form validation</h3>
+<p>In the following example the control elements of the three form elements value will be bound to the properties
+(given by <code>property</code>) of the form's <code>model</code>, which in this case is its controller (see <code>model=this</code>):</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
+  {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+  {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+  {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+  {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+{{/bs-form}}
+</code></pre>
+<p>By using this indirection in comparison to directly binding the <code>value</code> property, you get the benefit of automatic
+form validation, given that your <code>model</code> is implementing <a href="https://github.com/dockyard/ember-validations">ember-validations</a>.</p>
+<p>In the example above the <code>model</code> was our controller itself, so the control elements were bound to the appropriate
+properties of our controller. A controller implementing validations on those properties could look like this:</p>
+<pre class="code prettyprint"><code class="language-js">import Ember from 'ember';
+import EmberValidations from 'ember-validations';
+
+export default Ember.Controller.extend(EmberValidations.Mixin,{
+  email: null,
+  password: null,
+  rememberMe: false,
+  validations: {
+    email: {
+      presence: true,
+      format: {
+        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+      }
+    },
+    password: {
+      presence: true,
+      length: { minimum: 6, maximum: 10}
+    },
+    comments: {
+      length: { minimum: 5, maximum: 20}
+    }
+  }
+});
+</code></pre>
+<p>If the <code>showValidation</code> property is <code>true</code> (which is automatically the case if a <code>focusOut</code> event is captured from the
+control element or the containing <code>Components.Form</code> was submitted with its <code>model</code> failing validation) and there are
+validation errors for the <code>model</code>'s <code>property</code>, the appropriate Bootstrap validation markup (see
+http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
 <ul>
-<li>value: the button's value, see the <code>value</code> property</li>
-<li>event: the browsers event object</li>
-<li>callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling</li>
+<li><code>validation</code> is set to 'error', which will set the <code>has-error</code> CSS class</li>
+<li>the <code>errorIcon</code> feedback icon is displayed if <code>controlType</code> is a text field</li>
+<li>the validation messages are displayed as Bootstrap <code>help-block</code>s</li>
 </ul>
-<pre class="code prettyprint"><code class="language-handlebars">{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
-   Download
-{{/bs-button}}
-</code></pre>
-<h3>States</h3>
-<p>Use the <code>textState</code> property to change the label of the button. You can bind it to a controller property to set a &quot;loading&quot; state for example.
-The label of the button will be taken from the <code>&lt;state&gt;Text</code> property.</p>
-<pre class="code prettyprint"><code class="language-handlebars">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
-</code></pre>
-<pre class="code prettyprint"><code class="language-js">App.ApplicationController = Ember.Controller.extend({
-  buttonState: &quot;default&quot;
-  actions: {
-    download: function() {
-      this.set(&quot;buttonState&quot;, &quot;loading&quot;);
-    }
-  }
-});
-</code></pre>
-<h3>Promise support for automatic state change</h3>
-<p>When using the callback function of the click action to supply a Promise for any asynchronous operation the button will
-manage its <code>textState</code> property automatically, changing its value according to the state of the promise:
-&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;</p>
-<pre class="code prettyprint"><code class="language-handlebars">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=&quot;download&quot;}}
-</code></pre>
-<pre class="code prettyprint"><code class="language-js">App.ApplicationController = Ember.Controller.extend({
-  actions: {
-    download: function(actionParam, evt, cb) {
-      promise = new Ember.RSVP.Promise(...);
-      cb(promise);
-    }
-  }
-});
-</code></pre>
+<p>As soon as the validation is successful again...</p>
+<ul>
+<li><code>validation</code> is set to 'success', which will set the <code>has-success</code> CSS class</li>
+<li>the <code>successIcon</code> feedback icon is displayed if <code>controlType</code> is a text field</li>
+<li>the validation messages are removed</li>
+</ul>
 
 </div>
 
@@ -228,10 +238,6 @@ manage its <code>textState</code> property automatically, changing its value acc
                             </li>
                             <li class="index-item method inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_cacheFor" data-tablink="cacheFor">cacheFor</a>
-
-                            </li>
-                            <li class="index-item method protected">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_click" data-tablink="click">click</a>
 
                             </li>
                             <li class="index-item method inherited">
@@ -391,10 +397,6 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <a href="#" data-tabid="#methods" data-anchor="#method_rerender" data-tablink="rerender">rerender</a>
 
                             </li>
-                            <li class="index-item method protected">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_resetState" data-tablink="resetState">resetState</a>
-
-                            </li>
                             <li class="index-item method inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_send" data-tablink="send">send</a>
 
@@ -450,10 +452,6 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <a href="#" data-tabid="#properties" data-anchor="#property_actions" data-tablink="actions">actions</a>
 
                             </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_active" data-tablink="active">active</a>
-
-                            </li>
                             <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_ariaRole" data-tablink="ariaRole">ariaRole</a>
 
@@ -462,16 +460,20 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <a href="#" data-tabid="#properties" data-anchor="#property_attributeBindings" data-tablink="attributeBindings">attributeBindings</a>
 
                             </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_block" data-tablink="block">block</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_buttonType" data-tablink="buttonType">buttonType</a>
-
-                            </li>
                             <li class="index-item property private inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_childViews" data-tablink="childViews">childViews</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_choiceLabelProperty" data-tablink="choiceLabelProperty">choiceLabelProperty</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_choices" data-tablink="choices">choices</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_choiceValueProperty" data-tablink="choiceValueProperty">choiceValueProperty</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -482,8 +484,8 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <a href="#" data-tabid="#properties" data-anchor="#property_classNames" data-tablink="classNames">classNames</a>
 
                             </li>
-                            <li class="index-item property protected inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix" data-tablink="classTypePrefix">classTypePrefix</a>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_cols" data-tablink="cols">cols</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -499,27 +501,63 @@ manage its <code>textState</code> property automatically, changing its value acc
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_defaultText" data-tablink="defaultText">defaultText</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_disabled" data-tablink="disabled">disabled</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_controlType" data-tablink="controlType">controlType</a>
 
                             </li>
                             <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_element" data-tablink="element">element</a>
 
                             </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_errorIcon" data-tablink="errorIcon">errorIcon</a>
+
+                            </li>
                             <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_icon" data-tablink="icon">icon</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_errors" data-tablink="errors">errors</a>
+
+                            </li>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_form" data-tablink="form">form</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_iconActive" data-tablink="iconActive">iconActive</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_formLayout" data-tablink="formLayout">formLayout</a>
+
+                            </li>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasErrors" data-tablink="hasErrors">hasErrors</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasFeedback" data-tablink="hasFeedback">hasFeedback</a>
+
+                            </li>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasLabel" data-tablink="hasLabel">hasLabel</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasValidation" data-tablink="hasValidation">hasValidation</a>
+
+                            </li>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasValidator" data-tablink="hasValidator">hasValidator</a>
+
+                            </li>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_horizontalInputGridClass" data-tablink="horizontalInputGridClass">horizontalInputGridClass</a>
+
+                            </li>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_horizontalInputOffsetGridClass" data-tablink="horizontalInputOffsetGridClass">horizontalInputOffsetGridClass</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_iconInactive" data-tablink="iconInactive">iconInactive</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_horizontalLabelGridClass" data-tablink="horizontalLabelGridClass">horizontalLabelGridClass</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_infoIcon" data-tablink="infoIcon">infoIcon</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -530,8 +568,24 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <a href="#" data-tabid="#properties" data-anchor="#property_isDestroying" data-tablink="isDestroying">isDestroying</a>
 
                             </li>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isHorizontal" data-tablink="isHorizontal">isHorizontal</a>
+
+                            </li>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isInline" data-tablink="isInline">isInline</a>
+
+                            </li>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isVertical" data-tablink="isVertical">isVertical</a>
+
+                            </li>
                             <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_isVisible" data-tablink="isVisible">isVisible</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_label" data-tablink="label">label</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -542,16 +596,48 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <a href="#" data-tabid="#properties" data-anchor="#property_layoutName" data-tablink="layoutName">layoutName</a>
 
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_model" data-tablink="model">model</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_name" data-tablink="name">name</a>
+
+                            </li>
                             <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_parentView" data-tablink="parentView">parentView</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_reset" data-tablink="reset">reset</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_placeholder" data-tablink="placeholder">placeholder</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_property" data-tablink="property">property</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_rows" data-tablink="rows">rows</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_selectLabelProperty" data-tablink="selectLabelProperty">selectLabelProperty</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_selectValueProperty" data-tablink="selectValueProperty">selectValueProperty</a>
+
+                            </li>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showErrors" data-tablink="showErrors">showErrors</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showValidation" data-tablink="showValidation">showValidation</a>
 
                             </li>
                             <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_size" data-tablink="size">size</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_successIcon" data-tablink="successIcon">successIcon</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -572,20 +658,20 @@ manage its <code>textState</code> property automatically, changing its value acc
 
                                     <span class="label label-deprecated">deprecated</span>
                             </li>
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_textState" data-tablink="textState">textState</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_toggle" data-tablink="toggle">toggle</a>
-
-                            </li>
                             <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_type" data-tablink="type">type</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_useIcons" data-tablink="useIcons">useIcons</a>
+
+                            </li>
+                            <li class="index-item property protected inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_validation" data-tablink="validation">validation</a>
 
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_value" data-tablink="value">value</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_warningIcon" data-tablink="warningIcon">warningIcon</a>
 
                             </li>
                     </ul>
@@ -598,6 +684,10 @@ manage its <code>textState</code> property automatically, changing its value acc
                     <ul class="index-list events extends">
                             <li class="index-item event inherited">
                                 <a href="#" data-tabid="#events" data-anchor="#event_didInsertElement" data-tablink="didInsertElement">didInsertElement</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#" data-tabid="#events" data-anchor="#event_focusOut" data-tablink="focusOut">focusOut</a>
 
                             </li>
                             <li class="index-item event inherited">
@@ -665,7 +755,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;a jQuery-compatible selector string&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;a jQuery-compatible selector string&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -678,7 +768,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type">JQuery</span>:
-                                        <p>&lt;p&gt;&lt;p&gt;the jQuery object for the DOM node&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;the jQuery object for the DOM node&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -723,7 +813,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -807,7 +897,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -930,7 +1020,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;the function that inserts the element into the DOM&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;the function that inserts the element into the DOM&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1134,7 +1224,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The key to observer&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The key to observer&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1145,7 +1235,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The target object to invoke&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The target object to invoke&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1156,7 +1246,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The method to invoke.&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The method to invoke.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1169,7 +1259,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.Object.html" class="crosslink external" target="_blank">Ember.Object</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;self&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;self&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1216,7 +1306,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1269,7 +1359,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;selector, element, HTML string, or jQuery object&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;selector, element, HTML string, or jQuery object&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1282,7 +1372,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1372,7 +1462,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -1384,62 +1474,10 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>&lt;p&gt;&lt;p&gt;The cached value of the computed property, if any&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The cached value of the computed property, if any&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
-                    
-                    </div>
-                    <div id="method_click" class="method item protected">
-                        <h3 class="name">click
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l239"><code>addon&#x2F;components&#x2F;bs-button.js:239</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Click handler. This will send the default &quot;action&quot; action, with the following parameters:</p>
-                    <ul>
-                    <li>value of the button (that is the value of the &quot;value&quot; property)</li>
-                    <li>original event object of the click event</li>
-                    <li>callback: call that with a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;</li>
-                    </ul>
-                    
-                        </div>
-                    
-                            <div class="params">
-                                <h4>Parameters:</h4>
-                    
-                                <ul class="params-list">
-                                    <li class="param">
-                                            <code class="param-name">evt</code>
-                                            <span class="type">Object</span>
-                    
-                    
-                                        <div class="param-description">
-                                             
-                                        </div>
-                    
-                                    </li>
-                                </ul>
-                            </div>
-                    
                     
                     </div>
                     <div id="method_createChildView" class="method item inherited">
@@ -1483,7 +1521,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -1494,7 +1532,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;Attributes to add&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Attributes to add&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1507,7 +1545,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;new instance&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;new instance&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1549,7 +1587,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1595,7 +1633,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The name of the property to decrement&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the property to decrement&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1606,7 +1644,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The amount to decrement by. Defaults to 1&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The amount to decrement by. Defaults to 1&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1619,7 +1657,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type">Number</span>:
-                                        <p>&lt;p&gt;&lt;p&gt;The new property value&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The new property value&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1703,7 +1741,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1747,7 +1785,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -1757,7 +1795,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -1850,7 +1888,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The parent's DOM element&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The parent's DOM element&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1863,7 +1901,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type">DOMElement</span>:
-                                        <p>&lt;p&gt;&lt;p&gt;The discovered element&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The discovered element&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1928,7 +1966,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The property to retrieve&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property to retrieve&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1941,7 +1979,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>&lt;p&gt;&lt;p&gt;The property value or undefined.&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property value or undefined.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1990,7 +2028,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;of keys to get&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;of keys to get&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2047,7 +2085,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The name of the property to retrieve&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the property to retrieve&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2058,7 +2096,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The value to return if the property value is undefined&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The value to return if the property value is undefined&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2071,7 +2109,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>&lt;p&gt;&lt;p&gt;The property value or the defaultValue.&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property value or the defaultValue.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2115,7 +2153,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -2125,7 +2163,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -2171,7 +2209,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The name of the event&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the event&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2184,7 +2222,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type">Boolean</span>:
-                                        <p>&lt;p&gt;&lt;p&gt;does the object have a subscription for event&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;does the object have a subscription for event&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2230,7 +2268,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;Key to check&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Key to check&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2287,7 +2325,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The name of the property to increment&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the property to increment&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2298,7 +2336,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The amount to increment by. Defaults to 1&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The amount to increment by. Defaults to 1&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2311,7 +2349,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type">Number</span>:
-                                        <p>&lt;p&gt;&lt;p&gt;The new property value&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The new property value&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2394,7 +2432,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -2404,7 +2442,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;Includes itself if true.&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Includes itself if true.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2465,7 +2503,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;property name&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;property name&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2513,7 +2551,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;Subclass of Ember.View (or Ember.View itself)&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Subclass of Ember.View (or Ember.View itself)&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2525,7 +2563,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>&lt;p&gt;&lt;p&gt;Ember.View&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Ember.View&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2570,7 +2608,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;Subclass of Ember.View (or Ember.View itself)&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Subclass of Ember.View (or Ember.View itself)&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2582,7 +2620,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>&lt;p&gt;&lt;p&gt;Ember.View&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Ember.View&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2626,8 +2664,8 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;Subclass of Ember.View (or Ember.View itself),
-                    or an instance of Ember.Mixin.&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Subclass of Ember.View (or Ember.View itself),
+                    or an instance of Ember.Mixin.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2639,7 +2677,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>&lt;p&gt;&lt;p&gt;Ember.View&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Ember.View&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2682,7 +2720,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;A property name&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;A property name&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2694,7 +2732,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>&lt;p&gt;&lt;p&gt;Ember.View&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Ember.View&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2738,7 +2776,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The property key to be notified about.&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property key to be notified about.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2792,7 +2830,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The name of the event&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the event&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2803,7 +2841,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The target of the subscription&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The target of the subscription&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2814,7 +2852,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The function of the subscription&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The function of the subscription&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2826,7 +2864,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>&lt;p&gt;&lt;p&gt;this&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;this&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2877,7 +2915,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The name of the event&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the event&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2889,7 +2927,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The &quot;this&quot; binding for the callback&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The &quot;this&quot; binding for the callback&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2900,7 +2938,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The callback to execute&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The callback to execute&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2912,7 +2950,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>&lt;p&gt;&lt;p&gt;this&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;this&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2960,7 +2998,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The name of the event&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the event&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2972,7 +3010,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The &quot;this&quot; binding for the callback&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The &quot;this&quot; binding for the callback&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2983,7 +3021,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The callback to execute&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The callback to execute&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2995,7 +3033,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>&lt;p&gt;&lt;p&gt;this&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;this&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3047,7 +3085,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The property key that has just changed.&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property key that has just changed.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3110,7 +3148,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The property key that is about to change.&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property key that is about to change.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3160,7 +3198,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3199,7 +3237,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3242,7 +3280,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -3254,7 +3292,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3294,7 +3332,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3339,7 +3377,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The key to observer&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The key to observer&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3350,7 +3388,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The target object to invoke&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The target object to invoke&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3361,7 +3399,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The method to invoke.&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The method to invoke.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3374,7 +3412,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.Observable.html" class="crosslink external" target="_blank">Ember.Observable</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3422,7 +3460,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The render buffer&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The render buffer&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3477,9 +3515,9 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;the render buffer. If no buffer is
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;the render buffer. If no buffer is
                     passed, a default buffer, using the current view's &lt;code&gt;tagName&lt;/code&gt;, will
-                    be used.&lt;/p&gt;&lt;/p&gt;</p>
+                    be used.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3655,7 +3693,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;A selector, element, HTML string, or jQuery object&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;A selector, element, HTML string, or jQuery object&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3668,7 +3706,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;received&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;received&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3707,37 +3745,6 @@ manage its <code>textState</code> property automatically, changing its value acc
                     <p>In general, if the display of your view changes, you should modify
                     the DOM element directly instead of manually calling <code>rerender</code>, which can
                     be slow.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method_resetState" class="method item protected">
-                        <h3 class="name">resetState
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l219"><code>addon&#x2F;components&#x2F;bs-button.js:219</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>This will reset the state property to 'default', and with that the button's label to defaultText</p>
                     
                         </div>
                     
@@ -3799,7 +3806,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The action to trigger&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The action to trigger&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3810,7 +3817,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;a context to send with the action&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;a context to send with the action&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3913,7 +3920,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;the action to trigger&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;the action to trigger&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3925,7 +3932,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;a context to send with the action&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;a context to send with the action&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -4001,7 +4008,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The property to set&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property to set&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -4012,7 +4019,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The value to set or &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The value to set or &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -4070,7 +4077,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;the hash of keys and values to set&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;the hash of keys and values to set&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -4127,7 +4134,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -4137,7 +4144,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -4186,7 +4193,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                            <p>&lt;p&gt;&lt;p&gt;The name of the property to toggle&lt;/p&gt;&lt;/p&gt;</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the property to toggle&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -4199,7 +4206,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>&lt;p&gt;&lt;p&gt;The new property value&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The new property value&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -4260,7 +4267,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>:
-                                        <p>&lt;p&gt;&lt;p&gt;string representation&lt;/p&gt;&lt;/p&gt;</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;string representation&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -4308,7 +4315,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                                         <div class="param-description">
-                                             
+                                            
                                         </div>
                     
                                     </li>
@@ -4552,37 +4559,6 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                     </div>
-                    <div id="property_active" class="property item public">
-                        <h3 class="name">active
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l121"><code>addon&#x2F;components&#x2F;bs-button.js:121</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Set the 'active' class to apply active/pressed CSS styling</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
                     <div id="property_ariaRole" class="property item inherited">
                         <h3 class="name">ariaRole
                             <span class="small">String</span>
@@ -4663,69 +4639,6 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                     </div>
-                    <div id="property_block" class="property item public">
-                        <h3 class="name">block
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l131"><code>addon&#x2F;components&#x2F;bs-button.js:131</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Property for block level buttons</p>
-                    <p>See the <a href="http://getbootstrap.com/css/#buttons-sizes">Bootstrap docs</a></p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="property_buttonType" class="property item public">
-                        <h3 class="name">buttonType
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l111"><code>addon&#x2F;components&#x2F;bs-button.js:111</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Set the type of the button, either 'button' or 'submit'</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;button&#x27;</p>
-                    
-                    
-                    </div>
                     <div id="property_childViews" class="property item private inherited">
                         <h3 class="name">childViews
                             <span class="small">Array</span>
@@ -4755,6 +4668,100 @@ manage its <code>textState</code> property automatically, changing its value acc
                         </div>
                     
                             <p><strong>Default:</strong> []</p>
+                    
+                    
+                    </div>
+                    <div id="property_choiceLabelProperty" class="property item public">
+                        <h3 class="name">choiceLabelProperty
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l196"><code>addon&#x2F;components&#x2F;bs-form-element.js:196</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The property of the <code>choices</code> array of objects, containing the label of the choice, e.g. the select box option.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_choices" class="property item public">
+                        <h3 class="name">choices
+                            <span class="small">array</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l171"><code>addon&#x2F;components&#x2F;bs-form-element.js:171</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>An array of objects containing the selection of choices for multiple choice style form controls, e.g. select
+                    boxes.</p>
+                    <pre class="code prettyprint"><code class="language-hbs">{{bs-form-element controlType=&quot;select&quot; choices=countries choiceLabelProperty=&quot;name&quot; choiceValueProperty=&quot;id&quot; label=&quot;Country&quot; value=selectedCountry}}
+                    </code></pre>
+                    <p>Be sure to also set the <code>choiceValueProperty</code> and <code>choiceLabelProperty</code> properties.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_choiceValueProperty" class="property item public">
+                        <h3 class="name">choiceValueProperty
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l187"><code>addon&#x2F;components&#x2F;bs-form-element.js:187</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The property of the <code>choices</code> array of objects, containing the value of the choice, e.g. the select box option.</p>
+                    
+                        </div>
+                    
                     
                     
                     </div>
@@ -4845,36 +4852,33 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                     </div>
-                    <div id="property_classTypePrefix" class="property item protected">
-                        <h3 class="name">classTypePrefix
-                            <span class="small">String</span>
+                    <div id="property_cols" class="property item public">
+                        <h3 class="name">cols
+                            <span class="small">integer</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-protected">protected</span>
+                            <span class="label label-public">public</span>
                     
                     
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="../classes/Mixins.TypeClass.html#property_classTypePrefix">
-                                    Mixins.TypeClass
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_components_bs-button.js.html#l82"><code>addon&#x2F;components&#x2F;bs-button.js:82</code></a>
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l215"><code>addon&#x2F;components&#x2F;bs-form-element.js:215</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
+                            <p>Textarea's cols attribute (ignored for other <code>controlType</code>s)</p>
+                    
                         </div>
                     
-                            <p><strong>Default:</strong> &#x27;btn&#x27;</p>
                     
                     
                     </div>
@@ -5018,8 +5022,8 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                     </div>
-                    <div id="property_defaultText" class="property item public">
-                        <h3 class="name">defaultText
+                    <div id="property_controlType" class="property item public">
+                        <h3 class="name">controlType
                             <span class="small">string</span>
                         </h3>
                     
@@ -5034,48 +5038,27 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l92"><code>addon&#x2F;components&#x2F;bs-button.js:92</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l105"><code>addon&#x2F;components&#x2F;bs-form-element.js:105</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Default label of the button. Not need if used as a block component</p>
+                            <p>The type of the control widget.
+                    Supported types:</p>
+                    <ul>
+                    <li>'text'</li>
+                    <li>'checkbox'</li>
+                    <li>'select'</li>
+                    <li>'select2' (needs <a href="https://github.com/iStefo/ember-select-2">ember-select-2</a>)</li>
+                    <li>'textarea'</li>
+                    <li>any other type will use an input tag with the <code>controlType</code> value as the type attribute (for e.g. HTML5 input
+                    types like 'email'), and the same layout as the 'text' type</li>
+                    </ul>
                     
                         </div>
                     
-                    
-                    
-                    </div>
-                    <div id="property_disabled" class="property item public">
-                        <h3 class="name">disabled
-                            <span class="small">boolaen</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l101"><code>addon&#x2F;components&#x2F;bs-button.js:101</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Property to disable the button</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
@@ -5108,9 +5091,48 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                     </div>
-                    <div id="property_icon" class="property item protected">
-                        <h3 class="name">icon
-                            <span class="small">String</span>
+                    <div id="property_errorIcon" class="property item public inherited">
+                        <h3 class="name">errorIcon
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_errorIcon">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l81"><code>addon&#x2F;components&#x2F;bs-form-group.js:81</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The icon classes to be used for a feedback icon in a &quot;error&quot; validation state.
+                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+                    rendered if <code>useIcons</code> is false.</p>
+                    <p>You can change this globally by setting the <code>formValidationErrorIcon</code> property of
+                    the ember-bootstrap configuration in your config/environment.js file. If your are
+                    using FontAwesome for example:</p>
+                    <pre class="code prettyprint"><code class="language-js">ENV['ember-bootstrap'] = {
+                      formValidationErrorIcon: 'fa fa-times'
+                    }
+                    </code></pre>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_errors" class="property item protected">
+                        <h3 class="name">errors
+                            <span class="small">array</span>
                         </h3>
                     
                     
@@ -5124,24 +5146,53 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l170"><code>addon&#x2F;components&#x2F;bs-button.js:170</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l262"><code>addon&#x2F;components&#x2F;bs-form-element.js:262</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Class(es) (e.g. glyphicons or font awesome) to use as a button icon
-                    This will render a &lt;i class=&quot;{{icon}}&quot;&gt;&lt;/i&gt; element in front of the button's label</p>
+                            <p>The array of error messages from the <code>model</code>'s validation.</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_iconActive" class="property item public">
-                        <h3 class="name">iconActive
-                            <span class="small">String</span>
+                    <div id="property_form" class="property item protected">
+                        <h3 class="name">form
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l421"><code>addon&#x2F;components&#x2F;bs-form-element.js:421</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Reference to the parent <code>Components.Form</code> class.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_formLayout" class="property item public">
+                        <h3 class="name">formLayout
+                            <span class="small">string</span>
                         </h3>
                     
                     
@@ -5155,23 +5206,237 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l152"><code>addon&#x2F;components&#x2F;bs-button.js:152</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l341"><code>addon&#x2F;components&#x2F;bs-form-element.js:341</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>If button is active and this is set, the icon property will match this property</p>
+                            <p>The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):</p>
+                    <ul>
+                    <li>'horizontal'</li>
+                    <li>'vertical'</li>
+                    <li>'inline'</li>
+                    </ul>
+                    <p>Defaults to the parent <code>form</code>'s <code>formLayout</code> property.</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_iconInactive" class="property item public">
-                        <h3 class="name">iconInactive
-                            <span class="small">String</span>
+                    <div id="property_hasErrors" class="property item protected">
+                        <h3 class="name">hasErrors
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l271"><code>addon&#x2F;components&#x2F;bs-form-element.js:271</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasFeedback" class="property item public inherited">
+                        <h3 class="name">hasFeedback
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_hasFeedback">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l49"><code>addon&#x2F;components&#x2F;bs-form-group.js:49</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Computed property which is true if the form group is showing a validation icon</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasLabel" class="property item protected">
+                        <h3 class="name">hasLabel
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l321"><code>addon&#x2F;components&#x2F;bs-form-element.js:321</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasValidation" class="property item public inherited">
+                        <h3 class="name">hasValidation
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_hasValidation">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l39"><code>addon&#x2F;components&#x2F;bs-form-group.js:39</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Computed property which is true if the form group is in a validation state</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasValidator" class="property item protected">
+                        <h3 class="name">hasValidator
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l279"><code>addon&#x2F;components&#x2F;bs-form-element.js:279</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_horizontalInputGridClass" class="property item protected">
+                        <h3 class="name">horizontalInputGridClass
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l391"><code>addon&#x2F;components&#x2F;bs-form-element.js:391</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_horizontalInputOffsetGridClass" class="property item protected">
+                        <h3 class="name">horizontalInputOffsetGridClass
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l406"><code>addon&#x2F;components&#x2F;bs-form-element.js:406</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout
+                    form, that have no label.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_horizontalLabelGridClass" class="property item public">
+                        <h3 class="name">horizontalLabelGridClass
+                            <span class="small">string</span>
                         </h3>
                     
                     
@@ -5185,14 +5450,61 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l161"><code>addon&#x2F;components&#x2F;bs-button.js:161</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l380"><code>addon&#x2F;components&#x2F;bs-form-element.js:380</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>If button is inactive and this is set, the icon property will match this property</p>
+                            <p>The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
+                    property of the parent form. The corresponding grid class for form controls is automatically computed.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;col-md-4&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_infoIcon" class="property item public inherited">
+                        <h3 class="name">infoIcon
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_infoIcon">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l123"><code>addon&#x2F;components&#x2F;bs-form-group.js:123</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The icon classes to be used for a feedback icon in a &quot;info&quot; validation state.
+                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+                    rendered if <code>useIcons</code> is false.</p>
+                    <p>You can change this globally by setting the <code>formValidationInfoIcon</code> property of
+                    the ember-bootstrap configuration in your config/environment.js file. If your are
+                    using FontAwesome for example:</p>
+                    <pre class="code prettyprint"><code class="language-js">ENV['ember-bootstrap'] = {
+                      formValidationInfoIcon: 'fa fa-info-circle
+                    }
+                    </code></pre>
+                    <p>The &quot;info&quot; validation state is not supported in Bootstrap CSS, but can be easily added
+                    using the following LESS style:</p>
+                    <pre class="code prettyprint"><code class="language-less">.has-info {
+                      .form-control-validation(@state-info-text; @state-info-text; @state-info-bg);
+                    }
+                    </code></pre>
                     
                         </div>
                     
@@ -5263,6 +5575,93 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                     </div>
+                    <div id="property_isHorizontal" class="property item protected">
+                        <h3 class="name">isHorizontal
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l364"><code>addon&#x2F;components&#x2F;bs-form-element.js:364</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_isInline" class="property item protected">
+                        <h3 class="name">isInline
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l372"><code>addon&#x2F;components&#x2F;bs-form-element.js:372</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_isVertical" class="property item protected">
+                        <h3 class="name">isVertical
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l356"><code>addon&#x2F;components&#x2F;bs-form-element.js:356</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="property_isVisible" class="property item inherited">
                         <h3 class="name">isVisible
                             <span class="small">Boolean</span>
@@ -5290,6 +5689,36 @@ manage its <code>textState</code> property automatically, changing its value acc
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_label" class="property item public">
+                        <h3 class="name">label
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l96"><code>addon&#x2F;components&#x2F;bs-form-element.js:96</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Text to display within a <code>&lt;label&gt;</code> tag.</p>
+                    
+                        </div>
+                    
                     
                     
                     </div>
@@ -5361,6 +5790,66 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                     </div>
+                    <div id="property_model" class="property item public">
+                        <h3 class="name">model
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l254"><code>addon&#x2F;components&#x2F;bs-form-element.js:254</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The model used for validation. Defaults to the parent <code>Components.Form</code>'s <code>model</code></p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_name" class="property item public">
+                        <h3 class="name">name
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l162"><code>addon&#x2F;components&#x2F;bs-form-element.js:162</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Control element's name attribute</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="property_parentView" class="property item inherited">
                         <h3 class="name">parentView
                             <span class="small">Ember.View</span>
@@ -5392,8 +5881,191 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                     </div>
-                    <div id="property_reset" class="property item public">
-                        <h3 class="name">reset
+                    <div id="property_placeholder" class="property item public">
+                        <h3 class="name">placeholder
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l153"><code>addon&#x2F;components&#x2F;bs-form-element.js:153</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Control element's HTML5 placeholder attribute</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_property" class="property item public">
+                        <h3 class="name">property
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l140"><code>addon&#x2F;components&#x2F;bs-form-element.js:140</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The property name of the form element's <code>model</code> (by default the <code>model</code> of its parent <code>Components.Form</code>) that this
+                    form element should represent. The control element's value will automatically be bound to the model property's
+                    value.</p>
+                    <p>Using this property enables form validation on this element.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_rows" class="property item public">
+                        <h3 class="name">rows
+                            <span class="small">integer</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l205"><code>addon&#x2F;components&#x2F;bs-form-element.js:205</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Textarea's rows attribute (ignored for other <code>controlType</code>s)</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 5</p>
+                    
+                    
+                    </div>
+                    <div id="property_selectLabelProperty" class="property item private">
+                        <h3 class="name">selectLabelProperty
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l239"><code>addon&#x2F;components&#x2F;bs-form-element.js:239</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p><code>choiceLabelProperty</code> prefixed with 'content.' for 'select' <code>controlType</code></p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_selectValueProperty" class="property item private">
+                        <h3 class="name">selectValueProperty
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l224"><code>addon&#x2F;components&#x2F;bs-form-element.js:224</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p><code>choiceValueProperty</code> prefixed with 'content.' for 'select' <code>controlType</code></p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_showErrors" class="property item protected">
+                        <h3 class="name">showErrors
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l297"><code>addon&#x2F;components&#x2F;bs-form-element.js:297</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_showValidation" class="property item public">
+                        <h3 class="name">showValidation
                             <span class="small">boolean</span>
                         </h3>
                     
@@ -5408,23 +6080,24 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l210"><code>addon&#x2F;components&#x2F;bs-button.js:210</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l287"><code>addon&#x2F;components&#x2F;bs-form-element.js:287</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.</p>
+                            <p>If <code>true</code> form validation markup is rendered (requires a validatable <code>model</code>).</p>
                     
                         </div>
                     
+                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
-                    <div id="property_size" class="property item public inherited">
-                        <h3 class="name">size
-                            <span class="small">String</span>
+                    <div id="property_successIcon" class="property item public inherited">
+                        <h3 class="name">successIcon
+                            <span class="small">string</span>
                         </h3>
                     
                     
@@ -5437,19 +6110,28 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                         <div class="meta">
                                     <p>Inherited from
-                                    <a href="../classes/Mixins.SizeClass.html#property_size">Mixins.SizeClass</a>:
-                            <a href="../files/addon_mixins_size-class.js.html#l27"><code>addon&#x2F;mixins&#x2F;size-class.js:27</code></a>
+                                    <a href="../classes/Components.FormGroup.html#property_successIcon">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l59"><code>addon&#x2F;components&#x2F;bs-form-group.js:59</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Property for size styling, set to 'lg', 'sm' or 'xs'</p>
-                    <p>Also see the <a href="http://getbootstrap.com/css/#buttons-sizes">Bootstrap docs</a></p>
+                            <p>The icon classes to be used for a feedback icon in a &quot;success&quot; validation state.
+                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+                    rendered if <code>useIcons</code> is false.</p>
+                    <p>You can change this globally by setting the <code>formValidationSuccessIcon</code> property of
+                    the ember-bootstrap configuration in your config/environment.js file. If your are
+                    using FontAwesome for example:</p>
+                    <pre class="code prettyprint"><code class="language-js">ENV['ember-bootstrap'] = {
+                      formValidationSuccessIcon: 'fa fa-check'
+                    }
+                    </code></pre>
                     
                         </div>
                     
+                            <p><strong>Default:</strong> &#x27;glyphicon glyphicon-ok&#x27;</p>
                     
                     
                     </div>
@@ -5593,41 +6275,8 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                     </div>
-                    <div id="property_textState" class="property item protected">
-                        <h3 class="name">textState
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l198"><code>addon&#x2F;components&#x2F;bs-button.js:198</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>State of the button. The button's label (if not used as a block component) will be set to the
-                    <code>&lt;state&gt;Text</code> property.
-                    This property will automatically be set when using a click action that supplies the callback with an promise</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;default&#x27;</p>
-                    
-                    
-                    </div>
-                    <div id="property_toggle" class="property item public">
-                        <h3 class="name">toggle
+                    <div id="property_useIcons" class="property item public">
+                        <h3 class="name">useIcons
                             <span class="small">boolean</span>
                         </h3>
                     
@@ -5640,26 +6289,97 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                     
                         <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l142"><code>addon&#x2F;components&#x2F;bs-button.js:142</code></a>
+                                <p>Inherited from
+                                <a href="../classes/Components.FormGroup.html#property_useIcons">
+                                    Components.FormGroup
+                                </a>
+                                but overwritten in
+                            <a href="../files/addon_components_bs-form-element.js.html#l329"><code>addon&#x2F;components&#x2F;bs-form-element.js:329</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>If toggle property is true, clicking the button will toggle the active state</p>
+                            <p>True for text field <code>controlType</code>s</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
-                    <div id="property_type" class="property item public inherited">
-                        <h3 class="name">type
-                            <span class="small">String</span>
+                    <div id="property_validation" class="property item protected">
+                        <h3 class="name">validation
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                <p>Inherited from
+                                <a href="../classes/Components.FormGroup.html#property_validation">
+                                    Components.FormGroup
+                                </a>
+                                but overwritten in
+                            <a href="../files/addon_components_bs-form-element.js.html#l305"><code>addon&#x2F;components&#x2F;bs-form-element.js:305</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The validation (&quot;error&quot; or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
+                    models validation state.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_value" class="property item public">
+                        <h3 class="name">value
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l123"><code>addon&#x2F;components&#x2F;bs-form-element.js:123</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The value of the control element is bound to this property. You can bind it to some controller property to
+                    get/set the control element's value:</p>
+                    <pre class="code prettyprint"><code class="language-hbs">{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+                    </code></pre>
+                    <p>Note: you loose the ability to validate this form element by directly binding to its value. It is recommended
+                    to use the <code>property</code> feature instead.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_warningIcon" class="property item public inherited">
+                        <h3 class="name">warningIcon
+                            <span class="small">string</span>
                         </h3>
                     
                     
@@ -5672,48 +6392,24 @@ manage its <code>textState</code> property automatically, changing its value acc
                     
                         <div class="meta">
                                     <p>Inherited from
-                                    <a href="../classes/Mixins.TypeClass.html#property_type">Mixins.TypeClass</a>:
-                            <a href="../files/addon_mixins_type-class.js.html#l27"><code>addon&#x2F;mixins&#x2F;type-class.js:27</code></a>
+                                    <a href="../classes/Components.FormGroup.html#property_warningIcon">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l102"><code>addon&#x2F;components&#x2F;bs-form-group.js:102</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Property for type styling</p>
-                    <p>For the available types see the <a href="http://getbootstrap.com/css/#buttons-options">Bootstrap docs</a> (use without &quot;btn-&quot; prefix)</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;default&#x27;</p>
-                    
-                    
-                    </div>
-                    <div id="property_value" class="property item public">
-                        <h3 class="name">value
-                            <span class="small">any</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l188"><code>addon&#x2F;components&#x2F;bs-button.js:188</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Supply a value that will be associated with this button. This will be send
-                    as a parameter of the default action triggered when clicking the button</p>
+                            <p>The icon classes to be used for a feedback icon in a &quot;warning&quot; validation state.
+                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+                    rendered if <code>useIcons</code> is false.</p>
+                    <p>You can change this globally by setting the <code>formValidationWarningIcon</code> property of
+                    the ember-bootstrap configuration in your config/environment.js file. If your are
+                    using FontAwesome for example:</p>
+                    <pre class="code prettyprint"><code class="language-js">ENV['ember-bootstrap'] = {
+                      formValidationWarningIcon: 'fa fa-warning'
+                    }
+                    </code></pre>
                     
                         </div>
                     
@@ -5747,6 +6443,32 @@ manage its <code>textState</code> property automatically, changing its value acc
                             <p>Called when the element of the view has been inserted into the DOM
                     or after the view was re-rendered. Override this function to do any
                     set up that requires an element in the document body.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_focusOut" class="events item">
+                        <h3 class="name"><code>focusOut</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l451"><code>addon&#x2F;components&#x2F;bs-form-element.js:451</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Listen for focusOut events from the control element to automatically set <code>showValidation</code> to true to enable
+                    form validation markup rendering.</p>
                     
                         </div>
                     

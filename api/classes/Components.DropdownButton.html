@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.0.9</span></h1>
+    <h1>API Docs <span class="small">0.1.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -416,7 +416,7 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_ariaRole" data-tablink="ariaRole">ariaRole</a>
 
                             </li>
-                            <li class="index-item property protected inherited inherited">
+                            <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_attributeBindings" data-tablink="attributeBindings">attributeBindings</a>
 
                             </li>
@@ -432,11 +432,11 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_childViews" data-tablink="childViews">childViews</a>
 
                             </li>
-                            <li class="index-item property protected inherited inherited">
+                            <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_classNameBindings" data-tablink="classNameBindings">classNameBindings</a>
 
                             </li>
-                            <li class="index-item property protected inherited inherited">
+                            <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_classNames" data-tablink="classNames">classNames</a>
 
                             </li>
@@ -1364,7 +1364,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#method_click">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l259"><code>addon&#x2F;components&#x2F;bs-button.js:259</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l239"><code>addon&#x2F;components&#x2F;bs-button.js:239</code></a>
                             </p>
                     
                     
@@ -3687,7 +3687,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#method_resetState">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l239"><code>addon&#x2F;components&#x2F;bs-button.js:239</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l219"><code>addon&#x2F;components&#x2F;bs-button.js:219</code></a>
                             </p>
                     
                     
@@ -4557,7 +4557,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#property_active">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l141"><code>addon&#x2F;components&#x2F;bs-button.js:141</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l121"><code>addon&#x2F;components&#x2F;bs-button.js:121</code></a>
                             </p>
                     
                     
@@ -4605,36 +4605,48 @@
                     
                     
                     </div>
-                    <div id="property_attributeBindings" class="property item protected inherited">
+                    <div id="property_attributeBindings" class="property item inherited">
                         <h3 class="name">attributeBindings
-                            <span class="small">array</span>
+                            <span class="small">unknown</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-protected">protected</span>
                     
                     
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="http://emberjs.com/api/classes/Ember.View.html#property_attributeBindings">
-                                    Ember.View
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_components_bs-button.js.html#l104"><code>addon&#x2F;components&#x2F;bs-button.js:104</code></a>
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.View.html#property_attributeBindings">Ember.View</a>:
+                            <a href="http://emberjs.com/api/files/.._packages_ember-views_lib_views_view.js.html#l1970"><code>..&#x2F;packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;view.js:1970</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
+                            <p>A list of properties of the view to apply as attributes. If the property is
+                    a string value, the value of that string will be applied as the attribute.</p>
+                    <pre class="code prettyprint"><code class="language-javascript">// Applies the type attribute to the element
+                    // with the value &quot;button&quot;, like &lt;div type=&quot;button&quot;&gt;
+                    Ember.View.extend({
+                      attributeBindings: ['type'],
+                      type: 'button'
+                    });
+                    </code></pre>
+                    <p>If the value of the property is a Boolean, the name of that property is
+                    added as an attribute.</p>
+                    <pre class="code prettyprint"><code class="language-javascript">// Renders something like &lt;div enabled=&quot;enabled&quot;&gt;
+                    Ember.View.extend({
+                      attributeBindings: ['enabled'],
+                      enabled: true
+                    });
+                    </code></pre>
+                    
                         </div>
                     
-                            <p><strong>Default:</strong> [&#x27;id&#x27;, &#x27;disabled&#x27;, &#x27;buttonType:type&#x27;]</p>
                     
                     
                     </div>
@@ -4654,7 +4666,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#property_block">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l151"><code>addon&#x2F;components&#x2F;bs-button.js:151</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l131"><code>addon&#x2F;components&#x2F;bs-button.js:131</code></a>
                             </p>
                     
                     
@@ -4686,7 +4698,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#property_buttonType">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l131"><code>addon&#x2F;components&#x2F;bs-button.js:131</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l111"><code>addon&#x2F;components&#x2F;bs-button.js:111</code></a>
                             </p>
                     
                     
@@ -4733,69 +4745,90 @@
                     
                     
                     </div>
-                    <div id="property_classNameBindings" class="property item protected inherited">
+                    <div id="property_classNameBindings" class="property item inherited">
                         <h3 class="name">classNameBindings
-                            <span class="small">array</span>
+                            <span class="small">Array</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-protected">protected</span>
                     
                     
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="http://emberjs.com/api/classes/Ember.View.html#property_classNameBindings">
-                                    Ember.View
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_components_bs-button.js.html#l88"><code>addon&#x2F;components&#x2F;bs-button.js:88</code></a>
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.View.html#property_classNameBindings">Ember.View</a>:
+                            <a href="http://emberjs.com/api/files/.._packages_ember-views_lib_views_view.js.html#l1927"><code>..&#x2F;packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;view.js:1927</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
+                            <p>A list of properties of the view to apply as class names. If the property
+                    is a string value, the value of that string will be applied as a class
+                    name.</p>
+                    <pre class="code prettyprint"><code class="language-javascript">// Applies the 'high' class to the view element
+                    Ember.View.extend({
+                      classNameBindings: ['priority']
+                      priority: 'high'
+                    });
+                    </code></pre>
+                    <p>If the value of the property is a Boolean, the name of that property is
+                    added as a dasherized class name.</p>
+                    <pre class="code prettyprint"><code class="language-javascript">// Applies the 'is-urgent' class to the view element
+                    Ember.View.extend({
+                      classNameBindings: ['isUrgent']
+                      isUrgent: true
+                    });
+                    </code></pre>
+                    <p>If you would prefer to use a custom value instead of the dasherized
+                    property name, you can pass a binding like this:</p>
+                    <pre class="code prettyprint"><code class="language-javascript">// Applies the 'urgent' class to the view element
+                    Ember.View.extend({
+                      classNameBindings: ['isUrgent:urgent']
+                      isUrgent: true
+                    });
+                    </code></pre>
+                    <p>This list of properties is inherited from the view's superclasses as well.</p>
+                    
                         </div>
                     
-                            <p><strong>Default:</strong> [&#x27;active&#x27;, &#x27;block:btn-block&#x27;]</p>
+                            <p><strong>Default:</strong> []</p>
                     
                     
                     </div>
-                    <div id="property_classNames" class="property item protected inherited">
+                    <div id="property_classNames" class="property item inherited">
                         <h3 class="name">classNames
-                            <span class="small">array</span>
+                            <span class="small">Array</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-protected">protected</span>
                     
                     
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="http://emberjs.com/api/classes/Ember.View.html#property_classNames">
-                                    Ember.View
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_components_bs-button.js.html#l80"><code>addon&#x2F;components&#x2F;bs-button.js:80</code></a>
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.View.html#property_classNames">Ember.View</a>:
+                            <a href="http://emberjs.com/api/files/.._packages_ember-views_lib_views_view.js.html#l1916"><code>..&#x2F;packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;view.js:1916</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
+                            <p>Standard CSS class names to apply to the view's outer element. This
+                    property automatically inherits any class names defined by the view's
+                    superclasses as well.</p>
+                    
                         </div>
                     
-                            <p><strong>Default:</strong> [&#x27;btn&#x27;]</p>
+                            <p><strong>Default:</strong> [&#x27;ember-view&#x27;]</p>
                     
                     
                     </div>
@@ -4818,7 +4851,7 @@
                                     Mixins.TypeClass
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-button.js.html#l96"><code>addon&#x2F;components&#x2F;bs-button.js:96</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l82"><code>addon&#x2F;components&#x2F;bs-button.js:82</code></a>
                             </p>
                     
                     
@@ -4988,7 +5021,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#property_defaultText">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l112"><code>addon&#x2F;components&#x2F;bs-button.js:112</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l92"><code>addon&#x2F;components&#x2F;bs-button.js:92</code></a>
                             </p>
                     
                     
@@ -5018,7 +5051,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#property_disabled">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l121"><code>addon&#x2F;components&#x2F;bs-button.js:121</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l101"><code>addon&#x2F;components&#x2F;bs-button.js:101</code></a>
                             </p>
                     
                     
@@ -5078,7 +5111,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#property_icon">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l190"><code>addon&#x2F;components&#x2F;bs-button.js:190</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l170"><code>addon&#x2F;components&#x2F;bs-button.js:170</code></a>
                             </p>
                     
                     
@@ -5109,7 +5142,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#property_iconActive">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l172"><code>addon&#x2F;components&#x2F;bs-button.js:172</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l152"><code>addon&#x2F;components&#x2F;bs-button.js:152</code></a>
                             </p>
                     
                     
@@ -5139,7 +5172,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#property_iconInactive">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l181"><code>addon&#x2F;components&#x2F;bs-button.js:181</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l161"><code>addon&#x2F;components&#x2F;bs-button.js:161</code></a>
                             </p>
                     
                     
@@ -5362,7 +5395,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#property_reset">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l230"><code>addon&#x2F;components&#x2F;bs-button.js:230</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l210"><code>addon&#x2F;components&#x2F;bs-button.js:210</code></a>
                             </p>
                     
                     
@@ -5563,7 +5596,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#property_textState">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l218"><code>addon&#x2F;components&#x2F;bs-button.js:218</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l198"><code>addon&#x2F;components&#x2F;bs-button.js:198</code></a>
                             </p>
                     
                     
@@ -5596,7 +5629,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#property_toggle">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l162"><code>addon&#x2F;components&#x2F;bs-button.js:162</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l142"><code>addon&#x2F;components&#x2F;bs-button.js:142</code></a>
                             </p>
                     
                     
@@ -5659,7 +5692,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.Button.html#property_value">Components.Button</a>:
-                            <a href="../files/addon_components_bs-button.js.html#l208"><code>addon&#x2F;components&#x2F;bs-button.js:208</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l188"><code>addon&#x2F;components&#x2F;bs-button.js:188</code></a>
                             </p>
                     
                     
@@ -5829,6 +5862,10 @@
                     <li><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li><a href="../classes/Components.Form.html">Components.Form</a></li>
+                    <li><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+                    <li><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+                    <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
                     <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>

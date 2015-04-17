@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/components/bs-form-group.js - ember-bootstrap</title>
+    <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
+    <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
+    <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-toggle-wrapper visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+        </div>
+        <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="navbar-nav nav">
+                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
+                <li><a href="/ember-bootstrap/components">Components</a></li>
+                <li><a href="/ember-bootstrap/api">API</a></li>
+
+            </ul>
+            <ul class="navbar-nav nav navbar-right">
+                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>API Docs <span class="small">0.1.0</span></h1>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>addon/components/bs-form-group.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import Config from &#x27;ember-bootstrap/config&#x27;;
+
+/**
+ This component renders a &#x60;&lt;div class=&quot;form-group&quot;&gt;&#x60; element, with support for validation states and feedback icons.
+ Use as a block level component:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-form-group validation=firstNameValidation}}
+    &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
+    {{bs-input type=&quot;text&quot; value=firstname}}
+ {{/bs-form-group}}
+ &#x60;&#x60;&#x60;
+
+ If the &#x60;validation&#x60; property is set to some state (usually Bootstrap&#x27;s predefined states &quot;success&quot;,
+ &quot;warning&quot; or &quot;error&quot;), the appropriate styles will be added, together with a feedback icon.
+ See http://getbootstrap.com/css/#forms-control-validation
+
+ @class FormGroup
+ @namespace Components
+ @extends Ember.Component
+*/
+export default Ember.Component.extend({
+
+    classNames: [&#x27;form-group&#x27;],
+    classNameBindings: [&#x27;validationClass&#x27;,&#x27;hasFeedback&#x27;],
+
+    /**
+     * Whether to show validation state icons.
+     * See http://getbootstrap.com/css/#forms-control-validation
+     *
+     * @property useIcons
+     * @type boolean
+     * @default true
+     * @public
+     */
+    useIcons: true,
+
+    /**
+     * Computed property which is true if the form group is in a validation state
+     *
+     * @property hasValidation
+     * @type boolean
+     * @public
+     * @readonly
+     */
+    hasValidation: Ember.computed.notEmpty(&#x27;validation&#x27;),
+
+    /**
+     * Computed property which is true if the form group is showing a validation icon
+     *
+     * @property hasFeedback
+     * @type boolean
+     * @public
+     * @readonly
+     */
+    hasFeedback: Ember.computed.and(&#x27;hasValidation&#x27;,&#x27;useIcons&#x27;,&#x27;iconName&#x27;),
+
+    /**
+     * The icon classes to be used for a feedback icon in a &quot;success&quot; validation state.
+     * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+     * rendered if &#x60;useIcons&#x60; is false.
+     *
+     * You can change this globally by setting the &#x60;formValidationSuccessIcon&#x60; property of
+     * the ember-bootstrap configuration in your config/environment.js file. If your are
+     * using FontAwesome for example:
+     *
+     * &#x60;&#x60;&#x60;js
+     * ENV[&#x27;ember-bootstrap&#x27;] = {
+     *   formValidationSuccessIcon: &#x27;fa fa-check&#x27;
+     * }
+     * &#x60;&#x60;&#x60;
+     *
+     * @property successIcon
+     * @type string
+     * @default &#x27;glyphicon glyphicon-ok&#x27;
+     * @public
+     */
+    successIcon: Config.formValidationSuccessIcon,
+
+    /**
+     * The icon classes to be used for a feedback icon in a &quot;error&quot; validation state.
+     * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+     * rendered if &#x60;useIcons&#x60; is false.
+     *
+     * You can change this globally by setting the &#x60;formValidationErrorIcon&#x60; property of
+     * the ember-bootstrap configuration in your config/environment.js file. If your are
+     * using FontAwesome for example:
+     *
+     * &#x60;&#x60;&#x60;js
+     * ENV[&#x27;ember-bootstrap&#x27;] = {
+     *   formValidationErrorIcon: &#x27;fa fa-times&#x27;
+     * }
+     * &#x60;&#x60;&#x60;
+     *
+     * @property errorIcon
+     * @type string
+     * @public
+     */
+    errorIcon: Config.formValidationErrorIcon,
+
+    /**
+     * The icon classes to be used for a feedback icon in a &quot;warning&quot; validation state.
+     * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+     * rendered if &#x60;useIcons&#x60; is false.
+     *
+     * You can change this globally by setting the &#x60;formValidationWarningIcon&#x60; property of
+     * the ember-bootstrap configuration in your config/environment.js file. If your are
+     * using FontAwesome for example:
+     *
+     * &#x60;&#x60;&#x60;js
+     * ENV[&#x27;ember-bootstrap&#x27;] = {
+     *   formValidationWarningIcon: &#x27;fa fa-warning&#x27;
+     * }
+     * &#x60;&#x60;&#x60;
+     *
+     * @property warningIcon
+     * @type string
+     * @public
+     */
+    warningIcon: Config.formValidationWarningIcon,
+
+    /**
+     * The icon classes to be used for a feedback icon in a &quot;info&quot; validation state.
+     * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+     * rendered if &#x60;useIcons&#x60; is false.
+     *
+     * You can change this globally by setting the &#x60;formValidationInfoIcon&#x60; property of
+     * the ember-bootstrap configuration in your config/environment.js file. If your are
+     * using FontAwesome for example:
+     *
+     * &#x60;&#x60;&#x60;js
+     * ENV[&#x27;ember-bootstrap&#x27;] = {
+     *   formValidationInfoIcon: &#x27;fa fa-info-circle
+     * }
+     * &#x60;&#x60;&#x60;
+     *
+     * The &quot;info&quot; validation state is not supported in Bootstrap CSS, but can be easily added
+     * using the following LESS style:
+     * &#x60;&#x60;&#x60;less
+     * .has-info {
+     *   .form-control-validation(@state-info-text; @state-info-text; @state-info-bg);
+     * }
+     * &#x60;&#x60;&#x60;
+     *
+     * @property infoIcon
+     * @type string
+     * @public
+     */
+    infoIcon: Config.formValidationInfoIcon,
+
+    iconName: Ember.computed(&#x27;validation&#x27;, function() {
+        var validation = this.get(&#x27;validation&#x27;) || &#x27;success&#x27;;
+        return this.get(validation + &#x27;Icon&#x27;);
+    }),
+
+    /**
+     * Set to a validation stat to render the form-group with a validation style.
+     * See http://getbootstrap.com/css/#forms-control-validation
+     *
+     * The default states of &quot;success&quot;, &quot;warning&quot; and &quot;error&quot; are supported by Bootstrap out-of-the-box.
+     * But you can use custom states as well. This will set a has-&lt;state&gt; class, and (if &#x60;useIcons&#x60;is true)
+     * a feedback whose class is taken from the &lt;state&gt;Icon property
+     *
+     * @property validation
+     * @type string
+     * @public
+     */
+    validation: null,
+
+    validationClass: Ember.computed(&#x27;validation&#x27;, function() {
+        var validation = this.get(&#x27;validation&#x27;);
+        if (!Ember.isBlank(validation)) {
+            return &#x27;has-&#x27; + this.get(&#x27;validation&#x27;);
+        }
+    })
+});
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3>Classes</h3>
+            
+            <ul id="api-classes" class="nav nav-pills nav-stacked">
+                    <li><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li><a href="../classes/Components.Form.html">Components.Form</a></li>
+                    <li><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+                    <li><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+                    <li><a href="../classes/Components.Input.html">Components.Input</a></li>
+                    <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+            </ul>        </div>
+    </div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

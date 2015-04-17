@@ -8,6 +8,10 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.DropdownButton",
         "Components.DropdownMenu",
         "Components.DropdownToggle",
+        "Components.Form",
+        "Components.FormElement",
+        "Components.FormGroup",
+        "Components.Input",
         "Mixins.DropdownToggle",
         "Mixins.SizeClass",
         "Mixins.TypeClass"
