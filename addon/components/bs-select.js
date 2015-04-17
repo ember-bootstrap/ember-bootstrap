@@ -3,7 +3,7 @@ import Ember from 'ember';
 /**
  Extends Ember.Select to add Bootstrap's 'form-control' class.
 
- @class Input
+ @class Select
  @namespace Components
  @extends Ember.Select
  */
