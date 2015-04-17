@@ -126,7 +126,9 @@
         "addon/components/bs-input.js": {
             "name": "addon/components/bs-input.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "Components.Input": 1
+            },
             "fors": {},
             "namespaces": {
                 "Components": 1
@@ -135,7 +137,9 @@
         "addon/components/bs-select.js": {
             "name": "addon/components/bs-select.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "Components.Select": 1
+            },
             "fors": {},
             "namespaces": {
                 "Components": 1
@@ -145,7 +149,7 @@
             "name": "addon/components/bs-textarea.js",
             "modules": {},
             "classes": {
-                "Components.Input": 1
+                "Components.Textarea": 1
             },
             "fors": {},
             "namespaces": {
@@ -353,10 +357,38 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": "Components",
+            "file": "addon/components/bs-input.js",
+            "line": 3,
+            "description": "Extends Ember.TextField to add Bootstrap's 'form-control' class.",
+            "extends": "Ember.TextField"
+        },
+        "Components.Select": {
+            "name": "Components.Select",
+            "shortname": "Components.Select",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-select.js",
+            "line": 3,
+            "description": "Extends Ember.Select to add Bootstrap's 'form-control' class.",
+            "extends": "Ember.Select"
+        },
+        "Components.Textarea": {
+            "name": "Components.Textarea",
+            "shortname": "Components.Textarea",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
             "file": "addon/components/bs-textarea.js",
             "line": 3,
             "description": "Extends Ember.TextArea to add Bootstrap's 'form-control' class.",
-            "extends": "Ember.TextField"
+            "extends": "Ember.TextArea"
         },
         "Mixins.DropdownToggle": {
             "name": "Mixins.DropdownToggle",

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.Alert - ember-bootstrap</title>
+    <title>Components.Textarea - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,23 +49,17 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.Alert <small>Class</small></h1>
+    <h1>Components.Textarea <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
-        <div class="uses">
-            Uses
-            <ul class="inline commas">
-                    <li><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
-            </ul>
-        </div>
 
         <div class="extends">
-            Extends <a href="http://emberjs.com/api/classes/Ember.Component.html" class="crosslink external" target="_blank">Ember.Component</a>
+            Extends <a href="http://emberjs.com/api/classes/Ember.TextArea.html" class="crosslink external" target="_blank">Ember.TextArea</a>
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-alert.js.html#l5"><code>addon&#x2F;components&#x2F;bs-alert.js:5</code></a>
+            Defined in: <a href="../files/addon_components_bs-textarea.js.html#l3"><code>addon&#x2F;components&#x2F;bs-textarea.js:3</code></a>
         </div>
 
 
@@ -73,13 +67,7 @@
 
 
 <div class="well well-small">
-    <p>Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts</p>
-<p>By default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
-<code>type</code> property for proper styling.</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-alert type=&quot;success&quot;}}
-   &lt;strong&gt;Well done!&lt;/strong&gt; You successfully read this important alert message.
-{{/bs-alert}}
-</code></pre>
+    <p>Extends Ember.TextArea to add Bootstrap's 'form-control' class.</p>
 
 </div>
 
@@ -190,6 +178,10 @@
 
                             </li>
                             <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_cancel" data-tablink="cancel">cancel</a>
+
+                            </li>
+                            <li class="index-item method inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_createChildView" data-tablink="createChildView">createChildView</a>
 
                             </li>
@@ -222,6 +214,14 @@
 
                             </li>
                             <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_focusIn" data-tablink="focusIn">focusIn</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_focusOut" data-tablink="focusOut">focusOut</a>
+
+                            </li>
+                            <li class="index-item method inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_get" data-tablink="get">get</a>
 
                             </li>
@@ -245,10 +245,6 @@
                                 <a href="#" data-tabid="#methods" data-anchor="#method_hasObserverFor" data-tablink="hasObserverFor">hasObserverFor</a>
 
                             </li>
-                            <li class="index-item method public">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_hide" data-tablink="hide">hide</a>
-
-                            </li>
                             <li class="index-item method inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_incrementProperty" data-tablink="incrementProperty">incrementProperty</a>
 
@@ -257,8 +253,16 @@
                                 <a href="#" data-tabid="#methods" data-anchor="#method_init" data-tablink="init">init</a>
 
                             </li>
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_insertNewline" data-tablink="insertNewline">insertNewline</a>
+
+                            </li>
                             <li class="index-item method private inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_invokeRecursively" data-tablink="invokeRecursively">invokeRecursively</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_keyPress" data-tablink="keyPress">keyPress</a>
 
                             </li>
                             <li class="index-item method inherited">
@@ -370,10 +374,6 @@
                                 <a href="#" data-tabid="#methods" data-anchor="#method_setUnknownProperty" data-tablink="setUnknownProperty">setUnknownProperty</a>
 
                             </li>
-                            <li class="index-item method public">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_show" data-tablink="show">show</a>
-
-                            </li>
                             <li class="index-item method inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_toggleProperty" data-tablink="toggleProperty">toggleProperty</a>
 
@@ -406,11 +406,11 @@
 
                             </li>
                             <li class="index-item property inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_actions" data-tablink="actions">actions</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_action" data-tablink="action">action</a>
 
                             </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_alert" data-tablink="alert">alert</a>
+                            <li class="index-item property inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_actions" data-tablink="actions">actions</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -419,6 +419,10 @@
                             </li>
                             <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_attributeBindings" data-tablink="attributeBindings">attributeBindings</a>
+
+                            </li>
+                            <li class="index-item property inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_bubbles" data-tablink="bubbles">bubbles</a>
 
                             </li>
                             <li class="index-item property private inherited">
@@ -433,10 +437,6 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_classNames" data-tablink="classNames">classNames</a>
 
                             </li>
-                            <li class="index-item property protected inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix" data-tablink="classTypePrefix">classTypePrefix</a>
-
-                            </li>
                             <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_concatenatedProperties" data-tablink="concatenatedProperties">concatenatedProperties</a>
 
@@ -449,24 +449,8 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_controller" data-tablink="controller">controller</a>
 
                             </li>
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_dismissed" data-tablink="dismissed">dismissed</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_dismissible" data-tablink="dismissible">dismissible</a>
-
-                            </li>
                             <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_element" data-tablink="element">element</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_fadeDuration" data-tablink="fadeDuration">fadeDuration</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -490,6 +474,10 @@
 
                             </li>
                             <li class="index-item property inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_onEvent" data-tablink="onEvent">onEvent</a>
+
+                            </li>
+                            <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_parentView" data-tablink="parentView">parentView</a>
 
                             </li>
@@ -510,14 +498,6 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_templateName" data-tablink="templateName">templateName</a>
 
                                     <span class="label label-deprecated">deprecated</span>
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_type" data-tablink="type">type</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_visible" data-tablink="visible">visible</a>
-
                             </li>
                     </ul>
                 </div>
@@ -596,7 +576,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>a jQuery-compatible selector string</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;a jQuery-compatible selector string&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -609,7 +589,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">JQuery</span>:
-                                        <p>the jQuery object for the DOM node</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;the jQuery object for the DOM node&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -861,7 +841,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>the function that inserts the element into the DOM</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;the function that inserts the element into the DOM&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1065,7 +1045,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The key to observer</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The key to observer&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1076,7 +1056,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The target object to invoke</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The target object to invoke&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1087,7 +1067,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The method to invoke.</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The method to invoke.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1100,7 +1080,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.Object.html" class="crosslink external" target="_blank">Ember.Object</a></span>:
-                                        <p>self</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;self&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1147,7 +1127,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1200,7 +1180,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>selector, element, HTML string, or jQuery object</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;selector, element, HTML string, or jQuery object&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1213,7 +1193,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1315,10 +1295,58 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>The cached value of the computed property, if any</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The cached value of the computed property, if any&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
+                    
+                    </div>
+                    <div id="method_cancel" class="method item inherited">
+                        <h3 class="name">cancel
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.TextSupport.html#method_cancel">Ember.TextSupport</a>:
+                            <a href="http://emberjs.com/api/files/.._packages_ember-handlebars_lib_controls_text_support.js.html#l109"><code>..&#x2F;packages&#x2F;ember-handlebars&#x2F;lib&#x2F;controls&#x2F;text_support.js:109</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Called when the user hits escape.</p>
+                    <p>Called by the <code>Ember.TextSupport</code> mixin on keyUp if keycode matches 27.
+                    Uses sendAction to send the <code>escape-press</code> action to the controller.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">event</code>
+                                            <span class="type">Event</span>
+                    
+                    
+                                        <div class="param-description">
+                                            
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
                     
                     </div>
                     <div id="method_createChildView" class="method item inherited">
@@ -1373,7 +1401,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>Attributes to add</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Attributes to add&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1386,7 +1414,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>new instance</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;new instance&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1428,7 +1456,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1474,7 +1502,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the property to decrement</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the property to decrement&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1485,7 +1513,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The amount to decrement by. Defaults to 1</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The amount to decrement by. Defaults to 1&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1498,7 +1526,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Number</span>:
-                                        <p>The new property value</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The new property value&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1582,7 +1610,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1729,7 +1757,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The parent's DOM element</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The parent's DOM element&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1742,10 +1770,102 @@
                     
                                 <div class="returns-description">
                                             <span class="type">DOMElement</span>:
-                                        <p>The discovered element</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The discovered element&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
+                    
+                    </div>
+                    <div id="method_focusIn" class="method item inherited">
+                        <h3 class="name">focusIn
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.TextSupport.html#method_focusIn">Ember.TextSupport</a>:
+                            <a href="http://emberjs.com/api/files/.._packages_ember-handlebars_lib_controls_text_support.js.html#l122"><code>..&#x2F;packages&#x2F;ember-handlebars&#x2F;lib&#x2F;controls&#x2F;text_support.js:122</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Called when the text area is focused.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">event</code>
+                                            <span class="type">Event</span>
+                    
+                    
+                                        <div class="param-description">
+                                            
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="method_focusOut" class="method item inherited">
+                        <h3 class="name">focusOut
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.TextSupport.html#method_focusOut">Ember.TextSupport</a>:
+                            <a href="http://emberjs.com/api/files/.._packages_ember-handlebars_lib_controls_text_support.js.html#l132"><code>..&#x2F;packages&#x2F;ember-handlebars&#x2F;lib&#x2F;controls&#x2F;text_support.js:132</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Called when the text area is blurred.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">event</code>
+                                            <span class="type">Event</span>
+                    
+                    
+                                        <div class="param-description">
+                                            
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
                     
                     </div>
                     <div id="method_get" class="method item inherited">
@@ -1807,7 +1927,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The property to retrieve</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property to retrieve&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1820,7 +1940,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>The property value or undefined.</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property value or undefined.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -1869,7 +1989,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>of keys to get</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;of keys to get&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1926,7 +2046,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the property to retrieve</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the property to retrieve&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1937,7 +2057,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The value to return if the property value is undefined</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The value to return if the property value is undefined&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -1950,7 +2070,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>The property value or the defaultValue.</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property value or the defaultValue.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2050,7 +2170,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the event</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the event&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2063,7 +2183,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Boolean</span>:
-                                        <p>does the object have a subscription for event</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;does the object have a subscription for event&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2109,7 +2229,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>Key to check</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Key to check&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2124,38 +2244,6 @@
                                             <span class="type">Boolean</span>:
                                 </div>
                             </div>
-                    
-                    </div>
-                    <div id="method_hide" class="method item public">
-                        <h3 class="name">hide
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l125"><code>addon&#x2F;components&#x2F;bs-alert.js:125</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Call to hide the alert. If the <code>fade</code> property is true, this will fade out the alert before being finally
-                    dismissed.</p>
-                    
-                        </div>
-                    
-                    
                     
                     </div>
                     <div id="method_incrementProperty" class="method item inherited">
@@ -2198,7 +2286,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the property to increment</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the property to increment&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2209,7 +2297,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The amount to increment by. Defaults to 1</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The amount to increment by. Defaults to 1&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2222,7 +2310,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Number</span>:
-                                        <p>The new property value</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The new property value&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2264,6 +2352,54 @@
                     
                         </div>
                     
+                    
+                    
+                    </div>
+                    <div id="method_insertNewline" class="method item inherited">
+                        <h3 class="name">insertNewline
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.TextSupport.html#method_insertNewline">Ember.TextSupport</a>:
+                            <a href="http://emberjs.com/api/files/.._packages_ember-handlebars_lib_controls_text_support.js.html#l95"><code>..&#x2F;packages&#x2F;ember-handlebars&#x2F;lib&#x2F;controls&#x2F;text_support.js:95</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent when the user inserts a new line.</p>
+                    <p>Called by the <code>Ember.TextSupport</code> mixin on keyUp if keycode matches 13.
+                    Uses sendAction to send the <code>enter</code> action to the controller.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">event</code>
+                                            <span class="type">Event</span>
+                    
+                    
+                                        <div class="param-description">
+                                            
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
                     
                     
                     </div>
@@ -2315,8 +2451,56 @@
                     
                     
                                         <div class="param-description">
-                                            <p>Includes itself if true.</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Includes itself if true.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="method_keyPress" class="method item inherited">
+                        <h3 class="name">keyPress
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.TextSupport.html#method_keyPress">Ember.TextSupport</a>:
+                            <a href="http://emberjs.com/api/files/.._packages_ember-handlebars_lib_controls_text_support.js.html#l142"><code>..&#x2F;packages&#x2F;ember-handlebars&#x2F;lib&#x2F;controls&#x2F;text_support.js:142</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent when the user presses a key. Enabled by setting
+                    the <code>onEvent</code> property to <code>keyPress</code>.</p>
+                    <p>Uses sendAction to send the <code>keyPress</code> action to the controller.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">event</code>
+                                            <span class="type">Event</span>
+                    
+                    
+                                        <div class="param-description">
+                                            
                                         </div>
                     
                                     </li>
@@ -2376,7 +2560,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>property name</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;property name&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2424,7 +2608,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>Subclass of Ember.View (or Ember.View itself)</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Subclass of Ember.View (or Ember.View itself)&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2436,7 +2620,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>Ember.View</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Ember.View&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2481,7 +2665,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>Subclass of Ember.View (or Ember.View itself)</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Subclass of Ember.View (or Ember.View itself)&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2493,7 +2677,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>Ember.View</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Ember.View&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2537,8 +2721,8 @@
                     
                     
                                         <div class="param-description">
-                                            <p>Subclass of Ember.View (or Ember.View itself),
-                    or an instance of Ember.Mixin.</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Subclass of Ember.View (or Ember.View itself),
+                    or an instance of Ember.Mixin.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2550,7 +2734,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>Ember.View</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Ember.View&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2593,7 +2777,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>A property name</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;A property name&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2605,7 +2789,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>Ember.View</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;Ember.View&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2649,7 +2833,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The property key to be notified about.</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property key to be notified about.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2703,7 +2887,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the event</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the event&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2714,7 +2898,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The target of the subscription</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The target of the subscription&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2725,7 +2909,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The function of the subscription</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The function of the subscription&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2737,7 +2921,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>this</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;this&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2788,7 +2972,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the event</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the event&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2800,7 +2984,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The &quot;this&quot; binding for the callback</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The &quot;this&quot; binding for the callback&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2811,7 +2995,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The callback to execute</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The callback to execute&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2823,7 +3007,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>this</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;this&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2871,7 +3055,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the event</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the event&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2883,7 +3067,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The &quot;this&quot; binding for the callback</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The &quot;this&quot; binding for the callback&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2894,7 +3078,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The callback to execute</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The callback to execute&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -2906,7 +3090,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>this</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;this&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -2958,7 +3142,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The property key that has just changed.</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property key that has just changed.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3021,7 +3205,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The property key that is about to change.</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property key that is about to change.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3071,7 +3255,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3110,7 +3294,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3165,7 +3349,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3205,7 +3389,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3250,7 +3434,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The key to observer</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The key to observer&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3261,7 +3445,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The target object to invoke</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The target object to invoke&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3272,7 +3456,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The method to invoke.</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The method to invoke.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3285,7 +3469,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.Observable.html" class="crosslink external" target="_blank">Ember.Observable</a></span>:
-                                        <p>receiver</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;receiver&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3333,7 +3517,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The render buffer</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The render buffer&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3388,9 +3572,9 @@
                     
                     
                                         <div class="param-description">
-                                            <p>the render buffer. If no buffer is
-                    passed, a default buffer, using the current view's <code>tagName</code>, will
-                    be used.</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;the render buffer. If no buffer is
+                    passed, a default buffer, using the current view's &lt;code&gt;tagName&lt;/code&gt;, will
+                    be used.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3566,7 +3750,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>A selector, element, HTML string, or jQuery object</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;A selector, element, HTML string, or jQuery object&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3579,7 +3763,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>received</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;received&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -3679,7 +3863,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The action to trigger</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The action to trigger&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3690,7 +3874,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>a context to send with the action</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;a context to send with the action&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3793,7 +3977,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>the action to trigger</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;the action to trigger&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3805,7 +3989,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>a context to send with the action</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;a context to send with the action&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3881,7 +4065,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The property to set</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The property to set&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3892,7 +4076,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The value to set or <code>null</code>.</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The value to set or &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -3950,7 +4134,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>the hash of keys and values to set</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;the hash of keys and values to set&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -4026,37 +4210,6 @@
                     
                     
                     </div>
-                    <div id="method_show" class="method item public">
-                        <h3 class="name">show
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l112"><code>addon&#x2F;components&#x2F;bs-alert.js:112</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Call to make the alert visible again after it has been hidden</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="method_toggleProperty" class="method item inherited">
                         <h3 class="name">toggleProperty
                         <span class="small">Object</span>
@@ -4097,7 +4250,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the property to toggle</p>
+                                            <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The name of the property to toggle&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                         </div>
                     
@@ -4110,7 +4263,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>The new property value</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;The new property value&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -4171,7 +4324,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>:
-                                        <p>string representation</p>
+                                        <p>&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;&lt;p&gt;string representation&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;</p>
                     
                                 </div>
                             </div>
@@ -4337,6 +4490,39 @@
                     
                     
                     </div>
+                    <div id="property_action" class="property item inherited">
+                        <h3 class="name">action
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.TextSupport.html#property_action">Ember.TextSupport</a>:
+                            <a href="http://emberjs.com/api/files/.._packages_ember-handlebars_lib_controls_text_support.js.html#l39"><code>..&#x2F;packages&#x2F;ember-handlebars&#x2F;lib&#x2F;controls&#x2F;text_support.js:39</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent when the user presses the return key.</p>
+                    <p>This is similar to the <code>{{action}}</code> helper, but is fired when
+                    the user presses the return key when editing a text field, and sends
+                    the value of the field as the context.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
                     <div id="property_actions" class="property item inherited">
                         <h3 class="name">actions
                             <span class="small">Hash</span>
@@ -4463,37 +4649,6 @@
                     
                     
                     </div>
-                    <div id="property_alert" class="property item private">
-                        <h3 class="name">alert
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l68"><code>addon&#x2F;components&#x2F;bs-alert.js:68</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Computed property to set the alert class to the component div. Will be false when dismissed to have the component
-                    div (which cannot be removed form DOM by the component itself) without any markup.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_ariaRole" class="property item inherited">
                         <h3 class="name">ariaRole
                             <span class="small">String</span>
@@ -4571,6 +4726,42 @@
                     
                         </div>
                     
+                    
+                    
+                    </div>
+                    <div id="property_bubbles" class="property item inherited">
+                        <h3 class="name">bubbles
+                            <span class="small">Boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.TextSupport.html#property_bubbles">Ember.TextSupport</a>:
+                            <a href="http://emberjs.com/api/files/.._packages_ember-handlebars_lib_controls_text_support.js.html#l66"><code>..&#x2F;packages&#x2F;ember-handlebars&#x2F;lib&#x2F;controls&#x2F;text_support.js:66</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Whether they <code>keyUp</code> event that triggers an <code>action</code> to be sent continues
+                    propagating to other views.</p>
+                    <p>By default, when the user presses the return key on their keyboard and
+                    the text field has an <code>action</code> set, the action will be sent to the view's
+                    controller and the key event will stop propagating.</p>
+                    <p>If you would like parent views to receive the <code>keyUp</code> event even after an
+                    action has been dispatched, set <code>bubbles</code> to true.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
@@ -4690,39 +4881,6 @@
                         </div>
                     
                             <p><strong>Default:</strong> [&#x27;ember-view&#x27;]</p>
-                    
-                    
-                    </div>
-                    <div id="property_classTypePrefix" class="property item protected">
-                        <h3 class="name">classTypePrefix
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                <p>Inherited from
-                                <a href="../classes/Mixins.TypeClass.html#property_classTypePrefix">
-                                    Mixins.TypeClass
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_components_bs-alert.js.html#l79"><code>addon&#x2F;components&#x2F;bs-alert.js:79</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;alert&#x27;</p>
                     
                     
                     </div>
@@ -4866,69 +5024,6 @@
                     
                     
                     </div>
-                    <div id="property_dismissed" class="property item protected">
-                        <h3 class="name">dismissed
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l36"><code>addon&#x2F;components&#x2F;bs-alert.js:36</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>If true the alert is completely hidden. Will be set when the fade animation has finished.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="property_dismissible" class="property item public">
-                        <h3 class="name">dismissible
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l25"><code>addon&#x2F;components&#x2F;bs-alert.js:25</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
-                    the alert.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
                     <div id="property_element" class="property item inherited">
                         <h3 class="name">element
                             <span class="small">DOMElement</span>
@@ -4955,68 +5050,6 @@
                     
                         </div>
                     
-                    
-                    
-                    </div>
-                    <div id="property_fade" class="property item public">
-                        <h3 class="name">fade
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l58"><code>addon&#x2F;components&#x2F;bs-alert.js:58</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Set to false to disable the fade out animation when hiding the alert.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_fadeDuration" class="property item public">
-                        <h3 class="name">fadeDuration
-                            <span class="small">integer</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l87"><code>addon&#x2F;components&#x2F;bs-alert.js:87</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The duration of the fade out animation</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> 150</p>
                     
                     
                     </div>
@@ -5179,6 +5212,41 @@
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_onEvent" class="property item inherited">
+                        <h3 class="name">onEvent
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.TextSupport.html#property_onEvent">Ember.TextSupport</a>:
+                            <a href="http://emberjs.com/api/files/.._packages_ember-handlebars_lib_controls_text_support.js.html#l52"><code>..&#x2F;packages&#x2F;ember-handlebars&#x2F;lib&#x2F;controls&#x2F;text_support.js:52</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The event that should send the action.</p>
+                    <p>Options are:</p>
+                    <ul>
+                    <li><code>enter</code>: the user pressed enter</li>
+                    <li><code>keyPress</code>: the user pressed a key</li>
+                    </ul>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> enter</p>
                     
                     
                     </div>
@@ -5350,70 +5418,6 @@
                     
                         </div>
                     
-                    
-                    
-                    </div>
-                    <div id="property_type" class="property item public inherited">
-                        <h3 class="name">type
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.TypeClass.html#property_type">Mixins.TypeClass</a>:
-                            <a href="../files/addon_mixins_type-class.js.html#l27"><code>addon&#x2F;mixins&#x2F;type-class.js:27</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Property for type styling</p>
-                    <p>For the available types see the <a href="http://getbootstrap.com/css/#buttons-options">Bootstrap docs</a> (use without &quot;btn-&quot; prefix)</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;default&#x27;</p>
-                    
-                    
-                    </div>
-                    <div id="property_visible" class="property item public">
-                        <h3 class="name">visible
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l47"><code>addon&#x2F;components&#x2F;bs-alert.js:47</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>This property indicates if the alert is visible. If false it might still be in the DOM until the fade animation
-                    has completed. Can be set to change the visibility of the alert box.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
                     
                     
                     </div>
