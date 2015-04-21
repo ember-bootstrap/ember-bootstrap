@@ -54,7 +54,7 @@ export default Ember.Component.extend({
      * @public
      * @readonly
      */
-    hasFeedback: Ember.computed.and('hasValidation','useIcons','iconName'),
+    hasFeedback: Ember.computed.and('hasValidation','useIcons','hasIconForValidationState'),
 
     /**
      * The icon classes to be used for a feedback icon in a "success" validation state.
@@ -153,6 +153,8 @@ export default Ember.Component.extend({
         var validation = this.get('validation') || 'success';
         return this.get(validation + 'Icon');
     }),
+
+    hasIconForValidationState: Ember.computed.notEmpty('iconName'),
 
     /**
      * Set to a validation stat to render the form-group with a validation style.
