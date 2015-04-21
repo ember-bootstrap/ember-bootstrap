@@ -29,7 +29,7 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
     collapseHeight: null,
     collapseStyle: Ember.computed('collapseHeight', function(){
         var height = this.get('collapseHeight');
-        return height !== null ? 'height: %@px'.fmt(height) : null;
+        return height !== null ? Ember.String.htmlSafe('height: %@px'.fmt(height)) : null;
     }),
 
     selected: Ember.computed.alias('parentView.selected'),
