@@ -1,0 +1,6 @@
+{{#if hasLabel}}
+    <label class="control-label">{{label}}</label>
+{{/if}}
+{{bs-textarea value=value name=name placeholder=placeholder cols=cols rows=rows}}
+{{partial "components/form-element/feedback-icon"}}
+{{partial "components/form-element/errors"}}
