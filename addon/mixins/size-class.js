@@ -1,17 +1,28 @@
 import Ember from 'ember';
 
 /**
- * @class Bootstrap.SizeClass
+ * Mixin to set the appropriate class for components with different sizes.
+ *
+ *
+ * @class SizeClass
+ * @namespace Mixins
  */
 export default Ember.Mixin.create({
+    /**
+     * Prefix for the size class, e.g. "btn" for button size classes ("btn-lg", "btn-sm" etc.)
+     *
+     * @property classTypePrefix
+     * @type string
+     * @required
+     * @protected
+     */
     classTypePrefix: Ember.required(String),
     classNameBindings: ['sizeClass'],
-    sizeClass: (function() {
+    sizeClass: Ember.computed('size', function() {
         var prefix = this.get('classTypePrefix'),
             size = this.get('size');
         return Ember.isBlank(size) ? null : prefix + '-' + size;
-    }).property('size'),
-
+    }),
 
     /**
      * Property for size styling, set to 'lg', 'sm' or 'xs'
@@ -20,6 +31,7 @@ export default Ember.Mixin.create({
      *
      * @property size
      * @type String
+     * @public
      */
     size: null
 });

@@ -1,0 +1,14 @@
+{{#if hasLabel}}
+    <label {{bind-attr class=":control-label horizontalLabelGridClass"}}>{{label}}</label>
+    <div {{bind-attr class="horizontalInputGridClass"}}>
+        {{select-2 name=name content=choices optionValuePath=choiceValueProperty optionLabelPath=choiceLabelProperty value=value searchEnabled=false}}
+        {{partial "components/form-element/feedback-icon"}}
+        {{partial "components/form-element/errors"}}
+    </div>
+{{else}}
+    <div {{bind-attr class="horizontalInputGridClass horizontalInputOffsetGridClass"}}>
+        {{select-2 name=name content=choices optionValuePath=choiceValueProperty optionLabelPath=choiceLabelProperty value=value searchEnabled=false}}
+        {{partial "components/form-element/feedback-icon"}}
+        {{partial "components/form-element/errors"}}
+    </div>
+{{/if}}
