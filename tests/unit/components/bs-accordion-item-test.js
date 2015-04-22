@@ -41,3 +41,15 @@ test('selected accordion item has correct default markup', function(assert) {
     assert.equal(this.$().find('.panel-collapse').hasClass('collapse'), true, 'panel-collapse has collapse class');
     assert.equal(this.$().find('.panel-collapse').hasClass('in'), true, 'panel-collapse has in class');
 });
+
+
+test('accordion item  supports ember-i18n if present', function(assert) {
+    Ember.I18n.translations = {
+        i18nKey: 'translated'
+    };
+    var component = this.subject({
+        titleTranslation: 'i18nKey'
+    });
+
+    assert.equal(this.$().find('.panel-heading').text().trim(),'translated');
+});

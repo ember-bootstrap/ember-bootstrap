@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SubComponent from 'ember-bootstrap/mixins/sub-component';
+import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 
-export default Ember.Component.extend(TypeClass, SubComponent, {
+export default Ember.Component.extend(TypeClass, SubComponent, I18nSupport, {
     classNames: ['panel'],
 
     /**
