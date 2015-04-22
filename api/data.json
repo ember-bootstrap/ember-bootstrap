@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "0.1.0",
+        "version": "0.1.2",
         "external": {
             "data": [
                 {
@@ -167,6 +167,17 @@
                 "Mixins": 1
             }
         },
+        "addon/mixins/i18n-support.js": {
+            "name": "addon/mixins/i18n-support.js",
+            "modules": {},
+            "classes": {
+                "Mixins.I18nSupport": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Mixins": 1
+            }
+        },
         "addon/mixins/size-class.js": {
             "name": "addon/mixins/size-class.js",
             "modules": {},
@@ -236,12 +247,13 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-button.js",
-            "line": 5,
-            "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```handlebars\n{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\"}}\n   Download\n{{/bs-button}}\n```\n\n### Actions\n\nSet the action property of the component to send an action to your controller. The following parameters will be sent:\n* value: the button's value, see the `value` property\n* event: the browsers event object\n* callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling\n\n```handlebars\n{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" action=\"download\"}}\n   Download\n{{/bs-button}}\n```\n\n### States\n\nUse the `textState` property to change the label of the button. You can bind it to a controller property to set a \"loading\" state for example.\nThe label of the button will be taken from the `<state>Text` property.\n\n```handlebars\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" textState=buttonState defaultText=\"Download\" loadingText=\"Loading...\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  buttonState: \"default\"\n  actions: {\n    download: function() {\n      this.set(\"buttonState\", \"loading\");\n    }\n  }\n});\n```\n\n### Promise support for automatic state change\n\nWhen using the callback function of the click action to supply a Promise for any asynchronous operation the button will\nmanage its `textState` property automatically, changing its value according to the state of the promise:\n\"default\" > \"pending\" > \"resolved\"/\"rejected\"\n\n```handlebars\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" defaultText=\"Download\" pendingText=\"Loading...\" resolvedText=\"Completed!\" rejectedText=\"Oups!?\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  actions: {\n    download: function(actionParam, evt, cb) {\n      promise = new Ember.RSVP.Promise(...);\n      cb(promise);\n    }\n  }\n});\n```",
+            "line": 6,
+            "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```handlebars\n{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\"}}\n   Download\n{{/bs-button}}\n```\n\n### Actions\n\nSet the action property of the component to send an action to your controller. The following parameters will be sent:\n* value: the button's value, see the `value` property\n* event: the browsers event object\n* callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling\n\n```handlebars\n{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" action=\"download\"}}\n   Download\n{{/bs-button}}\n```\n\n### States\n\nUse the `textState` property to change the label of the button. You can bind it to a controller property to set a \"loading\" state for example.\nThe label of the button will be taken from the `<state>Text` property.\n\n```handlebars\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" textState=buttonState defaultText=\"Download\" loadingText=\"Loading...\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  buttonState: \"default\"\n  actions: {\n    download: function() {\n      this.set(\"buttonState\", \"loading\");\n    }\n  }\n});\n```\n\n### Promise support for automatic state change\n\nWhen using the callback function of the click action to supply a Promise for any asynchronous operation the button will\nmanage its `textState` property automatically, changing its value according to the state of the promise:\n\"default\" > \"pending\" > \"resolved\"/\"rejected\"\n\n```handlebars\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" defaultText=\"Download\" pendingText=\"Loading...\" resolvedText=\"Completed!\" rejectedText=\"Oups!?\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  actions: {\n    download: function(actionParam, evt, cb) {\n      promise = new Ember.RSVP.Promise(...);\n      cb(promise);\n    }\n  }\n});\n```\n\n### I18n support\n\nSupports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.\nSee {{#crossLink \"Mixins.I18nSupport\"}}{{/crossLink}}",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.TypeClass",
-                "Mixins.SizeClass"
+                "Mixins.SizeClass",
+                "Mixins.I18nSupport"
             ]
         },
         "Components.DropdownButton": {
@@ -316,9 +328,12 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-form-element.js",
-            "line": 13,
-            "description": "Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.\n\n### Form layout\n\nThe appropriate Bootstrap markup for the given `formLayout` and `controlType` is automatically generated to easily\ncreate forms without coding the default Bootstrap form markup by hand:\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" action=\"submit\"}}\n  {{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" value=email}}\n  {{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" value=password}}\n  {{bs-form-element controlType=\"checkbox\" label=\"Remember me\" value=rememberMe}}\n  {{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n{{/bs-form}}\n```\n\n### Form validation\n\nIn the following example the control elements of the three form elements value will be bound to the properties\n(given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\"}}\n  {{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" property=\"email\"}}\n  {{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" property=\"password\"}}\n  {{bs-form-element controlType=\"checkbox\" label=\"Remember me\" property=\"rememberMe\"}}\n  {{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n{{/bs-form}}\n```\n\nBy using this indirection in comparison to directly binding the `value` property, you get the benefit of automatic\nform validation, given that your `model` is implementing [ember-validations](https://github.com/dockyard/ember-validations).\n\nIn the example above the `model` was our controller itself, so the control elements were bound to the appropriate\nproperties of our controller. A controller implementing validations on those properties could look like this:\n\n```js\nimport Ember from 'ember';\nimport EmberValidations from 'ember-validations';\n\nexport default Ember.Controller.extend(EmberValidations.Mixin,{\n  email: null,\n  password: null,\n  rememberMe: false,\n  validations: {\n    email: {\n      presence: true,\n      format: {\n        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$/\n      }\n    },\n    password: {\n      presence: true,\n      length: { minimum: 6, maximum: 10}\n    },\n    comments: {\n      length: { minimum: 5, maximum: 20}\n    }\n  }\n});\n```\n\nIf the `showValidation` property is `true` (which is automatically the case if a `focusOut` event is captured from the\ncontrol element or the containing `Components.Form` was submitted with its `model` failing validation) and there are\nvalidation errors for the `model`'s `property`, the appropriate Bootstrap validation markup (see\nhttp://getbootstrap.com/css/#forms-control-validation) is applied:\n\n* `validation` is set to 'error', which will set the `has-error` CSS class\n* the `errorIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are displayed as Bootstrap `help-block`s\n\nAs soon as the validation is successful again...\n\n* `validation` is set to 'success', which will set the `has-success` CSS class\n* the `successIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are removed",
-            "extends": "Components.FormGroup"
+            "line": 14,
+            "description": "Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.\n\n### Form layout\n\nThe appropriate Bootstrap markup for the given `formLayout` and `controlType` is automatically generated to easily\ncreate forms without coding the default Bootstrap form markup by hand:\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" action=\"submit\"}}\n  {{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" value=email}}\n  {{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" value=password}}\n  {{bs-form-element controlType=\"checkbox\" label=\"Remember me\" value=rememberMe}}\n  {{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n{{/bs-form}}\n```\n\n### Form validation\n\nIn the following example the control elements of the three form elements value will be bound to the properties\n(given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\"}}\n  {{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" property=\"email\"}}\n  {{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" property=\"password\"}}\n  {{bs-form-element controlType=\"checkbox\" label=\"Remember me\" property=\"rememberMe\"}}\n  {{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n{{/bs-form}}\n```\n\nBy using this indirection in comparison to directly binding the `value` property, you get the benefit of automatic\nform validation, given that your `model` is implementing [ember-validations](https://github.com/dockyard/ember-validations).\n\nIn the example above the `model` was our controller itself, so the control elements were bound to the appropriate\nproperties of our controller. A controller implementing validations on those properties could look like this:\n\n```js\nimport Ember from 'ember';\nimport EmberValidations from 'ember-validations';\n\nexport default Ember.Controller.extend(EmberValidations.Mixin,{\n  email: null,\n  password: null,\n  rememberMe: false,\n  validations: {\n    email: {\n      presence: true,\n      format: {\n        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$/\n      }\n    },\n    password: {\n      presence: true,\n      length: { minimum: 6, maximum: 10}\n    },\n    comments: {\n      length: { minimum: 5, maximum: 20}\n    }\n  }\n});\n```\n\nIf the `showValidation` property is `true` (which is automatically the case if a `focusOut` event is captured from the\ncontrol element or the containing `Components.Form` was submitted with its `model` failing validation) and there are\nvalidation errors for the `model`'s `property`, the appropriate Bootstrap validation markup (see\nhttp://getbootstrap.com/css/#forms-control-validation) is applied:\n\n* `validation` is set to 'error', which will set the `has-error` CSS class\n* the `errorIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are displayed as Bootstrap `help-block`s\n\nAs soon as the validation is successful again...\n\n* `validation` is set to 'success', which will set the `has-success` CSS class\n* the `successIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are removed\n\n### I18n support\n\nSupports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.\nSee {{#crossLink \"Mixins.I18nSupport\"}}{{/crossLink}}",
+            "extends": "Components.FormGroup",
+            "uses": [
+                "Mixins.I18nSupport"
+            ]
         },
         "Components.FormGroup": {
             "name": "Components.FormGroup",
@@ -358,9 +373,12 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-input.js",
-            "line": 3,
-            "description": "Extends Ember.TextField to add Bootstrap's 'form-control' class.",
-            "extends": "Ember.TextField"
+            "line": 5,
+            "description": "Extends Ember.TextField to add Bootstrap's 'form-control' class.\n\n### I18n support\n\nSupports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.\nSee {{#crossLink \"Mixins.I18nSupport\"}}{{/crossLink}}",
+            "extends": "Ember.TextField",
+            "uses": [
+                "Mixins.I18nSupport"
+            ]
         },
         "Components.Select": {
             "name": "Components.Select",
@@ -372,9 +390,12 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-select.js",
-            "line": 3,
-            "description": "Extends Ember.Select to add Bootstrap's 'form-control' class.",
-            "extends": "Ember.Select"
+            "line": 5,
+            "description": "Extends Ember.Select to add Bootstrap's 'form-control' class.\n\n### I18n support\n\nSupports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.\nSee {{#crossLink \"Mixins.I18nSupport\"}}{{/crossLink}}",
+            "extends": "Ember.Select",
+            "uses": [
+                "Mixins.I18nSupport"
+            ]
         },
         "Components.Textarea": {
             "name": "Components.Textarea",
@@ -386,9 +407,12 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-textarea.js",
-            "line": 3,
-            "description": "Extends Ember.TextArea to add Bootstrap's 'form-control' class.",
-            "extends": "Ember.TextArea"
+            "line": 5,
+            "description": "Extends Ember.TextArea to add Bootstrap's 'form-control' class.\n\n### I18n support\n\nSupports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.\nSee {{#crossLink \"Mixins.I18nSupport\"}}{{/crossLink}}",
+            "extends": "Ember.TextArea",
+            "uses": [
+                "Mixins.I18nSupport"
+            ]
         },
         "Mixins.DropdownToggle": {
             "name": "Mixins.DropdownToggle",
@@ -405,6 +429,25 @@
             "file": "addon/mixins/dropdown-toggle.js",
             "line": 3,
             "description": "Mixin for components that act as dropdown toggles."
+        },
+        "Mixins.I18nSupport": {
+            "name": "Mixins.I18nSupport",
+            "shortname": "Mixins.I18nSupport",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "Components.Button",
+                "Components.FormElement",
+                "Components.Input",
+                "Components.Select",
+                "Components.Textarea"
+            ],
+            "namespace": "Mixins",
+            "file": "addon/mixins/i18n-support.js",
+            "line": 3,
+            "description": "Mixin for internationalization support.\n\nCurrently supported is only [ember-i18n](https://github.com/jamesarosen/ember-i18n):\nIf Ember.I18n is present, this mixin will simply export `Ember.I18n.TranslateableProperties`, maiking all\ncomponents that use this mixin inherit the translateable properties functionality of `Ember.I18n.TranslateableProperties`.\nSee https://github.com/jamesarosen/ember-i18n#translate-properties-on-any-object.\n\n```hbs\n{{bs-button defaultTextTranslation=\"label.translated\"}}\n```"
         },
         "Mixins.SizeClass": {
             "name": "Mixins.SizeClass",
@@ -676,7 +719,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 82,
+            "line": 90,
             "itemtype": "property",
             "name": "classTypePrefix",
             "type": "String",
@@ -688,7 +731,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 92,
+            "line": 100,
             "description": "Default label of the button. Not need if used as a block component",
             "itemtype": "property",
             "name": "defaultText",
@@ -700,7 +743,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 101,
+            "line": 109,
             "description": "Property to disable the button",
             "itemtype": "property",
             "name": "disabled",
@@ -713,7 +756,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 111,
+            "line": 119,
             "description": "Set the type of the button, either 'button' or 'submit'",
             "itemtype": "property",
             "name": "buttonType",
@@ -726,7 +769,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 121,
+            "line": 129,
             "description": "Set the 'active' class to apply active/pressed CSS styling",
             "itemtype": "property",
             "name": "active",
@@ -739,7 +782,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 131,
+            "line": 139,
             "description": "Property for block level buttons\n\nSee the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)",
             "itemtype": "property",
             "name": "block",
@@ -752,7 +795,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 142,
+            "line": 150,
             "description": "If toggle property is true, clicking the button will toggle the active state",
             "itemtype": "property",
             "name": "toggle",
@@ -765,7 +808,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 152,
+            "line": 160,
             "description": "If button is active and this is set, the icon property will match this property",
             "itemtype": "property",
             "name": "iconActive",
@@ -777,7 +820,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 161,
+            "line": 169,
             "description": "If button is inactive and this is set, the icon property will match this property",
             "itemtype": "property",
             "name": "iconInactive",
@@ -789,7 +832,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 170,
+            "line": 178,
             "description": "Class(es) (e.g. glyphicons or font awesome) to use as a button icon\nThis will render a <i class=\"{{icon}}\"></i> element in front of the button's label",
             "itemtype": "property",
             "name": "icon",
@@ -802,7 +845,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 188,
+            "line": 196,
             "description": "Supply a value that will be associated with this button. This will be send\nas a parameter of the default action triggered when clicking the button",
             "itemtype": "property",
             "name": "value",
@@ -814,7 +857,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 198,
+            "line": 206,
             "description": "State of the button. The button's label (if not used as a block component) will be set to the\n`<state>Text` property.\nThis property will automatically be set when using a click action that supplies the callback with an promise",
             "itemtype": "property",
             "name": "textState",
@@ -827,7 +870,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 210,
+            "line": 218,
             "description": "Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.",
             "itemtype": "property",
             "name": "reset",
@@ -839,7 +882,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 219,
+            "line": 227,
             "description": "This will reset the state property to 'default', and with that the button's label to defaultText",
             "itemtype": "method",
             "name": "resetState",
@@ -850,7 +893,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 239,
+            "line": 247,
             "description": "Click handler. This will send the default \"action\" action, with the following parameters:\n* value of the button (that is the value of the \"value\" property)\n* original event object of the click event\n* callback: call that with a promise object, and the buttons state will automatically set to \"pending\", \"resolved\" and/or \"rejected\"",
             "itemtype": "method",
             "name": "click",
@@ -1012,7 +1055,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 96,
+            "line": 104,
             "description": "Text to display within a `<label>` tag.",
             "itemtype": "property",
             "name": "label",
@@ -1024,7 +1067,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 105,
+            "line": 113,
             "description": "The type of the control widget.\nSupported types:\n\n* 'text'\n* 'checkbox'\n* 'select'\n* 'select2' (needs [ember-select-2](https://github.com/iStefo/ember-select-2))\n* 'textarea'\n* any other type will use an input tag with the `controlType` value as the type attribute (for e.g. HTML5 input\ntypes like 'email'), and the same layout as the 'text' type",
             "itemtype": "property",
             "name": "controlType",
@@ -1036,7 +1079,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 123,
+            "line": 131,
             "description": "The value of the control element is bound to this property. You can bind it to some controller property to\nget/set the control element's value:\n\n```hbs\n{{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" value=email}}\n```\n\nNote: you loose the ability to validate this form element by directly binding to its value. It is recommended\nto use the `property` feature instead.",
             "itemtype": "property",
             "name": "value",
@@ -1047,7 +1090,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 140,
+            "line": 148,
             "description": "The property name of the form element's `model` (by default the `model` of its parent `Components.Form`) that this\nform element should represent. The control element's value will automatically be bound to the model property's\nvalue.\n\nUsing this property enables form validation on this element.",
             "itemtype": "property",
             "name": "property",
@@ -1059,7 +1102,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 153,
+            "line": 161,
             "description": "Control element's HTML5 placeholder attribute",
             "itemtype": "property",
             "name": "placeholder",
@@ -1071,7 +1114,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 162,
+            "line": 170,
             "description": "Control element's name attribute",
             "itemtype": "property",
             "name": "name",
@@ -1083,7 +1126,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 171,
+            "line": 179,
             "description": "An array of objects containing the selection of choices for multiple choice style form controls, e.g. select\nboxes.\n\n```hbs\n{{bs-form-element controlType=\"select\" choices=countries choiceLabelProperty=\"name\" choiceValueProperty=\"id\" label=\"Country\" value=selectedCountry}}\n```\n\nBe sure to also set the `choiceValueProperty` and `choiceLabelProperty` properties.",
             "itemtype": "property",
             "name": "choices",
@@ -1095,7 +1138,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 187,
+            "line": 195,
             "description": "The property of the `choices` array of objects, containing the value of the choice, e.g. the select box option.",
             "itemtype": "property",
             "name": "choiceValueProperty",
@@ -1107,7 +1150,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 196,
+            "line": 204,
             "description": "The property of the `choices` array of objects, containing the label of the choice, e.g. the select box option.",
             "itemtype": "property",
             "name": "choiceLabelProperty",
@@ -1119,7 +1162,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 205,
+            "line": 213,
             "description": "Textarea's rows attribute (ignored for other `controlType`s)",
             "itemtype": "property",
             "name": "rows",
@@ -1132,7 +1175,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 215,
+            "line": 223,
             "description": "Textarea's cols attribute (ignored for other `controlType`s)",
             "itemtype": "property",
             "name": "cols",
@@ -1144,7 +1187,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 224,
+            "line": 232,
             "description": "`choiceValueProperty` prefixed with 'content.' for 'select' `controlType`",
             "itemtype": "property",
             "name": "selectValueProperty",
@@ -1157,7 +1200,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 239,
+            "line": 247,
             "description": "`choiceLabelProperty` prefixed with 'content.' for 'select' `controlType`",
             "itemtype": "property",
             "name": "selectLabelProperty",
@@ -1170,7 +1213,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 254,
+            "line": 262,
             "description": "The model used for validation. Defaults to the parent `Components.Form`'s `model`",
             "itemtype": "property",
             "name": "model",
@@ -1181,7 +1224,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 262,
+            "line": 270,
             "description": "The array of error messages from the `model`'s validation.",
             "itemtype": "property",
             "name": "errors",
@@ -1193,7 +1236,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 271,
+            "line": 279,
             "itemtype": "property",
             "name": "hasErrors",
             "type": "boolean",
@@ -1205,7 +1248,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 279,
+            "line": 287,
             "itemtype": "property",
             "name": "hasValidator",
             "type": "boolean",
@@ -1217,7 +1260,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 287,
+            "line": 295,
             "description": "If `true` form validation markup is rendered (requires a validatable `model`).",
             "itemtype": "property",
             "name": "showValidation",
@@ -1230,7 +1273,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 297,
+            "line": 305,
             "itemtype": "property",
             "name": "showErrors",
             "type": "boolean",
@@ -1242,7 +1285,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 305,
+            "line": 313,
             "description": "The validation (\"error\" or \"success\") or null if no validation is to be shown. Automatically computed from the\nmodels validation state.",
             "itemtype": "property",
             "name": "validation",
@@ -1255,7 +1298,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 321,
+            "line": 329,
             "itemtype": "property",
             "name": "hasLabel",
             "type": "boolean",
@@ -1267,7 +1310,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 329,
+            "line": 337,
             "description": "True for text field `controlType`s",
             "itemtype": "property",
             "name": "useIcons",
@@ -1280,7 +1323,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 341,
+            "line": 349,
             "description": "The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):\n\n* 'horizontal'\n* 'vertical'\n* 'inline'\n\nDefaults to the parent `form`'s `formLayout` property.",
             "itemtype": "property",
             "name": "formLayout",
@@ -1292,7 +1335,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 356,
+            "line": 364,
             "itemtype": "property",
             "name": "isVertical",
             "type": "boolean",
@@ -1304,7 +1347,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 364,
+            "line": 372,
             "itemtype": "property",
             "name": "isHorizontal",
             "type": "boolean",
@@ -1316,7 +1359,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 372,
+            "line": 380,
             "itemtype": "property",
             "name": "isInline",
             "type": "boolean",
@@ -1328,7 +1371,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 380,
+            "line": 388,
             "description": "The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same\nproperty of the parent form. The corresponding grid class for form controls is automatically computed.",
             "itemtype": "property",
             "name": "horizontalLabelGridClass",
@@ -1341,7 +1384,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 391,
+            "line": 399,
             "description": "Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.",
             "itemtype": "property",
             "name": "horizontalInputGridClass",
@@ -1354,7 +1397,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 406,
+            "line": 414,
             "description": "Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout\nform, that have no label.",
             "itemtype": "property",
             "name": "horizontalInputOffsetGridClass",
@@ -1367,7 +1410,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 421,
+            "line": 429,
             "description": "Reference to the parent `Components.Form` class.",
             "itemtype": "property",
             "name": "form",
@@ -1378,7 +1421,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 451,
+            "line": 459,
             "description": "Listen for focusOut events from the control element to automatically set `showValidation` to true to enable\nform validation markup rendering.",
             "itemtype": "event",
             "name": "focusOut",
@@ -1475,8 +1518,8 @@
         },
         {
             "file": "addon/components/bs-form-group.js",
-            "line": 157,
-            "description": "Set to a validation stat to render the form-group with a validation style.\nSee http://getbootstrap.com/css/#forms-control-validation\n\nThe default states of \"success\", \"warning\" and \"error\" are supported by Bootstrap out-of-the-box.\nBut you can use custom states as well. This will set a has-<state> class, and (if `useIcons`is true)\na feedback whose class is taken from the <state>Icon property",
+            "line": 159,
+            "description": "Set to a validation state to render the form-group with a validation style.\nSee http://getbootstrap.com/css/#forms-control-validation\n\nThe default states of \"success\", \"warning\" and \"error\" are supported by Bootstrap out-of-the-box.\nBut you can use custom states as well. This will set a has-<state> class, and (if `useIcons`is true)\na feedback whose class is taken from the <state>Icon property",
             "itemtype": "property",
             "name": "validation",
             "type": "string",

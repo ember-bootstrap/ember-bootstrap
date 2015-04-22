@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.0</span></h1>
+    <h1>API Docs <span class="small">0.1.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,6 +57,7 @@
 import Ember from &#x27;ember&#x27;;
 import FormGroup from &#x27;ember-bootstrap/components/bs-form-group&#x27;;
 import Form from &#x27;ember-bootstrap/components/bs-form&#x27;;
+import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
 
 
 var nonTextFieldControlTypes = [
@@ -144,11 +145,18 @@ var nonTextFieldControlTypes = [
  * the &#x60;successIcon&#x60; feedback icon is displayed if &#x60;controlType&#x60; is a text field
  * the validation messages are removed
 
+ ### I18n support
+
+ Supports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.
+ See {{#crossLink &quot;Mixins.I18nSupport&quot;}}{{/crossLink}}
+
+
  @class FormElement
  @namespace Components
  @extends Components.FormGroup
+ @uses Mixins.I18nSupport
  */
-export default FormGroup.extend({
+export default FormGroup.extend(I18nSupport, {
     /**
      * Text to display within a &#x60;&lt;label&gt;&#x60; tag.
      *
@@ -546,6 +554,7 @@ export default FormGroup.extend({
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
                     <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>

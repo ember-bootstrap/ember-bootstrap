@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.0</span></h1>
+    <h1>API Docs <span class="small">0.1.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -58,6 +58,7 @@
             <ul class="inline commas">
                     <li><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
                     <li><a href="Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li><a href="Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
             </ul>
         </div>
 
@@ -66,7 +67,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-button.js.html#l5"><code>addon&#x2F;components&#x2F;bs-button.js:5</code></a>
+            Defined in: <a href="../files/addon_components_bs-button.js.html#l6"><code>addon&#x2F;components&#x2F;bs-button.js:6</code></a>
         </div>
 
 
@@ -77,10 +78,7 @@
     <p>Implements a HTML button element, with support for all <a href="http://getbootstrap.com/css/#buttons">Bootstrap button CSS styles</a>
 as well as advanced functionality such as button states.</p>
 <h3>Basic Usage</h3>
-<pre class="code prettyprint"><code class="language-handlebars">{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
-   Download
-{{/bs-button}}
-</code></pre>
+<pre class="code prettyprint"><code class="language-handlebars"></code></pre>
 <h3>Actions</h3>
 <p>Set the action property of the component to send an action to your controller. The following parameters will be sent:</p>
 <ul>
@@ -88,20 +86,17 @@ as well as advanced functionality such as button states.</p>
 <li>event: the browsers event object</li>
 <li>callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling</li>
 </ul>
-<pre class="code prettyprint"><code class="language-handlebars">{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
-   Download
-{{/bs-button}}
-</code></pre>
+<pre class="code prettyprint"><code class="language-handlebars"></code></pre>
 <h3>States</h3>
-<p>Use the <code>textState</code> property to change the label of the button. You can bind it to a controller property to set a &quot;loading&quot; state for example.
+<p>Use the <code>textState</code> property to change the label of the button. You can bind it to a controller property to set a "loading" state for example.
 The label of the button will be taken from the <code>&lt;state&gt;Text</code> property.</p>
-<pre class="code prettyprint"><code class="language-handlebars">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
+<pre class="code prettyprint"><code class="language-handlebars">
 </code></pre>
 <pre class="code prettyprint"><code class="language-js">App.ApplicationController = Ember.Controller.extend({
-  buttonState: &quot;default&quot;
+  buttonState: "default"
   actions: {
     download: function() {
-      this.set(&quot;buttonState&quot;, &quot;loading&quot;);
+      this.set("buttonState", "loading");
     }
   }
 });
@@ -109,8 +104,8 @@ The label of the button will be taken from the <code>&lt;state&gt;Text</code> pr
 <h3>Promise support for automatic state change</h3>
 <p>When using the callback function of the click action to supply a Promise for any asynchronous operation the button will
 manage its <code>textState</code> property automatically, changing its value according to the state of the promise:
-&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;</p>
-<pre class="code prettyprint"><code class="language-handlebars">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=&quot;download&quot;}}
+"default" &gt; "pending" &gt; "resolved"/"rejected"</p>
+<pre class="code prettyprint"><code class="language-handlebars">
 </code></pre>
 <pre class="code prettyprint"><code class="language-js">App.ApplicationController = Ember.Controller.extend({
   actions: {
@@ -121,6 +116,9 @@ manage its <code>textState</code> property automatically, changing its value acc
   }
 });
 </code></pre>
+<h3>I18n support</h3>
+<p>Supports translateable properties if <a href="https://github.com/jamesarosen/ember-i18n">ember-i18n</a> is present.
+See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSupport</a></p>
 
 </div>
 
@@ -1406,7 +1404,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l239"><code>addon&#x2F;components&#x2F;bs-button.js:239</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l247"><code>addon&#x2F;components&#x2F;bs-button.js:247</code></a>
                             </p>
                     
                     
@@ -3729,7 +3727,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l219"><code>addon&#x2F;components&#x2F;bs-button.js:219</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l227"><code>addon&#x2F;components&#x2F;bs-button.js:227</code></a>
                             </p>
                     
                     
@@ -4568,7 +4566,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l121"><code>addon&#x2F;components&#x2F;bs-button.js:121</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l129"><code>addon&#x2F;components&#x2F;bs-button.js:129</code></a>
                             </p>
                     
                     
@@ -4679,7 +4677,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l131"><code>addon&#x2F;components&#x2F;bs-button.js:131</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l139"><code>addon&#x2F;components&#x2F;bs-button.js:139</code></a>
                             </p>
                     
                     
@@ -4711,7 +4709,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l111"><code>addon&#x2F;components&#x2F;bs-button.js:111</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l119"><code>addon&#x2F;components&#x2F;bs-button.js:119</code></a>
                             </p>
                     
                     
@@ -4864,7 +4862,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                                     Mixins.TypeClass
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-button.js.html#l82"><code>addon&#x2F;components&#x2F;bs-button.js:82</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l90"><code>addon&#x2F;components&#x2F;bs-button.js:90</code></a>
                             </p>
                     
                     
@@ -5034,7 +5032,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l92"><code>addon&#x2F;components&#x2F;bs-button.js:92</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l100"><code>addon&#x2F;components&#x2F;bs-button.js:100</code></a>
                             </p>
                     
                     
@@ -5064,7 +5062,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l101"><code>addon&#x2F;components&#x2F;bs-button.js:101</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l109"><code>addon&#x2F;components&#x2F;bs-button.js:109</code></a>
                             </p>
                     
                     
@@ -5124,7 +5122,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l170"><code>addon&#x2F;components&#x2F;bs-button.js:170</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l178"><code>addon&#x2F;components&#x2F;bs-button.js:178</code></a>
                             </p>
                     
                     
@@ -5155,7 +5153,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l152"><code>addon&#x2F;components&#x2F;bs-button.js:152</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l160"><code>addon&#x2F;components&#x2F;bs-button.js:160</code></a>
                             </p>
                     
                     
@@ -5185,7 +5183,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l161"><code>addon&#x2F;components&#x2F;bs-button.js:161</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l169"><code>addon&#x2F;components&#x2F;bs-button.js:169</code></a>
                             </p>
                     
                     
@@ -5408,7 +5406,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l210"><code>addon&#x2F;components&#x2F;bs-button.js:210</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l218"><code>addon&#x2F;components&#x2F;bs-button.js:218</code></a>
                             </p>
                     
                     
@@ -5609,7 +5607,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l198"><code>addon&#x2F;components&#x2F;bs-button.js:198</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l206"><code>addon&#x2F;components&#x2F;bs-button.js:206</code></a>
                             </p>
                     
                     
@@ -5642,7 +5640,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l142"><code>addon&#x2F;components&#x2F;bs-button.js:142</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l150"><code>addon&#x2F;components&#x2F;bs-button.js:150</code></a>
                             </p>
                     
                     
@@ -5705,7 +5703,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l188"><code>addon&#x2F;components&#x2F;bs-button.js:188</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l196"><code>addon&#x2F;components&#x2F;bs-button.js:196</code></a>
                             </p>
                     
                     
@@ -5882,6 +5880,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
                     <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>

@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.0</span></h1>
+    <h1>API Docs <span class="small">0.1.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,13 +53,19 @@
 </div>
 
 <div class="well well-small">
+        <div class="uses">
+            Uses
+            <ul class="inline commas">
+                    <li><a href="Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
+            </ul>
+        </div>
 
         <div class="extends">
             Extends <a href="../classes/Components.FormGroup.html" class="crosslink">Components.FormGroup</a>
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-form-element.js.html#l13"><code>addon&#x2F;components&#x2F;bs-form-element.js:13</code></a>
+            Defined in: <a href="../files/addon_components_bs-form-element.js.html#l14"><code>addon&#x2F;components&#x2F;bs-form-element.js:14</code></a>
         </div>
 
 
@@ -71,23 +77,11 @@
 <h3>Form layout</h3>
 <p>The appropriate Bootstrap markup for the given <code>formLayout</code> and <code>controlType</code> is automatically generated to easily
 create forms without coding the default Bootstrap form markup by hand:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; action=&quot;submit&quot;}}
-  {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
-  {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
-  {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
-  {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
-{{/bs-form}}
-</code></pre>
+<pre class="code prettyprint"><code class="language-hbs"></code></pre>
 <h3>Form validation</h3>
 <p>In the following example the control elements of the three form elements value will be bound to the properties
 (given by <code>property</code>) of the form's <code>model</code>, which in this case is its controller (see <code>model=this</code>):</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
-  {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
-  {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
-  {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
-  {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
-{{/bs-form}}
-</code></pre>
+<pre class="code prettyprint"><code class="language-hbs"></code></pre>
 <p>By using this indirection in comparison to directly binding the <code>value</code> property, you get the benefit of automatic
 form validation, given that your <code>model</code> is implementing <a href="https://github.com/dockyard/ember-validations">ember-validations</a>.</p>
 <p>In the example above the <code>model</code> was our controller itself, so the control elements were bound to the appropriate
@@ -131,6 +125,9 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
 <li>the <code>successIcon</code> feedback icon is displayed if <code>controlType</code> is a text field</li>
 <li>the validation messages are removed</li>
 </ul>
+<h3>I18n support</h3>
+<p>Supports translateable properties if <a href="https://github.com/jamesarosen/ember-i18n">ember-i18n</a> is present.
+See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSupport</a></p>
 
 </div>
 
@@ -4687,7 +4684,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l196"><code>addon&#x2F;components&#x2F;bs-form-element.js:196</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l204"><code>addon&#x2F;components&#x2F;bs-form-element.js:204</code></a>
                             </p>
                     
                     
@@ -4717,7 +4714,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l171"><code>addon&#x2F;components&#x2F;bs-form-element.js:171</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l179"><code>addon&#x2F;components&#x2F;bs-form-element.js:179</code></a>
                             </p>
                     
                     
@@ -4751,7 +4748,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l187"><code>addon&#x2F;components&#x2F;bs-form-element.js:187</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l195"><code>addon&#x2F;components&#x2F;bs-form-element.js:195</code></a>
                             </p>
                     
                     
@@ -4868,7 +4865,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l215"><code>addon&#x2F;components&#x2F;bs-form-element.js:215</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l223"><code>addon&#x2F;components&#x2F;bs-form-element.js:223</code></a>
                             </p>
                     
                     
@@ -5038,7 +5035,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l105"><code>addon&#x2F;components&#x2F;bs-form-element.js:105</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l113"><code>addon&#x2F;components&#x2F;bs-form-element.js:113</code></a>
                             </p>
                     
                     
@@ -5146,7 +5143,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l262"><code>addon&#x2F;components&#x2F;bs-form-element.js:262</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l270"><code>addon&#x2F;components&#x2F;bs-form-element.js:270</code></a>
                             </p>
                     
                     
@@ -5176,7 +5173,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l421"><code>addon&#x2F;components&#x2F;bs-form-element.js:421</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l429"><code>addon&#x2F;components&#x2F;bs-form-element.js:429</code></a>
                             </p>
                     
                     
@@ -5206,7 +5203,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l341"><code>addon&#x2F;components&#x2F;bs-form-element.js:341</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l349"><code>addon&#x2F;components&#x2F;bs-form-element.js:349</code></a>
                             </p>
                     
                     
@@ -5242,7 +5239,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l271"><code>addon&#x2F;components&#x2F;bs-form-element.js:271</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l279"><code>addon&#x2F;components&#x2F;bs-form-element.js:279</code></a>
                             </p>
                     
                     
@@ -5301,7 +5298,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l321"><code>addon&#x2F;components&#x2F;bs-form-element.js:321</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l329"><code>addon&#x2F;components&#x2F;bs-form-element.js:329</code></a>
                             </p>
                     
                     
@@ -5360,7 +5357,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l279"><code>addon&#x2F;components&#x2F;bs-form-element.js:279</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l287"><code>addon&#x2F;components&#x2F;bs-form-element.js:287</code></a>
                             </p>
                     
                     
@@ -5389,7 +5386,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l391"><code>addon&#x2F;components&#x2F;bs-form-element.js:391</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l399"><code>addon&#x2F;components&#x2F;bs-form-element.js:399</code></a>
                             </p>
                     
                     
@@ -5419,7 +5416,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l406"><code>addon&#x2F;components&#x2F;bs-form-element.js:406</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l414"><code>addon&#x2F;components&#x2F;bs-form-element.js:414</code></a>
                             </p>
                     
                     
@@ -5450,7 +5447,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l380"><code>addon&#x2F;components&#x2F;bs-form-element.js:380</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l388"><code>addon&#x2F;components&#x2F;bs-form-element.js:388</code></a>
                             </p>
                     
                     
@@ -5591,7 +5588,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l364"><code>addon&#x2F;components&#x2F;bs-form-element.js:364</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l372"><code>addon&#x2F;components&#x2F;bs-form-element.js:372</code></a>
                             </p>
                     
                     
@@ -5620,7 +5617,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l372"><code>addon&#x2F;components&#x2F;bs-form-element.js:372</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l380"><code>addon&#x2F;components&#x2F;bs-form-element.js:380</code></a>
                             </p>
                     
                     
@@ -5649,7 +5646,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l356"><code>addon&#x2F;components&#x2F;bs-form-element.js:356</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l364"><code>addon&#x2F;components&#x2F;bs-form-element.js:364</code></a>
                             </p>
                     
                     
@@ -5708,7 +5705,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l96"><code>addon&#x2F;components&#x2F;bs-form-element.js:96</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l104"><code>addon&#x2F;components&#x2F;bs-form-element.js:104</code></a>
                             </p>
                     
                     
@@ -5806,7 +5803,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l254"><code>addon&#x2F;components&#x2F;bs-form-element.js:254</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l262"><code>addon&#x2F;components&#x2F;bs-form-element.js:262</code></a>
                             </p>
                     
                     
@@ -5836,7 +5833,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l162"><code>addon&#x2F;components&#x2F;bs-form-element.js:162</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l170"><code>addon&#x2F;components&#x2F;bs-form-element.js:170</code></a>
                             </p>
                     
                     
@@ -5897,7 +5894,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l153"><code>addon&#x2F;components&#x2F;bs-form-element.js:153</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l161"><code>addon&#x2F;components&#x2F;bs-form-element.js:161</code></a>
                             </p>
                     
                     
@@ -5927,7 +5924,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l140"><code>addon&#x2F;components&#x2F;bs-form-element.js:140</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l148"><code>addon&#x2F;components&#x2F;bs-form-element.js:148</code></a>
                             </p>
                     
                     
@@ -5960,7 +5957,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l205"><code>addon&#x2F;components&#x2F;bs-form-element.js:205</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l213"><code>addon&#x2F;components&#x2F;bs-form-element.js:213</code></a>
                             </p>
                     
                     
@@ -5991,7 +5988,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l239"><code>addon&#x2F;components&#x2F;bs-form-element.js:239</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l247"><code>addon&#x2F;components&#x2F;bs-form-element.js:247</code></a>
                             </p>
                     
                     
@@ -6021,7 +6018,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l224"><code>addon&#x2F;components&#x2F;bs-form-element.js:224</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l232"><code>addon&#x2F;components&#x2F;bs-form-element.js:232</code></a>
                             </p>
                     
                     
@@ -6051,7 +6048,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l297"><code>addon&#x2F;components&#x2F;bs-form-element.js:297</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l305"><code>addon&#x2F;components&#x2F;bs-form-element.js:305</code></a>
                             </p>
                     
                     
@@ -6080,7 +6077,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l287"><code>addon&#x2F;components&#x2F;bs-form-element.js:287</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l295"><code>addon&#x2F;components&#x2F;bs-form-element.js:295</code></a>
                             </p>
                     
                     
@@ -6294,7 +6291,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                                     Components.FormGroup
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-form-element.js.html#l329"><code>addon&#x2F;components&#x2F;bs-form-element.js:329</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l337"><code>addon&#x2F;components&#x2F;bs-form-element.js:337</code></a>
                             </p>
                     
                     
@@ -6327,7 +6324,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                                     Components.FormGroup
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-form-element.js.html#l305"><code>addon&#x2F;components&#x2F;bs-form-element.js:305</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l313"><code>addon&#x2F;components&#x2F;bs-form-element.js:313</code></a>
                             </p>
                     
                     
@@ -6358,7 +6355,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l123"><code>addon&#x2F;components&#x2F;bs-form-element.js:123</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l131"><code>addon&#x2F;components&#x2F;bs-form-element.js:131</code></a>
                             </p>
                     
                     
@@ -6460,7 +6457,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l451"><code>addon&#x2F;components&#x2F;bs-form-element.js:451</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l459"><code>addon&#x2F;components&#x2F;bs-form-element.js:459</code></a>
                             </p>
                     
                     
@@ -6604,6 +6601,7 @@ http://getbootstrap.com/css/#forms-control-validation) is applied:</p>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
                     <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>

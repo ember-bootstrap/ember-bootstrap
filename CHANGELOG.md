@@ -1,3 +1,18 @@
+<a name"0.1.2"></a>
+### 0.1.2 (2015-04-22)
+
+#### Features
+
+* **I18n:** support for ember-i18n added: selected components support translateable properties
+
+<a name"0.1.1"></a>
+### 0.1.1 (2015-04-21)
+
+#### Bug Fixes
+
+* **FormGroup:** fixed wrong form group validation class in Ember 1.11 ([ff72909e](https://github.com/kaliber5/ember-bootstrap/commit/ff72909e))
+
+
 <a name"0.1.0"></a>
 ## 0.1.0 (2015-04-17)
 
