@@ -212,3 +212,14 @@ test('clicking a button sends default action with callback, if promise is return
     assert.equal(this.$().text(),'resolved');
 
 });
+
+test('button supports ember-i18n if present', function(assert) {
+    Ember.I18n.translations = {
+        i18nKey: 'translated'
+    };
+    var component = this.subject({
+        defaultTextTranslation: 'i18nKey'
+    });
+
+    assert.equal(this.$().text(),'translated');
+});

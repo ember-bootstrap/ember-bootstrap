@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import FormGroup from 'ember-bootstrap/components/bs-form-group';
 import Form from 'ember-bootstrap/components/bs-form';
+import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 
 
 var nonTextFieldControlTypes = [
@@ -88,11 +89,18 @@ var nonTextFieldControlTypes = [
  * the `successIcon` feedback icon is displayed if `controlType` is a text field
  * the validation messages are removed
 
+ ### I18n support
+
+ Supports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.
+ See {{#crossLink "Mixins.I18nSupport"}}{{/crossLink}}
+
+
  @class FormElement
  @namespace Components
  @extends Components.FormGroup
+ @uses Mixins.I18nSupport
  */
-export default FormGroup.extend({
+export default FormGroup.extend(I18nSupport, {
     /**
      * Text to display within a `<label>` tag.
      *

@@ -102,3 +102,14 @@ test('controlType "select" is supported', function(assert) {
     };
     controlTypeSupportTest.call(this, assert, 'select', 'select', ['m','f'], null, options);
 });
+
+
+test('button supports ember-i18n if present', function(assert) {
+    Ember.I18n.translations = {
+        i18nKey: 'translated'
+    };
+    var component = this.subject({
+        labelTranslation: 'i18nKey'
+    });
+    assert.equal(this.$().find('label').text().trim(), 'translated', 'label has translated text');
+});

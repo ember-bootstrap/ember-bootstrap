@@ -157,7 +157,7 @@ export default Ember.Component.extend({
     hasIconForValidationState: Ember.computed.notEmpty('iconName'),
 
     /**
-     * Set to a validation stat to render the form-group with a validation style.
+     * Set to a validation state to render the form-group with a validation style.
      * See http://getbootstrap.com/css/#forms-control-validation
      *
      * The default states of "success", "warning" and "error" are supported by Bootstrap out-of-the-box.
