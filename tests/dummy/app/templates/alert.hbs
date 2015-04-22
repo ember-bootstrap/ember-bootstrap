@@ -1,0 +1,21 @@
+<h1>Alerts</h1>
+
+<h2>Dismissible with animation</h2>
+
+{{#bs-alert type="success"}}<strong>Well done!</strong> You successfully read this important alert message.{{/bs-alert}}
+
+
+<h2>Dismissibe without animation</h2>
+
+{{#bs-alert type="info" fade=false}}<strong>Heads up!</strong> This alert needs your attention, but it's not super important.{{/bs-alert}}
+
+
+<h2>Not dismissible</h2>
+
+{{#bs-alert type="warning" dismissible=false}}<strong>Warning!</strong> Better check yourself, you're not looking too good.{{/bs-alert}}
+
+<h2>Bound visibility</h2>
+
+<label>{{input type="checkbox" checked=visible}} Show/Hide</label>
+{{#bs-alert type="danger" visible=visible}}<strong>Oh snap!</strong> Change a few things up and try submitting again.{{/bs-alert}}
+

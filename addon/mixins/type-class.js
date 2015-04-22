@@ -1,9 +1,20 @@
 import Ember from 'ember';
 
 /**
- * @class Bootstrap.TypeClass
+ * Mixin to set the appropriate class for components with differently styled types ("success", "danger" etc.)
+ *
+ * @class TypeClass
+ * @namespace Mixins
  */
 export default Ember.Mixin.create({
+    /**
+     * Prefix for the type class, e.g. "btn" for button type classes ("btn-primary2 etc.)
+     *
+     * @property classTypePrefix
+     * @type string
+     * @required
+     * @protected
+     */
     classTypePrefix: Ember.required(String),
     classNameBindings: ['typeClass'],
     typeClass: (function() {
@@ -21,6 +32,7 @@ export default Ember.Mixin.create({
      * @property type
      * @type String
      * @default 'default'
+     * @public
      */
     type: 'default'
 });
