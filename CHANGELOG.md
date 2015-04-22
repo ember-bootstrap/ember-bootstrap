@@ -1,6 +1,12 @@
+<a name"0.1.2"></a>
+### 0.1.2 (2015-04-22)
+
+#### Features
+
+* **I18n:** support for ember-i18n added: selected components support translateable properties
+
 <a name"0.1.1"></a>
 ### 0.1.1 (2015-04-21)
-
 
 #### Bug Fixes
 
