@@ -9,4 +9,4 @@ export default Ember.Controller.extend({
             this.send('openModal', 'modal.from-action');
         }
     }
-})
+});

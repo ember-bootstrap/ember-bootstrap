@@ -1,9 +1,7 @@
 import Ember from 'ember';
-import HeaderComponent from 'ember-bootstrap/components/bs-modal-header';
-import BodyComponent from 'ember-bootstrap/components/bs-modal-body';
-import FooterComponent from 'ember-bootstrap/components/bs-modal-footer';
+import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(I18nSupport, {
 
     classNames: ['modal'],
     classNameBindings: ['fade'],
