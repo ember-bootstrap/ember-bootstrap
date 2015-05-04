@@ -113,6 +113,17 @@ export default Ember.Component.extend({
      */
     horizontalLabelGridClass: 'col-md-4',
 
+
+    /**
+     * If set to true pressing enter will submit the form, even if no submit button is present
+     *
+     * @property submitOnEnter
+     * @type boolean
+     * @default false
+     * @public
+     */
+    submitOnEnter: false,
+
     /**
      * An array of `Components.FormElement`s that are children of this form.
      *
@@ -155,6 +166,13 @@ export default Ember.Component.extend({
                     that.get('childFormElements').setEach('showValidation', true);
                     return that.sendAction('invalid');
                 });
+        }
+    },
+
+    keyPress: function(e) {
+        var code = e.keyCode || e.which;
+        if(code === 13 && this.get('submitOnEnter')) {
+            this.$().submit();
         }
     }
 });

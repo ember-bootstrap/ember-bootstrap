@@ -142,3 +142,25 @@ test('Submitting the form with invalid validation calls invalid action', functio
 });
 
 */
+
+
+
+test('Pressing enter on a form with submitOnEnter submits the form', function(assert) {
+    var testController = Ember.Controller.extend({
+            actions: {
+                testAction: function() {
+                    assert.ok(true, 'Default action has been called.');
+                }
+            }
+        }).create(),
+        component = this.subject({
+            targetObject: testController,
+            action: 'testAction',
+            submitOnEnter: true
+        }),
+        e = Ember.$.Event("keypress");
+
+    assert.expect(1);
+    e.which = e.keyCode = 13;
+    this.$().trigger(e);
+});
