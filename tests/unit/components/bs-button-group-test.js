@@ -6,7 +6,8 @@ import {
 
 moduleForComponent('bs-button-group', {
   // specify the other units that are required for this test
-  needs: ['component:bs-button', 'template:components/bs-button']
+  needs: ['component:bs-button', 'template:components/bs-button'],
+  unit: true
 });
 
 test('it renders', function(assert) {
@@ -83,7 +84,7 @@ test('radio button group with value set activates button with same value', funct
             value: 1
         });
 
-    this.append();
+    this.render();
 
     assert.equal(component.get('value'), 1, 'value must match set value');
 
@@ -103,7 +104,7 @@ test('checkbox button group with value set activates buttons with same value', f
             value: value
         });
 
-    this.append();
+    this.render();
 
     assert.deepEqual(component.get('value'), value, 'value must match set value');
 
@@ -120,7 +121,7 @@ test('setting radio button group value activates button with same value', functi
             type: 'radio'
         });
 
-    this.append();
+    this.render();
 
     for (var i=0;i<3;i++) {
         /*jshint loopfunc: true */
@@ -145,7 +146,7 @@ test('setting checkbox button group value with array of values activates buttons
             type: 'checkbox'
         });
 
-    this.append();
+    this.render();
 
     var value = [1,3];
     Ember.run(function(){

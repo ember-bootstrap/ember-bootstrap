@@ -14,7 +14,8 @@ moduleForComponent('bs-form', 'BsFormComponent', {
 //        'template:components/bs-form-element',
 //        'component:bs-form-group',
 //        'template:components/bs-form-group'
-    ]
+    ],
+    unit: true
 });
 
 test('it renders', function(assert) {
@@ -25,7 +26,7 @@ test('it renders', function(assert) {
   assert.equal(component._state, 'preRender');
 
   // appends the component to the page
-  this.append();
+  this.render();
   assert.equal(component._state, 'inDOM');
 });
 

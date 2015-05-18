@@ -24,7 +24,8 @@ moduleForComponent('bs-form-element', 'BsFormElementComponent', {
         'component:bs-input',
         'component:bs-textarea',
         'component:bs-select'
-    ]
+    ],
+    unit: true
 });
 
 test('it renders', function(assert) {
@@ -35,7 +36,7 @@ test('it renders', function(assert) {
     assert.equal(component._state, 'preRender');
 
     // appends the component to the page
-    this.append();
+    this.render();
     assert.equal(component._state, 'inDOM');
 });
 
