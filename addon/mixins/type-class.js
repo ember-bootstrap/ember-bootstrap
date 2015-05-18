@@ -15,7 +15,7 @@ export default Ember.Mixin.create({
      * @required
      * @protected
      */
-    classTypePrefix: Ember.required(String),
+    classTypePrefix: null,
     classNameBindings: ['typeClass'],
     typeClass: (function() {
         var prefix = this.get('classTypePrefix'),
