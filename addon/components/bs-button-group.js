@@ -165,7 +165,7 @@ export default Ember.Component.extend(SizeClass, {
             return;
         }
         var value = this.get('value'),
-            values = !Ember.isArray(value) ? [value] : value;
+            values = Ember.A(!Ember.isArray(value) ? [value] : value);
         this.get('childButtons')
             .forEach(function(button) {
                 button.set('active', values.contains(button.get('value')));
@@ -192,7 +192,7 @@ export default Ember.Component.extend(SizeClass, {
     activeChildren: Ember.computed.filterBy('childButtons', 'active', true),
 
 
-    lastActiveChildren: [],
+    lastActiveChildren: Ember.A(),
     newActiveChildren: Ember.computed.setDiff('activeChildren','lastActiveChildren'),
     _observeButtons: Ember.observer('activeChildren.[]','type', function() {
         var type = this.get('type');
@@ -229,7 +229,7 @@ export default Ember.Component.extend(SizeClass, {
                 this.set('value', value);
             }
             // remember activeChildren, used as a replacement for a before observer as they will be deprecated in the future...
-            this.set('lastActiveChildren', this.get('activeChildren').slice());
+            this.set('lastActiveChildren', Ember.A(this.get('activeChildren').slice()));
         });
     }),
 

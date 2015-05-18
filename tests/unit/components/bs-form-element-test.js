@@ -62,6 +62,7 @@ function controlTypeSupportTest(assert, controlType, selector, values, getValueF
     if (!Ember.isArray(values)) {
         values = [values];
     }
+    values = Ember.A(values);
 
     assert.equal(control.length, 1, 'component has ' + controlType + ' control');
 
@@ -87,7 +88,7 @@ test('controlType "textarea" is supported', function(assert) {
 
 test('controlType "select" is supported', function(assert) {
     var options = {
-        choices: [
+        choices: Ember.A([
             {
                 id: 'f',
                 label: 'Female'
@@ -96,7 +97,7 @@ test('controlType "select" is supported', function(assert) {
                 id: 'm',
                 label: 'Male'
             }
-        ],
+        ]),
         choiceLabelProperty: 'label',
         choiceValueProperty: 'id'
     };
@@ -104,12 +105,12 @@ test('controlType "select" is supported', function(assert) {
 });
 
 
-test('button supports ember-i18n if present', function(assert) {
-    Ember.I18n.translations = {
-        i18nKey: 'translated'
-    };
-    var component = this.subject({
-        labelTranslation: 'i18nKey'
-    });
-    assert.equal(this.$().find('label').text().trim(), 'translated', 'label has translated text');
-});
+//test('button supports ember-i18n if present', function(assert) {
+//    Ember.I18n.translations = {
+//        i18nKey: 'translated'
+//    };
+//    var component = this.subject({
+//        labelTranslation: 'i18nKey'
+//    });
+//    assert.equal(this.$().find('label').text().trim(), 'translated', 'label has translated text');
+//});

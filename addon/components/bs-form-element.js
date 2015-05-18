@@ -4,12 +4,12 @@ import Form from 'ember-bootstrap/components/bs-form';
 import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 
 
-var nonTextFieldControlTypes = [
+var nonTextFieldControlTypes = Ember.A([
     'checkbox',
     'select',
     'select2',
     'textarea'
-];
+]);
 
 /**
  Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.
@@ -190,7 +190,7 @@ export default FormGroup.extend(I18nSupport, {
      * @type array
      * @public
      */
-    choices: [],
+    choices: Ember.A(),
 
     /**
      * The property of the `choices` array of objects, containing the value of the choice, e.g. the select box option.
