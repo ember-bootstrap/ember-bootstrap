@@ -20,12 +20,12 @@ var nonTextFieldControlTypes = Ember.A([
  create forms without coding the default Bootstrap form markup by hand:
 
  ```hbs
- {{#bs-form formLayout="horizontal" action="submit"}}
-   {{bs-form-element controlType="email" label="Email" placeholder="Email" value=email}}
-   {{bs-form-element controlType="password" label="Password" placeholder="Password" value=password}}
-   {{bs-form-element controlType="checkbox" label="Remember me" value=rememberMe}}
-   {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
- {{/bs-form}}
+ \{{#bs-form formLayout="horizontal" action="submit"}}
+   \{{bs-form-element controlType="email" label="Email" placeholder="Email" value=email}}
+   \{{bs-form-element controlType="password" label="Password" placeholder="Password" value=password}}
+   \{{bs-form-element controlType="checkbox" label="Remember me" value=rememberMe}}
+   \{{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+ \{{/bs-form}}
  ```
 
  ### Form validation
@@ -34,12 +34,12 @@ var nonTextFieldControlTypes = Ember.A([
  (given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):
 
  ```hbs
- {{#bs-form formLayout="horizontal" model=this action="submit"}}
-   {{bs-form-element controlType="email" label="Email" placeholder="Email" property="email"}}
-   {{bs-form-element controlType="password" label="Password" placeholder="Password" property="password"}}
-   {{bs-form-element controlType="checkbox" label="Remember me" property="rememberMe"}}
-   {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
- {{/bs-form}}
+ \{{#bs-form formLayout="horizontal" model=this action="submit"}}
+   \{{bs-form-element controlType="email" label="Email" placeholder="Email" property="email"}}
+   \{{bs-form-element controlType="password" label="Password" placeholder="Password" property="password"}}
+   \{{bs-form-element controlType="checkbox" label="Remember me" property="rememberMe"}}
+   \{{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+ \{{/bs-form}}
  ```
 
  By using this indirection in comparison to directly binding the `value` property, you get the benefit of automatic

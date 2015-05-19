@@ -9,10 +9,10 @@ import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 
  ### Basic Usage
 
- ```handlebars
- {{#bs-button type="primary" icon="glyphicon glyphicon-download"}}
-    Download
- {{/bs-button}}
+ ```hbs
+ \{{#bs-button type="primary" icon="glyphicon glyphicon-download"}}
+    Downloads
+ \{{/bs-button}}
  ```
 
  ### Actions
@@ -22,10 +22,10 @@ import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
  * event: the browsers event object
  * callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling
 
- ```handlebars
- {{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
+ ```hbs
+ \{{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
     Download
- {{/bs-button}}
+ \{{/bs-button}}
  ```
 
  ### States
@@ -33,8 +33,8 @@ import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
  Use the `textState` property to change the label of the button. You can bind it to a controller property to set a "loading" state for example.
  The label of the button will be taken from the `<state>Text` property.
 
- ```handlebars
- {{bs-button type="primary" icon="glyphicon glyphicon-download" textState=buttonState defaultText="Download" loadingText="Loading..." action="download"}}
+ ```hbs
+ \{{bs-button type="primary" icon="glyphicon glyphicon-download" textState=buttonState defaultText="Download" loadingText="Loading..." action="download"}}
  ```
 
  ```js
@@ -54,8 +54,8 @@ import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
  manage its `textState` property automatically, changing its value according to the state of the promise:
  "default" > "pending" > "resolved"/"rejected"
 
- ```handlebars
- {{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" action="download"}}
+ ```hbs
+ \{{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" action="download"}}
  ```
 
  ```js
