@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.2</span></h1>
+    <h1>API Docs <span class="small">0.1.2.e86630bc</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -65,10 +65,10 @@ import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
 
  ### Basic Usage
 
- &#x60;&#x60;&#x60;handlebars
- {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
-    Download
- {{/bs-button}}
+ &#x60;&#x60;&#x60;hbs
+ \{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
+    Downloads
+ \{{/bs-button}}
  &#x60;&#x60;&#x60;
 
  ### Actions
@@ -78,10 +78,10 @@ import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
  * event: the browsers event object
  * callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling
 
- &#x60;&#x60;&#x60;handlebars
- {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
+ &#x60;&#x60;&#x60;hbs
+ \{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
     Download
- {{/bs-button}}
+ \{{/bs-button}}
  &#x60;&#x60;&#x60;
 
  ### States
@@ -89,8 +89,8 @@ import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
  Use the &#x60;textState&#x60; property to change the label of the button. You can bind it to a controller property to set a &quot;loading&quot; state for example.
  The label of the button will be taken from the &#x60;&lt;state&gt;Text&#x60; property.
 
- &#x60;&#x60;&#x60;handlebars
- {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
+ &#x60;&#x60;&#x60;hbs
+ \{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
  &#x60;&#x60;&#x60;
 
  &#x60;&#x60;&#x60;js
@@ -110,8 +110,8 @@ import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
  manage its &#x60;textState&#x60; property automatically, changing its value according to the state of the promise:
  &quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;
 
- &#x60;&#x60;&#x60;handlebars
- {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=&quot;download&quot;}}
+ &#x60;&#x60;&#x60;hbs
+ \{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=&quot;download&quot;}}
  &#x60;&#x60;&#x60;
 
  &#x60;&#x60;&#x60;js

@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.2</span></h1>
+    <h1>API Docs <span class="small">0.1.2.e86630bc</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -71,13 +71,13 @@ export default Ember.Mixin.create({
      * @required
      * @protected
      */
-    classTypePrefix: Ember.required(String),
+    classTypePrefix: null,
     classNameBindings: [&#x27;typeClass&#x27;],
-    typeClass: (function() {
+    typeClass: Ember.computed(&#x27;type&#x27;, function() {
         var prefix = this.get(&#x27;classTypePrefix&#x27;),
             type = this.get(&#x27;type&#x27;) || &#x27;default&#x27;;
         return prefix + &#x27;-&#x27; + type;
-    }).property(&#x27;type&#x27;),
+    }),
 
 
     /**

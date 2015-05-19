@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.2</span></h1>
+    <h1>API Docs <span class="small">0.1.2.e86630bc</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -60,12 +60,12 @@ import Form from &#x27;ember-bootstrap/components/bs-form&#x27;;
 import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
 
 
-var nonTextFieldControlTypes = [
+var nonTextFieldControlTypes = Ember.A([
     &#x27;checkbox&#x27;,
     &#x27;select&#x27;,
     &#x27;select2&#x27;,
     &#x27;textarea&#x27;
-];
+]);
 
 /**
  Sub class of &#x60;Components.FormGroup&#x60; that adds automatic form layout markup and form validation features.
@@ -76,12 +76,12 @@ var nonTextFieldControlTypes = [
  create forms without coding the default Bootstrap form markup by hand:
 
  &#x60;&#x60;&#x60;hbs
- {{#bs-form formLayout=&quot;horizontal&quot; action=&quot;submit&quot;}}
-   {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
-   {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
-   {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
-   {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
- {{/bs-form}}
+ \{{#bs-form formLayout=&quot;horizontal&quot; action=&quot;submit&quot;}}
+   \{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+   \{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
+   \{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
+   \{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+ \{{/bs-form}}
  &#x60;&#x60;&#x60;
 
  ### Form validation
@@ -90,12 +90,12 @@ var nonTextFieldControlTypes = [
  (given by &#x60;property&#x60;) of the form&#x27;s &#x60;model&#x60;, which in this case is its controller (see &#x60;model=this&#x60;):
 
  &#x60;&#x60;&#x60;hbs
- {{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
-   {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
-   {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
-   {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
-   {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
- {{/bs-form}}
+ \{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
+   \{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+   \{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+   \{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+   \{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+ \{{/bs-form}}
  &#x60;&#x60;&#x60;
 
  By using this indirection in comparison to directly binding the &#x60;value&#x60; property, you get the benefit of automatic
@@ -246,7 +246,7 @@ export default FormGroup.extend(I18nSupport, {
      * @type array
      * @public
      */
-    choices: [],
+    choices: Ember.A(),
 
     /**
      * The property of the &#x60;choices&#x60; array of objects, containing the value of the choice, e.g. the select box option.

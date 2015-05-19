@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.2</span></h1>
+    <h1>API Docs <span class="small">0.1.2.e86630bc</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -221,7 +221,7 @@ export default Ember.Component.extend(SizeClass, {
             return;
         }
         var value = this.get(&#x27;value&#x27;),
-            values = !Ember.isArray(value) ? [value] : value;
+            values = Ember.A(!Ember.isArray(value) ? [value] : value);
         this.get(&#x27;childButtons&#x27;)
             .forEach(function(button) {
                 button.set(&#x27;active&#x27;, values.contains(button.get(&#x27;value&#x27;)));
@@ -248,7 +248,7 @@ export default Ember.Component.extend(SizeClass, {
     activeChildren: Ember.computed.filterBy(&#x27;childButtons&#x27;, &#x27;active&#x27;, true),
 
 
-    lastActiveChildren: [],
+    lastActiveChildren: Ember.A(),
     newActiveChildren: Ember.computed.setDiff(&#x27;activeChildren&#x27;,&#x27;lastActiveChildren&#x27;),
     _observeButtons: Ember.observer(&#x27;activeChildren.[]&#x27;,&#x27;type&#x27;, function() {
         var type = this.get(&#x27;type&#x27;);
@@ -285,7 +285,7 @@ export default Ember.Component.extend(SizeClass, {
                 this.set(&#x27;value&#x27;, value);
             }
             // remember activeChildren, used as a replacement for a before observer as they will be deprecated in the future...
-            this.set(&#x27;lastActiveChildren&#x27;, this.get(&#x27;activeChildren&#x27;).slice());
+            this.set(&#x27;lastActiveChildren&#x27;, Ember.A(this.get(&#x27;activeChildren&#x27;).slice()));
         });
     }),
 

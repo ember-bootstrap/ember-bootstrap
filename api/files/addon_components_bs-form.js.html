@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.2</span></h1>
+    <h1>API Docs <span class="small">0.1.2.e86630bc</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -169,6 +169,17 @@ export default Ember.Component.extend({
      */
     horizontalLabelGridClass: &#x27;col-md-4&#x27;,
 
+
+    /**
+     * If set to true pressing enter will submit the form, even if no submit button is present
+     *
+     * @property submitOnEnter
+     * @type boolean
+     * @default false
+     * @public
+     */
+    submitOnEnter: false,
+
     /**
      * An array of &#x60;Components.FormElement&#x60;s that are children of this form.
      *
@@ -211,6 +222,13 @@ export default Ember.Component.extend({
                     that.get(&#x27;childFormElements&#x27;).setEach(&#x27;showValidation&#x27;, true);
                     return that.sendAction(&#x27;invalid&#x27;);
                 });
+        }
+    },
+
+    keyPress: function(e) {
+        var code = e.keyCode || e.which;
+        if(code === 13 &amp;&amp; this.get(&#x27;submitOnEnter&#x27;)) {
+            this.$().submit();
         }
     }
 });
