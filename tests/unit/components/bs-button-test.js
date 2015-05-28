@@ -64,14 +64,14 @@ test('button has default label', function(assert) {
 
 test('button has default type "button"', function(assert) {
     var component = this.subject();
-    assert.equal(this.$().attr('type'),'button');
+    assert.equal(this.$().prop('type'),'button');
 });
 
 test('buttonType property allows changing button type', function(assert) {
     var component = this.subject({
         buttonType: 'submit'
     });
-    assert.equal(this.$().attr('type'),'submit');
+    assert.equal(this.$().prop('type'),'submit');
 });
 
 
