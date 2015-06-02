@@ -12,7 +12,7 @@ var defaultOptions = {
 };
 
 module.exports = {
-    name: 'ember-bootstrap',
+    name: 'ember-bootstrap-components',
 
     included: function included(app) {
         this._super.included(app);

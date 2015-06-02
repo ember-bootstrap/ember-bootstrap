@@ -1,8 +1,8 @@
 import ENV from '../config/environment';
-import Config from 'ember-bootstrap/config';
+import Config from 'ember-bootstrap-components/config';
 
 export function initialize(/* container, application */) {
-    Config.load(ENV['ember-bootstrap'] || {});
+    Config.load(ENV['ember-bootstrap-components'] || {});
 }
 
 export default {
