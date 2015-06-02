@@ -95,7 +95,58 @@ export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
      */
     classTypePrefix: 'btn',
 
-    attributeBindings: ['id', 'disabled', 'buttonType:type'],
+    attributeBindings: ['id', 'disabled', 'buttonType:type', 'dismiss:data-dismiss', 'contentDismiss:data-dismiss', '_type:type', 'style'],
+    
+    getPojoProperties: function(pojo) {
+      if (Ember.isEmpty(pojo)) {
+        return [];
+      }
+      return Object.keys(pojo);
+    },
+    getProxiedProperties: function(proxyObject) {
+      var contentProperties, objectProperties, prototypeProperties;
+      contentProperties = this.getObjectProperties(proxyObject.get('content'));
+      prototypeProperties = Object.keys(proxyObject.constructor.prototype);
+      objectProperties = this.getPojoProperties(proxyObject);
+      return contentProperties.concat(prototypeProperties).concat(objectProperties).uniq();
+    },
+    getEmberObjectProperties: function(emberObject) {
+      var objectProperties, prototypeProperties;
+      prototypeProperties = Object.keys(emberObject.constructor.prototype);
+      objectProperties = this.getPojoProperties(emberObject);
+      return prototypeProperties.concat(objectProperties).uniq();
+    },
+    getEmberDataProperties: function(emberDataObject) {
+      var attributes, keys;
+      attributes = Ember.get(emberDataObject.constructor, 'attributes');
+      keys = Ember.get(attributes, 'keys.list');
+      return Ember.getProperties(emberDataObject, keys);
+    },
+    getObjectProperties: function(object) {
+      if (object instanceof DS.Model) {
+        return this.getEmberDataProperties(object);
+      } else if (object instanceof Ember.ObjectProxy || Ember._ProxyMixin.detect(object)) {
+        return this.getProxiedProperties(object);
+      } else if (object instanceof Ember.Object) {
+        return this.getEmberObjectProperties(object);
+      } else {
+        return this.getPojoProperties(object);
+      }
+    },
+    
+    init: function() {
+      var me, properties;
+      this._super();
+      me = this;
+      if ((this.get('content') != null) && Ember.typeOf(this.get('content')) === 'instance') {
+        properties = this.getObjectProperties(this.get('content'));
+        return this.getProperties(properties);
+      } else {
+        if (this.get('defaultText') == null) {
+          return this.set('defaultText', this.get('content'));
+        }
+      }
+    },
 
     /**
      * Default label of the button. Not need if used as a block component
