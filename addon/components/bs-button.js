@@ -82,7 +82,7 @@ import I18nSupport from 'ember-bootstrap-components/mixins/i18n-support';
  @uses Mixins.SizeClass
  @uses Mixins.I18nSupport
 */
-export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
+export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSupport, {
     tagName: 'button',
     classNames: ['btn'],
     classNameBindings: ['active', 'block:btn-block'],
