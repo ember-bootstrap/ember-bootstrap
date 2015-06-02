@@ -1,1 +1,1 @@
-export { default } from 'ember-bootstrap-components/bootstrap-modal-manager/service';
+export { default } from 'ember-bootstrap-components/services/bootstrap-modal-manager';
