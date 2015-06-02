@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import TypeClass from 'ember-bootstrap/mixins/type-class';
-import SizeClass from 'ember-bootstrap/mixins/size-class';
-import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
+import TypeClass from 'ember-bootstrap-components/mixins/type-class';
+import SizeClass from 'ember-bootstrap-components/mixins/size-class';
+import I18nSupport from 'ember-bootstrap-components/mixins/i18n-support';
 
 /**
  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)

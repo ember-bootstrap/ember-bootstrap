@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import FormGroup from 'ember-bootstrap/components/bs-form-group';
-import Form from 'ember-bootstrap/components/bs-form';
-import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
+import FormGroup from 'ember-bootstrap-components/components/bs-form-group';
+import Form from 'ember-bootstrap-components/components/bs-form';
+import I18nSupport from 'ember-bootstrap-components/mixins/i18n-support';
 
 
 var nonTextFieldControlTypes = Ember.A([

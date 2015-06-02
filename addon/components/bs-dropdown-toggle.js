@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import DropdownToggle from 'ember-bootstrap/mixins/dropdown-toggle';
+import DropdownToggle from 'ember-bootstrap-components/mixins/dropdown-toggle';
 
 /**
  Anchor element that triggers the parent dropdown to open.

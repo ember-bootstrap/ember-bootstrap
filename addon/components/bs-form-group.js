@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Config from 'ember-bootstrap/config';
+import Config from 'ember-bootstrap-components/config';
 
 /**
  This component renders a `<div class="form-group">` element, with support for validation states and feedback icons.

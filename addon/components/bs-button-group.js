@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import Button from 'ember-bootstrap/components/bs-button';
-import SizeClass from 'ember-bootstrap/mixins/size-class';
+import Button from 'ember-bootstrap-components/components/bs-button';
+import SizeClass from 'ember-bootstrap-components/mixins/size-class';
 
 /**
  Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.

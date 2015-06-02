@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
+import I18nSupport from 'ember-bootstrap-components/mixins/i18n-support';
 
 
 /**

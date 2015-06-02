@@ -1,4 +1,4 @@
 import Ember from 'ember';
-import component from 'ember-bootstrap/components/bs-dropdown-menu';
+import component from 'ember-bootstrap-components/components/bs-dropdown-menu';
 
 export default component;
