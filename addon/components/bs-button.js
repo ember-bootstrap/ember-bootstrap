@@ -82,7 +82,7 @@ import I18nSupport from 'ember-bootstrap-components/mixins/i18n-support';
  @uses Mixins.SizeClass
  @uses Mixins.I18nSupport
 */
-export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSupport, {
+export default Ember.Component.extend(Ember._ProxyMixin, TypeClass, SizeClass, I18nSupport, {
     tagName: 'button',
     classNames: ['btn'],
     classNameBindings: ['active', 'block:btn-block'],
@@ -96,7 +96,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
     classTypePrefix: 'btn',
 
     attributeBindings: ['id', 'disabled', 'buttonType:type', 'dismiss:data-dismiss', 'contentDismiss:data-dismiss', '_type:type', 'style'],
-    
+
     getPojoProperties: function(pojo) {
       if (Ember.isEmpty(pojo)) {
         return [];
@@ -133,7 +133,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
         return this.getPojoProperties(object);
       }
     },
-    
+
     init: function() {
       var me, properties;
       this._super();
@@ -143,10 +143,26 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
         return this.getProperties(properties);
       } else {
         if (this.get('defaultText') == null) {
+          this.initParameters();
           return this.set('defaultText', this.get('content'));
         }
       }
     },
+
+  initParameters: function() {
+    this.setProperties({
+      defaultText: null,
+      disabled: false,
+      buttonType: 'button',
+      active: false,
+      block: false,
+      toggle: false,
+      iconInactive: null,
+      value: null,
+      textState: 'default',
+      reset: null
+    })
+  },
 
     /**
      * Default label of the button. Not need if used as a block component
@@ -155,7 +171,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
      * @type string
      * @public
      */
-    defaultText: null,
+    //defaultText: null,
 
     /**
      * Property to disable the button
@@ -165,7 +181,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
      * @default false
      * @public
      */
-    disabled: false,
+    //disabled: false,
 
     /**
      * Set the type of the button, either 'button' or 'submit'
@@ -175,7 +191,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
      * @default 'button'
      * @public
      */
-    buttonType: 'button',
+    //buttonType: 'button',
 
     /**
      * Set the 'active' class to apply active/pressed CSS styling
@@ -185,7 +201,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
      * @default false
      * @public
      */
-    active: false,
+    //active: false,
 
     /**
      * Property for block level buttons
@@ -196,7 +212,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
      * @default false
      * @public
      */
-    block: false,
+    //block: false,
 
     /**
      * If toggle property is true, clicking the button will toggle the active state
@@ -206,7 +222,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
      * @default false
      * @public
      */
-    toggle: false,
+    //toggle: false,
 
     /**
      * If button is active and this is set, the icon property will match this property
@@ -215,7 +231,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
      * @type String
      * @public
      */
-    iconActive: null,
+    //iconActive: null,
 
     /**
      * If button is inactive and this is set, the icon property will match this property
@@ -224,7 +240,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
      * @type String
      * @public
      */
-    iconInactive: null,
+    //iconInactive: null,
 
     /**
      * Class(es) (e.g. glyphicons or font awesome) to use as a button icon
@@ -252,7 +268,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
      * @type any
      * @public
      */
-    value: null,
+    //value: null,
 
     /**
      * State of the button. The button's label (if not used as a block component) will be set to the
@@ -264,7 +280,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
      * @default 'default'
      * @protected
      */
-    textState: 'default',
+    //textState: 'default',
 
     /**
      * Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.
@@ -273,7 +289,7 @@ export default Ember.Component.extend(Ember._Proxy, TypeClass, SizeClass, I18nSu
      * @type boolean
      * @public
      */
-    reset: null,
+    //reset: null,
 
     /**
      * This will reset the state property to 'default', and with that the button's label to defaultText

@@ -1,0 +1,30 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close {{unless allowClose 'hide''}}" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">
+                {{#if titleIconClasses}}
+                    <i class="{{titleIconClasses}}"></i>
+                {{/if}}
+                {{{title}}}
+            </h4>
+        </div>
+        <div class="modal-body">
+            {{#if body}}
+                {{view view.body}}
+            {{else}}
+                {{yield}}
+            {{/if}}
+        </div>
+        <div class="modal-footer {{if fullSizeButtons 'modal-footer-full'}}">
+            {{#each footerButton in footerButtons}}
+                {{bs-button content=footerButton targetObject="view.targetObject"}}
+            {{/each}}
+            {{#each footerView in footerViews}}
+                {{view footerView}}
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+<div style={{backdropStyle}} class="modal-backdrop {{if fade 'fade'}} {{if backdrop 'in'}}"></div>

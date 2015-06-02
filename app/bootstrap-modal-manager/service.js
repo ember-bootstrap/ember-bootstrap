@@ -1,0 +1,1 @@
+export { default } from 'ember-bootstrap-components/bootstrap-modal-manager/service';
