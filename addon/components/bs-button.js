@@ -140,6 +140,9 @@ export default Ember.Component.extend(Ember._ProxyMixin, TypeClass, SizeClass, I
       me = this;
       if ((this.get('content') != null) && Ember.typeOf(this.get('content')) === 'instance') {
         properties = this.getObjectProperties(this.get('content'));
+        if (Ember.isPresent(this.get('content.action'))) {
+          this.set('action', this.get('content.action'));
+        }
         return this.getProperties(properties);
       } else {
         if (this.get('defaultText') == null) {
@@ -259,6 +262,7 @@ export default Ember.Component.extend(Ember._ProxyMixin, TypeClass, SizeClass, I
         }
     }),
 
+    contentDismiss: Ember.computed.alias('content.dismiss'),
 
     /**
      * Supply a value that will be associated with this button. This will be send
@@ -326,9 +330,15 @@ export default Ember.Component.extend(Ember._ProxyMixin, TypeClass, SizeClass, I
             this.toggleProperty('active');
         }
         var that = this;
-        var callback = function(promise) {
+        var callback = function(promise, disablePending) {
+            if (Ember.isNone(disablePending)) {
+              disablePending = false;
+            }
             if (promise) {
                 that.set('textState', 'pending');
+                if (disablePending) {
+                  that.set('disabled', true);
+                }
                 promise.then(
                     function(){
                         if (!that.get('isDestroyed')) {
@@ -340,7 +350,12 @@ export default Ember.Component.extend(Ember._ProxyMixin, TypeClass, SizeClass, I
                             that.set('textState', 'rejected');
                         }
                     }
-                );
+                ).finally(function() {
+                    if (disablePending) {
+                      that.set('disabled', false);
+                    }
+
+                  });
             }
         };
         this.sendAction('action', this.get('value'), evt, callback);
