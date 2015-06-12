@@ -1,3 +1,6 @@
+{{#if showBackdrop}}
+    <div {{bind-attr class=":modal-backdrop fade in"}}></div>
+{{/if}}
 <div {{bind-attr class=":modal-dialog sizeClass"}}>
     <div class="modal-content">
         {{#if header}}

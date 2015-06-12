@@ -46,7 +46,7 @@ module.exports = {
 
         // Import transition support
         app.import(path.join(app.bowerDirectory, 'bootstrap/js/transition.js'));
-        app.import(path.join(app.bowerDirectory, 'bootstrap/js/modal.js'));
+        //app.import(path.join(app.bowerDirectory, 'bootstrap/js/modal.js'));
 
     }
 };
