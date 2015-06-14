@@ -1,0 +1,1 @@
+export { default } from 'ember-bootstrap-components/components/bs-component';

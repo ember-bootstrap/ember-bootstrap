@@ -12,16 +12,15 @@
         <div class="modal-body">
             {{#if body}}
                 {{view view.body}}
+            {{else if compiledTemp}}
+              {{bs-component layout=compiledTemp model=this}}
             {{else}}
                 {{yield}}
             {{/if}}
         </div>
         <div class="modal-footer {{if fullSizeButtons 'modal-footer-full'}}">
             {{#each footerButton in footerButtons}}
-                {{bs-button content=footerButton targetObject=view.targetObject}}
-            {{/each}}
-            {{#each footerView in footerViews}}
-                {{view footerView}}
+                {{bs-button content=footerButton targetObject=targetObject}}
             {{/each}}
         </div>
     </div>

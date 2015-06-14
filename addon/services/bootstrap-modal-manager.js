@@ -55,9 +55,7 @@ export default Ember.Service.extend(Ember.Evented, {
     if (cancelButtonType == null) {
       cancelButtonType = null;
     }
-    body = Ember.View.extend({
-      template: Ember.Handlebars.compile(message || "Are you sure you would like to perform this action?")
-    });
+    body = Ember.HTMLBars.compile(message || "Are you sure you would like to perform this action?");
     buttons = [
       Ember.Object.create({
         defaultText: confirmButtonTitle,
@@ -84,9 +82,7 @@ export default Ember.Service.extend(Ember.Evented, {
     if (okButtonType == null) {
       okButtonType = null;
     }
-    body = Ember.View.extend({
-      template: Ember.Handlebars.compile(message || "Are you sure you would like to perform this action?")
-    });
+    body = Ember.HTMLBars.compile(message || "Are you sure you would like to perform this action?");
     buttons = [
       Ember.Object.create({
         defaultText: okButtonTitle,
@@ -108,10 +104,7 @@ export default Ember.Service.extend(Ember.Evented, {
   },
   openManual: function(name, title, content, footerButtons, controller, options) {
     var view;
-    view = Ember.View.extend({
-      template: Ember.Handlebars.compile(content),
-      controller: controller
-    });
+    view = Ember.HTMLBars.compile(content || "Are you sure you would like to perform this action?");
     return this.open(name, title, view, footerButtons, controller, options);
   },
   open: function(name, title, view, footerButtons, controller, options) {
@@ -169,11 +162,20 @@ export default Ember.Service.extend(Ember.Evented, {
         });
       }
     } else if (Ember.typeOf(view) === "class") {
+
       modalComponent.setProperties({
+        compiledTemp: view.template,
         body: view,
         controller: controller
       });
     }
+    else if (Ember.typeOf(view) === 'object') {
+      modalComponent.setProperties({
+        compiledTemp: view,
+        controller: controller
+      });
+    }
+
     if (controllerMode) {
       rootElement = controller.rootElement;
       if (typeof controller.rootElement === "undefined" && Ember.isPresent(controller.namespace)) {
