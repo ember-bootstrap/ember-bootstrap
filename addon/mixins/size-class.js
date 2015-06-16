@@ -33,5 +33,5 @@ export default Ember.Mixin.create({
      * @type String
      * @public
      */
-    size: null
+    //size: null
 });

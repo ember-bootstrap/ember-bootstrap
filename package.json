@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kaliber5/ember-bootstrap"
+    "url": "https://github.com/danshapir/ember-bootstrap-components"
   },
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "Simon Ihmig <ihmig@kaliber5.de>",
+  "author": "Simon Ihmig <ihmig@kaliber5.de> & Dan Shapir <danshapir@outlook.com",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
@@ -54,7 +54,7 @@
     "configPath": "tests/dummy/config"
   },
   "bugs": {
-    "url": "https://github.com/kaliber5/ember-bootstrap/issues"
+    "url": "https://github.com/danshapir/ember-bootstrap-components/issues"
   },
-  "homepage": "http://kaliber5.github.io/ember-bootstrap/"
+  "homepage": "https://github.com/danshapir/ember-bootstrap-components"
 }
