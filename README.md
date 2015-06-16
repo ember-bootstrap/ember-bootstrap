@@ -26,9 +26,11 @@ If you are using an ember-cli version prior to 0.1.5, use the following commands
 ## Authors
 
 [Simon Ihmig](https://github.com/simonihmig) @ [kaliber5](http://www.kaliber5.de)
+
 [Dan Shapir](https://github.com/danshapir)
 
 ## Copyright and license
 
-Code and documentation copyright 2015 kaliber5 GmbH
+Code and documentation copyright 2015 kaliber5 GmbH.
+
 Added code copyright 2015 danshapir. Code released under [the MIT license](LICENSE).
