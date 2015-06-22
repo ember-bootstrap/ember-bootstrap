@@ -1,6 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend(Ember.Evented, {
+  allModals: Ember.A(),
+  modalVisible: false,
+  observeModalVisibillity: Ember.observer('allModals.@each.isVisible', 'allModals.[]', function() {
+    this.set('modalVisible', this.get('allModals').isAny('isVisible', true));
+  }),
   add: function(name, modalInstance) {
     var zindex;
     var _this = this;
@@ -14,6 +19,7 @@ export default Ember.Service.extend(Ember.Evented, {
       }
       return _this.trigger('closed', e);
     });
+    this.get('allModals').pushObject(modalInstance);
     return this.set(name, modalInstance);
   },
   register: function(name, modalInstance) {
@@ -21,6 +27,8 @@ export default Ember.Service.extend(Ember.Evented, {
     return modalInstance.appendTo(modalInstance.get('targetObject').namespace.rootElement);
   },
   remove: function(name) {
+    var allModals = this.get('allModals');
+    allModals.removeObject(this.get(name));
     return this.set(name, null);
   },
   close: function(name) {
