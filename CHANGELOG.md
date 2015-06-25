@@ -1,3 +1,11 @@
+<a name"0.1.3"></a>
+### 0.1.3 (2015-06-25)
+
+#### Bug Fixes
+
+* Fallback to defaultText if rejectedText/resolvedText are null (under the promise handling)
+
+
 <a name"0.1.2"></a>
 ### 0.1.2 (2015-04-22)
 

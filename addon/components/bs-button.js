@@ -342,13 +342,24 @@ export default Ember.Component.extend(Ember._ProxyMixin, TypeClass, SizeClass, I
                 promise.then(
                     function(){
                         if (!that.get('isDestroyed')) {
+                          if (Ember.isPresent(that.get('resolvedText'))) {
                             that.set('textState', 'resolved');
+                          }
+                          else {
+                            that.resetState();
+                          }
                         }
                     },
                     function(){
                         if (!that.get('isDestroyed')) {
+                          if (Ember.isPresent(that.get('rejectedText'))) {
                             that.set('textState', 'rejected');
+                          }
+                          else {
+                            that.resetState();
+                          }
                         }
+
                     }
                 ).finally(function() {
                     if (disablePending) {
