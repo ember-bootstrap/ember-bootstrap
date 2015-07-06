@@ -1,12 +1,12 @@
 {{#if hasLabel}}
-    <label {{bind-attr class=":control-label horizontalLabelGridClass"}}>{{label}}</label>
-    <div {{bind-attr class="horizontalInputGridClass"}}>
+    <label class="control-label {{horizontalLabelGridClass}}">{{label}}</label>
+    <div class="{{horizontalInputGridClass}}">
         {{bs-select name=name content=choices optionValuePath=selectValueProperty optionLabelPath=selectLabelProperty value=value}}
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
     </div>
 {{else}}
-    <div {{bind-attr class="horizontalInputGridClass horizontalInputOffsetGridClass"}}>
+    <div class="horizontalInputGridClass {{horizontalInputOffsetGridClass}}">
         {{bs-select name=name content=choices optionValuePath=selectValueProperty optionLabelPath=selectLabelProperty value=value}}
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
