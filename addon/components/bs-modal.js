@@ -98,8 +98,8 @@ export default Ember.Component.extend(Ember.Evented, {
     },
     click: function(event) {
       var target, targetDismiss;
-      target = event.target;
-      targetDismiss = target.getAttribute("data-dismiss");
+      target = $(event.target);
+      targetDismiss = target.attr("data-dismiss");
       if (targetDismiss === 'modal') {
         // If it's the header close icon
         if (target.hasClass('close') && target.parent().hasClass('modal-header')) {

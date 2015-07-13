@@ -1,3 +1,10 @@
+<a name"0.1.4"></a>
+### 0.1.4 (2015-07-13)
+
+#### Feature
+
+* Allow cancel mode button to be called once modal is closed through Esc or X button (the button passed with a "cancel=true" property) will be invoked.
+
 <a name"0.1.3"></a>
 ### 0.1.3 (2015-06-25)
 
