@@ -88,7 +88,7 @@ test('Submitting the form with successful validation calls default action', func
                 }
             }
         }).create(),
-        model = Ember.Object.extend(EmberValidations.Mixin,{
+        model = Ember.Object.extend(EmberValidations,{
             test: 'someValue',
             validations: {
                 test: {
@@ -122,7 +122,7 @@ test('Submitting the form with invalid validation calls invalid action', functio
                 }
             }
         }).create(),
-        model = Ember.Object.extend(EmberValidations.Mixin,{
+        model = Ember.Object.extend(EmberValidations,{
             test: null,
             validations: {
                 test: {
