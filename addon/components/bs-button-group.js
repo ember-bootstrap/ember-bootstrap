@@ -177,7 +177,7 @@ export default Ember.Component.extend(SizeClass, {
      * @type array
      * @protected
      */
-  childButtons: Ember.A(),
+    childButtons: Ember.A(),
 
 
     /**
@@ -188,8 +188,7 @@ export default Ember.Component.extend(SizeClass, {
      */
     activeChildren: Ember.computed.filterBy('childButtons', 'active', true),
 
-
-  lastActiveChildren: null,
+    lastActiveChildren: null,
     newActiveChildren: Ember.computed.setDiff('activeChildren','lastActiveChildren'),
     _observeButtons: Ember.observer('activeChildren.[]','type', function() {
         var type = this.get('type');
