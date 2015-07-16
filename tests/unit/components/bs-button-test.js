@@ -39,7 +39,8 @@ test('button has correct CSS classes', function(assert) {
     assert.equal(this.$().hasClass('btn-block'),true, 'button has block class');
 });
 
-
+// Test is failing due to https://github.com/emberjs/ember.js/issues/11480
+// Should pass when the issue is fixed in ember.
 test('button has HTML attributes', function(assert) {
     var attrs = {
         id: 'test',

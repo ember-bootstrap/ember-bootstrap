@@ -52,7 +52,7 @@ var nonTextFieldControlTypes = Ember.A([
  import Ember from 'ember';
  import EmberValidations from 'ember-validations';
 
- export default Ember.Controller.extend(EmberValidations.Mixin,{
+ export default Ember.Controller.extend(EmberValidations,{
    email: null,
    password: null,
    rememberMe: false,

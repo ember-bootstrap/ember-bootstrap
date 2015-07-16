@@ -113,8 +113,8 @@ export default Ember.Component.extend({
      * @readonly
      * @protected
      */
-    toggleType: Ember.computed('childViews.@each', function() {
-        if (this.get('childViews').any(function(view) {
+    toggleType: Ember.computed('children.@each', function() {
+        if (this.get('children').any(function(view) {
             return view instanceof toggleButton;
         })) {
             return 'button';
@@ -154,6 +154,7 @@ export default Ember.Component.extend({
         // click event name that is namespaced to our component instance, so multiple dropdowns do not interfere
         // with each other
         this.clickEventName = 'click.' + this.get('elementId');
+        this.set('children', Ember.A());
     },
 
     /**
@@ -170,5 +171,12 @@ export default Ember.Component.extend({
             ($target.closest(this.$().find('.dropdown-menu')).length === 0 || this.get('closeOnMenuClick'))) {
             this.set('open', false);
         }
+    },
+
+    registerChild: function(child) {
+        this.get('children').addObject(child);
+    },
+    removeChild: function(child) {
+        this.get('children').removeObject(child);
     }
 });

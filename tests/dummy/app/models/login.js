@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 
-export default Ember.Object.extend(EmberValidations.Mixin, {
+export default Ember.Object.extend(EmberValidations, {
     email: null,
     password: null,
     rememberMe: false,

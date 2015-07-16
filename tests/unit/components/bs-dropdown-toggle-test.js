@@ -39,16 +39,18 @@ test('toggle as button does not have href', function(assert) {
 });
 
 test('clicking toggle sends toggleDropdown action', function(assert) {
-    var actionHandler = Ember.Controller.extend({
-            actions: {
-                toggleDropdown: function() {
-                    assert.ok(true, 'toggleDropdown action has been called');
-                }
-            }
-        }).create(),
-        component = this.subject({
-            targetObject: actionHandler
-        });
+    var component = this.subject();
+    var $component = this.$();
     assert.expect(1);
-    this.$().click();
+    var actionHandler = {
+        toggleDropdown: function() {
+            assert.ok(true, 'toggleDropdown action has been called');
+        }
+    };
+    Ember.run(function(){
+        component.setProperties({ 'targetObject': actionHandler });
+    });
+    Ember.run(function() {
+        $component.click();
+    });
 });
