@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
+import ButtonGroup from 'ember-bootstrap/components/bs-button-group';
 import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 
 /**
@@ -277,7 +278,18 @@ export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
             }
         };
         this.sendAction('action', this.get('value'), evt, callback);
+    },
+
+    didInsertElement: function() {
+        var group = this.nearestOfType(ButtonGroup);
+        if (group) {
+            group.registerButton(this);
+        }
+    },
+    willDestroyElement: function() {
+        var group = this.nearestOfType(ButtonGroup);
+        if (group) {
+            group.removeButton(this);
+        }
     }
-
-
 });

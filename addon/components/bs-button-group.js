@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import Button from 'ember-bootstrap/components/bs-button';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
 
 /**
@@ -160,7 +159,7 @@ export default Ember.Component.extend(SizeClass, {
      */
     value: undefined,
 
-    _syncValueToActiveButtons: Ember.observer('value','childButtons.@each.value',function(){
+    _syncValueToActiveButtons: Ember.observer('value','childButtons.@each.value','_inDOM',function(){
         if (!this._inDOM) {
             return;
         }
@@ -178,9 +177,7 @@ export default Ember.Component.extend(SizeClass, {
      * @type array
      * @protected
      */
-    childButtons: Ember.computed.filter('childViews', function(view) {
-        return view instanceof Button;
-    }),
+  childButtons: Ember.A(),
 
 
     /**
@@ -192,7 +189,7 @@ export default Ember.Component.extend(SizeClass, {
     activeChildren: Ember.computed.filterBy('childButtons', 'active', true),
 
 
-    lastActiveChildren: Ember.A(),
+  lastActiveChildren: null,
     newActiveChildren: Ember.computed.setDiff('activeChildren','lastActiveChildren'),
     _observeButtons: Ember.observer('activeChildren.[]','type', function() {
         var type = this.get('type');
@@ -244,14 +241,20 @@ export default Ember.Component.extend(SizeClass, {
 
     init: function() {
         this._super();
+      this.set('childButtons', Ember.A());
+      this.set('lastActiveChildren', Ember.A());
         this.get('activeChildren');
     },
 
     _inDOM: false,
 
     didInsertElement: function() {
-        this._inDOM = true;
+        this.set('_inDOM', true);
+    },
+    registerButton: function(button) {
+        this.get('childButtons').addObject(button);
+    },
+    removeButton: function(button) {
+        this.get('childButtons').removeObject(button);
     }
-
-
 });
