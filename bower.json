@@ -14,5 +14,8 @@
     "qunit": "~1.17.1",
     "ember-i18n": "jamesarosen/ember-i18n#master",
     "bootstrap": "~3.3.4"
+  },
+  "resolutions": {
+    "ember-qunit": "0.4.1"
   }
 }
