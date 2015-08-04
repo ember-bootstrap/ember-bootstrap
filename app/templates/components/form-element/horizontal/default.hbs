@@ -6,7 +6,7 @@
         {{partial "components/form-element/errors"}}
     </div>
 {{else}}
-    <div class="horizontalInputGridClass {{horizontalInputOffsetGridClass}}">
+    <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
         {{bs-input name=name type=controlType value=value placeholder=placeholder}}
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
