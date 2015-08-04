@@ -31,7 +31,7 @@ test('dropdown container has dropdown class', function(assert) {
 
 test('dropdown container with dropdown button has btn-group class', function(assert) {
     var component = this.subject({
-        template: Ember.Handlebars.compile('{{#bs-dropdown-button}}Dropdown <span class="caret"></span>{{/bs-dropdown-button}}')
+        layout: Ember.Handlebars.compile('{{#bs-dropdown-button}}Dropdown <span class="caret"></span>{{/bs-dropdown-button}}')
     });
     assert.equal(this.$().hasClass('btn-group'), true, 'has btn-group class');
 });
@@ -80,7 +80,7 @@ test('opened dropdown will close on outside click', function(assert) {
 
 test('clicking dropdown menu will close it', function(assert) {
     var component = this.subject({
-        template: Ember.Handlebars.compile('<ul class="dropdown-menu"><li>test</li></ul>')
+        layout: Ember.Handlebars.compile('<ul class="dropdown-menu"><li>test</li></ul>')
     });
     Ember.run(function(){
         component.send('openDropdown');
@@ -94,7 +94,7 @@ test('clicking dropdown menu will close it', function(assert) {
 
 test('clicking dropdown menu when closeOnMenuClick is false will not close it', function(assert) {
     var component = this.subject({
-        template: Ember.Handlebars.compile('<ul class="dropdown-menu"><li>test</li></ul>'),
+        layout: Ember.Handlebars.compile('<ul class="dropdown-menu"><li>test</li></ul>'),
         closeOnMenuClick: false
     });
     Ember.run(function(){
@@ -104,5 +104,3 @@ test('clicking dropdown menu when closeOnMenuClick is false will not close it', 
     assert.equal(this.$().hasClass('open'), true, 'has open class');
     assert.equal(component.get('open'), true, 'open property is true');
 });
-
-

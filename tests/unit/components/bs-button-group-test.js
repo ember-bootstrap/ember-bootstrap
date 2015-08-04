@@ -39,7 +39,7 @@ test('button group has correct CSS classes', function(assert) {
 test('radio button group has value of selected button', function(assert) {
     var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
         component = this.subject({
-            template: Ember.Handlebars.compile(template),
+            layout: Ember.Handlebars.compile(template),
             type: 'radio'
         });
 
@@ -58,7 +58,7 @@ test('radio button group has value of selected button', function(assert) {
 test('checkbox button group has value of all selected button', function(assert) {
     var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
         component = this.subject({
-            template: Ember.Handlebars.compile(template),
+            layout: Ember.Handlebars.compile(template),
             type: 'checkbox'
         }),
         expectedValue = [];
@@ -79,7 +79,7 @@ test('checkbox button group has value of all selected button', function(assert) 
 test('radio button group with value set activates button with same value', function(assert) {
     var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
         component = this.subject({
-            template: Ember.Handlebars.compile(template),
+            layout: Ember.Handlebars.compile(template),
             type: 'radio',
             value: 1
         });
@@ -99,7 +99,7 @@ test('checkbox button group with value set activates buttons with same value', f
     var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
         value = [1,3],
         component = this.subject({
-            template: Ember.Handlebars.compile(template),
+            layout: Ember.Handlebars.compile(template),
             type: 'checkbox',
             value: value
         });
@@ -117,7 +117,7 @@ test('checkbox button group with value set activates buttons with same value', f
 test('setting radio button group value activates button with same value', function(assert) {
     var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
         component = this.subject({
-            template: Ember.Handlebars.compile(template),
+            layout: Ember.Handlebars.compile(template),
             type: 'radio'
         });
 
@@ -142,7 +142,7 @@ test('setting radio button group value activates button with same value', functi
 test('setting checkbox button group value with array of values activates buttons with same value', function(assert) {
     var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
         component = this.subject({
-            template: Ember.Handlebars.compile(template),
+            layout: Ember.Handlebars.compile(template),
             type: 'checkbox'
         });
 
@@ -163,7 +163,7 @@ test('setting checkbox button group value with array of values activates buttons
 test('when clicking active radio button, button remains active', function(assert) {
     var template = '{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}',
         component = this.subject({
-            template: Ember.Handlebars.compile(template),
+            layout: Ember.Handlebars.compile(template),
             type: 'radio'
         });
 
