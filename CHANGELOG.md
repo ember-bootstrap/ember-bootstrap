@@ -1,3 +1,12 @@
+<a name"0.1.4"></a>
+### 0.1.4 (2015-08-05)
+
+
+#### Bug Fixes
+
+* **Components.FormElement:** Wrong classes for horizontal layout forms (14) ([1caba612](https://github.com/kaliber5/ember-bootstrap/commit/1caba612))
+
+
 <a name"0.1.3"></a>
 ### 0.1.3 (2015-07-07)
 
