@@ -61,3 +61,13 @@
     {{/bs-dropdown-menu}}
 {{/bs-dropdown}}
 
+
+<h2>Do not close on menu click</h2>
+
+{{#bs-dropdown closeOnMenuClick=false}}
+    {{#bs-dropdown-button}}Dropdown <span class="caret"></span>{{/bs-dropdown-button}}
+    {{#bs-dropdown-menu}}
+        <li>{{#link-to "index"}}Home{{/link-to}}</li>
+        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+    {{/bs-dropdown-menu}}
+{{/bs-dropdown}}
