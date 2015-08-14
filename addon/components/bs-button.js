@@ -97,7 +97,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      */
     classTypePrefix: 'btn',
 
-    attributeBindings: ['id', 'disabled', 'buttonType:type'],
+    attributeBindings: ['disabled', 'buttonType:type'],
 
     /**
      * Default label of the button. Not need if used as a block component
@@ -237,7 +237,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
     },
 
     resetObserver: Ember.observer('reset', function(){
-        if(this.get('reset')){
+      if(this.get('reset')){
             this.resetState();
         }
     }),
@@ -279,6 +279,11 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
             }
         };
         this.sendAction('action', this.get('value'), evt, callback);
-    }
+    },
+
+  init: function() {
+    this._super();
+    this.get('reset');
+  }
 
 });

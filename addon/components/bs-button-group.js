@@ -185,7 +185,8 @@ export default Ember.Component.extend(ComponentParent, SizeClass, {
     newActiveChildren: Ember.computed.setDiff('activeChildren','lastActiveChildren'),
     _observeButtons: Ember.observer('activeChildren.[]','type', function() {
         var type = this.get('type');
-        if (!this._inDOM || (type !== 'radio' && type !== 'checkbox')) {
+
+      if (!this._inDOM || (type !== 'radio' && type !== 'checkbox')) {
             return;
         }
 
@@ -199,7 +200,7 @@ export default Ember.Component.extend(ComponentParent, SizeClass, {
 
             switch (type) {
                 case 'radio':
-                    newActive = this.get('newActiveChildren').objectAt(0);
+                    newActive = Ember.A(this.get('newActiveChildren')).objectAt(0);
                     if (newActive) {
                         value = newActive.get('value');
                     }
@@ -234,12 +235,13 @@ export default Ember.Component.extend(ComponentParent, SizeClass, {
     init: function() {
       this._super();
       this.set('lastActiveChildren', Ember.A());
-      this.get('activeChildren');
     },
 
     _inDOM: false,
 
     didInsertElement: function() {
         this.set('_inDOM', true);
+        this.get('activeChildren');
+
     }
 });

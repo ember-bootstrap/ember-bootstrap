@@ -114,7 +114,7 @@ export default Ember.Component.extend(ComponentParent, {
      * @readonly
      * @protected
      */
-    toggleType: Ember.computed('children.@each', function() {
+    toggleType: Ember.computed('children.[]', function() {
         if (this.get('children').any(function(view) {
             return view instanceof toggleButton;
         })) {
