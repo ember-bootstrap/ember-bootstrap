@@ -230,36 +230,6 @@ export default FormGroup.extend(I18nSupport, {
     cols: null,
 
     /**
-     * `choiceValueProperty` prefixed with 'content.' for 'select' `controlType`
-     *
-     * @property selectValueProperty
-     * @type string
-     * @readonly
-     * @private
-     */
-    selectValueProperty: Ember.computed('choiceValueProperty', function(){
-        var valuePath = this.get('choiceValueProperty');
-        if (Ember.isPresent(valuePath)) {
-            return valuePath.match(/^content\..*/) ? valuePath : 'content.' + valuePath;
-        }
-    }),
-
-    /**
-     * `choiceLabelProperty` prefixed with 'content.' for 'select' `controlType`
-     *
-     * @property selectLabelProperty
-     * @type string
-     * @readonly
-     * @private
-     */
-    selectLabelProperty: Ember.computed('choiceLabelProperty', function(){
-        var labelPath = this.get('choiceLabelProperty');
-        if (Ember.isPresent(labelPath)) {
-            return labelPath.match(/^content\..*/) ? labelPath : 'content.' + labelPath;
-        }
-    }),
-
-    /**
      * The model used for validation. Defaults to the parent `Components.Form`'s `model`
      *
      * @property model

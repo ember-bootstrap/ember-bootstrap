@@ -70,7 +70,7 @@ test('controlType "select" is supported', function(assert) {
         choiceLabelProperty: 'label',
         choiceValueProperty: 'id'
     };
-    controlTypeSupportTest.call(this, assert, 'select', 'select', ['m','f'], null, options);
+    controlTypeSupportTest.call(this, assert, 'select', 'select', [options.choices[0], options.choices[1]], function() {return options.choices.findBy('id', this.val());}, options);
 });
 
 

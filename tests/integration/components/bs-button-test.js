@@ -104,13 +104,15 @@ test('button text is changed according to button state', function(assert) {
 });
 
 test('setting reset to true resets button state', function(assert) {
-    this.render(hbs`{{bs-button defaultText="text1" loadingText="text2" textState="loading" reset=reset}}`);
+    this.render(hbs`{{bs-button defaultText="text1" loadingText="text2" textState=textState reset=reset}}`);
+  this.set('textState', 'loading');
 
     assert.equal(this.$('button').text(),'text2');
 
-    this.set('reset', true);
+  this.set('reset', true);
 
-    assert.equal(this.$('button').text(),'text1');
+
+  assert.equal(this.$('button').text(),'text1');
 });
 
 test('clicking a button sends default action with callback, if promise is returned button state is changed according to promise state', function(assert) {

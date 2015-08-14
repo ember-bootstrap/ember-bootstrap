@@ -238,8 +238,11 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
 
     resetObserver: Ember.observer('reset', function(){
       if(this.get('reset')){
-            this.resetState();
-        }
+        Ember.run.scheduleOnce('actions', this, function() {
+          this.set('textState', 'default');
+        });
+
+      }
     }),
 
     text: Ember.computed('textState', 'defaultText', 'pendingText', 'resolvedText', 'rejectedText', function() {
