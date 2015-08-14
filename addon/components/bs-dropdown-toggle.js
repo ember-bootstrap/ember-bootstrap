@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import DropdownToggle from 'ember-bootstrap/mixins/dropdown-toggle';
-import DropDown from 'ember-bootstrap/components/bs-dropdown';
 
 /**
  Anchor element that triggers the parent dropdown to open.
@@ -44,19 +43,6 @@ export default Ember.Component.extend(DropdownToggle, {
     click: function (e) {
         e.preventDefault();
         this.sendAction();
-    },
-
-    didInsertElement: function() {
-        var dropDown = this.nearestOfType(DropDown);
-        if (dropDown) {
-            dropDown.registerChild(this);
-        }
-    },
-    willDestroyElement: function() {
-        var dropDown = this.nearestOfType(DropDown);
-        if (dropDown) {
-            dropDown.removeChild(this);
-        }
     }
 
 });

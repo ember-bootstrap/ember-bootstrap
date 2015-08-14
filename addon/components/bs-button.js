@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
-import ButtonGroup from 'ember-bootstrap/components/bs-button-group';
 import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
+import ComponentChild from 'ember-bootstrap/mixins/component-child';
+
 
 /**
  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -83,7 +84,7 @@ import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
  @uses Mixins.SizeClass
  @uses Mixins.I18nSupport
 */
-export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
+export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18nSupport, {
     tagName: 'button',
     classNames: ['btn'],
     classNameBindings: ['active', 'block:btn-block'],
@@ -278,18 +279,6 @@ export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
             }
         };
         this.sendAction('action', this.get('value'), evt, callback);
-    },
-
-    didInsertElement: function() {
-        var group = this.nearestOfType(ButtonGroup);
-        if (group) {
-            group.registerButton(this);
-        }
-    },
-    willDestroyElement: function() {
-        var group = this.nearestOfType(ButtonGroup);
-        if (group) {
-            group.removeButton(this);
-        }
     }
+
 });

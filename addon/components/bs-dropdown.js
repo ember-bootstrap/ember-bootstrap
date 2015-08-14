@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import toggleButton from 'ember-bootstrap/components/bs-dropdown-button';
+import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 
 /**
  Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.
@@ -61,7 +62,7 @@ import toggleButton from 'ember-bootstrap/components/bs-dropdown-button';
  @namespace Components
  @extends Ember.Component
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(ComponentParent, {
     classNameBindings: ['open', 'containerClass'],
 
     /**
@@ -154,7 +155,6 @@ export default Ember.Component.extend({
         // click event name that is namespaced to our component instance, so multiple dropdowns do not interfere
         // with each other
         this.clickEventName = 'click.' + this.get('elementId');
-        this.set('children', Ember.A());
     },
 
     /**
@@ -171,12 +171,5 @@ export default Ember.Component.extend({
             ($target.closest(this.$().find('.dropdown-menu')).length === 0 || this.get('closeOnMenuClick'))) {
             this.set('open', false);
         }
-    },
-
-    registerChild: function(child) {
-        this.get('children').addObject(child);
-    },
-    removeChild: function(child) {
-        this.get('children').removeObject(child);
     }
 });
