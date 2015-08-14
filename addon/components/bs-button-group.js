@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
+import ComponentParent from 'ember-bootstrap/mixins/component-parent';
+
 
 /**
  Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
@@ -56,7 +58,7 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  @extends Ember.Component
  @uses Mixins.SizeClass
  */
-export default Ember.Component.extend(SizeClass, {
+export default Ember.Component.extend(ComponentParent, SizeClass, {
 
     /**
      * @type string
@@ -159,26 +161,17 @@ export default Ember.Component.extend(SizeClass, {
      */
     value: undefined,
 
-    _syncValueToActiveButtons: Ember.observer('value','childButtons.@each.value','_inDOM',function(){
+    _syncValueToActiveButtons: Ember.observer('value','children.@each.value','_inDOM',function(){
         if (!this._inDOM) {
             return;
         }
         var value = this.get('value'),
             values = Ember.A(!Ember.isArray(value) ? [value] : value);
-        this.get('childButtons')
+        this.get('children')
             .forEach(function(button) {
                 button.set('active', values.contains(button.get('value')));
             });
     }),
-
-    /**
-     * Array of all child buttons (instances of Bootstrap.Button)
-     * @property childButtons
-     * @type array
-     * @protected
-     */
-    childButtons: Ember.A(),
-
 
     /**
      * Child buttons that are active (pressed)
@@ -186,7 +179,7 @@ export default Ember.Component.extend(SizeClass, {
      * @type array
      * @protected
      */
-    activeChildren: Ember.computed.filterBy('childButtons', 'active', true),
+    activeChildren: Ember.computed.filterBy('children', 'active', true),
 
     lastActiveChildren: null,
     newActiveChildren: Ember.computed.setDiff('activeChildren','lastActiveChildren'),
@@ -229,31 +222,24 @@ export default Ember.Component.extend(SizeClass, {
         });
     }),
 
-    _observeType: Ember.observer('type','childButtons.[]', function() {
+    _observeType: Ember.observer('type','children.[]', function() {
         if (this.get('type') === 'radio' || this.get('type') === 'checkbox') {
             // set all child buttons to toggle
-            this.get('childButtons').forEach(function(button) {
+            this.get('children').forEach(function(button) {
                 button.set('toggle', true);
             });
         }
     }),
 
     init: function() {
-        this._super();
-      this.set('childButtons', Ember.A());
+      this._super();
       this.set('lastActiveChildren', Ember.A());
-        this.get('activeChildren');
+      this.get('activeChildren');
     },
 
     _inDOM: false,
 
     didInsertElement: function() {
         this.set('_inDOM', true);
-    },
-    registerButton: function(button) {
-        this.get('childButtons').addObject(button);
-    },
-    removeButton: function(button) {
-        this.get('childButtons').removeObject(button);
     }
 });
