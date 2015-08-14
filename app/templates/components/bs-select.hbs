@@ -1,0 +1,12 @@
+{{#if prompt}}
+    <option disabled selected={{is-not value}}>
+        {{prompt}}
+    </option>
+{{/if}}
+
+{{#each content key="@identity" as |item|}}
+    <option value="{{read-path item optionValuePath}}"
+            selected={{is-equal item value}}>
+        {{read-path item optionLabelPath}}
+    </option>
+{{/each}}

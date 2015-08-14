@@ -1,3 +1,13 @@
+<a name"0.2.0"></a>
+## 0.2.0 (2015-08-14)
+
+
+#### Features
+
+* **Ember:** Updated components to be compatible with Ember 1.13 (thanks to [jesenko](https://github.com/jesenko)) and 2.0. *NOTE: Ember 1.13 is the minimum required version for ember-bootstrap 0.2.0 and above*
+* **Tests:** Refactored all component tests to use the new integration test style
+* **Select:** added Ember.Select replacement component ([19144085](https://github.com/kaliber5/ember-bootstrap/commit/19144085))
+
 <a name"0.1.4"></a>
 ### 0.1.4 (2015-08-05)
 

@@ -40,11 +40,9 @@ export default Ember.Component.extend(DropdownToggle, {
         }
     }),
 
-
     click: function (e) {
         e.preventDefault();
         this.sendAction();
     }
-
 
 });

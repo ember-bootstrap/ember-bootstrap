@@ -16,6 +16,12 @@ If you are using an ember-cli version prior to 0.1.5, use the following commands
     
     npm install --save-dev ember-bootstrap
     ember g ember-bootstrap
+    
+Beginning from version 0.2.0 ember-bootstrap will require at least Ember 0.13.x!    
+
+## Changelog
+
+See [CHANGELOG] for the list of changes.
 
 ## Authors
 
