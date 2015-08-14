@@ -29,7 +29,9 @@ export default Ember.Mixin.create({
    * @public
    */
   registerChild: function(child) {
-    this.get('children').addObject(child);
+    Ember.run.schedule('sync', this, function() {
+      this.get('children').addObject(child);
+    });
   },
 
   /**

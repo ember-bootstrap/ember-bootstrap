@@ -21,11 +21,18 @@ test('registerChild adds child component to children array', function(assert) {
     foo: 'bar'
   });
 
-  subject.registerChild(child);
-  var children = subject.get('children');
+  assert.expect(2);
 
-  assert.equal(children.length, 1, 'children array has one item.');
-  assert.equal(children.get('firstObject'), child, 'children array has child as its only item.');
+  Ember.run(function(){
+    subject.registerChild(child);
+  });
+
+  Ember.run(function(){
+    var children = subject.get('children');
+    assert.equal(children.length, 1, 'children array has one item.');
+    assert.equal(children.get('firstObject'), child, 'children array has child as its only item.');
+  });
+
 });
 
 test('removeChild removes existing child component from children array', function(assert) {
@@ -35,9 +42,19 @@ test('removeChild removes existing child component from children array', functio
     foo: 'bar'
   });
 
-  subject.registerChild(child);
-  subject.removeChild(child);
-  var children = subject.get('children');
+  assert.expect(1);
 
-  assert.equal(children.length, 0, 'children array is empty.');
+  Ember.run(function() {
+    subject.registerChild(child);
+  });
+
+  Ember.run(function() {
+    subject.removeChild(child);
+  });
+
+  Ember.run(function(){
+    var children = subject.get('children');
+    assert.equal(children.length, 0, 'children array is empty.');
+  });
+
 });
