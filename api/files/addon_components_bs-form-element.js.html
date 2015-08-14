@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.2.e86630bc</span></h1>
+    <h1>API Docs <span class="small">v0.2.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -108,7 +108,7 @@ var nonTextFieldControlTypes = Ember.A([
  import Ember from &#x27;ember&#x27;;
  import EmberValidations from &#x27;ember-validations&#x27;;
 
- export default Ember.Controller.extend(EmberValidations.Mixin,{
+ export default Ember.Controller.extend(EmberValidations,{
    email: null,
    password: null,
    rememberMe: false,
@@ -284,36 +284,6 @@ export default FormGroup.extend(I18nSupport, {
      * @public
      */
     cols: null,
-
-    /**
-     * &#x60;choiceValueProperty&#x60; prefixed with &#x27;content.&#x27; for &#x27;select&#x27; &#x60;controlType&#x60;
-     *
-     * @property selectValueProperty
-     * @type string
-     * @readonly
-     * @private
-     */
-    selectValueProperty: Ember.computed(&#x27;choiceValueProperty&#x27;, function(){
-        var valuePath = this.get(&#x27;choiceValueProperty&#x27;);
-        if (Ember.isPresent(valuePath)) {
-            return valuePath.match(/^content\..*/) ? valuePath : &#x27;content.&#x27; + valuePath;
-        }
-    }),
-
-    /**
-     * &#x60;choiceLabelProperty&#x60; prefixed with &#x27;content.&#x27; for &#x27;select&#x27; &#x60;controlType&#x60;
-     *
-     * @property selectLabelProperty
-     * @type string
-     * @readonly
-     * @private
-     */
-    selectLabelProperty: Ember.computed(&#x27;choiceLabelProperty&#x27;, function(){
-        var labelPath = this.get(&#x27;choiceLabelProperty&#x27;);
-        if (Ember.isPresent(labelPath)) {
-            return labelPath.match(/^content\..*/) ? labelPath : &#x27;content.&#x27; + labelPath;
-        }
-    }),
 
     /**
      * The model used for validation. Defaults to the parent &#x60;Components.Form&#x60;&#x27;s &#x60;model&#x60;
@@ -553,6 +523,8 @@ export default FormGroup.extend(I18nSupport, {
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
+                    <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
                     <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
                     <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>

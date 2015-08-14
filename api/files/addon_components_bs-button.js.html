@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.2.e86630bc</span></h1>
+    <h1>API Docs <span class="small">v0.2.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -58,6 +58,8 @@ import Ember from &#x27;ember&#x27;;
 import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
 import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
 import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
+import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
+
 
 /**
  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -138,7 +140,7 @@ import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
  @uses Mixins.SizeClass
  @uses Mixins.I18nSupport
 */
-export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
+export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18nSupport, {
     tagName: &#x27;button&#x27;,
     classNames: [&#x27;btn&#x27;],
     classNameBindings: [&#x27;active&#x27;, &#x27;block:btn-block&#x27;],
@@ -151,7 +153,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
      */
     classTypePrefix: &#x27;btn&#x27;,
 
-    attributeBindings: [&#x27;id&#x27;, &#x27;disabled&#x27;, &#x27;buttonType:type&#x27;],
+    attributeBindings: [&#x27;disabled&#x27;, &#x27;buttonType:type&#x27;],
 
     /**
      * Default label of the button. Not need if used as a block component
@@ -291,9 +293,12 @@ export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
     },
 
     resetObserver: Ember.observer(&#x27;reset&#x27;, function(){
-        if(this.get(&#x27;reset&#x27;)){
-            this.resetState();
-        }
+      if(this.get(&#x27;reset&#x27;)){
+        Ember.run.scheduleOnce(&#x27;actions&#x27;, this, function() {
+          this.set(&#x27;textState&#x27;, &#x27;default&#x27;);
+        });
+
+      }
     }),
 
     text: Ember.computed(&#x27;textState&#x27;, &#x27;defaultText&#x27;, &#x27;pendingText&#x27;, &#x27;resolvedText&#x27;, &#x27;rejectedText&#x27;, function() {
@@ -333,8 +338,12 @@ export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
             }
         };
         this.sendAction(&#x27;action&#x27;, this.get(&#x27;value&#x27;), evt, callback);
-    }
+    },
 
+  init: function() {
+    this._super();
+    this.get(&#x27;reset&#x27;);
+  }
 
 });
 
@@ -361,6 +370,8 @@ export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
+                    <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
                     <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
                     <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>

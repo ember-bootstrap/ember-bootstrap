@@ -14,6 +14,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.Input",
         "Components.Select",
         "Components.Textarea",
+        "Mixins.ComponentChild",
+        "Mixins.ComponentParent",
         "Mixins.DropdownToggle",
         "Mixins.I18nSupport",
         "Mixins.SizeClass",

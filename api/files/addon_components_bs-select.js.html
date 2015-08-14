@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.2.e86630bc</span></h1>
+    <h1>API Docs <span class="small">v0.2.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -71,8 +71,45 @@ import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
  @extends Ember.Select
  @uses Mixins.I18nSupport
  */
-export default Ember.Select.extend(I18nSupport, {
-    classNames: [&#x27;form-control&#x27;]
+export default Ember.Component.extend(I18nSupport, {
+  tagName: &#x27;select&#x27;,
+  classNames: [&#x27;form-control&#x27;],
+
+  content: null,
+  prompt: null,
+  optionValuePath: &#x27;id&#x27;,
+  optionLabelPath: &#x27;title&#x27;,
+  action: Ember.K, // action to fire on change
+
+  value: null,
+
+  init() {
+    this._super(...arguments);
+    if (!this.get(&#x27;content&#x27;)) {
+      this.set(&#x27;content&#x27;, []);
+    }
+  },
+
+  change: function() {
+    var selectEl = this.$().get(0);
+    var selectedIndex = selectEl.selectedIndex;
+    var content = this.get(&#x27;content&#x27;);
+
+    // decrement index by 1 if we have a prompt
+    var hasPrompt = !!this.get(&#x27;prompt&#x27;);
+    var contentIndex = hasPrompt ? selectedIndex - 1 : selectedIndex;
+
+    var selection = content[contentIndex];
+
+    // set the local, shadowed selection to avoid leaking
+    // changes to &#x60;selection&#x60; out via 2-way binding
+    this.set(&#x27;value&#x27;, selection);
+
+    var changeCallback = this.get(&#x27;action&#x27;);
+    changeCallback(selection);
+  }
+
+  
 });
     </pre>
 </div>
@@ -97,6 +134,8 @@ export default Ember.Select.extend(I18nSupport, {
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
+                    <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
                     <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
                     <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>

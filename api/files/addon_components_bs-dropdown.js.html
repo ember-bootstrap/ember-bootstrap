@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.2.e86630bc</span></h1>
+    <h1>API Docs <span class="small">v0.2.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -56,6 +56,7 @@
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import toggleButton from &#x27;ember-bootstrap/components/bs-dropdown-button&#x27;;
+import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
 
 /**
  Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.
@@ -117,7 +118,7 @@ import toggleButton from &#x27;ember-bootstrap/components/bs-dropdown-button&#x2
  @namespace Components
  @extends Ember.Component
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(ComponentParent, {
     classNameBindings: [&#x27;open&#x27;, &#x27;containerClass&#x27;],
 
     /**
@@ -169,8 +170,8 @@ export default Ember.Component.extend({
      * @readonly
      * @protected
      */
-    toggleType: Ember.computed(&#x27;childViews.@each&#x27;, function() {
-        if (this.get(&#x27;childViews&#x27;).any(function(view) {
+    toggleType: Ember.computed(&#x27;children.[]&#x27;, function() {
+        if (this.get(&#x27;children&#x27;).any(function(view) {
             return view instanceof toggleButton;
         })) {
             return &#x27;button&#x27;;
@@ -252,6 +253,8 @@ export default Ember.Component.extend({
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
+                    <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
                     <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
                     <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>

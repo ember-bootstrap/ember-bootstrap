@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-dropdown-menu.js - ember-bootstrap</title>
+    <title>addon/mixins/component-parent.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,7 +49,7 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-dropdown-menu.js <small>File</small></h1>
+    <h1>addon/mixins/component-parent.js <small>File</small></h1>
 </div>
 
 <div class="file">
@@ -57,53 +57,49 @@
 import Ember from &#x27;ember&#x27;;
 
 /**
- Component for the dropdown menu.
-
- See {{#crossLink &quot;Components.Dropdown&quot;}}{{/crossLink}} for examples.
-
- @class DropdownMenu
- @namespace Components
- @extends Ember.Component
+ * Mixin for components that act as a parent component in a parent-child relationship of components
+ *
+ * @class ComponentParent
+ * @namespace Mixins
  */
-export default Ember.Component.extend({
+export default Ember.Mixin.create({
 
-    /**
-     * Defaults to a &#x60;&lt;ul&gt;&#x60; tag. Change for other types of dropdown menus.
-     *
-     * @property tagName
-     * @type string
-     * @default ul
-     * @public
-     */
-    tagName: &#x27;ul&#x27;,
-    classNames: [&#x27;dropdown-menu&#x27;],
-    classNameBindings: [&#x27;alignClass&#x27;],
+  /**
+   * Array of registered child components
+   *
+   * @property children
+   * @type array
+   * @protected
+   */
+  children: null,
 
-    /**
-     * @property ariaRole
-     * @default menu
-     * @type string
-     * @protected
-     */
-    ariaRole: &#x27;menu&#x27;,
+  _onInit: Ember.on(&#x27;init&#x27;, function() {
+    this.set(&#x27;children&#x27;, Ember.A());
+  }),
 
-    /**
-     * Alignment of the menu, either &quot;left&quot; or &quot;right&quot;
-     *
-     * @property align
-     * @type string
-     * @default left
-     * @public
-     */
-    align: &#x27;left&#x27;,
+  /**
+   * Register a component as a child of this parent
+   *
+   * @method registerChild
+   * @param child
+   * @public
+   */
+  registerChild: function(child) {
+    Ember.run.schedule(&#x27;sync&#x27;, this, function() {
+      this.get(&#x27;children&#x27;).addObject(child);
+    });
+  },
 
-    alignClass: Ember.computed(&#x27;align&#x27;, function() {
-        if (this.get(&#x27;align&#x27;) !== &#x27;left&#x27;) {
-            return &#x27;dropdown-menu-&#x27; + this.get(&#x27;align&#x27;);
-        }
-    })
-
-
+  /**
+   * Remove the child component from this parent component
+   *
+   * @method removeChild
+   * @param child
+   * @public
+   */
+  removeChild: function(child) {
+    this.get(&#x27;children&#x27;).removeObject(child);
+  }
 });
 
     </pre>

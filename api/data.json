@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "0.1.2.e86630bc",
+        "version": "v0.2.0",
         "external": {
             "data": [
                 {
@@ -156,6 +156,28 @@
                 "Components": 1
             }
         },
+        "addon/mixins/component-child.js": {
+            "name": "addon/mixins/component-child.js",
+            "modules": {},
+            "classes": {
+                "Mixins.ComponentChild": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Mixins": 1
+            }
+        },
+        "addon/mixins/component-parent.js": {
+            "name": "addon/mixins/component-parent.js",
+            "modules": {},
+            "classes": {
+                "Mixins.ComponentParent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Mixins": 1
+            }
+        },
         "addon/mixins/dropdown-toggle.js": {
             "name": "addon/mixins/dropdown-toggle.js",
             "modules": {},
@@ -230,7 +252,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-button-group.js",
-            "line": 5,
+            "line": 6,
             "description": "Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.\nSee http://getbootstrap.com/components/#btn-groups\n\nUse as a block level component with any number of {{#crossLink \"Components.Button\"}}{{/crossLink}} components as children:\n\n```handlebars\n{{#bs-button-group}}\n   {{#bs-button}}1{{/bs-button}}\n   {{#bs-button}}2{{/bs-button}}\n   {{#bs-button}}3{{/bs-button}}\n{{/bs-button-group}}\n```\n\n### Radio-like behaviour\n\nUse the `type` property set to \"radio\" to make the child buttons toggle like radio buttons, i.e. only one button can be active.\nSet the `value` property of the buttons to something meaningful. The `value` property of the button group will then reflect\nthe value of the active button:\n\n```handlebars\n{{#bs-button-group value=buttonGroupValue type=\"radio\"}}\n   {{#bs-button value=1}}1{{/bs-button}}\n   {{#bs-button value=2}}2{{/bs-button}}\n   {{#bs-button value=3}}3{{/bs-button}}\n{{/bs-button-group}}\n\nYou selected: {{buttonGroupValue}}!\n```\n\n### Checkbox-like behaviour\n\nSet `type` to \"checkbox\" to make any number of child buttons selectable. The `value` property will be an array\nof all the values of the active buttons:\n\n```handlebars\n{{#bs-button-group value=buttonGroupValue type=\"checkbox\"}}\n   {{#bs-button value=1}}1{{/bs-button}}\n   {{#bs-button value=2}}2{{/bs-button}}\n   {{#bs-button value=3}}3{{/bs-button}}\n{{/bs-button-group}}\n\nYou selected:\n<ul>\n{{#each value in buttonGroupValue}}\n   <li>{{value}}</li>\n{{/each}}\n</ul>\n```",
             "extends": "Ember.Component",
             "uses": [
@@ -247,7 +269,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-button.js",
-            "line": 6,
+            "line": 8,
             "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```hbs\n\\{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\"}}\n   Downloads\n\\{{/bs-button}}\n```\n\n### Actions\n\nSet the action property of the component to send an action to your controller. The following parameters will be sent:\n* value: the button's value, see the `value` property\n* event: the browsers event object\n* callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling\n\n```hbs\n\\{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" action=\"download\"}}\n   Download\n\\{{/bs-button}}\n```\n\n### States\n\nUse the `textState` property to change the label of the button. You can bind it to a controller property to set a \"loading\" state for example.\nThe label of the button will be taken from the `<state>Text` property.\n\n```hbs\n\\{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" textState=buttonState defaultText=\"Download\" loadingText=\"Loading...\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  buttonState: \"default\"\n  actions: {\n    download: function() {\n      this.set(\"buttonState\", \"loading\");\n    }\n  }\n});\n```\n\n### Promise support for automatic state change\n\nWhen using the callback function of the click action to supply a Promise for any asynchronous operation the button will\nmanage its `textState` property automatically, changing its value according to the state of the promise:\n\"default\" > \"pending\" > \"resolved\"/\"rejected\"\n\n```hbs\n\\{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" defaultText=\"Download\" pendingText=\"Loading...\" resolvedText=\"Completed!\" rejectedText=\"Oups!?\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  actions: {\n    download: function(actionParam, evt, cb) {\n      promise = new Ember.RSVP.Promise(...);\n      cb(promise);\n    }\n  }\n});\n```\n\n### I18n support\n\nSupports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.\nSee {{#crossLink \"Mixins.I18nSupport\"}}{{/crossLink}}",
             "extends": "Ember.Component",
             "uses": [
@@ -314,7 +336,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-dropdown.js",
-            "line": 4,
+            "line": 5,
             "description": "Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.\nSee http://getbootstrap.com/components/#dropdowns\n\nUse this component together with two sub components, a dropdown toggle (`Components.DropdownToggle` or\n`Components.DropdownButton` component) and a dropdown menu (`Components.DropdownMenu`) component:\n\n```hbs\n<nav class=\"navbar navbar-default navbar-static\">\n  <div class=\"container-fluid\">\n    <ul class=\"nav navbar-nav\">\n      {{#bs-dropdown tagName=\"li\"}}\n        {{#bs-dropdown-toggle}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-toggle}}\n        {{#bs-dropdown-menu}}\n          <li>{{#link-to \"index\"}}Something{{/link-to}}</li>\n          <li>{{#link-to \"index\"}}Something different{{/link-to}}</li>\n        {{/bs-dropdown-menu}}\n      {{/bs-dropdown}}\n    </ul>\n  </div>\n</nav>\n```\n\n### Button dropdowns\n\nTo use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the\n`Components.DropdownButton` component as the toggle:\n\n```hbs\n{{#bs-dropdown}}\n  {{#bs-dropdown-button}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-button}}\n  {{#bs-dropdown-menu}}\n    <li>{{#link-to \"index\"}}Something{{/link-to}}</li>\n    <li>{{#link-to \"index\"}}Something different{{/link-to}}</li>\n  {{/bs-dropdown-menu}}\n{{/bs-dropdown}}\n```\n\nIt has all the functionality of a `Components.Button` with additional dropdown support.\n\n### Split button dropdowns\n\nTo have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a\n`Components.Button` component and a `Components.DropdownButton`:\n\n```hbs\n{{#bs-dropdown}}\n  {{#bs-button}}Dropdown{{/bs-button}}\n  {{#bs-dropdown-button}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-button}}\n  {{#bs-dropdown-menu}}\n    <li>{{#link-to \"index\"}}Something{{/link-to}}</li>\n    <li>{{#link-to \"index\"}}Something different{{/link-to}}</li>\n  {{/bs-dropdown-menu}}\n{{/bs-dropdown}}\n```",
             "extends": "Ember.Component"
         },
@@ -329,7 +351,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-form-element.js",
             "line": 14,
-            "description": "Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.\n\n### Form layout\n\nThe appropriate Bootstrap markup for the given `formLayout` and `controlType` is automatically generated to easily\ncreate forms without coding the default Bootstrap form markup by hand:\n\n```hbs\n\\{{#bs-form formLayout=\"horizontal\" action=\"submit\"}}\n  \\{{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" value=email}}\n  \\{{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" value=password}}\n  \\{{bs-form-element controlType=\"checkbox\" label=\"Remember me\" value=rememberMe}}\n  \\{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n\\{{/bs-form}}\n```\n\n### Form validation\n\nIn the following example the control elements of the three form elements value will be bound to the properties\n(given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):\n\n```hbs\n\\{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\"}}\n  \\{{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" property=\"email\"}}\n  \\{{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" property=\"password\"}}\n  \\{{bs-form-element controlType=\"checkbox\" label=\"Remember me\" property=\"rememberMe\"}}\n  \\{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n\\{{/bs-form}}\n```\n\nBy using this indirection in comparison to directly binding the `value` property, you get the benefit of automatic\nform validation, given that your `model` is implementing [ember-validations](https://github.com/dockyard/ember-validations).\n\nIn the example above the `model` was our controller itself, so the control elements were bound to the appropriate\nproperties of our controller. A controller implementing validations on those properties could look like this:\n\n```js\nimport Ember from 'ember';\nimport EmberValidations from 'ember-validations';\n\nexport default Ember.Controller.extend(EmberValidations.Mixin,{\n  email: null,\n  password: null,\n  rememberMe: false,\n  validations: {\n    email: {\n      presence: true,\n      format: {\n        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$/\n      }\n    },\n    password: {\n      presence: true,\n      length: { minimum: 6, maximum: 10}\n    },\n    comments: {\n      length: { minimum: 5, maximum: 20}\n    }\n  }\n});\n```\n\nIf the `showValidation` property is `true` (which is automatically the case if a `focusOut` event is captured from the\ncontrol element or the containing `Components.Form` was submitted with its `model` failing validation) and there are\nvalidation errors for the `model`'s `property`, the appropriate Bootstrap validation markup (see\nhttp://getbootstrap.com/css/#forms-control-validation) is applied:\n\n* `validation` is set to 'error', which will set the `has-error` CSS class\n* the `errorIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are displayed as Bootstrap `help-block`s\n\nAs soon as the validation is successful again...\n\n* `validation` is set to 'success', which will set the `has-success` CSS class\n* the `successIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are removed\n\n### I18n support\n\nSupports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.\nSee {{#crossLink \"Mixins.I18nSupport\"}}{{/crossLink}}",
+            "description": "Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.\n\n### Form layout\n\nThe appropriate Bootstrap markup for the given `formLayout` and `controlType` is automatically generated to easily\ncreate forms without coding the default Bootstrap form markup by hand:\n\n```hbs\n\\{{#bs-form formLayout=\"horizontal\" action=\"submit\"}}\n  \\{{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" value=email}}\n  \\{{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" value=password}}\n  \\{{bs-form-element controlType=\"checkbox\" label=\"Remember me\" value=rememberMe}}\n  \\{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n\\{{/bs-form}}\n```\n\n### Form validation\n\nIn the following example the control elements of the three form elements value will be bound to the properties\n(given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):\n\n```hbs\n\\{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\"}}\n  \\{{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" property=\"email\"}}\n  \\{{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" property=\"password\"}}\n  \\{{bs-form-element controlType=\"checkbox\" label=\"Remember me\" property=\"rememberMe\"}}\n  \\{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n\\{{/bs-form}}\n```\n\nBy using this indirection in comparison to directly binding the `value` property, you get the benefit of automatic\nform validation, given that your `model` is implementing [ember-validations](https://github.com/dockyard/ember-validations).\n\nIn the example above the `model` was our controller itself, so the control elements were bound to the appropriate\nproperties of our controller. A controller implementing validations on those properties could look like this:\n\n```js\nimport Ember from 'ember';\nimport EmberValidations from 'ember-validations';\n\nexport default Ember.Controller.extend(EmberValidations,{\n  email: null,\n  password: null,\n  rememberMe: false,\n  validations: {\n    email: {\n      presence: true,\n      format: {\n        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$/\n      }\n    },\n    password: {\n      presence: true,\n      length: { minimum: 6, maximum: 10}\n    },\n    comments: {\n      length: { minimum: 5, maximum: 20}\n    }\n  }\n});\n```\n\nIf the `showValidation` property is `true` (which is automatically the case if a `focusOut` event is captured from the\ncontrol element or the containing `Components.Form` was submitted with its `model` failing validation) and there are\nvalidation errors for the `model`'s `property`, the appropriate Bootstrap validation markup (see\nhttp://getbootstrap.com/css/#forms-control-validation) is applied:\n\n* `validation` is set to 'error', which will set the `has-error` CSS class\n* the `errorIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are displayed as Bootstrap `help-block`s\n\nAs soon as the validation is successful again...\n\n* `validation` is set to 'success', which will set the `has-success` CSS class\n* the `successIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are removed\n\n### I18n support\n\nSupports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.\nSee {{#crossLink \"Mixins.I18nSupport\"}}{{/crossLink}}",
             "extends": "Components.FormGroup",
             "uses": [
                 "Mixins.I18nSupport"
@@ -414,6 +436,32 @@
                 "Mixins.I18nSupport"
             ]
         },
+        "Mixins.ComponentChild": {
+            "name": "Mixins.ComponentChild",
+            "shortname": "Mixins.ComponentChild",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mixins",
+            "file": "addon/mixins/component-child.js",
+            "line": 5,
+            "description": "Mixin for components that act as a child component in a parent-child relationship of components"
+        },
+        "Mixins.ComponentParent": {
+            "name": "Mixins.ComponentParent",
+            "shortname": "Mixins.ComponentParent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mixins",
+            "file": "addon/mixins/component-parent.js",
+            "line": 3,
+            "description": "Mixin for components that act as a parent component in a parent-child relationship of components"
+        },
         "Mixins.DropdownToggle": {
             "name": "Mixins.DropdownToggle",
             "shortname": "Mixins.DropdownToggle",
@@ -427,7 +475,7 @@
             ],
             "namespace": "Mixins",
             "file": "addon/mixins/dropdown-toggle.js",
-            "line": 3,
+            "line": 4,
             "description": "Mixin for components that act as dropdown toggles."
         },
         "Mixins.I18nSupport": {
@@ -597,7 +645,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 62,
+            "line": 63,
             "type": "string",
             "itemtype": "property",
             "name": "ariaRole",
@@ -609,7 +657,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 70,
+            "line": 71,
             "itemtype": "property",
             "name": "classNames",
             "type": "array",
@@ -621,7 +669,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 78,
+            "line": 79,
             "itemtype": "property",
             "name": "classNameBindings",
             "type": "array",
@@ -632,7 +680,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 85,
+            "line": 86,
             "itemtype": "property",
             "name": "classTypePrefix",
             "type": "String",
@@ -644,7 +692,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 93,
+            "line": 94,
             "description": "Set to true for a vertically stacked button group, see http://getbootstrap.com/components/#btn-groups-vertical",
             "itemtype": "property",
             "name": "vertical",
@@ -657,7 +705,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 103,
+            "line": 104,
             "description": "Set to true for the buttons to stretch at equal sizes to span the entire width of its parent.\n\n*Important*: You have to wrap every button component in a `div class=\"btn-group\">`:\n\n```handlebars\n<div class=\"btn-group\" role=\"group\">\n{{#bs-button}}My Button{{/bs-button}}\n</div>\n```\n\nSee http://getbootstrap.com/components/#btn-groups-justified",
             "itemtype": "property",
             "name": "justified",
@@ -670,7 +718,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 123,
+            "line": 124,
             "description": "The type of the button group specifies how child buttons behave and how the `value` property will be computed:\n\n### null\nIf `type` is not set (null), the button group will add no functionality besides Bootstrap styling\n\n### radio\nif `type` is set to \"radio\", the buttons will behave like radio buttons:\n* the buttons will toggle (`toggle` property of the child buttons will be set to true)\n* only one button may be active\n* the `value` property of the button group will reflect the `value` property of the active button\n\n### checkbox\nif `type` is set to \"checkbox\", the buttons will behave like checkboxes:\n* the buttons will toggle (`toggle` property of the child buttons will be set to true)\n* any number of buttons may be active\n* the `value` property of the button group will be an array containing the `value` properties of all active buttons",
             "itemtype": "property",
             "name": "type",
@@ -683,7 +731,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 149,
+            "line": 150,
             "description": "The value of the button group, computed by its child buttons.\nSee the {{#crossLink \"Button-Group/type:attribute\"}}`type` property{{/crossLink}} for how the value property is constructed.\n\nWhen you set the value, the corresponding buttons will be activated:\n* use a single value for a radio button group to activate the button with the same value\n* use an array of values for a checkbox button group to activate all the buttons with values contained in the array",
             "itemtype": "property",
             "name": "value",
@@ -695,19 +743,7 @@
         },
         {
             "file": "addon/components/bs-button-group.js",
-            "line": 175,
-            "description": "Array of all child buttons (instances of Bootstrap.Button)",
-            "itemtype": "property",
-            "name": "childButtons",
-            "type": "array",
-            "access": "protected",
-            "tagname": "",
-            "class": "Components.ButtonGroup",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/bs-button-group.js",
-            "line": 186,
+            "line": 176,
             "description": "Child buttons that are active (pressed)",
             "itemtype": "property",
             "name": "activeChildren",
@@ -719,7 +755,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 90,
+            "line": 92,
             "itemtype": "property",
             "name": "classTypePrefix",
             "type": "String",
@@ -731,7 +767,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 100,
+            "line": 102,
             "description": "Default label of the button. Not need if used as a block component",
             "itemtype": "property",
             "name": "defaultText",
@@ -743,7 +779,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 109,
+            "line": 111,
             "description": "Property to disable the button",
             "itemtype": "property",
             "name": "disabled",
@@ -756,7 +792,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 119,
+            "line": 121,
             "description": "Set the type of the button, either 'button' or 'submit'",
             "itemtype": "property",
             "name": "buttonType",
@@ -769,7 +805,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 129,
+            "line": 131,
             "description": "Set the 'active' class to apply active/pressed CSS styling",
             "itemtype": "property",
             "name": "active",
@@ -782,7 +818,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 139,
+            "line": 141,
             "description": "Property for block level buttons\n\nSee the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)",
             "itemtype": "property",
             "name": "block",
@@ -795,7 +831,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 150,
+            "line": 152,
             "description": "If toggle property is true, clicking the button will toggle the active state",
             "itemtype": "property",
             "name": "toggle",
@@ -808,7 +844,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 160,
+            "line": 162,
             "description": "If button is active and this is set, the icon property will match this property",
             "itemtype": "property",
             "name": "iconActive",
@@ -820,7 +856,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 169,
+            "line": 171,
             "description": "If button is inactive and this is set, the icon property will match this property",
             "itemtype": "property",
             "name": "iconInactive",
@@ -832,7 +868,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 178,
+            "line": 180,
             "description": "Class(es) (e.g. glyphicons or font awesome) to use as a button icon\nThis will render a <i class=\"{{icon}}\"></i> element in front of the button's label",
             "itemtype": "property",
             "name": "icon",
@@ -845,7 +881,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 196,
+            "line": 198,
             "description": "Supply a value that will be associated with this button. This will be send\nas a parameter of the default action triggered when clicking the button",
             "itemtype": "property",
             "name": "value",
@@ -857,7 +893,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 206,
+            "line": 208,
             "description": "State of the button. The button's label (if not used as a block component) will be set to the\n`<state>Text` property.\nThis property will automatically be set when using a click action that supplies the callback with an promise",
             "itemtype": "property",
             "name": "textState",
@@ -870,7 +906,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 218,
+            "line": 220,
             "description": "Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.",
             "itemtype": "property",
             "name": "reset",
@@ -882,7 +918,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 227,
+            "line": 229,
             "description": "This will reset the state property to 'default', and with that the button's label to defaultText",
             "itemtype": "method",
             "name": "resetState",
@@ -893,7 +929,7 @@
         },
         {
             "file": "addon/components/bs-button.js",
-            "line": 247,
+            "line": 252,
             "description": "Click handler. This will send the default \"action\" action, with the following parameters:\n* value of the button (that is the value of the \"value\" property)\n* original event object of the click event\n* callback: call that with a promise object, and the buttons state will automatically set to \"pending\", \"resolved\" and/or \"rejected\"",
             "itemtype": "method",
             "name": "click",
@@ -974,7 +1010,7 @@
         },
         {
             "file": "addon/components/bs-dropdown.js",
-            "line": 67,
+            "line": 68,
             "description": "This property reflects the state of the dropdown, whether it is open or closed.",
             "itemtype": "property",
             "name": "open",
@@ -987,7 +1023,7 @@
         },
         {
             "file": "addon/components/bs-dropdown.js",
-            "line": 77,
+            "line": 78,
             "description": "By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.",
             "itemtype": "property",
             "name": "closeOnMenuClick",
@@ -1000,7 +1036,7 @@
         },
         {
             "file": "addon/components/bs-dropdown.js",
-            "line": 87,
+            "line": 88,
             "description": "jQuery click event name, namespaced to this component's instance to prevent interference between multiple dropdowns.",
             "itemtype": "property",
             "name": "clickEventName",
@@ -1012,7 +1048,7 @@
         },
         {
             "file": "addon/components/bs-dropdown.js",
-            "line": 96,
+            "line": 97,
             "description": "A computed property to generate the suiting class for the dropdown container, either \"dropdown\" or \"btn-group\".",
             "itemtype": "property",
             "name": "containerClass",
@@ -1025,7 +1061,7 @@
         },
         {
             "file": "addon/components/bs-dropdown.js",
-            "line": 108,
+            "line": 109,
             "description": "This property is \"button\" if the toggle element is an instance of {{#crossLink \"Components.DropdownButton\"}}{{/crossLink}}, otherwise \"toggle\".",
             "itemtype": "property",
             "name": "toggleType",
@@ -1038,7 +1074,7 @@
         },
         {
             "file": "addon/components/bs-dropdown.js",
-            "line": 159,
+            "line": 160,
             "description": "Handler for click events to close the dropdown",
             "itemtype": "method",
             "name": "closeOnClickHandler",
@@ -1188,32 +1224,6 @@
         {
             "file": "addon/components/bs-form-element.js",
             "line": 232,
-            "description": "`choiceValueProperty` prefixed with 'content.' for 'select' `controlType`",
-            "itemtype": "property",
-            "name": "selectValueProperty",
-            "type": "string",
-            "readonly": "",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.FormElement",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/bs-form-element.js",
-            "line": 247,
-            "description": "`choiceLabelProperty` prefixed with 'content.' for 'select' `controlType`",
-            "itemtype": "property",
-            "name": "selectLabelProperty",
-            "type": "string",
-            "readonly": "",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.FormElement",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/bs-form-element.js",
-            "line": 262,
             "description": "The model used for validation. Defaults to the parent `Components.Form`'s `model`",
             "itemtype": "property",
             "name": "model",
@@ -1224,7 +1234,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 270,
+            "line": 240,
             "description": "The array of error messages from the `model`'s validation.",
             "itemtype": "property",
             "name": "errors",
@@ -1236,7 +1246,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 279,
+            "line": 249,
             "itemtype": "property",
             "name": "hasErrors",
             "type": "boolean",
@@ -1248,7 +1258,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 287,
+            "line": 257,
             "itemtype": "property",
             "name": "hasValidator",
             "type": "boolean",
@@ -1260,7 +1270,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 295,
+            "line": 265,
             "description": "If `true` form validation markup is rendered (requires a validatable `model`).",
             "itemtype": "property",
             "name": "showValidation",
@@ -1273,7 +1283,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 305,
+            "line": 275,
             "itemtype": "property",
             "name": "showErrors",
             "type": "boolean",
@@ -1285,7 +1295,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 313,
+            "line": 283,
             "description": "The validation (\"error\" or \"success\") or null if no validation is to be shown. Automatically computed from the\nmodels validation state.",
             "itemtype": "property",
             "name": "validation",
@@ -1298,7 +1308,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 329,
+            "line": 299,
             "itemtype": "property",
             "name": "hasLabel",
             "type": "boolean",
@@ -1310,7 +1320,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 337,
+            "line": 307,
             "description": "True for text field `controlType`s",
             "itemtype": "property",
             "name": "useIcons",
@@ -1323,7 +1333,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 349,
+            "line": 319,
             "description": "The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):\n\n* 'horizontal'\n* 'vertical'\n* 'inline'\n\nDefaults to the parent `form`'s `formLayout` property.",
             "itemtype": "property",
             "name": "formLayout",
@@ -1335,7 +1345,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 364,
+            "line": 334,
             "itemtype": "property",
             "name": "isVertical",
             "type": "boolean",
@@ -1347,7 +1357,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 372,
+            "line": 342,
             "itemtype": "property",
             "name": "isHorizontal",
             "type": "boolean",
@@ -1359,7 +1369,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 380,
+            "line": 350,
             "itemtype": "property",
             "name": "isInline",
             "type": "boolean",
@@ -1371,7 +1381,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 388,
+            "line": 358,
             "description": "The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same\nproperty of the parent form. The corresponding grid class for form controls is automatically computed.",
             "itemtype": "property",
             "name": "horizontalLabelGridClass",
@@ -1384,7 +1394,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 399,
+            "line": 369,
             "description": "Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.",
             "itemtype": "property",
             "name": "horizontalInputGridClass",
@@ -1397,7 +1407,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 414,
+            "line": 384,
             "description": "Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout\nform, that have no label.",
             "itemtype": "property",
             "name": "horizontalInputOffsetGridClass",
@@ -1410,7 +1420,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 429,
+            "line": 399,
             "description": "Reference to the parent `Components.Form` class.",
             "itemtype": "property",
             "name": "form",
@@ -1421,7 +1431,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 459,
+            "line": 429,
             "description": "Listen for focusOut events from the control element to automatically set `showValidation` to true to enable\nform validation markup rendering.",
             "itemtype": "event",
             "name": "focusOut",
@@ -1627,8 +1637,54 @@
             "namespace": "Components"
         },
         {
+            "file": "addon/mixins/component-parent.js",
+            "line": 11,
+            "description": "Array of registered child components",
+            "itemtype": "property",
+            "name": "children",
+            "type": "array",
+            "access": "protected",
+            "tagname": "",
+            "class": "Mixins.ComponentParent",
+            "namespace": "Mixins"
+        },
+        {
+            "file": "addon/mixins/component-parent.js",
+            "line": 24,
+            "description": "Register a component as a child of this parent",
+            "itemtype": "method",
+            "name": "registerChild",
+            "params": [
+                {
+                    "name": "child",
+                    "description": ""
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "class": "Mixins.ComponentParent",
+            "namespace": "Mixins"
+        },
+        {
+            "file": "addon/mixins/component-parent.js",
+            "line": 37,
+            "description": "Remove the child component from this parent component",
+            "itemtype": "method",
+            "name": "removeChild",
+            "params": [
+                {
+                    "name": "child",
+                    "description": ""
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "class": "Mixins.ComponentParent",
+            "namespace": "Mixins"
+        },
+        {
             "file": "addon/mixins/dropdown-toggle.js",
-            "line": 12,
+            "line": 13,
             "itemtype": "property",
             "name": "ariaRole",
             "default": "button",
@@ -1640,7 +1696,7 @@
         },
         {
             "file": "addon/mixins/dropdown-toggle.js",
-            "line": 24,
+            "line": 25,
             "description": "The default action is set to \"toggleDropdown\" on the parent {{#crossLink \"Components.Dropdown\"}}{{/crossLink}}",
             "itemtype": "property",
             "name": "action",

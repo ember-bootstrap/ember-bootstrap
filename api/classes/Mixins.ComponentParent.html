@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Mixins.SizeClass - ember-bootstrap</title>
+    <title>Mixins.ComponentParent - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,14 +49,14 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Mixins.SizeClass <small>Class</small></h1>
+    <h1>Mixins.ComponentParent <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_mixins_size-class.js.html#l3"><code>addon&#x2F;mixins&#x2F;size-class.js:3</code></a>
+            Defined in: <a href="../files/addon_mixins_component-parent.js.html#l3"><code>addon&#x2F;mixins&#x2F;component-parent.js:3</code></a>
         </div>
 
 
@@ -64,7 +64,7 @@
 
 
 <div class="well well-small">
-    <p>Mixin to set the appropriate class for components with different sizes.</p>
+    <p>Mixin for components that act as a parent component in a parent-child relationship of components</p>
 
 </div>
 
@@ -97,6 +97,7 @@
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
 
+            <li><a data-toggle="tab" href="#methods">Methods</a></li>
             <li><a data-toggle="tab" href="#properties">Properties</a></li>
     </ul>
 
@@ -104,17 +105,27 @@
         <div id="index" class="tab-pane active">
             <h2 class="off-left">Item Index</h2>
 
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method public">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_registerChild" data-tablink="registerChild">registerChild</a>
+
+                            </li>
+                            <li class="index-item method public">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_removeChild" data-tablink="removeChild">removeChild</a>
+
+                            </li>
+                    </ul>
+                </div>
 
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
                     <ul class="index-list properties">
                             <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix" data-tablink="classTypePrefix">classTypePrefix</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_size" data-tablink="size">size</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_children" data-tablink="children">children</a>
 
                             </li>
                     </ul>
@@ -123,13 +134,111 @@
 
         </div>
 
+            <div id="methods" class="tab-pane">
+                <h2 class="off-left">Methods</h2>
+
+                    <div id="method_registerChild" class="method item public">
+                        <h3 class="name">registerChild
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_mixins_component-parent.js.html#l24"><code>addon&#x2F;mixins&#x2F;component-parent.js:24</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Register a component as a child of this parent</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">child</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="method_removeChild" class="method item public">
+                        <h3 class="name">removeChild
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_mixins_component-parent.js.html#l37"><code>addon&#x2F;mixins&#x2F;component-parent.js:37</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Remove the child component from this parent component</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">child</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+            </div>
 
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_classTypePrefix" class="property item protected">
-                        <h3 class="name">classTypePrefix
-                            <span class="small">string</span>
+                    <div id="property_children" class="property item protected">
+                        <h3 class="name">children
+                            <span class="small">array</span>
                         </h3>
                     
                     
@@ -143,45 +252,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_mixins_size-class.js.html#l11"><code>addon&#x2F;mixins&#x2F;size-class.js:11</code></a>
+                            <a href="../files/addon_mixins_component-parent.js.html#l11"><code>addon&#x2F;mixins&#x2F;component-parent.js:11</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Prefix for the size class, e.g. &quot;btn&quot; for button size classes (&quot;btn-lg&quot;, &quot;btn-sm&quot; etc.)</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_size" class="property item public">
-                        <h3 class="name">size
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_mixins_size-class.js.html#l27"><code>addon&#x2F;mixins&#x2F;size-class.js:27</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Property for size styling, set to 'lg', 'sm' or 'xs'</p>
-                    <p>Also see the <a href="http://getbootstrap.com/css/#buttons-sizes">Bootstrap docs</a></p>
+                            <p>Array of registered child components</p>
                     
                         </div>
                     

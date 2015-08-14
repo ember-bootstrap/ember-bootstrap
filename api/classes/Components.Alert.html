@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.1.2.e86630bc</span></h1>
+    <h1>API Docs <span class="small">v0.2.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -73,7 +73,7 @@
 
 
 <div class="well well-small">
-    <p>Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts</p>
+    <p>Implements Bootstrap alerts, see <a href="http://getbootstrap.com/components/#alerts">http://getbootstrap.com/components/#alerts</a></p>
 <p>By default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
 <code>type</code> property for proper styling.</p>
 <pre class="code prettyprint"><code class="language-hbs">{{#bs-alert type=&quot;success&quot;}}
@@ -574,12 +574,12 @@
                         </div>
                     
                         <div class="description">
-                            <p>Returns a jQuery object for this view's element. If you pass in a selector
+                            Returns a jQuery object for this view's element. If you pass in a selector
                     string, this method will return a jQuery object, using the current element
-                    as its buffer.</p>
-                    <p>For example, calling <code>view.$('li')</code> will return a jQuery object containing
-                    all of the <code>li</code> elements inside the DOM element of this view.</p>
+                    as its buffer.
                     
+                    For example, calling <code>view.$(&#x27;li&#x27;)</code> will return a jQuery object containing
+                    all of the <code>li</code> elements inside the DOM element of this view.
                         </div>
                     
                             <div class="params">
@@ -593,8 +593,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>a jQuery-compatible selector string</p>
-                    
+                                            a jQuery-compatible selector string
                                         </div>
                     
                                     </li>
@@ -606,8 +605,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">JQuery</span>:
-                                        <p>the jQuery object for the DOM node</p>
-                    
+                                        the jQuery object for the DOM node
                                 </div>
                             </div>
                     
@@ -636,9 +634,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>Iterates through the view's attribute bindings, sets up observers for each,
-                    then applies the current value of the attributes to the passed render buffer.</p>
-                    
+                            Iterates through the view's attribute bindings, sets up observers for each,
+                    then applies the current value of the attributes to the passed render buffer.
                         </div>
                     
                             <div class="params">
@@ -694,11 +691,10 @@
                         </div>
                     
                         <div class="description">
-                            <p>Iterates over the view's <code>classNameBindings</code> array, inserts the value
+                            Iterates over the view's <code>classNameBindings</code> array, inserts the value
                     of the specified property into the <code>classNames</code> array, then creates an
                     observer to update the view's element if the bound property ever changes
-                    in the future.</p>
-                    
+                    in the future.
                         </div>
                     
                     
@@ -728,11 +724,11 @@
                         </div>
                     
                         <div class="description">
-                            <p>Given a property name, returns a dasherized version of that
-                    property name if the property evaluates to a non-falsy value.</p>
-                    <p>For example, if the view has property <code>isUrgent</code> that evaluates to true,
-                    passing <code>isUrgent</code> to this method will return <code>&quot;is-urgent&quot;</code>.</p>
+                            Given a property name, returns a dasherized version of that
+                    property name if the property evaluates to a non-falsy value.
                     
+                    For example, if the view has property <code>isUrgent</code> that evaluates to true,
+                    passing <code>isUrgent</code> to this method will return <code>&quot;is-urgent&quot;</code>.
                         </div>
                     
                             <div class="params">
@@ -778,9 +774,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>If a value that affects template rendering changes, the view should be
-                    re-rendered to reflect the new value.</p>
-                    
+                            If a value that affects template rendering changes, the view should be
+                    re-rendered to reflect the new value.
                         </div>
                     
                     
@@ -810,9 +805,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>When the view's <code>isVisible</code> property changes, toggle the visibility
-                    element of the actual DOM element.</p>
-                    
+                            When the view's <code>isVisible</code> property changes, toggle the visibility
+                    element of the actual DOM element.
                         </div>
                     
                     
@@ -841,9 +835,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>Returns a hash of property names and container names that injected
-                    properties will lookup on the container lazily.</p>
-                    
+                            Returns a hash of property names and container names that injected
+                    properties will lookup on the container lazily.
                         </div>
                     
                     
@@ -852,8 +845,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>Hash of all lazy injected property keys to container names</p>
-                    
+                                        Hash of all lazy injected property keys to container names
                                 </div>
                             </div>
                     
@@ -882,8 +874,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Provides lookup-time type validation for injected properties.</p>
-                    
+                            Provides lookup-time type validation for injected properties.
                         </div>
                     
                     
@@ -913,8 +904,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>When the parent view changes, recursively invalidate <code>controller</code></p>
-                    
+                            When the parent view changes, recursively invalidate <code>controller</code>
                         </div>
                     
                     
@@ -944,12 +934,12 @@
                         </div>
                     
                         <div class="description">
-                            <p>Registers the view in the view registry, keyed on the view's <code>elementId</code>.
+                            Registers the view in the view registry, keyed on the view's <code>elementId</code>.
                     This is used by the EventDispatcher to locate the view in response to
-                    events.</p>
-                    <p>This method should only be called once the view has been inserted into the
-                    DOM.</p>
+                    events.
                     
+                    This method should only be called once the view has been inserted into the
+                    DOM.
                         </div>
                     
                     
@@ -979,9 +969,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>Invoked by the run loop to actually destroy the object. This is
-                    scheduled for execution by the <code>destroy</code> method.</p>
-                    
+                            Invoked by the run loop to actually destroy the object. This is
+                    scheduled for execution by the <code>destroy</code> method.
                         </div>
                     
                     
@@ -1011,9 +1000,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>Removes the view from the view registry. This should be called when the
-                    view is removed from DOM.</p>
-                    
+                            Removes the view from the view registry. This should be called when the
+                    view is removed from DOM.
                         </div>
                     
                     
@@ -1042,35 +1030,46 @@
                         </div>
                     
                         <div class="description">
-                            <p>Adds an observer on a property.</p>
-                    <p>This is the core method used to register an observer for a property.</p>
-                    <p>Once you call this method, any time the key's value is set, your observer
+                            Adds an observer on a property.
+                    
+                    This is the core method used to register an observer for a property.
+                    
+                    Once you call this method, any time the key's value is set, your observer
                     will be notified. Note that the observers are triggered any time the
                     value is set, regardless of whether it has actually changed. Your
-                    observer should be prepared to handle that.</p>
-                    <p>You can also pass an optional context parameter to this method. The
+                    observer should be prepared to handle that.
+                    
+                    You can also pass an optional context parameter to this method. The
                     context will be passed to your observer method whenever it is triggered.
                     Note that if you add the same target/method pair on a key multiple times
                     with different context parameters, your observer will only be called once
-                    with the last context you passed.</p>
-                    <h3>Observer Methods</h3>
-                    <p>Observer methods you pass should generally have the following signature if
-                    you do not pass a <code>context</code> parameter:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">fooDidChange: function(sender, key, value, rev) { };
-                    </code></pre>
-                    <p>The sender is the object that changed. The key is the property that
+                    with the last context you passed.
+                    
+                    ### Observer Methods
+                    
+                    Observer methods you pass should generally have the following signature if
+                    you do not pass a <code>context</code> parameter:
+                    
+                    <code>&#x60;</code>javascript
+                    fooDidChange: function(sender, key, value, rev) { };
+                    <code>&#x60;</code>
+                    
+                    The sender is the object that changed. The key is the property that
                     changes. The value property is currently reserved and unused. The rev
                     is the last property revision of the object when it changed, which you can
-                    use to detect if the key value has really changed or not.</p>
-                    <p>If you pass a <code>context</code> parameter, the context will be passed before the
-                    revision like so:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">fooDidChange: function(sender, key, value, context, rev) { };
-                    </code></pre>
-                    <p>Usually you will not need the value, context or revision parameters at
+                    use to detect if the key value has really changed or not.
+                    
+                    If you pass a <code>context</code> parameter, the context will be passed before the
+                    revision like so:
+                    
+                    <code>&#x60;</code>javascript
+                    fooDidChange: function(sender, key, value, context, rev) { };
+                    <code>&#x60;</code>
+                    
+                    Usually you will not need the value, context or revision parameters at
                     the end. In this case, it is common to write observer methods that take
                     only a sender and key value as parameters or, if you aren't interested in
-                    any of these values, to write an observer that has no parameters at all.</p>
-                    
+                    any of these values, to write an observer that has no parameters at all.
                         </div>
                     
                             <div class="params">
@@ -1083,8 +1082,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The key to observer</p>
-                    
+                                            The key to observer
                                         </div>
                     
                                     </li>
@@ -1094,8 +1092,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The target object to invoke</p>
-                    
+                                            The target object to invoke
                                         </div>
                     
                                     </li>
@@ -1105,8 +1102,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The method to invoke.</p>
-                    
+                                            The method to invoke.
                                         </div>
                     
                                     </li>
@@ -1138,16 +1134,17 @@
                         </div>
                     
                         <div class="description">
-                            <p>Appends the view's element to the document body. If the view does
+                            Appends the view's element to the document body. If the view does
                     not have an HTML representation yet
-                    the element will be generated automatically.</p>
-                    <p>If your application uses the <code>rootElement</code> property, you must append
-                    the view within that element. Rendering views outside of the <code>rootElement</code>
-                    is not supported.</p>
-                    <p>Note that this method just schedules the view to be appended; the DOM
-                    element will not be appended to the document body until all bindings have
-                    finished synchronizing.</p>
+                    the element will be generated automatically.
                     
+                    If your application uses the <code>rootElement</code> property, you must append
+                    the view within that element. Rendering views outside of the <code>rootElement</code>
+                    is not supported.
+                    
+                    Note that this method just schedules the view to be appended; the DOM
+                    element will not be appended to the document body until all bindings have
+                    finished synchronizing.
                         </div>
                     
                     
@@ -1156,8 +1153,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
-                    
+                                        receiver
                                 </div>
                             </div>
                     
@@ -1185,18 +1181,20 @@
                         </div>
                     
                         <div class="description">
-                            <p>Appends the view's element to the specified parent element.</p>
-                    <p>If the view does not have an HTML representation yet, <code>createElement()</code>
-                    will be called automatically.</p>
-                    <p>Note that this method just schedules the view to be appended; the DOM
+                            Appends the view's element to the specified parent element.
+                    
+                    If the view does not have an HTML representation yet, <code>createElement()</code>
+                    will be called automatically.
+                    
+                    Note that this method just schedules the view to be appended; the DOM
                     element will not be appended to the given element until all bindings have
-                    finished synchronizing.</p>
-                    <p>This is not typically a function that you will need to call directly when
+                    finished synchronizing.
+                    
+                    This is not typically a function that you will need to call directly when
                     building your application. You might consider using <code>Ember.ContainerView</code>
                     instead. If you do need to use <code>appendTo</code>, be sure that the target element
                     you are providing is associated with an <code>Ember.Application</code> and does not
-                    have an ancestor element that is associated with an Ember view.</p>
-                    
+                    have an ancestor element that is associated with an Ember view.
                         </div>
                     
                             <div class="params">
@@ -1209,8 +1207,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>selector, element, HTML string, or jQuery object</p>
-                    
+                                            selector, element, HTML string, or jQuery object
                                         </div>
                     
                                     </li>
@@ -1222,8 +1219,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
-                    
+                                        receiver
                                 </div>
                             </div>
                     
@@ -1251,15 +1247,15 @@
                         </div>
                     
                         <div class="description">
-                            <p>Begins a grouping of property changes.</p>
-                    <p>You can use this method to group property changes so that notifications
+                            Begins a grouping of property changes.
+                    
+                    You can use this method to group property changes so that notifications
                     will not be sent until the changes are finished. If you plan to make a
                     large number of changes to an object at one time, you should call this
                     method at the beginning of the changes to begin deferring change
                     notifications. When you are done making changes, call
                     <code>endPropertyChanges()</code> to deliver the deferred change notifications and end
-                    deferring.</p>
-                    
+                    deferring.
                         </div>
                     
                     
@@ -1295,11 +1291,10 @@
                         </div>
                     
                         <div class="description">
-                            <p>Returns the cached value of a computed property, if it exists.
+                            Returns the cached value of a computed property, if it exists.
                     This allows you to inspect the value of a computed property
                     without accidentally invoking it if it is intended to be
-                    generated lazily.</p>
-                    
+                    generated lazily.
                         </div>
                     
                             <div class="params">
@@ -1324,8 +1319,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>The cached value of the computed property, if any</p>
-                    
+                                        The cached value of the computed property, if any
                                 </div>
                             </div>
                     
@@ -1353,12 +1347,11 @@
                         </div>
                     
                         <div class="description">
-                            <p>Instantiates a view to be added to the childViews array during view
+                            Instantiates a view to be added to the childViews array during view
                     initialization. You generally will not call this method directly unless
                     you are overriding <code>createChildViews()</code>. Note that this method will
                     automatically configure the correct settings on the new view instance to
-                    act as a child of the parent.</p>
-                    
+                    act as a child of the parent.
                         </div>
                     
                             <div class="params">
@@ -1382,8 +1375,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>Attributes to add</p>
-                    
+                                            Attributes to add
                                         </div>
                     
                                     </li>
@@ -1395,8 +1387,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>new instance</p>
-                    
+                                        new instance
                                 </div>
                             </div>
                     
@@ -1424,12 +1415,12 @@
                         </div>
                     
                         <div class="description">
-                            <p>Creates a DOM representation of the view and all of its child views by
+                            Creates a DOM representation of the view and all of its child views by
                     recursively calling the <code>render()</code> method. Once the element is created,
-                    it sets the <code>element</code> property of the view to the rendered element.</p>
-                    <p>After the element has been inserted into the DOM, <code>didInsertElement</code> will
-                    be called on this view and all of its child views.</p>
+                    it sets the <code>element</code> property of the view to the rendered element.
                     
+                    After the element has been inserted into the DOM, <code>didInsertElement</code> will
+                    be called on this view and all of its child views.
                         </div>
                     
                     
@@ -1438,8 +1429,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
-                    
+                                        receiver
                                 </div>
                             </div>
                     
@@ -1467,11 +1457,12 @@
                         </div>
                     
                         <div class="description">
-                            <p>Set the value of a property to the current value minus some amount.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">player.decrementProperty('lives');
-                    orc.decrementProperty('health', 5);
-                    </code></pre>
+                            Set the value of a property to the current value minus some amount.
                     
+                    <code>&#x60;</code>javascript
+                    player.decrementProperty('lives');
+                    orc.decrementProperty('health', 5);
+                    <code>&#x60;</code>
                         </div>
                     
                             <div class="params">
@@ -1484,8 +1475,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the property to decrement</p>
-                    
+                                            The name of the property to decrement
                                         </div>
                     
                                     </li>
@@ -1495,8 +1485,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The amount to decrement by. Defaults to 1</p>
-                    
+                                            The amount to decrement by. Defaults to 1
                                         </div>
                     
                                     </li>
@@ -1508,8 +1497,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Number</span>:
-                                        <p>The new property value</p>
-                    
+                                        The new property value
                                 </div>
                             </div>
                     
@@ -1540,11 +1528,10 @@
                         </div>
                     
                         <div class="description">
-                            <p>You must call <code>destroy</code> on a view to destroy the view (and all of its
+                            You must call <code>destroy</code> on a view to destroy the view (and all of its
                     child views). This will remove the view from any parent node, then make
                     sure that the DOM element managed by the view can be released by the
-                    memory manager.</p>
-                    
+                    memory manager.
                         </div>
                     
                     
@@ -1573,17 +1560,19 @@
                         </div>
                     
                         <div class="description">
-                            <p>Destroys any existing element along with the element for any child views
+                            Destroys any existing element along with the element for any child views
                     as well. If the view does not currently have a element, then this method
-                    will do nothing.</p>
-                    <p>If you implement <code>willDestroyElement()</code> on your view, then this method will
-                    be invoked on your view before your element is destroyed to give you a
-                    chance to clean up any event handlers, etc.</p>
-                    <p>If you write a <code>willDestroyElement()</code> handler, you can assume that your
-                    <code>didInsertElement()</code> handler was called earlier for the same element.</p>
-                    <p>You should not call or override this method yourself, but you may
-                    want to implement the above callbacks.</p>
+                    will do nothing.
                     
+                    If you implement <code>willDestroyElement()</code> on your view, then this method will
+                    be invoked on your view before your element is destroyed to give you a
+                    chance to clean up any event handlers, etc.
+                    
+                    If you write a <code>willDestroyElement()</code> handler, you can assume that your
+                    <code>didInsertElement()</code> handler was called earlier for the same element.
+                    
+                    You should not call or override this method yourself, but you may
+                    want to implement the above callbacks.
                         </div>
                     
                     
@@ -1592,8 +1581,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
-                    
+                                        receiver
                                 </div>
                             </div>
                     
@@ -1621,14 +1609,14 @@
                         </div>
                     
                         <div class="description">
-                            <p>Ends a grouping of property changes.</p>
-                    <p>You can use this method to group property changes so that notifications
+                            Ends a grouping of property changes.
+                    
+                    You can use this method to group property changes so that notifications
                     will not be sent until the changes are finished. If you plan to make a
                     large number of changes to an object at one time, you should call
                     <code>beginPropertyChanges()</code> at the beginning of the changes to defer change
                     notifications. When you are done making changes, call this method to
-                    deliver the deferred change notifications and end deferring.</p>
-                    
+                    deliver the deferred change notifications and end deferring.
                         </div>
                     
                     
@@ -1664,12 +1652,11 @@
                         </div>
                     
                         <div class="description">
-                            <p>Attempts to discover the element in the parent element. The default
+                            Attempts to discover the element in the parent element. The default
                     implementation looks for an element with an ID of <code>elementId</code> (or the
                     view's guid if <code>elementId</code> is null). You can override this method to
                     provide your own form of lookup. For example, if you want to discover your
-                    element using a CSS class name instead of an ID.</p>
-                    
+                    element using a CSS class name instead of an ID.
                         </div>
                     
                             <div class="params">
@@ -1682,8 +1669,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The parent's DOM element</p>
-                    
+                                            The parent's DOM element
                                         </div>
                     
                                     </li>
@@ -1695,8 +1681,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">DOMElement</span>:
-                                        <p>The discovered element</p>
-                    
+                                        The discovered element
                                 </div>
                             </div>
                     
@@ -1724,30 +1709,38 @@
                         </div>
                     
                         <div class="description">
-                            <p>Retrieves the value of a property from the object.</p>
-                    <p>This method is usually similar to using <code>object[keyName]</code> or <code>object.keyName</code>,
+                            Retrieves the value of a property from the object.
+                    
+                    This method is usually similar to using <code>object[keyName]</code> or <code>object.keyName</code>,
                     however it supports both computed properties and the unknownProperty
-                    handler.</p>
-                    <p>Because <code>get</code> unifies the syntax for accessing all these kinds
+                    handler.
+                    
+                    Because <code>get</code> unifies the syntax for accessing all these kinds
                     of properties, it can make many refactorings easier, such as replacing a
-                    simple property with a computed property, or vice versa.</p>
-                    <h3>Computed Properties</h3>
-                    <p>Computed properties are methods defined with the <code>property</code> modifier
-                    declared at the end, such as:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">fullName: function() {
+                    simple property with a computed property, or vice versa.
+                    
+                    ### Computed Properties
+                    
+                    Computed properties are methods defined with the <code>property</code> modifier
+                    declared at the end, such as:
+                    
+                    <code>&#x60;</code>javascript
+                    fullName: function() {
                       return this.get('firstName') + ' ' + this.get('lastName');
                     }.property('firstName', 'lastName')
-                    </code></pre>
-                    <p>When you call <code>get</code> on a computed property, the function will be
+                    <code>&#x60;</code>
+                    
+                    When you call <code>get</code> on a computed property, the function will be
                     called and the return value will be returned instead of the function
-                    itself.</p>
-                    <h3>Unknown Properties</h3>
-                    <p>Likewise, if you try to call <code>get</code> on a property whose value is
+                    itself.
+                    
+                    ### Unknown Properties
+                    
+                    Likewise, if you try to call <code>get</code> on a property whose value is
                     <code>undefined</code>, the <code>unknownProperty()</code> method will be called on the object.
                     If this method returns any value other than <code>undefined</code>, it will be returned
-                    instead. This allows you to implement &quot;virtual&quot; properties that are
-                    not defined upfront.</p>
-                    
+                    instead. This allows you to implement "virtual" properties that are
+                    not defined upfront.
                         </div>
                     
                             <div class="params">
@@ -1760,8 +1753,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The property to retrieve</p>
-                    
+                                            The property to retrieve
                                         </div>
                     
                                     </li>
@@ -1773,8 +1765,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>The property value or undefined.</p>
-                    
+                                        The property value or undefined.
                                 </div>
                             </div>
                     
@@ -1802,16 +1793,20 @@
                         </div>
                     
                         <div class="description">
-                            <p>To get the values of multiple properties at once, call <code>getProperties</code>
-                    with a list of strings or an array:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">record.getProperties('firstName', 'lastName', 'zipCode');
-                    // { firstName: 'John', lastName: 'Doe', zipCode: '10011' }
-                    </code></pre>
-                    <p>is equivalent to:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">record.getProperties(['firstName', 'lastName', 'zipCode']);
-                    // { firstName: 'John', lastName: 'Doe', zipCode: '10011' }
-                    </code></pre>
+                            To get the values of multiple properties at once, call <code>getProperties</code>
+                    with a list of strings or an array:
                     
+                    <code>&#x60;</code>javascript
+                    record.getProperties('firstName', 'lastName', 'zipCode');
+                    // { firstName: 'John', lastName: 'Doe', zipCode: '10011' }
+                    <code>&#x60;</code>
+                    
+                    is equivalent to:
+                    
+                    <code>&#x60;</code>javascript
+                    record.getProperties(['firstName', 'lastName', 'zipCode']);
+                    // { firstName: 'John', lastName: 'Doe', zipCode: '10011' }
+                    <code>&#x60;</code>
                         </div>
                     
                             <div class="params">
@@ -1824,8 +1819,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>of keys to get</p>
-                    
+                                            of keys to get
                                         </div>
                     
                                     </li>
@@ -1864,11 +1858,12 @@
                         </div>
                     
                         <div class="description">
-                            <p>Retrieves the value of a property, or a default value in the case that the
-                    property returns <code>undefined</code>.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">person.getWithDefault('lastName', 'Doe');
-                    </code></pre>
+                            Retrieves the value of a property, or a default value in the case that the
+                    property returns <code>undefined</code>.
                     
+                    <code>&#x60;</code>javascript
+                    person.getWithDefault('lastName', 'Doe');
+                    <code>&#x60;</code>
                         </div>
                     
                             <div class="params">
@@ -1881,8 +1876,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the property to retrieve</p>
-                    
+                                            The name of the property to retrieve
                                         </div>
                     
                                     </li>
@@ -1892,8 +1886,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The value to return if the property value is undefined</p>
-                    
+                                            The value to return if the property value is undefined
                                         </div>
                     
                                     </li>
@@ -1905,8 +1898,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>The property value or the defaultValue.</p>
-                    
+                                        The property value or the defaultValue.
                                 </div>
                             </div>
                     
@@ -1935,8 +1927,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Handle events from <code>Ember.EventDispatcher</code></p>
-                    
+                            Handle events from <code>Ember.EventDispatcher</code>
                         </div>
                     
                             <div class="params">
@@ -1991,8 +1982,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Checks to see if object has any subscriptions for named event.</p>
-                    
+                            Checks to see if object has any subscriptions for named event.
                         </div>
                     
                             <div class="params">
@@ -2005,8 +1995,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the event</p>
-                    
+                                            The name of the event
                                         </div>
                     
                                     </li>
@@ -2018,8 +2007,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Boolean</span>:
-                                        <p>does the object have a subscription for event</p>
-                    
+                                        does the object have a subscription for event
                                 </div>
                             </div>
                     
@@ -2047,11 +2035,10 @@
                         </div>
                     
                         <div class="description">
-                            <p>Returns <code>true</code> if the object currently has observers registered for a
+                            Returns <code>true</code> if the object currently has observers registered for a
                     particular key. You can use this method to potentially defer performing
                     an expensive action until someone begins observing a particular property
-                    on the object.</p>
-                    
+                    on the object.
                         </div>
                     
                             <div class="params">
@@ -2064,8 +2051,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>Key to check</p>
-                    
+                                            Key to check
                                         </div>
                     
                                     </li>
@@ -2136,11 +2122,12 @@
                         </div>
                     
                         <div class="description">
-                            <p>Set the value of a property to the current value plus some amount.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">person.incrementProperty('age');
-                    team.incrementProperty('score', 2);
-                    </code></pre>
+                            Set the value of a property to the current value plus some amount.
                     
+                    <code>&#x60;</code>javascript
+                    person.incrementProperty('age');
+                    team.incrementProperty('score', 2);
+                    <code>&#x60;</code>
                         </div>
                     
                             <div class="params">
@@ -2153,8 +2140,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the property to increment</p>
-                    
+                                            The name of the property to increment
                                         </div>
                     
                                     </li>
@@ -2164,8 +2150,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The amount to increment by. Defaults to 1</p>
-                    
+                                            The amount to increment by. Defaults to 1
                                         </div>
                     
                                     </li>
@@ -2177,8 +2162,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Number</span>:
-                                        <p>The new property value</p>
-                    
+                                        The new property value
                                 </div>
                             </div>
                     
@@ -2210,13 +2194,11 @@
                         </div>
                     
                         <div class="description">
-                            <p>Setup a view, but do not finish waking it up.</p>
-                    <ul>
-                    <li>configure <code>childViews</code></li>
-                    <li>register the view with the global views hash, which is used for event
-                    dispatch</li>
-                    </ul>
+                            Setup a view, but do not finish waking it up.
                     
+                    * configure <code>childViews</code>
+                    * register the view with the global views hash, which is used for event
+                      dispatch
                         </div>
                     
                     
@@ -2246,9 +2228,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>Return the nearest ancestor whose parent is an instance of
-                    <code>klass</code>.</p>
-                    
+                            Return the nearest ancestor whose parent is an instance of
+                    <code>klass</code>.
                         </div>
                     
                             <div class="params">
@@ -2261,8 +2242,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>Subclass of Ember.View (or Ember.View itself)</p>
-                    
+                                            Subclass of Ember.View (or Ember.View itself)
                                         </div>
                     
                                     </li>
@@ -2273,8 +2253,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>Ember.View</p>
-                    
+                                        Ember.View
                                 </div>
                             </div>
                     
@@ -2303,9 +2282,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>Return the nearest ancestor that is an instance of the provided
-                    class.</p>
-                    
+                            Return the nearest ancestor that is an instance of the provided
+                    class.
                         </div>
                     
                             <div class="params">
@@ -2318,8 +2296,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>Subclass of Ember.View (or Ember.View itself)</p>
-                    
+                                            Subclass of Ember.View (or Ember.View itself)
                                         </div>
                     
                                     </li>
@@ -2330,8 +2307,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>Ember.View</p>
-                    
+                                        Ember.View
                                 </div>
                             </div>
                     
@@ -2359,9 +2335,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>Return the nearest ancestor that is an instance of the provided
-                    class or mixin.</p>
-                    
+                            Return the nearest ancestor that is an instance of the provided
+                    class or mixin.
                         </div>
                     
                             <div class="params">
@@ -2374,9 +2349,8 @@
                     
                     
                                         <div class="param-description">
-                                            <p>Subclass of Ember.View (or Ember.View itself),
-                    or an instance of Ember.Mixin.</p>
-                    
+                                            Subclass of Ember.View (or Ember.View itself),
+                           or an instance of Ember.Mixin.
                                         </div>
                     
                                     </li>
@@ -2387,8 +2361,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>Ember.View</p>
-                    
+                                        Ember.View
                                 </div>
                             </div>
                     
@@ -2416,8 +2389,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Return the nearest ancestor that has a given property.</p>
-                    
+                            Return the nearest ancestor that has a given property.
                         </div>
                     
                             <div class="params">
@@ -2430,8 +2402,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>A property name</p>
-                    
+                                            A property name
                                         </div>
                     
                                     </li>
@@ -2442,8 +2413,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>Ember.View</p>
-                    
+                                        Ember.View
                                 </div>
                             </div>
                     
@@ -2471,9 +2441,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>Convenience method to call <code>propertyWillChange</code> and <code>propertyDidChange</code> in
-                    succession.</p>
-                    
+                            Convenience method to call <code>propertyWillChange</code> and <code>propertyDidChange</code> in
+                    succession.
                         </div>
                     
                             <div class="params">
@@ -2486,8 +2455,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The property key to be notified about.</p>
-                    
+                                            The property key to be notified about.
                                         </div>
                     
                                     </li>
@@ -2526,8 +2494,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Cancels subscription for given name, target, and method.</p>
-                    
+                            Cancels subscription for given name, target, and method.
                         </div>
                     
                             <div class="params">
@@ -2540,8 +2507,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the event</p>
-                    
+                                            The name of the event
                                         </div>
                     
                                     </li>
@@ -2551,8 +2517,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The target of the subscription</p>
-                    
+                                            The target of the subscription
                                         </div>
                     
                                     </li>
@@ -2562,8 +2527,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The function of the subscription</p>
-                    
+                                            The function of the subscription
                                         </div>
                     
                                     </li>
@@ -2574,8 +2538,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>this</p>
-                    
+                                        this
                                 </div>
                             </div>
                     
@@ -2603,16 +2566,18 @@
                         </div>
                     
                         <div class="description">
-                            <p>Subscribes to a named event with given function.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">person.on('didLoad', function() {
+                            Subscribes to a named event with given function.
+                    
+                    <code>&#x60;</code>javascript
+                    person.on('didLoad', function() {
                       // fired once the person has loaded
                     });
-                    </code></pre>
-                    <p>An optional target can be passed in as the 2nd argument that will
-                    be set as the &quot;this&quot; for the callback. This is a good way to give your
-                    function access to the object triggering the event. When the target
-                    parameter is used the callback becomes the third argument.</p>
+                    <code>&#x60;</code>
                     
+                    An optional target can be passed in as the 2nd argument that will
+                    be set as the "this" for the callback. This is a good way to give your
+                    function access to the object triggering the event. When the target
+                    parameter is used the callback becomes the third argument.
                         </div>
                     
                             <div class="params">
@@ -2625,8 +2590,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the event</p>
-                    
+                                            The name of the event
                                         </div>
                     
                                     </li>
@@ -2637,8 +2601,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The &quot;this&quot; binding for the callback</p>
-                    
+                                            The "this" binding for the callback
                                         </div>
                     
                                     </li>
@@ -2648,8 +2611,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The callback to execute</p>
-                    
+                                            The callback to execute
                                         </div>
                     
                                     </li>
@@ -2660,8 +2622,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>this</p>
-                    
+                                        this
                                 </div>
                             </div>
                     
@@ -2689,13 +2650,13 @@
                         </div>
                     
                         <div class="description">
-                            <p>Subscribes a function to a named event and then cancels the subscription
-                    after the first time the event is triggered. It is good to use <code>one</code> when
-                    you only care about the first time an event has taken place.</p>
-                    <p>This function takes an optional 2nd argument that will become the &quot;this&quot;
-                    value for the callback. If this argument is passed then the 3rd argument
-                    becomes the function.</p>
+                            Subscribes a function to a named event and then cancels the subscription
+                    after the first time the event is triggered. It is good to use <code>&#x60;one</code>` when
+                    you only care about the first time an event has taken place.
                     
+                    This function takes an optional 2nd argument that will become the "this"
+                    value for the callback. If this argument is passed then the 3rd argument
+                    becomes the function.
                         </div>
                     
                             <div class="params">
@@ -2708,8 +2669,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the event</p>
-                    
+                                            The name of the event
                                         </div>
                     
                                     </li>
@@ -2720,8 +2680,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The &quot;this&quot; binding for the callback</p>
-                    
+                                            The "this" binding for the callback
                                         </div>
                     
                                     </li>
@@ -2731,8 +2690,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The callback to execute</p>
-                    
+                                            The callback to execute
                                         </div>
                     
                                     </li>
@@ -2743,8 +2701,7 @@
                                 <h4>Returns:</h4>
                     
                                 <div class="returns-description">
-                                        <p>this</p>
-                    
+                                        this
                                 </div>
                             </div>
                     
@@ -2772,17 +2729,18 @@
                         </div>
                     
                         <div class="description">
-                            <p>Notify the observer system that a property has just changed.</p>
-                    <p>Sometimes you need to change a value directly or indirectly without
+                            Notify the observer system that a property has just changed.
+                    
+                    Sometimes you need to change a value directly or indirectly without
                     actually calling <code>get()</code> or <code>set()</code> on it. In this case, you can use this
                     method and <code>propertyWillChange()</code> instead. Calling these two methods
                     together will notify all observers that the property has potentially
-                    changed value.</p>
-                    <p>Note that you must always call <code>propertyWillChange</code> and <code>propertyDidChange</code>
+                    changed value.
+                    
+                    Note that you must always call <code>propertyWillChange</code> and <code>propertyDidChange</code>
                     as a pair. If you do not, it may get the property change groups out of
                     order and cause notifications to be delivered more often than you would
-                    like.</p>
-                    
+                    like.
                         </div>
                     
                             <div class="params">
@@ -2795,8 +2753,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The property key that has just changed.</p>
-                    
+                                            The property key that has just changed.
                                         </div>
                     
                                     </li>
@@ -2835,17 +2792,18 @@
                         </div>
                     
                         <div class="description">
-                            <p>Notify the observer system that a property is about to change.</p>
-                    <p>Sometimes you need to change a value directly or indirectly without
+                            Notify the observer system that a property is about to change.
+                    
+                    Sometimes you need to change a value directly or indirectly without
                     actually calling <code>get()</code> or <code>set()</code> on it. In this case, you can use this
                     method and <code>propertyDidChange()</code> instead. Calling these two methods
                     together will notify all observers that the property has potentially
-                    changed value.</p>
-                    <p>Note that you must always call <code>propertyWillChange</code> and <code>propertyDidChange</code>
+                    changed value.
+                    
+                    Note that you must always call <code>propertyWillChange</code> and <code>propertyDidChange</code>
                     as a pair. If you do not, it may get the property change groups out of
                     order and cause notifications to be delivered more often than you would
-                    like.</p>
-                    
+                    like.
                         </div>
                     
                             <div class="params">
@@ -2858,8 +2816,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The property key that is about to change.</p>
-                    
+                                            The property key that is about to change.
                                         </div>
                     
                                     </li>
@@ -2898,8 +2855,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Removes the view's element from the element to which it is attached.</p>
-                    
+                            Removes the view's element from the element to which it is attached.
                         </div>
                     
                     
@@ -2908,8 +2864,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
-                    
+                                        receiver
                                 </div>
                             </div>
                     
@@ -2937,8 +2892,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Removes all children from the <code>parentView</code>.</p>
-                    
+                            Removes all children from the <code>parentView</code>.
                         </div>
                     
                     
@@ -2947,8 +2901,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
-                    
+                                        receiver
                                 </div>
                             </div>
                     
@@ -2976,8 +2929,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Removes the child view from the parent view.</p>
-                    
+                            Removes the child view from the parent view.
                         </div>
                     
                             <div class="params">
@@ -3002,8 +2954,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
-                    
+                                        receiver
                                 </div>
                             </div>
                     
@@ -3031,9 +2982,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>Removes the view from its <code>parentView</code>, if one is found. Otherwise
-                    does nothing.</p>
-                    
+                            Removes the view from its <code>parentView</code>, if one is found. Otherwise
+                    does nothing.
                         </div>
                     
                     
@@ -3042,8 +2992,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>receiver</p>
-                    
+                                        receiver
                                 </div>
                             </div>
                     
@@ -3071,10 +3020,9 @@
                         </div>
                     
                         <div class="description">
-                            <p>Remove an observer you have previously registered on this object. Pass
+                            Remove an observer you have previously registered on this object. Pass
                     the same key, target, and method you passed to <code>addObserver()</code> and your
-                    target will no longer receive notifications.</p>
-                    
+                    target will no longer receive notifications.
                         </div>
                     
                             <div class="params">
@@ -3087,8 +3035,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The key to observer</p>
-                    
+                                            The key to observer
                                         </div>
                     
                                     </li>
@@ -3098,8 +3045,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The target object to invoke</p>
-                    
+                                            The target object to invoke
                                         </div>
                     
                                     </li>
@@ -3109,8 +3055,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The method to invoke.</p>
-                    
+                                            The method to invoke.
                                         </div>
                     
                                     </li>
@@ -3142,13 +3087,13 @@
                         </div>
                     
                         <div class="description">
-                            <p>Called on your view when it should push strings of HTML into a
+                            Called on your view when it should push strings of HTML into a
                     <code>Ember.RenderBuffer</code>. Most users will want to override the <code>template</code>
-                    or <code>templateName</code> properties instead of this method.</p>
-                    <p>By default, <code>Ember.View</code> will look for a function in the <code>template</code>
-                    property and invoke it with the value of <code>context</code>. The value of
-                    <code>context</code> will be the view's controller unless you override it.</p>
+                    or <code>templateName</code> properties instead of this method.
                     
+                    By default, <code>Ember.View</code> will look for a function in the <code>template</code>
+                    property and invoke it with the value of <code>context</code>. The value of
+                    <code>context</code> will be the view's controller unless you override it.
                         </div>
                     
                             <div class="params">
@@ -3161,8 +3106,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The render buffer</p>
-                    
+                                            The render buffer
                                         </div>
                     
                                     </li>
@@ -3208,8 +3152,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The tag of the element to create and render into. Defaults to &quot;body&quot;.</p>
-                    
+                                            The tag of the element to create and render into. Defaults to "body".
                                         </div>
                     
                                     </li>
@@ -3221,8 +3164,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">HTMLBodyElement</span>:
-                                        <p>element</p>
-                    
+                                        element
                                 </div>
                             </div>
                     
@@ -3250,9 +3192,11 @@
                         </div>
                     
                         <div class="description">
-                            <p>Augments a constructor's prototype with additional
-                    properties and functions:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">MyObject = Ember.Object.extend({
+                            Augments a constructor's prototype with additional
+                    properties and functions:
+                    
+                    <code>&#x60;</code>javascript
+                    MyObject = Ember.Object.extend({
                       name: 'an object'
                     });
                     
@@ -3266,13 +3210,13 @@
                     })
                     
                     o2 = MyObject.create();
-                    o2.say(&quot;hello&quot;); // logs &quot;hello&quot;
+                    o2.say("hello"); // logs "hello"
                     
-                    o.say(&quot;goodbye&quot;); // logs &quot;goodbye&quot;
-                    </code></pre>
-                    <p>To add functions and properties to the constructor itself,
-                    see <code>reopenClass</code></p>
+                    o.say("goodbye"); // logs "goodbye"
+                    <code>&#x60;</code>
                     
+                    To add functions and properties to the constructor itself,
+                    see <code>reopenClass</code>
                         </div>
                     
                     
@@ -3301,8 +3245,10 @@
                         </div>
                     
                         <div class="description">
-                            <p>Augments a constructor's own properties and functions:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">MyObject = Ember.Object.extend({
+                            Augments a constructor's own properties and functions:
+                    
+                    <code>&#x60;</code>javascript
+                    MyObject = Ember.Object.extend({
                       name: 'an object'
                     });
                     
@@ -3312,18 +3258,21 @@
                     
                     MyObject.canBuild; // false
                     o = MyObject.create();
-                    </code></pre>
-                    <p>In other words, this creates static properties and functions for the class. These are only available on the class
-                    and not on any instance of that class.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">App.Person = Ember.Object.extend({
-                      name : &quot;&quot;,
+                    <code>&#x60;</code>
+                    
+                    In other words, this creates static properties and functions for the class. These are only available on the class
+                    and not on any instance of that class.
+                    
+                    <code>&#x60;</code>javascript
+                    App.Person = Ember.Object.extend({
+                      name : "",
                       sayHello : function() {
-                        alert(&quot;Hello. My name is &quot; + this.get('name'));
+                        alert("Hello. My name is " + this.get('name'));
                       }
                     });
                     
                     App.Person.reopenClass({
-                      species : &quot;Homo sapiens&quot;,
+                      species : "Homo sapiens",
                       createPerson: function(newPersonsName){
                         return App.Person.create({
                           name:newPersonsName
@@ -3332,20 +3281,21 @@
                     });
                     
                     var tom = App.Person.create({
-                      name : &quot;Tom Dale&quot;
+                      name : "Tom Dale"
                     });
-                    var yehuda = App.Person.createPerson(&quot;Yehuda Katz&quot;);
+                    var yehuda = App.Person.createPerson("Yehuda Katz");
                     
-                    tom.sayHello(); // &quot;Hello. My name is Tom Dale&quot;
-                    yehuda.sayHello(); // &quot;Hello. My name is Yehuda Katz&quot;
-                    alert(App.Person.species); // &quot;Homo sapiens&quot;
-                    </code></pre>
-                    <p>Note that <code>species</code> and <code>createPerson</code> are <em>not</em> valid on the <code>tom</code> and <code>yehuda</code>
-                    variables. They are only valid on <code>App.Person</code>.</p>
-                    <p>To add functions and properties to instances of
+                    tom.sayHello(); // "Hello. My name is Tom Dale"
+                    yehuda.sayHello(); // "Hello. My name is Yehuda Katz"
+                    alert(App.Person.species); // "Homo sapiens"
+                    <code>&#x60;</code>
+                    
+                    Note that <code>species</code> and <code>createPerson</code> are *not* valid on the <code>tom</code> and <code>yehuda</code>
+                    variables. They are only valid on <code>App.Person</code>.
+                    
+                    To add functions and properties to instances of
                     a constructor by extending the constructor's prototype
-                    see <code>reopen</code></p>
-                    
+                    see <code>reopen</code>
                         </div>
                     
                     
@@ -3374,13 +3324,13 @@
                         </div>
                     
                         <div class="description">
-                            <p>Replaces the content of the specified parent element with this view's
+                            Replaces the content of the specified parent element with this view's
                     element. If the view does not have an HTML representation yet,
-                    the element will be generated automatically.</p>
-                    <p>Note that this method just schedules the view to be appended; the DOM
-                    element will not be appended to the given element until all bindings have
-                    finished synchronizing</p>
+                    the element will be generated automatically.
                     
+                    Note that this method just schedules the view to be appended; the DOM
+                    element will not be appended to the given element until all bindings have
+                    finished synchronizing
                         </div>
                     
                             <div class="params">
@@ -3393,8 +3343,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>A selector, element, HTML string, or jQuery object</p>
-                    
+                                            A selector, element, HTML string, or jQuery object
                                         </div>
                     
                                     </li>
@@ -3406,8 +3355,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/Ember.View.html" class="crosslink external" target="_blank">Ember.View</a></span>:
-                                        <p>received</p>
-                    
+                                        received
                                 </div>
                             </div>
                     
@@ -3435,17 +3383,18 @@
                         </div>
                     
                         <div class="description">
-                            <p>Renders the view again. This will work regardless of whether the
+                            Renders the view again. This will work regardless of whether the
                     view is already in the DOM or not. If the view is in the DOM, the
                     rendering process will be deferred to give bindings a chance
-                    to synchronize.</p>
-                    <p>If children were added during the rendering process using <code>appendChild</code>,
-                    <code>rerender</code> will remove them, because they will be added again
-                    if needed by the next <code>render</code>.</p>
-                    <p>In general, if the display of your view changes, you should modify
-                    the DOM element directly instead of manually calling <code>rerender</code>, which can
-                    be slow.</p>
+                    to synchronize.
                     
+                    If children were added during the rendering process using <code>appendChild</code>,
+                    <code>rerender</code> will remove them, because they will be added again
+                    if needed by the next <code>render</code>.
+                    
+                    In general, if the display of your view changes, you should modify
+                    the DOM element directly instead of manually calling <code>rerender</code>, which can
+                    be slow.
                         </div>
                     
                     
@@ -3474,15 +3423,19 @@
                         </div>
                     
                         <div class="description">
-                            <p>Triggers a named action on the <code>ActionHandler</code>. Any parameters
+                            Triggers a named action on the <code>ActionHandler</code>. Any parameters
                     supplied after the <code>actionName</code> string will be passed as arguments
-                    to the action target function.</p>
-                    <p>If the <code>ActionHandler</code> has its <code>target</code> property set, actions may
+                    to the action target function.
+                    
+                    If the <code>ActionHandler</code> has its <code>target</code> property set, actions may
                     bubble to the <code>target</code>. Bubbling happens when an <code>actionName</code> can
                     not be found in the <code>ActionHandler</code>'s <code>actions</code> hash or if the
-                    action target function returns <code>true</code>.</p>
-                    <p>Example</p>
-                    <pre class="code prettyprint"><code class="language-js">App.WelcomeRoute = Ember.Route.extend({
+                    action target function returns <code>true</code>.
+                    
+                    Example
+                    
+                    <code>&#x60;</code>js
+                    App.WelcomeRoute = Ember.Route.extend({
                       actions: {
                         playTheme: function() {
                            this.send('playMusic', 'theme.mp3');
@@ -3492,8 +3445,7 @@
                         }
                       }
                     });
-                    </code></pre>
-                    
+                    <code>&#x60;</code>
                         </div>
                     
                             <div class="params">
@@ -3506,8 +3458,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The action to trigger</p>
-                    
+                                            The action to trigger
                                         </div>
                     
                                     </li>
@@ -3517,8 +3468,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>a context to send with the action</p>
-                    
+                                            a context to send with the action
                                         </div>
                     
                                     </li>
@@ -3550,12 +3500,16 @@
                         </div>
                     
                         <div class="description">
-                            <p>Triggers a named action on the controller context where the component is used if
-                    this controller has registered for notifications of the action.</p>
-                    <p>For example a component for playing or pausing music may translate click events
-                    into action notifications of &quot;play&quot; or &quot;stop&quot; depending on some internal state
-                    of the component:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">App.PlayButtonComponent = Ember.Component.extend({
+                            Triggers a named action on the controller context where the component is used if
+                    this controller has registered for notifications of the action.
+                    
+                    For example a component for playing or pausing music may translate click events
+                    into action notifications of "play" or "stop" depending on some internal state
+                    of the component:
+                    
+                    
+                    <code>&#x60;</code>javascript
+                    App.PlayButtonComponent = Ember.Component.extend({
                       click: function() {
                         if (this.get('isPlaying')) {
                           this.sendAction('play');
@@ -3564,17 +3518,24 @@
                         }
                       }
                     });
-                    </code></pre>
-                    <p>When used inside a template these component actions are configured to
-                    trigger actions in the outer application context:</p>
-                    <pre class="code prettyprint"><code class="language-handlebars">{{! application.hbs }}
-                    {{play-button play=&quot;musicStarted&quot; stop=&quot;musicStopped&quot;}}
-                    </code></pre>
-                    <p>When the component receives a browser <code>click</code> event it translate this
-                    interaction into application-specific semantics (&quot;play&quot; or &quot;stop&quot;) and
+                    <code>&#x60;</code>
+                    
+                    When used inside a template these component actions are configured to
+                    trigger actions in the outer application context:
+                    
+                    <code>&#x60;</code>handlebars
+                    {{! application.hbs }}
+                    {{play-button play="musicStarted" stop="musicStopped"}}
+                    <code>&#x60;</code>
+                    
+                    When the component receives a browser <code>click</code> event it translate this
+                    interaction into application-specific semantics ("play" or "stop") and
                     triggers the specified action name on the controller for the template
-                    where the component is used:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">App.ApplicationController = Ember.Controller.extend({
+                    where the component is used:
+                    
+                    
+                    <code>&#x60;</code>javascript
+                    App.ApplicationController = Ember.Controller.extend({
                       actions: {
                         musicStarted: function() {
                           // called when the play button is clicked
@@ -3586,27 +3547,33 @@
                         }
                       }
                     });
-                    </code></pre>
-                    <p>If no action name is passed to <code>sendAction</code> a default name of &quot;action&quot;
-                    is assumed.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">App.NextButtonComponent = Ember.Component.extend({
+                    <code>&#x60;</code>
+                    
+                    If no action name is passed to <code>sendAction</code> a default name of "action"
+                    is assumed.
+                    
+                    <code>&#x60;</code>javascript
+                    App.NextButtonComponent = Ember.Component.extend({
                       click: function() {
                         this.sendAction();
                       }
                     });
-                    </code></pre>
-                    <pre class="code prettyprint"><code class="language-handlebars">{{! application.hbs }}
-                    {{next-button action=&quot;playNextSongInAlbum&quot;}}
-                    </code></pre>
-                    <pre class="code prettyprint"><code class="language-javascript">App.ApplicationController = Ember.Controller.extend({
+                    <code>&#x60;</code>
+                    
+                    <code>&#x60;</code>handlebars
+                    {{! application.hbs }}
+                    {{next-button action="playNextSongInAlbum"}}
+                    <code>&#x60;</code>
+                    
+                    <code>&#x60;</code>javascript
+                    App.ApplicationController = Ember.Controller.extend({
                       actions: {
                         playNextSongInAlbum: function() {
                           ...
                         }
                       }
                     });
-                    </code></pre>
-                    
+                    <code>&#x60;</code>
                         </div>
                     
                             <div class="params">
@@ -3620,8 +3587,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>the action to trigger</p>
-                    
+                                            the action to trigger
                                         </div>
                     
                                     </li>
@@ -3632,8 +3598,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>a context to send with the action</p>
-                    
+                                            a context to send with the action
                                         </div>
                     
                                     </li>
@@ -3665,37 +3630,47 @@
                         </div>
                     
                         <div class="description">
-                            <p>Sets the provided key or path to the value.</p>
-                    <p>This method is generally very similar to calling <code>object[key] = value</code> or
+                            Sets the provided key or path to the value.
+                    
+                    This method is generally very similar to calling <code>object[key] = value</code> or
                     <code>object.key = value</code>, except that it provides support for computed
-                    properties, the <code>setUnknownProperty()</code> method and property observers.</p>
-                    <h3>Computed Properties</h3>
-                    <p>If you try to set a value on a key that has a computed property handler
+                    properties, the <code>setUnknownProperty()</code> method and property observers.
+                    
+                    ### Computed Properties
+                    
+                    If you try to set a value on a key that has a computed property handler
                     defined (see the <code>get()</code> method for an example), then <code>set()</code> will call
                     that method, passing both the value and key instead of simply changing
                     the value itself. This is useful for those times when you need to
                     implement a property that is composed of one or more member
-                    properties.</p>
-                    <h3>Unknown Properties</h3>
-                    <p>If you try to set a value on a key that is undefined in the target
-                    object, then the <code>setUnknownProperty()</code> handler will be called instead. This
-                    gives you an opportunity to implement complex &quot;virtual&quot; properties that
-                    are not predefined on the object. If <code>setUnknownProperty()</code> returns
-                    undefined, then <code>set()</code> will simply set the value on the object.</p>
-                    <h3>Property Observers</h3>
-                    <p>In addition to changing the property, <code>set()</code> will also register a property
-                    change with the object. Unless you have placed this call inside of a
-                    <code>beginPropertyChanges()</code> and <code>endPropertyChanges(),</code> any &quot;local&quot; observers
-                    (i.e. observer methods declared on the same object), will be called
-                    immediately. Any &quot;remote&quot; observers (i.e. observer methods declared on
-                    another object) will be placed in a queue and called at a later time in a
-                    coalesced manner.</p>
-                    <h3>Chaining</h3>
-                    <p>In addition to property changes, <code>set()</code> returns the value of the object
-                    itself so you can do chaining like this:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">record.set('firstName', 'Charles').set('lastName', 'Jolley');
-                    </code></pre>
+                    properties.
                     
+                    ### Unknown Properties
+                    
+                    If you try to set a value on a key that is undefined in the target
+                    object, then the <code>setUnknownProperty()</code> handler will be called instead. This
+                    gives you an opportunity to implement complex "virtual" properties that
+                    are not predefined on the object. If <code>setUnknownProperty()</code> returns
+                    undefined, then <code>set()</code> will simply set the value on the object.
+                    
+                    ### Property Observers
+                    
+                    In addition to changing the property, <code>set()</code> will also register a property
+                    change with the object. Unless you have placed this call inside of a
+                    <code>beginPropertyChanges()</code> and <code>endPropertyChanges(),</code> any "local" observers
+                    (i.e. observer methods declared on the same object), will be called
+                    immediately. Any "remote" observers (i.e. observer methods declared on
+                    another object) will be placed in a queue and called at a later time in a
+                    coalesced manner.
+                    
+                    ### Chaining
+                    
+                    In addition to property changes, <code>set()</code> returns the value of the object
+                    itself so you can do chaining like this:
+                    
+                    <code>&#x60;</code>javascript
+                    record.set('firstName', 'Charles').set('lastName', 'Jolley');
+                    <code>&#x60;</code>
                         </div>
                     
                             <div class="params">
@@ -3708,8 +3683,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The property to set</p>
-                    
+                                            The property to set
                                         </div>
                     
                                     </li>
@@ -3719,8 +3693,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The value to set or <code>null</code>.</p>
-                    
+                                            The value to set or <code>null</code>.
                                         </div>
                     
                                     </li>
@@ -3759,12 +3732,13 @@
                         </div>
                     
                         <div class="description">
-                            <p>Sets a list of properties at once. These properties are set inside
+                            Sets a list of properties at once. These properties are set inside
                     a single <code>beginPropertyChanges</code> and <code>endPropertyChanges</code> batch, so
-                    observers will be buffered.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">record.setProperties({ firstName: 'Charles', lastName: 'Jolley' });
-                    </code></pre>
+                    observers will be buffered.
                     
+                    <code>&#x60;</code>javascript
+                    record.setProperties({ firstName: 'Charles', lastName: 'Jolley' });
+                    <code>&#x60;</code>
                         </div>
                     
                             <div class="params">
@@ -3777,8 +3751,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>the hash of keys and values to set</p>
-                    
+                                            the hash of keys and values to set
                                         </div>
                     
                                     </li>
@@ -3818,10 +3791,10 @@
                         </div>
                     
                         <div class="description">
-                            <p>We're using setUnknownProperty as a hook to setup attributeBinding observers for
-                    properties that aren't defined on a view at initialization time.</p>
-                    <p>Note: setUnknownProperty will only be called once for each property.</p>
+                            We're using setUnknownProperty as a hook to setup attributeBinding observers for
+                    properties that aren't defined on a view at initialization time.
                     
+                    Note: setUnknownProperty will only be called once for each property.
                         </div>
                     
                             <div class="params">
@@ -3907,11 +3880,12 @@
                         </div>
                     
                         <div class="description">
-                            <p>Set the value of a boolean property to the opposite of its
-                    current value.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">starship.toggleProperty('warpDriveEngaged');
-                    </code></pre>
+                            Set the value of a boolean property to the opposite of its
+                    current value.
                     
+                    <code>&#x60;</code>javascript
+                    starship.toggleProperty('warpDriveEngaged');
+                    <code>&#x60;</code>
                         </div>
                     
                             <div class="params">
@@ -3924,8 +3898,7 @@
                     
                     
                                         <div class="param-description">
-                                            <p>The name of the property to toggle</p>
-                    
+                                            The name of the property to toggle
                                         </div>
                     
                                     </li>
@@ -3937,8 +3910,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type">Object</span>:
-                                        <p>The new property value</p>
-                    
+                                        The new property value
                                 </div>
                             </div>
                     
@@ -3966,30 +3938,37 @@
                         </div>
                     
                         <div class="description">
-                            <p>Returns a string representation which attempts to provide more information
+                            Returns a string representation which attempts to provide more information
                     than Javascript's <code>toString</code> typically does, in a generic way for all Ember
-                    objects.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">App.Person = Em.Object.extend()
+                    objects.
+                    
+                    <code>&#x60;</code>javascript
+                    App.Person = Em.Object.extend()
                     person = App.Person.create()
-                    person.toString() //=&gt; &quot;&lt;App.Person:ember1024&gt;&quot;
-                    </code></pre>
-                    <p>If the object's class is not defined on an Ember namespace, it will
-                    indicate it is a subclass of the registered superclass:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">Student = App.Person.extend()
+                    person.toString() //=> "<App.Person:ember1024>"
+                    <code>&#x60;</code>
+                    
+                    If the object's class is not defined on an Ember namespace, it will
+                    indicate it is a subclass of the registered superclass:
+                    
+                       <code>&#x60;</code>javascript
+                    Student = App.Person.extend()
                     student = Student.create()
-                    student.toString() //=&gt; &quot;&lt;(subclass of App.Person):ember1025&gt;&quot;
-                    </code></pre>
-                    <p>If the method <code>toStringExtension</code> is defined, its return value will be
-                    included in the output.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">App.Teacher = App.Person.extend({
+                    student.toString() //=> "<(subclass of App.Person):ember1025>"
+                    <code>&#x60;</code>
+                    
+                    If the method <code>toStringExtension</code> is defined, its return value will be
+                    included in the output.
+                    
+                    <code>&#x60;</code>javascript
+                    App.Teacher = App.Person.extend({
                       toStringExtension: function() {
                         return this.get('fullName');
                       }
                     });
                     teacher = App.Teacher.create()
-                    teacher.toString(); //=&gt; &quot;&lt;App.Teacher:ember1026:Tom Dale&gt;&quot;
-                    </code></pre>
-                    
+                    teacher.toString(); //=> "<App.Teacher:ember1026:Tom Dale>"
+                    <code>&#x60;</code>
                         </div>
                     
                     
@@ -3998,8 +3977,7 @@
                     
                                 <div class="returns-description">
                                             <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>:
-                                        <p>string representation</p>
-                    
+                                        string representation
                                 </div>
                             </div>
                     
@@ -4031,9 +4009,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>Override the default event firing from <code>Ember.Evented</code> to
-                    also call methods with the given name.</p>
-                    
+                            Override the default event firing from <code>Ember.Evented</code> to
+                    also call methods with the given name.
                         </div>
                     
                             <div class="params">
@@ -4078,8 +4055,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Override to implement teardown.</p>
-                    
+                            Override to implement teardown.
                         </div>
                     
                     
@@ -4146,16 +4122,21 @@
                         </div>
                     
                         <div class="description">
-                            <p>The collection of functions, keyed by name, available on this
-                    <code>ActionHandler</code> as action targets.</p>
-                    <p>These functions will be invoked when a matching <code>{{action}}</code> is triggered
-                    from within a template and the application's current route is this route.</p>
-                    <p>Actions can also be invoked from other parts of your application
-                    via <code>ActionHandler#send</code>.</p>
-                    <p>The <code>actions</code> hash will inherit action handlers from
+                            The collection of functions, keyed by name, available on this
+                    <code>ActionHandler</code> as action targets.
+                    
+                    These functions will be invoked when a matching <code>{{action}}</code> is triggered
+                    from within a template and the application's current route is this route.
+                    
+                    Actions can also be invoked from other parts of your application
+                    via <code>ActionHandler#send</code>.
+                    
+                    The <code>actions</code> hash will inherit action handlers from
                     the <code>actions</code> hash defined on extended parent classes
-                    or mixins rather than just replace the entire hash, e.g.:</p>
-                    <pre class="code prettyprint"><code class="language-js">App.CanDisplayBanner = Ember.Mixin.create({
+                    or mixins rather than just replace the entire hash, e.g.:
+                    
+                    <code>&#x60;</code>js
+                    App.CanDisplayBanner = Ember.Mixin.create({
                       actions: {
                         displayBanner: function(msg) {
                           // ...
@@ -4176,28 +4157,35 @@
                     // then replaced when extending mixins / parent classes.
                     this.send('displayBanner');
                     this.send('playMusic');
-                    </code></pre>
-                    <p>Within a Controller, Route, View or Component's action handler,
+                    <code>&#x60;</code>
+                    
+                    Within a Controller, Route, View or Component's action handler,
                     the value of the <code>this</code> context is the Controller, Route, View or
-                    Component object:</p>
-                    <pre class="code prettyprint"><code class="language-js">App.SongRoute = Ember.Route.extend({
+                    Component object:
+                    
+                    <code>&#x60;</code>js
+                    App.SongRoute = Ember.Route.extend({
                       actions: {
                         myAction: function() {
-                          this.controllerFor(&quot;song&quot;);
-                          this.transitionTo(&quot;other.route&quot;);
+                          this.controllerFor("song");
+                          this.transitionTo("other.route");
                           ...
                         }
                       }
                     });
-                    </code></pre>
-                    <p>It is also possible to call <code>this._super.apply(this, arguments)</code> from within an
+                    <code>&#x60;</code>
+                    
+                    It is also possible to call <code>this._super.apply(this, arguments)</code> from within an
                     action handler if it overrides a handler defined on a parent
-                    class or mixin:</p>
-                    <p>Take for example the following routes:</p>
-                    <pre class="code prettyprint"><code class="language-js">App.DebugRoute = Ember.Mixin.create({
+                    class or mixin:
+                    
+                    Take for example the following routes:
+                    
+                    <code>&#x60;</code>js
+                    App.DebugRoute = Ember.Mixin.create({
                       actions: {
                         debugRouteInformation: function() {
-                          console.debug(&quot;trololo&quot;);
+                          console.debug("trololo");
                         }
                       }
                     });
@@ -4213,14 +4201,18 @@
                         }
                       }
                     });
-                    </code></pre>
-                    <h2>Bubbling</h2>
-                    <p>By default, an action will stop bubbling once a handler defined
+                    <code>&#x60;</code>
+                    
+                    ## Bubbling
+                    
+                    By default, an action will stop bubbling once a handler defined
                     on the <code>actions</code> hash handles it. To continue bubbling the action,
-                    you must return <code>true</code> from the handler:</p>
-                    <pre class="code prettyprint"><code class="language-js">App.Router.map(function() {
-                      this.resource(&quot;album&quot;, function() {
-                        this.route(&quot;song&quot;);
+                    you must return <code>true</code> from the handler:
+                    
+                    <code>&#x60;</code>js
+                    App.Router.map(function() {
+                      this.resource("album", function() {
+                        this.route("song");
                       });
                     });
                     
@@ -4242,8 +4234,7 @@
                         }
                       }
                     });
-                    </code></pre>
-                    
+                    <code>&#x60;</code>
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
@@ -4303,13 +4294,13 @@
                         </div>
                     
                         <div class="description">
-                            <p>The WAI-ARIA role of the control represented by this view. For example, a
+                            The WAI-ARIA role of the control represented by this view. For example, a
                     button may have a role of type 'button', or a pane may have a role of
                     type 'alertdialog'. This property is used by assistive software to help
-                    visually challenged users navigate rich web applications.</p>
-                    <p>The full list of valid WAI-ARIA roles is available at:
-                    <a href="http://www.w3.org/TR/wai-aria/roles#roles_categorization">http://www.w3.org/TR/wai-aria/roles#roles_categorization</a></p>
+                    visually challenged users navigate rich web applications.
                     
+                    The full list of valid WAI-ARIA roles is available at:
+                    [http://www.w3.org/TR/wai-aria/roles#roles_categorization](http://www.w3.org/TR/wai-aria/roles#roles_categorization)
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
@@ -4338,24 +4329,28 @@
                         </div>
                     
                         <div class="description">
-                            <p>A list of properties of the view to apply as attributes. If the property is
-                    a string value, the value of that string will be applied as the attribute.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">// Applies the type attribute to the element
-                    // with the value &quot;button&quot;, like &lt;div type=&quot;button&quot;&gt;
+                            A list of properties of the view to apply as attributes. If the property is
+                    a string value, the value of that string will be applied as the attribute.
+                    
+                    <code>&#x60;</code>javascript
+                    // Applies the type attribute to the element
+                    // with the value "button", like <div type="button">
                     Ember.View.extend({
                       attributeBindings: ['type'],
                       type: 'button'
                     });
-                    </code></pre>
-                    <p>If the value of the property is a Boolean, the name of that property is
-                    added as an attribute.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">// Renders something like &lt;div enabled=&quot;enabled&quot;&gt;
+                    <code>&#x60;</code>
+                    
+                    If the value of the property is a Boolean, the name of that property is
+                    added as an attribute.
+                    
+                    <code>&#x60;</code>javascript
+                    // Renders something like <div enabled="enabled">
                     Ember.View.extend({
                       attributeBindings: ['enabled'],
                       enabled: true
                     });
-                    </code></pre>
-                    
+                    <code>&#x60;</code>
                         </div>
                     
                     
@@ -4384,9 +4379,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>Array of child views. You should never edit this array directly.
-                    Instead, use <code>appendChild</code> and <code>removeFromParent</code>.</p>
-                    
+                            Array of child views. You should never edit this array directly.
+                    Instead, use <code>appendChild</code> and <code>removeFromParent</code>.
                         </div>
                     
                             <p><strong>Default:</strong> []</p>
@@ -4415,33 +4409,41 @@
                         </div>
                     
                         <div class="description">
-                            <p>A list of properties of the view to apply as class names. If the property
+                            A list of properties of the view to apply as class names. If the property
                     is a string value, the value of that string will be applied as a class
-                    name.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">// Applies the 'high' class to the view element
+                    name.
+                    
+                    <code>&#x60;</code>javascript
+                    // Applies the 'high' class to the view element
                     Ember.View.extend({
                       classNameBindings: ['priority']
                       priority: 'high'
                     });
-                    </code></pre>
-                    <p>If the value of the property is a Boolean, the name of that property is
-                    added as a dasherized class name.</p>
-                    <pre class="code prettyprint"><code class="language-javascript">// Applies the 'is-urgent' class to the view element
+                    <code>&#x60;</code>
+                    
+                    If the value of the property is a Boolean, the name of that property is
+                    added as a dasherized class name.
+                    
+                    <code>&#x60;</code>javascript
+                    // Applies the 'is-urgent' class to the view element
                     Ember.View.extend({
                       classNameBindings: ['isUrgent']
                       isUrgent: true
                     });
-                    </code></pre>
-                    <p>If you would prefer to use a custom value instead of the dasherized
-                    property name, you can pass a binding like this:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">// Applies the 'urgent' class to the view element
+                    <code>&#x60;</code>
+                    
+                    If you would prefer to use a custom value instead of the dasherized
+                    property name, you can pass a binding like this:
+                    
+                    <code>&#x60;</code>javascript
+                    // Applies the 'urgent' class to the view element
                     Ember.View.extend({
                       classNameBindings: ['isUrgent:urgent']
                       isUrgent: true
                     });
-                    </code></pre>
-                    <p>This list of properties is inherited from the view's superclasses as well.</p>
+                    <code>&#x60;</code>
                     
+                    This list of properties is inherited from the view's superclasses as well.
                         </div>
                     
                             <p><strong>Default:</strong> []</p>
@@ -4470,10 +4472,9 @@
                         </div>
                     
                         <div class="description">
-                            <p>Standard CSS class names to apply to the view's outer element. This
+                            Standard CSS class names to apply to the view's outer element. This
                     property automatically inherits any class names defined by the view's
-                    superclasses as well.</p>
-                    
+                    superclasses as well.
                         </div>
                     
                             <p><strong>Default:</strong> [&#x27;ember-view&#x27;]</p>
@@ -4535,17 +4536,21 @@
                         </div>
                     
                         <div class="description">
-                            <p>Defines the properties that will be concatenated from the superclass
-                    (instead of overridden).</p>
-                    <p>By default, when you extend an Ember class a property defined in
+                            Defines the properties that will be concatenated from the superclass
+                    (instead of overridden).
+                    
+                    By default, when you extend an Ember class a property defined in
                     the subclass overrides a property with the same name that is defined
                     in the superclass. However, there are some cases where it is preferable
                     to build up a property's value by combining the superclass' property
                     value with the subclass' value. An example of this in use within Ember
-                    is the <code>classNames</code> property of <code>Ember.View</code>.</p>
-                    <p>Here is some sample code showing the difference between a concatenated
-                    property and a normal one:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">App.BarView = Ember.View.extend({
+                    is the <code>classNames</code> property of <code>Ember.View</code>.
+                    
+                    Here is some sample code showing the difference between a concatenated
+                    property and a normal one:
+                    
+                    <code>&#x60;</code>javascript
+                    App.BarView = Ember.View.extend({
                       someNonConcatenatedProperty: ['bar'],
                       classNames: ['bar']
                     });
@@ -4558,32 +4563,39 @@
                     var fooBarView = App.FooBarView.create();
                     fooBarView.get('someNonConcatenatedProperty'); // ['foo']
                     fooBarView.get('classNames'); // ['ember-view', 'bar', 'foo']
-                    </code></pre>
-                    <p>This behavior extends to object creation as well. Continuing the
-                    above example:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">var view = App.FooBarView.create({
+                    <code>&#x60;</code>
+                    
+                    This behavior extends to object creation as well. Continuing the
+                    above example:
+                    
+                    <code>&#x60;</code>javascript
+                    var view = App.FooBarView.create({
                       someNonConcatenatedProperty: ['baz'],
                       classNames: ['baz']
                     })
                     view.get('someNonConcatenatedProperty'); // ['baz']
                     view.get('classNames'); // ['ember-view', 'bar', 'foo', 'baz']
-                    </code></pre>
-                    <p>Adding a single property that is not an array will just add it in the array:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">var view = App.FooBarView.create({
+                    <code>&#x60;</code>
+                    Adding a single property that is not an array will just add it in the array:
+                    
+                    <code>&#x60;</code>javascript
+                    var view = App.FooBarView.create({
                       classNames: 'baz'
                     })
                     view.get('classNames'); // ['ember-view', 'bar', 'foo', 'baz']
-                    </code></pre>
-                    <p>Using the <code>concatenatedProperties</code> property, we can tell Ember to mix the
-                    content of the properties.</p>
-                    <p>In <code>Ember.View</code> the <code>classNameBindings</code> and <code>attributeBindings</code> properties
-                    are also concatenated, in addition to <code>classNames</code>.</p>
-                    <p>This feature is available for you to use throughout the Ember object model,
+                    <code>&#x60;</code>
+                    
+                    Using the <code>concatenatedProperties</code> property, we can tell Ember to mix the
+                    content of the properties.
+                    
+                    In <code>Ember.View</code> the <code>classNameBindings</code> and <code>attributeBindings</code> properties
+                    are also concatenated, in addition to <code>classNames</code>.
+                    
+                    This feature is available for you to use throughout the Ember object model,
                     although typical app developers are likely to use it infrequently. Since
                     it changes expectations about behavior of properties, you should properly
                     document its usage in each individual concatenated property (to not
-                    mislead your users to think they can override the property in a subclass).</p>
-                    
+                    mislead your users to think they can override the property in a subclass).
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
@@ -4675,8 +4687,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Returns the current DOM element for the view.</p>
-                    
+                            Returns the current DOM element for the view.
                         </div>
                     
                     
@@ -4704,23 +4715,28 @@
                         </div>
                     
                         <div class="description">
-                            <p>The HTML <code>id</code> of the view's element in the DOM. You can provide this
-                    value yourself but it must be unique (just as in HTML):</p>
-                    <pre class="code prettyprint"><code class="language-handlebars">  {{my-component elementId=&quot;a-really-cool-id&quot;}}
-                    </code></pre>
-                    <p>If not manually set a default value will be provided by the framework.</p>
-                    <p>Once rendered an element's <code>elementId</code> is considered immutable and you
+                            The HTML <code>id</code> of the view's element in the DOM. You can provide this
+                    value yourself but it must be unique (just as in HTML):
+                    
+                    <code>&#x60;</code>handlebars
+                      {{my-component elementId="a-really-cool-id"}}
+                    <code>&#x60;</code>
+                    
+                    If not manually set a default value will be provided by the framework.
+                    
+                    Once rendered an element's <code>elementId</code> is considered immutable and you
                     should never change it. If you need to compute a dynamic value for the
                     <code>elementId</code>, you should do this when the component or element is being
-                    instantiated:</p>
-                    <pre class="code prettyprint"><code class="language-javascript">  export default Ember.Component.extend({
+                    instantiated:
+                    
+                    <code>&#x60;</code>javascript
+                      export default Ember.Component.extend({
                         setElementId: function() {
                           var index = this.get('index');
                           this.set('elementId', 'component-id' + index);
                         }.on('init')
                       });
-                    </code></pre>
-                    
+                    <code>&#x60;</code>
                         </div>
                     
                     
@@ -4811,10 +4827,12 @@
                         </div>
                     
                         <div class="description">
-                            <p>Returns true when the component was invoked with a block template.</p>
-                    <pre class="code prettyprint"><code> Example (<code>hasBlock</code> will be <code>false</code>):
-                    </code></pre>
-                    <pre class="code prettyprint"><code class="language-hbs">{{! templates/application.hbs }}
+                            Returns true when the component was invoked with a block template.
+                    
+                         Example (<code>hasBlock</code> will be <code>false</code>):
+                    
+                    <code>&#x60;</code>hbs
+                    {{! templates/application.hbs }}
                     
                     {{foo-bar}}
                     
@@ -4822,10 +4840,12 @@
                     {{#if hasBlock}}
                       This will not be printed, because no block was provided
                     {{/if}}
-                    </code></pre>
-                    <pre class="code prettyprint"><code> Example (<code>hasBlock</code> will be <code>true</code>):
-                    </code></pre>
-                    <pre class="code prettyprint"><code class="language-hbs">{{! templates/application.hbs }}
+                    <code>&#x60;</code>
+                    
+                         Example (<code>hasBlock</code> will be <code>true</code>):
+                    
+                    <code>&#x60;</code>hbs
+                    {{! templates/application.hbs }}
                     
                     {{#foo-bar}}
                       Hi!
@@ -4836,8 +4856,7 @@
                       This will be printed because a block was provided
                       {{yield}}
                     {{/if}}
-                    </code></pre>
-                    
+                    <code>&#x60;</code>
                         </div>
                     
                     
@@ -4866,10 +4885,13 @@
                         </div>
                     
                         <div class="description">
-                            <p>Returns true when the component was invoked with a block parameter
-                    supplied.</p>
-                    <p>Example (<code>hasBlockParams</code> will be <code>false</code>):</p>
-                    <pre class="code prettyprint"><code class="language-hbs">{{! templates/application.hbs }}
+                            Returns true when the component was invoked with a block parameter
+                    supplied.
+                    
+                    Example (<code>hasBlockParams</code> will be <code>false</code>):
+                    
+                    <code>&#x60;</code>hbs
+                    {{! templates/application.hbs }}
                     
                     {{#foo-bar}}
                       No block parameter.
@@ -4880,9 +4902,12 @@
                       This will not be printed, because no block was provided
                       {{yield this}}
                     {{/if}}
-                    </code></pre>
-                    <p>Example (<code>hasBlockParams</code> will be <code>true</code>):</p>
-                    <pre class="code prettyprint"><code class="language-hbs">{{! templates/application.hbs }}
+                    <code>&#x60;</code>
+                    
+                    Example (<code>hasBlockParams</code> will be <code>true</code>):
+                    
+                    <code>&#x60;</code>hbs
+                    {{! templates/application.hbs }}
                     
                     {{#foo-bar as |foo|}}
                       Hi!
@@ -4893,8 +4918,7 @@
                       This will be printed because a block was provided
                       {{yield this}}
                     {{/if}}
-                    </code></pre>
-                    
+                    <code>&#x60;</code>
                         </div>
                     
                     
@@ -4922,8 +4946,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Used to identify this view during debugging</p>
-                    
+                            Used to identify this view during debugging
                         </div>
                     
                     
@@ -4951,10 +4974,10 @@
                         </div>
                     
                         <div class="description">
-                            <p>Destroyed object property flag.</p>
-                    <p>if this property is <code>true</code> the observers and bindings were already
-                    removed by the effect of calling the <code>destroy()</code> method.</p>
+                            Destroyed object property flag.
                     
+                    if this property is <code>true</code> the observers and bindings were already
+                    removed by the effect of calling the <code>destroy()</code> method.
                         </div>
                     
                             <p><strong>Default:</strong> false</p>
@@ -4983,10 +5006,10 @@
                         </div>
                     
                         <div class="description">
-                            <p>Destruction scheduled flag. The <code>destroy()</code> method has been called.</p>
-                    <p>The object stays intact until the end of the run loop at which point
-                    the <code>isDestroyed</code> flag is set.</p>
+                            Destruction scheduled flag. The <code>destroy()</code> method has been called.
                     
+                    The object stays intact until the end of the run loop at which point
+                    the <code>isDestroyed</code> flag is set.
                         </div>
                     
                             <p><strong>Default:</strong> false</p>
@@ -5015,8 +5038,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>If <code>false</code>, the view will appear hidden in DOM.</p>
-                    
+                            If <code>false</code>, the view will appear hidden in DOM.
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
@@ -5045,15 +5067,15 @@
                         </div>
                     
                         <div class="description">
-                            <p>A view may contain a layout. A layout is a regular template but
+                            A view may contain a layout. A layout is a regular template but
                     supersedes the <code>template</code> property during rendering. It is the
                     responsibility of the layout template to retrieve the <code>template</code>
                     property from the view (or alternatively, call <code>Handlebars.helpers.yield</code>,
-                    <code>{{yield}}</code>) to render it in the correct location.</p>
-                    <p>This is useful for a view that has a shared wrapper, but which delegates
-                    the rendering of the contents of the wrapper to the <code>template</code> property
-                    on a subclass.</p>
+                    <code>{{yield}}</code>) to render it in the correct location.
                     
+                    This is useful for a view that has a shared wrapper, but which delegates
+                    the rendering of the contents of the wrapper to the <code>template</code> property
+                    on a subclass.
                         </div>
                     
                     
@@ -5081,10 +5103,10 @@
                         </div>
                     
                         <div class="description">
-                            <p>The name of the layout to lookup if no layout is provided.</p>
-                    <p>By default <code>Ember.View</code> will lookup a template with this name in
-                    <code>Ember.TEMPLATES</code> (a shared global object).</p>
+                            The name of the layout to lookup if no layout is provided.
                     
+                    By default <code>Ember.View</code> will lookup a template with this name in
+                    <code>Ember.TEMPLATES</code> (a shared global object).
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
@@ -5113,9 +5135,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>If the view is currently inserted into the DOM of a parent view, this
-                    property will point to the parent of the view.</p>
-                    
+                            If the view is currently inserted into the DOM of a parent view, this
+                    property will point to the parent of the view.
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
@@ -5144,11 +5165,11 @@
                         </div>
                     
                         <div class="description">
-                            <p>Tag name for the view's outer element. The tag name is only used when an
+                            Tag name for the view's outer element. The tag name is only used when an
                     element is first created. If you change the <code>tagName</code> for an element, you
-                    must destroy and recreate the view element.</p>
-                    <p>By default, the render buffer will use a <code>&lt;div&gt;</code> tag for views.</p>
+                    must destroy and recreate the view element.
                     
+                    By default, the render buffer will use a <code>&lt;div&gt;</code> tag for views.
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
@@ -5177,9 +5198,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>If the component is currently inserted into the DOM of a parent view, this
-                    property will point to the controller of the parent view.</p>
-                    
+                            If the component is currently inserted into the DOM of a parent view, this
+                    property will point to the controller of the parent view.
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
@@ -5212,17 +5232,20 @@
                         </div>
                     
                         <div class="description">
-                            <p>A components template property is set by passing a block
-                    during its invocation. It is executed within the parent context.</p>
-                    <p>Example:</p>
-                    <pre class="code prettyprint"><code class="language-handlebars">{{#my-component}}
+                            A components template property is set by passing a block
+                    during its invocation. It is executed within the parent context.
+                    
+                    Example:
+                    
+                    <code>&#x60;</code>handlebars
+                    {{#my-component}}
                       // something that is run in the context
                       // of the parent context
                     {{/my-component}}
-                    </code></pre>
-                    <p>Specifying a template directly to a component is deprecated without
-                    also specifying the layout property.</p>
+                    <code>&#x60;</code>
                     
+                    Specifying a template directly to a component is deprecated without
+                    also specifying the layout property.
                         </div>
                     
                     
@@ -5254,9 +5277,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>Specifying a components <code>templateName</code> is deprecated without also
-                    providing the <code>layout</code> or <code>layoutName</code> properties.</p>
-                    
+                            Specifying a components <code>templateName</code> is deprecated without also
+                    providing the <code>layout</code> or <code>layoutName</code> properties.
                         </div>
                     
                     
@@ -5285,9 +5307,9 @@
                         </div>
                     
                         <div class="description">
-                            <p>Property for type styling</p>
-                    <p>For the available types see the <a href="http://getbootstrap.com/css/#buttons-options">Bootstrap docs</a> (use without &quot;btn-&quot; prefix)</p>
+                            Property for type styling
                     
+                    For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without "btn-" prefix)
                         </div>
                     
                             <p><strong>Default:</strong> &#x27;default&#x27;</p>
@@ -5350,12 +5372,12 @@
                         </div>
                     
                         <div class="description">
-                            <p>Called when the element of the view has been inserted into the DOM
+                            Called when the element of the view has been inserted into the DOM
                     or after the view was re-rendered. Override this function to do any
-                    set up that requires an element in the document body.</p>
-                    <p>When a view has children, didInsertElement will be called on the
-                    child view(s) first, bubbling upwards through the hierarchy.</p>
+                    set up that requires an element in the document body.
                     
+                    When a view has children, didInsertElement will be called on the
+                    child view(s) first, bubbling upwards through the hierarchy.
                         </div>
                     
                     
@@ -5379,8 +5401,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Called when the parentView property has changed.</p>
-                    
+                            Called when the parentView property has changed.
                         </div>
                     
                     
@@ -5404,10 +5425,9 @@
                         </div>
                     
                         <div class="description">
-                            <p>Called when the view is about to rerender, but before anything has
+                            Called when the view is about to rerender, but before anything has
                     been torn down. This is a good opportunity to tear down any manual
-                    observers you have installed based on the DOM state</p>
-                    
+                    observers you have installed based on the DOM state
                         </div>
                     
                     
@@ -5431,12 +5451,12 @@
                         </div>
                     
                         <div class="description">
-                            <p>Called when the element of the view is going to be destroyed. Override
+                            Called when the element of the view is going to be destroyed. Override
                     this function to do any teardown that requires an element, like removing
-                    event listeners.</p>
-                    <p>Please note: any property changes made during this event will have no
-                    effect on object observers.</p>
+                    event listeners.
                     
+                    Please note: any property changes made during this event will have no
+                    effect on object observers.
                         </div>
                     
                     
@@ -5460,8 +5480,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Called when a view is going to insert an element into the DOM.</p>
-                    
+                            Called when a view is going to insert an element into the DOM.
                         </div>
                     
                     
@@ -5491,6 +5510,8 @@
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
+                    <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
                     <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
                     <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
