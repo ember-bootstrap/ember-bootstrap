@@ -21,7 +21,7 @@ Beginning from version 0.2.0 ember-bootstrap will require at least Ember 0.13.x!
 
 ## Changelog
 
-See [CHANGELOG](CHANGELOG) for the list of changes.
+See [CHANGELOG](CHANGELOG.md) for the list of changes.
 
 ## Authors
 
@@ -29,4 +29,4 @@ See [CHANGELOG](CHANGELOG) for the list of changes.
 
 ## Copyright and license
 
-Code and documentation copyright 2015 kaliber5 GmbH. Code released under [the MIT license](LICENSE).
+Code and documentation copyright 2015 kaliber5 GmbH. Code released under [the MIT license](LICENSE.md).
