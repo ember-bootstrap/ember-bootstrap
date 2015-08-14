@@ -21,7 +21,7 @@ Beginning from version 0.2.0 ember-bootstrap will require at least Ember 0.13.x!
 
 ## Changelog
 
-See [CHANGELOG] for the list of changes.
+See [CHANGELOG](CHANGELOG) for the list of changes.
 
 ## Authors
 
