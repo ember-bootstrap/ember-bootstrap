@@ -10,12 +10,18 @@ The addon includes the Bootstrap assets (CSS, Icons) in your project (can be dis
 
 In your application's directory:
 
-    ember install:addon ember-bootstrap
+    ember install ember-bootstrap
     
 If you are using an ember-cli version prior to 0.1.5, use the following commands instead:    
     
     npm install --save-dev ember-bootstrap
     ember g ember-bootstrap
+    
+Beginning from version 0.2.0 ember-bootstrap will require at least Ember 0.13.x!    
+
+## Changelog
+
+See [CHANGELOG](CHANGELOG.md) for the list of changes.
 
 ## Authors
 
@@ -23,4 +29,4 @@ If you are using an ember-cli version prior to 0.1.5, use the following commands
 
 ## Copyright and license
 
-Code and documentation copyright 2015 kaliber5 GmbH. Code released under [the MIT license](LICENSE).
+Code and documentation copyright 2015 kaliber5 GmbH. Code released under [the MIT license](LICENSE.md).

@@ -1,4 +1,4 @@
-{{#bs-button active=active toggle=true type="primary" icon="glyphicon glyphicon-download"}}Download{{/bs-button}}
+{{bs-button active=active toggle=true type="primary" icon="glyphicon glyphicon-download" defaultText="Default" loadingText="Loading"}}
 
 <hr>
 
@@ -12,7 +12,7 @@
 
 <p>You selected:</p>
 <ul>
-    {{#each value in buttonGroupValue}}
+    {{#each buttonGroupValue as |value|}}
         <li>{{value}}</li>
     {{/each}}
 </ul>

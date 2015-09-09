@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import componentChild from 'ember-bootstrap/mixins/component-child';
 
 /**
  * Mixin for components that act as dropdown toggles.
@@ -6,7 +7,7 @@ import Ember from 'ember';
  * @class DropdownToggle
  * @namespace Mixins
  */
-export default Ember.Mixin.create({
+export default Ember.Mixin.create(componentChild, {
     classNames: ['dropdown-toggle'],
     attributeBindings: ['data-toggle'],
     /**
