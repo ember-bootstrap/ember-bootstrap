@@ -7,19 +7,19 @@ import Ember from 'ember';
  Use as a block level component with any number of {{#crossLink "Components.AccordionItem"}}{{/crossLink}} components as children:
 
  ```handlebars
-  {{#bs-accordion selected=selected}}
-      {{#bs-accordion-item value="1" title="First item"}}
+  \{{#bs-accordion selected=selected}}
+      \{{#bs-accordion-item value="1" title="First item"}}
         <p>Lorem ipsum...</p>
-      {{/bs-accordion-item}}
-      {{#bs-accordion-item value="2" title="Second item"}}
+      \{{/bs-accordion-item}}
+      \{{#bs-accordion-item value="2" title="Second item"}}
         <p>Lorem ipsum...</p>
-      {{/bs-accordion-item}}
-      {{#bs-accordion-item value="3" title="Third item"}}
+      \{{/bs-accordion-item}}
+      \{{#bs-accordion-item value="3" title="Third item"}}
         <p>Lorem ipsum...</p>
-      {{/bs-accordion-item}}
-  {{/bs-accordion}}
+      \{{/bs-accordion-item}}
+  \{{/bs-accordion}}
 
-  <p>Selected accordion item: {{selected}}</p>
+  <p>Selected accordion item: \{{selected}}</p>
  ```
 
 
