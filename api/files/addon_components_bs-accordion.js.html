@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-textarea.js - ember-bootstrap</title>
+    <title>addon/components/bs-accordion.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,31 +49,60 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-textarea.js <small>File</small></h1>
+    <h1>addon/components/bs-accordion.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
-
 
 /**
- Extends Ember.TextArea to add Bootstrap&#x27;s &#x27;form-control&#x27; class.
+ Bootstrap-style accordion group, with collapsible/expandable items.
+ See http://getbootstrap.com/components/#btn-groups
 
- ### I18n support
+ Use as a block level component with any number of {{#crossLink &quot;Components.AccordionItem&quot;}}{{/crossLink}} components as children:
 
- Supports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.
- See {{#crossLink &quot;Mixins.I18nSupport&quot;}}{{/crossLink}}
+ &#x60;&#x60;&#x60;handlebars
+  \{{#bs-accordion selected=selected}}
+      \{{#bs-accordion-item value=&quot;1&quot; title=&quot;First item&quot;}}
+        &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+      \{{/bs-accordion-item}}
+      \{{#bs-accordion-item value=&quot;2&quot; title=&quot;Second item&quot;}}
+        &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+      \{{/bs-accordion-item}}
+      \{{#bs-accordion-item value=&quot;3&quot; title=&quot;Third item&quot;}}
+        &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+      \{{/bs-accordion-item}}
+  \{{/bs-accordion}}
 
- @class Textarea
+  &lt;p&gt;Selected accordion item: \{{selected}}&lt;/p&gt;
+ &#x60;&#x60;&#x60;
+
+
+ @class Accordion
  @namespace Components
- @extends Ember.TextArea
- @uses Mixins.I18nSupport
+ @extends Ember.Component
  */
-export default Ember.TextArea.extend(I18nSupport, {
-    classNames: [&#x27;form-control&#x27;]
+export default Ember.Component.extend({
+  classNames: [&#x27;panel-group&#x27;],
+  ariaRole: &#x27;tablist&#x27;,
+
+  /**
+   * The value of the currently selected accordion item
+   *
+   * @property selected
+   * @public
+   */
+  selected: null,
+
+  actions: {
+    selected: function (currentValue, previousValue) {
+      this.sendAction(&#x27;action&#x27;, currentValue, previousValue);
+    }
+  }
+
 });
+
     </pre>
 </div>
                     </div>

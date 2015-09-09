@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v0.2.0",
+        "version": "v0.3.0",
         "external": {
             "data": [
                 {
@@ -13,6 +13,28 @@
         }
     },
     "files": {
+        "addon/components/bs-accordion-item.js": {
+            "name": "addon/components/bs-accordion-item.js",
+            "modules": {},
+            "classes": {
+                "Components.AccordionItem": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-accordion.js": {
+            "name": "addon/components/bs-accordion.js",
+            "modules": {},
+            "classes": {
+                "Components.Accordion": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
         "addon/components/bs-alert.js": {
             "name": "addon/components/bs-alert.js",
             "modules": {},
@@ -211,6 +233,15 @@
                 "Mixins": 1
             }
         },
+        "addon/mixins/sub-component.js": {
+            "name": "addon/mixins/sub-component.js",
+            "modules": {},
+            "classes": {
+                "Mixins.Bootstrap.SubComponent": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "addon/mixins/type-class.js": {
             "name": "addon/mixins/type-class.js",
             "modules": {},
@@ -225,6 +256,39 @@
     },
     "modules": {},
     "classes": {
+        "Components.AccordionItem": {
+            "name": "Components.AccordionItem",
+            "shortname": "Components.AccordionItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-accordion-item.js",
+            "line": 6,
+            "description": "A collapsible/expandable item within an accordion\n\nSee {{#crossLink \"Components.Accordion\"}}{{/crossLink}} for examples.",
+            "extends": "Ember.Component",
+            "uses": [
+                "Mixins.TypeClass",
+                "Mixins.SubComponent",
+                "Mixins.I18nSupport"
+            ]
+        },
+        "Components.Accordion": {
+            "name": "Components.Accordion",
+            "shortname": "Components.Accordion",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-accordion.js",
+            "line": 3,
+            "description": "Bootstrap-style accordion group, with collapsible/expandable items.\nSee http://getbootstrap.com/components/#btn-groups\n\nUse as a block level component with any number of {{#crossLink \"Components.AccordionItem\"}}{{/crossLink}} components as children:\n\n```handlebars\n \\{{#bs-accordion selected=selected}}\n     \\{{#bs-accordion-item value=\"1\" title=\"First item\"}}\n       <p>Lorem ipsum...</p>\n     \\{{/bs-accordion-item}}\n     \\{{#bs-accordion-item value=\"2\" title=\"Second item\"}}\n       <p>Lorem ipsum...</p>\n     \\{{/bs-accordion-item}}\n     \\{{#bs-accordion-item value=\"3\" title=\"Third item\"}}\n       <p>Lorem ipsum...</p>\n     \\{{/bs-accordion-item}}\n \\{{/bs-accordion}}\n\n <p>Selected accordion item: \\{{selected}}</p>\n```",
+            "extends": "Ember.Component"
+        },
         "Components.Alert": {
             "name": "Components.Alert",
             "shortname": "Components.Alert",
@@ -486,6 +550,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [
+                "Components.AccordionItem",
                 "Components.Button",
                 "Components.FormElement",
                 "Components.Input",
@@ -513,6 +578,18 @@
             "line": 3,
             "description": "Mixin to set the appropriate class for components with different sizes."
         },
+        "Mixins.Bootstrap.SubComponent": {
+            "name": "Mixins.Bootstrap.SubComponent",
+            "shortname": "Bootstrap.SubComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mixins",
+            "file": "addon/mixins/sub-component.js",
+            "line": 3
+        },
         "Mixins.TypeClass": {
             "name": "Mixins.TypeClass",
             "shortname": "Mixins.TypeClass",
@@ -521,6 +598,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [
+                "Components.AccordionItem",
                 "Components.Alert",
                 "Components.Button"
             ],
@@ -531,6 +609,63 @@
         }
     },
     "classitems": [
+        {
+            "file": "addon/components/bs-accordion-item.js",
+            "line": 22,
+            "itemtype": "property",
+            "name": "classTypePrefix",
+            "type": "String",
+            "default": "'panel'",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.AccordionItem",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-accordion-item.js",
+            "line": 32,
+            "description": "True if this item is expanded",
+            "itemtype": "property",
+            "name": "active",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.AccordionItem",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-accordion-item.js",
+            "line": 40,
+            "description": "The title of the accordion item, displayed as a .panel-title element",
+            "itemtype": "property",
+            "name": "title",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.AccordionItem",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-accordion-item.js",
+            "line": 49,
+            "description": "The value of the accordion item, which is used as the value of the `selected` property of the parent {{#crossLink \"Components.Accordion\"}}{{/crossLink}} component",
+            "itemtype": "property",
+            "name": "value",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.AccordionItem",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-accordion.js",
+            "line": 34,
+            "description": "The value of the currently selected accordion item",
+            "itemtype": "property",
+            "name": "selected",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Accordion",
+            "namespace": "Components"
+        },
         {
             "file": "addon/components/bs-alert.js",
             "line": 25,

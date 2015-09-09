@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-textarea.js - ember-bootstrap</title>
+    <title>addon/components/bs-accordion-item.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,31 +49,180 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-textarea.js <small>File</small></h1>
+    <h1>addon/components/bs-accordion-item.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
+import SubComponent from &#x27;ember-bootstrap/mixins/sub-component&#x27;;
 import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
 
-
 /**
- Extends Ember.TextArea to add Bootstrap&#x27;s &#x27;form-control&#x27; class.
+ A collapsible/expandable item within an accordion
 
- ### I18n support
+ See {{#crossLink &quot;Components.Accordion&quot;}}{{/crossLink}} for examples.
 
- Supports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.
- See {{#crossLink &quot;Mixins.I18nSupport&quot;}}{{/crossLink}}
 
- @class Textarea
+ @class AccordionItem
  @namespace Components
- @extends Ember.TextArea
+ @extends Ember.Component
+ @uses Mixins.TypeClass
+ @uses Mixins.SubComponent
  @uses Mixins.I18nSupport
  */
-export default Ember.TextArea.extend(I18nSupport, {
-    classNames: [&#x27;form-control&#x27;]
+export default Ember.Component.extend(TypeClass, SubComponent, I18nSupport, {
+  classNames: [&#x27;panel&#x27;],
+
+  /**
+   * @property classTypePrefix
+   * @type String
+   * @default &#x27;panel&#x27;
+   * @protected
+   */
+  classTypePrefix: &#x27;panel&#x27;,
+
+  //type: &#x27;default&#x27;,
+
+  /**
+   * True if this item is expanded
+   *
+   * @property active
+   * @protected
+   */
+  active: false,
+
+  /**
+   * The title of the accordion item, displayed as a .panel-title element
+   *
+   * @property title
+   * @type string
+   * @public
+   */
+  title: null,
+
+  /**
+   * The value of the accordion item, which is used as the value of the &#x60;selected&#x60; property of the parent {{#crossLink &quot;Components.Accordion&quot;}}{{/crossLink}} component
+   *
+   * @property value
+   * @public
+   */
+  value: Ember.computed.oneWay(&#x27;elementId&#x27;),
+
+  collapse: Ember.computed.not(&#x27;transitioning&#x27;),
+  collapsing: Ember.computed.alias(&#x27;transitioning&#x27;),
+  in: Ember.computed.and(&#x27;collapse&#x27;, &#x27;active&#x27;),
+  collapsed: Ember.computed.not(&#x27;active&#x27;),
+  transitioning: false,
+  collapseHeight: null,
+  collapseStyle: Ember.computed(&#x27;collapseHeight&#x27;, function () {
+    var height = parseFloat(this.get(&#x27;collapseHeight&#x27;));
+    return new Ember.Handlebars.SafeString(height !== null ? &#x60;height: ${height}px&#x60; : &#x27;&#x27;);
+  }),
+
+  selected: Ember.computed.alias(&#x27;parentView.selected&#x27;),
+
+  action: &#x27;selected&#x27;,
+
+
+  show: function () {
+    var collapseElement = this.$().find(&#x27;.panel-collapse&#x27;);
+    var complete = function () {
+      this.setProperties({
+        transitioning: false,
+        collapseHeight: null
+      });
+    };
+
+    this.setProperties({
+      transitioning: true,
+      collapseHeight: 0,
+      active: true
+    });
+
+    if (!Ember.$.support.transition) {
+      return complete.call(this);
+    }
+
+    collapseElement
+      .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, complete))
+      // @todo: make duration configurable
+      .emulateTransitionEnd(350)
+    ;
+
+    Ember.run.next(this, function () {
+      this.set(&#x27;collapseHeight&#x27;, collapseElement[0].scrollHeight);
+    });
+  },
+
+  hide: function () {
+
+    var collapseElement = this.$().find(&#x27;.panel-collapse&#x27;);
+    var complete = function () {
+      this.setProperties({
+        transitioning: false,
+        collapseHeight: null
+      });
+    };
+
+    this.setProperties({
+      transitioning: true,
+      collapseHeight: collapseElement[0].offsetHeight,
+      active: false
+    });
+
+    if (!Ember.$.support.transition) {
+      return complete.call(this);
+    }
+
+    collapseElement
+      .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, complete))
+      // @todo: make duration configurable
+      .emulateTransitionEnd(350)
+    ;
+
+    Ember.run.next(this, function () {
+      this.set(&#x27;collapseHeight&#x27;, 0);
+    });
+  },
+
+  actions: {
+    toggleActive: function () {
+      var value = this.get(&#x27;value&#x27;),
+        previous = this.get(&#x27;selected&#x27;),
+        active = this.get(&#x27;active&#x27;);
+      if (!active) {
+        this.set(&#x27;selected&#x27;, value);
+        this.sendAction(&#x27;action&#x27;, value, previous);
+      }
+      else {
+        this.set(&#x27;selected&#x27;, null);
+        this.sendAction(&#x27;action&#x27;, null, previous);
+      }
+    }
+  },
+
+  _onSelectedChange: Ember.observer(&#x27;selected&#x27;, function () {
+    var selected = this.get(&#x27;selected&#x27;),
+      value = this.get(&#x27;value&#x27;),
+      active = this.get(&#x27;active&#x27;);
+    if (selected === value &amp;&amp; !active) {
+      this.show();
+    }
+    else if (active) {
+      this.hide();
+    }
+  }),
+  _onInit: Ember.on(&#x27;init&#x27;, function () {
+    if (this.get(&#x27;selected&#x27;) === this.get(&#x27;value&#x27;)) {
+      this.set(&#x27;active&#x27;, true);
+    }
+  })
+
+
 });
+
     </pre>
 </div>
                     </div>

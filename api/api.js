@@ -1,6 +1,8 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "Components.Accordion",
+        "Components.AccordionItem",
         "Components.Alert",
         "Components.Button",
         "Components.ButtonGroup",
@@ -14,6 +16,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.Input",
         "Components.Select",
         "Components.Textarea",
+        "Mixins.Bootstrap.SubComponent",
         "Mixins.ComponentChild",
         "Mixins.ComponentParent",
         "Mixins.DropdownToggle",

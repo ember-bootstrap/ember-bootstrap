@@ -1,3 +1,12 @@
+<a name"0.3.0"></a>
+## 0.3.0 (2015-09-09)
+
+
+#### Features
+
+* **Accordion:**
+  * added accordion components ([f2bbaca8](https://github.com/kaliber5/ember-bootstrap/commit/f2bbaca8))
+
 <a name"0.2.0"></a>
 ## 0.2.0 (2015-08-14)
 

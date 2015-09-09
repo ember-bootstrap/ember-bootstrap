@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-textarea.js - ember-bootstrap</title>
+    <title>addon/mixins/sub-component.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,30 +49,18 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-textarea.js <small>File</small></h1>
+    <h1>addon/mixins/sub-component.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
-
 
 /**
- Extends Ember.TextArea to add Bootstrap&#x27;s &#x27;form-control&#x27; class.
-
- ### I18n support
-
- Supports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.
- See {{#crossLink &quot;Mixins.I18nSupport&quot;}}{{/crossLink}}
-
- @class Textarea
- @namespace Components
- @extends Ember.TextArea
- @uses Mixins.I18nSupport
+ * @class Bootstrap.SubComponent
  */
-export default Ember.TextArea.extend(I18nSupport, {
-    classNames: [&#x27;form-control&#x27;]
+export default Ember.Mixin.create({
+    targetObject: Ember.computed.alias(&#x27;parentView&#x27;)
 });
     </pre>
 </div>

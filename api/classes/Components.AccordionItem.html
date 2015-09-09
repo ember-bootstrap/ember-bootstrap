@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.Alert - ember-bootstrap</title>
+    <title>Components.AccordionItem - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,7 +49,7 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.Alert <small>Class</small></h1>
+    <h1>Components.AccordionItem <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
@@ -57,6 +57,8 @@
             Uses
             <ul class="inline commas">
                     <li><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+                    <li><a href="Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li><a href="Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
             </ul>
         </div>
 
@@ -65,7 +67,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-alert.js.html#l5"><code>addon&#x2F;components&#x2F;bs-alert.js:5</code></a>
+            Defined in: <a href="../files/addon_components_bs-accordion-item.js.html#l6"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:6</code></a>
         </div>
 
 
@@ -73,13 +75,8 @@
 
 
 <div class="well well-small">
-    <p>Implements Bootstrap alerts, see <a href="http://getbootstrap.com/components/#alerts">http://getbootstrap.com/components/#alerts</a></p>
-<p>By default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
-<code>type</code> property for proper styling.</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-alert type=&quot;success&quot;}}
-   &lt;strong&gt;Well done!&lt;/strong&gt; You successfully read this important alert message.
-{{/bs-alert}}
-</code></pre>
+    <p>A collapsible/expandable item within an accordion</p>
+<p>See <a href="../classes/Components.Accordion.html" class="crosslink">Components.Accordion</a> for examples.</p>
 
 </div>
 
@@ -245,10 +242,6 @@
                                 <a href="#" data-tabid="#methods" data-anchor="#method_hasObserverFor" data-tablink="hasObserverFor">hasObserverFor</a>
 
                             </li>
-                            <li class="index-item method public">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_hide" data-tablink="hide">hide</a>
-
-                            </li>
                             <li class="index-item method inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_incrementProperty" data-tablink="incrementProperty">incrementProperty</a>
 
@@ -363,10 +356,6 @@
                                 <a href="#" data-tabid="#methods" data-anchor="#method_setUnknownProperty" data-tablink="setUnknownProperty">setUnknownProperty</a>
 
                             </li>
-                            <li class="index-item method public">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_show" data-tablink="show">show</a>
-
-                            </li>
                             <li class="index-item method inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_toggleProperty" data-tablink="toggleProperty">toggleProperty</a>
 
@@ -398,8 +387,8 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_actions" data-tablink="actions">actions</a>
 
                             </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_alert" data-tablink="alert">alert</a>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_active" data-tablink="active">active</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -430,28 +419,12 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_concatenatedProperties" data-tablink="concatenatedProperties">concatenatedProperties</a>
 
                             </li>
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_dismissed" data-tablink="dismissed">dismissed</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_dismissible" data-tablink="dismissible">dismissible</a>
-
-                            </li>
                             <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_element" data-tablink="element">element</a>
 
                             </li>
                             <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_elementId" data-tablink="elementId">elementId</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_fadeDuration" data-tablink="fadeDuration">fadeDuration</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -508,12 +481,16 @@
 
                                     <span class="label label-deprecated">deprecated</span>
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_title" data-tablink="title">title</a>
+
+                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_type" data-tablink="type">type</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_visible" data-tablink="visible">visible</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_value" data-tablink="value">value</a>
 
                             </li>
                     </ul>
@@ -2065,38 +2042,6 @@
                                             <span class="type">Boolean</span>:
                                 </div>
                             </div>
-                    
-                    </div>
-                    <div id="method_hide" class="method item public">
-                        <h3 class="name">hide
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l125"><code>addon&#x2F;components&#x2F;bs-alert.js:125</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Call to hide the alert. If the <code>fade</code> property is true, this will fade out the alert before being finally
-                    dismissed.</p>
-                    
-                        </div>
-                    
-                    
                     
                     </div>
                     <div id="method_incrementProperty" class="method item inherited">
@@ -3826,37 +3771,6 @@
                     
                     
                     </div>
-                    <div id="method_show" class="method item public">
-                        <h3 class="name">show
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l112"><code>addon&#x2F;components&#x2F;bs-alert.js:112</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Call to make the alert visible again after it has been hidden</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="method_toggleProperty" class="method item inherited">
                         <h3 class="name">toggleProperty
                         <span class="small">Object</span>
@@ -4241,15 +4155,15 @@
                     
                     
                     </div>
-                    <div id="property_alert" class="property item private">
-                        <h3 class="name">alert
-                            <span class="small">boolean</span>
+                    <div id="property_active" class="property item protected">
+                        <h3 class="name">active
+                            <span class="small">unknown</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-private">private</span>
+                            <span class="label label-protected">protected</span>
                     
                     
                     
@@ -4257,15 +4171,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l68"><code>addon&#x2F;components&#x2F;bs-alert.js:68</code></a>
+                            <a href="../files/addon_components_bs-accordion-item.js.html#l32"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:32</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Computed property to set the alert class to the component div. Will be false when dismissed to have the component
-                    div (which cannot be removed form DOM by the component itself) without any markup.</p>
+                            <p>True if this item is expanded</p>
                     
                         </div>
                     
@@ -4500,7 +4413,7 @@
                                     Mixins.TypeClass
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-alert.js.html#l79"><code>addon&#x2F;components&#x2F;bs-alert.js:79</code></a>
+                            <a href="../files/addon_components_bs-accordion-item.js.html#l22"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:22</code></a>
                             </p>
                     
                     
@@ -4510,7 +4423,7 @@
                             
                         </div>
                     
-                            <p><strong>Default:</strong> &#x27;alert&#x27;</p>
+                            <p><strong>Default:</strong> &#x27;panel&#x27;</p>
                     
                     
                     </div>
@@ -4602,69 +4515,6 @@
                     
                     
                     </div>
-                    <div id="property_dismissed" class="property item protected">
-                        <h3 class="name">dismissed
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l36"><code>addon&#x2F;components&#x2F;bs-alert.js:36</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>If true the alert is completely hidden. Will be set when the fade animation has finished.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="property_dismissible" class="property item public">
-                        <h3 class="name">dismissible
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l25"><code>addon&#x2F;components&#x2F;bs-alert.js:25</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
-                    the alert.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
                     <div id="property_element" class="property item inherited">
                         <h3 class="name">element
                             <span class="small">DOMElement</span>
@@ -4739,68 +4589,6 @@
                     <code>&#x60;</code>
                         </div>
                     
-                    
-                    
-                    </div>
-                    <div id="property_fade" class="property item public">
-                        <h3 class="name">fade
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l58"><code>addon&#x2F;components&#x2F;bs-alert.js:58</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Set to false to disable the fade out animation when hiding the alert.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_fadeDuration" class="property item public">
-                        <h3 class="name">fadeDuration
-                            <span class="small">integer</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l87"><code>addon&#x2F;components&#x2F;bs-alert.js:87</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The duration of the fade out animation</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> 150</p>
                     
                     
                     </div>
@@ -5284,6 +5072,36 @@
                     
                     
                     </div>
+                    <div id="property_title" class="property item public">
+                        <h3 class="name">title
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-accordion-item.js.html#l40"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:40</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The title of the accordion item, displayed as a .panel-title element</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="property_type" class="property item public inherited">
                         <h3 class="name">type
                             <span class="small">String</span>
@@ -5316,9 +5134,9 @@
                     
                     
                     </div>
-                    <div id="property_visible" class="property item public">
-                        <h3 class="name">visible
-                            <span class="small">boolean</span>
+                    <div id="property_value" class="property item public">
+                        <h3 class="name">value
+                            <span class="small">unknown</span>
                         </h3>
                     
                     
@@ -5332,19 +5150,17 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l47"><code>addon&#x2F;components&#x2F;bs-alert.js:47</code></a>
+                            <a href="../files/addon_components_bs-accordion-item.js.html#l49"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:49</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>This property indicates if the alert is visible. If false it might still be in the DOM until the fade animation
-                    has completed. Can be set to change the visibility of the alert box.</p>
+                            <p>The value of the accordion item, which is used as the value of the <code>selected</code> property of the parent <a href="../classes/Components.Accordion.html" class="crosslink">Components.Accordion</a> component</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> true</p>
                     
                     
                     </div>
