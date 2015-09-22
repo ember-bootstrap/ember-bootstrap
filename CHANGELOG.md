@@ -1,3 +1,10 @@
+<a name"0.4.0"></a>
+## 0.4.0 (2015-09-22)
+
+* **Collapse:**
+  * added bs-collapse component for collapsible content ([794b52d5](https://github.com/kaliber5/ember-bootstrap/commit/794b52d5f6ad1c53e6a468590d69c269d33c1da5))
+  * refactored bs-accordion-item to use bs-collapse internally ([58b0d868](https://github.com/kaliber5/ember-bootstrap/commit/58b0d868c58c2c5f29f6dcc99e1eccb357280b9e))
+
 <a name"0.3.0"></a>
 ## 0.3.0 (2015-09-09)
 

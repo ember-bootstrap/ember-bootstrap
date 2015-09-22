@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.3.0</span></h1>
+    <h1>API Docs <span class="small">0.4.0.25ec2913</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -83,16 +83,6 @@ export default Ember.Component.extend(TypeClass, SubComponent, I18nSupport, {
    */
   classTypePrefix: &#x27;panel&#x27;,
 
-  //type: &#x27;default&#x27;,
-
-  /**
-   * True if this item is expanded
-   *
-   * @property active
-   * @protected
-   */
-  active: false,
-
   /**
    * The title of the accordion item, displayed as a .panel-title element
    *
@@ -110,82 +100,13 @@ export default Ember.Component.extend(TypeClass, SubComponent, I18nSupport, {
    */
   value: Ember.computed.oneWay(&#x27;elementId&#x27;),
 
-  collapse: Ember.computed.not(&#x27;transitioning&#x27;),
-  collapsing: Ember.computed.alias(&#x27;transitioning&#x27;),
-  in: Ember.computed.and(&#x27;collapse&#x27;, &#x27;active&#x27;),
-  collapsed: Ember.computed.not(&#x27;active&#x27;),
-  transitioning: false,
-  collapseHeight: null,
-  collapseStyle: Ember.computed(&#x27;collapseHeight&#x27;, function () {
-    var height = parseFloat(this.get(&#x27;collapseHeight&#x27;));
-    return new Ember.Handlebars.SafeString(height !== null ? &#x60;height: ${height}px&#x60; : &#x27;&#x27;);
-  }),
-
   selected: Ember.computed.alias(&#x27;parentView.selected&#x27;),
 
+  collapsed: Ember.computed(&#x27;value&#x27;,&#x27;selected&#x27;, function() {
+    return this.get(&#x27;value&#x27;) !== this.get(&#x27;selected&#x27;);
+  }),
+
   action: &#x27;selected&#x27;,
-
-
-  show: function () {
-    var collapseElement = this.$().find(&#x27;.panel-collapse&#x27;);
-    var complete = function () {
-      this.setProperties({
-        transitioning: false,
-        collapseHeight: null
-      });
-    };
-
-    this.setProperties({
-      transitioning: true,
-      collapseHeight: 0,
-      active: true
-    });
-
-    if (!Ember.$.support.transition) {
-      return complete.call(this);
-    }
-
-    collapseElement
-      .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, complete))
-      // @todo: make duration configurable
-      .emulateTransitionEnd(350)
-    ;
-
-    Ember.run.next(this, function () {
-      this.set(&#x27;collapseHeight&#x27;, collapseElement[0].scrollHeight);
-    });
-  },
-
-  hide: function () {
-
-    var collapseElement = this.$().find(&#x27;.panel-collapse&#x27;);
-    var complete = function () {
-      this.setProperties({
-        transitioning: false,
-        collapseHeight: null
-      });
-    };
-
-    this.setProperties({
-      transitioning: true,
-      collapseHeight: collapseElement[0].offsetHeight,
-      active: false
-    });
-
-    if (!Ember.$.support.transition) {
-      return complete.call(this);
-    }
-
-    collapseElement
-      .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, complete))
-      // @todo: make duration configurable
-      .emulateTransitionEnd(350)
-    ;
-
-    Ember.run.next(this, function () {
-      this.set(&#x27;collapseHeight&#x27;, 0);
-    });
-  },
 
   actions: {
     toggleActive: function () {
@@ -201,25 +122,7 @@ export default Ember.Component.extend(TypeClass, SubComponent, I18nSupport, {
         this.sendAction(&#x27;action&#x27;, null, previous);
       }
     }
-  },
-
-  _onSelectedChange: Ember.observer(&#x27;selected&#x27;, function () {
-    var selected = this.get(&#x27;selected&#x27;),
-      value = this.get(&#x27;value&#x27;),
-      active = this.get(&#x27;active&#x27;);
-    if (selected === value &amp;&amp; !active) {
-      this.show();
-    }
-    else if (active) {
-      this.hide();
-    }
-  }),
-  _onInit: Ember.on(&#x27;init&#x27;, function () {
-    if (this.get(&#x27;selected&#x27;) === this.get(&#x27;value&#x27;)) {
-      this.set(&#x27;active&#x27;, true);
-    }
-  })
-
+  }
 
 });
 
@@ -238,6 +141,7 @@ export default Ember.Component.extend(TypeClass, SubComponent, I18nSupport, {
                     <li><a href="../classes/Components.Alert.html">Components.Alert</a></li>
                     <li><a href="../classes/Components.Button.html">Components.Button</a></li>
                     <li><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>

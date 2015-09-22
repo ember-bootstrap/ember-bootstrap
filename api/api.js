@@ -6,6 +6,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.Alert",
         "Components.Button",
         "Components.ButtonGroup",
+        "Components.Collapse",
         "Components.Dropdown",
         "Components.DropdownButton",
         "Components.DropdownMenu",

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.AccordionItem - ember-bootstrap</title>
+    <title>Components.Collapse - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,25 +49,17 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.AccordionItem <small>Class</small></h1>
+    <h1>Components.Collapse <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
-        <div class="uses">
-            Uses
-            <ul class="inline commas">
-                    <li><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
-                    <li><a href="Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-                    <li><a href="Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
-            </ul>
-        </div>
 
         <div class="extends">
             Extends <a href="http://emberjs.com/api/classes/Ember.Component.html" class="crosslink external" target="_blank">Ember.Component</a>
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-accordion-item.js.html#l6"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:6</code></a>
+            Defined in: <a href="../files/addon_components_bs-collapse.js.html#l3"><code>addon&#x2F;components&#x2F;bs-collapse.js:3</code></a>
         </div>
 
 
@@ -75,8 +67,14 @@
 
 
 <div class="well well-small">
-    <p>A collapsible/expandable item within an accordion</p>
-<p>See <a href="../classes/Components.Accordion.html" class="crosslink">Components.Accordion</a> for examples.</p>
+    <p>An Ember component that mimics the behaviour of Bootstrap's collapse.js plugin, see <a href="http://getbootstrap.com/javascript/#collapse">http://getbootstrap.com/javascript/#collapse</a></p>
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-collapse collapsed=collapsed}}
+ &lt;div class=&quot;well&quot;&gt;
+   &lt;h2&gt;Collapse&lt;/h2&gt;
+   &lt;p&gt;This is collapsible content&lt;/p&gt;
+ &lt;/div&gt;
+{{/bs-collapse}}
+</code></pre>
 
 </div>
 
@@ -222,6 +220,10 @@
                                 <a href="#" data-tabid="#methods" data-anchor="#method_get" data-tablink="get">get</a>
 
                             </li>
+                            <li class="index-item method private">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_getExpandedSize" data-tablink="getExpandedSize">getExpandedSize</a>
+
+                            </li>
                             <li class="index-item method inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_getProperties" data-tablink="getProperties">getProperties</a>
 
@@ -240,6 +242,10 @@
                             </li>
                             <li class="index-item method inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_hasObserverFor" data-tablink="hasObserverFor">hasObserverFor</a>
+
+                            </li>
+                            <li class="index-item method protected">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_hide" data-tablink="hide">hide</a>
 
                             </li>
                             <li class="index-item method inherited">
@@ -356,6 +362,10 @@
                                 <a href="#" data-tabid="#methods" data-anchor="#method_setUnknownProperty" data-tablink="setUnknownProperty">setUnknownProperty</a>
 
                             </li>
+                            <li class="index-item method protected">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_show" data-tablink="show">show</a>
+
+                            </li>
                             <li class="index-item method inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_toggleProperty" data-tablink="toggleProperty">toggleProperty</a>
 
@@ -387,6 +397,10 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_actions" data-tablink="actions">actions</a>
 
                             </li>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_active" data-tablink="active">active</a>
+
+                            </li>
                             <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_ariaRole" data-tablink="ariaRole">ariaRole</a>
 
@@ -407,8 +421,20 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_classNames" data-tablink="classNames">classNames</a>
 
                             </li>
-                            <li class="index-item property protected inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix" data-tablink="classTypePrefix">classTypePrefix</a>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_collapsed" data-tablink="collapsed">collapsed</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_collapseDimension" data-tablink="collapseDimension">collapseDimension</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_collapsedSize" data-tablink="collapsedSize">collapsedSize</a>
+
+                            </li>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_collapseSize" data-tablink="collapseSize">collapseSize</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -421,6 +447,10 @@
                             </li>
                             <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_elementId" data-tablink="elementId">elementId</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_expandedSize" data-tablink="expandedSize">expandedSize</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -459,6 +489,10 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_parentView" data-tablink="parentView">parentView</a>
 
                             </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_resetSizeWhenNotCollapsing" data-tablink="resetSizeWhenNotCollapsing">resetSizeWhenNotCollapsing</a>
+
+                            </li>
                             <li class="index-item property inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_tagName" data-tablink="tagName">tagName</a>
 
@@ -477,16 +511,8 @@
 
                                     <span class="label label-deprecated">deprecated</span>
                             </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_title" data-tablink="title">title</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_type" data-tablink="type">type</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_value" data-tablink="value">value</a>
+                            <li class="index-item property protected">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_transitioning" data-tablink="transitioning">transitioning</a>
 
                             </li>
                     </ul>
@@ -1743,6 +1769,61 @@
                             </div>
                     
                     </div>
+                    <div id="method_getExpandedSize" class="method item private">
+                        <h3 class="name">getExpandedSize
+                        <span class="small"></span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-collapse.js.html#l155"><code>addon&#x2F;components&#x2F;bs-collapse.js:155</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Get the size of the element when expanded</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">$action</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                            <div class="returns">
+                                <h4>Returns:</h4>
+                    
+                                <div class="returns-description">
+                                        <p>number</p>
+                    
+                                </div>
+                            </div>
+                    
+                    </div>
                     <div id="method_getProperties" class="method item inherited">
                         <h3 class="name">getProperties
                         <span class="small">Hash</span>
@@ -2038,6 +2119,37 @@
                                             <span class="type">Boolean</span>:
                                 </div>
                             </div>
+                    
+                    </div>
+                    <div id="method_hide" class="method item protected">
+                        <h3 class="name">hide
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-collapse.js.html#l175"><code>addon&#x2F;components&#x2F;bs-collapse.js:175</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Triggers the hide transition</p>
+                    
+                        </div>
+                    
+                    
                     
                     </div>
                     <div id="method_incrementProperty" class="method item inherited">
@@ -3767,6 +3879,37 @@
                     
                     
                     </div>
+                    <div id="method_show" class="method item protected">
+                        <h3 class="name">show
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-collapse.js.html#l115"><code>addon&#x2F;components&#x2F;bs-collapse.js:115</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Triggers the show transition</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="method_toggleProperty" class="method item inherited">
                         <h3 class="name">toggleProperty
                         <span class="small">Object</span>
@@ -4151,6 +4294,36 @@
                     
                     
                     </div>
+                    <div id="property_active" class="property item protected">
+                        <h3 class="name">active
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-collapse.js.html#l34"><code>addon&#x2F;components&#x2F;bs-collapse.js:34</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>True if this item is expanded</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="property_ariaRole" class="property item inherited">
                         <h3 class="name">ariaRole
                             <span class="small">String</span>
@@ -4360,9 +4533,104 @@
                     
                     
                     </div>
-                    <div id="property_classTypePrefix" class="property item protected">
-                        <h3 class="name">classTypePrefix
-                            <span class="small">String</span>
+                    <div id="property_collapsed" class="property item public">
+                        <h3 class="name">collapsed
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-collapse.js.html#l24"><code>addon&#x2F;components&#x2F;bs-collapse.js:24</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Collapsed/expanded state</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_collapseDimension" class="property item public">
+                        <h3 class="name">collapseDimension
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-collapse.js.html#l93"><code>addon&#x2F;components&#x2F;bs-collapse.js:93</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The direction (height/width) of the collapse animation.
+                    When setting this to 'width' you should also define custom CSS transitions for the width property, as the Bootstrap
+                    CSS does only support collapsible elements for the height direction.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;height&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_collapsedSize" class="property item public">
+                        <h3 class="name">collapsedSize
+                            <span class="small">number</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-collapse.js.html#l62"><code>addon&#x2F;components&#x2F;bs-collapse.js:62</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The size of the element when collapsed. Defaults to 0.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 0</p>
+                    
+                    
+                    </div>
+                    <div id="property_collapseSize" class="property item protected">
+                        <h3 class="name">collapseSize
+                            <span class="small">number</span>
                         </h3>
                     
                     
@@ -4374,12 +4642,9 @@
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="../classes/Mixins.TypeClass.html#property_classTypePrefix">
-                                    Mixins.TypeClass
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_components_bs-accordion-item.js.html#l22"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:22</code></a>
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-collapse.js.html#l55"><code>addon&#x2F;components&#x2F;bs-collapse.js:55</code></a>
                             </p>
                     
                     
@@ -4389,7 +4654,6 @@
                             
                         </div>
                     
-                            <p><strong>Default:</strong> &#x27;panel&#x27;</p>
                     
                     
                     </div>
@@ -4555,6 +4819,37 @@
                     <code>&#x60;</code>
                         </div>
                     
+                    
+                    
+                    </div>
+                    <div id="property_expandedSize" class="property item public">
+                        <h3 class="name">expandedSize
+                            <span class="small">number</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-collapse.js.html#l72"><code>addon&#x2F;components&#x2F;bs-collapse.js:72</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The size of the element when expanded. When null the value is calculated automatically to fit the containing elements.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
@@ -4897,6 +5192,37 @@
                     
                     
                     </div>
+                    <div id="property_resetSizeWhenNotCollapsing" class="property item private">
+                        <h3 class="name">resetSizeWhenNotCollapsing
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-collapse.js.html#l82"><code>addon&#x2F;components&#x2F;bs-collapse.js:82</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Usually the size (height) of the element is only set while transitioning, and reseted afterwards. Set to true to always set a size.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
                     <div id="property_tagName" class="property item inherited">
                         <h3 class="name">tagName
                             <span class="small">String</span>
@@ -5038,15 +5364,15 @@
                     
                     
                     </div>
-                    <div id="property_title" class="property item public">
-                        <h3 class="name">title
-                            <span class="small">string</span>
+                    <div id="property_transitioning" class="property item protected">
+                        <h3 class="name">transitioning
+                            <span class="small">boolean</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-public">public</span>
+                            <span class="label label-protected">protected</span>
                     
                     
                     
@@ -5054,76 +5380,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-accordion-item.js.html#l30"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:30</code></a>
+                            <a href="../files/addon_components_bs-collapse.js.html#l46"><code>addon&#x2F;components&#x2F;bs-collapse.js:46</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The title of the accordion item, displayed as a .panel-title element</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_type" class="property item public inherited">
-                        <h3 class="name">type
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.TypeClass.html#property_type">Mixins.TypeClass</a>:
-                            <a href="../files/addon_mixins_type-class.js.html#l27"><code>addon&#x2F;mixins&#x2F;type-class.js:27</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            Property for type styling
-                    
-                    For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without "btn-" prefix)
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;default&#x27;</p>
-                    
-                    
-                    </div>
-                    <div id="property_value" class="property item public">
-                        <h3 class="name">value
-                            <span class="small">unknown</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-accordion-item.js.html#l39"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:39</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The value of the accordion item, which is used as the value of the <code>selected</code> property of the parent <a href="../classes/Components.Accordion.html" class="crosslink">Components.Accordion</a> component</p>
+                            <p>true if the component is currently transitioning</p>
                     
                         </div>
                     

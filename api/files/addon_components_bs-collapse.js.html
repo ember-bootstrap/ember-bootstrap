@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/components/bs-collapse.js - ember-bootstrap</title>
+    <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
+    <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
+    <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-toggle-wrapper visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+        </div>
+        <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="navbar-nav nav">
+                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
+                <li><a href="/ember-bootstrap/components">Components</a></li>
+                <li><a href="/ember-bootstrap/api">API</a></li>
+
+            </ul>
+            <ul class="navbar-nav nav navbar-right">
+                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>API Docs <span class="small">0.4.0.25ec2913</span></h1>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>addon/components/bs-collapse.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+
+/**
+ An Ember component that mimics the behaviour of Bootstrap&#x27;s collapse.js plugin, see http://getbootstrap.com/javascript/#collapse
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-collapse collapsed=collapsed}}
+  &lt;div class=&quot;well&quot;&gt;
+    &lt;h2&gt;Collapse&lt;/h2&gt;
+    &lt;p&gt;This is collapsible content&lt;/p&gt;
+  &lt;/div&gt;
+ {{/bs-collapse}}
+ &#x60;&#x60;&#x60;
+
+ @class Collapse
+ @namespace Components
+ @extends Ember.Component
+ */
+export default Ember.Component.extend({
+
+  classNameBindings: [&#x27;collapse&#x27;,&#x27;in&#x27;,&#x27;collapsing&#x27;],
+  attributeBindings: [&#x27;style&#x27;],
+
+  /**
+   * Collapsed/expanded state
+   *
+   * @property collapsed
+   * @type boolean
+   * @default true
+   * @public
+   */
+  collapsed: true,
+
+  /**
+   * True if this item is expanded
+   *
+   * @property active
+   * @protected
+   */
+  active: false,
+
+  collapse: Ember.computed.not(&#x27;transitioning&#x27;),
+  collapsing: Ember.computed.alias(&#x27;transitioning&#x27;),
+  in: Ember.computed.and(&#x27;collapse&#x27;, &#x27;active&#x27;),
+
+  /**
+   * true if the component is currently transitioning
+   *
+   * @property transitioning
+   * @type boolean
+   * @protected
+   */
+  transitioning: false,
+
+  /**
+   * @property collapseSize
+   * @type number
+   * @protected
+   */
+  collapseSize: null,
+
+  /**
+   * The size of the element when collapsed. Defaults to 0.
+   *
+   * @property collapsedSize
+   * @type number
+   * @default 0
+   * @public
+   */
+  collapsedSize: 0,
+
+  /**
+   * The size of the element when expanded. When null the value is calculated automatically to fit the containing elements.
+   *
+   * @property expandedSize
+   * @type number
+   * @default null
+   * @public
+   */
+  expandedSize: null,
+
+  /**
+   * Usually the size (height) of the element is only set while transitioning, and reseted afterwards. Set to true to always set a size.
+   *
+   * @property resetSizeWhenNotCollapsing
+   * @type boolean
+   * @default true
+   * @private
+   */
+  resetSizeWhenNotCollapsing: true,
+
+
+  /**
+   * The direction (height/width) of the collapse animation.
+   * When setting this to &#x27;width&#x27; you should also define custom CSS transitions for the width property, as the Bootstrap
+   * CSS does only support collapsible elements for the height direction.
+   *
+   * @property collapseDimension
+   * @type string
+   * @default &#x27;height&#x27;
+   * @public
+   */
+  collapseDimension: &#x27;height&#x27;,
+
+  style: Ember.computed(&#x27;collapseSize&#x27;, function () {
+    var size = this.get(&#x27;collapseSize&#x27;),
+      dimension = this.get(&#x27;collapseDimension&#x27;);
+    if (Ember.isEmpty(size)) {
+      return new Ember.Handlebars.SafeString(&#x27;&#x27;);
+    }
+    return new Ember.Handlebars.SafeString(&#x60;${dimension}: ${size}px&#x60;);
+  }),
+
+
+  /**
+   * Triggers the show transition
+   * 
+   * @method show
+   * @protected
+   */
+  show: function () {
+    var complete = function () {
+        this.set(&#x27;transitioning&#x27;, false);
+        if (this.get(&#x27;resetSizeWhenNotCollapsing&#x27;)) {
+          this.set(&#x27;collapseSize&#x27;, null);
+        }
+        this.sendAction(&#x27;didShow&#x27;);
+      };
+
+    this.sendAction(&#x27;willShow&#x27;);
+
+    this.setProperties({
+      transitioning: true,
+      collapseSize: this.get(&#x27;collapsedSize&#x27;),
+      active: true
+    });
+
+    if (!Ember.$.support.transition) {
+      return complete.call(this);
+    }
+
+    this.$()
+      .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, complete))
+      // @todo: make duration configurable
+      .emulateTransitionEnd(350)
+    ;
+
+    Ember.run.next(this, function () {
+      if (!this.get(&#x27;isDestroyed&#x27;)) {
+        this.set(&#x27;collapseSize&#x27;, this.getExpandedSize(&#x27;show&#x27;));
+      }
+    });
+  },
+
+  /**
+   * Get the size of the element when expanded
+   *
+   * @method getExpandedSize
+   * @param $action
+   * @returns number
+   * @private
+   */
+  getExpandedSize: function($action) {
+    var expandedSize = this.get(&#x27;expandedSize&#x27;);
+    if (Ember.isPresent(expandedSize)) {
+      return expandedSize;
+    }
+
+    var collapseElement = this.$(),
+      prefix = $action === &#x27;show&#x27; ? &#x27;scroll&#x27; : &#x27;offset&#x27;,
+      measureProperty = Ember.String.camelize(prefix + &#x27;-&#x27; + this.get(&#x27;collapseDimension&#x27;));
+    return collapseElement[0][measureProperty];
+  },
+
+  /**
+   * Triggers the hide transition
+   *
+   * @method hide
+   * @protected
+   */
+  hide: function () {
+
+    var complete = function () {
+        this.set(&#x27;transitioning&#x27;, false);
+        if (this.get(&#x27;resetSizeWhenNotCollapsing&#x27;)) {
+          this.set(&#x27;collapseSize&#x27;, null);
+        }
+        this.sendAction(&#x27;didHide&#x27;);
+      };
+
+    this.sendAction(&#x27;willHide&#x27;);
+
+    this.setProperties({
+      transitioning: true,
+      collapseSize: this.getExpandedSize(&#x27;hide&#x27;),
+      active: false
+    });
+
+    if (!Ember.$.support.transition) {
+      return complete.call(this);
+    }
+
+    this.$()
+      .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, complete))
+      // @todo: make duration configurable
+      .emulateTransitionEnd(350)
+    ;
+
+    Ember.run.next(this, function () {
+        if (!this.get(&#x27;isDestroyed&#x27;)) {
+          this.set(&#x27;collapseSize&#x27;, this.get(&#x27;collapsedSize&#x27;));
+        }
+    });
+  },
+
+  _onCollapsedChange: Ember.observer(&#x27;collapsed&#x27;, function () {
+    var collapsed = this.get(&#x27;collapsed&#x27;),
+      active = this.get(&#x27;active&#x27;);
+    if (collapsed !== active) {
+      return;
+    }
+    if (collapsed === false) {
+      this.show();
+    }
+    else {
+      this.hide();
+    }
+  }),
+
+  _onInit: Ember.on(&#x27;init&#x27;, function () {
+    this.set(&#x27;active&#x27;, !this.get(&#x27;collapsed&#x27;));
+  }),
+
+  _updateCollapsedSize: Ember.observer(&#x27;collapsedSize&#x27;, function() {
+    if (!this.get(&#x27;resetSizeWhenNotCollapsing&#x27;) &amp;&amp; this.get(&#x27;collapsed&#x27;) &amp;&amp; !this.get(&#x27;collapsing&#x27;)) {
+      this.set(&#x27;collapseSize&#x27;, this.get(&#x27;collapsedSize&#x27;));
+    }
+  }),
+
+  _updateExpandedSize: Ember.observer(&#x27;expandedSize&#x27;, function() {
+    if (!this.get(&#x27;resetSizeWhenNotCollapsing&#x27;) &amp;&amp; !this.get(&#x27;collapsed&#x27;) &amp;&amp; !this.get(&#x27;collapsing&#x27;)) {
+      this.set(&#x27;collapseSize&#x27;, this.get(&#x27;expandedSize&#x27;));
+    }
+  })
+
+
+});
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3>Classes</h3>
+            
+            <ul id="api-classes" class="nav nav-pills nav-stacked">
+                    <li><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
+                    <li><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
+                    <li><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
+                    <li><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li><a href="../classes/Components.Form.html">Components.Form</a></li>
+                    <li><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+                    <li><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+                    <li><a href="../classes/Components.Input.html">Components.Input</a></li>
+                    <li><a href="../classes/Components.Select.html">Components.Select</a></li>
+                    <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
+                    <li><a href="../classes/Mixins.Bootstrap.SubComponent.html">Mixins.Bootstrap.SubComponent</a></li>
+                    <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+                    <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
+                    <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+            </ul>        </div>
+    </div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v0.3.0",
+        "version": "0.4.0.25ec2913",
         "external": {
             "data": [
                 {
@@ -62,6 +62,17 @@
             "modules": {},
             "classes": {
                 "Components.Button": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-collapse.js": {
+            "name": "addon/components/bs-collapse.js",
+            "modules": {},
+            "classes": {
+                "Components.Collapse": 1
             },
             "fors": {},
             "namespaces": {
@@ -341,6 +352,20 @@
                 "Mixins.SizeClass",
                 "Mixins.I18nSupport"
             ]
+        },
+        "Components.Collapse": {
+            "name": "Components.Collapse",
+            "shortname": "Components.Collapse",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-collapse.js",
+            "line": 3,
+            "description": "An Ember component that mimics the behaviour of Bootstrap's collapse.js plugin, see http://getbootstrap.com/javascript/#collapse\n\n```hbs\n{{#bs-collapse collapsed=collapsed}}\n <div class=\"well\">\n   <h2>Collapse</h2>\n   <p>This is collapsible content</p>\n </div>\n{{/bs-collapse}}\n```",
+            "extends": "Ember.Component"
         },
         "Components.DropdownButton": {
             "name": "Components.DropdownButton",
@@ -623,18 +648,7 @@
         },
         {
             "file": "addon/components/bs-accordion-item.js",
-            "line": 32,
-            "description": "True if this item is expanded",
-            "itemtype": "property",
-            "name": "active",
-            "access": "protected",
-            "tagname": "",
-            "class": "Components.AccordionItem",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/bs-accordion-item.js",
-            "line": 40,
+            "line": 30,
             "description": "The title of the accordion item, displayed as a .panel-title element",
             "itemtype": "property",
             "name": "title",
@@ -646,7 +660,7 @@
         },
         {
             "file": "addon/components/bs-accordion-item.js",
-            "line": 49,
+            "line": 39,
             "description": "The value of the accordion item, which is used as the value of the `selected` property of the parent {{#crossLink \"Components.Accordion\"}}{{/crossLink}} component",
             "itemtype": "property",
             "name": "value",
@@ -1077,6 +1091,147 @@
                 }
             ],
             "class": "Components.Button",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-collapse.js",
+            "line": 24,
+            "description": "Collapsed/expanded state",
+            "itemtype": "property",
+            "name": "collapsed",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-collapse.js",
+            "line": 34,
+            "description": "True if this item is expanded",
+            "itemtype": "property",
+            "name": "active",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-collapse.js",
+            "line": 46,
+            "description": "true if the component is currently transitioning",
+            "itemtype": "property",
+            "name": "transitioning",
+            "type": "boolean",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-collapse.js",
+            "line": 55,
+            "itemtype": "property",
+            "name": "collapseSize",
+            "type": "number",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-collapse.js",
+            "line": 62,
+            "description": "The size of the element when collapsed. Defaults to 0.",
+            "itemtype": "property",
+            "name": "collapsedSize",
+            "type": "number",
+            "default": "0",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-collapse.js",
+            "line": 72,
+            "description": "The size of the element when expanded. When null the value is calculated automatically to fit the containing elements.",
+            "itemtype": "property",
+            "name": "expandedSize",
+            "type": "number",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-collapse.js",
+            "line": 82,
+            "description": "Usually the size (height) of the element is only set while transitioning, and reseted afterwards. Set to true to always set a size.",
+            "itemtype": "property",
+            "name": "resetSizeWhenNotCollapsing",
+            "type": "boolean",
+            "default": "true",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-collapse.js",
+            "line": 93,
+            "description": "The direction (height/width) of the collapse animation.\nWhen setting this to 'width' you should also define custom CSS transitions for the width property, as the Bootstrap\nCSS does only support collapsible elements for the height direction.",
+            "itemtype": "property",
+            "name": "collapseDimension",
+            "type": "string",
+            "default": "'height'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-collapse.js",
+            "line": 115,
+            "description": "Triggers the show transition",
+            "itemtype": "method",
+            "name": "show",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-collapse.js",
+            "line": 155,
+            "description": "Get the size of the element when expanded",
+            "itemtype": "method",
+            "name": "getExpandedSize",
+            "params": [
+                {
+                    "name": "$action",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "number"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-collapse.js",
+            "line": 175,
+            "description": "Triggers the hide transition",
+            "itemtype": "method",
+            "name": "hide",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.Collapse",
             "namespace": "Components"
         },
         {
@@ -1894,5 +2049,10 @@
             "namespace": "Mixins"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " addon/components/bs-collapse.js:155"
+        }
+    ]
 }
