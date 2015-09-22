@@ -26,10 +26,10 @@
 
 <h2>Dynamic modal creation</h2>
 
-<h3>Using modal creation action</h3>
+{{#bs-button action="openModal"}}Open{{/bs-button}}
 
-{{#bs-button action="open"}}Open{{/bs-button}}
-
-<h3>Using dedicated modal route</h3>
-
-{{#link-to "modal.from-route" class="btn btn-default"}}Open{{/link-to}}
+{{#if modal3}}
+{{#bs-modal action="closeModal" title="Dynamic Dialog"}}
+    Hi there
+{{/bs-modal}}
+{{/if}}

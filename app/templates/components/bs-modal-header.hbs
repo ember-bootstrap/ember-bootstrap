@@ -1,7 +1,7 @@
 {{#if closeButton}}
     <button type="button" class="close" aria-label="Close" {{action "close"}}><span aria-hidden="true">&times;</span></button>
 {{/if}}
-{{#if template}}
+{{#if hasBlock}}
     {{yield}}
 {{else}}
     <h4 class="modal-title">{{title}}</h4>

@@ -17,17 +17,6 @@ var observeOpen = function () {
 
 export default Ember.Component.extend(I18nSupport, {
 
-  //  classNames: ['modal'],
-  //classNameBindings: ['fade','in'],
-  //
-  //
-  //  attributeBindings: [
-  //      'aria-describedby',
-  //      'aria-hidden',
-  //      //'aria-labelledby',
-  //      'tabindex'
-  //  ],
-
   /**
    * @property open
    * @type boolean
@@ -100,9 +89,6 @@ export default Ember.Component.extend(I18nSupport, {
 
   tabindex: '-1',
 
-  'aria-hidden': Ember.computed.alias('in'),
-  'aria-describedby': null,
-
   modalId: Ember.computed('elementId', function() {
     return this.get('elementId') + '-modal';
   }),
@@ -150,13 +136,10 @@ export default Ember.Component.extend(I18nSupport, {
   _observeOpen: Ember.observer('open', observeOpen),
 
   show: function () {
-    //this.trigger('show');
 
-    // @todo srollbar handling?
+    // @todo scrollbar handling?
     //this.checkScrollbar()
     //this.setScrollbar()
-
-    console.log('show');
 
     Ember.$('body').addClass('modal-open');
 
@@ -165,9 +148,8 @@ export default Ember.Component.extend(I18nSupport, {
 
     this.resize();
 
-    // @todo mobile backdrop support
     var callback = function () {
-      var transition = this.get('usesTransition');
+      //var transition = this.get('usesTransition');
 
       this.get('modalElement')
         .show()
@@ -200,14 +182,9 @@ export default Ember.Component.extend(I18nSupport, {
 
   hide: function () {
 
-    console.log('hide');
-
-    //this.trigger('hide');
-
+    // @todo escape key
     //this.escape()
     this.resize();
-
-    //$(document).off('focusin.bs.modal')
 
     this.set('in', false);
 
@@ -219,16 +196,14 @@ export default Ember.Component.extend(I18nSupport, {
   },
 
   hideModal: function () {
-    var that = this;
-
     this.get('modalElement').hide();
     this.handleBackdrop(function () {
       Ember.$('body').removeClass('modal-open');
       //that.resetAdjustments()
       //that.resetScrollbar()
       //that.trigger('hidden');
-      console.log('hidden');
 
+      this.sendAction();
     });
   },
 
@@ -239,20 +214,6 @@ export default Ember.Component.extend(I18nSupport, {
 
     if (this.get('open') && this.get('backdrop')) {
       this.set('showBackdrop', true);
-
-      //this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
-      //    .prependTo(this.$element)
-      //    .on('click.dismiss.bs.modal', $.proxy(function (e) {
-      //        if (e.target !== e.currentTarget) return
-      //        this.options.backdrop == 'static'
-      //            ? this.$element[0].focus.call(this.$element[0])
-      //            : this.hide.call(this)
-      //    }, this))
-
-      // @todo ???
-      //if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
-
-      //this.$backdrop.addClass('in')
 
       if (!callback) return;
 
@@ -271,7 +232,6 @@ export default Ember.Component.extend(I18nSupport, {
     } else if (!this.get('open') && this.get('backdrop')) {
       var $backdrop = this.get('backdropElement');
       Ember.assert('Backdrop element should be in DOM', $backdrop && $backdrop.length > 0);
-      //this.$backdrop.removeClass('in')
 
       var callbackRemove = function () {
         this.set('showBackdrop', false);
@@ -299,14 +259,7 @@ export default Ember.Component.extend(I18nSupport, {
   },
 
   handleUpdate: function () {
-    if (this.get('backdrop')) {
-      this.adjustBackdrop();
-    }
     this.adjustDialog();
-  },
-
-  adjustBackdrop: function () {
-
   },
 
   adjustDialog: function () {
