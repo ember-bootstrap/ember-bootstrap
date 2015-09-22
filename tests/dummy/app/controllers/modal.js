@@ -7,6 +7,9 @@ export default Ember.Controller.extend({
     actions: {
         open: function() {
             this.send('openModal', 'modal.from-action');
-        }
+        },
+      submit() {
+        alert('Modal submitted!');
+      }
     }
 });

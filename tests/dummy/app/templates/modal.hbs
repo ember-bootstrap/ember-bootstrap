@@ -13,14 +13,12 @@
 
 <h3>Explicit markup</h3>
 
-{{#bs-modal open=modal2 header=false body=false footer=false}}
+{{#bs-modal open=modal2 header=false body=false footer=false submit=(action "submit")}}
     {{#bs-modal-header}}
         <h4 class="modal-title">Dialog</h4>
     {{/bs-modal-header}}
     {{#bs-modal-body}}Hi there{{/bs-modal-body}}
-    {{#bs-modal-footer}}
-        {{#bs-button type="primary" action="closeDialog"}}Ok{{/bs-button}}
-    {{/bs-modal-footer}}
+    {{bs-modal-footer closeTitle="Cancel" submitTitle="Ok"}}
 {{/bs-modal}}
 
 <label>{{input type="checkbox" checked=modal2}} Open </label>

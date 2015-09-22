@@ -6,7 +6,7 @@ var Modal = {};
 Modal.TRANSITION_DURATION = 300;
 Modal.BACKDROP_TRANSITION_DURATION = 150;
 
-var observeOpen = function() {
+var observeOpen = function () {
   if (this.get('open')) {
     this.show();
   }
@@ -17,47 +17,47 @@ var observeOpen = function() {
 
 export default Ember.Component.extend(I18nSupport, {
 
-    classNames: ['modal'],
-  classNameBindings: ['fade','in'],
+  //  classNames: ['modal'],
+  //classNameBindings: ['fade','in'],
+  //
+  //
+  //  attributeBindings: [
+  //      'aria-describedby',
+  //      'aria-hidden',
+  //      //'aria-labelledby',
+  //      'tabindex'
+  //  ],
 
+  /**
+   * @property open
+   * @type boolean
+   * @default true
+   * @public
+   */
+  open: true,
 
-    attributeBindings: [
-        'aria-describedby',
-        'aria-hidden',
-        //'aria-labelledby',
-        'tabindex'
-    ],
+  /**
+   * @property title
+   * @type string
+   * @public
+   */
+  title: null,
 
-    /**
-     * @property open
-     * @type boolean
-     * @default true
-     * @public
-     */
-    open: true,
+  /**
+   * @property closeButton
+   * @type boolean
+   * @default true
+   * @public
+   */
+  closeButton: true,
 
-    /**
-     * @property title
-     * @type string
-     * @public
-     */
-    title: null,
-
-    /**
-     * @property closeButton
-     * @type boolean
-     * @default true
-     * @public
-     */
-    closeButton: true,
-
-    /**
-     * @property fade
-     * @type boolean
-     * @default true
-     * @public
-     */
-    fade: true,
+  /**
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  fade: true,
 
   /**
    * @property in
@@ -67,13 +67,13 @@ export default Ember.Component.extend(I18nSupport, {
    */
   in: false,
 
-    /**
-     * @property backdrop
-     * @type boolean
-     * @default true
-     * @public
-     */
-    backdrop: true,
+  /**
+   * @property backdrop
+   * @type boolean
+   * @default true
+   * @public
+   */
+  backdrop: true,
 
   /**
    * @property showBackdrop
@@ -83,65 +83,73 @@ export default Ember.Component.extend(I18nSupport, {
    */
   showBackdrop: false,
 
-    /**
-     * @property keyboard
-     * @type boolean
-     * @default true
-     * @public
-     */
-    keyboard: true,
+  /**
+   * @property keyboard
+   * @type boolean
+   * @default true
+   * @public
+   */
+  keyboard: true,
 
 
-    header: true,
-    body: true,
-    footer: true,
+  header: true,
+  body: true,
+  footer: true,
 
-    classTypePrefix: 'modal',
+  classTypePrefix: 'modal',
 
-    tabindex: '-1',
+  tabindex: '-1',
 
   'aria-hidden': Ember.computed.alias('in'),
-    'aria-describedby': null,
+  'aria-describedby': null,
 
-  usesTransition: Ember.computed('fade', function() {
+  modalId: Ember.computed('elementId', function() {
+    return this.get('elementId') + '-modal';
+  }),
+
+  modalElement: Ember.computed('modalId', function() {
+    return Ember.$('#' + this.get('modalId'));
+  }).volatile(),
+
+  backdropId: Ember.computed('elementId', function() {
+    return this.get('elementId') + '-backdrop';
+  }),
+
+  backdropElement: Ember.computed('backdropId', function() {
+    return Ember.$('#' + this.get('backdropId'));
+  }).volatile(),
+
+  usesTransition: Ember.computed('fade', function () {
     return Ember.$.support.transition && this.get('fade');
   }),
 
-  backdropElement: null,
-
-  _updateBackdropElement: Ember.observer('showBackdrop', function(){
-    Ember.run.scheduleOnce('afterRender', this, function(){
-      this.set('backdropElement', this.$().find('.modal-backdrop'));
-    });
+  size: null,
+  sizeClass: Ember.computed('size', function () {
+    var size = this.get('size');
+    return Ember.isBlank(size) ? null : 'modal-' + size;
   }),
 
-    size: null,
-    sizeClass: (function() {
-        var size = this.get('size');
-        return Ember.isBlank(size) ? null : 'modal-' + size;
-    }).property('size'),
-
-    actions: {
-        close: function() {
-          this.set('open', false);
-        },
-        submit: function() {
-            var form = this.$().find('.modal-body form');
-            if (form.length > 0) {
-                // trigger submit event on body form
-                this.$().find('.modal-body form').trigger('submit');
-            }
-            else {
-                // if we have no form, we send a submit action
-                this.sendAction('submit');
-            }
-        }
-
+  actions: {
+    close: function () {
+      this.set('open', false);
     },
+    submit: function () {
+      var form = this.$().find('.modal-body form');
+      if (form.length > 0) {
+        // trigger submit event on body form
+        this.$().find('.modal-body form').trigger('submit');
+      }
+      else {
+        // if we have no form, we send a submit action
+        this.sendAction('submit');
+      }
+    }
+
+  },
 
   _observeOpen: Ember.observer('open', observeOpen),
 
-  show: function() {
+  show: function () {
     //this.trigger('show');
 
     // @todo srollbar handling?
@@ -161,7 +169,7 @@ export default Ember.Component.extend(I18nSupport, {
     var callback = function () {
       var transition = this.get('usesTransition');
 
-      this.$()
+      this.get('modalElement')
         .show()
         .scrollTop(0);
 
@@ -190,7 +198,7 @@ export default Ember.Component.extend(I18nSupport, {
     Ember.run.scheduleOnce('afterRender', this, this.handleBackdrop, callback);
   },
 
-  hide: function() {
+  hide: function () {
 
     console.log('hide');
 
@@ -204,7 +212,7 @@ export default Ember.Component.extend(I18nSupport, {
     this.set('in', false);
 
     this.get('usesTransition') ?
-      this.$()
+      this.get('modalElement')
         .one('bsTransitionEnd', Ember.run.bind(this, this.hideModal))
         .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
       this.hideModal();
@@ -213,7 +221,7 @@ export default Ember.Component.extend(I18nSupport, {
   hideModal: function () {
     var that = this;
 
-    this.$().hide();
+    this.get('modalElement').hide();
     this.handleBackdrop(function () {
       Ember.$('body').removeClass('modal-open');
       //that.resetAdjustments()
@@ -223,7 +231,6 @@ export default Ember.Component.extend(I18nSupport, {
 
     });
   },
-
 
 
   handleBackdrop: function (callback) {
@@ -249,7 +256,7 @@ export default Ember.Component.extend(I18nSupport, {
 
       if (!callback) return;
 
-      var waitForFade = function() {
+      var waitForFade = function () {
         var $backdrop = this.get('backdropElement');
         Ember.assert('Backdrop element should be in DOM', $backdrop && $backdrop.length > 0);
         doAnimate ?
@@ -299,9 +306,7 @@ export default Ember.Component.extend(I18nSupport, {
   },
 
   adjustBackdrop: function () {
-    this.get('backdropElement')
-      .css('height', 0)
-      .css('height', this.$().get(0).scrollHeight);
+
   },
 
   adjustDialog: function () {
@@ -314,13 +319,12 @@ export default Ember.Component.extend(I18nSupport, {
     //});
   },
 
-  didInsertElement: function() {
+  didInsertElement: function () {
 
     if (this.get('open')) {
       this.show();
     }
   }
-
 
 
 });
