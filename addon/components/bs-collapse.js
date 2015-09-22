@@ -1,5 +1,21 @@
 import Ember from 'ember';
 
+/**
+ An Ember component that mimics the behaviour of Bootstrap's collapse.js plugin, see http://getbootstrap.com/javascript/#collapse
+
+ ```hbs
+ {{#bs-collapse collapsed=collapsed}}
+  <div class="well">
+    <h2>Collapse</h2>
+    <p>This is collapsible content</p>
+  </div>
+ {{/bs-collapse}}
+ ```
+
+ @class Collapse
+ @namespace Components
+ @extends Ember.Component
+ */
 export default Ember.Component.extend({
 
   classNameBindings: ['collapse','in','collapsing'],
