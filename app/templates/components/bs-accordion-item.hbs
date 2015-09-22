@@ -5,9 +5,8 @@
         </a>
     </h4>
 </div>
-<div class="panel-collapse {{if collapse "collapse"}} {{if in "in"}} {{if collapsing "collapsing"}}" style={{collapseStyle}} role="tabpanel">
+{{#bs-collapse collapsed=collapsed class="panel-collapse"}}
     <div class="panel-body">
         {{yield}}
     </div>
-</div>
-
+{{/bs-collapse}}
