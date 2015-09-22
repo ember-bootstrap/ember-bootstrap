@@ -117,7 +117,7 @@ export default Ember.Component.extend(I18nSupport, {
 
   actions: {
     close: function () {
-      this.set('open', false);
+      this.sendAction('closeAction');
     },
     submit: function () {
       var form = this.$().find('.modal-body form');
@@ -127,7 +127,7 @@ export default Ember.Component.extend(I18nSupport, {
       }
       else {
         // if we have no form, we send a submit action
-        this.sendAction('submit');
+        this.sendAction('submitAction');
       }
     }
 
@@ -176,6 +176,8 @@ export default Ember.Component.extend(I18nSupport, {
       //        })
       //        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
       //    that.$element.trigger('focus').trigger(e)
+
+      this.sendAction('openedAction');
     };
     Ember.run.scheduleOnce('afterRender', this, this.handleBackdrop, callback);
   },
@@ -203,7 +205,7 @@ export default Ember.Component.extend(I18nSupport, {
       //that.resetScrollbar()
       //that.trigger('hidden');
 
-      this.sendAction();
+      this.sendAction('closedAction');
     });
   },
 
