@@ -2,6 +2,8 @@ import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
 import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
+import ComponentChild from 'ember-bootstrap/mixins/component-child';
+
 
 /**
  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -9,10 +11,10 @@ import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 
  ### Basic Usage
 
- ```handlebars
- {{#bs-button type="primary" icon="glyphicon glyphicon-download"}}
-    Download
- {{/bs-button}}
+ ```hbs
+ \{{#bs-button type="primary" icon="glyphicon glyphicon-download"}}
+    Downloads
+ \{{/bs-button}}
  ```
 
  ### Actions
@@ -22,10 +24,10 @@ import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
  * event: the browsers event object
  * callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling
 
- ```handlebars
- {{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
+ ```hbs
+ \{{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
     Download
- {{/bs-button}}
+ \{{/bs-button}}
  ```
 
  ### States
@@ -33,8 +35,8 @@ import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
  Use the `textState` property to change the label of the button. You can bind it to a controller property to set a "loading" state for example.
  The label of the button will be taken from the `<state>Text` property.
 
- ```handlebars
- {{bs-button type="primary" icon="glyphicon glyphicon-download" textState=buttonState defaultText="Download" loadingText="Loading..." action="download"}}
+ ```hbs
+ \{{bs-button type="primary" icon="glyphicon glyphicon-download" textState=buttonState defaultText="Download" loadingText="Loading..." action="download"}}
  ```
 
  ```js
@@ -54,8 +56,8 @@ import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
  manage its `textState` property automatically, changing its value according to the state of the promise:
  "default" > "pending" > "resolved"/"rejected"
 
- ```handlebars
- {{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" action="download"}}
+ ```hbs
+ \{{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" action="download"}}
  ```
 
  ```js
@@ -82,7 +84,7 @@ import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
  @uses Mixins.SizeClass
  @uses Mixins.I18nSupport
 */
-export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
+export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18nSupport, {
     tagName: 'button',
     classNames: ['btn'],
     classNameBindings: ['active', 'block:btn-block'],
@@ -95,7 +97,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
      */
     classTypePrefix: 'btn',
 
-    attributeBindings: ['id', 'disabled', 'buttonType:type'],
+    attributeBindings: ['disabled', 'buttonType:type'],
 
     /**
      * Default label of the button. Not need if used as a block component
@@ -235,9 +237,12 @@ export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
     },
 
     resetObserver: Ember.observer('reset', function(){
-        if(this.get('reset')){
-            this.resetState();
-        }
+      if(this.get('reset')){
+        Ember.run.scheduleOnce('actions', this, function() {
+          this.set('textState', 'default');
+        });
+
+      }
     }),
 
     text: Ember.computed('textState', 'defaultText', 'pendingText', 'resolvedText', 'rejectedText', function() {
@@ -277,7 +282,11 @@ export default Ember.Component.extend(TypeClass, SizeClass, I18nSupport, {
             }
         };
         this.sendAction('action', this.get('value'), evt, callback);
-    }
+    },
 
+  init: function() {
+    this._super();
+    this.get('reset');
+  }
 
 });

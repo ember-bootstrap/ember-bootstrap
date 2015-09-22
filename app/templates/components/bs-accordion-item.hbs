@@ -1,0 +1,12 @@
+<div role="tab" {{action "toggleActive"}} class="panel-heading {{if collapsed "collapsed"}}">
+    <h4 class="panel-title">
+        <a href="#">
+            {{title}}
+        </a>
+    </h4>
+</div>
+{{#bs-collapse collapsed=collapsed class="panel-collapse"}}
+    <div class="panel-body">
+        {{yield}}
+    </div>
+{{/bs-collapse}}

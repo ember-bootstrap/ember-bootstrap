@@ -1,11 +1,13 @@
 import Ember from 'ember';
 
 export function initialize() {
-    Ember.I18n.translations = {
-        label: {
-            translated: "This is a translated label"
-        }
-    };
+    if (Ember.isPresent(Ember.I18n)) {
+        Ember.I18n.translations = {
+            label: {
+                translated: "This is a translated label"
+            }
+        };
+    }
 }
 
 export default {

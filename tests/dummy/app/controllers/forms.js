@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 
-export default Ember.Controller.extend(EmberValidations.Mixin,{
+export default Ember.Controller.extend(EmberValidations,{
     formLayout: 'vertical',
     email: null,
     password: null,
@@ -22,7 +22,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin,{
         }
     },
 
-    genderChoices: [
+    genderChoices: Ember.A([
         {
             id: 'f',
             label: 'Female'
@@ -31,7 +31,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin,{
             id: 'm',
             label: 'Male'
         }
-    ],
+    ]),
 
     actions: {
         submit: function() {

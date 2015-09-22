@@ -15,13 +15,13 @@ export default Ember.Mixin.create({
      * @required
      * @protected
      */
-    classTypePrefix: Ember.required(String),
+    classTypePrefix: null,
     classNameBindings: ['typeClass'],
-    typeClass: (function() {
+    typeClass: Ember.computed('type', function() {
         var prefix = this.get('classTypePrefix'),
             type = this.get('type') || 'default';
         return prefix + '-' + type;
-    }).property('type'),
+    }),
 
 
     /**

@@ -1,51 +1,23 @@
-import {
-  moduleForComponent,
-  test
-} from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
-import EmberValidations from 'ember-validations';
 
-
-
-moduleForComponent('bs-form', 'BsFormComponent', {
-  // specify the other units that are required for this test
-    needs: [
-//        'component:bs-form-element',
-//        'template:components/bs-form-element',
-//        'component:bs-form-group',
-//        'template:components/bs-form-group'
-    ]
+moduleForComponent('bs-form', 'Integration | Component | bs-form', {
+    integration: true
 });
-
-test('it renders', function(assert) {
-  assert.expect(2);
-
-  // creates the component instance
-  var component = this.subject();
-  assert.equal(component._state, 'preRender');
-
-  // appends the component to the page
-  this.append();
-  assert.equal(component._state, 'inDOM');
-});
-
-
-
 
 test('form has correct CSS class', function(assert) {
-    var component = this.subject(),
-        classSpec = {
+    this.render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
+
+    var classSpec = {
             vertical: 'form',
             horizontal: 'form-horizontal',
             inline: 'form-inline'
         };
 
     for (var layout in classSpec) {
-        /*jshint loopfunc: true */
-        Ember.run(function(){
-            component.set('formLayout', layout);
-        });
-        assert.equal(this.$().hasClass(classSpec[layout]), true, 'form has expected class.');
+        this.set('formLayout', layout);
+        assert.equal(this.$('form').hasClass(classSpec[layout]), true, 'form has expected class.');
     }
 
 });
@@ -53,21 +25,13 @@ test('form has correct CSS class', function(assert) {
 
 
 test('Submitting the form calls default action', function(assert) {
-    var testController = Ember.Controller.extend({
-            actions: {
-                testAction: function() {
-                    assert.ok(true, 'Default action has been called.');
-                }
-            }
-        }).create(),
-        component = this.subject({
-            targetObject: testController,
-            action: 'testAction'
-        });
+    this.render(hbs`{{#bs-form action="testAction"}}Test{{/bs-form}}`);
+    this.on('testAction', () => {
+        assert.ok(true, 'Default action has been called.');
+    });
 
     assert.expect(1);
-
-    this.$().submit();
+    this.$('form').submit();
 });
 
 
@@ -87,7 +51,7 @@ test('Submitting the form with successful validation calls default action', func
                 }
             }
         }).create(),
-        model = Ember.Object.extend(EmberValidations.Mixin,{
+        model = Ember.Object.extend(EmberValidations,{
             test: 'someValue',
             validations: {
                 test: {
@@ -121,7 +85,7 @@ test('Submitting the form with invalid validation calls invalid action', functio
                 }
             }
         }).create(),
-        model = Ember.Object.extend(EmberValidations.Mixin,{
+        model = Ember.Object.extend(EmberValidations,{
             test: null,
             validations: {
                 test: {
@@ -142,3 +106,18 @@ test('Submitting the form with invalid validation calls invalid action', functio
 });
 
 */
+
+
+
+test('Pressing enter on a form with submitOnEnter submits the form', function(assert) {
+    this.render(hbs`{{#bs-form action="testAction" submitOnEnter=true}}Test{{/bs-form}}`);
+    var e = Ember.$.Event("keypress");
+    e.which = e.keyCode = 13;
+    assert.expect(1);
+
+    this.on('testAction', () => {
+        assert.ok(true, 'Default action has been called.');
+    });
+
+    this.$('form').trigger(e);
+});

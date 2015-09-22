@@ -1,5 +1,8 @@
 # ember-bootstrap
 
+[![Build Status](https://travis-ci.org/kaliber5/ember-bootstrap.svg?branch=v0.3.0)](https://travis-ci.org/kaliber5/ember-bootstrap)
+[![Ember Observer Score](http://emberobserver.com/badges/ember-bootstrap.svg)](http://emberobserver.com/addons/ember-bootstrap)
+
 An [ember-cli](http://www.ember-cli.com) addon for using [Twitter Bootstrap](http://getbootstrap.com/) in Ember applications.
 
 The addon includes the Bootstrap assets (CSS, Icons) in your project (can be disabled). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
@@ -10,12 +13,18 @@ The addon includes the Bootstrap assets (CSS, Icons) in your project (can be dis
 
 In your application's directory:
 
-    ember install:addon ember-bootstrap
+    ember install ember-bootstrap
     
 If you are using an ember-cli version prior to 0.1.5, use the following commands instead:    
     
     npm install --save-dev ember-bootstrap
     ember g ember-bootstrap
+    
+Beginning from version 0.2.0 ember-bootstrap will require at least Ember 0.13.x!    
+
+## Changelog
+
+See [CHANGELOG](CHANGELOG.md) for the list of changes.
 
 ## Authors
 
@@ -23,4 +32,4 @@ If you are using an ember-cli version prior to 0.1.5, use the following commands
 
 ## Copyright and license
 
-Code and documentation copyright 2015 kaliber5 GmbH. Code released under [the MIT license](LICENSE).
+Code and documentation copyright 2015 kaliber5 GmbH. Code released under [the MIT license](LICENSE.md).
