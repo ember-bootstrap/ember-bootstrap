@@ -190,11 +190,14 @@ export default Ember.Component.extend(I18nSupport, {
 
     this.set('in', false);
 
-    this.get('usesTransition') ?
+    if (this.get('usesTransition')) {
       this.get('modalElement')
         .one('bsTransitionEnd', Ember.run.bind(this, this.hideModal))
-        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
+        .emulateTransitionEnd(Modal.TRANSITION_DURATION);
+    }
+    else {
       this.hideModal();
+    }
   },
 
   hideModal: function () {
@@ -209,24 +212,28 @@ export default Ember.Component.extend(I18nSupport, {
     });
   },
 
-
   handleBackdrop: function (callback) {
-    var that = this,
-      doAnimate = this.get('usesTransition');
+    var doAnimate = this.get('usesTransition');
 
     if (this.get('open') && this.get('backdrop')) {
       this.set('showBackdrop', true);
 
-      if (!callback) return;
+      if (!callback) {
+        return;
+      }
 
       var waitForFade = function () {
         var $backdrop = this.get('backdropElement');
         Ember.assert('Backdrop element should be in DOM', $backdrop && $backdrop.length > 0);
-        doAnimate ?
+
+        if (doAnimate) {
           $backdrop
             .one('bsTransitionEnd', Ember.run.bind(this, callback))
-            .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
+            .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION);
+        }
+        else {
           callback.call(this);
+        }
       };
 
       Ember.run.scheduleOnce('afterRender', this, waitForFade);
@@ -241,12 +248,14 @@ export default Ember.Component.extend(I18nSupport, {
           callback.call(this);
         }
       };
-      doAnimate ?
+      if (doAnimate) {
         $backdrop
           .one('bsTransitionEnd', Ember.run.bind(this, callbackRemove))
-          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
-        callbackRemove()
-
+          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION);
+      }
+      else {
+        callbackRemove();
+      }
     } else if (callback) {
       callback.call(this);
     }
@@ -256,7 +265,7 @@ export default Ember.Component.extend(I18nSupport, {
     if (this.get('open')) {
       Ember.$(window).on('resize.bs.modal', Ember.run.bind(this, this.handleUpdate));
     } else {
-      $(window).off('resize.bs.modal');
+      Ember.$(window).off('resize.bs.modal');
     }
   },
 
