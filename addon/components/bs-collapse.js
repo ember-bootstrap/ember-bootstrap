@@ -211,9 +211,9 @@ export default Ember.Component.extend({
     }
   }),
 
-  didInsertElement: function() {
+  _onInit: Ember.on('init', function () {
     this.set('active', !this.get('collapsed'));
-  },
+  }),
 
   _updateCollapsedSize: Ember.observer('collapsedSize', function() {
     if (!this.get('resetSizeWhenNotCollapsing') && this.get('collapsed') && !this.get('collapsing')) {
