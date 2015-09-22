@@ -1,0 +1,12 @@
+<h1>Collapse</h1>
+
+{{#bs-button toggle=true active=notCollapsed action="toggle"}}{{#if collapsed}}Show{{else}}Hide{{/if}}{{/bs-button}}
+
+<hr/>
+
+{{#bs-collapse collapsed=collapsed}}
+    <div class="well">
+        <h2>Collapse</h2>
+        <p>This is collapsible content</p>
+    </div>
+{{/bs-collapse}}
