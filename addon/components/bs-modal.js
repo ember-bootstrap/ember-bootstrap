@@ -131,10 +131,10 @@ export default Ember.Component.extend(I18nSupport, {
       this.sendAction('closeAction');
     },
     submit: function () {
-      var form = this.$().find('.modal-body form');
+      var form = this.get('modalElement').find('.modal-body form');
       if (form.length > 0) {
         // trigger submit event on body form
-        this.$().find('.modal-body form').trigger('submit');
+        form.trigger('submit');
       }
       else {
         // if we have no form, we send a submit action
