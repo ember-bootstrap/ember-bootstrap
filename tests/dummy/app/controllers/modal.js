@@ -8,15 +8,6 @@ export default Ember.Controller.extend({
   hasModal3: false,
 
   actions: {
-    closeModal1() {
-      this.set('modal1', false);
-    },
-    closeModal2() {
-      this.set('modal2', false);
-    },
-    closeModal3() {
-      this.set('modal3', false);
-    },
     addModal3() {
       this.set('hasModal3', true);
       this.set('modal3', true);

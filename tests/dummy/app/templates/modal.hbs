@@ -5,7 +5,7 @@
 <p>Note: the following modal components add permanent modal markup to the DOM. So dynamic modal creation below for alternatives.</p>
 
 <h3>Minimal markup</h3>
-{{#bs-modal open=modal1 title="Simple Dialog" size="sm" closeAction=(action "closeModal1")}}
+{{#bs-modal open=modal1 title="Simple Dialog" size="sm"}}
     Hi there
 {{/bs-modal}}
 
@@ -13,7 +13,7 @@
 
 <h3>Explicit markup</h3>
 
-{{#bs-modal open=modal2 header=false body=false footer=false submitAction=(action "submit") closeAction=(action "closeModal2")}}
+{{#bs-modal open=modal2 header=false body=false footer=false submitAction=(action "submit")}}
     {{#bs-modal-header}}
         <h4 class="modal-title">Dialog</h4>
     {{/bs-modal-header}}
@@ -29,7 +29,7 @@
 {{#bs-button action=(action "addModal3")}}Open{{/bs-button}}
 
 {{#if hasModal3}}
-{{#bs-modal open=modal3 closeAction=(action "closeModal3") closedAction=(action "removeModal3") title="Dynamic Dialog"}}
+{{#bs-modal open=modal3 closedAction=(action "removeModal3") title="Dynamic Dialog"}}
     Hi there
 {{/bs-modal}}
 {{/if}}

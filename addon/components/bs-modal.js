@@ -80,14 +80,21 @@ export default Ember.Component.extend(I18nSupport, {
    */
   keyboard: true,
 
+  /**
+   * If true clicking a close button will hide the modal automatically.
+   * If you want to handle hiding the modal by yourself, you can set this to false and use the closeAction to
+   * implement your custom logic.
+   *
+   * @property autoClose
+   * @type boolean
+   * @default true
+   * @public
+   */
+  autoClose: true,
 
   header: true,
   body: true,
   footer: true,
-
-  classTypePrefix: 'modal',
-
-  tabindex: '-1',
 
   modalId: Ember.computed('elementId', function() {
     return this.get('elementId') + '-modal';
@@ -117,6 +124,10 @@ export default Ember.Component.extend(I18nSupport, {
 
   actions: {
     close: function () {
+
+      if (this.get('autoClose')) {
+        this.set('open', false);
+      }
       this.sendAction('closeAction');
     },
     submit: function () {
