@@ -10,6 +10,8 @@ Router.map(function() {
     this.route('button');
     this.route('forms');
     this.route('alert');
+    this.route('accordion');
+    this.route('collapse');
 });
 
 export default Router;

@@ -2,6 +2,8 @@ import Ember from 'ember';
 import TypeClass from 'ember-bootstrap-components/mixins/type-class';
 import SizeClass from 'ember-bootstrap-components/mixins/size-class';
 import I18nSupport from 'ember-bootstrap-components/mixins/i18n-support';
+import ComponentChild from 'ember-bootstrap/mixins/component-child';
+
 
 /**
  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -82,7 +84,7 @@ import I18nSupport from 'ember-bootstrap-components/mixins/i18n-support';
  @uses Mixins.SizeClass
  @uses Mixins.I18nSupport
 */
-export default Ember.Component.extend(Ember._ProxyMixin, TypeClass, SizeClass, I18nSupport, {
+export default Ember.Component.extend(Ember._ProxyMixin, ComponentChild, TypeClass, SizeClass, I18nSupport, {
     tagName: 'button',
     classNames: ['btn'],
     classNameBindings: ['active', 'block:btn-block'],
@@ -306,9 +308,12 @@ export default Ember.Component.extend(Ember._ProxyMixin, TypeClass, SizeClass, I
     },
 
     resetObserver: Ember.observer('reset', function(){
-        if(this.get('reset')){
-            this.resetState();
-        }
+      if(this.get('reset')){
+        Ember.run.scheduleOnce('actions', this, function() {
+          this.set('textState', 'default');
+        });
+
+      }
     }),
 
     text: Ember.computed('textState', 'defaultText', 'pendingText', 'resolvedText', 'rejectedText', function() {
@@ -370,7 +375,11 @@ export default Ember.Component.extend(Ember._ProxyMixin, TypeClass, SizeClass, I
             }
         };
         this.sendAction('action', this.get('value'), evt, callback);
-    }
+    },
 
+  init: function() {
+    this._super();
+    this.get('reset');
+  }
 
 });
