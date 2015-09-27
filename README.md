@@ -1,5 +1,7 @@
 # ember-bootstrap-components
 
+Ember 2.0 compatible!
+
 An [ember-cli](http://www.ember-cli.com) addon for using [Twitter Bootstrap](http://getbootstrap.com/) in Ember applications.
 
 The addon includes the Bootstrap assets (CSS, Icons) in your project (can be disabled). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
@@ -17,9 +19,9 @@ The Modal supports vertial middle through CSS only.
 In your application's directory:
 
     ember install ember-bootstrap-components
-    
+
 If you are using an ember-cli version prior to 0.1.5, use the following commands instead:    
-    
+
     npm install --save-dev ember-bootstrap-components
     ember g ember-bootstrap-components
 

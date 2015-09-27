@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ComponentParentMixin from 'ember-bootstrap/mixins/component-parent';
+import ComponentParentMixin from 'ember-bootstrap-components/mixins/component-parent';
 
 
 /**

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import componentChild from 'ember-bootstrap/mixins/component-child';
+import componentChild from 'ember-bootstrap-components/mixins/component-child';
 
 /**
  * Mixin for components that act as dropdown toggles.

@@ -1,3 +1,8 @@
+<a name"0.5.0"></a>
+## 0.5.0 (2015-09-27)
+**
+Ember 2.0 compatible & merge with kaliber5 branch
+
 <a name"0.4.0"></a>
 ## 0.4.0 (2015-09-22)
 

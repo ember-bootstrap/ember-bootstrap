@@ -2,7 +2,7 @@ import Ember from 'ember';
 import TypeClass from 'ember-bootstrap-components/mixins/type-class';
 import SizeClass from 'ember-bootstrap-components/mixins/size-class';
 import I18nSupport from 'ember-bootstrap-components/mixins/i18n-support';
-import ComponentChild from 'ember-bootstrap/mixins/component-child';
+import ComponentChild from 'ember-bootstrap-components/mixins/component-child';
 
 
 /**
@@ -97,7 +97,7 @@ export default Ember.Component.extend(Ember._ProxyMixin, ComponentChild, TypeCla
      */
     classTypePrefix: 'btn',
 
-    attributeBindings: ['id', 'disabled', 'buttonType:type', 'dismiss:data-dismiss', 'contentDismiss:data-dismiss', '_type:type', 'style'],
+    attributeBindings: ['disabled', 'buttonType:type', 'dismiss:data-dismiss', 'contentDismiss:data-dismiss', '_type:type', 'style'],
 
     getPojoProperties: function(pojo) {
       if (Ember.isEmpty(pojo)) {
@@ -139,6 +139,7 @@ export default Ember.Component.extend(Ember._ProxyMixin, ComponentChild, TypeCla
     init: function() {
       var me, properties;
       this._super();
+      this.get('reset');
       me = this;
       if ((this.get('content') != null) && Ember.typeOf(this.get('content')) === 'instance') {
         properties = this.getObjectProperties(this.get('content'));
@@ -147,9 +148,11 @@ export default Ember.Component.extend(Ember._ProxyMixin, ComponentChild, TypeCla
         }
         return this.getProperties(properties);
       } else {
+        let content = this.get('content');
+        this.set('content', {});
         if (this.get('defaultText') == null) {
           this.initParameters();
-          return this.set('defaultText', this.get('content'));
+          return this.set('defaultText', content);
         }
       }
     },
@@ -375,11 +378,6 @@ export default Ember.Component.extend(Ember._ProxyMixin, ComponentChild, TypeCla
             }
         };
         this.sendAction('action', this.get('value'), evt, callback);
-    },
-
-  init: function() {
-    this._super();
-    this.get('reset');
-  }
+    }
 
 });

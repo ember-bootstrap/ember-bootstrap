@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import TypeClass from 'ember-bootstrap/mixins/type-class';
-import SubComponent from 'ember-bootstrap/mixins/sub-component';
-import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
+import TypeClass from 'ember-bootstrap-components/mixins/type-class';
+import SubComponent from 'ember-bootstrap-components/mixins/sub-component';
+import I18nSupport from 'ember-bootstrap-components/mixins/i18n-support';
 
 /**
  A collapsible/expandable item within an accordion
