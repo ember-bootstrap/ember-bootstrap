@@ -18,6 +18,8 @@ var observeOpen = function () {
 export default Ember.Component.extend(I18nSupport, {
 
   /**
+   * Visibility of the modal. Toggle to to show/hide with CSS transitions.
+   *
    * @property open
    * @type boolean
    * @default true
@@ -26,6 +28,8 @@ export default Ember.Component.extend(I18nSupport, {
   open: true,
 
   /**
+   * The title of the modal, visible in the modal header. Is ignored if `header` is false.
+   *
    * @property title
    * @type string
    * @public
@@ -33,6 +37,8 @@ export default Ember.Component.extend(I18nSupport, {
   title: null,
 
   /**
+   * Display a close button (x icon) in the corner of the modal header.
+   *
    * @property closeButton
    * @type boolean
    * @default true
@@ -41,6 +47,8 @@ export default Ember.Component.extend(I18nSupport, {
   closeButton: true,
 
   /**
+   * Set to false to disable fade animations.
+   *
    * @property fade
    * @type boolean
    * @default true
@@ -49,6 +57,8 @@ export default Ember.Component.extend(I18nSupport, {
   fade: true,
 
   /**
+   * Used to apply Bootstrap's "in" class
+   *
    * @property in
    * @type boolean
    * @default false
@@ -57,6 +67,8 @@ export default Ember.Component.extend(I18nSupport, {
   in: false,
 
   /**
+   * Use a semi-transparent modal background to hide the rest of the page.
+   *
    * @property backdrop
    * @type boolean
    * @default true
@@ -73,6 +85,8 @@ export default Ember.Component.extend(I18nSupport, {
   showBackdrop: false,
 
   /**
+   * Closes the modal when escape key is pressed.
+   *
    * @property keyboard
    * @type boolean
    * @default true
@@ -92,45 +106,184 @@ export default Ember.Component.extend(I18nSupport, {
    */
   autoClose: true,
 
+  /**
+   * Generate a modal header component automatically. Set to false to disable. In this case you would want to include an
+   * instance of {{#crossLink "Components.ModalHeader"}}{{/crossLink}} in the components block template
+   *
+   * @property header
+   * @type boolean
+   * @default true
+   * @public
+   */
   header: true,
+
+  /**
+   * Generate a modal body component automatically. Set to false to disable. In this case you would want to include an
+   * instance of {{#crossLink "Components.ModalBody"}}{{/crossLink}} in the components block template.
+   *
+   * Always set this to false if `header` and/or `footer` is false!
+   *
+   * @property header
+   * @type boolean
+   * @default true
+   * @public
+   */
   body: true,
+
+  /**
+   * Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an
+   * instance of {{#crossLink "Components.ModalFooter"}}{{/crossLink}} in the components block template
+   *
+   * @property header
+   * @type boolean
+   * @default true
+   * @public
+   */
   footer: true,
 
+  /**
+   * The id of the `.modal` element.
+   *
+   * @property modalId
+   * @type string
+   * @readonly
+   * @private
+   */
   modalId: Ember.computed('elementId', function() {
     return this.get('elementId') + '-modal';
   }),
 
+  /**
+   * The jQuery object of the `.modal` element.
+   *
+   * @property modalElement
+   * @type object
+   * @readonly
+   * @private
+   */
   modalElement: Ember.computed('modalId', function() {
     return Ember.$('#' + this.get('modalId'));
   }).volatile(),
 
+  /**
+   * The id of the backdrop element.
+   *
+   * @property backdropId
+   * @type string
+   * @readonly
+   * @private
+   */
   backdropId: Ember.computed('elementId', function() {
     return this.get('elementId') + '-backdrop';
   }),
 
+  /**
+   * The jQuery object of the backdrop element.
+   *
+   * @property backdropElement
+   * @type object
+   * @readonly
+   * @private
+   */
   backdropElement: Ember.computed('backdropId', function() {
     return Ember.$('#' + this.get('backdropId'));
   }).volatile(),
 
+  /**
+   * Use CSS transitions when showing/hiding the modal?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
   usesTransition: Ember.computed('fade', function () {
     return Ember.$.support.transition && this.get('fade');
   }),
 
+  /**
+   * Property for size styling, set to null (default), 'lg' or 'sm'
+   *
+   * Also see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
   size: null,
+
+  /**
+   * Name of the size class
+   *
+   * @property sizeClass
+   * @type string
+   * @private
+   */
   sizeClass: Ember.computed('size', function () {
     var size = this.get('size');
     return Ember.isBlank(size) ? null : 'modal-' + size;
   }),
 
+
+  /**
+   * The action to be sent when the modal footer's submit button (if present) is pressed.
+   * Note that if your modal body contains a form (e.g. {{#crossLink "Components.Form"}}{{/crossLink}}) this action will
+   * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
+   * example.
+   *
+   * @property submitAction
+   * @type string
+   * @default null
+   * @public
+   */
+  submitAction: null,
+
+  /**
+   * The action to be sent when the modal is closing.
+   * This will be triggered by pressing the modal header's close button (x button) or the modal footer's close button.
+   * Note that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some
+   * time to finish. Use the `closedAction` if you need the modal to be hidden when the action triggers.
+   *
+   * You can set `autoClose` to false to prevent closing the modal automatically, and do that in your closeAction by
+   * setting `open` to false.
+   *
+   * @property closeAction
+   * @type string
+   * @default null
+   * @public
+   */
+  closeAction: null,
+
+
+  /**
+   * The action to be sent after the modal has been completely hidden (including the CSS transition).
+   *
+   * @property closedAction
+   * @type string
+   * @default null
+   * @public
+   */
+  closedAction: null,
+
+  /**
+   * The action to be sent after the modal has been completely shown (including the CSS transition).
+   *
+   * @property openedAction
+   * @type string
+   * @default null
+   * @public
+   */
+  openedAction: null,
+
   actions: {
-    close: function () {
+    close() {
 
       if (this.get('autoClose')) {
         this.set('open', false);
       }
       this.sendAction('closeAction');
     },
-    submit: function () {
+    submit() {
       var form = this.get('modalElement').find('.modal-body form');
       if (form.length > 0) {
         // trigger submit event on body form
@@ -146,7 +299,13 @@ export default Ember.Component.extend(I18nSupport, {
 
   _observeOpen: Ember.observer('open', observeOpen),
 
-  show: function () {
+  /**
+   * Show the modal
+   *
+   * @method show
+   * @private
+   */
+  show() {
 
     // @todo scrollbar handling?
     //this.checkScrollbar()
@@ -193,7 +352,13 @@ export default Ember.Component.extend(I18nSupport, {
     Ember.run.scheduleOnce('afterRender', this, this.handleBackdrop, callback);
   },
 
-  hide: function () {
+  /**
+   * Hide the modal
+   *
+   * @method hide
+   * @private
+   */
+  hide() {
 
     // @todo escape key
     //this.escape()
@@ -211,7 +376,13 @@ export default Ember.Component.extend(I18nSupport, {
     }
   },
 
-  hideModal: function () {
+  /**
+   * Clean up after modal is hidden and call closedAction
+   *
+   * @method hideModal
+   * @private
+   */
+  hideModal() {
     this.get('modalElement').hide();
     this.handleBackdrop(function () {
       Ember.$('body').removeClass('modal-open');
@@ -223,7 +394,14 @@ export default Ember.Component.extend(I18nSupport, {
     });
   },
 
-  handleBackdrop: function (callback) {
+  /**
+   * SHow/hide the backdrop
+   *
+   * @method handleBackdrop
+   * @param callback
+   * @private
+   */
+  handleBackdrop(callback) {
     var doAnimate = this.get('usesTransition');
 
     if (this.get('open') && this.get('backdrop')) {
@@ -272,7 +450,13 @@ export default Ember.Component.extend(I18nSupport, {
     }
   },
 
-  resize: function () {
+  /**
+   * Attach/Detach resize event listeners
+   *
+   * @method resize
+   * @private
+   */
+  resize() {
     if (this.get('open')) {
       Ember.$(window).on('resize.bs.modal', Ember.run.bind(this, this.handleUpdate));
     } else {
@@ -280,11 +464,11 @@ export default Ember.Component.extend(I18nSupport, {
     }
   },
 
-  handleUpdate: function () {
+  handleUpdate() {
     this.adjustDialog();
   },
 
-  adjustDialog: function () {
+  adjustDialog() {
     // @todo
     //var modalIsOverflowing = this.get('element')[0].scrollHeight > document.documentElement.clientHeight;
     //
@@ -294,11 +478,15 @@ export default Ember.Component.extend(I18nSupport, {
     //});
   },
 
-  didInsertElement: function () {
+  didInsertElement() {
 
     if (this.get('open')) {
       this.show();
     }
+  },
+
+  willDestroyElement() {
+    Ember.$(window).off('resize.bs.modal');
   }
 
 
