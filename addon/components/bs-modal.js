@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend(Ember.Evented, {
     // Bootstrap Modal Manager Service
     bootstrapModalManager: Ember.inject.service(),
-  
+
     classNames: ['modal'],
     classNameBindings: ['fade', 'isVis:in', 'vertical:modal-dialog-center', 'class'],
     attributeBindings: ['role', 'aria-labelledby', 'isAriaHidden:aria-hidden', "ariaLabelledBy:aria-labelledby"],
@@ -53,11 +53,13 @@ export default Ember.Component.extend(Ember.Evented, {
       if (name == null) {
         name = this.get('elementId');
       }
-      this.get('bootstrapModalManager').add(name, this);
-      this.dialogStyle();
-      if (this.manual) {
-        return this.show();
-      }
+      Ember.run.scheduleOnce('afterRender', this, function() {
+        this.get('bootstrapModalManager').add(name, this);
+        this.dialogStyle();
+        if (this.manual) {
+          return this.show();
+        }
+      });
     },
     becameVisible: function() {
       return Ember.$('body').addClass('modal-open');
@@ -174,4 +176,3 @@ export default Ember.Component.extend(Ember.Evented, {
       return this._keyUpHandler = handler;
     }
   });
-

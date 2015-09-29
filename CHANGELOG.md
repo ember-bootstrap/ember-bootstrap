@@ -1,3 +1,8 @@
+<a name"0.5.1"></a>
+## 0.5.1 (2015-09-27)
+**
+Bug fix so that no changes are made during didInsertElement
+
 <a name"0.5.0"></a>
 ## 0.5.0 (2015-09-27)
 **
