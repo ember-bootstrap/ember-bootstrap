@@ -2,7 +2,7 @@ module.exports = {
    normalizeEntityName: function() {
    },
 
-   beforeInstall: function() {
+   afterInstall: function() {
        return this.addBowerPackageToProject('waves', '^0.7.2');
    }
 };
