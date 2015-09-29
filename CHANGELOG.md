@@ -1,3 +1,9 @@
+<a name"0.6.0"></a>
+## 0.6.2 (2015-09-29)
+**
+Added default waves support and a Waves mixin
+
+
 <a name"0.5.1"></a>
 ## 0.5.1 (2015-09-27)
 **

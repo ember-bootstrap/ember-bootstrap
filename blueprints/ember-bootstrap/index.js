@@ -1,8 +1,8 @@
 module.exports = {
-//    normalizeEntityName: function() {
-//    },
-//
-//    afterInstall: function() {
-//        return this.addBowerPackageToProject('bootstrap', '~3.3.2');
-//    }
+   normalizeEntityName: function() {
+   },
+
+   afterInstall: function() {
+       return this.addBowerPackageToProject('waves', '~0.7.2');
+   }
 };

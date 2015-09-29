@@ -3,7 +3,7 @@ import TypeClass from 'ember-bootstrap-components/mixins/type-class';
 import SizeClass from 'ember-bootstrap-components/mixins/size-class';
 import I18nSupport from 'ember-bootstrap-components/mixins/i18n-support';
 import ComponentChild from 'ember-bootstrap-components/mixins/component-child';
-
+import Waves from 'ember-bootstrap-components/mixins/waves';
 
 /**
  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -84,7 +84,7 @@ import ComponentChild from 'ember-bootstrap-components/mixins/component-child';
  @uses Mixins.SizeClass
  @uses Mixins.I18nSupport
 */
-export default Ember.Component.extend(Ember._ProxyMixin, ComponentChild, TypeClass, SizeClass, I18nSupport, {
+export default Ember.Component.extend(Ember._ProxyMixin, ComponentChild, TypeClass, SizeClass, I18nSupport, Waves, {
     tagName: 'button',
     classNames: ['btn'],
     classNameBindings: ['active', 'block:btn-block'],

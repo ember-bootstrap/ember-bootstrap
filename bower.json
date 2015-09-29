@@ -12,6 +12,7 @@
     "loader.js": "ember-cli/loader.js#3.2.0",
     "qunit": "~1.17.1",
     "ember-i18n": "jamesarosen/ember-i18n#master",
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "waves": "^0.7.2"
   }
 }
