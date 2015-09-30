@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
-export function waves(params, hash) {
+export function addWaves(params, hash) {
   let wavesClass = hash.wavesClass || 'waves-light';
-  return Ember.String.htmlSafe(`<div class="waves-effect ${wavesClass}"></div>`);
+  return Ember.String.htmlSafe(`<div class="waves-container waves-effect ${wavesClass}"></div>`);
 }
 
-export default Ember.Helper.helper(waves);
+export default Ember.Helper.helper(addWaves);
