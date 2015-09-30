@@ -1,4 +1,4 @@
-import { waves } from '../../../helpers/waves';
+import { waves } from '../../../helpers/add-waves';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | waves');
