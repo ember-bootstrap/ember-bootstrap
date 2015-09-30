@@ -1,1 +1,1 @@
-export { default, waves } from 'ember-bootstrap-components/helpers/add-waves';
+export { default, addWaves } from 'ember-bootstrap-components/helpers/add-waves';
