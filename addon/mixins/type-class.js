@@ -34,5 +34,5 @@ export default Ember.Mixin.create({
      * @default 'default'
      * @public
      */
-    type: 'default'
+    //type: 'default'
 });

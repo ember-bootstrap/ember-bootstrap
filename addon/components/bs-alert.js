@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import TypeClass from 'ember-bootstrap/mixins/type-class';
+import TypeClass from 'ember-bootstrap-components/mixins/type-class';
 
 
 /**

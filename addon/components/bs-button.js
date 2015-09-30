@@ -1,9 +1,9 @@
 import Ember from 'ember';
-import TypeClass from 'ember-bootstrap/mixins/type-class';
-import SizeClass from 'ember-bootstrap/mixins/size-class';
-import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
-import ComponentChild from 'ember-bootstrap/mixins/component-child';
-
+import TypeClass from 'ember-bootstrap-components/mixins/type-class';
+import SizeClass from 'ember-bootstrap-components/mixins/size-class';
+import I18nSupport from 'ember-bootstrap-components/mixins/i18n-support';
+import ComponentChild from 'ember-bootstrap-components/mixins/component-child';
+import Waves from 'ember-bootstrap-components/mixins/waves';
 
 /**
  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -84,7 +84,7 @@ import ComponentChild from 'ember-bootstrap/mixins/component-child';
  @uses Mixins.SizeClass
  @uses Mixins.I18nSupport
 */
-export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18nSupport, {
+export default Ember.Component.extend(Ember._ProxyMixin, ComponentChild, TypeClass, SizeClass, I18nSupport, Waves, {
     tagName: 'button',
     classNames: ['btn'],
     classNameBindings: ['active', 'block:btn-block'],
@@ -97,7 +97,80 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      */
     classTypePrefix: 'btn',
 
-    attributeBindings: ['disabled', 'buttonType:type'],
+    attributeBindings: ['disabled', 'buttonType:type', 'dismiss:data-dismiss', 'contentDismiss:data-dismiss', '_type:type', 'style'],
+
+    getPojoProperties: function(pojo) {
+      if (Ember.isEmpty(pojo)) {
+        return [];
+      }
+      return Object.keys(pojo);
+    },
+    getProxiedProperties: function(proxyObject) {
+      var contentProperties, objectProperties, prototypeProperties;
+      contentProperties = this.getObjectProperties(proxyObject.get('content'));
+      prototypeProperties = Object.keys(proxyObject.constructor.prototype);
+      objectProperties = this.getPojoProperties(proxyObject);
+      return contentProperties.concat(prototypeProperties).concat(objectProperties).uniq();
+    },
+    getEmberObjectProperties: function(emberObject) {
+      var objectProperties, prototypeProperties;
+      prototypeProperties = Object.keys(emberObject.constructor.prototype);
+      objectProperties = this.getPojoProperties(emberObject);
+      return prototypeProperties.concat(objectProperties).uniq();
+    },
+    getEmberDataProperties: function(emberDataObject) {
+      var attributes, keys;
+      attributes = Ember.get(emberDataObject.constructor, 'attributes');
+      keys = Ember.get(attributes, 'keys.list');
+      return Ember.getProperties(emberDataObject, keys);
+    },
+    getObjectProperties: function(object) {
+      if (object instanceof DS.Model) {
+        return this.getEmberDataProperties(object);
+      } else if (object instanceof Ember.ObjectProxy || Ember._ProxyMixin.detect(object)) {
+        return this.getProxiedProperties(object);
+      } else if (object instanceof Ember.Object) {
+        return this.getEmberObjectProperties(object);
+      } else {
+        return this.getPojoProperties(object);
+      }
+    },
+
+    init: function() {
+      var me, properties;
+      this._super();
+      this.get('reset');
+      me = this;
+      if ((this.get('content') != null) && Ember.typeOf(this.get('content')) === 'instance') {
+        properties = this.getObjectProperties(this.get('content'));
+        if (Ember.isPresent(this.get('content.action'))) {
+          this.set('action', this.get('content.action'));
+        }
+        return this.getProperties(properties);
+      } else {
+        let content = this.get('content');
+        this.set('content', {});
+        if (this.get('defaultText') == null) {
+          this.initParameters();
+          return this.set('defaultText', content);
+        }
+      }
+    },
+
+  initParameters: function() {
+    this.setProperties({
+      defaultText: null,
+      disabled: false,
+      buttonType: 'button',
+      active: false,
+      block: false,
+      toggle: false,
+      iconInactive: null,
+      value: null,
+      textState: 'default',
+      reset: null
+    })
+  },
 
     /**
      * Default label of the button. Not need if used as a block component
@@ -106,7 +179,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      * @type string
      * @public
      */
-    defaultText: null,
+    //defaultText: null,
 
     /**
      * Property to disable the button
@@ -116,7 +189,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      * @default false
      * @public
      */
-    disabled: false,
+    //disabled: false,
 
     /**
      * Set the type of the button, either 'button' or 'submit'
@@ -126,7 +199,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      * @default 'button'
      * @public
      */
-    buttonType: 'button',
+    //buttonType: 'button',
 
     /**
      * Set the 'active' class to apply active/pressed CSS styling
@@ -136,7 +209,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      * @default false
      * @public
      */
-    active: false,
+    //active: false,
 
     /**
      * Property for block level buttons
@@ -147,7 +220,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      * @default false
      * @public
      */
-    block: false,
+    //block: false,
 
     /**
      * If toggle property is true, clicking the button will toggle the active state
@@ -157,7 +230,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      * @default false
      * @public
      */
-    toggle: false,
+    //toggle: false,
 
     /**
      * If button is active and this is set, the icon property will match this property
@@ -166,7 +239,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      * @type String
      * @public
      */
-    iconActive: null,
+    //iconActive: null,
 
     /**
      * If button is inactive and this is set, the icon property will match this property
@@ -175,7 +248,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      * @type String
      * @public
      */
-    iconInactive: null,
+    //iconInactive: null,
 
     /**
      * Class(es) (e.g. glyphicons or font awesome) to use as a button icon
@@ -194,6 +267,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
         }
     }),
 
+    contentDismiss: Ember.computed.alias('content.dismiss'),
 
     /**
      * Supply a value that will be associated with this button. This will be send
@@ -203,7 +277,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      * @type any
      * @public
      */
-    value: null,
+    //value: null,
 
     /**
      * State of the button. The button's label (if not used as a block component) will be set to the
@@ -215,7 +289,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      * @default 'default'
      * @protected
      */
-    textState: 'default',
+    //textState: 'default',
 
     /**
      * Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.
@@ -224,7 +298,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
      * @type boolean
      * @public
      */
-    reset: null,
+    //reset: null,
 
     /**
      * This will reset the state property to 'default', and with that the button's label to defaultText
@@ -264,29 +338,46 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18n
             this.toggleProperty('active');
         }
         var that = this;
-        var callback = function(promise) {
+        var callback = function(promise, disablePending) {
+            if (Ember.isNone(disablePending)) {
+              disablePending = false;
+            }
             if (promise) {
                 that.set('textState', 'pending');
+                if (disablePending) {
+                  that.set('disabled', true);
+                }
                 promise.then(
                     function(){
                         if (!that.get('isDestroyed')) {
+                          if (Ember.isPresent(that.get('resolvedText'))) {
                             that.set('textState', 'resolved');
+                          }
+                          else {
+                            that.resetState();
+                          }
                         }
                     },
                     function(){
                         if (!that.get('isDestroyed')) {
+                          if (Ember.isPresent(that.get('rejectedText'))) {
                             that.set('textState', 'rejected');
+                          }
+                          else {
+                            that.resetState();
+                          }
                         }
+
                     }
-                );
+                ).finally(function() {
+                    if (disablePending) {
+                      that.set('disabled', false);
+                    }
+
+                  });
             }
         };
         this.sendAction('action', this.get('value'), evt, callback);
-    },
-
-  init: function() {
-    this._super();
-    this.get('reset');
-  }
+    }
 
 });

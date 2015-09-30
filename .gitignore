@@ -16,3 +16,8 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
+addon/components/bs-button.js.orig
+addon/components/bs-button-group.js.orig
+addon/components/bs-dropdown.js.orig
+index.js.orig
+package.json.orig

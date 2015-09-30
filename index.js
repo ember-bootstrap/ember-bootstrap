@@ -12,11 +12,10 @@ var defaultOptions = {
 };
 
 module.exports = {
-    name: 'ember-bootstrap',
+    name: 'ember-bootstrap-components',
 
     included: function included(app) {
         this._super.included(app);
-
         var emberCLIVersion = app.project.emberCLIVersion();
         if (emberCLIVersion < '0.0.41') {
             throw new Error('ember-cli-bootstrap requires ember-cli version 0.0.41 or greater.\n');
@@ -43,6 +42,8 @@ module.exports = {
             app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff'), { destDir: '/fonts' });
             app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff2'), { destDir: '/fonts' });
         }
+        app.import(path.join(app.bowerDirectory, 'waves/dist/waves.min.js'));
+        app.import(path.join(app.bowerDirectory, 'waves/dist/waves.min.css'));
 
         app.import(path.join(app.bowerDirectory, 'bootstrap/js/transition.js'));
 

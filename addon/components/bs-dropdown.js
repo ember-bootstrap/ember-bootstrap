@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import toggleButton from 'ember-bootstrap/components/bs-dropdown-button';
-import ComponentParent from 'ember-bootstrap/mixins/component-parent';
+import toggleButton from 'ember-bootstrap-components/components/bs-dropdown-button';
+import ComponentParent from 'ember-bootstrap-components/mixins/component-parent';
 
 /**
  Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.

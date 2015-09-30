@@ -1,3 +1,19 @@
+<a name"0.6.0"></a>
+## 0.6.2 (2015-09-29)
+**
+Added default waves support and a Waves mixin
+
+
+<a name"0.5.1"></a>
+## 0.5.1 (2015-09-27)
+**
+Bug fix so that no changes are made during didInsertElement
+
+<a name"0.5.0"></a>
+## 0.5.0 (2015-09-27)
+**
+Ember 2.0 compatible & merge with kaliber5 branch
+
 <a name"0.4.0"></a>
 ## 0.4.0 (2015-09-22)
 
@@ -39,7 +55,7 @@
 
 #### Bug Fixes
 
-* **Ember:** Updated to Ember-cli 0.2.7, fixed deprecation warnings in Ember 1.13 ([1fc78c4](https://github.com/kaliber5/ember-bootstrap/commit/1fc78c41cfd4f7f72095825e14c813d62d772dae)) 
+* **Ember:** Updated to Ember-cli 0.2.7, fixed deprecation warnings in Ember 1.13 ([1fc78c4](https://github.com/kaliber5/ember-bootstrap/commit/1fc78c41cfd4f7f72095825e14c813d62d772dae))
 * **Ember:** Updated to Ember-cli 0.2.5 / Ember.js 1.12. Fixed test failures because of missi ([45e59f03](https://github.com/kaliber5/ember-bootstrap/commit/45e59f03))
 
 

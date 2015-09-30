@@ -1,6 +1,7 @@
 import Ember from 'ember';
-import SizeClass from 'ember-bootstrap/mixins/size-class';
-import ComponentParent from 'ember-bootstrap/mixins/component-parent';
+import Button from 'ember-bootstrap-components/components/bs-button';
+import SizeClass from 'ember-bootstrap-components/mixins/size-class';
+import ComponentParent from 'ember-bootstrap-components/mixins/component-parent';
 
 
 /**

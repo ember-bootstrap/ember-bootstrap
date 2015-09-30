@@ -1,6 +1,6 @@
 {
-  "name": "ember-bootstrap",
-  "version": "0.4.0",
+  "name": "ember-bootstrap-components",
+  "version": "0.6.2",
   "directories": {
     "doc": "docs",
     "test": "tests"
@@ -12,50 +12,51 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kaliber5/ember-bootstrap"
+    "url": "https://github.com/danshapir/ember-bootstrap-components"
   },
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "Simon Ihmig <ihmig@kaliber5.de>",
+  "author": "Simon Ihmig <ihmig@kaliber5.de> & Dan Shapir <danshapir@outlook.com",
   "license": "MIT",
   "devDependencies": {
-    "broccoli-asset-rev": "^2.1.0",
+    "broccoli-asset-rev": "^2.1.2",
     "conventional-changelog": "0.0.17",
-    "ember-cli": "1.13.1",
+    "ember-cli": "1.13.8",
     "ember-cli-app-version": "0.4.0",
     "ember-cli-content-security-policy": "0.4.0",
     "ember-cli-dependency-checker": "^1.0.1",
     "ember-cli-htmlbars": "0.7.9",
-    "ember-cli-htmlbars-inline-precompile": "0.2.0",
+    "ember-cli-htmlbars-inline-precompile": "^0.2.0",
     "ember-cli-ic-ajax": "0.2.1",
     "ember-cli-inject-live-reload": "^1.3.1",
     "ember-cli-qunit": "0.3.15",
+
     "ember-cli-uglify": "^1.2.0",
     "ember-cli-yuidoc": "^0.7.2",
-    "ember-disable-prototype-extensions": "^1.0.1",
+    "ember-disable-prototype-extensions": "^1.0.0",
     "ember-disable-proxy-controllers": "^1.0.0",
-    "ember-export-application-global": "^1.0.2",
-    "ember-try": "0.0.7",
+    "ember-export-application-global": "^1.0.3",
     "ember-validations": "^2.0.0-alpha.4",
     "gh-pages": "^0.3.1",
     "glob": "^5.0.14",
     "gulp": "^3.9.0",
     "gulp-file": "^0.2.0",
-    "gulp-rename": "^1.2.2"
+    "gulp-rename": "^1.2.2",
+    "ember-try": "0.0.7"
   },
   "description": "Twitter Bootstrap components for Ember.js",
   "keywords": [
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.0.0"
+    "ember-cli-babel": "^5.1.3"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
   },
   "bugs": {
-    "url": "https://github.com/kaliber5/ember-bootstrap/issues"
+    "url": "https://github.com/danshapir/ember-bootstrap-components/issues"
   },
-  "homepage": "http://kaliber5.github.io/ember-bootstrap/"
+  "homepage": "https://github.com/danshapir/ember-bootstrap-components"
 }

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import FormElement from 'ember-bootstrap/components/bs-form-element';
+import FormElement from 'ember-bootstrap-components/components/bs-form-element';
 
 /**
  Render a form with the appropriate Bootstrap layout class (see `formLayout`).

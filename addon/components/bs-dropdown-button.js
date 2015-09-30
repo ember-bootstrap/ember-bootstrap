@@ -1,5 +1,5 @@
-import Button from 'ember-bootstrap/components/bs-button';
-import DropdownToggle from 'ember-bootstrap/mixins/dropdown-toggle';
+import Button from 'ember-bootstrap-components/components/bs-button';
+import DropdownToggle from 'ember-bootstrap-components/mixins/dropdown-toggle';
 
 /**
  Button component with that can act as a dropdown toggler.

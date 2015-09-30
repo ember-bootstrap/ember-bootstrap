@@ -1,35 +1,38 @@
-# ember-bootstrap
+# ember-bootstrap-components
 
-[![Build Status](https://travis-ci.org/kaliber5/ember-bootstrap.svg?branch=v0.3.0)](https://travis-ci.org/kaliber5/ember-bootstrap)
-[![Ember Observer Score](http://emberobserver.com/badges/ember-bootstrap.svg)](http://emberobserver.com/addons/ember-bootstrap)
+Ember 2.0 compatible!
 
 An [ember-cli](http://www.ember-cli.com) addon for using [Twitter Bootstrap](http://getbootstrap.com/) in Ember applications.
 
 The addon includes the Bootstrap assets (CSS, Icons) in your project (can be disabled). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
 
-*See [kaliber5.github.io/ember-bootstrap/](http://kaliber5.github.io/ember-bootstrap/) for full documentation.*
+*See [kaliber5.github.io/ember-bootstrap/](http://kaliber5.github.io/ember-bootstrap/) for full documentation. or the original ember-bootstrap*
+
+## What's added here?
+This addon is a twist of the base ember-bootstrap addon, changed regarding the button and mainly adding the modal functionallty first deveopled under the original bootstrap-for-ember non cli addon and later on by me.
+This includes the abillity to manually inject modals into the DOM, even multiple ones. Adding a ModalManager service and the support for creating buttons out of POJOs through proxy.
+
+The Modal supports vertial middle through CSS only.
 
 ## Install in ember-cli application
 
 In your application's directory:
 
-    ember install ember-bootstrap
-    
+    ember install ember-bootstrap-components
+
 If you are using an ember-cli version prior to 0.1.5, use the following commands instead:    
-    
-    npm install --save-dev ember-bootstrap
-    ember g ember-bootstrap
-    
-Beginning from version 0.2.0 ember-bootstrap will require at least Ember 0.13.x!    
 
-## Changelog
-
-See [CHANGELOG](CHANGELOG.md) for the list of changes.
+    npm install --save-dev ember-bootstrap-components
+    ember g ember-bootstrap-components
 
 ## Authors
 
 [Simon Ihmig](https://github.com/simonihmig) @ [kaliber5](http://www.kaliber5.de)
 
+[Dan Shapir](https://github.com/danshapir)
+
 ## Copyright and license
 
-Code and documentation copyright 2015 kaliber5 GmbH. Code released under [the MIT license](LICENSE.md).
+Code and documentation copyright 2015 kaliber5 GmbH.
+
+Added code copyright 2015 danshapir. Code released under [the MIT license](LICENSE).
