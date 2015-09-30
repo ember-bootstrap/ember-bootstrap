@@ -16,7 +16,6 @@ module.exports = {
 
     included: function included(app) {
         this._super.included(app);
-
         var emberCLIVersion = app.project.emberCLIVersion();
         if (emberCLIVersion < '0.0.41') {
             throw new Error('ember-cli-bootstrap requires ember-cli version 0.0.41 or greater.\n');
