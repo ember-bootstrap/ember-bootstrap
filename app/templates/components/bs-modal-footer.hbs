@@ -1,5 +1,5 @@
 {{#if hasBlock}}
-    {{yield}}
+    {{yield this}}
 {{else}}
     {{#if hasSubmitButton}}
         {{#bs-button type="default" action="close"}}{{closeTitle}}{{/bs-button}}

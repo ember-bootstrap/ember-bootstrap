@@ -46,17 +46,17 @@ export default Ember.Component.extend(ModalCloser, I18nSupport, {
   /**
    * The action to send to the parent modal component when the modal footer's form is submitted
    *
-   * @property action
+   * @property submitAction
    * @type string
    * @default 'submit'
    * @private
    */
-  action: 'submit',
+  submitAction: 'submit',
 
   submit: function (e) {
     e.preventDefault();
     // send to parent bs-modal component
-    this.sendAction();
+    this.sendAction('submitAction');
   }
 
 

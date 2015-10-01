@@ -15,6 +15,93 @@ var observeOpen = function () {
   }
 };
 
+
+/**
+
+ Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals). Creating a simple modal is easy:
+
+ ```hbs
+ {{#bs-modal title="Simple Dialog"}}
+   Hello world!
+ {{/bs-modal}}
+ ```
+
+ This will automatically create the appropriate markup, with a modal header containing the title, and a footer containing
+ a default "Ok" button, that will close the modal automatically (unless you set `autoClose` to false).
+
+ A modal created this way will be visible at once. You can use the `{{#if ...}}` helper to hide all modal elements form
+ the DOM until needed. Or you can bind the `open` property to trigger showing and hiding the modal:
+
+ ```hbs
+ {{#bs-modal open=openModal title="Simple Dialog"}}
+   Hello world!
+ {{/bs-modal}}
+ ```
+
+ ### Custom Markup
+
+ To customize your modal markup you can use the following sub components:
+
+ * {{#crossLink "Components.ModalBody"}}{{/crossLink}}
+ * {{#crossLink "Components.ModalHeader"}}{{/crossLink}}
+ * {{#crossLink "Components.ModalFooter"}}{{/crossLink}}
+
+ In the example above, these are generated for you automatically. Whenever you use one of these by yourself you should
+ set the appropriate property (`body`, `footer`, `header`) to false to prevent their automatic generation. Note that
+ in any case where you use a custom sub component, you must also use a custom {{#crossLink "Components.ModalBody"}}{{/crossLink}}!
+
+ A common use case is to customize the buttons in the footer. Most often you will have a cancel button that closes the
+ model without action, and a submit button that triggers some action. The footer component supports this case by letting
+ you customize the button titles, the rest (triggering close or submit actions) automatically set up:
+
+ ```hbs
+ {{#bs-modal body=false footer=false title="Attention" submitAction=(action "submit")}}
+   {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}
+   {{bs-modal-footer closeTitle="Cancel" submitTitle="Ok"}}
+ {{/bs-modal}}
+ ```
+
+ If you further want to customize your modal elements, you can supply custom templates for your footer and header, as in
+ the following example:
+
+ ```hbs
+ {{#bs-modal body=false footer=false header=false submitAction=(action "submit")}}
+   {{#bs-modal-header}}
+     <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Alert</h4>
+   {{/bs-modal-header}}
+   {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}
+   {{#bs-modal-footer as |footer|}}
+     {{#bs-button action=(action "close" target=footer) type="danger"}}Oh no, forget it!{{/bs-button}}
+     {{#bs-button buttonType="submit" type="success"}}Yeah!{{/bs-button}}
+   {{/bs-modal-footer}}
+ {{/bs-modal}}
+ ```
+
+ Note the use of the action helper of the close button that triggers the close action on the modal footer component
+ instead of on the controller, which will bubble up to the modal component and close the modal.
+
+ ### Modals with forms
+
+ {{#bs-modal title="Form Example" body=false footer=false}}
+   {{#bs-modal-body}}
+     {{#bs-form action="submit" model=this}}
+       {{bs-form-element controlType="text" label="first name" property="firstname"}}
+       {{bs-form-element controlType="text" label="last name" property="lastname"}}
+     {{/bs-form}}
+   {{/bs-modal-body}}
+   {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
+ {{/bs-modal}}
+
+
+ ### Modals inside wormhole
+
+
+
+
+ @class Modal
+ @namespace Components
+ @extends Ember.Component
+*/
 export default Ember.Component.extend(I18nSupport, {
 
   /**
