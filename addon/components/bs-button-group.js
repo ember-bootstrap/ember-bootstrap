@@ -160,7 +160,7 @@ export default Ember.Component.extend(SizeClass, {
      */
     value: undefined,
 
-    _syncValueToActiveButtons: Ember.observer('value','childButtons.@each.value',function(){
+    _syncValueToActiveButtons: Ember.observer('value','childButtons.[].value',function(){
         if (!this._inDOM) {
             return;
         }
