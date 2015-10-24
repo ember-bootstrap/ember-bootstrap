@@ -113,7 +113,7 @@ export default Ember.Component.extend({
      * @readonly
      * @protected
      */
-    toggleType: Ember.computed('childViews.@each', function() {
+    toggleType: Ember.computed('childViews.[]', function() {
         if (this.get('childViews').any(function(view) {
             return view instanceof toggleButton;
         })) {
