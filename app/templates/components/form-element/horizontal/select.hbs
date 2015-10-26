@@ -1,7 +1,7 @@
 {{#if hasLabel}}
-    <label class="control-label {{horizontalLabelGridClass}}">{{label}}</label>
+    <label class="control-label {{horizontalLabelGridClass}}" for="{{concat elementId '-' name}}">{{label}}</label>
     <div class="{{horizontalInputGridClass}}">
-        {{bs-select name=name content=choices optionValuePath=selectValueProperty optionLabelPath=selectLabelProperty value=value}}
+        {{bs-select id=(concat elementId '-' name) name=name content=choices optionValuePath=selectValueProperty optionLabelPath=selectLabelProperty value=value}}
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
     </div>
