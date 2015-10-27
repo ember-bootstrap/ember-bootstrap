@@ -42,8 +42,15 @@ function controlTypeSupportTest(assert, controlType, selector, values, getValueF
     });
 }
 
+function labeledControlTest(assert, controlType, selector) {
+    this.set('controlType',controlType);
+    this.render(hbs`{{bs-form-element controlType=controlType label="myLabel"}}`);
+    assert.equal(this.$(selector).attr('id'), this.$('label').attr('for'), 'component id ');
+}
+
 test('controlType "text" is supported', function(assert) {
     controlTypeSupportTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
+    labeledControlTest.call(this, assert, 'text', 'input[type=text]');
 });
 
 test('controlType "checkbox" is supported', function(assert) {
@@ -52,6 +59,7 @@ test('controlType "checkbox" is supported', function(assert) {
 
 test('controlType "textarea" is supported', function(assert) {
     controlTypeSupportTest.call(this, assert, 'textarea', 'textarea', 'myValue');
+    labeledControlTest.call(this, assert, 'textarea', 'textarea');
 });
 
 
@@ -71,6 +79,7 @@ test('controlType "select" is supported', function(assert) {
         choiceValueProperty: 'id'
     };
     controlTypeSupportTest.call(this, assert, 'select', 'select', [options.choices[0], options.choices[1]], function() {return options.choices.findBy('id', this.val());}, options);
+    labeledControlTest.call(this, assert, 'select', 'select');
 });
 
 
