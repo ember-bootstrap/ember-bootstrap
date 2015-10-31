@@ -1,0 +1,18 @@
+<div class="modal-dialog {{sizeClass}}">
+    <div class="modal-content">
+        {{#if header}}
+            {{bs-modal-header title=title closeButton=closeButton}}
+        {{/if}}
+        {{#if body}}
+            {{#bs-modal-body}}
+                {{yield}}
+            {{/bs-modal-body}}
+        {{else}}
+            {{yield}}
+        {{/if}}
+
+        {{#if footer}}
+            {{bs-modal-footer}}
+        {{/if}}
+    </div>
+</div>

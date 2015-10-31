@@ -37,9 +37,9 @@ test('open property shows modal', function (assert) {
   this.set('open', false);
   this.render(hbs`{{#bs-modal title="Simple Dialog" fade=false open=open}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
 
-  assert.equal(this.$('.modal').hasClass('in'), false, 'Modal has not fade class');
+  assert.equal(this.$('.modal').hasClass('in'), false, 'Modal has not in class');
   this.set('open', true);
-  assert.equal(this.$('.modal').hasClass('in'), true, 'Modal has fade class');
+  assert.equal(this.$('.modal').hasClass('in'), true, 'Modal has in class');
 });
 
 test('closeButton property shows close button', function (assert) {
@@ -229,4 +229,49 @@ test('when modal has a form and the submit button is clicked, the form is submit
 });
 
 
-// @todo esc key test
+test('Pressing escape key will close the modal if keyboard=true', function(assert) {
+  assert.expect(3);
+  this.on('testAction', () => {
+    assert.ok(true, 'Action has been called.');
+  });
+  this.render(hbs`{{#bs-modal title="Simple Dialog" closeAction=(action "testAction") keyboard=true}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
+  var done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is visible');
+
+    // trigger escape key event
+    var e = Ember.$.Event("keydown");
+    e.which = e.keyCode = 27;
+    this.$('.modal').trigger(e);
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('in'), false, 'Modal is hidden');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+test('Clicking on the backdrop will close the modal', function(assert) {
+  assert.expect(3);
+  this.on('testAction', () => {
+    assert.ok(true, 'Action has been called.');
+  });
+  this.render(hbs`{{#bs-modal title="Simple Dialog" closeAction=(action "testAction") keyboard=true}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
+  var done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is visible');
+
+    this.$('.modal').click();
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('in'), false, 'Modal is hidden');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});

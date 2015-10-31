@@ -300,19 +300,6 @@ export default Ember.Component.extend(I18nSupport, {
   size: null,
 
   /**
-   * Name of the size class
-   *
-   * @property sizeClass
-   * @type string
-   * @private
-   */
-  sizeClass: Ember.computed('size', function () {
-    var size = this.get('size');
-    return Ember.isBlank(size) ? null : 'modal-' + size;
-  }),
-
-
-  /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
    * Note that if your modal body contains a form (e.g. {{#crossLink "Components.Form"}}{{/crossLink}}) this action will
    * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
@@ -400,9 +387,6 @@ export default Ember.Component.extend(I18nSupport, {
 
     Ember.$('body').addClass('modal-open');
 
-    // @todo escape key
-    //this.escape()
-
     this.resize();
 
     var callback = function () {
@@ -423,16 +407,16 @@ export default Ember.Component.extend(I18nSupport, {
       // @todo focus
       //that.enforceFocus()
 
-      //this.trigger('shown');
-
-      // @todo focus
-      //transition ?
-      //    that.$element.find('.modal-dialog') // wait for modal to slide in
-      //        .one('bsTransitionEnd', function () {
-      //            that.$element.trigger('focus').trigger(e)
-      //        })
-      //        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
-      //    that.$element.trigger('focus').trigger(e)
+      if (this.get('usesTransition')) {
+        this.get('modalElement')
+          .one('bsTransitionEnd', Ember.run.bind(this, function() {
+            this.get('modalElement').trigger('focus');
+          }))
+          .emulateTransitionEnd(Modal.TRANSITION_DURATION);
+      }
+      else {
+        this.get('modalElement').trigger('focus');
+      }
 
       this.sendAction('openedAction');
     };
@@ -447,8 +431,6 @@ export default Ember.Component.extend(I18nSupport, {
    */
   hide() {
 
-    // @todo escape key
-    //this.escape()
     this.resize();
 
     this.set('in', false);
@@ -575,6 +557,5 @@ export default Ember.Component.extend(I18nSupport, {
   willDestroyElement() {
     Ember.$(window).off('resize.bs.modal');
   }
-
 
 });
