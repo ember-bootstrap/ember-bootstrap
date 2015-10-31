@@ -84,7 +84,7 @@ var observeOpen = function () {
 
  {{#bs-modal title="Form Example" body=false footer=false}}
    {{#bs-modal-body}}
-     {{#bs-form action="submit" model=this}}
+     {{#bs-form action=(action "submit") model=this}}
        {{bs-form-element controlType="text" label="first name" property="firstname"}}
        {{bs-form-element controlType="text" label="last name" property="lastname"}}
      {{/bs-form}}
