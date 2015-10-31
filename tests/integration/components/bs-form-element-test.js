@@ -27,9 +27,15 @@ function controlTypeSupportTest(assert, controlType, selector, values, getValueF
     values = Ember.A(values);
 
     this.set('controlType',controlType);
-    if (componentOptions.choices) this.set('choices',componentOptions.choices);
-    if (componentOptions.choiceLabelProperty) this.set('choiceLabelProperty',componentOptions.choiceLabelProperty);
-    if (componentOptions.choiceValueProperty) this.set('choiceValueProperty',componentOptions.choiceValueProperty);
+    if (componentOptions.choices) {
+      this.set('choices',componentOptions.choices);
+    }
+    if (componentOptions.choiceLabelProperty) {
+      this.set('choiceLabelProperty',componentOptions.choiceLabelProperty);
+    }
+    if (componentOptions.choiceValueProperty) {
+      this.set('choiceValueProperty',componentOptions.choiceValueProperty);
+    }
 
     this.render(hbs`{{bs-form-element controlType=controlType choices=choices choiceLabelProperty=choiceLabelProperty choiceValueProperty=choiceValueProperty value=value}}`);
 
@@ -42,8 +48,15 @@ function controlTypeSupportTest(assert, controlType, selector, values, getValueF
     });
 }
 
+function labeledControlTest(assert, controlType, selector) {
+    this.set('controlType',controlType);
+    this.render(hbs`{{bs-form-element controlType=controlType label="myLabel"}}`);
+    assert.equal(this.$(selector).attr('id'), this.$('label').attr('for'), 'component id ');
+}
+
 test('controlType "text" is supported', function(assert) {
     controlTypeSupportTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
+    labeledControlTest.call(this, assert, 'text', 'input[type=text]');
 });
 
 test('controlType "checkbox" is supported', function(assert) {
@@ -52,6 +65,7 @@ test('controlType "checkbox" is supported', function(assert) {
 
 test('controlType "textarea" is supported', function(assert) {
     controlTypeSupportTest.call(this, assert, 'textarea', 'textarea', 'myValue');
+    labeledControlTest.call(this, assert, 'textarea', 'textarea');
 });
 
 
@@ -71,6 +85,7 @@ test('controlType "select" is supported', function(assert) {
         choiceValueProperty: 'id'
     };
     controlTypeSupportTest.call(this, assert, 'select', 'select', [options.choices[0], options.choices[1]], function() {return options.choices.findBy('id', this.val());}, options);
+    labeledControlTest.call(this, assert, 'select', 'select');
 });
 
 
