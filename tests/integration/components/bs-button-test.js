@@ -80,9 +80,9 @@ test('button with iconActive and iconInactive properties shows icon depending on
 });
 
 test('clicking a button sends default action with "value" property as a parameter', function(assert) {
-    this.render(hbs`{{bs-button action="testAction" value="dummy"}}`);
-
     this.on('testAction', value => assert.equal(value, 'dummy', 'action parameter matches value property'));
+
+    this.render(hbs`{{bs-button action=(action "testAction") value="dummy"}}`);
 
     assert.expect(1);
     this.$('button').click();
@@ -118,14 +118,14 @@ test('clicking a button sends default action with callback, if promise is return
     var promise,
         resolvePromise;
 
-    this.render(hbs`{{bs-button action="testAction" textState=textState defaultText="default" pendingText="pending" resolvedText="resolved" rejectedText="rejected"}}`);
-
     this.on('testAction', (actionParam, evt, cb) => {
         promise = new Ember.RSVP.Promise(function(resolve){
             resolvePromise = resolve;
         });
         cb(promise);
     });
+
+    this.render(hbs`{{bs-button action=(action "testAction") textState=textState defaultText="default" pendingText="pending" resolvedText="resolved" rejectedText="rejected"}}`);
 
     assert.expect(4);
     this.$('button').click();
