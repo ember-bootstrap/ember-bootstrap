@@ -3,6 +3,6 @@ module.exports = {
     },
 
     afterInstall: function() {
-        return this.addBowerPackageToProject('bootstrap', '~3.3.2');
+        return this.addBowerPackageToProject('bootstrap', '~3.3.5');
     }
 };

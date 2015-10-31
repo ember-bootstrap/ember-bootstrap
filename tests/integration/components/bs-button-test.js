@@ -80,7 +80,6 @@ test('button with iconActive and iconInactive properties shows icon depending on
 });
 
 test('clicking a button sends default action with "value" property as a parameter', function(assert) {
-    var value = 'dummy';
     this.render(hbs`{{bs-button action="testAction" value="dummy"}}`);
 
     this.on('testAction', value => assert.equal(value, 'dummy', 'action parameter matches value property'));

@@ -27,9 +27,15 @@ function controlTypeSupportTest(assert, controlType, selector, values, getValueF
     values = Ember.A(values);
 
     this.set('controlType',controlType);
-    if (componentOptions.choices) this.set('choices',componentOptions.choices);
-    if (componentOptions.choiceLabelProperty) this.set('choiceLabelProperty',componentOptions.choiceLabelProperty);
-    if (componentOptions.choiceValueProperty) this.set('choiceValueProperty',componentOptions.choiceValueProperty);
+    if (componentOptions.choices) {
+      this.set('choices',componentOptions.choices);
+    }
+    if (componentOptions.choiceLabelProperty) {
+      this.set('choiceLabelProperty',componentOptions.choiceLabelProperty);
+    }
+    if (componentOptions.choiceValueProperty) {
+      this.set('choiceValueProperty',componentOptions.choiceValueProperty);
+    }
 
     this.render(hbs`{{bs-form-element controlType=controlType choices=choices choiceLabelProperty=choiceLabelProperty choiceValueProperty=choiceValueProperty value=value}}`);
 
