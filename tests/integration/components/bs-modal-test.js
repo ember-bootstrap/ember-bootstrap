@@ -254,12 +254,37 @@ test('Pressing escape key will close the modal if keyboard=true', function(asser
   }, transitionTimeout);
 });
 
+test('Pressing escape key is ignored if keyboard=false', function(assert) {
+  assert.expect(2);
+  this.on('testAction', () => {
+    assert.ok(false, 'Action must not be called.');
+  });
+  this.render(hbs`{{#bs-modal title="Simple Dialog" closeAction=(action "testAction") keyboard=false}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
+  var done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is visible');
+
+    // trigger escape key event
+    var e = Ember.$.Event("keydown");
+    e.which = e.keyCode = 27;
+    this.$('.modal').trigger(e);
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is still visible');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
 test('Clicking on the backdrop will close the modal', function(assert) {
   assert.expect(3);
   this.on('testAction', () => {
     assert.ok(true, 'Action has been called.');
   });
-  this.render(hbs`{{#bs-modal title="Simple Dialog" closeAction=(action "testAction") keyboard=true}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
+  this.render(hbs`{{#bs-modal title="Simple Dialog" closeAction=(action "testAction")}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
   var done = assert.async();
 
   // wait for fade animation
@@ -271,6 +296,29 @@ test('Clicking on the backdrop will close the modal', function(assert) {
     // wait for fade animation
     setTimeout(() => {
       assert.equal(this.$('.modal').hasClass('in'), false, 'Modal is hidden');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+
+test('Clicking on the backdrop is ignored when backdropClose=false', function(assert) {
+  assert.expect(2);
+  this.on('testAction', () => {
+    assert.ok(false, 'Action must not be called.');
+  });
+  this.render(hbs`{{#bs-modal title="Simple Dialog" closeAction=(action "testAction") backdropClose=false}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
+  var done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is visible');
+
+    this.$('.modal').click();
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is still visible');
       done();
     }, transitionTimeout);
   }, transitionTimeout);

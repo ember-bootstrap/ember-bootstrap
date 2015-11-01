@@ -300,6 +300,16 @@ export default Ember.Component.extend(I18nSupport, {
   size: null,
 
   /**
+   * If true clicking on the backdrop will close the modal.
+   *
+   * @property backdropClose
+   * @type boolean
+   * @default true
+   * @public
+   */
+  backdropClose: true,
+
+  /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
    * Note that if your modal body contains a form (e.g. {{#crossLink "Components.Form"}}{{/crossLink}}) this action will
    * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
@@ -381,7 +391,6 @@ export default Ember.Component.extend(I18nSupport, {
    */
   show() {
 
-    // @todo scrollbar handling?
     //this.checkScrollbar()
     //this.setScrollbar()
 
@@ -390,7 +399,6 @@ export default Ember.Component.extend(I18nSupport, {
     this.resize();
 
     var callback = function () {
-      //var transition = this.get('usesTransition');
 
       this.get('modalElement')
         .show()
@@ -404,8 +412,7 @@ export default Ember.Component.extend(I18nSupport, {
 
       this.set('in', true);
 
-      // @todo focus
-      //that.enforceFocus()
+      //this.enforceFocus()
 
       if (this.get('usesTransition')) {
         this.get('modalElement')
@@ -538,7 +545,6 @@ export default Ember.Component.extend(I18nSupport, {
   },
 
   adjustDialog() {
-    // @todo
     //var modalIsOverflowing = this.get('element')[0].scrollHeight > document.documentElement.clientHeight;
     //
     //this.get('element').css({

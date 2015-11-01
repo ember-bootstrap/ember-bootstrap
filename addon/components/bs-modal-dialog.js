@@ -111,6 +111,16 @@ export default Ember.Component.extend({
   size: null,
 
   /**
+   * If true clicking on the backdrop will close the modal.
+   *
+   * @property backdropClose
+   * @type boolean
+   * @default true
+   * @public
+   */
+  backdropClose: true,
+
+  /**
    * Name of the size class
    *
    * @property sizeClass
@@ -131,17 +141,9 @@ export default Ember.Component.extend({
 
   click(e) {
 
-//  @todo do we need this?
-//    if (this.ignoreBackdropClick) {
-//      this.ignoreBackdropClick = false
-//      return
-//    }
-
-    if (e.target !== e.currentTarget) {
+    if (e.target !== e.currentTarget || !this.get('backdropClose')) {
       return;
     }
-
-  // @todo support backdrop=static?
 
     this.sendAction('close');
   }
