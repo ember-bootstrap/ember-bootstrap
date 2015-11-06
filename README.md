@@ -1,6 +1,6 @@
 # ember-bootstrap
 
-[![Build Status](https://travis-ci.org/kaliber5/ember-bootstrap.svg?branch=v0.3.0)](https://travis-ci.org/kaliber5/ember-bootstrap)
+[![Build Status](https://travis-ci.org/kaliber5/ember-bootstrap.svg?branch=master)](https://travis-ci.org/kaliber5/ember-bootstrap)
 [![Ember Observer Score](http://emberobserver.com/badges/ember-bootstrap.svg)](http://emberobserver.com/addons/ember-bootstrap)
 
 An [ember-cli](http://www.ember-cli.com) addon for using [Twitter Bootstrap](http://getbootstrap.com/) in Ember applications.

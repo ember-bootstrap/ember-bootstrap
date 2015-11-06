@@ -88,7 +88,7 @@ var observeOpen = function () {
 
  {{#bs-modal title="Form Example" body=false footer=false}}
    {{#bs-modal-body}}
-     {{#bs-form action="submit" model=this}}
+     {{#bs-form action=(action "submit") model=this}}
        {{bs-form-element controlType="text" label="first name" property="firstname"}}
        {{bs-form-element controlType="text" label="last name" property="lastname"}}
      {{/bs-form}}
@@ -304,17 +304,14 @@ export default Ember.Component.extend(I18nSupport, {
   size: null,
 
   /**
-   * Name of the size class
+   * If true clicking on the backdrop will close the modal.
    *
-   * @property sizeClass
-   * @type string
-   * @private
+   * @property backdropClose
+   * @type boolean
+   * @default true
+   * @public
    */
-  sizeClass: Ember.computed('size', function () {
-    var size = this.get('size');
-    return Ember.isBlank(size) ? null : 'modal-' + size;
-  }),
-
+  backdropClose: true,
 
   /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
@@ -398,19 +395,14 @@ export default Ember.Component.extend(I18nSupport, {
    */
   show() {
 
-    // @todo scrollbar handling?
     //this.checkScrollbar()
     //this.setScrollbar()
 
     Ember.$('body').addClass('modal-open');
 
-    // @todo escape key
-    //this.escape()
-
     this.resize();
 
     var callback = function () {
-      //var transition = this.get('usesTransition');
 
       this.get('modalElement')
         .show()
@@ -424,19 +416,18 @@ export default Ember.Component.extend(I18nSupport, {
 
       this.set('in', true);
 
-      // @todo focus
-      //that.enforceFocus()
+      //this.enforceFocus()
 
-      //this.trigger('shown');
-
-      // @todo focus
-      //transition ?
-      //    that.$element.find('.modal-dialog') // wait for modal to slide in
-      //        .one('bsTransitionEnd', function () {
-      //            that.$element.trigger('focus').trigger(e)
-      //        })
-      //        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
-      //    that.$element.trigger('focus').trigger(e)
+      if (this.get('usesTransition')) {
+        this.get('modalElement')
+          .one('bsTransitionEnd', Ember.run.bind(this, function() {
+            this.get('modalElement').trigger('focus');
+          }))
+          .emulateTransitionEnd(Modal.TRANSITION_DURATION);
+      }
+      else {
+        this.get('modalElement').trigger('focus');
+      }
 
       this.sendAction('openedAction');
     };
@@ -451,8 +442,6 @@ export default Ember.Component.extend(I18nSupport, {
    */
   hide() {
 
-    // @todo escape key
-    //this.escape()
     this.resize();
 
     this.set('in', false);
@@ -560,7 +549,6 @@ export default Ember.Component.extend(I18nSupport, {
   },
 
   adjustDialog() {
-    // @todo
     //var modalIsOverflowing = this.get('element')[0].scrollHeight > document.documentElement.clientHeight;
     //
     //this.get('element').css({
@@ -580,6 +568,5 @@ export default Ember.Component.extend(I18nSupport, {
     Ember.$(window).off('resize.bs.modal');
     Ember.$('body').removeClass('modal-open');
   }
-
 
 });

@@ -1,26 +1,11 @@
 {{#ember-wormhole to="ember-bootstrap-modal-container"}}
-<div class="modal {{if fade "fade"}} {{if in "in"}}" id="{{modalId}}" tabindex="-1" role="dialog">
-    <div class="modal-dialog {{sizeClass}}">
-        <div class="modal-content">
-            {{#if header}}
-                {{bs-modal-header title=title closeButton=closeButton}}
-            {{/if}}
-            {{#if body}}
-                {{#bs-modal-body}}
-                    {{yield}}
-                {{/bs-modal-body}}
-            {{else}}
-                {{yield}}
-            {{/if}}
 
-            {{#if footer}}
-                {{bs-modal-footer}}
-            {{/if}}
-        </div>
-    </div>
-</div>
+{{#bs-modal-dialog close=(action "close") fade=fade in=in id=modalId title=title closeButton=closeButton keyboard=keyboard header=header body=body footer=footer size=size backdropClose=backdropClose}}
+  {{yield}}
+{{/bs-modal-dialog}}
+
 {{#if showBackdrop}}
-<div class="modal-backdrop {{if fade "fade"}} {{if in "in"}}" id="{{backdropId}}"></div>
+  <div class="modal-backdrop {{if fade "fade"}} {{if in "in"}}" id="{{backdropId}}"></div>
 {{/if}}
 
 {{/ember-wormhole}}

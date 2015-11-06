@@ -1,3 +1,9 @@
+<a name"0.4.1"></a>
+### 0.4.1 (2015-10-31)
+
+* **FormElement:**
+  * Wire up <label> for attribute used in form-element component, thanks to [cyk](https://github.com/cyk) ([3ed081a](https://github.com/kaliber5/ember-bootstrap/commit/3ed081a400f8a83524339bb71eda2d027e01bc05))
+
 <a name"0.4.0"></a>
 ## 0.4.0 (2015-09-22)
 

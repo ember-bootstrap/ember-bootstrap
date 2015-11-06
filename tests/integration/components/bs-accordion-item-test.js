@@ -2,7 +2,6 @@ import {
   moduleForComponent,
   test
 } from 'ember-qunit';
-import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 
