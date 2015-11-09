@@ -82,9 +82,10 @@ var observeOpen = function () {
 
  ### Modals with forms
 
- There is a special case when you have a form inside your modals body: you probaby do not want to have a submit button
+ There is a special case when you have a form inside your modals body: you probably do not want to have a submit button
  within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not
- trigger the form data to be submitted.
+ trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
+ thus bypass the form validation feature of the form component.
 
  {{#bs-modal title="Form Example" body=false footer=false}}
    {{#bs-modal-body}}
@@ -96,11 +97,16 @@ var observeOpen = function () {
    {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
  {{/bs-modal}}
 
+ The modal component supports this common case by triggering the submit event programmatically on the body's form if
+ present whenever the footer's submit button is pressed, so the example above will work as expected.
 
  ### Modals inside wormhole
 
-
-
+ Modals make use of the [ember-wormhole](https://github.com/yapplabs/ember-wormhole) addon, which will be installed
+ automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested
+ components/templates where it belongs to logically, but to have the actual DOM elements within a special container
+ element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and
+ are not effected by parent elements with `overflow: hidden` for example.
 
  @class Modal
  @namespace Components

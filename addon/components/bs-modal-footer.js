@@ -2,7 +2,14 @@ import Ember from 'ember';
 import ModalCloser from 'ember-bootstrap/mixins/modal-closer';
 import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 
+/**
 
+ Modal footer element used within {{#crossLink "Components.Modal"}}{{/crossLink}} components. See there for examples.
+
+ @class ModalFooter
+ @namespace Components
+ @extends Ember.Component
+ */
 export default Ember.Component.extend(ModalCloser, I18nSupport, {
   tagName: 'form',
   classNames: ['modal-footer'],

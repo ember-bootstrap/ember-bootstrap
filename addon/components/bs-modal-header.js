@@ -2,6 +2,14 @@ import Ember from 'ember';
 import ModalCloser from 'ember-bootstrap/mixins/modal-closer';
 import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 
+/**
+
+ Modal header element used within {{#crossLink "Components.Modal"}}{{/crossLink}} components. See there for examples.
+
+ @class ModalHeader
+ @namespace Components
+ @extends Ember.Component
+ */
 export default Ember.Component.extend(ModalCloser, I18nSupport, {
   classNames: ['modal-header'],
 
