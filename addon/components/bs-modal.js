@@ -82,6 +82,10 @@ var observeOpen = function () {
 
  ### Modals with forms
 
+ There is a special case when you have a form inside your modals body: you probaby do not want to have a submit button
+ within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not
+ trigger the form data to be submitted.
+
  {{#bs-modal title="Form Example" body=false footer=false}}
    {{#bs-modal-body}}
      {{#bs-form action=(action "submit") model=this}}
@@ -562,6 +566,7 @@ export default Ember.Component.extend(I18nSupport, {
 
   willDestroyElement() {
     Ember.$(window).off('resize.bs.modal');
+    Ember.$('body').removeClass('modal-open');
   }
 
 });
