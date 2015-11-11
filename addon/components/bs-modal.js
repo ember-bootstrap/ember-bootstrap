@@ -42,9 +42,9 @@ var observeOpen = function () {
 
  To customize your modal markup you can use the following sub components:
 
- * {{#crossLink "Components.ModalBody"}}{{/crossLink}}
- * {{#crossLink "Components.ModalHeader"}}{{/crossLink}}
- * {{#crossLink "Components.ModalFooter"}}{{/crossLink}}
+ {{#crossLink "Components.ModalBody"}}{{/crossLink}}
+ {{#crossLink "Components.ModalHeader"}}{{/crossLink}}
+ {{#crossLink "Components.ModalFooter"}}{{/crossLink}}
 
  In the example above, these are generated for you automatically. Whenever you use one of these by yourself you should
  set the appropriate property (`body`, `footer`, `header`) to false to prevent their automatic generation. Note that
@@ -87,6 +87,7 @@ var observeOpen = function () {
  trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
  thus bypass the form validation feature of the form component.
 
+ ```hbs
  {{#bs-modal title="Form Example" body=false footer=false}}
    {{#bs-modal-body}}
      {{#bs-form action=(action "submit") model=this}}
@@ -96,6 +97,7 @@ var observeOpen = function () {
    {{/bs-modal-body}}
    {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
  {{/bs-modal}}
+ ```
 
  The modal component supports this common case by triggering the submit event programmatically on the body's form if
  present whenever the footer's submit button is pressed, so the example above will work as expected.
