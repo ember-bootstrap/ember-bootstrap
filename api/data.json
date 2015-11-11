@@ -2,12 +2,12 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "0.4.0.25ec2913",
+        "version": "0.4.1.77a2746c",
         "external": {
             "data": [
                 {
                     "base": "http://emberjs.com/api/",
-                    "json": "http://builds.emberjs.com/tags/v1.12.0/ember-docs.json"
+                    "json": "http://builds.emberjs.com/tags/v1.13.10/ember-docs.json"
                 }
             ]
         }
@@ -248,10 +248,12 @@
             "name": "addon/mixins/sub-component.js",
             "modules": {},
             "classes": {
-                "Mixins.Bootstrap.SubComponent": 1
+                "Mixins.SubComponent": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "Mixins": 1
+            }
         },
         "addon/mixins/type-class.js": {
             "name": "addon/mixins/type-class.js",
@@ -603,14 +605,16 @@
             "line": 3,
             "description": "Mixin to set the appropriate class for components with different sizes."
         },
-        "Mixins.Bootstrap.SubComponent": {
-            "name": "Mixins.Bootstrap.SubComponent",
-            "shortname": "Bootstrap.SubComponent",
+        "Mixins.SubComponent": {
+            "name": "Mixins.SubComponent",
+            "shortname": "Mixins.SubComponent",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
-            "extension_for": [],
+            "extension_for": [
+                "Components.AccordionItem"
+            ],
             "namespace": "Mixins",
             "file": "addon/mixins/sub-component.js",
             "line": 3
