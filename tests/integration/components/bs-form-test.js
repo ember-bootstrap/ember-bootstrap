@@ -3,7 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
 moduleForComponent('bs-form', 'Integration | Component | bs-form', {
-    integration: true
+  integration: true
 });
 
 test('form has correct CSS class', function(assert) {
@@ -11,7 +11,7 @@ test('form has correct CSS class', function(assert) {
 
     var classSpec = {
             vertical: 'form',
-            horizontal: 'form-horizontal',
+      horizontal: 'form-horizontal',
             inline: 'form-inline'
         };
 

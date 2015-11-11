@@ -1,0 +1,11 @@
+{{#ember-wormhole to="ember-bootstrap-modal-container"}}
+
+{{#bs-modal-dialog close=(action "close") fade=fade in=in id=modalId title=title closeButton=closeButton keyboard=keyboard header=header body=body footer=footer size=size backdropClose=backdropClose}}
+  {{yield}}
+{{/bs-modal-dialog}}
+
+{{#if showBackdrop}}
+  <div class="modal-backdrop {{if fade "fade"}} {{if in "in"}}" id="{{backdropId}}"></div>
+{{/if}}
+
+{{/ember-wormhole}}
