@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v0.5.0",
+        "version": "0.5.0.96dd18c3",
         "external": {
             "data": [
                 {
@@ -2409,7 +2409,7 @@
             "line": 219,
             "description": "Generate a modal body component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalBody\"}}{{/crossLink}} in the components block template.\n\nAlways set this to false if `header` and/or `footer` is false!",
             "itemtype": "property",
-            "name": "header",
+            "name": "body",
             "type": "boolean",
             "default": "true",
             "access": "public",
@@ -2422,7 +2422,7 @@
             "line": 232,
             "description": "Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalFooter\"}}{{/crossLink}} in the components block template",
             "itemtype": "property",
-            "name": "header",
+            "name": "footer",
             "type": "boolean",
             "default": "true",
             "access": "public",
