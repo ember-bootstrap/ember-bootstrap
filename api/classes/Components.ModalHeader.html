@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.Alert - ember-bootstrap</title>
+    <title>Components.ModalHeader - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,23 +49,17 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.Alert <small>Class</small></h1>
+    <h1>Components.ModalHeader <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
-        <div class="uses">
-            Uses
-            <ul class="inline commas">
-                    <li><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
-            </ul>
-        </div>
 
         <div class="extends">
             Extends <a href="http://emberjs.com/api/classes/Ember.Component.html" class="crosslink external" target="_blank">Ember.Component</a>
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-alert.js.html#l5"><code>addon&#x2F;components&#x2F;bs-alert.js:5</code></a>
+            Defined in: <a href="../files/addon_components_bs-modal-header.js.html#l5"><code>addon&#x2F;components&#x2F;bs-modal-header.js:5</code></a>
         </div>
 
 
@@ -73,13 +67,7 @@
 
 
 <div class="well well-small">
-    <p>Implements Bootstrap alerts, see <a href="http://getbootstrap.com/components/#alerts">http://getbootstrap.com/components/#alerts</a></p>
-<p>By default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
-<code>type</code> property for proper styling.</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-alert type=&quot;success&quot;}}
-   &lt;strong&gt;Well done!&lt;/strong&gt; You successfully read this important alert message.
-{{/bs-alert}}
-</code></pre>
+    <p>Modal header element used within <a href="../classes/Components.Modal.html" class="crosslink">Components.Modal</a> components. See there for examples.</p>
 
 </div>
 
@@ -229,10 +217,6 @@
                                 <a href="#" data-tabid="#methods" data-anchor="#method_hasObserverFor" data-tablink="hasObserverFor">hasObserverFor</a>
 
                             </li>
-                            <li class="index-item method public">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_hide" data-tablink="hide">hide</a>
-
-                            </li>
                             <li class="index-item method public inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_incrementProperty" data-tablink="incrementProperty">incrementProperty</a>
 
@@ -343,10 +327,6 @@
                                 <a href="#" data-tabid="#methods" data-anchor="#method_setProperties" data-tablink="setProperties">setProperties</a>
 
                             </li>
-                            <li class="index-item method public">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_show" data-tablink="show">show</a>
-
-                            </li>
                             <li class="index-item method public inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_toggleProperty" data-tablink="toggleProperty">toggleProperty</a>
 
@@ -378,10 +358,6 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_actions" data-tablink="actions">actions</a>
 
                             </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_alert" data-tablink="alert">alert</a>
-
-                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_ariaRole" data-tablink="ariaRole">ariaRole</a>
 
@@ -394,20 +370,12 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_classNames" data-tablink="classNames">classNames</a>
 
                             </li>
-                            <li class="index-item property protected inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix" data-tablink="classTypePrefix">classTypePrefix</a>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_closeButton" data-tablink="closeButton">closeButton</a>
 
                             </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_concatenatedProperties" data-tablink="concatenatedProperties">concatenatedProperties</a>
-
-                            </li>
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_dismissed" data-tablink="dismissed">dismissed</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_dismissible" data-tablink="dismissible">dismissible</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -416,14 +384,6 @@
                             </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_elementId" data-tablink="elementId">elementId</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_fadeDuration" data-tablink="fadeDuration">fadeDuration</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -480,12 +440,8 @@
 
                                     <span class="label label-deprecated">deprecated</span>
                             </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_type" data-tablink="type">type</a>
-
-                            </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_visible" data-tablink="visible">visible</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_title" data-tablink="title">title</a>
 
                             </li>
                     </ul>
@@ -1867,38 +1823,6 @@
                                             <span class="type">Boolean</span>:
                                 </div>
                             </div>
-                    
-                    </div>
-                    <div id="method_hide" class="method item public">
-                        <h3 class="name">hide
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l125"><code>addon&#x2F;components&#x2F;bs-alert.js:125</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Call to hide the alert. If the <code>fade</code> property is true, this will fade out the alert before being finally
-                    dismissed.</p>
-                    
-                        </div>
-                    
-                    
                     
                     </div>
                     <div id="method_incrementProperty" class="method item public inherited">
@@ -3616,37 +3540,6 @@
                             </div>
                     
                     </div>
-                    <div id="method_show" class="method item public">
-                        <h3 class="name">show
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l112"><code>addon&#x2F;components&#x2F;bs-alert.js:112</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Call to make the alert visible again after it has been hidden</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="method_toggleProperty" class="method item public inherited">
                         <h3 class="name">toggleProperty
                         <span class="small">Boolean</span>
@@ -4033,37 +3926,6 @@
                     
                     
                     </div>
-                    <div id="property_alert" class="property item private">
-                        <h3 class="name">alert
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l68"><code>addon&#x2F;components&#x2F;bs-alert.js:68</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Computed property to set the alert class to the component div. Will be false when dismissed to have the component
-                    div (which cannot be removed form DOM by the component itself) without any markup.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_ariaRole" class="property item public inherited">
                         <h3 class="name">ariaRole
                             <span class="small">String</span>
@@ -4196,36 +4058,34 @@
                     
                     
                     </div>
-                    <div id="property_classTypePrefix" class="property item protected">
-                        <h3 class="name">classTypePrefix
-                            <span class="small">String</span>
+                    <div id="property_closeButton" class="property item public">
+                        <h3 class="name">closeButton
+                            <span class="small">boolean</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-protected">protected</span>
+                            <span class="label label-public">public</span>
                     
                     
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="../classes/Mixins.TypeClass.html#property_classTypePrefix">
-                                    Mixins.TypeClass
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_components_bs-alert.js.html#l79"><code>addon&#x2F;components&#x2F;bs-alert.js:79</code></a>
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-header.js.html#l16"><code>addon&#x2F;components&#x2F;bs-modal-header.js:16</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
+                            <p>Show a close button (x icon)</p>
+                    
                         </div>
                     
-                            <p><strong>Default:</strong> &#x27;alert&#x27;</p>
+                            <p><strong>Default:</strong> true</p>
                     
                     
                     </div>
@@ -4318,69 +4178,6 @@
                     
                     
                     </div>
-                    <div id="property_dismissed" class="property item protected">
-                        <h3 class="name">dismissed
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l36"><code>addon&#x2F;components&#x2F;bs-alert.js:36</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>If true the alert is completely hidden. Will be set when the fade animation has finished.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="property_dismissible" class="property item public">
-                        <h3 class="name">dismissible
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l25"><code>addon&#x2F;components&#x2F;bs-alert.js:25</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
-                    the alert.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
                     <div id="property_element" class="property item public inherited">
                         <h3 class="name">element
                             <span class="small">DOMElement</span>
@@ -4457,68 +4254,6 @@
                     <code>&#x60;</code>
                         </div>
                     
-                    
-                    
-                    </div>
-                    <div id="property_fade" class="property item public">
-                        <h3 class="name">fade
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l58"><code>addon&#x2F;components&#x2F;bs-alert.js:58</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Set to false to disable the fade out animation when hiding the alert.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_fadeDuration" class="property item public">
-                        <h3 class="name">fadeDuration
-                            <span class="small">integer</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l87"><code>addon&#x2F;components&#x2F;bs-alert.js:87</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The duration of the fade out animation</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> 150</p>
                     
                     
                     </div>
@@ -5013,41 +4748,9 @@
                     
                     
                     </div>
-                    <div id="property_type" class="property item public inherited">
-                        <h3 class="name">type
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.TypeClass.html#property_type">Mixins.TypeClass</a>:
-                            <a href="../files/addon_mixins_type-class.js.html#l27"><code>addon&#x2F;mixins&#x2F;type-class.js:27</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            Property for type styling
-                    
-                    For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without "btn-" prefix)
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;default&#x27;</p>
-                    
-                    
-                    </div>
-                    <div id="property_visible" class="property item public">
-                        <h3 class="name">visible
-                            <span class="small">boolean</span>
+                    <div id="property_title" class="property item public">
+                        <h3 class="name">title
+                            <span class="small">string</span>
                         </h3>
                     
                     
@@ -5061,19 +4764,18 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l47"><code>addon&#x2F;components&#x2F;bs-alert.js:47</code></a>
+                            <a href="../files/addon_components_bs-modal-header.js.html#l26"><code>addon&#x2F;components&#x2F;bs-modal-header.js:26</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>This property indicates if the alert is visible. If false it might still be in the DOM until the fade animation
-                    has completed. Can be set to change the visibility of the alert box.</p>
+                            <p>The title to display in the modal header</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> true</p>
+                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>

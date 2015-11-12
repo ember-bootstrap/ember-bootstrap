@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "0.4.1.77a2746c",
+        "version": "v0.5.0",
         "external": {
             "data": [
                 {
@@ -167,6 +167,57 @@
                 "Components": 1
             }
         },
+        "addon/components/bs-modal-body.js": {
+            "name": "addon/components/bs-modal-body.js",
+            "modules": {},
+            "classes": {
+                "Components.ModalBody": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-modal-dialog.js": {
+            "name": "addon/components/bs-modal-dialog.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "addon/components/bs-modal-footer.js": {
+            "name": "addon/components/bs-modal-footer.js",
+            "modules": {},
+            "classes": {
+                "Components.ModalFooter": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-modal-header.js": {
+            "name": "addon/components/bs-modal-header.js",
+            "modules": {},
+            "classes": {
+                "Components.ModalHeader": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-modal.js": {
+            "name": "addon/components/bs-modal.js",
+            "modules": {},
+            "classes": {
+                "Components.Modal": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
         "addon/components/bs-select.js": {
             "name": "addon/components/bs-select.js",
             "modules": {},
@@ -232,6 +283,15 @@
             "namespaces": {
                 "Mixins": 1
             }
+        },
+        "addon/mixins/modal-closer.js": {
+            "name": "addon/mixins/modal-closer.js",
+            "modules": {},
+            "classes": {
+                "Mixins.Bootstrap.SubComponent": 1
+            },
+            "fors": {},
+            "namespaces": {}
         },
         "addon/mixins/size-class.js": {
             "name": "addon/mixins/size-class.js",
@@ -493,6 +553,62 @@
                 "Mixins.I18nSupport"
             ]
         },
+        "Components.ModalBody": {
+            "name": "Components.ModalBody",
+            "shortname": "Components.ModalBody",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-modal-body.js",
+            "line": 3,
+            "description": "Modal body element used within {{#crossLink \"Components.Modal\"}}{{/crossLink}} components. See there for examples.",
+            "extends": "Ember.Component"
+        },
+        "Components.ModalFooter": {
+            "name": "Components.ModalFooter",
+            "shortname": "Components.ModalFooter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-modal-footer.js",
+            "line": 5,
+            "description": "Modal footer element used within {{#crossLink \"Components.Modal\"}}{{/crossLink}} components. See there for examples.",
+            "extends": "Ember.Component"
+        },
+        "Components.ModalHeader": {
+            "name": "Components.ModalHeader",
+            "shortname": "Components.ModalHeader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-modal-header.js",
+            "line": 5,
+            "description": "Modal header element used within {{#crossLink \"Components.Modal\"}}{{/crossLink}} components. See there for examples.",
+            "extends": "Ember.Component"
+        },
+        "Components.Modal": {
+            "name": "Components.Modal",
+            "shortname": "Components.Modal",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-modal.js",
+            "line": 19,
+            "description": "Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals). Creating a simple modal is easy:\n```hbs\n {{#bs-modal title=\"Simple Dialog\"}}\n   Hello world!\n {{/bs-modal}}\n ```\nThis will automatically create the appropriate markup, with a modal header containing the title, and a footer containing\n a default \"Ok\" button, that will close the modal automatically (unless you set `autoClose` to false).\nA modal created this way will be visible at once. You can use the `{{#if ...}}` helper to hide all modal elements form\n the DOM until needed. Or you can bind the `open` property to trigger showing and hiding the modal:\n```hbs\n {{#bs-modal open=openModal title=\"Simple Dialog\"}}\n   Hello world!\n {{/bs-modal}}\n ```\n### Custom Markup\nTo customize your modal markup you can use the following sub components:\n{{#crossLink \"Components.ModalBody\"}}{{/crossLink}}\n {{#crossLink \"Components.ModalHeader\"}}{{/crossLink}}\n {{#crossLink \"Components.ModalFooter\"}}{{/crossLink}}\nIn the example above, these are generated for you automatically. Whenever you use one of these by yourself you should\n set the appropriate property (`body`, `footer`, `header`) to false to prevent their automatic generation. Note that\n in any case where you use a custom sub component, you must also use a custom {{#crossLink \"Components.ModalBody\"}}{{/crossLink}}!\nA common use case is to customize the buttons in the footer. Most often you will have a cancel button that closes the\n model without action, and a submit button that triggers some action. The footer component supports this case by letting\n you customize the button titles, the rest (triggering close or submit actions) automatically set up:\n```hbs\n {{#bs-modal body=false footer=false title=\"Attention\" submitAction=(action \"submit\")}}\n   {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}\n   {{bs-modal-footer closeTitle=\"Cancel\" submitTitle=\"Ok\"}}\n {{/bs-modal}}\n ```\nIf you further want to customize your modal elements, you can supply custom templates for your footer and header, as in\n the following example:\n```hbs\n {{#bs-modal body=false footer=false header=false submitAction=(action \"submit\")}}\n   {{#bs-modal-header}}\n     <h4 class=\"modal-title\"><i class=\"glyphicon glyphicon-alert\"></i> Alert</h4>\n   {{/bs-modal-header}}\n   {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}\n   {{#bs-modal-footer as |footer|}}\n     {{#bs-button action=(action \"close\" target=footer) type=\"danger\"}}Oh no, forget it!{{/bs-button}}\n     {{#bs-button buttonType=\"submit\" type=\"success\"}}Yeah!{{/bs-button}}\n   {{/bs-modal-footer}}\n {{/bs-modal}}\n ```\nNote the use of the action helper of the close button that triggers the close action on the modal footer component\n instead of on the controller, which will bubble up to the modal component and close the modal.\n### Modals with forms\nThere is a special case when you have a form inside your modals body: you probably do not want to have a submit button\n within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not\n trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an\n thus bypass the form validation feature of the form component.\n```hbs\n {{#bs-modal title=\"Form Example\" body=false footer=false}}\n   {{#bs-modal-body}}\n     {{#bs-form action=(action \"submit\") model=this}}\n       {{bs-form-element controlType=\"text\" label=\"first name\" property=\"firstname\"}}\n       {{bs-form-element controlType=\"text\" label=\"last name\" property=\"lastname\"}}\n     {{/bs-form}}\n   {{/bs-modal-body}}\n   {{bs-modal-footer closeTitle=(t \"contact.label.cancel\") submitTitle=(t \"contact.label.ok\")}}\n {{/bs-modal}}\n ```\nThe modal component supports this common case by triggering the submit event programmatically on the body's form if\n present whenever the footer's submit button is pressed, so the example above will work as expected.\n### Modals inside wormhole\nModals make use of the [ember-wormhole](https://github.com/yapplabs/ember-wormhole) addon, which will be installed\n automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested\n components/templates where it belongs to logically, but to have the actual DOM elements within a special container\n element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and\n are not effected by parent elements with `overflow: hidden` for example.",
+            "extends": "Ember.Component"
+        },
         "Components.Select": {
             "name": "Components.Select",
             "shortname": "Components.Select",
@@ -588,6 +704,18 @@
             "file": "addon/mixins/i18n-support.js",
             "line": 3,
             "description": "Mixin for internationalization support.\n\nCurrently supported is only [ember-i18n](https://github.com/jamesarosen/ember-i18n):\nIf Ember.I18n is present, this mixin will simply export `Ember.I18n.TranslateableProperties`, maiking all\ncomponents that use this mixin inherit the translateable properties functionality of `Ember.I18n.TranslateableProperties`.\nSee https://github.com/jamesarosen/ember-i18n#translate-properties-on-any-object.\n\n```hbs\n{{bs-button defaultTextTranslation=\"label.translated\"}}\n```"
+        },
+        "Mixins.Bootstrap.SubComponent": {
+            "name": "Mixins.Bootstrap.SubComponent",
+            "shortname": "Bootstrap.SubComponent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mixins",
+            "file": "addon/mixins/modal-closer.js",
+            "line": 3
         },
         "Mixins.SizeClass": {
             "name": "Mixins.SizeClass",
@@ -1928,6 +2056,581 @@
             "itemtype": "event",
             "name": "submit",
             "class": "Components.Form",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-dialog.js",
+            "line": 18,
+            "description": "The title of the modal, visible in the modal header. Is ignored if `header` is false.",
+            "itemtype": "property",
+            "name": "title",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-dialog.js",
+            "line": 27,
+            "description": "Display a close button (x icon) in the corner of the modal header.",
+            "itemtype": "property",
+            "name": "closeButton",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-dialog.js",
+            "line": 37,
+            "description": "Set to false to disable fade animations.",
+            "itemtype": "property",
+            "name": "fade",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-dialog.js",
+            "line": 47,
+            "description": "Used to apply Bootstrap's \"in\" class",
+            "itemtype": "property",
+            "name": "in",
+            "type": "boolean",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-dialog.js",
+            "line": 57,
+            "description": "Closes the modal when escape key is pressed.",
+            "itemtype": "property",
+            "name": "keyboard",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-dialog.js",
+            "line": 67,
+            "description": "Generate a modal header component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalHeader\"}}{{/crossLink}} in the components block template",
+            "itemtype": "property",
+            "name": "header",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-dialog.js",
+            "line": 78,
+            "description": "Generate a modal body component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalBody\"}}{{/crossLink}} in the components block template.\n\nAlways set this to false if `header` and/or `footer` is false!",
+            "itemtype": "property",
+            "name": "header",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-dialog.js",
+            "line": 91,
+            "description": "Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalFooter\"}}{{/crossLink}} in the components block template",
+            "itemtype": "property",
+            "name": "header",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-dialog.js",
+            "line": 102,
+            "description": "Property for size styling, set to null (default), 'lg' or 'sm'\n\nAlso see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)",
+            "itemtype": "property",
+            "name": "size",
+            "type": "String",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-dialog.js",
+            "line": 113,
+            "description": "If true clicking on the backdrop will close the modal.",
+            "itemtype": "property",
+            "name": "backdropClose",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-dialog.js",
+            "line": 123,
+            "description": "Name of the size class",
+            "itemtype": "property",
+            "name": "sizeClass",
+            "type": "string",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-footer.js",
+            "line": 17,
+            "description": "The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block\ntemplate.",
+            "itemtype": "property",
+            "name": "closeTitle",
+            "type": "string",
+            "default": "'Ok'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-footer.js",
+            "line": 29,
+            "description": "The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null or if you provide\nyour own block template.",
+            "itemtype": "property",
+            "name": "submitTitle",
+            "type": "string",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-footer.js",
+            "line": 42,
+            "description": "Set to true to disable the submit button. If you bind this to some property that indicates if submitting is allowed\n(form validation for example) this can be used to prevent the user from pressing the submit button.",
+            "itemtype": "property",
+            "name": "submitDisabled",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-footer.js",
+            "line": 53,
+            "description": "The action to send to the parent modal component when the modal footer's form is submitted",
+            "itemtype": "property",
+            "name": "submitAction",
+            "type": "string",
+            "default": "'submit'",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ModalFooter",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-header.js",
+            "line": 16,
+            "description": "Show a close button (x icon)",
+            "itemtype": "property",
+            "name": "closeButton",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalHeader",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal-header.js",
+            "line": 26,
+            "description": "The title to display in the modal header",
+            "itemtype": "property",
+            "name": "title",
+            "type": "string",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ModalHeader",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 119,
+            "description": "Visibility of the modal. Toggle to to show/hide with CSS transitions.",
+            "itemtype": "property",
+            "name": "open",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 129,
+            "description": "The title of the modal, visible in the modal header. Is ignored if `header` is false.",
+            "itemtype": "property",
+            "name": "title",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 138,
+            "description": "Display a close button (x icon) in the corner of the modal header.",
+            "itemtype": "property",
+            "name": "closeButton",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 148,
+            "description": "Set to false to disable fade animations.",
+            "itemtype": "property",
+            "name": "fade",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 158,
+            "description": "Used to apply Bootstrap's \"in\" class",
+            "itemtype": "property",
+            "name": "in",
+            "type": "boolean",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 168,
+            "description": "Use a semi-transparent modal background to hide the rest of the page.",
+            "itemtype": "property",
+            "name": "backdrop",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 178,
+            "itemtype": "property",
+            "name": "showBackdrop",
+            "type": "boolean",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 186,
+            "description": "Closes the modal when escape key is pressed.",
+            "itemtype": "property",
+            "name": "keyboard",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 196,
+            "description": "If true clicking a close button will hide the modal automatically.\nIf you want to handle hiding the modal by yourself, you can set this to false and use the closeAction to\nimplement your custom logic.",
+            "itemtype": "property",
+            "name": "autoClose",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 208,
+            "description": "Generate a modal header component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalHeader\"}}{{/crossLink}} in the components block template",
+            "itemtype": "property",
+            "name": "header",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 219,
+            "description": "Generate a modal body component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalBody\"}}{{/crossLink}} in the components block template.\n\nAlways set this to false if `header` and/or `footer` is false!",
+            "itemtype": "property",
+            "name": "header",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 232,
+            "description": "Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalFooter\"}}{{/crossLink}} in the components block template",
+            "itemtype": "property",
+            "name": "header",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 243,
+            "description": "The id of the `.modal` element.",
+            "itemtype": "property",
+            "name": "modalId",
+            "type": "string",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 255,
+            "description": "The jQuery object of the `.modal` element.",
+            "itemtype": "property",
+            "name": "modalElement",
+            "type": "object",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 267,
+            "description": "The id of the backdrop element.",
+            "itemtype": "property",
+            "name": "backdropId",
+            "type": "string",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 279,
+            "description": "The jQuery object of the backdrop element.",
+            "itemtype": "property",
+            "name": "backdropElement",
+            "type": "object",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 291,
+            "description": "Use CSS transitions when showing/hiding the modal?",
+            "itemtype": "property",
+            "name": "usesTransition",
+            "type": "boolean",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 303,
+            "description": "Property for size styling, set to null (default), 'lg' or 'sm'\n\nAlso see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)",
+            "itemtype": "property",
+            "name": "size",
+            "type": "String",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 314,
+            "description": "If true clicking on the backdrop will close the modal.",
+            "itemtype": "property",
+            "name": "backdropClose",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 324,
+            "description": "The action to be sent when the modal footer's submit button (if present) is pressed.\nNote that if your modal body contains a form (e.g. {{#crossLink \"Components.Form\"}}{{/crossLink}}) this action will\nnot be triggered. Instead a submit event will be triggered on the form itself. See the class description for an\nexample.",
+            "itemtype": "property",
+            "name": "submitAction",
+            "type": "string",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 337,
+            "description": "The action to be sent when the modal is closing.\nThis will be triggered by pressing the modal header's close button (x button) or the modal footer's close button.\nNote that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some\ntime to finish. Use the `closedAction` if you need the modal to be hidden when the action triggers.\n\nYou can set `autoClose` to false to prevent closing the modal automatically, and do that in your closeAction by\nsetting `open` to false.",
+            "itemtype": "property",
+            "name": "closeAction",
+            "type": "string",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 354,
+            "description": "The action to be sent after the modal has been completely hidden (including the CSS transition).",
+            "itemtype": "property",
+            "name": "closedAction",
+            "type": "string",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 364,
+            "description": "The action to be sent after the modal has been completely shown (including the CSS transition).",
+            "itemtype": "property",
+            "name": "openedAction",
+            "type": "string",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 398,
+            "description": "Show the modal",
+            "itemtype": "method",
+            "name": "show",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 445,
+            "description": "Hide the modal",
+            "itemtype": "method",
+            "name": "hide",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 467,
+            "description": "Clean up after modal is hidden and call closedAction",
+            "itemtype": "method",
+            "name": "hideModal",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 485,
+            "description": "SHow/hide the backdrop",
+            "itemtype": "method",
+            "name": "handleBackdrop",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 541,
+            "description": "Attach/Detach resize event listeners",
+            "itemtype": "method",
+            "name": "resize",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
             "namespace": "Components"
         },
         {

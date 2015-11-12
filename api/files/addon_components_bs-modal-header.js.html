@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/mixins/sub-component.js - ember-bootstrap</title>
+    <title>addon/components/bs-modal-header.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,20 +49,48 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/sub-component.js <small>File</small></h1>
+    <h1>addon/components/bs-modal-header.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import ModalCloser from &#x27;ember-bootstrap/mixins/modal-closer&#x27;;
+import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
 
 /**
- * @class SubComponent
- * @namespace Mixins
+
+ Modal header element used within {{#crossLink &quot;Components.Modal&quot;}}{{/crossLink}} components. See there for examples.
+
+ @class ModalHeader
+ @namespace Components
+ @extends Ember.Component
  */
-export default Ember.Mixin.create({
-    targetObject: Ember.computed.alias(&#x27;parentView&#x27;)
+export default Ember.Component.extend(ModalCloser, I18nSupport, {
+  classNames: [&#x27;modal-header&#x27;],
+
+  /**
+   * Show a close button (x icon)
+   *
+   * @property closeButton
+   * @type boolean
+   * @default true
+   * @public
+   */
+  closeButton: true,
+
+  /**
+   * The title to display in the modal header
+   *
+   * @property title
+   * @type string
+   * @default null
+   * @public
+   */
+  title: null
+
 });
+
     </pre>
 </div>
                     </div>

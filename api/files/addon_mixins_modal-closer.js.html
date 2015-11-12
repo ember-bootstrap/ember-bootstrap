@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/mixins/sub-component.js - ember-bootstrap</title>
+    <title>addon/mixins/modal-closer.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,7 +49,7 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/sub-component.js <small>File</small></h1>
+    <h1>addon/mixins/modal-closer.js <small>File</small></h1>
 </div>
 
 <div class="file">
@@ -57,12 +57,18 @@
 import Ember from &#x27;ember&#x27;;
 
 /**
- * @class SubComponent
- * @namespace Mixins
+ * @class Bootstrap.SubComponent
  */
 export default Ember.Mixin.create({
-    targetObject: Ember.computed.alias(&#x27;parentView&#x27;)
+    targetObject: Ember.computed.alias(&#x27;parentView.parentView.parentView&#x27;),
+    action: &#x27;close&#x27;,
+    actions: {
+        close: function() {
+            this.sendAction();
+        }
+    }
 });
+
     </pre>
 </div>
                     </div>

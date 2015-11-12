@@ -1,3 +1,12 @@
+<a name"0.5.0"></a>
+## 0.5.0 (2015-11-12)
+
+
+#### Features
+
+* **Modal:**
+  * added bs-modal component and sub components for creating Bootstrap modal dialogs
+
 <a name"0.4.1"></a>
 ### 0.4.1 (2015-10-31)
 

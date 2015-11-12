@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/mixins/sub-component.js - ember-bootstrap</title>
+    <title>addon/components/bs-modal-dialog.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,19 +49,161 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/sub-component.js <small>File</small></h1>
+    <h1>addon/components/bs-modal-dialog.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 
-/**
- * @class SubComponent
- * @namespace Mixins
- */
-export default Ember.Mixin.create({
-    targetObject: Ember.computed.alias(&#x27;parentView&#x27;)
+/*
+  Internal component for modal&#x27;s markup and event handling. Should not be used directly.
+
+  @class ModalDialog
+  @namespace Components
+  @extends Ember.Component
+  @private
+*/
+export default Ember.Component.extend({
+  classNames: [&#x27;modal&#x27;],
+  classNameBindings: [&#x27;fade&#x27;, &#x27;in&#x27;],
+  attributeBindings: [&#x27;tabindex&#x27;],
+  ariaRole: &#x27;dialog&#x27;,
+  tabindex: &#x27;-1&#x27;,
+
+  /**
+   * The title of the modal, visible in the modal header. Is ignored if &#x60;header&#x60; is false.
+   *
+   * @property title
+   * @type string
+   * @public
+   */
+  title: null,
+
+  /**
+   * Display a close button (x icon) in the corner of the modal header.
+   *
+   * @property closeButton
+   * @type boolean
+   * @default true
+   * @public
+   */
+  closeButton: true,
+
+  /**
+   * Set to false to disable fade animations.
+   *
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  fade: true,
+
+  /**
+   * Used to apply Bootstrap&#x27;s &quot;in&quot; class
+   *
+   * @property in
+   * @type boolean
+   * @default false
+   * @private
+   */
+  in: false,
+
+  /**
+   * Closes the modal when escape key is pressed.
+   *
+   * @property keyboard
+   * @type boolean
+   * @default true
+   * @public
+   */
+  keyboard: true,
+
+  /**
+   * Generate a modal header component automatically. Set to false to disable. In this case you would want to include an
+   * instance of {{#crossLink &quot;Components.ModalHeader&quot;}}{{/crossLink}} in the components block template
+   *
+   * @property header
+   * @type boolean
+   * @default true
+   * @public
+   */
+  header: true,
+
+  /**
+   * Generate a modal body component automatically. Set to false to disable. In this case you would want to include an
+   * instance of {{#crossLink &quot;Components.ModalBody&quot;}}{{/crossLink}} in the components block template.
+   *
+   * Always set this to false if &#x60;header&#x60; and/or &#x60;footer&#x60; is false!
+   *
+   * @property header
+   * @type boolean
+   * @default true
+   * @public
+   */
+  body: true,
+
+  /**
+   * Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an
+   * instance of {{#crossLink &quot;Components.ModalFooter&quot;}}{{/crossLink}} in the components block template
+   *
+   * @property header
+   * @type boolean
+   * @default true
+   * @public
+   */
+  footer: true,
+
+  /**
+   * Property for size styling, set to null (default), &#x27;lg&#x27; or &#x27;sm&#x27;
+   *
+   * Also see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+
+  /**
+   * If true clicking on the backdrop will close the modal.
+   *
+   * @property backdropClose
+   * @type boolean
+   * @default true
+   * @public
+   */
+  backdropClose: true,
+
+  /**
+   * Name of the size class
+   *
+   * @property sizeClass
+   * @type string
+   * @private
+   */
+  sizeClass: Ember.computed(&#x27;size&#x27;, function () {
+    var size = this.get(&#x27;size&#x27;);
+    return Ember.isBlank(size) ? null : &#x27;modal-&#x27; + size;
+  }),
+
+  keyDown(e) {
+    var code = e.keyCode || e.which;
+    if(code === 27 &amp;&amp; this.get(&#x27;keyboard&#x27;)) {
+      this.sendAction(&#x27;close&#x27;);
+    }
+  },
+
+  click(e) {
+
+    if (e.target !== e.currentTarget || !this.get(&#x27;backdropClose&#x27;)) {
+      return;
+    }
+
+    this.sendAction(&#x27;close&#x27;);
+  }
+
 });
     </pre>
 </div>

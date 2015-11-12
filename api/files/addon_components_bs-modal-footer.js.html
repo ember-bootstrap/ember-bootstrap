@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/mixins/sub-component.js - ember-bootstrap</title>
+    <title>addon/components/bs-modal-footer.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,20 +49,82 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/sub-component.js <small>File</small></h1>
+    <h1>addon/components/bs-modal-footer.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import ModalCloser from &#x27;ember-bootstrap/mixins/modal-closer&#x27;;
+import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
 
 /**
- * @class SubComponent
- * @namespace Mixins
+
+ Modal footer element used within {{#crossLink &quot;Components.Modal&quot;}}{{/crossLink}} components. See there for examples.
+
+ @class ModalFooter
+ @namespace Components
+ @extends Ember.Component
  */
-export default Ember.Mixin.create({
-    targetObject: Ember.computed.alias(&#x27;parentView&#x27;)
+export default Ember.Component.extend(ModalCloser, I18nSupport, {
+  tagName: &#x27;form&#x27;,
+  classNames: [&#x27;modal-footer&#x27;],
+
+  /**
+   * The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block
+   * template.
+   *
+   * @property closeTitle
+   * @type string
+   * @default &#x27;Ok&#x27;
+   * @public
+   */
+  closeTitle: &#x27;Ok&#x27;,
+
+
+  /**
+   * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null or if you provide
+   * your own block template.
+   *
+   * @property submitTitle
+   * @type string
+   * @default null
+   * @public
+   */
+  submitTitle: null,
+
+  hasSubmitButton: Ember.computed.notEmpty(&#x27;submitTitle&#x27;),
+
+  /**
+   * Set to true to disable the submit button. If you bind this to some property that indicates if submitting is allowed
+   * (form validation for example) this can be used to prevent the user from pressing the submit button.
+   *
+   * @property submitDisabled
+   * @type boolean
+   * @default false
+   * @public
+   */
+  submitDisabled: false,
+
+  /**
+   * The action to send to the parent modal component when the modal footer&#x27;s form is submitted
+   *
+   * @property submitAction
+   * @type string
+   * @default &#x27;submit&#x27;
+   * @private
+   */
+  submitAction: &#x27;submit&#x27;,
+
+  submit: function (e) {
+    e.preventDefault();
+    // send to parent bs-modal component
+    this.sendAction(&#x27;submitAction&#x27;);
+  }
+
+
 });
+
     </pre>
 </div>
                     </div>

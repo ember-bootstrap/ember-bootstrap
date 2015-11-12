@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/components/bs-modal.js - ember-bootstrap</title>
+    <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
+    <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
+    <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-toggle-wrapper visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+        </div>
+        <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="navbar-nav nav">
+                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
+                <li><a href="/ember-bootstrap/components">Components</a></li>
+                <li><a href="/ember-bootstrap/api">API</a></li>
+
+            </ul>
+            <ul class="navbar-nav nav navbar-right">
+                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>API Docs <span class="small">v0.5.0</span></h1>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>addon/components/bs-modal.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import I18nSupport from &#x27;ember-bootstrap/mixins/i18n-support&#x27;;
+
+var Modal = {};
+
+Modal.TRANSITION_DURATION = 300;
+Modal.BACKDROP_TRANSITION_DURATION = 150;
+
+var observeOpen = function () {
+  if (this.get(&#x27;open&#x27;)) {
+    this.show();
+  }
+  else {
+    this.hide();
+  }
+};
+
+
+/**
+
+ Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals). Creating a simple modal is easy:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-modal title=&quot;Simple Dialog&quot;}}
+   Hello world!
+ {{/bs-modal}}
+ &#x60;&#x60;&#x60;
+
+ This will automatically create the appropriate markup, with a modal header containing the title, and a footer containing
+ a default &quot;Ok&quot; button, that will close the modal automatically (unless you set &#x60;autoClose&#x60; to false).
+
+ A modal created this way will be visible at once. You can use the &#x60;{{#if ...}}&#x60; helper to hide all modal elements form
+ the DOM until needed. Or you can bind the &#x60;open&#x60; property to trigger showing and hiding the modal:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-modal open=openModal title=&quot;Simple Dialog&quot;}}
+   Hello world!
+ {{/bs-modal}}
+ &#x60;&#x60;&#x60;
+
+ ### Custom Markup
+
+ To customize your modal markup you can use the following sub components:
+
+ {{#crossLink &quot;Components.ModalBody&quot;}}{{/crossLink}}
+ {{#crossLink &quot;Components.ModalHeader&quot;}}{{/crossLink}}
+ {{#crossLink &quot;Components.ModalFooter&quot;}}{{/crossLink}}
+
+ In the example above, these are generated for you automatically. Whenever you use one of these by yourself you should
+ set the appropriate property (&#x60;body&#x60;, &#x60;footer&#x60;, &#x60;header&#x60;) to false to prevent their automatic generation. Note that
+ in any case where you use a custom sub component, you must also use a custom {{#crossLink &quot;Components.ModalBody&quot;}}{{/crossLink}}!
+
+ A common use case is to customize the buttons in the footer. Most often you will have a cancel button that closes the
+ model without action, and a submit button that triggers some action. The footer component supports this case by letting
+ you customize the button titles, the rest (triggering close or submit actions) automatically set up:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-modal body=false footer=false title=&quot;Attention&quot; submitAction=(action &quot;submit&quot;)}}
+   {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}
+   {{bs-modal-footer closeTitle=&quot;Cancel&quot; submitTitle=&quot;Ok&quot;}}
+ {{/bs-modal}}
+ &#x60;&#x60;&#x60;
+
+ If you further want to customize your modal elements, you can supply custom templates for your footer and header, as in
+ the following example:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-modal body=false footer=false header=false submitAction=(action &quot;submit&quot;)}}
+   {{#bs-modal-header}}
+     &lt;h4 class=&quot;modal-title&quot;&gt;&lt;i class=&quot;glyphicon glyphicon-alert&quot;&gt;&lt;/i&gt; Alert&lt;/h4&gt;
+   {{/bs-modal-header}}
+   {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}
+   {{#bs-modal-footer as |footer|}}
+     {{#bs-button action=(action &quot;close&quot; target=footer) type=&quot;danger&quot;}}Oh no, forget it!{{/bs-button}}
+     {{#bs-button buttonType=&quot;submit&quot; type=&quot;success&quot;}}Yeah!{{/bs-button}}
+   {{/bs-modal-footer}}
+ {{/bs-modal}}
+ &#x60;&#x60;&#x60;
+
+ Note the use of the action helper of the close button that triggers the close action on the modal footer component
+ instead of on the controller, which will bubble up to the modal component and close the modal.
+
+ ### Modals with forms
+
+ There is a special case when you have a form inside your modals body: you probably do not want to have a submit button
+ within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not
+ trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
+ thus bypass the form validation feature of the form component.
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-modal title=&quot;Form Example&quot; body=false footer=false}}
+   {{#bs-modal-body}}
+     {{#bs-form action=(action &quot;submit&quot;) model=this}}
+       {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot;}}
+       {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
+     {{/bs-form}}
+   {{/bs-modal-body}}
+   {{bs-modal-footer closeTitle=(t &quot;contact.label.cancel&quot;) submitTitle=(t &quot;contact.label.ok&quot;)}}
+ {{/bs-modal}}
+ &#x60;&#x60;&#x60;
+
+ The modal component supports this common case by triggering the submit event programmatically on the body&#x27;s form if
+ present whenever the footer&#x27;s submit button is pressed, so the example above will work as expected.
+
+ ### Modals inside wormhole
+
+ Modals make use of the [ember-wormhole](https://github.com/yapplabs/ember-wormhole) addon, which will be installed
+ automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested
+ components/templates where it belongs to logically, but to have the actual DOM elements within a special container
+ element, which is a child of ember&#x27;s root element. This will make sure that modals always overlay the whole app, and
+ are not effected by parent elements with &#x60;overflow: hidden&#x60; for example.
+
+ @class Modal
+ @namespace Components
+ @extends Ember.Component
+*/
+export default Ember.Component.extend(I18nSupport, {
+
+  /**
+   * Visibility of the modal. Toggle to to show/hide with CSS transitions.
+   *
+   * @property open
+   * @type boolean
+   * @default true
+   * @public
+   */
+  open: true,
+
+  /**
+   * The title of the modal, visible in the modal header. Is ignored if &#x60;header&#x60; is false.
+   *
+   * @property title
+   * @type string
+   * @public
+   */
+  title: null,
+
+  /**
+   * Display a close button (x icon) in the corner of the modal header.
+   *
+   * @property closeButton
+   * @type boolean
+   * @default true
+   * @public
+   */
+  closeButton: true,
+
+  /**
+   * Set to false to disable fade animations.
+   *
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  fade: true,
+
+  /**
+   * Used to apply Bootstrap&#x27;s &quot;in&quot; class
+   *
+   * @property in
+   * @type boolean
+   * @default false
+   * @private
+   */
+  in: false,
+
+  /**
+   * Use a semi-transparent modal background to hide the rest of the page.
+   *
+   * @property backdrop
+   * @type boolean
+   * @default true
+   * @public
+   */
+  backdrop: true,
+
+  /**
+   * @property showBackdrop
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showBackdrop: false,
+
+  /**
+   * Closes the modal when escape key is pressed.
+   *
+   * @property keyboard
+   * @type boolean
+   * @default true
+   * @public
+   */
+  keyboard: true,
+
+  /**
+   * If true clicking a close button will hide the modal automatically.
+   * If you want to handle hiding the modal by yourself, you can set this to false and use the closeAction to
+   * implement your custom logic.
+   *
+   * @property autoClose
+   * @type boolean
+   * @default true
+   * @public
+   */
+  autoClose: true,
+
+  /**
+   * Generate a modal header component automatically. Set to false to disable. In this case you would want to include an
+   * instance of {{#crossLink &quot;Components.ModalHeader&quot;}}{{/crossLink}} in the components block template
+   *
+   * @property header
+   * @type boolean
+   * @default true
+   * @public
+   */
+  header: true,
+
+  /**
+   * Generate a modal body component automatically. Set to false to disable. In this case you would want to include an
+   * instance of {{#crossLink &quot;Components.ModalBody&quot;}}{{/crossLink}} in the components block template.
+   *
+   * Always set this to false if &#x60;header&#x60; and/or &#x60;footer&#x60; is false!
+   *
+   * @property header
+   * @type boolean
+   * @default true
+   * @public
+   */
+  body: true,
+
+  /**
+   * Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an
+   * instance of {{#crossLink &quot;Components.ModalFooter&quot;}}{{/crossLink}} in the components block template
+   *
+   * @property header
+   * @type boolean
+   * @default true
+   * @public
+   */
+  footer: true,
+
+  /**
+   * The id of the &#x60;.modal&#x60; element.
+   *
+   * @property modalId
+   * @type string
+   * @readonly
+   * @private
+   */
+  modalId: Ember.computed(&#x27;elementId&#x27;, function() {
+    return this.get(&#x27;elementId&#x27;) + &#x27;-modal&#x27;;
+  }),
+
+  /**
+   * The jQuery object of the &#x60;.modal&#x60; element.
+   *
+   * @property modalElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  modalElement: Ember.computed(&#x27;modalId&#x27;, function() {
+    return Ember.$(&#x27;#&#x27; + this.get(&#x27;modalId&#x27;));
+  }).volatile(),
+
+  /**
+   * The id of the backdrop element.
+   *
+   * @property backdropId
+   * @type string
+   * @readonly
+   * @private
+   */
+  backdropId: Ember.computed(&#x27;elementId&#x27;, function() {
+    return this.get(&#x27;elementId&#x27;) + &#x27;-backdrop&#x27;;
+  }),
+
+  /**
+   * The jQuery object of the backdrop element.
+   *
+   * @property backdropElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  backdropElement: Ember.computed(&#x27;backdropId&#x27;, function() {
+    return Ember.$(&#x27;#&#x27; + this.get(&#x27;backdropId&#x27;));
+  }).volatile(),
+
+  /**
+   * Use CSS transitions when showing/hiding the modal?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  usesTransition: Ember.computed(&#x27;fade&#x27;, function () {
+    return Ember.$.support.transition &amp;&amp; this.get(&#x27;fade&#x27;);
+  }),
+
+  /**
+   * Property for size styling, set to null (default), &#x27;lg&#x27; or &#x27;sm&#x27;
+   *
+   * Also see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+
+  /**
+   * If true clicking on the backdrop will close the modal.
+   *
+   * @property backdropClose
+   * @type boolean
+   * @default true
+   * @public
+   */
+  backdropClose: true,
+
+  /**
+   * The action to be sent when the modal footer&#x27;s submit button (if present) is pressed.
+   * Note that if your modal body contains a form (e.g. {{#crossLink &quot;Components.Form&quot;}}{{/crossLink}}) this action will
+   * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
+   * example.
+   *
+   * @property submitAction
+   * @type string
+   * @default null
+   * @public
+   */
+  submitAction: null,
+
+  /**
+   * The action to be sent when the modal is closing.
+   * This will be triggered by pressing the modal header&#x27;s close button (x button) or the modal footer&#x27;s close button.
+   * Note that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some
+   * time to finish. Use the &#x60;closedAction&#x60; if you need the modal to be hidden when the action triggers.
+   *
+   * You can set &#x60;autoClose&#x60; to false to prevent closing the modal automatically, and do that in your closeAction by
+   * setting &#x60;open&#x60; to false.
+   *
+   * @property closeAction
+   * @type string
+   * @default null
+   * @public
+   */
+  closeAction: null,
+
+
+  /**
+   * The action to be sent after the modal has been completely hidden (including the CSS transition).
+   *
+   * @property closedAction
+   * @type string
+   * @default null
+   * @public
+   */
+  closedAction: null,
+
+  /**
+   * The action to be sent after the modal has been completely shown (including the CSS transition).
+   *
+   * @property openedAction
+   * @type string
+   * @default null
+   * @public
+   */
+  openedAction: null,
+
+  actions: {
+    close() {
+
+      if (this.get(&#x27;autoClose&#x27;)) {
+        this.set(&#x27;open&#x27;, false);
+      }
+      this.sendAction(&#x27;closeAction&#x27;);
+    },
+    submit() {
+      var form = this.get(&#x27;modalElement&#x27;).find(&#x27;.modal-body form&#x27;);
+      if (form.length &gt; 0) {
+        // trigger submit event on body form
+        form.trigger(&#x27;submit&#x27;);
+      }
+      else {
+        // if we have no form, we send a submit action
+        this.sendAction(&#x27;submitAction&#x27;);
+      }
+    }
+
+  },
+
+  _observeOpen: Ember.observer(&#x27;open&#x27;, observeOpen),
+
+  /**
+   * Show the modal
+   *
+   * @method show
+   * @private
+   */
+  show() {
+
+    //this.checkScrollbar()
+    //this.setScrollbar()
+
+    Ember.$(&#x27;body&#x27;).addClass(&#x27;modal-open&#x27;);
+
+    this.resize();
+
+    var callback = function () {
+
+      this.get(&#x27;modalElement&#x27;)
+        .show()
+        .scrollTop(0);
+
+      this.handleUpdate();
+
+      //if (transition) {
+      //    that.$element[0].offsetWidth // force reflow
+      //}
+
+      this.set(&#x27;in&#x27;, true);
+
+      //this.enforceFocus()
+
+      if (this.get(&#x27;usesTransition&#x27;)) {
+        this.get(&#x27;modalElement&#x27;)
+          .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, function() {
+            this.get(&#x27;modalElement&#x27;).trigger(&#x27;focus&#x27;);
+          }))
+          .emulateTransitionEnd(Modal.TRANSITION_DURATION);
+      }
+      else {
+        this.get(&#x27;modalElement&#x27;).trigger(&#x27;focus&#x27;);
+      }
+
+      this.sendAction(&#x27;openedAction&#x27;);
+    };
+    Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this.handleBackdrop, callback);
+  },
+
+  /**
+   * Hide the modal
+   *
+   * @method hide
+   * @private
+   */
+  hide() {
+
+    this.resize();
+
+    this.set(&#x27;in&#x27;, false);
+
+    if (this.get(&#x27;usesTransition&#x27;)) {
+      this.get(&#x27;modalElement&#x27;)
+        .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, this.hideModal))
+        .emulateTransitionEnd(Modal.TRANSITION_DURATION);
+    }
+    else {
+      this.hideModal();
+    }
+  },
+
+  /**
+   * Clean up after modal is hidden and call closedAction
+   *
+   * @method hideModal
+   * @private
+   */
+  hideModal() {
+    this.get(&#x27;modalElement&#x27;).hide();
+    this.handleBackdrop(function () {
+      Ember.$(&#x27;body&#x27;).removeClass(&#x27;modal-open&#x27;);
+      //that.resetAdjustments()
+      //that.resetScrollbar()
+      //that.trigger(&#x27;hidden&#x27;);
+
+      this.sendAction(&#x27;closedAction&#x27;);
+    });
+  },
+
+  /**
+   * SHow/hide the backdrop
+   *
+   * @method handleBackdrop
+   * @param callback
+   * @private
+   */
+  handleBackdrop(callback) {
+    var doAnimate = this.get(&#x27;usesTransition&#x27;);
+
+    if (this.get(&#x27;open&#x27;) &amp;&amp; this.get(&#x27;backdrop&#x27;)) {
+      this.set(&#x27;showBackdrop&#x27;, true);
+
+      if (!callback) {
+        return;
+      }
+
+      var waitForFade = function () {
+        var $backdrop = this.get(&#x27;backdropElement&#x27;);
+        Ember.assert(&#x27;Backdrop element should be in DOM&#x27;, $backdrop &amp;&amp; $backdrop.length &gt; 0);
+
+        if (doAnimate) {
+          $backdrop
+            .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, callback))
+            .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION);
+        }
+        else {
+          callback.call(this);
+        }
+      };
+
+      Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, waitForFade);
+
+    } else if (!this.get(&#x27;open&#x27;) &amp;&amp; this.get(&#x27;backdrop&#x27;)) {
+      var $backdrop = this.get(&#x27;backdropElement&#x27;);
+      Ember.assert(&#x27;Backdrop element should be in DOM&#x27;, $backdrop &amp;&amp; $backdrop.length &gt; 0);
+
+      var callbackRemove = function () {
+        this.set(&#x27;showBackdrop&#x27;, false);
+        if (callback) {
+          callback.call(this);
+        }
+      };
+      if (doAnimate) {
+        $backdrop
+          .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, callbackRemove))
+          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION);
+      }
+      else {
+        callbackRemove();
+      }
+    } else if (callback) {
+      callback.call(this);
+    }
+  },
+
+  /**
+   * Attach/Detach resize event listeners
+   *
+   * @method resize
+   * @private
+   */
+  resize() {
+    if (this.get(&#x27;open&#x27;)) {
+      Ember.$(window).on(&#x27;resize.bs.modal&#x27;, Ember.run.bind(this, this.handleUpdate));
+    } else {
+      Ember.$(window).off(&#x27;resize.bs.modal&#x27;);
+    }
+  },
+
+  handleUpdate() {
+    this.adjustDialog();
+  },
+
+  adjustDialog() {
+    //var modalIsOverflowing = this.get(&#x27;element&#x27;)[0].scrollHeight &gt; document.documentElement.clientHeight;
+    //
+    //this.get(&#x27;element&#x27;).css({
+    //    paddingLeft:  !this.bodyIsOverflowing &amp;&amp; modalIsOverflowing ? this.scrollbarWidth : &#x27;&#x27;,
+    //    paddingRight: this.bodyIsOverflowing &amp;&amp; !modalIsOverflowing ? this.scrollbarWidth : &#x27;&#x27;
+    //});
+  },
+
+  didInsertElement() {
+
+    if (this.get(&#x27;open&#x27;)) {
+      this.show();
+    }
+  },
+
+  willDestroyElement() {
+    Ember.$(window).off(&#x27;resize.bs.modal&#x27;);
+    Ember.$(&#x27;body&#x27;).removeClass(&#x27;modal-open&#x27;);
+  }
+
+});
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3>Classes</h3>
+            
+            <ul id="api-classes" class="nav nav-pills nav-stacked">
+                    <li><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
+                    <li><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
+                    <li><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
+                    <li><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li><a href="../classes/Components.Form.html">Components.Form</a></li>
+                    <li><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+                    <li><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+                    <li><a href="../classes/Components.Input.html">Components.Input</a></li>
+                    <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
+                    <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
+                    <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li><a href="../classes/Components.Select.html">Components.Select</a></li>
+                    <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
+                    <li><a href="../classes/Mixins.Bootstrap.SubComponent.html">Mixins.Bootstrap.SubComponent</a></li>
+                    <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+                    <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
+                    <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+            </ul>        </div>
+    </div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
