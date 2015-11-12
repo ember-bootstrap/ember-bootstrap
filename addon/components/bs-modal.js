@@ -222,7 +222,7 @@ export default Ember.Component.extend(I18nSupport, {
    *
    * Always set this to false if `header` and/or `footer` is false!
    *
-   * @property header
+   * @property body
    * @type boolean
    * @default true
    * @public
@@ -233,7 +233,7 @@ export default Ember.Component.extend(I18nSupport, {
    * Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an
    * instance of {{#crossLink "Components.ModalFooter"}}{{/crossLink}} in the components block template
    *
-   * @property header
+   * @property footer
    * @type boolean
    * @default true
    * @public
