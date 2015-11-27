@@ -26,13 +26,13 @@ module.exports = {
         var bootstrapPath   = path.join(app.bowerDirectory, 'bootstrap/dist');
 
         // Import css from bootstrap
-        if (options.importBootstrapTheme) {
-            app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
-        }
-
         if (options.importBootstrapCSS) {
             app.import(path.join(bootstrapPath, 'css/bootstrap.css'));
             app.import(path.join(bootstrapPath, 'css/bootstrap.css.map'), { destDir: 'assets' });
+        }
+
+        if (options.importBootstrapTheme) {
+            app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
         }
 
         // Import glyphicons
