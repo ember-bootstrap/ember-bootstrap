@@ -8,7 +8,8 @@ var path = require('path'),
 var defaultOptions = {
     importBootstrapTheme: false,
     importBootstrapCSS: true,
-    importBootstrapFont: true
+    importBootstrapFont: true,
+    importBootstrapJsModules: []
 };
 
 module.exports = {
@@ -44,7 +45,13 @@ module.exports = {
             app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff2'), { destDir: '/fonts' });
         }
 
-        app.import(path.join(app.bowerDirectory, 'bootstrap/js/transition.js'));
+        if (options.importBootstrapModules && options.importBootstrapModules.length > 0) {
+            options.importBootstrapModules.forEach(function(module) {
+                app.import(path.join(app.bowerDirectory, 'bootstrap/js/' + module + '.js'));
+            });
+        } else {
+            app.import(path.join(bootstrapPath, 'js/bootstrap.js'));
+        }
 
     }
 };
