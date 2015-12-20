@@ -43,7 +43,12 @@ export default Ember.Component.extend(I18nSupport, {
     var hasPrompt = !!this.get('prompt');
     var contentIndex = hasPrompt ? selectedIndex - 1 : selectedIndex;
 
-    var selection = content[contentIndex];
+    var selection = undefined;
+    if(content.constructor && content.constructor === Array){
+      selection = content[contentIndex];
+    } else {
+      selection = content.objectAt(contentIndex);
+    }
 
     // set the local, shadowed selection to avoid leaking
     // changes to `selection` out via 2-way binding
