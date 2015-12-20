@@ -23,7 +23,7 @@ export default Ember.Component.extend(I18nSupport, {
   prompt: null,
   optionValuePath: 'id',
   optionLabelPath: 'title',
-  action: Ember.K, // action to fire on change
+  action: null,
 
   value: null,
 
@@ -54,9 +54,8 @@ export default Ember.Component.extend(I18nSupport, {
     // changes to `selection` out via 2-way binding
     this.set('value', selection);
 
-    var changeCallback = this.get('action');
-    changeCallback(selection);
+    if(this.get('action')){
+      this.sendAction('action', selection);
+    }
   }
-
-  
 });
