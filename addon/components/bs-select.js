@@ -18,12 +18,13 @@ import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 export default Ember.Component.extend(I18nSupport, {
   tagName: 'select',
   classNames: ['form-control'],
+  attributeBindings: ['multiple'],
 
   content: null,
   prompt: null,
   optionValuePath: 'id',
   optionLabelPath: 'title',
-  action: Ember.K, // action to fire on change
+  action: null,
 
   value: null,
 
@@ -34,24 +35,40 @@ export default Ember.Component.extend(I18nSupport, {
     }
   },
 
-  change: function() {
+  change: function () {
     var selectEl = this.$().get(0);
-    var selectedIndex = selectEl.selectedIndex;
+
+    let selection = this.get('multiple') ? [] : {};
+    let hasPrompt = !!this.get('prompt');
     var content = this.get('content');
 
-    // decrement index by 1 if we have a prompt
-    var hasPrompt = !!this.get('prompt');
-    var contentIndex = hasPrompt ? selectedIndex - 1 : selectedIndex;
+    if (this.get('multiple')) {
+      var selectedIndexes = selectEl.selectedOptions;
 
-    var selection = content[contentIndex];
+      for (var i = 0; i < selectedIndexes.length; i++) {
+        let contentIndex = hasPrompt ? selectedIndexes.item(i).index - 1 : selectedIndexes.item(i).index;
+        if (content.constructor && content.constructor === Array) {
+          selection.push(content[contentIndex]);
+        } else {
+          selection.push(content.objectAt(contentIndex));
+        }
+      }
+    } else {
+      let selectedIndex = selectEl.selectedIndex;
+      let contentIndex = hasPrompt ? selectedIndex - 1 : selectedIndex;
+      if (content.constructor && content.constructor === Array) {
+        selection = content[contentIndex];
+      } else {
+        selection = content.objectAt(contentIndex);
+      }
+    }
 
     // set the local, shadowed selection to avoid leaking
     // changes to `selection` out via 2-way binding
     this.set('value', selection);
 
-    var changeCallback = this.get('action');
-    changeCallback(selection);
+    if (this.get('action')) {
+      this.sendAction('action', selection);
+    }
   }
-
-  
 });
