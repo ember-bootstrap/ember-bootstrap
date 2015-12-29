@@ -124,15 +124,15 @@ export default Ember.Component.extend(ComponentParent, {
     }),
 
     actions: {
-        toggleDropdown: function () {
+        toggleDropdown () {
             this.toggleProperty('open');
         },
 
-        openDropdown: function () {
+        openDropdown () {
             this.set('open', true);
         },
 
-        closeDropdown: function () {
+        closeDropdown () {
             this.set('open', false);
         }
     },

@@ -34,7 +34,7 @@ export default Ember.Controller.extend(EmberValidations,{
     ]),
 
     actions: {
-        submit: function() {
+        submit () {
             window.alert('Successfully submitted form data!');
         }
     }
