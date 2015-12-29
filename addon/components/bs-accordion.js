@@ -40,7 +40,7 @@ export default Ember.Component.extend({
   selected: null,
 
   actions: {
-    selected: function (currentValue, previousValue) {
+    selected (currentValue, previousValue) {
       this.sendAction('action', currentValue, previousValue);
     }
   }

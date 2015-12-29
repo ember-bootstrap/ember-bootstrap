@@ -53,7 +53,7 @@ export default Ember.Component.extend(TypeClass, SubComponent, I18nSupport, {
   action: 'selected',
 
   actions: {
-    toggleActive: function () {
+    toggleActive () {
       var value = this.get('value'),
         previous = this.get('selected'),
         active = this.get('active');
