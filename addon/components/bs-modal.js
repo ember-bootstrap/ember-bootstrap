@@ -411,6 +411,7 @@ export default Ember.Component.extend(I18nSupport, {
     this.resize();
 
     var callback = function () {
+      if (this.get('isDestroyed')) { return; }
 
       this.get('modalElement')
         .show()
@@ -471,6 +472,8 @@ export default Ember.Component.extend(I18nSupport, {
    * @private
    */
   hideModal() {
+    if (this.get('isDestroyed')) { return; }
+
     this.get('modalElement').hide();
     this.handleBackdrop(function () {
       Ember.$('body').removeClass('modal-open');
