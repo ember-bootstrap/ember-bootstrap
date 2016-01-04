@@ -1,3 +1,17 @@
+<a name"0.5.1"></a>
+### 0.5.1 (2016-01-04)
+
+
+#### Bug Fixes
+
+* **Modal:** closing a modal left backdrop element in DOM on IE9 ([0e24f351](https://github.com/kaliber5/ember-bootstrap/commit/0e24f351))
+* Fixed bootstrap theme inclusion order, thanks to [huberts](https://github.com/huberts) ([PR#31](https://github.com/kaliber5/ember-bootstrap/pull/31))
+
+#### Features
+
+* **Modal:** implemented scrollbar layout adjustments when opening modals, like the original bootstrap.js modals ([3e28b099](https://github.com/kaliber5/ember-bootstrap/commit/3e28b099))
+
+
 <a name"0.5.0"></a>
 ## 0.5.0 (2015-11-12)
 
