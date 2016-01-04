@@ -534,7 +534,7 @@ export default Ember.Component.extend(I18nSupport, {
           .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION);
       }
       else {
-        callbackRemove();
+        callbackRemove.call(this);
       }
     } else if (callback) {
       callback.call(this);
