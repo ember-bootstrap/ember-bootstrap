@@ -403,8 +403,8 @@ export default Ember.Component.extend(I18nSupport, {
    */
   show() {
 
-    //this.checkScrollbar()
-    //this.setScrollbar()
+    this.checkScrollbar();
+    this.setScrollbar();
 
     Ember.$('body').addClass('modal-open');
 
@@ -475,10 +475,10 @@ export default Ember.Component.extend(I18nSupport, {
     if (this.get('isDestroyed')) { return; }
 
     this.get('modalElement').hide();
-    this.handleBackdrop(function () {
+    this.handleBackdrop(() => {
       Ember.$('body').removeClass('modal-open');
-      //that.resetAdjustments()
-      //that.resetScrollbar()
+      this.resetAdjustments();
+      this.resetScrollbar();
       //that.trigger('hidden');
 
       this.sendAction('closedAction');
@@ -555,18 +555,85 @@ export default Ember.Component.extend(I18nSupport, {
     }
   },
 
+  /**
+   * @method handleUpdate
+   * @private
+   */
   handleUpdate() {
     this.adjustDialog();
   },
 
+  /**
+   * @method adjustDialog
+   * @private
+   */
   adjustDialog() {
-    //var modalIsOverflowing = this.get('element')[0].scrollHeight > document.documentElement.clientHeight;
-    //
-    //this.get('element').css({
-    //    paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
-    //    paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
-    //});
+    var modalIsOverflowing = this.get('modalElement')[0].scrollHeight > document.documentElement.clientHeight;
+    this.get('modalElement').css({
+        paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.get('scrollbarWidth') : '',
+        paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.get('scrollbarWidth') : ''
+    });
   },
+
+  /**
+   * @method resetAdjustments
+   * @private
+   */
+  resetAdjustments() {
+    this.get('modalElement').css({
+      paddingLeft: '',
+      paddingRight: ''
+    });
+  },
+
+  /**
+   * @method checkScrollbar
+   * @private
+   */
+  checkScrollbar() {
+    var fullWindowWidth = window.innerWidth;
+    if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
+      let documentElementRect = document.documentElement.getBoundingClientRect();
+      fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
+    }
+
+    this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth;
+  },
+
+  /**
+   * @method setScrollbar
+   * @private
+   */
+  setScrollbar() {
+    var bodyPad = parseInt((Ember.$('body').css('padding-right') || 0), 10);
+    this.originalBodyPad = document.body.style.paddingRight || '';
+    if (this.bodyIsOverflowing) {
+      Ember.$('body').css('padding-right', bodyPad + this.get('scrollbarWidth'));
+    }
+  },
+
+  /**
+   * @method resetScrollbar
+   * @private
+   */
+  resetScrollbar() {
+    Ember.$('body').css('padding-right', this.originalBodyPad);
+  },
+
+  /**
+   * @property scrollbarWidth
+   * @type number
+   * @readonly
+   * @private
+   */
+  scrollbarWidth: Ember.computed(function() {
+    var scrollDiv = document.createElement('div');
+    scrollDiv.className = 'modal-scrollbar-measure';
+    this.get('modalElement').after(scrollDiv);
+    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+    Ember.$(scrollDiv).remove();
+    return scrollbarWidth;
+  }),
 
   didInsertElement() {
 
