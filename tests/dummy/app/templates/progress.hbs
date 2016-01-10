@@ -1,0 +1,26 @@
+<h1>Progress bars</h1>
+
+{{#bs-form formLayout="horizontal" model=this}}
+    {{bs-form-element controlType="number" label="Value" property="value"}}
+    {{bs-form-element controlType="number" label="Min" property="minValue"}}
+    {{bs-form-element controlType="number" label="Max" property="maxValue"}}
+    {{bs-form-element controlType="select" label="Type" choices=typeChoices choiceLabelProperty="id" choiceValueProperty="id" property="type"}}
+    {{bs-form-element controlType="checkbox" label="Show label" property="showLabel"}}
+    {{bs-form-element controlType="number" label="Round to digits" property="roundDigits"}}
+    {{bs-form-element controlType="checkbox" label="Striped" property="striped"}}
+    {{bs-form-element controlType="checkbox" label="Animate" property="animate"}}
+{{/bs-form}}
+
+<h2>Single progress bar</h2>
+
+{{#bs-progress}}
+    {{bs-progress-bar value=value minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type=type.id striped=striped animate=animate}}
+{{/bs-progress}}
+
+<h2>Stacked</h2>
+
+{{#bs-progress}}
+    {{bs-progress-bar value=value minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type=type.id striped=striped animate=animate}}
+    {{bs-progress-bar value=20 minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type="warning" striped=striped animate=animate}}
+    {{bs-progress-bar value=5 minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type="danger" striped=striped animate=animate}}
+{{/bs-progress}}
