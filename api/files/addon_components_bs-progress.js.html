@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-textarea.js - ember-bootstrap</title>
+    <title>addon/components/bs-progress.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,7 +49,7 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-textarea.js <small>File</small></h1>
+    <h1>addon/components/bs-progress.js <small>File</small></h1>
 </div>
 
 <div class="file">
@@ -57,15 +57,16 @@
 import Ember from &#x27;ember&#x27;;
 
 /**
- Extends Ember.TextArea to add Bootstrap&#x27;s &#x27;form-control&#x27; class.
+ Use to group one (or more) {{#crossLink &quot;Components.ProgressBar&quot;}}{{/crossLink}} components inside it.
 
- @class Textarea
+ @class Progress
  @namespace Components
- @extends Ember.TextArea
+ @extends Ember.Component
  */
-export default Ember.TextArea.extend({
-    classNames: [&#x27;form-control&#x27;]
+export default Ember.Component.extend({
+  classNames: [&#x27;progress&#x27;]
 });
+
     </pre>
 </div>
                     </div>
