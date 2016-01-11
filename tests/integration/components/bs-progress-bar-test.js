@@ -35,8 +35,7 @@ test('Progress bar has correct width according to value, minValue and maxValue',
         minValue: 5,
         maxValue: 10
       }
-    ],
-    expectedWidth;
+    ];
 
   testData.forEach(data => {
     this.render(hbs`

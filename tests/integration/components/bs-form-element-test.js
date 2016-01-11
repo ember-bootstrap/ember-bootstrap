@@ -50,9 +50,7 @@ function controlTypeSupportTest(assert, controlType, selector, values, getValueF
       var hasValue = typeof getValueFn === 'function' ? getValueFn.call(this.$(selector)) : this.$(selector).val();
       assert.equal(hasValue, value, controlType + ' control has correct values for form layout ' + layout);
     });
-  })
-
-
+  });
 }
 
 function labeledControlTest(assert, controlType, selector) {
@@ -63,8 +61,6 @@ function labeledControlTest(assert, controlType, selector) {
     this.render(hbs`{{#bs-form formLayout=formLayout}}{{bs-form-element controlType=controlType label="myLabel"}}{{/bs-form}}`);
     assert.equal(this.$(selector).attr('id'), this.$('label').attr('for'), 'component and label ids do match for form layout ' + layout);
   });
-
-
 }
 
 test('controlType "text" is supported', function (assert) {
