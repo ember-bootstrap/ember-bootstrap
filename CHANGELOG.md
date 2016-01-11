@@ -1,3 +1,23 @@
+<a name"0.6.0"></a>
+## 0.6.0 (2016-01-12)
+
+#### Bug Fixes
+
+* **FormElement:** Fixed select box for form layouts other than vertical, had wrong property assignments ([2c15ec2c](https://github.com/kaliber5/ember-bootstrap/commit/2c15ec2c))
+
+#### Features
+
+* **ProgressBar:** Added support for progress bars as native ember components
+* **I18nSupport:** Removed I18nSupport mixin as this is not needed anymore with ember-i18n 4.x help ([a5ade3c1](https://github.com/kaliber5/ember-bootstrap/commit/a5ade3c1))
+
+
+#### Breaking Changes
+
+* If you rely on ember-bootstrap components to use the old ember-i18n TranslatableProperties mixin, you should update ember-i18n to the latest version and use the "t" helper to supply already translated strings to ember-bootstrap component properties in your templates.
+
+ ([a5ade3c1](https://github.com/kaliber5/ember-bootstrap/commit/a5ade3c1))
+
+
 <a name"0.5.1"></a>
 ### 0.5.1 (2016-01-04)
 
