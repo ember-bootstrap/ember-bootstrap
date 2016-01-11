@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 
 var Modal = {};
 
@@ -114,7 +113,7 @@ var observeOpen = function () {
  @namespace Components
  @extends Ember.Component
 */
-export default Ember.Component.extend(I18nSupport, {
+export default Ember.Component.extend({
 
   /**
    * Visibility of the modal. Toggle to to show/hide with CSS transitions.

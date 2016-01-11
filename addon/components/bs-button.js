@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
-import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 
 
@@ -71,20 +70,13 @@ import ComponentChild from 'ember-bootstrap/mixins/component-child';
  });
  ```
 
- ### I18n support
-
- Supports translateable properties if [ember-i18n](https://github.com/jamesarosen/ember-i18n) is present.
- See {{#crossLink "Mixins.I18nSupport"}}{{/crossLink}}
-
-
  @class Button
  @namespace Components
  @extends Ember.Component
  @uses Mixins.TypeClass
  @uses Mixins.SizeClass
- @uses Mixins.I18nSupport
 */
-export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, I18nSupport, {
+export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
     tagName: 'button',
     classNames: ['btn'],
     classNameBindings: ['active', 'block:btn-block'],

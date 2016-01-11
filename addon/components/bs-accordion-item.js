@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SubComponent from 'ember-bootstrap/mixins/sub-component';
-import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
 
 /**
  A collapsible/expandable item within an accordion
@@ -14,9 +13,8 @@ import I18nSupport from 'ember-bootstrap/mixins/i18n-support';
  @extends Ember.Component
  @uses Mixins.TypeClass
  @uses Mixins.SubComponent
- @uses Mixins.I18nSupport
  */
-export default Ember.Component.extend(TypeClass, SubComponent, I18nSupport, {
+export default Ember.Component.extend(TypeClass, SubComponent, {
   classNames: ['panel'],
 
   /**
