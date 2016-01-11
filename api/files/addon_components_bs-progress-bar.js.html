@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-textarea.js - ember-bootstrap</title>
+    <title>addon/components/bs-progress-bar.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,23 +49,191 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-textarea.js <small>File</small></h1>
+    <h1>addon/components/bs-progress-bar.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
 
 /**
- Extends Ember.TextArea to add Bootstrap&#x27;s &#x27;form-control&#x27; class.
 
- @class Textarea
+ Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.
+
+ ### Usage
+
+ Always wrap the progress bar in a {{#crossLink &quot;Components.Progress&quot;}}{{/crossLink}} component. Use the &#x60;value&#x60;
+ property to control the progress bar&#x27;s width. To apply the different styling options supplied by Bootstrap, use the
+ appropriate properties like &#x60;type&#x60;, &#x60;showLabel&#x60;, &#x60;striped&#x60; or &#x60;animate&#x60;.
+
+ &#x60;&#x60;&#x60;hbs
+ \{{#bs-progress}}
+   \{{bs-progress-bar value=progressValue minValue=0 maxValue=10 showLabel=true type=&quot;danger&quot;}}
+ \{{/bs-progress}}
+ &#x60;&#x60;&#x60;
+
+ ### Stacked
+
+ You can place multiple progress bar components in a single {{#crossLink &quot;Components.Progress&quot;}}{{/crossLink}} to
+ create a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.
+
+ &#x60;&#x60;&#x60;hbs
+ \{{#bs-progress}}
+   \{{bs-progress-bar value=progressValue1 type=&quot;success&quot;}}
+   \{{bs-progress-bar value=progressValue2 type=&quot;warning&quot;}}
+   \{{bs-progress-bar value=progressValue3 type=&quot;danger&quot;}}
+ \{{/bs-progress}}
+ &#x60;&#x60;&#x60;
+
+ @class ProgressBar
  @namespace Components
- @extends Ember.TextArea
+ @extends Ember.Component
+ @uses Mixins.TypeClass
  */
-export default Ember.TextArea.extend({
-    classNames: [&#x27;form-control&#x27;]
+export default Ember.Component.extend(TypeClass, {
+  classNames: [&#x27;progress-bar&#x27;],
+  classNameBindings: [&#x27;progressBarStriped&#x27;,&#x27;active&#x27;],
+
+  attributeBindings: [&#x27;style&#x27;,&#x27;ariaValuenow&#x27;,&#x27;ariaValuemin&#x27;,&#x27;ariaValuemax&#x27;],
+
+  /**
+   * @property classTypePrefix
+   * @type String
+   * @default &#x27;progress-bar&#x27;
+   * @protected
+   */
+  classTypePrefix: &#x27;progress-bar&#x27;,
+
+  /**
+   * The lower limit of the value range
+   *
+   * @property minValue
+   * @type number
+   * @default 0
+   * @public
+   */
+  minValue: 0,
+
+  /**
+   * The upper limit of the value range
+   *
+   * @property maxValue
+   * @type number
+   * @default 100
+   * @public
+   */
+  maxValue: 100,
+
+  /**
+   * The value the progress bar should represent
+   *
+   * @property value
+   * @type number
+   * @default 0
+   * @public
+   */
+  value: 0,
+
+  /**
+   If true a label will be shown inside the progress bar.
+
+   By default it will be the percentage corresponding to the &#x60;value&#x60; property, rounded to &#x60;roundDigits&#x60; digits.
+   You can customize it by using the component with a block template, which the component yields the percentage
+   value to:
+
+   &#x60;&#x60;&#x60;hbs
+   {{#bs-progress}}
+     {{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}
+   {{/bs-progress}}
+   &#x60;&#x60;&#x60;
+
+   @property showLabel
+   @type boolean
+   @default false
+   @public
+   */
+  showLabel: false,
+
+  /**
+   * Create a striped effect, see http://getbootstrap.com/components/#progress-striped
+   *
+   * @property striped
+   * @type boolean
+   * @default false
+   * @public
+   */
+  striped: false,
+
+  /**
+   * Animate the stripes, see http://getbootstrap.com/components/#progress-animated
+   *
+   * @property animate
+   * @type boolean
+   * @default false
+   * @public
+   */
+  animate: false,
+
+  /**
+   * Specify to how many digits the progress bar label should be rounded.
+   *
+   * @property roundDigits
+   * @type number
+   * @default 0
+   * @public
+   */
+  roundDigits: 0,
+
+  progressBarStriped: Ember.computed.alias(&#x27;striped&#x27;),
+  active: Ember.computed.alias(&#x27;animate&#x27;),
+
+  ariaValuenow: Ember.computed.alias(&#x27;value&#x27;),
+  ariaValuemin: Ember.computed.alias(&#x27;minValue&#x27;),
+  ariaValuemax: Ember.computed.alias(&#x27;maxValue&#x27;),
+
+  /**
+   * The percentage of &#x60;value&#x60;
+   *
+   * @property percent
+   * @type number
+   * @protected
+   * @readonly
+   */
+  percent: Ember.computed(&#x27;value&#x27;,&#x27;minValue&#x27;,&#x27;maxValue&#x27;, function() {
+    var value = parseFloat(this.get(&#x27;value&#x27;)),
+      minValue = parseFloat(this.get(&#x27;minValue&#x27;)),
+      maxValue = parseFloat(this.get(&#x27;maxValue&#x27;));
+
+    return Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100;
+  }),
+
+  /**
+   * The percentage of &#x60;value&#x60;, rounded to &#x60;roundDigits&#x60; digits
+   *
+   * @property percentRounded
+   * @type number
+   * @protected
+   * @readonly
+   */
+  percentRounded: Ember.computed(&#x27;percent&#x27;,&#x27;roundDigits&#x27;, function() {
+    var roundFactor = Math.pow(10, this.get(&#x27;roundDigits&#x27;));
+    return Math.round(this.get(&#x27;percent&#x27;) * roundFactor) / roundFactor;
+  }),
+
+  /**
+   * @property style
+   * @type string
+   * @private
+   * @readonly
+   */
+  style: Ember.computed(&#x27;percent&#x27;, function() {
+    var percent = this.get(&#x27;percent&#x27;);
+    return new Ember.Handlebars.SafeString(&#x60;width: ${percent}%&#x60;);
+ })
+
 });
+
     </pre>
 </div>
                     </div>

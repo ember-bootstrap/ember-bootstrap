@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.5.0.96dd18c3</span></h1>
+    <h1>API Docs <span class="small">v0.6.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -59,7 +59,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-modal-footer.js.html#l5"><code>addon&#x2F;components&#x2F;bs-modal-footer.js:5</code></a>
+            Defined in: <a href="../files/addon_components_bs-modal-footer.js.html#l4"><code>addon&#x2F;components&#x2F;bs-modal-footer.js:4</code></a>
         </div>
 
 
@@ -366,6 +366,10 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_backdropClose" data-tablink="backdropClose">backdropClose</a>
 
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_body" data-tablink="body">body</a>
+
+                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_classNameBindings" data-tablink="classNameBindings">classNameBindings</a>
 
@@ -398,20 +402,16 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
 
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_footer" data-tablink="footer">footer</a>
+
+                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_hasBlock" data-tablink="hasBlock">hasBlock</a>
 
                             </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_hasBlockParams" data-tablink="hasBlockParams">hasBlockParams</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_header" data-tablink="header">header</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_header" data-tablink="header">header</a>
 
                             </li>
                             <li class="index-item property public">
@@ -4045,6 +4045,39 @@
                     
                     
                     </div>
+                    <div id="property_body" class="property item public">
+                        <h3 class="name">body
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l78"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:78</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Generate a modal body component automatically. Set to false to disable. In this case you would want to include an
+                    instance of <a href="../classes/Components.ModalBody.html" class="crosslink">Components.ModalBody</a> in the components block template.</p>
+                    <p>Always set this to false if <code>header</code> and/or <code>footer</code> is false!</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
                     <div id="property_classNameBindings" class="property item public inherited">
                         <h3 class="name">classNameBindings
                             <span class="small">Array</span>
@@ -4188,7 +4221,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal-footer.js.html#l17"><code>addon&#x2F;components&#x2F;bs-modal-footer.js:17</code></a>
+                            <a href="../files/addon_components_bs-modal-footer.js.html#l16"><code>addon&#x2F;components&#x2F;bs-modal-footer.js:16</code></a>
                             </p>
                     
                     
@@ -4403,6 +4436,38 @@
                     
                     
                     </div>
+                    <div id="property_footer" class="property item public">
+                        <h3 class="name">footer
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l91"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:91</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an
+                    instance of <a href="../classes/Components.ModalFooter.html" class="crosslink">Components.ModalFooter</a> in the components block template</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
                     <div id="property_hasBlock" class="property item public inherited">
                         <h3 class="name">hasBlock
                             <span class="small">unknown</span>
@@ -4539,39 +4604,6 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal-dialog.js.html#l78"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:78</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Generate a modal body component automatically. Set to false to disable. In this case you would want to include an
-                    instance of <a href="../classes/Components.ModalBody.html" class="crosslink">Components.ModalBody</a> in the components block template.</p>
-                    <p>Always set this to false if <code>header</code> and/or <code>footer</code> is false!</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_header" class="property item public">
-                        <h3 class="name">header
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
                             <a href="../files/addon_components_bs-modal-dialog.js.html#l67"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:67</code></a>
                             </p>
                     
@@ -4581,38 +4613,6 @@
                         <div class="description">
                             <p>Generate a modal header component automatically. Set to false to disable. In this case you would want to include an
                     instance of <a href="../classes/Components.ModalHeader.html" class="crosslink">Components.ModalHeader</a> in the components block template</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_header" class="property item public">
-                        <h3 class="name">header
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal-dialog.js.html#l91"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:91</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an
-                    instance of <a href="../classes/Components.ModalFooter.html" class="crosslink">Components.ModalFooter</a> in the components block template</p>
                     
                         </div>
                     
@@ -4985,7 +4985,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal-footer.js.html#l53"><code>addon&#x2F;components&#x2F;bs-modal-footer.js:53</code></a>
+                            <a href="../files/addon_components_bs-modal-footer.js.html#l52"><code>addon&#x2F;components&#x2F;bs-modal-footer.js:52</code></a>
                             </p>
                     
                     
@@ -5016,7 +5016,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal-footer.js.html#l42"><code>addon&#x2F;components&#x2F;bs-modal-footer.js:42</code></a>
+                            <a href="../files/addon_components_bs-modal-footer.js.html#l41"><code>addon&#x2F;components&#x2F;bs-modal-footer.js:41</code></a>
                             </p>
                     
                     
@@ -5048,7 +5048,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal-footer.js.html#l29"><code>addon&#x2F;components&#x2F;bs-modal-footer.js:29</code></a>
+                            <a href="../files/addon_components_bs-modal-footer.js.html#l28"><code>addon&#x2F;components&#x2F;bs-modal-footer.js:28</code></a>
                             </p>
                     
                     
@@ -5411,13 +5411,14 @@
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
+                    <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
-                    <li><a href="../classes/Mixins.Bootstrap.SubComponent.html">Mixins.Bootstrap.SubComponent</a></li>
                     <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
+                    <li><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
                     <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
                     <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>

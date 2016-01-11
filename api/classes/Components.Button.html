@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.5.0.96dd18c3</span></h1>
+    <h1>API Docs <span class="small">v0.6.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -58,7 +58,6 @@
             <ul class="inline commas">
                     <li><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
                     <li><a href="Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-                    <li><a href="Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
             </ul>
         </div>
 
@@ -67,7 +66,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-button.js.html#l8"><code>addon&#x2F;components&#x2F;bs-button.js:8</code></a>
+            Defined in: <a href="../files/addon_components_bs-button.js.html#l7"><code>addon&#x2F;components&#x2F;bs-button.js:7</code></a>
         </div>
 
 
@@ -78,9 +77,9 @@
     <p>Implements a HTML button element, with support for all <a href="http://getbootstrap.com/css/#buttons">Bootstrap button CSS styles</a>
 as well as advanced functionality such as button states.</p>
 <h3>Basic Usage</h3>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-button type="primary" icon="glyphicon glyphicon-download"}}
+<pre class="code prettyprint"><code class="language-hbs">\{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
    Downloads
-{{/bs-button}}
+\{{/bs-button}}
 </code></pre>
 <h3>Actions</h3>
 <p>Set the action property of the component to send an action to your controller. The following parameters will be sent:</p>
@@ -89,20 +88,20 @@ as well as advanced functionality such as button states.</p>
 <li>event: the browsers event object</li>
 <li>callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling</li>
 </ul>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
+<pre class="code prettyprint"><code class="language-hbs">\{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
    Download
-{{/bs-button}}
+\{{/bs-button}}
 </code></pre>
 <h3>States</h3>
-<p>Use the <code>textState</code> property to change the label of the button. You can bind it to a controller property to set a "loading" state for example.
+<p>Use the <code>textState</code> property to change the label of the button. You can bind it to a controller property to set a &quot;loading&quot; state for example.
 The label of the button will be taken from the <code>&lt;state&gt;Text</code> property.</p>
-<pre class="code prettyprint"><code class="language-hbs">{{bs-button type="primary" icon="glyphicon glyphicon-download" textState=buttonState defaultText="Download" loadingText="Loading..." action="download"}}
+<pre class="code prettyprint"><code class="language-hbs">\{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
 </code></pre>
 <pre class="code prettyprint"><code class="language-js">App.ApplicationController = Ember.Controller.extend({
-  buttonState: "default"
+  buttonState: &quot;default&quot;
   actions: {
     download: function() {
-      this.set("buttonState", "loading");
+      this.set(&quot;buttonState&quot;, &quot;loading&quot;);
     }
   }
 });
@@ -110,8 +109,8 @@ The label of the button will be taken from the <code>&lt;state&gt;Text</code> pr
 <h3>Promise support for automatic state change</h3>
 <p>When using the callback function of the click action to supply a Promise for any asynchronous operation the button will
 manage its <code>textState</code> property automatically, changing its value according to the state of the promise:
-"default" &gt; "pending" &gt; "resolved"/"rejected"</p>
-<pre class="code prettyprint"><code class="language-hbs">{{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" action="download"}}
+&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;</p>
+<pre class="code prettyprint"><code class="language-hbs">\{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=&quot;download&quot;}}
 </code></pre>
 <pre class="code prettyprint"><code class="language-js">App.ApplicationController = Ember.Controller.extend({
   actions: {
@@ -122,9 +121,6 @@ manage its <code>textState</code> property automatically, changing its value acc
   }
 });
 </code></pre>
-<h3>I18n support</h3>
-<p>Supports translateable properties if <a href="https://github.com/jamesarosen/ember-i18n">ember-i18n</a> is present.
-See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSupport</a></p>
 
 </div>
 
@@ -1272,7 +1268,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l252"><code>addon&#x2F;components&#x2F;bs-button.js:252</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l244"><code>addon&#x2F;components&#x2F;bs-button.js:244</code></a>
                             </p>
                     
                     
@@ -3355,7 +3351,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l229"><code>addon&#x2F;components&#x2F;bs-button.js:229</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l221"><code>addon&#x2F;components&#x2F;bs-button.js:221</code></a>
                             </p>
                     
                     
@@ -4142,7 +4138,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l131"><code>addon&#x2F;components&#x2F;bs-button.js:131</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l123"><code>addon&#x2F;components&#x2F;bs-button.js:123</code></a>
                             </p>
                     
                     
@@ -4209,7 +4205,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l141"><code>addon&#x2F;components&#x2F;bs-button.js:141</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l133"><code>addon&#x2F;components&#x2F;bs-button.js:133</code></a>
                             </p>
                     
                     
@@ -4241,7 +4237,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l121"><code>addon&#x2F;components&#x2F;bs-button.js:121</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l113"><code>addon&#x2F;components&#x2F;bs-button.js:113</code></a>
                             </p>
                     
                     
@@ -4371,7 +4367,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                                     Mixins.TypeClass
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-button.js.html#l92"><code>addon&#x2F;components&#x2F;bs-button.js:92</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l84"><code>addon&#x2F;components&#x2F;bs-button.js:84</code></a>
                             </p>
                     
                     
@@ -4490,7 +4486,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l102"><code>addon&#x2F;components&#x2F;bs-button.js:102</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l94"><code>addon&#x2F;components&#x2F;bs-button.js:94</code></a>
                             </p>
                     
                     
@@ -4520,7 +4516,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l111"><code>addon&#x2F;components&#x2F;bs-button.js:111</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l103"><code>addon&#x2F;components&#x2F;bs-button.js:103</code></a>
                             </p>
                     
                     
@@ -4750,7 +4746,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l180"><code>addon&#x2F;components&#x2F;bs-button.js:180</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l172"><code>addon&#x2F;components&#x2F;bs-button.js:172</code></a>
                             </p>
                     
                     
@@ -4781,7 +4777,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l162"><code>addon&#x2F;components&#x2F;bs-button.js:162</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l154"><code>addon&#x2F;components&#x2F;bs-button.js:154</code></a>
                             </p>
                     
                     
@@ -4811,7 +4807,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l171"><code>addon&#x2F;components&#x2F;bs-button.js:171</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l163"><code>addon&#x2F;components&#x2F;bs-button.js:163</code></a>
                             </p>
                     
                     
@@ -5067,7 +5063,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l220"><code>addon&#x2F;components&#x2F;bs-button.js:220</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l212"><code>addon&#x2F;components&#x2F;bs-button.js:212</code></a>
                             </p>
                     
                     
@@ -5273,7 +5269,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l208"><code>addon&#x2F;components&#x2F;bs-button.js:208</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l200"><code>addon&#x2F;components&#x2F;bs-button.js:200</code></a>
                             </p>
                     
                     
@@ -5306,7 +5302,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l152"><code>addon&#x2F;components&#x2F;bs-button.js:152</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l144"><code>addon&#x2F;components&#x2F;bs-button.js:144</code></a>
                             </p>
                     
                     
@@ -5369,7 +5365,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-button.js.html#l198"><code>addon&#x2F;components&#x2F;bs-button.js:198</code></a>
+                            <a href="../files/addon_components_bs-button.js.html#l190"><code>addon&#x2F;components&#x2F;bs-button.js:190</code></a>
                             </p>
                     
                     
@@ -5556,13 +5552,14 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
+                    <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
-                    <li><a href="../classes/Mixins.Bootstrap.SubComponent.html">Mixins.Bootstrap.SubComponent</a></li>
                     <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
+                    <li><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
                     <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
                     <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>

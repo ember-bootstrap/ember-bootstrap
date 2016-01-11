@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.5.0.96dd18c3</span></h1>
+    <h1>API Docs <span class="small">v0.6.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,19 +53,13 @@
 </div>
 
 <div class="well well-small">
-        <div class="uses">
-            Uses
-            <ul class="inline commas">
-                    <li><a href="Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
-            </ul>
-        </div>
 
         <div class="extends">
             Extends <a href="../classes/Components.FormGroup.html" class="crosslink">Components.FormGroup</a>
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-form-element.js.html#l14"><code>addon&#x2F;components&#x2F;bs-form-element.js:14</code></a>
+            Defined in: <a href="../files/addon_components_bs-form-element.js.html#l13"><code>addon&#x2F;components&#x2F;bs-form-element.js:13</code></a>
         </div>
 
 
@@ -77,22 +71,22 @@
 <h3>Form layout</h3>
 <p>The appropriate Bootstrap markup for the given <code>formLayout</code> and <code>controlType</code> is automatically generated to easily
 create forms without coding the default Bootstrap form markup by hand:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout="horizontal" action="submit"}}
-  {{bs-form-element controlType="email" label="Email" placeholder="Email" value=email}}
-  {{bs-form-element controlType="password" label="Password" placeholder="Password" value=password}}
-  {{bs-form-element controlType="checkbox" label="Remember me" value=rememberMe}}
-  {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
-{{/bs-form}}
+<pre class="code prettyprint"><code class="language-hbs">\{{#bs-form formLayout=&quot;horizontal&quot; action=&quot;submit&quot;}}
+  \{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+  \{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
+  \{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
+  \{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+\{{/bs-form}}
 </code></pre>
 <h3>Form validation</h3>
 <p>In the following example the control elements of the three form elements value will be bound to the properties
 (given by <code>property</code>) of the form's <code>model</code>, which in this case is its controller (see <code>model=this</code>):</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout="horizontal" model=this action="submit"}}
-  {{bs-form-element controlType="email" label="Email" placeholder="Email" property="email"}}
-  {{bs-form-element controlType="password" label="Password" placeholder="Password" property="password"}}
-  {{bs-form-element controlType="checkbox" label="Remember me" property="rememberMe"}}
-  {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
-{{/bs-form}}
+<pre class="code prettyprint"><code class="language-hbs">\{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
+  \{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+  \{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+  \{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+  \{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+\{{/bs-form}}
 </code></pre>
 <p>By using this indirection in comparison to directly binding the <code>value</code> property, you get the benefit of automatic
 form validation, given that your <code>model</code> is implementing <a href="https://github.com/dockyard/ember-validations">ember-validations</a>.</p>
@@ -137,9 +131,6 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
 <li>the <code>successIcon</code> feedback icon is displayed if <code>controlType</code> is a text field</li>
 <li>the validation messages are removed</li>
 </ul>
-<h3>I18n support</h3>
-<p>Supports translateable properties if <a href="https://github.com/jamesarosen/ember-i18n">ember-i18n</a> is present.
-See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSupport</a></p>
 
 </div>
 
@@ -4182,7 +4173,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l204"><code>addon&#x2F;components&#x2F;bs-form-element.js:204</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l196"><code>addon&#x2F;components&#x2F;bs-form-element.js:196</code></a>
                             </p>
                     
                     
@@ -4212,7 +4203,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l179"><code>addon&#x2F;components&#x2F;bs-form-element.js:179</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l171"><code>addon&#x2F;components&#x2F;bs-form-element.js:171</code></a>
                             </p>
                     
                     
@@ -4246,7 +4237,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l195"><code>addon&#x2F;components&#x2F;bs-form-element.js:195</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l187"><code>addon&#x2F;components&#x2F;bs-form-element.js:187</code></a>
                             </p>
                     
                     
@@ -4372,7 +4363,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l223"><code>addon&#x2F;components&#x2F;bs-form-element.js:223</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l215"><code>addon&#x2F;components&#x2F;bs-form-element.js:215</code></a>
                             </p>
                     
                     
@@ -4491,7 +4482,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l113"><code>addon&#x2F;components&#x2F;bs-form-element.js:113</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l105"><code>addon&#x2F;components&#x2F;bs-form-element.js:105</code></a>
                             </p>
                     
                     
@@ -4651,7 +4642,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l240"><code>addon&#x2F;components&#x2F;bs-form-element.js:240</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l232"><code>addon&#x2F;components&#x2F;bs-form-element.js:232</code></a>
                             </p>
                     
                     
@@ -4681,7 +4672,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l399"><code>addon&#x2F;components&#x2F;bs-form-element.js:399</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l391"><code>addon&#x2F;components&#x2F;bs-form-element.js:391</code></a>
                             </p>
                     
                     
@@ -4711,7 +4702,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l319"><code>addon&#x2F;components&#x2F;bs-form-element.js:319</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l311"><code>addon&#x2F;components&#x2F;bs-form-element.js:311</code></a>
                             </p>
                     
                     
@@ -4867,7 +4858,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l249"><code>addon&#x2F;components&#x2F;bs-form-element.js:249</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l241"><code>addon&#x2F;components&#x2F;bs-form-element.js:241</code></a>
                             </p>
                     
                     
@@ -4925,7 +4916,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l299"><code>addon&#x2F;components&#x2F;bs-form-element.js:299</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l291"><code>addon&#x2F;components&#x2F;bs-form-element.js:291</code></a>
                             </p>
                     
                     
@@ -4983,7 +4974,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l257"><code>addon&#x2F;components&#x2F;bs-form-element.js:257</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l249"><code>addon&#x2F;components&#x2F;bs-form-element.js:249</code></a>
                             </p>
                     
                     
@@ -5012,7 +5003,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l369"><code>addon&#x2F;components&#x2F;bs-form-element.js:369</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l361"><code>addon&#x2F;components&#x2F;bs-form-element.js:361</code></a>
                             </p>
                     
                     
@@ -5042,7 +5033,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l384"><code>addon&#x2F;components&#x2F;bs-form-element.js:384</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l376"><code>addon&#x2F;components&#x2F;bs-form-element.js:376</code></a>
                             </p>
                     
                     
@@ -5073,7 +5064,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l358"><code>addon&#x2F;components&#x2F;bs-form-element.js:358</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l350"><code>addon&#x2F;components&#x2F;bs-form-element.js:350</code></a>
                             </p>
                     
                     
@@ -5249,7 +5240,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l342"><code>addon&#x2F;components&#x2F;bs-form-element.js:342</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l334"><code>addon&#x2F;components&#x2F;bs-form-element.js:334</code></a>
                             </p>
                     
                     
@@ -5278,7 +5269,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l350"><code>addon&#x2F;components&#x2F;bs-form-element.js:350</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l342"><code>addon&#x2F;components&#x2F;bs-form-element.js:342</code></a>
                             </p>
                     
                     
@@ -5307,7 +5298,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l334"><code>addon&#x2F;components&#x2F;bs-form-element.js:334</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l326"><code>addon&#x2F;components&#x2F;bs-form-element.js:326</code></a>
                             </p>
                     
                     
@@ -5366,7 +5357,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l104"><code>addon&#x2F;components&#x2F;bs-form-element.js:104</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l96"><code>addon&#x2F;components&#x2F;bs-form-element.js:96</code></a>
                             </p>
                     
                     
@@ -5466,7 +5457,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l232"><code>addon&#x2F;components&#x2F;bs-form-element.js:232</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l224"><code>addon&#x2F;components&#x2F;bs-form-element.js:224</code></a>
                             </p>
                     
                     
@@ -5496,7 +5487,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l170"><code>addon&#x2F;components&#x2F;bs-form-element.js:170</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l162"><code>addon&#x2F;components&#x2F;bs-form-element.js:162</code></a>
                             </p>
                     
                     
@@ -5557,7 +5548,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l161"><code>addon&#x2F;components&#x2F;bs-form-element.js:161</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l153"><code>addon&#x2F;components&#x2F;bs-form-element.js:153</code></a>
                             </p>
                     
                     
@@ -5587,7 +5578,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l148"><code>addon&#x2F;components&#x2F;bs-form-element.js:148</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l140"><code>addon&#x2F;components&#x2F;bs-form-element.js:140</code></a>
                             </p>
                     
                     
@@ -5620,7 +5611,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l213"><code>addon&#x2F;components&#x2F;bs-form-element.js:213</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l205"><code>addon&#x2F;components&#x2F;bs-form-element.js:205</code></a>
                             </p>
                     
                     
@@ -5651,7 +5642,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l275"><code>addon&#x2F;components&#x2F;bs-form-element.js:275</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l267"><code>addon&#x2F;components&#x2F;bs-form-element.js:267</code></a>
                             </p>
                     
                     
@@ -5680,7 +5671,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l265"><code>addon&#x2F;components&#x2F;bs-form-element.js:265</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l257"><code>addon&#x2F;components&#x2F;bs-form-element.js:257</code></a>
                             </p>
                     
                     
@@ -5901,7 +5892,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                                     Components.FormGroup
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-form-element.js.html#l307"><code>addon&#x2F;components&#x2F;bs-form-element.js:307</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l299"><code>addon&#x2F;components&#x2F;bs-form-element.js:299</code></a>
                             </p>
                     
                     
@@ -5934,7 +5925,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                                     Components.FormGroup
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-form-element.js.html#l283"><code>addon&#x2F;components&#x2F;bs-form-element.js:283</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l275"><code>addon&#x2F;components&#x2F;bs-form-element.js:275</code></a>
                             </p>
                     
                     
@@ -5965,7 +5956,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l131"><code>addon&#x2F;components&#x2F;bs-form-element.js:131</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l123"><code>addon&#x2F;components&#x2F;bs-form-element.js:123</code></a>
                             </p>
                     
                     
@@ -6072,7 +6063,7 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l429"><code>addon&#x2F;components&#x2F;bs-form-element.js:429</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l421"><code>addon&#x2F;components&#x2F;bs-form-element.js:421</code></a>
                             </p>
                     
                     
@@ -6223,13 +6214,14 @@ See <a href="../classes/Mixins.I18nSupport.html" class="crosslink">Mixins.I18nSu
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
+                    <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
-                    <li><a href="../classes/Mixins.Bootstrap.SubComponent.html">Mixins.Bootstrap.SubComponent</a></li>
                     <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li><a href="../classes/Mixins.I18nSupport.html">Mixins.I18nSupport</a></li>
+                    <li><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
                     <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
                     <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
