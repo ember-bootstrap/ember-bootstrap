@@ -323,3 +323,18 @@ test('Clicking on the backdrop is ignored when backdropClose=false', function(as
     }, transitionTimeout);
   }, transitionTimeout);
 });
+
+
+test('Renders in wormhole if renderInPlace is not set', function(assert) {
+  this.render(hbs`{{#bs-modal title="Simple Dialog"}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
+
+  assert.equal(this.$('.modal').length, 1, 'Modal exists.');
+  assert.equal(this.$('.modal').parent().attr('id'), 'ember-bootstrap-modal-container');
+});
+
+test('Renders in place (no wormhole) if renderInPlace is set', function(assert) {
+  this.render(hbs`{{#bs-modal title="Simple Dialog" renderInPlace=true}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
+
+  assert.equal(this.$('.modal').length, 1, 'Modal exists.');
+  assert.notEqual(this.$('.modal').parent().attr('id'), 'ember-bootstrap-modal-container');
+});

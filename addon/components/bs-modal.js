@@ -109,6 +109,8 @@ var observeOpen = function () {
  element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and
  are not effected by parent elements with `overflow: hidden` for example.
 
+ If you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.
+
  @class Modal
  @namespace Components
  @extends Ember.Component
@@ -319,6 +321,16 @@ export default Ember.Component.extend({
    * @public
    */
   backdropClose: true,
+
+  /**
+   * If true component will render in place, rather than be wormholed.
+   *
+   * @property renderInPlace
+   * @type boolean
+   * @default false
+   * @public
+   */
+  renderInPlace: false,
 
   /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
