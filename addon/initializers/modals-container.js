@@ -1,3 +1,5 @@
+import Config from 'ember-bootstrap/config';
+
 /*globals document */
 const hasDOM = typeof document !== 'undefined';
 
@@ -13,9 +15,13 @@ function appendContainerElement(rootElementId, id) {
 }
 
 function initialize() {
+  if (!Config.insertEmberWormholeElementToDom) {
+    return;
+  }
+  
   const application = arguments[1] || arguments[0];
   const modalContainerElId = 'ember-bootstrap-modal-container';
-  appendContainerElement(application.rootElement, modalContainerElId);
+  appendContainerElement(application.rootElement, modalContainerElId);  
 }
 
 export default {

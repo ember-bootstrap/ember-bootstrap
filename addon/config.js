@@ -3,6 +3,7 @@ var Config = {
     formValidationErrorIcon: 'glyphicon glyphicon-remove',
     formValidationWarningIcon: 'glyphicon glyphicon-warning-sign',
     formValidationInfoIcon: 'glyphicon glyphicon-info-sign',
+    insertEmberWormholeElementToDom: true,
 
     load: function(config) {
         for (var property in this) {
