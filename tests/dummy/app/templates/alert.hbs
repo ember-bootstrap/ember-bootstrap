@@ -17,5 +17,5 @@
 <h2>Bound visibility</h2>
 
 <label>{{input type="checkbox" checked=visible}} Show/Hide</label>
-{{#bs-alert type="danger" visible=visible}}<strong>Oh snap!</strong> Change a few things up and try submitting again.{{/bs-alert}}
+{{#bs-alert type="danger" visible=visible dismissedAction=(action "close")}}<strong>Oh snap!</strong> Change a few things up and try submitting again.{{/bs-alert}}
 
