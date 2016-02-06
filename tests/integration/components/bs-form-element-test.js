@@ -102,12 +102,18 @@ test('controlType "select" is supported', function (assert) {
 });
 
 
-//test('button supports ember-i18n if present', function(assert) {
-//    Ember.I18n.translations = {
-//        i18nKey: 'translated'
-//    };
-//    var component = this.subject({
-//        labelTranslation: 'i18nKey'
-//    });
-//    assert.equal(this.$().find('label').text().trim(), 'translated', 'label has translated text');
-//});
+test('Changing formLayout changes markup', function (assert) {
+  this.set('formLayout', 'vertical');
+  this.render(hbs`{{#bs-form horizontalLabelGridClass="col-sm-4" formLayout=formLayout}}{{bs-form-element controlType="text" label="myLabel"}}{{/bs-form}}`);
+  assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
+  assert.equal(this.$(':first-child').children().eq(1).prop('tagName'), 'LABEL', 'first child is a label');
+  assert.equal(this.$(':first-child').children().eq(2).prop('tagName'), 'INPUT', 'second child is a input');
+
+  this.set('formLayout', 'horizontal');
+  assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
+  assert.equal(this.$(':first-child').children().eq(1).prop('tagName'), 'LABEL', 'first child is a label');
+  assert.ok(this.$(':first-child').children().eq(1).hasClass('col-sm-4'), 'label has grid class');
+  assert.equal(this.$(':first-child').children().eq(2).prop('tagName'), 'DIV', 'second child is a div');
+  assert.ok(this.$(':first-child').children().eq(2).hasClass('col-sm-8'), 'div has grid class');
+  assert.equal(this.$(':first-child').children().eq(2).find(':first-child').prop('tagName'), 'INPUT', 'divs first child is an input');
+});

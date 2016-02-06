@@ -398,7 +398,7 @@ export default FormGroup.extend({
         return this.nearestOfType(Form);
     }),
 
-    layoutName: Ember.computed('formLayout','controlType',function() {
+    formElementTemplate: Ember.computed('formLayout','controlType',function() {
         var formLayout = this.getWithDefault('formLayout','vertical'),
             inputLayout,
             controlType = this.get('controlType');
@@ -414,9 +414,6 @@ export default FormGroup.extend({
         return 'components/form-element/' + formLayout + '/' + inputLayout;
     }),
 
-    _rerender: Ember.observer('layoutName', function() {
-        this.rerender();
-    }),
 
     /**
      * Listen for focusOut events from the control element to automatically set `showValidation` to true to enable
