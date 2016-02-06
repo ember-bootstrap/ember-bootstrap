@@ -29,6 +29,11 @@
     {{bs-form-element controlType="textarea" label="Comments" value=comments}}
 {{/bs-form}}
 
-<h2>Manually built form</h2>
+<h2>Custom Controls</h2>
 
-<p>todo</p>
+{{#bs-form formLayout=formLayout model=this action="submit"}}
+    {{#bs-form-element label="Select-2" property="gender" as |value id|}}
+        {{select-2 id=id content=genderChoices optionLabelPath="label" value=value searchEnabled=false}}
+    {{/bs-form-element}}
+    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+{{/bs-form}}

@@ -1,5 +1,9 @@
 {{#if hasLabel}}
-    <label class="control-label" for="{{concat elementId '-' name}}">{{label}}</label>
+    <label class="control-label" for="{{formElementId}}">{{label}}</label>
 {{/if}}
-{{bs-input id=(concat elementId '-' name) name=name type=controlType value=value placeholder=placeholder}}
+{{#if hasBlock}}
+    {{yield value formElementId}}
+{{else}}
+    {{bs-input id=formElementId name=name type=controlType value=value placeholder=placeholder}}
+{{/if}}
 {{partial "components/form-element/feedback-icon"}}

@@ -1,13 +1,21 @@
 {{#if hasLabel}}
-    <label class="control-label {{horizontalLabelGridClass}}" for="{{concat elementId '-' name}}">{{label}}</label>
+    <label class="control-label {{horizontalLabelGridClass}}" for="{{formElementId}}">{{label}}</label>
     <div class="{{horizontalInputGridClass}}">
-        {{bs-input id=(concat elementId '-' name) name=name type=controlType value=value placeholder=placeholder}}
+        {{#if hasBlock}}
+            {{yield value formElementId}}
+        {{else}}
+            {{bs-input id=formElementId name=name type=controlType value=value placeholder=placeholder}}
+        {{/if}}
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
     </div>
 {{else}}
     <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
-        {{bs-input name=name type=controlType value=value placeholder=placeholder}}
+        {{#if hasBlock}}
+            {{yield value}}
+        {{else}}
+            {{bs-input name=name type=controlType value=value placeholder=placeholder}}
+        {{/if}}
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
     </div>

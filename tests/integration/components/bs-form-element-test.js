@@ -117,3 +117,21 @@ test('Changing formLayout changes markup', function (assert) {
   assert.ok(this.$(':first-child').children().eq(2).hasClass('col-sm-8'), 'div has grid class');
   assert.equal(this.$(':first-child').children().eq(2).find(':first-child').prop('tagName'), 'INPUT', 'divs first child is an input');
 });
+
+test('Custom controls are supported', function (assert) {
+  this.set('gender', 'male');
+  this.render(hbs`
+    {{#bs-form formLayout=formLayout model=this}}
+    {{#bs-form-element label="Gender" property="gender" as |value|}}
+      <div id="value">{{value}}</div>
+    {{/bs-form-element}}
+    {{/bs-form}}
+  `);
+
+  assert.equal(this.$('#value').length, 1, 'block template is rendered');
+  assert.equal(this.$('#value').text().trim(), 'male', 'value is yielded to block template');
+
+});
+
+
+

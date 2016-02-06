@@ -1,5 +1,5 @@
 {{#if hasLabel}}
-    <label class="control-label" for="{{concat elementId '-' name}}">{{label}}</label>
+    <label class="control-label" for="{{formElementId}}">{{label}}</label>
 {{/if}}
-{{bs-select id=(concat elementId '-' name) name=name content=choices optionValuePath=choiceValueProperty optionLabelPath=choiceLabelProperty value=value}}
+{{bs-select id=formElementId name=name content=choices optionValuePath=choiceValueProperty optionLabelPath=choiceLabelProperty value=value}}
 {{partial "components/form-element/feedback-icon"}}
