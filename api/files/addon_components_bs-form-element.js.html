@@ -74,12 +74,12 @@ var nonTextFieldControlTypes = Ember.A([
  create forms without coding the default Bootstrap form markup by hand:
 
  &#x60;&#x60;&#x60;hbs
- \{{#bs-form formLayout=&quot;horizontal&quot; action=&quot;submit&quot;}}
- \{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
- \{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
- \{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
- \{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
- \{{/bs-form}}
+ {{#bs-form formLayout=&quot;horizontal&quot; action=&quot;submit&quot;}}
+   {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+   {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
+   {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
+   {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+ {{/bs-form}}
  &#x60;&#x60;&#x60;
 
  ### Form validation
@@ -88,12 +88,12 @@ var nonTextFieldControlTypes = Ember.A([
  (given by &#x60;property&#x60;) of the form&#x27;s &#x60;model&#x60;, which in this case is its controller (see &#x60;model=this&#x60;):
 
  &#x60;&#x60;&#x60;hbs
- \{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
- \{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
- \{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
- \{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
- \{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
- \{{/bs-form}}
+ {{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
+   {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+   {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+   {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+   {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+ {{/bs-form}}
  &#x60;&#x60;&#x60;
 
  By using this indirection in comparison to directly binding the &#x60;value&#x60; property, you get the benefit of automatic
@@ -150,11 +150,11 @@ var nonTextFieldControlTypes = Ember.A([
  (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
 
  &#x60;&#x60;&#x60;hbs
- \{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
- \{{#bs-form-element label=&quot;Select-2&quot; property=&quot;gender&quot; as |value id|}}
-   \{{select-2 id=id content=genderChoices optionLabelPath=&quot;label&quot; value=value searchEnabled=false}}
- \{{/bs-form-element}}
- \{{/bs-form}}
+ {{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
+   {{#bs-form-element label=&quot;Select-2&quot; property=&quot;gender&quot; as |value id|}}
+     {{select-2 id=id content=genderChoices optionLabelPath=&quot;label&quot; value=value searchEnabled=false}}
+   {{/bs-form-element}}
+ {{/bs-form}}
  &#x60;&#x60;&#x60;
 
  @class FormElement
