@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v0.6.0",
+        "version": "v0.6.1",
         "external": {
             "data": [
                 {
@@ -385,7 +385,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-alert.js",
             "line": 5,
-            "description": "Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts\n\nBy default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the\n`type` property for proper styling.\n\n```hbs\n{{#bs-alert type=\"success\"}}\n   <strong>Well done!</strong> You successfully read this important alert message.\n{{/bs-alert}}\n```",
+            "description": "Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts\n\nBy default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the\n`type` property for proper styling.\n\n```hbs\n{{#bs-alert type=\"success\"}}\n<strong>Well done!</strong> You successfully read this important alert message.\n{{/bs-alert}}\n```",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.TypeClass"
@@ -512,8 +512,8 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-form-element.js",
-            "line": 13,
-            "description": "Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.\n\n### Form layout\n\nThe appropriate Bootstrap markup for the given `formLayout` and `controlType` is automatically generated to easily\ncreate forms without coding the default Bootstrap form markup by hand:\n\n```hbs\n\\{{#bs-form formLayout=\"horizontal\" action=\"submit\"}}\n  \\{{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" value=email}}\n  \\{{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" value=password}}\n  \\{{bs-form-element controlType=\"checkbox\" label=\"Remember me\" value=rememberMe}}\n  \\{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n\\{{/bs-form}}\n```\n\n### Form validation\n\nIn the following example the control elements of the three form elements value will be bound to the properties\n(given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):\n\n```hbs\n\\{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\"}}\n  \\{{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" property=\"email\"}}\n  \\{{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" property=\"password\"}}\n  \\{{bs-form-element controlType=\"checkbox\" label=\"Remember me\" property=\"rememberMe\"}}\n  \\{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n\\{{/bs-form}}\n```\n\nBy using this indirection in comparison to directly binding the `value` property, you get the benefit of automatic\nform validation, given that your `model` is implementing [ember-validations](https://github.com/dockyard/ember-validations).\n\nIn the example above the `model` was our controller itself, so the control elements were bound to the appropriate\nproperties of our controller. A controller implementing validations on those properties could look like this:\n\n```js\nimport Ember from 'ember';\nimport EmberValidations from 'ember-validations';\n\nexport default Ember.Controller.extend(EmberValidations,{\n  email: null,\n  password: null,\n  rememberMe: false,\n  validations: {\n    email: {\n      presence: true,\n      format: {\n        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$/\n      }\n    },\n    password: {\n      presence: true,\n      length: { minimum: 6, maximum: 10}\n    },\n    comments: {\n      length: { minimum: 5, maximum: 20}\n    }\n  }\n});\n```\n\nIf the `showValidation` property is `true` (which is automatically the case if a `focusOut` event is captured from the\ncontrol element or the containing `Components.Form` was submitted with its `model` failing validation) and there are\nvalidation errors for the `model`'s `property`, the appropriate Bootstrap validation markup (see\nhttp://getbootstrap.com/css/#forms-control-validation) is applied:\n\n* `validation` is set to 'error', which will set the `has-error` CSS class\n* the `errorIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are displayed as Bootstrap `help-block`s\n\nAs soon as the validation is successful again...\n\n* `validation` is set to 'success', which will set the `has-success` CSS class\n* the `successIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are removed",
+            "line": 12,
+            "description": "Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.\n\n### Form layout\n\nThe appropriate Bootstrap markup for the given `formLayout` and `controlType` is automatically generated to easily\ncreate forms without coding the default Bootstrap form markup by hand:\n\n```hbs\n\\{{#bs-form formLayout=\"horizontal\" action=\"submit\"}}\n\\{{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" value=email}}\n\\{{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" value=password}}\n\\{{bs-form-element controlType=\"checkbox\" label=\"Remember me\" value=rememberMe}}\n\\{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n\\{{/bs-form}}\n```\n\n### Form validation\n\nIn the following example the control elements of the three form elements value will be bound to the properties\n(given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):\n\n```hbs\n\\{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\"}}\n\\{{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" property=\"email\"}}\n\\{{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" property=\"password\"}}\n\\{{bs-form-element controlType=\"checkbox\" label=\"Remember me\" property=\"rememberMe\"}}\n\\{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n\\{{/bs-form}}\n```\n\nBy using this indirection in comparison to directly binding the `value` property, you get the benefit of automatic\nform validation, given that your `model` is implementing [ember-validations](https://github.com/dockyard/ember-validations).\n\nIn the example above the `model` was our controller itself, so the control elements were bound to the appropriate\nproperties of our controller. A controller implementing validations on those properties could look like this:\n\n```js\nimport Ember from 'ember';\nimport EmberValidations from 'ember-validations';\n\nexport default Ember.Controller.extend(EmberValidations,{\n  email: null,\n  password: null,\n  rememberMe: false,\n  validations: {\n    email: {\n      presence: true,\n      format: {\n        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$/\n      }\n    },\n    password: {\n      presence: true,\n      length: { minimum: 6, maximum: 10}\n    },\n    comments: {\n      length: { minimum: 5, maximum: 20}\n    }\n  }\n});\n```\n\nIf the `showValidation` property is `true` (which is automatically the case if a `focusOut` event is captured from the\ncontrol element or the containing `Components.Form` was submitted with its `model` failing validation) and there are\nvalidation errors for the `model`'s `property`, the appropriate Bootstrap validation markup (see\nhttp://getbootstrap.com/css/#forms-control-validation) is applied:\n\n* `validation` is set to 'error', which will set the `has-error` CSS class\n* the `errorIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are displayed as Bootstrap `help-block`s\n\nAs soon as the validation is successful again...\n\n* `validation` is set to 'success', which will set the `has-success` CSS class\n* the `successIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are removed\n\n### Custom controls\n\nApart from the standard built-in browser controls (see the `controlType` property), you can use any custom control simply\nby invoking the component with a block template. Use whatever control you might want, for example a select-2 component\n(from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):\n\n```hbs\n\\{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\"}}\n\\{{#bs-form-element label=\"Select-2\" property=\"gender\" as |value id|}}\n  \\{{select-2 id=id content=genderChoices optionLabelPath=\"label\" value=value searchEnabled=false}}\n\\{{/bs-form-element}}\n\\{{/bs-form}}\n```",
             "extends": "Components.FormGroup"
         },
         "Components.FormGroup": {
@@ -611,7 +611,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-modal.js",
             "line": 18,
-            "description": "Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals). Creating a simple modal is easy:\n```hbs\n {{#bs-modal title=\"Simple Dialog\"}}\n   Hello world!\n {{/bs-modal}}\n ```\nThis will automatically create the appropriate markup, with a modal header containing the title, and a footer containing\n a default \"Ok\" button, that will close the modal automatically (unless you set `autoClose` to false).\nA modal created this way will be visible at once. You can use the `{{#if ...}}` helper to hide all modal elements form\n the DOM until needed. Or you can bind the `open` property to trigger showing and hiding the modal:\n```hbs\n {{#bs-modal open=openModal title=\"Simple Dialog\"}}\n   Hello world!\n {{/bs-modal}}\n ```\n### Custom Markup\nTo customize your modal markup you can use the following sub components:\n{{#crossLink \"Components.ModalBody\"}}{{/crossLink}}\n {{#crossLink \"Components.ModalHeader\"}}{{/crossLink}}\n {{#crossLink \"Components.ModalFooter\"}}{{/crossLink}}\nIn the example above, these are generated for you automatically. Whenever you use one of these by yourself you should\n set the appropriate property (`body`, `footer`, `header`) to false to prevent their automatic generation. Note that\n in any case where you use a custom sub component, you must also use a custom {{#crossLink \"Components.ModalBody\"}}{{/crossLink}}!\nA common use case is to customize the buttons in the footer. Most often you will have a cancel button that closes the\n model without action, and a submit button that triggers some action. The footer component supports this case by letting\n you customize the button titles, the rest (triggering close or submit actions) automatically set up:\n```hbs\n {{#bs-modal body=false footer=false title=\"Attention\" submitAction=(action \"submit\")}}\n   {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}\n   {{bs-modal-footer closeTitle=\"Cancel\" submitTitle=\"Ok\"}}\n {{/bs-modal}}\n ```\nIf you further want to customize your modal elements, you can supply custom templates for your footer and header, as in\n the following example:\n```hbs\n {{#bs-modal body=false footer=false header=false submitAction=(action \"submit\")}}\n   {{#bs-modal-header}}\n     <h4 class=\"modal-title\"><i class=\"glyphicon glyphicon-alert\"></i> Alert</h4>\n   {{/bs-modal-header}}\n   {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}\n   {{#bs-modal-footer as |footer|}}\n     {{#bs-button action=(action \"close\" target=footer) type=\"danger\"}}Oh no, forget it!{{/bs-button}}\n     {{#bs-button buttonType=\"submit\" type=\"success\"}}Yeah!{{/bs-button}}\n   {{/bs-modal-footer}}\n {{/bs-modal}}\n ```\nNote the use of the action helper of the close button that triggers the close action on the modal footer component\n instead of on the controller, which will bubble up to the modal component and close the modal.\n### Modals with forms\nThere is a special case when you have a form inside your modals body: you probably do not want to have a submit button\n within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not\n trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an\n thus bypass the form validation feature of the form component.\n```hbs\n {{#bs-modal title=\"Form Example\" body=false footer=false}}\n   {{#bs-modal-body}}\n     {{#bs-form action=(action \"submit\") model=this}}\n       {{bs-form-element controlType=\"text\" label=\"first name\" property=\"firstname\"}}\n       {{bs-form-element controlType=\"text\" label=\"last name\" property=\"lastname\"}}\n     {{/bs-form}}\n   {{/bs-modal-body}}\n   {{bs-modal-footer closeTitle=(t \"contact.label.cancel\") submitTitle=(t \"contact.label.ok\")}}\n {{/bs-modal}}\n ```\nThe modal component supports this common case by triggering the submit event programmatically on the body's form if\n present whenever the footer's submit button is pressed, so the example above will work as expected.\n### Modals inside wormhole\nModals make use of the [ember-wormhole](https://github.com/yapplabs/ember-wormhole) addon, which will be installed\n automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested\n components/templates where it belongs to logically, but to have the actual DOM elements within a special container\n element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and\n are not effected by parent elements with `overflow: hidden` for example.",
+            "description": "Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals). Creating a simple modal is easy:\n```hbs\n {{#bs-modal title=\"Simple Dialog\"}}\n   Hello world!\n {{/bs-modal}}\n ```\nThis will automatically create the appropriate markup, with a modal header containing the title, and a footer containing\n a default \"Ok\" button, that will close the modal automatically (unless you set `autoClose` to false).\nA modal created this way will be visible at once. You can use the `{{#if ...}}` helper to hide all modal elements form\n the DOM until needed. Or you can bind the `open` property to trigger showing and hiding the modal:\n```hbs\n {{#bs-modal open=openModal title=\"Simple Dialog\"}}\n   Hello world!\n {{/bs-modal}}\n ```\n### Custom Markup\nTo customize your modal markup you can use the following sub components:\n{{#crossLink \"Components.ModalBody\"}}{{/crossLink}}\n {{#crossLink \"Components.ModalHeader\"}}{{/crossLink}}\n {{#crossLink \"Components.ModalFooter\"}}{{/crossLink}}\nIn the example above, these are generated for you automatically. Whenever you use one of these by yourself you should\n set the appropriate property (`body`, `footer`, `header`) to false to prevent their automatic generation. Note that\n in any case where you use a custom sub component, you must also use a custom {{#crossLink \"Components.ModalBody\"}}{{/crossLink}}!\nA common use case is to customize the buttons in the footer. Most often you will have a cancel button that closes the\n model without action, and a submit button that triggers some action. The footer component supports this case by letting\n you customize the button titles, the rest (triggering close or submit actions) automatically set up:\n```hbs\n {{#bs-modal body=false footer=false title=\"Attention\" submitAction=(action \"submit\")}}\n   {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}\n   {{bs-modal-footer closeTitle=\"Cancel\" submitTitle=\"Ok\"}}\n {{/bs-modal}}\n ```\nIf you further want to customize your modal elements, you can supply custom templates for your footer and header, as in\n the following example:\n```hbs\n {{#bs-modal body=false footer=false header=false submitAction=(action \"submit\")}}\n   {{#bs-modal-header}}\n     <h4 class=\"modal-title\"><i class=\"glyphicon glyphicon-alert\"></i> Alert</h4>\n   {{/bs-modal-header}}\n   {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}\n   {{#bs-modal-footer as |footer|}}\n     {{#bs-button action=(action \"close\" target=footer) type=\"danger\"}}Oh no, forget it!{{/bs-button}}\n     {{#bs-button buttonType=\"submit\" type=\"success\"}}Yeah!{{/bs-button}}\n   {{/bs-modal-footer}}\n {{/bs-modal}}\n ```\nNote the use of the action helper of the close button that triggers the close action on the modal footer component\n instead of on the controller, which will bubble up to the modal component and close the modal.\n### Modals with forms\nThere is a special case when you have a form inside your modals body: you probably do not want to have a submit button\n within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not\n trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an\n thus bypass the form validation feature of the form component.\n```hbs\n {{#bs-modal title=\"Form Example\" body=false footer=false}}\n   {{#bs-modal-body}}\n     {{#bs-form action=(action \"submit\") model=this}}\n       {{bs-form-element controlType=\"text\" label=\"first name\" property=\"firstname\"}}\n       {{bs-form-element controlType=\"text\" label=\"last name\" property=\"lastname\"}}\n     {{/bs-form}}\n   {{/bs-modal-body}}\n   {{bs-modal-footer closeTitle=(t \"contact.label.cancel\") submitTitle=(t \"contact.label.ok\")}}\n {{/bs-modal}}\n ```\nThe modal component supports this common case by triggering the submit event programmatically on the body's form if\n present whenever the footer's submit button is pressed, so the example above will work as expected.\n### Modals inside wormhole\nModals make use of the [ember-wormhole](https://github.com/yapplabs/ember-wormhole) addon, which will be installed\n automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested\n components/templates where it belongs to logically, but to have the actual DOM elements within a special container\n element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and\n are not effected by parent elements with `overflow: hidden` for example.\nIf you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.",
             "extends": "Ember.Component"
         },
         "Components.ProgressBar": {
@@ -853,7 +853,7 @@
         {
             "file": "addon/components/bs-alert.js",
             "line": 47,
-            "description": "This property indicates if the alert is visible. If false it might still be in the DOM until the fade animation\nhas completed. Can be set to change the visibility of the alert box.",
+            "description": "This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation\nhas completed.",
             "itemtype": "property",
             "name": "visible",
             "type": "boolean",
@@ -915,7 +915,20 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 112,
+            "line": 97,
+            "description": "The action to be sent after the alert has been dismissed (including the CSS transition).",
+            "itemtype": "property",
+            "name": "dismissedAction",
+            "type": "string",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Alert",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-alert.js",
+            "line": 122,
             "description": "Call to make the alert visible again after it has been hidden",
             "itemtype": "method",
             "name": "show",
@@ -926,7 +939,7 @@
         },
         {
             "file": "addon/components/bs-alert.js",
-            "line": 125,
+            "line": 134,
             "description": "Call to hide the alert. If the `fade` property is true, this will fade out the alert before being finally\ndismissed.",
             "itemtype": "method",
             "name": "hide",
@@ -1524,7 +1537,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 96,
+            "line": 109,
             "description": "Text to display within a `<label>` tag.",
             "itemtype": "property",
             "name": "label",
@@ -1536,8 +1549,8 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 105,
-            "description": "The type of the control widget.\nSupported types:\n\n* 'text'\n* 'checkbox'\n* 'select'\n* 'select2' (needs [ember-select-2](https://github.com/iStefo/ember-select-2))\n* 'textarea'\n* any other type will use an input tag with the `controlType` value as the type attribute (for e.g. HTML5 input\ntypes like 'email'), and the same layout as the 'text' type",
+            "line": 118,
+            "description": "The type of the control widget.\nSupported types:\n\n* 'text'\n* 'checkbox'\n* 'select'\n* 'textarea'\n* any other type will use an input tag with the `controlType` value as the type attribute (for e.g. HTML5 input\ntypes like 'email'), and the same layout as the 'text' type",
             "itemtype": "property",
             "name": "controlType",
             "type": "string",
@@ -1548,7 +1561,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 123,
+            "line": 135,
             "description": "The value of the control element is bound to this property. You can bind it to some controller property to\nget/set the control element's value:\n\n```hbs\n{{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" value=email}}\n```\n\nNote: you loose the ability to validate this form element by directly binding to its value. It is recommended\nto use the `property` feature instead.",
             "itemtype": "property",
             "name": "value",
@@ -1559,7 +1572,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 140,
+            "line": 152,
             "description": "The property name of the form element's `model` (by default the `model` of its parent `Components.Form`) that this\nform element should represent. The control element's value will automatically be bound to the model property's\nvalue.\n\nUsing this property enables form validation on this element.",
             "itemtype": "property",
             "name": "property",
@@ -1571,7 +1584,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 153,
+            "line": 165,
             "description": "Control element's HTML5 placeholder attribute",
             "itemtype": "property",
             "name": "placeholder",
@@ -1583,7 +1596,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 162,
+            "line": 174,
             "description": "Control element's name attribute",
             "itemtype": "property",
             "name": "name",
@@ -1595,7 +1608,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 171,
+            "line": 183,
             "description": "An array of objects containing the selection of choices for multiple choice style form controls, e.g. select\nboxes.\n\n```hbs\n{{bs-form-element controlType=\"select\" choices=countries choiceLabelProperty=\"name\" choiceValueProperty=\"id\" label=\"Country\" value=selectedCountry}}\n```\n\nBe sure to also set the `choiceValueProperty` and `choiceLabelProperty` properties.",
             "itemtype": "property",
             "name": "choices",
@@ -1607,7 +1620,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 187,
+            "line": 199,
             "description": "The property of the `choices` array of objects, containing the value of the choice, e.g. the select box option.",
             "itemtype": "property",
             "name": "choiceValueProperty",
@@ -1619,7 +1632,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 196,
+            "line": 208,
             "description": "The property of the `choices` array of objects, containing the label of the choice, e.g. the select box option.",
             "itemtype": "property",
             "name": "choiceLabelProperty",
@@ -1631,7 +1644,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 205,
+            "line": 217,
             "description": "Textarea's rows attribute (ignored for other `controlType`s)",
             "itemtype": "property",
             "name": "rows",
@@ -1644,7 +1657,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 215,
+            "line": 227,
             "description": "Textarea's cols attribute (ignored for other `controlType`s)",
             "itemtype": "property",
             "name": "cols",
@@ -1656,7 +1669,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 224,
+            "line": 236,
             "description": "The model used for validation. Defaults to the parent `Components.Form`'s `model`",
             "itemtype": "property",
             "name": "model",
@@ -1667,7 +1680,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 232,
+            "line": 244,
             "description": "The array of error messages from the `model`'s validation.",
             "itemtype": "property",
             "name": "errors",
@@ -1679,7 +1692,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 241,
+            "line": 253,
             "itemtype": "property",
             "name": "hasErrors",
             "type": "boolean",
@@ -1691,7 +1704,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 249,
+            "line": 261,
             "itemtype": "property",
             "name": "hasValidator",
             "type": "boolean",
@@ -1703,7 +1716,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 257,
+            "line": 269,
             "description": "If `true` form validation markup is rendered (requires a validatable `model`).",
             "itemtype": "property",
             "name": "showValidation",
@@ -1716,7 +1729,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 267,
+            "line": 279,
             "itemtype": "property",
             "name": "showErrors",
             "type": "boolean",
@@ -1728,7 +1741,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 275,
+            "line": 287,
             "description": "The validation (\"error\" or \"success\") or null if no validation is to be shown. Automatically computed from the\nmodels validation state.",
             "itemtype": "property",
             "name": "validation",
@@ -1741,7 +1754,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 291,
+            "line": 303,
             "itemtype": "property",
             "name": "hasLabel",
             "type": "boolean",
@@ -1753,7 +1766,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 299,
+            "line": 311,
             "description": "True for text field `controlType`s",
             "itemtype": "property",
             "name": "useIcons",
@@ -1766,7 +1779,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 311,
+            "line": 323,
             "description": "The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):\n\n* 'horizontal'\n* 'vertical'\n* 'inline'\n\nDefaults to the parent `form`'s `formLayout` property.",
             "itemtype": "property",
             "name": "formLayout",
@@ -1778,7 +1791,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 326,
+            "line": 338,
             "itemtype": "property",
             "name": "isVertical",
             "type": "boolean",
@@ -1790,7 +1803,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 334,
+            "line": 346,
             "itemtype": "property",
             "name": "isHorizontal",
             "type": "boolean",
@@ -1802,7 +1815,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 342,
+            "line": 354,
             "itemtype": "property",
             "name": "isInline",
             "type": "boolean",
@@ -1814,7 +1827,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 350,
+            "line": 362,
             "description": "The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same\nproperty of the parent form. The corresponding grid class for form controls is automatically computed.",
             "itemtype": "property",
             "name": "horizontalLabelGridClass",
@@ -1827,7 +1840,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 361,
+            "line": 373,
             "description": "Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.",
             "itemtype": "property",
             "name": "horizontalInputGridClass",
@@ -1840,7 +1853,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 376,
+            "line": 388,
             "description": "Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout\nform, that have no label.",
             "itemtype": "property",
             "name": "horizontalInputOffsetGridClass",
@@ -1853,7 +1866,19 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 391,
+            "line": 404,
+            "description": "ID for input field and the corresponding label's \"for\" attribute",
+            "itemtype": "property",
+            "name": "formElementId",
+            "type": "string",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.FormElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-form-element.js",
+            "line": 416,
             "description": "Reference to the parent `Components.Form` class.",
             "itemtype": "property",
             "name": "form",
@@ -1864,7 +1889,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 421,
+            "line": 443,
             "description": "Listen for focusOut events from the control element to automatically set `showValidation` to true to enable\nform validation markup rendering.",
             "itemtype": "event",
             "name": "focusOut",
@@ -2289,7 +2314,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 118,
+            "line": 120,
             "description": "Visibility of the modal. Toggle to to show/hide with CSS transitions.",
             "itemtype": "property",
             "name": "open",
@@ -2302,7 +2327,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 128,
+            "line": 130,
             "description": "The title of the modal, visible in the modal header. Is ignored if `header` is false.",
             "itemtype": "property",
             "name": "title",
@@ -2314,7 +2339,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 137,
+            "line": 139,
             "description": "Display a close button (x icon) in the corner of the modal header.",
             "itemtype": "property",
             "name": "closeButton",
@@ -2327,7 +2352,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 147,
+            "line": 149,
             "description": "Set to false to disable fade animations.",
             "itemtype": "property",
             "name": "fade",
@@ -2340,7 +2365,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 157,
+            "line": 159,
             "description": "Used to apply Bootstrap's \"in\" class",
             "itemtype": "property",
             "name": "in",
@@ -2353,7 +2378,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 167,
+            "line": 169,
             "description": "Use a semi-transparent modal background to hide the rest of the page.",
             "itemtype": "property",
             "name": "backdrop",
@@ -2366,7 +2391,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 177,
+            "line": 179,
             "itemtype": "property",
             "name": "showBackdrop",
             "type": "boolean",
@@ -2378,7 +2403,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 185,
+            "line": 187,
             "description": "Closes the modal when escape key is pressed.",
             "itemtype": "property",
             "name": "keyboard",
@@ -2391,7 +2416,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 195,
+            "line": 197,
             "description": "If true clicking a close button will hide the modal automatically.\nIf you want to handle hiding the modal by yourself, you can set this to false and use the closeAction to\nimplement your custom logic.",
             "itemtype": "property",
             "name": "autoClose",
@@ -2404,7 +2429,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 207,
+            "line": 209,
             "description": "Generate a modal header component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalHeader\"}}{{/crossLink}} in the components block template",
             "itemtype": "property",
             "name": "header",
@@ -2417,7 +2442,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 218,
+            "line": 220,
             "description": "Generate a modal body component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalBody\"}}{{/crossLink}} in the components block template.\n\nAlways set this to false if `header` and/or `footer` is false!",
             "itemtype": "property",
             "name": "body",
@@ -2430,7 +2455,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 231,
+            "line": 233,
             "description": "Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalFooter\"}}{{/crossLink}} in the components block template",
             "itemtype": "property",
             "name": "footer",
@@ -2443,7 +2468,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 242,
+            "line": 244,
             "description": "The id of the `.modal` element.",
             "itemtype": "property",
             "name": "modalId",
@@ -2456,7 +2481,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 254,
+            "line": 256,
             "description": "The jQuery object of the `.modal` element.",
             "itemtype": "property",
             "name": "modalElement",
@@ -2469,7 +2494,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 266,
+            "line": 268,
             "description": "The id of the backdrop element.",
             "itemtype": "property",
             "name": "backdropId",
@@ -2482,7 +2507,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 278,
+            "line": 280,
             "description": "The jQuery object of the backdrop element.",
             "itemtype": "property",
             "name": "backdropElement",
@@ -2495,7 +2520,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 290,
+            "line": 292,
             "description": "Use CSS transitions when showing/hiding the modal?",
             "itemtype": "property",
             "name": "usesTransition",
@@ -2508,7 +2533,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 302,
+            "line": 304,
             "description": "Property for size styling, set to null (default), 'lg' or 'sm'\n\nAlso see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)",
             "itemtype": "property",
             "name": "size",
@@ -2520,7 +2545,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 313,
+            "line": 315,
             "description": "If true clicking on the backdrop will close the modal.",
             "itemtype": "property",
             "name": "backdropClose",
@@ -2533,7 +2558,20 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 323,
+            "line": 325,
+            "description": "If true component will render in place, rather than be wormholed.",
+            "itemtype": "property",
+            "name": "renderInPlace",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 335,
             "description": "The action to be sent when the modal footer's submit button (if present) is pressed.\nNote that if your modal body contains a form (e.g. {{#crossLink \"Components.Form\"}}{{/crossLink}}) this action will\nnot be triggered. Instead a submit event will be triggered on the form itself. See the class description for an\nexample.",
             "itemtype": "property",
             "name": "submitAction",
@@ -2546,7 +2584,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 336,
+            "line": 348,
             "description": "The action to be sent when the modal is closing.\nThis will be triggered by pressing the modal header's close button (x button) or the modal footer's close button.\nNote that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some\ntime to finish. Use the `closedAction` if you need the modal to be hidden when the action triggers.\n\nYou can set `autoClose` to false to prevent closing the modal automatically, and do that in your closeAction by\nsetting `open` to false.",
             "itemtype": "property",
             "name": "closeAction",
@@ -2559,7 +2597,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 353,
+            "line": 365,
             "description": "The action to be sent after the modal has been completely hidden (including the CSS transition).",
             "itemtype": "property",
             "name": "closedAction",
@@ -2572,7 +2610,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 363,
+            "line": 375,
             "description": "The action to be sent after the modal has been completely shown (including the CSS transition).",
             "itemtype": "property",
             "name": "openedAction",
@@ -2585,7 +2623,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 397,
+            "line": 409,
             "description": "Show the modal",
             "itemtype": "method",
             "name": "show",
@@ -2596,7 +2634,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 445,
+            "line": 457,
             "description": "Hide the modal",
             "itemtype": "method",
             "name": "hide",
@@ -2607,7 +2645,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 467,
+            "line": 479,
             "description": "Clean up after modal is hidden and call closedAction",
             "itemtype": "method",
             "name": "hideModal",
@@ -2618,7 +2656,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 487,
+            "line": 499,
             "description": "SHow/hide the backdrop",
             "itemtype": "method",
             "name": "handleBackdrop",
@@ -2635,7 +2673,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 543,
+            "line": 555,
             "description": "Attach/Detach resize event listeners",
             "itemtype": "method",
             "name": "resize",
@@ -2646,7 +2684,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 557,
+            "line": 569,
             "itemtype": "method",
             "name": "handleUpdate",
             "access": "private",
@@ -2656,7 +2694,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 565,
+            "line": 577,
             "itemtype": "method",
             "name": "adjustDialog",
             "access": "private",
@@ -2666,7 +2704,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 577,
+            "line": 589,
             "itemtype": "method",
             "name": "resetAdjustments",
             "access": "private",
@@ -2676,7 +2714,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 588,
+            "line": 600,
             "itemtype": "method",
             "name": "checkScrollbar",
             "access": "private",
@@ -2686,7 +2724,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 602,
+            "line": 614,
             "itemtype": "method",
             "name": "setScrollbar",
             "access": "private",
@@ -2696,7 +2734,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 614,
+            "line": 626,
             "itemtype": "method",
             "name": "resetScrollbar",
             "access": "private",
@@ -2706,7 +2744,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 622,
+            "line": 634,
             "itemtype": "property",
             "name": "scrollbarWidth",
             "type": "number",

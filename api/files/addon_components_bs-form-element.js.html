@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.0</span></h1>
+    <h1>API Docs <span class="small">v0.6.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -60,10 +60,9 @@ import Form from &#x27;ember-bootstrap/components/bs-form&#x27;;
 
 
 var nonTextFieldControlTypes = Ember.A([
-    &#x27;checkbox&#x27;,
-    &#x27;select&#x27;,
-    &#x27;select2&#x27;,
-    &#x27;textarea&#x27;
+  &#x27;checkbox&#x27;,
+  &#x27;select&#x27;,
+  &#x27;textarea&#x27;
 ]);
 
 /**
@@ -76,10 +75,10 @@ var nonTextFieldControlTypes = Ember.A([
 
  &#x60;&#x60;&#x60;hbs
  \{{#bs-form formLayout=&quot;horizontal&quot; action=&quot;submit&quot;}}
-   \{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
-   \{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
-   \{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
-   \{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+ \{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+ \{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
+ \{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
+ \{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
  \{{/bs-form}}
  &#x60;&#x60;&#x60;
 
@@ -90,10 +89,10 @@ var nonTextFieldControlTypes = Ember.A([
 
  &#x60;&#x60;&#x60;hbs
  \{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
-   \{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
-   \{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
-   \{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
-   \{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+ \{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+ \{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+ \{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+ \{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
  \{{/bs-form}}
  &#x60;&#x60;&#x60;
 
@@ -144,353 +143,376 @@ var nonTextFieldControlTypes = Ember.A([
  * the &#x60;successIcon&#x60; feedback icon is displayed if &#x60;controlType&#x60; is a text field
  * the validation messages are removed
 
+ ### Custom controls
+
+ Apart from the standard built-in browser controls (see the &#x60;controlType&#x60; property), you can use any custom control simply
+ by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
+ (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
+
+ &#x60;&#x60;&#x60;hbs
+ \{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
+ \{{#bs-form-element label=&quot;Select-2&quot; property=&quot;gender&quot; as |value id|}}
+   \{{select-2 id=id content=genderChoices optionLabelPath=&quot;label&quot; value=value searchEnabled=false}}
+ \{{/bs-form-element}}
+ \{{/bs-form}}
+ &#x60;&#x60;&#x60;
+
  @class FormElement
  @namespace Components
  @extends Components.FormGroup
  */
 export default FormGroup.extend({
-    /**
-     * Text to display within a &#x60;&lt;label&gt;&#x60; tag.
-     *
-     * @property label
-     * @type string
-     * @public
-     */
-    label: null,
+  /**
+   * Text to display within a &#x60;&lt;label&gt;&#x60; tag.
+   *
+   * @property label
+   * @type string
+   * @public
+   */
+  label: null,
 
-    /**
-     * The type of the control widget.
-     * Supported types:
-     *
-     * * &#x27;text&#x27;
-     * * &#x27;checkbox&#x27;
-     * * &#x27;select&#x27;
-     * * &#x27;select2&#x27; (needs [ember-select-2](https://github.com/iStefo/ember-select-2))
-     * * &#x27;textarea&#x27;
-     * * any other type will use an input tag with the &#x60;controlType&#x60; value as the type attribute (for e.g. HTML5 input
-     * types like &#x27;email&#x27;), and the same layout as the &#x27;text&#x27; type
-     *
-     * @property controlType
-     * @type string
-     * @public
-     */
-    controlType: &#x27;text&#x27;,
+  /**
+   * The type of the control widget.
+   * Supported types:
+   *
+   * * &#x27;text&#x27;
+   * * &#x27;checkbox&#x27;
+   * * &#x27;select&#x27;
+   * * &#x27;textarea&#x27;
+   * * any other type will use an input tag with the &#x60;controlType&#x60; value as the type attribute (for e.g. HTML5 input
+   * types like &#x27;email&#x27;), and the same layout as the &#x27;text&#x27; type
+   *
+   * @property controlType
+   * @type string
+   * @public
+   */
+  controlType: &#x27;text&#x27;,
 
-    /**
-     * The value of the control element is bound to this property. You can bind it to some controller property to
-     * get/set the control element&#x27;s value:
-     *
-     * &#x60;&#x60;&#x60;hbs
-     * {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
-     * &#x60;&#x60;&#x60;
-     *
-     * Note: you loose the ability to validate this form element by directly binding to its value. It is recommended
-     * to use the &#x60;property&#x60; feature instead.
-     *
-     *
-     * @property value
-     * @public
-     */
-    value: null,
+  /**
+   * The value of the control element is bound to this property. You can bind it to some controller property to
+   * get/set the control element&#x27;s value:
+   *
+   * &#x60;&#x60;&#x60;hbs
+   * {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+   * &#x60;&#x60;&#x60;
+   *
+   * Note: you loose the ability to validate this form element by directly binding to its value. It is recommended
+   * to use the &#x60;property&#x60; feature instead.
+   *
+   *
+   * @property value
+   * @public
+   */
+  value: null,
 
-    /**
-     The property name of the form element&#x27;s &#x60;model&#x60; (by default the &#x60;model&#x60; of its parent &#x60;Components.Form&#x60;) that this
-     form element should represent. The control element&#x27;s value will automatically be bound to the model property&#x27;s
-     value.
+  /**
+   The property name of the form element&#x27;s &#x60;model&#x60; (by default the &#x60;model&#x60; of its parent &#x60;Components.Form&#x60;) that this
+   form element should represent. The control element&#x27;s value will automatically be bound to the model property&#x27;s
+   value.
 
-     Using this property enables form validation on this element.
+   Using this property enables form validation on this element.
 
-     @property property
-     @type string
-     @public
-     */
-    property: null,
+   @property property
+   @type string
+   @public
+   */
+  property: null,
 
-    /**
-     * Control element&#x27;s HTML5 placeholder attribute
-     *
-     * @property placeholder
-     * @type string
-     * @public
-     */
-    placeholder: null,
+  /**
+   * Control element&#x27;s HTML5 placeholder attribute
+   *
+   * @property placeholder
+   * @type string
+   * @public
+   */
+  placeholder: null,
 
-    /**
-     * Control element&#x27;s name attribute
-     *
-     * @property name
-     * @type string
-     * @public
-     */
-    name: null,
+  /**
+   * Control element&#x27;s name attribute
+   *
+   * @property name
+   * @type string
+   * @public
+   */
+  name: null,
 
-    /**
-     * An array of objects containing the selection of choices for multiple choice style form controls, e.g. select
-     * boxes.
-     *
-     * &#x60;&#x60;&#x60;hbs
-     * {{bs-form-element controlType=&quot;select&quot; choices=countries choiceLabelProperty=&quot;name&quot; choiceValueProperty=&quot;id&quot; label=&quot;Country&quot; value=selectedCountry}}
-     * &#x60;&#x60;&#x60;
-     *
-     * Be sure to also set the &#x60;choiceValueProperty&#x60; and &#x60;choiceLabelProperty&#x60; properties.
-     *
-     * @property choices
-     * @type array
-     * @public
-     */
-    choices: Ember.A(),
+  /**
+   * An array of objects containing the selection of choices for multiple choice style form controls, e.g. select
+   * boxes.
+   *
+   * &#x60;&#x60;&#x60;hbs
+   * {{bs-form-element controlType=&quot;select&quot; choices=countries choiceLabelProperty=&quot;name&quot; choiceValueProperty=&quot;id&quot; label=&quot;Country&quot; value=selectedCountry}}
+   * &#x60;&#x60;&#x60;
+   *
+   * Be sure to also set the &#x60;choiceValueProperty&#x60; and &#x60;choiceLabelProperty&#x60; properties.
+   *
+   * @property choices
+   * @type array
+   * @public
+   */
+  choices: Ember.A(),
 
-    /**
-     * The property of the &#x60;choices&#x60; array of objects, containing the value of the choice, e.g. the select box option.
-     *
-     * @property choiceValueProperty
-     * @type string
-     * @public
-     */
-    choiceValueProperty: null,
+  /**
+   * The property of the &#x60;choices&#x60; array of objects, containing the value of the choice, e.g. the select box option.
+   *
+   * @property choiceValueProperty
+   * @type string
+   * @public
+   */
+  choiceValueProperty: null,
 
-    /**
-     * The property of the &#x60;choices&#x60; array of objects, containing the label of the choice, e.g. the select box option.
-     *
-     * @property choiceLabelProperty
-     * @type string
-     * @public
-     */
-    choiceLabelProperty: null,
+  /**
+   * The property of the &#x60;choices&#x60; array of objects, containing the label of the choice, e.g. the select box option.
+   *
+   * @property choiceLabelProperty
+   * @type string
+   * @public
+   */
+  choiceLabelProperty: null,
 
-    /**
-     * Textarea&#x27;s rows attribute (ignored for other &#x60;controlType&#x60;s)
-     *
-     * @property rows
-     * @type integer
-     * @default 5
-     * @public
-     */
-    rows: 5,
+  /**
+   * Textarea&#x27;s rows attribute (ignored for other &#x60;controlType&#x60;s)
+   *
+   * @property rows
+   * @type integer
+   * @default 5
+   * @public
+   */
+  rows: 5,
 
-    /**
-     * Textarea&#x27;s cols attribute (ignored for other &#x60;controlType&#x60;s)
-     *
-     * @property cols
-     * @type integer
-     * @public
-     */
-    cols: null,
+  /**
+   * Textarea&#x27;s cols attribute (ignored for other &#x60;controlType&#x60;s)
+   *
+   * @property cols
+   * @type integer
+   * @public
+   */
+  cols: null,
 
-    /**
-     * The model used for validation. Defaults to the parent &#x60;Components.Form&#x60;&#x27;s &#x60;model&#x60;
-     *
-     * @property model
-     * @public
-     */
-    model: Ember.computed.alias(&#x27;form.model&#x27;),
+  /**
+   * The model used for validation. Defaults to the parent &#x60;Components.Form&#x60;&#x27;s &#x60;model&#x60;
+   *
+   * @property model
+   * @public
+   */
+  model: Ember.computed.alias(&#x27;form.model&#x27;),
 
-    /**
-     * The array of error messages from the &#x60;model&#x60;&#x27;s validation.
-     *
-     * @property errors
-     * @type array
-     * @protected
-     */
-    errors: null,
+  /**
+   * The array of error messages from the &#x60;model&#x60;&#x27;s validation.
+   *
+   * @property errors
+   * @type array
+   * @protected
+   */
+  errors: null,
 
-    /**
-     * @property hasErrors
-     * @type boolean
-     * @readonly
-     * @protected
-     */
-    hasErrors: Ember.computed.gt(&#x27;errors.length&#x27;,0),
+  /**
+   * @property hasErrors
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  hasErrors: Ember.computed.gt(&#x27;errors.length&#x27;, 0),
 
-    /**
-     * @property hasValidator
-     * @type boolean
-     * @readonly
-     * @protected
-     */
-    hasValidator: Ember.computed.notEmpty(&#x27;model.validate&#x27;),
+  /**
+   * @property hasValidator
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  hasValidator: Ember.computed.notEmpty(&#x27;model.validate&#x27;),
 
-    /**
-     * If &#x60;true&#x60; form validation markup is rendered (requires a validatable &#x60;model&#x60;).
-     *
-     * @property showValidation
-     * @type boolean
-     * @default false
-     * @public
-     */
-    showValidation: false,
+  /**
+   * If &#x60;true&#x60; form validation markup is rendered (requires a validatable &#x60;model&#x60;).
+   *
+   * @property showValidation
+   * @type boolean
+   * @default false
+   * @public
+   */
+  showValidation: false,
 
-    /**
-     * @property showErrors
-     * @type boolean
-     * @readonly
-     * @protected
-     */
-    showErrors: Ember.computed.and(&#x27;showValidation&#x27;,&#x27;hasErrors&#x27;),
+  /**
+   * @property showErrors
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  showErrors: Ember.computed.and(&#x27;showValidation&#x27;, &#x27;hasErrors&#x27;),
 
-    /**
-     * The validation (&quot;error&quot; or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
-     * models validation state.
-     *
-     * @property validation
-     * @readonly
-     * @type string
-     * @protected
-     */
-    validation: Ember.computed(&#x27;hasErrors&#x27;,&#x27;hasValidator&#x27;,&#x27;showValidation&#x27;,function(){
-        if (!this.get(&#x27;showValidation&#x27;) || !this.get(&#x27;hasValidator&#x27;)) {
-            return null;
-        }
-        return this.get(&#x27;hasErrors&#x27;) ? &#x27;error&#x27; : &#x27;success&#x27;;
-    }),
-
-    /**
-     * @property hasLabel
-     * @type boolean
-     * @readonly
-     * @protected
-     */
-    hasLabel: Ember.computed.notEmpty(&#x27;label&#x27;),
-
-    /**
-     * True for text field &#x60;controlType&#x60;s
-     *
-     * @property useIcons
-     * @type boolean
-     * @readonly
-     * @public
-     */
-    useIcons: Ember.computed(&#x27;controlType&#x27;, function() {
-        return !nonTextFieldControlTypes.contains(this.get(&#x27;controlType&#x27;));
-    }),
-
-    /**
-     * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
-     *
-     * * &#x27;horizontal&#x27;
-     * * &#x27;vertical&#x27;
-     * * &#x27;inline&#x27;
-     *
-     * Defaults to the parent &#x60;form&#x60;&#x27;s &#x60;formLayout&#x60; property.
-     *
-     * @property formLayout
-     * @type string
-     * @public
-     */
-    formLayout: Ember.computed.alias(&#x27;form.formLayout&#x27;),
-
-    /**
-     * @property isVertical
-     * @type boolean
-     * @readonly
-     * @protected
-     */
-    isVertical: Ember.computed.equal(&#x27;formLayout&#x27;,&#x27;vertical&#x27;),
-
-    /**
-     * @property isHorizontal
-     * @type boolean
-     * @readonly
-     * @protected
-     */
-    isHorizontal: Ember.computed.equal(&#x27;formLayout&#x27;,&#x27;horizontal&#x27;),
-
-    /**
-     * @property isInline
-     * @type boolean
-     * @readonly
-     * @protected
-     */
-    isInline: Ember.computed.equal(&#x27;formLayout&#x27;,&#x27;inline&#x27;),
-
-    /**
-     * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
-     * property of the parent form. The corresponding grid class for form controls is automatically computed.
-     *
-     * @property horizontalLabelGridClass
-     * @type string
-     * @default &#x27;col-md-4&#x27;
-     * @public
-     */
-    horizontalLabelGridClass: Ember.computed.oneWay(&#x27;form.horizontalLabelGridClass&#x27;),
-
-    /**
-     * Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.
-     *
-     * @property horizontalInputGridClass
-     * @type string
-     * @readonly
-     * @protected
-     */
-    horizontalInputGridClass: Ember.computed(&#x27;horizontalLabelGridClass&#x27;, function() {
-        var parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
-        Ember.assert(&#x27;horizontalInputGridClass must match format bootstrap grid column class&#x27;, parts.length===3);
-        parts[2] = 12 - parts[2];
-        return parts.join(&#x27;-&#x27;);
-    }),
-
-    /**
-     * Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout
-     * form, that have no label.
-     *
-     * @property horizontalInputOffsetGridClass
-     * @type string
-     * @readonly
-     * @protected
-     */
-    horizontalInputOffsetGridClass: Ember.computed(&#x27;horizontalLabelGridClass&#x27;, function() {
-        var parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
-        parts.splice(2,0,&#x27;offset&#x27;);
-        return parts.join(&#x27;-&#x27;);
-    }),
-
-    /**
-     * Reference to the parent &#x60;Components.Form&#x60; class.
-     *
-     * @property form
-     * @protected
-     */
-    form: Ember.computed(function(){
-        return this.nearestOfType(Form);
-    }),
-
-    layoutName: Ember.computed(&#x27;formLayout&#x27;,&#x27;controlType&#x27;,function() {
-        var formLayout = this.getWithDefault(&#x27;formLayout&#x27;,&#x27;vertical&#x27;),
-            inputLayout,
-            controlType = this.get(&#x27;controlType&#x27;);
-
-        switch (true) {
-            case nonTextFieldControlTypes.contains(controlType):
-                inputLayout = controlType;
-                break;
-            default:
-                inputLayout = &#x27;default&#x27;;
-        }
-
-        return &#x27;components/form-element/&#x27; + formLayout + &#x27;/&#x27; + inputLayout;
-    }),
-
-    _rerender: Ember.observer(&#x27;layoutName&#x27;, function() {
-        this.rerender();
-    }),
-
-    /**
-     * Listen for focusOut events from the control element to automatically set &#x60;showValidation&#x60; to true to enable
-     * form validation markup rendering.
-     *
-     * @event focusOut
-     */
-    focusOut: function() {
-        this.set(&#x27;showValidation&#x27;, true);
-    },
-
-    init: function() {
-        this._super();
-        if (!Ember.isBlank(this.get(&#x27;property&#x27;))) {
-            Ember.Binding.from(&quot;model.&quot; + this.get(&#x27;property&#x27;)).to(&#x27;value&#x27;).connect(this);
-            Ember.Binding.from(&quot;model.errors.&quot; + this.get(&#x27;property&#x27;)).to(&#x27;errors&#x27;).connect(this);
-        }
+  /**
+   * The validation (&quot;error&quot; or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
+   * models validation state.
+   *
+   * @property validation
+   * @readonly
+   * @type string
+   * @protected
+   */
+  validation: Ember.computed(&#x27;hasErrors&#x27;, &#x27;hasValidator&#x27;, &#x27;showValidation&#x27;, function () {
+    if (!this.get(&#x27;showValidation&#x27;) || !this.get(&#x27;hasValidator&#x27;)) {
+      return null;
     }
+    return this.get(&#x27;hasErrors&#x27;) ? &#x27;error&#x27; : &#x27;success&#x27;;
+  }),
+
+  /**
+   * @property hasLabel
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  hasLabel: Ember.computed.notEmpty(&#x27;label&#x27;),
+
+  /**
+   * True for text field &#x60;controlType&#x60;s
+   *
+   * @property useIcons
+   * @type boolean
+   * @readonly
+   * @public
+   */
+  useIcons: Ember.computed(&#x27;controlType&#x27;, function () {
+    return !nonTextFieldControlTypes.contains(this.get(&#x27;controlType&#x27;));
+  }),
+
+  /**
+   * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
+   *
+   * * &#x27;horizontal&#x27;
+   * * &#x27;vertical&#x27;
+   * * &#x27;inline&#x27;
+   *
+   * Defaults to the parent &#x60;form&#x60;&#x27;s &#x60;formLayout&#x60; property.
+   *
+   * @property formLayout
+   * @type string
+   * @public
+   */
+  formLayout: Ember.computed.alias(&#x27;form.formLayout&#x27;),
+
+  /**
+   * @property isVertical
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  isVertical: Ember.computed.equal(&#x27;formLayout&#x27;, &#x27;vertical&#x27;),
+
+  /**
+   * @property isHorizontal
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  isHorizontal: Ember.computed.equal(&#x27;formLayout&#x27;, &#x27;horizontal&#x27;),
+
+  /**
+   * @property isInline
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  isInline: Ember.computed.equal(&#x27;formLayout&#x27;, &#x27;inline&#x27;),
+
+  /**
+   * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
+   * property of the parent form. The corresponding grid class for form controls is automatically computed.
+   *
+   * @property horizontalLabelGridClass
+   * @type string
+   * @default &#x27;col-md-4&#x27;
+   * @public
+   */
+  horizontalLabelGridClass: Ember.computed.oneWay(&#x27;form.horizontalLabelGridClass&#x27;),
+
+  /**
+   * Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.
+   *
+   * @property horizontalInputGridClass
+   * @type string
+   * @readonly
+   * @protected
+   */
+  horizontalInputGridClass: Ember.computed(&#x27;horizontalLabelGridClass&#x27;, function () {
+    var parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
+    Ember.assert(&#x27;horizontalInputGridClass must match format bootstrap grid column class&#x27;, parts.length === 3);
+    parts[2] = 12 - parts[2];
+    return parts.join(&#x27;-&#x27;);
+  }),
+
+  /**
+   * Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout
+   * form, that have no label.
+   *
+   * @property horizontalInputOffsetGridClass
+   * @type string
+   * @readonly
+   * @protected
+   */
+  horizontalInputOffsetGridClass: Ember.computed(&#x27;horizontalLabelGridClass&#x27;, function () {
+    var parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
+    parts.splice(2, 0, &#x27;offset&#x27;);
+    return parts.join(&#x27;-&#x27;);
+  }),
+
+
+  /**
+   * ID for input field and the corresponding label&#x27;s &quot;for&quot; attribute
+   *
+   * @property formElementId
+   * @type string
+   * @private
+   */
+  formElementId: Ember.computed(&#x27;elementId&#x27;, function() {
+    let elementId = this.get(&#x27;elementId&#x27;);
+    return &#x60;${elementId}-field&#x60;;
+  }),
+
+  /**
+   * Reference to the parent &#x60;Components.Form&#x60; class.
+   *
+   * @property form
+   * @protected
+   */
+  form: Ember.computed(function () {
+    return this.nearestOfType(Form);
+  }),
+
+  formElementTemplate: Ember.computed(&#x27;formLayout&#x27;, &#x27;controlType&#x27;, function () {
+    var formLayout = this.getWithDefault(&#x27;formLayout&#x27;, &#x27;vertical&#x27;),
+      inputLayout,
+      controlType = this.get(&#x27;controlType&#x27;);
+
+    switch (true) {
+      case nonTextFieldControlTypes.contains(controlType):
+        inputLayout = controlType;
+        break;
+      default:
+        inputLayout = &#x27;default&#x27;;
+    }
+
+    return &#x27;components/form-element/&#x27; + formLayout + &#x27;/&#x27; + inputLayout;
+  }),
+
+
+  /**
+   * Listen for focusOut events from the control element to automatically set &#x60;showValidation&#x60; to true to enable
+   * form validation markup rendering.
+   *
+   * @event focusOut
+   */
+  focusOut: function () {
+    this.set(&#x27;showValidation&#x27;, true);
+  },
+
+  init: function () {
+    this._super();
+    if (!Ember.isBlank(this.get(&#x27;property&#x27;))) {
+      Ember.Binding.from(&quot;model.&quot; + this.get(&#x27;property&#x27;)).to(&#x27;value&#x27;).connect(this);
+      Ember.Binding.from(&quot;model.errors.&quot; + this.get(&#x27;property&#x27;)).to(&#x27;errors&#x27;).connect(this);
+    }
+  }
 });
     </pre>
 </div>

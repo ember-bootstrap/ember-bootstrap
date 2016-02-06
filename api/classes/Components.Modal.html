@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.0</span></h1>
+    <h1>API Docs <span class="small">v0.6.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -133,7 +133,8 @@ present whenever the footer's submit button is pressed, so the example above wil
 automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested
 components/templates where it belongs to logically, but to have the actual DOM elements within a special container
 element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and
-are not effected by parent elements with <code>overflow: hidden</code> for example.</p>
+are not effected by parent elements with <code>overflow: hidden</code> for example.
+If you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.</p>
 
 </div>
 
@@ -598,6 +599,10 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                             </li>
                             <li class="index-item property private inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_parentView" data-tablink="parentView">parentView</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_renderInPlace" data-tablink="renderInPlace">renderInPlace</a>
 
                             </li>
                             <li class="index-item property private">
@@ -1136,7 +1141,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l565"><code>addon&#x2F;components&#x2F;bs-modal.js:565</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l577"><code>addon&#x2F;components&#x2F;bs-modal.js:577</code></a>
                             </p>
                     
                     
@@ -1383,7 +1388,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l588"><code>addon&#x2F;components&#x2F;bs-modal.js:588</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l600"><code>addon&#x2F;components&#x2F;bs-modal.js:600</code></a>
                             </p>
                     
                     
@@ -1933,7 +1938,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l487"><code>addon&#x2F;components&#x2F;bs-modal.js:487</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l499"><code>addon&#x2F;components&#x2F;bs-modal.js:499</code></a>
                             </p>
                     
                     
@@ -2036,7 +2041,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l557"><code>addon&#x2F;components&#x2F;bs-modal.js:557</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l569"><code>addon&#x2F;components&#x2F;bs-modal.js:569</code></a>
                             </p>
                     
                     
@@ -2176,7 +2181,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l445"><code>addon&#x2F;components&#x2F;bs-modal.js:445</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l457"><code>addon&#x2F;components&#x2F;bs-modal.js:457</code></a>
                             </p>
                     
                     
@@ -2207,7 +2212,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l467"><code>addon&#x2F;components&#x2F;bs-modal.js:467</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l479"><code>addon&#x2F;components&#x2F;bs-modal.js:479</code></a>
                             </p>
                     
                     
@@ -3583,7 +3588,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l577"><code>addon&#x2F;components&#x2F;bs-modal.js:577</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l589"><code>addon&#x2F;components&#x2F;bs-modal.js:589</code></a>
                             </p>
                     
                     
@@ -3613,7 +3618,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l614"><code>addon&#x2F;components&#x2F;bs-modal.js:614</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l626"><code>addon&#x2F;components&#x2F;bs-modal.js:626</code></a>
                             </p>
                     
                     
@@ -3643,7 +3648,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l543"><code>addon&#x2F;components&#x2F;bs-modal.js:543</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l555"><code>addon&#x2F;components&#x2F;bs-modal.js:555</code></a>
                             </p>
                     
                     
@@ -4044,7 +4049,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l602"><code>addon&#x2F;components&#x2F;bs-modal.js:602</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l614"><code>addon&#x2F;components&#x2F;bs-modal.js:614</code></a>
                             </p>
                     
                     
@@ -4074,7 +4079,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l397"><code>addon&#x2F;components&#x2F;bs-modal.js:397</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l409"><code>addon&#x2F;components&#x2F;bs-modal.js:409</code></a>
                             </p>
                     
                     
@@ -4527,7 +4532,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l195"><code>addon&#x2F;components&#x2F;bs-modal.js:195</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l197"><code>addon&#x2F;components&#x2F;bs-modal.js:197</code></a>
                             </p>
                     
                     
@@ -4560,7 +4565,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l167"><code>addon&#x2F;components&#x2F;bs-modal.js:167</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l169"><code>addon&#x2F;components&#x2F;bs-modal.js:169</code></a>
                             </p>
                     
                     
@@ -4591,7 +4596,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l313"><code>addon&#x2F;components&#x2F;bs-modal.js:313</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l315"><code>addon&#x2F;components&#x2F;bs-modal.js:315</code></a>
                             </p>
                     
                     
@@ -4622,7 +4627,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l278"><code>addon&#x2F;components&#x2F;bs-modal.js:278</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l280"><code>addon&#x2F;components&#x2F;bs-modal.js:280</code></a>
                             </p>
                     
                     
@@ -4652,7 +4657,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l266"><code>addon&#x2F;components&#x2F;bs-modal.js:266</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l268"><code>addon&#x2F;components&#x2F;bs-modal.js:268</code></a>
                             </p>
                     
                     
@@ -4682,7 +4687,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l218"><code>addon&#x2F;components&#x2F;bs-modal.js:218</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l220"><code>addon&#x2F;components&#x2F;bs-modal.js:220</code></a>
                             </p>
                     
                     
@@ -4811,7 +4816,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l336"><code>addon&#x2F;components&#x2F;bs-modal.js:336</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l348"><code>addon&#x2F;components&#x2F;bs-modal.js:348</code></a>
                             </p>
                     
                     
@@ -4847,7 +4852,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l137"><code>addon&#x2F;components&#x2F;bs-modal.js:137</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l139"><code>addon&#x2F;components&#x2F;bs-modal.js:139</code></a>
                             </p>
                     
                     
@@ -4878,7 +4883,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l353"><code>addon&#x2F;components&#x2F;bs-modal.js:353</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l365"><code>addon&#x2F;components&#x2F;bs-modal.js:365</code></a>
                             </p>
                     
                     
@@ -5077,7 +5082,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l147"><code>addon&#x2F;components&#x2F;bs-modal.js:147</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l149"><code>addon&#x2F;components&#x2F;bs-modal.js:149</code></a>
                             </p>
                     
                     
@@ -5108,7 +5113,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l231"><code>addon&#x2F;components&#x2F;bs-modal.js:231</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l233"><code>addon&#x2F;components&#x2F;bs-modal.js:233</code></a>
                             </p>
                     
                     
@@ -5260,7 +5265,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l207"><code>addon&#x2F;components&#x2F;bs-modal.js:207</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l209"><code>addon&#x2F;components&#x2F;bs-modal.js:209</code></a>
                             </p>
                     
                     
@@ -5292,7 +5297,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l157"><code>addon&#x2F;components&#x2F;bs-modal.js:157</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l159"><code>addon&#x2F;components&#x2F;bs-modal.js:159</code></a>
                             </p>
                     
                     
@@ -5448,7 +5453,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l185"><code>addon&#x2F;components&#x2F;bs-modal.js:185</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l187"><code>addon&#x2F;components&#x2F;bs-modal.js:187</code></a>
                             </p>
                     
                     
@@ -5549,7 +5554,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l254"><code>addon&#x2F;components&#x2F;bs-modal.js:254</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l256"><code>addon&#x2F;components&#x2F;bs-modal.js:256</code></a>
                             </p>
                     
                     
@@ -5579,7 +5584,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l242"><code>addon&#x2F;components&#x2F;bs-modal.js:242</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l244"><code>addon&#x2F;components&#x2F;bs-modal.js:244</code></a>
                             </p>
                     
                     
@@ -5609,7 +5614,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l118"><code>addon&#x2F;components&#x2F;bs-modal.js:118</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l120"><code>addon&#x2F;components&#x2F;bs-modal.js:120</code></a>
                             </p>
                     
                     
@@ -5640,7 +5645,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l363"><code>addon&#x2F;components&#x2F;bs-modal.js:363</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l375"><code>addon&#x2F;components&#x2F;bs-modal.js:375</code></a>
                             </p>
                     
                     
@@ -5686,6 +5691,37 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                     
                     
                     </div>
+                    <div id="property_renderInPlace" class="property item public">
+                        <h3 class="name">renderInPlace
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal.js.html#l325"><code>addon&#x2F;components&#x2F;bs-modal.js:325</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>If true component will render in place, rather than be wormholed.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
                     <div id="property_scrollbarWidth" class="property item private">
                         <h3 class="name">scrollbarWidth
                             <span class="small">number</span>
@@ -5702,7 +5738,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l622"><code>addon&#x2F;components&#x2F;bs-modal.js:622</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l634"><code>addon&#x2F;components&#x2F;bs-modal.js:634</code></a>
                             </p>
                     
                     
@@ -5731,7 +5767,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l177"><code>addon&#x2F;components&#x2F;bs-modal.js:177</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l179"><code>addon&#x2F;components&#x2F;bs-modal.js:179</code></a>
                             </p>
                     
                     
@@ -5761,7 +5797,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l302"><code>addon&#x2F;components&#x2F;bs-modal.js:302</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l304"><code>addon&#x2F;components&#x2F;bs-modal.js:304</code></a>
                             </p>
                     
                     
@@ -5792,7 +5828,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l323"><code>addon&#x2F;components&#x2F;bs-modal.js:323</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l335"><code>addon&#x2F;components&#x2F;bs-modal.js:335</code></a>
                             </p>
                     
                     
@@ -5971,7 +6007,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l128"><code>addon&#x2F;components&#x2F;bs-modal.js:128</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l130"><code>addon&#x2F;components&#x2F;bs-modal.js:130</code></a>
                             </p>
                     
                     
@@ -6001,7 +6037,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l290"><code>addon&#x2F;components&#x2F;bs-modal.js:290</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l292"><code>addon&#x2F;components&#x2F;bs-modal.js:292</code></a>
                             </p>
                     
                     

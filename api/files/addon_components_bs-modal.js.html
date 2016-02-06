@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.0</span></h1>
+    <h1>API Docs <span class="small">v0.6.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -164,6 +164,8 @@ var observeOpen = function () {
  components/templates where it belongs to logically, but to have the actual DOM elements within a special container
  element, which is a child of ember&#x27;s root element. This will make sure that modals always overlay the whole app, and
  are not effected by parent elements with &#x60;overflow: hidden&#x60; for example.
+
+ If you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.
 
  @class Modal
  @namespace Components
@@ -375,6 +377,16 @@ export default Ember.Component.extend({
    * @public
    */
   backdropClose: true,
+
+  /**
+   * If true component will render in place, rather than be wormholed.
+   *
+   * @property renderInPlace
+   * @type boolean
+   * @default false
+   * @public
+   */
+  renderInPlace: false,
 
   /**
    * The action to be sent when the modal footer&#x27;s submit button (if present) is pressed.

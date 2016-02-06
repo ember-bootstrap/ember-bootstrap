@@ -1,3 +1,18 @@
+<a name"0.6.1"></a>
+### 0.6.1 (2016-02-06)
+
+
+#### Bug Fixes
+
+* **FormElement:** changing formLayout on parent form now correctly updates bootstrap markup ([5ff1c870](https://github.com/kaliber5/ember-bootstrap/commit/5ff1c870), closes [#47](https://github.com/kaliber5/ember-bootstrap/issues/47))
+
+
+#### Features
+
+* **Alert:** add a dismissed action ([760a2db5](https://github.com/kaliber5/ember-bootstrap/commit/760a2db5)), closes [#45](https://github.com/kaliber5/ember-bootstrap/issues/45))
+* **FormElement:** support custom controls ([641d96e7](https://github.com/kaliber5/ember-bootstrap/commit/641d96e7), closes [#46](https://github.com/kaliber5/ember-bootstrap/issues/46))
+
+
 <a name"0.6.0"></a>
 ## 0.6.0 (2016-01-12)
 

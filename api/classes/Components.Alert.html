@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.0</span></h1>
+    <h1>API Docs <span class="small">v0.6.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -77,7 +77,7 @@
 <p>By default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
 <code>type</code> property for proper styling.</p>
 <pre class="code prettyprint"><code class="language-hbs">{{#bs-alert type=&quot;success&quot;}}
-   &lt;strong&gt;Well done!&lt;/strong&gt; You successfully read this important alert message.
+&lt;strong&gt;Well done!&lt;/strong&gt; You successfully read this important alert message.
 {{/bs-alert}}
 </code></pre>
 
@@ -404,6 +404,10 @@
                             </li>
                             <li class="index-item property protected">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_dismissed" data-tablink="dismissed">dismissed</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_dismissedAction" data-tablink="dismissedAction">dismissedAction</a>
 
                             </li>
                             <li class="index-item property public">
@@ -1885,7 +1889,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l125"><code>addon&#x2F;components&#x2F;bs-alert.js:125</code></a>
+                            <a href="../files/addon_components_bs-alert.js.html#l134"><code>addon&#x2F;components&#x2F;bs-alert.js:134</code></a>
                             </p>
                     
                     
@@ -3632,7 +3636,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-alert.js.html#l112"><code>addon&#x2F;components&#x2F;bs-alert.js:112</code></a>
+                            <a href="../files/addon_components_bs-alert.js.html#l122"><code>addon&#x2F;components&#x2F;bs-alert.js:122</code></a>
                             </p>
                     
                     
@@ -4346,6 +4350,37 @@
                         </div>
                     
                             <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_dismissedAction" class="property item public">
+                        <h3 class="name">dismissedAction
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-alert.js.html#l97"><code>addon&#x2F;components&#x2F;bs-alert.js:97</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent after the alert has been dismissed (including the CSS transition).</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
@@ -5068,8 +5103,8 @@
                         </div>
                     
                         <div class="description">
-                            <p>This property indicates if the alert is visible. If false it might still be in the DOM until the fade animation
-                    has completed. Can be set to change the visibility of the alert box.</p>
+                            <p>This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
+                    has completed.</p>
                     
                         </div>
                     

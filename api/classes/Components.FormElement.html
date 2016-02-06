@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.0</span></h1>
+    <h1>API Docs <span class="small">v0.6.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -59,7 +59,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-form-element.js.html#l13"><code>addon&#x2F;components&#x2F;bs-form-element.js:13</code></a>
+            Defined in: <a href="../files/addon_components_bs-form-element.js.html#l12"><code>addon&#x2F;components&#x2F;bs-form-element.js:12</code></a>
         </div>
 
 
@@ -72,20 +72,20 @@
 <p>The appropriate Bootstrap markup for the given <code>formLayout</code> and <code>controlType</code> is automatically generated to easily
 create forms without coding the default Bootstrap form markup by hand:</p>
 <pre class="code prettyprint"><code class="language-hbs">\{{#bs-form formLayout=&quot;horizontal&quot; action=&quot;submit&quot;}}
-  \{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
-  \{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
-  \{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
-  \{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+\{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+\{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
+\{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
+\{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
 \{{/bs-form}}
 </code></pre>
 <h3>Form validation</h3>
 <p>In the following example the control elements of the three form elements value will be bound to the properties
 (given by <code>property</code>) of the form's <code>model</code>, which in this case is its controller (see <code>model=this</code>):</p>
 <pre class="code prettyprint"><code class="language-hbs">\{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
-  \{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
-  \{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
-  \{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
-  \{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+\{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+\{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+\{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+\{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
 \{{/bs-form}}
 </code></pre>
 <p>By using this indirection in comparison to directly binding the <code>value</code> property, you get the benefit of automatic
@@ -131,6 +131,16 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
 <li>the <code>successIcon</code> feedback icon is displayed if <code>controlType</code> is a text field</li>
 <li>the validation messages are removed</li>
 </ul>
+<h3>Custom controls</h3>
+<p>Apart from the standard built-in browser controls (see the <code>controlType</code> property), you can use any custom control simply
+by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
+(from the <a href="https://istefo.github.io/ember-select-2">ember-select-2 addon</a>):</p>
+<pre class="code prettyprint"><code class="language-hbs">\{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
+\{{#bs-form-element label=&quot;Select-2&quot; property=&quot;gender&quot; as |value id|}}
+  \{{select-2 id=id content=genderChoices optionLabelPath=&quot;label&quot; value=value searchEnabled=false}}
+\{{/bs-form-element}}
+\{{/bs-form}}
+</code></pre>
 
 </div>
 
@@ -475,6 +485,10 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                             </li>
                             <li class="index-item property protected">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_form" data-tablink="form">form</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_formElementId" data-tablink="formElementId">formElementId</a>
 
                             </li>
                             <li class="index-item property public">
@@ -4173,7 +4187,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l196"><code>addon&#x2F;components&#x2F;bs-form-element.js:196</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l208"><code>addon&#x2F;components&#x2F;bs-form-element.js:208</code></a>
                             </p>
                     
                     
@@ -4203,7 +4217,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l171"><code>addon&#x2F;components&#x2F;bs-form-element.js:171</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l183"><code>addon&#x2F;components&#x2F;bs-form-element.js:183</code></a>
                             </p>
                     
                     
@@ -4237,7 +4251,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l187"><code>addon&#x2F;components&#x2F;bs-form-element.js:187</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l199"><code>addon&#x2F;components&#x2F;bs-form-element.js:199</code></a>
                             </p>
                     
                     
@@ -4363,7 +4377,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l215"><code>addon&#x2F;components&#x2F;bs-form-element.js:215</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l227"><code>addon&#x2F;components&#x2F;bs-form-element.js:227</code></a>
                             </p>
                     
                     
@@ -4482,7 +4496,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l105"><code>addon&#x2F;components&#x2F;bs-form-element.js:105</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l118"><code>addon&#x2F;components&#x2F;bs-form-element.js:118</code></a>
                             </p>
                     
                     
@@ -4495,7 +4509,6 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                     <li>'text'</li>
                     <li>'checkbox'</li>
                     <li>'select'</li>
-                    <li>'select2' (needs <a href="https://github.com/iStefo/ember-select-2">ember-select-2</a>)</li>
                     <li>'textarea'</li>
                     <li>any other type will use an input tag with the <code>controlType</code> value as the type attribute (for e.g. HTML5 input
                     types like 'email'), and the same layout as the 'text' type</li>
@@ -4642,7 +4655,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l232"><code>addon&#x2F;components&#x2F;bs-form-element.js:232</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l244"><code>addon&#x2F;components&#x2F;bs-form-element.js:244</code></a>
                             </p>
                     
                     
@@ -4672,7 +4685,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l391"><code>addon&#x2F;components&#x2F;bs-form-element.js:391</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l416"><code>addon&#x2F;components&#x2F;bs-form-element.js:416</code></a>
                             </p>
                     
                     
@@ -4680,6 +4693,36 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                     
                         <div class="description">
                             <p>Reference to the parent <code>Components.Form</code> class.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_formElementId" class="property item private">
+                        <h3 class="name">formElementId
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l404"><code>addon&#x2F;components&#x2F;bs-form-element.js:404</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>ID for input field and the corresponding label's &quot;for&quot; attribute</p>
                     
                         </div>
                     
@@ -4702,7 +4745,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l311"><code>addon&#x2F;components&#x2F;bs-form-element.js:311</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l323"><code>addon&#x2F;components&#x2F;bs-form-element.js:323</code></a>
                             </p>
                     
                     
@@ -4858,7 +4901,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l241"><code>addon&#x2F;components&#x2F;bs-form-element.js:241</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l253"><code>addon&#x2F;components&#x2F;bs-form-element.js:253</code></a>
                             </p>
                     
                     
@@ -4916,7 +4959,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l291"><code>addon&#x2F;components&#x2F;bs-form-element.js:291</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l303"><code>addon&#x2F;components&#x2F;bs-form-element.js:303</code></a>
                             </p>
                     
                     
@@ -4974,7 +5017,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l249"><code>addon&#x2F;components&#x2F;bs-form-element.js:249</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l261"><code>addon&#x2F;components&#x2F;bs-form-element.js:261</code></a>
                             </p>
                     
                     
@@ -5003,7 +5046,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l361"><code>addon&#x2F;components&#x2F;bs-form-element.js:361</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l373"><code>addon&#x2F;components&#x2F;bs-form-element.js:373</code></a>
                             </p>
                     
                     
@@ -5033,7 +5076,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l376"><code>addon&#x2F;components&#x2F;bs-form-element.js:376</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l388"><code>addon&#x2F;components&#x2F;bs-form-element.js:388</code></a>
                             </p>
                     
                     
@@ -5064,7 +5107,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l350"><code>addon&#x2F;components&#x2F;bs-form-element.js:350</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l362"><code>addon&#x2F;components&#x2F;bs-form-element.js:362</code></a>
                             </p>
                     
                     
@@ -5240,7 +5283,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l334"><code>addon&#x2F;components&#x2F;bs-form-element.js:334</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l346"><code>addon&#x2F;components&#x2F;bs-form-element.js:346</code></a>
                             </p>
                     
                     
@@ -5269,7 +5312,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l342"><code>addon&#x2F;components&#x2F;bs-form-element.js:342</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l354"><code>addon&#x2F;components&#x2F;bs-form-element.js:354</code></a>
                             </p>
                     
                     
@@ -5298,7 +5341,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l326"><code>addon&#x2F;components&#x2F;bs-form-element.js:326</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l338"><code>addon&#x2F;components&#x2F;bs-form-element.js:338</code></a>
                             </p>
                     
                     
@@ -5357,7 +5400,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l96"><code>addon&#x2F;components&#x2F;bs-form-element.js:96</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l109"><code>addon&#x2F;components&#x2F;bs-form-element.js:109</code></a>
                             </p>
                     
                     
@@ -5457,7 +5500,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l224"><code>addon&#x2F;components&#x2F;bs-form-element.js:224</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l236"><code>addon&#x2F;components&#x2F;bs-form-element.js:236</code></a>
                             </p>
                     
                     
@@ -5487,7 +5530,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l162"><code>addon&#x2F;components&#x2F;bs-form-element.js:162</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l174"><code>addon&#x2F;components&#x2F;bs-form-element.js:174</code></a>
                             </p>
                     
                     
@@ -5548,7 +5591,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l153"><code>addon&#x2F;components&#x2F;bs-form-element.js:153</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l165"><code>addon&#x2F;components&#x2F;bs-form-element.js:165</code></a>
                             </p>
                     
                     
@@ -5578,7 +5621,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l140"><code>addon&#x2F;components&#x2F;bs-form-element.js:140</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l152"><code>addon&#x2F;components&#x2F;bs-form-element.js:152</code></a>
                             </p>
                     
                     
@@ -5611,7 +5654,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l205"><code>addon&#x2F;components&#x2F;bs-form-element.js:205</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l217"><code>addon&#x2F;components&#x2F;bs-form-element.js:217</code></a>
                             </p>
                     
                     
@@ -5642,7 +5685,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l267"><code>addon&#x2F;components&#x2F;bs-form-element.js:267</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l279"><code>addon&#x2F;components&#x2F;bs-form-element.js:279</code></a>
                             </p>
                     
                     
@@ -5671,7 +5714,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l257"><code>addon&#x2F;components&#x2F;bs-form-element.js:257</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l269"><code>addon&#x2F;components&#x2F;bs-form-element.js:269</code></a>
                             </p>
                     
                     
@@ -5892,7 +5935,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                                     Components.FormGroup
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-form-element.js.html#l299"><code>addon&#x2F;components&#x2F;bs-form-element.js:299</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l311"><code>addon&#x2F;components&#x2F;bs-form-element.js:311</code></a>
                             </p>
                     
                     
@@ -5925,7 +5968,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                                     Components.FormGroup
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-form-element.js.html#l275"><code>addon&#x2F;components&#x2F;bs-form-element.js:275</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l287"><code>addon&#x2F;components&#x2F;bs-form-element.js:287</code></a>
                             </p>
                     
                     
@@ -5956,7 +5999,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l123"><code>addon&#x2F;components&#x2F;bs-form-element.js:123</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l135"><code>addon&#x2F;components&#x2F;bs-form-element.js:135</code></a>
                             </p>
                     
                     
@@ -6063,7 +6106,7 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l421"><code>addon&#x2F;components&#x2F;bs-form-element.js:421</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l443"><code>addon&#x2F;components&#x2F;bs-form-element.js:443</code></a>
                             </p>
                     
                     
