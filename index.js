@@ -46,9 +46,5 @@ module.exports = {
 
     app.import(path.join(app.bowerDirectory, 'bootstrap/js/transition.js'));
 
-  },
-
-  isDevelopingAddon: function () {
-    return true;
   }
 };
