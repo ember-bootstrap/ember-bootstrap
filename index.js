@@ -43,7 +43,7 @@ module.exports = {
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff2'), {destDir: '/fonts'});
     }
 
-    app.import(path.join(app.bowerDirectory, 'bootstrap/js/transition.js'));
+    app.import('vendor/transition.js');
 
   }
 };
