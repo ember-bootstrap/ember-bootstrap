@@ -1,3 +1,14 @@
+<a name"0.6.2"></a>
+### 0.6.2 (2016-02-25)
+
+
+#### Bug Fixes
+
+* **Addon:** Remove hardcoding of `isDevelopingAddon`. Thanks to [@rwjblue](https://github.com/rwjblue) ([015fa5f](https://github.com/kaliber5/ember-bootstrap/commit/015fa5f)
+* **Addon:** Allow using ember-bootstrap within another addon ([a2e5b29f](https://github.com/kaliber5/ember-bootstrap/commit/a2e5b29f), closes [#50](https://github.com/kaliber5/ember-bootstrap/issues/50))
+* **Modal:** Patch emulateTransitionEnd to support andThen() waiting for transition ([ae787626](https://github.com/kaliber5/ember-bootstrap/commit/ae787626), closes [#53](https://github.com/kaliber5/ember-bootstrap/issues/53))
+
+
 <a name"0.6.1"></a>
 ### 0.6.1 (2016-02-06)
 
