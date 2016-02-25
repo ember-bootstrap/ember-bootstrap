@@ -1,3 +1,54 @@
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-toggle-wrapper visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="//kaliber5.github.io/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+        </div>
+        <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="navbar-nav nav">
+                <li><a href="//kaliber5.github.io/ember-bootstrap/getting-started">Getting Started</a></li>
+                <li><a href="//kaliber5.github.io/ember-bootstrap/components">Components</a></li>
+                <li><a href="//kaliber5.github.io/ember-bootstrap/api">API</a></li>
+                <li>{{#link-to "index"}}Examples{{/link-to}}</li>
+
+            </ul>
+            <ul class="navbar-nav nav navbar-right">
+                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
 <div class="container">
-    {{outlet}}
+    <div class="row">
+        <div class="col-sm-8">
+            {{outlet}}
+        </div>
+        <div class="col-sm-4">
+
+            <ul class="nav nav-pills nav-stacked">
+                <li>{{#link-to "alert"}}Alert{{/link-to}}</li>
+                <li>{{#link-to "button"}}Buttons{{/link-to}}</li>
+                <li>{{#link-to "dropdown"}}Dropdown{{/link-to}}</li>
+                <li>{{#link-to "forms"}}Forms{{/link-to}}</li>
+                <li>{{#link-to "accordion"}}Accordion{{/link-to}}</li>
+                <li>{{#link-to "collapse"}}Collapse{{/link-to}}</li>
+                <li>{{#link-to "modal"}}Modals{{/link-to}}</li>
+                <li>{{#link-to "progress"}}Progress bars{{/link-to}}</li>
+            </ul>
+
+        </div>
+
+    </div>
+    <div class="row footer">
+        <div class="col-sm-12 text-center">
+
+        </div>
+    </div>
 </div>
