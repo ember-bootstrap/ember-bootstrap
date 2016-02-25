@@ -15,11 +15,10 @@ module.exports = {
   name: 'ember-bootstrap',
 
   included: function included(app) {
-    this._super.included(app);
 
-    var emberCLIVersion = app.project.emberCLIVersion();
-    if (emberCLIVersion < '0.0.41') {
-      throw new Error('ember-cli-bootstrap requires ember-cli version 0.0.41 or greater.\n');
+    // workaround for https://github.com/ember-cli/ember-cli/issues/3718
+    if (typeof app.import !== 'function' && app.app) {
+      app = app.app;
     }
 
     var options = extend(defaultOptions, app.options['ember-bootstrap']);
