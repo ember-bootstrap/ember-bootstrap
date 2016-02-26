@@ -147,6 +147,7 @@ export default Ember.Component.extend(ComponentParent, {
     }),
 
     willDestroyElement: function(){
+        this._super();
         Ember.$(document).off(this.clickEventName);
     },
 
