@@ -228,6 +228,47 @@ test('when modal has a form and the submit button is clicked, the form is submit
   this.$('.modal .modal-footer button[type=submit]').click();
 });
 
+test('autofocus element is focused when present and fade=false', function (assert) {
+  assert.expect(1);
+
+  this.set('open', false);
+  this.render(hbs`
+    {{#bs-modal title="Simple Dialog" fade=false open=open}}
+      <input class="my-input" autofocus="autofocus"/> blahblahblah
+    {{/bs-modal}}
+    <div id="ember-bootstrap-modal-container"></div>
+  `);
+
+  this.$('.my-input').focus(() => {
+    assert.ok(true, "focus was triggered on the autofocus element");
+  });
+
+  this.set('open', true);
+});
+
+test('autofocus element is focused when present and fade=true', function (assert) {
+  assert.expect(1);
+
+  this.set('open', false);
+  this.render(hbs`
+    {{#bs-modal title="Simple Dialog" fade=true open=open}}
+      <input class="my-input" autofocus="autofocus"/>
+    {{/bs-modal}}
+    <div id="ember-bootstrap-modal-container"></div>
+  `);
+
+  this.$('.my-input').focus(() => {
+    assert.ok(true, "focus was triggered on the autofocus element");
+  });
+
+  this.set('open', true);
+
+  // wait for fade animation
+  var done = assert.async();
+  setTimeout(() => {
+    done();
+  }, transitionTimeout);
+});
 
 test('Pressing escape key will close the modal if keyboard=true', function(assert) {
   assert.expect(3);
@@ -235,6 +276,36 @@ test('Pressing escape key will close the modal if keyboard=true', function(asser
     assert.ok(true, 'Action has been called.');
   });
   this.render(hbs`{{#bs-modal title="Simple Dialog" closeAction=(action "testAction") keyboard=true}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
+  var done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is visible');
+
+    // trigger escape key event
+    var e = Ember.$.Event("keydown");
+    e.which = e.keyCode = 27;
+    this.$('.modal').trigger(e);
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('in'), false, 'Modal is hidden');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+test('Pressing escape key will close the modal if keyboard=true and element is autofocused', function (assert) {
+  assert.expect(3);
+  this.on('testAction', () => {
+    assert.ok(true, 'Action has been called.');
+  });
+  this.render(hbs`
+    {{#bs-modal title="Simple Dialog" closeAction=(action "testAction") keyboard=true}}
+      <input autofocus="autofocus"/>
+    {{/bs-modal}}
+    <div id="ember-bootstrap-modal-container"></div>
+  `);
   var done = assert.async();
 
   // wait for fade animation
