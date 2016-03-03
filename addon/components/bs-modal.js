@@ -392,6 +392,19 @@ export default Ember.Component.extend({
   closedAction: null,
 
   /**
+   * The action to be sent when the modal is opening.
+   * This will be triggered immediately after the modal is shown (so it's safe to access the DOM for
+   * size calculations and the like). This means that if fade=true, it will be shown in between the
+   * backdrop animation and the fade animation.
+   *
+   * @property openAction
+   * @type string
+   * @default null
+   * @public
+   */
+  openAction: null,
+
+  /**
    * The action to be sent after the modal has been completely shown (including the CSS transition).
    *
    * @property openedAction
@@ -471,18 +484,20 @@ export default Ember.Component.extend({
 
       //this.enforceFocus()
 
+      this.sendAction('openAction');
+
       if (this.get('usesTransition')) {
         this.get('modalElement')
           .one('bsTransitionEnd', Ember.run.bind(this, function() {
             this.takeFocus();
+            this.sendAction('openedAction');
           }))
           .emulateTransitionEnd(Modal.TRANSITION_DURATION);
       }
       else {
         this.takeFocus();
+        this.sendAction('openedAction');
       }
-
-      this.sendAction('openedAction');
     };
     Ember.run.scheduleOnce('afterRender', this, this.handleBackdrop, callback);
   },
