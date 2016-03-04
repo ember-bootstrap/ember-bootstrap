@@ -1,3 +1,20 @@
+<a name"0.6.3"></a>
+### 0.6.3 (2016-03-04)
+
+
+#### Bug Fixes
+
+* **Accordion:** Fix toggling accordion items. ([925ee7d6](https://github.com/kaliber5/ember-bootstrap/commit/925ee7d6), closes [#56](https://github.com/kaliber5/ember-bootstrap/issues/56))
+* **Alert:**
+  * Alert is initially hidden when visible=false ([10aa8870](https://github.com/kaliber5/ember-bootstrap/commit/10aa8870), closes [#61](https://github.com/kaliber5/ember-bootstrap/issues/61))
+  * missing fade out animation when clicking close button ([11acbccd](https://github.com/kaliber5/ember-bootstrap/commit/11acbccd), closes [#59](https://github.com/kaliber5/ember-bootstrap/issues/59))
+
+
+#### Features
+
+* **Modal:** Implement autofocus support. Thanks to [bendemboski](https://github.com/bendemboski) ([10f6d71f](https://github.com/kaliber5/ember-bootstrap/commit/10f6d71f), closes [#55](https://github.com/kaliber5/ember-bootstrap/issues/55))
+
+
 <a name"0.6.2"></a>
 ### 0.6.2 (2016-02-25)
 
