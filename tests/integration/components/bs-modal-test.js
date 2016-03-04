@@ -169,6 +169,29 @@ test('clicking close button leaves modal open when autoClose=false', function (a
 
 });
 
+test('can implement custom close buttons', function (assert) {
+  this.render(hbs`
+    {{#bs-modal title="Simple Dialog" as |modal|}}
+      Hello world! <a href="#" class="close-link" {{action 'close' target=modal}}>close</a>
+    {{/bs-modal}}
+    <div id="ember-bootstrap-modal-container"></div>
+  `);
+
+  var done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is visible');
+    this.$('.modal .close-link').click();
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('in'), false, 'Modal is hidden');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
 
 test('header=false does not create model-header component', function (assert) {
   this.render(hbs`{{#bs-modal title="Simple Dialog" header=false}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
