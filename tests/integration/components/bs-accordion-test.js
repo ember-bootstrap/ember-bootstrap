@@ -41,6 +41,42 @@ test('changing selected item expands this item', function(assert) {
 
     done();
   }, 500);
+});
 
+test('clicking collapsed item expands it', function(assert) {
+  this.render(hbs`{{#bs-accordion}}{{#bs-accordion-item id="firstItem" value=1 title="TITLE1"}}CONTENT1{{/bs-accordion-item}}{{#bs-accordion-item id="secondItem" value=2 title="TITLE2"}}CONTENT2{{/bs-accordion-item}}{{/bs-accordion}}`);
+  var item = this.$('#firstItem');
+  var done = assert.async();
 
+  item.find('.panel-heading').click();
+
+  // wait for transitions to complete
+  setTimeout(() => {
+    assert.equal(item.find('.panel-heading').hasClass('collapsed'), false, 'panel-heading has not collapsed class');
+    assert.equal(item.find('.panel-collapse').hasClass('collapse'), true, 'panel-collapse has collapse class');
+    assert.equal(item.find('.panel-collapse').hasClass('in'), true, 'panel-collapse has in class');
+
+    done();
+  }, 500);
+});
+
+test('clicking expanded item collapses it', function(assert) {
+  this.render(hbs`{{#bs-accordion selected=1}}{{#bs-accordion-item id="firstItem" value=1 title="TITLE1"}}CONTENT1{{/bs-accordion-item}}{{#bs-accordion-item id="secondItem" value=2 title="TITLE2"}}CONTENT2{{/bs-accordion-item}}{{/bs-accordion}}`);
+  var item = this.$('#firstItem');
+  var done = assert.async();
+
+  assert.equal(item.find('.panel-heading').hasClass('collapsed'), false, 'panel-heading has not collapsed class');
+  assert.equal(item.find('.panel-collapse').hasClass('collapse'), true, 'panel-collapse has collapse class');
+  assert.equal(item.find('.panel-collapse').hasClass('in'), true, 'panel-collapse has in class');
+
+  item.find('.panel-heading').click();
+
+  // wait for transitions to complete
+  setTimeout(() => {
+    assert.equal(item.find('.panel-heading').hasClass('collapsed'), true, 'panel-heading has collapsed class');
+    assert.equal(item.find('.panel-collapse').hasClass('collapse'), true, 'panel-collapse has collapse class');
+    assert.equal(item.find('.panel-collapse').hasClass('in'), false, 'panel-collapse has not in class');
+
+    done();
+  }, 500);
 });

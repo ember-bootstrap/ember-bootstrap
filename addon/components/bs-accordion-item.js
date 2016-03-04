@@ -47,6 +47,7 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
   collapsed: Ember.computed('value','selected', function() {
     return this.get('value') !== this.get('selected');
   }),
+  active: Ember.computed.not('collapsed'),
 
   action: 'selected',
 
