@@ -64,3 +64,20 @@ test('dismissedAction is called after modal is closed', function (assert) {
 
   this.$().find('button.close').click();
 });
+
+test('alert is initially hidden when visible=false', function (assert) {
+  this.render(hbs`{{#bs-alert type="success" fade=false visible=false}}Test{{/bs-alert}}`);
+
+  assert.equal(this.$(':first-child').hasClass('alert'), false, 'alert has no alert class');
+  assert.equal(this.$(':first-child').text().trim(), '', 'alert has no content');
+
+});
+
+test('alert can be made visible when setting visible=true', function (assert) {
+  this.set('visible', false);
+  this.render(hbs`{{#bs-alert type="success" visible=visible fade=false}}Test{{/bs-alert}}`);
+  this.set('visible', true);
+
+  assert.equal(this.$(':first-child').hasClass('alert'), true, 'alert has alert class');
+  assert.equal(this.$(':first-child').hasClass('alert-success'), true, 'alert has type class');
+});

@@ -42,7 +42,7 @@ export default Ember.Component.extend(TypeClass, {
    * @readonly
    * @protected
    */
-  dismissed: false,
+  dismissed: Ember.computed.oneWay('notVisible'),
 
   /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
@@ -54,6 +54,7 @@ export default Ember.Component.extend(TypeClass, {
    * @public
    */
   visible: true,
+  notVisible: Ember.computed.not('visible'),
 
   /**
    * Set to false to disable the fade out animation when hiding the alert.
