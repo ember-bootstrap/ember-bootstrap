@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.1</span></h1>
+    <h1>API Docs <span class="small">v0.6.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -103,6 +103,7 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
   collapsed: Ember.computed(&#x27;value&#x27;,&#x27;selected&#x27;, function() {
     return this.get(&#x27;value&#x27;) !== this.get(&#x27;selected&#x27;);
   }),
+  active: Ember.computed.not(&#x27;collapsed&#x27;),
 
   action: &#x27;selected&#x27;,
 

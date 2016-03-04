@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.1</span></h1>
+    <h1>API Docs <span class="small">v0.6.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -156,6 +156,25 @@ var observeOpen = function () {
 
  The modal component supports this common case by triggering the submit event programmatically on the body&#x27;s form if
  present whenever the footer&#x27;s submit button is pressed, so the example above will work as expected.
+
+ ### Auto-focus
+
+ In order to allow key handling to function, the modal&#x27;s root element is given focus once the modal is shown. If your
+ modal contains an element such as a text input and you would like it to be given focus rather than the modal element,
+ then give it the HTML5 autofocus attribute:
+
+  &#x60;&#x60;&#x60;hbs
+ {{#bs-modal title=&quot;Form Example&quot; body=false footer=false}}
+   {{#bs-modal-body}}
+     {{#bs-form action=(action &quot;submit&quot;) model=this}}
+       {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot; autofocus=true}}
+       {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
+     {{/bs-form}}
+   {{/bs-modal-body}}
+   {{bs-modal-footer closeTitle=(t &quot;contact.label.cancel&quot;) submitTitle=(t &quot;contact.label.ok&quot;)}}
+ {{/bs-modal}}
+ &#x60;&#x60;&#x60;
+
 
  ### Modals inside wormhole
 
@@ -463,6 +482,20 @@ export default Ember.Component.extend({
   _observeOpen: Ember.observer(&#x27;open&#x27;, observeOpen),
 
   /**
+   * Give the modal (or its autofocus element) focus
+   *
+   * @method takeFocus
+   * @private
+   */
+  takeFocus() {
+    let focusElement = this.$(&#x27;[autofocus]&#x27;).first();
+    if (focusElement.length === 0) {
+      focusElement = this.get(&#x27;modalElement&#x27;);
+    }
+    focusElement.focus();
+  },
+
+  /**
    * Show the modal
    *
    * @method show
@@ -497,12 +530,12 @@ export default Ember.Component.extend({
       if (this.get(&#x27;usesTransition&#x27;)) {
         this.get(&#x27;modalElement&#x27;)
           .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, function() {
-            this.get(&#x27;modalElement&#x27;).trigger(&#x27;focus&#x27;);
+            this.takeFocus();
           }))
           .emulateTransitionEnd(Modal.TRANSITION_DURATION);
       }
       else {
-        this.get(&#x27;modalElement&#x27;).trigger(&#x27;focus&#x27;);
+        this.takeFocus();
       }
 
       this.sendAction(&#x27;openedAction&#x27;);
