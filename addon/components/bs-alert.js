@@ -106,7 +106,7 @@ export default Ember.Component.extend(TypeClass, {
 
   actions: {
     dismiss: function () {
-      this.hide();
+      this.set('visible', false);
     }
   },
 
@@ -123,7 +123,7 @@ export default Ember.Component.extend(TypeClass, {
    * Call to make the alert visible again after it has been hidden
    *
    * @method show
-   * @public
+   * @private
    */
   show: function () {
     this.setProperties({
@@ -136,7 +136,7 @@ export default Ember.Component.extend(TypeClass, {
    * dismissed.
    *
    * @method hide
-   * @public
+   * @private
    */
   hide: function () {
     if (this.get('fade')) {

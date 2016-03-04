@@ -13,7 +13,7 @@ test('alert has correct CSS classes', function (assert) {
   assert.equal(this.$(':first-child').hasClass('alert-success'), true, 'alert has type class');
 });
 
-test('dismissible alert can be hidden by clicking close button', function (assert) {
+test('dismissible alert can be hidden by clicking close button with fade=false', function (assert) {
   this.render(hbs`{{#bs-alert type="success" fade=false}}Test{{/bs-alert}}`);
 
   assert.equal(this.$().find('button.close').length, 1, 'alert has close button');
@@ -21,6 +21,25 @@ test('dismissible alert can be hidden by clicking close button', function (asser
 
   assert.equal(this.$(':first-child').hasClass('alert'), false, 'alert has no alert class');
   assert.equal(this.$(':first-child').text().trim(), '', 'alert has no content');
+
+});
+
+test('dismissible alert can be hidden by clicking close button with fade=true', function (assert) {
+  this.render(hbs`{{#bs-alert type="success" fade=true}}Test{{/bs-alert}}`);
+
+  assert.equal(this.$().find('button.close').length, 1, 'alert has close button');
+  this.$().find('button.close').click();
+
+  assert.equal(this.$(':first-child').hasClass('in'), false, 'alert has no in class');
+
+  var done = assert.async();
+  // wait for transitions to complete
+  setTimeout(() => {
+    assert.equal(this.$(':first-child').hasClass('alert'), false, 'alert has no alert class');
+    assert.equal(this.$(':first-child').text().trim(), '', 'alert has no content');
+
+    done();
+  }, 500);
 
 });
 
