@@ -120,6 +120,37 @@ test('clicking ok button closes modal when autoClose=true', function (assert) {
 
 });
 
+test('clicking ok button closes modal when autoClose=true with custom component hierarchy', function (assert) {
+  this.register('component:my-component', Ember.Component.extend({
+    layout: hbs`{{yield}}`
+  }));
+
+  this.render(hbs`
+    {{#bs-modal title="Simple Dialog" body=false footer=false}}
+      {{#my-component}}
+        {{#bs-modal-body}}Hello world!{{/bs-modal-body}}
+        {{bs-modal-footer}}
+      {{/my-component}}
+    {{/bs-modal}}
+    <div id="ember-bootstrap-modal-container"></div>
+  `);
+
+  var done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is visible');
+    this.$('.modal .modal-footer button').click();
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('in'), false, 'Modal is hidden');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+
+});
+
 test('clicking close button leaves modal open when autoClose=false', function (assert) {
   this.render(hbs`{{#bs-modal title="Simple Dialog" autoClose=false}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
   var done = assert.async();
