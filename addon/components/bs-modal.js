@@ -101,6 +101,25 @@ var observeOpen = function () {
  The modal component supports this common case by triggering the submit event programmatically on the body's form if
  present whenever the footer's submit button is pressed, so the example above will work as expected.
 
+ ### Auto-focus
+
+ In order to allow key handling to function, the modal's root element is given focus once the modal is shown. If your
+ modal contains an element such as a text input and you would like it to be given focus rather than the modal element,
+ then give it the HTML5 autofocus attribute:
+
+  ```hbs
+ {{#bs-modal title="Form Example" body=false footer=false}}
+   {{#bs-modal-body}}
+     {{#bs-form action=(action "submit") model=this}}
+       {{bs-form-element controlType="text" label="first name" property="firstname" autofocus=true}}
+       {{bs-form-element controlType="text" label="last name" property="lastname"}}
+     {{/bs-form}}
+   {{/bs-modal-body}}
+   {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
+ {{/bs-modal}}
+ ```
+
+
  ### Modals inside wormhole
 
  Modals make use of the [ember-wormhole](https://github.com/yapplabs/ember-wormhole) addon, which will be installed
@@ -407,6 +426,20 @@ export default Ember.Component.extend({
   _observeOpen: Ember.observer('open', observeOpen),
 
   /**
+   * Give the modal (or its autofocus element) focus
+   *
+   * @method takeFocus
+   * @private
+   */
+  takeFocus() {
+    let focusElement = this.$('[autofocus]').first();
+    if (focusElement.length === 0) {
+      focusElement = this.get('modalElement');
+    }
+    focusElement.focus();
+  },
+
+  /**
    * Show the modal
    *
    * @method show
@@ -441,12 +474,12 @@ export default Ember.Component.extend({
       if (this.get('usesTransition')) {
         this.get('modalElement')
           .one('bsTransitionEnd', Ember.run.bind(this, function() {
-            this.get('modalElement').trigger('focus');
+            this.takeFocus();
           }))
           .emulateTransitionEnd(Modal.TRANSITION_DURATION);
       }
       else {
-        this.get('modalElement').trigger('focus');
+        this.takeFocus();
       }
 
       this.sendAction('openedAction');

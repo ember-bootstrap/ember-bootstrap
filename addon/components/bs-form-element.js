@@ -172,6 +172,15 @@ export default FormGroup.extend({
   placeholder: null,
 
   /**
+   * Control element's HTML5 autofocus attribute
+   *
+   * @property autofocus
+   * @type boolean
+   * @public
+   */
+  autofocus: false,
+
+  /**
    * Control element's name attribute
    *
    * @property name
