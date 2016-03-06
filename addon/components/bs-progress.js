@@ -6,6 +6,7 @@ import Ember from 'ember';
  @class Progress
  @namespace Components
  @extends Ember.Component
+ @public
  */
 export default Ember.Component.extend({
   classNames: ['progress']

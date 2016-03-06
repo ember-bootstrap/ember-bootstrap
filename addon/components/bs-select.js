@@ -6,6 +6,7 @@ import Ember from 'ember';
  @class Select
  @namespace Components
  @extends Ember.Select
+ @public
  */
 export default Ember.Component.extend({
   tagName: 'select',
@@ -26,24 +27,22 @@ export default Ember.Component.extend({
     }
   },
 
-  change: function() {
-    var selectEl = this.$().get(0);
-    var selectedIndex = selectEl.selectedIndex;
-    var content = this.get('content');
+  change() {
+    let selectEl = this.$().get(0);
+    let { selectedIndex } = selectEl;
+    let content = this.get('content');
 
     // decrement index by 1 if we have a prompt
-    var hasPrompt = !!this.get('prompt');
-    var contentIndex = hasPrompt ? selectedIndex - 1 : selectedIndex;
+    let hasPrompt = !!this.get('prompt');
+    let contentIndex = hasPrompt ? selectedIndex - 1 : selectedIndex;
 
-    var selection = content[contentIndex];
+    let selection = content[contentIndex];
 
     // set the local, shadowed selection to avoid leaking
     // changes to `selection` out via 2-way binding
     this.set('value', selection);
 
-    var changeCallback = this.get('action');
+    let changeCallback = this.get('action');
     changeCallback(selection);
   }
-
-  
 });

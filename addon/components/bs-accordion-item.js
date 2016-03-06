@@ -2,6 +2,8 @@ import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SubComponent from 'ember-bootstrap/mixins/sub-component';
 
+const { computed } = Ember;
+
 /**
  A collapsible/expandable item within an accordion
 
@@ -13,6 +15,7 @@ import SubComponent from 'ember-bootstrap/mixins/sub-component';
  @extends Ember.Component
  @uses Mixins.TypeClass
  @uses Mixins.SubComponent
+ @public
  */
 export default Ember.Component.extend(TypeClass, SubComponent, {
   classNames: ['panel'],
@@ -40,27 +43,26 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
    * @property value
    * @public
    */
-  value: Ember.computed.oneWay('elementId'),
+  value: computed.oneWay('elementId'),
 
-  selected: Ember.computed.alias('parentView.selected'),
+  selected: computed.alias('parentView.selected'),
 
-  collapsed: Ember.computed('value','selected', function() {
+  collapsed: computed('value', 'selected', function() {
     return this.get('value') !== this.get('selected');
   }),
-  active: Ember.computed.not('collapsed'),
+  active: computed.not('collapsed'),
 
   action: 'selected',
 
   actions: {
-    toggleActive () {
-      var value = this.get('value'),
-        previous = this.get('selected'),
-        active = this.get('active');
+    toggleActive() {
+      let value = this.get('value');
+      let previous = this.get('selected');
+      let active = this.get('active');
       if (!active) {
         this.set('selected', value);
         this.sendAction('action', value, previous);
-      }
-      else {
+      } else {
         this.set('selected', null);
         this.sendAction('action', null, previous);
       }

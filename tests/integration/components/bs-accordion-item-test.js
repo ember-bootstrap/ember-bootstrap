@@ -4,7 +4,6 @@ import {
 } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-
 moduleForComponent('bs-accordion-item', 'Integration | Component | bs-accordion-item', {
   integration: true
 });

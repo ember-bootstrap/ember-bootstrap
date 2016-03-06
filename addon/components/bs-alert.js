@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 
+const { computed, observer } = Ember;
 
 /**
  Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts
@@ -18,6 +19,7 @@ import TypeClass from 'ember-bootstrap/mixins/type-class';
  @namespace Components
  @extends Ember.Component
  @uses Mixins.TypeClass
+ @public
  */
 export default Ember.Component.extend(TypeClass, {
   classNameBindings: ['alert', 'fade', 'in'],
@@ -42,7 +44,7 @@ export default Ember.Component.extend(TypeClass, {
    * @readonly
    * @protected
    */
-  dismissed: Ember.computed.oneWay('notVisible'),
+  dismissed: computed.oneWay('notVisible'),
 
   /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
@@ -54,7 +56,7 @@ export default Ember.Component.extend(TypeClass, {
    * @public
    */
   visible: true,
-  notVisible: Ember.computed.not('visible'),
+  notVisible: computed.not('visible'),
 
   /**
    * Set to false to disable the fade out animation when hiding the alert.
@@ -74,8 +76,8 @@ export default Ember.Component.extend(TypeClass, {
    * @type boolean
    * @private
    */
-  alert: Ember.computed.not('dismissed'),
-  in: Ember.computed.and('visible', 'fade'),
+  alert: computed.not('dismissed'),
+  in: computed.and('visible', 'fade'),
 
   /**
    * @property classTypePrefix
@@ -106,16 +108,15 @@ export default Ember.Component.extend(TypeClass, {
   dismissedAction: null,
 
   actions: {
-    dismiss: function () {
+    dismiss() {
       this.set('visible', false);
     }
   },
 
-  _onVisibleChange: Ember.observer('visible', function () {
+  _onVisibleChange: observer('visible', function() {
     if (this.get('visible')) {
       this.show();
-    }
-    else {
+    } else {
       this.hide();
     }
   }),
@@ -126,7 +127,7 @@ export default Ember.Component.extend(TypeClass, {
    * @method show
    * @private
    */
-  show: function () {
+  show() {
     this.setProperties({
       dismissed: false
     });
@@ -139,22 +140,19 @@ export default Ember.Component.extend(TypeClass, {
    * @method hide
    * @private
    */
-  hide: function () {
+  hide() {
     if (this.get('fade')) {
-      Ember.run.later(this, function () {
+      Ember.run.later(this, function() {
         if (!this.get('isDestroyed')) {
           this.set('dismissed', true);
           this.sendAction('dismissedAction');
         }
       }, this.get('fadeDuration'));
-    }
-    else {
+    } else {
       this.setProperties({
         dismissed: true
       });
       this.sendAction('dismissedAction');
     }
   }
-
-
 });

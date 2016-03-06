@@ -1,19 +1,18 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-
 moduleForComponent('bs-alert', 'Integration | Component | bs-alert', {
   integration: true
 });
 
-test('alert has correct CSS classes', function (assert) {
+test('alert has correct CSS classes', function(assert) {
   this.render(hbs`{{#bs-alert type="success"}}Test{{/bs-alert}}`);
 
   assert.equal(this.$(':first-child').hasClass('alert'), true, 'alert has alert class');
   assert.equal(this.$(':first-child').hasClass('alert-success'), true, 'alert has type class');
 });
 
-test('dismissible alert can be hidden by clicking close button with fade=false', function (assert) {
+test('dismissible alert can be hidden by clicking close button with fade=false', function(assert) {
   this.render(hbs`{{#bs-alert type="success" fade=false}}Test{{/bs-alert}}`);
 
   assert.equal(this.$().find('button.close').length, 1, 'alert has close button');
@@ -24,7 +23,7 @@ test('dismissible alert can be hidden by clicking close button with fade=false',
 
 });
 
-test('dismissible alert can be hidden by clicking close button with fade=true', function (assert) {
+test('dismissible alert can be hidden by clicking close button with fade=true', function(assert) {
   this.render(hbs`{{#bs-alert type="success" fade=true}}Test{{/bs-alert}}`);
 
   assert.equal(this.$().find('button.close').length, 1, 'alert has close button');
@@ -32,7 +31,7 @@ test('dismissible alert can be hidden by clicking close button with fade=true', 
 
   assert.equal(this.$(':first-child').hasClass('in'), false, 'alert has no in class');
 
-  var done = assert.async();
+  let done = assert.async();
   // wait for transitions to complete
   setTimeout(() => {
     assert.equal(this.$(':first-child').hasClass('alert'), false, 'alert has no alert class');
@@ -43,7 +42,7 @@ test('dismissible alert can be hidden by clicking close button with fade=true', 
 
 });
 
-test('alert can be hidden by setting visible property', function (assert) {
+test('alert can be hidden by setting visible property', function(assert) {
   this.set('visible', true);
   this.render(hbs`{{#bs-alert type="success" fade=false visible=visible}}Test{{/bs-alert}}`);
 
@@ -54,7 +53,7 @@ test('alert can be hidden by setting visible property', function (assert) {
 
 });
 
-test('dismissedAction is called after modal is closed', function (assert) {
+test('dismissedAction is called after modal is closed', function(assert) {
   assert.expect(1);
 
   this.on('testAction', () => {
@@ -65,7 +64,7 @@ test('dismissedAction is called after modal is closed', function (assert) {
   this.$().find('button.close').click();
 });
 
-test('alert is initially hidden when visible=false', function (assert) {
+test('alert is initially hidden when visible=false', function(assert) {
   this.render(hbs`{{#bs-alert type="success" fade=false visible=false}}Test{{/bs-alert}}`);
 
   assert.equal(this.$(':first-child').hasClass('alert'), false, 'alert has no alert class');
@@ -73,7 +72,7 @@ test('alert is initially hidden when visible=false', function (assert) {
 
 });
 
-test('alert can be made visible when setting visible=true', function (assert) {
+test('alert can be made visible when setting visible=true', function(assert) {
   this.set('visible', false);
   this.render(hbs`{{#bs-alert type="success" visible=visible fade=false}}Test{{/bs-alert}}`);
   this.set('visible', true);

@@ -6,7 +6,8 @@ import Ember from 'ember';
  @class Input
  @namespace Components
  @extends Ember.TextField
+ @public
  */
 export default Ember.TextField.extend({
-    classNames: ['form-control']
+  classNames: ['form-control']
 });

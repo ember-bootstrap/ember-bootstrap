@@ -7,7 +7,8 @@ import Ember from 'ember';
  @class ModalBody
  @namespace Components
  @extends Ember.Component
+ @public
  */
 export default Ember.Component.extend({
-    classNames: ['modal-body']
+  classNames: ['modal-body']
 });

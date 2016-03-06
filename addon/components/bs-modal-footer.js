@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import ModalCloser from 'ember-bootstrap/mixins/modal-closer';
 
+const { computed } = Ember;
+
 /**
 
  Modal footer element used within {{#crossLink "Components.Modal"}}{{/crossLink}} components. See there for examples.
@@ -8,6 +10,7 @@ import ModalCloser from 'ember-bootstrap/mixins/modal-closer';
  @class ModalFooter
  @namespace Components
  @extends Ember.Component
+ @public
  */
 export default Ember.Component.extend(ModalCloser, {
   tagName: 'form',
@@ -24,7 +27,6 @@ export default Ember.Component.extend(ModalCloser, {
    */
   closeTitle: 'Ok',
 
-
   /**
    * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null or if you provide
    * your own block template.
@@ -36,7 +38,7 @@ export default Ember.Component.extend(ModalCloser, {
    */
   submitTitle: null,
 
-  hasSubmitButton: Ember.computed.notEmpty('submitTitle'),
+  hasSubmitButton: computed.notEmpty('submitTitle'),
 
   /**
    * Set to true to disable the submit button. If you bind this to some property that indicates if submitting is allowed
@@ -59,11 +61,10 @@ export default Ember.Component.extend(ModalCloser, {
    */
   submitAction: 'submit',
 
-  submit: function (e) {
+  submit(e) {
     e.preventDefault();
     // send to parent bs-modal component
     this.sendAction('submitAction');
   }
-
 
 });

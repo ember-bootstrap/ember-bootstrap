@@ -5,7 +5,7 @@ moduleForComponent('bs-modal-footer', 'Integration | Component | bs-modal-footer
   integration: true
 });
 
-test('Footer has close button', function (assert) {
+test('Footer has close button', function(assert) {
   this.render(hbs`{{bs-modal-footer closeTitle="close"}}`);
 
   assert.equal(this.$('.modal-footer').length, 1, 'Modal footer exists.');
@@ -15,7 +15,7 @@ test('Footer has close button', function (assert) {
   assert.equal(this.$('.modal-footer button').text().trim(), 'close', 'Button title is correct.');
 });
 
-test('Footer can have submit button', function (assert) {
+test('Footer can have submit button', function(assert) {
   this.render(hbs`{{bs-modal-footer closeTitle="close" submitTitle="submit"}}`);
 
   assert.equal(this.$('.modal-footer button').length, 2, 'Modal footer has two button.');
@@ -27,14 +27,14 @@ test('Footer can have submit button', function (assert) {
   assert.equal(this.$('.modal-footer button:last-child').text().trim(), 'submit', 'Submit button title is correct.');
 });
 
-test('Footer can have custom block content', function (assert) {
+test('Footer can have custom block content', function(assert) {
   this.render(hbs`{{#bs-modal-footer closeTitle="close" submitTitle="submit"}}custom{{/bs-modal-footer}}`);
 
   assert.equal(this.$('.modal-footer button').length, 0, 'Modal footer has no buttons.');
   assert.equal(this.$('.modal-footer').text().trim(), 'custom', 'Block content is shown.');
 });
 
-test('submitDisabled disables submit button', function (assert) {
+test('submitDisabled disables submit button', function(assert) {
   this.set('disabled', true);
   this.render(hbs`{{bs-modal-footer closeTitle="close" submitTitle="submit" submitDisabled=disabled}}`);
 

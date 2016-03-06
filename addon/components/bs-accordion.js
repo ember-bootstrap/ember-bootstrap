@@ -26,6 +26,7 @@ import Ember from 'ember';
  @class Accordion
  @namespace Components
  @extends Ember.Component
+ @public
  */
 export default Ember.Component.extend({
   classNames: ['panel-group'],
@@ -40,7 +41,7 @@ export default Ember.Component.extend({
   selected: null,
 
   actions: {
-    selected (currentValue, previousValue) {
+    selected(currentValue, previousValue) {
       this.sendAction('action', currentValue, previousValue);
     }
   }

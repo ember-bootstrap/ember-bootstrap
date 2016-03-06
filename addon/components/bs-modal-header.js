@@ -8,6 +8,7 @@ import ModalCloser from 'ember-bootstrap/mixins/modal-closer';
  @class ModalHeader
  @namespace Components
  @extends Ember.Component
+ @public
  */
 export default Ember.Component.extend(ModalCloser, {
   classNames: ['modal-header'],

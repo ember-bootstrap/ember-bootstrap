@@ -3,11 +3,11 @@ import { module, test } from 'qunit';
 import startApp from '../../tests/helpers/start-app';
 
 module('Acceptance | bs modal', {
-  beforeEach: function() {
+  beforeEach() {
     this.application = startApp();
   },
 
-  afterEach: function() {
+  afterEach() {
     Ember.run(this.application, 'destroy');
   }
 });

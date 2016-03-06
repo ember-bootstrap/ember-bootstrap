@@ -10,5 +10,6 @@ import DropdownToggle from 'ember-bootstrap/mixins/dropdown-toggle';
  @namespace Components
  @extends Components.Button
  @uses Mixins.DropdownToggle
+ @public
  */
 export default Button.extend(DropdownToggle);

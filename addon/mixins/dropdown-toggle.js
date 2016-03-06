@@ -6,29 +6,30 @@ import componentChild from 'ember-bootstrap/mixins/component-child';
  *
  * @class DropdownToggle
  * @namespace Mixins
+ * @public
  */
 export default Ember.Mixin.create(componentChild, {
-    classNames: ['dropdown-toggle'],
-    attributeBindings: ['data-toggle'],
-    /**
-     * @property ariaRole
-     * @default button
-     * @type string
-     * @protected
-     */
-    ariaRole: 'button',
+  classNames: ['dropdown-toggle'],
+  attributeBindings: ['data-toggle'],
+  /**
+   * @property ariaRole
+   * @default button
+   * @type string
+   * @protected
+   */
+  ariaRole: 'button',
 
-    'data-toggle': 'dropdown',
+  'data-toggle': 'dropdown',
 
-    targetObject: Ember.computed.alias('parentView'),
+  targetObject: Ember.computed.alias('parentView'),
 
-    /**
-     * The default action is set to "toggleDropdown" on the parent {{#crossLink "Components.Dropdown"}}{{/crossLink}}
-     *
-     * @property action
-     * @default toggleDropdown
-     * @type string
-     * @protected
-     */
-    action: 'toggleDropdown'
+  /**
+   * The default action is set to "toggleDropdown" on the parent {{#crossLink "Components.Dropdown"}}{{/crossLink}}
+   *
+   * @property action
+   * @default toggleDropdown
+   * @type string
+   * @protected
+   */
+  action: 'toggleDropdown'
 });

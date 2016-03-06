@@ -1,13 +1,15 @@
 import Ember from 'ember';
 
-/*
+const { computed } = Ember;
+
+/**
   Internal component for modal's markup and event handling. Should not be used directly.
 
   @class ModalDialog
   @namespace Components
   @extends Ember.Component
   @private
-*/
+ */
 export default Ember.Component.extend({
   classNames: ['modal'],
   classNameBindings: ['fade', 'in'],
@@ -52,7 +54,7 @@ export default Ember.Component.extend({
    * @default false
    * @private
    */
-  in: false,
+  'in': false,
 
   /**
    * Closes the modal when escape key is pressed.
@@ -127,24 +129,22 @@ export default Ember.Component.extend({
    * @type string
    * @private
    */
-  sizeClass: Ember.computed('size', function () {
-    var size = this.get('size');
-    return Ember.isBlank(size) ? null : 'modal-' + size;
+  sizeClass: computed('size', function() {
+    let size = this.get('size');
+    return Ember.isBlank(size) ? null : `modal-${size}`;
   }),
 
   keyDown(e) {
-    var code = e.keyCode || e.which;
-    if(code === 27 && this.get('keyboard')) {
+    let code = e.keyCode || e.which;
+    if (code === 27 && this.get('keyboard')) {
       this.sendAction('close');
     }
   },
 
   click(e) {
-
     if (e.target !== e.currentTarget || !this.get('backdropClose')) {
       return;
     }
-
     this.sendAction('close');
   }
 

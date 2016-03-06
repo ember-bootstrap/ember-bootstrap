@@ -6,7 +6,8 @@ import Ember from 'ember';
  @class Textarea
  @namespace Components
  @extends Ember.TextArea
+ @public
  */
 export default Ember.TextArea.extend({
-    classNames: ['form-control']
+  classNames: ['form-control']
 });

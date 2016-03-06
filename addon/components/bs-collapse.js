@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { computed, observer } = Ember;
+
 /**
  An Ember component that mimics the behaviour of Bootstrap's collapse.js plugin, see http://getbootstrap.com/javascript/#collapse
 
@@ -15,10 +17,11 @@ import Ember from 'ember';
  @class Collapse
  @namespace Components
  @extends Ember.Component
+ @public
  */
 export default Ember.Component.extend({
 
-  classNameBindings: ['collapse','in','collapsing'],
+  classNameBindings: ['collapse', 'in', 'collapsing'],
   attributeBindings: ['style'],
 
   /**
@@ -39,9 +42,9 @@ export default Ember.Component.extend({
    */
   active: false,
 
-  collapse: Ember.computed.not('transitioning'),
-  collapsing: Ember.computed.alias('transitioning'),
-  in: Ember.computed.and('collapse', 'active'),
+  collapse: computed.not('transitioning'),
+  collapsing: computed.alias('transitioning'),
+  'in': computed.and('collapse', 'active'),
 
   /**
    * true if the component is currently transitioning
@@ -89,7 +92,6 @@ export default Ember.Component.extend({
    */
   resetSizeWhenNotCollapsing: true,
 
-
   /**
    * The direction (height/width) of the collapse animation.
    * When setting this to 'width' you should also define custom CSS transitions for the width property, as the Bootstrap
@@ -102,24 +104,23 @@ export default Ember.Component.extend({
    */
   collapseDimension: 'height',
 
-  style: Ember.computed('collapseSize', function () {
-    var size = this.get('collapseSize'),
-      dimension = this.get('collapseDimension');
+  style: computed('collapseSize', function() {
+    let size = this.get('collapseSize');
+    let dimension = this.get('collapseDimension');
     if (Ember.isEmpty(size)) {
       return new Ember.Handlebars.SafeString('');
     }
     return new Ember.Handlebars.SafeString(`${dimension}: ${size}px`);
   }),
 
-
   /**
    * Triggers the show transition
-   * 
+   *
    * @method show
    * @protected
    */
-  show: function () {
-    var complete = function () {
+  show() {
+    let complete = function() {
         this.set('transitioning', false);
         if (this.get('resetSizeWhenNotCollapsing')) {
           this.set('collapseSize', null);
@@ -145,7 +146,7 @@ export default Ember.Component.extend({
       .emulateTransitionEnd(350)
     ;
 
-    Ember.run.next(this, function () {
+    Ember.run.next(this, function() {
       if (!this.get('isDestroyed')) {
         this.set('collapseSize', this.getExpandedSize('show'));
       }
@@ -160,15 +161,15 @@ export default Ember.Component.extend({
    * @returns number
    * @private
    */
-  getExpandedSize: function($action) {
-    var expandedSize = this.get('expandedSize');
+  getExpandedSize($action) {
+    let expandedSize = this.get('expandedSize');
     if (Ember.isPresent(expandedSize)) {
       return expandedSize;
     }
 
-    var collapseElement = this.$(),
-      prefix = $action === 'show' ? 'scroll' : 'offset',
-      measureProperty = Ember.String.camelize(prefix + '-' + this.get('collapseDimension'));
+    let collapseElement = this.$();
+    let prefix = $action === 'show' ? 'scroll' : 'offset';
+    let measureProperty = Ember.String.camelize(`${prefix}-${this.get('collapseDimension')}`);
     return collapseElement[0][measureProperty];
   },
 
@@ -178,9 +179,9 @@ export default Ember.Component.extend({
    * @method hide
    * @protected
    */
-  hide: function () {
+  hide() {
 
-    var complete = function () {
+    let complete = function() {
         this.set('transitioning', false);
         if (this.get('resetSizeWhenNotCollapsing')) {
           this.set('collapseSize', null);
@@ -206,42 +207,39 @@ export default Ember.Component.extend({
       .emulateTransitionEnd(350)
     ;
 
-    Ember.run.next(this, function () {
-        if (!this.get('isDestroyed')) {
-          this.set('collapseSize', this.get('collapsedSize'));
-        }
+    Ember.run.next(this, function() {
+      if (!this.get('isDestroyed')) {
+        this.set('collapseSize', this.get('collapsedSize'));
+      }
     });
   },
 
-  _onCollapsedChange: Ember.observer('collapsed', function () {
-    var collapsed = this.get('collapsed'),
-      active = this.get('active');
+  _onCollapsedChange: observer('collapsed', function() {
+    let collapsed = this.get('collapsed');
+    let active = this.get('active');
     if (collapsed !== active) {
       return;
     }
     if (collapsed === false) {
       this.show();
-    }
-    else {
+    } else {
       this.hide();
     }
   }),
 
-  _onInit: Ember.on('init', function () {
+  _onInit: Ember.on('init', function() {
     this.set('active', !this.get('collapsed'));
   }),
 
-  _updateCollapsedSize: Ember.observer('collapsedSize', function() {
+  _updateCollapsedSize: observer('collapsedSize', function() {
     if (!this.get('resetSizeWhenNotCollapsing') && this.get('collapsed') && !this.get('collapsing')) {
       this.set('collapseSize', this.get('collapsedSize'));
     }
   }),
 
-  _updateExpandedSize: Ember.observer('expandedSize', function() {
+  _updateExpandedSize: observer('expandedSize', function() {
     if (!this.get('resetSizeWhenNotCollapsing') && !this.get('collapsed') && !this.get('collapsing')) {
       this.set('collapseSize', this.get('expandedSize'));
     }
   })
-
-
 });

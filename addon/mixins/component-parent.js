@@ -5,6 +5,7 @@ import Ember from 'ember';
  *
  * @class ComponentParent
  * @namespace Mixins
+ * @public
  */
 export default Ember.Mixin.create({
 
@@ -28,7 +29,7 @@ export default Ember.Mixin.create({
    * @param child
    * @public
    */
-  registerChild: function(child) {
+  registerChild(child) {
     Ember.run.schedule('sync', this, function() {
       this.get('children').addObject(child);
     });
@@ -41,7 +42,7 @@ export default Ember.Mixin.create({
    * @param child
    * @public
    */
-  removeChild: function(child) {
+  removeChild(child) {
     this.get('children').removeObject(child);
   }
 });

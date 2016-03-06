@@ -39,6 +39,7 @@
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.3",
     "ember-select-2": "1.3.0",
+    "ember-suave": "2.0.1",
     "ember-try": "0.0.8",
     "ember-validations": "^2.0.0-alpha.4",
     "gh-pages": "^0.3.1",

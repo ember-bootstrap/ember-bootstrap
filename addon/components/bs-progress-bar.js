@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 
+const { computed } = Ember;
+
 /**
 
  Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.
@@ -34,12 +36,13 @@ import TypeClass from 'ember-bootstrap/mixins/type-class';
  @namespace Components
  @extends Ember.Component
  @uses Mixins.TypeClass
+ @public
  */
 export default Ember.Component.extend(TypeClass, {
   classNames: ['progress-bar'],
-  classNameBindings: ['progressBarStriped','active'],
+  classNameBindings: ['progressBarStriped', 'active'],
 
-  attributeBindings: ['style','ariaValuenow','ariaValuemin','ariaValuemax'],
+  attributeBindings: ['style', 'ariaValuenow', 'ariaValuemin', 'ariaValuemax'],
 
   /**
    * @property classTypePrefix
@@ -129,12 +132,12 @@ export default Ember.Component.extend(TypeClass, {
    */
   roundDigits: 0,
 
-  progressBarStriped: Ember.computed.alias('striped'),
-  active: Ember.computed.alias('animate'),
+  progressBarStriped: computed.alias('striped'),
+  active: computed.alias('animate'),
 
-  ariaValuenow: Ember.computed.alias('value'),
-  ariaValuemin: Ember.computed.alias('minValue'),
-  ariaValuemax: Ember.computed.alias('maxValue'),
+  ariaValuenow: computed.alias('value'),
+  ariaValuemin: computed.alias('minValue'),
+  ariaValuemax: computed.alias('maxValue'),
 
   /**
    * The percentage of `value`
@@ -144,10 +147,10 @@ export default Ember.Component.extend(TypeClass, {
    * @protected
    * @readonly
    */
-  percent: Ember.computed('value','minValue','maxValue', function() {
-    var value = parseFloat(this.get('value')),
-      minValue = parseFloat(this.get('minValue')),
-      maxValue = parseFloat(this.get('maxValue'));
+  percent: computed('value', 'minValue', 'maxValue', function() {
+    let value = parseFloat(this.get('value'));
+    let minValue = parseFloat(this.get('minValue'));
+    let maxValue = parseFloat(this.get('maxValue'));
 
     return Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100;
   }),
@@ -160,8 +163,8 @@ export default Ember.Component.extend(TypeClass, {
    * @protected
    * @readonly
    */
-  percentRounded: Ember.computed('percent','roundDigits', function() {
-    var roundFactor = Math.pow(10, this.get('roundDigits'));
+  percentRounded: computed('percent', 'roundDigits', function() {
+    let roundFactor = Math.pow(10, this.get('roundDigits'));
     return Math.round(this.get('percent') * roundFactor) / roundFactor;
   }),
 
@@ -171,9 +174,9 @@ export default Ember.Component.extend(TypeClass, {
    * @private
    * @readonly
    */
-  style: Ember.computed('percent', function() {
-    var percent = this.get('percent');
+  style: computed('percent', function() {
+    let percent = this.get('percent');
     return new Ember.Handlebars.SafeString(`width: ${percent}%`);
- })
+  })
 
 });
