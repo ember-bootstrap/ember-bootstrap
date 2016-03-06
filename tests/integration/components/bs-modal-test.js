@@ -159,7 +159,59 @@ test('size property adds size class', function (assert) {
   assert.ok(this.$('.modal-dialog').hasClass('modal-lg'), 'Modal has size class.');
 });
 
-test('openedAction is called after modal is shown', function (assert) {
+test('openAction/openedAction fire correctly with fade=false', function (assert) {
+  assert.expect(4);
+
+  this.set('open', false);
+  let openActionCount = 0;
+  let openedActionCount = 0;
+  this.on('openAction', () => {
+    openActionCount += 1;
+    assert.notEqual(this.$('.modal-body').width(), 0, "the modal is displayed when openAction is fired");
+    assert.equal(openedActionCount, 0, "openAction doesn't fire before openedAction");
+  });
+  this.on('openedAction', () => {
+    openedActionCount += 1;
+  });
+  this.render(hbs`{{#bs-modal title="Simple Dialog" openAction=(action "openAction") openedAction=(action "openedAction") open=open fade=false}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
+
+  this.set('open', true);
+
+  assert.equal(openActionCount, 1, "open action fired after setting open=true");
+  assert.equal(openedActionCount, 1, "opened action fired after setting open=true");
+});
+
+test('openAction/openedAction fire correctly with fade=true', function (assert) {
+  assert.expect(5);
+
+  this.set('open', false);
+  let openActionCount = 0;
+  let openedActionCount = 0;
+  this.on('openAction', () => {
+    openActionCount += 1;
+    assert.notEqual(this.$('.modal-body').width(), 0, "the modal is displayed when openAction is fired");
+  });
+  this.on('openedAction', () => {
+    openedActionCount += 1;
+  });
+  this.render(hbs`{{#bs-modal title="Simple Dialog" openAction=(action "openAction") openedAction=(action "openedAction") open=open}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);
+
+  this.set('open', true);
+
+  assert.equal(openActionCount, 0, "open action didn't fire immediately");
+  assert.equal(openedActionCount, 0, "opened action didn't fire immediately");
+
+  // wait for fade animation
+  var done = assert.async();
+  setTimeout(() => {
+    assert.equal(openActionCount, 1, "open action fired");
+    assert.equal(openedActionCount, 1, "opened action fired");
+
+    done();
+  }, transitionTimeout);
+});
+
+test('openedAction is called after modal is shown and animation completes', function (assert) {
   assert.expect(1);
 
   this.set('open', false);
