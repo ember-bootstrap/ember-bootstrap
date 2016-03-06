@@ -17,6 +17,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.Input",
         "Components.Modal",
         "Components.ModalBody",
+        "Components.ModalDialog",
         "Components.ModalFooter",
         "Components.ModalHeader",
         "Components.Progress",

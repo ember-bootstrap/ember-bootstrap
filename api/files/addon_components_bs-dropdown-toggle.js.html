@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,6 +57,8 @@
 import Ember from &#x27;ember&#x27;;
 import DropdownToggle from &#x27;ember-bootstrap/mixins/dropdown-toggle&#x27;;
 
+const { computed } = Ember;
+
 /**
  Anchor element that triggers the parent dropdown to open.
  Use {{#crossLink &quot;Components.DropdownButton&quot;}}{{/crossLink}} if you want a button instead of an anchor tag.
@@ -68,38 +70,39 @@ import DropdownToggle from &#x27;ember-bootstrap/mixins/dropdown-toggle&#x27;;
  @namespace Components
  @extends Ember.Component
  @uses Mixins.DropdownToggle
+ @public
  */
 export default Ember.Component.extend(DropdownToggle, {
-    /**
-     * Defaults to a &#x60;&lt;a&gt;&#x60; tag. Change for other types of dropdown toggles.
-     *
-     * @property tagName
-     * @type string
-     * @default a
-     * @public
-     */
-    tagName: &#x27;a&#x27;,
+  /**
+   * Defaults to a &#x60;&lt;a&gt;&#x60; tag. Change for other types of dropdown toggles.
+   *
+   * @property tagName
+   * @type string
+   * @default a
+   * @public
+   */
+  tagName: &#x27;a&#x27;,
 
-    attributeBindings: [&#x27;href&#x27;],
+  attributeBindings: [&#x27;href&#x27;],
 
-    /**
-     * Computed property to generate a &#x60;href=&quot;#&quot;&#x60; attribute when &#x60;tagName&#x60; is &quot;a&quot;.
-     *
-     * @property href
-     * @type string
-     * @readonly
-     * @protected
-     */
-    href: Ember.computed(&#x27;tagName&#x27;, function(){
-        if (this.get(&#x27;tagName&#x27;).toUpperCase() === &#x27;A&#x27;) {
-            return &#x27;#&#x27;;
-        }
-    }),
-
-    click: function (e) {
-        e.preventDefault();
-        this.sendAction();
+  /**
+   * Computed property to generate a &#x60;href=&quot;#&quot;&#x60; attribute when &#x60;tagName&#x60; is &quot;a&quot;.
+   *
+   * @property href
+   * @type string
+   * @readonly
+   * @protected
+   */
+  href: computed(&#x27;tagName&#x27;, function() {
+    if (this.get(&#x27;tagName&#x27;).toUpperCase() === &#x27;A&#x27;) {
+      return &#x27;#&#x27;;
     }
+  }),
+
+  click(e) {
+    e.preventDefault();
+    this.sendAction();
+  }
 
 });
 
@@ -129,6 +132,7 @@ export default Ember.Component.extend(DropdownToggle, {
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

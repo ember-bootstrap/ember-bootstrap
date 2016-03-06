@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -62,34 +62,37 @@ import Ember from &#x27;ember&#x27;;
  *
  * @class SizeClass
  * @namespace Mixins
+ * @public
  */
 export default Ember.Mixin.create({
-    /**
-     * Prefix for the size class, e.g. &quot;btn&quot; for button size classes (&quot;btn-lg&quot;, &quot;btn-sm&quot; etc.)
-     *
-     * @property classTypePrefix
-     * @type string
-     * @required
-     * @protected
-     */
-    classTypePrefix: null,
-    classNameBindings: [&#x27;sizeClass&#x27;],
-    sizeClass: Ember.computed(&#x27;size&#x27;, function() {
-        var prefix = this.get(&#x27;classTypePrefix&#x27;),
-            size = this.get(&#x27;size&#x27;);
-        return Ember.isBlank(size) ? null : prefix + &#x27;-&#x27; + size;
-    }),
+  /**
+   * Prefix for the size class, e.g. &quot;btn&quot; for button size classes (&quot;btn-lg&quot;, &quot;btn-sm&quot; etc.)
+   *
+   * @property classTypePrefix
+   * @type string
+   * @required
+   * @protected
+   */
+  classTypePrefix: null,
 
-    /**
-     * Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27;
-     *
-     * Also see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)
-     *
-     * @property size
-     * @type String
-     * @public
-     */
-    size: null
+  classNameBindings: [&#x27;sizeClass&#x27;],
+
+  sizeClass: Ember.computed(&#x27;size&#x27;, function() {
+    let prefix = this.get(&#x27;classTypePrefix&#x27;);
+    let size = this.get(&#x27;size&#x27;);
+    return Ember.isBlank(size) ? null : &#x60;${prefix}-${size}&#x60;;
+  }),
+
+  /**
+   * Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27;
+   *
+   * Also see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null
 });
 
     </pre>
@@ -118,6 +121,7 @@ export default Ember.Mixin.create({
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

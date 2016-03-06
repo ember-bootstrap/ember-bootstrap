@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -59,7 +59,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-form.js.html#l4"><code>addon&#x2F;components&#x2F;bs-form.js:4</code></a>
+            Defined in: <a href="../files/addon_components_bs-form.js.html#l6"><code>addon&#x2F;components&#x2F;bs-form.js:6</code></a>
         </div>
 
 
@@ -72,10 +72,10 @@ Allows setting a <code>model</code> that nested <code>Components.FormElement</co
 <a href="https://github.com/dockyard/ember-validations">ember-validations</a></p>
 <p>You can use whatever markup you like within the form:</p>
 <pre class="code prettyprint"><code class="language-hbs">{{#bs-form action=&quot;submit&quot;}}
-  {{#bs-form-group validation=firstNameValidation}}
-    &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
-    {{bs-input type=&quot;text&quot; value=firstname}}
-  {{/bs-form-group}}
+{{#bs-form-group validation=firstNameValidation}}
+&lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
+{{bs-input type=&quot;text&quot; value=firstname}}
+{{/bs-form-group}}
 {{/bs-form}}
 </code></pre>
 <p>However to benefit from features such as automatic form markup, validations and validation markup, use <code>Components.FormElement</code>
@@ -94,10 +94,10 @@ rules are evaluated before, and if those fail, the &quot;invalid&quot; action is
 with an invalid validation, or when focusing out of invalid inputs</li>
 </ul>
 <pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
-  {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
-  {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
-  {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
-  {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
 {{/bs-form}}
 </code></pre>
 <p>See the <code>Components.FormElement</code> API docs for further information.</p>
@@ -513,7 +513,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                                 <a href="#" data-tabid="#events" data-anchor="#event_parentViewDidChange" data-tablink="parentViewDidChange">parentViewDidChange</a>
 
                             </li>
-                            <li class="index-item event">
+                            <li class="index-item event private">
                                 <a href="#" data-tabid="#events" data-anchor="#event_submit" data-tablink="submit">submit</a>
 
                             </li>
@@ -4035,7 +4035,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l127"><code>addon&#x2F;components&#x2F;bs-form.js:127</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l129"><code>addon&#x2F;components&#x2F;bs-form.js:129</code></a>
                             </p>
                     
                     
@@ -4329,7 +4329,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l86"><code>addon&#x2F;components&#x2F;bs-form.js:86</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l89"><code>addon&#x2F;components&#x2F;bs-form.js:89</code></a>
                             </p>
                     
                     
@@ -4479,7 +4479,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l95"><code>addon&#x2F;components&#x2F;bs-form.js:95</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l98"><code>addon&#x2F;components&#x2F;bs-form.js:98</code></a>
                             </p>
                     
                     
@@ -4509,7 +4509,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l105"><code>addon&#x2F;components&#x2F;bs-form.js:105</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l108"><code>addon&#x2F;components&#x2F;bs-form.js:108</code></a>
                             </p>
                     
                     
@@ -4703,7 +4703,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l58"><code>addon&#x2F;components&#x2F;bs-form.js:58</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l61"><code>addon&#x2F;components&#x2F;bs-form.js:61</code></a>
                             </p>
                     
                     
@@ -4766,7 +4766,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l72"><code>addon&#x2F;components&#x2F;bs-form.js:72</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l75"><code>addon&#x2F;components&#x2F;bs-form.js:75</code></a>
                             </p>
                     
                     
@@ -4833,7 +4833,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l117"><code>addon&#x2F;components&#x2F;bs-form.js:117</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l119"><code>addon&#x2F;components&#x2F;bs-form.js:119</code></a>
                             </p>
                     
                     
@@ -5054,18 +5054,19 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                     
                     
                     </div>
-                    <div id="event_submit" class="events item">
+                    <div id="event_submit" class="events item private">
                         <h3 class="name"><code>submit</code></h3>
                         <span class="type"></span>
                     
                     
+                            <span class="flag private">private</span>
                     
                     
                     
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l139"><code>addon&#x2F;components&#x2F;bs-form.js:139</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l141"><code>addon&#x2F;components&#x2F;bs-form.js:141</code></a>
                             </p>
                     
                     
@@ -5192,6 +5193,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

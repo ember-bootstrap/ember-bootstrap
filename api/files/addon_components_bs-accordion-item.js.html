@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -58,6 +58,8 @@ import Ember from &#x27;ember&#x27;;
 import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
 import SubComponent from &#x27;ember-bootstrap/mixins/sub-component&#x27;;
 
+const { computed } = Ember;
+
 /**
  A collapsible/expandable item within an accordion
 
@@ -69,6 +71,7 @@ import SubComponent from &#x27;ember-bootstrap/mixins/sub-component&#x27;;
  @extends Ember.Component
  @uses Mixins.TypeClass
  @uses Mixins.SubComponent
+ @public
  */
 export default Ember.Component.extend(TypeClass, SubComponent, {
   classNames: [&#x27;panel&#x27;],
@@ -96,27 +99,26 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
    * @property value
    * @public
    */
-  value: Ember.computed.oneWay(&#x27;elementId&#x27;),
+  value: computed.oneWay(&#x27;elementId&#x27;),
 
-  selected: Ember.computed.alias(&#x27;parentView.selected&#x27;),
+  selected: computed.alias(&#x27;parentView.selected&#x27;),
 
-  collapsed: Ember.computed(&#x27;value&#x27;,&#x27;selected&#x27;, function() {
+  collapsed: computed(&#x27;value&#x27;, &#x27;selected&#x27;, function() {
     return this.get(&#x27;value&#x27;) !== this.get(&#x27;selected&#x27;);
   }),
-  active: Ember.computed.not(&#x27;collapsed&#x27;),
+  active: computed.not(&#x27;collapsed&#x27;),
 
   action: &#x27;selected&#x27;,
 
   actions: {
-    toggleActive () {
-      var value = this.get(&#x27;value&#x27;),
-        previous = this.get(&#x27;selected&#x27;),
-        active = this.get(&#x27;active&#x27;);
+    toggleActive() {
+      let value = this.get(&#x27;value&#x27;);
+      let previous = this.get(&#x27;selected&#x27;);
+      let active = this.get(&#x27;active&#x27;);
       if (!active) {
         this.set(&#x27;selected&#x27;, value);
         this.sendAction(&#x27;action&#x27;, value, previous);
-      }
-      else {
+      } else {
         this.set(&#x27;selected&#x27;, null);
         this.sendAction(&#x27;action&#x27;, null, previous);
       }
@@ -151,6 +153,7 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,32 +57,28 @@
 import Ember from &#x27;ember&#x27;;
 import ComponentParentMixin from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
 
-
 /**
  * Mixin for components that act as a child component in a parent-child relationship of components
  *
  * @class ComponentChild
  * @namespace Mixins
+ * @public
  */
 export default Ember.Mixin.create({
 
-
   _didInsertElement: Ember.on(&#x27;didInsertElement&#x27;, function() {
-    var parent = this.nearestOfType(ComponentParentMixin);
+    let parent = this.nearestOfType(ComponentParentMixin);
     if (parent) {
       parent.registerChild(this);
     }
   }),
 
   _willDestroyElement: Ember.on(&#x27;willDestroyElement&#x27;, function() {
-    var parent = this.nearestOfType(ComponentParentMixin);
+    let parent = this.nearestOfType(ComponentParentMixin);
     if (parent) {
       parent.removeChild(this);
     }
   })
-
-
-
 });
 
     </pre>
@@ -111,6 +107,7 @@ export default Ember.Mixin.create({
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -56,6 +56,8 @@
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 
+const { computed } = Ember;
+
 /**
  Component for the dropdown menu.
 
@@ -64,46 +66,45 @@ import Ember from &#x27;ember&#x27;;
  @class DropdownMenu
  @namespace Components
  @extends Ember.Component
+ @public
  */
 export default Ember.Component.extend({
 
-    /**
-     * Defaults to a &#x60;&lt;ul&gt;&#x60; tag. Change for other types of dropdown menus.
-     *
-     * @property tagName
-     * @type string
-     * @default ul
-     * @public
-     */
-    tagName: &#x27;ul&#x27;,
-    classNames: [&#x27;dropdown-menu&#x27;],
-    classNameBindings: [&#x27;alignClass&#x27;],
+  /**
+   * Defaults to a &#x60;&lt;ul&gt;&#x60; tag. Change for other types of dropdown menus.
+   *
+   * @property tagName
+   * @type string
+   * @default ul
+   * @public
+   */
+  tagName: &#x27;ul&#x27;,
+  classNames: [&#x27;dropdown-menu&#x27;],
+  classNameBindings: [&#x27;alignClass&#x27;],
 
-    /**
-     * @property ariaRole
-     * @default menu
-     * @type string
-     * @protected
-     */
-    ariaRole: &#x27;menu&#x27;,
+  /**
+   * @property ariaRole
+   * @default menu
+   * @type string
+   * @protected
+   */
+  ariaRole: &#x27;menu&#x27;,
 
-    /**
-     * Alignment of the menu, either &quot;left&quot; or &quot;right&quot;
-     *
-     * @property align
-     * @type string
-     * @default left
-     * @public
-     */
-    align: &#x27;left&#x27;,
+  /**
+   * Alignment of the menu, either &quot;left&quot; or &quot;right&quot;
+   *
+   * @property align
+   * @type string
+   * @default left
+   * @public
+   */
+  align: &#x27;left&#x27;,
 
-    alignClass: Ember.computed(&#x27;align&#x27;, function() {
-        if (this.get(&#x27;align&#x27;) !== &#x27;left&#x27;) {
-            return &#x27;dropdown-menu-&#x27; + this.get(&#x27;align&#x27;);
-        }
-    })
-
-
+  alignClass: computed(&#x27;align&#x27;, function() {
+    if (this.get(&#x27;align&#x27;) !== &#x27;left&#x27;) {
+      return &#x60;dropdown-menu-${this.get(&#x27;align&#x27;)}&#x60;;
+    }
+  })
 });
 
     </pre>
@@ -132,6 +133,7 @@ export default Ember.Component.extend({
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

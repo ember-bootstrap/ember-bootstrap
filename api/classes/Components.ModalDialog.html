@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.Select - ember-bootstrap</title>
+    <title>Components.ModalDialog - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,17 +49,17 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.Select <small>Class</small></h1>
+    <h1>Components.ModalDialog <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
 
         <div class="extends">
-            Extends <a href="http://emberjs.com/api/classes/Ember.Select.html" class="crosslink external" target="_blank">Ember.Select</a>
+            Extends <a href="http://emberjs.com/api/classes/Ember.Component.html" class="crosslink external" target="_blank">Ember.Component</a>
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-select.js.html#l3"><code>addon&#x2F;components&#x2F;bs-select.js:3</code></a>
+            Defined in: <a href="../files/addon_components_bs-modal-dialog.js.html#l5"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:5</code></a>
         </div>
 
 
@@ -67,7 +67,7 @@
 
 
 <div class="well well-small">
-    <p>Extends Ember.Select to add Bootstrap's 'form-control' class.</p>
+    <p>Internal component for modal's markup and event handling. Should not be used directly.</p>
 
 </div>
 
@@ -316,6 +316,10 @@
 
                             </li>
                             <li class="index-item method public inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_sendAction" data-tablink="sendAction">sendAction</a>
+
+                            </li>
+                            <li class="index-item method public inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_set" data-tablink="set">set</a>
 
                             </li>
@@ -358,6 +362,14 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_ariaRole" data-tablink="ariaRole">ariaRole</a>
 
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_backdropClose" data-tablink="backdropClose">backdropClose</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_body" data-tablink="body">body</a>
+
+                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_classNameBindings" data-tablink="classNameBindings">classNameBindings</a>
 
@@ -366,16 +378,12 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_classNames" data-tablink="classNames">classNames</a>
 
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_closeButton" data-tablink="closeButton">closeButton</a>
+
+                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_concatenatedProperties" data-tablink="concatenatedProperties">concatenatedProperties</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_content" data-tablink="content">content</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_disabled" data-tablink="disabled">disabled</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -386,8 +394,28 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_elementId" data-tablink="elementId">elementId</a>
 
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_footer" data-tablink="footer">footer</a>
+
+                            </li>
                             <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_groupView" data-tablink="groupView">groupView</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasBlock" data-tablink="hasBlock">hasBlock</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasBlockParams" data-tablink="hasBlockParams">hasBlockParams</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_header" data-tablink="header">header</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_in" data-tablink="in">in</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -406,6 +434,10 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_isVisible" data-tablink="isVisible">isVisible</a>
 
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_keyboard" data-tablink="keyboard">keyboard</a>
+
+                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_layout" data-tablink="layout">layout</a>
 
@@ -414,40 +446,16 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_layoutName" data-tablink="layoutName">layoutName</a>
 
                             </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_multiple" data-tablink="multiple">multiple</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_optionGroupPath" data-tablink="optionGroupPath">optionGroupPath</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_optionLabelPath" data-tablink="optionLabelPath">optionLabelPath</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_optionValuePath" data-tablink="optionValuePath">optionValuePath</a>
-
-                            </li>
-                            <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_optionView" data-tablink="optionView">optionView</a>
-
-                            </li>
                             <li class="index-item property private inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_parentView" data-tablink="parentView">parentView</a>
 
                             </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_prompt" data-tablink="prompt">prompt</a>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_size" data-tablink="size">size</a>
 
                             </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_required" data-tablink="required">required</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_selection" data-tablink="selection">selection</a>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_sizeClass" data-tablink="sizeClass">sizeClass</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -455,15 +463,21 @@
 
                             </li>
                             <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_targetObject" data-tablink="targetObject">targetObject</a>
+
+                            </li>
+                            <li class="index-item property public deprecated inherited inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_template" data-tablink="template">template</a>
 
+                                    <span class="label label-deprecated">deprecated</span>
                             </li>
-                            <li class="index-item property private inherited">
+                            <li class="index-item property public deprecated inherited inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_templateName" data-tablink="templateName">templateName</a>
 
+                                    <span class="label label-deprecated">deprecated</span>
                             </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_value" data-tablink="value">value</a>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_title" data-tablink="title">title</a>
 
                             </li>
                     </ul>
@@ -3270,6 +3284,136 @@
                     
                     
                     </div>
+                    <div id="method_sendAction" class="method item public inherited">
+                        <h3 class="name">sendAction
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.Component.html#method_sendAction">Ember.Component</a>:
+                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_component.js.html#l212"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;component.js:212</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Calls a action passed to a component.
+                    
+                    For example a component for playing or pausing music may translate click events
+                    into action notifications of "play" or "stop" depending on some internal state
+                    of the component:
+                    
+                    <code>&#x60;</code>javascript
+                    // app/components/play-button.js
+                    export default Ember.Component.extend({
+                      click() {
+                        if (this.get('isPlaying')) {
+                          this.sendAction('play');
+                        } else {
+                          this.sendAction('stop');
+                        }
+                      }
+                    });
+                    <code>&#x60;</code>
+                    
+                    The actions "play" and "stop" must be passed to this <code>play-button</code> component:
+                    
+                    <code>&#x60;</code>handlebars
+                    {{! app/templates/application.hbs }}
+                    {{play-button play=(action "musicStarted") stop=(action "musicStopped")}}
+                    <code>&#x60;</code>
+                    
+                    When the component receives a browser <code>click</code> event it translate this
+                    interaction into application-specific semantics ("play" or "stop") and
+                    calls the specified action.
+                    
+                    <code>&#x60;</code>javascript
+                    // app/controller/application.js
+                    export default Ember.Controller.extend({
+                      actions: {
+                        musicStarted() {
+                          // called when the play button is clicked
+                          // and the music started playing
+                        },
+                        musicStopped() {
+                          // called when the play button is clicked
+                          // and the music stopped playing
+                        }
+                      }
+                    });
+                    <code>&#x60;</code>
+                    
+                    If no action is passed to <code>sendAction</code> a default name of "action"
+                    is assumed.
+                    
+                    <code>&#x60;</code>javascript
+                    // app/components/next-button.js
+                    export default Ember.Component.extend({
+                      click() {
+                        this.sendAction();
+                      }
+                    });
+                    <code>&#x60;</code>
+                    
+                    <code>&#x60;</code>handlebars
+                    {{! app/templates/application.hbs }}
+                    {{next-button action=(action "playNextSongInAlbum")}}
+                    <code>&#x60;</code>
+                    
+                    <code>&#x60;</code>javascript
+                    // app/controllers/application.js
+                    App.ApplicationController = Ember.Controller.extend({
+                      actions: {
+                        playNextSongInAlbum() {
+                          ...
+                        }
+                      }
+                    });
+                    <code>&#x60;</code>
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name optional">[action]</code>
+                                            <span class="type"><a href="http://emberjs.com/api/classes/String.html" class="crosslink external" target="_blank">String</a></span>
+                                            <span class="label label-info" title="This parameter is optional.">optional</span>
+                    
+                    
+                                        <div class="param-description">
+                                            the action to call
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name optional">[params]</code>
+                                            <span class="type"></span>
+                                            <span class="label label-info" title="This parameter is optional.">optional</span>
+                    
+                    
+                                        <div class="param-description">
+                                            arguments for the action
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
                     <div id="method_set" class="method item public inherited">
                         <h3 class="name">set
                         <span class="small">Ember.Observable</span>
@@ -3854,6 +3998,70 @@
                     
                     
                     </div>
+                    <div id="property_backdropClose" class="property item public">
+                        <h3 class="name">backdropClose
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l115"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:115</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>If true clicking on the backdrop will close the modal.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_body" class="property item public">
+                        <h3 class="name">body
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l80"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:80</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Generate a modal body component automatically. Set to false to disable. In this case you would want to include an
+                    instance of <a href="../classes/Components.ModalBody.html" class="crosslink">Components.ModalBody</a> in the components block template.</p>
+                    <p>Always set this to false if <code>header</code> and/or <code>footer</code> is false!</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
                     <div id="property_classNameBindings" class="property item public inherited">
                         <h3 class="name">classNameBindings
                             <span class="small">Array</span>
@@ -3950,6 +4158,37 @@
                     
                     
                     </div>
+                    <div id="property_closeButton" class="property item public">
+                        <h3 class="name">closeButton
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l29"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:29</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Display a close button (x icon) in the corner of the modal header.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
                     <div id="property_concatenatedProperties" class="property item public inherited">
                         <h3 class="name">concatenatedProperties
                             <span class="small">Array</span>
@@ -4039,84 +4278,6 @@
                     
                     
                     </div>
-                    <div id="property_content" class="property item public inherited">
-                        <h3 class="name">content
-                            <span class="small">Array</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.Select.html#property_content">Ember.Select</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_select.js.html#l370"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;select.js:370</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The list of options.
-                    
-                    If <code>optionLabelPath</code> and <code>optionValuePath</code> are not overridden, this should
-                    be a list of strings, which will serve simultaneously as labels and values.
-                    
-                    Otherwise, this should be a list of objects. For instance:
-                    
-                    <code>&#x60;</code>javascript
-                    var App = Ember.Application.create();
-                    var App.MySelect = Ember.Select.extend({
-                      content: Ember.A([
-                          { id: 1, firstName: 'Yehuda' },
-                          { id: 2, firstName: 'Tom' }
-                        ]),
-                      optionLabelPath: 'content.firstName',
-                      optionValuePath: 'content.id'
-                    });
-                    <code>&#x60;</code>
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="property_disabled" class="property item public inherited">
-                        <h3 class="name">disabled
-                            <span class="small">Boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.Select.html#property_disabled">Ember.Select</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_select.js.html#l347"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;select.js:347</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The <code>disabled</code> attribute of the select element. Indicates whether
-                    the element is disabled from interactions.
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
                     <div id="property_element" class="property item public inherited">
                         <h3 class="name">element
                             <span class="small">DOMElement</span>
@@ -4196,9 +4357,72 @@
                     
                     
                     </div>
-                    <div id="property_groupView" class="property item public inherited">
-                        <h3 class="name">groupView
-                            <span class="small">Ember.View</span>
+                    <div id="property_fade" class="property item public">
+                        <h3 class="name">fade
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l39"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:39</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Set to false to disable fade animations.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_footer" class="property item public">
+                        <h3 class="name">footer
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l93"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:93</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an
+                    instance of <a href="../classes/Components.ModalFooter.html" class="crosslink">Components.ModalFooter</a> in the components block template</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_hasBlock" class="property item public inherited">
+                        <h3 class="name">hasBlock
+                            <span class="small">unknown</span>
                         </h3>
                     
                     
@@ -4211,18 +4435,171 @@
                     
                         <div class="meta">
                                     <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.Select.html#property_groupView">Ember.Select</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_select.js.html#l473"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;select.js:473</code></a>
+                                    <a href="http://emberjs.com/api/classes/Ember.Component.html#property_hasBlock">Ember.Component</a>:
+                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_component.js.html#l335"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;component.js:335</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            The view class for optgroup.
+                            Returns true when the component was invoked with a block template.
+                    
+                    Example (<code>hasBlock</code> will be <code>false</code>):
+                    
+                    <code>&#x60;</code>hbs
+                    {{! templates/application.hbs }}
+                    
+                    {{foo-bar}}
+                    
+                    {{! templates/components/foo-bar.js }}
+                    {{#if hasBlock}}
+                      This will not be printed, because no block was provided
+                    {{/if}}
+                    <code>&#x60;</code>
+                    
+                    Example (<code>hasBlock</code> will be <code>true</code>):
+                    
+                    <code>&#x60;</code>hbs
+                    {{! templates/application.hbs }}
+                    
+                    {{#foo-bar}}
+                      Hi!
+                    {{/foo-bar}}
+                    
+                    {{! templates/components/foo-bar.js }}
+                    {{#if hasBlock}}
+                      This will be printed because a block was provided
+                      {{yield}}
+                    {{/if}}
+                    <code>&#x60;</code>
                         </div>
                     
-                            <p><strong>Default:</strong> Ember.SelectOptgroup</p>
+                    
+                    
+                    </div>
+                    <div id="property_hasBlockParams" class="property item public inherited">
+                        <h3 class="name">hasBlockParams
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.Component.html#property_hasBlockParams">Ember.Component</a>:
+                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_component.js.html#l372"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;component.js:372</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Returns true when the component was invoked with a block parameter
+                    supplied.
+                    
+                    Example (<code>hasBlockParams</code> will be <code>false</code>):
+                    
+                    <code>&#x60;</code>hbs
+                    {{! templates/application.hbs }}
+                    
+                    {{#foo-bar}}
+                      No block parameter.
+                    {{/foo-bar}}
+                    
+                    {{! templates/components/foo-bar.js }}
+                    {{#if hasBlockParams}}
+                      This will not be printed, because no block was provided
+                      {{yield this}}
+                    {{/if}}
+                    <code>&#x60;</code>
+                    
+                    Example (<code>hasBlockParams</code> will be <code>true</code>):
+                    
+                    <code>&#x60;</code>hbs
+                    {{! templates/application.hbs }}
+                    
+                    {{#foo-bar as |foo|}}
+                      Hi!
+                    {{/foo-bar}}
+                    
+                    {{! templates/components/foo-bar.js }}
+                    {{#if hasBlockParams}}
+                      This will be printed because a block was provided
+                      {{yield this}}
+                    {{/if}}
+                    <code>&#x60;</code>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_header" class="property item public">
+                        <h3 class="name">header
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l69"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:69</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Generate a modal header component automatically. Set to false to disable. In this case you would want to include an
+                    instance of <a href="../classes/Components.ModalHeader.html" class="crosslink">Components.ModalHeader</a> in the components block template</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_in" class="property item private">
+                        <h3 class="name">in
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l49"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:49</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Used to apply Bootstrap's &quot;in&quot; class</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
@@ -4351,6 +4728,37 @@
                     
                     
                     </div>
+                    <div id="property_keyboard" class="property item public">
+                        <h3 class="name">keyboard
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l59"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:59</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Closes the modal when escape key is pressed.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
                     <div id="property_layout" class="property item public inherited">
                         <h3 class="name">layout
                             <span class="small">Function</span>
@@ -4421,158 +4829,6 @@
                     
                     
                     </div>
-                    <div id="property_multiple" class="property item public inherited">
-                        <h3 class="name">multiple
-                            <span class="small">Boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.Select.html#property_multiple">Ember.Select</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_select.js.html#l336"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;select.js:336</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The <code>multiple</code> attribute of the select element. Indicates whether multiple
-                    options can be selected.
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="property_optionGroupPath" class="property item public inherited">
-                        <h3 class="name">optionGroupPath
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.Select.html#property_optionGroupPath">Ember.Select</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_select.js.html#l462"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;select.js:462</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The path of the option group.
-                    When this property is used, <code>content</code> should be sorted by <code>optionGroupPath</code>.
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="property_optionLabelPath" class="property item public inherited">
-                        <h3 class="name">optionLabelPath
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.Select.html#property_optionLabelPath">Ember.Select</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_select.js.html#l442"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;select.js:442</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The path of the option labels. See [content](/api/classes/Ember.Select.html#property_content).
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;content&#x27;</p>
-                    
-                    
-                    </div>
-                    <div id="property_optionValuePath" class="property item public inherited">
-                        <h3 class="name">optionValuePath
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.Select.html#property_optionValuePath">Ember.Select</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_select.js.html#l452"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;select.js:452</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The path of the option values. See [content](/api/classes/Ember.Select.html#property_content).
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;content&#x27;</p>
-                    
-                    
-                    </div>
-                    <div id="property_optionView" class="property item private inherited">
-                        <h3 class="name">optionView
-                            <span class="small">Ember.View</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.Select.html#property_optionView">Ember.Select</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_select.js.html#l504"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;select.js:504</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The view class for option.
-                        </div>
-                    
-                            <p><strong>Default:</strong> Ember.SelectOption</p>
-                    
-                    
-                    </div>
                     <div id="property_parentView" class="property item private inherited">
                         <h3 class="name">parentView
                             <span class="small">Ember.View</span>
@@ -4604,8 +4860,8 @@
                     
                     
                     </div>
-                    <div id="property_prompt" class="property item public inherited">
-                        <h3 class="name">prompt
+                    <div id="property_size" class="property item public">
+                        <h3 class="name">size
                             <span class="small">String</span>
                         </h3>
                     
@@ -4618,85 +4874,50 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.Select.html#property_prompt">Ember.Select</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_select.js.html#l431"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;select.js:431</code></a>
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l104"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:104</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            If given, a top-most dummy option will be rendered to serve as a user
-                    prompt.
+                            <p>Property for size styling, set to null (default), 'lg' or 'sm'</p>
+                    <p>Also see the <a href="http://getbootstrap.com/javascript/#modals-sizes">Bootstrap docs</a></p>
+                    
                         </div>
                     
-                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
-                    <div id="property_required" class="property item public inherited">
-                        <h3 class="name">required
-                            <span class="small">Boolean</span>
+                    <div id="property_sizeClass" class="property item private">
+                        <h3 class="name">sizeClass
+                            <span class="small">string</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-public">public</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.Select.html#property_required">Ember.Select</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_select.js.html#l358"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;select.js:358</code></a>
-                            </p>
-                    
-                    
-                                <div class="alert-alert-info">Available since 1.5.0</div>
-                        </div>
-                    
-                        <div class="description">
-                            The <code>required</code> attribute of the select element. Indicates whether
-                    a selected option is required for form validation.
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="property_selection" class="property item public inherited">
-                        <h3 class="name">selection
-                            <span class="small">Object or Array</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.Select.html#property_selection">Ember.Select</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_select.js.html#l397"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;select.js:397</code></a>
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l125"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:125</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            When <code>multiple</code> is <code>false</code>, the element of <code>content</code> that is currently
-                    selected, if any.
+                            <p>Name of the size class</p>
                     
-                    When <code>multiple</code> is <code>true</code>, an array of such elements.
                         </div>
                     
-                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
@@ -4734,9 +4955,9 @@
                     
                     
                     </div>
-                    <div id="property_template" class="property item private inherited">
-                        <h3 class="name">template
-                            <span class="small">Function</span>
+                    <div id="property_targetObject" class="property item private inherited">
+                        <h3 class="name">targetObject
+                            <span class="small">Ember.Controller</span>
                         </h3>
                     
                     
@@ -4749,61 +4970,105 @@
                     
                         <div class="meta">
                                     <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.View.html#property_template">Ember.View</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_view.js.html#l726"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;view.js:726</code></a>
+                                    <a href="http://emberjs.com/api/classes/Ember.Component.html#property_targetObject">Ember.Component</a>:
+                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_component.js.html#l196"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;component.js:196</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            The template used to render the view. This should be a function that
-                    accepts an optional context parameter and returns a string of HTML that
-                    will be inserted into the DOM relative to its parent view.
-                    
-                    In general, you should set the <code>templateName</code> property instead of setting
-                    the template yourself.
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_templateName" class="property item private inherited">
-                        <h3 class="name">templateName
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.View.html#property_templateName">Ember.View</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_view.js.html#l700"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;view.js:700</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The name of the template to lookup if no template is provided.
-                    
-                    By default <code>Ember.View</code> will lookup a template with this name in
-                    <code>Ember.TEMPLATES</code> (a shared global object).
+                            If the component is currently inserted into the DOM of a parent view, this
+                    property will point to the controller of the parent view.
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
-                    <div id="property_value" class="property item public inherited">
-                        <h3 class="name">value
-                            <span class="small">String</span>
+                    <div id="property_template" class="property item public deprecated inherited">
+                        <h3 class="name">template
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                            <span class="label label-warning">deprecated</span>
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                <p>Inherited from
+                                <a href="http://emberjs.com/api/classes/Ember.View.html#property_template">
+                                    Ember.View
+                                </a>
+                                but overwritten in
+                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_component.js.html#l138"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;component.js:138</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            A components template property is set by passing a block
+                    during its invocation. It is executed within the parent context.
+                    
+                    Example:
+                    
+                    <code>&#x60;</code>handlebars
+                    {{#my-component}}
+                      // something that is run in the context
+                      // of the parent context
+                    {{/my-component}}
+                    <code>&#x60;</code>
+                    
+                    Specifying a template directly to a component is deprecated without
+                    also specifying the layout property.
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_templateName" class="property item public deprecated inherited">
+                        <h3 class="name">templateName
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                            <span class="label label-warning">deprecated</span>
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                <p>Inherited from
+                                <a href="http://emberjs.com/api/classes/Ember.View.html#property_templateName">
+                                    Ember.View
+                                </a>
+                                but overwritten in
+                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_component.js.html#l186"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;component.js:186</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Specifying a components <code>templateName</code> is deprecated without also
+                    providing the <code>layout</code> or <code>layoutName</code> properties.
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_title" class="property item public">
+                        <h3 class="name">title
+                            <span class="small">string</span>
                         </h3>
                     
                     
@@ -4815,22 +5080,19 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="http://emberjs.com/api/classes/Ember.Select.html#property_value">Ember.Select</a>:
-                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_select.js.html#l410"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;select.js:410</code></a>
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-dialog.js.html#l20"><code>addon&#x2F;components&#x2F;bs-modal-dialog.js:20</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            In single selection mode (when <code>multiple</code> is <code>false</code>), value can be used to
-                    get the current selection's value or set the selection by its value.
+                            <p>The title of the modal, visible in the modal header. Is ignored if <code>header</code> is false.</p>
                     
-                    It is not currently supported in multiple selection mode.
                         </div>
                     
-                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>

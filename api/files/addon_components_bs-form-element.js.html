@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -58,8 +58,9 @@ import Ember from &#x27;ember&#x27;;
 import FormGroup from &#x27;ember-bootstrap/components/bs-form-group&#x27;;
 import Form from &#x27;ember-bootstrap/components/bs-form&#x27;;
 
+const { computed } = Ember;
 
-var nonTextFieldControlTypes = Ember.A([
+const nonTextFieldControlTypes = Ember.A([
   &#x27;checkbox&#x27;,
   &#x27;select&#x27;,
   &#x27;textarea&#x27;
@@ -160,6 +161,7 @@ var nonTextFieldControlTypes = Ember.A([
  @class FormElement
  @namespace Components
  @extends Components.FormGroup
+ @public
  */
 export default FormGroup.extend({
   /**
@@ -283,7 +285,7 @@ export default FormGroup.extend({
    * Textarea&#x27;s rows attribute (ignored for other &#x60;controlType&#x60;s)
    *
    * @property rows
-   * @type integer
+   * @type number
    * @default 5
    * @public
    */
@@ -293,7 +295,7 @@ export default FormGroup.extend({
    * Textarea&#x27;s cols attribute (ignored for other &#x60;controlType&#x60;s)
    *
    * @property cols
-   * @type integer
+   * @type number
    * @public
    */
   cols: null,
@@ -304,7 +306,7 @@ export default FormGroup.extend({
    * @property model
    * @public
    */
-  model: Ember.computed.alias(&#x27;form.model&#x27;),
+  model: computed.alias(&#x27;form.model&#x27;),
 
   /**
    * The array of error messages from the &#x60;model&#x60;&#x27;s validation.
@@ -321,7 +323,7 @@ export default FormGroup.extend({
    * @readonly
    * @protected
    */
-  hasErrors: Ember.computed.gt(&#x27;errors.length&#x27;, 0),
+  hasErrors: computed.gt(&#x27;errors.length&#x27;, 0),
 
   /**
    * @property hasValidator
@@ -329,7 +331,7 @@ export default FormGroup.extend({
    * @readonly
    * @protected
    */
-  hasValidator: Ember.computed.notEmpty(&#x27;model.validate&#x27;),
+  hasValidator: computed.notEmpty(&#x27;model.validate&#x27;),
 
   /**
    * If &#x60;true&#x60; form validation markup is rendered (requires a validatable &#x60;model&#x60;).
@@ -347,7 +349,7 @@ export default FormGroup.extend({
    * @readonly
    * @protected
    */
-  showErrors: Ember.computed.and(&#x27;showValidation&#x27;, &#x27;hasErrors&#x27;),
+  showErrors: computed.and(&#x27;showValidation&#x27;, &#x27;hasErrors&#x27;),
 
   /**
    * The validation (&quot;error&quot; or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
@@ -358,7 +360,7 @@ export default FormGroup.extend({
    * @type string
    * @protected
    */
-  validation: Ember.computed(&#x27;hasErrors&#x27;, &#x27;hasValidator&#x27;, &#x27;showValidation&#x27;, function () {
+  validation: computed(&#x27;hasErrors&#x27;, &#x27;hasValidator&#x27;, &#x27;showValidation&#x27;, function() {
     if (!this.get(&#x27;showValidation&#x27;) || !this.get(&#x27;hasValidator&#x27;)) {
       return null;
     }
@@ -371,7 +373,7 @@ export default FormGroup.extend({
    * @readonly
    * @protected
    */
-  hasLabel: Ember.computed.notEmpty(&#x27;label&#x27;),
+  hasLabel: computed.notEmpty(&#x27;label&#x27;),
 
   /**
    * True for text field &#x60;controlType&#x60;s
@@ -381,7 +383,7 @@ export default FormGroup.extend({
    * @readonly
    * @public
    */
-  useIcons: Ember.computed(&#x27;controlType&#x27;, function () {
+  useIcons: computed(&#x27;controlType&#x27;, function() {
     return !nonTextFieldControlTypes.contains(this.get(&#x27;controlType&#x27;));
   }),
 
@@ -398,7 +400,7 @@ export default FormGroup.extend({
    * @type string
    * @public
    */
-  formLayout: Ember.computed.alias(&#x27;form.formLayout&#x27;),
+  formLayout: computed.alias(&#x27;form.formLayout&#x27;),
 
   /**
    * @property isVertical
@@ -406,7 +408,7 @@ export default FormGroup.extend({
    * @readonly
    * @protected
    */
-  isVertical: Ember.computed.equal(&#x27;formLayout&#x27;, &#x27;vertical&#x27;),
+  isVertical: computed.equal(&#x27;formLayout&#x27;, &#x27;vertical&#x27;),
 
   /**
    * @property isHorizontal
@@ -414,7 +416,7 @@ export default FormGroup.extend({
    * @readonly
    * @protected
    */
-  isHorizontal: Ember.computed.equal(&#x27;formLayout&#x27;, &#x27;horizontal&#x27;),
+  isHorizontal: computed.equal(&#x27;formLayout&#x27;, &#x27;horizontal&#x27;),
 
   /**
    * @property isInline
@@ -422,7 +424,7 @@ export default FormGroup.extend({
    * @readonly
    * @protected
    */
-  isInline: Ember.computed.equal(&#x27;formLayout&#x27;, &#x27;inline&#x27;),
+  isInline: computed.equal(&#x27;formLayout&#x27;, &#x27;inline&#x27;),
 
   /**
    * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
@@ -433,7 +435,7 @@ export default FormGroup.extend({
    * @default &#x27;col-md-4&#x27;
    * @public
    */
-  horizontalLabelGridClass: Ember.computed.oneWay(&#x27;form.horizontalLabelGridClass&#x27;),
+  horizontalLabelGridClass: computed.oneWay(&#x27;form.horizontalLabelGridClass&#x27;),
 
   /**
    * Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.
@@ -443,8 +445,8 @@ export default FormGroup.extend({
    * @readonly
    * @protected
    */
-  horizontalInputGridClass: Ember.computed(&#x27;horizontalLabelGridClass&#x27;, function () {
-    var parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
+  horizontalInputGridClass: computed(&#x27;horizontalLabelGridClass&#x27;, function() {
+    let parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
     Ember.assert(&#x27;horizontalInputGridClass must match format bootstrap grid column class&#x27;, parts.length === 3);
     parts[2] = 12 - parts[2];
     return parts.join(&#x27;-&#x27;);
@@ -459,12 +461,11 @@ export default FormGroup.extend({
    * @readonly
    * @protected
    */
-  horizontalInputOffsetGridClass: Ember.computed(&#x27;horizontalLabelGridClass&#x27;, function () {
-    var parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
+  horizontalInputOffsetGridClass: computed(&#x27;horizontalLabelGridClass&#x27;, function() {
+    let parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
     parts.splice(2, 0, &#x27;offset&#x27;);
     return parts.join(&#x27;-&#x27;);
   }),
-
 
   /**
    * ID for input field and the corresponding label&#x27;s &quot;for&quot; attribute
@@ -473,7 +474,7 @@ export default FormGroup.extend({
    * @type string
    * @private
    */
-  formElementId: Ember.computed(&#x27;elementId&#x27;, function() {
+  formElementId: computed(&#x27;elementId&#x27;, function() {
     let elementId = this.get(&#x27;elementId&#x27;);
     return &#x60;${elementId}-field&#x60;;
   }),
@@ -484,14 +485,14 @@ export default FormGroup.extend({
    * @property form
    * @protected
    */
-  form: Ember.computed(function () {
+  form: computed(function() {
     return this.nearestOfType(Form);
   }),
 
-  formElementTemplate: Ember.computed(&#x27;formLayout&#x27;, &#x27;controlType&#x27;, function () {
-    var formLayout = this.getWithDefault(&#x27;formLayout&#x27;, &#x27;vertical&#x27;),
-      inputLayout,
-      controlType = this.get(&#x27;controlType&#x27;);
+  formElementTemplate: computed(&#x27;formLayout&#x27;, &#x27;controlType&#x27;, function() {
+    let formLayout = this.getWithDefault(&#x27;formLayout&#x27;, &#x27;vertical&#x27;);
+    let inputLayout;
+    let controlType = this.get(&#x27;controlType&#x27;);
 
     switch (true) {
       case nonTextFieldControlTypes.contains(controlType):
@@ -501,25 +502,25 @@ export default FormGroup.extend({
         inputLayout = &#x27;default&#x27;;
     }
 
-    return &#x27;components/form-element/&#x27; + formLayout + &#x27;/&#x27; + inputLayout;
+    return &#x60;components/form-element/${formLayout}/${inputLayout}&#x60;;
   }),
-
 
   /**
    * Listen for focusOut events from the control element to automatically set &#x60;showValidation&#x60; to true to enable
    * form validation markup rendering.
    *
    * @event focusOut
+   * @private
    */
-  focusOut: function () {
+  focusOut() {
     this.set(&#x27;showValidation&#x27;, true);
   },
 
-  init: function () {
+  init() {
     this._super();
     if (!Ember.isBlank(this.get(&#x27;property&#x27;))) {
-      Ember.Binding.from(&quot;model.&quot; + this.get(&#x27;property&#x27;)).to(&#x27;value&#x27;).connect(this);
-      Ember.Binding.from(&quot;model.errors.&quot; + this.get(&#x27;property&#x27;)).to(&#x27;errors&#x27;).connect(this);
+      Ember.Binding.from(&#x60;model.${this.get(&#x27;property&#x27;)}&#x60;).to(&#x27;value&#x27;).connect(this);
+      Ember.Binding.from(&#x60;model.errors.${this.get(&#x27;property&#x27;)}&#x60;).to(&#x27;errors&#x27;).connect(this);
     }
   }
 });
@@ -550,6 +551,7 @@ export default FormGroup.extend({
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

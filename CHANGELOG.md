@@ -1,3 +1,20 @@
+<a name"0.6.4"></a>
+### 0.6.4 (2016-03-07)
+
+
+#### Bug Fixes
+
+* **Modal:**
+  * fixed autofocus feature for whormholed modals ([c3cec755](https://github.com/kaliber5/ember-bootstrap/commit/c3cec755))
+  * Expose modal to contained components. Thanks to [bendemboski](https://github.com/bendemboski) ([7d26d07d](https://github.com/kaliber5/ember-bootstrap/commit/7d26d07d), closes [#58](https://github.com/kaliber5/ember-bootstrap/issues/58))
+  * Make modal-closer mixin less brittle (refs #58). Thanks to [bendemboski](https://github.com/bendemboski) ([4d32b08a](https://github.com/kaliber5/ember-bootstrap/commit/4d32b08a))
+
+
+#### Features
+
+* **Modal:** Implement openAction (refs #55). Thanks to [bendemboski](https://github.com/bendemboski) ([ab713eef](https://github.com/kaliber5/ember-bootstrap/commit/ab713eef))
+
+
 <a name"0.6.3"></a>
 ### 0.6.3 (2016-03-04)
 

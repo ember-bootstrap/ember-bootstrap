@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,6 +57,8 @@
 import Ember from &#x27;ember&#x27;;
 import FormElement from &#x27;ember-bootstrap/components/bs-form-element&#x27;;
 
+const { computed } = Ember;
+
 /**
  Render a form with the appropriate Bootstrap layout class (see &#x60;formLayout&#x60;).
  Allows setting a &#x60;model&#x60; that nested &#x60;Components.FormElement&#x60;s can access, and that can provide form validation through
@@ -66,10 +68,10 @@ import FormElement from &#x27;ember-bootstrap/components/bs-form-element&#x27;;
 
  &#x60;&#x60;&#x60;hbs
  {{#bs-form action=&quot;submit&quot;}}
-   {{#bs-form-group validation=firstNameValidation}}
-     &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
-     {{bs-input type=&quot;text&quot; value=firstname}}
-   {{/bs-form-group}}
+ {{#bs-form-group validation=firstNameValidation}}
+ &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
+ {{bs-input type=&quot;text&quot; value=firstname}}
+ {{/bs-form-group}}
  {{/bs-form}}
  &#x60;&#x60;&#x60;
 
@@ -93,10 +95,10 @@ import FormElement from &#x27;ember-bootstrap/components/bs-form-element&#x27;;
 
  &#x60;&#x60;&#x60;hbs
  {{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
-   {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
-   {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
-   {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
-   {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+ {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+ {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+ {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+ {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
  {{/bs-form}}
  &#x60;&#x60;&#x60;
 
@@ -105,132 +107,132 @@ import FormElement from &#x27;ember-bootstrap/components/bs-form-element&#x27;;
  @class Form
  @namespace Components
  @extends Ember.Component
-*/
+ @public
+ */
 export default Ember.Component.extend({
-    tagName: &#x27;form&#x27;,
-    classNameBindings: [&#x27;layoutClass&#x27;],
-    ariaRole: &#x27;form&#x27;,
+  tagName: &#x27;form&#x27;,
+  classNameBindings: [&#x27;layoutClass&#x27;],
+  ariaRole: &#x27;form&#x27;,
 
-    /**
-     * Bootstrap form class name (computed)
-     *
-     * @property layoutClass
-     * @type string
-     * @readonly
-     * @protected
-     *
-     */
-    layoutClass: Ember.computed(&#x27;formLayout&#x27;, function() {
-        var layout = this.get(&#x27;formLayout&#x27;);
-        return layout === &#x27;vertical&#x27; ? &#x27;form&#x27; : &#x27;form-&#x27; + layout;
-    }),
+  /**
+   * Bootstrap form class name (computed)
+   *
+   * @property layoutClass
+   * @type string
+   * @readonly
+   * @protected
+   *
+   */
+  layoutClass: computed(&#x27;formLayout&#x27;, function() {
+    let layout = this.get(&#x27;formLayout&#x27;);
+    return layout === &#x27;vertical&#x27; ? &#x27;form&#x27; : &#x60;form-${layout}&#x60;;
+  }),
 
-    /**
-     * Set a model that this form should represent. This serves several purposes:
-     *
-     * * child &#x60;Components.FormElement&#x60;s can access and bind to this model by their &#x60;property&#x60;
-     * * when the model supports validation by using the [ember-validations](https://github.com/dockyard/ember-validations) mixin,
-     * child &#x60;Components.FormElement&#x60;s will look at the validation information of their &#x60;property&#x60; and render their form group accordingly.
-     * Moreover the form&#x27;s &#x60;submit&#x60; event handler will validate the model and deny submitting if the model is not validated successfully.
-     *
-     * @property model
-     * @type Ember.Object
-     * @public
-     */
-    model: null,
+  /**
+   * Set a model that this form should represent. This serves several purposes:
+   *
+   * * child &#x60;Components.FormElement&#x60;s can access and bind to this model by their &#x60;property&#x60;
+   * * when the model supports validation by using the [ember-validations](https://github.com/dockyard/ember-validations) mixin,
+   * child &#x60;Components.FormElement&#x60;s will look at the validation information of their &#x60;property&#x60; and render their form group accordingly.
+   * Moreover the form&#x27;s &#x60;submit&#x60; event handler will validate the model and deny submitting if the model is not validated successfully.
+   *
+   * @property model
+   * @type Ember.Object
+   * @public
+   */
+  model: null,
 
-    /**
-     * Set the layout of the form to either &quot;vertical&quot;, &quot;horizontal&quot; or &quot;inline&quot;. See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal
-     *
-     * @property formLayout
-     * @type string
-     * @public
-     */
-    formLayout: &#x27;vertical&#x27;,
+  /**
+   * Set the layout of the form to either &quot;vertical&quot;, &quot;horizontal&quot; or &quot;inline&quot;. See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal
+   *
+   * @property formLayout
+   * @type string
+   * @public
+   */
+  formLayout: &#x27;vertical&#x27;,
 
-    /**
-     * Check if the &#x60;model&#x60; has a validate method, i.e. supports validation by using [ember-validations](https://github.com/dockyard/ember-validations)
-     *
-     * @property hasValidator
-     * @type boolean
-     * @readonly
-     * @protected
-     */
-    hasValidator: Ember.computed.notEmpty(&#x27;model.validate&#x27;),
+  /**
+   * Check if the &#x60;model&#x60; has a validate method, i.e. supports validation by using [ember-validations](https://github.com/dockyard/ember-validations)
+   *
+   * @property hasValidator
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  hasValidator: computed.notEmpty(&#x27;model.validate&#x27;),
 
-    /**
-     * The Bootstrap grid class for form labels. This is used by the &#x60;Components.FormElement&#x60; class as a default for the
-     * whole form.
-     *
-     * @property horizontalLabelGridClass
-     * @type string
-     * @default &#x27;col-md-4&#x27;
-     * @public
-     */
-    horizontalLabelGridClass: &#x27;col-md-4&#x27;,
+  /**
+   * The Bootstrap grid class for form labels. This is used by the &#x60;Components.FormElement&#x60; class as a default for the
+   * whole form.
+   *
+   * @property horizontalLabelGridClass
+   * @type string
+   * @default &#x27;col-md-4&#x27;
+   * @public
+   */
+  horizontalLabelGridClass: &#x27;col-md-4&#x27;,
 
+  /**
+   * If set to true pressing enter will submit the form, even if no submit button is present
+   *
+   * @property submitOnEnter
+   * @type boolean
+   * @default false
+   * @public
+   */
+  submitOnEnter: false,
 
-    /**
-     * If set to true pressing enter will submit the form, even if no submit button is present
-     *
-     * @property submitOnEnter
-     * @type boolean
-     * @default false
-     * @public
-     */
-    submitOnEnter: false,
+  /**
+   * An array of &#x60;Components.FormElement&#x60;s that are children of this form.
+   *
+   * @property childFormElements
+   * @type Array
+   * @readonly
+   * @protected
+   */
+  childFormElements: computed.filter(&#x27;childViews&#x27;, function(view) {
+    return view instanceof FormElement;
+  }),
 
-    /**
-     * An array of &#x60;Components.FormElement&#x60;s that are children of this form.
-     *
-     * @property childFormElements
-     * @type Array
-     * @readonly
-     * @protected
-     */
-    childFormElements: Ember.computed.filter(&#x27;childViews&#x27;, function(view) {
-        return view instanceof FormElement;
-    }),
-
-    /**
-     * Submit handler that will send the default action (&quot;action&quot;) to the controller when submitting the form.
-     *
-     * If there is a supplied &#x60;model&#x60; that supports validation (&#x60;hasValidator&#x60;) the model will be validated before, and
-     * only if validation is successful the default action will be sent. Otherwise an &quot;invalid&quot; action will be sent, and
-     * all the &#x60;showValidation&#x60; property of all child &#x60;Components.FormElement&#x60;s will be set to true, so error state and
-     * messages will be shown automatically.
-     *
-     * @event submit
-     */
-    submit: function(e) {
-        var that = this;
-        if (e) {
-            e.preventDefault();
-        }
-        if (!this.get(&#x27;hasValidator&#x27;)) {
-            return this.sendAction();
-        } else {
-            return this
-                .get(&#x27;model&#x27;)
-                .validate()
-                .then(function() {
-                    if (that.get(&#x27;model.isValid&#x27;)) {
-                        return that.sendAction();
-                    }
-                })
-                .catch(function(){
-                    that.get(&#x27;childFormElements&#x27;).setEach(&#x27;showValidation&#x27;, true);
-                    return that.sendAction(&#x27;invalid&#x27;);
-                });
-        }
-    },
-
-    keyPress: function(e) {
-        var code = e.keyCode || e.which;
-        if(code === 13 &amp;&amp; this.get(&#x27;submitOnEnter&#x27;)) {
-            this.$().submit();
-        }
+  /**
+   * Submit handler that will send the default action (&quot;action&quot;) to the controller when submitting the form.
+   *
+   * If there is a supplied &#x60;model&#x60; that supports validation (&#x60;hasValidator&#x60;) the model will be validated before, and
+   * only if validation is successful the default action will be sent. Otherwise an &quot;invalid&quot; action will be sent, and
+   * all the &#x60;showValidation&#x60; property of all child &#x60;Components.FormElement&#x60;s will be set to true, so error state and
+   * messages will be shown automatically.
+   *
+   * @event submit
+   * @private
+   */
+  submit(e) {
+    if (e) {
+      e.preventDefault();
     }
+    if (!this.get(&#x27;hasValidator&#x27;)) {
+      return this.sendAction();
+    } else {
+      return this
+        .get(&#x27;model&#x27;)
+        .validate()
+        .then(() =&gt; {
+          if (this.get(&#x27;model.isValid&#x27;)) {
+            return this.sendAction();
+          }
+        })
+        .catch(() =&gt; {
+          this.get(&#x27;childFormElements&#x27;).setEach(&#x27;showValidation&#x27;, true);
+          return this.sendAction(&#x27;invalid&#x27;);
+        });
+    }
+  },
+
+  keyPress(e) {
+    let code = e.keyCode || e.which;
+    if (code === 13 &amp;&amp; this.get(&#x27;submitOnEnter&#x27;)) {
+      this.$().submit();
+    }
+  }
 });
     </pre>
 </div>
@@ -258,6 +260,7 @@ export default Ember.Component.extend({
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

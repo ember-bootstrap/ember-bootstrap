@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -69,7 +69,7 @@
 <div class="well well-small">
     <p>Component for creating <a href="http://getbootstrap.com/javascript/#modals">Bootstrap modals</a>. Creating a simple modal is easy:</p>
 <pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal title="Simple Dialog"}}
-   Hello world!
+ Hello world!
  {{/bs-modal}}
 </code></pre>
 <p>This will automatically create the appropriate markup, with a modal header containing the title, and a footer containing
@@ -77,7 +77,7 @@ a default "Ok" button, that will close the modal automatically (unless you set <
 A modal created this way will be visible at once. You can use the <code>{{#if ...}}</code> helper to hide all modal elements form
 the DOM until needed. Or you can bind the <code>open</code> property to trigger showing and hiding the modal:</p>
 <pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal open=openModal title="Simple Dialog"}}
-   Hello world!
+ Hello world!
  {{/bs-modal}}
 </code></pre>
 <h3>Custom Markup</h3>
@@ -92,21 +92,21 @@ A common use case is to customize the buttons in the footer. Most often you will
 model without action, and a submit button that triggers some action. The footer component supports this case by letting
 you customize the button titles, the rest (triggering close or submit actions) automatically set up:</p>
 <pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal body=false footer=false title="Attention" submitAction=(action "submit")}}
-   {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}
-   {{bs-modal-footer closeTitle="Cancel" submitTitle="Ok"}}
+ {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}
+ {{bs-modal-footer closeTitle="Cancel" submitTitle="Ok"}}
  {{/bs-modal}}
 </code></pre>
 <p>If you further want to customize your modal elements, you can supply custom templates for your footer and header, as in
 the following example:</p>
 <pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal body=false footer=false header=false submitAction=(action "submit")}}
-   {{#bs-modal-header}}
-     &lt;h4 class="modal-title"&gt;&lt;i class="glyphicon glyphicon-alert"&gt;&lt;/i&gt; Alert&lt;/h4&gt;
-   {{/bs-modal-header}}
-   {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}
-   {{#bs-modal-footer as |footer|}}
-     {{#bs-button action=(action "close" target=footer) type="danger"}}Oh no, forget it!{{/bs-button}}
-     {{#bs-button buttonType="submit" type="success"}}Yeah!{{/bs-button}}
-   {{/bs-modal-footer}}
+ {{#bs-modal-header}}
+ &lt;h4 class="modal-title"&gt;&lt;i class="glyphicon glyphicon-alert"&gt;&lt;/i&gt; Alert&lt;/h4&gt;
+ {{/bs-modal-header}}
+ {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}
+ {{#bs-modal-footer as |footer|}}
+ {{#bs-button action=(action "close" target=footer) type="danger"}}Oh no, forget it!{{/bs-button}}
+ {{#bs-button buttonType="submit" type="success"}}Yeah!{{/bs-button}}
+ {{/bs-modal-footer}}
  {{/bs-modal}}
 </code></pre>
 <p>Note the use of the action helper of the close button that triggers the close action on the modal footer component
@@ -117,13 +117,13 @@ within your form but instead in your modal footer. Hover pressing the submit but
 trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
 thus bypass the form validation feature of the form component.</p>
 <pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal title="Form Example" body=false footer=false}}
-   {{#bs-modal-body}}
-     {{#bs-form action=(action "submit") model=this}}
-       {{bs-form-element controlType="text" label="first name" property="firstname"}}
-       {{bs-form-element controlType="text" label="last name" property="lastname"}}
-     {{/bs-form}}
-   {{/bs-modal-body}}
-   {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
+ {{#bs-modal-body}}
+ {{#bs-form action=(action "submit") model=this}}
+ {{bs-form-element controlType="text" label="first name" property="firstname"}}
+ {{bs-form-element controlType="text" label="last name" property="lastname"}}
+ {{/bs-form}}
+ {{/bs-modal-body}}
+ {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
  {{/bs-modal}}
 </code></pre>
 <p>The modal component supports this common case by triggering the submit event programmatically on the body's form if
@@ -132,15 +132,15 @@ present whenever the footer's submit button is pressed, so the example above wil
 <p>In order to allow key handling to function, the modal's root element is given focus once the modal is shown. If your
 modal contains an element such as a text input and you would like it to be given focus rather than the modal element,
 then give it the HTML5 autofocus attribute:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-modal title="Form Example" body=false footer=false}}
-  {{#bs-modal-body}}
-    {{#bs-form action=(action "submit") model=this}}
-      {{bs-form-element controlType="text" label="first name" property="firstname" autofocus=true}}
-      {{bs-form-element controlType="text" label="last name" property="lastname"}}
-    {{/bs-form}}
-  {{/bs-modal-body}}
-  {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
-{{/bs-modal}}
+<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal title="Form Example" body=false footer=false}}
+ {{#bs-modal-body}}
+ {{#bs-form action=(action "submit") model=this}}
+ {{bs-form-element controlType="text" label="first name" property="firstname" autofocus=true}}
+ {{bs-form-element controlType="text" label="last name" property="lastname"}}
+ {{/bs-form}}
+ {{/bs-modal-body}}
+ {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
+ {{/bs-modal}}
 </code></pre>
 <h3>Modals inside wormhole</h3>
 <p>Modals make use of the <a href="https://github.com/yapplabs/ember-wormhole">ember-wormhole</a> addon, which will be installed
@@ -609,6 +609,10 @@ If you want the modal to render in place, rather than being wormholed, you can s
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_open" data-tablink="open">open</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_openAction" data-tablink="openAction">openAction</a>
 
                             </li>
                             <li class="index-item property public">
@@ -1159,7 +1163,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l610"><code>addon&#x2F;components&#x2F;bs-modal.js:610</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l611"><code>addon&#x2F;components&#x2F;bs-modal.js:611</code></a>
                             </p>
                     
                     
@@ -1406,7 +1410,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l633"><code>addon&#x2F;components&#x2F;bs-modal.js:633</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l634"><code>addon&#x2F;components&#x2F;bs-modal.js:634</code></a>
                             </p>
                     
                     
@@ -1956,7 +1960,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l532"><code>addon&#x2F;components&#x2F;bs-modal.js:532</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l535"><code>addon&#x2F;components&#x2F;bs-modal.js:535</code></a>
                             </p>
                     
                     
@@ -2059,7 +2063,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l602"><code>addon&#x2F;components&#x2F;bs-modal.js:602</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l603"><code>addon&#x2F;components&#x2F;bs-modal.js:603</code></a>
                             </p>
                     
                     
@@ -2199,7 +2203,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l490"><code>addon&#x2F;components&#x2F;bs-modal.js:490</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l496"><code>addon&#x2F;components&#x2F;bs-modal.js:496</code></a>
                             </p>
                     
                     
@@ -2230,7 +2234,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l512"><code>addon&#x2F;components&#x2F;bs-modal.js:512</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l515"><code>addon&#x2F;components&#x2F;bs-modal.js:515</code></a>
                             </p>
                     
                     
@@ -3606,7 +3610,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l622"><code>addon&#x2F;components&#x2F;bs-modal.js:622</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l623"><code>addon&#x2F;components&#x2F;bs-modal.js:623</code></a>
                             </p>
                     
                     
@@ -3636,7 +3640,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l659"><code>addon&#x2F;components&#x2F;bs-modal.js:659</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l660"><code>addon&#x2F;components&#x2F;bs-modal.js:660</code></a>
                             </p>
                     
                     
@@ -3666,7 +3670,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l588"><code>addon&#x2F;components&#x2F;bs-modal.js:588</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l589"><code>addon&#x2F;components&#x2F;bs-modal.js:589</code></a>
                             </p>
                     
                     
@@ -4067,7 +4071,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l647"><code>addon&#x2F;components&#x2F;bs-modal.js:647</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l648"><code>addon&#x2F;components&#x2F;bs-modal.js:648</code></a>
                             </p>
                     
                     
@@ -4097,7 +4101,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l442"><code>addon&#x2F;components&#x2F;bs-modal.js:442</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l453"><code>addon&#x2F;components&#x2F;bs-modal.js:453</code></a>
                             </p>
                     
                     
@@ -4128,7 +4132,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l428"><code>addon&#x2F;components&#x2F;bs-modal.js:428</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l438"><code>addon&#x2F;components&#x2F;bs-modal.js:438</code></a>
                             </p>
                     
                     
@@ -4581,7 +4585,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l216"><code>addon&#x2F;components&#x2F;bs-modal.js:216</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l217"><code>addon&#x2F;components&#x2F;bs-modal.js:217</code></a>
                             </p>
                     
                     
@@ -4614,7 +4618,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l188"><code>addon&#x2F;components&#x2F;bs-modal.js:188</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l189"><code>addon&#x2F;components&#x2F;bs-modal.js:189</code></a>
                             </p>
                     
                     
@@ -4645,7 +4649,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l334"><code>addon&#x2F;components&#x2F;bs-modal.js:334</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l335"><code>addon&#x2F;components&#x2F;bs-modal.js:335</code></a>
                             </p>
                     
                     
@@ -4676,7 +4680,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l299"><code>addon&#x2F;components&#x2F;bs-modal.js:299</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l300"><code>addon&#x2F;components&#x2F;bs-modal.js:300</code></a>
                             </p>
                     
                     
@@ -4706,7 +4710,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l287"><code>addon&#x2F;components&#x2F;bs-modal.js:287</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l288"><code>addon&#x2F;components&#x2F;bs-modal.js:288</code></a>
                             </p>
                     
                     
@@ -4736,7 +4740,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l239"><code>addon&#x2F;components&#x2F;bs-modal.js:239</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l240"><code>addon&#x2F;components&#x2F;bs-modal.js:240</code></a>
                             </p>
                     
                     
@@ -4865,7 +4869,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l367"><code>addon&#x2F;components&#x2F;bs-modal.js:367</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l368"><code>addon&#x2F;components&#x2F;bs-modal.js:368</code></a>
                             </p>
                     
                     
@@ -4901,7 +4905,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l158"><code>addon&#x2F;components&#x2F;bs-modal.js:158</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l159"><code>addon&#x2F;components&#x2F;bs-modal.js:159</code></a>
                             </p>
                     
                     
@@ -5131,7 +5135,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l168"><code>addon&#x2F;components&#x2F;bs-modal.js:168</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l169"><code>addon&#x2F;components&#x2F;bs-modal.js:169</code></a>
                             </p>
                     
                     
@@ -5162,7 +5166,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l252"><code>addon&#x2F;components&#x2F;bs-modal.js:252</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l253"><code>addon&#x2F;components&#x2F;bs-modal.js:253</code></a>
                             </p>
                     
                     
@@ -5314,7 +5318,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l228"><code>addon&#x2F;components&#x2F;bs-modal.js:228</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l229"><code>addon&#x2F;components&#x2F;bs-modal.js:229</code></a>
                             </p>
                     
                     
@@ -5346,7 +5350,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l178"><code>addon&#x2F;components&#x2F;bs-modal.js:178</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l179"><code>addon&#x2F;components&#x2F;bs-modal.js:179</code></a>
                             </p>
                     
                     
@@ -5502,7 +5506,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l206"><code>addon&#x2F;components&#x2F;bs-modal.js:206</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l207"><code>addon&#x2F;components&#x2F;bs-modal.js:207</code></a>
                             </p>
                     
                     
@@ -5603,7 +5607,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l275"><code>addon&#x2F;components&#x2F;bs-modal.js:275</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l276"><code>addon&#x2F;components&#x2F;bs-modal.js:276</code></a>
                             </p>
                     
                     
@@ -5633,7 +5637,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l263"><code>addon&#x2F;components&#x2F;bs-modal.js:263</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l264"><code>addon&#x2F;components&#x2F;bs-modal.js:264</code></a>
                             </p>
                     
                     
@@ -5663,7 +5667,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l139"><code>addon&#x2F;components&#x2F;bs-modal.js:139</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l140"><code>addon&#x2F;components&#x2F;bs-modal.js:140</code></a>
                             </p>
                     
                     
@@ -5675,6 +5679,40 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         </div>
                     
                             <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_openAction" class="property item public">
+                        <h3 class="name">openAction
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal.js.html#l394"><code>addon&#x2F;components&#x2F;bs-modal.js:394</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent when the modal is opening.
+                    This will be triggered immediately after the modal is shown (so it's safe to access the DOM for
+                    size calculations and the like). This means that if fade=true, it will be shown in between the
+                    backdrop animation and the fade animation.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
@@ -5694,7 +5732,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l394"><code>addon&#x2F;components&#x2F;bs-modal.js:394</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l407"><code>addon&#x2F;components&#x2F;bs-modal.js:407</code></a>
                             </p>
                     
                     
@@ -5756,7 +5794,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l344"><code>addon&#x2F;components&#x2F;bs-modal.js:344</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l345"><code>addon&#x2F;components&#x2F;bs-modal.js:345</code></a>
                             </p>
                     
                     
@@ -5787,7 +5825,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l667"><code>addon&#x2F;components&#x2F;bs-modal.js:667</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l668"><code>addon&#x2F;components&#x2F;bs-modal.js:668</code></a>
                             </p>
                     
                     
@@ -5816,7 +5854,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l198"><code>addon&#x2F;components&#x2F;bs-modal.js:198</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l199"><code>addon&#x2F;components&#x2F;bs-modal.js:199</code></a>
                             </p>
                     
                     
@@ -5846,7 +5884,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l323"><code>addon&#x2F;components&#x2F;bs-modal.js:323</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l324"><code>addon&#x2F;components&#x2F;bs-modal.js:324</code></a>
                             </p>
                     
                     
@@ -5877,7 +5915,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l354"><code>addon&#x2F;components&#x2F;bs-modal.js:354</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l355"><code>addon&#x2F;components&#x2F;bs-modal.js:355</code></a>
                             </p>
                     
                     
@@ -6056,7 +6094,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l149"><code>addon&#x2F;components&#x2F;bs-modal.js:149</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l150"><code>addon&#x2F;components&#x2F;bs-modal.js:150</code></a>
                             </p>
                     
                     
@@ -6086,7 +6124,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l311"><code>addon&#x2F;components&#x2F;bs-modal.js:311</code></a>
+                            <a href="../files/addon_components_bs-modal.js.html#l312"><code>addon&#x2F;components&#x2F;bs-modal.js:312</code></a>
                             </p>
                     
                     
@@ -6270,6 +6308,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

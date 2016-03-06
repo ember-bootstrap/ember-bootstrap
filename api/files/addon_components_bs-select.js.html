@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -62,6 +62,7 @@ import Ember from &#x27;ember&#x27;;
  @class Select
  @namespace Components
  @extends Ember.Select
+ @public
  */
 export default Ember.Component.extend({
   tagName: &#x27;select&#x27;,
@@ -82,26 +83,24 @@ export default Ember.Component.extend({
     }
   },
 
-  change: function() {
-    var selectEl = this.$().get(0);
-    var selectedIndex = selectEl.selectedIndex;
-    var content = this.get(&#x27;content&#x27;);
+  change() {
+    let selectEl = this.$().get(0);
+    let { selectedIndex } = selectEl;
+    let content = this.get(&#x27;content&#x27;);
 
     // decrement index by 1 if we have a prompt
-    var hasPrompt = !!this.get(&#x27;prompt&#x27;);
-    var contentIndex = hasPrompt ? selectedIndex - 1 : selectedIndex;
+    let hasPrompt = !!this.get(&#x27;prompt&#x27;);
+    let contentIndex = hasPrompt ? selectedIndex - 1 : selectedIndex;
 
-    var selection = content[contentIndex];
+    let selection = content[contentIndex];
 
     // set the local, shadowed selection to avoid leaking
     // changes to &#x60;selection&#x60; out via 2-way binding
     this.set(&#x27;value&#x27;, selection);
 
-    var changeCallback = this.get(&#x27;action&#x27;);
+    let changeCallback = this.get(&#x27;action&#x27;);
     changeCallback(selection);
   }
-
-  
 });
     </pre>
 </div>
@@ -129,6 +128,7 @@ export default Ember.Component.extend({
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

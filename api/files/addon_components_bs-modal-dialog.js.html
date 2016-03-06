@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -56,14 +56,16 @@
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 
-/*
+const { computed } = Ember;
+
+/**
   Internal component for modal&#x27;s markup and event handling. Should not be used directly.
 
   @class ModalDialog
   @namespace Components
   @extends Ember.Component
   @private
-*/
+ */
 export default Ember.Component.extend({
   classNames: [&#x27;modal&#x27;],
   classNameBindings: [&#x27;fade&#x27;, &#x27;in&#x27;],
@@ -108,7 +110,7 @@ export default Ember.Component.extend({
    * @default false
    * @private
    */
-  in: false,
+  &#x27;in&#x27;: false,
 
   /**
    * Closes the modal when escape key is pressed.
@@ -183,24 +185,22 @@ export default Ember.Component.extend({
    * @type string
    * @private
    */
-  sizeClass: Ember.computed(&#x27;size&#x27;, function () {
-    var size = this.get(&#x27;size&#x27;);
-    return Ember.isBlank(size) ? null : &#x27;modal-&#x27; + size;
+  sizeClass: computed(&#x27;size&#x27;, function() {
+    let size = this.get(&#x27;size&#x27;);
+    return Ember.isBlank(size) ? null : &#x60;modal-${size}&#x60;;
   }),
 
   keyDown(e) {
-    var code = e.keyCode || e.which;
-    if(code === 27 &amp;&amp; this.get(&#x27;keyboard&#x27;)) {
+    let code = e.keyCode || e.which;
+    if (code === 27 &amp;&amp; this.get(&#x27;keyboard&#x27;)) {
       this.sendAction(&#x27;close&#x27;);
     }
   },
 
   click(e) {
-
     if (e.target !== e.currentTarget || !this.get(&#x27;backdropClose&#x27;)) {
       return;
     }
-
     this.sendAction(&#x27;close&#x27;);
   }
 
@@ -231,6 +231,7 @@ export default Ember.Component.extend({
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

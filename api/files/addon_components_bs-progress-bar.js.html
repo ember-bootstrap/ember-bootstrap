@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -56,6 +56,8 @@
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
+
+const { computed } = Ember;
 
 /**
 
@@ -90,12 +92,13 @@ import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
  @namespace Components
  @extends Ember.Component
  @uses Mixins.TypeClass
+ @public
  */
 export default Ember.Component.extend(TypeClass, {
   classNames: [&#x27;progress-bar&#x27;],
-  classNameBindings: [&#x27;progressBarStriped&#x27;,&#x27;active&#x27;],
+  classNameBindings: [&#x27;progressBarStriped&#x27;, &#x27;active&#x27;],
 
-  attributeBindings: [&#x27;style&#x27;,&#x27;ariaValuenow&#x27;,&#x27;ariaValuemin&#x27;,&#x27;ariaValuemax&#x27;],
+  attributeBindings: [&#x27;style&#x27;, &#x27;ariaValuenow&#x27;, &#x27;ariaValuemin&#x27;, &#x27;ariaValuemax&#x27;],
 
   /**
    * @property classTypePrefix
@@ -185,12 +188,12 @@ export default Ember.Component.extend(TypeClass, {
    */
   roundDigits: 0,
 
-  progressBarStriped: Ember.computed.alias(&#x27;striped&#x27;),
-  active: Ember.computed.alias(&#x27;animate&#x27;),
+  progressBarStriped: computed.alias(&#x27;striped&#x27;),
+  active: computed.alias(&#x27;animate&#x27;),
 
-  ariaValuenow: Ember.computed.alias(&#x27;value&#x27;),
-  ariaValuemin: Ember.computed.alias(&#x27;minValue&#x27;),
-  ariaValuemax: Ember.computed.alias(&#x27;maxValue&#x27;),
+  ariaValuenow: computed.alias(&#x27;value&#x27;),
+  ariaValuemin: computed.alias(&#x27;minValue&#x27;),
+  ariaValuemax: computed.alias(&#x27;maxValue&#x27;),
 
   /**
    * The percentage of &#x60;value&#x60;
@@ -200,10 +203,10 @@ export default Ember.Component.extend(TypeClass, {
    * @protected
    * @readonly
    */
-  percent: Ember.computed(&#x27;value&#x27;,&#x27;minValue&#x27;,&#x27;maxValue&#x27;, function() {
-    var value = parseFloat(this.get(&#x27;value&#x27;)),
-      minValue = parseFloat(this.get(&#x27;minValue&#x27;)),
-      maxValue = parseFloat(this.get(&#x27;maxValue&#x27;));
+  percent: computed(&#x27;value&#x27;, &#x27;minValue&#x27;, &#x27;maxValue&#x27;, function() {
+    let value = parseFloat(this.get(&#x27;value&#x27;));
+    let minValue = parseFloat(this.get(&#x27;minValue&#x27;));
+    let maxValue = parseFloat(this.get(&#x27;maxValue&#x27;));
 
     return Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100;
   }),
@@ -216,8 +219,8 @@ export default Ember.Component.extend(TypeClass, {
    * @protected
    * @readonly
    */
-  percentRounded: Ember.computed(&#x27;percent&#x27;,&#x27;roundDigits&#x27;, function() {
-    var roundFactor = Math.pow(10, this.get(&#x27;roundDigits&#x27;));
+  percentRounded: computed(&#x27;percent&#x27;, &#x27;roundDigits&#x27;, function() {
+    let roundFactor = Math.pow(10, this.get(&#x27;roundDigits&#x27;));
     return Math.round(this.get(&#x27;percent&#x27;) * roundFactor) / roundFactor;
   }),
 
@@ -227,10 +230,10 @@ export default Ember.Component.extend(TypeClass, {
    * @private
    * @readonly
    */
-  style: Ember.computed(&#x27;percent&#x27;, function() {
-    var percent = this.get(&#x27;percent&#x27;);
+  style: computed(&#x27;percent&#x27;, function() {
+    let percent = this.get(&#x27;percent&#x27;);
     return new Ember.Handlebars.SafeString(&#x60;width: ${percent}%&#x60;);
- })
+  })
 
 });
 
@@ -260,6 +263,7 @@ export default Ember.Component.extend(TypeClass, {
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

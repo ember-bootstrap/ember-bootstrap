@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,6 +57,7 @@
 import Ember from &#x27;ember&#x27;;
 import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
 
+const { computed, observer } = Ember;
 
 /**
  Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts
@@ -74,6 +75,7 @@ import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
  @namespace Components
  @extends Ember.Component
  @uses Mixins.TypeClass
+ @public
  */
 export default Ember.Component.extend(TypeClass, {
   classNameBindings: [&#x27;alert&#x27;, &#x27;fade&#x27;, &#x27;in&#x27;],
@@ -98,7 +100,7 @@ export default Ember.Component.extend(TypeClass, {
    * @readonly
    * @protected
    */
-  dismissed: Ember.computed.oneWay(&#x27;notVisible&#x27;),
+  dismissed: computed.oneWay(&#x27;notVisible&#x27;),
 
   /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
@@ -110,7 +112,7 @@ export default Ember.Component.extend(TypeClass, {
    * @public
    */
   visible: true,
-  notVisible: Ember.computed.not(&#x27;visible&#x27;),
+  notVisible: computed.not(&#x27;visible&#x27;),
 
   /**
    * Set to false to disable the fade out animation when hiding the alert.
@@ -130,8 +132,8 @@ export default Ember.Component.extend(TypeClass, {
    * @type boolean
    * @private
    */
-  alert: Ember.computed.not(&#x27;dismissed&#x27;),
-  in: Ember.computed.and(&#x27;visible&#x27;, &#x27;fade&#x27;),
+  alert: computed.not(&#x27;dismissed&#x27;),
+  in: computed.and(&#x27;visible&#x27;, &#x27;fade&#x27;),
 
   /**
    * @property classTypePrefix
@@ -162,16 +164,15 @@ export default Ember.Component.extend(TypeClass, {
   dismissedAction: null,
 
   actions: {
-    dismiss: function () {
+    dismiss() {
       this.set(&#x27;visible&#x27;, false);
     }
   },
 
-  _onVisibleChange: Ember.observer(&#x27;visible&#x27;, function () {
+  _onVisibleChange: observer(&#x27;visible&#x27;, function() {
     if (this.get(&#x27;visible&#x27;)) {
       this.show();
-    }
-    else {
+    } else {
       this.hide();
     }
   }),
@@ -182,7 +183,7 @@ export default Ember.Component.extend(TypeClass, {
    * @method show
    * @private
    */
-  show: function () {
+  show() {
     this.setProperties({
       dismissed: false
     });
@@ -195,26 +196,22 @@ export default Ember.Component.extend(TypeClass, {
    * @method hide
    * @private
    */
-  hide: function () {
+  hide() {
     if (this.get(&#x27;fade&#x27;)) {
-      Ember.run.later(this, function () {
+      Ember.run.later(this, function() {
         if (!this.get(&#x27;isDestroyed&#x27;)) {
           this.set(&#x27;dismissed&#x27;, true);
           this.sendAction(&#x27;dismissedAction&#x27;);
         }
       }, this.get(&#x27;fadeDuration&#x27;));
-    }
-    else {
+    } else {
       this.setProperties({
         dismissed: true
       });
       this.sendAction(&#x27;dismissedAction&#x27;);
     }
   }
-
-
 });
-
     </pre>
 </div>
                     </div>
@@ -241,6 +238,7 @@ export default Ember.Component.extend(TypeClass, {
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

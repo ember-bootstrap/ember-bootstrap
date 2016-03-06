@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -61,6 +61,7 @@ import Ember from &#x27;ember&#x27;;
  *
  * @class ComponentParent
  * @namespace Mixins
+ * @public
  */
 export default Ember.Mixin.create({
 
@@ -84,7 +85,7 @@ export default Ember.Mixin.create({
    * @param child
    * @public
    */
-  registerChild: function(child) {
+  registerChild(child) {
     Ember.run.schedule(&#x27;sync&#x27;, this, function() {
       this.get(&#x27;children&#x27;).addObject(child);
     });
@@ -97,7 +98,7 @@ export default Ember.Mixin.create({
    * @param child
    * @public
    */
-  removeChild: function(child) {
+  removeChild(child) {
     this.get(&#x27;children&#x27;).removeObject(child);
   }
 });
@@ -128,6 +129,7 @@ export default Ember.Mixin.create({
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

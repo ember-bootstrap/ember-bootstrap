@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -55,19 +55,25 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import ModalComponent from &#x27;../components/bs-modal&#x27;;
 
 /**
  * @class ModalCloser
  * @namespace Mixins
+ * @public
  */
 export default Ember.Mixin.create({
-    targetObject: Ember.computed.alias(&#x27;parentView.parentView.parentView&#x27;),
-    action: &#x27;close&#x27;,
-    actions: {
-        close: function() {
-            this.sendAction();
-        }
+  targetObject: Ember.computed(function() {
+    return this.nearestOfType(ModalComponent);
+  }).volatile(),
+
+  action: &#x27;close&#x27;,
+
+  actions: {
+    close() {
+      this.sendAction();
     }
+  }
 });
 
     </pre>
@@ -96,6 +102,7 @@ export default Ember.Mixin.create({
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>

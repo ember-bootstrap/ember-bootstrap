@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.3</span></h1>
+    <h1>API Docs <span class="small">v0.6.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -62,31 +62,32 @@ import componentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
  *
  * @class DropdownToggle
  * @namespace Mixins
+ * @public
  */
 export default Ember.Mixin.create(componentChild, {
-    classNames: [&#x27;dropdown-toggle&#x27;],
-    attributeBindings: [&#x27;data-toggle&#x27;],
-    /**
-     * @property ariaRole
-     * @default button
-     * @type string
-     * @protected
-     */
-    ariaRole: &#x27;button&#x27;,
+  classNames: [&#x27;dropdown-toggle&#x27;],
+  attributeBindings: [&#x27;data-toggle&#x27;],
+  /**
+   * @property ariaRole
+   * @default button
+   * @type string
+   * @protected
+   */
+  ariaRole: &#x27;button&#x27;,
 
-    &#x27;data-toggle&#x27;: &#x27;dropdown&#x27;,
+  &#x27;data-toggle&#x27;: &#x27;dropdown&#x27;,
 
-    targetObject: Ember.computed.alias(&#x27;parentView&#x27;),
+  targetObject: Ember.computed.alias(&#x27;parentView&#x27;),
 
-    /**
-     * The default action is set to &quot;toggleDropdown&quot; on the parent {{#crossLink &quot;Components.Dropdown&quot;}}{{/crossLink}}
-     *
-     * @property action
-     * @default toggleDropdown
-     * @type string
-     * @protected
-     */
-    action: &#x27;toggleDropdown&#x27;
+  /**
+   * The default action is set to &quot;toggleDropdown&quot; on the parent {{#crossLink &quot;Components.Dropdown&quot;}}{{/crossLink}}
+   *
+   * @property action
+   * @default toggleDropdown
+   * @type string
+   * @protected
+   */
+  action: &#x27;toggleDropdown&#x27;
 });
 
     </pre>
@@ -115,6 +116,7 @@ export default Ember.Mixin.create(componentChild, {
                     <li><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
