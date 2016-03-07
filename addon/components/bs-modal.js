@@ -442,12 +442,13 @@ export default Ember.Component.extend({
    * @private
    */
   takeFocus() {
-
-    let focusElement = this.get('modalElement').find('[autofocus]');
+    let focusElement = this.get('modalElement').find('[autofocus]').first();
     if (focusElement.length === 0) {
       focusElement = this.get('modalElement');
     }
-    focusElement.focus();
+    if (focusElement.length > 0) {
+      focusElement.focus();
+    }
   },
 
   /**

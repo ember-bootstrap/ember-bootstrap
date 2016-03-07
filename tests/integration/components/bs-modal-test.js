@@ -334,7 +334,7 @@ test('autofocus element is focused when present and fade=false', function(assert
     <div id="ember-bootstrap-modal-container"></div>
   `);
 
-  this.$('.my-input').focus(() => {
+  this.$('.my-input').one('focus', () => {
     assert.ok(true, 'focus was triggered on the autofocus element');
   });
 
@@ -352,7 +352,7 @@ test('autofocus element is focused when present and fade=true', function(assert)
     <div id="ember-bootstrap-modal-container"></div>
   `);
 
-  this.$('.my-input').focus(() => {
+  this.$('.my-input').one('focus', () => {
     assert.ok(true, 'focus was triggered on the autofocus element');
   });
 
