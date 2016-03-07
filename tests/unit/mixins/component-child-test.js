@@ -6,13 +6,11 @@ import { module, test } from 'qunit';
 
 module('Unit | Mixin | component child');
 
-
-
 test('child component registers itself with parent upon didInsertElement event', function(assert) {
-  var ComponentChildObject = Ember.Component.extend(ComponentChildMixin);
-  var child = ComponentChildObject.create();
-  var ComponentParentObject = Ember.Component.extend(ComponentParentMixin);
-  var parent = ComponentParentObject.create();
+  let ComponentChildObject = Ember.Component.extend(ComponentChildMixin);
+  let child = ComponentChildObject.create();
+  let ComponentParentObject = Ember.Component.extend(ComponentParentMixin);
+  let parent = ComponentParentObject.create();
 
   assert.expect(1);
 
@@ -24,15 +22,13 @@ test('child component registers itself with parent upon didInsertElement event',
   child.parentView = parent;
 
   child.trigger('didInsertElement');
-
 });
 
-
 test('child component removes itself from parent upon willDestroyElement event', function(assert) {
-  var ComponentChildObject = Ember.Component.extend(ComponentChildMixin);
-  var child = ComponentChildObject.create();
-  var ComponentParentObject = Ember.Component.extend(ComponentParentMixin);
-  var parent = ComponentParentObject.create();
+  let ComponentChildObject = Ember.Component.extend(ComponentChildMixin);
+  let child = ComponentChildObject.create();
+  let ComponentParentObject = Ember.Component.extend(ComponentParentMixin);
+  let parent = ComponentParentObject.create();
 
   assert.expect(1);
 
@@ -44,7 +40,4 @@ test('child component removes itself from parent upon willDestroyElement event',
   child.parentView = parent;
 
   child.trigger('willDestroyElement');
-
 });
-
-
