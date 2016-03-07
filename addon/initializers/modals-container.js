@@ -8,8 +8,8 @@ function appendContainerElement(rootElementId, id) {
     return;
   }
 
-  const rootEl = document.querySelector(rootElementId);
-  const modalContainerEl = document.createElement('div');
+  let rootEl = document.querySelector(rootElementId);
+  let modalContainerEl = document.createElement('div');
   modalContainerEl.id = id;
   rootEl.appendChild(modalContainerEl);
 }
@@ -18,13 +18,12 @@ function initialize() {
   if (!Config.insertEmberWormholeElementToDom) {
     return;
   }
-  
-  const application = arguments[1] || arguments[0];
-  const modalContainerElId = 'ember-bootstrap-modal-container';
-  appendContainerElement(application.rootElement, modalContainerElId);  
+  let application = arguments[1] || arguments[0];
+  let modalContainerElId = 'ember-bootstrap-modal-container';
+  appendContainerElement(application.rootElement, modalContainerElId);
 }
 
 export default {
   name: 'modals-container',
-  initialize: initialize
+  initialize
 };

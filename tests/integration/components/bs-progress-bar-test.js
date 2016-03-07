@@ -14,12 +14,11 @@ test('bs-progress-bar has correct markup', function(assert) {
 
 });
 
-
 test('Progress bar has correct width according to value, minValue and maxValue', function(assert) {
 
-  var baseSize = 500,
+  let baseSize = 500;
   // some test data
-    testData = [
+  let testData = [
       {
         value: 60,
         minValue: 0,
@@ -37,7 +36,7 @@ test('Progress bar has correct width according to value, minValue and maxValue',
       }
     ];
 
-  testData.forEach(data => {
+  testData.forEach((data) => {
     this.render(hbs`
       <div style="width: 500px">
         {{#bs-progress}}
@@ -46,10 +45,10 @@ test('Progress bar has correct width according to value, minValue and maxValue',
       </div>
     `);
 
-    let value = data.value,
-      minValue = data.minValue || 0,
-      maxValue = data.maxValue || 100,
-      expectedWidth = (value - minValue) / (maxValue - minValue) * baseSize;
+    let { value } = data;
+    let minValue = data.minValue || 0;
+    let maxValue = data.maxValue || 100;
+    let expectedWidth = (value - minValue) / (maxValue - minValue) * baseSize;
 
     this.setProperties(data);
 
@@ -118,7 +117,6 @@ test('bs-progress-bar supports type class', function(assert) {
 
 });
 
-
 test('bs-progress-bar supports striped style', function(assert) {
   this.render(hbs`
     {{#bs-progress}}
@@ -129,7 +127,6 @@ test('bs-progress-bar supports striped style', function(assert) {
   assert.ok(this.$('.progress-bar').hasClass('progress-bar-striped'), 'Progress bar has type class');
 
 });
-
 
 test('bs-progress-bar supports animated stripes', function(assert) {
   this.render(hbs`

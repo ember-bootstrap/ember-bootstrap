@@ -4,11 +4,9 @@ import {
 } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-
 moduleForComponent('bs-collapse', 'Integration | Component | bs-collapse', {
   integration: true
 });
-
 
 test('collapse has correct default markup', function(assert) {
   this.render(hbs`{{#bs-collapse}}<p>Just some content</p>{{/bs-collapse}}`);
@@ -23,8 +21,6 @@ test('expanded collapse has correct default markup', function(assert) {
   assert.equal(this.$(':first-child').hasClass('in'), true, 'collapse has in class');
 });
 
-
-
 test('setting collapse to false expands this item', function(assert) {
   this.set('collapsed', true);
   this.render(hbs`{{#bs-collapse collapsed=collapsed}}<p>Just some content</p>{{/bs-collapse}}`);
@@ -32,8 +28,7 @@ test('setting collapse to false expands this item', function(assert) {
 
   assert.equal(this.$(':first-child').hasClass('collapsing'), true, 'collapse has collapsing class while transition is running');
 
-
-  var done = assert.async();
+  let done = assert.async();
 
   // wait for transitions to complete
   setTimeout(() => {
@@ -42,8 +37,6 @@ test('setting collapse to false expands this item', function(assert) {
 
     done();
   }, 500);
-
-
 });
 
 test('setting collapse to true collapses this item', function(assert) {
@@ -53,7 +46,7 @@ test('setting collapse to true collapses this item', function(assert) {
 
   assert.equal(this.$(':first-child').hasClass('collapsing'), true, 'collapse has collapsing class while transition is running');
 
-  var done = assert.async();
+  let done = assert.async();
 
   // wait for transitions to complete
   setTimeout(() => {
@@ -62,8 +55,4 @@ test('setting collapse to true collapses this item', function(assert) {
 
     done();
   }, 500);
-
-
 });
-
-

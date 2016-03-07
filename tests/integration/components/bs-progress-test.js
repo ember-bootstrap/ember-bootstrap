@@ -14,7 +14,5 @@ test('bs-progress has correct markup', function(assert) {
   `);
 
   assert.equal(this.$().text().trim(), 'template block text', 'Shows block content');
-
   assert.equal(this.$('div.progress').length, 1, 'Has progress class');
-
 });
