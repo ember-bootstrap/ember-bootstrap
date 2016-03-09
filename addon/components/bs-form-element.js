@@ -183,6 +183,15 @@ export default FormGroup.extend({
   autofocus: false,
 
   /**
+   * Control element's HTML5 disabled attribute
+   *
+   * @property disabled
+   * @type boolean
+   * @public
+   */
+  disabled: false,
+
+  /**
    * Control element's name attribute
    *
    * @property name
