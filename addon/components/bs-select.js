@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   classNames: ['form-control'],
 
   attributeBindings: [
-    'disabled',
+    'disabled'
   ],
   disabled: false,
 
