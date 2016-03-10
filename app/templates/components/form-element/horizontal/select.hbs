@@ -1,13 +1,13 @@
 {{#if hasLabel}}
     <label class="control-label {{horizontalLabelGridClass}}" for="{{formElementId}}">{{label}}</label>
     <div class="{{horizontalInputGridClass}}">
-        {{bs-select id=formElementId name=name content=choices optionValuePath=choiceValueProperty optionLabelPath=choiceLabelProperty value=value}}
+        {{bs-select id=formElementId name=name content=choices optionValuePath=choiceValueProperty optionLabelPath=choiceLabelProperty value=value disabled=disabled}}
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
     </div>
 {{else}}
     <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
-        {{bs-select name=name content=choices optionValuePath=choiceValueProperty optionLabelPath=choiceLabelProperty value=value}}
+        {{bs-select name=name content=choices optionValuePath=choiceValueProperty optionLabelPath=choiceLabelProperty value=value disabled=disabled}}
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
     </div>
