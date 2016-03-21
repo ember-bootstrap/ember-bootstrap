@@ -108,7 +108,7 @@ const nonTextFieldControlTypes = Ember.A([
  @public
  */
 export default FormGroup.extend({
-  classNameBindings: ['required:is-required'],
+  classNameBindings: ['disabled:is-disabled', 'required:is-required'],
 
   /**
    * Text to display within a `<label>` tag.

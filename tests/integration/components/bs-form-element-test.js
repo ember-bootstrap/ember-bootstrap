@@ -154,6 +154,7 @@ test('disabled property propagates', function(assert) {
 
   this.render(hbs`{{bs-form-element label="myLabel" property="foo" disabled=true}}`);
 
+  assert.ok(this.$('.form-group').hasClass('is-disabled'), 'component has is-disabled class');
   assert.equal(this.$('input').attr('disabled'), 'disabled', 'input html5 disabled is true');
 });
 
@@ -162,5 +163,6 @@ test('disabled property propagates - select', function(assert) {
 
   this.render(hbs`{{bs-form-element controlType="select" label="myLabel" property="foo" disabled=true}}`);
 
+  assert.ok(this.$('.form-group').hasClass('is-disabled'), 'component has is-disabled class');
   assert.equal(this.$('select').attr('disabled'), 'disabled', 'input html5 disabled is true');
 });
