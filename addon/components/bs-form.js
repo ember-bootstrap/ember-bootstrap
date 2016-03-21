@@ -139,16 +139,17 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * Validate hook that will either resolve if the model is valid or reject if it's not
+   * Validate hook that will return a promise that will either resolve if the model is valid
+   * or reject if it's not.
    *
-   * @param Function resolve
-   * @param Function reject
+   * @param Object model
+   * @return Promise
    * @public
    */
-  validate(resolve, reject) {
-    this.get('model').validate().then(() => {
-      return this.get('model.isValid') ? resolve() : reject();
-    }, reject);
+  validate(/* model */) {
+    Ember.deprecate('[ember-bootstrap] Validation support has been moved to 3rd party addons.\n' +
+                    'ember-validations: https://github.com/kaliber5/ember-bootstrap-validations\n' +
+                    'ember-cp-validations: https://github.com/offirgolan/ember-bootstrap-cp-validations\n', false);
   },
 
   /**
@@ -166,15 +167,17 @@ export default Ember.Component.extend({
     if (e) {
       e.preventDefault();
     }
+
     if (!this.get('hasValidator')) {
       return this.sendAction();
     } else {
-      return new Ember.RSVP.Promise((resolve, reject) => this.validate(resolve, reject)).then(() => {
-        return this.sendAction();
-      }, () => {
-        this.get('childFormElements').setEach('showValidation', true);
-        return this.sendAction('invalid');
-      });
+      let validationPromise = this.validate(this.get('model'));
+      if (validationPromise && validationPromise instanceof Ember.RSVP.Promise) {
+        validationPromise.then(() => this.sendAction(), () => {
+          this.get('childFormElements').setEach('showValidation', true);
+          return this.sendAction('invalid');
+        });
+      }
     }
   },
 

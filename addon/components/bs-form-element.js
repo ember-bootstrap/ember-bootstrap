@@ -450,6 +450,15 @@ export default FormGroup.extend({
   }),
 
   /**
+   * Setup validation properties. This method acts as a hook for external validation
+   * libraries to overwrite.
+   *
+   * @method setupValidations
+   * @public
+   */
+  setupValidations: Ember.K,
+
+  /**
    * Listen for focusOut events from the control element to automatically set `showValidation` to true to enable
    * form validation markup rendering.
    *
@@ -458,17 +467,6 @@ export default FormGroup.extend({
    */
   focusOut() {
     this.set('showValidation', true);
-  },
-
-  /**
-   * Setup validation properties. This method acts as a hook for external validation
-   * libraries to overwrite.
-   *
-   * @method setupValidations
-   * @public
-   */
-  setupValidations() {
-    defineProperty(this, 'errors', computed.readOnly(`model.errors.${this.get('property')}`));
   },
 
   init() {
