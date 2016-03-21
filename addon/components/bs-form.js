@@ -139,7 +139,7 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * Validate hook that will return a promise that will either resolve if the model is valid
+   * Validate hook which will return a promise that will either resolve if the model is valid
    * or reject if it's not.
    *
    * @param Object model
@@ -152,6 +152,26 @@ export default Ember.Component.extend({
                     'ember-cp-validations: https://github.com/offirgolan/ember-bootstrap-cp-validations\n', false);
   },
 
+  /**
+   * A handler called before the form is validated (if possible) and submitted.
+   *
+   * @event before
+   * @public
+   */
+  /**
+   * A handler called when submit has been triggered and the model has passed all validations (if present).
+   *
+   * @event action
+   * @param Object result The returned result from the validate method
+   * @public
+   */
+  /**
+   * A handler called when validation of the model has failed.
+   *
+   * @event invalid
+   * @param Object error
+   * @public
+   */
   /**
    * Submit handler that will send the default action ("action") to the controller when submitting the form.
    *
@@ -168,14 +188,16 @@ export default Ember.Component.extend({
       e.preventDefault();
     }
 
+    this.sendAction('before');
+
     if (!this.get('hasValidator')) {
       return this.sendAction();
     } else {
       let validationPromise = this.validate(this.get('model'));
       if (validationPromise && validationPromise instanceof Ember.RSVP.Promise) {
-        validationPromise.then(() => this.sendAction(), () => {
+        validationPromise.then((r) => this.sendAction('action', r), (err) => {
           this.get('childFormElements').setEach('showValidation', true);
-          return this.sendAction('invalid');
+          return this.sendAction('invalid', err);
         });
       }
     }

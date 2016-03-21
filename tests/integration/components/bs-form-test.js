@@ -31,6 +31,19 @@ test('Submitting the form calls default action', function(assert) {
   this.$('form').submit();
 });
 
+test('Submitting the form calls before submit action', function(assert) {
+  this.on('beforeAction', () => {
+    assert.ok(true, 'Before action has been called.');
+  });
+  this.on('submitAction', () => {
+    assert.ok(true, 'Default action has been called.');
+  });
+  this.render(hbs`{{#bs-form before=(action "beforeAction") action=(action "submitAction")}}Test{{/bs-form}}`);
+
+  assert.expect(2);
+  this.$('form').submit();
+});
+
 /*
 
  Cannot test validations as expected in unit tests.
