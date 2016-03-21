@@ -324,8 +324,8 @@ export default FormGroup.extend({
    * @type string
    * @protected
    */
-  validation: computed('hasErrors', 'hasValidator', 'showValidation', function() {
-    if (!this.get('showValidation') || !this.get('hasValidator')) {
+  validation: computed('hasErrors', 'hasValidator', 'showValidation', 'disabled', function() {
+    if (!this.get('showValidation') || !this.get('hasValidator') || this.get('disabled')) {
       return null;
     }
     return this.get('hasErrors') ? 'error' : 'success';
