@@ -175,6 +175,14 @@ export default FormGroup.extend({
    */
   placeholder: null,
 
+  /**
+   * Control element's HTML5 disabled attribute
+   *
+   * @property disabled
+   * @type boolean
+   * @public
+   */
+  disabled: false,
 
   /**
    * Control element's HTML5 required attribute
