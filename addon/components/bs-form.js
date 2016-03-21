@@ -139,6 +139,20 @@ export default Ember.Component.extend({
   }),
 
   /**
+   * Validate hook that will return a promise that will either resolve if the model is valid
+   * or reject if it's not.
+   *
+   * @param Object model
+   * @return Promise
+   * @public
+   */
+  validate(/* model */) {
+    Ember.deprecate('[ember-bootstrap] Validation support has been moved to 3rd party addons.\n' +
+                    'ember-validations: https://github.com/kaliber5/ember-bootstrap-validations\n' +
+                    'ember-cp-validations: https://github.com/offirgolan/ember-bootstrap-cp-validations\n', false);
+  },
+
+  /**
    * Submit handler that will send the default action ("action") to the controller when submitting the form.
    *
    * If there is a supplied `model` that supports validation (`hasValidator`) the model will be validated before, and
@@ -153,21 +167,17 @@ export default Ember.Component.extend({
     if (e) {
       e.preventDefault();
     }
+
     if (!this.get('hasValidator')) {
       return this.sendAction();
     } else {
-      return this
-        .get('model')
-        .validate()
-        .then(() => {
-          if (this.get('model.isValid')) {
-            return this.sendAction();
-          }
-        })
-        .catch(() => {
+      let validationPromise = this.validate(this.get('model'));
+      if (validationPromise && validationPromise instanceof Ember.RSVP.Promise) {
+        validationPromise.then(() => this.sendAction(), () => {
           this.get('childFormElements').setEach('showValidation', true);
           return this.sendAction('invalid');
         });
+      }
     }
   },
 
