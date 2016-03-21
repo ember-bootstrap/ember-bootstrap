@@ -108,6 +108,8 @@ const nonTextFieldControlTypes = Ember.A([
  @public
  */
 export default FormGroup.extend({
+  classNameBindings: ['isValidating'],
+
   /**
    * Text to display within a `<label>` tag.
    *
@@ -276,6 +278,16 @@ export default FormGroup.extend({
    * @protected
    */
   hasValidator: computed.notEmpty('model.validate'),
+
+  /**
+   * Set a validating state for async validations
+   *
+   * @property isValidating
+   * @type boolean
+   * @default false
+   * @public
+   */
+  isValidating: false,
 
   /**
    * If `true` form validation markup is rendered (requires a validatable `model`).

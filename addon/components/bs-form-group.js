@@ -26,7 +26,7 @@ const { computed } = Ember;
 export default Ember.Component.extend({
 
   classNames: ['form-group'],
-  classNameBindings: ['validationClass', 'hasFeedback', 'isValidating'],
+  classNameBindings: ['validationClass', 'hasFeedback'],
 
   /**
    * Whether to show validation state icons.
@@ -38,16 +38,6 @@ export default Ember.Component.extend({
    * @public
    */
   useIcons: true,
-
-  /**
-   * Set a validating state for async validations
-   *
-   * @property isValidating
-   * @type boolean
-   * @default false
-   * @public
-   */
-  isValidating: false,
 
   /**
    * Computed property which is true if the form group is in a validation state
