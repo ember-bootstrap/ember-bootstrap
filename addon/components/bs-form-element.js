@@ -2,7 +2,7 @@ import Ember from 'ember';
 import FormGroup from 'ember-bootstrap/components/bs-form-group';
 import Form from 'ember-bootstrap/components/bs-form';
 
-const { computed } = Ember;
+const { computed, defineProperty } = Ember;
 
 const nonTextFieldControlTypes = Ember.A([
   'checkbox',
@@ -108,6 +108,8 @@ const nonTextFieldControlTypes = Ember.A([
  @public
  */
 export default FormGroup.extend({
+  classNameBindings: ['isValidating'],
+
   /**
    * Text to display within a `<label>` tag.
    *
@@ -278,6 +280,16 @@ export default FormGroup.extend({
   hasValidator: computed.notEmpty('model.validate'),
 
   /**
+   * Set a validating state for async validations
+   *
+   * @property isValidating
+   * @type boolean
+   * @default false
+   * @public
+   */
+  isValidating: false,
+
+  /**
    * If `true` form validation markup is rendered (requires a validatable `model`).
    *
    * @property showValidation
@@ -304,8 +316,8 @@ export default FormGroup.extend({
    * @type string
    * @protected
    */
-  validation: computed('hasErrors', 'hasValidator', 'showValidation', function() {
-    if (!this.get('showValidation') || !this.get('hasValidator')) {
+  validation: computed('hasErrors', 'hasValidator', 'showValidation', 'isValidating', function() {
+    if (!this.get('showValidation') || !this.get('hasValidator') || this.get('isValidating')) {
       return null;
     }
     return this.get('hasErrors') ? 'error' : 'success';
@@ -450,6 +462,15 @@ export default FormGroup.extend({
   }),
 
   /**
+   * Setup validation properties. This method acts as a hook for external validation
+   * libraries to overwrite.
+   *
+   * @method setupValidations
+   * @public
+   */
+  setupValidations: Ember.K,
+
+  /**
    * Listen for focusOut events from the control element to automatically set `showValidation` to true to enable
    * form validation markup rendering.
    *
@@ -463,8 +484,8 @@ export default FormGroup.extend({
   init() {
     this._super();
     if (!Ember.isBlank(this.get('property'))) {
-      Ember.Binding.from(`model.${this.get('property')}`).to('value').connect(this);
-      Ember.Binding.from(`model.errors.${this.get('property')}`).to('errors').connect(this);
+      defineProperty(this, 'value', computed.alias(`model.${this.get('property')}`));
+      this.setupValidations();
     }
   }
 });
