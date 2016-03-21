@@ -108,6 +108,8 @@ const nonTextFieldControlTypes = Ember.A([
  @public
  */
 export default FormGroup.extend({
+  classNameBindings: ['required:is-required'],
+
   /**
    * Text to display within a `<label>` tag.
    *
@@ -172,6 +174,16 @@ export default FormGroup.extend({
    * @public
    */
   placeholder: null,
+
+
+  /**
+   * Control element's HTML5 required attribute
+   *
+   * @property required
+   * @type boolean
+   * @public
+   */
+  required: false,
 
   /**
    * Control element's HTML5 autofocus attribute

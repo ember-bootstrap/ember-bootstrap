@@ -4,6 +4,6 @@
 {{#if hasBlock}}
     {{yield value formElementId}}
 {{else}}
-    {{bs-input id=formElementId name=name type=controlType value=value placeholder=placeholder autofocus=autofocus}}
+    {{bs-input id=formElementId name=name type=controlType value=value placeholder=placeholder autofocus=autofocus required=required}}
 {{/if}}
 {{partial "components/form-element/feedback-icon"}}

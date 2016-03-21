@@ -11,9 +11,9 @@
 <h2>Automatically bound fields, automatic markup, with validation</h2>
 
 {{#bs-form formLayout=formLayout model=this action="submit"}}
-    {{bs-form-element controlType="email" label="Email" placeholder="Email" property="email"}}
-    {{bs-form-element controlType="password" label="Password" placeholder="Password" property="password"}}
-    {{bs-form-element controlType="select" choices=genderChoices choiceLabelProperty="label" choiceValueProperty="id" label="Gender" property="gender"}}
+    {{bs-form-element controlType="email" label="Email" placeholder="Email" property="email" required=true}}
+    {{bs-form-element controlType="password" label="Password" placeholder="Password" property="password" required=true}}
+    {{bs-form-element controlType="select" choices=genderChoices choiceLabelProperty="label" choiceValueProperty="id" label="Gender" property="gender" required=true}}
     {{bs-form-element controlType="checkbox" label="Remember me" property="rememberMe"}}
     {{bs-form-element controlType="textarea" label="Comments" property="comments"}}
     {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}

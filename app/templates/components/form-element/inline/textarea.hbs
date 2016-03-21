@@ -1,6 +1,6 @@
 {{#if hasLabel}}
     <label class="control-label" for="{{formElementId}}">{{label}}</label>
 {{/if}}
-{{bs-textarea id=formElementId name=name value=value placeholder=placeholder autofocus=autofocus cols=cols rows=rows}}
+{{bs-textarea id=formElementId name=name value=value placeholder=placeholder autofocus=autofocus cols=cols rows=rows required=required}}
 {{partial "components/form-element/feedback-icon"}}
 {{partial "components/form-element/errors"}}
