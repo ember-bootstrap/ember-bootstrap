@@ -108,6 +108,8 @@ const nonTextFieldControlTypes = Ember.A([
  @public
  */
 export default FormGroup.extend({
+  classNameBindings: ['disabled:is-disabled', 'required:is-required'],
+
   /**
    * Text to display within a `<label>` tag.
    *
@@ -172,6 +174,24 @@ export default FormGroup.extend({
    * @public
    */
   placeholder: null,
+
+  /**
+   * Control element's HTML5 disabled attribute
+   *
+   * @property disabled
+   * @type boolean
+   * @public
+   */
+  disabled: false,
+
+  /**
+   * Control element's HTML5 required attribute
+   *
+   * @property required
+   * @type boolean
+   * @public
+   */
+  required: false,
 
   /**
    * Control element's HTML5 autofocus attribute
@@ -304,8 +324,8 @@ export default FormGroup.extend({
    * @type string
    * @protected
    */
-  validation: computed('hasErrors', 'hasValidator', 'showValidation', function() {
-    if (!this.get('showValidation') || !this.get('hasValidator')) {
+  validation: computed('hasErrors', 'hasValidator', 'showValidation', 'disabled', function() {
+    if (!this.get('showValidation') || !this.get('hasValidator') || this.get('disabled')) {
       return null;
     }
     return this.get('hasErrors') ? 'error' : 'success';

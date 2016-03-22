@@ -12,6 +12,10 @@ export default Ember.Component.extend({
   tagName: 'select',
   classNames: ['form-control'],
 
+  attributeBindings: ['disabled', 'required'],
+  disabled: false,
+  required: false,
+
   content: null,
   prompt: null,
   optionValuePath: 'id',

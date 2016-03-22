@@ -4,7 +4,7 @@
         {{#if hasBlock}}
             {{yield value formElementId}}
         {{else}}
-            {{bs-input id=formElementId name=name type=controlType value=value placeholder=placeholder autofocus=autofocus}}
+            {{bs-input id=formElementId name=name type=controlType value=value placeholder=placeholder autofocus=autofocus disabled=disabled required=required}}
         {{/if}}
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
@@ -14,7 +14,7 @@
         {{#if hasBlock}}
             {{yield value}}
         {{else}}
-            {{bs-input name=name type=controlType value=value placeholder=placeholder autofocus=autofocus}}
+            {{bs-input name=name type=controlType value=value placeholder=placeholder autofocus=autofocus disabled=disabled required=required}}
         {{/if}}
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
