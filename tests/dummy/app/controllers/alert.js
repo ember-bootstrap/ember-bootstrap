@@ -1,11 +1,22 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  visible: false,
-
-  actions: {
-    close() {
-      this.set('visible', false);
+  visible: true,
+  fade: true,
+  dismissible: true,
+  type: Ember.computed.oneWay('typeChoices.firstObject'),
+  typeChoices: Ember.A([
+    {
+      id: 'success'
+    },
+    {
+      id: 'info'
+    },
+    {
+      id: 'warning'
+    },
+    {
+      id: 'danger'
     }
-  }
+  ])
 });

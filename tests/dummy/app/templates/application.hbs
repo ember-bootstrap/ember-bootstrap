@@ -27,24 +27,23 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-8">
-            {{outlet}}
-        </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 col-sm-push-8">
 
             <ul class="nav nav-pills nav-stacked">
+                <li>{{#link-to "accordion"}}Accordion{{/link-to}}</li>
                 <li>{{#link-to "alert"}}Alert{{/link-to}}</li>
                 <li>{{#link-to "button"}}Buttons{{/link-to}}</li>
+                <li>{{#link-to "collapse"}}Collapse{{/link-to}}</li>
                 <li>{{#link-to "dropdown"}}Dropdown{{/link-to}}</li>
                 <li>{{#link-to "forms"}}Forms{{/link-to}}</li>
-                <li>{{#link-to "accordion"}}Accordion{{/link-to}}</li>
-                <li>{{#link-to "collapse"}}Collapse{{/link-to}}</li>
                 <li>{{#link-to "modal"}}Modals{{/link-to}}</li>
                 <li>{{#link-to "progress"}}Progress bars{{/link-to}}</li>
             </ul>
 
         </div>
-
+        <div class="col-sm-8 col-sm-pull-4">
+            {{outlet}}
+        </div>
     </div>
     <div class="row footer">
         <div class="col-sm-12 text-center">
