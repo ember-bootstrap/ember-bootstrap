@@ -96,14 +96,14 @@ export default Ember.Component.extend({
   formLayout: 'vertical',
 
   /**
-   * Check if the `model` has a validate method, i.e. supports validation by using [ember-validations](https://github.com/dockyard/ember-validations)
+   * Check if validating the model is supported. This needs to be implemented by another addon.
    *
    * @property hasValidator
    * @type boolean
    * @readonly
    * @protected
    */
-  hasValidator: computed.notEmpty('model.validate'),
+  hasValidator: false,
 
   /**
    * The Bootstrap grid class for form labels. This is used by the `Components.FormElement` class as a default for the
