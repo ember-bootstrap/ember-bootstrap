@@ -26,15 +26,16 @@ const { computed } = Ember;
 
  When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the default action
  will be sent to the controller.
- When an [ember-validations](https://github.com/dockyard/ember-validations) validated model is supplied, validations
- rules are evaluated before, and if those fail, the "invalid" action is sent instead of the default "action".
+ In case the form supports validation (see "Form validation" below), the "before" action is called (which allows you to
+ do e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the "invalid"
+ action is sent instead of the default "action".
 
  ### Use with Components.FormElement
 
  When using `Components.FormElement`s with their `property` set to property names of the form's validation enabled
  `model`, you gain some additional powerful features:
  * the appropriate Bootstrap markup for the given `formLayout` and the form element's `controlType` is automatically generated
- * markup for validation states and error messages is generated based on the model's validation, when submitting the form
+ * markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form
  with an invalid validation, or when focusing out of invalid inputs
 
  ```hbs
@@ -46,7 +47,23 @@ const { computed } = Ember;
  {{/bs-form}}
  ```
 
- See the `Components.FormElement` API docs for further information.
+ See the {{#crossLink "Components.FormElement"}}{{/crossLink}} API docs for further information.
+
+ ### Form validation
+
+ All version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.
+ Instead support is added usually by addition Ember addons, for example:
+
+ * [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)
+ * [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)
+
+ To add your own validation support, you have to:
+
+ * extend this component, setting `hasValidator` to true if validations are available (by means of a computed property for example), and implementing the `validate` method
+ * extend the {{#crossLink "Components.FormElement"}}{{/crossLink}} component and implement the `setupValidations` hook or simply override the `errors` property to add the validation error messages to be displayed
+
+ See the above mentioned addons for examples.
+
 
  @class Form
  @namespace Components
@@ -140,7 +157,7 @@ export default Ember.Component.extend({
 
   /**
    * Validate hook which will return a promise that will either resolve if the model is valid
-   * or reject if it's not.
+   * or reject if it's not. This should be overridden to add validation support.
    *
    * @param Object model
    * @return Promise
@@ -149,7 +166,13 @@ export default Ember.Component.extend({
   validate(/* model */) {
     Ember.deprecate('[ember-bootstrap] Validation support has been moved to 3rd party addons.\n' +
                     'ember-validations: https://github.com/kaliber5/ember-bootstrap-validations\n' +
-                    'ember-cp-validations: https://github.com/offirgolan/ember-bootstrap-cp-validations\n', false);
+                    'ember-cp-validations: https://github.com/offirgolan/ember-bootstrap-cp-validations\n',
+      false,
+      {
+        id: 'ember-bootstrap.form.validate',
+        url: 'http://kaliber5.github.io/ember-bootstrap/api/classes/Components.Form.html'
+      }
+    );
   },
 
   /**
@@ -158,6 +181,7 @@ export default Ember.Component.extend({
    * @event before
    * @public
    */
+
   /**
    * A handler called when submit has been triggered and the model has passed all validations (if present).
    *
@@ -165,6 +189,7 @@ export default Ember.Component.extend({
    * @param Object result The returned result from the validate method
    * @public
    */
+
   /**
    * A handler called when validation of the model has failed.
    *
@@ -172,6 +197,7 @@ export default Ember.Component.extend({
    * @param Object error
    * @public
    */
+
   /**
    * Submit handler that will send the default action ("action") to the controller when submitting the form.
    *
@@ -180,7 +206,7 @@ export default Ember.Component.extend({
    * all the `showValidation` property of all child `Components.FormElement`s will be set to true, so error state and
    * messages will be shown automatically.
    *
-   * @event submit
+   * @method submit
    * @private
    */
   submit(e) {

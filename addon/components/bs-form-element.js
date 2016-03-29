@@ -463,10 +463,10 @@ export default FormGroup.extend({
 
   /**
    * Setup validation properties. This method acts as a hook for external validation
-   * libraries to overwrite.
+   * libraries to overwrite. In case of failed validations the `errors` property should contain an array of error messages.
    *
    * @method setupValidations
-   * @public
+   * @protected
    */
   setupValidations: Ember.K,
 
