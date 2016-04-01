@@ -1,3 +1,27 @@
+<a name"0.7.0"></a>
+## 0.7.0 (2016-04-02)
+
+#### Bug Fixes
+
+* **Config:** fix config loader, closes [#68](https://github.com/kaliber5/ember-bootstrap/issues/68). Thanks to [Offir Golan](https://github.com/offirgolan)
+
+#### Features
+
+* **Form/FormElement:** Added validation hooks for external validation addons. See the Breaking Changes. Thanks to [Offir Golan](https://github.com/offirgolan)
+* **FormElement:** Support disabled property. Thanks to [oswaldoacauan](https://github.com/oswaldoacauan)
+* **FormElement:** Support required property. Thanks to [Offir Golan](https://github.com/offirgolan)
+* **Form:** Add before submit action. Thanks to [Offir Golan](https://github.com/offirgolan)
+
+#### Breaking Changes
+
+Direct support for [ember-validations](https://github.com/DockYard/ember-validations) for validations your
+ember-bootstrap forms has been removed in favor of an API that supports adding support for specific validation libraries
+through additional addons. If you rely on ember-validations then install this addon when upgrading ember-bootstrap to
+enable support for it:
+[ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations)
+
+Additional support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations) has been added by [Offir Golan](https://github.com/offirgolan) through [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations)
+
 <a name"0.6.4"></a>
 ### 0.6.4 (2016-03-07)
 
