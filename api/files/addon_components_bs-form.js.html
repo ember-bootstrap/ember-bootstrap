@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.4</span></h1>
+    <h1>API Docs <span class="small">v0.7.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -82,15 +82,16 @@ const { computed } = Ember;
 
  When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the default action
  will be sent to the controller.
- When an [ember-validations](https://github.com/dockyard/ember-validations) validated model is supplied, validations
- rules are evaluated before, and if those fail, the &quot;invalid&quot; action is sent instead of the default &quot;action&quot;.
+ In case the form supports validation (see &quot;Form validation&quot; below), the &quot;before&quot; action is called (which allows you to
+ do e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the &quot;invalid&quot;
+ action is sent instead of the default &quot;action&quot;.
 
  ### Use with Components.FormElement
 
  When using &#x60;Components.FormElement&#x60;s with their &#x60;property&#x60; set to property names of the form&#x27;s validation enabled
  &#x60;model&#x60;, you gain some additional powerful features:
  * the appropriate Bootstrap markup for the given &#x60;formLayout&#x60; and the form element&#x27;s &#x60;controlType&#x60; is automatically generated
- * markup for validation states and error messages is generated based on the model&#x27;s validation, when submitting the form
+ * markup for validation states and error messages is generated based on the model&#x27;s validation (if available), when submitting the form
  with an invalid validation, or when focusing out of invalid inputs
 
  &#x60;&#x60;&#x60;hbs
@@ -102,7 +103,23 @@ const { computed } = Ember;
  {{/bs-form}}
  &#x60;&#x60;&#x60;
 
- See the &#x60;Components.FormElement&#x60; API docs for further information.
+ See the {{#crossLink &quot;Components.FormElement&quot;}}{{/crossLink}} API docs for further information.
+
+ ### Form validation
+
+ All version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.
+ Instead support is added usually by addition Ember addons, for example:
+
+ * [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)
+ * [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)
+
+ To add your own validation support, you have to:
+
+ * extend this component, setting &#x60;hasValidator&#x60; to true if validations are available (by means of a computed property for example), and implementing the &#x60;validate&#x60; method
+ * extend the {{#crossLink &quot;Components.FormElement&quot;}}{{/crossLink}} component and implement the &#x60;setupValidations&#x60; hook or simply override the &#x60;errors&#x60; property to add the validation error messages to be displayed
+
+ See the above mentioned addons for examples.
+
 
  @class Form
  @namespace Components
@@ -152,14 +169,14 @@ export default Ember.Component.extend({
   formLayout: &#x27;vertical&#x27;,
 
   /**
-   * Check if the &#x60;model&#x60; has a validate method, i.e. supports validation by using [ember-validations](https://github.com/dockyard/ember-validations)
+   * Check if validating the model is supported. This needs to be implemented by another addon.
    *
    * @property hasValidator
    * @type boolean
    * @readonly
    * @protected
    */
-  hasValidator: computed.notEmpty(&#x27;model.validate&#x27;),
+  hasValidator: false,
 
   /**
    * The Bootstrap grid class for form labels. This is used by the &#x60;Components.FormElement&#x60; class as a default for the
@@ -195,6 +212,49 @@ export default Ember.Component.extend({
   }),
 
   /**
+   * Validate hook which will return a promise that will either resolve if the model is valid
+   * or reject if it&#x27;s not. This should be overridden to add validation support.
+   *
+   * @param Object model
+   * @return Promise
+   * @public
+   */
+  validate(/* model */) {
+    Ember.deprecate(&#x27;[ember-bootstrap] Validation support has been moved to 3rd party addons.\n&#x27; +
+                    &#x27;ember-validations: https://github.com/kaliber5/ember-bootstrap-validations\n&#x27; +
+                    &#x27;ember-cp-validations: https://github.com/offirgolan/ember-bootstrap-cp-validations\n&#x27;,
+      false,
+      {
+        id: &#x27;ember-bootstrap.form.validate&#x27;,
+        url: &#x27;http://kaliber5.github.io/ember-bootstrap/api/classes/Components.Form.html&#x27;
+      }
+    );
+  },
+
+  /**
+   * A handler called before the form is validated (if possible) and submitted.
+   *
+   * @event before
+   * @public
+   */
+
+  /**
+   * A handler called when submit has been triggered and the model has passed all validations (if present).
+   *
+   * @event action
+   * @param Object result The returned result from the validate method
+   * @public
+   */
+
+  /**
+   * A handler called when validation of the model has failed.
+   *
+   * @event invalid
+   * @param Object error
+   * @public
+   */
+
+  /**
    * Submit handler that will send the default action (&quot;action&quot;) to the controller when submitting the form.
    *
    * If there is a supplied &#x60;model&#x60; that supports validation (&#x60;hasValidator&#x60;) the model will be validated before, and
@@ -202,28 +262,26 @@ export default Ember.Component.extend({
    * all the &#x60;showValidation&#x60; property of all child &#x60;Components.FormElement&#x60;s will be set to true, so error state and
    * messages will be shown automatically.
    *
-   * @event submit
+   * @method submit
    * @private
    */
   submit(e) {
     if (e) {
       e.preventDefault();
     }
+
+    this.sendAction(&#x27;before&#x27;);
+
     if (!this.get(&#x27;hasValidator&#x27;)) {
       return this.sendAction();
     } else {
-      return this
-        .get(&#x27;model&#x27;)
-        .validate()
-        .then(() =&gt; {
-          if (this.get(&#x27;model.isValid&#x27;)) {
-            return this.sendAction();
-          }
-        })
-        .catch(() =&gt; {
+      let validationPromise = this.validate(this.get(&#x27;model&#x27;));
+      if (validationPromise &amp;&amp; validationPromise instanceof Ember.RSVP.Promise) {
+        validationPromise.then((r) =&gt; this.sendAction(&#x27;action&#x27;, r), (err) =&gt; {
           this.get(&#x27;childFormElements&#x27;).setEach(&#x27;showValidation&#x27;, true);
-          return this.sendAction(&#x27;invalid&#x27;);
+          return this.sendAction(&#x27;invalid&#x27;, err);
         });
+      }
     }
   },
 
@@ -234,6 +292,7 @@ export default Ember.Component.extend({
     }
   }
 });
+
     </pre>
 </div>
                     </div>

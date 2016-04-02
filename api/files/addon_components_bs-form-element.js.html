@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.4</span></h1>
+    <h1>API Docs <span class="small">v0.7.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -58,7 +58,7 @@ import Ember from &#x27;ember&#x27;;
 import FormGroup from &#x27;ember-bootstrap/components/bs-form-group&#x27;;
 import Form from &#x27;ember-bootstrap/components/bs-form&#x27;;
 
-const { computed } = Ember;
+const { computed, defineProperty } = Ember;
 
 const nonTextFieldControlTypes = Ember.A([
   &#x27;checkbox&#x27;,
@@ -164,6 +164,8 @@ const nonTextFieldControlTypes = Ember.A([
  @public
  */
 export default FormGroup.extend({
+  classNameBindings: [&#x27;disabled:is-disabled&#x27;, &#x27;required:is-required&#x27;, &#x27;isValidating&#x27;],
+
   /**
    * Text to display within a &#x60;&lt;label&gt;&#x60; tag.
    *
@@ -228,6 +230,24 @@ export default FormGroup.extend({
    * @public
    */
   placeholder: null,
+
+  /**
+   * Control element&#x27;s HTML5 disabled attribute
+   *
+   * @property disabled
+   * @type boolean
+   * @public
+   */
+  disabled: false,
+
+  /**
+   * Control element&#x27;s HTML5 required attribute
+   *
+   * @property required
+   * @type boolean
+   * @public
+   */
+  required: false,
 
   /**
    * Control element&#x27;s HTML5 autofocus attribute
@@ -334,6 +354,16 @@ export default FormGroup.extend({
   hasValidator: computed.notEmpty(&#x27;model.validate&#x27;),
 
   /**
+   * Set a validating state for async validations
+   *
+   * @property isValidating
+   * @type boolean
+   * @default false
+   * @public
+   */
+  isValidating: false,
+
+  /**
    * If &#x60;true&#x60; form validation markup is rendered (requires a validatable &#x60;model&#x60;).
    *
    * @property showValidation
@@ -360,8 +390,8 @@ export default FormGroup.extend({
    * @type string
    * @protected
    */
-  validation: computed(&#x27;hasErrors&#x27;, &#x27;hasValidator&#x27;, &#x27;showValidation&#x27;, function() {
-    if (!this.get(&#x27;showValidation&#x27;) || !this.get(&#x27;hasValidator&#x27;)) {
+  validation: computed(&#x27;hasErrors&#x27;, &#x27;hasValidator&#x27;, &#x27;showValidation&#x27;, &#x27;isValidating&#x27;, function() {
+    if (!this.get(&#x27;showValidation&#x27;) || !this.get(&#x27;hasValidator&#x27;) || this.get(&#x27;isValidating&#x27;) || this.get(&#x27;disabled&#x27;)) {
       return null;
     }
     return this.get(&#x27;hasErrors&#x27;) ? &#x27;error&#x27; : &#x27;success&#x27;;
@@ -506,6 +536,15 @@ export default FormGroup.extend({
   }),
 
   /**
+   * Setup validation properties. This method acts as a hook for external validation
+   * libraries to overwrite. In case of failed validations the &#x60;errors&#x60; property should contain an array of error messages.
+   *
+   * @method setupValidations
+   * @protected
+   */
+  setupValidations: Ember.K,
+
+  /**
    * Listen for focusOut events from the control element to automatically set &#x60;showValidation&#x60; to true to enable
    * form validation markup rendering.
    *
@@ -519,8 +558,8 @@ export default FormGroup.extend({
   init() {
     this._super();
     if (!Ember.isBlank(this.get(&#x27;property&#x27;))) {
-      Ember.Binding.from(&#x60;model.${this.get(&#x27;property&#x27;)}&#x60;).to(&#x27;value&#x27;).connect(this);
-      Ember.Binding.from(&#x60;model.errors.${this.get(&#x27;property&#x27;)}&#x60;).to(&#x27;errors&#x27;).connect(this);
+      defineProperty(this, &#x27;value&#x27;, computed.alias(&#x60;model.${this.get(&#x27;property&#x27;)}&#x60;));
+      this.setupValidations();
     }
   }
 });

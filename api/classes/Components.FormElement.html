@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.4</span></h1>
+    <h1>API Docs <span class="small">v0.7.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -400,6 +400,10 @@ by invoking the component with a block template. Use whatever control you might 
                                 <a href="#" data-tabid="#methods" data-anchor="#method_setProperties" data-tablink="setProperties">setProperties</a>
 
                             </li>
+                            <li class="index-item method protected">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_setupValidations" data-tablink="setupValidations">setupValidations</a>
+
+                            </li>
                             <li class="index-item method public inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_toggleProperty" data-tablink="toggleProperty">toggleProperty</a>
 
@@ -469,6 +473,10 @@ by invoking the component with a block template. Use whatever control you might 
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_controlType" data-tablink="controlType">controlType</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_disabled" data-tablink="disabled">disabled</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -563,6 +571,10 @@ by invoking the component with a block template. Use whatever control you might 
                                 <a href="#" data-tabid="#properties" data-anchor="#property_isInline" data-tablink="isInline">isInline</a>
 
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isValidating" data-tablink="isValidating">isValidating</a>
+
+                            </li>
                             <li class="index-item property protected">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_isVertical" data-tablink="isVertical">isVertical</a>
 
@@ -601,6 +613,10 @@ by invoking the component with a block template. Use whatever control you might 
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_property" data-tablink="property">property</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_required" data-tablink="required">required</a>
 
                             </li>
                             <li class="index-item property public">
@@ -3753,6 +3769,38 @@ by invoking the component with a block template. Use whatever control you might 
                             </div>
                     
                     </div>
+                    <div id="method_setupValidations" class="method item protected">
+                        <h3 class="name">setupValidations
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l482"><code>addon&#x2F;components&#x2F;bs-form-element.js:482</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Setup validation properties. This method acts as a hook for external validation
+                    libraries to overwrite. In case of failed validations the <code>errors</code> property should contain an array of error messages.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="method_toggleProperty" class="method item public inherited">
                         <h3 class="name">toggleProperty
                         <span class="small">Boolean</span>
@@ -4191,7 +4239,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l176"><code>addon&#x2F;components&#x2F;bs-form-element.js:176</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l196"><code>addon&#x2F;components&#x2F;bs-form-element.js:196</code></a>
                             </p>
                     
                     
@@ -4221,7 +4269,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l219"><code>addon&#x2F;components&#x2F;bs-form-element.js:219</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l239"><code>addon&#x2F;components&#x2F;bs-form-element.js:239</code></a>
                             </p>
                     
                     
@@ -4251,7 +4299,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l194"><code>addon&#x2F;components&#x2F;bs-form-element.js:194</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l214"><code>addon&#x2F;components&#x2F;bs-form-element.js:214</code></a>
                             </p>
                     
                     
@@ -4285,7 +4333,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l210"><code>addon&#x2F;components&#x2F;bs-form-element.js:210</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l230"><code>addon&#x2F;components&#x2F;bs-form-element.js:230</code></a>
                             </p>
                     
                     
@@ -4411,7 +4459,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l238"><code>addon&#x2F;components&#x2F;bs-form-element.js:238</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l258"><code>addon&#x2F;components&#x2F;bs-form-element.js:258</code></a>
                             </p>
                     
                     
@@ -4530,7 +4578,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l120"><code>addon&#x2F;components&#x2F;bs-form-element.js:120</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l122"><code>addon&#x2F;components&#x2F;bs-form-element.js:122</code></a>
                             </p>
                     
                     
@@ -4547,6 +4595,36 @@ by invoking the component with a block template. Use whatever control you might 
                     <li>any other type will use an input tag with the <code>controlType</code> value as the type attribute (for e.g. HTML5 input
                     types like 'email'), and the same layout as the 'text' type</li>
                     </ul>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_disabled" class="property item public">
+                        <h3 class="name">disabled
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l178"><code>addon&#x2F;components&#x2F;bs-form-element.js:178</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Control element's HTML5 disabled attribute</p>
                     
                         </div>
                     
@@ -4689,7 +4767,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l255"><code>addon&#x2F;components&#x2F;bs-form-element.js:255</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l275"><code>addon&#x2F;components&#x2F;bs-form-element.js:275</code></a>
                             </p>
                     
                     
@@ -4719,7 +4797,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l426"><code>addon&#x2F;components&#x2F;bs-form-element.js:426</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l456"><code>addon&#x2F;components&#x2F;bs-form-element.js:456</code></a>
                             </p>
                     
                     
@@ -4749,7 +4827,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l414"><code>addon&#x2F;components&#x2F;bs-form-element.js:414</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l444"><code>addon&#x2F;components&#x2F;bs-form-element.js:444</code></a>
                             </p>
                     
                     
@@ -4779,7 +4857,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l334"><code>addon&#x2F;components&#x2F;bs-form-element.js:334</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l364"><code>addon&#x2F;components&#x2F;bs-form-element.js:364</code></a>
                             </p>
                     
                     
@@ -4935,7 +5013,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l264"><code>addon&#x2F;components&#x2F;bs-form-element.js:264</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l284"><code>addon&#x2F;components&#x2F;bs-form-element.js:284</code></a>
                             </p>
                     
                     
@@ -4993,7 +5071,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l314"><code>addon&#x2F;components&#x2F;bs-form-element.js:314</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l344"><code>addon&#x2F;components&#x2F;bs-form-element.js:344</code></a>
                             </p>
                     
                     
@@ -5051,7 +5129,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l272"><code>addon&#x2F;components&#x2F;bs-form-element.js:272</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l292"><code>addon&#x2F;components&#x2F;bs-form-element.js:292</code></a>
                             </p>
                     
                     
@@ -5080,7 +5158,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l384"><code>addon&#x2F;components&#x2F;bs-form-element.js:384</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l414"><code>addon&#x2F;components&#x2F;bs-form-element.js:414</code></a>
                             </p>
                     
                     
@@ -5110,7 +5188,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l399"><code>addon&#x2F;components&#x2F;bs-form-element.js:399</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l429"><code>addon&#x2F;components&#x2F;bs-form-element.js:429</code></a>
                             </p>
                     
                     
@@ -5141,7 +5219,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l373"><code>addon&#x2F;components&#x2F;bs-form-element.js:373</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l403"><code>addon&#x2F;components&#x2F;bs-form-element.js:403</code></a>
                             </p>
                     
                     
@@ -5317,7 +5395,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l357"><code>addon&#x2F;components&#x2F;bs-form-element.js:357</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l387"><code>addon&#x2F;components&#x2F;bs-form-element.js:387</code></a>
                             </p>
                     
                     
@@ -5346,7 +5424,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l365"><code>addon&#x2F;components&#x2F;bs-form-element.js:365</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l395"><code>addon&#x2F;components&#x2F;bs-form-element.js:395</code></a>
                             </p>
                     
                     
@@ -5356,6 +5434,37 @@ by invoking the component with a block template. Use whatever control you might 
                             
                         </div>
                     
+                    
+                    
+                    </div>
+                    <div id="property_isValidating" class="property item public">
+                        <h3 class="name">isValidating
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l300"><code>addon&#x2F;components&#x2F;bs-form-element.js:300</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Set a validating state for async validations</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
@@ -5375,7 +5484,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l349"><code>addon&#x2F;components&#x2F;bs-form-element.js:349</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l379"><code>addon&#x2F;components&#x2F;bs-form-element.js:379</code></a>
                             </p>
                     
                     
@@ -5434,7 +5543,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l111"><code>addon&#x2F;components&#x2F;bs-form-element.js:111</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l113"><code>addon&#x2F;components&#x2F;bs-form-element.js:113</code></a>
                             </p>
                     
                     
@@ -5534,7 +5643,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l247"><code>addon&#x2F;components&#x2F;bs-form-element.js:247</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l267"><code>addon&#x2F;components&#x2F;bs-form-element.js:267</code></a>
                             </p>
                     
                     
@@ -5564,7 +5673,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l185"><code>addon&#x2F;components&#x2F;bs-form-element.js:185</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l205"><code>addon&#x2F;components&#x2F;bs-form-element.js:205</code></a>
                             </p>
                     
                     
@@ -5625,7 +5734,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l167"><code>addon&#x2F;components&#x2F;bs-form-element.js:167</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l169"><code>addon&#x2F;components&#x2F;bs-form-element.js:169</code></a>
                             </p>
                     
                     
@@ -5655,7 +5764,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l154"><code>addon&#x2F;components&#x2F;bs-form-element.js:154</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l156"><code>addon&#x2F;components&#x2F;bs-form-element.js:156</code></a>
                             </p>
                     
                     
@@ -5666,6 +5775,36 @@ by invoking the component with a block template. Use whatever control you might 
                     form element should represent. The control element's value will automatically be bound to the model property's
                     value.</p>
                     <p>Using this property enables form validation on this element.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_required" class="property item public">
+                        <h3 class="name">required
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form-element.js.html#l187"><code>addon&#x2F;components&#x2F;bs-form-element.js:187</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Control element's HTML5 required attribute</p>
                     
                         </div>
                     
@@ -5688,7 +5827,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l228"><code>addon&#x2F;components&#x2F;bs-form-element.js:228</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l248"><code>addon&#x2F;components&#x2F;bs-form-element.js:248</code></a>
                             </p>
                     
                     
@@ -5719,7 +5858,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l290"><code>addon&#x2F;components&#x2F;bs-form-element.js:290</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l320"><code>addon&#x2F;components&#x2F;bs-form-element.js:320</code></a>
                             </p>
                     
                     
@@ -5748,7 +5887,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l280"><code>addon&#x2F;components&#x2F;bs-form-element.js:280</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l310"><code>addon&#x2F;components&#x2F;bs-form-element.js:310</code></a>
                             </p>
                     
                     
@@ -5969,7 +6108,7 @@ by invoking the component with a block template. Use whatever control you might 
                                     Components.FormGroup
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-form-element.js.html#l322"><code>addon&#x2F;components&#x2F;bs-form-element.js:322</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l352"><code>addon&#x2F;components&#x2F;bs-form-element.js:352</code></a>
                             </p>
                     
                     
@@ -6002,7 +6141,7 @@ by invoking the component with a block template. Use whatever control you might 
                                     Components.FormGroup
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-form-element.js.html#l298"><code>addon&#x2F;components&#x2F;bs-form-element.js:298</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l328"><code>addon&#x2F;components&#x2F;bs-form-element.js:328</code></a>
                             </p>
                     
                     
@@ -6033,7 +6172,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l137"><code>addon&#x2F;components&#x2F;bs-form-element.js:137</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l139"><code>addon&#x2F;components&#x2F;bs-form-element.js:139</code></a>
                             </p>
                     
                     
@@ -6141,7 +6280,7 @@ by invoking the component with a block template. Use whatever control you might 
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-element.js.html#l452"><code>addon&#x2F;components&#x2F;bs-form-element.js:452</code></a>
+                            <a href="../files/addon_components_bs-form-element.js.html#l491"><code>addon&#x2F;components&#x2F;bs-form-element.js:491</code></a>
                             </p>
                     
                     

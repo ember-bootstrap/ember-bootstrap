@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.4</span></h1>
+    <h1>API Docs <span class="small">v0.7.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -67,6 +67,10 @@ import Ember from &#x27;ember&#x27;;
 export default Ember.Component.extend({
   tagName: &#x27;select&#x27;,
   classNames: [&#x27;form-control&#x27;],
+
+  attributeBindings: [&#x27;disabled&#x27;, &#x27;required&#x27;],
+  disabled: false,
+  required: false,
 
   content: null,
   prompt: null,
@@ -102,6 +106,7 @@ export default Ember.Component.extend({
     changeCallback(selection);
   }
 });
+
     </pre>
 </div>
                     </div>

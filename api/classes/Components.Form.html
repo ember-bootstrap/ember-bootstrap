@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.6.4</span></h1>
+    <h1>API Docs <span class="small">v0.7.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -71,36 +71,38 @@
 Allows setting a <code>model</code> that nested <code>Components.FormElement</code>s can access, and that can provide form validation through
 <a href="https://github.com/dockyard/ember-validations">ember-validations</a></p>
 <p>You can use whatever markup you like within the form:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-form action=&quot;submit&quot;}}
-{{#bs-form-group validation=firstNameValidation}}
-&lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
-{{bs-input type=&quot;text&quot; value=firstname}}
-{{/bs-form-group}}
-{{/bs-form}}
-</code></pre>
+<pre class="code prettyprint"><code class="language-hbs"></code></pre>
 <p>However to benefit from features such as automatic form markup, validations and validation markup, use <code>Components.FormElement</code>
 as nested components. See below for an example.</p>
 <h3>Submitting the form</h3>
 <p>When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the default action
 will be sent to the controller.
-When an <a href="https://github.com/dockyard/ember-validations">ember-validations</a> validated model is supplied, validations
-rules are evaluated before, and if those fail, the &quot;invalid&quot; action is sent instead of the default &quot;action&quot;.</p>
+In case the form supports validation (see "Form validation" below), the "before" action is called (which allows you to
+do e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the "invalid"
+action is sent instead of the default "action".</p>
 <h3>Use with Components.FormElement</h3>
 <p>When using <code>Components.FormElement</code>s with their <code>property</code> set to property names of the form's validation enabled
 <code>model</code>, you gain some additional powerful features:</p>
 <ul>
 <li>the appropriate Bootstrap markup for the given <code>formLayout</code> and the form element's <code>controlType</code> is automatically generated</li>
-<li>markup for validation states and error messages is generated based on the model's validation, when submitting the form
+<li>markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form
 with an invalid validation, or when focusing out of invalid inputs</li>
 </ul>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
-{{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
-{{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
-{{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
-{{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
-{{/bs-form}}
-</code></pre>
-<p>See the <code>Components.FormElement</code> API docs for further information.</p>
+<pre class="code prettyprint"><code class="language-hbs"></code></pre>
+<p>See the <a href="../classes/Components.FormElement.html" class="crosslink">Components.FormElement</a> API docs for further information.</p>
+<h3>Form validation</h3>
+<p>All version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.
+Instead support is added usually by addition Ember addons, for example:</p>
+<ul>
+<li><a href="https://github.com/kaliber5/ember-bootstrap-validations">ember-bootstrap-validations</a>: adds support for <a href="https://github.com/DockYard/ember-validations">ember-validations</a></li>
+<li><a href="https://github.com/offirgolan/ember-bootstrap-cp-validations">ember-bootstrap-cp-validations</a>: adds support for <a href="https://github.com/offirgolan/ember-cp-validations">ember-cp-validations</a></li>
+</ul>
+<p>To add your own validation support, you have to:</p>
+<ul>
+<li>extend this component, setting <code>hasValidator</code> to true if validations are available (by means of a computed property for example), and implementing the <code>validate</code> method</li>
+<li>extend the <a href="../classes/Components.FormElement.html" class="crosslink">Components.FormElement</a> component and implement the <code>setupValidations</code> hook or simply override the <code>errors</code> property to add the validation error messages to be displayed</li>
+</ul>
+<p>See the above mentioned addons for examples.</p>
 
 </div>
 
@@ -360,6 +362,10 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                                 <a href="#" data-tabid="#methods" data-anchor="#method_setProperties" data-tablink="setProperties">setProperties</a>
 
                             </li>
+                            <li class="index-item method private">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_submit" data-tablink="submit">submit</a>
+
+                            </li>
                             <li class="index-item method public inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_toggleProperty" data-tablink="toggleProperty">toggleProperty</a>
 
@@ -505,16 +511,24 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                     <h3>Events</h3>
 
                     <ul class="index-list events extends">
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_action" data-tablink="action">action</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_before" data-tablink="before">before</a>
+
+                            </li>
                             <li class="index-item event public inherited">
                                 <a href="#" data-tabid="#events" data-anchor="#event_didInsertElement" data-tablink="didInsertElement">didInsertElement</a>
 
                             </li>
-                            <li class="index-item event private inherited">
-                                <a href="#" data-tabid="#events" data-anchor="#event_parentViewDidChange" data-tablink="parentViewDidChange">parentViewDidChange</a>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_invalid" data-tablink="invalid">invalid</a>
 
                             </li>
-                            <li class="index-item event private">
-                                <a href="#" data-tabid="#events" data-anchor="#event_submit" data-tablink="submit">submit</a>
+                            <li class="index-item event private inherited">
+                                <a href="#" data-tabid="#events" data-anchor="#event_parentViewDidChange" data-tablink="parentViewDidChange">parentViewDidChange</a>
 
                             </li>
                             <li class="index-item event public inherited">
@@ -3597,6 +3611,41 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                             </div>
                     
                     </div>
+                    <div id="method_submit" class="method item private">
+                        <h3 class="name">submit
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form.js.html#l201"><code>addon&#x2F;components&#x2F;bs-form.js:201</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Submit handler that will send the default action (&quot;action&quot;) to the controller when submitting the form.</p>
+                    <p>If there is a supplied <code>model</code> that supports validation (<code>hasValidator</code>) the model will be validated before, and
+                    only if validation is successful the default action will be sent. Otherwise an &quot;invalid&quot; action will be sent, and
+                    all the <code>showValidation</code> property of all child <code>Components.FormElement</code>s will be set to true, so error state and
+                    messages will be shown automatically.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="method_toggleProperty" class="method item public inherited">
                         <h3 class="name">toggleProperty
                         <span class="small">Boolean</span>
@@ -4035,7 +4084,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l129"><code>addon&#x2F;components&#x2F;bs-form.js:129</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l146"><code>addon&#x2F;components&#x2F;bs-form.js:146</code></a>
                             </p>
                     
                     
@@ -4329,7 +4378,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l89"><code>addon&#x2F;components&#x2F;bs-form.js:89</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l106"><code>addon&#x2F;components&#x2F;bs-form.js:106</code></a>
                             </p>
                     
                     
@@ -4479,14 +4528,14 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l98"><code>addon&#x2F;components&#x2F;bs-form.js:98</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l115"><code>addon&#x2F;components&#x2F;bs-form.js:115</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Check if the <code>model</code> has a validate method, i.e. supports validation by using <a href="https://github.com/dockyard/ember-validations">ember-validations</a></p>
+                            <p>Check if validating the model is supported. This needs to be implemented by another addon.</p>
                     
                         </div>
                     
@@ -4509,7 +4558,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l108"><code>addon&#x2F;components&#x2F;bs-form.js:108</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l125"><code>addon&#x2F;components&#x2F;bs-form.js:125</code></a>
                             </p>
                     
                     
@@ -4703,7 +4752,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l61"><code>addon&#x2F;components&#x2F;bs-form.js:61</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l78"><code>addon&#x2F;components&#x2F;bs-form.js:78</code></a>
                             </p>
                     
                     
@@ -4766,7 +4815,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l75"><code>addon&#x2F;components&#x2F;bs-form.js:75</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l92"><code>addon&#x2F;components&#x2F;bs-form.js:92</code></a>
                             </p>
                     
                     
@@ -4833,7 +4882,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l119"><code>addon&#x2F;components&#x2F;bs-form.js:119</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l136"><code>addon&#x2F;components&#x2F;bs-form.js:136</code></a>
                             </p>
                     
                     
@@ -4999,6 +5048,75 @@ with an invalid validation, or when focusing out of invalid inputs</li>
             <div id="events" class="tab-pane">
                 <h2 class="off-left">Events</h2>
 
+                    <div id="event_action" class="events item public">
+                        <h3 class="name"><code>action</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form.js.html#l185"><code>addon&#x2F;components&#x2F;bs-form.js:185</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>A handler called when submit has been triggered and the model has passed all validations (if present).</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">Object</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>result The returned result from the validate method</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_before" class="events item public">
+                        <h3 class="name"><code>before</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form.js.html#l178"><code>addon&#x2F;components&#x2F;bs-form.js:178</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>A handler called before the form is validated (if possible) and submitted.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="event_didInsertElement" class="events item public inherited">
                         <h3 class="name"><code>didInsertElement</code></h3>
                         <span class="type"></span>
@@ -5029,6 +5147,49 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                     
                     
                     </div>
+                    <div id="event_invalid" class="events item public">
+                        <h3 class="name"><code>invalid</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form.js.html#l193"><code>addon&#x2F;components&#x2F;bs-form.js:193</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>A handler called when validation of the model has failed.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">Object</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>error</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
                     <div id="event_parentViewDidChange" class="events item private inherited">
                         <h3 class="name"><code>parentViewDidChange</code></h3>
                         <span class="type"></span>
@@ -5049,36 +5210,6 @@ with an invalid validation, or when focusing out of invalid inputs</li>
                     
                         <div class="description">
                             Called when the parentView property has changed.
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="event_submit" class="events item private">
-                        <h3 class="name"><code>submit</code></h3>
-                        <span class="type"></span>
-                    
-                    
-                            <span class="flag private">private</span>
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l141"><code>addon&#x2F;components&#x2F;bs-form.js:141</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Submit handler that will send the default action (&quot;action&quot;) to the controller when submitting the form.</p>
-                    <p>If there is a supplied <code>model</code> that supports validation (<code>hasValidator</code>) the model will be validated before, and
-                    only if validation is successful the default action will be sent. Otherwise an &quot;invalid&quot; action will be sent, and
-                    all the <code>showValidation</code> property of all child <code>Components.FormElement</code>s will be set to true, so error state and
-                    messages will be shown automatically.</p>
-                    
                         </div>
                     
                     
