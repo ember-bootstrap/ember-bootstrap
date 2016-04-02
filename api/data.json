@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v0.7.0",
+        "version": "0.7.0.30a4353d",
         "external": {
             "data": [
                 {
@@ -357,7 +357,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-accordion-item.js",
             "line": 7,
-            "description": "A collapsible/expandable item within an accordion\n\nSee {{#crossLink \"Components.Accordion\"}}{{/crossLink}} for examples.",
+            "description": "A collapsible/expandable item within an accordion\n\nSee [Components.Accordion](Components.Accordion.html) for examples.",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.TypeClass",
@@ -377,7 +377,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-accordion.js",
             "line": 3,
-            "description": "Bootstrap-style accordion group, with collapsible/expandable items.\nSee http://getbootstrap.com/components/#btn-groups\n\nUse as a block level component with any number of {{#crossLink \"Components.AccordionItem\"}}{{/crossLink}} components as children:\n\n```handlebars\n \\{{#bs-accordion selected=selected}}\n     \\{{#bs-accordion-item value=\"1\" title=\"First item\"}}\n       <p>Lorem ipsum...</p>\n     \\{{/bs-accordion-item}}\n     \\{{#bs-accordion-item value=\"2\" title=\"Second item\"}}\n       <p>Lorem ipsum...</p>\n     \\{{/bs-accordion-item}}\n     \\{{#bs-accordion-item value=\"3\" title=\"Third item\"}}\n       <p>Lorem ipsum...</p>\n     \\{{/bs-accordion-item}}\n \\{{/bs-accordion}}\n\n <p>Selected accordion item: \\{{selected}}</p>\n```",
+            "description": "Bootstrap-style accordion group, with collapsible/expandable items.\nSee http://getbootstrap.com/components/#btn-groups\n\nUse as a block level component with any number of [Components.AccordionItem](Components.AccordionItem.html) components as children:\n\n```handlebars\n {{#bs-accordion selected=selected}}\n     {{#bs-accordion-item value=\"1\" title=\"First item\"}}\n       <p>Lorem ipsum...</p>\n     {{/bs-accordion-item}}\n     {{#bs-accordion-item value=\"2\" title=\"Second item\"}}\n       <p>Lorem ipsum...</p>\n     {{/bs-accordion-item}}\n     {{#bs-accordion-item value=\"3\" title=\"Third item\"}}\n       <p>Lorem ipsum...</p>\n     {{/bs-accordion-item}}\n {{/bs-accordion}}\n\n <p>Selected accordion item: {{selected}}</p>\n```",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -412,7 +412,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-button-group.js",
             "line": 7,
-            "description": "Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.\nSee http://getbootstrap.com/components/#btn-groups\n\nUse as a block level component with any number of {{#crossLink \"Components.Button\"}}{{/crossLink}} components as children:\n\n```handlebars\n{{#bs-button-group}}\n{{#bs-button}}1{{/bs-button}}\n{{#bs-button}}2{{/bs-button}}\n{{#bs-button}}3{{/bs-button}}\n{{/bs-button-group}}\n```\n\n### Radio-like behaviour\n\nUse the `type` property set to \"radio\" to make the child buttons toggle like radio buttons, i.e. only one button can be active.\nSet the `value` property of the buttons to something meaningful. The `value` property of the button group will then reflect\nthe value of the active button:\n\n```handlebars\n{{#bs-button-group value=buttonGroupValue type=\"radio\"}}\n{{#bs-button value=1}}1{{/bs-button}}\n{{#bs-button value=2}}2{{/bs-button}}\n{{#bs-button value=3}}3{{/bs-button}}\n{{/bs-button-group}}\n\nYou selected: {{buttonGroupValue}}!\n```\n\n### Checkbox-like behaviour\n\nSet `type` to \"checkbox\" to make any number of child buttons selectable. The `value` property will be an array\nof all the values of the active buttons:\n\n```handlebars\n{{#bs-button-group value=buttonGroupValue type=\"checkbox\"}}\n{{#bs-button value=1}}1{{/bs-button}}\n{{#bs-button value=2}}2{{/bs-button}}\n{{#bs-button value=3}}3{{/bs-button}}\n{{/bs-button-group}}\n\nYou selected:\n<ul>\n{{#each value in buttonGroupValue}}\n<li>{{value}}</li>\n{{/each}}\n</ul>\n```",
+            "description": "Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.\nSee http://getbootstrap.com/components/#btn-groups\n\nUse as a block level component with any number of [Components.Button](Components.Button.html) components as children:\n\n```handlebars\n{{#bs-button-group}}\n  {{#bs-button}}1{{/bs-button}}\n  {{#bs-button}}2{{/bs-button}}\n  {{#bs-button}}3{{/bs-button}}\n{{/bs-button-group}}\n```\n\n### Radio-like behaviour\n\nUse the `type` property set to \"radio\" to make the child buttons toggle like radio buttons, i.e. only one button can be active.\nSet the `value` property of the buttons to something meaningful. The `value` property of the button group will then reflect\nthe value of the active button:\n\n```handlebars\n{{#bs-button-group value=buttonGroupValue type=\"radio\"}}\n  {{#bs-button value=1}}1{{/bs-button}}\n  {{#bs-button value=2}}2{{/bs-button}}\n  {{#bs-button value=3}}3{{/bs-button}}\n{{/bs-button-group}}\n\nYou selected: {{buttonGroupValue}}!\n```\n\n### Checkbox-like behaviour\n\nSet `type` to \"checkbox\" to make any number of child buttons selectable. The `value` property will be an array\nof all the values of the active buttons:\n\n```handlebars\n{{#bs-button-group value=buttonGroupValue type=\"checkbox\"}}\n  {{#bs-button value=1}}1{{/bs-button}}\n  {{#bs-button value=2}}2{{/bs-button}}\n  {{#bs-button value=3}}3{{/bs-button}}\n{{/bs-button-group}}\n\nYou selected:\n<ul>\n{{#each value in buttonGroupValue}}\n  <li>{{value}}</li>\n{{/each}}\n</ul>\n```",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.SizeClass"
@@ -431,7 +431,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-button.js",
             "line": 8,
-            "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```hbs\n\\{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\"}}\nDownloads\n\\{{/bs-button}}\n```\n\n### Actions\n\nSet the action property of the component to send an action to your controller. The following parameters will be sent:\n* value: the button's value, see the `value` property\n* event: the browsers event object\n* callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling\n\n```hbs\n\\{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" action=\"download\"}}\nDownload\n\\{{/bs-button}}\n```\n\n### States\n\nUse the `textState` property to change the label of the button. You can bind it to a controller property to set a \"loading\" state for example.\nThe label of the button will be taken from the `<state>Text` property.\n\n```hbs\n\\{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" textState=buttonState defaultText=\"Download\" loadingText=\"Loading...\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  buttonState: \"default\"\n  actions: {\n    download: function() {\n      this.set(\"buttonState\", \"loading\");\n    }\n  }\n});\n```\n\n### Promise support for automatic state change\n\nWhen using the callback function of the click action to supply a Promise for any asynchronous operation the button will\nmanage its `textState` property automatically, changing its value according to the state of the promise:\n\"default\" > \"pending\" > \"resolved\"/\"rejected\"\n\n```hbs\n\\{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" defaultText=\"Download\" pendingText=\"Loading...\" resolvedText=\"Completed!\" rejectedText=\"Oups!?\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  actions: {\n    download: function(actionParam, evt, cb) {\n      promise = new Ember.RSVP.Promise(...);\n      cb(promise);\n    }\n  }\n});\n```",
+            "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```hbs\n{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\"}}\nDownloads\n{{/bs-button}}\n```\n\n### Actions\n\nSet the action property of the component to send an action to your controller. The following parameters will be sent:\n* value: the button's value, see the `value` property\n* event: the browsers event object\n* callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling\n\n```hbs\n{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" action=\"download\"}}\nDownload\n{{/bs-button}}\n```\n\n### States\n\nUse the `textState` property to change the label of the button. You can bind it to a controller property to set a \"loading\" state for example.\nThe label of the button will be taken from the `<state>Text` property.\n\n```hbs\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" textState=buttonState defaultText=\"Download\" loadingText=\"Loading...\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  buttonState: \"default\"\n  actions: {\n    download: function() {\n      this.set(\"buttonState\", \"loading\");\n    }\n  }\n});\n```\n\n### Promise support for automatic state change\n\nWhen using the callback function of the click action to supply a Promise for any asynchronous operation the button will\nmanage its `textState` property automatically, changing its value according to the state of the promise:\n\"default\" > \"pending\" > \"resolved\"/\"rejected\"\n\n```hbs\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" defaultText=\"Download\" pendingText=\"Loading...\" resolvedText=\"Completed!\" rejectedText=\"Oups!?\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  actions: {\n    download: function(actionParam, evt, cb) {\n      promise = new Ember.RSVP.Promise(...);\n      cb(promise);\n    }\n  }\n});\n```",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.TypeClass",
@@ -467,7 +467,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-dropdown-button.js",
             "line": 4,
-            "description": "Button component with that can act as a dropdown toggler.\n\nSee {{#crossLink \"Components.Dropdown\"}}{{/crossLink}} for examples.",
+            "description": "Button component with that can act as a dropdown toggler.\n\nSee [Components.Dropdown](Components.Dropdown.html) for examples.",
             "extends": "Components.Button",
             "uses": [
                 "Mixins.DropdownToggle"
@@ -486,7 +486,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-dropdown-menu.js",
             "line": 5,
-            "description": "Component for the dropdown menu.\n\nSee {{#crossLink \"Components.Dropdown\"}}{{/crossLink}} for examples.",
+            "description": "Component for the dropdown menu.\n\nSee [Components.Dropdown](Components.Dropdown.html) for examples.",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -502,7 +502,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-dropdown-toggle.js",
             "line": 6,
-            "description": "Anchor element that triggers the parent dropdown to open.\nUse {{#crossLink \"Components.DropdownButton\"}}{{/crossLink}} if you want a button instead of an anchor tag.\n\nSee {{#crossLink \"Components.Dropdown\"}}{{/crossLink}} for examples.",
+            "description": "Anchor element that triggers the parent dropdown to open.\nUse [Components.DropdownButton](Components.DropdownButton.html) if you want a button instead of an anchor tag.\n\nSee [Components.Dropdown](Components.Dropdown.html) for examples.",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.DropdownToggle"
@@ -521,7 +521,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-dropdown.js",
             "line": 7,
-            "description": "Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.\nSee http://getbootstrap.com/components/#dropdowns\n\nUse this component together with two sub components, a dropdown toggle (`Components.DropdownToggle` or\n`Components.DropdownButton` component) and a dropdown menu (`Components.DropdownMenu`) component:\n\n```hbs\n<nav class=\"navbar navbar-default navbar-static\">\n<div class=\"container-fluid\">\n<ul class=\"nav navbar-nav\">\n{{#bs-dropdown tagName=\"li\"}}\n{{#bs-dropdown-toggle}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-toggle}}\n{{#bs-dropdown-menu}}\n<li>{{#link-to \"index\"}}Something{{/link-to}}</li>\n<li>{{#link-to \"index\"}}Something different{{/link-to}}</li>\n{{/bs-dropdown-menu}}\n{{/bs-dropdown}}\n</ul>\n</div>\n</nav>\n```\n\n### Button dropdowns\n\nTo use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the\n`Components.DropdownButton` component as the toggle:\n\n```hbs\n{{#bs-dropdown}}\n{{#bs-dropdown-button}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-button}}\n{{#bs-dropdown-menu}}\n<li>{{#link-to \"index\"}}Something{{/link-to}}</li>\n<li>{{#link-to \"index\"}}Something different{{/link-to}}</li>\n{{/bs-dropdown-menu}}\n{{/bs-dropdown}}\n```\n\nIt has all the functionality of a `Components.Button` with additional dropdown support.\n\n### Split button dropdowns\n\nTo have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a\n`Components.Button` component and a `Components.DropdownButton`:\n\n```hbs\n{{#bs-dropdown}}\n{{#bs-button}}Dropdown{{/bs-button}}\n{{#bs-dropdown-button}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-button}}\n{{#bs-dropdown-menu}}\n<li>{{#link-to \"index\"}}Something{{/link-to}}</li>\n<li>{{#link-to \"index\"}}Something different{{/link-to}}</li>\n{{/bs-dropdown-menu}}\n{{/bs-dropdown}}\n```",
+            "description": "Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.\nSee http://getbootstrap.com/components/#dropdowns\n\nUse this component together with two sub components, a dropdown toggle (`Components.DropdownToggle` or\n`Components.DropdownButton` component) and a dropdown menu (`Components.DropdownMenu`) component:\n\n```hbs\n<nav class=\"navbar navbar-default navbar-static\">\n  <div class=\"container-fluid\">\n    <ul class=\"nav navbar-nav\">\n      {{#bs-dropdown tagName=\"li\"}}\n        {{#bs-dropdown-toggle}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-toggle}}\n        {{#bs-dropdown-menu}}\n          <li>{{#link-to \"index\"}}Something{{/link-to}}</li>\n          <li>{{#link-to \"index\"}}Something different{{/link-to}}</li>\n        {{/bs-dropdown-menu}}\n      {{/bs-dropdown}}\n    </ul>\n  </div>\n</nav>\n```\n\n### Button dropdowns\n\nTo use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the\n`Components.DropdownButton` component as the toggle:\n\n```hbs\n{{#bs-dropdown}}\n  {{#bs-dropdown-button}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-button}}\n  {{#bs-dropdown-menu}}\n    <li>{{#link-to \"index\"}}Something{{/link-to}}</li>\n    <li>{{#link-to \"index\"}}Something different{{/link-to}}</li>\n  {{/bs-dropdown-menu}}\n{{/bs-dropdown}}\n```\n\nIt has all the functionality of a `Components.Button` with additional dropdown support.\n\n### Split button dropdowns\n\nTo have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a\n`Components.Button` component and a `Components.DropdownButton`:\n\n```hbs\n{{#bs-dropdown}}\n  {{#bs-button}}Dropdown{{/bs-button}}\n  {{#bs-dropdown-button}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-button}}\n  {{#bs-dropdown-menu}}\n    <li>{{#link-to \"index\"}}Something{{/link-to}}</li>\n    <li>{{#link-to \"index\"}}Something different{{/link-to}}</li>\n  {{/bs-dropdown-menu}}\n{{/bs-dropdown}}\n```",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -553,7 +553,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-form-group.js",
             "line": 6,
-            "description": "This component renders a `<div class=\"form-group\">` element, with support for validation states and feedback icons.\nUse as a block level component:\n\n```hbs\n{{#bs-form-group validation=firstNameValidation}}\n<label class=\"control-label\">First name</label>\n{{bs-input type=\"text\" value=firstname}}\n{{/bs-form-group}}\n```\n\nIf the `validation` property is set to some state (usually Bootstrap's predefined states \"success\",\n\"warning\" or \"error\"), the appropriate styles will be added, together with a feedback icon.\nSee http://getbootstrap.com/css/#forms-control-validation",
+            "description": "This component renders a `<div class=\"form-group\">` element, with support for validation states and feedback icons.\nUse as a block level component:\n\n```hbs\n{{#bs-form-group validation=firstNameValidation}}\n  <label class=\"control-label\">First name</label>\n  {{bs-input type=\"text\" value=firstname}}\n{{/bs-form-group}}\n```\n\nIf the `validation` property is set to some state (usually Bootstrap's predefined states \"success\",\n\"warning\" or \"error\"), the appropriate styles will be added, together with a feedback icon.\nSee http://getbootstrap.com/css/#forms-control-validation",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -569,7 +569,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-form.js",
             "line": 6,
-            "description": "Render a form with the appropriate Bootstrap layout class (see `formLayout`).\nAllows setting a `model` that nested `Components.FormElement`s can access, and that can provide form validation through\n[ember-validations](https://github.com/dockyard/ember-validations)\n\nYou can use whatever markup you like within the form:\n\n```hbs\n{{#bs-form action=\"submit\"}}\n{{#bs-form-group validation=firstNameValidation}}\n<label class=\"control-label\">First name</label>\n{{bs-input type=\"text\" value=firstname}}\n{{/bs-form-group}}\n{{/bs-form}}\n```\n\nHowever to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`\nas nested components. See below for an example.\n\n### Submitting the form\n\nWhen the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the default action\nwill be sent to the controller.\nIn case the form supports validation (see \"Form validation\" below), the \"before\" action is called (which allows you to\ndo e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the \"invalid\"\naction is sent instead of the default \"action\".\n\n### Use with Components.FormElement\n\nWhen using `Components.FormElement`s with their `property` set to property names of the form's validation enabled\n`model`, you gain some additional powerful features:\n* the appropriate Bootstrap markup for the given `formLayout` and the form element's `controlType` is automatically generated\n* markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form\nwith an invalid validation, or when focusing out of invalid inputs\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\"}}\n{{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" property=\"email\"}}\n{{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" property=\"password\"}}\n{{bs-form-element controlType=\"checkbox\" label=\"Remember me\" property=\"rememberMe\"}}\n{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n{{/bs-form}}\n```\n\nSee the {{#crossLink \"Components.FormElement\"}}{{/crossLink}} API docs for further information.\n\n### Form validation\n\nAll version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.\nInstead support is added usually by addition Ember addons, for example:\n\n* [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)\n* [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)\n\nTo add your own validation support, you have to:\n\n* extend this component, setting `hasValidator` to true if validations are available (by means of a computed property for example), and implementing the `validate` method\n* extend the {{#crossLink \"Components.FormElement\"}}{{/crossLink}} component and implement the `setupValidations` hook or simply override the `errors` property to add the validation error messages to be displayed\n\nSee the above mentioned addons for examples.",
+            "description": "Render a form with the appropriate Bootstrap layout class (see `formLayout`).\nAllows setting a `model` that nested `Components.FormElement`s can access, and that can provide form validation (see below)\n\nYou can use whatever markup you like within the form:\n\n ```handlebars\n {{#bs-form action=\"submit\"}}\n   {{#bs-form-group validation=firstNameValidation}}\n     <label class=\"control-label\">First name</label>\n     {{bs-input type=\"text\" value=firstname}}\n  {{/bs-form-group}}\n{{/bs-form}}\n```\n\nHowever to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`\nas nested components. See below for an example.\n\n### Submitting the form\n\nWhen the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the default action\nwill be sent to the controller.\nIn case the form supports validation (see \"Form validation\" below), the \"before\" action is called (which allows you to\ndo e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the \"invalid\"\naction is sent instead of the default \"action\".\n\n### Use with Components.FormElement\n\nWhen using `Components.FormElement`s with their `property` set to property names of the form's validation enabled\n`model`, you gain some additional powerful features:\n* the appropriate Bootstrap markup for the given `formLayout` and the form element's `controlType` is automatically generated\n* markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form\nwith an invalid validation, or when focusing out of invalid inputs\n\n```handlebars\n{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\"}}\n  {{bs-form-element controlType=\"email\" label=\"Email\" placeholder=\"Email\" property=\"email\"}}\n  {{bs-form-element controlType=\"password\" label=\"Password\" placeholder=\"Password\" property=\"password\"}}\n  {{bs-form-element controlType=\"checkbox\" label=\"Remember me\" property=\"rememberMe\"}}\n  {{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n{{/bs-form}}\n```\n\nSee the [Components.FormElement](Components.FormElement.html) API docs for further information.\n\n### Form validation\n\nAll version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.\nInstead support is added usually by addition Ember addons, for example:\n\n* [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)\n* [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)\n\nTo add your own validation support, you have to:\n\n* extend this component, setting `hasValidator` to true if validations are available (by means of a computed property for example), and implementing the `validate` method\n* extend the [Components.FormElement](Components.FormElement.html) component and implement the `setupValidations` hook or simply override the `errors` property to add the validation error messages to be displayed\n\nSee the above mentioned addons for examples.",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -601,7 +601,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-modal-body.js",
             "line": 3,
-            "description": "Modal body element used within {{#crossLink \"Components.Modal\"}}{{/crossLink}} components. See there for examples.",
+            "description": "Modal body element used within [Components.Modal](Components.Modal.html) components. See there for examples.",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -633,7 +633,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-modal-footer.js",
             "line": 6,
-            "description": "Modal footer element used within {{#crossLink \"Components.Modal\"}}{{/crossLink}} components. See there for examples.",
+            "description": "Modal footer element used within [Components.Modal](Components.Modal.html) components. See there for examples.",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -649,7 +649,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-modal-header.js",
             "line": 4,
-            "description": "Modal header element used within {{#crossLink \"Components.Modal\"}}{{/crossLink}} components. See there for examples.",
+            "description": "Modal header element used within [Components.Modal](Components.Modal.html) components. See there for examples.",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -665,7 +665,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-modal.js",
             "line": 18,
-            "description": "Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals). Creating a simple modal is easy:\n```hbs\n {{#bs-modal title=\"Simple Dialog\"}}\n Hello world!\n {{/bs-modal}}\n ```\nThis will automatically create the appropriate markup, with a modal header containing the title, and a footer containing\n a default \"Ok\" button, that will close the modal automatically (unless you set `autoClose` to false).\nA modal created this way will be visible at once. You can use the `{{#if ...}}` helper to hide all modal elements form\n the DOM until needed. Or you can bind the `open` property to trigger showing and hiding the modal:\n```hbs\n {{#bs-modal open=openModal title=\"Simple Dialog\"}}\n Hello world!\n {{/bs-modal}}\n ```\n### Custom Markup\nTo customize your modal markup you can use the following sub components:\n{{#crossLink \"Components.ModalBody\"}}{{/crossLink}}\n {{#crossLink \"Components.ModalHeader\"}}{{/crossLink}}\n {{#crossLink \"Components.ModalFooter\"}}{{/crossLink}}\nIn the example above, these are generated for you automatically. Whenever you use one of these by yourself you should\n set the appropriate property (`body`, `footer`, `header`) to false to prevent their automatic generation. Note that\n in any case where you use a custom sub component, you must also use a custom {{#crossLink \"Components.ModalBody\"}}{{/crossLink}}!\nA common use case is to customize the buttons in the footer. Most often you will have a cancel button that closes the\n model without action, and a submit button that triggers some action. The footer component supports this case by letting\n you customize the button titles, the rest (triggering close or submit actions) automatically set up:\n```hbs\n {{#bs-modal body=false footer=false title=\"Attention\" submitAction=(action \"submit\")}}\n {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}\n {{bs-modal-footer closeTitle=\"Cancel\" submitTitle=\"Ok\"}}\n {{/bs-modal}}\n ```\nIf you further want to customize your modal elements, you can supply custom templates for your footer and header, as in\n the following example:\n```hbs\n {{#bs-modal body=false footer=false header=false submitAction=(action \"submit\")}}\n {{#bs-modal-header}}\n <h4 class=\"modal-title\"><i class=\"glyphicon glyphicon-alert\"></i> Alert</h4>\n {{/bs-modal-header}}\n {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}\n {{#bs-modal-footer as |footer|}}\n {{#bs-button action=(action \"close\" target=footer) type=\"danger\"}}Oh no, forget it!{{/bs-button}}\n {{#bs-button buttonType=\"submit\" type=\"success\"}}Yeah!{{/bs-button}}\n {{/bs-modal-footer}}\n {{/bs-modal}}\n ```\nNote the use of the action helper of the close button that triggers the close action on the modal footer component\n instead of on the controller, which will bubble up to the modal component and close the modal.\n### Modals with forms\nThere is a special case when you have a form inside your modals body: you probably do not want to have a submit button\n within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not\n trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an\n thus bypass the form validation feature of the form component.\n```hbs\n {{#bs-modal title=\"Form Example\" body=false footer=false}}\n {{#bs-modal-body}}\n {{#bs-form action=(action \"submit\") model=this}}\n {{bs-form-element controlType=\"text\" label=\"first name\" property=\"firstname\"}}\n {{bs-form-element controlType=\"text\" label=\"last name\" property=\"lastname\"}}\n {{/bs-form}}\n {{/bs-modal-body}}\n {{bs-modal-footer closeTitle=(t \"contact.label.cancel\") submitTitle=(t \"contact.label.ok\")}}\n {{/bs-modal}}\n ```\nThe modal component supports this common case by triggering the submit event programmatically on the body's form if\n present whenever the footer's submit button is pressed, so the example above will work as expected.\n### Auto-focus\nIn order to allow key handling to function, the modal's root element is given focus once the modal is shown. If your\n modal contains an element such as a text input and you would like it to be given focus rather than the modal element,\n then give it the HTML5 autofocus attribute:\n```hbs\n {{#bs-modal title=\"Form Example\" body=false footer=false}}\n {{#bs-modal-body}}\n {{#bs-form action=(action \"submit\") model=this}}\n {{bs-form-element controlType=\"text\" label=\"first name\" property=\"firstname\" autofocus=true}}\n {{bs-form-element controlType=\"text\" label=\"last name\" property=\"lastname\"}}\n {{/bs-form}}\n {{/bs-modal-body}}\n {{bs-modal-footer closeTitle=(t \"contact.label.cancel\") submitTitle=(t \"contact.label.ok\")}}\n {{/bs-modal}}\n ```\n\n### Modals inside wormhole\nModals make use of the [ember-wormhole](https://github.com/yapplabs/ember-wormhole) addon, which will be installed\n automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested\n components/templates where it belongs to logically, but to have the actual DOM elements within a special container\n element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and\n are not effected by parent elements with `overflow: hidden` for example.\nIf you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.",
+            "description": "Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals). Creating a simple modal is easy:\n```hbs\n {{#bs-modal title=\"Simple Dialog\"}}\n   Hello world!\n {{/bs-modal}}\n ```\nThis will automatically create the appropriate markup, with a modal header containing the title, and a footer containing\n a default \"Ok\" button, that will close the modal automatically (unless you set `autoClose` to false).\nA modal created this way will be visible at once. You can use the `{{#if ...}}` helper to hide all modal elements form\n the DOM until needed. Or you can bind the `open` property to trigger showing and hiding the modal:\n```hbs\n {{#bs-modal open=openModal title=\"Simple Dialog\"}}\n   Hello world!\n {{/bs-modal}}\n ```\n### Custom Markup\nTo customize your modal markup you can use the following sub components:\n[Components.ModalBody](Components.ModalBody.html)\n [Components.ModalHeader](Components.ModalHeader.html)\n [Components.ModalFooter](Components.ModalFooter.html)\nIn the example above, these are generated for you automatically. Whenever you use one of these by yourself you should\n set the appropriate property (`body`, `footer`, `header`) to false to prevent their automatic generation. Note that\n in any case where you use a custom sub component, you must also use a custom [Components.ModalBody](Components.ModalBody.html)!\nA common use case is to customize the buttons in the footer. Most often you will have a cancel button that closes the\n model without action, and a submit button that triggers some action. The footer component supports this case by letting\n you customize the button titles, the rest (triggering close or submit actions) automatically set up:\n```hbs\n {{#bs-modal body=false footer=false title=\"Attention\" submitAction=(action \"submit\")}}\n   {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}\n   {{bs-modal-footer closeTitle=\"Cancel\" submitTitle=\"Ok\"}}\n {{/bs-modal}}\n ```\nIf you further want to customize your modal elements, you can supply custom templates for your footer and header, as in\n the following example:\n```hbs\n {{#bs-modal body=false footer=false header=false submitAction=(action \"submit\")}}\n   {{#bs-modal-header}}\n     <h4 class=\"modal-title\"><i class=\"glyphicon glyphicon-alert\"></i> Alert</h4>\n   {{/bs-modal-header}}\n   {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}\n   {{#bs-modal-footer as |footer|}}\n     {{#bs-button action=(action \"close\" target=footer) type=\"danger\"}}Oh no, forget it!{{/bs-button}}\n     {{#bs-button buttonType=\"submit\" type=\"success\"}}Yeah!{{/bs-button}}\n   {{/bs-modal-footer}}\n {{/bs-modal}}\n ```\nNote the use of the action helper of the close button that triggers the close action on the modal footer component\n instead of on the controller, which will bubble up to the modal component and close the modal.\n### Modals with forms\nThere is a special case when you have a form inside your modals body: you probably do not want to have a submit button\n within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not\n trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an\n thus bypass the form validation feature of the form component.\n```hbs\n {{#bs-modal title=\"Form Example\" body=false footer=false}}\n   {{#bs-modal-body}}\n     {{#bs-form action=(action \"submit\") model=this}}\n       {{bs-form-element controlType=\"text\" label=\"first name\" property=\"firstname\"}}\n       {{bs-form-element controlType=\"text\" label=\"last name\" property=\"lastname\"}}\n     {{/bs-form}}\n   {{/bs-modal-body}}\n   {{bs-modal-footer closeTitle=(t \"contact.label.cancel\") submitTitle=(t \"contact.label.ok\")}}\n {{/bs-modal}}\n ```\nThe modal component supports this common case by triggering the submit event programmatically on the body's form if\n present whenever the footer's submit button is pressed, so the example above will work as expected.\n### Auto-focus\nIn order to allow key handling to function, the modal's root element is given focus once the modal is shown. If your\n modal contains an element such as a text input and you would like it to be given focus rather than the modal element,\n then give it the HTML5 autofocus attribute:\n```hbs\n {{#bs-modal title=\"Form Example\" body=false footer=false}}\n   {{#bs-modal-body}}\n     {{#bs-form action=(action \"submit\") model=this}}\n       {{bs-form-element controlType=\"text\" label=\"first name\" property=\"firstname\" autofocus=true}}\n       {{bs-form-element controlType=\"text\" label=\"last name\" property=\"lastname\"}}\n     {{/bs-form}}\n   {{/bs-modal-body}}\n   {{bs-modal-footer closeTitle=(t \"contact.label.cancel\") submitTitle=(t \"contact.label.ok\")}}\n {{/bs-modal}}\n ```\n\n### Modals inside wormhole\nModals make use of the [ember-wormhole](https://github.com/yapplabs/ember-wormhole) addon, which will be installed\n automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested\n components/templates where it belongs to logically, but to have the actual DOM elements within a special container\n element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and\n are not effected by parent elements with `overflow: hidden` for example.\nIf you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -681,7 +681,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-progress-bar.js",
             "line": 6,
-            "description": "Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.\n### Usage\nAlways wrap the progress bar in a {{#crossLink \"Components.Progress\"}}{{/crossLink}} component. Use the `value`\n property to control the progress bar's width. To apply the different styling options supplied by Bootstrap, use the\n appropriate properties like `type`, `showLabel`, `striped` or `animate`.\n```hbs\n \\{{#bs-progress}}\n   \\{{bs-progress-bar value=progressValue minValue=0 maxValue=10 showLabel=true type=\"danger\"}}\n \\{{/bs-progress}}\n ```\n### Stacked\nYou can place multiple progress bar components in a single {{#crossLink \"Components.Progress\"}}{{/crossLink}} to\n create a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.\n```hbs\n \\{{#bs-progress}}\n   \\{{bs-progress-bar value=progressValue1 type=\"success\"}}\n   \\{{bs-progress-bar value=progressValue2 type=\"warning\"}}\n   \\{{bs-progress-bar value=progressValue3 type=\"danger\"}}\n \\{{/bs-progress}}\n ```",
+            "description": "Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.\n### Usage\nAlways wrap the progress bar in a [Components.Progress](Components.Progress.html) component. Use the `value`\n property to control the progress bar's width. To apply the different styling options supplied by Bootstrap, use the\n appropriate properties like `type`, `showLabel`, `striped` or `animate`.\n```hbs\n {{#bs-progress}}\n   {{bs-progress-bar value=progressValue minValue=0 maxValue=10 showLabel=true type=\"danger\"}}\n {{/bs-progress}}\n ```\n### Stacked\nYou can place multiple progress bar components in a single [Components.Progress](Components.Progress.html) to\n create a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.\n```hbs\n {{#bs-progress}}\n   {{bs-progress-bar value=progressValue1 type=\"success\"}}\n   {{bs-progress-bar value=progressValue2 type=\"warning\"}}\n   {{bs-progress-bar value=progressValue3 type=\"danger\"}}\n {{/bs-progress}}\n ```",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.TypeClass"
@@ -700,7 +700,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-progress.js",
             "line": 3,
-            "description": "Use to group one (or more) {{#crossLink \"Components.ProgressBar\"}}{{/crossLink}} components inside it.",
+            "description": "Use to group one (or more) [Components.ProgressBar](Components.ProgressBar.html) components inside it.",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -854,6 +854,7 @@
             "tagname": ""
         }
     },
+    "elements": {},
     "classitems": [
         {
             "file": "addon/components/bs-accordion-item.js",
@@ -882,7 +883,7 @@
         {
             "file": "addon/components/bs-accordion-item.js",
             "line": 40,
-            "description": "The value of the accordion item, which is used as the value of the `selected` property of the parent {{#crossLink \"Components.Accordion\"}}{{/crossLink}} component",
+            "description": "The value of the accordion item, which is used as the value of the `selected` property of the parent [Components.Accordion](Components.Accordion.html) component",
             "itemtype": "property",
             "name": "value",
             "access": "public",
@@ -1115,10 +1116,10 @@
         {
             "file": "addon/components/bs-button-group.js",
             "line": 150,
-            "description": "The value of the button group, computed by its child buttons.\nSee the {{#crossLink \"Button-Group/type:attribute\"}}`type` property{{/crossLink}} for how the value property is constructed.\n\nWhen you set the value, the corresponding buttons will be activated:\n* use a single value for a radio button group to activate the button with the same value\n* use an array of values for a checkbox button group to activate all the buttons with values contained in the array",
+            "description": "The value of the button group, computed by its child buttons.\nSee the `type` property for how the value property is constructed.\n\nWhen you set the value, the corresponding buttons will be activated:\n* use a single value for a radio button group to activate the button with the same value\n* use an array of values for a checkbox button group to activate all the buttons with values contained in the array",
             "itemtype": "property",
             "name": "value",
-            "type": "array|any",
+            "type": "array",
             "access": "public",
             "tagname": "",
             "class": "Components.ButtonGroup",
@@ -1450,7 +1451,8 @@
                 }
             ],
             "return": {
-                "description": "number"
+                "description": "",
+                "type": "Number"
             },
             "access": "private",
             "tagname": "",
@@ -1586,7 +1588,7 @@
         {
             "file": "addon/components/bs-dropdown.js",
             "line": 112,
-            "description": "This property is \"button\" if the toggle element is an instance of {{#crossLink \"Components.DropdownButton\"}}{{/crossLink}}, otherwise \"toggle\".",
+            "description": "This property is \"button\" if the toggle element is an instance of [Components.DropdownButton](Components.DropdownButton.html), otherwise \"toggle\".",
             "itemtype": "property",
             "name": "toggleType",
             "type": "string",
@@ -2138,7 +2140,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 78,
+            "line": 77,
             "description": "Bootstrap form class name (computed)",
             "itemtype": "property",
             "name": "layoutClass",
@@ -2151,7 +2153,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 92,
+            "line": 91,
             "description": "Set a model that this form should represent. This serves several purposes:\n\n* child `Components.FormElement`s can access and bind to this model by their `property`\n* when the model supports validation by using the [ember-validations](https://github.com/dockyard/ember-validations) mixin,\nchild `Components.FormElement`s will look at the validation information of their `property` and render their form group accordingly.\nMoreover the form's `submit` event handler will validate the model and deny submitting if the model is not validated successfully.",
             "itemtype": "property",
             "name": "model",
@@ -2163,7 +2165,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 106,
+            "line": 105,
             "description": "Set the layout of the form to either \"vertical\", \"horizontal\" or \"inline\". See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal",
             "itemtype": "property",
             "name": "formLayout",
@@ -2175,7 +2177,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 115,
+            "line": 114,
             "description": "Check if validating the model is supported. This needs to be implemented by another addon.",
             "itemtype": "property",
             "name": "hasValidator",
@@ -2188,7 +2190,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 125,
+            "line": 124,
             "description": "The Bootstrap grid class for form labels. This is used by the `Components.FormElement` class as a default for the\nwhole form.",
             "itemtype": "property",
             "name": "horizontalLabelGridClass",
@@ -2201,7 +2203,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 136,
+            "line": 135,
             "description": "If set to true pressing enter will submit the form, even if no submit button is present",
             "itemtype": "property",
             "name": "submitOnEnter",
@@ -2214,7 +2216,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 146,
+            "line": 145,
             "description": "An array of `Components.FormElement`s that are children of this form.",
             "itemtype": "property",
             "name": "childFormElements",
@@ -2227,7 +2229,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 158,
+            "line": 157,
             "description": "Validate hook which will return a promise that will either resolve if the model is valid\nor reject if it's not. This should be overridden to add validation support.",
             "params": [
                 {
@@ -2236,7 +2238,8 @@
                 }
             ],
             "return": {
-                "description": "Promise"
+                "description": "",
+                "type": "Promise"
             },
             "access": "public",
             "tagname": "",
@@ -2245,7 +2248,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 178,
+            "line": 177,
             "description": "A handler called before the form is validated (if possible) and submitted.",
             "itemtype": "event",
             "name": "before",
@@ -2256,7 +2259,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 185,
+            "line": 184,
             "description": "A handler called when submit has been triggered and the model has passed all validations (if present).",
             "itemtype": "event",
             "name": "action",
@@ -2273,7 +2276,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 193,
+            "line": 192,
             "description": "A handler called when validation of the model has failed.",
             "itemtype": "event",
             "name": "invalid",
@@ -2290,7 +2293,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 201,
+            "line": 200,
             "description": "Submit handler that will send the default action (\"action\") to the controller when submitting the form.\n\nIf there is a supplied `model` that supports validation (`hasValidator`) the model will be validated before, and\nonly if validation is successful the default action will be sent. Otherwise an \"invalid\" action will be sent, and\nall the `showValidation` property of all child `Components.FormElement`s will be set to true, so error state and\nmessages will be shown automatically.",
             "itemtype": "method",
             "name": "submit",
@@ -2366,7 +2369,7 @@
         {
             "file": "addon/components/bs-modal-dialog.js",
             "line": 69,
-            "description": "Generate a modal header component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalHeader\"}}{{/crossLink}} in the components block template",
+            "description": "Generate a modal header component automatically. Set to false to disable. In this case you would want to include an\ninstance of [Components.ModalHeader](Components.ModalHeader.html) in the components block template",
             "itemtype": "property",
             "name": "header",
             "type": "boolean",
@@ -2379,7 +2382,7 @@
         {
             "file": "addon/components/bs-modal-dialog.js",
             "line": 80,
-            "description": "Generate a modal body component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalBody\"}}{{/crossLink}} in the components block template.\n\nAlways set this to false if `header` and/or `footer` is false!",
+            "description": "Generate a modal body component automatically. Set to false to disable. In this case you would want to include an\ninstance of [Components.ModalBody](Components.ModalBody.html) in the components block template.\n\nAlways set this to false if `header` and/or `footer` is false!",
             "itemtype": "property",
             "name": "body",
             "type": "boolean",
@@ -2392,7 +2395,7 @@
         {
             "file": "addon/components/bs-modal-dialog.js",
             "line": 93,
-            "description": "Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalFooter\"}}{{/crossLink}} in the components block template",
+            "description": "Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an\ninstance of [Components.ModalFooter](Components.ModalFooter.html) in the components block template",
             "itemtype": "property",
             "name": "footer",
             "type": "boolean",
@@ -2635,7 +2638,7 @@
         {
             "file": "addon/components/bs-modal.js",
             "line": 229,
-            "description": "Generate a modal header component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalHeader\"}}{{/crossLink}} in the components block template",
+            "description": "Generate a modal header component automatically. Set to false to disable. In this case you would want to include an\ninstance of [Components.ModalHeader](Components.ModalHeader.html) in the components block template",
             "itemtype": "property",
             "name": "header",
             "type": "boolean",
@@ -2648,7 +2651,7 @@
         {
             "file": "addon/components/bs-modal.js",
             "line": 240,
-            "description": "Generate a modal body component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalBody\"}}{{/crossLink}} in the components block template.\n\nAlways set this to false if `header` and/or `footer` is false!",
+            "description": "Generate a modal body component automatically. Set to false to disable. In this case you would want to include an\ninstance of [Components.ModalBody](Components.ModalBody.html) in the components block template.\n\nAlways set this to false if `header` and/or `footer` is false!",
             "itemtype": "property",
             "name": "body",
             "type": "boolean",
@@ -2661,7 +2664,7 @@
         {
             "file": "addon/components/bs-modal.js",
             "line": 253,
-            "description": "Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an\ninstance of {{#crossLink \"Components.ModalFooter\"}}{{/crossLink}} in the components block template",
+            "description": "Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an\ninstance of [Components.ModalFooter](Components.ModalFooter.html) in the components block template",
             "itemtype": "property",
             "name": "footer",
             "type": "boolean",
@@ -2777,7 +2780,7 @@
         {
             "file": "addon/components/bs-modal.js",
             "line": 355,
-            "description": "The action to be sent when the modal footer's submit button (if present) is pressed.\nNote that if your modal body contains a form (e.g. {{#crossLink \"Components.Form\"}}{{/crossLink}}) this action will\nnot be triggered. Instead a submit event will be triggered on the form itself. See the class description for an\nexample.",
+            "description": "The action to be sent when the modal footer's submit button (if present) is pressed.\nNote that if your modal body contains a form (e.g. [Components.Form](Components.Form.html){{/crossLink}}) this action will\nnot be triggered. Instead a submit event will be triggered on the form itself. See the class description for an\nexample.",
             "itemtype": "property",
             "name": "submitAction",
             "type": "string",
@@ -3249,12 +3252,8 @@
     ],
     "warnings": [
         {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " addon/components/bs-collapse.js:156"
-        },
-        {
             "message": "Missing item type\nValidate hook which will return a promise that will either resolve if the model is valid\nor reject if it's not. This should be overridden to add validation support.",
-            "line": " addon/components/bs-form.js:158"
+            "line": " addon/components/bs-form.js:157"
         }
     ]
 }

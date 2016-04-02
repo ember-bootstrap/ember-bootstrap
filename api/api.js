@@ -33,6 +33,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Mixins.TypeClass"
     ],
     "modules": [],
-    "allModules": []
+    "allModules": [],
+    "elements": []
 } };
 });

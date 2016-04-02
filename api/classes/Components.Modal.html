@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.7.0</span></h1>
+    <h1>API Docs <span class="small">0.7.0.30a4353d</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -68,45 +68,45 @@
 
 <div class="well well-small">
     <p>Component for creating <a href="http://getbootstrap.com/javascript/#modals">Bootstrap modals</a>. Creating a simple modal is easy:</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal title="Simple Dialog"}}
- Hello world!
+<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal title=&quot;Simple Dialog&quot;}}
+   Hello world!
  {{/bs-modal}}
 </code></pre>
 <p>This will automatically create the appropriate markup, with a modal header containing the title, and a footer containing
-a default "Ok" button, that will close the modal automatically (unless you set <code>autoClose</code> to false).
+a default &quot;Ok&quot; button, that will close the modal automatically (unless you set <code>autoClose</code> to false).
 A modal created this way will be visible at once. You can use the <code>{{#if ...}}</code> helper to hide all modal elements form
 the DOM until needed. Or you can bind the <code>open</code> property to trigger showing and hiding the modal:</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal open=openModal title="Simple Dialog"}}
- Hello world!
+<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal open=openModal title=&quot;Simple Dialog&quot;}}
+   Hello world!
  {{/bs-modal}}
 </code></pre>
 <h3>Custom Markup</h3>
 <p>To customize your modal markup you can use the following sub components:
-{{#crossLink "Components.ModalBody"}}{{/crossLink}}
-{{#crossLink "Components.ModalHeader"}}{{/crossLink}}
-{{#crossLink "Components.ModalFooter"}}{{/crossLink}}
+<a href="Components.ModalBody.html">Components.ModalBody</a>
+<a href="Components.ModalHeader.html">Components.ModalHeader</a>
+<a href="Components.ModalFooter.html">Components.ModalFooter</a>
 In the example above, these are generated for you automatically. Whenever you use one of these by yourself you should
 set the appropriate property (<code>body</code>, <code>footer</code>, <code>header</code>) to false to prevent their automatic generation. Note that
-in any case where you use a custom sub component, you must also use a custom {{#crossLink "Components.ModalBody"}}{{/crossLink}}!
+in any case where you use a custom sub component, you must also use a custom <a href="Components.ModalBody.html">Components.ModalBody</a>!
 A common use case is to customize the buttons in the footer. Most often you will have a cancel button that closes the
 model without action, and a submit button that triggers some action. The footer component supports this case by letting
 you customize the button titles, the rest (triggering close or submit actions) automatically set up:</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal body=false footer=false title="Attention" submitAction=(action "submit")}}
- {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}
- {{bs-modal-footer closeTitle="Cancel" submitTitle="Ok"}}
+<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal body=false footer=false title=&quot;Attention&quot; submitAction=(action &quot;submit&quot;)}}
+   {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}
+   {{bs-modal-footer closeTitle=&quot;Cancel&quot; submitTitle=&quot;Ok&quot;}}
  {{/bs-modal}}
 </code></pre>
 <p>If you further want to customize your modal elements, you can supply custom templates for your footer and header, as in
 the following example:</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal body=false footer=false header=false submitAction=(action "submit")}}
- {{#bs-modal-header}}
- &lt;h4 class="modal-title"&gt;&lt;i class="glyphicon glyphicon-alert"&gt;&lt;/i&gt; Alert&lt;/h4&gt;
- {{/bs-modal-header}}
- {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}
- {{#bs-modal-footer as |footer|}}
- {{#bs-button action=(action "close" target=footer) type="danger"}}Oh no, forget it!{{/bs-button}}
- {{#bs-button buttonType="submit" type="success"}}Yeah!{{/bs-button}}
- {{/bs-modal-footer}}
+<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal body=false footer=false header=false submitAction=(action &quot;submit&quot;)}}
+   {{#bs-modal-header}}
+     &lt;h4 class=&quot;modal-title&quot;&gt;&lt;i class=&quot;glyphicon glyphicon-alert&quot;&gt;&lt;/i&gt; Alert&lt;/h4&gt;
+   {{/bs-modal-header}}
+   {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}
+   {{#bs-modal-footer as |footer|}}
+     {{#bs-button action=(action &quot;close&quot; target=footer) type=&quot;danger&quot;}}Oh no, forget it!{{/bs-button}}
+     {{#bs-button buttonType=&quot;submit&quot; type=&quot;success&quot;}}Yeah!{{/bs-button}}
+   {{/bs-modal-footer}}
  {{/bs-modal}}
 </code></pre>
 <p>Note the use of the action helper of the close button that triggers the close action on the modal footer component
@@ -116,14 +116,14 @@ instead of on the controller, which will bubble up to the modal component and cl
 within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not
 trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
 thus bypass the form validation feature of the form component.</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal title="Form Example" body=false footer=false}}
- {{#bs-modal-body}}
- {{#bs-form action=(action "submit") model=this}}
- {{bs-form-element controlType="text" label="first name" property="firstname"}}
- {{bs-form-element controlType="text" label="last name" property="lastname"}}
- {{/bs-form}}
- {{/bs-modal-body}}
- {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
+<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal title=&quot;Form Example&quot; body=false footer=false}}
+   {{#bs-modal-body}}
+     {{#bs-form action=(action &quot;submit&quot;) model=this}}
+       {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot;}}
+       {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
+     {{/bs-form}}
+   {{/bs-modal-body}}
+   {{bs-modal-footer closeTitle=(t &quot;contact.label.cancel&quot;) submitTitle=(t &quot;contact.label.ok&quot;)}}
  {{/bs-modal}}
 </code></pre>
 <p>The modal component supports this common case by triggering the submit event programmatically on the body's form if
@@ -132,14 +132,14 @@ present whenever the footer's submit button is pressed, so the example above wil
 <p>In order to allow key handling to function, the modal's root element is given focus once the modal is shown. If your
 modal contains an element such as a text input and you would like it to be given focus rather than the modal element,
 then give it the HTML5 autofocus attribute:</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal title="Form Example" body=false footer=false}}
- {{#bs-modal-body}}
- {{#bs-form action=(action "submit") model=this}}
- {{bs-form-element controlType="text" label="first name" property="firstname" autofocus=true}}
- {{bs-form-element controlType="text" label="last name" property="lastname"}}
- {{/bs-form}}
- {{/bs-modal-body}}
- {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
+<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal title=&quot;Form Example&quot; body=false footer=false}}
+   {{#bs-modal-body}}
+     {{#bs-form action=(action &quot;submit&quot;) model=this}}
+       {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot; autofocus=true}}
+       {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
+     {{/bs-form}}
+   {{/bs-modal-body}}
+   {{bs-modal-footer closeTitle=(t &quot;contact.label.cancel&quot;) submitTitle=(t &quot;contact.label.ok&quot;)}}
  {{/bs-modal}}
 </code></pre>
 <h3>Modals inside wormhole</h3>
@@ -4748,7 +4748,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                         <div class="description">
                             <p>Generate a modal body component automatically. Set to false to disable. In this case you would want to include an
-                    instance of <a href="../classes/Components.ModalBody.html" class="crosslink">Components.ModalBody</a> in the components block template.</p>
+                    instance of <a href="Components.ModalBody.html">Components.ModalBody</a> in the components block template.</p>
                     <p>Always set this to false if <code>header</code> and/or <code>footer</code> is false!</p>
                     
                         </div>
@@ -5174,7 +5174,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                         <div class="description">
                             <p>Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an
-                    instance of <a href="../classes/Components.ModalFooter.html" class="crosslink">Components.ModalFooter</a> in the components block template</p>
+                    instance of <a href="Components.ModalFooter.html">Components.ModalFooter</a> in the components block template</p>
                     
                         </div>
                     
@@ -5326,7 +5326,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                         <div class="description">
                             <p>Generate a modal header component automatically. Set to false to disable. In this case you would want to include an
-                    instance of <a href="../classes/Components.ModalHeader.html" class="crosslink">Components.ModalHeader</a> in the components block template</p>
+                    instance of <a href="Components.ModalHeader.html">Components.ModalHeader</a> in the components block template</p>
                     
                         </div>
                     
@@ -5923,7 +5923,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                         <div class="description">
                             <p>The action to be sent when the modal footer's submit button (if present) is pressed.
-                    Note that if your modal body contains a form (e.g. <a href="../classes/Components.Form.html" class="crosslink">Components.Form</a>) this action will
+                    Note that if your modal body contains a form (e.g. <a href="Components.Form.html">Components.Form</a>{{/crossLink}}) this action will
                     not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
                     example.</p>
                     

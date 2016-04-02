@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.7.0</span></h1>
+    <h1>API Docs <span class="small">0.7.0.30a4353d</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -75,20 +75,20 @@
 <div class="well well-small">
     <p>Component to display a Bootstrap progress bar, see <a href="http://getbootstrap.com/components/#progress">http://getbootstrap.com/components/#progress</a>.</p>
 <h3>Usage</h3>
-<p>Always wrap the progress bar in a <a href="../classes/Components.Progress.html" class="crosslink">Components.Progress</a> component. Use the <code>value</code>
+<p>Always wrap the progress bar in a <a href="Components.Progress.html">Components.Progress</a> component. Use the <code>value</code>
 property to control the progress bar's width. To apply the different styling options supplied by Bootstrap, use the
 appropriate properties like <code>type</code>, <code>showLabel</code>, <code>striped</code> or <code>animate</code>.</p>
 <pre class="code prettyprint"><code class="language-hbs"> {{#bs-progress}}
-   {{bs-progress-bar value=progressValue minValue=0 maxValue=10 showLabel=true type="danger"}}
+   {{bs-progress-bar value=progressValue minValue=0 maxValue=10 showLabel=true type=&quot;danger&quot;}}
  {{/bs-progress}}
 </code></pre>
 <h3>Stacked</h3>
-<p>You can place multiple progress bar components in a single <a href="../classes/Components.Progress.html" class="crosslink">Components.Progress</a> to
+<p>You can place multiple progress bar components in a single <a href="Components.Progress.html">Components.Progress</a> to
 create a stack of progress bars as seen in <a href="http://getbootstrap.com/components/#progress-stacked">http://getbootstrap.com/components/#progress-stacked</a>.</p>
 <pre class="code prettyprint"><code class="language-hbs"> {{#bs-progress}}
-   {{bs-progress-bar value=progressValue1 type="success"}}
-   {{bs-progress-bar value=progressValue2 type="warning"}}
-   {{bs-progress-bar value=progressValue3 type="danger"}}
+   {{bs-progress-bar value=progressValue1 type=&quot;success&quot;}}
+   {{bs-progress-bar value=progressValue2 type=&quot;warning&quot;}}
+   {{bs-progress-bar value=progressValue3 type=&quot;danger&quot;}}
  {{/bs-progress}}
 </code></pre>
 

@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.7.0</span></h1>
+    <h1>API Docs <span class="small">0.7.0.30a4353d</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -77,9 +77,9 @@
     <p>Implements a HTML button element, with support for all <a href="http://getbootstrap.com/css/#buttons">Bootstrap button CSS styles</a>
 as well as advanced functionality such as button states.</p>
 <h3>Basic Usage</h3>
-<pre class="code prettyprint"><code class="language-hbs">\{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
 Downloads
-\{{/bs-button}}
+{{/bs-button}}
 </code></pre>
 <h3>Actions</h3>
 <p>Set the action property of the component to send an action to your controller. The following parameters will be sent:</p>
@@ -88,14 +88,14 @@ Downloads
 <li>event: the browsers event object</li>
 <li>callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling</li>
 </ul>
-<pre class="code prettyprint"><code class="language-hbs">\{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
 Download
-\{{/bs-button}}
+{{/bs-button}}
 </code></pre>
 <h3>States</h3>
 <p>Use the <code>textState</code> property to change the label of the button. You can bind it to a controller property to set a &quot;loading&quot; state for example.
 The label of the button will be taken from the <code>&lt;state&gt;Text</code> property.</p>
-<pre class="code prettyprint"><code class="language-hbs">\{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
+<pre class="code prettyprint"><code class="language-hbs">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
 </code></pre>
 <pre class="code prettyprint"><code class="language-js">App.ApplicationController = Ember.Controller.extend({
   buttonState: &quot;default&quot;
@@ -110,7 +110,7 @@ The label of the button will be taken from the <code>&lt;state&gt;Text</code> pr
 <p>When using the callback function of the click action to supply a Promise for any asynchronous operation the button will
 manage its <code>textState</code> property automatically, changing its value according to the state of the promise:
 &quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;</p>
-<pre class="code prettyprint"><code class="language-hbs">\{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=&quot;download&quot;}}
+<pre class="code prettyprint"><code class="language-hbs">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=&quot;download&quot;}}
 </code></pre>
 <pre class="code prettyprint"><code class="language-js">App.ApplicationController = Ember.Controller.extend({
   actions: {

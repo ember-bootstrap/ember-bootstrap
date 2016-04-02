@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.7.0</span></h1>
+    <h1>API Docs <span class="small">0.7.0.30a4353d</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -68,9 +68,9 @@ const { computed, observer } = Ember;
  ### Basic Usage
 
  &#x60;&#x60;&#x60;hbs
- \{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
+ {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
  Downloads
- \{{/bs-button}}
+ {{/bs-button}}
  &#x60;&#x60;&#x60;
 
  ### Actions
@@ -81,9 +81,9 @@ const { computed, observer } = Ember;
  * callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling
 
  &#x60;&#x60;&#x60;hbs
- \{{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
+ {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
  Download
- \{{/bs-button}}
+ {{/bs-button}}
  &#x60;&#x60;&#x60;
 
  ### States
@@ -92,7 +92,7 @@ const { computed, observer } = Ember;
  The label of the button will be taken from the &#x60;&lt;state&gt;Text&#x60; property.
 
  &#x60;&#x60;&#x60;hbs
- \{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
+ {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
  &#x60;&#x60;&#x60;
 
  &#x60;&#x60;&#x60;js
@@ -113,7 +113,7 @@ const { computed, observer } = Ember;
  &quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;
 
  &#x60;&#x60;&#x60;hbs
- \{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=&quot;download&quot;}}
+ {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=&quot;download&quot;}}
  &#x60;&#x60;&#x60;
 
  &#x60;&#x60;&#x60;js

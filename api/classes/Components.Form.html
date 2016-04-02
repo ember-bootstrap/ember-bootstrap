@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.7.0</span></h1>
+    <h1>API Docs <span class="small">0.7.0.30a4353d</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -68,18 +68,23 @@
 
 <div class="well well-small">
     <p>Render a form with the appropriate Bootstrap layout class (see <code>formLayout</code>).
-Allows setting a <code>model</code> that nested <code>Components.FormElement</code>s can access, and that can provide form validation through
-<a href="https://github.com/dockyard/ember-validations">ember-validations</a></p>
+Allows setting a <code>model</code> that nested <code>Components.FormElement</code>s can access, and that can provide form validation (see below)</p>
 <p>You can use whatever markup you like within the form:</p>
-<pre class="code prettyprint"><code class="language-hbs"></code></pre>
+<pre class="code prettyprint"><code class="language-handlebars">{{#bs-form action=&quot;submit&quot;}}
+  {{#bs-form-group validation=firstNameValidation}}
+    &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
+    {{bs-input type=&quot;text&quot; value=firstname}}
+ {{/bs-form-group}}
+{{/bs-form}}
+</code></pre>
 <p>However to benefit from features such as automatic form markup, validations and validation markup, use <code>Components.FormElement</code>
 as nested components. See below for an example.</p>
 <h3>Submitting the form</h3>
 <p>When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the default action
 will be sent to the controller.
-In case the form supports validation (see "Form validation" below), the "before" action is called (which allows you to
-do e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the "invalid"
-action is sent instead of the default "action".</p>
+In case the form supports validation (see &quot;Form validation&quot; below), the &quot;before&quot; action is called (which allows you to
+do e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the &quot;invalid&quot;
+action is sent instead of the default &quot;action&quot;.</p>
 <h3>Use with Components.FormElement</h3>
 <p>When using <code>Components.FormElement</code>s with their <code>property</code> set to property names of the form's validation enabled
 <code>model</code>, you gain some additional powerful features:</p>
@@ -88,8 +93,14 @@ action is sent instead of the default "action".</p>
 <li>markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form
 with an invalid validation, or when focusing out of invalid inputs</li>
 </ul>
-<pre class="code prettyprint"><code class="language-hbs"></code></pre>
-<p>See the <a href="../classes/Components.FormElement.html" class="crosslink">Components.FormElement</a> API docs for further information.</p>
+<pre class="code prettyprint"><code class="language-handlebars">{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
+  {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+  {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+  {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+  {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+{{/bs-form}}
+</code></pre>
+<p>See the <a href="Components.FormElement.html">Components.FormElement</a> API docs for further information.</p>
 <h3>Form validation</h3>
 <p>All version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.
 Instead support is added usually by addition Ember addons, for example:</p>
@@ -100,7 +111,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
 <p>To add your own validation support, you have to:</p>
 <ul>
 <li>extend this component, setting <code>hasValidator</code> to true if validations are available (by means of a computed property for example), and implementing the <code>validate</code> method</li>
-<li>extend the <a href="../classes/Components.FormElement.html" class="crosslink">Components.FormElement</a> component and implement the <code>setupValidations</code> hook or simply override the <code>errors</code> property to add the validation error messages to be displayed</li>
+<li>extend the <a href="Components.FormElement.html">Components.FormElement</a> component and implement the <code>setupValidations</code> hook or simply override the <code>errors</code> property to add the validation error messages to be displayed</li>
 </ul>
 <p>See the above mentioned addons for examples.</p>
 
@@ -3627,7 +3638,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l201"><code>addon&#x2F;components&#x2F;bs-form.js:201</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l200"><code>addon&#x2F;components&#x2F;bs-form.js:200</code></a>
                             </p>
                     
                     
@@ -4084,7 +4095,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l146"><code>addon&#x2F;components&#x2F;bs-form.js:146</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l145"><code>addon&#x2F;components&#x2F;bs-form.js:145</code></a>
                             </p>
                     
                     
@@ -4378,7 +4389,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l106"><code>addon&#x2F;components&#x2F;bs-form.js:106</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l105"><code>addon&#x2F;components&#x2F;bs-form.js:105</code></a>
                             </p>
                     
                     
@@ -4528,7 +4539,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l115"><code>addon&#x2F;components&#x2F;bs-form.js:115</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l114"><code>addon&#x2F;components&#x2F;bs-form.js:114</code></a>
                             </p>
                     
                     
@@ -4558,7 +4569,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l125"><code>addon&#x2F;components&#x2F;bs-form.js:125</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l124"><code>addon&#x2F;components&#x2F;bs-form.js:124</code></a>
                             </p>
                     
                     
@@ -4752,7 +4763,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l78"><code>addon&#x2F;components&#x2F;bs-form.js:78</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l77"><code>addon&#x2F;components&#x2F;bs-form.js:77</code></a>
                             </p>
                     
                     
@@ -4815,7 +4826,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l92"><code>addon&#x2F;components&#x2F;bs-form.js:92</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l91"><code>addon&#x2F;components&#x2F;bs-form.js:91</code></a>
                             </p>
                     
                     
@@ -4882,7 +4893,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l136"><code>addon&#x2F;components&#x2F;bs-form.js:136</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l135"><code>addon&#x2F;components&#x2F;bs-form.js:135</code></a>
                             </p>
                     
                     
@@ -5060,7 +5071,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l185"><code>addon&#x2F;components&#x2F;bs-form.js:185</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l184"><code>addon&#x2F;components&#x2F;bs-form.js:184</code></a>
                             </p>
                     
                     
@@ -5103,7 +5114,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l178"><code>addon&#x2F;components&#x2F;bs-form.js:178</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l177"><code>addon&#x2F;components&#x2F;bs-form.js:177</code></a>
                             </p>
                     
                     
@@ -5159,7 +5170,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l193"><code>addon&#x2F;components&#x2F;bs-form.js:193</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l192"><code>addon&#x2F;components&#x2F;bs-form.js:192</code></a>
                             </p>
                     
                     

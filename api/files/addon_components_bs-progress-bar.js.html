@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.7.0</span></h1>
+    <h1>API Docs <span class="small">0.7.0.30a4353d</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -65,27 +65,27 @@ const { computed } = Ember;
 
  ### Usage
 
- Always wrap the progress bar in a {{#crossLink &quot;Components.Progress&quot;}}{{/crossLink}} component. Use the &#x60;value&#x60;
+ Always wrap the progress bar in a [Components.Progress](Components.Progress.html) component. Use the &#x60;value&#x60;
  property to control the progress bar&#x27;s width. To apply the different styling options supplied by Bootstrap, use the
  appropriate properties like &#x60;type&#x60;, &#x60;showLabel&#x60;, &#x60;striped&#x60; or &#x60;animate&#x60;.
 
  &#x60;&#x60;&#x60;hbs
- \{{#bs-progress}}
-   \{{bs-progress-bar value=progressValue minValue=0 maxValue=10 showLabel=true type=&quot;danger&quot;}}
- \{{/bs-progress}}
+ {{#bs-progress}}
+   {{bs-progress-bar value=progressValue minValue=0 maxValue=10 showLabel=true type=&quot;danger&quot;}}
+ {{/bs-progress}}
  &#x60;&#x60;&#x60;
 
  ### Stacked
 
- You can place multiple progress bar components in a single {{#crossLink &quot;Components.Progress&quot;}}{{/crossLink}} to
+ You can place multiple progress bar components in a single [Components.Progress](Components.Progress.html) to
  create a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.
 
  &#x60;&#x60;&#x60;hbs
- \{{#bs-progress}}
-   \{{bs-progress-bar value=progressValue1 type=&quot;success&quot;}}
-   \{{bs-progress-bar value=progressValue2 type=&quot;warning&quot;}}
-   \{{bs-progress-bar value=progressValue3 type=&quot;danger&quot;}}
- \{{/bs-progress}}
+ {{#bs-progress}}
+   {{bs-progress-bar value=progressValue1 type=&quot;success&quot;}}
+   {{bs-progress-bar value=progressValue2 type=&quot;warning&quot;}}
+   {{bs-progress-bar value=progressValue3 type=&quot;danger&quot;}}
+ {{/bs-progress}}
  &#x60;&#x60;&#x60;
 
  @class ProgressBar
