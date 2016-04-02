@@ -68,7 +68,7 @@ export default Ember.Component.extend({
 
   /**
    * Generate a modal header component automatically. Set to false to disable. In this case you would want to include an
-   * instance of {{#crossLink "Components.ModalHeader"}}{{/crossLink}} in the components block template
+   * instance of [Components.ModalHeader](Components.ModalHeader.html) in the components block template
    *
    * @property header
    * @type boolean
@@ -79,7 +79,7 @@ export default Ember.Component.extend({
 
   /**
    * Generate a modal body component automatically. Set to false to disable. In this case you would want to include an
-   * instance of {{#crossLink "Components.ModalBody"}}{{/crossLink}} in the components block template.
+   * instance of [Components.ModalBody](Components.ModalBody.html) in the components block template.
    *
    * Always set this to false if `header` and/or `footer` is false!
    *
@@ -92,7 +92,7 @@ export default Ember.Component.extend({
 
   /**
    * Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an
-   * instance of {{#crossLink "Components.ModalFooter"}}{{/crossLink}} in the components block template
+   * instance of [Components.ModalFooter](Components.ModalFooter.html) in the components block template
    *
    * @property footer
    * @type boolean

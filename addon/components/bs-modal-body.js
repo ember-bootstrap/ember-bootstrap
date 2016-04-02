@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 /**
 
- Modal body element used within {{#crossLink "Components.Modal"}}{{/crossLink}} components. See there for examples.
+ Modal body element used within [Components.Modal](Components.Modal.html) components. See there for examples.
 
  @class ModalBody
  @namespace Components

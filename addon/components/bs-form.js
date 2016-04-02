@@ -4,71 +4,70 @@ import FormElement from 'ember-bootstrap/components/bs-form-element';
 const { computed } = Ember;
 
 /**
- Render a form with the appropriate Bootstrap layout class (see `formLayout`).
- Allows setting a `model` that nested `Components.FormElement`s can access, and that can provide form validation through
- [ember-validations](https://github.com/dockyard/ember-validations)
+  Render a form with the appropriate Bootstrap layout class (see `formLayout`).
+  Allows setting a `model` that nested `Components.FormElement`s can access, and that can provide form validation (see below)
 
- You can use whatever markup you like within the form:
+  You can use whatever markup you like within the form:
 
- ```hbs
- {{#bs-form action="submit"}}
- {{#bs-form-group validation=firstNameValidation}}
- <label class="control-label">First name</label>
- {{bs-input type="text" value=firstname}}
- {{/bs-form-group}}
- {{/bs-form}}
- ```
+ ```handlebars
+   {{#bs-form action="submit"}}
+     {{#bs-form-group validation=firstNameValidation}}
+       <label class="control-label">First name</label>
+       {{bs-input type="text" value=firstname}}
+    {{/bs-form-group}}
+  {{/bs-form}}
+  ```
 
- However to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`
- as nested components. See below for an example.
+  However to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`
+  as nested components. See below for an example.
 
- ### Submitting the form
+  ### Submitting the form
 
- When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the default action
- will be sent to the controller.
- In case the form supports validation (see "Form validation" below), the "before" action is called (which allows you to
- do e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the "invalid"
- action is sent instead of the default "action".
+  When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the default action
+  will be sent to the controller.
+  In case the form supports validation (see "Form validation" below), the "before" action is called (which allows you to
+  do e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the "invalid"
+  action is sent instead of the default "action".
 
- ### Use with Components.FormElement
+  ### Use with Components.FormElement
 
- When using `Components.FormElement`s with their `property` set to property names of the form's validation enabled
- `model`, you gain some additional powerful features:
- * the appropriate Bootstrap markup for the given `formLayout` and the form element's `controlType` is automatically generated
- * markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form
- with an invalid validation, or when focusing out of invalid inputs
+  When using `Components.FormElement`s with their `property` set to property names of the form's validation enabled
+  `model`, you gain some additional powerful features:
+  * the appropriate Bootstrap markup for the given `formLayout` and the form element's `controlType` is automatically generated
+  * markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form
+  with an invalid validation, or when focusing out of invalid inputs
 
- ```hbs
- {{#bs-form formLayout="horizontal" model=this action="submit"}}
- {{bs-form-element controlType="email" label="Email" placeholder="Email" property="email"}}
- {{bs-form-element controlType="password" label="Password" placeholder="Password" property="password"}}
- {{bs-form-element controlType="checkbox" label="Remember me" property="rememberMe"}}
- {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
- {{/bs-form}}
- ```
+  ```handlebars
+  {{#bs-form formLayout="horizontal" model=this action="submit"}}
+    {{bs-form-element controlType="email" label="Email" placeholder="Email" property="email"}}
+    {{bs-form-element controlType="password" label="Password" placeholder="Password" property="password"}}
+    {{bs-form-element controlType="checkbox" label="Remember me" property="rememberMe"}}
+    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+  {{/bs-form}}
+  ```
 
- See the {{#crossLink "Components.FormElement"}}{{/crossLink}} API docs for further information.
+  See the [Components.FormElement](Components.FormElement.html) API docs for further information.
 
- ### Form validation
+  ### Form validation
 
- All version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.
- Instead support is added usually by addition Ember addons, for example:
+  All version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.
+  Instead support is added usually by addition Ember addons, for example:
 
- * [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)
- * [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)
+  * [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)
+  * [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)
 
- To add your own validation support, you have to:
+  To add your own validation support, you have to:
 
- * extend this component, setting `hasValidator` to true if validations are available (by means of a computed property for example), and implementing the `validate` method
- * extend the {{#crossLink "Components.FormElement"}}{{/crossLink}} component and implement the `setupValidations` hook or simply override the `errors` property to add the validation error messages to be displayed
+  * extend this component, setting `hasValidator` to true if validations are available (by means of a computed property for example), and implementing the `validate` method
+  * extend the [Components.FormElement](Components.FormElement.html) component and implement the `setupValidations` hook or simply override the `errors` property to add the validation error messages to be displayed
 
- See the above mentioned addons for examples.
+  See the above mentioned addons for examples.
 
 
- @class Form
- @namespace Components
- @extends Ember.Component
- @public
+  @class Form
+  @namespace Components
+  @extends Ember.Component
+  @public
  */
 export default Ember.Component.extend({
   tagName: 'form',
@@ -160,7 +159,7 @@ export default Ember.Component.extend({
    * or reject if it's not. This should be overridden to add validation support.
    *
    * @param Object model
-   * @return Promise
+   * @return {Promise}
    * @public
    */
   validate(/* model */) {

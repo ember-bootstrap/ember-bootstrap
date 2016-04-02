@@ -7,7 +7,7 @@ const { computed } = Ember;
 /**
  A collapsible/expandable item within an accordion
 
- See {{#crossLink "Components.Accordion"}}{{/crossLink}} for examples.
+ See [Components.Accordion](Components.Accordion.html) for examples.
 
 
  @class AccordionItem
@@ -38,7 +38,7 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
   title: null,
 
   /**
-   * The value of the accordion item, which is used as the value of the `selected` property of the parent {{#crossLink "Components.Accordion"}}{{/crossLink}} component
+   * The value of the accordion item, which is used as the value of the `selected` property of the parent [Components.Accordion](Components.Accordion.html) component
    *
    * @property value
    * @public

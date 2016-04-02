@@ -5,9 +5,9 @@ const { computed } = Ember;
 
 /**
  Anchor element that triggers the parent dropdown to open.
- Use {{#crossLink "Components.DropdownButton"}}{{/crossLink}} if you want a button instead of an anchor tag.
+ Use [Components.DropdownButton](Components.DropdownButton.html) if you want a button instead of an anchor tag.
 
- See {{#crossLink "Components.Dropdown"}}{{/crossLink}} for examples.
+ See [Components.Dropdown](Components.Dropdown.html) for examples.
 
 
  @class DropdownToggle

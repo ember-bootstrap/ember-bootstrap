@@ -5,7 +5,7 @@ const { computed } = Ember;
 
 /**
 
- Modal footer element used within {{#crossLink "Components.Modal"}}{{/crossLink}} components. See there for examples.
+ Modal footer element used within [Components.Modal](Components.Modal.html) components. See there for examples.
 
  @class ModalFooter
  @namespace Components

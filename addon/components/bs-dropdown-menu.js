@@ -5,7 +5,7 @@ const { computed } = Ember;
 /**
  Component for the dropdown menu.
 
- See {{#crossLink "Components.Dropdown"}}{{/crossLink}} for examples.
+ See [Components.Dropdown](Components.Dropdown.html) for examples.
 
  @class DropdownMenu
  @namespace Components

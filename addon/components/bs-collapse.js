@@ -158,7 +158,7 @@ export default Ember.Component.extend({
    *
    * @method getExpandedSize
    * @param $action
-   * @returns number
+   * @return {Number}
    * @private
    */
   getExpandedSize($action) {

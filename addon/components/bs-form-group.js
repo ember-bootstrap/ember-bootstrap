@@ -9,8 +9,8 @@ const { computed } = Ember;
 
  ```hbs
  {{#bs-form-group validation=firstNameValidation}}
- <label class="control-label">First name</label>
- {{bs-input type="text" value=firstname}}
+   <label class="control-label">First name</label>
+   {{bs-input type="text" value=firstname}}
  {{/bs-form-group}}
  ```
 

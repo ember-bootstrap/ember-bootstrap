@@ -3,7 +3,7 @@ import ModalCloser from 'ember-bootstrap/mixins/modal-closer';
 
 /**
 
- Modal header element used within {{#crossLink "Components.Modal"}}{{/crossLink}} components. See there for examples.
+ Modal header element used within [Components.Modal](Components.Modal.html) components. See there for examples.
 
  @class ModalHeader
  @namespace Components

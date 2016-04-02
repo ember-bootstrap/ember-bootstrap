@@ -21,7 +21,7 @@ const observeOpen = function() {
 
  ```hbs
  {{#bs-modal title="Simple Dialog"}}
- Hello world!
+   Hello world!
  {{/bs-modal}}
  ```
 
@@ -33,7 +33,7 @@ const observeOpen = function() {
 
  ```hbs
  {{#bs-modal open=openModal title="Simple Dialog"}}
- Hello world!
+   Hello world!
  {{/bs-modal}}
  ```
 
@@ -41,13 +41,13 @@ const observeOpen = function() {
 
  To customize your modal markup you can use the following sub components:
 
- {{#crossLink "Components.ModalBody"}}{{/crossLink}}
- {{#crossLink "Components.ModalHeader"}}{{/crossLink}}
- {{#crossLink "Components.ModalFooter"}}{{/crossLink}}
+ [Components.ModalBody](Components.ModalBody.html)
+ [Components.ModalHeader](Components.ModalHeader.html)
+ [Components.ModalFooter](Components.ModalFooter.html)
 
  In the example above, these are generated for you automatically. Whenever you use one of these by yourself you should
  set the appropriate property (`body`, `footer`, `header`) to false to prevent their automatic generation. Note that
- in any case where you use a custom sub component, you must also use a custom {{#crossLink "Components.ModalBody"}}{{/crossLink}}!
+ in any case where you use a custom sub component, you must also use a custom [Components.ModalBody](Components.ModalBody.html)!
 
  A common use case is to customize the buttons in the footer. Most often you will have a cancel button that closes the
  model without action, and a submit button that triggers some action. The footer component supports this case by letting
@@ -55,8 +55,8 @@ const observeOpen = function() {
 
  ```hbs
  {{#bs-modal body=false footer=false title="Attention" submitAction=(action "submit")}}
- {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}
- {{bs-modal-footer closeTitle="Cancel" submitTitle="Ok"}}
+   {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}
+   {{bs-modal-footer closeTitle="Cancel" submitTitle="Ok"}}
  {{/bs-modal}}
  ```
 
@@ -65,14 +65,14 @@ const observeOpen = function() {
 
  ```hbs
  {{#bs-modal body=false footer=false header=false submitAction=(action "submit")}}
- {{#bs-modal-header}}
- <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Alert</h4>
- {{/bs-modal-header}}
- {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}
- {{#bs-modal-footer as |footer|}}
- {{#bs-button action=(action "close" target=footer) type="danger"}}Oh no, forget it!{{/bs-button}}
- {{#bs-button buttonType="submit" type="success"}}Yeah!{{/bs-button}}
- {{/bs-modal-footer}}
+   {{#bs-modal-header}}
+     <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Alert</h4>
+   {{/bs-modal-header}}
+   {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}
+   {{#bs-modal-footer as |footer|}}
+     {{#bs-button action=(action "close" target=footer) type="danger"}}Oh no, forget it!{{/bs-button}}
+     {{#bs-button buttonType="submit" type="success"}}Yeah!{{/bs-button}}
+   {{/bs-modal-footer}}
  {{/bs-modal}}
  ```
 
@@ -88,13 +88,13 @@ const observeOpen = function() {
 
  ```hbs
  {{#bs-modal title="Form Example" body=false footer=false}}
- {{#bs-modal-body}}
- {{#bs-form action=(action "submit") model=this}}
- {{bs-form-element controlType="text" label="first name" property="firstname"}}
- {{bs-form-element controlType="text" label="last name" property="lastname"}}
- {{/bs-form}}
- {{/bs-modal-body}}
- {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
+   {{#bs-modal-body}}
+     {{#bs-form action=(action "submit") model=this}}
+       {{bs-form-element controlType="text" label="first name" property="firstname"}}
+       {{bs-form-element controlType="text" label="last name" property="lastname"}}
+     {{/bs-form}}
+   {{/bs-modal-body}}
+   {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
  {{/bs-modal}}
  ```
 
@@ -109,13 +109,13 @@ const observeOpen = function() {
 
  ```hbs
  {{#bs-modal title="Form Example" body=false footer=false}}
- {{#bs-modal-body}}
- {{#bs-form action=(action "submit") model=this}}
- {{bs-form-element controlType="text" label="first name" property="firstname" autofocus=true}}
- {{bs-form-element controlType="text" label="last name" property="lastname"}}
- {{/bs-form}}
- {{/bs-modal-body}}
- {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
+   {{#bs-modal-body}}
+     {{#bs-form action=(action "submit") model=this}}
+       {{bs-form-element controlType="text" label="first name" property="firstname" autofocus=true}}
+       {{bs-form-element controlType="text" label="last name" property="lastname"}}
+     {{/bs-form}}
+   {{/bs-modal-body}}
+   {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
  {{/bs-modal}}
  ```
 
@@ -228,7 +228,7 @@ export default Ember.Component.extend({
 
   /**
    * Generate a modal header component automatically. Set to false to disable. In this case you would want to include an
-   * instance of {{#crossLink "Components.ModalHeader"}}{{/crossLink}} in the components block template
+   * instance of [Components.ModalHeader](Components.ModalHeader.html) in the components block template
    *
    * @property header
    * @type boolean
@@ -239,7 +239,7 @@ export default Ember.Component.extend({
 
   /**
    * Generate a modal body component automatically. Set to false to disable. In this case you would want to include an
-   * instance of {{#crossLink "Components.ModalBody"}}{{/crossLink}} in the components block template.
+   * instance of [Components.ModalBody](Components.ModalBody.html) in the components block template.
    *
    * Always set this to false if `header` and/or `footer` is false!
    *
@@ -252,7 +252,7 @@ export default Ember.Component.extend({
 
   /**
    * Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an
-   * instance of {{#crossLink "Components.ModalFooter"}}{{/crossLink}} in the components block template
+   * instance of [Components.ModalFooter](Components.ModalFooter.html) in the components block template
    *
    * @property footer
    * @type boolean
@@ -354,7 +354,7 @@ export default Ember.Component.extend({
 
   /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
-   * Note that if your modal body contains a form (e.g. {{#crossLink "Components.Form"}}{{/crossLink}}) this action will
+   * Note that if your modal body contains a form (e.g. [Components.Form](Components.Form.html){{/crossLink}}) this action will
    * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
    * example.
    *

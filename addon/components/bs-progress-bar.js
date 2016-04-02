@@ -9,27 +9,27 @@ const { computed } = Ember;
 
  ### Usage
 
- Always wrap the progress bar in a {{#crossLink "Components.Progress"}}{{/crossLink}} component. Use the `value`
+ Always wrap the progress bar in a [Components.Progress](Components.Progress.html) component. Use the `value`
  property to control the progress bar's width. To apply the different styling options supplied by Bootstrap, use the
  appropriate properties like `type`, `showLabel`, `striped` or `animate`.
 
  ```hbs
- \{{#bs-progress}}
-   \{{bs-progress-bar value=progressValue minValue=0 maxValue=10 showLabel=true type="danger"}}
- \{{/bs-progress}}
+ {{#bs-progress}}
+   {{bs-progress-bar value=progressValue minValue=0 maxValue=10 showLabel=true type="danger"}}
+ {{/bs-progress}}
  ```
 
  ### Stacked
 
- You can place multiple progress bar components in a single {{#crossLink "Components.Progress"}}{{/crossLink}} to
+ You can place multiple progress bar components in a single [Components.Progress](Components.Progress.html) to
  create a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.
 
  ```hbs
- \{{#bs-progress}}
-   \{{bs-progress-bar value=progressValue1 type="success"}}
-   \{{bs-progress-bar value=progressValue2 type="warning"}}
-   \{{bs-progress-bar value=progressValue3 type="danger"}}
- \{{/bs-progress}}
+ {{#bs-progress}}
+   {{bs-progress-bar value=progressValue1 type="success"}}
+   {{bs-progress-bar value=progressValue2 type="warning"}}
+   {{bs-progress-bar value=progressValue3 type="danger"}}
+ {{/bs-progress}}
  ```
 
  @class ProgressBar

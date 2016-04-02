@@ -12,9 +12,9 @@ const { computed, observer } = Ember;
  ### Basic Usage
 
  ```hbs
- \{{#bs-button type="primary" icon="glyphicon glyphicon-download"}}
+ {{#bs-button type="primary" icon="glyphicon glyphicon-download"}}
  Downloads
- \{{/bs-button}}
+ {{/bs-button}}
  ```
 
  ### Actions
@@ -25,9 +25,9 @@ const { computed, observer } = Ember;
  * callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling
 
  ```hbs
- \{{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
+ {{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
  Download
- \{{/bs-button}}
+ {{/bs-button}}
  ```
 
  ### States
@@ -36,7 +36,7 @@ const { computed, observer } = Ember;
  The label of the button will be taken from the `<state>Text` property.
 
  ```hbs
- \{{bs-button type="primary" icon="glyphicon glyphicon-download" textState=buttonState defaultText="Download" loadingText="Loading..." action="download"}}
+ {{bs-button type="primary" icon="glyphicon glyphicon-download" textState=buttonState defaultText="Download" loadingText="Loading..." action="download"}}
  ```
 
  ```js
@@ -57,7 +57,7 @@ const { computed, observer } = Ember;
  "default" > "pending" > "resolved"/"rejected"
 
  ```hbs
- \{{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" action="download"}}
+ {{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" action="download"}}
  ```
 
  ```js

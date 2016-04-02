@@ -4,7 +4,7 @@ import DropdownToggle from 'ember-bootstrap/mixins/dropdown-toggle';
 /**
  Button component with that can act as a dropdown toggler.
 
- See {{#crossLink "Components.Dropdown"}}{{/crossLink}} for examples.
+ See [Components.Dropdown](Components.Dropdown.html) for examples.
 
  @class DropdownButton
  @namespace Components

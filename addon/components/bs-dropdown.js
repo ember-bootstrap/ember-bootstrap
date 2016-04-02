@@ -13,17 +13,17 @@ const { computed, observer } = Ember;
 
  ```hbs
  <nav class="navbar navbar-default navbar-static">
- <div class="container-fluid">
- <ul class="nav navbar-nav">
- {{#bs-dropdown tagName="li"}}
- {{#bs-dropdown-toggle}}Dropdown <span class="caret"></span>{{/bs-dropdown-toggle}}
- {{#bs-dropdown-menu}}
- <li>{{#link-to "index"}}Something{{/link-to}}</li>
- <li>{{#link-to "index"}}Something different{{/link-to}}</li>
- {{/bs-dropdown-menu}}
- {{/bs-dropdown}}
- </ul>
- </div>
+   <div class="container-fluid">
+     <ul class="nav navbar-nav">
+       {{#bs-dropdown tagName="li"}}
+         {{#bs-dropdown-toggle}}Dropdown <span class="caret"></span>{{/bs-dropdown-toggle}}
+         {{#bs-dropdown-menu}}
+           <li>{{#link-to "index"}}Something{{/link-to}}</li>
+           <li>{{#link-to "index"}}Something different{{/link-to}}</li>
+         {{/bs-dropdown-menu}}
+       {{/bs-dropdown}}
+     </ul>
+   </div>
  </nav>
  ```
 
@@ -34,11 +34,11 @@ const { computed, observer } = Ember;
 
  ```hbs
  {{#bs-dropdown}}
- {{#bs-dropdown-button}}Dropdown <span class="caret"></span>{{/bs-dropdown-button}}
- {{#bs-dropdown-menu}}
- <li>{{#link-to "index"}}Something{{/link-to}}</li>
- <li>{{#link-to "index"}}Something different{{/link-to}}</li>
- {{/bs-dropdown-menu}}
+   {{#bs-dropdown-button}}Dropdown <span class="caret"></span>{{/bs-dropdown-button}}
+   {{#bs-dropdown-menu}}
+     <li>{{#link-to "index"}}Something{{/link-to}}</li>
+     <li>{{#link-to "index"}}Something different{{/link-to}}</li>
+   {{/bs-dropdown-menu}}
  {{/bs-dropdown}}
  ```
 
@@ -51,12 +51,12 @@ const { computed, observer } = Ember;
 
  ```hbs
  {{#bs-dropdown}}
- {{#bs-button}}Dropdown{{/bs-button}}
- {{#bs-dropdown-button}}Dropdown <span class="caret"></span>{{/bs-dropdown-button}}
- {{#bs-dropdown-menu}}
- <li>{{#link-to "index"}}Something{{/link-to}}</li>
- <li>{{#link-to "index"}}Something different{{/link-to}}</li>
- {{/bs-dropdown-menu}}
+   {{#bs-button}}Dropdown{{/bs-button}}
+   {{#bs-dropdown-button}}Dropdown <span class="caret"></span>{{/bs-dropdown-button}}
+   {{#bs-dropdown-menu}}
+     <li>{{#link-to "index"}}Something{{/link-to}}</li>
+     <li>{{#link-to "index"}}Something different{{/link-to}}</li>
+   {{/bs-dropdown-menu}}
  {{/bs-dropdown}}
  ```
 
@@ -110,7 +110,7 @@ export default Ember.Component.extend(ComponentParent, {
   }),
 
   /**
-   * This property is "button" if the toggle element is an instance of {{#crossLink "Components.DropdownButton"}}{{/crossLink}}, otherwise "toggle".
+   * This property is "button" if the toggle element is an instance of [Components.DropdownButton](Components.DropdownButton.html), otherwise "toggle".
    *
    * @property toggleType
    * @type string
