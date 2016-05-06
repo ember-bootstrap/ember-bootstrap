@@ -26,9 +26,9 @@ const { computed, observer } = Ember;
 
  ```handlebars
  {{#bs-button-group value=buttonGroupValue type="radio"}}
-   {{#bs-button value=1}}1{{/bs-button}}
-   {{#bs-button value=2}}2{{/bs-button}}
-   {{#bs-button value=3}}3{{/bs-button}}
+   {{#bs-button value='foo'}}foo{{/bs-button}}
+   {{#bs-button value='bar'}}bar{{/bs-button}}
+   {{#bs-button value='baz'}}baz{{/bs-button}}
  {{/bs-button-group}}
 
  You selected: {{buttonGroupValue}}!
@@ -41,9 +41,9 @@ const { computed, observer } = Ember;
 
  ```handlebars
  {{#bs-button-group value=buttonGroupValue type="checkbox"}}
-   {{#bs-button value=1}}1{{/bs-button}}
-   {{#bs-button value=2}}2{{/bs-button}}
-   {{#bs-button value=3}}3{{/bs-button}}
+   {{#bs-button value='foo'}}foo{{/bs-button}}
+   {{#bs-button value='bar'}}bar{{/bs-button}}
+   {{#bs-button value='baz'}}baz{{/bs-button}}
  {{/bs-button-group}}
 
  You selected:
