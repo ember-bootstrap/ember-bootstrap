@@ -1,3 +1,17 @@
+<a name"0.7.1"></a>
+### 0.7.1 (2016-05-11)
+
+
+#### Bug Fixes
+
+* **FormElement:** fixed validation property dependent keys ([16903155](https://github.com/kaliber5/ember-bootstrap/commit/16903155))
+
+
+#### Features
+
+* **Less Import:** import Bootstrap's less assets simply by importing 'ember-bootstrap/bootstrap' in your app.less ([ab38b9d5](https://github.com/kaliber5/ember-bootstrap/commit/ab38b9d5), closes [#80](https://github.com/kaliber5/ember-bootstrap/issues/80))
+
+
 <a name"0.7.0"></a>
 ## 0.7.0 (2016-04-02)
 
