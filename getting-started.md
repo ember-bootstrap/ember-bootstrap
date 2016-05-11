@@ -84,16 +84,16 @@ Less assets easily under the 'ember-bootstrap' namespace:
 @import "ember-bootstrap/theme";
 ```
 
-You can also seletively import only the assets your app needs:
+You can also selectively import only the assets your app needs:
 
 ```less
 // app.less
-@import "variables.less";
-@import "mixins.less";
-@import "normalize.less";
-@import "scaffolding.less";
-@import "type.less";
-@import "buttons.less";
+@import "ember-bootstrap/variables.less";
+@import "ember-bootstrap/mixins.less";
+@import "ember-bootstrap/normalize.less";
+@import "ember-bootstrap/scaffolding.less";
+@import "ember-bootstrap/type.less";
+@import "ember-bootstrap/buttons.less";
 ```
 
 __Just make sure to not include the compiled CSS file that is included by default, see "Opting out of Bootstrap CSS" above!__
