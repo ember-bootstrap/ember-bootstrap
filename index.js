@@ -3,7 +3,9 @@
 
 var path = require('path'),
   util = require('util'),
-  extend = util._extend;
+  extend = util._extend,
+  mergeTrees = require('broccoli-merge-trees'),
+  Funnel = require('broccoli-funnel');
 
 var defaultOptions = {
   importBootstrapTheme: false,
@@ -15,11 +17,11 @@ module.exports = {
   name: 'ember-bootstrap',
 
   included: function included(app) {
-
     // workaround for https://github.com/ember-cli/ember-cli/issues/3718
     if (typeof app.import !== 'function' && app.app) {
       app = app.app;
     }
+    this.app = app;
 
     var options = extend(defaultOptions, app.options['ember-bootstrap']);
     var bootstrapPath = path.join(app.bowerDirectory, 'bootstrap/dist');
@@ -44,6 +46,22 @@ module.exports = {
     }
 
     app.import('vendor/transition.js');
+  },
 
+  treeForStyles: function treeForStyles(tree) {
+    var styleTrees = [];
+
+    if (this.app.project.findAddonByName('ember-cli-less')) {
+      var lessTree = new Funnel(path.join(this.app.bowerDirectory, 'bootstrap/less'), {
+        destDir: 'ember-bootstrap'
+      });
+      styleTrees.push(lessTree);
+    }
+    
+    if (tree) {
+      styleTrees.push(tree);
+    }
+    
+    return mergeTrees(styleTrees, { overwrite: true });
   }
 };

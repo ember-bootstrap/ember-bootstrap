@@ -31,4 +31,4 @@ See [CHANGELOG](CHANGELOG.md) for the list of changes.
 
 ## Copyright and license
 
-Code and documentation copyright 2015 kaliber5 GmbH. Code released under [the MIT license](LICENSE.md).
+Code and documentation copyright 2016 kaliber5 GmbH. Code released under [the MIT license](LICENSE.md).
