@@ -130,3 +130,28 @@ test('clicking a button sends default action with callback, if promise is return
   assert.equal(this.$('button').text(), 'resolved');
 
 });
+
+test('clicking a button sends default action, if promise is returned from closure action button state is changed according to promise state', function(assert) {
+  let promise;
+  let resolvePromise;
+
+  this.on('testAction', () => {
+    promise = new Ember.RSVP.Promise(function(resolve) {
+      resolvePromise = resolve;
+    });
+    return promise;
+  });
+
+  this.render(hbs`{{bs-button action=(action "testAction") textState=textState defaultText="default" pendingText="pending" resolvedText="resolved" rejectedText="rejected"}}`);
+
+  assert.expect(4);
+  this.$('button').click();
+  assert.equal(this.get('textState'), 'pending');
+  assert.equal(this.$('button').text(), 'pending');
+
+  Ember.run(resolvePromise);
+
+  assert.equal(this.get('textState'), 'resolved');
+  assert.equal(this.$('button').text(), 'resolved');
+
+});
