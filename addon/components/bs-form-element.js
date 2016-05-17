@@ -125,7 +125,7 @@ export default FormGroup.extend({
    *
    * * 'text'
    * * 'checkbox'
-   * * 'select'
+   * * 'select' (deprecated)
    * * 'textarea'
    * * any other type will use an input tag with the `controlType` value as the type attribute (for e.g. HTML5 input
    * types like 'email'), and the same layout as the 'text' type

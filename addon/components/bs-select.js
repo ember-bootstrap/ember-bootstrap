@@ -1,11 +1,21 @@
 import Ember from 'ember';
 
 /**
- Extends Ember.Select to add Bootstrap's 'form-control' class.
+ Selectbox component.
+
+ #### Deprecated ####
+
+ Usage of this component is deprecated. Please use one of the better alternatives for select boxes in Ember, as one of
+ those: https://www.emberaddons.com/?query=select%20component.
+
+ If you use it with a FormElement component as in `{{bs-form-element controlType="select" ... }}`, then see the section
+ on custom Controls in [Components.FormElement](Components.FormElement.html) to learn how to replace this with an external
+ select component.
 
  @class Select
  @namespace Components
- @extends Ember.Select
+ @extends Ember.Component
+ @deprecated
  @public
  */
 export default Ember.Component.extend({
@@ -26,6 +36,13 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
+
+    Ember.deprecate('bs-select is deprecated and will be removed in the future. Please use a dedicated addon for select box components', false, {
+      url: 'http://kaliber5.github.io/ember-bootstrap/api/classes/Components.Select.html',
+      until: '0.8.0',
+      id: 'ember-bootstrap.component.select'
+    });
+
     if (!this.get('content')) {
       this.set('content', []);
     }
