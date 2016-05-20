@@ -45,7 +45,9 @@ module.exports = {
       app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff2'), {destDir: '/fonts'});
     }
 
-    app.import('vendor/transition.js');
+    if (!process.env.EMBER_CLI_FASTBOOT) {
+      app.import('vendor/transition.js');
+    }
   },
 
   treeForStyles: function treeForStyles(tree) {
