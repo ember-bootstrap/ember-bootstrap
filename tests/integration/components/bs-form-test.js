@@ -127,3 +127,17 @@ test('Pressing enter on a form with submitOnEnter submits the form', function(as
 
   this.$('form').trigger(e);
 });
+
+test('supports novalidate attribute', function(assert) {
+  assert.expect(2);
+  this.render(hbs`{{bs-form}}`);
+  assert.ok(
+    this.$('form').attr('novalidate') === 'false',
+    'defaults to false'
+  );
+  this.set('novalidate', true);
+  this.render(hbs`{{bs-form novalidate=novalidate}}`);
+  assert.ok(
+    this.$('form').attr('novalidate') === 'true'
+  );
+});
