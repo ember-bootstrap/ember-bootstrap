@@ -270,7 +270,7 @@ export default FormGroup.extend({
    * @property model
    * @public
    */
-  model: computed.alias('form.model'),
+  model: computed.reads('form.model'),
 
   /**
    * The array of error messages from the `model`'s validation.
