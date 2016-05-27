@@ -72,6 +72,7 @@ const { computed } = Ember;
 export default Ember.Component.extend({
   tagName: 'form',
   classNameBindings: ['layoutClass'],
+  attributeBindings: ['novalidate'],
   ariaRole: 'form',
 
   /**
