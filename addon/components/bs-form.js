@@ -72,6 +72,7 @@ const { computed } = Ember;
 export default Ember.Component.extend({
   tagName: 'form',
   classNameBindings: ['layoutClass'],
+  attributeBindings: ['novalidate'],
   ariaRole: 'form',
 
   /**
@@ -141,6 +142,16 @@ export default Ember.Component.extend({
    * @public
    */
   submitOnEnter: false,
+
+  /**
+   * If set to true novalidate attribute is present on form element
+   *
+   * @property novalidate
+   * @type boolean
+   * @default false
+   * @public
+   */
+  novalidate: false,
 
   /**
    * An array of `Components.FormElement`s that are children of this form.
