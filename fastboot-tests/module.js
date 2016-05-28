@@ -3,7 +3,7 @@ var RSVP = require('rsvp');
 var request = RSVP.denodeify(require('request'));
 
 function describeForFastboot(name, fn) {
-  describe('Fastboot: ' + name, function() {
+  describe(name, function() {
     this.timeout(600000);
 
     var app;
