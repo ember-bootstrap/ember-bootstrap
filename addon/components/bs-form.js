@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import FormElement from 'ember-bootstrap/components/bs-form-element';
 
-const { computed } = Ember;
+const { computed, get } = Ember;
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -154,16 +154,30 @@ export default Ember.Component.extend({
   novalidate: false,
 
   /**
-   * An array of `Components.FormElement`s that are children of this form.
+   * Returns an array of `Components.FormElement`s that are children of this form
+   * or the view passed as param.
    *
-   * @property childFormElements
-   * @type Array
-   * @readonly
-   * @protected
+   * @method getChildFormElements
+   * @param {Object} [view=this] Instance of Ember.View
+   * @return {Array} Returns array of `Components.FormElement`s
+   * @private
    */
-  childFormElements: computed.filter('childViews', function(view) {
-    return view instanceof FormElement;
-  }),
+  getChildFormElements(view) {
+    const childFormElements = Ember.A();
+    const target = view || this;
+    const childViews = get(target, 'childViews');
+
+    childViews.forEach((childView) => {
+      if (childView instanceof FormElement) {
+        childFormElements.push(childView);
+      }
+      childFormElements.pushObjects(
+        this.getChildFormElements(childView)
+      );
+    });
+
+    return childFormElements;
+  },
 
   /**
    * Validate hook which will return a promise that will either resolve if the model is valid
@@ -232,7 +246,7 @@ export default Ember.Component.extend({
       let validationPromise = this.validate(this.get('model'));
       if (validationPromise && validationPromise instanceof Ember.RSVP.Promise) {
         validationPromise.then((r) => this.sendAction('action', r), (err) => {
-          this.get('childFormElements').setEach('showValidation', true);
+          this.getChildFormElements().setEach('showValidation', true);
           return this.sendAction('invalid', err);
         });
       }
