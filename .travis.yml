@@ -1,7 +1,7 @@
 ---
 language: node_js
 node_js:
-  - "0.12"
+  - "4"
 
 sudo: false
 
@@ -20,7 +20,7 @@ install:
   - bower install
 
 script:
-  - ember try:each
+  - npm test
 
 addons:
     code_climate:
