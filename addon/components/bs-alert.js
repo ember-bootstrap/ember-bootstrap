@@ -38,13 +38,13 @@ export default Ember.Component.extend(TypeClass, {
   /**
    * If true the alert is completely hidden. Will be set when the fade animation has finished.
    *
-   * @property dismissed
+   * @property hidden
    * @type boolean
    * @default false
    * @readonly
    * @protected
    */
-  dismissed: computed.oneWay('notVisible'),
+  hidden: false,
 
   /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
@@ -76,7 +76,7 @@ export default Ember.Component.extend(TypeClass, {
    * @type boolean
    * @private
    */
-  alert: computed.not('dismissed'),
+  alert: computed.not('hidden'),
   in: computed.and('visible', 'fade'),
 
   /**
@@ -129,7 +129,7 @@ export default Ember.Component.extend(TypeClass, {
    */
   show() {
     this.setProperties({
-      dismissed: false
+      hidden: false
     });
   },
 
@@ -144,15 +144,20 @@ export default Ember.Component.extend(TypeClass, {
     if (this.get('fade')) {
       Ember.run.later(this, function() {
         if (!this.get('isDestroyed')) {
-          this.set('dismissed', true);
+          this.set('hidden', true);
           this.sendAction('dismissedAction');
         }
       }, this.get('fadeDuration'));
     } else {
       this.setProperties({
-        dismissed: true
+        hidden: true
       });
       this.sendAction('dismissedAction');
     }
+  },
+
+  init() {
+    this._super(...arguments);
+    this.set('hidden', !this.get('visible'));
   }
 });

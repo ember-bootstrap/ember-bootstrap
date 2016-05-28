@@ -29,6 +29,7 @@ test('dismissible alert can be hidden by clicking close button with fade=true', 
   assert.equal(this.$().find('button.close').length, 1, 'alert has close button');
   this.$().find('button.close').click();
 
+  assert.equal(this.$(':first-child').hasClass('alert'), true, 'alert has alert class');
   assert.equal(this.$(':first-child').hasClass('in'), false, 'alert has no in class');
 
   let done = assert.async();
@@ -38,7 +39,7 @@ test('dismissible alert can be hidden by clicking close button with fade=true', 
     assert.equal(this.$(':first-child').text().trim(), '', 'alert has no content');
 
     done();
-  }, 500);
+  }, 300);
 
 });
 
