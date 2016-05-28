@@ -54,7 +54,8 @@
     "gulp-rename": "^1.2.2",
     "loader.js": "^4.0.1",
     "mocha": "^2.5.3",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "rsvp": "^3.2.1"
   },
   "description": "Twitter Bootstrap components for Ember.js",
   "keywords": [
