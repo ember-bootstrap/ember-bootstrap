@@ -20,7 +20,7 @@ install:
   - bower install
 
 script:
-  - ember try:each
+  - npm test
 
 addons:
     code_climate:
