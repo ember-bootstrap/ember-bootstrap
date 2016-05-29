@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.7.0.30a4353d</span></h1>
+    <h1>API Docs <span class="small">v.0.7.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -59,7 +59,7 @@ import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
 import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
 import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
 
-const { computed, observer } = Ember;
+const { computed, observer, typeOf } = Ember;
 
 /**
  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -108,20 +108,20 @@ const { computed, observer } = Ember;
 
  ### Promise support for automatic state change
 
- When using the callback function of the click action to supply a Promise for any asynchronous operation the button will
+ When returning a Promise for any asynchronous operation from the click closure action the button will
  manage its &#x60;textState&#x60; property automatically, changing its value according to the state of the promise:
  &quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;
 
  &#x60;&#x60;&#x60;hbs
- {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=&quot;download&quot;}}
+ {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=(action &quot;download&quot;)}}
  &#x60;&#x60;&#x60;
 
  &#x60;&#x60;&#x60;js
- App.ApplicationController = Ember.Controller.extend({
+ // controller.js
+export default Ember.Controller.extend({
    actions: {
-     download: function(actionParam, evt, cb) {
-       promise = new Ember.RSVP.Promise(...);
-       cb(promise);
+     download(actionParam, evt) {
+       return new Ember.RSVP.Promise(...);
      }
    }
  });
@@ -303,6 +303,8 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
    * * original event object of the click event
    * * callback: call that with a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;
    *
+   * When using closure actions just return the promise instead of calling the above mentioned callback.
+   *
    * @method click
    * @protected
    * @param evt
@@ -312,7 +314,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
       this.toggleProperty(&#x27;active&#x27;);
     }
     let that = this;
-    let callback = function(promise) {
+    function handleButtonPromise(promise) {
       if (promise) {
         that.set(&#x27;textState&#x27;, &#x27;pending&#x27;);
         promise.then(
@@ -329,7 +331,16 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
         );
       }
     };
-    this.sendAction(&#x27;action&#x27;, this.get(&#x27;value&#x27;), evt, callback);
+    let action = this.get(&#x27;action&#x27;);
+    if (typeOf(action) === &#x27;function&#x27;) {
+      let promise = action(this.get(&#x27;value&#x27;), evt, handleButtonPromise);
+      if (promise &amp;&amp; promise.then) {
+        handleButtonPromise(promise);
+      }
+    } else {
+      // continue to support string actions for now...
+      this.sendAction(&#x27;action&#x27;, this.get(&#x27;value&#x27;), evt, handleButtonPromise);
+    }
   },
 
   init() {

@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.7.0.30a4353d</span></h1>
+    <h1>API Docs <span class="small">v.0.7.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -94,13 +94,13 @@ export default Ember.Component.extend(TypeClass, {
   /**
    * If true the alert is completely hidden. Will be set when the fade animation has finished.
    *
-   * @property dismissed
+   * @property hidden
    * @type boolean
    * @default false
    * @readonly
    * @protected
    */
-  dismissed: computed.oneWay(&#x27;notVisible&#x27;),
+  hidden: false,
 
   /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
@@ -132,7 +132,7 @@ export default Ember.Component.extend(TypeClass, {
    * @type boolean
    * @private
    */
-  alert: computed.not(&#x27;dismissed&#x27;),
+  alert: computed.not(&#x27;hidden&#x27;),
   in: computed.and(&#x27;visible&#x27;, &#x27;fade&#x27;),
 
   /**
@@ -185,7 +185,7 @@ export default Ember.Component.extend(TypeClass, {
    */
   show() {
     this.setProperties({
-      dismissed: false
+      hidden: false
     });
   },
 
@@ -200,16 +200,21 @@ export default Ember.Component.extend(TypeClass, {
     if (this.get(&#x27;fade&#x27;)) {
       Ember.run.later(this, function() {
         if (!this.get(&#x27;isDestroyed&#x27;)) {
-          this.set(&#x27;dismissed&#x27;, true);
+          this.set(&#x27;hidden&#x27;, true);
           this.sendAction(&#x27;dismissedAction&#x27;);
         }
       }, this.get(&#x27;fadeDuration&#x27;));
     } else {
       this.setProperties({
-        dismissed: true
+        hidden: true
       });
       this.sendAction(&#x27;dismissedAction&#x27;);
     }
+  },
+
+  init() {
+    this._super(...arguments);
+    this.set(&#x27;hidden&#x27;, !this.get(&#x27;visible&#x27;));
   }
 });
     </pre>

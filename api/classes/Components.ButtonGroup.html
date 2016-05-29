@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.7.0.30a4353d</span></h1>
+    <h1>API Docs <span class="small">v.0.7.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -87,9 +87,9 @@ See <a href="http://getbootstrap.com/components/#btn-groups">http://getbootstrap
 Set the <code>value</code> property of the buttons to something meaningful. The <code>value</code> property of the button group will then reflect
 the value of the active button:</p>
 <pre class="code prettyprint"><code class="language-handlebars">{{#bs-button-group value=buttonGroupValue type=&quot;radio&quot;}}
-  {{#bs-button value=1}}1{{/bs-button}}
-  {{#bs-button value=2}}2{{/bs-button}}
-  {{#bs-button value=3}}3{{/bs-button}}
+  {{#bs-button value='foo'}}foo{{/bs-button}}
+  {{#bs-button value='bar'}}bar{{/bs-button}}
+  {{#bs-button value='baz'}}baz{{/bs-button}}
 {{/bs-button-group}}
 
 You selected: {{buttonGroupValue}}!
@@ -98,9 +98,9 @@ You selected: {{buttonGroupValue}}!
 <p>Set <code>type</code> to &quot;checkbox&quot; to make any number of child buttons selectable. The <code>value</code> property will be an array
 of all the values of the active buttons:</p>
 <pre class="code prettyprint"><code class="language-handlebars">{{#bs-button-group value=buttonGroupValue type=&quot;checkbox&quot;}}
-  {{#bs-button value=1}}1{{/bs-button}}
-  {{#bs-button value=2}}2{{/bs-button}}
-  {{#bs-button value=3}}3{{/bs-button}}
+  {{#bs-button value='foo'}}foo{{/bs-button}}
+  {{#bs-button value='bar'}}bar{{/bs-button}}
+  {{#bs-button value='baz'}}baz{{/bs-button}}
 {{/bs-button-group}}
 
 You selected:

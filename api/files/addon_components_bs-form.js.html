@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.7.0.30a4353d</span></h1>
+    <h1>API Docs <span class="small">v.0.7.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -128,6 +128,7 @@ const { computed } = Ember;
 export default Ember.Component.extend({
   tagName: &#x27;form&#x27;,
   classNameBindings: [&#x27;layoutClass&#x27;],
+  attributeBindings: [&#x27;novalidate&#x27;],
   ariaRole: &#x27;form&#x27;,
 
   /**
@@ -197,6 +198,16 @@ export default Ember.Component.extend({
    * @public
    */
   submitOnEnter: false,
+
+  /**
+   * If set to true novalidate attribute is present on form element
+   *
+   * @property novalidate
+   * @type boolean
+   * @default false
+   * @public
+   */
+  novalidate: false,
 
   /**
    * An array of &#x60;Components.FormElement&#x60;s that are children of this form.

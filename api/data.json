@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "0.7.0.30a4353d",
+        "version": "v.0.7.2",
         "external": {
             "data": [
                 {
@@ -412,7 +412,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-button-group.js",
             "line": 7,
-            "description": "Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.\nSee http://getbootstrap.com/components/#btn-groups\n\nUse as a block level component with any number of [Components.Button](Components.Button.html) components as children:\n\n```handlebars\n{{#bs-button-group}}\n  {{#bs-button}}1{{/bs-button}}\n  {{#bs-button}}2{{/bs-button}}\n  {{#bs-button}}3{{/bs-button}}\n{{/bs-button-group}}\n```\n\n### Radio-like behaviour\n\nUse the `type` property set to \"radio\" to make the child buttons toggle like radio buttons, i.e. only one button can be active.\nSet the `value` property of the buttons to something meaningful. The `value` property of the button group will then reflect\nthe value of the active button:\n\n```handlebars\n{{#bs-button-group value=buttonGroupValue type=\"radio\"}}\n  {{#bs-button value=1}}1{{/bs-button}}\n  {{#bs-button value=2}}2{{/bs-button}}\n  {{#bs-button value=3}}3{{/bs-button}}\n{{/bs-button-group}}\n\nYou selected: {{buttonGroupValue}}!\n```\n\n### Checkbox-like behaviour\n\nSet `type` to \"checkbox\" to make any number of child buttons selectable. The `value` property will be an array\nof all the values of the active buttons:\n\n```handlebars\n{{#bs-button-group value=buttonGroupValue type=\"checkbox\"}}\n  {{#bs-button value=1}}1{{/bs-button}}\n  {{#bs-button value=2}}2{{/bs-button}}\n  {{#bs-button value=3}}3{{/bs-button}}\n{{/bs-button-group}}\n\nYou selected:\n<ul>\n{{#each value in buttonGroupValue}}\n  <li>{{value}}</li>\n{{/each}}\n</ul>\n```",
+            "description": "Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.\nSee http://getbootstrap.com/components/#btn-groups\n\nUse as a block level component with any number of [Components.Button](Components.Button.html) components as children:\n\n```handlebars\n{{#bs-button-group}}\n  {{#bs-button}}1{{/bs-button}}\n  {{#bs-button}}2{{/bs-button}}\n  {{#bs-button}}3{{/bs-button}}\n{{/bs-button-group}}\n```\n\n### Radio-like behaviour\n\nUse the `type` property set to \"radio\" to make the child buttons toggle like radio buttons, i.e. only one button can be active.\nSet the `value` property of the buttons to something meaningful. The `value` property of the button group will then reflect\nthe value of the active button:\n\n```handlebars\n{{#bs-button-group value=buttonGroupValue type=\"radio\"}}\n  {{#bs-button value='foo'}}foo{{/bs-button}}\n  {{#bs-button value='bar'}}bar{{/bs-button}}\n  {{#bs-button value='baz'}}baz{{/bs-button}}\n{{/bs-button-group}}\n\nYou selected: {{buttonGroupValue}}!\n```\n\n### Checkbox-like behaviour\n\nSet `type` to \"checkbox\" to make any number of child buttons selectable. The `value` property will be an array\nof all the values of the active buttons:\n\n```handlebars\n{{#bs-button-group value=buttonGroupValue type=\"checkbox\"}}\n  {{#bs-button value='foo'}}foo{{/bs-button}}\n  {{#bs-button value='bar'}}bar{{/bs-button}}\n  {{#bs-button value='baz'}}baz{{/bs-button}}\n{{/bs-button-group}}\n\nYou selected:\n<ul>\n{{#each value in buttonGroupValue}}\n  <li>{{value}}</li>\n{{/each}}\n</ul>\n```",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.SizeClass"
@@ -431,7 +431,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-button.js",
             "line": 8,
-            "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```hbs\n{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\"}}\nDownloads\n{{/bs-button}}\n```\n\n### Actions\n\nSet the action property of the component to send an action to your controller. The following parameters will be sent:\n* value: the button's value, see the `value` property\n* event: the browsers event object\n* callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling\n\n```hbs\n{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" action=\"download\"}}\nDownload\n{{/bs-button}}\n```\n\n### States\n\nUse the `textState` property to change the label of the button. You can bind it to a controller property to set a \"loading\" state for example.\nThe label of the button will be taken from the `<state>Text` property.\n\n```hbs\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" textState=buttonState defaultText=\"Download\" loadingText=\"Loading...\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  buttonState: \"default\"\n  actions: {\n    download: function() {\n      this.set(\"buttonState\", \"loading\");\n    }\n  }\n});\n```\n\n### Promise support for automatic state change\n\nWhen using the callback function of the click action to supply a Promise for any asynchronous operation the button will\nmanage its `textState` property automatically, changing its value according to the state of the promise:\n\"default\" > \"pending\" > \"resolved\"/\"rejected\"\n\n```hbs\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" defaultText=\"Download\" pendingText=\"Loading...\" resolvedText=\"Completed!\" rejectedText=\"Oups!?\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  actions: {\n    download: function(actionParam, evt, cb) {\n      promise = new Ember.RSVP.Promise(...);\n      cb(promise);\n    }\n  }\n});\n```",
+            "description": "Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)\nas well as advanced functionality such as button states.\n\n### Basic Usage\n\n```hbs\n{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\"}}\nDownloads\n{{/bs-button}}\n```\n\n### Actions\n\nSet the action property of the component to send an action to your controller. The following parameters will be sent:\n* value: the button's value, see the `value` property\n* event: the browsers event object\n* callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling\n\n```hbs\n{{#bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" action=\"download\"}}\nDownload\n{{/bs-button}}\n```\n\n### States\n\nUse the `textState` property to change the label of the button. You can bind it to a controller property to set a \"loading\" state for example.\nThe label of the button will be taken from the `<state>Text` property.\n\n```hbs\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" textState=buttonState defaultText=\"Download\" loadingText=\"Loading...\" action=\"download\"}}\n```\n\n```js\nApp.ApplicationController = Ember.Controller.extend({\n  buttonState: \"default\"\n  actions: {\n    download: function() {\n      this.set(\"buttonState\", \"loading\");\n    }\n  }\n});\n```\n\n### Promise support for automatic state change\n\nWhen returning a Promise for any asynchronous operation from the click closure action the button will\nmanage its `textState` property automatically, changing its value according to the state of the promise:\n\"default\" > \"pending\" > \"resolved\"/\"rejected\"\n\n```hbs\n{{bs-button type=\"primary\" icon=\"glyphicon glyphicon-download\" defaultText=\"Download\" pendingText=\"Loading...\" resolvedText=\"Completed!\" rejectedText=\"Oups!?\" action=(action \"download\")}}\n```\n\n```js\n// controller.js\nexport default Ember.Controller.extend({\n  actions: {\n    download(actionParam, evt) {\n      return new Ember.RSVP.Promise(...);\n    }\n  }\n});\n```",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.TypeClass",
@@ -716,8 +716,9 @@
             "namespace": "Components",
             "file": "addon/components/bs-select.js",
             "line": 3,
-            "description": "Extends Ember.Select to add Bootstrap's 'form-control' class.",
-            "extends": "Ember.Select",
+            "description": "Selectbox component.\n\n#### Deprecated ####\n\nUsage of this component is deprecated. Please use one of the better alternatives for select boxes in Ember, as one of\nthose: https://www.emberaddons.com/?query=select%20component.\n\nIf you use it with a FormElement component as in `{{bs-form-element controlType=\"select\" ... }}`, then see the section\non custom Controls in [Components.FormElement](Components.FormElement.html) to learn how to replace this with an external\nselect component.",
+            "extends": "Ember.Component",
+            "deprecated": true,
             "access": "public",
             "tagname": ""
         },
@@ -920,7 +921,7 @@
             "line": 38,
             "description": "If true the alert is completely hidden. Will be set when the fade animation has finished.",
             "itemtype": "property",
-            "name": "dismissed",
+            "name": "hidden",
             "type": "boolean",
             "default": "false",
             "readonly": "",
@@ -1314,7 +1315,7 @@
         {
             "file": "addon/components/bs-button.js",
             "line": 244,
-            "description": "Click handler. This will send the default \"action\" action, with the following parameters:\n* value of the button (that is the value of the \"value\" property)\n* original event object of the click event\n* callback: call that with a promise object, and the buttons state will automatically set to \"pending\", \"resolved\" and/or \"rejected\"",
+            "description": "Click handler. This will send the default \"action\" action, with the following parameters:\n* value of the button (that is the value of the \"value\" property)\n* original event object of the click event\n* callback: call that with a promise object, and the buttons state will automatically set to \"pending\", \"resolved\" and/or \"rejected\"\n\nWhen using closure actions just return the promise instead of calling the above mentioned callback.",
             "itemtype": "method",
             "name": "click",
             "access": "protected",
@@ -1630,7 +1631,7 @@
         {
             "file": "addon/components/bs-form-element.js",
             "line": 122,
-            "description": "The type of the control widget.\nSupported types:\n\n* 'text'\n* 'checkbox'\n* 'select'\n* 'textarea'\n* any other type will use an input tag with the `controlType` value as the type attribute (for e.g. HTML5 input\ntypes like 'email'), and the same layout as the 'text' type",
+            "description": "The type of the control widget.\nSupported types:\n\n* 'text'\n* 'checkbox'\n* 'select' (deprecated)\n* 'textarea'\n* any other type will use an input tag with the `controlType` value as the type attribute (for e.g. HTML5 input\ntypes like 'email'), and the same layout as the 'text' type",
             "itemtype": "property",
             "name": "controlType",
             "type": "string",
@@ -2140,7 +2141,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 77,
+            "line": 78,
             "description": "Bootstrap form class name (computed)",
             "itemtype": "property",
             "name": "layoutClass",
@@ -2153,7 +2154,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 91,
+            "line": 92,
             "description": "Set a model that this form should represent. This serves several purposes:\n\n* child `Components.FormElement`s can access and bind to this model by their `property`\n* when the model supports validation by using the [ember-validations](https://github.com/dockyard/ember-validations) mixin,\nchild `Components.FormElement`s will look at the validation information of their `property` and render their form group accordingly.\nMoreover the form's `submit` event handler will validate the model and deny submitting if the model is not validated successfully.",
             "itemtype": "property",
             "name": "model",
@@ -2165,7 +2166,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 105,
+            "line": 106,
             "description": "Set the layout of the form to either \"vertical\", \"horizontal\" or \"inline\". See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal",
             "itemtype": "property",
             "name": "formLayout",
@@ -2177,7 +2178,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 114,
+            "line": 115,
             "description": "Check if validating the model is supported. This needs to be implemented by another addon.",
             "itemtype": "property",
             "name": "hasValidator",
@@ -2190,7 +2191,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 124,
+            "line": 125,
             "description": "The Bootstrap grid class for form labels. This is used by the `Components.FormElement` class as a default for the\nwhole form.",
             "itemtype": "property",
             "name": "horizontalLabelGridClass",
@@ -2203,7 +2204,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 135,
+            "line": 136,
             "description": "If set to true pressing enter will submit the form, even if no submit button is present",
             "itemtype": "property",
             "name": "submitOnEnter",
@@ -2216,7 +2217,20 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 145,
+            "line": 146,
+            "description": "If set to true novalidate attribute is present on form element",
+            "itemtype": "property",
+            "name": "novalidate",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Form",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-form.js",
+            "line": 156,
             "description": "An array of `Components.FormElement`s that are children of this form.",
             "itemtype": "property",
             "name": "childFormElements",
@@ -2229,7 +2243,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 157,
+            "line": 168,
             "description": "Validate hook which will return a promise that will either resolve if the model is valid\nor reject if it's not. This should be overridden to add validation support.",
             "params": [
                 {
@@ -2248,7 +2262,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 177,
+            "line": 188,
             "description": "A handler called before the form is validated (if possible) and submitted.",
             "itemtype": "event",
             "name": "before",
@@ -2259,7 +2273,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 184,
+            "line": 195,
             "description": "A handler called when submit has been triggered and the model has passed all validations (if present).",
             "itemtype": "event",
             "name": "action",
@@ -2276,7 +2290,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 192,
+            "line": 203,
             "description": "A handler called when validation of the model has failed.",
             "itemtype": "event",
             "name": "invalid",
@@ -2293,7 +2307,7 @@
         },
         {
             "file": "addon/components/bs-form.js",
-            "line": 200,
+            "line": 211,
             "description": "Submit handler that will send the default action (\"action\") to the controller when submitting the form.\n\nIf there is a supplied `model` that supports validation (`hasValidator`) the model will be validated before, and\nonly if validation is successful the default action will be sent. Otherwise an \"invalid\" action will be sent, and\nall the `showValidation` property of all child `Components.FormElement`s will be set to true, so error state and\nmessages will be shown automatically.",
             "itemtype": "method",
             "name": "submit",
@@ -3253,7 +3267,7 @@
     "warnings": [
         {
             "message": "Missing item type\nValidate hook which will return a promise that will either resolve if the model is valid\nor reject if it's not. This should be overridden to add validation support.",
-            "line": " addon/components/bs-form.js:157"
+            "line": " addon/components/bs-form.js:168"
         }
     ]
 }

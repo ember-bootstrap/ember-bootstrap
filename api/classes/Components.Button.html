@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.7.0.30a4353d</span></h1>
+    <h1>API Docs <span class="small">v.0.7.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -107,16 +107,16 @@ The label of the button will be taken from the <code>&lt;state&gt;Text</code> pr
 });
 </code></pre>
 <h3>Promise support for automatic state change</h3>
-<p>When using the callback function of the click action to supply a Promise for any asynchronous operation the button will
+<p>When returning a Promise for any asynchronous operation from the click closure action the button will
 manage its <code>textState</code> property automatically, changing its value according to the state of the promise:
 &quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;</p>
-<pre class="code prettyprint"><code class="language-hbs">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=&quot;download&quot;}}
+<pre class="code prettyprint"><code class="language-hbs">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=(action &quot;download&quot;)}}
 </code></pre>
-<pre class="code prettyprint"><code class="language-js">App.ApplicationController = Ember.Controller.extend({
+<pre class="code prettyprint"><code class="language-js">// controller.js
+export default Ember.Controller.extend({
   actions: {
-    download: function(actionParam, evt, cb) {
-      promise = new Ember.RSVP.Promise(...);
-      cb(promise);
+    download(actionParam, evt) {
+      return new Ember.RSVP.Promise(...);
     }
   }
 });
@@ -1282,6 +1282,7 @@ manage its <code>textState</code> property automatically, changing its value acc
                     <li>original event object of the click event</li>
                     <li>callback: call that with a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;</li>
                     </ul>
+                    <p>When using closure actions just return the promise instead of calling the above mentioned callback.</p>
                     
                         </div>
                     
