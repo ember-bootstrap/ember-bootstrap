@@ -1,3 +1,17 @@
+<a name"0.7.2"></a>
+### 0.7.2 (2016-05-29)
+
+#### Bug Fixes
+
+* **Alert:** fixed fade out animation
+* **FormElement:** fixed overriding form model by setting bs-form-element model. Thanks to [jelhan](https://github.com/jelhan)
+
+#### Features
+
+* **Fastboot:** Fixed breaking apps in Fastboot environment. Thanks to [openhouse](https://github.com/openhouse). Fastboot is now officially supported and automatically tested.
+* **Button:** add support for returning a promise from a closure action to support automatic state change ([fb8fa1e3](https://github.com/kaliber5/ember-bootstrap/commit/fb8fa1e3), closes [#87](https://github.com/kaliber5/ember-bootstrap/issues/87))
+* **Form:** adds support for novalidate attribute. Thanks to [jelhan](https://github.com/jelhan)
+
 <a name"0.7.1"></a>
 ### 0.7.1 (2016-05-11)
 
