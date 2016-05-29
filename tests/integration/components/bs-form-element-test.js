@@ -1,6 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
+import EmberValidations from 'ember-validations';
 
 moduleForComponent('bs-form-element', 'Integration | Component | bs-form-element', {
   integration: true
@@ -117,18 +118,36 @@ test('Changing formLayout changes markup', function(assert) {
 });
 
 test('Custom controls are supported', function(assert) {
-  this.set('gender', 'male');
+  this.set('model',
+    Ember.Object.extend(EmberValidations, {
+      gender: 'male',
+      validations: {
+        name: {
+          presence: true
+        }
+      }
+    }).create({
+      container: this.get('container')
+    })
+  );
   this.render(hbs`
-    {{#bs-form formLayout=formLayout model=this}}
-    {{#bs-form-element label="Gender" property="gender" as |value|}}
-      <div id="value">{{value}}</div>
-    {{/bs-form-element}}
+    {{#bs-form formLayout=formLayout model=model}}
+      {{#bs-form-element label="Gender" property="gender" as |value id validation|}}
+        <div id="value">{{value}}</div>
+        <div id="id">{{id}}</div>
+        <div id="validation">{{validation}}</div>
+      {{/bs-form-element}}
     {{/bs-form}}
   `);
 
   assert.equal(this.$('#value').length, 1, 'block template is rendered');
   assert.equal(this.$('#value').text().trim(), 'male', 'value is yielded to block template');
+  assert.equal(this.$('#id').text().trim(), `${$('.form-group').attr('id')}-field`, 'id is yielded to block template');
+  assert.equal(this.$('#validation').text().trim(), '');
 
+  this.$('form').submit();
+  assert.ok(this.$('.form-group').hasClass('has-success'), 'assumption');
+  assert.equal(this.$('#validation').text().trim(), 'success');
 });
 
 test('required property propagates', function(assert) {

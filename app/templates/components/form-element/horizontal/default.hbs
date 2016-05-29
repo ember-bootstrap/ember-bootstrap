@@ -2,7 +2,7 @@
     <label class="control-label {{horizontalLabelGridClass}}" for="{{formElementId}}">{{label}}</label>
     <div class="{{horizontalInputGridClass}}">
         {{#if hasBlock}}
-            {{yield value formElementId}}
+            {{yield value formElementId validation}}
         {{else}}
             {{bs-input id=formElementId name=name type=controlType value=value placeholder=placeholder autofocus=autofocus disabled=disabled required=required}}
         {{/if}}
@@ -12,7 +12,7 @@
 {{else}}
     <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
         {{#if hasBlock}}
-            {{yield value}}
+            {{yield value formElementId validation}}
         {{else}}
             {{bs-input name=name type=controlType value=value placeholder=placeholder autofocus=autofocus disabled=disabled required=required}}
         {{/if}}
