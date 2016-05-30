@@ -3,7 +3,7 @@ import FormGroup from 'ember-bootstrap/components/bs-form-group';
 import Form from 'ember-bootstrap/components/bs-form';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 
-const { computed, defineProperty } = Ember;
+const { computed, defineProperty, observer, on, run } = Ember;
 
 const nonTextFieldControlTypes = Ember.A([
   'checkbox',
@@ -519,5 +519,49 @@ export default FormGroup.extend(ComponentChild, {
       defineProperty(this, 'value', computed.alias(`model.${this.get('property')}`));
       this.setupValidations();
     }
-  }
+  },
+
+  /*
+   * adjust feedback icon position
+   *
+   * Bootstrap documentation:
+   *  Manual positioning of feedback icons is required for [...] input groups
+   *  with an add-on on the right. [...] For input groups, adjust the right
+   *  value to an appropriate pixel value depending on the width of your addon.
+   */
+  adjustFeedbackIcons: on('didInsertElement', observer('hasFeedback', 'formLayout', function() {
+    run.scheduleOnce('afterRender', () => {
+      // validation state icons are only shown if form element has feedback
+      if (this.get('hasFeedback') && !this.get('isDestroying')) {
+        // form group element has
+        this.$()
+          // an input-group
+          .has('.input-group')
+          // an addon or button on right side
+          .has('.input-group input + .input-group-addon, .input-group input + .input-group-btn')
+          // an icon showing validation state
+          .has('.form-control-feedback')
+          .each((i, formGroups) => {
+            // clear existing adjustment
+            this.$('.form-control-feedback').css('right', '');
+            let feedbackIcon = this.$('.form-control-feedback', formGroups);
+            let defaultPositionString = feedbackIcon.css('right');
+            Ember.assert(
+              defaultPositionString.substr(-2) === 'px',
+              '.form-control-feedback css right units other than px are not supported'
+            );
+            let defaultPosition = parseInt(
+              defaultPositionString.substr(0, defaultPositionString.length - 2)
+            );
+            // Bootstrap documentation:
+            //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
+            // therefore we could rely on having only one input-group-addon or input-group-btn
+            let inputGroupWidth = this.$('input + .input-group-addon, input + .input-group-btn', formGroups).outerWidth();
+            let adjustedPosition = defaultPosition + inputGroupWidth;
+
+            feedbackIcon.css('right', adjustedPosition);
+          });
+      }
+    });
+  }))
 });
