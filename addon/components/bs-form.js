@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import FormElement from 'ember-bootstrap/components/bs-form-element';
+import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 
-const { computed, get } = Ember;
+const { computed } = Ember;
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -69,7 +70,7 @@ const { computed, get } = Ember;
   @extends Ember.Component
   @public
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(ComponentParent, {
   tagName: 'form',
   classNameBindings: ['layoutClass'],
   attributeBindings: ['novalidate'],
@@ -154,32 +155,6 @@ export default Ember.Component.extend({
   novalidate: false,
 
   /**
-   * Returns an array of `Components.FormElement`s that are children of this form
-   * or the view passed as param.
-   *
-   * @method getChildFormElements
-   * @param {Object} [view=this] Instance of Ember.View
-   * @return {Array} Returns array of `Components.FormElement`s
-   * @private
-   */
-  getChildFormElements(view) {
-    const childFormElements = Ember.A();
-    const target = view || this;
-    const childViews = get(target, 'childViews');
-
-    childViews.forEach((childView) => {
-      if (childView instanceof FormElement) {
-        childFormElements.push(childView);
-      }
-      childFormElements.pushObjects(
-        this.getChildFormElements(childView)
-      );
-    });
-
-    return childFormElements;
-  },
-
-  /**
    * Validate hook which will return a promise that will either resolve if the model is valid
    * or reject if it's not. This should be overridden to add validation support.
    *
@@ -246,7 +221,7 @@ export default Ember.Component.extend({
       let validationPromise = this.validate(this.get('model'));
       if (validationPromise && validationPromise instanceof Ember.RSVP.Promise) {
         validationPromise.then((r) => this.sendAction('action', r), (err) => {
-          this.getChildFormElements().setEach('showValidation', true);
+          this.get('children').setEach('showValidation', true);
           return this.sendAction('invalid', err);
         });
       }

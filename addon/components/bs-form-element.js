@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import FormGroup from 'ember-bootstrap/components/bs-form-group';
 import Form from 'ember-bootstrap/components/bs-form';
+import ComponentChild from 'ember-bootstrap/mixins/component-child';
 
 const { computed, defineProperty } = Ember;
 
@@ -107,7 +108,7 @@ const nonTextFieldControlTypes = Ember.A([
  @extends Components.FormGroup
  @public
  */
-export default FormGroup.extend({
+export default FormGroup.extend(ComponentChild, {
   classNameBindings: ['disabled:is-disabled', 'required:is-required', 'isValidating'],
 
   /**
