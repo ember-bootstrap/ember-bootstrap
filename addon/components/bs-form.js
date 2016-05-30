@@ -155,6 +155,18 @@ export default Ember.Component.extend(ComponentParent, {
   novalidate: false,
 
   /**
+   * An array of `Components.FormElement`s that are children of this form.
+   *
+   * @property childFormElements
+   * @type Array
+   * @readonly
+   * @protected
+   */
+  childFormElements: computed.filter('children', function(view) {
+    return view instanceof FormElement;
+  }),
+
+  /**
    * Validate hook which will return a promise that will either resolve if the model is valid
    * or reject if it's not. This should be overridden to add validation support.
    *
@@ -221,7 +233,7 @@ export default Ember.Component.extend(ComponentParent, {
       let validationPromise = this.validate(this.get('model'));
       if (validationPromise && validationPromise instanceof Ember.RSVP.Promise) {
         validationPromise.then((r) => this.sendAction('action', r), (err) => {
-          this.get('children').setEach('showValidation', true);
+          this.get('childFormElements').setEach('showValidation', true);
           return this.sendAction('invalid', err);
         });
       }
