@@ -233,7 +233,13 @@ export default Ember.Component.extend(ComponentParent, {
       let validationPromise = this.validate(this.get('model'));
       if (validationPromise && validationPromise instanceof Ember.RSVP.Promise) {
         validationPromise.then((r) => this.sendAction('action', r), (err) => {
-          this.get('childFormElements').setEach('showValidation', true);
+          // childFormElements may contain destoryed objects due to https://github.com/kaliber5/ember-bootstrap/issues/99
+          // calling setEach on destroyed object throws therefore filter out all destroyed objects before
+          // since filterBy returns a base JS Array we have to convert it into Ember.Array
+          const activeChildFormElements = Ember.A(
+            this.get('childFormElements').filterBy('isDestroyed', false)
+          );
+          activeChildFormElements.setEach('showValidation', true);
           return this.sendAction('invalid', err);
         });
       }
