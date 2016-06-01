@@ -14,11 +14,16 @@ export default Ember.Mixin.create({
     let parent = this.nearestOfType(ComponentParentMixin);
     if (parent) {
       parent.registerChild(this);
+      this.set('_parent', parent);
     }
   }),
 
+  // stores the parent in didInsertElement hook as a work-a-round for
+  // https://github.com/emberjs/ember.js/issues/12080
+  _parent: null,
+
   _willDestroyElement: Ember.on('willDestroyElement', function() {
-    let parent = this.nearestOfType(ComponentParentMixin);
+    let parent = this.nearestOfType(ComponentParentMixin) || this.get('_parent');
     if (parent) {
       parent.removeChild(this);
     }
