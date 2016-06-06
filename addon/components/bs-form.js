@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import FormElement from 'ember-bootstrap/components/bs-form-element';
+import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 
 const { computed } = Ember;
 
@@ -69,7 +70,7 @@ const { computed } = Ember;
   @extends Ember.Component
   @public
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(ComponentParent, {
   tagName: 'form',
   classNameBindings: ['layoutClass'],
   attributeBindings: ['novalidate'],
@@ -161,7 +162,7 @@ export default Ember.Component.extend({
    * @readonly
    * @protected
    */
-  childFormElements: computed.filter('childViews', function(view) {
+  childFormElements: computed.filter('children', function(view) {
     return view instanceof FormElement;
   }),
 
