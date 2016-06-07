@@ -1,5 +1,5 @@
 {{#if hasLabel}}
-    <label class="control-label" for="{{formElementId}}">{{label}}</label>
+    <label class="control-label {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
 {{/if}}
 {{bs-textarea id=formElementId name=name value=value placeholder=placeholder autofocus=autofocus cols=cols rows=rows disabled=disabled required=required}}
 {{partial "components/form-element/feedback-icon"}}

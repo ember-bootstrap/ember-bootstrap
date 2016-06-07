@@ -114,11 +114,24 @@ export default FormGroup.extend(ComponentChild, {
   /**
    * Text to display within a `<label>` tag.
    *
+   * You should include a label for every form input cause otherwise screen readers
+   * will have trouble with your forms. Use `invisibleLabel` property if you want
+   * to hide them.
+   *
    * @property label
    * @type string
    * @public
    */
   label: null,
+
+  /**
+   * Controls label visibilty by adding 'sr-only' class.
+   *
+   * @property invisibleLabel
+   * @type boolean
+   * @public
+   */
+  invisibleLabel: false,
 
   /**
    * The type of the control widget.
