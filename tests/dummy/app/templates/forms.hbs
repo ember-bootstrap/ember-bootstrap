@@ -30,7 +30,15 @@
 {{/bs-form}}
 
 <h2>Custom Controls</h2>
-
+{{#bs-form formLayout=formLayout model=this action="submit"}}
+    {{#bs-form-element label="Email" placeholder="Email" property="email" as |value id|}}
+      <div class="input-group">
+        {{bs-input id=id value=value}}
+        <span class="input-group-addon">@example.com</span>
+      </div>
+    {{/bs-form-element}}
+    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+{{/bs-form}}
 
 
 <h2>Disabled Controls</h2>
