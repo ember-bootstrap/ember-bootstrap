@@ -1,5 +1,5 @@
 {{#if hasLabel}}
-    <label class="control-label {{horizontalLabelGridClass}}" for="{{formElementId}}">{{label}}</label>
+    <label class="control-label {{horizontalLabelGridClass}} {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
     <div class="{{horizontalInputGridClass}}">
         {{#if hasBlock}}
             {{yield value formElementId validation}}

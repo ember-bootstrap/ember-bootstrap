@@ -1,5 +1,5 @@
 {{#if hasLabel}}
-    <label class="control-label" for="{{formElementId}}">{{label}}</label>
+    <label class="control-label {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
 {{/if}}
 {{#if hasBlock}}
     {{yield value formElementId validation}}
