@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v.0.7.2</span></h1>
+    <h1>API Docs <span class="small">v0.7.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,8 +57,9 @@
 import Ember from &#x27;ember&#x27;;
 import FormGroup from &#x27;ember-bootstrap/components/bs-form-group&#x27;;
 import Form from &#x27;ember-bootstrap/components/bs-form&#x27;;
+import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
 
-const { computed, defineProperty } = Ember;
+const { computed, defineProperty, observer, on, run } = Ember;
 
 const nonTextFieldControlTypes = Ember.A([
   &#x27;checkbox&#x27;,
@@ -98,7 +99,8 @@ const nonTextFieldControlTypes = Ember.A([
  &#x60;&#x60;&#x60;
 
  By using this indirection in comparison to directly binding the &#x60;value&#x60; property, you get the benefit of automatic
- form validation, given that your &#x60;model&#x60; is implementing [ember-validations](https://github.com/dockyard/ember-validations).
+ form validation, given that your &#x60;model&#x60; has a supported means of validating itself.
+ See [Components.Form](Components.Form.html) for details on how to enable form validation.
 
  In the example above the &#x60;model&#x60; was our controller itself, so the control elements were bound to the appropriate
  properties of our controller. A controller implementing validations on those properties could look like this:
@@ -152,7 +154,7 @@ const nonTextFieldControlTypes = Ember.A([
 
  &#x60;&#x60;&#x60;hbs
  {{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
-   {{#bs-form-element label=&quot;Select-2&quot; property=&quot;gender&quot; as |value id|}}
+   {{#bs-form-element label=&quot;Select-2&quot; property=&quot;gender&quot; as |value id validationState|}}
      {{select-2 id=id content=genderChoices optionLabelPath=&quot;label&quot; value=value searchEnabled=false}}
    {{/bs-form-element}}
  {{/bs-form}}
@@ -163,17 +165,30 @@ const nonTextFieldControlTypes = Ember.A([
  @extends Components.FormGroup
  @public
  */
-export default FormGroup.extend({
+export default FormGroup.extend(ComponentChild, {
   classNameBindings: [&#x27;disabled:is-disabled&#x27;, &#x27;required:is-required&#x27;, &#x27;isValidating&#x27;],
 
   /**
    * Text to display within a &#x60;&lt;label&gt;&#x60; tag.
+   *
+   * You should include a label for every form input cause otherwise screen readers
+   * will have trouble with your forms. Use &#x60;invisibleLabel&#x60; property if you want
+   * to hide them.
    *
    * @property label
    * @type string
    * @public
    */
   label: null,
+
+  /**
+   * Controls label visibilty by adding &#x27;sr-only&#x27; class.
+   *
+   * @property invisibleLabel
+   * @type boolean
+   * @public
+   */
+  invisibleLabel: false,
 
   /**
    * The type of the control widget.
@@ -561,7 +576,51 @@ export default FormGroup.extend({
       defineProperty(this, &#x27;value&#x27;, computed.alias(&#x60;model.${this.get(&#x27;property&#x27;)}&#x60;));
       this.setupValidations();
     }
-  }
+  },
+
+  /*
+   * adjust feedback icon position
+   *
+   * Bootstrap documentation:
+   *  Manual positioning of feedback icons is required for [...] input groups
+   *  with an add-on on the right. [...] For input groups, adjust the right
+   *  value to an appropriate pixel value depending on the width of your addon.
+   */
+  adjustFeedbackIcons: on(&#x27;didInsertElement&#x27;, observer(&#x27;hasFeedback&#x27;, &#x27;formLayout&#x27;, function() {
+    run.scheduleOnce(&#x27;afterRender&#x27;, () =&gt; {
+      // validation state icons are only shown if form element has feedback
+      if (this.get(&#x27;hasFeedback&#x27;) &amp;&amp; !this.get(&#x27;isDestroying&#x27;)) {
+        // form group element has
+        this.$()
+          // an input-group
+          .has(&#x27;.input-group&#x27;)
+          // an addon or button on right side
+          .has(&#x27;.input-group input + .input-group-addon, .input-group input + .input-group-btn&#x27;)
+          // an icon showing validation state
+          .has(&#x27;.form-control-feedback&#x27;)
+          .each((i, formGroups) =&gt; {
+            // clear existing adjustment
+            this.$(&#x27;.form-control-feedback&#x27;).css(&#x27;right&#x27;, &#x27;&#x27;);
+            let feedbackIcon = this.$(&#x27;.form-control-feedback&#x27;, formGroups);
+            let defaultPositionString = feedbackIcon.css(&#x27;right&#x27;);
+            Ember.assert(
+              defaultPositionString.substr(-2) === &#x27;px&#x27;,
+              &#x27;.form-control-feedback css right units other than px are not supported&#x27;
+            );
+            let defaultPosition = parseInt(
+              defaultPositionString.substr(0, defaultPositionString.length - 2)
+            );
+            // Bootstrap documentation:
+            //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
+            // therefore we could rely on having only one input-group-addon or input-group-btn
+            let inputGroupWidth = this.$(&#x27;input + .input-group-addon, input + .input-group-btn&#x27;, formGroups).outerWidth();
+            let adjustedPosition = defaultPosition + inputGroupWidth;
+
+            feedbackIcon.css(&#x27;right&#x27;, adjustedPosition);
+          });
+      }
+    });
+  }))
 });
 
     </pre>

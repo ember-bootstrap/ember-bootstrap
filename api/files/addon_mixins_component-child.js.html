@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v.0.7.2</span></h1>
+    <h1>API Docs <span class="small">v0.7.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -70,11 +70,16 @@ export default Ember.Mixin.create({
     let parent = this.nearestOfType(ComponentParentMixin);
     if (parent) {
       parent.registerChild(this);
+      this.set(&#x27;_parent&#x27;, parent);
     }
   }),
 
+  // stores the parent in didInsertElement hook as a work-a-round for
+  // https://github.com/emberjs/ember.js/issues/12080
+  _parent: null,
+
   _willDestroyElement: Ember.on(&#x27;willDestroyElement&#x27;, function() {
-    let parent = this.nearestOfType(ComponentParentMixin);
+    let parent = this.nearestOfType(ComponentParentMixin) || this.get(&#x27;_parent&#x27;);
     if (parent) {
       parent.removeChild(this);
     }

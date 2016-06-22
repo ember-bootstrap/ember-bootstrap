@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v.0.7.2</span></h1>
+    <h1>API Docs <span class="small">v0.7.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -56,6 +56,7 @@
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import FormElement from &#x27;ember-bootstrap/components/bs-form-element&#x27;;
+import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
 
 const { computed } = Ember;
 
@@ -111,6 +112,7 @@ const { computed } = Ember;
 
   * [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)
   * [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)
+  * [ember-bootstrap-changeset-validations](https://github.com/kaliber5/ember-bootstrap-changeset-validations): adds support for [ember-changeset](https://github.com/poteto/ember-changeset)
 
   To add your own validation support, you have to:
 
@@ -125,7 +127,7 @@ const { computed } = Ember;
   @extends Ember.Component
   @public
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(ComponentParent, {
   tagName: &#x27;form&#x27;,
   classNameBindings: [&#x27;layoutClass&#x27;],
   attributeBindings: [&#x27;novalidate&#x27;],
@@ -217,7 +219,7 @@ export default Ember.Component.extend({
    * @readonly
    * @protected
    */
-  childFormElements: computed.filter(&#x27;childViews&#x27;, function(view) {
+  childFormElements: computed.filter(&#x27;children&#x27;, function(view) {
     return view instanceof FormElement;
   }),
 
