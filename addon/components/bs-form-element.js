@@ -43,7 +43,8 @@ const nonTextFieldControlTypes = Ember.A([
  ```
 
  By using this indirection in comparison to directly binding the `value` property, you get the benefit of automatic
- form validation, given that your `model` is implementing [ember-validations](https://github.com/dockyard/ember-validations).
+ form validation, given that your `model` has a supported means of validating itself.
+ See [Components.Form](Components.Form.html) for details on how to enable form validation.
 
  In the example above the `model` was our controller itself, so the control elements were bound to the appropriate
  properties of our controller. A controller implementing validations on those properties could look like this:
