@@ -3,6 +3,34 @@ import layout from '../templates/components/bs-nav';
 
 const { isPresent } = Ember;
 
+/**
+
+ 
+ 
+ 
+ ### Usage
+
+ ```hbs
+ {{#bs-nav type="pills"}}
+   {{#bs-nav-item}}
+      {{#link-to "foo"}}Foo{{/link-to}}
+   {{/bs-nav-item}}
+   {{#bs-nav-item}}
+     {{#link-to "bar"}}Bar{{/link-to}}
+   {{/bs-nav-item}}
+ {{/bs-nav}}
+ ```
+
+ ### Active items
+
+ Bootstrap expects to have the `active` class on the `<li>` element that should be the active link. 
+
+ @class Nav
+ @namespace Components
+ @extends Ember.Component
+ @public
+
+ */
 export default Ember.Component.extend({
   layout,
 
