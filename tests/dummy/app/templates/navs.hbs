@@ -1,4 +1,12 @@
-{{#bs-nav type="pills"}}
+<h1>Navs</h1>
+
+{{#bs-form model=this}}
+    {{bs-form-element controlType="select" label="Type" choices=typeChoices choiceLabelProperty="id" choiceValueProperty="id" property="type"}}
+    {{bs-form-element controlType="checkbox" label="Stacked" property="stacked"}}
+    {{bs-form-element controlType="checkbox" label="Justified" property="justified"}}
+{{/bs-form}}
+
+{{#bs-nav type=type.id justified=justified stacked=stacked}}
     {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
     {{#bs-nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/bs-nav-item}}
     {{#bs-nav-item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/bs-nav-item}}
@@ -10,6 +18,3 @@
     {{#bs-nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/bs-nav-item}}
 {{/bs-nav}}
 
-<div class="container">
-    {{outlet}}
-</div>

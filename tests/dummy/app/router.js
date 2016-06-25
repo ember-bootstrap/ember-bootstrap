@@ -14,6 +14,7 @@ Router.map(function() {
   this.route('collapse');
   this.route('modal');
   this.route('progress');
+  this.route('navs');
 });
 
 export default Router;
