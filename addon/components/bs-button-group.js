@@ -210,7 +210,7 @@ export default Ember.Component.extend(ComponentParent, SizeClass, {
           value = this.get('activeChildren').mapBy('value');
           break;
       }
-      if (value) {
+      if (typeof value !== 'undefined') {
         this.set('value', value);
       }
       // remember activeChildren, used as a replacement for a before observer as they will be deprecated in the future...
