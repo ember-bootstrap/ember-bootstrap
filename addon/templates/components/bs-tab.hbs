@@ -1,0 +1,9 @@
+{{#bs-nav type=type}}
+  {{#each childPanes as |pane|}}
+    {{#bs-nav-item active=(is-equal pane.elementId activeId)}}<a href="#{{pane.elementId}}" role="tab" {{action "select" pane.elementId}}>{{pane.title}}</a>{{/bs-nav-item}}
+  {{/each}}
+{{/bs-nav}}
+
+<div class="tab-content">
+  {{yield}}
+</div>
