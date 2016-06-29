@@ -51,6 +51,14 @@ export default Ember.Component.extend(ComponentParent, {
   activeId: computed.oneWay('childPanes.firstObject.elementId'),
 
   /**
+   * action is called when switching the active tab, with the new and previous pane id
+   *
+   * @event action
+   * @public
+   */
+  action: null,
+
+  /**
    * All `TabPane` child components
    *
    * @property childPanes
@@ -97,7 +105,9 @@ export default Ember.Component.extend(ComponentParent, {
 
   actions: {
     select(id) {
+      let previous = this.get('activeId');
       this.set('activeId', id);
+      this.sendAction('action', id, previous);
     }
   }
 });
