@@ -1,0 +1,24 @@
+{{#if customTabs}}
+  {{yield activeId (action "select")}}
+{{else}}
+  {{#bs-nav type=type}}
+    {{#each navItems as |item|}}
+      {{#if item.isGroup}}
+        {{#bs-dropdown tagName="li" class=(if (bs-contains item.childIds activeId) "active")}}
+          {{#bs-dropdown-toggle}}{{item.groupTitle}} <span class="caret"></span>{{/bs-dropdown-toggle}}
+          {{#bs-dropdown-menu}}
+            {{#each item.children as |subItem|}}
+              <li class="{{if (bs-eq activeId subItem.elementId) "active"}}"><a href="#{{subItem.elementId}}" role="tab" {{action "select" subItem.elementId}}>{{subItem.title}}</a></li>
+            {{/each}}
+          {{/bs-dropdown-menu}}
+        {{/bs-dropdown}}
+      {{else}}
+        {{#bs-nav-item active=(bs-eq item.elementId activeId)}}<a href="#{{item.elementId}}" role="tab" {{action "select" item.elementId}}>{{item.title}}</a>{{/bs-nav-item}}
+      {{/if}}
+    {{/each}}
+  {{/bs-nav}}
+
+  <div class="tab-content">
+    {{yield activeId (action "select")}}
+  </div>
+{{/if}}

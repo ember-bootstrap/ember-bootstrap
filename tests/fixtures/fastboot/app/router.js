@@ -8,12 +8,14 @@ let Router = Ember.Router.extend({
 Router.map(function() {
   this.route('dropdown');
   this.route('button');
-  this.route('form');
+  this.route('forms');
   this.route('alert');
   this.route('accordion');
   this.route('collapse');
   this.route('modal');
   this.route('progress');
+  this.route('navs');
+  this.route('tabs');
 });
 
 export default Router;
