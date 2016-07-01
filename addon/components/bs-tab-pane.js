@@ -3,23 +3,55 @@ import layout from '../templates/components/bs-tab-pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import Tab from './bs-tab';
 
-const { computed } = Ember;
+const { computed, observer } = Ember;
 
 export default Ember.Component.extend(ComponentChild, {
   layout,
-  classNameBindings: ['active'],
+  classNameBindings: ['active', 'fade', 'in'],
   classNames: ['tab-pane'],
   ariaRole: 'tabpanel',
 
   /**
    * True if this pane is active (visible)
    *
-   * @property active
+   * @property isActive
    * @type boolean
    * @protected
    */
-  active: computed('tab.activeId', 'elementId', function() {
+  isActive: computed('tab.activeId', 'elementId', function() {
     return this.get('tab.activeId') === this.get('elementId');
+  }),
+
+  /**
+   * Used to apply Bootstrap's "active" class
+   *
+   * @property active
+   * @type boolean
+   * @default false
+   * @protected
+   */
+  active: false,
+
+  /**
+   * Used to apply Bootstrap's "in" class
+   *
+   * @property in
+   * @type boolean
+   * @default false
+   * @protected
+   */
+  'in': false,
+
+  /**
+   * Use CSS transitions when showing/hiding the pane?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  usesTransition: computed('fade', function() {
+    return Ember.$.support.transition && this.get('fade');
   }),
 
   /**
@@ -55,5 +87,81 @@ export default Ember.Component.extend(ComponentChild, {
    * @default null
    * @public
    */
-  groupTitle: null
+  groupTitle: null,
+
+  /**
+   * Use fade animation when switching tabs.
+   *
+   * @property fade
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  fade: computed.readOnly('tab.fade'),
+
+  /**
+   * The duration of the fade out animation
+   *
+   * @property fadeDuration
+   * @type integer
+   * @readonly
+   * @protected
+   */
+  fadeDuration: computed.readOnly('tab.fadeDuration'),
+
+  /**
+   * Show the pane
+   *
+   * @method show
+   * @protected
+   */
+  show() {
+    if (this.get('usesTransition')) {
+      this.$()
+        .one('bsTransitionEnd', Ember.run.bind(this, function() {
+          if (!this.get('isDestroyed')) {
+            this.setProperties({
+              active: true,
+              in: true
+            });
+          }
+        }))
+        .emulateTransitionEnd(this.get('fadeDuration'));
+    } else {
+      this.set('active', true);
+    }
+  },
+
+  /**
+   * Hide the pane
+   *
+   * @method hide
+   * @protected
+   */
+  hide() {
+    if (this.get('usesTransition')) {
+      this.$()
+        .one('bsTransitionEnd', Ember.run.bind(this, function() {
+          if (!this.get('isDestroyed')) {
+            this.set('active', false);
+          }
+        }))
+        .emulateTransitionEnd(this.get('fadeDuration'));
+      this.set('in', false);
+    } else {
+      this.set('active', false);
+    }
+  },
+
+  _showHide: observer('isActive', function() {
+    this.get('isActive') ? this.show() : this.hide();
+  }),
+
+  init() {
+    this._super(...arguments);
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      this.set('active', this.get('isActive'));
+    });
+  }
+
 });

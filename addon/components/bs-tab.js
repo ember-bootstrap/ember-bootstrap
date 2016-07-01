@@ -51,6 +51,26 @@ export default Ember.Component.extend(ComponentParent, {
   activeId: computed.oneWay('childPanes.firstObject.elementId'),
 
   /**
+   * Set to false to disable the fade animation when switching tabs.
+   *
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  fade: true,
+
+  /**
+   * The duration of the fade animation
+   *
+   * @property fadeDuration
+   * @type integer
+   * @default 150
+   * @public
+   */
+  fadeDuration: 150,
+
+  /**
    * action is called when switching the active tab, with the new and previous pane id
    *
    * @event action

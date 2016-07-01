@@ -6,7 +6,7 @@ moduleForComponent('bs-modal', 'Integration | Component | bs-modal', {
   integration: true
 });
 
-let transitionTimeout = 500;
+const transitionTimeout = 500;
 
 test('Simple modal has header, footer and body', function(assert) {
   this.render(hbs`{{#bs-modal title="Simple Dialog"}}Hello world!{{/bs-modal}}<div id="ember-bootstrap-modal-container"></div>`);

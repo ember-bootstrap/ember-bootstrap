@@ -46,7 +46,7 @@ test('first tab is active by default', function(assert) {
 
 test('clicking tab activates it', function(assert) {
   this.render(hbs`
-    {{#bs-tab}}
+    {{#bs-tab fade=false}}
       {{#bs-tab-pane title="Tab 1"}}
         tabcontent 1
       {{/bs-tab-pane}}
@@ -65,11 +65,11 @@ test('clicking tab activates it', function(assert) {
 test('activeId activates tabs', function(assert) {
   this.set('paneId', 'pane1');
   this.render(hbs`
-    {{#bs-tab activeId=paneId}}
-      {{#bs-tab-pane id="pane1" title="Tab 1"}}
+    {{#bs-tab fade=false activeId=paneId}}
+      {{#bs-tab-pane elementId="pane1" title="Tab 1"}}
         tabcontent 1
       {{/bs-tab-pane}}
-      {{#bs-tab-pane id="pane2" title="Tab 2"}}
+      {{#bs-tab-pane elementId="pane2" title="Tab 2"}}
         tabcontent 2
       {{/bs-tab-pane}}
     {{/bs-tab}}
@@ -154,10 +154,10 @@ test('calls action after changing active tab', function(assert) {
 
   this.render(hbs`
     {{#bs-tab action=(action "testAction")}}
-      {{#bs-tab-pane id="pane1" title="Tab 1"}}
+      {{#bs-tab-pane elementId="pane1" title="Tab 1"}}
         tabcontent 1
       {{/bs-tab-pane}}
-      {{#bs-tab-pane id="pane2" title="Tab 2"}}
+      {{#bs-tab-pane elementId="pane2" title="Tab 2"}}
         tabcontent 2
       {{/bs-tab-pane}}
     {{/bs-tab}}
