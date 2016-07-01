@@ -84,6 +84,24 @@ describeForFastboot('Fastboot', function() {
 
   });
 
+  it('Navs render', function() {
 
+    return this.visit('/navs')
+      .then(function(response) {
+        expect(response.statusCode).to.equal(200);
+        expect(response.body).to.contain('id="nav"');
+      });
+
+  });
+
+  it('Tabs render', function() {
+
+    return this.visit('/tabs')
+      .then(function(response) {
+        expect(response.statusCode).to.equal(200);
+        expect(response.body).to.contain('id="tab"');
+      });
+
+  });
 
 });
