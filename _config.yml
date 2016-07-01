@@ -15,17 +15,12 @@ exclude:
   - "tmp/"
   - "node_modules/"
   - "bower_components/"
+  - "dist/"
+  - "docs/"
 permalink: :title
 defaults:
   -
     scope:
-      path: ""
       type: "pages"
     values:
       layout: "default"
-  -
-    scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
