@@ -5,6 +5,16 @@ import Tab from './bs-tab';
 
 const { computed, observer } = Ember;
 
+/**
+ The tab pane of a tab component.
+ See [Components.Tab](Components.Tab.html) for examples.
+
+ @class TabPane
+ @namespace Components
+ @extends Ember.Component
+ @uses Mixins.ComponentChild
+ @public
+ */
 export default Ember.Component.extend(ComponentChild, {
   layout,
   classNameBindings: ['active', 'fade', 'in'],
@@ -160,7 +170,9 @@ export default Ember.Component.extend(ComponentChild, {
   init() {
     this._super(...arguments);
     Ember.run.scheduleOnce('afterRender', this, function() {
+      // isActive comes from parent component, so only available after render...
       this.set('active', this.get('isActive'));
+      this.set('in', this.get('isActive') && this.get('fade'));
     });
   }
 

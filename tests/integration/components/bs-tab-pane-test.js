@@ -19,6 +19,7 @@ test('it has correct markup', function(assert) {
   assert.equal(this.$().text().trim(), 'template block text', 'Shows block content');
   assert.equal(this.$('div.tab-pane').length, 1, 'has tab-pane class');
   assert.equal(this.$('div.tab-pane').hasClass('active'), true, 'tab-pane has active class');
+  assert.equal(this.$('div.tab-pane').hasClass('in'), true, 'tab-pane has in class');
 });
 
 test('it has correct markup when switching active pane and fade=false', function(assert) {
