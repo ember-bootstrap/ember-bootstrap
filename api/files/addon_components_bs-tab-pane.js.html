@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/mixins/component-parent.js - ember-bootstrap</title>
+    <title>addon/components/bs-tab-pane.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,58 +49,189 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/component-parent.js <small>File</small></h1>
+    <h1>addon/components/bs-tab-pane.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import layout from &#x27;../templates/components/bs-tab-pane&#x27;;
+import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
+import Tab from &#x27;./bs-tab&#x27;;
+
+const { computed, observer } = Ember;
 
 /**
- * Mixin for components that act as a parent component in a parent-child relationship of components
- *
- * @class ComponentParent
- * @namespace Mixins
- * @public
+ The tab pane of a tab component.
+ See [Components.Tab](Components.Tab.html) for examples.
+
+ @class TabPane
+ @namespace Components
+ @extends Ember.Component
+ @uses Mixins.ComponentChild
+ @public
  */
-export default Ember.Mixin.create({
+export default Ember.Component.extend(ComponentChild, {
+  layout,
+  classNameBindings: [&#x27;active&#x27;, &#x27;fade&#x27;, &#x27;in&#x27;],
+  classNames: [&#x27;tab-pane&#x27;],
+  ariaRole: &#x27;tabpanel&#x27;,
 
   /**
-   * Array of registered child components
+   * True if this pane is active (visible)
    *
-   * @property children
-   * @type array
+   * @property isActive
+   * @type boolean
    * @protected
    */
-  children: null,
-
-  _onInit: Ember.on(&#x27;init&#x27;, function() {
-    this.set(&#x27;children&#x27;, Ember.A());
+  isActive: computed(&#x27;tab.activeId&#x27;, &#x27;elementId&#x27;, function() {
+    return this.get(&#x27;tab.activeId&#x27;) === this.get(&#x27;elementId&#x27;);
   }),
 
   /**
-   * Register a component as a child of this parent
+   * Used to apply Bootstrap&#x27;s &quot;active&quot; class
    *
-   * @method registerChild
-   * @param child
+   * @property active
+   * @type boolean
+   * @default false
+   * @protected
+   */
+  active: false,
+
+  /**
+   * Used to apply Bootstrap&#x27;s &quot;in&quot; class
+   *
+   * @property in
+   * @type boolean
+   * @default false
+   * @protected
+   */
+  &#x27;in&#x27;: false,
+
+  /**
+   * Use CSS transitions when showing/hiding the pane?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  usesTransition: computed(&#x27;fade&#x27;, function() {
+    return Ember.$.support.transition &amp;&amp; this.get(&#x27;fade&#x27;);
+  }),
+
+  /**
+   * The parent [Components.Tab](Components.Tab.html) instance.
+   *
+   * @property tab
+   * @type {Components.Tab}
+   * @protected
+   */
+  tab: computed(function() {
+    return this.nearestOfType(Tab);
+  }),
+
+  /**
+   * The title for this tab pane. This is used by the &#x60;bs-tab&#x60; component to automatically generate
+   * the tab navigation.
+   * See the [Components.Tab](Components.Tab.html) for examples.
+   *
+   * @property title
+   * @type string
+   * @default null
    * @public
    */
-  registerChild(child) {
-    Ember.run.schedule(&#x27;sync&#x27;, this, function() {
-      this.get(&#x27;children&#x27;).addObject(child);
-    });
+  title: null,
+
+  /**
+   * An optional group title used by the &#x60;bs-tab&#x60; component to group all panes with the same group title
+   * under a common drop down in the tab navigation.
+   * See the [Components.Tab](Components.Tab.html) for examples.
+   *
+   * @property groupTitle
+   * @type string
+   * @default null
+   * @public
+   */
+  groupTitle: null,
+
+  /**
+   * Use fade animation when switching tabs.
+   *
+   * @property fade
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  fade: computed.readOnly(&#x27;tab.fade&#x27;),
+
+  /**
+   * The duration of the fade out animation
+   *
+   * @property fadeDuration
+   * @type integer
+   * @readonly
+   * @protected
+   */
+  fadeDuration: computed.readOnly(&#x27;tab.fadeDuration&#x27;),
+
+  /**
+   * Show the pane
+   *
+   * @method show
+   * @protected
+   */
+  show() {
+    if (this.get(&#x27;usesTransition&#x27;)) {
+      this.$()
+        .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, function() {
+          if (!this.get(&#x27;isDestroyed&#x27;)) {
+            this.setProperties({
+              active: true,
+              in: true
+            });
+          }
+        }))
+        .emulateTransitionEnd(this.get(&#x27;fadeDuration&#x27;));
+    } else {
+      this.set(&#x27;active&#x27;, true);
+    }
   },
 
   /**
-   * Remove the child component from this parent component
+   * Hide the pane
    *
-   * @method removeChild
-   * @param child
-   * @public
+   * @method hide
+   * @protected
    */
-  removeChild(child) {
-    this.get(&#x27;children&#x27;).removeObject(child);
+  hide() {
+    if (this.get(&#x27;usesTransition&#x27;)) {
+      this.$()
+        .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, function() {
+          if (!this.get(&#x27;isDestroyed&#x27;)) {
+            this.set(&#x27;active&#x27;, false);
+          }
+        }))
+        .emulateTransitionEnd(this.get(&#x27;fadeDuration&#x27;));
+      this.set(&#x27;in&#x27;, false);
+    } else {
+      this.set(&#x27;active&#x27;, false);
+    }
+  },
+
+  _showHide: observer(&#x27;isActive&#x27;, function() {
+    this.get(&#x27;isActive&#x27;) ? this.show() : this.hide();
+  }),
+
+  init() {
+    this._super(...arguments);
+    Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, function() {
+      // isActive comes from parent component, so only available after render...
+      this.set(&#x27;active&#x27;, this.get(&#x27;isActive&#x27;));
+      this.set(&#x27;in&#x27;, this.get(&#x27;isActive&#x27;) &amp;&amp; this.get(&#x27;fade&#x27;));
+    });
   }
+
 });
 
     </pre>

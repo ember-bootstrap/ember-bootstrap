@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.7.3</span></h1>
+    <h1>API Docs <span class="small">v0.8.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -103,7 +103,7 @@ with an invalid validation, or when focusing out of invalid inputs</li>
 <p>See the <a href="Components.FormElement.html">Components.FormElement</a> API docs for further information.</p>
 <h3>Form validation</h3>
 <p>All version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.
-Instead support is added usually by addition Ember addons, for example:</p>
+Instead support is added usually by additional Ember addons, for example:</p>
 <ul>
 <li><a href="https://github.com/kaliber5/ember-bootstrap-validations">ember-bootstrap-validations</a>: adds support for <a href="https://github.com/DockYard/ember-validations">ember-validations</a></li>
 <li><a href="https://github.com/offirgolan/ember-bootstrap-cp-validations">ember-bootstrap-cp-validations</a>: adds support for <a href="https://github.com/offirgolan/ember-cp-validations">ember-cp-validations</a></li>
@@ -114,6 +114,9 @@ Instead support is added usually by addition Ember addons, for example:</p>
 <li>extend this component, setting <code>hasValidator</code> to true if validations are available (by means of a computed property for example), and implementing the <code>validate</code> method</li>
 <li>extend the <a href="Components.FormElement.html">Components.FormElement</a> component and implement the <code>setupValidations</code> hook or simply override the <code>errors</code> property to add the validation error messages to be displayed</li>
 </ul>
+<p>When validation fails, the appropriate Bootstrap markup is added automatically, i.e. the error classes are applied and
+the validation messages are shown for each form element. In case the validation library supports it, also warning messages
+are shown. See the <a href="Components.FormElement.html">Components.FormElement</a> documentation for further details.</p>
 <p>See the above mentioned addons for examples.</p>
 
 </div>
@@ -3643,7 +3646,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l213"><code>addon&#x2F;components&#x2F;bs-form.js:213</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l217"><code>addon&#x2F;components&#x2F;bs-form.js:217</code></a>
                             </p>
                     
                     
@@ -4100,7 +4103,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l158"><code>addon&#x2F;components&#x2F;bs-form.js:158</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l162"><code>addon&#x2F;components&#x2F;bs-form.js:162</code></a>
                             </p>
                     
                     
@@ -4394,7 +4397,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l108"><code>addon&#x2F;components&#x2F;bs-form.js:108</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l112"><code>addon&#x2F;components&#x2F;bs-form.js:112</code></a>
                             </p>
                     
                     
@@ -4544,7 +4547,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l117"><code>addon&#x2F;components&#x2F;bs-form.js:117</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l121"><code>addon&#x2F;components&#x2F;bs-form.js:121</code></a>
                             </p>
                     
                     
@@ -4574,7 +4577,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l127"><code>addon&#x2F;components&#x2F;bs-form.js:127</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l131"><code>addon&#x2F;components&#x2F;bs-form.js:131</code></a>
                             </p>
                     
                     
@@ -4768,7 +4771,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l80"><code>addon&#x2F;components&#x2F;bs-form.js:80</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l84"><code>addon&#x2F;components&#x2F;bs-form.js:84</code></a>
                             </p>
                     
                     
@@ -4831,7 +4834,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l94"><code>addon&#x2F;components&#x2F;bs-form.js:94</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l98"><code>addon&#x2F;components&#x2F;bs-form.js:98</code></a>
                             </p>
                     
                     
@@ -4867,7 +4870,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l148"><code>addon&#x2F;components&#x2F;bs-form.js:148</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l152"><code>addon&#x2F;components&#x2F;bs-form.js:152</code></a>
                             </p>
                     
                     
@@ -4929,7 +4932,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l138"><code>addon&#x2F;components&#x2F;bs-form.js:138</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l142"><code>addon&#x2F;components&#x2F;bs-form.js:142</code></a>
                             </p>
                     
                     
@@ -5107,7 +5110,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l197"><code>addon&#x2F;components&#x2F;bs-form.js:197</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l201"><code>addon&#x2F;components&#x2F;bs-form.js:201</code></a>
                             </p>
                     
                     
@@ -5150,7 +5153,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l190"><code>addon&#x2F;components&#x2F;bs-form.js:190</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l194"><code>addon&#x2F;components&#x2F;bs-form.js:194</code></a>
                             </p>
                     
                     
@@ -5206,7 +5209,7 @@ Instead support is added usually by addition Ember addons, for example:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l205"><code>addon&#x2F;components&#x2F;bs-form.js:205</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l209"><code>addon&#x2F;components&#x2F;bs-form.js:209</code></a>
                             </p>
                     
                     
@@ -5374,9 +5377,13 @@ Instead support is added usually by addition Ember addons, for example:</p>
                     <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
+                    <li><a href="../classes/Components.Tab.html">Components.Tab</a></li>
+                    <li><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>

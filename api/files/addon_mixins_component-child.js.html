@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.7.3</span></h1>
+    <h1>API Docs <span class="small">v0.8.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -66,18 +66,47 @@ import ComponentParentMixin from &#x27;ember-bootstrap/mixins/component-parent&#
  */
 export default Ember.Mixin.create({
 
-  _didInsertElement: Ember.on(&#x27;didInsertElement&#x27;, function() {
-    let parent = this.nearestOfType(ComponentParentMixin);
-    if (parent) {
-      parent.registerChild(this);
-      this.set(&#x27;_parent&#x27;, parent);
+  /**
+   * flag to check if component has already been rendered, for the &#x60;_willRender&#x60; event handler
+   * @property _didInsert
+   * @type boolean
+   * @private
+   */
+  _didInsert: false,
+
+  /**
+   * Register ourself as a child at the parent component
+   * We use the &#x60;willRender&#x60; event here to also support the fastboot environment, where there is no &#x60;didInsertElement&#x60;
+   *
+   * @method _willRender
+   * @private
+   */
+  _willRender: Ember.on(&#x27;willRender&#x27;, function() {
+    if (!this._didInsert) {
+      this._didInsert = true;
+      let parent = this.nearestOfType(ComponentParentMixin);
+      if (parent) {
+        parent.registerChild(this);
+        this.set(&#x27;_parent&#x27;, parent);
+      }
     }
   }),
 
-  // stores the parent in didInsertElement hook as a work-a-round for
-  // https://github.com/emberjs/ember.js/issues/12080
+  /**
+   * stores the parent in didInsertElement hook as a work-a-round for
+   * https://github.com/emberjs/ember.js/issues/12080
+   *
+   * @property _parent
+   * @private
+   */
   _parent: null,
 
+  /**
+   * Unregister form the parent component
+   *
+   * @method _willDestroyElement
+   * @private
+   */
   _willDestroyElement: Ember.on(&#x27;willDestroyElement&#x27;, function() {
     let parent = this.nearestOfType(ComponentParentMixin) || this.get(&#x27;_parent&#x27;);
     if (parent) {
@@ -115,9 +144,13 @@ export default Ember.Mixin.create({
                     <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
+                    <li><a href="../classes/Components.Tab.html">Components.Tab</a></li>
+                    <li><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>

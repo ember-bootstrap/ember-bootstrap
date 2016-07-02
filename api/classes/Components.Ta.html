@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.DropdownToggle - ember-bootstrap</title>
+    <title>Components.Ta - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,14 +49,14 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.DropdownToggle <small>Class</small></h1>
+    <h1>Components.Ta <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
         <div class="uses">
             Uses
             <ul class="inline commas">
-                    <li><a href="Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li><a href="Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
             </ul>
         </div>
 
@@ -65,7 +65,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-dropdown-toggle.js.html#l6"><code>addon&#x2F;components&#x2F;bs-dropdown-toggle.js:6</code></a>
+            Defined in: <a href="../files/addon_components_bs-tab.js.html#l8"><code>addon&#x2F;components&#x2F;bs-tab.js:8</code></a>
         </div>
 
 
@@ -73,9 +73,83 @@
 
 
 <div class="well well-small">
-    <p>Anchor element that triggers the parent dropdown to open.
-Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if you want a button instead of an anchor tag.</p>
-<p>See <a href="Components.Dropdown.html">Components.Dropdown</a> for examples.</p>
+    <p>Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,
+see <a href="http://getbootstrap.com/javascript/#tabs">http://getbootstrap.com/javascript/#tabs</a></p>
+<h3>Usage</h3>
+<p>Just nest any number of <a href="Components.TabPane.html">Components.TabPane</a> components that hold the tab content.
+The tab navigation is automatically generated from the tab panes' <code>title</code> property:</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-tab type=type.id}}
+  {{#bs-tab-pane title=&quot;Tab 1&quot;}}
+    &lt;p&gt;...&lt;/p&gt;
+  {{/bs-tab-pane}}
+  {{#bs-tab-pane title=&quot;Tab 2&quot;}}
+    &lt;p&gt;...&lt;/p&gt;
+  {{/bs-tab-pane}}
+{{/bs-tab}}
+</code></pre>
+<h3>Groupable (dropdown) tabs</h3>
+<p>Bootstrap's support for dropdown menus as tab navigation is mimiced by the use of the <code>groupTitle</code> property.
+All panes with the same <code>groupTitle</code> will be put inside the menu of a <a href="Components.Dropdown.html">Components.Dropdown</a>
+component with <code>groupTitle</code> being the dropdown's title:</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-tab type=type.id}}
+   {{#bs-tab-pane title=&quot;Tab 1&quot;}}
+     &lt;p&gt;...&lt;/p&gt;
+   {{/bs-tab-pane}}
+   {{#bs-tab-pane title=&quot;Tab 2&quot;}}
+     &lt;p&gt;...&lt;/p&gt;
+   {{/bs-tab-pane}}
+   {{#bs-tab-pane title=&quot;Tab 3&quot; groupTitle=&quot;Dropdown&quot;}}
+     &lt;p&gt;...&lt;/p&gt;
+   {{/bs-tab-pane}}
+   {{#bs-tab-pane title=&quot;Tab 4&quot; groupTitle=&quot;Dropdown&quot;}}
+     &lt;p&gt;...&lt;/p&gt;
+   {{/bs-tab-pane}}
+{{/bs-tab}}
+
+### Custom tabs
+
+When having the tab pane's <code>title</code> as the tab navigation title is not sufficient, for example because you want to
+integrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup
+your navigation by yourself.
+
+Set <code>customTabs</code> to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably
+using a [Components.Nav](Components.Nav.html) component. The tab component yields the <code>activeId</code> property as well as
+its <code>select</code> action, which you would have to use to manually set the <code>active</code> state of the navigation items and to
+trigger the selection of the different tab panes, using their ids:
+
+<code>&#x60;</code>hbs
+{{#bs-tab customTabs=true as |activeId select|}}
+   {{#bs-nav type=&quot;tabs&quot;}}
+       {{#bs-nav-item active=(bs-eq activeId &quot;pane1&quot;)}}&lt;a href=&quot;#pane1&quot; role=&quot;tab&quot; {{action select &quot;pane1&quot;}}&gt;Tab 1&lt;/a&gt;{{/bs-nav-item}}
+       {{#bs-nav-item active=(bs-eq activeId &quot;pane2&quot;)}}&lt;a href=&quot;#pane1&quot; role=&quot;tab&quot; {{action select &quot;pane2&quot;}}&gt;Tab 2 &lt;span class=&quot;badge&quot;&gt;{{badge}}&lt;/span&gt;&lt;/a&gt;{{/bs-nav-item}}
+   {{/bs-nav}}
+
+   &lt;div class=&quot;tab-content&quot;&gt;
+   {{#bs-tab-pane elementId=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
+       &lt;p&gt;...&lt;/p&gt;
+   {{/bs-tab-pane}}
+   {{#bs-tab-pane elementId=&quot;pane2&quot; title=&quot;Tab 2&quot;}}
+       &lt;p&gt;...&lt;/p&gt;
+   {{/bs-tab-pane}}
+   &lt;/div&gt;
+{{/bs-tab}}
+</code></pre>
+<p>Note that the <code>bs-eq</code> helper used in the example above is a private helper, which is not guaranteed to be available for
+the future. Better use the corresponding <code>eq</code> helper of the
+<a href="https://github.com/jmurphyau/ember-truth-helpers">ember-truth-helpers</a> addon for example!</p>
+<h3>Routable tabs</h3>
+<p>The tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and
+deactivated dynamically, just as the  original Bootstrap implementation.</p>
+<p>If you want to have the content delivered through individual sub routes, just use
+the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{outlet}}</code> that show the nested routes' content:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;div&gt;
+  {{#bs-nav type=&quot;tabs&quot;}}
+    {{#bs-nav-item}}{{#link-to &quot;tabs.index&quot;}}Tab 1{{/link-to}}{{/bs-nav-item}}
+    {{#bs-nav-item}}{{#link-to &quot;tabs.other&quot;}}Tab 2{{/link-to}}{{/bs-nav-item}}
+  {{/bs-nav}}
+  {{outlet}}
+&lt;/div&gt;
+</code></pre>
 
 </div>
 
@@ -279,12 +353,20 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                                 <a href="#" data-tabid="#methods" data-anchor="#method_readDOMAttr" data-tablink="readDOMAttr">readDOMAttr</a>
 
                             </li>
+                            <li class="index-item method public inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_registerChild" data-tablink="registerChild">registerChild</a>
+
+                            </li>
                             <li class="index-item method private inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_remove" data-tablink="remove">remove</a>
 
                             </li>
                             <li class="index-item method private inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_removeAllChildren" data-tablink="removeAllChildren">removeAllChildren</a>
+
+                            </li>
+                            <li class="index-item method public inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_removeChild" data-tablink="removeChild">removeChild</a>
 
                             </li>
                             <li class="index-item method private inherited">
@@ -362,16 +444,24 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
-                            <li class="index-item property protected inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_action" data-tablink="action">action</a>
-
-                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_actions" data-tablink="actions">actions</a>
 
                             </li>
-                            <li class="index-item property protected inherited inherited">
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_activeId" data-tablink="activeId">activeId</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_ariaRole" data-tablink="ariaRole">ariaRole</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_childPanes" data-tablink="childPanes">childPanes</a>
+
+                            </li>
+                            <li class="index-item property protected inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_children" data-tablink="children">children</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -386,6 +476,10 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                                 <a href="#" data-tabid="#properties" data-anchor="#property_concatenatedProperties" data-tablink="concatenatedProperties">concatenatedProperties</a>
 
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_customTabs" data-tablink="customTabs">customTabs</a>
+
+                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_element" data-tablink="element">element</a>
 
@@ -394,16 +488,20 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                                 <a href="#" data-tabid="#properties" data-anchor="#property_elementId" data-tablink="elementId">elementId</a>
 
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_fadeDuration" data-tablink="fadeDuration">fadeDuration</a>
+
+                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_hasBlock" data-tablink="hasBlock">hasBlock</a>
 
                             </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_hasBlockParams" data-tablink="hasBlockParams">hasBlockParams</a>
-
-                            </li>
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_href" data-tablink="href">href</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -430,6 +528,10 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                                 <a href="#" data-tabid="#properties" data-anchor="#property_layoutName" data-tablink="layoutName">layoutName</a>
 
                             </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_navItems" data-tablink="navItems">navItems</a>
+
+                            </li>
                             <li class="index-item property private inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_parentView" data-tablink="parentView">parentView</a>
 
@@ -452,6 +554,10 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
 
                                     <span class="label label-deprecated">deprecated</span>
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_type" data-tablink="type">type</a>
+
+                            </li>
                     </ul>
                 </div>
 
@@ -460,6 +566,10 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     <h3>Events</h3>
 
                     <ul class="index-list events extends">
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_action" data-tablink="action">action</a>
+
+                            </li>
                             <li class="index-item event public inherited">
                                 <a href="#" data-tabid="#events" data-anchor="#event_didInsertElement" data-tablink="didInsertElement">didInsertElement</a>
 
@@ -2654,6 +2764,52 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                             </div>
                     
                     </div>
+                    <div id="method_registerChild" class="method item public inherited">
+                        <h3 class="name">registerChild
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentParent.html#method_registerChild">Mixins.ComponentParent</a>:
+                            <a href="../files/addon_mixins_component-parent.js.html#l25"><code>addon&#x2F;mixins&#x2F;component-parent.js:25</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Register a component as a child of this parent
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">child</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
                     <div id="method_remove" class="method item private inherited">
                         <h3 class="name">remove
                         <span class="small">Ember.View</span>
@@ -2728,6 +2884,52 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                                         receiver
                                 </div>
                             </div>
+                    
+                    </div>
+                    <div id="method_removeChild" class="method item public inherited">
+                        <h3 class="name">removeChild
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentParent.html#method_removeChild">Mixins.ComponentParent</a>:
+                            <a href="../files/addon_mixins_component-parent.js.html#l38"><code>addon&#x2F;mixins&#x2F;component-parent.js:38</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Remove the child component from this parent component
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">child</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
                     
                     </div>
                     <div id="method_removeFromParent" class="method item private inherited">
@@ -3792,36 +3994,6 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_action" class="property item protected inherited">
-                        <h3 class="name">action
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.DropdownToggle.html#property_action">Mixins.DropdownToggle</a>:
-                            <a href="../files/addon_mixins_dropdown-toggle.js.html#l26"><code>addon&#x2F;mixins&#x2F;dropdown-toggle.js:26</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The default action is set to "toggleDropdown" on the parent {{#crossLink "Components.Dropdown"}}{{/crossLink}}
-                        </div>
-                    
-                            <p><strong>Default:</strong> toggleDropdown</p>
-                    
-                    
-                    </div>
                     <div id="property_actions" class="property item public inherited">
                         <h3 class="name">actions
                             <span class="small">Object</span>
@@ -3964,9 +4136,115 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                     </div>
-                    <div id="property_ariaRole" class="property item protected inherited">
-                        <h3 class="name">ariaRole
+                    <div id="property_activeId" class="property item public">
+                        <h3 class="name">activeId
                             <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-tab.js.html#l131"><code>addon&#x2F;components&#x2F;bs-tab.js:131</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The id (<code>elementId</code>) of the active <a href="Components.TabPane.html">TabPane</a>.
+                    By default the first tab will be active, but this can be changed by setting this property</p>
+                    <pre class="code prettyprint"><code class="language-hbs">{{#bs-tab activeId=&quot;pane2&quot;}}
+                      {{#bs-tab-pane id=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
+                         ...
+                      {{/bs-tab-pane}}
+                      {{#bs-tab-pane id=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
+                        ...
+                      {{/bs-tab-pane}}
+                    {{/bs-tab}}
+                    </code></pre>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_ariaRole" class="property item public inherited">
+                        <h3 class="name">ariaRole
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.AriaRoleSupport.html#property_ariaRole">Ember.AriaRoleSupport</a>:
+                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_mixins_aria_role_support.js.html#l16"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;mixins&#x2F;aria_role_support.js:16</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The WAI-ARIA role of the control represented by this view. For example, a
+                    button may have a role of type 'button', or a pane may have a role of
+                    type 'alertdialog'. This property is used by assistive software to help
+                    visually challenged users navigate rich web applications.
+                    
+                    The full list of valid WAI-ARIA roles is available at:
+                    [http://www.w3.org/TR/wai-aria/roles#roles_categorization](http://www.w3.org/TR/wai-aria/roles#roles_categorization)
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_childPanes" class="property item private">
+                        <h3 class="name">childPanes
+                            <span class="small">array</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-tab.js.html#l180"><code>addon&#x2F;components&#x2F;bs-tab.js:180</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>All <code>TabPane</code> child components</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_children" class="property item protected inherited">
+                        <h3 class="name">children
+                            <span class="small">array</span>
                         </h3>
                     
                     
@@ -3978,22 +4256,18 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="http://emberjs.com/api/classes/Ember.AriaRoleSupport.html#property_ariaRole">
-                                    Ember.AriaRoleSupport
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_mixins_dropdown-toggle.js.html#l14"><code>addon&#x2F;mixins&#x2F;dropdown-toggle.js:14</code></a>
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentParent.html#property_children">Mixins.ComponentParent</a>:
+                            <a href="../files/addon_mixins_component-parent.js.html#l12"><code>addon&#x2F;mixins&#x2F;component-parent.js:12</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
+                            Array of registered child components
                         </div>
                     
-                            <p><strong>Default:</strong> button</p>
                     
                     
                     </div>
@@ -4182,6 +4456,38 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                     </div>
+                    <div id="property_customTabs" class="property item public">
+                        <h3 class="name">customTabs
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-tab.js.html#l120"><code>addon&#x2F;components&#x2F;bs-tab.js:120</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>By default the tabs will be automatically generated using the available <a href="Components.TabPane.html">TabPane</a>
+                    components. If set to true, you can deactivate this and setup the tabs manually. See the example above.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
                     <div id="property_element" class="property item public inherited">
                         <h3 class="name">element
                             <span class="small">DOMElement</span>
@@ -4258,6 +4564,68 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     <code>&#x60;</code>
                         </div>
                     
+                    
+                    
+                    </div>
+                    <div id="property_fade" class="property item public">
+                        <h3 class="name">fade
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-tab.js.html#l152"><code>addon&#x2F;components&#x2F;bs-tab.js:152</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Set to false to disable the fade animation when switching tabs.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_fadeDuration" class="property item public">
+                        <h3 class="name">fadeDuration
+                            <span class="small">integer</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-tab.js.html#l162"><code>addon&#x2F;components&#x2F;bs-tab.js:162</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The duration of the fade animation</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 150</p>
                     
                     
                     </div>
@@ -4376,36 +4744,6 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                       {{yield this}}
                     {{/if}}
                     <code>&#x60;</code>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_href" class="property item protected">
-                        <h3 class="name">href
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-dropdown-toggle.js.html#l32"><code>addon&#x2F;components&#x2F;bs-dropdown-toggle.js:32</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Computed property to generate a <code>href=&quot;#&quot;</code> attribute when <code>tagName</code> is &quot;a&quot;.</p>
-                    
                         </div>
                     
                     
@@ -4606,6 +4944,36 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                     </div>
+                    <div id="property_navItems" class="property item private">
+                        <h3 class="name">navItems
+                            <span class="small">array</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-tab.js.html#l192"><code>addon&#x2F;components&#x2F;bs-tab.js:192</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Array of objects that define the tab structure</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="property_parentView" class="property item private inherited">
                         <h3 class="name">parentView
                             <span class="small">Ember.View</span>
@@ -4637,9 +5005,9 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                     </div>
-                    <div id="property_tagName" class="property item public">
+                    <div id="property_tagName" class="property item public inherited">
                         <h3 class="name">tagName
-                            <span class="small">string</span>
+                            <span class="small">String</span>
                         </h3>
                     
                     
@@ -4651,23 +5019,23 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="http://emberjs.com/api/classes/Ember.View.html#property_tagName">
-                                    Ember.View
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_components_bs-dropdown-toggle.js.html#l20"><code>addon&#x2F;components&#x2F;bs-dropdown-toggle.js:20</code></a>
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.View.html#property_tagName">Ember.View</a>:
+                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_view.js.html#l1237"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;view.js:1237</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Defaults to a <code>&lt;a&gt;</code> tag. Change for other types of dropdown toggles.</p>
+                            Tag name for the view's outer element. The tag name is only used when an
+                    element is first created. If you change the <code>tagName</code> for an element, you
+                    must destroy and recreate the view element.
                     
+                    By default, the render buffer will use a <code>&lt;div&gt;</code> tag for views.
                         </div>
                     
-                            <p><strong>Default:</strong> a</p>
+                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
@@ -4782,12 +5150,69 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                     </div>
+                    <div id="property_type" class="property item public">
+                        <h3 class="name">type
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-tab.js.html#l110"><code>addon&#x2F;components&#x2F;bs-tab.js:110</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Type of nav, either &quot;pills&quot; or &quot;tabs&quot;</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &quot;tabs&quot;</p>
+                    
+                    
+                    </div>
             </div>
 
 
             <div id="events" class="tab-pane">
                 <h2 class="off-left">Events</h2>
 
+                    <div id="event_action" class="events item public">
+                        <h3 class="name"><code>action</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-tab.js.html#l172"><code>addon&#x2F;components&#x2F;bs-tab.js:172</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>action is called when switching the active tab, with the new and previous pane id</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="event_didInsertElement" class="events item public inherited">
                         <h3 class="name"><code>didInsertElement</code></h3>
                         <span class="type"></span>
@@ -4960,7 +5385,7 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
-                    <li><a href="../classes/Components.Tab.html">Components.Tab</a></li>
+                    <li><a href="../classes/Components.Ta.html">Components.Ta</a></li>
                     <li><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>

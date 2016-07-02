@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.DropdownToggle - ember-bootstrap</title>
+    <title>Components.NavItem - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,14 +49,14 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.DropdownToggle <small>Class</small></h1>
+    <h1>Components.NavItem <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
         <div class="uses">
             Uses
             <ul class="inline commas">
-                    <li><a href="Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li><a href="Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
             </ul>
         </div>
 
@@ -65,7 +65,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-dropdown-toggle.js.html#l6"><code>addon&#x2F;components&#x2F;bs-dropdown-toggle.js:6</code></a>
+            Defined in: <a href="../files/addon_components_bs-nav-item.js.html#l7"><code>addon&#x2F;components&#x2F;bs-nav-item.js:7</code></a>
         </div>
 
 
@@ -73,9 +73,7 @@
 
 
 <div class="well well-small">
-    <p>Anchor element that triggers the parent dropdown to open.
-Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if you want a button instead of an anchor tag.</p>
-<p>See <a href="Components.Dropdown.html">Components.Dropdown</a> for examples.</p>
+    <p>Component for each item within a <a href="Components.Nav.html">Components.Nav</a> component. Have a look there for examples.</p>
 
 </div>
 
@@ -279,12 +277,20 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                                 <a href="#" data-tabid="#methods" data-anchor="#method_readDOMAttr" data-tablink="readDOMAttr">readDOMAttr</a>
 
                             </li>
+                            <li class="index-item method public inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_registerChild" data-tablink="registerChild">registerChild</a>
+
+                            </li>
                             <li class="index-item method private inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_remove" data-tablink="remove">remove</a>
 
                             </li>
                             <li class="index-item method private inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_removeAllChildren" data-tablink="removeAllChildren">removeAllChildren</a>
+
+                            </li>
+                            <li class="index-item method public inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_removeChild" data-tablink="removeChild">removeChild</a>
 
                             </li>
                             <li class="index-item method private inherited">
@@ -362,16 +368,24 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
-                            <li class="index-item property protected inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_action" data-tablink="action">action</a>
-
-                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_actions" data-tablink="actions">actions</a>
 
                             </li>
-                            <li class="index-item property protected inherited inherited">
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_active" data-tablink="active">active</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_ariaRole" data-tablink="ariaRole">ariaRole</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_childLinks" data-tablink="childLinks">childLinks</a>
+
+                            </li>
+                            <li class="index-item property protected inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_children" data-tablink="children">children</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -384,6 +398,10 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                             </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_concatenatedProperties" data-tablink="concatenatedProperties">concatenatedProperties</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_disabled" data-tablink="disabled">disabled</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -400,10 +418,6 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                             </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_hasBlockParams" data-tablink="hasBlockParams">hasBlockParams</a>
-
-                            </li>
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_href" data-tablink="href">href</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -2654,6 +2668,52 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                             </div>
                     
                     </div>
+                    <div id="method_registerChild" class="method item public inherited">
+                        <h3 class="name">registerChild
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentParent.html#method_registerChild">Mixins.ComponentParent</a>:
+                            <a href="../files/addon_mixins_component-parent.js.html#l25"><code>addon&#x2F;mixins&#x2F;component-parent.js:25</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Register a component as a child of this parent
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">child</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
                     <div id="method_remove" class="method item private inherited">
                         <h3 class="name">remove
                         <span class="small">Ember.View</span>
@@ -2728,6 +2788,52 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                                         receiver
                                 </div>
                             </div>
+                    
+                    </div>
+                    <div id="method_removeChild" class="method item public inherited">
+                        <h3 class="name">removeChild
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentParent.html#method_removeChild">Mixins.ComponentParent</a>:
+                            <a href="../files/addon_mixins_component-parent.js.html#l38"><code>addon&#x2F;mixins&#x2F;component-parent.js:38</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Remove the child component from this parent component
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">child</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
                     
                     </div>
                     <div id="method_removeFromParent" class="method item private inherited">
@@ -3792,36 +3898,6 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_action" class="property item protected inherited">
-                        <h3 class="name">action
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.DropdownToggle.html#property_action">Mixins.DropdownToggle</a>:
-                            <a href="../files/addon_mixins_dropdown-toggle.js.html#l26"><code>addon&#x2F;mixins&#x2F;dropdown-toggle.js:26</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The default action is set to "toggleDropdown" on the parent {{#crossLink "Components.Dropdown"}}{{/crossLink}}
-                        </div>
-                    
-                            <p><strong>Default:</strong> toggleDropdown</p>
-                    
-                    
-                    </div>
                     <div id="property_actions" class="property item public inherited">
                         <h3 class="name">actions
                             <span class="small">Object</span>
@@ -3964,9 +4040,108 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                     </div>
-                    <div id="property_ariaRole" class="property item protected inherited">
+                    <div id="property_active" class="property item public">
+                        <h3 class="name">active
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-nav-item.js.html#l34"><code>addon&#x2F;components&#x2F;bs-nav-item.js:34</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Render the nav item as active.
+                    By default it will look at any nested <code>link-to</code> components and make itself active if there is an active link
+                    (i.e. the link points to the current route).
+                    See the <a href="http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_handling-current-route">link-to API</a></p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_ariaRole" class="property item public inherited">
                         <h3 class="name">ariaRole
-                            <span class="small">string</span>
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.AriaRoleSupport.html#property_ariaRole">Ember.AriaRoleSupport</a>:
+                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_mixins_aria_role_support.js.html#l16"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;mixins&#x2F;aria_role_support.js:16</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The WAI-ARIA role of the control represented by this view. For example, a
+                    button may have a role of type 'button', or a pane may have a role of
+                    type 'alertdialog'. This property is used by assistive software to help
+                    visually challenged users navigate rich web applications.
+                    
+                    The full list of valid WAI-ARIA roles is available at:
+                    [http://www.w3.org/TR/wai-aria/roles#roles_categorization](http://www.w3.org/TR/wai-aria/roles#roles_categorization)
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_childLinks" class="property item private">
+                        <h3 class="name">childLinks
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-nav-item.js.html#l46"><code>addon&#x2F;components&#x2F;bs-nav-item.js:46</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Collection of all <code>Ember.LinkComponent</code>s that are children</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_children" class="property item protected inherited">
+                        <h3 class="name">children
+                            <span class="small">array</span>
                         </h3>
                     
                     
@@ -3978,22 +4153,18 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="http://emberjs.com/api/classes/Ember.AriaRoleSupport.html#property_ariaRole">
-                                    Ember.AriaRoleSupport
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_mixins_dropdown-toggle.js.html#l14"><code>addon&#x2F;mixins&#x2F;dropdown-toggle.js:14</code></a>
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentParent.html#property_children">Mixins.ComponentParent</a>:
+                            <a href="../files/addon_mixins_component-parent.js.html#l12"><code>addon&#x2F;mixins&#x2F;component-parent.js:12</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
+                            Array of registered child components
                         </div>
                     
-                            <p><strong>Default:</strong> button</p>
                     
                     
                     </div>
@@ -4179,6 +4350,38 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_disabled" class="property item public">
+                        <h3 class="name">disabled
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-nav-item.js.html#l23"><code>addon&#x2F;components&#x2F;bs-nav-item.js:23</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Render the nav item as disabled (see <a href="http://getbootstrap.com/components/#nav-disabled-links">Bootstrap docs</a>).
+                    By default it will look at any nested <code>link-to</code> components and make itself disabled if there is a disabled link.
+                    See the <a href="http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_disabling-the-code-link-to-code-component">link-to API</a></p>
+                    
+                        </div>
+                    
                     
                     
                     </div>
@@ -4376,36 +4579,6 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                       {{yield this}}
                     {{/if}}
                     <code>&#x60;</code>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_href" class="property item protected">
-                        <h3 class="name">href
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-dropdown-toggle.js.html#l32"><code>addon&#x2F;components&#x2F;bs-dropdown-toggle.js:32</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Computed property to generate a <code>href=&quot;#&quot;</code> attribute when <code>tagName</code> is &quot;a&quot;.</p>
-                    
                         </div>
                     
                     
@@ -4637,9 +4810,9 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                     </div>
-                    <div id="property_tagName" class="property item public">
+                    <div id="property_tagName" class="property item public inherited">
                         <h3 class="name">tagName
-                            <span class="small">string</span>
+                            <span class="small">String</span>
                         </h3>
                     
                     
@@ -4651,23 +4824,23 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="http://emberjs.com/api/classes/Ember.View.html#property_tagName">
-                                    Ember.View
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_components_bs-dropdown-toggle.js.html#l20"><code>addon&#x2F;components&#x2F;bs-dropdown-toggle.js:20</code></a>
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.View.html#property_tagName">Ember.View</a>:
+                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_view.js.html#l1237"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;view.js:1237</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Defaults to a <code>&lt;a&gt;</code> tag. Change for other types of dropdown toggles.</p>
+                            Tag name for the view's outer element. The tag name is only used when an
+                    element is first created. If you change the <code>tagName</code> for an element, you
+                    must destroy and recreate the view element.
                     
+                    By default, the render buffer will use a <code>&lt;div&gt;</code> tag for views.
                         </div>
                     
-                            <p><strong>Default:</strong> a</p>
+                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
