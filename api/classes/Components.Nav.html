@@ -88,17 +88,18 @@ navigation item. To achieve that just use the <code>link-to</code> helper as usu
 it points to the current route, the <code>bs-nav-item</code> component will detect that and apply the <code>active</code> class
 automatically. The same applies for the <code>disabled</code> state.</p>
 <h3>Dropdowns</h3>
-<p>Use the <a href="Components.Dropdown.html">Components.Dropdown</a> component with a <code>tagName</code> of &quot;li&quot; to integrate a dropdown into your nav:
-{{#bs-nav type=&quot;pills&quot;}}
-{{#bs-nav-item}}{{#link-to &quot;index&quot;}}Home{{/link-to}}{{/bs-nav-item}}
-{{#bs-dropdown tagName=&quot;li&quot;}}
-{{#bs-dropdown-toggle}}Dropdown <span class="caret"></span>{{/bs-dropdown-toggle}}
-{{#bs-dropdown-menu}}
-<li>{{#link-to &quot;foo&quot;}}Foo{{/link-to}}</li>
-<li>{{#link-to &quot;bar&quot;}}Bar{{/link-to}}</li>
-{{/bs-dropdown-menu}}
-{{/bs-dropdown}}
-{{/bs-nav}}</p>
+<p>Use the <a href="Components.Dropdown.html">Components.Dropdown</a> component with a <code>tagName</code> of &quot;li&quot; to integrate a dropdown into your nav:</p>
+<pre class="code prettyprint"><code class="language-hbs"> {{#bs-nav type=&quot;pills&quot;}}
+   {{#bs-nav-item}}{{#link-to &quot;index&quot;}}Home{{/link-to}}{{/bs-nav-item}}
+   {{#bs-dropdown tagName=&quot;li&quot;}}
+     {{#bs-dropdown-toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/bs-dropdown-toggle}}
+     {{#bs-dropdown-menu}}
+       &lt;li&gt;{{#link-to &quot;foo&quot;}}Foo{{/link-to}}&lt;/li&gt;
+       &lt;li&gt;{{#link-to &quot;bar&quot;}}Bar{{/link-to}}&lt;/li&gt;
+     {{/bs-dropdown-menu}}
+   {{/bs-dropdown}}
+ {{/bs-nav}}
+</code></pre>
 
 </div>
 
@@ -4522,7 +4523,7 @@ automatically. The same applies for the <code>disabled</code> state.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-nav.js.html#l83"><code>addon&#x2F;components&#x2F;bs-nav.js:83</code></a>
+                            <a href="../files/addon_components_bs-nav.js.html#l85"><code>addon&#x2F;components&#x2F;bs-nav.js:85</code></a>
                             </p>
                     
                     
@@ -4654,7 +4655,7 @@ automatically. The same applies for the <code>disabled</code> state.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-nav.js.html#l93"><code>addon&#x2F;components&#x2F;bs-nav.js:93</code></a>
+                            <a href="../files/addon_components_bs-nav.js.html#l95"><code>addon&#x2F;components&#x2F;bs-nav.js:95</code></a>
                             </p>
                     
                     
@@ -4830,7 +4831,7 @@ automatically. The same applies for the <code>disabled</code> state.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-nav.js.html#l73"><code>addon&#x2F;components&#x2F;bs-nav.js:73</code></a>
+                            <a href="../files/addon_components_bs-nav.js.html#l75"><code>addon&#x2F;components&#x2F;bs-nav.js:75</code></a>
                             </p>
                     
                     
@@ -5023,7 +5024,7 @@ automatically. The same applies for the <code>disabled</code> state.</p>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
                     <li><a href="../classes/Components.Select.html">Components.Select</a></li>
-                    <li><a href="../classes/Components.Ta.html">Components.Ta</a></li>
+                    <li><a href="../classes/Components.Tab.html">Components.Tab</a></li>
                     <li><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
                     <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>

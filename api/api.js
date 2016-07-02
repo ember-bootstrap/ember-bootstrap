@@ -25,7 +25,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.Progress",
         "Components.ProgressBar",
         "Components.Select",
-        "Components.Ta",
+        "Components.Tab",
         "Components.TabPane",
         "Components.Textarea",
         "Mixins.ComponentChild",

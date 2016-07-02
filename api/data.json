@@ -292,7 +292,7 @@
             "name": "addon/components/bs-tab.js",
             "modules": {},
             "classes": {
-                "Components.Ta": 1
+                "Components.Tab": 1
             },
             "fors": {},
             "namespaces": {
@@ -744,7 +744,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-nav.js",
             "line": 6,
-            "description": "Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)\n \n ### Usage\nUse in combination with the [Components.NavItem](Components.NavItem.html) component:\n```hbs\n {{#bs-nav type=\"pills\"}}\n   {{#bs-nav-item}}\n      {{#link-to \"foo\"}}Foo{{/link-to}}\n   {{/bs-nav-item}}\n   {{#bs-nav-item}}\n     {{#link-to \"bar\"}}Bar{{/link-to}}\n   {{/bs-nav-item}}\n {{/bs-nav}}\n ```\n### Nav styles\nThe component supports the default bootstrap nav styling options \"pills\" and \"tabs\" through the `type`\n property, as well as the `justified` and `stacked` properties.\n### Active items\nBootstrap expects to have the `active` class on the `<li>` element that should be the active (highlighted)\n navigation item. To achieve that just use the `link-to` helper as usual. If the link is active, i.e\n it points to the current route, the `bs-nav-item` component will detect that and apply the `active` class\n automatically. The same applies for the `disabled` state.\n### Dropdowns\nUse the [Components.Dropdown](Components.Dropdown.html) component with a `tagName` of \"li\" to integrate a dropdown into your nav:\n{{#bs-nav type=\"pills\"}}\n   {{#bs-nav-item}}{{#link-to \"index\"}}Home{{/link-to}}{{/bs-nav-item}}\n   {{#bs-dropdown tagName=\"li\"}}\n     {{#bs-dropdown-toggle}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-toggle}}\n     {{#bs-dropdown-menu}}\n       <li>{{#link-to \"foo\"}}Foo{{/link-to}}</li>\n       <li>{{#link-to \"bar\"}}Bar{{/link-to}}</li>\n     {{/bs-dropdown-menu}}\n   {{/bs-dropdown}}\n {{/bs-nav}}",
+            "description": "Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)\n \n ### Usage\nUse in combination with the [Components.NavItem](Components.NavItem.html) component:\n```hbs\n {{#bs-nav type=\"pills\"}}\n   {{#bs-nav-item}}\n      {{#link-to \"foo\"}}Foo{{/link-to}}\n   {{/bs-nav-item}}\n   {{#bs-nav-item}}\n     {{#link-to \"bar\"}}Bar{{/link-to}}\n   {{/bs-nav-item}}\n {{/bs-nav}}\n ```\n### Nav styles\nThe component supports the default bootstrap nav styling options \"pills\" and \"tabs\" through the `type`\n property, as well as the `justified` and `stacked` properties.\n### Active items\nBootstrap expects to have the `active` class on the `<li>` element that should be the active (highlighted)\n navigation item. To achieve that just use the `link-to` helper as usual. If the link is active, i.e\n it points to the current route, the `bs-nav-item` component will detect that and apply the `active` class\n automatically. The same applies for the `disabled` state.\n### Dropdowns\nUse the [Components.Dropdown](Components.Dropdown.html) component with a `tagName` of \"li\" to integrate a dropdown into your nav:\n```hbs\n {{#bs-nav type=\"pills\"}}\n   {{#bs-nav-item}}{{#link-to \"index\"}}Home{{/link-to}}{{/bs-nav-item}}\n   {{#bs-dropdown tagName=\"li\"}}\n     {{#bs-dropdown-toggle}}Dropdown <span class=\"caret\"></span>{{/bs-dropdown-toggle}}\n     {{#bs-dropdown-menu}}\n       <li>{{#link-to \"foo\"}}Foo{{/link-to}}</li>\n       <li>{{#link-to \"bar\"}}Bar{{/link-to}}</li>\n     {{/bs-dropdown-menu}}\n   {{/bs-dropdown}}\n {{/bs-nav}}\n ```",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -820,9 +820,9 @@
             "access": "public",
             "tagname": ""
         },
-        "Components.Ta": {
-            "name": "Components.Ta",
-            "shortname": "Components.Ta",
+        "Components.Tab": {
+            "name": "Components.Tab",
+            "shortname": "Components.Tab",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -831,7 +831,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-tab.js",
             "line": 8,
-            "description": "Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,\nsee http://getbootstrap.com/javascript/#tabs\n\n### Usage\n\nJust nest any number of [Components.TabPane](Components.TabPane.html) components that hold the tab content.\nThe tab navigation is automatically generated from the tab panes' `title` property:\n\n```hbs\n{{#bs-tab type=type.id}}\n  {{#bs-tab-pane title=\"Tab 1\"}}\n    <p>...</p>\n  {{/bs-tab-pane}}\n  {{#bs-tab-pane title=\"Tab 2\"}}\n    <p>...</p>\n  {{/bs-tab-pane}}\n{{/bs-tab}}\n```\n\n### Groupable (dropdown) tabs\n\nBootstrap's support for dropdown menus as tab navigation is mimiced by the use of the `groupTitle` property.\nAll panes with the same `groupTitle` will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)\ncomponent with `groupTitle` being the dropdown's title:\n\n```hbs\n{{#bs-tab type=type.id}}\n   {{#bs-tab-pane title=\"Tab 1\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane title=\"Tab 2\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane title=\"Tab 3\" groupTitle=\"Dropdown\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane title=\"Tab 4\" groupTitle=\"Dropdown\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n{{/bs-tab}}\n\n### Custom tabs\n\nWhen having the tab pane's `title` as the tab navigation title is not sufficient, for example because you want to\nintegrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup\nyour navigation by yourself.\n\nSet `customTabs` to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably\nusing a [Components.Nav](Components.Nav.html) component. The tab component yields the `activeId` property as well as\nits `select` action, which you would have to use to manually set the `active` state of the navigation items and to\ntrigger the selection of the different tab panes, using their ids:\n\n```hbs\n{{#bs-tab customTabs=true as |activeId select|}}\n   {{#bs-nav type=\"tabs\"}}\n       {{#bs-nav-item active=(bs-eq activeId \"pane1\")}}<a href=\"#pane1\" role=\"tab\" {{action select \"pane1\"}}>Tab 1</a>{{/bs-nav-item}}\n       {{#bs-nav-item active=(bs-eq activeId \"pane2\")}}<a href=\"#pane1\" role=\"tab\" {{action select \"pane2\"}}>Tab 2 <span class=\"badge\">{{badge}}</span></a>{{/bs-nav-item}}\n   {{/bs-nav}}\n\n   <div class=\"tab-content\">\n   {{#bs-tab-pane elementId=\"pane1\" title=\"Tab 1\"}}\n       <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane elementId=\"pane2\" title=\"Tab 2\"}}\n       <p>...</p>\n   {{/bs-tab-pane}}\n   </div>\n{{/bs-tab}}\n```\n\nNote that the `bs-eq` helper used in the example above is a private helper, which is not guaranteed to be available for\nthe future. Better use the corresponding `eq` helper of the\n[ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!\n\n### Routable tabs\n\nThe tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and\ndeactivated dynamically, just as the  original Bootstrap implementation.\n\nIf you want to have the content delivered through individual sub routes, just use\nthe [Components.Nav](Components.Nav.html) component and an `{{outlet}}` that show the nested routes' content:\n\n```hbs\n<div>\n  {{#bs-nav type=\"tabs\"}}\n    {{#bs-nav-item}}{{#link-to \"tabs.index\"}}Tab 1{{/link-to}}{{/bs-nav-item}}\n    {{#bs-nav-item}}{{#link-to \"tabs.other\"}}Tab 2{{/link-to}}{{/bs-nav-item}}\n  {{/bs-nav}}\n  {{outlet}}\n</div>\n```",
+            "description": "Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,\nsee http://getbootstrap.com/javascript/#tabs\n\n### Usage\n\nJust nest any number of [Components.TabPane](Components.TabPane.html) components that hold the tab content.\nThe tab navigation is automatically generated from the tab panes' `title` property:\n\n```hbs\n{{#bs-tab type=type.id}}\n  {{#bs-tab-pane title=\"Tab 1\"}}\n    <p>...</p>\n  {{/bs-tab-pane}}\n  {{#bs-tab-pane title=\"Tab 2\"}}\n    <p>...</p>\n  {{/bs-tab-pane}}\n{{/bs-tab}}\n```\n\n### Groupable (dropdown) tabs\n\nBootstrap's support for dropdown menus as tab navigation is mimiced by the use of the `groupTitle` property.\nAll panes with the same `groupTitle` will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)\ncomponent with `groupTitle` being the dropdown's title:\n\n```hbs\n{{#bs-tab type=type.id}}\n   {{#bs-tab-pane title=\"Tab 1\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane title=\"Tab 2\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane title=\"Tab 3\" groupTitle=\"Dropdown\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane title=\"Tab 4\" groupTitle=\"Dropdown\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n{{/bs-tab}}\n```\n\n### Custom tabs\n\nWhen having the tab pane's `title` as the tab navigation title is not sufficient, for example because you want to\nintegrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup\nyour navigation by yourself.\n\nSet `customTabs` to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably\nusing a [Components.Nav](Components.Nav.html) component. The tab component yields the `activeId` property as well as\nits `select` action, which you would have to use to manually set the `active` state of the navigation items and to\ntrigger the selection of the different tab panes, using their ids:\n\n```hbs\n{{#bs-tab customTabs=true as |activeId select|}}\n   {{#bs-nav type=\"tabs\"}}\n       {{#bs-nav-item active=(bs-eq activeId \"pane1\")}}<a href=\"#pane1\" role=\"tab\" {{action select \"pane1\"}}>Tab 1</a>{{/bs-nav-item}}\n       {{#bs-nav-item active=(bs-eq activeId \"pane2\")}}<a href=\"#pane1\" role=\"tab\" {{action select \"pane2\"}}>Tab 2 <span class=\"badge\">{{badge}}</span></a>{{/bs-nav-item}}\n   {{/bs-nav}}\n\n   <div class=\"tab-content\">\n   {{#bs-tab-pane elementId=\"pane1\" title=\"Tab 1\"}}\n       <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane elementId=\"pane2\" title=\"Tab 2\"}}\n       <p>...</p>\n   {{/bs-tab-pane}}\n   </div>\n{{/bs-tab}}\n```\n\nNote that the `bs-eq` helper used in the example above is a private helper, which is not guaranteed to be available for\nthe future. Better use the corresponding `eq` helper of the\n[ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!\n\n### Routable tabs\n\nThe tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and\ndeactivated dynamically, just as the  original Bootstrap implementation.\n\nIf you want to have the content delivered through individual sub routes, just use\nthe [Components.Nav](Components.Nav.html) component and an `{{outlet}}` that show the nested routes' content:\n\n```hbs\n<div>\n  {{#bs-nav type=\"tabs\"}}\n    {{#bs-nav-item}}{{#link-to \"tabs.index\"}}Tab 1{{/link-to}}{{/bs-nav-item}}\n    {{#bs-nav-item}}{{#link-to \"tabs.other\"}}Tab 2{{/link-to}}{{/bs-nav-item}}\n  {{/bs-nav}}\n  {{outlet}}\n</div>\n```",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.ComponentParent"
@@ -881,7 +881,7 @@
             "plugin_for": [],
             "extension_for": [
                 "Components.NavItem",
-                "Components.Ta"
+                "Components.Tab"
             ],
             "namespace": "Mixins",
             "file": "addon/mixins/component-parent.js",
@@ -3232,7 +3232,7 @@
         },
         {
             "file": "addon/components/bs-nav.js",
-            "line": 73,
+            "line": 75,
             "description": "Special type of nav, either \"pills\" or \"tabs\"",
             "itemtype": "property",
             "name": "type",
@@ -3245,7 +3245,7 @@
         },
         {
             "file": "addon/components/bs-nav.js",
-            "line": 83,
+            "line": 85,
             "description": "Make the nav justified, see [bootstrap docs](http://getbootstrap.com/components/#nav-justified)",
             "itemtype": "property",
             "name": "justified",
@@ -3258,7 +3258,7 @@
         },
         {
             "file": "addon/components/bs-nav.js",
-            "line": 93,
+            "line": 95,
             "description": "Make the nav pills stacked, see [bootstrap docs](http://getbootstrap.com/components/#nav-pills)",
             "itemtype": "property",
             "name": "stacked",
@@ -3549,7 +3549,7 @@
         },
         {
             "file": "addon/components/bs-tab.js",
-            "line": 110,
+            "line": 111,
             "description": "Type of nav, either \"pills\" or \"tabs\"",
             "itemtype": "property",
             "name": "type",
@@ -3557,12 +3557,12 @@
             "default": "\"tabs\"",
             "access": "public",
             "tagname": "",
-            "class": "Components.Ta",
+            "class": "Components.Tab",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-tab.js",
-            "line": 120,
+            "line": 121,
             "description": "By default the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)\ncomponents. If set to true, you can deactivate this and setup the tabs manually. See the example above.",
             "itemtype": "property",
             "name": "customTabs",
@@ -3570,24 +3570,24 @@
             "default": "false",
             "access": "public",
             "tagname": "",
-            "class": "Components.Ta",
+            "class": "Components.Tab",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-tab.js",
-            "line": 131,
+            "line": 132,
             "description": "The id (`elementId`) of the active [TabPane](Components.TabPane.html).\nBy default the first tab will be active, but this can be changed by setting this property\n\n```hbs\n{{#bs-tab activeId=\"pane2\"}}\n  {{#bs-tab-pane id=\"pane1\" title=\"Tab 1\"}}\n     ...\n  {{/bs-tab-pane}}\n  {{#bs-tab-pane id=\"pane1\" title=\"Tab 1\"}}\n    ...\n  {{/bs-tab-pane}}\n{{/bs-tab}}\n```",
             "itemtype": "property",
             "name": "activeId",
             "type": "string",
             "access": "public",
             "tagname": "",
-            "class": "Components.Ta",
+            "class": "Components.Tab",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-tab.js",
-            "line": 152,
+            "line": 153,
             "description": "Set to false to disable the fade animation when switching tabs.",
             "itemtype": "property",
             "name": "fade",
@@ -3595,12 +3595,12 @@
             "default": "true",
             "access": "public",
             "tagname": "",
-            "class": "Components.Ta",
+            "class": "Components.Tab",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-tab.js",
-            "line": 162,
+            "line": 163,
             "description": "The duration of the fade animation",
             "itemtype": "property",
             "name": "fadeDuration",
@@ -3608,23 +3608,23 @@
             "default": "150",
             "access": "public",
             "tagname": "",
-            "class": "Components.Ta",
+            "class": "Components.Tab",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-tab.js",
-            "line": 172,
+            "line": 173,
             "description": "action is called when switching the active tab, with the new and previous pane id",
             "itemtype": "event",
             "name": "action",
             "access": "public",
             "tagname": "",
-            "class": "Components.Ta",
+            "class": "Components.Tab",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-tab.js",
-            "line": 180,
+            "line": 181,
             "description": "All `TabPane` child components",
             "itemtype": "property",
             "name": "childPanes",
@@ -3632,12 +3632,12 @@
             "readonly": "",
             "access": "private",
             "tagname": "",
-            "class": "Components.Ta",
+            "class": "Components.Tab",
             "namespace": "Components"
         },
         {
             "file": "addon/components/bs-tab.js",
-            "line": 192,
+            "line": 193,
             "description": "Array of objects that define the tab structure",
             "itemtype": "property",
             "name": "navItems",
@@ -3645,7 +3645,7 @@
             "readonly": "",
             "access": "private",
             "tagname": "",
-            "class": "Components.Ta",
+            "class": "Components.Tab",
             "namespace": "Components"
         },
         {
