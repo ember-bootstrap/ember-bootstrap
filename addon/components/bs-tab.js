@@ -46,6 +46,7 @@ const { computed, isPresent, A } = Ember;
       <p>...</p>
     {{/bs-tab-pane}}
  {{/bs-tab}}
+ ```
 
  ### Custom tabs
 
@@ -98,7 +99,7 @@ const { computed, isPresent, A } = Ember;
  </div>
  ```
 
- @class Ta
+ @class Tab
  @namespace Components
  @extends Ember.Component
  @uses Mixins.ComponentParent

@@ -38,6 +38,7 @@ const { isPresent } = Ember;
 
  Use the [Components.Dropdown](Components.Dropdown.html) component with a `tagName` of "li" to integrate a dropdown into your nav:
 
+ ```hbs
  {{#bs-nav type="pills"}}
    {{#bs-nav-item}}{{#link-to "index"}}Home{{/link-to}}{{/bs-nav-item}}
    {{#bs-dropdown tagName="li"}}
@@ -48,6 +49,7 @@ const { isPresent } = Ember;
      {{/bs-dropdown-menu}}
    {{/bs-dropdown}}
  {{/bs-nav}}
+ ```
 
  @class Nav
  @namespace Components
