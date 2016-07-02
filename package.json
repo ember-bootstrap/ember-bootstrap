@@ -53,10 +53,12 @@
     "gulp": "^3.9.0",
     "gulp-file": "^0.2.0",
     "gulp-rename": "^1.2.2",
+    "gulp-transform": "^1.0.8",
     "loader.js": "^4.0.1",
     "mocha": "^2.5.3",
     "request": "^2.72.0",
-    "rsvp": "^3.2.1"
+    "rsvp": "^3.2.1",
+    "striptags": "^2.1.1"
   },
   "description": "Twitter Bootstrap components for Ember.js",
   "keywords": [
