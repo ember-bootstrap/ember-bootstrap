@@ -52,7 +52,7 @@ const { computed } = Ember;
   ### Form validation
 
   All version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.
-  Instead support is added usually by addition Ember addons, for example:
+  Instead support is added usually by additional Ember addons, for example:
 
   * [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)
   * [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)
@@ -62,6 +62,10 @@ const { computed } = Ember;
 
   * extend this component, setting `hasValidator` to true if validations are available (by means of a computed property for example), and implementing the `validate` method
   * extend the [Components.FormElement](Components.FormElement.html) component and implement the `setupValidations` hook or simply override the `errors` property to add the validation error messages to be displayed
+
+  When validation fails, the appropriate Bootstrap markup is added automatically, i.e. the error classes are applied and
+  the validation messages are shown for each form element. In case the validation library supports it, also warning messages
+  are shown. See the [Components.FormElement](Components.FormElement.html) documentation for further details.
 
   See the above mentioned addons for examples.
 

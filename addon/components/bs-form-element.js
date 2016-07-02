@@ -84,6 +84,9 @@ const nonTextFieldControlTypes = Ember.A([
  * the `errorIcon` feedback icon is displayed if `controlType` is a text field
  * the validation messages are displayed as Bootstrap `help-block`s
 
+ The same applies for warning messages, if the used validation library supports this. (Currently only
+ [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations))
+
  As soon as the validation is successful again...
 
  * `validation` is set to 'success', which will set the `has-success` CSS class
@@ -305,6 +308,48 @@ export default FormGroup.extend(ComponentChild, {
   hasErrors: computed.gt('errors.length', 0),
 
   /**
+   * The array of warning messages from the `model`'s validation.
+   *
+   * @property errors
+   * @type array
+   * @protected
+   */
+  warnings: null,
+
+  /**
+   * @property hasWarnings
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  hasWarnings: computed.gt('warnings.length', 0),
+
+  /**
+   * The array of validation messages (either errors or warnings) rom the `model`'s validation.
+   *
+   * @property validationMessages
+   * @type array
+   * @protected
+   */
+  validationMessages: computed('hasErrors', 'hasWarnings', 'errors.[]', 'warnings.[]', function() {
+    if (this.get('hasErrors')) {
+      return this.get('errors');
+    }
+    if (this.get('hasWarnings')) {
+      return this.get('warnings');
+    }
+    return null;
+  }),
+
+  /**
+   * @property hasValidationMessages
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  hasValidationMessages: computed.gt('validationMessages.length', 0),
+
+  /**
    * @property hasValidator
    * @type boolean
    * @readonly
@@ -333,12 +378,21 @@ export default FormGroup.extend(ComponentChild, {
   showValidation: false,
 
   /**
-   * @property showErrors
+   * @property showValidationMessages
    * @type boolean
    * @readonly
    * @protected
    */
-  showErrors: computed.and('showValidation', 'hasErrors'),
+  showValidationMessages: computed.and('showValidation', 'hasValidationMessages'),
+
+  /**
+   * @property showErrors
+   * @type boolean
+   * @readonly
+   * @deprecated
+   * @protected
+   */
+  showErrors: computed.deprecatingAlias('showValidationMessages'),
 
   /**
    * The validation ("error" or "success") or null if no validation is to be shown. Automatically computed from the
@@ -349,11 +403,11 @@ export default FormGroup.extend(ComponentChild, {
    * @type string
    * @protected
    */
-  validation: computed('hasErrors', 'hasValidator', 'showValidation', 'isValidating', 'disabled', function() {
+  validation: computed('hasErrors', 'hasWarnings', 'hasValidator', 'showValidation', 'isValidating', 'disabled', function() {
     if (!this.get('showValidation') || !this.get('hasValidator') || this.get('isValidating') || this.get('disabled')) {
       return null;
     }
-    return this.get('hasErrors') ? 'error' : 'success';
+    return this.get('hasErrors') ? 'error' : (this.get('hasWarnings') ? 'warning' : 'success');
   }),
 
   /**

@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
-import EmberValidations from 'ember-validations';
+// import EmberValidations from 'ember-validations';
 
 moduleForComponent('bs-form', 'Integration | Component | bs-form', {
   integration: true
@@ -143,41 +143,41 @@ test('supports novalidate attribute', function(assert) {
   );
 });
 
-test('shows validation errors on submit', function(assert) {
-  assert.expect(3);
-  this.set('model',
-    Ember.Object.extend(EmberValidations, {
-      name: null,
-      validations: {
-        name: {
-          presence: true
-        }
-      }
-    }).create({
-      container: this.get('container')
-    })
-  );
-  this.render(hbs`
-    {{#bs-form model=model}}
-      {{bs-form-element property='name' classNames='child'}}
-      {{#dummy-component}}
-        {{bs-form-element property='name' classNames='grandchild'}}
-      {{/dummy-component}}
-    {{/bs-form}}
-  `);
-  assert.ok(
-    this.$('form .has-error').length === 0,
-    'validation errors aren\'t shown before user interaction'
-  );
-  Ember.run(() => {
-    this.$('form').submit();
-  });
-  assert.ok(
-    this.$('form .form-group.child').hasClass('has-error'),
-    'validation errors are shown after form submission (child)'
-  );
-  assert.ok(
-    this.$('form .form-group.grandchild').hasClass('has-error'),
-    'validation errors are shown after form submission (grandchild)'
-  );
-});
+// test('shows validation errors on submit', function(assert) {
+//   assert.expect(3);
+//   this.set('model',
+//     Ember.Object.extend(EmberValidations, {
+//       name: null,
+//       validations: {
+//         name: {
+//           presence: true
+//         }
+//       }
+//     }).create({
+//       container: this.get('container')
+//     })
+//   );
+//   this.render(hbs`
+//     {{#bs-form model=model}}
+//       {{bs-form-element property='name' classNames='child'}}
+//       {{#dummy-component}}
+//         {{bs-form-element property='name' classNames='grandchild'}}
+//       {{/dummy-component}}
+//     {{/bs-form}}
+//   `);
+//   assert.ok(
+//     this.$('form .has-error').length === 0,
+//     'validation errors aren\'t shown before user interaction'
+//   );
+//   Ember.run(() => {
+//     this.$('form').submit();
+//   });
+//   assert.ok(
+//     this.$('form .form-group.child').hasClass('has-error'),
+//     'validation errors are shown after form submission (child)'
+//   );
+//   assert.ok(
+//     this.$('form .form-group.grandchild').hasClass('has-error'),
+//     'validation errors are shown after form submission (grandchild)'
+//   );
+// });

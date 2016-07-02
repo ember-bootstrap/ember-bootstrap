@@ -1,7 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
-import EmberValidations from 'ember-validations';
 
 moduleForComponent('bs-form-element', 'Integration | Component | bs-form-element', {
   integration: true
@@ -119,20 +118,13 @@ test('Changing formLayout changes markup', function(assert) {
 
 test('Custom controls are supported', function(assert) {
   this.set('model',
-    Ember.Object.extend(EmberValidations, {
-      gender: 'male',
-      validations: {
-        name: {
-          presence: true
-        }
-      }
-    }).create({
-      container: this.get('container')
+    Ember.Object.create({
+      gender: 'male'
     })
   );
   this.render(hbs`
-    {{#bs-form formLayout=formLayout model=model}}
-      {{#bs-form-element label="Gender" property="gender" as |value id validation|}}
+    {{#bs-form model=model}}
+      {{#bs-form-element label="Gender" property="gender" validation="success" as |value id validation|}}
         <div id="value">{{value}}</div>
         <div id="id">{{id}}</div>
         <div id="validation">{{validation}}</div>
@@ -143,10 +135,6 @@ test('Custom controls are supported', function(assert) {
   assert.equal(this.$('#value').length, 1, 'block template is rendered');
   assert.equal(this.$('#value').text().trim(), 'male', 'value is yielded to block template');
   assert.equal(this.$('#id').text().trim(), `${$('.form-group').attr('id')}-field`, 'id is yielded to block template');
-  assert.equal(this.$('#validation').text().trim(), '');
-
-  this.$('form').submit();
-  assert.ok(this.$('.form-group').hasClass('has-success'), 'assumption');
   assert.equal(this.$('#validation').text().trim(), 'success');
 });
 
@@ -277,4 +265,46 @@ test('adjusts validation icon position if there is an input group', function(ass
     gap === 0 || gap === -1,
     'takes bootstrap default positioning into account'
   );
+});
+
+test('shows validation errors', function(assert) {
+  this.set('errors', Ember.A());
+  this.render(hbs`
+      {{bs-form-element property='name' elementId='child' showValidation=true hasValidator=true errors=errors}}
+  `);
+  assert.ok(
+    this.$('form .has-error').length === 0,
+    'validation errors aren\'t shown before user interaction'
+  );
+  Ember.run(() => {
+    this.set('errors', Ember.A([
+      'Invalid'
+    ]));
+  });
+  assert.ok(
+    this.$('.form-group').hasClass('has-error'),
+    'validation errors are shown when errors are present (child)'
+  );
+  assert.equal(this.$('.form-group .help-block').text().trim(), 'Invalid');
+});
+
+test('shows validation warnings', function(assert) {
+  this.set('warnings', Ember.A());
+  this.render(hbs`
+      {{bs-form-element property='name' elementId='child' showValidation=true hasValidator=true warnings=warnings}}
+  `);
+  assert.ok(
+    this.$('form .has-warning').length === 0,
+    'validation warnings aren\'t shown before user interaction'
+  );
+  Ember.run(() => {
+    this.set('warnings', Ember.A([
+      'Insecure'
+    ]));
+  });
+  assert.ok(
+    this.$('.form-group').hasClass('has-warning'),
+    'validation warnings are shown when warnings are present'
+  );
+  assert.equal(this.$('.form-group .help-block').text().trim(), 'Insecure');
 });
