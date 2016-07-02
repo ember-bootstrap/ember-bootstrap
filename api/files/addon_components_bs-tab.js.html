@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/components/bs-tab.js - ember-bootstrap</title>
+    <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
+    <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
+    <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-toggle-wrapper visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+        </div>
+        <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="navbar-nav nav">
+                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
+                <li><a href="/ember-bootstrap/components">Components</a></li>
+                <li><a href="/ember-bootstrap/api">API</a></li>
+
+            </ul>
+            <ul class="navbar-nav nav navbar-right">
+                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>API Docs <span class="small">v0.8.0</span></h1>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>addon/components/bs-tab.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import layout from &#x27;../templates/components/bs-tab&#x27;;
+import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
+import TabPane from &#x27;./bs-tab-pane&#x27;;
+
+const { computed, isPresent, A } = Ember;
+
+/**
+ Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap&#x27;s tab.js plugin,
+ see http://getbootstrap.com/javascript/#tabs
+
+ ### Usage
+
+ Just nest any number of [Components.TabPane](Components.TabPane.html) components that hold the tab content.
+ The tab navigation is automatically generated from the tab panes&#x27; &#x60;title&#x60; property:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-tab type=type.id}}
+   {{#bs-tab-pane title=&quot;Tab 1&quot;}}
+     &lt;p&gt;...&lt;/p&gt;
+   {{/bs-tab-pane}}
+   {{#bs-tab-pane title=&quot;Tab 2&quot;}}
+     &lt;p&gt;...&lt;/p&gt;
+   {{/bs-tab-pane}}
+ {{/bs-tab}}
+ &#x60;&#x60;&#x60;
+
+ ### Groupable (dropdown) tabs
+
+ Bootstrap&#x27;s support for dropdown menus as tab navigation is mimiced by the use of the &#x60;groupTitle&#x60; property.
+ All panes with the same &#x60;groupTitle&#x60; will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)
+ component with &#x60;groupTitle&#x60; being the dropdown&#x27;s title:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-tab type=type.id}}
+    {{#bs-tab-pane title=&quot;Tab 1&quot;}}
+      &lt;p&gt;...&lt;/p&gt;
+    {{/bs-tab-pane}}
+    {{#bs-tab-pane title=&quot;Tab 2&quot;}}
+      &lt;p&gt;...&lt;/p&gt;
+    {{/bs-tab-pane}}
+    {{#bs-tab-pane title=&quot;Tab 3&quot; groupTitle=&quot;Dropdown&quot;}}
+      &lt;p&gt;...&lt;/p&gt;
+    {{/bs-tab-pane}}
+    {{#bs-tab-pane title=&quot;Tab 4&quot; groupTitle=&quot;Dropdown&quot;}}
+      &lt;p&gt;...&lt;/p&gt;
+    {{/bs-tab-pane}}
+ {{/bs-tab}}
+
+ ### Custom tabs
+
+ When having the tab pane&#x27;s &#x60;title&#x60; as the tab navigation title is not sufficient, for example because you want to
+ integrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup
+ your navigation by yourself.
+
+ Set &#x60;customTabs&#x60; to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably
+ using a [Components.Nav](Components.Nav.html) component. The tab component yields the &#x60;activeId&#x60; property as well as
+ its &#x60;select&#x60; action, which you would have to use to manually set the &#x60;active&#x60; state of the navigation items and to
+ trigger the selection of the different tab panes, using their ids:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-tab customTabs=true as |activeId select|}}
+    {{#bs-nav type=&quot;tabs&quot;}}
+        {{#bs-nav-item active=(bs-eq activeId &quot;pane1&quot;)}}&lt;a href=&quot;#pane1&quot; role=&quot;tab&quot; {{action select &quot;pane1&quot;}}&gt;Tab 1&lt;/a&gt;{{/bs-nav-item}}
+        {{#bs-nav-item active=(bs-eq activeId &quot;pane2&quot;)}}&lt;a href=&quot;#pane1&quot; role=&quot;tab&quot; {{action select &quot;pane2&quot;}}&gt;Tab 2 &lt;span class=&quot;badge&quot;&gt;{{badge}}&lt;/span&gt;&lt;/a&gt;{{/bs-nav-item}}
+    {{/bs-nav}}
+
+    &lt;div class=&quot;tab-content&quot;&gt;
+    {{#bs-tab-pane elementId=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
+        &lt;p&gt;...&lt;/p&gt;
+    {{/bs-tab-pane}}
+    {{#bs-tab-pane elementId=&quot;pane2&quot; title=&quot;Tab 2&quot;}}
+        &lt;p&gt;...&lt;/p&gt;
+    {{/bs-tab-pane}}
+    &lt;/div&gt;
+ {{/bs-tab}}
+ &#x60;&#x60;&#x60;
+
+ Note that the &#x60;bs-eq&#x60; helper used in the example above is a private helper, which is not guaranteed to be available for
+ the future. Better use the corresponding &#x60;eq&#x60; helper of the
+ [ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!
+
+ ### Routable tabs
+
+ The tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and
+ deactivated dynamically, just as the  original Bootstrap implementation.
+
+ If you want to have the content delivered through individual sub routes, just use
+ the [Components.Nav](Components.Nav.html) component and an &#x60;{{outlet}}&#x60; that show the nested routes&#x27; content:
+
+ &#x60;&#x60;&#x60;hbs
+ &lt;div&gt;
+   {{#bs-nav type=&quot;tabs&quot;}}
+     {{#bs-nav-item}}{{#link-to &quot;tabs.index&quot;}}Tab 1{{/link-to}}{{/bs-nav-item}}
+     {{#bs-nav-item}}{{#link-to &quot;tabs.other&quot;}}Tab 2{{/link-to}}{{/bs-nav-item}}
+   {{/bs-nav}}
+   {{outlet}}
+ &lt;/div&gt;
+ &#x60;&#x60;&#x60;
+
+ @class Ta
+ @namespace Components
+ @extends Ember.Component
+ @uses Mixins.ComponentParent
+ @public
+ */
+export default Ember.Component.extend(ComponentParent, {
+  layout,
+
+  /**
+   * Type of nav, either &quot;pills&quot; or &quot;tabs&quot;
+   *
+   * @property type
+   * @type String
+   * @default &quot;tabs&quot;
+   * @public
+   */
+  type: &quot;tabs&quot;,
+
+  /**
+   * By default the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)
+   * components. If set to true, you can deactivate this and setup the tabs manually. See the example above.
+   *
+   * @property customTabs
+   * @type boolean
+   * @default false
+   * @public
+   */
+  customTabs: false,
+
+  /**
+   * The id (&#x60;elementId&#x60;) of the active [TabPane](Components.TabPane.html).
+   * By default the first tab will be active, but this can be changed by setting this property
+   *
+   * &#x60;&#x60;&#x60;hbs
+   * {{#bs-tab activeId=&quot;pane2&quot;}}
+   *   {{#bs-tab-pane id=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
+   *      ...
+   *   {{/bs-tab-pane}}
+   *   {{#bs-tab-pane id=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
+   *     ...
+   *   {{/bs-tab-pane}}
+   * {{/bs-tab}}
+   * &#x60;&#x60;&#x60;
+   *
+   * @property activeId
+   * @type string
+   * @public
+   */
+  activeId: computed.oneWay(&#x27;childPanes.firstObject.elementId&#x27;),
+
+  /**
+   * Set to false to disable the fade animation when switching tabs.
+   *
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  fade: true,
+
+  /**
+   * The duration of the fade animation
+   *
+   * @property fadeDuration
+   * @type integer
+   * @default 150
+   * @public
+   */
+  fadeDuration: 150,
+
+  /**
+   * action is called when switching the active tab, with the new and previous pane id
+   *
+   * @event action
+   * @public
+   */
+  action: null,
+
+  /**
+   * All &#x60;TabPane&#x60; child components
+   *
+   * @property childPanes
+   * @type array
+   * @readonly
+   * @private
+   */
+  childPanes: computed.filter(&#x27;children&#x27;, function(view) {
+    return view instanceof TabPane;
+  }),
+
+  /**
+   * Array of objects that define the tab structure
+   *
+   * @property navItems
+   * @type array
+   * @readonly
+   * @private
+   */
+  navItems: computed(&#x27;childPanes.@each.{elementId,title,group}&#x27;, function() {
+    let items = A();
+    this.get(&#x27;childPanes&#x27;).forEach((pane) =&gt; {
+      let groupTitle = pane.get(&#x27;groupTitle&#x27;);
+      let item = pane.getProperties(&#x27;elementId&#x27;, &#x27;title&#x27;);
+      if (isPresent(groupTitle)) {
+        let group = items.findBy(&#x27;groupTitle&#x27;, groupTitle);
+        if (group) {
+          group.children.push(item);
+          group.childIds.push(item.elementId);
+        } else {
+          items.push({
+            isGroup: true,
+            groupTitle,
+            children: A([item]),
+            childIds: A([item.elementId])
+          });
+        }
+      } else {
+        items.push(item);
+      }
+    });
+    return items;
+  }),
+
+  actions: {
+    select(id) {
+      let previous = this.get(&#x27;activeId&#x27;);
+      this.set(&#x27;activeId&#x27;, id);
+      this.sendAction(&#x27;action&#x27;, id, previous);
+    }
+  }
+});
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3>Classes</h3>
+            
+            <ul id="api-classes" class="nav nav-pills nav-stacked">
+                    <li><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
+                    <li><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
+                    <li><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
+                    <li><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li><a href="../classes/Components.Form.html">Components.Form</a></li>
+                    <li><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+                    <li><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+                    <li><a href="../classes/Components.Input.html">Components.Input</a></li>
+                    <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
+                    <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
+                    <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
+                    <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
+                    <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
+                    <li><a href="../classes/Components.Select.html">Components.Select</a></li>
+                    <li><a href="../classes/Components.Ta.html">Components.Ta</a></li>
+                    <li><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
+                    <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
+                    <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+                    <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
+                    <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+            </ul>        </div>
+    </div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

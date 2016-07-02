@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-alert.js - ember-bootstrap</title>
+    <title>addon/components/bs-tab-pane.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,174 +49,191 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-alert.js <small>File</small></h1>
+    <h1>addon/components/bs-tab-pane.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
+import layout from &#x27;../templates/components/bs-tab-pane&#x27;;
+import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
+import Tab from &#x27;./bs-tab&#x27;;
 
 const { computed, observer } = Ember;
 
 /**
- Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts
+ The tab pane of a tab component.
+ See [Components.Tab](Components.Tab.html) for examples.
 
- By default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
- &#x60;type&#x60; property for proper styling.
-
- &#x60;&#x60;&#x60;hbs
- {{#bs-alert type=&quot;success&quot;}}
- &lt;strong&gt;Well done!&lt;/strong&gt; You successfully read this important alert message.
- {{/bs-alert}}
- &#x60;&#x60;&#x60;
-
- @class Alert
+ @class TabPane
  @namespace Components
  @extends Ember.Component
- @uses Mixins.TypeClass
+ @uses Mixins.ComponentChild
  @public
  */
-export default Ember.Component.extend(TypeClass, {
-  classNameBindings: [&#x27;alert&#x27;, &#x27;fade&#x27;, &#x27;in&#x27;],
+export default Ember.Component.extend(ComponentChild, {
+  layout,
+  classNameBindings: [&#x27;active&#x27;, &#x27;fade&#x27;, &#x27;in&#x27;],
+  classNames: [&#x27;tab-pane&#x27;],
+  ariaRole: &#x27;tabpanel&#x27;,
 
   /**
-   * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
-   * the alert.
+   * True if this pane is active (visible)
    *
-   * @property dismissible
+   * @property isActive
    * @type boolean
-   * @default true
-   * @public
+   * @protected
    */
-  dismissible: true,
+  isActive: computed(&#x27;tab.activeId&#x27;, &#x27;elementId&#x27;, function() {
+    return this.get(&#x27;tab.activeId&#x27;) === this.get(&#x27;elementId&#x27;);
+  }),
 
   /**
-   * If true the alert is completely hidden. Will be set when the fade animation has finished.
+   * Used to apply Bootstrap&#x27;s &quot;active&quot; class
    *
-   * @property hidden
+   * @property active
    * @type boolean
    * @default false
+   * @protected
+   */
+  active: false,
+
+  /**
+   * Used to apply Bootstrap&#x27;s &quot;in&quot; class
+   *
+   * @property in
+   * @type boolean
+   * @default false
+   * @protected
+   */
+  &#x27;in&#x27;: false,
+
+  /**
+   * Use CSS transitions when showing/hiding the pane?
+   *
+   * @property usesTransition
+   * @type boolean
    * @readonly
    * @protected
    */
-  hidden: false,
+  usesTransition: computed(&#x27;fade&#x27;, function() {
+    return Ember.$.support.transition &amp;&amp; this.get(&#x27;fade&#x27;);
+  }),
 
   /**
-   * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
-   * has completed.
+   * The parent [Components.Tab](Components.Tab.html) instance.
    *
-   * @property visible
-   * @type boolean
-   * @default true
+   * @property tab
+   * @type {Components.Tab}
+   * @protected
+   */
+  tab: computed(function() {
+    return this.nearestOfType(Tab);
+  }),
+
+  /**
+   * The title for this tab pane. This is used by the &#x60;bs-tab&#x60; component to automatically generate
+   * the tab navigation.
+   * See the [Components.Tab](Components.Tab.html) for examples.
+   *
+   * @property title
+   * @type string
+   * @default null
    * @public
    */
-  visible: true,
-  notVisible: computed.not(&#x27;visible&#x27;),
+  title: null,
 
   /**
-   * Set to false to disable the fade out animation when hiding the alert.
+   * An optional group title used by the &#x60;bs-tab&#x60; component to group all panes with the same group title
+   * under a common drop down in the tab navigation.
+   * See the [Components.Tab](Components.Tab.html) for examples.
+   *
+   * @property groupTitle
+   * @type string
+   * @default null
+   * @public
+   */
+  groupTitle: null,
+
+  /**
+   * Use fade animation when switching tabs.
    *
    * @property fade
    * @type boolean
-   * @default true
-   * @public
-   */
-  fade: true,
-
-  /**
-   * Computed property to set the alert class to the component div. Will be false when dismissed to have the component
-   * div (which cannot be removed form DOM by the component itself) without any markup.
-   *
-   * @property alert
-   * @type boolean
-   * @private
-   */
-  alert: computed.not(&#x27;hidden&#x27;),
-  in: computed.and(&#x27;visible&#x27;, &#x27;fade&#x27;),
-
-  /**
-   * @property classTypePrefix
-   * @type String
-   * @default &#x27;alert&#x27;
+   * @readonly
    * @protected
    */
-  classTypePrefix: &#x27;alert&#x27;,
+  fade: computed.readOnly(&#x27;tab.fade&#x27;),
 
   /**
    * The duration of the fade out animation
    *
    * @property fadeDuration
    * @type integer
-   * @default 150
-   * @public
+   * @readonly
+   * @protected
    */
-  fadeDuration: 150,
+  fadeDuration: computed.readOnly(&#x27;tab.fadeDuration&#x27;),
 
   /**
-   * The action to be sent after the alert has been dismissed (including the CSS transition).
-   *
-   * @property dismissedAction
-   * @type string
-   * @default null
-   * @public
-   */
-  dismissedAction: null,
-
-  actions: {
-    dismiss() {
-      this.set(&#x27;visible&#x27;, false);
-    }
-  },
-
-  _onVisibleChange: observer(&#x27;visible&#x27;, function() {
-    if (this.get(&#x27;visible&#x27;)) {
-      this.show();
-    } else {
-      this.hide();
-    }
-  }),
-
-  /**
-   * Call to make the alert visible again after it has been hidden
+   * Show the pane
    *
    * @method show
-   * @private
+   * @protected
    */
   show() {
-    this.setProperties({
-      hidden: false
-    });
+    if (this.get(&#x27;usesTransition&#x27;)) {
+      this.$()
+        .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, function() {
+          if (!this.get(&#x27;isDestroyed&#x27;)) {
+            this.setProperties({
+              active: true,
+              in: true
+            });
+          }
+        }))
+        .emulateTransitionEnd(this.get(&#x27;fadeDuration&#x27;));
+    } else {
+      this.set(&#x27;active&#x27;, true);
+    }
   },
 
   /**
-   * Call to hide the alert. If the &#x60;fade&#x60; property is true, this will fade out the alert before being finally
-   * dismissed.
+   * Hide the pane
    *
    * @method hide
-   * @private
+   * @protected
    */
   hide() {
-    if (this.get(&#x27;fade&#x27;)) {
-      Ember.run.later(this, function() {
-        if (!this.get(&#x27;isDestroyed&#x27;)) {
-          this.set(&#x27;hidden&#x27;, true);
-          this.sendAction(&#x27;dismissedAction&#x27;);
-        }
-      }, this.get(&#x27;fadeDuration&#x27;));
+    if (this.get(&#x27;usesTransition&#x27;)) {
+      this.$()
+        .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, function() {
+          if (!this.get(&#x27;isDestroyed&#x27;)) {
+            this.set(&#x27;active&#x27;, false);
+          }
+        }))
+        .emulateTransitionEnd(this.get(&#x27;fadeDuration&#x27;));
+      this.set(&#x27;in&#x27;, false);
     } else {
-      this.setProperties({
-        hidden: true
-      });
-      this.sendAction(&#x27;dismissedAction&#x27;);
+      this.set(&#x27;active&#x27;, false);
     }
   },
+
+  _showHide: observer(&#x27;isActive&#x27;, function() {
+    this.get(&#x27;isActive&#x27;) ? this.show() : this.hide();
+  }),
 
   init() {
     this._super(...arguments);
-    this.set(&#x27;hidden&#x27;, !this.get(&#x27;visible&#x27;));
+    Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, function() {
+      // isActive comes from parent component, so only available after render...
+      this.set(&#x27;active&#x27;, this.get(&#x27;isActive&#x27;));
+      this.set(&#x27;in&#x27;, this.get(&#x27;isActive&#x27;) &amp;&amp; this.get(&#x27;fade&#x27;));
+    });
   }
+
 });
+
     </pre>
 </div>
                     </div>
