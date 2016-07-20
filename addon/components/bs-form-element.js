@@ -427,7 +427,8 @@ export default FormGroup.extend(ComponentChild, {
    * @public
    */
   useIcons: computed('controlType', function() {
-    return !nonTextFieldControlTypes.contains(this.get('controlType'));
+    return !this.get('hasBlock') &&
+           !nonTextFieldControlTypes.contains(this.get('controlType'));
   }),
 
   /**
@@ -534,16 +535,8 @@ export default FormGroup.extend(ComponentChild, {
 
   formElementTemplate: computed('formLayout', 'controlType', function() {
     let formLayout = this.getWithDefault('formLayout', 'vertical');
-    let inputLayout;
     let controlType = this.get('controlType');
-
-    switch (true) {
-      case nonTextFieldControlTypes.contains(controlType):
-        inputLayout = controlType;
-        break;
-      default:
-        inputLayout = 'default';
-    }
+    let inputLayout = nonTextFieldControlTypes.contains(controlType) ? controlType : 'default';
 
     return `components/form-element/${formLayout}/${inputLayout}`;
   }),
