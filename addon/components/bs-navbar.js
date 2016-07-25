@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   expanded: Ember.computed.not('collapsed'),
 
   actions: {
-    toggle() {
+    toggleNavbar() {
       this.toggleProperty('collapsed');
     }
   }
