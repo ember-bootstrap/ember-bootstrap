@@ -101,11 +101,14 @@ const nonTextFieldControlTypes = Ember.A([
 
  ```hbs
  {{#bs-form formLayout="horizontal" model=this action="submit"}}
-   {{#bs-form-element label="Select-2" property="gender" as |value id validationState|}}
+   {{#bs-form-element label="Select-2" property="gender" useIcons=false as |value id validationState|}}
      {{select-2 id=id content=genderChoices optionLabelPath="label" value=value searchEnabled=false}}
    {{/bs-form-element}}
  {{/bs-form}}
  ```
+
+ If your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports
+ feedback icons with textual `<input class="form-control">` elements.
 
  @class FormElement
  @namespace Components
