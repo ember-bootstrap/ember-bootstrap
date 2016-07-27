@@ -138,7 +138,7 @@ test('supports novalidate attribute', function(assert) {
   );
   this.render(hbs`{{bs-form novalidate=true}}`);
   assert.ok(
-    this.$('form').attr('novalidate') !== undefined
+    this.$('form').attr('novalidate') === ''
   );
 });
 

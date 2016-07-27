@@ -78,7 +78,7 @@ const { computed } = Ember;
 export default Ember.Component.extend(ComponentParent, {
   tagName: 'form',
   classNameBindings: ['layoutClass'],
-  attributeBindings: ['novalidate'],
+  attributeBindings: ['_novalidate:novalidate'],
   ariaRole: 'form',
 
   /**
@@ -154,10 +154,14 @@ export default Ember.Component.extend(ComponentParent, {
    *
    * @property novalidate
    * @type boolean
-   * @default false
+   * @default null
    * @public
    */
   novalidate: false,
+  
+  _novalidate: computed('novalidate', function() {
+    return this.get('novalidate') === true ? '' : undefined;
+  }),
 
   /**
    * An array of `Components.FormElement`s that are children of this form.
