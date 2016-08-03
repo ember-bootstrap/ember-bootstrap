@@ -690,6 +690,7 @@ export default Ember.Component.extend({
   willDestroyElement() {
     Ember.$(window).off('resize.bs.modal');
     Ember.$('body').removeClass('modal-open');
+    this.resetScrollbar();
   }
 
 });
