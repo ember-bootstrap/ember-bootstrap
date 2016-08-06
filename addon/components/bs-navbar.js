@@ -7,12 +7,12 @@ export default Ember.Component.extend({
   tagName: 'nav',
   classNames: ['navbar', 'navbar-default'],
 
-  collapsed: true,
-  expanded: Ember.computed.not('collapsed'),
+  navbarCollapsed: true,
+  navbarExpanded: Ember.computed.not('navbarCollapsed'),
 
   actions: {
     toggleNavbar() {
-      this.toggleProperty('collapsed');
+      this.toggleProperty('navbarCollapsed');
     }
   }
 });
