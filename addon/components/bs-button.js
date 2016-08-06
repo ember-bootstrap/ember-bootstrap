@@ -274,7 +274,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
           }
         );
       }
-    };
+    }
     let action = this.get('action');
     if (typeOf(action) === 'function') {
       let promise = action(this.get('value'), evt, handleButtonPromise);
@@ -288,7 +288,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
   },
 
   init() {
-    this._super();
+    this._super(...arguments);
     this.get('reset');
   }
 
