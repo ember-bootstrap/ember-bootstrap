@@ -5,9 +5,5 @@ export default BsButtonComponent.extend({
   layout,
 
   classNames: ['navbar-toggle', 'collapsed'],
-
-  init() {
-    this._super(...arguments);
-    this.set('toggle', true);
-  }
+  toggle: true
 });
