@@ -20,8 +20,7 @@
         <a class="navbar-brand" href="#">Brand</a>
     {{/bs-navbar-header}}
     {{#bs-navbar-content collapsed=navbar.collapsed}}
-        {{!-- TODO: Create bs-navbar-nav to install guardrails? --}}
-        {{#bs-nav navbar=true}}
+        {{#bs-navbar-nav}}
             {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
             {{#bs-nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/bs-nav-item}}
             {{#bs-nav-item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/bs-nav-item}}
@@ -32,6 +31,6 @@
             {{#bs-nav-item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/bs-nav-item}}
             {{#bs-nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/bs-nav-item}}
             {{#bs-nav-item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/bs-nav-item}}
-        {{/bs-nav}}
+        {{/bs-navbar-nav}}
     {{/bs-navbar-content}}
 {{/bs-navbar}}
