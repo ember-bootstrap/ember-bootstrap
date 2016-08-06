@@ -19,8 +19,7 @@
         --}}
         <a class="navbar-brand" href="#">Brand</a>
     {{/bs-navbar-header}}
-    {{!-- TODO: Create bs-navbar-content instead of using bs-collapse --}}
-    {{#bs-collapse collapsed=navbar.collapsed class="navbar-collapse"}}
+    {{#bs-navbar-content collapsed=navbar.collapsed}}
         {{!-- TODO: Create bs-navbar-nav to install guardrails? --}}
         {{#bs-nav navbar=true}}
             {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
@@ -34,5 +33,5 @@
             {{#bs-nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/bs-nav-item}}
             {{#bs-nav-item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/bs-nav-item}}
         {{/bs-nav}}
-    {{/bs-collapse}}
+    {{/bs-navbar-content}}
 {{/bs-navbar}}
