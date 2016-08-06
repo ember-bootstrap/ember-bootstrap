@@ -8,7 +8,6 @@
 
 {{#bs-navbar as |navbar|}}
     {{#bs-navbar-header}}
-        {{!-- TODO: Hide more of the plumbing --}}
         {{#bs-navbar-toggle action=navbar.toggle}}
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -23,7 +22,7 @@
     {{!-- TODO: Create bs-navbar-content instead of using bs-collapse --}}
     {{#bs-collapse collapsed=navbar.collapsed class="navbar-collapse"}}
         {{!-- TODO: Create bs-navbar-nav to install guardrails? --}}
-        {{#bs-nav justified=false stacked=true navbar=true}}
+        {{#bs-nav navbar=true}}
             {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
             {{#bs-nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/bs-nav-item}}
             {{#bs-nav-item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/bs-nav-item}}
