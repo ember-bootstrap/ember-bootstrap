@@ -8,7 +8,6 @@ export default Ember.Component.extend({
   classNames: ['navbar', 'navbar-default'],
 
   navbarCollapsed: true,
-  navbarExpanded: Ember.computed.not('navbarCollapsed'),
 
   actions: {
     toggleNavbar() {
