@@ -63,7 +63,7 @@ export default Ember.Component.extend({
   tagName: 'ul',
   classNames: ['nav'],
 
-  classNameBindings: ['typeClass', 'justified:nav-justified', 'stacked:nav-stacked', 'navbar:navbar-nav'],
+  classNameBindings: ['typeClass', 'justified:nav-justified', 'stacked:nav-stacked'],
 
   typeClass: Ember.computed('type', function() {
     let type = this.get('type');
@@ -100,16 +100,5 @@ export default Ember.Component.extend({
    * @default false
    * @public
    */
-  stacked: false,
-
-  // TODO: Should this be a derived bs-navbar-nav instead? Can't have justified navbar navs.
-  /**
-   * Make the nav a navbar nav, see [boostrap docs](http://getbootstrap.com/components/#navbar)
-   *
-   * @property navbar
-   * @type boolean
-   * @default false
-   * @public
-   */
-  navbar: false
+  stacked: false
 });
