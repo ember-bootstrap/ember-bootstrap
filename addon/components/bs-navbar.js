@@ -10,11 +10,11 @@ export default Ember.Component.extend(TypeClass, {
 
   classTypePrefix: 'navbar',
 
-  navbarCollapsed: true,
+  collapsed: true,
 
   actions: {
     toggleNavbar() {
-      this.toggleProperty('navbarCollapsed');
+      this.toggleProperty('collapsed');
     }
   }
 });
