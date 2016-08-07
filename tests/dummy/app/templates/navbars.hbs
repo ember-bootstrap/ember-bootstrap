@@ -1,12 +1,12 @@
 <h1>Navbars</h1>
 
 {{#bs-form model=this}}
-    {{bs-form-element controlType="checkbox" label="Expanded" property="nbe" value=nbe}}
+    {{bs-form-element controlType="checkbox" label="Inverse" property="inverse" value=inverse}}
 {{/bs-form}}
 
 <h2>Navbars</h2>
 
-{{#bs-navbar as |navbar|}}
+{{#bs-navbar type=(if inverse 'inverse') as |navbar|}}
     {{#navbar.header}}
         {{#navbar.toggle}}
             <span class="sr-only">Toggle navigation</span>
