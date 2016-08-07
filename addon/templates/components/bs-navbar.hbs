@@ -1,3 +1,12 @@
 <div class="container-fluid">
-    {{yield (hash collapsed=collapsed toggle=(action 'toggleNavbar'))}}
+    {{yield
+        (hash
+            collapsed=collapsed
+            header=(component 'bs-navbar-header')
+            toggle=(component 'bs-navbar-toggle' action=(action 'toggleNavbar'))
+            brand=(component 'bs-navbar-brand')
+            content=(component 'bs-navbar-content' collapsed=collapsed)
+            nav=(component 'bs-navbar-nav')
+        )
+    }}
 </div>

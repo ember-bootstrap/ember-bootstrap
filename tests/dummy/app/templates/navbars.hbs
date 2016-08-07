@@ -7,17 +7,17 @@
 <h2>Navbars</h2>
 
 {{#bs-navbar as |navbar|}}
-    {{#bs-navbar-header}}
-        {{#bs-navbar-toggle action=navbar.toggle}}
+    {{#navbar.header}}
+        {{#navbar.toggle}}
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-        {{/bs-navbar-toggle}}
-        {{#bs-navbar-brand}}Brand{{/bs-navbar-brand}}
-    {{/bs-navbar-header}}
-    {{#bs-navbar-content collapsed=navbar.collapsed}}
-        {{#bs-navbar-nav}}
+        {{/navbar.toggle}}
+        {{#navbar.brand}}Brand{{/navbar.brand}}
+    {{/navbar.header}}
+    {{#navbar.content}}
+        {{#navbar.nav}}
             {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
             {{#bs-nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/bs-nav-item}}
             {{#bs-nav-item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/bs-nav-item}}
@@ -28,6 +28,6 @@
             {{#bs-nav-item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/bs-nav-item}}
             {{#bs-nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/bs-nav-item}}
             {{#bs-nav-item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/bs-nav-item}}
-        {{/bs-navbar-nav}}
-    {{/bs-navbar-content}}
+        {{/navbar.nav}}
+    {{/navbar.content}}
 {{/bs-navbar}}
