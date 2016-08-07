@@ -1,10 +1,11 @@
-import Ember from 'ember';
 import BsButtonComponent from 'ember-bootstrap/components/bs-button';
 import layout from '../templates/components/bs-navbar-toggle';
 
 /**
  * Component to implement the responsive menu toggle behavior in a [Components.Navbar](Components.Navbar.html)
  * component. Have a look there for examples.
+ *
+ * The button `toggle` property will always be set to `true` in this component.
  *
  * @class NavbarToggle
  * @namespace Components
@@ -16,16 +17,8 @@ export default BsButtonComponent.extend({
 
   classNames: ['navbar-toggle', 'collapsed'],
 
-  /**
-   * See [Components.Button](Components.Button.html).
-   *
-   * @property toggle
-   * @type Boolean
-   * @default true
-   * @readonly
-   * @protected
-   */
-  toggle: Ember.computed(function() {
-    return true;
-  })
+  didReceiveAttrs() {
+    this._super(...arguments);
+    this.set('toggle', true);
+  }
 });
