@@ -6,9 +6,6 @@ moduleForComponent('bs-navbar-header', 'Integration | Component | bs navbar head
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
   this.render(hbs`{{bs-navbar-header}}`);
 
   assert.equal(this.$().text().trim(), '');
@@ -21,4 +18,15 @@ test('it renders', function(assert) {
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');
+});
+
+test('it has correct markup', function(assert) {
+  this.render(hbs`
+    {{#bs-navbar-header}}
+      Header
+    {{/bs-navbar-header}}
+  `);
+
+  assert.equal(this.$().text().trim(), 'Header');
+  assert.equal(this.$('.navbar-header').length, 1, 'there is only one element with the header class');
 });
