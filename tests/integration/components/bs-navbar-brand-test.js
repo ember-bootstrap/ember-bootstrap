@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('bs-navbar-brand', 'Integration | Component | bs navbar brand', {
+moduleForComponent('bs-navbar-brand', 'Integration | Component | bs-navbar-brand', {
   integration: true
 });
 
