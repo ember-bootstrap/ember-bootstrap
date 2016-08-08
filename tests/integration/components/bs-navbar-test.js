@@ -40,24 +40,19 @@ test('it handles inverse navbars properly', function(assert) {
 test('it handles the toggling action propoerly', function(assert) {
   this.render(hbs`
     {{#bs-navbar as |navbar|}}
-      {{#navbar.toggle}}{{navbar.collapsed}}{{/navbar.toggle}}
+      {{#navbar.toggle class="clickme"}}{{navbar.collapsed}}{{/navbar.toggle}}
     {{/bs-navbar}}
   `);
 
   assert.equal(this.$('button').text().trim(), 'true', 'ensure the default state of the property');
 
-  this.$('#clickme').click();
+  let done = assert.async();
+
+  this.$('button').click();
   setTimeout(() => {
     assert.equal(this.$('button').text().trim(), 'false', 'ensure the toggled state of the property');
 
-    assert.async();
-  }, 500);
-
-  this.$('#clickme').click();
-  setTimeout(() => {
-    assert.equal(this.$('button').text().trim(), 'true', 'ensure the state of the property toggles back');
-
-    assert.async();
+    done();
   }, 500);
 });
 
