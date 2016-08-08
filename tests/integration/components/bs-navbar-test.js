@@ -83,3 +83,35 @@ test('it exposes all the requisite contextual components', function(assert) {
   assert.equal(this.$('nav.navbar-default .navbar-collapse').length, 1, 'it has the navbar content');
   assert.equal(this.$('nav.navbar-default .navbar-collapse > .navbar-nav').length, 1, 'it has the navbar nav');
 });
+
+test('it nas no positional classes when position is not specified', function(assert) {
+  this.render(hbs`{{bs-navbar}}`);
+
+  assert.notOk(this.$('nav').hasClass('navbar-fixed-top'), 'it does not have navbar-fixed-top');
+  assert.notOk(this.$('nav').hasClass('navbar-fixed-bottom'), 'it does not have navbar-fixed-bottom');
+  assert.notOk(this.$('nav').hasClass('navbar-static-top'), 'it does not have navbar-static-top');
+});
+
+test('it handles fixed-top properly', function(assert) {
+  this.render(hbs`{{bs-navbar position="fixed-top"}}`);
+
+  assert.ok(this.$('nav').hasClass('navbar-fixed-top'), 'it has navbar-fixed-top');
+  assert.notOk(this.$('nav').hasClass('navbar-fixed-bottom'), 'it does not have navbar-fixed-bottom');
+  assert.notOk(this.$('nav').hasClass('navbar-static-top'), 'it does not have navbar-static-top');
+});
+
+test('it handles fixed-bottom properly', function(assert) {
+  this.render(hbs`{{bs-navbar position="fixed-bottom"}}`);
+
+  assert.notOk(this.$('nav').hasClass('navbar-fixed-top'), 'it does not have navbar-fixed-top');
+  assert.ok(this.$('nav').hasClass('navbar-fixed-bottom'), 'it has navbar-fixed-bottom');
+  assert.notOk(this.$('nav').hasClass('navbar-static-top'), 'it does not have navbar-static-top');
+});
+
+test('it handles static-top properly', function(assert) {
+  this.render(hbs`{{bs-navbar position="static-top"}}`);
+
+  assert.notOk(this.$('nav').hasClass('navbar-fixed-top'), 'it does not have navbar-fixed-top');
+  assert.notOk(this.$('nav').hasClass('navbar-fixed-bottom'), 'it does not have navbar-fixed-bottom');
+  assert.ok(this.$('nav').hasClass('navbar-static-top'), 'it has navbar-static-top');
+});
