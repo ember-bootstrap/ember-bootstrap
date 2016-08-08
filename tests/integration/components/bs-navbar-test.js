@@ -20,7 +20,7 @@ test('it renders', function(assert) {
   assert.equal(this.$().text().trim(), 'template block text');
 });
 
-test('it has correct markup', function(assert) {
+test('it has correct default markup', function(assert) {
   this.render(hbs`{{bs-navbar}}`);
 
   assert.equal(this.$('nav').length, 1, 'there is only one nav element');
@@ -35,6 +35,13 @@ test('it handles inverse navbars properly', function(assert) {
 
   assert.ok(this.$('nav').hasClass('navbar-inverse'), 'the navbar has the navbar-inverse class');
   assert.notOk(this.$('nav').hasClass('navbar-default'), 'the navbar does not have the navbar-default class');
+});
+
+test('it handles fluid containers properly', function(assert) {
+  this.render(hbs`{{bs-navbar fluid=false}}`);
+
+  assert.ok(this.$('nav > div').hasClass('container'), 'the wrapping div has the container class');
+  assert.notOk(this.$('nav > div').hasClass('container-fluid'), 'the wrapping div does not have the container-fluid class');
 });
 
 test('it handles the toggling action propoerly', function(assert) {
