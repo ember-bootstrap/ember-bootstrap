@@ -26,7 +26,7 @@ import layout from '../templates/components/bs-navbar';
        <span class="icon-bar"></span>
        <span class="icon-bar"></span>
      {{/navbar.toggle}}
-     {{#navbar.brand}}Brand{{/navbar.brand}}
+     <a class="navbar-brand" href="#">Brand</a>
    {{/navbar.header}}
    {{#navbar.content}}
      {{#navbar.nav}}
