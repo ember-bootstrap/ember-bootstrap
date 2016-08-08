@@ -66,10 +66,10 @@ test('it handles the toggling action propoerly', function(assert) {
 test('it exposes all the requisite contextual components', function(assert) {
   this.render(hbs`
     {{#bs-navbar as | navbar | }}
-      {{#navbar.header}}
+      <div class="navbar-header">
         {{navbar.toggle}}
         <a class="navbar-brand" href="#">Brand</a>
-      {{/navbar.header}}
+      </div>
       {{#navbar.content}}
         {{navbar.nav}}
       {{/navbar.content}}
@@ -77,7 +77,6 @@ test('it exposes all the requisite contextual components', function(assert) {
   `);
 
   assert.equal(this.$('nav.navbar-default').length, 1, 'it has the navbar');
-  assert.equal(this.$('nav.navbar-default .navbar-header').length, 1, 'it has the navbar header');
   assert.equal(this.$('nav.navbar-default .navbar-header > button.navbar-toggle').length, 1, 'it has the navbar toggle');
   assert.equal(this.$('nav.navbar-default .navbar-collapse').length, 1, 'it has the navbar content');
   assert.equal(this.$('nav.navbar-default .navbar-collapse > .navbar-nav').length, 1, 'it has the navbar nav');

@@ -19,7 +19,7 @@ import layout from '../templates/components/bs-navbar';
 
  ```hbs
  {{#bs-navbar as |navbar|}}
-   {{#navbar.header}}
+   <div class="navbar-header">
      {{#navbar.toggle}}
        <span class="sr-only">Toggle navigation</span>
        <span class="icon-bar"></span>
@@ -27,7 +27,7 @@ import layout from '../templates/components/bs-navbar';
        <span class="icon-bar"></span>
      {{/navbar.toggle}}
      <a class="navbar-brand" href="#">Brand</a>
-   {{/navbar.header}}
+   </div>
    {{#navbar.content}}
      {{#navbar.nav}}
        {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
