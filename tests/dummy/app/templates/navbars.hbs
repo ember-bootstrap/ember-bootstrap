@@ -2,11 +2,12 @@
 
 {{#bs-form model=this}}
     {{bs-form-element controlType="checkbox" label="Inverse" property="inverse" value=inverse}}
+    {{bs-form-element controlType="checkbox" label="Fluid" property="fluid" value=fluid}}
 {{/bs-form}}
 
 <h2>Navbars</h2>
 
-{{#bs-navbar type=(if inverse 'inverse') as |navbar|}}
+{{#bs-navbar type=(if inverse 'inverse') fluid=fluid as |navbar|}}
     {{#navbar.header}}
         {{#navbar.toggle}}
             <span class="sr-only">Toggle navigation</span>
