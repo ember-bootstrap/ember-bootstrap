@@ -51,7 +51,7 @@ import layout from '../templates/components/bs-navbar';
  property. Bootstrap navbars [do not currently support justified nav links](http://getbootstrap.com/components/#navbar-default),
  so those are explicitly disallowed.
 
- Other bootstrap navbar variations, such as forms, buttons, fixed to top, etc. can be supported through direct use of
+ Other bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of
  bootstrap styles applied through the `class` attribute on the components.
 
  @class Navbar
@@ -66,6 +66,7 @@ export default Ember.Component.extend(TypeClass, {
 
   tagName: 'nav',
   classNames: ['navbar'],
+  classNameBindings: ['positionClass'],
 
   classTypePrefix: 'navbar',
 
@@ -88,6 +89,28 @@ export default Ember.Component.extend(TypeClass, {
    * @public
    */
   fluid: true,
+
+  /**
+   * Specifies the position classes for the navbar, currently supporting none, "fixed-top", "fixed-bottom", and "static-top".
+   * See the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.
+   *
+   * @property position
+   * @type String
+   * @default null
+   * @public
+   */
+  position: null,
+
+  positionClass: Ember.computed('position', function() {
+    let position=this.get('position');
+    const validPositions = ['fixed-top', 'fixed-bottom', 'static-top'];
+
+    if (validPositions.indexOf(position) === -1) {
+      return null;
+    }
+
+    return 'navbar-' + position;
+  }),
 
   actions: {
     toggleNavbar() {
