@@ -71,7 +71,6 @@ test('it exposes all the requisite contextual components', function(assert) {
         <a class="navbar-brand" href="#">Brand</a>
       </div>
       {{#navbar.content}}
-        {{navbar.nav}}
       {{/navbar.content}}
     {{/bs-navbar}}
   `);
@@ -79,7 +78,6 @@ test('it exposes all the requisite contextual components', function(assert) {
   assert.equal(this.$('nav.navbar-default').length, 1, 'it has the navbar');
   assert.equal(this.$('nav.navbar-default .navbar-header > button.navbar-toggle').length, 1, 'it has the navbar toggle');
   assert.equal(this.$('nav.navbar-default .navbar-collapse').length, 1, 'it has the navbar content');
-  assert.equal(this.$('nav.navbar-default .navbar-collapse > .navbar-nav').length, 1, 'it has the navbar nav');
 });
 
 test('it nas no positional classes when position is not specified', function(assert) {

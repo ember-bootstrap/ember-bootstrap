@@ -29,7 +29,7 @@ import layout from '../templates/components/bs-navbar';
      <a class="navbar-brand" href="#">Brand</a>
    </div>
    {{#navbar.content}}
-     {{#navbar.nav}}
+     {{#bs-navbar-nav}}
        {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
        {{#bs-nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/bs-nav-item}}
        {{#bs-nav-item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/bs-nav-item}}
@@ -40,7 +40,7 @@ import layout from '../templates/components/bs-navbar';
        {{#bs-nav-item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/bs-nav-item}}
        {{#bs-nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/bs-nav-item}}
        {{#bs-nav-item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/bs-nav-item}}
-     {{/navbar.nav}}
+     {{/bs-navbar-nav}}
    {{/navbar.content}}
  {{/bs-navbar}}
  ```
