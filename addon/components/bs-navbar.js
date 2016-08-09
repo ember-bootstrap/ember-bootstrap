@@ -20,12 +20,12 @@ import layout from '../templates/components/bs-navbar';
  ```hbs
  {{#bs-navbar as |navbar|}}
    <div class="navbar-header">
-     {{#navbar.toggle}}
+     {{#bs-navbar-toggle}}
        <span class="sr-only">Toggle navigation</span>
        <span class="icon-bar"></span>
        <span class="icon-bar"></span>
        <span class="icon-bar"></span>
-     {{/navbar.toggle}}
+     {{/bs-navbar-toggle}}
      <a class="navbar-brand" href="#">Brand</a>
    </div>
    {{#navbar.content}}

@@ -1,4 +1,6 @@
+import Ember from 'ember';
 import BsButtonComponent from 'ember-bootstrap/components/bs-button';
+import NavbarComponent from 'ember-bootstrap/components/bs-navbar';
 import layout from '../templates/components/bs-navbar-toggle';
 
 /**
@@ -16,6 +18,18 @@ export default BsButtonComponent.extend({
   layout,
 
   classNames: ['navbar-toggle', 'collapsed'],
+
+  targetObject: Ember.computed(function() {
+    return this.nearestOfType(NavbarComponent);
+  }).volatile(),
+
+  action: 'toggleNavbar',
+
+  actions: {
+    toggleNavbar() {
+      this.sendAction();
+    }
+  },
 
   didReceiveAttrs() {
     this._super(...arguments);
