@@ -7,18 +7,17 @@ import layout from '../templates/components/bs-navbar';
 
  ### Usage
 
- Uses the following components by a contextual reference:
+ Used in combination with the following components:
 
  - [Components.NavbarHeader](Components.NavbarHeader.html
  - [Components.NavbarContent](Components.NavbarContent.html
  - [Components.NavbarToggle](Components.NavbarToggle.html
  - [Components.NavbarBrand](Components.NavbarBrand.html
  - [Components.NavbarNav](Components.NavbarNav.html
-
- and uses [Components.NavItem](Components.NavItem.html) directly.
+ - [Components.NavItem](Components.NavItem.html)
 
  ```hbs
- {{#bs-navbar as |navbar|}}
+ {{#bs-navbar}}
    <div class="navbar-header">
      {{#bs-navbar-toggle}}
        <span class="sr-only">Toggle navigation</span>
@@ -28,7 +27,7 @@ import layout from '../templates/components/bs-navbar';
      {{/bs-navbar-toggle}}
      <a class="navbar-brand" href="#">Brand</a>
    </div>
-   {{#navbar.content}}
+   {{#bs-navbar-content}}
      {{#bs-navbar-nav}}
        {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
        {{#bs-nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/bs-nav-item}}
@@ -41,7 +40,7 @@ import layout from '../templates/components/bs-navbar';
        {{#bs-nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/bs-nav-item}}
        {{#bs-nav-item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/bs-nav-item}}
      {{/bs-navbar-nav}}
-   {{/navbar.content}}
+   {{/bs-navbar-content}}
  {{/bs-navbar}}
  ```
 
