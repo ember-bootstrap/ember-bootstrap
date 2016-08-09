@@ -47,7 +47,7 @@ test('it handles fluid containers properly', function(assert) {
 test('it handles the toggling action propoerly', function(assert) {
   this.render(hbs`
     {{#bs-navbar as |navbar|}}
-      {{#navbar.toggle class="clickme"}}{{navbar.collapsed}}{{/navbar.toggle}}
+      {{#bs-navbar-toggle class="clickme"}}{{navbar.collapsed}}{{/bs-navbar-toggle}}
     {{/bs-navbar}}
   `);
 
@@ -67,7 +67,7 @@ test('it exposes all the requisite contextual components', function(assert) {
   this.render(hbs`
     {{#bs-navbar as | navbar | }}
       <div class="navbar-header">
-        {{navbar.toggle}}
+        {{bs-navbar-toggle}}
         <a class="navbar-brand" href="#">Brand</a>
       </div>
       {{#navbar.content}}
@@ -76,7 +76,6 @@ test('it exposes all the requisite contextual components', function(assert) {
   `);
 
   assert.equal(this.$('nav.navbar-default').length, 1, 'it has the navbar');
-  assert.equal(this.$('nav.navbar-default .navbar-header > button.navbar-toggle').length, 1, 'it has the navbar toggle');
   assert.equal(this.$('nav.navbar-default .navbar-collapse').length, 1, 'it has the navbar content');
 });
 
