@@ -46,8 +46,8 @@ test('it handles fluid containers properly', function(assert) {
 
 test('it handles the toggling action propoerly', function(assert) {
   this.render(hbs`
-    {{#bs-navbar as |navbar|}}
-      {{#bs-navbar-toggle class="clickme"}}{{navbar.collapsed}}{{/bs-navbar-toggle}}
+    {{#bs-navbar as | collapsed |}}
+      {{#bs-navbar-toggle}}{{collapsed}}{{/bs-navbar-toggle}}
     {{/bs-navbar}}
   `);
 
@@ -61,22 +61,6 @@ test('it handles the toggling action propoerly', function(assert) {
 
     done();
   }, 500);
-});
-
-test('it exposes all the requisite contextual components', function(assert) {
-  this.render(hbs`
-    {{#bs-navbar as | navbar | }}
-      <div class="navbar-header">
-        {{bs-navbar-toggle}}
-        <a class="navbar-brand" href="#">Brand</a>
-      </div>
-      {{#navbar.content}}
-      {{/navbar.content}}
-    {{/bs-navbar}}
-  `);
-
-  assert.equal(this.$('nav.navbar-default').length, 1, 'it has the navbar');
-  assert.equal(this.$('nav.navbar-default .navbar-collapse').length, 1, 'it has the navbar content');
 });
 
 test('it nas no positional classes when position is not specified', function(assert) {

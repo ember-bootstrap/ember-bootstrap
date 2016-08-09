@@ -1,8 +1,3 @@
 <div class={{if fluid "container-fluid" "container"}}>
-    {{yield
-        (hash
-            collapsed=collapsed
-            content=(component 'bs-navbar-content' collapsed=collapsed)
-        )
-    }}
+    {{yield collapsed}} {{! yielding property for testing }}
 </div>
