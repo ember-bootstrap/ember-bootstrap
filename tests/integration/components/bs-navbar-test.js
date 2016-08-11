@@ -44,20 +44,21 @@ test('it handles fluid containers properly', function(assert) {
   assert.notOk(this.$('nav > div').hasClass('container-fluid'), 'the wrapping div does not have the container-fluid class');
 });
 
-test('it handles the toggling action propoerly', function(assert) {
+test('it handles the toggling action properly', function(assert) {
   this.render(hbs`
-    {{#bs-navbar as | collapsed |}}
-      {{#bs-navbar-toggle}}{{collapsed}}{{/bs-navbar-toggle}}
+    {{#bs-navbar}}
+      {{bs-navbar-toggle}}
+      {{#bs-navbar-content}}Content{{/bs-navbar-content}}
     {{/bs-navbar}}
   `);
 
-  assert.equal(this.$('button').text().trim(), 'true', 'ensure the default state of the property');
+  assert.notOk(this.$('.navbar-collapse').hasClass('in'), 'ensure the default state of the content');
 
   let done = assert.async();
 
   this.$('button').click();
   setTimeout(() => {
-    assert.equal(this.$('button').text().trim(), 'false', 'ensure the toggled state of the property');
+    assert.ok(this.$('.navbar-collapse').hasClass('in'), 'ensure the toggled state of the content');
 
     done();
   }, 500);
