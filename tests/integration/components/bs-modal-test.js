@@ -502,3 +502,38 @@ test('Renders in place (no wormhole) if renderInPlace is set', function(assert) 
   assert.equal(this.$('.modal').length, 1, 'Modal exists.');
   assert.notEqual(this.$('.modal').parent().attr('id'), 'ember-bootstrap-modal-container');
 });
+
+test('Removes "modal-open" class when component is removed from view', function(assert) {
+  this.set('renderComponent', true);
+  this.render(hbs`{{#if renderComponent}}{{#bs-modal title="Simple Dialog"}}Hello world!{{/bs-modal}}{{/if}}<div id="ember-bootstrap-modal-container"></div>`);
+
+  let done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.ok($('body').hasClass('modal-open'), 'body element has "modal-open" class.');
+
+    this.set('renderComponent', false);
+
+    assert.ok(!($('body').hasClass('modal-open')), 'body element does not have "modal-open" class.');
+    done();
+  }, transitionTimeout);
+});
+
+test('Resets scroll bar when component is removed from view', function(assert) {
+  document.body.style.paddingRight = '50px';
+  this.set('renderComponent', true);
+  this.render(hbs`{{#if renderComponent}}{{#bs-modal title="Simple Dialog"}}Hello world!{{/bs-modal}}{{/if}}<div id="ember-bootstrap-modal-container"></div>`);
+
+  let done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    document.body.style.paddingRight = '0px';
+    this.set('renderComponent', false);
+
+    assert.equal(document.body.style.paddingRight, '50px', 'paddingRight restored to 50px');
+    document.body.style.paddingRight = '0px';
+    done();
+  }, transitionTimeout);
+});
