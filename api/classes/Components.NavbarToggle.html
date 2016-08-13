@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.DropdownToggle - ember-bootstrap</title>
+    <title>Components.NavbarToggle - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,23 +49,17 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.DropdownToggle <small>Class</small></h1>
+    <h1>Components.NavbarToggle <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
-        <div class="uses">
-            Uses
-            <ul class="inline commas">
-                    <li><a href="Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-            </ul>
-        </div>
 
         <div class="extends">
-            Extends <a href="http://emberjs.com/api/classes/Ember.Component.html" class="crosslink external" target="_blank">Ember.Component</a>
+            Extends <a href="../classes/Components.Button.html" class="crosslink">Components.Button</a>
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-dropdown-toggle.js.html#l6"><code>addon&#x2F;components&#x2F;bs-dropdown-toggle.js:6</code></a>
+            Defined in: <a href="../files/addon_components_bs-navbar-toggle.js.html#l6"><code>addon&#x2F;components&#x2F;bs-navbar-toggle.js:6</code></a>
         </div>
 
 
@@ -73,9 +67,9 @@
 
 
 <div class="well well-small">
-    <p>Anchor element that triggers the parent dropdown to open.
-Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if you want a button instead of an anchor tag.</p>
-<p>See <a href="Components.Dropdown.html">Components.Dropdown</a> for examples.</p>
+    <p>Component to implement the responsive menu toggle behavior in a <a href="Components.Navbar.html">Components.Navbar</a>
+component. Have a look there for examples.</p>
+<p>The button <code>toggle</code> property will always be set to <code>true</code> in this component.</p>
 
 </div>
 
@@ -175,6 +169,10 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                             </li>
                             <li class="index-item method public inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_cacheFor" data-tablink="cacheFor">cacheFor</a>
+
+                            </li>
+                            <li class="index-item method protected inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_click" data-tablink="click">click</a>
 
                             </li>
                             <li class="index-item method private inherited">
@@ -319,6 +317,10 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                                 <a href="#" data-tabid="#methods" data-anchor="#method_rerender" data-tablink="rerender">rerender</a>
 
                             </li>
+                            <li class="index-item method protected inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_resetState" data-tablink="resetState">resetState</a>
+
+                            </li>
                             <li class="index-item method public inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method_send" data-tablink="send">send</a>
 
@@ -362,16 +364,24 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
-                            <li class="index-item property protected inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_action" data-tablink="action">action</a>
-
-                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_actions" data-tablink="actions">actions</a>
 
                             </li>
-                            <li class="index-item property protected inherited inherited">
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_active" data-tablink="active">active</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_ariaRole" data-tablink="ariaRole">ariaRole</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_block" data-tablink="block">block</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_buttonType" data-tablink="buttonType">buttonType</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -382,8 +392,20 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                                 <a href="#" data-tabid="#properties" data-anchor="#property_classNames" data-tablink="classNames">classNames</a>
 
                             </li>
+                            <li class="index-item property protected inherited inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix" data-tablink="classTypePrefix">classTypePrefix</a>
+
+                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_concatenatedProperties" data-tablink="concatenatedProperties">concatenatedProperties</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_defaultText" data-tablink="defaultText">defaultText</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_disabled" data-tablink="disabled">disabled</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -402,8 +424,16 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                                 <a href="#" data-tabid="#properties" data-anchor="#property_hasBlockParams" data-tablink="hasBlockParams">hasBlockParams</a>
 
                             </li>
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_href" data-tablink="href">href</a>
+                            <li class="index-item property protected inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_icon" data-tablink="icon">icon</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_iconActive" data-tablink="iconActive">iconActive</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_iconInactive" data-tablink="iconInactive">iconInactive</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -435,6 +465,14 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
 
                             </li>
                             <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_reset" data-tablink="reset">reset</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_size" data-tablink="size">size</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_tagName" data-tablink="tagName">tagName</a>
 
                             </li>
@@ -451,6 +489,22 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                                 <a href="#" data-tabid="#properties" data-anchor="#property_templateName" data-tablink="templateName">templateName</a>
 
                                     <span class="label label-deprecated">deprecated</span>
+                            </li>
+                            <li class="index-item property protected inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_textState" data-tablink="textState">textState</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_toggle" data-tablink="toggle">toggle</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_type" data-tablink="type">type</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_value" data-tablink="value">value</a>
+
                             </li>
                     </ul>
                 </div>
@@ -1145,6 +1199,59 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                                         The cached value of the computed property, if any
                                 </div>
                             </div>
+                    
+                    </div>
+                    <div id="method_click" class="method item protected inherited">
+                        <h3 class="name">click
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#method_click">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l244"><code>addon&#x2F;components&#x2F;bs-button.js:244</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Click handler. This will send the default &quot;action&quot; action, with the following parameters:</p>
+                    <ul>
+                    <li>value of the button (that is the value of the &quot;value&quot; property)</li>
+                    <li>original event object of the click event</li>
+                    <li>callback: call that with a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;</li>
+                    </ul>
+                    <p>When using closure actions just return the promise instead of calling the above mentioned callback.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">evt</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
                     
                     </div>
                     <div id="method_createElement" class="method item private inherited">
@@ -3178,6 +3285,37 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                     </div>
+                    <div id="method_resetState" class="method item protected inherited">
+                        <h3 class="name">resetState
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#method_resetState">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l222"><code>addon&#x2F;components&#x2F;bs-button.js:222</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>This will reset the state property to 'default', and with that the button's label to defaultText</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="method_send" class="method item public inherited">
                         <h3 class="name">send
                         <span class="small"> </span>
@@ -3792,36 +3930,6 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_action" class="property item protected inherited">
-                        <h3 class="name">action
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.DropdownToggle.html#property_action">Mixins.DropdownToggle</a>:
-                            <a href="../files/addon_mixins_dropdown-toggle.js.html#l24"><code>addon&#x2F;mixins&#x2F;dropdown-toggle.js:24</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The default action is set to "toggleDropdown" on the parent {{#crossLink "Components.Dropdown"}}{{/crossLink}}
-                        </div>
-                    
-                            <p><strong>Default:</strong> toggleDropdown</p>
-                    
-                    
-                    </div>
                     <div id="property_actions" class="property item public inherited">
                         <h3 class="name">actions
                             <span class="small">Object</span>
@@ -3964,36 +4072,133 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                     </div>
-                    <div id="property_ariaRole" class="property item protected inherited">
-                        <h3 class="name">ariaRole
-                            <span class="small">string</span>
+                    <div id="property_active" class="property item public inherited">
+                        <h3 class="name">active
+                            <span class="small">boolean</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-protected">protected</span>
+                            <span class="label label-public">public</span>
                     
                     
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="http://emberjs.com/api/classes/Ember.AriaRoleSupport.html#property_ariaRole">
-                                    Ember.AriaRoleSupport
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_mixins_dropdown-toggle.js.html#l14"><code>addon&#x2F;mixins&#x2F;dropdown-toggle.js:14</code></a>
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#property_active">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l125"><code>addon&#x2F;components&#x2F;bs-button.js:125</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
+                            <p>Set the 'active' class to apply active/pressed CSS styling</p>
+                    
                         </div>
                     
-                            <p><strong>Default:</strong> button</p>
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_ariaRole" class="property item public inherited">
+                        <h3 class="name">ariaRole
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.AriaRoleSupport.html#property_ariaRole">Ember.AriaRoleSupport</a>:
+                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_mixins_aria_role_support.js.html#l16"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;mixins&#x2F;aria_role_support.js:16</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The WAI-ARIA role of the control represented by this view. For example, a
+                    button may have a role of type 'button', or a pane may have a role of
+                    type 'alertdialog'. This property is used by assistive software to help
+                    visually challenged users navigate rich web applications.
+                    
+                    The full list of valid WAI-ARIA roles is available at:
+                    [http://www.w3.org/TR/wai-aria/roles#roles_categorization](http://www.w3.org/TR/wai-aria/roles#roles_categorization)
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_block" class="property item public inherited">
+                        <h3 class="name">block
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#property_block">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l135"><code>addon&#x2F;components&#x2F;bs-button.js:135</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Property for block level buttons</p>
+                    <p>See the <a href="http://getbootstrap.com/css/#buttons-sizes">Bootstrap docs</a></p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_buttonType" class="property item public inherited">
+                        <h3 class="name">buttonType
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#property_buttonType">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l115"><code>addon&#x2F;components&#x2F;bs-button.js:115</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Set the type of the button, either 'button' or 'submit'</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;button&#x27;</p>
                     
                     
                     </div>
@@ -4093,6 +4298,39 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                     </div>
+                    <div id="property_classTypePrefix" class="property item protected inherited">
+                        <h3 class="name">classTypePrefix
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                <p>Inherited from
+                                <a href="../classes/Mixins.TypeClass.html#property_classTypePrefix">
+                                    Mixins.TypeClass
+                                </a>
+                                but overwritten in
+                            <a href="../files/addon_components_bs-button.js.html#l86"><code>addon&#x2F;components&#x2F;bs-button.js:86</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;btn&#x27;</p>
+                    
+                    
+                    </div>
                     <div id="property_concatenatedProperties" class="property item public inherited">
                         <h3 class="name">concatenatedProperties
                             <span class="small">Array</span>
@@ -4179,6 +4417,67 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_defaultText" class="property item public inherited">
+                        <h3 class="name">defaultText
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#property_defaultText">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l96"><code>addon&#x2F;components&#x2F;bs-button.js:96</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Default label of the button. Not need if used as a block component</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_disabled" class="property item public inherited">
+                        <h3 class="name">disabled
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#property_disabled">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l105"><code>addon&#x2F;components&#x2F;bs-button.js:105</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Property to disable the button</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
@@ -4381,9 +4680,9 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                     </div>
-                    <div id="property_href" class="property item protected">
-                        <h3 class="name">href
-                            <span class="small">string</span>
+                    <div id="property_icon" class="property item protected inherited">
+                        <h3 class="name">icon
+                            <span class="small">String</span>
                         </h3>
                     
                     
@@ -4395,16 +4694,77 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                         <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-dropdown-toggle.js.html#l32"><code>addon&#x2F;components&#x2F;bs-dropdown-toggle.js:32</code></a>
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#property_icon">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l174"><code>addon&#x2F;components&#x2F;bs-button.js:174</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Computed property to generate a <code>href=&quot;#&quot;</code> attribute when <code>tagName</code> is &quot;a&quot;.</p>
+                            <p>Class(es) (e.g. glyphicons or font awesome) to use as a button icon
+                    This will render a <i class="{{icon}}"></i> element in front of the button's label</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_iconActive" class="property item public inherited">
+                        <h3 class="name">iconActive
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#property_iconActive">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l156"><code>addon&#x2F;components&#x2F;bs-button.js:156</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>If button is active and this is set, the icon property will match this property</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_iconInactive" class="property item public inherited">
+                        <h3 class="name">iconInactive
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#property_iconInactive">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l165"><code>addon&#x2F;components&#x2F;bs-button.js:165</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>If button is inactive and this is set, the icon property will match this property</p>
                     
                         </div>
                     
@@ -4637,9 +4997,9 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                     </div>
-                    <div id="property_tagName" class="property item public">
-                        <h3 class="name">tagName
-                            <span class="small">string</span>
+                    <div id="property_reset" class="property item public inherited">
+                        <h3 class="name">reset
+                            <span class="small">boolean</span>
                         </h3>
                     
                     
@@ -4651,23 +5011,84 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="http://emberjs.com/api/classes/Ember.View.html#property_tagName">
-                                    Ember.View
-                                </a>
-                                but overwritten in
-                            <a href="../files/addon_components_bs-dropdown-toggle.js.html#l20"><code>addon&#x2F;components&#x2F;bs-dropdown-toggle.js:20</code></a>
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#property_reset">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l213"><code>addon&#x2F;components&#x2F;bs-button.js:213</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Defaults to a <code>&lt;a&gt;</code> tag. Change for other types of dropdown toggles.</p>
+                            <p>Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> a</p>
+                    
+                    
+                    </div>
+                    <div id="property_size" class="property item public inherited">
+                        <h3 class="name">size
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.SizeClass.html#property_size">Mixins.SizeClass</a>:
+                            <a href="../files/addon_mixins_size-class.js.html#l30"><code>addon&#x2F;mixins&#x2F;size-class.js:30</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Property for size styling, set to 'lg', 'sm' or 'xs'
+                    
+                    Also see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_tagName" class="property item public inherited">
+                        <h3 class="name">tagName
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="http://emberjs.com/api/classes/Ember.View.html#property_tagName">Ember.View</a>:
+                            <a href="http://emberjs.com/api/files/packages_ember-views_lib_views_view.js.html#l1237"><code>packages&#x2F;ember-views&#x2F;lib&#x2F;views&#x2F;view.js:1237</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Tag name for the view's outer element. The tag name is only used when an
+                    element is first created. If you change the <code>tagName</code> for an element, you
+                    must destroy and recreate the view element.
+                    
+                    By default, the render buffer will use a <code>&lt;div&gt;</code> tag for views.
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
@@ -4777,6 +5198,133 @@ Use <a href="Components.DropdownButton.html">Components.DropdownButton</a> if yo
                         <div class="description">
                             Specifying a components <code>templateName</code> is deprecated without also
                     providing the <code>layout</code> or <code>layoutName</code> properties.
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_textState" class="property item protected inherited">
+                        <h3 class="name">textState
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-protected">protected</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#property_textState">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l201"><code>addon&#x2F;components&#x2F;bs-button.js:201</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>State of the button. The button's label (if not used as a block component) will be set to the
+                    <code>&lt;state&gt;Text</code> property.
+                    This property will automatically be set when using a click action that supplies the callback with an promise</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;default&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_toggle" class="property item public inherited">
+                        <h3 class="name">toggle
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#property_toggle">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l146"><code>addon&#x2F;components&#x2F;bs-button.js:146</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>If toggle property is true, clicking the button will toggle the active state</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_type" class="property item public inherited">
+                        <h3 class="name">type
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.TypeClass.html#property_type">Mixins.TypeClass</a>:
+                            <a href="../files/addon_mixins_type-class.js.html#l29"><code>addon&#x2F;mixins&#x2F;type-class.js:29</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Property for type styling
+                    
+                    For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without "btn-" prefix)
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;default&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_value" class="property item public inherited">
+                        <h3 class="name">value
+                            <span class="small">any</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Button.html#property_value">Components.Button</a>:
+                            <a href="../files/addon_components_bs-button.js.html#l191"><code>addon&#x2F;components&#x2F;bs-button.js:191</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Supply a value that will be associated with this button. This will be send
+                    as a parameter of the default action triggered when clicking the button</p>
+                    
                         </div>
                     
                     

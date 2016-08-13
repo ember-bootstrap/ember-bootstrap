@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.8.0</span></h1>
+    <h1>API Docs <span class="small">0.9.0.fcdf4193</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -134,7 +134,7 @@ const { computed } = Ember;
 export default Ember.Component.extend(ComponentParent, {
   tagName: &#x27;form&#x27;,
   classNameBindings: [&#x27;layoutClass&#x27;],
-  attributeBindings: [&#x27;novalidate&#x27;],
+  attributeBindings: [&#x27;_novalidate:novalidate&#x27;],
   ariaRole: &#x27;form&#x27;,
 
   /**
@@ -210,10 +210,14 @@ export default Ember.Component.extend(ComponentParent, {
    *
    * @property novalidate
    * @type boolean
-   * @default false
+   * @default null
    * @public
    */
   novalidate: false,
+
+  _novalidate: computed(&#x27;novalidate&#x27;, function() {
+    return this.get(&#x27;novalidate&#x27;) === true ? &#x27;&#x27; : undefined;
+  }),
 
   /**
    * An array of &#x60;Components.FormElement&#x60;s that are children of this form.
@@ -339,6 +343,10 @@ export default Ember.Component.extend(ComponentParent, {
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
+                    <li><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+                    <li><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>

@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.8.0</span></h1>
+    <h1>API Docs <span class="small">0.9.0.fcdf4193</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -54,9 +54,18 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../templates/components/bs-nav-item&#x27;;
-import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
+import
+Ember
+from
+&#x27;ember&#x27;;
+import
+layout
+from
+&#x27;../templates/components/bs-nav-item&#x27;;
+import
+ComponentParent
+from
+&#x27;ember-bootstrap/mixins/component-parent&#x27;;
 
 const { computed, LinkComponent } = Ember;
 
@@ -70,7 +79,8 @@ const { computed, LinkComponent } = Ember;
  @uses Mixins.ComponentParent
  @public
  */
-export default Ember.Component.extend(ComponentParent, {
+export default
+Ember.Component.extend(ComponentParent, {
   layout,
   classNameBindings: [&#x27;disabled&#x27;, &#x27;active&#x27;],
   tagName: &#x27;li&#x27;,
@@ -80,7 +90,7 @@ export default Ember.Component.extend(ComponentParent, {
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
    * By default it will look at any nested &#x60;link-to&#x60; components and make itself disabled if there is a disabled link.
    * See the [link-to API](http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_disabling-the-code-link-to-code-component)
-   * 
+   *
    * @property disabled
    * @type boolean
    * @public
@@ -100,8 +110,8 @@ export default Ember.Component.extend(ComponentParent, {
   active: computed.gt(&#x27;activeChildLinks.length&#x27;, 0),
 
   /**
-   * Collection of all &#x60;Ember.LinkComponent&#x60;s that are children 
-   * 
+   * Collection of all &#x60;Ember.LinkComponent&#x60;s that are children
+   *
    * @property childLinks
    * @private
    */
@@ -109,7 +119,6 @@ export default Ember.Component.extend(ComponentParent, {
     return view instanceof LinkComponent;
   }),
 
-  
   activeChildLinks: computed.filterBy(&#x27;childLinks&#x27;, &#x27;active&#x27;),
   disabledChildLinks: computed.filterBy(&#x27;childLinks&#x27;, &#x27;disabled&#x27;)
 });
@@ -144,6 +153,10 @@ export default Ember.Component.extend(ComponentParent, {
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
+                    <li><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+                    <li><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>

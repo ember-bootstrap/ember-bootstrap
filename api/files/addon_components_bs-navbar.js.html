@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-dropdown-menu.js - ember-bootstrap</title>
+    <title>addon/components/bs-navbar.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,62 +49,127 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-dropdown-menu.js <small>File</small></h1>
+    <h1>addon/components/bs-navbar.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-
-const { computed } = Ember;
+import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
+import layout from &#x27;../templates/components/bs-navbar&#x27;;
 
 /**
- Component for the dropdown menu.
+ Component to generate [bootstrap navbars](http://getbootstrap.com/components/#navbar).
 
- See [Components.Dropdown](Components.Dropdown.html) for examples.
+ ### Usage
 
- @class DropdownMenu
+ Used in combination with the following components:
+
+ - [Components.NavbarContent](Components.NavbarContent.html
+ - [Components.NavbarToggle](Components.NavbarToggle.html
+ - [Components.NavbarNav](Components.NavbarNav.html
+ - [Components.NavItem](Components.NavItem.html)
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-navbar}}
+   &lt;div class=&quot;navbar-header&quot;&gt;
+     {{#bs-navbar-toggle}}
+       &lt;span class=&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;
+       &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+       &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+       &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+     {{/bs-navbar-toggle}}
+     &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;Brand&lt;/a&gt;
+   &lt;/div&gt;
+   {{#bs-navbar-content}}
+     {{#bs-navbar-nav}}
+       {{#bs-nav-item}}{{#link-to &quot;alert&quot;}}Alert{{/link-to}}{{/bs-nav-item}}
+       {{#bs-nav-item}}{{#link-to &quot;button&quot;}}Buttons{{/link-to}}{{/bs-nav-item}}
+       {{#bs-nav-item}}{{#link-to &quot;dropdown&quot;}}Dropdown{{/link-to}}{{/bs-nav-item}}
+       {{#bs-nav-item}}{{#link-to &quot;forms&quot;}}Forms{{/link-to}}{{/bs-nav-item}}
+       {{#bs-nav-item}}{{#link-to &quot;accordion&quot;}}Accordion{{/link-to}}{{/bs-nav-item}}
+       {{#bs-nav-item}}{{#link-to &quot;collapse&quot;}}Collapse{{/link-to}}{{/bs-nav-item}}
+       {{#bs-nav-item}}{{#link-to &quot;modal&quot;}}Modals{{/link-to}}{{/bs-nav-item}}
+       {{#bs-nav-item}}{{#link-to &quot;progress&quot;}}Progress bars{{/link-to}}{{/bs-nav-item}}
+       {{#bs-nav-item}}{{#link-to &quot;navs&quot;}}Navs{{/link-to}}{{/bs-nav-item}}
+       {{#bs-nav-item}}{{#link-to &quot;navbars&quot;}}Navbars{{/link-to}}{{/bs-nav-item}}
+     {{/bs-navbar-nav}}
+   {{/bs-navbar-content}}
+ {{/bs-navbar}}
+ &#x60;&#x60;&#x60;
+
+ ### Navbar styles
+
+ The component supports the default bootstrap navbar styling options &quot;default&quot; and &quot;inverse&quot; through the &#x60;type&#x60;
+ property. Bootstrap navbars [do not currently support justified nav links](http://getbootstrap.com/components/#navbar-default),
+ so those are explicitly disallowed.
+
+ Other bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of
+ bootstrap styles applied through the &#x60;class&#x60; attribute on the components.
+
+ @class Navbar
  @namespace Components
  @extends Ember.Component
+ @uses Mixins.TypeClass
  @public
+
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(TypeClass, {
+  layout,
+
+  tagName: &#x27;nav&#x27;,
+  classNames: [&#x27;navbar&#x27;],
+  classNameBindings: [&#x27;positionClass&#x27;],
+
+  classTypePrefix: &#x27;navbar&#x27;,
 
   /**
-   * Defaults to a &#x60;&lt;ul&gt;&#x60; tag. Change for other types of dropdown menus.
+   * Manages the state for the responsive menu between the toggle and the content.
    *
-   * @property tagName
-   * @type string
-   * @default ul
-   * @public
-   */
-  tagName: &#x27;ul&#x27;,
-  classNames: [&#x27;dropdown-menu&#x27;],
-  classNameBindings: [&#x27;alignClass&#x27;],
-
-  /**
-   * @property ariaRole
-   * @default menu
-   * @type string
+   * @property collapsed
+   * @type boolean
+   * @default true
    * @protected
    */
-  ariaRole: &#x27;menu&#x27;,
+  collapsed: true,
 
   /**
-   * Alignment of the menu, either &quot;left&quot; or &quot;right&quot;
+   * Controls whether the wrapping div is a fluid container or not.
    *
-   * @property align
-   * @type string
-   * @default left
+   * @property fluid
+   * @type boolean
+   * @default true
    * @public
    */
-  align: &#x27;left&#x27;,
+  fluid: true,
 
-  alignClass: computed(&#x27;align&#x27;, function() {
-    if (this.get(&#x27;align&#x27;) !== &#x27;left&#x27;) {
-      return &#x60;dropdown-menu-${this.get(&#x27;align&#x27;)}&#x60;;
+  /**
+   * Specifies the position classes for the navbar, currently supporting none, &quot;fixed-top&quot;, &quot;fixed-bottom&quot;, and &quot;static-top&quot;.
+   * See the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.
+   *
+   * @property position
+   * @type String
+   * @default null
+   * @public
+   */
+  position: null,
+
+  positionClass: Ember.computed(&#x27;position&#x27;, function() {
+    let position = this.get(&#x27;position&#x27;);
+    let validPositions = [&#x27;fixed-top&#x27;, &#x27;fixed-bottom&#x27;, &#x27;static-top&#x27;];
+
+    if (validPositions.indexOf(position) === -1) {
+      return null;
     }
-  })
+
+    return &#x60;navbar-${position}&#x60;;
+  }),
+
+  actions: {
+    toggleNavbar() {
+      this.toggleProperty(&#x27;collapsed&#x27;);
+    }
+  }
 });
 
     </pre>

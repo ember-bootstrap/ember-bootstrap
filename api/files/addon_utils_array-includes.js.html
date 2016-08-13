@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-dropdown-menu.js - ember-bootstrap</title>
+    <title>addon/utils/array-includes.js - ember-bootstrap</title>
     <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
     <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
 
@@ -49,64 +49,32 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-dropdown-menu.js <small>File</small></h1>
+    <h1>addon/utils/array-includes.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 
-const { computed } = Ember;
-
 /**
- Component for the dropdown menu.
-
- See [Components.Dropdown](Components.Dropdown.html) for examples.
-
- @class DropdownMenu
- @namespace Components
- @extends Ember.Component
- @public
+ * Handle Ember.Array.contains deprecation: http://emberjs.com/deprecations/v2.x/#toc_enumerable-contains
+ *
+ * @param array
+ * @param value
+ * @public
  */
-export default Ember.Component.extend({
+let includes;
+if (typeof Ember.Array.includes === &#x27;function&#x27;) {
+  includes = function arrayIncludes(array, value) {
+    return array.includes(value);
+  };
+} else {
+  includes = function arrayContains(array, value) {
+    return array.contains(value);
+  };
+}
 
-  /**
-   * Defaults to a &#x60;&lt;ul&gt;&#x60; tag. Change for other types of dropdown menus.
-   *
-   * @property tagName
-   * @type string
-   * @default ul
-   * @public
-   */
-  tagName: &#x27;ul&#x27;,
-  classNames: [&#x27;dropdown-menu&#x27;],
-  classNameBindings: [&#x27;alignClass&#x27;],
-
-  /**
-   * @property ariaRole
-   * @default menu
-   * @type string
-   * @protected
-   */
-  ariaRole: &#x27;menu&#x27;,
-
-  /**
-   * Alignment of the menu, either &quot;left&quot; or &quot;right&quot;
-   *
-   * @property align
-   * @type string
-   * @default left
-   * @public
-   */
-  align: &#x27;left&#x27;,
-
-  alignClass: computed(&#x27;align&#x27;, function() {
-    if (this.get(&#x27;align&#x27;) !== &#x27;left&#x27;) {
-      return &#x60;dropdown-menu-${this.get(&#x27;align&#x27;)}&#x60;;
-    }
-  })
-});
-
+export default includes;
     </pre>
 </div>
                     </div>

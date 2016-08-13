@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.8.0</span></h1>
+    <h1>API Docs <span class="small">0.9.0.fcdf4193</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -314,6 +314,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
       this.toggleProperty(&#x27;active&#x27;);
     }
     let that = this;
+
     function handleButtonPromise(promise) {
       if (promise) {
         that.set(&#x27;textState&#x27;, &#x27;pending&#x27;);
@@ -330,7 +331,8 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
           }
         );
       }
-    };
+    }
+
     let action = this.get(&#x27;action&#x27;);
     if (typeOf(action) === &#x27;function&#x27;) {
       let promise = action(this.get(&#x27;value&#x27;), evt, handleButtonPromise);
@@ -344,7 +346,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
   },
 
   init() {
-    this._super();
+    this._super(...arguments);
     this.get(&#x27;reset&#x27;);
   }
 
@@ -379,6 +381,10 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
+                    <li><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+                    <li><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>

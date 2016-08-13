@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.8.0</span></h1>
+    <h1>API Docs <span class="small">0.9.0.fcdf4193</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -116,6 +116,16 @@ const { computed, observer } = Ember;
  {{/bs-dropdown}}
  &#x60;&#x60;&#x60;
 
+ ### Dropup style
+
+ Set the &#x60;direction&#x60; property to &quot;up&quot; to switch to a &quot;dropup&quot; style:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-dropdown direction=&quot;up&quot;}}
+   ...
+ {{/bs-dropdown}}
+ &#x60;&#x60;&#x60;
+
  @class Dropdown
  @namespace Components
  @extends Ember.Component
@@ -154,15 +164,29 @@ export default Ember.Component.extend(ComponentParent, {
   clickEventName: undefined,
 
   /**
-   * A computed property to generate the suiting class for the dropdown container, either &quot;dropdown&quot; or &quot;btn-group&quot;.
+   * By default the dropdown menu will expand downwards. Set to &#x27;up&#x27; to expand upwards.
+   *
+   * @property direction
+   * @type string
+   * @default &#x27;down&#x27;
+   * @public
+   */
+  direction: &#x27;down&#x27;,
+
+  /**
+   * A computed property to generate the suiting class for the dropdown container, either &quot;dropdown&quot;, &quot;dropup&quot; or &quot;btn-group&quot;.
    *
    * @property containerClass
    * @type string
    * @readonly
-   * @protected
+   * @private
    */
-  containerClass: computed(&#x27;toggleType&#x27;, function() {
-    return this.get(&#x27;toggleType&#x27;) === &#x27;button&#x27; ? &#x27;btn-group&#x27; : &#x27;dropdown&#x27;;
+  containerClass: computed(&#x27;toggleType&#x27;, &#x27;direction&#x27;, function() {
+    if (this.get(&#x27;toggleType&#x27;) === &#x27;button&#x27;) {
+      return this.get(&#x27;direction&#x27;) === &#x27;up&#x27; ? &#x27;btn-group dropup&#x27; : &#x27;btn-group&#x27;;
+    } else {
+      return this.get(&#x27;direction&#x27;) === &#x27;up&#x27; ? &#x27;dropup&#x27; : &#x27;dropdown&#x27;;
+    }
   }),
 
   /**
@@ -263,6 +287,10 @@ export default Ember.Component.extend(ComponentParent, {
                     <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
                     <li><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
+                    <li><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+                    <li><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
                     <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
