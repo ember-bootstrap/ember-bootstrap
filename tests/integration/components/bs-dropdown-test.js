@@ -11,9 +11,21 @@ test('dropdown container has dropdown class', function(assert) {
   assert.equal(this.$(':first-child').hasClass('dropdown'), true, 'has dropdown class');
 });
 
+test('dropdown container supports dropup style', function(assert) {
+  this.render(hbs`{{#bs-dropdown direction="up"}}Test{{/bs-dropdown}}`);
+
+  assert.equal(this.$(':first-child').hasClass('dropup'), true, 'has dropup class');
+});
+
 test('dropdown container with dropdown button has btn-group class', function(assert) {
   this.render(hbs`{{#bs-dropdown}}{{#bs-dropdown-button}}Dropdown <span class="caret"></span>{{/bs-dropdown-button}}{{#bs-dropdown-menu}}<li><a href="#">Something</a></li>{{/bs-dropdown-menu}}{{/bs-dropdown}}`);
   assert.equal(this.$(':first-child').hasClass('btn-group'), true, 'has btn-group class');
+});
+
+test('dropdown container with dropdown button supports dropup style', function(assert) {
+  this.render(hbs`{{#bs-dropdown direction="up"}}{{#bs-dropdown-button}}Dropdown <span class="caret"></span>{{/bs-dropdown-button}}{{#bs-dropdown-menu}}<li><a href="#">Something</a></li>{{/bs-dropdown-menu}}{{/bs-dropdown}}`);
+  assert.equal(this.$(':first-child').hasClass('btn-group'), true, 'has btn-group class');
+  assert.equal(this.$(':first-child').hasClass('dropup'), true, 'has dropup class');
 });
 
 test('dropdown-toggle toggles dropdown visibility', function(assert) {

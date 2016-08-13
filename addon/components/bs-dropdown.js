@@ -60,6 +60,16 @@ const { computed, observer } = Ember;
  {{/bs-dropdown}}
  ```
 
+ ### Dropup style
+
+ Set the `direction` property to "up" to switch to a "dropup" style:
+
+ ```hbs
+ {{#bs-dropdown direction="up"}}
+   ...
+ {{/bs-dropdown}}
+ ```
+
  @class Dropdown
  @namespace Components
  @extends Ember.Component
@@ -98,15 +108,29 @@ export default Ember.Component.extend(ComponentParent, {
   clickEventName: undefined,
 
   /**
-   * A computed property to generate the suiting class for the dropdown container, either "dropdown" or "btn-group".
+   * By default the dropdown menu will expand downwards. Set to 'up' to expand upwards.
+   *
+   * @property direction
+   * @type string
+   * @default 'down'
+   * @public
+   */
+  direction: 'down',
+
+  /**
+   * A computed property to generate the suiting class for the dropdown container, either "dropdown", "dropup" or "btn-group".
    *
    * @property containerClass
    * @type string
    * @readonly
-   * @protected
+   * @private
    */
-  containerClass: computed('toggleType', function() {
-    return this.get('toggleType') === 'button' ? 'btn-group' : 'dropdown';
+  containerClass: computed('toggleType', 'direction', function() {
+    if (this.get('toggleType') === 'button') {
+      return this.get('direction') === 'up' ? 'btn-group dropup' : 'btn-group';
+    } else {
+      return this.get('direction') === 'up' ? 'dropup' : 'dropdown';
+    }
   }),
 
   /**

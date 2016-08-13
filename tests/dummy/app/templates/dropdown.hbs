@@ -21,8 +21,8 @@
                         <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
                     {{/bs-dropdown-menu}}
                 {{/bs-dropdown}}
-                {{#bs-dropdown tagName="li"}}
-                    {{#bs-dropdown-toggle}}Dropdown <span class="caret"></span>{{/bs-dropdown-toggle}}
+                {{#bs-dropdown direction="up" tagName="li"}}
+                    {{#bs-dropdown-toggle}}Dropup <span class="caret"></span>{{/bs-dropdown-toggle}}
                     {{#bs-dropdown-menu align="right"}}
                         <li>{{#link-to "index"}}Home{{/link-to}}</li>
                         <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
@@ -61,6 +61,13 @@
     {{/bs-dropdown-menu}}
 {{/bs-dropdown}}
 
+{{#bs-dropdown direction="up"}}
+  {{#bs-dropdown-button}}Dropup <span class="caret"></span>{{/bs-dropdown-button}}
+  {{#bs-dropdown-menu}}
+      <li>{{#link-to "index"}}Home{{/link-to}}</li>
+      <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+  {{/bs-dropdown-menu}}
+{{/bs-dropdown}}
 
 <h2>Do not close on menu click</h2>
 
