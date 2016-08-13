@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import BsNavComponent from 'ember-bootstrap/components/bs-nav';
 import layout from '../templates/components/bs-navbar-nav';
 
