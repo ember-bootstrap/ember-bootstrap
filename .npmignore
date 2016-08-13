@@ -3,6 +3,8 @@
 /dist
 /tests
 /tmp
+/fastboot-tests
+/docs
 **/.gitkeep
 .bowerrc
 .editorconfig
@@ -14,3 +16,7 @@
 bower.json
 ember-cli-build.js
 testem.js
+yuidoc.json
+gulpfile.js
+.codeclimate.yml
+.jscsrc
