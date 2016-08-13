@@ -1,0 +1,34 @@
+<h1>Navbars</h1>
+
+{{#bs-form model=this}}
+    {{bs-form-element controlType="checkbox" label="Inverse" property="inverse" value=inverse}}
+    {{bs-form-element controlType="checkbox" label="Fluid" property="fluid" value=fluid}}
+{{/bs-form}}
+
+<h2>Navbars</h2>
+
+{{#bs-navbar type=(if inverse 'inverse') fluid=fluid}}
+    <div class="navbar-header">
+        {{#bs-navbar-toggle}}
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        {{/bs-navbar-toggle}}
+        <a class="navbar-brand" href="#">Brand</a>
+    </div>
+    {{#bs-navbar-content}}
+        {{#bs-navbar-nav}}
+            {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
+            {{#bs-nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/bs-nav-item}}
+            {{#bs-nav-item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/bs-nav-item}}
+            {{#bs-nav-item}}{{#link-to "forms"}}Forms{{/link-to}}{{/bs-nav-item}}
+            {{#bs-nav-item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/bs-nav-item}}
+            {{#bs-nav-item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/bs-nav-item}}
+            {{#bs-nav-item}}{{#link-to "modal"}}Modals{{/link-to}}{{/bs-nav-item}}
+            {{#bs-nav-item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/bs-nav-item}}
+            {{#bs-nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/bs-nav-item}}
+            {{#bs-nav-item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/bs-nav-item}}
+        {{/bs-navbar-nav}}
+    {{/bs-navbar-content}}
+{{/bs-navbar}}
