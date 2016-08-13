@@ -10,7 +10,7 @@ import componentChild from 'ember-bootstrap/mixins/component-child';
  */
 export default Ember.Mixin.create(componentChild, {
   classNames: ['dropdown-toggle'],
-  attributeBindings: ['data-toggle'],
+
   /**
    * @property ariaRole
    * @default button
@@ -18,8 +18,6 @@ export default Ember.Mixin.create(componentChild, {
    * @protected
    */
   ariaRole: 'button',
-
-  'data-toggle': 'dropdown',
 
   targetObject: Ember.computed.alias('parentView'),
 

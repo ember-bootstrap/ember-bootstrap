@@ -10,7 +10,6 @@ test('dropdown button has correct default markup', function(assert) {
 
   assert.equal(this.$(':first-child').prop('tagName'), 'BUTTON', 'dropdown button is a button');
   assert.equal(this.$(':first-child').hasClass('dropdown-toggle'), true, 'has dropdown-toggle class');
-  assert.equal(this.$(':first-child').attr('data-toggle'), 'dropdown', 'has data-toggle=dropdown attribute');
   assert.equal(this.$(':first-child').attr('role'), 'button', 'has role=button');
 });
 

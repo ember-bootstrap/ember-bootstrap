@@ -11,7 +11,6 @@ test('toggle has correct default markup', function(assert) {
   assert.equal(this.$(':first-child').prop('tagName'), 'A', 'toggle is an anchor tag by default');
   assert.equal(this.$(':first-child').attr('href'), '#', 'has href attribute');
   assert.equal(this.$(':first-child').hasClass('dropdown-toggle'), true, 'has dropdown-toggle class');
-  assert.equal(this.$(':first-child').attr('data-toggle'), 'dropdown', 'has data-toggle=dropdown attribute');
   assert.equal(this.$(':first-child').attr('role'), 'button', 'has role=button');
 });
 
