@@ -108,9 +108,9 @@ export default Ember.Component.extend({
     let size = this.get('collapseSize');
     let dimension = this.get('collapseDimension');
     if (Ember.isEmpty(size)) {
-      return new Ember.Handlebars.SafeString('');
+      return Ember.String.htmlSafe('');
     }
-    return new Ember.Handlebars.SafeString(`${dimension}: ${size}px`);
+    return Ember.String.htmlSafe(`${dimension}: ${size}px`);
   }),
 
   /**
