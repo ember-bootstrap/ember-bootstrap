@@ -113,10 +113,10 @@ export default Ember.Component.extend(ComponentParent, {
    *
    * @property type
    * @type String
-   * @default "tabs"
+   * @default 'tabs'
    * @public
    */
-  type: "tabs",
+  type: 'tabs',
 
   /**
    * By default the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)

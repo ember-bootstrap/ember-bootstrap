@@ -164,7 +164,11 @@ export default Ember.Component.extend(ComponentChild, {
   },
 
   _showHide: observer('isActive', function() {
-    this.get('isActive') ? this.show() : this.hide();
+    if (this.get('isActive')) {
+      this.show();
+    } else {
+      this.hide();
+    }
   }),
 
   init() {

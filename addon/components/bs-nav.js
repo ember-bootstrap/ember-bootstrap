@@ -6,7 +6,7 @@ const { isPresent } = Ember;
 /**
 
  Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)
- 
+
  ### Usage
 
  Use in combination with the [Components.NavItem](Components.NavItem.html) component:

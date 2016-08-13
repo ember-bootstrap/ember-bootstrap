@@ -258,6 +258,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
       this.toggleProperty('active');
     }
     let that = this;
+
     function handleButtonPromise(promise) {
       if (promise) {
         that.set('textState', 'pending');
@@ -274,7 +275,8 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
           }
         );
       }
-    };
+    }
+
     let action = this.get('action');
     if (typeOf(action) === 'function') {
       let promise = action(this.get('value'), evt, handleButtonPromise);
