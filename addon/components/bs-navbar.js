@@ -99,14 +99,14 @@ export default Ember.Component.extend(TypeClass, {
   position: null,
 
   positionClass: Ember.computed('position', function() {
-    let position=this.get('position');
-    const validPositions = ['fixed-top', 'fixed-bottom', 'static-top'];
+    let position = this.get('position');
+    let validPositions = ['fixed-top', 'fixed-bottom', 'static-top'];
 
     if (validPositions.indexOf(position) === -1) {
       return null;
     }
 
-    return 'navbar-' + position;
+    return `navbar-${position}`;
   }),
 
   actions: {
