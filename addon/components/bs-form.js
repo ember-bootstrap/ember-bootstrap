@@ -158,7 +158,7 @@ export default Ember.Component.extend(ComponentParent, {
    * @public
    */
   novalidate: false,
-  
+
   _novalidate: computed('novalidate', function() {
     return this.get('novalidate') === true ? '' : undefined;
   }),

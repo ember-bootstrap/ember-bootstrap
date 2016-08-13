@@ -5,7 +5,7 @@ const { LinkComponent } = Ember;
 
 export function initialize(/* application */) {
   if (!ComponentChildMixin.detect(LinkComponent)) {
-    LinkComponent.reopen(ComponentChildMixin)
+    LinkComponent.reopen(ComponentChildMixin);
   }
 }
 

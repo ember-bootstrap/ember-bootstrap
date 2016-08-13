@@ -176,7 +176,7 @@ export default Ember.Component.extend(TypeClass, {
    */
   style: computed('percent', function() {
     let percent = this.get('percent');
-    return new Ember.Handlebars.SafeString(`width: ${percent}%`);
+    return new Ember.String.htmlSafe(`width: ${percent}%`);
   })
 
 });

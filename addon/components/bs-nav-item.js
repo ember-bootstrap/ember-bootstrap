@@ -1,6 +1,15 @@
-import Ember from 'ember';
-import layout from '../templates/components/bs-nav-item';
-import ComponentParent from 'ember-bootstrap/mixins/component-parent';
+import
+Ember
+from
+'ember';
+import
+layout
+from
+'../templates/components/bs-nav-item';
+import
+ComponentParent
+from
+'ember-bootstrap/mixins/component-parent';
 
 const { computed, LinkComponent } = Ember;
 
@@ -14,7 +23,8 @@ const { computed, LinkComponent } = Ember;
  @uses Mixins.ComponentParent
  @public
  */
-export default Ember.Component.extend(ComponentParent, {
+export default
+Ember.Component.extend(ComponentParent, {
   layout,
   classNameBindings: ['disabled', 'active'],
   tagName: 'li',
@@ -24,7 +34,7 @@ export default Ember.Component.extend(ComponentParent, {
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
    * By default it will look at any nested `link-to` components and make itself disabled if there is a disabled link.
    * See the [link-to API](http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_disabling-the-code-link-to-code-component)
-   * 
+   *
    * @property disabled
    * @type boolean
    * @public
@@ -44,8 +54,8 @@ export default Ember.Component.extend(ComponentParent, {
   active: computed.gt('activeChildLinks.length', 0),
 
   /**
-   * Collection of all `Ember.LinkComponent`s that are children 
-   * 
+   * Collection of all `Ember.LinkComponent`s that are children
+   *
    * @property childLinks
    * @private
    */
@@ -53,7 +63,6 @@ export default Ember.Component.extend(ComponentParent, {
     return view instanceof LinkComponent;
   }),
 
-  
   activeChildLinks: computed.filterBy('childLinks', 'active'),
   disabledChildLinks: computed.filterBy('childLinks', 'disabled')
 });
