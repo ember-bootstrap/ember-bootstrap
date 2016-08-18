@@ -4,7 +4,7 @@ import Form from 'ember-bootstrap/components/bs-form';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import includes from 'ember-bootstrap/utils/array-includes';
 
-const { computed, defineProperty, observer, on, run } = Ember;
+const { computed, defineProperty, isArray, observer, on, run, warn } = Ember;
 
 const nonTextFieldControlTypes = Ember.A([
   'checkbox',
@@ -390,6 +390,48 @@ export default FormGroup.extend(ComponentChild, {
   showValidationMessages: computed.and('showValidation', 'hasValidationMessages'),
 
   /**
+   * Event or list of events which enable form validation markup rendering.
+   * Supported events: ['focusOut', 'change']
+   *
+   * @property showValidationOn
+   * @type string|array
+   * @default ['focusOut']
+   * @public
+   */
+  showValidationOn: ['focusOut'],
+
+  /**
+   * @property _showValidationOn
+   * @type array
+   * @readonly
+   * @private
+   */
+  _showValidationOn: computed('showValidationOn', function() {
+    let showValidationOn = this.get('showValidationOn');
+
+    if (isArray(showValidationOn)) {
+      return showValidationOn;
+    }
+
+    if (typeof showValidationOn.toString === 'function') {
+      return [showValidationOn];
+    }
+
+    warn('showValidationOn must be a String or an Array');
+    return [];
+  }),
+
+  /**
+   * @method showValidationOnHandler
+   * @private
+   */
+  showValidationOnHandler(event) {
+    if (this.get('_showValidationOn').indexOf(event) !== -1) {
+      this.set('showValidation', true);
+    }
+  },
+
+  /**
    * @property showErrors
    * @type boolean
    * @readonly
@@ -563,13 +605,24 @@ export default FormGroup.extend(ComponentChild, {
 
   /**
    * Listen for focusOut events from the control element to automatically set `showValidation` to true to enable
-   * form validation markup rendering.
+   * form validation markup rendering if `showValidationsOn` contains `focusOut`.
    *
    * @event focusOut
    * @private
    */
   focusOut() {
-    this.set('showValidation', true);
+    this.showValidationOnHandler('focusOut');
+  },
+
+  /**
+   * Listen for change events from the control element to automatically set `showValidation` to true to enable
+   * form validation markup rendering if `showValidationsOn` contains `change`.
+   *
+   * @event change
+   * @private
+   */
+  change() {
+    this.showValidationOnHandler('change');
   },
 
   init() {
@@ -596,7 +649,7 @@ export default FormGroup.extend(ComponentChild, {
         this.$()
           // an input-group
           .has('.input-group')
-          // an addon or button on right side
+          // an addon or button on right si de
           .has('.input-group input + .input-group-addon, .input-group input + .input-group-btn')
           // an icon showing validation state
           .has('.form-control-feedback')

@@ -268,43 +268,108 @@ test('adjusts validation icon position if there is an input group', function(ass
 });
 
 test('shows validation errors', function(assert) {
-  this.set('errors', Ember.A());
+  this.set('errors', Ember.A(['Invalid']));
+  this.set('model', Ember.Object.create({ name: null }));
   this.render(hbs`
-      {{bs-form-element property='name' elementId='child' showValidation=true hasValidator=true errors=errors}}
+      {{bs-form-element property='name' elementId='child' hasValidator=true errors=errors model=model}}
   `);
-  assert.ok(
-    this.$('form .has-error').length === 0,
+  assert.notOk(
+    this.$('.form-group').hasClass('has-error'),
     'validation errors aren\'t shown before user interaction'
   );
   Ember.run(() => {
-    this.set('errors', Ember.A([
-      'Invalid'
-    ]));
+    this.$('input').trigger('focusout');
   });
   assert.ok(
     this.$('.form-group').hasClass('has-error'),
-    'validation errors are shown when errors are present (child)'
+    'validation errors are shown after user interaction when errors are present (child)'
   );
   assert.equal(this.$('.form-group .help-block').text().trim(), 'Invalid');
+  Ember.run(() => {
+    this.set('errors', Ember.A());
+  });
+  assert.notOk(
+    this.$('.form-group').hasClass('has-error'),
+    'form group isn\'t shown as having errors if there aren\'t any'
+  );
 });
 
 test('shows validation warnings', function(assert) {
-  this.set('warnings', Ember.A());
+  this.set('warnings', Ember.A(['Insecure']));
+  this.set('model', Ember.Object.create({ name: null }));
   this.render(hbs`
-      {{bs-form-element property='name' elementId='child' showValidation=true hasValidator=true warnings=warnings}}
+      {{bs-form-element property='name' elementId='child' hasValidator=true warnings=warnings model=model}}
   `);
-  assert.ok(
-    this.$('form .has-warning').length === 0,
+  assert.notOk(
+    this.$('.form-group').hasClass('has-warning'),
     'validation warnings aren\'t shown before user interaction'
   );
   Ember.run(() => {
-    this.set('warnings', Ember.A([
-      'Insecure'
-    ]));
+    this.$('input').trigger('focusout');
   });
   assert.ok(
     this.$('.form-group').hasClass('has-warning'),
-    'validation warnings are shown when warnings are present'
+    'validation warnings are shown after user interaction when warnings are present'
   );
   assert.equal(this.$('.form-group .help-block').text().trim(), 'Insecure');
+  Ember.run(() => {
+    this.set('warnings', Ember.A());
+  });
+  assert.notOk(
+    this.$('.form-group').hasClass('has-warning'),
+    'form group isn\'t shown as having warnings if there are\'t any'
+  );
+});
+
+test('events enabling validation rendering are configurable per `showValidationOn` (array)', function(assert) {
+  this.set('errors', Ember.A(['Invalid']));
+  this.set('model', Ember.Object.create({ name: null }));
+  this.set('showValidationOn', ['change']);
+  this.render(hbs`
+      {{bs-form-element property='name' elementId='child' hasValidator=true errors=errors model=model showValidationOn=showValidationOn}}
+  `);
+  assert.notOk(
+    this.$('.form-group').hasClass('has-error'),
+    'validation warnings aren\'t shown before user interaction'
+  );
+  Ember.run(() => {
+    this.$('input').trigger('focusout');
+  });
+  assert.notOk(
+    this.$('.form-group').hasClass('has-error'),
+    'events not present in `showValidationOn` are ignored'
+  );
+  Ember.run(() => {
+    this.$('input').trigger('change');
+  });
+  assert.ok(
+    this.$('.form-group').hasClass('has-error'),
+    'events present in `showValidationOn` trigger validation'
+  );
+});
+
+test('events enabling validation rendering are configurable per `showValidationOn` (string)', function(assert) {
+  this.set('errors', Ember.A(['Invalid']));
+  this.set('model', Ember.Object.create({ name: null }));
+  this.render(hbs`
+      {{bs-form-element property='name' elementId='child' hasValidator=true errors=errors model=model showValidationOn='change'}}
+  `);
+  assert.notOk(
+    this.$('.form-group').hasClass('has-error'),
+    'validation warnings aren\'t shown before user interaction'
+  );
+  Ember.run(() => {
+    this.$('input').trigger('focusout');
+  });
+  assert.notOk(
+    this.$('.form-group').hasClass('has-error'),
+    'events not present in `showValidationOn` are ignored'
+  );
+  Ember.run(() => {
+    this.$('input').trigger('change');
+  });
+  assert.ok(
+    this.$('.form-group').hasClass('has-error'),
+    'events present in `showValidationOn` trigger validation'
+  );
 });
