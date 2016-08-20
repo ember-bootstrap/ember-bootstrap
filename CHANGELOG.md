@@ -1,3 +1,17 @@
+<a name"0.9.1"></a>
+### 0.9.1 (2016-08-20)
+
+
+#### Bug Fixes
+
+* **Modal:** perform cleanup when removing an opened modal from DOM without waiting for transition. Thanks to [sukima](https://github.com/sukima) ([e863f71f](https://github.com/kaliber5/ember-bootstrap/commit/e863f71f))
+
+
+#### Features
+
+* **FormElement:** adds `showValidationOn` events. Thanks to [jelhan](https://github.com/jelhan) (#127) ([2eb7ac07](https://github.com/kaliber5/ember-bootstrap/commit/2eb7ac07))
+
+
 <a name"0.9.0"></a>
 ## 0.9.0 (2016-08-13)
 
