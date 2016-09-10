@@ -65,7 +65,7 @@ test('checkbox button group with value set activates buttons with same value', f
 
   // check button's active property
   for (let k = 0; k < 3; k++) {
-    assert.equal(this.$('button').eq(k).hasClass('active'), value.contains(k + 1), 'only buttons with value contained in set value are active');
+    assert.equal(this.$('button').eq(k).hasClass('active'), value.includes(k + 1), 'only buttons with value contained in set value are active');
   }
 });
 
@@ -92,7 +92,7 @@ test('setting checkbox button group value with array of values activates buttons
 
   // check button's active property
   for (let k = 0; k < 3; k++) {
-    assert.equal(this.$('button').eq(k).hasClass('active'), value.contains(k + 1), 'only buttons with value contained in set value is active');
+    assert.equal(this.$('button').eq(k).hasClass('active'), value.includes(k + 1), 'only buttons with value contained in set value is active');
   }
 });
 

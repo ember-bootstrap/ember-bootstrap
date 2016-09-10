@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
-import includes from 'ember-bootstrap/utils/array-includes';
 
 const { computed, observer } = Ember;
 
@@ -170,7 +169,7 @@ export default Ember.Component.extend(ComponentParent, SizeClass, {
     let values = Ember.A(!Ember.isArray(value) ? [value] : value);
     this.get('children')
       .forEach(function(button) {
-        button.set('active', includes(values, button.get('value')));
+        button.set('active', values.includes(button.get('value')));
       });
   }),
 

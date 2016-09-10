@@ -2,7 +2,6 @@ import Ember from 'ember';
 import FormGroup from 'ember-bootstrap/components/bs-form-group';
 import Form from 'ember-bootstrap/components/bs-form';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
-import includes from 'ember-bootstrap/utils/array-includes';
 
 const { computed, defineProperty, isArray, observer, on, run, warn } = Ember;
 
@@ -473,7 +472,7 @@ export default FormGroup.extend(ComponentChild, {
    * @public
    */
   useIcons: computed('controlType', function() {
-    return !includes(nonTextFieldControlTypes, this.get('controlType'));
+    return !nonTextFieldControlTypes.includes(this.get('controlType'));
   }),
 
   /**
@@ -584,7 +583,7 @@ export default FormGroup.extend(ComponentChild, {
     let controlType = this.get('controlType');
 
     switch (true) {
-      case includes(nonTextFieldControlTypes, controlType):
+      case nonTextFieldControlTypes.includes(controlType):
         inputLayout = controlType;
         break;
       default:
