@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 
 /**
  Bootstrap-style accordion group, with collapsible/expandable items.
@@ -26,9 +27,10 @@ import Ember from 'ember';
  @class Accordion
  @namespace Components
  @extends Ember.Component
+ @uses Mixins.ComponentParent
  @public
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(ComponentParent, {
   classNames: ['panel-group'],
   ariaRole: 'tablist',
 

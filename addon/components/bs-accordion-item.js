@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
-import SubComponent from 'ember-bootstrap/mixins/sub-component';
+import ComponentChild from 'ember-bootstrap/mixins/component-child';
+import Accordion from 'ember-bootstrap/components/bs-accordion';
 
 const { computed } = Ember;
 
@@ -13,11 +14,11 @@ const { computed } = Ember;
  @class AccordionItem
  @namespace Components
  @extends Ember.Component
+ @uses Mixins.ComponentChild
  @uses Mixins.TypeClass
- @uses Mixins.SubComponent
  @public
  */
-export default Ember.Component.extend(TypeClass, SubComponent, {
+export default Ember.Component.extend(ComponentChild, TypeClass, {
   classNames: ['panel'],
 
   /**
@@ -45,14 +46,24 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
    */
   value: computed.oneWay('elementId'),
 
-  selected: computed.alias('parentView.selected'),
+  selected: computed.alias('accordion.selected'),
 
   collapsed: computed('value', 'selected', function() {
     return this.get('value') !== this.get('selected');
   }),
   active: computed.not('collapsed'),
 
-  action: 'selected',
+  /**
+   * Reference to the parent `Components.Accordion` class.
+   *
+   * @property accordion
+   * @private
+   */
+  accordion: computed(function() {
+    return this.nearestOfType(Accordion);
+  }),
+
+  target: computed.reads('accordion'),
 
   actions: {
     toggleActive() {
@@ -61,10 +72,10 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
       let active = this.get('active');
       if (!active) {
         this.set('selected', value);
-        this.sendAction('action', value, previous);
+        this.send('selected', value, previous);
       } else {
         this.set('selected', null);
-        this.sendAction('action', null, previous);
+        this.send('selected', null, previous);
       }
     }
   }

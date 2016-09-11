@@ -3,7 +3,8 @@ import Ember from 'ember';
 /**
  * @class SubComponent
  * @namespace Mixins
- * @public
+ * @deprecated
+ * @private
  */
 export default Ember.Mixin.create({
   targetObject: Ember.computed.alias('parentView')
