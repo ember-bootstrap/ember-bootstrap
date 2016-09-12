@@ -67,7 +67,7 @@
     "ember-cli-babel": "^5.1.6",
     "ember-cli-htmlbars": "^1.0.2",
     "ember-runtime-enumerable-includes-polyfill": "^1.0.1",
-    "ember-wormhole": "^0.3.4"
+    "ember-wormhole": "yapplabs/ember-wormhole#master"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
