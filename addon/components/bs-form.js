@@ -233,15 +233,16 @@ export default Ember.Component.extend(ComponentParent, {
     if (e) {
       e.preventDefault();
     }
+    let model = this.get('model');
 
-    this.sendAction('before');
+    this.sendAction('before', model);
 
     if (!this.get('hasValidator')) {
-      return this.sendAction();
+      return this.sendAction('action', model);
     } else {
       let validationPromise = this.validate(this.get('model'));
       if (validationPromise && validationPromise instanceof Ember.RSVP.Promise) {
-        validationPromise.then((r) => this.sendAction('action', r), (err) => {
+        validationPromise.then((r) => this.sendAction('action', model, r), (err) => {
           this.get('childFormElements').setEach('showValidation', true);
           return this.sendAction('invalid', err);
         });
