@@ -30,7 +30,7 @@ test('it has correct markup', function(assert) {
 });
 
 test('it cannot override the toggle behavior', function(assert) {
-  this.render(hbs`{{#bs-navbar-toggle toggle=false}}Button{{/bs-navbar-toggle}}`);
+  this.render(hbs`{{#bs-navbar-toggle toggle=false action=null}}Button{{/bs-navbar-toggle}}`);
 
   assert.notOk(this.$('button').hasClass('active'), 'begins in inactive state');
   this.$('button').click();

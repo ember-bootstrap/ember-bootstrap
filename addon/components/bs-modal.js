@@ -202,7 +202,7 @@ export default Ember.Component.extend({
    * @default false
    * @private
    */
-  showBackdrop: false,
+  showBackdrop: computed.and('open', 'backdrop'),
 
   /**
    * Closes the modal when escape key is pressed.
@@ -491,7 +491,7 @@ export default Ember.Component.extend({
         this.sendAction('openedAction');
       }
     };
-    Ember.run.scheduleOnce('afterRender', this, this.handleBackdrop, callback);
+    this.handleBackdrop(callback);
   },
 
   /**
@@ -550,21 +550,17 @@ export default Ember.Component.extend({
         return;
       }
 
-      let waitForFade = function() {
-        let $backdrop = this.get('backdropElement');
-        Ember.assert('Backdrop element should be in DOM', $backdrop && $backdrop.length > 0);
-
-        if (doAnimate) {
+      if (doAnimate) {
+        Ember.run.schedule('afterRender', this, function() {
+          let $backdrop = this.get('backdropElement');
+          Ember.assert('Backdrop element should be in DOM', $backdrop && $backdrop.length > 0);
           $backdrop
             .one('bsTransitionEnd', Ember.run.bind(this, callback))
             .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION);
-        } else {
-          callback.call(this);
-        }
-      };
-
-      Ember.run.scheduleOnce('afterRender', this, waitForFade);
-
+        });
+      } else {
+        callback.call(this);
+      }
     } else if (!this.get('open') && this.get('backdrop')) {
       let $backdrop = this.get('backdropElement');
       Ember.assert('Backdrop element should be in DOM', $backdrop && $backdrop.length > 0);

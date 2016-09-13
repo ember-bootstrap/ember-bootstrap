@@ -79,27 +79,6 @@ test('controlType "textarea" is supported', function(assert) {
   labeledControlTest.call(this, assert, 'textarea', 'textarea');
 });
 
-test('controlType "select" is supported', function(assert) {
-  let options = {
-    choices: Ember.A([
-      {
-        id: 'f',
-        label: 'Female'
-      },
-      {
-        id: 'm',
-        label: 'Male'
-      }
-    ]),
-    choiceLabelProperty: 'label',
-    choiceValueProperty: 'id'
-  };
-  controlTypeSupportTest.call(this, assert, 'select', 'select', [options.choices[0], options.choices[1]], function() {
-    return options.choices.findBy('id', this.val());
-  }, options);
-  labeledControlTest.call(this, assert, 'select', 'select');
-});
-
 test('Changing formLayout changes markup', function(assert) {
   this.set('formLayout', 'vertical');
   this.render(hbs`{{#bs-form horizontalLabelGridClass="col-sm-4" formLayout=formLayout}}{{bs-form-element controlType="text" label="myLabel"}}{{/bs-form}}`);
@@ -147,15 +126,6 @@ test('required property propagates', function(assert) {
   assert.equal(this.$('input').attr('required'), 'required', 'input html5 required is true');
 });
 
-test('required property propagates - select', function(assert) {
-  this.set('model', Ember.Object.create());
-
-  this.render(hbs`{{bs-form-element controlType="select" label="myLabel" property="foo" required=true}}`);
-
-  assert.ok(this.$('.form-group').hasClass('is-required'), 'component has is-required class');
-  assert.equal(this.$('select').attr('required'), 'required', 'input html5 required is true');
-});
-
 test('disabled property propagates', function(assert) {
   this.set('model', Ember.Object.create());
 
@@ -163,15 +133,6 @@ test('disabled property propagates', function(assert) {
 
   assert.ok(this.$('.form-group').hasClass('is-disabled'), 'component has is-disabled class');
   assert.equal(this.$('input').attr('disabled'), 'disabled', 'input html5 disabled is true');
-});
-
-test('disabled property propagates - select', function(assert) {
-  this.set('model', Ember.Object.create());
-
-  this.render(hbs`{{bs-form-element controlType="select" label="myLabel" property="foo" disabled=true}}`);
-
-  assert.ok(this.$('.form-group').hasClass('is-disabled'), 'component has is-disabled class');
-  assert.equal(this.$('select').attr('disabled'), 'disabled', 'input html5 disabled is true');
 });
 
 test('if invisibleLabel is true sr-only class is added to label', function(assert) {

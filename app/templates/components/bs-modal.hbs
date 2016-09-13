@@ -4,8 +4,10 @@
   {{yield this}}
 {{/bs-modal-dialog}}
 
+<div>
 {{#if showBackdrop}}
   <div class="modal-backdrop {{if fade "fade"}} {{if in "in"}}" id="{{backdropId}}"></div>
 {{/if}}
+</div>
 
 {{/ember-wormhole}}

@@ -40,8 +40,8 @@ test('first tab is active by default', function(assert) {
     {{/bs-tab}}
   `);
 
-  assertActiveTab(assert, 0, true);
-  assertActiveTab(assert, 1, false);
+  assertActiveTab.call(this, assert, 0, true);
+  assertActiveTab.call(this, assert, 1, false);
 });
 
 test('clicking tab activates it', function(assert) {
@@ -58,8 +58,8 @@ test('clicking tab activates it', function(assert) {
 
   this.$('ul.nav.nav-tabs li:eq(1) a').click();
 
-  assertActiveTab(assert, 0, false);
-  assertActiveTab(assert, 1, true);
+  assertActiveTab.call(this, assert, 0, false);
+  assertActiveTab.call(this, assert, 1, true);
 });
 
 test('activeId activates tabs', function(assert) {
@@ -75,13 +75,13 @@ test('activeId activates tabs', function(assert) {
     {{/bs-tab}}
   `);
 
-  assertActiveTab(assert, 0, true);
-  assertActiveTab(assert, 1, false);
+  assertActiveTab.call(this, assert, 0, true);
+  assertActiveTab.call(this, assert, 1, false);
 
   this.set('paneId', 'pane2');
 
-  assertActiveTab(assert, 0, false);
-  assertActiveTab(assert, 1, true);
+  assertActiveTab.call(this, assert, 0, false);
+  assertActiveTab.call(this, assert, 1, true);
 });
 
 test('tab navigation is groupable', function(assert) {

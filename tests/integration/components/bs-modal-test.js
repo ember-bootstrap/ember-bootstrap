@@ -73,7 +73,7 @@ test('backdrop=false removes backdrop element', function(assert) {
   let done = assert.async();
   // wait for fade animation
   setTimeout(() => {
-    assert.equal(this.$('.modal-backdrop').length, 0, 'Modal has backdrop element');
+    assert.equal(this.$('.modal-backdrop').length, 0, 'Modal has no backdrop element');
     done();
   }, transitionTimeout);
 });
