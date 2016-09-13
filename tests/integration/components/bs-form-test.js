@@ -23,25 +23,32 @@ test('form has correct CSS class', function(assert) {
 });
 
 test('Submitting the form calls default action', function(assert) {
-  this.on('testAction', () => {
+  let model = {};
+  this.set('model', model)
+  this.on('testAction', (m) => {
     assert.ok(true, 'Default action has been called.');
+    assert.equal(m, model, 'Action invocation has model as parameter');
   });
-  this.render(hbs`{{#bs-form action=(action "testAction")}}Test{{/bs-form}}`);
+  this.render(hbs`{{#bs-form model=model action=(action "testAction")}}Test{{/bs-form}}`);
 
-  assert.expect(1);
+  assert.expect(2);
   this.$('form').submit();
 });
 
 test('Submitting the form calls before submit action', function(assert) {
-  this.on('beforeAction', () => {
+  let model = {};
+  this.set('model', model)
+  this.on('beforeAction', (m) => {
     assert.ok(true, 'Before action has been called.');
+    assert.equal(m, model, 'Action invocation has model as parameter');
   });
-  this.on('submitAction', () => {
+  this.on('submitAction', (m) => {
     assert.ok(true, 'Default action has been called.');
+    assert.equal(m, model, 'Action invocation has model as parameter');
   });
-  this.render(hbs`{{#bs-form before=(action "beforeAction") action=(action "submitAction")}}Test{{/bs-form}}`);
+  this.render(hbs`{{#bs-form model=model before=(action "beforeAction") action=(action "submitAction")}}Test{{/bs-form}}`);
 
-  assert.expect(2);
+  assert.expect(4);
   this.$('form').submit();
 });
 
