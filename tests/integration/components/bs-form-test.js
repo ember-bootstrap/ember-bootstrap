@@ -24,7 +24,7 @@ test('form has correct CSS class', function(assert) {
 
 test('Submitting the form calls default action', function(assert) {
   let model = {};
-  this.set('model', model)
+  this.set('model', model);
   this.on('testAction', (m) => {
     assert.ok(true, 'Default action has been called.');
     assert.equal(m, model, 'Action invocation has model as parameter');
@@ -37,7 +37,7 @@ test('Submitting the form calls default action', function(assert) {
 
 test('Submitting the form calls before submit action', function(assert) {
   let model = {};
-  this.set('model', model)
+  this.set('model', model);
   this.on('beforeAction', (m) => {
     assert.ok(true, 'Before action has been called.');
     assert.equal(m, model, 'Action invocation has model as parameter');
