@@ -177,6 +177,13 @@ export default Ember.Component.extend({
   fade: true,
 
   /**
+   * @property notFade
+   * @type boolean
+   * @private
+   */
+  notFade: computed.not('fade'),
+
+  /**
    * Used to apply Bootstrap's "in" class
    *
    * @property in
@@ -184,7 +191,7 @@ export default Ember.Component.extend({
    * @default false
    * @private
    */
-  'in': false,
+  'in': computed.and('open', 'notFade'),
 
   /**
    * Use a semi-transparent modal background to hide the rest of the page.
@@ -588,7 +595,7 @@ export default Ember.Component.extend({
         callbackRemove.call(this);
       }
     } else if (callback) {
-      callback.call(this);
+      Ember.run.next(this, callback);
     }
   },
 
