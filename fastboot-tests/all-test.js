@@ -1,5 +1,6 @@
+/* jshint node: true */
 var expect = require('chai').expect;
-var describeForFastboot = require('./module');
+var describeForFastboot = require('ember-fastboot-addon-tests').describeForFastboot;
 
 describeForFastboot('Fastboot', function() {
 
