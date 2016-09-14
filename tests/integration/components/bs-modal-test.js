@@ -334,7 +334,7 @@ test('autofocus element is focused when present and fade=false', function(assert
     
   `);
 
-  this.$('.my-input').one('focus', () => {
+  this.$('.modal').one('focus', '.my-input', () => {
     assert.ok(true, 'focus was triggered on the autofocus element');
   });
 
@@ -352,7 +352,7 @@ test('autofocus element is focused when present and fade=true', function(assert)
     
   `);
 
-  this.$('.my-input').one('focus', () => {
+  this.$('.modal').one('focus', '.my-input', () => {
     assert.ok(true, 'focus was triggered on the autofocus element');
   });
 
