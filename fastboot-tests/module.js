@@ -19,7 +19,9 @@ function describeForFastboot(name, fn) {
       app = new AddonTestApp();
       this.visit = visit.bind(this);
 
-      return app.create('fastboot')
+      return app.create('fastboot', {
+          emberVersion: 'release'
+        })
         .then(function() {
           return app.runEmberCommand('install', 'ember-cli-fastboot');
         })
@@ -35,7 +37,7 @@ function describeForFastboot(name, fn) {
     after(function() {
       return app.stopServer();
     });
-    
+
     fn.call(this);
   });
 }

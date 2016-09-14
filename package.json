@@ -25,7 +25,7 @@
     "conventional-changelog": "0.0.17",
     "ember-ajax": "^2.0.1",
     "ember-cli": "2.8.0",
-    "ember-cli-addon-tests": "simonihmig/ember-cli-addon-tests",
+    "ember-cli-addon-tests": "simonihmig/ember-cli-addon-tests#ember-version-option",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-fastboot": "1.0.0-beta.9",
