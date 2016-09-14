@@ -7,6 +7,8 @@ export default Ember.Controller.extend({
   modal3: true,
   hasModal3: false,
 
+  queryParams: ['modal1', 'modal2'],
+
   actions: {
     addModal3() {
       this.set('hasModal3', true);
