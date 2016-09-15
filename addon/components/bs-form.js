@@ -199,6 +199,7 @@ export default Ember.Component.extend(ComponentParent, {
    * A handler called before the form is validated (if possible) and submitted.
    *
    * @event before
+   * @param Object model  The form's `model`
    * @public
    */
 
@@ -206,7 +207,8 @@ export default Ember.Component.extend(ComponentParent, {
    * A handler called when submit has been triggered and the model has passed all validations (if present).
    *
    * @event action
-   * @param Object result The returned result from the validate method
+   * @param Object model  The form's `model`
+   * @param Object result The returned result from the validate method, if validation is available
    * @public
    */
 
