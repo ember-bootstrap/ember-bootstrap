@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.9.0.fcdf4193</span></h1>
+    <h1>API Docs <span class="small">v0.10.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -255,6 +255,7 @@ export default Ember.Component.extend(ComponentParent, {
    * A handler called before the form is validated (if possible) and submitted.
    *
    * @event before
+   * @param Object model  The form&#x27;s &#x60;model&#x60;
    * @public
    */
 
@@ -262,7 +263,8 @@ export default Ember.Component.extend(ComponentParent, {
    * A handler called when submit has been triggered and the model has passed all validations (if present).
    *
    * @event action
-   * @param Object result The returned result from the validate method
+   * @param Object model  The form&#x27;s &#x60;model&#x60;
+   * @param Object result The returned result from the validate method, if validation is available
    * @public
    */
 
@@ -289,15 +291,16 @@ export default Ember.Component.extend(ComponentParent, {
     if (e) {
       e.preventDefault();
     }
+    let model = this.get(&#x27;model&#x27;);
 
-    this.sendAction(&#x27;before&#x27;);
+    this.sendAction(&#x27;before&#x27;, model);
 
     if (!this.get(&#x27;hasValidator&#x27;)) {
-      return this.sendAction();
+      return this.sendAction(&#x27;action&#x27;, model);
     } else {
       let validationPromise = this.validate(this.get(&#x27;model&#x27;));
       if (validationPromise &amp;&amp; validationPromise instanceof Ember.RSVP.Promise) {
-        validationPromise.then((r) =&gt; this.sendAction(&#x27;action&#x27;, r), (err) =&gt; {
+        validationPromise.then((r) =&gt; this.sendAction(&#x27;action&#x27;, model, r), (err) =&gt; {
           this.get(&#x27;childFormElements&#x27;).setEach(&#x27;showValidation&#x27;, true);
           return this.sendAction(&#x27;invalid&#x27;, err);
         });

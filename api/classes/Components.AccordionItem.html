@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.9.0.fcdf4193</span></h1>
+    <h1>API Docs <span class="small">v0.10.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -56,8 +56,8 @@
         <div class="uses">
             Uses
             <ul class="inline commas">
+                    <li><a href="Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
-                    <li><a href="Mixins.SubComponent.html">Mixins.SubComponent</a></li>
             </ul>
         </div>
 
@@ -66,7 +66,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-accordion-item.js.html#l7"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:7</code></a>
+            Defined in: <a href="../files/addon_components_bs-accordion-item.js.html#l8"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:8</code></a>
         </div>
 
 
@@ -155,6 +155,14 @@
                             </li>
                             <li class="index-item method private inherited">
                                 <a href="#" data-tabid="#methods" data-anchor="#method__unregister" data-tablink="_unregister">_unregister</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method__willDestroyElement" data-tablink="_willDestroyElement">_willDestroyElement</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method__willRender" data-tablink="_willRender">_willRender</a>
 
                             </li>
                             <li class="index-item method public inherited">
@@ -362,6 +370,18 @@
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property__didInsert" data-tablink="_didInsert">_didInsert</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property__parent" data-tablink="_parent">_parent</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_accordion" data-tablink="accordion">accordion</a>
+
+                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_actions" data-tablink="actions">actions</a>
 
@@ -828,6 +848,67 @@
                         <div class="description">
                             Removes the view from the view registry. This should be called when the
                     view is removed from DOM.
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method__willDestroyElement" class="method item private inherited">
+                        <h3 class="name">_willDestroyElement
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentChild.html#method__willDestroyElement">Mixins.ComponentChild</a>:
+                            <a href="../files/addon_mixins_component-child.js.html#l48"><code>addon&#x2F;mixins&#x2F;component-child.js:48</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Unregister form the parent component
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method__willRender" class="method item private inherited">
+                        <h3 class="name">_willRender
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentChild.html#method__willRender">Mixins.ComponentChild</a>:
+                            <a href="../files/addon_mixins_component-child.js.html#l21"><code>addon&#x2F;mixins&#x2F;component-child.js:21</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Register ourself as a child at the parent component
+                    We use the <code>willRender</code> event here to also support the fastboot environment, where there is no <code>didInsertElement</code>
                         </div>
                     
                     
@@ -3800,6 +3881,95 @@
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
+                    <div id="property__didInsert" class="property item private inherited">
+                        <h3 class="name">_didInsert
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentChild.html#property__didInsert">Mixins.ComponentChild</a>:
+                            <a href="../files/addon_mixins_component-child.js.html#l13"><code>addon&#x2F;mixins&#x2F;component-child.js:13</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            flag to check if component has already been rendered, for the <code>_willRender</code> event handler
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property__parent" class="property item private inherited">
+                        <h3 class="name">_parent
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentChild.html#property__parent">Mixins.ComponentChild</a>:
+                            <a href="../files/addon_mixins_component-child.js.html#l39"><code>addon&#x2F;mixins&#x2F;component-child.js:39</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            stores the parent in didInsertElement hook as a work-a-round for
+                    https://github.com/emberjs/ember.js/issues/12080
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_accordion" class="property item private">
+                        <h3 class="name">accordion
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-accordion-item.js.html#l56"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:56</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Reference to the parent <code>Components.Accordion</code> class.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="property_actions" class="property item public inherited">
                         <h3 class="name">actions
                             <span class="small">Object</span>
@@ -4093,7 +4263,7 @@
                                     Mixins.TypeClass
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-accordion-item.js.html#l23"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:23</code></a>
+                            <a href="../files/addon_components_bs-accordion-item.js.html#l24"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:24</code></a>
                             </p>
                     
                     
@@ -4782,7 +4952,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-accordion-item.js.html#l31"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:31</code></a>
+                            <a href="../files/addon_components_bs-accordion-item.js.html#l32"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:32</code></a>
                             </p>
                     
                     
@@ -4844,7 +5014,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-accordion-item.js.html#l40"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:40</code></a>
+                            <a href="../files/addon_components_bs-accordion-item.js.html#l41"><code>addon&#x2F;components&#x2F;bs-accordion-item.js:41</code></a>
                             </p>
                     
                     

@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.9.0.fcdf4193</span></h1>
+    <h1>API Docs <span class="small">v0.10.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -55,6 +55,7 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
 
 /**
  Bootstrap-style accordion group, with collapsible/expandable items.
@@ -82,9 +83,10 @@ import Ember from &#x27;ember&#x27;;
  @class Accordion
  @namespace Components
  @extends Ember.Component
+ @uses Mixins.ComponentParent
  @public
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(ComponentParent, {
   classNames: [&#x27;panel-group&#x27;],
   ariaRole: &#x27;tablist&#x27;,
 

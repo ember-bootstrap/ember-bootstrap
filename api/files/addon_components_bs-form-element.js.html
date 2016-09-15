@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.9.0.fcdf4193</span></h1>
+    <h1>API Docs <span class="small">v0.10.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -58,9 +58,8 @@ import Ember from &#x27;ember&#x27;;
 import FormGroup from &#x27;ember-bootstrap/components/bs-form-group&#x27;;
 import Form from &#x27;ember-bootstrap/components/bs-form&#x27;;
 import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
-import includes from &#x27;ember-bootstrap/utils/array-includes&#x27;;
 
-const { computed, defineProperty, observer, on, run } = Ember;
+const { computed, defineProperty, isArray, observer, on, run, warn } = Ember;
 
 const nonTextFieldControlTypes = Ember.A([
   &#x27;checkbox&#x27;,
@@ -446,6 +445,48 @@ export default FormGroup.extend(ComponentChild, {
   showValidationMessages: computed.and(&#x27;showValidation&#x27;, &#x27;hasValidationMessages&#x27;),
 
   /**
+   * Event or list of events which enable form validation markup rendering.
+   * Supported events: [&#x27;focusOut&#x27;, &#x27;change&#x27;]
+   *
+   * @property showValidationOn
+   * @type string|array
+   * @default [&#x27;focusOut&#x27;]
+   * @public
+   */
+  showValidationOn: [&#x27;focusOut&#x27;],
+
+  /**
+   * @property _showValidationOn
+   * @type array
+   * @readonly
+   * @private
+   */
+  _showValidationOn: computed(&#x27;showValidationOn&#x27;, function() {
+    let showValidationOn = this.get(&#x27;showValidationOn&#x27;);
+
+    if (isArray(showValidationOn)) {
+      return showValidationOn;
+    }
+
+    if (typeof showValidationOn.toString === &#x27;function&#x27;) {
+      return [showValidationOn];
+    }
+
+    warn(&#x27;showValidationOn must be a String or an Array&#x27;);
+    return [];
+  }),
+
+  /**
+   * @method showValidationOnHandler
+   * @private
+   */
+  showValidationOnHandler(event) {
+    if (this.get(&#x27;_showValidationOn&#x27;).indexOf(event) !== -1) {
+      this.set(&#x27;showValidation&#x27;, true);
+    }
+  },
+
+  /**
    * @property showErrors
    * @type boolean
    * @readonly
@@ -487,7 +528,7 @@ export default FormGroup.extend(ComponentChild, {
    * @public
    */
   useIcons: computed(&#x27;controlType&#x27;, function() {
-    return !includes(nonTextFieldControlTypes, this.get(&#x27;controlType&#x27;));
+    return !nonTextFieldControlTypes.includes(this.get(&#x27;controlType&#x27;));
   }),
 
   /**
@@ -598,7 +639,7 @@ export default FormGroup.extend(ComponentChild, {
     let controlType = this.get(&#x27;controlType&#x27;);
 
     switch (true) {
-      case includes(nonTextFieldControlTypes, controlType):
+      case nonTextFieldControlTypes.includes(controlType):
         inputLayout = controlType;
         break;
       default:
@@ -619,13 +660,24 @@ export default FormGroup.extend(ComponentChild, {
 
   /**
    * Listen for focusOut events from the control element to automatically set &#x60;showValidation&#x60; to true to enable
-   * form validation markup rendering.
+   * form validation markup rendering if &#x60;showValidationsOn&#x60; contains &#x60;focusOut&#x60;.
    *
    * @event focusOut
    * @private
    */
   focusOut() {
-    this.set(&#x27;showValidation&#x27;, true);
+    this.showValidationOnHandler(&#x27;focusOut&#x27;);
+  },
+
+  /**
+   * Listen for change events from the control element to automatically set &#x60;showValidation&#x60; to true to enable
+   * form validation markup rendering if &#x60;showValidationsOn&#x60; contains &#x60;change&#x60;.
+   *
+   * @event change
+   * @private
+   */
+  change() {
+    this.showValidationOnHandler(&#x27;change&#x27;);
   },
 
   init() {
@@ -652,7 +704,7 @@ export default FormGroup.extend(ComponentChild, {
         this.$()
           // an input-group
           .has(&#x27;.input-group&#x27;)
-          // an addon or button on right side
+          // an addon or button on right si de
           .has(&#x27;.input-group input + .input-group-addon, .input-group input + .input-group-btn&#x27;)
           // an icon showing validation state
           .has(&#x27;.form-control-feedback&#x27;)

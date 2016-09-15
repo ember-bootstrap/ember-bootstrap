@@ -1,4 +1,52 @@
 
+## 0.10.0 (2016-09-15)
+
+
+#### Bug Fixes
+
+* **Accordion:** fixed use of private parentView property, breaking tests in Ember 2.8 ([9d7584ed](https://github.com/kaliber5/ember-bootstrap/commit/9d7584ed))
+* **Modal:**
+  * fixed "You modified ... twice in a single render" deprecation/assertion ([cdd35ac3](https://github.com/kaliber5/ember-bootstrap/commit/cdd35ac3))
+  * Modal is rendered in place when no wormhole container is found. Fixes modals in Fastboot ([c4184f29](https://github.com/kaliber5/ember-bootstrap/commit/c4184f29))
+  * added fixes for Glimmer2, including workaround for ember-wormhole ([ce9a2c25](https://github.com/kaliber5/ember-bootstrap/commit/ce9a2c25))
+
+
+#### Features
+
+* **Form:** model is passed as parameter to default and before actions ([6c9282a7](https://github.com/kaliber5/ember-bootstrap/commit/6c9282a7), closes [#126](https://github.com/kaliber5/ember-bootstrap/issues/126))
+
+
+#### Breaking Changes
+
+* **Form:** the signature of the default action that is called when submitting the form has changed.
+    The form's model is always the first parameter, with an optional validation result as the second parameter
+
+    Before:
+
+        submit(validationResult) { ... }
+
+    After:
+
+        submit(model, validationResult) { ... }
+
+ ([6c9282a7](https://github.com/kaliber5/ember-bootstrap/commit/6c9282a7))
+
+
+
+### 0.9.1 (2016-08-20)
+
+
+#### Bug Fixes
+
+* **Modal:** perform cleanup when removing an opened modal from DOM without waiting for transition. Thanks to [sukima](https://github.com/sukima) ([e863f71f](https://github.com/kaliber5/ember-bootstrap/commit/e863f71f))
+
+
+#### Features
+
+* **FormElement:** adds `showValidationOn` events. Thanks to [jelhan](https://github.com/jelhan) (#127) ([2eb7ac07](https://github.com/kaliber5/ember-bootstrap/commit/2eb7ac07))
+
+
+
 ## 0.9.0 (2016-08-13)
 
 

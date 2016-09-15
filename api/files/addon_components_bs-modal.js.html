@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.9.0.fcdf4193</span></h1>
+    <h1>API Docs <span class="small">v0.10.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -233,6 +233,13 @@ export default Ember.Component.extend({
   fade: true,
 
   /**
+   * @property notFade
+   * @type boolean
+   * @private
+   */
+  notFade: computed.not(&#x27;fade&#x27;),
+
+  /**
    * Used to apply Bootstrap&#x27;s &quot;in&quot; class
    *
    * @property in
@@ -240,7 +247,7 @@ export default Ember.Component.extend({
    * @default false
    * @private
    */
-  &#x27;in&#x27;: false,
+  &#x27;in&#x27;: computed.and(&#x27;open&#x27;, &#x27;notFade&#x27;),
 
   /**
    * Use a semi-transparent modal background to hide the rest of the page.
@@ -258,7 +265,7 @@ export default Ember.Component.extend({
    * @default false
    * @private
    */
-  showBackdrop: false,
+  showBackdrop: computed.and(&#x27;open&#x27;, &#x27;backdrop&#x27;),
 
   /**
    * Closes the modal when escape key is pressed.
@@ -409,6 +416,15 @@ export default Ember.Component.extend({
   renderInPlace: false,
 
   /**
+   * @property _renderInPlace
+   * @type boolean
+   * @private
+   */
+  _renderInPlace: computed(&#x27;renderInPlace&#x27;, function() {
+    return this.get(&#x27;renderInPlace&#x27;) || typeof Ember.$ !== &#x27;function&#x27; || Ember.$(&#x27;#ember-bootstrap-modal-container&#x27;).length === 0;
+  }),
+
+  /**
    * The action to be sent when the modal footer&#x27;s submit button (if present) is pressed.
    * Note that if your modal body contains a form (e.g. [Components.Form](Components.Form.html){{/crossLink}}) this action will
    * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
@@ -547,7 +563,7 @@ export default Ember.Component.extend({
         this.sendAction(&#x27;openedAction&#x27;);
       }
     };
-    Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this.handleBackdrop, callback);
+    this.handleBackdrop(callback);
   },
 
   /**
@@ -606,21 +622,17 @@ export default Ember.Component.extend({
         return;
       }
 
-      let waitForFade = function() {
-        let $backdrop = this.get(&#x27;backdropElement&#x27;);
-        Ember.assert(&#x27;Backdrop element should be in DOM&#x27;, $backdrop &amp;&amp; $backdrop.length &gt; 0);
-
-        if (doAnimate) {
+      if (doAnimate) {
+        Ember.run.schedule(&#x27;afterRender&#x27;, this, function() {
+          let $backdrop = this.get(&#x27;backdropElement&#x27;);
+          Ember.assert(&#x27;Backdrop element should be in DOM&#x27;, $backdrop &amp;&amp; $backdrop.length &gt; 0);
           $backdrop
             .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, callback))
             .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION);
-        } else {
-          callback.call(this);
-        }
-      };
-
-      Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, waitForFade);
-
+        });
+      } else {
+        callback.call(this);
+      }
     } else if (!this.get(&#x27;open&#x27;) &amp;&amp; this.get(&#x27;backdrop&#x27;)) {
       let $backdrop = this.get(&#x27;backdropElement&#x27;);
       Ember.assert(&#x27;Backdrop element should be in DOM&#x27;, $backdrop &amp;&amp; $backdrop.length &gt; 0);
@@ -639,7 +651,7 @@ export default Ember.Component.extend({
         callbackRemove.call(this);
       }
     } else if (callback) {
-      callback.call(this);
+      Ember.run.next(this, callback);
     }
   },
 
@@ -746,6 +758,7 @@ export default Ember.Component.extend({
   willDestroyElement() {
     Ember.$(window).off(&#x27;resize.bs.modal&#x27;);
     Ember.$(&#x27;body&#x27;).removeClass(&#x27;modal-open&#x27;);
+    this.resetScrollbar();
   }
 
 });

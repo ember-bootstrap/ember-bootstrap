@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.9.0.fcdf4193</span></h1>
+    <h1>API Docs <span class="small">v0.10.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -56,7 +56,8 @@
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
-import SubComponent from &#x27;ember-bootstrap/mixins/sub-component&#x27;;
+import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
+import Accordion from &#x27;ember-bootstrap/components/bs-accordion&#x27;;
 
 const { computed } = Ember;
 
@@ -69,11 +70,11 @@ const { computed } = Ember;
  @class AccordionItem
  @namespace Components
  @extends Ember.Component
+ @uses Mixins.ComponentChild
  @uses Mixins.TypeClass
- @uses Mixins.SubComponent
  @public
  */
-export default Ember.Component.extend(TypeClass, SubComponent, {
+export default Ember.Component.extend(ComponentChild, TypeClass, {
   classNames: [&#x27;panel&#x27;],
 
   /**
@@ -101,14 +102,24 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
    */
   value: computed.oneWay(&#x27;elementId&#x27;),
 
-  selected: computed.alias(&#x27;parentView.selected&#x27;),
+  selected: computed.alias(&#x27;accordion.selected&#x27;),
 
   collapsed: computed(&#x27;value&#x27;, &#x27;selected&#x27;, function() {
     return this.get(&#x27;value&#x27;) !== this.get(&#x27;selected&#x27;);
   }),
   active: computed.not(&#x27;collapsed&#x27;),
 
-  action: &#x27;selected&#x27;,
+  /**
+   * Reference to the parent &#x60;Components.Accordion&#x60; class.
+   *
+   * @property accordion
+   * @private
+   */
+  accordion: computed(function() {
+    return this.nearestOfType(Accordion);
+  }),
+
+  target: computed.reads(&#x27;accordion&#x27;),
 
   actions: {
     toggleActive() {
@@ -117,10 +128,10 @@ export default Ember.Component.extend(TypeClass, SubComponent, {
       let active = this.get(&#x27;active&#x27;);
       if (!active) {
         this.set(&#x27;selected&#x27;, value);
-        this.sendAction(&#x27;action&#x27;, value, previous);
+        this.send(&#x27;selected&#x27;, value, previous);
       } else {
         this.set(&#x27;selected&#x27;, null);
-        this.sendAction(&#x27;action&#x27;, null, previous);
+        this.send(&#x27;selected&#x27;, null, previous);
       }
     }
   }

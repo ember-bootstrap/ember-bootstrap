@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.9.0.fcdf4193</span></h1>
+    <h1>API Docs <span class="small">v0.10.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,7 +57,6 @@
 import Ember from &#x27;ember&#x27;;
 import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
 import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
-import includes from &#x27;ember-bootstrap/utils/array-includes&#x27;;
 
 const { computed, observer } = Ember;
 
@@ -226,7 +225,7 @@ export default Ember.Component.extend(ComponentParent, SizeClass, {
     let values = Ember.A(!Ember.isArray(value) ? [value] : value);
     this.get(&#x27;children&#x27;)
       .forEach(function(button) {
-        button.set(&#x27;active&#x27;, includes(values, button.get(&#x27;value&#x27;)));
+        button.set(&#x27;active&#x27;, values.includes(button.get(&#x27;value&#x27;)));
       });
   }),
 
