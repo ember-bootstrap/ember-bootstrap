@@ -8,7 +8,7 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember try:each && ember fastboot:test"
+    "test": "ember fastboot:test"
   },
   "repository": {
     "type": "git",
