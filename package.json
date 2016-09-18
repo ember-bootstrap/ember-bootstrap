@@ -1,6 +1,6 @@
 {
   "name": "ember-bootstrap",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "directories": {
     "doc": "docs",
     "test": "tests"
