@@ -3,7 +3,7 @@ import Ember from 'ember';
 const { $ } = Ember;
 
 export default function getPosition($element) {
-  let [el] = $element;
+  let el = $element.get(0);
   let isBody = el.tagName === 'BODY';
 
   let elRect = el.getBoundingClientRect();
