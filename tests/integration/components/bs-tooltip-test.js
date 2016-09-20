@@ -127,3 +127,26 @@ test('Renders in place (no wormhole) if renderInPlace is set', function(assert) 
   assert.equal(this.$('.tooltip').length, 1, 'Tooltip exists.');
   assert.notEqual(this.$('.tooltip').parent().attr('id'), 'ember-bootstrap-modal-container');
 });
+
+test('should place tooltip on top of element', function(assert) {
+  this.render(hbs`<div id="container"><p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false}}</a></p></div>`);
+
+  this.$('#container')
+    .css({
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      textAlign: 'right',
+      width: 300,
+      height: 300
+    });
+
+  let $trigger = this.$('a')
+    .css('margin-top', 200);
+
+  this.$('#target').trigger('mouseover');
+  assert.equal(this.$('.tooltip').length, 1, 'Tooltip exists.');
+
+  let $tooltip = this.$('.tooltip');
+  assert.ok(Math.round($tooltip.offset().top + $tooltip.outerHeight()) <= Math.round($trigger.offset().top));
+});

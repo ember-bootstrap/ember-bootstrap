@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/bs-tooltip';
+import getPosition from '../utils/get-position';
+import getCalculatedOffset from '../utils/get-calculated-offset';
 
 const {
   Component,
@@ -7,24 +9,23 @@ const {
   isArray,
   isBlank,
   K,
-  Object,
   run,
   $,
   run: {
     later,
     cancel,
-    bind
+    bind,
+    schedule
   }
 } = Ember;
 const eventNamespace = 'tooltip';
 
-const InState = Object.extend({
+const InState = Ember.Object.extend({
   hover: false,
   focus: false,
   click: false,
   in: computed.or('hover', 'focus', 'click')
 });
-
 
 export default Component.extend({
   layout,
@@ -51,6 +52,9 @@ export default Component.extend({
   hasDelayHide: computed.gt('delayHide', 0),
 
   transitionDuration: 150,
+
+  viewportSelector: 'body',
+  viewportPadding: 0,
 
   /**
    * Use CSS transitions when showing/hiding?
@@ -87,6 +91,30 @@ export default Component.extend({
   tooltipElement: computed('tooltipId', function() {
     return Ember.$(`#${this.get('tooltipId')}`);
   }).volatile(),
+
+  /**
+   * The jQuery object of the `.tooltip-arrow` element.
+   *
+   * @property arrowElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  arrowElement: computed('tooltipElement', function() {
+    return this.get('tooltipElement').find('.tooltip-arrow');
+  }),
+
+  /**
+   * The jQuery object of the viewport element.
+   *
+   * @property viewportElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  viewportElement: computed('viewportSelector', function() {
+    return $(this.get('viewportSelector'));
+  }),
 
   triggerTarget: null,
 
@@ -202,7 +230,6 @@ export default Component.extend({
    */
   onHidden: K,
 
-
   enter(e) {
     if (e) {
       let eventType = e.type === 'focusin' ? 'focus' : 'hover';
@@ -272,64 +299,162 @@ export default Component.extend({
   },
 
   show() {
-
     if (false === this.get('onShow')(this)) {
       return;
     }
 
-    // this.$element.attr('aria-describedby', tipId) @todo ?
+    this.set('visible', true);
+    schedule('afterRender', this, function() {
+      let $element = this.get('triggerTargetElement');
+      let placement = this.get('placement');
 
-    // @todo auto placement
-    // var autoToken = /\s?auto?\s?/i
-    // var autoPlace = autoToken.test(placement)
-    // if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
+      // this.$element.attr('aria-describedby', tipId) @todo ?
 
-    // $tip.css({ top: 0, left: 0, display: 'block' })
+      // @todo auto placement
+      // var autoToken = /\s?auto?\s?/i
+      // var autoPlace = autoToken.test(placement)
+      // if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
 
-    // @todo add to bs-tooltip-element ?
-    // var pos = this.getPosition()
-    // var actualWidth = $tip[0].offsetWidth
-    // var actualHeight = $tip[0].offsetHeight
-    //
-    // if (autoPlace) {
-    //   var orgPlacement = placement
-    //   var viewportDim = this.getPosition(this.$viewport)
-    //
-    //   placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top' :
-    //     placement == 'top' && pos.top - actualHeight < viewportDim.top ? 'bottom' :
-    //       placement == 'right' && pos.right + actualWidth > viewportDim.width ? 'left' :
-    //         placement == 'left' && pos.left - actualWidth < viewportDim.left ? 'right' :
-    //           placement
-    //
-    //   $tip
-    //     .removeClass(orgPlacement)
-    //     .addClass(placement)
-    // }
-    //
-    // var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight)
-    //
-    // this.applyPlacement(calculatedOffset, placement)
+      let $tip = this.get('tooltipElement');
+      $tip.css({ top: 0, left: 0, display: 'block' });
+
+      let pos = getPosition($element);
+      let actualWidth = $tip[0].offsetWidth;
+      let actualHeight = $tip[0].offsetHeight;
+
+      //
+      // if (autoPlace) {
+      //   var orgPlacement = placement
+      //   var viewportDim = this.getPosition(this.$viewport)
+      //
+      //   placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top' :
+      //     placement == 'top' && pos.top - actualHeight < viewportDim.top ? 'bottom' :
+      //       placement == 'right' && pos.right + actualWidth > viewportDim.width ? 'left' :
+      //         placement == 'left' && pos.left - actualWidth < viewportDim.left ? 'right' :
+      //           placement
+      //
+      //   $tip
+      //     .removeClass(orgPlacement)
+      //     .addClass(placement)
+      // }
+      //
+
+      let calculatedOffset = getCalculatedOffset(placement, pos, actualWidth, actualHeight);
+      this.applyPlacement(calculatedOffset, placement);
+
+      function tooltipShowComplete() {
+        let prevHoverState = this.get('hoverState');
+
+        this.get('onShown')(this);
+        this.set('hoverState', null);
+
+        if (prevHoverState === 'out') {
+          this.leave();
+        }
+      }
+
+      if (this.get('usesTransition')) {
+        this.get('tooltipElement')
+          .one('bsTransitionEnd', bind(this, tooltipShowComplete))
+          .emulateTransitionEnd(this.get('transitionDuration'));
+      } else {
+        tooltipShowComplete.call(this);
+      }
+    });
+  },
+
+  applyPlacement(offset, placement) {
+    let $tip = this.get('tooltipElement');
+    let width = $tip[0].offsetWidth;
+    let height = $tip[0].offsetHeight;
+
+    // manually read margins because getBoundingClientRect includes difference
+    let marginTop = parseInt($tip.css('margin-top'), 10);
+    let marginLeft = parseInt($tip.css('margin-left'), 10);
+
+    // we must check for NaN for ie 8/9
+    if (isNaN(marginTop)) {
+      marginTop = 0;
+    }
+    if (isNaN(marginLeft)) {
+      marginLeft = 0;
+    }
+
+    offset.top += marginTop;
+    offset.left += marginLeft;
+
+    // $.fn.offset doesn't round pixel values
+    // so we use setOffset directly with our own function B-0
+    $.offset.setOffset($tip[0], $.extend({
+      using(props) {
+        $tip.css({
+          top: Math.round(props.top),
+          left: Math.round(props.left)
+        });
+      }
+    }, offset), 0);
 
     this.set('in', true);
 
-    function tooltipShowComplete() {
-      let prevHoverState = this.get('hoverState');
+    // check to see if placing tip in new offset caused the tip to resize itself
+    let actualWidth = $tip[0].offsetWidth;
+    let actualHeight = $tip[0].offsetHeight;
 
-      this.get('onShown')(this);
-      this.set('hoverState', null);
-
-      if (prevHoverState === 'out') {
-        this.leave();
-      }
-    };
-
-    if (this.get('usesTransition')) {
-      this.get('tooltipElement')
-        .one('bsTransitionEnd', bind(this, tooltipShowComplete))
-        .emulateTransitionEnd(this.get('transitionDuration'));
-    } else {
-      tooltipShowComplete.call(this);
+    if (placement === 'top' && actualHeight !== height) {
+      offset.top = offset.top + height - actualHeight;
     }
+
+    let delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight);
+
+    if (delta.left) {
+      offset.left += delta.left;
+    } else {
+      offset.top += delta.top;
+    }
+
+    let isVertical = /top|bottom/.test(placement);
+    let arrowDelta = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight;
+    let arrowOffsetPosition = isVertical ? 'offsetWidth' : 'offsetHeight';
+
+    $tip.offset(offset);
+    this.replaceArrow(arrowDelta, $tip[0][arrowOffsetPosition], isVertical);
+  },
+
+  getViewportAdjustedDelta(placement, pos, actualWidth, actualHeight) {
+    let delta = { top: 0, left: 0 };
+    let $viewport = this.get('viewportElement');
+    if (!$viewport) {
+      return delta;
+    }
+
+    let viewportPadding = this.get('viewportPadding');
+    let viewportDimensions = getPosition($viewport);
+
+    if (/right|left/.test(placement)) {
+      let topEdgeOffset = pos.top - viewportPadding - viewportDimensions.scroll;
+      let bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight;
+      if (topEdgeOffset < viewportDimensions.top) { // top overflow
+        delta.top = viewportDimensions.top - topEdgeOffset;
+      } else if (bottomEdgeOffset > viewportDimensions.top + viewportDimensions.height) { // bottom overflow
+        delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset;
+      }
+    } else {
+      let leftEdgeOffset = pos.left - viewportPadding;
+      let rightEdgeOffset = pos.left + viewportPadding + actualWidth;
+      if (leftEdgeOffset < viewportDimensions.left) { // left overflow
+        delta.left = viewportDimensions.left - leftEdgeOffset;
+      } else if (rightEdgeOffset > viewportDimensions.right) { // right overflow
+        delta.left = viewportDimensions.left + viewportDimensions.width - rightEdgeOffset;
+      }
+    }
+
+    return delta;
+  },
+
+  replaceArrow(delta, dimension, isVertical) {
+    this.get('arrowElement')
+      .css(isVertical ? 'left' : 'top', `${50 * (1 - delta / dimension)}%`)
+      .css(isVertical ? 'top' : 'left', '');
   },
 
   hide() {
@@ -339,9 +464,9 @@ export default Component.extend({
     }
 
     function tooltipHideComplete() {
-      // if (that.hoverState != 'in') $tip.detach()
-
-      // callback && callback()
+      if (this.get('hoverState') !== 'in') {
+        this.set('visible', false);
+      }
       this.get('onHidden')(this);
     }
 
@@ -367,8 +492,7 @@ export default Component.extend({
           let [inEvent, outEvent] = event;
           $target.on(`${inEvent}.${eventNamespace}`, run.bind(this, this.enter));
           $target.on(`${outEvent}.${eventNamespace}`, run.bind(this, this.leave));
-        }
-        else {
+        } else {
           $target.on(`${event}.${eventNamespace}`, run.bind(this, this.toggle));
         }
       });
@@ -388,6 +512,5 @@ export default Component.extend({
     this._super(...arguments);
     this.removeListeners();
   }
-
 
 });
