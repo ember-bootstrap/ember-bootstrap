@@ -8,13 +8,15 @@ moduleForComponent('bs-tooltip-element', 'Integration | Component | bs tooltip e
 test('it has correct markup', function(assert) {
   // Template block usage:
   this.render(hbs`
-    {{#bs-tooltip-element}}
+    {{#bs-tooltip-element fade=true in=true}}
       template block text
     {{/bs-tooltip-element}}
   `);
 
   assert.ok(this.$(':first-child').hasClass('tooltip'), 'has tooltip class');
   assert.ok(this.$(':first-child').hasClass('top'), 'has top class');
+  assert.ok(this.$(':first-child').hasClass('fade'), 'has fade class');
+  assert.ok(this.$(':first-child').hasClass('in'), 'has in class');
   assert.equal(this.$('.tooltip-arrow').length, 1, 'has arrow');
   assert.equal(this.$('.tooltip-inner').text().trim(), 'template block text', 'shows title');
 });

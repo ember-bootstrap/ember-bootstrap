@@ -38,6 +38,16 @@ test('it shows and hides immediately when hovering over triggerTarget [fade=fals
   assert.equal(this.$('.tooltip').length, 0, 'tooltip is not visible');
 });
 
+test('it shows and hides immediately when focusing triggerTarget [fade=false]', function(assert) {
+  this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false}}</div>`);
+
+  this.$('#target').focusin();
+  assert.equal(this.$('.tooltip').length, 1, 'tooltip is visible');
+
+  this.$('#target').focusout();
+  assert.equal(this.$('.tooltip').length, 0, 'tooltip is not visible');
+});
+
 test('it shows and hides immediately when clicking on triggerTarget [fade=false]', function(assert) {
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false triggerEvents="click"}}</div>`);
 

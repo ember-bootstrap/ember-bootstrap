@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   layout,
 
   classNames: ['tooltip'],
-  classNameBindings: ['placement', 'in'],
+  classNameBindings: ['placement', 'in', 'fade'],
   ariaRole: 'tooltip',
 
   placement: 'top',

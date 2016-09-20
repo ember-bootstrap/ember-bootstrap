@@ -15,7 +15,8 @@ const {
     later,
     cancel,
     bind,
-    schedule
+    schedule,
+    next
   }
 } = Ember;
 const eventNamespace = 'tooltip';
@@ -258,7 +259,7 @@ export default Component.extend({
 
   leave(e) {
     if (e) {
-      let eventType = e.type === 'focusin' ? 'focus' : 'hover';
+      let eventType = e.type === 'focusout' ? 'focus' : 'hover';
       this.get('inState').set(eventType, false);
     }
 
@@ -303,8 +304,14 @@ export default Component.extend({
       return;
     }
 
+    // this waits for the tooltip element to be created. when animating a wormholed tooltip we need to wait until
+    // ember-wormhole has moved things in the DOM for the animation to be correct, so use Ember.run.next in this case
+    let delayFn = !this.get('_renderInPlace') && this.get('fade') ? next : function(target, fn) {
+      schedule('afterRender', target, fn);
+    };
+
     this.set('visible', true);
-    schedule('afterRender', this, function() {
+    delayFn(this, function() {
       let $element = this.get('triggerTargetElement');
       let placement = this.get('placement');
 
