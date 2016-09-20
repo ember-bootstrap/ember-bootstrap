@@ -38,7 +38,7 @@ test('it shows and hides immediately when hovering over triggerTarget [fade=fals
   assert.equal(this.$('.tooltip').length, 0, 'tooltip is not visible');
 });
 
-test('it shows and hides immediately when clicking on triggerTarget and [fade=false]', function(assert) {
+test('it shows and hides immediately when clicking on triggerTarget [fade=false]', function(assert) {
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false triggerEvents="click"}}</div>`);
 
   this.$('#target').click();
@@ -55,8 +55,8 @@ sinonTest('it calls onShow/onShown actions when showing tooltip [fade=false]', f
   this.on('shown', shownAction);
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false onShow=(action "show") onShown=(action "shown")}}</div>`);
   this.$('#target').trigger('mouseover');
-  assert.ok(showAction.calledOnce, 'show action was called');
-  assert.ok(shownAction.calledOnce, 'show action was called');
+  assert.ok(showAction.calledOnce, 'show action has been called');
+  assert.ok(shownAction.calledOnce, 'show action has been called');
 });
 
 sinonTest('it aborts showing if onShow action returns false', function(assert) {
@@ -67,9 +67,47 @@ sinonTest('it aborts showing if onShow action returns false', function(assert) {
   this.on('shown', shownAction);
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false onShow=(action "show") onShown=(action "shown")}}</div>`);
   this.$('#target').trigger('mouseover');
-  assert.ok(showAction.calledOnce, 'show action was called');
-  assert.notOk(shownAction.calledOnce, 'show action was called');
+  assert.ok(showAction.calledOnce, 'show action has been called');
+  assert.notOk(shownAction.calledOnce, 'show action has not been called');
   assert.equal(this.$('.tooltip').length, 0, 'tooltip is not visible');
+});
+
+sinonTest('it calls onHide/onHidden actions when hiding tooltip [fade=false]', function(assert) {
+  let hideAction = this.spy();
+  this.on('hide', hideAction);
+  let hiddenAction = this.spy();
+  this.on('hidden', hiddenAction);
+  this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false onHide=(action "hide") onHidden=(action "hidden")}}</div>`);
+  this.$('#target').trigger('mouseover');
+  this.$('#target').trigger('mouseout');
+  assert.ok(hideAction.calledOnce, 'hide action has been called');
+  assert.ok(hiddenAction.calledOnce, 'hidden action was called');
+});
+
+sinonTest('it aborts hiding if onHide action returns false', function(assert) {
+  let hideAction = this.stub();
+  hideAction.returns(false);
+  this.on('hide', hideAction);
+  let hiddenAction = this.spy();
+  this.on('hidden', hiddenAction);
+  this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false onHide=(action "hide") onHidden=(action "hidden")}}</div>`);
+  this.$('#target').trigger('mouseover');
+  this.$('#target').trigger('mouseout');
+  assert.ok(hideAction.calledOnce, 'hide action has been called');
+  assert.notOk(hiddenAction.calledOnce, 'hidden action has not been called');
+  assert.equal(this.$('.tooltip').length, 1, 'tooltip is visible');
+});
+
+test('it keeps showing when leaving the mouse but is still focused [fade=false]', function(assert) {
+  this.render(hbs`<a href="#" id="target">{{bs-tooltip title="Dummy" fade=false}}</a>`);
+
+  this.$('#target').focus();
+  assert.equal(this.$('.tooltip').length, 1, 'tooltip is visible');
+
+  this.$('#target').trigger('mouseover');
+  assert.equal(this.$('.tooltip').length, 1, 'tooltip is visible');
+  this.$('#target').trigger('mouseout');
+  assert.equal(this.$('.tooltip').length, 1, 'tooltip is visible');
 });
 
 test('Renders in wormhole if renderInPlace is not set', function(assert) {

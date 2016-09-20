@@ -12,7 +12,8 @@ const {
   $,
   run: {
     later,
-    cancel
+    cancel,
+    bind
   }
 } = Ember;
 const eventNamespace = 'tooltip';
@@ -228,12 +229,46 @@ export default Component.extend({
     }, this.get('delayShow'));
   },
 
-  leave() {
-    console.log('leave');
+  leave(e) {
+    if (e) {
+      let eventType = e.type === 'focusin' ? 'focus' : 'hover';
+      this.get('inState').set(eventType, false);
+    }
+
+    if (this.get('inState.in')) {
+      return;
+    }
+
+    cancel(this.timer);
+
+    this.set('hoverState', 'out');
+
+    if (!this.get('hasDelayShow')) {
+      return this.hide();
+    }
+
+    this.timer = later(this, function() {
+      if (this.get('hoverState') === 'out') {
+        this.hide();
+      }
+    }, this.get('delayHide'));
   },
 
-  toggle() {
-    console.log('toggle');
+  toggle(e) {
+    if (e) {
+      this.get('inState').toggleProperty('click');
+      if (this.get('inState.in')) {
+        this.enter();
+      } else {
+        this.leave();
+      }
+    } else {
+      if (this.get('in')) {
+        this.leave();
+      } else {
+        this.enter();
+      }
+    }
   },
 
   show() {
@@ -277,7 +312,7 @@ export default Component.extend({
 
     this.set('in', true);
 
-    let complete = function tooltipShowComplete() {
+    function tooltipShowComplete() {
       let prevHoverState = this.get('hoverState');
 
       this.get('onShown')(this);
@@ -290,15 +325,37 @@ export default Component.extend({
 
     if (this.get('usesTransition')) {
       this.get('tooltipElement')
-        .one('bsTransitionEnd', bind(this, complete))
+        .one('bsTransitionEnd', bind(this, tooltipShowComplete))
         .emulateTransitionEnd(this.get('transitionDuration'));
     } else {
-      complete.call(this);
+      tooltipShowComplete.call(this);
     }
   },
 
   hide() {
 
+    if (false === this.get('onHide')(this)) {
+      return;
+    }
+
+    function tooltipHideComplete() {
+      // if (that.hoverState != 'in') $tip.detach()
+
+      // callback && callback()
+      this.get('onHidden')(this);
+    }
+
+    this.set('in', false);
+
+    if (this.get('usesTransition')) {
+      this.get('tooltipElement')
+        .one('bsTransitionEnd', bind(this, tooltipHideComplete))
+        .emulateTransitionEnd(this.get('transitionDuration'));
+    } else {
+      tooltipHideComplete.call(this);
+    }
+
+    this.set('hoverState', null);
   },
 
   addListeners() {
