@@ -2,10 +2,13 @@ import Ember from 'ember';
 import layout from '../templates/components/bs-tooltip';
 import getPosition from '../utils/get-position';
 import getCalculatedOffset from '../utils/get-calculated-offset';
+import getParent from '../utils/get-parent';
 
 const {
+  assert,
   Component,
   computed,
+  guidFor,
   isArray,
   isBlank,
   K,
@@ -32,7 +35,7 @@ const InState = Ember.Object.extend({
 export default Component.extend({
   layout,
 
-  tagName: 'span',
+  tagName: '',
 
   title: null,
 
@@ -82,8 +85,8 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  tooltipId: computed('elementId', function() {
-    return `${this.get('elementId')}-tooltip`;
+  tooltipId: computed(function() {
+    return `tooltip-${guidFor(this)}`;
   }),
 
   /**
@@ -131,12 +134,15 @@ export default Component.extend({
    */
   triggerTargetElement: computed('triggerTarget', function() {
     let triggerTarget = this.get('triggerTarget');
+    let $el;
 
     if (isBlank(triggerTarget)) {
-      return this.$().parent();
+      $el = getParent(this);
     } else {
-      return $(triggerTarget);
+      $el = $(triggerTarget);
     }
+    assert('Trigger element for tooltip must be present', $el.length === 1);
+    return $el;
   }),
 
   /**
