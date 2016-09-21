@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import ContextualHelp from './bs-contextual-help';
-import layout from '../templates/components/bs-tooltip';
+import layout from '../templates/components/bs-popover';
 
 const {
   computed
@@ -8,6 +8,10 @@ const {
 
 export default ContextualHelp.extend({
   layout,
+
+  placement: 'right',
+
+  triggerEvents: 'click',
 
   /**
    * The jQuery object of the arrow element.
@@ -18,6 +22,6 @@ export default ContextualHelp.extend({
    * @private
    */
   arrowElement: computed('overlayElement', function() {
-    return this.get('overlayElement').find('.tooltip-arrow');
+    return this.get('overlayElement').find('.arrow');
   })
 });

@@ -18,6 +18,7 @@ Router.map(function() {
   this.route('navs');
   this.route('navbars');
   this.route('tooltip');
+  this.route('popover');
   this.route('tabs', function() {
     this.route('other');
   });
