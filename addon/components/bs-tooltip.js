@@ -9,6 +9,7 @@ const {
   isArray,
   isBlank,
   K,
+  observer,
   run,
   $,
   run: {
@@ -38,6 +39,7 @@ export default Component.extend({
   placement: 'top',
 
   visible: false,
+  inDom: computed.reads('visible'),
 
   fade: true,
 
@@ -271,7 +273,7 @@ export default Component.extend({
 
     this.set('hoverState', 'out');
 
-    if (!this.get('hasDelayShow')) {
+    if (!this.get('hasDelayHide')) {
       return this.hide();
     }
 
@@ -300,6 +302,10 @@ export default Component.extend({
   },
 
   show() {
+    if (this.get('isDestroyed')) {
+      return;
+    }
+
     if (false === this.get('onShow')(this)) {
       return;
     }
@@ -310,64 +316,69 @@ export default Component.extend({
       schedule('afterRender', target, fn);
     };
 
-    this.set('visible', true);
-    delayFn(this, function() {
-      let $element = this.get('triggerTargetElement');
-      let placement = this.get('placement');
+    this.set('inDom', true);
+    delayFn(this, this._show);
+  },
 
-      // this.$element.attr('aria-describedby', tipId) @todo ?
+  _show(skipTransition = false) {
+    let $element = this.get('triggerTargetElement');
+    let placement = this.get('placement');
 
-      // @todo auto placement
-      // var autoToken = /\s?auto?\s?/i
-      // var autoPlace = autoToken.test(placement)
-      // if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
+    // this.$element.attr('aria-describedby', tipId) @todo ?
 
-      let $tip = this.get('tooltipElement');
-      $tip.css({ top: 0, left: 0, display: 'block' });
+    // @todo auto placement
+    // var autoToken = /\s?auto?\s?/i
+    // var autoPlace = autoToken.test(placement)
+    // if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
 
-      let pos = getPosition($element);
-      let actualWidth = $tip[0].offsetWidth;
-      let actualHeight = $tip[0].offsetHeight;
+    let $tip = this.get('tooltipElement');
+    $tip.css({ top: 0, left: 0, display: 'block' });
 
-      //
-      // if (autoPlace) {
-      //   var orgPlacement = placement
-      //   var viewportDim = this.getPosition(this.$viewport)
-      //
-      //   placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top' :
-      //     placement == 'top' && pos.top - actualHeight < viewportDim.top ? 'bottom' :
-      //       placement == 'right' && pos.right + actualWidth > viewportDim.width ? 'left' :
-      //         placement == 'left' && pos.left - actualWidth < viewportDim.left ? 'right' :
-      //           placement
-      //
-      //   $tip
-      //     .removeClass(orgPlacement)
-      //     .addClass(placement)
-      // }
-      //
+    let pos = getPosition($element);
+    let actualWidth = $tip[0].offsetWidth;
+    let actualHeight = $tip[0].offsetHeight;
 
-      let calculatedOffset = getCalculatedOffset(placement, pos, actualWidth, actualHeight);
-      this.applyPlacement(calculatedOffset, placement);
+    //
+    // if (autoPlace) {
+    //   var orgPlacement = placement
+    //   var viewportDim = this.getPosition(this.$viewport)
+    //
+    //   placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top' :
+    //     placement == 'top' && pos.top - actualHeight < viewportDim.top ? 'bottom' :
+    //       placement == 'right' && pos.right + actualWidth > viewportDim.width ? 'left' :
+    //         placement == 'left' && pos.left - actualWidth < viewportDim.left ? 'right' :
+    //           placement
+    //
+    //   $tip
+    //     .removeClass(orgPlacement)
+    //     .addClass(placement)
+    // }
+    //
 
-      function tooltipShowComplete() {
-        let prevHoverState = this.get('hoverState');
+    let calculatedOffset = getCalculatedOffset(placement, pos, actualWidth, actualHeight);
+    this.applyPlacement(calculatedOffset, placement);
 
-        this.get('onShown')(this);
-        this.set('hoverState', null);
-
-        if (prevHoverState === 'out') {
-          this.leave();
-        }
+    function tooltipShowComplete() {
+      if (this.get('isDestroyed')) {
+        return;
       }
+      let prevHoverState = this.get('hoverState');
 
-      if (this.get('usesTransition')) {
-        this.get('tooltipElement')
-          .one('bsTransitionEnd', bind(this, tooltipShowComplete))
-          .emulateTransitionEnd(this.get('transitionDuration'));
-      } else {
-        tooltipShowComplete.call(this);
+      this.get('onShown')(this);
+      this.set('hoverState', null);
+
+      if (prevHoverState === 'out') {
+        this.leave();
       }
-    });
+    }
+
+    if (skipTransition === false && this.get('usesTransition')) {
+      this.get('tooltipElement')
+        .one('bsTransitionEnd', bind(this, tooltipShowComplete))
+        .emulateTransitionEnd(this.get('transitionDuration'));
+    } else {
+      tooltipShowComplete.call(this);
+    }
   },
 
   applyPlacement(offset, placement) {
@@ -465,14 +476,20 @@ export default Component.extend({
   },
 
   hide() {
+    if (this.get('isDestroyed')) {
+      return;
+    }
 
     if (false === this.get('onHide')(this)) {
       return;
     }
 
     function tooltipHideComplete() {
+      if (this.get('isDestroyed')) {
+        return;
+      }
       if (this.get('hoverState') !== 'in') {
-        this.set('visible', false);
+        this.set('inDom', false);
       }
       this.get('onHidden')(this);
     }
@@ -513,11 +530,22 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
     this.addListeners();
+    if (this.get('visible')) {
+      this._show(true);
+    }
   },
 
   willRemoveElement() {
     this._super(...arguments);
     this.removeListeners();
-  }
+  },
+
+  _watchVisible: observer('visible', function() {
+    if (this.get('visible')) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  })
 
 });
