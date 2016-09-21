@@ -1,11 +1,10 @@
-import {moduleForComponent, test} from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import sinonTest from 'dummy/tests/ember-sinon-qunit/test';
 
 moduleForComponent('bs-tooltip', 'Integration | Component | bs tooltip', {
   integration: true
 });
-
 
 function setupForPositioning() {
   this.$('#container')
@@ -172,11 +171,15 @@ test('should place tooltip on top of element', function(assert) {
 });
 
 test('should place tooltip on top of element if already visible', function(assert) {
+  assert.expect(2);
+  let done = assert.async();
   this.render(hbs`<div id="container"><p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=true}}</a></p></div>`);
 
   setupForPositioning.call(this);
-
-  assertPositioning.call(this, assert);
+  setTimeout(function() {
+    assertPositioning.call(this, assert);
+    done();
+  }, 0);
 });
 
 test('should place tooltip on top of element if visible is set to true', function(assert) {
@@ -189,18 +192,18 @@ test('should place tooltip on top of element if visible is set to true', functio
   assertPositioning.call(this, assert);
 });
 
-test('should show tooltip if leave event hasn\'t occurred before delay expires', function (assert) {
+test('should show tooltip if leave event hasn\'t occurred before delay expires', function(assert) {
   assert.expect(2);
   let done = assert.async();
 
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
   let $trigger = this.$('#target');
 
-  setTimeout(function () {
+  setTimeout(function() {
     assert.notOk(this.$('.tooltip').is('.fade.in'), '100ms: tooltip is not faded in');
   }, 100);
 
-  setTimeout(function () {
+  setTimeout(function() {
     assert.ok(this.$('.tooltip').is('.fade.in'), '200ms: tooltip is faded in');
     done();
   }, 200);
@@ -208,19 +211,19 @@ test('should show tooltip if leave event hasn\'t occurred before delay expires',
   $trigger.trigger('mouseenter');
 });
 
-test('should not show tooltip if leave event occurs before delay expires', function (assert) {
+test('should not show tooltip if leave event occurs before delay expires', function(assert) {
   assert.expect(2);
   let done = assert.async();
 
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
   let $trigger = this.$('#target');
 
-  setTimeout(function () {
+  setTimeout(function() {
     assert.notOk(this.$('.tooltip').is('.fade.in'), '100ms: tooltip not faded in');
     $trigger.trigger('mouseout');
   }, 100);
 
-  setTimeout(function () {
+  setTimeout(function() {
     assert.notOk(this.$('.tooltip').is('.fade.in'), '200ms: tooltip not faded in');
     done();
   }, 200);
@@ -228,23 +231,23 @@ test('should not show tooltip if leave event occurs before delay expires', funct
   $trigger.trigger('mouseenter');
 });
 
-test('should not hide tooltip if leave event occurs and enter event occurs within the hide delay', function (assert) {
+test('should not hide tooltip if leave event occurs and enter event occurs within the hide delay', function(assert) {
   assert.expect(3);
   let done = assert.async();
 
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" delayShow=0 delayHide=150}}</div>`);
   let $trigger = this.$('#target');
 
-  setTimeout(function () {
+  setTimeout(function() {
     assert.ok(this.$('.tooltip').is('.fade.in'), '1ms: tooltip faded in');
     $trigger.trigger('mouseout');
 
-    setTimeout(function () {
+    setTimeout(function() {
       assert.ok(this.$('.tooltip').is('.fade.in'), '100ms: tooltip still faded in');
       $trigger.trigger('mouseenter');
     }, 100);
 
-    setTimeout(function () {
+    setTimeout(function() {
       assert.ok(this.$('.tooltip').is('.fade.in'), '200ms: tooltip still faded in');
       done();
     }, 200);
@@ -253,19 +256,19 @@ test('should not hide tooltip if leave event occurs and enter event occurs withi
   $trigger.trigger('mouseenter');
 });
 
-test('should not show tooltip if leave event occurs before delay expires', function (assert) {
+test('should not show tooltip if leave event occurs before delay expires', function(assert) {
   assert.expect(2);
   let done = assert.async();
 
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
   let $trigger = this.$('#target');
 
-  setTimeout(function () {
+  setTimeout(function() {
     assert.notOk(this.$('.tooltip').is('.fade.in'), '100ms: tooltip not faded in');
     $trigger.trigger('mouseout');
   }, 100);
 
-  setTimeout(function () {
+  setTimeout(function() {
     assert.notOk(this.$('.tooltip').is('.fade.in'), '200ms: tooltip not faded in');
     done();
   }, 200);

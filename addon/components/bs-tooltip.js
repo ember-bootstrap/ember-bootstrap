@@ -37,6 +37,9 @@ export default Component.extend({
   title: null,
 
   placement: 'top',
+  _placement: computed.reads('placement'),
+
+  autoPlacement: false,
 
   visible: false,
   inDom: computed.reads('visible'),
@@ -326,11 +329,6 @@ export default Component.extend({
 
     // this.$element.attr('aria-describedby', tipId) @todo ?
 
-    // @todo auto placement
-    // var autoToken = /\s?auto?\s?/i
-    // var autoPlace = autoToken.test(placement)
-    // if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
-
     let $tip = this.get('tooltipElement');
     $tip.css({ top: 0, left: 0, display: 'block' });
 
@@ -338,22 +336,17 @@ export default Component.extend({
     let actualWidth = $tip[0].offsetWidth;
     let actualHeight = $tip[0].offsetHeight;
 
-    //
-    // if (autoPlace) {
-    //   var orgPlacement = placement
-    //   var viewportDim = this.getPosition(this.$viewport)
-    //
-    //   placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top' :
-    //     placement == 'top' && pos.top - actualHeight < viewportDim.top ? 'bottom' :
-    //       placement == 'right' && pos.right + actualWidth > viewportDim.width ? 'left' :
-    //         placement == 'left' && pos.left - actualWidth < viewportDim.left ? 'right' :
-    //           placement
-    //
-    //   $tip
-    //     .removeClass(orgPlacement)
-    //     .addClass(placement)
-    // }
-    //
+    if (this.get('autoPlacement')) {
+      let viewportDim = getPosition(this.get('viewportElement'));
+
+      placement = placement === 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top' :
+        placement === 'top' && pos.top - actualHeight < viewportDim.top ? 'bottom' :
+          placement === 'right' && pos.right + actualWidth > viewportDim.width ? 'left' :
+            placement === 'left' && pos.left - actualWidth < viewportDim.left ? 'right' :
+              placement;
+    }
+
+    this.set('_placement', placement);
 
     let calculatedOffset = getCalculatedOffset(placement, pos, actualWidth, actualHeight);
     this.applyPlacement(calculatedOffset, placement);
@@ -531,7 +524,7 @@ export default Component.extend({
     this._super(...arguments);
     this.addListeners();
     if (this.get('visible')) {
-      this._show(true);
+      next(this, this._show, true);
     }
   },
 
