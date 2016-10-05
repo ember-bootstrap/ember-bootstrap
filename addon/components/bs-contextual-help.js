@@ -31,35 +31,149 @@ const InState = Ember.Object.extend({
   in: computed.or('hover', 'focus', 'click')
 });
 
+/**
+
+ @class Components.ContextualHelp
+ @namespace Components
+ @extends Ember.Component
+ @private
+ */
 export default Component.extend({
   tagName: '',
 
+  /**
+   * @property title
+   * @type string
+   * @public
+   */
   title: null,
 
+  /**
+   * How to position the tooltip - top | bottom | left | right
+   *
+   * @property title
+   * @type string
+   * @default 'top'
+   * @public
+   */
   placement: 'top',
+
   _placement: computed.reads('placement'),
 
+  /**
+   * When `true` it will dynamically reorient the tooltip. For example, if `placement` is "left", the
+   * tooltip will display to the left when possible, otherwise it will display right.
+   *
+   * @property autoPlacement
+   * @type boolean
+   * @default false
+   * @public
+   */
   autoPlacement: false,
 
+  /**
+   * You can programmatically show the tooltip by setting this to `true`
+   *
+   * @property visible
+   * @type boolean
+   * @default false
+   * @public
+   */
   visible: false,
+
+  /**
+   * @property inDom
+   * @type boolean
+   * @private
+   */
   inDom: computed.reads('visible'),
 
+  /**
+   * Set to false to disable fade animations.
+   *
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
   fade: true,
 
+  /**
+   * Used to apply Bootstrap's "in" class
+   *
+   * @property in
+   * @type boolean
+   * @default false
+   * @private
+   */
   in: computed.reads('visible'),
 
+  /**
+   * Delay showing and hiding the tooltip (ms). Individual delays for showing and hiding can be specified by using the
+   * `delayShow` and `delayHide` properties.
+   *
+   * @property delay
+   * @type number
+   * @default 0
+   * @public
+   */
   delay: 0,
 
+  /**
+   * Delay showing the tooltip. This property overrides the general delay set with the `delay` property.
+   *
+   * @property delayShow
+   * @type number
+   * @default 0
+   * @public
+   */
   delayShow: computed.reads('delay'),
 
+  /**
+   * Delay hiding the tooltip. This property overrides the general delay set with the `delay` property.
+   *
+   * @property delayHide
+   * @type number
+   * @default 0
+   * @public
+   */
   delayHide: computed.reads('delay'),
 
   hasDelayShow: computed.gt('delayShow', 0),
   hasDelayHide: computed.gt('delayHide', 0),
 
+  /**
+   * The duration of the fade transition
+   *
+   * @property transitionDuration
+   * @type number
+   * @default 150
+   * @public
+   */
   transitionDuration: 150,
 
+  /**
+   * Keeps the tooltip within the bounds of this element when `autoPlacement` is true. Can be any valid jQuery selector.
+   *
+   * @property viewportSelector
+   * @type string
+   * @default 'body'
+   * @see viewportPadding
+   * @see autoPlacement
+   * @public
+   */
   viewportSelector: 'body',
+
+  /**
+   * Take a padding into account for keeping the tooltip within the bounds of the element given by `viewportSelector`.
+   *
+   * @property viewportPadding
+   * @type number
+   * @default 0
+   * @see viewportSelector
+   * @see autoPlacement
+   * @public
+   */
   viewportPadding: 0,
 
   /**
@@ -120,29 +234,41 @@ export default Component.extend({
     return $(this.get('viewportSelector'));
   }),
 
-  triggerTarget: null,
+  /**
+   * The DOM element that triggers the tooltip. By default it is the parent element of this component.
+   * You can set this to any jQuery selector to have any other element trigger the tooltip.
+   *
+   * @property triggerElement
+   * @type string
+   * @public
+   */
+  triggerElement: null,
 
   /**
    * @property triggerTargetElement
    * @type {jQuery}
    * @private
    */
-  triggerTargetElement: computed('triggerTarget', function() {
-    let triggerTarget = this.get('triggerTarget');
+  triggerTargetElement: computed('triggerElement', function() {
+    let triggerElement = this.get('triggerElement');
     let $el;
 
-    if (isBlank(triggerTarget)) {
+    if (isBlank(triggerElement)) {
       $el = getParent(this);
     } else {
-      $el = $(triggerTarget);
+      $el = $(triggerElement);
     }
     assert('Trigger element for tooltip/popover must be present', $el.length === 1);
     return $el;
   }),
 
   /**
+   * The event(s) that should trigger the tooltip - click | hover | focus.
+   * You can set this to a single event or multiple events, given as an array or a string separated by spaces.
+   *
    * @property triggerEvents
    * @type array|string
+   * @default 'hover focus'
    * @public
    */
   triggerEvents: 'hover focus',
@@ -214,29 +340,44 @@ export default Component.extend({
   timer: null,
 
   /**
+   * This action is called immediately when the tooltip is about to be shown.
+   *
    * @event onShow
    * @public
    */
   onShow: K,
 
   /**
+   * This action will be called when the tooltip has been made visible to the user (will wait for CSS transitions to complete).
+   *
    * @event onShown
    * @public
    */
   onShown: K,
 
   /**
+   * This action is called immediately when the tooltip is about to be hidden.
+   *
    * @event onHide
    * @public
    */
   onHide: K,
 
   /**
+   * This action is called when the tooltip has finished being hidden from the user (will wait for CSS transitions to complete).
+   *
    * @event onHidden
    * @public
    */
   onHidden: K,
 
+  /**
+   * Called when a show event has been received
+   *
+   * @method enter
+   * @param e
+   * @private
+   */
   enter(e) {
     if (e) {
       let eventType = e.type === 'focusin' ? 'focus' : 'hover';
@@ -263,6 +404,13 @@ export default Component.extend({
     }, this.get('delayShow'));
   },
 
+  /**
+   * Called when a hide event has been received
+   *
+   * @method leave
+   * @param e
+   * @private
+   */
   leave(e) {
     if (e) {
       let eventType = e.type === 'focusout' ? 'focus' : 'hover';
@@ -288,6 +436,13 @@ export default Component.extend({
     }, this.get('delayHide'));
   },
 
+  /**
+   * Called for a click event
+   *
+   * @method toggle
+   * @param e
+   * @private
+   */
   toggle(e) {
     if (e) {
       this.get('inState').toggleProperty('click');
@@ -305,6 +460,12 @@ export default Component.extend({
     }
   },
 
+  /**
+   * Show the tooltip
+   *
+   * @method show
+   * @private
+   */
   show() {
     if (this.get('isDestroyed')) {
       return;
@@ -375,6 +536,14 @@ export default Component.extend({
     }
   },
 
+  /**
+   * Position the tooltip
+   *
+   * @method applyPlacement
+   * @param offset
+   * @param placement
+   * @private
+   */
   applyPlacement(offset, placement) {
     let $tip = this.get('overlayElement');
     let width = $tip[0].offsetWidth;
@@ -432,6 +601,15 @@ export default Component.extend({
     this.replaceArrow(arrowDelta, $tip[0][arrowOffsetPosition], isVertical);
   },
 
+  /**
+   * @method getViewportAdjustedDelta
+   * @param placement
+   * @param pos
+   * @param actualWidth
+   * @param actualHeight
+   * @returns {{top: number, left: number}}
+   * @private
+   */
   getViewportAdjustedDelta(placement, pos, actualWidth, actualHeight) {
     let delta = { top: 0, left: 0 };
     let $viewport = this.get('viewportElement');
@@ -463,12 +641,27 @@ export default Component.extend({
     return delta;
   },
 
+  /**
+   * Position the tooltip's arrow
+   *
+   * @method replaceArrow
+   * @param delta
+   * @param dimension
+   * @param isVertical
+   * @private
+   */
   replaceArrow(delta, dimension, isVertical) {
     this.get('arrowElement')
       .css(isVertical ? 'left' : 'top', `${50 * (1 - delta / dimension)}%`)
       .css(isVertical ? 'top' : 'left', '');
   },
 
+  /**
+   * Hide the tooltip
+   *
+   * @method hide
+   * @private
+   */
   hide() {
     if (this.get('isDestroyed')) {
       return;
@@ -501,6 +694,10 @@ export default Component.extend({
     this.set('hoverState', null);
   },
 
+  /**
+   * @method addListeners
+   * @private
+   */
   addListeners() {
     let $target = this.get('triggerTargetElement');
 
@@ -516,6 +713,10 @@ export default Component.extend({
       });
   },
 
+  /**
+   * @method removeListeners
+   * @private
+   */
   removeListeners() {
     this.get('triggerTargetElement')
       .off(`.${eventNamespace}`);

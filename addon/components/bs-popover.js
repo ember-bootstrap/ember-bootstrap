@@ -6,11 +6,30 @@ const {
   computed
 } = Ember;
 
+/**
+
+ @class Popover
+ @namespace Components
+ @extends Components.ContextualHelp
+ @public
+ */
 export default ContextualHelp.extend({
   layout,
 
+  /**
+   * @property placement
+   * @type string
+   * @default 'right'
+   * @public
+   */
   placement: 'right',
 
+  /**
+   * @property triggerEvents
+   * @type array|string
+   * @default 'click'
+   * @public
+   */
   triggerEvents: 'click',
 
   /**

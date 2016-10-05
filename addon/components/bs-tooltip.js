@@ -6,6 +6,13 @@ const {
   computed
 } = Ember;
 
+/**
+
+ @class Tooltip
+ @namespace Components
+ @extends Components.ContextualHelp
+ @public
+ */
 export default ContextualHelp.extend({
   layout,
 
