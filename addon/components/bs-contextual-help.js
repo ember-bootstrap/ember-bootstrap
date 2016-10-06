@@ -237,6 +237,7 @@ export default Component.extend({
   /**
    * The DOM element that triggers the tooltip. By default it is the parent element of this component.
    * You can set this to any jQuery selector to have any other element trigger the tooltip.
+   * With the special value of "parentView" you can attach the tooltip to the parent component's element.
    *
    * @property triggerElement
    * @type string
@@ -255,6 +256,8 @@ export default Component.extend({
 
     if (isBlank(triggerElement)) {
       $el = getParent(this);
+    } else if (triggerElement === 'parentView') {
+      $el = $(this.get('parentView.element'));
     } else {
       $el = $(triggerElement);
     }

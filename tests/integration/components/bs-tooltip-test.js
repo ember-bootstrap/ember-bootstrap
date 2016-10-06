@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import sinonTest from 'dummy/tests/ember-sinon-qunit/test';
@@ -51,7 +52,7 @@ test('it hides invisible tooltip', function(assert) {
   assert.equal(this.$('.tooltip').length, 0, 'tooltip is not visible');
 });
 
-test('it shows and hides immediately when hovering over triggerTarget [fade=false]', function(assert) {
+test('it shows and hides immediately when hovering [fade=false]', function(assert) {
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false}}</div>`);
 
   this.$('#target').trigger('mouseover');
@@ -61,7 +62,7 @@ test('it shows and hides immediately when hovering over triggerTarget [fade=fals
   assert.equal(this.$('.tooltip').length, 0, 'tooltip is not visible');
 });
 
-test('it shows and hides immediately when focusing triggerTarget [fade=false]', function(assert) {
+test('it shows and hides immediately when focusing [fade=false]', function(assert) {
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false}}</div>`);
 
   this.$('#target').focusin();
@@ -71,13 +72,38 @@ test('it shows and hides immediately when focusing triggerTarget [fade=false]', 
   assert.equal(this.$('.tooltip').length, 0, 'tooltip is not visible');
 });
 
-test('it shows and hides immediately when clicking on triggerTarget [fade=false]', function(assert) {
+test('it shows and hides immediately when clicking [fade=false]', function(assert) {
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false triggerEvents="click"}}</div>`);
 
   this.$('#target').click();
   assert.equal(this.$('.tooltip').length, 1, 'tooltip is visible');
 
   this.$('#target').click();
+  assert.equal(this.$('.tooltip').length, 0, 'tooltip is not visible');
+});
+
+test('it allows changing the trigger element to some arbitrary element', function(assert) {
+  this.render(hbs`<div id="target"></div><div>{{bs-tooltip title="Dummy" fade=false triggerElement="#target"}}</div>`);
+
+  this.$('#target').trigger('mouseover');
+  assert.equal(this.$('.tooltip').length, 1, 'tooltip is visible');
+
+  this.$('#target').trigger('mouseout');
+  assert.equal(this.$('.tooltip').length, 0, 'tooltip is not visible');
+});
+
+test('it allows changing the trigger element to the parent view', function(assert) {
+  let dummyComponent = Ember.Component.extend({
+    layout: hbs`<div>{{yield}}</div>`
+  });
+  this.register('component:dum-my', dummyComponent);
+
+  this.render(hbs`{{#dum-my id="target"}}{{bs-tooltip title="Dummy" fade=false triggerElement="parentView"}}{{/dum-my}}`);
+
+  this.$('#target').trigger('mouseover');
+  assert.equal(this.$('.tooltip').length, 1, 'tooltip is visible');
+
+  this.$('#target').trigger('mouseout');
   assert.equal(this.$('.tooltip').length, 0, 'tooltip is not visible');
 });
 
