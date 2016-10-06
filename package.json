@@ -40,7 +40,7 @@
     "ember-cli-yuidoc": "^0.8.7",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
-    "ember-fastboot-addon-tests": "kaliber5/ember-fastboot-addon-tests",
+    "ember-fastboot-addon-tests": "^0.1.0",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
     "ember-sinon": "0.5.1",
