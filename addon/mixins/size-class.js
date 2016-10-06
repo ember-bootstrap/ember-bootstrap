@@ -6,7 +6,7 @@ import Ember from 'ember';
  *
  * @class SizeClass
  * @namespace Mixins
- * @public
+ * @private
  */
 export default Ember.Mixin.create({
   /**

@@ -4,7 +4,7 @@ import ModalComponent from '../components/bs-modal';
 /**
  * @class ModalCloser
  * @namespace Mixins
- * @public
+ * @private
  */
 export default Ember.Mixin.create({
   targetObject: Ember.computed(function() {
