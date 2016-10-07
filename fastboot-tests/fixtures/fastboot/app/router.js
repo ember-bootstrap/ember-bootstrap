@@ -19,6 +19,8 @@ Router.map(function() {
   this.route('nav');
   this.route('navBar');
   this.route('tabs');
+  this.route('tooltip');
+  this.route('popover');
 });
 
 export default Router;
