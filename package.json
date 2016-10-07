@@ -1,6 +1,6 @@
 {
   "name": "ember-bootstrap",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "directories": {
     "doc": "docs",
     "test": "tests"
@@ -58,7 +58,8 @@
   },
   "description": "Twitter Bootstrap components for Ember.js",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "bootstrap"
   ],
   "dependencies": {
     "broccoli-funnel": "^1.0.1",

@@ -1,3 +1,12 @@
+<a name"0.11.0"></a>
+## 0.11.0 (2016-10-08)
+
+
+#### Features
+
+* **Tooltips:** Added support for tooltips and popovers ([25d16ccd](https://github.com/kaliber5/ember-bootstrap/commit/25d16ccd), closes [#7](https://github.com/kaliber5/ember-bootstrap/issues/7))
+
+
 <a name"0.10.0"></a>
 ## 0.10.0 (2016-09-15)
 
