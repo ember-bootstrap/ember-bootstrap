@@ -6,7 +6,6 @@ const {
   computed
 } = Ember;
 
-
 /**
  Component that implements Bootstrap [popovers](http://getbootstrap.com/javascript/#popovers).
 
