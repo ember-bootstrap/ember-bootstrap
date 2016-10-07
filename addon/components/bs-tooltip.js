@@ -42,7 +42,7 @@ const {
  ```
 
  To customize the events that will trigger the tooltip use the `triggerEvents` property, that accepts an array or a
- string of events, with "hover", "focus" und "click" being supported.
+ string of events, with "hover", "focus" and "click" being supported.
 
  ### Placement options
 
@@ -56,14 +56,14 @@ const {
  Several other properties allow for some advanced customization:
  * `visible` to show/hide the tooltip programmatically
  * `fade` to disable the fade in transition
- * `delay` (or `delayShow and `delayHide`) to add a delay
+ * `delay` (or `delayShow` and `delayHide`) to add a delay
  * `viewportSelector` and `viewportPadding` to customize the viewport that affects `autoPlacement`
 
  See the individual API docs for each property.
 
  ### Actions
 
- When you want to react on the tooltip beeing shown or hidden, you can use one of the following supported actions:
+ When you want to react on the tooltip being shown or hidden, you can use one of the following supported actions:
  * `onShow`
  * `onShown`
  * `onHide`

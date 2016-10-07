@@ -49,7 +49,7 @@ export default Component.extend({
   title: null,
 
   /**
-   * How to position the tooltip - top | bottom | left | right
+   * How to position the tooltip/popover - top | bottom | left | right
    *
    * @property title
    * @type string
@@ -61,8 +61,8 @@ export default Component.extend({
   _placement: computed.reads('placement'),
 
   /**
-   * When `true` it will dynamically reorient the tooltip. For example, if `placement` is "left", the
-   * tooltip will display to the left when possible, otherwise it will display right.
+   * When `true` it will dynamically reorient the tooltip/popover. For example, if `placement` is "left", the
+   * tooltip/popover will display to the left when possible, otherwise it will display right.
    *
    * @property autoPlacement
    * @type boolean
@@ -72,7 +72,7 @@ export default Component.extend({
   autoPlacement: false,
 
   /**
-   * You can programmatically show the tooltip by setting this to `true`
+   * You can programmatically show the tooltip/popover by setting this to `true`
    *
    * @property visible
    * @type boolean
@@ -109,7 +109,7 @@ export default Component.extend({
   in: computed.reads('visible'),
 
   /**
-   * Delay showing and hiding the tooltip (ms). Individual delays for showing and hiding can be specified by using the
+   * Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the
    * `delayShow` and `delayHide` properties.
    *
    * @property delay
@@ -120,7 +120,7 @@ export default Component.extend({
   delay: 0,
 
   /**
-   * Delay showing the tooltip. This property overrides the general delay set with the `delay` property.
+   * Delay showing the tooltip/popover. This property overrides the general delay set with the `delay` property.
    *
    * @property delayShow
    * @type number
@@ -130,7 +130,7 @@ export default Component.extend({
   delayShow: computed.reads('delay'),
 
   /**
-   * Delay hiding the tooltip. This property overrides the general delay set with the `delay` property.
+   * Delay hiding the tooltip/popover. This property overrides the general delay set with the `delay` property.
    *
    * @property delayHide
    * @type number
@@ -153,7 +153,7 @@ export default Component.extend({
   transitionDuration: 150,
 
   /**
-   * Keeps the tooltip within the bounds of this element when `autoPlacement` is true. Can be any valid jQuery selector.
+   * Keeps the tooltip/popover within the bounds of this element when `autoPlacement` is true. Can be any valid jQuery selector.
    *
    * @property viewportSelector
    * @type string
@@ -165,7 +165,7 @@ export default Component.extend({
   viewportSelector: 'body',
 
   /**
-   * Take a padding into account for keeping the tooltip within the bounds of the element given by `viewportSelector`.
+   * Take a padding into account for keeping the tooltip/popover within the bounds of the element given by `viewportSelector`.
    *
    * @property viewportPadding
    * @type number
@@ -203,7 +203,7 @@ export default Component.extend({
   /**
    * The jQuery object of the overlay element.
    *
-   * @property tooltipElement
+   * @property overlayElement
    * @type object
    * @readonly
    * @private
@@ -235,9 +235,9 @@ export default Component.extend({
   }),
 
   /**
-   * The DOM element that triggers the tooltip. By default it is the parent element of this component.
-   * You can set this to any jQuery selector to have any other element trigger the tooltip.
-   * With the special value of "parentView" you can attach the tooltip to the parent component's element.
+   * The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.
+   * You can set this to any jQuery selector to have any other element trigger the tooltip/popover.
+   * With the special value of "parentView" you can attach the tooltip/popover to the parent component's element.
    *
    * @property triggerElement
    * @type string
@@ -266,7 +266,7 @@ export default Component.extend({
   }),
 
   /**
-   * The event(s) that should trigger the tooltip - click | hover | focus.
+   * The event(s) that should trigger the tooltip/popover - click | hover | focus.
    * You can set this to a single event or multiple events, given as an array or a string separated by spaces.
    *
    * @property triggerEvents
@@ -343,7 +343,7 @@ export default Component.extend({
   timer: null,
 
   /**
-   * This action is called immediately when the tooltip is about to be shown.
+   * This action is called immediately when the tooltip/popover is about to be shown.
    *
    * @event onShow
    * @public
@@ -351,7 +351,7 @@ export default Component.extend({
   onShow: K,
 
   /**
-   * This action will be called when the tooltip has been made visible to the user (will wait for CSS transitions to complete).
+   * This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).
    *
    * @event onShown
    * @public
@@ -359,7 +359,7 @@ export default Component.extend({
   onShown: K,
 
   /**
-   * This action is called immediately when the tooltip is about to be hidden.
+   * This action is called immediately when the tooltip/popover is about to be hidden.
    *
    * @event onHide
    * @public
@@ -367,7 +367,7 @@ export default Component.extend({
   onHide: K,
 
   /**
-   * This action is called when the tooltip has finished being hidden from the user (will wait for CSS transitions to complete).
+   * This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).
    *
    * @event onHidden
    * @public
@@ -464,7 +464,7 @@ export default Component.extend({
   },
 
   /**
-   * Show the tooltip
+   * Show the tooltip/popover
    *
    * @method show
    * @private
@@ -478,7 +478,7 @@ export default Component.extend({
       return;
     }
 
-    // this waits for the tooltip element to be created. when animating a wormholed tooltip we need to wait until
+    // this waits for the tooltip/popover element to be created. when animating a wormholed tooltip/popover we need to wait until
     // ember-wormhole has moved things in the DOM for the animation to be correct, so use Ember.run.next in this case
     let delayFn = !this.get('_renderInPlace') && this.get('fade') ? next : function(target, fn) {
       schedule('afterRender', target, fn);
@@ -540,7 +540,7 @@ export default Component.extend({
   },
 
   /**
-   * Position the tooltip
+   * Position the tooltip/popover
    *
    * @method applyPlacement
    * @param offset
@@ -645,7 +645,7 @@ export default Component.extend({
   },
 
   /**
-   * Position the tooltip's arrow
+   * Position the tooltip/popover's arrow
    *
    * @method replaceArrow
    * @param delta
@@ -660,7 +660,7 @@ export default Component.extend({
   },
 
   /**
-   * Hide the tooltip
+   * Hide the tooltip/popover
    *
    * @method hide
    * @private
