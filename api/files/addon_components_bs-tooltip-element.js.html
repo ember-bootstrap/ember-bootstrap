@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-modal-body.js - ember-bootstrap</title>
+    <title>addon/components/bs-tooltip-element.js - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
@@ -47,24 +47,52 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-modal-body.js <small>File</small></h1>
+    <h1>addon/components/bs-tooltip-element.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import layout from &#x27;../templates/components/bs-tooltip-element&#x27;;
 
 /**
+ Internal component for tooltip&#x27;s markup. Should not be used directly.
 
- Modal body element used within [Components.Modal](Components.Modal.html) components. See there for examples.
-
- @class ModalBody
+ @class TooltipElement
  @namespace Components
  @extends Ember.Component
- @public
+ @private
  */
 export default Ember.Component.extend({
-  classNames: [&#x27;modal-body&#x27;]
+  layout,
+
+  classNames: [&#x27;tooltip&#x27;],
+  classNameBindings: [&#x27;placement&#x27;, &#x27;in&#x27;, &#x27;fade&#x27;],
+  ariaRole: &#x27;tooltip&#x27;,
+
+  /**
+   * @property placement
+   * @type string
+   * @default &#x27;top&#x27;
+   * @public
+   */
+  placement: &#x27;top&#x27;,
+
+  /**
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  fade: true,
+
+  /**
+   * @property in
+   * @type boolean
+   * @default false
+   * @public
+   */
+  in: false
 });
 
     </pre>

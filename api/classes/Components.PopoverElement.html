@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.Textarea - ember-bootstrap</title>
+    <title>Components.PopoverElement - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
@@ -47,19 +47,19 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.Textarea <small>Class</small></h1>
+    <h1>Components.PopoverElement <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
-        <span class="label label-public">public</span>
+        <span class="label label-private">private</span>
 
 
         <div class="extends">
-            Extends Ember.TextArea
+            Extends Ember.Component
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-textarea.js.html#l3"><code>addon&#x2F;components&#x2F;bs-textarea.js:3</code></a>
+            Defined in: <a href="../files/addon_components_bs-popover-element.js.html#l8"><code>addon&#x2F;components&#x2F;bs-popover-element.js:8</code></a>
         </div>
 
 
@@ -67,7 +67,7 @@
 
 
 <div class="well well-small">
-    <p>Extends Ember.TextArea to add Bootstrap's 'form-control' class.</p>
+    <p>Internal component for popover's markup. Should not be used directly.</p>
 
 </div>
 
@@ -100,6 +100,7 @@
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
 
+            <li><a data-toggle="tab" href="#properties">Properties</a></li>
     </ul>
 
     <div class="tab-content">
@@ -107,11 +108,189 @@
             <h2 class="off-left">Item Index</h2>
 
 
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasTitle" data-tablink="hasTitle">hasTitle</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_in" data-tablink="in">in</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_placement" data-tablink="placement">placement</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_title" data-tablink="title">title</a>
+
+                            </li>
+                    </ul>
+                </div>
 
 
         </div>
 
 
+            <div id="properties" class="tab-pane">
+                <h2 class="off-left">Properties</h2>
+
+                    <div id="property_fade" class="property item public">
+                        <h3 class="name">fade
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-popover-element.js.html#l31"><code>addon&#x2F;components&#x2F;bs-popover-element.js:31</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_hasTitle" class="property item private">
+                        <h3 class="name">hasTitle
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-popover-element.js.html#l54"><code>addon&#x2F;components&#x2F;bs-popover-element.js:54</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_in" class="property item public">
+                        <h3 class="name">in
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-popover-element.js.html#l39"><code>addon&#x2F;components&#x2F;bs-popover-element.js:39</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_placement" class="property item public">
+                        <h3 class="name">placement
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-popover-element.js.html#l23"><code>addon&#x2F;components&#x2F;bs-popover-element.js:23</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;top&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_title" class="property item public">
+                        <h3 class="name">title
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-popover-element.js.html#l47"><code>addon&#x2F;components&#x2F;bs-popover-element.js:47</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
 
 
     </div>

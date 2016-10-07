@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.Modal - ember-bootstrap</title>
+    <title>Components.ContextualHelp - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
@@ -47,11 +47,11 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.Modal <small>Class</small></h1>
+    <h1>Components.ContextualHelp <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
-        <span class="label label-public">public</span>
+        <span class="label label-private">private</span>
 
 
         <div class="extends">
@@ -59,7 +59,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-modal.js.html#l18"><code>addon&#x2F;components&#x2F;bs-modal.js:18</code></a>
+            Defined in: <a href="../files/addon_components_bs-contextual-help.js.html#l34"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:34</code></a>
         </div>
 
 
@@ -67,89 +67,7 @@
 
 
 <div class="well well-small">
-    <p>Component for creating <a href="http://getbootstrap.com/javascript/#modals">Bootstrap modals</a>. Creating a simple modal is easy:</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal title=&quot;Simple Dialog&quot;}}
-   Hello world!
- {{/bs-modal}}
-</code></pre>
-<p>This will automatically create the appropriate markup, with a modal header containing the title, and a footer containing
-a default &quot;Ok&quot; button, that will close the modal automatically (unless you set <code>autoClose</code> to false).
-A modal created this way will be visible at once. You can use the <code>{{#if ...}}</code> helper to hide all modal elements form
-the DOM until needed. Or you can bind the <code>open</code> property to trigger showing and hiding the modal:</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal open=openModal title=&quot;Simple Dialog&quot;}}
-   Hello world!
- {{/bs-modal}}
-</code></pre>
-<h3>Custom Markup</h3>
-<p>To customize your modal markup you can use the following sub components:
-<a href="Components.ModalBody.html">Components.ModalBody</a>
-<a href="Components.ModalHeader.html">Components.ModalHeader</a>
-<a href="Components.ModalFooter.html">Components.ModalFooter</a>
-In the example above, these are generated for you automatically. Whenever you use one of these by yourself you should
-set the appropriate property (<code>body</code>, <code>footer</code>, <code>header</code>) to false to prevent their automatic generation. Note that
-in any case where you use a custom sub component, you must also use a custom <a href="Components.ModalBody.html">Components.ModalBody</a>!
-A common use case is to customize the buttons in the footer. Most often you will have a cancel button that closes the
-model without action, and a submit button that triggers some action. The footer component supports this case by letting
-you customize the button titles, the rest (triggering close or submit actions) automatically set up:</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal body=false footer=false title=&quot;Attention&quot; submitAction=(action &quot;submit&quot;)}}
-   {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}
-   {{bs-modal-footer closeTitle=&quot;Cancel&quot; submitTitle=&quot;Ok&quot;}}
- {{/bs-modal}}
-</code></pre>
-<p>If you further want to customize your modal elements, you can supply custom templates for your footer and header, as in
-the following example:</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal body=false footer=false header=false submitAction=(action &quot;submit&quot;)}}
-   {{#bs-modal-header}}
-     &lt;h4 class=&quot;modal-title&quot;&gt;&lt;i class=&quot;glyphicon glyphicon-alert&quot;&gt;&lt;/i&gt; Alert&lt;/h4&gt;
-   {{/bs-modal-header}}
-   {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}
-   {{#bs-modal-footer as |footer|}}
-     {{#bs-button action=(action &quot;close&quot; target=footer) type=&quot;danger&quot;}}Oh no, forget it!{{/bs-button}}
-     {{#bs-button buttonType=&quot;submit&quot; type=&quot;success&quot;}}Yeah!{{/bs-button}}
-   {{/bs-modal-footer}}
- {{/bs-modal}}
-</code></pre>
-<p>Note the use of the action helper of the close button that triggers the close action on the modal footer component
-instead of on the controller, which will bubble up to the modal component and close the modal.</p>
-<h3>Modals with forms</h3>
-<p>There is a special case when you have a form inside your modals body: you probably do not want to have a submit button
-within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not
-trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
-thus bypass the form validation feature of the form component.</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal title=&quot;Form Example&quot; body=false footer=false}}
-   {{#bs-modal-body}}
-     {{#bs-form action=(action &quot;submit&quot;) model=this}}
-       {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot;}}
-       {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
-     {{/bs-form}}
-   {{/bs-modal-body}}
-   {{bs-modal-footer closeTitle=(t &quot;contact.label.cancel&quot;) submitTitle=(t &quot;contact.label.ok&quot;)}}
- {{/bs-modal}}
-</code></pre>
-<p>The modal component supports this common case by triggering the submit event programmatically on the body's form if
-present whenever the footer's submit button is pressed, so the example above will work as expected.</p>
-<h3>Auto-focus</h3>
-<p>In order to allow key handling to function, the modal's root element is given focus once the modal is shown. If your
-modal contains an element such as a text input and you would like it to be given focus rather than the modal element,
-then give it the HTML5 autofocus attribute:</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal title=&quot;Form Example&quot; body=false footer=false}}
-   {{#bs-modal-body}}
-     {{#bs-form action=(action &quot;submit&quot;) model=this}}
-       {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot; autofocus=true}}
-       {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
-     {{/bs-form}}
-   {{/bs-modal-body}}
-   {{bs-modal-footer closeTitle=(t &quot;contact.label.cancel&quot;) submitTitle=(t &quot;contact.label.ok&quot;)}}
- {{/bs-modal}}
-</code></pre>
-<h3>Modals inside wormhole</h3>
-<p>Modals make use of the <a href="https://github.com/yapplabs/ember-wormhole">ember-wormhole</a> addon, which will be installed
-automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested
-components/templates where it belongs to logically, but to have the actual DOM elements within a special container
-element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and
-are not effected by parent elements with <code>overflow: hidden</code> for example.
-If you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.</p>
-
+    
 </div>
 
 
@@ -183,6 +101,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
 
             <li><a data-toggle="tab" href="#methods">Methods</a></li>
             <li><a data-toggle="tab" href="#properties">Properties</a></li>
+            <li><a data-toggle="tab" href="#events">Events</a></li>
     </ul>
 
     <div class="tab-content">
@@ -194,19 +113,19 @@ If you want the modal to render in place, rather than being wormholed, you can s
 
                     <ul class="index-list methods extends">
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_adjustDialog" data-tablink="adjustDialog">adjustDialog</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_addListeners" data-tablink="addListeners">addListeners</a>
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_checkScrollbar" data-tablink="checkScrollbar">checkScrollbar</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_applyPlacement" data-tablink="applyPlacement">applyPlacement</a>
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_handleBackdrop" data-tablink="handleBackdrop">handleBackdrop</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_enter" data-tablink="enter">enter</a>
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_handleUpdate" data-tablink="handleUpdate">handleUpdate</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_getViewportAdjustedDelta" data-tablink="getViewportAdjustedDelta">getViewportAdjustedDelta</a>
 
                             </li>
                             <li class="index-item method private">
@@ -214,23 +133,15 @@ If you want the modal to render in place, rather than being wormholed, you can s
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_hideModal" data-tablink="hideModal">hideModal</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_leave" data-tablink="leave">leave</a>
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_resetAdjustments" data-tablink="resetAdjustments">resetAdjustments</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_removeListeners" data-tablink="removeListeners">removeListeners</a>
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_resetScrollbar" data-tablink="resetScrollbar">resetScrollbar</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_resize" data-tablink="resize">resize</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_setScrollbar" data-tablink="setScrollbar">setScrollbar</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_replaceArrow" data-tablink="replaceArrow">replaceArrow</a>
 
                             </li>
                             <li class="index-item method private">
@@ -238,7 +149,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_takeFocus" data-tablink="takeFocus">takeFocus</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_toggle" data-tablink="toggle">toggle</a>
 
                             </li>
                     </ul>
@@ -252,84 +163,52 @@ If you want the modal to render in place, rather than being wormholed, you can s
                                 <a href="#" data-tabid="#properties" data-anchor="#property__renderInPlace" data-tablink="_renderInPlace">_renderInPlace</a>
 
                             </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_autoClose" data-tablink="autoClose">autoClose</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_backdrop" data-tablink="backdrop">backdrop</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_backdropClose" data-tablink="backdropClose">backdropClose</a>
-
-                            </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_backdropElement" data-tablink="backdropElement">backdropElement</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_backdropId" data-tablink="backdropId">backdropId</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_arrowElement" data-tablink="arrowElement">arrowElement</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_body" data-tablink="body">body</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_autoPlacement" data-tablink="autoPlacement">autoPlacement</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_closeAction" data-tablink="closeAction">closeAction</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_delay" data-tablink="delay">delay</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_closeButton" data-tablink="closeButton">closeButton</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_delayHide" data-tablink="delayHide">delayHide</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_closedAction" data-tablink="closedAction">closedAction</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_delayShow" data-tablink="delayShow">delayShow</a>
 
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
 
                             </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_footer" data-tablink="footer">footer</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_header" data-tablink="header">header</a>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hoverState" data-tablink="hoverState">hoverState</a>
 
                             </li>
                             <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_in" data-tablink="in">in</a>
 
                             </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_keyboard" data-tablink="keyboard">keyboard</a>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_inDom" data-tablink="inDom">inDom</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_modalElement" data-tablink="modalElement">modalElement</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_inState" data-tablink="inState">inState</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_modalId" data-tablink="modalId">modalId</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_overlayElement" data-tablink="overlayElement">overlayElement</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_notFade" data-tablink="notFade">notFade</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_open" data-tablink="open">open</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_openAction" data-tablink="openAction">openAction</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_openedAction" data-tablink="openedAction">openedAction</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_overlayId" data-tablink="overlayId">overlayId</a>
 
                             </li>
                             <li class="index-item property public">
@@ -337,40 +216,86 @@ If you want the modal to render in place, rather than being wormholed, you can s
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_scrollbarWidth" data-tablink="scrollbarWidth">scrollbarWidth</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_showBackdrop" data-tablink="showBackdrop">showBackdrop</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_size" data-tablink="size">size</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_submitAction" data-tablink="submitAction">submitAction</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_timer" data-tablink="timer">timer</a>
 
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_title" data-tablink="title">title</a>
 
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_title" data-tablink="title">title</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_transitionDuration" data-tablink="transitionDuration">transitionDuration</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_triggerElement" data-tablink="triggerElement">triggerElement</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_triggerEvents" data-tablink="triggerEvents">triggerEvents</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_triggerTargetElement" data-tablink="triggerTargetElement">triggerTargetElement</a>
+
+                            </li>
                             <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_usesTransition" data-tablink="usesTransition">usesTransition</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_viewportElement" data-tablink="viewportElement">viewportElement</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_viewportPadding" data-tablink="viewportPadding">viewportPadding</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_viewportSelector" data-tablink="viewportSelector">viewportSelector</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_visible" data-tablink="visible">visible</a>
 
                             </li>
                     </ul>
                 </div>
 
 
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onHidden" data-tablink="onHidden">onHidden</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onHide" data-tablink="onHide">onHide</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onShow" data-tablink="onShow">onShow</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onShown" data-tablink="onShown">onShown</a>
+
+                            </li>
+                    </ul>
+                </div>
         </div>
 
             <div id="methods" class="tab-pane">
                 <h2 class="off-left">Methods</h2>
 
-                    <div id="method_adjustDialog" class="method item private">
-                        <h3 class="name">adjustDialog
+                    <div id="method_addListeners" class="method item private">
+                        <h3 class="name">addListeners
                         <span class="small"> </span>
                         </h3>
                     
@@ -385,7 +310,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l624"><code>addon&#x2F;components&#x2F;bs-modal.js:624</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l700"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:700</code></a>
                             </p>
                     
                     
@@ -399,8 +324,8 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                     
                     </div>
-                    <div id="method_checkScrollbar" class="method item private">
-                        <h3 class="name">checkScrollbar
+                    <div id="method_applyPlacement" class="method item private">
+                        <h3 class="name">applyPlacement
                         <span class="small"> </span>
                         </h3>
                     
@@ -415,7 +340,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l647"><code>addon&#x2F;components&#x2F;bs-modal.js:647</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l542"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:542</code></a>
                             </p>
                     
                     
@@ -423,37 +348,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         </div>
                     
                         <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method_handleBackdrop" class="method item private">
-                        <h3 class="name">handleBackdrop
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l552"><code>addon&#x2F;components&#x2F;bs-modal.js:552</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>SHow/hide the backdrop</p>
+                            <p>Position the tooltip/popover</p>
                     
                         </div>
                     
@@ -462,7 +357,17 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                                 <ul class="params-list">
                                     <li class="param">
-                                            <code class="param-name">callback</code>
+                                            <code class="param-name">offset</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">placement</code>
                                             <span class="type">Object</span>
                     
                     
@@ -476,8 +381,8 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                     
                     </div>
-                    <div id="method_handleUpdate" class="method item private">
-                        <h3 class="name">handleUpdate
+                    <div id="method_enter" class="method item private">
+                        <h3 class="name">enter
                         <span class="small"> </span>
                         </h3>
                     
@@ -492,7 +397,54 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l616"><code>addon&#x2F;components&#x2F;bs-modal.js:616</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l377"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:377</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Called when a show event has been received</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">e</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="method_getViewportAdjustedDelta" class="method item private">
+                        <h3 class="name">getViewportAdjustedDelta
+                        <span class="small">Top: number, left: number</span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l607"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:607</code></a>
                             </p>
                     
                     
@@ -503,7 +455,62 @@ If you want the modal to render in place, rather than being wormholed, you can s
                             
                         </div>
                     
+                            <div class="params">
+                                <h4>Parameters:</h4>
                     
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">placement</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">pos</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">actualWidth</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">actualHeight</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                            <div class="returns">
+                                <h4>Returns:</h4>
+                    
+                                <div class="returns-description">
+                                            <span class="type">Top: number, left: number</span>:
+                                        <p>}</p>
+                    
+                                </div>
+                            </div>
                     
                     </div>
                     <div id="method_hide" class="method item private">
@@ -522,7 +529,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l513"><code>addon&#x2F;components&#x2F;bs-modal.js:513</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l662"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:662</code></a>
                             </p>
                     
                     
@@ -530,15 +537,15 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         </div>
                     
                         <div class="description">
-                            <p>Hide the modal</p>
+                            <p>Hide the tooltip/popover</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="method_hideModal" class="method item private">
-                        <h3 class="name">hideModal
+                    <div id="method_leave" class="method item private">
+                        <h3 class="name">leave
                         <span class="small"> </span>
                         </h3>
                     
@@ -553,7 +560,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l532"><code>addon&#x2F;components&#x2F;bs-modal.js:532</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l410"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:410</code></a>
                             </p>
                     
                     
@@ -561,15 +568,31 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         </div>
                     
                         <div class="description">
-                            <p>Clean up after modal is hidden and call closedAction</p>
+                            <p>Called when a hide event has been received</p>
                     
                         </div>
                     
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">e</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
                     
                     
                     </div>
-                    <div id="method_resetAdjustments" class="method item private">
-                        <h3 class="name">resetAdjustments
+                    <div id="method_removeListeners" class="method item private">
+                        <h3 class="name">removeListeners
                         <span class="small"> </span>
                         </h3>
                     
@@ -584,7 +607,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l636"><code>addon&#x2F;components&#x2F;bs-modal.js:636</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l719"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:719</code></a>
                             </p>
                     
                     
@@ -598,8 +621,8 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                     
                     </div>
-                    <div id="method_resetScrollbar" class="method item private">
-                        <h3 class="name">resetScrollbar
+                    <div id="method_replaceArrow" class="method item private">
+                        <h3 class="name">replaceArrow
                         <span class="small"> </span>
                         </h3>
                     
@@ -614,7 +637,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l673"><code>addon&#x2F;components&#x2F;bs-modal.js:673</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l647"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:647</code></a>
                             </p>
                     
                     
@@ -622,70 +645,46 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         </div>
                     
                         <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method_resize" class="method item private">
-                        <h3 class="name">resize
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l602"><code>addon&#x2F;components&#x2F;bs-modal.js:602</code></a>
-                            </p>
-                    
-                    
+                            <p>Position the tooltip/popover's arrow</p>
                     
                         </div>
                     
-                        <div class="description">
-                            <p>Attach/Detach resize event listeners</p>
+                            <div class="params">
+                                <h4>Parameters:</h4>
                     
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method_setScrollbar" class="method item private">
-                        <h3 class="name">setScrollbar
-                        <span class="small"> </span>
-                        </h3>
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">delta</code>
+                                            <span class="type">Object</span>
                     
                     
+                                        <div class="param-description">
+                                             
+                                        </div>
                     
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l661"><code>addon&#x2F;components&#x2F;bs-modal.js:661</code></a>
-                            </p>
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">dimension</code>
+                                            <span class="type">Object</span>
                     
                     
+                                        <div class="param-description">
+                                             
+                                        </div>
                     
-                        </div>
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">isVertical</code>
+                                            <span class="type">Object</span>
                     
-                        <div class="description">
-                            
-                        </div>
                     
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
                     
                     
                     </div>
@@ -705,7 +704,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l470"><code>addon&#x2F;components&#x2F;bs-modal.js:470</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l466"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:466</code></a>
                             </p>
                     
                     
@@ -713,15 +712,15 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         </div>
                     
                         <div class="description">
-                            <p>Show the modal</p>
+                            <p>Show the tooltip/popover</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="method_takeFocus" class="method item private">
-                        <h3 class="name">takeFocus
+                    <div id="method_toggle" class="method item private">
+                        <h3 class="name">toggle
                         <span class="small"> </span>
                         </h3>
                     
@@ -736,7 +735,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l454"><code>addon&#x2F;components&#x2F;bs-modal.js:454</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l442"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:442</code></a>
                             </p>
                     
                     
@@ -744,10 +743,26 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         </div>
                     
                         <div class="description">
-                            <p>Give the modal (or its autofocus element) focus</p>
+                            <p>Called for a click event</p>
                     
                         </div>
                     
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">e</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
                     
                     
                     </div>
@@ -772,7 +787,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l362"><code>addon&#x2F;components&#x2F;bs-modal.js:362</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l308"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:308</code></a>
                             </p>
                     
                     
@@ -785,103 +800,8 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                     
                     </div>
-                    <div id="property_autoClose" class="property item public">
-                        <h3 class="name">autoClose
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l224"><code>addon&#x2F;components&#x2F;bs-modal.js:224</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>If true clicking a close button will hide the modal automatically.
-                    If you want to handle hiding the modal by yourself, you can set this to false and use the closeAction to
-                    implement your custom logic.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_backdrop" class="property item public">
-                        <h3 class="name">backdrop
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l196"><code>addon&#x2F;components&#x2F;bs-modal.js:196</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Use a semi-transparent modal background to hide the rest of the page.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_backdropClose" class="property item public">
-                        <h3 class="name">backdropClose
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l342"><code>addon&#x2F;components&#x2F;bs-modal.js:342</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>If true clicking on the backdrop will close the modal.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_backdropElement" class="property item private">
-                        <h3 class="name">backdropElement
+                    <div id="property_arrowElement" class="property item private">
+                        <h3 class="name">arrowElement
                             <span class="small">object</span>
                         </h3>
                     
@@ -896,52 +816,22 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l307"><code>addon&#x2F;components&#x2F;bs-modal.js:307</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l215"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:215</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The jQuery object of the backdrop element.</p>
+                            <p>The jQuery object of the arrow element.</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_backdropId" class="property item private">
-                        <h3 class="name">backdropId
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l295"><code>addon&#x2F;components&#x2F;bs-modal.js:295</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The id of the backdrop element.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_body" class="property item public">
-                        <h3 class="name">body
+                    <div id="property_autoPlacement" class="property item public">
+                        <h3 class="name">autoPlacement
                             <span class="small">boolean</span>
                         </h3>
                     
@@ -956,26 +846,25 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l247"><code>addon&#x2F;components&#x2F;bs-modal.js:247</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l63"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:63</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Generate a modal body component automatically. Set to false to disable. In this case you would want to include an
-                    instance of <a href="Components.ModalBody.html">Components.ModalBody</a> in the components block template.</p>
-                    <p>Always set this to false if <code>header</code> and/or <code>footer</code> is false!</p>
+                            <p>When <code>true</code> it will dynamically reorient the tooltip/popover. For example, if <code>placement</code> is &quot;left&quot;, the
+                    tooltip/popover will display to the left when possible, otherwise it will display right.</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> true</p>
+                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
-                    <div id="property_closeAction" class="property item public">
-                        <h3 class="name">closeAction
-                            <span class="small">string</span>
+                    <div id="property_delay" class="property item public">
+                        <h3 class="name">delay
+                            <span class="small">number</span>
                         </h3>
                     
                     
@@ -989,29 +878,25 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l384"><code>addon&#x2F;components&#x2F;bs-modal.js:384</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l111"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:111</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The action to be sent when the modal is closing.
-                    This will be triggered by pressing the modal header's close button (x button) or the modal footer's close button.
-                    Note that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some
-                    time to finish. Use the <code>closedAction</code> if you need the modal to be hidden when the action triggers.</p>
-                    <p>You can set <code>autoClose</code> to false to prevent closing the modal automatically, and do that in your closeAction by
-                    setting <code>open</code> to false.</p>
+                            <p>Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the
+                    <code>delayShow</code> and <code>delayHide</code> properties.</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> null</p>
+                            <p><strong>Default:</strong> 0</p>
                     
                     
                     </div>
-                    <div id="property_closeButton" class="property item public">
-                        <h3 class="name">closeButton
-                            <span class="small">boolean</span>
+                    <div id="property_delayHide" class="property item public">
+                        <h3 class="name">delayHide
+                            <span class="small">number</span>
                         </h3>
                     
                     
@@ -1025,24 +910,24 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l159"><code>addon&#x2F;components&#x2F;bs-modal.js:159</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l132"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:132</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Display a close button (x icon) in the corner of the modal header.</p>
+                            <p>Delay hiding the tooltip/popover. This property overrides the general delay set with the <code>delay</code> property.</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> true</p>
+                            <p><strong>Default:</strong> 0</p>
                     
                     
                     </div>
-                    <div id="property_closedAction" class="property item public">
-                        <h3 class="name">closedAction
-                            <span class="small">string</span>
+                    <div id="property_delayShow" class="property item public">
+                        <h3 class="name">delayShow
+                            <span class="small">number</span>
                         </h3>
                     
                     
@@ -1056,18 +941,18 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l400"><code>addon&#x2F;components&#x2F;bs-modal.js:400</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l122"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:122</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The action to be sent after the modal has been completely hidden (including the CSS transition).</p>
+                            <p>Delay showing the tooltip/popover. This property overrides the general delay set with the <code>delay</code> property.</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> null</p>
+                            <p><strong>Default:</strong> 0</p>
                     
                     
                     </div>
@@ -1087,7 +972,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l169"><code>addon&#x2F;components&#x2F;bs-modal.js:169</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l91"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:91</code></a>
                             </p>
                     
                     
@@ -1102,15 +987,15 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                     
                     </div>
-                    <div id="property_footer" class="property item public">
-                        <h3 class="name">footer
-                            <span class="small">boolean</span>
+                    <div id="property_hoverState" class="property item private">
+                        <h3 class="name">hoverState
+                            <span class="small">string</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-public">public</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
@@ -1118,51 +1003,17 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l260"><code>addon&#x2F;components&#x2F;bs-modal.js:260</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l317"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:317</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an
-                    instance of <a href="Components.ModalFooter.html">Components.ModalFooter</a> in the components block template</p>
+                            <p>Current hover state, 'in', 'out' or null</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_header" class="property item public">
-                        <h3 class="name">header
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l236"><code>addon&#x2F;components&#x2F;bs-modal.js:236</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Generate a modal header component automatically. Set to false to disable. In this case you would want to include an
-                    instance of <a href="Components.ModalHeader.html">Components.ModalHeader</a> in the components block template</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
                     
                     
                     </div>
@@ -1182,7 +1033,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l186"><code>addon&#x2F;components&#x2F;bs-modal.js:186</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l101"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:101</code></a>
                             </p>
                     
                     
@@ -1197,15 +1048,15 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                     
                     </div>
-                    <div id="property_keyboard" class="property item public">
-                        <h3 class="name">keyboard
+                    <div id="property_inDom" class="property item private">
+                        <h3 class="name">inDom
                             <span class="small">boolean</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-public">public</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
@@ -1213,23 +1064,51 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l214"><code>addon&#x2F;components&#x2F;bs-modal.js:214</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l84"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:84</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Closes the modal when escape key is pressed.</p>
-                    
+                            
                         </div>
                     
-                            <p><strong>Default:</strong> true</p>
                     
                     
                     </div>
-                    <div id="property_modalElement" class="property item private">
-                        <h3 class="name">modalElement
+                    <div id="property_inState" class="property item private">
+                        <h3 class="name">inState
+                            <span class="small">{InState}</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l326"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:326</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Current state for events</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_overlayElement" class="property item private">
+                        <h3 class="name">overlayElement
                             <span class="small">object</span>
                         </h3>
                     
@@ -1244,22 +1123,22 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l283"><code>addon&#x2F;components&#x2F;bs-modal.js:283</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l203"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:203</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The jQuery object of the <code>.modal</code> element.</p>
+                            <p>The jQuery object of the overlay element.</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_modalId" class="property item private">
-                        <h3 class="name">modalId
+                    <div id="property_overlayId" class="property item private">
+                        <h3 class="name">overlayId
                             <span class="small">string</span>
                         </h3>
                     
@@ -1274,142 +1153,17 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l271"><code>addon&#x2F;components&#x2F;bs-modal.js:271</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l191"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:191</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The id of the <code>.modal</code> element.</p>
+                            <p>The id of the overlay element.</p>
                     
                         </div>
                     
-                    
-                    
-                    </div>
-                    <div id="property_notFade" class="property item private">
-                        <h3 class="name">notFade
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l179"><code>addon&#x2F;components&#x2F;bs-modal.js:179</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_open" class="property item public">
-                        <h3 class="name">open
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l140"><code>addon&#x2F;components&#x2F;bs-modal.js:140</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Visibility of the modal. Toggle to to show/hide with CSS transitions.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_openAction" class="property item public">
-                        <h3 class="name">openAction
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l410"><code>addon&#x2F;components&#x2F;bs-modal.js:410</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent when the modal is opening.
-                    This will be triggered immediately after the modal is shown (so it's safe to access the DOM for
-                    size calculations and the like). This means that if fade=true, it will be shown in between the
-                    backdrop animation and the fade animation.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="property_openedAction" class="property item public">
-                        <h3 class="name">openedAction
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l423"><code>addon&#x2F;components&#x2F;bs-modal.js:423</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent after the modal has been completely shown (including the CSS transition).</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
@@ -1429,7 +1183,7 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l352"><code>addon&#x2F;components&#x2F;bs-modal.js:352</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l298"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:298</code></a>
                             </p>
                     
                     
@@ -1444,9 +1198,9 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                     
                     </div>
-                    <div id="property_scrollbarWidth" class="property item private">
-                        <h3 class="name">scrollbarWidth
-                            <span class="small">number</span>
+                    <div id="property_timer" class="property item private">
+                        <h3 class="name">timer
+                            <span class="small">unknown</span>
                         </h3>
                     
                     
@@ -1460,111 +1214,17 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l681"><code>addon&#x2F;components&#x2F;bs-modal.js:681</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l337"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:337</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_showBackdrop" class="property item private">
-                        <h3 class="name">showBackdrop
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l206"><code>addon&#x2F;components&#x2F;bs-modal.js:206</code></a>
-                            </p>
-                    
+                            <p>Ember.run timer</p>
                     
                         </div>
                     
-                        <div class="description">
-                            
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="property_size" class="property item public">
-                        <h3 class="name">size
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l331"><code>addon&#x2F;components&#x2F;bs-modal.js:331</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Property for size styling, set to null (default), 'lg' or 'sm'</p>
-                    <p>Also see the <a href="http://getbootstrap.com/javascript/#modals-sizes">Bootstrap docs</a></p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_submitAction" class="property item public">
-                        <h3 class="name">submitAction
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l371"><code>addon&#x2F;components&#x2F;bs-modal.js:371</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent when the modal footer's submit button (if present) is pressed.
-                    Note that if your modal body contains a form (e.g. <a href="Components.Form.html">Components.Form</a>{{/crossLink}}) this action will
-                    not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
-                    example.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
@@ -1584,15 +1244,169 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l150"><code>addon&#x2F;components&#x2F;bs-modal.js:150</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l51"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:51</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The title of the modal, visible in the modal header. Is ignored if <code>header</code> is false.</p>
+                            <p>How to position the tooltip/popover - top | bottom | left | right</p>
                     
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;top&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_title" class="property item public">
+                        <h3 class="name">title
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l44"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:44</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_transitionDuration" class="property item public">
+                        <h3 class="name">transitionDuration
+                            <span class="small">number</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l145"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:145</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The duration of the fade transition</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 150</p>
+                    
+                    
+                    </div>
+                    <div id="property_triggerElement" class="property item public">
+                        <h3 class="name">triggerElement
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l237"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:237</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.
+                    You can set this to any jQuery selector to have any other element trigger the tooltip/popover.
+                    With the special value of &quot;parentView&quot; you can attach the tooltip/popover to the parent component's element.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_triggerEvents" class="property item public">
+                        <h3 class="name">triggerEvents
+                            <span class="small">array|string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l268"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:268</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The event(s) that should trigger the tooltip/popover - click | hover | focus.
+                    You can set this to a single event or multiple events, given as an array or a string separated by spaces.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;hover focus&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_triggerTargetElement" class="property item private">
+                        <h3 class="name">triggerTargetElement
+                            <span class="small">{jQuery}</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l248"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:248</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
                         </div>
                     
                     
@@ -1614,14 +1428,247 @@ If you want the modal to render in place, rather than being wormholed, you can s
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l319"><code>addon&#x2F;components&#x2F;bs-modal.js:319</code></a>
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l179"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:179</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Use CSS transitions when showing/hiding the modal?</p>
+                            <p>Use CSS transitions when showing/hiding?</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_viewportElement" class="property item private">
+                        <h3 class="name">viewportElement
+                            <span class="small">object</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l225"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:225</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The jQuery object of the viewport element.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_viewportPadding" class="property item public">
+                        <h3 class="name">viewportPadding
+                            <span class="small">number</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l167"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:167</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Take a padding into account for keeping the tooltip/popover within the bounds of the element given by <code>viewportSelector</code>.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 0</p>
+                    
+                    
+                    </div>
+                    <div id="property_viewportSelector" class="property item public">
+                        <h3 class="name">viewportSelector
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l155"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:155</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Keeps the tooltip/popover within the bounds of this element when <code>autoPlacement</code> is true. Can be any valid jQuery selector.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;body&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_visible" class="property item public">
+                        <h3 class="name">visible
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l74"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:74</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>You can programmatically show the tooltip/popover by setting this to <code>true</code></p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+            </div>
+
+
+            <div id="events" class="tab-pane">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_onHidden" class="events item public">
+                        <h3 class="name"><code>onHidden</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l369"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:369</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_onHide" class="events item public">
+                        <h3 class="name"><code>onHide</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l361"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:361</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>This action is called immediately when the tooltip/popover is about to be hidden.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_onShow" class="events item public">
+                        <h3 class="name"><code>onShow</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l345"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:345</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>This action is called immediately when the tooltip/popover is about to be shown.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_onShown" class="events item public">
+                        <h3 class="name"><code>onShown</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-contextual-help.js.html#l353"><code>addon&#x2F;components&#x2F;bs-contextual-help.js:353</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).</p>
                     
                         </div>
                     
@@ -1629,8 +1676,6 @@ If you want the modal to render in place, rather than being wormholed, you can s
                     
                     </div>
             </div>
-
-
     </div>
 </div>
                     </div>

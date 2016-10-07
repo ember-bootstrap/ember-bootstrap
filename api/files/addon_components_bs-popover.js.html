@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-modal-body.js - ember-bootstrap</title>
+    <title>addon/components/bs-popover.js - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
@@ -47,24 +47,109 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-modal-body.js <small>File</small></h1>
+    <h1>addon/components/bs-popover.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import ContextualHelp from &#x27;./bs-contextual-help&#x27;;
+import layout from &#x27;../templates/components/bs-popover&#x27;;
+
+const {
+  computed
+} = Ember;
 
 /**
+ Component that implements Bootstrap [popovers](http://getbootstrap.com/javascript/#popovers).
 
- Modal body element used within [Components.Modal](Components.Modal.html) components. See there for examples.
+ By default it will attach its listeners (click) to the parent DOM element to trigger
+ the popover:
 
- @class ModalBody
+ &#x60;&#x60;&#x60;hbs
+ &lt;button class=&quot;btn&quot;&gt;
+   {{#bs-popover title=&quot;This is a title&quot;}}and this the body{{/bs-popover}}
+ &lt;/button&gt;
+ &#x60;&#x60;&#x60;
+
+ ### Trigger
+
+ The trigger element is the DOM element that will cause the popover to be shown when one of the trigger events occur on
+ that element. By default the trigger element is the parent DOM element of the component, and the trigger event will be
+ &quot;click&quot;.
+
+ The &#x60;triggerElement&#x60; property accepts any jQuery selector to attach the popover to any other existing DOM element.
+ With the special value &quot;parentView&quot; you can attach the popover to the DOM element of the parent component:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#my-component}}
+   {{#bs-popover triggerElement=&quot;parentView&quot;}}This is a popover{{/bs-popover}}
+ {{/my-component}}
+ &#x60;&#x60;&#x60;
+
+ To customize the events that will trigger the popover use the &#x60;triggerEvents&#x60; property, that accepts an array or a
+ string of events, with &quot;hover&quot;, &quot;focus&quot; and &quot;click&quot; being supported.
+
+ ### Placement options
+
+ By default the popover will show up to the right of the trigger element. Use the &#x60;placement&#x60; property to change that
+ (&quot;top&quot;, &quot;bottom&quot;, &quot;left&quot; and &quot;right&quot;). To make sure the popover will not exceed the viewport (see Advanced customization)
+ you can set &#x60;autoPlacement&#x60; to true. A popover with &#x60;placement=&quot;right&quot; will be placed to the right if there is enough
+ space, otherwise to the left.
+
+ ### Advanced customization
+
+ Several other properties allow for some advanced customization:
+ * &#x60;visible&#x60; to show/hide the popover programmatically
+ * &#x60;fade&#x60; to disable the fade in transition
+ * &#x60;delay&#x60; (or &#x60;delayShow&#x60; and &#x60;delayHide&#x60;) to add a delay
+ * &#x60;viewportSelector&#x60; and &#x60;viewportPadding&#x60; to customize the viewport that affects &#x60;autoPlacement&#x60;
+
+ See the individual API docs for each property.
+
+ ### Actions
+
+ When you want to react on the popover being shown or hidden, you can use one of the following supported actions:
+ * &#x60;onShow&#x60;
+ * &#x60;onShown&#x60;
+ * &#x60;onHide&#x60;
+ * &#x60;onHidden&#x60;
+
+ @class Popover
  @namespace Components
- @extends Ember.Component
+ @extends Components.ContextualHelp
  @public
  */
-export default Ember.Component.extend({
-  classNames: [&#x27;modal-body&#x27;]
+export default ContextualHelp.extend({
+  layout,
+
+  /**
+   * @property placement
+   * @type string
+   * @default &#x27;right&#x27;
+   * @public
+   */
+  placement: &#x27;right&#x27;,
+
+  /**
+   * @property triggerEvents
+   * @type array|string
+   * @default &#x27;click&#x27;
+   * @public
+   */
+  triggerEvents: &#x27;click&#x27;,
+
+  /**
+   * The jQuery object of the arrow element.
+   *
+   * @property arrowElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  arrowElement: computed(&#x27;overlayElement&#x27;, function() {
+    return this.get(&#x27;overlayElement&#x27;).find(&#x27;.arrow&#x27;);
+  })
 });
 
     </pre>

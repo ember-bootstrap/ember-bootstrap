@@ -2,15 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v0.10.0",
-        "external": {
-            "data": [
-                {
-                    "base": "http://emberjs.com/api/",
-                    "json": "http://builds.emberjs.com/tags/v1.13.10/ember-docs.json"
-                }
-            ]
-        }
+        "version": "v0.11.0"
     },
     "files": {
         "addon/components/bs-accordion-item.js": {
@@ -73,6 +65,17 @@
             "modules": {},
             "classes": {
                 "Components.Collapse": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-contextual-help.js": {
+            "name": "addon/components/bs-contextual-help.js",
+            "modules": {},
+            "classes": {
+                "Components.ContextualHelp": 1
             },
             "fors": {},
             "namespaces": {
@@ -288,6 +291,28 @@
                 "Components": 1
             }
         },
+        "addon/components/bs-popover-element.js": {
+            "name": "addon/components/bs-popover-element.js",
+            "modules": {},
+            "classes": {
+                "Components.PopoverElement": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-popover.js": {
+            "name": "addon/components/bs-popover.js",
+            "modules": {},
+            "classes": {
+                "Components.Popover": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
         "addon/components/bs-progress-bar.js": {
             "name": "addon/components/bs-progress-bar.js",
             "modules": {},
@@ -348,6 +373,28 @@
             "modules": {},
             "classes": {
                 "Components.Textarea": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-tooltip-element.js": {
+            "name": "addon/components/bs-tooltip-element.js",
+            "modules": {},
+            "classes": {
+                "Components.TooltipElement": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/bs-tooltip.js": {
+            "name": "addon/components/bs-tooltip.js",
+            "modules": {},
+            "classes": {
+                "Components.Tooltip": 1
             },
             "fors": {},
             "namespaces": {
@@ -545,6 +592,21 @@
             "description": "An Ember component that mimics the behaviour of Bootstrap's collapse.js plugin, see http://getbootstrap.com/javascript/#collapse\n\n```hbs\n{{#bs-collapse collapsed=collapsed}}\n <div class=\"well\">\n   <h2>Collapse</h2>\n   <p>This is collapsible content</p>\n </div>\n{{/bs-collapse}}\n```",
             "extends": "Ember.Component",
             "access": "public",
+            "tagname": ""
+        },
+        "Components.ContextualHelp": {
+            "name": "Components.ContextualHelp",
+            "shortname": "Components.ContextualHelp",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 34,
+            "extends": "Ember.Component",
+            "access": "private",
             "tagname": ""
         },
         "Components.DropdownButton": {
@@ -863,6 +925,38 @@
             "access": "public",
             "tagname": ""
         },
+        "Components.PopoverElement": {
+            "name": "Components.PopoverElement",
+            "shortname": "Components.PopoverElement",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-popover-element.js",
+            "line": 8,
+            "description": "Internal component for popover's markup. Should not be used directly.",
+            "extends": "Ember.Component",
+            "access": "private",
+            "tagname": ""
+        },
+        "Components.Popover": {
+            "name": "Components.Popover",
+            "shortname": "Components.Popover",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-popover.js",
+            "line": 9,
+            "description": "Component that implements Bootstrap [popovers](http://getbootstrap.com/javascript/#popovers).\n\nBy default it will attach its listeners (click) to the parent DOM element to trigger\nthe popover:\n\n```hbs\n<button class=\"btn\">\n  {{#bs-popover title=\"This is a title\"}}and this the body{{/bs-popover}}\n</button>\n```\n\n### Trigger\n\nThe trigger element is the DOM element that will cause the popover to be shown when one of the trigger events occur on\nthat element. By default the trigger element is the parent DOM element of the component, and the trigger event will be\n\"click\".\n\nThe `triggerElement` property accepts any jQuery selector to attach the popover to any other existing DOM element.\nWith the special value \"parentView\" you can attach the popover to the DOM element of the parent component:\n\n```hbs\n{{#my-component}}\n  {{#bs-popover triggerElement=\"parentView\"}}This is a popover{{/bs-popover}}\n{{/my-component}}\n```\n\nTo customize the events that will trigger the popover use the `triggerEvents` property, that accepts an array or a\nstring of events, with \"hover\", \"focus\" and \"click\" being supported.\n\n### Placement options\n\nBy default the popover will show up to the right of the trigger element. Use the `placement` property to change that\n(\"top\", \"bottom\", \"left\" and \"right\"). To make sure the popover will not exceed the viewport (see Advanced customization)\nyou can set `autoPlacement` to true. A popover with `placement=\"right\" will be placed to the right if there is enough\nspace, otherwise to the left.\n\n### Advanced customization\n\nSeveral other properties allow for some advanced customization:\n* `visible` to show/hide the popover programmatically\n* `fade` to disable the fade in transition\n* `delay` (or `delayShow` and `delayHide`) to add a delay\n* `viewportSelector` and `viewportPadding` to customize the viewport that affects `autoPlacement`\n\nSee the individual API docs for each property.\n\n### Actions\n\nWhen you want to react on the popover being shown or hidden, you can use one of the following supported actions:\n* `onShow`\n* `onShown`\n* `onHide`\n* `onHidden`",
+            "extends": "Components.ContextualHelp",
+            "access": "public",
+            "tagname": ""
+        },
         "Components.ProgressBar": {
             "name": "Components.ProgressBar",
             "shortname": "Components.ProgressBar",
@@ -969,6 +1063,38 @@
             "access": "public",
             "tagname": ""
         },
+        "Components.TooltipElement": {
+            "name": "Components.TooltipElement",
+            "shortname": "Components.TooltipElement",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-tooltip-element.js",
+            "line": 4,
+            "description": "Internal component for tooltip's markup. Should not be used directly.",
+            "extends": "Ember.Component",
+            "access": "private",
+            "tagname": ""
+        },
+        "Components.Tooltip": {
+            "name": "Components.Tooltip",
+            "shortname": "Components.Tooltip",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/bs-tooltip.js",
+            "line": 9,
+            "description": "Component that implements Bootstrap [tooltips](http://getbootstrap.com/javascript/#tooltips).\n\nBy default it will attach its listeners (mouseover and focus) to the parent DOM element to trigger\nthe tooltip:\n\n```hbs\n<button class=\"btn\">\n  {{bs-tooltip title=\"This is a tooltip\"}}\n</button>\n```\n\nYou can also use the component in a block form to set the title:\n\n```hbs\n<button class=\"btn\">\n  {{#bs-tooltip}}This is a tooltip{{/bs-tooltip}}\n</button>\n```\n\n### Trigger\n\nThe trigger element is the DOM element that will cause the tooltip to be shown when one of the trigger events occur on\nthat element. By default the trigger element is the parent DOM element of the component, and the trigger events will be\n\"hover\" and \"focus\".\n\nThe `triggerElement` property accepts any jQuery selector to attach the tooltip to any other existing DOM element.\nWith the special value \"parentView\" you can attach the tooltip to the DOM element of the parent component:\n\n```hbs\n{{#my-component}}\n  {{bs-tooltip title=\"This is a tooltip\" triggerElement=\"parentView\"}}\n{{/my-component}}\n```\n\nTo customize the events that will trigger the tooltip use the `triggerEvents` property, that accepts an array or a\nstring of events, with \"hover\", \"focus\" and \"click\" being supported.\n\n### Placement options\n\nBy default the tooltip will show up on top of the trigger element. Use the `placement` property to change that\n(\"top\", \"bottom\", \"left\" and \"right\"). To make sure the tooltip will not exceed the viewport (see Advanced customization)\nyou can set `autoPlacement` to true. A tooltip with `placement=\"right\" will be placed to the right if there is enough\nspace, otherwise to the left.\n\n### Advanced customization\n\nSeveral other properties allow for some advanced customization:\n* `visible` to show/hide the tooltip programmatically\n* `fade` to disable the fade in transition\n* `delay` (or `delayShow` and `delayHide`) to add a delay\n* `viewportSelector` and `viewportPadding` to customize the viewport that affects `autoPlacement`\n\nSee the individual API docs for each property.\n\n### Actions\n\nWhen you want to react on the tooltip being shown or hidden, you can use one of the following supported actions:\n* `onShow`\n* `onShown`\n* `onHide`\n* `onHidden`",
+            "extends": "Components.ContextualHelp",
+            "access": "public",
+            "tagname": ""
+        },
         "Mixins.ComponentChild": {
             "name": "Mixins.ComponentChild",
             "shortname": "Mixins.ComponentChild",
@@ -984,7 +1110,7 @@
             "file": "addon/mixins/component-child.js",
             "line": 4,
             "description": "Mixin for components that act as a child component in a parent-child relationship of components",
-            "access": "public",
+            "access": "private",
             "tagname": ""
         },
         "Mixins.ComponentParent": {
@@ -1003,7 +1129,7 @@
             "file": "addon/mixins/component-parent.js",
             "line": 3,
             "description": "Mixin for components that act as a parent component in a parent-child relationship of components",
-            "access": "public",
+            "access": "private",
             "tagname": ""
         },
         "Mixins.DropdownToggle": {
@@ -1021,7 +1147,7 @@
             "file": "addon/mixins/dropdown-toggle.js",
             "line": 4,
             "description": "Mixin for components that act as dropdown toggles.",
-            "access": "public",
+            "access": "private",
             "tagname": ""
         },
         "Mixins.ModalCloser": {
@@ -1035,7 +1161,7 @@
             "namespace": "Mixins",
             "file": "addon/mixins/modal-closer.js",
             "line": 4,
-            "access": "public",
+            "access": "private",
             "tagname": ""
         },
         "Mixins.SizeClass": {
@@ -1053,7 +1179,7 @@
             "file": "addon/mixins/size-class.js",
             "line": 3,
             "description": "Mixin to set the appropriate class for components with different sizes.",
-            "access": "public",
+            "access": "private",
             "tagname": ""
         },
         "Mixins.SubComponent": {
@@ -1089,7 +1215,7 @@
             "file": "addon/mixins/type-class.js",
             "line": 3,
             "description": "Mixin to set the appropriate class for components with differently styled types (\"success\", \"danger\" etc.)",
-            "access": "public",
+            "access": "private",
             "tagname": ""
         }
     },
@@ -1718,6 +1844,554 @@
             "access": "protected",
             "tagname": "",
             "class": "Components.Collapse",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 44,
+            "itemtype": "property",
+            "name": "title",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 51,
+            "description": "How to position the tooltip/popover - top | bottom | left | right",
+            "itemtype": "property",
+            "name": "title",
+            "type": "string",
+            "default": "'top'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 63,
+            "description": "When `true` it will dynamically reorient the tooltip/popover. For example, if `placement` is \"left\", the\ntooltip/popover will display to the left when possible, otherwise it will display right.",
+            "itemtype": "property",
+            "name": "autoPlacement",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 74,
+            "description": "You can programmatically show the tooltip/popover by setting this to `true`",
+            "itemtype": "property",
+            "name": "visible",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 84,
+            "itemtype": "property",
+            "name": "inDom",
+            "type": "boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 91,
+            "description": "Set to false to disable fade animations.",
+            "itemtype": "property",
+            "name": "fade",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 101,
+            "description": "Used to apply Bootstrap's \"in\" class",
+            "itemtype": "property",
+            "name": "in",
+            "type": "boolean",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 111,
+            "description": "Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the\n`delayShow` and `delayHide` properties.",
+            "itemtype": "property",
+            "name": "delay",
+            "type": "number",
+            "default": "0",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 122,
+            "description": "Delay showing the tooltip/popover. This property overrides the general delay set with the `delay` property.",
+            "itemtype": "property",
+            "name": "delayShow",
+            "type": "number",
+            "default": "0",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 132,
+            "description": "Delay hiding the tooltip/popover. This property overrides the general delay set with the `delay` property.",
+            "itemtype": "property",
+            "name": "delayHide",
+            "type": "number",
+            "default": "0",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 145,
+            "description": "The duration of the fade transition",
+            "itemtype": "property",
+            "name": "transitionDuration",
+            "type": "number",
+            "default": "150",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 155,
+            "description": "Keeps the tooltip/popover within the bounds of this element when `autoPlacement` is true. Can be any valid jQuery selector.",
+            "itemtype": "property",
+            "name": "viewportSelector",
+            "type": "string",
+            "default": "'body'",
+            "see": [
+                "viewportPadding",
+                "autoPlacement"
+            ],
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 167,
+            "description": "Take a padding into account for keeping the tooltip/popover within the bounds of the element given by `viewportSelector`.",
+            "itemtype": "property",
+            "name": "viewportPadding",
+            "type": "number",
+            "default": "0",
+            "see": [
+                "viewportSelector",
+                "autoPlacement"
+            ],
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 179,
+            "description": "Use CSS transitions when showing/hiding?",
+            "itemtype": "property",
+            "name": "usesTransition",
+            "type": "boolean",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 191,
+            "description": "The id of the overlay element.",
+            "itemtype": "property",
+            "name": "overlayId",
+            "type": "string",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 203,
+            "description": "The jQuery object of the overlay element.",
+            "itemtype": "property",
+            "name": "overlayElement",
+            "type": "object",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 215,
+            "description": "The jQuery object of the arrow element.",
+            "itemtype": "property",
+            "name": "arrowElement",
+            "type": "object",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 225,
+            "description": "The jQuery object of the viewport element.",
+            "itemtype": "property",
+            "name": "viewportElement",
+            "type": "object",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 237,
+            "description": "The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.\nYou can set this to any jQuery selector to have any other element trigger the tooltip/popover.\nWith the special value of \"parentView\" you can attach the tooltip/popover to the parent component's element.",
+            "itemtype": "property",
+            "name": "triggerElement",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 248,
+            "itemtype": "property",
+            "name": "triggerTargetElement",
+            "type": "{jQuery}",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 268,
+            "description": "The event(s) that should trigger the tooltip/popover - click | hover | focus.\nYou can set this to a single event or multiple events, given as an array or a string separated by spaces.",
+            "itemtype": "property",
+            "name": "triggerEvents",
+            "type": "array|string",
+            "default": "'hover focus'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 298,
+            "description": "If true component will render in place, rather than be wormholed.",
+            "itemtype": "property",
+            "name": "renderInPlace",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 308,
+            "itemtype": "property",
+            "name": "_renderInPlace",
+            "type": "boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 317,
+            "description": "Current hover state, 'in', 'out' or null",
+            "itemtype": "property",
+            "name": "hoverState",
+            "type": "string",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 326,
+            "description": "Current state for events",
+            "itemtype": "property",
+            "name": "inState",
+            "type": "{InState}",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 337,
+            "description": "Ember.run timer",
+            "itemtype": "property",
+            "name": "timer",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 345,
+            "description": "This action is called immediately when the tooltip/popover is about to be shown.",
+            "itemtype": "event",
+            "name": "onShow",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 353,
+            "description": "This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).",
+            "itemtype": "event",
+            "name": "onShown",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 361,
+            "description": "This action is called immediately when the tooltip/popover is about to be hidden.",
+            "itemtype": "event",
+            "name": "onHide",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 369,
+            "description": "This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).",
+            "itemtype": "event",
+            "name": "onHidden",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 377,
+            "description": "Called when a show event has been received",
+            "itemtype": "method",
+            "name": "enter",
+            "params": [
+                {
+                    "name": "e",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 410,
+            "description": "Called when a hide event has been received",
+            "itemtype": "method",
+            "name": "leave",
+            "params": [
+                {
+                    "name": "e",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 442,
+            "description": "Called for a click event",
+            "itemtype": "method",
+            "name": "toggle",
+            "params": [
+                {
+                    "name": "e",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 466,
+            "description": "Show the tooltip/popover",
+            "itemtype": "method",
+            "name": "show",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 542,
+            "description": "Position the tooltip/popover",
+            "itemtype": "method",
+            "name": "applyPlacement",
+            "params": [
+                {
+                    "name": "offset",
+                    "description": ""
+                },
+                {
+                    "name": "placement",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 607,
+            "itemtype": "method",
+            "name": "getViewportAdjustedDelta",
+            "params": [
+                {
+                    "name": "placement",
+                    "description": ""
+                },
+                {
+                    "name": "pos",
+                    "description": ""
+                },
+                {
+                    "name": "actualWidth",
+                    "description": ""
+                },
+                {
+                    "name": "actualHeight",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "}",
+                "type": "Top: number, left: number"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 647,
+            "description": "Position the tooltip/popover's arrow",
+            "itemtype": "method",
+            "name": "replaceArrow",
+            "params": [
+                {
+                    "name": "delta",
+                    "description": ""
+                },
+                {
+                    "name": "dimension",
+                    "description": ""
+                },
+                {
+                    "name": "isVertical",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 662,
+            "description": "Hide the tooltip/popover",
+            "itemtype": "method",
+            "name": "hide",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 700,
+            "itemtype": "method",
+            "name": "addListeners",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-contextual-help.js",
+            "line": 719,
+            "itemtype": "method",
+            "name": "removeListeners",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ContextualHelp",
             "namespace": "Components"
         },
         {
@@ -3527,6 +4201,101 @@
             "namespace": "Components"
         },
         {
+            "file": "addon/components/bs-popover-element.js",
+            "line": 23,
+            "itemtype": "property",
+            "name": "placement",
+            "type": "string",
+            "default": "'top'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.PopoverElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-popover-element.js",
+            "line": 31,
+            "itemtype": "property",
+            "name": "fade",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.PopoverElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-popover-element.js",
+            "line": 39,
+            "itemtype": "property",
+            "name": "in",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.PopoverElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-popover-element.js",
+            "line": 47,
+            "itemtype": "property",
+            "name": "title",
+            "type": "string",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.PopoverElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-popover-element.js",
+            "line": 54,
+            "itemtype": "property",
+            "name": "hasTitle",
+            "type": "boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.PopoverElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-popover.js",
+            "line": 72,
+            "itemtype": "property",
+            "name": "placement",
+            "type": "string",
+            "default": "'right'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Popover",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-popover.js",
+            "line": 80,
+            "itemtype": "property",
+            "name": "triggerEvents",
+            "type": "array|string",
+            "default": "'click'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Popover",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-popover.js",
+            "line": 88,
+            "description": "The jQuery object of the arrow element.",
+            "itemtype": "property",
+            "name": "arrowElement",
+            "type": "object",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Popover",
+            "namespace": "Components"
+        },
+        {
             "file": "addon/components/bs-progress-bar.js",
             "line": 47,
             "itemtype": "property",
@@ -3906,6 +4675,55 @@
             "namespace": "Components"
         },
         {
+            "file": "addon/components/bs-tooltip-element.js",
+            "line": 19,
+            "itemtype": "property",
+            "name": "placement",
+            "type": "string",
+            "default": "'top'",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.TooltipElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-tooltip-element.js",
+            "line": 27,
+            "itemtype": "property",
+            "name": "fade",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.TooltipElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-tooltip-element.js",
+            "line": 35,
+            "itemtype": "property",
+            "name": "in",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.TooltipElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-tooltip.js",
+            "line": 80,
+            "description": "The jQuery object of the arrow element.",
+            "itemtype": "property",
+            "name": "arrowElement",
+            "type": "object",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Tooltip",
+            "namespace": "Components"
+        },
+        {
             "file": "addon/mixins/component-child.js",
             "line": 13,
             "description": "flag to check if component has already been rendered, for the `_willRender` event handler",
@@ -4074,6 +4892,10 @@
         }
     ],
     "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " addon/components/bs-contextual-help.js:607"
+        },
         {
             "message": "Missing item type\nValidate hook which will return a promise that will either resolve if the model is valid\nor reject if it's not. This should be overridden to add validation support.",
             "line": " addon/components/bs-form.js:178"

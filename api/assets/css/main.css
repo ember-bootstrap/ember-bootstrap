@@ -25,10 +25,10 @@ html {
 }
 
 body {
-    font: 13px/1.4 'Lucida Grande', 'Lucida Sans Unicode', 'DejaVu Sans', 'Bitstream Vera Sans', 'Helvetica', 'Arial', sans-serif;
+    /*font: 13px/1.4 'Lucida Grande', 'Lucida Sans Unicode', 'DejaVu Sans', 'Bitstream Vera Sans', 'Helvetica', 'Arial', sans-serif;*/
+    font: 13px/1.4 'Helvetica', 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    padding-top: 40px;
 }
 
 /* -- Links ----------------------------------------------------------------- */
@@ -95,9 +95,10 @@ h5, h6 { font-size: 107.692%; }
 code, kbd, pre, samp {
     font-family: Menlo, Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
     font-size: 92.308%;
+    line-height: 1.35;
 }
 
-p code, p kbd, p samp {
+p code, p kbd, p samp, li code {
     background: #FCFBFA;
     border: 1px solid #EFEEED;
     padding: 0 3px;
@@ -572,8 +573,8 @@ kbd .cmd { font-family: Monaco, Helvetica; }
 
 .apidocs .item {
     border-bottom: 1px solid #efefef;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    margin: 1.5em 0 2em;
+    padding-bottom: 2em;
 }
 
 .apidocs .item h4,
@@ -622,10 +623,6 @@ kbd .cmd { font-family: Monaco, Helvetica; }
     padding: 0;
 }
 
-.apidocs .param .param-description {
-    padding-top: 2px;
-}
-
 .apidocs .param { margin-bottom: 1em; }
 
 .apidocs .param .type,
@@ -657,10 +654,6 @@ kbd .cmd { font-family: Monaco, Helvetica; }
 .apidocs .constructor .item {
     border: none;
     padding-bottom: 0;
-}
-
-.apidocs .constructor {
-    padding-bottom: 10px;
 }
 
 /* -- File Source View ------------------------------------------------------ */
@@ -788,6 +781,3 @@ kbd .cmd { font-family: Monaco, Helvetica; }
     font-weight: bold;
 }
 
-.form-inline label {
-    line-height: 20px;
-}

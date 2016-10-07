@@ -3,11 +3,9 @@
 <head>
     <meta charset="utf-8">
     <title>addon/components/bs-button-group.js - ember-bootstrap</title>
-    <!--<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">-->
-    <!--<link rel="stylesheet" href="../assets/css/custom.css">-->
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -42,7 +40,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.10.0</span></h1>
+    <h1>API Docs <span class="small">v0.11.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -306,44 +304,49 @@ export default Ember.Component.extend(ComponentParent, SizeClass, {
             <h3>Classes</h3>
             
             <ul id="api-classes" class="nav nav-pills nav-stacked">
-                    <li><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-                    <li><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-                    <li><a href="../classes/Components.Alert.html">Components.Alert</a></li>
-                    <li><a href="../classes/Components.Button.html">Components.Button</a></li>
-                    <li><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
-                    <li><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
-                    <li><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
-                    <li><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
-                    <li><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
-                    <li><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
-                    <li><a href="../classes/Components.Form.html">Components.Form</a></li>
-                    <li><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
-                    <li><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
-                    <li><a href="../classes/Components.Input.html">Components.Input</a></li>
-                    <li><a href="../classes/Components.Modal.html">Components.Modal</a></li>
-                    <li><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
-                    <li><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
-                    <li><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
-                    <li><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
-                    <li><a href="../classes/Components.Nav.html">Components.Nav</a></li>
-                    <li><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
-                    <li><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
-                    <li><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
-                    <li><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
-                    <li><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
-                    <li><a href="../classes/Components.Progress.html">Components.Progress</a></li>
-                    <li><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
-                    <li><a href="../classes/Components.Select.html">Components.Select</a></li>
-                    <li><a href="../classes/Components.Tab.html">Components.Tab</a></li>
-                    <li><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
-                    <li><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
-                    <li><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
-                    <li><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
-                    <li><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
-                    <li><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-                    <li><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-                    <li><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
+                    <li class="nav-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
+                    <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+                    <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Input.html">Components.Input</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
+                    <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Select.html">Components.Select</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
+                    <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
+                    <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>
     </div>
 </div>
