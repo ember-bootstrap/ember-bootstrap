@@ -6,7 +6,7 @@ import ComponentParentMixin from 'ember-bootstrap/mixins/component-parent';
  *
  * @class ComponentChild
  * @namespace Mixins
- * @public
+ * @private
  */
 export default Ember.Mixin.create({
 

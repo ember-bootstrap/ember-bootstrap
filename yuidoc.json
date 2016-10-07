@@ -9,13 +9,5 @@
     "exclude": "vendor",
     "outdir": "docs/api",
     "themedir": "docs/yuidoc-theme"
-  },
-    "external": {
-        "data": [
-            {
-                "base": "http://emberjs.com/api/",
-                "json": "http://builds.emberjs.com/tags/v1.13.10/ember-docs.json"
-            }
-        ]
-    }
+  }
 }

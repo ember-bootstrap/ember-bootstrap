@@ -3,6 +3,10 @@
 </div>
 
 <div class="well well-small">
+    {{#if access}}
+        <span class="label label-{{access}}">{{access}}</span>
+    {{/if}}
+
     {{#if uses}}
         <div class="uses">
             Uses
