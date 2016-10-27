@@ -1,3 +1,12 @@
+<a name"0.11.1"></a>
+### 0.11.1 (2016-10-27)
+
+
+#### Bug Fixes
+
+* **Alert:** added missing alert-dismissible class ([9c8f5ace](https://github.com/kaliber5/ember-bootstrap/commit/9c8f5ace), closes [#146](https://github.com/kaliber5/ember-bootstrap/issues/146))
+
+
 <a name"0.11.0"></a>
 ## 0.11.0 (2016-10-08)
 
