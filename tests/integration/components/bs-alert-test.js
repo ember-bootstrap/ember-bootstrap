@@ -6,10 +6,11 @@ moduleForComponent('bs-alert', 'Integration | Component | bs-alert', {
 });
 
 test('alert has correct CSS classes', function(assert) {
-  this.render(hbs`{{#bs-alert type="success"}}Test{{/bs-alert}}`);
+  this.render(hbs`{{#bs-alert type="success" dismissible=true}}Test{{/bs-alert}}`);
 
   assert.equal(this.$(':first-child').hasClass('alert'), true, 'alert has alert class');
   assert.equal(this.$(':first-child').hasClass('alert-success'), true, 'alert has type class');
+  assert.equal(this.$(':first-child').hasClass('alert-dismissible'), true, 'alert has dismissible class');
 });
 
 test('dismissible alert can be hidden by clicking close button with fade=false', function(assert) {

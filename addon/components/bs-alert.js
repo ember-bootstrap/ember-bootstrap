@@ -22,7 +22,7 @@ const { computed, observer } = Ember;
  @public
  */
 export default Ember.Component.extend(TypeClass, {
-  classNameBindings: ['alert', 'fade', 'in'],
+  classNameBindings: ['alert', 'fade', 'in', 'alert-dismissible'],
 
   /**
    * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
@@ -34,6 +34,7 @@ export default Ember.Component.extend(TypeClass, {
    * @public
    */
   dismissible: true,
+  'alert-dismissible': computed.readOnly('dismissible'),
 
   /**
    * If true the alert is completely hidden. Will be set when the fade animation has finished.
