@@ -17,10 +17,11 @@ test('button has correct CSS classes', function(assert) {
 });
 
 test('button has HTML attributes', function(assert) {
-  this.render(hbs`{{#bs-button id="test" disabled=true}}Test{{/bs-button}}`);
+  this.render(hbs`{{#bs-button id="test" disabled=true title="title"}}Test{{/bs-button}}`);
 
   assert.equal(this.$('button').attr('id'), 'test');
   assert.equal(this.$('button').attr('disabled'), 'disabled');
+  assert.equal(this.$('button').attr('title'), 'title');
 });
 
 test('button has default label', function(assert) {
