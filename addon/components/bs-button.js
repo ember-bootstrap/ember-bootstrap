@@ -220,6 +220,15 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
   reset: null,
 
   /**
+   * The HTML title attribute
+   *
+   * @property title
+   * @type string
+   * @public
+   */
+  title: null,
+
+  /**
    * This will reset the state property to 'default', and with that the button's label to defaultText
    *
    * @method resetState
