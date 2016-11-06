@@ -91,7 +91,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
    */
   classTypePrefix: 'btn',
 
-  attributeBindings: ['disabled', 'buttonType:type'],
+  attributeBindings: ['disabled', 'buttonType:type', 'title'],
 
   /**
    * Default label of the button. Not need if used as a block component
@@ -218,6 +218,15 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
    * @public
    */
   reset: null,
+
+  /**
+   * The HTML title attribute
+   *
+   * @property title
+   * @type string
+   * @public
+   */
+  title: null,
 
   /**
    * This will reset the state property to 'default', and with that the button's label to defaultText
