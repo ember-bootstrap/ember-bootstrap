@@ -103,3 +103,17 @@ test('when clicking active radio button, button remains active', function(assert
   this.$('button').eq(0).click();
   assert.ok(this.$('button').eq(0).hasClass('active'), 'clicked active button remains active');
 });
+
+test('setting radio button group value to null sets buttons active state to false', function(assert) {
+  this.render(hbs`{{#bs-button-group type="radio" value=value}}{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}{{/bs-button-group}}`);
+
+  for (let i = 0; i < 3; i++) {
+    this.set('value', i + 1);
+    this.set('value', null);
+    assert.equal(this.get('value'), null, 'value must be null');
+    // check button's active property
+    for (let k = 0; k < 3; k++) {
+      assert.equal(this.$('button').eq(k).hasClass('active'), false, 'button active state is true');
+    }
+  }
+});
