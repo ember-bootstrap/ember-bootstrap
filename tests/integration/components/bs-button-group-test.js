@@ -104,7 +104,6 @@ test('when clicking active radio button, button remains active', function(assert
   assert.ok(this.$('button').eq(0).hasClass('active'), 'clicked active button remains active');
 });
 
-
 test('setting radio button group value to null sets buttons active state to false', function(assert) {
   this.render(hbs`{{#bs-button-group type="radio" value=value}}{{#bs-button value=1}}1{{/bs-button}}{{#bs-button value=2}}2{{/bs-button}}{{#bs-button value=3}}3{{/bs-button}}{{/bs-button-group}}`);
 
