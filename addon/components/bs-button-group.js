@@ -202,7 +202,7 @@ export default Ember.Component.extend(ComponentParent, SizeClass, {
           } else {
             let lastActive = this.get('lastActiveChildren.firstObject');
             if (lastActive) {
-              lastActive.set('active', true);
+              lastActive.set('active', this.get('value') ? true : false);
             }
           }
           break;
