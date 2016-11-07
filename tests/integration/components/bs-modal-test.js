@@ -39,6 +39,26 @@ test('open property shows modal', function(assert) {
   assert.equal(this.$('.modal').hasClass('in'), false, 'Modal has not in class');
   this.set('open', true);
   assert.equal(this.$('.modal').hasClass('in'), true, 'Modal has in class');
+  this.set('open', false);
+  assert.equal(this.$('.modal').hasClass('in'), false, 'Modal has not in class');
+});
+
+test('open property shows modal [fade]', function(assert) {
+  let done = assert.async();
+  this.set('open', false);
+  this.render(hbs`{{#bs-modal title="Simple Dialog" open=open}}Hello world!{{/bs-modal}}`);
+
+  assert.equal(this.$('.modal').hasClass('in'), false, 'Modal has not in class');
+  this.set('open', true);
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('in'), true, 'Modal has in class');
+    this.set('open', false);
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('in'), false, 'Modal has not in class');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
 });
 
 test('closeButton property shows close button', function(assert) {
