@@ -7,14 +7,6 @@ const Modal = {};
 Modal.TRANSITION_DURATION = 300;
 Modal.BACKDROP_TRANSITION_DURATION = 150;
 
-const observeOpen = function() {
-  if (this.get('open')) {
-    this.show();
-  } else {
-    this.hide();
-  }
-};
-
 /**
 
  Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals). Creating a simple modal is easy:
@@ -191,7 +183,7 @@ export default Ember.Component.extend({
    * @default false
    * @private
    */
-  'in': computed.and('open', 'notFade'),
+  'in': false,
 
   /**
    * Use a semi-transparent modal background to hide the rest of the page.
@@ -209,7 +201,7 @@ export default Ember.Component.extend({
    * @default false
    * @private
    */
-  showBackdrop: computed.and('open', 'backdrop'),
+  showBackdrop: false,
 
   /**
    * Closes the modal when escape key is pressed.
@@ -448,8 +440,6 @@ export default Ember.Component.extend({
       }
     }
   },
-
-  _observeOpen: observer('open', observeOpen),
 
   /**
    * Give the modal (or its autofocus element) focus
@@ -694,15 +684,31 @@ export default Ember.Component.extend({
   }),
 
   didInsertElement() {
+    this._super(...arguments);
     if (this.get('open')) {
       this.show();
     }
   },
 
   willDestroyElement() {
+    this._super(...arguments);
     Ember.$(window).off('resize.bs.modal');
     Ember.$('body').removeClass('modal-open');
     this.resetScrollbar();
-  }
+  },
 
+  _observeOpen: observer('open', function() {
+    if (this.get('open')) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }),
+
+  init() {
+    this._super(...arguments);
+    let { open, backdrop, fade } = this.getProperties('open', 'backdrop', 'fade');
+    this.set('in', open && !fade);
+    this.set('showBackdrop', open && backdrop);
+  }
 });
