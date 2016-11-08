@@ -19,7 +19,7 @@ In your application's directory:
 
     ember install ember-bootstrap
     
-Beginning from version 0.2.0 ember-bootstrap will require at least Ember 0.13.x!    
+Beginning from version 1.0 ember-bootstrap will require at least Ember 2.3!
 
 ## Changelog
 

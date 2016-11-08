@@ -1,6 +1,6 @@
 {
   "name": "ember-bootstrap",
-  "version": "0.11.2",
+  "version": "1.0.0-alpha",
   "directories": {
     "doc": "docs",
     "test": "tests"
@@ -72,7 +72,7 @@
   "ember-addon": {
     "configPath": "tests/dummy/config",
     "versionCompatibility": {
-      "ember": ">=1.13.0"
+      "ember": ">=2.3.0"
     }
   },
   "bugs": {
