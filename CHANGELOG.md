@@ -1,3 +1,18 @@
+<a name"0.11.2"></a>
+### 0.11.2 (2016-11-08)
+
+
+#### Bug Fixes
+
+* **ButtonGroup:** null value sync with child buttons. Thanks to apokinsocha ([f96ff45a](https://github.com/kaliber5/ember-bootstrap/commit/f96ff45a))
+* **Modal:** fixed Modal not closing when setting open=false in Ember 1.13 ([f59b94da](https://github.com/kaliber5/ember-bootstrap/commit/f59b94da))
+
+
+#### Features
+
+* **Button:** Addition/support for title attribute on buttons. Thanks to basz ([3d630874](https://github.com/kaliber5/ember-bootstrap/commit/3d630874), closes [#148](https://github.com/kaliber5/ember-bootstrap/issues/148))
+
+
 <a name"0.11.1"></a>
 ### 0.11.1 (2016-10-27)
 
