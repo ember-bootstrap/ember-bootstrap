@@ -40,7 +40,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.11.0</span></h1>
+    <h1>API Docs <span class="small">v0.11.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -145,7 +145,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
    */
   classTypePrefix: &#x27;btn&#x27;,
 
-  attributeBindings: [&#x27;disabled&#x27;, &#x27;buttonType:type&#x27;],
+  attributeBindings: [&#x27;disabled&#x27;, &#x27;buttonType:type&#x27;, &#x27;title&#x27;],
 
   /**
    * Default label of the button. Not need if used as a block component
@@ -274,6 +274,15 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
   reset: null,
 
   /**
+   * The HTML title attribute
+   *
+   * @property title
+   * @type string
+   * @public
+   */
+  title: null,
+
+  /**
    * This will reset the state property to &#x27;default&#x27;, and with that the button&#x27;s label to defaultText
    *
    * @method resetState
@@ -349,6 +358,7 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
   }
 
 });
+
     </pre>
 </div>
                     </div>

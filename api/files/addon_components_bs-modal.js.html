@@ -40,7 +40,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.11.0</span></h1>
+    <h1>API Docs <span class="small">v0.11.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -60,14 +60,6 @@ const Modal = {};
 
 Modal.TRANSITION_DURATION = 300;
 Modal.BACKDROP_TRANSITION_DURATION = 150;
-
-const observeOpen = function() {
-  if (this.get(&#x27;open&#x27;)) {
-    this.show();
-  } else {
-    this.hide();
-  }
-};
 
 /**
 
@@ -245,7 +237,7 @@ export default Ember.Component.extend({
    * @default false
    * @private
    */
-  &#x27;in&#x27;: computed.and(&#x27;open&#x27;, &#x27;notFade&#x27;),
+  &#x27;in&#x27;: false,
 
   /**
    * Use a semi-transparent modal background to hide the rest of the page.
@@ -263,7 +255,7 @@ export default Ember.Component.extend({
    * @default false
    * @private
    */
-  showBackdrop: computed.and(&#x27;open&#x27;, &#x27;backdrop&#x27;),
+  showBackdrop: false,
 
   /**
    * Closes the modal when escape key is pressed.
@@ -502,8 +494,6 @@ export default Ember.Component.extend({
       }
     }
   },
-
-  _observeOpen: observer(&#x27;open&#x27;, observeOpen),
 
   /**
    * Give the modal (or its autofocus element) focus
@@ -748,17 +738,33 @@ export default Ember.Component.extend({
   }),
 
   didInsertElement() {
+    this._super(...arguments);
     if (this.get(&#x27;open&#x27;)) {
       this.show();
     }
   },
 
   willDestroyElement() {
+    this._super(...arguments);
     Ember.$(window).off(&#x27;resize.bs.modal&#x27;);
     Ember.$(&#x27;body&#x27;).removeClass(&#x27;modal-open&#x27;);
     this.resetScrollbar();
-  }
+  },
 
+  _observeOpen: observer(&#x27;open&#x27;, function() {
+    if (this.get(&#x27;open&#x27;)) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }),
+
+  init() {
+    this._super(...arguments);
+    let { open, backdrop, fade } = this.getProperties(&#x27;open&#x27;, &#x27;backdrop&#x27;, &#x27;fade&#x27;);
+    this.set(&#x27;in&#x27;, open &amp;&amp; !fade);
+    this.set(&#x27;showBackdrop&#x27;, open &amp;&amp; backdrop);
+  }
 });
 
     </pre>

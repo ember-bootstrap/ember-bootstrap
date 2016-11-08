@@ -40,7 +40,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.11.0</span></h1>
+    <h1>API Docs <span class="small">v0.11.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -256,7 +256,7 @@ export default Ember.Component.extend(ComponentParent, SizeClass, {
           } else {
             let lastActive = this.get(&#x27;lastActiveChildren.firstObject&#x27;);
             if (lastActive) {
-              lastActive.set(&#x27;active&#x27;, true);
+              lastActive.set(&#x27;active&#x27;, this.get(&#x27;value&#x27;) ? true : false);
             }
           }
           break;
