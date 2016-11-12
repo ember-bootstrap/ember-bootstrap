@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from '../templates/components/bs-modal';
 
 const { computed, observer } = Ember;
 
@@ -128,6 +129,7 @@ Modal.BACKDROP_TRANSITION_DURATION = 150;
  @public
  */
 export default Ember.Component.extend({
+  layout,
 
   /**
    * Visibility of the modal. Toggle to to show/hide with CSS transitions.

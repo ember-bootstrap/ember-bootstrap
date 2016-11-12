@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from '../../templates/components/bs-modal/body';
 
 /**
 
@@ -10,5 +11,6 @@ import Ember from 'ember';
  @public
  */
 export default Ember.Component.extend({
+  layout,
   classNames: ['modal-body']
 });

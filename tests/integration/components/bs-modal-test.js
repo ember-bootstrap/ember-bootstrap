@@ -138,10 +138,10 @@ test('clicking ok button closes modal when autoClose=true with custom component 
   }));
 
   this.render(hbs`
-    {{#bs-modal title="Simple Dialog" body=false footer=false}}
+    {{#bs-modal title="Simple Dialog" body=false footer=false as |modal|}}
       {{#my-component}}
-        {{#bs-modal-body}}Hello world!{{/bs-modal-body}}
-        {{bs-modal-footer}}
+        {{#modal.body}}Hello world!{{/modal.body}}
+        {{modal.footer}}
       {{/my-component}}
     {{/bs-modal}}
     
@@ -182,9 +182,8 @@ test('clicking close button leaves modal open when autoClose=false', function(as
 test('can implement custom close buttons', function(assert) {
   this.render(hbs`
     {{#bs-modal title="Simple Dialog" as |modal|}}
-      Hello world! <a href="#" class="close-link" {{action 'close' target=modal}}>close</a>
+      Hello world! <a href="#" class="close-link" onclick={{modal.close}}>close</a>
     {{/bs-modal}}
-    
   `);
 
   let done = assert.async();
@@ -326,8 +325,8 @@ test('submitAction is called when clicking submit button', function(assert) {
   this.on('testAction', () => {
     assert.ok(true, 'Action has been called.');
   });
-  this.render(hbs`{{#bs-modal title="Simple Dialog" submitAction=(action "testAction") footer=false body=false}}{{#bs-modal-body}}Hello world!{{/bs-modal-body}}{{bs-modal-footer closeTitle="Cancel" submitTitle="Ok"}}{{/bs-modal}}`);
-  this.$('.modal .modal-footer button[type=submit]').click();
+  this.render(hbs`{{#bs-modal title="Simple Dialog" submitAction=(action "testAction") footer=false body=false as |modal|}}{{#modal.body}}Hello world!{{/modal.body}}{{modal.footer closeTitle="Cancel" submitTitle="Ok"}}{{/bs-modal}}`);
+  this.$('.modal .modal-footer button.btn-primary').click();
 });
 
 test('when modal has a form and the submit button is clicked, the form is submitted', function(assert) {
@@ -339,8 +338,8 @@ test('when modal has a form and the submit button is clicked, the form is submit
   this.on('doNotCallThisAction', () => {
     assert.ok(false, 'submitAction of modal must not be called.');
   });
-  this.render(hbs`{{#bs-modal title="Simple Dialog" submitAction=(action "doNotCallThisAction") footer=false body=false}}{{#bs-modal-body}}{{#bs-form action=(action "testAction")}}{{/bs-form}}{{/bs-modal-body}}{{bs-modal-footer closeTitle="Cancel" submitTitle="Ok"}}{{/bs-modal}}`);
-  this.$('.modal .modal-footer button[type=submit]').click();
+  this.render(hbs`{{#bs-modal title="Simple Dialog" submitAction=(action "doNotCallThisAction") footer=false body=false as |modal|}}{{#modal.body}}{{#bs-form action=(action "testAction")}}{{/bs-form}}{{/modal.body}}{{modal.footer closeTitle="Cancel" submitTitle="Ok"}}{{/bs-modal}}`);
+  this.$('.modal .modal-footer button.btn-primary').click();
 });
 
 test('autofocus element is focused when present and fade=false', function(assert) {
