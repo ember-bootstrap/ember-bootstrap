@@ -13,15 +13,15 @@
 
 <h3>Explicit markup</h3>
 
-{{#bs-modal open=modal2 header=false body=false footer=false submitAction=(action "submit")}}
-    {{#bs-modal-header}}
+{{#bs-modal open=modal2 header=false body=false footer=false submitAction=(action "submit") as |modal|}}
+    {{#modal.header}}
         <h4 class="modal-title">Dialog</h4>
-    {{/bs-modal-header}}
-    {{#bs-modal-body}}
+    {{/modal.header}}
+    {{#modal.body}}
         Hi there
         <input type="text" autofocus="autofocus">
-    {{/bs-modal-body}}
-    {{bs-modal-footer closeTitle="Cancel" submitTitle="Ok"}}
+    {{/modal.body}}
+    {{modal.footer closeTitle="Cancel" submitTitle="Ok"}}
 {{/bs-modal}}
 
 <label>{{input type="checkbox" checked=modal2}} Open </label>
