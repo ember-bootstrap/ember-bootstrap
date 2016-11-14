@@ -9,14 +9,15 @@
         size=size
         backdropClose=backdropClose
     }}
-        {{yield
-            (hash
-                header=(component "bs-modal/header" title=title closeButton=closeButton onClose=(action "close"))
-                body=(component "bs-modal/body")
-                footer=(component "bs-modal/footer" onClose=(action "close") onSubmit=(action "submit"))
-                close=(action "close")
-            )
-        }}
+        {{bs-modal/header title=title closeButton=closeButton onClose=(action "close")}}
+        {{#bs-modal/body}}
+            {{yield
+                (hash
+                    close=(action "close")
+                )
+            }}
+        {{/bs-modal/body}}
+        {{bs-modal/footer closeTitle=closeTitle submitTitle=submitTitle onClose=(action "close") onSubmit=(action "submit")}}
     {{/bs-modal/dialog}}
 
     <div>

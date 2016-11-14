@@ -142,25 +142,6 @@ export default Ember.Component.extend({
   open: true,
 
   /**
-   * The title of the modal, visible in the modal header. Is ignored if `header` is false.
-   *
-   * @property title
-   * @type string
-   * @public
-   */
-  title: null,
-
-  /**
-   * Display a close button (x icon) in the corner of the modal header.
-   *
-   * @property closeButton
-   * @type boolean
-   * @default true
-   * @public
-   */
-  closeButton: true,
-
-  /**
    * Set to false to disable fade animations.
    *
    * @property fade
@@ -226,41 +207,6 @@ export default Ember.Component.extend({
    * @public
    */
   autoClose: true,
-
-  /**
-   * Generate a modal header component automatically. Set to false to disable. In this case you would want to include an
-   * instance of [Components.ModalHeader](Components.ModalHeader.html) in the components block template
-   *
-   * @property header
-   * @type boolean
-   * @default true
-   * @public
-   */
-  header: true,
-
-  /**
-   * Generate a modal body component automatically. Set to false to disable. In this case you would want to include an
-   * instance of [Components.ModalBody](Components.ModalBody.html) in the components block template.
-   *
-   * Always set this to false if `header` and/or `footer` is false!
-   *
-   * @property body
-   * @type boolean
-   * @default true
-   * @public
-   */
-  body: true,
-
-  /**
-   * Generate a modal footer component automatically. Set to false to disable. In this case you would want to include an
-   * instance of [Components.ModalFooter](Components.ModalFooter.html) in the components block template
-   *
-   * @property footer
-   * @type boolean
-   * @default true
-   * @public
-   */
-  footer: true,
 
   /**
    * The id of the `.modal` element.
