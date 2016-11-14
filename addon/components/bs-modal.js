@@ -314,12 +314,12 @@ export default Ember.Component.extend({
    * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
    * example.
    *
-   * @property submitAction
+   * @property onSubmit
    * @type string
    * @default null
    * @public
    */
-  submitAction: null,
+  onSubmit: null,
 
   /**
    * The action to be sent when the modal is closing.
@@ -330,22 +330,22 @@ export default Ember.Component.extend({
    * You can set `autoClose` to false to prevent closing the modal automatically, and do that in your closeAction by
    * setting `open` to false.
    *
-   * @property closeAction
+   * @property onHide
    * @type string
    * @default null
    * @public
    */
-  closeAction: null,
+  onHide: null,
 
   /**
    * The action to be sent after the modal has been completely hidden (including the CSS transition).
    *
-   * @property closedAction
+   * @property onHidden
    * @type string
    * @default null
    * @public
    */
-  closedAction: null,
+  onHidden: null,
 
   /**
    * The action to be sent when the modal is opening.
@@ -353,29 +353,29 @@ export default Ember.Component.extend({
    * size calculations and the like). This means that if fade=true, it will be shown in between the
    * backdrop animation and the fade animation.
    *
-   * @property openAction
+   * @property onShow
    * @type string
    * @default null
    * @public
    */
-  openAction: null,
+  onShow: null,
 
   /**
    * The action to be sent after the modal has been completely shown (including the CSS transition).
    *
-   * @property openedAction
+   * @property onShown
    * @type string
    * @default null
    * @public
    */
-  openedAction: null,
+  onShown: null,
 
   actions: {
     close() {
       if (this.get('autoClose')) {
         this.set('open', false);
       }
-      this.sendAction('closeAction');
+      this.sendAction('onHide');
     },
     submit() {
       let form = this.get('modalElement').find('.modal-body form');
@@ -384,7 +384,7 @@ export default Ember.Component.extend({
         form.trigger('submit');
       } else {
         // if we have no form, we send a submit action
-        this.sendAction('submitAction');
+        this.sendAction('onSubmit');
       }
     }
   },
@@ -431,18 +431,18 @@ export default Ember.Component.extend({
 
       this.handleUpdate();
       this.set('in', true);
-      this.sendAction('openAction');
+      this.sendAction('onShow');
 
       if (this.get('usesTransition')) {
         this.get('modalElement')
           .one('bsTransitionEnd', Ember.run.bind(this, function() {
             this.takeFocus();
-            this.sendAction('openedAction');
+            this.sendAction('onShown');
           }))
           .emulateTransitionEnd(Modal.TRANSITION_DURATION);
       } else {
         this.takeFocus();
-        this.sendAction('openedAction');
+        this.sendAction('onShown');
       }
     };
     this.handleBackdrop(callback);
@@ -483,7 +483,7 @@ export default Ember.Component.extend({
       Ember.$('body').removeClass('modal-open');
       this.resetAdjustments();
       this.resetScrollbar();
-      this.sendAction('closedAction');
+      this.sendAction('onHidden');
     });
   },
 

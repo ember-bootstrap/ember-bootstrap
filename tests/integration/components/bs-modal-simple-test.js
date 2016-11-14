@@ -188,7 +188,7 @@ test('size property adds size class', function(assert) {
   assert.ok(this.$('.modal-dialog').hasClass('modal-lg'), 'Modal has size class.');
 });
 
-test('openAction/openedAction fire correctly with fade=false', function(assert) {
+test('onShow/onShown actions fire correctly with fade=false', function(assert) {
   assert.expect(4);
 
   this.set('open', false);
@@ -202,7 +202,7 @@ test('openAction/openedAction fire correctly with fade=false', function(assert) 
   this.on('openedAction', () => {
     openedActionCount += 1;
   });
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" openAction=(action "openAction") openedAction=(action "openedAction") open=open fade=false}}Hello world!{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onShow=(action "openAction") onShown=(action "openedAction") open=open fade=false}}Hello world!{{/bs-modal-simple}}`);
 
   this.set('open', true);
 
@@ -210,7 +210,7 @@ test('openAction/openedAction fire correctly with fade=false', function(assert) 
   assert.equal(openedActionCount, 1, 'opened action fired after setting open=true');
 });
 
-test('openAction/openedAction fire correctly with fade=true', function(assert) {
+test('onShow/onShown fire correctly with fade=true', function(assert) {
   assert.expect(5);
 
   this.set('open', false);
@@ -223,7 +223,7 @@ test('openAction/openedAction fire correctly with fade=true', function(assert) {
   this.on('openedAction', () => {
     openedActionCount += 1;
   });
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" openAction=(action "openAction") openedAction=(action "openedAction") open=open}}Hello world!{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onShow=(action "openAction") onShown=(action "openedAction") open=open}}Hello world!{{/bs-modal-simple}}`);
 
   this.set('open', true);
 
@@ -240,42 +240,24 @@ test('openAction/openedAction fire correctly with fade=true', function(assert) {
   }, transitionTimeout);
 });
 
-test('openedAction is called after modal is shown and animation completes', function(assert) {
-  assert.expect(1);
-
-  this.set('open', false);
-  this.on('testAction', () => {
-    assert.ok(true, 'Action has been called.');
-  });
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" openedAction=(action "testAction") open=open}}Hello world!{{/bs-modal-simple}}`);
-
-  this.set('open', true);
-  let done = assert.async();
-  // wait for fade animation
-  setTimeout(() => {
-    done();
-  }, transitionTimeout);
-
-});
-
-test('closeAction is called when clicking close button', function(assert) {
+test('onHide is called when clicking close button', function(assert) {
   assert.expect(1);
 
   this.on('testAction', () => {
     assert.ok(true, 'Action has been called.');
   });
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeAction=(action "testAction")}}Hello world!{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction")}}Hello world!{{/bs-modal-simple}}`);
   this.$('.modal .modal-header .close').click();
 });
 
-test('closedAction is called after modal is closed', function(assert) {
+test('onHidden is called after modal is closed', function(assert) {
   assert.expect(1);
 
   this.set('open', true);
   this.on('testAction', () => {
     assert.ok(true, 'Action has been called.');
   });
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closedAction=(action "testAction") open=open}}Hello world!{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHidden=(action "testAction") open=open}}Hello world!{{/bs-modal-simple}}`);
 
   this.set('open', false);
   let done = assert.async();
@@ -286,13 +268,13 @@ test('closedAction is called after modal is closed', function(assert) {
 
 });
 
-test('submitAction is called when clicking submit button', function(assert) {
+test('onSubmit is called when clicking submit button', function(assert) {
   assert.expect(1);
 
   this.on('testAction', () => {
     assert.ok(true, 'Action has been called.');
   });
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" submitAction=(action "testAction") as |modal|}}Hello world!{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" onSubmit=(action "testAction") as |modal|}}Hello world!{{/bs-modal-simple}}`);
   this.$('.modal .modal-footer button.btn-primary').click();
 });
 
@@ -305,7 +287,7 @@ test('when modal has a form and the submit button is clicked, the form is submit
   this.on('doNotCallThisAction', () => {
     assert.ok(false, 'submitAction of modal must not be called.');
   });
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" submitAction=(action "doNotCallThisAction") as |modal|}}{{#bs-form action=(action "testAction")}}{{/bs-form}}{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" onSubmit=(action "doNotCallThisAction") as |modal|}}{{#bs-form action=(action "testAction")}}{{/bs-form}}{{/bs-modal-simple}}`);
   this.$('.modal .modal-footer button.btn-primary').click();
 });
 
@@ -356,7 +338,7 @@ test('Pressing escape key will close the modal if keyboard=true', function(asser
   this.on('testAction', () => {
     assert.ok(true, 'Action has been called.');
   });
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeAction=(action "testAction") keyboard=true}}Hello world!{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=true}}Hello world!{{/bs-modal-simple}}`);
   let done = assert.async();
 
   // wait for fade animation
@@ -382,7 +364,7 @@ test('Pressing escape key will close the modal if keyboard=true and element is a
     assert.ok(true, 'Action has been called.');
   });
   this.render(hbs`
-    {{#bs-modal-simple title="Simple Dialog" closeAction=(action "testAction") keyboard=true}}
+    {{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=true}}
       <input autofocus="autofocus"/>
     {{/bs-modal-simple}}
     
@@ -411,7 +393,7 @@ test('Pressing escape key is ignored if keyboard=false', function(assert) {
   this.on('testAction', () => {
     assert.ok(false, 'Action must not be called.');
   });
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeAction=(action "testAction") keyboard=false}}Hello world!{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=false}}Hello world!{{/bs-modal-simple}}`);
   let done = assert.async();
 
   // wait for fade animation
@@ -436,7 +418,7 @@ test('Clicking on the backdrop will close the modal', function(assert) {
   this.on('testAction', () => {
     assert.ok(true, 'Action has been called.');
   });
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeAction=(action "testAction")}}Hello world!{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction")}}Hello world!{{/bs-modal-simple}}`);
   let done = assert.async();
 
   // wait for fade animation
@@ -458,7 +440,7 @@ test('Clicking on the backdrop is ignored when backdropClose=false', function(as
   this.on('testAction', () => {
     assert.ok(false, 'Action must not be called.');
   });
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeAction=(action "testAction") backdropClose=false}}Hello world!{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") backdropClose=false}}Hello world!{{/bs-modal-simple}}`);
   let done = assert.async();
 
   // wait for fade animation
