@@ -1,6 +1,7 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
+import test from 'ember-sinon-qunit/test-support/test';
 
 moduleForComponent('bs-modal', 'Integration | Component | bs-modal', {
   integration: true
@@ -53,4 +54,36 @@ test('clicking ok button closes modal when autoClose=true with custom component 
       done();
     }, transitionTimeout);
   }, transitionTimeout);
+});
+
+test('Modal yields close action', function(assert) {
+  let closeAction = this.spy();
+  this.on('close', closeAction);
+
+  this.render(hbs`{{#bs-modal onHide=(action "close") as |modal|}}
+    {{modal.header title="Dialog"}}
+    {{#modal.body}}Hello world!{{/modal.body}}
+    {{#modal.footer}}
+      <button id="close" {{action modal.close}}>Close</button>
+    {{/modal.footer}}
+  {{/bs-modal}}`);
+
+  this.$('#close').click();
+  assert.ok(closeAction.calledOnce, 'close action has been called.');
+});
+
+test('Modal yields submit action', function(assert) {
+  let submitAction = this.spy();
+  this.on('submit', submitAction);
+
+  this.render(hbs`{{#bs-modal onSubmit=(action "submit") as |modal|}}
+    {{modal.header title="Dialog"}}
+    {{#modal.body}}Hello world!{{/modal.body}}
+    {{#modal.footer}}
+      <button id="submit" {{action modal.submit}}>Submit</button>
+    {{/modal.footer}}
+  {{/bs-modal}}`);
+
+  this.$('#submit').click();
+  assert.ok(submitAction.calledOnce, 'submit action has been called.');
 });

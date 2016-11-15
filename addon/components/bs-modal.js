@@ -10,118 +10,35 @@ Modal.BACKDROP_TRANSITION_DURATION = 150;
 
 /**
 
- Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals). Creating a simple modal is easy:
+ Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup:
 
  ```hbs
- {{#bs-modal title="Simple Dialog"}}
-   Hello world!
- {{/bs-modal}}
- ```
-
- This will automatically create the appropriate markup, with a modal header containing the title, and a footer containing
- a default "Ok" button, that will close the modal automatically (unless you set `autoClose` to false).
-
- A modal created this way will be visible at once. You can use the `{{#if ...}}` helper to hide all modal elements form
- the DOM until needed. Or you can bind the `open` property to trigger showing and hiding the modal:
-
- ```hbs
- {{#bs-modal open=openModal title="Simple Dialog"}}
-   Hello world!
- {{/bs-modal}}
- ```
-
- ### Custom Markup
-
- To customize your modal markup you can use the following sub components:
-
- [Components.ModalBody](Components.ModalBody.html)
- [Components.ModalHeader](Components.ModalHeader.html)
- [Components.ModalFooter](Components.ModalFooter.html)
-
- In the example above, these are generated for you automatically. Whenever you use one of these by yourself you should
- set the appropriate property (`body`, `footer`, `header`) to false to prevent their automatic generation. Note that
- in any case where you use a custom sub component, you must also use a custom [Components.ModalBody](Components.ModalBody.html)!
-
- A common use case is to customize the buttons in the footer. Most often you will have a cancel button that closes the
- model without action, and a submit button that triggers some action. The footer component supports this case by letting
- you customize the button titles, the rest (triggering close or submit actions) automatically set up:
-
- ```hbs
- {{#bs-modal body=false footer=false title="Attention" submitAction=(action "submit")}}
-   {{#bs-modal-body}}Are you sure?{{/bs-modal-body}}
-   {{bs-modal-footer closeTitle="Cancel" submitTitle="Ok"}}
- {{/bs-modal}}
- ```
-
- If you further want to customize your modal elements, you can supply custom templates for your footer and header, as in
- the following example:
-
- ```hbs
- {{#bs-modal body=false footer=false header=false submitAction=(action "submit")}}
-   {{#bs-modal-header}}
+ {{#bs-modal onSubmit=(action "submit") as |modal|}}
+   {{#modal.header}}
      <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Alert</h4>
-   {{/bs-modal-header}}
-   {{#bs-modal-body}}Are you absolutely sure you want to do that???{{/bs-modal-body}}
-   {{#bs-modal-footer as |footer|}}
-     {{#bs-button action=(action "close" target=footer) type="danger"}}Oh no, forget it!{{/bs-button}}
-     {{#bs-button buttonType="submit" type="success"}}Yeah!{{/bs-button}}
-   {{/bs-modal-footer}}
+   {{/modal.header}}
+   {{#modal.body}}Are you absolutely sure you want to do that???{{/modal.body}}
+   {{#modal.footer as |footer|}}
+     {{#bs-button action=(action modal.close) type="danger"}}Oh no, forget it!{{/bs-button}}
+     {{#bs-button action=(action modal.submit) type="success"}}Yeah!{{/bs-button}}
+   {{/modal.footer}}
  {{/bs-modal}}
  ```
 
- Note the use of the action helper of the close button that triggers the close action on the modal footer component
- instead of on the controller, which will bubble up to the modal component and close the modal.
+ The component yields references to the following contextual components, that you can use to further customize the output:
 
- ### Modals with forms
+ * [modal.body](Components.ModalBody.html)
+ * [modal.header](Components.ModalHeader.html)
+ * [modal.footer](Components.ModalFooter.html)
 
- There is a special case when you have a form inside your modals body: you probably do not want to have a submit button
- within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not
- trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
- thus bypass the form validation feature of the form component.
+ Furthermore references to the following actions are yielded:
 
- ```hbs
- {{#bs-modal title="Form Example" body=false footer=false}}
-   {{#bs-modal-body}}
-     {{#bs-form action=(action "submit") model=this}}
-       {{bs-form-element controlType="text" label="first name" property="firstname"}}
-       {{bs-form-element controlType="text" label="last name" property="lastname"}}
-     {{/bs-form}}
-   {{/bs-modal-body}}
-   {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
- {{/bs-modal}}
- ```
+ * `close`: triggers the `onHide` action and closes the modal (if `autoClose` is true)
+ * `submit`: triggers the `onSubmit` action (or the submit event on a form if present in the body element)
 
- The modal component supports this common case by triggering the submit event programmatically on the body's form if
- present whenever the footer's submit button is pressed, so the example above will work as expected.
+ ### Further reading
 
- ### Auto-focus
-
- In order to allow key handling to function, the modal's root element is given focus once the modal is shown. If your
- modal contains an element such as a text input and you would like it to be given focus rather than the modal element,
- then give it the HTML5 autofocus attribute:
-
- ```hbs
- {{#bs-modal title="Form Example" body=false footer=false}}
-   {{#bs-modal-body}}
-     {{#bs-form action=(action "submit") model=this}}
-       {{bs-form-element controlType="text" label="first name" property="firstname" autofocus=true}}
-       {{bs-form-element controlType="text" label="last name" property="lastname"}}
-     {{/bs-form}}
-   {{/bs-modal-body}}
-   {{bs-modal-footer closeTitle=(t "contact.label.cancel") submitTitle=(t "contact.label.ok")}}
- {{/bs-modal}}
- ```
-
-
- ### Modals inside wormhole
-
- Modals make use of the [ember-wormhole](https://github.com/yapplabs/ember-wormhole) addon, which will be installed
- automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested
- components/templates where it belongs to logically, but to have the actual DOM elements within a special container
- element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and
- are not effected by parent elements with `overflow: hidden` for example.
-
- If you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.
+ See the documentation of the [bs-modal-simple](Components.ModalSimple.html) component for further examples.
 
  @class Modal
  @namespace Components
