@@ -301,3 +301,17 @@ test('should not show tooltip if leave event occurs before delay expires', funct
 
   $trigger.trigger('mouseenter');
 });
+
+test('show pass along class attribute', function(assert) {
+  assert.expect(1);
+  let done = assert.async();
+
+  this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" class='wide' delay=150}}</div>`);
+  let $trigger = this.$('#target');
+  setTimeout(function() {
+    assert.equal(this.$('.tooltip.wide').length, 1);
+    done();
+  }, 200);
+
+  $trigger.trigger('mouseenter');
+});

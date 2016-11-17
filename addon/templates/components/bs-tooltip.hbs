@@ -2,7 +2,7 @@
 
     {{#ember-wormhole to="ember-bootstrap-modal-container" renderInPlace=_renderInPlace}}
 
-        {{#bs-tooltip-element id=overlayId placement=_placement fade=fade in=in}}
+        {{#bs-tooltip-element id=overlayId placement=_placement fade=fade in=in class=class}}
             {{#if hasBlock}}
                 {{yield}}
             {{else}}
