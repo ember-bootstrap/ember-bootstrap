@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 
-const { computed, observer } = Ember;
+const { computed, K: noop, run: { later } } = Ember;
 
 /**
  Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts
@@ -43,7 +43,7 @@ export default Ember.Component.extend(TypeClass, {
    * @type boolean
    * @default false
    * @readonly
-   * @protected
+   * @private
    */
   hidden: false,
 
@@ -56,7 +56,20 @@ export default Ember.Component.extend(TypeClass, {
    * @default true
    * @public
    */
-  visible: true,
+  visible: computed({
+    get() {
+      return true;
+    },
+    set(, value) {
+      if (value) {
+        this.show();
+      } else {
+        this.hide();
+      }
+      return value;
+    }
+  }),
+
   notVisible: computed.not('visible'),
 
   /**
@@ -84,7 +97,7 @@ export default Ember.Component.extend(TypeClass, {
    * @property classTypePrefix
    * @type String
    * @default 'alert'
-   * @protected
+   * @private
    */
   classTypePrefix: 'alert',
 
@@ -101,26 +114,31 @@ export default Ember.Component.extend(TypeClass, {
   /**
    * The action to be sent after the alert has been dismissed (including the CSS transition).
    *
-   * @property dismissedAction
-   * @type string
-   * @default null
+   * @property onDismissed
+   * @type function
    * @public
    */
-  dismissedAction: null,
+  onDismissed: noop,
+
+  /**
+   * The action is called when the close button is clicked.
+   *
+   * You can return false to prevent closing the alert automatically, and do that in your action by
+   * setting `visible` to false.
+   *
+   * @property onDismiss
+   * @type function
+   * @public
+   */
+  onDismiss: noop,
 
   actions: {
     dismiss() {
-      this.set('visible', false);
+      if (this.get('onDismiss')() !== false) {
+        this.set('visible', false);
+      }
     }
   },
-
-  _onVisibleChange: observer('visible', function() {
-    if (this.get('visible')) {
-      this.show();
-    } else {
-      this.hide();
-    }
-  }),
 
   /**
    * Call to make the alert visible again after it has been hidden
@@ -143,17 +161,15 @@ export default Ember.Component.extend(TypeClass, {
    */
   hide() {
     if (this.get('fade')) {
-      Ember.run.later(this, function() {
+      later(this, function() {
         if (!this.get('isDestroyed')) {
           this.set('hidden', true);
-          this.sendAction('dismissedAction');
+          this.get('onDismissed')();
         }
       }, this.get('fadeDuration'));
     } else {
-      this.setProperties({
-        hidden: true
-      });
-      this.sendAction('dismissedAction');
+      this.set('hidden', true);
+      this.get('onDismissed')();
     }
   },
 

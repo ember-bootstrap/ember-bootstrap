@@ -1,4 +1,5 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-alert', 'Integration | Component | bs-alert', {
@@ -55,15 +56,31 @@ test('alert can be hidden by setting visible property', function(assert) {
 
 });
 
-test('dismissedAction is called after modal is closed', function(assert) {
-  assert.expect(1);
-
-  this.on('testAction', () => {
-    assert.ok(true, 'Action has been called.');
-  });
-  this.render(hbs`{{#bs-alert type="success" fade=false dismissedAction=(action "testAction")}}Test{{/bs-alert}}`);
-
+test('onDismiss is called when clicking the close button', function(assert) {
+  let action = this.spy();
+  this.on('dismiss', action);
+  this.render(hbs`{{#bs-alert type="success" fade=false onDismiss=(action "dismiss")}}Test{{/bs-alert}}`);
   this.$().find('button.close').click();
+  assert.ok(action.calledOnce, 'onDismiss has been called.');
+});
+
+test('alert is not hidden after clicking the close button when onDismiss action return false', function(assert) {
+  let action = this.stub();
+  action.returns(false);
+  this.on('dismiss', action);
+  this.render(hbs`{{#bs-alert type="success" fade=false onDismiss=(action "dismiss")}}Test{{/bs-alert}}`);
+  this.$().find('button.close').click();
+  assert.ok(action.calledOnce, 'onDismiss has been called.');
+
+  assert.equal(this.$(':first-child').hasClass('alert'), true, 'alert is still visible');
+});
+
+test('onDismissed is called after modal is closed', function(assert) {
+  let action = this.spy();
+  this.on('dismissed', action);
+  this.render(hbs`{{#bs-alert type="success" fade=false onDismissed=(action "dismissed")}}Test{{/bs-alert}}`);
+  this.$().find('button.close').click();
+  assert.ok(action.calledOnce, 'onDismissed has been called.');
 });
 
 test('alert is initially hidden when visible=false', function(assert) {
@@ -71,7 +88,6 @@ test('alert is initially hidden when visible=false', function(assert) {
 
   assert.equal(this.$(':first-child').hasClass('alert'), false, 'alert has no alert class');
   assert.equal(this.$(':first-child').text().trim(), '', 'alert has no content');
-
 });
 
 test('alert can be made visible when setting visible=true', function(assert) {
