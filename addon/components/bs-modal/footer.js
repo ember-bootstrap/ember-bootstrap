@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import ModalCloser from 'ember-bootstrap/mixins/modal-closer';
+import layout from '../../templates/components/bs-modal/footer';
 
-const { computed } = Ember;
+const { computed, K } = Ember;
 
 /**
 
@@ -12,7 +12,8 @@ const { computed } = Ember;
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend(ModalCloser, {
+export default Ember.Component.extend({
+  layout,
   tagName: 'form',
   classNames: ['modal-footer'],
 
@@ -54,17 +55,21 @@ export default Ember.Component.extend(ModalCloser, {
   /**
    * The action to send to the parent modal component when the modal footer's form is submitted
    *
-   * @property submitAction
-   * @type string
-   * @default 'submit'
-   * @private
+   * @event onSubmit
+   * @public
    */
-  submitAction: 'submit',
+  onSubmit: K,
+
+  /**
+   * @event onClose
+   * @public
+   */
+  onClose: K,
 
   submit(e) {
     e.preventDefault();
     // send to parent bs-modal component
-    this.sendAction('submitAction');
+    this.get('onSubmit')();
   }
 
 });

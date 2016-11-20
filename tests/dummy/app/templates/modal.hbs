@@ -5,23 +5,23 @@
 <p>Note: the following modal components add permanent modal markup to the DOM. See dynamic modal creation below for alternatives.</p>
 
 <h3>Minimal markup</h3>
-{{#bs-modal open=modal1 title="Simple Dialog" size="sm"}}
+{{#bs-modal-simple open=modal1 title="Simple Dialog" size="sm"}}
     Hi there
-{{/bs-modal}}
+{{/bs-modal-simple}}
 
 <label>{{input type="checkbox" checked=modal1}} Open </label>
 
 <h3>Explicit markup</h3>
 
-{{#bs-modal open=modal2 header=false body=false footer=false submitAction=(action "submit")}}
-    {{#bs-modal-header}}
+{{#bs-modal open=modal2 onSubmit=(action "submit") as |modal|}}
+    {{#modal.header}}
         <h4 class="modal-title">Dialog</h4>
-    {{/bs-modal-header}}
-    {{#bs-modal-body}}
+    {{/modal.header}}
+    {{#modal.body}}
         Hi there
         <input type="text" autofocus="autofocus">
-    {{/bs-modal-body}}
-    {{bs-modal-footer closeTitle="Cancel" submitTitle="Ok"}}
+    {{/modal.body}}
+    {{modal.footer closeTitle="Cancel" submitTitle="Ok"}}
 {{/bs-modal}}
 
 <label>{{input type="checkbox" checked=modal2}} Open </label>
@@ -32,7 +32,7 @@
 {{#bs-button id="openModal3" action=(action "addModal3")}}Open{{/bs-button}}
 
 {{#if hasModal3}}
-{{#bs-modal id="modal3" open=modal3 closedAction=(action "removeModal3") title="Dynamic Dialog"}}
+{{#bs-modal-simple id="modal3" open=modal3 onHidden=(action "removeModal3") title="Dynamic Dialog"}}
     Hi there
-{{/bs-modal}}
+{{/bs-modal-simple}}
 {{/if}}

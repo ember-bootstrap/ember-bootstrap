@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import ModalCloser from 'ember-bootstrap/mixins/modal-closer';
+import layout from '../../templates/components/bs-modal/header';
+
+const { K } = Ember;
 
 /**
 
@@ -10,7 +12,8 @@ import ModalCloser from 'ember-bootstrap/mixins/modal-closer';
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend(ModalCloser, {
+export default Ember.Component.extend({
+  layout,
   classNames: ['modal-header'],
 
   /**
@@ -31,6 +34,12 @@ export default Ember.Component.extend(ModalCloser, {
    * @default null
    * @public
    */
-  title: null
+  title: null,
+
+  /**
+   * @event onClose
+   * @public
+   */
+  onClose: K
 
 });
