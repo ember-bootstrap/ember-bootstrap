@@ -60,7 +60,7 @@ export default Ember.Component.extend(TypeClass, {
     get() {
       return true;
     },
-    set(, value) {
+    set(key, value) {
       if (value) {
         this.show();
       } else {
