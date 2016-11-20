@@ -3,11 +3,6 @@ import layout from '../templates/components/bs-modal';
 
 const { computed, observer, K: noop } = Ember;
 
-const Modal = {};
-
-Modal.TRANSITION_DURATION = 300;
-Modal.BACKDROP_TRANSITION_DURATION = 150;
-
 /**
 
  Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup:
@@ -216,6 +211,26 @@ export default Ember.Component.extend({
   }),
 
   /**
+   * The duration of the fade transition
+   *
+   * @property transitionDuration
+   * @type number
+   * @default 300
+   * @public
+   */
+  transitionDuration: 300,
+
+  /**
+   * The duration of the backdrop fade transition
+   *
+   * @property backdropTransitionDuration
+   * @type number
+   * @default 150
+   * @public
+   */
+  backdropTransitionDuration: 150,
+
+  /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
    * Note that if your modal body contains a form (e.g. [Components.Form](Components.Form.html){{/crossLink}}) this action will
    * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
@@ -342,7 +357,7 @@ export default Ember.Component.extend({
             this.takeFocus();
             this.get('onShown')();
           }))
-          .emulateTransitionEnd(Modal.TRANSITION_DURATION);
+          .emulateTransitionEnd(this.get('transitionDuration'));
       } else {
         this.takeFocus();
         this.get('onShown')();
@@ -364,7 +379,7 @@ export default Ember.Component.extend({
     if (this.get('usesTransition')) {
       this.get('modalElement')
         .one('bsTransitionEnd', Ember.run.bind(this, this.hideModal))
-        .emulateTransitionEnd(Modal.TRANSITION_DURATION);
+        .emulateTransitionEnd(this.get('transitionDuration'));
     } else {
       this.hideModal();
     }
@@ -413,7 +428,7 @@ export default Ember.Component.extend({
           Ember.assert('Backdrop element should be in DOM', $backdrop && $backdrop.length > 0);
           $backdrop
             .one('bsTransitionEnd', Ember.run.bind(this, callback))
-            .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION);
+            .emulateTransitionEnd(this.get('backdropTransitionDuration'));
         });
       } else {
         callback.call(this);
@@ -431,7 +446,7 @@ export default Ember.Component.extend({
       if (doAnimate) {
         $backdrop
           .one('bsTransitionEnd', Ember.run.bind(this, callbackRemove))
-          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION);
+          .emulateTransitionEnd(this.get('backdropTransitionDuration'));
       } else {
         callbackRemove.call(this);
       }
