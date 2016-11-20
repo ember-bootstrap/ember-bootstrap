@@ -13,7 +13,7 @@ import layout from '../templates/components/bs-modal-simple';
  ```
 
  This will automatically create the appropriate markup, with a modal header containing the title, and a footer containing
- a default "Ok" button, that will close the modal automatically (unless you set `autoClose` to false).
+ a default "Ok" button, that will close the modal automatically (unless you return false from `onHide`).
 
  A modal created this way will be visible at once. You can use the `{{#if ...}}` helper to hide all modal elements form
  the DOM until needed. Or you can bind the `open` property to trigger showing and hiding the modal:

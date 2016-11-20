@@ -111,7 +111,7 @@ test('backdrop=false removes backdrop element', function(assert) {
   }, transitionTimeout);
 });
 
-test('clicking close button closes modal when autoClose=true', function(assert) {
+test('clicking close button closes modal', function(assert) {
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
   let done = assert.async();
 
@@ -128,7 +128,7 @@ test('clicking close button closes modal when autoClose=true', function(assert) 
   }, transitionTimeout);
 });
 
-test('clicking ok button closes modal when autoClose=true', function(assert) {
+test('clicking ok button closes modal', function(assert) {
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
   let done = assert.async();
 
@@ -145,8 +145,12 @@ test('clicking ok button closes modal when autoClose=true', function(assert) {
   }, transitionTimeout);
 });
 
-test('clicking close button leaves modal open when autoClose=false', function(assert) {
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" autoClose=false}}Hello world!{{/bs-modal-simple}}`);
+test('clicking close button leaves modal open when onHide action returns false', function(assert) {
+  let hideAction = this.stub();
+  hideAction.returns(false);
+  this.on('hide', hideAction);
+
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "hide")}}Hello world!{{/bs-modal-simple}}`);
   let done = assert.async();
 
   // wait for fade animation

@@ -33,7 +33,7 @@ Modal.BACKDROP_TRANSITION_DURATION = 150;
 
  Furthermore references to the following actions are yielded:
 
- * `close`: triggers the `onHide` action and closes the modal (if `autoClose` is true)
+ * `close`: triggers the `onHide` action and closes the modal
  * `submit`: triggers the `onSubmit` action (or the submit event on a form if present in the body element)
 
  ### Further reading
@@ -50,6 +50,8 @@ export default Ember.Component.extend({
 
   /**
    * Visibility of the modal. Toggle to to show/hide with CSS transitions.
+   * *Note*: this property will be automatically set to false when clicking the modal's close button, unless you return
+   * false from the `onHide` action. Beware when using two-way bindings!
    *
    * @property open
    * @type boolean
@@ -112,18 +114,6 @@ export default Ember.Component.extend({
    * @public
    */
   keyboard: true,
-
-  /**
-   * If true clicking a close button will hide the modal automatically.
-   * If you want to handle hiding the modal by yourself, you can set this to false and use the closeAction to
-   * implement your custom logic.
-   *
-   * @property autoClose
-   * @type boolean
-   * @default true
-   * @public
-   */
-  autoClose: true,
 
   /**
    * The id of the `.modal` element.
@@ -243,7 +233,7 @@ export default Ember.Component.extend({
    * Note that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some
    * time to finish. Use the `closedAction` if you need the modal to be hidden when the action triggers.
    *
-   * You can set `autoClose` to false to prevent closing the modal automatically, and do that in your closeAction by
+   * You can return false to prevent closing the modal automatically, and do that in your action by
    * setting `open` to false.
    *
    * @property onHide
@@ -286,10 +276,9 @@ export default Ember.Component.extend({
 
   actions: {
     close() {
-      if (this.get('autoClose')) {
+      if (this.get('onHide')() !== false) {
         this.set('open', false);
       }
-      this.get('onHide')();
     },
     submit() {
       let form = this.get('modalElement').find('.modal-body form');
