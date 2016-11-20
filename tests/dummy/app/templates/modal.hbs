@@ -13,7 +13,7 @@
 
 <h3>Explicit markup</h3>
 
-{{#bs-modal open=modal2 submitAction=(action "submit") as |modal|}}
+{{#bs-modal open=modal2 onSubmit=(action "submit") as |modal|}}
     {{#modal.header}}
         <h4 class="modal-title">Dialog</h4>
     {{/modal.header}}
@@ -32,7 +32,7 @@
 {{#bs-button id="openModal3" action=(action "addModal3")}}Open{{/bs-button}}
 
 {{#if hasModal3}}
-{{#bs-modal-simple id="modal3" open=modal3 closedAction=(action "removeModal3") title="Dynamic Dialog"}}
+{{#bs-modal-simple id="modal3" open=modal3 onHidden=(action "removeModal3") title="Dynamic Dialog"}}
     Hi there
 {{/bs-modal-simple}}
 {{/if}}

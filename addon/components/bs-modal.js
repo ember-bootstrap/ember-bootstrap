@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/bs-modal';
 
-const { computed, observer } = Ember;
+const { computed, observer, K: noop } = Ember;
 
 const Modal = {};
 
@@ -232,11 +232,10 @@ export default Ember.Component.extend({
    * example.
    *
    * @property onSubmit
-   * @type string
-   * @default null
+   * @type function
    * @public
    */
-  onSubmit: null,
+  onSubmit: noop,
 
   /**
    * The action to be sent when the modal is closing.
@@ -248,21 +247,20 @@ export default Ember.Component.extend({
    * setting `open` to false.
    *
    * @property onHide
-   * @type string
-   * @default null
+   * @type function
    * @public
    */
-  onHide: null,
+  onHide: noop,
 
   /**
    * The action to be sent after the modal has been completely hidden (including the CSS transition).
    *
    * @property onHidden
-   * @type string
+   * @type function
    * @default null
    * @public
    */
-  onHidden: null,
+  onHidden: noop,
 
   /**
    * The action to be sent when the modal is opening.
@@ -271,28 +269,27 @@ export default Ember.Component.extend({
    * backdrop animation and the fade animation.
    *
    * @property onShow
-   * @type string
+   * @type function
    * @default null
    * @public
    */
-  onShow: null,
+  onShow: noop,
 
   /**
    * The action to be sent after the modal has been completely shown (including the CSS transition).
    *
    * @property onShown
-   * @type string
-   * @default null
+   * @type function
    * @public
    */
-  onShown: null,
+  onShown: noop,
 
   actions: {
     close() {
       if (this.get('autoClose')) {
         this.set('open', false);
       }
-      this.sendAction('onHide');
+      this.get('onHide')();
     },
     submit() {
       let form = this.get('modalElement').find('.modal-body form');
@@ -301,7 +298,7 @@ export default Ember.Component.extend({
         form.trigger('submit');
       } else {
         // if we have no form, we send a submit action
-        this.sendAction('onSubmit');
+        this.get('onSubmit')();
       }
     }
   },
@@ -348,18 +345,18 @@ export default Ember.Component.extend({
 
       this.handleUpdate();
       this.set('in', true);
-      this.sendAction('onShow');
+      this.get('onShow')();
 
       if (this.get('usesTransition')) {
         this.get('modalElement')
           .one('bsTransitionEnd', Ember.run.bind(this, function() {
             this.takeFocus();
-            this.sendAction('onShown');
+            this.get('onShown')();
           }))
           .emulateTransitionEnd(Modal.TRANSITION_DURATION);
       } else {
         this.takeFocus();
-        this.sendAction('onShown');
+        this.get('onShown')();
       }
     };
     this.handleBackdrop(callback);
@@ -400,7 +397,7 @@ export default Ember.Component.extend({
       Ember.$('body').removeClass('modal-open');
       this.resetAdjustments();
       this.resetScrollbar();
-      this.sendAction('onHidden');
+      this.get('onHidden')();
     });
   },
 

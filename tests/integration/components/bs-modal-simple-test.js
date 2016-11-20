@@ -228,7 +228,7 @@ test('onShow/onShown fire correctly with fade=true', function(assert) {
 test('onHide is called when clicking close button', function(assert) {
   let hideSpy = this.spy();
   this.on('testAction', hideSpy);
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction")}}Hello world!{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false onHide=(action "testAction")}}Hello world!{{/bs-modal-simple}}`);
   this.$('.modal .modal-header .close').click();
   assert.ok(hideSpy.calledOnce);
 });
