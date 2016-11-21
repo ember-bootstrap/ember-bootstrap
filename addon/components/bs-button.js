@@ -1,9 +1,8 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
-import ComponentChild from 'ember-bootstrap/mixins/component-child';
 
-const { computed, observer, typeOf } = Ember;
+const { computed, observer, K: noop } = Ember;
 
 /**
  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -19,13 +18,11 @@ const { computed, observer, typeOf } = Ember;
 
  ### Actions
 
- Set the action property of the component to send an action to your controller. The following parameters will be sent:
- * value: the button's value, see the `value` property
- * event: the browsers event object
- * callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling
+ Use the `onClick` property of the component to send an action to your controller. It will receive the button's value
+ (see the `value` property) as an argument.
 
  ```hbs
- {{#bs-button type="primary" icon="glyphicon glyphicon-download" action="download"}}
+ {{#bs-button type="primary" icon="glyphicon glyphicon-download" onClick=(action "download")}}
  Download
  {{/bs-button}}
  ```
@@ -52,9 +49,9 @@ const { computed, observer, typeOf } = Ember;
 
  ### Promise support for automatic state change
 
- When returning a Promise for any asynchronous operation from the click closure action the button will
- manage its `textState` property automatically, changing its value according to the state of the promise:
- "default" > "pending" > "resolved"/"rejected"
+ When returning a Promise for any asynchronous operation from the `onClick` closure action the button will
+ manage an internal state ("default" > "pending" > "resolved"/"rejected") automatically, changing its label according to the state of the promise:
+
 
  ```hbs
  {{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" action=(action "download")}}
@@ -62,9 +59,9 @@ const { computed, observer, typeOf } = Ember;
 
  ```js
  // controller.js
-export default Ember.Controller.extend({
+ export default Ember.Controller.extend({
    actions: {
-     download(actionParam, evt) {
+     download(value) {
        return new Ember.RSVP.Promise(...);
      }
    }
@@ -78,7 +75,7 @@ export default Ember.Controller.extend({
  @uses Mixins.SizeClass
  @public
  */
-export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
+export default Ember.Component.extend(TypeClass, SizeClass, {
   tagName: 'button',
   classNames: ['btn'],
   classNameBindings: ['active', 'block:btn-block'],
@@ -142,16 +139,6 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
    * @public
    */
   block: false,
-
-  /**
-   * If toggle property is true, clicking the button will toggle the active state
-   *
-   * @property toggle
-   * @type boolean
-   * @default false
-   * @public
-   */
-  toggle: false,
 
   /**
    * If button is active and this is set, the icon property will match this property
@@ -229,6 +216,16 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
   title: null,
 
   /**
+   * When clicking the button this action is called with the value of the button (that is the value of the "value" property).
+   * Return a promise object, and the buttons state will automatically set to "pending", "resolved" and/or "rejected".
+   *
+   * @event onClick
+   * @param {*} value
+   * @public
+   */
+  onClick: noop,
+
+  /**
    * This will reset the state property to 'default', and with that the button's label to defaultText
    *
    * @method resetState
@@ -251,50 +248,23 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
   }),
 
   /**
-   * Click handler. This will send the default "action" action, with the following parameters:
-   * * value of the button (that is the value of the "value" property)
-   * * original event object of the click event
-   * * callback: call that with a promise object, and the buttons state will automatically set to "pending", "resolved" and/or "rejected"
-   *
-   * When using closure actions just return the promise instead of calling the above mentioned callback.
-   *
    * @method click
-   * @protected
-   * @param evt
+   * @private
    */
-  click(evt) {
-    if (this.get('toggle')) {
-      this.toggleProperty('active');
-    }
-    let that = this;
-
-    function handleButtonPromise(promise) {
-      if (promise) {
-        that.set('textState', 'pending');
-        promise.then(
-          function() {
-            if (!that.get('isDestroyed')) {
-              that.set('textState', 'resolved');
-            }
-          },
-          function() {
-            if (!that.get('isDestroyed')) {
-              that.set('textState', 'rejected');
-            }
+  click() {
+    let promise = this.get('onClick')(this.get('value'));
+    if (promise && typeof promise.then === 'function') {
+      this.set('textState', 'pending');
+      promise.then(() => {
+          if (!this.get('isDestroyed')) {
+            this.set('textState', 'resolved');
           }
-        );
-      }
-    }
-
-    let action = this.get('action');
-    if (typeOf(action) === 'function') {
-      let promise = action(this.get('value'), evt, handleButtonPromise);
-      if (promise && promise.then) {
-        handleButtonPromise(promise);
-      }
-    } else {
-      // continue to support string actions for now...
-      this.sendAction('action', this.get('value'), evt, handleButtonPromise);
+        }, () => {
+          if (!this.get('isDestroyed')) {
+            this.set('textState', 'rejected');
+          }
+        }
+      );
     }
   },
 

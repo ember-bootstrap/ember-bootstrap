@@ -1,4 +1,5 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -39,16 +40,6 @@ test('buttonType property allows changing button type', function(assert) {
   assert.equal(this.$('button').prop('type'), 'submit');
 });
 
-test('toggle button toggles active state when clicked', function(assert) {
-  this.render(hbs`{{bs-button toggle=true}}`);
-
-  assert.equal(this.$('button').hasClass('active'), false, 'button is inactive');
-  this.$('button').click();
-  assert.equal(this.$('button').hasClass('active'), true, 'button is active');
-  this.$('button').click();
-  assert.equal(this.$('button').hasClass('active'), false, 'button is inactive');
-});
-
 test('button with icon property shows icon', function(assert) {
   this.render(hbs`{{bs-button icon="fa fa-check"}}`);
 
@@ -57,29 +48,30 @@ test('button with icon property shows icon', function(assert) {
 });
 
 test('button with iconActive and iconInactive properties shows icon depending on active state', function(assert) {
-  this.render(hbs`{{bs-button toggle=true iconInactive="fa fa-plus" iconActive="fa fa-minus"}}`);
+  this.set('active', false);
+  this.render(hbs`{{bs-button active=active iconInactive="fa fa-plus" iconActive="fa fa-minus"}}`);
 
   assert.equal(this.$('button').find('i').hasClass('fa'), true);
   assert.equal(this.$('button').find('i').hasClass('fa-plus'), true);
 
-  this.$('button').click();
+  this.set('active', true);
 
   assert.equal(this.$('button').find('i').hasClass('fa'), true);
   assert.equal(this.$('button').find('i').hasClass('fa-minus'), true);
 
-  this.$('button').click();
+  this.set('active', false);
 
   assert.equal(this.$('button').find('i').hasClass('fa'), true);
   assert.equal(this.$('button').find('i').hasClass('fa-plus'), true);
 });
 
-test('clicking a button sends default action with "value" property as a parameter', function(assert) {
-  this.on('testAction', (value) => assert.equal(value, 'dummy', 'action parameter matches value property'));
+test('clicking a button sends onClick action with "value" property as a parameter', function(assert) {
+  let action = this.spy();
+  this.on('testAction', action);
+  this.render(hbs`{{bs-button onClick=(action "testAction") value="dummy"}}`);
 
-  this.render(hbs`{{bs-button action=(action "testAction") value="dummy"}}`);
-
-  assert.expect(1);
   this.$('button').click();
+  assert.ok(action.calledWith("dummy"), 'onClick action has been called with button value');
 });
 
 test('button text is changed according to button state', function(assert) {
@@ -107,32 +99,7 @@ test('setting reset to true resets button state', function(assert) {
   assert.equal(this.$('button').text(), 'text1');
 });
 
-test('clicking a button sends default action with callback, if promise is returned button state is changed according to promise state', function(assert) {
-  let promise;
-  let resolvePromise;
-
-  this.on('testAction', (actionParam, evt, cb) => {
-    promise = new Ember.RSVP.Promise(function(resolve) {
-      resolvePromise = resolve;
-    });
-    cb(promise);
-  });
-
-  this.render(hbs`{{bs-button action=(action "testAction") textState=textState defaultText="default" pendingText="pending" resolvedText="resolved" rejectedText="rejected"}}`);
-
-  assert.expect(4);
-  this.$('button').click();
-  assert.equal(this.get('textState'), 'pending');
-  assert.equal(this.$('button').text(), 'pending');
-
-  Ember.run(resolvePromise);
-
-  assert.equal(this.get('textState'), 'resolved');
-  assert.equal(this.$('button').text(), 'resolved');
-
-});
-
-test('clicking a button sends default action, if promise is returned from closure action button state is changed according to promise state', function(assert) {
+test('clicking a button sends onclick action, if promise is returned from closure action button state is changed according to promise state', function(assert) {
   let promise;
   let resolvePromise;
 
@@ -143,16 +110,14 @@ test('clicking a button sends default action, if promise is returned from closur
     return promise;
   });
 
-  this.render(hbs`{{bs-button action=(action "testAction") textState=textState defaultText="default" pendingText="pending" resolvedText="resolved" rejectedText="rejected"}}`);
+  this.render(hbs`{{bs-button onClick=(action "testAction") textState=textState defaultText="default" pendingText="pending" resolvedText="resolved" rejectedText="rejected"}}`);
 
-  assert.expect(4);
+  assert.expect(2);
   this.$('button').click();
-  assert.equal(this.get('textState'), 'pending');
   assert.equal(this.$('button').text(), 'pending');
 
   Ember.run(resolvePromise);
 
-  assert.equal(this.get('textState'), 'resolved');
   assert.equal(this.$('button').text(), 'resolved');
 
 });
