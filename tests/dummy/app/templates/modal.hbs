@@ -29,7 +29,7 @@
 
 <h2>Dynamic modal creation</h2>
 
-{{#bs-button id="openModal3" action=(action "addModal3")}}Open{{/bs-button}}
+{{#bs-button id="openModal3" onClick=(action "addModal3")}}Open{{/bs-button}}
 
 {{#if hasModal3}}
 {{#bs-modal-simple id="modal3" open=modal3 onHidden=(action "removeModal3") title="Dynamic Dialog"}}

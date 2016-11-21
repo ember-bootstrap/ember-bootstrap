@@ -71,7 +71,7 @@ test('clicking a button sends onClick action with "value" property as a paramete
   this.render(hbs`{{bs-button onClick=(action "testAction") value="dummy"}}`);
 
   this.$('button').click();
-  assert.ok(action.calledWith("dummy"), 'onClick action has been called with button value');
+  assert.ok(action.calledWith('dummy'), 'onClick action has been called with button value');
 });
 
 test('button text is changed according to button state', function(assert) {

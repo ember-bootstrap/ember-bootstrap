@@ -1,7 +1,7 @@
 import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
 
-moduleForAcceptance('Acceptance | bs nav');
+moduleForAcceptance('Acceptance | bs-nav');
 
 test('link-to still works after reopening', function(assert) {
   visit('/');
