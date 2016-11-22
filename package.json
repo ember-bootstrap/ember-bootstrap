@@ -22,7 +22,6 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
     "chai": "^3.5.0",
-    "conventional-changelog": "0.0.17",
     "ember-ajax": "^2.4.1",
     "ember-cli": "2.9.1",
     "ember-cli-app-version": "^2.0.0",
@@ -49,6 +48,7 @@
     "gh-pages": "^0.12.0",
     "glob": "^5.0.14",
     "gulp": "^3.9.0",
+    "gulp-conventional-changelog": "^1.1.0",
     "gulp-file": "^0.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-transform": "^1.0.8",
