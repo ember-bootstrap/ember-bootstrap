@@ -60,11 +60,11 @@ module.exports = {
       });
       styleTrees.push(lessTree);
     }
-    
+
     if (tree) {
       styleTrees.push(tree);
     }
-    
+
     return mergeTrees(styleTrees, { overwrite: true });
   }
 };

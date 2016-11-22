@@ -9,6 +9,19 @@ cache:
   directories:
     - node_modules
 
+env:
+  # we recommend testing LTS's and latest stable release (bonus points to beta/canary)
+  - EMBER_TRY_SCENARIO=ember-1.13
+  - EMBER_TRY_SCENARIO=ember-lts-2.4
+  - EMBER_TRY_SCENARIO=ember-release
+  - EMBER_TRY_SCENARIO=ember-beta
+  - EMBER_TRY_SCENARIO=ember-canary
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: EMBER_TRY_SCENARIO=ember-canary
+
 before_install:
   - npm config set spin false
   - npm install -g bower
@@ -21,7 +34,9 @@ install:
   - bower install
 
 script:
-  - npm test
+  # Usually, it's ok to finish the test scenario without reverting
+  #  to the addon's original dependency state, skipping "cleanup".
+  - ember try:one $EMBER_TRY_SCENARIO test --skip-cleanup
 
 addons:
     code_climate:
