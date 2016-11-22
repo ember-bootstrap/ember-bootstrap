@@ -1,7 +1,6 @@
 <div class={{if fluid "container-fluid" "container"}}>
     {{yield
         (hash
-            collapsed=collapsed
             toggle=(component 'bs-navbar-toggle' onClick=(action 'toggleNavbar') collapsed=collapsed)
             content=(component 'bs-navbar-content' collapsed=collapsed)
             nav=(component 'bs-navbar-nav')

@@ -47,17 +47,17 @@ test('it handles fluid containers properly', function(assert) {
 test('it handles the toggling action properly', function(assert) {
   this.render(hbs`
     {{#bs-navbar as |navbar|}}
-      {{#navbar.toggle class="clickme"}}{{navbar.collapsed}}{{/navbar.toggle}}
+      {{#navbar.toggle class="clickme"}}Button{{/navbar.toggle}}
     {{/bs-navbar}}
   `);
 
-  assert.equal(this.$('button').text().trim(), 'true', 'ensure the default state of the property');
+  assert.notOk(this.$('button.navbar-toggle').hasClass('active'), 'ensure the default state of the button through the active class');
 
   let done = assert.async();
 
   this.$('button').click();
   setTimeout(() => {
-    assert.equal(this.$('button').text().trim(), 'false', 'ensure the toggled state of the property');
+    assert.ok(this.$('button.navbar-toggle').hasClass('active'), 'ensure the toggled state of the button through the active class');
 
     done();
   }, 500);
