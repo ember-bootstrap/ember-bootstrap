@@ -7,26 +7,29 @@ import layout from '../templates/components/bs-navbar';
 
  ### Usage
 
- Used in combination with the following components:
+ Uses the following components by a contextual reference:
 
- - [Components.NavbarContent](Components.NavbarContent.html)
- - [Components.NavbarToggle](Components.NavbarToggle.html)
- - [Components.NavbarNav](Components.NavbarNav.html)
- - [Components.NavItem](Components.NavItem.html)
+ - [Components.NavbarHeader](Components.NavbarHeader.html
+ - [Components.NavbarContent](Components.NavbarContent.html
+ - [Components.NavbarToggle](Components.NavbarToggle.html
+ - [Components.NavbarBrand](Components.NavbarBrand.html
+ - [Components.NavbarNav](Components.NavbarNav.html
+
+ and uses [Components.NavItem](Components.NavItem.html) directly.
 
  ```hbs
- {{#bs-navbar}}
+ {{#bs-navbar as |navbar|}}
    <div class="navbar-header">
-     {{#bs-navbar-toggle}}
+     {{#navbar.toggle}}
        <span class="sr-only">Toggle navigation</span>
        <span class="icon-bar"></span>
        <span class="icon-bar"></span>
        <span class="icon-bar"></span>
-     {{/bs-navbar-toggle}}
+     {{/navbar.toggle}}
      <a class="navbar-brand" href="#">Brand</a>
    </div>
-   {{#bs-navbar-content}}
-     {{#bs-navbar-nav}}
+   {{#navbar.content}}
+     {{#navbar.nav}}
        {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
        {{#bs-nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/bs-nav-item}}
        {{#bs-nav-item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/bs-nav-item}}
@@ -37,8 +40,8 @@ import layout from '../templates/components/bs-navbar';
        {{#bs-nav-item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/bs-nav-item}}
        {{#bs-nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/bs-nav-item}}
        {{#bs-nav-item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/bs-nav-item}}
-     {{/bs-navbar-nav}}
-   {{/bs-navbar-content}}
+     {{/navbar.nav}}
+   {{/navbar.content}}
  {{/bs-navbar}}
  ```
 
