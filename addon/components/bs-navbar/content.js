@@ -1,4 +1,4 @@
-import layout from '../templates/components/bs-navbar-content';
+import layout from '../../templates/components/bs-navbar/content';
 import BsCollapseComponent from 'ember-bootstrap/components/bs-collapse';
 
 /**

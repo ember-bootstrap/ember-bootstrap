@@ -1,20 +1,20 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('bs-navbar-nav', 'Integration | Component | bs-navbar-nav', {
+moduleForComponent('bs-navbar/nav', 'Integration | Component | bs-navbar/nav', {
   integration: true
 });
 
 test('it renders', function(assert) {
-  this.render(hbs`{{bs-navbar-nav}}`);
+  this.render(hbs`{{bs-navbar/nav}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#bs-navbar-nav}}
+    {{#bs-navbar/nav}}
       template block text
-    {{/bs-navbar-nav}}
+    {{/bs-navbar/nav}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');
@@ -22,9 +22,9 @@ test('it renders', function(assert) {
 
 test('it has correct markup', function(assert) {
   this.render(hbs`
-    {{#bs-navbar-nav}}
+    {{#bs-navbar/nav}}
       Nav
-    {{/bs-navbar-nav}}
+    {{/bs-navbar/nav}}
   `);
 
   assert.equal(this.$().text().trim(), 'Nav');
@@ -33,7 +33,7 @@ test('it has correct markup', function(assert) {
 });
 
 test('it no longer supports the justified option', function(assert) {
-  this.render(hbs`{{bs-navbar-nav justified=true}}`);
+  this.render(hbs`{{bs-navbar/nav justified=true}}`);
 
   assert.equal(this.$('.navbar-justified').length, 0, 'the justified class was not applied');
 });

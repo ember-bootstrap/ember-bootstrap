@@ -1,5 +1,5 @@
 import BsButtonComponent from 'ember-bootstrap/components/bs-button';
-import layout from '../templates/components/bs-navbar-toggle';
+import layout from '../../templates/components/bs-navbar/toggle';
 
 /**
  * Component to implement the responsive menu toggle behavior in a [Components.Navbar](Components.Navbar.html)
