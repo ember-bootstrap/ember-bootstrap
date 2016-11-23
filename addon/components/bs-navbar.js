@@ -9,11 +9,11 @@ import layout from '../templates/components/bs-navbar';
 
  Uses the following components by a contextual reference:
 
- - [Components.NavbarHeader](Components.NavbarHeader.html
- - [Components.NavbarContent](Components.NavbarContent.html
- - [Components.NavbarToggle](Components.NavbarToggle.html
- - [Components.NavbarBrand](Components.NavbarBrand.html
- - [Components.NavbarNav](Components.NavbarNav.html
+ - [Components.NavbarHeader](Components.NavbarHeader.html)
+ - [Components.NavbarContent](Components.NavbarContent.html)
+ - [Components.NavbarToggle](Components.NavbarToggle.html)
+ - [Components.NavbarBrand](Components.NavbarBrand.html)
+ - [Components.NavbarNav](Components.NavbarNav.html)
  - [Components.NavItem](Components.NavItem.html)
 
  ```hbs
