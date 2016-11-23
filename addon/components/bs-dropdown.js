@@ -89,6 +89,16 @@ export default Ember.Component.extend(ComponentParent, {
   open: false,
 
   /**
+   * This property indicates whether to open the dropdown on hover or not.
+   *
+   * @property openOnHover
+   * @default false
+   * @type boolean
+   * @public
+   */
+  openOnHover: false,
+
+  /**
    * By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.
    *
    * @property closeOnMenuClick
@@ -149,6 +159,18 @@ export default Ember.Component.extend(ComponentParent, {
     }
     return 'toggle';
   }),
+
+  mouseEnter() {
+  if (this.get('openOnHover')) {
+    this.set('open', true);
+    }
+  },
+
+  mouseLeave() {
+    if (this.get('openOnHover')) {
+      this.set('open', false);
+    }
+  },
 
   actions: {
     toggleDropdown() {
