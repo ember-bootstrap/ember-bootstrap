@@ -51,13 +51,13 @@ test('it handles the toggling action properly', function(assert) {
     {{/bs-navbar}}
   `);
 
-  assert.notOk(this.$('button.navbar-toggle').hasClass('active'), 'ensure the default state of the button through the active class');
+  assert.ok(this.$('button.navbar-toggle').hasClass('collapsed'), 'ensure the default state of the button through the active class');
 
   let done = assert.async();
 
   this.$('button').click();
   setTimeout(() => {
-    assert.ok(this.$('button.navbar-toggle').hasClass('active'), 'ensure the toggled state of the button through the active class');
+    assert.notOk(this.$('button.navbar-toggle').hasClass('collapsed'), 'ensure the toggled state of the button through the active class');
 
     done();
   }, 500);

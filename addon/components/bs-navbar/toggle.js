@@ -13,7 +13,7 @@ import layout from '../../templates/components/bs-navbar/toggle';
 export default BsButtonComponent.extend({
   layout,
 
-  classNames: ['navbar-toggle', 'collapsed'],
-  classNameBindings: ['collapsed::active'],
+  classNames: ['navbar-toggle'],
+  classNameBindings: ['collapsed'],
   collapsed: true
 });
