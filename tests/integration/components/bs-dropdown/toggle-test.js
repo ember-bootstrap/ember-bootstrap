@@ -1,12 +1,13 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('bs-dropdown-toggle', 'Integration | Component | bs-dropdown-toggle', {
+moduleForComponent('bs-dropdown/toggle', 'Integration | Component | bs-dropdown/toggle', {
   integration: true
 });
 
 test('toggle has correct default markup', function(assert) {
-  this.render(hbs`{{#bs-dropdown-toggle}}Test{{/bs-dropdown-toggle}}`);
+  this.render(hbs`{{#bs-dropdown/toggle}}Test{{/bs-dropdown/toggle}}`);
 
   assert.equal(this.$(':first-child').prop('tagName'), 'A', 'toggle is an anchor tag by default');
   assert.equal(this.$(':first-child').attr('href'), '#', 'has href attribute');
@@ -15,21 +16,17 @@ test('toggle has correct default markup', function(assert) {
 });
 
 test('toggle as button does not have href', function(assert) {
-  this.render(hbs`{{#bs-dropdown-toggle tagName="button"}}Test{{/bs-dropdown-toggle}}`);
+  this.render(hbs`{{#bs-dropdown/toggle tagName="button"}}Test{{/bs-dropdown/toggle}}`);
 
   assert.equal(this.$(':first-child').prop('tagName'), 'BUTTON', 'toggle is a button');
   assert.equal(this.$(':first-child').is('[href]'), false, 'does not have href attribute');
 });
 
-test('clicking dropdown button sends toggleDropdown action', function(assert) {
-  let actionHandler = {
-    toggleDropdown() {
-      assert.ok(true, 'toggleDropdown action has been called');
-    }
-  };
-  this.render(hbs`{{#bs-dropdown-toggle targetObject=actionHandler}}Test{{/bs-dropdown-toggle}}`);
-  this.set('actionHandler', actionHandler);
-
+test('clicking toggle sends onClick action', function(assert) {
+  let action = this.spy();
+  this.on('click', action);
+  this.render(hbs`{{#bs-dropdown/toggle onClick=(action "click")}}Test{{/bs-dropdown/toggle}}`);
   this.$('a').click();
+  assert.ok(action.calledOnce, 'onClick action has been called.');
 });
 

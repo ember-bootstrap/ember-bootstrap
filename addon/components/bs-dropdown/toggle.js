@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import DropdownToggle from 'ember-bootstrap/mixins/dropdown-toggle';
 
-const { computed } = Ember;
+const { computed, K: noop } = Ember;
 
 /**
  Anchor element that triggers the parent dropdown to open.
@@ -35,7 +35,7 @@ export default Ember.Component.extend(DropdownToggle, {
    * @property href
    * @type string
    * @readonly
-   * @protected
+   * @private
    */
   href: computed('tagName', function() {
     if (this.get('tagName').toUpperCase() === 'A') {
@@ -43,9 +43,18 @@ export default Ember.Component.extend(DropdownToggle, {
     }
   }),
 
+  /**
+   * When clicking the toggle this action is called.
+   *
+   * @event onClick
+   * @param {*} value
+   * @public
+   */
+  onClick: noop,
+
   click(e) {
     e.preventDefault();
-    this.sendAction();
+    this.get('onClick')();
   }
 
 });
