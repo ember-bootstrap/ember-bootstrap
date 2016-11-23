@@ -7,38 +7,40 @@ import layout from '../templates/components/bs-navbar';
 
  ### Usage
 
- Used in combination with the following components:
+ Uses the following components by a contextual reference:
 
+ - [Components.NavbarHeader](Components.NavbarHeader.html)
  - [Components.NavbarContent](Components.NavbarContent.html)
  - [Components.NavbarToggle](Components.NavbarToggle.html)
+ - [Components.NavbarBrand](Components.NavbarBrand.html)
  - [Components.NavbarNav](Components.NavbarNav.html)
  - [Components.NavItem](Components.NavItem.html)
 
  ```hbs
- {{#bs-navbar}}
+ {{#bs-navbar as |navbar|}}
    <div class="navbar-header">
-     {{#bs-navbar-toggle}}
+     {{#navbar.toggle}}
        <span class="sr-only">Toggle navigation</span>
        <span class="icon-bar"></span>
        <span class="icon-bar"></span>
        <span class="icon-bar"></span>
-     {{/bs-navbar-toggle}}
+     {{/navbar.toggle}}
      <a class="navbar-brand" href="#">Brand</a>
    </div>
-   {{#bs-navbar-content}}
-     {{#bs-navbar-nav}}
-       {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
-       {{#bs-nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/bs-nav-item}}
-       {{#bs-nav-item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/bs-nav-item}}
-       {{#bs-nav-item}}{{#link-to "forms"}}Forms{{/link-to}}{{/bs-nav-item}}
-       {{#bs-nav-item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/bs-nav-item}}
-       {{#bs-nav-item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/bs-nav-item}}
-       {{#bs-nav-item}}{{#link-to "modal"}}Modals{{/link-to}}{{/bs-nav-item}}
-       {{#bs-nav-item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/bs-nav-item}}
-       {{#bs-nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/bs-nav-item}}
-       {{#bs-nav-item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/bs-nav-item}}
-     {{/bs-navbar-nav}}
-   {{/bs-navbar-content}}
+   {{#navbar.content}}
+     {{#navbar.nav}}
+       {{#navbar.nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/navbar.nav-item}}
+       {{#navbar.nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/navbar.nav-item}}
+       {{#navbar.nav-item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/navbar.nav-item}}
+       {{#navbar.nav-item}}{{#link-to "forms"}}Forms{{/link-to}}{{/navbar.nav-item}}
+       {{#navbar.nav-item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/navbar.nav-item}}
+       {{#navbar.nav-item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/navbar.nav-item}}
+       {{#navbar.nav-item}}{{#link-to "modal"}}Modals{{/link-to}}{{/navbar.nav-item}}
+       {{#navbar.nav-item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/navbar.nav-item}}
+       {{#navbar.nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/navbar.nav-item}}
+       {{#navbar.nav-item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/navbar.nav-item}}
+     {{/navbar.nav}}
+   {{/navbar.content}}
  {{/bs-navbar}}
  ```
 

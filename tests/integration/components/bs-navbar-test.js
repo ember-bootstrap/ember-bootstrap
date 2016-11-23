@@ -46,22 +46,40 @@ test('it handles fluid containers properly', function(assert) {
 
 test('it handles the toggling action properly', function(assert) {
   this.render(hbs`
-    {{#bs-navbar}}
-      {{bs-navbar-toggle}}
-      {{#bs-navbar-content}}Content{{/bs-navbar-content}}
+    {{#bs-navbar as |navbar|}}
+      {{#navbar.toggle class="clickme"}}Button{{/navbar.toggle}}
     {{/bs-navbar}}
   `);
 
-  assert.notOk(this.$('.navbar-collapse').hasClass('in'), 'ensure the default state of the content');
+  assert.ok(this.$('button.navbar-toggle').hasClass('collapsed'), 'ensure the default state of the button through the active class');
 
   let done = assert.async();
 
   this.$('button').click();
   setTimeout(() => {
-    assert.ok(this.$('.navbar-collapse').hasClass('in'), 'ensure the toggled state of the content');
+    assert.notOk(this.$('button.navbar-toggle').hasClass('collapsed'), 'ensure the toggled state of the button through the active class');
 
     done();
   }, 500);
+});
+
+test('it exposes all the requisite contextual components', function(assert) {
+  this.render(hbs`
+    {{#bs-navbar as | navbar | }}
+      <div class="navbar-header">
+        {{navbar.toggle}}
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
+      {{#navbar.content}}
+        {{navbar.nav}}
+      {{/navbar.content}}
+    {{/bs-navbar}}
+  `);
+
+  assert.equal(this.$('nav.navbar-default').length, 1, 'it has the navbar');
+  assert.equal(this.$('nav.navbar-default .navbar-header > button.navbar-toggle').length, 1, 'it has the navbar toggle');
+  assert.equal(this.$('nav.navbar-default .navbar-collapse').length, 1, 'it has the navbar content');
+  assert.equal(this.$('nav.navbar-default .navbar-collapse > .navbar-nav').length, 1, 'it has the navbar nav');
 });
 
 test('it nas no positional classes when position is not specified', function(assert) {
