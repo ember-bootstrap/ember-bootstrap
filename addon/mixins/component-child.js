@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import ComponentParentMixin from 'ember-bootstrap/mixins/component-parent';
 
+const { computed } = Ember;
+
 /**
  * Mixin for components that act as a child component in a parent-child relationship of components
  *
@@ -9,6 +11,16 @@ import ComponentParentMixin from 'ember-bootstrap/mixins/component-parent';
  * @private
  */
 export default Ember.Mixin.create({
+
+  /**
+   * The parent component
+   *
+   * @property parent
+   * @private
+   */
+  parent: computed(function() {
+    return this.nearestOfType(ComponentParentMixin);
+  }),
 
   /**
    * flag to check if component has already been rendered, for the `_willRender` event handler
@@ -22,19 +34,19 @@ export default Ember.Mixin.create({
    * Register ourself as a child at the parent component
    * We use the `willRender` event here to also support the fastboot environment, where there is no `didInsertElement`
    *
-   * @method _willRender
+   * @method willRender
    * @private
    */
-  _willRender: Ember.on('willRender', function() {
+  willRender() {
+    this._super(...arguments);
     if (!this._didInsert) {
       this._didInsert = true;
-      let parent = this.nearestOfType(ComponentParentMixin);
+      let parent = this.get('parent');
       if (parent) {
         parent.registerChild(this);
-        this.set('_parent', parent);
       }
     }
-  }),
+  },
 
   /**
    * stores the parent in didInsertElement hook as a work-a-round for
@@ -48,13 +60,14 @@ export default Ember.Mixin.create({
   /**
    * Unregister form the parent component
    *
-   * @method _willDestroyElement
+   * @method willDestroyElement
    * @private
    */
-  _willDestroyElement: Ember.on('willDestroyElement', function() {
-    let parent = this.nearestOfType(ComponentParentMixin) || this.get('_parent');
+  willDestroyElement() {
+    this._super(...arguments);
+    let parent = this.get('parent');
     if (parent) {
       parent.removeChild(this);
     }
-  })
+  }
 });

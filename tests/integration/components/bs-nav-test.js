@@ -29,3 +29,13 @@ test('it supports bootstrap options', function(assert) {
   assert.ok(this.$('ul').hasClass('nav-stacked'), 'has stacked class');
 });
 
+test('it exposes the item as a contextual component', function(assert) {
+  this.render(hbs`
+    {{#bs-nav as |nav|}}
+      {{nav.item}}
+    {{/bs-nav}}
+  `);
+
+  assert.equal(this.$('.nav').length, 1, 'it has the nav');
+  assert.equal(this.$('.nav li').length, 1, 'it has the nav item');
+});

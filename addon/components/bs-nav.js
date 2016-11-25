@@ -9,16 +9,16 @@ const { isPresent } = Ember;
 
  ### Usage
 
- Use in combination with the [Components.NavItem](Components.NavItem.html) component:
+ Use in combination with the yielded [Components.NavItem](Components.NavItem.html) component:
 
  ```hbs
- {{#bs-nav type="pills"}}
-   {{#bs-nav-item}}
+ {{#bs-nav type="pills" as |nav|}}
+   {{#nav.item}}
       {{#link-to "foo"}}Foo{{/link-to}}
-   {{/bs-nav-item}}
-   {{#bs-nav-item}}
+   {{/nav.item}}
+   {{#nav.item}}
      {{#link-to "bar"}}Bar{{/link-to}}
-   {{/bs-nav-item}}
+   {{/nav.item}}
  {{/bs-nav}}
  ```
 
@@ -39,14 +39,14 @@ const { isPresent } = Ember;
  Use the [Components.Dropdown](Components.Dropdown.html) component with a `tagName` of "li" to integrate a dropdown into your nav:
 
  ```hbs
- {{#bs-nav type="pills"}}
-   {{#bs-nav-item}}{{#link-to "index"}}Home{{/link-to}}{{/bs-nav-item}}
-   {{#bs-dropdown tagName="li"}}
-     {{#bs-dropdown-toggle}}Dropdown <span class="caret"></span>{{/bs-dropdown-toggle}}
-     {{#bs-dropdown-menu}}
+ {{#bs-nav type="pills" as |nav|}}
+   {{#nav.item}}{{#link-to "index"}}Home{{/link-to}}{{/nav.item}}
+   {{#bs-dropdown tagName="li" as |dd|}}
+     {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+     {{#dd.menu}}
        <li>{{#link-to "foo"}}Foo{{/link-to}}</li>
        <li>{{#link-to "bar"}}Bar{{/link-to}}</li>
-     {{/bs-dropdown-menu}}
+     {{/dd.menu}}
    {{/bs-dropdown}}
  {{/bs-nav}}
  ```

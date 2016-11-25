@@ -14,7 +14,6 @@ import layout from '../templates/components/bs-navbar';
  - [Components.NavbarToggle](Components.NavbarToggle.html)
  - [Components.NavbarBrand](Components.NavbarBrand.html)
  - [Components.NavbarNav](Components.NavbarNav.html)
- - [Components.NavItem](Components.NavItem.html)
 
  ```hbs
  {{#bs-navbar as |navbar|}}
@@ -28,17 +27,17 @@ import layout from '../templates/components/bs-navbar';
      <a class="navbar-brand" href="#">Brand</a>
    </div>
    {{#navbar.content}}
-     {{#navbar.nav}}
-       {{#navbar.nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/navbar.nav-item}}
-       {{#navbar.nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/navbar.nav-item}}
-       {{#navbar.nav-item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/navbar.nav-item}}
-       {{#navbar.nav-item}}{{#link-to "forms"}}Forms{{/link-to}}{{/navbar.nav-item}}
-       {{#navbar.nav-item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/navbar.nav-item}}
-       {{#navbar.nav-item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/navbar.nav-item}}
-       {{#navbar.nav-item}}{{#link-to "modal"}}Modals{{/link-to}}{{/navbar.nav-item}}
-       {{#navbar.nav-item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/navbar.nav-item}}
-       {{#navbar.nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/navbar.nav-item}}
-       {{#navbar.nav-item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/navbar.nav-item}}
+     {{#navbar.nav as |nav|}}
+       {{#nav.item}}{{#link-to "alert"}}Alert{{/link-to}}{{/nav.item}}
+       {{#nav.item}}{{#link-to "button"}}Buttons{{/link-to}}{{/nav.item}}
+       {{#nav.item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/nav.item}}
+       {{#nav.item}}{{#link-to "forms"}}Forms{{/link-to}}{{/nav.item}}
+       {{#nav.item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/nav.item}}
+       {{#nav.item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/nav.item}}
+       {{#nav.item}}{{#link-to "modal"}}Modals{{/link-to}}{{/nav.item}}
+       {{#nav.item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/nav.item}}
+       {{#nav.item}}{{#link-to "navs"}}Navs{{/link-to}}{{/nav.item}}
+       {{#nav.item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/nav.item}}
      {{/navbar.nav}}
    {{/navbar.content}}
  {{/bs-navbar}}

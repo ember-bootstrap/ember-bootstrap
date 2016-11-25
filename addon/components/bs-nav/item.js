@@ -1,15 +1,6 @@
-import
-Ember
-from
-'ember';
-import
-layout
-from
-'../templates/components/bs-nav-item';
-import
-ComponentParent
-from
-'ember-bootstrap/mixins/component-parent';
+import Ember from 'ember';
+import layout from '../../templates/components/bs-nav/item';
+import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 
 const { computed, LinkComponent } = Ember;
 

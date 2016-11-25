@@ -1,5 +1,4 @@
 import BsNavComponent from 'ember-bootstrap/components/bs-nav';
-import layout from '../../templates/components/bs-navbar/nav';
 
 /**
  * Component for the `.nav` element within a [Components.Navbar](Components.Navbar.html)
@@ -14,8 +13,6 @@ import layout from '../../templates/components/bs-navbar/nav';
  * @public
  */
 export default BsNavComponent.extend({
-  layout,
-
   classNames: ['navbar-nav'],
 
   didReceiveAttrs() {
