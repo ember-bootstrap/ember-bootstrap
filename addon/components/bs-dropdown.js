@@ -178,7 +178,7 @@ export default Ember.Component.extend({
   },
 
   willDestroyElement() {
-    this._super();
+    this._super(...arguments);
     $(document).off(this.clickEventName);
   },
 
@@ -197,7 +197,7 @@ export default Ember.Component.extend({
    * @protected
    */
   closeOnClickHandler(e) {
-    let $target = Ember.$(e.target);
+    let $target = $(e.target);
     if (!this.get('isDestroyed') &&
       $target.closest(this.$().find('.dropdown-toggle')).length === 0 &&
       ($target.closest(this.$().find('.dropdown-menu')).length === 0 || this.get('closeOnMenuClick'))) {
