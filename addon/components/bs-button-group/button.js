@@ -38,7 +38,7 @@ export default Button.extend({
       return value === groupValue;
     } else {
       if (isArray(groupValue)) {
-        return groupValue.includes(value);
+        return groupValue.indexOf(value) !== -1;
       }
     }
     return false;
