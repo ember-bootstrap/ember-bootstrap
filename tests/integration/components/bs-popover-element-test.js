@@ -34,3 +34,13 @@ test('it supports different placements', function(assert) {
     assert.ok(this.$(':first-child').hasClass(placement), `has ${placement} class`);
   });
 });
+
+test('it passes along class attribute', function(assert) {
+  this.render(hbs`
+    {{#bs-popover-element placement=placement title="dummy title" class="wide"}}
+      template block text
+    {{/bs-popover-element}}
+  `);
+
+  assert.equal(this.$('.popover.wide').length, 1);
+});
