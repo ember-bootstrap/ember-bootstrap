@@ -1,9 +1,8 @@
 import Ember from 'ember';
-import layout from '../templates/components/bs-tab-pane';
+import layout from '../../templates/components/bs-tab/pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
-import Tab from './bs-tab';
 
-const { computed, observer } = Ember;
+const { computed, observer, run: { scheduleOnce } } = Ember;
 
 /**
  The tab pane of a tab component.
@@ -22,15 +21,22 @@ export default Ember.Component.extend(ComponentChild, {
   ariaRole: 'tabpanel',
 
   /**
+   * @property activeId
+   * @private
+   */
+  activeId: null,
+
+  /**
    * True if this pane is active (visible)
    *
    * @property isActive
    * @type boolean
-   * @protected
+   * @readonly
+   * @private
    */
-  isActive: computed('tab.activeId', 'elementId', function() {
-    return this.get('tab.activeId') === this.get('elementId');
-  }),
+  isActive: computed('activeId', 'elementId', function() {
+    return this.get('activeId') === this.get('elementId');
+  }).readOnly(),
 
   /**
    * Used to apply Bootstrap's "active" class
@@ -38,7 +44,7 @@ export default Ember.Component.extend(ComponentChild, {
    * @property active
    * @type boolean
    * @default false
-   * @protected
+   * @private
    */
   active: false,
 
@@ -48,7 +54,7 @@ export default Ember.Component.extend(ComponentChild, {
    * @property in
    * @type boolean
    * @default false
-   * @protected
+   * @private
    */
   'in': false,
 
@@ -58,21 +64,10 @@ export default Ember.Component.extend(ComponentChild, {
    * @property usesTransition
    * @type boolean
    * @readonly
-   * @protected
+   * @private
    */
   usesTransition: computed('fade', function() {
     return Ember.$.support.transition && this.get('fade');
-  }),
-
-  /**
-   * The parent [Components.Tab](Components.Tab.html) instance.
-   *
-   * @property tab
-   * @type {Components.Tab}
-   * @protected
-   */
-  tab: computed(function() {
-    return this.nearestOfType(Tab);
   }),
 
   /**
@@ -104,20 +99,19 @@ export default Ember.Component.extend(ComponentChild, {
    *
    * @property fade
    * @type boolean
-   * @readonly
-   * @protected
+   * @private
    */
-  fade: computed.readOnly('tab.fade'),
+  fade: true,
 
   /**
    * The duration of the fade out animation
    *
    * @property fadeDuration
    * @type integer
-   * @readonly
-   * @protected
+   * @default 150
+   * @private
    */
-  fadeDuration: computed.readOnly('tab.fadeDuration'),
+  fadeDuration: 150,
 
   /**
    * Show the pane
@@ -173,7 +167,7 @@ export default Ember.Component.extend(ComponentChild, {
 
   init() {
     this._super(...arguments);
-    Ember.run.scheduleOnce('afterRender', this, function() {
+    scheduleOnce('afterRender', this, function() {
       // isActive comes from parent component, so only available after render...
       this.set('active', this.get('isActive'));
       this.set('in', this.get('isActive') && this.get('fade'));
