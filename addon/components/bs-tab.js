@@ -171,7 +171,10 @@ export default Ember.Component.extend(ComponentParent, {
   fadeDuration: 150,
 
   /**
-   * action is called when switching the active tab, with the new and previous pane id
+   * This action is called when switching the active tab, with the new and previous pane id
+   *
+   * You can return false to prevent changing the active tab automatically, and do that in your action by
+   * setting `activeId`.
    *
    * @event onChange
    * @public
@@ -226,8 +229,10 @@ export default Ember.Component.extend(ComponentParent, {
   actions: {
     select(id) {
       let previous = this.get('activeId');
-      this.set('activeId', id);
-      this.get('onChange')(id, previous);
+      if (this.get('onChange')(id, previous) !== false) {
+        // change active tab when `onChange` does not return false
+        this.set('activeId', id);
+      }
     }
   }
 });

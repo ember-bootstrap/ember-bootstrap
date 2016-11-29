@@ -96,24 +96,6 @@ test('first tab is active by default', function(assert) {
   assertActiveTab.call(this, assert, 1, false);
 });
 
-test('clicking tab activates it', function(assert) {
-  this.render(hbs`
-    {{#bs-tab fade=false as |tab|}}
-      {{#tab.pane title="Tab 1"}}
-        tabcontent 1
-      {{/tab.pane}}
-      {{#tab.pane title="Tab 2"}}
-        tabcontent 2
-      {{/tab.pane}}
-    {{/bs-tab}}
-  `);
-
-  this.$('ul.nav.nav-tabs li:eq(1) a').click();
-
-  assertActiveTab.call(this, assert, 0, false);
-  assertActiveTab.call(this, assert, 1, true);
-});
-
 test('activeId activates tabs', function(assert) {
   this.set('paneId', 'pane1');
   this.render(hbs`
@@ -196,12 +178,12 @@ test('type sets tab navigation type', function(assert) {
   assert.equal(this.$('ul.nav.nav-pills > li').length, 2, 'has tabs navigation items');
 });
 
-test('calls onChange after changing active tab', function(assert) {
+test('calls onChange when changing active tab', function(assert) {
   let action = this.spy();
   this.on('change', action);
 
   this.render(hbs`
-    {{#bs-tab onChange=(action "change") as |tab|}}
+    {{#bs-tab fade=false onChange=(action "change") as |tab|}}
       {{#tab.pane elementId="pane1" title="Tab 1"}}
         tabcontent 1
       {{/tab.pane}}
@@ -213,4 +195,30 @@ test('calls onChange after changing active tab', function(assert) {
 
   this.$('ul.nav.nav-tabs li:eq(1) a').click();
   assert.ok(action.calledWith('pane2', 'pane1'));
+
+  assertActiveTab.call(this, assert, 0, false);
+  assertActiveTab.call(this, assert, 1, true);
+});
+
+test('when onChange returns false active tab is not changed', function(assert) {
+  let action = this.stub();
+  action.returns(false);
+  this.on('change', action);
+
+  this.render(hbs`
+    {{#bs-tab fade=false onChange=(action "change") as |tab|}}
+      {{#tab.pane elementId="pane1" title="Tab 1"}}
+        tabcontent 1
+      {{/tab.pane}}
+      {{#tab.pane elementId="pane2" title="Tab 2"}}
+        tabcontent 2
+      {{/tab.pane}}
+    {{/bs-tab}}
+  `);
+
+  this.$('ul.nav.nav-tabs li:eq(1) a').click();
+  assert.ok(action.calledWith('pane2', 'pane1'));
+
+  assertActiveTab.call(this, assert, 0, true);
+  assertActiveTab.call(this, assert, 1, false);
 });
