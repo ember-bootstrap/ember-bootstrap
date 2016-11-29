@@ -36,7 +36,6 @@ test('it yields expected values', function(assert) {
   assert.equal(this.$('#activeId').text().trim(), 'pane2', 'yields activeId');
 });
 
-
 test('it yields expected values [customTabs=true]', function(assert) {
   this.render(hbs`
     {{#bs-tab fade=false customTabs=true as |tab|}}
