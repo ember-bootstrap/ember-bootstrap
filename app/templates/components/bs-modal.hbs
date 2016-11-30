@@ -1,6 +1,6 @@
 {{#ember-wormhole to="ember-bootstrap-modal-container" renderInPlace=_renderInPlace}}
 
-{{#bs-modal-dialog close=(action "close") fade=fade in=in id=modalId title=title closeButton=closeButton keyboard=keyboard header=header body=body footer=footer size=size backdropClose=backdropClose}}
+{{#bs-modal-dialog close=(action "close") class=class fade=fade in=in id=modalId title=title closeButton=closeButton keyboard=keyboard header=header body=body footer=footer size=size backdropClose=backdropClose}}
   {{yield this}}
 {{/bs-modal-dialog}}
 

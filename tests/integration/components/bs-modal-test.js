@@ -561,3 +561,13 @@ test('Resets scroll bar when component is removed from view', function(assert) {
     done();
   }, transitionTimeout);
 });
+
+test('it passes along class attribute', function(assert) {
+  this.render(hbs`
+    {{#bs-modal fade=false class="custom"}}
+      template block text
+    {{/bs-modal}}
+  `);
+
+  assert.equal(this.$('.modal.custom').length, 1);
+});
