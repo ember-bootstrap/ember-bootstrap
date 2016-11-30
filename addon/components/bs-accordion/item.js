@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
-import Accordion from 'ember-bootstrap/components/bs-accordion';
+import layout from '../../templates/components/bs-accordion/item';
 
-const { computed } = Ember;
+const { computed, K: noop } = Ember;
 
 /**
  A collapsible/expandable item within an accordion
@@ -19,6 +19,7 @@ const { computed } = Ember;
  @public
  */
 export default Ember.Component.extend(ComponentChild, TypeClass, {
+  layout,
   classNames: ['panel'],
 
   /**
@@ -46,11 +47,28 @@ export default Ember.Component.extend(ComponentChild, TypeClass, {
    */
   value: computed.oneWay('elementId'),
 
-  selected: computed.alias('accordion.selected'),
+  /**
+   * @property selected
+   * @private
+   */
+  selected: null,
 
+  /**
+   * @property collapsed
+   * @type boolean
+   * @readonly
+   * @private
+   */
   collapsed: computed('value', 'selected', function() {
     return this.get('value') !== this.get('selected');
-  }),
+  }).readOnly(),
+
+  /**
+   * @property active
+   * @type boolean
+   * @readonly
+   * @private
+   */
   active: computed.not('collapsed'),
 
   /**
@@ -59,25 +77,12 @@ export default Ember.Component.extend(ComponentChild, TypeClass, {
    * @property accordion
    * @private
    */
-  accordion: computed(function() {
-    return this.nearestOfType(Accordion);
-  }),
+  accordion: null,
 
-  target: computed.reads('accordion'),
-
-  actions: {
-    toggleActive() {
-      let value = this.get('value');
-      let previous = this.get('selected');
-      let active = this.get('active');
-      if (!active) {
-        this.set('selected', value);
-        this.send('selected', value, previous);
-      } else {
-        this.set('selected', null);
-        this.send('selected', null, previous);
-      }
-    }
-  }
+  /**
+   * @event onClick
+   * @public
+   */
+  onClick: noop
 
 });

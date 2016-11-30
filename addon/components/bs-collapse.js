@@ -121,12 +121,15 @@ export default Ember.Component.extend({
    */
   show() {
     let complete = function() {
-        this.set('transitioning', false);
-        if (this.get('resetSizeWhenNotCollapsing')) {
-          this.set('collapseSize', null);
-        }
-        this.sendAction('didShow');
-      };
+      if (this.get('isDestroyed')) {
+        return;
+      }
+      this.set('transitioning', false);
+      if (this.get('resetSizeWhenNotCollapsing')) {
+        this.set('collapseSize', null);
+      }
+      this.sendAction('didShow');
+    };
 
     this.sendAction('willShow');
 
@@ -182,12 +185,15 @@ export default Ember.Component.extend({
   hide() {
 
     let complete = function() {
-        this.set('transitioning', false);
-        if (this.get('resetSizeWhenNotCollapsing')) {
-          this.set('collapseSize', null);
-        }
-        this.sendAction('didHide');
-      };
+      if (this.get('isDestroyed')) {
+        return;
+      }
+      this.set('transitioning', false);
+      if (this.get('resetSizeWhenNotCollapsing')) {
+        this.set('collapseSize', null);
+      }
+      this.sendAction('didHide');
+    };
 
     this.sendAction('willHide');
 

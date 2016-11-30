@@ -1,22 +1,29 @@
 import {
-  moduleForComponent,
-  test
+  moduleForComponent
 } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import test from 'ember-sinon-qunit/test-support/test';
 
 moduleForComponent('bs-accordion', 'Integration | Component | bs-accordion', {
   integration: true
 });
 
 test('accordion has correct default markup', function(assert) {
-  this.render(hbs`{{#bs-accordion}}{{#bs-accordion-item value=1 title="TITLE1"}}CONTENT1{{/bs-accordion-item}}{{#bs-accordion-item value=2 title="TITLE2"}}CONTENT2{{/bs-accordion-item}}{{/bs-accordion}}`);
+  this.render(hbs`{{#bs-accordion as |acc|}}
+    {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
+    {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
+  {{/bs-accordion}}`);
   assert.equal(this.$(':first-child').hasClass('panel-group'), true, 'accordion has panel-group class');
+  assert.equal(this.$('.panel').length, 2, 'accordion yields item');
 });
 
 test('accordion with preselected item has this item expanded', function(assert) {
   this.set('selected', 1);
-  this.render(hbs`{{#bs-accordion selected=selected}}{{#bs-accordion-item id="firstItem" value=1 title="TITLE1"}}CONTENT1{{/bs-accordion-item}}{{#bs-accordion-item id="secondItem" value=2 title="TITLE2"}}CONTENT2{{/bs-accordion-item}}{{/bs-accordion}}`);
-  let item = this.$('#firstItem');
+  this.render(hbs`{{#bs-accordion selected=selected as |acc|}}
+    {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
+    {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
+  {{/bs-accordion}}`);
+  let item = this.$('.panel:eq(0)');
 
   assert.equal(item.find('.panel-heading').hasClass('collapsed'), false, 'panel-heading has not collapsed class');
   assert.equal(item.find('.panel-collapse').hasClass('collapse'), true, 'panel-collapse has collapse class');
@@ -25,10 +32,13 @@ test('accordion with preselected item has this item expanded', function(assert) 
 
 test('changing selected item expands this item', function(assert) {
   this.set('selected', 1);
-  this.render(hbs`{{#bs-accordion selected=selected}}{{#bs-accordion-item id="firstItem" value=1 title="TITLE1"}}CONTENT1{{/bs-accordion-item}}{{#bs-accordion-item id="secondItem" value=2 title="TITLE2"}}CONTENT2{{/bs-accordion-item}}{{/bs-accordion}}`);
+  this.render(hbs`{{#bs-accordion selected=selected as |acc|}}
+    {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
+    {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
+  {{/bs-accordion}}`);
   this.set('selected', 2);
 
-  let item = this.$('#secondItem');
+  let item = this.$('.panel:eq(1)');
   let done = assert.async();
 
   // wait for transitions to complete
@@ -42,8 +52,11 @@ test('changing selected item expands this item', function(assert) {
 });
 
 test('clicking collapsed item expands it', function(assert) {
-  this.render(hbs`{{#bs-accordion}}{{#bs-accordion-item id="firstItem" value=1 title="TITLE1"}}CONTENT1{{/bs-accordion-item}}{{#bs-accordion-item id="secondItem" value=2 title="TITLE2"}}CONTENT2{{/bs-accordion-item}}{{/bs-accordion}}`);
-  let item = this.$('#firstItem');
+  this.render(hbs`{{#bs-accordion as |acc|}}
+    {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
+    {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
+  {{/bs-accordion}}`);
+  let item = this.$('.panel:eq(0)');
   let done = assert.async();
 
   item.find('.panel-heading').click();
@@ -59,8 +72,11 @@ test('clicking collapsed item expands it', function(assert) {
 });
 
 test('clicking expanded item collapses it', function(assert) {
-  this.render(hbs`{{#bs-accordion selected=1}}{{#bs-accordion-item id="firstItem" value=1 title="TITLE1"}}CONTENT1{{/bs-accordion-item}}{{#bs-accordion-item id="secondItem" value=2 title="TITLE2"}}CONTENT2{{/bs-accordion-item}}{{/bs-accordion}}`);
-  let item = this.$('#firstItem');
+  this.render(hbs`{{#bs-accordion selected=1 as |acc|}}
+    {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
+    {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
+  {{/bs-accordion}}`);
+  let item = this.$('.panel:eq(0)');
   let done = assert.async();
 
   assert.equal(item.find('.panel-heading').hasClass('collapsed'), false, 'panel-heading has not collapsed class');
@@ -68,6 +84,43 @@ test('clicking expanded item collapses it', function(assert) {
   assert.equal(item.find('.panel-collapse').hasClass('in'), true, 'panel-collapse has in class');
 
   item.find('.panel-heading').click();
+
+  // wait for transitions to complete
+  setTimeout(() => {
+    assert.equal(item.find('.panel-heading').hasClass('collapsed'), true, 'panel-heading has collapsed class');
+    assert.equal(item.find('.panel-collapse').hasClass('collapse'), true, 'panel-collapse has collapse class');
+    assert.equal(item.find('.panel-collapse').hasClass('in'), false, 'panel-collapse has not in class');
+
+    done();
+  }, 500);
+});
+
+test('calls onChange action when changing selection', function(assert) {
+  let action = this.spy();
+  this.on('change', action);
+  this.render(hbs`{{#bs-accordion onChange=(action "change") as |acc|}}
+    {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
+    {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
+  {{/bs-accordion}}`);
+
+  this.$('.panel:eq(0) .panel-heading').click();
+  assert.ok(action.calledWith(1), 'onClick action has been called.');
+});
+
+test('prevents changing selection when onChange returns false', function(assert) {
+  let action = this.stub();
+  action.returns(false);
+  this.on('change', action);
+  this.render(hbs`{{#bs-accordion onChange=(action "change") as |acc|}}
+    {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
+    {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
+  {{/bs-accordion}}`);
+
+  let item = this.$('.panel:eq(0)');
+  let done = assert.async();
+
+  item.find('.panel-heading').click();
+  assert.ok(action.calledWith(1), 'onClick action has been called.');
 
   // wait for transitions to complete
   setTimeout(() => {

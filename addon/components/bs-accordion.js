@@ -1,28 +1,28 @@
 import Ember from 'ember';
-import ComponentParent from 'ember-bootstrap/mixins/component-parent';
+import layout from '../templates/components/bs-accordion';
+
+const { K: noop } = Ember;
 
 /**
  Bootstrap-style accordion group, with collapsible/expandable items.
  See http://getbootstrap.com/components/#btn-groups
 
- Use as a block level component with any number of [Components.AccordionItem](Components.AccordionItem.html) components as children:
+ Use as a block level component with any number of yielded [Components.AccordionItem](Components.AccordionItem.html)
+ components as children:
 
  ```handlebars
-  {{#bs-accordion selected=selected}}
-      {{#bs-accordion-item value="1" title="First item"}}
+  {{#bs-accordion as |acc|}}
+      {{#acc.item value=1 title="First item"}}
         <p>Lorem ipsum...</p>
-      {{/bs-accordion-item}}
-      {{#bs-accordion-item value="2" title="Second item"}}
+      {{/acc.item}}
+      {{#acc.item value=2 title="Second item"}}
         <p>Lorem ipsum...</p>
-      {{/bs-accordion-item}}
-      {{#bs-accordion-item value="3" title="Third item"}}
+      {{/acc.item}}
+      {{#acc.item value=3 title="Third item"}}
         <p>Lorem ipsum...</p>
-      {{/bs-accordion-item}}
+      {{/acc.item}}
   {{/bs-accordion}}
-
-  <p>Selected accordion item: {{selected}}</p>
  ```
-
 
  @class Accordion
  @namespace Components
@@ -30,7 +30,8 @@ import ComponentParent from 'ember-bootstrap/mixins/component-parent';
  @uses Mixins.ComponentParent
  @public
  */
-export default Ember.Component.extend(ComponentParent, {
+export default Ember.Component.extend({
+  layout,
   classNames: ['panel-group'],
   ariaRole: 'tablist',
 
@@ -42,9 +43,17 @@ export default Ember.Component.extend(ComponentParent, {
    */
   selected: null,
 
+  onChange: noop,
+
   actions: {
-    selected(currentValue, previousValue) {
-      this.sendAction('action', currentValue, previousValue);
+    change(newValue) {
+      let oldValue = this.get('selected');
+      if (oldValue === newValue) {
+        newValue = null;
+      }
+      if (this.get('onChange')(newValue, oldValue) !== false) {
+        this.set('selected', newValue);
+      }
     }
   }
 
