@@ -1,13 +1,13 @@
 {{#if hasLabel}}
     <label class="control-label {{horizontalLabelGridClass}} {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
     <div class="{{horizontalInputGridClass}}">
-        {{bs-textarea id=formElementId name=name value=value placeholder=placeholder autofocus=autofocus cols=cols rows=rows disabled=disabled required=required}}
+        {{bs-textarea id=formElementId name=name value=value placeholder=placeholder autofocus=autofocus cols=cols rows=rows disabled=disabled readonly=readonly required=required}}
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
     </div>
 {{else}}
     <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
-        {{bs-textarea name=name value=value placeholder=placeholder autofocus=autofocus cols=cols rows=rows disabled=disabled required=required}}
+        {{bs-textarea name=name value=value placeholder=placeholder autofocus=autofocus cols=cols rows=rows disabled=disabled readonly=readonly required=required}}
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
     </div>

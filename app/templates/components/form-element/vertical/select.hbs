@@ -1,6 +1,6 @@
 {{#if hasLabel}}
     <label class="control-label {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
 {{/if}}
-{{bs-select id=formElementId name=name content=choices optionValuePath=choiceValueProperty optionLabelPath=choiceLabelProperty value=value disabled=disabled required=required}}
+{{bs-select id=formElementId name=name content=choices optionValuePath=choiceValueProperty optionLabelPath=choiceLabelProperty value=value disabled=disabled readonly=readonly required=required}}
 {{partial "components/form-element/feedback-icon"}}
 {{partial "components/form-element/errors"}}
