@@ -135,6 +135,14 @@ test('disabled property propagates', function(assert) {
   assert.equal(this.$('input').attr('disabled'), 'disabled', 'input html5 disabled is true');
 });
 
+test('readonly property propagates', function(assert) {
+  this.set('model', Ember.Object.create());
+
+  this.render(hbs`{{bs-form-element label="myLabel" property="foo" readonly=true}}`);
+
+  assert.equal(this.$('input').attr('readonly'), 'readonly', 'input html5 readonly is true');
+});
+
 test('if invisibleLabel is true sr-only class is added to label', function(assert) {
   let formLayouts = [
     'vertical',
