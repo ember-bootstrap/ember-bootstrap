@@ -1,36 +1,12 @@
 import Ember from 'ember';
+import layout from '../../templates/components/bs-progress/bar';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 
 const { computed } = Ember;
 
 /**
 
- Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.
-
- ### Usage
-
- Always wrap the progress bar in a [Components.Progress](Components.Progress.html) component. Use the `value`
- property to control the progress bar's width. To apply the different styling options supplied by Bootstrap, use the
- appropriate properties like `type`, `showLabel`, `striped` or `animate`.
-
- ```hbs
- {{#bs-progress}}
-   {{bs-progress-bar value=progressValue minValue=0 maxValue=10 showLabel=true type="danger"}}
- {{/bs-progress}}
- ```
-
- ### Stacked
-
- You can place multiple progress bar components in a single [Components.Progress](Components.Progress.html) to
- create a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.
-
- ```hbs
- {{#bs-progress}}
-   {{bs-progress-bar value=progressValue1 type="success"}}
-   {{bs-progress-bar value=progressValue2 type="warning"}}
-   {{bs-progress-bar value=progressValue3 type="danger"}}
- {{/bs-progress}}
- ```
+ Component for a single progress bar, see [Components.Progress](Components.Progress.html) for more examples.
 
  @class ProgressBar
  @namespace Components
@@ -39,6 +15,7 @@ const { computed } = Ember;
  @public
  */
 export default Ember.Component.extend(TypeClass, {
+  layout,
   classNames: ['progress-bar'],
   classNameBindings: ['progressBarStriped', 'active'],
 
@@ -132,12 +109,12 @@ export default Ember.Component.extend(TypeClass, {
    */
   roundDigits: 0,
 
-  progressBarStriped: computed.alias('striped'),
-  active: computed.alias('animate'),
+  progressBarStriped: computed.readOnly('striped'),
+  active: computed.readOnly('animate'),
 
-  ariaValuenow: computed.alias('value'),
-  ariaValuemin: computed.alias('minValue'),
-  ariaValuemax: computed.alias('maxValue'),
+  ariaValuenow: computed.readOnly('value'),
+  ariaValuemin: computed.readOnly('minValue'),
+  ariaValuemax: computed.readOnly('maxValue'),
 
   /**
    * The percentage of `value`
@@ -153,7 +130,7 @@ export default Ember.Component.extend(TypeClass, {
     let maxValue = parseFloat(this.get('maxValue'));
 
     return Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100;
-  }),
+  }).readOnly(),
 
   /**
    * The percentage of `value`, rounded to `roundDigits` digits
@@ -166,7 +143,7 @@ export default Ember.Component.extend(TypeClass, {
   percentRounded: computed('percent', 'roundDigits', function() {
     let roundFactor = Math.pow(10, this.get('roundDigits'));
     return Math.round(this.get('percent') * roundFactor) / roundFactor;
-  }),
+  }).readOnly(),
 
   /**
    * @property style

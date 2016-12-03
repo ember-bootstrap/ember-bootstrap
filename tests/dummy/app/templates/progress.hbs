@@ -13,14 +13,14 @@
 
 <h2>Single progress bar</h2>
 
-{{#bs-progress}}
-    {{bs-progress-bar value=value minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type=type.id striped=striped animate=animate}}
+{{#bs-progress as |p|}}
+    {{p.bar value=value minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type=type.id striped=striped animate=animate}}
 {{/bs-progress}}
 
 <h2>Stacked</h2>
 
-{{#bs-progress}}
-    {{bs-progress-bar value=value minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type=type.id striped=striped animate=animate}}
-    {{bs-progress-bar value=20 minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type="warning" striped=striped animate=animate}}
-    {{bs-progress-bar value=5 minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type="danger" striped=striped animate=animate}}
+{{#bs-progress as |p|}}
+    {{p.bar value=value minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type=type.id striped=striped animate=animate}}
+    {{p.bar value=20 minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type="warning" striped=striped animate=animate}}
+    {{p.bar value=5 minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type="danger" striped=striped animate=animate}}
 {{/bs-progress}}
