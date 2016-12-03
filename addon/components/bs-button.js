@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from '../templates/components/bs-button';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
 
@@ -76,6 +77,7 @@ const { computed, observer, K: noop } = Ember;
  @public
  */
 export default Ember.Component.extend(TypeClass, SizeClass, {
+  layout,
   tagName: 'button',
   classNames: ['btn'],
   classNameBindings: ['active', 'block:btn-block'],

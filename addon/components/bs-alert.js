@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from '../templates/components/bs-alert';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 
 const { computed, K: noop, run: { later } } = Ember;
@@ -22,6 +23,7 @@ const { computed, K: noop, run: { later } } = Ember;
  @public
  */
 export default Ember.Component.extend(TypeClass, {
+  layout,
   classNameBindings: ['alert', 'fade', 'in', 'alert-dismissible'],
 
   /**
