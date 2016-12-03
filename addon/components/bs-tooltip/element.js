@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/bs-tooltip-element';
+import layout from '../../templates/components/bs-tooltip/element';
 
 /**
  Internal component for tooltip's markup. Should not be used directly.

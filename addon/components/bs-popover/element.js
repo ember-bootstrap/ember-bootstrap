@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/bs-popover-element';
+import layout from '../../templates/components/bs-popover/element';
 
 const {
   computed

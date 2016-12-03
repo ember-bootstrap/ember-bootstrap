@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/bs-alert';
+import layout from '../templates/components/bs-form-group';
 import Config from 'ember-bootstrap/config';
 
 const { computed } = Ember;
