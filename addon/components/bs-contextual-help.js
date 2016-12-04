@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import getPosition from '../utils/get-position';
 import getCalculatedOffset from '../utils/get-calculated-offset';
 import getParent from '../utils/get-parent';
@@ -38,7 +39,7 @@ const InState = Ember.Object.extend({
  @extends Ember.Component
  @private
  */
-export default Component.extend({
+export default Component.extend(TransitionSupport, {
   tagName: '',
 
   /**
@@ -175,18 +176,6 @@ export default Component.extend({
    * @public
    */
   viewportPadding: 0,
-
-  /**
-   * Use CSS transitions when showing/hiding?
-   *
-   * @property usesTransition
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  usesTransition: computed('fade', function() {
-    return Ember.$.support.transition && this.get('fade');
-  }),
 
   /**
    * The id of the overlay element.

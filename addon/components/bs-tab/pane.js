@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import layout from '../../templates/components/bs-tab/pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
+import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 
 const { computed, observer, run: { scheduleOnce } } = Ember;
 
@@ -14,9 +15,9 @@ const { computed, observer, run: { scheduleOnce } } = Ember;
  @uses Mixins.ComponentChild
  @public
  */
-export default Ember.Component.extend(ComponentChild, {
+export default Ember.Component.extend(ComponentChild, TransitionSupport, {
   layout,
-  classNameBindings: ['active', 'fade', 'in'],
+  classNameBindings: ['active', 'usesTransition:fade', 'in'],
   classNames: ['tab-pane'],
   ariaRole: 'tabpanel',
 
@@ -57,18 +58,6 @@ export default Ember.Component.extend(ComponentChild, {
    * @private
    */
   'in': false,
-
-  /**
-   * Use CSS transitions when showing/hiding the pane?
-   *
-   * @property usesTransition
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  usesTransition: computed('fade', function() {
-    return Ember.$.support.transition && this.get('fade');
-  }),
 
   /**
    * The title for this tab pane. This is used by the `bs-tab` component to automatically generate

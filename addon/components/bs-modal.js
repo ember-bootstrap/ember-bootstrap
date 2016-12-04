@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/bs-modal';
+import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 
 const { computed, observer, K: noop } = Ember;
 
@@ -40,7 +41,7 @@ const { computed, observer, K: noop } = Ember;
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(TransitionSupport, {
   layout,
 
   /**
@@ -157,18 +158,6 @@ export default Ember.Component.extend({
   backdropElement: computed('backdropId', function() {
     return Ember.$(`#${this.get('backdropId')}`);
   }).volatile(),
-
-  /**
-   * Use CSS transitions when showing/hiding the modal?
-   *
-   * @property usesTransition
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  usesTransition: computed('fade', function() {
-    return Ember.$.support.transition && this.get('fade');
-  }),
 
   /**
    * Property for size styling, set to null (default), 'lg' or 'sm'

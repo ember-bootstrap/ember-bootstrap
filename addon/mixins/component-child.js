@@ -15,59 +15,64 @@ export default Ember.Mixin.create({
   /**
    * The parent component
    *
-   * @property parent
+   * @property _parent
    * @private
    */
-  parent: computed(function() {
+  _parent: computed(function() {
     return this.nearestOfType(ComponentParentMixin);
   }),
 
   /**
-   * flag to check if component has already been rendered, for the `_willRender` event handler
-   * @property _didInsert
+   * flag to check if component has already been registered
+   * @property _didRegister
    * @type boolean
    * @private
    */
-  _didInsert: false,
+  _didRegister: false,
 
   /**
    * Register ourself as a child at the parent component
    * We use the `willRender` event here to also support the fastboot environment, where there is no `didInsertElement`
    *
-   * @method willRender
+   * @method _registerWithParent
    * @private
    */
-  willRender() {
-    this._super(...arguments);
-    if (!this._didInsert) {
-      this._didInsert = true;
-      let parent = this.get('parent');
+  _registerWithParent() {
+    if (!this._didRegister) {
+      let parent = this.get('_parent');
       if (parent) {
         parent.registerChild(this);
+        this._didRegister = true;
       }
     }
   },
 
   /**
-   * stores the parent in didInsertElement hook as a work-a-round for
-   * https://github.com/emberjs/ember.js/issues/12080
+   * Unregister from the parent component
    *
-   * @property _parent
+   * @method _unregisterFromParent
    * @private
    */
-  _parent: null,
+  _unregisterFromParent() {
+    let parent = this.get('_parent');
+    if (this._didRegister && parent) {
+      parent.removeChild(this);
+      this._didRegister = false;
+    }
+  },
 
-  /**
-   * Unregister form the parent component
-   *
-   * @method willDestroyElement
-   * @private
-   */
+  didReceiveAttrs() {
+    this._super(...arguments);
+    this._registerWithParent();
+  },
+
+  willRender() {
+    this._super(...arguments);
+    this._registerWithParent();
+  },
+
   willDestroyElement() {
     this._super(...arguments);
-    let parent = this.get('parent');
-    if (parent) {
-      parent.removeChild(this);
-    }
+    this._registerWithParent();
   }
 });

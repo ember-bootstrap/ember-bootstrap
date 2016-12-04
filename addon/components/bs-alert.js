@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import layout from '../templates/components/bs-alert';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 
@@ -22,7 +23,7 @@ const { computed, K: noop, run: { later } } = Ember;
  @uses Mixins.TypeClass
  @public
  */
-export default Ember.Component.extend(TypeClass, {
+export default Ember.Component.extend(TypeClass, TransitionSupport, {
   layout,
   classNameBindings: ['alert', 'fade', 'in', 'alert-dismissible'],
 
@@ -162,7 +163,7 @@ export default Ember.Component.extend(TypeClass, {
    * @private
    */
   hide() {
-    if (this.get('fade')) {
+    if (this.get('usesTransition')) {
       later(this, function() {
         if (!this.get('isDestroyed')) {
           this.set('hidden', true);
