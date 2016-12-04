@@ -6,7 +6,6 @@ const { computed, defineProperty, isArray, observer, on, run, warn, K: noop } = 
 
 const nonTextFieldControlTypes = Ember.A([
   'checkbox',
-  'select',
   'textarea'
 ]);
 
