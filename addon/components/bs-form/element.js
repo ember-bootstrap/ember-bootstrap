@@ -205,6 +205,15 @@ export default FormGroup.extend({
   disabled: false,
 
   /**
+   * Control element's HTML5 readonly attribute
+   *
+   * @property readonly
+   * @type boolean
+   * @public
+   */
+  readonly: false,
+
+  /**
    * Control element's HTML5 required attribute
    *
    * @property required

@@ -1,3 +1,13 @@
+<a name"0.11.3"></a>
+### 0.11.3 (2016-11-30)
+
+
+#### Features
+
+* **Modal:** support custom class ([2b23316b](https://github.com/kaliber5/ember-bootstrap/commit/2b23316b))
+* **Tooltips:** support custom class. Thanks to rstudner ([7877c5df](https://github.com/kaliber5/ember-bootstrap/commit/7877c5df), closes [#161](https://github.com/kaliber5/ember-bootstrap/issues/161))
+
+
 <a name"0.11.2"></a>
 ### 0.11.2 (2016-11-08)
 
