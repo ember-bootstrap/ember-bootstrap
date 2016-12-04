@@ -1,7 +1,11 @@
 import Ember from 'ember';
 import layout from '../templates/components/bs-form';
 
-const { computed } = Ember;
+const {
+  computed,
+  K: noop,
+  RSVP
+} = Ember;
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -167,21 +171,11 @@ export default Ember.Component.extend({
    * Validate hook which will return a promise that will either resolve if the model is valid
    * or reject if it's not. This should be overridden to add validation support.
    *
-   * @param Object model
+   * @param {Object} model
    * @return {Promise}
    * @public
    */
-  validate(/* model */) {
-    Ember.deprecate('[ember-bootstrap] Validation support has been moved to 3rd party addons.\n' +
-                    'ember-validations: https://github.com/kaliber5/ember-bootstrap-validations\n' +
-                    'ember-cp-validations: https://github.com/offirgolan/ember-bootstrap-cp-validations\n',
-      false,
-      {
-        id: 'ember-bootstrap.form.validate',
-        url: 'http://kaliber5.github.io/ember-bootstrap/api/classes/Components.Form.html'
-      }
-    );
-  },
+  validate: noop,
 
   /**
    * @property showAllValidations
@@ -192,29 +186,32 @@ export default Ember.Component.extend({
   showAllValidations: false,
 
   /**
-   * A handler called before the form is validated (if possible) and submitted.
+   * Action is called before the form is validated (if possible) and submitted.
    *
-   * @event before
+   * @event onBefore
    * @param Object model  The form's `model`
    * @public
    */
+  onBefore: noop,
 
   /**
-   * A handler called when submit has been triggered and the model has passed all validations (if present).
+   * Action is called when submit has been triggered and the model has passed all validations (if present).
    *
-   * @event action
+   * @event onSubmit
    * @param Object model  The form's `model`
    * @param Object result The returned result from the validate method, if validation is available
    * @public
    */
+  onSubmit: noop,
 
   /**
-   * A handler called when validation of the model has failed.
+   * Action is called when validation of the model has failed.
    *
-   * @event invalid
+   * @event onInvalid
    * @param Object error
    * @public
    */
+  onInvalid: noop,
 
   /**
    * Submit handler that will send the default action ("action") to the controller when submitting the form.
@@ -233,17 +230,19 @@ export default Ember.Component.extend({
     }
     let model = this.get('model');
 
-    this.sendAction('before', model);
+    this.get('onBefore')(model);
 
     if (!this.get('hasValidator')) {
-      return this.sendAction('action', model);
+      return this.get('onSubmit')(model);
     } else {
       let validationPromise = this.validate(this.get('model'));
-      if (validationPromise && validationPromise instanceof Ember.RSVP.Promise) {
-        validationPromise.then((r) => this.sendAction('action', model, r), (err) => {
-          this.set('showAllValidations', true);
-          return this.sendAction('invalid', err);
-        });
+      if (validationPromise && validationPromise instanceof RSVP.Promise) {
+        validationPromise
+          .then((r) => this.get('onSubmit')(model, r))
+          .catch((err) => {
+            this.set('showAllValidations', true);
+            return this.get('onInvalid')(model, err);
+          });
       }
     }
   },

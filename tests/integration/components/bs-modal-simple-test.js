@@ -266,7 +266,7 @@ test('when modal has a form and the submit button is clicked, the form is submit
   let formSpy = this.spy();
   this.on('modalSubmit', modalSpy);
   this.on('formSubmit', formSpy);
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" onSubmit=(action "modalSubmit") as |modal|}}{{#bs-form action=(action "formSubmit")}}{{/bs-form}}{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" onSubmit=(action "modalSubmit") as |modal|}}{{#bs-form onSubmit=(action "formSubmit")}}{{/bs-form}}{{/bs-modal-simple}}`);
   this.$('.modal .modal-footer button.btn-primary').click();
   assert.ok(formSpy.calledOnce);
   assert.notOk(modalSpy.called);
