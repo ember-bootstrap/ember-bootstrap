@@ -511,3 +511,13 @@ test('Modal yields submit action', function(assert) {
   this.$('#submit').click();
   assert.ok(submitAction.calledOnce, 'submit action has been called.');
 });
+
+test('it passes along class attribute', function(assert) {
+  this.render(hbs`
+    {{#bs-modal-simple fade=false class="custom"}}
+      template block text
+    {{/bs-modal-simple}}
+  `);
+
+  assert.equal(this.$('.modal.custom').length, 1);
+});

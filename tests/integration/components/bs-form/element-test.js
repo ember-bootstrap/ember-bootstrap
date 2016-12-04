@@ -118,8 +118,6 @@ test('Custom controls are supported', function(assert) {
 });
 
 test('required property propagates', function(assert) {
-  this.set('model', Ember.Object.create());
-
   this.render(hbs`{{bs-form/element label="myLabel" property="foo" required=true}}`);
 
   assert.ok(this.$('.form-group').hasClass('is-required'), 'component has is-required class');
@@ -127,8 +125,6 @@ test('required property propagates', function(assert) {
 });
 
 test('disabled property propagates', function(assert) {
-  this.set('model', Ember.Object.create());
-
   this.render(hbs`{{bs-form/element label="myLabel" property="foo" disabled=true}}`);
 
   assert.ok(this.$('.form-group').hasClass('is-disabled'), 'component has is-disabled class');
@@ -136,9 +132,7 @@ test('disabled property propagates', function(assert) {
 });
 
 test('readonly property propagates', function(assert) {
-  this.set('model', Ember.Object.create());
-
-  this.render(hbs`{{bs-form-element label="myLabel" property="foo" readonly=true}}`);
+  this.render(hbs`{{bs-form/element label="myLabel" property="foo" readonly=true}}`);
 
   assert.equal(this.$('input').attr('readonly'), 'readonly', 'input html5 readonly is true');
 });
