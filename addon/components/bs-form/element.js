@@ -1,9 +1,8 @@
 import Ember from 'ember';
+import layout from '../../templates/components/bs-form/element';
 import FormGroup from 'ember-bootstrap/components/bs-form-group';
-import Form from 'ember-bootstrap/components/bs-form';
-import ComponentChild from 'ember-bootstrap/mixins/component-child';
 
-const { computed, defineProperty, isArray, observer, on, run, warn } = Ember;
+const { computed, defineProperty, isArray, observer, on, run, warn, K: noop } = Ember;
 
 const nonTextFieldControlTypes = Ember.A([
   'checkbox',
@@ -20,10 +19,10 @@ const nonTextFieldControlTypes = Ember.A([
  create forms without coding the default Bootstrap form markup by hand:
 
  ```hbs
- {{#bs-form formLayout="horizontal" action="submit"}}
-   {{bs-form-element controlType="email" label="Email" placeholder="Email" value=email}}
-   {{bs-form-element controlType="password" label="Password" placeholder="Password" value=password}}
-   {{bs-form-element controlType="checkbox" label="Remember me" value=rememberMe}}
+ {{#bs-form formLayout="horizontal" action="submit" as |form|}}
+   {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
+   {{form.element controlType="password" label="Password" placeholder="Password" value=password}}
+   {{form.element controlType="checkbox" label="Remember me" value=rememberMe}}
    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
  {{/bs-form}}
  ```
@@ -34,10 +33,10 @@ const nonTextFieldControlTypes = Ember.A([
  (given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):
 
  ```hbs
- {{#bs-form formLayout="horizontal" model=this action="submit"}}
-   {{bs-form-element controlType="email" label="Email" placeholder="Email" property="email"}}
-   {{bs-form-element controlType="password" label="Password" placeholder="Password" property="password"}}
-   {{bs-form-element controlType="checkbox" label="Remember me" property="rememberMe"}}
+ {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
+   {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
+   {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
+   {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
  {{/bs-form}}
  ```
@@ -100,10 +99,10 @@ const nonTextFieldControlTypes = Ember.A([
  (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
 
  ```hbs
- {{#bs-form formLayout="horizontal" model=this action="submit"}}
-   {{#bs-form-element label="Select-2" property="gender" useIcons=false as |value id validationState|}}
+ {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
+   {{#form.element label="Select-2" property="gender" useIcons=false as |value id validationState|}}
      {{select-2 id=id content=genderChoices optionLabelPath="label" value=value searchEnabled=false}}
-   {{/bs-form-element}}
+   {{/form.element}}
  {{/bs-form}}
  ```
 
@@ -115,7 +114,8 @@ const nonTextFieldControlTypes = Ember.A([
  @extends Components.FormGroup
  @public
  */
-export default FormGroup.extend(ComponentChild, {
+export default FormGroup.extend({
+  layout,
   classNameBindings: ['disabled:is-disabled', 'required:is-required', 'isValidating'],
 
   /**
@@ -162,7 +162,7 @@ export default FormGroup.extend(ComponentChild, {
    * get/set the control element's value:
    *
    * ```hbs
-   * {{bs-form-element controlType="email" label="Email" placeholder="Email" value=email}}
+   * {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
    * ```
    *
    * Note: you loose the ability to validate this form element by directly binding to its value. It is recommended
@@ -237,7 +237,7 @@ export default FormGroup.extend(ComponentChild, {
    * boxes.
    *
    * ```hbs
-   * {{bs-form-element controlType="select" choices=countries choiceLabelProperty="name" choiceValueProperty="id" label="Country" value=selectedCountry}}
+   * {{form.element controlType="select" choices=countries choiceLabelProperty="name" choiceValueProperty="id" label="Country" value=selectedCountry}}
    * ```
    *
    * Be sure to also set the `choiceValueProperty` and `choiceLabelProperty` properties.
@@ -291,14 +291,14 @@ export default FormGroup.extend(ComponentChild, {
    * @property model
    * @public
    */
-  model: computed.reads('form.model'),
+  model: null,
 
   /**
    * The array of error messages from the `model`'s validation.
    *
    * @property errors
    * @type array
-   * @protected
+   * @private
    */
   errors: null,
 
@@ -306,7 +306,7 @@ export default FormGroup.extend(ComponentChild, {
    * @property hasErrors
    * @type boolean
    * @readonly
-   * @protected
+   * @private
    */
   hasErrors: computed.gt('errors.length', 0),
 
@@ -315,7 +315,7 @@ export default FormGroup.extend(ComponentChild, {
    *
    * @property errors
    * @type array
-   * @protected
+   * @private
    */
   warnings: null,
 
@@ -323,7 +323,7 @@ export default FormGroup.extend(ComponentChild, {
    * @property hasWarnings
    * @type boolean
    * @readonly
-   * @protected
+   * @private
    */
   hasWarnings: computed.gt('warnings.length', 0),
 
@@ -332,7 +332,7 @@ export default FormGroup.extend(ComponentChild, {
    *
    * @property validationMessages
    * @type array
-   * @protected
+   * @private
    */
   validationMessages: computed('hasErrors', 'hasWarnings', 'errors.[]', 'warnings.[]', function() {
     if (this.get('hasErrors')) {
@@ -348,7 +348,7 @@ export default FormGroup.extend(ComponentChild, {
    * @property hasValidationMessages
    * @type boolean
    * @readonly
-   * @protected
+   * @private
    */
   hasValidationMessages: computed.gt('validationMessages.length', 0),
 
@@ -356,7 +356,7 @@ export default FormGroup.extend(ComponentChild, {
    * @property hasValidator
    * @type boolean
    * @readonly
-   * @protected
+   * @private
    */
   hasValidator: computed.notEmpty('model.validate'),
 
@@ -376,15 +376,31 @@ export default FormGroup.extend(ComponentChild, {
    * @property showValidation
    * @type boolean
    * @default false
-   * @public
+   * @private
    */
-  showValidation: false,
+  showValidation: computed.or('showOwnValidation', 'showAllValidations'),
+
+  /**
+   * @property showOwnValidation
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showOwnValidation: false,
+
+  /**
+   * @property showAllValidations
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showAllValidations: false,
 
   /**
    * @property showValidationMessages
    * @type boolean
    * @readonly
-   * @protected
+   * @private
    */
   showValidationMessages: computed.and('showValidation', 'hasValidationMessages'),
 
@@ -426,7 +442,7 @@ export default FormGroup.extend(ComponentChild, {
    */
   showValidationOnHandler(event) {
     if (this.get('_showValidationOn').indexOf(event) !== -1) {
-      this.set('showValidation', true);
+      this.set('showOwnValidation', true);
     }
   },
 
@@ -435,7 +451,7 @@ export default FormGroup.extend(ComponentChild, {
    * @type boolean
    * @readonly
    * @deprecated
-   * @protected
+   * @private
    */
   showErrors: computed.deprecatingAlias('showValidationMessages'),
 
@@ -446,7 +462,7 @@ export default FormGroup.extend(ComponentChild, {
    * @property validation
    * @readonly
    * @type string
-   * @protected
+   * @private
    */
   validation: computed('hasErrors', 'hasWarnings', 'hasValidator', 'showValidation', 'isValidating', 'disabled', function() {
     if (!this.get('showValidation') || !this.get('hasValidator') || this.get('isValidating') || this.get('disabled')) {
@@ -459,7 +475,7 @@ export default FormGroup.extend(ComponentChild, {
    * @property hasLabel
    * @type boolean
    * @readonly
-   * @protected
+   * @private
    */
   hasLabel: computed.notEmpty('label'),
 
@@ -486,33 +502,34 @@ export default FormGroup.extend(ComponentChild, {
    *
    * @property formLayout
    * @type string
+   * @default 'vertical'
    * @public
    */
-  formLayout: computed.alias('form.formLayout'),
+  formLayout: 'vertical',
 
   /**
    * @property isVertical
    * @type boolean
    * @readonly
-   * @protected
+   * @private
    */
-  isVertical: computed.equal('formLayout', 'vertical'),
+  isVertical: computed.equal('formLayout', 'vertical').readOnly(),
 
   /**
    * @property isHorizontal
    * @type boolean
    * @readonly
-   * @protected
+   * @private
    */
-  isHorizontal: computed.equal('formLayout', 'horizontal'),
+  isHorizontal: computed.equal('formLayout', 'horizontal').readOnly(),
 
   /**
    * @property isInline
    * @type boolean
    * @readonly
-   * @protected
+   * @private
    */
-  isInline: computed.equal('formLayout', 'inline'),
+  isInline: computed.equal('formLayout', 'inline').readOnly(),
 
   /**
    * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
@@ -520,10 +537,9 @@ export default FormGroup.extend(ComponentChild, {
    *
    * @property horizontalLabelGridClass
    * @type string
-   * @default 'col-md-4'
    * @public
    */
-  horizontalLabelGridClass: computed.oneWay('form.horizontalLabelGridClass'),
+  horizontalLabelGridClass: null,
 
   /**
    * Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.
@@ -531,14 +547,14 @@ export default FormGroup.extend(ComponentChild, {
    * @property horizontalInputGridClass
    * @type string
    * @readonly
-   * @protected
+   * @private
    */
   horizontalInputGridClass: computed('horizontalLabelGridClass', function() {
     let parts = this.get('horizontalLabelGridClass').split('-');
     Ember.assert('horizontalInputGridClass must match format bootstrap grid column class', parts.length === 3);
     parts[2] = 12 - parts[2];
     return parts.join('-');
-  }),
+  }).readOnly(),
 
   /**
    * Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout
@@ -547,7 +563,7 @@ export default FormGroup.extend(ComponentChild, {
    * @property horizontalInputOffsetGridClass
    * @type string
    * @readonly
-   * @protected
+   * @private
    */
   horizontalInputOffsetGridClass: computed('horizontalLabelGridClass', function() {
     let parts = this.get('horizontalLabelGridClass').split('-');
@@ -565,16 +581,6 @@ export default FormGroup.extend(ComponentChild, {
   formElementId: computed('elementId', function() {
     let elementId = this.get('elementId');
     return `${elementId}-field`;
-  }),
-
-  /**
-   * Reference to the parent `Components.Form` class.
-   *
-   * @property form
-   * @protected
-   */
-  form: computed(function() {
-    return this.nearestOfType(Form);
   }),
 
   formElementTemplate: computed('formLayout', 'controlType', function() {
@@ -598,12 +604,12 @@ export default FormGroup.extend(ComponentChild, {
    * libraries to overwrite. In case of failed validations the `errors` property should contain an array of error messages.
    *
    * @method setupValidations
-   * @protected
+   * @private
    */
-  setupValidations: Ember.K,
+  setupValidations: noop,
 
   /**
-   * Listen for focusOut events from the control element to automatically set `showValidation` to true to enable
+   * Listen for focusOut events from the control element to automatically set `showOwnValidation` to true to enable
    * form validation markup rendering if `showValidationsOn` contains `focusOut`.
    *
    * @event focusOut
@@ -614,7 +620,7 @@ export default FormGroup.extend(ComponentChild, {
   },
 
   /**
-   * Listen for change events from the control element to automatically set `showValidation` to true to enable
+   * Listen for change events from the control element to automatically set `showOwnValidation` to true to enable
    * form validation markup rendering if `showValidationsOn` contains `change`.
    *
    * @event change

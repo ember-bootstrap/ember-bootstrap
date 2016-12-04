@@ -1,9 +1,9 @@
 <h1>Navs</h1>
 
-{{#bs-form model=this}}
-    {{bs-form-element controlType="select" label="Type" choices=typeChoices choiceLabelProperty="id" choiceValueProperty="id" property="type"}}
-    {{bs-form-element controlType="checkbox" label="Stacked" property="stacked"}}
-    {{bs-form-element controlType="checkbox" label="Justified" property="justified"}}
+{{#bs-form model=this as |form|}}
+    {{form.element controlType="select" label="Type" choices=typeChoices choiceLabelProperty="id" choiceValueProperty="id" property="type"}}
+    {{form.element controlType="checkbox" label="Stacked" property="stacked"}}
+    {{form.element controlType="checkbox" label="Justified" property="justified"}}
 {{/bs-form}}
 
 <h2>Navs</h2>

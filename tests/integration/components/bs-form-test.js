@@ -1,7 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
-// import EmberValidations from 'ember-validations';
 
 moduleForComponent('bs-form', 'Integration | Component | bs-form', {
   integration: true
@@ -20,6 +19,12 @@ test('form has correct CSS class', function(assert) {
     this.set('formLayout', layout);
     assert.equal(this.$('form').hasClass(classSpec[layout]), true, 'form has expected class.');
   }
+});
+
+test('it yields form element component', function(assert) {
+  this.render(hbs`{{#bs-form formLayout=formLayout as |form|}}{{form.element}}{{/bs-form}}`);
+
+  assert.equal(this.$('.form-group').length, 1, 'form has element');
 });
 
 test('Submitting the form calls default action', function(assert) {
@@ -50,6 +55,36 @@ test('Submitting the form calls before submit action', function(assert) {
 
   assert.expect(4);
   this.$('form').submit();
+});
+
+test('Submitting the form with invalid validation shows validation errors', function(assert) {
+  let model = {};
+  this.set('model', model);
+  this.set('errors', Ember.A(['There is an error']));
+  this.set('validateStub', function() {
+    return Ember.RSVP.reject();
+  });
+  this.render(hbs`{{#bs-form model=model hasValidator=true validate=validateStub as |form|}}{{form.element hasValidator=true errors=errors}}{{/bs-form}}`);
+
+  assert.notOk(
+    this.$('form .form-group').hasClass('has-error'),
+    'validation errors aren\'t shown before user interaction'
+  );
+  this.$('form').submit();
+
+  let done = assert.async();
+  setTimeout(() => {
+    assert.ok(
+      this.$('form .form-group').hasClass('has-error'),
+      'validation errors are shown after form submission'
+    );
+    assert.equal(
+      this.$('form .form-group .help-block').text().trim(),
+      'There is an error'
+    );
+    done();
+  }, 1);
+
 });
 
 /*

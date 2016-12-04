@@ -1,6 +1,5 @@
 import Ember from 'ember';
-import FormElement from 'ember-bootstrap/components/bs-form-element';
-import ComponentParent from 'ember-bootstrap/mixins/component-parent';
+import layout from '../templates/components/bs-form';
 
 const { computed } = Ember;
 
@@ -39,10 +38,10 @@ const { computed } = Ember;
   with an invalid validation, or when focusing out of invalid inputs
 
   ```handlebars
-  {{#bs-form formLayout="horizontal" model=this action="submit"}}
-    {{bs-form-element controlType="email" label="Email" placeholder="Email" property="email"}}
-    {{bs-form-element controlType="password" label="Password" placeholder="Password" property="password"}}
-    {{bs-form-element controlType="checkbox" label="Remember me" property="rememberMe"}}
+  {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
+    {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
+    {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
+    {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
     {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
   {{/bs-form}}
   ```
@@ -75,7 +74,8 @@ const { computed } = Ember;
   @extends Ember.Component
   @public
  */
-export default Ember.Component.extend(ComponentParent, {
+export default Ember.Component.extend({
+  layout,
   tagName: 'form',
   classNameBindings: ['layoutClass'],
   attributeBindings: ['_novalidate:novalidate'],
@@ -164,18 +164,6 @@ export default Ember.Component.extend(ComponentParent, {
   }),
 
   /**
-   * An array of `Components.FormElement`s that are children of this form.
-   *
-   * @property childFormElements
-   * @type Array
-   * @readonly
-   * @protected
-   */
-  childFormElements: computed.filter('children', function(view) {
-    return view instanceof FormElement;
-  }),
-
-  /**
    * Validate hook which will return a promise that will either resolve if the model is valid
    * or reject if it's not. This should be overridden to add validation support.
    *
@@ -194,6 +182,14 @@ export default Ember.Component.extend(ComponentParent, {
       }
     );
   },
+
+  /**
+   * @property showAllValidations
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showAllValidations: false,
 
   /**
    * A handler called before the form is validated (if possible) and submitted.
@@ -245,7 +241,7 @@ export default Ember.Component.extend(ComponentParent, {
       let validationPromise = this.validate(this.get('model'));
       if (validationPromise && validationPromise instanceof Ember.RSVP.Promise) {
         validationPromise.then((r) => this.sendAction('action', model, r), (err) => {
-          this.get('childFormElements').setEach('showValidation', true);
+          this.set('showAllValidations', true);
           return this.sendAction('invalid', err);
         });
       }

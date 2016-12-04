@@ -1,7 +1,7 @@
 <h1>Tabs</h1>
 
-{{#bs-form model=this}}
-  {{bs-form-element controlType="select" label="Type" choices=typeChoices choiceLabelProperty="id" choiceValueProperty="id" property="type"}}
+{{#bs-form model=this as |form|}}
+  {{form.element controlType="select" label="Type" choices=typeChoices choiceLabelProperty="id" choiceValueProperty="id" property="type"}}
 {{/bs-form}}
 
 <h2>Default tabs</h2>

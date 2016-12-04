@@ -2,19 +2,19 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
-moduleForComponent('bs-form-element', 'Integration | Component | bs-form-element', {
+moduleForComponent('bs-form/element', 'Integration | Component | bs-form/element', {
   integration: true
 });
 
 let formLayouts = ['vertical', 'horizontal', 'inline'];
 
 test('component has form-group bootstrap class', function(assert) {
-  this.render(hbs`{{bs-form-element}}`);
+  this.render(hbs`{{bs-form/element}}`);
   assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
 });
 
 test('setting label property displays label tag', function(assert) {
-  this.render(hbs`{{bs-form-element label="myLabel"}}`);
+  this.render(hbs`{{bs-form/element label="myLabel"}}`);
 
   assert.equal(this.$('label').length, 1, 'component has label tag');
   assert.equal(this.$('label').text().trim(), 'myLabel', 'label has text');
@@ -41,7 +41,7 @@ function controlTypeSupportTest(assert, controlType, selector, values, getValueF
 
   formLayouts.forEach((layout) => {
     this.set('formLayout', layout);
-    this.render(hbs`{{#bs-form formLayout=formLayout}}{{bs-form-element controlType=controlType choices=choices choiceLabelProperty=choiceLabelProperty choiceValueProperty=choiceValueProperty value=value}}{{/bs-form}}`);
+    this.render(hbs`{{#bs-form formLayout=formLayout as |form|}}{{form.element controlType=controlType choices=choices choiceLabelProperty=choiceLabelProperty choiceValueProperty=choiceValueProperty value=value}}{{/bs-form}}`);
 
     assert.equal(this.$(selector).length, 1, `component has ${controlType} control for form layout ${layout}`);
 
@@ -58,7 +58,7 @@ function labeledControlTest(assert, controlType, selector) {
 
   formLayouts.forEach((layout) => {
     this.set('formLayout', layout);
-    this.render(hbs`{{#bs-form formLayout=formLayout}}{{bs-form-element controlType=controlType label="myLabel"}}{{/bs-form}}`);
+    this.render(hbs`{{#bs-form formLayout=formLayout as |form|}}{{form.element controlType=controlType label="myLabel"}}{{/bs-form}}`);
     assert.equal(this.$(selector).attr('id'), this.$('label').attr('for'), `component and label ids do match for form layout ${layout}`);
   });
 }
@@ -81,7 +81,7 @@ test('controlType "textarea" is supported', function(assert) {
 
 test('Changing formLayout changes markup', function(assert) {
   this.set('formLayout', 'vertical');
-  this.render(hbs`{{#bs-form horizontalLabelGridClass="col-sm-4" formLayout=formLayout}}{{bs-form-element controlType="text" label="myLabel"}}{{/bs-form}}`);
+  this.render(hbs`{{#bs-form horizontalLabelGridClass="col-sm-4" formLayout=formLayout as |form|}}{{form.element controlType="text" label="myLabel"}}{{/bs-form}}`);
   assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
   assert.equal(this.$(':first-child').children().eq(1).prop('tagName'), 'LABEL', 'first child is a label');
   assert.equal(this.$(':first-child').children().eq(2).prop('tagName'), 'INPUT', 'second child is a input');
@@ -102,12 +102,12 @@ test('Custom controls are supported', function(assert) {
     })
   );
   this.render(hbs`
-    {{#bs-form model=model}}
-      {{#bs-form-element label="Gender" property="gender" validation="success" as |value id validation|}}
+    {{#bs-form model=model as |form|}}
+      {{#form.element label="Gender" property="gender" validation="success" as |value id validation|}}
         <div id="value">{{value}}</div>
         <div id="id">{{id}}</div>
         <div id="validation">{{validation}}</div>
-      {{/bs-form-element}}
+      {{/form.element}}
     {{/bs-form}}
   `);
 
@@ -120,7 +120,7 @@ test('Custom controls are supported', function(assert) {
 test('required property propagates', function(assert) {
   this.set('model', Ember.Object.create());
 
-  this.render(hbs`{{bs-form-element label="myLabel" property="foo" required=true}}`);
+  this.render(hbs`{{bs-form/element label="myLabel" property="foo" required=true}}`);
 
   assert.ok(this.$('.form-group').hasClass('is-required'), 'component has is-required class');
   assert.equal(this.$('input').attr('required'), 'required', 'input html5 required is true');
@@ -129,7 +129,7 @@ test('required property propagates', function(assert) {
 test('disabled property propagates', function(assert) {
   this.set('model', Ember.Object.create());
 
-  this.render(hbs`{{bs-form-element label="myLabel" property="foo" disabled=true}}`);
+  this.render(hbs`{{bs-form/element label="myLabel" property="foo" disabled=true}}`);
 
   assert.ok(this.$('.form-group').hasClass('is-disabled'), 'component has is-disabled class');
   assert.equal(this.$('input').attr('disabled'), 'disabled', 'input html5 disabled is true');
@@ -141,10 +141,10 @@ test('if invisibleLabel is true sr-only class is added to label', function(asser
     'horizontal',
     'inline'
   ];
-  this.render(hbs`{{bs-form-element label="myLabel"}}`);
+  this.render(hbs`{{bs-form/element label="myLabel"}}`);
   assert.notOk(this.$('label').hasClass('sr-only'), `sr-only class is not present as defaultText`);
   formLayouts.forEach((formLayout) => {
-    this.render(hbs`{{#bs-form formLayout=formLayout }}{{bs-form-element label="myLabel" invisibleLabel=true}}{{/bs-form}}`);
+    this.render(hbs`{{#bs-form formLayout=formLayout }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`);
     assert.ok(this.$('label').hasClass('sr-only'), `sr-only class is present for formLayout ${formLayout}`);
   });
 });
@@ -154,16 +154,16 @@ test('adjusts validation icon position if there is an input group', function(ass
   this.set('validation', 'success');
   this.set('formLayout', 'vertical');
   this.render(hbs`
-    {{#bs-form formLayout=formLayout}}
-      {{#bs-form-element validation=validation label='ajusts validation icon position' classNames='addon'}}
+    {{#bs-form formLayout=formLayout as |form|}}
+      {{#form.element validation=validation label='ajusts validation icon position' classNames='addon'}}
         <div class="input-group">
           {{bs-input}}
           <div class="input-group-addon">
             @example.com
           </div>
         </div>
-      {{/bs-form-element}}
-      {{#bs-form-element validation=validation label='ajusts validation icon position' classNames='button'}}
+      {{/form.element}}
+      {{#form.element validation=validation label='ajusts validation icon position' classNames='button'}}
         <div class="input-group">
           {{bs-input}}
           <div class="input-group-btn">
@@ -171,7 +171,7 @@ test('adjusts validation icon position if there is an input group', function(ass
             <button class="btn btn-default" type="button">bar</button>
           </div>
         </div>
-      {{/bs-form-element}}
+      {{/form.element}}
     {{/bs-form}}
   `);
   // assumption on bootstrap defaults:
@@ -232,7 +232,7 @@ test('shows validation errors', function(assert) {
   this.set('errors', Ember.A(['Invalid']));
   this.set('model', Ember.Object.create({ name: null }));
   this.render(hbs`
-      {{bs-form-element property='name' elementId='child' hasValidator=true errors=errors model=model}}
+      {{bs-form/element property='name' elementId='child' hasValidator=true errors=errors model=model}}
   `);
   assert.notOk(
     this.$('.form-group').hasClass('has-error'),
@@ -259,7 +259,7 @@ test('shows validation warnings', function(assert) {
   this.set('warnings', Ember.A(['Insecure']));
   this.set('model', Ember.Object.create({ name: null }));
   this.render(hbs`
-      {{bs-form-element property='name' elementId='child' hasValidator=true warnings=warnings model=model}}
+      {{bs-form/element property='name' elementId='child' hasValidator=true warnings=warnings model=model}}
   `);
   assert.notOk(
     this.$('.form-group').hasClass('has-warning'),
@@ -287,7 +287,7 @@ test('events enabling validation rendering are configurable per `showValidationO
   this.set('model', Ember.Object.create({ name: null }));
   this.set('showValidationOn', ['change']);
   this.render(hbs`
-      {{bs-form-element property='name' elementId='child' hasValidator=true errors=errors model=model showValidationOn=showValidationOn}}
+      {{bs-form/element property='name' elementId='child' hasValidator=true errors=errors model=model showValidationOn=showValidationOn}}
   `);
   assert.notOk(
     this.$('.form-group').hasClass('has-error'),
@@ -313,7 +313,7 @@ test('events enabling validation rendering are configurable per `showValidationO
   this.set('errors', Ember.A(['Invalid']));
   this.set('model', Ember.Object.create({ name: null }));
   this.render(hbs`
-      {{bs-form-element property='name' elementId='child' hasValidator=true errors=errors model=model showValidationOn='change'}}
+      {{bs-form/element property='name' elementId='child' hasValidator=true errors=errors model=model showValidationOn='change'}}
   `);
   assert.notOk(
     this.$('.form-group').hasClass('has-error'),

@@ -15,26 +15,26 @@ export default Button.extend({
 
   /**
    * @property groupValue
-   * @public
+   * @private
    */
   groupValue: null,
 
   /**
-   * @property type
+   * @property buttonGroupType
    * @type string
-   * @public
+   * @private
    */
-  type: false,
+  buttonGroupType: false,
 
   /**
    * @property active
    * @type boolean
    * @readonly
-   * @public
+   * @private
    */
-  active: computed('type', 'groupValue.[]', 'value', function() {
+  active: computed('buttonGroupType', 'groupValue.[]', 'value', function() {
     let { value, groupValue } = this.getProperties('value', 'groupValue');
-    if (this.get('type') === 'radio') {
+    if (this.get('buttonGroupType') === 'radio') {
       return value === groupValue;
     } else {
       if (isArray(groupValue)) {
