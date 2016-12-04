@@ -13,7 +13,7 @@ const { computed, observer, K: noop } = Ember;
 
  ```hbs
  {{#bs-button type="primary" icon="glyphicon glyphicon-download"}}
- Downloads
+   Downloads
  {{/bs-button}}
  ```
 
@@ -24,7 +24,7 @@ const { computed, observer, K: noop } = Ember;
 
  ```hbs
  {{#bs-button type="primary" icon="glyphicon glyphicon-download" onClick=(action "download")}}
- Download
+   Download
  {{/bs-button}}
  ```
 

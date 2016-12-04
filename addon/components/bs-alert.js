@@ -13,7 +13,7 @@ const { computed, K: noop, run: { later } } = Ember;
 
  ```hbs
  {{#bs-alert type="success"}}
- <strong>Well done!</strong> You successfully read this important alert message.
+   <strong>Well done!</strong> You successfully read this important alert message.
  {{/bs-alert}}
  ```
 

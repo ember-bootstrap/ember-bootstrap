@@ -1,16 +1,27 @@
 import Ember from 'ember';
 
-const { computed, observer } = Ember;
+const {
+  computed,
+  observer,
+  K: noop,
+  run: {
+    bind,
+    next
+  },
+  String: {
+    htmlSafe
+  }
+} = Ember;
 
 /**
  An Ember component that mimics the behaviour of Bootstrap's collapse.js plugin, see http://getbootstrap.com/javascript/#collapse
 
  ```hbs
  {{#bs-collapse collapsed=collapsed}}
-  <div class="well">
-    <h2>Collapse</h2>
-    <p>This is collapsible content</p>
-  </div>
+ <div class="well">
+ <h2>Collapse</h2>
+ <p>This is collapsible content</p>
+ </div>
  {{/bs-collapse}}
  ```
 
@@ -38,7 +49,7 @@ export default Ember.Component.extend({
    * True if this item is expanded
    *
    * @property active
-   * @protected
+   * @private
    */
   active: false,
 
@@ -51,14 +62,14 @@ export default Ember.Component.extend({
    *
    * @property transitioning
    * @type boolean
-   * @protected
+   * @private
    */
   transitioning: false,
 
   /**
    * @property collapseSize
    * @type number
-   * @protected
+   * @private
    */
   collapseSize: null,
 
@@ -108,10 +119,48 @@ export default Ember.Component.extend({
     let size = this.get('collapseSize');
     let dimension = this.get('collapseDimension');
     if (Ember.isEmpty(size)) {
-      return Ember.String.htmlSafe('');
+      return htmlSafe('');
     }
-    return Ember.String.htmlSafe(`${dimension}: ${size}px`);
+    return htmlSafe(`${dimension}: ${size}px`);
   }),
+
+  /**
+   * The action to be sent when the element is about to be hidden.
+   *
+   * @property onHide
+   * @type function
+   * @public
+   */
+  onHide: noop,
+
+  /**
+   * The action to be sent after the element has been completely hidden (including the CSS transition).
+   *
+   * @property onHidden
+   * @type function
+   * @default null
+   * @public
+   */
+  onHidden: noop,
+
+  /**
+   * The action to be sent when the element is about to be shown.
+   *
+   * @property onShow
+   * @type function
+   * @default null
+   * @public
+   */
+  onShow: noop,
+
+  /**
+   * The action to be sent after the element has been completely shown (including the CSS transition).
+   *
+   * @property onShown
+   * @type function
+   * @public
+   */
+  onShown: noop,
 
   /**
    * Triggers the show transition
@@ -128,10 +177,10 @@ export default Ember.Component.extend({
       if (this.get('resetSizeWhenNotCollapsing')) {
         this.set('collapseSize', null);
       }
-      this.sendAction('didShow');
+      this.get('onShown')();
     };
 
-    this.sendAction('willShow');
+    this.get('onShow')();
 
     this.setProperties({
       transitioning: true,
@@ -144,12 +193,12 @@ export default Ember.Component.extend({
     }
 
     this.$()
-      .one('bsTransitionEnd', Ember.run.bind(this, complete))
+      .one('bsTransitionEnd', bind(this, complete))
       // @todo: make duration configurable
       .emulateTransitionEnd(350)
     ;
 
-    Ember.run.next(this, function() {
+    next(this, function() {
       if (!this.get('isDestroyed')) {
         this.set('collapseSize', this.getExpandedSize('show'));
       }
@@ -192,10 +241,10 @@ export default Ember.Component.extend({
       if (this.get('resetSizeWhenNotCollapsing')) {
         this.set('collapseSize', null);
       }
-      this.sendAction('didHide');
+      this.get('onHidden')();
     };
 
-    this.sendAction('willHide');
+    this.get('onHide')();
 
     this.setProperties({
       transitioning: true,
@@ -208,12 +257,12 @@ export default Ember.Component.extend({
     }
 
     this.$()
-      .one('bsTransitionEnd', Ember.run.bind(this, complete))
+      .one('bsTransitionEnd', bind(this, complete))
       // @todo: make duration configurable
       .emulateTransitionEnd(350)
     ;
 
-    Ember.run.next(this, function() {
+    next(this, function() {
       if (!this.get('isDestroyed')) {
         this.set('collapseSize', this.get('collapsedSize'));
       }
@@ -233,9 +282,10 @@ export default Ember.Component.extend({
     }
   }),
 
-  _onInit: Ember.on('init', function() {
+  init() {
+    this._super(...arguments);
     this.set('active', !this.get('collapsed'));
-  }),
+  },
 
   _updateCollapsedSize: observer('collapsedSize', function() {
     if (!this.get('resetSizeWhenNotCollapsing') && this.get('collapsed') && !this.get('collapsing')) {

@@ -43,6 +43,17 @@ export default Ember.Component.extend({
    */
   selected: null,
 
+  /**
+   * Action when the selected accordion item is about to be changed.
+   *
+   * You can return false to prevent changing the active item, and do that in your action by
+   * setting `selected` accordingly.
+   *
+   * @event onChange
+   * @param newValue
+   * @param oldValue
+   * @public
+   */
   onChange: noop,
 
   actions: {
