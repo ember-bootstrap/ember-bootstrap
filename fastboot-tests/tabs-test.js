@@ -13,9 +13,9 @@ describe('tabs', function() {
         expect($('#tab ul').hasClass('nav')).to.be.true;
         expect($('#tab ul').hasClass('nav-tabs')).to.be.true;
         expect($('#tab ul.nav li').length).to.equal(2);
-        expect($('#tab ul.nav li:eq(1)').hasClass('active')).to.be.true;
+        expect($('#tab ul.nav li:eq(0)').hasClass('active')).to.be.true;
         expect($('#tab .tab-pane').length).to.equal(2);
-        expect($('#tab .tab-pane:eq(1)').hasClass('active')).to.be.true;
+        expect($('#tab .tab-pane:eq(0)').hasClass('active')).to.be.true;
       });
   });
 
