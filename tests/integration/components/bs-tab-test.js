@@ -81,7 +81,7 @@ test('it generates tab navigation', function(assert) {
 
 test('first tab is active by default', function(assert) {
   this.render(hbs`
-    {{#bs-tab as |tab|}}
+    {{#bs-tab fade=false as |tab|}}
       {{#tab.pane title="Tab 1"}}
         tabcontent 1
       {{/tab.pane}}
