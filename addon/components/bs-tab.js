@@ -15,7 +15,7 @@ const { computed, isPresent, A } = Ember;
  The tab navigation is automatically generated from the tab panes' `title` property:
 
  ```hbs
- {{#bs-tab type=type.id}}
+ {{#bs-tab}}
    {{#bs-tab-pane title="Tab 1"}}
      <p>...</p>
    {{/bs-tab-pane}}
@@ -32,7 +32,7 @@ const { computed, isPresent, A } = Ember;
  component with `groupTitle` being the dropdown's title:
 
  ```hbs
- {{#bs-tab type=type.id}}
+ {{#bs-tab}}
     {{#bs-tab-pane title="Tab 1"}}
       <p>...</p>
     {{/bs-tab-pane}}
