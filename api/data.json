@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v0.11.2"
+        "version": "0.11.3.c321ebf7"
     },
     "files": {
         "addon/components/bs-accordion-item.js": {
@@ -1039,7 +1039,7 @@
             "namespace": "Components",
             "file": "addon/components/bs-tab.js",
             "line": 8,
-            "description": "Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,\nsee http://getbootstrap.com/javascript/#tabs\n\n### Usage\n\nJust nest any number of [Components.TabPane](Components.TabPane.html) components that hold the tab content.\nThe tab navigation is automatically generated from the tab panes' `title` property:\n\n```hbs\n{{#bs-tab type=type.id}}\n  {{#bs-tab-pane title=\"Tab 1\"}}\n    <p>...</p>\n  {{/bs-tab-pane}}\n  {{#bs-tab-pane title=\"Tab 2\"}}\n    <p>...</p>\n  {{/bs-tab-pane}}\n{{/bs-tab}}\n```\n\n### Groupable (dropdown) tabs\n\nBootstrap's support for dropdown menus as tab navigation is mimiced by the use of the `groupTitle` property.\nAll panes with the same `groupTitle` will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)\ncomponent with `groupTitle` being the dropdown's title:\n\n```hbs\n{{#bs-tab type=type.id}}\n   {{#bs-tab-pane title=\"Tab 1\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane title=\"Tab 2\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane title=\"Tab 3\" groupTitle=\"Dropdown\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane title=\"Tab 4\" groupTitle=\"Dropdown\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n{{/bs-tab}}\n```\n\n### Custom tabs\n\nWhen having the tab pane's `title` as the tab navigation title is not sufficient, for example because you want to\nintegrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup\nyour navigation by yourself.\n\nSet `customTabs` to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably\nusing a [Components.Nav](Components.Nav.html) component. The tab component yields the `activeId` property as well as\nits `select` action, which you would have to use to manually set the `active` state of the navigation items and to\ntrigger the selection of the different tab panes, using their ids:\n\n```hbs\n{{#bs-tab customTabs=true as |activeId select|}}\n   {{#bs-nav type=\"tabs\"}}\n       {{#bs-nav-item active=(bs-eq activeId \"pane1\")}}<a href=\"#pane1\" role=\"tab\" {{action select \"pane1\"}}>Tab 1</a>{{/bs-nav-item}}\n       {{#bs-nav-item active=(bs-eq activeId \"pane2\")}}<a href=\"#pane1\" role=\"tab\" {{action select \"pane2\"}}>Tab 2 <span class=\"badge\">{{badge}}</span></a>{{/bs-nav-item}}\n   {{/bs-nav}}\n\n   <div class=\"tab-content\">\n   {{#bs-tab-pane elementId=\"pane1\" title=\"Tab 1\"}}\n       <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane elementId=\"pane2\" title=\"Tab 2\"}}\n       <p>...</p>\n   {{/bs-tab-pane}}\n   </div>\n{{/bs-tab}}\n```\n\nNote that the `bs-eq` helper used in the example above is a private helper, which is not guaranteed to be available for\nthe future. Better use the corresponding `eq` helper of the\n[ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!\n\n### Routable tabs\n\nThe tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and\ndeactivated dynamically, just as the  original Bootstrap implementation.\n\nIf you want to have the content delivered through individual sub routes, just use\nthe [Components.Nav](Components.Nav.html) component and an `{{outlet}}` that show the nested routes' content:\n\n```hbs\n<div>\n  {{#bs-nav type=\"tabs\"}}\n    {{#bs-nav-item}}{{#link-to \"tabs.index\"}}Tab 1{{/link-to}}{{/bs-nav-item}}\n    {{#bs-nav-item}}{{#link-to \"tabs.other\"}}Tab 2{{/link-to}}{{/bs-nav-item}}\n  {{/bs-nav}}\n  {{outlet}}\n</div>\n```",
+            "description": "Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,\nsee http://getbootstrap.com/javascript/#tabs\n\n### Usage\n\nJust nest any number of [Components.TabPane](Components.TabPane.html) components that hold the tab content.\nThe tab navigation is automatically generated from the tab panes' `title` property:\n\n```hbs\n{{#bs-tab}}\n  {{#bs-tab-pane title=\"Tab 1\"}}\n    <p>...</p>\n  {{/bs-tab-pane}}\n  {{#bs-tab-pane title=\"Tab 2\"}}\n    <p>...</p>\n  {{/bs-tab-pane}}\n{{/bs-tab}}\n```\n\n### Groupable (dropdown) tabs\n\nBootstrap's support for dropdown menus as tab navigation is mimiced by the use of the `groupTitle` property.\nAll panes with the same `groupTitle` will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)\ncomponent with `groupTitle` being the dropdown's title:\n\n```hbs\n{{#bs-tab}}\n   {{#bs-tab-pane title=\"Tab 1\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane title=\"Tab 2\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane title=\"Tab 3\" groupTitle=\"Dropdown\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane title=\"Tab 4\" groupTitle=\"Dropdown\"}}\n     <p>...</p>\n   {{/bs-tab-pane}}\n{{/bs-tab}}\n```\n\n### Custom tabs\n\nWhen having the tab pane's `title` as the tab navigation title is not sufficient, for example because you want to\nintegrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup\nyour navigation by yourself.\n\nSet `customTabs` to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably\nusing a [Components.Nav](Components.Nav.html) component. The tab component yields the `activeId` property as well as\nits `select` action, which you would have to use to manually set the `active` state of the navigation items and to\ntrigger the selection of the different tab panes, using their ids:\n\n```hbs\n{{#bs-tab customTabs=true as |activeId select|}}\n   {{#bs-nav type=\"tabs\"}}\n       {{#bs-nav-item active=(bs-eq activeId \"pane1\")}}<a href=\"#pane1\" role=\"tab\" {{action select \"pane1\"}}>Tab 1</a>{{/bs-nav-item}}\n       {{#bs-nav-item active=(bs-eq activeId \"pane2\")}}<a href=\"#pane1\" role=\"tab\" {{action select \"pane2\"}}>Tab 2 <span class=\"badge\">{{badge}}</span></a>{{/bs-nav-item}}\n   {{/bs-nav}}\n\n   <div class=\"tab-content\">\n   {{#bs-tab-pane elementId=\"pane1\" title=\"Tab 1\"}}\n       <p>...</p>\n   {{/bs-tab-pane}}\n   {{#bs-tab-pane elementId=\"pane2\" title=\"Tab 2\"}}\n       <p>...</p>\n   {{/bs-tab-pane}}\n   </div>\n{{/bs-tab}}\n```\n\nNote that the `bs-eq` helper used in the example above is a private helper, which is not guaranteed to be available for\nthe future. Better use the corresponding `eq` helper of the\n[ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!\n\n### Routable tabs\n\nThe tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and\ndeactivated dynamically, just as the  original Bootstrap implementation.\n\nIf you want to have the content delivered through individual sub routes, just use\nthe [Components.Nav](Components.Nav.html) component and an `{{outlet}}` that show the nested routes' content:\n\n```hbs\n<div>\n  {{#bs-nav type=\"tabs\"}}\n    {{#bs-nav-item}}{{#link-to \"tabs.index\"}}Tab 1{{/link-to}}{{/bs-nav-item}}\n    {{#bs-nav-item}}{{#link-to \"tabs.other\"}}Tab 2{{/link-to}}{{/bs-nav-item}}\n  {{/bs-nav}}\n  {{outlet}}\n</div>\n```",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.ComponentParent"
@@ -2650,6 +2650,18 @@
         {
             "file": "addon/components/bs-form-element.js",
             "line": 208,
+            "description": "Control element's HTML5 readonly attribute",
+            "itemtype": "property",
+            "name": "readonly",
+            "type": "boolean",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.FormElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-form-element.js",
+            "line": 217,
             "description": "Control element's HTML5 required attribute",
             "itemtype": "property",
             "name": "required",
@@ -2661,7 +2673,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 217,
+            "line": 226,
             "description": "Control element's HTML5 autofocus attribute",
             "itemtype": "property",
             "name": "autofocus",
@@ -2673,7 +2685,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 226,
+            "line": 235,
             "description": "Control element's name attribute",
             "itemtype": "property",
             "name": "name",
@@ -2685,7 +2697,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 235,
+            "line": 244,
             "description": "An array of objects containing the selection of choices for multiple choice style form controls, e.g. select\nboxes.\n\n```hbs\n{{bs-form-element controlType=\"select\" choices=countries choiceLabelProperty=\"name\" choiceValueProperty=\"id\" label=\"Country\" value=selectedCountry}}\n```\n\nBe sure to also set the `choiceValueProperty` and `choiceLabelProperty` properties.",
             "itemtype": "property",
             "name": "choices",
@@ -2697,7 +2709,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 251,
+            "line": 260,
             "description": "The property of the `choices` array of objects, containing the value of the choice, e.g. the select box option.",
             "itemtype": "property",
             "name": "choiceValueProperty",
@@ -2709,7 +2721,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 260,
+            "line": 269,
             "description": "The property of the `choices` array of objects, containing the label of the choice, e.g. the select box option.",
             "itemtype": "property",
             "name": "choiceLabelProperty",
@@ -2721,7 +2733,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 269,
+            "line": 278,
             "description": "Textarea's rows attribute (ignored for other `controlType`s)",
             "itemtype": "property",
             "name": "rows",
@@ -2734,7 +2746,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 279,
+            "line": 288,
             "description": "Textarea's cols attribute (ignored for other `controlType`s)",
             "itemtype": "property",
             "name": "cols",
@@ -2746,7 +2758,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 288,
+            "line": 297,
             "description": "The model used for validation. Defaults to the parent `Components.Form`'s `model`",
             "itemtype": "property",
             "name": "model",
@@ -2757,7 +2769,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 296,
+            "line": 305,
             "description": "The array of error messages from the `model`'s validation.",
             "itemtype": "property",
             "name": "errors",
@@ -2769,7 +2781,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 305,
+            "line": 314,
             "itemtype": "property",
             "name": "hasErrors",
             "type": "boolean",
@@ -2781,7 +2793,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 313,
+            "line": 322,
             "description": "The array of warning messages from the `model`'s validation.",
             "itemtype": "property",
             "name": "errors",
@@ -2793,7 +2805,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 322,
+            "line": 331,
             "itemtype": "property",
             "name": "hasWarnings",
             "type": "boolean",
@@ -2805,7 +2817,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 330,
+            "line": 339,
             "description": "The array of validation messages (either errors or warnings) rom the `model`'s validation.",
             "itemtype": "property",
             "name": "validationMessages",
@@ -2817,7 +2829,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 347,
+            "line": 356,
             "itemtype": "property",
             "name": "hasValidationMessages",
             "type": "boolean",
@@ -2829,7 +2841,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 355,
+            "line": 364,
             "itemtype": "property",
             "name": "hasValidator",
             "type": "boolean",
@@ -2841,7 +2853,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 363,
+            "line": 372,
             "description": "Set a validating state for async validations",
             "itemtype": "property",
             "name": "isValidating",
@@ -2854,7 +2866,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 373,
+            "line": 382,
             "description": "If `true` form validation markup is rendered (requires a validatable `model`).",
             "itemtype": "property",
             "name": "showValidation",
@@ -2867,7 +2879,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 383,
+            "line": 392,
             "itemtype": "property",
             "name": "showValidationMessages",
             "type": "boolean",
@@ -2879,7 +2891,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 391,
+            "line": 400,
             "description": "Event or list of events which enable form validation markup rendering.\nSupported events: ['focusOut', 'change']",
             "itemtype": "property",
             "name": "showValidationOn",
@@ -2892,7 +2904,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 402,
+            "line": 411,
             "itemtype": "property",
             "name": "_showValidationOn",
             "type": "array",
@@ -2904,7 +2916,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 423,
+            "line": 432,
             "itemtype": "method",
             "name": "showValidationOnHandler",
             "access": "private",
@@ -2914,7 +2926,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 433,
+            "line": 442,
             "itemtype": "property",
             "name": "showErrors",
             "type": "boolean",
@@ -2927,7 +2939,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 442,
+            "line": 451,
             "description": "The validation (\"error\" or \"success\") or null if no validation is to be shown. Automatically computed from the\nmodels validation state.",
             "itemtype": "property",
             "name": "validation",
@@ -2940,7 +2952,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 458,
+            "line": 467,
             "itemtype": "property",
             "name": "hasLabel",
             "type": "boolean",
@@ -2952,7 +2964,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 466,
+            "line": 475,
             "description": "True for text field `controlType`s",
             "itemtype": "property",
             "name": "useIcons",
@@ -2965,7 +2977,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 478,
+            "line": 487,
             "description": "The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):\n\n* 'horizontal'\n* 'vertical'\n* 'inline'\n\nDefaults to the parent `form`'s `formLayout` property.",
             "itemtype": "property",
             "name": "formLayout",
@@ -2977,7 +2989,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 493,
+            "line": 502,
             "itemtype": "property",
             "name": "isVertical",
             "type": "boolean",
@@ -2989,7 +3001,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 501,
+            "line": 510,
             "itemtype": "property",
             "name": "isHorizontal",
             "type": "boolean",
@@ -3001,7 +3013,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 509,
+            "line": 518,
             "itemtype": "property",
             "name": "isInline",
             "type": "boolean",
@@ -3013,7 +3025,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 517,
+            "line": 526,
             "description": "The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same\nproperty of the parent form. The corresponding grid class for form controls is automatically computed.",
             "itemtype": "property",
             "name": "horizontalLabelGridClass",
@@ -3026,7 +3038,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 528,
+            "line": 537,
             "description": "Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.",
             "itemtype": "property",
             "name": "horizontalInputGridClass",
@@ -3039,7 +3051,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 543,
+            "line": 552,
             "description": "Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout\nform, that have no label.",
             "itemtype": "property",
             "name": "horizontalInputOffsetGridClass",
@@ -3052,7 +3064,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 558,
+            "line": 567,
             "description": "ID for input field and the corresponding label's \"for\" attribute",
             "itemtype": "property",
             "name": "formElementId",
@@ -3064,7 +3076,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 570,
+            "line": 579,
             "description": "Reference to the parent `Components.Form` class.",
             "itemtype": "property",
             "name": "form",
@@ -3075,7 +3087,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 596,
+            "line": 605,
             "description": "Setup validation properties. This method acts as a hook for external validation\nlibraries to overwrite. In case of failed validations the `errors` property should contain an array of error messages.",
             "itemtype": "method",
             "name": "setupValidations",
@@ -3086,7 +3098,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 605,
+            "line": 614,
             "description": "Listen for focusOut events from the control element to automatically set `showValidation` to true to enable\nform validation markup rendering if `showValidationsOn` contains `focusOut`.",
             "itemtype": "event",
             "name": "focusOut",
@@ -3097,7 +3109,7 @@
         },
         {
             "file": "addon/components/bs-form-element.js",
-            "line": 616,
+            "line": 625,
             "description": "Listen for change events from the control element to automatically set `showValidation` to true to enable\nform validation markup rendering if `showValidationsOn` contains `change`.",
             "itemtype": "event",
             "name": "change",

@@ -40,7 +40,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v0.11.2</span></h1>
+    <h1>API Docs <span class="small">0.11.3.c321ebf7</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -78,7 +78,7 @@ see <a href="http://getbootstrap.com/javascript/#tabs">http://getbootstrap.com/j
 <h3>Usage</h3>
 <p>Just nest any number of <a href="Components.TabPane.html">Components.TabPane</a> components that hold the tab content.
 The tab navigation is automatically generated from the tab panes' <code>title</code> property:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-tab type=type.id}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-tab}}
   {{#bs-tab-pane title=&quot;Tab 1&quot;}}
     &lt;p&gt;...&lt;/p&gt;
   {{/bs-tab-pane}}
@@ -91,7 +91,7 @@ The tab navigation is automatically generated from the tab panes' <code>title</c
 <p>Bootstrap's support for dropdown menus as tab navigation is mimiced by the use of the <code>groupTitle</code> property.
 All panes with the same <code>groupTitle</code> will be put inside the menu of a <a href="Components.Dropdown.html">Components.Dropdown</a>
 component with <code>groupTitle</code> being the dropdown's title:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-tab type=type.id}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-tab}}
    {{#bs-tab-pane title=&quot;Tab 1&quot;}}
      &lt;p&gt;...&lt;/p&gt;
    {{/bs-tab-pane}}
