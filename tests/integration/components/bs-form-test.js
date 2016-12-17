@@ -23,7 +23,7 @@ test('form has correct CSS class', function(assert) {
 });
 
 test('it yields form element component', function(assert) {
-  this.render(hbs`{{#bs-form formLayout=formLayout as |form|}}{{form.element}}{{/bs-form}}`);
+  this.render(hbs`{{#bs-form as |form|}}{{form.element}}{{/bs-form}}`);
 
   assert.equal(this.$('.form-group').length, 1, 'form has element');
 });
@@ -114,6 +114,21 @@ test('Submitting the form with invalid validation shows validation errors', func
     done();
   }, 1);
 
+});
+
+test('Adds default onChange action to form elements that updates model\'s property', function(assert) {
+  let model = Ember.Object.create({
+    name: 'foo'
+  });
+  this.set('model', model);
+  this.render(hbs`{{#bs-form model=model as |form|}}
+    {{form.element property="name"}}
+  {{/bs-form}}`);
+
+  assert.equal(this.$('input').val(), 'foo', 'input has model property value');
+
+  this.$('input').val('bar').trigger('input');
+  assert.equal(model.get('name'), 'bar', 'model property was updated');
 });
 
 test('Pressing enter on a form with submitOnEnter submits the form', function(assert) {

@@ -119,7 +119,7 @@ const nonTextFieldControlTypes = A([
  {{/bs-form}}
  ```
 
- The component yields the following hash properties as a block param:
+ The component yields a hash with the following properties:
  * `id`: id to be used for the form control, so it matches the labels `for` attribute
  * `value`: the value of the form element
  * `validation`: the validation state of the element, `null` if no validation is to be shown, otherwise 'success', 'error' or 'warning'
@@ -621,6 +621,17 @@ export default FormGroup.extend({
     this.showValidationOnHandler('change');
   },
 
+  /**
+   * The action is called whenever the input value is changed, e.g. by typing text
+   *
+   * @event onChange
+   * @param {String} value The new value of the form control
+   * @param {Object} model The form element's model
+   * @param {String} property The value of `property`
+   * @public
+   */
+  onChange: noop,
+
   init() {
     this._super(...arguments);
     if (!isBlank(this.get('property'))) {
@@ -671,5 +682,12 @@ export default FormGroup.extend({
           });
       }
     });
-  }))
+  })),
+
+  actions: {
+    change(value) {
+      let { onChange, model, property } = this.getProperties('onChange', 'model', 'property');
+      onChange(value, model, property);
+    }
+  }
 });

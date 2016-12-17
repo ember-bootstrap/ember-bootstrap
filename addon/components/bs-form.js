@@ -4,7 +4,10 @@ import layout from '../templates/components/bs-form';
 const {
   computed,
   K: noop,
-  RSVP
+  RSVP,
+  set,
+  assert,
+  isPresent
 } = Ember;
 
 /**
@@ -251,6 +254,15 @@ export default Ember.Component.extend({
     let code = e.keyCode || e.which;
     if (code === 13 && this.get('submitOnEnter')) {
       this.$().submit();
+    }
+  },
+
+  actions: {
+    change(value, model, property) {
+      assert('You cannot use the form\'s default onChange action for form elements if not using a model of setting the value directly on a form element. You must add your own onChange action to the form element in this case!',
+        isPresent(model) && isPresent(property)
+      );
+      set(model, property, value);
     }
   }
 });

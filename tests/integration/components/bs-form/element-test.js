@@ -1,4 +1,5 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -25,7 +26,17 @@ test('setting label property displays label tag', function(assert) {
   assert.equal(this.$('label').text().trim(), 'myLabel', 'label has text');
 });
 
-function controlTypeSupportTest(assert, controlType, selector, values, getValueFn) {
+function controlTypeLayoutTest(assert, controlType, selector) {
+  this.set('controlType', controlType);
+
+  formLayouts.forEach((layout) => {
+    this.set('formLayout', layout);
+    this.render(hbs`{{bs-form/element controlType=controlType formLayout=formLayout horizontalLabelGridClass="col-md-4"}}`);
+    assert.equal(this.$(selector).length, 1, `component has ${controlType} control for form layout ${layout}`);
+  });
+}
+
+function controlTypeValueTest(assert, controlType, selector, values, getValueFn) {
   if (!isArray(values)) {
     values = [values];
   }
@@ -35,15 +46,36 @@ function controlTypeSupportTest(assert, controlType, selector, values, getValueF
 
   formLayouts.forEach((layout) => {
     this.set('formLayout', layout);
-    this.render(hbs`{{#bs-form formLayout=formLayout as |form|}}{{form.element controlType=controlType value=value}}{{/bs-form}}`);
-
-    assert.equal(this.$(selector).length, 1, `component has ${controlType} control for form layout ${layout}`);
+    this.render(hbs`{{bs-form/element controlType=controlType formLayout=formLayout horizontalLabelGridClass="col-md-4" value=value}}`);
 
     values.forEach((value) => {
       this.set('value', value);
       let hasValue = typeof getValueFn === 'function' ? getValueFn.call(this.$(selector)) : this.$(selector).val();
-      assert.equal(hasValue, value, `{controlType} control has correct values for form layout ${layout}`);
+      assert.equal(hasValue, value, `${controlType} control has correct values for form layout ${layout}`);
     });
+  });
+}
+
+function controlTypeUpdateTest(assert, controlType, selector, value, oldValue = 'foo', setValueFn = null) {
+  this.set('controlType', controlType);
+  let action = this.spy();
+  this.on('change', action);
+
+  formLayouts.forEach((layout) => {
+    this.set('formLayout', layout);
+    let model = Ember.Object.create({
+      name: oldValue
+    });
+    this.set('model', model);
+    this.render(hbs`{{bs-form/element controlType=controlType formLayout=formLayout horizontalLabelGridClass="col-md-4" model=model property="name" onChange=(action "change")}}`);
+
+    if (typeof setValueFn === 'function') {
+      setValueFn.call(this.$(selector), value);
+    } else {
+      this.$(selector).val(value).trigger('input');
+    }
+    assert.equal(this.get('model.name'), oldValue, `${controlType} value has not changed for form layout ${layout}`);
+    assert.ok(action.calledWith(value, model, 'name'), `onChange action of ${controlType} has been called with expected args for form layout ${layout}`);
   });
 }
 
@@ -58,19 +90,40 @@ function labeledControlTest(assert, controlType, selector) {
 }
 
 test('controlType "text" is supported', function(assert) {
-  controlTypeSupportTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
+  controlTypeLayoutTest.call(this, assert, 'text', 'input[type=text]');
+  controlTypeValueTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
+  controlTypeUpdateTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
   labeledControlTest.call(this, assert, 'text', 'input[type=text]');
 });
 
 test('controlType "checkbox" is supported', function(assert) {
-  controlTypeSupportTest.call(this, assert, 'checkbox', 'input[type=checkbox]', [true, false], function() {
+  controlTypeLayoutTest.call(this, assert, 'checkbox', 'input[type=checkbox]');
+  controlTypeValueTest.call(this, assert, 'checkbox', 'input[type=checkbox]', [true, false], function() {
     return this.is(':checked');
+  });
+  controlTypeUpdateTest.call(this, assert, 'checkbox', 'input[type=checkbox]', true, false, function() {
+    return this.click();
   });
 });
 
 test('controlType "textarea" is supported', function(assert) {
-  controlTypeSupportTest.call(this, assert, 'textarea', 'textarea', 'myValue');
+  controlTypeLayoutTest.call(this, assert, 'textarea', 'textarea', 'myValue');
+  controlTypeValueTest.call(this, assert, 'textarea', 'textarea', 'myValue');
+  controlTypeUpdateTest.call(this, assert, 'textarea', 'textarea', 'myValue');
   labeledControlTest.call(this, assert, 'textarea', 'textarea');
+});
+
+test('using "property" creates binding to model property', function(assert) {
+  let model = Ember.Object.create({
+    foo: 'bar'
+  });
+  this.set('model', model);
+  this.render(hbs`{{bs-form/element property="foo" model=model}}`);
+
+  assert.equal(this.$('input').val(), 'bar', 'input has expected value from model');
+
+  this.set('model.foo', 'baz');
+  assert.equal(this.$('input').val(), 'baz', 'input updates value from model');
 });
 
 test('Changing formLayout changes markup', function(assert) {
@@ -112,23 +165,41 @@ test('Custom controls are supported', function(assert) {
 });
 
 test('required property propagates', function(assert) {
-  this.render(hbs`{{bs-form/element label="myLabel" property="foo" required=true}}`);
+  this.render(hbs`{{bs-form/element label="myLabel" required=true}}`);
 
   assert.ok(this.$('.form-group').hasClass('is-required'), 'component has is-required class');
   assert.equal(this.$('input').attr('required'), 'required', 'input html5 required is true');
 });
 
 test('disabled property propagates', function(assert) {
-  this.render(hbs`{{bs-form/element label="myLabel" property="foo" disabled=true}}`);
+  this.render(hbs`{{bs-form/element label="myLabel" disabled=true}}`);
 
   assert.ok(this.$('.form-group').hasClass('is-disabled'), 'component has is-disabled class');
   assert.equal(this.$('input').attr('disabled'), 'disabled', 'input html5 disabled is true');
 });
 
 test('readonly property propagates', function(assert) {
-  this.render(hbs`{{bs-form/element label="myLabel" property="foo" readonly=true}}`);
+  this.render(hbs`{{bs-form/element label="myLabel" readonly=true}}`);
 
   assert.equal(this.$('input').attr('readonly'), 'readonly', 'input html5 readonly is true');
+});
+
+test('placeholder property propagates', function(assert) {
+  this.render(hbs`{{bs-form/element label="myLabel" placeholder="foo"}}`);
+
+  assert.equal(this.$('input').attr('placeholder'), 'foo', 'input html5 placeholder is set');
+});
+
+test('name property propagates', function(assert) {
+  this.render(hbs`{{bs-form/element label="myLabel" name="foo"}}`);
+
+  assert.equal(this.$('input').attr('name'), 'foo', 'input html5 name is set');
+});
+
+test('autofocus property propagates', function(assert) {
+  this.render(hbs`{{bs-form/element label="myLabel" autofocus=true}}`);
+
+  assert.equal(this.$('input').attr('autofocus'), 'autofocus', 'input html5 autofocus is true');
 });
 
 test('if invisibleLabel is true sr-only class is added to label', function(assert) {
@@ -210,14 +281,14 @@ test('adjusts validation icon position if there is an input group', function(ass
   /* PhantomJS 1.9 used by travis fails test due to a positioning or rounding issue.
    * PhantomJS 2.x and all major browsers are fine.
    * Replace test above by the strict one after travis upgraded PhantomJS finally.
-  assert.equal(
-    this.$('.addon .form-control-feedback').css('right'),
-    `${this.$('.addon .input-group-addon').outerWidth() + 15}px`,
-    'takes bootstrap default positioning into account'
-  );
-  */
+   assert.equal(
+   this.$('.addon .form-control-feedback').css('right'),
+   `${this.$('.addon .input-group-addon').outerWidth() + 15}px`,
+   'takes bootstrap default positioning into account'
+   );
+   */
   let gap = parseInt(this.$('.addon .form-control-feedback').css('right')) -
-            this.$('.addon .input-group-addon').outerWidth() - 15;
+    this.$('.addon .input-group-addon').outerWidth() - 15;
   assert.ok(
     gap === 0 || gap === -1,
     'takes bootstrap default positioning into account'

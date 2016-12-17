@@ -10,7 +10,7 @@
 
 <h2>Automatically bound fields, automatic markup, with validation</h2>
 
-{{#bs-form formLayout=formLayout model=this action="submit" as |form|}}
+{{#bs-form formLayout=formLayout model=this onSubmit=(action "submit") as |form|}}
     {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=true}}
     {{form.element controlType="password" label="Password" placeholder="Password" property="password" required=true}}
     {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
@@ -28,10 +28,10 @@
 {{/bs-form}}
 
 <h2>Custom Controls</h2>
-{{#bs-form formLayout=formLayout model=this action="submit" as |form|}}
-    {{#form.element label="Email" placeholder="Email" property="email" as |value id|}}
+{{#bs-form formLayout=formLayout model=this onSubmit=(action "submit") as |form|}}
+    {{#form.element label="Email" placeholder="Email" property="email" as |el|}}
       <div class="input-group">
-        {{bs-input id=id value=value}}
+        {{bs-input id=el.id value=el.value}}
         <span class="input-group-addon">@example.com</span>
       </div>
     {{/form.element}}

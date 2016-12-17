@@ -10,7 +10,7 @@
         )
     }}
 {{else}}
-    {{bs-input id=formElementId name=name type=controlType value=value placeholder=placeholder autofocus=autofocus disabled=disabled readonly=readonly required=required}}
+    <input value={{value}} class="form-control" oninput={{action "change" value="target.value"}} id={{formElementId}} name={{name}} type={{controlType}} placeholder={{placeholder}} autofocus={{autofocus}} disabled={{disabled}} readonly={{if readonly "readonly"}} required={{required}}>
 {{/if}}
 {{partial "components/form-element/feedback-icon"}}
 {{partial "components/form-element/errors"}}
