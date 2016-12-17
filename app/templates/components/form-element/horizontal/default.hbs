@@ -2,7 +2,13 @@
     <label class="control-label {{horizontalLabelGridClass}} {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
     <div class="{{horizontalInputGridClass}}">
         {{#if hasBlock}}
-            {{yield value formElementId validation}}
+                {{yield
+                    (hash
+                        value=value
+                        id=formElementId
+                        validation=validation
+                    )
+                }}
         {{else}}
             {{bs-input id=formElementId name=name type=controlType value=value placeholder=placeholder autofocus=autofocus disabled=disabled readonly=readonly required=required}}
         {{/if}}
@@ -12,7 +18,13 @@
 {{else}}
     <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
         {{#if hasBlock}}
-            {{yield value formElementId validation}}
+            {{yield
+                (hash
+                    value=value
+                    id=formElementId
+                    validation=validation
+                )
+            }}
         {{else}}
             {{bs-input name=name type=controlType value=value placeholder=placeholder autofocus=autofocus disabled=disabled readonly=readonly required=required}}
         {{/if}}

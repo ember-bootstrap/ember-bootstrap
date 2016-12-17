@@ -2,9 +2,23 @@ import Ember from 'ember';
 import layout from '../../templates/components/bs-form/element';
 import FormGroup from 'ember-bootstrap/components/bs-form-group';
 
-const { computed, defineProperty, isArray, observer, on, run, warn, K: noop } = Ember;
+const {
+  computed,
+  defineProperty,
+  isArray,
+  isBlank,
+  observer,
+  on,
+  run: {
+    scheduleOnce
+  },
+  assert,
+  K: noop,
+  typeOf,
+  A
+} = Ember;
 
-const nonTextFieldControlTypes = Ember.A([
+const nonTextFieldControlTypes = A([
   'checkbox',
   'textarea'
 ]);
@@ -99,11 +113,16 @@ const nonTextFieldControlTypes = Ember.A([
 
  ```hbs
  {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
-   {{#form.element label="Select-2" property="gender" useIcons=false as |value id validationState|}}
-     {{select-2 id=id content=genderChoices optionLabelPath="label" value=value searchEnabled=false}}
+   {{#form.element label="Select-2" property="gender" useIcons=false as |el|}}
+     {{select-2 id=el.id content=genderChoices optionLabelPath="label" value=el.value searchEnabled=false}}
    {{/form.element}}
  {{/bs-form}}
  ```
+
+ The component yields the following hash properties as a block param:
+ * `id`: id to be used for the form control, so it matches the labels `for` attribute
+ * `value`: the value of the form element
+ * `validation`: the validation state of the element, `null` if no validation is to be shown, otherwise 'success', 'error' or 'warning'
 
  If your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports
  feedback icons with textual `<input class="form-control">` elements.
@@ -131,7 +150,7 @@ export default FormGroup.extend({
   label: null,
 
   /**
-   * Controls label visibilty by adding 'sr-only' class.
+   * Controls label visibility by adding 'sr-only' class.
    *
    * @property invisibleLabel
    * @type boolean
@@ -145,7 +164,6 @@ export default FormGroup.extend({
    *
    * * 'text'
    * * 'checkbox'
-   * * 'select' (deprecated)
    * * 'textarea'
    * * any other type will use an input tag with the `controlType` value as the type attribute (for e.g. HTML5 input
    * types like 'email'), and the same layout as the 'text' type
@@ -239,40 +257,6 @@ export default FormGroup.extend({
    * @public
    */
   name: null,
-
-  /**
-   * An array of objects containing the selection of choices for multiple choice style form controls, e.g. select
-   * boxes.
-   *
-   * ```hbs
-   * {{form.element controlType="select" choices=countries choiceLabelProperty="name" choiceValueProperty="id" label="Country" value=selectedCountry}}
-   * ```
-   *
-   * Be sure to also set the `choiceValueProperty` and `choiceLabelProperty` properties.
-   *
-   * @property choices
-   * @type array
-   * @public
-   */
-  choices: Ember.A(),
-
-  /**
-   * The property of the `choices` array of objects, containing the value of the choice, e.g. the select box option.
-   *
-   * @property choiceValueProperty
-   * @type string
-   * @public
-   */
-  choiceValueProperty: null,
-
-  /**
-   * The property of the `choices` array of objects, containing the label of the choice, e.g. the select box option.
-   *
-   * @property choiceLabelProperty
-   * @type string
-   * @public
-   */
-  choiceLabelProperty: null,
 
   /**
    * Textarea's rows attribute (ignored for other `controlType`s)
@@ -432,6 +416,7 @@ export default FormGroup.extend({
   _showValidationOn: computed('showValidationOn', function() {
     let showValidationOn = this.get('showValidationOn');
 
+    assert('showValidationOn must be a String or an Array', isArray(showValidationOn) || typeOf(showValidationOn) === 'string');
     if (isArray(showValidationOn)) {
       return showValidationOn;
     }
@@ -439,8 +424,6 @@ export default FormGroup.extend({
     if (typeof showValidationOn.toString === 'function') {
       return [showValidationOn];
     }
-
-    warn('showValidationOn must be a String or an Array');
     return [];
   }),
 
@@ -559,7 +542,7 @@ export default FormGroup.extend({
    */
   horizontalInputGridClass: computed('horizontalLabelGridClass', function() {
     let parts = this.get('horizontalLabelGridClass').split('-');
-    Ember.assert('horizontalInputGridClass must match format bootstrap grid column class', parts.length === 3);
+    assert('horizontalInputGridClass must match format bootstrap grid column class', parts.length === 3);
     parts[2] = 12 - parts[2];
     return parts.join('-');
   }).readOnly(),
@@ -639,8 +622,8 @@ export default FormGroup.extend({
   },
 
   init() {
-    this._super();
-    if (!Ember.isBlank(this.get('property'))) {
+    this._super(...arguments);
+    if (!isBlank(this.get('property'))) {
       defineProperty(this, 'value', computed.alias(`model.${this.get('property')}`));
       this.setupValidations();
     }
@@ -655,7 +638,7 @@ export default FormGroup.extend({
    *  value to an appropriate pixel value depending on the width of your addon.
    */
   adjustFeedbackIcons: on('didInsertElement', observer('hasFeedback', 'formLayout', function() {
-    run.scheduleOnce('afterRender', () => {
+    scheduleOnce('afterRender', () => {
       // validation state icons are only shown if form element has feedback
       if (this.get('hasFeedback') && !this.get('isDestroying')) {
         // form group element has
@@ -671,7 +654,7 @@ export default FormGroup.extend({
             this.$('.form-control-feedback').css('right', '');
             let feedbackIcon = this.$('.form-control-feedback', formGroups);
             let defaultPositionString = feedbackIcon.css('right');
-            Ember.assert(
+            assert(
               defaultPositionString.substr(-2) === 'px',
               '.form-control-feedback css right units other than px are not supported'
             );

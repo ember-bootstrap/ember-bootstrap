@@ -2,6 +2,11 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
+const {
+  isArray,
+  A
+} = Ember;
+
 moduleForComponent('bs-form/element', 'Integration | Component | bs-form/element', {
   integration: true
 });
@@ -20,28 +25,17 @@ test('setting label property displays label tag', function(assert) {
   assert.equal(this.$('label').text().trim(), 'myLabel', 'label has text');
 });
 
-function controlTypeSupportTest(assert, controlType, selector, values, getValueFn, componentOptions) {
-  componentOptions = componentOptions || {};
-
-  if (!Ember.isArray(values)) {
+function controlTypeSupportTest(assert, controlType, selector, values, getValueFn) {
+  if (!isArray(values)) {
     values = [values];
   }
-  values = Ember.A(values);
+  values = A(values);
 
   this.set('controlType', controlType);
-  if (componentOptions.choices) {
-    this.set('choices', componentOptions.choices);
-  }
-  if (componentOptions.choiceLabelProperty) {
-    this.set('choiceLabelProperty', componentOptions.choiceLabelProperty);
-  }
-  if (componentOptions.choiceValueProperty) {
-    this.set('choiceValueProperty', componentOptions.choiceValueProperty);
-  }
 
   formLayouts.forEach((layout) => {
     this.set('formLayout', layout);
-    this.render(hbs`{{#bs-form formLayout=formLayout as |form|}}{{form.element controlType=controlType choices=choices choiceLabelProperty=choiceLabelProperty choiceValueProperty=choiceValueProperty value=value}}{{/bs-form}}`);
+    this.render(hbs`{{#bs-form formLayout=formLayout as |form|}}{{form.element controlType=controlType value=value}}{{/bs-form}}`);
 
     assert.equal(this.$(selector).length, 1, `component has ${controlType} control for form layout ${layout}`);
 
@@ -103,10 +97,10 @@ test('Custom controls are supported', function(assert) {
   );
   this.render(hbs`
     {{#bs-form model=model as |form|}}
-      {{#form.element label="Gender" property="gender" validation="success" as |value id validation|}}
-        <div id="value">{{value}}</div>
-        <div id="id">{{id}}</div>
-        <div id="validation">{{validation}}</div>
+      {{#form.element label="Gender" property="gender" validation="success" as |el|}}
+        <div id="value">{{el.value}}</div>
+        <div id="id">{{el.id}}</div>
+        <div id="validation">{{el.validation}}</div>
       {{/form.element}}
     {{/bs-form}}
   `);

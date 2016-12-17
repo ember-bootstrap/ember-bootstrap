@@ -2,7 +2,13 @@
     <label class="control-label {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
 {{/if}}
 {{#if hasBlock}}
-    {{yield value formElementId validation}}
+    {{yield
+        (hash
+            value=value
+            id=formElementId
+            validation=validation
+        )
+    }}
 {{else}}
     {{bs-input id=formElementId name=name type=controlType value=value placeholder=placeholder autofocus=autofocus disabled=disabled readonly=readonly required=required}}
 {{/if}}
