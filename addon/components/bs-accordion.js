@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/bs-accordion';
+import listenTo from '../utils/listen-to-cp';
 
 const { K: noop } = Ember;
 
@@ -39,7 +40,10 @@ export default Ember.Component.extend({
   ariaRole: 'tablist',
 
   /**
-   * The value of the currently selected accordion item
+   * The value of the currently selected accordion item. Set this to change selection programmatically.
+   *
+   * When the selection is changed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onChange` action
    *
    * @property selected
    * @public
@@ -47,10 +51,18 @@ export default Ember.Component.extend({
   selected: null,
 
   /**
+   * The value of the currently selected accordion item
+   *
+   * @property isSelected
+   * @private
+   */
+  isSelected: listenTo('selected'),
+
+  /**
    * Action when the selected accordion item is about to be changed.
    *
    * You can return false to prevent changing the active item, and do that in your action by
-   * setting `selected` accordingly.
+   * setting the `selected` accordingly.
    *
    * @event onChange
    * @param newValue
@@ -61,12 +73,12 @@ export default Ember.Component.extend({
 
   actions: {
     change(newValue) {
-      let oldValue = this.get('selected');
+      let oldValue = this.get('isSelected');
       if (oldValue === newValue) {
         newValue = null;
       }
       if (this.get('onChange')(newValue, oldValue) !== false) {
-        this.set('selected', newValue);
+        this.set('isSelected', newValue);
       }
     }
   }

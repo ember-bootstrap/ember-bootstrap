@@ -132,6 +132,19 @@ test('prevents changing selection when onChange returns false', function(assert)
   }, 500);
 });
 
+test('changing selection does not leak to public selected property (DDAU)', function(assert) {
+  this.set('selected', 1);
+  this.render(hbs`{{#bs-accordion selected=selected as |acc|}}
+    {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
+    {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
+  {{/bs-accordion}}`);
+
+  let item = this.$('.panel:eq(1)');
+
+  item.find('.panel-heading').click();
+  assert.equal(this.get('selected'), 1, 'Does not modify public selected property');
+});
+
 test('yields change action to add custom behaviour', function(assert) {
   this.set('selected', 1);
   this.render(hbs`{{#bs-accordion selected=1 as |acc|}}
