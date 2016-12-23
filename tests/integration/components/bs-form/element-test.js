@@ -224,7 +224,7 @@ test('adjusts validation icon position if there is an input group', function(ass
     {{#bs-form formLayout=formLayout as |form|}}
       {{#form.element validation=validation label='ajusts validation icon position' classNames='addon'}}
         <div class="input-group">
-          {{bs-input}}
+          <input class="form-control">
           <div class="input-group-addon">
             @example.com
           </div>
@@ -232,7 +232,7 @@ test('adjusts validation icon position if there is an input group', function(ass
       {{/form.element}}
       {{#form.element validation=validation label='ajusts validation icon position' classNames='button'}}
         <div class="input-group">
-          {{bs-input}}
+          <input class="form-control">
           <div class="input-group-btn">
             <button class="btn btn-default" type="button">foo</button>
             <button class="btn btn-default" type="button">bar</button>

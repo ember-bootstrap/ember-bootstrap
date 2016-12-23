@@ -20,7 +20,7 @@ const {
    {{#bs-form action="submit"}}
      {{#bs-form-group validation=firstNameValidation}}
        <label class="control-label">First name</label>
-       {{bs-input type="text" value=firstname}}
+       <input value={{firstname}} class="form-control" oninput={{action (mut firstname) value="target.value"}} type="text">
     {{/bs-form-group}}
   {{/bs-form}}
   ```

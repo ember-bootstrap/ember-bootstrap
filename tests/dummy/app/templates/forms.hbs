@@ -31,7 +31,7 @@
 {{#bs-form formLayout=formLayout model=this onSubmit=(action "submit") as |form|}}
     {{#form.element label="Email" placeholder="Email" property="email" as |el|}}
       <div class="input-group">
-        {{bs-input id=el.id value=el.value}}
+        <input value={{el.value}} class="form-control" oninput={{action (mut el.value) value="target.value"}} id={{el.id}} type="text">
         <span class="input-group-addon">@example.com</span>
       </div>
     {{/form.element}}
