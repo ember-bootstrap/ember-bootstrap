@@ -14,9 +14,11 @@ cache:
 
 before_install:
   - npm config set spin false
-  - npm install -g bower yarn
-  - bower --version
+  - npm install -g bower
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
   - yarn global add phantomjs-prebuilt
+  - yarn --version
+  - bower --version
   - phantomjs --version
 
 install:
