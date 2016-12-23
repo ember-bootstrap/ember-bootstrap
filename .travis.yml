@@ -8,16 +8,15 @@ sudo: false
 cache:
   directories:
     - node_modules
-    - $HOME/.yarn
     - $HOME/.yarn-cache
     - $HOME/.cache # includes bowers cache
 
 before_install:
   - npm config set spin false
-  - npm install -g bower
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
   - yarn global add phantomjs-prebuilt
+  - yarn global add bower
   - yarn --version
   - bower --version
   - phantomjs --version
