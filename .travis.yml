@@ -8,20 +8,23 @@ sudo: false
 cache:
   directories:
     - node_modules
+    - $HOME/.yarn
+    - $HOME/.yarn-cache
+    - $HOME/.cache # includes bowers cache
 
 before_install:
   - npm config set spin false
-  - npm install -g bower
+  - npm install -g bower yarn
   - bower --version
-  - npm install phantomjs-prebuilt
+  - yarn global add phantomjs-prebuilt
   - phantomjs --version
 
 install:
-  - npm install
+  - yarn install
   - bower install
 
 script:
-  - npm test
+  - yarn run test
 
 addons:
     code_climate:
