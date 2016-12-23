@@ -14,6 +14,7 @@ const { K: noop } = Ember;
   {{#bs-accordion as |acc|}}
       {{#acc.item value=1 title="First item"}}
         <p>Lorem ipsum...</p>
+        <button {{action acc.change 2}}>Next</button>
       {{/acc.item}}
       {{#acc.item value=2 title="Second item"}}
         <p>Lorem ipsum...</p>
@@ -23,6 +24,8 @@ const { K: noop } = Ember;
       {{/acc.item}}
   {{/bs-accordion}}
  ```
+
+ In the example above the first accordion item utilizes the yielded `change` action to add some custom behaviour.
 
  @class Accordion
  @namespace Components

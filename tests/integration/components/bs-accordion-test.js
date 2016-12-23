@@ -131,3 +131,27 @@ test('prevents changing selection when onChange returns false', function(assert)
     done();
   }, 500);
 });
+
+test('yields change action to add custom behaviour', function(assert) {
+  this.set('selected', 1);
+  this.render(hbs`{{#bs-accordion selected=1 as |acc|}}
+    {{#acc.item value=1 title="TITLE1"}}CONTENT1 <button {{action acc.change 2}}>Next</button>{{/acc.item}}
+    {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
+  {{/bs-accordion}}`);
+
+  let item = this.$('.panel:eq(0)');
+  let done = assert.async();
+
+  item.find('button').click();
+
+  let newItem = this.$('.panel:eq(1)');
+
+  // wait for transitions to complete
+  setTimeout(() => {
+    assert.equal(newItem.find('.panel-heading').hasClass('collapsed'), false, 'panel-heading has not collapsed class');
+    assert.equal(newItem.find('.panel-collapse').hasClass('collapse'), true, 'panel-collapse has collapse class');
+    assert.equal(newItem.find('.panel-collapse').hasClass('in'), true, 'panel-collapse has in class');
+
+    done();
+  }, 500);
+});
