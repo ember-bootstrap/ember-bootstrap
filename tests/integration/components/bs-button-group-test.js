@@ -112,3 +112,12 @@ test('setting radio button group value to null sets buttons active state to fals
     }
   }
 });
+
+test('clicking button group does not change public value porperty', function(assert) {
+  let value = Ember.A([1]);
+  this.set('value', value);
+  this.render(hbs`{{#bs-button-group type="checkbox" value=value as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
+
+  this.$('button').eq(2).click();
+  assert.equal(this.get('value'), value, 'Does not change value property');
+});
