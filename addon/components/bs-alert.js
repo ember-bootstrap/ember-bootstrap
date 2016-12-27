@@ -1,7 +1,15 @@
 import Ember from 'ember';
+import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
+import layout from '../templates/components/bs-alert';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
+import listenTo from '../utils/listen-to-cp';
 
-const { computed, observer } = Ember;
+const {
+  computed,
+  observer,
+  K: noop,
+  run: { later }
+} = Ember;
 
 /**
  Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts
@@ -21,7 +29,8 @@ const { computed, observer } = Ember;
  @uses Mixins.TypeClass
  @public
  */
-export default Ember.Component.extend(TypeClass, {
+export default Ember.Component.extend(TypeClass, TransitionSupport, {
+  layout,
   classNameBindings: ['alert', 'fade', 'in', 'alert-dismissible'],
 
   /**
@@ -43,7 +52,7 @@ export default Ember.Component.extend(TypeClass, {
    * @type boolean
    * @default false
    * @readonly
-   * @protected
+   * @private
    */
   hidden: false,
 
@@ -51,13 +60,27 @@ export default Ember.Component.extend(TypeClass, {
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
    * has completed.
    *
+   * When the alert is dismissed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onHide` action
+   *
    * @property visible
    * @type boolean
    * @default true
    * @public
    */
   visible: true,
-  notVisible: computed.not('visible'),
+
+  /**
+   * @property _visible
+   * @private
+   */
+  _visible: listenTo('visible'),
+
+  /**
+   * @property notVisible
+   * @private
+   */
+  notVisible: computed.not('_visible'),
 
   /**
    * Set to false to disable the fade out animation when hiding the alert.
@@ -78,13 +101,13 @@ export default Ember.Component.extend(TypeClass, {
    * @private
    */
   alert: computed.not('hidden'),
-  in: computed.and('visible', 'fade'),
+  in: computed.and('_visible', 'fade'),
 
   /**
    * @property classTypePrefix
    * @type String
    * @default 'alert'
-   * @protected
+   * @private
    */
   classTypePrefix: 'alert',
 
@@ -101,26 +124,31 @@ export default Ember.Component.extend(TypeClass, {
   /**
    * The action to be sent after the alert has been dismissed (including the CSS transition).
    *
-   * @property dismissedAction
-   * @type string
-   * @default null
+   * @property onDismissed
+   * @type function
    * @public
    */
-  dismissedAction: null,
+  onDismissed: noop,
+
+  /**
+   * The action is called when the close button is clicked.
+   *
+   * You can return false to prevent closing the alert automatically, and do that in your action by
+   * setting `visible` to false.
+   *
+   * @property onDismiss
+   * @type function
+   * @public
+   */
+  onDismiss: noop,
 
   actions: {
     dismiss() {
-      this.set('visible', false);
+      if (this.get('onDismiss')() !== false) {
+        this.set('_visible', false);
+      }
     }
   },
-
-  _onVisibleChange: observer('visible', function() {
-    if (this.get('visible')) {
-      this.show();
-    } else {
-      this.hide();
-    }
-  }),
 
   /**
    * Call to make the alert visible again after it has been hidden
@@ -129,9 +157,7 @@ export default Ember.Component.extend(TypeClass, {
    * @private
    */
   show() {
-    this.setProperties({
-      hidden: false
-    });
+    this.set('hidden', false);
   },
 
   /**
@@ -142,23 +168,29 @@ export default Ember.Component.extend(TypeClass, {
    * @private
    */
   hide() {
-    if (this.get('fade')) {
-      Ember.run.later(this, function() {
+    if (this.get('usesTransition')) {
+      later(this, function() {
         if (!this.get('isDestroyed')) {
           this.set('hidden', true);
-          this.sendAction('dismissedAction');
+          this.get('onDismissed')();
         }
       }, this.get('fadeDuration'));
     } else {
-      this.setProperties({
-        hidden: true
-      });
-      this.sendAction('dismissedAction');
+      this.set('hidden', true);
+      this.get('onDismissed')();
     }
   },
 
   init() {
     this._super(...arguments);
-    this.set('hidden', !this.get('visible'));
-  }
+    this.set('hidden', !this.get('_visible'));
+  },
+
+  _observeIsVisible: observer('_visible', function() {
+    if (this.get('_visible')) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  })
 });

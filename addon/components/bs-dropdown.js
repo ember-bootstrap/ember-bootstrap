@@ -1,30 +1,25 @@
 import Ember from 'ember';
-import toggleButton from 'ember-bootstrap/components/bs-dropdown-button';
-import ComponentParent from 'ember-bootstrap/mixins/component-parent';
+import layout from '../templates/components/bs-dropdown';
 
-const { computed, observer } = Ember;
+const { computed, $, K: noop, run: { bind } } = Ember;
 
 /**
  Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.
  See http://getbootstrap.com/components/#dropdowns
 
- Use this component together with two sub components, a dropdown toggle (`Components.DropdownToggle` or
+ Use this component together with the yielded contextual components, a dropdown toggle (`Components.DropdownToggle` or
  `Components.DropdownButton` component) and a dropdown menu (`Components.DropdownMenu`) component:
 
  ```hbs
- <nav class="navbar navbar-default navbar-static">
-   <div class="container-fluid">
-     <ul class="nav navbar-nav">
-       {{#bs-dropdown tagName="li"}}
-         {{#bs-dropdown-toggle}}Dropdown <span class="caret"></span>{{/bs-dropdown-toggle}}
-         {{#bs-dropdown-menu}}
-           <li>{{#link-to "index"}}Something{{/link-to}}</li>
-           <li>{{#link-to "index"}}Something different{{/link-to}}</li>
-         {{/bs-dropdown-menu}}
-       {{/bs-dropdown}}
-     </ul>
-   </div>
- </nav>
+ <ul class="nav navbar-nav">
+   {{#bs-dropdown tagName="li" as |dd|}}
+     {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+     {{#dd.menu}}
+       <li>{{#link-to "index"}}Something{{/link-to}}</li>
+       <li>{{#link-to "index"}}Something different{{/link-to}}</li>
+     {{/dd.menu}}
+   {{/bs-dropdown}}
+ </ul>
  ```
 
  ### Button dropdowns
@@ -33,12 +28,12 @@ const { computed, observer } = Ember;
  `Components.DropdownButton` component as the toggle:
 
  ```hbs
- {{#bs-dropdown}}
-   {{#bs-dropdown-button}}Dropdown <span class="caret"></span>{{/bs-dropdown-button}}
-   {{#bs-dropdown-menu}}
+ {{#bs-dropdown as |dd|}}
+   {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
+   {{#dd.menu}}
      <li>{{#link-to "index"}}Something{{/link-to}}</li>
      <li>{{#link-to "index"}}Something different{{/link-to}}</li>
-   {{/bs-dropdown-menu}}
+     {{/dd.menu}}
  {{/bs-dropdown}}
  ```
 
@@ -50,14 +45,14 @@ const { computed, observer } = Ember;
  `Components.Button` component and a `Components.DropdownButton`:
 
  ```hbs
- {{#bs-dropdown}}
+ {{#bs-dropdown as |dd|}}
    {{#bs-button}}Dropdown{{/bs-button}}
-   {{#bs-dropdown-button}}Dropdown <span class="caret"></span>{{/bs-dropdown-button}}
-   {{#bs-dropdown-menu}}
+   {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
+   {{#dd.menu}}
      <li>{{#link-to "index"}}Something{{/link-to}}</li>
      <li>{{#link-to "index"}}Something different{{/link-to}}</li>
-   {{/bs-dropdown-menu}}
- {{/bs-dropdown}}
+   {{/dd.menu}}
+   {{/bs-dropdown}}
  ```
 
  ### Dropup style
@@ -65,8 +60,8 @@ const { computed, observer } = Ember;
  Set the `direction` property to "up" to switch to a "dropup" style:
 
  ```hbs
- {{#bs-dropdown direction="up"}}
-   ...
+ {{#bs-dropdown direction="up" as |dd|}}
+ ...
  {{/bs-dropdown}}
  ```
 
@@ -75,7 +70,8 @@ const { computed, observer } = Ember;
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend(ComponentParent, {
+export default Ember.Component.extend({
+  layout,
   classNameBindings: ['open', 'containerClass'],
 
   /**
@@ -84,7 +80,7 @@ export default Ember.Component.extend(ComponentParent, {
    * @property open
    * @default false
    * @type boolean
-   * @public
+   * @private
    */
   open: false,
 
@@ -125,8 +121,8 @@ export default Ember.Component.extend(ComponentParent, {
    * @readonly
    * @private
    */
-  containerClass: computed('toggleType', 'direction', function() {
-    if (this.get('toggleType') === 'button') {
+  containerClass: computed('toggle.tagName', 'direction', function() {
+    if (this.get('toggle.tagName') === 'button') {
       return this.get('direction') === 'up' ? 'btn-group dropup' : 'btn-group';
     } else {
       return this.get('direction') === 'up' ? 'dropup' : 'dropdown';
@@ -134,51 +130,60 @@ export default Ember.Component.extend(ComponentParent, {
   }),
 
   /**
-   * This property is "button" if the toggle element is an instance of [Components.DropdownButton](Components.DropdownButton.html), otherwise "toggle".
+   * Reference to the child toggle (Toggle or Button)
    *
-   * @property toggleType
-   * @type string
-   * @readonly
-   * @protected
+   * @property toggle
+   * @private
    */
-  toggleType: computed('children.[]', function() {
-    if (this.get('children').any(function(view) {
-        return view instanceof toggleButton;
-      })) {
-      return 'button';
-    }
-    return 'toggle';
-  }),
+  toggle: null,
+
+  /**
+   * Action is called when dropdown is about to be shown
+   *
+   * @event onShow
+   * @param {*} value
+   * @public
+   */
+  onShow: noop,
+
+  /**
+   * Action is called when dropdown is about to be hidden
+   *
+   * @event onHide
+   * @param {*} value
+   * @public
+   */
+  onHide: noop,
 
   actions: {
     toggleDropdown() {
-      this.toggleProperty('open');
+      if (this.get('open')) {
+        this.send('closeDropdown');
+      } else {
+        this.send('openDropdown');
+      }
     },
 
     openDropdown() {
       this.set('open', true);
+      $(document).on(this.clickEventName, bind(this, this.closeOnClickHandler));
+      this.get('onShow')();
     },
 
     closeDropdown() {
       this.set('open', false);
+      $(document).off(this.clickEventName);
+      this.get('onHide')();
     }
   },
 
-  handleClickEvents: observer('open', function() {
-    if (this.get('open')) {
-      Ember.$(document).on(this.clickEventName, Ember.run.bind(this, this.closeOnClickHandler));
-    } else {
-      Ember.$(document).off(this.clickEventName);
-    }
-  }),
-
   willDestroyElement() {
-    this._super();
-    Ember.$(document).off(this.clickEventName);
+    this._super(...arguments);
+    $(document).off(this.clickEventName);
   },
 
   init() {
-    this._super();
+    this._super(...arguments);
     // click event name that is namespaced to our component instance, so multiple dropdowns do not interfere
     // with each other
     this.clickEventName = `click.${this.get('elementId')}`;
@@ -192,11 +197,11 @@ export default Ember.Component.extend(ComponentParent, {
    * @protected
    */
   closeOnClickHandler(e) {
-    let $target = Ember.$(e.target);
+    let $target = $(e.target);
     if (!this.get('isDestroyed') &&
       $target.closest(this.$().find('.dropdown-toggle')).length === 0 &&
       ($target.closest(this.$().find('.dropdown-menu')).length === 0 || this.get('closeOnMenuClick'))) {
-      this.set('open', false);
+      this.send('closeDropdown');
     }
   }
 });

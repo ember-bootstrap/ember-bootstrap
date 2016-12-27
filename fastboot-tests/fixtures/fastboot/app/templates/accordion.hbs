@@ -1,13 +1,13 @@
 <h1>accordion</h1>
 
-{{#bs-accordion id="accordion"}}
-    {{#bs-accordion-item value="1" title="First item"}}
+{{#bs-accordion id="accordion" as |a|}}
+    {{#a.item value="1" title="First item"}}
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
-    {{/bs-accordion-item}}
-    {{#bs-accordion-item value="2" title="Second item"}}
+    {{/a.item}}
+    {{#a.item value="2" title="Second item"}}
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
-    {{/bs-accordion-item}}
-    {{#bs-accordion-item value="3" title="Third item"}}
+    {{/a.item}}
+    {{#a.item value="3" title="Third item"}}
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
-    {{/bs-accordion-item}}
+    {{/a.item}}
 {{/bs-accordion}}

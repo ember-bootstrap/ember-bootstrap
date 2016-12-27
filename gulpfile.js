@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var conventionalChangelog = require('gulp-conventional-changelog');
 var ghpages = require('gh-pages');
 var path = require('path');
 var file = require('gulp-file');
@@ -30,11 +31,10 @@ gulp.task('docs:publish', ['docs:generate', 'docs:copyChangelog'], function () {
   });
 });
 
-gulp.task('docs:changelog', function (done) {
-  require('conventional-changelog')({
-  }, function (err, log) {
-    file('CHANGELOG.md', log, { src: true })
-      .pipe(gulp.dest('./'))
-      .on('end', done);
-  });
+gulp.task('docs:changelog', function () {
+  return gulp.src('CHANGELOG.md')
+    .pipe(conventionalChangelog({
+      preset: 'angular'
+    }))
+    .pipe(gulp.dest('./'));
 });

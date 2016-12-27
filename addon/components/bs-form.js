@@ -1,8 +1,14 @@
 import Ember from 'ember';
-import FormElement from 'ember-bootstrap/components/bs-form-element';
-import ComponentParent from 'ember-bootstrap/mixins/component-parent';
+import layout from '../templates/components/bs-form';
 
-const { computed } = Ember;
+const {
+  computed,
+  K: noop,
+  RSVP,
+  set,
+  assert,
+  isPresent
+} = Ember;
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -14,7 +20,7 @@ const { computed } = Ember;
    {{#bs-form action="submit"}}
      {{#bs-form-group validation=firstNameValidation}}
        <label class="control-label">First name</label>
-       {{bs-input type="text" value=firstname}}
+       <input value={{firstname}} class="form-control" oninput={{action (mut firstname) value="target.value"}} type="text">
     {{/bs-form-group}}
   {{/bs-form}}
   ```
@@ -39,10 +45,10 @@ const { computed } = Ember;
   with an invalid validation, or when focusing out of invalid inputs
 
   ```handlebars
-  {{#bs-form formLayout="horizontal" model=this action="submit"}}
-    {{bs-form-element controlType="email" label="Email" placeholder="Email" property="email"}}
-    {{bs-form-element controlType="password" label="Password" placeholder="Password" property="password"}}
-    {{bs-form-element controlType="checkbox" label="Remember me" property="rememberMe"}}
+  {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
+    {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
+    {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
+    {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
     {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
   {{/bs-form}}
   ```
@@ -75,7 +81,8 @@ const { computed } = Ember;
   @extends Ember.Component
   @public
  */
-export default Ember.Component.extend(ComponentParent, {
+export default Ember.Component.extend({
+  layout,
   tagName: 'form',
   classNameBindings: ['layoutClass'],
   attributeBindings: ['_novalidate:novalidate'],
@@ -164,61 +171,50 @@ export default Ember.Component.extend(ComponentParent, {
   }),
 
   /**
-   * An array of `Components.FormElement`s that are children of this form.
-   *
-   * @property childFormElements
-   * @type Array
-   * @readonly
-   * @protected
-   */
-  childFormElements: computed.filter('children', function(view) {
-    return view instanceof FormElement;
-  }),
-
-  /**
    * Validate hook which will return a promise that will either resolve if the model is valid
    * or reject if it's not. This should be overridden to add validation support.
    *
-   * @param Object model
+   * @param {Object} model
    * @return {Promise}
    * @public
    */
-  validate(/* model */) {
-    Ember.deprecate('[ember-bootstrap] Validation support has been moved to 3rd party addons.\n' +
-                    'ember-validations: https://github.com/kaliber5/ember-bootstrap-validations\n' +
-                    'ember-cp-validations: https://github.com/offirgolan/ember-bootstrap-cp-validations\n',
-      false,
-      {
-        id: 'ember-bootstrap.form.validate',
-        url: 'http://kaliber5.github.io/ember-bootstrap/api/classes/Components.Form.html'
-      }
-    );
-  },
+  validate: noop,
 
   /**
-   * A handler called before the form is validated (if possible) and submitted.
+   * @property showAllValidations
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showAllValidations: false,
+
+  /**
+   * Action is called before the form is validated (if possible) and submitted.
    *
-   * @event before
+   * @event onBefore
    * @param Object model  The form's `model`
    * @public
    */
+  onBefore: noop,
 
   /**
-   * A handler called when submit has been triggered and the model has passed all validations (if present).
+   * Action is called when submit has been triggered and the model has passed all validations (if present).
    *
-   * @event action
+   * @event onSubmit
    * @param Object model  The form's `model`
    * @param Object result The returned result from the validate method, if validation is available
    * @public
    */
+  onSubmit: noop,
 
   /**
-   * A handler called when validation of the model has failed.
+   * Action is called when validation of the model has failed.
    *
-   * @event invalid
+   * @event onInvalid
    * @param Object error
    * @public
    */
+  onInvalid: noop,
 
   /**
    * Submit handler that will send the default action ("action") to the controller when submitting the form.
@@ -237,17 +233,19 @@ export default Ember.Component.extend(ComponentParent, {
     }
     let model = this.get('model');
 
-    this.sendAction('before', model);
+    this.get('onBefore')(model);
 
     if (!this.get('hasValidator')) {
-      return this.sendAction('action', model);
+      return this.get('onSubmit')(model);
     } else {
       let validationPromise = this.validate(this.get('model'));
-      if (validationPromise && validationPromise instanceof Ember.RSVP.Promise) {
-        validationPromise.then((r) => this.sendAction('action', model, r), (err) => {
-          this.get('childFormElements').setEach('showValidation', true);
-          return this.sendAction('invalid', err);
-        });
+      if (validationPromise && validationPromise instanceof RSVP.Promise) {
+        validationPromise
+          .then((r) => this.get('onSubmit')(model, r))
+          .catch((err) => {
+            this.set('showAllValidations', true);
+            return this.get('onInvalid')(model, err);
+          });
       }
     }
   },
@@ -256,6 +254,15 @@ export default Ember.Component.extend(ComponentParent, {
     let code = e.keyCode || e.which;
     if (code === 13 && this.get('submitOnEnter')) {
       this.$().submit();
+    }
+  },
+
+  actions: {
+    change(value, model, property) {
+      assert('You cannot use the form element\'s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!',
+        isPresent(model) && isPresent(property)
+      );
+      set(model, property, value);
     }
   }
 });

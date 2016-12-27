@@ -1,17 +1,17 @@
-{{#bs-nav type="pills"}}
-    {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "forms"}}Forms{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "modal"}}Modals{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "tabs"}}Tabs{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "tooltip"}}Tooltips{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "popover"}}Popovers{{/link-to}}{{/bs-nav-item}}
+{{#bs-nav type="pills" as |nav|}}
+    {{#nav.item}}{{#link-to "alert"}}Alert{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#link-to "button"}}Buttons{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#link-to "forms"}}Forms{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#link-to "modal"}}Modals{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#link-to "navs"}}Navs{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#link-to "tabs"}}Tabs{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#link-to "tooltip"}}Tooltips{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#link-to "popover"}}Popovers{{/link-to}}{{/nav.item}}
 {{/bs-nav}}
 
 <div class="container">

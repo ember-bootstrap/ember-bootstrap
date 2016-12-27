@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import sinonTest from 'dummy/tests/ember-sinon-qunit/test';
+import sinonTest from 'ember-sinon-qunit/test-support/test';
 
 moduleForComponent('bs-tooltip', 'Integration | Component | bs tooltip', {
   integration: true

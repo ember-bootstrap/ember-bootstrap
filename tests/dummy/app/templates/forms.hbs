@@ -1,52 +1,49 @@
 <h1>Forms</h1>
 
 <p>Layout:</p>
-{{#bs-button-group value=formLayout type="radio"}}
-    {{#bs-button value="vertical"}}Vertical{{/bs-button}}
-    {{#bs-button value="horizontal"}}Horizontal{{/bs-button}}
-    {{#bs-button value="inline"}}Inline{{/bs-button}}
+{{#bs-button-group value=formLayout type="radio" onChange=(action (mut formLayout)) as |bg|}}
+    {{#bg.button value="vertical"}}Vertical{{/bg.button}}
+    {{#bg.button value="horizontal"}}Horizontal{{/bg.button}}
+    {{#bg.button value="inline"}}Inline{{/bg.button}}
 {{/bs-button-group}}
 
 
 <h2>Automatically bound fields, automatic markup, with validation</h2>
 
-{{#bs-form formLayout=formLayout model=this action="submit"}}
-    {{bs-form-element controlType="email" label="Email" placeholder="Email" property="email" required=true}}
-    {{bs-form-element controlType="password" label="Password" placeholder="Password" property="password" required=true}}
-    {{bs-form-element controlType="select" choices=genderChoices choiceLabelProperty="label" choiceValueProperty="id" label="Gender" property="gender" required=true}}
-    {{bs-form-element controlType="checkbox" label="Remember me" property="rememberMe"}}
-    {{bs-form-element controlType="textarea" label="Comments" property="comments"}}
+{{#bs-form formLayout=formLayout model=this onSubmit=(action "submit") as |form|}}
+    {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=true}}
+    {{form.element controlType="password" label="Password" placeholder="Password" property="password" required=true}}
+    {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
+    {{form.element controlType="textarea" label="Comments" property="comments"}}
     {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
 {{/bs-form}}
 
 <h2>Manually bound fields, automatic markup, no validations</h2>
 
-{{#bs-form formLayout=formLayout}}
-    {{bs-form-element controlType="email" label="Email" placeholder="Email" value=email}}
-    {{bs-form-element controlType="password" label="Password" placeholder="Password" value=password}}
-    {{bs-form-element controlType="select" choices=genderChoices choiceLabelProperty="label" choiceValueProperty="id" label="Gender" value=gender}}
-    {{bs-form-element controlType="checkbox" label="Remember me" value=rememberMe}}
-    {{bs-form-element controlType="textarea" label="Comments" value=comments}}
+{{#bs-form formLayout=formLayout as |form|}}
+    {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
+    {{form.element controlType="password" label="Password" placeholder="Password" value=password}}
+    {{form.element controlType="checkbox" label="Remember me" value=rememberMe}}
+    {{form.element controlType="textarea" label="Comments" value=comments}}
 {{/bs-form}}
 
 <h2>Custom Controls</h2>
-{{#bs-form formLayout=formLayout model=this action="submit"}}
-    {{#bs-form-element label="Email" placeholder="Email" property="email" as |value id|}}
+{{#bs-form formLayout=formLayout model=this onSubmit=(action "submit") as |form|}}
+    {{#form.element label="Email" placeholder="Email" property="email" as |el|}}
       <div class="input-group">
-        {{bs-input id=id value=value}}
+        <input value={{el.value}} class="form-control" oninput={{action (mut el.value) value="target.value"}} id={{el.id}} type="text">
         <span class="input-group-addon">@example.com</span>
       </div>
-    {{/bs-form-element}}
+    {{/form.element}}
     {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
 {{/bs-form}}
 
 
 <h2>Disabled Controls</h2>
 
-{{#bs-form formLayout=formLayout}}
-   {{bs-form-element controlType="email" label="Email" placeholder="Email" value=email disabled=true}}
-   {{bs-form-element controlType="password" label="Password" placeholder="Password" value=password disabled=true}}
-   {{bs-form-element controlType="select" choices=genderChoices choiceLabelProperty="label" choiceValueProperty="id" label="Gender" value=gender disabled=true}}
-   {{bs-form-element controlType="checkbox" label="Remember me" value=rememberMe disabled=true}}
-   {{bs-form-element controlType="textarea" label="Comments" value=comments disabled=true}}
+{{#bs-form formLayout=formLayout as |form|}}
+   {{form.element controlType="email" label="Email" placeholder="Email" value=email disabled=true}}
+   {{form.element controlType="password" label="Password" placeholder="Password" value=password disabled=true}}
+   {{form.element controlType="checkbox" label="Remember me" value=rememberMe disabled=true}}
+   {{form.element controlType="textarea" label="Comments" value=comments disabled=true}}
 {{/bs-form}}

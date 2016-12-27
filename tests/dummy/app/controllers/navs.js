@@ -7,11 +7,7 @@ export default Ember.Controller.extend({
   stacked: false,
   justified: false,
   typeChoices: A([
-    {
-      id: 'pills'
-    },
-    {
-      id: 'tabs'
-    }
+    'pills',
+    'tabs'
   ])
 });

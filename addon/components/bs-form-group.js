@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from '../templates/components/bs-form-group';
 import Config from 'ember-bootstrap/config';
 
 const { computed } = Ember;
@@ -10,7 +11,7 @@ const { computed } = Ember;
  ```hbs
  {{#bs-form-group validation=firstNameValidation}}
    <label class="control-label">First name</label>
-   {{bs-input type="text" value=firstname}}
+   <input value={{firstname}} class="form-control" oninput={{action (mut firstname) value="target.value"}} type="text">
  {{/bs-form-group}}
  ```
 
@@ -24,6 +25,7 @@ const { computed } = Ember;
  @public
  */
 export default Ember.Component.extend({
+  layout,
 
   classNames: ['form-group'],
   classNameBindings: ['validationClass', 'hasFeedback'],
@@ -44,20 +46,20 @@ export default Ember.Component.extend({
    *
    * @property hasValidation
    * @type boolean
-   * @public
+   * @private
    * @readonly
    */
-  hasValidation: computed.notEmpty('validation'),
+  hasValidation: computed.notEmpty('validation').readOnly(),
 
   /**
    * Computed property which is true if the form group is showing a validation icon
    *
    * @property hasFeedback
    * @type boolean
-   * @public
+   * @private
    * @readonly
    */
-  hasFeedback: computed.and('hasValidation', 'useIcons', 'hasIconForValidationState'),
+  hasFeedback: computed.and('hasValidation', 'useIcons', 'hasIconForValidationState').readOnly(),
 
   /**
    * The icon classes to be used for a feedback icon in a "success" validation state.
@@ -152,12 +154,24 @@ export default Ember.Component.extend({
    */
   infoIcon: Config.formValidationInfoIcon,
 
+  /**
+   * @property iconName
+   * @type string
+   * @readonly
+   * @private
+   */
   iconName: computed('validation', function() {
     let validation = this.get('validation') || 'success';
     return this.get(`${validation}Icon`);
-  }),
+  }).readOnly(),
 
-  hasIconForValidationState: computed.notEmpty('iconName'),
+  /**
+   * @property hasIconForValidationState
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasIconForValidationState: computed.notEmpty('iconName').readOnly(),
 
   /**
    * Set to a validation state to render the form-group with a validation style.
@@ -173,10 +187,16 @@ export default Ember.Component.extend({
    */
   validation: null,
 
+  /**
+   * @property validationClass
+   * @type string
+   * @readonly
+   * @private
+   */
   validationClass: computed('validation', function() {
     let validation = this.get('validation');
     if (!Ember.isBlank(validation)) {
       return `has-${this.get('validation')}`;
     }
-  })
+  }).readOnly()
 });

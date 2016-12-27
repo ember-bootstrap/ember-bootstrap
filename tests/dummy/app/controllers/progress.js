@@ -10,20 +10,10 @@ export default Ember.Controller.extend({
   animate: false,
   roundDigits: 0,
   typeChoices: [
-    {
-      id: ''
-    },
-    {
-      id: 'success'
-    },
-    {
-      id: 'info'
-    },
-    {
-      id: 'warning'
-    },
-    {
-      id: 'danger'
-    }
+    '',
+    'success',
+    'info',
+    'warning',
+    'danger'
   ]
 });

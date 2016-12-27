@@ -1,24 +1,75 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import test from 'ember-sinon-qunit/test-support/test';
 
 moduleForComponent('bs-tab', 'Integration | Component | bs-tab', {
   integration: true
 });
 
 function assertActiveTab(assert, tabIndex, active = true) {
-  assert.equal(this.$(`ul.nav.nav-tabs li:eq(${tabIndex})`).hasClass('active'), active, active ? 'tab is active' : 'tab is inactive');
+  if (this.$('ul.nav.nav-tabs li').length > 0) {
+    assert.equal(this.$(`ul.nav.nav-tabs li:eq(${tabIndex})`).hasClass('active'), active, active ? 'tab is active' : 'tab is inactive');
+  }
   assert.equal(this.$(`.tab-content .tab-pane:eq(${tabIndex})`).hasClass('active'), active, active ? 'tab pane is active' : 'tab pane is inactive');
 }
 
+test('it yields expected values', function(assert) {
+  this.render(hbs`
+    {{#bs-tab fade=false as |tab|}}
+      {{#tab.pane elementId="pane1" title="Tab 1"}}
+        tabcontent 1
+      {{/tab.pane}}
+      {{#tab.pane elementId="pane2" title="Tab 2"}}
+        tabcontent 2
+      {{/tab.pane}}
+      <div id="activeId">{{tab.activeId}}</div>
+      <div id="switch" {{action tab.select "pane2"}}></div>
+    {{/bs-tab}}
+  `);
+
+  assert.equal(this.$('.tab-pane').length, 2, 'yields tab pane component');
+
+  this.$('#switch').click();
+
+  assertActiveTab.call(this, assert, 0, false);
+  assertActiveTab.call(this, assert, 1, true);
+  assert.equal(this.$('#activeId').text().trim(), 'pane2', 'yields activeId');
+});
+
+test('it yields expected values [customTabs=true]', function(assert) {
+  this.render(hbs`
+    {{#bs-tab fade=false customTabs=true as |tab|}}
+      <div class="tab-content">
+      {{#tab.pane elementId="pane1" title="Tab 1"}}
+        tabcontent 1
+      {{/tab.pane}}
+      {{#tab.pane elementId="pane2" title="Tab 2"}}
+        tabcontent 2
+      {{/tab.pane}}
+      <div id="activeId">{{tab.activeId}}</div>
+      <div id="switch" {{action tab.select "pane2"}}></div>
+      </div>
+    {{/bs-tab}}
+  `);
+
+  assert.equal(this.$('.tab-pane').length, 2, 'yields tab pane component');
+
+  this.$('#switch').click();
+
+  assertActiveTab.call(this, assert, 0, false);
+  assertActiveTab.call(this, assert, 1, true);
+  assert.equal(this.$('#activeId').text().trim(), 'pane2', 'yields activeId');
+});
+
 test('it generates tab navigation', function(assert) {
   this.render(hbs`
-    {{#bs-tab}}
-      {{#bs-tab-pane title="Tab 1"}}
+    {{#bs-tab as |tab|}}
+      {{#tab.pane title="Tab 1"}}
         tabcontent 1
-      {{/bs-tab-pane}}
-      {{#bs-tab-pane title="Tab 2"}}
+      {{/tab.pane}}
+      {{#tab.pane title="Tab 2"}}
         tabcontent 2
-      {{/bs-tab-pane}}
+      {{/tab.pane}}
     {{/bs-tab}}
   `);
 
@@ -30,13 +81,13 @@ test('it generates tab navigation', function(assert) {
 
 test('first tab is active by default', function(assert) {
   this.render(hbs`
-    {{#bs-tab}}
-      {{#bs-tab-pane title="Tab 1"}}
+    {{#bs-tab fade=false as |tab|}}
+      {{#tab.pane title="Tab 1"}}
         tabcontent 1
-      {{/bs-tab-pane}}
-      {{#bs-tab-pane title="Tab 2"}}
+      {{/tab.pane}}
+      {{#tab.pane title="Tab 2"}}
         tabcontent 2
-      {{/bs-tab-pane}}
+      {{/tab.pane}}
     {{/bs-tab}}
   `);
 
@@ -44,34 +95,16 @@ test('first tab is active by default', function(assert) {
   assertActiveTab.call(this, assert, 1, false);
 });
 
-test('clicking tab activates it', function(assert) {
-  this.render(hbs`
-    {{#bs-tab fade=false}}
-      {{#bs-tab-pane title="Tab 1"}}
-        tabcontent 1
-      {{/bs-tab-pane}}
-      {{#bs-tab-pane title="Tab 2"}}
-        tabcontent 2
-      {{/bs-tab-pane}}
-    {{/bs-tab}}
-  `);
-
-  this.$('ul.nav.nav-tabs li:eq(1) a').click();
-
-  assertActiveTab.call(this, assert, 0, false);
-  assertActiveTab.call(this, assert, 1, true);
-});
-
 test('activeId activates tabs', function(assert) {
   this.set('paneId', 'pane1');
   this.render(hbs`
-    {{#bs-tab fade=false activeId=paneId}}
-      {{#bs-tab-pane elementId="pane1" title="Tab 1"}}
+    {{#bs-tab fade=false activeId=paneId as |tab|}}
+      {{#tab.pane elementId="pane1" title="Tab 1"}}
         tabcontent 1
-      {{/bs-tab-pane}}
-      {{#bs-tab-pane elementId="pane2" title="Tab 2"}}
+      {{/tab.pane}}
+      {{#tab.pane elementId="pane2" title="Tab 2"}}
         tabcontent 2
-      {{/bs-tab-pane}}
+      {{/tab.pane}}
     {{/bs-tab}}
   `);
 
@@ -86,19 +119,19 @@ test('activeId activates tabs', function(assert) {
 
 test('tab navigation is groupable', function(assert) {
   this.render(hbs`
-    {{#bs-tab}}
-      {{#bs-tab-pane title="Tab 1"}}
+    {{#bs-tab as |tab|}}
+      {{#tab.pane title="Tab 1"}}
           tabcontent 1
-      {{/bs-tab-pane}}
-      {{#bs-tab-pane title="Tab 2"}}
+      {{/tab.pane}}
+      {{#tab.pane title="Tab 2"}}
           tabcontent 2
-      {{/bs-tab-pane}}
-      {{#bs-tab-pane title="Tab 3" groupTitle="Dropdown"}}
+      {{/tab.pane}}
+      {{#tab.pane title="Tab 3" groupTitle="Dropdown"}}
           tabcontent 3
-      {{/bs-tab-pane}}
-      {{#bs-tab-pane title="Tab 4" groupTitle="Dropdown"}}
+      {{/tab.pane}}
+      {{#tab.pane title="Tab 4" groupTitle="Dropdown"}}
           tabcontent 4
-      {{/bs-tab-pane}}
+      {{/tab.pane}}
     {{/bs-tab}}
   `);
 
@@ -115,13 +148,13 @@ test('tab navigation is groupable', function(assert) {
 
 test('customTabs disables tab navigation generation', function(assert) {
   this.render(hbs`
-    {{#bs-tab customTabs=true}}
-      {{#bs-tab-pane title="Tab 1"}}
+    {{#bs-tab customTabs=true as |tab|}}
+      {{#tab.pane title="Tab 1"}}
         tabcontent 1
-      {{/bs-tab-pane}}
-      {{#bs-tab-pane title="Tab 2"}}
+      {{/tab.pane}}
+      {{#tab.pane title="Tab 2"}}
         tabcontent 2
-      {{/bs-tab-pane}}
+      {{/tab.pane}}
     {{/bs-tab}}
   `);
 
@@ -130,13 +163,13 @@ test('customTabs disables tab navigation generation', function(assert) {
 
 test('type sets tab navigation type', function(assert) {
   this.render(hbs`
-    {{#bs-tab type="pills"}}
-      {{#bs-tab-pane title="Tab 1"}}
+    {{#bs-tab type="pills" as |tab|}}
+      {{#tab.pane title="Tab 1"}}
         tabcontent 1
-      {{/bs-tab-pane}}
-      {{#bs-tab-pane title="Tab 2"}}
+      {{/tab.pane}}
+      {{#tab.pane title="Tab 2"}}
         tabcontent 2
-      {{/bs-tab-pane}}
+      {{/tab.pane}}
     {{/bs-tab}}
   `);
 
@@ -144,24 +177,63 @@ test('type sets tab navigation type', function(assert) {
   assert.equal(this.$('ul.nav.nav-pills > li').length, 2, 'has tabs navigation items');
 });
 
-test('calls action after changing active tab', function(assert) {
-  assert.expect(3);
-  this.on('testAction', (current, previous) => {
-    assert.ok(true, 'Action has been called.');
-    assert.equal(current, 'pane2');
-    assert.equal(previous, 'pane1');
-  });
+test('calls onChange when changing active tab', function(assert) {
+  let action = this.spy();
+  this.on('change', action);
 
   this.render(hbs`
-    {{#bs-tab action=(action "testAction")}}
-      {{#bs-tab-pane elementId="pane1" title="Tab 1"}}
+    {{#bs-tab fade=false onChange=(action "change") as |tab|}}
+      {{#tab.pane elementId="pane1" title="Tab 1"}}
         tabcontent 1
-      {{/bs-tab-pane}}
-      {{#bs-tab-pane elementId="pane2" title="Tab 2"}}
+      {{/tab.pane}}
+      {{#tab.pane elementId="pane2" title="Tab 2"}}
         tabcontent 2
-      {{/bs-tab-pane}}
+      {{/tab.pane}}
     {{/bs-tab}}
   `);
 
   this.$('ul.nav.nav-tabs li:eq(1) a').click();
+  assert.ok(action.calledWith('pane2', 'pane1'));
+
+  assertActiveTab.call(this, assert, 0, false);
+  assertActiveTab.call(this, assert, 1, true);
+});
+
+test('when onChange returns false active tab is not changed', function(assert) {
+  let action = this.stub();
+  action.returns(false);
+  this.on('change', action);
+
+  this.render(hbs`
+    {{#bs-tab fade=false onChange=(action "change") as |tab|}}
+      {{#tab.pane elementId="pane1" title="Tab 1"}}
+        tabcontent 1
+      {{/tab.pane}}
+      {{#tab.pane elementId="pane2" title="Tab 2"}}
+        tabcontent 2
+      {{/tab.pane}}
+    {{/bs-tab}}
+  `);
+
+  this.$('ul.nav.nav-tabs li:eq(1) a').click();
+  assert.ok(action.calledWith('pane2', 'pane1'));
+
+  assertActiveTab.call(this, assert, 0, true);
+  assertActiveTab.call(this, assert, 1, false);
+});
+
+test('changing active tab does not change public activeId property (DDAU)', function(assert) {
+  this.set('paneId', 'pane1');
+  this.render(hbs`
+    {{#bs-tab fade=false activeId=paneId as |tab|}}
+      {{#tab.pane elementId="pane1" title="Tab 1"}}
+        tabcontent 1
+      {{/tab.pane}}
+      {{#tab.pane elementId="pane2" title="Tab 2"}}
+        tabcontent 2
+      {{/tab.pane}}
+    {{/bs-tab}}
+  `);
+  this.$('ul.nav.nav-tabs li:eq(1) a').click();
+  assert.equal(this.get('paneId'), 'pane1', 'Does not modify public activeId property');
 });

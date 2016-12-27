@@ -1,6 +1,6 @@
 {{#if hasLabel}}
     <label class="control-label {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
 {{/if}}
-{{bs-textarea id=formElementId value=value name=name placeholder=placeholder autofocus=autofocus disabled=disabled readonly=readonly required=required cols=cols rows=rows}}
+<textarea class="form-control" cols={{cols}} rows={{rows}} oninput={{action "change" value="target.value"}} id={{formElementId}} name={{name}} placeholder={{placeholder}} autofocus={{autofocus}} disabled={{disabled}} readonly={{if readonly "readonly"}} required={{required}}>{{value}}</textarea>
 {{partial "components/form-element/feedback-icon"}}
 {{partial "components/form-element/errors"}}

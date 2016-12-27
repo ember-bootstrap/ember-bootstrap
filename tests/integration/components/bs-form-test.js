@@ -1,7 +1,7 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
+import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
-// import EmberValidations from 'ember-validations';
 
 moduleForComponent('bs-form', 'Integration | Component | bs-form', {
   integration: true
@@ -22,118 +22,123 @@ test('form has correct CSS class', function(assert) {
   }
 });
 
-test('Submitting the form calls default action', function(assert) {
-  let model = {};
-  this.set('model', model);
-  this.on('testAction', (m) => {
-    assert.ok(true, 'Default action has been called.');
-    assert.equal(m, model, 'Action invocation has model as parameter');
-  });
-  this.render(hbs`{{#bs-form model=model action=(action "testAction")}}Test{{/bs-form}}`);
+test('it yields form element component', function(assert) {
+  this.render(hbs`{{#bs-form as |form|}}{{form.element}}{{/bs-form}}`);
 
-  assert.expect(2);
-  this.$('form').submit();
+  assert.equal(this.$('.form-group').length, 1, 'form has element');
 });
 
-test('Submitting the form calls before submit action', function(assert) {
+test('Submitting the form calls onBeforeSubmit and onSubmit action', function(assert) {
+  let submit = this.spy();
+  let before = this.spy();
+  let invalid = this.spy();
   let model = {};
   this.set('model', model);
-  this.on('beforeAction', (m) => {
-    assert.ok(true, 'Before action has been called.');
-    assert.equal(m, model, 'Action invocation has model as parameter');
-  });
-  this.on('submitAction', (m) => {
-    assert.ok(true, 'Default action has been called.');
-    assert.equal(m, model, 'Action invocation has model as parameter');
-  });
-  this.render(hbs`{{#bs-form model=model before=(action "beforeAction") action=(action "submitAction")}}Test{{/bs-form}}`);
+  this.on('before', before);
+  this.on('submit', submit);
+  this.on('invalid', invalid);
+  this.render(hbs`{{#bs-form model=model onBefore=(action "before") onSubmit=(action "submit") onInvalid=(action "invalid")}}Test{{/bs-form}}`);
 
-  assert.expect(4);
   this.$('form').submit();
+  assert.ok(before.calledWith(model), 'onBefore action has been called with model as parameter');
+  assert.ok(submit.calledWith(model), 'onSubmit action has been called with model as parameter');
+  assert.notOk(invalid.called, 'onInvalid action has not been called');
 });
 
-/*
+test('Submitting the form with valid validation calls onBeforeSubmit and onSubmit action', function(assert) {
+  let submit = this.spy();
+  let before = this.spy();
+  let invalid = this.spy();
+  let model = {};
+  this.set('model', model);
+  this.on('before', before);
+  this.on('submit', submit);
+  this.on('invalid', invalid);
+  this.set('validateStub', function() {
+    return Ember.RSVP.resolve('SUCCESS');
+  });
+  this.render(hbs`{{#bs-form model=model hasValidator=true validate=validateStub onBefore=(action "before") onSubmit=(action "submit") onInvalid=(action "invalid") as |form|}}Test{{/bs-form}}`);
 
- Cannot test validations as expected in unit tests.
- See https://github.com/dockyard/ember-validations/issues/247
+  this.$('form').submit();
+  assert.ok(before.calledWith(model), 'onBefore action has been called with model as parameter');
+  assert.ok(submit.calledWith(model, 'SUCCESS'), 'onSubmit action has been called with model and validation result as parameter');
+  assert.notOk(invalid.called, 'onInvalid action has not been called');
+});
 
- test('Submitting the form with successful validation calls default action', function(assert) {
- var testController = Ember.Controller.extend({
- actions: {
- success: function() {
- ok(true, 'Default action has been called.');
- },
- error: function() {
- ok(false, 'Invalid action must not be called.');
- }
- }
- }).create(),
- model = Ember.Object.extend(EmberValidations,{
- test: 'someValue',
- validations: {
- test: {
- presence: true
- }
- }
- }).create(),
- component = this.subject({
- targetObject: testController,
- action: 'success',
- invalid: 'error',
- model: model
- });
+test('Submitting the form with invalid validation calls onBeforeSubmit and onInvalid action', function(assert) {
+  let submit = this.spy();
+  let before = this.spy();
+  let invalid = this.spy();
+  let model = {};
+  this.set('model', model);
+  this.on('before', before);
+  this.on('submit', submit);
+  this.on('invalid', invalid);
+  this.set('validateStub', function() {
+    return Ember.RSVP.reject('ERROR');
+  });
+  this.render(hbs`{{#bs-form model=model hasValidator=true validate=validateStub onBefore=(action "before") onSubmit=(action "submit") onInvalid=(action "invalid") as |form|}}Test{{/bs-form}}`);
 
- expect(1);
+  this.$('form').submit();
 
- this.$().submit();
- });
+  assert.ok(before.calledWith(model), 'onBefore action has been called with model as parameter');
+  assert.ok(invalid.calledWith(model, 'ERROR'), 'onInvalid action has been called with model and validation result');
+  assert.notOk(submit.called, 'onSubmit action has not been called');
+});
 
+test('Submitting the form with invalid validation shows validation errors', function(assert) {
+  let model = {};
+  this.set('model', model);
+  this.set('errors', Ember.A(['There is an error']));
+  this.set('validateStub', function() {
+    return Ember.RSVP.reject();
+  });
+  this.render(hbs`{{#bs-form model=model hasValidator=true validate=validateStub as |form|}}{{form.element hasValidator=true errors=errors}}{{/bs-form}}`);
 
+  assert.notOk(
+    this.$('form .form-group').hasClass('has-error'),
+    'validation errors aren\'t shown before user interaction'
+  );
+  this.$('form').submit();
 
+  let done = assert.async();
+  setTimeout(() => {
+    assert.ok(
+      this.$('form .form-group').hasClass('has-error'),
+      'validation errors are shown after form submission'
+    );
+    assert.equal(
+      this.$('form .form-group .help-block').text().trim(),
+      'There is an error'
+    );
+    done();
+  }, 1);
 
- test('Submitting the form with invalid validation calls invalid action', function(assert) {
- var testController = Ember.Controller.extend({
- actions: {
- success: function() {
- ok(false, 'Default action must not be called.');
- },
- error: function() {
- ok(true, 'Invalid action has been called called.');
- }
- }
- }).create(),
- model = Ember.Object.extend(EmberValidations,{
- test: null,
- validations: {
- test: {
- presence: true
- }
- }
- }).create(),
- component = this.subject({
- targetObject: testController,
- action: 'success',
- invalid: 'error',
- model: model
- });
+});
 
- expect(1);
+test('Adds default onChange action to form elements that updates model\'s property', function(assert) {
+  let model = Ember.Object.create({
+    name: 'foo'
+  });
+  this.set('model', model);
+  this.render(hbs`{{#bs-form model=model as |form|}}
+    {{form.element property="name"}}
+  {{/bs-form}}`);
 
- this.$().submit();
- });
+  assert.equal(this.$('input').val(), 'foo', 'input has model property value');
 
- */
+  this.$('input').val('bar').trigger('input');
+  assert.equal(model.get('name'), 'bar', 'model property was updated');
+});
 
 test('Pressing enter on a form with submitOnEnter submits the form', function(assert) {
-  this.on('testAction', () => {
-    assert.ok(true, 'Default action has been called.');
-  });
-  this.render(hbs`{{#bs-form action=(action "testAction") submitOnEnter=true}}Test{{/bs-form}}`);
+  let submit = this.spy();
+  this.on('submit', submit);
+  this.render(hbs`{{#bs-form onSubmit=(action "submit") submitOnEnter=true}}Test{{/bs-form}}`);
   let e = Ember.$.Event('keypress');
   e.which = e.keyCode = 13;
-  assert.expect(1);
-
   this.$('form').trigger(e);
+  assert.ok(submit.calledOnce, 'onSubmit action has been called');
 });
 
 test('supports novalidate attribute', function(assert) {
@@ -148,42 +153,3 @@ test('supports novalidate attribute', function(assert) {
     this.$('form').attr('novalidate') === ''
   );
 });
-
-// test('shows validation errors on submit', function(assert) {
-//   assert.expect(3);
-//   this.set('model',
-//     Ember.Object.extend(EmberValidations, {
-//       name: null,
-//       validations: {
-//         name: {
-//           presence: true
-//         }
-//       }
-//     }).create({
-//       container: this.get('container')
-//     })
-//   );
-//   this.render(hbs`
-//     {{#bs-form model=model}}
-//       {{bs-form-element property='name' classNames='child'}}
-//       {{#dummy-component}}
-//         {{bs-form-element property='name' classNames='grandchild'}}
-//       {{/dummy-component}}
-//     {{/bs-form}}
-//   `);
-//   assert.ok(
-//     this.$('form .has-error').length === 0,
-//     'validation errors aren\'t shown before user interaction'
-//   );
-//   Ember.run(() => {
-//     this.$('form').submit();
-//   });
-//   assert.ok(
-//     this.$('form .form-group.child').hasClass('has-error'),
-//     'validation errors are shown after form submission (child)'
-//   );
-//   assert.ok(
-//     this.$('form .form-group.grandchild').hasClass('has-error'),
-//     'validation errors are shown after form submission (grandchild)'
-//   );
-// });

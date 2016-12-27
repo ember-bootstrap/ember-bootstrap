@@ -1,28 +1,32 @@
 import Ember from 'ember';
-import ComponentParent from 'ember-bootstrap/mixins/component-parent';
+import layout from '../templates/components/bs-accordion';
+import listenTo from '../utils/listen-to-cp';
+
+const { K: noop } = Ember;
 
 /**
  Bootstrap-style accordion group, with collapsible/expandable items.
  See http://getbootstrap.com/components/#btn-groups
 
- Use as a block level component with any number of [Components.AccordionItem](Components.AccordionItem.html) components as children:
+ Use as a block level component with any number of yielded [Components.AccordionItem](Components.AccordionItem.html)
+ components as children:
 
  ```handlebars
-  {{#bs-accordion selected=selected}}
-      {{#bs-accordion-item value="1" title="First item"}}
+  {{#bs-accordion as |acc|}}
+      {{#acc.item value=1 title="First item"}}
         <p>Lorem ipsum...</p>
-      {{/bs-accordion-item}}
-      {{#bs-accordion-item value="2" title="Second item"}}
+        <button {{action acc.change 2}}>Next</button>
+      {{/acc.item}}
+      {{#acc.item value=2 title="Second item"}}
         <p>Lorem ipsum...</p>
-      {{/bs-accordion-item}}
-      {{#bs-accordion-item value="3" title="Third item"}}
+      {{/acc.item}}
+      {{#acc.item value=3 title="Third item"}}
         <p>Lorem ipsum...</p>
-      {{/bs-accordion-item}}
+      {{/acc.item}}
   {{/bs-accordion}}
-
-  <p>Selected accordion item: {{selected}}</p>
  ```
 
+ In the example above the first accordion item utilizes the yielded `change` action to add some custom behaviour.
 
  @class Accordion
  @namespace Components
@@ -30,21 +34,52 @@ import ComponentParent from 'ember-bootstrap/mixins/component-parent';
  @uses Mixins.ComponentParent
  @public
  */
-export default Ember.Component.extend(ComponentParent, {
+export default Ember.Component.extend({
+  layout,
   classNames: ['panel-group'],
   ariaRole: 'tablist',
 
   /**
-   * The value of the currently selected accordion item
+   * The value of the currently selected accordion item. Set this to change selection programmatically.
+   *
+   * When the selection is changed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onChange` action
    *
    * @property selected
    * @public
    */
   selected: null,
 
+  /**
+   * The value of the currently selected accordion item
+   *
+   * @property isSelected
+   * @private
+   */
+  isSelected: listenTo('selected'),
+
+  /**
+   * Action when the selected accordion item is about to be changed.
+   *
+   * You can return false to prevent changing the active item, and do that in your action by
+   * setting the `selected` accordingly.
+   *
+   * @event onChange
+   * @param newValue
+   * @param oldValue
+   * @public
+   */
+  onChange: noop,
+
   actions: {
-    selected(currentValue, previousValue) {
-      this.sendAction('action', currentValue, previousValue);
+    change(newValue) {
+      let oldValue = this.get('isSelected');
+      if (oldValue === newValue) {
+        newValue = null;
+      }
+      if (this.get('onChange')(newValue, oldValue) !== false) {
+        this.set('isSelected', newValue);
+      }
     }
   }
 

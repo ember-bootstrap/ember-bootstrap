@@ -1,15 +1,15 @@
 <h1>Accordion</h1>
 
-{{#bs-accordion selected=selected}}
-    {{#bs-accordion-item value="1" title="First item"}}
+{{#bs-accordion selected=selected as |acc|}}
+    {{#acc.item value="1" title="First item"}}
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
-    {{/bs-accordion-item}}
-    {{#bs-accordion-item value="2" title="Second item"}}
+    {{/acc.item}}
+    {{#acc.item value="2" title="Second item"}}
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
-    {{/bs-accordion-item}}
-    {{#bs-accordion-item value="3" title="Third item"}}
+    {{/acc.item}}
+    {{#acc.item value="3" title="Third item"}}
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
-    {{/bs-accordion-item}}
+    {{/acc.item}}
 {{/bs-accordion}}
 
 <p>Selected accordion item: {{selected}}</p>

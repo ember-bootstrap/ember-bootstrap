@@ -1,9 +1,10 @@
 import Ember from 'ember';
 import layout from '../templates/components/bs-tab';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
-import TabPane from './bs-tab-pane';
+import TabPane from './bs-tab/pane';
+import listenTo from '../utils/listen-to-cp';
 
-const { computed, isPresent, A } = Ember;
+const { computed, isPresent, A, K: noop } = Ember;
 
 /**
  Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,
@@ -11,17 +12,17 @@ const { computed, isPresent, A } = Ember;
 
  ### Usage
 
- Just nest any number of [Components.TabPane](Components.TabPane.html) components that hold the tab content.
+ Just nest any number of yielded [Components.TabPane](Components.TabPane.html) components that hold the tab content.
  The tab navigation is automatically generated from the tab panes' `title` property:
 
  ```hbs
- {{#bs-tab}}
-   {{#bs-tab-pane title="Tab 1"}}
+ {{#bs-tab as |tab|}}
+   {{#tab.pane title="Tab 1"}}
      <p>...</p>
-   {{/bs-tab-pane}}
-   {{#bs-tab-pane title="Tab 2"}}
+   {{/tab.pane}}
+   {{#tab.pane title="Tab 2"}}
      <p>...</p>
-   {{/bs-tab-pane}}
+   {{/tab.pane}}
  {{/bs-tab}}
  ```
 
@@ -32,19 +33,19 @@ const { computed, isPresent, A } = Ember;
  component with `groupTitle` being the dropdown's title:
 
  ```hbs
- {{#bs-tab}}
-    {{#bs-tab-pane title="Tab 1"}}
+ {{#bs-tab as |tab|}}
+    {{#tab.pane title="Tab 1"}}
       <p>...</p>
-    {{/bs-tab-pane}}
-    {{#bs-tab-pane title="Tab 2"}}
+    {{/tab.pane}}
+    {{#tab.pane title="Tab 2"}}
       <p>...</p>
-    {{/bs-tab-pane}}
-    {{#bs-tab-pane title="Tab 3" groupTitle="Dropdown"}}
+    {{/tab.pane}}
+    {{#tab.pane title="Tab 3" groupTitle="Dropdown"}}
       <p>...</p>
-    {{/bs-tab-pane}}
-    {{#bs-tab-pane title="Tab 4" groupTitle="Dropdown"}}
+    {{/tab.pane}}
+    {{#tab.pane title="Tab 4" groupTitle="Dropdown"}}
       <p>...</p>
-    {{/bs-tab-pane}}
+    {{/tab.pane}}
  {{/bs-tab}}
  ```
 
@@ -60,19 +61,19 @@ const { computed, isPresent, A } = Ember;
  trigger the selection of the different tab panes, using their ids:
 
  ```hbs
- {{#bs-tab customTabs=true as |activeId select|}}
-    {{#bs-nav type="tabs"}}
-        {{#bs-nav-item active=(bs-eq activeId "pane1")}}<a href="#pane1" role="tab" {{action select "pane1"}}>Tab 1</a>{{/bs-nav-item}}
-        {{#bs-nav-item active=(bs-eq activeId "pane2")}}<a href="#pane1" role="tab" {{action select "pane2"}}>Tab 2 <span class="badge">{{badge}}</span></a>{{/bs-nav-item}}
+ {{#bs-tab customTabs=true as |tab|}}
+    {{#bs-nav type="tabs" as |nav|}}
+        {{#nav.item active=(bs-eq tab.activeId "pane1")}}<a href="#pane1" role="tab" {{action tab.select "pane1"}}>Tab 1</a>{{/nav.item}}
+        {{#nav.item active=(bs-eq tab.activeId "pane2")}}<a href="#pane1" role="tab" {{action tab.select "pane2"}}>Tab 2 <span class="badge">{{badge}}</span></a>{{/nav.item}}
     {{/bs-nav}}
 
     <div class="tab-content">
-    {{#bs-tab-pane elementId="pane1" title="Tab 1"}}
+    {{#tab.pane elementId="pane1" title="Tab 1"}}
         <p>...</p>
-    {{/bs-tab-pane}}
-    {{#bs-tab-pane elementId="pane2" title="Tab 2"}}
+    {{/tab.pane}}
+    {{#tab.pane elementId="pane2" title="Tab 2"}}
         <p>...</p>
-    {{/bs-tab-pane}}
+    {{/tab.pane}}
     </div>
  {{/bs-tab}}
  ```
@@ -91,9 +92,9 @@ const { computed, isPresent, A } = Ember;
 
  ```hbs
  <div>
-   {{#bs-nav type="tabs"}}
-     {{#bs-nav-item}}{{#link-to "tabs.index"}}Tab 1{{/link-to}}{{/bs-nav-item}}
-     {{#bs-nav-item}}{{#link-to "tabs.other"}}Tab 2{{/link-to}}{{/bs-nav-item}}
+   {{#bs-nav type="tabs" as |nav|}}
+     {{#nav.item}}{{#link-to "tabs.index"}}Tab 1{{/link-to}}{{/nav.item}}
+     {{#nav.item}}{{#link-to "tabs.other"}}Tab 2{{/link-to}}{{/nav.item}}
    {{/bs-nav}}
    {{outlet}}
  </div>
@@ -135,20 +136,29 @@ export default Ember.Component.extend(ComponentParent, {
    *
    * ```hbs
    * {{#bs-tab activeId="pane2"}}
-   *   {{#bs-tab-pane id="pane1" title="Tab 1"}}
+   *   {{#tab.pane id="pane1" title="Tab 1"}}
    *      ...
-   *   {{/bs-tab-pane}}
-   *   {{#bs-tab-pane id="pane1" title="Tab 1"}}
+   *   {{/tab.pane}}
+   *   {{#tab.pane id="pane1" title="Tab 1"}}
    *     ...
-   *   {{/bs-tab-pane}}
+   *   {{/tab.pane}}
    * {{/bs-tab}}
    * ```
+   *
+   * When the selection is changed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onChange` action
    *
    * @property activeId
    * @type string
    * @public
    */
   activeId: computed.oneWay('childPanes.firstObject.elementId'),
+
+  /**
+   * @property isActiveId
+   * @private
+   */
+  isActiveId: listenTo('activeId'),
 
   /**
    * Set to false to disable the fade animation when switching tabs.
@@ -171,12 +181,15 @@ export default Ember.Component.extend(ComponentParent, {
   fadeDuration: 150,
 
   /**
-   * action is called when switching the active tab, with the new and previous pane id
+   * This action is called when switching the active tab, with the new and previous pane id
    *
-   * @event action
+   * You can return false to prevent changing the active tab automatically, and do that in your action by
+   * setting `activeId`.
+   *
+   * @event onChange
    * @public
    */
-  action: null,
+  onChange: noop,
 
   /**
    * All `TabPane` child components
@@ -225,9 +238,11 @@ export default Ember.Component.extend(ComponentParent, {
 
   actions: {
     select(id) {
-      let previous = this.get('activeId');
-      this.set('activeId', id);
-      this.sendAction('action', id, previous);
+      let previous = this.get('isActiveId');
+      if (this.get('onChange')(id, previous) !== false) {
+        // change active tab when `onChange` does not return false
+        this.set('isActiveId', id);
+      }
     }
   }
 });
