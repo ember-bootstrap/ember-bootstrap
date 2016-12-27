@@ -2,8 +2,14 @@ import Ember from 'ember';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import layout from '../templates/components/bs-alert';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
+import listenTo from '../utils/listen-to-cp';
 
-const { computed, K: noop, run: { later } } = Ember;
+const {
+  computed,
+  observer,
+  K: noop,
+  run: { later }
+} = Ember;
 
 /**
  Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts
@@ -59,21 +65,19 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
    * @default true
    * @public
    */
-  visible: computed({
-    get() {
-      return true;
-    },
-    set(key, value) {
-      if (value) {
-        this.show();
-      } else {
-        this.hide();
-      }
-      return value;
-    }
-  }),
+  visible: true,
 
-  notVisible: computed.not('visible'),
+  /**
+   * @property _visible
+   * @private
+   */
+  _visible: listenTo('visible'),
+
+  /**
+   * @property notVisible
+   * @private
+   */
+  notVisible: computed.not('_visible'),
 
   /**
    * Set to false to disable the fade out animation when hiding the alert.
@@ -94,7 +98,7 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
    * @private
    */
   alert: computed.not('hidden'),
-  in: computed.and('visible', 'fade'),
+  in: computed.and('_visible', 'fade'),
 
   /**
    * @property classTypePrefix
@@ -138,7 +142,7 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
   actions: {
     dismiss() {
       if (this.get('onDismiss')() !== false) {
-        this.set('visible', false);
+        this.set('_visible', false);
       }
     }
   },
@@ -150,9 +154,7 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
    * @private
    */
   show() {
-    this.setProperties({
-      hidden: false
-    });
+    this.set('hidden', false);
   },
 
   /**
@@ -178,6 +180,14 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
 
   init() {
     this._super(...arguments);
-    this.set('hidden', !this.get('visible'));
-  }
+    this.set('hidden', !this.get('_visible'));
+  },
+
+  _observeIsVisible: observer('_visible', function() {
+    if (this.get('_visible')) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  })
 });
