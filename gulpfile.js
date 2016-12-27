@@ -33,6 +33,8 @@ gulp.task('docs:publish', ['docs:generate', 'docs:copyChangelog'], function () {
 
 gulp.task('docs:changelog', function () {
   return gulp.src('CHANGELOG.md')
-    .pipe(conventionalChangelog())
+    .pipe(conventionalChangelog({
+      preset: 'angular'
+    }))
     .pipe(gulp.dest('./'));
 });
