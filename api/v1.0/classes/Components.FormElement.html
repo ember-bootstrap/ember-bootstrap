@@ -1,0 +1,2242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Components.FormElement - ember-bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-toggle-wrapper visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+        </div>
+        <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="navbar-nav nav">
+                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
+                <li><a href="/ember-bootstrap/components">Components</a></li>
+                <li><a href="/ember-bootstrap/api">API</a></li>
+                <li><a href="/ember-bootstrap/api/v1.0">API v1.0</a></li>
+
+            </ul>
+            <ul class="navbar-nav nav navbar-right">
+                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>API Docs <span class="small">v1.0.0-alpha</span></h1>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>Components.FormElement <small>Class</small></h1>
+</div>
+
+<div class="well well-small">
+        <span class="label label-public">public</span>
+
+
+        <div class="extends">
+            Extends <a href="../classes/Components.FormGroup.html" class="crosslink">Components.FormGroup</a>
+        </div>
+
+        <div class="foundat">
+            Defined in: <a href="../files/addon_components_bs-form_element.js.html#l26"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:26</code></a>
+        </div>
+
+
+</div>
+
+
+<div class="well well-small">
+    <p>Sub class of <code>Components.FormGroup</code> that adds automatic form layout markup and form validation features.</p>
+<h3>Form layout</h3>
+<p>The appropriate Bootstrap markup for the given <code>formLayout</code> and <code>controlType</code> is automatically generated to easily
+create forms without coding the default Bootstrap form markup by hand:</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; action=&quot;submit&quot; as |form|}}
+  {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+  {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
+  {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
+  {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+{{/bs-form}}
+</code></pre>
+<h3>Form validation</h3>
+<p>In the following example the control elements of the three form elements value will be bound to the properties
+(given by <code>property</code>) of the form's <code>model</code>, which in this case is its controller (see <code>model=this</code>):</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot; as |form|}}
+  {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+  {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+  {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+  {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+{{/bs-form}}
+</code></pre>
+<p>By using this indirection in comparison to directly binding the <code>value</code> property, you get the benefit of automatic
+form validation, given that your <code>model</code> has a supported means of validating itself.
+See <a href="Components.Form.html">Components.Form</a> for details on how to enable form validation.</p>
+<p>In the example above the <code>model</code> was our controller itself, so the control elements were bound to the appropriate
+properties of our controller. A controller implementing validations on those properties could look like this:</p>
+<pre class="code prettyprint"><code class="language-js">import Ember from 'ember';
+import EmberValidations from 'ember-validations';
+
+export default Ember.Controller.extend(EmberValidations,{
+  email: null,
+  password: null,
+  rememberMe: false,
+  validations: {
+    email: {
+      presence: true,
+      format: {
+        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+      }
+    },
+    password: {
+      presence: true,
+      length: { minimum: 6, maximum: 10}
+    },
+    comments: {
+      length: { minimum: 5, maximum: 20}
+    }
+  }
+});
+</code></pre>
+<p>If the <code>showValidation</code> property is <code>true</code> (which is automatically the case if a <code>focusOut</code> event is captured from the
+control element or the containing <code>Components.Form</code> was submitted with its <code>model</code> failing validation) and there are
+validation errors for the <code>model</code>'s <code>property</code>, the appropriate Bootstrap validation markup (see
+<a href="http://getbootstrap.com/css/#forms-control-validation">http://getbootstrap.com/css/#forms-control-validation</a>) is applied:</p>
+<ul>
+<li><code>validation</code> is set to 'error', which will set the <code>has-error</code> CSS class</li>
+<li>the <code>errorIcon</code> feedback icon is displayed if <code>controlType</code> is a text field</li>
+<li>the validation messages are displayed as Bootstrap <code>help-block</code>s</li>
+</ul>
+<p>The same applies for warning messages, if the used validation library supports this. (Currently only
+<a href="https://github.com/offirgolan/ember-cp-validations">ember-cp-validations</a>)</p>
+<p>As soon as the validation is successful again...</p>
+<ul>
+<li><code>validation</code> is set to 'success', which will set the <code>has-success</code> CSS class</li>
+<li>the <code>successIcon</code> feedback icon is displayed if <code>controlType</code> is a text field</li>
+<li>the validation messages are removed</li>
+</ul>
+<h3>Custom controls</h3>
+<p>Apart from the standard built-in browser controls (see the <code>controlType</code> property), you can use any custom control simply
+by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
+(from the <a href="https://istefo.github.io/ember-select-2">ember-select-2 addon</a>):</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot; as |form|}}
+  {{#form.element label=&quot;Select-2&quot; property=&quot;gender&quot; useIcons=false as |el|}}
+    {{select-2 id=el.id content=genderChoices optionLabelPath=&quot;label&quot; value=el.value searchEnabled=false}}
+  {{/form.element}}
+{{/bs-form}}
+</code></pre>
+<p>The component yields a hash with the following properties:</p>
+<ul>
+<li><code>id</code>: id to be used for the form control, so it matches the labels <code>for</code> attribute</li>
+<li><code>value</code>: the value of the form element</li>
+<li><code>validation</code>: the validation state of the element, <code>null</code> if no validation is to be shown, otherwise 'success', 'error' or 'warning'</li>
+</ul>
+<p>If your custom control does not render an input element, you should set <code>useIcons</code> to <code>false</code> since bootstrap only supports
+feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</code> elements.</p>
+
+</div>
+
+
+    <form id="options-form" class="form-inline" style="margin-bottom: 1em;">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
+
+            <li><a data-toggle="tab" href="#methods">Methods</a></li>
+            <li><a data-toggle="tab" href="#properties">Properties</a></li>
+            <li><a data-toggle="tab" href="#events">Events</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="index" class="tab-pane active">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                            <li class="index-item method private">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_setupValidations" data-tablink="setupValidations">setupValidations</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_showValidationOnHandler" data-tablink="showValidationOnHandler">showValidationOnHandler</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property__showValidationOn" data-tablink="_showValidationOn">_showValidationOn</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_autofocus" data-tablink="autofocus">autofocus</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_cols" data-tablink="cols">cols</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_controlType" data-tablink="controlType">controlType</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_disabled" data-tablink="disabled">disabled</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_errorIcon" data-tablink="errorIcon">errorIcon</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_errors" data-tablink="errors">errors</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_errors" data-tablink="errors">errors</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_formElementId" data-tablink="formElementId">formElementId</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_formLayout" data-tablink="formLayout">formLayout</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasErrors" data-tablink="hasErrors">hasErrors</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasFeedback" data-tablink="hasFeedback">hasFeedback</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasIconForValidationState" data-tablink="hasIconForValidationState">hasIconForValidationState</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasLabel" data-tablink="hasLabel">hasLabel</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasValidation" data-tablink="hasValidation">hasValidation</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasValidationMessages" data-tablink="hasValidationMessages">hasValidationMessages</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasValidator" data-tablink="hasValidator">hasValidator</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasWarnings" data-tablink="hasWarnings">hasWarnings</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_horizontalInputGridClass" data-tablink="horizontalInputGridClass">horizontalInputGridClass</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_horizontalInputOffsetGridClass" data-tablink="horizontalInputOffsetGridClass">horizontalInputOffsetGridClass</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_horizontalLabelGridClass" data-tablink="horizontalLabelGridClass">horizontalLabelGridClass</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_iconName" data-tablink="iconName">iconName</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_infoIcon" data-tablink="infoIcon">infoIcon</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_invisibleLabel" data-tablink="invisibleLabel">invisibleLabel</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isHorizontal" data-tablink="isHorizontal">isHorizontal</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isInline" data-tablink="isInline">isInline</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isValidating" data-tablink="isValidating">isValidating</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isVertical" data-tablink="isVertical">isVertical</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_label" data-tablink="label">label</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_model" data-tablink="model">model</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_name" data-tablink="name">name</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_placeholder" data-tablink="placeholder">placeholder</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_property" data-tablink="property">property</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_readonly" data-tablink="readonly">readonly</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_required" data-tablink="required">required</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_rows" data-tablink="rows">rows</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showAllValidations" data-tablink="showAllValidations">showAllValidations</a>
+
+                            </li>
+                            <li class="index-item property private deprecated">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showErrors" data-tablink="showErrors">showErrors</a>
+
+                                    <span class="label label-deprecated">deprecated</span>
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showOwnValidation" data-tablink="showOwnValidation">showOwnValidation</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showValidation" data-tablink="showValidation">showValidation</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showValidationMessages" data-tablink="showValidationMessages">showValidationMessages</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showValidationOn" data-tablink="showValidationOn">showValidationOn</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_successIcon" data-tablink="successIcon">successIcon</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_useIcons" data-tablink="useIcons">useIcons</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_validation" data-tablink="validation">validation</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_validationClass" data-tablink="validationClass">validationClass</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_validationMessages" data-tablink="validationMessages">validationMessages</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_value" data-tablink="value">value</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_warningIcon" data-tablink="warningIcon">warningIcon</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                            <li class="index-item event private">
+                                <a href="#" data-tabid="#events" data-anchor="#event_change" data-tablink="change">change</a>
+
+                            </li>
+                            <li class="index-item event private">
+                                <a href="#" data-tabid="#events" data-anchor="#event_focusOut" data-tablink="focusOut">focusOut</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onChange" data-tablink="onChange">onChange</a>
+
+                            </li>
+                    </ul>
+                </div>
+        </div>
+
+            <div id="methods" class="tab-pane">
+                <h2 class="off-left">Methods</h2>
+
+                    <div id="method_setupValidations" class="method item private">
+                        <h3 class="name">setupValidations
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l593"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:593</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Setup validation properties. This method acts as a hook for external validation
+                    libraries to overwrite. In case of failed validations the <code>errors</code> property should contain an array of error messages.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_showValidationOnHandler" class="method item private">
+                        <h3 class="name">showValidationOnHandler
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l430"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:430</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
+
+            <div id="properties" class="tab-pane">
+                <h2 class="off-left">Properties</h2>
+
+                    <div id="property__showValidationOn" class="property item private">
+                        <h3 class="name">_showValidationOn
+                            <span class="small">array</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l410"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:410</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_autofocus" class="property item public">
+                        <h3 class="name">autofocus
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l243"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:243</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Control element's HTML5 autofocus attribute</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_cols" class="property item public">
+                        <h3 class="name">cols
+                            <span class="small">number</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l271"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:271</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Textarea's cols attribute (ignored for other <code>controlType</code>s)</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_controlType" class="property item public">
+                        <h3 class="name">controlType
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l161"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:161</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The type of the control widget.
+                    Supported types:</p>
+                    <ul>
+                    <li>'text'</li>
+                    <li>'checkbox'</li>
+                    <li>'textarea'</li>
+                    <li>any other type will use an input tag with the <code>controlType</code> value as the type attribute (for e.g. HTML5 input
+                    types like 'email'), and the same layout as the 'text' type</li>
+                    </ul>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_disabled" class="property item public">
+                        <h3 class="name">disabled
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l216"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:216</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Control element's HTML5 disabled attribute</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_errorIcon" class="property item public inherited">
+                        <h3 class="name">errorIcon
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_errorIcon">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l86"><code>addon&#x2F;components&#x2F;bs-form-group.js:86</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The icon classes to be used for a feedback icon in a "error" validation state.
+                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+                    rendered if <code>useIcons</code> is false.
+                    
+                    You can change this globally by setting the <code>formValidationErrorIcon</code> property of
+                    the ember-bootstrap configuration in your config/environment.js file. If your are
+                    using FontAwesome for example:
+                    
+                    <code>&#x60;</code>js
+                    ENV['ember-bootstrap'] = {
+                      formValidationErrorIcon: 'fa fa-times'
+                    }
+                    <code>&#x60;</code>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_errors" class="property item private">
+                        <h3 class="name">errors
+                            <span class="small">array</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l288"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:288</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The array of error messages from the <code>model</code>'s validation.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_errors" class="property item private">
+                        <h3 class="name">errors
+                            <span class="small">array</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l305"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:305</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The array of warning messages from the <code>model</code>'s validation.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_formElementId" class="property item private">
+                        <h3 class="name">formElementId
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l565"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:565</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>ID for input field and the corresponding label's &quot;for&quot; attribute</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_formLayout" class="property item public">
+                        <h3 class="name">formLayout
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l485"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:485</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The form layout used for the markup generation (see <a href="http://getbootstrap.com/css/#forms">http://getbootstrap.com/css/#forms</a>):</p>
+                    <ul>
+                    <li>'horizontal'</li>
+                    <li>'vertical'</li>
+                    <li>'inline'</li>
+                    </ul>
+                    <p>Defaults to the parent <code>form</code>'s <code>formLayout</code> property.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;vertical&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_hasErrors" class="property item private">
+                        <h3 class="name">hasErrors
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l297"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:297</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasFeedback" class="property item private inherited">
+                        <h3 class="name">hasFeedback
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_hasFeedback">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l54"><code>addon&#x2F;components&#x2F;bs-form-group.js:54</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Computed property which is true if the form group is showing a validation icon
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasIconForValidationState" class="property item private inherited">
+                        <h3 class="name">hasIconForValidationState
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_hasIconForValidationState">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l168"><code>addon&#x2F;components&#x2F;bs-form-group.js:168</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasLabel" class="property item private">
+                        <h3 class="name">hasLabel
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l465"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:465</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasValidation" class="property item private inherited">
+                        <h3 class="name">hasValidation
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_hasValidation">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l44"><code>addon&#x2F;components&#x2F;bs-form-group.js:44</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Computed property which is true if the form group is in a validation state
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasValidationMessages" class="property item private">
+                        <h3 class="name">hasValidationMessages
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l339"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:339</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasValidator" class="property item private">
+                        <h3 class="name">hasValidator
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l347"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:347</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasWarnings" class="property item private">
+                        <h3 class="name">hasWarnings
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l314"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:314</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_horizontalInputGridClass" class="property item private">
+                        <h3 class="name">horizontalInputGridClass
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l535"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:535</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_horizontalInputOffsetGridClass" class="property item private">
+                        <h3 class="name">horizontalInputOffsetGridClass
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l550"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:550</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout
+                    form, that have no label.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_horizontalLabelGridClass" class="property item public">
+                        <h3 class="name">horizontalLabelGridClass
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l525"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:525</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
+                    property of the parent form. The corresponding grid class for form controls is automatically computed.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_iconName" class="property item private inherited">
+                        <h3 class="name">iconName
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_iconName">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l157"><code>addon&#x2F;components&#x2F;bs-form-group.js:157</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_infoIcon" class="property item public inherited">
+                        <h3 class="name">infoIcon
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_infoIcon">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l128"><code>addon&#x2F;components&#x2F;bs-form-group.js:128</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The icon classes to be used for a feedback icon in a "info" validation state.
+                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+                    rendered if <code>useIcons</code> is false.
+                    
+                    You can change this globally by setting the <code>formValidationInfoIcon</code> property of
+                    the ember-bootstrap configuration in your config/environment.js file. If your are
+                    using FontAwesome for example:
+                    
+                    <code>&#x60;</code>js
+                    ENV['ember-bootstrap'] = {
+                      formValidationInfoIcon: 'fa fa-info-circle
+                    }
+                    <code>&#x60;</code>
+                    
+                    The "info" validation state is not supported in Bootstrap CSS, but can be easily added
+                    using the following LESS style:
+                    <code>&#x60;</code>less
+                    .has-info {
+                      .form-control-validation(@state-info-text; @state-info-text; @state-info-bg);
+                    }
+                    <code>&#x60;</code>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_invisibleLabel" class="property item public">
+                        <h3 class="name">invisibleLabel
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l152"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:152</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Controls label visibility by adding 'sr-only' class.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_isHorizontal" class="property item private">
+                        <h3 class="name">isHorizontal
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l509"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:509</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_isInline" class="property item private">
+                        <h3 class="name">isInline
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l517"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:517</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_isValidating" class="property item public">
+                        <h3 class="name">isValidating
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l355"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:355</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Set a validating state for async validations</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_isVertical" class="property item private">
+                        <h3 class="name">isVertical
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l501"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:501</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_label" class="property item public">
+                        <h3 class="name">label
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l139"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:139</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Text to display within a <code>&lt;label&gt;</code> tag.</p>
+                    <p>You should include a label for every form input cause otherwise screen readers
+                    will have trouble with your forms. Use <code>invisibleLabel</code> property if you want
+                    to hide them.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_model" class="property item public">
+                        <h3 class="name">model
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l280"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:280</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The model used for validation. Defaults to the parent <code>Components.Form</code>'s <code>model</code></p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_name" class="property item public">
+                        <h3 class="name">name
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l252"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:252</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Control element's name attribute</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_placeholder" class="property item public">
+                        <h3 class="name">placeholder
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l207"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:207</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Control element's HTML5 placeholder attribute</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_property" class="property item public">
+                        <h3 class="name">property
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l194"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:194</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The property name of the form element's <code>model</code> (by default the <code>model</code> of its parent <code>Components.Form</code>) that this
+                    form element should represent. The control element's value will automatically be bound to the model property's
+                    value.</p>
+                    <p>Using this property enables form validation on this element.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_readonly" class="property item public">
+                        <h3 class="name">readonly
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l225"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:225</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Control element's HTML5 readonly attribute</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_required" class="property item public">
+                        <h3 class="name">required
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l234"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:234</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Control element's HTML5 required attribute</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_rows" class="property item public">
+                        <h3 class="name">rows
+                            <span class="small">number</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l261"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:261</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Textarea's rows attribute (ignored for other <code>controlType</code>s)</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 5</p>
+                    
+                    
+                    </div>
+                    <div id="property_showAllValidations" class="property item private">
+                        <h3 class="name">showAllValidations
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l383"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:383</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_showErrors" class="property item private deprecated">
+                        <h3 class="name">showErrors
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                            <span class="label label-warning">deprecated</span>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l440"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:440</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_showOwnValidation" class="property item private">
+                        <h3 class="name">showOwnValidation
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l375"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:375</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_showValidation" class="property item private">
+                        <h3 class="name">showValidation
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l365"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:365</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>If <code>true</code> form validation markup is rendered (requires a validatable <code>model</code>).</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_showValidationMessages" class="property item private">
+                        <h3 class="name">showValidationMessages
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l391"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:391</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_showValidationOn" class="property item public">
+                        <h3 class="name">showValidationOn
+                            <span class="small">string|array</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l399"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:399</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Event or list of events which enable form validation markup rendering.
+                    Supported events: ['focusOut', 'change']</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> [&#x27;focusOut&#x27;]</p>
+                    
+                    
+                    </div>
+                    <div id="property_successIcon" class="property item public inherited">
+                        <h3 class="name">successIcon
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_successIcon">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l64"><code>addon&#x2F;components&#x2F;bs-form-group.js:64</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The icon classes to be used for a feedback icon in a "success" validation state.
+                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+                    rendered if <code>useIcons</code> is false.
+                    
+                    You can change this globally by setting the <code>formValidationSuccessIcon</code> property of
+                    the ember-bootstrap configuration in your config/environment.js file. If your are
+                    using FontAwesome for example:
+                    
+                    <code>&#x60;</code>js
+                    ENV['ember-bootstrap'] = {
+                      formValidationSuccessIcon: 'fa fa-check'
+                    }
+                    <code>&#x60;</code>
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;glyphicon glyphicon-ok&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_useIcons" class="property item public">
+                        <h3 class="name">useIcons
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                <p>Inherited from
+                                <a href="../classes/Components.FormGroup.html#property_useIcons">
+                                    Components.FormGroup
+                                </a>
+                                but overwritten in
+                            <a href="../files/addon_components_bs-form_element.js.html#l473"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:473</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>True for text field <code>controlType</code>s</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_validation" class="property item private">
+                        <h3 class="name">validation
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                <p>Inherited from
+                                <a href="../classes/Components.FormGroup.html#property_validation">
+                                    Components.FormGroup
+                                </a>
+                                but overwritten in
+                            <a href="../files/addon_components_bs-form_element.js.html#l449"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:449</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The validation (&quot;error&quot; or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
+                    models validation state.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_validationClass" class="property item private inherited">
+                        <h3 class="name">validationClass
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_validationClass">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l190"><code>addon&#x2F;components&#x2F;bs-form-group.js:190</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_validationMessages" class="property item private">
+                        <h3 class="name">validationMessages
+                            <span class="small">array</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l322"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:322</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The array of validation messages (either errors or warnings) rom the <code>model</code>'s validation.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_value" class="property item public">
+                        <h3 class="name">value
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l177"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:177</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The value of the control element is bound to this property. You can bind it to some controller property to
+                    get/set the control element's value:</p>
+                    <pre class="code prettyprint"><code class="language-hbs">{{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+                    </code></pre>
+                    <p>Note: you loose the ability to validate this form element by directly binding to its value. It is recommended
+                    to use the <code>property</code> feature instead.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_warningIcon" class="property item public inherited">
+                        <h3 class="name">warningIcon
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_warningIcon">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form-group.js.html#l107"><code>addon&#x2F;components&#x2F;bs-form-group.js:107</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The icon classes to be used for a feedback icon in a "warning" validation state.
+                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+                    rendered if <code>useIcons</code> is false.
+                    
+                    You can change this globally by setting the <code>formValidationWarningIcon</code> property of
+                    the ember-bootstrap configuration in your config/environment.js file. If your are
+                    using FontAwesome for example:
+                    
+                    <code>&#x60;</code>js
+                    ENV['ember-bootstrap'] = {
+                      formValidationWarningIcon: 'fa fa-warning'
+                    }
+                    <code>&#x60;</code>
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
+
+
+            <div id="events" class="tab-pane">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_change" class="events item private">
+                        <h3 class="name"><code>change</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l613"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:613</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Listen for change events from the control element to automatically set <code>showOwnValidation</code> to true to enable
+                    form validation markup rendering if <code>showValidationsOn</code> contains <code>change</code>.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_focusOut" class="events item private">
+                        <h3 class="name"><code>focusOut</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l602"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:602</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Listen for focusOut events from the control element to automatically set <code>showOwnValidation</code> to true to enable
+                    form validation markup rendering if <code>showValidationsOn</code> contains <code>focusOut</code>.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_onChange" class="events item public">
+                        <h3 class="name"><code>onChange</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form_element.js.html#l624"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:624</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action is called whenever the input value is changed, e.g. by typing text</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">value</code>
+                                            <span class="type">String</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The new value of the form control</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">model</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The form element's model</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">property</code>
+                                            <span class="type">String</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The value of <code>property</code></p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+            </div>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3>Classes</h3>
+            
+            <ul id="api-classes" class="nav nav-pills nav-stacked">
+                    <li class="nav-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
+                    <li class="nav-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
+                    <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+                    <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
+                    <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
+                    <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
+                    <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+            </ul>        </div>
+    </div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

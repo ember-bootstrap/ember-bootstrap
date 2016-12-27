@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Components.ModalSimple - ember-bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-toggle-wrapper visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+        </div>
+        <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="navbar-nav nav">
+                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
+                <li><a href="/ember-bootstrap/components">Components</a></li>
+                <li><a href="/ember-bootstrap/api">API</a></li>
+                <li><a href="/ember-bootstrap/api/v1.0">API v1.0</a></li>
+
+            </ul>
+            <ul class="navbar-nav nav navbar-right">
+                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>API Docs <span class="small">v1.0.0-alpha</span></h1>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>Components.ModalSimple <small>Class</small></h1>
+</div>
+
+<div class="well well-small">
+        <span class="label label-public">public</span>
+
+
+        <div class="extends">
+            Extends <a href="../classes/Components.Modal.html" class="crosslink">Components.Modal</a>
+        </div>
+
+        <div class="foundat">
+            Defined in: <a href="../files/addon_components_bs-modal-simple.js.html#l4"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:4</code></a>
+        </div>
+
+
+</div>
+
+
+<div class="well well-small">
+    <p>Component for creating <a href="http://getbootstrap.com/javascript/#modals">Bootstrap modals</a> with a some common default markup
+including a header, footer and body. Creating a simple modal is easy:</p>
+<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal-simple title=&quot;Simple Dialog&quot;}}
+   Hello world!
+ {{/bs-modal-simple}}
+</code></pre>
+<p>This will automatically create the appropriate markup, with a modal header containing the title, and a footer containing
+a default &quot;Ok&quot; button, that will close the modal automatically (unless you return false from <code>onHide</code>).
+A modal created this way will be visible at once. You can use the <code>{{#if ...}}</code> helper to hide all modal elements form
+the DOM until needed. Or you can bind the <code>open</code> property to trigger showing and hiding the modal:</p>
+<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal-simple open=openModal title=&quot;Simple Dialog&quot;}}
+   Hello world!
+ {{/bs-modal-simple}}
+</code></pre>
+<h3>Custom Markup</h3>
+<p>To customize the markup within the modal you can use the <a href="Components.Modal.html">bs-modal</a> component.</p>
+<h3>Modals with forms</h3>
+<p>There is a special case when you have a form inside your modals body: you probably do not want to have a submit button
+within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not
+trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
+thus bypass the form validation feature of the form component.</p>
+<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal-simple title=&quot;Form Example&quot; closeTitle=&quot;Cancel&quot; submitTitle=&quot;Ok&quot;}}
+   {{#bs-form action=(action &quot;submit&quot;) model=this}}
+     {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot;}}
+     {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
+   {{/bs-form}}
+ {{/bs-modal-simple}}
+</code></pre>
+<p>The modal component supports this common case by triggering the submit event programmatically on the body's form if
+present whenever the footer's submit button is pressed, so the example above will work as expected.</p>
+<h3>Auto-focus</h3>
+<p>In order to allow key handling to function, the modal's root element is given focus once the modal is shown. If your
+modal contains an element such as a text input and you would like it to be given focus rather than the modal element,
+then give it the HTML5 autofocus attribute:</p>
+<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal-simple title=&quot;Form Example&quot; closeTitle=&quot;Cancel&quot; submitTitle=&quot;Ok&quot;}}
+   {{#bs-form action=(action &quot;submit&quot;) model=this}}
+     {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot; autofocus=true}}
+     {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
+   {{/bs-form}}
+ {{/bs-modal-simple}}
+</code></pre>
+<h3>Modals inside wormhole</h3>
+<p>Modals make use of the <a href="https://github.com/yapplabs/ember-wormhole">ember-wormhole</a> addon, which will be installed
+automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested
+components/templates where it belongs to logically, but to have the actual DOM elements within a special container
+element, which is a child of ember's root element. This will make sure that modals always overlay the whole app, and
+are not effected by parent elements with <code>overflow: hidden</code> for example.
+If you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.</p>
+
+</div>
+
+
+    <form id="options-form" class="form-inline" style="margin-bottom: 1em;">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
+
+            <li><a data-toggle="tab" href="#methods">Methods</a></li>
+            <li><a data-toggle="tab" href="#properties">Properties</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="index" class="tab-pane active">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_adjustDialog" data-tablink="adjustDialog">adjustDialog</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_checkScrollbar" data-tablink="checkScrollbar">checkScrollbar</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_handleBackdrop" data-tablink="handleBackdrop">handleBackdrop</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_handleUpdate" data-tablink="handleUpdate">handleUpdate</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_hide" data-tablink="hide">hide</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_hideModal" data-tablink="hideModal">hideModal</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_resetAdjustments" data-tablink="resetAdjustments">resetAdjustments</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_resetScrollbar" data-tablink="resetScrollbar">resetScrollbar</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_resize" data-tablink="resize">resize</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_setScrollbar" data-tablink="setScrollbar">setScrollbar</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_show" data-tablink="show">show</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_takeFocus" data-tablink="takeFocus">takeFocus</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property__renderInPlace" data-tablink="_renderInPlace">_renderInPlace</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_backdrop" data-tablink="backdrop">backdrop</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_backdropClose" data-tablink="backdropClose">backdropClose</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_backdropElement" data-tablink="backdropElement">backdropElement</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_backdropId" data-tablink="backdropId">backdropId</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_backdropTransitionDuration" data-tablink="backdropTransitionDuration">backdropTransitionDuration</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_closeButton" data-tablink="closeButton">closeButton</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_closeTitle" data-tablink="closeTitle">closeTitle</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_in" data-tablink="in">in</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isOpen" data-tablink="isOpen">isOpen</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_keyboard" data-tablink="keyboard">keyboard</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_modalElement" data-tablink="modalElement">modalElement</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_modalId" data-tablink="modalId">modalId</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_notFade" data-tablink="notFade">notFade</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_onHidden" data-tablink="onHidden">onHidden</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_onHide" data-tablink="onHide">onHide</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_onShow" data-tablink="onShow">onShow</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_onShown" data-tablink="onShown">onShown</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_onSubmit" data-tablink="onSubmit">onSubmit</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_open" data-tablink="open">open</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_renderInPlace" data-tablink="renderInPlace">renderInPlace</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_scrollbarWidth" data-tablink="scrollbarWidth">scrollbarWidth</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showBackdrop" data-tablink="showBackdrop">showBackdrop</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_size" data-tablink="size">size</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_submitTitle" data-tablink="submitTitle">submitTitle</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_title" data-tablink="title">title</a>
+
+                            </li>
+                            <li class="index-item property public inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_transitionDuration" data-tablink="transitionDuration">transitionDuration</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+        </div>
+
+            <div id="methods" class="tab-pane">
+                <h2 class="off-left">Methods</h2>
+
+                    <div id="method_adjustDialog" class="method item private inherited">
+                        <h3 class="name">adjustDialog
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#method_adjustDialog">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l477"><code>addon&#x2F;components&#x2F;bs-modal.js:477</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_checkScrollbar" class="method item private inherited">
+                        <h3 class="name">checkScrollbar
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#method_checkScrollbar">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l500"><code>addon&#x2F;components&#x2F;bs-modal.js:500</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_handleBackdrop" class="method item private inherited">
+                        <h3 class="name">handleBackdrop
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#method_handleBackdrop">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l405"><code>addon&#x2F;components&#x2F;bs-modal.js:405</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            SHow/hide the backdrop
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">callback</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="method_handleUpdate" class="method item private inherited">
+                        <h3 class="name">handleUpdate
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#method_handleUpdate">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l469"><code>addon&#x2F;components&#x2F;bs-modal.js:469</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_hide" class="method item private inherited">
+                        <h3 class="name">hide
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#method_hide">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l366"><code>addon&#x2F;components&#x2F;bs-modal.js:366</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Hide the modal
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_hideModal" class="method item private inherited">
+                        <h3 class="name">hideModal
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#method_hideModal">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l385"><code>addon&#x2F;components&#x2F;bs-modal.js:385</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Clean up after modal is hidden and call closedAction
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_resetAdjustments" class="method item private inherited">
+                        <h3 class="name">resetAdjustments
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#method_resetAdjustments">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l489"><code>addon&#x2F;components&#x2F;bs-modal.js:489</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_resetScrollbar" class="method item private inherited">
+                        <h3 class="name">resetScrollbar
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#method_resetScrollbar">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l526"><code>addon&#x2F;components&#x2F;bs-modal.js:526</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_resize" class="method item private inherited">
+                        <h3 class="name">resize
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#method_resize">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l455"><code>addon&#x2F;components&#x2F;bs-modal.js:455</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Attach/Detach resize event listeners
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_setScrollbar" class="method item private inherited">
+                        <h3 class="name">setScrollbar
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#method_setScrollbar">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l514"><code>addon&#x2F;components&#x2F;bs-modal.js:514</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_show" class="method item private inherited">
+                        <h3 class="name">show
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#method_show">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l323"><code>addon&#x2F;components&#x2F;bs-modal.js:323</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Show the modal
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_takeFocus" class="method item private inherited">
+                        <h3 class="name">takeFocus
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#method_takeFocus">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l307"><code>addon&#x2F;components&#x2F;bs-modal.js:307</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Give the modal (or its autofocus element) focus
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
+
+            <div id="properties" class="tab-pane">
+                <h2 class="off-left">Properties</h2>
+
+                    <div id="property__renderInPlace" class="property item private inherited">
+                        <h3 class="name">_renderInPlace
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property__renderInPlace">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l201"><code>addon&#x2F;components&#x2F;bs-modal.js:201</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_backdrop" class="property item public inherited">
+                        <h3 class="name">backdrop
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_backdrop">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l94"><code>addon&#x2F;components&#x2F;bs-modal.js:94</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Use a semi-transparent modal background to hide the rest of the page.
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_backdropClose" class="property item public inherited">
+                        <h3 class="name">backdropClose
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_backdropClose">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l181"><code>addon&#x2F;components&#x2F;bs-modal.js:181</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            If true clicking on the backdrop will close the modal.
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_backdropElement" class="property item private inherited">
+                        <h3 class="name">backdropElement
+                            <span class="small">object</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_backdropElement">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l158"><code>addon&#x2F;components&#x2F;bs-modal.js:158</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The jQuery object of the backdrop element.
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_backdropId" class="property item private inherited">
+                        <h3 class="name">backdropId
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_backdropId">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l146"><code>addon&#x2F;components&#x2F;bs-modal.js:146</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The id of the backdrop element.
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_backdropTransitionDuration" class="property item public inherited">
+                        <h3 class="name">backdropTransitionDuration
+                            <span class="small">number</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_backdropTransitionDuration">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l220"><code>addon&#x2F;components&#x2F;bs-modal.js:220</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The duration of the backdrop fade transition
+                        </div>
+                    
+                            <p><strong>Default:</strong> 150</p>
+                    
+                    
+                    </div>
+                    <div id="property_closeButton" class="property item public">
+                        <h3 class="name">closeButton
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-simple.js.html#l93"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:93</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Display a close button (x icon) in the corner of the modal header.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_closeTitle" class="property item public">
+                        <h3 class="name">closeTitle
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-simple.js.html#l103"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:103</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The title of the default close button.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;Ok&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_fade" class="property item public inherited">
+                        <h3 class="name">fade
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_fade">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l67"><code>addon&#x2F;components&#x2F;bs-modal.js:67</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Set to false to disable fade animations.
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_in" class="property item private inherited">
+                        <h3 class="name">in
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_in">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l84"><code>addon&#x2F;components&#x2F;bs-modal.js:84</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Used to apply Bootstrap's "in" class
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_isOpen" class="property item private inherited">
+                        <h3 class="name">isOpen
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_isOpen">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l61"><code>addon&#x2F;components&#x2F;bs-modal.js:61</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_keyboard" class="property item public inherited">
+                        <h3 class="name">keyboard
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_keyboard">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l112"><code>addon&#x2F;components&#x2F;bs-modal.js:112</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Closes the modal when escape key is pressed.
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_modalElement" class="property item private inherited">
+                        <h3 class="name">modalElement
+                            <span class="small">object</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_modalElement">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l134"><code>addon&#x2F;components&#x2F;bs-modal.js:134</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The jQuery object of the <code>.modal</code> element.
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_modalId" class="property item private inherited">
+                        <h3 class="name">modalId
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_modalId">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l122"><code>addon&#x2F;components&#x2F;bs-modal.js:122</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The id of the <code>.modal</code> element.
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_notFade" class="property item private inherited">
+                        <h3 class="name">notFade
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_notFade">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l77"><code>addon&#x2F;components&#x2F;bs-modal.js:77</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_onHidden" class="property item public inherited">
+                        <h3 class="name">onHidden
+                            <span class="small">function</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_onHidden">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l257"><code>addon&#x2F;components&#x2F;bs-modal.js:257</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The action to be sent after the modal has been completely hidden (including the CSS transition).
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_onHide" class="property item public inherited">
+                        <h3 class="name">onHide
+                            <span class="small">function</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_onHide">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l242"><code>addon&#x2F;components&#x2F;bs-modal.js:242</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The action to be sent when the modal is closing.
+                    This will be triggered by pressing the modal header's close button (x button) or the modal footer's close button.
+                    Note that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some
+                    time to finish. Use the <code>closedAction</code> if you need the modal to be hidden when the action triggers.
+                    
+                    You can return false to prevent closing the modal automatically, and do that in your action by
+                    setting <code>open</code> to false.
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_onShow" class="property item public inherited">
+                        <h3 class="name">onShow
+                            <span class="small">function</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_onShow">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l267"><code>addon&#x2F;components&#x2F;bs-modal.js:267</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The action to be sent when the modal is opening.
+                    This will be triggered immediately after the modal is shown (so it's safe to access the DOM for
+                    size calculations and the like). This means that if fade=true, it will be shown in between the
+                    backdrop animation and the fade animation.
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_onShown" class="property item public inherited">
+                        <h3 class="name">onShown
+                            <span class="small">function</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_onShown">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l280"><code>addon&#x2F;components&#x2F;bs-modal.js:280</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The action to be sent after the modal has been completely shown (including the CSS transition).
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_onSubmit" class="property item public inherited">
+                        <h3 class="name">onSubmit
+                            <span class="small">function</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_onSubmit">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l230"><code>addon&#x2F;components&#x2F;bs-modal.js:230</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The action to be sent when the modal footer's submit button (if present) is pressed.
+                    Note that if your modal body contains a form (e.g. [Components.Form](Components.Form.html){{/crossLink}}) this action will
+                    not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
+                    example.
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_open" class="property item public inherited">
+                        <h3 class="name">open
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_open">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l48"><code>addon&#x2F;components&#x2F;bs-modal.js:48</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Visibility of the modal. Toggle to to show/hide with CSS transitions.
+                    
+                    When the modal is closed by user interaction this property will not update by using two-way bindings in order
+                    to follow DDAU best practices. If you want to react to such changes, subscribe to the <code>onHide</code> action
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_renderInPlace" class="property item public inherited">
+                        <h3 class="name">renderInPlace
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_renderInPlace">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l191"><code>addon&#x2F;components&#x2F;bs-modal.js:191</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            If true component will render in place, rather than be wormholed.
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_scrollbarWidth" class="property item private inherited">
+                        <h3 class="name">scrollbarWidth
+                            <span class="small">number</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_scrollbarWidth">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l534"><code>addon&#x2F;components&#x2F;bs-modal.js:534</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_showBackdrop" class="property item private inherited">
+                        <h3 class="name">showBackdrop
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_showBackdrop">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l104"><code>addon&#x2F;components&#x2F;bs-modal.js:104</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_size" class="property item public inherited">
+                        <h3 class="name">size
+                            <span class="small">String</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_size">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l170"><code>addon&#x2F;components&#x2F;bs-modal.js:170</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Property for size styling, set to null (default), 'lg' or 'sm'
+                    
+                    Also see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_submitTitle" class="property item public">
+                        <h3 class="name">submitTitle
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-simple.js.html#l113"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:113</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_title" class="property item public">
+                        <h3 class="name">title
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-modal-simple.js.html#l84"><code>addon&#x2F;components&#x2F;bs-modal-simple.js:84</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The title of the modal, visible in the modal header. Is ignored if <code>header</code> is false.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_transitionDuration" class="property item public inherited">
+                        <h3 class="name">transitionDuration
+                            <span class="small">number</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Components.Modal.html#property_transitionDuration">Components.Modal</a>:
+                            <a href="../files/addon_components_bs-modal.js.html#l210"><code>addon&#x2F;components&#x2F;bs-modal.js:210</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The duration of the fade transition
+                        </div>
+                    
+                            <p><strong>Default:</strong> 300</p>
+                    
+                    
+                    </div>
+            </div>
+
+
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3>Classes</h3>
+            
+            <ul id="api-classes" class="nav nav-pills nav-stacked">
+                    <li class="nav-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
+                    <li class="nav-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
+                    <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+                    <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
+                    <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
+                    <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
+                    <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+            </ul>        </div>
+    </div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

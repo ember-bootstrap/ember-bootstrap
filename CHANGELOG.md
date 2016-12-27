@@ -1,4 +1,54 @@
 
+# [1.0.0-alpha](https://github.com/kaliber5/ember-bootstrap/compare/v0.11.3...v1.0.0-alpha) (2016-12-27)
+
+## Breaking Changes
+
+Please note that the 1.0 release of ember-bootstrap will introduce several breaking changes to make use of modern Ember features, follow Data Down Actions Up (DDAU) best practises and to make its API consistent.
+Most changes will fall into one of the following categories:
+
+* Use contextual components for parent/child components
+* Use one-way bindings for public properties to not violate DDAU
+* renamed actions for consistency
+
+Also ember-bootstrap 1.0 requires at least **Ember v2.3**!
+
+See the following list for details.
+
+### Features
+
+* **Accordion:** binding to `selected` property is one-way, thus preventing DDAU violations ([a44ec7d](https://github.com/kaliber5/ember-bootstrap/commit/a44ec7d))
+* **Accordion:** uses contectual components for items. Fires `onChange` action. ([bbab0f4](https://github.com/kaliber5/ember-bootstrap/commit/bbab0f4))
+* **Accordion:** yield `change` action for adding custom behaviour ([e8936cd](https://github.com/kaliber5/ember-bootstrap/commit/e8936cd))
+* **Alert:** Binding to visible property is one-way only (DDAU) ([d3ab2f3](https://github.com/kaliber5/ember-bootstrap/commit/d3ab2f3))
+* **Alert:** renamed `dismissedAction` to `onDismissed`. Added `onDismiss` action, that prevents hiding the alert automatically when it returns false ([8460af4](https://github.com/kaliber5/ember-bootstrap/commit/8460af4))
+* **Alert:** renamed `dismissedAction` to `onDismissed`. Added `onDismiss` action, that prevents hiding the alert automatically when it returns false ([99a139b](https://github.com/kaliber5/ember-bootstrap/commit/99a139b))
+* **Button:** removed `toggle` property, `active` state is not changed by button itself anymore (DDAU). Changed default action to `onClick` closure action with changed signature ([14cd0bf](https://github.com/kaliber5/ember-bootstrap/commit/14cd0bf))
+* **ButtonGroup:** refactored to make use of contextual components, does not change `value` (DDAU) ([603c67d](https://github.com/kaliber5/ember-bootstrap/commit/603c67d))
+* **Collapse:** renamed actions to onShow/onShown/onHide/onHidden ([9dad149](https://github.com/kaliber5/ember-bootstrap/commit/9dad149))
+* **Dropdown:** refactored to make use of contextual components, added onShow and onHide actions ([ae4d2af](https://github.com/kaliber5/ember-bootstrap/commit/ae4d2af))
+* **Form:** FormElement component is yielded as contextual component ([2509620](https://github.com/kaliber5/ember-bootstrap/commit/2509620))
+* **Form:** renamed actions to onBefore/onSubmit/onInvalid ([e1397a1](https://github.com/kaliber5/ember-bootstrap/commit/e1397a1))
+* **FormElement:** support readonly attribute. Thanks to basz ([dec8e8c](https://github.com/kaliber5/ember-bootstrap/commit/dec8e8c))
+* **FormElement:** the existing block params `id`, `value` and `validation` are yielded as hash properties ([c353154](https://github.com/kaliber5/ember-bootstrap/commit/c353154))
+* **FormElement:** uses one-way controls thus supporting DDAU pattern. Calls onChange action when input values have changed. Form component initializes FormElement with default action that updates the models property, but can be overriden. ([dda8e36](https://github.com/kaliber5/ember-bootstrap/commit/dda8e36))
+* **Input:** The `bs-input` and `bs-textarea` components have been removed, as they were based on the basic Ember input helpers that allow only two-way bindings. Use simple `` elements instead if needed. The form elements yielded by `bs-form` wrap these for you, so use them whenever possible. ([3e7d81f](https://github.com/kaliber5/ember-bootstrap/commit/3e7d81f))
+* **Modal:** added `transitionDuration` and `backdropTransitionDuration`. ([d49c79a](https://github.com/kaliber5/ember-bootstrap/commit/d49c79a)), closes [#78](https://github.com/kaliber5/ember-bootstrap/issues/78)
+* **Modal:** Binding to open property is one-way only (DDAU) ([c3869c9](https://github.com/kaliber5/ember-bootstrap/commit/c3869c9))
+* **Modal:** dropped `autoClose` property. Preventing automatically closing the modal can now be done by returning false from `onHide` ([1bffd84](https://github.com/kaliber5/ember-bootstrap/commit/1bffd84))
+* **Modal:** refactored to use contextual components for header, footer and body ([c3d449e](https://github.com/kaliber5/ember-bootstrap/commit/c3d449e))
+* **Modal:** Renamed actions to onShow/onShown/onHide/onHidden/onSubmit for consistency ([91ec078](https://github.com/kaliber5/ember-bootstrap/commit/91ec078))
+* **Modal:** Splitted in `bs-modal-simple` for default markup and `bs-modal` for custom markup. This replaces the previous `header`, `body` and `footer` flags ([3ef2bf7](https://github.com/kaliber5/ember-bootstrap/commit/3ef2bf7))
+* **Nav:** refactored to yield nav item as a contextual component ([da7ef45](https://github.com/kaliber5/ember-bootstrap/commit/da7ef45))
+* **NavBar:** refactored to use contextual components. Thanks to [srvance](https://github.com/srvance) ([1f49c28](https://github.com/kaliber5/ember-bootstrap/commit/1f49c28))
+* **Progress:** Progress bar component is yielded as contextual component ([a237379](https://github.com/kaliber5/ember-bootstrap/commit/a237379))
+* **Select:** removed deprecated select component and FromElement with controlType="select" ([9f04445](https://github.com/kaliber5/ember-bootstrap/commit/9f04445))
+* **Tab:** Binding to activeId property is one-way only (DDAU) ([2e3e44a](https://github.com/kaliber5/ember-bootstrap/commit/2e3e44a))
+* **Tab:** refactored to yield tab pane as a contextual component. Changed default action to `onChange` ([0185589](https://github.com/kaliber5/ember-bootstrap/commit/0185589))
+* **Tab:** returning false from `onChange` prevents changing the active tab (DDAU) ([3ac6225](https://github.com/kaliber5/ember-bootstrap/commit/3ac6225))
+
+
+
+
 ### 0.11.3 (2016-11-30)
 
 

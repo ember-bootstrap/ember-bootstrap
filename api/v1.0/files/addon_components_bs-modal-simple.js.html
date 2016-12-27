@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/components/bs-modal-simple.js - ember-bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-toggle-wrapper visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+        </div>
+        <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="navbar-nav nav">
+                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
+                <li><a href="/ember-bootstrap/components">Components</a></li>
+                <li><a href="/ember-bootstrap/api">API</a></li>
+                <li><a href="/ember-bootstrap/api/v1.0">API v1.0</a></li>
+
+            </ul>
+            <ul class="navbar-nav nav navbar-right">
+                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>API Docs <span class="small">v1.0.0-alpha</span></h1>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>addon/components/bs-modal-simple.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Modal from &#x27;./bs-modal&#x27;;
+import layout from &#x27;../templates/components/bs-modal-simple&#x27;;
+
+/**
+
+ Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with a some common default markup
+ including a header, footer and body. Creating a simple modal is easy:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-modal-simple title=&quot;Simple Dialog&quot;}}
+   Hello world!
+ {{/bs-modal-simple}}
+ &#x60;&#x60;&#x60;
+
+ This will automatically create the appropriate markup, with a modal header containing the title, and a footer containing
+ a default &quot;Ok&quot; button, that will close the modal automatically (unless you return false from &#x60;onHide&#x60;).
+
+ A modal created this way will be visible at once. You can use the &#x60;{{#if ...}}&#x60; helper to hide all modal elements form
+ the DOM until needed. Or you can bind the &#x60;open&#x60; property to trigger showing and hiding the modal:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-modal-simple open=openModal title=&quot;Simple Dialog&quot;}}
+   Hello world!
+ {{/bs-modal-simple}}
+ &#x60;&#x60;&#x60;
+
+ ### Custom Markup
+
+ To customize the markup within the modal you can use the [bs-modal](Components.Modal.html) component.
+
+ ### Modals with forms
+
+ There is a special case when you have a form inside your modals body: you probably do not want to have a submit button
+ within your form but instead in your modal footer. Hover pressing the submit button outside of your form would not
+ trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
+ thus bypass the form validation feature of the form component.
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-modal-simple title=&quot;Form Example&quot; closeTitle=&quot;Cancel&quot; submitTitle=&quot;Ok&quot;}}
+   {{#bs-form action=(action &quot;submit&quot;) model=this}}
+     {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot;}}
+     {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
+   {{/bs-form}}
+ {{/bs-modal-simple}}
+ &#x60;&#x60;&#x60;
+
+ The modal component supports this common case by triggering the submit event programmatically on the body&#x27;s form if
+ present whenever the footer&#x27;s submit button is pressed, so the example above will work as expected.
+
+ ### Auto-focus
+
+ In order to allow key handling to function, the modal&#x27;s root element is given focus once the modal is shown. If your
+ modal contains an element such as a text input and you would like it to be given focus rather than the modal element,
+ then give it the HTML5 autofocus attribute:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-modal-simple title=&quot;Form Example&quot; closeTitle=&quot;Cancel&quot; submitTitle=&quot;Ok&quot;}}
+   {{#bs-form action=(action &quot;submit&quot;) model=this}}
+     {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot; autofocus=true}}
+     {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
+   {{/bs-form}}
+ {{/bs-modal-simple}}
+
+ &#x60;&#x60;&#x60;
+
+ ### Modals inside wormhole
+
+ Modals make use of the [ember-wormhole](https://github.com/yapplabs/ember-wormhole) addon, which will be installed
+ automatically alongside ember-bootstrap. This is used to allow the modal to be placed in deeply nested
+ components/templates where it belongs to logically, but to have the actual DOM elements within a special container
+ element, which is a child of ember&#x27;s root element. This will make sure that modals always overlay the whole app, and
+ are not effected by parent elements with &#x60;overflow: hidden&#x60; for example.
+
+ If you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.
+
+ @class ModalSimple
+ @namespace Components
+ @extends Components.Modal
+ @public
+ */
+export default Modal.extend({
+  layout,
+
+  /**
+   * The title of the modal, visible in the modal header. Is ignored if &#x60;header&#x60; is false.
+   *
+   * @property title
+   * @type string
+   * @public
+   */
+  title: null,
+
+  /**
+   * Display a close button (x icon) in the corner of the modal header.
+   *
+   * @property closeButton
+   * @type boolean
+   * @default true
+   * @public
+   */
+  closeButton: true,
+
+  /**
+   * The title of the default close button.
+   *
+   * @property closeTitle
+   * @type string
+   * @default &#x27;Ok&#x27;
+   * @public
+   */
+  closeTitle: &#x27;Ok&#x27;,
+
+  /**
+   * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null.
+   *
+   * @property submitTitle
+   * @type string
+   * @default null
+   * @public
+   */
+  submitTitle: null
+
+});
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3>Classes</h3>
+            
+            <ul id="api-classes" class="nav nav-pills nav-stacked">
+                    <li class="nav-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
+                    <li class="nav-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
+                    <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+                    <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
+                    <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
+                    <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
+                    <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+            </ul>        </div>
+    </div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
