@@ -521,3 +521,10 @@ test('it passes along class attribute', function(assert) {
 
   assert.equal(this.$('.modal.custom').length, 1);
 });
+
+test('closing modal does not modify public open property', function(assert) {
+  this.set('open', true);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false open=open}}Hello world!{{/bs-modal-simple}}`);
+  this.$('.modal .modal-header .close').click();
+  assert.equal(this.get('open'), true, 'DOes not change open property');
+});

@@ -19,7 +19,7 @@ const {
 
  ```hbs
  {{#bs-alert type="success"}}
-   <strong>Well done!</strong> You successfully read this important alert message.
+ <strong>Well done!</strong> You successfully read this important alert message.
  {{/bs-alert}}
  ```
 
@@ -59,6 +59,9 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
   /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
    * has completed.
+   *
+   * When the alert is dismissed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onHide` action
    *
    * @property visible
    * @type boolean

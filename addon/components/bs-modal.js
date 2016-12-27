@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/bs-modal';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
+import listenTo from '../utils/listen-to-cp';
 
 const { computed, observer, K: noop } = Ember;
 
@@ -46,8 +47,9 @@ export default Ember.Component.extend(TransitionSupport, {
 
   /**
    * Visibility of the modal. Toggle to to show/hide with CSS transitions.
-   * *Note*: this property will be automatically set to false when clicking the modal's close button, unless you return
-   * false from the `onHide` action. Beware when using two-way bindings!
+   *
+   * When the modal is closed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onHide` action
    *
    * @property open
    * @type boolean
@@ -55,6 +57,12 @@ export default Ember.Component.extend(TransitionSupport, {
    * @public
    */
   open: true,
+
+  /**
+   * @property isOpen
+   * @private
+   */
+  isOpen: listenTo('open'),
 
   /**
    * Set to false to disable fade animations.
@@ -281,7 +289,7 @@ export default Ember.Component.extend(TransitionSupport, {
   actions: {
     close() {
       if (this.get('onHide')() !== false) {
-        this.set('open', false);
+        this.set('isOpen', false);
       }
     },
     submit() {
@@ -404,7 +412,7 @@ export default Ember.Component.extend(TransitionSupport, {
   handleBackdrop(callback) {
     let doAnimate = this.get('usesTransition');
 
-    if (this.get('open') && this.get('backdrop')) {
+    if (this.get('isOpen') && this.get('backdrop')) {
       this.set('showBackdrop', true);
 
       if (!callback) {
@@ -422,7 +430,7 @@ export default Ember.Component.extend(TransitionSupport, {
       } else {
         callback.call(this);
       }
-    } else if (!this.get('open') && this.get('backdrop')) {
+    } else if (!this.get('isOpen') && this.get('backdrop')) {
       let $backdrop = this.get('backdropElement');
       Ember.assert('Backdrop element should be in DOM', $backdrop && $backdrop.length > 0);
 
@@ -451,7 +459,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   resize() {
-    if (this.get('open')) {
+    if (this.get('isOpen')) {
       Ember.$(window).on('resize.bs.modal', Ember.run.bind(this, this.handleUpdate));
     } else {
       Ember.$(window).off('resize.bs.modal');
@@ -540,7 +548,7 @@ export default Ember.Component.extend(TransitionSupport, {
 
   didInsertElement() {
     this._super(...arguments);
-    if (this.get('open')) {
+    if (this.get('isOpen')) {
       this.show();
     }
   },
@@ -552,8 +560,8 @@ export default Ember.Component.extend(TransitionSupport, {
     this.resetScrollbar();
   },
 
-  _observeOpen: observer('open', function() {
-    if (this.get('open')) {
+  _observeOpen: observer('isOpen', function() {
+    if (this.get('isOpen')) {
       this.show();
     } else {
       this.hide();
@@ -562,8 +570,8 @@ export default Ember.Component.extend(TransitionSupport, {
 
   init() {
     this._super(...arguments);
-    let { open, backdrop, fade } = this.getProperties('open', 'backdrop', 'fade');
-    this.set('in', open && !fade);
-    this.set('showBackdrop', open && backdrop);
+    let { isOpen, backdrop, fade } = this.getProperties('isOpen', 'backdrop', 'fade');
+    this.set('in', isOpen && !fade);
+    this.set('showBackdrop', isOpen && backdrop);
   }
 });
