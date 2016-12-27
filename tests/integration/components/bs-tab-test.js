@@ -221,3 +221,19 @@ test('when onChange returns false active tab is not changed', function(assert) {
   assertActiveTab.call(this, assert, 0, true);
   assertActiveTab.call(this, assert, 1, false);
 });
+
+test('changing active tab does not change public activeId property (DDAU)', function(assert) {
+    this.set('paneId', 'pane1');
+    this.render(hbs`
+    {{#bs-tab fade=false activeId=paneId as |tab|}}
+      {{#tab.pane elementId="pane1" title="Tab 1"}}
+        tabcontent 1
+      {{/tab.pane}}
+      {{#tab.pane elementId="pane2" title="Tab 2"}}
+        tabcontent 2
+      {{/tab.pane}}
+    {{/bs-tab}}
+  `);
+    this.$('ul.nav.nav-tabs li:eq(1) a').click();
+    assert.equal(this.get('paneId'), 'pane1', 'Does not modify public activeId property');
+});

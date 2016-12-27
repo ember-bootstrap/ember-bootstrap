@@ -2,6 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/bs-tab';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import TabPane from './bs-tab/pane';
+import listenTo from '../utils/listen-to-cp';
 
 const { computed, isPresent, A, K: noop } = Ember;
 
@@ -144,11 +145,20 @@ export default Ember.Component.extend(ComponentParent, {
    * {{/bs-tab}}
    * ```
    *
+   * When the selection is changed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onChange` action
+   *
    * @property activeId
    * @type string
    * @public
    */
   activeId: computed.oneWay('childPanes.firstObject.elementId'),
+
+  /**
+   * @property isActiveId
+   * @private
+   */
+  isActiveId: listenTo('activeId'),
 
   /**
    * Set to false to disable the fade animation when switching tabs.
@@ -228,10 +238,10 @@ export default Ember.Component.extend(ComponentParent, {
 
   actions: {
     select(id) {
-      let previous = this.get('activeId');
+      let previous = this.get('isActiveId');
       if (this.get('onChange')(id, previous) !== false) {
         // change active tab when `onChange` does not return false
-        this.set('activeId', id);
+        this.set('isActiveId', id);
       }
     }
   }
