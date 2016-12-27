@@ -97,7 +97,7 @@ test('alert can be made visible when setting visible=true', function(assert) {
 
   assert.equal(this.$(':first-child').hasClass('alert'), true, 'alert has alert class');
   assert.equal(this.$(':first-child').hasClass('alert-success'), true, 'alert has type class');
-})
+});
 
 test('dismissing alert does not change public visible property (DDAU)', function(assert) {
   this.set('visible', true);
