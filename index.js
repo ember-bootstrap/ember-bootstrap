@@ -10,7 +10,7 @@ var path = require('path'),
 var defaultOptions = {
   importBootstrapTheme: false,
   importBootstrapCSS: true,
-  importBootstrapFont: true
+  importBootstrapFont: false  // TODO: Not in BS4 as of alpha.5
 };
 
 module.exports = {
@@ -54,12 +54,10 @@ module.exports = {
   treeForStyles: function treeForStyles(tree) {
     var styleTrees = [];
 
-    if (this.app.project.findAddonByName('ember-cli-less')) {
-      var lessTree = new Funnel(path.join(this.app.bowerDirectory, 'bootstrap/less'), {
-        destDir: 'ember-bootstrap'
-      });
-      styleTrees.push(lessTree);
-    }
+    var scssTree = new Funnel(path.join(this.app.bowerDirectory, 'bootstrap/scss'), {
+      destDir: 'ember-bootstrap'
+    });
+    styleTrees.push(scssTree);
 
     if (tree) {
       styleTrees.push(tree);
