@@ -1,6 +1,6 @@
-<div class="checkbox">
-    <label>
-        <input type="checkbox" checked={{value}} onclick={{action "change" value="target.checked"}} id={{formElementId}} name={{name}} disabled={{disabled}} required={{required}}> {{label}}
+<div class="checkbox form-check">
+    <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" checked={{value}} onclick={{action "change" value="target.checked"}} id={{formElementId}} name={{name}} disabled={{disabled}} required={{required}}> {{label}}
     </label>
 </div>
 {{partial "components/form-element/errors"}}
