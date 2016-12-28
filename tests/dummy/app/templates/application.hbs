@@ -1,46 +1,26 @@
-{{#bs-nav type="pills" as |nav|}}
-    {{#nav.item}}{{#link-to "alert"}}Alert{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "button"}}Buttons{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "forms"}}Forms{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "modal"}}Modals{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "navs"}}Navs{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "tabs"}}Tabs{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "tooltip"}}Tooltips{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "popover"}}Popovers{{/link-to}}{{/nav.item}}
-{{/bs-nav}}
-
-<div class="navbar navbar-inverse navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
-            <div class="navbar-toggle-wrapper visible-xs">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <a href="//kaliber5.github.io/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
-        </div>
-        <div class="collapse navbar-collapse js-navbar-collapse">
-            <ul class="navbar-nav nav">
-                <li><a href="//kaliber5.github.io/ember-bootstrap/getting-started">Getting Started</a></li>
-                <li><a href="//kaliber5.github.io/ember-bootstrap/components">Components</a></li>
-                <li><a href="//kaliber5.github.io/ember-bootstrap/api">API</a></li>
-                <li>{{#link-to "index"}}Examples{{/link-to}}</li>
-
-            </ul>
-            <ul class="navbar-nav nav navbar-right">
-                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
-
-            </ul>
-        </div>
+{{#bs-navbar fluid=false class="navbar-inverse navbar-static-top" as |navbar|}}
+    <div class="navbar-header">
+        {{#navbar.toggle}}
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        {{/navbar.toggle}}
+        <a href="//kaliber5.github.io/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
     </div>
-</div>
+    {{#navbar.content}}
+        {{#navbar.nav as |nav|}}
+            {{#nav.item}}<a href="//kaliber5.github.io/ember-bootstrap/getting-started">Getting Started</a>{{/nav.item}}
+            {{#nav.item}}<a href="//kaliber5.github.io/ember-bootstrap/components">Components</a>{{/nav.item}}
+            {{#nav.item}}<a href="//kaliber5.github.io/ember-bootstrap/api">API</a>{{/nav.item}}
+            {{#nav.item}}{{#link-to "index"}}Demo{{/link-to}}{{/nav.item}}
+        {{/navbar.nav}}
+        {{#navbar.nav class="navbar-right" as |nav|}}
+            {{#nav.item}}<a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a>{{/nav.item}}
+        {{/navbar.nav}}
+    {{/navbar.content}}
+{{/bs-navbar}}
+
 <div class="container">
     <div class="row">
         <div class="col-sm-8">
@@ -48,16 +28,21 @@
         </div>
         <div class="col-sm-4">
 
-            <ul class="nav nav-pills nav-stacked">
-                <li>{{#link-to "alert"}}Alert{{/link-to}}</li>
-                <li>{{#link-to "button"}}Buttons{{/link-to}}</li>
-                <li>{{#link-to "dropdown"}}Dropdown{{/link-to}}</li>
-                <li>{{#link-to "forms"}}Forms{{/link-to}}</li>
-                <li>{{#link-to "accordion"}}Accordion{{/link-to}}</li>
-                <li>{{#link-to "collapse"}}Collapse{{/link-to}}</li>
-                <li>{{#link-to "modal"}}Modals{{/link-to}}</li>
-                <li>{{#link-to "progress"}}Progress bars{{/link-to}}</li>
-            </ul>
+            {{#bs-nav type="pills" stacked=true as |nav|}}
+                {{#nav.item}}{{#link-to "alert"}}Alert{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "button"}}Buttons{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "forms"}}Forms{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "modal"}}Modals{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "navs"}}Navs{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "tabs"}}Tabs{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "tooltip"}}Tooltips{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "popover"}}Popovers{{/link-to}}{{/nav.item}}
+            {{/bs-nav}}
 
         </div>
 
