@@ -1,6 +1,6 @@
 <h1>Accordion</h1>
 
-{{#bs-accordion selected=selected as |acc|}}
+{{#bs-accordion selected=selected onChange=(action "select") as |acc|}}
     {{#acc.item value="1" title="First item"}}
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
     {{/acc.item}}
