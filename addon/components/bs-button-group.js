@@ -180,7 +180,7 @@ export default Ember.Component.extend(SizeClass, {
           }
         }
       }
-      
+
       this.get('onChange')(newValue);
     }
   }
