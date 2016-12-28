@@ -5,18 +5,10 @@ export default Ember.Controller.extend({
   fade: true,
   dismissible: true,
   type: Ember.computed.oneWay('typeChoices.firstObject'),
-  typeChoices: Ember.A([
-    {
-      id: 'success'
-    },
-    {
-      id: 'info'
-    },
-    {
-      id: 'warning'
-    },
-    {
-      id: 'danger'
-    }
-  ])
+  typeChoices: [
+    'success',
+    'info',
+    'warning',
+    'danger'
+  ]
 });
