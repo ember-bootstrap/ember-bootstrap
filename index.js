@@ -9,8 +9,7 @@ var path = require('path'),
 
 var defaultOptions = {
   importBootstrapTheme: false,
-  importBootstrapCSS: true,
-  importBootstrapFont: false  // TODO: Not in BS4 as of alpha.5
+  importBootstrapCSS: true
 };
 
 module.exports = {
@@ -35,15 +34,6 @@ module.exports = {
     if (options.importBootstrapTheme) {
       app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
       app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css.map'), {destDir: 'assets'});
-    }
-
-    // Import glyphicons
-    if (options.importBootstrapFont) {
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.eot'), {destDir: '/fonts'});
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.svg'), {destDir: '/fonts'});
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.ttf'), {destDir: '/fonts'});
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff'), {destDir: '/fonts'});
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff2'), {destDir: '/fonts'});
     }
 
     if (!process.env.EMBER_CLI_FASTBOOT) {
