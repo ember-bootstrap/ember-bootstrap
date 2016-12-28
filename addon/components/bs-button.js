@@ -80,7 +80,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
   layout,
   tagName: 'button',
   classNames: ['btn'],
-  classNameBindings: ['active', 'block:btn-block'],
+  classNameBindings: ['active', 'block:btn-block', 'secondary:btn-secondary'],
 
   /**
    * @property classTypePrefix
@@ -91,6 +91,8 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
   classTypePrefix: 'btn',
 
   attributeBindings: ['disabled', 'buttonType:type', 'title'],
+
+  secondary: computed.equal('type', 'default'),
 
   /**
    * Default label of the button. Not need if used as a block component
