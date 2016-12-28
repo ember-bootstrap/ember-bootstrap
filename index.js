@@ -15,7 +15,7 @@ var defaultOptions = {
 module.exports = {
   name: 'ember-bootstrap',
 
-  included: function included(app) {
+  included(app) {
     // workaround for https://github.com/ember-cli/ember-cli/issues/3718
     if (typeof app.import !== 'function' && app.app) {
       app = app.app;
@@ -41,7 +41,7 @@ module.exports = {
     }
   },
 
-  treeForStyles: function treeForStyles(tree) {
+  treeForStyles(tree) {
     var styleTrees = [];
 
     var scssTree = new Funnel(path.join(this.app.bowerDirectory, 'bootstrap/scss'), {
