@@ -17,6 +17,7 @@ const { computed, LinkComponent } = Ember;
 export default
 Ember.Component.extend(ComponentParent, {
   layout,
+  classNames: ['nav-item'],
   classNameBindings: ['disabled', 'active'],
   tagName: 'li',
   ariaRole: 'presentation',

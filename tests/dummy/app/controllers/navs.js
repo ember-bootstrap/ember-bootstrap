@@ -7,6 +7,7 @@ export default Ember.Controller.extend({
   stacked: false,
   justified: false,
   typeChoices: A([
+    'inline',
     'pills',
     'tabs'
   ])
