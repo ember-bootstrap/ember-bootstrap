@@ -23,10 +23,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-8">
-            {{outlet}}
-        </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 col-sm-push-8">
 
             {{#bs-nav type="pills" stacked=true as |nav|}}
                 {{#nav.item}}{{#link-to "alert"}}Alert{{/link-to}}{{/nav.item}}
@@ -43,9 +40,10 @@
                 {{#nav.item}}{{#link-to "tooltip"}}Tooltips{{/link-to}}{{/nav.item}}
                 {{#nav.item}}{{#link-to "popover"}}Popovers{{/link-to}}{{/nav.item}}
             {{/bs-nav}}
-
         </div>
-
+        <div class="col-sm-8 col-sm-pull-4">
+            {{outlet}}
+        </div>
     </div>
     <div class="row footer">
         <div class="col-sm-12 text-center">

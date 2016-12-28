@@ -3,9 +3,10 @@
 var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
-  var app = new EmberAddon(defaults, {
+  var app = new EmberApp(defaults, {
+    snippetSearchPaths: [path.join('tests','dummy','app')],
     'ember-bootstrap': {
-      importBootstrapCSS: false
+      'importBootstrapCSS': false
     }
   });
 

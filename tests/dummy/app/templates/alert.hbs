@@ -1,21 +1,32 @@
 <h1>Alerts</h1>
 
-<h2>Dismissible with animation</h2>
+<h2>Simple example</h2>
 
-{{#bs-alert type="success"}}<strong>Well done!</strong> You successfully read this important alert message.{{/bs-alert}}
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET alert-simple -->
+    {{#bs-alert type="success"}}<strong>Well done!</strong> You successfully read this important alert message.{{/bs-alert}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="alert-simple.hbs"}}
+</div>
 
+<h2>Alert options</h2>
 
-<h2>Dismissibe without animation</h2>
+<div class="bs-example">
+{{#bs-form formLayout="inline" model=this}}
+    {{bs-form-element controlType="checkbox" label="Show/Hide" property="visible"}}
+    {{bs-form-element controlType="checkbox" label="Fade animation" property="fade"}}
+    {{bs-form-element controlType="checkbox" label="Dismissible" property="dismissible"}}
+    {{bs-form-element controlType="select" label="Type" choices=typeChoices choiceLabelProperty="id" choiceValueProperty="id" property="type"}}
+{{/bs-form}}
+    <hr/>
+    <!-- BEGIN-SNIPPET alert-options -->
+    {{#bs-alert visible=visible fade=fade type=type.id dismissible=dismissible dismissedAction=(action (mut visible) false)}}<strong>Well done!</strong> You successfully read this important alert message.{{/bs-alert}}
+    <!-- END-SNIPPET -->
 
-{{#bs-alert type="info" fade=false}}<strong>Heads up!</strong> This alert needs your attention, but it's not super important.{{/bs-alert}}
-
-
-<h2>Not dismissible</h2>
-
-{{#bs-alert type="warning" dismissible=false}}<strong>Warning!</strong> Better check yourself, you're not looking too good.{{/bs-alert}}
-
-<h2>Bound visibility</h2>
-
-<label>{{input type="checkbox" checked=visible}} Show/Hide</label>
-{{#bs-alert type="danger" visible=visible dismissedAction=(action "close")}}<strong>Oh snap!</strong> Change a few things up and try submitting again.{{/bs-alert}}
-
+</div>
+<div class="highlight">
+    {{!--code-snippet name="alert-options.hbs"--}}
+    <pre>\{{#bs-alert visible={{visible}} fade={{fade}} type=&quot;{{type.id}}&quot; dismissible={{dismissible}} }}&lt;strong&gt;Well done!&lt;/strong&gt; You successfully read this important alert message.\{{/bs-alert}}</pre>
+</div>
