@@ -180,10 +180,8 @@ export default Ember.Component.extend(SizeClass, {
           }
         }
       }
-
-      if (newValue) {
-        this.get('onChange')(newValue);
-      }
+      
+      this.get('onChange')(newValue);
     }
   }
 });
