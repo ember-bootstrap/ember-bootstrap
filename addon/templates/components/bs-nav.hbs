@@ -1,7 +1,8 @@
 {{yield
     (hash
         item=(component "bs-nav/item")
+        linkto=(component "link-to" class="nav-link")
     )
 }}
 
-{{!-- TODO: Add nav.link --}}
+{{!-- TODO: Consider explicit nav.linkto component to avoid class overwriting --}}
