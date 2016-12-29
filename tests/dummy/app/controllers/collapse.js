@@ -1,12 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  collapsed: true,
-  notCollapsed: Ember.computed.not('collapsed'),
+  collapsed1: true,
+  notCollapsed1: Ember.computed.not('collapsed1'),
 
-  actions: {
-    toggle() {
-      this.toggleProperty('collapsed');
+  collapsed2: true,
+  notCollapsed2: Ember.computed.not('collapsed2'),
+
+	actions: {
+    toggle: function(choice) {
+      this.toggleProperty('collapsed' + choice);
     }
   }
 });
