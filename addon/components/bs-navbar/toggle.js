@@ -19,7 +19,7 @@ export default BsButtonComponent.extend({
   collapsed: true,
 
   togglerHiddenClass: Ember.computed('toggleBreak', function() {
-    const sizes = ['xs', 'sm', 'md', 'lg', 'xl'];
+    let sizes = ['xs', 'sm', 'md', 'lg', 'xl'];
     let breakpoint = this.getWithDefault('toggleBreak', 'md');
 
     let nextIndex = sizes.indexOf(breakpoint);
