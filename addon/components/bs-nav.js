@@ -100,5 +100,5 @@ export default Ember.Component.extend({
    * @default false
    * @public
    */
-  stacked: false,
+  stacked: false
 });
