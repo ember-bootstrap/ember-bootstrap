@@ -18,7 +18,7 @@ export default BsButtonComponent.extend({
   classNameBindings: ['collapsed', 'togglerHiddenClass'],
   collapsed: true,
 
-  togglerHiddenClass: Ember.computed('toggleBreak', function () {
+  togglerHiddenClass: Ember.computed('toggleBreak', function() {
     const sizes = ['xs', 'sm', 'md', 'lg', 'xl'];
     let breakpoint = this.getWithDefault('toggleBreak', 'md');
 
