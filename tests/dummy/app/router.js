@@ -9,6 +9,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('dropdown');
   this.route('button');
+  this.route('button-group');
   this.route('forms');
   this.route('alert');
   this.route('accordion');

@@ -3,7 +3,7 @@
         {{#navbar.toggle}}
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>bu
             <span class="icon-bar"></span>
         {{/navbar.toggle}}
         <a href="//kaliber5.github.io/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
@@ -26,19 +26,20 @@
         <div class="col-sm-4 col-sm-push-8">
 
             {{#bs-nav type="pills" stacked=true as |nav|}}
+                {{#nav.item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/nav.item}}
                 {{#nav.item}}{{#link-to "alert"}}Alert{{/link-to}}{{/nav.item}}
                 {{#nav.item}}{{#link-to "button"}}Buttons{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "button-group"}}Button group{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/nav.item}}
                 {{#nav.item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/nav.item}}
                 {{#nav.item}}{{#link-to "forms"}}Forms{{/link-to}}{{/nav.item}}
-                {{#nav.item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/nav.item}}
-                {{#nav.item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/nav.item}}
                 {{#nav.item}}{{#link-to "modal"}}Modals{{/link-to}}{{/nav.item}}
-                {{#nav.item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/nav.item}}
-                {{#nav.item}}{{#link-to "navs"}}Navs{{/link-to}}{{/nav.item}}
                 {{#nav.item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "navs"}}Navs{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "popover"}}Popovers{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/nav.item}}
                 {{#nav.item}}{{#link-to "tabs"}}Tabs{{/link-to}}{{/nav.item}}
                 {{#nav.item}}{{#link-to "tooltip"}}Tooltips{{/link-to}}{{/nav.item}}
-                {{#nav.item}}{{#link-to "popover"}}Popovers{{/link-to}}{{/nav.item}}
             {{/bs-nav}}
         </div>
         <div class="col-sm-8 col-sm-pull-4">
