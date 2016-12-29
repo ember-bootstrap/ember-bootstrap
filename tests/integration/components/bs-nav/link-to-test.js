@@ -10,13 +10,13 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{bs-nav/link-to}}`);
+  this.render(hbs`{{bs-nav/link-to "foo" "bar"}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'foo');
 
   // Template block usage:
   this.render(hbs`
-    {{#bs-nav/link-to}}
+    {{#bs-nav/link-to "foo"}}
       template block text
     {{/bs-nav/link-to}}
   `);
