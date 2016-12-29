@@ -7,6 +7,16 @@
     border-width: 1px 0;
     -webkit-box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
     box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+
+    overflow: hidden;
+    .modal {
+        position: absolute;
+        z-index: @zindex-modal - 100;
+    }
+    .modal-backdrop {
+        position: absolute;
+        z-index: @zindex-modal-background - 100;
+    }
 }
 /* Echo out a label for the example */
 .bs-example:after {

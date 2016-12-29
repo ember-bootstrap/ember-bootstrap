@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { computed } = Ember;
+
 export default Ember.Controller.extend({
   value: 50,
   minValue: 0,
@@ -15,5 +17,6 @@ export default Ember.Controller.extend({
     'info',
     'warning',
     'danger'
-  ]
+  ],
+  notStriped: computed.not('striped')
 });

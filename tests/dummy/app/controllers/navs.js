@@ -9,5 +9,26 @@ export default Ember.Controller.extend({
   typeChoices: A([
     'pills',
     'tabs'
-  ])
+  ]),
+
+  actions: {
+    updateType(type) {
+      let props = {
+        type
+      };
+      if (type === 'tabs') {
+        props.stacked = false;
+      }
+      this.setProperties(props);
+    },
+    updateStacked(stacked) {
+      let props = {
+        stacked
+      };
+      if (stacked) {
+        props.justified = false;
+      }
+      this.setProperties(props);
+    }
+  }
 });
