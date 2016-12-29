@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import BsButtonComponent from 'ember-bootstrap/components/bs-button';
 import layout from '../../templates/components/bs-navbar/toggle';
 
@@ -13,7 +14,20 @@ import layout from '../../templates/components/bs-navbar/toggle';
 export default BsButtonComponent.extend({
   layout,
 
-  classNames: ['navbar-toggle'],
-  classNameBindings: ['collapsed'],
-  collapsed: true
+  classNames: ['navbar-toggle', 'navbar-toggler'],
+  classNameBindings: ['collapsed', 'togglerHiddenClass'],
+  collapsed: true,
+
+  togglerHiddenClass: Ember.computed('toggleBreak', function () {
+    const sizes = ['xs', 'sm', 'md', 'lg', 'xl'];
+    let breakpoint = this.getWithDefault('toggleBreak', 'md');
+
+    let nextIndex = sizes.indexOf(breakpoint);
+    let nextSize = 'lg';
+    if (nextIndex > -1) {
+      nextSize = sizes[Math.min(sizes.length - 1, nextIndex + 1)];
+    }
+
+    return `hidden-${nextSize}-up`;
+  })
 });
