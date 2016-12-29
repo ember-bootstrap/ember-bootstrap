@@ -1,80 +1,52 @@
 <h1>Dropdowns</h1>
 
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET dropdown-demo -->
+    <ul class="nav nav-pills">
+        {{#bs-dropdown tagName="li" as |dd|}}
+            {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+            {{#dd.menu}}
+                <li>{{#link-to "index"}}Home{{/link-to}}</li>
+                <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+            {{/dd.menu}}
+        {{/bs-dropdown}}
+        {{#bs-dropdown direction="up" tagName="li" as |dd|}}
+            {{#dd.toggle}}Dropup <span class="caret"></span>{{/dd.toggle}}
+            {{#dd.menu align="right"}}
+                <li>{{#link-to "index"}}Home{{/link-to}}</li>
+                <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+            {{/dd.menu}}
+        {{/bs-dropdown}}
+    </ul>
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="dropdown-demo.hbs"}}
+</div>
 
-<nav id="navbar-example" class="navbar navbar-default navbar-static">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-example-js-navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Project Name</a>
-        </div>
-        <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
-            <ul class="nav navbar-nav">
-                {{#bs-dropdown tagName="li" as |dd|}}
-                    {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-                    {{#dd.menu}}
-                        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-                        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
-                    {{/dd.menu}}
-                {{/bs-dropdown}}
-                {{#bs-dropdown direction="up" tagName="li" as |dd|}}
-                    {{#dd.toggle}}Dropup <span class="caret"></span>{{/dd.toggle}}
-                    {{#dd.menu align="right"}}
-                        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-                        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
-                    {{/dd.menu}}
-                {{/bs-dropdown}}
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {{#bs-dropdown tagName="li" as |dd|}}
-                    {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-                    {{#dd.menu}}
-                        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-                        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
-                    {{/dd.menu}}
-                {{/bs-dropdown}}
-            </ul>
-        </div><!-- /.nav-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
 
 <h2>Button dropdowns</h2>
 
-{{#bs-dropdown as |dd|}}
-    {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
-    {{#dd.menu}}
-        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
-    {{/dd.menu}}
-{{/bs-dropdown}}
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET dropdown-button -->
+    {{#bs-dropdown as |dd|}}
+        {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
+        {{#dd.menu}}
+            <li>{{#link-to "index"}}Home{{/link-to}}</li>
+            <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+        {{/dd.menu}}
+    {{/bs-dropdown}}
 
-{{#bs-dropdown as |dd|}}
-    {{#bs-button}}Dropdown{{/bs-button}}
-    {{#dd.button}}<span class="caret"></span>{{/dd.button}}
-    {{#dd.menu}}
-        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
-    {{/dd.menu}}
-{{/bs-dropdown}}
-
-{{#bs-dropdown direction="up" as |dd|}}
-  {{#dd.button}}Dropup <span class="caret"></span>{{/dd.button}}
-  {{#dd.menu}}
-      <li>{{#link-to "index"}}Home{{/link-to}}</li>
-      <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
-  {{/dd.menu}}
-{{/bs-dropdown}}
-
-<h2>Do not close on menu click</h2>
-
-{{#bs-dropdown closeOnMenuClick=false as |dd|}}
-    {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
-    {{#dd.menu}}
-        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
-    {{/dd.menu}}
-{{/bs-dropdown}}
+    {{#bs-dropdown as |dd|}}
+        {{#bs-button}}Dropdown{{/bs-button}}
+        {{#dd.button}}<span class="caret"></span>{{/dd.button}}
+        {{#dd.menu}}
+            <li>{{#link-to "index"}}Home{{/link-to}}</li>
+            <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+        {{/dd.menu}}
+    {{/bs-dropdown}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="dropdown-button.hbs"}}
+</div>

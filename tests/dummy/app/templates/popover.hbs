@@ -1,17 +1,51 @@
 <h1>Popovers</h1>
 
-<button type="button" class="btn btn-default">Popover on left
-    {{#bs-popover placement="left" title="Popover on left"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!{{/bs-popover}}
-</button>
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET popover-demo -->
+    {{#bs-button}}Popover on left
+        {{#bs-popover placement="left" title="Popover on left"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!{{/bs-popover}}
+    {{/bs-button}}
 
-<button type="button" class="btn btn-default">Popover on top
-    {{#bs-popover placement="top" title="Popover on top"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!{{/bs-popover}}
-</button>
+    {{#bs-button}}Popover on top
+        {{#bs-popover placement="top" title="Popover on top"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!{{/bs-popover}}
+    {{/bs-button}}
 
-<button type="button" class="btn btn-default">Popover on bottom
-    {{#bs-popover placement="bottom"}}Popover on bottom{{/bs-popover}}
-</button>
+    {{#bs-button}}Popover on bottom
+        {{#bs-popover placement="bottom" title="Popover on bottom"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!{{/bs-popover}}
+    {{/bs-button}}
 
-<button type="button" class="btn btn-default">Popover on right
-    {{#bs-popover placement="right"}}Popover on right{{/bs-popover}}
-</button>
+    {{#bs-button}}Popover on right
+        {{#bs-popover placement="right" title="Popover on right"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!{{/bs-popover}}
+    {{/bs-button}}
+
+    {{#bs-button}}Hover Popover
+        {{#bs-popover triggerEvents="hover focus" title="Hover Popover"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!{{/bs-popover}}
+    {{/bs-button}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="popover-demo.hbs"}}
+</div>
+
+<h2>Popover trigger</h2>
+
+<p>By default the popover will attach itself to the parent DOM element, but there are ways to customize this:</p>
+
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET popover-target -->
+    <button type="button" class="btn btn-default">DOM parent
+        {{#bs-popover title="DOM parent"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!{{/bs-popover}}
+    </button>
+
+    {{#bs-button}}Parent component
+        {{#bs-popover triggerElement="parentView" title="Parent component"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!{{/bs-popover}}
+    {{/bs-button}}
+
+    <button id="popover-button" class="btn btn-default">jQuery selector</button>
+    {{#bs-popover triggerElement="#popover-button" title="jQuery selector"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!{{/bs-popover}}
+
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="popover-target.hbs"}}
+</div>

@@ -1,34 +1,31 @@
 <h1>Navbars</h1>
 
-{{#bs-form model=this as |form|}}
-    {{form.element controlType="checkbox" label="Inverse" property="inverse" value=inverse}}
-    {{form.element controlType="checkbox" label="Fluid" property="fluid" value=fluid}}
-{{/bs-form}}
-
-<h2>Navbars</h2>
-
-{{#bs-navbar type=(if inverse 'inverse') fluid=fluid as |navbar|}}
-    <div class="navbar-header">
-        {{#navbar.toggle}}
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        {{/navbar.toggle}}
-        <a class="navbar-brand" href="#">Brand</a>
-    </div>
-    {{#navbar.content}}
-        {{#navbar.nav as |nav|}}
-            {{#nav.item}}{{#link-to "alert"}}Alert{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "button"}}Buttons{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "forms"}}Forms{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "modal"}}Modals{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "navs"}}Navs{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/nav.item}}
-        {{/navbar.nav}}
-    {{/navbar.content}}
-{{/bs-navbar}}
+<div class="bs-example">
+    {{#bs-form formLayout="inline" model=this as |form|}}
+        {{form.element controlType="checkbox" label="Inverse" property="inverse" value=inverse}}
+        {{form.element controlType="checkbox" label="Fluid" property="fluid" value=fluid}}
+    {{/bs-form}}
+    <hr>
+    <!-- BEGIN-SNIPPET navbar-demo -->
+    {{#bs-navbar type=(if inverse 'inverse') fluid=fluid as |navbar|}}
+        <div class="navbar-header">
+            {{#navbar.toggle}}
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            {{/navbar.toggle}}
+           {{#link-to "index" class="navbar-brand"}}Brand{{/link-to}}
+        </div>
+        {{#navbar.content}}
+            {{#navbar.nav as |nav|}}
+                {{#nav.item}}{{#link-to "index"}}Home{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/nav.item}}
+            {{/navbar.nav}}
+        {{/navbar.content}}
+    {{/bs-navbar}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="navbar-demo.hbs"}}
+</div>

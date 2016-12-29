@@ -1,12 +1,18 @@
 <h1>Collapse</h1>
 
-{{#bs-button toggle=true active=notCollapsed onClick=(action "toggle")}}{{#if collapsed}}Show{{else}}Hide{{/if}}{{/bs-button}}
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET collapse-demo -->
+    {{#bs-button active=notCollapsed onClick=(action "toggle")}}{{#if collapsed}}Show{{else}}Hide{{/if}}{{/bs-button}}
 
-<hr/>
+    <hr/>
 
-{{#bs-collapse collapsed=collapsed}}
-    <div class="well">
-        <h2>Collapse</h2>
-        <p>This is collapsible content</p>
-    </div>
-{{/bs-collapse}}
+    {{#bs-collapse collapsed=collapsed}}
+        <div class="well">
+            <p>This is collapsible content</p>
+        </div>
+    {{/bs-collapse}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="collapse-demo.hbs"}}
+</div>
