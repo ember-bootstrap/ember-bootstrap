@@ -14,9 +14,11 @@
                     {{#dd.toggle}}{{item.groupTitle}} <span class="caret"></span>{{/dd.toggle}}
                     {{#dd.menu}}
                         {{#each item.children as |subItem|}}
-                            <li class="{{if (bs-eq isActiveId subItem.elementId) "active"}}"><a
+                            {{#dd.item class=(if (bs-eq isActiveId subItem.elementId) "active")}}
+                                <a
                                     href="#{{subItem.elementId}}"
-                                    role="tab" {{action "select" subItem.elementId}}>{{subItem.title}}</a></li>
+                                    role="tab" {{action "select" subItem.elementId}}>{{subItem.title}}</a>
+                            {{/dd.item}}
                         {{/each}}
                     {{/dd.menu}}
                 {{/bs-dropdown}}
