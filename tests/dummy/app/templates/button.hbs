@@ -4,15 +4,47 @@
 
 <div class="bs-example">
     <!-- BEGIN-SNIPPET button-demo -->
-    {{#bs-button
-        active=active
-        type="primary"
-        icon="glyphicon glyphicon-download"
-        }}
+    {{#bs-button onClick=(action "submit")}}
         Button
     {{/bs-button}}
     <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
     {{code-snippet name="button-demo.hbs"}}
+</div>
+
+<h2>Options</h2>
+
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET button-options -->
+    <p>
+        {{#bs-button type="primary" onClick=(action "submit")}}Primary Button{{/bs-button}}
+        {{#bs-button type="info" onClick=(action "submit")}}Info Button{{/bs-button}}
+        {{#bs-button type="success" onClick=(action "submit")}}Success Button{{/bs-button}}
+        {{#bs-button type="warning" onClick=(action "submit")}}Warning Button{{/bs-button}}
+        {{#bs-button type="danger" onClick=(action "submit")}}Danger Button{{/bs-button}}
+        {{#bs-button icon="glyphicon glyphicon-download" onClick=(action "submit")}}Icon Button{{/bs-button}}
+        {{#bs-button disabled=true onClick=(action "submit")}}Disabled Button{{/bs-button}}
+    </p>
+    <p>
+        {{#bs-button block=true onClick=(action "submit")}}Block Button{{/bs-button}}
+    </p>
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="button-options.hbs"}}
+</div>
+
+
+<h2>Promise support</h2>
+
+<p>Return a Promise from the <code>onClick</code> action for custom text based on the Promise state.</p>
+
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET button-promise -->
+    {{bs-button defaultText="Start download" pendingText="Downloading..." resolvedText="Download complete!" onClick=(action "download")}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="button-promise.hbs"}}
 </div>

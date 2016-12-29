@@ -23,7 +23,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-4 col-sm-push-8">
+        <div class="col-sm-4 col-sm-push-8 col-md-3 col-md-push-9">
 
             {{#bs-nav type="pills" stacked=true as |nav|}}
                 {{#nav.item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/nav.item}}
@@ -42,7 +42,7 @@
                 {{#nav.item}}{{#link-to "tooltip"}}Tooltips{{/link-to}}{{/nav.item}}
             {{/bs-nav}}
         </div>
-        <div class="col-sm-8 col-sm-pull-4">
+        <div class="col-sm-8 col-sm-pull-4 col-md-9 col-md-pull-3">
             {{outlet}}
         </div>
     </div>
