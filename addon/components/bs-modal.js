@@ -65,6 +65,12 @@ export default Ember.Component.extend(TransitionSupport, {
   isOpen: listenTo('open'),
 
   /**
+   * @property _isOpen
+   * @private
+   */
+  _isOpen: false,
+
+  /**
    * Set to false to disable fade animations.
    *
    * @property fade
@@ -327,6 +333,10 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   show() {
+    if (this._isOpen) {
+      return;
+    }
+    this._isOpen = true;
 
     this.checkScrollbar();
     this.setScrollbar();
@@ -370,6 +380,11 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   hide() {
+    if (!this._isOpen) {
+      return;
+    }
+    this._isOpen = false;
+
     this.resize();
     this.set('in', false);
 
