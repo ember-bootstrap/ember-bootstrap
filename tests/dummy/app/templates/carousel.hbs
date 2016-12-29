@@ -1,0 +1,27 @@
+<h1>Carousel</h1>
+
+{{#bs-carousel
+        showIndicators=true
+        animate=true
+        interval=5
+        showIndicators=true
+        slideChanged=(action "slideChanged") as |c|
+}}
+
+    {{#c.slide imgsrc="http://imgsv.imaging.nikon.com/lineup/lens/zoom/normalzoom/af-s_dx_18-140mmf_35-56g_ed_vr/img/sample/sample1_l.jpg"}}
+        <h3>BIRD</h3>
+        <p>Caption 1</p>
+    {{/c.slide}}
+
+    {{#c.slide imgsrc="http://imgsv.imaging.nikon.com/lineup/lens/zoom/normalzoom/af-s_dx_18-140mmf_35-56g_ed_vr/img/sample/sample2_l.jpg"}}
+        <h3>CHURCH</h3>
+    {{/c.slide}}
+
+    {{#c.slide imgsrc="http://imgsv.imaging.nikon.com/lineup/lens/zoom/normalzoom/af-s_dx_18-140mmf_35-56g_ed_vr/img/sample/sample3_l.jpg"}}
+        <h3>STREET</h3>
+        <p>Caption 3</p>
+    {{/c.slide}}
+{{/bs-carousel}}
+<br/>
+
+<p>Slide # {{slideNumber}}</p>
