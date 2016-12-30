@@ -3,7 +3,9 @@ import TypeClass from 'ember-bootstrap/mixins/type-class';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import layout from '../../templates/components/bs-accordion/item';
 
-const { computed, K: noop } = Ember;
+const {
+ computed
+} = Ember;
 
 /**
  A collapsible/expandable item within an accordion
@@ -83,6 +85,6 @@ export default Ember.Component.extend(ComponentChild, TypeClass, {
    * @event onClick
    * @public
    */
-  onClick: noop
+  onClick() {}
 
 });

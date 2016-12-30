@@ -3,19 +3,20 @@ import layout from '../../templates/components/bs-form/element';
 import FormGroup from 'ember-bootstrap/components/bs-form-group';
 
 const {
-  computed,
-  defineProperty,
-  isArray,
-  isBlank,
-  observer,
-  on,
-  run: {
-    scheduleOnce
-  },
-  assert,
-  K: noop,
-  typeOf,
-  A
+ computed,
+ defineProperty,
+ isArray,
+ isBlank,
+ observer,
+ on,
+
+ run: {
+   scheduleOnce
+ },
+
+ assert,
+ typeOf,
+ A
 } = Ember;
 
 const nonTextFieldControlTypes = A([
@@ -597,7 +598,7 @@ export default FormGroup.extend({
    * @method setupValidations
    * @private
    */
-  setupValidations: noop,
+  setupValidations() {},
 
   /**
    * Listen for focusOut events from the control element to automatically set `showOwnValidation` to true to enable
@@ -630,7 +631,7 @@ export default FormGroup.extend({
    * @param {String} property The value of `property`
    * @public
    */
-  onChange: noop,
+  onChange() {},
 
   init() {
     this._super(...arguments);
