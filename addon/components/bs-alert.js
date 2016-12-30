@@ -7,7 +7,6 @@ import listenTo from '../utils/listen-to-cp';
 const {
   computed,
   observer,
-  K: noop,
   run: { later }
 } = Ember;
 
@@ -128,7 +127,7 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
    * @type function
    * @public
    */
-  onDismissed: noop,
+  onDismissed() {},
 
   /**
    * The action is called when the close button is clicked.
@@ -140,7 +139,7 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
    * @type function
    * @public
    */
-  onDismiss: noop,
+  onDismiss() {},
 
   actions: {
     dismiss() {

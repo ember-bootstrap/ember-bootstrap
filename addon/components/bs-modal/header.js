@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import layout from '../../templates/components/bs-modal/header';
 
-const { K } = Ember;
+const {} = Ember;
 
 /**
 
@@ -40,6 +40,6 @@ export default Ember.Component.extend({
    * @event onClose
    * @public
    */
-  onClose: K
+  onClose() {}
 
 });

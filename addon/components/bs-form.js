@@ -3,7 +3,6 @@ import layout from '../templates/components/bs-form';
 
 const {
   computed,
-  K: noop,
   RSVP,
   set,
   assert,
@@ -178,7 +177,7 @@ export default Ember.Component.extend({
    * @return {Promise}
    * @public
    */
-  validate: noop,
+  validate() {},
 
   /**
    * @property showAllValidations
@@ -195,7 +194,7 @@ export default Ember.Component.extend({
    * @param Object model  The form's `model`
    * @public
    */
-  onBefore: noop,
+  onBefore() {},
 
   /**
    * Action is called when submit has been triggered and the model has passed all validations (if present).
@@ -205,7 +204,7 @@ export default Ember.Component.extend({
    * @param Object result The returned result from the validate method, if validation is available
    * @public
    */
-  onSubmit: noop,
+  onSubmit() {},
 
   /**
    * Action is called when validation of the model has failed.
@@ -214,7 +213,7 @@ export default Ember.Component.extend({
    * @param Object error
    * @public
    */
-  onInvalid: noop,
+  onInvalid() {},
 
   /**
    * Submit handler that will send the default action ("action") to the controller when submitting the form.
