@@ -9,14 +9,13 @@ var path = require('path'),
 
 var defaultOptions = {
   importBootstrapTheme: false,
-  importBootstrapCSS: true,
-  importBootstrapFont: true
+  importBootstrapCSS: true
 };
 
 module.exports = {
   name: 'ember-bootstrap',
 
-  included: function included(app) {
+  included(app) {
     // workaround for https://github.com/ember-cli/ember-cli/issues/3718
     if (typeof app.import !== 'function' && app.app) {
       app = app.app;
@@ -37,29 +36,18 @@ module.exports = {
       app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css.map'), {destDir: 'assets'});
     }
 
-    // Import glyphicons
-    if (options.importBootstrapFont) {
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.eot'), {destDir: '/fonts'});
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.svg'), {destDir: '/fonts'});
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.ttf'), {destDir: '/fonts'});
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff'), {destDir: '/fonts'});
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff2'), {destDir: '/fonts'});
-    }
-
     if (!process.env.EMBER_CLI_FASTBOOT) {
       app.import('vendor/transition.js');
     }
   },
 
-  treeForStyles: function treeForStyles(tree) {
+  treeForStyles(tree) {
     var styleTrees = [];
 
-    if (this.app.project.findAddonByName('ember-cli-less')) {
-      var lessTree = new Funnel(path.join(this.app.bowerDirectory, 'bootstrap/less'), {
-        destDir: 'ember-bootstrap'
-      });
-      styleTrees.push(lessTree);
-    }
+    var scssTree = new Funnel(path.join(this.app.bowerDirectory, 'bootstrap/scss'), {
+      destDir: 'ember-bootstrap'
+    });
+    styleTrees.push(scssTree);
 
     if (tree) {
       styleTrees.push(tree);

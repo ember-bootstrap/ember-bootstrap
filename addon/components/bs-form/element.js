@@ -135,7 +135,7 @@ const nonTextFieldControlTypes = A([
  */
 export default FormGroup.extend({
   layout,
-  classNameBindings: ['disabled:is-disabled', 'required:is-required', 'isValidating'],
+  classNameBindings: ['disabled:is-disabled', 'required:is-required', 'isValidating', 'isHorizontal:row'],
 
   /**
    * Text to display within a `<label>` tag.

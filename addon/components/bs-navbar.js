@@ -89,6 +89,18 @@ export default Ember.Component.extend(TypeClass, {
   fluid: true,
 
   /**
+   * Sets the toggle breakpoint, i.e., the size at which the content disappears and
+   * above which the toggler appears. Values should be chosen from the bootstrap
+   * size options: 'xs', 'sm', 'md', 'lg', 'xl'
+   *
+   * @property toggleBreak
+   * @type string
+   * @default 'md'
+   * @public
+   */
+  toggleBreak: 'md',
+
+  /**
    * Specifies the position classes for the navbar, currently supporting none, "fixed-top", "fixed-bottom", and "static-top".
    * See the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.
    *

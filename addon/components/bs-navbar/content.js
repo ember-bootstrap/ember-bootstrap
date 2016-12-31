@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import layout from '../../templates/components/bs-navbar/content';
 import BsCollapseComponent from 'ember-bootstrap/components/bs-collapse';
 
@@ -13,5 +14,11 @@ import BsCollapseComponent from 'ember-bootstrap/components/bs-collapse';
 export default BsCollapseComponent.extend({
   layout,
 
-  classNames: ['navbar-collapse']
+  classNames: ['navbar-collapse'],
+  classNameBindings: ['toggleBreakClass'],
+
+  toggleBreakClass: Ember.computed('toggleBreak', function() {
+    let breakpoint = this.getWithDefault('toggleBreak', 'md');
+    return `navbar-toggleable-${breakpoint}`;
+  })
 });

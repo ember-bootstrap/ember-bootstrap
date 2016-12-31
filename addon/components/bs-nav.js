@@ -73,7 +73,7 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * Special type of nav, either "pills" or "tabs"
+   * Special type of nav, "inline", "pills" or "tabs"
    *
    * @property type
    * @type String

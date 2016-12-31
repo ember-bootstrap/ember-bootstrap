@@ -1,54 +1,57 @@
 <h1>Dropdowns</h1>
 
 
-<nav id="navbar-example" class="navbar navbar-default navbar-static">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-example-js-navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Project Name</a>
-        </div>
-        <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
-            <ul class="nav navbar-nav">
-                {{#bs-dropdown tagName="li" as |dd|}}
-                    {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-                    {{#dd.menu}}
-                        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-                        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
-                    {{/dd.menu}}
-                {{/bs-dropdown}}
-                {{#bs-dropdown direction="up" tagName="li" as |dd|}}
-                    {{#dd.toggle}}Dropup <span class="caret"></span>{{/dd.toggle}}
-                    {{#dd.menu align="right"}}
-                        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-                        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
-                    {{/dd.menu}}
-                {{/bs-dropdown}}
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {{#bs-dropdown tagName="li" as |dd|}}
-                    {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-                    {{#dd.menu}}
-                        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-                        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
-                    {{/dd.menu}}
-                {{/bs-dropdown}}
-            </ul>
-        </div><!-- /.nav-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
+{{#bs-navbar fluid=true as | navbar | }}
+    <div class="navbar-header">
+        {{#navbar.toggle}}
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        {{/navbar.toggle}}
+        <a class="navbar-brand" href="#">Project Name</a>
+    </div>
+    {{#navbar.content}}
+        {{#navbar.nav as | nav | }}
+            {{!-- TODO: How to handle dropdown nav items? --}}
+            {{#bs-dropdown tagName="li" as |dd|}}
+                {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+                {{#dd.menu}}
+                    {{#dd.item}}
+                        {{#link-to "index"}}Home{{/link-to}}
+                    {{/dd.item}}
+                    {{#dd.item}}
+                        {{#link-to "dropdown"}}Dropdowns{{/link-to}}
+                    {{/dd.item}}
+                {{/dd.menu}}
+            {{/bs-dropdown}}
+            {{#bs-dropdown direction="up" tagName="li" as |dd|}}
+                {{#dd.toggle}}Dropup <span class="caret"></span>{{/dd.toggle}}
+                {{#dd.menu align="right"}}
+                    {{#dd.item}}{{#link-to "index"}}Home{{/link-to}}{{/dd.item}}
+                    {{#dd.item}}{{#link-to "dropdown"}}Dropdowns{{/link-to}}{{/dd.item}}
+                {{/dd.menu}}
+            {{/bs-dropdown}}
+        {{/navbar.nav}}
+        {{#navbar.nav class="navbar-right"}}
+            {{#bs-dropdown tagName="li" as |dd|}}
+                {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+                {{#dd.menu}}
+                    {{#dd.item}}{{#link-to "index"}}Home{{/link-to}}{{/dd.item}}
+                    {{#dd.item}}{{#link-to "dropdown"}}Dropdowns{{/link-to}}{{/dd.item}}
+                {{/dd.menu}}
+            {{/bs-dropdown}}
+        {{/navbar.nav}}
+    {{/navbar.content}}
+{{/bs-navbar}}
 
 <h2>Button dropdowns</h2>
 
 {{#bs-dropdown as |dd|}}
-    {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
+    {{#dd.button class="dropdown-toggle"}}Dropdown <span class="caret"></span>{{/dd.button}}
     {{#dd.menu}}
-        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+        {{#dd.item}}{{#link-to "index"}}Home{{/link-to}}{{/dd.item}}
+        {{#dd.item}}{{#link-to "dropdown"}}Dropdowns{{/link-to}}{{/dd.item}}
     {{/dd.menu}}
 {{/bs-dropdown}}
 
@@ -56,16 +59,16 @@
     {{#bs-button}}Dropdown{{/bs-button}}
     {{#dd.button}}<span class="caret"></span>{{/dd.button}}
     {{#dd.menu}}
-        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+        {{#dd.item}}{{#link-to "index"}}Home{{/link-to}}{{/dd.item}}
+        {{#dd.item}}{{#link-to "dropdown"}}Dropdowns{{/link-to}}{{/dd.item}}
     {{/dd.menu}}
 {{/bs-dropdown}}
 
 {{#bs-dropdown direction="up" as |dd|}}
   {{#dd.button}}Dropup <span class="caret"></span>{{/dd.button}}
   {{#dd.menu}}
-      <li>{{#link-to "index"}}Home{{/link-to}}</li>
-      <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+      {{#dd.item}}{{#link-to "index"}}Home{{/link-to}}{{/dd.item}}
+      {{#dd.item}}{{#link-to "dropdown"}}Dropdowns{{/link-to}}{{/dd.item}}
   {{/dd.menu}}
 {{/bs-dropdown}}
 
@@ -74,7 +77,7 @@
 {{#bs-dropdown closeOnMenuClick=false as |dd|}}
     {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
     {{#dd.menu}}
-        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+        {{#dd.item}}{{#link-to "index"}}Home{{/link-to}}{{/dd.item}}
+        {{#dd.item}}{{#link-to "dropdown"}}Dropdowns{{/link-to}}{{/dd.item}}
     {{/dd.menu}}
 {{/bs-dropdown}}
