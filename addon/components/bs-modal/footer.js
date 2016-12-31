@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import layout from '../../templates/components/bs-modal/footer';
 
-const { computed, K } = Ember;
+const {
+ computed
+} = Ember;
 
 /**
 
@@ -58,13 +60,13 @@ export default Ember.Component.extend({
    * @event onSubmit
    * @public
    */
-  onSubmit: K,
+  onSubmit() {},
 
   /**
    * @event onClose
    * @public
    */
-  onClose: K,
+  onClose() {},
 
   submit(e) {
     e.preventDefault();

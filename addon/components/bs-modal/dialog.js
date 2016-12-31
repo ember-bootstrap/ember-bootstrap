@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import layout from '../../templates/components/bs-modal/dialog';
 
-const { computed, K } = Ember;
+const {
+ computed
+} = Ember;
 
 /**
   Internal component for modal's markup and event handling. Should not be used directly.
@@ -74,7 +76,7 @@ export default Ember.Component.extend({
    * @event onClose
    * @public
    */
-  onClose: K,
+  onClose() {},
 
   /**
    * Name of the size class

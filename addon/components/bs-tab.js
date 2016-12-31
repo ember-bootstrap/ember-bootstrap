@@ -4,7 +4,11 @@ import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import TabPane from './bs-tab/pane';
 import listenTo from '../utils/listen-to-cp';
 
-const { computed, isPresent, A, K: noop } = Ember;
+const {
+  computed,
+  isPresent,
+  A
+} = Ember;
 
 /**
  Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,
@@ -189,7 +193,7 @@ export default Ember.Component.extend(ComponentParent, {
    * @event onChange
    * @public
    */
-  onChange: noop,
+  onChange() {},
 
   /**
    * All `TabPane` child components
