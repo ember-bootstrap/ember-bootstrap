@@ -2,8 +2,6 @@ import Ember from 'ember';
 import layout from '../templates/components/bs-accordion';
 import listenTo from '../utils/listen-to-cp';
 
-const { K: noop } = Ember;
-
 /**
  Bootstrap-style accordion group, with collapsible/expandable items.
  See http://getbootstrap.com/components/#btn-groups
@@ -69,7 +67,7 @@ export default Ember.Component.extend({
    * @param oldValue
    * @public
    */
-  onChange: noop,
+  onChange() {},
 
   actions: {
     change(newValue) {

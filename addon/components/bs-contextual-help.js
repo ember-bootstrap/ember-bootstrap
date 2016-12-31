@@ -11,10 +11,10 @@ const {
   guidFor,
   isArray,
   isBlank,
-  K,
   observer,
   run,
   $,
+
   run: {
     later,
     cancel,
@@ -337,7 +337,7 @@ export default Component.extend(TransitionSupport, {
    * @event onShow
    * @public
    */
-  onShow: K,
+  onShow() {},
 
   /**
    * This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).
@@ -345,7 +345,7 @@ export default Component.extend(TransitionSupport, {
    * @event onShown
    * @public
    */
-  onShown: K,
+  onShown() {},
 
   /**
    * This action is called immediately when the tooltip/popover is about to be hidden.
@@ -353,7 +353,7 @@ export default Component.extend(TransitionSupport, {
    * @event onHide
    * @public
    */
-  onHide: K,
+  onHide() {},
 
   /**
    * This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).
@@ -361,7 +361,7 @@ export default Component.extend(TransitionSupport, {
    * @event onHidden
    * @public
    */
-  onHidden: K,
+  onHidden() {},
 
   /**
    * Called when a show event has been received

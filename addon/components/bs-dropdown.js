@@ -1,7 +1,11 @@
 import Ember from 'ember';
 import layout from '../templates/components/bs-dropdown';
 
-const { computed, $, K: noop, run: { bind } } = Ember;
+const {
+  computed,
+  $,
+  run: { bind }
+} = Ember;
 
 /**
  Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.
@@ -144,7 +148,7 @@ export default Ember.Component.extend({
    * @param {*} value
    * @public
    */
-  onShow: noop,
+  onShow() {},
 
   /**
    * Action is called when dropdown is about to be hidden
@@ -153,7 +157,7 @@ export default Ember.Component.extend({
    * @param {*} value
    * @public
    */
-  onHide: noop,
+  onHide() {},
 
   actions: {
     toggleDropdown() {

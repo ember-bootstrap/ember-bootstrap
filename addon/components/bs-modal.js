@@ -3,7 +3,10 @@ import layout from '../templates/components/bs-modal';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import listenTo from '../utils/listen-to-cp';
 
-const { computed, observer, K: noop } = Ember;
+const {
+  computed,
+  observer
+} = Ember;
 
 /**
 
@@ -243,7 +246,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * @type function
    * @public
    */
-  onSubmit: noop,
+  onSubmit() {},
 
   /**
    * The action to be sent when the modal is closing.
@@ -258,7 +261,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * @type function
    * @public
    */
-  onHide: noop,
+  onHide() {},
 
   /**
    * The action to be sent after the modal has been completely hidden (including the CSS transition).
@@ -268,7 +271,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * @default null
    * @public
    */
-  onHidden: noop,
+  onHidden() {},
 
   /**
    * The action to be sent when the modal is opening.
@@ -281,7 +284,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * @default null
    * @public
    */
-  onShow: noop,
+  onShow() {},
 
   /**
    * The action to be sent after the modal has been completely shown (including the CSS transition).
@@ -290,7 +293,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * @type function
    * @public
    */
-  onShown: noop,
+  onShown() {},
 
   actions: {
     close() {

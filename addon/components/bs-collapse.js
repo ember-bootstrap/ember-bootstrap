@@ -3,11 +3,12 @@ import Ember from 'ember';
 const {
   computed,
   observer,
-  K: noop,
+
   run: {
     bind,
     next
   },
+
   String: {
     htmlSafe
   }
@@ -131,7 +132,7 @@ export default Ember.Component.extend({
    * @type function
    * @public
    */
-  onHide: noop,
+  onHide() {},
 
   /**
    * The action to be sent after the element has been completely hidden (including the CSS transition).
@@ -141,7 +142,7 @@ export default Ember.Component.extend({
    * @default null
    * @public
    */
-  onHidden: noop,
+  onHidden() {},
 
   /**
    * The action to be sent when the element is about to be shown.
@@ -151,7 +152,7 @@ export default Ember.Component.extend({
    * @default null
    * @public
    */
-  onShow: noop,
+  onShow() {},
 
   /**
    * The action to be sent after the element has been completely shown (including the CSS transition).
@@ -160,7 +161,7 @@ export default Ember.Component.extend({
    * @type function
    * @public
    */
-  onShown: noop,
+  onShown() {},
 
   /**
    * Triggers the show transition
