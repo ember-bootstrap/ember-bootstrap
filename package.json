@@ -47,7 +47,7 @@
     "ember-sinon": "0.5.1",
     "ember-sinon-qunit": "1.3.5",
     "ember-suave": "4.0.0",
-    "emberx-select": "2.2.2",
+    "emberx-select": "^3.0.0",
     "gh-pages": "^0.12.0",
     "glob": "^5.0.14",
     "gulp": "^3.9.0",

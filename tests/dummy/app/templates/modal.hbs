@@ -24,7 +24,7 @@
     {{form.element label="Submit button" placeholder="Enter title to add a submit button" property="submitTitle"}}
 
     {{#form.element label="Size" property="size" as |el|}}
-        {{#x-select class="form-control" value=el.value id=el.id on-click=(action (mut type)) as |xs|}}
+        {{#x-select class="form-control" value=el.value id=el.id on-change=(action (mut size)) as |xs|}}
             {{#each sizes as |choice|}}
                 {{#xs.option value=choice}}{{choice}}{{/xs.option}}
             {{/each}}
