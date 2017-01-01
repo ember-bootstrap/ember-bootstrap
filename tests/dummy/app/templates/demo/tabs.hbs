@@ -1,5 +1,3 @@
-<h1>Tabs</h1>
-
 <h2>Simple example</h2>
 
 <div class="bs-example">
@@ -74,7 +72,7 @@
 <h2>Routable tabs</h2>
 
 <p>The <code>bs-tab</code> component is to be used for tab content that is rendered on a single page. If you want to
-have the tab content be loaded from a nested route, simply use the {{#link-to "navs"}}<code>bs-nav</code>{{/link-to}}
+have the tab content be loaded from a nested route, simply use the {{#link-to "demo.navs"}}<code>bs-nav</code>{{/link-to}}
 component and a <code>\{{outlet}}</code>:</p>
 
 
@@ -83,8 +81,8 @@ component and a <code>\{{outlet}}</code>:</p>
     <!-- BEGIN-SNIPPET tab-route-->
     <div>
         {{#bs-nav type="tabs" as |nav|}}
-            {{#nav.item}}{{#link-to "tabs.index"}}Tab 1{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "tabs.other"}}Tab 2{{/link-to}}{{/nav.item}}
+            {{#nav.item}}{{#link-to "demo.tabs.index"}}Tab 1{{/link-to}}{{/nav.item}}
+            {{#nav.item}}{{#link-to "demo.tabs.other"}}Tab 2{{/link-to}}{{/nav.item}}
         {{/bs-nav}}
         {{outlet}}
     </div>

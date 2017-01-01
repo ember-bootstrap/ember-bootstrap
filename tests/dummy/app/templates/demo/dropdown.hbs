@@ -7,14 +7,14 @@
             {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
             {{#dd.menu}}
                 <li>{{#link-to "index"}}Home{{/link-to}}</li>
-                <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+                <li>{{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}</li>
             {{/dd.menu}}
         {{/bs-dropdown}}
         {{#bs-dropdown direction="up" tagName="li" as |dd|}}
             {{#dd.toggle}}Dropup <span class="caret"></span>{{/dd.toggle}}
             {{#dd.menu align="right"}}
                 <li>{{#link-to "index"}}Home{{/link-to}}</li>
-                <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+                <li>{{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}</li>
             {{/dd.menu}}
         {{/bs-dropdown}}
     </ul>
@@ -33,7 +33,7 @@
         {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
         {{#dd.menu}}
             <li>{{#link-to "index"}}Home{{/link-to}}</li>
-            <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+            <li>{{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}</li>
         {{/dd.menu}}
     {{/bs-dropdown}}
 
@@ -42,7 +42,7 @@
         {{#dd.button}}<span class="caret"></span>{{/dd.button}}
         {{#dd.menu}}
             <li>{{#link-to "index"}}Home{{/link-to}}</li>
-            <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+            <li>{{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}</li>
         {{/dd.menu}}
     {{/bs-dropdown}}
     <!-- END-SNIPPET -->
