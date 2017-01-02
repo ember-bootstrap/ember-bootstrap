@@ -1,12 +1,12 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('bs-form-group', 'Integration | Component | bs-form-group', {
+moduleForComponent('bs-form/group', 'Integration | Component | bs-form/group', {
   integration: true
 });
 
 test('component has form-group bootstrap class', function(assert) {
-  this.render(hbs`{{#bs-form-group}}{{/bs-form-group}}`);
+  this.render(hbs`{{#bs-form/group}}{{/bs-form/group}}`);
   assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
 });
 
@@ -27,7 +27,7 @@ const validations = {
 
 function testValidationState(assert, state) {
   let validationConfig = validations[state];
-  this.render(hbs`{{#bs-form-group validation=validation}}{{/bs-form-group}}`);
+  this.render(hbs`{{#bs-form/group validation=validation}}{{/bs-form/group}}`);
   this.set('validation', state);
   validationConfig.formGroupClasses.forEach((className) => {
     assert.equal(this.$(':first-child').hasClass(className), true, `component has ${className} class`);

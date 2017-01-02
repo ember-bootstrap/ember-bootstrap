@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/bs-form-group';
+import layout from '../../templates/components/bs-form/group';
 import Config from 'ember-bootstrap/config';
 
 const { computed } = Ember;
@@ -9,10 +9,12 @@ const { computed } = Ember;
  Use as a block level component:
 
  ```hbs
- {{#bs-form-group validation=firstNameValidation}}
-   <label class="control-label">First name</label>
-   <input value={{firstname}} class="form-control" oninput={{action (mut firstname) value="target.value"}} type="text">
- {{/bs-form-group}}
+ {{#bs-form as |form|}}
+   {{#form.group validation=firstNameValidation}}
+     <label class="control-label">First name</label>
+     <input value={{firstname}} class="form-control" oninput={{action (mut firstname) value="target.value"}} type="text">
+   {{/form.group}}
+ {{/bs-form}}
  ```
 
  If the `validation` property is set to some state (usually Bootstrap's predefined states "success",
