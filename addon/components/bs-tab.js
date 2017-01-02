@@ -97,8 +97,8 @@ const {
  ```hbs
  <div>
    {{#bs-nav type="tabs" as |nav|}}
-     {{#nav.item}}{{#link-to "tabs.index"}}Tab 1{{/link-to}}{{/nav.item}}
-     {{#nav.item}}{{#link-to "tabs.other"}}Tab 2{{/link-to}}{{/nav.item}}
+     {{#nav.item}}{{#nav.link-to "tabs.index"}}Tab 1{{/nav.link-to}}{{/nav.item}}
+     {{#nav.item}}{{#nav.link-to "tabs.other"}}Tab 2{{/nav.link-to}}{{/nav.item}}
    {{/bs-nav}}
    {{outlet}}
  </div>

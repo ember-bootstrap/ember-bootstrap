@@ -28,16 +28,16 @@ import layout from '../templates/components/bs-navbar';
    </div>
    {{#navbar.content}}
      {{#navbar.nav as |nav|}}
-       {{#nav.item}}{{#link-to "alert"}}Alert{{/link-to}}{{/nav.item}}
-       {{#nav.item}}{{#link-to "button"}}Buttons{{/link-to}}{{/nav.item}}
-       {{#nav.item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/nav.item}}
-       {{#nav.item}}{{#link-to "forms"}}Forms{{/link-to}}{{/nav.item}}
-       {{#nav.item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/nav.item}}
-       {{#nav.item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/nav.item}}
-       {{#nav.item}}{{#link-to "modal"}}Modals{{/link-to}}{{/nav.item}}
-       {{#nav.item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/nav.item}}
-       {{#nav.item}}{{#link-to "navs"}}Navs{{/link-to}}{{/nav.item}}
-       {{#nav.item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/nav.item}}
+       {{#nav.item}}{{#nav.link-to "alert"}}Alert{{/nav.link-to}}{{/nav.item}}
+       {{#nav.item}}{{#nav.link-to "button"}}Buttons{{/nav.link-to}}{{/nav.item}}
+       {{#nav.item}}{{#nav.link-to "dropdown"}}Dropdown{{/nav.link-to}}{{/nav.item}}
+       {{#nav.item}}{{#nav.link-to "forms"}}Forms{{/nav.link-to}}{{/nav.item}}
+       {{#nav.item}}{{#nav.link-to "accordion"}}Accordion{{/nav.link-to}}{{/nav.item}}
+       {{#nav.item}}{{#nav.link-to "collapse"}}Collapse{{/nav.link-to}}{{/nav.item}}
+       {{#nav.item}}{{#nav.link-to "modal"}}Modals{{/nav.link-to}}{{/nav.item}}
+       {{#nav.item}}{{#nav.link-to "progress"}}Progress bars{{/nav.link-to}}{{/nav.item}}
+       {{#nav.item}}{{#nav.link-to "navs"}}Navs{{/nav.link-to}}{{/nav.item}}
+       {{#nav.item}}{{#nav.link-to "navbars"}}Navbars{{/nav.link-to}}{{/nav.item}}
      {{/navbar.nav}}
    {{/navbar.content}}
  {{/bs-navbar}}
