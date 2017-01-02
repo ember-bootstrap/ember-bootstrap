@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v1.0.0-alpha</span></h1>
+    <h1>API Docs <span class="small">v1.0.0-alpha.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -60,7 +60,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-form.js.html#l13"><code>addon&#x2F;components&#x2F;bs-form.js:13</code></a>
+            Defined in: <a href="../files/addon_components_bs-form.js.html#l12"><code>addon&#x2F;components&#x2F;bs-form.js:12</code></a>
         </div>
 
 
@@ -71,21 +71,21 @@
     <p>Render a form with the appropriate Bootstrap layout class (see <code>formLayout</code>).
 Allows setting a <code>model</code> that nested <code>Components.FormElement</code>s can access, and that can provide form validation (see below)</p>
 <p>You can use whatever markup you like within the form:</p>
-<pre class="code prettyprint"><code class="language-handlebars">{{#bs-form action=&quot;submit&quot;}}
-  {{#bs-form-group validation=firstNameValidation}}
+<pre class="code prettyprint"><code class="language-handlebars">{{#bs-form onSubmit=(action &quot;submit&quot;) as |form|}}
+  {{#form.group validation=firstNameValidation}}
     &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
     &lt;input value={{firstname}} class=&quot;form-control&quot; oninput={{action (mut firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
- {{/bs-form-group}}
+ {{/form.group}}
 {{/bs-form}}
 </code></pre>
 <p>However to benefit from features such as automatic form markup, validations and validation markup, use <code>Components.FormElement</code>
 as nested components. See below for an example.</p>
 <h3>Submitting the form</h3>
-<p>When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the default action
-will be sent to the controller.
-In case the form supports validation (see &quot;Form validation&quot; below), the &quot;before&quot; action is called (which allows you to
-do e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the &quot;invalid&quot;
-action is sent instead of the default &quot;action&quot;.</p>
+<p>When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the <code>onSubmit</code> action
+will be sent to the controller or parent component.
+In case the form supports validation (see &quot;Form validation&quot; below), the <code>onBefore</code> action is called (which allows you to
+do e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the <code>onInvalid</code>
+action is sent instead of <code>onSubmit</code>.</p>
 <h3>Use with Components.FormElement</h3>
 <p>When using <code>Components.FormElement</code>s with their <code>property</code> set to property names of the form's validation enabled
 <code>model</code>, you gain some additional powerful features:</p>
@@ -94,7 +94,7 @@ action is sent instead of the default &quot;action&quot;.</p>
 <li>markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form
 with an invalid validation, or when focusing out of invalid inputs</li>
 </ul>
-<pre class="code prettyprint"><code class="language-handlebars">{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot; as |form|}}
+<pre class="code prettyprint"><code class="language-handlebars">{{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
   {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
   {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
   {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
@@ -250,7 +250,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l219"><code>addon&#x2F;components&#x2F;bs-form.js:219</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l218"><code>addon&#x2F;components&#x2F;bs-form.js:218</code></a>
                             </p>
                     
                     
@@ -290,7 +290,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l119"><code>addon&#x2F;components&#x2F;bs-form.js:119</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l118"><code>addon&#x2F;components&#x2F;bs-form.js:118</code></a>
                             </p>
                     
                     
@@ -320,7 +320,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l128"><code>addon&#x2F;components&#x2F;bs-form.js:128</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l127"><code>addon&#x2F;components&#x2F;bs-form.js:127</code></a>
                             </p>
                     
                     
@@ -350,7 +350,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l138"><code>addon&#x2F;components&#x2F;bs-form.js:138</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l137"><code>addon&#x2F;components&#x2F;bs-form.js:137</code></a>
                             </p>
                     
                     
@@ -382,7 +382,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l91"><code>addon&#x2F;components&#x2F;bs-form.js:91</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l90"><code>addon&#x2F;components&#x2F;bs-form.js:90</code></a>
                             </p>
                     
                     
@@ -412,7 +412,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l105"><code>addon&#x2F;components&#x2F;bs-form.js:105</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l104"><code>addon&#x2F;components&#x2F;bs-form.js:104</code></a>
                             </p>
                     
                     
@@ -448,7 +448,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l159"><code>addon&#x2F;components&#x2F;bs-form.js:159</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l158"><code>addon&#x2F;components&#x2F;bs-form.js:158</code></a>
                             </p>
                     
                     
@@ -479,7 +479,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l183"><code>addon&#x2F;components&#x2F;bs-form.js:183</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l182"><code>addon&#x2F;components&#x2F;bs-form.js:182</code></a>
                             </p>
                     
                     
@@ -509,7 +509,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l149"><code>addon&#x2F;components&#x2F;bs-form.js:149</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l148"><code>addon&#x2F;components&#x2F;bs-form.js:148</code></a>
                             </p>
                     
                     
@@ -542,7 +542,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l191"><code>addon&#x2F;components&#x2F;bs-form.js:191</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l190"><code>addon&#x2F;components&#x2F;bs-form.js:190</code></a>
                             </p>
                     
                     
@@ -585,7 +585,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l210"><code>addon&#x2F;components&#x2F;bs-form.js:210</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l209"><code>addon&#x2F;components&#x2F;bs-form.js:209</code></a>
                             </p>
                     
                     
@@ -628,7 +628,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l200"><code>addon&#x2F;components&#x2F;bs-form.js:200</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l199"><code>addon&#x2F;components&#x2F;bs-form.js:199</code></a>
                             </p>
                     
                     
@@ -692,6 +692,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -708,6 +709,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>

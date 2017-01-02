@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v1.0.0-alpha</span></h1>
+    <h1>API Docs <span class="small">v1.0.0-alpha.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -60,7 +60,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-form-group.js.html#l7"><code>addon&#x2F;components&#x2F;bs-form-group.js:7</code></a>
+            Defined in: <a href="../files/addon_components_bs-form_group.js.html#l7"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:7</code></a>
         </div>
 
 
@@ -70,10 +70,12 @@
 <div class="well well-small">
     <p>This component renders a <code>&lt;div class=&quot;form-group&quot;&gt;</code> element, with support for validation states and feedback icons.
 Use as a block level component:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-form-group validation=firstNameValidation}}
-  &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
-  &lt;input value={{firstname}} class=&quot;form-control&quot; oninput={{action (mut firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
-{{/bs-form-group}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-form as |form|}}
+  {{#form.group validation=firstNameValidation}}
+    &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
+    &lt;input value={{firstname}} class=&quot;form-control&quot; oninput={{action (mut firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
+  {{/form.group}}
+{{/bs-form}}
 </code></pre>
 <p>If the <code>validation</code> property is set to some state (usually Bootstrap's predefined states &quot;success&quot;,
 &quot;warning&quot; or &quot;error&quot;), the appropriate styles will be added, together with a feedback icon.
@@ -192,7 +194,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-group.js.html#l86"><code>addon&#x2F;components&#x2F;bs-form-group.js:86</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l88"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:88</code></a>
                             </p>
                     
                     
@@ -231,7 +233,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-group.js.html#l54"><code>addon&#x2F;components&#x2F;bs-form-group.js:54</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l56"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:56</code></a>
                             </p>
                     
                     
@@ -261,7 +263,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-group.js.html#l168"><code>addon&#x2F;components&#x2F;bs-form-group.js:168</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l170"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:170</code></a>
                             </p>
                     
                     
@@ -290,7 +292,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-group.js.html#l44"><code>addon&#x2F;components&#x2F;bs-form-group.js:44</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l46"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:46</code></a>
                             </p>
                     
                     
@@ -320,7 +322,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-group.js.html#l157"><code>addon&#x2F;components&#x2F;bs-form-group.js:157</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l159"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:159</code></a>
                             </p>
                     
                     
@@ -349,7 +351,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-group.js.html#l128"><code>addon&#x2F;components&#x2F;bs-form-group.js:128</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l130"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:130</code></a>
                             </p>
                     
                     
@@ -394,7 +396,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-group.js.html#l64"><code>addon&#x2F;components&#x2F;bs-form-group.js:64</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l66"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:66</code></a>
                             </p>
                     
                     
@@ -434,7 +436,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-group.js.html#l33"><code>addon&#x2F;components&#x2F;bs-form-group.js:33</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l35"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:35</code></a>
                             </p>
                     
                     
@@ -466,7 +468,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-group.js.html#l176"><code>addon&#x2F;components&#x2F;bs-form-group.js:176</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l178"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:178</code></a>
                             </p>
                     
                     
@@ -500,7 +502,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-group.js.html#l190"><code>addon&#x2F;components&#x2F;bs-form-group.js:190</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l192"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:192</code></a>
                             </p>
                     
                     
@@ -529,7 +531,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form-group.js.html#l107"><code>addon&#x2F;components&#x2F;bs-form-group.js:107</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l109"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:109</code></a>
                             </p>
                     
                     
@@ -576,6 +578,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -592,6 +595,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>

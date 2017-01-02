@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-tab.js - ember-bootstrap</title>
+    <title>addon/components/bs-form/group.js - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
@@ -48,262 +48,214 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-tab.js <small>File</small></h1>
+    <h1>addon/components/bs-form/group.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../templates/components/bs-tab&#x27;;
-import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
-import TabPane from &#x27;./bs-tab/pane&#x27;;
-import listenTo from &#x27;../utils/listen-to-cp&#x27;;
+import layout from &#x27;../../templates/components/bs-form/group&#x27;;
+import Config from &#x27;ember-bootstrap/config&#x27;;
 
-const {
-  computed,
-  isPresent,
-  A
-} = Ember;
+const { computed } = Ember;
 
 /**
- Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap&#x27;s tab.js plugin,
- see http://getbootstrap.com/javascript/#tabs
-
- ### Usage
-
- Just nest any number of yielded [Components.TabPane](Components.TabPane.html) components that hold the tab content.
- The tab navigation is automatically generated from the tab panes&#x27; &#x60;title&#x60; property:
+ This component renders a &#x60;&lt;div class=&quot;form-group&quot;&gt;&#x60; element, with support for validation states and feedback icons.
+ Use as a block level component:
 
  &#x60;&#x60;&#x60;hbs
- {{#bs-tab as |tab|}}
-   {{#tab.pane title=&quot;Tab 1&quot;}}
-     &lt;p&gt;...&lt;/p&gt;
-   {{/tab.pane}}
-   {{#tab.pane title=&quot;Tab 2&quot;}}
-     &lt;p&gt;...&lt;/p&gt;
-   {{/tab.pane}}
- {{/bs-tab}}
+ {{#bs-form as |form|}}
+   {{#form.group validation=firstNameValidation}}
+     &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
+     &lt;input value={{firstname}} class=&quot;form-control&quot; oninput={{action (mut firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
+   {{/form.group}}
+ {{/bs-form}}
  &#x60;&#x60;&#x60;
 
- ### Groupable (dropdown) tabs
+ If the &#x60;validation&#x60; property is set to some state (usually Bootstrap&#x27;s predefined states &quot;success&quot;,
+ &quot;warning&quot; or &quot;error&quot;), the appropriate styles will be added, together with a feedback icon.
+ See http://getbootstrap.com/css/#forms-control-validation
 
- Bootstrap&#x27;s support for dropdown menus as tab navigation is mimiced by the use of the &#x60;groupTitle&#x60; property.
- All panes with the same &#x60;groupTitle&#x60; will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)
- component with &#x60;groupTitle&#x60; being the dropdown&#x27;s title:
-
- &#x60;&#x60;&#x60;hbs
- {{#bs-tab as |tab|}}
-    {{#tab.pane title=&quot;Tab 1&quot;}}
-      &lt;p&gt;...&lt;/p&gt;
-    {{/tab.pane}}
-    {{#tab.pane title=&quot;Tab 2&quot;}}
-      &lt;p&gt;...&lt;/p&gt;
-    {{/tab.pane}}
-    {{#tab.pane title=&quot;Tab 3&quot; groupTitle=&quot;Dropdown&quot;}}
-      &lt;p&gt;...&lt;/p&gt;
-    {{/tab.pane}}
-    {{#tab.pane title=&quot;Tab 4&quot; groupTitle=&quot;Dropdown&quot;}}
-      &lt;p&gt;...&lt;/p&gt;
-    {{/tab.pane}}
- {{/bs-tab}}
- &#x60;&#x60;&#x60;
-
- ### Custom tabs
-
- When having the tab pane&#x27;s &#x60;title&#x60; as the tab navigation title is not sufficient, for example because you want to
- integrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup
- your navigation by yourself.
-
- Set &#x60;customTabs&#x60; to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably
- using a [Components.Nav](Components.Nav.html) component. The tab component yields the &#x60;activeId&#x60; property as well as
- its &#x60;select&#x60; action, which you would have to use to manually set the &#x60;active&#x60; state of the navigation items and to
- trigger the selection of the different tab panes, using their ids:
-
- &#x60;&#x60;&#x60;hbs
- {{#bs-tab customTabs=true as |tab|}}
-    {{#bs-nav type=&quot;tabs&quot; as |nav|}}
-        {{#nav.item active=(bs-eq tab.activeId &quot;pane1&quot;)}}&lt;a href=&quot;#pane1&quot; role=&quot;tab&quot; {{action tab.select &quot;pane1&quot;}}&gt;Tab 1&lt;/a&gt;{{/nav.item}}
-        {{#nav.item active=(bs-eq tab.activeId &quot;pane2&quot;)}}&lt;a href=&quot;#pane1&quot; role=&quot;tab&quot; {{action tab.select &quot;pane2&quot;}}&gt;Tab 2 &lt;span class=&quot;badge&quot;&gt;{{badge}}&lt;/span&gt;&lt;/a&gt;{{/nav.item}}
-    {{/bs-nav}}
-
-    &lt;div class=&quot;tab-content&quot;&gt;
-    {{#tab.pane elementId=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
-        &lt;p&gt;...&lt;/p&gt;
-    {{/tab.pane}}
-    {{#tab.pane elementId=&quot;pane2&quot; title=&quot;Tab 2&quot;}}
-        &lt;p&gt;...&lt;/p&gt;
-    {{/tab.pane}}
-    &lt;/div&gt;
- {{/bs-tab}}
- &#x60;&#x60;&#x60;
-
- Note that the &#x60;bs-eq&#x60; helper used in the example above is a private helper, which is not guaranteed to be available for
- the future. Better use the corresponding &#x60;eq&#x60; helper of the
- [ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!
-
- ### Routable tabs
-
- The tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and
- deactivated dynamically, just as the  original Bootstrap implementation.
-
- If you want to have the content delivered through individual sub routes, just use
- the [Components.Nav](Components.Nav.html) component and an &#x60;{{outlet}}&#x60; that show the nested routes&#x27; content:
-
- &#x60;&#x60;&#x60;hbs
- &lt;div&gt;
-   {{#bs-nav type=&quot;tabs&quot; as |nav|}}
-     {{#nav.item}}{{#nav.link-to &quot;tabs.index&quot;}}Tab 1{{/nav.link-to}}{{/nav.item}}
-     {{#nav.item}}{{#nav.link-to &quot;tabs.other&quot;}}Tab 2{{/nav.link-to}}{{/nav.item}}
-   {{/bs-nav}}
-   {{outlet}}
- &lt;/div&gt;
- &#x60;&#x60;&#x60;
-
- @class Tab
+ @class FormGroup
  @namespace Components
  @extends Ember.Component
- @uses Mixins.ComponentParent
  @public
  */
-export default Ember.Component.extend(ComponentParent, {
+export default Ember.Component.extend({
   layout,
 
-  /**
-   * Type of nav, either &quot;pills&quot; or &quot;tabs&quot;
-   *
-   * @property type
-   * @type String
-   * @default &#x27;tabs&#x27;
-   * @public
-   */
-  type: &#x27;tabs&#x27;,
+  classNames: [&#x27;form-group&#x27;],
+  classNameBindings: [&#x27;validationClass&#x27;, &#x27;hasFeedback&#x27;],
 
   /**
-   * By default the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)
-   * components. If set to true, you can deactivate this and setup the tabs manually. See the example above.
+   * Whether to show validation state icons.
+   * See http://getbootstrap.com/css/#forms-control-validation
    *
-   * @property customTabs
-   * @type boolean
-   * @default false
-   * @public
-   */
-  customTabs: false,
-
-  /**
-   * The id (&#x60;elementId&#x60;) of the active [TabPane](Components.TabPane.html).
-   * By default the first tab will be active, but this can be changed by setting this property
-   *
-   * &#x60;&#x60;&#x60;hbs
-   * {{#bs-tab activeId=&quot;pane2&quot;}}
-   *   {{#tab.pane id=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
-   *      ...
-   *   {{/tab.pane}}
-   *   {{#tab.pane id=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
-   *     ...
-   *   {{/tab.pane}}
-   * {{/bs-tab}}
-   * &#x60;&#x60;&#x60;
-   *
-   * When the selection is changed by user interaction this property will not update by using two-way bindings in order
-   * to follow DDAU best practices. If you want to react to such changes, subscribe to the &#x60;onChange&#x60; action
-   *
-   * @property activeId
-   * @type string
-   * @public
-   */
-  activeId: computed.oneWay(&#x27;childPanes.firstObject.elementId&#x27;),
-
-  /**
-   * @property isActiveId
-   * @private
-   */
-  isActiveId: listenTo(&#x27;activeId&#x27;),
-
-  /**
-   * Set to false to disable the fade animation when switching tabs.
-   *
-   * @property fade
+   * @property useIcons
    * @type boolean
    * @default true
    * @public
    */
-  fade: true,
+  useIcons: true,
 
   /**
-   * The duration of the fade animation
+   * Computed property which is true if the form group is in a validation state
    *
-   * @property fadeDuration
-   * @type integer
-   * @default 150
+   * @property hasValidation
+   * @type boolean
+   * @private
+   * @readonly
+   */
+  hasValidation: computed.notEmpty(&#x27;validation&#x27;).readOnly(),
+
+  /**
+   * Computed property which is true if the form group is showing a validation icon
+   *
+   * @property hasFeedback
+   * @type boolean
+   * @private
+   * @readonly
+   */
+  hasFeedback: computed.and(&#x27;hasValidation&#x27;, &#x27;useIcons&#x27;, &#x27;hasIconForValidationState&#x27;).readOnly(),
+
+  /**
+   * The icon classes to be used for a feedback icon in a &quot;success&quot; validation state.
+   * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+   * rendered if &#x60;useIcons&#x60; is false.
+   *
+   * You can change this globally by setting the &#x60;formValidationSuccessIcon&#x60; property of
+   * the ember-bootstrap configuration in your config/environment.js file. If your are
+   * using FontAwesome for example:
+   *
+   * &#x60;&#x60;&#x60;js
+   * ENV[&#x27;ember-bootstrap&#x27;] = {
+     *   formValidationSuccessIcon: &#x27;fa fa-check&#x27;
+     * }
+   * &#x60;&#x60;&#x60;
+   *
+   * @property successIcon
+   * @type string
+   * @default &#x27;glyphicon glyphicon-ok&#x27;
    * @public
    */
-  fadeDuration: 150,
+  successIcon: Config.formValidationSuccessIcon,
 
   /**
-   * This action is called when switching the active tab, with the new and previous pane id
+   * The icon classes to be used for a feedback icon in a &quot;error&quot; validation state.
+   * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+   * rendered if &#x60;useIcons&#x60; is false.
    *
-   * You can return false to prevent changing the active tab automatically, and do that in your action by
-   * setting &#x60;activeId&#x60;.
+   * You can change this globally by setting the &#x60;formValidationErrorIcon&#x60; property of
+   * the ember-bootstrap configuration in your config/environment.js file. If your are
+   * using FontAwesome for example:
    *
-   * @event onChange
+   * &#x60;&#x60;&#x60;js
+   * ENV[&#x27;ember-bootstrap&#x27;] = {
+     *   formValidationErrorIcon: &#x27;fa fa-times&#x27;
+     * }
+   * &#x60;&#x60;&#x60;
+   *
+   * @property errorIcon
+   * @type string
    * @public
    */
-  onChange() {},
+  errorIcon: Config.formValidationErrorIcon,
 
   /**
-   * All &#x60;TabPane&#x60; child components
+   * The icon classes to be used for a feedback icon in a &quot;warning&quot; validation state.
+   * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+   * rendered if &#x60;useIcons&#x60; is false.
    *
-   * @property childPanes
-   * @type array
+   * You can change this globally by setting the &#x60;formValidationWarningIcon&#x60; property of
+   * the ember-bootstrap configuration in your config/environment.js file. If your are
+   * using FontAwesome for example:
+   *
+   * &#x60;&#x60;&#x60;js
+   * ENV[&#x27;ember-bootstrap&#x27;] = {
+     *   formValidationWarningIcon: &#x27;fa fa-warning&#x27;
+     * }
+   * &#x60;&#x60;&#x60;
+   *
+   * @property warningIcon
+   * @type string
+   * @public
+   */
+  warningIcon: Config.formValidationWarningIcon,
+
+  /**
+   * The icon classes to be used for a feedback icon in a &quot;info&quot; validation state.
+   * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
+   * rendered if &#x60;useIcons&#x60; is false.
+   *
+   * You can change this globally by setting the &#x60;formValidationInfoIcon&#x60; property of
+   * the ember-bootstrap configuration in your config/environment.js file. If your are
+   * using FontAwesome for example:
+   *
+   * &#x60;&#x60;&#x60;js
+   * ENV[&#x27;ember-bootstrap&#x27;] = {
+     *   formValidationInfoIcon: &#x27;fa fa-info-circle
+     * }
+   * &#x60;&#x60;&#x60;
+   *
+   * The &quot;info&quot; validation state is not supported in Bootstrap CSS, but can be easily added
+   * using the following LESS style:
+   * &#x60;&#x60;&#x60;less
+   * .has-info {
+     *   .form-control-validation(@state-info-text; @state-info-text; @state-info-bg);
+     * }
+   * &#x60;&#x60;&#x60;
+   *
+   * @property infoIcon
+   * @type string
+   * @public
+   */
+  infoIcon: Config.formValidationInfoIcon,
+
+  /**
+   * @property iconName
+   * @type string
    * @readonly
    * @private
    */
-  childPanes: computed.filter(&#x27;children&#x27;, function(view) {
-    return view instanceof TabPane;
-  }),
+  iconName: computed(&#x27;validation&#x27;, function() {
+    let validation = this.get(&#x27;validation&#x27;) || &#x27;success&#x27;;
+    return this.get(&#x60;${validation}Icon&#x60;);
+  }).readOnly(),
 
   /**
-   * Array of objects that define the tab structure
-   *
-   * @property navItems
-   * @type array
+   * @property hasIconForValidationState
+   * @type boolean
    * @readonly
    * @private
    */
-  navItems: computed(&#x27;childPanes.@each.{elementId,title,group}&#x27;, function() {
-    let items = A();
-    this.get(&#x27;childPanes&#x27;).forEach((pane) =&gt; {
-      let groupTitle = pane.get(&#x27;groupTitle&#x27;);
-      let item = pane.getProperties(&#x27;elementId&#x27;, &#x27;title&#x27;);
-      if (isPresent(groupTitle)) {
-        let group = items.findBy(&#x27;groupTitle&#x27;, groupTitle);
-        if (group) {
-          group.children.push(item);
-          group.childIds.push(item.elementId);
-        } else {
-          items.push({
-            isGroup: true,
-            groupTitle,
-            children: A([item]),
-            childIds: A([item.elementId])
-          });
-        }
-      } else {
-        items.push(item);
-      }
-    });
-    return items;
-  }),
+  hasIconForValidationState: computed.notEmpty(&#x27;iconName&#x27;).readOnly(),
 
-  actions: {
-    select(id) {
-      let previous = this.get(&#x27;isActiveId&#x27;);
-      if (this.get(&#x27;onChange&#x27;)(id, previous) !== false) {
-        // change active tab when &#x60;onChange&#x60; does not return false
-        this.set(&#x27;isActiveId&#x27;, id);
-      }
+  /**
+   * Set to a validation state to render the form-group with a validation style.
+   * See http://getbootstrap.com/css/#forms-control-validation
+   *
+   * The default states of &quot;success&quot;, &quot;warning&quot; and &quot;error&quot; are supported by Bootstrap out-of-the-box.
+   * But you can use custom states as well. This will set a has-&lt;state&gt; class, and (if &#x60;useIcons&#x60;is true)
+   * a feedback whose class is taken from the &lt;state&gt;Icon property
+   *
+   * @property validation
+   * @type string
+   * @public
+   */
+  validation: null,
+
+  /**
+   * @property validationClass
+   * @type string
+   * @readonly
+   * @private
+   */
+  validationClass: computed(&#x27;validation&#x27;, function() {
+    let validation = this.get(&#x27;validation&#x27;);
+    if (!Ember.isBlank(validation)) {
+      return &#x60;has-${this.get(&#x27;validation&#x27;)}&#x60;;
     }
-  }
+  }).readOnly()
 });
 
     </pre>

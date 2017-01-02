@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v1.0.0-alpha</span></h1>
+    <h1>API Docs <span class="small">v1.0.0-alpha.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -58,7 +58,6 @@ import layout from &#x27;../templates/components/bs-form&#x27;;
 
 const {
   computed,
-  K: noop,
   RSVP,
   set,
   assert,
@@ -72,11 +71,11 @@ const {
   You can use whatever markup you like within the form:
 
  &#x60;&#x60;&#x60;handlebars
-   {{#bs-form action=&quot;submit&quot;}}
-     {{#bs-form-group validation=firstNameValidation}}
+   {{#bs-form onSubmit=(action &quot;submit&quot;) as |form|}}
+     {{#form.group validation=firstNameValidation}}
        &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
        &lt;input value={{firstname}} class=&quot;form-control&quot; oninput={{action (mut firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
-    {{/bs-form-group}}
+    {{/form.group}}
   {{/bs-form}}
   &#x60;&#x60;&#x60;
 
@@ -85,11 +84,11 @@ const {
 
   ### Submitting the form
 
-  When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the default action
-  will be sent to the controller.
-  In case the form supports validation (see &quot;Form validation&quot; below), the &quot;before&quot; action is called (which allows you to
-  do e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the &quot;invalid&quot;
-  action is sent instead of the default &quot;action&quot;.
+  When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the &#x60;onSubmit&#x60; action
+  will be sent to the controller or parent component.
+  In case the form supports validation (see &quot;Form validation&quot; below), the &#x60;onBefore&#x60; action is called (which allows you to
+  do e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the &#x60;onInvalid&#x60;
+  action is sent instead of &#x60;onSubmit&#x60;.
 
   ### Use with Components.FormElement
 
@@ -100,7 +99,7 @@ const {
   with an invalid validation, or when focusing out of invalid inputs
 
   &#x60;&#x60;&#x60;handlebars
-  {{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot; as |form|}}
+  {{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
     {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
     {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
     {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
@@ -233,7 +232,7 @@ export default Ember.Component.extend({
    * @return {Promise}
    * @public
    */
-  validate: noop,
+  validate() {},
 
   /**
    * @property showAllValidations
@@ -250,7 +249,7 @@ export default Ember.Component.extend({
    * @param Object model  The form&#x27;s &#x60;model&#x60;
    * @public
    */
-  onBefore: noop,
+  onBefore() {},
 
   /**
    * Action is called when submit has been triggered and the model has passed all validations (if present).
@@ -260,7 +259,7 @@ export default Ember.Component.extend({
    * @param Object result The returned result from the validate method, if validation is available
    * @public
    */
-  onSubmit: noop,
+  onSubmit() {},
 
   /**
    * Action is called when validation of the model has failed.
@@ -269,7 +268,7 @@ export default Ember.Component.extend({
    * @param Object error
    * @public
    */
-  onInvalid: noop,
+  onInvalid() {},
 
   /**
    * Submit handler that will send the default action (&quot;action&quot;) to the controller when submitting the form.
@@ -343,6 +342,7 @@ export default Ember.Component.extend({
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -359,6 +359,7 @@ export default Ember.Component.extend({
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>

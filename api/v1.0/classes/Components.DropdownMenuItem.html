@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/bs-button.js - ember-bootstrap</title>
+    <title>Components.DropdownMenuItem - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
@@ -48,294 +48,75 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/bs-button.js <small>File</small></h1>
+    <h1>Components.DropdownMenuItem <small>Class</small></h1>
 </div>
 
-<div class="file">
-    <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-import layout from &#x27;../templates/components/bs-button&#x27;;
-import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
-import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
-
-const {
-  computed,
-  observer
-} = Ember;
-
-/**
- Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
- as well as advanced functionality such as button states.
-
- ### Basic Usage
-
- &#x60;&#x60;&#x60;hbs
- {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
-   Downloads
- {{/bs-button}}
- &#x60;&#x60;&#x60;
-
- ### Actions
-
- Use the &#x60;onClick&#x60; property of the component to send an action to your controller. It will receive the button&#x27;s value
- (see the &#x60;value&#x60; property) as an argument.
-
- &#x60;&#x60;&#x60;hbs
- {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; onClick=(action &quot;download&quot;)}}
-   Download
- {{/bs-button}}
- &#x60;&#x60;&#x60;
-
- ### States
-
- Use the &#x60;textState&#x60; property to change the label of the button. You can bind it to a controller property to set a &quot;loading&quot; state for example.
- The label of the button will be taken from the &#x60;&lt;state&gt;Text&#x60; property.
-
- &#x60;&#x60;&#x60;hbs
- {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
- &#x60;&#x60;&#x60;
-
- &#x60;&#x60;&#x60;js
- App.ApplicationController = Ember.Controller.extend({
-   buttonState: &quot;default&quot;
-   actions: {
-     download: function() {
-       this.set(&quot;buttonState&quot;, &quot;loading&quot;);
-     }
-   }
- });
- &#x60;&#x60;&#x60;
-
- ### Promise support for automatic state change
-
- When returning a Promise for any asynchronous operation from the &#x60;onClick&#x60; closure action the button will
- manage an internal state (&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;) automatically, changing its label according to the state of the promise:
+<div class="well well-small">
+        <span class="label label-public">public</span>
 
 
- &#x60;&#x60;&#x60;hbs
- {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=(action &quot;download&quot;)}}
- &#x60;&#x60;&#x60;
+        <div class="extends">
+            Extends Ember.Component
+        </div>
 
- &#x60;&#x60;&#x60;js
- // controller.js
- export default Ember.Controller.extend({
-   actions: {
-     download(value) {
-       return new Ember.RSVP.Promise(...);
-     }
-   }
- });
- &#x60;&#x60;&#x60;
+        <div class="foundat">
+            Defined in: <a href="../files/addon_components_bs-dropdown_menu_item.js.html#l3"><code>addon&#x2F;components&#x2F;bs-dropdown&#x2F;menu&#x2F;item.js:3</code></a>
+        </div>
 
- @class Button
- @namespace Components
- @extends Ember.Component
- @uses Mixins.TypeClass
- @uses Mixins.SizeClass
- @public
- */
-export default Ember.Component.extend(TypeClass, SizeClass, {
-  layout,
-  tagName: &#x27;button&#x27;,
-  classNames: [&#x27;btn&#x27;],
-  classNameBindings: [&#x27;active&#x27;, &#x27;block:btn-block&#x27;],
 
-  /**
-   * @property classTypePrefix
-   * @type String
-   * @default &#x27;btn&#x27;
-   * @protected
-   */
-  classTypePrefix: &#x27;btn&#x27;,
+</div>
 
-  attributeBindings: [&#x27;disabled&#x27;, &#x27;buttonType:type&#x27;, &#x27;title&#x27;],
 
-  /**
-   * Default label of the button. Not need if used as a block component
-   *
-   * @property defaultText
-   * @type string
-   * @public
-   */
-  defaultText: null,
+<div class="well well-small">
+    <p>Component for a dropdown menu item.</p>
+<p>See <a href="Components.Dropdown.html">Components.Dropdown</a> for examples.</p>
 
-  /**
-   * Property to disable the button
-   *
-   * @property disabled
-   * @type boolean
-   * @default false
-   * @public
-   */
-  disabled: false,
+</div>
 
-  /**
-   * Set the type of the button, either &#x27;button&#x27; or &#x27;submit&#x27;
-   *
-   * @property buttonType
-   * @type String
-   * @default &#x27;button&#x27;
-   * @public
-   */
-  buttonType: &#x27;button&#x27;,
 
-  /**
-   * Set the &#x27;active&#x27; class to apply active/pressed CSS styling
-   *
-   * @property active
-   * @type boolean
-   * @default false
-   * @public
-   */
-  active: false,
+    <form id="options-form" class="form-inline" style="margin-bottom: 1em;">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
 
-  /**
-   * Property for block level buttons
-   *
-   * See the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)
-   * @property block
-   * @type boolean
-   * @default false
-   * @public
-   */
-  block: false,
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
 
-  /**
-   * If button is active and this is set, the icon property will match this property
-   *
-   * @property iconActive
-   * @type String
-   * @public
-   */
-  iconActive: null,
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
 
-  /**
-   * If button is inactive and this is set, the icon property will match this property
-   *
-   * @property iconInactive
-   * @type String
-   * @public
-   */
-  iconInactive: null,
+    </form>
 
-  /**
-   * Class(es) (e.g. glyphicons or font awesome) to use as a button icon
-   * This will render a &lt;i class=&quot;{{icon}}&quot;&gt;&lt;/i&gt; element in front of the button&#x27;s label
-   *
-   * @property icon
-   * @type String
-   * @readonly
-   * @protected
-   */
-  icon: computed(&#x27;active&#x27;, function() {
-    if (this.get(&#x27;active&#x27;)) {
-      return this.get(&#x27;iconActive&#x27;);
-    } else {
-      return this.get(&#x27;iconInactive&#x27;);
-    }
-  }),
 
-  /**
-   * Supply a value that will be associated with this button. This will be send
-   * as a parameter of the default action triggered when clicking the button
-   *
-   * @property value
-   * @type any
-   * @public
-   */
-  value: null,
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
 
-  /**
-   * State of the button. The button&#x27;s label (if not used as a block component) will be set to the
-   * &#x60;&lt;state&gt;Text&#x60; property.
-   * This property will automatically be set when using a click action that supplies the callback with an promise
-   *
-   * @property textState
-   * @type String
-   * @default &#x27;default&#x27;
-   * @protected
-   */
-  textState: &#x27;default&#x27;,
+    </ul>
 
-  /**
-   * Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.
-   *
-   * @property reset
-   * @type boolean
-   * @public
-   */
-  reset: null,
+    <div class="tab-content">
+        <div id="index" class="tab-pane active">
+            <h2 class="off-left">Item Index</h2>
 
-  /**
-   * The HTML title attribute
-   *
-   * @property title
-   * @type string
-   * @public
-   */
-  title: null,
 
-  /**
-   * When clicking the button this action is called with the value of the button (that is the value of the &quot;value&quot; property).
-   * Return a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;.
-   *
-   * @event onClick
-   * @param {*} value
-   * @public
-   */
-  onClick() {},
 
-  /**
-   * This will reset the state property to &#x27;default&#x27;, and with that the button&#x27;s label to defaultText
-   *
-   * @method resetState
-   * @protected
-   */
-  resetState() {
-    this.set(&#x27;textState&#x27;, &#x27;default&#x27;);
-  },
 
-  resetObserver: observer(&#x27;reset&#x27;, function() {
-    if (this.get(&#x27;reset&#x27;)) {
-      Ember.run.scheduleOnce(&#x27;actions&#x27;, this, function() {
-        this.set(&#x27;textState&#x27;, &#x27;default&#x27;);
-      });
-    }
-  }),
+        </div>
 
-  text: computed(&#x27;textState&#x27;, &#x27;defaultText&#x27;, &#x27;pendingText&#x27;, &#x27;resolvedText&#x27;, &#x27;rejectedText&#x27;, function() {
-    return this.getWithDefault(&#x60;${this.get(&#x27;textState&#x27;)}Text&#x60;, this.get(&#x27;defaultText&#x27;));
-  }),
 
-  /**
-   * @method click
-   * @private
-   */
-  click() {
-    let promise = this.get(&#x27;onClick&#x27;)(this.get(&#x27;value&#x27;));
-    if (promise &amp;&amp; typeof promise.then === &#x27;function&#x27;) {
-      this.set(&#x27;textState&#x27;, &#x27;pending&#x27;);
-      promise.then(() =&gt; {
-          if (!this.get(&#x27;isDestroyed&#x27;)) {
-            this.set(&#x27;textState&#x27;, &#x27;resolved&#x27;);
-          }
-        }, () =&gt; {
-          if (!this.get(&#x27;isDestroyed&#x27;)) {
-            this.set(&#x27;textState&#x27;, &#x27;rejected&#x27;);
-          }
-        }
-      );
-    }
-  },
 
-  init() {
-    this._super(...arguments);
-    this.get(&#x27;reset&#x27;);
-  }
 
-});
-
-    </pre>
+    </div>
 </div>
                     </div>
                 </div>

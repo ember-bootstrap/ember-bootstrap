@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.Navbar - ember-bootstrap</title>
+    <title>Components.NavLink - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
@@ -48,7 +48,7 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.Navbar <small>Class</small></h1>
+    <h1>Components.NavLink <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
@@ -57,16 +57,16 @@
         <div class="uses">
             Uses
             <ul class="inline commas">
-                    <li><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+                    <li><a href="Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
             </ul>
         </div>
 
         <div class="extends">
-            Extends Ember.Component
+            Extends Ember.LinkComponent
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-navbar.js.html#l5"><code>addon&#x2F;components&#x2F;bs-navbar.js:5</code></a>
+            Defined in: <a href="../files/addon_components_bs-nav_link-to.js.html#l4"><code>addon&#x2F;components&#x2F;bs-nav&#x2F;link-to.js:4</code></a>
         </div>
 
 
@@ -74,48 +74,7 @@
 
 
 <div class="well well-small">
-    <p>Component to generate <a href="http://getbootstrap.com/components/#navbar">bootstrap navbars</a>.</p>
-<h3>Usage</h3>
-<p>Uses the following components by a contextual reference:</p>
-<ul>
-<li><a href="Components.NavbarHeader.html">Components.NavbarHeader</a></li>
-<li><a href="Components.NavbarContent.html">Components.NavbarContent</a></li>
-<li><a href="Components.NavbarToggle.html">Components.NavbarToggle</a></li>
-<li><a href="Components.NavbarBrand.html">Components.NavbarBrand</a></li>
-<li><a href="Components.NavbarNav.html">Components.NavbarNav</a></li>
-</ul>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-navbar as |navbar|}}
-  &lt;div class=&quot;navbar-header&quot;&gt;
-    {{#navbar.toggle}}
-      &lt;span class=&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;
-      &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
-      &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
-      &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
-    {{/navbar.toggle}}
-    &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;Brand&lt;/a&gt;
-  &lt;/div&gt;
-  {{#navbar.content}}
-    {{#navbar.nav as |nav|}}
-      {{#nav.item}}{{#nav.link-to &quot;alert&quot;}}Alert{{/nav.link-to}}{{/nav.item}}
-      {{#nav.item}}{{#nav.link-to &quot;button&quot;}}Buttons{{/nav.link-to}}{{/nav.item}}
-      {{#nav.item}}{{#nav.link-to &quot;dropdown&quot;}}Dropdown{{/nav.link-to}}{{/nav.item}}
-      {{#nav.item}}{{#nav.link-to &quot;forms&quot;}}Forms{{/nav.link-to}}{{/nav.item}}
-      {{#nav.item}}{{#nav.link-to &quot;accordion&quot;}}Accordion{{/nav.link-to}}{{/nav.item}}
-      {{#nav.item}}{{#nav.link-to &quot;collapse&quot;}}Collapse{{/nav.link-to}}{{/nav.item}}
-      {{#nav.item}}{{#nav.link-to &quot;modal&quot;}}Modals{{/nav.link-to}}{{/nav.item}}
-      {{#nav.item}}{{#nav.link-to &quot;progress&quot;}}Progress bars{{/nav.link-to}}{{/nav.item}}
-      {{#nav.item}}{{#nav.link-to &quot;navs&quot;}}Navs{{/nav.link-to}}{{/nav.item}}
-      {{#nav.item}}{{#nav.link-to &quot;navbars&quot;}}Navbars{{/nav.link-to}}{{/nav.item}}
-    {{/navbar.nav}}
-  {{/navbar.content}}
-{{/bs-navbar}}
-</code></pre>
-<h3>Navbar styles</h3>
-<p>The component supports the default bootstrap navbar styling options &quot;default&quot; and &quot;inverse&quot; through the <code>type</code>
-property. Bootstrap navbars <a href="http://getbootstrap.com/components/#navbar-default">do not currently support justified nav links</a>,
-so those are explicitly disallowed.</p>
-<p>Other bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of
-bootstrap styles applied through the <code>class</code> attribute on the components.</p>
+    <p>Extended <code>{{link-to}}</code> component for use within Navs.</p>
 
 </div>
 
@@ -148,6 +107,7 @@ bootstrap styles applied through the <code>class</code> attribute on the compone
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
 
+            <li><a data-toggle="tab" href="#methods">Methods</a></li>
             <li><a data-toggle="tab" href="#properties">Properties</a></li>
     </ul>
 
@@ -155,29 +115,31 @@ bootstrap styles applied through the <code>class</code> attribute on the compone
         <div id="index" class="tab-pane active">
             <h2 class="off-left">Item Index</h2>
 
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method__registerWithParent" data-tablink="_registerWithParent">_registerWithParent</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#" data-tabid="#methods" data-anchor="#method__unregisterFromParent" data-tablink="_unregisterFromParent">_unregisterFromParent</a>
+
+                            </li>
+                    </ul>
+                </div>
 
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
-                            <li class="index-item property protected inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix" data-tablink="classTypePrefix">classTypePrefix</a>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property__didRegister" data-tablink="_didRegister">_didRegister</a>
 
                             </li>
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_collapsed" data-tablink="collapsed">collapsed</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_fluid" data-tablink="fluid">fluid</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_position" data-tablink="position">position</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_type" data-tablink="type">type</a>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property__parent" data-tablink="_parent">_parent</a>
 
                             </li>
                     </ul>
@@ -186,162 +148,130 @@ bootstrap styles applied through the <code>class</code> attribute on the compone
 
         </div>
 
+            <div id="methods" class="tab-pane">
+                <h2 class="off-left">Methods</h2>
+
+                    <div id="method__registerWithParent" class="method item private inherited">
+                        <h3 class="name">_registerWithParent
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentChild.html#method__registerWithParent">Mixins.ComponentChild</a>:
+                            <a href="../files/addon_mixins_component-child.js.html#l33"><code>addon&#x2F;mixins&#x2F;component-child.js:33</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Register ourself as a child at the parent component
+                    We use the <code>willRender</code> event here to also support the fastboot environment, where there is no <code>didInsertElement</code>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method__unregisterFromParent" class="method item private inherited">
+                        <h3 class="name">_unregisterFromParent
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentChild.html#method__unregisterFromParent">Mixins.ComponentChild</a>:
+                            <a href="../files/addon_mixins_component-child.js.html#l50"><code>addon&#x2F;mixins&#x2F;component-child.js:50</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Unregister from the parent component
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
 
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_classTypePrefix" class="property item protected inherited">
-                        <h3 class="name">classTypePrefix
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.TypeClass.html#property_classTypePrefix">Mixins.TypeClass</a>:
-                            <a href="../files/addon_mixins_type-class.js.html#l11"><code>addon&#x2F;mixins&#x2F;type-class.js:11</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            Prefix for the type class, e.g. "btn" for button type classes ("btn-primary2 etc.)
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_collapsed" class="property item protected">
-                        <h3 class="name">collapsed
+                    <div id="property__didRegister" class="property item private inherited">
+                        <h3 class="name">_didRegister
                             <span class="small">boolean</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-navbar.js.html#l71"><code>addon&#x2F;components&#x2F;bs-navbar.js:71</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Manages the state for the responsive menu between the toggle and the content.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_fluid" class="property item public">
-                        <h3 class="name">fluid
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-navbar.js.html#l81"><code>addon&#x2F;components&#x2F;bs-navbar.js:81</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Controls whether the wrapping div is a fluid container or not.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_position" class="property item public">
-                        <h3 class="name">position
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-navbar.js.html#l91"><code>addon&#x2F;components&#x2F;bs-navbar.js:91</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Specifies the position classes for the navbar, currently supporting none, &quot;fixed-top&quot;, &quot;fixed-bottom&quot;, and &quot;static-top&quot;.
-                    See the <a href="http://getbootstrap.com/components/#navbar-fixed-top">bootstrap docs</a> for details.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="property_type" class="property item public inherited">
-                        <h3 class="name">type
-                            <span class="small">String</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
                     
                         <div class="meta">
                                     <p>Inherited from
-                                    <a href="../classes/Mixins.TypeClass.html#property_type">Mixins.TypeClass</a>:
-                            <a href="../files/addon_mixins_type-class.js.html#l29"><code>addon&#x2F;mixins&#x2F;type-class.js:29</code></a>
+                                    <a href="../classes/Mixins.ComponentChild.html#property__didRegister">Mixins.ComponentChild</a>:
+                            <a href="../files/addon_mixins_component-child.js.html#l25"><code>addon&#x2F;mixins&#x2F;component-child.js:25</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            Property for type styling
-                    
-                    For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without "btn-" prefix)
+                            flag to check if component has already been registered
                         </div>
                     
-                            <p><strong>Default:</strong> &#x27;default&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property__parent" class="property item private inherited">
+                        <h3 class="name">_parent
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentChild.html#property__parent">Mixins.ComponentChild</a>:
+                            <a href="../files/addon_mixins_component-child.js.html#l15"><code>addon&#x2F;mixins&#x2F;component-child.js:15</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            The parent component
+                        </div>
+                    
                     
                     
                     </div>

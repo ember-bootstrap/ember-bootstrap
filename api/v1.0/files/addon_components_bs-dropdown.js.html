@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v1.0.0-alpha</span></h1>
+    <h1>API Docs <span class="small">v1.0.0-alpha.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -56,22 +56,28 @@
 import Ember from &#x27;ember&#x27;;
 import layout from &#x27;../templates/components/bs-dropdown&#x27;;
 
-const { computed, $, K: noop, run: { bind } } = Ember;
+const {
+  computed,
+  $,
+  run: { bind }
+} = Ember;
 
 /**
  Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.
  See http://getbootstrap.com/components/#dropdowns
 
- Use this component together with the yielded contextual components, a dropdown toggle (&#x60;Components.DropdownToggle&#x60; or
- &#x60;Components.DropdownButton&#x60; component) and a dropdown menu (&#x60;Components.DropdownMenu&#x60;) component:
+ Use this component together with the yielded contextual components, a dropdown toggle
+ ([Components.DropdownToggle](Components.DropdownToggle.html) or [Components.DropdownButton](Components.DropdownButton.html)
+ component) and a dropdown menu ([Components.DropdownMenu](Components.DropdownMenu.html) and
+ ([Components.DropdownMenuItem](Components.DropdownMenuItem.html) components):
 
  &#x60;&#x60;&#x60;hbs
  &lt;ul class=&quot;nav navbar-nav&quot;&gt;
    {{#bs-dropdown tagName=&quot;li&quot; as |dd|}}
      {{#dd.toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.toggle}}
-     {{#dd.menu}}
-       &lt;li&gt;{{#link-to &quot;index&quot;}}Something{{/link-to}}&lt;/li&gt;
-       &lt;li&gt;{{#link-to &quot;index&quot;}}Something different{{/link-to}}&lt;/li&gt;
+     {{#dd.menu as |ddm|}}
+       {{#ddm.item}}{{#link-to &quot;index&quot;}}Something{{/link-to}}{{/ddm.item}}
+       {{#ddm.item}}{{#link-to &quot;index&quot;}}Something different{{/link-to}}{{/ddm.item}}
      {{/dd.menu}}
    {{/bs-dropdown}}
  &lt;/ul&gt;
@@ -85,9 +91,9 @@ const { computed, $, K: noop, run: { bind } } = Ember;
  &#x60;&#x60;&#x60;hbs
  {{#bs-dropdown as |dd|}}
    {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
-   {{#dd.menu}}
-     &lt;li&gt;{{#link-to &quot;index&quot;}}Something{{/link-to}}&lt;/li&gt;
-     &lt;li&gt;{{#link-to &quot;index&quot;}}Something different{{/link-to}}&lt;/li&gt;
+   {{#dd.menu as |ddm|}}
+       {{#ddm.item}}{{#link-to &quot;index&quot;}}Something{{/link-to}}{{/ddm.item}}
+       {{#ddm.item}}{{#link-to &quot;index&quot;}}Something different{{/link-to}}{{/ddm.item}}
      {{/dd.menu}}
  {{/bs-dropdown}}
  &#x60;&#x60;&#x60;
@@ -103,9 +109,9 @@ const { computed, $, K: noop, run: { bind } } = Ember;
  {{#bs-dropdown as |dd|}}
    {{#bs-button}}Dropdown{{/bs-button}}
    {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
-   {{#dd.menu}}
-     &lt;li&gt;{{#link-to &quot;index&quot;}}Something{{/link-to}}&lt;/li&gt;
-     &lt;li&gt;{{#link-to &quot;index&quot;}}Something different{{/link-to}}&lt;/li&gt;
+   {{#dd.menu as |ddm|}}
+     {{#ddm.item}}{{#link-to &quot;index&quot;}}Something{{/link-to}}{{/ddm.item}}
+     {{#ddm.item}}{{#link-to &quot;index&quot;}}Something different{{/link-to}}{{/ddm.item}}
    {{/dd.menu}}
    {{/bs-dropdown}}
  &#x60;&#x60;&#x60;
@@ -199,7 +205,7 @@ export default Ember.Component.extend({
    * @param {*} value
    * @public
    */
-  onShow: noop,
+  onShow() {},
 
   /**
    * Action is called when dropdown is about to be hidden
@@ -208,7 +214,7 @@ export default Ember.Component.extend({
    * @param {*} value
    * @public
    */
-  onHide: noop,
+  onHide() {},
 
   actions: {
     toggleDropdown() {
@@ -282,6 +288,7 @@ export default Ember.Component.extend({
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -298,6 +305,7 @@ export default Ember.Component.extend({
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>

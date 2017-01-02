@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">v1.0.0-alpha</span></h1>
+    <h1>API Docs <span class="small">v1.0.0-alpha.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -60,7 +60,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-dropdown.js.html#l6"><code>addon&#x2F;components&#x2F;bs-dropdown.js:6</code></a>
+            Defined in: <a href="../files/addon_components_bs-dropdown.js.html#l10"><code>addon&#x2F;components&#x2F;bs-dropdown.js:10</code></a>
         </div>
 
 
@@ -70,14 +70,16 @@
 <div class="well well-small">
     <p>Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.
 See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.com/components/#dropdowns</a></p>
-<p>Use this component together with the yielded contextual components, a dropdown toggle (<code>Components.DropdownToggle</code> or
-<code>Components.DropdownButton</code> component) and a dropdown menu (<code>Components.DropdownMenu</code>) component:</p>
+<p>Use this component together with the yielded contextual components, a dropdown toggle
+(<a href="Components.DropdownToggle.html">Components.DropdownToggle</a> or <a href="Components.DropdownButton.html">Components.DropdownButton</a>
+component) and a dropdown menu (<a href="Components.DropdownMenu.html">Components.DropdownMenu</a> and
+(<a href="Components.DropdownMenuItem.html">Components.DropdownMenuItem</a> components):</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;ul class=&quot;nav navbar-nav&quot;&gt;
   {{#bs-dropdown tagName=&quot;li&quot; as |dd|}}
     {{#dd.toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.toggle}}
-    {{#dd.menu}}
-      &lt;li&gt;{{#link-to &quot;index&quot;}}Something{{/link-to}}&lt;/li&gt;
-      &lt;li&gt;{{#link-to &quot;index&quot;}}Something different{{/link-to}}&lt;/li&gt;
+    {{#dd.menu as |ddm|}}
+      {{#ddm.item}}{{#link-to &quot;index&quot;}}Something{{/link-to}}{{/ddm.item}}
+      {{#ddm.item}}{{#link-to &quot;index&quot;}}Something different{{/link-to}}{{/ddm.item}}
     {{/dd.menu}}
   {{/bs-dropdown}}
 &lt;/ul&gt;
@@ -87,9 +89,9 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
 <code>Components.DropdownButton</code> component as the toggle:</p>
 <pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown as |dd|}}
   {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
-  {{#dd.menu}}
-    &lt;li&gt;{{#link-to &quot;index&quot;}}Something{{/link-to}}&lt;/li&gt;
-    &lt;li&gt;{{#link-to &quot;index&quot;}}Something different{{/link-to}}&lt;/li&gt;
+  {{#dd.menu as |ddm|}}
+      {{#ddm.item}}{{#link-to &quot;index&quot;}}Something{{/link-to}}{{/ddm.item}}
+      {{#ddm.item}}{{#link-to &quot;index&quot;}}Something different{{/link-to}}{{/ddm.item}}
     {{/dd.menu}}
 {{/bs-dropdown}}
 </code></pre>
@@ -100,9 +102,9 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
 <pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown as |dd|}}
   {{#bs-button}}Dropdown{{/bs-button}}
   {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
-  {{#dd.menu}}
-    &lt;li&gt;{{#link-to &quot;index&quot;}}Something{{/link-to}}&lt;/li&gt;
-    &lt;li&gt;{{#link-to &quot;index&quot;}}Something different{{/link-to}}&lt;/li&gt;
+  {{#dd.menu as |ddm|}}
+    {{#ddm.item}}{{#link-to &quot;index&quot;}}Something{{/link-to}}{{/ddm.item}}
+    {{#ddm.item}}{{#link-to &quot;index&quot;}}Something different{{/link-to}}{{/ddm.item}}
   {{/dd.menu}}
   {{/bs-dropdown}}
 </code></pre>
@@ -231,7 +233,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l192"><code>addon&#x2F;components&#x2F;bs-dropdown.js:192</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l198"><code>addon&#x2F;components&#x2F;bs-dropdown.js:198</code></a>
                             </p>
                     
                     
@@ -283,7 +285,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l97"><code>addon&#x2F;components&#x2F;bs-dropdown.js:97</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l103"><code>addon&#x2F;components&#x2F;bs-dropdown.js:103</code></a>
                             </p>
                     
                     
@@ -313,7 +315,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l87"><code>addon&#x2F;components&#x2F;bs-dropdown.js:87</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l93"><code>addon&#x2F;components&#x2F;bs-dropdown.js:93</code></a>
                             </p>
                     
                     
@@ -344,7 +346,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l116"><code>addon&#x2F;components&#x2F;bs-dropdown.js:116</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l122"><code>addon&#x2F;components&#x2F;bs-dropdown.js:122</code></a>
                             </p>
                     
                     
@@ -374,7 +376,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l106"><code>addon&#x2F;components&#x2F;bs-dropdown.js:106</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l112"><code>addon&#x2F;components&#x2F;bs-dropdown.js:112</code></a>
                             </p>
                     
                     
@@ -405,7 +407,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l77"><code>addon&#x2F;components&#x2F;bs-dropdown.js:77</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l83"><code>addon&#x2F;components&#x2F;bs-dropdown.js:83</code></a>
                             </p>
                     
                     
@@ -436,7 +438,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l132"><code>addon&#x2F;components&#x2F;bs-dropdown.js:132</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l138"><code>addon&#x2F;components&#x2F;bs-dropdown.js:138</code></a>
                             </p>
                     
                     
@@ -468,7 +470,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l149"><code>addon&#x2F;components&#x2F;bs-dropdown.js:149</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l155"><code>addon&#x2F;components&#x2F;bs-dropdown.js:155</code></a>
                             </p>
                     
                     
@@ -510,7 +512,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l140"><code>addon&#x2F;components&#x2F;bs-dropdown.js:140</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l146"><code>addon&#x2F;components&#x2F;bs-dropdown.js:146</code></a>
                             </p>
                     
                     
@@ -562,6 +564,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -578,6 +581,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
