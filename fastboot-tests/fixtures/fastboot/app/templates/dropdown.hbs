@@ -2,8 +2,8 @@
 
 {{#bs-dropdown id="dropdown" as |dd|}}
     {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
-    {{#dd.menu}}
-        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-        <li>{{#link-to "dropdown"}}Dropdowns{{/link-to}}</li>
+    {{#dd.menu as |ddm|}}
+        {{#ddm.item}}{{#link-to "index"}}Home{{/link-to}}{{/ddm.item}}
+        {{#ddm.item}}{{#link-to "dropdown"}}Dropdowns{{/link-to}}{{/ddm.item}}
     {{/dd.menu}}
 {{/bs-dropdown}}
