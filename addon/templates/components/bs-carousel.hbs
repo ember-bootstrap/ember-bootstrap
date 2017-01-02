@@ -1,0 +1,25 @@
+<div id="{{carouselId}}" class="carousel slide" style={{style}}>
+
+    {{#if showIndicators}}
+        <ol id="indicator-{{carouselId}}" class="carousel-indicators">
+
+        </ol>
+    {{/if}}
+
+    <div class="carousel-inner" role="listbox">
+        {{yield (hash
+                        slide=(component 'bs-carousel/slide' addSlide=(action "addSlide"))
+                )
+        }}
+    </div>
+
+    <a class="left carousel-control" onclick={{action "prev"}} role="button">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+
+    <a class="right carousel-control" onclick={{action "next"}} role="button">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>

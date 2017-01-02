@@ -19,15 +19,28 @@ In your application's directory:
 
     ember install ember-bootstrap
     
-Beginning from version 1.0 ember-bootstrap will require at least Ember 2.3!
+### 1.0 alpha
+    
+The 1.0 release is currently in alpha stage. While the API is not guaranteed to remain unchanged until the first stable release, 
+breaking changes are unlikely. So I encourage everybody to use the alpha version for new projects, and also to upgrade existing projects:
+    
+    ember install ember-bootstrap@1.0.0-alpha    
+    
+The 1.0 release will consist of a number of breaking changes compared to the previous 0.x releases, so be sure to check the 
+[CHANGELOG](CHANGELOG.md) for details. After the first stable 1.0 release the API should remain stable according to SemVer.    
 
-## Changelog
+Beginning from version 1.0 ember-bootstrap will require at least Ember 2.3! Please file any issues you may encounter!
 
-See [CHANGELOG](CHANGELOG.md) for the list of changes.
+## Updates
+
+See [CHANGELOG](CHANGELOG.md) for the list of all changes.
+
+If you want to keep up to date with ember-bootstrap, you may want to [follow me on Twitter](https://twitter.com/simonihmig). 
 
 ## Authors
 
-[Simon Ihmig](https://github.com/simonihmig) @ [kaliber5](http://www.kaliber5.de)
+[Simon Ihmig](https://github.com/simonihmig)@[kaliber5](http://www.kaliber5.de) & [Contributors](https://github.com/kaliber5/ember-bootstrap/graphs/contributors)
+
 
 ## Copyright and license
 
