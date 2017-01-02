@@ -1,3 +1,21 @@
+<a name="1.0.0-alpha.1"></a>
+# [1.0.0-alpha.1](https://github.com/kaliber5/ember-bootstrap/compare/v1.0.0-alpha...v1.0.0-alpha.1) (2017-01-02)
+
+
+### Bug Fixes
+
+* **Form:** Restore the label for a checkbox in vertical layout
+* **Modal:** added guard to double invocation of show/hide methods ([eb63088](https://github.com/kaliber5/ember-bootstrap/commit/eb63088))
+
+
+### Features
+
+* **Dropdown:** menu item component is yielded as a contextual component from DropdownMenu ([55e508f](https://github.com/kaliber5/ember-bootstrap/commit/55e508f))
+* **Form:** FormGroup component is yielded as a contextual component from Form ([0941946](https://github.com/kaliber5/ember-bootstrap/commit/0941946)), closes [#186](https://github.com/kaliber5/ember-bootstrap/issues/186)
+* **Nav:** added contextual link-to component ([8c7d2b5](https://github.com/kaliber5/ember-bootstrap/commit/8c7d2b5))
+
+
+
 <a name="1.0.0-alpha"></a>
 # [1.0.0-alpha](https://github.com/kaliber5/ember-bootstrap/compare/v0.11.3...v1.0.0-alpha) (2016-12-27)
 
