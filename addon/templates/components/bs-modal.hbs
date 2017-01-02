@@ -12,7 +12,7 @@
     }}
         {{yield
             (hash
-                header=(component "bs-modal/header" title=title closeButton=closeButton onClose=(action "close"))
+                header=(component "bs-modal/header" title=title onClose=(action "close"))
                 body=(component "bs-modal/body")
                 footer=(component "bs-modal/footer" onClose=(action "close") onSubmit=(action "submit"))
                 close=(action "close")
