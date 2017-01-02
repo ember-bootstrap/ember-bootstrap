@@ -9,15 +9,15 @@ const { isPresent } = Ember;
 
  ### Usage
 
- Use in combination with the yielded [Components.NavItem](Components.NavItem.html) component:
+ Use in combination with the yielded [Components.NavItem](Components.NavItem.html) and [Components.NavLink](Components.NavLink.html) components:
 
  ```hbs
  {{#bs-nav type="pills" as |nav|}}
    {{#nav.item}}
-      {{#link-to "foo"}}Foo{{/link-to}}
+      {{#nav.link-to "foo"}}Foo{{/nav.link-to}}
    {{/nav.item}}
    {{#nav.item}}
-     {{#link-to "bar"}}Bar{{/link-to}}
+     {{#nav.link-to "bar"}}Bar{{/nav.link-to}}
    {{/nav.item}}
  {{/bs-nav}}
  ```
@@ -40,7 +40,7 @@ const { isPresent } = Ember;
 
  ```hbs
  {{#bs-nav type="pills" as |nav|}}
-   {{#nav.item}}{{#link-to "index"}}Home{{/link-to}}{{/nav.item}}
+   {{#nav.item}}{{#nav.link-to "index"}}Home{{/nav.link-to}}{{/nav.item}}
    {{#bs-dropdown tagName="li" as |dd|}}
      {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
      {{#dd.menu}}
