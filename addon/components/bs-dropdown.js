@@ -1,22 +1,28 @@
 import Ember from 'ember';
 import layout from '../templates/components/bs-dropdown';
 
-const { computed, $, K: noop, run: { bind } } = Ember;
+const {
+  computed,
+  $,
+  run: { bind }
+} = Ember;
 
 /**
  Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.
  See http://getbootstrap.com/components/#dropdowns
 
- Use this component together with the yielded contextual components, a dropdown toggle (`Components.DropdownToggle` or
- `Components.DropdownButton` component) and a dropdown menu (`Components.DropdownMenu`) component:
+ Use this component together with the yielded contextual components, a dropdown toggle
+ ([Components.DropdownToggle](Components.DropdownToggle.html) or [Components.DropdownButton](Components.DropdownButton.html)
+ component) and a dropdown menu ([Components.DropdownMenu](Components.DropdownMenu.html) and
+ ([Components.DropdownMenuItem](Components.DropdownMenuItem.html) components):
 
  ```hbs
  <ul class="nav navbar-nav">
    {{#bs-dropdown tagName="li" as |dd|}}
      {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-     {{#dd.menu}}
-       <li>{{#link-to "index"}}Something{{/link-to}}</li>
-       <li>{{#link-to "index"}}Something different{{/link-to}}</li>
+     {{#dd.menu as |ddm|}}
+       {{#ddm.item}}{{#link-to "index"}}Something{{/link-to}}{{/ddm.item}}
+       {{#ddm.item}}{{#link-to "index"}}Something different{{/link-to}}{{/ddm.item}}
      {{/dd.menu}}
    {{/bs-dropdown}}
  </ul>
@@ -30,9 +36,9 @@ const { computed, $, K: noop, run: { bind } } = Ember;
  ```hbs
  {{#bs-dropdown as |dd|}}
    {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
-   {{#dd.menu}}
-     <li>{{#link-to "index"}}Something{{/link-to}}</li>
-     <li>{{#link-to "index"}}Something different{{/link-to}}</li>
+   {{#dd.menu as |ddm|}}
+       {{#ddm.item}}{{#link-to "index"}}Something{{/link-to}}{{/ddm.item}}
+       {{#ddm.item}}{{#link-to "index"}}Something different{{/link-to}}{{/ddm.item}}
      {{/dd.menu}}
  {{/bs-dropdown}}
  ```
@@ -48,9 +54,9 @@ const { computed, $, K: noop, run: { bind } } = Ember;
  {{#bs-dropdown as |dd|}}
    {{#bs-button}}Dropdown{{/bs-button}}
    {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
-   {{#dd.menu}}
-     <li>{{#link-to "index"}}Something{{/link-to}}</li>
-     <li>{{#link-to "index"}}Something different{{/link-to}}</li>
+   {{#dd.menu as |ddm|}}
+     {{#ddm.item}}{{#link-to "index"}}Something{{/link-to}}{{/ddm.item}}
+     {{#ddm.item}}{{#link-to "index"}}Something different{{/link-to}}{{/ddm.item}}
    {{/dd.menu}}
    {{/bs-dropdown}}
  ```
@@ -144,7 +150,7 @@ export default Ember.Component.extend({
    * @param {*} value
    * @public
    */
-  onShow: noop,
+  onShow() {},
 
   /**
    * Action is called when dropdown is about to be hidden
@@ -153,7 +159,7 @@ export default Ember.Component.extend({
    * @param {*} value
    * @public
    */
-  onHide: noop,
+  onHide() {},
 
   actions: {
     toggleDropdown() {

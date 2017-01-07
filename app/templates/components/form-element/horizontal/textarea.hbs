@@ -1,13 +1,13 @@
 {{#if hasLabel}}
     <label class="control-label {{horizontalLabelGridClass}} {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
     <div class="{{horizontalInputGridClass}}">
-        <textarea class="form-control" cols={{cols}} rows={{rows}} oninput={{action "change" value="target.value"}} id={{formElementId}} name={{name}} placeholder={{placeholder}} autofocus={{autofocus}} disabled={{disabled}} readonly={{if readonly "readonly"}} required={{required}}>{{value}}</textarea>
+        <textarea class="form-control" cols={{cols}} rows={{rows}} oninput={{action "change" value="target.value"}} onchange={{action "change" value="target.value"}} id={{formElementId}} name={{name}} placeholder={{placeholder}} autofocus={{autofocus}} disabled={{disabled}} readonly={{if readonly "readonly"}} required={{required}}>{{value}}</textarea>
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
     </div>
 {{else}}
     <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
-        <textarea class="form-control" cols={{cols}} rows={{rows}} oninput={{action "change" value="target.value"}} id={{formElementId}} name={{name}} placeholder={{placeholder}} autofocus={{autofocus}} disabled={{disabled}} readonly={{if readonly "readonly"}} required={{required}}>{{value}}</textarea>
+        <textarea class="form-control" cols={{cols}} rows={{rows}} oninput={{action "change" value="target.value"}} onchange={{action "change" value="target.value"}} id={{formElementId}} name={{name}} placeholder={{placeholder}} autofocus={{autofocus}} disabled={{disabled}} readonly={{if readonly "readonly"}} required={{required}}>{{value}}</textarea>
         {{partial "components/form-element/feedback-icon"}}
         {{partial "components/form-element/errors"}}
     </div>

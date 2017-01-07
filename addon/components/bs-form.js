@@ -3,7 +3,6 @@ import layout from '../templates/components/bs-form';
 
 const {
   computed,
-  K: noop,
   RSVP,
   set,
   assert,
@@ -17,11 +16,11 @@ const {
   You can use whatever markup you like within the form:
 
  ```handlebars
-   {{#bs-form action="submit"}}
-     {{#bs-form-group validation=firstNameValidation}}
+   {{#bs-form onSubmit=(action "submit") as |form|}}
+     {{#form.group validation=firstNameValidation}}
        <label class="control-label">First name</label>
        <input value={{firstname}} class="form-control" oninput={{action (mut firstname) value="target.value"}} type="text">
-    {{/bs-form-group}}
+    {{/form.group}}
   {{/bs-form}}
   ```
 
@@ -30,11 +29,11 @@ const {
 
   ### Submitting the form
 
-  When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the default action
-  will be sent to the controller.
-  In case the form supports validation (see "Form validation" below), the "before" action is called (which allows you to
-  do e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the "invalid"
-  action is sent instead of the default "action".
+  When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the `onSubmit` action
+  will be sent to the controller or parent component.
+  In case the form supports validation (see "Form validation" below), the `onBefore` action is called (which allows you to
+  do e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the `onInvalid`
+  action is sent instead of `onSubmit`.
 
   ### Use with Components.FormElement
 
@@ -45,7 +44,7 @@ const {
   with an invalid validation, or when focusing out of invalid inputs
 
   ```handlebars
-  {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
+  {{#bs-form formLayout="horizontal" model=this onSubmit=(action "submit") as |form|}}
     {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
     {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
     {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
@@ -178,7 +177,7 @@ export default Ember.Component.extend({
    * @return {Promise}
    * @public
    */
-  validate: noop,
+  validate() {},
 
   /**
    * @property showAllValidations
@@ -195,7 +194,7 @@ export default Ember.Component.extend({
    * @param Object model  The form's `model`
    * @public
    */
-  onBefore: noop,
+  onBefore() {},
 
   /**
    * Action is called when submit has been triggered and the model has passed all validations (if present).
@@ -205,7 +204,7 @@ export default Ember.Component.extend({
    * @param Object result The returned result from the validate method, if validation is available
    * @public
    */
-  onSubmit: noop,
+  onSubmit() {},
 
   /**
    * Action is called when validation of the model has failed.
@@ -214,7 +213,7 @@ export default Ember.Component.extend({
    * @param Object error
    * @public
    */
-  onInvalid: noop,
+  onInvalid() {},
 
   /**
    * Submit handler that will send the default action ("action") to the controller when submitting the form.

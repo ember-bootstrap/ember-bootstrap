@@ -3,7 +3,10 @@ import layout from '../templates/components/bs-button';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
 
-const { computed, observer, K: noop } = Ember;
+const {
+  computed,
+  observer
+} = Ember;
 
 /**
  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -225,7 +228,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
    * @param {*} value
    * @public
    */
-  onClick: noop,
+  onClick() {},
 
   /**
    * This will reset the state property to 'default', and with that the button's label to defaultText

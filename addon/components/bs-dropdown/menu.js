@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from '../../templates/components/bs-dropdown/menu';
 
 const { computed } = Ember;
 
@@ -13,6 +14,7 @@ const { computed } = Ember;
  @public
  */
 export default Ember.Component.extend({
+  layout,
 
   /**
    * Defaults to a `<ul>` tag. Change for other types of dropdown menus.

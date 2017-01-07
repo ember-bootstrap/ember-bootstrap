@@ -1,7 +1,7 @@
 <h1>nav</h1>
 
 {{#bs-nav id="nav" as |nav|}}
-    {{#nav.item}}{{#link-to "alert"}}Alert{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "button"}}Buttons{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/nav.item}}
+    {{#nav.item}}{{#nav.link-to "alert"}}Alert{{/nav.link-to}}{{/nav.item}}
+    {{#nav.item}}{{#nav.link-to "button"}}Buttons{{/nav.link-to}}{{/nav.item}}
+    {{#nav.item}}{{#nav.link-to "dropdown"}}Dropdown{{/nav.link-to}}{{/nav.item}}
 {{/bs-nav}}

@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import layout from '../../templates/components/bs-modal/header';
 
-const { K } = Ember;
-
 /**
 
  Modal header element used within [Components.Modal](Components.Modal.html) components. See there for examples.
@@ -40,6 +38,6 @@ export default Ember.Component.extend({
    * @event onClose
    * @public
    */
-  onClose: K
+  onClose() {}
 
 });

@@ -4,7 +4,11 @@ import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import TabPane from './bs-tab/pane';
 import listenTo from '../utils/listen-to-cp';
 
-const { computed, isPresent, A, K: noop } = Ember;
+const {
+  computed,
+  isPresent,
+  A
+} = Ember;
 
 /**
  Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,
@@ -93,8 +97,8 @@ const { computed, isPresent, A, K: noop } = Ember;
  ```hbs
  <div>
    {{#bs-nav type="tabs" as |nav|}}
-     {{#nav.item}}{{#link-to "tabs.index"}}Tab 1{{/link-to}}{{/nav.item}}
-     {{#nav.item}}{{#link-to "tabs.other"}}Tab 2{{/link-to}}{{/nav.item}}
+     {{#nav.item}}{{#nav.link-to "tabs.index"}}Tab 1{{/nav.link-to}}{{/nav.item}}
+     {{#nav.item}}{{#nav.link-to "tabs.other"}}Tab 2{{/nav.link-to}}{{/nav.item}}
    {{/bs-nav}}
    {{outlet}}
  </div>
@@ -189,7 +193,7 @@ export default Ember.Component.extend(ComponentParent, {
    * @event onChange
    * @public
    */
-  onChange: noop,
+  onChange() {},
 
   /**
    * All `TabPane` child components

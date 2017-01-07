@@ -1,6 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import BootstrapLinktoInitializer from 'ember-bootstrap/initializers/bootstrap-linkto';
 import startApp from '../../../helpers/start-app';
 import destroyApp from '../../../helpers/destroy-app';
 
@@ -37,11 +36,10 @@ test('can be active', function(assert) {
 test('active link makes nav item active', function(assert) {
 
   let application = startApp();
-  BootstrapLinktoInitializer.initialize(application);
 
   this.render(hbs`
     {{#bs-nav/item}}
-      {{#link-to "application" active="foo"}}Test{{/link-to}}
+      {{#bs-nav/link-to "application" active="foo"}}Test{{/bs-nav/link-to}}
     {{/bs-nav/item}}
   `);
   assert.ok(this.$('li').hasClass('active'), 'has active class');
@@ -51,11 +49,10 @@ test('active link makes nav item active', function(assert) {
 test('disabled link makes nav item disabled', function(assert) {
 
   let application = startApp();
-  BootstrapLinktoInitializer.initialize(application);
 
   this.render(hbs`
     {{#bs-nav/item}}
-      {{#link-to "application" disabled="foo"}}Test{{/link-to}}
+      {{#bs-nav/link-to "application" disabled="foo"}}Test{{/bs-nav/link-to}}
     {{/bs-nav/item}}
   `);
   assert.ok(this.$('li').hasClass('disabled'), 'has disabled class');
