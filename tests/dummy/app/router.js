@@ -26,6 +26,8 @@ Router.map(function() {
     });
   });
   this.route('components');
+  this.route('getting-started');
+  this.route('license');
 });
 
 export default Router;
