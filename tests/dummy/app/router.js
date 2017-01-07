@@ -7,7 +7,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('demo', function() {
+  this.route('demo', { path: '/components' }, function() {
     this.route('dropdown');
     this.route('button');
     this.route('button-group');
@@ -25,7 +25,6 @@ Router.map(function() {
       this.route('other');
     });
   });
-  this.route('components');
   this.route('getting-started');
   this.route('license');
   this.route('changelog');

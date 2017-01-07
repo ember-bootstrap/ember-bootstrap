@@ -9,9 +9,14 @@
     </div>
 {{/if}}
 <ul class="list-group">
-    {{#if apiUrl}}
-        <li class="list-group-item"><a href={{apiUrl}}>API Docs</a></li>
-    {{/if}}
+    <li class="list-group-item">
+        {{#if apiUrl}}
+            <a href={{apiUrl}}>API 1.x Docs</a>
+        {{/if}}
+        {{#if apiUnstableUrl}}
+            <a href={{apiUnstableUrl}} class="pull-right">API 0.x Docs</a><
+        {{/if}}
+    </li>
     {{#if bsUrl}}
         <li class="list-group-item"><a href={{bsUrl}} target="_blank">Bootstrap Docs</a></li>
     {{/if}}

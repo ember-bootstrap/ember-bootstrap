@@ -8,6 +8,11 @@ export default Ember.Controller.extend({
   currentRouteName: computed.readOnly('application.currentRouteName'),
 
   currentComponent: computed('currentRouteName', function() {
-    return this.get('component.models').findBy('demoRoute', this.get('currentRouteName'));
+    let routeName = this.get('currentRouteName');
+    let routeParts = routeName.split('.');
+    if (routeParts.length > 2) {
+      routeName = routeParts.slice(0, 2).join('.');
+    }
+    return this.get('component.models').findBy('demoRoute', routeName);
   })
 });

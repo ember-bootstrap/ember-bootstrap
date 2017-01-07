@@ -11,12 +11,13 @@
     {{#navbar.content}}
         {{#navbar.nav as |nav|}}
             {{#nav.item}}{{#link-to "getting-started"}}Getting Started{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "components"}}Components{{/link-to}}{{/nav.item}}
-            {{#nav.item}}<a href="//kaliber5.github.io/ember-bootstrap/api">API</a>{{/nav.item}}
-            {{#nav.item}}{{#link-to "demo"}}Demo{{/link-to}}{{/nav.item}}
+            {{#nav.item}}{{#link-to "demo"}}Components{{/link-to}}{{/nav.item}}
+            {{#nav.item}}<a href="//kaliber5.github.io/ember-bootstrap/api/v1.0">API v1.x</a>{{/nav.item}}
+            {{#nav.item}}<a href="//kaliber5.github.io/ember-bootstrap/api">API v0.x</a>{{/nav.item}}
         {{/navbar.nav}}
         {{#navbar.nav class="navbar-right" as |nav|}}
             {{#nav.item}}<a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a>{{/nav.item}}
+            {{#nav.item}}<a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a>{{/nav.item}}
         {{/navbar.nav}}
     {{/navbar.content}}
 {{/bs-navbar}}
