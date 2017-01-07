@@ -7,6 +7,8 @@ export default Ember.Controller.extend({
   component: inject.service(),
   currentRouteName: computed.readOnly('application.currentRouteName'),
 
+  isDetailPage: computed.notEmpty('currentComponent'),
+
   currentComponent: computed('currentRouteName', function() {
     let routeName = this.get('currentRouteName');
     let routeParts = routeName.split('.');

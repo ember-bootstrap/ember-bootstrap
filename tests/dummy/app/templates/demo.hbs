@@ -11,6 +11,7 @@
     </div>
     <div class="col-sm-8 col-sm-pull-4 col-md-9 col-md-pull-3">
 
+        {{#if isDetailPage}}
         <h1>{{currentComponent.title}}</h1>
 
         <div class="row">
@@ -31,6 +32,8 @@
             These examples refer to the current ember-bootstrap 1.0 API. If you are still using any 0.x version, then please
             check the old <a href={{currentComponent.apiUnstableUrl}}>API docs</a>!
         {{/bs-alert}}
+
+        {{/if}}
 
         {{outlet}}
     </div>
