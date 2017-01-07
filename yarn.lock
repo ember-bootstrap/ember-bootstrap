@@ -2366,6 +2366,12 @@ ember-load-initializers@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/ember-load-initializers/-/ember-load-initializers-0.5.1.tgz#76e3db23c111dbdcd3ae6f687036bf0b56be0cbe"
 
+ember-markdown-it@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/ember-markdown-it/-/ember-markdown-it-0.0.5.tgz#f2626c4d9bcb869425e484e7135049340eac8465"
+  dependencies:
+    ember-cli-babel "^5.1.7"
+
 ember-qunit@^2.0.0-beta.1:
   version "2.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/ember-qunit/-/ember-qunit-2.0.0-beta.1.tgz#f6b815e51e253bfa662e3915da4b093681d8c5e2"

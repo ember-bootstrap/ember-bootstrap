@@ -28,6 +28,7 @@ Router.map(function() {
   this.route('components');
   this.route('getting-started');
   this.route('license');
+  this.route('changelog');
 });
 
 export default Router;
