@@ -15,11 +15,6 @@ export default Ember.Object.extend({
 
   apiUrl: computed('nameSpace', 'className', function() {
     let { nameSpace, className } = this.getProperties('nameSpace', 'className');
-    return `${config.rootURL}api/v1.0/classes/${nameSpace}.${className}.html`;
-  }),
-
-  apiUnstableUrl: computed('nameSpace', 'className', function() {
-    let { nameSpace, className } = this.getProperties('nameSpace', 'className');
     return `${config.rootURL}api/classes/${nameSpace}.${className}.html`;
   }),
 
