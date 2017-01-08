@@ -27,7 +27,7 @@ gulp.task('docs:publish', ['docs:api', 'docs:app'], function() {
     .pipe(ghPages());
 });
 
-gulp.task('docs:changelog', function() {
+gulp.task('changelog', function() {
   return gulp.src('CHANGELOG.md')
     .pipe(conventionalChangelog({
       preset: 'angular'
