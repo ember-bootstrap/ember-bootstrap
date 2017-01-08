@@ -599,7 +599,7 @@ export default Component.extend(TransitionSupport, {
    * @param pos
    * @param actualWidth
    * @param actualHeight
-   * @returns {{top: number, left: number}}
+   * @return {{top: number, left: number}}
    * @private
    */
   getViewportAdjustedDelta(placement, pos, actualWidth, actualHeight) {
