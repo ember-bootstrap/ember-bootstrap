@@ -7,7 +7,7 @@ module.exports = {
   beforeCommit: function(project, versions) {
     var gulp = require('gulp');
     require('../gulpfile.js');
-    var start = RSVP.denodeify(gulp.start);
+    var start = RSVP.denodeify(gulp.start.bind(gulp));
     return start('changelog');
   }
 };
