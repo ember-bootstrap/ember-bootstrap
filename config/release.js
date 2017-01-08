@@ -8,6 +8,6 @@ module.exports = {
     var gulp = require('gulp');
     require('../gulpfile.js');
     var start = RSVP.denodeify(gulp.start);
-    return start('changelog'));
+    return start('changelog');
   }
 };
