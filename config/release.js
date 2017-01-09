@@ -31,6 +31,17 @@ module.exports = {
         project.ui.stopProgress();
         return promptForCompletion(project);
       });
+  },
+  afterPush: function(project, versions) {
+    var gulp = require('gulp');
+    require('../gulpfile.js');
+    var start = RSVP.denodeify(gulp.start.bind(gulp));
+
+    project.ui.startProgress('Updating docs...');
+    return start('docs')
+      .then(function() {
+        project.ui.stopProgress();
+      });
   }
 };
 
