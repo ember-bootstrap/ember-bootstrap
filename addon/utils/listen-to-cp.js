@@ -8,6 +8,7 @@ const { computed, getWithDefault } = Ember;
  *
  * Kudos to @fsmanuel for coming up with this solution.
  *
+ * @function
  * @return {boolean}
  * @param {string} dependentKey
  * @param {*} defaultValue

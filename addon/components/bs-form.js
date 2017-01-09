@@ -173,6 +173,7 @@ export default Ember.Component.extend({
    * Validate hook which will return a promise that will either resolve if the model is valid
    * or reject if it's not. This should be overridden to add validation support.
    *
+   * @methoid validate
    * @param {Object} model
    * @return {Promise}
    * @public
