@@ -1,0 +1,26 @@
+{
+  "dependencies": {},
+  "fastboot": {
+    "moduleWhitelist": [],
+    "manifest": {
+      "appFile": "fastboot/dummy-9f2e753df54e8c9e4412515ca4db8816.js",
+      "vendorFile": "fastboot/vendor-3cdc57cd7d7f9509070f4eab36cf4d67.js",
+      "htmlFile": "index.html"
+    },
+    "appConfig": {
+      "modulePrefix": "dummy",
+      "environment": "production",
+      "rootURL": "/ember-bootstrap/",
+      "locationType": "hash",
+      "EmberENV": {
+        "FEATURES": {}
+      },
+      "APP": {
+        "name": "ember-bootstrap",
+        "version": "1.0.0-alpha.1+9ea795d3",
+        "autoboot": false
+      },
+      "exportApplicationGlobal": false
+    }
+  }
+}

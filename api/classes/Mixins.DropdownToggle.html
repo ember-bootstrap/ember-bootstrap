@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>Mixins.DropdownToggle - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,24 +22,26 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+            <a href="/" class="navbar-brand">ember-bootstrap</a>
         </div>
         <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="navbar-nav nav">
-                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
-                <li><a href="/ember-bootstrap/components">Components</a></li>
-                <li><a href="/ember-bootstrap/api">API</a></li>
+                <li><a href="/#/getting-started">Getting Started</a></li>
+                <li><a href="/#/components">Components</a></li>
+                <li><a href="/api">API v1.0</a></li>
+                <li><a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a></li>
 
             </ul>
             <ul class="navbar-nav nav navbar-right">
                 <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.11.3.c321ebf7</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.1.9ea795d3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -56,7 +57,7 @@
 
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_mixins_dropdown-toggle.js.html#l4"><code>addon&#x2F;mixins&#x2F;dropdown-toggle.js:4</code></a>
+            Defined in: <a href="../files/addon_mixins_dropdown-toggle.js.html#l5"><code>addon&#x2F;mixins&#x2F;dropdown-toggle.js:5</code></a>
         </div>
 
 
@@ -110,11 +111,11 @@
 
                     <ul class="index-list properties">
                             <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_action" data-tablink="action">action</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_ariaRole" data-tablink="ariaRole">ariaRole</a>
 
                             </li>
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_ariaRole" data-tablink="ariaRole">ariaRole</a>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_dropdown" data-tablink="dropdown">dropdown</a>
 
                             </li>
                     </ul>
@@ -127,37 +128,6 @@
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_action" class="property item protected">
-                        <h3 class="name">action
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_mixins_dropdown-toggle.js.html#l24"><code>addon&#x2F;mixins&#x2F;dropdown-toggle.js:24</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The default action is set to "toggleDropdown" on the parent <a href="../classes/Components.Dropdown.html" class="crosslink">Components.Dropdown</a></p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> toggleDropdown</p>
-                    
-                    
-                    </div>
                     <div id="property_ariaRole" class="property item protected">
                         <h3 class="name">ariaRole
                             <span class="small">string</span>
@@ -174,7 +144,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_mixins_dropdown-toggle.js.html#l14"><code>addon&#x2F;mixins&#x2F;dropdown-toggle.js:14</code></a>
+                            <a href="../files/addon_mixins_dropdown-toggle.js.html#l15"><code>addon&#x2F;mixins&#x2F;dropdown-toggle.js:15</code></a>
                             </p>
                     
                     
@@ -185,6 +155,36 @@
                         </div>
                     
                             <p><strong>Default:</strong> button</p>
+                    
+                    
+                    </div>
+                    <div id="property_dropdown" class="property item private">
+                        <h3 class="name">dropdown
+                            <span class="small">{Components.Dropdown}</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_mixins_dropdown-toggle.js.html#l23"><code>addon&#x2F;mixins&#x2F;dropdown-toggle.js:23</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Reference to the parent dropdown component</p>
+                    
+                        </div>
+                    
                     
                     
                     </div>
@@ -206,43 +206,44 @@
                     <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
                     <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
                     <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
                     <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
                     <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li class="nav-private"><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>
     </div>

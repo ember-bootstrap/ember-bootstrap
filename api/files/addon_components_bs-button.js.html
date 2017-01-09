@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>addon/components/bs-button.js - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,24 +22,26 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+            <a href="/" class="navbar-brand">ember-bootstrap</a>
         </div>
         <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="navbar-nav nav">
-                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
-                <li><a href="/ember-bootstrap/components">Components</a></li>
-                <li><a href="/ember-bootstrap/api">API</a></li>
+                <li><a href="/#/getting-started">Getting Started</a></li>
+                <li><a href="/#/components">Components</a></li>
+                <li><a href="/api">API v1.0</a></li>
+                <li><a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a></li>
 
             </ul>
             <ul class="navbar-nav nav navbar-right">
                 <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.11.3.c321ebf7</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.1.9ea795d3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,11 +54,14 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import layout from &#x27;../templates/components/bs-button&#x27;;
 import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
 import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
-import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
 
-const { computed, observer, typeOf } = Ember;
+const {
+  computed,
+  observer
+} = Ember;
 
 /**
  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -67,20 +71,18 @@ const { computed, observer, typeOf } = Ember;
 
  &#x60;&#x60;&#x60;hbs
  {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
- Downloads
+   Downloads
  {{/bs-button}}
  &#x60;&#x60;&#x60;
 
  ### Actions
 
- Set the action property of the component to send an action to your controller. The following parameters will be sent:
- * value: the button&#x27;s value, see the &#x60;value&#x60; property
- * event: the browsers event object
- * callback: a function that may be called from the action handler to supply a Promise to the button component for automatic state handling
+ Use the &#x60;onClick&#x60; property of the component to send an action to your controller. It will receive the button&#x27;s value
+ (see the &#x60;value&#x60; property) as an argument.
 
  &#x60;&#x60;&#x60;hbs
- {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; action=&quot;download&quot;}}
- Download
+ {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; onClick=(action &quot;download&quot;)}}
+   Download
  {{/bs-button}}
  &#x60;&#x60;&#x60;
 
@@ -106,9 +108,9 @@ const { computed, observer, typeOf } = Ember;
 
  ### Promise support for automatic state change
 
- When returning a Promise for any asynchronous operation from the click closure action the button will
- manage its &#x60;textState&#x60; property automatically, changing its value according to the state of the promise:
- &quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;
+ When returning a Promise for any asynchronous operation from the &#x60;onClick&#x60; closure action the button will
+ manage an internal state (&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;) automatically, changing its label according to the state of the promise:
+
 
  &#x60;&#x60;&#x60;hbs
  {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=(action &quot;download&quot;)}}
@@ -116,9 +118,9 @@ const { computed, observer, typeOf } = Ember;
 
  &#x60;&#x60;&#x60;js
  // controller.js
-export default Ember.Controller.extend({
+ export default Ember.Controller.extend({
    actions: {
-     download(actionParam, evt) {
+     download(value) {
        return new Ember.RSVP.Promise(...);
      }
    }
@@ -132,7 +134,8 @@ export default Ember.Controller.extend({
  @uses Mixins.SizeClass
  @public
  */
-export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
+export default Ember.Component.extend(TypeClass, SizeClass, {
+  layout,
   tagName: &#x27;button&#x27;,
   classNames: [&#x27;btn&#x27;],
   classNameBindings: [&#x27;active&#x27;, &#x27;block:btn-block&#x27;],
@@ -196,16 +199,6 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
    * @public
    */
   block: false,
-
-  /**
-   * If toggle property is true, clicking the button will toggle the active state
-   *
-   * @property toggle
-   * @type boolean
-   * @default false
-   * @public
-   */
-  toggle: false,
 
   /**
    * If button is active and this is set, the icon property will match this property
@@ -283,6 +276,16 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
   title: null,
 
   /**
+   * When clicking the button this action is called with the value of the button (that is the value of the &quot;value&quot; property).
+   * Return a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;.
+   *
+   * @event onClick
+   * @param {*} value
+   * @public
+   */
+  onClick() {},
+
+  /**
    * This will reset the state property to &#x27;default&#x27;, and with that the button&#x27;s label to defaultText
    *
    * @method resetState
@@ -305,50 +308,23 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
   }),
 
   /**
-   * Click handler. This will send the default &quot;action&quot; action, with the following parameters:
-   * * value of the button (that is the value of the &quot;value&quot; property)
-   * * original event object of the click event
-   * * callback: call that with a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;
-   *
-   * When using closure actions just return the promise instead of calling the above mentioned callback.
-   *
    * @method click
-   * @protected
-   * @param evt
+   * @private
    */
-  click(evt) {
-    if (this.get(&#x27;toggle&#x27;)) {
-      this.toggleProperty(&#x27;active&#x27;);
-    }
-    let that = this;
-
-    function handleButtonPromise(promise) {
-      if (promise) {
-        that.set(&#x27;textState&#x27;, &#x27;pending&#x27;);
-        promise.then(
-          function() {
-            if (!that.get(&#x27;isDestroyed&#x27;)) {
-              that.set(&#x27;textState&#x27;, &#x27;resolved&#x27;);
-            }
-          },
-          function() {
-            if (!that.get(&#x27;isDestroyed&#x27;)) {
-              that.set(&#x27;textState&#x27;, &#x27;rejected&#x27;);
-            }
+  click() {
+    let promise = this.get(&#x27;onClick&#x27;)(this.get(&#x27;value&#x27;));
+    if (promise &amp;&amp; typeof promise.then === &#x27;function&#x27;) {
+      this.set(&#x27;textState&#x27;, &#x27;pending&#x27;);
+      promise.then(() =&gt; {
+          if (!this.get(&#x27;isDestroyed&#x27;)) {
+            this.set(&#x27;textState&#x27;, &#x27;resolved&#x27;);
           }
-        );
-      }
-    }
-
-    let action = this.get(&#x27;action&#x27;);
-    if (typeOf(action) === &#x27;function&#x27;) {
-      let promise = action(this.get(&#x27;value&#x27;), evt, handleButtonPromise);
-      if (promise &amp;&amp; promise.then) {
-        handleButtonPromise(promise);
-      }
-    } else {
-      // continue to support string actions for now...
-      this.sendAction(&#x27;action&#x27;, this.get(&#x27;value&#x27;), evt, handleButtonPromise);
+        }, () =&gt; {
+          if (!this.get(&#x27;isDestroyed&#x27;)) {
+            this.set(&#x27;textState&#x27;, &#x27;rejected&#x27;);
+          }
+        }
+      );
     }
   },
 
@@ -374,43 +350,44 @@ export default Ember.Component.extend(ComponentChild, TypeClass, SizeClass, {
                     <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
                     <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
                     <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
                     <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
                     <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li class="nav-private"><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>
     </div>

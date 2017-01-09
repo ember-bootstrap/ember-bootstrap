@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>Components.TabPane - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,24 +22,26 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+            <a href="/" class="navbar-brand">ember-bootstrap</a>
         </div>
         <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="navbar-nav nav">
-                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
-                <li><a href="/ember-bootstrap/components">Components</a></li>
-                <li><a href="/ember-bootstrap/api">API</a></li>
+                <li><a href="/#/getting-started">Getting Started</a></li>
+                <li><a href="/#/components">Components</a></li>
+                <li><a href="/api">API v1.0</a></li>
+                <li><a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a></li>
 
             </ul>
             <ul class="navbar-nav nav navbar-right">
                 <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.11.3.c321ebf7</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.1.9ea795d3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -65,7 +66,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-tab-pane.js.html#l8"><code>addon&#x2F;components&#x2F;bs-tab-pane.js:8</code></a>
+            Defined in: <a href="../files/addon_components_bs-tab_pane.js.html#l8"><code>addon&#x2F;components&#x2F;bs-tab&#x2F;pane.js:8</code></a>
         </div>
 
 
@@ -120,11 +121,11 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
 
                     <ul class="index-list methods extends">
                             <li class="index-item method private inherited">
-                                <a href="#" data-tabid="#methods" data-anchor="#method__willDestroyElement" data-tablink="_willDestroyElement">_willDestroyElement</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method__registerWithParent" data-tablink="_registerWithParent">_registerWithParent</a>
 
                             </li>
                             <li class="index-item method private inherited">
-                                <a href="#" data-tabid="#methods" data-anchor="#method__willRender" data-tablink="_willRender">_willRender</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method__unregisterFromParent" data-tablink="_unregisterFromParent">_unregisterFromParent</a>
 
                             </li>
                             <li class="index-item method protected">
@@ -143,22 +144,26 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
 
                     <ul class="index-list properties extends">
                             <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property__didInsert" data-tablink="_didInsert">_didInsert</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property__didRegister" data-tablink="_didRegister">_didRegister</a>
 
                             </li>
                             <li class="index-item property private inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property__parent" data-tablink="_parent">_parent</a>
 
                             </li>
-                            <li class="index-item property protected">
+                            <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_active" data-tablink="active">active</a>
 
                             </li>
-                            <li class="index-item property protected">
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_activeId" data-tablink="activeId">activeId</a>
+
+                            </li>
+                            <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
 
                             </li>
-                            <li class="index-item property protected">
+                            <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_fadeDuration" data-tablink="fadeDuration">fadeDuration</a>
 
                             </li>
@@ -166,24 +171,16 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                                 <a href="#" data-tabid="#properties" data-anchor="#property_groupTitle" data-tablink="groupTitle">groupTitle</a>
 
                             </li>
-                            <li class="index-item property protected">
+                            <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_in" data-tablink="in">in</a>
 
                             </li>
-                            <li class="index-item property protected">
+                            <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_isActive" data-tablink="isActive">isActive</a>
-
-                            </li>
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_tab" data-tablink="tab">tab</a>
 
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_title" data-tablink="title">title</a>
-
-                            </li>
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_usesTransition" data-tablink="usesTransition">usesTransition</a>
 
                             </li>
                     </ul>
@@ -195,8 +192,8 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
             <div id="methods" class="tab-pane">
                 <h2 class="off-left">Methods</h2>
 
-                    <div id="method__willDestroyElement" class="method item private inherited">
-                        <h3 class="name">_willDestroyElement
+                    <div id="method__registerWithParent" class="method item private inherited">
+                        <h3 class="name">_registerWithParent
                         <span class="small"> </span>
                         </h3>
                     
@@ -210,38 +207,8 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                         <div class="meta">
                                     <p>Inherited from
-                                    <a href="../classes/Mixins.ComponentChild.html#method__willDestroyElement">Mixins.ComponentChild</a>:
-                            <a href="../files/addon_mixins_component-child.js.html#l48"><code>addon&#x2F;mixins&#x2F;component-child.js:48</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            Unregister form the parent component
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method__willRender" class="method item private inherited">
-                        <h3 class="name">_willRender
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.ComponentChild.html#method__willRender">Mixins.ComponentChild</a>:
-                            <a href="../files/addon_mixins_component-child.js.html#l21"><code>addon&#x2F;mixins&#x2F;component-child.js:21</code></a>
+                                    <a href="../classes/Mixins.ComponentChild.html#method__registerWithParent">Mixins.ComponentChild</a>:
+                            <a href="../files/addon_mixins_component-child.js.html#l33"><code>addon&#x2F;mixins&#x2F;component-child.js:33</code></a>
                             </p>
                     
                     
@@ -251,6 +218,36 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="description">
                             Register ourself as a child at the parent component
                     We use the <code>willRender</code> event here to also support the fastboot environment, where there is no <code>didInsertElement</code>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method__unregisterFromParent" class="method item private inherited">
+                        <h3 class="name">_unregisterFromParent
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.ComponentChild.html#method__unregisterFromParent">Mixins.ComponentChild</a>:
+                            <a href="../files/addon_mixins_component-child.js.html#l50"><code>addon&#x2F;mixins&#x2F;component-child.js:50</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Unregister from the parent component
                         </div>
                     
                     
@@ -272,7 +269,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab-pane.js.html#l145"><code>addon&#x2F;components&#x2F;bs-tab-pane.js:145</code></a>
+                            <a href="../files/addon_components_bs-tab_pane.js.html#l128"><code>addon&#x2F;components&#x2F;bs-tab&#x2F;pane.js:128</code></a>
                             </p>
                     
                     
@@ -303,7 +300,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab-pane.js.html#l122"><code>addon&#x2F;components&#x2F;bs-tab-pane.js:122</code></a>
+                            <a href="../files/addon_components_bs-tab_pane.js.html#l105"><code>addon&#x2F;components&#x2F;bs-tab&#x2F;pane.js:105</code></a>
                             </p>
                     
                     
@@ -323,8 +320,8 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property__didInsert" class="property item private inherited">
-                        <h3 class="name">_didInsert
+                    <div id="property__didRegister" class="property item private inherited">
+                        <h3 class="name">_didRegister
                             <span class="small">boolean</span>
                         </h3>
                     
@@ -338,15 +335,15 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                         <div class="meta">
                                     <p>Inherited from
-                                    <a href="../classes/Mixins.ComponentChild.html#property__didInsert">Mixins.ComponentChild</a>:
-                            <a href="../files/addon_mixins_component-child.js.html#l13"><code>addon&#x2F;mixins&#x2F;component-child.js:13</code></a>
+                                    <a href="../classes/Mixins.ComponentChild.html#property__didRegister">Mixins.ComponentChild</a>:
+                            <a href="../files/addon_mixins_component-child.js.html#l25"><code>addon&#x2F;mixins&#x2F;component-child.js:25</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            flag to check if component has already been rendered, for the <code>_willRender</code> event handler
+                            flag to check if component has already been registered
                         </div>
                     
                     
@@ -368,21 +365,20 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Mixins.ComponentChild.html#property__parent">Mixins.ComponentChild</a>:
-                            <a href="../files/addon_mixins_component-child.js.html#l39"><code>addon&#x2F;mixins&#x2F;component-child.js:39</code></a>
+                            <a href="../files/addon_mixins_component-child.js.html#l15"><code>addon&#x2F;mixins&#x2F;component-child.js:15</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            stores the parent in didInsertElement hook as a work-a-round for
-                    https://github.com/emberjs/ember.js/issues/12080
+                            The parent component
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_active" class="property item protected">
+                    <div id="property_active" class="property item private">
                         <h3 class="name">active
                             <span class="small">boolean</span>
                         </h3>
@@ -390,7 +386,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                     
                     
-                            <span class="label label-protected">protected</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
@@ -398,7 +394,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab-pane.js.html#l35"><code>addon&#x2F;components&#x2F;bs-tab-pane.js:35</code></a>
+                            <a href="../files/addon_components_bs-tab_pane.js.html#l42"><code>addon&#x2F;components&#x2F;bs-tab&#x2F;pane.js:42</code></a>
                             </p>
                     
                     
@@ -413,15 +409,15 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                     
                     </div>
-                    <div id="property_fade" class="property item protected">
-                        <h3 class="name">fade
-                            <span class="small">boolean</span>
+                    <div id="property_activeId" class="property item private">
+                        <h3 class="name">activeId
+                            <span class="small">unknown</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-protected">protected</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
@@ -429,7 +425,36 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab-pane.js.html#l102"><code>addon&#x2F;components&#x2F;bs-tab-pane.js:102</code></a>
+                            <a href="../files/addon_components_bs-tab_pane.js.html#l24"><code>addon&#x2F;components&#x2F;bs-tab&#x2F;pane.js:24</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_fade" class="property item private">
+                        <h3 class="name">fade
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-tab_pane.js.html#l86"><code>addon&#x2F;components&#x2F;bs-tab&#x2F;pane.js:86</code></a>
                             </p>
                     
                     
@@ -443,7 +468,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                     
                     </div>
-                    <div id="property_fadeDuration" class="property item protected">
+                    <div id="property_fadeDuration" class="property item private">
                         <h3 class="name">fadeDuration
                             <span class="small">integer</span>
                         </h3>
@@ -451,7 +476,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                     
                     
-                            <span class="label label-protected">protected</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
@@ -459,7 +484,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab-pane.js.html#l112"><code>addon&#x2F;components&#x2F;bs-tab-pane.js:112</code></a>
+                            <a href="../files/addon_components_bs-tab_pane.js.html#l95"><code>addon&#x2F;components&#x2F;bs-tab&#x2F;pane.js:95</code></a>
                             </p>
                     
                     
@@ -470,6 +495,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                         </div>
                     
+                            <p><strong>Default:</strong> 150</p>
                     
                     
                     </div>
@@ -489,7 +515,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab-pane.js.html#l90"><code>addon&#x2F;components&#x2F;bs-tab-pane.js:90</code></a>
+                            <a href="../files/addon_components_bs-tab_pane.js.html#l74"><code>addon&#x2F;components&#x2F;bs-tab&#x2F;pane.js:74</code></a>
                             </p>
                     
                     
@@ -506,7 +532,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                     
                     </div>
-                    <div id="property_in" class="property item protected">
+                    <div id="property_in" class="property item private">
                         <h3 class="name">in
                             <span class="small">boolean</span>
                         </h3>
@@ -514,7 +540,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                     
                     
-                            <span class="label label-protected">protected</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
@@ -522,7 +548,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab-pane.js.html#l45"><code>addon&#x2F;components&#x2F;bs-tab-pane.js:45</code></a>
+                            <a href="../files/addon_components_bs-tab_pane.js.html#l52"><code>addon&#x2F;components&#x2F;bs-tab&#x2F;pane.js:52</code></a>
                             </p>
                     
                     
@@ -537,7 +563,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                     
                     </div>
-                    <div id="property_isActive" class="property item protected">
+                    <div id="property_isActive" class="property item private">
                         <h3 class="name">isActive
                             <span class="small">boolean</span>
                         </h3>
@@ -545,7 +571,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                     
                     
-                            <span class="label label-protected">protected</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
@@ -553,7 +579,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab-pane.js.html#l24"><code>addon&#x2F;components&#x2F;bs-tab-pane.js:24</code></a>
+                            <a href="../files/addon_components_bs-tab_pane.js.html#l30"><code>addon&#x2F;components&#x2F;bs-tab&#x2F;pane.js:30</code></a>
                             </p>
                     
                     
@@ -561,36 +587,6 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                         <div class="description">
                             <p>True if this pane is active (visible)</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_tab" class="property item protected">
-                        <h3 class="name">tab
-                            <span class="small">{Components.Tab}</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-tab-pane.js.html#l67"><code>addon&#x2F;components&#x2F;bs-tab-pane.js:67</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The parent <a href="Components.Tab.html">Components.Tab</a> instance.</p>
                     
                         </div>
                     
@@ -613,7 +609,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab-pane.js.html#l78"><code>addon&#x2F;components&#x2F;bs-tab-pane.js:78</code></a>
+                            <a href="../files/addon_components_bs-tab_pane.js.html#l62"><code>addon&#x2F;components&#x2F;bs-tab&#x2F;pane.js:62</code></a>
                             </p>
                     
                     
@@ -627,36 +623,6 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="property_usesTransition" class="property item protected">
-                        <h3 class="name">usesTransition
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-tab-pane.js.html#l55"><code>addon&#x2F;components&#x2F;bs-tab-pane.js:55</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Use CSS transitions when showing/hiding the pane?</p>
-                    
-                        </div>
-                    
                     
                     
                     </div>
@@ -678,43 +644,44 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
                     <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
                     <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
                     <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
                     <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li class="nav-private"><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>
     </div>

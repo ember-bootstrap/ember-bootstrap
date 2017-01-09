@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>Components.Accordion - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,24 +22,26 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+            <a href="/" class="navbar-brand">ember-bootstrap</a>
         </div>
         <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="navbar-nav nav">
-                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
-                <li><a href="/ember-bootstrap/components">Components</a></li>
-                <li><a href="/ember-bootstrap/api">API</a></li>
+                <li><a href="/#/getting-started">Getting Started</a></li>
+                <li><a href="/#/components">Components</a></li>
+                <li><a href="/api">API v1.0</a></li>
+                <li><a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a></li>
 
             </ul>
             <ul class="navbar-nav nav navbar-right">
                 <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.11.3.c321ebf7</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.1.9ea795d3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -65,7 +66,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-accordion.js.html#l4"><code>addon&#x2F;components&#x2F;bs-accordion.js:4</code></a>
+            Defined in: <a href="../files/addon_components_bs-accordion.js.html#l5"><code>addon&#x2F;components&#x2F;bs-accordion.js:5</code></a>
         </div>
 
 
@@ -75,21 +76,22 @@
 <div class="well well-small">
     <p>Bootstrap-style accordion group, with collapsible/expandable items.
 See <a href="http://getbootstrap.com/components/#btn-groups">http://getbootstrap.com/components/#btn-groups</a></p>
-<p>Use as a block level component with any number of <a href="Components.AccordionItem.html">Components.AccordionItem</a> components as children:</p>
-<pre class="code prettyprint"><code class="language-handlebars"> {{#bs-accordion selected=selected}}
-     {{#bs-accordion-item value=&quot;1&quot; title=&quot;First item&quot;}}
+<p>Use as a block level component with any number of yielded <a href="Components.AccordionItem.html">Components.AccordionItem</a>
+components as children:</p>
+<pre class="code prettyprint"><code class="language-handlebars"> {{#bs-accordion as |acc|}}
+     {{#acc.item value=1 title=&quot;First item&quot;}}
        &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-     {{/bs-accordion-item}}
-     {{#bs-accordion-item value=&quot;2&quot; title=&quot;Second item&quot;}}
+       &lt;button {{action acc.change 2}}&gt;Next&lt;/button&gt;
+     {{/acc.item}}
+     {{#acc.item value=2 title=&quot;Second item&quot;}}
        &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-     {{/bs-accordion-item}}
-     {{#bs-accordion-item value=&quot;3&quot; title=&quot;Third item&quot;}}
+     {{/acc.item}}
+     {{#acc.item value=3 title=&quot;Third item&quot;}}
        &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-     {{/bs-accordion-item}}
+     {{/acc.item}}
  {{/bs-accordion}}
-
- &lt;p&gt;Selected accordion item: {{selected}}&lt;/p&gt;
 </code></pre>
+<p>In the example above the first accordion item utilizes the yielded <code>change</code> action to add some custom behaviour.</p>
 
 </div>
 
@@ -124,6 +126,7 @@ See <a href="http://getbootstrap.com/components/#btn-groups">http://getbootstrap
 
             <li><a data-toggle="tab" href="#methods">Methods</a></li>
             <li><a data-toggle="tab" href="#properties">Properties</a></li>
+            <li><a data-toggle="tab" href="#events">Events</a></li>
     </ul>
 
     <div class="tab-content">
@@ -153,6 +156,10 @@ See <a href="http://getbootstrap.com/components/#btn-groups">http://getbootstrap
                                 <a href="#" data-tabid="#properties" data-anchor="#property_children" data-tablink="children">children</a>
 
                             </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isSelected" data-tablink="isSelected">isSelected</a>
+
+                            </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_selected" data-tablink="selected">selected</a>
 
@@ -161,6 +168,16 @@ See <a href="http://getbootstrap.com/components/#btn-groups">http://getbootstrap
                 </div>
 
 
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onChange" data-tablink="onChange">onChange</a>
+
+                            </li>
+                    </ul>
+                </div>
         </div>
 
             <div id="methods" class="tab-pane">
@@ -182,7 +199,7 @@ See <a href="http://getbootstrap.com/components/#btn-groups">http://getbootstrap
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Mixins.ComponentParent.html#method_registerChild">Mixins.ComponentParent</a>:
-                            <a href="../files/addon_mixins_component-parent.js.html#l25"><code>addon&#x2F;mixins&#x2F;component-parent.js:25</code></a>
+                            <a href="../files/addon_mixins_component-parent.js.html#l26"><code>addon&#x2F;mixins&#x2F;component-parent.js:26</code></a>
                             </p>
                     
                     
@@ -228,7 +245,7 @@ See <a href="http://getbootstrap.com/components/#btn-groups">http://getbootstrap
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Mixins.ComponentParent.html#method_removeChild">Mixins.ComponentParent</a>:
-                            <a href="../files/addon_mixins_component-parent.js.html#l38"><code>addon&#x2F;mixins&#x2F;component-parent.js:38</code></a>
+                            <a href="../files/addon_mixins_component-parent.js.html#l39"><code>addon&#x2F;mixins&#x2F;component-parent.js:39</code></a>
                             </p>
                     
                     
@@ -292,6 +309,36 @@ See <a href="http://getbootstrap.com/components/#btn-groups">http://getbootstrap
                     
                     
                     </div>
+                    <div id="property_isSelected" class="property item private">
+                        <h3 class="name">isSelected
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-accordion.js.html#l51"><code>addon&#x2F;components&#x2F;bs-accordion.js:51</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The value of the currently selected accordion item</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="property_selected" class="property item public">
                         <h3 class="name">selected
                             <span class="small">unknown</span>
@@ -308,14 +355,16 @@ See <a href="http://getbootstrap.com/components/#btn-groups">http://getbootstrap
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-accordion.js.html#l37"><code>addon&#x2F;components&#x2F;bs-accordion.js:37</code></a>
+                            <a href="../files/addon_components_bs-accordion.js.html#l40"><code>addon&#x2F;components&#x2F;bs-accordion.js:40</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The value of the currently selected accordion item</p>
+                            <p>The value of the currently selected accordion item. Set this to change selection programmatically.</p>
+                    <p>When the selection is changed by user interaction this property will not update by using two-way bindings in order
+                    to follow DDAU best practices. If you want to react to such changes, subscribe to the <code>onChange</code> action</p>
                     
                         </div>
                     
@@ -325,6 +374,64 @@ See <a href="http://getbootstrap.com/components/#btn-groups">http://getbootstrap
             </div>
 
 
+            <div id="events" class="tab-pane">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_onChange" class="events item public">
+                        <h3 class="name"><code>onChange</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-accordion.js.html#l59"><code>addon&#x2F;components&#x2F;bs-accordion.js:59</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Action when the selected accordion item is about to be changed.</p>
+                    <p>You can return false to prevent changing the active item, and do that in your action by
+                    setting the <code>selected</code> accordingly.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">newValue</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">oldValue</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+            </div>
     </div>
 </div>
                     </div>
@@ -340,43 +447,44 @@ See <a href="http://getbootstrap.com/components/#btn-groups">http://getbootstrap
                     <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
                     <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
                     <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
                     <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
                     <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li class="nav-private"><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>
     </div>

@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>Components.Dropdown - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,24 +22,26 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+            <a href="/" class="navbar-brand">ember-bootstrap</a>
         </div>
         <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="navbar-nav nav">
-                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
-                <li><a href="/ember-bootstrap/components">Components</a></li>
-                <li><a href="/ember-bootstrap/api">API</a></li>
+                <li><a href="/#/getting-started">Getting Started</a></li>
+                <li><a href="/#/components">Components</a></li>
+                <li><a href="/api">API v1.0</a></li>
+                <li><a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a></li>
 
             </ul>
             <ul class="navbar-nav nav navbar-right">
                 <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.11.3.c321ebf7</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.1.9ea795d3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -59,7 +60,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-dropdown.js.html#l7"><code>addon&#x2F;components&#x2F;bs-dropdown.js:7</code></a>
+            Defined in: <a href="../files/addon_components_bs-dropdown.js.html#l10"><code>addon&#x2F;components&#x2F;bs-dropdown.js:10</code></a>
         </div>
 
 
@@ -69,50 +70,48 @@
 <div class="well well-small">
     <p>Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.
 See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.com/components/#dropdowns</a></p>
-<p>Use this component together with two sub components, a dropdown toggle (<code>Components.DropdownToggle</code> or
-<code>Components.DropdownButton</code> component) and a dropdown menu (<code>Components.DropdownMenu</code>) component:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;nav class=&quot;navbar navbar-default navbar-static&quot;&gt;
-  &lt;div class=&quot;container-fluid&quot;&gt;
-    &lt;ul class=&quot;nav navbar-nav&quot;&gt;
-      {{#bs-dropdown tagName=&quot;li&quot;}}
-        {{#bs-dropdown-toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/bs-dropdown-toggle}}
-        {{#bs-dropdown-menu}}
-          &lt;li&gt;{{#link-to &quot;index&quot;}}Something{{/link-to}}&lt;/li&gt;
-          &lt;li&gt;{{#link-to &quot;index&quot;}}Something different{{/link-to}}&lt;/li&gt;
-        {{/bs-dropdown-menu}}
-      {{/bs-dropdown}}
-    &lt;/ul&gt;
-  &lt;/div&gt;
-&lt;/nav&gt;
+<p>Use this component together with the yielded contextual components, a dropdown toggle
+(<a href="Components.DropdownToggle.html">Components.DropdownToggle</a> or <a href="Components.DropdownButton.html">Components.DropdownButton</a>
+component) and a dropdown menu (<a href="Components.DropdownMenu.html">Components.DropdownMenu</a> and
+(<a href="Components.DropdownMenuItem.html">Components.DropdownMenuItem</a> components):</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;ul class=&quot;nav navbar-nav&quot;&gt;
+  {{#bs-dropdown tagName=&quot;li&quot; as |dd|}}
+    {{#dd.toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.toggle}}
+    {{#dd.menu as |ddm|}}
+      {{#ddm.item}}{{#link-to &quot;index&quot;}}Something{{/link-to}}{{/ddm.item}}
+      {{#ddm.item}}{{#link-to &quot;index&quot;}}Something different{{/link-to}}{{/ddm.item}}
+    {{/dd.menu}}
+  {{/bs-dropdown}}
+&lt;/ul&gt;
 </code></pre>
 <h3>Button dropdowns</h3>
 <p>To use a button as the dropdown toggle element (see <a href="http://getbootstrap.com/components/#btn-dropdowns">http://getbootstrap.com/components/#btn-dropdowns</a>), use the
 <code>Components.DropdownButton</code> component as the toggle:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown}}
-  {{#bs-dropdown-button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/bs-dropdown-button}}
-  {{#bs-dropdown-menu}}
-    &lt;li&gt;{{#link-to &quot;index&quot;}}Something{{/link-to}}&lt;/li&gt;
-    &lt;li&gt;{{#link-to &quot;index&quot;}}Something different{{/link-to}}&lt;/li&gt;
-  {{/bs-dropdown-menu}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown as |dd|}}
+  {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
+  {{#dd.menu as |ddm|}}
+      {{#ddm.item}}{{#link-to &quot;index&quot;}}Something{{/link-to}}{{/ddm.item}}
+      {{#ddm.item}}{{#link-to &quot;index&quot;}}Something different{{/link-to}}{{/ddm.item}}
+    {{/dd.menu}}
 {{/bs-dropdown}}
 </code></pre>
 <p>It has all the functionality of a <code>Components.Button</code> with additional dropdown support.</p>
 <h3>Split button dropdowns</h3>
 <p>To have a regular button with a dropdown button as in <a href="http://getbootstrap.com/components/#btn-dropdowns-split">http://getbootstrap.com/components/#btn-dropdowns-split</a>, use a
 <code>Components.Button</code> component and a <code>Components.DropdownButton</code>:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown as |dd|}}
   {{#bs-button}}Dropdown{{/bs-button}}
-  {{#bs-dropdown-button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/bs-dropdown-button}}
-  {{#bs-dropdown-menu}}
-    &lt;li&gt;{{#link-to &quot;index&quot;}}Something{{/link-to}}&lt;/li&gt;
-    &lt;li&gt;{{#link-to &quot;index&quot;}}Something different{{/link-to}}&lt;/li&gt;
-  {{/bs-dropdown-menu}}
-{{/bs-dropdown}}
+  {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
+  {{#dd.menu as |ddm|}}
+    {{#ddm.item}}{{#link-to &quot;index&quot;}}Something{{/link-to}}{{/ddm.item}}
+    {{#ddm.item}}{{#link-to &quot;index&quot;}}Something different{{/link-to}}{{/ddm.item}}
+  {{/dd.menu}}
+  {{/bs-dropdown}}
 </code></pre>
 <h3>Dropup style</h3>
 <p>Set the <code>direction</code> property to &quot;up&quot; to switch to a &quot;dropup&quot; style:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown direction=&quot;up&quot;}}
-  ...
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown direction=&quot;up&quot; as |dd|}}
+...
 {{/bs-dropdown}}
 </code></pre>
 
@@ -149,6 +148,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
 
             <li><a data-toggle="tab" href="#methods">Methods</a></li>
             <li><a data-toggle="tab" href="#properties">Properties</a></li>
+            <li><a data-toggle="tab" href="#events">Events</a></li>
     </ul>
 
     <div class="tab-content">
@@ -186,18 +186,32 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                                 <a href="#" data-tabid="#properties" data-anchor="#property_direction" data-tablink="direction">direction</a>
 
                             </li>
-                            <li class="index-item property public">
+                            <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_open" data-tablink="open">open</a>
 
                             </li>
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_toggleType" data-tablink="toggleType">toggleType</a>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_toggle" data-tablink="toggle">toggle</a>
 
                             </li>
                     </ul>
                 </div>
 
 
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onHide" data-tablink="onHide">onHide</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onShow" data-tablink="onShow">onShow</a>
+
+                            </li>
+                    </ul>
+                </div>
         </div>
 
             <div id="methods" class="tab-pane">
@@ -219,7 +233,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l187"><code>addon&#x2F;components&#x2F;bs-dropdown.js:187</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l198"><code>addon&#x2F;components&#x2F;bs-dropdown.js:198</code></a>
                             </p>
                     
                     
@@ -271,7 +285,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l101"><code>addon&#x2F;components&#x2F;bs-dropdown.js:101</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l103"><code>addon&#x2F;components&#x2F;bs-dropdown.js:103</code></a>
                             </p>
                     
                     
@@ -301,7 +315,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l91"><code>addon&#x2F;components&#x2F;bs-dropdown.js:91</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l93"><code>addon&#x2F;components&#x2F;bs-dropdown.js:93</code></a>
                             </p>
                     
                     
@@ -332,7 +346,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l120"><code>addon&#x2F;components&#x2F;bs-dropdown.js:120</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l122"><code>addon&#x2F;components&#x2F;bs-dropdown.js:122</code></a>
                             </p>
                     
                     
@@ -362,7 +376,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l110"><code>addon&#x2F;components&#x2F;bs-dropdown.js:110</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l112"><code>addon&#x2F;components&#x2F;bs-dropdown.js:112</code></a>
                             </p>
                     
                     
@@ -377,7 +391,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                     
                     
                     </div>
-                    <div id="property_open" class="property item public">
+                    <div id="property_open" class="property item private">
                         <h3 class="name">open
                             <span class="small">boolean</span>
                         </h3>
@@ -385,7 +399,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                     
                     
                     
-                            <span class="label label-public">public</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
@@ -393,7 +407,7 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l81"><code>addon&#x2F;components&#x2F;bs-dropdown.js:81</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l83"><code>addon&#x2F;components&#x2F;bs-dropdown.js:83</code></a>
                             </p>
                     
                     
@@ -408,15 +422,15 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                     
                     
                     </div>
-                    <div id="property_toggleType" class="property item protected">
-                        <h3 class="name">toggleType
-                            <span class="small">string</span>
+                    <div id="property_toggle" class="property item private">
+                        <h3 class="name">toggle
+                            <span class="small">unknown</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-protected">protected</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
@@ -424,14 +438,14 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-dropdown.js.html#l136"><code>addon&#x2F;components&#x2F;bs-dropdown.js:136</code></a>
+                            <a href="../files/addon_components_bs-dropdown.js.html#l138"><code>addon&#x2F;components&#x2F;bs-dropdown.js:138</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>This property is &quot;button&quot; if the toggle element is an instance of <a href="Components.DropdownButton.html">Components.DropdownButton</a>, otherwise &quot;toggle&quot;.</p>
+                            <p>Reference to the child toggle (Toggle or Button)</p>
                     
                         </div>
                     
@@ -441,6 +455,94 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
             </div>
 
 
+            <div id="events" class="tab-pane">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_onHide" class="events item public">
+                        <h3 class="name"><code>onHide</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-dropdown.js.html#l155"><code>addon&#x2F;components&#x2F;bs-dropdown.js:155</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Action is called when dropdown is about to be hidden</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">value</code>
+                                            <span class="type"></span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_onShow" class="events item public">
+                        <h3 class="name"><code>onShow</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-dropdown.js.html#l146"><code>addon&#x2F;components&#x2F;bs-dropdown.js:146</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Action is called when dropdown is about to be shown</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">value</code>
+                                            <span class="type"></span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+            </div>
     </div>
 </div>
                     </div>
@@ -456,43 +558,44 @@ See <a href="http://getbootstrap.com/components/#dropdowns">http://getbootstrap.
                     <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
                     <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
                     <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
                     <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
                     <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li class="nav-private"><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>
     </div>

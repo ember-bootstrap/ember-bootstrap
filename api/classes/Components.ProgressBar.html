@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>Components.ProgressBar - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,24 +22,26 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+            <a href="/" class="navbar-brand">ember-bootstrap</a>
         </div>
         <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="navbar-nav nav">
-                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
-                <li><a href="/ember-bootstrap/components">Components</a></li>
-                <li><a href="/ember-bootstrap/api">API</a></li>
+                <li><a href="/#/getting-started">Getting Started</a></li>
+                <li><a href="/#/components">Components</a></li>
+                <li><a href="/api">API v1.0</a></li>
+                <li><a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a></li>
 
             </ul>
             <ul class="navbar-nav nav navbar-right">
                 <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.11.3.c321ebf7</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.1.9ea795d3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -65,7 +66,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-progress-bar.js.html#l6"><code>addon&#x2F;components&#x2F;bs-progress-bar.js:6</code></a>
+            Defined in: <a href="../files/addon_components_bs-progress_bar.js.html#l7"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:7</code></a>
         </div>
 
 
@@ -73,24 +74,7 @@
 
 
 <div class="well well-small">
-    <p>Component to display a Bootstrap progress bar, see <a href="http://getbootstrap.com/components/#progress">http://getbootstrap.com/components/#progress</a>.</p>
-<h3>Usage</h3>
-<p>Always wrap the progress bar in a <a href="Components.Progress.html">Components.Progress</a> component. Use the <code>value</code>
-property to control the progress bar's width. To apply the different styling options supplied by Bootstrap, use the
-appropriate properties like <code>type</code>, <code>showLabel</code>, <code>striped</code> or <code>animate</code>.</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-progress}}
-   {{bs-progress-bar value=progressValue minValue=0 maxValue=10 showLabel=true type=&quot;danger&quot;}}
- {{/bs-progress}}
-</code></pre>
-<h3>Stacked</h3>
-<p>You can place multiple progress bar components in a single <a href="Components.Progress.html">Components.Progress</a> to
-create a stack of progress bars as seen in <a href="http://getbootstrap.com/components/#progress-stacked">http://getbootstrap.com/components/#progress-stacked</a>.</p>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-progress}}
-   {{bs-progress-bar value=progressValue1 type=&quot;success&quot;}}
-   {{bs-progress-bar value=progressValue2 type=&quot;warning&quot;}}
-   {{bs-progress-bar value=progressValue3 type=&quot;danger&quot;}}
- {{/bs-progress}}
-</code></pre>
+    <p>Component for a single progress bar, see <a href="Components.Progress.html">Components.Progress</a> for more examples.</p>
 
 </div>
 
@@ -209,7 +193,7 @@ create a stack of progress bars as seen in <a href="http://getbootstrap.com/comp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-progress-bar.js.html#l115"><code>addon&#x2F;components&#x2F;bs-progress-bar.js:115</code></a>
+                            <a href="../files/addon_components_bs-progress_bar.js.html#l92"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:92</code></a>
                             </p>
                     
                     
@@ -243,7 +227,7 @@ create a stack of progress bars as seen in <a href="http://getbootstrap.com/comp
                                     Mixins.TypeClass
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-progress-bar.js.html#l47"><code>addon&#x2F;components&#x2F;bs-progress-bar.js:47</code></a>
+                            <a href="../files/addon_components_bs-progress_bar.js.html#l24"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:24</code></a>
                             </p>
                     
                     
@@ -273,7 +257,7 @@ create a stack of progress bars as seen in <a href="http://getbootstrap.com/comp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-progress-bar.js.html#l65"><code>addon&#x2F;components&#x2F;bs-progress-bar.js:65</code></a>
+                            <a href="../files/addon_components_bs-progress_bar.js.html#l42"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:42</code></a>
                             </p>
                     
                     
@@ -304,7 +288,7 @@ create a stack of progress bars as seen in <a href="http://getbootstrap.com/comp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-progress-bar.js.html#l55"><code>addon&#x2F;components&#x2F;bs-progress-bar.js:55</code></a>
+                            <a href="../files/addon_components_bs-progress_bar.js.html#l32"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:32</code></a>
                             </p>
                     
                     
@@ -335,7 +319,7 @@ create a stack of progress bars as seen in <a href="http://getbootstrap.com/comp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-progress-bar.js.html#l142"><code>addon&#x2F;components&#x2F;bs-progress-bar.js:142</code></a>
+                            <a href="../files/addon_components_bs-progress_bar.js.html#l119"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:119</code></a>
                             </p>
                     
                     
@@ -365,7 +349,7 @@ create a stack of progress bars as seen in <a href="http://getbootstrap.com/comp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-progress-bar.js.html#l158"><code>addon&#x2F;components&#x2F;bs-progress-bar.js:158</code></a>
+                            <a href="../files/addon_components_bs-progress_bar.js.html#l135"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:135</code></a>
                             </p>
                     
                     
@@ -395,7 +379,7 @@ create a stack of progress bars as seen in <a href="http://getbootstrap.com/comp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-progress-bar.js.html#l125"><code>addon&#x2F;components&#x2F;bs-progress-bar.js:125</code></a>
+                            <a href="../files/addon_components_bs-progress_bar.js.html#l102"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:102</code></a>
                             </p>
                     
                     
@@ -426,7 +410,7 @@ create a stack of progress bars as seen in <a href="http://getbootstrap.com/comp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-progress-bar.js.html#l85"><code>addon&#x2F;components&#x2F;bs-progress-bar.js:85</code></a>
+                            <a href="../files/addon_components_bs-progress_bar.js.html#l62"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:62</code></a>
                             </p>
                     
                     
@@ -464,7 +448,7 @@ create a stack of progress bars as seen in <a href="http://getbootstrap.com/comp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-progress-bar.js.html#l105"><code>addon&#x2F;components&#x2F;bs-progress-bar.js:105</code></a>
+                            <a href="../files/addon_components_bs-progress_bar.js.html#l82"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:82</code></a>
                             </p>
                     
                     
@@ -495,7 +479,7 @@ create a stack of progress bars as seen in <a href="http://getbootstrap.com/comp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-progress-bar.js.html#l171"><code>addon&#x2F;components&#x2F;bs-progress-bar.js:171</code></a>
+                            <a href="../files/addon_components_bs-progress_bar.js.html#l148"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:148</code></a>
                             </p>
                     
                     
@@ -556,7 +540,7 @@ create a stack of progress bars as seen in <a href="http://getbootstrap.com/comp
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-progress-bar.js.html#l75"><code>addon&#x2F;components&#x2F;bs-progress-bar.js:75</code></a>
+                            <a href="../files/addon_components_bs-progress_bar.js.html#l52"><code>addon&#x2F;components&#x2F;bs-progress&#x2F;bar.js:52</code></a>
                             </p>
                     
                     
@@ -589,43 +573,44 @@ create a stack of progress bars as seen in <a href="http://getbootstrap.com/comp
                     <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
                     <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
                     <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
                     <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
                     <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li class="nav-private"><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>
     </div>

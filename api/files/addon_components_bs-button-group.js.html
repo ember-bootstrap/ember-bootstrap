@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>addon/components/bs-button-group.js - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,24 +22,26 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+            <a href="/" class="navbar-brand">ember-bootstrap</a>
         </div>
         <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="navbar-nav nav">
-                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
-                <li><a href="/ember-bootstrap/components">Components</a></li>
-                <li><a href="/ember-bootstrap/api">API</a></li>
+                <li><a href="/#/getting-started">Getting Started</a></li>
+                <li><a href="/#/components">Components</a></li>
+                <li><a href="/api">API v1.0</a></li>
+                <li><a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a></li>
 
             </ul>
             <ul class="navbar-nav nav navbar-right">
                 <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.11.3.c321ebf7</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.1.9ea795d3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,22 +54,28 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import layout from &#x27;../templates/components/bs-button-group&#x27;;
 import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
-import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
 
-const { computed, observer } = Ember;
+const {
+  A,
+  copy,
+  computed,
+  isArray
+} = Ember;
 
 /**
  Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
  See http://getbootstrap.com/components/#btn-groups
 
- Use as a block level component with any number of [Components.Button](Components.Button.html) components as children:
+ Use as a block level component with any number of [Components.Button](Components.Button.html) components provided as
+ a yielded pre-configured contextual component:
 
  &#x60;&#x60;&#x60;handlebars
- {{#bs-button-group}}
-   {{#bs-button}}1{{/bs-button}}
-   {{#bs-button}}2{{/bs-button}}
-   {{#bs-button}}3{{/bs-button}}
+ {{#bs-button-group as |bg|}}
+   {{#bg.button}}1{{/bg.button}}
+   {{#bg.button}}2{{/s-bg.button}}
+   {{#bg.button}}3{{/bg.button}}
  {{/bs-button-group}}
  &#x60;&#x60;&#x60;
 
@@ -79,10 +86,10 @@ const { computed, observer } = Ember;
  the value of the active button:
 
  &#x60;&#x60;&#x60;handlebars
- {{#bs-button-group value=buttonGroupValue type=&quot;radio&quot;}}
-   {{#bs-button value=&#x27;foo&#x27;}}foo{{/bs-button}}
-   {{#bs-button value=&#x27;bar&#x27;}}bar{{/bs-button}}
-   {{#bs-button value=&#x27;baz&#x27;}}baz{{/bs-button}}
+ {{#bs-button-group value=buttonGroupValue type=&quot;radio&quot; onChange=(action (mut buttonGroupValue)) as |bg|}}
+   {{#bg.button type=&quot;default&quot; value=1}}1{{/bg.button}}
+   {{#bg.button type=&quot;default&quot; value=2}}2{{/bg.button}}
+   {{#bg.button type=&quot;default&quot; value=3}}3{{/bg.button}}
  {{/bs-button-group}}
 
  You selected: {{buttonGroupValue}}!
@@ -94,10 +101,10 @@ const { computed, observer } = Ember;
  of all the values of the active buttons:
 
  &#x60;&#x60;&#x60;handlebars
- {{#bs-button-group value=buttonGroupValue type=&quot;checkbox&quot;}}
-   {{#bs-button value=&#x27;foo&#x27;}}foo{{/bs-button}}
-   {{#bs-button value=&#x27;bar&#x27;}}bar{{/bs-button}}
-   {{#bs-button value=&#x27;baz&#x27;}}baz{{/bs-button}}
+ {{#bs-button-group value=buttonGroupValue type=&quot;checkbox&quot; onChange=(action (mut buttonGroupValue)) as |bg|}}
+   {{#bg.button type=&quot;default&quot; value=1}}1{{/bg.button}}
+   {{#bg.button type=&quot;default&quot; value=2}}2{{/bg.button}}
+   {{#bg.button type=&quot;default&quot; value=3}}3{{/bg.button}}
  {{/bs-button-group}}
 
  You selected:
@@ -114,28 +121,10 @@ const { computed, observer } = Ember;
  @uses Mixins.SizeClass
  @public
  */
-export default Ember.Component.extend(ComponentParent, SizeClass, {
-  /**
-   * @type string
-   * @property ariaRole
-   * @default &#x27;group&#x27;
-   * @protected
-   */
+export default Ember.Component.extend(SizeClass, {
+  layout,
   ariaRole: &#x27;group&#x27;,
-
-  /**
-   * @property classNames
-   * @type array
-   * @default [&#x27;btn-group&#x27;]
-   * @protected
-   */
   classNames: [&#x27;btn-group&#x27;],
-
-  /**
-   * @property classNameBindings
-   * @type array
-   * @protected
-   */
   classNameBindings: [&#x27;vertical:btn-group-vertical&#x27;, &#x27;justified:btn-group-justified&#x27;],
 
   /**
@@ -184,13 +173,11 @@ export default Ember.Component.extend(ComponentParent, SizeClass, {
    *
    * ### radio
    * if &#x60;type&#x60; is set to &quot;radio&quot;, the buttons will behave like radio buttons:
-   * * the buttons will toggle (&#x60;toggle&#x60; property of the child buttons will be set to true)
-   * * only one button may be active
    * * the &#x60;value&#x60; property of the button group will reflect the &#x60;value&#x60; property of the active button
+   * * thus only one button may be active
    *
    * ### checkbox
    * if &#x60;type&#x60; is set to &quot;checkbox&quot;, the buttons will behave like checkboxes:
-   * * the buttons will toggle (&#x60;toggle&#x60; property of the child buttons will be set to true)
    * * any number of buttons may be active
    * * the &#x60;value&#x60; property of the button group will be an array containing the &#x60;value&#x60; properties of all active buttons
    *
@@ -215,82 +202,47 @@ export default Ember.Component.extend(ComponentParent, SizeClass, {
    */
   value: undefined,
 
-  _syncValueToActiveButtons: observer(&#x27;value&#x27;, &#x27;children.@each.value&#x27;, &#x27;_inDOM&#x27;, function() {
-    if (!this._inDOM) {
-      return;
-    }
-    let value = this.get(&#x27;value&#x27;);
-    let values = Ember.A(!Ember.isArray(value) ? [value] : value);
-    this.get(&#x27;children&#x27;)
-      .forEach(function(button) {
-        button.set(&#x27;active&#x27;, values.includes(button.get(&#x27;value&#x27;)));
-      });
-  }),
+  /**
+   * @property isRadio
+   * @type boolean
+   * @private
+   */
+  isRadio: computed.equal(&#x27;type&#x27;, &#x27;radio&#x27;).readOnly(),
 
   /**
-   * Child buttons that are active (pressed)
-   * @property activeChildren
-   * @type array
-   * @protected
+   * This action is called whenever the button group&#x27;s value should be changed because the user clicked a button.
+   * You will receive the new value of the button group (based on the &#x60;type&#x60; property), which you should use to update the
+   * &#x60;value&#x60; property.
+   *
+   * @event onChange
+   * @param {*} value
+   * @public
    */
-  activeChildren: computed.filterBy(&#x27;children&#x27;, &#x27;active&#x27;, true),
+  onChange() {},
 
-  lastActiveChildren: null,
-  newActiveChildren: computed.setDiff(&#x27;activeChildren&#x27;, &#x27;lastActiveChildren&#x27;),
-  _observeButtons: observer(&#x27;activeChildren.[]&#x27;, &#x27;type&#x27;, function() {
-    let type = this.get(&#x27;type&#x27;);
+  actions: {
+    buttonPressed(pressedValue) {
+      let newValue = copy(this.get(&#x27;value&#x27;));
 
-    if (!this._inDOM || (type !== &#x27;radio&#x27; &amp;&amp; type !== &#x27;checkbox&#x27;)) {
-      return;
-    }
-
-    Ember.run.scheduleOnce(&#x27;actions&#x27;, this, function() {
-      // the button that just became active
-      let value;
-
-      switch (type) {
-        case &#x27;radio&#x27;:
-          let newActive = Ember.A(this.get(&#x27;newActiveChildren&#x27;)).objectAt(0);
-          if (newActive) {
-            value = newActive.get(&#x27;value&#x27;);
+      if (this.get(&#x27;isRadio&#x27;)) {
+        if (newValue !== pressedValue) {
+          newValue = pressedValue;
+        }
+      } else {
+        if (!isArray(newValue)) {
+          newValue = A([pressedValue]);
+        } else {
+          newValue = A(newValue);
+          if (newValue.includes(pressedValue)) {
+            newValue.removeObject(pressedValue);
           } else {
-            let lastActive = this.get(&#x27;lastActiveChildren.firstObject&#x27;);
-            if (lastActive) {
-              lastActive.set(&#x27;active&#x27;, this.get(&#x27;value&#x27;) ? true : false);
-            }
+            newValue.pushObject(pressedValue);
           }
-          break;
-        case &#x27;checkbox&#x27;:
-          value = this.get(&#x27;activeChildren&#x27;).mapBy(&#x27;value&#x27;);
-          break;
+        }
       }
-      if (typeof value !== &#x27;undefined&#x27;) {
-        this.set(&#x27;value&#x27;, value);
-      }
-      // remember activeChildren, used as a replacement for a before observer as they will be deprecated in the future...
-      this.set(&#x27;lastActiveChildren&#x27;, Ember.A(this.get(&#x27;activeChildren&#x27;).slice()));
-    });
-  }),
 
-  _observeType: observer(&#x27;type&#x27;, &#x27;children.[]&#x27;, function() {
-    if (this.get(&#x27;type&#x27;) === &#x27;radio&#x27; || this.get(&#x27;type&#x27;) === &#x27;checkbox&#x27;) {
-      // set all child buttons to toggle
-      this.get(&#x27;children&#x27;).forEach(function(button) {
-        button.set(&#x27;toggle&#x27;, true);
-      });
+      this.get(&#x27;onChange&#x27;)(newValue);
     }
-  }),
-
-  init() {
-    this._super();
-    this.set(&#x27;lastActiveChildren&#x27;, Ember.A());
-  },
-
-  _inDOM: false,
-
-  didInsertElement() {
-    this.set(&#x27;_inDOM&#x27;, true);
-    this.get(&#x27;activeChildren&#x27;);
   }
 });
 
@@ -309,43 +261,44 @@ export default Ember.Component.extend(ComponentParent, SizeClass, {
                     <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
                     <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
                     <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
                     <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
                     <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li class="nav-private"><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>
     </div>

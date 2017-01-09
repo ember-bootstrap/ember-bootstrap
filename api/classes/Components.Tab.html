@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>Components.Tab - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,24 +22,26 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+            <a href="/" class="navbar-brand">ember-bootstrap</a>
         </div>
         <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="navbar-nav nav">
-                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
-                <li><a href="/ember-bootstrap/components">Components</a></li>
-                <li><a href="/ember-bootstrap/api">API</a></li>
+                <li><a href="/#/getting-started">Getting Started</a></li>
+                <li><a href="/#/components">Components</a></li>
+                <li><a href="/api">API v1.0</a></li>
+                <li><a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a></li>
 
             </ul>
             <ul class="navbar-nav nav navbar-right">
                 <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.11.3.c321ebf7</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.1.9ea795d3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -65,7 +66,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-tab.js.html#l8"><code>addon&#x2F;components&#x2F;bs-tab.js:8</code></a>
+            Defined in: <a href="../files/addon_components_bs-tab.js.html#l13"><code>addon&#x2F;components&#x2F;bs-tab.js:13</code></a>
         </div>
 
 
@@ -76,34 +77,34 @@
     <p>Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,
 see <a href="http://getbootstrap.com/javascript/#tabs">http://getbootstrap.com/javascript/#tabs</a></p>
 <h3>Usage</h3>
-<p>Just nest any number of <a href="Components.TabPane.html">Components.TabPane</a> components that hold the tab content.
+<p>Just nest any number of yielded <a href="Components.TabPane.html">Components.TabPane</a> components that hold the tab content.
 The tab navigation is automatically generated from the tab panes' <code>title</code> property:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-tab}}
-  {{#bs-tab-pane title=&quot;Tab 1&quot;}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-tab as |tab|}}
+  {{#tab.pane title=&quot;Tab 1&quot;}}
     &lt;p&gt;...&lt;/p&gt;
-  {{/bs-tab-pane}}
-  {{#bs-tab-pane title=&quot;Tab 2&quot;}}
+  {{/tab.pane}}
+  {{#tab.pane title=&quot;Tab 2&quot;}}
     &lt;p&gt;...&lt;/p&gt;
-  {{/bs-tab-pane}}
+  {{/tab.pane}}
 {{/bs-tab}}
 </code></pre>
 <h3>Groupable (dropdown) tabs</h3>
 <p>Bootstrap's support for dropdown menus as tab navigation is mimiced by the use of the <code>groupTitle</code> property.
 All panes with the same <code>groupTitle</code> will be put inside the menu of a <a href="Components.Dropdown.html">Components.Dropdown</a>
 component with <code>groupTitle</code> being the dropdown's title:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-tab}}
-   {{#bs-tab-pane title=&quot;Tab 1&quot;}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-tab as |tab|}}
+   {{#tab.pane title=&quot;Tab 1&quot;}}
      &lt;p&gt;...&lt;/p&gt;
-   {{/bs-tab-pane}}
-   {{#bs-tab-pane title=&quot;Tab 2&quot;}}
+   {{/tab.pane}}
+   {{#tab.pane title=&quot;Tab 2&quot;}}
      &lt;p&gt;...&lt;/p&gt;
-   {{/bs-tab-pane}}
-   {{#bs-tab-pane title=&quot;Tab 3&quot; groupTitle=&quot;Dropdown&quot;}}
+   {{/tab.pane}}
+   {{#tab.pane title=&quot;Tab 3&quot; groupTitle=&quot;Dropdown&quot;}}
      &lt;p&gt;...&lt;/p&gt;
-   {{/bs-tab-pane}}
-   {{#bs-tab-pane title=&quot;Tab 4&quot; groupTitle=&quot;Dropdown&quot;}}
+   {{/tab.pane}}
+   {{#tab.pane title=&quot;Tab 4&quot; groupTitle=&quot;Dropdown&quot;}}
      &lt;p&gt;...&lt;/p&gt;
-   {{/bs-tab-pane}}
+   {{/tab.pane}}
 {{/bs-tab}}
 </code></pre>
 <h3>Custom tabs</h3>
@@ -114,19 +115,19 @@ your navigation by yourself.</p>
 using a <a href="Components.Nav.html">Components.Nav</a> component. The tab component yields the <code>activeId</code> property as well as
 its <code>select</code> action, which you would have to use to manually set the <code>active</code> state of the navigation items and to
 trigger the selection of the different tab panes, using their ids:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-tab customTabs=true as |activeId select|}}
-   {{#bs-nav type=&quot;tabs&quot;}}
-       {{#bs-nav-item active=(bs-eq activeId &quot;pane1&quot;)}}&lt;a href=&quot;#pane1&quot; role=&quot;tab&quot; {{action select &quot;pane1&quot;}}&gt;Tab 1&lt;/a&gt;{{/bs-nav-item}}
-       {{#bs-nav-item active=(bs-eq activeId &quot;pane2&quot;)}}&lt;a href=&quot;#pane1&quot; role=&quot;tab&quot; {{action select &quot;pane2&quot;}}&gt;Tab 2 &lt;span class=&quot;badge&quot;&gt;{{badge}}&lt;/span&gt;&lt;/a&gt;{{/bs-nav-item}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-tab customTabs=true as |tab|}}
+   {{#bs-nav type=&quot;tabs&quot; as |nav|}}
+       {{#nav.item active=(bs-eq tab.activeId &quot;pane1&quot;)}}&lt;a href=&quot;#pane1&quot; role=&quot;tab&quot; {{action tab.select &quot;pane1&quot;}}&gt;Tab 1&lt;/a&gt;{{/nav.item}}
+       {{#nav.item active=(bs-eq tab.activeId &quot;pane2&quot;)}}&lt;a href=&quot;#pane1&quot; role=&quot;tab&quot; {{action tab.select &quot;pane2&quot;}}&gt;Tab 2 &lt;span class=&quot;badge&quot;&gt;{{badge}}&lt;/span&gt;&lt;/a&gt;{{/nav.item}}
    {{/bs-nav}}
 
    &lt;div class=&quot;tab-content&quot;&gt;
-   {{#bs-tab-pane elementId=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
+   {{#tab.pane elementId=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
        &lt;p&gt;...&lt;/p&gt;
-   {{/bs-tab-pane}}
-   {{#bs-tab-pane elementId=&quot;pane2&quot; title=&quot;Tab 2&quot;}}
+   {{/tab.pane}}
+   {{#tab.pane elementId=&quot;pane2&quot; title=&quot;Tab 2&quot;}}
        &lt;p&gt;...&lt;/p&gt;
-   {{/bs-tab-pane}}
+   {{/tab.pane}}
    &lt;/div&gt;
 {{/bs-tab}}
 </code></pre>
@@ -139,9 +140,9 @@ deactivated dynamically, just as the  original Bootstrap implementation.</p>
 <p>If you want to have the content delivered through individual sub routes, just use
 the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{outlet}}</code> that show the nested routes' content:</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;div&gt;
-  {{#bs-nav type=&quot;tabs&quot;}}
-    {{#bs-nav-item}}{{#link-to &quot;tabs.index&quot;}}Tab 1{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to &quot;tabs.other&quot;}}Tab 2{{/link-to}}{{/bs-nav-item}}
+  {{#bs-nav type=&quot;tabs&quot; as |nav|}}
+    {{#nav.item}}{{#nav.link-to &quot;tabs.index&quot;}}Tab 1{{/nav.link-to}}{{/nav.item}}
+    {{#nav.item}}{{#nav.link-to &quot;tabs.other&quot;}}Tab 2{{/nav.link-to}}{{/nav.item}}
   {{/bs-nav}}
   {{outlet}}
 &lt;/div&gt;
@@ -231,6 +232,10 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
 
                             </li>
                             <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isActiveId" data-tablink="isActiveId">isActiveId</a>
+
+                            </li>
+                            <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_navItems" data-tablink="navItems">navItems</a>
 
                             </li>
@@ -247,7 +252,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
 
                     <ul class="index-list events extends">
                             <li class="index-item event public">
-                                <a href="#" data-tabid="#events" data-anchor="#event_action" data-tablink="action">action</a>
+                                <a href="#" data-tabid="#events" data-anchor="#event_onChange" data-tablink="onChange">onChange</a>
 
                             </li>
                     </ul>
@@ -273,7 +278,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Mixins.ComponentParent.html#method_registerChild">Mixins.ComponentParent</a>:
-                            <a href="../files/addon_mixins_component-parent.js.html#l25"><code>addon&#x2F;mixins&#x2F;component-parent.js:25</code></a>
+                            <a href="../files/addon_mixins_component-parent.js.html#l26"><code>addon&#x2F;mixins&#x2F;component-parent.js:26</code></a>
                             </p>
                     
                     
@@ -319,7 +324,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Mixins.ComponentParent.html#method_removeChild">Mixins.ComponentParent</a>:
-                            <a href="../files/addon_mixins_component-parent.js.html#l38"><code>addon&#x2F;mixins&#x2F;component-parent.js:38</code></a>
+                            <a href="../files/addon_mixins_component-parent.js.html#l39"><code>addon&#x2F;mixins&#x2F;component-parent.js:39</code></a>
                             </p>
                     
                     
@@ -370,7 +375,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab.js.html#l132"><code>addon&#x2F;components&#x2F;bs-tab.js:132</code></a>
+                            <a href="../files/addon_components_bs-tab.js.html#l137"><code>addon&#x2F;components&#x2F;bs-tab.js:137</code></a>
                             </p>
                     
                     
@@ -380,14 +385,16 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                             <p>The id (<code>elementId</code>) of the active <a href="Components.TabPane.html">TabPane</a>.
                     By default the first tab will be active, but this can be changed by setting this property</p>
                     <pre class="code prettyprint"><code class="language-hbs">{{#bs-tab activeId=&quot;pane2&quot;}}
-                      {{#bs-tab-pane id=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
+                      {{#tab.pane id=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
                          ...
-                      {{/bs-tab-pane}}
-                      {{#bs-tab-pane id=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
+                      {{/tab.pane}}
+                      {{#tab.pane id=&quot;pane1&quot; title=&quot;Tab 1&quot;}}
                         ...
-                      {{/bs-tab-pane}}
+                      {{/tab.pane}}
                     {{/bs-tab}}
                     </code></pre>
+                    <p>When the selection is changed by user interaction this property will not update by using two-way bindings in order
+                    to follow DDAU best practices. If you want to react to such changes, subscribe to the <code>onChange</code> action</p>
                     
                         </div>
                     
@@ -410,7 +417,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab.js.html#l181"><code>addon&#x2F;components&#x2F;bs-tab.js:181</code></a>
+                            <a href="../files/addon_components_bs-tab.js.html#l198"><code>addon&#x2F;components&#x2F;bs-tab.js:198</code></a>
                             </p>
                     
                     
@@ -469,7 +476,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab.js.html#l121"><code>addon&#x2F;components&#x2F;bs-tab.js:121</code></a>
+                            <a href="../files/addon_components_bs-tab.js.html#l126"><code>addon&#x2F;components&#x2F;bs-tab.js:126</code></a>
                             </p>
                     
                     
@@ -501,7 +508,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab.js.html#l153"><code>addon&#x2F;components&#x2F;bs-tab.js:153</code></a>
+                            <a href="../files/addon_components_bs-tab.js.html#l167"><code>addon&#x2F;components&#x2F;bs-tab.js:167</code></a>
                             </p>
                     
                     
@@ -532,7 +539,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab.js.html#l163"><code>addon&#x2F;components&#x2F;bs-tab.js:163</code></a>
+                            <a href="../files/addon_components_bs-tab.js.html#l177"><code>addon&#x2F;components&#x2F;bs-tab.js:177</code></a>
                             </p>
                     
                     
@@ -544,6 +551,35 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                         </div>
                     
                             <p><strong>Default:</strong> 150</p>
+                    
+                    
+                    </div>
+                    <div id="property_isActiveId" class="property item private">
+                        <h3 class="name">isActiveId
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-tab.js.html#l161"><code>addon&#x2F;components&#x2F;bs-tab.js:161</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
                     
                     
                     </div>
@@ -563,7 +599,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab.js.html#l193"><code>addon&#x2F;components&#x2F;bs-tab.js:193</code></a>
+                            <a href="../files/addon_components_bs-tab.js.html#l210"><code>addon&#x2F;components&#x2F;bs-tab.js:210</code></a>
                             </p>
                     
                     
@@ -593,7 +629,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab.js.html#l111"><code>addon&#x2F;components&#x2F;bs-tab.js:111</code></a>
+                            <a href="../files/addon_components_bs-tab.js.html#l116"><code>addon&#x2F;components&#x2F;bs-tab.js:116</code></a>
                             </p>
                     
                     
@@ -614,8 +650,8 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
             <div id="events" class="tab-pane">
                 <h2 class="off-left">Events</h2>
 
-                    <div id="event_action" class="events item public">
-                        <h3 class="name"><code>action</code></h3>
+                    <div id="event_onChange" class="events item public">
+                        <h3 class="name"><code>onChange</code></h3>
                         <span class="type"></span>
                     
                     
@@ -626,14 +662,16 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-tab.js.html#l173"><code>addon&#x2F;components&#x2F;bs-tab.js:173</code></a>
+                            <a href="../files/addon_components_bs-tab.js.html#l187"><code>addon&#x2F;components&#x2F;bs-tab.js:187</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>action is called when switching the active tab, with the new and previous pane id</p>
+                            <p>This action is called when switching the active tab, with the new and previous pane id</p>
+                    <p>You can return false to prevent changing the active tab automatically, and do that in your action by
+                    setting <code>activeId</code>.</p>
                     
                         </div>
                     
@@ -656,43 +694,44 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                     <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
                     <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
                     <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
                     <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
                     <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li class="nav-private"><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>
     </div>

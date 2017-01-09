@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>Components.Form - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//kaliber5.github.io/ember-bootstrap/stylesheets/kaliber5.css">
-    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,24 +22,26 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <a href="/ember-bootstrap/" class="navbar-brand">ember-bootstrap</a>
+            <a href="/" class="navbar-brand">ember-bootstrap</a>
         </div>
         <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="navbar-nav nav">
-                <li><a href="/ember-bootstrap/getting-started">Getting Started</a></li>
-                <li><a href="/ember-bootstrap/components">Components</a></li>
-                <li><a href="/ember-bootstrap/api">API</a></li>
+                <li><a href="/#/getting-started">Getting Started</a></li>
+                <li><a href="/#/components">Components</a></li>
+                <li><a href="/api">API v1.0</a></li>
+                <li><a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a></li>
 
             </ul>
             <ul class="navbar-nav nav navbar-right">
                 <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a></li>
 
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">0.11.3.c321ebf7</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.1.9ea795d3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -59,7 +60,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-form.js.html#l7"><code>addon&#x2F;components&#x2F;bs-form.js:7</code></a>
+            Defined in: <a href="../files/addon_components_bs-form.js.html#l12"><code>addon&#x2F;components&#x2F;bs-form.js:12</code></a>
         </div>
 
 
@@ -70,21 +71,21 @@
     <p>Render a form with the appropriate Bootstrap layout class (see <code>formLayout</code>).
 Allows setting a <code>model</code> that nested <code>Components.FormElement</code>s can access, and that can provide form validation (see below)</p>
 <p>You can use whatever markup you like within the form:</p>
-<pre class="code prettyprint"><code class="language-handlebars">{{#bs-form action=&quot;submit&quot;}}
-  {{#bs-form-group validation=firstNameValidation}}
+<pre class="code prettyprint"><code class="language-handlebars">{{#bs-form onSubmit=(action &quot;submit&quot;) as |form|}}
+  {{#form.group validation=firstNameValidation}}
     &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
-    {{bs-input type=&quot;text&quot; value=firstname}}
- {{/bs-form-group}}
+    &lt;input value={{firstname}} class=&quot;form-control&quot; oninput={{action (mut firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
+ {{/form.group}}
 {{/bs-form}}
 </code></pre>
 <p>However to benefit from features such as automatic form markup, validations and validation markup, use <code>Components.FormElement</code>
 as nested components. See below for an example.</p>
 <h3>Submitting the form</h3>
-<p>When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the default action
-will be sent to the controller.
-In case the form supports validation (see &quot;Form validation&quot; below), the &quot;before&quot; action is called (which allows you to
-do e.g. model data normalization), then the available  validation rules are evaluated, and if those fail, the &quot;invalid&quot;
-action is sent instead of the default &quot;action&quot;.</p>
+<p>When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the <code>onSubmit</code> action
+will be sent to the controller or parent component.
+In case the form supports validation (see &quot;Form validation&quot; below), the <code>onBefore</code> action is called (which allows you to
+do e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the <code>onInvalid</code>
+action is sent instead of <code>onSubmit</code>.</p>
 <h3>Use with Components.FormElement</h3>
 <p>When using <code>Components.FormElement</code>s with their <code>property</code> set to property names of the form's validation enabled
 <code>model</code>, you gain some additional powerful features:</p>
@@ -93,10 +94,10 @@ action is sent instead of the default &quot;action&quot;.</p>
 <li>markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form
 with an invalid validation, or when focusing out of invalid inputs</li>
 </ul>
-<pre class="code prettyprint"><code class="language-handlebars">{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot;}}
-  {{bs-form-element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
-  {{bs-form-element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
-  {{bs-form-element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+<pre class="code prettyprint"><code class="language-handlebars">{{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
+  {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+  {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+  {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
   {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
 {{/bs-form}}
 </code></pre>
@@ -174,10 +175,6 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
-                            <li class="index-item property protected">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_childFormElements" data-tablink="childFormElements">childFormElements</a>
-
-                            </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_formLayout" data-tablink="formLayout">formLayout</a>
 
@@ -202,6 +199,10 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                                 <a href="#" data-tabid="#properties" data-anchor="#property_novalidate" data-tablink="novalidate">novalidate</a>
 
                             </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showAllValidations" data-tablink="showAllValidations">showAllValidations</a>
+
+                            </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_submitOnEnter" data-tablink="submitOnEnter">submitOnEnter</a>
 
@@ -215,15 +216,15 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
 
                     <ul class="index-list events extends">
                             <li class="index-item event public">
-                                <a href="#" data-tabid="#events" data-anchor="#event_action" data-tablink="action">action</a>
+                                <a href="#" data-tabid="#events" data-anchor="#event_onBefore" data-tablink="onBefore">onBefore</a>
 
                             </li>
                             <li class="index-item event public">
-                                <a href="#" data-tabid="#events" data-anchor="#event_before" data-tablink="before">before</a>
+                                <a href="#" data-tabid="#events" data-anchor="#event_onInvalid" data-tablink="onInvalid">onInvalid</a>
 
                             </li>
                             <li class="index-item event public">
-                                <a href="#" data-tabid="#events" data-anchor="#event_invalid" data-tablink="invalid">invalid</a>
+                                <a href="#" data-tabid="#events" data-anchor="#event_onSubmit" data-tablink="onSubmit">onSubmit</a>
 
                             </li>
                     </ul>
@@ -249,7 +250,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l223"><code>addon&#x2F;components&#x2F;bs-form.js:223</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l219"><code>addon&#x2F;components&#x2F;bs-form.js:219</code></a>
                             </p>
                     
                     
@@ -273,36 +274,6 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_childFormElements" class="property item protected">
-                        <h3 class="name">childFormElements
-                            <span class="small">Array</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l166"><code>addon&#x2F;components&#x2F;bs-form.js:166</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>An array of <code>Components.FormElement</code>s that are children of this form.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_formLayout" class="property item public">
                         <h3 class="name">formLayout
                             <span class="small">string</span>
@@ -319,7 +290,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l112"><code>addon&#x2F;components&#x2F;bs-form.js:112</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l118"><code>addon&#x2F;components&#x2F;bs-form.js:118</code></a>
                             </p>
                     
                     
@@ -349,7 +320,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l121"><code>addon&#x2F;components&#x2F;bs-form.js:121</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l127"><code>addon&#x2F;components&#x2F;bs-form.js:127</code></a>
                             </p>
                     
                     
@@ -379,7 +350,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l131"><code>addon&#x2F;components&#x2F;bs-form.js:131</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l137"><code>addon&#x2F;components&#x2F;bs-form.js:137</code></a>
                             </p>
                     
                     
@@ -411,7 +382,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l84"><code>addon&#x2F;components&#x2F;bs-form.js:84</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l90"><code>addon&#x2F;components&#x2F;bs-form.js:90</code></a>
                             </p>
                     
                     
@@ -441,7 +412,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l98"><code>addon&#x2F;components&#x2F;bs-form.js:98</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l104"><code>addon&#x2F;components&#x2F;bs-form.js:104</code></a>
                             </p>
                     
                     
@@ -477,7 +448,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l152"><code>addon&#x2F;components&#x2F;bs-form.js:152</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l158"><code>addon&#x2F;components&#x2F;bs-form.js:158</code></a>
                             </p>
                     
                     
@@ -489,6 +460,36 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_showAllValidations" class="property item private">
+                        <h3 class="name">showAllValidations
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form.js.html#l183"><code>addon&#x2F;components&#x2F;bs-form.js:183</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
@@ -508,7 +509,7 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l142"><code>addon&#x2F;components&#x2F;bs-form.js:142</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l148"><code>addon&#x2F;components&#x2F;bs-form.js:148</code></a>
                             </p>
                     
                     
@@ -529,8 +530,8 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
             <div id="events" class="tab-pane">
                 <h2 class="off-left">Events</h2>
 
-                    <div id="event_action" class="events item public">
-                        <h3 class="name"><code>action</code></h3>
+                    <div id="event_onBefore" class="events item public">
+                        <h3 class="name"><code>onBefore</code></h3>
                         <span class="type"></span>
                     
                     
@@ -541,14 +542,100 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l206"><code>addon&#x2F;components&#x2F;bs-form.js:206</code></a>
+                            <a href="../files/addon_components_bs-form.js.html#l191"><code>addon&#x2F;components&#x2F;bs-form.js:191</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>A handler called when submit has been triggered and the model has passed all validations (if present).</p>
+                            <p>Action is called before the form is validated (if possible) and submitted.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">Object</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>model  The form's <code>model</code></p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_onInvalid" class="events item public">
+                        <h3 class="name"><code>onInvalid</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form.js.html#l210"><code>addon&#x2F;components&#x2F;bs-form.js:210</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Action is called when validation of the model has failed.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">Object</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>error</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_onSubmit" class="events item public">
+                        <h3 class="name"><code>onSubmit</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_bs-form.js.html#l200"><code>addon&#x2F;components&#x2F;bs-form.js:200</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Action is called when submit has been triggered and the model has passed all validations (if present).</p>
                     
                         </div>
                     
@@ -583,92 +670,6 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                     
                     
                     </div>
-                    <div id="event_before" class="events item public">
-                        <h3 class="name"><code>before</code></h3>
-                        <span class="type"></span>
-                    
-                    
-                            <span class="flag public">public</span>
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l198"><code>addon&#x2F;components&#x2F;bs-form.js:198</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>A handler called before the form is validated (if possible) and submitted.</p>
-                    
-                        </div>
-                    
-                            <div class="params">
-                                <h4>Event Payload:</h4>
-                    
-                                <ul class="params-list">
-                                    <li class="param">
-                                            <code class="param-name">Object</code>
-                                            <span class="type">Object</span>
-                    
-                    
-                                        <div class="param-description">
-                                            <p>model  The form's <code>model</code></p>
-                    
-                                        </div>
-                    
-                                    </li>
-                                </ul>
-                            </div>
-                    
-                    
-                    </div>
-                    <div id="event_invalid" class="events item public">
-                        <h3 class="name"><code>invalid</code></h3>
-                        <span class="type"></span>
-                    
-                    
-                            <span class="flag public">public</span>
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form.js.html#l215"><code>addon&#x2F;components&#x2F;bs-form.js:215</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>A handler called when validation of the model has failed.</p>
-                    
-                        </div>
-                    
-                            <div class="params">
-                                <h4>Event Payload:</h4>
-                    
-                                <ul class="params-list">
-                                    <li class="param">
-                                            <code class="param-name">Object</code>
-                                            <span class="type">Object</span>
-                    
-                    
-                                        <div class="param-description">
-                                            <p>error</p>
-                    
-                                        </div>
-                    
-                                    </li>
-                                </ul>
-                            </div>
-                    
-                    
-                    </div>
             </div>
     </div>
 </div>
@@ -685,43 +686,44 @@ are shown. See the <a href="Components.FormElement.html">Components.FormElement<
                     <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
                     <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
                     <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Input.html">Components.Input</a></li>
                     <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
                     <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Select.html">Components.Select</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
                     <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
-                    <li class="nav-public"><a href="../classes/Components.Textarea.html">Components.Textarea</a></li>
                     <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
                     <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-                    <li class="nav-private"><a href="../classes/Mixins.ModalCloser.html">Mixins.ModalCloser</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>        </div>
     </div>
