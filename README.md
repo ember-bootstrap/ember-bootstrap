@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/kaliber5/ember-bootstrap.svg?branch=master)](https://travis-ci.org/kaliber5/ember-bootstrap)
 [![Ember Observer Score](http://emberobserver.com/badges/ember-bootstrap.svg)](http://emberobserver.com/addons/ember-bootstrap)
+[![npm version](https://badge.fury.io/js/ember-bootstrap.svg)](https://badge.fury.io/js/ember-bootstrap)
 [![Dependency Status](https://david-dm.org/kaliber5/ember-bootstrap.svg)](https://david-dm.org/kaliber5/ember-bootstrap)
 [![devDependency Status](https://david-dm.org/kaliber5/ember-bootstrap/dev-status.svg)](https://david-dm.org/kaliber5/ember-bootstrap#info=devDependencies)
 [![Code Climate](https://codeclimate.com/github/kaliber5/ember-bootstrap/badges/gpa.svg)](https://codeclimate.com/github/kaliber5/ember-bootstrap)
