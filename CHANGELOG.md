@@ -1,4 +1,4 @@
-<a name="1.0.0-alpha.1"></a>
+
 # [1.0.0-alpha.1](https://github.com/kaliber5/ember-bootstrap/compare/v1.0.0-alpha...v1.0.0-alpha.1) (2017-01-02)
 
 
@@ -16,7 +16,7 @@
 
 
 
-<a name="1.0.0-alpha"></a>
+
 # [1.0.0-alpha](https://github.com/kaliber5/ember-bootstrap/compare/v0.11.3...v1.0.0-alpha) (2016-12-27)
 
 ## Breaking Changes
@@ -49,7 +49,7 @@ See the following list for details.
 * **FormElement:** support readonly attribute. Thanks to basz ([dec8e8c](https://github.com/kaliber5/ember-bootstrap/commit/dec8e8c))
 * **FormElement:** the existing block params `id`, `value` and `validation` are yielded as hash properties ([c353154](https://github.com/kaliber5/ember-bootstrap/commit/c353154))
 * **FormElement:** uses one-way controls thus supporting DDAU pattern. Calls onChange action when input values have changed. Form component initializes FormElement with default action that updates the models property, but can be overriden. ([dda8e36](https://github.com/kaliber5/ember-bootstrap/commit/dda8e36))
-* **Input:** The `bs-input` and `bs-textarea` components have been removed, as they were based on the basic Ember input helpers that allow only two-way bindings. Use simple `<input class="form-control">` elements instead if needed. The form elements yielded by `bs-form` wrap these for you, so use them whenever possible. ([3e7d81f](https://github.com/kaliber5/ember-bootstrap/commit/3e7d81f))
+* **Input:** The `bs-input` and `bs-textarea` components have been removed, as they were based on the basic Ember input helpers that allow only two-way bindings. Use simple `` elements instead if needed. The form elements yielded by `bs-form` wrap these for you, so use them whenever possible. ([3e7d81f](https://github.com/kaliber5/ember-bootstrap/commit/3e7d81f))
 * **Modal:** added `transitionDuration` and `backdropTransitionDuration`. ([d49c79a](https://github.com/kaliber5/ember-bootstrap/commit/d49c79a)), closes [#78](https://github.com/kaliber5/ember-bootstrap/issues/78)
 * **Modal:** Binding to open property is one-way only (DDAU) ([c3869c9](https://github.com/kaliber5/ember-bootstrap/commit/c3869c9))
 * **Modal:** dropped `autoClose` property. Preventing automatically closing the modal can now be done by returning false from `onHide` ([1bffd84](https://github.com/kaliber5/ember-bootstrap/commit/1bffd84))
@@ -66,7 +66,7 @@ See the following list for details.
 
 
 
-<a name"0.11.3"></a>
+
 ### 0.11.3 (2016-11-30)
 
 
@@ -76,7 +76,7 @@ See the following list for details.
 * **Tooltips:** support custom class. Thanks to rstudner ([7877c5df](https://github.com/kaliber5/ember-bootstrap/commit/7877c5df), closes [#161](https://github.com/kaliber5/ember-bootstrap/issues/161))
 
 
-<a name"0.11.2"></a>
+
 ### 0.11.2 (2016-11-08)
 
 
@@ -91,7 +91,7 @@ See the following list for details.
 * **Button:** Addition/support for title attribute on buttons. Thanks to basz ([3d630874](https://github.com/kaliber5/ember-bootstrap/commit/3d630874), closes [#148](https://github.com/kaliber5/ember-bootstrap/issues/148))
 
 
-<a name"0.11.1"></a>
+
 ### 0.11.1 (2016-10-27)
 
 
@@ -100,7 +100,7 @@ See the following list for details.
 * **Alert:** added missing alert-dismissible class ([9c8f5ace](https://github.com/kaliber5/ember-bootstrap/commit/9c8f5ace), closes [#146](https://github.com/kaliber5/ember-bootstrap/issues/146))
 
 
-<a name"0.11.0"></a>
+
 ## 0.11.0 (2016-10-08)
 
 
@@ -109,7 +109,7 @@ See the following list for details.
 * **Tooltips:** Added support for tooltips and popovers ([25d16ccd](https://github.com/kaliber5/ember-bootstrap/commit/25d16ccd), closes [#7](https://github.com/kaliber5/ember-bootstrap/issues/7))
 
 
-<a name"0.10.0"></a>
+
 ## 0.10.0 (2016-09-15)
 
 
@@ -143,7 +143,7 @@ See the following list for details.
  ([6c9282a7](https://github.com/kaliber5/ember-bootstrap/commit/6c9282a7))
 
 
-<a name"0.9.1"></a>
+
 ### 0.9.1 (2016-08-20)
 
 
@@ -157,7 +157,7 @@ See the following list for details.
 * **FormElement:** adds `showValidationOn` events. Thanks to [jelhan](https://github.com/jelhan) (#127) ([2eb7ac07](https://github.com/kaliber5/ember-bootstrap/commit/2eb7ac07))
 
 
-<a name"0.9.0"></a>
+
 ## 0.9.0 (2016-08-13)
 
 
@@ -177,7 +177,7 @@ See the following list for details.
 * **Navbar:** added set of components for creating navbars. Thanks to [srvance](https://github.com/srvance) for implementation ([6065a0b4](https://github.com/kaliber5/ember-bootstrap/commit/6065a0b4), closes [#48](https://github.com/kaliber5/ember-bootstrap/issues/48))
 
 
-<a name"0.8.0"></a>
+
 ## 0.8.0 (2016-07-02)
 
 
@@ -193,7 +193,7 @@ See the following list for details.
 * **FormElement:** support validations with warning messages (supported by ember-cp-validations 3.0 ([cd324d16](https://github.com/kaliber5/ember-bootstrap/commit/cd324d16))
 
 
-<a name"0.7.3"></a>
+
 ### 0.7.3 (2016-06-22)
 
 
@@ -210,7 +210,7 @@ See the following list for details.
 * **FormElement:** adjust position of feedback items if there is input group. Thanks to [jelhan](https://github.com/jelhan)
 
 
-<a name"0.7.2"></a>
+
 ### 0.7.2 (2016-05-29)
 
 #### Bug Fixes
@@ -224,7 +224,7 @@ See the following list for details.
 * **Button:** add support for returning a promise from a closure action to support automatic state change ([fb8fa1e3](https://github.com/kaliber5/ember-bootstrap/commit/fb8fa1e3), closes [#87](https://github.com/kaliber5/ember-bootstrap/issues/87))
 * **Form:** adds support for novalidate attribute. Thanks to [jelhan](https://github.com/jelhan)
 
-<a name"0.7.1"></a>
+
 ### 0.7.1 (2016-05-11)
 
 
@@ -238,7 +238,7 @@ See the following list for details.
 * **Less Import:** import Bootstrap's less assets simply by importing 'ember-bootstrap/bootstrap' in your app.less ([ab38b9d5](https://github.com/kaliber5/ember-bootstrap/commit/ab38b9d5), closes [#80](https://github.com/kaliber5/ember-bootstrap/issues/80))
 
 
-<a name"0.7.0"></a>
+
 ## 0.7.0 (2016-04-02)
 
 #### Bug Fixes
@@ -262,7 +262,7 @@ enable support for it:
 
 Additional support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations) has been added by [Offir Golan](https://github.com/offirgolan) through [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations)
 
-<a name"0.6.4"></a>
+
 ### 0.6.4 (2016-03-07)
 
 
@@ -279,7 +279,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 * **Modal:** Implement openAction (refs #55). Thanks to [bendemboski](https://github.com/bendemboski) ([ab713eef](https://github.com/kaliber5/ember-bootstrap/commit/ab713eef))
 
 
-<a name"0.6.3"></a>
+
 ### 0.6.3 (2016-03-04)
 
 
@@ -296,7 +296,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 * **Modal:** Implement autofocus support. Thanks to [bendemboski](https://github.com/bendemboski) ([10f6d71f](https://github.com/kaliber5/ember-bootstrap/commit/10f6d71f), closes [#55](https://github.com/kaliber5/ember-bootstrap/issues/55))
 
 
-<a name"0.6.2"></a>
+
 ### 0.6.2 (2016-02-25)
 
 
@@ -307,7 +307,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 * **Modal:** Patch emulateTransitionEnd to support andThen() waiting for transition ([ae787626](https://github.com/kaliber5/ember-bootstrap/commit/ae787626), closes [#53](https://github.com/kaliber5/ember-bootstrap/issues/53))
 
 
-<a name"0.6.1"></a>
+
 ### 0.6.1 (2016-02-06)
 
 
@@ -322,7 +322,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 * **FormElement:** support custom controls ([641d96e7](https://github.com/kaliber5/ember-bootstrap/commit/641d96e7), closes [#46](https://github.com/kaliber5/ember-bootstrap/issues/46))
 
 
-<a name"0.6.0"></a>
+
 ## 0.6.0 (2016-01-12)
 
 #### Bug Fixes
@@ -342,7 +342,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
  ([a5ade3c1](https://github.com/kaliber5/ember-bootstrap/commit/a5ade3c1))
 
 
-<a name"0.5.1"></a>
+
 ### 0.5.1 (2016-01-04)
 
 
@@ -356,7 +356,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 * **Modal:** implemented scrollbar layout adjustments when opening modals, like the original bootstrap.js modals ([3e28b099](https://github.com/kaliber5/ember-bootstrap/commit/3e28b099))
 
 
-<a name"0.5.0"></a>
+
 ## 0.5.0 (2015-11-12)
 
 
@@ -365,20 +365,20 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 * **Modal:**
   * added bs-modal component and sub components for creating Bootstrap modal dialogs
 
-<a name"0.4.1"></a>
+
 ### 0.4.1 (2015-10-31)
 
 * **FormElement:**
-  * Wire up <label> for attribute used in form-element component, thanks to [cyk](https://github.com/cyk) ([3ed081a](https://github.com/kaliber5/ember-bootstrap/commit/3ed081a400f8a83524339bb71eda2d027e01bc05))
+  * Wire up  for attribute used in form-element component, thanks to [cyk](https://github.com/cyk) ([3ed081a](https://github.com/kaliber5/ember-bootstrap/commit/3ed081a400f8a83524339bb71eda2d027e01bc05))
 
-<a name"0.4.0"></a>
+
 ## 0.4.0 (2015-09-22)
 
 * **Collapse:**
   * added bs-collapse component for collapsible content ([794b52d5](https://github.com/kaliber5/ember-bootstrap/commit/794b52d5f6ad1c53e6a468590d69c269d33c1da5))
   * refactored bs-accordion-item to use bs-collapse internally ([58b0d868](https://github.com/kaliber5/ember-bootstrap/commit/58b0d868c58c2c5f29f6dcc99e1eccb357280b9e))
 
-<a name"0.3.0"></a>
+
 ## 0.3.0 (2015-09-09)
 
 
@@ -387,7 +387,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 * **Accordion:**
   * added accordion components ([f2bbaca8](https://github.com/kaliber5/ember-bootstrap/commit/f2bbaca8))
 
-<a name"0.2.0"></a>
+
 ## 0.2.0 (2015-08-14)
 
 
@@ -397,7 +397,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 * **Tests:** Refactored all component tests to use the new integration test style
 * **Select:** added Ember.Select replacement component ([19144085](https://github.com/kaliber5/ember-bootstrap/commit/19144085))
 
-<a name"0.1.4"></a>
+
 ### 0.1.4 (2015-08-05)
 
 
@@ -406,7 +406,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 * **Components.FormElement:** Wrong classes for horizontal layout forms (14) ([1caba612](https://github.com/kaliber5/ember-bootstrap/commit/1caba612))
 
 
-<a name"0.1.3"></a>
+
 ### 0.1.3 (2015-07-07)
 
 
@@ -421,14 +421,14 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 * **Form:** submitOnEnter submits the form when user presses enter, even if no submit button ([fcc9898b](https://github.com/kaliber5/ember-bootstrap/commit/fcc9898b))
 
 
-<a name"0.1.2"></a>
+
 ### 0.1.2 (2015-04-22)
 
 #### Features
 
 * **I18n:** support for ember-i18n added: selected components support translateable properties
 
-<a name"0.1.1"></a>
+
 ### 0.1.1 (2015-04-21)
 
 #### Bug Fixes
@@ -436,7 +436,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 * **FormGroup:** fixed wrong form group validation class in Ember 1.11 ([ff72909e](https://github.com/kaliber5/ember-bootstrap/commit/ff72909e))
 
 
-<a name"0.1.0"></a>
+
 ## 0.1.0 (2015-04-17)
 
 #### Features
@@ -447,7 +447,7 @@ New form classes to support creating powerful forms:
 * **FormGroup:** component for Bootstrap form-group elements with validation rendering
 * **FormElement:** extends FormGroup to implement automatic markup generation and model based validations
 
-<a name"0.0.9"></a>
+
 ### 0.0.9 (2015-04-08)
 
 #### Bug Fixes
@@ -455,7 +455,7 @@ New form classes to support creating powerful forms:
 * **ButtonGroup:**
   * initial value did not set active buttons properly
 
-<a name"0.0.8"></a>
+
 ### 0.0.8 (2015-04-08)
 
 
@@ -466,7 +466,7 @@ New form classes to support creating powerful forms:
   * fixed broken button group value added separate button page to dummy app ([2c2dafc0](https://github.com/kaliber5/ember-bootstrap/commit/2c2dafc0))
 * **bower:** fixed missing bootstrap dependency in bower.json. Did not affect the host ember  ([5c00c2b9](https://github.com/kaliber5/ember-bootstrap/commit/5c00c2b9))
 
-<a name"0.0.7"></a>
+
 ### 0.0.7 (2015-03-14)
 
 #### Features
@@ -478,17 +478,17 @@ New form classes to support creating powerful forms:
 * Enhanced API docs, with custom theme
 * Updated to ember-cli 0.2.0, ember.js 1.10
 
-<a name"0.0.6"></a>
+
 ### 0.0.6 (2015-03-10)
 
 * **Alert:** component for dismissible Bootstrap alerts
 
-<a name"0.0.5"></a>
+
 ### 0.0.5 (2015-02-2)
 
 * **ButtonGroup:** component for groups of Buttons, with radio and checkbox style toggling
 
-<a name"0.0.4"></a>
+
 ### 0.0.4 (2015-01-25)
 
 * Initial release
