@@ -1,5 +1,7 @@
 <h2>Simple form</h2>
 
+<p>The forms component lets you easily create forms with automatic markup generation based on the chosen form layout:</p>
+
 <div class="bs-example">
     {{#bs-form formLayout="horizontal" model=this as |form|}}
         {{#form.element label="Layout" property="formLayout" as |el|}}
@@ -10,6 +12,7 @@
             {{/bs-button-group}}
         {{/form.element}}
     {{/bs-form}}
+    <hr>
     <!-- BEGIN-SNIPPET form-demo -->
     {{#bs-form formLayout=formLayout model=this onSubmit=(action "submit") as |form|}}
         {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=true}}
@@ -24,20 +27,62 @@
     {{code-snippet name="form-demo.hbs"}}
 </div>
 
+
+<h2>Validation</h2>
+
+<p>Add support for forms validation by using one of the available additional addons depending on your favourite form validation library:</p>
+
+<ul>
+    <li><a href="https://github.com/offirgolan/ember-bootstrap-cp-validations" target="_blank">ember-bootstrap-cp-validations</a> for
+        <a href="https://github.com/offirgolan/ember-cp-validations" target="_blank">ember-cp-validations</a> support</li>
+    <li><a href="https://github.com/kaliber5/ember-bootstrap-changeset-validations" target="_blank">ember-bootstrap-changeset-validations</a> for
+        <a href="https://github.com/DockYard/ember-changeset-validations" target="_blank">ember-changeset</a> support</li>
+    <li><a href="https://github.com/kaliber5/ember-bootstrap-validations" target="_blank">ember-bootstrap-validations</a> for
+        <a href="https://github.com/DockYard/ember-validations" target="_blank">ember-validations</a> support</li>
+</ul>
+
+<p>Just add validations to your model assigned to your form. It will then force validation on submit and show the eventual validation errors.
+    The following example uses ember-cp-validations:</p>
+
+{{!--
+This is needed for the correct code sample as we have no bs-form with validation support in this addon to not override
+the original one in tests. -bs-form contains the (copy pasted) validation support from ember-bootstrap-cp-validations
+
+<!-- BEGIN-SNIPPET form-validation -->
+{{#bs-form model=login onSubmit=(action "submit") novalidate=true as |form|}}
+    {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
+    {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
+    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+{{/bs-form}}
+<!-- END-SNIPPET -->
+--}}
+<div class="bs-example">
+    {{#-bs-form model=login onSubmit=(action "submit") novalidate=true as |form|}}
+        {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
+        {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
+        {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+    {{/-bs-form}}
+</div>
+{{#bs-tab as |tab|}}
+    {{#tab.pane title="template.hbs"}}
+        <div class="highlight">
+            {{code-snippet name="form-validation.hbs"}}
+        </div>
+    {{/tab.pane}}
+    {{#tab.pane title="models/login.js"}}
+        <div class="highlight">
+            {{code-snippet name="login-model.js"}}
+        </div>
+    {{/tab.pane}}
+{{/bs-tab}}
+
 <h2>Custom Controls</h2>
 
+<p>Use the form element in block from to add your custom controls.</p>
+
 <div class="bs-example">
-    {{#bs-form formLayout="horizontal" model=this as |form|}}
-        {{#form.element label="Layout" property="formLayout" as |el|}}
-            {{#bs-button-group value=formLayout type="radio" onChange=(action (mut formLayout)) as |bg|}}
-                {{#bg.button value="vertical"}}Vertical{{/bg.button}}
-                {{#bg.button value="horizontal"}}Horizontal{{/bg.button}}
-                {{#bg.button value="inline"}}Inline{{/bg.button}}
-            {{/bs-button-group}}
-        {{/form.element}}
-    {{/bs-form}}
     <!-- BEGIN-SNIPPET form-custom -->
-    {{#bs-form formLayout=formLayout model=this onSubmit=(action "submit") as |form|}}
+    {{#bs-form model=this onSubmit=(action "submit") as |form|}}
         {{#form.element label="Email" placeholder="Email" property="username" as |el|}}
             <div class="input-group">
                 <input value={{el.value}} class="form-control" oninput={{action (mut el.value) value="target.value"}} id={{el.id}} type="text">

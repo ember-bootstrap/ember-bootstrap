@@ -1,18 +1,29 @@
+// BEGIN-SNIPPET login-model
 import Ember from 'ember';
-import EmberValidations from 'ember-validations';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default Ember.Object.extend(EmberValidations, {
+const Validations = buildValidations({
+  password: [
+    validator('presence', true),
+    validator('length', {
+      min: 4,
+      max: 8
+    }),
+    validator('length', {
+      isWarning: true,
+      min: 6,
+      message: 'Password is weak'
+    })
+  ],
+  email: [
+    validator('presence', true),
+    validator('format', { type: 'email' })
+  ]
+});
+
+export default Ember.Object.extend(Validations, {
   email: null,
   password: null,
-  rememberMe: false,
-  validations: {
-    email: {
-      format: {
-        with: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/
-      }
-    },
-    password: {
-      length: { minimum: 3, maximum: 10 }
-    }
-  }
+  rememberMe: false
 });
+// END-SNIPPET
