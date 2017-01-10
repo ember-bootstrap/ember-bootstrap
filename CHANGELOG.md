@@ -1,3 +1,14 @@
+<a name="1.0.0-alpha.2"></a>
+# [1.0.0-alpha.2](https://github.com/kaliber5/ember-bootstrap/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2017-01-10)
+
+
+### Bug Fixes
+
+* **FormElement:** input elements also trigger on change event as well as on input event ([62600fc](https://github.com/kaliber5/ember-bootstrap/commit/62600fc))
+* **Modal:** Fixed missing close button for header yielded by bs-modal ([1100e3f](https://github.com/kaliber5/ember-bootstrap/commit/1100e3f))
+
+
+
 <a name="1.0.0-alpha.1"></a>
 # [1.0.0-alpha.1](https://github.com/kaliber5/ember-bootstrap/compare/v1.0.0-alpha...v1.0.0-alpha.1) (2017-01-02)
 
