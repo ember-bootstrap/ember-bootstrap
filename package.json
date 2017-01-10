@@ -3,8 +3,8 @@
   "fastboot": {
     "moduleWhitelist": [],
     "manifest": {
-      "appFile": "fastboot/dummy-a629506e419cc3ff5824c82dd447fda6.js",
-      "vendorFile": "fastboot/vendor-3cdc57cd7d7f9509070f4eab36cf4d67.js",
+      "appFile": "fastboot/dummy-97c48a233175d4fa865e610bb90e533a.js",
+      "vendorFile": "fastboot/vendor-c1ec3d8b281a69671c4e73e9a7f29088.js",
       "htmlFile": "index.html"
     },
     "appConfig": {
@@ -17,7 +17,7 @@
       },
       "APP": {
         "name": "ember-bootstrap",
-        "version": "1.0.0-alpha.1+ed9fb93e",
+        "version": "1.0.0-alpha.1+571665b3",
         "autoboot": false
       },
       "unstableApiURL": "http://simonihmig.github.io/ember-bootstrap/",
