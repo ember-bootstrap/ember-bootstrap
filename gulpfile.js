@@ -23,8 +23,8 @@ gulp.task('docs:app', function(cb) {
 gulp.task('docs:publish', ['docs:api', 'docs:app'], function() {
   return merge(
     gulp.src('docs/api/**/*', { base: 'docs' }),
-    gulp.src('CHANGELOG.md').pipe(transform(striptags, { encoding: 'utf8' })),
-    gulp.src('dist/**/*')
+    gulp.src('dist/**/*'),
+    gulp.src('CHANGELOG.md').pipe(transform(striptags, { encoding: 'utf8' }))
   )
     .pipe(ghPages());
 });
