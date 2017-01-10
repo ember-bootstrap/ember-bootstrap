@@ -11,7 +11,7 @@ An [ember-cli](http://www.ember-cli.com) addon for using [Twitter Bootstrap](htt
 
 The addon includes the Bootstrap assets (CSS, Icons) in your project (can be disabled). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
 
-*See [kaliber5.github.io/ember-bootstrap/](http://kaliber5.github.io/ember-bootstrap/) for full documentation.*
+*See [www.ember-bootstrap.com](http://www.ember-bootstrap.com/) for full documentation.*
 
 ## Install in ember-cli application
 
