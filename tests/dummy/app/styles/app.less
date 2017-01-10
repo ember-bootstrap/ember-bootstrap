@@ -1,10 +1,20 @@
 @import 'ember-bootstrap/bootstrap';
+@import 'bs-example';
+@import 'variables';
 
 body {
-    position: relative;
+  position: relative;
+  overflow: auto !important; // for modals in bs-example
 }
 
 .is-required > label:after {
   content: '*';
-  color: red;
+}
+
+.navbar-static-top {
+  border-width: 0 0 3px;
+}
+
+.logo {
+  margin-top: 20px;
 }

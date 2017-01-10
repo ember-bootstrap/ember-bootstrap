@@ -1,0 +1,50 @@
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET dropdown-demo -->
+    <ul class="nav nav-pills">
+        {{#bs-dropdown tagName="li" as |dd|}}
+            {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+            {{#dd.menu}}
+                <li>{{#link-to "index"}}Home{{/link-to}}</li>
+                <li>{{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}</li>
+            {{/dd.menu}}
+        {{/bs-dropdown}}
+        {{#bs-dropdown direction="up" tagName="li" as |dd|}}
+            {{#dd.toggle}}Dropup <span class="caret"></span>{{/dd.toggle}}
+            {{#dd.menu align="right"}}
+                <li>{{#link-to "index"}}Home{{/link-to}}</li>
+                <li>{{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}</li>
+            {{/dd.menu}}
+        {{/bs-dropdown}}
+    </ul>
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="dropdown-demo.hbs"}}
+</div>
+
+
+<h2>Button dropdowns</h2>
+
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET dropdown-button -->
+    {{#bs-dropdown as |dd|}}
+        {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
+        {{#dd.menu}}
+            <li>{{#link-to "index"}}Home{{/link-to}}</li>
+            <li>{{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}</li>
+        {{/dd.menu}}
+    {{/bs-dropdown}}
+
+    {{#bs-dropdown as |dd|}}
+        {{#bs-button}}Dropdown{{/bs-button}}
+        {{#dd.button}}<span class="caret"></span>{{/dd.button}}
+        {{#dd.menu}}
+            <li>{{#link-to "index"}}Home{{/link-to}}</li>
+            <li>{{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}</li>
+        {{/dd.menu}}
+    {{/bs-dropdown}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="dropdown-button.hbs"}}
+</div>

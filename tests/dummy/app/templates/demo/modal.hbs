@@ -1,0 +1,85 @@
+<h2>Simple modal</h2>
+
+<p>Use the <code>bs-modal-simple</code> component for Modals with a default layout</p>
+
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET modal-demo -->
+    {{#bs-modal-simple open=modal1 title="Simple Dialog" size="sm" onHidden=(action (mut modal1) false)}}
+        Hi there
+    {{/bs-modal-simple}}
+    {{#bs-button onClick=(action (mut modal1) true)}}Open Modal{{/bs-button}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="modal-demo.hbs"}}
+</div>
+
+<h3>Options</h3>
+
+{{#bs-form formLayout="horizontal" model=this as |form|}}
+    {{form.element label="Title" property="title"}}
+    {{form.element label="Close button" property="closeTitle"}}
+    {{form.element label="Submit button" placeholder="Enter title to add a submit button" property="submitTitle"}}
+
+    {{#form.element label="Size" property="size" as |el|}}
+        {{#x-select class="form-control" value=el.value id=el.id on-change=(action (mut size)) as |xs|}}
+            {{#each sizes as |choice|}}
+                {{#xs.option value=choice}}{{choice}}{{/xs.option}}
+            {{/each}}
+        {{/x-select}}
+    {{/form.element}}
+    {{form.element controlType="checkbox" label="Close button" property="closeButton"}}
+    {{form.element controlType="checkbox" label="Fade" property="fade"}}
+    {{form.element controlType="checkbox" label="Backdrop" property="backdrop" onChange=(action "backdropChange")}}
+    {{form.element controlType="checkbox" label="Backdrop close" property="backdropClose"}}
+{{/bs-form}}
+
+<div class="bs-example bs-example__modal">
+    <!-- BEGIN-SNIPPET modal-options -->
+    {{#bs-modal-simple
+        open=modal2
+        title=title
+        closeTitle=closeTitle
+        submitTitle=submitTitle
+        size=size
+        closeButton=closeButton
+        fade=fade
+        backdrop=backdrop
+        backdropClose=backdropClose
+        onSubmit=(action "submit")
+        onHidden=(action "close")
+        renderInPlace=true}}
+        Hi there
+    {{/bs-modal-simple}}
+    {{#bs-button onClick=(action "open")}}Reopen Modal{{/bs-button}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="modal-options.hbs"}}
+</div>
+
+<h2>Custom markup</h2>
+
+<p>Use the <code>bs-modal</code> component for custom markup</p>
+
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET modal-custom -->
+    {{#bs-modal open=modal3 onSubmit=(action "submit") onHidden=(action (mut modal3) false) as |modal|}}
+        {{#modal.header}}
+            <h4 class="modal-title">Custom Dialog <div class="badge">2</div></h4>
+        {{/modal.header}}
+        {{#modal.body}}
+            <input type="text" autofocus="autofocus">
+        {{/modal.body}}
+        {{#modal.footer}}
+            {{#bs-button onClick=(action modal.close)}}Cancel{{/bs-button}}
+            {{#bs-button type="danger"}}Delete{{/bs-button}}
+            {{#bs-button type="success" onClick=(action modal.submit)}}Save{{/bs-button}}
+        {{/modal.footer}}
+    {{/bs-modal}}
+    {{#bs-button onClick=(action (mut modal3) true)}}Open Modal{{/bs-button}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="modal-custom.hbs"}}
+</div>

@@ -1,18 +1,26 @@
-{{#bs-nav type="pills" as |nav|}}
-    {{#nav.item}}{{#link-to "alert"}}Alert{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "button"}}Buttons{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "forms"}}Forms{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "modal"}}Modals{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "navs"}}Navs{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "tabs"}}Tabs{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "tooltip"}}Tooltips{{/link-to}}{{/nav.item}}
-    {{#nav.item}}{{#link-to "popover"}}Popovers{{/link-to}}{{/nav.item}}
-{{/bs-nav}}
+{{#bs-navbar fluid=false type="inverse" class="navbar-static-top" as |navbar|}}
+    <div class="navbar-header">
+        {{#navbar.toggle}}
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        {{/navbar.toggle}}
+        {{#link-to "index" class="navbar-brand"}}ember-bootstrap{{/link-to}}
+    </div>
+    {{#navbar.content}}
+        {{#navbar.nav as |nav|}}
+            {{#nav.item}}{{#link-to "getting-started"}}Getting Started{{/link-to}}{{/nav.item}}
+            {{#nav.item}}{{#link-to "demo"}}Components{{/link-to}}{{/nav.item}}
+            {{#nav.item}}<a href="/api">API v1.0</a>{{/nav.item}}
+            {{#nav.item}}<a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a>{{/nav.item}}
+        {{/navbar.nav}}
+        {{#navbar.nav class="navbar-right" as |nav|}}
+            {{#nav.item}}<a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a>{{/nav.item}}
+            {{#nav.item}}<a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a>{{/nav.item}}
+        {{/navbar.nav}}
+    {{/navbar.content}}
+{{/bs-navbar}}
 
 <div class="container">
     {{outlet}}

@@ -1,0 +1,49 @@
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET tooltip-demo -->
+    {{#bs-button}}Tooltip on left
+        {{#bs-tooltip placement="left"}}Tooltip on left{{/bs-tooltip}}
+    {{/bs-button}}
+
+    {{#bs-button}}Tooltip on top
+        {{#bs-tooltip placement="top"}}Tooltip on top{{/bs-tooltip}}
+    {{/bs-button}}
+
+    {{#bs-button}}Tooltip on bottom
+        {{#bs-tooltip placement="bottom"}}Tooltip on bottom{{/bs-tooltip}}
+    {{/bs-button}}
+
+    {{#bs-button}}Tooltip on right
+        {{#bs-tooltip placement="right"}}Tooltip on right{{/bs-tooltip}}
+    {{/bs-button}}
+
+    {{#bs-button}}Click tooltip
+        {{#bs-tooltip triggerEvents="click"}}Click tooltip{{/bs-tooltip}}
+    {{/bs-button}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="tooltip-demo.hbs"}}
+</div>
+
+<h2>Tooltip trigger</h2>
+
+<p>By default the tooltip will attach itself to the parent DOM element, but there are ways to customize this:</p>
+
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET tooltip-target -->
+    <button type="button" class="btn btn-default">DOM parent
+        {{bs-tooltip title="DOM parent"}}
+    </button>
+
+    {{#bs-button}}Parent component
+        {{bs-tooltip triggerElement="parentView" title="Parent component"}}
+    {{/bs-button}}
+
+    <button id="Tooltip-button" class="btn btn-default">jQuery selector</button>
+    {{bs-tooltip triggerElement="#Tooltip-button" title="jQuery selector"}}
+
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="tooltip-target.hbs"}}
+</div>

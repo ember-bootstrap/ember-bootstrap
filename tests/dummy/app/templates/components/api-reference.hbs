@@ -1,0 +1,20 @@
+{{#if title}}
+    <div class="panel-heading">
+        <h3 class="panel-title">{{title}}</h3>
+    </div>
+{{/if}}
+{{#if hasBlock}}
+    <div class="panel-body">
+        {{yield}}
+    </div>
+{{/if}}
+<ul class="list-group">
+    <li class="list-group-item">
+        {{#if apiUrl}}
+            <a href={{apiUrl}}>API Docs</a>
+        {{/if}}
+    </li>
+    {{#if bsUrl}}
+        <li class="list-group-item"><a href={{bsUrl}} target="_blank">Bootstrap Docs</a></li>
+    {{/if}}
+</ul>

@@ -16,7 +16,9 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+
+    unstableApiURL: 'http://simonihmig.github.io/ember-bootstrap/'
   };
 
   if (environment === 'development') {
@@ -39,7 +41,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.locationType = 'hash';
   }
 
   return ENV;

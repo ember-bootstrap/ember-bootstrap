@@ -1,0 +1,44 @@
+<h2>Simple example</h2>
+
+<div class="bs-example">
+    <!-- BEGIN-SNIPPET alert-simple -->
+    {{#bs-alert type="success"}}
+        <strong>Well done!</strong> You successfully read this important alert message.
+    {{/bs-alert}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="alert-simple.hbs"}}
+</div>
+
+<h2>Options</h2>
+
+<div class="bs-example">
+{{#bs-form formLayout="inline" model=this as |form|}}
+    {{form.element controlType="checkbox" label="Show/Hide" property="visible"}}
+    {{form.element controlType="checkbox" label="Fade animation" property="fade"}}
+    {{form.element controlType="checkbox" label="Dismissible" property="dismissible"}}
+    {{#form.element label="Type" property="type" as |el|}}
+        {{#x-select class="form-control" value=el.value on-change=(action (mut type)) as |xs|}}
+            {{#each typeChoices as |choice|}}
+                {{#xs.option value=choice}}{{choice}}{{/xs.option}}
+            {{/each}}
+        {{/x-select}}
+    {{/form.element}}
+{{/bs-form}}
+    <hr/>
+    <!-- BEGIN-SNIPPET alert-options -->
+    {{#bs-alert
+        visible=visible
+        fade=fade
+        type=type
+        dismissible=dismissible
+    }}
+        <strong>Well done!</strong> You successfully read this important alert message.
+    {{/bs-alert}}
+    <!-- END-SNIPPET -->
+
+</div>
+<div class="highlight">
+    {{code-snippet name="alert-options.hbs"}}
+</div>

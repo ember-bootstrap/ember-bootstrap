@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-sm-4 col-sm-push-8 col-md-3 col-md-push-9">
+
+        <h3>Components</h3>
+
+        {{#bs-nav type="pills" stacked=true as |nav|}}
+            {{#each model as |comp|}}
+                {{#nav.item}}{{#link-to comp.demoRoute}}{{comp.title}}{{/link-to}}{{/nav.item}}
+            {{/each}}
+        {{/bs-nav}}
+    </div>
+    <div class="col-sm-8 col-sm-pull-4 col-md-9 col-md-pull-3">
+
+        {{#if isDetailPage}}
+        <h1>{{currentComponent.title}}</h1>
+
+        <div class="row">
+            <div class="col-md-8">
+
+                <p class="lead">{{currentComponent.description}}</p>
+            </div>
+
+            <div class="col-md-4">
+                {{api-reference model=currentComponent}}
+            </div>
+
+        </div>
+
+        <hr>
+
+        {{#bs-alert type="info"}}
+            These examples refer to the current ember-bootstrap 1.0 API. If you are still using any 0.x version, then please
+            check the old <a href={{currentComponent.apiUnstableUrl}}>API docs</a>!
+        {{/bs-alert}}
+
+        {{/if}}
+
+        {{outlet}}
+    </div>
+</div>

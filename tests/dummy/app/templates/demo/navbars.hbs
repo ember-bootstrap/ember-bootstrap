@@ -1,0 +1,29 @@
+<div class="bs-example">
+    {{#bs-form formLayout="inline" model=this as |form|}}
+        {{form.element controlType="checkbox" label="Inverse" property="inverse" value=inverse}}
+        {{form.element controlType="checkbox" label="Fluid" property="fluid" value=fluid}}
+    {{/bs-form}}
+    <hr>
+    <!-- BEGIN-SNIPPET navbar-demo -->
+    {{#bs-navbar type=(if inverse 'inverse') fluid=fluid as |navbar|}}
+        <div class="navbar-header">
+            {{#navbar.toggle}}
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            {{/navbar.toggle}}
+           {{#link-to "index" class="navbar-brand"}}Brand{{/link-to}}
+        </div>
+        {{#navbar.content}}
+            {{#navbar.nav as |nav|}}
+                {{#nav.item}}{{#link-to "index"}}Home{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#link-to "demo.navbars"}}Navbars{{/link-to}}{{/nav.item}}
+            {{/navbar.nav}}
+        {{/navbar.content}}
+    {{/bs-navbar}}
+    <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+    {{code-snippet name="navbar-demo.hbs"}}
+</div>

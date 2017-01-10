@@ -1,0 +1,104 @@
+<h1>Getting started</h1>
+
+<h2 id="install-in-ember-cli-application">Install in ember-cli application</h2>
+
+<p>In your application’s directory:</p>
+
+<div>
+    <pre class="highlight"><code>ember install ember-bootstrap</code></pre>
+</div>
+
+<h2 id="addon-options">Addon Options</h2>
+
+<h3 id="importing-css-assets">Importing CSS Assets</h3>
+
+<h4 id="importing-twitter-bootstrap-theme">Importing Twitter Bootstrap Theme</h4>
+<p>Bootstrap comes with an optional theme CSS with various visual enhancements. To include this file you can import it
+    by setting <code>importBootstrapTheme</code> to true in your <code
+           >ember-cli-build.js</code>:</p>
+
+<div><pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
+
+/* global require, module */
+var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+module.exports = function(defaults) {
+    var app = new EmberApp({
+        'ember-bootstrap': {
+            'importBootstrapTheme': true
+        }
+    });
+
+    return app.toTree();
+};
+</code></pre>
+</div>
+
+<h4 id="opting-out-of-bootstrap-css">Opting out of Bootstrap CSS</h4>
+<p>In situations where you prefer to use another strategy for importing Bootstrap CSS,
+    you can opt out of CSS import by setting the <code>importBootstrapCSS</code> option to
+    false in your <code>ember-cli-build.js</code>:</p>
+
+<div><pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
+
+/* global require, module */
+var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+module.exports = function(defaults) {
+    var app = new EmberApp({
+        'ember-bootstrap': {
+            'importBootstrapCSS': false
+        }
+    });
+
+    return app.toTree();
+};
+</code></pre>
+</div>
+
+<h4 id="opting-out-of-bootstrap-font">Opting out of Bootstrap Font</h4>
+<p>In situations where you prefer to use another strategy for importing the Bootstrap font,
+    you can opt out of the font import by setting the <code>importBootstrapFont</code> option
+    to false in your <code>ember-cli-build.js</code>:</p>
+
+<div><pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
+
+/* global require, module */
+var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+module.exports = function(defaults) {
+    var app = new EmberApp({
+        'ember-bootstrap': {
+            'importBootstrapFont': false
+        }
+    });
+
+    return app.toTree();
+};
+</code></pre>
+</div>
+
+<h3 id="using-with-less">Using with Less</h3>
+
+<p>When you are using <a href="https://github.com/gdub22/ember-cli-less">ember-cli-less</a> you can import all of
+    bootstrap’s
+    Less assets easily under the ‘ember-bootstrap’ namespace:</p>
+
+<pre><code class="language-less">// app.less
+@import "ember-bootstrap/bootstrap";
+@import "ember-bootstrap/theme";
+</code></pre>
+
+<p>You can also selectively import only the assets your app needs:</p>
+
+<pre><code class="language-less">// app.less
+@import "ember-bootstrap/variables.less";
+@import "ember-bootstrap/mixins.less";
+@import "ember-bootstrap/normalize.less";
+@import "ember-bootstrap/scaffolding.less";
+@import "ember-bootstrap/type.less";
+@import "ember-bootstrap/buttons.less";
+</code></pre>
+
+<p><strong>Just make sure to not include the compiled CSS file that is included by default, see “Opting out of Bootstrap
+    CSS” above!</strong></p>
