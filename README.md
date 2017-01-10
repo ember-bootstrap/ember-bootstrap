@@ -22,9 +22,7 @@ In your application's directory:
 ### 1.0 alpha
     
 The 1.0 release is currently in alpha stage. While the API is not guaranteed to remain unchanged until the first stable release, 
-breaking changes are unlikely. So I encourage everybody to use the alpha version for new projects, and also to upgrade existing projects:
-    
-    ember install ember-bootstrap@1.0.0-alpha    
+breaking changes are unlikely. So I encourage everybody to use the alpha version for new projects, and also to upgrade existing projects.
     
 The 1.0 release will consist of a number of breaking changes compared to the previous 0.x releases, so be sure to check the 
 [CHANGELOG](CHANGELOG.md) for details. After the first stable 1.0 release the API should remain stable according to SemVer.    
