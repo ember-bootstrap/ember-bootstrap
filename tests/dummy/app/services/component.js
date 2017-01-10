@@ -25,6 +25,7 @@ const componentData = A([
   {
     id: 'button-group',
     title: 'Button Group',
+    className: 'ButtonGroup',
     description: 'Group a series of buttons together on a single line with the button group, with radio and checkbox style behavior.',
     bsUrl: 'http://getbootstrap.com/components/#btn-groups'
   },

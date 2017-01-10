@@ -54,9 +54,11 @@
     "gulp-conventional-changelog": "^1.1.0",
     "gulp-gh-pages": "^0.5.4",
     "gulp-rename": "^1.2.2",
+    "gulp-transform": "^1.1.0",
     "loader.js": "^4.0.10",
     "merge-stream": "^1.0.1",
-    "rsvp": "^3.2.1"
+    "rsvp": "^3.2.1",
+    "striptags": "^2.1.1"
   },
   "description": "Twitter Bootstrap components for Ember.js",
   "keywords": [

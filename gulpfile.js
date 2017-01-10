@@ -3,6 +3,8 @@ var conventionalChangelog = require('gulp-conventional-changelog');
 var ghPages = require('gulp-gh-pages');
 var exec = require('child_process').exec;
 var merge = require('merge-stream');
+var striptags = require('striptags')
+var transform = require('gulp-transform');
 
 gulp.task('docs', ['docs:publish']);
 
@@ -21,7 +23,7 @@ gulp.task('docs:app', function(cb) {
 gulp.task('docs:publish', ['docs:api', 'docs:app'], function() {
   return merge(
     gulp.src('docs/api/**/*', { base: 'docs' }),
-    gulp.src('CHANGELOG.md'),
+    gulp.src('CHANGELOG.md').pipe(transform(striptags, { encoding: 'utf8' })),
     gulp.src('dist/**/*')
   )
     .pipe(ghPages());
