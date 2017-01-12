@@ -78,14 +78,14 @@ the original one in tests. -bs-form contains the (copy pasted) validation suppor
 
 <h2>Custom Controls</h2>
 
-<p>Use the form element in block from to add your custom controls.</p>
+<p>Use the form element in block form to add your custom controls.</p>
 
 <div class="bs-example">
     <!-- BEGIN-SNIPPET form-custom -->
     {{#bs-form model=this onSubmit=(action "submit") as |form|}}
         {{#form.element label="Email" placeholder="Email" property="username" as |el|}}
             <div class="input-group">
-                <input value={{el.value}} class="form-control" oninput={{action (mut el.value) value="target.value"}} id={{el.id}} type="text">
+                <input value={{el.value}} class="form-control" oninput={{action (mut el.value) value="target.value"}} onchange={{action (mut el.value) value="target.value"}} id={{el.id}} type="text">
                 <span class="input-group-addon">@example.com</span>
             </div>
         {{/form.element}}
