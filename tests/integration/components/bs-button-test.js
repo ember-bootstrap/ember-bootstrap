@@ -100,8 +100,7 @@ test('setting reset to true resets button state', function(assert) {
 });
 
 test('clicking a button sends onclick action, if promise is returned from closure action button state is changed according to promise state', function(assert) {
-  let promise;
-  let resolvePromise;
+  let promise, resolvePromise;
 
   this.on('testAction', () => {
     promise = new Ember.RSVP.Promise(function(resolve) {

@@ -135,7 +135,7 @@ test('Pressing enter on a form with submitOnEnter submits the form', function(as
   let submit = this.spy();
   this.on('submit', submit);
   this.render(hbs`{{#bs-form onSubmit=(action "submit") submitOnEnter=true}}Test{{/bs-form}}`);
-  let e = Ember.$.Event('keypress');
+  let e = new Ember.$.Event('keypress');
   e.which = e.keyCode = 13;
   this.$('form').trigger(e);
   assert.ok(submit.calledOnce, 'onSubmit action has been called');

@@ -7,6 +7,7 @@ moduleForComponent('bs-modal-simple', 'Integration | Component | bs-modal-simple
   integration: true
 });
 
+const { $ } = Ember;
 const transitionTimeout = 500;
 
 test('Simple modal has header, footer and body', function(assert) {
@@ -327,7 +328,7 @@ test('Pressing escape key will close the modal if keyboard=true', function(asser
     assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is visible');
 
     // trigger escape key event
-    let e = Ember.$.Event('keydown');
+    let e = new $.Event('keydown');
     e.which = e.keyCode = 27;
     this.$('.modal').trigger(e);
 
@@ -357,7 +358,7 @@ test('Pressing escape key will close the modal if keyboard=true and element is a
     assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is visible');
 
     // trigger escape key event
-    let e = Ember.$.Event('keydown');
+    let e = new $.Event('keydown');
     e.which = e.keyCode = 27;
     this.$('.modal').trigger(e);
 
@@ -380,7 +381,7 @@ test('Pressing escape key is ignored if keyboard=false', function(assert) {
     assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is visible');
 
     // trigger escape key event
-    let e = Ember.$.Event('keydown');
+    let e = new $.Event('keydown');
     e.which = e.keyCode = 27;
     this.$('.modal').trigger(e);
 

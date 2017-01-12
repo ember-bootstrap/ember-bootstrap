@@ -12,7 +12,6 @@ const {
 
  See [Components.Accordion](Components.Accordion.html) for examples.
 
-
  @class AccordionItem
  @namespace Components
  @extends Ember.Component

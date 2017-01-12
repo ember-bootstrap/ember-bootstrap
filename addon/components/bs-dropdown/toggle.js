@@ -11,7 +11,6 @@ const {
 
  See [Components.Dropdown](Components.Dropdown.html) for examples.
 
-
  @class DropdownToggle
  @namespace Components
  @extends Ember.Component

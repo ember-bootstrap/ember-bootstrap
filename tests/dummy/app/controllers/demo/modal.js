@@ -1,4 +1,4 @@
-/*globals alert */
+/* globals alert */
 import Ember from 'ember';
 
 const { computed, A, run: { next } } = Ember;

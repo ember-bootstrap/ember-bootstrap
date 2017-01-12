@@ -1,4 +1,0 @@
-{
-  "preset": "ember-suave",
-  disallowDirectPropertyAccess: false
-}

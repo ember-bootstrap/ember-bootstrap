@@ -1,6 +1,6 @@
 import Config from 'ember-bootstrap/config';
 
-/*globals document */
+/* globals document */
 const hasDOM = typeof document !== 'undefined';
 
 function appendContainerElement(rootElementId, id) {

@@ -1,4 +1,4 @@
-import {moduleForComponent, test} from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-popover/element', 'Integration | Component | bs-popover/element', {

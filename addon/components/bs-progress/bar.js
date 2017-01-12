@@ -2,7 +2,7 @@ import Ember from 'ember';
 import layout from '../../templates/components/bs-progress/bar';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 
-const { computed } = Ember;
+const { computed, String: { htmlSafe } } = Ember;
 
 /**
 
@@ -153,7 +153,7 @@ export default Ember.Component.extend(TypeClass, {
    */
   style: computed('percent', function() {
     let percent = this.get('percent');
-    return new Ember.String.htmlSafe(`width: ${percent}%`);
+    return htmlSafe(`width: ${percent}%`);
   })
 
 });

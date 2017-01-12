@@ -74,7 +74,6 @@ const {
 
   See the above mentioned addons for examples.
 
-
   @class Form
   @namespace Components
   @extends Ember.Component

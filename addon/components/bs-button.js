@@ -56,7 +56,6 @@ const {
  When returning a Promise for any asynchronous operation from the `onClick` closure action the button will
  manage an internal state ("default" > "pending" > "resolved"/"rejected") automatically, changing its label according to the state of the promise:
 
-
  ```hbs
  {{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" action=(action "download")}}
  ```
@@ -261,14 +260,14 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
     if (promise && typeof promise.then === 'function') {
       this.set('textState', 'pending');
       promise.then(() => {
-          if (!this.get('isDestroyed')) {
-            this.set('textState', 'resolved');
-          }
-        }, () => {
-          if (!this.get('isDestroyed')) {
-            this.set('textState', 'rejected');
-          }
+        if (!this.get('isDestroyed')) {
+          this.set('textState', 'resolved');
         }
+      }, () => {
+        if (!this.get('isDestroyed')) {
+          this.set('textState', 'rejected');
+        }
+      }
       );
     }
   },

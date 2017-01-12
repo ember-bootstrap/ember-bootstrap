@@ -272,15 +272,15 @@ export default Component.extend(TransitionSupport, {
     }
 
     return events.map((event) => {
-        switch (event) {
-          case 'hover':
-            return ['mouseenter', 'mouseleave'];
-          case 'focus':
-            return ['focusin', 'focusout'];
-          default:
-            return event;
-        }
+      switch (event) {
+        case 'hover':
+          return ['mouseenter', 'mouseleave'];
+        case 'focus':
+          return ['focusin', 'focusout'];
+        default:
+          return event;
       }
+    }
     );
   }),
 
@@ -493,11 +493,11 @@ export default Component.extend(TransitionSupport, {
     if (this.get('autoPlacement')) {
       let viewportDim = getPosition(this.get('viewportElement'));
 
-      placement = placement === 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top' :
-        placement === 'top' && pos.top - actualHeight < viewportDim.top ? 'bottom' :
-          placement === 'right' && pos.right + actualWidth > viewportDim.width ? 'left' :
-            placement === 'left' && pos.left - actualWidth < viewportDim.left ? 'right' :
-              placement;
+      placement = placement === 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top'
+        : placement === 'top' && pos.top - actualHeight < viewportDim.top ? 'bottom'
+          : placement === 'right' && pos.right + actualWidth > viewportDim.width ? 'left'
+            : placement === 'left' && pos.left - actualWidth < viewportDim.left ? 'right'
+              : placement;
     }
 
     this.set('_placement', placement);

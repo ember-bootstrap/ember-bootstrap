@@ -160,7 +160,7 @@ test('Custom controls are supported', function(assert) {
 
   assert.equal(this.$('#value').length, 1, 'block template is rendered');
   assert.equal(this.$('#value').text().trim(), 'male', 'value is yielded to block template');
-  assert.equal(this.$('#id').text().trim(), `${$('.form-group').attr('id')}-field`, 'id is yielded to block template');
+  assert.equal(this.$('#id').text().trim(), `${this.$('.form-group').attr('id')}-field`, 'id is yielded to block template');
   assert.equal(this.$('#validation').text().trim(), 'success');
 });
 
@@ -209,7 +209,7 @@ test('if invisibleLabel is true sr-only class is added to label', function(asser
     'inline'
   ];
   this.render(hbs`{{bs-form/element label="myLabel"}}`);
-  assert.notOk(this.$('label').hasClass('sr-only'), `sr-only class is not present as defaultText`);
+  assert.notOk(this.$('label').hasClass('sr-only'), 'sr-only class is not present as defaultText');
   formLayouts.forEach((formLayout) => {
     this.render(hbs`{{#bs-form formLayout=formLayout }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`);
     assert.ok(this.$('label').hasClass('sr-only'), `sr-only class is present for formLayout ${formLayout}`);
@@ -287,8 +287,8 @@ test('adjusts validation icon position if there is an input group', function(ass
    'takes bootstrap default positioning into account'
    );
    */
-  let gap = parseInt(this.$('.addon .form-control-feedback').css('right')) -
-    this.$('.addon .input-group-addon').outerWidth() - 15;
+  let gap = parseInt(this.$('.addon .form-control-feedback').css('right'))
+    - this.$('.addon .input-group-addon').outerWidth() - 15;
   assert.ok(
     gap === 0 || gap === -1,
     'takes bootstrap default positioning into account'
