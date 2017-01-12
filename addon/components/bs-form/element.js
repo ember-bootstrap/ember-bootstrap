@@ -321,7 +321,7 @@ export default FormGroup.extend({
   hasWarnings: computed.gt('warnings.length', 0),
 
   /**
-   * The array of validation messages (either errors or warnings) rom the `model`'s validation.
+   * The array of validation messages (either errors or warnings) from the `model`'s validation.
    *
    * @property validationMessages
    * @type array
@@ -437,15 +437,6 @@ export default FormGroup.extend({
       this.set('showOwnValidation', true);
     }
   },
-
-  /**
-   * @property showErrors
-   * @type boolean
-   * @readonly
-   * @deprecated
-   * @private
-   */
-  showErrors: computed.deprecatingAlias('showValidationMessages'),
 
   /**
    * The validation ("error" or "success") or null if no validation is to be shown. Automatically computed from the
