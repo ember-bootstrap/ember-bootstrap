@@ -1,7 +1,8 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import startApp from '../../../helpers/start-app';
 import destroyApp from '../../../helpers/destroy-app';
+import test from 'ember-sinon-qunit/test-support/test';
 
 moduleForComponent('bs-nav/item', 'Integration | Component | bs-nav/item', {
   integration: true
@@ -57,4 +58,13 @@ test('disabled link makes nav item disabled', function(assert) {
   `);
   assert.ok(this.$('li').hasClass('disabled'), 'has disabled class');
   destroyApp(application);
+});
+
+test('clicking item calls onClick action', function(assert) {
+  let action = this.spy();
+  this.on('click', action);
+  this.render(hbs`{{bs-nav/item onClick=(action "click")}}`);
+  this.$('li').click();
+
+  assert.ok(action.calledOnce, 'action has been called');
 });

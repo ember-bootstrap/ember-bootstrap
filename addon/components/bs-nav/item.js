@@ -55,5 +55,17 @@ Ember.Component.extend(ComponentParent, {
   }),
 
   activeChildLinks: computed.filterBy('childLinks', 'active'),
-  disabledChildLinks: computed.filterBy('childLinks', 'disabled')
+  disabledChildLinks: computed.filterBy('childLinks', 'disabled'),
+
+  /**
+   * Called when clicking the nav item
+   *
+   * @event onClick
+   * @public
+   */
+  onClick() {},
+
+  click() {
+    this.get('onClick')();
+  }
 });
