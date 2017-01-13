@@ -6,8 +6,16 @@ moduleForComponent('bs-form/group', 'Integration | Component | bs-form/group', {
 });
 
 test('component has form-group bootstrap class', function(assert) {
-  this.render(hbs`{{#bs-form/group}}{{/bs-form/group}}`);
+  this.render(hbs`{{bs-form/group}}`);
   assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
+});
+
+test('support size classes', function(assert) {
+  this.render(hbs`{{bs-form/group size="lg"}}`);
+  assert.equal(this.$('.form-group').hasClass('form-group-lg'), true, 'form-group has large class');
+
+  this.render(hbs`{{bs-form/group size="sm"}}`);
+  assert.equal(this.$('.form-group').hasClass('form-group-sm'), true, 'form-group has small class');
 });
 
 const validations = {

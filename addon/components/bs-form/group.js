@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import layout from '../../templates/components/bs-form/group';
 import Config from 'ember-bootstrap/config';
+import SizeClass from 'ember-bootstrap/mixins/size-class';
 
 const { computed } = Ember;
 
@@ -26,11 +27,19 @@ const { computed } = Ember;
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(SizeClass, {
   layout,
 
   classNames: ['form-group'],
   classNameBindings: ['validationClass', 'hasFeedback'],
+
+  /**
+   * @property classTypePrefix
+   * @type String
+   * @default 'form-group'
+   * @private
+   */
+  classTypePrefix: 'form-group',
 
   /**
    * Whether to show validation state icons.

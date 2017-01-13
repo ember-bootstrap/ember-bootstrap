@@ -88,7 +88,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
    * @property classTypePrefix
    * @type String
    * @default 'btn'
-   * @protected
+   * @private
    */
   classTypePrefix: 'btn',
 
