@@ -128,6 +128,181 @@ const nonTextFieldControlTypes = A([
  If your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports
  feedback icons with textual `<input class="form-control">` elements.
 
+ ### HTML attributes
+
+ To set HTML attributes on the control element provided by this component, set them as properties of this component:
+
+ ```hbs
+ {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
+   {{form.element controlType="email" label="Email" property="email"
+     placeholder="Email"
+     required=true
+     multiple=true
+     tabIndex=5
+   }}
+    ...
+ {{/bs-form}}
+ ```
+
+ The following attributes are supported depending on the `controlType`:
+
+ <table class="table table-striped">
+ <thead>
+ <tr>
+ <th></th>
+ <th>textarea</th>
+ <th>checkbox</th>
+ <th>all others</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>accept</td>
+ <td></td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>autocomplete</td>
+ <td>✔︎</td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>autofocus</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>autosave</td>
+ <td></td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>cols</td>
+ <td>✔︎</td>
+ <td></td>
+ <td></td>
+ </tr>
+ <tr>
+ <td>disabled</td>
+ <td></td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>form</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>inputmode</td>
+ <td></td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>max</td>
+ <td></td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>maxlength</td>
+ <td>✔︎</td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>min</td>
+ <td></td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>minlength</td>
+ <td>✔︎</td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>multiple</td>
+ <td></td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>name</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>pattern</td>
+ <td></td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>placeholder</td>
+ <td>✔︎</td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>readonly</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>required</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>rows</td>
+ <td>✔︎</td>
+ <td></td>
+ <td></td>
+ </tr>
+ <tr>
+ <td>size</td>
+ <td></td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>spellcheck</td>
+ <td>✔︎</td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>step</td>
+ <td></td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>tabindex</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>wrap</td>
+ <td>✔︎</td>
+ <td></td>
+ <td></td>
+ </tr>
+ </tbody>
+ </table>
+
  @class FormElement
  @namespace Components
  @extends Components.FormGroup
@@ -204,79 +379,6 @@ export default FormGroup.extend({
    @public
    */
   property: null,
-
-  /**
-   * Control element's HTML5 placeholder attribute
-   *
-   * @property placeholder
-   * @type string
-   * @public
-   */
-  placeholder: null,
-
-  /**
-   * Control element's HTML5 disabled attribute
-   *
-   * @property disabled
-   * @type boolean
-   * @public
-   */
-  disabled: false,
-
-  /**
-   * Control element's HTML5 readonly attribute
-   *
-   * @property readonly
-   * @type boolean
-   * @public
-   */
-  readonly: false,
-
-  /**
-   * Control element's HTML5 required attribute
-   *
-   * @property required
-   * @type boolean
-   * @public
-   */
-  required: false,
-
-  /**
-   * Control element's HTML5 autofocus attribute
-   *
-   * @property autofocus
-   * @type boolean
-   * @public
-   */
-  autofocus: false,
-
-  /**
-   * Control element's name attribute
-   *
-   * @property name
-   * @type string
-   * @public
-   */
-  name: null,
-
-  /**
-   * Textarea's rows attribute (ignored for other `controlType`s)
-   *
-   * @property rows
-   * @type number
-   * @default 5
-   * @public
-   */
-  rows: 5,
-
-  /**
-   * Textarea's cols attribute (ignored for other `controlType`s)
-   *
-   * @property cols
-   * @type number
-   * @public
-   */
-  cols: null,
 
   /**
    * The model used for validation. Defaults to the parent `Components.Form`'s `model`
@@ -533,6 +635,9 @@ export default FormGroup.extend({
    * @private
    */
   horizontalInputGridClass: computed('horizontalLabelGridClass', function() {
+    if (isBlank(this.get('horizontalLabelGridClass'))) {
+      return;
+    }
     let parts = this.get('horizontalLabelGridClass').split('-');
     assert('horizontalInputGridClass must match format bootstrap grid column class', parts.length === 3);
     parts[2] = 12 - parts[2];
@@ -549,6 +654,9 @@ export default FormGroup.extend({
    * @private
    */
   horizontalInputOffsetGridClass: computed('horizontalLabelGridClass', function() {
+    if (isBlank(this.get('horizontalLabelGridClass'))) {
+      return;
+    }
     let parts = this.get('horizontalLabelGridClass').split('-');
     parts.splice(2, 0, 'offset');
     return parts.join('-');

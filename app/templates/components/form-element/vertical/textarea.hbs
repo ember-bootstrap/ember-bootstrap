@@ -1,6 +1,26 @@
 {{#if hasLabel}}
-    <label class="control-label {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
+  <label class="control-label {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
 {{/if}}
-<textarea class="form-control" cols={{cols}} rows={{rows}} oninput={{action "change" value="target.value"}} onchange={{action "change" value="target.value"}} id={{formElementId}} name={{name}} placeholder={{placeholder}} autofocus={{autofocus}} disabled={{disabled}} readonly={{if readonly "readonly"}} required={{required}}>{{value}}</textarea>
+<textarea
+  class="form-control"
+  oninput={{action "change" value="target.value"}}
+  onchange={{action "change" value="target.value"}}
+  id={{formElementId}}
+  name={{name}}
+  cols={{cols}}
+  rows={{rows}}
+  placeholder={{placeholder}}
+  autofocus={{autofocus}}
+  disabled={{disabled}}
+  readonly={{if readonly "readonly"}}
+  required={{required}}
+  tabindex={{tabindex}}
+  minlength={{minlength}}
+  maxlength={{maxlength}}
+  autocomplete={{autocomplete}}
+  form={{form}}
+  spellcheck={{spellcheck}}
+  wrap={{wrap}}
+>{{value}}</textarea>
 {{partial "components/form-element/feedback-icon"}}
 {{partial "components/form-element/errors"}}

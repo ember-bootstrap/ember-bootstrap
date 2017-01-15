@@ -43,4 +43,4 @@ If you want to keep up to date with ember-bootstrap, you may want to [follow me 
 
 ## Copyright and license
 
-Code and documentation copyright 2016 kaliber5 GmbH. Code released under [the MIT license](LICENSE.md).
+Code and documentation copyright 2017 kaliber5 GmbH. Code released under [the MIT license](LICENSE.md).

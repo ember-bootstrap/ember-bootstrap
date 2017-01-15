@@ -12,7 +12,56 @@ moduleForComponent('bs-form/element', 'Integration | Component | bs-form/element
   integration: true
 });
 
-let formLayouts = ['vertical', 'horizontal', 'inline'];
+const formLayouts = ['vertical', 'horizontal', 'inline'];
+const supportedInputAttributes = {
+  name: ['dummy', 'dummy'],
+  required: [true, 'required'],
+  readonly: [true, 'readonly'],
+  placeholder: ['dummy', 'dummy'],
+  disabled: [true, 'disabled'],
+  autofocus: [true, 'autofocus'],
+  size: [50, 50],
+  tabindex: [50, 50],
+  maxlength: [50, 50],
+  minlength: [50, 50],
+  min: [50, 50],
+  max: [50, 50],
+  pattern: ['dummy', 'dummy'],
+  accept: ['dummy', 'dummy'],
+  autocomplete: ['on', 'on'],
+  autosave: ['true', 'true'],
+  inputmode: ['latin', 'latin'],
+  multiple: [true, 'multiple'],
+  step: [50, 50],
+  form: ['dummy', 'dummy'],
+  spellcheck: [true, 'true']
+};
+const supportedTextareaAttributes = {
+  name: ['dummy', 'dummy'],
+  rows: [50, 50],
+  cols: [50, 50],
+  required: [true, 'required'],
+  readonly: [true, 'readonly'],
+  placeholder: ['dummy', 'dummy'],
+  disabled: [true, 'disabled'],
+  autofocus: [true, 'autofocus'],
+  tabindex: [50, 50],
+  maxlength: [50, 50],
+  minlength: [50, 50],
+  autocomplete: ['on', 'on'],
+  form: ['dummy', 'dummy'],
+  spellcheck: [true, 'true'],
+  wrap: ['hard', 'hard']
+};
+const supportedCheckboxAttributes = {
+  name: ['dummy', 'dummy'],
+  required: [true, 'required'],
+  readonly: [true, 'readonly'],
+  disabled: [true, 'disabled'],
+  autofocus: [true, 'autofocus'],
+  tabindex: [50, 50],
+  form: ['dummy', 'dummy']
+};
 
 test('component has form-group bootstrap class', function(assert) {
   this.render(hbs`{{bs-form/element}}`);
@@ -164,42 +213,118 @@ test('Custom controls are supported', function(assert) {
   assert.equal(this.$('#validation').text().trim(), 'success');
 });
 
+test('supported input attributes propagate', function(assert) {
+  formLayouts.forEach((formLayout) => {
+    this.set('formLayout', formLayout);
+    let resetProps = Object.keys(supportedInputAttributes).reduce((prev, key) => {
+      prev[key] = undefined;
+      return prev;
+    }, {});
+    this.setProperties(resetProps);
+    this.render(hbs`{{bs-form/element formLayout=formLayout
+      name=name
+      required=required
+      readonly=readonly
+      placeholder=placeholder
+      disabled=disabled
+      autofocus=autofocus
+      size=size
+      tabindex=tabindex
+      minlength=minlength
+      maxlength=maxlength
+      min=min
+      max=max
+      pattern=pattern
+      accept=accept
+      autocomplete=autocomplete
+      autosave=autosave
+      inputmode=inputmode
+      multiple=multiple
+      step=step
+      form=form
+      spellcheck=spellcheck
+    }}`);
+
+    for (let attribute in supportedInputAttributes) {
+      assert.equal(this.$('input').attr(attribute), undefined, `input attribute ${attribute} is undefined [${formLayout}]`);
+      let [value, expectedValue] = supportedInputAttributes[attribute];
+      this.set(attribute, value);
+      assert.equal(this.$('input').attr(attribute), expectedValue, `input attribute ${attribute} is ${expectedValue} [${formLayout}]`);
+    }
+    this.render(hbs``); // hack to prevent browser exception when setting size to undefined
+  });
+});
+
+test('supported textarea attributes propagate', function(assert) {
+  formLayouts.forEach((formLayout) => {
+    this.set('formLayout', formLayout);
+    let resetProps = Object.keys(supportedTextareaAttributes).reduce((prev, key) => {
+      prev[key] = undefined;
+      return prev;
+    }, {});
+    this.setProperties(resetProps);
+    this.render(hbs`{{bs-form/element formLayout=formLayout controlType="textarea"
+      name=name
+      rows=rows
+      cols=cols
+      required=required
+      readonly=readonly
+      placeholder=placeholder
+      disabled=disabled
+      autofocus=autofocus
+      tabindex=tabindex
+      minlength=minlength
+      maxlength=maxlength
+      autocomplete=autocomplete
+      form=form
+      spellcheck=spellcheck
+      wrap=wrap
+    }}`);
+
+    for (let attribute in supportedTextareaAttributes) {
+      assert.equal(this.$('textarea').attr(attribute), undefined, `textarea attribute ${attribute} is undefined [${formLayout}]`);
+      let [value, expectedValue] = supportedTextareaAttributes[attribute];
+      this.set(attribute, value);
+      assert.equal(this.$('textarea').attr(attribute), expectedValue, `textarea attribute ${attribute} is ${expectedValue} [${formLayout}]`);
+    }
+  });
+});
+
+test('supported checkbox attributes propagate', function(assert) {
+  formLayouts.forEach((formLayout) => {
+    this.set('formLayout', formLayout);
+    let resetProps = Object.keys(supportedCheckboxAttributes).reduce((prev, key) => {
+      prev[key] = undefined;
+      return prev;
+    }, {});
+    this.setProperties(resetProps);
+    this.render(hbs`{{bs-form/element controlType="checkbox" formLayout=formLayout
+      name=name
+      required=required
+      readonly=readonly
+      disabled=disabled
+      autofocus=autofocus
+      tabindex=tabindex
+      form=form
+    }}`);
+
+    for (let attribute in supportedCheckboxAttributes) {
+      assert.equal(this.$('input').attr(attribute), undefined, `checkbox attribute ${attribute} is undefined [${formLayout}]`);
+      let [value, expectedValue] = supportedCheckboxAttributes[attribute];
+      this.set(attribute, value);
+      assert.equal(this.$('input').attr(attribute), expectedValue, `input attribute ${attribute} is ${expectedValue} [${formLayout}]`);
+    }
+  });
+});
+
 test('required property propagates', function(assert) {
   this.render(hbs`{{bs-form/element label="myLabel" required=true}}`);
-
   assert.ok(this.$('.form-group').hasClass('is-required'), 'component has is-required class');
-  assert.equal(this.$('input').attr('required'), 'required', 'input html5 required is true');
 });
 
 test('disabled property propagates', function(assert) {
   this.render(hbs`{{bs-form/element label="myLabel" disabled=true}}`);
-
   assert.ok(this.$('.form-group').hasClass('is-disabled'), 'component has is-disabled class');
-  assert.equal(this.$('input').attr('disabled'), 'disabled', 'input html5 disabled is true');
-});
-
-test('readonly property propagates', function(assert) {
-  this.render(hbs`{{bs-form/element label="myLabel" readonly=true}}`);
-
-  assert.equal(this.$('input').attr('readonly'), 'readonly', 'input html5 readonly is true');
-});
-
-test('placeholder property propagates', function(assert) {
-  this.render(hbs`{{bs-form/element label="myLabel" placeholder="foo"}}`);
-
-  assert.equal(this.$('input').attr('placeholder'), 'foo', 'input html5 placeholder is set');
-});
-
-test('name property propagates', function(assert) {
-  this.render(hbs`{{bs-form/element label="myLabel" name="foo"}}`);
-
-  assert.equal(this.$('input').attr('name'), 'foo', 'input html5 name is set');
-});
-
-test('autofocus property propagates', function(assert) {
-  this.render(hbs`{{bs-form/element label="myLabel" autofocus=true}}`);
-
-  assert.equal(this.$('input').attr('autofocus'), 'autofocus', 'input html5 autofocus is true');
 });
 
 test('if invisibleLabel is true sr-only class is added to label', function(assert) {
