@@ -78,7 +78,8 @@
     "configPath": "tests/dummy/config",
     "versionCompatibility": {
       "ember": ">=2.3.0"
-    }
+    },
+    "demoURL": "http://www.ember-bootstrap.com"
   },
   "bugs": {
     "url": "https://github.com/kaliber5/ember-bootstrap/issues"
