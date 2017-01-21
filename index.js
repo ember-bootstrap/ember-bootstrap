@@ -10,12 +10,18 @@ const stew = require('broccoli-stew');
 const mv = stew.mv;
 const log = stew.log;
 const rm = stew.rm;
+const chalk = require('chalk');
 
 const defaultOptions = {
   importBootstrapTheme: false,
   importBootstrapCSS: true,
   importBootstrapFont: true
 };
+
+const supportedPreprocessors = [
+  'less',
+  'sass'
+];
 
 module.exports = {
   name: 'ember-bootstrap',
@@ -27,36 +33,97 @@ module.exports = {
     }
     this.app = app;
 
+    this.preprocessor = this.findPreprocessor();
+
     let options = extend(defaultOptions, app.options['ember-bootstrap']);
-    let bootstrapPath = path.join(app.bowerDirectory, 'bootstrap/dist');
+    this.bootstrapOptions = options;
 
-    // Import css from bootstrap
-    if (options.importBootstrapCSS) {
-      app.import(path.join(bootstrapPath, 'css/bootstrap.css'));
-      app.import(path.join(bootstrapPath, 'css/bootstrap.css.map'), { destDir: 'assets' });
-    }
+    if (!this.hasPreprocessor()) {
+      let cssPath = this.getBootstrapStylesPath();
+      // Import css from bootstrap
+      if (options.importBootstrapCSS) {
+        app.import(path.join(cssPath, 'bootstrap.css'));
+        app.import(path.join(cssPath, 'bootstrap.css.map'), { destDir: 'assets' });
+      }
 
-    if (options.importBootstrapTheme) {
-      app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
-      app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css.map'), { destDir: 'assets' });
-    }
-
-    // Import glyphicons
-    if (options.importBootstrapFont) {
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.eot'), { destDir: '/fonts' });
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.svg'), { destDir: '/fonts' });
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.ttf'), { destDir: '/fonts' });
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff'), { destDir: '/fonts' });
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff2'), { destDir: '/fonts' });
+      if (options.importBootstrapTheme) {
+        app.import(path.join(cssPath, 'bootstrap-theme.css'));
+        app.import(path.join(cssPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
+      }
     }
 
     if (!process.env.EMBER_CLI_FASTBOOT) {
       app.import('vendor/transition.js');
     }
   },
-  
+
   getBootstrapVersion() {
     return 'bs3'; // @todo replace with dynamic config
+  },
+
+  findPreprocessor() {
+    return supportedPreprocessors.find((name) => !!this.app.project.findAddonByName(`ember-cli-${name}`) && this.validatePreprocessor(name));
+  },
+
+  validatePreprocessor(name) {
+    let npmDependencies = this.app.project.dependencies();
+    let bowerDependencies = this.app.project.bowerDependencies();
+    switch (name) {
+      case 'sass':
+        if (!('bootstrap-sass' in npmDependencies)) {
+          this.ui.writeLine(chalk.red('Npm package "bootstrap-sass" is missing, but required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'));
+          return false;
+        }
+        break;
+      case 'less':
+        if (!('bootstrap' in bowerDependencies)) {
+          this.ui.writeLine(chalk.red('Bower package "bootstrap" is missing, but required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'));
+          return false;
+        }
+        break;
+    }
+    return true;
+  },
+
+  getBootstrapStylesPath() {
+    switch (this.preprocessor) {
+      case 'sass':
+        return path.join(this.app.project.nodeModulesPath, 'bootstrap-sass', 'assets', 'stylesheets');
+      case 'less':
+        return path.join(this.app.bowerDirectory, 'bootstrap', 'less');
+      default:
+        return path.join(this.app.bowerDirectory, 'bootstrap', 'dist', 'css');
+    }
+  },
+
+  getBootstrapFontPath() {
+    switch (this.preprocessor) {
+      case 'sass':
+        return path.join(this.app.project.nodeModulesPath, 'bootstrap-sass', 'assets', 'fonts');
+      case 'less':
+      default:
+        return path.join(this.app.bowerDirectory, 'bootstrap', 'fonts');
+    }
+  },
+
+  hasPreprocessor() {
+    return !!this.preprocessor;
+  },
+
+  treeForStyles() {
+    if (this.hasPreprocessor()) {
+      return new Funnel(this.getBootstrapStylesPath(), {
+        destDir: 'ember-bootstrap'
+      });
+    }
+  },
+
+  treeForPublic() {
+    if (this.bootstrapOptions.importBootstrapFont) {
+      return new Funnel(this.getBootstrapFontPath(), {
+        destDir: 'fonts'
+      });
+    }
   },
 
   treeForAddon() {
@@ -78,22 +145,5 @@ module.exports = {
     tree = mv(tree, `${templatePath}${bsVersion}/`, templatePath);
     tree = rm(tree, `${templatePath}${otherBsVersion}/**/*`);
     return tree; //log(tree, {output: 'tree', label: 'moved'});
-  },
-
-  treeForStyles(tree) {
-    let styleTrees = [];
-
-    if (this.app.project.findAddonByName('ember-cli-less')) {
-      let lessTree = new Funnel(path.join(this.app.bowerDirectory, 'bootstrap/less'), {
-        destDir: 'ember-bootstrap'
-      });
-      styleTrees.push(lessTree);
-    }
-
-    if (tree) {
-      styleTrees.push(tree);
-    }
-
-    return mergeTrees(styleTrees, { overwrite: true });
   }
 };
