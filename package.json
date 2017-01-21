@@ -8,7 +8,7 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember try:each && ember fastboot:test",
+    "test": "ember try:each && DEBUG=ember-cli.addon-tests ember fastboot:test",
     "nodetest": "mocha node-tests --recursive"
   },
   "repository": {
