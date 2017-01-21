@@ -3,17 +3,30 @@ const fs = require('fs');
 const path = require('path');
 const writeFile = rsvp.denodeify(fs.writeFile);
 
+const bs3Version = '^3.3.7';
+
 module.exports = {
   normalizeEntityName() {
   },
 
   afterInstall() {
-    return this.addBowerDependencies()
+    return this.addDependencies()
       .then(() => this.addPreprocessorImport());
   },
 
-  addBowerDependencies() {
-    return this.addBowerPackageToProject('bootstrap', '~3.3.7');
+  addDependencies() {
+    let dependencies = this.project.dependencies();
+
+    let promises = [
+    ];
+
+    if ('ember-cli-sass' in dependencies) {
+      promises.push(this.addPackageToProject('bootstrap-sass', bs3Version));
+    } else {
+      promises.push(this.addBowerPackageToProject('bootstrap', bs3Version));
+    }
+
+    return rsvp.all(promises);
   },
 
   addPreprocessorImport() {

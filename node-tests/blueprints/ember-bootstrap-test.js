@@ -38,34 +38,34 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       }));
   });
 
-  // it('creates app.scss if not existing', function() {
-  //   let args = ['ember-bootstrap'];
-  //
-  //   return emberNew()
-  //     .then(() => modifyPackages([
-  //       { name: 'ember-cli-sass' }
-  //     ]))
-  //     .then(() => emberGenerate(args))
-  //     .then(() => {
-  //       expect(file('app/styles/app.scss'))
-  //         .to.contain('@import "ember-bootstrap/bootstrap";');
-  //       expect(file('app/styles/app.less')).to.not.exist;
-  //     });
-  // });
-  //
-  // it('adds @import to existing app.scss', function() {
-  //   let args = ['ember-bootstrap'];
-  //
-  //   return emberNew()
-  //     .then(() => modifyPackages([
-  //       { name: 'ember-cli-sass' }
-  //     ]))
-  //     .then(() => createStyleFixture('app.scss'))
-  //     .then(() => emberGenerate(args, (file) => {
-  //       expect(file('app/styles/app.scss')).to.contain('@import "ember-bootstrap/bootstrap";');
-  //       expect(file('app/styles/app.less')).to.not.exist;
-  //     }));
-  // });
+  it('creates app.scss if not existing', function() {
+    let args = ['ember-bootstrap'];
+
+    return emberNew()
+      .then(() => modifyPackages([
+        { name: 'ember-cli-sass' }
+      ]))
+      .then(() => emberGenerate(args))
+      .then(() => {
+        expect(file('app/styles/app.scss'))
+          .to.contain('@import "ember-bootstrap/bootstrap";');
+        expect(file('app/styles/app.less')).to.not.exist;
+      });
+  });
+
+  it('adds @import to existing app.scss', function() {
+    let args = ['ember-bootstrap'];
+
+    return emberNew()
+      .then(() => modifyPackages([
+        { name: 'ember-cli-sass' }
+      ]))
+      .then(() => createStyleFixture('app.scss'))
+      .then(() => emberGenerate(args, (file) => {
+        expect(file('app/styles/app.scss')).to.contain('@import "ember-bootstrap/bootstrap";');
+        expect(file('app/styles/app.less')).to.not.exist;
+      }));
+  });
 
   it('creates app.less if not existing', function() {
     let args = ['ember-bootstrap'];
