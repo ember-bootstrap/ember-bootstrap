@@ -1,3 +1,6 @@
+/* eslint-env node */
+'use strict';
+
 const rsvp = require('rsvp');
 const fs = require('fs');
 const path = require('path');
