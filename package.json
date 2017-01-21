@@ -16,7 +16,7 @@
     "url": "https://github.com/kaliber5/ember-bootstrap"
   },
   "engines": {
-    "node": ">= 0.12.0"
+    "node": ">= 4.0"
   },
   "author": "Simon Ihmig <ihmig@kaliber5.de>",
   "license": "MIT",
