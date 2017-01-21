@@ -9,6 +9,7 @@ const Funnel = require('broccoli-funnel');
 const stew = require('broccoli-stew');
 // const mv = stew.mv;
 // const rm = stew.rm;
+const chalk = require('chalk');
 
 const defaultOptions = {
   importBootstrapTheme: false,
@@ -56,7 +57,27 @@ module.exports = {
   },
 
   findPreprocessor() {
-    return supportedPreprocessors.find((name) => !!this.app.project.findAddonByName(`ember-cli-${name}`));
+    return supportedPreprocessors.find((name) => !!this.app.project.findAddonByName(`ember-cli-${name}`) && this.validatePreprocessor(name));
+  },
+
+  validatePreprocessor(name) {
+    let npmDependencies = this.app.project.dependencies();
+    let bowerDependencies = this.app.project.bowerDependencies();
+    switch (name) {
+      case 'sass':
+        if (!('bootstrap-sass' in npmDependencies)) {
+          this.ui.writeLine(chalk.red('Npm package "bootstrap-sass" is missing, but required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'));
+          return false;
+        }
+        break;
+      case 'less':
+        if (!('bootstrap' in bowerDependencies)) {
+          this.ui.writeLine(chalk.red('Bower package "bootstrap" is missing, but required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'));
+          return false;
+        }
+        break;
+    }
+    return true;
   },
 
   getBootstrapStylesPath() {

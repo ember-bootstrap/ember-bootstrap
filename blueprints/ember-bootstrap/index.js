@@ -2,6 +2,7 @@ const rsvp = require('rsvp');
 const fs = require('fs');
 const path = require('path');
 const writeFile = rsvp.denodeify(fs.writeFile);
+const chalk = require('chalk');
 
 const bs3Version = '^3.3.7';
 
@@ -48,10 +49,10 @@ module.exports = {
         fs.mkdirSync(stylePath);
       }
       if (fs.existsSync(file)) {
-        this.ui.writeLine(`Added import statement to ${file}`);
+        this.ui.writeLine(chalk.green(`Added import statement to ${file}`));
         return this.insertIntoFile(file, importStatement, {});
       } else {
-        this.ui.writeLine(`Created ${file}`);
+        this.ui.writeLine(chalk.green(`Created ${file}`));
         return writeFile(file, importStatement);
       }
     }
