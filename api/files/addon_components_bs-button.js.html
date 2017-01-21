@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.2.d7d354a9</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -111,7 +111,6 @@ const {
  When returning a Promise for any asynchronous operation from the &#x60;onClick&#x60; closure action the button will
  manage an internal state (&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;) automatically, changing its label according to the state of the promise:
 
-
  &#x60;&#x60;&#x60;hbs
  {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=(action &quot;download&quot;)}}
  &#x60;&#x60;&#x60;
@@ -144,7 +143,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
    * @property classTypePrefix
    * @type String
    * @default &#x27;btn&#x27;
-   * @protected
+   * @private
    */
   classTypePrefix: &#x27;btn&#x27;,
 
@@ -316,14 +315,14 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
     if (promise &amp;&amp; typeof promise.then === &#x27;function&#x27;) {
       this.set(&#x27;textState&#x27;, &#x27;pending&#x27;);
       promise.then(() =&gt; {
-          if (!this.get(&#x27;isDestroyed&#x27;)) {
-            this.set(&#x27;textState&#x27;, &#x27;resolved&#x27;);
-          }
-        }, () =&gt; {
-          if (!this.get(&#x27;isDestroyed&#x27;)) {
-            this.set(&#x27;textState&#x27;, &#x27;rejected&#x27;);
-          }
+        if (!this.get(&#x27;isDestroyed&#x27;)) {
+          this.set(&#x27;textState&#x27;, &#x27;resolved&#x27;);
         }
+      }, () =&gt; {
+        if (!this.get(&#x27;isDestroyed&#x27;)) {
+          this.set(&#x27;textState&#x27;, &#x27;rejected&#x27;);
+        }
+      }
       );
     }
   },

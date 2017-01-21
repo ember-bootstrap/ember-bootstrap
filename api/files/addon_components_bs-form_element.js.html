@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.2.d7d354a9</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -183,6 +183,181 @@ const nonTextFieldControlTypes = A([
  If your custom control does not render an input element, you should set &#x60;useIcons&#x60; to &#x60;false&#x60; since bootstrap only supports
  feedback icons with textual &#x60;&lt;input class=&quot;form-control&quot;&gt;&#x60; elements.
 
+ ### HTML attributes
+
+ To set HTML attributes on the control element provided by this component, set them as properties of this component:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot; as |form|}}
+   {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; property=&quot;email&quot;
+     placeholder=&quot;Email&quot;
+     required=true
+     multiple=true
+     tabIndex=5
+   }}
+    ...
+ {{/bs-form}}
+ &#x60;&#x60;&#x60;
+
+ The following attributes are supported depending on the &#x60;controlType&#x60;:
+
+ &lt;table class=&quot;table table-striped&quot;&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;&lt;/th&gt;
+ &lt;th&gt;textarea&lt;/th&gt;
+ &lt;th&gt;checkbox&lt;/th&gt;
+ &lt;th&gt;all others&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;accept&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;autocomplete&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;autofocus&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;autosave&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;cols&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;disabled&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;form&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;inputmode&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;max&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;maxlength&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;min&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;minlength&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;multiple&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;name&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;pattern&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;placeholder&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;readonly&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;required&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;rows&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;size&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;spellcheck&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;step&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;tabindex&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;wrap&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+ &lt;/table&gt;
+
  @class FormElement
  @namespace Components
  @extends Components.FormGroup
@@ -261,79 +436,6 @@ export default FormGroup.extend({
   property: null,
 
   /**
-   * Control element&#x27;s HTML5 placeholder attribute
-   *
-   * @property placeholder
-   * @type string
-   * @public
-   */
-  placeholder: null,
-
-  /**
-   * Control element&#x27;s HTML5 disabled attribute
-   *
-   * @property disabled
-   * @type boolean
-   * @public
-   */
-  disabled: false,
-
-  /**
-   * Control element&#x27;s HTML5 readonly attribute
-   *
-   * @property readonly
-   * @type boolean
-   * @public
-   */
-  readonly: false,
-
-  /**
-   * Control element&#x27;s HTML5 required attribute
-   *
-   * @property required
-   * @type boolean
-   * @public
-   */
-  required: false,
-
-  /**
-   * Control element&#x27;s HTML5 autofocus attribute
-   *
-   * @property autofocus
-   * @type boolean
-   * @public
-   */
-  autofocus: false,
-
-  /**
-   * Control element&#x27;s name attribute
-   *
-   * @property name
-   * @type string
-   * @public
-   */
-  name: null,
-
-  /**
-   * Textarea&#x27;s rows attribute (ignored for other &#x60;controlType&#x60;s)
-   *
-   * @property rows
-   * @type number
-   * @default 5
-   * @public
-   */
-  rows: 5,
-
-  /**
-   * Textarea&#x27;s cols attribute (ignored for other &#x60;controlType&#x60;s)
-   *
-   * @property cols
-   * @type number
-   * @public
-   */
-  cols: null,
-
-  /**
    * The model used for validation. Defaults to the parent &#x60;Components.Form&#x60;&#x27;s &#x60;model&#x60;
    *
    * @property model
@@ -376,7 +478,7 @@ export default FormGroup.extend({
   hasWarnings: computed.gt(&#x27;warnings.length&#x27;, 0),
 
   /**
-   * The array of validation messages (either errors or warnings) rom the &#x60;model&#x60;&#x27;s validation.
+   * The array of validation messages (either errors or warnings) from the &#x60;model&#x60;&#x27;s validation.
    *
    * @property validationMessages
    * @type array
@@ -494,15 +596,6 @@ export default FormGroup.extend({
   },
 
   /**
-   * @property showErrors
-   * @type boolean
-   * @readonly
-   * @deprecated
-   * @private
-   */
-  showErrors: computed.deprecatingAlias(&#x27;showValidationMessages&#x27;),
-
-  /**
    * The validation (&quot;error&quot; or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
    * models validation state.
    *
@@ -597,6 +690,9 @@ export default FormGroup.extend({
    * @private
    */
   horizontalInputGridClass: computed(&#x27;horizontalLabelGridClass&#x27;, function() {
+    if (isBlank(this.get(&#x27;horizontalLabelGridClass&#x27;))) {
+      return;
+    }
     let parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
     assert(&#x27;horizontalInputGridClass must match format bootstrap grid column class&#x27;, parts.length === 3);
     parts[2] = 12 - parts[2];
@@ -613,6 +709,9 @@ export default FormGroup.extend({
    * @private
    */
   horizontalInputOffsetGridClass: computed(&#x27;horizontalLabelGridClass&#x27;, function() {
+    if (isBlank(this.get(&#x27;horizontalLabelGridClass&#x27;))) {
+      return;
+    }
     let parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
     parts.splice(2, 0, &#x27;offset&#x27;);
     return parts.join(&#x27;-&#x27;);

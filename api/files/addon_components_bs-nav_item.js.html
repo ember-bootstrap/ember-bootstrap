@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.2.d7d354a9</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -110,7 +110,19 @@ Ember.Component.extend(ComponentParent, {
   }),
 
   activeChildLinks: computed.filterBy(&#x27;childLinks&#x27;, &#x27;active&#x27;),
-  disabledChildLinks: computed.filterBy(&#x27;childLinks&#x27;, &#x27;disabled&#x27;)
+  disabledChildLinks: computed.filterBy(&#x27;childLinks&#x27;, &#x27;disabled&#x27;),
+
+  /**
+   * Called when clicking the nav item
+   *
+   * @event onClick
+   * @public
+   */
+  onClick() {},
+
+  click() {
+    this.get(&#x27;onClick&#x27;)();
+  }
 });
 
     </pre>

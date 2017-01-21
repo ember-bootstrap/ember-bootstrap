@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.2.d7d354a9</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,7 +57,7 @@ import Ember from &#x27;ember&#x27;;
 import layout from &#x27;../../templates/components/bs-progress/bar&#x27;;
 import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
 
-const { computed } = Ember;
+const { computed, String: { htmlSafe } } = Ember;
 
 /**
 
@@ -208,7 +208,7 @@ export default Ember.Component.extend(TypeClass, {
    */
   style: computed(&#x27;percent&#x27;, function() {
     let percent = this.get(&#x27;percent&#x27;);
-    return new Ember.String.htmlSafe(&#x60;width: ${percent}%&#x60;);
+    return htmlSafe(&#x60;width: ${percent}%&#x60;);
   })
 
 });

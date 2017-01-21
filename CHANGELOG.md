@@ -1,4 +1,19 @@
 
+# [1.0.0-alpha.3](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.2...v1.0.0-alpha.3) (2017-01-21)
+
+
+### Features
+
+* **FormElement:** supports most common HTML5 attributes ([3ef492c](https://github.com/kaliber5/ember-bootstrap/commit/3ef492c)), closes [#179](https://github.com/kaliber5/ember-bootstrap/issues/179)
+* **FormGroup/FormElement:** supports control sizing through `size` property ([90ca70b](https://github.com/kaliber5/ember-bootstrap/commit/90ca70b)), closes [#202](https://github.com/kaliber5/ember-bootstrap/issues/202)
+* **LESS:** when installing ember-bootstrap and ember-cli-less is present, an `@import` statement is automatically added to app.less, the static CSS is not imported (regardless of importBootstrapCSS setting) ([992b65f](https://github.com/kaliber5/ember-bootstrap/commit/992b65f))
+* **NavItem:** calls onClick action ([5188c80](https://github.com/kaliber5/ember-bootstrap/commit/5188c80)), closes [#196](https://github.com/kaliber5/ember-bootstrap/issues/196)
+* **SASS:** when installing ember-bootstrap and ember-cli-sass is present, the SASS port of Bootstrap 3 is installed and an `@import` statement is automatically added to app.sass ([5666a06](https://github.com/kaliber5/ember-bootstrap/commit/5666a06)), closes [#178](https://github.com/kaliber5/ember-bootstrap/issues/178)
+* **SASS/LESS:** Add warnings when required dependencies are missing ([2d2ff5f](https://github.com/kaliber5/ember-bootstrap/commit/2d2ff5f))
+
+
+
+
 # [1.0.0-alpha.2](https://github.com/kaliber5/ember-bootstrap/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2017-01-10)
 
 

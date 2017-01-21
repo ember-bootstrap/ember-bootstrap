@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.2.d7d354a9</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -327,15 +327,15 @@ export default Component.extend(TransitionSupport, {
     }
 
     return events.map((event) =&gt; {
-        switch (event) {
-          case &#x27;hover&#x27;:
-            return [&#x27;mouseenter&#x27;, &#x27;mouseleave&#x27;];
-          case &#x27;focus&#x27;:
-            return [&#x27;focusin&#x27;, &#x27;focusout&#x27;];
-          default:
-            return event;
-        }
+      switch (event) {
+        case &#x27;hover&#x27;:
+          return [&#x27;mouseenter&#x27;, &#x27;mouseleave&#x27;];
+        case &#x27;focus&#x27;:
+          return [&#x27;focusin&#x27;, &#x27;focusout&#x27;];
+        default:
+          return event;
       }
+    }
     );
   }),
 
@@ -548,11 +548,11 @@ export default Component.extend(TransitionSupport, {
     if (this.get(&#x27;autoPlacement&#x27;)) {
       let viewportDim = getPosition(this.get(&#x27;viewportElement&#x27;));
 
-      placement = placement === &#x27;bottom&#x27; &amp;&amp; pos.bottom + actualHeight &gt; viewportDim.bottom ? &#x27;top&#x27; :
-        placement === &#x27;top&#x27; &amp;&amp; pos.top - actualHeight &lt; viewportDim.top ? &#x27;bottom&#x27; :
-          placement === &#x27;right&#x27; &amp;&amp; pos.right + actualWidth &gt; viewportDim.width ? &#x27;left&#x27; :
-            placement === &#x27;left&#x27; &amp;&amp; pos.left - actualWidth &lt; viewportDim.left ? &#x27;right&#x27; :
-              placement;
+      placement = placement === &#x27;bottom&#x27; &amp;&amp; pos.bottom + actualHeight &gt; viewportDim.bottom ? &#x27;top&#x27;
+        : placement === &#x27;top&#x27; &amp;&amp; pos.top - actualHeight &lt; viewportDim.top ? &#x27;bottom&#x27;
+          : placement === &#x27;right&#x27; &amp;&amp; pos.right + actualWidth &gt; viewportDim.width ? &#x27;left&#x27;
+            : placement === &#x27;left&#x27; &amp;&amp; pos.left - actualWidth &lt; viewportDim.left ? &#x27;right&#x27;
+              : placement;
     }
 
     this.set(&#x27;_placement&#x27;, placement);

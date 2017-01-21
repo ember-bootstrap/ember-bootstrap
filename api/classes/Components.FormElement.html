@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.2.d7d354a9</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -153,7 +153,175 @@ by invoking the component with a block template. Use whatever control you might 
 </ul>
 <p>If your custom control does not render an input element, you should set <code>useIcons</code> to <code>false</code> since bootstrap only supports
 feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</code> elements.</p>
-
+<h3>HTML attributes</h3>
+<p>To set HTML attributes on the control element provided by this component, set them as properties of this component:</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot; as |form|}}
+  {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; property=&quot;email&quot;
+    placeholder=&quot;Email&quot;
+    required=true
+    multiple=true
+    tabIndex=5
+  }}
+   ...
+{{/bs-form}}
+</code></pre>
+<p>The following attributes are supported depending on the <code>controlType</code>:</p>
+<table class="table table-striped">
+<thead>
+<tr>
+<th></th>
+<th>textarea</th>
+<th>checkbox</th>
+<th>all others</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>accept</td>
+<td></td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>autocomplete</td>
+<td>✔︎</td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>autofocus</td>
+<td>✔︎</td>
+<td>✔︎</td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>autosave</td>
+<td></td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>cols</td>
+<td>✔︎</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>disabled</td>
+<td></td>
+<td>✔︎</td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>form</td>
+<td>✔︎</td>
+<td>✔︎</td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>inputmode</td>
+<td></td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>max</td>
+<td></td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>maxlength</td>
+<td>✔︎</td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>min</td>
+<td></td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>minlength</td>
+<td>✔︎</td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>multiple</td>
+<td></td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>name</td>
+<td>✔︎</td>
+<td>✔︎</td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>pattern</td>
+<td></td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>placeholder</td>
+<td>✔︎</td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>readonly</td>
+<td>✔︎</td>
+<td>✔︎</td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>required</td>
+<td>✔︎</td>
+<td>✔︎</td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>rows</td>
+<td>✔︎</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>size</td>
+<td></td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>spellcheck</td>
+<td>✔︎</td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>step</td>
+<td></td>
+<td></td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>tabindex</td>
+<td>✔︎</td>
+<td>✔︎</td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>wrap</td>
+<td>✔︎</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -217,20 +385,12 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                                 <a href="#" data-tabid="#properties" data-anchor="#property__showValidationOn" data-tablink="_showValidationOn">_showValidationOn</a>
 
                             </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_autofocus" data-tablink="autofocus">autofocus</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_cols" data-tablink="cols">cols</a>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix" data-tablink="classTypePrefix">classTypePrefix</a>
 
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_controlType" data-tablink="controlType">controlType</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_disabled" data-tablink="disabled">disabled</a>
 
                             </li>
                             <li class="index-item property public inherited">
@@ -334,37 +494,12 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_name" data-tablink="name">name</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_placeholder" data-tablink="placeholder">placeholder</a>
-
-                            </li>
-                            <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_property" data-tablink="property">property</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_readonly" data-tablink="readonly">readonly</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_required" data-tablink="required">required</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_rows" data-tablink="rows">rows</a>
 
                             </li>
                             <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_showAllValidations" data-tablink="showAllValidations">showAllValidations</a>
 
-                            </li>
-                            <li class="index-item property private deprecated">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_showErrors" data-tablink="showErrors">showErrors</a>
-
-                                    <span class="label label-deprecated">deprecated</span>
                             </li>
                             <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_showOwnValidation" data-tablink="showOwnValidation">showOwnValidation</a>
@@ -453,7 +588,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l594"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:594</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l693"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:693</code></a>
                             </p>
                     
                     
@@ -485,7 +620,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l431"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:431</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l533"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:533</code></a>
                             </p>
                     
                     
@@ -520,7 +655,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l411"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:411</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l513"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:513</code></a>
                             </p>
                     
                     
@@ -533,63 +668,33 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                     
                     
                     </div>
-                    <div id="property_autofocus" class="property item public">
-                        <h3 class="name">autofocus
-                            <span class="small">boolean</span>
+                    <div id="property_classTypePrefix" class="property item private inherited">
+                        <h3 class="name">classTypePrefix
+                            <span class="small">String</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-public">public</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
                     
                         <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l244"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:244</code></a>
+                                    <p>Inherited from
+                                    <a href="../classes/Components.FormGroup.html#property_classTypePrefix">Components.FormGroup</a>:
+                            <a href="../files/addon_components_bs-form_group.js.html#l36"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:36</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Control element's HTML5 autofocus attribute</p>
-                    
+                            
                         </div>
                     
-                    
-                    
-                    </div>
-                    <div id="property_cols" class="property item public">
-                        <h3 class="name">cols
-                            <span class="small">number</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l272"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:272</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Textarea's cols attribute (ignored for other <code>controlType</code>s)</p>
-                    
-                        </div>
-                    
+                            <p><strong>Default:</strong> &#x27;form-group&#x27;</p>
                     
                     
                     </div>
@@ -609,7 +714,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l162"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:162</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l337"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:337</code></a>
                             </p>
                     
                     
@@ -625,36 +730,6 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                     <li>any other type will use an input tag with the <code>controlType</code> value as the type attribute (for e.g. HTML5 input
                     types like 'email'), and the same layout as the 'text' type</li>
                     </ul>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_disabled" class="property item public">
-                        <h3 class="name">disabled
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l217"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:217</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Control element's HTML5 disabled attribute</p>
                     
                         </div>
                     
@@ -677,7 +752,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_errorIcon">Components.FormGroup</a>:
-                            <a href="../files/addon_components_bs-form_group.js.html#l88"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:88</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l97"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:97</code></a>
                             </p>
                     
                     
@@ -718,7 +793,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l289"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:289</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l391"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:391</code></a>
                             </p>
                     
                     
@@ -748,7 +823,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l306"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:306</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l408"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:408</code></a>
                             </p>
                     
                     
@@ -778,7 +853,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l566"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:566</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l665"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:665</code></a>
                             </p>
                     
                     
@@ -808,7 +883,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l486"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:486</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l579"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:579</code></a>
                             </p>
                     
                     
@@ -845,7 +920,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l298"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:298</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l400"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:400</code></a>
                             </p>
                     
                     
@@ -874,7 +949,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_hasFeedback">Components.FormGroup</a>:
-                            <a href="../files/addon_components_bs-form_group.js.html#l56"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:56</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l65"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:65</code></a>
                             </p>
                     
                     
@@ -903,7 +978,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_hasIconForValidationState">Components.FormGroup</a>:
-                            <a href="../files/addon_components_bs-form_group.js.html#l170"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:170</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l179"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:179</code></a>
                             </p>
                     
                     
@@ -932,7 +1007,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l466"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:466</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l559"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:559</code></a>
                             </p>
                     
                     
@@ -961,7 +1036,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_hasValidation">Components.FormGroup</a>:
-                            <a href="../files/addon_components_bs-form_group.js.html#l46"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:46</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l55"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:55</code></a>
                             </p>
                     
                     
@@ -990,7 +1065,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l340"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:340</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l442"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:442</code></a>
                             </p>
                     
                     
@@ -1019,7 +1094,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l348"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:348</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l450"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:450</code></a>
                             </p>
                     
                     
@@ -1048,7 +1123,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l315"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:315</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l417"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:417</code></a>
                             </p>
                     
                     
@@ -1077,7 +1152,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l536"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:536</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l629"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:629</code></a>
                             </p>
                     
                     
@@ -1107,7 +1182,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l551"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:551</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l647"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:647</code></a>
                             </p>
                     
                     
@@ -1138,7 +1213,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l526"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:526</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l619"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:619</code></a>
                             </p>
                     
                     
@@ -1169,7 +1244,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_iconName">Components.FormGroup</a>:
-                            <a href="../files/addon_components_bs-form_group.js.html#l159"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:159</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l168"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:168</code></a>
                             </p>
                     
                     
@@ -1198,7 +1273,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_infoIcon">Components.FormGroup</a>:
-                            <a href="../files/addon_components_bs-form_group.js.html#l130"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:130</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l139"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:139</code></a>
                             </p>
                     
                     
@@ -1247,7 +1322,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l153"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:153</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l328"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:328</code></a>
                             </p>
                     
                     
@@ -1277,7 +1352,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l510"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:510</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l603"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:603</code></a>
                             </p>
                     
                     
@@ -1306,7 +1381,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l518"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:518</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l611"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:611</code></a>
                             </p>
                     
                     
@@ -1335,7 +1410,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l356"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:356</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l458"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:458</code></a>
                             </p>
                     
                     
@@ -1366,7 +1441,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l502"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:502</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l595"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:595</code></a>
                             </p>
                     
                     
@@ -1395,7 +1470,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l140"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:140</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l315"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:315</code></a>
                             </p>
                     
                     
@@ -1428,7 +1503,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l281"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:281</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l383"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:383</code></a>
                             </p>
                     
                     
@@ -1436,66 +1511,6 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                     
                         <div class="description">
                             <p>The model used for validation. Defaults to the parent <code>Components.Form</code>'s <code>model</code></p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_name" class="property item public">
-                        <h3 class="name">name
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l253"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:253</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Control element's name attribute</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_placeholder" class="property item public">
-                        <h3 class="name">placeholder
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l208"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:208</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Control element's HTML5 placeholder attribute</p>
                     
                         </div>
                     
@@ -1518,7 +1533,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l195"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:195</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l370"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:370</code></a>
                             </p>
                     
                     
@@ -1532,97 +1547,6 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                     
                         </div>
                     
-                    
-                    
-                    </div>
-                    <div id="property_readonly" class="property item public">
-                        <h3 class="name">readonly
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l226"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:226</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Control element's HTML5 readonly attribute</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_required" class="property item public">
-                        <h3 class="name">required
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l235"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:235</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Control element's HTML5 required attribute</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_rows" class="property item public">
-                        <h3 class="name">rows
-                            <span class="small">number</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l262"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:262</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Textarea's rows attribute (ignored for other <code>controlType</code>s)</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> 5</p>
                     
                     
                     </div>
@@ -1642,7 +1566,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l384"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:384</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l486"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:486</code></a>
                             </p>
                     
                     
@@ -1653,36 +1577,6 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         </div>
                     
                             <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="property_showErrors" class="property item private deprecated">
-                        <h3 class="name">showErrors
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                            <span class="label label-warning">deprecated</span>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l441"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:441</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
                     
                     
                     </div>
@@ -1702,7 +1596,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l376"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:376</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l478"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:478</code></a>
                             </p>
                     
                     
@@ -1732,7 +1626,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l366"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:366</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l468"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:468</code></a>
                             </p>
                     
                     
@@ -1763,7 +1657,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l392"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:392</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l494"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:494</code></a>
                             </p>
                     
                     
@@ -1792,7 +1686,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l400"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:400</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l502"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:502</code></a>
                             </p>
                     
                     
@@ -1824,7 +1718,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_successIcon">Components.FormGroup</a>:
-                            <a href="../files/addon_components_bs-form_group.js.html#l66"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:66</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l75"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:75</code></a>
                             </p>
                     
                     
@@ -1869,7 +1763,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                                     Components.FormGroup
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-form_element.js.html#l474"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:474</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l567"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:567</code></a>
                             </p>
                     
                     
@@ -1902,7 +1796,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                                     Components.FormGroup
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_bs-form_element.js.html#l450"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:450</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l543"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:543</code></a>
                             </p>
                     
                     
@@ -1933,7 +1827,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_validationClass">Components.FormGroup</a>:
-                            <a href="../files/addon_components_bs-form_group.js.html#l192"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:192</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l201"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:201</code></a>
                             </p>
                     
                     
@@ -1962,14 +1856,14 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l323"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:323</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l425"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:425</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The array of validation messages (either errors or warnings) rom the <code>model</code>'s validation.</p>
+                            <p>The array of validation messages (either errors or warnings) from the <code>model</code>'s validation.</p>
                     
                         </div>
                     
@@ -1992,7 +1886,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l178"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:178</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l353"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:353</code></a>
                             </p>
                     
                     
@@ -2027,7 +1921,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_warningIcon">Components.FormGroup</a>:
-                            <a href="../files/addon_components_bs-form_group.js.html#l109"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:109</code></a>
+                            <a href="../files/addon_components_bs-form_group.js.html#l118"><code>addon&#x2F;components&#x2F;bs-form&#x2F;group.js:118</code></a>
                             </p>
                     
                     
@@ -2070,7 +1964,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l614"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:614</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l713"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:713</code></a>
                             </p>
                     
                     
@@ -2097,7 +1991,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l603"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:603</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l702"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:702</code></a>
                             </p>
                     
                     
@@ -2124,7 +2018,7 @@ feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-form_element.js.html#l625"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:625</code></a>
+                            <a href="../files/addon_components_bs-form_element.js.html#l724"><code>addon&#x2F;components&#x2F;bs-form&#x2F;element.js:724</code></a>
                             </p>
                     
                     

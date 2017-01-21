@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.2.d7d354a9</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -259,9 +259,9 @@ export default Ember.Component.extend({
    */
   closeOnClickHandler(e) {
     let $target = $(e.target);
-    if (!this.get(&#x27;isDestroyed&#x27;) &amp;&amp;
-      $target.closest(this.$().find(&#x27;.dropdown-toggle&#x27;)).length === 0 &amp;&amp;
-      ($target.closest(this.$().find(&#x27;.dropdown-menu&#x27;)).length === 0 || this.get(&#x27;closeOnMenuClick&#x27;))) {
+    if (!this.get(&#x27;isDestroyed&#x27;)
+      &amp;&amp; $target.closest(this.$().find(&#x27;.dropdown-toggle&#x27;)).length === 0
+      &amp;&amp; ($target.closest(this.$().find(&#x27;.dropdown-menu&#x27;)).length === 0 || this.get(&#x27;closeOnMenuClick&#x27;))) {
       this.send(&#x27;closeDropdown&#x27;);
     }
   }

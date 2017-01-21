@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.2.d7d354a9</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -56,6 +56,7 @@
 import Ember from &#x27;ember&#x27;;
 import layout from &#x27;../../templates/components/bs-form/group&#x27;;
 import Config from &#x27;ember-bootstrap/config&#x27;;
+import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
 
 const { computed } = Ember;
 
@@ -81,11 +82,19 @@ const { computed } = Ember;
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(SizeClass, {
   layout,
 
   classNames: [&#x27;form-group&#x27;],
   classNameBindings: [&#x27;validationClass&#x27;, &#x27;hasFeedback&#x27;],
+
+  /**
+   * @property classTypePrefix
+   * @type String
+   * @default &#x27;form-group&#x27;
+   * @private
+   */
+  classTypePrefix: &#x27;form-group&#x27;,
 
   /**
    * Whether to show validation state icons.
