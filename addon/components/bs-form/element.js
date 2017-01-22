@@ -732,7 +732,6 @@ export default FormGroup.extend({
     this.showValidationOnHandler('keyPress');
   },
 
-
   /**
    * The action is called whenever the input value is changed, e.g. by typing text
    *
