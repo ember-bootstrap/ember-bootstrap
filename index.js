@@ -4,19 +4,10 @@
 const path = require('path');
 const util = require('util');
 const extend = util._extend;
-const mergeTrees = require('broccoli-merge-trees');
 const Funnel = require('broccoli-funnel');
 const stew = require('broccoli-stew');
-const mv = stew.mv;
-const log = stew.log;
-const rm = stew.rm;
+const { mv, /* log, */ rm } = stew;
 const chalk = require('chalk');
-
-const defaultOptions = {
-  importBootstrapTheme: false,
-  importBootstrapCSS: true,
-  importBootstrapFont: true
-};
 
 const supportedPreprocessors = [
   'less',
@@ -32,6 +23,14 @@ module.exports = {
       app = app.app;
     }
     this.app = app;
+
+    let bootstrapVersion = this.getBootstrapVersion();
+
+    let defaultOptions = {
+      importBootstrapTheme: false,
+      importBootstrapCSS: true,
+      importBootstrapFont: bootstrapVersion === 'bs3'
+    };
 
     this.preprocessor = this.findPreprocessor();
 
@@ -61,6 +60,10 @@ module.exports = {
     return 'bs3'; // @todo replace with dynamic config
   },
 
+  getOtherBootstrapVersion() {
+    return this.getBootstrapVersion() === 'bs3' ? 'bs4' : 'bs3';
+  },
+
   findPreprocessor() {
     return supportedPreprocessors.find((name) => !!this.app.project.findAddonByName(`ember-cli-${name}`) && this.validatePreprocessor(name));
   },
@@ -68,7 +71,7 @@ module.exports = {
   treeForAddon() {
     let tree = this._super.treeForAddon.apply(this, arguments);
     let bsVersion = this.getBootstrapVersion();
-    let otherBsVersion = bsVersion === 'bs3' ? 'bs4' : 'bs3';
+    let otherBsVersion = this.getOtherBootstrapVersion();
     let componentsPath = 'modules/ember-bootstrap/components/';
     tree = mv(tree, `${componentsPath}${bsVersion}/`, componentsPath);
     tree = rm(tree, `${componentsPath}${otherBsVersion}/**/*`);
@@ -78,12 +81,12 @@ module.exports = {
   treeForAddonTemplates() {
     let tree = this._super.treeForAddonTemplates.apply(this, arguments);
     let bsVersion = this.getBootstrapVersion();
-    let otherBsVersion = bsVersion === 'bs3' ? 'bs4' : 'bs3';
+    let otherBsVersion = this.getOtherBootstrapVersion();
     let templatePath = 'components/';
     tree = mv(tree, `${templatePath}common/`, templatePath);
     tree = mv(tree, `${templatePath}${bsVersion}/`, templatePath);
     tree = rm(tree, `${templatePath}${otherBsVersion}/**/*`);
-    return tree; //log(tree, {output: 'tree', label: 'moved'});
+    return tree; // log(tree, {output: 'tree', label: 'moved'});
   },
 
   validatePreprocessor(name) {
@@ -140,7 +143,7 @@ module.exports = {
   },
 
   treeForPublic() {
-    if (this.bootstrapOptions.importBootstrapFont) {
+    if (this.bootstrapOptions.importBootstrapFont && this.getBootstrapVersion() === 'bs3') {
       return new Funnel(this.getBootstrapFontPath(), {
         destDir: 'fonts'
       });
