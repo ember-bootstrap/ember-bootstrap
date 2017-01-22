@@ -22,3 +22,4 @@ yuidoc.json
 gulpfile.js
 .codeclimate.yml
 .jscsrc
+node-tests/
