@@ -83,12 +83,12 @@ export default Ember.Component.extend({
   /**
    * This property reflects the state of the dropdown, whether it is open or closed.
    *
-   * @property open
+   * @property isOpen
    * @default false
    * @type boolean
    * @private
    */
-  open: false,
+  isOpen: false,
 
   /**
    * By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.
@@ -163,7 +163,7 @@ export default Ember.Component.extend({
 
   actions: {
     toggleDropdown() {
-      if (this.get('open')) {
+      if (this.get('isOpen')) {
         this.send('closeDropdown');
       } else {
         this.send('openDropdown');
@@ -171,13 +171,13 @@ export default Ember.Component.extend({
     },
 
     openDropdown() {
-      this.set('open', true);
+      this.set('isOpen', true);
       $(document).on(this.clickEventName, bind(this, this.closeOnClickHandler));
       this.get('onShow')();
     },
 
     closeDropdown() {
-      this.set('open', false);
+      this.set('isOpen', false);
       $(document).off(this.clickEventName);
       this.get('onHide')();
     }
