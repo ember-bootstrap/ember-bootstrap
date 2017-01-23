@@ -33,7 +33,7 @@ const {
  */
 export default Ember.Component.extend({
 
-  classNameBindings: ['collapse', 'in', 'collapsing'],
+  classNameBindings: ['collapse', 'collapsing'],
   attributeBindings: ['style'],
 
   /**
@@ -56,7 +56,7 @@ export default Ember.Component.extend({
 
   collapse: computed.not('transitioning'),
   collapsing: computed.alias('transitioning'),
-  'in': computed.and('collapse', 'active'),
+  showContent: computed.and('collapse', 'active'),
 
   /**
    * true if the component is currently transitioning
