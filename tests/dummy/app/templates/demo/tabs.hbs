@@ -81,8 +81,8 @@ component and a <code>\{{outlet}}</code>:</p>
     <!-- BEGIN-SNIPPET tab-route-->
     <div>
         {{#bs-nav type="tabs" as |nav|}}
-            {{#nav.item}}{{#link-to "demo.tabs.index"}}Tab 1{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "demo.tabs.other"}}Tab 2{{/link-to}}{{/nav.item}}
+            {{#nav.item}}{{#nav.link-to "demo.tabs.index"}}Tab 1{{/nav.link-to}}{{/nav.item}}
+            {{#nav.item}}{{#nav.link-to "demo.tabs.other"}}Tab 2{{/nav.link-to}}{{/nav.item}}
         {{/bs-nav}}
         {{outlet}}
     </div>

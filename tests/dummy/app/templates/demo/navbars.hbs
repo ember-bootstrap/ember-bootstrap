@@ -17,8 +17,8 @@
         </div>
         {{#navbar.content}}
             {{#navbar.nav as |nav|}}
-                {{#nav.item}}{{#link-to "index"}}Home{{/link-to}}{{/nav.item}}
-                {{#nav.item}}{{#link-to "demo.navbars"}}Navbars{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#nav.link-to "index"}}Home{{/nav.link-to}}{{/nav.item}}
+                {{#nav.item}}{{#nav.link-to "demo.navbars"}}Navbars{{/nav.link-to}}{{/nav.item}}
             {{/navbar.nav}}
         {{/navbar.content}}
     {{/bs-navbar}}

@@ -10,14 +10,14 @@
     </div>
     {{#navbar.content}}
         {{#navbar.nav as |nav|}}
-            {{#nav.item}}{{#link-to "getting-started"}}Getting Started{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "demo"}}Components{{/link-to}}{{/nav.item}}
-            {{#nav.item}}<a href="/api">API v1.0</a>{{/nav.item}}
-            {{#nav.item}}<a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a>{{/nav.item}}
+            {{#nav.item}}{{#nav.link-to "getting-started"}}Getting Started{{/nav.link-to}}{{/nav.item}}
+            {{#nav.item}}{{#nav.link-to "demo"}}Components{{/nav.link-to}}{{/nav.item}}
+            {{#nav.item}}<a href="/api" class="nav-link">API v1.0</a>{{/nav.item}}
+            {{#nav.item}}<a href="//simonihmig.github.io/ember-bootstrap/api/" class="nav-link">API v0.11</a>{{/nav.item}}
         {{/navbar.nav}}
         {{#navbar.nav class="navbar-right" as |nav|}}
-            {{#nav.item}}<a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a>{{/nav.item}}
-            {{#nav.item}}<a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a>{{/nav.item}}
+            {{#nav.item}}<a href="https://github.com/kaliber5/ember-bootstrap" class="nav-link" target="_blank"><i class="fa fa-github"></i></a>{{/nav.item}}
+            {{#nav.item}}<a href="https://twitter.com/simonihmig" class="nav-link" target="_blank"><i class="fa fa-twitter"></i></a>{{/nav.item}}
         {{/navbar.nav}}
     {{/navbar.content}}
 {{/bs-navbar}}
