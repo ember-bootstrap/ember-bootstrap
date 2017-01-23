@@ -79,16 +79,6 @@ export default Ember.Component.extend(TypeClass, {
   collapsed: true,
 
   /**
-   * Controls whether the wrapping div is a fluid container or not.
-   *
-   * @property fluid
-   * @type boolean
-   * @default true
-   * @public
-   */
-  fluid: true,
-
-  /**
    * Specifies the position classes for the navbar, currently supporting none, "fixed-top", "fixed-bottom", and "static-top".
    * See the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.
    *

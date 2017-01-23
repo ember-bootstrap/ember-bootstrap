@@ -13,7 +13,6 @@ import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
 export default BsButtonComponent.extend({
   layout,
 
-  classNames: ['navbar-toggle'],
   classNameBindings: ['collapsed'],
   collapsed: true
 });
