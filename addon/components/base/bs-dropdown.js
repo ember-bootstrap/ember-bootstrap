@@ -78,7 +78,7 @@ const {
  */
 export default Ember.Component.extend({
   layout,
-  classNameBindings: ['open', 'containerClass'],
+  classNameBindings: ['containerClass'],
 
   /**
    * This property reflects the state of the dropdown, whether it is open or closed.
