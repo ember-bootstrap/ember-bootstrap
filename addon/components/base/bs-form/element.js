@@ -687,7 +687,7 @@ export default FormGroup.extend({
         inputLayout = 'default';
     }
 
-    return `components/form-element/${formLayout}/${inputLayout}`;
+    return `components/bs-form/element/${formLayout}/${inputLayout}`;
   }),
 
   /**

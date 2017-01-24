@@ -10,7 +10,7 @@
     )
   }}
 {{else}}
-    <input
+  <input
     value={{value}}
     class="form-control"
     oninput={{action "change" value="target.value"}}
@@ -40,4 +40,5 @@
     spellcheck={{spellcheck}}
   >
 {{/if}}
-{{partial "components/form-element/feedback-icon"}}
+{{partial "components/bs-form/element/feedback-icon"}}
+{{partial "components/bs-form/element/errors"}}
