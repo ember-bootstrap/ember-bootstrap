@@ -1,7 +1,7 @@
 <div class="bs-example">
     <!-- BEGIN-SNIPPET dropdown-demo -->
     <ul class="nav nav-pills">
-        {{#bs-dropdown tagName="li" as |dd|}}
+        {{#bs-dropdown tagName="li" inNav=true as |dd|}}
             {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
             {{#dd.menu as |menu|}}
                 {{#menu.item}}
@@ -12,7 +12,7 @@
                 {{/menu.item}}
             {{/dd.menu}}
         {{/bs-dropdown}}
-        {{#bs-dropdown direction="up" tagName="li" as |dd|}}
+        {{#bs-dropdown direction="up" tagName="li" inNav=true as |dd|}}
             {{#dd.toggle}}Dropup <span class="caret"></span>{{/dd.toggle}}
             {{#dd.menu align="right" as |menu|}}
                 {{#menu.item}}

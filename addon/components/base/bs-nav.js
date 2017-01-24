@@ -41,13 +41,13 @@ const { isPresent } = Ember;
  ```hbs
  {{#bs-nav type="pills" as |nav|}}
    {{#nav.item}}{{#nav.link-to "index"}}Home{{/nav.link-to}}{{/nav.item}}
-   {{#bs-dropdown tagName="li" as |dd|}}
+   {{#nav.dropdown tagName="li" as |dd|}}
      {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
      {{#dd.menu as |ddm|}}
        {{#ddm.item}}{{#link-to "foo"}}Foo{{/link-to}}{{/ddm.item}}
        {{#ddm.item}}{{#link-to "bar"}}Bar{{/link-to}}{{/ddm.item}}
      {{/dd.menu}}
-   {{/bs-dropdown}}
+   {{/nav.dropdown}}
  {{/bs-nav}}
  ```
 

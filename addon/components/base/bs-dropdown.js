@@ -18,7 +18,7 @@ const {
 
  ```hbs
  <ul class="nav navbar-nav">
-   {{#bs-dropdown tagName="li" as |dd|}}
+   {{#bs-dropdown tagName="li" inNav=true as |dd|}}
      {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
      {{#dd.menu as |ddm|}}
        {{#ddm.item}}{{#link-to "index"}}Something{{/link-to}}{{/ddm.item}}
@@ -118,6 +118,16 @@ export default Ember.Component.extend({
    * @public
    */
   direction: 'down',
+
+  /**
+   * Indicates the dropdown is being used as a navigation item dropdown.
+   *
+   * @property inNav
+   * @type boolean
+   * @default false
+   * @private
+   */
+  inNav: false,
 
   /**
    * A computed property to generate the suiting class for the dropdown container, either "dropdown", "dropup" or "btn-group".
