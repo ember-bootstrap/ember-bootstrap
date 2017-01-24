@@ -30,7 +30,7 @@ const {
  */
 export default Ember.Component.extend(TypeClass, TransitionSupport, {
   layout,
-  classNameBindings: ['alert', 'fade', 'dismissable:alert-dismissible'],
+  classNameBindings: ['alert', 'fade', 'dismissible:alert-dismissible'],
 
   /**
    * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
