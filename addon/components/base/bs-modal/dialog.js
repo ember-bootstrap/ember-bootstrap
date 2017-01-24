@@ -16,7 +16,7 @@ const {
 export default Ember.Component.extend({
   layout,
   classNames: ['modal'],
-  classNameBindings: ['fade', 'in'],
+  classNameBindings: ['fade'],
   attributeBindings: ['tabindex'],
   ariaRole: 'dialog',
   tabindex: '-1',
@@ -32,14 +32,14 @@ export default Ember.Component.extend({
   fade: true,
 
   /**
-   * Used to apply Bootstrap's "in" class
+   * Used to apply Bootstrap's visibility classes
    *
-   * @property in
+   * @property showModal
    * @type boolean
    * @default false
    * @private
    */
-  'in': false,
+  showModal: false,
 
   /**
    * Closes the modal when escape key is pressed.

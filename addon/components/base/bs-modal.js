@@ -91,14 +91,14 @@ export default Ember.Component.extend(TransitionSupport, {
   notFade: computed.not('fade'),
 
   /**
-   * Used to apply Bootstrap's "in" class
+   * Used to apply Bootstrap's visibility classes.
    *
-   * @property in
+   * @property showModal
    * @type boolean
    * @default false
    * @private
    */
-  'in': false,
+  showModal: false,
 
   /**
    * Use a semi-transparent modal background to hide the rest of the page.
@@ -358,7 +358,7 @@ export default Ember.Component.extend(TransitionSupport, {
         .scrollTop(0);
 
       this.handleUpdate();
-      this.set('in', true);
+      this.set('showModal', true);
       this.get('onShow')();
 
       if (this.get('usesTransition')) {
@@ -389,7 +389,7 @@ export default Ember.Component.extend(TransitionSupport, {
     this._isOpen = false;
 
     this.resize();
-    this.set('in', false);
+    this.set('showModal', false);
 
     if (this.get('usesTransition')) {
       this.get('modalElement')
@@ -589,7 +589,7 @@ export default Ember.Component.extend(TransitionSupport, {
   init() {
     this._super(...arguments);
     let { isOpen, backdrop, fade } = this.getProperties('isOpen', 'backdrop', 'fade');
-    this.set('in', isOpen && !fade);
+    this.set('showModal', isOpen && !fade);
     this.set('showBackdrop', isOpen && backdrop);
   }
 });

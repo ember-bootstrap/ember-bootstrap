@@ -3,7 +3,7 @@
     {{#bs-modal/dialog
         onClose=(action "close")
         fade=fade
-        in=in
+        showModal=showModal
         id=modalId
         keyboard=keyboard
         size=size
@@ -23,7 +23,7 @@
 
     <div>
     {{#if showBackdrop}}
-      <div class="modal-backdrop {{if fade "fade"}} {{if in "in"}}" id="{{backdropId}}"></div>
+      <div class="modal-backdrop {{if fade "fade"}} {{if showModal showClass}}" id="{{backdropId}}"></div>
     {{/if}}
     </div>
 
