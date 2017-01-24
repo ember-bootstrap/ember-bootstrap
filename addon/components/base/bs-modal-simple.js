@@ -1,4 +1,4 @@
-import Modal from './bs-modal';
+import Modal from 'ember-bootstrap/components/bs-modal';
 import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
 
 /**
