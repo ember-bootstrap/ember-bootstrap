@@ -21,15 +21,6 @@ const {
  */
 export default Ember.Component.extend(ComponentChild, TypeClass, {
   layout,
-  classNames: ['panel'],
-
-  /**
-   * @property classTypePrefix
-   * @type String
-   * @default 'panel'
-   * @protected
-   */
-  classTypePrefix: 'panel',
 
   /**
    * The title of the accordion item, displayed as a .panel-title element

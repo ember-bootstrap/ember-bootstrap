@@ -34,7 +34,6 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  */
 export default Ember.Component.extend({
   layout,
-  classNames: ['panel-group'],
   ariaRole: 'tablist',
 
   /**

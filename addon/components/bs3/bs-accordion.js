@@ -1,2 +1,5 @@
-export { default } from 'ember-bootstrap/components/base/bs-accordion';
+import Accordion from 'ember-bootstrap/components/base/bs-accordion';
 
+export default Accordion.extend({
+  classNames: ['panel-group']
+});
