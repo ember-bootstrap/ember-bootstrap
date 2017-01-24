@@ -63,7 +63,7 @@ export default Ember.Component.extend({
   tagName: 'ul',
   classNames: ['nav'],
 
-  classNameBindings: ['typeClass', 'justified:nav-justified', 'stacked:nav-stacked'],
+  classNameBindings: ['typeClass', 'justified:nav-justified'],
 
   typeClass: Ember.computed('type', function() {
     let type = this.get('type');

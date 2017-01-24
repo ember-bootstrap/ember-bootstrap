@@ -1,1 +1,5 @@
-export { default } from 'ember-bootstrap/components/base/bs-nav';
+import Nav from 'ember-bootstrap/components/base/bs-nav';
+
+export default Nav.extend({
+  classNameBindings: ['stacked:flex-column']
+});
