@@ -4,6 +4,8 @@ import Navbar from 'ember-bootstrap/components/base/bs-navbar';
 export default Navbar.extend({
   classNameBindings: ['breakpointClass', 'backgroundClass'],
 
+  type: 'light',
+
   /**
    * Defines the responsive toggle breakpoint size. Options are the standard
    * two character Bootstrap size abbreviations. Used to set the `navbar-toggleable-*`
