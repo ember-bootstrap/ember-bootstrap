@@ -30,7 +30,7 @@ const {
  */
 export default Ember.Component.extend(TypeClass, TransitionSupport, {
   layout,
-  classNameBindings: ['alert', 'fade', 'in', 'alert-dismissible'],
+  classNameBindings: ['alert', 'fade', 'dismissable:alert-dismissible'],
 
   /**
    * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
@@ -42,7 +42,6 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
    * @public
    */
   dismissible: true,
-  'alert-dismissible': computed.readOnly('dismissible'),
 
   /**
    * If true the alert is completely hidden. Will be set when the fade animation has finished.
@@ -100,7 +99,7 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
    * @private
    */
   alert: computed.not('hidden'),
-  in: computed.and('_visible', 'fade'),
+  showAlert: computed.and('_visible', 'fade'),
 
   /**
    * @property classTypePrefix
@@ -114,7 +113,7 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
    * The duration of the fade out animation
    *
    * @property fadeDuration
-   * @type integer
+   * @type number
    * @default 150
    * @public
    */
