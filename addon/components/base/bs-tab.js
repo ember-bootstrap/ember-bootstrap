@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-tab';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
-import TabPane from './bs-tab/pane';
+import TabPane from 'ember-bootstrap/components/bs-tab/pane';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
 const {

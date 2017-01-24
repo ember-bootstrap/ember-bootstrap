@@ -50,8 +50,8 @@
     <!-- BEGIN-SNIPPET tab-custom -->
     {{#bs-tab customTabs=true as |tab|}}
         {{#bs-nav type="tabs" as |nav|}}
-            {{#nav.item active=(bs-eq tab.activeId "pane1")}}<a href="#pane1" role="tab" {{action tab.select "pane1"}}>Tab 1 <span class="badge">{{badge}}</span></a>{{/nav.item}}
-            {{#nav.item active=(bs-eq tab.activeId "pane2")}}<a href="#pane1" role="tab" {{action tab.select "pane2"}}>Tab 2</a>{{/nav.item}}
+            {{#nav.item active=(bs-eq tab.activeId "pane1")}}<a href="#pane1" class="nav-link" role="tab" {{action tab.select "pane1"}}>Tab 1 <span class="badge">{{badge}}</span></a>{{/nav.item}}
+            {{#nav.item active=(bs-eq tab.activeId "pane2")}}<a href="#pane1" class="nav-link" role="tab" {{action tab.select "pane2"}}>Tab 2</a>{{/nav.item}}
         {{/bs-nav}}
 
         <div class="tab-content">
