@@ -175,5 +175,16 @@ module.exports = {
     tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
     tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
     return tree; //log(tree, {output: 'tree', label: 'moved'});
+  },
+
+  treeForTemplates() {
+    let tree = this._super.treeForTemplates.apply(this, arguments);
+    let bsVersion = this.getBootstrapVersion();
+    let otherBsVersion = this.getOtherBootstrapVersion();
+    let templatePath = 'components/';
+    tree = mv(tree, `${templatePath}common/`, templatePath);
+    tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
+    tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
+    return tree; //log(tree, {output: 'tree', label: 'moved'});
   }
 };
