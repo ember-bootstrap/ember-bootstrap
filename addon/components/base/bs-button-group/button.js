@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Button from '../bs-button';
+import Button from 'ember-bootstrap/components/bs-button';
 
 const { computed, isArray } = Ember;
 
