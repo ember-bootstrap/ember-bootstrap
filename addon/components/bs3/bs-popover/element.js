@@ -1,1 +1,5 @@
-export { default } from 'ember-bootstrap/components/base/bs-popover/element';
+import PopoverElement from 'ember-bootstrap/components/base/bs-popover/element';
+
+export default PopoverElement.extend({
+  classNameBindings: ['placement', 'in']
+});

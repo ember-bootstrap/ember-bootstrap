@@ -17,7 +17,7 @@ export default Ember.Component.extend({
   layout,
 
   classNames: ['popover'],
-  classNameBindings: ['placement', 'in', 'fade'],
+  classNameBindings: ['fade'],
   ariaRole: 'tooltip',
 
   /**
