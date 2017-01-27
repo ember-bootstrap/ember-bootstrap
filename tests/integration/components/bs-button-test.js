@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import test from '../../helpers/bootstrap-test';
+import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -7,14 +7,14 @@ moduleForComponent('bs-button', 'Integration | Component | bs-button', {
   integration: true
 });
 
-test(3, 'button has correct default markup', function(assert) {
+testBS3('button has correct default markup', function(assert) {
   this.render(hbs`{{#bs-button}}Test{{/bs-button}}`);
 
   assert.equal(this.$('button').hasClass('btn'), true, 'button has btn class');
   assert.equal(this.$('button').hasClass('btn-default'), true, 'button has type class');
 });
 
-test(4, 'button has correct default markup', function(assert) {
+testBS4('button has correct default markup', function(assert) {
   this.render(hbs`{{#bs-button}}Test{{/bs-button}}`);
 
   assert.equal(this.$('button').hasClass('btn'), true, 'button has btn class');
