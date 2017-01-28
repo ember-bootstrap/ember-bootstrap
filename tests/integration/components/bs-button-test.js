@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import test from 'ember-sinon-qunit/test-support/test';
+import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -7,13 +7,42 @@ moduleForComponent('bs-button', 'Integration | Component | bs-button', {
   integration: true
 });
 
-test('button has correct CSS classes', function(assert) {
-  this.render(hbs`{{#bs-button type="primary" size="lg" active=true block=true}}Test{{/bs-button}}`);
+testBS3('button has correct default markup', function(assert) {
+  this.render(hbs`{{#bs-button}}Test{{/bs-button}}`);
+
+  assert.equal(this.$('button').hasClass('btn'), true, 'button has btn class');
+  assert.equal(this.$('button').hasClass('btn-default'), true, 'button has type class');
+});
+
+testBS4('button has correct default markup', function(assert) {
+  this.render(hbs`{{#bs-button}}Test{{/bs-button}}`);
+
+  assert.equal(this.$('button').hasClass('btn'), true, 'button has btn class');
+  assert.equal(this.$('button').hasClass('btn-secondary'), true, 'button has type class');
+});
+
+test('button has correct size', function(assert) {
+  this.render(hbs`{{#bs-button size="lg"}}Test{{/bs-button}}`);
+
+  assert.equal(this.$('button').hasClass('btn-lg'), true, 'button has size class');
+});
+
+test('button has correct type', function(assert) {
+  this.render(hbs`{{#bs-button type="primary"}}Test{{/bs-button}}`);
 
   assert.equal(this.$('button').hasClass('btn'), true, 'button has btn class');
   assert.equal(this.$('button').hasClass('btn-primary'), true, 'button has type class');
-  assert.equal(this.$('button').hasClass('btn-lg'), true, 'button has size class');
+});
+
+test('button can be active', function(assert) {
+  this.render(hbs`{{#bs-button active=true}}Test{{/bs-button}}`);
+
   assert.equal(this.$('button').hasClass('active'), true, 'button has active class');
+});
+
+test('button can be block', function(assert) {
+  this.render(hbs`{{#bs-button block=true}}Test{{/bs-button}}`);
+
   assert.equal(this.$('button').hasClass('btn-block'), true, 'button has block class');
 });
 

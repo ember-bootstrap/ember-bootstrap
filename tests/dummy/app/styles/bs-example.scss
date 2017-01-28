@@ -14,11 +14,11 @@
 
         .modal {
             position: absolute;
-            z-index: @zindex-modal - 100;
+            z-index: $zindex-modal - 100;
         }
         .modal-backdrop {
             position: absolute;
-            z-index: @zindex-modal-background - 100;
+            z-index: $zindex-modal-background - 100;
         }
     }
 }
