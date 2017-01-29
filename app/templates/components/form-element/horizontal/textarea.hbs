@@ -2,6 +2,7 @@
   <label class="control-label {{horizontalLabelGridClass}} {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
   <div class="{{horizontalInputGridClass}}">
     <textarea
+      value={{value}}
       class="form-control"
       oninput={{action "change" value="target.value"}}
       onchange={{action "change" value="target.value"}}
@@ -21,13 +22,14 @@
       form={{form}}
       spellcheck={{spellcheck}}
       wrap={{wrap}}
-    >{{value}}</textarea>
+    ></textarea>
     {{partial "components/form-element/feedback-icon"}}
     {{partial "components/form-element/errors"}}
   </div>
 {{else}}
   <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
     <textarea
+      value={{value}}
       class="form-control"
       oninput={{action "change" value="target.value"}}
       onchange={{action "change" value="target.value"}}
@@ -47,7 +49,7 @@
       form={{form}}
       spellcheck={{spellcheck}}
       wrap={{wrap}}
-    >{{value}}</textarea>
+    ></textarea>
     {{partial "components/form-element/feedback-icon"}}
     {{partial "components/form-element/errors"}}
   </div>
