@@ -501,7 +501,7 @@ export default FormGroup.extend({
 
   /**
    * Event or list of events which enable form validation markup rendering.
-   * Supported events: ['focusOut', 'change', 'keyPress']
+   * Supported events: ['focusOut', 'change', 'input']
    *
    * @property showValidationOn
    * @type string|array
@@ -722,14 +722,14 @@ export default FormGroup.extend({
   },
 
   /**
-   * Listen for keyPress events from the control element to automatically set `showOwnValidation` to true to enable
-   * form validation markup rendering if `showValidationsOn` contains `keyPress`.
+   * Listen for input events from the control element to automatically set `showOwnValidation` to true to enable
+   * form validation markup rendering if `showValidationsOn` contains `input`.
    *
-   * @event keyPress
+   * @event input
    * @private
    */
-  keyPress() {
-    this.showValidationOnHandler('keyPress');
+  input() {
+    this.showValidationOnHandler('input');
   },
 
   /**
