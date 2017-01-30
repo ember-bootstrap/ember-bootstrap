@@ -34,7 +34,7 @@ module.exports = {
     }
     this.app = app;
 
-    let options = extend({}, defaultOptions, app.options['ember-bootstrap']);
+    let options = extend(extend({}, defaultOptions), app.options['ember-bootstrap']);
     if (process.env['BOOTSTRAPVERSION']) {
       // override bootstrapVersion config when environment variable is set
       options.bootstrapVersion = parseInt(process.env['BOOTSTRAPVERSION']);
