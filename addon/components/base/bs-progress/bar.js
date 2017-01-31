@@ -17,17 +17,9 @@ const { computed, String: { htmlSafe } } = Ember;
 export default Ember.Component.extend(TypeClass, {
   layout,
   classNames: ['progress-bar'],
-  classNameBindings: ['progressBarStriped', 'active'],
+  classNameBindings: ['progressBarStriped'],
 
   attributeBindings: ['style', 'ariaValuenow', 'ariaValuemin', 'ariaValuemax'],
-
-  /**
-   * @property classTypePrefix
-   * @type String
-   * @default 'progress-bar'
-   * @protected
-   */
-  classTypePrefix: 'progress-bar',
 
   /**
    * The lower limit of the value range
@@ -110,7 +102,7 @@ export default Ember.Component.extend(TypeClass, {
   roundDigits: 0,
 
   progressBarStriped: computed.readOnly('striped'),
-  active: computed.readOnly('animate'),
+  progressBarAnimate: computed.readOnly('animate'),
 
   ariaValuenow: computed.readOnly('value'),
   ariaValuemin: computed.readOnly('minValue'),
