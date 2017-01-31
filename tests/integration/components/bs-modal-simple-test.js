@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { moduleForComponent } from 'ember-qunit';
+import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
-import test from 'ember-sinon-qunit/test-support/test';
 
 moduleForComponent('bs-modal-simple', 'Integration | Component | bs-modal-simple', {
   integration: true
@@ -23,7 +23,7 @@ test('Simple modal has header, footer and body', function(assert) {
   assert.equal(this.$('.modal .modal-body').text().trim(), 'Hello world!', 'Modal body has correct content.');
 });
 
-test('Simple modal has default CSS classes', function(assert) {
+testBS3('Simple modal has default CSS classes', function(assert) {
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
 
   assert.ok(this.$('.modal').hasClass('fade'), 'Modal has fade class');
@@ -32,6 +32,19 @@ test('Simple modal has default CSS classes', function(assert) {
   // wait for fade animation
   setTimeout(() => {
     assert.ok(this.$('.modal').hasClass('in'), 'Modal has in class');
+    done();
+  }, transitionTimeout);
+});
+
+testBS4('Simple modal has default CSS classes', function(assert) {
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
+
+  assert.ok(this.$('.modal').hasClass('fade'), 'Modal has fade class');
+
+  let done = assert.async();
+  // wait for fade animation
+  setTimeout(() => {
+    assert.ok(this.$('.modal').hasClass('show'), 'Modal has show class');
     done();
   }, transitionTimeout);
 });
@@ -46,7 +59,7 @@ test('Simple modal supports custom buttons', function(assert) {
 
 });
 
-test('open property shows modal', function(assert) {
+testBS3('open property shows modal', function(assert) {
   this.set('open', false);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false open=open}}Hello world!{{/bs-modal-simple}}`);
 
@@ -57,7 +70,18 @@ test('open property shows modal', function(assert) {
   assert.equal(this.$('.modal').hasClass('in'), false, 'Modal has not in class');
 });
 
-test('open property shows modal [fade]', function(assert) {
+testBS4('open property shows modal', function(assert) {
+  this.set('open', false);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false open=open}}Hello world!{{/bs-modal-simple}}`);
+
+  assert.equal(this.$('.modal').hasClass('show'), false, 'Modal has not show class');
+  this.set('open', true);
+  assert.equal(this.$('.modal').hasClass('show'), true, 'Modal has show class');
+  this.set('open', false);
+  assert.equal(this.$('.modal').hasClass('show'), false, 'Modal has not show class');
+});
+
+testBS3('open property shows modal [fade]', function(assert) {
   let done = assert.async();
   this.set('open', false);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" open=open}}Hello world!{{/bs-modal-simple}}`);
@@ -70,6 +94,24 @@ test('open property shows modal [fade]', function(assert) {
     this.set('open', false);
     setTimeout(() => {
       assert.equal(this.$('.modal').hasClass('in'), false, 'Modal has not in class');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+testBS4('open property shows modal [fade]', function(assert) {
+  let done = assert.async();
+  this.set('open', false);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" open=open}}Hello world!{{/bs-modal-simple}}`);
+
+  assert.equal(this.$('.modal').hasClass('show'), false, 'Modal has not show class');
+  this.set('open', true);
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('show'), true, 'Modal has show class');
+    this.set('open', false);
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('show'), false, 'Modal has not show class');
       done();
     }, transitionTimeout);
   }, transitionTimeout);
@@ -91,13 +133,24 @@ test('fade property toggles fade effect', function(assert) {
   assert.equal(this.$('.modal').hasClass('fade'), true, 'Modal has fade class');
 });
 
-test('backdrop=true adds backdrop element', function(assert) {
+testBS3('backdrop=true adds backdrop element', function(assert) {
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" backdrop=true}}Hello world!{{/bs-modal-simple}}`);
   let done = assert.async();
   // wait for fade animation
   setTimeout(() => {
     assert.equal(this.$('.modal-backdrop').length, 1, 'Modal has backdrop element');
     assert.ok(this.$('.modal-backdrop').hasClass('in'), 'Modal backdrop has in class');
+    done();
+  }, transitionTimeout);
+});
+
+testBS4('backdrop=true adds backdrop element', function(assert) {
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" backdrop=true}}Hello world!{{/bs-modal-simple}}`);
+  let done = assert.async();
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal-backdrop').length, 1, 'Modal has backdrop element');
+    assert.ok(this.$('.modal-backdrop').hasClass('show'), 'Modal backdrop has show class');
     done();
   }, transitionTimeout);
 });
@@ -112,7 +165,7 @@ test('backdrop=false removes backdrop element', function(assert) {
   }, transitionTimeout);
 });
 
-test('clicking close button closes modal', function(assert) {
+testBS3('clicking close button closes modal', function(assert) {
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
   let done = assert.async();
 
@@ -129,7 +182,24 @@ test('clicking close button closes modal', function(assert) {
   }, transitionTimeout);
 });
 
-test('clicking ok button closes modal', function(assert) {
+testBS4('clicking close button closes modal', function(assert) {
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
+  let done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is visible');
+    this.$('.modal .modal-header .close').click();
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('show'), false, 'Modal is hidden');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+testBS3('clicking ok button closes modal', function(assert) {
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
   let done = assert.async();
 
@@ -146,7 +216,24 @@ test('clicking ok button closes modal', function(assert) {
   }, transitionTimeout);
 });
 
-test('clicking close button leaves modal open when onHide action returns false', function(assert) {
+testBS4('clicking ok button closes modal', function(assert) {
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
+  let done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is visible');
+    this.$('.modal .modal-footer button').click();
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('show'), false, 'Modal is hidden');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+testBS3('clicking close button leaves modal open when onHide action returns false', function(assert) {
   let hideAction = this.stub();
   hideAction.returns(false);
   this.on('hide', hideAction);
@@ -167,7 +254,28 @@ test('clicking close button leaves modal open when onHide action returns false',
   }, transitionTimeout);
 });
 
-test('can implement custom close buttons', function(assert) {
+testBS4('clicking close button leaves modal open when onHide action returns false', function(assert) {
+  let hideAction = this.stub();
+  hideAction.returns(false);
+  this.on('hide', hideAction);
+
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "hide")}}Hello world!{{/bs-modal-simple}}`);
+  let done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is visible');
+    this.$('.modal .modal-header .close').click();
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is still visible');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+testBS3('can implement custom close buttons', function(assert) {
   this.render(hbs`
     {{#bs-modal-simple title="Simple Dialog" as |modal|}}
       Hello world! <a href="#" class="close-link" onclick={{modal.close}}>close</a>
@@ -184,6 +292,28 @@ test('can implement custom close buttons', function(assert) {
     // wait for fade animation
     setTimeout(() => {
       assert.equal(this.$('.modal').hasClass('in'), false, 'Modal is hidden');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+testBS4('can implement custom close buttons', function(assert) {
+  this.render(hbs`
+    {{#bs-modal-simple title="Simple Dialog" as |modal|}}
+      Hello world! <a href="#" class="close-link" onclick={{modal.close}}>close</a>
+    {{/bs-modal-simple}}
+  `);
+
+  let done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is visible');
+    this.$('.modal .close-link').click();
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('show'), false, 'Modal is hidden');
       done();
     }, transitionTimeout);
   }, transitionTimeout);
@@ -315,7 +445,7 @@ test('autofocus element is focused when present and fade=true', function(assert)
   }, transitionTimeout);
 });
 
-test('Pressing escape key will close the modal if keyboard=true', function(assert) {
+testBS3('Pressing escape key will close the modal if keyboard=true', function(assert) {
   assert.expect(3);
   this.on('testAction', () => {
     assert.ok(true, 'Action has been called.');
@@ -340,7 +470,32 @@ test('Pressing escape key will close the modal if keyboard=true', function(asser
   }, transitionTimeout);
 });
 
-test('Pressing escape key will close the modal if keyboard=true and element is autofocused', function(assert) {
+testBS4('Pressing escape key will close the modal if keyboard=true', function(assert) {
+  assert.expect(3);
+  this.on('testAction', () => {
+    assert.ok(true, 'Action has been called.');
+  });
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=true}}Hello world!{{/bs-modal-simple}}`);
+  let done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is visible');
+
+    // trigger escape key event
+    let e = new $.Event('keydown');
+    e.which = e.keyCode = 27;
+    this.$('.modal').trigger(e);
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('show'), false, 'Modal is hidden');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+testBS3('Pressing escape key will close the modal if keyboard=true and element is autofocused', function(assert) {
   assert.expect(3);
   this.on('testAction', () => {
     assert.ok(true, 'Action has been called.');
@@ -370,7 +525,37 @@ test('Pressing escape key will close the modal if keyboard=true and element is a
   }, transitionTimeout);
 });
 
-test('Pressing escape key is ignored if keyboard=false', function(assert) {
+testBS4('Pressing escape key will close the modal if keyboard=true and element is autofocused', function(assert) {
+  assert.expect(3);
+  this.on('testAction', () => {
+    assert.ok(true, 'Action has been called.');
+  });
+  this.render(hbs`
+    {{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=true}}
+      <input autofocus="autofocus"/>
+    {{/bs-modal-simple}}
+    
+  `);
+  let done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is visible');
+
+    // trigger escape key event
+    let e = new $.Event('keydown');
+    e.which = e.keyCode = 27;
+    this.$('.modal').trigger(e);
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('show'), false, 'Modal is hidden');
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+testBS3('Pressing escape key is ignored if keyboard=false', function(assert) {
   let hideSpy = this.spy();
   this.on('testAction', hideSpy);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=false}}Hello world!{{/bs-modal-simple}}`);
@@ -394,7 +579,31 @@ test('Pressing escape key is ignored if keyboard=false', function(assert) {
   }, transitionTimeout);
 });
 
-test('Clicking on the backdrop will close the modal', function(assert) {
+testBS4('Pressing escape key is ignored if keyboard=false', function(assert) {
+  let hideSpy = this.spy();
+  this.on('testAction', hideSpy);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=false}}Hello world!{{/bs-modal-simple}}`);
+  let done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is visible');
+
+    // trigger escape key event
+    let e = new $.Event('keydown');
+    e.which = e.keyCode = 27;
+    this.$('.modal').trigger(e);
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is still visible');
+      assert.notOk(hideSpy.called);
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+testBS3('Clicking on the backdrop will close the modal', function(assert) {
   let hideSpy = this.spy();
   this.on('testAction', hideSpy);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction")}}Hello world!{{/bs-modal-simple}}`);
@@ -415,7 +624,28 @@ test('Clicking on the backdrop will close the modal', function(assert) {
   }, transitionTimeout);
 });
 
-test('Clicking on the backdrop is ignored when backdropClose=false', function(assert) {
+testBS4('Clicking on the backdrop will close the modal', function(assert) {
+  let hideSpy = this.spy();
+  this.on('testAction', hideSpy);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction")}}Hello world!{{/bs-modal-simple}}`);
+  let done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is visible');
+
+    this.$('.modal').click();
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('show'), false, 'Modal is hidden');
+      assert.ok(hideSpy.calledOnce);
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+testBS3('Clicking on the backdrop is ignored when backdropClose=false', function(assert) {
   let hideSpy = this.spy();
   this.on('testAction', hideSpy);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") backdropClose=false}}Hello world!{{/bs-modal-simple}}`);
@@ -430,6 +660,27 @@ test('Clicking on the backdrop is ignored when backdropClose=false', function(as
     // wait for fade animation
     setTimeout(() => {
       assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is still visible');
+      assert.notOk(hideSpy.called);
+      done();
+    }, transitionTimeout);
+  }, transitionTimeout);
+});
+
+testBS4('Clicking on the backdrop is ignored when backdropClose=false', function(assert) {
+  let hideSpy = this.spy();
+  this.on('testAction', hideSpy);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") backdropClose=false}}Hello world!{{/bs-modal-simple}}`);
+  let done = assert.async();
+
+  // wait for fade animation
+  setTimeout(() => {
+    assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is visible');
+
+    this.$('.modal').click();
+
+    // wait for fade animation
+    setTimeout(() => {
+      assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is still visible');
       assert.notOk(hideSpy.called);
       done();
     }, transitionTimeout);
