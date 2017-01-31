@@ -6,12 +6,37 @@ moduleForComponent('bs-navbar/toggle', 'Integration | Component | bs-navbar/togg
   integration: true
 });
 
-test('it renders', function(assert) {
+testBS3('it renders inline usage', function(assert) {
   this.render(hbs`{{bs-navbar/toggle}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'Toggle navigation');
 
   // Template block usage:
+  this.render(hbs`
+    {{#bs-navbar/toggle}}
+      template block text
+    {{/bs-navbar/toggle}}
+  `);
+
+  assert.equal(this.$().text().trim(), 'template block text');
+});
+
+testBS4('it renders inline usage', function(assert) {
+  this.render(hbs`{{bs-navbar/toggle}}`);
+
+  assert.ok(this.$('.navbar-toggler > span').hasClass('navbar-toggler-icon'));
+
+  // Template block usage:
+  this.render(hbs`
+    {{#bs-navbar/toggle}}
+      template block text
+    {{/bs-navbar/toggle}}
+  `);
+
+  assert.equal(this.$().text().trim(), 'template block text');
+});
+
+test('it renders block usage', function(assert) {
   this.render(hbs`
     {{#bs-navbar/toggle}}
       template block text

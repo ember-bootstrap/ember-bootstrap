@@ -1,11 +1,6 @@
-{{#bs-navbar fluid=false type="inverse" class="navbar-static-top" as |navbar|}}
+{{#bs-navbar fluid=false position="static-top" as |navbar|}}
     <div class="navbar-header">
-        {{#navbar.toggle}}
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        {{/navbar.toggle}}
+        {{navbar.toggle}}
         {{#link-to "index" class="navbar-brand"}}ember-bootstrap{{/link-to}}
     </div>
     {{#navbar.content}}
