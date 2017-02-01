@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
+import { test, visibilityClass } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -26,7 +26,7 @@ test('Modal yields header, footer and body components', function(assert) {
   assert.equal(this.$('.modal .modal-body').text().trim(), 'Hello world!', 'Modal body has correct content.');
 });
 
-testBS3('clicking ok button closes modal when autoClose=true with custom component hierarchy', function(assert) {
+test('clicking ok button closes modal when autoClose=true with custom component hierarchy', function(assert) {
   this.register('component:my-component', Ember.Component.extend({
     layout: hbs`{{yield}}`
   }));
@@ -45,42 +45,12 @@ testBS3('clicking ok button closes modal when autoClose=true with custom compone
 
   // wait for fade animation
   setTimeout(() => {
-    assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is visible');
+    assert.equal(this.$('.modal').hasClass(visibilityClass()), true, 'Modal is visible');
     this.$('.modal .modal-footer button').click();
 
     // wait for fade animation
     setTimeout(() => {
-      assert.equal(this.$('.modal').hasClass('in'), false, 'Modal is hidden');
-      done();
-    }, transitionTimeout);
-  }, transitionTimeout);
-});
-
-testBS4('clicking ok button closes modal when autoClose=true with custom component hierarchy', function(assert) {
-  this.register('component:my-component', Ember.Component.extend({
-    layout: hbs`{{yield}}`
-  }));
-
-  this.render(hbs`
-    {{#bs-modal title="Simple Dialog" body=false footer=false as |modal|}}
-      {{#my-component}}
-        {{#modal.body}}Hello world!{{/modal.body}}
-        {{modal.footer}}
-      {{/my-component}}
-    {{/bs-modal}}
-    
-  `);
-
-  let done = assert.async();
-
-  // wait for fade animation
-  setTimeout(() => {
-    assert.equal(this.$('.modal').hasClass('show'), true, 'Modal is visible');
-    this.$('.modal .modal-footer button').click();
-
-    // wait for fade animation
-    setTimeout(() => {
-      assert.equal(this.$('.modal').hasClass('show'), false, 'Modal is hidden');
+      assert.equal(this.$('.modal').hasClass(visibilityClass()), false, 'Modal is hidden');
       done();
     }, transitionTimeout);
   }, transitionTimeout);
