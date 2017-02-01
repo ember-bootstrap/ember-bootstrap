@@ -2,6 +2,7 @@
   <label class="control-label {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
 {{/if}}
 <textarea
+  value={{value}}
   class="form-control"
   oninput={{action "change" value="target.value"}}
   onchange={{action "change" value="target.value"}}
@@ -21,6 +22,6 @@
   form={{form}}
   spellcheck={{spellcheck}}
   wrap={{wrap}}
->{{value}}</textarea>
+></textarea>
 {{partial "components/bs-form/element/feedback-icon"}}
 {{partial "components/bs-form/element/errors"}}

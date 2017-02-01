@@ -501,7 +501,7 @@ export default FormGroup.extend({
 
   /**
    * Event or list of events which enable form validation markup rendering.
-   * Supported events: ['focusOut', 'change']
+   * Supported events: ['focusOut', 'change', 'input']
    *
    * @property showValidationOn
    * @type string|array
@@ -719,6 +719,17 @@ export default FormGroup.extend({
    */
   change() {
     this.showValidationOnHandler('change');
+  },
+
+  /**
+   * Listen for input events from the control element to automatically set `showOwnValidation` to true to enable
+   * form validation markup rendering if `showValidationsOn` contains `input`.
+   *
+   * @event input
+   * @private
+   */
+  input() {
+    this.showValidationOnHandler('input');
   },
 
   /**

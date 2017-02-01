@@ -92,15 +92,22 @@ function controlTypeValueTest(assert, controlType, selector, values, getValueFn)
   values = A(values);
 
   this.set('controlType', controlType);
+  let model = Ember.Object.create();
+  this.set('model', model);
 
   formLayouts.forEach((layout) => {
     this.set('formLayout', layout);
-    this.render(hbs`{{bs-form/element controlType=controlType formLayout=formLayout horizontalLabelGridClass="col-md-4" value=value}}`);
+    this.render(hbs`{{#bs-form model=model formLayout=formLayout as |f|}}{{f.element controlType=controlType property="prop"}}{{/bs-form}}`);
+
+    // this is needed to catch an error with textareas not updating correctly, see #217
+    this.$(selector).val('foo');
+    this.set('model.prop', 'foo');
 
     values.forEach((value) => {
-      this.set('value', value);
+      this.set('model.prop', value);
       let hasValue = typeof getValueFn === 'function' ? getValueFn.call(this.$(selector)) : this.$(selector).val();
-      assert.equal(hasValue, value, `${controlType} control has correct values for form layout ${layout}`);
+      let expectedValue = value || '';
+      assert.equal(hasValue, expectedValue, `${controlType} control has correct values for form layout ${layout}`);
     });
   });
 }
@@ -140,7 +147,7 @@ function labeledControlTest(assert, controlType, selector) {
 
 test('controlType "text" is supported', function(assert) {
   controlTypeLayoutTest.call(this, assert, 'text', 'input[type=text]');
-  controlTypeValueTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
+  controlTypeValueTest.call(this, assert, 'text', 'input[type=text]', ['myValue', undefined]);
   controlTypeUpdateTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
   labeledControlTest.call(this, assert, 'text', 'input[type=text]');
 });
@@ -157,7 +164,7 @@ test('controlType "checkbox" is supported', function(assert) {
 
 test('controlType "textarea" is supported', function(assert) {
   controlTypeLayoutTest.call(this, assert, 'textarea', 'textarea', 'myValue');
-  controlTypeValueTest.call(this, assert, 'textarea', 'textarea', 'myValue');
+  controlTypeValueTest.call(this, assert, 'textarea', 'textarea', ['myValue', undefined]);
   controlTypeUpdateTest.call(this, assert, 'textarea', 'textarea', 'myValue');
   labeledControlTest.call(this, assert, 'textarea', 'textarea');
 });
