@@ -23,11 +23,11 @@ testBS4('accordion item has correct default markup', function(assert) {
   this.render(hbs`{{#bs-accordion/item title="TITLE"}}CONTENT{{/bs-accordion/item}}`);
   assert.equal(this.$(':first-child').hasClass('card'), true, 'has card class');
   assert.equal(this.$(':first-child').hasClass('card-default'), true, 'has card-default class');
-  assert.equal(this.$('.card-heading').hasClass('collapsed'), true, 'card-heading has collapsed class');
+  assert.equal(this.$('.card-header').hasClass('collapsed'), true, 'card-header has collapsed class');
   assert.equal(this.$('.card-collapse').hasClass('collapse'), true, 'card-collapse has collapse class');
   assert.equal(this.$('.card-collapse').hasClass('show'), false, 'card-collapse has not show class');
   assert.equal(this.$('.card-title').text().trim(), 'TITLE', 'card-title has correct title');
-  assert.equal(this.$('.card-body').text().trim(), 'CONTENT', 'card-body has correct content');
+  assert.equal(this.$('.card-block').text().trim(), 'CONTENT', 'card-block has correct content');
 });
 
 testBS3('calls onClick action when clicking heading', function(assert) {
@@ -44,6 +44,6 @@ testBS4('calls onClick action when clicking heading', function(assert) {
   this.on('click', action);
   this.render(hbs`{{#bs-accordion/item value=1 onClick=(action "click") title="TITLE"}}CONTENT{{/bs-accordion/item}}`);
 
-  this.$('.card-heading').click();
+  this.$('.card-header').click();
   assert.ok(action.calledWith(1), 'onClick action has been called.');
 });

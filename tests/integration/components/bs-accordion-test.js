@@ -8,7 +8,7 @@ moduleForComponent('bs-accordion', 'Integration | Component | bs-accordion', {
   integration: true
 });
 
-testBS3('accordion has correct default markup in BS3', function(assert) {
+testBS3('accordion has correct default markup', function(assert) {
   this.render(hbs`{{#bs-accordion as |acc|}}
     {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
     {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
@@ -17,13 +17,11 @@ testBS3('accordion has correct default markup in BS3', function(assert) {
   assert.equal(this.$('.panel').length, 2, 'accordion yields item');
 });
 
-testBS4('accordion has correct default markup in BS4', function(assert) {
+testBS4('accordion has correct default markup ', function(assert) {
   this.render(hbs`{{#bs-accordion as |acc|}}
     {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
     {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
   {{/bs-accordion}}`);
-  // TODO: Should it have .card-group?
-  // assert.equal(this.$(':first-child').hasClass('card-group'), true, 'accordion has card-group class');
   assert.equal(this.$('.card').length, 2, 'accordion yields item');
 });
 
@@ -48,12 +46,12 @@ testBS4('accordion with preselected item has this item expanded', function(asser
   {{/bs-accordion}}`);
   let item = this.$('.card:eq(0)');
 
-  assert.notOk(item.find('.card-heading').hasClass('collapsed'), 'card-heading has not collapsed class');
+  assert.notOk(item.find('.card-header').hasClass('collapsed'), 'card-header has not collapsed class');
   assert.ok(item.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
   assert.ok(item.find('.card-collapse').hasClass('show'), 'card-collapse has show class');
 });
 
-testBS3('changing selected item expands this item in BS3', function(assert) {
+testBS3('changing selected item expands this item', function(assert) {
   this.set('selected', 1);
   this.render(hbs`{{#bs-accordion selected=selected as |acc|}}
     {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
@@ -74,7 +72,7 @@ testBS3('changing selected item expands this item in BS3', function(assert) {
   }, 500);
 });
 
-testBS4('changing selected item expands this item in BS4', function(assert) {
+testBS4('changing selected item expands this item', function(assert) {
   this.set('selected', 1);
   this.render(hbs`{{#bs-accordion selected=selected as |acc|}}
     {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
@@ -87,7 +85,7 @@ testBS4('changing selected item expands this item in BS4', function(assert) {
 
   // wait for transitions to complete
   setTimeout(() => {
-    assert.notOk(item.find('.card-heading').hasClass('collapsed'), 'card-heading has not collapsed class');
+    assert.notOk(item.find('.card-header').hasClass('collapsed'), 'card-header has not collapsed class');
     assert.ok(item.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
     assert.ok(item.find('.card-collapse').hasClass('show'), 'card-collapse has show class');
 
@@ -95,7 +93,7 @@ testBS4('changing selected item expands this item in BS4', function(assert) {
   }, 500);
 });
 
-testBS3('clicking collapsed item expands it in BS3', function(assert) {
+testBS3('clicking collapsed item expands it', function(assert) {
   this.render(hbs`{{#bs-accordion as |acc|}}
     {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
     {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
@@ -115,7 +113,7 @@ testBS3('clicking collapsed item expands it in BS3', function(assert) {
   }, 500);
 });
 
-testBS4('clicking collapsed item expands it in BS4', function(assert) {
+testBS4('clicking collapsed item expands it', function(assert) {
   this.render(hbs`{{#bs-accordion as |acc|}}
     {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
     {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
@@ -123,11 +121,11 @@ testBS4('clicking collapsed item expands it in BS4', function(assert) {
   let item = this.$('.card:eq(0)');
   let done = assert.async();
 
-  item.find('.card-heading').click();
+  item.find('.card-header').click();
 
   // wait for transitions to complete
   setTimeout(() => {
-    assert.notOk(item.find('.card-heading').hasClass('collapsed'), 'card-heading has not collapsed class');
+    assert.notOk(item.find('.card-header').hasClass('collapsed'), 'card-header has not collapsed class');
     assert.ok(item.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
     assert.ok(item.find('.card-collapse').hasClass('show'), 'card-collapse has show class');
 
@@ -135,7 +133,7 @@ testBS4('clicking collapsed item expands it in BS4', function(assert) {
   }, 500);
 });
 
-testBS3('clicking expanded item collapses it in BS3', function(assert) {
+testBS3('clicking expanded item collapses it', function(assert) {
   this.render(hbs`{{#bs-accordion selected=1 as |acc|}}
     {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
     {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
@@ -159,7 +157,7 @@ testBS3('clicking expanded item collapses it in BS3', function(assert) {
   }, 500);
 });
 
-testBS4('clicking expanded item collapses it in BS4', function(assert) {
+testBS4('clicking expanded item collapses it', function(assert) {
   this.render(hbs`{{#bs-accordion selected=1 as |acc|}}
     {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
     {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
@@ -167,15 +165,15 @@ testBS4('clicking expanded item collapses it in BS4', function(assert) {
   let item = this.$('.card:eq(0)');
   let done = assert.async();
 
-  assert.notOk(item.find('.card-heading').hasClass('collapsed'), 'card-heading has not collapsed class');
+  assert.notOk(item.find('.card-header').hasClass('collapsed'), 'card-header has not collapsed class');
   assert.ok(item.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
   assert.ok(item.find('.card-collapse').hasClass('show'), 'card-collapse has show class');
 
-  item.find('.card-heading').click();
+  item.find('.card-header').click();
 
   // wait for transitions to complete
   setTimeout(() => {
-    assert.ok(item.find('.card-heading').hasClass('collapsed'), 'card-heading has collapsed class');
+    assert.ok(item.find('.card-header').hasClass('collapsed'), 'card-header has collapsed class');
     assert.ok(item.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
     assert.notOk(item.find('.card-collapse').hasClass('show'), 'card-collapse has not show class');
 
@@ -183,7 +181,7 @@ testBS4('clicking expanded item collapses it in BS4', function(assert) {
   }, 500);
 });
 
-testBS3('calls onChange action when changing selection in BS3', function(assert) {
+testBS3('calls onChange action when changing selection', function(assert) {
   let action = this.spy();
   this.on('change', action);
   this.render(hbs`{{#bs-accordion onChange=(action "change") as |acc|}}
@@ -195,7 +193,7 @@ testBS3('calls onChange action when changing selection in BS3', function(assert)
   assert.ok(action.calledWith(1), 'onClick action has been called.');
 });
 
-testBS4('calls onChange action when changing selection in BS4', function(assert) {
+testBS4('calls onChange action when changing selection', function(assert) {
   let action = this.spy();
   this.on('change', action);
   this.render(hbs`{{#bs-accordion onChange=(action "change") as |acc|}}
@@ -203,7 +201,7 @@ testBS4('calls onChange action when changing selection in BS4', function(assert)
     {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
   {{/bs-accordion}}`);
 
-  this.$('.card:eq(0) .card-heading').click();
+  this.$('.card:eq(0) .card-header').click();
   assert.ok(action.calledWith(1), 'onClick action has been called.');
 });
 
@@ -244,12 +242,12 @@ testBS4('prevents changing selection when onChange returns false', function(asse
   let item = this.$('.card:eq(0)');
   let done = assert.async();
 
-  item.find('.card-heading').click();
+  item.find('.card-header').click();
   assert.ok(action.calledWith(1), 'onClick action has been called.');
 
   // wait for transitions to complete
   setTimeout(() => {
-    assert.ok(item.find('.card-heading').hasClass('collapsed'), 'card-heading has collapsed class');
+    assert.ok(item.find('.card-header').hasClass('collapsed'), 'card-header has collapsed class');
     assert.ok(item.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
     assert.notOk(item.find('.card-collapse').hasClass('in'), 'card-collapse has not in class');
 
@@ -279,7 +277,7 @@ testBS4('changing selection does not leak to public selected property (DDAU)', f
 
   let item = this.$('.card:eq(1)');
 
-  item.find('.card-heading').click();
+  item.find('.card-header').click();
   assert.equal(this.get('selected'), 1, 'Does not modify public selected property');
 });
 
@@ -323,7 +321,7 @@ testBS4('yields change action to add custom behaviour', function(assert) {
 
   // wait for transitions to complete
   setTimeout(() => {
-    assert.notOk(newItem.find('.card-heading').hasClass('collapsed'), 'card-heading has not collapsed class');
+    assert.notOk(newItem.find('.card-header').hasClass('collapsed'), 'card-header has not collapsed class');
     assert.ok(newItem.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
     assert.ok(newItem.find('.card-collapse').hasClass('show'), 'card-collapse has show class');
 
