@@ -15,7 +15,7 @@
                     {{#dd.menu as |menu|}}
                         {{#each item.children as |subItem|}}
                             {{#menu.item class=(if (bs-eq isActiveId subItem.elementId) "active")}}
-                                <a href="#{{subItem.elementId}}" role="tab" class="nav-link" {{action "select" subItem.elementId}}>
+                                <a href="#{{subItem.elementId}}" role="tab" class={{if (bs-eq isActiveId subItem.elementId) "nav-link active" "nav-link"}} {{action "select" subItem.elementId}}>
                                     {{subItem.title}}
                                 </a>
                             {{/menu.item}}
@@ -24,7 +24,7 @@
                 {{/nav.dropdown}}
             {{else}}
                 {{#nav.item active=(bs-eq item.elementId isActiveId)}}
-                    <a href="#{{item.elementId}}" role="tab" class="nav-link" {{action "select" item.elementId}}>
+                    <a href="#{{item.elementId}}" role="tab" class={{if (bs-eq isActiveId item.elementId) "nav-link active" "nav-link"}} {{action "select" item.elementId}}>
                         {{item.title}}
                     </a>
                 {{/nav.item}}
