@@ -213,7 +213,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   _renderInPlace: computed('renderInPlace', function() {
-    return this.get('renderInPlace') || typeof Ember.$ !== 'function' || Ember.$('#ember-bootstrap-modal-container').length === 0;
+    return this.get('renderInPlace') || typeof Ember.$ !== 'function' || Ember.$('#ember-bootstrap-wormhole').length === 0;
   }),
 
   /**

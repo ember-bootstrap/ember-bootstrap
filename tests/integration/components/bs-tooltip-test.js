@@ -171,20 +171,20 @@ test('it keeps showing when leaving the mouse but is still focused [fade=false]'
 
 test('Renders in wormhole if renderInPlace is not set', function(assert) {
   this.set('show', false);
-  this.render(hbs`<div id="ember-bootstrap-modal-container"></div>{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false}}{{/if}}`);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false}}{{/if}}`);
   this.set('show', true);
 
   assert.equal(this.$('.tooltip').length, 1, 'Tooltip exists.');
-  assert.equal(this.$('.tooltip').parent().attr('id'), 'ember-bootstrap-modal-container');
+  assert.equal(this.$('.tooltip').parent().attr('id'), 'ember-bootstrap-wormhole');
 });
 
 test('Renders in place (no wormhole) if renderInPlace is set', function(assert) {
   this.set('show', false);
-  this.render(hbs`<div id="ember-bootstrap-modal-container"></div>{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false renderInPlace=true}}{{/if}}`);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false renderInPlace=true}}{{/if}}`);
   this.set('show', true);
 
   assert.equal(this.$('.tooltip').length, 1, 'Tooltip exists.');
-  assert.notEqual(this.$('.tooltip').parent().attr('id'), 'ember-bootstrap-modal-container');
+  assert.notEqual(this.$('.tooltip').parent().attr('id'), 'ember-bootstrap-wormhole');
 });
 
 test('should place tooltip on top of element', function(assert) {
