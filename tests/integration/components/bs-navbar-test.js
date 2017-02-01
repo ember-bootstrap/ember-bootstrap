@@ -37,7 +37,7 @@ testBS4('it has correct default markup', function(assert) {
   assert.equal(this.$('nav').length, 1, 'there is only one nav element');
   assert.ok(this.$('nav').hasClass('navbar'), 'the navbar has the navbar class');
   assert.ok(this.$('nav').hasClass('navbar-light'), 'the navbar has the navbar-default class');
-  // TODO: Revisit this when re-evaluating fluid in BS4
+  // No container by default because fluid is automatic
 });
 
 test('it handles inverse navbars properly', function(assert) {
@@ -47,7 +47,7 @@ test('it handles inverse navbars properly', function(assert) {
   assert.notOk(this.$('nav').hasClass('navbar-default'), 'the navbar does not have the navbar-default class');
 });
 
-testBS3('it handles fluid containers properly', function(assert) {
+test('it handles fluid containers properly', function(assert) {
   this.render(hbs`{{bs-navbar fluid=false}}`);
 
   assert.ok(this.$('nav > div').hasClass('container'), 'the wrapping div has the container class');
