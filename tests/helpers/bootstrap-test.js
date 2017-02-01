@@ -19,4 +19,24 @@ export function testBS4() {
   return testForBootstrap(4, ...arguments);
 }
 
+function versionDependent(v3, v4) {
+  if (currentBootstrapVersion === 3) {
+    return v3;
+  }
+
+  return v4;
+}
+
+export function visibilityClass() {
+  return versionDependent('in', 'show');
+}
+
+export function openClass() {
+  return versionDependent('open', 'show');
+}
+
+export function placementClassFor(type, placement) {
+  return versionDependent(placement, `${type}-${placement}`);
+}
+
 export { test };
