@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import sinonTest from 'ember-sinon-qunit/test-support/test';
-import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
+import { test, visibilityClass } from '../../helpers/bootstrap-test';
 
 moduleForComponent('bs-tooltip', 'Integration | Component | bs-tooltip', {
   integration: true
@@ -219,7 +219,7 @@ test('should place tooltip on top of element if visible is set to true', functio
   assertPositioning.call(this, assert);
 });
 
-testBS3('should show tooltip if leave event hasn\'t occurred before delay expires', function(assert) {
+test('should show tooltip if leave event hasn\'t occurred before delay expires', function(assert) {
   assert.expect(2);
   let done = assert.async();
 
@@ -227,30 +227,11 @@ testBS3('should show tooltip if leave event hasn\'t occurred before delay expire
   let $trigger = this.$('#target');
 
   setTimeout(function() {
-    assert.notOk(this.$('.tooltip').is('.fade.in'), '100ms: tooltip is not faded in');
+    assert.notOk(this.$('.tooltip').is(`.fade.${visibilityClass()}`), '100ms: tooltip is not faded in');
   }, 100);
 
   setTimeout(function() {
-    assert.ok(this.$('.tooltip').is('.fade.in'), '200ms: tooltip is faded in');
-    done();
-  }, 200);
-
-  $trigger.trigger('mouseenter');
-});
-
-testBS4('should show tooltip if leave event hasn\'t occurred before delay expires', function(assert) {
-  assert.expect(2);
-  let done = assert.async();
-
-  this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
-  let $trigger = this.$('#target');
-
-  setTimeout(function() {
-    assert.notOk(this.$('.tooltip').is('.fade.show'), '100ms: tooltip is not faded in');
-  }, 100);
-
-  setTimeout(function() {
-    assert.ok(this.$('.tooltip').is('.fade.show'), '200ms: tooltip is faded in');
+    assert.ok(this.$('.tooltip').is(`.fade.${visibilityClass()}`), '200ms: tooltip is faded in');
     done();
   }, 200);
 
@@ -277,7 +258,7 @@ test('should not show tooltip if leave event occurs before delay expires', funct
   $trigger.trigger('mouseenter');
 });
 
-testBS3('should not hide tooltip if leave event occurs and enter event occurs within the hide delay', function(assert) {
+test('should not hide tooltip if leave event occurs and enter event occurs within the hide delay', function(assert) {
   assert.expect(3);
   let done = assert.async();
 
@@ -285,41 +266,16 @@ testBS3('should not hide tooltip if leave event occurs and enter event occurs wi
   let $trigger = this.$('#target');
 
   setTimeout(function() {
-    assert.ok(this.$('.tooltip').is('.fade.in'), '1ms: tooltip faded in');
+    assert.ok(this.$('.tooltip').is(`.fade.${visibilityClass()}`), '1ms: tooltip faded in');
     $trigger.trigger('mouseout');
 
     setTimeout(function() {
-      assert.ok(this.$('.tooltip').is('.fade.in'), '100ms: tooltip still faded in');
+      assert.ok(this.$('.tooltip').is(`.fade.${visibilityClass()}`), '100ms: tooltip still faded in');
       $trigger.trigger('mouseenter');
     }, 100);
 
     setTimeout(function() {
-      assert.ok(this.$('.tooltip').is('.fade.in'), '200ms: tooltip still faded in');
-      done();
-    }, 200);
-  }, 0);
-
-  $trigger.trigger('mouseenter');
-});
-
-testBS4('should not hide tooltip if leave event occurs and enter event occurs within the hide delay', function(assert) {
-  assert.expect(3);
-  let done = assert.async();
-
-  this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" delayShow=0 delayHide=150}}</div>`);
-  let $trigger = this.$('#target');
-
-  setTimeout(function() {
-    assert.ok(this.$('.tooltip').is('.fade.show'), '1ms: tooltip faded in');
-    $trigger.trigger('mouseout');
-
-    setTimeout(function() {
-      assert.ok(this.$('.tooltip').is('.fade.show'), '100ms: tooltip still faded in');
-      $trigger.trigger('mouseenter');
-    }, 100);
-
-    setTimeout(function() {
-      assert.ok(this.$('.tooltip').is('.fade.show'), '200ms: tooltip still faded in');
+      assert.ok(this.$('.tooltip').is(`.fade.${visibilityClass()}`), '200ms: tooltip still faded in');
       done();
     }, 200);
   }, 0);
