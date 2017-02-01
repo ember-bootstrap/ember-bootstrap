@@ -10,6 +10,8 @@ describe('modal', function() {
 
         // add your real tests here
         expect($('#modal').length).to.equal(1);
+        expect($('.modal').length).to.equal(1);
+        expect($('.modal').hasClass('fade')).to.be.false;
       });
   });
 
