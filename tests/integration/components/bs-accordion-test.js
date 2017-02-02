@@ -2,7 +2,7 @@ import {
   moduleForComponent
 } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { testBS3, testBS4 } from '../../helpers/bootstrap-test';
+import { testBS3, testBS4, visibilityClass } from '../../helpers/bootstrap-test';
 
 moduleForComponent('bs-accordion', 'Integration | Component | bs-accordion', {
   integration: true
@@ -66,7 +66,7 @@ testBS3('changing selected item expands this item', function(assert) {
   setTimeout(() => {
     assert.notOk(item.find('.panel-heading').hasClass('collapsed'), 'panel-heading has not collapsed class');
     assert.ok(item.find('.panel-collapse').hasClass('collapse'), 'panel-collapse has collapse class');
-    assert.ok(item.find('.panel-collapse').hasClass('in'), 'panel-collapse has in class');
+    assert.ok(item.find('.panel-collapse').hasClass(visibilityClass()), 'panel-collapse is visible');
 
     done();
   }, 500);
@@ -87,7 +87,7 @@ testBS4('changing selected item expands this item', function(assert) {
   setTimeout(() => {
     assert.notOk(item.find('.card-header').hasClass('collapsed'), 'card-header has not collapsed class');
     assert.ok(item.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
-    assert.ok(item.find('.card-collapse').hasClass('show'), 'card-collapse has show class');
+    assert.ok(item.find('.card-collapse').hasClass(visibilityClass()), 'card-collapse is visible');
 
     done();
   }, 500);
@@ -107,7 +107,7 @@ testBS3('clicking collapsed item expands it', function(assert) {
   setTimeout(() => {
     assert.notOk(item.find('.panel-heading').hasClass('collapsed'), 'panel-heading has not collapsed class');
     assert.ok(item.find('.panel-collapse').hasClass('collapse'), 'panel-collapse has collapse class');
-    assert.ok(item.find('.panel-collapse').hasClass('in'), 'panel-collapse has in class');
+    assert.ok(item.find('.panel-collapse').hasClass(visibilityClass()), 'panel-collapse is visible');
 
     done();
   }, 500);
@@ -127,7 +127,7 @@ testBS4('clicking collapsed item expands it', function(assert) {
   setTimeout(() => {
     assert.notOk(item.find('.card-header').hasClass('collapsed'), 'card-header has not collapsed class');
     assert.ok(item.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
-    assert.ok(item.find('.card-collapse').hasClass('show'), 'card-collapse has show class');
+    assert.ok(item.find('.card-collapse').hasClass(visibilityClass()), 'card-collapse is visible');
 
     done();
   }, 500);
@@ -143,7 +143,7 @@ testBS3('clicking expanded item collapses it', function(assert) {
 
   assert.notOk(item.find('.panel-heading').hasClass('collapsed'), 'panel-heading has not collapsed class');
   assert.ok(item.find('.panel-collapse').hasClass('collapse'), 'panel-collapse has collapse class');
-  assert.ok(item.find('.panel-collapse').hasClass('in'), 'panel-collapse has in class');
+  assert.ok(item.find('.panel-collapse').hasClass(visibilityClass()), 'panel-collapse is visible');
 
   item.find('.panel-heading').click();
 
@@ -151,7 +151,7 @@ testBS3('clicking expanded item collapses it', function(assert) {
   setTimeout(() => {
     assert.ok(item.find('.panel-heading').hasClass('collapsed'), 'panel-heading has collapsed class');
     assert.ok(item.find('.panel-collapse').hasClass('collapse'), 'panel-collapse has collapse class');
-    assert.notOk(item.find('.panel-collapse').hasClass('in'), 'panel-collapse has not in class');
+    assert.notOk(item.find('.panel-collapse').hasClass(visibilityClass()), 'panel-collapse is hidden');
 
     done();
   }, 500);
@@ -167,7 +167,7 @@ testBS4('clicking expanded item collapses it', function(assert) {
 
   assert.notOk(item.find('.card-header').hasClass('collapsed'), 'card-header has not collapsed class');
   assert.ok(item.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
-  assert.ok(item.find('.card-collapse').hasClass('show'), 'card-collapse has show class');
+  assert.ok(item.find('.card-collapse').hasClass(visibilityClass()), 'card-collapse is visible');
 
   item.find('.card-header').click();
 
@@ -175,7 +175,7 @@ testBS4('clicking expanded item collapses it', function(assert) {
   setTimeout(() => {
     assert.ok(item.find('.card-header').hasClass('collapsed'), 'card-header has collapsed class');
     assert.ok(item.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
-    assert.notOk(item.find('.card-collapse').hasClass('show'), 'card-collapse has not show class');
+    assert.notOk(item.find('.card-collapse').hasClass(visibilityClass()), 'card-collapse is hidden');
 
     done();
   }, 500);
@@ -224,7 +224,7 @@ testBS3('prevents changing selection when onChange returns false', function(asse
   setTimeout(() => {
     assert.ok(item.find('.panel-heading').hasClass('collapsed'), 'panel-heading has collapsed class');
     assert.ok(item.find('.panel-collapse').hasClass('collapse'), 'panel-collapse has collapse class');
-    assert.notOk(item.find('.panel-collapse').hasClass('in'), 'panel-collapse has not in class');
+    assert.notOk(item.find('.panel-collapse').hasClass(visibilityClass()), 'panel-collapse is hidden');
 
     done();
   }, 500);
@@ -249,7 +249,7 @@ testBS4('prevents changing selection when onChange returns false', function(asse
   setTimeout(() => {
     assert.ok(item.find('.card-header').hasClass('collapsed'), 'card-header has collapsed class');
     assert.ok(item.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
-    assert.notOk(item.find('.card-collapse').hasClass('in'), 'card-collapse has not in class');
+    assert.notOk(item.find('.card-collapse').hasClass(visibilityClass()), 'card-collapse is hidden');
 
     done();
   }, 500);
@@ -299,7 +299,7 @@ testBS3('yields change action to add custom behaviour', function(assert) {
   setTimeout(() => {
     assert.notOk(newItem.find('.panel-heading').hasClass('collapsed'), 'panel-heading has not collapsed class');
     assert.ok(newItem.find('.panel-collapse').hasClass('collapse'), 'panel-collapse has collapse class');
-    assert.ok(newItem.find('.panel-collapse').hasClass('in'), 'panel-collapse has in class');
+    assert.ok(newItem.find('.panel-collapse').hasClass(visibilityClass()), 'panel-collapse is visible');
 
     done();
   }, 500);
@@ -323,7 +323,7 @@ testBS4('yields change action to add custom behaviour', function(assert) {
   setTimeout(() => {
     assert.notOk(newItem.find('.card-header').hasClass('collapsed'), 'card-header has not collapsed class');
     assert.ok(newItem.find('.card-collapse').hasClass('collapse'), 'card-collapse has collapse class');
-    assert.ok(newItem.find('.card-collapse').hasClass('show'), 'card-collapse has show class');
+    assert.ok(newItem.find('.card-collapse').hasClass(visibilityClass()), 'card-collapse is visible');
 
     done();
   }, 500);
