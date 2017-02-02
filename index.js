@@ -126,9 +126,5 @@ module.exports = {
     if (type === 'body-footer' && config.environment !== 'test' && this.bootstrapOptions.insertEmberWormholeElementToDom !== false) {
       return '<div id="ember-bootstrap-wormhole"></div>';
     }
-  },
-
-  isDevelopingAddon() {
-    return true;
   }
 };
