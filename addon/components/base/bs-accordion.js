@@ -3,8 +3,10 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
 /**
- Bootstrap-style accordion group, with collapsible/expandable items.
- See http://getbootstrap.com/components/#btn-groups
+ Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),
+ with collapsible/expandable items.
+
+ ### Usage
 
  Use as a block level component with any number of yielded [Components.AccordionItem](Components.AccordionItem.html)
  components as children:
@@ -26,10 +28,13 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
  In the example above the first accordion item utilizes the yielded `change` action to add some custom behaviour.
 
+ ### Bootstrap 3/4 Notes
+
+ The Bootstrap 3 accordion uses the `panel-*` classes while Bootstrap 4 uses the `card-*` classes.
+
  @class Accordion
  @namespace Components
  @extends Ember.Component
- @uses Mixins.ComponentParent
  @public
  */
 export default Ember.Component.extend({
@@ -66,7 +71,7 @@ export default Ember.Component.extend({
    * @param oldValue
    * @public
    */
-  onChange() {},
+  onChange(newValue, oldValue) {}, // eslint-disable-line no-unused-vars
 
   actions: {
     change(newValue) {
