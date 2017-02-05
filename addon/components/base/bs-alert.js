@@ -11,7 +11,9 @@ const {
 } = Ember;
 
 /**
- Implements Bootstrap alerts, see http://getbootstrap.com/components/#alerts
+ Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
+
+ ### Usage
 
  By default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
  `type` property for proper styling.
@@ -22,10 +24,15 @@ const {
  {{/bs-alert}}
  ```
 
+ ### Bootstrap 3/4 Notes
+
+ Bootstrap 3 uses the `in` class for visibility while Bootstrap 4 uses `show`.
+
  @class Alert
  @namespace Components
  @extends Ember.Component
  @uses Mixins.TypeClass
+ @uses Mixins.TransitionSupport
  @public
  */
 export default Ember.Component.extend(TypeClass, TransitionSupport, {
