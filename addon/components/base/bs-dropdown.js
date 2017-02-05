@@ -8,25 +8,32 @@ const {
 } = Ember;
 
 /**
- Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.
- See http://getbootstrap.com/components/#dropdowns
+ Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
+ of a toggle element, and the dropdown menu itself.
 
- Use this component together with the yielded contextual components, a dropdown toggle
- ([Components.DropdownToggle](Components.DropdownToggle.html) or [Components.DropdownButton](Components.DropdownButton.html)
- component) and a dropdown menu ([Components.DropdownMenu](Components.DropdownMenu.html) and
- ([Components.DropdownMenuItem](Components.DropdownMenuItem.html) components):
+ ### Usage
+
+ Use this component together with the yielded contextual components:
+ * [Components.DropdownToggle](Components.DropdownToggle.html)
+ * [Components.DropdownButton](Components.DropdownButton.html)
+ * [Components.DropdownMenu](Components.DropdownMenu.html)
+   * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)
+   * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)
 
  ```hbs
- <ul class="nav navbar-nav">
-   {{#bs-dropdown tagName="li" inNav=true as |dd|}}
-     {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-     {{#dd.menu as |ddm|}}
-       {{#ddm.item}}{{#link-to "index"}}Something{{/link-to}}{{/ddm.item}}
-       {{#ddm.item}}{{#link-to "index"}}Something different{{/link-to}}{{/ddm.item}}
-     {{/dd.menu}}
-   {{/bs-dropdown}}
- </ul>
+ {{#bs-dropdown as |dd|}}
+   {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+   {{#dd.menu as |ddm|}}
+     {{#ddm.item}}{{#link-to "index"}}Something{{/link-to}}{{/ddm.item}}
+     {{ddm.divider}}
+     {{#ddm.item}}{{#link-to "index"}}Something different{{/link-to}}{{/ddm.item}}
+   {{/dd.menu}}
+ {{/bs-dropdown}}
  ```
+
+ If you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`
+ contextual component rather than a standalone dropdown to ensure the correct styling
+ regardless of your Bootstrap version.
 
  ### Button dropdowns
 
@@ -70,6 +77,15 @@ const {
  ...
  {{/bs-dropdown}}
  ```
+
+ ### Bootstrap 3/4 Notes
+
+ If you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`
+ contextual component rather than a standalone dropdown to ensure the correct styling
+ regardless of your Bootstrap version.
+
+ If you use the [dropdown divider](Component.DropdownMenuDivider), you don't have to worry
+ about differences in the markup between versions.
 
  @class Dropdown
  @namespace Components
@@ -160,7 +176,7 @@ export default Ember.Component.extend({
    * @param {*} value
    * @public
    */
-  onShow() {},
+  onShow(value) {}, // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when dropdown is about to be hidden
@@ -169,7 +185,7 @@ export default Ember.Component.extend({
    * @param {*} value
    * @public
    */
-  onHide() {},
+  onHide(value) {}, // eslint-disable-line no-unused-vars
 
   actions: {
     toggleDropdown() {
