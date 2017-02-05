@@ -37,6 +37,7 @@ const InState = Ember.Object.extend({
  @class Components.ContextualHelp
  @namespace Components
  @extends Ember.Component
+ @uses Mixins.TransitionSupport
  @private
  */
 export default Component.extend(TransitionSupport, {
