@@ -1,31 +1,29 @@
 <div class="bs-example">
     <!-- BEGIN-SNIPPET dropdown-demo -->
-    <ul class="nav nav-pills">
-        {{#bs-dropdown tagName="li" inNav=true as |dd|}}
-            {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-            {{#dd.menu as |menu|}}
-                {{#menu.item}}
-                    {{#link-to "index"}}Home{{/link-to}}
-                {{/menu.item}}
-                {{menu.divider}}
-                {{#menu.item}}
-                    {{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}
-                {{/menu.item}}
-            {{/dd.menu}}
-        {{/bs-dropdown}}
-        {{#bs-dropdown direction="up" tagName="li" inNav=true as |dd|}}
-            {{#dd.toggle}}Dropup <span class="caret"></span>{{/dd.toggle}}
-            {{#dd.menu align="right" as |menu|}}
-                {{#menu.item}}
-                    {{#link-to "index"}}Home{{/link-to}}
-                {{/menu.item}}
-                {{menu.divider}}
-                {{#menu.item}}
-                    {{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}
-                {{/menu.item}}
-            {{/dd.menu}}
-        {{/bs-dropdown}}
-    </ul>
+    {{#bs-dropdown tagName="span" as |dd|}}
+        {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+        {{#dd.menu as |menu|}}
+            {{#menu.item}}
+                {{#link-to "index"}}Home{{/link-to}}
+            {{/menu.item}}
+            {{menu.divider}}
+            {{#menu.item}}
+                {{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}
+            {{/menu.item}}
+        {{/dd.menu}}
+    {{/bs-dropdown}}
+    {{#bs-dropdown direction="up" tagName="span" as |dd|}}
+        {{#dd.toggle}}Dropup <span class="caret"></span>{{/dd.toggle}}
+        {{#dd.menu align="right" as |menu|}}
+            {{#menu.item}}
+                {{#link-to "index"}}Home{{/link-to}}
+            {{/menu.item}}
+            {{menu.divider}}
+            {{#menu.item}}
+                {{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}
+            {{/menu.item}}
+        {{/dd.menu}}
+    {{/bs-dropdown}}
     <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
