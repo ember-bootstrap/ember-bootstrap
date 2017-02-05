@@ -15,7 +15,9 @@ const {
 } = Ember;
 
 /**
- An Ember component that mimics the behaviour of Bootstrap's collapse.js plugin, see http://getbootstrap.com/javascript/#collapse
+ An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
+
+ ### Usage
 
  ```hbs
  {{#bs-collapse collapsed=collapsed}}
@@ -25,6 +27,10 @@ const {
  </div>
  {{/bs-collapse}}
  ```
+
+ ### Bootstrap 3/4 Notes
+
+ Bootstrap 3 uses the `in` class for visibility while Bootstrap 4 uses `show`.
 
  @class Collapse
  @namespace Components
