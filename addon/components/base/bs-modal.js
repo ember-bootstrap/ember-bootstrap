@@ -10,7 +10,9 @@ const {
 
 /**
 
- Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup:
+ Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
+
+ ### Usage
 
  ```hbs
  {{#bs-modal onSubmit=(action "submit") as |modal|}}
@@ -43,6 +45,7 @@ const {
  @class Modal
  @namespace Components
  @extends Ember.Component
+ @uses Mixins.TransitionSupport
  @public
  */
 export default Ember.Component.extend(TransitionSupport, {
