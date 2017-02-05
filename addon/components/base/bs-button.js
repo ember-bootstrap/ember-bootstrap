@@ -71,6 +71,10 @@ const {
  });
  ```
 
+ ### Bootstrap 3/4 Notes
+
+ The default button class in Bootstrap 4 is `btn-secondary` rather than `btn-default`.
+
  @class Button
  @namespace Components
  @extends Ember.Component
@@ -227,7 +231,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
    * @param {*} value
    * @public
    */
-  onClick() {},
+  onClick(value) {}, // eslint-disable-line no-unused-vars
 
   /**
    * This will reset the state property to 'default', and with that the button's label to defaultText
