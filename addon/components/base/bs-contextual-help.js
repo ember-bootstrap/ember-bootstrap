@@ -29,7 +29,7 @@ const InState = Ember.Object.extend({
   hover: false,
   focus: false,
   click: false,
-  in: computed.or('hover', 'focus', 'click')
+  showHelp: computed.or('hover', 'focus', 'click')
 });
 
 /**
@@ -101,14 +101,14 @@ export default Component.extend(TransitionSupport, {
   fade: true,
 
   /**
-   * Used to apply Bootstrap's "in" class
+   * Used to apply Bootstrap's visibility class
    *
-   * @property in
+   * @property showHelp
    * @type boolean
    * @default false
    * @private
    */
-  in: computed.reads('visible'),
+  showHelp: computed.reads('visible'),
 
   /**
    * Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the
@@ -377,7 +377,7 @@ export default Component.extend(TransitionSupport, {
       this.get('inState').set(eventType, true);
     }
 
-    if (this.get('in') || this.get('hoverState') === 'in') {
+    if (this.get('showHelp') || this.get('hoverState') === 'in') {
       this.set('hoverState', 'in');
       return;
     }
@@ -410,7 +410,7 @@ export default Component.extend(TransitionSupport, {
       this.get('inState').set(eventType, false);
     }
 
-    if (this.get('inState.in')) {
+    if (this.get('inState.showHelp')) {
       return;
     }
 
@@ -439,13 +439,13 @@ export default Component.extend(TransitionSupport, {
   toggle(e) {
     if (e) {
       this.get('inState').toggleProperty('click');
-      if (this.get('inState.in')) {
+      if (this.get('inState.showHelp')) {
         this.enter();
       } else {
         this.leave();
       }
     } else {
-      if (this.get('in')) {
+      if (this.get('showHelp')) {
         this.leave();
       } else {
         this.enter();
@@ -568,7 +568,7 @@ export default Component.extend(TransitionSupport, {
       }
     }, offset), 0);
 
-    this.set('in', true);
+    this.set('showHelp', true);
 
     // check to see if placing tip in new offset caused the tip to resize itself
     let actualWidth = $tip[0].offsetWidth;
@@ -674,7 +674,7 @@ export default Component.extend(TransitionSupport, {
       this.get('onHidden')(this);
     }
 
-    this.set('in', false);
+    this.set('showHelp', false);
 
     if (this.get('usesTransition')) {
       this.get('overlayElement')

@@ -9,7 +9,7 @@ moduleForComponent('bs-popover/element', 'Integration | Component | bs-popover/e
 test('it has correct markup', function(assert) {
   // Template block usage:
   this.render(hbs`
-    {{#bs-popover/element fade=true in=true title="dummy title"}}
+    {{#bs-popover/element fade=true showHelp=true title="dummy title"}}
       template block text
     {{/bs-popover/element}}
   `);

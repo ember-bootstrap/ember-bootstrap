@@ -37,12 +37,12 @@ export default Ember.Component.extend({
   fade: true,
 
   /**
-   * @property in
+   * @property showHelp
    * @type boolean
    * @default false
    * @public
    */
-  in: false,
+  showHelp: false,
 
   /**
    * @property title

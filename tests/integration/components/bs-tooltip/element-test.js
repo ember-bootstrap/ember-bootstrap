@@ -9,7 +9,7 @@ moduleForComponent('bs-tooltip/element', 'Integration | Component | bs-tooltip/e
 test('it has correct markup', function(assert) {
   // Template block usage:
   this.render(hbs`
-    {{#bs-tooltip/element fade=true in=true}}
+    {{#bs-tooltip/element fade=true showHelp=true}}
       template block text
     {{/bs-tooltip/element}}
   `);
