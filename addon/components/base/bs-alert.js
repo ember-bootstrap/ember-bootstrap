@@ -24,10 +24,6 @@ const {
  {{/bs-alert}}
  ```
 
- ### Bootstrap 3/4 Notes
-
- Bootstrap 3 uses the `in` class for visibility while Bootstrap 4 uses `show`.
-
  @class Alert
  @namespace Components
  @extends Ember.Component

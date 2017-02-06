@@ -71,10 +71,6 @@ const {
  });
  ```
 
- ### Bootstrap 3/4 Notes
-
- The default button class in Bootstrap 4 is `btn-secondary` rather than `btn-default`.
-
  @class Button
  @namespace Components
  @extends Ember.Component

@@ -28,10 +28,6 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
  In the example above the first accordion item utilizes the yielded `change` action to add some custom behaviour.
 
- ### Bootstrap 3/4 Notes
-
- The Bootstrap 3 accordion uses the `panel-*` classes while Bootstrap 4 uses the `card-*` classes.
-
  @class Accordion
  @namespace Components
  @extends Ember.Component
