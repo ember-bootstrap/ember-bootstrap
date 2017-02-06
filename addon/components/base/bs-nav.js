@@ -9,7 +9,11 @@ const { isPresent } = Ember;
 
  ### Usage
 
- Use in combination with the yielded [Components.NavItem](Components.NavItem.html) and [Components.NavLink](Components.NavLink.html) components:
+ Use in combination with the yielded components
+
+ * [Components.NavItem](Components.NavItem.html)
+ * [Components.NavLinkTo](Components.NavLinkTo.html)
+ * [`nav.dropdown`](Components.Dropdown.html)
 
  ```hbs
  {{#bs-nav type="pills" as |nav|}}
@@ -36,7 +40,8 @@ const { isPresent } = Ember;
 
  ### Dropdowns
 
- Use the [Components.Dropdown](Components.Dropdown.html) component with a `tagName` of "li" to integrate a dropdown into your nav:
+ Use the `nav.dropdown` contextual version of the [Components.Dropdown](Components.Dropdown.html) component
+ with a `tagName` of "li" to integrate a dropdown into your nav:
 
  ```hbs
  {{#bs-nav type="pills" as |nav|}}
@@ -50,6 +55,15 @@ const { isPresent } = Ember;
    {{/nav.dropdown}}
  {{/bs-nav}}
  ```
+
+ ### Bootstrap 3/4 Notes
+
+ Use [`nav.link-to`](Components.NavLinkTo.html) for in-app links to ensure proper styling regardless of
+ Bootstrap version. Explicit use of `<a>` tags in Bootstrap 4 must apply the `nav-link` class and manage
+ the `active` state explicitly.
+
+ You can override `tagName` if you want to use Bootstrap 4's ability to represent more structural
+ components with `div` tags.
 
  @class Nav
  @namespace Components
