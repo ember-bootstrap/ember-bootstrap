@@ -172,12 +172,12 @@ export default Ember.Component.extend({
    * Validate hook which will return a promise that will either resolve if the model is valid
    * or reject if it's not. This should be overridden to add validation support.
    *
-   * @methoid validate
+   * @method validate
    * @param {Object} model
    * @return {Promise}
    * @public
    */
-  validate() {},
+  validate(model) {}, // eslint-disable-line no-unused-vars
 
   /**
    * @property showAllValidations
@@ -191,29 +191,29 @@ export default Ember.Component.extend({
    * Action is called before the form is validated (if possible) and submitted.
    *
    * @event onBefore
-   * @param Object model  The form's `model`
+   * @param { Object } model  The form's `model`
    * @public
    */
-  onBefore() {},
+  onBefore(model) {}, // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when submit has been triggered and the model has passed all validations (if present).
    *
    * @event onSubmit
-   * @param Object model  The form's `model`
-   * @param Object result The returned result from the validate method, if validation is available
+   * @param { Object } model  The form's `model`
+   * @param { Object } result The returned result from the validate method, if validation is available
    * @public
    */
-  onSubmit() {},
+  onSubmit(model, result) {}, // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when validation of the model has failed.
    *
    * @event onInvalid
-   * @param Object error
+   * @param { Object } error
    * @public
    */
-  onInvalid() {},
+  onInvalid(error) {}, // eslint-disable-line no-unused-vars
 
   /**
    * Submit handler that will send the default action ("action") to the controller when submitting the form.
