@@ -252,7 +252,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * The action to be sent when the modal is closing.
    * This will be triggered by pressing the modal header's close button (x button) or the modal footer's close button.
    * Note that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some
-   * time to finish. Use the `closedAction` if you need the modal to be hidden when the action triggers.
+   * time to finish. Use the `onHidden` if you need the modal to be hidden when the action triggers.
    *
    * You can return false to prevent closing the modal automatically, and do that in your action by
    * setting `open` to false.
@@ -401,7 +401,7 @@ export default Ember.Component.extend(TransitionSupport, {
   },
 
   /**
-   * Clean up after modal is hidden and call closedAction
+   * Clean up after modal is hidden and call onHidden
    *
    * @method hideModal
    * @private
