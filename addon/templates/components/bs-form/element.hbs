@@ -1,1 +1,49 @@
-{{partial formElementTemplate}}
+{{#component
+  layoutComponent
+  label=label
+  invisibleLabel=invisibleLabel
+  formElementId=formElementId
+  horizontalLabelGridClass=horizontalLabelGridClass
+}}
+  {{#if hasBlock}}
+    {{yield
+      (hash
+        value=value
+        id=formElementId
+        validation=validation
+      )
+    }}
+  {{else}}
+    {{component
+      controlComponent
+      value=value
+      onChange=(action onChange model property)
+      id=formElementId
+      name=name
+      type=controlType
+      placeholder=placeholder
+      autofocus=autofocus
+      disabled=disabled
+      readonly=readonly
+      required=required
+      size=size
+      tabindex=tabindex
+      minlength=minlength
+      maxlength=maxlength
+      min=min
+      max=max
+      pattern=pattern
+      accept=accept
+      autocomplete=autocomplete
+      autosave=autosave
+      inputmode=inputmode
+      multiple=multiple
+      step=step
+      form=form
+      spellcheck=spellcheck
+      cols=cols
+      rows=rows
+      wrap=wrap
+    }}
+  {{/if}}
+{{/component}}

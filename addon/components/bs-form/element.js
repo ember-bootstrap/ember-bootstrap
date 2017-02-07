@@ -3,25 +3,29 @@ import layout from '../../templates/components/bs-form/element';
 import FormGroup from './group';
 
 const {
- computed,
- defineProperty,
- isArray,
- isBlank,
- observer,
- on,
+  computed,
+  defineProperty,
+  isArray,
+  isBlank,
+  observer,
+  on,
 
- run: {
-   scheduleOnce
- },
+  run: {
+    scheduleOnce
+  },
 
- assert,
- typeOf,
- A
+  assert,
+  typeOf,
+  A
 } = Ember;
 
 const nonTextFieldControlTypes = A([
   'checkbox',
   'textarea'
+]);
+
+const nonDefaultLayouts = A([
+  'checkbox'
 ]);
 
 /**
@@ -34,10 +38,10 @@ const nonTextFieldControlTypes = A([
 
  ```hbs
  {{#bs-form formLayout="horizontal" action="submit" as |form|}}
-   {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
-   {{form.element controlType="password" label="Password" placeholder="Password" value=password}}
-   {{form.element controlType="checkbox" label="Remember me" value=rememberMe}}
-   {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+ {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
+ {{form.element controlType="password" label="Password" placeholder="Password" value=password}}
+ {{form.element controlType="checkbox" label="Remember me" value=rememberMe}}
+ {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
  {{/bs-form}}
  ```
 
@@ -48,10 +52,10 @@ const nonTextFieldControlTypes = A([
 
  ```hbs
  {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
-   {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
-   {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
-   {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
-   {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+ {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
+ {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
+ {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
+ {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
  {{/bs-form}}
  ```
 
@@ -114,9 +118,9 @@ const nonTextFieldControlTypes = A([
 
  ```hbs
  {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
-   {{#form.element label="Select-2" property="gender" useIcons=false as |el|}}
-     {{select-2 id=el.id content=genderChoices optionLabelPath="label" value=el.value searchEnabled=false}}
-   {{/form.element}}
+ {{#form.element label="Select-2" property="gender" useIcons=false as |el|}}
+ {{select-2 id=el.id content=genderChoices optionLabelPath="label" value=el.value searchEnabled=false}}
+ {{/form.element}}
  {{/bs-form}}
  ```
 
@@ -134,13 +138,13 @@ const nonTextFieldControlTypes = A([
 
  ```hbs
  {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
-   {{form.element controlType="email" label="Email" property="email"
-     placeholder="Email"
-     required=true
-     multiple=true
-     tabIndex=5
-   }}
-    ...
+ {{form.element controlType="email" label="Email" property="email"
+   placeholder="Email"
+   required=true
+   multiple=true
+   tabIndex=5
+ }}
+ ...
  {{/bs-form}}
  ```
 
@@ -557,14 +561,6 @@ export default FormGroup.extend({
   }),
 
   /**
-   * @property hasLabel
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  hasLabel: computed.notEmpty('label'),
-
-  /**
    * True for text field `controlType`s
    *
    * @property useIcons
@@ -593,30 +589,6 @@ export default FormGroup.extend({
   formLayout: 'vertical',
 
   /**
-   * @property isVertical
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  isVertical: computed.equal('formLayout', 'vertical').readOnly(),
-
-  /**
-   * @property isHorizontal
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  isHorizontal: computed.equal('formLayout', 'horizontal').readOnly(),
-
-  /**
-   * @property isInline
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  isInline: computed.equal('formLayout', 'inline').readOnly(),
-
-  /**
    * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
    * property of the parent form. The corresponding grid class for form controls is automatically computed.
    *
@@ -625,42 +597,6 @@ export default FormGroup.extend({
    * @public
    */
   horizontalLabelGridClass: null,
-
-  /**
-   * Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.
-   *
-   * @property horizontalInputGridClass
-   * @type string
-   * @readonly
-   * @private
-   */
-  horizontalInputGridClass: computed('horizontalLabelGridClass', function() {
-    if (isBlank(this.get('horizontalLabelGridClass'))) {
-      return;
-    }
-    let parts = this.get('horizontalLabelGridClass').split('-');
-    assert('horizontalInputGridClass must match format bootstrap grid column class', parts.length === 3);
-    parts[2] = 12 - parts[2];
-    return parts.join('-');
-  }).readOnly(),
-
-  /**
-   * Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout
-   * form, that have no label.
-   *
-   * @property horizontalInputOffsetGridClass
-   * @type string
-   * @readonly
-   * @private
-   */
-  horizontalInputOffsetGridClass: computed('horizontalLabelGridClass', function() {
-    if (isBlank(this.get('horizontalLabelGridClass'))) {
-      return;
-    }
-    let parts = this.get('horizontalLabelGridClass').split('-');
-    parts.splice(2, 0, 'offset');
-    return parts.join('-');
-  }),
 
   /**
    * ID for input field and the corresponding label's "for" attribute
@@ -674,20 +610,24 @@ export default FormGroup.extend({
     return `${elementId}-field`;
   }),
 
-  formElementTemplate: computed('formLayout', 'controlType', function() {
-    let formLayout = this.getWithDefault('formLayout', 'vertical');
-    let inputLayout;
+  layoutComponent: computed('formLayout', 'controlType', function() {
+    let formLayout = this.get('formLayout');
     let controlType = this.get('controlType');
 
-    switch (true) {
-      case nonTextFieldControlTypes.includes(controlType):
-        inputLayout = controlType;
-        break;
-      default:
-        inputLayout = 'default';
+    if (nonDefaultLayouts.includes(controlType)) {
+      return `bs-form/element/layout/${formLayout}/${controlType}`;
+    } else {
+      return `bs-form/element/layout/${formLayout}`;
+    }
+  }),
+
+  controlComponent: computed('formLayout', 'controlType', function() {
+    let controlType = this.get('controlType');
+    if (!nonTextFieldControlTypes.includes(controlType)) {
+      controlType = 'input';
     }
 
-    return `components/form-element/${formLayout}/${inputLayout}`;
+    return `bs-form/element/control/${controlType}`;
   }),
 
   /**
@@ -697,7 +637,8 @@ export default FormGroup.extend({
    * @method setupValidations
    * @private
    */
-  setupValidations() {},
+  setupValidations() {
+  },
 
   /**
    * Listen for focusOut events from the control element to automatically set `showOwnValidation` to true to enable
@@ -741,7 +682,8 @@ export default FormGroup.extend({
    * @param {String} property The value of `property`
    * @public
    */
-  onChange() {},
+  onChange() {
+  },
 
   init() {
     this._super(...arguments);
@@ -765,7 +707,7 @@ export default FormGroup.extend({
       if (this.get('hasFeedback') && !this.get('isDestroying')) {
         // form group element has
         this.$()
-          // an input-group
+        // an input-group
           .has('.input-group')
           // an addon or button on right si de
           .has('.input-group input + .input-group-addon, .input-group input + .input-group-btn')
@@ -793,12 +735,5 @@ export default FormGroup.extend({
           });
       }
     });
-  })),
-
-  actions: {
-    change(value) {
-      let { onChange, model, property } = this.getProperties('onChange', 'model', 'property');
-      onChange(value, model, property);
-    }
-  }
+  }))
 });

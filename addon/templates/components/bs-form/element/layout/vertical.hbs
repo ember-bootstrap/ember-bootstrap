@@ -1,0 +1,8 @@
+{{#if hasLabel}}
+  <label class="control-label {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
+{{/if}}
+{{yield}}
+{{!--
+{{partial "components/form-element/feedback-icon"}}
+{{partial "components/form-element/errors"}}
+--}}
