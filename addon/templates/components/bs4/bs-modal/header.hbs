@@ -1,0 +1,8 @@
+{{#if hasBlock}}
+    {{yield}}
+{{else}}
+    <h5 class="modal-title">{{title}}</h5>
+{{/if}}
+{{#if closeButton}}
+    <button type="button" class="close" aria-label="Close" onclick={{onClose}}><span aria-hidden="true">&times;</span></button>
+{{/if}}
