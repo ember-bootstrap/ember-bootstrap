@@ -438,20 +438,20 @@ test('Clicking on the backdrop is ignored when backdropClose=false', function(as
 
 test('Renders in wormhole if renderInPlace is not set', function(assert) {
   this.set('show', false);
-  this.render(hbs`<div id="ember-bootstrap-modal-container"></div>{{#if show}}{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}{{/if}}`);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}{{/if}}`);
   this.set('show', true);
 
   assert.equal(this.$('.modal').length, 1, 'Modal exists.');
-  assert.equal(this.$('.modal').parent().attr('id'), 'ember-bootstrap-modal-container');
+  assert.equal(this.$('.modal').parent().attr('id'), 'ember-bootstrap-wormhole');
 });
 
 test('Renders in place (no wormhole) if renderInPlace is set', function(assert) {
   this.set('show', false);
-  this.render(hbs`<div id="ember-bootstrap-modal-container"></div>{{#if show}}{{#bs-modal-simple title="Simple Dialog" renderInPlace=true}}Hello world!{{/bs-modal-simple}}{{/if}}`);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{#bs-modal-simple title="Simple Dialog" renderInPlace=true}}Hello world!{{/bs-modal-simple}}{{/if}}`);
   this.set('show', true);
 
   assert.equal(this.$('.modal').length, 1, 'Modal exists.');
-  assert.notEqual(this.$('.modal').parent().attr('id'), 'ember-bootstrap-modal-container');
+  assert.notEqual(this.$('.modal').parent().attr('id'), 'ember-bootstrap-wormhole');
 });
 
 test('Removes "modal-open" class when component is removed from view', function(assert) {

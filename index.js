@@ -14,7 +14,8 @@ const chalk = require('chalk');
 const defaultOptions = {
   importBootstrapTheme: false,
   importBootstrapCSS: true,
-  importBootstrapFont: true
+  importBootstrapFont: true,
+  insertEmberWormholeElementToDom: true
 };
 
 const supportedPreprocessors = [
@@ -118,6 +119,12 @@ module.exports = {
       return new Funnel(this.getBootstrapFontPath(), {
         destDir: 'fonts'
       });
+    }
+  },
+
+  contentFor(type, config) {
+    if (type === 'body-footer' && config.environment !== 'test' && this.bootstrapOptions.insertEmberWormholeElementToDom !== false) {
+      return '<div id="ember-bootstrap-wormhole"></div>';
     }
   }
 };
