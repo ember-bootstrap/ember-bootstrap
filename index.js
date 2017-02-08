@@ -74,7 +74,7 @@ module.exports = {
     let bowerDependencies = this.app.project.bowerDependencies();
     switch (name) {
       case 'sass':
-        if (!('bootstrap-sass' in npmDependencies)) {
+        if (!('bootstrap-sass' in npmDependencies) && this.getBootstrapVersion() === 3) {
           this.ui.writeLine(chalk.red('Npm package "bootstrap-sass" is missing, but required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'));
           return false;
         }
