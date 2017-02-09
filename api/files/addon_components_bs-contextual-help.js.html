@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.3</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -355,7 +355,7 @@ export default Component.extend(TransitionSupport, {
    * @private
    */
   _renderInPlace: computed(&#x27;renderInPlace&#x27;, function() {
-    return this.get(&#x27;renderInPlace&#x27;) || typeof Ember.$ !== &#x27;function&#x27; || Ember.$(&#x27;#ember-bootstrap-modal-container&#x27;).length === 0;
+    return this.get(&#x27;renderInPlace&#x27;) || typeof Ember.$ !== &#x27;function&#x27; || Ember.$(&#x27;#ember-bootstrap-wormhole&#x27;).length === 0;
   }),
 
   /**

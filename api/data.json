@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "1.0.0-alpha.3"
+        "version": "1.0.0-alpha.4"
     },
     "files": {
         "addon/components/bs-accordion/item.js": {
@@ -1023,7 +1023,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/bs-modal.js",
-            "line": 11,
+            "line": 13,
             "description": "Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup:\n```hbs\n {{#bs-modal onSubmit=(action \"submit\") as |modal|}}\n   {{#modal.header}}\n     <h4 class=\"modal-title\"><i class=\"glyphicon glyphicon-alert\"></i> Alert</h4>\n   {{/modal.header}}\n   {{#modal.body}}Are you absolutely sure you want to do that???{{/modal.body}}\n   {{#modal.footer as |footer|}}\n     {{#bs-button onClick=(action modal.close) type=\"danger\"}}Oh no, forget it!{{/bs-button}}\n     {{#bs-button onClick=(action modal.submit) type=\"success\"}}Yeah!{{/bs-button}}\n   {{/modal.footer}}\n {{/bs-modal}}\n ```\nThe component yields references to the following contextual components, that you can use to further customize the output:\n* [modal.body](Components.ModalBody.html)\n * [modal.header](Components.ModalHeader.html)\n * [modal.footer](Components.ModalFooter.html)\nFurthermore references to the following actions are yielded:\n* `close`: triggers the `onHide` action and closes the modal\n * `submit`: triggers the `onSubmit` action (or the submit event on a form if present in the body element)\n### Further reading\nSee the documentation of the [bs-modal-simple](Components.ModalSimple.html) component for further examples.",
             "extends": "Ember.Component",
             "access": "public",
@@ -1683,7 +1683,7 @@
         {
             "file": "addon/components/bs-form/element.js",
             "line": 502,
-            "description": "Event or list of events which enable form validation markup rendering.\nSupported events: ['focusOut', 'change']",
+            "description": "Event or list of events which enable form validation markup rendering.\nSupported events: ['focusOut', 'change', 'input']",
             "itemtype": "property",
             "name": "showValidationOn",
             "type": "string|array",
@@ -1888,6 +1888,17 @@
         {
             "file": "addon/components/bs-form/element.js",
             "line": 724,
+            "description": "Listen for input events from the control element to automatically set `showOwnValidation` to true to enable\nform validation markup rendering if `showValidationsOn` contains `input`.",
+            "itemtype": "event",
+            "name": "input",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.FormElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-form/element.js",
+            "line": 735,
             "description": "The action is called whenever the input value is changed, e.g. by typing text",
             "itemtype": "event",
             "name": "onChange",
@@ -4235,7 +4246,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 51,
+            "line": 53,
             "description": "Visibility of the modal. Toggle to to show/hide with CSS transitions.\n\nWhen the modal is closed by user interaction this property will not update by using two-way bindings in order\nto follow DDAU best practices. If you want to react to such changes, subscribe to the `onHide` action",
             "itemtype": "property",
             "name": "open",
@@ -4248,7 +4259,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 64,
+            "line": 66,
             "itemtype": "property",
             "name": "isOpen",
             "access": "private",
@@ -4258,7 +4269,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 70,
+            "line": 72,
             "itemtype": "property",
             "name": "_isOpen",
             "access": "private",
@@ -4268,7 +4279,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 76,
+            "line": 78,
             "description": "Set to false to disable fade animations.",
             "itemtype": "property",
             "name": "fade",
@@ -4281,7 +4292,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 86,
+            "line": 88,
             "itemtype": "property",
             "name": "notFade",
             "type": "boolean",
@@ -4292,7 +4303,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 93,
+            "line": 95,
             "description": "Used to apply Bootstrap's \"in\" class",
             "itemtype": "property",
             "name": "in",
@@ -4305,7 +4316,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 103,
+            "line": 105,
             "description": "Use a semi-transparent modal background to hide the rest of the page.",
             "itemtype": "property",
             "name": "backdrop",
@@ -4318,7 +4329,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 113,
+            "line": 115,
             "itemtype": "property",
             "name": "showBackdrop",
             "type": "boolean",
@@ -4330,7 +4341,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 121,
+            "line": 123,
             "description": "Closes the modal when escape key is pressed.",
             "itemtype": "property",
             "name": "keyboard",
@@ -4343,7 +4354,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 131,
+            "line": 133,
             "description": "The id of the `.modal` element.",
             "itemtype": "property",
             "name": "modalId",
@@ -4356,7 +4367,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 143,
+            "line": 145,
             "description": "The jQuery object of the `.modal` element.",
             "itemtype": "property",
             "name": "modalElement",
@@ -4369,7 +4380,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 155,
+            "line": 157,
             "description": "The id of the backdrop element.",
             "itemtype": "property",
             "name": "backdropId",
@@ -4382,7 +4393,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 167,
+            "line": 169,
             "description": "The jQuery object of the backdrop element.",
             "itemtype": "property",
             "name": "backdropElement",
@@ -4395,7 +4406,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 179,
+            "line": 181,
             "description": "Property for size styling, set to null (default), 'lg' or 'sm'\n\nAlso see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)",
             "itemtype": "property",
             "name": "size",
@@ -4407,7 +4418,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 190,
+            "line": 192,
             "description": "If true clicking on the backdrop will close the modal.",
             "itemtype": "property",
             "name": "backdropClose",
@@ -4420,7 +4431,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 200,
+            "line": 202,
             "description": "If true component will render in place, rather than be wormholed.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -4433,7 +4444,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 210,
+            "line": 212,
             "itemtype": "property",
             "name": "_renderInPlace",
             "type": "boolean",
@@ -4444,7 +4455,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 219,
+            "line": 221,
             "description": "The duration of the fade transition",
             "itemtype": "property",
             "name": "transitionDuration",
@@ -4457,7 +4468,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 229,
+            "line": 231,
             "description": "The duration of the backdrop fade transition",
             "itemtype": "property",
             "name": "backdropTransitionDuration",
@@ -4470,7 +4481,18 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 239,
+            "line": 241,
+            "itemtype": "property",
+            "name": "isFastBoot",
+            "type": "{Boolean}",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/bs-modal.js",
+            "line": 265,
             "description": "The action to be sent when the modal footer's submit button (if present) is pressed.\nNote that if your modal body contains a form (e.g. [Components.Form](Components.Form.html){{/crossLink}}) this action will\nnot be triggered. Instead a submit event will be triggered on the form itself. See the class description for an\nexample.",
             "itemtype": "property",
             "name": "onSubmit",
@@ -4482,8 +4504,8 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 251,
-            "description": "The action to be sent when the modal is closing.\nThis will be triggered by pressing the modal header's close button (x button) or the modal footer's close button.\nNote that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some\ntime to finish. Use the `closedAction` if you need the modal to be hidden when the action triggers.\n\nYou can return false to prevent closing the modal automatically, and do that in your action by\nsetting `open` to false.",
+            "line": 277,
+            "description": "The action to be sent when the modal is closing.\nThis will be triggered by pressing the modal header's close button (x button) or the modal footer's close button.\nNote that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some\ntime to finish. Use the `onHidden` if you need the modal to be hidden when the action triggers.\n\nYou can return false to prevent closing the modal automatically, and do that in your action by\nsetting `open` to false.",
             "itemtype": "property",
             "name": "onHide",
             "type": "function",
@@ -4494,7 +4516,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 266,
+            "line": 292,
             "description": "The action to be sent after the modal has been completely hidden (including the CSS transition).",
             "itemtype": "property",
             "name": "onHidden",
@@ -4507,7 +4529,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 276,
+            "line": 302,
             "description": "The action to be sent when the modal is opening.\nThis will be triggered immediately after the modal is shown (so it's safe to access the DOM for\nsize calculations and the like). This means that if fade=true, it will be shown in between the\nbackdrop animation and the fade animation.",
             "itemtype": "property",
             "name": "onShow",
@@ -4520,7 +4542,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 289,
+            "line": 315,
             "description": "The action to be sent after the modal has been completely shown (including the CSS transition).",
             "itemtype": "property",
             "name": "onShown",
@@ -4532,7 +4554,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 316,
+            "line": 342,
             "description": "Give the modal (or its autofocus element) focus",
             "itemtype": "method",
             "name": "takeFocus",
@@ -4543,7 +4565,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 332,
+            "line": 358,
             "description": "Show the modal",
             "itemtype": "method",
             "name": "show",
@@ -4554,7 +4576,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 379,
+            "line": 405,
             "description": "Hide the modal",
             "itemtype": "method",
             "name": "hide",
@@ -4565,8 +4587,8 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 403,
-            "description": "Clean up after modal is hidden and call closedAction",
+            "line": 429,
+            "description": "Clean up after modal is hidden and call onHidden",
             "itemtype": "method",
             "name": "hideModal",
             "access": "private",
@@ -4576,7 +4598,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 423,
+            "line": 449,
             "description": "SHow/hide the backdrop",
             "itemtype": "method",
             "name": "handleBackdrop",
@@ -4593,7 +4615,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 473,
+            "line": 499,
             "description": "Attach/Detach resize event listeners",
             "itemtype": "method",
             "name": "resize",
@@ -4604,7 +4626,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 487,
+            "line": 513,
             "itemtype": "method",
             "name": "handleUpdate",
             "access": "private",
@@ -4614,7 +4636,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 495,
+            "line": 521,
             "itemtype": "method",
             "name": "adjustDialog",
             "access": "private",
@@ -4624,7 +4646,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 507,
+            "line": 533,
             "itemtype": "method",
             "name": "resetAdjustments",
             "access": "private",
@@ -4634,7 +4656,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 518,
+            "line": 544,
             "itemtype": "method",
             "name": "checkScrollbar",
             "access": "private",
@@ -4644,7 +4666,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 532,
+            "line": 558,
             "itemtype": "method",
             "name": "setScrollbar",
             "access": "private",
@@ -4654,7 +4676,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 544,
+            "line": 570,
             "itemtype": "method",
             "name": "resetScrollbar",
             "access": "private",
@@ -4664,7 +4686,7 @@
         },
         {
             "file": "addon/components/bs-modal.js",
-            "line": 552,
+            "line": 578,
             "itemtype": "property",
             "name": "scrollbarWidth",
             "type": "number",

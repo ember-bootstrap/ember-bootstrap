@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.3</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -556,7 +556,7 @@ export default FormGroup.extend({
 
   /**
    * Event or list of events which enable form validation markup rendering.
-   * Supported events: [&#x27;focusOut&#x27;, &#x27;change&#x27;]
+   * Supported events: [&#x27;focusOut&#x27;, &#x27;change&#x27;, &#x27;input&#x27;]
    *
    * @property showValidationOn
    * @type string|array
@@ -774,6 +774,17 @@ export default FormGroup.extend({
    */
   change() {
     this.showValidationOnHandler(&#x27;change&#x27;);
+  },
+
+  /**
+   * Listen for input events from the control element to automatically set &#x60;showOwnValidation&#x60; to true to enable
+   * form validation markup rendering if &#x60;showValidationsOn&#x60; contains &#x60;input&#x60;.
+   *
+   * @event input
+   * @private
+   */
+  input() {
+    this.showValidationOnHandler(&#x27;input&#x27;);
   },
 
   /**
