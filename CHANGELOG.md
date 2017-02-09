@@ -1,3 +1,15 @@
+<a name="1.0.0-alpha.4"></a>
+# [1.0.0-alpha.4](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.3...v1.0.0-alpha.4) (2017-02-09)
+
+
+### Features
+
+* **FormElement:** Add input as available event for showValidationOn. Thanks to elgordino ([#210](https://github.com/kaliber5/ember-bootstrap/issues/210)) ([b153864](https://github.com/kaliber5/ember-bootstrap/commit/b153864))
+* **Modal:** container div for ember-wormhole renamed to `#ember-bootstrap-wormhole`, is added at build-time to index.html, not through initializer anymore ([9b4013a](https://github.com/kaliber5/ember-bootstrap/commit/9b4013a)), closes [#222](https://github.com/kaliber5/ember-bootstrap/issues/222)
+* **Modal:** Fall back to not using fade transition in FastBoot by default, so FastBoot rendered app contains immediately visible modal ([b95aad9](https://github.com/kaliber5/ember-bootstrap/commit/b95aad9))
+
+
+
 <a name="1.0.0-alpha.3"></a>
 # [1.0.0-alpha.3](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.2...v1.0.0-alpha.3) (2017-01-21)
 
