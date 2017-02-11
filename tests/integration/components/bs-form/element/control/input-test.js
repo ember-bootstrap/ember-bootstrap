@@ -7,19 +7,7 @@ moduleForComponent('bs-form/element/control/input', 'Integration | Component | b
 
 test('it renders', function(assert) {
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
   this.render(hbs`{{bs-form/element/control/input}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#bs-form/element/control/input}}
-      template block text
-    {{/bs-form/element/control/input}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('input[type=text]').length, 1);
 });

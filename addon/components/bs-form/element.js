@@ -339,6 +339,14 @@ export default FormGroup.extend({
   invisibleLabel: false,
 
   /**
+   * @property hasLabel
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasLabel: computed.notEmpty('label'),
+
+  /**
    * The type of the control widget.
    * Supported types:
    *
@@ -610,6 +618,11 @@ export default FormGroup.extend({
     return `${elementId}-field`;
   }),
 
+  /**
+   * @property layoutComponent
+   * @type {String}
+   * @private
+   */
   layoutComponent: computed('formLayout', 'controlType', function() {
     let formLayout = this.get('formLayout');
     let controlType = this.get('controlType');
@@ -621,6 +634,11 @@ export default FormGroup.extend({
     }
   }),
 
+  /**
+   * @property controlComponent
+   * @type {String}
+   * @private
+   */
   controlComponent: computed('formLayout', 'controlType', function() {
     let controlType = this.get('controlType');
     if (!nonTextFieldControlTypes.includes(controlType)) {
@@ -630,9 +648,26 @@ export default FormGroup.extend({
     return `bs-form/element/control/${controlType}`;
   }),
 
+  /**
+   * @property errorsComponent
+   * @type {String}
+   * @private
+   */
   errorsComponent: 'bs-form/element/errors',
 
+  /**
+   * @property feedbackIconComponent
+   * @type {String}
+   * @private
+   */
   feedbackIconComponent: 'bs-form/element/feedback-icon',
+
+  /**
+   * @property labelComponent
+   * @type {String}
+   * @private
+   */
+  labelComponent: 'bs-form/element/label',
 
   /**
    * Setup validation properties. This method acts as a hook for external validation

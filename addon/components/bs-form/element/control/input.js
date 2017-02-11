@@ -36,6 +36,11 @@ export default Control.extend({
   tagName: 'input',
   classNames: ['form-control'],
 
+  /**
+   * @property type
+   * @type {String}
+   * @public
+   */
   type: 'text',
 
   change(event) {

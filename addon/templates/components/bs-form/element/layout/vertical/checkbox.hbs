@@ -1,7 +1,6 @@
 <div class="checkbox">
-  <label>
+  {{#component labelComponent}}
     {{yield}}
-    {{label}}
-  </label>
+  {{/component}}
 </div>
 {{component errorsComponent}}

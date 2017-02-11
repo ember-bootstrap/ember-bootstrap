@@ -1,7 +1,5 @@
 import Ember from 'ember';
 
-const { computed } = Ember;
-
 /**
 
  @class FormElementLayout
@@ -11,19 +9,39 @@ const { computed } = Ember;
  */
 export default Ember.Component.extend({
   tagName: '',
-  label: null,
-  invisibleLabel: false,
+
+  /**
+   * @property formElementId
+   * @type {String}
+   * @public
+   */
   formElementId: null,
 
   /**
    * @property hasLabel
    * @type boolean
-   * @readonly
-   * @private
+   * @public
    */
-  hasLabel: computed.notEmpty('label'),
+  hasLabel: true,
 
+  /**
+   * @property errorsComponent
+   * @type {Ember.Component}
+   * @public
+   */
   errorsComponent: null,
 
-  feedbackIconComponent: null
+  /**
+   * @property feedbackIconComponent
+   * @type {Ember.Component}
+   * @public
+   */
+  feedbackIconComponent: null,
+
+  /**
+   * @property labelComponent
+   * @type {Ember.Component}
+   * @public
+   */
+  labelComponent: null
 });

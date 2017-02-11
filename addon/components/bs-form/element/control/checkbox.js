@@ -21,6 +21,12 @@ export default Control.extend({
   ],
   tagName: 'input',
 
+  /**
+   * @property type
+   * @type {String}
+   * @readonly
+   * @private
+   */
   type: 'checkbox',
 
   click(event) {

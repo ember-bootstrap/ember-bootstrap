@@ -1,5 +1,5 @@
 {{#if hasLabel}}
-  <label class="control-label {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
+  {{component labelComponent}}
 {{/if}}
 {{yield}}
 {{component feedbackIconComponent}}

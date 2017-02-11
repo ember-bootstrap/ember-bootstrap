@@ -1,7 +1,5 @@
-{{#component
-  layoutComponent
-  label=label
-  invisibleLabel=invisibleLabel
+{{#component layoutComponent
+  hasLabel=hasLabel
   formElementId=formElementId
   horizontalLabelGridClass=horizontalLabelGridClass
   errorsComponent=(component
@@ -9,10 +7,14 @@
     messages=validationMessages
     show=showValidationMessages
   )
-  feedbackIconComponent=(component
-    feedbackIconComponent
+  feedbackIconComponent=(component feedbackIconComponent
     iconName=iconName
     show=hasFeedback
+  )
+  labelComponent=(component labelComponent
+    label=label
+    invisibleLabel=invisibleLabel
+    formElementId=formElementId
   )
 }}
   {{#if hasBlock}}
@@ -24,8 +26,7 @@
       )
     }}
   {{else}}
-    {{component
-      controlComponent
+    {{component controlComponent
       value=value
       onChange=(action onChange model property)
       id=formElementId
