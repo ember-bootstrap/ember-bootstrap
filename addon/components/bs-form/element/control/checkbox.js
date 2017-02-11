@@ -1,8 +1,29 @@
-import Ember from 'ember';
+import Control from '../control';
 
-export default Ember.Component.extend({
-  attributeBindings: ['type'],
+/**
+
+ @class FormElementControlCheckbox
+ @namespace Components
+ @extends Components.FormElementControl
+ @private
+ */
+export default Control.extend({
+  attributeBindings: [
+    'value:checked',
+    'type',
+    'name',
+    'autofocus',
+    'disabled',
+    'readonly',
+    'required',
+    'tabindex',
+    'form'
+  ],
   tagName: 'input',
 
-  type: 'checkbox'
+  type: 'checkbox',
+
+  click(event) {
+    this.get('onChange')(event.target.checked);
+  }
 });

@@ -10,7 +10,7 @@ const { computed } = Ember;
  @private
  */
 export default Ember.Component.extend({
-
+  tagName: '',
   label: null,
   invisibleLabel: false,
   formElementId: null,

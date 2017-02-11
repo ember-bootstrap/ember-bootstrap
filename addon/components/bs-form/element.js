@@ -738,5 +738,12 @@ export default FormGroup.extend({
           });
       }
     });
-  }))
+  })),
+
+  actions: {
+    change(value) {
+      let { onChange, model, property } = this.getProperties('onChange', 'model', 'property');
+      onChange(value, model, property);
+    }
+  }
 });

@@ -1,25 +1,28 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+
+const { A } = Ember;
 
 moduleForComponent('bs-form/element/errors', 'Integration | Component | bs form/element/errors', {
   integration: true
 });
 
-test('it renders', function(assert) {
+test('is empty by default', function(assert) {
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  this.set('messages', ['foo', 'bar']);
 
-  this.render(hbs`{{bs-form/element/errors}}`);
+  this.render(hbs`{{bs-form/element/errors show=false messages=messages}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$('.help-block').length, 0);
+});
 
-  // Template block usage:
-  this.render(hbs`
-    {{#bs-form/element/errors}}
-      template block text
-    {{/bs-form/element/errors}}
-  `);
+test('shows first message', function(assert) {
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  this.set('messages', A(['foo', 'bar']));
+
+  this.render(hbs`{{bs-form/element/errors show=true messages=messages}}`);
+
+  assert.equal(this.$('.help-block').length, 1);
+  assert.equal(this.$('.help-block').text().trim(), 'foo');
 });

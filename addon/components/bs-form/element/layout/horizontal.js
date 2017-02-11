@@ -57,6 +57,6 @@ export default FormElementLayout.extend({
     let parts = this.get('horizontalLabelGridClass').split('-');
     parts.splice(2, 0, 'offset');
     return parts.join('-');
-  }),
+  })
 
 });

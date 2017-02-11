@@ -5,21 +5,16 @@ moduleForComponent('bs-form/element/feedback-icon', 'Integration | Component | b
   integration: true
 });
 
-test('it renders', function(assert) {
+test('is empty by default', function(assert) {
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  this.render(hbs`{{bs-form/element/feedback-icon show=false}}`);
 
-  this.render(hbs`{{bs-form/element/feedback-icon}}`);
+  assert.equal(this.$('.form-control-feedback').length, 0);
+});
 
-  assert.equal(this.$().text().trim(), '');
+test('shows icon', function(assert) {
 
-  // Template block usage:
-  this.render(hbs`
-    {{#bs-form/element/feedback-icon}}
-      template block text
-    {{/bs-form/element/feedback-icon}}
-  `);
+  this.render(hbs`{{bs-form/element/feedback-icon show=true iconName="foo"}}`);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('.form-control-feedback.foo').length, 1);
 });
