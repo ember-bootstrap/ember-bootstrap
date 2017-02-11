@@ -4,6 +4,16 @@
   invisibleLabel=invisibleLabel
   formElementId=formElementId
   horizontalLabelGridClass=horizontalLabelGridClass
+  errorsComponent=(component
+    errorsComponent
+    messages=validationMessages
+    show=showValidationMessages
+  )
+  feedbackIconComponent=(component
+    feedbackIconComponent
+    iconName=iconName
+    show=hasFeedback
+  )
 }}
   {{#if hasBlock}}
     {{yield

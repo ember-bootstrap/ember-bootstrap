@@ -630,6 +630,10 @@ export default FormGroup.extend({
     return `bs-form/element/control/${controlType}`;
   }),
 
+  errorsComponent: 'bs-form/element/errors',
+
+  feedbackIconComponent: 'bs-form/element/feedback-icon',
+
   /**
    * Setup validation properties. This method acts as a hook for external validation
    * libraries to overwrite. In case of failed validations the `errors` property should contain an array of error messages.
@@ -682,8 +686,7 @@ export default FormGroup.extend({
    * @param {String} property The value of `property`
    * @public
    */
-  onChange() {
-  },
+  onChange() {},
 
   init() {
     this._super(...arguments);

@@ -1,10 +1,14 @@
 {{#if hasLabel}}
-    <label class="control-label {{horizontalLabelGridClass}} {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
-    <div class="{{horizontalInputGridClass}}">
-        {{yield}}
-    </div>
+  <label class="control-label {{horizontalLabelGridClass}} {{if invisibleLabel "sr-only"}}" for="{{formElementId}}">{{label}}</label>
+  <div class="{{horizontalInputGridClass}}">
+    {{yield}}
+    {{component feedbackIconComponent}}
+    {{component errorsComponent}}
+  </div>
 {{else}}
-    <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
-      {{yield}}
-    </div>
+  <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
+    {{yield}}
+    {{component feedbackIconComponent}}
+    {{component errorsComponent}}
+  </div>
 {{/if}}

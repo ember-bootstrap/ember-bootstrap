@@ -22,4 +22,8 @@ export default Ember.Component.extend({
    * @private
    */
   hasLabel: computed.notEmpty('label'),
+
+  errorsComponent: null,
+
+  feedbackIconComponent: null
 });
