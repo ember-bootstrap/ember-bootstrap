@@ -11,28 +11,33 @@ const bs3Version = '^3.3.7';
 const bs4Version = 'next';
 
 module.exports = {
+  name: 'ember-bootstrap',
+
+  availableOptions: [
+    { name: 'bootstrap-version', type: Number, default: 3 }
+  ],
+
   normalizeEntityName() {
   },
 
-  afterInstall() {
-    return this.addDependencies()
-      .then(() => this.addPreprocessorImport());
+  afterInstall(options) {
+    return this.addDependencies(options)
+      .then(() => this.addPreprocessorImport())
+      .then(() => this.addBuildConfiguration(options));
   },
 
-  addDependencies() {
+  addDependencies(options) {
     let dependencies = this.project.dependencies();
 
-    let promises = [
-      this.addPackageToProject('bootstrap', bs4Version)
-    ];
-
-    if ('ember-cli-sass' in dependencies) {
-      promises.push(this.addPackageToProject('bootstrap-sass', bs3Version));
-    } else {
-      promises.push(this.addBowerPackageToProject('bootstrap', bs3Version));
+    if (options.bootstrapVersion === 4) {
+      return this.addPackageToProject('bootstrap', bs4Version);
     }
 
-    return rsvp.all(promises);
+    if ('ember-cli-sass' in dependencies) {
+      return this.addPackageToProject('bootstrap-sass', bs3Version);
+    }
+
+    return this.addBowerPackageToProject('bootstrap', bs3Version);
   },
 
   addPreprocessorImport() {
@@ -60,6 +65,25 @@ module.exports = {
         this.ui.writeLine(chalk.green(`Created ${file}`));
         return writeFile(file, importStatement);
       }
+    }
+  },
+
+  addBuildConfiguration(options) {
+    let file = 'ember-cli-build.js';
+    let includeFonts = options.bootstrapVersion === 3;
+    let config = `
+        'ember-bootstrap': {
+            importBootstrapTheme: false,
+            importBootstrapCSS: true,
+            importBootstrapFont: ${includeFonts},
+            bootstrapVersion: ${options.bootstrapVersion}
+        },`;
+
+    if (fs.existsSync(file)) {
+      this.ui.writeLine(chalk.green(`Added ember-bootstrap configuration to ${file}`));
+      return this.insertIntoFile(file, config, { after: 'new EmberApp(defaults, {' });
+    } else {
+      this.ui.writeLine(chalk.red(`Could not find ${file} to modify.`));
     }
   }
 };
