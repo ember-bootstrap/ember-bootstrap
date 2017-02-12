@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../../../templates/components/bs-form/element/feedback-icon';
+import layout from 'ember-bootstrap/templates/components/bs-form/element/feedback-icon';
 
 /**
 
