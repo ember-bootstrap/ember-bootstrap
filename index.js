@@ -16,6 +16,7 @@ const defaultOptions = {
   importBootstrapTheme: false,
   importBootstrapCSS: true,
   importBootstrapFont: true,
+  insertEmberWormholeElementToDom: true,
   bootstrapVersion: 3
 };
 
@@ -190,5 +191,11 @@ module.exports = {
     tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
     tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
     return tree; //log(tree, {output: 'tree', label: 'moved'});
+  },
+
+  contentFor(type, config) {
+    if (type === 'body-footer' && config.environment !== 'test' && this.bootstrapOptions.insertEmberWormholeElementToDom !== false) {
+      return '<div id="ember-bootstrap-wormhole"></div>';
+    }
   }
 };

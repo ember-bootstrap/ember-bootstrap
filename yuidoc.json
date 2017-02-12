@@ -1,7 +1,7 @@
 {
   "name": "ember-bootstrap",
   "description": "Twitter Bootstrap components for Ember.js",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "options": {
     "paths": [
       "addon"

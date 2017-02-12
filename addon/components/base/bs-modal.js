@@ -5,6 +5,8 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
 const {
   computed,
+  get,
+  getOwner,
   observer
 } = Ember;
 
@@ -84,7 +86,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * @default true
    * @public
    */
-  fade: true,
+  fade: computed.not('isFastBoot'),
 
   /**
    * @property notFade
@@ -215,8 +217,8 @@ export default Ember.Component.extend(TransitionSupport, {
    * @type boolean
    * @private
    */
-  _renderInPlace: computed('renderInPlace', function() {
-    return this.get('renderInPlace') || typeof Ember.$ !== 'function' || Ember.$('#ember-bootstrap-modal-container').length === 0;
+  _renderInPlace: computed('renderInPlace', 'isFastBoot', function() {
+    return this.get('renderInPlace') || !this.get('isFastBoot') && Ember.$('#ember-bootstrap-wormhole').length === 0;
   }),
 
   /**
@@ -240,6 +242,30 @@ export default Ember.Component.extend(TransitionSupport, {
   backdropTransitionDuration: 150,
 
   /**
+   * @property isFastBoot
+   * @type {Boolean}
+   * @private
+   */
+  isFastBoot: computed(function() {
+    if (!getOwner) {
+      // Ember.getOwner is available as of Ember 2.3, while FastBoot requires 2.4. So just return false...
+      return false;
+    }
+
+    let owner = getOwner(this);
+    if (!owner) {
+      return false;
+    }
+
+    let fastboot = owner.lookup('service:fastboot');
+    if (!fastboot) {
+      return false;
+    }
+
+    return get(fastboot, 'isFastBoot');
+  }),
+
+  /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
    * Note that if your modal body contains a form (e.g. [Components.Form](Components.Form.html){{/crossLink}}) this action will
    * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
@@ -255,7 +281,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * The action to be sent when the modal is closing.
    * This will be triggered by pressing the modal header's close button (x button) or the modal footer's close button.
    * Note that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some
-   * time to finish. Use the `closedAction` if you need the modal to be hidden when the action triggers.
+   * time to finish. Use the `onHidden` if you need the modal to be hidden when the action triggers.
    *
    * You can return false to prevent closing the modal automatically, and do that in your action by
    * setting `open` to false.
@@ -404,7 +430,7 @@ export default Ember.Component.extend(TransitionSupport, {
   },
 
   /**
-   * Clean up after modal is hidden and call closedAction
+   * Clean up after modal is hidden and call onHidden
    *
    * @method hideModal
    * @private
