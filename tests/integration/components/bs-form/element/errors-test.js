@@ -15,7 +15,7 @@ test('is empty by default', function(assert) {
 
   this.render(hbs`{{bs-form/element/errors show=false messages=messages}}`);
 
-  assert.equal(this.$(formFeedbackClass()).length, 0);
+  assert.equal(this.$(`.${formFeedbackClass()}`).length, 0);
 });
 
 test('shows first message', function(assert) {
@@ -24,6 +24,6 @@ test('shows first message', function(assert) {
 
   this.render(hbs`{{bs-form/element/errors show=true messages=messages}}`);
 
-  assert.equal(this.$(formFeedbackClass()).length, 1);
-  assert.equal(this.$(formFeedbackClass()).text().trim(), 'foo');
+  assert.equal(this.$(`.${formFeedbackClass()}`).length, 1);
+  assert.equal(this.$(`.${formFeedbackClass()}`).text().trim(), 'foo');
 });
