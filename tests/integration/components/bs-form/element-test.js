@@ -481,6 +481,26 @@ test('shows validation warnings', function(assert) {
   );
 });
 
+test('shows custom error immediately', function(assert) {
+  this.set('model', Ember.Object.create({ name: null }));
+  this.set('error', 'some error');
+  this.render(hbs`
+      {{bs-form/element property='name' elementId='child' hasValidator=true customError=error model=model}}
+  `);
+  assert.ok(
+    this.$('.form-group').hasClass('has-error'),
+    'custom error is shown immediately'
+  );
+  assert.equal(this.$('.form-group .help-block').text().trim(), 'some error');
+  Ember.run(() => {
+    this.set('error', null);
+  });
+  assert.notOk(
+    this.$('.form-group').hasClass('has-error'),
+    'form group isn\'t shown as having errors if there aren\'t any'
+  );
+});
+
 test('events enabling validation rendering are configurable per `showValidationOn` (array)', function(assert) {
   this.set('errors', Ember.A(['Invalid']));
   this.set('model', Ember.Object.create({ name: null }));
