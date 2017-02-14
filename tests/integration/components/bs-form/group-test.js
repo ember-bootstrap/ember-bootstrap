@@ -1,4 +1,5 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
+import { test, testBS3, testBS4 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-form/group', 'Integration | Component | bs-form/group', {
@@ -10,12 +11,20 @@ test('component has form-group bootstrap class', function(assert) {
   assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
 });
 
-test('support size classes', function(assert) {
+testBS3('support size classes', function(assert) {
   this.render(hbs`{{bs-form/group size="lg"}}`);
   assert.equal(this.$('.form-group').hasClass('form-group-lg'), true, 'form-group has large class');
 
   this.render(hbs`{{bs-form/group size="sm"}}`);
   assert.equal(this.$('.form-group').hasClass('form-group-sm'), true, 'form-group has small class');
+});
+
+testBS4('support size classes', function(assert) {
+  this.render(hbs`{{bs-form/group size="lg"}}`);
+  assert.equal(this.$('.form-group').hasClass('form-control-lg'), true, 'form-group has large class');
+
+  this.render(hbs`{{bs-form/group size="sm"}}`);
+  assert.equal(this.$('.form-group').hasClass('form-control-sm'), true, 'form-group has small class');
 });
 
 const validations = {

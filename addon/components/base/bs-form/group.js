@@ -36,10 +36,9 @@ export default Ember.Component.extend(SizeClass, {
   /**
    * @property classTypePrefix
    * @type String
-   * @default 'form-group'
+   * @default 'form-group' (BS3) or 'form-control' (BS4)
    * @private
    */
-  classTypePrefix: 'form-group',
 
   /**
    * Whether to show validation state icons.
