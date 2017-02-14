@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { moduleForComponent } from 'ember-qunit';
-import { test, visibilityClass } from '../../helpers/bootstrap-test';
+import { test, defaultButtonClass, visibilityClass } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-modal-simple', 'Integration | Component | bs-modal-simple', {
@@ -39,8 +39,8 @@ test('Simple modal has default CSS classes', function(assert) {
 test('Simple modal supports custom buttons', function(assert) {
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok"}}Hello world!{{/bs-modal-simple}}`);
 
-  assert.equal(this.$('.modal .modal-footer button.btn-default').length, 1, 'Modal has close button.');
-  assert.equal(this.$('.modal .modal-footer button.btn-default').text().trim(), 'Cancel', 'Close button has correct title.');
+  assert.equal(this.$(`.modal .modal-footer button.${defaultButtonClass()}`).length, 1, 'Modal has close button.');
+  assert.equal(this.$(`.modal .modal-footer button.${defaultButtonClass()}`).text().trim(), 'Cancel', 'Close button has correct title.');
   assert.equal(this.$('.modal .modal-footer button.btn-primary').length, 1, 'Modal has submit button.');
   assert.equal(this.$('.modal .modal-footer button.btn-primary').text().trim(), 'Ok', 'Submit button has correct title.');
 

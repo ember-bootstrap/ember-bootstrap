@@ -35,6 +35,10 @@ export function openClass() {
   return versionDependent('open', 'show');
 }
 
+export function defaultButtonClass() {
+  return versionDependent('btn-default', 'btn-secondary');
+}
+
 export function placementClassFor(type, placement) {
   return versionDependent(placement, `${type}-${placement}`);
 }
