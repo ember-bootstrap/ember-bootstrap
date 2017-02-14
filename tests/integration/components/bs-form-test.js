@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import test from 'ember-sinon-qunit/test-support/test';
+import { formFeedbackClass, test } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -108,7 +108,7 @@ test('Submitting the form with invalid validation shows validation errors', func
       'validation errors are shown after form submission'
     );
     assert.equal(
-      this.$('form .form-group .help-block').text().trim(),
+      this.$(`form .form-group .${formFeedbackClass()}`).text().trim(),
       'There is an error'
     );
     done();

@@ -99,7 +99,7 @@ const nonDefaultLayouts = A([
 
  * `validation` is set to 'error', which will set the `has-error` CSS class
  * the `errorIcon` feedback icon is displayed if `controlType` is a text field
- * the validation messages are displayed as Bootstrap `help-block`s
+ * the validation messages are displayed as Bootstrap `help-block`s in BS3 and `form-text` in BS4
 
  The same applies for warning messages, if the used validation library supports this. (Currently only
  [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations))

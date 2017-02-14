@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import test from 'ember-sinon-qunit/test-support/test';
+import { formFeedbackClass, test } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -444,7 +444,7 @@ test('shows validation errors', function(assert) {
     this.$('.form-group').hasClass('has-error'),
     'validation errors are shown after user interaction when errors are present (child)'
   );
-  assert.equal(this.$('.form-group .help-block').text().trim(), 'Invalid');
+  assert.equal(this.$(`.form-group .${formFeedbackClass()}`).text().trim(), 'Invalid');
   Ember.run(() => {
     this.set('errors', Ember.A());
   });
@@ -471,7 +471,7 @@ test('shows validation warnings', function(assert) {
     this.$('.form-group').hasClass('has-warning'),
     'validation warnings are shown after user interaction when warnings are present'
   );
-  assert.equal(this.$('.form-group .help-block').text().trim(), 'Insecure');
+  assert.equal(this.$(`.form-group .${formFeedbackClass()}`).text().trim(), 'Insecure');
   Ember.run(() => {
     this.set('warnings', Ember.A());
   });

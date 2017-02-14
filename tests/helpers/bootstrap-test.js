@@ -39,6 +39,10 @@ export function defaultButtonClass() {
   return versionDependent('btn-default', 'btn-secondary');
 }
 
+export function formFeedbackClass() {
+  return versionDependent('help-block', 'form-text');
+}
+
 export function placementClassFor(type, placement) {
   return versionDependent(placement, `${type}-${placement}`);
 }
