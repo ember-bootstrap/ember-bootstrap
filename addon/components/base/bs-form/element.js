@@ -721,7 +721,7 @@ export default FormGroup.extend({
    * @param {String} property The value of `property`
    * @public
    */
-  onChange() {},
+  onChange(value, model, property) {}, // eslint-disable-line no-unused-vars
 
   init() {
     this._super(...arguments);
