@@ -11,6 +11,11 @@ test('component has form-group bootstrap class', function(assert) {
   assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
 });
 
+testBS4('component has row class for horizontal layouts', function(assert) {
+  this.render(hbs`{{bs-form/group formLayout="horizontal"}}`);
+  assert.equal(this.$(':first-child').hasClass('row'), true, 'component has row class');
+});
+
 testBS3('support size classes', function(assert) {
   this.render(hbs`{{bs-form/group size="lg"}}`);
   assert.equal(this.$('.form-group').hasClass('form-group-lg'), true, 'form-group has large class');
