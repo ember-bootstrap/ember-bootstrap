@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import { formFeedbackClass, test } from '../../helpers/bootstrap-test';
+import { formFeedbackClass, test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -7,7 +7,7 @@ moduleForComponent('bs-form', 'Integration | Component | bs-form', {
   integration: true
 });
 
-test('form has correct CSS class', function(assert) {
+testBS3('form has correct CSS class', function(assert) {
   this.render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
 
   let classSpec = {
@@ -18,7 +18,23 @@ test('form has correct CSS class', function(assert) {
 
   for (let layout in classSpec) {
     this.set('formLayout', layout);
-    assert.equal(this.$('form').hasClass(classSpec[layout]), true, 'form has expected class.');
+    assert.equal(this.$('form').hasClass(classSpec[layout]), true, `form has expected class for ${layout}`);
+  }
+});
+
+testBS4('form has correct markup', function(assert) {
+  this.render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
+
+  let classSpec = {
+    vertical: ['form', false],
+    horizontal: ['form-horizontal', false],
+    inline: ['form-inline', true]
+  };
+
+  for (let layout in classSpec) {
+    this.set('formLayout', layout);
+    let expectation = classSpec[layout];
+    assert.equal(this.$('form').hasClass(expectation[0]), expectation[1], `form has expected markup for ${layout}`);
   }
 });
 

@@ -95,10 +95,6 @@ export default Ember.Component.extend({
    * @protected
    *
    */
-  layoutClass: computed('formLayout', function() {
-    let layout = this.get('formLayout');
-    return layout === 'vertical' ? 'form' : `form-${layout}`;
-  }),
 
   /**
    * Set a model that this form should represent. This serves several purposes:
