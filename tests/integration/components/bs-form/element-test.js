@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import { formFeedbackClass, test } from '../../../helpers/bootstrap-test';
+import { formFeedbackClass, test, testBS3 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -348,13 +348,13 @@ test('if invisibleLabel is true sr-only class is added to label', function(asser
   });
 });
 
-test('adjusts validation icon position if there is an input group', function(assert) {
+testBS3('adjusts validation icon position if there is an input group', function(assert) {
   assert.expect(6);
   this.set('validation', 'success');
   this.set('formLayout', 'vertical');
   this.render(hbs`
     {{#bs-form formLayout=formLayout as |form|}}
-      {{#form.element validation=validation label='ajusts validation icon position' classNames='addon'}}
+      {{#form.element validation=validation label='adjusts validation icon position' classNames='addon'}}
         <div class="input-group">
           <input class="form-control">
           <div class="input-group-addon">
@@ -362,7 +362,7 @@ test('adjusts validation icon position if there is an input group', function(ass
           </div>
         </div>
       {{/form.element}}
-      {{#form.element validation=validation label='ajusts validation icon position' classNames='button'}}
+      {{#form.element validation=validation label='adjusts validation icon position' classNames='button'}}
         <div class="input-group">
           <input class="form-control">
           <div class="input-group-btn">
