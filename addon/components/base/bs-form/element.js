@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-form/element';
-import FormGroup from './group';
+import FormGroup from 'ember-bootstrap/components/bs-form/group';
 
 const {
   computed,
