@@ -13,7 +13,7 @@ const {
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
   Allows setting a `model` that nested `Components.FormElement`s can access, and that can provide form validation (see below)
 
-  You can use whatever markup you like within the form:
+  You can use whatever markup you like within the form. The following shows Bootstrap 3 usage for the internal markup.
 
  ```handlebars
    {{#bs-form onSubmit=(action "submit") as |form|}}

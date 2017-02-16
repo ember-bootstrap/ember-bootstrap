@@ -7,7 +7,7 @@ const { computed } = Ember;
 
 /**
  This component renders a `<div class="form-group">` element, with support for validation states and feedback icons.
- Use as a block level component:
+ You can use it as a block level component. The following shows Bootstrap 3 usage for the internal markup.
 
  ```hbs
  {{#bs-form as |form|}}
