@@ -553,7 +553,7 @@ export default FormGroup.extend({
   },
 
   /**
-   * The validation ("error" or "success") or null if no validation is to be shown. Automatically computed from the
+   * The validation ("error" (BS3)/"danger" (BS4), "warning", or "success") or null if no validation is to be shown. Automatically computed from the
    * models validation state.
    *
    * @property validation

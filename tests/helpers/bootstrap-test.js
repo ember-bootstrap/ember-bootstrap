@@ -43,6 +43,10 @@ export function formFeedbackClass() {
   return versionDependent('help-block', 'form-text');
 }
 
+export function validationErrorClass() {
+  return versionDependent('has-error', 'has-danger');
+}
+
 export function placementClassFor(type, placement) {
   return versionDependent(placement, `${type}-${placement}`);
 }

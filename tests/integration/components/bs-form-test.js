@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import { formFeedbackClass, test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
+import { formFeedbackClass, test, testBS3, testBS4, validationErrorClass } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -112,7 +112,7 @@ test('Submitting the form with invalid validation shows validation errors', func
   this.render(hbs`{{#bs-form model=model hasValidator=true validate=validateStub as |form|}}{{form.element hasValidator=true errors=errors}}{{/bs-form}}`);
 
   assert.notOk(
-    this.$('form .form-group').hasClass('has-error'),
+    this.$('form .form-group').hasClass(validationErrorClass()),
     'validation errors aren\'t shown before user interaction'
   );
   this.$('form').submit();
@@ -120,7 +120,7 @@ test('Submitting the form with invalid validation shows validation errors', func
   let done = assert.async();
   setTimeout(() => {
     assert.ok(
-      this.$('form .form-group').hasClass('has-error'),
+      this.$('form .form-group').hasClass(validationErrorClass()),
       'validation errors are shown after form submission'
     );
     assert.equal(

@@ -191,6 +191,9 @@ export default Ember.Component.extend(SizeClass, {
    * But you can use custom states as well. This will set a has-<state> class, and (if `useIcons`is true)
    * a feedback whose class is taken from the <state>Icon property
    *
+   * Note that BS4 uses the `has-danger` class for the `error` validation state and does not automatically
+   * import glyphicons.
+   *
    * @property validation
    * @type string
    * @public
@@ -203,10 +206,10 @@ export default Ember.Component.extend(SizeClass, {
    * @readonly
    * @private
    */
-  validationClass: computed('validation', function() {
-    let validation = this.get('validation');
+  validationClass: computed('_validationType', function() {
+    let validation = this.get('_validationType');
     if (!Ember.isBlank(validation)) {
-      return `has-${this.get('validation')}`;
+      return `has-${this.get('_validationType')}`;
     }
   }).readOnly()
 });
