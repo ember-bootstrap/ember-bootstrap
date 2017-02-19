@@ -488,15 +488,15 @@ test('shows custom error immediately', function(assert) {
       {{bs-form/element property='name' elementId='child' hasValidator=true customError=error model=model}}
   `);
   assert.ok(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'custom error is shown immediately'
   );
-  assert.equal(this.$('.form-group .help-block').text().trim(), 'some error');
+  assert.equal(this.$(`.form-group .${formFeedbackClass()}`).text().trim(), 'some error');
   Ember.run(() => {
     this.set('error', null);
   });
   assert.notOk(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'form group isn\'t shown as having errors if there aren\'t any'
   );
 });

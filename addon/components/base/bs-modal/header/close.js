@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../../../templates/components/bs-modal/header/close';
+import layout from 'ember-bootstrap/templates/components/bs-modal/header/close';
 
 /**
 

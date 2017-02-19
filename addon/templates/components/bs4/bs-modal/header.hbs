@@ -1,8 +1,8 @@
 {{#if hasBlock}}
-    {{yield}}
+  {{yield}}
 {{else}}
-    <h5 class="modal-title">{{title}}</h5>
+  {{#bs-modal/header/title}}{{title}}{{/bs-modal/header/title}}
 {{/if}}
 {{#if closeButton}}
-    <button type="button" class="close" aria-label="Close" onclick={{onClose}}><span aria-hidden="true">&times;</span></button>
+  {{bs-modal/header/close onClick=(action onClose)}}
 {{/if}}
