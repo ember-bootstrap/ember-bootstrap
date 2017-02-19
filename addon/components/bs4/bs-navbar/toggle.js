@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import NavbarToggle from 'ember-bootstrap/components/base/bs-navbar/toggle';
 
+const { computed } = Ember;
+
 export default NavbarToggle.extend({
   classNames: ['navbar-toggler'],
   classNameBindings: ['alignmentClass'],
@@ -16,11 +18,11 @@ export default NavbarToggle.extend({
    */
   align: null,
 
-  alignmentClass: Ember.computed('align', function() {
+  alignmentClass: computed('align', function() {
     let align = this.get('align');
 
     if (align) {
       return `navbar-toggler-${align}`;
     }
-  })
+  }).readOnly()
 });
