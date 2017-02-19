@@ -1,14 +1,18 @@
-var expect = require('chai').expect;
+'use strict';
+
+const expect = require('chai').expect;
+const setupTest = require('ember-fastboot-addon-tests').setupTest;
 
 describe('tooltip', function() {
+  setupTest();
 
   it('renders', function() {
     return this.visit('/tooltip')
       .then(function(res) {
-        var $ = res.jQuery;
-        // var response = res.response;
+        let $ = res.jQuery;
+        let response = res.response;
 
-        expect($('body').length).to.equal(1);
+        expect(response.statusCode).to.equal(200);
         expect($('h1').text().trim()).to.equal('tooltip');
         expect($('button').text().trim()).to.equal('Tooltip');
 

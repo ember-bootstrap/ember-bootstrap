@@ -1,13 +1,18 @@
-var expect = require('chai').expect;
+'use strict';
+
+const expect = require('chai').expect;
+const setupTest = require('ember-fastboot-addon-tests').setupTest;
 
 describe('modal', function() {
+  setupTest();
 
   it('renders', function() {
     return this.visit('/modal')
       .then(function(res) {
-        var $ = res.jQuery;
-        // var response = res.response;
+        let $ = res.jQuery;
+        let response = res.response;
 
+        expect(response.statusCode).to.equal(200);
         expect($('#modal').length).to.equal(1);
 
         // @todo ember-wormhole has still several issues with FastBoot
