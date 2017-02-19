@@ -44,7 +44,7 @@
     "ember-cp-validations": "^3.1.4",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
-    "ember-fastboot-addon-tests": "^0.1.0",
+    "ember-fastboot-addon-tests": "^0.2.0",
     "ember-load-initializers": "^0.5.1",
     "ember-markdown-it": "0.0.5",
     "ember-resolver": "^2.0.3",
