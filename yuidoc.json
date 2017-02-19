@@ -4,7 +4,8 @@
   "version": "1.0.0-alpha.4",
   "options": {
     "paths": [
-      "addon"
+      "addon/components/base",
+      "addon/mixins"
     ],
     "exclude": "vendor",
     "outdir": "docs/api",
