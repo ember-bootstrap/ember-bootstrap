@@ -63,7 +63,6 @@
     "loader.js": "^4.0.10",
     "merge-stream": "^1.0.1",
     "mocha": "2.5.3",
-    "rsvp": "^3.3.3",
     "striptags": "^2.1.1"
   },
   "description": "Twitter Bootstrap components for Ember.js",
@@ -79,7 +78,8 @@
     "ember-cli-babel": "^5.1.7",
     "ember-cli-htmlbars": "^1.0.10",
     "ember-runtime-enumerable-includes-polyfill": "^1.0.1",
-    "ember-wormhole": "^0.4.1"
+    "ember-wormhole": "^0.4.1",
+    "rsvp": "^3.3.3"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
