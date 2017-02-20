@@ -8,7 +8,7 @@ $navbar-inverse-toggle-border-color: #fff;
 $navbar-inverse-toggle-hover-bg: darken($navbar-inverse-bg, 10%);
 
 
-//$font-size-base: 16px;
+$font-size-base: 16px;
 $font-family-sans-serif: 'myriad-pro', sans-serif;
 
 // make sure this is defined so Sass compiles without errors even for BS4 build
