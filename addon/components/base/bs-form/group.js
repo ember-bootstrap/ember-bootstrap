@@ -31,7 +31,7 @@ export default Ember.Component.extend(SizeClass, {
   layout,
 
   classNames: ['form-group'],
-  classNameBindings: ['validationClass', 'hasFeedback'],
+  classNameBindings: ['validationClass'],
 
   /**
    * @property classTypePrefix
