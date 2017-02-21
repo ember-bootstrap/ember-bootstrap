@@ -40,7 +40,7 @@ export function defaultButtonClass() {
 }
 
 export function formFeedbackClass() {
-  return versionDependent('help-block', 'form-text');
+  return versionDependent('help-block', 'form-control-feedback');
 }
 
 export function validationErrorClass() {
