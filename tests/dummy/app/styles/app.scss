@@ -18,3 +18,14 @@ body {
 .logo {
   margin-top: 20px;
 }
+
+.jumbotron {
+  pre {
+    font-size: 20px;
+    padding: 20px;
+    background-color: $brand-primary;
+    color: #fff;
+    border: none;
+    border-bottom: solid 3px $brand-secondary;
+  }
+}
