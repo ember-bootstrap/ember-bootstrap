@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/components/base/bs-button-group.js - ember-bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../assets/css/api.css">
+    <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-toggle-wrapper visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="/" class="navbar-brand">ember-bootstrap</a>
+        </div>
+        <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="navbar-nav nav">
+                <li><a href="/#/getting-started">Getting Started</a></li>
+                <li><a href="/#/components">Components</a></li>
+                <li><a href="/api">API v1.0</a></li>
+                <li><a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a></li>
+
+            </ul>
+            <ul class="navbar-nav nav navbar-right">
+                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>API Docs <span class="small">1.0.0-alpha.5</span></h1>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>addon/components/base/bs-button-group.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-button-group&#x27;;
+import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
+
+const {
+  A,
+  copy,
+  computed,
+  isArray
+} = Ember;
+
+/**
+ Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
+ See http://getbootstrap.com/components/#btn-groups
+
+ Use as a block level component with any number of [Components.Button](Components.Button.html) components provided as
+ a yielded pre-configured contextual component:
+
+ &#x60;&#x60;&#x60;handlebars
+ {{#bs-button-group as |bg|}}
+   {{#bg.button}}1{{/bg.button}}
+   {{#bg.button}}2{{/s-bg.button}}
+   {{#bg.button}}3{{/bg.button}}
+ {{/bs-button-group}}
+ &#x60;&#x60;&#x60;
+
+ ### Radio-like behaviour
+
+ Use the &#x60;type&#x60; property set to &quot;radio&quot; to make the child buttons toggle like radio buttons, i.e. only one button can be active.
+ Set the &#x60;value&#x60; property of the buttons to something meaningful. The &#x60;value&#x60; property of the button group will then reflect
+ the value of the active button:
+
+ &#x60;&#x60;&#x60;handlebars
+ {{#bs-button-group value=buttonGroupValue type=&quot;radio&quot; onChange=(action (mut buttonGroupValue)) as |bg|}}
+   {{#bg.button type=&quot;default&quot; value=1}}1{{/bg.button}}
+   {{#bg.button type=&quot;default&quot; value=2}}2{{/bg.button}}
+   {{#bg.button type=&quot;default&quot; value=3}}3{{/bg.button}}
+ {{/bs-button-group}}
+
+ You selected: {{buttonGroupValue}}!
+ &#x60;&#x60;&#x60;
+
+ ### Checkbox-like behaviour
+
+ Set &#x60;type&#x60; to &quot;checkbox&quot; to make any number of child buttons selectable. The &#x60;value&#x60; property will be an array
+ of all the values of the active buttons:
+
+ &#x60;&#x60;&#x60;handlebars
+ {{#bs-button-group value=buttonGroupValue type=&quot;checkbox&quot; onChange=(action (mut buttonGroupValue)) as |bg|}}
+   {{#bg.button type=&quot;default&quot; value=1}}1{{/bg.button}}
+   {{#bg.button type=&quot;default&quot; value=2}}2{{/bg.button}}
+   {{#bg.button type=&quot;default&quot; value=3}}3{{/bg.button}}
+ {{/bs-button-group}}
+
+ You selected:
+ &lt;ul&gt;
+ {{#each value in buttonGroupValue}}
+   &lt;li&gt;{{value}}&lt;/li&gt;
+ {{/each}}
+ &lt;/ul&gt;
+ &#x60;&#x60;&#x60;
+
+ @class ButtonGroup
+ @namespace Components
+ @extends Ember.Component
+ @uses Mixins.SizeClass
+ @public
+ */
+export default Ember.Component.extend(SizeClass, {
+  layout,
+  ariaRole: &#x27;group&#x27;,
+  classNames: [&#x27;btn-group&#x27;],
+  classNameBindings: [&#x27;vertical:btn-group-vertical&#x27;, &#x27;justified:btn-group-justified&#x27;],
+
+  /**
+   * @property classTypePrefix
+   * @type String
+   * @default &#x27;btn-group&#x27;
+   * @protected
+   */
+  classTypePrefix: &#x27;btn-group&#x27;,
+
+  /**
+   * Set to true for a vertically stacked button group, see http://getbootstrap.com/components/#btn-groups-vertical
+   *
+   * @property vertical
+   * @type boolean
+   * @default false
+   * @public
+   */
+  vertical: false,
+
+  /**
+   * Set to true for the buttons to stretch at equal sizes to span the entire width of its parent.
+   *
+   * *Important*: You have to wrap every button component in a &#x60;div class=&quot;btn-group&quot;&gt;&#x60;:
+   *
+   * &#x60;&#x60;&#x60;handlebars
+   * &lt;div class=&quot;btn-group&quot; role=&quot;group&quot;&gt;
+   * {{#bs-button}}My Button{{/bs-button}}
+   * &lt;/div&gt;
+   * &#x60;&#x60;&#x60;
+   *
+   * See http://getbootstrap.com/components/#btn-groups-justified
+   *
+   * @property justified
+   * @type boolean
+   * @default false
+   * @public
+   */
+  justified: false,
+
+  /**
+   * The type of the button group specifies how child buttons behave and how the &#x60;value&#x60; property will be computed:
+   *
+   * ### null
+   * If &#x60;type&#x60; is not set (null), the button group will add no functionality besides Bootstrap styling
+   *
+   * ### radio
+   * if &#x60;type&#x60; is set to &quot;radio&quot;, the buttons will behave like radio buttons:
+   * * the &#x60;value&#x60; property of the button group will reflect the &#x60;value&#x60; property of the active button
+   * * thus only one button may be active
+   *
+   * ### checkbox
+   * if &#x60;type&#x60; is set to &quot;checkbox&quot;, the buttons will behave like checkboxes:
+   * * any number of buttons may be active
+   * * the &#x60;value&#x60; property of the button group will be an array containing the &#x60;value&#x60; properties of all active buttons
+   *
+   * @property type
+   * @type string
+   * @default null
+   * @public
+   */
+  type: null,
+
+  /**
+   * The value of the button group, computed by its child buttons.
+   * See the &#x60;type&#x60; property for how the value property is constructed.
+   *
+   * When you set the value, the corresponding buttons will be activated:
+   * * use a single value for a radio button group to activate the button with the same value
+   * * use an array of values for a checkbox button group to activate all the buttons with values contained in the array
+   *
+   * @property value
+   * @type array
+   * @public
+   */
+  value: undefined,
+
+  /**
+   * @property isRadio
+   * @type boolean
+   * @private
+   */
+  isRadio: computed.equal(&#x27;type&#x27;, &#x27;radio&#x27;).readOnly(),
+
+  /**
+   * This action is called whenever the button group&#x27;s value should be changed because the user clicked a button.
+   * You will receive the new value of the button group (based on the &#x60;type&#x60; property), which you should use to update the
+   * &#x60;value&#x60; property.
+   *
+   * @event onChange
+   * @param {*} value
+   * @public
+   */
+  onChange() {},
+
+  actions: {
+    buttonPressed(pressedValue) {
+      let newValue = copy(this.get(&#x27;value&#x27;));
+
+      if (this.get(&#x27;isRadio&#x27;)) {
+        if (newValue !== pressedValue) {
+          newValue = pressedValue;
+        }
+      } else {
+        if (!isArray(newValue)) {
+          newValue = A([pressedValue]);
+        } else {
+          newValue = A(newValue);
+          if (newValue.includes(pressedValue)) {
+            newValue.removeObject(pressedValue);
+          } else {
+            newValue.pushObject(pressedValue);
+          }
+        }
+      }
+
+      this.get(&#x27;onChange&#x27;)(newValue);
+    }
+  }
+});
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3>Classes</h3>
+            
+            <ul id="api-classes" class="nav nav-pills nav-stacked">
+                    <li class="nav-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
+                    <li class="nav-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
+                    <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementControl.html">Components.FormElementControl</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementControlCheckbox.html">Components.FormElementControlCheckbox</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementControlInput.html">Components.FormElementControlInput</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutHorizontalCheckbox.html">Components.FormElementLayoutHorizontalCheckbox</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutInline.html">Components.FormElementLayoutInline</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
+                    <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ModalHeaderClose.html">Components.ModalHeaderClose</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ModalHeaderTitle.html">Components.ModalHeaderTitle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
+                    <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
+                    <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
+                    <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+            </ul>        </div>
+    </div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

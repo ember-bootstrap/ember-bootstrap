@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.4</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.5</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -54,13 +54,19 @@
 <div class="well well-small">
         <span class="label label-public">public</span>
 
+        <div class="uses">
+            Uses
+            <ul class="inline commas">
+                    <li><a href="Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
+            </ul>
+        </div>
 
         <div class="extends">
             Extends Ember.Component
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_bs-modal.js.html#l13"><code>addon&#x2F;components&#x2F;bs-modal.js:13</code></a>
+            Defined in: <a href="../files/addon_components_base_bs-modal.js.html#l13"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:13</code></a>
         </div>
 
 
@@ -68,7 +74,8 @@
 
 
 <div class="well well-small">
-    <p>Component for creating <a href="http://getbootstrap.com/javascript/#modals">Bootstrap modals</a> with custom markup:</p>
+    <p>Component for creating <a href="http://getbootstrap.com/javascript/#modals">Bootstrap modals</a> with custom markup.</p>
+<h3>Usage</h3>
 <pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal onSubmit=(action &quot;submit&quot;) as |modal|}}
    {{#modal.header}}
      &lt;h4 class=&quot;modal-title&quot;&gt;&lt;i class=&quot;glyphicon glyphicon-alert&quot;&gt;&lt;/i&gt; Alert&lt;/h4&gt;
@@ -222,8 +229,8 @@ Furthermore references to the following actions are yielded:</li>
                                 <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
 
                             </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_in" data-tablink="in">in</a>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_fastboot" data-tablink="fastboot">fastboot</a>
 
                             </li>
                             <li class="index-item property private">
@@ -286,12 +293,24 @@ Furthermore references to the following actions are yielded:</li>
                                 <a href="#" data-tabid="#properties" data-anchor="#property_showBackdrop" data-tablink="showBackdrop">showBackdrop</a>
 
                             </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showModal" data-tablink="showModal">showModal</a>
+
+                            </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_size" data-tablink="size">size</a>
 
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_transitionDuration" data-tablink="transitionDuration">transitionDuration</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_transitionsEnabled" data-tablink="transitionsEnabled">transitionsEnabled</a>
+
+                            </li>
+                            <li class="index-item property private inherited">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_usesTransition" data-tablink="usesTransition">usesTransition</a>
 
                             </li>
                     </ul>
@@ -319,7 +338,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l521"><code>addon&#x2F;components&#x2F;bs-modal.js:521</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l524"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:524</code></a>
                             </p>
                     
                     
@@ -349,7 +368,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l544"><code>addon&#x2F;components&#x2F;bs-modal.js:544</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l547"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:547</code></a>
                             </p>
                     
                     
@@ -379,7 +398,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l449"><code>addon&#x2F;components&#x2F;bs-modal.js:449</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l452"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:452</code></a>
                             </p>
                     
                     
@@ -426,7 +445,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l513"><code>addon&#x2F;components&#x2F;bs-modal.js:513</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l516"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:516</code></a>
                             </p>
                     
                     
@@ -456,7 +475,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l405"><code>addon&#x2F;components&#x2F;bs-modal.js:405</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l408"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:408</code></a>
                             </p>
                     
                     
@@ -487,7 +506,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l429"><code>addon&#x2F;components&#x2F;bs-modal.js:429</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l432"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:432</code></a>
                             </p>
                     
                     
@@ -518,7 +537,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l533"><code>addon&#x2F;components&#x2F;bs-modal.js:533</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l536"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:536</code></a>
                             </p>
                     
                     
@@ -548,7 +567,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l570"><code>addon&#x2F;components&#x2F;bs-modal.js:570</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l573"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:573</code></a>
                             </p>
                     
                     
@@ -578,7 +597,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l499"><code>addon&#x2F;components&#x2F;bs-modal.js:499</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l502"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:502</code></a>
                             </p>
                     
                     
@@ -609,7 +628,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l558"><code>addon&#x2F;components&#x2F;bs-modal.js:558</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l561"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:561</code></a>
                             </p>
                     
                     
@@ -639,7 +658,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l358"><code>addon&#x2F;components&#x2F;bs-modal.js:358</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l361"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:361</code></a>
                             </p>
                     
                     
@@ -670,7 +689,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l342"><code>addon&#x2F;components&#x2F;bs-modal.js:342</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l345"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:345</code></a>
                             </p>
                     
                     
@@ -706,7 +725,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l72"><code>addon&#x2F;components&#x2F;bs-modal.js:72</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l75"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:75</code></a>
                             </p>
                     
                     
@@ -735,7 +754,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l212"><code>addon&#x2F;components&#x2F;bs-modal.js:212</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l215"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:215</code></a>
                             </p>
                     
                     
@@ -764,7 +783,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l105"><code>addon&#x2F;components&#x2F;bs-modal.js:105</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l108"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:108</code></a>
                             </p>
                     
                     
@@ -795,7 +814,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l192"><code>addon&#x2F;components&#x2F;bs-modal.js:192</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l195"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:195</code></a>
                             </p>
                     
                     
@@ -826,7 +845,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l169"><code>addon&#x2F;components&#x2F;bs-modal.js:169</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l172"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:172</code></a>
                             </p>
                     
                     
@@ -856,7 +875,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l157"><code>addon&#x2F;components&#x2F;bs-modal.js:157</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l160"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:160</code></a>
                             </p>
                     
                     
@@ -886,7 +905,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l231"><code>addon&#x2F;components&#x2F;bs-modal.js:231</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l234"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:234</code></a>
                             </p>
                     
                     
@@ -917,7 +936,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l78"><code>addon&#x2F;components&#x2F;bs-modal.js:78</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l81"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:81</code></a>
                             </p>
                     
                     
@@ -932,9 +951,9 @@ Furthermore references to the following actions are yielded:</li>
                     
                     
                     </div>
-                    <div id="property_in" class="property item private">
-                        <h3 class="name">in
-                            <span class="small">boolean</span>
+                    <div id="property_fastboot" class="property item private inherited">
+                        <h3 class="name">fastboot
+                            <span class="small">{Ember.Service}</span>
                         </h3>
                     
                     
@@ -946,20 +965,18 @@ Furthermore references to the following actions are yielded:</li>
                     
                     
                         <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l95"><code>addon&#x2F;components&#x2F;bs-modal.js:95</code></a>
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.TransitionSupport.html#property_fastboot">Mixins.TransitionSupport</a>:
+                            <a href="../files/addon_mixins_transition-support.js.html#l21"><code>addon&#x2F;mixins&#x2F;transition-support.js:21</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Used to apply Bootstrap's &quot;in&quot; class</p>
-                    
+                            Access to the fastboot service if available
                         </div>
                     
-                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
@@ -979,7 +996,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l241"><code>addon&#x2F;components&#x2F;bs-modal.js:241</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l244"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:244</code></a>
                             </p>
                     
                     
@@ -1008,7 +1025,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l66"><code>addon&#x2F;components&#x2F;bs-modal.js:66</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l69"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:69</code></a>
                             </p>
                     
                     
@@ -1037,7 +1054,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l123"><code>addon&#x2F;components&#x2F;bs-modal.js:123</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l126"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:126</code></a>
                             </p>
                     
                     
@@ -1068,7 +1085,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l145"><code>addon&#x2F;components&#x2F;bs-modal.js:145</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l148"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:148</code></a>
                             </p>
                     
                     
@@ -1098,7 +1115,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l133"><code>addon&#x2F;components&#x2F;bs-modal.js:133</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l136"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:136</code></a>
                             </p>
                     
                     
@@ -1128,7 +1145,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l88"><code>addon&#x2F;components&#x2F;bs-modal.js:88</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l91"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:91</code></a>
                             </p>
                     
                     
@@ -1157,7 +1174,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l292"><code>addon&#x2F;components&#x2F;bs-modal.js:292</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l295"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:295</code></a>
                             </p>
                     
                     
@@ -1188,7 +1205,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l277"><code>addon&#x2F;components&#x2F;bs-modal.js:277</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l280"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:280</code></a>
                             </p>
                     
                     
@@ -1223,7 +1240,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l302"><code>addon&#x2F;components&#x2F;bs-modal.js:302</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l305"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:305</code></a>
                             </p>
                     
                     
@@ -1257,7 +1274,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l315"><code>addon&#x2F;components&#x2F;bs-modal.js:315</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l318"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:318</code></a>
                             </p>
                     
                     
@@ -1287,7 +1304,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l265"><code>addon&#x2F;components&#x2F;bs-modal.js:265</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l268"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:268</code></a>
                             </p>
                     
                     
@@ -1320,7 +1337,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l53"><code>addon&#x2F;components&#x2F;bs-modal.js:53</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l56"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:56</code></a>
                             </p>
                     
                     
@@ -1353,7 +1370,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l202"><code>addon&#x2F;components&#x2F;bs-modal.js:202</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l205"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:205</code></a>
                             </p>
                     
                     
@@ -1384,7 +1401,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l578"><code>addon&#x2F;components&#x2F;bs-modal.js:578</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l581"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:581</code></a>
                             </p>
                     
                     
@@ -1413,7 +1430,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l115"><code>addon&#x2F;components&#x2F;bs-modal.js:115</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l118"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:118</code></a>
                             </p>
                     
                     
@@ -1421,6 +1438,37 @@ Furthermore references to the following actions are yielded:</li>
                     
                         <div class="description">
                             
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_showModal" class="property item private">
+                        <h3 class="name">showModal
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-modal.js.html#l98"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:98</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Used to apply Bootstrap's visibility classes.</p>
+                    
                         </div>
                     
                             <p><strong>Default:</strong> false</p>
@@ -1443,7 +1491,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l181"><code>addon&#x2F;components&#x2F;bs-modal.js:181</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l184"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:184</code></a>
                             </p>
                     
                     
@@ -1474,7 +1522,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_bs-modal.js.html#l221"><code>addon&#x2F;components&#x2F;bs-modal.js:221</code></a>
+                            <a href="../files/addon_components_base_bs-modal.js.html#l224"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:224</code></a>
                             </p>
                     
                     
@@ -1486,6 +1534,64 @@ Furthermore references to the following actions are yielded:</li>
                         </div>
                     
                             <p><strong>Default:</strong> 300</p>
+                    
+                    
+                    </div>
+                    <div id="property_transitionsEnabled" class="property item private inherited">
+                        <h3 class="name">transitionsEnabled
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.TransitionSupport.html#property_transitionsEnabled">Mixins.TransitionSupport</a>:
+                            <a href="../files/addon_mixins_transition-support.js.html#l14"><code>addon&#x2F;mixins&#x2F;transition-support.js:14</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_usesTransition" class="property item private inherited">
+                        <h3 class="name">usesTransition
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Mixins.TransitionSupport.html#property_usesTransition">Mixins.TransitionSupport</a>:
+                            <a href="../files/addon_mixins_transition-support.js.html#l33"><code>addon&#x2F;mixins&#x2F;transition-support.js:33</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            Use CSS transitions?
+                        </div>
+                    
                     
                     
                     </div>
@@ -1513,16 +1619,33 @@ Furthermore references to the following actions are yielded:</li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementControl.html">Components.FormElementControl</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementControlCheckbox.html">Components.FormElementControlCheckbox</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementControlInput.html">Components.FormElementControlInput</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutHorizontalCheckbox.html">Components.FormElementLayoutHorizontalCheckbox</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutInline.html">Components.FormElementLayoutInline</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
                     <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
                     <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ModalHeaderClose.html">Components.ModalHeaderClose</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ModalHeaderTitle.html">Components.ModalHeaderTitle</a></li>
                     <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
@@ -1530,7 +1653,7 @@ Furthermore references to the following actions are yielded:</li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
-                    <li class="nav-public"><a href="../classes/Components.NavLink.html">Components.NavLink</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
                     <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>

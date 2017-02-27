@@ -242,6 +242,16 @@ $(function() {
     $(window).on('hashchange', moveToWindowHash);
   }
 
+  function setUpPrivateApis() {
+    $('#api-show-private').click(function(e) {
+      if ($(e.target).is(':checked')) {
+        $('body').addClass('show-private-apis');
+      } else {
+        $('body').removeClass('show-private-apis');
+      }
+    });
+  }
+
   // ************************************************************************* //
   //  Immediate function calls
   // ************************************************************************* //
@@ -253,5 +263,6 @@ $(function() {
   if (window.location.hash) {
     moveToWindowHash();
   }
+  setUpPrivateApis();
 
 });

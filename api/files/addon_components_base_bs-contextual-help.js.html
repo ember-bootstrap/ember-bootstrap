@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>addon/components/base/bs-contextual-help.js - ember-bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../assets/css/api.css">
+    <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-toggle-wrapper visible-xs">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".js-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a href="/" class="navbar-brand">ember-bootstrap</a>
+        </div>
+        <div class="collapse navbar-collapse js-navbar-collapse">
+            <ul class="navbar-nav nav">
+                <li><a href="/#/getting-started">Getting Started</a></li>
+                <li><a href="/#/components">Components</a></li>
+                <li><a href="/api">API v1.0</a></li>
+                <li><a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a></li>
+
+            </ul>
+            <ul class="navbar-nav nav navbar-right">
+                <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/simonihmig" target="_blank"><i class="fa fa-twitter"></i></a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>API Docs <span class="small">1.0.0-alpha.5</span></h1>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>addon/components/base/bs-contextual-help.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
+import getPosition from &#x27;ember-bootstrap/utils/get-position&#x27;;
+import getCalculatedOffset from &#x27;ember-bootstrap/utils/get-calculated-offset&#x27;;
+import getParent from &#x27;ember-bootstrap/utils/get-parent&#x27;;
+
+const {
+  assert,
+  Component,
+  computed,
+  guidFor,
+  isArray,
+  isBlank,
+  observer,
+  run,
+  $,
+
+  run: {
+    later,
+    cancel,
+    bind,
+    schedule,
+    next
+  }
+} = Ember;
+const eventNamespace = &#x27;bs-contextual-help&#x27;;
+
+const InState = Ember.Object.extend({
+  hover: false,
+  focus: false,
+  click: false,
+  showHelp: computed.or(&#x27;hover&#x27;, &#x27;focus&#x27;, &#x27;click&#x27;)
+});
+
+/**
+
+ @class Components.ContextualHelp
+ @namespace Components
+ @extends Ember.Component
+ @uses Mixins.TransitionSupport
+ @private
+ */
+export default Component.extend(TransitionSupport, {
+  tagName: &#x27;&#x27;,
+
+  /**
+   * @property title
+   * @type string
+   * @public
+   */
+  title: null,
+
+  /**
+   * How to position the tooltip/popover - top | bottom | left | right
+   *
+   * @property title
+   * @type string
+   * @default &#x27;top&#x27;
+   * @public
+   */
+  placement: &#x27;top&#x27;,
+
+  _placement: computed.reads(&#x27;placement&#x27;),
+
+  /**
+   * When &#x60;true&#x60; it will dynamically reorient the tooltip/popover. For example, if &#x60;placement&#x60; is &quot;left&quot;, the
+   * tooltip/popover will display to the left when possible, otherwise it will display right.
+   *
+   * @property autoPlacement
+   * @type boolean
+   * @default false
+   * @public
+   */
+  autoPlacement: false,
+
+  /**
+   * You can programmatically show the tooltip/popover by setting this to &#x60;true&#x60;
+   *
+   * @property visible
+   * @type boolean
+   * @default false
+   * @public
+   */
+  visible: false,
+
+  /**
+   * @property inDom
+   * @type boolean
+   * @private
+   */
+  inDom: computed.reads(&#x27;visible&#x27;),
+
+  /**
+   * Set to false to disable fade animations.
+   *
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  fade: true,
+
+  /**
+   * Used to apply Bootstrap&#x27;s visibility class
+   *
+   * @property showHelp
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showHelp: computed.reads(&#x27;visible&#x27;),
+
+  /**
+   * Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the
+   * &#x60;delayShow&#x60; and &#x60;delayHide&#x60; properties.
+   *
+   * @property delay
+   * @type number
+   * @default 0
+   * @public
+   */
+  delay: 0,
+
+  /**
+   * Delay showing the tooltip/popover. This property overrides the general delay set with the &#x60;delay&#x60; property.
+   *
+   * @property delayShow
+   * @type number
+   * @default 0
+   * @public
+   */
+  delayShow: computed.reads(&#x27;delay&#x27;),
+
+  /**
+   * Delay hiding the tooltip/popover. This property overrides the general delay set with the &#x60;delay&#x60; property.
+   *
+   * @property delayHide
+   * @type number
+   * @default 0
+   * @public
+   */
+  delayHide: computed.reads(&#x27;delay&#x27;),
+
+  hasDelayShow: computed.gt(&#x27;delayShow&#x27;, 0),
+  hasDelayHide: computed.gt(&#x27;delayHide&#x27;, 0),
+
+  /**
+   * The duration of the fade transition
+   *
+   * @property transitionDuration
+   * @type number
+   * @default 150
+   * @public
+   */
+  transitionDuration: 150,
+
+  /**
+   * Keeps the tooltip/popover within the bounds of this element when &#x60;autoPlacement&#x60; is true. Can be any valid jQuery selector.
+   *
+   * @property viewportSelector
+   * @type string
+   * @default &#x27;body&#x27;
+   * @see viewportPadding
+   * @see autoPlacement
+   * @public
+   */
+  viewportSelector: &#x27;body&#x27;,
+
+  /**
+   * Take a padding into account for keeping the tooltip/popover within the bounds of the element given by &#x60;viewportSelector&#x60;.
+   *
+   * @property viewportPadding
+   * @type number
+   * @default 0
+   * @see viewportSelector
+   * @see autoPlacement
+   * @public
+   */
+  viewportPadding: 0,
+
+  /**
+   * The id of the overlay element.
+   *
+   * @property overlayId
+   * @type string
+   * @readonly
+   * @private
+   */
+  overlayId: computed(function() {
+    return &#x60;overlay-${guidFor(this)}&#x60;;
+  }),
+
+  /**
+   * The jQuery object of the overlay element.
+   *
+   * @property overlayElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  overlayElement: computed(&#x27;overlayId&#x27;, function() {
+    return Ember.$(&#x60;#${this.get(&#x27;overlayId&#x27;)}&#x60;);
+  }).volatile(),
+
+  /**
+   * The jQuery object of the arrow element.
+   *
+   * @property arrowElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  arrowElement: null,
+
+  /**
+   * The jQuery object of the viewport element.
+   *
+   * @property viewportElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  viewportElement: computed(&#x27;viewportSelector&#x27;, function() {
+    return $(this.get(&#x27;viewportSelector&#x27;));
+  }),
+
+  /**
+   * The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.
+   * You can set this to any jQuery selector to have any other element trigger the tooltip/popover.
+   * With the special value of &quot;parentView&quot; you can attach the tooltip/popover to the parent component&#x27;s element.
+   *
+   * @property triggerElement
+   * @type string
+   * @public
+   */
+  triggerElement: null,
+
+  /**
+   * @property triggerTargetElement
+   * @type {jQuery}
+   * @private
+   */
+  triggerTargetElement: computed(&#x27;triggerElement&#x27;, function() {
+    let triggerElement = this.get(&#x27;triggerElement&#x27;);
+    let $el;
+
+    if (isBlank(triggerElement)) {
+      $el = getParent(this);
+    } else if (triggerElement === &#x27;parentView&#x27;) {
+      $el = $(this.get(&#x27;parentView.element&#x27;));
+    } else {
+      $el = $(triggerElement);
+    }
+    assert(&#x27;Trigger element for tooltip/popover must be present&#x27;, $el.length === 1);
+    return $el;
+  }),
+
+  /**
+   * The event(s) that should trigger the tooltip/popover - click | hover | focus.
+   * You can set this to a single event or multiple events, given as an array or a string separated by spaces.
+   *
+   * @property triggerEvents
+   * @type array|string
+   * @default &#x27;hover focus&#x27;
+   * @public
+   */
+  triggerEvents: &#x27;hover focus&#x27;,
+
+  _triggerEvents: computed(&#x27;triggerEvents&#x27;, function() {
+    let events = this.get(&#x27;triggerEvents&#x27;);
+    if (!isArray(events)) {
+      events = events.split(&#x27; &#x27;);
+    }
+
+    return events.map((event) =&gt; {
+      switch (event) {
+        case &#x27;hover&#x27;:
+          return [&#x27;mouseenter&#x27;, &#x27;mouseleave&#x27;];
+        case &#x27;focus&#x27;:
+          return [&#x27;focusin&#x27;, &#x27;focusout&#x27;];
+        default:
+          return event;
+      }
+    }
+    );
+  }),
+
+  /**
+   * If true component will render in place, rather than be wormholed.
+   *
+   * @property renderInPlace
+   * @type boolean
+   * @default false
+   * @public
+   */
+  renderInPlace: false,
+
+  /**
+   * @property _renderInPlace
+   * @type boolean
+   * @private
+   */
+  _renderInPlace: computed(&#x27;renderInPlace&#x27;, function() {
+    return this.get(&#x27;renderInPlace&#x27;) || typeof Ember.$ !== &#x27;function&#x27; || Ember.$(&#x27;#ember-bootstrap-wormhole&#x27;).length === 0;
+  }),
+
+  /**
+   * Current hover state, &#x27;in&#x27;, &#x27;out&#x27; or null
+   *
+   * @property hoverState
+   * @type string
+   * @private
+   */
+  hoverState: null,
+
+  /**
+   * Current state for events
+   *
+   * @property inState
+   * @type {InState}
+   * @private
+   */
+  inState: computed(function() {
+    return InState.create();
+  }),
+
+  /**
+   * Ember.run timer
+   *
+   * @property timer
+   * @private
+   */
+  timer: null,
+
+  /**
+   * This action is called immediately when the tooltip/popover is about to be shown.
+   *
+   * @event onShow
+   * @public
+   */
+  onShow() {},
+
+  /**
+   * This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).
+   *
+   * @event onShown
+   * @public
+   */
+  onShown() {},
+
+  /**
+   * This action is called immediately when the tooltip/popover is about to be hidden.
+   *
+   * @event onHide
+   * @public
+   */
+  onHide() {},
+
+  /**
+   * This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).
+   *
+   * @event onHidden
+   * @public
+   */
+  onHidden() {},
+
+  /**
+   * Called when a show event has been received
+   *
+   * @method enter
+   * @param e
+   * @private
+   */
+  enter(e) {
+    if (e) {
+      let eventType = e.type === &#x27;focusin&#x27; ? &#x27;focus&#x27; : &#x27;hover&#x27;;
+      this.get(&#x27;inState&#x27;).set(eventType, true);
+    }
+
+    if (this.get(&#x27;showHelp&#x27;) || this.get(&#x27;hoverState&#x27;) === &#x27;in&#x27;) {
+      this.set(&#x27;hoverState&#x27;, &#x27;in&#x27;);
+      return;
+    }
+
+    cancel(this.timer);
+
+    this.set(&#x27;hoverState&#x27;, &#x27;in&#x27;);
+
+    if (!this.get(&#x27;hasDelayShow&#x27;)) {
+      return this.show();
+    }
+
+    this.timer = later(this, function() {
+      if (this.get(&#x27;hoverState&#x27;) === &#x27;in&#x27;) {
+        this.show();
+      }
+    }, this.get(&#x27;delayShow&#x27;));
+  },
+
+  /**
+   * Called when a hide event has been received
+   *
+   * @method leave
+   * @param e
+   * @private
+   */
+  leave(e) {
+    if (e) {
+      let eventType = e.type === &#x27;focusout&#x27; ? &#x27;focus&#x27; : &#x27;hover&#x27;;
+      this.get(&#x27;inState&#x27;).set(eventType, false);
+    }
+
+    if (this.get(&#x27;inState.showHelp&#x27;)) {
+      return;
+    }
+
+    cancel(this.timer);
+
+    this.set(&#x27;hoverState&#x27;, &#x27;out&#x27;);
+
+    if (!this.get(&#x27;hasDelayHide&#x27;)) {
+      return this.hide();
+    }
+
+    this.timer = later(this, function() {
+      if (this.get(&#x27;hoverState&#x27;) === &#x27;out&#x27;) {
+        this.hide();
+      }
+    }, this.get(&#x27;delayHide&#x27;));
+  },
+
+  /**
+   * Called for a click event
+   *
+   * @method toggle
+   * @param e
+   * @private
+   */
+  toggle(e) {
+    if (e) {
+      this.get(&#x27;inState&#x27;).toggleProperty(&#x27;click&#x27;);
+      if (this.get(&#x27;inState.showHelp&#x27;)) {
+        this.enter();
+      } else {
+        this.leave();
+      }
+    } else {
+      if (this.get(&#x27;showHelp&#x27;)) {
+        this.leave();
+      } else {
+        this.enter();
+      }
+    }
+  },
+
+  /**
+   * Show the tooltip/popover
+   *
+   * @method show
+   * @private
+   */
+  show() {
+    if (this.get(&#x27;isDestroyed&#x27;)) {
+      return;
+    }
+
+    if (false === this.get(&#x27;onShow&#x27;)(this)) {
+      return;
+    }
+
+    // this waits for the tooltip/popover element to be created. when animating a wormholed tooltip/popover we need to wait until
+    // ember-wormhole has moved things in the DOM for the animation to be correct, so use Ember.run.next in this case
+    let delayFn = !this.get(&#x27;_renderInPlace&#x27;) &amp;&amp; this.get(&#x27;fade&#x27;) ? next : function(target, fn) {
+      schedule(&#x27;afterRender&#x27;, target, fn);
+    };
+
+    this.set(&#x27;inDom&#x27;, true);
+    delayFn(this, this._show);
+  },
+
+  _show(skipTransition = false) {
+    let $element = this.get(&#x27;triggerTargetElement&#x27;);
+    let placement = this.get(&#x27;placement&#x27;);
+
+    // this.$element.attr(&#x27;aria-describedby&#x27;, tipId) @todo ?
+
+    let $tip = this.get(&#x27;overlayElement&#x27;);
+    $tip.css({ top: 0, left: 0, display: &#x27;block&#x27; });
+
+    let pos = getPosition($element);
+    let actualWidth = $tip[0].offsetWidth;
+    let actualHeight = $tip[0].offsetHeight;
+
+    if (this.get(&#x27;autoPlacement&#x27;)) {
+      let viewportDim = getPosition(this.get(&#x27;viewportElement&#x27;));
+
+      placement = placement === &#x27;bottom&#x27; &amp;&amp; pos.bottom + actualHeight &gt; viewportDim.bottom ? &#x27;top&#x27;
+        : placement === &#x27;top&#x27; &amp;&amp; pos.top - actualHeight &lt; viewportDim.top ? &#x27;bottom&#x27;
+          : placement === &#x27;right&#x27; &amp;&amp; pos.right + actualWidth &gt; viewportDim.width ? &#x27;left&#x27;
+            : placement === &#x27;left&#x27; &amp;&amp; pos.left - actualWidth &lt; viewportDim.left ? &#x27;right&#x27;
+              : placement;
+    }
+
+    this.set(&#x27;_placement&#x27;, placement);
+
+    let calculatedOffset = getCalculatedOffset(placement, pos, actualWidth, actualHeight);
+    this.applyPlacement(calculatedOffset, placement);
+
+    function tooltipShowComplete() {
+      if (this.get(&#x27;isDestroyed&#x27;)) {
+        return;
+      }
+      let prevHoverState = this.get(&#x27;hoverState&#x27;);
+
+      this.get(&#x27;onShown&#x27;)(this);
+      this.set(&#x27;hoverState&#x27;, null);
+
+      if (prevHoverState === &#x27;out&#x27;) {
+        this.leave();
+      }
+    }
+
+    if (skipTransition === false &amp;&amp; this.get(&#x27;usesTransition&#x27;)) {
+      this.get(&#x27;overlayElement&#x27;)
+        .one(&#x27;bsTransitionEnd&#x27;, bind(this, tooltipShowComplete))
+        .emulateTransitionEnd(this.get(&#x27;transitionDuration&#x27;));
+    } else {
+      tooltipShowComplete.call(this);
+    }
+  },
+
+  /**
+   * Position the tooltip/popover
+   *
+   * @method applyPlacement
+   * @param offset
+   * @param placement
+   * @private
+   */
+  applyPlacement(offset, placement) {
+    let $tip = this.get(&#x27;overlayElement&#x27;);
+    let width = $tip[0].offsetWidth;
+    let height = $tip[0].offsetHeight;
+
+    // manually read margins because getBoundingClientRect includes difference
+    let marginTop = parseInt($tip.css(&#x27;margin-top&#x27;), 10);
+    let marginLeft = parseInt($tip.css(&#x27;margin-left&#x27;), 10);
+
+    // we must check for NaN for ie 8/9
+    if (isNaN(marginTop)) {
+      marginTop = 0;
+    }
+    if (isNaN(marginLeft)) {
+      marginLeft = 0;
+    }
+
+    offset.top += marginTop;
+    offset.left += marginLeft;
+
+    // $.fn.offset doesn&#x27;t round pixel values
+    // so we use setOffset directly with our own function B-0
+    $.offset.setOffset($tip[0], $.extend({
+      using(props) {
+        $tip.css({
+          top: Math.round(props.top),
+          left: Math.round(props.left)
+        });
+      }
+    }, offset), 0);
+
+    this.set(&#x27;showHelp&#x27;, true);
+
+    // check to see if placing tip in new offset caused the tip to resize itself
+    let actualWidth = $tip[0].offsetWidth;
+    let actualHeight = $tip[0].offsetHeight;
+
+    if (placement === &#x27;top&#x27; &amp;&amp; actualHeight !== height) {
+      offset.top = offset.top + height - actualHeight;
+    }
+
+    let delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight);
+
+    if (delta.left) {
+      offset.left += delta.left;
+    } else {
+      offset.top += delta.top;
+    }
+
+    let isVertical = /top|bottom/.test(placement);
+    let arrowDelta = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight;
+    let arrowOffsetPosition = isVertical ? &#x27;offsetWidth&#x27; : &#x27;offsetHeight&#x27;;
+
+    $tip.offset(offset);
+    this.replaceArrow(arrowDelta, $tip[0][arrowOffsetPosition], isVertical);
+  },
+
+  /**
+   * @method getViewportAdjustedDelta
+   * @param placement
+   * @param pos
+   * @param actualWidth
+   * @param actualHeight
+   * @return {{top: number, left: number}}
+   * @private
+   */
+  getViewportAdjustedDelta(placement, pos, actualWidth, actualHeight) {
+    let delta = { top: 0, left: 0 };
+    let $viewport = this.get(&#x27;viewportElement&#x27;);
+    if (!$viewport) {
+      return delta;
+    }
+
+    let viewportPadding = this.get(&#x27;viewportPadding&#x27;);
+    let viewportDimensions = getPosition($viewport);
+
+    if (/right|left/.test(placement)) {
+      let topEdgeOffset = pos.top - viewportPadding - viewportDimensions.scroll;
+      let bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight;
+      if (topEdgeOffset &lt; viewportDimensions.top) { // top overflow
+        delta.top = viewportDimensions.top - topEdgeOffset;
+      } else if (bottomEdgeOffset &gt; viewportDimensions.top + viewportDimensions.height) { // bottom overflow
+        delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset;
+      }
+    } else {
+      let leftEdgeOffset = pos.left - viewportPadding;
+      let rightEdgeOffset = pos.left + viewportPadding + actualWidth;
+      if (leftEdgeOffset &lt; viewportDimensions.left) { // left overflow
+        delta.left = viewportDimensions.left - leftEdgeOffset;
+      } else if (rightEdgeOffset &gt; viewportDimensions.right) { // right overflow
+        delta.left = viewportDimensions.left + viewportDimensions.width - rightEdgeOffset;
+      }
+    }
+
+    return delta;
+  },
+
+  /**
+   * Position the tooltip/popover&#x27;s arrow
+   *
+   * @method replaceArrow
+   * @param delta
+   * @param dimension
+   * @param isVertical
+   * @private
+   */
+  replaceArrow(delta, dimension, isVertical) {
+    this.get(&#x27;arrowElement&#x27;)
+      .css(isVertical ? &#x27;left&#x27; : &#x27;top&#x27;, &#x60;${50 * (1 - delta / dimension)}%&#x60;)
+      .css(isVertical ? &#x27;top&#x27; : &#x27;left&#x27;, &#x27;&#x27;);
+  },
+
+  /**
+   * Hide the tooltip/popover
+   *
+   * @method hide
+   * @private
+   */
+  hide() {
+    if (this.get(&#x27;isDestroyed&#x27;)) {
+      return;
+    }
+
+    if (false === this.get(&#x27;onHide&#x27;)(this)) {
+      return;
+    }
+
+    function tooltipHideComplete() {
+      if (this.get(&#x27;isDestroyed&#x27;)) {
+        return;
+      }
+      if (this.get(&#x27;hoverState&#x27;) !== &#x27;in&#x27;) {
+        this.set(&#x27;inDom&#x27;, false);
+      }
+      this.get(&#x27;onHidden&#x27;)(this);
+    }
+
+    this.set(&#x27;showHelp&#x27;, false);
+
+    if (this.get(&#x27;usesTransition&#x27;)) {
+      this.get(&#x27;overlayElement&#x27;)
+        .one(&#x27;bsTransitionEnd&#x27;, bind(this, tooltipHideComplete))
+        .emulateTransitionEnd(this.get(&#x27;transitionDuration&#x27;));
+    } else {
+      tooltipHideComplete.call(this);
+    }
+
+    this.set(&#x27;hoverState&#x27;, null);
+  },
+
+  /**
+   * @method addListeners
+   * @private
+   */
+  addListeners() {
+    let $target = this.get(&#x27;triggerTargetElement&#x27;);
+
+    this.get(&#x27;_triggerEvents&#x27;)
+      .forEach((event) =&gt; {
+        if (isArray(event)) {
+          let [inEvent, outEvent] = event;
+          $target.on(&#x60;${inEvent}.${eventNamespace}&#x60;, run.bind(this, this.enter));
+          $target.on(&#x60;${outEvent}.${eventNamespace}&#x60;, run.bind(this, this.leave));
+        } else {
+          $target.on(&#x60;${event}.${eventNamespace}&#x60;, run.bind(this, this.toggle));
+        }
+      });
+  },
+
+  /**
+   * @method removeListeners
+   * @private
+   */
+  removeListeners() {
+    this.get(&#x27;triggerTargetElement&#x27;)
+      .off(&#x60;.${eventNamespace}&#x60;);
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.addListeners();
+    if (this.get(&#x27;visible&#x27;)) {
+      next(this, this._show, true);
+    }
+  },
+
+  willRemoveElement() {
+    this._super(...arguments);
+    this.removeListeners();
+  },
+
+  _watchVisible: observer(&#x27;visible&#x27;, function() {
+    if (this.get(&#x27;visible&#x27;)) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  })
+
+});
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3>Classes</h3>
+            
+            <ul id="api-classes" class="nav nav-pills nav-stacked">
+                    <li class="nav-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
+                    <li class="nav-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
+                    <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementControl.html">Components.FormElementControl</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementControlCheckbox.html">Components.FormElementControlCheckbox</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementControlInput.html">Components.FormElementControlInput</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutHorizontalCheckbox.html">Components.FormElementLayoutHorizontalCheckbox</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutInline.html">Components.FormElementLayoutInline</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementLayoutVerticalCheckbox.html">Components.FormElementLayoutVerticalCheckbox</a></li>
+                    <li class="nav-public"><a href="../classes/Components.FormGroup.html">Components.FormGroup</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Modal.html">Components.Modal</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalBody.html">Components.ModalBody</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ModalDialog.html">Components.ModalDialog</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalFooter.html">Components.ModalFooter</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalHeader.html">Components.ModalHeader</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ModalHeaderClose.html">Components.ModalHeaderClose</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ModalHeaderTitle.html">Components.ModalHeaderTitle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ModalSimple.html">Components.ModalSimple</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Popover.html">Components.Popover</a></li>
+                    <li class="nav-private"><a href="../classes/Components.PopoverElement.html">Components.PopoverElement</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Progress.html">Components.Progress</a></li>
+                    <li class="nav-public"><a href="../classes/Components.ProgressBar.html">Components.ProgressBar</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Tab.html">Components.Tab</a></li>
+                    <li class="nav-public"><a href="../classes/Components.TabPane.html">Components.TabPane</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Tooltip.html">Components.Tooltip</a></li>
+                    <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+            </ul>        </div>
+    </div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
