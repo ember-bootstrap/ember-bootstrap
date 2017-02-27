@@ -1,4 +1,5 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
+import { test, defaultButtonClass } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-modal/footer', 'Integration | Component | bs-modal/footer', {
@@ -19,7 +20,7 @@ test('Footer can have submit button', function(assert) {
   this.render(hbs`{{bs-modal/footer closeTitle="close" submitTitle="submit"}}`);
 
   assert.equal(this.$('.modal-footer button').length, 2, 'Modal footer has two button.');
-  assert.ok(this.$('.modal-footer button:first-child').hasClass('btn-default'), 'Close button is a default button.');
+  assert.ok(this.$('.modal-footer button:first-child').hasClass(defaultButtonClass()), 'Close button is a default button.');
   assert.ok(this.$('.modal-footer button:first-child').attr('type'), 'button', 'Submit button is of type submit.');
   assert.equal(this.$('.modal-footer button:first-child').text().trim(), 'close', 'Close button title is correct.');
   assert.ok(this.$('.modal-footer button:last-child').hasClass('btn-primary'), 'Submit button is a primary button.');

@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import test from 'ember-sinon-qunit/test-support/test';
+import { openClass, test } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-dropdown', 'Integration | Component | bs-dropdown', {
@@ -42,39 +42,39 @@ test('dropdown container with dropdown button supports dropup style', function(a
 test('dropdown-toggle toggles dropdown visibility', function(assert) {
   this.render(hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`);
 
-  assert.equal(this.$(':first-child').hasClass('open'), false, 'has not open class');
+  assert.equal(this.$(':first-child').hasClass(openClass()), false, 'Dropdown is closed');
   this.$('a.dropdown-toggle').click();
-  assert.equal(this.$(':first-child').hasClass('open'), true, 'has open class');
+  assert.equal(this.$(':first-child').hasClass(openClass()), true, 'Dropdown is open');
   this.$('a.dropdown-toggle').click();
-  assert.equal(this.$(':first-child').hasClass('open'), false, 'has not open class');
+  assert.equal(this.$(':first-child').hasClass(openClass()), false, 'Dropdown is closed');
 });
 
 test('opened dropdown will close on outside click', function(assert) {
   this.render(hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`);
 
   this.$('a.dropdown-toggle').click();
-  assert.equal(this.$(':first-child').hasClass('open'), true, 'has open class');
+  assert.equal(this.$(':first-child').hasClass(openClass()), true, 'Dropdown is open');
 
   this.$().closest(document).click();
-  assert.equal(this.$(':first-child').hasClass('open'), false, 'has not open class');
+  assert.equal(this.$(':first-child').hasClass(openClass()), false, 'Dropdown is closed');
 });
 
 test('clicking dropdown menu will close it', function(assert) {
   this.render(hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`);
   this.$('a.dropdown-toggle').click();
-  assert.equal(this.$(':first-child').hasClass('open'), true, 'has open class');
+  assert.equal(this.$(':first-child').hasClass(openClass()), true, 'Dropdown is open');
 
   this.$('ul.dropdown-menu a').click();
-  assert.equal(this.$(':first-child').hasClass('open'), false, 'has not open class');
+  assert.equal(this.$(':first-child').hasClass(openClass()), false, 'Dropdown is closed');
 });
 
 test('clicking dropdown menu when closeOnMenuClick is false will not close it', function(assert) {
   this.render(hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`);
   this.$('a.dropdown-toggle').click();
-  assert.equal(this.$(':first-child').hasClass('open'), true, 'has open class');
+  assert.equal(this.$(':first-child').hasClass(openClass()), true, 'Dropdown is open');
 
   this.$('ul.dropdown-menu a').click();
-  assert.equal(this.$(':first-child').hasClass('open'), true, 'has open class');
+  assert.equal(this.$(':first-child').hasClass(openClass()), true, 'Dropdown is open');
 });
 
 test('opening dropdown calls onShow action', function(assert) {

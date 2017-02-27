@@ -18,7 +18,8 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    unstableApiURL: 'http://simonihmig.github.io/ember-bootstrap/'
+    unstableApiURL: 'http://simonihmig.github.io/ember-bootstrap/',
+    bootstrapVersion: process.env.BOOTSTRAPVERSION || 3
   };
 
   if (environment === 'development') {

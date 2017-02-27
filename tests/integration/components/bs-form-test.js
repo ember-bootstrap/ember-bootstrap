@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import test from 'ember-sinon-qunit/test-support/test';
+import { formFeedbackClass, test, testBS3, testBS4, validationErrorClass } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -7,7 +7,7 @@ moduleForComponent('bs-form', 'Integration | Component | bs-form', {
   integration: true
 });
 
-test('form has correct CSS class', function(assert) {
+testBS3('form has correct CSS class', function(assert) {
   this.render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
 
   let classSpec = {
@@ -18,7 +18,23 @@ test('form has correct CSS class', function(assert) {
 
   for (let layout in classSpec) {
     this.set('formLayout', layout);
-    assert.equal(this.$('form').hasClass(classSpec[layout]), true, 'form has expected class.');
+    assert.equal(this.$('form').hasClass(classSpec[layout]), true, `form has expected class for ${layout}`);
+  }
+});
+
+testBS4('form has correct markup', function(assert) {
+  this.render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
+
+  let classSpec = {
+    vertical: ['form', false],
+    horizontal: ['form-horizontal', false],
+    inline: ['form-inline', true]
+  };
+
+  for (let layout in classSpec) {
+    this.set('formLayout', layout);
+    let expectation = classSpec[layout];
+    assert.equal(this.$('form').hasClass(expectation[0]), expectation[1], `form has expected markup for ${layout}`);
   }
 });
 
@@ -96,7 +112,7 @@ test('Submitting the form with invalid validation shows validation errors', func
   this.render(hbs`{{#bs-form model=model hasValidator=true validate=validateStub as |form|}}{{form.element hasValidator=true errors=errors}}{{/bs-form}}`);
 
   assert.notOk(
-    this.$('form .form-group').hasClass('has-error'),
+    this.$('form .form-group').hasClass(validationErrorClass()),
     'validation errors aren\'t shown before user interaction'
   );
   this.$('form').submit();
@@ -104,11 +120,11 @@ test('Submitting the form with invalid validation shows validation errors', func
   let done = assert.async();
   setTimeout(() => {
     assert.ok(
-      this.$('form .form-group').hasClass('has-error'),
+      this.$('form .form-group').hasClass(validationErrorClass()),
       'validation errors are shown after form submission'
     );
     assert.equal(
-      this.$('form .form-group .help-block').text().trim(),
+      this.$(`form .form-group .${formFeedbackClass()}`).text().trim(),
       'There is an error'
     );
     done();

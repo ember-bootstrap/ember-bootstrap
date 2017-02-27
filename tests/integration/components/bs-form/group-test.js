@@ -1,4 +1,5 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
+import { test, testBS3, testBS4, validationErrorClass } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-form/group', 'Integration | Component | bs-form/group', {
@@ -10,12 +11,25 @@ test('component has form-group bootstrap class', function(assert) {
   assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
 });
 
-test('support size classes', function(assert) {
+testBS4('component has row class for horizontal layouts', function(assert) {
+  this.render(hbs`{{bs-form/group formLayout="horizontal"}}`);
+  assert.equal(this.$(':first-child').hasClass('row'), true, 'component has row class');
+});
+
+testBS3('support size classes', function(assert) {
   this.render(hbs`{{bs-form/group size="lg"}}`);
   assert.equal(this.$('.form-group').hasClass('form-group-lg'), true, 'form-group has large class');
 
   this.render(hbs`{{bs-form/group size="sm"}}`);
   assert.equal(this.$('.form-group').hasClass('form-group-sm'), true, 'form-group has small class');
+});
+
+testBS4('support size classes', function(assert) {
+  this.render(hbs`{{bs-form/group size="lg"}}`);
+  assert.equal(this.$('.form-group').hasClass('form-control-lg'), true, 'form-group has large class');
+
+  this.render(hbs`{{bs-form/group size="sm"}}`);
+  assert.equal(this.$('.form-group').hasClass('form-control-sm'), true, 'form-group has small class');
 });
 
 const validations = {
@@ -28,7 +42,7 @@ const validations = {
     iconClasses: ['glyphicon', 'glyphicon-warning-sign']
   },
   error: {
-    formGroupClasses: ['has-feedback', 'has-error'],
+    formGroupClasses: ['has-feedback', validationErrorClass()],
     iconClasses: ['glyphicon', 'glyphicon-remove']
   }
 };
@@ -46,14 +60,30 @@ function testValidationState(assert, state) {
   });
 }
 
-test('component with successful validation has success classes and success icon', function(assert) {
+testBS3('component with successful validation has success classes and success icon', function(assert) {
   testValidationState.call(this, assert, 'success');
 });
 
-test('component with warning validation has warning classes and warning icon', function(assert) {
+testBS3('component with warning validation has warning classes and warning icon', function(assert) {
   testValidationState.call(this, assert, 'warning');
 });
 
-test('component with error validation has error classes and error icon', function(assert) {
+testBS3('component with error validation has error classes and error icon', function(assert) {
   testValidationState.call(this, assert, 'error');
+});
+
+testBS4('component with successful validation has validation class', function(assert) {
+  let validationClasses = {
+    success: 'has-success',
+    warning: 'has-warning',
+    error: 'has-danger'
+  };
+
+  this.render(hbs`{{#bs-form/group validation=validation}}{{/bs-form/group}}`);
+
+  Object.keys(validationClasses).forEach((validation) => {
+    let className = validationClasses[validation];
+    this.set('validation', validation);
+    assert.equal(this.$(':first-child').hasClass(className), true, `component has ${className} class`);
+  });
 });

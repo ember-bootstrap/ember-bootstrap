@@ -8,7 +8,7 @@ const { computed, getWithDefault } = Ember;
  *
  * Kudos to @fsmanuel for coming up with this solution.
  *
- * @function
+ * @method
  * @return {boolean}
  * @param {string} dependentKey
  * @param {*} defaultValue
@@ -19,7 +19,7 @@ export default function(dependentKey, defaultValue = null) {
     get() {
       return getWithDefault(this, dependentKey, defaultValue);
     },
-    set(key, value) {
+    set(key, value) { // eslint-disable-line no-unused-vars
       return value;
     }
   });

@@ -2,7 +2,7 @@ import {
   moduleForComponent
 } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import test from 'ember-sinon-qunit/test-support/test';
+import { test, visibilityClass } from '../../helpers/bootstrap-test';
 
 moduleForComponent('bs-collapse', 'Integration | Component | bs-collapse', {
   integration: true
@@ -11,14 +11,14 @@ moduleForComponent('bs-collapse', 'Integration | Component | bs-collapse', {
 test('collapse has correct default markup', function(assert) {
   this.render(hbs`{{#bs-collapse}}<p>Just some content</p>{{/bs-collapse}}`);
   assert.equal(this.$(':first-child').hasClass('collapse'), true, 'collapse has collapse class');
-  assert.equal(this.$(':first-child').hasClass('in'), false, 'collapse does not have in class');
+  assert.equal(this.$(':first-child').hasClass(visibilityClass()), false, 'collapse does not have visibility class');
 
 });
 
 test('expanded collapse has correct default markup', function(assert) {
   this.render(hbs`{{#bs-collapse collapsed=false}}<p>Just some content</p>{{/bs-collapse}}`);
   assert.equal(this.$(':first-child').hasClass('collapse'), true, 'collapse has collapse class');
-  assert.equal(this.$(':first-child').hasClass('in'), true, 'collapse has in class');
+  assert.equal(this.$(':first-child').hasClass(visibilityClass()), true, 'collapse has visibility class');
 });
 
 test('setting collapse to false expands this item', function(assert) {
@@ -40,7 +40,7 @@ test('setting collapse to false expands this item', function(assert) {
   setTimeout(() => {
     assert.ok(shownAction.calledOnce, 'onShown action has been called');
     assert.equal(this.$(':first-child').hasClass('collapse'), true, 'collapse has collapse class');
-    assert.equal(this.$(':first-child').hasClass('in'), true, 'collapse has in class');
+    assert.equal(this.$(':first-child').hasClass(visibilityClass()), true, 'collapse has visibility class');
 
     done();
   }, 500);

@@ -2023,7 +2023,14 @@ button.close { padding: 0; cursor: pointer; background: transparent; border: 0; 
 .logo { margin-top: 20px; }
 
 
+.nav > li.nav-private {
+  display: none;
+}
 
-.nav-private a {
-    color: #ccc;
+.nav > li.nav-private a {
+  color: #ccc;
+}
+
+.show-private-apis .nav > li.nav-private {
+  display: block;
 }

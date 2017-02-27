@@ -7,18 +7,13 @@
     <!-- BEGIN-SNIPPET navbar-demo -->
     {{#bs-navbar type=(if inverse 'inverse') fluid=fluid as |navbar|}}
         <div class="navbar-header">
-            {{#navbar.toggle}}
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            {{/navbar.toggle}}
-           {{#link-to "index" class="navbar-brand"}}Brand{{/link-to}}
+            {{navbar.toggle}}
+            {{#link-to "index" class="navbar-brand"}}Brand{{/link-to}}
         </div>
         {{#navbar.content}}
             {{#navbar.nav as |nav|}}
-                {{#nav.item}}{{#link-to "index"}}Home{{/link-to}}{{/nav.item}}
-                {{#nav.item}}{{#link-to "demo.navbars"}}Navbars{{/link-to}}{{/nav.item}}
+                {{#nav.item}}{{#nav.link-to "index"}}Home{{/nav.link-to}}{{/nav.item}}
+                {{#nav.item}}{{#nav.link-to "demo.navbars"}}Navbars{{/nav.link-to}}{{/nav.item}}
             {{/navbar.nav}}
         {{/navbar.content}}
     {{/bs-navbar}}

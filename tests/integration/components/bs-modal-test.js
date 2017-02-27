@@ -1,7 +1,7 @@
 import { moduleForComponent } from 'ember-qunit';
+import { test, visibilityClass } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
-import test from 'ember-sinon-qunit/test-support/test';
 
 moduleForComponent('bs-modal', 'Integration | Component | bs-modal', {
   integration: true
@@ -45,12 +45,12 @@ test('clicking ok button closes modal when autoClose=true with custom component 
 
   // wait for fade animation
   setTimeout(() => {
-    assert.equal(this.$('.modal').hasClass('in'), true, 'Modal is visible');
+    assert.equal(this.$('.modal').hasClass(visibilityClass()), true, 'Modal is visible');
     this.$('.modal .modal-footer button').click();
 
     // wait for fade animation
     setTimeout(() => {
-      assert.equal(this.$('.modal').hasClass('in'), false, 'Modal is hidden');
+      assert.equal(this.$('.modal').hasClass(visibilityClass()), false, 'Modal is hidden');
       done();
     }, transitionTimeout);
   }, transitionTimeout);

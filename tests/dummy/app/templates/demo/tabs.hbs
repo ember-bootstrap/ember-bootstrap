@@ -44,14 +44,14 @@
 
 <h2>Custom tabs</h2>
 
-<p>Set <codeq>customTabs</codeq> to true to disable automatic nav generation and create a custom one:</p>
+<p>Set <code>customTabs</code> to true to disable automatic nav generation and create a custom one:</p>
 
 <div class="bs-example">
     <!-- BEGIN-SNIPPET tab-custom -->
     {{#bs-tab customTabs=true as |tab|}}
         {{#bs-nav type="tabs" as |nav|}}
-            {{#nav.item active=(bs-eq tab.activeId "pane1")}}<a href="#pane1" role="tab" {{action tab.select "pane1"}}>Tab 1 <span class="badge">{{badge}}</span></a>{{/nav.item}}
-            {{#nav.item active=(bs-eq tab.activeId "pane2")}}<a href="#pane1" role="tab" {{action tab.select "pane2"}}>Tab 2</a>{{/nav.item}}
+            {{#nav.item active=(bs-eq tab.activeId "pane1")}}<a href="#pane1" class="nav-link" role="tab" {{action tab.select "pane1"}}>Tab 1 <span class="badge">{{badge}}</span></a>{{/nav.item}}
+            {{#nav.item active=(bs-eq tab.activeId "pane2")}}<a href="#pane1" class="nav-link" role="tab" {{action tab.select "pane2"}}>Tab 2</a>{{/nav.item}}
         {{/bs-nav}}
 
         <div class="tab-content">
@@ -81,8 +81,8 @@ component and a <code>\{{outlet}}</code>:</p>
     <!-- BEGIN-SNIPPET tab-route-->
     <div>
         {{#bs-nav type="tabs" as |nav|}}
-            {{#nav.item}}{{#link-to "demo.tabs.index"}}Tab 1{{/link-to}}{{/nav.item}}
-            {{#nav.item}}{{#link-to "demo.tabs.other"}}Tab 2{{/link-to}}{{/nav.item}}
+            {{#nav.item}}{{#nav.link-to "demo.tabs.index"}}Tab 1{{/nav.link-to}}{{/nav.item}}
+            {{#nav.item}}{{#nav.link-to "demo.tabs.other"}}Tab 2{{/nav.link-to}}{{/nav.item}}
         {{/bs-nav}}
         {{outlet}}
     </div>

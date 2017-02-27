@@ -1,9 +1,10 @@
 import Ember from 'ember';
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import sinonTest from 'ember-sinon-qunit/test-support/test';
+import { test, visibilityClass } from '../../helpers/bootstrap-test';
 
-moduleForComponent('bs-tooltip', 'Integration | Component | bs tooltip', {
+moduleForComponent('bs-tooltip', 'Integration | Component | bs-tooltip', {
   integration: true
 });
 
@@ -226,11 +227,11 @@ test('should show tooltip if leave event hasn\'t occurred before delay expires',
   let $trigger = this.$('#target');
 
   setTimeout(function() {
-    assert.notOk(this.$('.tooltip').is('.fade.in'), '100ms: tooltip is not faded in');
+    assert.notOk(this.$('.tooltip').is(`.fade.${visibilityClass()}`), '100ms: tooltip is not faded in');
   }, 100);
 
   setTimeout(function() {
-    assert.ok(this.$('.tooltip').is('.fade.in'), '200ms: tooltip is faded in');
+    assert.ok(this.$('.tooltip').is(`.fade.${visibilityClass()}`), '200ms: tooltip is faded in');
     done();
   }, 200);
 
@@ -265,16 +266,16 @@ test('should not hide tooltip if leave event occurs and enter event occurs withi
   let $trigger = this.$('#target');
 
   setTimeout(function() {
-    assert.ok(this.$('.tooltip').is('.fade.in'), '1ms: tooltip faded in');
+    assert.ok(this.$('.tooltip').is(`.fade.${visibilityClass()}`), '1ms: tooltip faded in');
     $trigger.trigger('mouseout');
 
     setTimeout(function() {
-      assert.ok(this.$('.tooltip').is('.fade.in'), '100ms: tooltip still faded in');
+      assert.ok(this.$('.tooltip').is(`.fade.${visibilityClass()}`), '100ms: tooltip still faded in');
       $trigger.trigger('mouseenter');
     }, 100);
 
     setTimeout(function() {
-      assert.ok(this.$('.tooltip').is('.fade.in'), '200ms: tooltip still faded in');
+      assert.ok(this.$('.tooltip').is(`.fade.${visibilityClass()}`), '200ms: tooltip still faded in');
       done();
     }, 200);
   }, 0);

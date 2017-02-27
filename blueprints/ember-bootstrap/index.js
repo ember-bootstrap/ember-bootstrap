@@ -8,6 +8,7 @@ const writeFile = rsvp.denodeify(fs.writeFile);
 const chalk = require('chalk');
 
 const bs3Version = '^3.3.7';
+const bs4Version = 'next';
 
 module.exports = {
   normalizeEntityName() {
@@ -22,6 +23,7 @@ module.exports = {
     let dependencies = this.project.dependencies();
 
     let promises = [
+      this.addPackageToProject('bootstrap', bs4Version)
     ];
 
     if ('ember-cli-sass' in dependencies) {

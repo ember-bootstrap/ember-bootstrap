@@ -1,4 +1,5 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent } from 'ember-qunit';
+import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-progress', 'Integration | Component | bs-progress', {
@@ -109,7 +110,7 @@ test('progress bar can round label\'s percent value', function(assert) {
 
 });
 
-test('progress bar supports type class', function(assert) {
+testBS3('progress bar supports type class', function(assert) {
   this.render(hbs`
     {{#bs-progress as |p|}}
       {{p.bar value=50 type="success"}}
@@ -117,6 +118,17 @@ test('progress bar supports type class', function(assert) {
   `);
 
   assert.ok(this.$('.progress-bar').hasClass('progress-bar-success'), 'Progress bar has type class');
+
+});
+
+testBS4('progress bar supports type class', function(assert) {
+  this.render(hbs`
+    {{#bs-progress as |p|}}
+      {{p.bar value=50 type="success"}}
+    {{/bs-progress}}
+  `);
+
+  assert.ok(this.$('.progress-bar').hasClass('bg-success'), 'Progress bar has type class');
 
 });
 
@@ -131,7 +143,7 @@ test('progress bar supports striped style', function(assert) {
 
 });
 
-test('progress bar supports animated stripes', function(assert) {
+testBS3('progress bar supports animated stripes', function(assert) {
   this.render(hbs`
     {{#bs-progress as |p|}}
       {{p.bar value=50 type="success" striped=true animate=true}}
@@ -140,6 +152,18 @@ test('progress bar supports animated stripes', function(assert) {
 
   assert.ok(this.$('.progress-bar').hasClass('progress-bar-striped'), 'Progress bar has type class');
   assert.ok(this.$('.progress-bar').hasClass('active'), 'Progress bar has active class');
+
+});
+
+testBS4('progress bar supports animated stripes', function(assert) {
+  this.render(hbs`
+    {{#bs-progress as |p|}}
+      {{p.bar value=50 type="success" striped=true animate=true}}
+    {{/bs-progress}}
+  `);
+
+  assert.ok(this.$('.progress-bar').hasClass('progress-bar-striped'), 'Progress bar has type class');
+  assert.ok(this.$('.progress-bar').hasClass('progress-bar-animated'), 'Progress bar has animated class');
 
 });
 

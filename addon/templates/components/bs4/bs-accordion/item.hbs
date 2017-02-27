@@ -1,0 +1,12 @@
+<div role="tab" {{action onClick value}} class="card-header {{if collapsed "collapsed" "expanded"}}">
+    <h5 class="card-title mb-0">
+        <a href="#">
+            {{title}}
+        </a>
+    </h5>
+</div>
+{{#bs-collapse collapsed=collapsed class="card-collapse"}}
+    <div class="card-block">
+        {{yield}}
+    </div>
+{{/bs-collapse}}

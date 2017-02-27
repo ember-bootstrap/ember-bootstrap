@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import test from 'ember-sinon-qunit/test-support/test';
+import { formFeedbackClass, test, testBS3, validationErrorClass } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -348,13 +348,13 @@ test('if invisibleLabel is true sr-only class is added to label', function(asser
   });
 });
 
-test('adjusts validation icon position if there is an input group', function(assert) {
+testBS3('adjusts validation icon position if there is an input group', function(assert) {
   assert.expect(6);
   this.set('validation', 'success');
   this.set('formLayout', 'vertical');
   this.render(hbs`
     {{#bs-form formLayout=formLayout as |form|}}
-      {{#form.element validation=validation label='ajusts validation icon position' classNames='addon'}}
+      {{#form.element validation=validation label='adjusts validation icon position' classNames='addon'}}
         <div class="input-group">
           <input class="form-control">
           <div class="input-group-addon">
@@ -362,7 +362,7 @@ test('adjusts validation icon position if there is an input group', function(ass
           </div>
         </div>
       {{/form.element}}
-      {{#form.element validation=validation label='ajusts validation icon position' classNames='button'}}
+      {{#form.element validation=validation label='adjusts validation icon position' classNames='button'}}
         <div class="input-group">
           <input class="form-control">
           <div class="input-group-btn">
@@ -434,22 +434,22 @@ test('shows validation errors', function(assert) {
       {{bs-form/element property='name' elementId='child' hasValidator=true errors=errors model=model}}
   `);
   assert.notOk(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'validation errors aren\'t shown before user interaction'
   );
   Ember.run(() => {
     this.$('input').trigger('focusout');
   });
   assert.ok(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'validation errors are shown after user interaction when errors are present (child)'
   );
-  assert.equal(this.$('.form-group .help-block').text().trim(), 'Invalid');
+  assert.equal(this.$(`.form-group .${formFeedbackClass()}`).text().trim(), 'Invalid');
   Ember.run(() => {
     this.set('errors', Ember.A());
   });
   assert.notOk(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'form group isn\'t shown as having errors if there aren\'t any'
   );
 });
@@ -471,7 +471,7 @@ test('shows validation warnings', function(assert) {
     this.$('.form-group').hasClass('has-warning'),
     'validation warnings are shown after user interaction when warnings are present'
   );
-  assert.equal(this.$('.form-group .help-block').text().trim(), 'Insecure');
+  assert.equal(this.$(`.form-group .${formFeedbackClass()}`).text().trim(), 'Insecure');
   Ember.run(() => {
     this.set('warnings', Ember.A());
   });
@@ -488,15 +488,15 @@ test('shows custom error immediately', function(assert) {
       {{bs-form/element property='name' elementId='child' hasValidator=true customError=error model=model}}
   `);
   assert.ok(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'custom error is shown immediately'
   );
-  assert.equal(this.$('.form-group .help-block').text().trim(), 'some error');
+  assert.equal(this.$(`.form-group .${formFeedbackClass()}`).text().trim(), 'some error');
   Ember.run(() => {
     this.set('error', null);
   });
   assert.notOk(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'form group isn\'t shown as having errors if there aren\'t any'
   );
 });
@@ -509,21 +509,21 @@ test('events enabling validation rendering are configurable per `showValidationO
       {{bs-form/element property='name' elementId='child' hasValidator=true errors=errors model=model showValidationOn=showValidationOn}}
   `);
   assert.notOk(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'validation warnings aren\'t shown before user interaction'
   );
   Ember.run(() => {
     this.$('input').trigger('focusout');
   });
   assert.notOk(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'events not present in `showValidationOn` are ignored'
   );
   Ember.run(() => {
     this.$('input').trigger('change');
   });
   assert.ok(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'events present in `showValidationOn` trigger validation'
   );
 });
@@ -535,21 +535,21 @@ test('events enabling validation rendering are configurable per `showValidationO
       {{bs-form/element property='name' elementId='child' hasValidator=true errors=errors model=model showValidationOn='change'}}
   `);
   assert.notOk(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'validation warnings aren\'t shown before user interaction'
   );
   Ember.run(() => {
     this.$('input').trigger('focusout');
   });
   assert.notOk(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'events not present in `showValidationOn` are ignored'
   );
   Ember.run(() => {
     this.$('input').trigger('change');
   });
   assert.ok(
-    this.$('.form-group').hasClass('has-error'),
+    this.$('.form-group').hasClass(validationErrorClass()),
     'events present in `showValidationOn` trigger validation'
   );
 });

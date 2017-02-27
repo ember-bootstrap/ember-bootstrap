@@ -25,7 +25,11 @@ Router.map(function() {
       this.route('other');
     });
   });
-  this.route('getting-started');
+  this.route('getting-started', function() {
+    this.route('assets');
+    this.route('migrating-to-1-0');
+    this.route('bootstrap-4');
+  });
   this.route('license');
   this.route('changelog');
   this.route('acceptance', function() {
