@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "1.0.0-alpha.5"
+        "version": "1.0.0-alpha.5.682f75a5"
     },
     "files": {
         "addon/components/base/bs-accordion/item.js": {
