@@ -49,7 +49,7 @@ install:
   - bower install
 
 script:
-  - ember try:one $EMBER_TRY_SCENARIO test
+  - ember try:one $EMBER_TRY_SCENARIO test --skip-cleanup
 
 addons:
     code_climate:
