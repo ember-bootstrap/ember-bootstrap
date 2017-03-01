@@ -77,6 +77,16 @@ test('clicking dropdown menu when closeOnMenuClick is false will not close it', 
   assert.equal(this.$(':first-child').hasClass(openClass()), true, 'Dropdown is open');
 });
 
+test('child components can access isOpen property', function(assert) {
+  this.render(hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}<span id="toggleText">{{if dd.isOpen "open" "closed"}}</span>{{/dd.toggle}}{{/bs-dropdown}}`);
+
+  assert.equal(this.$('#toggleText').text(), 'closed', 'Dropdown is closed');
+  this.$('a.dropdown-toggle').click();
+  assert.equal(this.$('#toggleText').text(), 'open', 'Dropdown is open');
+  this.$('a.dropdown-toggle').click();
+  assert.equal(this.$('#toggleText').text(), 'closed', 'Dropdown is closed');
+});
+
 test('opening dropdown calls onShow action', function(assert) {
   let action = this.spy();
   this.on('show', action);
