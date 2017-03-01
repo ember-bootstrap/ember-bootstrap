@@ -83,7 +83,7 @@ module.exports = {
       let source = fs.readFileSync(file, 'utf-8');
       let build = new BuildConfigEditor(source);
       let newBuild = build.edit('ember-bootstrap', settings);
-      fs.writeFileSync(newBuild.code());
+      fs.writeFileSync(file, newBuild.code());
     } else {
       this.ui.writeLine(chalk.red(`Could not find ${file} to modify.`));
     }
