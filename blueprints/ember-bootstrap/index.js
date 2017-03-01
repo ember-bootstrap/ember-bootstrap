@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const writeFile = rsvp.denodeify(fs.writeFile);
 const chalk = require('chalk');
+const BuildConfigEditor = require('ember-cli-build-config-editor');
 
 const bs3Version = '^3.3.7';
 const bs4Version = 'next';
@@ -68,20 +69,21 @@ module.exports = {
     }
   },
 
-  addBuildConfiguration(options) {
+  addBuildConfiguration(option) {
     let file = 'ember-cli-build.js';
-    let includeFonts = options.bootstrapVersion === 3;
-    let config = `
-        'ember-bootstrap': {
-            importBootstrapTheme: false,
-            importBootstrapCSS: true,
-            importBootstrapFont: ${includeFonts},
-            bootstrapVersion: ${options.bootstrapVersion}
-        },`;
+    let settings = {
+      bootstrapVersion: option.bootstrapVersion
+    };
+    if (option.bootstrapVersion === 4) {
+      settings.importBootstrapFont = false;
+    }
 
     if (fs.existsSync(file)) {
       this.ui.writeLine(chalk.green(`Added ember-bootstrap configuration to ${file}`));
-      return this.insertIntoFile(file, config, { after: 'new EmberApp(defaults, {' });
+      let source = fs.readFileSync(file, 'utf-8');
+      let build = new BuildConfigEditor(source);
+      let newBuild = build.edit('ember-bootstrap', settings);
+      fs.writeFileSync(newBuild.code());
     } else {
       this.ui.writeLine(chalk.red(`Could not find ${file} to modify.`));
     }
