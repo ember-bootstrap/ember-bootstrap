@@ -1,3 +1,15 @@
+<a name="1.0.0-alpha.5"></a>
+# [1.0.0-alpha.5](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.4...v1.0.0-alpha.5) (2017-02-27)
+
+
+### Features
+
+* **Bootstrap 4:** experimental support for Bootstrap 4 added, thanks to the terrific work of [srvance](https://github.com/srvance). For instructions visit the [Getting started](http://www.ember-bootstrap.com/#/getting-started/bootstrap-4) guide. ([#206](https://github.com/kaliber5/ember-bootstrap/pull/206))
+* **FormElement:** `customError` shows custom error message independent of the model's validation ([93e451a](https://github.com/kaliber5/ember-bootstrap/commit/93e451a))
+* **Modal:** use separate components for modal header and close button to allow for better customization ([7ba6bc1](https://github.com/kaliber5/ember-bootstrap/commit/7ba6bc1))
+
+
+
 <a name="1.0.0-alpha.4"></a>
 # [1.0.0-alpha.4](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.3...v1.0.0-alpha.4) (2017-02-09)
 

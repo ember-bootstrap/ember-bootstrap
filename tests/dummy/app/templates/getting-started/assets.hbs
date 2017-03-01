@@ -3,7 +3,7 @@
 <h2 id="importing-css-assets">Importing static CSS Assets</h2>
 
 <p>When not using a CSS preprocessor (see below) ember-bootstrap will automatically import the static Bootstrap CSS into
-  your ember-cli build. >In situations where you prefer to use another strategy for importing Bootstrap CSS,
+  your ember-cli build. In situations where you prefer to use another strategy for importing Bootstrap CSS,
   you can opt out of CSS import by setting the <code>importBootstrapCSS</code> option to
   false in your <code>ember-cli-build.js</code>:</p>
 
@@ -13,7 +13,7 @@
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-    var app = new EmberApp({
+    var app = new EmberApp(defaults, {
         'ember-bootstrap': {
             'importBootstrapCSS': false
         }
@@ -72,7 +72,7 @@ module.exports = function(defaults) {
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-    var app = new EmberApp({
+    var app = new EmberApp(defaults, {
         'ember-bootstrap': {
             'importBootstrapFont': false
         }
