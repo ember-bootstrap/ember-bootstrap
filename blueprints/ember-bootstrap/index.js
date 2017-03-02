@@ -21,16 +21,16 @@ module.exports = {
   normalizeEntityName() {
   },
 
-  afterInstall(options) {
-    return this.addDependencies(options)
+  afterInstall(option) {
+    return this.addDependencies(option)
       .then(() => this.addPreprocessorImport())
-      .then(() => this.addBuildConfiguration(options));
+      .then(() => this.addBuildConfiguration(option));
   },
 
-  addDependencies(options) {
+  addDependencies(option) {
     let dependencies = this.project.dependencies();
 
-    if (options.bootstrapVersion === 4) {
+    if (option.bootstrapVersion === 4) {
       return this.addPackageToProject('bootstrap', bs4Version);
     }
 
