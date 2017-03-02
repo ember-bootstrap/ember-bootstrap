@@ -14,6 +14,8 @@ const bs4Version = 'next';
 module.exports = {
   name: 'ember-bootstrap',
 
+  description: 'Configure ember-bootstrap',
+
   availableOptions: [
     { name: 'bootstrap-version', type: Number, default: 3 }
   ],
