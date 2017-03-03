@@ -2,7 +2,7 @@ import Ember from 'ember';
 import toggleButton from 'ember-bootstrap/components/bs-dropdown-button';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 
-const { computed, observer } = Ember;
+const { computed, observer, on } = Ember;
 
 /**
  Bootstrap style dropdown menus, consisting of a toggle element, and the dropdown menu itself.
@@ -164,13 +164,13 @@ export default Ember.Component.extend(ComponentParent, {
     }
   },
 
-  handleClickEvents: observer('open', function() {
+  handleClickEvents: on('init', observer('open', function() {
     if (this.get('open')) {
       Ember.$(document).on(this.clickEventName, Ember.run.bind(this, this.closeOnClickHandler));
     } else {
       Ember.$(document).off(this.clickEventName);
     }
-  }),
+  })),
 
   willDestroyElement() {
     this._super();
