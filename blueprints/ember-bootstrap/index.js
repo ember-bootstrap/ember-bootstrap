@@ -62,25 +62,50 @@ module.exports = {
   },
 
   afterInstall(option) {
-    return this.addDependencies(option)
-      .then(() => this.addPreprocessorImport(option))
+    return this.adjustBootstrapDependencies(option)
+      .then(() => this.addPreprocessorStyleImport(option))
       .then(() => this.addBuildConfiguration(option));
   },
 
-  addDependencies(option) {
-    if (option.bootstrapVersion === 4) {
-      return this.addPackageToProject('bootstrap', bs4Version);
+  adjustBootstrapDependencies(option) {
+    let { bootstrapVersion, targetPreprocessor } = option;
+    let dependencies = this.project.dependencies();
+    let bowerDependencies = this.project.bowerDependencies();
+    let promises = [];
+
+    if (bootstrapVersion === 4) {
+      if ('bootstrap' in bowerDependencies) {
+        this.ui.writeLine(chalk.white.bgBlue('ACTION: Manually remove \'bootstrap\' from bower.json'));
+      }
+      if ('bootstrap-sass' in dependencies) {
+        promises.push(this.removePackageFromProject('bootstrap-sass'));
+      }
+      if ('bootstrap-sass' in bowerDependencies) {
+        this.ui.writeLine(chalk.white.bgBlue('ACTION: Manually remove \'bootstrap-sass\' from bower.json'));
+      }
+      promises.push(this.addPackageToProject('bootstrap', bs4Version));
+    } else if (targetPreprocessor === 'sass') {
+      if ('bootstrap' in dependencies) {
+        promises.push(this.removePackageFromProject('bootstrap'));
+      }
+      if ('bootstrap' in bowerDependencies) {
+        this.ui.writeLine(chalk.white.bgBlue('ACTION: Manually remove \'bootstrap\' from bower.json'));
+      }
+      promises.push(this.addPackageToProject('bootstrap-sass', bs3Version));
+    } else {
+      if ('bootstrap' in dependencies) {
+        promises.push(this.removePackageFromProject('bootstrap'));
+      }
+      if ('bootstrap-sass' in dependencies) {
+        promises.push(this.removePackageFromProject('bootstrap-sass'));
+      }
+      promises.push(this.addBowerPackageToProject('bootstrap', bs3Version));
     }
 
-    // bootstrapVersion === 3
-    if (option.targetPreprocessor === 'sass') {
-      return this.addPackageToProject('bootstrap-sass', bs3Version);
-    }
-
-    return this.addBowerPackageToProject('bootstrap', bs3Version);
+    return rsvp.all(promises);
   },
 
-  addPreprocessorImport(option) {
+  addPreprocessorStyleImport(option) {
     let { targetPreprocessor } = option;
     let importStatement = '\n@import "ember-bootstrap/bootstrap";\n';
 
