@@ -141,9 +141,7 @@ module.exports = {
       settings.importBootstrapFont = false;
     }
 
-    if (targetPreprocessor !== 'none') {
-      settings.importBootstrapCSS = false;
-    }
+    settings.importBootstrapCSS = (targetPreprocessor === 'none');
 
     if (fs.existsSync(file)) {
       this.ui.writeLine(chalk.green(`Added ember-bootstrap configuration to ${file}`));
