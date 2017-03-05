@@ -2,7 +2,7 @@
 'use strict';
 
 const rsvp = require('rsvp');
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const writeFile = rsvp.denodeify(fs.writeFile);
 const chalk = require('chalk');
@@ -67,6 +67,24 @@ module.exports = {
       .then(() => this.addBuildConfiguration(option));
   },
 
+  removePackageFromBowerJSON(dependency) {
+    this.ui.writeLine(chalk.green(`  uninstall bower package ${chalk.white(dependency)}`));
+    return new rsvp.Promise(function(resolve, reject) {
+      try {
+        let bowerJSONPath = 'bower.json';
+        let bowerJSON = fs.readJsonSync(bowerJSONPath);
+
+        delete bowerJSON.dependencies[dependency];
+
+        fs.writeJsonSync(bowerJSONPath, bowerJSON);
+
+        resolve();
+      } catch(error) {
+        reject(error);
+      }
+    });
+  },
+
   adjustBootstrapDependencies(option) {
     let { bootstrapVersion, targetPreprocessor } = option;
     let dependencies = this.project.dependencies();
@@ -75,13 +93,13 @@ module.exports = {
 
     if (bootstrapVersion === 4) {
       if ('bootstrap' in bowerDependencies) {
-        this.ui.writeLine(chalk.white.bgBlue('ACTION: Manually remove \'bootstrap\' from bower.json'));
+        promises.push(this.removePackageFromBowerJSON('bootstrap'));
       }
       if ('bootstrap-sass' in dependencies) {
         promises.push(this.removePackageFromProject('bootstrap-sass'));
       }
       if ('bootstrap-sass' in bowerDependencies) {
-        this.ui.writeLine(chalk.white.bgBlue('ACTION: Manually remove \'bootstrap-sass\' from bower.json'));
+        promises.push(this.removePackageFromBowerJSON('bootstrap-sass'));
       }
       promises.push(this.addPackageToProject('bootstrap', bs4Version));
     } else if (targetPreprocessor === 'sass') {
@@ -89,7 +107,7 @@ module.exports = {
         promises.push(this.removePackageFromProject('bootstrap'));
       }
       if ('bootstrap' in bowerDependencies) {
-        this.ui.writeLine(chalk.white.bgBlue('ACTION: Manually remove \'bootstrap\' from bower.json'));
+        promises.push(this.removePackageFromBowerJSON('bootstrap'));
       }
       promises.push(this.addPackageToProject('bootstrap-sass', bs3Version));
     } else {

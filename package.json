@@ -80,6 +80,7 @@
     "ember-cli-htmlbars": "^1.0.10",
     "ember-runtime-enumerable-includes-polyfill": "^1.0.1",
     "ember-wormhole": "^0.4.1",
+    "fs-extra": "^2.0.0",
     "rsvp": "^3.3.3"
   },
   "ember-addon": {
