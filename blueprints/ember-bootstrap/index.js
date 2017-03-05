@@ -111,13 +111,10 @@ module.exports = {
       }
       promises.push(this.addPackageToProject('bootstrap-sass', bs3Version));
     } else {
-      if ('bootstrap' in dependencies) {
-        promises.push(this.removePackageFromProject('bootstrap'));
-      }
       if ('bootstrap-sass' in dependencies) {
         promises.push(this.removePackageFromProject('bootstrap-sass'));
       }
-      promises.push(this.addBowerPackageToProject('bootstrap', bs3Version));
+      promises.push(this.addPackageToProject('bootstrap', bs3Version));
     }
 
     return rsvp.all(promises);
