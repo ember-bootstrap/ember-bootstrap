@@ -63,6 +63,7 @@ module.exports = {
 
   afterInstall(option) {
     return this.adjustBootstrapDependencies(option)
+      .then(() => this.adjustPreprocessorDependencies(option))
       .then(() => this.addPreprocessorStyleImport(option))
       .then(() => this.addBuildConfiguration(option));
   },
@@ -115,6 +116,30 @@ module.exports = {
         promises.push(this.removePackageFromProject('bootstrap-sass'));
       }
       promises.push(this.addPackageToProject('bootstrap', bs3Version));
+    }
+
+    return rsvp.all(promises);
+  },
+
+  adjustPreprocessorDependencies(option) {
+    let { preprocessor } = option;
+    let dependencies = this.project.dependencies();
+    let promises = [];
+
+    if (preprocessor !== 'less' && 'ember-cli-less' in dependencies) {
+      promises.push(this.removePackageFromProject('ember-cli-less'));
+    }
+
+    if (preprocessor !== 'sass' && 'ember-cli-sass' in dependencies) {
+      promises.push(this.removePackageFromProject('ember-cli-sass'));
+    }
+
+    if (preprocessor === 'less' && !('ember-cli-less' in dependencies)) {
+      promises.push(this.addAddonToProject('ember-cli-less'));
+    }
+
+    if (preprocessor === 'sass' && !('ember-cli-sass' in dependencies)) {
+      promises.push(this.addAddonToProject('ember-cli-sass'));
     }
 
     return rsvp.all(promises);
