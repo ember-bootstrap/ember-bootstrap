@@ -24,8 +24,8 @@ module.exports = {
   description: 'Configure ember-bootstrap',
 
   availableOptions: [
-    { name: 'bootstrap-version', type: Number, default: 3, aliases: ['bv'] },
-    { name: 'target-preprocessor', type: String, aliases: ['tp'] }
+    { name: 'bootstrap-version', type: Number, default: 3, aliases: ['bootstrap', 'bv'] },
+    { name: 'preprocessor', type: String, aliases: ['pp'] }
   ],
 
   works: 'insideProject',
@@ -34,31 +34,31 @@ module.exports = {
   },
 
   beforeInstall(option) {
-    let { bootstrapVersion, targetPreprocessor } = option;
+    let { bootstrapVersion, preprocessor } = option;
     if (bootstrapVersion !== 3 && bootstrapVersion !== 4) {
       throw new SilentError('Bootstrap version must be 3 or 4');
     }
 
-    if (targetPreprocessor && !validPreprocessors.includes(targetPreprocessor)) {
+    if (preprocessor && !validPreprocessors.includes(preprocessor)) {
       throw new SilentError(`Valid preprocessors are: ${validPreprocessors.join(', ')}`);
     }
 
-    if (!targetPreprocessor) {
+    if (!preprocessor) {
       let dependencies = this.project.dependencies();
       if ('ember-cli-sass' in dependencies) {
-        targetPreprocessor = option.targetPreprocessor = 'sass';
+        preprocessor = option.preprocessor = 'sass';
       } else if ('ember-cli-less' in dependencies) {
-        targetPreprocessor = option.targetPreprocessor = 'less';
+        preprocessor = option.preprocessor = 'less';
       } else {
-        targetPreprocessor = 'none';
+        preprocessor = 'none';
       }
     }
 
-    if (bootstrapVersion === 4 && targetPreprocessor === 'less') {
+    if (bootstrapVersion === 4 && preprocessor === 'less') {
       throw new SilentError('You cannot use LESS with Bootstrap 4');
     }
 
-    this.ui.writeLine(chalk.green(`Installing for Bootstrap ${bootstrapVersion} using preprocessor ${targetPreprocessor}`));
+    this.ui.writeLine(chalk.green(`Installing for Bootstrap ${bootstrapVersion} using preprocessor ${preprocessor}`));
   },
 
   afterInstall(option) {
@@ -86,7 +86,7 @@ module.exports = {
   },
 
   adjustBootstrapDependencies(option) {
-    let { bootstrapVersion, targetPreprocessor } = option;
+    let { bootstrapVersion, preprocessor } = option;
     let dependencies = this.project.dependencies();
     let bowerDependencies = this.project.bowerDependencies();
     let promises = [];
@@ -102,7 +102,7 @@ module.exports = {
         promises.push(this.removePackageFromBowerJSON('bootstrap-sass'));
       }
       promises.push(this.addPackageToProject('bootstrap', bs4Version));
-    } else if (targetPreprocessor === 'sass') {
+    } else if (preprocessor === 'sass') {
       if ('bootstrap' in dependencies) {
         promises.push(this.removePackageFromProject('bootstrap'));
       }
@@ -121,14 +121,14 @@ module.exports = {
   },
 
   addPreprocessorStyleImport(option) {
-    let { targetPreprocessor } = option;
+    let { preprocessor } = option;
     let importStatement = '\n@import "ember-bootstrap/bootstrap";\n';
 
-    if (targetPreprocessor === 'none') {
+    if (preprocessor === 'none') {
       return;
     }
 
-    let extension = targetPreprocessor === 'sass' ? 'scss' : 'less';
+    let extension = preprocessor === 'sass' ? 'scss' : 'less';
 
     let stylePath = path.join('app', 'styles');
     let file = path.join(stylePath, `app.${extension}`);
@@ -147,7 +147,7 @@ module.exports = {
 
   addBuildConfiguration(option) {
     let file = 'ember-cli-build.js';
-    let { bootstrapVersion, targetPreprocessor } = option;
+    let { bootstrapVersion, preprocessor } = option;
     let settings = {
       bootstrapVersion
     };
@@ -156,7 +156,7 @@ module.exports = {
       settings.importBootstrapFont = false;
     }
 
-    settings.importBootstrapCSS = (targetPreprocessor === 'none');
+    settings.importBootstrapCSS = (preprocessor === 'none');
 
     if (fs.existsSync(file)) {
       this.ui.writeLine(chalk.green(`Added ember-bootstrap configuration to ${file}`));
