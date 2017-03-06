@@ -177,9 +177,7 @@ module.exports = {
       bootstrapVersion
     };
 
-    if (bootstrapVersion === 4) {
-      settings.importBootstrapFont = false;
-    }
+    settings.importBootstrapFont = (bootstrapVersion === 3);
 
     settings.importBootstrapCSS = (preprocessor === 'none');
 
