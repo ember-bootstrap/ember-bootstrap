@@ -20,6 +20,26 @@ In your application's directory:
 
     ember install ember-bootstrap
     
+This will install Bootstrap 3 and will use the currently installed preprocessor or none if one is not installed.
+To switch Bootstrap version or preprocessor, re-run the default blueprint like
+
+    ember generate ember-bootstrap --bootstrap-version=4 --preprocessor=sass
+    
+The `--bootstrap-version` can be "3" or "4" and defaults to "3" if the option is omitted. The `--preprocessor`
+can be `none`, `less`, or `sass` and will use the currently installed preprocessor as its cue if omitted.
+We explicitly support `ember-cli-less` and `ember-cli-sass`. You will need to install and configure other
+preprocessors yourself.
+
+The default blueprint does the following:
+
+* Removes any unneeded versions of `bootstrap` and `bootstrap-sass` from `package.json` and `bower.json`
+* Installs the appropriate version of `bootstrap` or `bootstrap-sass` as an npm package
+* Removes unneeded dependencies on `ember-cli-less` and `ember-cli-sass`
+* Installs `ember-cli-less` or `ember-cli-sass` if appropriate
+* Creates `app.less` or `app.scss` if appropriate and it doesn't exist
+* Adds the appropriate `@import` statement to your `app.less` or `app.scss` if it's not there
+* Safely edits your `ember-cli-build.js` to ensure the proper ember-bootstrap settings for your configuration
+    
 ### 1.0 alpha
     
 The 1.0 release is currently in alpha stage. While the API is not guaranteed to remain unchanged until the first stable release, 
