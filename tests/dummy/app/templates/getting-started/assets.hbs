@@ -1,5 +1,47 @@
 <h1 id="addon-options">Importing assets</h1>
 
+<h2 id="configuration-with-blueprint">Configuration using the default blueprint</h2>
+
+<p>By default, ember-bootstrap installs Bootstrap 3 and uses the installed preprocessor if there is one. You can use
+    the ember-bootstrap default blueprint to switch Bootstrap version or preprocessor. Simply re-run the default
+    blueprint like</p>
+
+<pre class="highlight">ember generate ember-bootstrap --bootstrap-version=4 --preprocessor=sass
+</pre>
+
+<p>The <code>--bootstrap-version</code> can be "3" or "4" and defaults to "3" if the option is omitted. The
+    <code>--preprocessor</code> can be "none", "less", or "sass". The blueprint will use the currently installed
+    preprocessor as its cue if this option is omitted. We explicitly support ember-cli-less and ember-cli-sass. You will
+    need to install and configure other preprocessors yourself.</p>
+
+<p>The default blueprint does the following:</p>
+
+<ul>
+    <li>
+        Removes any unneeded versions of bootstrap and bootstrap-sass from <code>package.json</code>
+        and <code>bower.json</code>
+    </li>
+    <li>
+        Installs the appropriate version of bootstrap or bootstrap-sass as an npm package
+    </li>
+    <li>
+        Removes unneeded dependencies on ember-cli-less and ember-cli-sass
+    </li>
+    <li>
+        Installs ember-cli-less or ember-cli-sass if appropriate
+    </li>
+    <li>
+        Creates <code>app.less</code> or <code>app.scss</code> if appropriate and it doesn't exist
+    </li>
+    <li>
+        Adds the appropriate "@import" statement to your <code>app.less</code> or <code>app.scss</code> if it&apos;s
+        not there already
+    </li>
+    <li>
+        Safely edits your <code>ember-cli-build.js</code> to ensure the proper ember-bootstrap settings for your configuration
+    </li>
+</ul>
+
 <h2 id="importing-css-assets">Importing static CSS Assets</h2>
 
 <p>When not using a CSS preprocessor (see below) ember-bootstrap will automatically import the static Bootstrap CSS into
