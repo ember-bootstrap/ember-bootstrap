@@ -92,23 +92,21 @@ module.exports = {
     let bowerDependencies = this.project.bowerDependencies();
     let promises = [];
 
+    if ('bootstrap' in bowerDependencies) {
+      promises.push(this.removePackageFromBowerJSON('bootstrap'));
+    }
+    if ('bootstrap-sass' in bowerDependencies) {
+      promises.push(this.removePackageFromBowerJSON('bootstrap-sass'));
+    }
+
     if (bootstrapVersion === 4) {
-      if ('bootstrap' in bowerDependencies) {
-        promises.push(this.removePackageFromBowerJSON('bootstrap'));
-      }
       if ('bootstrap-sass' in dependencies) {
         promises.push(this.removePackageFromProject('bootstrap-sass'));
-      }
-      if ('bootstrap-sass' in bowerDependencies) {
-        promises.push(this.removePackageFromBowerJSON('bootstrap-sass'));
       }
       promises.push(this.addPackageToProject('bootstrap', bs4Version));
     } else if (preprocessor === 'sass') {
       if ('bootstrap' in dependencies) {
         promises.push(this.removePackageFromProject('bootstrap'));
-      }
-      if ('bootstrap' in bowerDependencies) {
-        promises.push(this.removePackageFromBowerJSON('bootstrap'));
       }
       promises.push(this.addPackageToProject('bootstrap-sass', bs3Version));
     } else {
