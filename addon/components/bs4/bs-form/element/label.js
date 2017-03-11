@@ -3,7 +3,7 @@ import FormElementLabel from 'ember-bootstrap/components/base/bs-form/element/la
 export default FormElementLabel.extend({
   tagName: 'label',
 
-  classNames: ['form-control-label'],
+  classNames: ['col-form-label'],
   classNameBindings: ['invisibleLabel:sr-only', 'labelClass'],
   attributeBindings: ['formElementId:for']
 });
