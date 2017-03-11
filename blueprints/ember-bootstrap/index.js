@@ -41,7 +41,7 @@ module.exports = {
       throw new SilentError('Bootstrap version must be 3 or 4');
     }
 
-    if (preprocessor && !validPreprocessors.includes(preprocessor)) {
+    if (preprocessor && validPreprocessors.indexOf(preprocessor) === -1) {
       throw new SilentError(`Valid preprocessors are: ${validPreprocessors.join(', ')}`);
     }
 
