@@ -34,7 +34,9 @@ module.exports = {
   },
 
   beforeInstall(option) {
-    let { bootstrapVersion, preprocessor } = option;
+    let bootstrapVersion = option.bootstrapVersion;
+    let preprocessor = option.preprocessor;
+
     if (bootstrapVersion !== 3 && bootstrapVersion !== 4) {
       throw new SilentError('Bootstrap version must be 3 or 4');
     }
@@ -87,7 +89,8 @@ module.exports = {
   },
 
   adjustBootstrapDependencies(option) {
-    let { bootstrapVersion, preprocessor } = option;
+    let bootstrapVersion = option.bootstrapVersion;
+    let preprocessor = option.preprocessor;
     let dependencies = this.project.dependencies();
     let bowerDependencies = this.project.bowerDependencies();
     let promises = [];
@@ -120,7 +123,7 @@ module.exports = {
   },
 
   adjustPreprocessorDependencies(option) {
-    let { preprocessor } = option;
+    let preprocessor = option.preprocessor;
     let dependencies = this.project.dependencies();
     let promises = [];
 
@@ -144,7 +147,7 @@ module.exports = {
   },
 
   addPreprocessorStyleImport(option) {
-    let { preprocessor } = option;
+    let preprocessor = option.preprocessor;
     let importStatement = '\n@import "ember-bootstrap/bootstrap";\n';
 
     if (preprocessor === 'none') {
@@ -170,7 +173,8 @@ module.exports = {
 
   addBuildConfiguration(option) {
     let file = 'ember-cli-build.js';
-    let { bootstrapVersion, preprocessor } = option;
+    let bootstrapVersion = option.bootstrapVersion;
+    let preprocessor = option.preprocessor;
     let settings = {
       bootstrapVersion
     };
