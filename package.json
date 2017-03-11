@@ -8,7 +8,7 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember try:each && DEBUG=ember-cli.addon-tests ember fastboot:test",
+    "test": "ember try:each",
     "nodetest": "mocha node-tests --recursive"
   },
   "repository": {
@@ -28,7 +28,7 @@
     "ember-ajax": "^2.4.1",
     "ember-cli": "^2.10.0",
     "ember-cli-app-version": "^2.0.0",
-    "ember-cli-blueprint-test-helpers": "0.14.0",
+    "ember-cli-blueprint-test-helpers": "^0.17.0",
     "ember-cli-dependency-checker": "^1.3.0",
     "ember-cli-eslint": "^3.0.2",
     "ember-cli-fastboot": "^1.0.0-beta.15",
