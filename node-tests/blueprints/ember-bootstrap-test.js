@@ -39,7 +39,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
 
     describe('based on existing preprocessor', function() {
 
-      it('skips blueprint when no preprocessor present', function() {
+      it('skips style import when no preprocessor present', function() {
         let args = ['ember-bootstrap'];
 
         return emberNew()
@@ -114,7 +114,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
 
     describe('based on generator option', function() {
 
-      it('skips blueprint when --preprocessor=none', function() {
+      it('skips style import when --preprocessor=none', function() {
         let args = ['ember-bootstrap', '--preprocessor=none'];
 
         return emberNew()
