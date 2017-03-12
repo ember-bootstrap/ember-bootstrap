@@ -34,7 +34,7 @@ module.exports = {
   },
 
   beforeInstall(option) {
-    let bootstrapVersion = option.bootstrapVersion;
+    let bootstrapVersion = option.bootstrapVersion = parseInt(option.bootstrapVersion);
     let preprocessor = option.preprocessor;
 
     if (bootstrapVersion !== 3 && bootstrapVersion !== 4) {
