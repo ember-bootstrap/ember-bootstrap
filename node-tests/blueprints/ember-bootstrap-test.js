@@ -186,17 +186,30 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       bower: [],
       addon: []
     };
+    let uninstalled = {
+      npm: [],
+      bower: []
+    };
 
     before(function() {
       Blueprint.prototype.taskFor = function(taskName) {
         let match = taskName.match(/^(npm|bower|addon)-install$/);
-
         if (match) {
           let type = match[1];
           return {
             run: function(options) {
               let packages = options.packages || [];
               installed[type] = installed[type].concat(packages);
+              return Promise.resolve();
+            }
+          };
+        }
+
+        if (taskName === 'npm-uninstall') {
+          return {
+            run: function(options) {
+              let packages = options.packages || [];
+              uninstalled.npm = uninstalled.npm.concat(packages);
               return Promise.resolve();
             }
           };
@@ -216,11 +229,20 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
         bower: [],
         addon: []
       };
+      uninstalled = {
+        npm: [],
+        bower: []
+      };
     });
 
     function checkPackage(type, pkg, version) {
       let installedPackages = installed[type];
+      let uninstalledPackages = uninstalled[type === 'addon' ? 'npm' : type];
       if (version === null) {
+        if (type === 'bower') {
+          return; // not yet implemented
+        }
+        expect(uninstalledPackages).to.include.some.that.equal(pkg);
         if (type === 'addon') {
           expect(installedPackages).to.not.include.some.that.equal(pkg);
         } else {

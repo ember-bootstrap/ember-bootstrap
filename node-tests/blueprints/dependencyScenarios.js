@@ -5,12 +5,8 @@ const bs4Regex = 'next';
 const scenarios = [
   {
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs3Regex,
-        'bootstrap-sass': null
+        bootstrap: bs3Regex
       }
     }
   },
@@ -19,9 +15,16 @@ const scenarios = [
       npm: ['ember-cli-less']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
+      npm: {
+        bootstrap: bs3Regex
+      }
+    }
+  },
+  {
+    installed: {
+      npm: ['ember-cli-less', 'bootstrap-sass']
+    },
+    dependencies: {
       npm: {
         bootstrap: bs3Regex,
         'bootstrap-sass': null
@@ -33,9 +36,16 @@ const scenarios = [
       npm: ['ember-cli-sass']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
+      npm: {
+        'bootstrap-sass': bs3Regex
+      }
+    }
+  },
+  {
+    installed: {
+      npm: ['ember-cli-sass', 'bootstrap']
+    },
+    dependencies: {
       npm: {
         bootstrap: null,
         'bootstrap-sass': bs3Regex
@@ -47,9 +57,19 @@ const scenarios = [
       preprocessor: 'none'
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
+      npm: {
+        bootstrap: bs3Regex
+      }
+    }
+  },
+  {
+    options: {
+      preprocessor: 'none'
+    },
+    installed: {
+      npm: ['bootstrap-sass']
+    },
+    dependencies: {
       npm: {
         bootstrap: bs3Regex,
         'bootstrap-sass': null
@@ -61,12 +81,9 @@ const scenarios = [
       preprocessor: 'none'
     },
     installed: {
-      npm: ['ember-cli-sass']
+      npm: ['ember-cli-sass', 'bootstrap-sass']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
         bootstrap: bs3Regex,
         'bootstrap-sass': null
@@ -84,12 +101,8 @@ const scenarios = [
       npm: ['ember-cli-less']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs3Regex,
-        'bootstrap-sass': null
+        bootstrap: bs3Regex
       },
       addon: {
         'ember-cli-less': null
@@ -101,12 +114,8 @@ const scenarios = [
       preprocessor: 'less'
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs3Regex,
-        'bootstrap-sass': null
+        bootstrap: bs3Regex
       },
       addon: {
         'ember-cli-less': true
@@ -121,15 +130,8 @@ const scenarios = [
       npm: ['ember-cli-less']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs3Regex,
-        'bootstrap-sass': null
-      },
-      addon: {
-        'ember-cli-sass': null
+        bootstrap: bs3Regex
       }
     }
   },
@@ -138,12 +140,9 @@ const scenarios = [
       preprocessor: 'less'
     },
     installed: {
-      npm: ['ember-cli-sass']
+      npm: ['ember-cli-sass', 'bootstrap-sass']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
         bootstrap: bs3Regex,
         'bootstrap-sass': null
@@ -159,9 +158,22 @@ const scenarios = [
       preprocessor: 'sass'
     },
     dependencies: {
-      bower: {
-        bootstrap: null
+      npm: {
+        'bootstrap-sass': bs3Regex
       },
+      addon: {
+        'ember-cli-sass': true
+      }
+    }
+  },
+  {
+    options: {
+      preprocessor: 'sass'
+    },
+    installed: {
+      npm: ['bootstrap']
+    },
+    dependencies: {
       npm: {
         bootstrap: null,
         'bootstrap-sass': bs3Regex
@@ -179,11 +191,7 @@ const scenarios = [
       npm: ['ember-cli-sass']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: null,
         'bootstrap-sass': bs3Regex
       }
     }
@@ -196,9 +204,23 @@ const scenarios = [
       npm: ['ember-cli-less']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
+      npm: {
+        'bootstrap-sass': bs3Regex
       },
+      addon: {
+        'ember-cli-less': null,
+        'ember-cli-sass': true
+      }
+    }
+  },
+  {
+    options: {
+      preprocessor: 'sass'
+    },
+    installed: {
+      npm: ['ember-cli-less', 'bootstrap']
+    },
+    dependencies: {
       npm: {
         bootstrap: null,
         'bootstrap-sass': bs3Regex
@@ -216,12 +238,8 @@ const scenarios = [
       bootstrapVersion: 3
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs3Regex,
-        'bootstrap-sass': null
+        bootstrap: bs3Regex
       }
     }
   },
@@ -233,12 +251,8 @@ const scenarios = [
       npm: ['ember-cli-less']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs3Regex,
-        'bootstrap-sass': null
+        bootstrap: bs3Regex
       }
     }
   },
@@ -250,11 +264,7 @@ const scenarios = [
       npm: ['ember-cli-sass']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: null,
         'bootstrap-sass': bs3Regex
       }
     }
@@ -265,12 +275,8 @@ const scenarios = [
       bootstrapVersion: 3
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs3Regex,
-        'bootstrap-sass': null
+        bootstrap: bs3Regex
       }
     }
   },
@@ -283,12 +289,8 @@ const scenarios = [
       npm: ['ember-cli-sass']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs3Regex,
-        'bootstrap-sass': null
+        bootstrap: bs3Regex
       },
       addon: {
         'ember-cli-sass': null
@@ -304,12 +306,8 @@ const scenarios = [
       npm: ['ember-cli-less']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs3Regex,
-        'bootstrap-sass': null
+        bootstrap: bs3Regex
       },
       addon: {
         'ember-cli-less': null
@@ -322,12 +320,8 @@ const scenarios = [
       bootstrapVersion: 3
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs3Regex,
-        'bootstrap-sass': null
+        bootstrap: bs3Regex
       },
       addon: {
         'ember-cli-less': true
@@ -343,12 +337,8 @@ const scenarios = [
       npm: ['ember-cli-less']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs3Regex,
-        'bootstrap-sass': null
+        bootstrap: bs3Regex
       }
     }
   },
@@ -361,12 +351,8 @@ const scenarios = [
       npm: ['ember-cli-sass']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
         bootstrap: bs3Regex,
-        'bootstrap-sass': null
       },
       addon: {
         'ember-cli-less': true,
@@ -380,11 +366,7 @@ const scenarios = [
       bootstrapVersion: 3
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: null,
         'bootstrap-sass': bs3Regex
       },
       addon: {
@@ -401,11 +383,7 @@ const scenarios = [
       npm: ['ember-cli-sass']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: null,
         'bootstrap-sass': bs3Regex
       }
     }
@@ -419,11 +397,7 @@ const scenarios = [
       npm: ['ember-cli-less']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: null,
         'bootstrap-sass': bs3Regex
       },
       addon: {
@@ -439,12 +413,8 @@ const scenarios = [
       bootstrapVersion: 4
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs4Regex,
-        'bootstrap-sass': null
+        bootstrap: bs4Regex
       }
     }
   },
@@ -456,9 +426,19 @@ const scenarios = [
       npm: ['ember-cli-sass']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
+      npm: {
+        bootstrap: bs4Regex
+      }
+    }
+  },
+  {
+    options: {
+      bootstrapVersion: 4
+    },
+    installed: {
+      npm: ['ember-cli-sass', 'bootstrap-sass']
+    },
+    dependencies: {
       npm: {
         bootstrap: bs4Regex,
         'bootstrap-sass': null
@@ -471,12 +451,8 @@ const scenarios = [
       bootstrapVersion: 4
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs4Regex,
-        'bootstrap-sass': null
+        bootstrap: bs4Regex
       }
     }
   },
@@ -489,9 +465,23 @@ const scenarios = [
       npm: ['ember-cli-sass']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
+      npm: {
+        bootstrap: bs4Regex
       },
+      addon: {
+        'ember-cli-sass': null
+      }
+    }
+  },
+  {
+    options: {
+      preprocessor: 'none',
+      bootstrapVersion: 4
+    },
+    installed: {
+      npm: ['ember-cli-sass', 'bootstrap-sass']
+    },
+    dependencies: {
       npm: {
         bootstrap: bs4Regex,
         'bootstrap-sass': null
@@ -510,12 +500,8 @@ const scenarios = [
       npm: ['ember-cli-less']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
-        bootstrap: bs4Regex,
-        'bootstrap-sass': null
+        bootstrap: bs4Regex
       },
       addon: {
         'ember-cli-less': null
@@ -528,9 +514,23 @@ const scenarios = [
       bootstrapVersion: 4
     },
     dependencies: {
-      bower: {
-        bootstrap: null
+      npm: {
+        bootstrap: bs4Regex
       },
+      addon: {
+        'ember-cli-sass': true
+      }
+    }
+  },
+  {
+    options: {
+      preprocessor: 'sass',
+      bootstrapVersion: 4
+    },
+    installed: {
+      npm: ['bootstrap-sass']
+    },
+    dependencies: {
       npm: {
         bootstrap: bs4Regex,
         'bootstrap-sass': null
@@ -549,9 +549,20 @@ const scenarios = [
       npm: ['ember-cli-sass']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
+      npm: {
+        bootstrap: bs4Regex
+      }
+    }
+  },
+  {
+    options: {
+      preprocessor: 'sass',
+      bootstrapVersion: 4
+    },
+    installed: {
+      npm: ['ember-cli-sass', 'bootstrap-sass']
+    },
+    dependencies: {
       npm: {
         bootstrap: bs4Regex,
         'bootstrap-sass': null
@@ -567,12 +578,8 @@ const scenarios = [
       npm: ['ember-cli-less']
     },
     dependencies: {
-      bower: {
-        bootstrap: null
-      },
       npm: {
         bootstrap: bs4Regex,
-        'bootstrap-sass': null
       },
       addon: {
         'ember-cli-less': null,
