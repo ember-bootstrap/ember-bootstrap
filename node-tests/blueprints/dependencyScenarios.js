@@ -22,17 +22,6 @@ const scenarios = [
   },
   {
     installed: {
-      npm: ['ember-cli-less', 'bootstrap-sass']
-    },
-    dependencies: {
-      npm: {
-        bootstrap: bs3Regex,
-        'bootstrap-sass': null
-      }
-    }
-  },
-  {
-    installed: {
       npm: ['ember-cli-sass']
     },
     dependencies: {
