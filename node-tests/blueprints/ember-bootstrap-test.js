@@ -35,7 +35,6 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
   setupTestHooks(this);
 
   describe('import styles', function() {
-    setupTestHooks(this);
 
     describe('based on existing preprocessor', function() {
 
