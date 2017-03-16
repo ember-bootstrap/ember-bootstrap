@@ -20,6 +20,9 @@ In your application's directory:
 
     ember install ember-bootstrap
     
+This will install Bootstrap 3 and will use the currently installed preprocessor or none if one is not installed.
+To switch Bootstrap version or preprocessor, see the documentation.
+
 ### 1.0 alpha
     
 The 1.0 release is currently in alpha stage. While the API is not guaranteed to remain unchanged until the first stable release, 

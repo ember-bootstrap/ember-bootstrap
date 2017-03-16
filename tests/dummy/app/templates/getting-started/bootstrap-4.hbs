@@ -19,29 +19,7 @@
         <code>package.json</code> and install ember-cli-sass if appropriate.
     </li>
     <li>
-        Run the ember-bootstrap blueprint. (You don't have to do this again if you already did it with the right
-        preprocessor as part of your migraion to 1.0.)
-        <pre class="highlight"><code>ember generate ember-bootstrap</code></pre>
-    </li>
-    <li>
-        Add the <code>bootstrapVersion</code> key to the ember-bootstrap configuration so it looks similar to
-        <div>
-            <pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
-
-/* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
-
-module.exports = function(defaults) {
-    var app = new EmberApp(defaults, {
-        'ember-bootstrap': {
-            bootstrapVersion: 4
-        }
-    });
-
-    return app.toTree();
-};
-            </code></pre>
-        </div>
+        Run the ember-bootstrap blueprint. For details, see the <a href="assets.hbs">assets guide</a>.
     </li>
     <li>
         Make sure your ember-bootstrap code uses all of the new contextual components. Most of the differences between

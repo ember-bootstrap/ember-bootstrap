@@ -28,6 +28,7 @@ env:
   - EMBER_TRY_SCENARIO=ember-release-bs4
   - EMBER_TRY_SCENARIO=ember-beta-bs4
   - EMBER_TRY_SCENARIO=fastboot-addon-tests
+  - EMBER_TRY_SCENARIO=blueprint-tests
 
 matrix:
   fast_finish: true

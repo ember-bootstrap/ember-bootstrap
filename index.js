@@ -36,9 +36,9 @@ module.exports = {
     this.app = app;
 
     let options = extend(extend({}, defaultOptions), app.options['ember-bootstrap']);
-    if (process.env['BOOTSTRAPVERSION']) {
+    if (process.env.BOOTSTRAPVERSION) {
       // override bootstrapVersion config when environment variable is set
-      options.bootstrapVersion = parseInt(process.env['BOOTSTRAPVERSION']);
+      options.bootstrapVersion = parseInt(process.env.BOOTSTRAPVERSION);
     }
     this.bootstrapOptions = options;
 
@@ -71,11 +71,10 @@ module.exports = {
   },
 
   validatePreprocessor(name) {
-    let npmDependencies = this.app.project.dependencies();
-    let bowerDependencies = this.app.project.bowerDependencies();
+    let dependencies = this.app.project.dependencies();
     switch (name) {
       case 'sass':
-        if (!('bootstrap-sass' in npmDependencies) && this.getBootstrapVersion() === 3) {
+        if (!('bootstrap-sass' in dependencies) && this.getBootstrapVersion() === 3) {
           this.ui.writeLine(chalk.red('Npm package "bootstrap-sass" is missing, but required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'));
           return false;
         }
@@ -85,7 +84,7 @@ module.exports = {
           this.ui.writeLine(chalk.red('There is no Less support for Bootstrap 4! Falling back to importing static CSS. Consider switching to Sass for preprocessor support!'));
           return false;
         }
-        if (!('bootstrap' in bowerDependencies)) {
+        if (!('bootstrap' in dependencies)) {
           this.ui.writeLine(chalk.red('Bower package "bootstrap" is missing, but required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'));
           return false;
         }
@@ -95,21 +94,18 @@ module.exports = {
   },
 
   getBootstrapStylesPath() {
+    let nodeModulesPath = this.app.project.nodeModulesPath;
     switch (this.preprocessor) {
       case 'sass':
         if (this.getBootstrapVersion() === 4) {
-          return path.join(this.app.project.nodeModulesPath, 'bootstrap', 'scss');
+          return path.join(nodeModulesPath, 'bootstrap', 'scss');
         } else {
-          return path.join(this.app.project.nodeModulesPath, 'bootstrap-sass', 'assets', 'stylesheets');
+          return path.join(nodeModulesPath, 'bootstrap-sass', 'assets', 'stylesheets');
         }
       case 'less':
-        return path.join(this.app.bowerDirectory, 'bootstrap', 'less');
+        return path.join(nodeModulesPath, 'bootstrap', 'less');
       default:
-        if (this.getBootstrapVersion() === 4) {
-          return path.join(this.app.project.nodeModulesPath, 'bootstrap', 'dist', 'css');
-        } else {
-          return path.join(this.app.bowerDirectory, 'bootstrap', 'dist', 'css');
-        }
+        return path.join(nodeModulesPath, 'bootstrap', 'dist', 'css');
     }
   },
 
@@ -119,7 +115,7 @@ module.exports = {
         return path.join(this.app.project.nodeModulesPath, 'bootstrap-sass', 'assets', 'fonts');
       case 'less':
       default:
-        return path.join(this.app.bowerDirectory, 'bootstrap', 'fonts');
+        return path.join(this.app.project.nodeModulesPath, 'bootstrap', 'fonts');
     }
   },
 
@@ -179,7 +175,7 @@ module.exports = {
     tree = mv(tree, `${templatePath}common/`, templatePath);
     tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
     tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
-    return tree; //log(tree, {output: 'tree', label: 'moved'});
+    return tree; // log(tree, {output: 'tree', label: 'moved'});
   },
 
   contentFor(type, config) {
