@@ -8,12 +8,18 @@ moduleForComponent('bs-button-group', 'Integration | Component | bs-button-group
 });
 
 test('button group has correct CSS classes', function(assert) {
-  this.render(hbs`{{#bs-button-group size="lg" vertical=true justified=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
+  this.render(hbs`{{#bs-button-group size="lg" justified=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
 
-  assert.equal(this.$(':first-child').hasClass('btn-group'), true, 'has btn-group class');
-  assert.equal(this.$(':first-child').hasClass('btn-group-lg'), true, 'has size class');
-  assert.equal(this.$(':first-child').hasClass('btn-group-vertical'), true, 'has vertical class');
-  assert.equal(this.$(':first-child').hasClass('btn-group-justified'), true, 'has justified class');
+  assert.ok(this.$(':first-child').hasClass('btn-group'), 'has btn-group class');
+  assert.ok(this.$(':first-child').hasClass('btn-group-lg'), 'has size class');
+  assert.ok(this.$(':first-child').hasClass('btn-group-justified'), 'has justified class');
+});
+
+test('button group supports vertical layout', function(assert) {
+  this.render(hbs`{{#bs-button-group vertical=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
+
+  assert.notOk(this.$(':first-child').hasClass('btn-group'), 'has not btn-group class');
+  assert.ok(this.$(':first-child').hasClass('btn-group-vertical'), 'has vertical class');
 });
 
 test('radio button group calls onChange with value of selected button', function(assert) {

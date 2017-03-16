@@ -69,8 +69,7 @@ const {
 export default Ember.Component.extend(SizeClass, {
   layout,
   ariaRole: 'group',
-  classNames: ['btn-group'],
-  classNameBindings: ['vertical:btn-group-vertical', 'justified:btn-group-justified'],
+  classNameBindings: ['vertical:btn-group-vertical:btn-group', 'justified:btn-group-justified'],
 
   /**
    * @property classTypePrefix
