@@ -157,25 +157,27 @@ module.exports = {
     return this.getBootstrapVersion() === 3 ? 4 : 3;
   },
 
-  treeForAddon() {
-    let tree = this._super.treeForAddon.apply(this, arguments);
+  treeForAddon(tree) {
     let bsVersion = this.getBootstrapVersion();
     let otherBsVersion = this.getOtherBootstrapVersion();
-    let componentsPath = 'modules/ember-bootstrap/components/';
+    let componentsPath = 'components/';
+
     tree = mv(tree, `${componentsPath}bs${bsVersion}/`, componentsPath);
     tree = rm(tree, `${componentsPath}bs${otherBsVersion}/**/*`);
-    return tree; // log(tree, {output: 'tree', label: 'moved'});
+
+    return this._super.treeForAddon.call(this, tree);
   },
 
-  treeForAddonTemplates() {
-    let tree = this._super.treeForAddonTemplates.apply(this, arguments);
+  treeForAddonTemplates(tree) {
     let bsVersion = this.getBootstrapVersion();
     let otherBsVersion = this.getOtherBootstrapVersion();
     let templatePath = 'components/';
+
     tree = mv(tree, `${templatePath}common/`, templatePath);
     tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
     tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
-    return tree; // log(tree, {output: 'tree', label: 'moved'});
+
+    return this._super.treeForAddonTemplates.call(this, tree);
   },
 
   contentFor(type, config) {
