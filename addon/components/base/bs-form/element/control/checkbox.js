@@ -17,7 +17,8 @@ export default Control.extend({
     'readonly',
     'required',
     'tabindex',
-    'form'
+    'form',
+    'title'
   ],
   tagName: 'input',
 

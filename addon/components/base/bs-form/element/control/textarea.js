@@ -24,7 +24,8 @@ export default Control.extend({
     'spellcheck',
     'rows',
     'cols',
-    'wrap'
+    'wrap',
+    'title'
   ],
   tagName: 'textarea',
   classNames: ['form-control'],
