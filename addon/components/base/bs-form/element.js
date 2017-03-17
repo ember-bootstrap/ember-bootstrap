@@ -415,7 +415,7 @@ export default FormGroup.extend({
    *
    * @property errors
    * @type array
-   * @private
+   * @protected
    */
   errors: null,
 
@@ -432,7 +432,7 @@ export default FormGroup.extend({
    *
    * @property errors
    * @type array
-   * @private
+   * @protected
    */
   warnings: null,
 
@@ -493,10 +493,10 @@ export default FormGroup.extend({
   /**
    * @property hasValidator
    * @type boolean
-   * @readonly
-   * @private
+   * @default false
+   * @protected
    */
-  hasValidator: computed.notEmpty('model.validate'),
+  hasValidator: false,
 
   /**
    * Set a validating state for async validations
@@ -504,7 +504,7 @@ export default FormGroup.extend({
    * @property isValidating
    * @type boolean
    * @default false
-   * @public
+   * @protected
    */
   isValidating: false,
 
