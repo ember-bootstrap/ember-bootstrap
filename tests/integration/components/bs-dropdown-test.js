@@ -28,6 +28,16 @@ test('dropdown container with dropdown button has btn-group class', function(ass
   }, 0);
 });
 
+test('dropdown container with block dropdown button has dropdown class', function(assert) {
+  this.render(hbs`{{#bs-dropdown as |dd|}}{{#dd.button block=true}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`);
+  let done = assert.async();
+  // timeout is needed as class is set in next run loop
+  setTimeout(() => {
+    assert.equal(this.$(':first-child').hasClass('dropdown'), true, 'has dropdown class');
+    done();
+  }, 0);
+});
+
 test('dropdown container with dropdown button supports dropup style', function(assert) {
   this.render(hbs`{{#bs-dropdown direction="up" as |dd|}}{{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`);
   let done = assert.async();

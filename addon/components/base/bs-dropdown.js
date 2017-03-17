@@ -154,7 +154,7 @@ export default Ember.Component.extend({
    * @private
    */
   containerClass: computed('toggle.tagName', 'direction', function() {
-    if (this.get('toggle.tagName') === 'button') {
+    if (this.get('toggle.tagName') === 'button' && this.get('toggle.block') !== true) {
       return this.get('direction') === 'up' ? 'btn-group dropup' : 'btn-group';
     } else {
       return this.get('direction') === 'up' ? 'dropup' : 'dropdown';
