@@ -10,7 +10,7 @@ const stew = require('broccoli-stew');
 const mv = stew.mv;
 // const log = stew.log;
 const rm = stew.rm;
-const chalk = require('chalk');
+const SilentError = require('silent-error'); // From ember-cli
 
 const defaultOptions = {
   importBootstrapTheme: false,
@@ -42,6 +42,7 @@ module.exports = {
     }
     this.bootstrapOptions = options;
 
+    this.validateDependencies();
     this.preprocessor = this.findPreprocessor();
 
     if (!this.hasPreprocessor()) {
@@ -66,6 +67,12 @@ module.exports = {
     }
   },
 
+  validateDependencies() {
+    if ('bootstrap' in this.app.project.bowerDependencies()) {
+      throw new SilentError('The dependencies for ember-bootstrap are outdated. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
+    }
+  },
+
   findPreprocessor() {
     return supportedPreprocessors.find((name) => !!this.app.project.findAddonByName(`ember-cli-${name}`) && this.validatePreprocessor(name));
   },
@@ -75,18 +82,15 @@ module.exports = {
     switch (name) {
       case 'sass':
         if (!('bootstrap-sass' in dependencies) && this.getBootstrapVersion() === 3) {
-          this.ui.writeLine(chalk.red('Npm package "bootstrap-sass" is missing, but required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'));
-          return false;
+          throw new SilentError('Npm package "bootstrap-sass" is missing, but required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
         }
         break;
       case 'less':
         if (this.getBootstrapVersion() === 4) {
-          this.ui.writeLine(chalk.red('There is no Less support for Bootstrap 4! Falling back to importing static CSS. Consider switching to Sass for preprocessor support!'));
-          return false;
+          throw new SilentError('There is no Less support for Bootstrap 4! Falling back to importing static CSS. Consider switching to Sass for preprocessor support!');
         }
         if (!('bootstrap' in dependencies)) {
-          this.ui.writeLine(chalk.red('Bower package "bootstrap" is missing, but required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'));
-          return false;
+          throw new SilentError('Npm package "bootstrap" is missing, but required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
         }
         break;
     }
