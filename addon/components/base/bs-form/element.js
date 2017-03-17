@@ -303,6 +303,12 @@ const nonDefaultLayouts = A([
  <td>✔︎</td>
  </tr>
  <tr>
+ <td>title</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
  <td>wrap</td>
  <td>✔︎</td>
  <td></td>

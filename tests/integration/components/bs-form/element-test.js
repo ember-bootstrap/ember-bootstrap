@@ -34,7 +34,8 @@ const supportedInputAttributes = {
   multiple: [true, 'multiple'],
   step: [50, 50],
   form: ['dummy', 'dummy'],
-  spellcheck: [true, 'true']
+  spellcheck: [true, 'true'],
+  title: ['dummy', 'dummy']
 };
 const supportedTextareaAttributes = {
   name: ['dummy', 'dummy'],
@@ -51,7 +52,8 @@ const supportedTextareaAttributes = {
   autocomplete: ['on', 'on'],
   form: ['dummy', 'dummy'],
   spellcheck: [true, 'true'],
-  wrap: ['hard', 'hard']
+  wrap: ['hard', 'hard'],
+  title: ['dummy', 'dummy']
 };
 const supportedCheckboxAttributes = {
   name: ['dummy', 'dummy'],
@@ -60,7 +62,8 @@ const supportedCheckboxAttributes = {
   disabled: [true, 'disabled'],
   autofocus: [true, 'autofocus'],
   tabindex: [50, 50],
-  form: ['dummy', 'dummy']
+  form: ['dummy', 'dummy'],
+  title: ['dummy', 'dummy']
 };
 
 test('component has form-group bootstrap class', function(assert) {
@@ -250,6 +253,7 @@ test('supported input attributes propagate', function(assert) {
       step=step
       form=form
       spellcheck=spellcheck
+      title=title
     }}`);
 
     for (let attribute in supportedInputAttributes) {
@@ -286,6 +290,7 @@ test('supported textarea attributes propagate', function(assert) {
       form=form
       spellcheck=spellcheck
       wrap=wrap
+      title=title
     }}`);
 
     for (let attribute in supportedTextareaAttributes) {
@@ -313,6 +318,7 @@ test('supported checkbox attributes propagate', function(assert) {
       autofocus=autofocus
       tabindex=tabindex
       form=form
+      title=title
     }}`);
 
     for (let attribute in supportedCheckboxAttributes) {

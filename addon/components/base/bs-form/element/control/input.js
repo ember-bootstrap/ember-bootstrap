@@ -31,7 +31,8 @@ export default Control.extend({
     'multiple',
     'step',
     'form',
-    'spellcheck'
+    'spellcheck',
+    'title'
   ],
   tagName: 'input',
   classNames: ['form-control'],
