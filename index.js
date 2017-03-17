@@ -11,6 +11,7 @@ const mv = stew.mv;
 // const log = stew.log;
 const rm = stew.rm;
 const SilentError = require('silent-error'); // From ember-cli
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 const defaultOptions = {
   importBootstrapTheme: false,
@@ -68,7 +69,7 @@ module.exports = {
   },
 
   validateDependencies() {
-    if ('bootstrap' in this.app.project.bowerDependencies()) {
+    if (EmberApp.env() !== 'test' && 'bootstrap' in this.app.project.bowerDependencies()) {
       throw new SilentError('The dependencies for ember-bootstrap are outdated. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
     }
   },
