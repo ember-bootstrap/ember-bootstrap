@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "1.0.0-alpha.5.682f75a5"
+        "version": "1.0.0-alpha.6"
     },
     "files": {
         "addon/components/base/bs-accordion/item.js": {
@@ -1022,7 +1022,7 @@
             "namespace": "Components",
             "file": "addon/components/base/bs-form/element.js",
             "line": 31,
-            "description": "Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.\n\n### Form layout\n\nThe appropriate Bootstrap markup for the given `formLayout` and `controlType` is automatically generated to easily\ncreate forms without coding the default Bootstrap form markup by hand:\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" action=\"submit\" as |form|}}\n{{form.element controlType=\"email\" label=\"Email\" placeholder=\"Email\" value=email}}\n{{form.element controlType=\"password\" label=\"Password\" placeholder=\"Password\" value=password}}\n{{form.element controlType=\"checkbox\" label=\"Remember me\" value=rememberMe}}\n{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n{{/bs-form}}\n```\n\n### Form validation\n\nIn the following example the control elements of the three form elements value will be bound to the properties\n(given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\" as |form|}}\n{{form.element controlType=\"email\" label=\"Email\" placeholder=\"Email\" property=\"email\"}}\n{{form.element controlType=\"password\" label=\"Password\" placeholder=\"Password\" property=\"password\"}}\n{{form.element controlType=\"checkbox\" label=\"Remember me\" property=\"rememberMe\"}}\n{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n{{/bs-form}}\n```\n\nBy using this indirection in comparison to directly binding the `value` property, you get the benefit of automatic\nform validation, given that your `model` has a supported means of validating itself.\nSee [Components.Form](Components.Form.html) for details on how to enable form validation.\n\nIn the example above the `model` was our controller itself, so the control elements were bound to the appropriate\nproperties of our controller. A controller implementing validations on those properties could look like this:\n\n```js\nimport Ember from 'ember';\nimport EmberValidations from 'ember-validations';\n\nexport default Ember.Controller.extend(EmberValidations,{\n  email: null,\n  password: null,\n  rememberMe: false,\n  validations: {\n    email: {\n      presence: true,\n      format: {\n        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$/\n      }\n    },\n    password: {\n      presence: true,\n      length: { minimum: 6, maximum: 10}\n    },\n    comments: {\n      length: { minimum: 5, maximum: 20}\n    }\n  }\n});\n```\n\nIf the `showValidation` property is `true` (which is automatically the case if a `focusOut` event is captured from the\ncontrol element or the containing `Components.Form` was submitted with its `model` failing validation) and there are\nvalidation errors for the `model`'s `property`, the appropriate Bootstrap validation markup (see\nhttp://getbootstrap.com/css/#forms-control-validation) is applied:\n\n* `validation` is set to 'error', which will set the `has-error` CSS class\n* the `errorIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are displayed as Bootstrap `help-block`s in BS3 and `form-text` in BS4\n\nThe same applies for warning messages, if the used validation library supports this. (Currently only\n[ember-cp-validations](https://github.com/offirgolan/ember-cp-validations))\n\nAs soon as the validation is successful again...\n\n* `validation` is set to 'success', which will set the `has-success` CSS class\n* the `successIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are removed\n\nIn case you want to display some error message that is independent of the model's validation, for example to display\na failure message on a login form after a failed authentication attempt (so not coming from the validation library),\nyou can use the `customError` property to do so.\n\n### Custom controls\n\nApart from the standard built-in browser controls (see the `controlType` property), you can use any custom control simply\nby invoking the component with a block template. Use whatever control you might want, for example a select-2 component\n(from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\" as |form|}}\n{{#form.element label=\"Select-2\" property=\"gender\" useIcons=false as |el|}}\n{{select-2 id=el.id content=genderChoices optionLabelPath=\"label\" value=el.value searchEnabled=false}}\n{{/form.element}}\n{{/bs-form}}\n```\n\nThe component yields a hash with the following properties:\n* `id`: id to be used for the form control, so it matches the labels `for` attribute\n* `value`: the value of the form element\n* `validation`: the validation state of the element, `null` if no validation is to be shown, otherwise 'success', 'error' or 'warning'\n\nIf your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports\nfeedback icons with textual `<input class=\"form-control\">` elements.\n\n### HTML attributes\n\nTo set HTML attributes on the control element provided by this component, set them as properties of this component:\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\" as |form|}}\n{{form.element controlType=\"email\" label=\"Email\" property=\"email\"\n  placeholder=\"Email\"\n  required=true\n  multiple=true\n  tabIndex=5\n}}\n...\n{{/bs-form}}\n```\n\nThe following attributes are supported depending on the `controlType`:\n\n<table class=\"table table-striped\">\n<thead>\n<tr>\n<th></th>\n<th>textarea</th>\n<th>checkbox</th>\n<th>all others</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>accept</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>autocomplete</td>\n<td>✔︎</td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>autofocus</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>autosave</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>cols</td>\n<td>✔︎</td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td>disabled</td>\n<td></td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>form</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>inputmode</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>max</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>maxlength</td>\n<td>✔︎</td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>min</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>minlength</td>\n<td>✔︎</td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>multiple</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>name</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>pattern</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>placeholder</td>\n<td>✔︎</td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>readonly</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>required</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>rows</td>\n<td>✔︎</td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td>size</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>spellcheck</td>\n<td>✔︎</td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>step</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>tabindex</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>wrap</td>\n<td>✔︎</td>\n<td></td>\n<td></td>\n</tr>\n</tbody>\n</table>",
+            "description": "Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.\n\n### Form layout\n\nThe appropriate Bootstrap markup for the given `formLayout` and `controlType` is automatically generated to easily\ncreate forms without coding the default Bootstrap form markup by hand:\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" action=\"submit\" as |form|}}\n{{form.element controlType=\"email\" label=\"Email\" placeholder=\"Email\" value=email}}\n{{form.element controlType=\"password\" label=\"Password\" placeholder=\"Password\" value=password}}\n{{form.element controlType=\"checkbox\" label=\"Remember me\" value=rememberMe}}\n{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n{{/bs-form}}\n```\n\n### Form validation\n\nIn the following example the control elements of the three form elements value will be bound to the properties\n(given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\" as |form|}}\n{{form.element controlType=\"email\" label=\"Email\" placeholder=\"Email\" property=\"email\"}}\n{{form.element controlType=\"password\" label=\"Password\" placeholder=\"Password\" property=\"password\"}}\n{{form.element controlType=\"checkbox\" label=\"Remember me\" property=\"rememberMe\"}}\n{{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n{{/bs-form}}\n```\n\nBy using this indirection in comparison to directly binding the `value` property, you get the benefit of automatic\nform validation, given that your `model` has a supported means of validating itself.\nSee [Components.Form](Components.Form.html) for details on how to enable form validation.\n\nIn the example above the `model` was our controller itself, so the control elements were bound to the appropriate\nproperties of our controller. A controller implementing validations on those properties could look like this:\n\n```js\nimport Ember from 'ember';\nimport EmberValidations from 'ember-validations';\n\nexport default Ember.Controller.extend(EmberValidations,{\n  email: null,\n  password: null,\n  rememberMe: false,\n  validations: {\n    email: {\n      presence: true,\n      format: {\n        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$/\n      }\n    },\n    password: {\n      presence: true,\n      length: { minimum: 6, maximum: 10}\n    },\n    comments: {\n      length: { minimum: 5, maximum: 20}\n    }\n  }\n});\n```\n\nIf the `showValidation` property is `true` (which is automatically the case if a `focusOut` event is captured from the\ncontrol element or the containing `Components.Form` was submitted with its `model` failing validation) and there are\nvalidation errors for the `model`'s `property`, the appropriate Bootstrap validation markup (see\nhttp://getbootstrap.com/css/#forms-control-validation) is applied:\n\n* `validation` is set to 'error', which will set the `has-error` CSS class\n* the `errorIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are displayed as Bootstrap `help-block`s in BS3 and `form-text` in BS4\n\nThe same applies for warning messages, if the used validation library supports this. (Currently only\n[ember-cp-validations](https://github.com/offirgolan/ember-cp-validations))\n\nAs soon as the validation is successful again...\n\n* `validation` is set to 'success', which will set the `has-success` CSS class\n* the `successIcon` feedback icon is displayed if `controlType` is a text field\n* the validation messages are removed\n\nIn case you want to display some error message that is independent of the model's validation, for example to display\na failure message on a login form after a failed authentication attempt (so not coming from the validation library),\nyou can use the `customError` property to do so.\n\n### Custom controls\n\nApart from the standard built-in browser controls (see the `controlType` property), you can use any custom control simply\nby invoking the component with a block template. Use whatever control you might want, for example a select-2 component\n(from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\" as |form|}}\n{{#form.element label=\"Select-2\" property=\"gender\" useIcons=false as |el|}}\n{{select-2 id=el.id content=genderChoices optionLabelPath=\"label\" value=el.value searchEnabled=false}}\n{{/form.element}}\n{{/bs-form}}\n```\n\nThe component yields a hash with the following properties:\n* `id`: id to be used for the form control, so it matches the labels `for` attribute\n* `value`: the value of the form element\n* `validation`: the validation state of the element, `null` if no validation is to be shown, otherwise 'success', 'error' or 'warning'\n\nIf your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports\nfeedback icons with textual `<input class=\"form-control\">` elements.\n\n### HTML attributes\n\nTo set HTML attributes on the control element provided by this component, set them as properties of this component:\n\n```hbs\n{{#bs-form formLayout=\"horizontal\" model=this action=\"submit\" as |form|}}\n{{form.element controlType=\"email\" label=\"Email\" property=\"email\"\n  placeholder=\"Email\"\n  required=true\n  multiple=true\n  tabIndex=5\n}}\n...\n{{/bs-form}}\n```\n\nThe following attributes are supported depending on the `controlType`:\n\n<table class=\"table table-striped\">\n<thead>\n<tr>\n<th></th>\n<th>textarea</th>\n<th>checkbox</th>\n<th>all others</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>accept</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>autocomplete</td>\n<td>✔︎</td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>autofocus</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>autosave</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>cols</td>\n<td>✔︎</td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td>disabled</td>\n<td></td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>form</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>inputmode</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>max</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>maxlength</td>\n<td>✔︎</td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>min</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>minlength</td>\n<td>✔︎</td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>multiple</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>name</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>pattern</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>placeholder</td>\n<td>✔︎</td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>readonly</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>required</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>rows</td>\n<td>✔︎</td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td>size</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>spellcheck</td>\n<td>✔︎</td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>step</td>\n<td></td>\n<td></td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>tabindex</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>title</td>\n<td>✔︎</td>\n<td>✔︎</td>\n<td>✔︎</td>\n</tr>\n<tr>\n<td>wrap</td>\n<td>✔︎</td>\n<td></td>\n<td></td>\n</tr>\n</tbody>\n</table>",
             "extends": "Components.FormGroup",
             "access": "public",
             "tagname": ""
@@ -1897,7 +1897,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element/control/checkbox.js",
-            "line": 24,
+            "line": 25,
             "itemtype": "property",
             "name": "type",
             "type": "{String}",
@@ -1909,7 +1909,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element/control/input.js",
-            "line": 39,
+            "line": 40,
             "itemtype": "property",
             "name": "type",
             "type": "{String}",
@@ -2129,7 +2129,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 323,
+            "line": 329,
             "description": "Text to display within a `<label>` tag.\n\nYou should include a label for every form input cause otherwise screen readers\nwill have trouble with your forms. Use `invisibleLabel` property if you want\nto hide them.",
             "itemtype": "property",
             "name": "label",
@@ -2141,7 +2141,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 336,
+            "line": 342,
             "description": "Controls label visibility by adding 'sr-only' class.",
             "itemtype": "property",
             "name": "invisibleLabel",
@@ -2153,7 +2153,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 345,
+            "line": 351,
             "itemtype": "property",
             "name": "hasLabel",
             "type": "boolean",
@@ -2165,7 +2165,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 353,
+            "line": 359,
             "description": "The type of the control widget.\nSupported types:\n\n* 'text'\n* 'checkbox'\n* 'textarea'\n* any other type will use an input tag with the `controlType` value as the type attribute (for e.g. HTML5 input\ntypes like 'email'), and the same layout as the 'text' type",
             "itemtype": "property",
             "name": "controlType",
@@ -2177,7 +2177,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 369,
+            "line": 375,
             "description": "The value of the control element is bound to this property. You can bind it to some controller property to\nget/set the control element's value:\n\n```hbs\n{{form.element controlType=\"email\" label=\"Email\" placeholder=\"Email\" value=email}}\n```\n\nNote: you loose the ability to validate this form element by directly binding to its value. It is recommended\nto use the `property` feature instead.",
             "itemtype": "property",
             "name": "value",
@@ -2188,7 +2188,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 386,
+            "line": 392,
             "description": "The property name of the form element's `model` (by default the `model` of its parent `Components.Form`) that this\nform element should represent. The control element's value will automatically be bound to the model property's\nvalue.\n\nUsing this property enables form validation on this element.",
             "itemtype": "property",
             "name": "property",
@@ -2200,7 +2200,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 399,
+            "line": 405,
             "description": "The model used for validation. Defaults to the parent `Components.Form`'s `model`",
             "itemtype": "property",
             "name": "model",
@@ -2211,19 +2211,19 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 407,
+            "line": 413,
             "description": "The array of error messages from the `model`'s validation.",
             "itemtype": "property",
             "name": "errors",
             "type": "array",
-            "access": "private",
+            "access": "protected",
             "tagname": "",
             "class": "Components.FormElement",
             "namespace": "Components"
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 416,
+            "line": 422,
             "itemtype": "property",
             "name": "hasErrors",
             "type": "boolean",
@@ -2235,19 +2235,19 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 424,
+            "line": 430,
             "description": "The array of warning messages from the `model`'s validation.",
             "itemtype": "property",
             "name": "errors",
             "type": "array",
-            "access": "private",
+            "access": "protected",
             "tagname": "",
             "class": "Components.FormElement",
             "namespace": "Components"
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 433,
+            "line": 439,
             "itemtype": "property",
             "name": "hasWarnings",
             "type": "boolean",
@@ -2259,7 +2259,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 441,
+            "line": 447,
             "description": "Show a custom error message that does not come from the model's validation. Will be immediately shown, regardless\nof any user interaction (i.e. no `focusOut` event required)",
             "itemtype": "property",
             "name": "customError",
@@ -2271,7 +2271,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 451,
+            "line": 457,
             "itemtype": "property",
             "name": "hasCustomError",
             "type": "boolean",
@@ -2283,7 +2283,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 459,
+            "line": 465,
             "description": "The array of validation messages (either errors or warnings) from the `model`'s validation.",
             "itemtype": "property",
             "name": "validationMessages",
@@ -2295,7 +2295,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 479,
+            "line": 485,
             "itemtype": "property",
             "name": "hasValidationMessages",
             "type": "boolean",
@@ -2307,32 +2307,32 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 487,
+            "line": 493,
             "itemtype": "property",
             "name": "hasValidator",
             "type": "boolean",
-            "readonly": "",
-            "access": "private",
+            "default": "false",
+            "access": "protected",
             "tagname": "",
             "class": "Components.FormElement",
             "namespace": "Components"
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 495,
+            "line": 501,
             "description": "Set a validating state for async validations",
             "itemtype": "property",
             "name": "isValidating",
             "type": "boolean",
             "default": "false",
-            "access": "public",
+            "access": "protected",
             "tagname": "",
             "class": "Components.FormElement",
             "namespace": "Components"
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 505,
+            "line": 511,
             "description": "If `true` form validation markup is rendered (requires a validatable `model`).",
             "itemtype": "property",
             "name": "showValidation",
@@ -2345,7 +2345,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 515,
+            "line": 521,
             "itemtype": "property",
             "name": "showOwnValidation",
             "type": "boolean",
@@ -2357,7 +2357,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 523,
+            "line": 529,
             "itemtype": "property",
             "name": "showAllValidations",
             "type": "boolean",
@@ -2369,7 +2369,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 531,
+            "line": 537,
             "itemtype": "property",
             "name": "showValidationMessages",
             "type": "boolean",
@@ -2381,7 +2381,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 539,
+            "line": 545,
             "description": "Event or list of events which enable form validation markup rendering.\nSupported events: ['focusOut', 'change', 'input']",
             "itemtype": "property",
             "name": "showValidationOn",
@@ -2394,7 +2394,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 550,
+            "line": 556,
             "itemtype": "property",
             "name": "_showValidationOn",
             "type": "array",
@@ -2406,7 +2406,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 570,
+            "line": 576,
             "itemtype": "method",
             "name": "showValidationOnHandler",
             "access": "private",
@@ -2416,7 +2416,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 580,
+            "line": 586,
             "description": "The validation (\"error\" (BS3)/\"danger\" (BS4), \"warning\", or \"success\") or null if no validation is to be shown. Automatically computed from the\nmodels validation state.",
             "itemtype": "property",
             "name": "validation",
@@ -2429,7 +2429,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 596,
+            "line": 602,
             "description": "True for text field `controlType`s",
             "itemtype": "property",
             "name": "useIcons",
@@ -2442,7 +2442,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 608,
+            "line": 614,
             "description": "The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):\n\n* 'horizontal'\n* 'vertical'\n* 'inline'\n\nDefaults to the parent `form`'s `formLayout` property.",
             "itemtype": "property",
             "name": "formLayout",
@@ -2455,7 +2455,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 624,
+            "line": 630,
             "description": "The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same\nproperty of the parent form. The corresponding grid class for form controls is automatically computed.",
             "itemtype": "property",
             "name": "horizontalLabelGridClass",
@@ -2467,7 +2467,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 634,
+            "line": 640,
             "description": "ID for input field and the corresponding label's \"for\" attribute",
             "itemtype": "property",
             "name": "formElementId",
@@ -2479,7 +2479,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 646,
+            "line": 652,
             "itemtype": "property",
             "name": "layoutComponent",
             "type": "{String}",
@@ -2490,7 +2490,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 662,
+            "line": 668,
             "itemtype": "property",
             "name": "controlComponent",
             "type": "{String}",
@@ -2501,7 +2501,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 676,
+            "line": 682,
             "itemtype": "property",
             "name": "errorsComponent",
             "type": "{String}",
@@ -2512,7 +2512,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 683,
+            "line": 689,
             "itemtype": "property",
             "name": "feedbackIconComponent",
             "type": "{String}",
@@ -2523,7 +2523,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 690,
+            "line": 696,
             "itemtype": "property",
             "name": "labelComponent",
             "type": "{String}",
@@ -2534,7 +2534,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 697,
+            "line": 703,
             "description": "Setup validation properties. This method acts as a hook for external validation\nlibraries to overwrite. In case of failed validations the `errors` property should contain an array of error messages.",
             "itemtype": "method",
             "name": "setupValidations",
@@ -2545,7 +2545,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 707,
+            "line": 713,
             "description": "Listen for focusOut events from the control element to automatically set `showOwnValidation` to true to enable\nform validation markup rendering if `showValidationsOn` contains `focusOut`.",
             "itemtype": "event",
             "name": "focusOut",
@@ -2556,7 +2556,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 718,
+            "line": 724,
             "description": "Listen for change events from the control element to automatically set `showOwnValidation` to true to enable\nform validation markup rendering if `showValidationsOn` contains `change`.",
             "itemtype": "event",
             "name": "change",
@@ -2567,7 +2567,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 729,
+            "line": 735,
             "description": "Listen for input events from the control element to automatically set `showOwnValidation` to true to enable\nform validation markup rendering if `showValidationsOn` contains `input`.",
             "itemtype": "event",
             "name": "input",
@@ -2578,7 +2578,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 740,
+            "line": 746,
             "description": "The action is called whenever the input value is changed, e.g. by typing text",
             "itemtype": "event",
             "name": "onChange",
@@ -3550,7 +3550,7 @@
         },
         {
             "file": "addon/components/base/bs-button-group.js",
-            "line": 75,
+            "line": 74,
             "itemtype": "property",
             "name": "classTypePrefix",
             "type": "String",
@@ -3562,7 +3562,7 @@
         },
         {
             "file": "addon/components/base/bs-button-group.js",
-            "line": 83,
+            "line": 82,
             "description": "Set to true for a vertically stacked button group, see http://getbootstrap.com/components/#btn-groups-vertical",
             "itemtype": "property",
             "name": "vertical",
@@ -3575,7 +3575,7 @@
         },
         {
             "file": "addon/components/base/bs-button-group.js",
-            "line": 93,
+            "line": 92,
             "description": "Set to true for the buttons to stretch at equal sizes to span the entire width of its parent.\n\n*Important*: You have to wrap every button component in a `div class=\"btn-group\">`:\n\n```handlebars\n<div class=\"btn-group\" role=\"group\">\n{{#bs-button}}My Button{{/bs-button}}\n</div>\n```\n\nSee http://getbootstrap.com/components/#btn-groups-justified",
             "itemtype": "property",
             "name": "justified",
@@ -3588,7 +3588,7 @@
         },
         {
             "file": "addon/components/base/bs-button-group.js",
-            "line": 113,
+            "line": 112,
             "description": "The type of the button group specifies how child buttons behave and how the `value` property will be computed:\n\n### null\nIf `type` is not set (null), the button group will add no functionality besides Bootstrap styling\n\n### radio\nif `type` is set to \"radio\", the buttons will behave like radio buttons:\n* the `value` property of the button group will reflect the `value` property of the active button\n* thus only one button may be active\n\n### checkbox\nif `type` is set to \"checkbox\", the buttons will behave like checkboxes:\n* any number of buttons may be active\n* the `value` property of the button group will be an array containing the `value` properties of all active buttons",
             "itemtype": "property",
             "name": "type",
@@ -3601,7 +3601,7 @@
         },
         {
             "file": "addon/components/base/bs-button-group.js",
-            "line": 136,
+            "line": 135,
             "description": "The value of the button group, computed by its child buttons.\nSee the `type` property for how the value property is constructed.\n\nWhen you set the value, the corresponding buttons will be activated:\n* use a single value for a radio button group to activate the button with the same value\n* use an array of values for a checkbox button group to activate all the buttons with values contained in the array",
             "itemtype": "property",
             "name": "value",
@@ -3613,7 +3613,7 @@
         },
         {
             "file": "addon/components/base/bs-button-group.js",
-            "line": 150,
+            "line": 149,
             "itemtype": "property",
             "name": "isRadio",
             "type": "boolean",
@@ -3624,7 +3624,7 @@
         },
         {
             "file": "addon/components/base/bs-button-group.js",
-            "line": 157,
+            "line": 156,
             "description": "This action is called whenever the button group's value should be changed because the user clicked a button.\nYou will receive the new value of the button group (based on the `type` property), which you should use to update the\n`value` property.",
             "itemtype": "event",
             "name": "onChange",

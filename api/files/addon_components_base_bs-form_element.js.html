@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.5.682f75a5</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.6</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -358,6 +358,12 @@ const nonDefaultLayouts = A([
  &lt;td&gt;✔︎&lt;/td&gt;
  &lt;/tr&gt;
  &lt;tr&gt;
+ &lt;td&gt;title&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;td&gt;✔︎&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
  &lt;td&gt;wrap&lt;/td&gt;
  &lt;td&gt;✔︎&lt;/td&gt;
  &lt;td&gt;&lt;/td&gt;
@@ -464,7 +470,7 @@ export default FormGroup.extend({
    *
    * @property errors
    * @type array
-   * @private
+   * @protected
    */
   errors: null,
 
@@ -481,7 +487,7 @@ export default FormGroup.extend({
    *
    * @property errors
    * @type array
-   * @private
+   * @protected
    */
   warnings: null,
 
@@ -542,10 +548,10 @@ export default FormGroup.extend({
   /**
    * @property hasValidator
    * @type boolean
-   * @readonly
-   * @private
+   * @default false
+   * @protected
    */
-  hasValidator: computed.notEmpty(&#x27;model.validate&#x27;),
+  hasValidator: false,
 
   /**
    * Set a validating state for async validations
@@ -553,7 +559,7 @@ export default FormGroup.extend({
    * @property isValidating
    * @type boolean
    * @default false
-   * @public
+   * @protected
    */
   isValidating: false,
 
