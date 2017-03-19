@@ -1,4 +1,14 @@
 
+# [1.0.0-alpha.7](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.6...v1.0.0-alpha.7) (2017-03-19)
+
+
+### Bug Fixes
+
+* **Install:** fixed missing dependency (`silent-error`) in package.json ([7f6cc7a](https://github.com/kaliber5/ember-bootstrap/commit/7f6cc7a))
+
+
+
+
 # [1.0.0-alpha.6](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.5...v1.0.0-alpha.6) (2017-03-18)
 
 
