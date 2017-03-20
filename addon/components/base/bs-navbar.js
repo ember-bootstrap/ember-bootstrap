@@ -87,7 +87,8 @@ export default Ember.Component.extend(TypeClass, {
   fluid: true,
 
   /**
-   * Specifies the position classes for the navbar, currently supporting none, "fixed-top", "fixed-bottom", and "static-top".
+   * Specifies the position classes for the navbar, currently supporting none, "fixed-top", "fixed-bottom", and
+   * either "static-top" (BS3) or "sticky-top" (BS4).
    * See the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.
    *
    * @property position
@@ -99,13 +100,14 @@ export default Ember.Component.extend(TypeClass, {
 
   positionClass: Ember.computed('position', function() {
     let position = this.get('position');
-    let validPositions = ['fixed-top', 'fixed-bottom', 'static-top'];
+    let validPositions = this.get('_validPositions');
+    let positionPrefix = this.get('_positionPrefix');
 
     if (validPositions.indexOf(position) === -1) {
       return null;
     }
 
-    return `navbar-${position}`;
+    return `${positionPrefix}${position}`;
   }),
 
   actions: {
