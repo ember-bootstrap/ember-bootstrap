@@ -1,3 +1,15 @@
+<a name="1.0.0-alpha.8"></a>
+# [1.0.0-alpha.8](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.7...v1.0.0-alpha.8) (2017-03-20)
+
+
+### Bug Fixes
+
+* **Install:** fixed default options not being applied at addon installation, causing a `Bootstrap version must be 3 or 4` error ([1d753cb](https://github.com/kaliber5/ember-bootstrap/commit/1d753cb)), closes [#272](https://github.com/kaliber5/ember-bootstrap/issues/272)
+* **Install:** fixed wrong config being added to `ember-cli-build.js` when no preprocessor was used ([63210bf](https://github.com/kaliber5/ember-bootstrap/commit/63210bf))
+* **Navbar:** Use `fixed-top`, `fixed-bottom`, and `sticky-top` for BS4 for navbar `position` ([bf46b39](https://github.com/kaliber5/ember-bootstrap/commit/bf46b39)), closes [#269](https://github.com/kaliber5/ember-bootstrap/issues/269)
+
+
+
 <a name="1.0.0-alpha.7"></a>
 # [1.0.0-alpha.7](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.6...v1.0.0-alpha.7) (2017-03-19)
 
