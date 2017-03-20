@@ -8,7 +8,7 @@
         "fastboot/dummy-1c1079466eb3a24583abccbee3e93cf5.js"
       ],
       "vendorFiles": [
-        "fastboot/vendor-3e829851536ada48a978292d651d6921.js"
+        "fastboot/vendor-5234603ad73c21a091806fd938fba94e.js"
       ],
       "htmlFile": "index.html"
     },
@@ -22,7 +22,7 @@
       },
       "APP": {
         "name": "ember-bootstrap",
-        "version": "1.0.0-alpha.7",
+        "version": "1.0.0-alpha.8",
         "autoboot": false
       },
       "unstableApiURL": "http://simonihmig.github.io/ember-bootstrap/",

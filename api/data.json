@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "1.0.0-alpha.7"
+        "version": "1.0.0-alpha.8"
     },
     "files": {
         "addon/components/base/bs-accordion/item.js": {
@@ -5473,7 +5473,7 @@
         {
             "file": "addon/components/base/bs-navbar.js",
             "line": 89,
-            "description": "Specifies the position classes for the navbar, currently supporting none, \"fixed-top\", \"fixed-bottom\", and \"static-top\".\nSee the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.",
+            "description": "Specifies the position classes for the navbar, currently supporting none, \"fixed-top\", \"fixed-bottom\", and\neither \"static-top\" (BS3) or \"sticky-top\" (BS4).\nSee the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.",
             "itemtype": "property",
             "name": "position",
             "type": "String",
@@ -5485,7 +5485,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 117,
+            "line": 119,
             "description": "Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard\ntwo character Bootstrap size abbreviations. Used to set the `navbar-toggleable-*`\nclass.",
             "itemtype": "property",
             "name": "toggleBreakpoint",
@@ -5498,7 +5498,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 128,
+            "line": 130,
             "description": "Bootstrap 4 Only: Sets the background color for the navbar. Can be any color\nin the set that composes the `bg-*` classes and can be extended by creating your\nown `bg-*` classes.",
             "itemtype": "property",
             "name": "backgroundColor",

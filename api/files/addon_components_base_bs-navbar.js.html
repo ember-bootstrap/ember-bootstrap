@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.7</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.8</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -142,7 +142,8 @@ export default Ember.Component.extend(TypeClass, {
   fluid: true,
 
   /**
-   * Specifies the position classes for the navbar, currently supporting none, &quot;fixed-top&quot;, &quot;fixed-bottom&quot;, and &quot;static-top&quot;.
+   * Specifies the position classes for the navbar, currently supporting none, &quot;fixed-top&quot;, &quot;fixed-bottom&quot;, and
+   * either &quot;static-top&quot; (BS3) or &quot;sticky-top&quot; (BS4).
    * See the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.
    *
    * @property position
@@ -154,13 +155,14 @@ export default Ember.Component.extend(TypeClass, {
 
   positionClass: Ember.computed(&#x27;position&#x27;, function() {
     let position = this.get(&#x27;position&#x27;);
-    let validPositions = [&#x27;fixed-top&#x27;, &#x27;fixed-bottom&#x27;, &#x27;static-top&#x27;];
+    let validPositions = this.get(&#x27;_validPositions&#x27;);
+    let positionPrefix = this.get(&#x27;_positionPrefix&#x27;);
 
     if (validPositions.indexOf(position) === -1) {
       return null;
     }
 
-    return &#x60;navbar-${position}&#x60;;
+    return &#x60;${positionPrefix}${position}&#x60;;
   }),
 
   actions: {
