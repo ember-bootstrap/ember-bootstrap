@@ -39,5 +39,9 @@ export default Navbar.extend({
     let backgroundColor = this.get('backgroundColor');
 
     return `bg-${backgroundColor}`;
-  })
+  }),
+
+  _validPositions: ['fixed-top', 'fixed-bottom', 'sticky-top'],
+
+  _positionPrefix: ''
 });

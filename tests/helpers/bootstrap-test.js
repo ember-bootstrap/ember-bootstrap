@@ -51,4 +51,12 @@ export function placementClassFor(type, placement) {
   return versionDependent(placement, `${type}-${placement}`);
 }
 
+export function positionClassFor(position) {
+  return versionDependent(`navbar-${position}`, position);
+}
+
+export function positionStickyClass() {
+  return versionDependent('navbar-static-top', 'sticky-top');
+}
+
 export { test };

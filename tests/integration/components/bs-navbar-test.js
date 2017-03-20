@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
+import { positionClassFor, positionStickyClass, test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-navbar', 'Integration | Component | bs-navbar', {
@@ -133,31 +133,39 @@ testBS4('it exposes all the requisite contextual components', function(assert) {
 test('it nas no positional classes when position is not specified', function(assert) {
   this.render(hbs`{{bs-navbar}}`);
 
-  assert.notOk(this.$('nav').hasClass('navbar-fixed-top'), 'it does not have navbar-fixed-top');
-  assert.notOk(this.$('nav').hasClass('navbar-fixed-bottom'), 'it does not have navbar-fixed-bottom');
-  assert.notOk(this.$('nav').hasClass('navbar-static-top'), 'it does not have navbar-static-top');
+  assert.notOk(this.$('nav').hasClass(positionClassFor('fixed-top')), 'it does not have position fixed-top');
+  assert.notOk(this.$('nav').hasClass(positionClassFor('fixed-bottom')), 'it does not have position fixed-bottom');
+  assert.notOk(this.$('nav').hasClass(positionStickyClass()), `it does not have ${positionStickyClass()}`);
 });
 
 test('it handles fixed-top properly', function(assert) {
   this.render(hbs`{{bs-navbar position="fixed-top"}}`);
 
-  assert.ok(this.$('nav').hasClass('navbar-fixed-top'), 'it has navbar-fixed-top');
-  assert.notOk(this.$('nav').hasClass('navbar-fixed-bottom'), 'it does not have navbar-fixed-bottom');
-  assert.notOk(this.$('nav').hasClass('navbar-static-top'), 'it does not have navbar-static-top');
+  assert.ok(this.$('nav').hasClass(positionClassFor('fixed-top')), 'it has position fixed-top');
+  assert.notOk(this.$('nav').hasClass(positionClassFor('fixed-bottom')), 'it does not have position fixed-bottom');
+  assert.notOk(this.$('nav').hasClass(positionStickyClass()), `it does not have ${positionStickyClass()}`);
 });
 
 test('it handles fixed-bottom properly', function(assert) {
   this.render(hbs`{{bs-navbar position="fixed-bottom"}}`);
 
-  assert.notOk(this.$('nav').hasClass('navbar-fixed-top'), 'it does not have navbar-fixed-top');
-  assert.ok(this.$('nav').hasClass('navbar-fixed-bottom'), 'it has navbar-fixed-bottom');
-  assert.notOk(this.$('nav').hasClass('navbar-static-top'), 'it does not have navbar-static-top');
+  assert.notOk(this.$('nav').hasClass(positionClassFor('fixed-top')), 'it does not have position fixed-top');
+  assert.ok(this.$('nav').hasClass(positionClassFor('fixed-bottom')), 'it has position fixed-bottom');
+  assert.notOk(this.$('nav').hasClass(positionStickyClass()), `it does not have ${positionStickyClass()}`);
 });
 
-test('it handles static-top properly', function(assert) {
+testBS3('it handles static-top properly', function(assert) {
   this.render(hbs`{{bs-navbar position="static-top"}}`);
 
-  assert.notOk(this.$('nav').hasClass('navbar-fixed-top'), 'it does not have navbar-fixed-top');
-  assert.notOk(this.$('nav').hasClass('navbar-fixed-bottom'), 'it does not have navbar-fixed-bottom');
-  assert.ok(this.$('nav').hasClass('navbar-static-top'), 'it has navbar-static-top');
+  assert.notOk(this.$('nav').hasClass(positionClassFor('fixed-top')), 'it does not have position fixed-top');
+  assert.notOk(this.$('nav').hasClass(positionClassFor('fixed-bottom')), 'it does not have position fixed-bottom');
+  assert.ok(this.$('nav').hasClass(positionStickyClass()), `it has ${positionStickyClass()}`);
+});
+
+testBS4('it handles sticky-top properly', function(assert) {
+  this.render(hbs`{{bs-navbar position="sticky-top"}}`);
+
+  assert.notOk(this.$('nav').hasClass(positionClassFor('fixed-top')), 'it does not have position fixed-top');
+  assert.notOk(this.$('nav').hasClass(positionClassFor('fixed-bottom')), 'it does not have position fixed-bottom');
+  assert.ok(this.$('nav').hasClass(positionStickyClass()), `it has ${positionStickyClass()}`);
 });
