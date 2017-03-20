@@ -42,10 +42,11 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
         let args = ['ember-bootstrap'];
 
         return emberNew()
-          .then(() => emberGenerate(args, (file) => {
+          .then(() => emberGenerate(args))
+          .then(() => {
             expect(file('app/styles/app.scss')).to.not.exist;
             expect(file('app/styles/app.less')).to.not.exist;
-          }));
+          });
       });
 
       it('creates app.scss if not existing and ember-cli-sass is present', function() {
@@ -71,10 +72,11 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
             { name: 'ember-cli-sass' }
           ]))
           .then(() => createStyleFixture('app.scss'))
-          .then(() => emberGenerate(args, (file) => {
+          .then(() => emberGenerate(args))
+          .then(() => {
             expect(file('app/styles/app.scss')).to.contain('@import "ember-bootstrap/bootstrap";');
             expect(file('app/styles/app.less')).to.not.exist;
-          }));
+          });
       });
 
       it('creates app.less if not existing and ember-cli-less is present', function() {
@@ -117,10 +119,11 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
         let args = ['ember-bootstrap', '--preprocessor=none'];
 
         return emberNew()
-          .then(() => emberGenerate(args, (file) => {
+          .then(() => emberGenerate(args))
+          .then(() => {
             expect(file('app/styles/app.scss')).to.not.exist;
             expect(file('app/styles/app.less')).to.not.exist;
-          }));
+          });
       });
 
       it('creates app.scss if not existing and --preprocessor=sass', function() {
@@ -140,10 +143,11 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
 
         return emberNew()
           .then(() => createStyleFixture('app.scss'))
-          .then(() => emberGenerate(args, (file) => {
+          .then(() => emberGenerate(args))
+          .then(() => {
             expect(file('app/styles/app.scss')).to.contain('@import "ember-bootstrap/bootstrap";');
             expect(file('app/styles/app.less')).to.not.exist;
-          }));
+          });
       });
 
       it('creates app.less if not existing and --preprocessor=less', function() {

@@ -34,7 +34,7 @@ module.exports = {
   },
 
   beforeInstall(option) {
-    let bootstrapVersion = option.bootstrapVersion = parseInt(option.bootstrapVersion) || 3;
+    let bootstrapVersion = parseInt(option.bootstrapVersion) || 3;
     let preprocessor = option.preprocessor;
 
     if (bootstrapVersion !== 3 && bootstrapVersion !== 4) {
@@ -48,9 +48,9 @@ module.exports = {
     if (!preprocessor) {
       let dependencies = this.project.dependencies();
       if ('ember-cli-sass' in dependencies) {
-        preprocessor = option.preprocessor = 'sass';
+        preprocessor = 'sass';
       } else if ('ember-cli-less' in dependencies) {
-        preprocessor = option.preprocessor = 'less';
+        preprocessor = 'less';
       } else {
         preprocessor = 'none';
       }
@@ -61,13 +61,16 @@ module.exports = {
     }
 
     this.ui.writeLine(chalk.green(`Installing for Bootstrap ${bootstrapVersion} using preprocessor ${preprocessor}`));
+
+    this.bootstrapVersion = bootstrapVersion;
+    this.preprocessor = preprocessor;
   },
 
-  afterInstall(option) {
-    return this.adjustBootstrapDependencies(option)
-      .then(() => this.adjustPreprocessorDependencies(option))
-      .then(() => this.addPreprocessorStyleImport(option))
-      .then(() => this.addBuildConfiguration(option));
+  afterInstall() {
+    return this.adjustBootstrapDependencies()
+      .then(() => this.adjustPreprocessorDependencies())
+      .then(() => this.addPreprocessorStyleImport())
+      .then(() => this.addBuildConfiguration());
   },
 
   removePackageFromBowerJSON(dependency) {
@@ -88,9 +91,9 @@ module.exports = {
     });
   },
 
-  adjustBootstrapDependencies(option) {
-    let bootstrapVersion = option.bootstrapVersion;
-    let preprocessor = option.preprocessor;
+  adjustBootstrapDependencies() {
+    let bootstrapVersion = this.bootstrapVersion;
+    let preprocessor = this.preprocessor;
     let dependencies = this.project.dependencies();
     let bowerDependencies = this.project.bowerDependencies();
     let promises = [];
@@ -122,8 +125,8 @@ module.exports = {
     return rsvp.all(promises);
   },
 
-  adjustPreprocessorDependencies(option) {
-    let preprocessor = option.preprocessor;
+  adjustPreprocessorDependencies() {
+    let preprocessor = this.preprocessor;
     let dependencies = this.project.dependencies();
     let promises = [];
 
@@ -146,8 +149,8 @@ module.exports = {
     return rsvp.all(promises);
   },
 
-  addPreprocessorStyleImport(option) {
-    let preprocessor = option.preprocessor;
+  addPreprocessorStyleImport() {
+    let preprocessor = this.preprocessor;
     let importStatement = '\n@import "ember-bootstrap/bootstrap";\n';
 
     if (preprocessor === 'none') {
@@ -171,10 +174,10 @@ module.exports = {
     }
   },
 
-  addBuildConfiguration(option) {
+  addBuildConfiguration() {
     let file = 'ember-cli-build.js';
-    let bootstrapVersion = option.bootstrapVersion;
-    let preprocessor = option.preprocessor;
+    let bootstrapVersion = this.bootstrapVersion;
+    let preprocessor = this.preprocessor;
     let settings = {
       bootstrapVersion
     };
