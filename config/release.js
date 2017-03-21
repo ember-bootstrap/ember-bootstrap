@@ -1,4 +1,4 @@
-/* jshint node:true */
+/* eslint-env node */
 var RSVP = require('rsvp');
 
 function promptForCompletion(project) {
