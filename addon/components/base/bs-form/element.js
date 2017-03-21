@@ -670,7 +670,7 @@ export default FormGroup.extend({
    * @type {String}
    * @private
    */
-  controlComponent: computed('formLayout', 'controlType', function() {
+  controlComponent: computed('controlType', function() {
     let controlType = this.get('controlType');
     if (!nonTextFieldControlTypes.includes(controlType)) {
       controlType = 'input';
