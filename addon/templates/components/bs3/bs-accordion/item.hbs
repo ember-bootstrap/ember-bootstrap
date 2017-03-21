@@ -1,12 +1,13 @@
+{{! template-lint-disable nested-interactive }}
 <div role="tab" {{action onClick value}} class="panel-heading {{if collapsed "collapsed" "expanded"}}">
-    <h4 class="panel-title">
-        <a href="#">
-            {{title}}
-        </a>
-    </h4>
+  <h4 class="panel-title">
+    <a href="#">
+      {{title}}
+    </a>
+  </h4>
 </div>
 {{#bs-collapse collapsed=collapsed class="panel-collapse"}}
-    <div class="panel-body">
-        {{yield}}
-    </div>
+  <div class="panel-body">
+    {{yield}}
+  </div>
 {{/bs-collapse}}

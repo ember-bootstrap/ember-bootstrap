@@ -3,22 +3,22 @@
 <p>The following components are currently available as native Ember components:</p>
 
 <table class="table">
-    <thead>
+  <thead>
     <tr>
-        <th>Component</th>
-        <th>Demo</th>
-        <th>API Docs</th>
-        <th>Bootstrap Docs</th>
+      <th>Component</th>
+      <th>Demo</th>
+      <th>API Docs</th>
+      <th>Bootstrap Docs</th>
     </tr>
-    </thead>
-    <tbody>
+  </thead>
+  <tbody>
     {{#each model as |comp|}}
-        <tr>
-            <th scope="row">{{comp.title}}</th>
-            <td>{{#link-to comp.demoRoute}}Demo{{/link-to}}</td>
-            <td><a href={{comp.apiUrl}}>API Docs</a></td>
-            <td><a href={{comp.bsUrl}}>Bootstrap Docs</a></td>
-        </tr>
+      <tr>
+        <th scope="row">{{comp.title}}</th>
+        <td>{{#link-to comp.demoRoute}}Demo{{/link-to}}</td>
+        <td><a href={{comp.apiUrl}}>API Docs</a></td>
+        <td><a href={{comp.bsUrl}}>Bootstrap Docs</a></td>
+      </tr>
     {{/each}}
-    </tbody>
+  </tbody>
 </table>

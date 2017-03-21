@@ -1,3 +1,4 @@
+/* eslint-env node */
 var gulp = require('gulp');
 var conventionalChangelog = require('gulp-conventional-changelog');
 var ghPages = require('gulp-gh-pages');
