@@ -7,6 +7,8 @@ const emberNew = blueprintHelpers.emberNew;
 const emberGenerate = blueprintHelpers.emberGenerate;
 const modifyPackages = blueprintHelpers.modifyPackages;
 
+const BuildConfigEditor = require('ember-cli-build-config-editor');
+
 const chai = require('ember-cli-blueprint-test-helpers/chai');
 const file = chai.file;
 const chaiThings = require('chai-things');
@@ -182,8 +184,8 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
 
   describe('install dependencies', function() {
 
-    const Blueprint = require('ember-cli/lib/models/blueprint');
-    const origTaskFor = Blueprint.prototype.taskFor;
+    let Blueprint = require('ember-cli/lib/models/blueprint');
+    let origTaskFor = Blueprint.prototype.taskFor;
     let installed = {
       npm: [],
       bower: [],
@@ -260,6 +262,14 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       }
     }
 
+    function editConfiguration(config) {
+      let buildFile = 'ember-cli-build.js';
+      let source = fs.readFileSync(buildFile);
+      let editor = new BuildConfigEditor(source);
+      editor.edit('ember-bootstrap', config);
+      fs.writeFileSync(buildFile, editor.code());
+    }
+
     scenarios.forEach(function(scenario) {
       let args = [];
       let options = scenario.options || {};
@@ -267,6 +277,8 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       let bootstrapVersion = options.bootstrapVersion;
       let installed = scenario.installed || {};
       let npmInstalled = installed.npm || [];
+      let config = installed.config;
+      let configuredBootstrapVersion = config && config.bootstrapVersion;
 
       if (preprocessor) {
         args.push(`--preprocessor=${preprocessor}`);
@@ -276,12 +288,14 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       }
 
       let preInstalledText = npmInstalled.length > 0 ? `, preInstalled: ${npmInstalled.join(', ')}` : '';
+      let configuredVersionText = configuredBootstrapVersion ? `, configured version: ${configuredBootstrapVersion}` : '';
 
-      it(`installs dependencies for ember g ember-bootstrap ${args.join(' ')}${preInstalledText}`, function() {
+      it(`installs dependencies for ember g ember-bootstrap ${args.join(' ')}${preInstalledText}${configuredVersionText}`, function() {
         args = ['ember-bootstrap'].concat(args);
 
         return emberNew()
           .then(() => modifyPackages(npmInstalled.map((pkg) => ({ name: pkg, dev: true }))))
+          .then(() => editConfiguration(config))
           .then(() => emberGenerate(args))
           .then(() => {
             for (let pkg in scenario.dependencies.bower) {
@@ -297,7 +311,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
             }
 
           });
-      })
+      });
     });
   });
 });
