@@ -34,8 +34,7 @@ module.exports = {
   },
 
   beforeInstall(option) {
-    let configuredBootstrapVersion = this.retrieveBootstrapVersion();
-    let bootstrapVersion = parseInt(option.bootstrapVersion) || configuredBootstrapVersion || 3;
+    let bootstrapVersion = parseInt(option.bootstrapVersion, 10) || this.retrieveBootstrapVersion() || 3;
     let preprocessor = option.preprocessor;
 
     if (bootstrapVersion !== 3 && bootstrapVersion !== 4) {
@@ -212,6 +211,6 @@ module.exports = {
     let build = new BuildConfigEditor(source);
     let config = build.retrieve(this.name);
 
-    return config && config.bootstrapVersion;
+    return config && parseInt(config.bootstrapVersion, 10);
   }
 };
