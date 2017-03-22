@@ -12,6 +12,18 @@ const scenarios = [
   },
   {
     installed: {
+      config: {
+        bootstrapVersion: 4
+      }
+    },
+    dependencies: {
+      npm: {
+        bootstrap: bs4Regex
+      }
+    }
+  },
+  {
+    installed: {
       npm: ['ember-cli-less']
     },
     dependencies: {
@@ -341,7 +353,7 @@ const scenarios = [
     },
     dependencies: {
       npm: {
-        bootstrap: bs3Regex,
+        bootstrap: bs3Regex
       },
       addon: {
         'ember-cli-less': true,
@@ -568,7 +580,7 @@ const scenarios = [
     },
     dependencies: {
       npm: {
-        bootstrap: bs4Regex,
+        bootstrap: bs4Regex
       },
       addon: {
         'ember-cli-less': null,

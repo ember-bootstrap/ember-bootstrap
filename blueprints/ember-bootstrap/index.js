@@ -24,7 +24,7 @@ module.exports = {
   description: 'Configure ember-bootstrap',
 
   availableOptions: [
-    { name: 'bootstrap-version', type: Number, default: 3, aliases: ['bootstrap', 'bv'] },
+    { name: 'bootstrap-version', type: Number, aliases: ['bootstrap', 'bv'] },
     { name: 'preprocessor', type: String, aliases: ['pp'] }
   ],
 
@@ -34,7 +34,7 @@ module.exports = {
   },
 
   beforeInstall(option) {
-    let bootstrapVersion = parseInt(option.bootstrapVersion) || 3;
+    let bootstrapVersion = parseInt(option.bootstrapVersion, 10) || this.retrieveBootstrapVersion() || 3;
     let preprocessor = option.preprocessor;
 
     if (bootstrapVersion !== 3 && bootstrapVersion !== 4) {
@@ -202,5 +202,15 @@ module.exports = {
       let settingsString = JSON.stringify(settings);
       this.ui.writeLine(chalk.red(`Configuration file could not be edited. Manually update your ember-cli-build.js to include '${this.name}': ${settingsString}`));
     }
+  },
+
+  retrieveBootstrapVersion() {
+    let file = 'ember-cli-build.js';
+
+    let source = fs.readFileSync(file);
+    let build = new BuildConfigEditor(source);
+    let config = build.retrieve(this.name);
+
+    return config && parseInt(config.bootstrapVersion, 10);
   }
 };
