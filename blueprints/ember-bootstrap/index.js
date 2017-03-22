@@ -191,13 +191,13 @@ module.exports = {
       return;
     }
 
-    this.ui.writeLine(chalk.green(`Added ember-bootstrap configuration to ${file}`));
     let source = fs.readFileSync(file, 'utf-8');
     let build = new BuildConfigEditor(source);
 
     try {
       let newBuild = build.edit(this.name, settings);
       fs.writeFileSync(file, newBuild.code());
+      this.ui.writeLine(chalk.green(`Added ember-bootstrap configuration to ${file}`));
     } catch(error) {
       let settingsString = JSON.stringify(settings);
       this.ui.writeLine(chalk.red(`Configuration file could not be edited. Manually update your ember-cli-build.js to include '${this.name}': ${settingsString}`));
