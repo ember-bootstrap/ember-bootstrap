@@ -254,7 +254,7 @@ module.exports = {
       }
     },
     {
-      name: 'blueprint-tests',
+      name: 'node-tests',
       command: 'yarn run nodetest',
       npm: {
         devDependencies: {}
