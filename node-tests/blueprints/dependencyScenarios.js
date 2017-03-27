@@ -8,6 +8,29 @@ const scenarios = [
       npm: {
         bootstrap: bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: true,
+      importBootstrapFont: true
+    }
+  },
+  { // Existing settings are preserved if they don't need to be overridden
+    installed: {
+      config: {
+        importBootstrapCSS: false,
+        importBootstrapFont: false
+      }
+    },
+    dependencies: {
+      npm: {
+        bootstrap: bs3Regex
+      }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: false
     }
   },
   {
@@ -23,6 +46,7 @@ const scenarios = [
     },
     config: {
       bootstrapVersion: 4,
+      importBootstrapCSS: true,
       importBootstrapFont: false
     }
   },
@@ -36,7 +60,9 @@ const scenarios = [
       }
     },
     config: {
-      bootstrapVersion: 3
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -47,6 +73,11 @@ const scenarios = [
       npm: {
         'bootstrap-sass': bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -58,6 +89,11 @@ const scenarios = [
         bootstrap: null,
         'bootstrap-sass': bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -68,6 +104,11 @@ const scenarios = [
       npm: {
         bootstrap: bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: true,
+      importBootstrapFont: true
     }
   },
   {
@@ -82,6 +123,11 @@ const scenarios = [
         bootstrap: bs3Regex,
         'bootstrap-sass': null
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: true,
+      importBootstrapFont: true
     }
   },
   {
@@ -99,6 +145,11 @@ const scenarios = [
       addon: {
         'ember-cli-sass': null
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: true,
+      importBootstrapFont: true
     }
   },
   {
@@ -115,6 +166,11 @@ const scenarios = [
       addon: {
         'ember-cli-less': null
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: true,
+      importBootstrapFont: true
     }
   },
   {
@@ -128,6 +184,11 @@ const scenarios = [
       addon: {
         'ember-cli-less': true
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -141,6 +202,11 @@ const scenarios = [
       npm: {
         bootstrap: bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -159,6 +225,11 @@ const scenarios = [
         'ember-cli-less': true,
         'ember-cli-sass': null
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -172,6 +243,11 @@ const scenarios = [
       addon: {
         'ember-cli-sass': true
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -189,6 +265,11 @@ const scenarios = [
       addon: {
         'ember-cli-sass': true
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -202,6 +283,11 @@ const scenarios = [
       npm: {
         'bootstrap-sass': bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -219,6 +305,11 @@ const scenarios = [
         'ember-cli-less': null,
         'ember-cli-sass': true
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -237,6 +328,11 @@ const scenarios = [
         'ember-cli-less': null,
         'ember-cli-sass': true
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
 
@@ -249,6 +345,11 @@ const scenarios = [
       npm: {
         bootstrap: bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: true,
+      importBootstrapFont: true
     }
   },
   {
@@ -262,6 +363,11 @@ const scenarios = [
       npm: {
         bootstrap: bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -275,6 +381,11 @@ const scenarios = [
       npm: {
         'bootstrap-sass': bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -286,6 +397,11 @@ const scenarios = [
       npm: {
         bootstrap: bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: true,
+      importBootstrapFont: true
     }
   },
   {
@@ -303,6 +419,11 @@ const scenarios = [
       addon: {
         'ember-cli-sass': null
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: true,
+      importBootstrapFont: true
     }
   },
   {
@@ -320,6 +441,11 @@ const scenarios = [
       addon: {
         'ember-cli-less': null
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: true,
+      importBootstrapFont: true
     }
   },
   {
@@ -334,6 +460,11 @@ const scenarios = [
       addon: {
         'ember-cli-less': true
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -348,6 +479,11 @@ const scenarios = [
       npm: {
         bootstrap: bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -366,6 +502,11 @@ const scenarios = [
         'ember-cli-less': true,
         'ember-cli-sass': null
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -380,6 +521,11 @@ const scenarios = [
       addon: {
         'ember-cli-sass': true
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -394,6 +540,11 @@ const scenarios = [
       npm: {
         'bootstrap-sass': bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
   {
@@ -412,6 +563,11 @@ const scenarios = [
         'ember-cli-less': null,
         'ember-cli-sass': true
       }
+    },
+    config: {
+      bootstrapVersion: 3,
+      importBootstrapCSS: false,
+      importBootstrapFont: true
     }
   },
 
@@ -424,6 +580,11 @@ const scenarios = [
       npm: {
         bootstrap: bs4Regex
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapCSS: true,
+      importBootstrapFont: false
     }
   },
   {
@@ -437,6 +598,11 @@ const scenarios = [
       npm: {
         bootstrap: bs4Regex
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapCSS: false,
+      importBootstrapFont: false
     }
   },
   {
@@ -451,6 +617,11 @@ const scenarios = [
         bootstrap: bs4Regex,
         'bootstrap-sass': null
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapCSS: false,
+      importBootstrapFont: false
     }
   },
   {
@@ -462,6 +633,11 @@ const scenarios = [
       npm: {
         bootstrap: bs4Regex
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapCSS: true,
+      importBootstrapFont: false
     }
   },
   {
@@ -479,6 +655,11 @@ const scenarios = [
       addon: {
         'ember-cli-sass': null
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapCSS: true,
+      importBootstrapFont: false
     }
   },
   {
@@ -497,6 +678,11 @@ const scenarios = [
       addon: {
         'ember-cli-sass': null
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapCSS: true,
+      importBootstrapFont: false
     }
   },
   {
@@ -514,6 +700,11 @@ const scenarios = [
       addon: {
         'ember-cli-less': null
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapCSS: true,
+      importBootstrapFont: false
     }
   },
   {
@@ -528,6 +719,11 @@ const scenarios = [
       addon: {
         'ember-cli-sass': true
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapCSS: false,
+      importBootstrapFont: false
     }
   },
   {
@@ -546,6 +742,11 @@ const scenarios = [
       addon: {
         'ember-cli-sass': true
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapCSS: false,
+      importBootstrapFont: false
     }
   },
   {
@@ -560,6 +761,11 @@ const scenarios = [
       npm: {
         bootstrap: bs4Regex
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapCSS: false,
+      importBootstrapFont: false
     }
   },
   {
@@ -575,6 +781,11 @@ const scenarios = [
         bootstrap: bs4Regex,
         'bootstrap-sass': null
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapCSS: false,
+      importBootstrapFont: false
     }
   },
   {
@@ -593,6 +804,11 @@ const scenarios = [
         'ember-cli-less': null,
         'ember-cli-sass': true
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapCSS: false,
+      importBootstrapFont: false
     }
   }
 
