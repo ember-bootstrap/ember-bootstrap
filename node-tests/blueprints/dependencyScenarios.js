@@ -20,6 +20,10 @@ const scenarios = [
       npm: {
         bootstrap: bs4Regex
       }
+    },
+    config: {
+      bootstrapVersion: 4,
+      importBootstrapFont: false
     }
   },
   {
@@ -30,6 +34,9 @@ const scenarios = [
       npm: {
         bootstrap: bs3Regex
       }
+    },
+    config: {
+      bootstrapVersion: 3
     }
   },
   {
