@@ -193,10 +193,12 @@ module.exports = {
       settings.importBootstrapFont = true;
     }
 
-    if (config.hasOwnProperty('importBootstrapCSS')) {
-      settings.importBootstrapCSS = config.importBootstrapCSS;
+    if (preprocessor !== 'none') {
+      settings.importBootstrapCSS = false;
+    } else if (config.hasOwnProperty('importBootstrapCSS')) {
+      settings.importBootstrapCSS = config. importBootstrapCSS;
     } else {
-      settings.importBootstrapCSS = (preprocessor === 'none');
+      settings.importBootstrapCSS = true;
     }
 
     if (!fs.existsSync(file)) {
