@@ -6,10 +6,7 @@ node_js:
 sudo: false
 
 cache:
-  directories:
-    - node_modules
-    - $HOME/.yarn-cache
-    - $HOME/.cache # includes bowers cache
+  yarn: true
 
 env:
   - EMBER_TRY_SCENARIO=ember-2.3
@@ -48,7 +45,7 @@ before_install:
   - phantomjs --version
 
 install:
-  - yarn install
+  - yarn install --no-lockfile
   - bower install
 
 script:
