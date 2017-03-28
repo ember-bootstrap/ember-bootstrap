@@ -281,8 +281,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
 
       expect(config).to.exist;
       Object.keys(expectedConfig).forEach((key) => {
-        expect(config[key], key).to.exist;
-        expect(config[key], key).to.equal(expectedConfig[key]);
+        expect(config, key).to.have.property(key, expectedConfig[key]);
       });
     }
 
