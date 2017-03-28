@@ -194,7 +194,7 @@ module.exports = {
     }
 
     if (config.hasOwnProperty('importBootstrapCSS')) {
-      settings.importBootstrapFont = config.importBootstrapFont;
+      settings.importBootstrapCSS = config.importBootstrapCSS;
     } else {
       settings.importBootstrapCSS = (preprocessor === 'none');
     }
