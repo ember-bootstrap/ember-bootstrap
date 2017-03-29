@@ -196,7 +196,7 @@ module.exports = {
     if (preprocessor !== 'none') {
       settings.importBootstrapCSS = false;
     } else if (config.hasOwnProperty('importBootstrapCSS')) {
-      settings.importBootstrapCSS = config. importBootstrapCSS;
+      settings.importBootstrapCSS = config.importBootstrapCSS;
     } else {
       settings.importBootstrapCSS = true;
     }
