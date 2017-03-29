@@ -33,6 +33,8 @@ module.exports = {
   normalizeEntityName() {
   },
 
+  existingConfiguration: null,
+
   beforeInstall(option) {
     let bootstrapVersion = parseInt(option.bootstrapVersion, 10) || this.retrieveBootstrapVersion() || 3;
     let preprocessor = option.preprocessor;
@@ -178,13 +180,26 @@ module.exports = {
     let file = 'ember-cli-build.js';
     let bootstrapVersion = this.bootstrapVersion;
     let preprocessor = this.preprocessor;
+    let config = this.retrieveExistingConfiguration();
     let settings = {
       bootstrapVersion
     };
 
-    settings.importBootstrapFont = (bootstrapVersion === 3);
+    if (bootstrapVersion === 4) {
+      settings.importBootstrapFont = false;
+    } else if (config.hasOwnProperty('importBootstrapFont')) {
+      settings.importBootstrapFont = config.importBootstrapFont;
+    } else {
+      settings.importBootstrapFont = true;
+    }
 
-    settings.importBootstrapCSS = (preprocessor === 'none');
+    if (preprocessor !== 'none') {
+      settings.importBootstrapCSS = false;
+    } else if (config.hasOwnProperty('importBootstrapCSS')) {
+      settings.importBootstrapCSS = config.importBootstrapCSS;
+    } else {
+      settings.importBootstrapCSS = true;
+    }
 
     if (!fs.existsSync(file)) {
       this.ui.writeLine(chalk.red(`Could not find ${file} to modify.`));
@@ -204,13 +219,23 @@ module.exports = {
     }
   },
 
-  retrieveBootstrapVersion() {
+  retrieveExistingConfiguration() {
+    if (this.existingConfiguration) {
+      return this.existingConfiguration;
+    }
+
     let file = 'ember-cli-build.js';
 
     let source = fs.readFileSync(file);
     let build = new BuildConfigEditor(source);
-    let config = build.retrieve(this.name);
+    this.existingConfiguration = build.retrieve(this.name) || {};
+    return this.existingConfiguration;
+  },
 
-    return config && parseInt(config.bootstrapVersion, 10);
+  retrieveBootstrapVersion() {
+
+    let config = this.retrieveExistingConfiguration();
+
+    return config.bootstrapVersion && parseInt(config.bootstrapVersion, 10);
   }
 };

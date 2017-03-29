@@ -182,7 +182,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
 
   });
 
-  describe('install dependencies', function() {
+  describe('install dependencies and configuration', function() {
 
     let Blueprint = require('ember-cli/lib/models/blueprint');
     let origTaskFor = Blueprint.prototype.taskFor;
@@ -195,6 +195,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       npm: [],
       bower: []
     };
+    let buildFile = 'ember-cli-build.js';
 
     before(function() {
       Blueprint.prototype.taskFor = function(taskName) {
@@ -202,7 +203,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
         if (match) {
           let type = match[1];
           return {
-            run: function(options) {
+            run(options) {
               let packages = options.packages || [];
               installed[type] = installed[type].concat(packages);
               return Promise.resolve();
@@ -212,7 +213,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
 
         if (taskName === 'npm-uninstall') {
           return {
-            run: function(options) {
+            run(options) {
               let packages = options.packages || [];
               uninstalled.npm = uninstalled.npm.concat(packages);
               return Promise.resolve();
@@ -263,11 +264,25 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
     }
 
     function editConfiguration(config) {
-      let buildFile = 'ember-cli-build.js';
       let source = fs.readFileSync(buildFile);
       let editor = new BuildConfigEditor(source);
       editor.edit('ember-bootstrap', config);
       fs.writeFileSync(buildFile, editor.code());
+    }
+
+    function checkConfiguration(expectedConfig) {
+      if (!expectedConfig) {
+        return; // No expectation means nothing to check
+      }
+
+      let source = fs.readFileSync(buildFile);
+      let editor = new BuildConfigEditor(source);
+      let config = editor.retrieve('ember-bootstrap');
+
+      expect(config).to.exist;
+      Object.keys(expectedConfig).forEach((key) => {
+        expect(config, key).to.have.property(key, expectedConfig[key]);
+      });
     }
 
     scenarios.forEach(function(scenario) {
@@ -277,8 +292,9 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       let bootstrapVersion = options.bootstrapVersion;
       let installed = scenario.installed || {};
       let npmInstalled = installed.npm || [];
-      let config = installed.config;
-      let configuredBootstrapVersion = config && config.bootstrapVersion;
+      let installedConfig = installed.config;
+      let configuredBootstrapVersion = installedConfig && installedConfig.bootstrapVersion;
+      let config = scenario.config;
 
       if (preprocessor) {
         args.push(`--preprocessor=${preprocessor}`);
@@ -290,12 +306,12 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       let preInstalledText = npmInstalled.length > 0 ? `, preInstalled: ${npmInstalled.join(', ')}` : '';
       let configuredVersionText = configuredBootstrapVersion ? `, configured version: ${configuredBootstrapVersion}` : '';
 
-      it(`installs dependencies for ember g ember-bootstrap ${args.join(' ')}${preInstalledText}${configuredVersionText}`, function() {
+      it(`installs dependencies and config for ember g ember-bootstrap ${args.join(' ')}${preInstalledText}${configuredVersionText}`, function() {
         args = ['ember-bootstrap'].concat(args);
 
         return emberNew()
           .then(() => modifyPackages(npmInstalled.map((pkg) => ({ name: pkg, dev: true }))))
-          .then(() => editConfiguration(config))
+          .then(() => editConfiguration(installedConfig))
           .then(() => emberGenerate(args))
           .then(() => {
             for (let pkg in scenario.dependencies.bower) {
@@ -310,7 +326,8 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
               checkPackage('addon', pkg, scenario.dependencies.addon[pkg]);
             }
 
-          });
+          })
+          .then(() => checkConfiguration(config));
       });
     });
   });
