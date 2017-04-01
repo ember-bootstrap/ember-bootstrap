@@ -57,7 +57,7 @@
     "ember-source": "~2.12.0",
     "emberx-select": "^3.0.0",
     "eslint-plugin-ember-suave": "^1.0.0",
-    "glob": "^5.0.14",
+    "glob": "^7.1.1",
     "gulp": "^3.9.0",
     "gulp-conventional-changelog": "^1.1.0",
     "gulp-gh-pages": "^0.5.4",
@@ -66,6 +66,7 @@
     "loader.js": "^4.2.3",
     "merge-stream": "^1.0.1",
     "mocha": "2.5.3",
+    "mocha-eslint": "^3.0.1",
     "striptags": "^2.1.1"
   },
   "description": "Twitter Bootstrap components for Ember.js",
@@ -83,6 +84,7 @@
     "ember-cli-htmlbars": "^1.0.10",
     "ember-runtime-enumerable-includes-polyfill": "^1.0.1",
     "ember-wormhole": "^0.4.1",
+    "findup-sync": "^0.4.3",
     "fs-extra": "^2.0.0",
     "rsvp": "^3.3.3",
     "silent-error": "^1.0.1"

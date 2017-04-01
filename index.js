@@ -29,6 +29,12 @@ const supportedPreprocessors = [
 module.exports = {
   name: 'ember-bootstrap',
 
+  includedCommands() {
+    return {
+      'bootstrap:info': require('./lib/commands/info')
+    };
+  },
+
   included(app) {
     // workaround for https://github.com/ember-cli/ember-cli/issues/3718
     if (typeof app.import !== 'function' && app.app) {
