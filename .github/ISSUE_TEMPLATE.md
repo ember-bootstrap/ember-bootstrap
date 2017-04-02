@@ -6,7 +6,7 @@ it will make it easier for us to track down the issue you're having.
 
 ---
 
-Output from `ember bootstrap:info`:
+Output from `ember bootstrap:info` (available since 1.0.0-alpha.9):
 ```
 [Replace this line with the output.]
 ```
