@@ -1,4 +1,21 @@
 
+# [1.0.0-alpha.9](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.8...v1.0.0-alpha.9) (2017-04-01)
+
+
+### Bug Fixes
+
+* **Install:** Blueprint honor existing config ([#285](https://github.com/kaliber5/ember-bootstrap/issues/285)) ([030131e](https://github.com/kaliber5/ember-bootstrap/commit/030131e)), closes [#282](https://github.com/kaliber5/ember-bootstrap/issues/282)
+* **Install:** Use configured `bootstrapVersion` if present ([e68d372](https://github.com/kaliber5/ember-bootstrap/commit/e68d372)), closes [#276](https://github.com/kaliber5/ember-bootstrap/issues/276)
+* **Install:** Address the situation where `ember-cli-build.js` could not be edited, closes [#279](https://github.com/kaliber5/ember-bootstrap/issues/279)
+
+
+### Features
+
+* **Info command:** added `ember bootstrap:info` command ([2c54d3f](https://github.com/kaliber5/ember-bootstrap/commit/2c54d3f))
+
+
+
+
 # [1.0.0-alpha.8](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.7...v1.0.0-alpha.8) (2017-03-20)
 
 

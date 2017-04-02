@@ -5,10 +5,10 @@
     "schemaVersion": 2,
     "manifest": {
       "appFiles": [
-        "fastboot/dummy-1c1079466eb3a24583abccbee3e93cf5.js"
+        "fastboot/dummy-efc521b865bc62982d4cfecacc1c07a4.js"
       ],
       "vendorFiles": [
-        "fastboot/vendor-5234603ad73c21a091806fd938fba94e.js"
+        "fastboot/vendor-341cb6ecda0236698b66ea41ecda34a5.js"
       ],
       "htmlFile": "index.html"
     },
@@ -22,7 +22,7 @@
       },
       "APP": {
         "name": "ember-bootstrap",
-        "version": "1.0.0-alpha.8",
+        "version": "1.0.0-alpha.9",
         "autoboot": false
       },
       "unstableApiURL": "http://simonihmig.github.io/ember-bootstrap/",
