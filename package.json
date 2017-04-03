@@ -82,6 +82,7 @@
     "ember-cli-babel": "^5.1.7",
     "ember-cli-build-config-editor": "^0.4.0",
     "ember-cli-htmlbars": "^1.0.10",
+    "ember-cli-import-polyfill": "^0.2.0",
     "ember-runtime-enumerable-includes-polyfill": "^1.0.1",
     "ember-wormhole": "^0.4.1",
     "findup-sync": "^0.4.3",
