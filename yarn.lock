@@ -2097,9 +2097,9 @@ ember-cli-babel@^5.1.10, ember-cli-babel@^5.1.3, ember-cli-babel@^5.1.5, ember-c
     ember-cli-version-checker "^1.0.2"
     resolve "^1.1.2"
 
-ember-cli-blueprint-test-helpers@simonihmig/ember-cli-blueprint-test-helpers#cleanup-symlink:
-  version "0.17.0"
-  resolved "https://codeload.github.com/simonihmig/ember-cli-blueprint-test-helpers/tar.gz/1da201023ca915a775229cf2da1fd73b378751b9"
+ember-cli-blueprint-test-helpers@^0.17.2:
+  version "0.17.2"
+  resolved "https://registry.yarnpkg.com/ember-cli-blueprint-test-helpers/-/ember-cli-blueprint-test-helpers-0.17.2.tgz#13e833d9570c4461fe22d0f375ddf096c5a37e72"
   dependencies:
     chai "^3.3.0"
     chai-as-promised "^6.0.0"
@@ -2108,7 +2108,7 @@ ember-cli-blueprint-test-helpers@simonihmig/ember-cli-blueprint-test-helpers#cle
     ember-cli-internal-test-helpers "^0.9.1"
     exists-sync "0.0.3"
     findup "^0.1.5"
-    fs-extra "^0.30.0"
+    fs-extra "^2.1.0"
     lodash.merge "^4.4.0"
     rsvp "^3.0.17"
     tmp-sync "^1.0.0"
@@ -3525,7 +3525,7 @@ fs-extra@^1.0.0:
     jsonfile "^2.1.0"
     klaw "^1.0.0"
 
-fs-extra@^2.0.0:
+fs-extra@^2.0.0, fs-extra@^2.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-2.1.2.tgz#046c70163cef9aad46b0e4a7fa467fb22d71de35"
   dependencies:
