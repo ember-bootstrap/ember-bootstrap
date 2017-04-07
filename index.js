@@ -8,7 +8,6 @@ const mergeTrees = require('broccoli-merge-trees');
 const Funnel = require('broccoli-funnel');
 const stew = require('broccoli-stew');
 const mv = stew.mv;
-// const log = stew.log;
 const rm = stew.rm;
 const chalk = require('chalk');
 const SilentError = require('silent-error'); // From ember-cli
@@ -75,10 +74,10 @@ module.exports = {
   },
 
   validateDependencies() {
-    let bowerDependencies = this.app.project.bowerDependencies()
-    if ('bootstrap' in bowerDependencies
-      || 'bootstrap-sass' in bowerDependencies) {
-      throw new SilentError('The dependencies for ember-bootstrap are outdated. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
+    let bowerDependencies = this.app.project.bowerDependencies();
+
+    if ('bootstrap' in bowerDependencies || 'bootstrap-sass' in bowerDependencies) {
+      this.ui.writeLine(chalk.yellow('The dependencies for ember-bootstrap can be outdated. Please run `ember generate ember-bootstrap` to install appropriate dependencies!'));
     }
   },
 
