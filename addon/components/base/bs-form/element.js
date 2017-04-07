@@ -344,6 +344,7 @@ export default FormGroup.extend({
    *
    * @property invisibleLabel
    * @type boolean
+   * @default false
    * @public
    */
   invisibleLabel: false,
@@ -368,6 +369,7 @@ export default FormGroup.extend({
    *
    * @property controlType
    * @type string
+   * @default 'text'
    * @public
    */
   controlType: 'text',
