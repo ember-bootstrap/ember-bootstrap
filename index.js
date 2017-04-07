@@ -35,11 +35,9 @@ module.exports = {
     };
   },
 
-  included(app) {
-    // workaround for https://github.com/ember-cli/ember-cli/issues/3718
-    if (typeof app.import !== 'function' && app.app) {
-      app = app.app;
-    }
+  included() {
+    this._super.included.apply(this, arguments);
+    let app = this._findHost();
     this.app = app;
 
     let options = extend(extend({}, defaultOptions), app.options['ember-bootstrap']);
@@ -59,23 +57,23 @@ module.exports = {
 
       // / Import css from bootstrap
       if (options.importBootstrapCSS) {
-        app.import(path.join(cssPath, 'bootstrap.css'));
-        app.import(path.join(cssPath, 'bootstrap.css.map'), { destDir: 'assets' });
+        this.import(path.join(cssPath, 'bootstrap.css'));
+        this.import(path.join(cssPath, 'bootstrap.css.map'), { destDir: 'assets' });
       }
 
       if (options.importBootstrapTheme) {
-        app.import(path.join(cssPath, 'bootstrap-theme.css'));
-        app.import(path.join(cssPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
+        this.import(path.join(cssPath, 'bootstrap-theme.css'));
+        this.import(path.join(cssPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
       }
     }
 
     if (!process.env.EMBER_CLI_FASTBOOT) {
-      app.import('vendor/transition.js');
+      this.import('vendor/transition.js');
     }
   },
 
   validateDependencies() {
-    let bowerDependencies = this.app.project.bowerDependencies()
+    let bowerDependencies = this.app.project.bowerDependencies();
     if ('bootstrap' in bowerDependencies
       || 'bootstrap-sass' in bowerDependencies) {
       throw new SilentError('The dependencies for ember-bootstrap are outdated. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
