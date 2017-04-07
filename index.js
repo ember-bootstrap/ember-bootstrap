@@ -7,16 +7,14 @@ const extend = util._extend;
 const mergeTrees = require('broccoli-merge-trees');
 const Funnel = require('broccoli-funnel');
 const stew = require('broccoli-stew');
-const mv = stew.mv;
-// const log = stew.log;
-const rm = stew.rm;
-const chalk = require('chalk');
+const { rm, mv } = stew;
 const SilentError = require('silent-error'); // From ember-cli
 
 const defaultOptions = {
   importBootstrapTheme: false,
   importBootstrapCSS: true,
   importBootstrapFont: true,
+  importBootstrapJS: false,
   insertEmberWormholeElementToDom: true,
   bootstrapVersion: 3
 };
@@ -52,21 +50,28 @@ module.exports = {
     this.validateDependencies();
     this.preprocessor = this.findPreprocessor();
 
+    // static Bootstrap files are mapped to vendor tree, independent of BS version, so import from there
+    let vendorPath = path.join('vendor', 'ember-bootstrap');
+
     if (!this.hasPreprocessor()) {
-
-      // static Bootstrap CSS is mapped to vendor tree, independent of BS version, so import from there
-      let cssPath = path.join('vendor', 'ember-bootstrap');
-
-      // / Import css from bootstrap
+      // Import css from bootstrap
       if (options.importBootstrapCSS) {
-        app.import(path.join(cssPath, 'bootstrap.css'));
-        app.import(path.join(cssPath, 'bootstrap.css.map'), { destDir: 'assets' });
+        app.import(path.join(vendorPath, 'bootstrap.css'));
+        app.import(path.join(vendorPath, 'bootstrap.css.map'), { destDir: 'assets' });
       }
 
+      // Import themes from bootstrap
       if (options.importBootstrapTheme) {
-        app.import(path.join(cssPath, 'bootstrap-theme.css'));
-        app.import(path.join(cssPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
+        app.import(path.join(vendorPath, 'bootstrap-theme.css'));
+        app.import(path.join(vendorPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
       }
+
+    }
+
+    // Import JS from bootstrap
+    if (options.importBootstrapJS) {
+      app.import(path.join(vendorPath, 'bootstrap.min.js'));
+      app.import(path.join(vendorPath, 'bootstrap.js'), { destDir: 'assets' });
     }
 
     if (!process.env.EMBER_CLI_FASTBOOT) {
@@ -75,7 +80,7 @@ module.exports = {
   },
 
   validateDependencies() {
-    let bowerDependencies = this.app.project.bowerDependencies()
+    let bowerDependencies = this.app.project.bowerDependencies();
     if ('bootstrap' in bowerDependencies
       || 'bootstrap-sass' in bowerDependencies) {
       throw new SilentError('The dependencies for ember-bootstrap are outdated. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
@@ -107,7 +112,7 @@ module.exports = {
   },
 
   getBootstrapStylesPath() {
-    let nodeModulesPath = this.app.project.nodeModulesPath;
+    let { nodeModulesPath } = this.app.project;
     switch (this.preprocessor) {
       case 'sass':
         if (this.getBootstrapVersion() === 4) {
@@ -129,6 +134,16 @@ module.exports = {
       case 'less':
       default:
         return path.join(this.app.project.nodeModulesPath, 'bootstrap', 'fonts');
+    }
+  },
+
+  getBootstrapJSPath() {
+    switch (this.preprocessor) {
+      case 'sass':
+        return path.join(this.app.project.nodeModulesPath, 'bootstrap-sass', 'assets', 'javascripts');
+      case 'less':
+      default:
+        return path.join(this.app.project.nodeModulesPath, 'bootstrap', 'dist', 'js');
     }
   },
 
@@ -159,6 +174,13 @@ module.exports = {
         destDir: 'ember-bootstrap'
       }));
     }
+
+    if (this.bootstrapOptions.importBootstrapJS) {
+      trees.push(new Funnel(this.getBootstrapJSPath(), {
+        destDir: 'ember-bootstrap'
+      }));
+    }
+
     return mergeTrees(trees);
   },
 
