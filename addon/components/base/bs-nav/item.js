@@ -17,7 +17,7 @@ const { computed, LinkComponent } = Ember;
 export default
 Ember.Component.extend(ComponentParent, {
   layout,
-  classNameBindings: ['disabled', 'active'],
+  classNameBindings: ['disabled', 'active', 'pullRight'],
   tagName: 'li',
   ariaRole: 'presentation',
 
