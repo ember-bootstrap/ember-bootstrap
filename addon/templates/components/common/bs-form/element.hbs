@@ -16,20 +16,13 @@
     formElementId=formElementId
   )
 }}
-  {{#if hasBlock}}
-    {{yield
-      (hash
-        value=value
-        id=formElementId
-        validation=validation
-      )
-    }}
-  {{else}}
-    {{component controlComponent
+  {{#with
+    (component controlComponent
       value=value
       id=formElementId
       name=name
       type=controlType
+      label=label
       placeholder=placeholder
       autofocus=autofocus
       disabled=disabled
@@ -56,6 +49,18 @@
       title=title
       onChange=(action "change")
       validationType=_validationType
-    }}
-  {{/if}}
+  ) as |control|}}
+    {{#if hasBlock}}
+      {{yield
+        (hash
+          value=value
+          id=formElementId
+          validation=validation
+          control=control
+        )
+      }}
+    {{else}}
+      {{component control}}
+    {{/if}}
+  {{/with}}
 {{/component}}

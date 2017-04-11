@@ -213,6 +213,7 @@ test('Custom controls are supported', function(assert) {
         <div id="value">{{el.value}}</div>
         <div id="id">{{el.id}}</div>
         <div id="validation">{{el.validation}}</div>
+        <div id="control">{{el.control}}</div>
       {{/form.element}}
     {{/bs-form}}
   `);
@@ -221,6 +222,7 @@ test('Custom controls are supported', function(assert) {
   assert.equal(this.$('#value').text().trim(), 'male', 'value is yielded to block template');
   assert.equal(this.$('#id').text().trim(), `${this.$('.form-group').attr('id')}-field`, 'id is yielded to block template');
   assert.equal(this.$('#validation').text().trim(), 'success');
+  assert.equal(this.$('#control input[type=text]').length, 1, 'control component is yielded');
 });
 
 test('supported input attributes propagate', function(assert) {
@@ -572,4 +574,14 @@ test('events enabling validation rendering are configurable per `showValidationO
     this.$('.form-group').hasClass(validationErrorClass()),
     'events present in `showValidationOn` trigger validation'
   );
+});
+
+test('it uses custom control component when registered in DI container', function(assert) {
+  this.register('component:bs-form/element/control/foo', Ember.Component.extend({
+    layout: hbs`<div id="foo"></div>`
+  }));
+  this.render(hbs`
+      {{bs-form/element controlType="foo"}}
+  `);
+  assert.equal(this.$('#foo').length, 1, 'Custom control is used');
 });
