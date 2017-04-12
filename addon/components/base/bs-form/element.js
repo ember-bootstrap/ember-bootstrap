@@ -117,7 +117,7 @@ const nonDefaultLayouts = A([
  (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
 
  ```hbs
- {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
+ {{#bs-form model=this onSubmit=(action "submit") as |form|}}
    {{#form.element label="Select-2" property="gender" useIcons=false as |el|}}
      {{select-2 id=el.id content=genderChoices optionLabelPath="label" value=el.value searchEnabled=false}}
    {{/form.element}}
@@ -132,6 +132,17 @@ const nonDefaultLayouts = A([
 
  If your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports
  feedback icons with textual `<input class="form-control">` elements.
+
+ If you just want to customize the existing control component, you can use the aforementioned yielded `control` component
+ to customize that existing component:
+
+ ```hbs
+ {{#bs-form model=this onSubmit=(action "submit") as |form|}}
+   {{#form.element label="Email" placeholder="Email" property="email" as |el|}}
+     {{el.control class="input-lg"}}
+   {{/form.element}}
+ {{/bs-form}}
+ ```
 
  ### HTML attributes
 
