@@ -16,13 +16,9 @@ const {
 
   assert,
   typeOf,
-  A
+  A,
+  getOwner
 } = Ember;
-
-const nonTextFieldControlTypes = A([
-  'checkbox',
-  'textarea'
-]);
 
 const nonDefaultLayouts = A([
   'checkbox'
@@ -121,20 +117,32 @@ const nonDefaultLayouts = A([
  (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
 
  ```hbs
- {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
- {{#form.element label="Select-2" property="gender" useIcons=false as |el|}}
- {{select-2 id=el.id content=genderChoices optionLabelPath="label" value=el.value searchEnabled=false}}
- {{/form.element}}
+ {{#bs-form model=this onSubmit=(action "submit") as |form|}}
+   {{#form.element label="Select-2" property="gender" useIcons=false as |el|}}
+     {{select-2 id=el.id content=genderChoices optionLabelPath="label" value=el.value searchEnabled=false}}
+   {{/form.element}}
  {{/bs-form}}
  ```
 
  The component yields a hash with the following properties:
+ * `control`: the component that would be used for rendering the form control based on the given `controlType`
  * `id`: id to be used for the form control, so it matches the labels `for` attribute
  * `value`: the value of the form element
  * `validation`: the validation state of the element, `null` if no validation is to be shown, otherwise 'success', 'error' or 'warning'
 
  If your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports
  feedback icons with textual `<input class="form-control">` elements.
+
+ If you just want to customize the existing control component, you can use the aforementioned yielded `control` component
+ to customize that existing component:
+
+ ```hbs
+ {{#bs-form model=this onSubmit=(action "submit") as |form|}}
+   {{#form.element label="Email" placeholder="Email" property="email" as |el|}}
+     {{el.control class="input-lg"}}
+   {{/form.element}}
+ {{/bs-form}}
+ ```
 
  ### HTML attributes
 
@@ -609,9 +617,7 @@ export default FormGroup.extend({
    * @readonly
    * @public
    */
-  useIcons: computed('controlType', function() {
-    return !nonTextFieldControlTypes.includes(this.get('controlType'));
-  }),
+  useIcons: computed.equal('controlComponent', 'bs-form/element/control/input'),
 
   /**
    * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
@@ -674,11 +680,13 @@ export default FormGroup.extend({
    */
   controlComponent: computed('controlType', function() {
     let controlType = this.get('controlType');
-    if (!nonTextFieldControlTypes.includes(controlType)) {
-      controlType = 'input';
+    let componentName = `bs-form/element/control/${controlType}`;
+
+    if (getOwner(this).hasRegistration(`component:${componentName}`)) {
+      return componentName;
     }
 
-    return `bs-form/element/control/${controlType}`;
+    return 'bs-form/element/control/input';
   }),
 
   /**
@@ -754,7 +762,7 @@ export default FormGroup.extend({
    * @param {String} property The value of `property`
    * @public
    */
-  onChange(value, model, property) {}, // eslint-disable-line no-unused-vars
+  onChange() {},
 
   init() {
     this._super(...arguments);
