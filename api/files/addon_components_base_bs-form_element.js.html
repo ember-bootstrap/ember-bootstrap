@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.9</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.10</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -71,13 +71,9 @@ const {
 
   assert,
   typeOf,
-  A
+  A,
+  getOwner
 } = Ember;
-
-const nonTextFieldControlTypes = A([
-  &#x27;checkbox&#x27;,
-  &#x27;textarea&#x27;
-]);
 
 const nonDefaultLayouts = A([
   &#x27;checkbox&#x27;
@@ -176,20 +172,32 @@ const nonDefaultLayouts = A([
  (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
 
  &#x60;&#x60;&#x60;hbs
- {{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot; as |form|}}
- {{#form.element label=&quot;Select-2&quot; property=&quot;gender&quot; useIcons=false as |el|}}
- {{select-2 id=el.id content=genderChoices optionLabelPath=&quot;label&quot; value=el.value searchEnabled=false}}
- {{/form.element}}
+ {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
+   {{#form.element label=&quot;Select-2&quot; property=&quot;gender&quot; useIcons=false as |el|}}
+     {{select-2 id=el.id content=genderChoices optionLabelPath=&quot;label&quot; value=el.value searchEnabled=false}}
+   {{/form.element}}
  {{/bs-form}}
  &#x60;&#x60;&#x60;
 
  The component yields a hash with the following properties:
+ * &#x60;control&#x60;: the component that would be used for rendering the form control based on the given &#x60;controlType&#x60;
  * &#x60;id&#x60;: id to be used for the form control, so it matches the labels &#x60;for&#x60; attribute
  * &#x60;value&#x60;: the value of the form element
  * &#x60;validation&#x60;: the validation state of the element, &#x60;null&#x60; if no validation is to be shown, otherwise &#x27;success&#x27;, &#x27;error&#x27; or &#x27;warning&#x27;
 
  If your custom control does not render an input element, you should set &#x60;useIcons&#x60; to &#x60;false&#x60; since bootstrap only supports
  feedback icons with textual &#x60;&lt;input class=&quot;form-control&quot;&gt;&#x60; elements.
+
+ If you just want to customize the existing control component, you can use the aforementioned yielded &#x60;control&#x60; component
+ to customize that existing component:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
+   {{#form.element label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot; as |el|}}
+     {{el.control class=&quot;input-lg&quot;}}
+   {{/form.element}}
+ {{/bs-form}}
+ &#x60;&#x60;&#x60;
 
  ### HTML attributes
 
@@ -399,6 +407,7 @@ export default FormGroup.extend({
    *
    * @property invisibleLabel
    * @type boolean
+   * @default false
    * @public
    */
   invisibleLabel: false,
@@ -423,6 +432,7 @@ export default FormGroup.extend({
    *
    * @property controlType
    * @type string
+   * @default &#x27;text&#x27;
    * @public
    */
   controlType: &#x27;text&#x27;,
@@ -662,9 +672,7 @@ export default FormGroup.extend({
    * @readonly
    * @public
    */
-  useIcons: computed(&#x27;controlType&#x27;, function() {
-    return !nonTextFieldControlTypes.includes(this.get(&#x27;controlType&#x27;));
-  }),
+  useIcons: computed.equal(&#x27;controlComponent&#x27;, &#x27;bs-form/element/control/input&#x27;),
 
   /**
    * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
@@ -727,11 +735,13 @@ export default FormGroup.extend({
    */
   controlComponent: computed(&#x27;controlType&#x27;, function() {
     let controlType = this.get(&#x27;controlType&#x27;);
-    if (!nonTextFieldControlTypes.includes(controlType)) {
-      controlType = &#x27;input&#x27;;
+    let componentName = &#x60;bs-form/element/control/${controlType}&#x60;;
+
+    if (getOwner(this).hasRegistration(&#x60;component:${componentName}&#x60;)) {
+      return componentName;
     }
 
-    return &#x60;bs-form/element/control/${controlType}&#x60;;
+    return &#x27;bs-form/element/control/input&#x27;;
   }),
 
   /**
@@ -807,7 +817,7 @@ export default FormGroup.extend({
    * @param {String} property The value of &#x60;property&#x60;
    * @public
    */
-  onChange(value, model, property) {}, // eslint-disable-line no-unused-vars
+  onChange() {},
 
   init() {
     this._super(...arguments);
