@@ -1,3 +1,18 @@
+<a name="1.0.0-alpha.10"></a>
+# [1.0.0-alpha.10](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.9...v1.0.0-alpha.10) (2017-04-13)
+
+
+### Bug Fixes
+
+* **Install:** Fix dependency validator to allow having bootstrap in bower dependencies. Thanks to [Exelord](https://github.com/exelord).  ([2d5d254](https://github.com/kaliber5/ember-bootstrap/commit/2d5d254))
+
+
+### Features
+
+* **Form:** form element yields control component for easier customization ([7fa354a](https://github.com/kaliber5/ember-bootstrap/commit/7fa354a))
+
+
+
 <a name="1.0.0-alpha.9"></a>
 # [1.0.0-alpha.9](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.8...v1.0.0-alpha.9) (2017-04-01)
 
