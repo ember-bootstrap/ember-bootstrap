@@ -68,9 +68,7 @@ module.exports = {
       }
     }
 
-    if (!process.env.EMBER_CLI_FASTBOOT) {
-      app.import('vendor/transition.js');
-    }
+    app.import('vendor/transition.js');
   },
 
   validateDependencies() {
