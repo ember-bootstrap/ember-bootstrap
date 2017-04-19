@@ -18,7 +18,8 @@ export default Control.extend({
     'required',
     'tabindex',
     'form',
-    'title'
+    'title',
+    'ariaDescribedby:aria-describedBy'
   ],
   tagName: 'input',
 

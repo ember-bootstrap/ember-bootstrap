@@ -25,7 +25,8 @@ export default Control.extend({
     'rows',
     'cols',
     'wrap',
-    'title'
+    'title',
+    'ariaDescribedby:aria-describedBy'
   ],
   tagName: 'textarea',
   classNames: ['form-control'],

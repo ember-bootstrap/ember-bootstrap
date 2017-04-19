@@ -32,7 +32,8 @@ export default Control.extend({
     'step',
     'form',
     'spellcheck',
-    'title'
+    'title',
+    'ariaDescribedby:aria-describedBy'
   ],
   tagName: 'input',
   classNames: ['form-control'],

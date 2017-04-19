@@ -3,10 +3,12 @@
   <div class="{{horizontalInputGridClass}}">
     {{yield}}
     {{component errorsComponent}}
+    {{component helpTextComponent}}
   </div>
 {{else}}
   <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
     {{yield}}
     {{component errorsComponent}}
+    {{component helpTextComponent}}
   </div>
 {{/if}}

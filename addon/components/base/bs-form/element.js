@@ -421,6 +421,23 @@ export default FormGroup.extend({
   model: null,
 
   /**
+   * Show a help text next to the control
+   *
+   * @property helpText
+   * @type {string}
+   * @public
+   */
+  helpText: null,
+
+  /**
+   * @property hasHelpText
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasHelpText: computed.notEmpty('helpText').readOnly(),
+
+  /**
    * The array of error messages from the `model`'s validation.
    *
    * @property errors
@@ -653,8 +670,18 @@ export default FormGroup.extend({
    * @private
    */
   formElementId: computed('elementId', function() {
-    let elementId = this.get('elementId');
-    return `${elementId}-field`;
+    return `${this.get('elementId')}-field`;
+  }),
+
+  /**
+   * ID of the helpText, used for aria-describedby attribute of the control element
+   *
+   * @property ariaDescribedby
+   * @type string
+   * @private
+   */
+  ariaDescribedby: computed('elementId', function() {
+    return `${this.get('elementId')}-help`;
   }),
 
   /**
@@ -709,6 +736,13 @@ export default FormGroup.extend({
    * @private
    */
   labelComponent: 'bs-form/element/label',
+
+  /**
+   * @property helpTextComponent
+   * @type {String}
+   * @private
+   */
+  helpTextComponent: 'bs-form/element/help-text',
 
   /**
    * Setup validation properties. This method acts as a hook for external validation

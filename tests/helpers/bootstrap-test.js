@@ -59,4 +59,8 @@ export function positionStickyClass() {
   return versionDependent('navbar-static-top', 'sticky-top');
 }
 
+export function formHelpTextClass() {
+  return versionDependent('help-block', 'form-text');
+}
+
 export { test };

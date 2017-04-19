@@ -43,5 +43,12 @@ export default Ember.Component.extend({
    * @type {Ember.Component}
    * @public
    */
-  labelComponent: null
+  labelComponent: null,
+
+  /**
+   * @property helpTextComponent
+   * @type {Ember.Component}
+   * @public
+   */
+  helpTextComponent: null
 });
