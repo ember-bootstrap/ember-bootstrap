@@ -14,7 +14,7 @@ export default Ember.Component.extend({
   /**
    * @property text
    * @type {string}
-   * @poublic
+   * @public
    */
   text: null
 });
