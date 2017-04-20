@@ -18,7 +18,7 @@
   helpTextComponent=(if hasHelpText
     (component helpTextComponent
       text=helpText
-      id=ariaDescribedby
+      id=ariaDescribedBy
     )
   )
 }}
@@ -55,7 +55,7 @@
       title=title
       options=options
       optionLabelPath=optionLabelPath
-      ariaDescribedby=(if hasHelpText ariaDescribedby)
+      ariaDescribedBy=(if hasHelpText ariaDescribedBy)
       onChange=(action "change")
       validationType=_validationType
   ) as |control|}}

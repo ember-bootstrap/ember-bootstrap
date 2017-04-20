@@ -16,11 +16,11 @@ export default Ember.Component.extend({
   value: null,
 
   /**
-   * @property ariaDescribedby
+   * @property ariaDescribedBy
    * @type {string}
    * @public
    */
-  ariaDescribedby: null,
+  ariaDescribedBy: null,
 
   /**
    * This action is called whenever the `value` changes
