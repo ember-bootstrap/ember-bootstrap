@@ -95,7 +95,7 @@ const nonDefaultLayouts = A([
 
  * `validation` is set to 'error', which will set the `has-error` CSS class
  * the `errorIcon` feedback icon is displayed if `controlType` is a text field
- * the validation messages are displayed as Bootstrap `help-block`s in BS3 and `form-text` in BS4
+ * the validation messages are displayed as Bootstrap `help-block`s in BS3 and `form-control-feedback` in BS4
 
  The same applies for warning messages, if the used validation library supports this. (Currently only
  [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations))
@@ -421,6 +421,23 @@ export default FormGroup.extend({
   model: null,
 
   /**
+   * Show a help text next to the control
+   *
+   * @property helpText
+   * @type {string}
+   * @public
+   */
+  helpText: null,
+
+  /**
+   * @property hasHelpText
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasHelpText: computed.notEmpty('helpText').readOnly(),
+
+  /**
    * The array of error messages from the `model`'s validation.
    *
    * @property errors
@@ -653,8 +670,18 @@ export default FormGroup.extend({
    * @private
    */
   formElementId: computed('elementId', function() {
-    let elementId = this.get('elementId');
-    return `${elementId}-field`;
+    return `${this.get('elementId')}-field`;
+  }),
+
+  /**
+   * ID of the helpText, used for aria-describedby attribute of the control element
+   *
+   * @property ariaDescribedBy
+   * @type string
+   * @private
+   */
+  ariaDescribedBy: computed('elementId', function() {
+    return `${this.get('elementId')}-help`;
   }),
 
   /**
@@ -709,6 +736,13 @@ export default FormGroup.extend({
    * @private
    */
   labelComponent: 'bs-form/element/label',
+
+  /**
+   * @property helpTextComponent
+   * @type {String}
+   * @private
+   */
+  helpTextComponent: 'bs-form/element/help-text',
 
   /**
    * Setup validation properties. This method acts as a hook for external validation

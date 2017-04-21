@@ -15,6 +15,12 @@
     invisibleLabel=invisibleLabel
     formElementId=formElementId
   )
+  helpTextComponent=(if hasHelpText
+    (component helpTextComponent
+      text=helpText
+      id=ariaDescribedBy
+    )
+  )
 }}
   {{#with
     (component controlComponent
@@ -49,6 +55,7 @@
       title=title
       options=options
       optionLabelPath=optionLabelPath
+      ariaDescribedBy=(if hasHelpText ariaDescribedBy)
       onChange=(action "change")
       validationType=_validationType
   ) as |control|}}

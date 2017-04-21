@@ -1,5 +1,5 @@
 import { moduleForComponent } from 'ember-qunit';
-import { formFeedbackClass, test, testBS3, validationErrorClass } from '../../../helpers/bootstrap-test';
+import { formFeedbackClass, test, testBS3, validationErrorClass, formHelpTextClass } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -584,4 +584,17 @@ test('it uses custom control component when registered in DI container', functio
       {{bs-form/element controlType="foo"}}
   `);
   assert.equal(this.$('#foo').length, 1, 'Custom control is used');
+});
+
+test('shows help text if available', function(assert) {
+  this.render(hbs`
+    {{bs-form/element helpText="foo"}}
+  `);
+
+  let helpTextClass = `.${formHelpTextClass()}`;
+  assert.equal(this.$(helpTextClass).length, 1, 'has help text element');
+  assert.equal(this.$(helpTextClass).text().trim(), 'foo', 'shows help text');
+
+  assert.ok(this.$('input').attr('aria-describedby'), 'control has aria-describedby attribute');
+  assert.equal(this.$('input').attr('aria-describedby'), this.$(helpTextClass).attr('id'), 'aria-describedby matches id');
 });

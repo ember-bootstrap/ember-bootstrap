@@ -1,4 +1,5 @@
 import Control from '../control';
+import ControlAttributes from 'ember-bootstrap/mixins/control-attributes';
 
 /**
 
@@ -7,18 +8,12 @@ import Control from '../control';
  @extends Components.FormElementControl
  @private
  */
-export default Control.extend({
+export default Control.extend(ControlAttributes, {
   attributeBindings: [
     'value',
     'type',
-    'name',
     'placeholder',
-    'autofocus',
-    'disabled',
-    'readonly',
-    'required',
     'size',
-    'tabindex',
     'minlength',
     'maxlength',
     'min',
@@ -30,11 +25,8 @@ export default Control.extend({
     'inputmode',
     'multiple',
     'step',
-    'form',
-    'spellcheck',
-    'title'
+    'spellcheck'
   ],
-  tagName: 'input',
   classNames: ['form-control'],
 
   /**
