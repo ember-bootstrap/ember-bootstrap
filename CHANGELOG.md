@@ -1,3 +1,15 @@
+<a name="1.0.0-alpha.11"></a>
+# [1.0.0-alpha.11](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.10...v1.0.0-alpha.11) (2017-04-21)
+
+
+### Features
+
+* **FastBoot:** prepare for upcoming FastBoot 1.0 breaking changes. ember-bootstrap should now be compatible with pre and post 1.0 versions of FastBoot! ([7474e72](https://github.com/kaliber5/ember-bootstrap/commit/7474e72))
+* **FormElement:** `helpText` allows you to add a block of help text next to your form control ([c23af92](https://github.com/kaliber5/ember-bootstrap/commit/c23af92)), closes [#169](https://github.com/kaliber5/ember-bootstrap/issues/169)
+* **FormElement:** Added `options` and `optionLabelPath` properties to better support select-like control components ([271c52d](https://github.com/kaliber5/ember-bootstrap/commit/271c52d))
+
+
+
 <a name="1.0.0-alpha.10"></a>
 # [1.0.0-alpha.10](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.9...v1.0.0-alpha.10) (2017-04-13)
 
