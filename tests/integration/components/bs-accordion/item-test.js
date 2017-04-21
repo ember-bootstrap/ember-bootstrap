@@ -47,3 +47,23 @@ testBS4('calls onClick action when clicking heading', function(assert) {
   this.$('.card-header').click();
   assert.ok(action.calledWith(1), 'onClick action has been called.');
 });
+
+testBS3('renders a contextual title block', function(assert) {
+  this.render(hbs`{{#bs-accordion/item as |aitem|}}
+    {{#aitem.title}}TITLE{{/aitem.title}}
+    {{#aitem.body}}CONTENT{{/aitem.body}}
+  {{/bs-accordion/item}}`);
+
+  assert.equal(this.$('.panel-title').text().trim(), 'TITLE', 'panel-title has correct title');
+  assert.equal(this.$('.panel-body').text().trim(), 'CONTENT', 'panel-body has correct content');
+});
+
+testBS4('renders a contextual title block', function(assert) {
+  this.render(hbs`{{#bs-accordion/item as |aitem|}}
+    {{#aitem.title}}TITLE{{/aitem.title}}
+    {{#aitem.body}}CONTENT{{/aitem.body}}
+  {{/bs-accordion/item}}`);
+
+  assert.equal(this.$('.card-title').text().trim(), 'TITLE', 'card-title has correct title');
+  assert.equal(this.$('.card-block').text().trim(), 'CONTENT', 'card-block has correct content');
+});
