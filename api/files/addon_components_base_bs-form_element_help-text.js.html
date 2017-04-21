@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/base/bs-modal/header/close.js - ember-bootstrap</title>
+    <title>addon/components/base/bs-form/element/help-text.js - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -48,39 +48,32 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/base/bs-modal/header/close.js <small>File</small></h1>
+    <h1>addon/components/base/bs-form/element/help-text.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import layout from &#x27;ember-bootstrap/templates/components/bs-modal/header/close&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/help-text&#x27;;
 
 /**
 
- @class ModalHeaderClose
+ @class FormElementHelpText
  @namespace Components
  @extends Ember.Component
  @private
  */
 export default Ember.Component.extend({
   layout,
-  tagName: &#x27;button&#x27;,
-  classNames: [&#x27;close&#x27;],
-  attributeBindings: [&#x27;type&#x27;, &#x27;aria-label&#x27;],
-  &#x27;aria-label&#x27;: &#x27;Close&#x27;,
-  type: &#x27;button&#x27;,
 
   /**
-   * @event onClick
+   * @property text
+   * @type {string}
    * @public
    */
-  onChange() {},
-
-  click() {
-    this.get(&#x27;onClick&#x27;)();
-  }
+  text: null
 });
+
     </pre>
 </div>
                     </div>

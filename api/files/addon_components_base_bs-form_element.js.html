@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.10</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.11</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -150,7 +150,7 @@ const nonDefaultLayouts = A([
 
  * &#x60;validation&#x60; is set to &#x27;error&#x27;, which will set the &#x60;has-error&#x60; CSS class
  * the &#x60;errorIcon&#x60; feedback icon is displayed if &#x60;controlType&#x60; is a text field
- * the validation messages are displayed as Bootstrap &#x60;help-block&#x60;s in BS3 and &#x60;form-text&#x60; in BS4
+ * the validation messages are displayed as Bootstrap &#x60;help-block&#x60;s in BS3 and &#x60;form-control-feedback&#x60; in BS4
 
  The same applies for warning messages, if the used validation library supports this. (Currently only
  [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations))
@@ -476,6 +476,23 @@ export default FormGroup.extend({
   model: null,
 
   /**
+   * Show a help text next to the control
+   *
+   * @property helpText
+   * @type {string}
+   * @public
+   */
+  helpText: null,
+
+  /**
+   * @property hasHelpText
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasHelpText: computed.notEmpty(&#x27;helpText&#x27;).readOnly(),
+
+  /**
    * The array of error messages from the &#x60;model&#x60;&#x27;s validation.
    *
    * @property errors
@@ -708,8 +725,18 @@ export default FormGroup.extend({
    * @private
    */
   formElementId: computed(&#x27;elementId&#x27;, function() {
-    let elementId = this.get(&#x27;elementId&#x27;);
-    return &#x60;${elementId}-field&#x60;;
+    return &#x60;${this.get(&#x27;elementId&#x27;)}-field&#x60;;
+  }),
+
+  /**
+   * ID of the helpText, used for aria-describedby attribute of the control element
+   *
+   * @property ariaDescribedBy
+   * @type string
+   * @private
+   */
+  ariaDescribedBy: computed(&#x27;elementId&#x27;, function() {
+    return &#x60;${this.get(&#x27;elementId&#x27;)}-help&#x60;;
   }),
 
   /**
@@ -764,6 +791,13 @@ export default FormGroup.extend({
    * @private
    */
   labelComponent: &#x27;bs-form/element/label&#x27;,
+
+  /**
+   * @property helpTextComponent
+   * @type {String}
+   * @private
+   */
+  helpTextComponent: &#x27;bs-form/element/help-text&#x27;,
 
   /**
    * Setup validation properties. This method acts as a hook for external validation
@@ -911,6 +945,7 @@ export default FormGroup.extend({
                     <li class="nav-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
                     <li class="nav-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
                     <li class="nav-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
+                    <li class="nav-private"><a href="../classes/Components.FormElementHelpText.html">Components.FormElementHelpText</a></li>
                     <li class="nav-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
                     <li class="nav-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
                     <li class="nav-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
@@ -945,6 +980,7 @@ export default FormGroup.extend({
                     <li class="nav-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
