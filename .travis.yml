@@ -5,6 +5,11 @@ node_js:
 
 sudo: false
 
+addons:
+  apt:
+    packages:
+      - google-chrome-stable
+
 cache:
   yarn: true
 
