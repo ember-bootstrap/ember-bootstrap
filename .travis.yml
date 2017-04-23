@@ -4,6 +4,12 @@ node_js:
   - "6"
 
 sudo: false
+dist: trusty
+
+addons:
+  apt:
+    packages:
+      - google-chrome-stable
 
 cache:
   yarn: true
@@ -37,16 +43,17 @@ before_install:
   - npm config set spin false
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
-  - yarn global add phantomjs-prebuilt
   - yarn global add bower
   - npm --version
   - yarn --version
   - bower --version
-  - phantomjs --version
 
 install:
   - yarn install --no-lockfile
   - bower install
+
+before_script:
+  - export DISPLAY=:99; sh -e /etc/init.d/xvfb start; sleep 3
 
 script:
   - ember try:one $EMBER_TRY_SCENARIO test --skip-cleanup
