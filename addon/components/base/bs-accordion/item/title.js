@@ -13,6 +13,8 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/title';
  */
 export default Ember.Component.extend({
   layout,
+  ariaRole: 'tab',
+  classNameBindings: ['collapsed:collapsed:expanded'],
 
   /**
    * @property collapsed

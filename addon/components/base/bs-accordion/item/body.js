@@ -13,6 +13,7 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/body';
  */
 export default Ember.Component.extend({
   layout,
+  tagName: '',
 
   /**
    * @property collapsed
