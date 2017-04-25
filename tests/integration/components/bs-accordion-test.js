@@ -6,10 +6,19 @@ import {
   accordionClassFor,
   accordionItemHeadClass,
   test,
+  testBS3,
   visibilityClass } from '../../helpers/bootstrap-test';
 
 moduleForComponent('bs-accordion', 'Integration | Component | bs-accordion', {
   integration: true
+});
+
+testBS3('accordion has correct default markup', function(assert) {
+  this.render(hbs`{{#bs-accordion as |acc|}}
+    {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
+    {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
+  {{/bs-accordion}}`);
+  assert.ok(this.$(':first-child').hasClass('panel-group'), 'accordion has panel-group class');
 });
 
 test('accordion has correct default markup', function(assert) {
@@ -17,7 +26,6 @@ test('accordion has correct default markup', function(assert) {
     {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
     {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
   {{/bs-accordion}}`);
-  assert.ok(this.$(':first-child').hasClass(accordionClassFor('group')), `accordion has ${accordionClassFor('group')} class`);
   assert.equal(this.$(`.${accordionClassFor()}`).length, 2, 'accordion yields item');
 });
 
@@ -31,7 +39,7 @@ test('accordion with preselected item has this item expanded', function(assert) 
 
   assert.notOk(item.find(`.${accordionItemHeadClass()}`).hasClass('collapsed'), `${accordionItemHeadClass()} has not collapsed class`);
   assert.ok(item.find(`.${accordionClassFor('collapse')}`).hasClass('collapse'), `${accordionClassFor('collapse')} has collapse class`);
-  assert.ok(item.find(`.${accordionClassFor('collapse')}`).hasClass('in'), `${accordionClassFor('collapse')} has in class`);
+  assert.ok(item.find(`.${accordionClassFor('collapse')}`).hasClass(visibilityClass()), `${accordionClassFor('collapse')} has ${visibilityClass()} class`);
 });
 
 test('changing selected item expands this item', function(assert) {
