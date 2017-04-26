@@ -80,6 +80,7 @@ const componentData = A([
   {
     id: 'tabs',
     title: 'Tabs',
+    className: 'Tab',
     description: 'Add quick, dynamic tab functionality to transition through panes of local content, even via dropdown menus.',
     bsUrl: 'http://getbootstrap.com/javascript/#tabs'
   },
