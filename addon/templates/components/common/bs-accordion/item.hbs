@@ -1,0 +1,15 @@
+{{#if hasBlockParams}}
+  {{yield
+    (hash
+      title=(component "bs-accordion/item/title" collapsed=collapsed onClick=(action onClick value))
+      body=(component "bs-accordion/item/body" collapsed=collapsed)
+    )
+  }}
+{{else}}
+  {{#bs-accordion/item/title collapsed=collapsed onClick=(action onClick value)}}
+    {{title}}
+  {{/bs-accordion/item/title}}
+  {{#bs-accordion/item/body collapsed=collapsed}}
+    {{yield}}
+  {{/bs-accordion/item/body}}
+{{/if}}

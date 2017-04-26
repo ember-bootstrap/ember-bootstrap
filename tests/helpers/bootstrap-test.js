@@ -63,4 +63,17 @@ export function formHelpTextClass() {
   return versionDependent('help-block', 'form-text');
 }
 
+export function accordionClassFor(type) {
+  type = type ? `-${type}` : '';
+  return versionDependent(`panel${type}`, `card${type}`);
+}
+
+export function accordionItemHeadClass() {
+  return versionDependent('panel-heading', 'card-header');
+}
+
+export function accordionItemBodyClass() {
+  return versionDependent('panel-body', 'card-block');
+}
+
 export { test };
