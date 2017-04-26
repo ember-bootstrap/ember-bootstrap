@@ -1,4 +1,15 @@
 
+# [1.0.0-alpha.12](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.11...v1.0.0-alpha.12) (2017-04-26)
+
+
+### Features
+
+* **AccordionItem:** yield title and body as contextual components for better customization. Thanks to [@dajk](https://github.com/dajk) ([8d09cdf](https://github.com/kaliber5/ember-bootstrap/commit/8d09cdf)), closes [#283](https://github.com/kaliber5/ember-bootstrap/issues/283)
+* **Build:** Upgrade to ember-cli-babel@6 to enable new ember-cli targets feature ([cf9a77d](https://github.com/kaliber5/ember-bootstrap/commit/cf9a77d))
+
+
+
+
 # [1.0.0-alpha.11](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.10...v1.0.0-alpha.11) (2017-04-21)
 
 

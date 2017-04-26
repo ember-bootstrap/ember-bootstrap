@@ -2,9 +2,31 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "1.0.0-alpha.11.2cdd29a5"
+        "version": "1.0.0-alpha.12"
     },
     "files": {
+        "addon/components/base/bs-accordion/item/body.js": {
+            "name": "addon/components/base/bs-accordion/item/body.js",
+            "modules": {},
+            "classes": {
+                "Components.AccordionBody": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "addon/components/base/bs-accordion/item/title.js": {
+            "name": "addon/components/base/bs-accordion/item/title.js",
+            "modules": {},
+            "classes": {
+                "Components.AccordionTitle": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
         "addon/components/base/bs-accordion/item.js": {
             "name": "addon/components/base/bs-accordion/item.js",
             "modules": {},
@@ -701,6 +723,38 @@
     },
     "modules": {},
     "classes": {
+        "Components.AccordionBody": {
+            "name": "Components.AccordionBody",
+            "shortname": "Components.AccordionBody",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/base/bs-accordion/item/body.js",
+            "line": 4,
+            "description": "Component for an accordion item body.\n\nSee [Components.Accordion](Components.Accordion.html) for examples.",
+            "extends": "Ember.Component",
+            "access": "public",
+            "tagname": ""
+        },
+        "Components.AccordionTitle": {
+            "name": "Components.AccordionTitle",
+            "shortname": "Components.AccordionTitle",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Components",
+            "file": "addon/components/base/bs-accordion/item/title.js",
+            "line": 4,
+            "description": "Component for an accordion item title.\n\nSee [Components.Accordion](Components.Accordion.html) for examples.",
+            "extends": "Ember.Component",
+            "access": "public",
+            "tagname": ""
+        },
         "Components.AccordionItem": {
             "name": "Components.AccordionItem",
             "shortname": "Components.AccordionItem",
@@ -1754,6 +1808,38 @@
     },
     "elements": {},
     "classitems": [
+        {
+            "file": "addon/components/base/bs-accordion/item/body.js",
+            "line": 18,
+            "itemtype": "property",
+            "name": "collapsed",
+            "type": "boolean",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.AccordionBody",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-accordion/item/title.js",
+            "line": 19,
+            "itemtype": "property",
+            "name": "collapsed",
+            "type": "boolean",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.AccordionTitle",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-accordion/item/title.js",
+            "line": 26,
+            "itemtype": "event",
+            "name": "onClick",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.AccordionTitle",
+            "namespace": "Components"
+        },
         {
             "file": "addon/components/base/bs-accordion/item.js",
             "line": 25,

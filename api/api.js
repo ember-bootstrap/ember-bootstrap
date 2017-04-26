@@ -2,7 +2,9 @@ YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
         "Components.Accordion",
+        "Components.AccordionBody",
         "Components.AccordionItem",
+        "Components.AccordionTitle",
         "Components.Alert",
         "Components.Button",
         "Components.ButtonGroup",
