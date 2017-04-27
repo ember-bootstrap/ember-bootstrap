@@ -20,7 +20,7 @@ export default Ember.Component.extend({
    * @event onClick
    * @public
    */
-  onChange() {},
+  onClick() {},
 
   click() {
     this.get('onClick')();
