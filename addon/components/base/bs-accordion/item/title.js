@@ -29,7 +29,8 @@ export default Ember.Component.extend({
    */
   onClick() {},
 
-  click() {
+  click(e) {
+    e.preventDefault();
     this.get('onClick')();
   }
 
