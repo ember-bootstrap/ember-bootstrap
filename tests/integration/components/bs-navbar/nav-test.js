@@ -1,3 +1,4 @@
+import { find, findAll } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -8,7 +9,7 @@ moduleForComponent('bs-navbar/nav', 'Integration | Component | bs-navbar/nav', {
 test('it renders', function(assert) {
   this.render(hbs`{{bs-navbar/nav}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(find('*').textContent.trim(), '');
 
   // Template block usage:
   this.render(hbs`
@@ -17,7 +18,7 @@ test('it renders', function(assert) {
     {{/bs-navbar/nav}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(find('*').textContent.trim(), 'template block text');
 });
 
 test('it has correct markup', function(assert) {
@@ -27,13 +28,13 @@ test('it has correct markup', function(assert) {
     {{/bs-navbar/nav}}
   `);
 
-  assert.equal(this.$().text().trim(), 'Nav');
-  assert.equal(this.$('.navbar-nav').length, 1, 'there is only one element with the navbar-nav class');
-  assert.ok(this.$('.navbar-nav').hasClass('nav'), 'it has the nav class indicating it derives from bs-nav');
+  assert.equal(find('*').textContent.trim(), 'Nav');
+  assert.equal(findAll('.navbar-nav').length, 1, 'there is only one element with the navbar-nav class');
+  assert.ok(find('.navbar-nav').classList.contains('nav'), 'it has the nav class indicating it derives from bs-nav');
 });
 
 test('it no longer supports the justified option', function(assert) {
   this.render(hbs`{{bs-navbar/nav justified=true}}`);
 
-  assert.equal(this.$('.navbar-justified').length, 0, 'the justified class was not applied');
+  assert.equal(findAll('.navbar-justified').length, 0, 'the justified class was not applied');
 });

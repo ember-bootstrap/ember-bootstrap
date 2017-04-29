@@ -1,3 +1,4 @@
+import { find, click } from 'ember-native-dom-helpers';
 import Ember from 'ember';
 import { moduleForComponent } from 'ember-qunit';
 import test from 'ember-sinon-qunit/test-support/test';
@@ -10,30 +11,30 @@ moduleForComponent('bs-button-group', 'Integration | Component | bs-button-group
 test('button group has correct CSS classes', function(assert) {
   this.render(hbs`{{#bs-button-group size="lg" justified=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
 
-  assert.ok(this.$(':first-child').hasClass('btn-group'), 'has btn-group class');
-  assert.ok(this.$(':first-child').hasClass('btn-group-lg'), 'has size class');
-  assert.ok(this.$(':first-child').hasClass('btn-group-justified'), 'has justified class');
+  assert.ok(find(':first-child').classList.contains('btn-group'), 'has btn-group class');
+  assert.ok(find(':first-child').classList.contains('btn-group-lg'), 'has size class');
+  assert.ok(find(':first-child').classList.contains('btn-group-justified'), 'has justified class');
 });
 
 test('button group supports vertical layout', function(assert) {
   this.render(hbs`{{#bs-button-group vertical=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
 
-  assert.notOk(this.$(':first-child').hasClass('btn-group'), 'has not btn-group class');
-  assert.ok(this.$(':first-child').hasClass('btn-group-vertical'), 'has vertical class');
+  assert.notOk(find(':first-child').classList.contains('btn-group'), 'has not btn-group class');
+  assert.ok(find(':first-child').classList.contains('btn-group-vertical'), 'has vertical class');
 });
 
-test('radio button group calls onChange with value of selected button', function(assert) {
+test('radio button group calls onChange with value of selected button', async function(assert) {
   let action = this.spy();
   this.on('change', action);
   this.render(hbs`{{#bs-button-group type="radio" value=value onChange=(action "change") as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
 
   for (let i = 0; i < 3; i++) {
-    this.$('button').eq(i).click();
+    await click(`button:nth-child(${i + 1})`);
     assert.ok(action.calledWith(i + 1), 'onChange has been called with correct value');
   }
 });
 
-test('checkbox button group calls onChange with value of all selected buttons', function(assert) {
+test('checkbox button group calls onChange with value of all selected buttons', async function(assert) {
   assert.expect(1);
   let expectedValue = [1, 2];
   this.on('change', (value) => {
@@ -41,7 +42,7 @@ test('checkbox button group calls onChange with value of all selected buttons', 
   });
   this.render(hbs`{{#bs-button-group type="checkbox" value=value onChange=(action "change") as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
   this.set('value', [1]);
-  this.$('button').eq(1).click();
+  await click('button:nth-child(2)');
 });
 
 test('radio button group with value set activates button with same value', function(assert) {
@@ -52,7 +53,7 @@ test('radio button group with value set activates button with same value', funct
 
   // check button's active property
   for (let k = 0; k < 3; k++) {
-    assert.equal(this.$('button').eq(k).hasClass('active'), 0 === k, 'only button with same value is active');
+    assert.equal(find(`button:nth-child(${k + 1})`).classList.contains('active'), 0 === k, 'only button with same value is active');
   }
 });
 
@@ -65,7 +66,7 @@ test('checkbox button group with value set activates buttons with same value', f
 
   // check button's active property
   for (let k = 0; k < 3; k++) {
-    assert.equal(this.$('button').eq(k).hasClass('active'), value.includes(k + 1), 'only buttons with value contained in set value are active');
+    assert.equal(find(`button:nth-child(${k + 1})`).classList.contains('active'), value.includes(k + 1), 'only buttons with value contained in set value are active');
   }
 });
 
@@ -78,7 +79,7 @@ test('setting radio button group value activates button with same value', functi
 
     // check button's active property
     for (let k = 0; k < 3; k++) {
-      assert.equal(this.$('button').eq(k).hasClass('active'), i === k, 'only button with same value is active');
+      assert.equal(find(`button:nth-child(${k + 1})`).classList.contains('active'), i === k, 'only button with same value is active');
     }
   }
 });
@@ -92,16 +93,16 @@ test('setting checkbox button group value with array of values activates buttons
 
   // check button's active property
   for (let k = 0; k < 3; k++) {
-    assert.equal(this.$('button').eq(k).hasClass('active'), value.includes(k + 1), 'only buttons with value contained in set value is active');
+    assert.equal(find(`button:nth-child(${k + 1})`).classList.contains('active'), value.includes(k + 1), 'only buttons with value contained in set value is active');
   }
 });
 
-test('when clicking active radio button, onChange must not be called', function(assert) {
+test('when clicking active radio button, onChange must not be called', async function(assert) {
   let action = this.spy();
   this.on('change', action);
   this.render(hbs`{{#bs-button-group type="radio" value=1 as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
 
-  this.$('button').eq(0).click();
+  await click('button:nth-child(1)');
   assert.notOk(action.called, 'onChange has not been called');
 });
 
@@ -114,16 +115,16 @@ test('setting radio button group value to null sets buttons active state to fals
     assert.equal(this.get('value'), null, 'value must be null');
     // check button's active property
     for (let k = 0; k < 3; k++) {
-      assert.equal(this.$('button').eq(k).hasClass('active'), false, 'button active state is true');
+      assert.equal(find(`button:nth-child(${k + 1})`).classList.contains('active'), false, 'button active state is true');
     }
   }
 });
 
-test('clicking button group does not change public value porperty', function(assert) {
+test('clicking button group does not change public value porperty', async function(assert) {
   let value = Ember.A([1]);
   this.set('value', value);
   this.render(hbs`{{#bs-button-group type="checkbox" value=value as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
 
-  this.$('button').eq(2).click();
+  await click('button:nth-child(3)');
   assert.equal(this.get('value'), value, 'Does not change value property');
 });

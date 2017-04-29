@@ -1,3 +1,4 @@
+import { findAll } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -9,5 +10,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{bs-form/element/control/textarea}}`);
 
-  assert.equal(this.$('textarea').length, 1);
+  assert.equal(findAll('textarea').length, 1);
 });

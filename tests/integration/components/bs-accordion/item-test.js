@@ -1,3 +1,4 @@
+import { find, click } from 'ember-native-dom-helpers';
 import {
   moduleForComponent
 } from 'ember-qunit';
@@ -16,21 +17,21 @@ moduleForComponent('bs-accordion-item', 'Integration | Component | bs-accordion-
 
 test('accordion item has correct default markup', function(assert) {
   this.render(hbs`{{#bs-accordion/item title="TITLE"}}CONTENT{{/bs-accordion/item}}`);
-  assert.equal(this.$(':first-child').hasClass(accordionClassFor()), true, `has ${accordionClassFor()} class`);
-  assert.equal(this.$(':first-child').hasClass(accordionClassFor('default')), true, `has ${accordionClassFor('default')} class`);
-  assert.equal(this.$(`.${accordionItemHeadClass()}`).hasClass('collapsed'), true, `has ${accordionItemHeadClass()} class`);
-  assert.equal(this.$(`.${accordionClassFor('collapse')}`).hasClass('collapse'), true, `${accordionClassFor('collapse')} has collapse class`);
-  assert.equal(this.$(`.${accordionClassFor('collapse')}`).hasClass(visibilityClass()), false, `${accordionClassFor('collapse')} is hidden`);
-  assert.equal(this.$(`.${accordionClassFor('title')}`).text().trim(), 'TITLE', `${accordionClassFor('title')} has correct title`);
-  assert.equal(this.$(`.${accordionItemBodyClass()}`).text().trim(), 'CONTENT', `${accordionItemBodyClass()} has correct title`);
+  assert.equal(find(':first-child').classList.contains(accordionClassFor()), true, `has ${accordionClassFor()} class`);
+  assert.equal(find(':first-child').classList.contains(accordionClassFor('default')), true, `has ${accordionClassFor('default')} class`);
+  assert.equal(find(`.${accordionItemHeadClass()}`).classList.contains('collapsed'), true, `has ${accordionItemHeadClass()} class`);
+  assert.equal(find(`.${accordionClassFor('collapse')}`).classList.contains('collapse'), true, `${accordionClassFor('collapse')} has collapse class`);
+  assert.equal(find(`.${accordionClassFor('collapse')}`).classList.contains(visibilityClass()), false, `${accordionClassFor('collapse')} is hidden`);
+  assert.equal(find(`.${accordionClassFor('title')}`).textContent.trim(), 'TITLE', `${accordionClassFor('title')} has correct title`);
+  assert.equal(find(`.${accordionItemBodyClass()}`).textContent.trim(), 'CONTENT', `${accordionItemBodyClass()} has correct title`);
 });
 
-test('calls onClick action when clicking heading', function(assert) {
+test('calls onClick action when clicking heading', async function(assert) {
   let action = this.spy();
   this.on('click', action);
   this.render(hbs`{{#bs-accordion/item value=1 onClick=(action "click") title="TITLE"}}CONTENT{{/bs-accordion/item}}`);
 
-  this.$(`.${accordionItemHeadClass()}`).click();
+  await click(`.${accordionItemHeadClass()}`);
   assert.ok(action.calledWith(1), 'onClick action has been called.');
 });
 
@@ -40,6 +41,6 @@ test('renders a contextual title block', function(assert) {
     {{#aitem.body}}CONTENT{{/aitem.body}}
   {{/bs-accordion/item}}`);
 
-  assert.equal(this.$(`.${accordionClassFor('title')}`).text().trim(), 'TITLE', `${accordionClassFor('title')} has correct title`);
-  assert.equal(this.$(`.${accordionItemBodyClass()}`).text().trim(), 'CONTENT', `${accordionItemBodyClass()} has correct content`);
+  assert.equal(find(`.${accordionClassFor('title')}`).textContent.trim(), 'TITLE', `${accordionClassFor('title')} has correct title`);
+  assert.equal(find(`.${accordionItemBodyClass()}`).textContent.trim(), 'CONTENT', `${accordionItemBodyClass()} has correct content`);
 });

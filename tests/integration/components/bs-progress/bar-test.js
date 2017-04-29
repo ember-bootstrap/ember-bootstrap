@@ -1,3 +1,4 @@
+import { findAll } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -10,6 +11,6 @@ test('has correct markup', function(assert) {
     {{bs-progress/bar}}
   `);
 
-  assert.equal(this.$('div.progress-bar').length, 1, 'Has progress-bar class');
+  assert.equal(findAll('div.progress-bar').length, 1, 'Has progress-bar class');
 
 });

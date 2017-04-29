@@ -1,3 +1,4 @@
+import { click, find, findAll, fillIn, triggerEvent } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import { formFeedbackClass, test, testBS3, validationErrorClass, formHelpTextClass } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
@@ -14,68 +15,68 @@ moduleForComponent('bs-form/element', 'Integration | Component | bs-form/element
 
 const formLayouts = ['vertical', 'horizontal', 'inline'];
 const supportedInputAttributes = {
-  name: ['dummy', 'dummy'],
-  required: [true, 'required'],
-  readonly: [true, 'readonly'],
-  placeholder: ['dummy', 'dummy'],
-  disabled: [true, 'disabled'],
-  autofocus: [true, 'autofocus'],
-  size: [50, 50],
-  tabindex: [50, 50],
-  maxlength: [50, 50],
-  minlength: [50, 50],
-  min: [50, 50],
-  max: [50, 50],
-  pattern: ['dummy', 'dummy'],
-  accept: ['dummy', 'dummy'],
-  autocomplete: ['on', 'on'],
-  autosave: ['true', 'true'],
-  inputmode: ['latin', 'latin'],
-  multiple: [true, 'multiple'],
-  step: [50, 50],
-  form: ['dummy', 'dummy'],
-  spellcheck: [true, 'true'],
-  title: ['dummy', 'dummy']
+  name: 'dummy',
+  required: true,
+  readonly: true,
+  placeholder: 'dummy',
+  disabled: true,
+  autofocus: true,
+  size: 50,
+  tabindex: 50,
+  maxlength: 50,
+  minlength: 50,
+  min: 50,
+  max: 50,
+  pattern: 'dummy',
+  accept: 'dummy',
+  autocomplete: 'on',
+  autosave: 'true',
+  inputmode: 'latin',
+  multiple: true,
+  step: 50,
+  form: 'dummy',
+  spellcheck: true,
+  title: 'dummy'
 };
 const supportedTextareaAttributes = {
-  name: ['dummy', 'dummy'],
-  rows: [50, 50],
-  cols: [50, 50],
-  required: [true, 'required'],
-  readonly: [true, 'readonly'],
-  placeholder: ['dummy', 'dummy'],
-  disabled: [true, 'disabled'],
-  autofocus: [true, 'autofocus'],
-  tabindex: [50, 50],
-  maxlength: [50, 50],
-  minlength: [50, 50],
-  autocomplete: ['on', 'on'],
-  form: ['dummy', 'dummy'],
-  spellcheck: [true, 'true'],
-  wrap: ['hard', 'hard'],
-  title: ['dummy', 'dummy']
+  name: 'dummy',
+  rows: 50,
+  cols: 50,
+  required: true,
+  readonly: true,
+  placeholder: 'dummy',
+  disabled: true,
+  autofocus: true,
+  tabindex: 50,
+  maxlength: 50,
+  minlength: 50,
+  autocomplete: 'on',
+  form: 'dummy',
+  spellcheck: true,
+  wrap: 'hard',
+  title: 'dummy'
 };
 const supportedCheckboxAttributes = {
-  name: ['dummy', 'dummy'],
-  required: [true, 'required'],
-  readonly: [true, 'readonly'],
-  disabled: [true, 'disabled'],
-  autofocus: [true, 'autofocus'],
-  tabindex: [50, 50],
-  form: ['dummy', 'dummy'],
-  title: ['dummy', 'dummy']
+  name: 'dummy',
+  required: true,
+  readonly: true,
+  disabled: true,
+  autofocus: true,
+  tabindex: 50,
+  form: 'dummy',
+  title: 'dummy'
 };
 
 test('component has form-group bootstrap class', function(assert) {
   this.render(hbs`{{bs-form/element}}`);
-  assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
+  assert.equal(find(':first-child').classList.contains('form-group'), true, 'component has form-group class');
 });
 
 test('setting label property displays label tag', function(assert) {
   this.render(hbs`{{bs-form/element label="myLabel"}}`);
 
-  assert.equal(this.$('label').length, 1, 'component has label tag');
-  assert.equal(this.$('label').text().trim(), 'myLabel', 'label has text');
+  assert.equal(findAll('label').length, 1, 'component has label tag');
+  assert.equal(find('label').textContent.trim(), 'myLabel', 'label has text');
 });
 
 function controlTypeLayoutTest(assert, controlType, selector) {
@@ -84,7 +85,7 @@ function controlTypeLayoutTest(assert, controlType, selector) {
   formLayouts.forEach((layout) => {
     this.set('formLayout', layout);
     this.render(hbs`{{bs-form/element controlType=controlType formLayout=formLayout horizontalLabelGridClass="col-md-4"}}`);
-    assert.equal(this.$(selector).length, 1, `component has ${controlType} control for form layout ${layout}`);
+    assert.equal(findAll(selector).length, 1, `component has ${controlType} control for form layout ${layout}`);
   });
 }
 
@@ -98,77 +99,72 @@ function controlTypeValueTest(assert, controlType, selector, values, getValueFn)
   let model = Ember.Object.create();
   this.set('model', model);
 
-  formLayouts.forEach((layout) => {
-    this.set('formLayout', layout);
-    this.render(hbs`{{#bs-form model=model formLayout=formLayout as |f|}}{{f.element controlType=controlType property="prop"}}{{/bs-form}}`);
+  this.render(hbs`{{#bs-form model=model as |f|}}{{f.element controlType=controlType property="prop"}}{{/bs-form}}`);
 
-    // this is needed to catch an error with textareas not updating correctly, see #217
-    this.$(selector).val('foo');
-    this.set('model.prop', 'foo');
+  this.set('model.prop', 'foo');
 
-    values.forEach((value) => {
-      this.set('model.prop', value);
-      let hasValue = typeof getValueFn === 'function' ? getValueFn.call(this.$(selector)) : this.$(selector).val();
-      let expectedValue = value || '';
-      assert.equal(hasValue, expectedValue, `${controlType} control has correct values for form layout ${layout}`);
-    });
+  values.forEach((value) => {
+    this.set('model.prop', value);
+    let hasValue = typeof getValueFn === 'function' ? getValueFn.call(find(selector)) : find(selector).value;
+    let expectedValue = value || '';
+    assert.equal(hasValue, expectedValue, `${controlType} control has correct values`);
   });
 }
 
-function controlTypeUpdateTest(assert, controlType, selector, value, oldValue = 'foo', setValueFn = null) {
+async function controlTypeUpdateTest(assert, controlType, selector, value, oldValue = 'foo', setValueFn = null) {
   this.set('controlType', controlType);
   let action = this.spy();
   this.on('change', action);
 
-  formLayouts.forEach((layout) => {
-    this.set('formLayout', layout);
-    let model = Ember.Object.create({
-      name: oldValue
-    });
-    this.set('model', model);
-    this.render(hbs`{{bs-form/element controlType=controlType formLayout=formLayout horizontalLabelGridClass="col-md-4" model=model property="name" onChange=(action "change")}}`);
-
-    if (typeof setValueFn === 'function') {
-      setValueFn.call(this.$(selector), value);
-    } else {
-      this.$(selector).val(value).trigger('input');
-    }
-    assert.equal(this.get('model.name'), oldValue, `${controlType} value has not changed for form layout ${layout}`);
-    assert.ok(action.calledWith(value, model, 'name'), `onChange action of ${controlType} has been called with expected args for form layout ${layout}`);
+  let model = Ember.Object.create({
+    name: oldValue
   });
+  this.set('model', model);
+  this.render(hbs`{{bs-form/element controlType=controlType horizontalLabelGridClass="col-md-4" model=model property="name" onChange=(action "change")}}`);
+
+  if (typeof setValueFn === 'function') {
+    setValueFn.call(find(selector), value);
+  } else {
+    await fillIn(selector, value);
+    // this.$(selector).val(value).change();
+  }
+  assert.equal(this.get('model.name'), oldValue, `${controlType} value has not changed`);
+  assert.ok(action.calledWith(value, model, 'name'), `onChange action of ${controlType} has been called with expected args`);
 }
 
 function labeledControlTest(assert, controlType, selector) {
   this.set('controlType', controlType);
+  let model = Ember.Object.create();
+  this.set('model', model);
 
   formLayouts.forEach((layout) => {
     this.set('formLayout', layout);
-    this.render(hbs`{{#bs-form formLayout=formLayout as |form|}}{{form.element controlType=controlType label="myLabel"}}{{/bs-form}}`);
-    assert.equal(this.$(selector).attr('id'), this.$('label').attr('for'), `component and label ids do match for form layout ${layout}`);
+    this.render(hbs`{{#bs-form model=model formLayout=formLayout as |form|}}{{form.element controlType=controlType property="prop" label="myLabel"}}{{/bs-form}}`);
+    assert.equal(find(selector).getAttribute('id'), find('label').getAttribute('for'), `component and label ids do match for form layout ${layout}`);
   });
 }
 
-test('controlType "text" is supported', function(assert) {
+test('controlType "text" is supported', async function(assert) {
   controlTypeLayoutTest.call(this, assert, 'text', 'input[type=text]');
   controlTypeValueTest.call(this, assert, 'text', 'input[type=text]', ['myValue', undefined]);
-  controlTypeUpdateTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
+  await controlTypeUpdateTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
   labeledControlTest.call(this, assert, 'text', 'input[type=text]');
 });
 
-test('controlType "checkbox" is supported', function(assert) {
+test('controlType "checkbox" is supported', async function(assert) {
   controlTypeLayoutTest.call(this, assert, 'checkbox', 'input[type=checkbox]');
   controlTypeValueTest.call(this, assert, 'checkbox', 'input[type=checkbox]', [true, false], function() {
-    return this.is(':checked');
+    return this.checked;
   });
-  controlTypeUpdateTest.call(this, assert, 'checkbox', 'input[type=checkbox]', true, false, function() {
-    return this.click();
+  await controlTypeUpdateTest.call(this, assert, 'checkbox', 'input[type=checkbox]', true, false, function() {
+    return click(this);
   });
 });
 
-test('controlType "textarea" is supported', function(assert) {
+test('controlType "textarea" is supported', async function(assert) {
   controlTypeLayoutTest.call(this, assert, 'textarea', 'textarea', 'myValue');
   controlTypeValueTest.call(this, assert, 'textarea', 'textarea', ['myValue', undefined]);
-  controlTypeUpdateTest.call(this, assert, 'textarea', 'textarea', 'myValue');
+  await controlTypeUpdateTest.call(this, assert, 'textarea', 'textarea', 'myValue');
   labeledControlTest.call(this, assert, 'textarea', 'textarea');
 });
 
@@ -179,26 +175,26 @@ test('using "property" creates binding to model property', function(assert) {
   this.set('model', model);
   this.render(hbs`{{bs-form/element property="foo" model=model}}`);
 
-  assert.equal(this.$('input').val(), 'bar', 'input has expected value from model');
+  assert.equal(find('input').value, 'bar', 'input has expected value from model');
 
   this.set('model.foo', 'baz');
-  assert.equal(this.$('input').val(), 'baz', 'input updates value from model');
+  assert.equal(find('input').value, 'baz', 'input updates value from model');
 });
 
 test('Changing formLayout changes markup', function(assert) {
   this.set('formLayout', 'vertical');
   this.render(hbs`{{#bs-form horizontalLabelGridClass="col-sm-4" formLayout=formLayout as |form|}}{{form.element controlType="text" label="myLabel"}}{{/bs-form}}`);
-  assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
-  assert.equal(this.$(':first-child').children().eq(1).prop('tagName'), 'LABEL', 'first child is a label');
-  assert.equal(this.$(':first-child').children().eq(2).prop('tagName'), 'INPUT', 'second child is a input');
+  assert.equal(find('form > div').classList.contains('form-group'), true, 'component has form-group class');
+  assert.equal(find('form > div > :nth-child(1)').tagName, 'LABEL', 'first child is a label');
+  assert.equal(find('form > div > :nth-child(2)').tagName, 'INPUT', 'second child is a input');
 
   this.set('formLayout', 'horizontal');
-  assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
-  assert.equal(this.$(':first-child').children().eq(1).prop('tagName'), 'LABEL', 'first child is a label');
-  assert.ok(this.$(':first-child').children().eq(1).hasClass('col-sm-4'), 'label has grid class');
-  assert.equal(this.$(':first-child').children().eq(2).prop('tagName'), 'DIV', 'second child is a div');
-  assert.ok(this.$(':first-child').children().eq(2).hasClass('col-sm-8'), 'div has grid class');
-  assert.equal(this.$(':first-child').children().eq(2).find(':first-child').prop('tagName'), 'INPUT', 'divs first child is an input');
+  assert.equal(find('form > div').classList.contains('form-group'), true, 'component has form-group class');
+  assert.equal(find('form > div > :nth-child(1)').tagName, 'LABEL', 'first child is a label');
+  assert.ok(find('form > div > :nth-child(1)').classList.contains('col-sm-4'), 'label has grid class');
+  assert.equal(find('form > div > :nth-child(2)').tagName, 'DIV', 'second child is a div');
+  assert.ok(find('form > div > :nth-child(2)').classList.contains('col-sm-8'), 'div has grid class');
+  assert.equal(find('form > div > :nth-child(2) > :first-child').tagName, 'INPUT', 'divs first child is an input');
 });
 
 test('Custom controls are supported', function(assert) {
@@ -218,11 +214,11 @@ test('Custom controls are supported', function(assert) {
     {{/bs-form}}
   `);
 
-  assert.equal(this.$('#value').length, 1, 'block template is rendered');
-  assert.equal(this.$('#value').text().trim(), 'male', 'value is yielded to block template');
-  assert.equal(this.$('#id').text().trim(), `${this.$('.form-group').attr('id')}-field`, 'id is yielded to block template');
-  assert.equal(this.$('#validation').text().trim(), 'success');
-  assert.equal(this.$('#control input[type=text]').length, 1, 'control component is yielded');
+  assert.equal(findAll('#value').length, 1, 'block template is rendered');
+  assert.equal(find('#value').textContent.trim(), 'male', 'value is yielded to block template');
+  assert.equal(find('#id').textContent.trim(), `${find('.form-group').getAttribute('id')}-field`, 'id is yielded to block template');
+  assert.equal(find('#validation').textContent.trim(), 'success');
+  assert.equal(findAll('#control input[type=text]').length, 1, 'control component is yielded');
 });
 
 test('supported input attributes propagate', function(assert) {
@@ -259,10 +255,14 @@ test('supported input attributes propagate', function(assert) {
     }}`);
 
     for (let attribute in supportedInputAttributes) {
-      assert.equal(this.$('input').attr(attribute), undefined, `input attribute ${attribute} is undefined [${formLayout}]`);
-      let [value, expectedValue] = supportedInputAttributes[attribute];
+      assert.equal(find('input').getAttribute(attribute), undefined, `input attribute ${attribute} is undefined [${formLayout}]`);
+      let value = supportedInputAttributes[attribute];
       this.set(attribute, value);
-      assert.equal(this.$('input').attr(attribute), expectedValue, `input attribute ${attribute} is ${expectedValue} [${formLayout}]`);
+      if (value === true) {
+        assert.ok(find('input').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
+      } else {
+        assert.equal(find('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
+      }
     }
     this.render(hbs``); // hack to prevent browser exception when setting size to undefined
   });
@@ -296,10 +296,14 @@ test('supported textarea attributes propagate', function(assert) {
     }}`);
 
     for (let attribute in supportedTextareaAttributes) {
-      assert.equal(this.$('textarea').attr(attribute), undefined, `textarea attribute ${attribute} is undefined [${formLayout}]`);
-      let [value, expectedValue] = supportedTextareaAttributes[attribute];
+      assert.equal(find('textarea').getAttribute(attribute), undefined, `textarea attribute ${attribute} is undefined [${formLayout}]`);
+      let value = supportedTextareaAttributes[attribute];
       this.set(attribute, value);
-      assert.equal(this.$('textarea').attr(attribute), expectedValue, `textarea attribute ${attribute} is ${expectedValue} [${formLayout}]`);
+      if (value === true) {
+        assert.ok(find('textarea').hasAttribute(attribute), `textarea has attribute ${attribute} [${formLayout}]`);
+      } else {
+        assert.equal(find('textarea').getAttribute(attribute), value, `textarea attribute ${attribute} is ${value} [${formLayout}]`);
+      }
     }
   });
 });
@@ -324,22 +328,26 @@ test('supported checkbox attributes propagate', function(assert) {
     }}`);
 
     for (let attribute in supportedCheckboxAttributes) {
-      assert.equal(this.$('input').attr(attribute), undefined, `checkbox attribute ${attribute} is undefined [${formLayout}]`);
-      let [value, expectedValue] = supportedCheckboxAttributes[attribute];
+      assert.equal(find('input').getAttribute(attribute), undefined, `checkbox attribute ${attribute} is undefined [${formLayout}]`);
+      let value = supportedCheckboxAttributes[attribute];
       this.set(attribute, value);
-      assert.equal(this.$('input').attr(attribute), expectedValue, `input attribute ${attribute} is ${expectedValue} [${formLayout}]`);
+      if (value === true) {
+        assert.ok(find('input').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
+      } else {
+        assert.equal(find('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
+      }
     }
   });
 });
 
 test('required property propagates', function(assert) {
   this.render(hbs`{{bs-form/element label="myLabel" required=true}}`);
-  assert.ok(this.$('.form-group').hasClass('is-required'), 'component has is-required class');
+  assert.ok(find('.form-group').classList.contains('is-required'), 'component has is-required class');
 });
 
 test('disabled property propagates', function(assert) {
   this.render(hbs`{{bs-form/element label="myLabel" disabled=true}}`);
-  assert.ok(this.$('.form-group').hasClass('is-disabled'), 'component has is-disabled class');
+  assert.ok(find('.form-group').classList.contains('is-disabled'), 'component has is-disabled class');
 });
 
 test('if invisibleLabel is true sr-only class is added to label', function(assert) {
@@ -349,14 +357,14 @@ test('if invisibleLabel is true sr-only class is added to label', function(asser
     'inline'
   ];
   this.render(hbs`{{bs-form/element label="myLabel"}}`);
-  assert.notOk(this.$('label').hasClass('sr-only'), 'sr-only class is not present as defaultText');
+  assert.notOk(find('label').classList.contains('sr-only'), 'sr-only class is not present as defaultText');
   formLayouts.forEach((formLayout) => {
     this.render(hbs`{{#bs-form formLayout=formLayout }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`);
-    assert.ok(this.$('label').hasClass('sr-only'), `sr-only class is present for formLayout ${formLayout}`);
+    assert.ok(find('label').classList.contains('sr-only'), `sr-only class is present for formLayout ${formLayout}`);
   });
 });
 
-testBS3('adjusts validation icon position if there is an input group', function(assert) {
+testBS3('adjusts validation icon position if there is an input group', async function(assert) {
   assert.expect(6);
   this.set('validation', 'success');
   this.set('formLayout', 'vertical');
@@ -385,31 +393,32 @@ testBS3('adjusts validation icon position if there is an input group', function(
   // feedback icons does have right: 0px for vertical forms
   // https://github.com/twbs/bootstrap/blob/v3.3.6/less/forms.less#L400-L403
   assert.equal(
-    this.$('.addon .form-control-feedback').css('right'),
-    `${this.$('.addon .input-group-addon').outerWidth()}px`,
+    find('.addon .form-control-feedback').style.right,
+    `${find('.addon .input-group-addon').offsetWidth}px`,
     'works for addon on init'
   );
   assert.equal(
-    this.$('.button .form-control-feedback').css('right'),
-    `${this.$('.button .input-group-btn').outerWidth()}px`,
+    find('.button .form-control-feedback').style.right,
+    `${find('.button .input-group-btn').offsetWidth}px`,
     'works for button on init'
   );
-  let expectedRightValue = this.$('.addon .form-control-feedback').css('right');
+  let expectedRightValue = find('.addon .form-control-feedback').style.right;
   this.set('validation', null);
   assert.ok(
-    this.$().has('.form-control-feedback').length === 0,
+    findAll('.form-control-feedback').length === 0,
     'assumption'
   );
   this.set('validation', 'error');
   assert.equal(
-    this.$('.addon .form-control-feedback').css('right'),
+    find('.addon .form-control-feedback').style.right,
     expectedRightValue,
     'adjusts correctly after validation changed from null'
   );
   this.set('validation', 'success');
-  this.$('.addon input').val('foo').trigger('change');
+  await fillIn('.addon input', 'foo');
+  await triggerEvent('.addon input', 'change');
   assert.equal(
-    this.$('.addon .form-control-feedback').css('right'),
+    find('.addon .form-control-feedback').style.right,
     expectedRightValue,
     'adjusts correctly after validation changed form error to success'
   );
@@ -418,87 +427,72 @@ testBS3('adjusts validation icon position if there is an input group', function(
   // https://github.com/twbs/bootstrap/blob/v3.3.6/less/forms.less#L589-L591
   // https://github.com/twbs/bootstrap/blob/v3.3.6/less/variables.less#L326-L327
   this.set('formLayout', 'horizontal');
-  /* PhantomJS 1.9 used by travis fails test due to a positioning or rounding issue.
-   * PhantomJS 2.x and all major browsers are fine.
-   * Replace test above by the strict one after travis upgraded PhantomJS finally.
-   assert.equal(
-   this.$('.addon .form-control-feedback').css('right'),
-   `${this.$('.addon .input-group-addon').outerWidth() + 15}px`,
-   'takes bootstrap default positioning into account'
-   );
-   */
-  let gap = parseInt(this.$('.addon .form-control-feedback').css('right'))
-    - this.$('.addon .input-group-addon').outerWidth() - 15;
-  assert.ok(
-    gap === 0 || gap === -1,
+
+  assert.equal(
+    find('.addon .form-control-feedback').style.right,
+    `${find('.addon .input-group-addon').offsetWidth + 15}px`,
     'takes bootstrap default positioning into account'
   );
 });
 
-test('shows validation state only when validator is present', function(assert) {
+test('shows validation state only when validator is present', async function(assert) {
   this.set('model', Ember.Object.create({ name: null, validate() {} }));
   this.render(hbs`
       {{bs-form/element property='name' model=model}}
   `);
-  Ember.run(() => {
-    this.$('input').trigger('focusout');
-  });
+  await triggerEvent('input', 'focusout');
   assert.notOk(
-    this.$('.form-group').hasClass('has-success'),
+    find('.form-group').classList.contains('has-success'),
     'form group isn\'t shown as having errors if there is no validator'
   );
 });
 
-test('shows validation errors', function(assert) {
+test('shows validation errors', async function(assert) {
   this.set('errors', Ember.A(['Invalid']));
   this.set('model', Ember.Object.create({ name: null }));
   this.render(hbs`
       {{bs-form/element property='name' hasValidator=true errors=errors model=model}}
   `);
   assert.notOk(
-    this.$('.form-group').hasClass(validationErrorClass()),
+    find('.form-group').classList.contains(validationErrorClass()),
     'validation errors aren\'t shown before user interaction'
   );
-  Ember.run(() => {
-    this.$('input').trigger('focusout');
-  });
+  await triggerEvent('input', 'blur');
   assert.ok(
-    this.$('.form-group').hasClass(validationErrorClass()),
+    find('.form-group').classList.contains(validationErrorClass()),
     'validation errors are shown after user interaction when errors are present'
   );
-  assert.equal(this.$(`.form-group .${formFeedbackClass()}`).text().trim(), 'Invalid');
+  assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Invalid');
   Ember.run(() => {
     this.set('errors', Ember.A());
   });
   assert.notOk(
-    this.$('.form-group').hasClass(validationErrorClass()),
+    find('.form-group').classList.contains(validationErrorClass()),
     'form group isn\'t shown as having errors if there aren\'t any'
   );
 });
 
-test('shows validation warnings', function(assert) {
+test('shows validation warnings', async function(assert) {
   this.set('warnings', Ember.A(['Insecure']));
   this.set('model', Ember.Object.create({ name: null }));
   this.render(hbs`
       {{bs-form/element property='name' hasValidator=true warnings=warnings model=model}}
   `);
   assert.notOk(
-    this.$('.form-group').hasClass('has-warning'),
+    find('.form-group').classList.contains('has-warning'),
     'validation warnings aren\'t shown before user interaction'
   );
-  Ember.run(() => {
-    this.$('input').trigger('focusout');
-  });
+  await triggerEvent('input', 'blur');
   assert.ok(
-    this.$('.form-group').hasClass('has-warning'),
+    find('.form-group').classList.contains('has-warning'),
     'validation warnings are shown after user interaction when warnings are present'
   );
-  assert.equal(this.$(`.form-group .${formFeedbackClass()}`).text().trim(), 'Insecure');
+  assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Insecure');
   Ember.run(() => {
     this.set('warnings', Ember.A());
   });
   assert.notOk(
-    this.$('.form-group').hasClass('has-warning'),
+    find('.form-group').classList.contains('has-warning'),
     'form group isn\'t shown as having warnings if there are\'t any'
   );
 });
@@ -510,20 +504,20 @@ test('shows custom error immediately', function(assert) {
       {{bs-form/element property='name' hasValidator=true customError=error model=model}}
   `);
   assert.ok(
-    this.$('.form-group').hasClass(validationErrorClass()),
+    find('.form-group').classList.contains(validationErrorClass()),
     'custom error is shown immediately'
   );
-  assert.equal(this.$(`.form-group .${formFeedbackClass()}`).text().trim(), 'some error');
+  assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'some error');
   Ember.run(() => {
     this.set('error', null);
   });
   assert.notOk(
-    this.$('.form-group').hasClass(validationErrorClass()),
+    find('.form-group').classList.contains(validationErrorClass()),
     'form group isn\'t shown as having errors if there aren\'t any'
   );
 });
 
-test('events enabling validation rendering are configurable per `showValidationOn` (array)', function(assert) {
+test('events enabling validation rendering are configurable per `showValidationOn` (array)', async function(assert) {
   this.set('errors', Ember.A(['Invalid']));
   this.set('model', Ember.Object.create({ name: null }));
   this.set('showValidationOn', ['change']);
@@ -531,47 +525,39 @@ test('events enabling validation rendering are configurable per `showValidationO
       {{bs-form/element property='name' hasValidator=true errors=errors model=model showValidationOn=showValidationOn}}
   `);
   assert.notOk(
-    this.$('.form-group').hasClass(validationErrorClass()),
+    find('.form-group').classList.contains(validationErrorClass()),
     'validation warnings aren\'t shown before user interaction'
   );
-  Ember.run(() => {
-    this.$('input').trigger('focusout');
-  });
+  await triggerEvent('input', 'blur');
   assert.notOk(
-    this.$('.form-group').hasClass(validationErrorClass()),
+    find('.form-group').classList.contains(validationErrorClass()),
     'events not present in `showValidationOn` are ignored'
   );
-  Ember.run(() => {
-    this.$('input').trigger('change');
-  });
+  await triggerEvent('input', 'change');
   assert.ok(
-    this.$('.form-group').hasClass(validationErrorClass()),
+    find('.form-group').classList.contains(validationErrorClass()),
     'events present in `showValidationOn` trigger validation'
   );
 });
 
-test('events enabling validation rendering are configurable per `showValidationOn` (string)', function(assert) {
+test('events enabling validation rendering are configurable per `showValidationOn` (string)', async function(assert) {
   this.set('errors', Ember.A(['Invalid']));
   this.set('model', Ember.Object.create({ name: null }));
   this.render(hbs`
       {{bs-form/element property='name' hasValidator=true errors=errors model=model showValidationOn='change'}}
   `);
   assert.notOk(
-    this.$('.form-group').hasClass(validationErrorClass()),
+    find('.form-group').classList.contains(validationErrorClass()),
     'validation warnings aren\'t shown before user interaction'
   );
-  Ember.run(() => {
-    this.$('input').trigger('focusout');
-  });
+  await triggerEvent('input', 'blur');
   assert.notOk(
-    this.$('.form-group').hasClass(validationErrorClass()),
+    find('.form-group').classList.contains(validationErrorClass()),
     'events not present in `showValidationOn` are ignored'
   );
-  Ember.run(() => {
-    this.$('input').trigger('change');
-  });
+  await triggerEvent('input', 'change');
   assert.ok(
-    this.$('.form-group').hasClass(validationErrorClass()),
+    find('.form-group').classList.contains(validationErrorClass()),
     'events present in `showValidationOn` trigger validation'
   );
 });
@@ -583,7 +569,7 @@ test('it uses custom control component when registered in DI container', functio
   this.render(hbs`
       {{bs-form/element controlType="foo"}}
   `);
-  assert.equal(this.$('#foo').length, 1, 'Custom control is used');
+  assert.equal(findAll('#foo').length, 1, 'Custom control is used');
 });
 
 test('shows help text if available', function(assert) {
@@ -592,9 +578,9 @@ test('shows help text if available', function(assert) {
   `);
 
   let helpTextClass = `.${formHelpTextClass()}`;
-  assert.equal(this.$(helpTextClass).length, 1, 'has help text element');
-  assert.equal(this.$(helpTextClass).text().trim(), 'foo', 'shows help text');
+  assert.equal(findAll(helpTextClass).length, 1, 'has help text element');
+  assert.equal(find(helpTextClass).textContent.trim(), 'foo', 'shows help text');
 
-  assert.ok(this.$('input').attr('aria-describedby'), 'control has aria-describedby attribute');
-  assert.equal(this.$('input').attr('aria-describedby'), this.$(helpTextClass).attr('id'), 'aria-describedby matches id');
+  assert.ok(find('input').getAttribute('aria-describedby'), 'control has aria-describedby attribute');
+  assert.equal(find('input').getAttribute('aria-describedby'), find(helpTextClass).getAttribute('id'), 'aria-describedby matches id');
 });

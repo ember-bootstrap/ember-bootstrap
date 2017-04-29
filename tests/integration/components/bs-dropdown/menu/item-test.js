@@ -1,3 +1,4 @@
+import { find, findAll } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -13,6 +14,6 @@ test('it has correct markup', function(assert) {
     {{/bs-dropdown/menu/item}}
   `);
 
-  assert.equal(this.$('li').length, 1, 'renders as <li> element');
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(findAll('li').length, 1, 'renders as <li> element');
+  assert.equal(find('*').textContent.trim(), 'template block text');
 });
