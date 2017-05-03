@@ -17,26 +17,36 @@
 </p>
 
 <ol>
-    <li>
-        <strong>Bootstrap 4 uses SASS!</strong> If you were using LESS with Bootstrap 3, you will need to switch to
-        either static CSS or SASS. The details of doing this are beyond the scope of this guide. It could be as simple
-        as changing <code>@</code> to <code>$</code> but is likely more complex. Remove ember-cli-less from your
-        <code>package.json</code> and install ember-cli-sass if appropriate.
-    </li>
-    <li>
-        Run the ember-bootstrap blueprint. For details, see the <a href="assets.hbs">assets guide</a>.
-    </li>
-    <li>
-        Make sure your ember-bootstrap code uses all of the new contextual components. Most of the differences between
-        the two versions of Bootstrap are hidden by proper component usage. Some of the more noteworthy ones are
-        <code>bs-form</code>, <code>bs-nav.link-to</code> (which also affects navs in navbars),
-        <code>bs-dropdown.menu.item</code>, and <code>bs-dropdown.menu.divider</code>.
-    </li>
-    <li>
-        Refer to the <a href="https://v4-alpha.getbootstrap.com/getting-started/introduction/" target="_blank" rel="noopener">Bootstrap
-        4 documentation</a> and, in particular, the <a href="https://v4-alpha.getbootstrap.com/migration/" target="_blank" rel="noopener">
-        Migration Guide</a> for other necessary changes in markup with Bootstrap 4.
-    </li>
+  <li>
+    <strong>Bootstrap 4 uses SASS!</strong> If you were using LESS with Bootstrap 3, you will need to switch to
+    either static CSS or SASS. The details of doing this are beyond the scope of this guide. It could be as simple
+    as changing <code>@</code> to <code>$</code> but is likely more complex. Remove ember-cli-less from your
+    <code>package.json</code> and install ember-cli-sass if appropriate.
+  </li>
+  <li>
+    Run the ember-bootstrap blueprint:
+
+    <code>
+      ember generate ember-bootstrap --bootstrap-version=4
+    </code>
+    <br>
+    For details, see the {{#link-to "getting-started.assets"}}assets guide{{/link-to}}.
+  </li>
+  <li>
+    Make sure your ember-bootstrap code uses all of the new contextual components. Most of the differences between
+    the two versions of Bootstrap are hidden by proper component usage. Some of the more noteworthy ones are
+    <code>bs-form</code>, <code>bs-nav.link-to</code> (which also affects navs in navbars),
+    <code>bs-dropdown.menu.item</code>, and <code>bs-dropdown.menu.divider</code>.
+  </li>
+  <li>
+    Refer to the
+    <a href="https://v4-alpha.getbootstrap.com/getting-started/introduction/" target="_blank" rel="noopener">
+      Bootstrap 4 documentation
+    </a> and, in particular, the
+    <a href="https://v4-alpha.getbootstrap.com/migration/" target="_blank" rel="noopener">
+      Migration Guide
+    </a> for other necessary changes in markup with Bootstrap 4.
+  </li>
 </ol>
 
 <p>
