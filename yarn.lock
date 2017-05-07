@@ -158,7 +158,7 @@ acorn-jsx@^3.0.0:
   dependencies:
     acorn "^3.0.4"
 
-acorn@4.0.4:
+acorn@4.0.4, acorn@^4.0.3, acorn@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.4.tgz#17a8d6a7a6c4ef538b814ec9abac2779293bf30a"
 
@@ -169,10 +169,6 @@ acorn@^2.7.0:
 acorn@^3.0.4:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
-
-acorn@^4.0.3, acorn@^4.0.4:
-  version "4.0.11"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.11.tgz#edcda3bd937e7556410d42ed5860f67399c794c0"
 
 add-stream@^1.0.0:
   version "1.0.0"
@@ -1247,7 +1243,20 @@ broccoli-builder@^0.18.3:
     rsvp "^3.0.17"
     silent-error "^1.0.1"
 
-broccoli-caching-writer@^2.0.4, broccoli-caching-writer@^2.2.0, broccoli-caching-writer@^2.3.1:
+broccoli-caching-writer@^2.0.4, broccoli-caching-writer@~2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/broccoli-caching-writer/-/broccoli-caching-writer-2.0.4.tgz#d995d7d1977292e498f78df05887230fcb4a5e2c"
+  dependencies:
+    broccoli-kitchen-sink-helpers "^0.2.5"
+    broccoli-plugin "1.1.0"
+    debug "^2.1.1"
+    lodash-node "^3.2.0"
+    rimraf "^2.2.8"
+    rsvp "^3.0.17"
+    symlink-or-copy "^1.0.0"
+    walk-sync "^0.2.0"
+
+broccoli-caching-writer@^2.2.0, broccoli-caching-writer@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/broccoli-caching-writer/-/broccoli-caching-writer-2.3.1.tgz#b93cf58f9264f003075868db05774f4e7f25bd07"
   dependencies:
@@ -1268,19 +1277,6 @@ broccoli-caching-writer@^3.0.3:
     rimraf "^2.2.8"
     rsvp "^3.0.17"
     walk-sync "^0.3.0"
-
-broccoli-caching-writer@~2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/broccoli-caching-writer/-/broccoli-caching-writer-2.0.4.tgz#d995d7d1977292e498f78df05887230fcb4a5e2c"
-  dependencies:
-    broccoli-kitchen-sink-helpers "^0.2.5"
-    broccoli-plugin "1.1.0"
-    debug "^2.1.1"
-    lodash-node "^3.2.0"
-    rimraf "^2.2.8"
-    rsvp "^3.0.17"
-    symlink-or-copy "^1.0.0"
-    walk-sync "^0.2.0"
 
 broccoli-clean-css@^1.1.0:
   version "1.1.0"
@@ -1420,18 +1416,7 @@ broccoli-kitchen-sink-helpers@^0.3.1:
     glob "^5.0.10"
     mkdirp "^0.5.1"
 
-broccoli-lint-eslint@^3.2.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/broccoli-lint-eslint/-/broccoli-lint-eslint-3.2.1.tgz#6c88cd36f2999eab98b07538a382ef2c10d2b77f"
-  dependencies:
-    broccoli-persistent-filter "^1.2.0"
-    escape-string-regexp "^1.0.5"
-    eslint "^3.0.0"
-    js-string-escape "^1.0.1"
-    json-stable-stringify "^1.0.1"
-    md5-hex "^2.0.0"
-
-broccoli-lint-eslint@^3.3.0:
+broccoli-lint-eslint@^3.2.0, broccoli-lint-eslint@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/broccoli-lint-eslint/-/broccoli-lint-eslint-3.3.0.tgz#708bad893101241980c168702d61cb41ca30bba2"
   dependencies:
@@ -2688,20 +2673,21 @@ ember-ajax@^3.0.0:
   dependencies:
     ember-cli-babel "^6.0.0"
 
-ember-cli-addon-tests@^0.6.1:
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/ember-cli-addon-tests/-/ember-cli-addon-tests-0.6.3.tgz#be4daba4d34b77c2bc830dedc88c9baa6903243a"
+ember-cli-addon-tests@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-addon-tests/-/ember-cli-addon-tests-0.7.0.tgz#c7ad8f839f22ad1b3c22a4b993df6c0f691324ef"
   dependencies:
     chalk "^1.1.3"
     cpr "^2.0.0"
     debug "^2.2.0"
     exists-sync "0.0.4"
-    findup-sync "^0.4.3"
-    fs-extra "^2.0.0"
+    findup-sync "^1.0.0"
+    fs-extra "^3.0.0"
     fs-promise "^2.0.0"
     lodash "^4.0.0"
     mkdirp "^0.5.1"
     rsvp "^3.1.0"
+    semver "^5.3.0"
     symlink-or-copy "^1.1.3"
     temp "^0.8.3"
 
@@ -3025,13 +3011,13 @@ ember-cli-valid-component-name@^1.0.0:
   dependencies:
     silent-error "^1.0.0"
 
-ember-cli-version-checker@^1.0.2, ember-cli-version-checker@^1.1.4, ember-cli-version-checker@^1.1.6, ember-cli-version-checker@^1.1.7, ember-cli-version-checker@^1.2.0:
+ember-cli-version-checker@^1.0.2, ember-cli-version-checker@^1.1.6, ember-cli-version-checker@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ember-cli-version-checker/-/ember-cli-version-checker-1.2.0.tgz#caa286b77d1b485df5d2f62c67a6f19aa8b582c4"
   dependencies:
     semver "^5.3.0"
 
-ember-cli-version-checker@^1.3.1:
+ember-cli-version-checker@^1.1.4, ember-cli-version-checker@^1.1.7, ember-cli-version-checker@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/ember-cli-version-checker/-/ember-cli-version-checker-1.3.1.tgz#0bc2d134c830142da64bf9627a0eded10b61ae72"
   dependencies:
@@ -3191,15 +3177,15 @@ ember-factory-for-polyfill@^1.1.0:
     ember-cli-babel "^5.1.7"
     ember-cli-version-checker "^1.2.0"
 
-ember-fastboot-addon-tests@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/ember-fastboot-addon-tests/-/ember-fastboot-addon-tests-0.2.2.tgz#7d90dece71b70bceaf10faff66379aba1ea91f65"
+ember-fastboot-addon-tests@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/ember-fastboot-addon-tests/-/ember-fastboot-addon-tests-0.3.3.tgz#69fb4a8f4600fac609c91d4c41b3ef80c802bf85"
   dependencies:
     chalk "^1.1.3"
     core-object "^2.0.6"
     debug "^2.2.0"
-    ember-cli-addon-tests "^0.6.1"
-    ember-cli-babel "^5.1.6"
+    ember-cli-addon-tests "^0.7.0"
+    ember-cli-babel "^6.0.0"
     ember-router-generator "^1.2.2"
     fs-extra "^0.30.0"
     jquery "^3.1.0"
@@ -4062,6 +4048,15 @@ findup-sync@^0.4.2, findup-sync@^0.4.3:
     micromatch "^2.3.7"
     resolve-dir "^0.1.0"
 
+findup-sync@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/findup-sync/-/findup-sync-1.0.0.tgz#6f7e4b57b6ee3a4037b4414eaedea3f58f71e0ec"
+  dependencies:
+    detect-file "^0.1.0"
+    is-glob "^2.0.1"
+    micromatch "^2.3.7"
+    resolve-dir "^0.1.0"
+
 findup@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/findup/-/findup-0.1.5.tgz#8ad929a3393bac627957a7e5de4623b06b0e2ceb"
@@ -4211,6 +4206,14 @@ fs-extra@^2.0.0, fs-extra@^2.1.0:
     graceful-fs "^4.1.2"
     jsonfile "^2.1.0"
 
+fs-extra@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-3.0.1.tgz#3794f378c58b342ea7dbbb23095109c4b3b62291"
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^3.0.0"
+    universalify "^0.1.0"
+
 fs-promise@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/fs-promise/-/fs-promise-2.0.0.tgz#d1c8bae6ab2bc2ea0cfad643d5fb1c07814d22b3"
@@ -4344,13 +4347,13 @@ git-remote-origin-url@^2.0.0:
     gitconfiglocal "^1.0.0"
     pify "^2.3.0"
 
-git-repo-info@^1.0.4, git-repo-info@~1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/git-repo-info/-/git-repo-info-1.2.0.tgz#43d8513e04a24dd441330a2f7c6655a709fdbaf2"
-
-git-repo-info@^1.4.1:
+git-repo-info@^1.0.4, git-repo-info@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/git-repo-info/-/git-repo-info-1.4.1.tgz#2a072823254aaf62fcf0766007d7b6651bd41943"
+
+git-repo-info@~1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/git-repo-info/-/git-repo-info-1.2.0.tgz#43d8513e04a24dd441330a2f7c6655a709fdbaf2"
 
 git-repo-version@0.2.0:
   version "0.2.0"
@@ -5434,6 +5437,12 @@ json5@^0.5.0:
 jsonfile@^2.1.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-2.4.0.tgz#3736a2b428b87bbda0cc83b53fa3d633a35c2ae8"
+  optionalDependencies:
+    graceful-fs "^4.1.6"
+
+jsonfile@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-3.0.0.tgz#92e7c7444e5ffd5fa32e6a9ae8b85034df8347d0"
   optionalDependencies:
     graceful-fs "^4.1.6"
 
@@ -6853,15 +6862,7 @@ querystring@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
-quick-temp@^0.1.0, quick-temp@^0.1.2, quick-temp@^0.1.3:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/quick-temp/-/quick-temp-0.1.6.tgz#a6242a15cba9f9cdbd341287b5c569e318eec307"
-  dependencies:
-    mktemp "~0.4.0"
-    rimraf "~2.2.6"
-    underscore.string "~2.3.3"
-
-quick-temp@^0.1.5, quick-temp@^0.1.8:
+quick-temp@^0.1.0, quick-temp@^0.1.2, quick-temp@^0.1.3, quick-temp@^0.1.5, quick-temp@^0.1.8:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/quick-temp/-/quick-temp-0.1.8.tgz#bab02a242ab8fb0dd758a3c9776b32f9a5d94408"
   dependencies:
@@ -8162,10 +8163,6 @@ unc-path-regex@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/unc-path-regex/-/unc-path-regex-0.1.2.tgz#e73dd3d7b0d7c5ed86fbac6b0ae7d8c6a69d50fa"
 
-underscore.string@~2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-2.3.3.tgz#71c08bf6b428b1133f37e78fa3a21c82f7329b0d"
-
 underscore.string@~3.3.4:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-3.3.4.tgz#2c2a3f9f83e64762fdc45e6ceac65142864213db"
@@ -8193,6 +8190,10 @@ unique-string@^1.0.0:
   resolved "https://registry.yarnpkg.com/unique-string/-/unique-string-1.0.0.tgz#9e1057cca851abb93398f8b33ae187b99caec11a"
   dependencies:
     crypto-random-string "^1.0.0"
+
+universalify@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.0.tgz#9eb1c4651debcc670cc94f1a75762332bb967778"
 
 unpipe@~1.0.0:
   version "1.0.0"
