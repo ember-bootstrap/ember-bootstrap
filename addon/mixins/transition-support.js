@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import transitionSupport from 'ember-bootstrap/utils/transition-support';
 
 const { computed } = Ember;
 
@@ -39,6 +40,6 @@ export default Ember.Mixin.create({
    * @private
    */
   usesTransition: computed('fade', 'fastboot.isFastBoot', function() {
-    return !this.get('fastboot.isFastBoot') && Ember.$.support.transition && this.get('transitionsEnabled');
+    return !this.get('fastboot.isFastBoot') && !!transitionSupport && this.get('transitionsEnabled');
   })
 });

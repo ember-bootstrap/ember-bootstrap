@@ -1,4 +1,4 @@
-import { find, findAll, click, focus, triggerEvent } from 'ember-native-dom-helpers';
+import { find, findAll, click, focus, blur, triggerEvent } from 'ember-native-dom-helpers';
 import Ember from 'ember';
 import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
@@ -68,20 +68,20 @@ test('it hides invisible tooltip', function(assert) {
 test('it shows and hides immediately when hovering [fade=false]', async function(assert) {
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false}}</div>`);
 
-  await triggerEvent('#target', 'mouseover');
+  await triggerEvent('#target', 'mouseenter');
   assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
 
-  await triggerEvent('#target', 'mouseout');
+  await triggerEvent('#target', 'mouseleave');
   assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
 });
 
 test('it shows and hides immediately when focusing [fade=false]', async function(assert) {
-  this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false}}</div>`);
+  this.render(hbs`<button id="target">{{bs-tooltip title="Dummy" fade=false}}</button>`);
 
-  await triggerEvent('#target', 'focus');
+  await focus('#target');
   assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
 
-  await triggerEvent('#target', 'blur');
+  await blur('#target');
   assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
 });
 
@@ -98,10 +98,10 @@ test('it shows and hides immediately when clicking [fade=false]', async function
 test('it allows changing the trigger element to some arbitrary element', async function(assert) {
   this.render(hbs`<div id="target"></div><div>{{bs-tooltip title="Dummy" fade=false triggerElement="#target"}}</div>`);
 
-  await triggerEvent('#target', 'mouseover');
+  await triggerEvent('#target', 'mouseenter');
   assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
 
-  await triggerEvent('#target', 'mouseout');
+  await triggerEvent('#target', 'mouseleave');
   assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
 });
 
@@ -113,10 +113,10 @@ test('it allows changing the trigger element to the parent view', async function
 
   this.render(hbs`{{#dum-my id="target"}}{{bs-tooltip title="Dummy" fade=false triggerElement="parentView"}}{{/dum-my}}`);
 
-  await triggerEvent('#target', 'mouseover');
+  await triggerEvent('#target', 'mouseenter');
   assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
 
-  await triggerEvent('#target', 'mouseout');
+  await triggerEvent('#target', 'mouseleave');
   assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
 });
 
@@ -126,7 +126,7 @@ sinonTest('it calls onShow/onShown actions when showing tooltip [fade=false]', a
   let shownAction = this.spy();
   this.on('shown', shownAction);
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false onShow=(action "show") onShown=(action "shown")}}</div>`);
-  await triggerEvent('#target', 'mouseover');
+  await triggerEvent('#target', 'mouseenter');
   assert.ok(showAction.calledOnce, 'show action has been called');
   assert.ok(shownAction.calledOnce, 'show action has been called');
 });
@@ -138,7 +138,7 @@ sinonTest('it aborts showing if onShow action returns false', async function(ass
   let shownAction = this.spy();
   this.on('shown', shownAction);
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false onShow=(action "show") onShown=(action "shown")}}</div>`);
-  await triggerEvent('#target', 'mouseover');
+  await triggerEvent('#target', 'mouseenter');
   assert.ok(showAction.calledOnce, 'show action has been called');
   assert.notOk(shownAction.calledOnce, 'show action has not been called');
   assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
@@ -150,8 +150,8 @@ sinonTest('it calls onHide/onHidden actions when hiding tooltip [fade=false]', a
   let hiddenAction = this.spy();
   this.on('hidden', hiddenAction);
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false onHide=(action "hide") onHidden=(action "hidden")}}</div>`);
-  await triggerEvent('#target', 'mouseover');
-  await triggerEvent('#target', 'mouseout');
+  await triggerEvent('#target', 'mouseenter');
+  await triggerEvent('#target', 'mouseleave');
   assert.ok(hideAction.calledOnce, 'hide action has been called');
   assert.ok(hiddenAction.calledOnce, 'hidden action was called');
 });
@@ -163,8 +163,8 @@ sinonTest('it aborts hiding if onHide action returns false', async function(asse
   let hiddenAction = this.spy();
   this.on('hidden', hiddenAction);
   this.render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false onHide=(action "hide") onHidden=(action "hidden")}}</div>`);
-  await triggerEvent('#target', 'mouseover');
-  await triggerEvent('#target', 'mouseout');
+  await triggerEvent('#target', 'mouseenter');
+  await triggerEvent('#target', 'mouseleave');
   assert.ok(hideAction.calledOnce, 'hide action has been called');
   assert.notOk(hiddenAction.calledOnce, 'hidden action has not been called');
   assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
@@ -176,9 +176,9 @@ test('it keeps showing when leaving the mouse but is still focused [fade=false]'
   await focus('#target');
   assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
 
-  await triggerEvent('#target', 'mouseover');
+  await triggerEvent('#target', 'mouseenter');
   assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
-  await triggerEvent('#target', 'mouseout');
+  await triggerEvent('#target', 'mouseleave');
   assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
 });
 
@@ -205,7 +205,7 @@ test('should place tooltip on top of element', async function(assert) {
 
   setupForPositioning.call(this);
 
-  await triggerEvent('#target', 'mouseover');
+  await triggerEvent('#target', 'mouseenter');
   assertPositioning.call(this, assert);
 });
 
@@ -246,7 +246,7 @@ test('should show tooltip if leave event hasn\'t occurred before delay expires',
     done();
   }, 200);
 
-  triggerEvent('#target', 'mouseover');
+  triggerEvent('#target', 'mouseenter');
 });
 
 test('should not show tooltip if leave event occurs before delay expires', function(assert) {
@@ -257,7 +257,7 @@ test('should not show tooltip if leave event occurs before delay expires', funct
 
   setTimeout(function() {
     assert.notOk(isVisible(find('.tooltip')), '100ms: tooltip not faded in');
-    triggerEvent('#target', 'mouseout');
+    triggerEvent('#target', 'mouseleave');
   }, 100);
 
   setTimeout(function() {
@@ -265,7 +265,7 @@ test('should not show tooltip if leave event occurs before delay expires', funct
     done();
   }, 200);
 
-  triggerEvent('#target', 'mouseover');
+  triggerEvent('#target', 'mouseenter');
 });
 
 test('should not hide tooltip if leave event occurs and enter event occurs within the hide delay', function(assert) {
@@ -276,11 +276,11 @@ test('should not hide tooltip if leave event occurs and enter event occurs withi
 
   setTimeout(function() {
     assert.ok(isVisible(find('.tooltip')), '1ms: tooltip faded in');
-    triggerEvent('#target', 'mouseout');
+    triggerEvent('#target', 'mouseleave');
 
     setTimeout(function() {
       assert.ok(isVisible(find('.tooltip')), '100ms: tooltip still faded in');
-      triggerEvent('#target', 'mouseover');
+      triggerEvent('#target', 'mouseenter');
     }, 100);
 
     setTimeout(function() {
@@ -289,7 +289,7 @@ test('should not hide tooltip if leave event occurs and enter event occurs withi
     }, 200);
   }, 0);
 
-  triggerEvent('#target', 'mouseover');
+  triggerEvent('#target', 'mouseenter');
 });
 
 test('should not show tooltip if leave event occurs before delay expires', function(assert) {
@@ -300,7 +300,7 @@ test('should not show tooltip if leave event occurs before delay expires', funct
 
   setTimeout(function() {
     assert.notOk(isVisible(find('.tooltip')), '100ms: tooltip not faded in');
-    triggerEvent('#target', 'mouseout');
+    triggerEvent('#target', 'mouseleave');
   }, 100);
 
   setTimeout(function() {
@@ -308,7 +308,7 @@ test('should not show tooltip if leave event occurs before delay expires', funct
     done();
   }, 200);
 
-  triggerEvent('#target', 'mouseover');
+  triggerEvent('#target', 'mouseenter');
 });
 
 test('show pass along class attribute', function(assert) {
@@ -321,5 +321,5 @@ test('show pass along class attribute', function(assert) {
     done();
   }, 200);
 
-  triggerEvent('#target', 'mouseover');
+  triggerEvent('#target', 'mouseenter');
 });

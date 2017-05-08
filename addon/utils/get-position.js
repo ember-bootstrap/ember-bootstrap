@@ -1,12 +1,9 @@
 import Ember from 'ember';
 
-const { $ } = Ember;
+const { assign } = Ember;
 
-export default function getPosition($element) {
-  let el = $element.get(0);
+export default function getPosition(el) {
   let isBody = el.tagName === 'BODY';
-
-  let elRect = el.getBoundingClientRect();
 
   // not needed as we won't support IE8
   //
@@ -18,9 +15,23 @@ export default function getPosition($element) {
   let isSvg = window.SVGElement && el instanceof window.SVGElement;
   // Avoid using $.offset() on SVGs since it gives incorrect results in jQuery 3.
   // See https://github.com/twbs/bootstrap/issues/20280
-  let elOffset = isBody ? { top: 0, left: 0 } : (isSvg ? null : $element.offset());
-  let scroll = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() };
-  let outerDims = isBody ? { width: $(window).width(), height: $(window).height() } : null;
+  let rect = el.getBoundingClientRect();
+  let elOffset = isBody ? { top: 0, left: 0 } : (isSvg ? {} : {
+    top: rect.top + document.body.scrollTop,
+    left: rect.left + document.body.scrollLeft
+  });
+  let scroll = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : el.scrollTop };
+  let outerDims = isBody ? { width: window.outerWidth, height: window.outerHeight } : {};
 
-  return $.extend({}, elRect, scroll, outerDims, elOffset);
+  // Ember.assign/Object.assign does not copy properties of DOMRect object, so we have to clone into POJO...
+  let clonedRect = {
+    top: rect.top,
+    bottom: rect.bottom,
+    left: rect.left,
+    right: rect.right,
+    width: rect.width,
+    height: rect.height
+  };
+
+  return assign({}, clonedRect, scroll, outerDims, elOffset);
 }

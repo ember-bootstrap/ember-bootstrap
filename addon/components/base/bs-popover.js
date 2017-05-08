@@ -94,6 +94,6 @@ export default ContextualHelp.extend({
    * @private
    */
   arrowElement: computed('overlayElement', function() {
-    return this.get('overlayElement').find('.arrow');
+    return this.get('overlayElement').querySelector('.arrow');
   })
 });

@@ -3,6 +3,8 @@ import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import getPosition from 'ember-bootstrap/utils/get-position';
 import getCalculatedOffset from 'ember-bootstrap/utils/get-calculated-offset';
 import getParent from 'ember-bootstrap/utils/get-parent';
+import setOffset from 'ember-bootstrap/utils/set-offset';
+import transitionEnd from 'ember-bootstrap/utils/transition-end';
 
 const {
   assert,
@@ -13,17 +15,13 @@ const {
   isBlank,
   observer,
   run,
-  $,
-
   run: {
     later,
     cancel,
-    bind,
     schedule,
     next
   }
 } = Ember;
-const eventNamespace = 'bs-contextual-help';
 
 const InState = Ember.Object.extend({
   hover: false,
@@ -191,7 +189,7 @@ export default Component.extend(TransitionSupport, {
   }),
 
   /**
-   * The jQuery object of the overlay element.
+   * The DOM element of the overlay element.
    *
    * @property overlayElement
    * @type object
@@ -199,11 +197,11 @@ export default Component.extend(TransitionSupport, {
    * @private
    */
   overlayElement: computed('overlayId', function() {
-    return Ember.$(`#${this.get('overlayId')}`);
+    return document.getElementById(this.get('overlayId'));
   }).volatile(),
 
   /**
-   * The jQuery object of the arrow element.
+   * The DOM element of the arrow element.
    *
    * @property arrowElement
    * @type object
@@ -213,7 +211,7 @@ export default Component.extend(TransitionSupport, {
   arrowElement: null,
 
   /**
-   * The jQuery object of the viewport element.
+   * The DOM element of the viewport element.
    *
    * @property viewportElement
    * @type object
@@ -221,7 +219,7 @@ export default Component.extend(TransitionSupport, {
    * @private
    */
   viewportElement: computed('viewportSelector', function() {
-    return $(this.get('viewportSelector'));
+    return document.getElementById(this.get('viewportSelector'));
   }),
 
   /**
@@ -237,22 +235,22 @@ export default Component.extend(TransitionSupport, {
 
   /**
    * @property triggerTargetElement
-   * @type {jQuery}
+   * @type {object}
    * @private
    */
   triggerTargetElement: computed('triggerElement', function() {
     let triggerElement = this.get('triggerElement');
-    let $el;
+    let el;
 
     if (isBlank(triggerElement)) {
-      $el = getParent(this);
+      el = getParent(this);
     } else if (triggerElement === 'parentView') {
-      $el = $(this.get('parentView.element'));
+      el = this.get('parentView.element');
     } else {
-      $el = $(triggerElement);
+      el = document.querySelector(triggerElement);
     }
-    assert('Trigger element for tooltip/popover must be present', $el.length === 1);
-    return $el;
+    assert('Trigger element for tooltip/popover must be present', el);
+    return el;
   }),
 
   /**
@@ -281,8 +279,7 @@ export default Component.extend(TransitionSupport, {
         default:
           return event;
       }
-    }
-    );
+    });
   }),
 
   /**
@@ -301,7 +298,7 @@ export default Component.extend(TransitionSupport, {
    * @private
    */
   _renderInPlace: computed('renderInPlace', function() {
-    return this.get('renderInPlace') || typeof Ember.$ !== 'function' || Ember.$('#ember-bootstrap-wormhole').length === 0;
+    return this.get('renderInPlace') || typeof document === 'undefined' || !document.getElementById('ember-bootstrap-wormhole');
   }),
 
   /**
@@ -338,7 +335,8 @@ export default Component.extend(TransitionSupport, {
    * @event onShow
    * @public
    */
-  onShow() {},
+  onShow() {
+  },
 
   /**
    * This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).
@@ -346,7 +344,8 @@ export default Component.extend(TransitionSupport, {
    * @event onShown
    * @public
    */
-  onShown() {},
+  onShown() {
+  },
 
   /**
    * This action is called immediately when the tooltip/popover is about to be hidden.
@@ -354,7 +353,8 @@ export default Component.extend(TransitionSupport, {
    * @event onHide
    * @public
    */
-  onHide() {},
+  onHide() {
+  },
 
   /**
    * This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).
@@ -362,7 +362,8 @@ export default Component.extend(TransitionSupport, {
    * @event onHidden
    * @public
    */
-  onHidden() {},
+  onHidden() {
+  },
 
   /**
    * Called when a show event has been received
@@ -479,17 +480,19 @@ export default Component.extend(TransitionSupport, {
   },
 
   _show(skipTransition = false) {
-    let $element = this.get('triggerTargetElement');
+    let element = this.get('triggerTargetElement');
     let placement = this.get('placement');
 
     // this.$element.attr('aria-describedby', tipId) @todo ?
 
-    let $tip = this.get('overlayElement');
-    $tip.css({ top: 0, left: 0, display: 'block' });
+    let tip = this.get('overlayElement');
+    tip.style.top = 0;
+    tip.style.left = 0;
+    tip.style.display = 'block';
 
-    let pos = getPosition($element);
-    let actualWidth = $tip[0].offsetWidth;
-    let actualHeight = $tip[0].offsetHeight;
+    let pos = getPosition(element);
+    let actualWidth = tip.offsetWidth;
+    let actualHeight = tip.offsetHeight;
 
     if (this.get('autoPlacement')) {
       let viewportDim = getPosition(this.get('viewportElement'));
@@ -521,9 +524,7 @@ export default Component.extend(TransitionSupport, {
     }
 
     if (skipTransition === false && this.get('usesTransition')) {
-      this.get('overlayElement')
-        .one('bsTransitionEnd', bind(this, tooltipShowComplete))
-        .emulateTransitionEnd(this.get('transitionDuration'));
+      transitionEnd(this.get('overlayElement'), tooltipShowComplete, this, this.get('transitionDuration'));
     } else {
       tooltipShowComplete.call(this);
     }
@@ -538,13 +539,13 @@ export default Component.extend(TransitionSupport, {
    * @private
    */
   applyPlacement(offset, placement) {
-    let $tip = this.get('overlayElement');
-    let width = $tip[0].offsetWidth;
-    let height = $tip[0].offsetHeight;
+    let tip = this.get('overlayElement');
+    let width = tip.offsetWidth;
+    let height = tip.offsetHeight;
 
     // manually read margins because getBoundingClientRect includes difference
-    let marginTop = parseInt($tip.css('margin-top'), 10);
-    let marginLeft = parseInt($tip.css('margin-left'), 10);
+    let marginTop = parseInt(tip.style.marginTop, 10);
+    let marginLeft = parseInt(tip.style.marginLeft, 10);
 
     // we must check for NaN for ie 8/9
     if (isNaN(marginTop)) {
@@ -557,22 +558,13 @@ export default Component.extend(TransitionSupport, {
     offset.top += marginTop;
     offset.left += marginLeft;
 
-    // $.fn.offset doesn't round pixel values
-    // so we use setOffset directly with our own function B-0
-    $.offset.setOffset($tip[0], $.extend({
-      using(props) {
-        $tip.css({
-          top: Math.round(props.top),
-          left: Math.round(props.left)
-        });
-      }
-    }, offset), 0);
+    setOffset(tip, offset);
 
     this.set('showHelp', true);
 
     // check to see if placing tip in new offset caused the tip to resize itself
-    let actualWidth = $tip[0].offsetWidth;
-    let actualHeight = $tip[0].offsetHeight;
+    let actualWidth = tip.offsetWidth;
+    let actualHeight = tip.offsetHeight;
 
     if (placement === 'top' && actualHeight !== height) {
       offset.top = offset.top + height - actualHeight;
@@ -590,8 +582,8 @@ export default Component.extend(TransitionSupport, {
     let arrowDelta = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight;
     let arrowOffsetPosition = isVertical ? 'offsetWidth' : 'offsetHeight';
 
-    $tip.offset(offset);
-    this.replaceArrow(arrowDelta, $tip[0][arrowOffsetPosition], isVertical);
+    setOffset(tip, offset);
+    this.replaceArrow(arrowDelta, tip[arrowOffsetPosition], isVertical);
   },
 
   /**
@@ -605,13 +597,13 @@ export default Component.extend(TransitionSupport, {
    */
   getViewportAdjustedDelta(placement, pos, actualWidth, actualHeight) {
     let delta = { top: 0, left: 0 };
-    let $viewport = this.get('viewportElement');
-    if (!$viewport) {
+    let viewport = this.get('viewportElement');
+    if (!viewport) {
       return delta;
     }
 
     let viewportPadding = this.get('viewportPadding');
-    let viewportDimensions = getPosition($viewport);
+    let viewportDimensions = getPosition(viewport);
 
     if (/right|left/.test(placement)) {
       let topEdgeOffset = pos.top - viewportPadding - viewportDimensions.scroll;
@@ -644,9 +636,9 @@ export default Component.extend(TransitionSupport, {
    * @private
    */
   replaceArrow(delta, dimension, isVertical) {
-    this.get('arrowElement')
-      .css(isVertical ? 'left' : 'top', `${50 * (1 - delta / dimension)}%`)
-      .css(isVertical ? 'top' : 'left', '');
+    let el = this.get('arrowElement');
+    el.style[isVertical ? 'left' : 'top'] = `${50 * (1 - delta / dimension)}%`;
+    el.style[isVertical ? 'top' : 'left'] = null;
   },
 
   /**
@@ -677,9 +669,7 @@ export default Component.extend(TransitionSupport, {
     this.set('showHelp', false);
 
     if (this.get('usesTransition')) {
-      this.get('overlayElement')
-        .one('bsTransitionEnd', bind(this, tooltipHideComplete))
-        .emulateTransitionEnd(this.get('transitionDuration'));
+      transitionEnd(this.get('overlayElement'), tooltipHideComplete, this, this.get('transitionDuration'));
     } else {
       tooltipHideComplete.call(this);
     }
@@ -692,16 +682,19 @@ export default Component.extend(TransitionSupport, {
    * @private
    */
   addListeners() {
-    let $target = this.get('triggerTargetElement');
+    let target = this.get('triggerTargetElement');
 
     this.get('_triggerEvents')
       .forEach((event) => {
         if (isArray(event)) {
           let [inEvent, outEvent] = event;
-          $target.on(`${inEvent}.${eventNamespace}`, run.bind(this, this.enter));
-          $target.on(`${outEvent}.${eventNamespace}`, run.bind(this, this.leave));
+          this._handleEnter = run.bind(this, this.enter);
+          this._handleLeave = run.bind(this, this.leave);
+          target.addEventListener(inEvent, this._handleEnter);
+          target.addEventListener(outEvent, this._handleLeave);
         } else {
-          $target.on(`${event}.${eventNamespace}`, run.bind(this, this.toggle));
+          this._handleToggle = run.bind(this, this.toggle);
+          target.addEventListener(event, this._handleToggle);
         }
       });
   },
@@ -711,8 +704,26 @@ export default Component.extend(TransitionSupport, {
    * @private
    */
   removeListeners() {
-    this.get('triggerTargetElement')
-      .off(`.${eventNamespace}`);
+    let target = this.get('triggerTargetElement');
+    this.get('_triggerEvents')
+      .forEach((event) => {
+        if (isArray(event)) {
+          let [inEvent, outEvent] = event;
+          if (this._handleEnter) {
+            target.removeEventListener(inEvent, this._handleEnter);
+            this._handleEnter = null;
+          }
+          if (this._handleLeave) {
+            target.removeEventListener(outEvent, this._handleLeave);
+            this._handleLeave = null;
+          }
+        } else {
+          if (this._handleToggle) {
+            target.removeEventListener(event, this._handleToggle);
+            this._handleToggle = null;
+          }
+        }
+      });
   },
 
   didInsertElement() {
