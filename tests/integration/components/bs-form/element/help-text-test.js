@@ -1,3 +1,4 @@
+import { find } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { formHelpTextClass } from '../../../../helpers/bootstrap-test';
@@ -11,6 +12,6 @@ test('it renders help text', function(assert) {
     {{bs-form/element/help-text text="foo bar"}}
   `);
 
-  assert.ok(this.$('div').hasClass(formHelpTextClass()));
-  assert.equal(this.$('div').text().trim(), 'foo bar');
+  assert.ok(find('div').classList.contains(formHelpTextClass()));
+  assert.equal(find('div').textContent.trim(), 'foo bar');
 });

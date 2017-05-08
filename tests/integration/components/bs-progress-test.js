@@ -1,3 +1,4 @@
+import { find, findAll } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
@@ -14,8 +15,8 @@ test('bs-progress has correct markup', function(assert) {
     {{/bs-progress}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text', 'Shows block content');
-  assert.equal(this.$('div.progress').length, 1, 'Has progress class');
+  assert.equal(find('*').textContent.trim(), 'template block text', 'Shows block content');
+  assert.equal(findAll('div.progress').length, 1, 'Has progress class');
 });
 
 test('Progress bar has correct width according to value, minValue and maxValue', function(assert) {
@@ -56,7 +57,7 @@ test('Progress bar has correct width according to value, minValue and maxValue',
 
     this.setProperties(data);
 
-    assert.equal(this.$('.progress-bar').width(), expectedWidth, 'Progress bar has expected width.');
+    assert.equal(find('.progress-bar').offsetWidth, expectedWidth, 'Progress bar has expected width.');
   });
 
 });
@@ -68,7 +69,7 @@ test('progress bar has invisible label for screen readers', function(assert) {
     {{/bs-progress}}
   `);
 
-  assert.equal(this.$('.progress-bar .sr-only').html().trim(), '50%', 'Progress bar shows correct default label');
+  assert.equal(find('.progress-bar .sr-only').innerHTML.trim(), '50%', 'Progress bar shows correct default label');
 
   this.render(hbs`
     {{#bs-progress as |p|}}
@@ -76,7 +77,7 @@ test('progress bar has invisible label for screen readers', function(assert) {
     {{/bs-progress}}
   `);
 
-  assert.equal(this.$('.progress-bar .sr-only').html().trim(), '5 (50%)', 'Progress bar shows correct custom label');
+  assert.equal(find('.progress-bar .sr-only').innerHTML.trim(), '5 (50%)', 'Progress bar shows correct custom label');
 
 });
 
@@ -87,7 +88,7 @@ test('progress bar can show label', function(assert) {
     {{/bs-progress}}
   `);
 
-  assert.equal(this.$('.progress-bar').html().trim(), '50%', 'Progress bar shows correct default label');
+  assert.equal(find('.progress-bar').innerHTML.trim(), '50%', 'Progress bar shows correct default label');
 
   this.render(hbs`
     {{#bs-progress as |p|}}
@@ -95,7 +96,7 @@ test('progress bar can show label', function(assert) {
     {{/bs-progress}}
   `);
 
-  assert.equal(this.$('.progress-bar').html().trim(), '5 (50%)', 'Progress bar shows correct custom label');
+  assert.equal(find('.progress-bar').innerHTML.trim(), '5 (50%)', 'Progress bar shows correct custom label');
 
 });
 
@@ -106,7 +107,7 @@ test('progress bar can round label\'s percent value', function(assert) {
     {{/bs-progress}}
   `);
 
-  assert.equal(this.$('.progress-bar').html().trim(), '83.33%', 'Progress bar shows correct default label');
+  assert.equal(find('.progress-bar').innerHTML.trim(), '83.33%', 'Progress bar shows correct default label');
 
 });
 
@@ -117,7 +118,7 @@ testBS3('progress bar supports type class', function(assert) {
     {{/bs-progress}}
   `);
 
-  assert.ok(this.$('.progress-bar').hasClass('progress-bar-success'), 'Progress bar has type class');
+  assert.ok(find('.progress-bar').classList.contains('progress-bar-success'), 'Progress bar has type class');
 
 });
 
@@ -128,7 +129,7 @@ testBS4('progress bar supports type class', function(assert) {
     {{/bs-progress}}
   `);
 
-  assert.ok(this.$('.progress-bar').hasClass('bg-success'), 'Progress bar has type class');
+  assert.ok(find('.progress-bar').classList.contains('bg-success'), 'Progress bar has type class');
 
 });
 
@@ -139,7 +140,7 @@ test('progress bar supports striped style', function(assert) {
     {{/bs-progress}}
   `);
 
-  assert.ok(this.$('.progress-bar').hasClass('progress-bar-striped'), 'Progress bar has type class');
+  assert.ok(find('.progress-bar').classList.contains('progress-bar-striped'), 'Progress bar has type class');
 
 });
 
@@ -150,8 +151,8 @@ testBS3('progress bar supports animated stripes', function(assert) {
     {{/bs-progress}}
   `);
 
-  assert.ok(this.$('.progress-bar').hasClass('progress-bar-striped'), 'Progress bar has type class');
-  assert.ok(this.$('.progress-bar').hasClass('active'), 'Progress bar has active class');
+  assert.ok(find('.progress-bar').classList.contains('progress-bar-striped'), 'Progress bar has type class');
+  assert.ok(find('.progress-bar').classList.contains('active'), 'Progress bar has active class');
 
 });
 
@@ -162,8 +163,8 @@ testBS4('progress bar supports animated stripes', function(assert) {
     {{/bs-progress}}
   `);
 
-  assert.ok(this.$('.progress-bar').hasClass('progress-bar-striped'), 'Progress bar has type class');
-  assert.ok(this.$('.progress-bar').hasClass('progress-bar-animated'), 'Progress bar has animated class');
+  assert.ok(find('.progress-bar').classList.contains('progress-bar-striped'), 'Progress bar has type class');
+  assert.ok(find('.progress-bar').classList.contains('progress-bar-animated'), 'Progress bar has animated class');
 
 });
 
@@ -175,6 +176,6 @@ test('progress bar supports stacked bars', function(assert) {
     {{/bs-progress}}
   `);
 
-  assert.equal(this.$('.progress-bar').length, 2, 'Progress bar has two bars');
+  assert.equal(findAll('.progress-bar').length, 2, 'Progress bar has two bars');
 
 });

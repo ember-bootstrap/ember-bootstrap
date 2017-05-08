@@ -1,3 +1,4 @@
+import { findAll, find } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import { test, testBS3, testBS4, validationErrorClass } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
@@ -8,28 +9,28 @@ moduleForComponent('bs-form/group', 'Integration | Component | bs-form/group', {
 
 test('component has form-group bootstrap class', function(assert) {
   this.render(hbs`{{bs-form/group}}`);
-  assert.equal(this.$(':first-child').hasClass('form-group'), true, 'component has form-group class');
+  assert.equal(find(':first-child').classList.contains('form-group'), true, 'component has form-group class');
 });
 
 testBS4('component has row class for horizontal layouts', function(assert) {
   this.render(hbs`{{bs-form/group formLayout="horizontal"}}`);
-  assert.equal(this.$(':first-child').hasClass('row'), true, 'component has row class');
+  assert.equal(find(':first-child').classList.contains('row'), true, 'component has row class');
 });
 
 testBS3('support size classes', function(assert) {
   this.render(hbs`{{bs-form/group size="lg"}}`);
-  assert.equal(this.$('.form-group').hasClass('form-group-lg'), true, 'form-group has large class');
+  assert.equal(find('.form-group').classList.contains('form-group-lg'), true, 'form-group has large class');
 
   this.render(hbs`{{bs-form/group size="sm"}}`);
-  assert.equal(this.$('.form-group').hasClass('form-group-sm'), true, 'form-group has small class');
+  assert.equal(find('.form-group').classList.contains('form-group-sm'), true, 'form-group has small class');
 });
 
 testBS4('support size classes', function(assert) {
   this.render(hbs`{{bs-form/group size="lg"}}`);
-  assert.equal(this.$('.form-group').hasClass('form-control-lg'), true, 'form-group has large class');
+  assert.equal(find('.form-group').classList.contains('form-control-lg'), true, 'form-group has large class');
 
   this.render(hbs`{{bs-form/group size="sm"}}`);
-  assert.equal(this.$('.form-group').hasClass('form-control-sm'), true, 'form-group has small class');
+  assert.equal(find('.form-group').classList.contains('form-control-sm'), true, 'form-group has small class');
 });
 
 const validations = {
@@ -52,11 +53,11 @@ function testValidationState(assert, state) {
   this.render(hbs`{{#bs-form/group validation=validation}}{{/bs-form/group}}`);
   this.set('validation', state);
   validationConfig.formGroupClasses.forEach((className) => {
-    assert.equal(this.$(':first-child').hasClass(className), true, `component has ${className} class`);
+    assert.equal(find(':first-child').classList.contains(className), true, `component has ${className} class`);
   });
-  assert.equal(this.$('.form-control-feedback').length, 1, 'component has feedback icon');
+  assert.equal(findAll('.form-control-feedback').length, 1, 'component has feedback icon');
   validationConfig.iconClasses.forEach((className) => {
-    assert.equal(this.$('.form-control-feedback').hasClass(className), 1, `icon has ${className} class`);
+    assert.equal(find('.form-control-feedback').classList.contains(className), 1, `icon has ${className} class`);
   });
 }
 
@@ -84,6 +85,6 @@ testBS4('component with successful validation has validation class', function(as
   Object.keys(validationClasses).forEach((validation) => {
     let className = validationClasses[validation];
     this.set('validation', validation);
-    assert.equal(this.$(':first-child').hasClass(className), true, `component has ${className} class`);
+    assert.equal(find(':first-child').classList.contains(className), true, `component has ${className} class`);
   });
 });

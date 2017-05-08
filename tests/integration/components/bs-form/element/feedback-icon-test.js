@@ -1,3 +1,4 @@
+import { findAll } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -9,12 +10,12 @@ test('is empty by default', function(assert) {
 
   this.render(hbs`{{bs-form/element/feedback-icon show=false}}`);
 
-  assert.equal(this.$('.form-control-feedback').length, 0);
+  assert.equal(findAll('.form-control-feedback').length, 0);
 });
 
 test('shows icon', function(assert) {
 
   this.render(hbs`{{bs-form/element/feedback-icon show=true iconName="foo"}}`);
 
-  assert.equal(this.$('.form-control-feedback.foo').length, 1);
+  assert.equal(findAll('.form-control-feedback.foo').length, 1);
 });

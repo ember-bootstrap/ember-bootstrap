@@ -1,3 +1,4 @@
+import { find, findAll, click } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import { test, visibilityClass } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
@@ -16,14 +17,14 @@ test('Modal yields header, footer and body components', function(assert) {
     {{modal.footer}}
   {{/bs-modal}}`);
 
-  assert.equal(this.$('.modal').length, 1, 'Modal exists.');
-  assert.equal(this.$('.modal .modal-header').length, 1, 'Modal has header.');
-  assert.equal(this.$('.modal .modal-header .modal-title').text().trim(), 'Dialog', 'Modal header has correct title.');
-  assert.equal(this.$('.modal .modal-footer').length, 1, 'Modal has footer.');
-  assert.equal(this.$('.modal .modal-footer button').length, 1, 'Modal has button in footer.');
-  assert.equal(this.$('.modal .modal-footer button').text().trim(), 'Ok', 'Modal button has default title.');
-  assert.equal(this.$('.modal .modal-body').length, 1, 'Modal has body.');
-  assert.equal(this.$('.modal .modal-body').text().trim(), 'Hello world!', 'Modal body has correct content.');
+  assert.equal(findAll('.modal').length, 1, 'Modal exists.');
+  assert.equal(findAll('.modal .modal-header').length, 1, 'Modal has header.');
+  assert.equal(find('.modal .modal-header .modal-title').textContent.trim(), 'Dialog', 'Modal header has correct title.');
+  assert.equal(findAll('.modal .modal-footer').length, 1, 'Modal has footer.');
+  assert.equal(findAll('.modal .modal-footer button').length, 1, 'Modal has button in footer.');
+  assert.equal(find('.modal .modal-footer button').textContent.trim(), 'Ok', 'Modal button has default title.');
+  assert.equal(findAll('.modal .modal-body').length, 1, 'Modal has body.');
+  assert.equal(find('.modal .modal-body').textContent.trim(), 'Hello world!', 'Modal body has correct content.');
 });
 
 test('clicking ok button closes modal when autoClose=true with custom component hierarchy', function(assert) {
@@ -44,19 +45,19 @@ test('clicking ok button closes modal when autoClose=true with custom component 
   let done = assert.async();
 
   // wait for fade animation
-  setTimeout(() => {
-    assert.equal(this.$('.modal').hasClass(visibilityClass()), true, 'Modal is visible');
-    this.$('.modal .modal-footer button').click();
+  setTimeout(async () => {
+    assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is visible');
+    await click('.modal .modal-footer button');
 
     // wait for fade animation
     setTimeout(() => {
-      assert.equal(this.$('.modal').hasClass(visibilityClass()), false, 'Modal is hidden');
+      assert.equal(find('.modal').classList.contains(visibilityClass()), false, 'Modal is hidden');
       done();
     }, transitionTimeout);
   }, transitionTimeout);
 });
 
-test('Modal yields close action', function(assert) {
+test('Modal yields close action', async function(assert) {
   let closeAction = this.spy();
   this.on('close', closeAction);
 
@@ -68,11 +69,11 @@ test('Modal yields close action', function(assert) {
     {{/modal.footer}}
   {{/bs-modal}}`);
 
-  this.$('#close').click();
+  await click('#close');
   assert.ok(closeAction.calledOnce, 'close action has been called.');
 });
 
-test('Modal yields submit action', function(assert) {
+test('Modal yields submit action', async function(assert) {
   let submitAction = this.spy();
   this.on('submit', submitAction);
 
@@ -84,6 +85,6 @@ test('Modal yields submit action', function(assert) {
     {{/modal.footer}}
   {{/bs-modal}}`);
 
-  this.$('#submit').click();
+  await click('#submit');
   assert.ok(submitAction.calledOnce, 'submit action has been called.');
 });
