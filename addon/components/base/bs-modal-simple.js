@@ -37,7 +37,7 @@ import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
 
  ```hbs
  {{#bs-modal-simple title="Form Example" closeTitle="Cancel" submitTitle="Ok"}}
-   {{#bs-form action=(action "submit") model=this as |form|}}
+   {{#bs-form onSubmit=(action "submit") model=this as |form|}}
      {{form.element controlType="text" label="first name" property="firstname"}}
      {{form.element controlType="text" label="last name" property="lastname"}}
    {{/bs-form}}
@@ -55,7 +55,7 @@ import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
 
  ```hbs
  {{#bs-modal-simple title="Form Example" closeTitle="Cancel" submitTitle="Ok"}}
-   {{#bs-form action=(action "submit") model=this as |form|}}
+   {{#bs-form onSubmit=(action "submit") model=this as |form|}}
      {{form.element controlType="text" label="first name" property="firstname" autofocus=true}}
      {{form.element controlType="text" label="last name" property="lastname"}}
    {{/bs-form}}
