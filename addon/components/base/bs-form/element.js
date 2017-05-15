@@ -33,7 +33,7 @@ const nonDefaultLayouts = A([
  create forms without coding the default Bootstrap form markup by hand:
 
  ```hbs
- {{#bs-form formLayout="horizontal" action="submit" as |form|}}
+ {{#bs-form formLayout="horizontal" onSubmit=(action "submit") as |form|}}
  {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
  {{form.element controlType="password" label="Password" placeholder="Password" value=password}}
  {{form.element controlType="checkbox" label="Remember me" value=rememberMe}}
@@ -47,7 +47,7 @@ const nonDefaultLayouts = A([
  (given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):
 
  ```hbs
- {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
+ {{#bs-form formLayout="horizontal" model=this onSubmit=(action "submit") as |form|}}
  {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
  {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
  {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
@@ -149,7 +149,7 @@ const nonDefaultLayouts = A([
  To set HTML attributes on the control element provided by this component, set them as properties of this component:
 
  ```hbs
- {{#bs-form formLayout="horizontal" model=this action="submit" as |form|}}
+ {{#bs-form formLayout="horizontal" model=this onSubmit=(action "submit") as |form|}}
  {{form.element controlType="email" label="Email" property="email"
    placeholder="Email"
    required=true
