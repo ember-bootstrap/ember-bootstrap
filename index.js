@@ -75,7 +75,7 @@ module.exports = {
     let bowerDependencies = this.app.project.bowerDependencies();
 
     if ('bootstrap' in bowerDependencies || 'bootstrap-sass' in bowerDependencies) {
-      this.ui.writeLine(chalk.yellow('The dependencies for ember-bootstrap can be outdated. Please run `ember generate ember-bootstrap` to install appropriate dependencies!'));
+      this.ui.writeLine(chalk.yellow('The dependencies for ember-bootstrap may be outdated. Please run `ember generate ember-bootstrap` to install appropriate dependencies!'));
     }
   },
 
