@@ -96,7 +96,7 @@ module.exports = {
           throw new SilentError('There is no Less support for Bootstrap 4! Falling back to importing static CSS. Consider switching to Sass for preprocessor support!');
         }
         if (!('bootstrap' in dependencies)) {
-          throw new SilentError('Npm package "bootstrap" is missing, but required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
+          this.ui.writeLine(chalk.yellow('Npm package "bootstrap" is missing, but is typically required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'));
         }
         break;
     }
