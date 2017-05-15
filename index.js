@@ -88,7 +88,7 @@ module.exports = {
     switch (name) {
       case 'sass':
         if (!('bootstrap-sass' in dependencies) && this.getBootstrapVersion() === 3) {
-          throw new SilentError('Npm package "bootstrap-sass" is missing, but required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
+          this.ui.writeLine(chalk.yellow('Npm package "bootstrap-sass" is missing, but is typically required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'));
         }
         break;
       case 'less':
