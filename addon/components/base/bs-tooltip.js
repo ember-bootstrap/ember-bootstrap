@@ -32,7 +32,7 @@ const {
  that element. By default the trigger element is the parent DOM element of the component, and the trigger events will be
  "hover" and "focus".
 
- The `triggerElement` property accepts any jQuery selector to attach the tooltip to any other existing DOM element.
+ The `triggerElement` property accepts any CSS selector to attach the tooltip to any other existing DOM element.
  With the special value "parentView" you can attach the tooltip to the DOM element of the parent component:
 
  ```hbs
@@ -78,7 +78,7 @@ export default ContextualHelp.extend({
   layout,
 
   /**
-   * The jQuery object of the arrow element.
+   * The DOM element of the arrow element.
    *
    * @property arrowElement
    * @type object

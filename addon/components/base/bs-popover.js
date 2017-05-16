@@ -24,7 +24,7 @@ const {
  that element. By default the trigger element is the parent DOM element of the component, and the trigger event will be
  "click".
 
- The `triggerElement` property accepts any jQuery selector to attach the popover to any other existing DOM element.
+ The `triggerElement` property accepts any CSS selector to attach the popover to any other existing DOM element.
  With the special value "parentView" you can attach the popover to the DOM element of the parent component:
 
  ```hbs
@@ -86,7 +86,7 @@ export default ContextualHelp.extend({
   triggerEvents: 'click',
 
   /**
-   * The jQuery object of the arrow element.
+   * The DOm element of the arrow element.
    *
    * @property arrowElement
    * @type object
