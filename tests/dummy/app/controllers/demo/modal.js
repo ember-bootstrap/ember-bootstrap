@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   hasModal3: false,
 
   title: 'Simple Modal',
-  sizes: A([null, 'sm', 'lg']),
+  sizes: A(['', 'sm', 'lg']),
   size: computed.oneWay('sizes.firstObject'),
   closeButton: true,
   closeTitle: 'Ok',
