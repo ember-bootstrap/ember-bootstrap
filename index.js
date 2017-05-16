@@ -75,7 +75,7 @@ module.exports = {
     let bowerDependencies = this.app.project.bowerDependencies();
 
     if ('bootstrap' in bowerDependencies || 'bootstrap-sass' in bowerDependencies) {
-      this.ui.writeLine(chalk.yellow('The dependencies for ember-bootstrap can be outdated. Please run `ember generate ember-bootstrap` to install appropriate dependencies!'));
+      this.warn('The dependencies for ember-bootstrap may be outdated. Please run `ember generate ember-bootstrap` to install appropriate dependencies!');
     }
   },
 
@@ -88,7 +88,7 @@ module.exports = {
     switch (name) {
       case 'sass':
         if (!('bootstrap-sass' in dependencies) && this.getBootstrapVersion() === 3) {
-          throw new SilentError('Npm package "bootstrap-sass" is missing, but required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
+          this.warn('Npm package "bootstrap-sass" is missing, but is typically required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
         }
         break;
       case 'less':
@@ -96,7 +96,7 @@ module.exports = {
           throw new SilentError('There is no Less support for Bootstrap 4! Falling back to importing static CSS. Consider switching to Sass for preprocessor support!');
         }
         if (!('bootstrap' in dependencies)) {
-          throw new SilentError('Npm package "bootstrap" is missing, but required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
+          this.warn('Npm package "bootstrap" is missing, but is typically required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
         }
         break;
     }
@@ -194,5 +194,9 @@ module.exports = {
     if (type === 'body-footer' && config.environment !== 'test' && this.bootstrapOptions.insertEmberWormholeElementToDom !== false) {
       return '<div id="ember-bootstrap-wormhole"></div>';
     }
+  },
+
+  warn(message) {
+    this.ui.writeLine(chalk.yellow(message));
   }
 };
