@@ -17,4 +17,4 @@ function transitionSupport() {
   return false;
 }
 
-export default transitionSupport();
+export default typeof document !== 'undefined' && transitionSupport();
