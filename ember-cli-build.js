@@ -8,7 +8,8 @@ module.exports = function(defaults) {
     snippetSearchPaths: [path.join('tests','dummy','app')],
     'ember-bootstrap': {
       'importBootstrapCSS': false
-    }
+    },
+    vendorFiles: { 'jquery.js': null }
   });
 
   /*
