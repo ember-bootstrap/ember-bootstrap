@@ -219,7 +219,7 @@ export default Component.extend(TransitionSupport, {
    * @private
    */
   viewportElement: computed('viewportSelector', function() {
-    return document.getElementById(this.get('viewportSelector'));
+    return document.querySelector(this.get('viewportSelector'));
   }),
 
   /**
