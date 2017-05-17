@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.12.4f16da44</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.12.fec690ee</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -90,9 +90,9 @@ within your form but instead in your modal footer. Hover pressing the submit but
 trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
 thus bypass the form validation feature of the form component.</p>
 <pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal-simple title=&quot;Form Example&quot; closeTitle=&quot;Cancel&quot; submitTitle=&quot;Ok&quot;}}
-   {{#bs-form action=(action &quot;submit&quot;) model=this}}
-     {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot;}}
-     {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
+   {{#bs-form onSubmit=(action &quot;submit&quot;) model=this as |form|}}
+     {{form.element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot;}}
+     {{form.element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
    {{/bs-form}}
  {{/bs-modal-simple}}
 </code></pre>
@@ -103,9 +103,9 @@ present whenever the footer's submit button is pressed, so the example above wil
 modal contains an element such as a text input and you would like it to be given focus rather than the modal element,
 then give it the HTML5 autofocus attribute:</p>
 <pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal-simple title=&quot;Form Example&quot; closeTitle=&quot;Cancel&quot; submitTitle=&quot;Ok&quot;}}
-   {{#bs-form action=(action &quot;submit&quot;) model=this}}
-     {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot; autofocus=true}}
-     {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
+   {{#bs-form onSubmit=(action &quot;submit&quot;) model=this as |form|}}
+     {{form.element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot; autofocus=true}}
+     {{form.element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
    {{/bs-form}}
  {{/bs-modal-simple}}
 </code></pre>

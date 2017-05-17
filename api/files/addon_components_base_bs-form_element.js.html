@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.12.4f16da44</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.12.fec690ee</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -88,7 +88,7 @@ const nonDefaultLayouts = A([
  create forms without coding the default Bootstrap form markup by hand:
 
  &#x60;&#x60;&#x60;hbs
- {{#bs-form formLayout=&quot;horizontal&quot; action=&quot;submit&quot; as |form|}}
+ {{#bs-form formLayout=&quot;horizontal&quot; onSubmit=(action &quot;submit&quot;) as |form|}}
  {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
  {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
  {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
@@ -102,7 +102,7 @@ const nonDefaultLayouts = A([
  (given by &#x60;property&#x60;) of the form&#x27;s &#x60;model&#x60;, which in this case is its controller (see &#x60;model=this&#x60;):
 
  &#x60;&#x60;&#x60;hbs
- {{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot; as |form|}}
+ {{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
  {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
  {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
  {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
@@ -204,7 +204,7 @@ const nonDefaultLayouts = A([
  To set HTML attributes on the control element provided by this component, set them as properties of this component:
 
  &#x60;&#x60;&#x60;hbs
- {{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot; as |form|}}
+ {{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
  {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; property=&quot;email&quot;
    placeholder=&quot;Email&quot;
    required=true

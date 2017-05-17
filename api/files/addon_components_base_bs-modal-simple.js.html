@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.12.4f16da44</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.12.fec690ee</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -92,9 +92,9 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-modal-simple&#x
 
  &#x60;&#x60;&#x60;hbs
  {{#bs-modal-simple title=&quot;Form Example&quot; closeTitle=&quot;Cancel&quot; submitTitle=&quot;Ok&quot;}}
-   {{#bs-form action=(action &quot;submit&quot;) model=this}}
-     {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot;}}
-     {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
+   {{#bs-form onSubmit=(action &quot;submit&quot;) model=this as |form|}}
+     {{form.element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot;}}
+     {{form.element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
    {{/bs-form}}
  {{/bs-modal-simple}}
  &#x60;&#x60;&#x60;
@@ -110,9 +110,9 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-modal-simple&#x
 
  &#x60;&#x60;&#x60;hbs
  {{#bs-modal-simple title=&quot;Form Example&quot; closeTitle=&quot;Cancel&quot; submitTitle=&quot;Ok&quot;}}
-   {{#bs-form action=(action &quot;submit&quot;) model=this}}
-     {{bs-form-element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot; autofocus=true}}
-     {{bs-form-element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
+   {{#bs-form onSubmit=(action &quot;submit&quot;) model=this as |form|}}
+     {{form.element controlType=&quot;text&quot; label=&quot;first name&quot; property=&quot;firstname&quot; autofocus=true}}
+     {{form.element controlType=&quot;text&quot; label=&quot;last name&quot; property=&quot;lastname&quot;}}
    {{/bs-form}}
  {{/bs-modal-simple}}
 

@@ -1,9 +1,9 @@
 {
   "assets": {
     "assets/dummy.css": "assets/dummy-a0cfd9840807929234c1ba76c4958b13.css",
-    "assets/dummy.js": "assets/dummy-66df2ee2614d84415605a5a686e13299.js",
+    "assets/dummy.js": "assets/dummy-48c11e76f4cfae70eac77ba6e6f45091.js",
     "assets/vendor.css": "assets/vendor-b45f6a648ca23892bdf363da44fb0bb8.css",
-    "assets/vendor.js": "assets/vendor-bfb299b1ce5e5268c32d7e8531c58638.js",
+    "assets/vendor.js": "assets/vendor-de510a3d3d8ba87c94cb4792838916f9.js",
     "img/kaliber5.png": "img/kaliber5-9d16d7736e217dbdc3c61c42dcd5bbf4.png"
   },
   "prepend": ""

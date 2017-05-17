@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.12.4f16da44</span></h1>
+    <h1>API Docs <span class="small">1.0.0-alpha.12.fec690ee</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -72,7 +72,7 @@
 <h3>Form layout</h3>
 <p>The appropriate Bootstrap markup for the given <code>formLayout</code> and <code>controlType</code> is automatically generated to easily
 create forms without coding the default Bootstrap form markup by hand:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; action=&quot;submit&quot; as |form|}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; onSubmit=(action &quot;submit&quot;) as |form|}}
 {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
 {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
 {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
@@ -82,7 +82,7 @@ create forms without coding the default Bootstrap form markup by hand:</p>
 <h3>Form validation</h3>
 <p>In the following example the control elements of the three form elements value will be bound to the properties
 (given by <code>property</code>) of the form's <code>model</code>, which in this case is its controller (see <code>model=this</code>):</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot; as |form|}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
 {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
 {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
 {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
@@ -167,7 +167,7 @@ to customize that existing component:</p>
 </code></pre>
 <h3>HTML attributes</h3>
 <p>To set HTML attributes on the control element provided by this component, set them as properties of this component:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this action=&quot;submit&quot; as |form|}}
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
 {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; property=&quot;email&quot;
   placeholder=&quot;Email&quot;
   required=true
