@@ -49,7 +49,7 @@ before_install:
   - bower --version
 
 install:
-  - yarn install --no-lockfile
+  - yarn install
   - bower install
 
 before_script:
