@@ -93,6 +93,10 @@ module.exports = function(defaults) {
 @import "ember-bootstrap/bootstrap";
 </code></pre>
 
+<pre><code class="language-sass">// app.scss
+@import "ember-bootstrap/bootstrap";
+</code></pre>
+
 <p>This will add the whole bootstrap stylesheets allowing you to customize them easily using the available variables.</p>
 
 {{#bs-alert type="warning"}}
@@ -110,6 +114,15 @@ module.exports = function(defaults) {
 @import "ember-bootstrap/scaffolding.less";
 @import "ember-bootstrap/type.less";
 @import "ember-bootstrap/buttons.less";
+</code></pre>
+
+<pre><code class="language-sass">// app.scss
+@import "ember-bootstrap/bootstrap/variables.scss";
+@import "ember-bootstrap/bootstrap/mixins.scss";
+@import "ember-bootstrap/bootstrap/normalize.scss";
+@import "ember-bootstrap/bootstrap/scaffolding.scss";
+@import "ember-bootstrap/bootstrap/type.scss";
+@import "ember-bootstrap/bootstrap/buttons.scss";
 </code></pre>
 
 <h2>Importing the Bootstrap Glyphicons font</h2>
