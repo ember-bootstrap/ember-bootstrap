@@ -1231,7 +1231,20 @@ broccoli-builder@^0.18.3:
     rsvp "^3.0.17"
     silent-error "^1.0.1"
 
-broccoli-caching-writer@^2.0.4, broccoli-caching-writer@^2.2.0, broccoli-caching-writer@^2.3.1:
+broccoli-caching-writer@^2.0.4, broccoli-caching-writer@~2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/broccoli-caching-writer/-/broccoli-caching-writer-2.0.4.tgz#d995d7d1977292e498f78df05887230fcb4a5e2c"
+  dependencies:
+    broccoli-kitchen-sink-helpers "^0.2.5"
+    broccoli-plugin "1.1.0"
+    debug "^2.1.1"
+    lodash-node "^3.2.0"
+    rimraf "^2.2.8"
+    rsvp "^3.0.17"
+    symlink-or-copy "^1.0.0"
+    walk-sync "^0.2.0"
+
+broccoli-caching-writer@^2.2.0, broccoli-caching-writer@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/broccoli-caching-writer/-/broccoli-caching-writer-2.3.1.tgz#b93cf58f9264f003075868db05774f4e7f25bd07"
   dependencies:
@@ -1252,19 +1265,6 @@ broccoli-caching-writer@^3.0.3:
     rimraf "^2.2.8"
     rsvp "^3.0.17"
     walk-sync "^0.3.0"
-
-broccoli-caching-writer@~2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/broccoli-caching-writer/-/broccoli-caching-writer-2.0.4.tgz#d995d7d1977292e498f78df05887230fcb4a5e2c"
-  dependencies:
-    broccoli-kitchen-sink-helpers "^0.2.5"
-    broccoli-plugin "1.1.0"
-    debug "^2.1.1"
-    lodash-node "^3.2.0"
-    rimraf "^2.2.8"
-    rsvp "^3.0.17"
-    symlink-or-copy "^1.0.0"
-    walk-sync "^0.2.0"
 
 broccoli-clean-css@^1.1.0:
   version "1.1.0"
@@ -2778,6 +2778,12 @@ ember-cli-broccoli-sane-watcher@^2.0.4:
 ember-cli-build-config-editor@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/ember-cli-build-config-editor/-/ember-cli-build-config-editor-0.4.0.tgz#ff2b8af78380f306d6672a040b916f9fcb9f8ef9"
+  dependencies:
+    recast "^0.12.0"
+
+ember-cli-build-config-editor@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-build-config-editor/-/ember-cli-build-config-editor-0.5.0.tgz#e19a06f4da2e3e579b407964b72df9fbf3839f4b"
   dependencies:
     recast "^0.12.0"
 
@@ -4361,13 +4367,13 @@ git-remote-origin-url@^2.0.0:
     gitconfiglocal "^1.0.0"
     pify "^2.3.0"
 
-git-repo-info@^1.0.4, git-repo-info@~1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/git-repo-info/-/git-repo-info-1.2.0.tgz#43d8513e04a24dd441330a2f7c6655a709fdbaf2"
-
-git-repo-info@^1.4.1:
+git-repo-info@^1.0.4, git-repo-info@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/git-repo-info/-/git-repo-info-1.4.1.tgz#2a072823254aaf62fcf0766007d7b6651bd41943"
+
+git-repo-info@~1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/git-repo-info/-/git-repo-info-1.2.0.tgz#43d8513e04a24dd441330a2f7c6655a709fdbaf2"
 
 git-repo-version@0.2.0:
   version "0.2.0"
