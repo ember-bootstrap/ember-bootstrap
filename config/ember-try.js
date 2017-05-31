@@ -116,7 +116,8 @@ module.exports = {
       },
       npm: {
         devDependencies: {
-          'ember-source': null
+          'ember-source': null,
+          'ember-native-dom-event-dispatcher': null
         }
       }
     },
@@ -132,7 +133,17 @@ module.exports = {
       },
       npm: {
         devDependencies: {
-          'ember-source': null
+          'ember-source': null,
+          'ember-native-dom-event-dispatcher': null
+        }
+      }
+    },
+    {
+      name: 'ember-lts-2.12',
+      npm: {
+        devDependencies: {
+          'ember-source': '~2.12.0',
+          'ember-native-dom-event-dispatcher': null
         }
       }
     },
@@ -216,6 +227,16 @@ module.exports = {
       npm: {
         devDependencies: {
           'ember-source': null,
+          'ember-native-dom-event-dispatcher': null
+        }
+      }
+    },
+    {
+      name: 'ember-lts-2.12-bs4',
+      command: 'BOOTSTRAPVERSION=4 ember test',
+      npm: {
+        devDependencies: {
+          'ember-source': '~2.12.0',
           'ember-native-dom-event-dispatcher': null
         }
       }

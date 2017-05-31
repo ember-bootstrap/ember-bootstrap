@@ -23,11 +23,14 @@ env:
   - EMBER_TRY_SCENARIO=ember-lts-2.8
   - EMBER_TRY_SCENARIO=ember-2.9
   - EMBER_TRY_SCENARIO=ember-2.10
+  - EMBER_TRY_SCENARIO=ember-lts-2.12
+  - EMBER_TRY_SCENARIO=ember-2.13
   - EMBER_TRY_SCENARIO=ember-release
   - EMBER_TRY_SCENARIO=ember-beta
   - EMBER_TRY_SCENARIO=ember-canary
   - EMBER_TRY_SCENARIO=ember-lts-2.4-bs4
   - EMBER_TRY_SCENARIO=ember-lts-2.8-bs4
+  - EMBER_TRY_SCENARIO=ember-lts-2.12-bs4
   - EMBER_TRY_SCENARIO=ember-release-bs4
   - EMBER_TRY_SCENARIO=ember-beta-bs4
   - EMBER_TRY_SCENARIO=fastboot-addon-tests
@@ -50,6 +53,8 @@ before_install:
 
 install:
   - yarn install
+  # temporary workaround for https://github.com/yarnpkg/yarn/issues/3485
+  - npm rebuild node-sass
   - bower install
 
 before_script:

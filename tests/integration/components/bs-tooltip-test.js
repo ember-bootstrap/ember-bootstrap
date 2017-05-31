@@ -10,7 +10,7 @@ moduleForComponent('bs-tooltip', 'Integration | Component | bs-tooltip', {
 });
 
 function setupForPositioning() {
-  Object.assign(find('#container').style, {
+  Object.assign(find('#wrapper').style, {
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -201,7 +201,7 @@ test('Renders in place (no wormhole) if renderInPlace is set', function(assert) 
 });
 
 test('should place tooltip on top of element', async function(assert) {
-  this.render(hbs`<div id="container"><p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false}}</a></p></div>`);
+  this.render(hbs`<div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false}}</a></p></div>`);
 
   setupForPositioning.call(this);
 
@@ -212,7 +212,7 @@ test('should place tooltip on top of element', async function(assert) {
 test('should place tooltip on top of element if already visible', function(assert) {
   assert.expect(2);
   let done = assert.async();
-  this.render(hbs`<div id="container"><p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=true}}</a></p></div>`);
+  this.render(hbs`<div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=true}}</a></p></div>`);
 
   setupForPositioning.call(this);
   setTimeout(function() {
@@ -223,7 +223,7 @@ test('should place tooltip on top of element if already visible', function(asser
 
 test('should place tooltip on top of element if visible is set to true', function(assert) {
   this.set('visible', false);
-  this.render(hbs`<div id="container"><p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=visible}}</a></p></div>`);
+  this.render(hbs`<div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=visible}}</a></p></div>`);
 
   setupForPositioning.call(this);
 
