@@ -2,6 +2,7 @@ import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-tab/pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
+import transitionEnd from 'ember-bootstrap/utils/transition-end';
 
 const { computed, observer, run: { scheduleOnce } } = Ember;
 
@@ -110,16 +111,14 @@ export default Ember.Component.extend(ComponentChild, TransitionSupport, {
    */
   show() {
     if (this.get('usesTransition')) {
-      this.$()
-        .one('bsTransitionEnd', Ember.run.bind(this, function() {
-          if (!this.get('isDestroyed')) {
-            this.setProperties({
-              active: true,
-              showContent: true
-            });
-          }
-        }))
-        .emulateTransitionEnd(this.get('fadeDuration'));
+      transitionEnd(this.get('element'), function() {
+        if (!this.get('isDestroyed')) {
+          this.setProperties({
+            active: true,
+            showContent: true
+          });
+        }
+      }, this, this.get('fadeDuration'));
     } else {
       this.set('active', true);
     }
@@ -133,13 +132,11 @@ export default Ember.Component.extend(ComponentChild, TransitionSupport, {
    */
   hide() {
     if (this.get('usesTransition')) {
-      this.$()
-        .one('bsTransitionEnd', Ember.run.bind(this, function() {
-          if (!this.get('isDestroyed')) {
-            this.set('active', false);
-          }
-        }))
-        .emulateTransitionEnd(this.get('fadeDuration'));
+      transitionEnd(this.get('element'), function() {
+        if (!this.get('isDestroyed')) {
+          this.set('active', false);
+        }
+      }, this, this.get('fadeDuration'));
       this.set('showContent', false);
     } else {
       this.set('active', false);

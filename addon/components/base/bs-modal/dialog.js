@@ -99,7 +99,7 @@ export default Ember.Component.extend({
   },
 
   click(e) {
-    if (e.target !== e.currentTarget || !this.get('backdropClose')) {
+    if (!e.target.classList.contains('modal') || !this.get('backdropClose')) {
       return;
     }
     this.get('onClose')();

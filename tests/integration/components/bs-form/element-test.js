@@ -1,4 +1,4 @@
-import { click, find, findAll, fillIn, triggerEvent } from 'ember-native-dom-helpers';
+import { click, find, findAll, fillIn, triggerEvent, focus, blur } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import { formFeedbackClass, test, testBS3, validationErrorClass, formHelpTextClass } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
@@ -440,7 +440,8 @@ test('shows validation state only when validator is present', async function(ass
   this.render(hbs`
       {{bs-form/element property='name' model=model}}
   `);
-  await triggerEvent('input', 'focusout');
+  await focus('input');
+  await blur('input');
   assert.notOk(
     find('.form-group').classList.contains('has-success'),
     'form group isn\'t shown as having errors if there is no validator'
@@ -457,7 +458,8 @@ test('shows validation errors', async function(assert) {
     find('.form-group').classList.contains(validationErrorClass()),
     'validation errors aren\'t shown before user interaction'
   );
-  await triggerEvent('input', 'blur');
+  await focus('input');
+  await blur('input');
   assert.ok(
     find('.form-group').classList.contains(validationErrorClass()),
     'validation errors are shown after user interaction when errors are present'
@@ -482,7 +484,8 @@ test('shows validation warnings', async function(assert) {
     find('.form-group').classList.contains('has-warning'),
     'validation warnings aren\'t shown before user interaction'
   );
-  await triggerEvent('input', 'blur');
+  await focus('input');
+  await blur('input');
   assert.ok(
     find('.form-group').classList.contains('has-warning'),
     'validation warnings are shown after user interaction when warnings are present'
@@ -528,11 +531,13 @@ test('events enabling validation rendering are configurable per `showValidationO
     find('.form-group').classList.contains(validationErrorClass()),
     'validation warnings aren\'t shown before user interaction'
   );
-  await triggerEvent('input', 'blur');
+  await focus('input');
+  await blur('input');
   assert.notOk(
     find('.form-group').classList.contains(validationErrorClass()),
     'events not present in `showValidationOn` are ignored'
   );
+  await fillIn('input', 'foo');
   await triggerEvent('input', 'change');
   assert.ok(
     find('.form-group').classList.contains(validationErrorClass()),
@@ -550,7 +555,8 @@ test('events enabling validation rendering are configurable per `showValidationO
     find('.form-group').classList.contains(validationErrorClass()),
     'validation warnings aren\'t shown before user interaction'
   );
-  await triggerEvent('input', 'blur');
+  await focus('input');
+  await blur('input');
   assert.notOk(
     find('.form-group').classList.contains(validationErrorClass()),
     'events not present in `showValidationOn` are ignored'

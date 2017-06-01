@@ -1,11 +1,7 @@
 <div class="bs-example">
   {{#bs-form formLayout="inline" model=this as |form|}}
-    {{#form.element label="Type" property="type" as |el|}}
-      {{#x-select class="form-control" value=el.value id=el.id on-change=(action "updateType") as |xs|}}
-        {{#each typeChoices as |choice|}}
-          {{#xs.option value=choice}}{{choice}}{{/xs.option}}
-        {{/each}}
-      {{/x-select}}
+    {{#form.element controlType="power-select" options=typeChoices label="Type" property="type" as |el|}}
+      {{el.control searchEnabled=false}}
     {{/form.element}}
     {{form.element controlType="checkbox" disabled=(bs-eq type "tabs") label="Stacked" property="stacked" onChange=(action "updateStacked")}}
     {{form.element controlType="checkbox" disabled=stacked label="Justified" property="justified"}}

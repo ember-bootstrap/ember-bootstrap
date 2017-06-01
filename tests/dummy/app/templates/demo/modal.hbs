@@ -20,13 +20,8 @@
   {{form.element label="Title" property="title"}}
   {{form.element label="Close button" property="closeTitle"}}
   {{form.element label="Submit button" placeholder="Enter title to add a submit button" property="submitTitle"}}
-
-  {{#form.element label="Size" property="size" as |el|}}
-    {{#x-select class="form-control" value=el.value id=el.id on-change=(action (mut size)) as |xs|}}
-      {{#each sizes as |choice|}}
-        {{#xs.option value=choice}}{{choice}}{{/xs.option}}
-      {{/each}}
-    {{/x-select}}
+  {{#form.element controlType="power-select" options=sizes label="Size" property="size" as |el|}}
+    {{el.control searchEnabled=false}}
   {{/form.element}}
   {{form.element controlType="checkbox" label="Close button" property="closeButton"}}
   {{form.element controlType="checkbox" label="Fade" property="fade"}}

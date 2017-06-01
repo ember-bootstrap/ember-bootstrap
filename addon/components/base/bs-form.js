@@ -248,8 +248,14 @@ export default Ember.Component.extend({
   keyPress(e) {
     let code = e.keyCode || e.which;
     if (code === 13 && this.get('submitOnEnter')) {
-      this.$().submit();
+      this.triggerSubmit();
     }
+  },
+
+  triggerSubmit() {
+    let event = document.createEvent('Event');
+    event.initEvent('submit', true, true);
+    this.get('element').dispatchEvent(event);
   },
 
   actions: {

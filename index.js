@@ -67,8 +67,6 @@ module.exports = {
         app.import(path.join(cssPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
       }
     }
-
-    app.import('vendor/transition.js');
   },
 
   validateDependencies() {

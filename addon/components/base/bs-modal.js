@@ -2,6 +2,7 @@ import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-modal';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+import transitionEnd from 'ember-bootstrap/utils/transition-end';
 
 const {
   computed,
@@ -18,14 +19,14 @@ const {
 
  ```hbs
  {{#bs-modal onSubmit=(action "submit") as |modal|}}
-   {{#modal.header}}
-     <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Alert</h4>
-   {{/modal.header}}
-   {{#modal.body}}Are you absolutely sure you want to do that???{{/modal.body}}
-   {{#modal.footer as |footer|}}
-     {{#bs-button onClick=(action modal.close) type="danger"}}Oh no, forget it!{{/bs-button}}
-     {{#bs-button onClick=(action modal.submit) type="success"}}Yeah!{{/bs-button}}
-   {{/modal.footer}}
+ {{#modal.header}}
+ <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Alert</h4>
+ {{/modal.header}}
+ {{#modal.body}}Are you absolutely sure you want to do that???{{/modal.body}}
+ {{#modal.footer as |footer|}}
+ {{#bs-button onClick=(action modal.close) type="danger"}}Oh no, forget it!{{/bs-button}}
+ {{#bs-button onClick=(action modal.submit) type="success"}}Yeah!{{/bs-button}}
+ {{/modal.footer}}
  {{/bs-modal}}
  ```
 
@@ -146,7 +147,7 @@ export default Ember.Component.extend(TransitionSupport, {
   }),
 
   /**
-   * The jQuery object of the `.modal` element.
+   * The DOM element of the `.modal` element.
    *
    * @property modalElement
    * @type object
@@ -154,7 +155,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   modalElement: computed('modalId', function() {
-    return Ember.$(`#${this.get('modalId')}`);
+    return document.getElementById(this.get('modalId'));
   }).volatile(),
 
   /**
@@ -170,7 +171,7 @@ export default Ember.Component.extend(TransitionSupport, {
   }),
 
   /**
-   * The jQuery object of the backdrop element.
+   * The DOM elemnt of the backdrop element.
    *
    * @property backdropElement
    * @type object
@@ -178,7 +179,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   backdropElement: computed('backdropId', function() {
-    return Ember.$(`#${this.get('backdropId')}`);
+    return document.getElementById(this.get('backdropId'));
   }).volatile(),
 
   /**
@@ -218,7 +219,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   _renderInPlace: computed('renderInPlace', 'isFastBoot', function() {
-    return this.get('renderInPlace') || !this.get('isFastBoot') && Ember.$('#ember-bootstrap-wormhole').length === 0;
+    return this.get('renderInPlace') || !this.get('isFastBoot') && !document.getElementById('ember-bootstrap-wormhole');
   }),
 
   /**
@@ -275,7 +276,8 @@ export default Ember.Component.extend(TransitionSupport, {
    * @type function
    * @public
    */
-  onSubmit() {},
+  onSubmit() {
+  },
 
   /**
    * The action to be sent when the modal is closing.
@@ -290,7 +292,8 @@ export default Ember.Component.extend(TransitionSupport, {
    * @type function
    * @public
    */
-  onHide() {},
+  onHide() {
+  },
 
   /**
    * The action to be sent after the modal has been completely hidden (including the CSS transition).
@@ -300,7 +303,8 @@ export default Ember.Component.extend(TransitionSupport, {
    * @default null
    * @public
    */
-  onHidden() {},
+  onHidden() {
+  },
 
   /**
    * The action to be sent when the modal is opening.
@@ -313,7 +317,8 @@ export default Ember.Component.extend(TransitionSupport, {
    * @default null
    * @public
    */
-  onShow() {},
+  onShow() {
+  },
 
   /**
    * The action to be sent after the modal has been completely shown (including the CSS transition).
@@ -322,7 +327,8 @@ export default Ember.Component.extend(TransitionSupport, {
    * @type function
    * @public
    */
-  onShown() {},
+  onShown() {
+  },
 
   actions: {
     close() {
@@ -331,10 +337,12 @@ export default Ember.Component.extend(TransitionSupport, {
       }
     },
     submit() {
-      let form = this.get('modalElement').find('.modal-body form');
-      if (form.length > 0) {
+      let form = this.get('modalElement').querySelector('.modal-body form');
+      if (form) {
         // trigger submit event on body form
-        form.trigger('submit');
+        let event = document.createEvent('Events');
+        event.initEvent('submit', true, true);
+        form.dispatchEvent(event);
       } else {
         // if we have no form, we send a submit action
         this.get('onSubmit')();
@@ -349,11 +357,12 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   takeFocus() {
-    let focusElement = this.get('modalElement').find('[autofocus]').first();
-    if (focusElement.length === 0) {
-      focusElement = this.get('modalElement');
+    let modalEl = this.get('modalElement');
+    let focusElement = modalEl && modalEl.querySelector('[autofocus]');
+    if (!focusElement) {
+      focusElement = modalEl;
     }
-    if (focusElement.length > 0) {
+    if (focusElement) {
       focusElement.focus();
     }
   },
@@ -373,7 +382,7 @@ export default Ember.Component.extend(TransitionSupport, {
     this.checkScrollbar();
     this.setScrollbar();
 
-    Ember.$('body').addClass('modal-open');
+    document.body.classList.add('modal-open');
 
     this.resize();
 
@@ -382,21 +391,19 @@ export default Ember.Component.extend(TransitionSupport, {
         return;
       }
 
-      this.get('modalElement')
-        .show()
-        .scrollTop(0);
+      let modalEl = this.get('modalElement');
+      modalEl.style.display = 'block';
+      modalEl.scrollTop = 0;
 
       this.handleUpdate();
       this.set('showModal', true);
       this.get('onShow')();
 
       if (this.get('usesTransition')) {
-        this.get('modalElement')
-          .one('bsTransitionEnd', Ember.run.bind(this, function() {
-            this.takeFocus();
-            this.get('onShown')();
-          }))
-          .emulateTransitionEnd(this.get('transitionDuration'));
+        transitionEnd(this.get('modalElement'), function() {
+          this.takeFocus();
+          this.get('onShown')();
+        }, this, this.get('transitionDuration'));
       } else {
         this.takeFocus();
         this.get('onShown')();
@@ -421,9 +428,7 @@ export default Ember.Component.extend(TransitionSupport, {
     this.set('showModal', false);
 
     if (this.get('usesTransition')) {
-      this.get('modalElement')
-        .one('bsTransitionEnd', Ember.run.bind(this, this.hideModal))
-        .emulateTransitionEnd(this.get('transitionDuration'));
+      transitionEnd(this.get('modalElement'), this.hideModal, this, this.get('transitionDuration'));
     } else {
       this.hideModal();
     }
@@ -440,9 +445,9 @@ export default Ember.Component.extend(TransitionSupport, {
       return;
     }
 
-    this.get('modalElement').hide();
+    this.get('modalElement').style.display = 'none';
     this.handleBackdrop(() => {
-      Ember.$('body').removeClass('modal-open');
+      document.body.classList.remove('modal-open');
       this.resetAdjustments();
       this.resetScrollbar();
       this.get('onHidden')();
@@ -468,18 +473,16 @@ export default Ember.Component.extend(TransitionSupport, {
 
       if (doAnimate) {
         Ember.run.schedule('afterRender', this, function() {
-          let $backdrop = this.get('backdropElement');
-          Ember.assert('Backdrop element should be in DOM', $backdrop && $backdrop.length > 0);
-          $backdrop
-            .one('bsTransitionEnd', Ember.run.bind(this, callback))
-            .emulateTransitionEnd(this.get('backdropTransitionDuration'));
+          let backdrop = this.get('backdropElement');
+          Ember.assert('Backdrop element should be in DOM', backdrop);
+          transitionEnd(backdrop, callback, this, this.get('backdropTransitionDuration'));
         });
       } else {
         callback.call(this);
       }
     } else if (!this.get('isOpen') && this.get('backdrop')) {
-      let $backdrop = this.get('backdropElement');
-      Ember.assert('Backdrop element should be in DOM', $backdrop && $backdrop.length > 0);
+      let backdrop = this.get('backdropElement');
+      Ember.assert('Backdrop element should be in DOM', backdrop);
 
       let callbackRemove = function() {
         this.set('showBackdrop', false);
@@ -488,9 +491,7 @@ export default Ember.Component.extend(TransitionSupport, {
         }
       };
       if (doAnimate) {
-        $backdrop
-          .one('bsTransitionEnd', Ember.run.bind(this, callbackRemove))
-          .emulateTransitionEnd(this.get('backdropTransitionDuration'));
+        transitionEnd(backdrop, callbackRemove, this, this.get('backdropTransitionDuration'));
       } else {
         callbackRemove.call(this);
       }
@@ -507,9 +508,10 @@ export default Ember.Component.extend(TransitionSupport, {
    */
   resize() {
     if (this.get('isOpen')) {
-      Ember.$(window).on('resize.bs.modal', Ember.run.bind(this, this.handleUpdate));
+      this._handleUpdate = Ember.run.bind(this, this.handleUpdate);
+      window.addEventListener('resize', this._handleUpdate, false);
     } else {
-      Ember.$(window).off('resize.bs.modal');
+      window.removeEventListener('resize', this._handleUpdate, false);
     }
   },
 
@@ -526,11 +528,10 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   adjustDialog() {
-    let modalIsOverflowing = this.get('modalElement')[0].scrollHeight > document.documentElement.clientHeight;
-    this.get('modalElement').css({
-      paddingLeft: !this.bodyIsOverflowing && modalIsOverflowing ? this.get('scrollbarWidth') : '',
-      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.get('scrollbarWidth') : ''
-    });
+    let modalIsOverflowing = this.get('modalElement').scrollHeight > document.documentElement.clientHeight;
+    let el = this.get('modalElement');
+    el.style.paddingLeft = !this.bodyIsOverflowing && modalIsOverflowing ? `${this.get('scrollbarWidth')}px` : null;
+    el.style.paddingRight = this.bodyIsOverflowing && !modalIsOverflowing ? `${this.get('scrollbarWidth')}px` : null;
   },
 
   /**
@@ -538,10 +539,9 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   resetAdjustments() {
-    this.get('modalElement').css({
-      paddingLeft: '',
-      paddingRight: ''
-    });
+    let el = this.get('modalElement');
+    el.style.paddingLeft = null;
+    el.style.paddingRight = null;
   },
 
   /**
@@ -563,10 +563,10 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   setScrollbar() {
-    let bodyPad = parseInt((Ember.$('body').css('padding-right') || 0), 10);
-    this.originalBodyPad = document.body.style.paddingRight || '';
+    let bodyPad = parseInt((document.body.style.paddingRight || 0), 10);
+    this._originalBodyPad = document.body.style.paddingRight || '';
     if (this.bodyIsOverflowing) {
-      Ember.$('body').css('padding-right', bodyPad + this.get('scrollbarWidth'));
+      document.body.style.paddingRight = bodyPad + this.get('scrollbarWidth');
     }
   },
 
@@ -575,7 +575,7 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   resetScrollbar() {
-    Ember.$('body').css('padding-right', this.originalBodyPad);
+    document.body.style.paddingRight = this._originalBodyPad;
   },
 
   /**
@@ -587,9 +587,9 @@ export default Ember.Component.extend(TransitionSupport, {
   scrollbarWidth: computed(function() {
     let scrollDiv = document.createElement('div');
     scrollDiv.className = 'modal-scrollbar-measure';
-    this.get('modalElement').after(scrollDiv);
+    this.get('modalElement').insertAdjacentElement('afterend', scrollDiv);
     let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-    Ember.$(scrollDiv).remove();
+    scrollDiv.parentNode.removeChild(scrollDiv);
     return scrollbarWidth;
   }),
 
@@ -602,8 +602,8 @@ export default Ember.Component.extend(TransitionSupport, {
 
   willDestroyElement() {
     this._super(...arguments);
-    Ember.$(window).off('resize.bs.modal');
-    Ember.$('body').removeClass('modal-open');
+    window.removeEventListener('resize', this._handleUpdate, false);
+    document.body.classList.remove('modal-open');
     this.resetScrollbar();
   },
 
