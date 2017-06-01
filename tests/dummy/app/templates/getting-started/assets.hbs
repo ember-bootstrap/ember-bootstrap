@@ -1,4 +1,16 @@
 {{! template-lint-disable block-indentation }}
+<h1 id="included-assets">Included Assets</h1>
+
+<p>ember-bootstrap uses the Bootstrap CSS classes while replacing the behaviors from the components Bootstrap implements
+    in <code>bootstrap.js</code>, such as toggle, navbar, modal, etc., with equivalent, CSS class-compatible
+    native Ember components.</p>
+
+<p>If you are not using a preprocessor, ember-bootstrap will import the static CSS files. If you are using a preprocessor
+    like LESS or SASS, ember-bootstrap imports the preprocessor-ready versions of the styles.</p>
+
+<p>ember-bootstrap specifically excludes `bootstrap.js`. The jQuery and Ember ways of control flow and animation sometimes
+    don't play well together, causing unpredictable results. This is the main motivation behind ember-bootstrap.</p>
+
 <h1 id="addon-options">Importing assets</h1>
 
 <h2 id="configuration-with-blueprint">Configuration using the default blueprint</h2>
