@@ -8,8 +8,10 @@
 <p>If you are not using a preprocessor, ember-bootstrap will import the static CSS files. If you are using a preprocessor
     like LESS or SASS, ember-bootstrap imports the preprocessor-ready versions of the styles.</p>
 
-<p>ember-bootstrap specifically excludes `bootstrap.js`. The jQuery and Ember ways of control flow and animation sometimes
-    don't play well together, causing unpredictable results. This is the main motivation behind ember-bootstrap.</p>
+<p>ember-bootstrap deliberately excludes `bootstrap.js` because the jQuery and Ember ways of control flow and animation
+    sometimes don't play well together, causing unpredictable results. This is the main motivation behind ember-bootstrap.
+    It is possible to import `bootstrap.js` from bower_components or the vendor folder. This is NOT recommended or
+    supported, and you will be on your own. You have been warned!!!</p>
 
 <h1 id="addon-options">Importing assets</h1>
 
