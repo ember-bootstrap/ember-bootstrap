@@ -1,26 +1,28 @@
 {{#component layoutComponent
-  hasLabel=hasLabel
-  formElementId=formElementId
-  horizontalLabelGridClass=horizontalLabelGridClass
-  errorsComponent=(component errorsComponent
-    messages=validationMessages
-    show=showValidationMessages
-  )
-  feedbackIconComponent=(component feedbackIconComponent
-    iconName=iconName
-    show=hasFeedback
-  )
-  labelComponent=(component labelComponent
-    label=label
-    invisibleLabel=invisibleLabel
-    formElementId=formElementId
-  )
-  helpTextComponent=(if hasHelpText
-    (component helpTextComponent
-      text=helpText
-      id=ariaDescribedBy
-    )
-  )
+             hasLabel=hasLabel
+             formElementId=formElementId
+             horizontalLabelGridClass=horizontalLabelGridClass
+             errorsComponent=(component errorsComponent
+               messages=validationMessages
+               show=showValidationMessages
+             )
+             feedbackIconComponent=(component feedbackIconComponent
+               iconName=iconName
+               show=hasFeedback
+             )
+             labelComponent=(component labelComponent
+               label=label
+               invisibleLabel=invisibleLabel
+               formElementId=formElementId
+               controlType=controlType
+               formLayout=formLayout
+             )
+             helpTextComponent=(if hasHelpText
+               (component helpTextComponent
+                 text=helpText
+                 id=ariaDescribedBy
+               )
+             )
 }}
   {{#with
     (component controlComponent
@@ -58,7 +60,7 @@
       ariaDescribedBy=(if hasHelpText ariaDescribedBy)
       onChange=(action "change")
       validationType=_validationType
-  ) as |control|}}
+    ) as |control|}}
     {{#if hasBlock}}
       {{yield
         (hash

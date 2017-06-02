@@ -330,7 +330,7 @@ const nonDefaultLayouts = A([
  */
 export default FormGroup.extend({
   layout,
-  classNameBindings: ['disabled:is-disabled', 'required:is-required', 'isValidating'],
+  classNameBindings: ['disabled:disabled', 'required:is-required', 'isValidating'],
 
   /**
    * Text to display within a `<label>` tag.

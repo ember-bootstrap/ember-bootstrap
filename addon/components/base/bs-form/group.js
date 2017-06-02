@@ -30,7 +30,6 @@ const { computed } = Ember;
 export default Ember.Component.extend(SizeClass, {
   layout,
 
-  classNames: ['form-group'],
   classNameBindings: ['validationClass'],
 
   /**
