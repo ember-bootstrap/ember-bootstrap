@@ -1,6 +1,6 @@
 import { click, find, findAll, fillIn, triggerEvent, focus, blur } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
-import { formFeedbackClass, test, testBS3, validationErrorClass, formHelpTextClass } from '../../../helpers/bootstrap-test';
+import { formFeedbackClass, test, testBS3, validationErrorClass, validationWarningClass, formHelpTextClass } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -517,6 +517,65 @@ test('shows custom error immediately', function(assert) {
   assert.notOk(
     find('.form-group').classList.contains(validationErrorClass()),
     'form group isn\'t shown as having errors if there aren\'t any'
+  );
+});
+
+test('shows custom warning immediately', function(assert) {
+  this.set('model', Ember.Object.create({ name: null }));
+  this.set('warning', 'some warning');
+  this.render(hbs`
+      {{bs-form/element property='name' hasValidator=true customWarning=warning model=model}}
+  `);
+  assert.ok(
+    find('.form-group').classList.contains(validationWarningClass()),
+    'custom warning is shown immediately'
+  );
+  assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'some warning');
+  Ember.run(() => {
+    this.set('warning', null);
+  });
+  assert.notOk(
+    find('.form-group').classList.contains(validationWarningClass()),
+    'form group isn\'t shown as having warning if there aren\'t any'
+  );
+});
+
+test('shows validation errors in preference to custom warning', async function(assert) {
+  this.set('errors', Ember.A(['Invalid']));
+  this.set('warning', 'some warning');
+  this.set('model', Ember.Object.create({ name: null }));
+  this.render(hbs`
+      {{bs-form/element property='name' hasValidator=true errors=errors customWarning=warning model=model}}
+  `);
+  assert.notOk(
+    find('.form-group').classList.contains(validationErrorClass()),
+    'validation errors aren\'t shown before user interaction'
+  );
+  assert.ok(
+    find('.form-group').classList.contains(validationWarningClass()),
+    'custom warning is shown immediately'
+  );
+  await focus('input');
+  await blur('input');
+  assert.ok(
+    find('.form-group').classList.contains(validationErrorClass()),
+    'validation errors are shown after user interaction when errors are present'
+  );
+  assert.notOk(
+    find('.form-group').classList.contains(validationWarningClass()),
+    'custom warning is removed when errors are shown'
+  );
+  assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Invalid');
+  Ember.run(() => {
+    this.set('errors', Ember.A());
+  });
+  assert.notOk(
+    find('.form-group').classList.contains(validationErrorClass()),
+    'form group isn\'t shown as having errors if there aren\'t any'
+  );
+  assert.ok(
+    find('.form-group').classList.contains(validationWarningClass()),
+    'custom warning is shown when errors are removed'
   );
 });
 

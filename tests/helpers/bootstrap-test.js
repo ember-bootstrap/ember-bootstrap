@@ -47,6 +47,10 @@ export function validationErrorClass() {
   return versionDependent('has-error', 'has-danger');
 }
 
+export function validationWarningClass() {
+  return 'has-warning';
+}
+
 export function placementClassFor(type, placement) {
   return versionDependent(placement, `${type}-${placement}`);
 }

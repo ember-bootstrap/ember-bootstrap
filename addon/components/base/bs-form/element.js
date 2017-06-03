@@ -104,9 +104,9 @@ const nonDefaultLayouts = A([
  * the `successIcon` feedback icon is displayed if `controlType` is a text field
  * the validation messages are removed
 
- In case you want to display some error message that is independent of the model's validation, for example to display
- a failure message on a login form after a failed authentication attempt (so not coming from the validation library),
- you can use the `customError` property to do so.
+ In case you want to display some error or warning message that is independent of the model's validation, for
+ example to display a failure message on a login form after a failed authentication attempt (so not coming from
+ the validation library), you can use the `customError` or `customWarning` properties to do so.
 
  ### Custom controls
 
@@ -488,18 +488,40 @@ export default FormGroup.extend({
   hasCustomError: computed.notEmpty('customError'),
 
   /**
+   * Show a custom warning message that does not come from the model's validation. Will be immediately shown, regardless
+   * of any user interaction (i.e. no `focusOut` event required). If the model's validation has an error then the error
+   * will be shown in place of this warning.
+   *
+   * @property customWarning
+   * @type string
+   * @public
+   */
+  customWarning: null,
+
+  /**
+   * @property hasCustomWarning
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasCustomWarning: computed.notEmpty('customWarning'),
+
+  /**
    * The array of validation messages (either errors or warnings) from the `model`'s validation.
    *
    * @property validationMessages
    * @type array
    * @private
    */
-  validationMessages: computed('hasCustomError', 'customError', 'hasErrors', 'hasWarnings', 'errors.[]', 'warnings.[]', function() {
+  validationMessages: computed('hasCustomError', 'customError', 'hasErrors', 'hasCustomWarning', 'customWarning', 'hasWarnings', 'errors.[]', 'warnings.[]', function() {
     if (this.get('hasCustomError')) {
       return A([this.get('customError')]);
     }
     if (this.get('hasErrors')) {
       return A(this.get('errors'));
+    }
+    if (this.get('hasCustomWarning')) {
+      return A([this.get('customWarning')]);
     }
     if (this.get('hasWarnings')) {
       return A(this.get('warnings'));
@@ -541,7 +563,7 @@ export default FormGroup.extend({
    * @default false
    * @private
    */
-  showValidation: computed.or('showOwnValidation', 'showAllValidations', 'hasCustomError'),
+  showValidation: computed.or('showOwnValidation', 'showAllValidations', 'hasCustomError', 'hasCustomWarning'),
 
   /**
    * @property showOwnValidation
@@ -617,11 +639,16 @@ export default FormGroup.extend({
    * @type string
    * @private
    */
-  validation: computed('hasCustomError', 'hasErrors', 'hasWarnings', 'hasValidator', 'showValidation', 'isValidating', 'disabled', function() {
+  validation: computed('hasCustomError', 'hasErrors', 'hasCustomWarning', 'hasWarnings', 'hasValidator', 'showValidation', 'isValidating', 'disabled', function() {
     if (!this.get('showValidation') || !this.get('hasValidator') || this.get('isValidating') || this.get('disabled')) {
       return null;
+    } else if (this.get('showOwnValidation') || this.get('showAllValidations')) {
+      // The display of validation messages has been enabled
+      return this.get('hasErrors') || this.get('hasCustomError') ? 'error' : (this.get('hasWarnings') || this.get('hasCustomWarning') ? 'warning' : 'success');
+    } else {
+      // If there are custom errors or warnings these should always be shown
+      return this.get('hasCustomError') ? 'error' : (this.get('hasWarnings') || this.get('hasCustomWarning') ? 'warning' : null);
     }
-    return this.get('hasErrors') || this.get('hasCustomError') ? 'error' : (this.get('hasWarnings') ? 'warning' : 'success');
   }),
 
   /**
