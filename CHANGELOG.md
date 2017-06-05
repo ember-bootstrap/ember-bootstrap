@@ -1,3 +1,25 @@
+<a name="1.0.0-beta.1"></a>
+# [1.0.0-beta.1](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.12...v1.0.0-beta.1) (2017-06-05)
+
+
+### Bug Fixes
+
+* **AccordionItem:** preventDefault click on title link. Thanks to [@dajk](https://github.com/dajk) ([78bb9e9](https://github.com/kaliber5/ember-bootstrap/commit/78bb9e9)), closes [#311](https://github.com/kaliber5/ember-bootstrap/issues/311)
+* **Modal:** Fixed `onClick` dummy action. Thanks to [@dajk](https://github.com/dajk) ([76dadf2](https://github.com/kaliber5/ember-bootstrap/commit/76dadf2))
+* **Setup:** Soften the build-time errors to warnings for non-standard configurations ([fec690e](https://github.com/kaliber5/ember-bootstrap/commit/fec690e)), closes [#322](https://github.com/kaliber5/ember-bootstrap/issues/322)
+
+
+### Features
+
+* **jQuery:** Removed jQuery-dependency ([ac489e8](https://github.com/kaliber5/ember-bootstrap/commit/ac489e8)), closes [#300](https://github.com/kaliber5/ember-bootstrap/issues/300)
+
+
+### BREAKING CHANGES
+
+* **jQuery:** The `triggerElement` and `viewportSelector` properties of tooltips and popovers now expect a valid CSS Selector. If you used any jQuery specific non-standard selector features like `:eq()` for example, this needs to be refactored!
+
+
+
 <a name="1.0.0-alpha.12"></a>
 # [1.0.0-alpha.12](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.11...v1.0.0-alpha.12) (2017-04-26)
 
