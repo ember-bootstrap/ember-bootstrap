@@ -23,15 +23,15 @@ In your application's directory:
 This will install Bootstrap 3 and will use the currently installed preprocessor or none if one is not installed.
 To switch Bootstrap version or preprocessor, see the documentation.
 
-### 1.0 alpha
-    
-The 1.0 release is currently in alpha stage. While the API is not guaranteed to remain unchanged until the first stable release, 
-breaking changes are unlikely. So I encourage everybody to use the alpha version for new projects, and also to upgrade existing projects.
-    
-The 1.0 release will consist of a number of breaking changes compared to the previous 0.x releases, so be sure to check the 
-[CHANGELOG](CHANGELOG.md) for details. After the first stable 1.0 release the API should remain stable according to SemVer.    
+ember-bootstrap requires at least Ember 2.3!
 
-Beginning from version 1.0 ember-bootstrap will require at least Ember 2.3! Please file any issues you may encounter!
+### 1.0 beta
+
+The 1.0 release is currently in beta stage. There *should* not be any breaking changes anymore. So I encourage everybody
+to use the beta version for new projects, and also to upgrade existing projects.
+
+The 1.0 alpha series consisted of a number of breaking changes compared to the previous 0.x releases, so be sure to check the 
+[CHANGELOG](CHANGELOG.md) for details. After the first stable 1.0 release the API should remain stable according to SemVer.    
 
 ## Updates
 
