@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.12.fec690ee</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -64,11 +64,9 @@ const {
   isBlank,
   observer,
   on,
-
   run: {
     scheduleOnce
   },
-
   assert,
   typeOf,
   A,
@@ -871,36 +869,34 @@ export default FormGroup.extend({
    */
   adjustFeedbackIcons: on(&#x27;didInsertElement&#x27;, observer(&#x27;hasFeedback&#x27;, &#x27;formLayout&#x27;, function() {
     scheduleOnce(&#x27;afterRender&#x27;, () =&gt; {
+      let el = this.get(&#x27;element&#x27;);
+      let feedbackIcon;
       // validation state icons are only shown if form element has feedback
-      if (this.get(&#x27;hasFeedback&#x27;) &amp;&amp; !this.get(&#x27;isDestroying&#x27;)) {
-        // form group element has
-        this.$()
+      if (this.get(&#x27;hasFeedback&#x27;)
+        &amp;&amp; !this.get(&#x27;isDestroying&#x27;)
+        // and form group element has
         // an input-group
-          .has(&#x27;.input-group&#x27;)
-          // an addon or button on right si de
-          .has(&#x27;.input-group input + .input-group-addon, .input-group input + .input-group-btn&#x27;)
-          // an icon showing validation state
-          .has(&#x27;.form-control-feedback&#x27;)
-          .each((i, formGroups) =&gt; {
-            // clear existing adjustment
-            this.$(&#x27;.form-control-feedback&#x27;).css(&#x27;right&#x27;, &#x27;&#x27;);
-            let feedbackIcon = this.$(&#x27;.form-control-feedback&#x27;, formGroups);
-            let defaultPositionString = feedbackIcon.css(&#x27;right&#x27;);
-            assert(
-              defaultPositionString.substr(-2) === &#x27;px&#x27;,
-              &#x27;.form-control-feedback css right units other than px are not supported&#x27;
-            );
-            let defaultPosition = parseInt(
-              defaultPositionString.substr(0, defaultPositionString.length - 2)
-            );
-            // Bootstrap documentation:
-            //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
-            // therefore we could rely on having only one input-group-addon or input-group-btn
-            let inputGroupWidth = this.$(&#x27;input + .input-group-addon, input + .input-group-btn&#x27;, formGroups).outerWidth();
-            let adjustedPosition = defaultPosition + inputGroupWidth;
+        &amp;&amp; el.querySelector(&#x27;.input-group&#x27;)
+        // an addon or button on right side
+        &amp;&amp; el.querySelector(&#x27;.input-group input + .input-group-addon, .input-group input + .input-group-btn&#x27;)
+        // an icon showing validation state
+        &amp;&amp; (feedbackIcon = el.querySelector(&#x27;.form-control-feedback&#x27;))
+      ) {
+        // clear existing adjustment
+        feedbackIcon.style.right = &#x27;&#x27;;
 
-            feedbackIcon.css(&#x27;right&#x27;, adjustedPosition);
-          });
+        let defaultPosition = 0;
+        let match = getComputedStyle(feedbackIcon).right.match(/^(\d+)px$/);
+        if (match) {
+          defaultPosition = parseInt(match[1]);
+        }
+        // Bootstrap documentation:
+        //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
+        // therefore we could rely on having only one input-group-addon or input-group-btn
+        let inputGroupWidth = el.querySelector(&#x27;input + .input-group-addon, input + .input-group-btn&#x27;).offsetWidth;
+        let adjustedPosition = defaultPosition + inputGroupWidth;
+
+        feedbackIcon.style.right = &#x60;${adjustedPosition}px&#x60;;
       }
     });
   })),

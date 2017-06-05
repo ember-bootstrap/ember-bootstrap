@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.12.fec690ee</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -79,7 +79,7 @@ const {
  that element. By default the trigger element is the parent DOM element of the component, and the trigger event will be
  &quot;click&quot;.
 
- The &#x60;triggerElement&#x60; property accepts any jQuery selector to attach the popover to any other existing DOM element.
+ The &#x60;triggerElement&#x60; property accepts any CSS selector to attach the popover to any other existing DOM element.
  With the special value &quot;parentView&quot; you can attach the popover to the DOM element of the parent component:
 
  &#x60;&#x60;&#x60;hbs
@@ -141,7 +141,7 @@ export default ContextualHelp.extend({
   triggerEvents: &#x27;click&#x27;,
 
   /**
-   * The jQuery object of the arrow element.
+   * The DOm element of the arrow element.
    *
    * @property arrowElement
    * @type object
@@ -149,7 +149,7 @@ export default ContextualHelp.extend({
    * @private
    */
   arrowElement: computed(&#x27;overlayElement&#x27;, function() {
-    return this.get(&#x27;overlayElement&#x27;).find(&#x27;.arrow&#x27;);
+    return this.get(&#x27;overlayElement&#x27;).querySelector(&#x27;.arrow&#x27;);
   })
 });
 

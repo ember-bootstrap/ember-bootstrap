@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.12.fec690ee</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -58,7 +58,6 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
 
 const {
   computed,
-  $,
   run: { bind }
 } = Ember;
 
@@ -172,15 +171,6 @@ export default Ember.Component.extend({
   closeOnMenuClick: true,
 
   /**
-   * jQuery click event name, namespaced to this component&#x27;s instance to prevent interference between multiple dropdowns.
-   *
-   * @property clickEventName
-   * @type string
-   * @private
-   */
-  clickEventName: undefined,
-
-  /**
    * By default the dropdown menu will expand downwards. Set to &#x27;up&#x27; to expand upwards.
    *
    * @property direction
@@ -215,6 +205,20 @@ export default Ember.Component.extend({
       return this.get(&#x27;direction&#x27;) === &#x27;up&#x27; ? &#x27;dropup&#x27; : &#x27;dropdown&#x27;;
     }
   }),
+
+  /**
+   * @property menuElement
+   * @private
+   */
+  menuElement: computed(function() {
+    return this.get(&#x27;element&#x27;).querySelector(&#x27;.dropdown-menu&#x27;);
+  }).volatile(),
+
+  /**
+   * @property toggleElement
+   * @private
+   */
+  toggleElement: computed.readOnly(&#x27;toggle.element&#x27;),
 
   /**
    * Reference to the child toggle (Toggle or Button)
@@ -253,27 +257,34 @@ export default Ember.Component.extend({
 
     openDropdown() {
       this.set(&#x27;isOpen&#x27;, true);
-      $(document).on(this.clickEventName, bind(this, this.closeOnClickHandler));
+      this.addClickListener();
       this.get(&#x27;onShow&#x27;)();
     },
 
     closeDropdown() {
       this.set(&#x27;isOpen&#x27;, false);
-      $(document).off(this.clickEventName);
+      this.removeClickListener();
       this.get(&#x27;onHide&#x27;)();
+    }
+  },
+
+  addClickListener() {
+    if (!this.clickListener) {
+      this.clickListener = bind(this, this.closeOnClickHandler);
+      document.addEventListener(&#x27;click&#x27;, this.clickListener);
+    }
+  },
+
+  removeClickListener() {
+    if (this.clickListener)  {
+      document.removeEventListener(&#x27;click&#x27;, this.clickListener);
+      this.clickListener = null;
     }
   },
 
   willDestroyElement() {
     this._super(...arguments);
-    $(document).off(this.clickEventName);
-  },
-
-  init() {
-    this._super(...arguments);
-    // click event name that is namespaced to our component instance, so multiple dropdowns do not interfere
-    // with each other
-    this.clickEventName = &#x60;click.${this.get(&#x27;elementId&#x27;)}&#x60;;
+    this.removeClickListener();
   },
 
   /**
@@ -284,10 +295,12 @@ export default Ember.Component.extend({
    * @protected
    */
   closeOnClickHandler(e) {
-    let $target = $(e.target);
+    let { target } = e;
+    let { toggleElement, menuElement } = this.getProperties(&#x27;toggleElement&#x27;, &#x27;menuElement&#x27;);
+
     if (!this.get(&#x27;isDestroyed&#x27;)
-      &amp;&amp; $target.closest(this.$().find(&#x27;.dropdown-toggle&#x27;)).length === 0
-      &amp;&amp; ($target.closest(this.$().find(&#x27;.dropdown-menu&#x27;)).length === 0 || this.get(&#x27;closeOnMenuClick&#x27;))) {
+      &amp;&amp; (toggleElement &amp;&amp; !toggleElement.contains(target))
+      &amp;&amp; ((menuElement &amp;&amp; !menuElement.contains(target)) || this.get(&#x27;closeOnMenuClick&#x27;))) {
       this.send(&#x27;closeDropdown&#x27;);
     }
   }

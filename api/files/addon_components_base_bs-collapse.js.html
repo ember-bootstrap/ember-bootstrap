@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.12.fec690ee</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -54,17 +54,18 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 
 const {
   computed,
+  isEmpty,
+  isPresent,
   observer,
-
   run: {
-    bind,
     next
   },
-
   String: {
+    camelize,
     htmlSafe
   }
 } = Ember;
@@ -173,10 +174,20 @@ export default Ember.Component.extend({
    */
   collapseDimension: &#x27;height&#x27;,
 
+  /**
+   * The duration of the fade transition
+   *
+   * @property transitionDuration
+   * @type number
+   * @default 350
+   * @public
+   */
+  transitionDuration: 350,
+
   style: computed(&#x27;collapseSize&#x27;, function() {
     let size = this.get(&#x27;collapseSize&#x27;);
     let dimension = this.get(&#x27;collapseDimension&#x27;);
-    if (Ember.isEmpty(size)) {
+    if (isEmpty(size)) {
       return htmlSafe(&#x27;&#x27;);
     }
     return htmlSafe(&#x60;${dimension}: ${size}px&#x60;);
@@ -189,7 +200,8 @@ export default Ember.Component.extend({
    * @type function
    * @public
    */
-  onHide() {},
+  onHide() {
+  },
 
   /**
    * The action to be sent after the element has been completely hidden (including the CSS transition).
@@ -199,7 +211,8 @@ export default Ember.Component.extend({
    * @default null
    * @public
    */
-  onHidden() {},
+  onHidden() {
+  },
 
   /**
    * The action to be sent when the element is about to be shown.
@@ -209,7 +222,8 @@ export default Ember.Component.extend({
    * @default null
    * @public
    */
-  onShow() {},
+  onShow() {
+  },
 
   /**
    * The action to be sent after the element has been completely shown (including the CSS transition).
@@ -218,7 +232,8 @@ export default Ember.Component.extend({
    * @type function
    * @public
    */
-  onShown() {},
+  onShown() {
+  },
 
   /**
    * Triggers the show transition
@@ -246,15 +261,7 @@ export default Ember.Component.extend({
       active: true
     });
 
-    if (!Ember.$.support.transition) {
-      return complete.call(this);
-    }
-
-    this.$()
-      .one(&#x27;bsTransitionEnd&#x27;, bind(this, complete))
-      // @todo: make duration configurable
-      .emulateTransitionEnd(350)
-    ;
+    transitionEnd(this.get(&#x27;element&#x27;), complete, this, this.get(&#x27;transitionDuration&#x27;));
 
     next(this, function() {
       if (!this.get(&#x27;isDestroyed&#x27;)) {
@@ -267,20 +274,20 @@ export default Ember.Component.extend({
    * Get the size of the element when expanded
    *
    * @method getExpandedSize
-   * @param $action
+   * @param action
    * @return {Number}
    * @private
    */
-  getExpandedSize($action) {
+  getExpandedSize(action) {
     let expandedSize = this.get(&#x27;expandedSize&#x27;);
-    if (Ember.isPresent(expandedSize)) {
+    if (isPresent(expandedSize)) {
       return expandedSize;
     }
 
-    let collapseElement = this.$();
-    let prefix = $action === &#x27;show&#x27; ? &#x27;scroll&#x27; : &#x27;offset&#x27;;
-    let measureProperty = Ember.String.camelize(&#x60;${prefix}-${this.get(&#x27;collapseDimension&#x27;)}&#x60;);
-    return collapseElement[0][measureProperty];
+    let collapseElement = this.get(&#x27;element&#x27;);
+    let prefix = action === &#x27;show&#x27; ? &#x27;scroll&#x27; : &#x27;offset&#x27;;
+    let measureProperty = camelize(&#x60;${prefix}-${this.get(&#x27;collapseDimension&#x27;)}&#x60;);
+    return collapseElement[measureProperty];
   },
 
   /**
@@ -310,15 +317,7 @@ export default Ember.Component.extend({
       active: false
     });
 
-    if (!Ember.$.support.transition) {
-      return complete.call(this);
-    }
-
-    this.$()
-      .one(&#x27;bsTransitionEnd&#x27;, bind(this, complete))
-      // @todo: make duration configurable
-      .emulateTransitionEnd(350)
-    ;
+    transitionEnd(this.get(&#x27;element&#x27;), complete, this, this.get(&#x27;transitionDuration&#x27;));
 
     next(this, function() {
       if (!this.get(&#x27;isDestroyed&#x27;)) {

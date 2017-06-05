@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.12.fec690ee</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -303,8 +303,14 @@ export default Ember.Component.extend({
   keyPress(e) {
     let code = e.keyCode || e.which;
     if (code === 13 &amp;&amp; this.get(&#x27;submitOnEnter&#x27;)) {
-      this.$().submit();
+      this.triggerSubmit();
     }
+  },
+
+  triggerSubmit() {
+    let event = document.createEvent(&#x27;Event&#x27;);
+    event.initEvent(&#x27;submit&#x27;, true, true);
+    this.get(&#x27;element&#x27;).dispatchEvent(event);
   },
 
   actions: {

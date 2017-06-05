@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-alpha.12.fec690ee</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,6 +57,7 @@ import Ember from &#x27;ember&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-tab/pane&#x27;;
 import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
 import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
+import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 
 const { computed, observer, run: { scheduleOnce } } = Ember;
 
@@ -165,16 +166,14 @@ export default Ember.Component.extend(ComponentChild, TransitionSupport, {
    */
   show() {
     if (this.get(&#x27;usesTransition&#x27;)) {
-      this.$()
-        .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, function() {
-          if (!this.get(&#x27;isDestroyed&#x27;)) {
-            this.setProperties({
-              active: true,
-              showContent: true
-            });
-          }
-        }))
-        .emulateTransitionEnd(this.get(&#x27;fadeDuration&#x27;));
+      transitionEnd(this.get(&#x27;element&#x27;), function() {
+        if (!this.get(&#x27;isDestroyed&#x27;)) {
+          this.setProperties({
+            active: true,
+            showContent: true
+          });
+        }
+      }, this, this.get(&#x27;fadeDuration&#x27;));
     } else {
       this.set(&#x27;active&#x27;, true);
     }
@@ -188,13 +187,11 @@ export default Ember.Component.extend(ComponentChild, TransitionSupport, {
    */
   hide() {
     if (this.get(&#x27;usesTransition&#x27;)) {
-      this.$()
-        .one(&#x27;bsTransitionEnd&#x27;, Ember.run.bind(this, function() {
-          if (!this.get(&#x27;isDestroyed&#x27;)) {
-            this.set(&#x27;active&#x27;, false);
-          }
-        }))
-        .emulateTransitionEnd(this.get(&#x27;fadeDuration&#x27;));
+      transitionEnd(this.get(&#x27;element&#x27;), function() {
+        if (!this.get(&#x27;isDestroyed&#x27;)) {
+          this.set(&#x27;active&#x27;, false);
+        }
+      }, this, this.get(&#x27;fadeDuration&#x27;));
       this.set(&#x27;showContent&#x27;, false);
     } else {
       this.set(&#x27;active&#x27;, false);
