@@ -11,30 +11,12 @@ testBS3('it renders inline usage', function(assert) {
   this.render(hbs`{{bs-navbar/toggle}}`);
 
   assert.equal(find('*').textContent.trim(), 'Toggle navigation');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#bs-navbar/toggle}}
-      template block text
-    {{/bs-navbar/toggle}}
-  `);
-
-  assert.equal(find('*').textContent.trim(), 'template block text');
 });
 
 testBS4('it renders inline usage', function(assert) {
   this.render(hbs`{{bs-navbar/toggle}}`);
 
   assert.ok(find('.navbar-toggler > span').classList.contains('navbar-toggler-icon'));
-
-  // Template block usage:
-  this.render(hbs`
-    {{#bs-navbar/toggle}}
-      template block text
-    {{/bs-navbar/toggle}}
-  `);
-
-  assert.equal(find('*').textContent.trim(), 'template block text');
 });
 
 test('it renders block usage', function(assert) {
