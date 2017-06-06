@@ -19,14 +19,14 @@ const {
 
  ```hbs
  {{#bs-modal onSubmit=(action "submit") as |modal|}}
- {{#modal.header}}
- <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Alert</h4>
- {{/modal.header}}
- {{#modal.body}}Are you absolutely sure you want to do that???{{/modal.body}}
- {{#modal.footer as |footer|}}
- {{#bs-button onClick=(action modal.close) type="danger"}}Oh no, forget it!{{/bs-button}}
- {{#bs-button onClick=(action modal.submit) type="success"}}Yeah!{{/bs-button}}
- {{/modal.footer}}
+   {{#modal.header}}
+     <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Alert</h4>
+   {{/modal.header}}
+   {{#modal.body}}Are you absolutely sure you want to do that???{{/modal.body}}
+   {{#modal.footer as |footer|}}
+     {{#bs-button onClick=(action modal.close) type="danger"}}Oh no, forget it!{{/bs-button}}
+     {{#bs-button onClick=(action modal.submit) type="success"}}Yeah!{{/bs-button}}
+   {{/modal.footer}}
  {{/bs-modal}}
  ```
 

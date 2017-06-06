@@ -22,10 +22,10 @@ const {
 
  ```hbs
  {{#bs-collapse collapsed=collapsed}}
- <div class="well">
- <h2>Collapse</h2>
- <p>This is collapsible content</p>
- </div>
+   <div class="well">
+     <h2>Collapse</h2>
+     <p>This is collapsible content</p>
+   </div>
  {{/bs-collapse}}
  ```
 
@@ -141,44 +141,34 @@ export default Ember.Component.extend({
   /**
    * The action to be sent when the element is about to be hidden.
    *
-   * @property onHide
-   * @type function
+   * @event onHide
    * @public
    */
-  onHide() {
-  },
+  onHide() {},
 
   /**
    * The action to be sent after the element has been completely hidden (including the CSS transition).
    *
-   * @property onHidden
-   * @type function
-   * @default null
+   * @event onHidden
    * @public
    */
-  onHidden() {
-  },
+  onHidden() {},
 
   /**
    * The action to be sent when the element is about to be shown.
    *
-   * @property onShow
-   * @type function
-   * @default null
+   * @event onShow
    * @public
    */
-  onShow() {
-  },
+  onShow() {},
 
   /**
    * The action to be sent after the element has been completely shown (including the CSS transition).
    *
-   * @property onShown
-   * @type function
+   * @event onShown
    * @public
    */
-  onShown() {
-  },
+  onShown() {},
 
   /**
    * Triggers the show transition

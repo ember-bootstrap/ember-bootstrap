@@ -125,8 +125,7 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
   /**
    * The action to be sent after the alert has been dismissed (including the CSS transition).
    *
-   * @property onDismissed
-   * @type function
+   * @event onDismissed
    * @public
    */
   onDismissed() {},
@@ -137,8 +136,7 @@ export default Ember.Component.extend(TypeClass, TransitionSupport, {
    * You can return false to prevent closing the alert automatically, and do that in your action by
    * setting `visible` to false.
    *
-   * @property onDismiss
-   * @type function
+   * @event onDismiss
    * @public
    */
   onDismiss() {},
