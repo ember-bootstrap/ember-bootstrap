@@ -1,6 +1,9 @@
 import Ember from 'ember';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import layout from 'ember-bootstrap/templates/components/bs-navbar';
+import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+
+const { observer } = Ember;
 
 /**
  Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
@@ -8,10 +11,6 @@ import layout from 'ember-bootstrap/templates/components/bs-navbar';
  ### Usage
 
  Uses the following components by a contextual reference:
-
- - [Components.NavbarContent](Components.NavbarContent.html)
- - [Components.NavbarToggle](Components.NavbarToggle.html)
- - [Components.NavbarNav](Components.NavbarNav.html)
 
  ```hbs
  {{#bs-navbar as |navbar|}}
@@ -31,6 +30,17 @@ import layout from 'ember-bootstrap/templates/components/bs-navbar';
    {{/navbar.content}}
  {{/bs-navbar}}
  ```
+
+ The component yields references to the following contextual components:
+
+ * [Components.NavbarContent](Components.NavbarContent.html)
+ * [Components.NavbarToggle](Components.NavbarToggle.html)
+ * [Components.NavbarNav](Components.NavbarNav.html)
+
+ Furthermore references to the following actions are yielded:
+
+ * `collapse`: triggers the `onCollapse` action and collapses the navbar (mobile)
+ * `expand`: triggers the `onExpand` action and expands the navbar (mobile)
 
  ### Navbar styles
 
@@ -72,9 +82,15 @@ export default Ember.Component.extend(TypeClass, {
    * @property collapsed
    * @type boolean
    * @default true
-   * @protected
+   * @public
    */
   collapsed: true,
+
+  /**
+   * @property _collapsed
+   * @private
+   */
+  _collapsed: listenTo('collapsed'),
 
   /**
    * Controls whether the wrapping div is a fluid container or not.
@@ -110,9 +126,90 @@ export default Ember.Component.extend(TypeClass, {
     return `${positionPrefix}${position}`;
   }),
 
+  /**
+   * The action to be sent when the navbar is about to be collapsed.
+   *
+   * You can return false to prevent collapsing the navbar automatically, and do that in your action by
+   * setting `collapsed` to true.
+   *
+   * @event onCollapse
+   * @public
+   */
+  onCollapse() {},
+
+  /**
+   * The action to be sent after the navbar has been collapsed (including the CSS transition).
+   *
+   * @event onCollapsed
+   * @public
+   */
+  onCollapsed() {},
+
+  /**
+   * The action to be sent when the navbar is about to be expanded.
+   *
+   * You can return false to prevent expanding the navbar automatically, and do that in your action by
+   * setting `collapsed` to false.
+   *
+   * @event onExpand
+   * @public
+   */
+  onExpand() {},
+
+  /**
+   * The action to be sent after the navbar has been expanded (including the CSS transition).
+   *
+   * @event onExpanded
+   * @public
+   */
+  onExpanded() {},
+
+  _onCollapsedChange: observer('_collapsed', function() {
+    let collapsed = this.get('_collapsed');
+    let active = this.get('active');
+    if (collapsed !== active) {
+      return;
+    }
+    if (collapsed === false) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }),
+
+  /**
+   * @method expand
+   * @private
+   */
+  expand() {
+    if (this.onExpand() !== false) {
+      this.set('_collapsed', false);
+    }
+  },
+
+  /**
+   * @method collapse
+   * @private
+   */
+  collapse() {
+    if (this.onCollapse() !== false) {
+      this.set('_collapsed', true);
+    }
+  },
+
   actions: {
+    expand() {
+      this.expand();
+    },
+    collapse() {
+      this.collapse();
+    },
     toggleNavbar() {
-      this.toggleProperty('collapsed');
+      if (this.get('_collapsed')) {
+        this.expand();
+      } else {
+        this.collapse();
+      }
     }
   }
 
