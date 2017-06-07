@@ -17,6 +17,12 @@ testBS4('component has row class for horizontal layouts', function(assert) {
   assert.equal(find(':first-child').classList.contains('row'), true, 'component has row class');
 });
 
+testBS4('component has form-check class for group with checkbox control type', function(assert) {
+  this.render(hbs`{{bs-form/group controlType="checkbox"}}`);
+  assert.equal(find(':first-child').classList.contains('form-check'), true, 'component has form-check class');
+  assert.equal(find(':first-child').classList.contains('form-group'), false, 'component has no form-group class');
+});
+
 testBS3('support size classes', function(assert) {
   this.render(hbs`{{bs-form/group size="lg"}}`);
   assert.equal(find('.form-group').classList.contains('form-group-lg'), true, 'form-group has large class');
