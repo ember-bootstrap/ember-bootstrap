@@ -1,5 +1,6 @@
 import { find } from 'ember-native-dom-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
+import { testBS3, testBS4 } from '../../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-form/element/label', 'Integration | Component | bs form/element/label', {
@@ -23,4 +24,14 @@ test('it renders', function(assert) {
   `);
 
   assert.equal(find('*').textContent.trim(), 'template block text');
+});
+
+testBS3('bs3 class', function(assert) {
+  this.render(hbs`{{bs-form/element/label}}`);
+  assert.equal(this.$('label').hasClass('control-label'), true);
+});
+
+testBS4('bs4 class', function(assert) {
+  this.render(hbs`{{bs-form/element/label}}`);
+  assert.equal(this.$('label').hasClass('col-form-label'), true);
 });
