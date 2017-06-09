@@ -270,6 +270,8 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
       }
       );
     }
+
+    return false;
   },
 
   init() {
