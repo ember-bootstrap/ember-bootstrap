@@ -347,7 +347,7 @@ test('required property propagates', function(assert) {
 
 test('disabled property propagates', function(assert) {
   this.render(hbs`{{bs-form/element label="myLabel" disabled=true}}`);
-  assert.ok(find('.form-group').classList.contains('is-disabled'), 'component has is-disabled class');
+  assert.ok(find('.form-group').classList.contains('disabled'), 'component has disabled class');
 });
 
 test('if invisibleLabel is true sr-only class is added to label', function(assert) {

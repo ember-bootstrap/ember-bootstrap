@@ -3,7 +3,7 @@ import FormElementLabel from 'ember-bootstrap/components/base/bs-form/element/la
 export default FormElementLabel.extend({
   tagName: 'label',
 
-  classNames: ['form-control-label'],
-  classNameBindings: ['invisibleLabel:sr-only', 'labelClass'],
+  classNames: [],
+  classNameBindings: ['invisibleLabel:sr-only', 'isHorizontal:col-form-label', 'isCheckbox:form-check-label', 'labelClass'],
   attributeBindings: ['formElementId:for']
 });
