@@ -688,12 +688,9 @@ export default Component.extend(TransitionSupport, {
       .forEach((event) => {
         if (isArray(event)) {
           let [inEvent, outEvent] = event;
-          this._handleEnter = run.bind(this, this.enter);
-          this._handleLeave = run.bind(this, this.leave);
           target.addEventListener(inEvent, this._handleEnter);
           target.addEventListener(outEvent, this._handleLeave);
         } else {
-          this._handleToggle = run.bind(this, this.toggle);
           target.addEventListener(event, this._handleToggle);
         }
       });
@@ -709,21 +706,19 @@ export default Component.extend(TransitionSupport, {
       .forEach((event) => {
         if (isArray(event)) {
           let [inEvent, outEvent] = event;
-          if (this._handleEnter) {
-            target.removeEventListener(inEvent, this._handleEnter);
-            this._handleEnter = null;
-          }
-          if (this._handleLeave) {
-            target.removeEventListener(outEvent, this._handleLeave);
-            this._handleLeave = null;
-          }
+          target.removeEventListener(inEvent, this._handleEnter);
+          target.removeEventListener(outEvent, this._handleLeave);
         } else {
-          if (this._handleToggle) {
-            target.removeEventListener(event, this._handleToggle);
-            this._handleToggle = null;
-          }
+          target.removeEventListener(event, this._handleToggle);
         }
       });
+  },
+
+  init() {
+    this._super(...arguments);
+    this._handleEnter = run.bind(this, this.enter);
+    this._handleLeave = run.bind(this, this.leave);
+    this._handleToggle = run.bind(this, this.toggle);
   },
 
   didInsertElement() {
@@ -734,7 +729,7 @@ export default Component.extend(TransitionSupport, {
     }
   },
 
-  willRemoveElement() {
+  willDestroyElement() {
     this._super(...arguments);
     this.removeListeners();
   },
