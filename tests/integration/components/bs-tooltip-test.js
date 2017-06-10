@@ -2,7 +2,6 @@ import { find, findAll, click, focus, blur, triggerEvent } from 'ember-native-do
 import Ember from 'ember';
 import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import sinonTest from 'ember-sinon-qunit/test-support/test';
 import { test, visibilityClass } from '../../helpers/bootstrap-test';
 
 moduleForComponent('bs-tooltip', 'Integration | Component | bs-tooltip', {
@@ -120,7 +119,7 @@ test('it allows changing the trigger element to the parent view', async function
   assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
 });
 
-sinonTest('it calls onShow/onShown actions when showing tooltip [fade=false]', async function(assert) {
+test('it calls onShow/onShown actions when showing tooltip [fade=false]', async function(assert) {
   let showAction = this.spy();
   this.on('show', showAction);
   let shownAction = this.spy();
@@ -131,7 +130,7 @@ sinonTest('it calls onShow/onShown actions when showing tooltip [fade=false]', a
   assert.ok(shownAction.calledOnce, 'show action has been called');
 });
 
-sinonTest('it aborts showing if onShow action returns false', async function(assert) {
+test('it aborts showing if onShow action returns false', async function(assert) {
   let showAction = this.stub();
   showAction.returns(false);
   this.on('show', showAction);
@@ -144,7 +143,7 @@ sinonTest('it aborts showing if onShow action returns false', async function(ass
   assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
 });
 
-sinonTest('it calls onHide/onHidden actions when hiding tooltip [fade=false]', async function(assert) {
+test('it calls onHide/onHidden actions when hiding tooltip [fade=false]', async function(assert) {
   let hideAction = this.spy();
   this.on('hide', hideAction);
   let hiddenAction = this.spy();
@@ -156,7 +155,7 @@ sinonTest('it calls onHide/onHidden actions when hiding tooltip [fade=false]', a
   assert.ok(hiddenAction.calledOnce, 'hidden action was called');
 });
 
-sinonTest('it aborts hiding if onHide action returns false', async function(assert) {
+test('it aborts hiding if onHide action returns false', async function(assert) {
   let hideAction = this.stub();
   hideAction.returns(false);
   this.on('hide', hideAction);
