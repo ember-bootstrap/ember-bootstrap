@@ -1,4 +1,4 @@
-import { findAll, find, fillIn, keyEvent, triggerEvent } from 'ember-native-dom-helpers';
+import { click, findAll, find, fillIn, keyEvent, triggerEvent } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import { formFeedbackClass, test, testBS3, testBS4, validationErrorClass } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
@@ -60,6 +60,15 @@ test('Submitting the form calls onBeforeSubmit and onSubmit action', async funct
   assert.ok(before.calledWith(model), 'onBefore action has been called with model as parameter');
   assert.ok(submit.calledWith(model), 'onSubmit action has been called with model as parameter');
   assert.notOk(invalid.called, 'onInvalid action has not been called');
+});
+
+test('Clicking a submit button submits the form', async function(assert) {
+  let submit = this.spy();
+  this.on('submit', submit);
+  this.render(hbs`{{#bs-form onSubmit=(action "submit")}}{{#bs-button buttonType="submit"}}Submit{{/bs-button}}{{/bs-form}}`);
+
+  await click('button');
+  assert.ok(submit.called, 'onSubmit action has been called');
 });
 
 test('Submitting the form with valid validation calls onBeforeSubmit and onSubmit action', async function(assert) {

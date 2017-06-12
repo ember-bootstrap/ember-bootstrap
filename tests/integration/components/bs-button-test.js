@@ -144,7 +144,7 @@ test('clicking a button sends onclick action, if promise is returned from closur
 
 });
 
-test('clicking a button will prevent event to bubble up', async function(assert) {
+test('clicking a button with onClick action will prevent event to bubble up', async function(assert) {
   let buttonClick = this.spy();
   this.on('buttonClick', buttonClick);
   let parentClick = this.spy();
@@ -155,4 +155,14 @@ test('clicking a button will prevent event to bubble up', async function(assert)
   await click('button');
   assert.ok(buttonClick.called);
   assert.notOk(parentClick.called);
+});
+
+test('clicking a button without onClick action will cause event to bubble up', async function(assert) {
+  let parentClick = this.spy();
+  this.on('parentClick', parentClick);
+
+  this.render(hbs`<div {{action "parentClick"}}>{{#bs-button}}Button{{/bs-button}}</div>`);
+
+  await click('button');
+  assert.ok(parentClick.called);
 });
