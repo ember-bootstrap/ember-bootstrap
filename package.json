@@ -88,7 +88,7 @@
     "ember-cli-build-config-editor": "^0.5.0",
     "ember-cli-htmlbars": "^2.0.2",
     "ember-runtime-enumerable-includes-polyfill": "^2.0.0",
-    "ember-wormhole": "^0.4.1",
+    "ember-wormhole": "^0.5.2",
     "findup-sync": "^1.0.0",
     "fs-extra": "^3.0.0",
     "rsvp": "^3.3.3",
