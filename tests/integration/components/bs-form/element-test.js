@@ -555,6 +555,7 @@ test('shows validation errors in preference to custom warning', async function(a
     find('.form-group').classList.contains(validationWarningClass()),
     'custom warning is shown immediately'
   );
+  assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'some warning', 'Custom Warning is shown');
   await focus('input');
   await blur('input');
   assert.ok(
@@ -565,7 +566,7 @@ test('shows validation errors in preference to custom warning', async function(a
     find('.form-group').classList.contains(validationWarningClass()),
     'custom warning is removed when errors are shown'
   );
-  assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Invalid');
+  assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Invalid', 'Validation error is shown');
   Ember.run(() => {
     this.set('errors', Ember.A());
   });

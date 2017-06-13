@@ -507,23 +507,23 @@ export default FormGroup.extend({
   hasCustomWarning: computed.notEmpty('customWarning'),
 
   /**
-   * The array of validation messages (either errors or warnings) from the `model`'s validation.
+   * The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model's validation
    *
    * @property validationMessages
    * @type array
    * @private
    */
-  validationMessages: computed('hasCustomError', 'customError', 'hasErrors', 'hasCustomWarning', 'customWarning', 'hasWarnings', 'errors.[]', 'warnings.[]', function() {
+  validationMessages: computed('hasCustomError', 'customError', 'hasErrors', 'hasCustomWarning', 'customWarning', 'hasWarnings', 'errors.[]', 'warnings.[]', 'showModelValidation', function() {
     if (this.get('hasCustomError')) {
       return A([this.get('customError')]);
     }
-    if (this.get('hasErrors')) {
+    if (this.get('hasErrors') && this.get('showModelValidation')) {
       return A(this.get('errors'));
     }
     if (this.get('hasCustomWarning')) {
       return A([this.get('customWarning')]);
     }
-    if (this.get('hasWarnings')) {
+    if (this.get('hasWarnings') && this.get('showModelValidation')) {
       return A(this.get('warnings'));
     }
     return null;
@@ -580,6 +580,14 @@ export default FormGroup.extend({
    * @private
    */
   showAllValidations: false,
+
+  /**
+   * @property showModelValidations
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  showModelValidation: computed.or('showOwnValidation', 'showAllValidations'),
 
   /**
    * @property showValidationMessages
@@ -639,15 +647,15 @@ export default FormGroup.extend({
    * @type string
    * @private
    */
-  validation: computed('hasCustomError', 'hasErrors', 'hasCustomWarning', 'hasWarnings', 'hasValidator', 'showValidation', 'isValidating', 'disabled', function() {
+  validation: computed('hasCustomError', 'hasErrors', 'hasCustomWarning', 'hasWarnings', 'hasValidator', 'showValidation', 'showModelValidation', 'isValidating', 'disabled', function() {
     if (!this.get('showValidation') || !this.get('hasValidator') || this.get('isValidating') || this.get('disabled')) {
       return null;
-    } else if (this.get('showOwnValidation') || this.get('showAllValidations')) {
-      // The display of validation messages has been enabled
+    } else if (this.get('showModelValidation')) {
+      /* The display of model validation messages has been triggered */
       return this.get('hasErrors') || this.get('hasCustomError') ? 'error' : (this.get('hasWarnings') || this.get('hasCustomWarning') ? 'warning' : 'success');
     } else {
-      // If there are custom errors or warnings these should always be shown
-      return this.get('hasCustomError') ? 'error' : (this.get('hasWarnings') || this.get('hasCustomWarning') ? 'warning' : null);
+      /* If there are custom errors or warnings these should always be shown */
+      return this.get('hasCustomError') ? 'error' : 'warning';
     }
   }),
 
