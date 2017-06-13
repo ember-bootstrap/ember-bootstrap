@@ -227,7 +227,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
    * @param {*} value
    * @public
    */
-  onClick(value) {}, // eslint-disable-line no-unused-vars
+  onClick: null,
 
   /**
    * This will reset the state property to 'default', and with that the button's label to defaultText
@@ -256,22 +256,24 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
    * @private
    */
   click() {
-    let promise = this.get('onClick')(this.get('value'));
-    if (promise && typeof promise.then === 'function') {
-      this.set('textState', 'pending');
-      promise.then(() => {
-        if (!this.get('isDestroyed')) {
-          this.set('textState', 'resolved');
+    let action = this.get('onClick');
+    if (action !== null) {
+      let promise = (action)(this.get('value'));
+      if (promise && typeof promise.then === 'function') {
+        this.set('textState', 'pending');
+        promise.then(() => {
+          if (!this.get('isDestroyed')) {
+            this.set('textState', 'resolved');
+          }
+        }, () => {
+          if (!this.get('isDestroyed')) {
+            this.set('textState', 'rejected');
+          }
         }
-      }, () => {
-        if (!this.get('isDestroyed')) {
-          this.set('textState', 'rejected');
-        }
+        );
       }
-      );
+      return false;
     }
-
-    return false;
   },
 
   init() {
