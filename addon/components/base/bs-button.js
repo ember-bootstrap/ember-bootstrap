@@ -37,7 +37,7 @@ const {
  The label of the button will be taken from the `<state>Text` property.
 
  ```hbs
- {{bs-button type="primary" icon="glyphicon glyphicon-download" textState=buttonState defaultText="Download" loadingText="Loading..." action="download"}}
+ {{bs-button type="primary" icon="glyphicon glyphicon-download" textState=buttonState defaultText="Download" loadingText="Loading..." onClick="download"}}
  ```
 
  ```js
@@ -57,7 +57,7 @@ const {
  manage an internal state ("default" > "pending" > "resolved"/"rejected") automatically, changing its label according to the state of the promise:
 
  ```hbs
- {{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" action=(action "download")}}
+ {{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" onClick=(action "download")}}
  ```
 
  ```js
