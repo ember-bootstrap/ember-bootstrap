@@ -259,7 +259,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
     let action = this.get('onClick');
     if (action !== null) {
       let promise = (action)(this.get('value'));
-      if (promise && typeof promise.then === 'function') {
+      if (promise && typeof promise.then === 'function' && !this.get('isDestroyed')) {
         this.set('textState', 'pending');
         promise.then(() => {
           if (!this.get('isDestroyed')) {
