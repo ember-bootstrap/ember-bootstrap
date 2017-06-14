@@ -114,5 +114,26 @@ export default Ember.Component.extend({
    * @default false
    * @public
    */
-  stacked: false
+  stacked: false,
+
+  /**
+   * @property itemComponent
+   * @type {String}
+   * @private
+   */
+  itemComponent: 'bs-nav/item',
+
+  /**
+   * @property linkToComponent
+   * @type {String}
+   * @private
+   */
+  linkToComponent: 'bs-nav/link-to',
+
+  /**
+   * @property dropdownComponent
+   * @type {String}
+   * @private
+   */
+  dropdownComponent: 'bs-dropdown'
 });

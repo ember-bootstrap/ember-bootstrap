@@ -376,3 +376,47 @@ test('Navbar yields expand action', async function(assert) {
   await click('button');
   assert.ok(action.calledOnce, 'onExpand action has been called.');
 });
+
+test('Clicking expanded navbar nav item collapses navbar', async function(assert) {
+  let collapseAction = this.spy();
+  this.on('collapseAction', collapseAction);
+
+  this.render(hbs`
+    {{#bs-navbar as collapsed=false onCollapse=(action "collapseAction") as |navbar|}}
+      <div class="navbar-header">
+        {{navbar.toggle}}
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
+      {{#navbar.content}}
+        {{#navbar.nav as |nav|}}
+          {{#nav.item}}<span id="item">Item</span>{{/nav.item}}
+        {{/navbar.nav}}
+      {{/navbar.content}}
+    {{/bs-navbar}}
+  `);
+  await click('#item');
+
+  assert.ok(collapseAction.calledOnce, 'onCollapse action has been called');
+});
+
+test('Clicking expanded navbar nav item does not collapse navbar when onClick action has been overridden', async function(assert) {
+  let collapseAction = this.spy();
+  this.on('collapseAction', collapseAction);
+
+  this.render(hbs`
+    {{#bs-navbar as collapsed=false onCollapse=(action "collapseAction") as |navbar|}}
+      <div class="navbar-header">
+        {{navbar.toggle}}
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
+      {{#navbar.content}}
+        {{#navbar.nav as |nav|}}
+          {{#nav.item onClick=false}}<span id="item">Item</span>{{/nav.item}}
+        {{/navbar.nav}}
+      {{/navbar.content}}
+    {{/bs-navbar}}
+  `);
+  await click('#item');
+
+  assert.notOk(collapseAction.called, 'onCollapse action has not been called');
+});
