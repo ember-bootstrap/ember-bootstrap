@@ -17,8 +17,8 @@ export default function getPosition(el) {
   // See https://github.com/twbs/bootstrap/issues/20280
   let rect = el.getBoundingClientRect();
   let elOffset = isBody ? { top: 0, left: 0 } : (isSvg ? {} : {
-    top: rect.top + document.body.scrollTop,
-    left: rect.left + document.body.scrollLeft
+    top: rect.top + (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0),
+    left: rect.left + (window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0)
   });
   let scroll = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : el.scrollTop };
   let outerDims = isBody ? { width: window.outerWidth, height: window.outerHeight } : {};
