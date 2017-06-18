@@ -4,11 +4,15 @@
     {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
     {{#dd.menu as |menu|}}
       {{#menu.item}}
-        {{#link-to "index"}}Home{{/link-to}}
+        {{#menu.link-to "index"}}Home{{/menu.link-to}}
       {{/menu.item}}
       {{menu.divider}}
       {{#menu.item}}
-        {{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}
+        {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
+      {{/menu.item}}
+      {{menu.divider}}
+      {{#menu.item}}
+        <a href="https://example.com" class="dropdown-item">External</a>
       {{/menu.item}}
     {{/dd.menu}}
   {{/bs-dropdown}}
@@ -16,11 +20,11 @@
     {{#dd.toggle}}Dropup <span class="caret"></span>{{/dd.toggle}}
     {{#dd.menu align="right" as |menu|}}
       {{#menu.item}}
-        {{#link-to "index"}}Home{{/link-to}}
+        {{#menu.link-to "index"}}Home{{/menu.link-to}}
       {{/menu.item}}
       {{menu.divider}}
       {{#menu.item}}
-        {{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}
+        {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
       {{/menu.item}}
     {{/dd.menu}}
   {{/bs-dropdown}}
@@ -39,10 +43,10 @@
     {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
     {{#dd.menu as |menu|}}
       {{#menu.item}}
-        {{#link-to "index"}}Home{{/link-to}}
+        {{#menu.link-to "index"}}Home{{/menu.link-to}}
       {{/menu.item}}
       {{#menu.item}}
-        {{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}
+        {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
       {{/menu.item}}
     {{/dd.menu}}
   {{/bs-dropdown}}
@@ -52,10 +56,10 @@
     {{#dd.button}}<span class="caret"></span>{{/dd.button}}
     {{#dd.menu as |menu|}}
       {{#menu.item}}
-        {{#link-to "index"}}Home{{/link-to}}
+        {{#menu.link-to "index"}}Home{{/menu.link-to}}
       {{/menu.item}}
       {{#menu.item}}
-        {{#link-to "demo.dropdown"}}Dropdowns{{/link-to}}
+        {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
       {{/menu.item}}
     {{/dd.menu}}
   {{/bs-dropdown}}

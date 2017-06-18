@@ -34,5 +34,5 @@ testBS3('dropdown menu yields item component', function(assert) {
 testBS4('dropdown menu yields item component', function(assert) {
   this.render(hbs`{{#bs-dropdown/menu as |ddm|}}{{#ddm.item}}Dummy{{/ddm.item}}{{/bs-dropdown/menu}}`);
 
-  assert.equal(findAll('.dropdown-item').length, 1, 'has item component');
+  assert.equal(findAll('.dropdown-item').length, 0, 'has item component with no markup');
 });

@@ -18,14 +18,19 @@ const {
  * [Components.DropdownMenu](Components.DropdownMenu.html)
    * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)
    * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)
+   * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)
 
  ```hbs
  {{#bs-dropdown as |dd|}}
    {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
    {{#dd.menu as |ddm|}}
-     {{#ddm.item}}{{#link-to "index"}}Something{{/link-to}}{{/ddm.item}}
+     {{#ddm.item}}
+       {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+     {{/ddm.item}}
      {{ddm.divider}}
-     {{#ddm.item}}{{#link-to "index"}}Something different{{/link-to}}{{/ddm.item}}
+     {{#ddm.item}}
+       {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+     {{/ddm.item}}
    {{/dd.menu}}
  {{/bs-dropdown}}
  ```
@@ -43,8 +48,8 @@ const {
  {{#bs-dropdown as |dd|}}
    {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
    {{#dd.menu as |ddm|}}
-       {{#ddm.item}}{{#link-to "index"}}Something{{/link-to}}{{/ddm.item}}
-       {{#ddm.item}}{{#link-to "index"}}Something different{{/link-to}}{{/ddm.item}}
+       {{#ddm.item}}{{#ddm.link-to "index"}}Something{{/ddm.link-to}}{{/ddm.item}}
+       {{#ddm.item}}{{#ddm.link-to "index"}}Something different{{/ddm.link-to}}{{/ddm.item}}
      {{/dd.menu}}
  {{/bs-dropdown}}
  ```
@@ -61,8 +66,8 @@ const {
    {{#bs-button}}Dropdown{{/bs-button}}
    {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
    {{#dd.menu as |ddm|}}
-     {{#ddm.item}}{{#link-to "index"}}Something{{/link-to}}{{/ddm.item}}
-     {{#ddm.item}}{{#link-to "index"}}Something different{{/link-to}}{{/ddm.item}}
+     {{#ddm.item}}{{#ddm.link-to "index"}}Something{{/ddm.link-to}}{{/ddm.item}}
+     {{#ddm.item}}{{#ddm.link-to "index"}}Something different{{/ddm.link-to}}{{/ddm.item}}
    {{/dd.menu}}
    {{/bs-dropdown}}
  ```
@@ -85,6 +90,12 @@ const {
 
  If you use the [dropdown divider](Component.DropdownMenuDivider), you don't have to worry
  about differences in the markup between versions.
+
+ Be sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application
+ links as dropdown menu items. This is essential for proper styling regardless of Bootstrap
+ version and will also provide automatic `active` highlighting on dropdown menu items. If you
+ wish to have a dropdown menu item refer to an external link, be sure to apply the `dropdown-item`
+ class to the `<a>` tag for Bootstrap 4 compatibility.
 
  @class Dropdown
  @namespace Components
