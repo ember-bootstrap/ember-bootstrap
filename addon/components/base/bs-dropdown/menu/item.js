@@ -11,5 +11,4 @@ import Ember from 'ember';
  @public
  */
 export default Ember.Component.extend({
-  tagName: 'li'
 });
