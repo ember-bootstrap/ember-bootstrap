@@ -4,7 +4,7 @@ import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
 
 const {
- computed
+  computed
 } = Ember;
 
 /**

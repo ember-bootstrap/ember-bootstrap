@@ -2,7 +2,7 @@ import Ember from 'ember';
 import DropdownToggle from 'ember-bootstrap/mixins/dropdown-toggle';
 
 const {
- computed
+  computed
 } = Ember;
 
 /**

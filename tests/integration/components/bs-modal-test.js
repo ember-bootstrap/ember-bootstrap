@@ -45,7 +45,7 @@ test('clicking ok button closes modal when autoClose=true with custom component 
   let done = assert.async();
 
   // wait for fade animation
-  setTimeout(async () => {
+  setTimeout(async() => {
     assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is visible');
     await click('.modal .modal-footer button');
 

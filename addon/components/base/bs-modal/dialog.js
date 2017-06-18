@@ -2,7 +2,7 @@ import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
 
 const {
- computed
+  computed
 } = Ember;
 
 /**
