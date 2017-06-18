@@ -16,11 +16,12 @@ export default function getPosition(el) {
   // Avoid using $.offset() on SVGs since it gives incorrect results in jQuery 3.
   // See https://github.com/twbs/bootstrap/issues/20280
   let rect = el.getBoundingClientRect();
+  let scrollPosition = getScrollPosition();
   let elOffset = isBody ? { top: 0, left: 0 } : (isSvg ? {} : {
-    top: rect.top + document.body.scrollTop,
-    left: rect.left + document.body.scrollLeft
+    top: rect.top + scrollPosition.top,
+    left: rect.left + scrollPosition.left
   });
-  let scroll = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : el.scrollTop };
+  let scroll = { scroll: isBody ? scrollPosition.top : el.scrollTop };
   let outerDims = isBody ? { width: window.outerWidth, height: window.outerHeight } : {};
 
   // Ember.assign/Object.assign does not copy properties of DOMRect object, so we have to clone into POJO...
@@ -34,4 +35,12 @@ export default function getPosition(el) {
   };
 
   return assign({}, clonedRect, scroll, outerDims, elOffset);
+}
+
+function getScrollPosition() {
+  return {
+    //    IE, Firefox                            Chrome
+    top: document.documentElement.scrollTop || document.body.scrollTop || 0,
+    left: document.documentElement.scrollLeft || document.body.scrollLeft || 0
+  };
 }
