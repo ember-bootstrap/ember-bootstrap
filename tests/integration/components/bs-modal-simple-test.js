@@ -272,6 +272,20 @@ test('when modal has a form and the submit button is clicked, the form is submit
   assert.notOk(modalSpy.called);
 });
 
+test('when modal has several forms and the submit button is clicked, those forms are submitted', async function(assert) {
+  let modalSpy = this.spy();
+  let formOneSpy = this.spy();
+  let formTwoSpy = this.spy();
+  this.on('modalSubmit', modalSpy);
+  this.on('formOneSubmit', formOneSpy);
+  this.on('formTwoSubmit', formTwoSpy);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" onSubmit=(action "modalSubmit") as |modal|}}{{#bs-form onSubmit=(action "formOneSubmit")}}{{/bs-form}}{{#bs-form onSubmit=(action "formTwoSubmit")}}{{/bs-form}}{{/bs-modal-simple}}`);
+  await click('.modal .modal-footer button.btn-primary');
+  assert.ok(formOneSpy.calledOnce);
+  assert.ok(formTwoSpy.calledOnce);
+  assert.notOk(modalSpy.called);
+});
+
 test('autofocus element is focused when present and fade=false', function(assert) {
   let action = this.spy();
   this.on('focusAction', action);
@@ -311,7 +325,7 @@ test('Pressing escape key will close the modal if keyboard=true and element is a
     {{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=true}}
       <input autofocus="autofocus"/>
     {{/bs-modal-simple}}
-    
+
   `);
 
   // wait for fade animation

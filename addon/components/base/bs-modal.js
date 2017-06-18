@@ -337,12 +337,14 @@ export default Ember.Component.extend(TransitionSupport, {
       }
     },
     submit() {
-      let form = this.get('modalElement').querySelector('.modal-body form');
-      if (form) {
-        // trigger submit event on body form
+      let forms = this.get('modalElement').querySelectorAll('.modal-body form');
+      if (forms.length > 0) {
+        // trigger submit event on body forms
         let event = document.createEvent('Events');
         event.initEvent('submit', true, true);
-        form.dispatchEvent(event);
+        forms.forEach((form) => {
+          form.dispatchEvent(event);
+        });
       } else {
         // if we have no form, we send a submit action
         this.get('onSubmit')();
