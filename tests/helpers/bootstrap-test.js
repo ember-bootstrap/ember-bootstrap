@@ -19,7 +19,7 @@ export function testBS4() {
   return testForBootstrap(4, ...arguments);
 }
 
-function versionDependent(v3, v4) {
+export function versionDependent(v3, v4) {
   if (currentBootstrapVersion === 3) {
     return v3;
   }

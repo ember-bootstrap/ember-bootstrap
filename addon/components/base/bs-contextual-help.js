@@ -544,8 +544,8 @@ export default Component.extend(TransitionSupport, {
     let height = tip.offsetHeight;
 
     // manually read margins because getBoundingClientRect includes difference
-    let marginTop = parseInt(tip.style.marginTop, 10);
-    let marginLeft = parseInt(tip.style.marginLeft, 10);
+    let marginTop = parseInt(window.getComputedStyle(tip).marginTop, 10);
+    let marginLeft = parseInt(window.getComputedStyle(tip).marginLeft, 10);
 
     // we must check for NaN for ie 8/9
     if (isNaN(marginTop)) {
@@ -562,28 +562,30 @@ export default Component.extend(TransitionSupport, {
 
     this.set('showHelp', true);
 
-    // check to see if placing tip in new offset caused the tip to resize itself
-    let actualWidth = tip.offsetWidth;
-    let actualHeight = tip.offsetHeight;
+    schedule('afterRender', () => {
+      // check to see if placing tip in new offset caused the tip to resize itself
+      let actualWidth = tip.offsetWidth;
+      let actualHeight = tip.offsetHeight;
 
-    if (placement === 'top' && actualHeight !== height) {
-      offset.top = offset.top + height - actualHeight;
-    }
+      if (placement === 'top' && actualHeight !== height) {
+        offset.top = offset.top + height - actualHeight;
+      }
 
-    let delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight);
+      let delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight);
 
-    if (delta.left) {
-      offset.left += delta.left;
-    } else {
-      offset.top += delta.top;
-    }
+      if (delta.left) {
+        offset.left += delta.left;
+      } else {
+        offset.top += delta.top;
+      }
 
-    let isVertical = /top|bottom/.test(placement);
-    let arrowDelta = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight;
-    let arrowOffsetPosition = isVertical ? 'offsetWidth' : 'offsetHeight';
+      let isVertical = /top|bottom/.test(placement);
+      let arrowDelta = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight;
+      let arrowOffsetPosition = isVertical ? 'offsetWidth' : 'offsetHeight';
 
-    setOffset(tip, offset);
-    this.replaceArrow(arrowDelta, tip[arrowOffsetPosition], isVertical);
+      setOffset(tip, offset);
+      this.replaceArrow(arrowDelta, tip[arrowOffsetPosition], isVertical);
+    });
   },
 
   /**
