@@ -206,10 +206,11 @@ export default Ember.Component.extend({
    * Action is called when validation of the model has failed.
    *
    * @event onInvalid
+   * @param { Object } model  The form's `model`
    * @param { Object } error
    * @public
    */
-  onInvalid(error) {}, // eslint-disable-line no-unused-vars
+  onInvalid(model, error) {}, // eslint-disable-line no-unused-vars
 
   /**
    * Submit handler that will send the default action ("action") to the controller when submitting the form.
