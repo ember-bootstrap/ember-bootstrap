@@ -45,15 +45,29 @@ const { observer } = Ember;
  ### Responsive Design
 
  For the mobile breakpoint the Bootstrap styles will hide the navbar content (`{{navbar.content}}`). Clicking on the
- navbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all NavItems (`{{nav.item}}`) are already
+ navbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all nav links (`{{nav.link-to}}`) are already
  wired up to call the navbar's `collapse` action, so clicking any of them will collapse the navbar. To selectively
- prevent that, you can override the NavItem's `onClick` action, with a custom action if needed, or just be setting it
- to false:
+ prevent that, you can set its `collapseNavbar` property to false:
 
  ```hbs
- {{#nav.item onClick=false}}
-   {{#nav.link-to "index"}}Don't collapse{{/nav.link-to}}
+ {{#nav.item}}
+   {{#nav.link-to "index" collapseNavbar=false}}Don't collapse{{/nav.link-to}}
  {{/nav.item}}
+ ```
+
+ To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded `collapse`
+ action:
+
+ ```hbs
+ {#bs-navbar as |navbar|}}
+   {{#navbar.content}}
+     {{#navbar.nav as |nav|}}
+       {{#nav.item}}
+         <a {{action navbar.collapse}}>Collapse</a>
+       {{/nav.item}}
+     {{/navbar.nav}}
+   {{/navbar.content}}
+ {{/bs-navbar}}
  ```
 
  ### Navbar styles

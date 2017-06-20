@@ -377,7 +377,7 @@ test('Navbar yields expand action', async function(assert) {
   assert.ok(action.calledOnce, 'onExpand action has been called.');
 });
 
-test('Clicking expanded navbar nav item collapses navbar', async function(assert) {
+test('Clicking expanded navbar link collapses navbar', async function(assert) {
   let collapseAction = this.spy();
   this.on('collapseAction', collapseAction);
 
@@ -389,17 +389,17 @@ test('Clicking expanded navbar nav item collapses navbar', async function(assert
       </div>
       {{#navbar.content}}
         {{#navbar.nav as |nav|}}
-          {{#nav.item}}<span id="item">Item</span>{{/nav.item}}
+          {{#nav.item}}{{#nav.link-to "index" id="link" disabled=true}}Home{{/nav.link-to}}{{/nav.item}}
         {{/navbar.nav}}
       {{/navbar.content}}
     {{/bs-navbar}}
   `);
-  await click('#item');
+  await click('#link');
 
   assert.ok(collapseAction.calledOnce, 'onCollapse action has been called');
 });
 
-test('Clicking expanded navbar nav item does not collapse navbar when onClick action has been overridden', async function(assert) {
+test('Clicking expanded navbar link does not collapse navbar when collapseNavbar is false', async function(assert) {
   let collapseAction = this.spy();
   this.on('collapseAction', collapseAction);
 
@@ -411,12 +411,12 @@ test('Clicking expanded navbar nav item does not collapse navbar when onClick ac
       </div>
       {{#navbar.content}}
         {{#navbar.nav as |nav|}}
-          {{#nav.item onClick=false}}<span id="item">Item</span>{{/nav.item}}
+          {{#nav.item}}{{#nav.link-to "index" id="link" disabled=true collapseNavbar=false}}Home{{/nav.link-to}}{{/nav.item}}
         {{/navbar.nav}}
       {{/navbar.content}}
     {{/bs-navbar}}
   `);
-  await click('#item');
+  await click('#link');
 
   assert.notOk(collapseAction.called, 'onCollapse action has not been called');
 });
