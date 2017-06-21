@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.1.b12dfd13</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -92,7 +92,7 @@ as well as advanced functionality such as button states.</p>
 <h3>States</h3>
 <p>Use the <code>textState</code> property to change the label of the button. You can bind it to a controller property to set a &quot;loading&quot; state for example.
 The label of the button will be taken from the <code>&lt;state&gt;Text</code> property.</p>
-<pre class="code prettyprint"><code class="language-hbs">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
+<pre class="code prettyprint"><code class="language-hbs">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; onClick=&quot;download&quot;}}
 </code></pre>
 <pre class="code prettyprint"><code class="language-js">App.ApplicationController = Ember.Controller.extend({
   buttonState: &quot;default&quot;
@@ -106,7 +106,7 @@ The label of the button will be taken from the <code>&lt;state&gt;Text</code> pr
 <h3>Promise support for automatic state change</h3>
 <p>When returning a Promise for any asynchronous operation from the <code>onClick</code> closure action the button will
 manage an internal state (&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;) automatically, changing its label according to the state of the promise:</p>
-<pre class="code prettyprint"><code class="language-hbs">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=(action &quot;download&quot;)}}
+<pre class="code prettyprint"><code class="language-hbs">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; onClick=(action &quot;download&quot;)}}
 </code></pre>
 <pre class="code prettyprint"><code class="language-js">// controller.js
 export default Ember.Controller.extend({
@@ -863,6 +863,7 @@ export default Ember.Controller.extend({
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -893,6 +894,7 @@ export default Ember.Controller.extend({
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>

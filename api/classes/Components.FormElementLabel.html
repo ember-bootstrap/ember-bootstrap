@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.1.b12dfd13</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -60,7 +60,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_base_bs-form_element_label.js.html#l4"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:4</code></a>
+            Defined in: <a href="../files/addon_components_base_bs-form_element_label.js.html#l8"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:8</code></a>
         </div>
 
 
@@ -113,11 +113,27 @@
 
                     <ul class="index-list properties extends">
                             <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_controlType" data-tablink="controlType">controlType</a>
+
+                            </li>
+                            <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_formElementId" data-tablink="formElementId">formElementId</a>
 
                             </li>
                             <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_formLayout" data-tablink="formLayout">formLayout</a>
+
+                            </li>
+                            <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_invisibleLabel" data-tablink="invisibleLabel">invisibleLabel</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isCheckbox" data-tablink="isCheckbox">isCheckbox</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isHorizontal" data-tablink="isHorizontal">isHorizontal</a>
 
                             </li>
                             <li class="index-item property public">
@@ -138,6 +154,45 @@
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
+                    <div id="property_controlType" class="property item public">
+                        <h3 class="name">controlType
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-form_element_label.js.html#l63"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:63</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The type of the control widget.
+                    Supported types:</p>
+                    <ul>
+                    <li>'text'</li>
+                    <li>'checkbox'</li>
+                    <li>'textarea'</li>
+                    <li>any other type will use an input tag with the <code>controlType</code> value as the type attribute (for e.g. HTML5 input
+                    types like 'email'), and the same layout as the 'text' type</li>
+                    </ul>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;text&#x27;</p>
+                    
+                    
+                    </div>
                     <div id="property_formElementId" class="property item public">
                         <h3 class="name">formElementId
                             <span class="small">{String}</span>
@@ -154,7 +209,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element_label.js.html#l29"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:29</code></a>
+                            <a href="../files/addon_components_base_bs-form_element_label.js.html#l33"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:33</code></a>
                             </p>
                     
                     
@@ -164,6 +219,43 @@
                             
                         </div>
                     
+                    
+                    
+                    </div>
+                    <div id="property_formLayout" class="property item public">
+                        <h3 class="name">formLayout
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-form_element_label.js.html#l47"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:47</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The form layout used for the markup generation (see <a href="http://getbootstrap.com/css/#forms">http://getbootstrap.com/css/#forms</a>):</p>
+                    <ul>
+                    <li>'horizontal'</li>
+                    <li>'vertical'</li>
+                    <li>'inline'</li>
+                    </ul>
+                    <p>Defaults to the parent <code>form</code>'s <code>formLayout</code> property.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;vertical&#x27;</p>
                     
                     
                     </div>
@@ -183,7 +275,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element_label.js.html#l22"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:22</code></a>
+                            <a href="../files/addon_components_base_bs-form_element_label.js.html#l26"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:26</code></a>
                             </p>
                     
                     
@@ -191,6 +283,66 @@
                     
                         <div class="description">
                             
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_isCheckbox" class="property item private">
+                        <h3 class="name">isCheckbox
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-form_element_label.js.html#l80"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:80</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Indicates whether the type of the control widget equals <code>checkbox</code></p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_isHorizontal" class="property item private">
+                        <h3 class="name">isHorizontal
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-form_element_label.js.html#l89"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:89</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Indicates whether the form type equals <code>horizontal</code></p>
+                    
                         </div>
                     
                     
@@ -212,7 +364,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element_label.js.html#l15"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:15</code></a>
+                            <a href="../files/addon_components_base_bs-form_element_label.js.html#l19"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:19</code></a>
                             </p>
                     
                     
@@ -241,7 +393,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element_label.js.html#l36"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:36</code></a>
+                            <a href="../files/addon_components_base_bs-form_element_label.js.html#l40"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;label.js:40</code></a>
                             </p>
                     
                     
@@ -282,6 +434,7 @@
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -312,6 +465,7 @@
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>

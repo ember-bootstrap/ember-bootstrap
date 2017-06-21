@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.1.b12dfd13</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -73,14 +73,19 @@ const {
  * [Components.DropdownMenu](Components.DropdownMenu.html)
    * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)
    * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)
+   * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)
 
  &#x60;&#x60;&#x60;hbs
  {{#bs-dropdown as |dd|}}
    {{#dd.toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.toggle}}
    {{#dd.menu as |ddm|}}
-     {{#ddm.item}}{{#link-to &quot;index&quot;}}Something{{/link-to}}{{/ddm.item}}
+     {{#ddm.item}}
+       {{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}
+     {{/ddm.item}}
      {{ddm.divider}}
-     {{#ddm.item}}{{#link-to &quot;index&quot;}}Something different{{/link-to}}{{/ddm.item}}
+     {{#ddm.item}}
+       {{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}
+     {{/ddm.item}}
    {{/dd.menu}}
  {{/bs-dropdown}}
  &#x60;&#x60;&#x60;
@@ -98,8 +103,8 @@ const {
  {{#bs-dropdown as |dd|}}
    {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
    {{#dd.menu as |ddm|}}
-       {{#ddm.item}}{{#link-to &quot;index&quot;}}Something{{/link-to}}{{/ddm.item}}
-       {{#ddm.item}}{{#link-to &quot;index&quot;}}Something different{{/link-to}}{{/ddm.item}}
+       {{#ddm.item}}{{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}{{/ddm.item}}
+       {{#ddm.item}}{{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}{{/ddm.item}}
      {{/dd.menu}}
  {{/bs-dropdown}}
  &#x60;&#x60;&#x60;
@@ -116,8 +121,8 @@ const {
    {{#bs-button}}Dropdown{{/bs-button}}
    {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
    {{#dd.menu as |ddm|}}
-     {{#ddm.item}}{{#link-to &quot;index&quot;}}Something{{/link-to}}{{/ddm.item}}
-     {{#ddm.item}}{{#link-to &quot;index&quot;}}Something different{{/link-to}}{{/ddm.item}}
+     {{#ddm.item}}{{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}{{/ddm.item}}
+     {{#ddm.item}}{{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}{{/ddm.item}}
    {{/dd.menu}}
    {{/bs-dropdown}}
  &#x60;&#x60;&#x60;
@@ -140,6 +145,12 @@ const {
 
  If you use the [dropdown divider](Component.DropdownMenuDivider), you don&#x27;t have to worry
  about differences in the markup between versions.
+
+ Be sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application
+ links as dropdown menu items. This is essential for proper styling regardless of Bootstrap
+ version and will also provide automatic &#x60;active&#x60; highlighting on dropdown menu items. If you
+ wish to have a dropdown menu item refer to an external link, be sure to apply the &#x60;dropdown-item&#x60;
+ class to the &#x60;&lt;a&gt;&#x60; tag for Bootstrap 4 compatibility.
 
  @class Dropdown
  @namespace Components
@@ -331,6 +342,7 @@ export default Ember.Component.extend({
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -361,6 +373,7 @@ export default Ember.Component.extend({
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>

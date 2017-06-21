@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.1.b12dfd13</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -92,7 +92,7 @@ const {
  The label of the button will be taken from the &#x60;&lt;state&gt;Text&#x60; property.
 
  &#x60;&#x60;&#x60;hbs
- {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; action=&quot;download&quot;}}
+ {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; onClick=&quot;download&quot;}}
  &#x60;&#x60;&#x60;
 
  &#x60;&#x60;&#x60;js
@@ -112,7 +112,7 @@ const {
  manage an internal state (&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;) automatically, changing its label according to the state of the promise:
 
  &#x60;&#x60;&#x60;hbs
- {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; action=(action &quot;download&quot;)}}
+ {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; onClick=(action &quot;download&quot;)}}
  &#x60;&#x60;&#x60;
 
  &#x60;&#x60;&#x60;js
@@ -282,7 +282,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
    * @param {*} value
    * @public
    */
-  onClick(value) {}, // eslint-disable-line no-unused-vars
+  onClick: null,
 
   /**
    * This will reset the state property to &#x27;default&#x27;, and with that the button&#x27;s label to defaultText
@@ -311,19 +311,23 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
    * @private
    */
   click() {
-    let promise = this.get(&#x27;onClick&#x27;)(this.get(&#x27;value&#x27;));
-    if (promise &amp;&amp; typeof promise.then === &#x27;function&#x27;) {
-      this.set(&#x27;textState&#x27;, &#x27;pending&#x27;);
-      promise.then(() =&gt; {
-        if (!this.get(&#x27;isDestroyed&#x27;)) {
-          this.set(&#x27;textState&#x27;, &#x27;resolved&#x27;);
+    let action = this.get(&#x27;onClick&#x27;);
+    if (action !== null) {
+      let promise = (action)(this.get(&#x27;value&#x27;));
+      if (promise &amp;&amp; typeof promise.then === &#x27;function&#x27;) {
+        this.set(&#x27;textState&#x27;, &#x27;pending&#x27;);
+        promise.then(() =&gt; {
+          if (!this.get(&#x27;isDestroyed&#x27;)) {
+            this.set(&#x27;textState&#x27;, &#x27;resolved&#x27;);
+          }
+        }, () =&gt; {
+          if (!this.get(&#x27;isDestroyed&#x27;)) {
+            this.set(&#x27;textState&#x27;, &#x27;rejected&#x27;);
+          }
         }
-      }, () =&gt; {
-        if (!this.get(&#x27;isDestroyed&#x27;)) {
-          this.set(&#x27;textState&#x27;, &#x27;rejected&#x27;);
-        }
+        );
       }
-      );
+      return false;
     }
   },
 
@@ -359,6 +363,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -389,6 +394,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>

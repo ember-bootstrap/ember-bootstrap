@@ -1,4 +1,31 @@
 
+# [1.0.0-beta.2](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-beta.1...1.0.0-beta.2) (2017-06-21)
+
+
+### Bug Fixes
+
+* **Accordion:** add static CSS fix to enable clicking on whole header on iOS ([2a8fefe](https://github.com/kaliber5/ember-bootstrap/commit/2a8fefe)), closes [#355](https://github.com/kaliber5/ember-bootstrap/issues/355)
+* **Button:** fix event bubbling for submit buttons. Event bubbling is prevented when a `onClick` action handler has been set ([89c575d](https://github.com/kaliber5/ember-bootstrap/commit/89c575d))
+* **Button:** Stop event bubbling when clicked ([a2d123b](https://github.com/kaliber5/ember-bootstrap/commit/a2d123b)), closes [#347](https://github.com/kaliber5/ember-bootstrap/issues/347)
+* **Dropdown:** Make dropdowns BS4 compliant ([b37c150](https://github.com/kaliber5/ember-bootstrap/commit/b37c150))
+* **Form:** fixed various form classes for Bootstrap 4. Thanks to [@Rapid0o](https://github.com/Rapid0o) ([f487ecd](https://github.com/kaliber5/ember-bootstrap/commit/f487ecd)), closes [#336](https://github.com/kaliber5/ember-bootstrap/issues/336)
+* **Modal:** Trigger submit on all forms in modal body. Thanks to [@Moxide](https://github.com/Moxide) ([b2b32b8](https://github.com/kaliber5/ember-bootstrap/commit/b2b32b8)), closes [#362](https://github.com/kaliber5/ember-bootstrap/issues/362)
+* **Modal/Tooltip/Popover:** Updated ember-wormhole fixes FastBoot problems for Modals, Tooltips and Popovers ([19b8328](https://github.com/kaliber5/ember-bootstrap/commit/19b8328)), closes [#284](https://github.com/kaliber5/ember-bootstrap/issues/284)
+* **Popover:** Fix scrollposition for FF - fixes [#357](https://github.com/kaliber5/ember-bootstrap/issues/357) ([ef97a62](https://github.com/kaliber5/ember-bootstrap/commit/ef97a62))
+* **Tooltip/Popover:** fixed offset of arrow for subsequent displays ([0ed9042](https://github.com/kaliber5/ember-bootstrap/commit/0ed9042)), closes [#361](https://github.com/kaliber5/ember-bootstrap/issues/361)
+* **Tooltip/Popover:** fixed positioning being slightly off ([3ba51b1](https://github.com/kaliber5/ember-bootstrap/commit/3ba51b1))
+* **Tooltip/Popover:** Fixed removing event listeners of destroyed components ([33dfda7](https://github.com/kaliber5/ember-bootstrap/commit/33dfda7)), closes [#350](https://github.com/kaliber5/ember-bootstrap/issues/350)
+
+
+### Features
+
+* **FormElement:** Add customWarning property to show warnings independently of validation. Thanks to [@elgordino](https://github.com/elgordino) ([540e233](https://github.com/kaliber5/ember-bootstrap/commit/540e233))
+* **Navbar:** automatically collapse menu when clicking nav link on mobile ([2008884](https://github.com/kaliber5/ember-bootstrap/commit/2008884)), closes [#317](https://github.com/kaliber5/ember-bootstrap/issues/317)
+* **Navbar:** expose public `collapsed` property, call onCollapse/onCollapsed and onExpand/onExpanded actions ([27f0da9](https://github.com/kaliber5/ember-bootstrap/commit/27f0da9))
+
+
+
+
 # [1.0.0-beta.1](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.12...v1.0.0-beta.1) (2017-06-05)
 
 

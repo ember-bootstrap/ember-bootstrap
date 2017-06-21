@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.1.b12dfd13</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -71,10 +71,10 @@
     <p>An Ember component that mimics the behaviour of <a href="http://getbootstrap.com/javascript/#collapse">Bootstrap's collapse.js plugin</a></p>
 <h3>Usage</h3>
 <pre class="code prettyprint"><code class="language-hbs">{{#bs-collapse collapsed=collapsed}}
-&lt;div class=&quot;well&quot;&gt;
-&lt;h2&gt;Collapse&lt;/h2&gt;
-&lt;p&gt;This is collapsible content&lt;/p&gt;
-&lt;/div&gt;
+  &lt;div class=&quot;well&quot;&gt;
+    &lt;h2&gt;Collapse&lt;/h2&gt;
+    &lt;p&gt;This is collapsible content&lt;/p&gt;
+  &lt;/div&gt;
 {{/bs-collapse}}
 </code></pre>
 
@@ -111,6 +111,7 @@
 
             <li><a data-toggle="tab" href="#methods">Methods</a></li>
             <li><a data-toggle="tab" href="#properties">Properties</a></li>
+            <li><a data-toggle="tab" href="#events">Events</a></li>
     </ul>
 
     <div class="tab-content">
@@ -164,22 +165,6 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_expandedSize" data-tablink="expandedSize">expandedSize</a>
 
                             </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_onHidden" data-tablink="onHidden">onHidden</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_onHide" data-tablink="onHide">onHide</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_onShow" data-tablink="onShow">onShow</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_onShown" data-tablink="onShown">onShown</a>
-
-                            </li>
                             <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_resetSizeWhenNotCollapsing" data-tablink="resetSizeWhenNotCollapsing">resetSizeWhenNotCollapsing</a>
 
@@ -196,6 +181,28 @@
                 </div>
 
 
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onHidden" data-tablink="onHidden">onHidden</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onHide" data-tablink="onHide">onHide</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onShow" data-tablink="onShow">onShow</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onShown" data-tablink="onShown">onShown</a>
+
+                            </li>
+                    </ul>
+                </div>
         </div>
 
             <div id="methods" class="tab-pane">
@@ -217,7 +224,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-collapse.js.html#l218"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:218</code></a>
+                            <a href="../files/addon_components_base_bs-collapse.js.html#l208"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:208</code></a>
                             </p>
                     
                     
@@ -271,7 +278,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-collapse.js.html#l238"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:238</code></a>
+                            <a href="../files/addon_components_base_bs-collapse.js.html#l228"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:228</code></a>
                             </p>
                     
                     
@@ -302,7 +309,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-collapse.js.html#l183"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:183</code></a>
+                            <a href="../files/addon_components_base_bs-collapse.js.html#l173"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:173</code></a>
                             </p>
                     
                     
@@ -507,128 +514,6 @@
                     
                     
                     </div>
-                    <div id="property_onHidden" class="property item public">
-                        <h3 class="name">onHidden
-                            <span class="small">function</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-collapse.js.html#l151"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:151</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent after the element has been completely hidden (including the CSS transition).</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="property_onHide" class="property item public">
-                        <h3 class="name">onHide
-                            <span class="small">function</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-collapse.js.html#l141"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:141</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent when the element is about to be hidden.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_onShow" class="property item public">
-                        <h3 class="name">onShow
-                            <span class="small">function</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-collapse.js.html#l162"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:162</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent when the element is about to be shown.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="property_onShown" class="property item public">
-                        <h3 class="name">onShown
-                            <span class="small">function</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-collapse.js.html#l173"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:173</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent after the element has been completely shown (including the CSS transition).</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_resetSizeWhenNotCollapsing" class="property item private">
                         <h3 class="name">resetSizeWhenNotCollapsing
                             <span class="small">boolean</span>
@@ -724,6 +609,114 @@
             </div>
 
 
+            <div id="events" class="tab-pane">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_onHidden" class="events item public">
+                        <h3 class="name"><code>onHidden</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-collapse.js.html#l149"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:149</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent after the element has been completely hidden (including the CSS transition).</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_onHide" class="events item public">
+                        <h3 class="name"><code>onHide</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-collapse.js.html#l141"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:141</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent when the element is about to be hidden.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_onShow" class="events item public">
+                        <h3 class="name"><code>onShow</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-collapse.js.html#l157"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:157</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent when the element is about to be shown.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_onShown" class="events item public">
+                        <h3 class="name"><code>onShown</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-collapse.js.html#l165"><code>addon&#x2F;components&#x2F;base&#x2F;bs-collapse.js:165</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent after the element has been completely shown (including the CSS transition).</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
     </div>
 </div>
                     </div>
@@ -749,6 +742,7 @@
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -779,6 +773,7 @@
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>

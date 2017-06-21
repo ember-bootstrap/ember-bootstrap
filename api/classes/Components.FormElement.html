@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.1.b12dfd13</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -135,9 +135,9 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
 <li>the <code>successIcon</code> feedback icon is displayed if <code>controlType</code> is a text field</li>
 <li>the validation messages are removed</li>
 </ul>
-<p>In case you want to display some error message that is independent of the model's validation, for example to display
-a failure message on a login form after a failed authentication attempt (so not coming from the validation library),
-you can use the <code>customError</code> property to do so.</p>
+<p>In case you want to display some error or warning message that is independent of the model's validation, for
+example to display a failure message on a login form after a failed authentication attempt (so not coming from
+the validation library), you can use the <code>customError</code> or <code>customWarning</code> properties to do so.</p>
 <h3>Custom controls</h3>
 <p>Apart from the standard built-in browser controls (see the <code>controlType</code> property), you can use any custom control simply
 by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
@@ -423,6 +423,10 @@ to customize that existing component:</p>
                                 <a href="#" data-tabid="#properties" data-anchor="#property_customError" data-tablink="customError">customError</a>
 
                             </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_customWarning" data-tablink="customWarning">customWarning</a>
+
+                            </li>
                             <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_errorIcon" data-tablink="errorIcon">errorIcon</a>
 
@@ -453,6 +457,10 @@ to customize that existing component:</p>
                             </li>
                             <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_hasCustomError" data-tablink="hasCustomError">hasCustomError</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasCustomWarning" data-tablink="hasCustomWarning">hasCustomWarning</a>
 
                             </li>
                             <li class="index-item property private">
@@ -541,6 +549,10 @@ to customize that existing component:</p>
                             </li>
                             <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_showAllValidations" data-tablink="showAllValidations">showAllValidations</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showModelValidations" data-tablink="showModelValidations">showModelValidations</a>
 
                             </li>
                             <li class="index-item property private">
@@ -634,7 +646,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l745"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:745</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l780"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:780</code></a>
                             </p>
                     
                     
@@ -666,7 +678,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l601"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:601</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l631"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:631</code></a>
                             </p>
                     
                     
@@ -701,7 +713,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l581"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:581</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l611"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:611</code></a>
                             </p>
                     
                     
@@ -730,7 +742,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l674"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:674</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l709"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:709</code></a>
                             </p>
                     
                     
@@ -760,7 +772,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_classTypePrefix">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l36"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:36</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l35"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:35</code></a>
                             </p>
                     
                     
@@ -790,7 +802,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l701"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:701</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l736"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:736</code></a>
                             </p>
                     
                     
@@ -873,6 +885,38 @@ to customize that existing component:</p>
                     
                     
                     </div>
+                    <div id="property_customWarning" class="property item public">
+                        <h3 class="name">customWarning
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l490"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:490</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Show a custom warning message that does not come from the model's validation. Will be immediately shown, regardless
+                    of any user interaction (i.e. no <code>focusOut</code> event required). If the model's validation has an error then the error
+                    will be shown in place of this warning.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="property_errorIcon" class="property item public inherited">
                         <h3 class="name">errorIcon
                             <span class="small">string</span>
@@ -889,7 +933,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_errorIcon">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l96"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:96</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l95"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:95</code></a>
                             </p>
                     
                     
@@ -990,7 +1034,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l717"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:717</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l752"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:752</code></a>
                             </p>
                     
                     
@@ -1019,7 +1063,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l724"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:724</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l759"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:759</code></a>
                             </p>
                     
                     
@@ -1048,7 +1092,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l663"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:663</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l698"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:698</code></a>
                             </p>
                     
                     
@@ -1078,7 +1122,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l637"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:637</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l672"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:672</code></a>
                             </p>
                     
                     
@@ -1116,6 +1160,35 @@ to customize that existing component:</p>
                                     <p>
                                     Defined in
                             <a href="../files/addon_components_base_bs-form_element.js.html#l482"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:482</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasCustomWarning" class="property item private">
+                        <h3 class="name">hasCustomWarning
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l501"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:501</code></a>
                             </p>
                     
                     
@@ -1173,7 +1246,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_hasFeedback">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l64"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:64</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l63"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:63</code></a>
                             </p>
                     
                     
@@ -1231,7 +1304,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_hasIconForValidationState">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l178"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:178</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l177"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:177</code></a>
                             </p>
                     
                     
@@ -1289,7 +1362,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_hasValidation">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l54"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:54</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l53"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:53</code></a>
                             </p>
                     
                     
@@ -1318,7 +1391,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l510"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:510</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l532"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:532</code></a>
                             </p>
                     
                     
@@ -1347,7 +1420,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l518"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:518</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l540"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:540</code></a>
                             </p>
                     
                     
@@ -1436,7 +1509,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l738"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:738</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l773"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:773</code></a>
                             </p>
                     
                     
@@ -1465,7 +1538,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l653"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:653</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l688"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:688</code></a>
                             </p>
                     
                     
@@ -1496,7 +1569,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_iconName">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l167"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:167</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l166"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:166</code></a>
                             </p>
                     
                     
@@ -1525,7 +1598,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_infoIcon">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l138"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:138</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l137"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:137</code></a>
                             </p>
                     
                     
@@ -1605,7 +1678,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l526"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:526</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l548"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:548</code></a>
                             </p>
                     
                     
@@ -1669,7 +1742,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l731"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:731</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l766"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:766</code></a>
                             </p>
                     
                     
@@ -1698,7 +1771,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l685"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:685</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l720"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:720</code></a>
                             </p>
                     
                     
@@ -1790,7 +1863,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l554"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:554</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l576"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:576</code></a>
                             </p>
                     
                     
@@ -1801,6 +1874,35 @@ to customize that existing component:</p>
                         </div>
                     
                             <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_showModelValidations" class="property item private">
+                        <h3 class="name">showModelValidations
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l584"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:584</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
                     
                     
                     </div>
@@ -1820,7 +1922,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l546"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:546</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l568"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:568</code></a>
                             </p>
                     
                     
@@ -1850,7 +1952,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l536"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:536</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l558"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:558</code></a>
                             </p>
                     
                     
@@ -1881,7 +1983,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l562"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:562</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l592"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:592</code></a>
                             </p>
                     
                     
@@ -1910,7 +2012,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l570"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:570</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l600"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:600</code></a>
                             </p>
                     
                     
@@ -1942,7 +2044,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_successIcon">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l74"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:74</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l73"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:73</code></a>
                             </p>
                     
                     
@@ -1987,7 +2089,7 @@ to customize that existing component:</p>
                                     Components.FormGroup
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l627"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:627</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l662"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:662</code></a>
                             </p>
                     
                     
@@ -2020,7 +2122,7 @@ to customize that existing component:</p>
                                     Components.FormGroup
                                 </a>
                                 but overwritten in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l611"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:611</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l641"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:641</code></a>
                             </p>
                     
                     
@@ -2051,7 +2153,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_validationClass">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l203"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:203</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l202"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:202</code></a>
                             </p>
                     
                     
@@ -2080,14 +2182,14 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l490"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:490</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l509"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:509</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The array of validation messages (either errors or warnings) from the <code>model</code>'s validation.</p>
+                            <p>The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model's validation</p>
                     
                         </div>
                     
@@ -2145,7 +2247,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_warningIcon">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l117"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:117</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l116"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:116</code></a>
                             </p>
                     
                     
@@ -2188,7 +2290,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l766"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:766</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l801"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:801</code></a>
                             </p>
                     
                     
@@ -2215,7 +2317,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l755"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:755</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l790"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:790</code></a>
                             </p>
                     
                     
@@ -2242,7 +2344,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l777"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:777</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l812"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:812</code></a>
                             </p>
                     
                     
@@ -2269,7 +2371,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l788"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:788</code></a>
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l823"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:823</code></a>
                             </p>
                     
                     
@@ -2348,6 +2450,7 @@ to customize that existing component:</p>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -2378,6 +2481,7 @@ to customize that existing component:</p>
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>

@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.1.b12dfd13</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -56,6 +56,9 @@
 import Ember from &#x27;ember&#x27;;
 import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-navbar&#x27;;
+import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
+
+const { observer } = Ember;
 
 /**
  Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
@@ -63,10 +66,6 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-navbar&#x27;;
  ### Usage
 
  Uses the following components by a contextual reference:
-
- - [Components.NavbarContent](Components.NavbarContent.html)
- - [Components.NavbarToggle](Components.NavbarToggle.html)
- - [Components.NavbarNav](Components.NavbarNav.html)
 
  &#x60;&#x60;&#x60;hbs
  {{#bs-navbar as |navbar|}}
@@ -81,6 +80,45 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-navbar&#x27;;
        {{/nav.item}}
        {{#nav.item}}
          {{#nav.link-to &quot;navbars&quot;}}Navbars{{/nav.link-to}}
+       {{/nav.item}}
+     {{/navbar.nav}}
+   {{/navbar.content}}
+ {{/bs-navbar}}
+ &#x60;&#x60;&#x60;
+
+ The component yields references to the following contextual components:
+
+ * [Components.NavbarContent](Components.NavbarContent.html)
+ * [Components.NavbarToggle](Components.NavbarToggle.html)
+ * [Components.NavbarNav](Components.NavbarNav.html)
+
+ Furthermore references to the following actions are yielded:
+
+ * &#x60;collapse&#x60;: triggers the &#x60;onCollapse&#x60; action and collapses the navbar (mobile)
+ * &#x60;expand&#x60;: triggers the &#x60;onExpand&#x60; action and expands the navbar (mobile)
+
+ ### Responsive Design
+
+ For the mobile breakpoint the Bootstrap styles will hide the navbar content (&#x60;{{navbar.content}}&#x60;). Clicking on the
+ navbar toggle button (&#x60;{{navbar.toggle}}&#x60;) will expand the menu. By default all nav links (&#x60;{{nav.link-to}}&#x60;) are already
+ wired up to call the navbar&#x27;s &#x60;collapse&#x60; action, so clicking any of them will collapse the navbar. To selectively
+ prevent that, you can set its &#x60;collapseNavbar&#x60; property to false:
+
+ &#x60;&#x60;&#x60;hbs
+ {{#nav.item}}
+   {{#nav.link-to &quot;index&quot; collapseNavbar=false}}Don&#x27;t collapse{{/nav.link-to}}
+ {{/nav.item}}
+ &#x60;&#x60;&#x60;
+
+ To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded &#x60;collapse&#x60;
+ action:
+
+ &#x60;&#x60;&#x60;hbs
+ {#bs-navbar as |navbar|}}
+   {{#navbar.content}}
+     {{#navbar.nav as |nav|}}
+       {{#nav.item}}
+         &lt;a {{action navbar.collapse}}&gt;Collapse&lt;/a&gt;
        {{/nav.item}}
      {{/navbar.nav}}
    {{/navbar.content}}
@@ -127,9 +165,15 @@ export default Ember.Component.extend(TypeClass, {
    * @property collapsed
    * @type boolean
    * @default true
-   * @protected
+   * @public
    */
   collapsed: true,
+
+  /**
+   * @property _collapsed
+   * @private
+   */
+  _collapsed: listenTo(&#x27;collapsed&#x27;),
 
   /**
    * Controls whether the wrapping div is a fluid container or not.
@@ -165,9 +209,90 @@ export default Ember.Component.extend(TypeClass, {
     return &#x60;${positionPrefix}${position}&#x60;;
   }),
 
+  /**
+   * The action to be sent when the navbar is about to be collapsed.
+   *
+   * You can return false to prevent collapsing the navbar automatically, and do that in your action by
+   * setting &#x60;collapsed&#x60; to true.
+   *
+   * @event onCollapse
+   * @public
+   */
+  onCollapse() {},
+
+  /**
+   * The action to be sent after the navbar has been collapsed (including the CSS transition).
+   *
+   * @event onCollapsed
+   * @public
+   */
+  onCollapsed() {},
+
+  /**
+   * The action to be sent when the navbar is about to be expanded.
+   *
+   * You can return false to prevent expanding the navbar automatically, and do that in your action by
+   * setting &#x60;collapsed&#x60; to false.
+   *
+   * @event onExpand
+   * @public
+   */
+  onExpand() {},
+
+  /**
+   * The action to be sent after the navbar has been expanded (including the CSS transition).
+   *
+   * @event onExpanded
+   * @public
+   */
+  onExpanded() {},
+
+  _onCollapsedChange: observer(&#x27;_collapsed&#x27;, function() {
+    let collapsed = this.get(&#x27;_collapsed&#x27;);
+    let active = this.get(&#x27;active&#x27;);
+    if (collapsed !== active) {
+      return;
+    }
+    if (collapsed === false) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }),
+
+  /**
+   * @method expand
+   * @private
+   */
+  expand() {
+    if (this.onExpand() !== false) {
+      this.set(&#x27;_collapsed&#x27;, false);
+    }
+  },
+
+  /**
+   * @method collapse
+   * @private
+   */
+  collapse() {
+    if (this.onCollapse() !== false) {
+      this.set(&#x27;_collapsed&#x27;, true);
+    }
+  },
+
   actions: {
+    expand() {
+      this.expand();
+    },
+    collapse() {
+      this.collapse();
+    },
     toggleNavbar() {
-      this.toggleProperty(&#x27;collapsed&#x27;);
+      if (this.get(&#x27;_collapsed&#x27;)) {
+        this.expand();
+      } else {
+        this.collapse();
+      }
     }
   }
 
@@ -219,6 +344,7 @@ export default Ember.Component.extend(TypeClass, {
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -249,6 +375,7 @@ export default Ember.Component.extend(TypeClass, {
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>

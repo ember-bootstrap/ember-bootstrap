@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.1.b12dfd13</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -66,7 +66,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_base_bs-navbar.js.html#l5"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:5</code></a>
+            Defined in: <a href="../files/addon_components_base_bs-navbar.js.html#l8"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:8</code></a>
         </div>
 
 
@@ -77,11 +77,6 @@
     <p>Component to generate <a href="http://getbootstrap.com/components/#navbar">Bootstrap navbars</a>.</p>
 <h3>Usage</h3>
 <p>Uses the following components by a contextual reference:</p>
-<ul>
-<li><a href="Components.NavbarContent.html">Components.NavbarContent</a></li>
-<li><a href="Components.NavbarToggle.html">Components.NavbarToggle</a></li>
-<li><a href="Components.NavbarNav.html">Components.NavbarNav</a></li>
-</ul>
 <pre class="code prettyprint"><code class="language-hbs">{{#bs-navbar as |navbar|}}
   &lt;div class=&quot;navbar-header&quot;&gt;
     {{navbar.toggle}}
@@ -94,6 +89,38 @@
       {{/nav.item}}
       {{#nav.item}}
         {{#nav.link-to &quot;navbars&quot;}}Navbars{{/nav.link-to}}
+      {{/nav.item}}
+    {{/navbar.nav}}
+  {{/navbar.content}}
+{{/bs-navbar}}
+</code></pre>
+<p>The component yields references to the following contextual components:</p>
+<ul>
+<li><a href="Components.NavbarContent.html">Components.NavbarContent</a></li>
+<li><a href="Components.NavbarToggle.html">Components.NavbarToggle</a></li>
+<li><a href="Components.NavbarNav.html">Components.NavbarNav</a></li>
+</ul>
+<p>Furthermore references to the following actions are yielded:</p>
+<ul>
+<li><code>collapse</code>: triggers the <code>onCollapse</code> action and collapses the navbar (mobile)</li>
+<li><code>expand</code>: triggers the <code>onExpand</code> action and expands the navbar (mobile)</li>
+</ul>
+<h3>Responsive Design</h3>
+<p>For the mobile breakpoint the Bootstrap styles will hide the navbar content (<code>{{navbar.content}}</code>). Clicking on the
+navbar toggle button (<code>{{navbar.toggle}}</code>) will expand the menu. By default all nav links (<code>{{nav.link-to}}</code>) are already
+wired up to call the navbar's <code>collapse</code> action, so clicking any of them will collapse the navbar. To selectively
+prevent that, you can set its <code>collapseNavbar</code> property to false:</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#nav.item}}
+  {{#nav.link-to &quot;index&quot; collapseNavbar=false}}Don't collapse{{/nav.link-to}}
+{{/nav.item}}
+</code></pre>
+<p>To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded <code>collapse</code>
+action:</p>
+<pre class="code prettyprint"><code class="language-hbs">{#bs-navbar as |navbar|}}
+  {{#navbar.content}}
+    {{#navbar.nav as |nav|}}
+      {{#nav.item}}
+        &lt;a {{action navbar.collapse}}&gt;Collapse&lt;/a&gt;
       {{/nav.item}}
     {{/navbar.nav}}
   {{/navbar.content}}
@@ -143,18 +170,38 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
 
+            <li><a data-toggle="tab" href="#methods">Methods</a></li>
             <li><a data-toggle="tab" href="#properties">Properties</a></li>
+            <li><a data-toggle="tab" href="#events">Events</a></li>
     </ul>
 
     <div class="tab-content">
         <div id="index" class="tab-pane active">
             <h2 class="off-left">Item Index</h2>
 
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                            <li class="index-item method private">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_collapse" data-tablink="collapse">collapse</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_expand" data-tablink="expand">expand</a>
+
+                            </li>
+                    </ul>
+                </div>
 
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property__collapsed" data-tablink="_collapsed">_collapsed</a>
+
+                            </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_backgroundColor" data-tablink="backgroundColor">backgroundColor</a>
 
@@ -163,7 +210,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                                 <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix" data-tablink="classTypePrefix">classTypePrefix</a>
 
                             </li>
-                            <li class="index-item property protected">
+                            <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_collapsed" data-tablink="collapsed">collapsed</a>
 
                             </li>
@@ -187,12 +234,127 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 </div>
 
 
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onCollapse" data-tablink="onCollapse">onCollapse</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onCollapsed" data-tablink="onCollapsed">onCollapsed</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onExpand" data-tablink="onExpand">onExpand</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onExpanded" data-tablink="onExpanded">onExpanded</a>
+
+                            </li>
+                    </ul>
+                </div>
         </div>
 
+            <div id="methods" class="tab-pane">
+                <h2 class="off-left">Methods</h2>
+
+                    <div id="method_collapse" class="method item private">
+                        <h3 class="name">collapse
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-navbar.js.html#l218"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:218</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_expand" class="method item private">
+                        <h3 class="name">expand
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-navbar.js.html#l208"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:208</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
 
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
+                    <div id="property__collapsed" class="property item private">
+                        <h3 class="name">_collapsed
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-navbar.js.html#l117"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:117</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="property_backgroundColor" class="property item public">
                         <h3 class="name">backgroundColor
                             <span class="small">String</span>
@@ -209,7 +371,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-navbar.js.html#l130"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:130</code></a>
+                            <a href="../files/addon_components_base_bs-navbar.js.html#l255"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:255</code></a>
                             </p>
                     
                     
@@ -255,7 +417,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                     
                     
                     </div>
-                    <div id="property_collapsed" class="property item protected">
+                    <div id="property_collapsed" class="property item public">
                         <h3 class="name">collapsed
                             <span class="small">boolean</span>
                         </h3>
@@ -263,7 +425,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                     
                     
                     
-                            <span class="label label-protected">protected</span>
+                            <span class="label label-public">public</span>
                     
                     
                     
@@ -271,7 +433,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-navbar.js.html#l69"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:69</code></a>
+                            <a href="../files/addon_components_base_bs-navbar.js.html#l107"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:107</code></a>
                             </p>
                     
                     
@@ -302,7 +464,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-navbar.js.html#l79"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:79</code></a>
+                            <a href="../files/addon_components_base_bs-navbar.js.html#l123"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:123</code></a>
                             </p>
                     
                     
@@ -333,7 +495,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-navbar.js.html#l89"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:89</code></a>
+                            <a href="../files/addon_components_base_bs-navbar.js.html#l133"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:133</code></a>
                             </p>
                     
                     
@@ -366,7 +528,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-navbar.js.html#l119"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:119</code></a>
+                            <a href="../files/addon_components_base_bs-navbar.js.html#l244"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:244</code></a>
                             </p>
                     
                     
@@ -418,6 +580,118 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             </div>
 
 
+            <div id="events" class="tab-pane">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_onCollapse" class="events item public">
+                        <h3 class="name"><code>onCollapse</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-navbar.js.html#l157"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:157</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent when the navbar is about to be collapsed.</p>
+                    <p>You can return false to prevent collapsing the navbar automatically, and do that in your action by
+                    setting <code>collapsed</code> to true.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_onCollapsed" class="events item public">
+                        <h3 class="name"><code>onCollapsed</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-navbar.js.html#l168"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:168</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent after the navbar has been collapsed (including the CSS transition).</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_onExpand" class="events item public">
+                        <h3 class="name"><code>onExpand</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-navbar.js.html#l176"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:176</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent when the navbar is about to be expanded.</p>
+                    <p>You can return false to prevent expanding the navbar automatically, and do that in your action by
+                    setting <code>collapsed</code> to false.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_onExpanded" class="events item public">
+                        <h3 class="name"><code>onExpanded</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-navbar.js.html#l187"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:187</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent after the navbar has been expanded (including the CSS transition).</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
     </div>
 </div>
                     </div>
@@ -443,6 +717,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -473,6 +748,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>

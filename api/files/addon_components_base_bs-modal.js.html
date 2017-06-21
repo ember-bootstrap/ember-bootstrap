@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.1.b12dfd13</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -74,14 +74,14 @@ const {
 
  &#x60;&#x60;&#x60;hbs
  {{#bs-modal onSubmit=(action &quot;submit&quot;) as |modal|}}
- {{#modal.header}}
- &lt;h4 class=&quot;modal-title&quot;&gt;&lt;i class=&quot;glyphicon glyphicon-alert&quot;&gt;&lt;/i&gt; Alert&lt;/h4&gt;
- {{/modal.header}}
- {{#modal.body}}Are you absolutely sure you want to do that???{{/modal.body}}
- {{#modal.footer as |footer|}}
- {{#bs-button onClick=(action modal.close) type=&quot;danger&quot;}}Oh no, forget it!{{/bs-button}}
- {{#bs-button onClick=(action modal.submit) type=&quot;success&quot;}}Yeah!{{/bs-button}}
- {{/modal.footer}}
+   {{#modal.header}}
+     &lt;h4 class=&quot;modal-title&quot;&gt;&lt;i class=&quot;glyphicon glyphicon-alert&quot;&gt;&lt;/i&gt; Alert&lt;/h4&gt;
+   {{/modal.header}}
+   {{#modal.body}}Are you absolutely sure you want to do that???{{/modal.body}}
+   {{#modal.footer as |footer|}}
+     {{#bs-button onClick=(action modal.close) type=&quot;danger&quot;}}Oh no, forget it!{{/bs-button}}
+     {{#bs-button onClick=(action modal.submit) type=&quot;success&quot;}}Yeah!{{/bs-button}}
+   {{/modal.footer}}
  {{/bs-modal}}
  &#x60;&#x60;&#x60;
 
@@ -392,12 +392,14 @@ export default Ember.Component.extend(TransitionSupport, {
       }
     },
     submit() {
-      let form = this.get(&#x27;modalElement&#x27;).querySelector(&#x27;.modal-body form&#x27;);
-      if (form) {
-        // trigger submit event on body form
+      let forms = this.get(&#x27;modalElement&#x27;).querySelectorAll(&#x27;.modal-body form&#x27;);
+      if (forms.length &gt; 0) {
+        // trigger submit event on body forms
         let event = document.createEvent(&#x27;Events&#x27;);
         event.initEvent(&#x27;submit&#x27;, true, true);
-        form.dispatchEvent(event);
+        forms.forEach((form) =&gt; {
+          form.dispatchEvent(event);
+        });
       } else {
         // if we have no form, we send a submit action
         this.get(&#x27;onSubmit&#x27;)();
@@ -703,6 +705,7 @@ export default Ember.Component.extend(TransitionSupport, {
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -733,6 +736,7 @@ export default Ember.Component.extend(TransitionSupport, {
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>

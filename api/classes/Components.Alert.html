@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.1.b12dfd13</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -117,6 +117,7 @@
 
             <li><a data-toggle="tab" href="#methods">Methods</a></li>
             <li><a data-toggle="tab" href="#properties">Properties</a></li>
+            <li><a data-toggle="tab" href="#events">Events</a></li>
     </ul>
 
     <div class="tab-content">
@@ -178,14 +179,6 @@
                                 <a href="#" data-tabid="#properties" data-anchor="#property_notVisible" data-tablink="notVisible">notVisible</a>
 
                             </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_onDismiss" data-tablink="onDismiss">onDismiss</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_onDismissed" data-tablink="onDismissed">onDismissed</a>
-
-                            </li>
                             <li class="index-item property private inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_transitionsEnabled" data-tablink="transitionsEnabled">transitionsEnabled</a>
 
@@ -206,6 +199,20 @@
                 </div>
 
 
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onDismiss" data-tablink="onDismiss">onDismiss</a>
+
+                            </li>
+                            <li class="index-item event public">
+                                <a href="#" data-tabid="#events" data-anchor="#event_onDismissed" data-tablink="onDismissed">onDismissed</a>
+
+                            </li>
+                    </ul>
+                </div>
         </div>
 
             <div id="methods" class="tab-pane">
@@ -227,7 +234,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-alert.js.html#l164"><code>addon&#x2F;components&#x2F;base&#x2F;bs-alert.js:164</code></a>
+                            <a href="../files/addon_components_base_bs-alert.js.html#l162"><code>addon&#x2F;components&#x2F;base&#x2F;bs-alert.js:162</code></a>
                             </p>
                     
                     
@@ -259,7 +266,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-alert.js.html#l154"><code>addon&#x2F;components&#x2F;base&#x2F;bs-alert.js:154</code></a>
+                            <a href="../files/addon_components_base_bs-alert.js.html#l152"><code>addon&#x2F;components&#x2F;base&#x2F;bs-alert.js:152</code></a>
                             </p>
                     
                     
@@ -555,68 +562,6 @@
                     
                     
                     </div>
-                    <div id="property_onDismiss" class="property item public">
-                        <h3 class="name">onDismiss
-                            <span class="small">function</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-alert.js.html#l134"><code>addon&#x2F;components&#x2F;base&#x2F;bs-alert.js:134</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action is called when the close button is clicked.</p>
-                    <p>You can return false to prevent closing the alert automatically, and do that in your action by
-                    setting <code>visible</code> to false.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_onDismissed" class="property item public">
-                        <h3 class="name">onDismissed
-                            <span class="small">function</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-alert.js.html#l125"><code>addon&#x2F;components&#x2F;base&#x2F;bs-alert.js:125</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent after the alert has been dismissed (including the CSS transition).</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_transitionsEnabled" class="property item private inherited">
                         <h3 class="name">transitionsEnabled
                             <span class="small">boolean</span>
@@ -744,6 +689,64 @@
             </div>
 
 
+            <div id="events" class="tab-pane">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_onDismiss" class="events item public">
+                        <h3 class="name"><code>onDismiss</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-alert.js.html#l133"><code>addon&#x2F;components&#x2F;base&#x2F;bs-alert.js:133</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action is called when the close button is clicked.</p>
+                    <p>You can return false to prevent closing the alert automatically, and do that in your action by
+                    setting <code>visible</code> to false.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_onDismissed" class="events item public">
+                        <h3 class="name"><code>onDismissed</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                            <span class="flag public">public</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-alert.js.html#l125"><code>addon&#x2F;components&#x2F;base&#x2F;bs-alert.js:125</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to be sent after the alert has been dismissed (including the CSS transition).</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
     </div>
 </div>
                     </div>
@@ -769,6 +772,7 @@
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -799,6 +803,7 @@
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>

@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.1.b12dfd13</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -159,9 +159,9 @@ const nonDefaultLayouts = A([
  * the &#x60;successIcon&#x60; feedback icon is displayed if &#x60;controlType&#x60; is a text field
  * the validation messages are removed
 
- In case you want to display some error message that is independent of the model&#x27;s validation, for example to display
- a failure message on a login form after a failed authentication attempt (so not coming from the validation library),
- you can use the &#x60;customError&#x60; property to do so.
+ In case you want to display some error or warning message that is independent of the model&#x27;s validation, for
+ example to display a failure message on a login form after a failed authentication attempt (so not coming from
+ the validation library), you can use the &#x60;customError&#x60; or &#x60;customWarning&#x60; properties to do so.
 
  ### Custom controls
 
@@ -385,7 +385,7 @@ const nonDefaultLayouts = A([
  */
 export default FormGroup.extend({
   layout,
-  classNameBindings: [&#x27;disabled:is-disabled&#x27;, &#x27;required:is-required&#x27;, &#x27;isValidating&#x27;],
+  classNameBindings: [&#x27;disabled:disabled&#x27;, &#x27;required:is-required&#x27;, &#x27;isValidating&#x27;],
 
   /**
    * Text to display within a &#x60;&lt;label&gt;&#x60; tag.
@@ -543,20 +543,42 @@ export default FormGroup.extend({
   hasCustomError: computed.notEmpty(&#x27;customError&#x27;),
 
   /**
-   * The array of validation messages (either errors or warnings) from the &#x60;model&#x60;&#x27;s validation.
+   * Show a custom warning message that does not come from the model&#x27;s validation. Will be immediately shown, regardless
+   * of any user interaction (i.e. no &#x60;focusOut&#x60; event required). If the model&#x27;s validation has an error then the error
+   * will be shown in place of this warning.
+   *
+   * @property customWarning
+   * @type string
+   * @public
+   */
+  customWarning: null,
+
+  /**
+   * @property hasCustomWarning
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasCustomWarning: computed.notEmpty(&#x27;customWarning&#x27;),
+
+  /**
+   * The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model&#x27;s validation
    *
    * @property validationMessages
    * @type array
    * @private
    */
-  validationMessages: computed(&#x27;hasCustomError&#x27;, &#x27;customError&#x27;, &#x27;hasErrors&#x27;, &#x27;hasWarnings&#x27;, &#x27;errors.[]&#x27;, &#x27;warnings.[]&#x27;, function() {
+  validationMessages: computed(&#x27;hasCustomError&#x27;, &#x27;customError&#x27;, &#x27;hasErrors&#x27;, &#x27;hasCustomWarning&#x27;, &#x27;customWarning&#x27;, &#x27;hasWarnings&#x27;, &#x27;errors.[]&#x27;, &#x27;warnings.[]&#x27;, &#x27;showModelValidation&#x27;, function() {
     if (this.get(&#x27;hasCustomError&#x27;)) {
       return A([this.get(&#x27;customError&#x27;)]);
     }
-    if (this.get(&#x27;hasErrors&#x27;)) {
+    if (this.get(&#x27;hasErrors&#x27;) &amp;&amp; this.get(&#x27;showModelValidation&#x27;)) {
       return A(this.get(&#x27;errors&#x27;));
     }
-    if (this.get(&#x27;hasWarnings&#x27;)) {
+    if (this.get(&#x27;hasCustomWarning&#x27;)) {
+      return A([this.get(&#x27;customWarning&#x27;)]);
+    }
+    if (this.get(&#x27;hasWarnings&#x27;) &amp;&amp; this.get(&#x27;showModelValidation&#x27;)) {
       return A(this.get(&#x27;warnings&#x27;));
     }
     return null;
@@ -596,7 +618,7 @@ export default FormGroup.extend({
    * @default false
    * @private
    */
-  showValidation: computed.or(&#x27;showOwnValidation&#x27;, &#x27;showAllValidations&#x27;, &#x27;hasCustomError&#x27;),
+  showValidation: computed.or(&#x27;showOwnValidation&#x27;, &#x27;showAllValidations&#x27;, &#x27;hasCustomError&#x27;, &#x27;hasCustomWarning&#x27;),
 
   /**
    * @property showOwnValidation
@@ -613,6 +635,14 @@ export default FormGroup.extend({
    * @private
    */
   showAllValidations: false,
+
+  /**
+   * @property showModelValidations
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  showModelValidation: computed.or(&#x27;showOwnValidation&#x27;, &#x27;showAllValidations&#x27;),
 
   /**
    * @property showValidationMessages
@@ -672,11 +702,16 @@ export default FormGroup.extend({
    * @type string
    * @private
    */
-  validation: computed(&#x27;hasCustomError&#x27;, &#x27;hasErrors&#x27;, &#x27;hasWarnings&#x27;, &#x27;hasValidator&#x27;, &#x27;showValidation&#x27;, &#x27;isValidating&#x27;, &#x27;disabled&#x27;, function() {
+  validation: computed(&#x27;hasCustomError&#x27;, &#x27;hasErrors&#x27;, &#x27;hasCustomWarning&#x27;, &#x27;hasWarnings&#x27;, &#x27;hasValidator&#x27;, &#x27;showValidation&#x27;, &#x27;showModelValidation&#x27;, &#x27;isValidating&#x27;, &#x27;disabled&#x27;, function() {
     if (!this.get(&#x27;showValidation&#x27;) || !this.get(&#x27;hasValidator&#x27;) || this.get(&#x27;isValidating&#x27;) || this.get(&#x27;disabled&#x27;)) {
       return null;
+    } else if (this.get(&#x27;showModelValidation&#x27;)) {
+      /* The display of model validation messages has been triggered */
+      return this.get(&#x27;hasErrors&#x27;) || this.get(&#x27;hasCustomError&#x27;) ? &#x27;error&#x27; : (this.get(&#x27;hasWarnings&#x27;) || this.get(&#x27;hasCustomWarning&#x27;) ? &#x27;warning&#x27; : &#x27;success&#x27;);
+    } else {
+      /* If there are custom errors or warnings these should always be shown */
+      return this.get(&#x27;hasCustomError&#x27;) ? &#x27;error&#x27; : &#x27;warning&#x27;;
     }
-    return this.get(&#x27;hasErrors&#x27;) || this.get(&#x27;hasCustomError&#x27;) ? &#x27;error&#x27; : (this.get(&#x27;hasWarnings&#x27;) ? &#x27;warning&#x27; : &#x27;success&#x27;);
   }),
 
   /**
@@ -934,6 +969,7 @@ export default FormGroup.extend({
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -964,6 +1000,7 @@ export default FormGroup.extend({
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>

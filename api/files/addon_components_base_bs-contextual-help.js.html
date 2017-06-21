@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.1.b12dfd13</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -599,8 +599,8 @@ export default Component.extend(TransitionSupport, {
     let height = tip.offsetHeight;
 
     // manually read margins because getBoundingClientRect includes difference
-    let marginTop = parseInt(tip.style.marginTop, 10);
-    let marginLeft = parseInt(tip.style.marginLeft, 10);
+    let marginTop = parseInt(window.getComputedStyle(tip).marginTop, 10);
+    let marginLeft = parseInt(window.getComputedStyle(tip).marginLeft, 10);
 
     // we must check for NaN for ie 8/9
     if (isNaN(marginTop)) {
@@ -617,28 +617,30 @@ export default Component.extend(TransitionSupport, {
 
     this.set(&#x27;showHelp&#x27;, true);
 
-    // check to see if placing tip in new offset caused the tip to resize itself
-    let actualWidth = tip.offsetWidth;
-    let actualHeight = tip.offsetHeight;
+    schedule(&#x27;afterRender&#x27;, () =&gt; {
+      // check to see if placing tip in new offset caused the tip to resize itself
+      let actualWidth = tip.offsetWidth;
+      let actualHeight = tip.offsetHeight;
 
-    if (placement === &#x27;top&#x27; &amp;&amp; actualHeight !== height) {
-      offset.top = offset.top + height - actualHeight;
-    }
+      if (placement === &#x27;top&#x27; &amp;&amp; actualHeight !== height) {
+        offset.top = offset.top + height - actualHeight;
+      }
 
-    let delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight);
+      let delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight);
 
-    if (delta.left) {
-      offset.left += delta.left;
-    } else {
-      offset.top += delta.top;
-    }
+      if (delta.left) {
+        offset.left += delta.left;
+      } else {
+        offset.top += delta.top;
+      }
 
-    let isVertical = /top|bottom/.test(placement);
-    let arrowDelta = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight;
-    let arrowOffsetPosition = isVertical ? &#x27;offsetWidth&#x27; : &#x27;offsetHeight&#x27;;
+      let isVertical = /top|bottom/.test(placement);
+      let arrowDelta = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight;
+      let arrowOffsetPosition = isVertical ? &#x27;offsetWidth&#x27; : &#x27;offsetHeight&#x27;;
 
-    setOffset(tip, offset);
-    this.replaceArrow(arrowDelta, tip[arrowOffsetPosition], isVertical);
+      setOffset(tip, offset);
+      this.replaceArrow(arrowDelta, tip[arrowOffsetPosition], isVertical);
+    });
   },
 
   /**
@@ -743,12 +745,9 @@ export default Component.extend(TransitionSupport, {
       .forEach((event) =&gt; {
         if (isArray(event)) {
           let [inEvent, outEvent] = event;
-          this._handleEnter = run.bind(this, this.enter);
-          this._handleLeave = run.bind(this, this.leave);
           target.addEventListener(inEvent, this._handleEnter);
           target.addEventListener(outEvent, this._handleLeave);
         } else {
-          this._handleToggle = run.bind(this, this.toggle);
           target.addEventListener(event, this._handleToggle);
         }
       });
@@ -764,21 +763,19 @@ export default Component.extend(TransitionSupport, {
       .forEach((event) =&gt; {
         if (isArray(event)) {
           let [inEvent, outEvent] = event;
-          if (this._handleEnter) {
-            target.removeEventListener(inEvent, this._handleEnter);
-            this._handleEnter = null;
-          }
-          if (this._handleLeave) {
-            target.removeEventListener(outEvent, this._handleLeave);
-            this._handleLeave = null;
-          }
+          target.removeEventListener(inEvent, this._handleEnter);
+          target.removeEventListener(outEvent, this._handleLeave);
         } else {
-          if (this._handleToggle) {
-            target.removeEventListener(event, this._handleToggle);
-            this._handleToggle = null;
-          }
+          target.removeEventListener(event, this._handleToggle);
         }
       });
+  },
+
+  init() {
+    this._super(...arguments);
+    this._handleEnter = run.bind(this, this.enter);
+    this._handleLeave = run.bind(this, this.leave);
+    this._handleToggle = run.bind(this, this.toggle);
   },
 
   didInsertElement() {
@@ -789,7 +786,7 @@ export default Component.extend(TransitionSupport, {
     }
   },
 
-  willRemoveElement() {
+  willDestroyElement() {
     this._super(...arguments);
     this.removeListeners();
   },
@@ -829,6 +826,7 @@ export default Component.extend(TransitionSupport, {
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+                    <li class="nav-public"><a href="../classes/Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownToggle.html">Components.DropdownToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.Form.html">Components.Form</a></li>
                     <li class="nav-public"><a href="../classes/Components.FormElement.html">Components.FormElement</a></li>
@@ -859,6 +857,7 @@ export default Component.extend(TransitionSupport, {
                     <li class="nav-public"><a href="../classes/Components.Nav.html">Components.Nav</a></li>
                     <li class="nav-public"><a href="../classes/Components.Navbar.html">Components.Navbar</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
+                    <li class="nav-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
                     <li class="nav-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
