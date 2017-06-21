@@ -66,6 +66,6 @@ Ember.Component.extend(ComponentParent, {
   onClick() {},
 
   click() {
-    this.get('onClick')();
+    this.onClick();
   }
 });
