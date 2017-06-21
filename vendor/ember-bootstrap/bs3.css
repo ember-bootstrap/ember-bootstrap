@@ -1,0 +1,4 @@
+/* Fix for https://github.com/kaliber5/ember-bootstrap/issues/355 */
+.panel-heading[role='tab'] {
+    cursor: pointer;
+}

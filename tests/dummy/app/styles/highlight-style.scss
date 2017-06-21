@@ -32,7 +32,7 @@
 .hljs-tag .hljs-value,
 .hljs-phpdoc,
 .tex .hljs-formula {
-    color: #EF5A31;
+    color: $brand-primary;
 }
 
 .hljs-title,
@@ -69,7 +69,7 @@
 .hljs-attribute,
 .hljs-variable,
 .lisp .hljs-body {
-    color: #7BBA1D;
+    color: $brand-secondary;
 }
 
 .hljs-regexp {
@@ -87,7 +87,7 @@
 .hljs-built_in,
 .lisp .hljs-title,
 .clojure .hljs-built_in {
-    color: #0086b3;
+    color: $brand-secondary;
 }
 
 .hljs-preprocessor,

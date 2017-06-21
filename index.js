@@ -51,11 +51,10 @@ module.exports = {
     this.validateDependencies();
     this.preprocessor = this.findPreprocessor();
 
+    // static Bootstrap CSS is mapped to vendor tree, independent of BS version, so import from there
+    let cssPath = path.join('vendor', 'ember-bootstrap');
+
     if (!this.hasPreprocessor()) {
-
-      // static Bootstrap CSS is mapped to vendor tree, independent of BS version, so import from there
-      let cssPath = path.join('vendor', 'ember-bootstrap');
-
       // / Import css from bootstrap
       if (options.importBootstrapCSS) {
         app.import(path.join(cssPath, 'bootstrap.css'));
@@ -67,6 +66,9 @@ module.exports = {
         app.import(path.join(cssPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
       }
     }
+
+    // import custom addon CSS
+    app.import(path.join(cssPath, `bs${options.bootstrapVersion}.css`));
   },
 
   validateDependencies() {

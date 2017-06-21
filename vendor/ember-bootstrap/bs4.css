@@ -1,0 +1,4 @@
+/* Fix for https://github.com/kaliber5/ember-bootstrap/issues/355 */
+.card-header[role='tab'] {
+    cursor: pointer;
+}
