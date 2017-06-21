@@ -1,7 +1,7 @@
 import { find, findAll, click } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
+import test from 'ember-sinon-qunit/test-support/test';
 
 moduleForComponent('bs-tab', 'Integration | Component | bs-tab', {
   integration: true
@@ -118,40 +118,7 @@ test('activeId activates tabs', function(assert) {
   assertActiveTab.call(this, assert, 1, true);
 });
 
-testBS3('tab navigation is groupable', function(assert) {
-  this.render(hbs`
-    {{#bs-tab as |tab|}}
-      {{#tab.pane title="Tab 1"}}
-          tabcontent 1
-      {{/tab.pane}}
-      {{#tab.pane title="Tab 2"}}
-          tabcontent 2
-      {{/tab.pane}}
-      {{#tab.pane title="Tab 3" groupTitle="Dropdown"}}
-          tabcontent 3
-      {{/tab.pane}}
-      {{#tab.pane title="Tab 4" groupTitle="Dropdown"}}
-          tabcontent 4
-      {{/tab.pane}}
-    {{/bs-tab}}
-  `);
-
-  assert.equal(findAll('ul.nav.nav-tabs').length, 1, 'has tabs navigation');
-  assert.equal(findAll('ul.nav.nav-tabs > li').length, 3, 'has tabs navigation items');
-  assert.equal(find('ul.nav.nav-tabs > li:nth-child(1) > a').textContent.trim(), 'Tab 1', 'navigation item shows pane title');
-  assert.equal(find('ul.nav.nav-tabs > li:nth-child(2) > a').textContent.trim(), 'Tab 2', 'navigation item shows pane title');
-  assert.equal(find('ul.nav.nav-tabs > li:nth-child(3)').classList.contains('dropdown'), true, 'adds dropdown for grouped items');
-  assert.equal(find('ul.nav.nav-tabs > li:nth-child(3) > a').textContent.trim(), 'Dropdown', 'drop down item shows pane groupTitle');
-  assert.equal(find('ul.nav.nav-tabs > li:nth-child(3) > .dropdown-menu').children.length, 2, 'puts items with groupTitle under dropdown menu');
-  assert.equal(find(
-    'ul.nav.nav-tabs > li:nth-child(3) > .dropdown-menu > :nth-child(1) > a'
-  ).textContent.trim(), 'Tab 3', 'dropdown menu item shows pane title');
-  assert.equal(find(
-    'ul.nav.nav-tabs > li:nth-child(3) > .dropdown-menu > :nth-child(2) > a'
-  ).textContent.trim(), 'Tab 4', 'dropdown menu item shows pane title');
-});
-
-testBS4('tab navigation is groupable', function(assert) {
+test('tab navigation is groupable', function(assert) {
   this.render(hbs`
     {{#bs-tab as |tab|}}
       {{#tab.pane title="Tab 1"}}
