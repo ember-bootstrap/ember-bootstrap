@@ -10,7 +10,7 @@ moduleForComponent('bs-dropdown/menu/link-to', 'Integration | Component | bs dro
 testBS3('it has correct markup', function(assert) {
   // Template block usage:
   this.render(hbs`
-    {{#bs-dropdown/menu/link-to}}
+    {{#bs-dropdown/menu/link-to "index"}}
       template block text
     {{/bs-dropdown/menu/link-to}}
   `);
@@ -22,7 +22,7 @@ testBS3('it has correct markup', function(assert) {
 testBS4('it has correct markup', function(assert) {
   // Template block usage:
   this.render(hbs`
-    {{#bs-dropdown/menu/link-to}}
+    {{#bs-dropdown/menu/link-to "index"}}
       template block text
     {{/bs-dropdown/menu/link-to}}
   `);
