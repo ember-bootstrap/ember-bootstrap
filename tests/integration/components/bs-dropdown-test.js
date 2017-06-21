@@ -75,7 +75,7 @@ test('clicking dropdown menu will close it', async function(assert) {
   await click('a.dropdown-toggle');
   assert.equal(find(':first-child').classList.contains(openClass()), true, 'Dropdown is open');
 
-  await click('ul.dropdown-menu a');
+  await click('.dropdown-menu a');
   assert.equal(find(':first-child').classList.contains(openClass()), false, 'Dropdown is closed');
 });
 
@@ -84,7 +84,7 @@ test('clicking dropdown menu when closeOnMenuClick is false will not close it', 
   await click('a.dropdown-toggle');
   assert.equal(find(':first-child').classList.contains(openClass()), true, 'Dropdown is open');
 
-  await click('ul.dropdown-menu a');
+  await click('.dropdown-menu a');
   assert.equal(find(':first-child').classList.contains(openClass()), true, 'Dropdown is open');
 });
 
@@ -113,6 +113,6 @@ test('closing dropdown calls onHide action', async function(assert) {
   this.render(hbs`{{#bs-dropdown onHide=(action "hide") as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`);
 
   await click('a.dropdown-toggle');
-  await click('ul.dropdown-menu a');
+  await click('.dropdown-menu a');
   assert.ok(action.calledOnce);
 });

@@ -3,32 +3,30 @@ import { moduleForComponent } from 'ember-qunit';
 import { testBS3, testBS4 } from '../../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('bs-dropdown/menu/item', 'Integration | Component | bs-dropdown/menu/item', {
+moduleForComponent('bs-dropdown/menu/link-to', 'Integration | Component | bs dropdown/menu/link to', {
   integration: true
 });
 
 testBS3('it has correct markup', function(assert) {
   // Template block usage:
   this.render(hbs`
-    {{#bs-dropdown/menu/item}}
+    {{#bs-dropdown/menu/link-to "index"}}
       template block text
-    {{/bs-dropdown/menu/item}}
+    {{/bs-dropdown/menu/link-to}}
   `);
 
-  assert.equal(findAll('li').length, 1, 'renders as <li> element');
   assert.equal(find('*').textContent.trim(), 'template block text');
+  assert.equal(findAll('a.dropdown-item').length, 0, 'renders as plain element with no dropdown item class');
 });
 
 testBS4('it has correct markup', function(assert) {
   // Template block usage:
   this.render(hbs`
-    <span>
-    {{#bs-dropdown/menu/item}}
+    {{#bs-dropdown/menu/link-to "index"}}
       template block text
-    {{/bs-dropdown/menu/item}}
-    </span>
+    {{/bs-dropdown/menu/link-to}}
   `);
 
-  assert.equal(findAll('div').length, 0, 'renders as no element');
   assert.equal(find('*').textContent.trim(), 'template block text');
+  assert.equal(findAll('a.dropdown-item').length, 1, 'renders as plain element with dropdown item class');
 });
