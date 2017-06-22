@@ -589,7 +589,8 @@ export default Ember.Component.extend(TransitionSupport, {
   scrollbarWidth: computed(function() {
     let scrollDiv = document.createElement('div');
     scrollDiv.className = 'modal-scrollbar-measure';
-    this.get('modalElement').insertAdjacentElement('afterend', scrollDiv);
+    let modalEl = this.get('modalElement');
+    modalEl.parentNode.insertBefore(scrollDiv, modalEl.nextSibling);
     let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
     scrollDiv.parentNode.removeChild(scrollDiv);
     return scrollbarWidth;
