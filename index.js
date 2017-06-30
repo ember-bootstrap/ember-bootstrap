@@ -1,4 +1,5 @@
 /* eslint-env node */
+/* eslint-disable ember-suave/prefer-destructuring */
 'use strict';
 
 const path = require('path');
@@ -9,6 +10,8 @@ const Funnel = require('broccoli-funnel');
 const stew = require('broccoli-stew');
 const mv = stew.mv;
 const rm = stew.rm;
+const map = stew.map;
+const rename = stew.rename;
 const chalk = require('chalk');
 const SilentError = require('silent-error'); // From ember-cli
 
@@ -52,23 +55,26 @@ module.exports = {
     this.preprocessor = this.findPreprocessor();
 
     // static Bootstrap CSS is mapped to vendor tree, independent of BS version, so import from there
-    let cssPath = path.join('vendor', 'ember-bootstrap');
+    let vendorPath = path.join('vendor', 'ember-bootstrap');
 
     if (!this.hasPreprocessor()) {
       // / Import css from bootstrap
       if (options.importBootstrapCSS) {
-        app.import(path.join(cssPath, 'bootstrap.css'));
-        app.import(path.join(cssPath, 'bootstrap.css.map'), { destDir: 'assets' });
+        app.import(path.join(vendorPath, 'bootstrap.css'));
+        app.import(path.join(vendorPath, 'bootstrap.css.map'), { destDir: 'assets' });
       }
 
       if (options.importBootstrapTheme) {
-        app.import(path.join(cssPath, 'bootstrap-theme.css'));
-        app.import(path.join(cssPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
+        app.import(path.join(vendorPath, 'bootstrap-theme.css'));
+        app.import(path.join(vendorPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
       }
     }
 
     // import custom addon CSS
-    app.import(path.join(cssPath, `bs${options.bootstrapVersion}.css`));
+    app.import(path.join(vendorPath, `bs${options.bootstrapVersion}.css`));
+
+    // register library version
+    app.import(path.join(vendorPath, 'register-version.js'));
   },
 
   validateDependencies() {
@@ -151,12 +157,19 @@ module.exports = {
 
   treeForVendor(tree) {
     let trees = [tree];
+    let versionTree = rename(
+      map(tree, 'ember-bootstrap/register-version.template', (c) => c.replace('###VERSION###', require('./package.json').version)),
+      'register-version.template',
+      'register-version.js'
+    );
+    trees.push(versionTree);
+
     if (!this.hasPreprocessor()) {
       trees.push(new Funnel(this.getBootstrapStylesPath(), {
         destDir: 'ember-bootstrap'
       }));
     }
-    return mergeTrees(trees);
+    return mergeTrees(trees, { overwrite: true });
   },
 
   getBootstrapVersion() {
