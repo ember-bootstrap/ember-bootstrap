@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.2</span></h1>
+    <h1>API Docs <span class="small">1.0.0-beta.2.f7c7ad6b</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -644,7 +644,8 @@ export default Ember.Component.extend(TransitionSupport, {
   scrollbarWidth: computed(function() {
     let scrollDiv = document.createElement(&#x27;div&#x27;);
     scrollDiv.className = &#x27;modal-scrollbar-measure&#x27;;
-    this.get(&#x27;modalElement&#x27;).insertAdjacentElement(&#x27;afterend&#x27;, scrollDiv);
+    let modalEl = this.get(&#x27;modalElement&#x27;);
+    modalEl.parentNode.insertBefore(scrollDiv, modalEl.nextSibling);
     let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
     scrollDiv.parentNode.removeChild(scrollDiv);
     return scrollbarWidth;
