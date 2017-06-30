@@ -8,7 +8,8 @@ let paths = glob('fastboot-tests/*')
   .concat([
     'lib',
     'node-tests',
-    'blueprints'
+    'blueprints',
+    'index.js'
   ]);
 
 lint(paths);
