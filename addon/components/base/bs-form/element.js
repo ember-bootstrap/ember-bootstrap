@@ -388,7 +388,7 @@ export default FormGroup.extend({
    * {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
    * ```
    *
-   * Note: you loose the ability to validate this form element by directly binding to its value. It is recommended
+   * Note: you lose the ability to validate this form element by directly binding to its value. It is recommended
    * to use the `property` feature instead.
    *
    *
