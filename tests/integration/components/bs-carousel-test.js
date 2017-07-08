@@ -32,8 +32,8 @@ testBS4('carousel has correct controls markup', function(assert) {
 
   let prev = findAll('.carousel-control-prev');
   let next = findAll('.carousel-control-next');
-  assert.equal(prev, 1, 'has left control class names');
-  assert.equal(next, 1, 'has right control class names');
+  assert.equal(prev.length, 1, 'has left control class names');
+  assert.equal(next.length, 1, 'has right control class names');
   assert.ok(prev[0].querySelector('.sr-only'), 'left control has sr-only');
   assert.ok(next[0].querySelector('.sr-only'), 'right control has sr-only');
 });
