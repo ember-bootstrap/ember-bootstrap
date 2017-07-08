@@ -1,0 +1,25 @@
+{{#if showIndicators}}
+  <ol class='carousel-indicators'>
+    {{#each indicators as |indicator|}}
+      <li class='{{if indicator.active 'active'}}' onclick={{action 'toSlide' indicator.index}} role='button'></li>
+    {{/each}}
+  </ol>
+{{/if}}
+
+<div class='carousel-inner' role='listbox'>
+  {{yield
+    (hash
+      slide=(component 'bs-carousel/slide' slides=slides)
+    )
+  }}
+</div>
+
+{{yield
+  (hash
+    controls=(component 'bs-carousel/controls'
+      parentElementId=elementId
+      toNextSlide=(action 'toNextSlide')
+      toPrevSlide=(action 'toPrevSlide')
+    )
+  )
+}}
