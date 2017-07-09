@@ -1,6 +1,12 @@
 import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
 
+const {
+  A,
+  run: { cancel, debounce, later, next },
+  set
+} = Ember;
+
 /**
   Ember implementation of Bootstrap's Carousel. Supports all original features but API is different:
 
@@ -213,7 +219,7 @@ export default Ember.Component.extend({
   },
   init() {
     this._super(...arguments);
-    this.set('slides', Ember.A([]));
+    this.set('slides', A([]));
   },
 
   /**
@@ -226,8 +232,8 @@ export default Ember.Component.extend({
     let indicators = this.get('indicators');
     let currIndicator = indicators[this.get('index')];
     let followingIndicator = indicators[this.get('followingSlideIndex')];
-    Ember.set(currIndicator, 'active', false);
-    Ember.set(followingIndicator, 'active', true);
+    set(currIndicator, 'active', false);
+    set(followingIndicator, 'active', true);
   },
   /**
    * Indicates what class names should be applicable to the current transition slides. 
@@ -268,7 +274,7 @@ export default Ember.Component.extend({
    * @private
    */
   cancelCycle() {
-    Ember.run.cancel(this.get('cycle'));
+    cancel(this.get('cycle'));
   },
   /**
    * Do a presentation and calls itself to perform a cycle.
@@ -284,7 +290,7 @@ export default Ember.Component.extend({
     } else {
       return null;
     }
-    return Ember.run.later(this, function() {
+    return later(this, function() {
       this.set('cycle', this.doCycle());
     }, this.get('transitionDuration') + this.get('interval'));
   },
@@ -315,7 +321,7 @@ export default Ember.Component.extend({
     let currSlide = slides[this.get('index')];
     let followingSlide = slides[this.get('followingSlideIndex')];
     this.willTransit(currSlide, followingSlide);
-    Ember.run.later(
+    later(
       this,
       this.didTransition,
       currSlide,
@@ -338,7 +344,7 @@ export default Ember.Component.extend({
    * @private
    */
   populateIndicators() {
-    let indicators = Ember.A([]);
+    let indicators = A([]);
     for (let a = 0; a < this.get('slides').length; a++) {
       indicators.push({
         active: false,
@@ -432,7 +438,7 @@ export default Ember.Component.extend({
    * @private
    */
   waitPresentationToInitCycle() {
-    Ember.run.debounce(this, this.initCycle, this.get('transitionDuration') + this.get('interval'));
+    debounce(this, this.initCycle, this.get('transitionDuration') + this.get('interval'));
   },
   /**
    * Waits a slide interval time to start a cycle.
@@ -443,7 +449,7 @@ export default Ember.Component.extend({
    * @private
    */
   waitIntervalToInitCycle() {
-    Ember.run.debounce(this, this.initCycle, this.get('interval'));
+    debounce(this, this.initCycle, this.get('interval'));
   },
   /**
    * @method willTransit
@@ -452,7 +458,7 @@ export default Ember.Component.extend({
   willTransit(currSlide, followingSlide) {
     this.adjustIndicators();
     followingSlide.set(this.get('orderClassName'), true);
-    Ember.run.next(this, function() {
+    next(this, function() {
       this.element.offsetHeight;
       currSlide.set(this.get('directionalClassName'), true);
       followingSlide.set(this.get('directionalClassName'), true);
