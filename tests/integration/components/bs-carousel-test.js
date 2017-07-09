@@ -39,14 +39,14 @@ testBS4('carousel has correct controls markup', function(assert) {
 });
 
 testBS3('carousel has correct indicators and slides markup', function(assert) {
-  this.render(hbs`{{#bs-carousel as |car|}}{{#car.slide}}1{{/car.slide}}{{#car.slide}}2{{/car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
 
   assert.equal(findAll('.carousel-indicators li').length, 2, 'has right number of indicators');
   assert.equal(findAll('.carousel-inner .item').length, 2, 'has right number of slides');
 });
 
 testBS4('carousel has correct indicators and slides markup', function(assert) {
-  this.render(hbs`{{#bs-carousel as |car|}}{{#car.slide}}1{{/car.slide}}{{#car.slide}}2{{/car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
 
   assert.equal(findAll('.carousel-indicators li').length, 2, 'has right number of indicators');
   assert.equal(findAll('.carousel-inner .carousel-item').length, 2, 'has right number of slides');
