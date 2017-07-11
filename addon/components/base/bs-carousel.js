@@ -3,6 +3,7 @@ import layout from 'ember-bootstrap/templates/components/bs-carousel';
 
 const {
   A,
+  computed,
   run: { cancel, debounce, later, next },
   set
 } = Ember;
@@ -59,6 +60,22 @@ const {
 export default Ember.Component.extend({
   classNames: ['carousel', 'slide'],
   layout,
+
+  /**
+   * @private
+   * @property canTurnToLeft
+   */
+  canTurnToLeft: computed('continuouslyCycle', 'index', function() {
+    return this.get('continuouslyCycle') || this.get('index') > 0;
+  }),
+
+  /**
+   * @private
+   * @property canTurnToRight
+   */
+  canTurnToRight: computed('continuouslyCycle', 'index', 'slides', function () {
+    return this.get('continuouslyCycle') || this.get('index') < this.get('slides').length - 1;
+  }),
 
   /**
    * Holds the cycle scheduled item.
@@ -228,13 +245,13 @@ export default Ember.Component.extend({
     },
 
     toNextSlide() {
-      if (this.canTurnToRight()) {
+      if (this.get('canTurnToRight')) {
         this.send('toSlide', this.get('index') + 1);
       }
     },
 
     toPrevSlide() {
-      if (this.canTurnToLeft()) {
+      if (this.get('canTurnToLeft')) {
         this.send('toSlide', this.get('index') - 1);
       }
     }
@@ -288,25 +305,6 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @method canTurnToLeft
-   * @private
-   */
-  canTurnToLeft() {
-    let canNotTurn = this.get('continuouslyCycle') === false && this.get('index') <= 0;
-    return !canNotTurn;
-  },
-
-  /**
-   * @method canTurnToRight
-   * @private
-   */
-  canTurnToRight() {
-    let canNotTurn = this.get('continuouslyCycle') === false
-      && this.get('index') >= this.get('slides').length - 1;
-    return !canNotTurn;
-  },
-
-  /**
    * Cancels a scheduled cycle item.
    * 
    * @method cancelCycle
@@ -323,9 +321,9 @@ export default Ember.Component.extend({
    * @private
    */
   doCycle() {
-    if (this.get('ltr') && this.canTurnToRight()) {
+    if (this.get('ltr') && this.get('canTurnToRight')) {
       this.transition(this.get('index') + 1);
-    } else if (this.get('ltr') === false && this.canTurnToLeft()) {
+    } else if (this.get('ltr') === false && this.get('canTurnToLeft')) {
       this.transition(this.get('index') - 1);
     } else {
       return null;
