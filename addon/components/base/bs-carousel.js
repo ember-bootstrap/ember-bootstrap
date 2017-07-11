@@ -15,13 +15,13 @@ const {
   | Autoplays after first user event or on page load. | ride='carousel'\|false | autoPlay=false\|true |
   | Disable automatic cycle. | interval=false | interval=0 |
   | If first slide should follow last slide on "previous" event, the  opposite will also be true for "next" event. | wrap=false\|true | continuouslyCicle=false\|true |
-  | Jumps into specific slide index | data-slide-to=n \| n ∈ N  | index=n \| n ∈ N  |
+  | Jumps into specific slide index | data-slide-to=n | index=n |
   | Keyboard events. | keyboard=false\|true | keyboard=false\|true |
   | Left-to-right or right-to-left sliding. | N/A |  ltr=false\|true |
   | Pause current cycle on mouse enter. | pause='hover'\|null | pauseOnMouseEnter=false\|true |
   | Show or hide controls  | Tag manipulation. | Nested component. |
   | Show or hide indicators  | Tag manipulation. | showIndicators=false\|true |
-  | Waiting time of slides in a automatic cycle. | interval=n \| n ∈ N | interval=n \| n ∈ N, n ≠ 0 |
+  | Waiting time of slides in a automatic cycle. | interval=n | interval=n |
 
   To better understand the documentation, you should be aware of the following operations:
 
