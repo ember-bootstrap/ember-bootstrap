@@ -67,6 +67,7 @@ export default Ember.Component.extend({
    * @private
    */
   cycle: null,
+
   /**
    * Bootstrap style to indicate that a given slide should be moving to left/right.
    *
@@ -75,6 +76,7 @@ export default Ember.Component.extend({
    * @type string
    */
   directionalClassName: null,
+
   /**
    * Contains all information to render indicators.
    *
@@ -82,6 +84,7 @@ export default Ember.Component.extend({
    * @private
    */
   indicators: null,
+
   /**
    * Relative to current index, indicates the next slide to move into.
    *
@@ -90,6 +93,7 @@ export default Ember.Component.extend({
    * @type string
    */
   followingSlideIndex: null,
+
   /**
    * Bootstrap style to indicate the next/previous slide.
    *
@@ -98,6 +102,7 @@ export default Ember.Component.extend({
    * @type string
    */
   orderClassName: null,
+
   /**
    * Contains all components slides children.
    *
@@ -105,6 +110,7 @@ export default Ember.Component.extend({
    * @private
    */
   slides: null,
+
   /**
    * If user is hovering its cursor on component.
    *
@@ -113,6 +119,7 @@ export default Ember.Component.extend({
    * @type boolean
    */
   isMouseHovering: false,
+
   /**
    * Current slide transition has finished.
    *
@@ -121,6 +128,7 @@ export default Ember.Component.extend({
    * @type boolean
    */
   transitionFinished: true,
+
   /**
    * Transition animation time.
    * 600ms is defined in bootstrap's css.
@@ -141,6 +149,7 @@ export default Ember.Component.extend({
    * @type boolean
    */
   autoPlay: false,
+
   /**
    * Should have hard stop on slides indexes corners.
    *
@@ -149,6 +158,7 @@ export default Ember.Component.extend({
    * @type boolean
    */
   continuouslyCycle: true,
+
   /**
    * Index of starting slide.
    *
@@ -157,6 +167,7 @@ export default Ember.Component.extend({
    * @type number
    */
   index: 0,
+
   /**
    * Waiting time before automatically show another slide.
    * Automatic sliding is canceled if interval is less than or equal to zero.
@@ -166,6 +177,7 @@ export default Ember.Component.extend({
    * @type number
    */
   interval: 5000,
+
   /**
    * Should bind keyboard events into sliding.
    *
@@ -174,6 +186,7 @@ export default Ember.Component.extend({
    * @type boolean
    */
   keyboard: true,
+
   /**
    * If automatic sliding should be left-to-right or right-to-left.
    * This parameter has no effect if interval is less than or equal to zero.
@@ -183,6 +196,7 @@ export default Ember.Component.extend({
    * @type boolean
    */
   ltr: true,
+
   /**
    * Pauses automatic sliding if mouse cursor is hovering the component.
    * This parameter has no effect if interval is less than or equal to zero.
@@ -192,6 +206,7 @@ export default Ember.Component.extend({
    * @type boolean
    */
   pauseOnMouseEnter: true,
+
   /**
    * Show or hide indicators.
    * 
@@ -212,17 +227,20 @@ export default Ember.Component.extend({
       }
       this.transition(toIndex, true);
     },
+
     toNextSlide() {
       if (this.canTurnToRight()) {
         this.send('toSlide', this.get('index') + 1);
       }
     },
+
     toPrevSlide() {
       if (this.canTurnToLeft()) {
         this.send('toSlide', this.get('index') - 1);
       }
     }
   },
+
   didInsertElement() {
     this._super(...arguments);
     this.populateIndicators();
@@ -234,6 +252,7 @@ export default Ember.Component.extend({
       this.waitIntervalToInitCycle();
     }
   },
+
   init() {
     this._super(...arguments);
     this.set('slides', A([]));
@@ -252,6 +271,7 @@ export default Ember.Component.extend({
     set(currIndicator, 'active', false);
     set(followingIndicator, 'active', true);
   },
+
   /**
    * Indicates what class names should be applicable to the current transition slides. 
    * 
@@ -267,6 +287,7 @@ export default Ember.Component.extend({
       this.set('orderClassName', 'next');
     }
   },
+
   /**
    * @method canTurnToLeft
    * @private
@@ -275,6 +296,7 @@ export default Ember.Component.extend({
     let canNotTurn = this.get('continuouslyCycle') === false && this.get('index') <= 0;
     return !canNotTurn;
   },
+
   /**
    * @method canTurnToRight
    * @private
@@ -284,6 +306,7 @@ export default Ember.Component.extend({
       && this.get('index') >= this.get('slides').length - 1;
     return !canNotTurn;
   },
+
   /**
    * Cancels a scheduled cycle item.
    * 
@@ -293,6 +316,7 @@ export default Ember.Component.extend({
   cancelCycle() {
     cancel(this.get('cycle'));
   },
+
   /**
    * Do a presentation and calls itself to perform a cycle.
    * 
@@ -311,6 +335,7 @@ export default Ember.Component.extend({
       this.set('cycle', this.doCycle());
     }, this.get('transitionDuration') + this.get('interval'));
   },
+
   /**
    * Applies class names to slides, sets the current index as the following index and
    * indicates that the transition has finished.
@@ -327,6 +352,7 @@ export default Ember.Component.extend({
     this.set('index', this.get('followingSlideIndex'));
     this.set('transitionFinished', true);
   },
+
   /**
    * @method doTransition
    * @private
@@ -345,6 +371,7 @@ export default Ember.Component.extend({
       followingSlide,
       this.get('transitionDuration'));
   },
+
   /**
    * Starts a cycle.
    * 
@@ -354,6 +381,7 @@ export default Ember.Component.extend({
   initCycle() {
     this.set('cycle', this.doCycle());
   },
+
   /**
    * Populate indicators array based on filled slides.
    * 
@@ -373,6 +401,7 @@ export default Ember.Component.extend({
     }
     this.set('indicators', indicators);
   },
+
   /**
    * For some reason Ember's mouseEnter(), mouseLeave() and keyPress() doesn't work.
    * 
@@ -411,6 +440,7 @@ export default Ember.Component.extend({
       }
     });
   },
+
   /**
    * @method shouldRunAutomatically
    * @private
@@ -418,6 +448,7 @@ export default Ember.Component.extend({
   shouldRunAutomatically() {
     return this.get('interval') > 0;
   },
+
   /**
    * Sets the following slide index within the lower and upper bounds.
    * 
@@ -447,6 +478,7 @@ export default Ember.Component.extend({
       this.doTransition(toIndex);
     }
   },
+
   /**
    * Waits a slide presentation time to start a cycle.
    * Debounce is used to prevent user event abuse.
@@ -457,6 +489,7 @@ export default Ember.Component.extend({
   waitPresentationToInitCycle() {
     debounce(this, this.initCycle, this.get('transitionDuration') + this.get('interval'));
   },
+
   /**
    * Waits a slide interval time to start a cycle.
    * Debounce is used to prevent user event abuse.
@@ -468,6 +501,7 @@ export default Ember.Component.extend({
   waitIntervalToInitCycle() {
     debounce(this, this.initCycle, this.get('interval'));
   },
+
   /**
    * @method willTransit
    * @private

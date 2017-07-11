@@ -67,6 +67,7 @@ export default Ember.Component.extend({
       slides.pushObject(this);
     }
   },
+
   willDestroyElement() {
     this._super(...arguments);
     let slides = this.get('slides');

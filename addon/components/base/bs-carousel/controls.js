@@ -23,6 +23,7 @@ export default Ember.Component.extend({
    * @private
    */
   nextClassName: null,
+
   /**
    * The parent's id of this component.
    *
@@ -31,6 +32,7 @@ export default Ember.Component.extend({
    * @private
    */
   parentElementId: null,
+
   /**
    * The class name to append to the previous link element.
    *
@@ -39,6 +41,7 @@ export default Ember.Component.extend({
    * @private
    */
   prevClassName: null,
+
   /**
    * Function to call on next click event.
    *
@@ -46,6 +49,7 @@ export default Ember.Component.extend({
    * @private
    */
   toNextSlide: null,
+
   /**
    * Function to call on previous click event.
    *
@@ -62,6 +66,7 @@ export default Ember.Component.extend({
    * @public
    */
   nextIcon: 'icon-next',
+
   /**
    * Label for screen readers, defaults to 'Next'.
    *
@@ -70,6 +75,7 @@ export default Ember.Component.extend({
    * @public
    */
   nextSrOnly: 'Next',
+
   /**
    * The previos icon to be displayed to the user.
    *
@@ -78,6 +84,7 @@ export default Ember.Component.extend({
    * @public
    */
   prevIcon: 'icon-prev',
+
   /**
    * Label for screen readers, defaults to 'PR'.
    *
