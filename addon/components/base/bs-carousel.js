@@ -34,7 +34,7 @@ const {
   | Continuously cycle | Infinite cycling without stops. |
   ```
 
-  @class CarouselSlide
+  @class Carousel
   @namespace Components
   @extends Ember.Component
   @public  
