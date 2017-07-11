@@ -130,17 +130,6 @@ export default Ember.Component.extend({
   transitionFinished: true,
 
   /**
-   * Transition animation time.
-   * 600ms is defined in bootstrap's css.
-   * 
-   * @property transitionDuration
-   * @private
-   * @type number
-   * @readonly
-   */
-  transitionDuration: 600,
-
-  /**
    * Starts automatic sliding on page load.
    * This parameter has no effect if interval is less than or equal to zero.
    *
@@ -215,6 +204,16 @@ export default Ember.Component.extend({
    * @type boolean
    */
   showIndicators: true,
+
+  /**
+   * The duration of the slides transition.
+   * 
+   * @default 600
+   * @property transitionDuration
+   * @public
+   * @type number
+   */
+  transitionDuration: 600,
 
   actions: {
     toSlide(toIndex) {
