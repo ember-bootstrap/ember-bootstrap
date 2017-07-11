@@ -70,11 +70,11 @@ export default Ember.Component.extend({
   /**
    * Label for screen readers, defaults to 'Next'.
    *
-   * @property nextSrOnly
+   * @property nextLabel
    * @type string
    * @public
    */
-  nextSrOnly: 'Next',
+  nextLabel: 'Next',
 
   /**
    * The previos icon to be displayed to the user.
@@ -86,11 +86,11 @@ export default Ember.Component.extend({
   prevIcon: 'icon-prev',
 
   /**
-   * Label for screen readers, defaults to 'PR'.
+   * Label for screen readers, defaults to 'Prev'.
    *
-   * @property nextSrOnly
+   * @property prevLabel
    * @type string
    * @public
    */
-  prevSrOnly: 'Previous'
+  prevLabel: 'Previous'
 });
