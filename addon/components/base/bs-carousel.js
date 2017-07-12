@@ -55,7 +55,7 @@ const {
   @class Carousel
   @namespace Components
   @extends Ember.Component
-  @public  
+  @public
  */
 export default Ember.Component.extend({
   classNames: ['carousel', 'slide'],
@@ -73,7 +73,7 @@ export default Ember.Component.extend({
    * @private
    * @property canTurnToRight
    */
-  canTurnToRight: computed('continuouslyCycle', 'index', 'slides', function () {
+  canTurnToRight: computed('continuouslyCycle', 'index', 'slides', function() {
     return this.get('continuouslyCycle') || this.get('index') < this.get('slides').length - 1;
   }),
 
