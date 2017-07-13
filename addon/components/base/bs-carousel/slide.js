@@ -1,3 +1,4 @@
+import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-carousel/slide';
 
@@ -11,7 +12,7 @@ import layout from 'ember-bootstrap/templates/components/bs-carousel/slide';
   @extends Ember.Component
   @public  
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(ComponentChild, {
   classNameBindings: ['active'],
   layout,
 
@@ -58,21 +59,5 @@ export default Ember.Component.extend({
    * @type boolean
    * @private
    */
-  right: false,
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-    let slides = this.get('slides');
-    if (slides) {
-      slides.pushObject(this);
-    }
-  },
-
-  willDestroyElement() {
-    this._super(...arguments);
-    let slides = this.get('slides');
-    if (slides) {
-      slides.removeObject(this);
-    }
-  }
+  right: false
 });
