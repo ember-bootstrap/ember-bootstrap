@@ -1,8 +1,9 @@
+import CarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
+import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
 
 const {
-  A,
   computed,
   run: { cancel, debounce, later, next },
   set
@@ -57,7 +58,7 @@ const {
   @extends Ember.Component
   @public
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(ComponentParent, {
   classNames: ['carousel', 'slide'],
   layout,
 
@@ -73,8 +74,20 @@ export default Ember.Component.extend({
    * @private
    * @property canTurnToRight
    */
-  canTurnToRight: computed('continuouslyCycle', 'index', 'slides', function() {
-    return this.get('continuouslyCycle') || this.get('index') < this.get('slides').length - 1;
+  canTurnToRight: computed('childSlides', 'continuouslyCycle', 'index', function() {
+    return this.get('continuouslyCycle') || this.get('index') < this.get('childSlides').length - 1;
+  }),
+
+  /**
+   * All `CarouselSlide` child components
+   *
+   * @private
+   * @property childSlides
+   * @readonly
+   * @type array
+   */
+  childSlides: computed.filter('children', function(view) {
+    return view instanceof CarouselSlide;
   }),
 
   /**
@@ -95,12 +108,19 @@ export default Ember.Component.extend({
   directionalClassName: null,
 
   /**
-   * Contains all information to render indicators.
-   *
    * @property indicators
    * @private
    */
-  indicators: null,
+  indicators: computed('childSlides', function() {
+    let indicators = [];
+    for (let a = 0; a < this.get('childSlides').length; a++) {
+      indicators.push({
+        active: false,
+        index: a
+      });
+    }
+    return indicators;
+  }),
 
   /**
    * Relative to current index, indicates the next slide to move into.
@@ -119,14 +139,6 @@ export default Ember.Component.extend({
    * @type string
    */
   orderClassName: null,
-
-  /**
-   * Contains all components slides children.
-   *
-   * @property slides
-   * @private
-   */
-  slides: null,
 
   /**
    * If user is hovering its cursor on component.
@@ -259,19 +271,16 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    this.populateIndicators();
     this.registerEvents();
-    if (this.get('slides').length !== 0) {
-      this.get('slides')[this.get('index')].set('active', true);
+    if (this.get('childSlides').length !== 0) {
+      this.get('childSlides')[this.get('index')].set('active', true);
+    }
+    if (this.get('indicators').length !== 0) {
+      this.get('indicators')[this.get('index')].set('active', true);
     }
     if (this.shouldRunAutomatically() && this.get('autoPlay')) {
       this.waitIntervalToInitCycle();
     }
-  },
-
-  init() {
-    this._super(...arguments);
-    this.set('slides', A([]));
   },
 
   /**
@@ -357,7 +366,7 @@ export default Ember.Component.extend({
   doTransition(toIndex) {
     this.assignClassNameControls(toIndex);
     this.setFollowingSlideIndex(toIndex);
-    let slides = this.get('slides');
+    let slides = this.get('childSlides');
     let currSlide = slides[this.get('index')];
     let followingSlide = slides[this.get('followingSlideIndex')];
     this.willTransit(currSlide, followingSlide);
@@ -377,26 +386,6 @@ export default Ember.Component.extend({
    */
   initCycle() {
     this.set('cycle', this.doCycle());
-  },
-
-  /**
-   * Populate indicators array based on filled slides.
-   * 
-   * @method populateIndicators
-   * @private
-   */
-  populateIndicators() {
-    let indicators = A([]);
-    for (let a = 0; a < this.get('slides').length; a++) {
-      indicators.push({
-        active: false,
-        index: a
-      });
-    }
-    if (indicators.length !== 0) {
-      indicators[this.get('index')].active = true;
-    }
-    this.set('indicators', indicators);
   },
 
   /**
@@ -453,7 +442,7 @@ export default Ember.Component.extend({
    * @private
    */
   setFollowingSlideIndex(toIndex) {
-    let slidesLengthMinusOne = this.get('slides').length - 1;
+    let slidesLengthMinusOne = this.get('childSlides').length - 1;
     if (toIndex > slidesLengthMinusOne) {
       this.set('followingSlideIndex', 0);
     } else if (toIndex < 0) {
