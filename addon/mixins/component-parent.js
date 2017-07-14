@@ -44,6 +44,9 @@ export default Ember.Mixin.create({
    * @public
    */
   removeChild(child) {
-    this.get('children').removeObject(child);
+    console.log('removeChild');
+    Ember.run.schedule('sync', this, function() {
+      this.get('children').removeObject(child);
+    });
   }
 });
