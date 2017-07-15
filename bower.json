@@ -1,6 +1,0 @@
-{
-  "name": "ember-bootstrap",
-  "dependencies": {
-    "markdown-it": "^8.2.2"
-  }
-}
