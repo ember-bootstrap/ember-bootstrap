@@ -2,9 +2,11 @@ import CarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
+import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
 const {
   computed,
+  observer,
   run: { cancel, debounce, later, next },
   set
 } = Ember;
@@ -63,23 +65,33 @@ export default Ember.Component.extend(ComponentParent, {
   layout,
 
   /**
+   * @property _index
+   * @private
+   */
+  _index: listenTo('index'),
+
+  /**
+   * If a slide can turn to left, including corners.
+   * 
    * @private
    * @property canTurnToLeft
    */
-  canTurnToLeft: computed('continuouslyCycle', 'index', function() {
-    return this.get('continuouslyCycle') || this.get('index') > 0;
+  canTurnToLeft: computed('continuouslyCycle', '_index', function() {
+    return this.get('continuouslyCycle') || this.get('_index') > 0;
   }),
 
   /**
+   * If a slide can turn to right, including corners.
+   * 
    * @private
    * @property canTurnToRight
    */
-  canTurnToRight: computed('childSlides', 'continuouslyCycle', 'index', function() {
-    return this.get('continuouslyCycle') || this.get('index') < this.get('childSlides').length - 1;
+  canTurnToRight: computed('childSlides', 'continuouslyCycle', '_index', function() {
+    return this.get('continuouslyCycle') || this.get('_index') < this.get('childSlides').length - 1;
   }),
 
   /**
-   * All `CarouselSlide` child components
+   * All `CarouselSlide` child components.
    *
    * @private
    * @property childSlides
@@ -88,6 +100,26 @@ export default Ember.Component.extend(ComponentParent, {
    */
   childSlides: computed.filter('children', function(view) {
     return view instanceof CarouselSlide;
+  }),
+
+  /**
+   * This observer is the entry point for real time insertion and removing of slides.
+   * 
+   * @private
+   * @property childSlidesObserver
+   */
+  childSlidesObserver: observer('childSlides', function() {
+    this.cancelCycle();
+    let slidesLen = this.get('childSlides').length;
+    if (slidesLen > 0) {
+      if (this.get('_index') >= slidesLen) {
+        this.set('_index', slidesLen - 1);
+      }
+      this.get('childSlides')[this.get('_index')].set('active', true);
+      if (this.get('shouldRunAutomatically') && this.get('autoPlay')) {
+        this.waitToInitCycle();
+      }
+    }
   }),
 
   /**
@@ -111,13 +143,19 @@ export default Ember.Component.extend(ComponentParent, {
    * @property indicators
    * @private
    */
-  indicators: computed('childSlides', function() {
+  indicators: computed('_index', 'childSlides', 'showIndicators', function() {
+    if (this.get('showIndicators') === false) {
+      return;
+    }
     let indicators = [];
     for (let a = 0; a < this.get('childSlides').length; a++) {
       indicators.push({
         active: false,
         index: a
       });
+    }
+    if (indicators.length > 0) {
+      indicators[this.get('_index')].active = true;
     }
     return indicators;
   }),
@@ -226,6 +264,26 @@ export default Ember.Component.extend(ComponentParent, {
   pauseOnMouseEnter: true,
 
   /**
+   * Shouldn't do presentations with less than 2 slides.
+   * 
+   * @private
+   * @property shouldNotDoPresentation
+   * @type boolean
+   */
+  shouldNotDoPresentation: computed('childSlides', function() {
+    return this.get('childSlides').length <= 1;
+  }),
+
+  /**
+   * @private
+   * @property shouldRunAutomatically
+   * @type boolean
+   */
+  shouldRunAutomatically: computed('interval', function() {
+    return this.get('interval') > 0;
+  }),
+
+  /**
    * Show or hide indicators.
    * 
    * @property showIndicators
@@ -246,25 +304,25 @@ export default Ember.Component.extend(ComponentParent, {
 
   actions: {
     toSlide(toIndex) {
-      if (this.get('index') === toIndex) {
+      if (this.get('_index') === toIndex || this.get('shouldNotDoPresentation')) {
         return;
       }
-      if (this.shouldRunAutomatically() && this.get('isMouseHovering') === false) {
+      if (this.get('shouldRunAutomatically') && this.get('isMouseHovering') === false) {
         this.cancelCycle();
-        this.waitPresentationToInitCycle();
+        this.waitToInitCycle(true);
       }
       this.transition(toIndex, true);
     },
 
     toNextSlide() {
       if (this.get('canTurnToRight')) {
-        this.send('toSlide', this.get('index') + 1);
+        this.send('toSlide', this.get('_index') + 1);
       }
     },
 
     toPrevSlide() {
       if (this.get('canTurnToLeft')) {
-        this.send('toSlide', this.get('index') - 1);
+        this.send('toSlide', this.get('_index') - 1);
       }
     }
   },
@@ -272,15 +330,13 @@ export default Ember.Component.extend(ComponentParent, {
   didInsertElement() {
     this._super(...arguments);
     this.registerEvents();
-    if (this.get('childSlides').length !== 0) {
-      this.get('childSlides')[this.get('index')].set('active', true);
-    }
-    if (this.get('indicators').length !== 0) {
-      this.get('indicators')[this.get('index')].set('active', true);
-    }
-    if (this.shouldRunAutomatically() && this.get('autoPlay')) {
-      this.waitIntervalToInitCycle();
-    }
+    // Weird bug?! On page load, any carousel without indicators doesn't
+    // trigger the 'childSlidesObserver', thus, nothing happens.
+    Ember.run.schedule('sync', this, function() {
+      if (this.get('showIndicators') === false) {
+        this.notifyPropertyChange('childSlides');
+      }
+    });
   },
 
   /**
@@ -291,7 +347,7 @@ export default Ember.Component.extend(ComponentParent, {
    */
   adjustIndicators() {
     let indicators = this.get('indicators');
-    let currIndicator = indicators[this.get('index')];
+    let currIndicator = indicators[this.get('_index')];
     let followingIndicator = indicators[this.get('followingSlideIndex')];
     set(currIndicator, 'active', false);
     set(followingIndicator, 'active', true);
@@ -304,7 +360,7 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   assignClassNameControls(toIndex) {
-    if (toIndex < this.get('index')) {
+    if (toIndex < this.get('_index')) {
       this.set('directionalClassName', 'right');
       this.set('orderClassName', 'prev');
     } else {
@@ -331,9 +387,9 @@ export default Ember.Component.extend(ComponentParent, {
    */
   doCycle() {
     if (this.get('ltr') && this.get('canTurnToRight')) {
-      this.transition(this.get('index') + 1);
+      this.transition(this.get('_index') + 1);
     } else if (this.get('ltr') === false && this.get('canTurnToLeft')) {
-      this.transition(this.get('index') - 1);
+      this.transition(this.get('_index') - 1);
     } else {
       return null;
     }
@@ -355,7 +411,7 @@ export default Ember.Component.extend(ComponentParent, {
     followingSlide.set('active', true);
     followingSlide.set(this.get('directionalClassName'), false);
     followingSlide.set(this.get('orderClassName'), false);
-    this.set('index', this.get('followingSlideIndex'));
+    this.set('_index', this.get('followingSlideIndex'));
     this.set('transitionFinished', true);
   },
 
@@ -367,7 +423,7 @@ export default Ember.Component.extend(ComponentParent, {
     this.assignClassNameControls(toIndex);
     this.setFollowingSlideIndex(toIndex);
     let slides = this.get('childSlides');
-    let currSlide = slides[this.get('index')];
+    let currSlide = slides[this.get('_index')];
     let followingSlide = slides[this.get('followingSlideIndex')];
     this.willTransit(currSlide, followingSlide);
     later(
@@ -385,11 +441,15 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   initCycle() {
+    if (this.get('shouldNotDoPresentation')) {
+      return;
+    }
     this.set('cycle', this.doCycle());
   },
 
   /**
-   * For some reason Ember's mouseEnter(), mouseLeave() and keyPress() doesn't work.
+   * For some reason Ember's mouseEnter() and mouseLeave() doesn't work and keypress() doesn't 
+   * work without tabindex (IE11+).
    * 
    * @method registerEvents
    * @private
@@ -398,17 +458,17 @@ export default Ember.Component.extend(ComponentParent, {
     let self = this;
     this.element.addEventListener('mouseenter', function() {
       self.set('isMouseHovering', true);
-      if (self.shouldRunAutomatically() && self.get('pauseOnMouseEnter')) {
+      if (self.get('shouldRunAutomatically') && self.get('pauseOnMouseEnter')) {
         self.cancelCycle();
       }
     });
     this.element.addEventListener('mouseleave', function() {
       self.set('isMouseHovering', false);
-      if (self.shouldRunAutomatically() && self.get('pauseOnMouseEnter')) {
+      if (self.get('shouldRunAutomatically') && self.get('pauseOnMouseEnter')) {
         if (self.get('cycle') !== null && self.get('autoplay')) {
           return;
         }
-        self.waitIntervalToInitCycle();
+        self.waitToInitCycle();
       }
     });
     window.addEventListener('keypress', function(e) {
@@ -425,14 +485,6 @@ export default Ember.Component.extend(ComponentParent, {
         }
       }
     });
-  },
-
-  /**
-   * @method shouldRunAutomatically
-   * @private
-   */
-  shouldRunAutomatically() {
-    return this.get('interval') > 0;
   },
 
   /**
@@ -472,20 +524,12 @@ export default Ember.Component.extend(ComponentParent, {
    * @method waitPresentationToInitCycle
    * @private
    */
-  waitPresentationToInitCycle() {
-    debounce(this, this.initCycle, this.get('transitionDuration') + this.get('interval'));
-  },
-
-  /**
-   * Waits a slide interval time to start a cycle.
-   * Debounce is used to prevent user event abuse.
-   * 
-   * 
-   * @method waitIntervalToInitCycle
-   * @private
-   */
-  waitIntervalToInitCycle() {
-    debounce(this, this.initCycle, this.get('interval'));
+  waitToInitCycle(shouldWaitWholePresentation) {
+    if (this.get('shouldNotDoPresentation')) {
+      return;
+    }
+    let interval = this.get('interval');
+    debounce(this, this.initCycle, shouldWaitWholePresentation ? interval + this.get('transitionDuration') : interval);
   },
 
   /**
@@ -493,7 +537,9 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   willTransit(currSlide, followingSlide) {
-    this.adjustIndicators();
+    if (this.get('showIndicators')) {
+      this.adjustIndicators();
+    }
     followingSlide.set(this.get('orderClassName'), true);
     next(this, function() {
       this.element.offsetHeight;
