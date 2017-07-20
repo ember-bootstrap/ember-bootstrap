@@ -145,6 +145,17 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
   block: false,
 
   /**
+   * A click event on a button will not bubble up the DOM tree if it has an `onClick` action handler. Set to true to
+   * enable the event to bubble
+   *
+   * @property bubble
+   * @type boolean
+   * @default false
+   * @public
+   */
+  bubble: false,
+
+  /**
    * If button is active and this is set, the icon property will match this property
    *
    * @property iconActive
@@ -223,6 +234,8 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
    * When clicking the button this action is called with the value of the button (that is the value of the "value" property).
    * Return a promise object, and the buttons state will automatically set to "pending", "resolved" and/or "rejected".
    *
+   * The click event will not bubble up, unless you set `bubble` to true.
+   *
    * @event onClick
    * @param {*} value
    * @public
@@ -272,7 +285,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
         }
         );
       }
-      return false;
+      return this.get('bubble');
     }
   },
 
