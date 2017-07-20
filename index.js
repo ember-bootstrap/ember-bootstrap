@@ -211,5 +211,9 @@ module.exports = {
 
   warn(message) {
     this.ui.writeLine(chalk.yellow(message));
+  },
+
+  isDevelopingAddon() {
+    return true;
   }
 };
