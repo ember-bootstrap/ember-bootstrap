@@ -166,3 +166,16 @@ test('clicking a button without onClick action will cause event to bubble up', a
   await click('button');
   assert.ok(parentClick.called);
 });
+
+test('clicking a button with onClick action and bubble=true will cause event to bubble up', async function(assert) {
+  let buttonClick = this.spy();
+  this.on('buttonClick', buttonClick);
+  let parentClick = this.spy();
+  this.on('parentClick', parentClick);
+
+  this.render(hbs`<div {{action "parentClick"}}>{{#bs-button bubble=true onClick=(action "buttonClick")}}Button{{/bs-button}}</div>`);
+
+  await click('button');
+  assert.ok(buttonClick.called);
+  assert.ok(parentClick.called);
+});
