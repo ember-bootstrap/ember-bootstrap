@@ -13,15 +13,18 @@ describe('modal', function() {
         let response = res.response;
 
         expect(response.statusCode).to.equal(200);
+
+        // default modal
         expect($('#modal').length).to.equal(1);
+        expect($('#modal .modal.in').length).to.equal(1);
+        expect($('#modal .modal').css('display')).to.equal('block');
+        expect($('#modal .modal-backdrop.in').length).to.equal(1);
+        expect($('#modal .modal .modal-header .modal-title').text().trim()).to.equal('modal header');
+        expect($('#modal .modal .modal-body').text().trim()).to.equal('modal body');
 
-        // @todo ember-wormhole has still several issues with FastBoot
-        // see https://github.com/yapplabs/ember-wormhole/issues/86
-        // also cannot upgrade form 0.4.1 because of https://github.com/yapplabs/ember-wormhole/issues/77
-        // when these things have been sorted out hopefully soon, we can activate the following tests
-
-        // expect($('.modal').length).to.equal(1);
-        // expect($('.modal').hasClass('fade')).to.be.false;
+        // hidden modal
+        expect($('#modal-hidden').length).to.equal(1);
+        expect($('#modal-hidden .modal.in').length).to.equal(0);
       });
   });
 

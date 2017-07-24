@@ -2,7 +2,10 @@ import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
 
 const {
-  computed
+  computed,
+  String: {
+    htmlSafe
+  }
 } = Ember;
 
 /**
@@ -17,7 +20,7 @@ export default Ember.Component.extend({
   layout,
   classNames: ['modal'],
   classNameBindings: ['fade'],
-  attributeBindings: ['tabindex'],
+  attributeBindings: ['tabindex', 'style'],
   ariaRole: 'dialog',
   tabindex: '-1',
 
@@ -40,6 +43,32 @@ export default Ember.Component.extend({
    * @private
    */
   showModal: false,
+
+  /**
+   * Render modal markup?
+   *
+   * @property inDom
+   * @type boolean
+   * @default false
+   * @private
+   */
+  inDom: false,
+
+  /**
+   * @property paddingLeft
+   * @type number|null
+   * @default null
+   * @private
+   */
+  paddingLeft: null,
+
+  /**
+   * @property paddingRight
+   * @type number|null
+   * @default null
+   * @private
+   */
+  paddingRight: null,
 
   /**
    * Closes the modal when escape key is pressed.
@@ -73,10 +102,27 @@ export default Ember.Component.extend({
   backdropClose: true,
 
   /**
-   * @event onClose
-   * @public
+   * @property style
+   * @type string
+   * @readOnly
+   * @private
    */
-  onClose() {},
+  style: computed('inDom', 'paddingLeft', 'paddingRight', function() {
+    let styles = [];
+    let { inDom, paddingLeft, paddingRight } = this.getProperties('inDom', 'paddingLeft', 'paddingRight');
+
+    if (inDom) {
+      styles.push('display: block');
+    }
+    if (paddingLeft) {
+      styles.push(`padding-left: ${paddingLeft}px`);
+    }
+    if (paddingRight) {
+      styles.push(`padding-right: ${paddingRight}px`);
+    }
+
+    return htmlSafe(styles.join(';'));
+  }),
 
   /**
    * Name of the size class
@@ -90,6 +136,12 @@ export default Ember.Component.extend({
     let size = this.get('size');
     return Ember.isBlank(size) ? null : `modal-${size}`;
   }).readOnly(),
+
+  /**
+   * @event onClose
+   * @public
+   */
+  onClose() {},
 
   keyDown(e) {
     let code = e.keyCode || e.which;
