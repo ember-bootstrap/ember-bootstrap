@@ -154,21 +154,8 @@ export default Ember.Component.extend(ComponentParent, {
    * @property indicators
    * @private
    */
-  indicators: computed('currentIndex', 'childSlides', 'showIndicators', function() {
-    if (this.get('showIndicators') === false) {
-      return;
-    }
-    let indicators = [];
-    for (let a = 0; a < this.get('childSlides').length; a++) {
-      indicators.push({
-        active: false,
-        index: a
-      });
-    }
-    if (indicators.length > 0) {
-      indicators[this.get('currentIndex')].active = true;
-    }
-    return indicators;
+  indicators: computed('childSlides.length', function() {
+    return new Array(this.get('childSlides.length'));
   }),
 
   /**
@@ -194,14 +181,14 @@ export default Ember.Component.extend(ComponentParent, {
    * @property shouldNotDoPresentation
    * @type boolean
    */
-  shouldNotDoPresentation: lt('childSlides', 2),
+  shouldNotDoPresentation: computed.lt('childSlides', 2),
 
   /**
    * @private
    * @property shouldRunAutomatically
    * @type boolean
    */
-  shouldRunAutomatically: gt('interval', 0),
+  shouldRunAutomatically: computed.gt('interval', 0),
 
   /**
    * Current slide transition has finished.
@@ -333,20 +320,6 @@ export default Ember.Component.extend(ComponentParent, {
         this.notifyPropertyChange('childSlides');
       }
     });
-  },
-
-  /**
-   * Transfers 'active' class name of current index to the next follwing index.
-   * 
-   * @method adjustIndicators
-   * @private
-   */
-  adjustIndicators() {
-    let indicators = this.get('indicators');
-    let currIndicator = indicators[this.get('currentIndex')];
-    let followingIndicator = indicators[this.get('followingIndex')];
-    set(currIndicator, 'active', false);
-    set(followingIndicator, 'active', true);
   },
 
   /**
@@ -533,9 +506,6 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   willTransit(currSlide, followingSlide) {
-    if (this.get('showIndicators')) {
-      this.adjustIndicators();
-    }
     followingSlide.set(this.get('orderClassName'), true);
     next(this, function() {
       this.element.offsetHeight;
