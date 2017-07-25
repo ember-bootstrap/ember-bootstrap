@@ -17,8 +17,11 @@
       {{#nav.item}}
         <a href="https://twitter.com/simonihmig" class="nav-link" target="_blank" rel="noopener"><i class="fa fa-twitter"></i></a>
       {{/nav.item}}
-      {{#nav.item}}
+      {{#nav.item class="visible-sm-block visible-xs-block"}}
         <a href="https://github.com/kaliber5/ember-bootstrap" class="nav-link" target="_blank" rel="noopener"><i class="fa fa-github"></i></a>
+      {{/nav.item}}
+      {{#nav.item class="hidden-sm hidden-xs"}}
+        <iframe class="navbar-text" src="https://ghbtns.com/github-btn.html?user=kaliber5&repo=ember-bootstrap&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
       {{/nav.item}}
     {{/navbar.nav}}
   {{/navbar.content}}
