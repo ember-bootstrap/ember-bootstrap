@@ -8,54 +8,17 @@
 <p>If you are not using a preprocessor, ember-bootstrap will import the static CSS files. If you are using a preprocessor
     like LESS or SASS, ember-bootstrap imports the preprocessor-ready versions of the styles.</p>
 
-<p>ember-bootstrap deliberately excludes `bootstrap.js` because the jQuery and Ember ways of control flow and animation
-    sometimes don't play well together, causing unpredictable results. This is the main motivation behind ember-bootstrap.
-    It is possible to import `bootstrap.js` from bower_components or the vendor folder. This is NOT recommended or
-    supported, and you will be on your own. You have been warned!!!</p>
+{{#bs-alert type="warning" dismissible=false}}
+  <h4>No bootstrap.js</h4>
+  ember-bootstrap deliberately excludes
+  <code>bootstrap.js</code> because the jQuery and Ember ways of control flow and animation
+  sometimes don't play well together, causing unpredictable results. This is the main motivation behind ember-bootstrap.
+  It is possible to import
+  <code>bootstrap.js</code> from bower_components or the vendor folder. This is NOT recommended or
+  supported, and you will be on your own. You have been warned!
+{{/bs-alert}}
 
 <h1 id="addon-options">Importing assets</h1>
-
-<h2 id="configuration-with-blueprint">Configuration using the default blueprint</h2>
-
-<p>By default, ember-bootstrap installs Bootstrap 3 and uses the installed preprocessor if there is one. You can use
-    the ember-bootstrap default blueprint to switch Bootstrap version or preprocessor. Simply re-run the default
-    blueprint like</p>
-
-<pre class="highlight">ember generate ember-bootstrap --bootstrap-version=4 --preprocessor=sass
-</pre>
-
-<p>The <code>--bootstrap-version</code> can be "3" or "4" and if omitted, defaults to the currently configured version,
-    if present, or "3". The <code>--preprocessor</code> can be "none", "less", or "sass". The blueprint will use the
-    currently installed preprocessor as its cue if this option is omitted. We explicitly support ember-cli-less and
-    ember-cli-sass. You will need to install and configure other preprocessors yourself.</p>
-
-<p>The default blueprint does the following:</p>
-
-<ul>
-    <li>
-        Removes any unneeded versions of bootstrap and bootstrap-sass from <code>package.json</code>
-        and <code>bower.json</code>
-    </li>
-    <li>
-        Installs the appropriate version of bootstrap or bootstrap-sass as an npm package
-    </li>
-    <li>
-        Removes unneeded dependencies on ember-cli-less and ember-cli-sass
-    </li>
-    <li>
-        Installs ember-cli-less or ember-cli-sass if appropriate
-    </li>
-    <li>
-        Creates <code>app.less</code> or <code>app.scss</code> if appropriate and it doesn't exist
-    </li>
-    <li>
-        Adds the appropriate "@import" statement to your <code>app.less</code> or <code>app.scss</code> if it&apos;s
-        not there already
-    </li>
-    <li>
-        Safely edits your <code>ember-cli-build.js</code> to ensure the proper ember-bootstrap settings for your configuration
-    </li>
-</ul>
 
 <h2 id="importing-css-assets">Importing static CSS Assets</h2>
 
@@ -69,11 +32,8 @@
 <div>
   <pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
 
-/* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
-
 module.exports = function(defaults) {
-    var app = new EmberApp(defaults, {
+    let app = new EmberApp(defaults, {
         'ember-bootstrap': {
             'importBootstrapCSS': false
         }
@@ -113,7 +73,7 @@ module.exports = function(defaults) {
 
 <p>This will add the whole bootstrap stylesheets allowing you to customize them easily using the available variables.</p>
 
-{{#bs-alert type="warning"}}
+{{#bs-alert type="info" dismissible=false}}
   <strong>Important note:</strong> this only works when you have the CSS preprocessor addon installed before installing ember-bootstrap
   itself. If that is not the case, make sure to run the default install blueprint after installing the preprocessor addon:
   <code>ember generate ember-bootstrap</code>! This will execute the necessary setup steps as described above.
@@ -147,9 +107,6 @@ module.exports = function(defaults) {
   to false in your <code>ember-cli-build.js</code>:</p>
 
 <div><pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
-
-/* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
     var app = new EmberApp(defaults, {
