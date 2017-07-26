@@ -25,7 +25,7 @@ export default function onTransitionEnd(node, handler, context, duration = 0) {
     if (backup) {
       cancel(backup);
     }
-    event.target.removeEventListener(transitionEnd, done);
+    node.removeEventListener(transitionEnd, done);
     join(context, handler, event);
   }
 }
