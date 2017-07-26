@@ -153,12 +153,12 @@
       <td></td>
       <td>
         <p>
-          Include only the listed components into your build, to reduce your JavaScript bundle size. Components not listed here will not be available.
+          Component tree shaking: include only the listed components into your build, to reduce your JavaScript bundle size. Components not listed here will not be available.
           You should use either <code>whitelist</code> or <code>blacklist</code>, not both.
         </p>
 
         <p>Example:</p>
-        <pre class="highlight"><code>blacklist: ['bs-button', 'bs-modal', 'bs-form']</code></pre>
+        <pre class="highlight"><code>whitelist: ['bs-button', 'bs-modal', 'bs-form']</code></pre>
       </td>
     </tr>
     <tr>
