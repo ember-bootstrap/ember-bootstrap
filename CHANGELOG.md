@@ -10,6 +10,10 @@
 * **Modal:** refactored visibility rendering of modals, making open modals render correctly in FastBoot ([565d805](https://github.com/kaliber5/ember-bootstrap/commit/565d805)), closes [#380](https://github.com/kaliber5/ember-bootstrap/issues/380)
 * register as Ember library, showing addon version in console and Ember Inspector ([47cc7ef](https://github.com/kaliber5/ember-bootstrap/commit/47cc7ef))
 
+### Bug Fixes
+
+* **Modal:** fix transitionend event listener removal, fixing occasional problems with modals. Thanks to [@lodrantl](https://github.com/lodrantl)
+
 
 <a name="1.0.0-beta.2"></a>
 # [1.0.0-beta.2](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-beta.1...1.0.0-beta.2) (2017-06-21)
