@@ -7,8 +7,7 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 const {
   computed,
   observer,
-  run: { cancel, debounce, later, next },
-  set
+  run: { cancel, debounce, later, next, throttle }
 } = Ember;
 
 /**
@@ -103,16 +102,11 @@ export default Ember.Component.extend(ComponentParent, {
    * @property childSlidesObserver
    */
   childSlidesObserver: observer('childSlides', function() {
-    this.cancelCycle();
-    let slidesLen = this.get('childSlides').length;
-    if (slidesLen > 0) {
-      if (this.get('currentIndex') >= slidesLen) {
-        this.set('currentIndex', slidesLen - 1);
-      }
-      this.get('childSlides')[this.get('currentIndex')].set('active', true);
-      if (this.get('shouldRunAutomatically') && this.get('autoPlay')) {
-        this.waitToInitCycle();
-      }
+    let childSlides = this.get('childSlides');
+    if (childSlides.length > 0) {
+      this.cancelTransition();
+      this.cancelCycle();
+      this.startingConfiguration(childSlides);
     }
   }),
 
@@ -125,14 +119,6 @@ export default Ember.Component.extend(ComponentParent, {
   currentIndex: listenTo('index'),
 
   /**
-   * Holds the cycle scheduled item.
-   *
-   * @property cycle
-   * @private
-   */
-  cycle: null,
-
-  /**
    * Bootstrap style to indicate that a given slide should be moving to left/right.
    *
    * @property directionalClassName
@@ -142,7 +128,7 @@ export default Ember.Component.extend(ComponentParent, {
   directionalClassName: null,
 
   /**
-   * Relative to current index, indicates the next slide to move into.
+   * Indicates the next slide index to move into.
    *
    * @property followingIndex
    * @private
@@ -181,7 +167,7 @@ export default Ember.Component.extend(ComponentParent, {
    * @property shouldNotDoPresentation
    * @type boolean
    */
-  shouldNotDoPresentation: computed.lt('childSlides', 2),
+  shouldNotDoPresentation: computed.lt('childSlides.length', 2),
 
   /**
    * @private
@@ -191,13 +177,20 @@ export default Ember.Component.extend(ComponentParent, {
   shouldRunAutomatically: computed.gt('interval', 0),
 
   /**
-   * Current slide transition has finished.
+   * Holds the scheduled cycle item.
    *
+   * @property scheduledCycle
    * @private
-   * @property transitionFinished
-   * @type boolean
    */
-  transitionFinished: true,
+  scheduledCycle: null,
+
+  /**
+   * Holds the scheduled transition item.
+   *
+   * @property scheduledTransition
+   * @private
+   */
+  scheduledTransition: null,
 
   /**
    * Starts automatic sliding on page load.
@@ -294,7 +287,7 @@ export default Ember.Component.extend(ComponentParent, {
         this.cancelCycle();
         this.waitToInitCycle(true);
       }
-      this.transition(toIndex, true);
+      this.initTransition(toIndex, true);
     },
 
     toNextSlide() {
@@ -345,7 +338,17 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   cancelCycle() {
-    cancel(this.get('cycle'));
+    cancel(this.get('scheduledCycle'));
+  },
+
+  /**
+   * Cancels a scheduled transition item.
+   * 
+   * @method cancelTransition
+   * @private
+   */
+  cancelTransition() {
+    cancel(this.get('scheduledTransition'));
   },
 
   /**
@@ -356,14 +359,14 @@ export default Ember.Component.extend(ComponentParent, {
    */
   doCycle() {
     if (this.get('ltr') && this.get('canTurnToRight')) {
-      this.transition(this.get('currentIndex') + 1);
+      this.initTransition(this.get('currentIndex') + 1);
     } else if (this.get('ltr') === false && this.get('canTurnToLeft')) {
-      this.transition(this.get('currentIndex') - 1);
+      this.initTransition(this.get('currentIndex') - 1);
     } else {
       return null;
     }
     return later(this, function() {
-      this.set('cycle', this.doCycle());
+      this.set('scheduledCycle', this.doCycle());
     }, this.get('transitionDuration') + this.get('interval'));
   },
 
@@ -380,8 +383,6 @@ export default Ember.Component.extend(ComponentParent, {
     followingSlide.set('active', true);
     followingSlide.set(this.get('directionalClassName'), false);
     followingSlide.set(this.get('orderClassName'), false);
-    this.set('currentIndex', this.get('followingIndex'));
-    this.set('transitionFinished', true);
   },
 
   /**
@@ -394,13 +395,14 @@ export default Ember.Component.extend(ComponentParent, {
     let slides = this.get('childSlides');
     let currSlide = slides[this.get('currentIndex')];
     let followingSlide = slides[this.get('followingIndex')];
+    this.set('currentIndex', this.get('followingIndex'));
     this.willTransit(currSlide, followingSlide);
-    later(
+    this.set('scheduledTransition', later(
       this,
       this.didTransition,
       currSlide,
       followingSlide,
-      this.get('transitionDuration'));
+      this.get('transitionDuration')));
   },
 
   /**
@@ -410,10 +412,7 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   initCycle() {
-    if (this.get('shouldNotDoPresentation')) {
-      return;
-    }
-    this.set('cycle', this.doCycle());
+    this.set('scheduledCycle', this.doCycle());
   },
 
   /**
@@ -434,7 +433,7 @@ export default Ember.Component.extend(ComponentParent, {
     this.element.addEventListener('mouseleave', function() {
       self.set('isMouseHovering', false);
       if (self.get('shouldRunAutomatically') && self.get('pauseOnMouseEnter')) {
-        if (self.get('cycle') !== null && self.get('autoplay')) {
+        if (self.get('scheduledCycle') !== null && self.get('autoplay')) {
           return;
         }
         self.waitToInitCycle();
@@ -474,31 +473,50 @@ export default Ember.Component.extend(ComponentParent, {
   },
 
   /**
-   * Groups all transition functionalities.
-   * 
-   * @method transition
+   * @method startingConfiguration
    * @private
    */
-  transition(toIndex) {
-    if (this.get('transitionFinished')) {
-      this.set('transitionFinished', false);
-      this.doTransition(toIndex);
+  startingConfiguration(childSlides) {
+    // Sets new current index
+    let currentIndex = this.get('currentIndex');
+    if (currentIndex >= childSlides.length) {
+      currentIndex = childSlides.length - 1;
+      this.set('currentIndex', currentIndex);
     }
+    // autoPlay triggers automatic sliding
+    if (this.get('shouldRunAutomatically') && this.get('autoPlay')) {
+      this.waitToInitCycle();
+    }
+    // Default starting slide parameters
+    if (this.get('directionalClassName') !== null) {
+      childSlides[currentIndex].set(this.get('directionalClassName'), false);
+    }
+    childSlides[currentIndex].set('active', true);
   },
 
   /**
-   * Waits a slide presentation time to start a cycle.
+   * Groups all transition functionalities.
+   * 
+   * @method initTransition
+   * @private
+   */
+  initTransition(toIndex) {
+    throttle(this, this.doTransition, toIndex, this.get('transitionDuration'));
+  },
+
+  /**
+   * Waits a interval or presentation time to start a cycle.
    * Debounce is used to prevent user event abuse.
    * 
    * @method waitPresentationToInitCycle
    * @private
    */
-  waitToInitCycle(shouldWaitWholePresentation) {
+  waitToInitCycle(shouldWaitPresentation) {
     if (this.get('shouldNotDoPresentation')) {
       return;
     }
     let interval = this.get('interval');
-    debounce(this, this.initCycle, shouldWaitWholePresentation ? interval + this.get('transitionDuration') : interval);
+    debounce(this, this.initCycle, shouldWaitPresentation ? interval + this.get('transitionDuration') : interval);
   },
 
   /**
