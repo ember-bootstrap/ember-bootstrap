@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.2.f7c7ad6b</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -63,7 +63,10 @@ const {
   computed,
   get,
   getOwner,
-  observer
+  observer,
+  run: {
+    schedule
+  }
 } = Ember;
 
 /**
@@ -160,6 +163,32 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   showModal: false,
+
+  /**
+   * Render modal markup?
+   *
+   * @property inDom
+   * @type boolean
+   * @default false
+   * @private
+   */
+  inDom: false,
+
+  /**
+   * @property paddingLeft
+   * @type number|null
+   * @default null
+   * @private
+   */
+  paddingLeft: null,
+
+  /**
+   * @property paddingRight
+   * @type number|null
+   * @default null
+   * @private
+   */
+  paddingRight: null,
 
   /**
    * Use a semi-transparent modal background to hide the rest of the page.
@@ -448,23 +477,25 @@ export default Ember.Component.extend(TransitionSupport, {
         return;
       }
 
-      let modalEl = this.get(&#x27;modalElement&#x27;);
-      modalEl.style.display = &#x27;block&#x27;;
-      modalEl.scrollTop = 0;
+      this.set(&#x27;inDom&#x27;, true);
+      schedule(&#x27;afterRender&#x27;, () =&gt; {
+        let modalEl = this.get(&#x27;modalElement&#x27;);
+        modalEl.scrollTop = 0;
 
-      this.handleUpdate();
-      this.set(&#x27;showModal&#x27;, true);
-      this.get(&#x27;onShow&#x27;)();
+        this.handleUpdate();
+        this.set(&#x27;showModal&#x27;, true);
+        this.get(&#x27;onShow&#x27;)();
 
-      if (this.get(&#x27;usesTransition&#x27;)) {
-        transitionEnd(this.get(&#x27;modalElement&#x27;), function() {
+        if (this.get(&#x27;usesTransition&#x27;)) {
+          transitionEnd(this.get(&#x27;modalElement&#x27;), function() {
+            this.takeFocus();
+            this.get(&#x27;onShown&#x27;)();
+          }, this, this.get(&#x27;transitionDuration&#x27;));
+        } else {
           this.takeFocus();
           this.get(&#x27;onShown&#x27;)();
-        }, this, this.get(&#x27;transitionDuration&#x27;));
-      } else {
-        this.takeFocus();
-        this.get(&#x27;onShown&#x27;)();
-      }
+        }
+      });
     };
     this.handleBackdrop(callback);
   },
@@ -502,7 +533,8 @@ export default Ember.Component.extend(TransitionSupport, {
       return;
     }
 
-    this.get(&#x27;modalElement&#x27;).style.display = &#x27;none&#x27;;
+    this.set(&#x27;inDom&#x27;, false);
+
     this.handleBackdrop(() =&gt; {
       document.body.classList.remove(&#x27;modal-open&#x27;);
       this.resetAdjustments();
@@ -586,9 +618,10 @@ export default Ember.Component.extend(TransitionSupport, {
    */
   adjustDialog() {
     let modalIsOverflowing = this.get(&#x27;modalElement&#x27;).scrollHeight &gt; document.documentElement.clientHeight;
-    let el = this.get(&#x27;modalElement&#x27;);
-    el.style.paddingLeft = !this.bodyIsOverflowing &amp;&amp; modalIsOverflowing ? &#x60;${this.get(&#x27;scrollbarWidth&#x27;)}px&#x60; : null;
-    el.style.paddingRight = this.bodyIsOverflowing &amp;&amp; !modalIsOverflowing ? &#x60;${this.get(&#x27;scrollbarWidth&#x27;)}px&#x60; : null;
+    this.setProperties({
+      paddingLeft: !this.bodyIsOverflowing &amp;&amp; modalIsOverflowing ? this.get(&#x27;scrollbarWidth&#x27;) : null,
+      paddingRight: this.bodyIsOverflowing &amp;&amp; !modalIsOverflowing ? this.get(&#x27;scrollbarWidth&#x27;) : null
+    });
   },
 
   /**
@@ -596,9 +629,10 @@ export default Ember.Component.extend(TransitionSupport, {
    * @private
    */
   resetAdjustments() {
-    let el = this.get(&#x27;modalElement&#x27;);
-    el.style.paddingLeft = null;
-    el.style.paddingRight = null;
+    this.setProperties({
+      paddingLeft: null,
+      paddingRight: null
+    });
   },
 
   /**
@@ -675,9 +709,12 @@ export default Ember.Component.extend(TransitionSupport, {
 
   init() {
     this._super(...arguments);
-    let { isOpen, backdrop, fade } = this.getProperties(&#x27;isOpen&#x27;, &#x27;backdrop&#x27;, &#x27;fade&#x27;);
-    this.set(&#x27;showModal&#x27;, isOpen &amp;&amp; !fade);
-    this.set(&#x27;showBackdrop&#x27;, isOpen &amp;&amp; backdrop);
+    let { isOpen, backdrop, fade, isFastBoot } = this.getProperties(&#x27;isOpen&#x27;, &#x27;backdrop&#x27;, &#x27;fade&#x27;, &#x27;isFastBoot&#x27;);
+    this.setProperties({
+      showModal: isOpen &amp;&amp; (!fade || isFastBoot),
+      showBackdrop: isOpen &amp;&amp; backdrop,
+      inDom: isOpen &amp;&amp; isFastBoot
+    });
   }
 });
 

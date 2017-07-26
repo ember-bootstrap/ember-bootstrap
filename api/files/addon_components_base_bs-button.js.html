@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.2.f7c7ad6b</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -200,6 +200,17 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
   block: false,
 
   /**
+   * A click event on a button will not bubble up the DOM tree if it has an &#x60;onClick&#x60; action handler. Set to true to
+   * enable the event to bubble
+   *
+   * @property bubble
+   * @type boolean
+   * @default false
+   * @public
+   */
+  bubble: false,
+
+  /**
    * If button is active and this is set, the icon property will match this property
    *
    * @property iconActive
@@ -278,6 +289,8 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
    * When clicking the button this action is called with the value of the button (that is the value of the &quot;value&quot; property).
    * Return a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;.
    *
+   * The click event will not bubble up, unless you set &#x60;bubble&#x60; to true.
+   *
    * @event onClick
    * @param {*} value
    * @public
@@ -314,7 +327,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
     let action = this.get(&#x27;onClick&#x27;);
     if (action !== null) {
       let promise = (action)(this.get(&#x27;value&#x27;));
-      if (promise &amp;&amp; typeof promise.then === &#x27;function&#x27;) {
+      if (promise &amp;&amp; typeof promise.then === &#x27;function&#x27; &amp;&amp; !this.get(&#x27;isDestroyed&#x27;)) {
         this.set(&#x27;textState&#x27;, &#x27;pending&#x27;);
         promise.then(() =&gt; {
           if (!this.get(&#x27;isDestroyed&#x27;)) {
@@ -327,7 +340,7 @@ export default Ember.Component.extend(TypeClass, SizeClass, {
         }
         );
       }
-      return false;
+      return this.get(&#x27;bubble&#x27;);
     }
   },
 

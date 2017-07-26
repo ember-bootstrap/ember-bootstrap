@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-beta.2.f7c7ad6b</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,7 +57,10 @@ import Ember from &#x27;ember&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-modal/dialog&#x27;;
 
 const {
-  computed
+  computed,
+  String: {
+    htmlSafe
+  }
 } = Ember;
 
 /**
@@ -72,7 +75,7 @@ export default Ember.Component.extend({
   layout,
   classNames: [&#x27;modal&#x27;],
   classNameBindings: [&#x27;fade&#x27;],
-  attributeBindings: [&#x27;tabindex&#x27;],
+  attributeBindings: [&#x27;tabindex&#x27;, &#x27;style&#x27;],
   ariaRole: &#x27;dialog&#x27;,
   tabindex: &#x27;-1&#x27;,
 
@@ -95,6 +98,32 @@ export default Ember.Component.extend({
    * @private
    */
   showModal: false,
+
+  /**
+   * Render modal markup?
+   *
+   * @property inDom
+   * @type boolean
+   * @default false
+   * @private
+   */
+  inDom: false,
+
+  /**
+   * @property paddingLeft
+   * @type number|null
+   * @default null
+   * @private
+   */
+  paddingLeft: null,
+
+  /**
+   * @property paddingRight
+   * @type number|null
+   * @default null
+   * @private
+   */
+  paddingRight: null,
 
   /**
    * Closes the modal when escape key is pressed.
@@ -128,10 +157,27 @@ export default Ember.Component.extend({
   backdropClose: true,
 
   /**
-   * @event onClose
-   * @public
+   * @property style
+   * @type string
+   * @readOnly
+   * @private
    */
-  onClose() {},
+  style: computed(&#x27;inDom&#x27;, &#x27;paddingLeft&#x27;, &#x27;paddingRight&#x27;, function() {
+    let styles = [];
+    let { inDom, paddingLeft, paddingRight } = this.getProperties(&#x27;inDom&#x27;, &#x27;paddingLeft&#x27;, &#x27;paddingRight&#x27;);
+
+    if (inDom) {
+      styles.push(&#x27;display: block&#x27;);
+    }
+    if (paddingLeft) {
+      styles.push(&#x60;padding-left: ${paddingLeft}px&#x60;);
+    }
+    if (paddingRight) {
+      styles.push(&#x60;padding-right: ${paddingRight}px&#x60;);
+    }
+
+    return htmlSafe(styles.join(&#x27;;&#x27;));
+  }),
 
   /**
    * Name of the size class
@@ -145,6 +191,12 @@ export default Ember.Component.extend({
     let size = this.get(&#x27;size&#x27;);
     return Ember.isBlank(size) ? null : &#x60;modal-${size}&#x60;;
   }).readOnly(),
+
+  /**
+   * @event onClose
+   * @public
+   */
+  onClose() {},
 
   keyDown(e) {
     let code = e.keyCode || e.which;
