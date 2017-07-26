@@ -10,7 +10,9 @@ export default Ember.Controller.extend({
   ],
   autoPlay: false,
   continuouslyCycle: true,
-  index: 0,
+  integerInterval: computed('interval', function() {
+    return parseInt(this.get('interval'), 10);
+  }),
   interval: 5000,
   keyboard: true,
   slides: computed('_slides', 'numberOfSlides', function() {
