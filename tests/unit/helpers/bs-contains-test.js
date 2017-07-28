@@ -4,7 +4,7 @@ import { module, test } from 'qunit';
 module('Unit | Helper | bs contains');
 
 test('it works', function(assert) {
-  assert.equal(bsContains([[42,3,15], 3]), true);
-  assert.equal(bsContains([[42,3,15], 4]), false);
+  assert.equal(bsContains([[42, 3, 15], 3]), true);
+  assert.equal(bsContains([[42, 3, 15], 4]), false);
   assert.equal(bsContains([4, 4]), false);
 });

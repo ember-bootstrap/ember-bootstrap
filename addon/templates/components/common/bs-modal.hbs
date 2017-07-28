@@ -1,0 +1,33 @@
+{{#ember-wormhole to="ember-bootstrap-wormhole" renderInPlace=_renderInPlace}}
+
+  {{#bs-modal/dialog
+    onClose=(action "close")
+    fade=fade
+    showModal=showModal
+    id=modalId
+    keyboard=keyboard
+    size=size
+    backdropClose=backdropClose
+    class=class
+    inDom=inDom
+    paddingLeft=paddingLeft
+    paddingRight=paddingRight
+  }}
+    {{yield
+      (hash
+        header=(component "bs-modal/header" title=title onClose=(action "close"))
+        body=(component "bs-modal/body")
+        footer=(component "bs-modal/footer" onClose=(action "close") onSubmit=(action "submit"))
+        close=(action "close")
+        submit=(action "submit")
+      )
+    }}
+  {{/bs-modal/dialog}}
+
+  <div>
+    {{#if showBackdrop}}
+      <div class="modal-backdrop {{if fade "fade"}} {{if showModal showClass}}" id="{{backdropId}}"></div>
+    {{/if}}
+  </div>
+
+{{/ember-wormhole}}

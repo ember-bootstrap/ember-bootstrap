@@ -14,8 +14,13 @@
 /connect.lock
 /coverage/*
 /libpeerconnection.log
-npm-debug.log
+npm-debug.log*
 testem.log
 
 .idea
 *.iml
+.publish
+
+# ember-try
+/package.json.ember-try
+/.node_modules.ember-try/

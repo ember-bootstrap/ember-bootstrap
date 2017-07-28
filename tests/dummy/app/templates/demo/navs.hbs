@@ -1,0 +1,19 @@
+<div class="bs-example">
+  {{#bs-form formLayout="inline" model=this as |form|}}
+    {{#form.element controlType="power-select" options=typeChoices label="Type" property="type" as |el|}}
+      {{el.control searchEnabled=false}}
+    {{/form.element}}
+    {{form.element controlType="checkbox" disabled=(bs-eq type "tabs") label="Stacked" property="stacked" onChange=(action "updateStacked")}}
+    {{form.element controlType="checkbox" disabled=stacked label="Justified" property="justified"}}
+  {{/bs-form}}
+  <hr>
+  <!-- BEGIN-SNIPPET nav-demo -->
+  {{#bs-nav type=type justified=justified stacked=stacked as |nav|}}
+    {{#nav.item}}{{#nav.link-to "index"}}Home{{/nav.link-to}}{{/nav.item}}
+    {{#nav.item}}{{#nav.link-to "demo.navs"}}Navs{{/nav.link-to}}{{/nav.item}}
+  {{/bs-nav}}
+  <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+  {{code-snippet name="nav-demo.hbs"}}
+</div>

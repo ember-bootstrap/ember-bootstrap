@@ -1,0 +1,15 @@
+{{#if inDom}}
+
+  {{#ember-wormhole to="ember-bootstrap-wormhole" renderInPlace=_renderInPlace}}
+
+    {{#bs-tooltip/element id=overlayId placement=_placement fade=fade showHelp=showHelp class=class}}
+      {{#if hasBlock}}
+        {{yield}}
+      {{else}}
+        {{title}}
+      {{/if}}
+    {{/bs-tooltip/element}}
+
+  {{/ember-wormhole}}
+
+{{/if}}

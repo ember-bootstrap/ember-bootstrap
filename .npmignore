@@ -1,3 +1,4 @@
+/.publish
 /.idea
 /bower_components
 /config/ember-try.js
@@ -11,7 +12,7 @@
 .editorconfig
 .ember-cli
 .gitignore
-.jshintrc
+.eslintrc.js
 .watchmanconfig
 .travis.yml
 bower.json
@@ -20,4 +21,4 @@ testem.js
 yuidoc.json
 gulpfile.js
 .codeclimate.yml
-.jscsrc
+node-tests/

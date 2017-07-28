@@ -1,0 +1,12 @@
+{{yield
+  (hash
+    element=(component "bs-form/element"
+      model=model
+      formLayout=formLayout
+      horizontalLabelGridClass=horizontalLabelGridClass
+      showAllValidations=showAllValidations
+      onChange=(action "change")
+    )
+    group=(component "bs-form/group" formLayout=formLayout)
+  )
+}}

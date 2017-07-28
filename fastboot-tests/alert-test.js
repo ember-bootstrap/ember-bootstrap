@@ -1,14 +1,18 @@
-var expect = require('chai').expect;
+'use strict';
+
+const expect = require('chai').expect;
+const setupTest = require('ember-fastboot-addon-tests').setupTest;
 
 describe('alert', function() {
+  setupTest();
 
   it('renders', function() {
     return this.visit('/alert')
       .then(function(res) {
-        var $ = res.jQuery;
-        // var response = res.response;
+        let $ = res.jQuery;
+        let response = res.response;
 
-        // add your real tests here
+        expect(response.statusCode).to.equal(200);
         expect($('#alert').length).to.equal(1);
         expect($('#alert').hasClass('alert')).to.be.true;
       });

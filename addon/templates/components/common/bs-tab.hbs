@@ -1,0 +1,44 @@
+{{#if customTabs}}
+  {{yield
+    (hash
+      pane=(component "bs-tab/pane" parent=this activeId=isActiveId fade=fade fadeTransition=fadeTransition)
+      activeId=isActiveId
+      select=(action "select")
+    )
+  }}
+{{else}}
+  {{#bs-nav type=type as |nav|}}
+    {{#each navItems as |item|}}
+      {{#if item.isGroup}}
+        {{#nav.dropdown tagName="li" class=(if (bs-contains item.childIds isActiveId) "active") as |dd|}}
+          {{#dd.toggle}}{{item.groupTitle}} <span class="caret"></span>{{/dd.toggle}}
+          {{#dd.menu as |menu|}}
+            {{#each item.children as |subItem|}}
+              {{#menu.item class=(if (bs-eq isActiveId subItem.elementId) "active")}}
+                <a href="#{{subItem.elementId}}" role="tab" class={{if (bs-eq isActiveId subItem.elementId) "nav-link active" "nav-link"}} {{action "select" subItem.elementId}}>
+                  {{subItem.title}}
+                </a>
+              {{/menu.item}}
+            {{/each}}
+          {{/dd.menu}}
+        {{/nav.dropdown}}
+      {{else}}
+        {{#nav.item active=(bs-eq item.elementId isActiveId)}}
+          <a href="#{{item.elementId}}" role="tab" class={{if (bs-eq isActiveId item.elementId) "nav-link active" "nav-link"}} {{action "select" item.elementId}}>
+            {{item.title}}
+          </a>
+        {{/nav.item}}
+      {{/if}}
+    {{/each}}
+  {{/bs-nav}}
+
+  <div class="tab-content">
+    {{yield
+      (hash
+        pane=(component "bs-tab/pane" parent=this activeId=isActiveId fade=fade fadeTransition=fadeTransition)
+        activeId=isActiveId
+        select=(action "select")
+      )
+    }}
+  </div>
+{{/if}}

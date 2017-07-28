@@ -1,0 +1,16 @@
+{{#if hasLabel}}
+  {{component labelComponent labelClass=horizontalLabelGridClass}}
+  <div class="{{horizontalInputGridClass}}">
+    {{yield}}
+    {{component feedbackIconComponent}}
+    {{component errorsComponent}}
+    {{component helpTextComponent}}
+  </div>
+{{else}}
+  <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
+    {{yield}}
+    {{component feedbackIconComponent}}
+    {{component errorsComponent}}
+    {{component helpTextComponent}}
+  </div>
+{{/if}}

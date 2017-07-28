@@ -1,19 +1,32 @@
-{{#bs-nav type="pills"}}
-    {{#bs-nav-item}}{{#link-to "alert"}}Alert{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "button"}}Buttons{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "dropdown"}}Dropdown{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "forms"}}Forms{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "accordion"}}Accordion{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "collapse"}}Collapse{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "modal"}}Modals{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "progress"}}Progress bars{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "navs"}}Navs{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "navbars"}}Navbars{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "tabs"}}Tabs{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "tooltip"}}Tooltips{{/link-to}}{{/bs-nav-item}}
-    {{#bs-nav-item}}{{#link-to "popover"}}Popovers{{/link-to}}{{/bs-nav-item}}
-{{/bs-nav}}
+{{#bs-navbar fluid=false position="static-top" type="inverse" as |navbar|}}
+  <div class="navbar-header">
+    {{navbar.toggle}}
+    {{#link-to "index" class="navbar-brand"}}ember-bootstrap{{/link-to}}
+  </div>
+  {{#navbar.content}}
+    {{#navbar.nav as |nav|}}
+      {{#nav.item}}{{#nav.link-to "getting-started"}}Getting Started{{/nav.link-to}}{{/nav.item}}
+      {{#nav.item}}{{#nav.link-to "demo"}}Components{{/nav.link-to}}{{/nav.item}}
+      {{#nav.item}}<a href="/api" class="nav-link">API v1.0</a>{{/nav.item}}
+      {{#nav.item}}<a href="//simonihmig.github.io/ember-bootstrap/api/" class="nav-link">API v0.11</a>{{/nav.item}}
+    {{/navbar.nav}}
+    {{#navbar.nav class="navbar-right" as |nav|}}
+      {{#nav.item}}
+        <a href="https://embercommunity.slack.com/messages/e-bootstrap/" class="nav-link" target="_blank" rel="noopener"><i class="fa fa-slack"></i> e-bootstrap</a>
+      {{/nav.item}}
+      {{#nav.item}}
+        <a href="https://twitter.com/simonihmig" class="nav-link" target="_blank" rel="noopener"><i class="fa fa-twitter"></i></a>
+      {{/nav.item}}
+      {{#nav.item class="visible-sm-block visible-xs-block"}}
+        <a href="https://github.com/kaliber5/ember-bootstrap" class="nav-link" target="_blank" rel="noopener"><i class="fa fa-github"></i></a>
+      {{/nav.item}}
+      {{#nav.item class="hidden-sm hidden-xs"}}
+        <iframe class="navbar-text" src="https://ghbtns.com/github-btn.html?user=kaliber5&repo=ember-bootstrap&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+      {{/nav.item}}
+    {{/navbar.nav}}
+  {{/navbar.content}}
+{{/bs-navbar}}
 
 <div class="container">
-    {{outlet}}
+  {{outlet}}
 </div>

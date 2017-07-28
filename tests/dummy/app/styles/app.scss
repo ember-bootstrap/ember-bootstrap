@@ -1,0 +1,34 @@
+@import 'variables';
+@import 'ember-bootstrap/bootstrap';
+@import 'bs-example';
+@import "ember-power-select/themes/bootstrap";
+@import "ember-power-select";
+@import "highlight-style";
+
+body {
+  //position: relative;
+  overflow: auto !important; // for modals in bs-example
+}
+
+.is-required > label:after {
+  content: '*';
+}
+
+.navbar-static-top {
+  border-width: 0 0 3px;
+}
+
+.logo {
+  margin-top: 20px;
+}
+
+.jumbotron {
+  pre {
+    font-size: 20px;
+    padding: 20px;
+    background-color: $brand-primary;
+    color: #fff;
+    border: none;
+    border-bottom: solid 3px $brand-secondary;
+  }
+}

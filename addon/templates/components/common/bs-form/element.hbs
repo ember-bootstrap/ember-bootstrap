@@ -1,0 +1,77 @@
+{{#component layoutComponent
+  hasLabel=hasLabel
+  formElementId=formElementId
+  horizontalLabelGridClass=horizontalLabelGridClass
+  errorsComponent=(component errorsComponent
+    messages=validationMessages
+    show=showValidationMessages
+  )
+  feedbackIconComponent=(component feedbackIconComponent
+    iconName=iconName
+    show=hasFeedback
+  )
+  labelComponent=(component labelComponent
+    label=label
+    invisibleLabel=invisibleLabel
+    formElementId=formElementId
+    controlType=controlType
+    formLayout=formLayout
+  )
+  helpTextComponent=(if hasHelpText
+    (component helpTextComponent
+      text=helpText
+      id=ariaDescribedBy
+    )
+  )
+}}
+  {{#with
+    (component controlComponent
+      value=value
+      id=formElementId
+      name=name
+      type=controlType
+      label=label
+      placeholder=placeholder
+      autofocus=autofocus
+      disabled=disabled
+      readonly=readonly
+      required=required
+      size=size
+      tabindex=tabindex
+      minlength=minlength
+      maxlength=maxlength
+      min=min
+      max=max
+      pattern=pattern
+      accept=accept
+      autocomplete=autocomplete
+      autosave=autosave
+      inputmode=inputmode
+      multiple=multiple
+      step=step
+      form=form
+      spellcheck=spellcheck
+      cols=cols
+      rows=rows
+      wrap=wrap
+      title=title
+      options=options
+      optionLabelPath=optionLabelPath
+      ariaDescribedBy=(if hasHelpText ariaDescribedBy)
+      onChange=(action "change")
+      validationType=_validationType
+  ) as |control|}}
+    {{#if hasBlock}}
+      {{yield
+        (hash
+          value=value
+          id=formElementId
+          validation=validation
+          control=control
+        )
+      }}
+    {{else}}
+      {{component control}}
+    {{/if}}
+  {{/with}}
+{{/component}}

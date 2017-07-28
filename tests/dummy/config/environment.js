@@ -1,9 +1,9 @@
-/* jshint node: true */
+/* eslint-env node */
 
 module.exports = function(environment) {
-  var ENV = {
+  let ENV = {
     modulePrefix: 'dummy',
-    environment: environment,
+    environment,
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
@@ -16,7 +16,10 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+
+    unstableApiURL: 'http://simonihmig.github.io/ember-bootstrap/',
+    bootstrapVersion: process.env.BOOTSTRAPVERSION || 3
   };
 
   if (environment === 'development') {
@@ -39,7 +42,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.locationType = 'hash';
   }
 
   return ENV;

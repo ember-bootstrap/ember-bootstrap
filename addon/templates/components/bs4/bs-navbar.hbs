@@ -1,0 +1,23 @@
+{{#if fluid}}
+  {{yield
+    (hash
+      toggle=(component 'bs-navbar/toggle' onClick=(action 'toggleNavbar') collapsed=_collapsed)
+      content=(component 'bs-navbar/content' collapsed=_collapsed onHidden=onCollapsed onShown=onExpanded)
+      nav=(component "bs-navbar/nav" linkToComponent=(component "bs-navbar/link-to" onCollapse=(action "collapse")))
+      collapse=(action "collapse")
+      expand=(action "expand")
+    )
+  }}
+{{else}}
+  <div class="container">
+    {{yield
+      (hash
+        toggle=(component 'bs-navbar/toggle' onClick=(action 'toggleNavbar') collapsed=_collapsed)
+        content=(component 'bs-navbar/content' collapsed=_collapsed onHidden=onCollapsed onShown=onExpanded)
+        nav=(component "bs-navbar/nav" linkToComponent=(component "bs-navbar/link-to" onCollapse=(action "collapse")))
+        collapse=(action "collapse")
+        expand=(action "expand")
+      )
+    }}
+  </div>
+{{/if}}

@@ -1,0 +1,10 @@
+{{#if hasBlock}}
+  {{yield}}
+{{else}}
+  {{#if hasSubmitButton}}
+    {{#bs-button onClick=(action onClose)}}{{closeTitle}}{{/bs-button}}
+    {{#bs-button type="primary" onClick=(action onSubmit) disabled=submitDisabled}}{{submitTitle}}{{/bs-button}}
+  {{else}}
+    {{#bs-button type="primary" onClick=(action onClose)}}{{closeTitle}}{{/bs-button}}
+  {{/if}}
+{{/if}}

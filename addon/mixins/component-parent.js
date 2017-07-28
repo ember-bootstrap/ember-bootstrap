@@ -18,9 +18,10 @@ export default Ember.Mixin.create({
    */
   children: null,
 
-  _onInit: Ember.on('init', function() {
+  init() {
+    this._super(...arguments);
     this.set('children', Ember.A());
-  }),
+  },
 
   /**
    * Register a component as a child of this parent

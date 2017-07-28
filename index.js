@@ -1,16 +1,43 @@
-/* jshint node: true */
+/* eslint-env node */
+/* eslint-disable ember-suave/prefer-destructuring */
 'use strict';
 
-var path = require('path'),
-  util = require('util'),
-  extend = util._extend,
-  mergeTrees = require('broccoli-merge-trees'),
-  Funnel = require('broccoli-funnel');
+const path = require('path');
+const util = require('util');
+const extend = util._extend;
+const mergeTrees = require('broccoli-merge-trees');
+const Funnel = require('broccoli-funnel');
+const stew = require('broccoli-stew');
+const mv = stew.mv;
+const rm = stew.rm;
+const map = stew.map;
+const rename = stew.rename;
+const BroccoliDebug = require('broccoli-debug');
+const chalk = require('chalk');
+const SilentError = require('silent-error'); // From ember-cli
 
-var defaultOptions = {
+const defaultOptions = {
   importBootstrapTheme: false,
   importBootstrapCSS: true,
-  importBootstrapFont: true
+  importBootstrapFont: true,
+  insertEmberWormholeElementToDom: true,
+  bootstrapVersion: 3
+};
+
+const supportedPreprocessors = [
+  'less',
+  'sass'
+];
+
+const componentDependencies = {
+  'bs-button-group': ['bs-button'],
+  'bs-accordion': ['bs-collapse'],
+  'bs-dropdown': ['bs-button'],
+  'bs-modal-simple': ['bs-modal'],
+  'bs-navbar': ['bs-nav', 'bs-button'],
+  'bs-popover': ['bs-contextual-help'],
+  'bs-tab': ['bs-nav'],
+  'bs-tooltip': ['bs-contextual-help']
 };
 
 // For ember-cli < 2.7 findHost doesnt exist so we backport from that version
@@ -28,54 +55,263 @@ function findHostShim() {
 module.exports = {
   name: 'ember-bootstrap',
 
-  included: function included(appOrAddon) {
+  init() {
+    this._super.init.apply(this, arguments);
+    this.debugTree = BroccoliDebug.buildDebugCallback(`ember-bootstrap:${this.name}`);
+  },
+
+  includedCommands() {
+    return {
+      'bootstrap:info': require('./lib/commands/info')
+    };
+  },
+
+  included(appOrAddon) {
     let findHost = this._findHost || findHostShim;
     let app = findHost.call(this);
 
     this.app = app;
 
-    var options = extend(defaultOptions, app.options['ember-bootstrap']);
-    var bootstrapPath = path.join(app.bowerDirectory, 'bootstrap/dist');
+    let options = extend(extend({}, defaultOptions), app.options['ember-bootstrap']);
+    if (process.env.BOOTSTRAPVERSION) {
+      // override bootstrapVersion config when environment variable is set
+      options.bootstrapVersion = parseInt(process.env.BOOTSTRAPVERSION);
+    }
+    this.bootstrapOptions = options;
 
-    // Import css from bootstrap
-    if (options.importBootstrapCSS) {
-      app.import(path.join(bootstrapPath, 'css/bootstrap.css'));
-      app.import(path.join(bootstrapPath, 'css/bootstrap.css.map'), {destDir: 'assets'});
+    this.validateDependencies();
+    this.preprocessor = this.findPreprocessor();
+
+    // static Bootstrap CSS is mapped to vendor tree, independent of BS version, so import from there
+    let vendorPath = path.join('vendor', 'ember-bootstrap');
+
+    if (!this.hasPreprocessor()) {
+      // / Import css from bootstrap
+      if (options.importBootstrapCSS) {
+        app.import(path.join(vendorPath, 'bootstrap.css'));
+        app.import(path.join(vendorPath, 'bootstrap.css.map'), { destDir: 'assets' });
+      }
+
+      if (options.importBootstrapTheme) {
+        app.import(path.join(vendorPath, 'bootstrap-theme.css'));
+        app.import(path.join(vendorPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
+      }
     }
 
-    if (options.importBootstrapTheme) {
-      app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css'));
-      app.import(path.join(bootstrapPath, 'css/bootstrap-theme.css.map'), {destDir: 'assets'});
-    }
+    // import custom addon CSS
+    app.import(path.join(vendorPath, `bs${options.bootstrapVersion}.css`));
 
-    // Import glyphicons
-    if (options.importBootstrapFont) {
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.eot'), {destDir: '/fonts'});
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.svg'), {destDir: '/fonts'});
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.ttf'), {destDir: '/fonts'});
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff'), {destDir: '/fonts'});
-      app.import(path.join(bootstrapPath, 'fonts/glyphicons-halflings-regular.woff2'), {destDir: '/fonts'});
-    }
+    // register library version
+    app.import(path.join(vendorPath, 'register-version.js'));
+  },
 
-    if (!process.env.EMBER_CLI_FASTBOOT) {
-      app.import('vendor/transition.js');
+  validateDependencies() {
+    let bowerDependencies = this.app.project.bowerDependencies();
+
+    if ('bootstrap' in bowerDependencies || 'bootstrap-sass' in bowerDependencies) {
+      this.warn('The dependencies for ember-bootstrap may be outdated. Please run `ember generate ember-bootstrap` to install appropriate dependencies!');
     }
   },
 
-  treeForStyles: function treeForStyles(tree) {
-    var styleTrees = [];
+  findPreprocessor() {
+    return supportedPreprocessors.find((name) => !!this.app.project.findAddonByName(`ember-cli-${name}`) && this.validatePreprocessor(name));
+  },
 
-    if (this.app.project.findAddonByName('ember-cli-less')) {
-      var lessTree = new Funnel(path.join(this.app.bowerDirectory, 'bootstrap/less'), {
+  validatePreprocessor(name) {
+    let dependencies = this.app.project.dependencies();
+    switch (name) {
+      case 'sass':
+        if (!('bootstrap-sass' in dependencies) && this.getBootstrapVersion() === 3) {
+          this.warn('Npm package "bootstrap-sass" is missing, but is typically required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
+        }
+        break;
+      case 'less':
+        if (this.getBootstrapVersion() === 4) {
+          throw new SilentError('There is no Less support for Bootstrap 4! Falling back to importing static CSS. Consider switching to Sass for preprocessor support!');
+        }
+        if (!('bootstrap' in dependencies)) {
+          this.warn('Npm package "bootstrap" is missing, but is typically required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
+        }
+        break;
+    }
+    return true;
+  },
+
+  getBootstrapStylesPath() {
+    let nodeModulesPath = this.app.project.nodeModulesPath;
+    switch (this.preprocessor) {
+      case 'sass':
+        if (this.getBootstrapVersion() === 4) {
+          return path.join(nodeModulesPath, 'bootstrap', 'scss');
+        } else {
+          return path.join(nodeModulesPath, 'bootstrap-sass', 'assets', 'stylesheets');
+        }
+      case 'less':
+        return path.join(nodeModulesPath, 'bootstrap', 'less');
+      default:
+        return path.join(nodeModulesPath, 'bootstrap', 'dist', 'css');
+    }
+  },
+
+  getBootstrapFontPath() {
+    switch (this.preprocessor) {
+      case 'sass':
+        return path.join(this.app.project.nodeModulesPath, 'bootstrap-sass', 'assets', 'fonts');
+      case 'less':
+      default:
+        return path.join(this.app.project.nodeModulesPath, 'bootstrap', 'fonts');
+    }
+  },
+
+  hasPreprocessor() {
+    return !!this.preprocessor;
+  },
+
+  treeForStyles() {
+    if (this.hasPreprocessor()) {
+      return new Funnel(this.getBootstrapStylesPath(), {
         destDir: 'ember-bootstrap'
       });
-      styleTrees.push(lessTree);
+    }
+  },
+
+  treeForPublic() {
+    if (this.getBootstrapVersion() === 3 && this.bootstrapOptions.importBootstrapFont) {
+      return new Funnel(this.getBootstrapFontPath(), {
+        destDir: 'fonts'
+      });
+    }
+  },
+
+  treeForVendor(tree) {
+    let trees = [tree];
+    let versionTree = rename(
+      map(tree, 'ember-bootstrap/register-version.template', (c) => c.replace('###VERSION###', require('./package.json').version)),
+      'register-version.template',
+      'register-version.js'
+    );
+    trees.push(versionTree);
+
+    if (!this.hasPreprocessor()) {
+      trees.push(new Funnel(this.getBootstrapStylesPath(), {
+        destDir: 'ember-bootstrap'
+      }));
+    }
+    return mergeTrees(trees, { overwrite: true });
+  },
+
+  getBootstrapVersion() {
+    return parseInt(this.bootstrapOptions.bootstrapVersion);
+  },
+
+  getOtherBootstrapVersion() {
+    return this.getBootstrapVersion() === 3 ? 4 : 3;
+  },
+
+  treeForAddon(tree) {
+    let bsVersion = this.getBootstrapVersion();
+    let otherBsVersion = this.getOtherBootstrapVersion();
+    let componentsPath = 'components/';
+
+    tree = this.debugTree(tree, 'addon-tree:input');
+    tree = mv(tree, `${componentsPath}bs${bsVersion}/`, componentsPath);
+    tree = rm(tree, `${componentsPath}bs${otherBsVersion}/**/*`);
+
+    tree = this.debugTree(tree, 'addon-tree:bootstrap-version');
+    tree = this.filterComponents(tree);
+    tree = this.debugTree(tree, 'addon-tree:tree-shaken');
+
+    return this._super.treeForAddon.call(this, tree);
+  },
+
+  treeForAddonTemplates(tree) {
+    let bsVersion = this.getBootstrapVersion();
+    let otherBsVersion = this.getOtherBootstrapVersion();
+    let templatePath = 'components/';
+
+    tree = this.debugTree(tree, 'addon-templates-tree:input');
+    tree = mv(tree, `${templatePath}common/`, templatePath);
+    tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
+    tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
+
+    tree = this.debugTree(tree, 'addon-templates-tree:bootstrap-version');
+    tree = this.filterComponents(tree);
+    tree = this.debugTree(tree, 'addon-templates-tree:tree-shaken');
+
+    return this._super.treeForAddonTemplates.call(this, tree);
+  },
+
+  contentFor(type, config) {
+    if (type === 'body-footer' && config.environment !== 'test' && this.bootstrapOptions.insertEmberWormholeElementToDom !== false) {
+      return '<div id="ember-bootstrap-wormhole"></div>';
+    }
+  },
+
+  warn(message) {
+    this.ui.writeLine(chalk.yellow(message));
+  },
+
+  filterComponents(tree) {
+    let whitelist = this.generateWhitelist(this.bootstrapOptions.whitelist);
+    let blacklist = this.bootstrapOptions.blacklist || [];
+
+    // exit early if no opts defined
+    if (whitelist.length === 0 && blacklist.length === 0) {
+      return tree;
     }
 
-    if (tree) {
-      styleTrees.push(tree);
+    return new Funnel(tree, {
+      exclude: [(name) => this.excludeComponent(name, whitelist, blacklist)]
+    });
+  },
+
+  excludeComponent(name, whitelist, blacklist) {
+    let regex = /^(templates\/)?components\/(base\/)?/;
+    let isComponent = regex.test(name);
+    if (!isComponent) {
+      return false;
     }
 
-    return mergeTrees(styleTrees, { overwrite: true });
+    let baseName = name.replace(regex, '');
+    let firstSeparator = baseName.indexOf('/');
+    if (firstSeparator !== -1) {
+      baseName = baseName.substring(0, firstSeparator);
+    } else {
+      baseName = baseName.substring(0, baseName.lastIndexOf('.'));
+    }
+
+    let isWhitelisted = whitelist.indexOf(baseName) !== -1;
+    let isBlacklisted = blacklist.indexOf(baseName) !== -1;
+
+    if (whitelist.length === 0 && blacklist.length === 0) {
+      return false;
+    }
+
+    if (whitelist.length && blacklist.length === 0) {
+      return !isWhitelisted;
+    }
+
+    return isBlacklisted;
+  },
+
+  generateWhitelist(whitelist) {
+    let list = [];
+
+    if (!whitelist) {
+      return list;
+    }
+
+    function _addToWhitelist(item) {
+      if (list.indexOf(item) === -1) {
+        list.push(item);
+
+        if (componentDependencies[item]) {
+          componentDependencies[item].forEach(_addToWhitelist);
+        }
+      }
+    }
+
+    whitelist.forEach(_addToWhitelist);
+    return list;
   }
 };
