@@ -1,13 +1,9 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import RSVP from 'rsvp';
+import { set, computed } from '@ember/object';
+import { assert } from '@ember/debug';
+import { isPresent } from '@ember/utils';
 import layout from 'ember-bootstrap/templates/components/bs-form';
-
-const {
-  computed,
-  RSVP,
-  set,
-  assert,
-  isPresent
-} = Ember;
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -79,7 +75,7 @@ const {
   @extends Ember.Component
   @public
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: 'form',
   classNameBindings: ['layoutClass'],

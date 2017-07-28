@@ -1,10 +1,6 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import ContextualHelp from './bs-contextual-help';
 import layout from 'ember-bootstrap/templates/components/bs-tooltip';
-
-const {
-  computed
-} = Ember;
 
 /**
  Component that implements Bootstrap [tooltips](http://getbootstrap.com/javascript/#tooltips).

@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { alias } from '@ember/object/computed';
+import Mixin from '@ember/object/mixin';
 
 /**
  * @class SubComponent
@@ -6,6 +7,6 @@ import Ember from 'ember';
  * @deprecated
  * @private
  */
-export default Ember.Mixin.create({
-  targetObject: Ember.computed.alias('parentView')
+export default Mixin.create({
+  targetObject: alias('parentView')
 });

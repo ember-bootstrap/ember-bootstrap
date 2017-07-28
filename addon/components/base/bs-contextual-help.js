@@ -1,4 +1,10 @@
-import Ember from 'ember';
+import { assert } from '@ember/debug';
+import Component from '@ember/component';
+import { guidFor } from '@ember/object/internals';
+import { isArray } from '@ember/array';
+import { isBlank } from '@ember/utils';
+import EmberObject, { observer, computed } from '@ember/object';
+import { next, schedule, cancel, later, run } from '@ember/runloop';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import getPosition from 'ember-bootstrap/utils/get-position';
 import getCalculatedOffset from 'ember-bootstrap/utils/get-calculated-offset';
@@ -6,24 +12,7 @@ import getParent from 'ember-bootstrap/utils/get-parent';
 import setOffset from 'ember-bootstrap/utils/set-offset';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 
-const {
-  assert,
-  Component,
-  computed,
-  guidFor,
-  isArray,
-  isBlank,
-  observer,
-  run,
-  run: {
-    later,
-    cancel,
-    schedule,
-    next
-  }
-} = Ember;
-
-const InState = Ember.Object.extend({
+const InState = EmberObject.extend({
   hover: false,
   focus: false,
   click: false,

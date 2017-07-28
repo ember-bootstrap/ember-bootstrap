@@ -1,10 +1,10 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { observer, computed } from '@ember/object';
+import { scheduleOnce } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-tab/pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
-
-const { computed, observer, run: { scheduleOnce } } = Ember;
 
 /**
  The tab pane of a tab component.
@@ -16,7 +16,7 @@ const { computed, observer, run: { scheduleOnce } } = Ember;
  @uses Mixins.ComponentChild
  @public
  */
-export default Ember.Component.extend(ComponentChild, TransitionSupport, {
+export default Component.extend(ComponentChild, TransitionSupport, {
   layout,
   classNameBindings: ['active', 'usesTransition:fade'],
   classNames: ['tab-pane'],

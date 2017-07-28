@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
 
 /**
  * Mixin for control components to add standard HTML attributes
@@ -7,7 +7,7 @@ import Ember from 'ember';
  * @namespace Mixins
  * @private
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
   attributeBindings: [
     'name',
     'autofocus',

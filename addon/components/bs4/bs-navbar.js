@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import Navbar from 'ember-bootstrap/components/base/bs-navbar';
 
 export default Navbar.extend({
@@ -29,13 +29,13 @@ export default Navbar.extend({
    */
   backgroundColor: 'faded',
 
-  breakpointClass: Ember.computed('toggleBreakpoint', function() {
+  breakpointClass: computed('toggleBreakpoint', function() {
     let toggleBreakpoint = this.get('toggleBreakpoint');
 
     return `navbar-toggleable-${toggleBreakpoint}`;
   }),
 
-  backgroundClass: Ember.computed('backgroundColor', function() {
+  backgroundClass: computed('backgroundColor', function() {
     let backgroundColor = this.get('backgroundColor');
 
     return `bg-${backgroundColor}`;

@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
 
 export default function destroyApp(application) {
-  Ember.run(application, 'destroy');
+  run(application, 'destroy');
   let el = document.getElementById('ember-bootstrap-modal-container');
   if (el) {
     el.remove();

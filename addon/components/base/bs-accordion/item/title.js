@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/title';
 
 /**
@@ -11,7 +11,7 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/title';
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   ariaRole: 'tab',
   classNameBindings: ['collapsed:collapsed:expanded'],

@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import { later, cancel, join } from '@ember/runloop';
 import transitionEnd from './transition-support';
-
-const { run: { join, cancel, later } } = Ember;
 
 export default function onTransitionEnd(node, handler, context, duration = 0) {
   if (!node) {

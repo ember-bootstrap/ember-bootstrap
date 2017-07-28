@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import { assert } from '@ember/debug';
+import { computed } from '@ember/object';
+import { isBlank } from '@ember/utils';
 import FormElementLayout from '../layout';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/horizontal';
-
-const { assert, computed, isBlank } = Ember;
 
 /**
 

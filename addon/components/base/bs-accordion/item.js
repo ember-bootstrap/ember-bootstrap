@@ -1,11 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
-
-const {
-  computed
-} = Ember;
 
 /**
  A collapsible/expandable item within an accordion
@@ -19,7 +16,7 @@ const {
  @uses Mixins.TypeClass
  @public
  */
-export default Ember.Component.extend(ComponentChild, TypeClass, {
+export default Component.extend(ComponentChild, TypeClass, {
   layout,
 
   /**

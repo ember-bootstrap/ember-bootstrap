@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { htmlSafe } from '@ember/string';
 import layout from 'ember-bootstrap/templates/components/bs-progress/bar';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
-
-const { computed, String: { htmlSafe } } = Ember;
 
 /**
 
@@ -14,7 +14,7 @@ const { computed, String: { htmlSafe } } = Ember;
  @uses Mixins.TypeClass
  @public
  */
-export default Ember.Component.extend(TypeClass, {
+export default Component.extend(TypeClass, {
   layout,
   classNames: ['progress-bar'],
   classNameBindings: ['progressBarStriped'],

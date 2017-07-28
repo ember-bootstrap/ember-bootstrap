@@ -1,8 +1,9 @@
+import { run } from '@ember/runloop';
+import { Promise as EmberPromise } from 'rsvp';
 import { find, click } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import { test, defaultButtonClass } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
 
 moduleForComponent('bs-button', 'Integration | Component | bs-button', {
   integration: true
@@ -126,7 +127,7 @@ test('clicking a button sends onclick action, if promise is returned from closur
   let promise, resolvePromise;
 
   this.on('testAction', () => {
-    promise = new Ember.RSVP.Promise(function(resolve) {
+    promise = new EmberPromise(function(resolve) {
       resolvePromise = resolve;
     });
     return promise;
@@ -138,7 +139,7 @@ test('clicking a button sends onclick action, if promise is returned from closur
   await click('button');
   assert.equal(find('button').textContent, 'pending');
 
-  Ember.run(resolvePromise);
+  run(resolvePromise);
 
   assert.equal(find('button').textContent, 'resolved');
 

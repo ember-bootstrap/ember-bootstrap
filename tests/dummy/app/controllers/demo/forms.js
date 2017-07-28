@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { computed } from '@ember/object';
+import { getOwner } from '@ember/application';
 import Login from '../../models/login';
 
-const { computed, getOwner } = Ember;
-
-export default Ember.Controller.extend({
+export default Controller.extend({
   formLayout: 'vertical',
   email: null,
   password: null,

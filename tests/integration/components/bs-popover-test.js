@@ -2,7 +2,10 @@ import { click, find } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { test, versionDependent } from '../../helpers/bootstrap-test';
-import { setupForPositioning, assertPositioning } from '../../helpers/contextual-help';
+import {
+  setupForPositioning,
+  assertPositioning
+} from '../../helpers/contextual-help';
 
 moduleForComponent('bs-popover', 'Integration | Component | bs-popover', {
   integration: true

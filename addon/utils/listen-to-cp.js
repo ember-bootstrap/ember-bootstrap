@@ -1,6 +1,4 @@
-import Ember from 'ember';
-
-const { computed, getWithDefault } = Ember;
+import { getWithDefault, computed } from '@ember/object';
 
 /**
  * CP macro that listens to dependent (external) property, but allows overriding it locally without violating DDAU

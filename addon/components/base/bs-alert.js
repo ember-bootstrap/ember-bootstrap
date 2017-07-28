@@ -1,14 +1,10 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { observer, computed } from '@ember/object';
+import { later } from '@ember/runloop';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import layout from 'ember-bootstrap/templates/components/bs-alert';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
-
-const {
-  computed,
-  observer,
-  run: { later }
-} = Ember;
 
 /**
  Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -31,7 +27,7 @@ const {
  @uses Mixins.TransitionSupport
  @public
  */
-export default Ember.Component.extend(TypeClass, TransitionSupport, {
+export default Component.extend(TypeClass, TransitionSupport, {
   layout,
   classNameBindings: ['alert', 'fade', 'dismissible:alert-dismissible'],
 

@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import NavbarToggle from 'ember-bootstrap/components/base/bs-navbar/toggle';
-
-const { computed } = Ember;
 
 export default NavbarToggle.extend({
   classNames: ['navbar-toggler'],

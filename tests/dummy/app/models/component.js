@@ -1,9 +1,7 @@
-import Ember from 'ember';
+import EmberObject, { computed } from '@ember/object';
 import config from 'dummy/config/environment';
 
-const { computed } = Ember;
-
-export default Ember.Object.extend({
+export default EmberObject.extend({
   id: null,
   title: null,
   description: null,

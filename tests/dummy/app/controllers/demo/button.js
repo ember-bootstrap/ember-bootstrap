@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import RSVP from 'rsvp';
+import { later } from '@ember/runloop';
 
-const { RSVP, run: { later } } = Ember;
-
-export default Ember.Controller.extend({
+export default Controller.extend({
 
   actions: {
     submit() {

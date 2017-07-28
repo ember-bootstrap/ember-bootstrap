@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
+import { isPresent } from '@ember/utils';
 import layout from 'ember-bootstrap/templates/components/bs-nav';
-
-const { isPresent } = Ember;
 
 /**
 
@@ -71,7 +71,7 @@ const { isPresent } = Ember;
  @public
 
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
 
   tagName: 'ul',
@@ -79,7 +79,7 @@ export default Ember.Component.extend({
 
   classNameBindings: ['typeClass', 'justified:nav-justified'],
 
-  typeClass: Ember.computed('type', function() {
+  typeClass: computed('type', function() {
     let type = this.get('type');
     if (isPresent(type)) {
       return `nav-${type}`;

@@ -1,13 +1,9 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { copy } from '@ember/object/internals';
+import { computed } from '@ember/object';
+import { isArray, A } from '@ember/array';
 import layout from 'ember-bootstrap/templates/components/bs-button-group';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
-
-const {
-  A,
-  copy,
-  computed,
-  isArray
-} = Ember;
 
 /**
  Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
@@ -66,7 +62,7 @@ const {
  @uses Mixins.SizeClass
  @public
  */
-export default Ember.Component.extend(SizeClass, {
+export default Component.extend(SizeClass, {
   layout,
   ariaRole: 'group',
   classNameBindings: ['vertical:btn-group-vertical:btn-group', 'justified:btn-group-justified'],

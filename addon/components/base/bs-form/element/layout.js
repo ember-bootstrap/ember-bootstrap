@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
 /**
 
@@ -7,7 +7,7 @@ import Ember from 'ember';
  @extends Ember.Component
  @private
  */
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: '',
 
   /**
