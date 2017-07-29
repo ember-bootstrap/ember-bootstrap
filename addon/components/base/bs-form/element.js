@@ -1,22 +1,12 @@
-import Ember from 'ember';
+import { observer, defineProperty, computed } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { scheduleOnce } from '@ember/runloop';
+import { assert } from '@ember/debug';
+import { typeOf, isBlank } from '@ember/utils';
+import { A, isArray } from '@ember/array';
+import { getOwner } from '@ember/application';
 import layout from 'ember-bootstrap/templates/components/bs-form/element';
 import FormGroup from 'ember-bootstrap/components/bs-form/group';
-
-const {
-  computed,
-  defineProperty,
-  isArray,
-  isBlank,
-  observer,
-  on,
-  run: {
-    scheduleOnce
-  },
-  assert,
-  typeOf,
-  A,
-  getOwner
-} = Ember;
 
 const nonDefaultLayouts = A([
   'checkbox'

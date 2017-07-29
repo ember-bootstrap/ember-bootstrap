@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import Form from 'ember-bootstrap/components/base/bs-form';
-
-const { computed } = Ember;
 
 export default Form.extend({
   layoutClass: computed('formLayout', function() {

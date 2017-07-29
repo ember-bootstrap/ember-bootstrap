@@ -1,6 +1,11 @@
 import { findAll, find } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
-import { test, testBS3, testBS4, validationErrorClass } from '../../../helpers/bootstrap-test';
+import {
+  test,
+  testBS3,
+  testBS4,
+  validationErrorClass
+} from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-form/group', 'Integration | Component | bs-form/group', {

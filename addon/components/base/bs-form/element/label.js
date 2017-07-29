@@ -1,9 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/label';
-
-const {
-  computed
-} = Ember;
 
 /**
 
@@ -12,7 +9,7 @@ const {
  @extends Ember.Component
  @private
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: '',
 

@@ -1,6 +1,5 @@
-import Ember from 'ember';
-
-const { run: { next } } = Ember;
+import Mixin from '@ember/object/mixin';
+import { next } from '@ember/runloop';
 
 /**
  * Mixin for components that act as dropdown toggles.
@@ -9,7 +8,7 @@ const { run: { next } } = Ember;
  * @namespace Mixins
  * @private
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
   classNames: ['dropdown-toggle'],
 
   /**

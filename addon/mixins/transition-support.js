@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import { getOwner } from '@ember/application';
+import Mixin from '@ember/object/mixin';
+import { computed } from '@ember/object';
 import transitionSupport from 'ember-bootstrap/utils/transition-support';
-
-const { computed } = Ember;
 
 /**
  * Mixin for components that support transitions
@@ -10,7 +10,7 @@ const { computed } = Ember;
  * @namespace Mixins
  * @private
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   /**
    * @property transitionsEnabled
@@ -26,8 +26,8 @@ export default Ember.Mixin.create({
    * @type {Ember.Service}
    * @private
    */
-  fastboot: Ember.computed(function() {
-    let owner = Ember.getOwner(this);
+  fastboot: computed(function() {
+    let owner = getOwner(this);
     return owner.lookup('service:fastboot');
   }),
 

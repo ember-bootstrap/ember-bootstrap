@@ -1,18 +1,16 @@
-import Ember from 'ember';
+import ObjectProxy from '@ember/object/proxy';
+import { Promise as EmberPromise } from 'rsvp';
+import { computed } from '@ember/object';
 import BsForm from 'ember-bootstrap/components/bs-form';
-
-const {
-  computed
-} = Ember;
 
 export default BsForm.extend({
   hasValidator: computed.notEmpty('model.validate'),
 
   validate(model) {
-    return new Ember.RSVP.Promise((resolve, reject) => {
+    return new EmberPromise((resolve, reject) => {
       let m = model;
 
-      if (model instanceof Ember.ObjectProxy) {
+      if (model instanceof ObjectProxy) {
         m = model.get('content');
       }
 

@@ -1,10 +1,5 @@
-import Ember from 'ember';
+import { defineProperty, computed } from '@ember/object';
 import BsFormElement from 'ember-bootstrap/components/bs-form/element';
-
-const {
-  computed,
-  defineProperty
-} = Ember;
 
 export default BsFormElement.extend({
   _attrValidations: null,

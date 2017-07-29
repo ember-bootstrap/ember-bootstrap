@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
 
 export function currentYear() {
   return new Date().getFullYear();
 }
 
-export default Ember.Helper.helper(currentYear);
+export default helper(currentYear);

@@ -1,6 +1,13 @@
 import { find, findAll, click } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
-import { positionClassFor, positionStickyClass, visibilityClass, test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
+import {
+  positionClassFor,
+  positionStickyClass,
+  visibilityClass,
+  test,
+  testBS3,
+  testBS4
+} from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-navbar', 'Integration | Component | bs-navbar', {

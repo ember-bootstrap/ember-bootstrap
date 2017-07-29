@@ -1,10 +1,8 @@
+import { A } from '@ember/array';
 import { find, findAll } from 'ember-native-dom-helpers';
-import Ember from 'ember';
 import { moduleForComponent } from 'ember-qunit';
 import { formFeedbackClass, test } from '../../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
-
-const { A } = Ember;
 
 moduleForComponent('bs-form/element/errors', 'Integration | Component | bs form/element/errors', {
   integration: true

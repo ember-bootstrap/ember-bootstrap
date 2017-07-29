@@ -1,5 +1,5 @@
+import { A } from '@ember/array';
 import { find, click } from 'ember-native-dom-helpers';
-import Ember from 'ember';
 import { moduleForComponent } from 'ember-qunit';
 import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
@@ -58,7 +58,7 @@ test('radio button group with value set activates button with same value', funct
 });
 
 test('checkbox button group with value set activates buttons with same value', function(assert) {
-  let value = Ember.A([1, 3]);
+  let value = A([1, 3]);
   this.render(hbs`{{#bs-button-group type="checkbox" value=value as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
   this.set('value', value);
 
@@ -87,7 +87,7 @@ test('setting radio button group value activates button with same value', functi
 test('setting checkbox button group value with array of values activates buttons with same value', function(assert) {
   this.render(hbs`{{#bs-button-group type="checkbox" value=value as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
 
-  let value = Ember.A([1, 3]);
+  let value = A([1, 3]);
   this.set('value', value);
   assert.deepEqual(this.get('value'), value, 'value must match set value');
 
@@ -121,7 +121,7 @@ test('setting radio button group value to null sets buttons active state to fals
 });
 
 test('clicking button group does not change public value porperty', async function(assert) {
-  let value = Ember.A([1]);
+  let value = A([1]);
   this.set('value', value);
   this.render(hbs`{{#bs-button-group type="checkbox" value=value as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`);
 

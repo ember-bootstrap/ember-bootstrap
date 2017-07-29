@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Mixin from '@ember/object/mixin';
 
 /**
  * Mixin to set the appropriate class for components with differently styled types ("success", "danger" etc.)
@@ -7,7 +8,7 @@ import Ember from 'ember';
  * @namespace Mixins
  * @private
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
   /**
    * Prefix for the type class, e.g. "btn" for button type classes ("btn-primary2 etc.)
    *
@@ -20,7 +21,7 @@ export default Ember.Mixin.create({
 
   classNameBindings: ['typeClass'],
 
-  typeClass: Ember.computed('type', function() {
+  typeClass: computed('type', function() {
     let prefix = this.get('classTypePrefix');
     let type = this.get('type') || 'default';
     return `${prefix}-${type}`;

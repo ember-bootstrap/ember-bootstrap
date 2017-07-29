@@ -1,8 +1,12 @@
+import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import Ember from 'ember';
 
-const { computed, inject } = Ember;
+const {
+  inject
+} = Ember;
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   application: inject.controller(),
   component: inject.service(),
   currentRouteName: computed.readOnly('application.currentRouteName'),

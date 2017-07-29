@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import FormGroup from 'ember-bootstrap/components/base/bs-form/group';
-
-const { computed } = Ember;
 
 export default FormGroup.extend({
   classNameBindings: ['isHorizontal:row', 'isCheckbox:form-check:form-group'],

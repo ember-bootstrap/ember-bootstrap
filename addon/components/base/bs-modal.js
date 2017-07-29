@@ -1,18 +1,12 @@
-import Ember from 'ember';
+import { assert } from '@ember/debug';
+import Component from '@ember/component';
+import { getOwner } from '@ember/application';
+import { observer, get, computed } from '@ember/object';
+import { schedule, next, bind } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-modal';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
-
-const {
-  computed,
-  get,
-  getOwner,
-  observer,
-  run: {
-    schedule
-  }
-} = Ember;
 
 /**
 
@@ -54,7 +48,7 @@ const {
  @uses Mixins.TransitionSupport
  @public
  */
-export default Ember.Component.extend(TransitionSupport, {
+export default Component.extend(TransitionSupport, {
   layout,
 
   /**
@@ -506,9 +500,9 @@ export default Ember.Component.extend(TransitionSupport, {
       }
 
       if (doAnimate) {
-        Ember.run.schedule('afterRender', this, function() {
+        schedule('afterRender', this, function() {
           let backdrop = this.get('backdropElement');
-          Ember.assert('Backdrop element should be in DOM', backdrop);
+          assert('Backdrop element should be in DOM', backdrop);
           transitionEnd(backdrop, callback, this, this.get('backdropTransitionDuration'));
         });
       } else {
@@ -516,7 +510,7 @@ export default Ember.Component.extend(TransitionSupport, {
       }
     } else if (!this.get('isOpen') && this.get('backdrop')) {
       let backdrop = this.get('backdropElement');
-      Ember.assert('Backdrop element should be in DOM', backdrop);
+      assert('Backdrop element should be in DOM', backdrop);
 
       let callbackRemove = function() {
         this.set('showBackdrop', false);
@@ -530,7 +524,7 @@ export default Ember.Component.extend(TransitionSupport, {
         callbackRemove.call(this);
       }
     } else if (callback) {
-      Ember.run.next(this, callback);
+      next(this, callback);
     }
   },
 
@@ -542,7 +536,7 @@ export default Ember.Component.extend(TransitionSupport, {
    */
   resize() {
     if (this.get('isOpen')) {
-      this._handleUpdate = Ember.run.bind(this, this.handleUpdate);
+      this._handleUpdate = bind(this, this.handleUpdate);
       window.addEventListener('resize', this._handleUpdate, false);
     } else {
       window.removeEventListener('resize', this._handleUpdate, false);

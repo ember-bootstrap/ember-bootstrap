@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/errors';
 
 /**
@@ -8,7 +8,7 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/errors'
  @extends Ember.Component
  @private
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: '',
 

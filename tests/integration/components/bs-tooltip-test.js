@@ -1,9 +1,19 @@
-import { find, findAll, click, focus, blur, triggerEvent } from 'ember-native-dom-helpers';
-import Ember from 'ember';
+import Component from '@ember/component';
+import {
+  find,
+  findAll,
+  click,
+  focus,
+  blur,
+  triggerEvent
+} from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { test, visibilityClass } from '../../helpers/bootstrap-test';
-import { setupForPositioning, assertPositioning } from '../../helpers/contextual-help';
+import {
+  setupForPositioning,
+  assertPositioning
+} from '../../helpers/contextual-help';
 
 moduleForComponent('bs-tooltip', 'Integration | Component | bs-tooltip', {
   integration: true
@@ -76,7 +86,7 @@ test('it allows changing the trigger element to some arbitrary element', async f
 });
 
 test('it allows changing the trigger element to the parent view', async function(assert) {
-  let dummyComponent = Ember.Component.extend({
+  let dummyComponent = Component.extend({
     layout: hbs`<div>{{yield}}</div>`
   });
   this.register('component:dum-my', dummyComponent);

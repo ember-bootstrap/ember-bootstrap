@@ -1,13 +1,26 @@
-import { click, find, findAll, fillIn, triggerEvent, focus, blur } from 'ember-native-dom-helpers';
+import Component from '@ember/component';
+import { run } from '@ember/runloop';
+import EmberObject from '@ember/object';
+import { A, isArray } from '@ember/array';
+import {
+  click,
+  find,
+  findAll,
+  fillIn,
+  triggerEvent,
+  focus,
+  blur
+} from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
-import { formFeedbackClass, test, testBS3, validationErrorClass, validationWarningClass, formHelpTextClass } from '../../../helpers/bootstrap-test';
+import {
+  formFeedbackClass,
+  test,
+  testBS3,
+  validationErrorClass,
+  validationWarningClass,
+  formHelpTextClass
+} from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
-
-const {
-  isArray,
-  A
-} = Ember;
 
 moduleForComponent('bs-form/element', 'Integration | Component | bs-form/element', {
   integration: true
@@ -96,7 +109,7 @@ function controlTypeValueTest(assert, controlType, selector, values, getValueFn)
   values = A(values);
 
   this.set('controlType', controlType);
-  let model = Ember.Object.create();
+  let model = EmberObject.create();
   this.set('model', model);
 
   this.render(hbs`{{#bs-form model=model as |f|}}{{f.element controlType=controlType property="prop"}}{{/bs-form}}`);
@@ -116,7 +129,7 @@ async function controlTypeUpdateTest(assert, controlType, selector, value, oldVa
   let action = this.spy();
   this.on('change', action);
 
-  let model = Ember.Object.create({
+  let model = EmberObject.create({
     name: oldValue
   });
   this.set('model', model);
@@ -134,7 +147,7 @@ async function controlTypeUpdateTest(assert, controlType, selector, value, oldVa
 
 function labeledControlTest(assert, controlType, selector) {
   this.set('controlType', controlType);
-  let model = Ember.Object.create();
+  let model = EmberObject.create();
   this.set('model', model);
 
   formLayouts.forEach((layout) => {
@@ -169,7 +182,7 @@ test('controlType "textarea" is supported', async function(assert) {
 });
 
 test('using "property" creates binding to model property', function(assert) {
-  let model = Ember.Object.create({
+  let model = EmberObject.create({
     foo: 'bar'
   });
   this.set('model', model);
@@ -199,7 +212,7 @@ test('Changing formLayout changes markup', function(assert) {
 
 test('Custom controls are supported', function(assert) {
   this.set('model',
-    Ember.Object.create({
+    EmberObject.create({
       gender: 'male'
     })
   );
@@ -436,7 +449,7 @@ testBS3('adjusts validation icon position if there is an input group', async fun
 });
 
 test('shows validation state only when validator is present', async function(assert) {
-  this.set('model', Ember.Object.create({ name: null, validate() {} }));
+  this.set('model', EmberObject.create({ name: null, validate() {} }));
   this.render(hbs`
       {{bs-form/element property='name' model=model}}
   `);
@@ -449,8 +462,8 @@ test('shows validation state only when validator is present', async function(ass
 });
 
 test('shows validation errors', async function(assert) {
-  this.set('errors', Ember.A(['Invalid']));
-  this.set('model', Ember.Object.create({ name: null }));
+  this.set('errors', A(['Invalid']));
+  this.set('model', EmberObject.create({ name: null }));
   this.render(hbs`
       {{bs-form/element property='name' hasValidator=true errors=errors model=model}}
   `);
@@ -465,8 +478,8 @@ test('shows validation errors', async function(assert) {
     'validation errors are shown after user interaction when errors are present'
   );
   assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Invalid');
-  Ember.run(() => {
-    this.set('errors', Ember.A());
+  run(() => {
+    this.set('errors', A());
   });
   assert.notOk(
     find('.form-group').classList.contains(validationErrorClass()),
@@ -475,8 +488,8 @@ test('shows validation errors', async function(assert) {
 });
 
 test('shows validation warnings', async function(assert) {
-  this.set('warnings', Ember.A(['Insecure']));
-  this.set('model', Ember.Object.create({ name: null }));
+  this.set('warnings', A(['Insecure']));
+  this.set('model', EmberObject.create({ name: null }));
   this.render(hbs`
       {{bs-form/element property='name' hasValidator=true warnings=warnings model=model}}
   `);
@@ -491,8 +504,8 @@ test('shows validation warnings', async function(assert) {
     'validation warnings are shown after user interaction when warnings are present'
   );
   assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Insecure');
-  Ember.run(() => {
-    this.set('warnings', Ember.A());
+  run(() => {
+    this.set('warnings', A());
   });
   assert.notOk(
     find('.form-group').classList.contains('has-warning'),
@@ -501,7 +514,7 @@ test('shows validation warnings', async function(assert) {
 });
 
 test('shows custom error immediately', function(assert) {
-  this.set('model', Ember.Object.create({ name: null }));
+  this.set('model', EmberObject.create({ name: null }));
   this.set('error', 'some error');
   this.render(hbs`
       {{bs-form/element property='name' hasValidator=true customError=error model=model}}
@@ -511,7 +524,7 @@ test('shows custom error immediately', function(assert) {
     'custom error is shown immediately'
   );
   assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'some error');
-  Ember.run(() => {
+  run(() => {
     this.set('error', null);
   });
   assert.notOk(
@@ -521,7 +534,7 @@ test('shows custom error immediately', function(assert) {
 });
 
 test('shows custom warning immediately', function(assert) {
-  this.set('model', Ember.Object.create({ name: null }));
+  this.set('model', EmberObject.create({ name: null }));
   this.set('warning', 'some warning');
   this.render(hbs`
       {{bs-form/element property='name' hasValidator=true customWarning=warning model=model}}
@@ -531,7 +544,7 @@ test('shows custom warning immediately', function(assert) {
     'custom warning is shown immediately'
   );
   assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'some warning');
-  Ember.run(() => {
+  run(() => {
     this.set('warning', null);
   });
   assert.notOk(
@@ -541,9 +554,9 @@ test('shows custom warning immediately', function(assert) {
 });
 
 test('shows validation errors in preference to custom warning', async function(assert) {
-  this.set('errors', Ember.A(['Invalid']));
+  this.set('errors', A(['Invalid']));
   this.set('warning', 'some warning');
-  this.set('model', Ember.Object.create({ name: null }));
+  this.set('model', EmberObject.create({ name: null }));
   this.render(hbs`
       {{bs-form/element property='name' hasValidator=true errors=errors customWarning=warning model=model}}
   `);
@@ -567,8 +580,8 @@ test('shows validation errors in preference to custom warning', async function(a
     'custom warning is removed when errors are shown'
   );
   assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Invalid', 'Validation error is shown');
-  Ember.run(() => {
-    this.set('errors', Ember.A());
+  run(() => {
+    this.set('errors', A());
   });
   assert.notOk(
     find('.form-group').classList.contains(validationErrorClass()),
@@ -581,8 +594,8 @@ test('shows validation errors in preference to custom warning', async function(a
 });
 
 test('events enabling validation rendering are configurable per `showValidationOn` (array)', async function(assert) {
-  this.set('errors', Ember.A(['Invalid']));
-  this.set('model', Ember.Object.create({ name: null }));
+  this.set('errors', A(['Invalid']));
+  this.set('model', EmberObject.create({ name: null }));
   this.set('showValidationOn', ['change']);
   this.render(hbs`
       {{bs-form/element property='name' hasValidator=true errors=errors model=model showValidationOn=showValidationOn}}
@@ -606,8 +619,8 @@ test('events enabling validation rendering are configurable per `showValidationO
 });
 
 test('events enabling validation rendering are configurable per `showValidationOn` (string)', async function(assert) {
-  this.set('errors', Ember.A(['Invalid']));
-  this.set('model', Ember.Object.create({ name: null }));
+  this.set('errors', A(['Invalid']));
+  this.set('model', EmberObject.create({ name: null }));
   this.render(hbs`
       {{bs-form/element property='name' hasValidator=true errors=errors model=model showValidationOn='change'}}
   `);
@@ -629,7 +642,7 @@ test('events enabling validation rendering are configurable per `showValidationO
 });
 
 test('it uses custom control component when registered in DI container', function(assert) {
-  this.register('component:bs-form/element/control/foo', Ember.Component.extend({
+  this.register('component:bs-form/element/control/foo', Component.extend({
     layout: hbs`<div id="foo"></div>`
   }));
   this.render(hbs`

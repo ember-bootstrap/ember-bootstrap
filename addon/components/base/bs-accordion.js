@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
@@ -33,7 +33,7 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   ariaRole: 'tablist',
 

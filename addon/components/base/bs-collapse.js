@@ -1,19 +1,9 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { isPresent, isEmpty } from '@ember/utils';
+import { observer, computed } from '@ember/object';
+import { next } from '@ember/runloop';
+import { htmlSafe, camelize } from '@ember/string';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
-
-const {
-  computed,
-  isEmpty,
-  isPresent,
-  observer,
-  run: {
-    next
-  },
-  String: {
-    camelize,
-    htmlSafe
-  }
-} = Ember;
 
 /**
  An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -34,7 +24,7 @@ const {
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend({
+export default Component.extend({
 
   classNameBindings: ['collapse', 'collapsing'],
   attributeBindings: ['style'],

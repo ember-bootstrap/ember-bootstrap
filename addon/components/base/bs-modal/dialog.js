@@ -1,12 +1,8 @@
-import Ember from 'ember';
+import { isBlank } from '@ember/utils';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { htmlSafe } from '@ember/string';
 import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
-
-const {
-  computed,
-  String: {
-    htmlSafe
-  }
-} = Ember;
 
 /**
   Internal component for modal's markup and event handling. Should not be used directly.
@@ -16,7 +12,7 @@ const {
   @extends Ember.Component
   @private
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   classNames: ['modal'],
   classNameBindings: ['fade'],
@@ -134,7 +130,7 @@ export default Ember.Component.extend({
    */
   sizeClass: computed('size', function() {
     let size = this.get('size');
-    return Ember.isBlank(size) ? null : `modal-${size}`;
+    return isBlank(size) ? null : `modal-${size}`;
   }).readOnly(),
 
   /**

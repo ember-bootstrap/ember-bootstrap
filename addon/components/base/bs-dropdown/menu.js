@@ -1,7 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown/menu';
-
-const { computed } = Ember;
 
 /**
  Component for the dropdown menu.
@@ -13,7 +12,7 @@ const { computed } = Ember;
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
 
   /**

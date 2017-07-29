@@ -1,6 +1,4 @@
-import Ember from 'ember';
-
-const { assert } = Ember;
+import { assert } from '@ember/debug';
 
 export default function getCalculatedOffset(placement, pos, actualWidth, actualHeight) {
   switch (placement) {

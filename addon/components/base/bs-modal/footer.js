@@ -1,9 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import layout from 'ember-bootstrap/templates/components/bs-modal/footer';
-
-const {
-  computed
-} = Ember;
 
 /**
 
@@ -14,7 +11,7 @@ const {
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: 'form',
   classNames: ['modal-footer'],

@@ -1,10 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { bind } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown';
-
-const {
-  computed,
-  run: { bind }
-} = Ember;
 
 /**
  Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
@@ -102,7 +99,7 @@ const {
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   classNameBindings: ['containerClass'],
 
