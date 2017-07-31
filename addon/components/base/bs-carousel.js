@@ -3,11 +3,12 @@ import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+import { task, timeout } from 'ember-concurrency';
 
 const {
   computed,
   observer,
-  run: { cancel, debounce, later, next, throttle }
+  run: { next, schedule }
 } = Ember;
 
 /**
@@ -104,9 +105,22 @@ export default Ember.Component.extend(ComponentParent, {
   childSlidesObserver: observer('childSlides', function() {
     let childSlides = this.get('childSlides');
     if (childSlides.length > 0) {
-      this.cancelTransition();
-      this.cancelCycle();
-      this.startingConfiguration(childSlides);
+      // Sets new current index
+      let currentIndex = this.get('currentIndex');
+      if (currentIndex >= childSlides.length) {
+        currentIndex = childSlides.length - 1;
+        this.set('currentIndex', currentIndex);
+      }
+      // Automatic sliding
+      if (this.get('autoPlay')) {
+        this.get('waitIntervalToInitCycle').perform();
+      }
+      // Default starting slide parameters
+      if (this.get('directionalClassName') !== null && this.get('orderClassName') !== null) {
+        childSlides[currentIndex].set(this.get('orderClassName'), false);
+        childSlides[currentIndex].set(this.get('directionalClassName'), false);
+      }
+      childSlides[currentIndex].set('active', true);
     }
   }),
 
@@ -146,6 +160,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * If user is hovering its cursor on component.
+   * This property is only manipulated when 'pauseOneMouseEnter' is true.
    *
    * @property isMouseHovering
    * @private
@@ -175,22 +190,6 @@ export default Ember.Component.extend(ComponentParent, {
    * @type boolean
    */
   shouldRunAutomatically: computed.gt('interval', 0),
-
-  /**
-   * Holds the scheduled cycle item.
-   *
-   * @property scheduledCycle
-   * @private
-   */
-  scheduledCycle: null,
-
-  /**
-   * Holds the scheduled transition item.
-   *
-   * @property scheduledTransition
-   * @private
-   */
-  scheduledTransition: null,
 
   /**
    * Starts automatic sliding on page load.
@@ -270,7 +269,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * The duration of the slide transition.
-   * 
+   *
    * @default 600
    * @property transitionDuration
    * @public
@@ -278,16 +277,66 @@ export default Ember.Component.extend(ComponentParent, {
    */
   transitionDuration: 600,
 
+  /**
+   * Do a presentation and calls itself to perform a cycle.
+   * 
+   * @method cycle
+   * @private
+   */
+  cycle: task(function* () {
+    this.get('transition').perform();
+    yield timeout(this.get('interval') + this.get('transitionDuration'));
+    if (this.get('ltr')) {
+      this.send('toNextSlide');
+    } else {
+      this.send('toPrevSlide');
+    }
+  }).restartable(),
+
+  /**
+   * @method transition
+   * @private
+   */
+  transition: task(function* () {
+    let slides = this.get('childSlides');
+    let currSlide = slides[this.get('currentIndex')];
+    let followingSlide = slides[this.get('followingIndex')];
+    this.set('currentIndex', this.get('followingIndex'));
+    this.willTransit(currSlide, followingSlide);
+    yield timeout(this.get('transitionDuration'));
+    this.didTransition(currSlide, followingSlide);
+  }).drop(),
+
+  /**
+   * Waits a interval time to start a cycle.
+   * 
+   * @method waitIntervalToInitCycle
+   * @private
+   */
+  waitIntervalToInitCycle: task(function* () {
+    if (this.get('shouldRunAutomatically') === false) {
+      return;
+    }
+    yield timeout(this.get('interval'));
+    if (this.get('ltr')) {
+      this.send('toNextSlide');
+    } else {
+      this.send('toPrevSlide');
+    }
+  }).restartable(),
+
   actions: {
     toSlide(toIndex) {
       if (this.get('currentIndex') === toIndex || this.get('shouldNotDoPresentation')) {
         return;
       }
-      if (this.get('shouldRunAutomatically') && this.get('isMouseHovering') === false) {
-        this.cancelCycle();
-        this.waitToInitCycle(true);
+      this.assignClassNameControls(toIndex);
+      this.setfollowingIndex(toIndex);
+      if (this.get('shouldRunAutomatically') === false || this.get('isMouseHovering')) {
+        this.get('transition').perform();
+      } else {
+        this.get('cycle').perform();
       }
-      this.initTransition(toIndex, true);
     },
 
     toNextSlide() {
@@ -301,18 +350,6 @@ export default Ember.Component.extend(ComponentParent, {
         this.send('toSlide', this.get('currentIndex') - 1);
       }
     }
-  },
-
-  didInsertElement() {
-    this._super(...arguments);
-    this.registerEvents();
-    // Weird bug?! On page load, any carousel without indicators doesn't
-    // trigger the 'childSlidesObserver', thus, nothing happens.
-    Ember.run.schedule('sync', this, function() {
-      if (this.get('showIndicators') === false) {
-        this.notifyPropertyChange('childSlides');
-      }
-    });
   },
 
   /**
@@ -331,43 +368,16 @@ export default Ember.Component.extend(ComponentParent, {
     }
   },
 
-  /**
-   * Cancels a scheduled cycle item.
-   * 
-   * @method cancelCycle
-   * @private
-   */
-  cancelCycle() {
-    cancel(this.get('scheduledCycle'));
-  },
-
-  /**
-   * Cancels a scheduled transition item.
-   * 
-   * @method cancelTransition
-   * @private
-   */
-  cancelTransition() {
-    cancel(this.get('scheduledTransition'));
-  },
-
-  /**
-   * Do a presentation and calls itself to perform a cycle.
-   * 
-   * @method doCycle
-   * @private
-   */
-  doCycle() {
-    if (this.get('ltr') && this.get('canTurnToRight')) {
-      this.initTransition(this.get('currentIndex') + 1);
-    } else if (this.get('ltr') === false && this.get('canTurnToLeft')) {
-      this.initTransition(this.get('currentIndex') - 1);
-    } else {
-      return null;
-    }
-    return later(this, function() {
-      this.set('scheduledCycle', this.doCycle());
-    }, this.get('transitionDuration') + this.get('interval'));
+  didInsertElement() {
+    this._super(...arguments);
+    this.registerEvents();
+    // Weird bug?! On page load, any carousel without indicators doesn't
+    // trigger the 'childSlidesObserver', thus, nothing happens.
+    schedule('sync', this, function() {
+      if (this.get('showIndicators') === false) {
+        this.notifyPropertyChange('childSlides');
+      }
+    });
   },
 
   /**
@@ -378,41 +388,13 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   didTransition(currSlide, followingSlide) {
-    currSlide.set('active', false);
-    currSlide.set(this.get('directionalClassName'), false);
-    followingSlide.set('active', true);
-    followingSlide.set(this.get('directionalClassName'), false);
-    followingSlide.set(this.get('orderClassName'), false);
-  },
-
-  /**
-   * @method doTransition
-   * @private
-   */
-  doTransition(toIndex) {
-    this.assignClassNameControls(toIndex);
-    this.setfollowingIndex(toIndex);
-    let slides = this.get('childSlides');
-    let currSlide = slides[this.get('currentIndex')];
-    let followingSlide = slides[this.get('followingIndex')];
-    this.set('currentIndex', this.get('followingIndex'));
-    this.willTransit(currSlide, followingSlide);
-    this.set('scheduledTransition', later(
-      this,
-      this.didTransition,
-      currSlide,
-      followingSlide,
-      this.get('transitionDuration')));
-  },
-
-  /**
-   * Starts a cycle.
-   * 
-   * @method initCycle
-   * @private
-   */
-  initCycle() {
-    this.set('scheduledCycle', this.doCycle());
+    if (currSlide.isDestroyed === false && followingSlide.isDestroyed === false) {
+      currSlide.set('active', false);
+      currSlide.set(this.get('directionalClassName'), false);
+      followingSlide.set('active', true);
+      followingSlide.set(this.get('directionalClassName'), false);
+      followingSlide.set(this.get('orderClassName'), false);
+    }
   },
 
   /**
@@ -425,18 +407,15 @@ export default Ember.Component.extend(ComponentParent, {
   registerEvents() {
     let self = this;
     this.element.addEventListener('mouseenter', function() {
-      self.set('isMouseHovering', true);
-      if (self.get('shouldRunAutomatically') && self.get('pauseOnMouseEnter')) {
-        self.cancelCycle();
+      if (self.get('pauseOnMouseEnter')) {
+        self.set('isMouseHovering', true);
+        self.get('cycle').cancelAll();
       }
     });
     this.element.addEventListener('mouseleave', function() {
-      self.set('isMouseHovering', false);
-      if (self.get('shouldRunAutomatically') && self.get('pauseOnMouseEnter')) {
-        if (self.get('scheduledCycle') !== null && self.get('autoplay')) {
-          return;
-        }
-        self.waitToInitCycle();
+      if (self.get('pauseOnMouseEnter') && self.get('transition.last') !== null) {
+        self.set('isMouseHovering', false);
+        self.get('waitIntervalToInitCycle').perform();
       }
     });
     window.addEventListener('keypress', function(e) {
@@ -470,53 +449,6 @@ export default Ember.Component.extend(ComponentParent, {
     } else {
       this.set('followingIndex', toIndex);
     }
-  },
-
-  /**
-   * @method startingConfiguration
-   * @private
-   */
-  startingConfiguration(childSlides) {
-    // Sets new current index
-    let currentIndex = this.get('currentIndex');
-    if (currentIndex >= childSlides.length) {
-      currentIndex = childSlides.length - 1;
-      this.set('currentIndex', currentIndex);
-    }
-    // autoPlay triggers automatic sliding
-    if (this.get('shouldRunAutomatically') && this.get('autoPlay')) {
-      this.waitToInitCycle();
-    }
-    // Default starting slide parameters
-    if (this.get('directionalClassName') !== null) {
-      childSlides[currentIndex].set(this.get('directionalClassName'), false);
-    }
-    childSlides[currentIndex].set('active', true);
-  },
-
-  /**
-   * Groups all transition functionalities.
-   * 
-   * @method initTransition
-   * @private
-   */
-  initTransition(toIndex) {
-    throttle(this, this.doTransition, toIndex, this.get('transitionDuration'));
-  },
-
-  /**
-   * Waits a interval or presentation time to start a cycle.
-   * Debounce is used to prevent user event abuse.
-   * 
-   * @method waitPresentationToInitCycle
-   * @private
-   */
-  waitToInitCycle(shouldWaitPresentation) {
-    if (this.get('shouldNotDoPresentation')) {
-      return;
-    }
-    let interval = this.get('interval');
-    debounce(this, this.initCycle, shouldWaitPresentation ? interval + this.get('transitionDuration') : interval);
   },
 
   /**
