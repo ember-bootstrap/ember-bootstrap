@@ -1,6 +1,5 @@
 import Ember from 'ember';
-
-const { computed } = Ember;
+import { computed } from '@ember/object';
 
 export default Ember.Controller.extend({
   _slides: [
