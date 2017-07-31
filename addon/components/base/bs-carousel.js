@@ -384,9 +384,11 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   didTransition(currSlide, followingSlide) {
-    if (currSlide.isDestroyed === false && followingSlide.isDestroyed === false) {
+    if (currSlide.isDestroyed === false) {
       currSlide.set('active', false);
       currSlide.set(this.get('directionalClassName'), false);
+    }
+    if (followingSlide.isDestroyed === false) {
       followingSlide.set('active', true);
       followingSlide.set(this.get('directionalClassName'), false);
       followingSlide.set(this.get('orderClassName'), false);
