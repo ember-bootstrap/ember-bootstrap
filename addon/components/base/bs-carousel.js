@@ -3,13 +3,9 @@ import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+import { computed, observer } from '@ember/object';
+import { next, schedule } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
-
-const {
-  computed,
-  observer,
-  run: { next, schedule }
-} = Ember;
 
 /**
   Ember implementation of Bootstrap's Carousel. Supports all original features but API is different:
