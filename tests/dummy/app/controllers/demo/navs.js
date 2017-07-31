@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { computed } from '@ember/object';
+import { A } from '@ember/array';
 
-const { computed, A } = Ember;
-
-export default Ember.Controller.extend({
+export default Controller.extend({
   type: computed.oneWay('typeChoices.firstObject'),
   stacked: false,
   justified: false,

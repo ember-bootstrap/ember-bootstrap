@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import LinkComponent from '@ember/routing/link-component';
 
 /**
 
@@ -9,5 +9,5 @@ import Ember from 'ember';
  @extends Ember.LinkComponent
  @public
  */
-export default Ember.LinkComponent.extend({
+export default LinkComponent.extend({
 });

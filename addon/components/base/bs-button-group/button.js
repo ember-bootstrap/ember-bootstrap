@@ -1,7 +1,6 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { isArray } from '@ember/array';
 import Button from 'ember-bootstrap/components/bs-button';
-
-const { computed, isArray } = Ember;
 
 /**
  Internal component for button-group buttons

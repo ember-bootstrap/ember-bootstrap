@@ -1,9 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import layout from 'ember-bootstrap/templates/components/bs-popover/element';
-
-const {
-  computed
-} = Ember;
 
 /**
  Internal component for popover's markup. Should not be used directly.
@@ -13,7 +10,7 @@ const {
  @extends Ember.Component
  @private
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
 
   classNames: ['popover'],

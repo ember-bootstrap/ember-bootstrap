@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { isBlank } from '@ember/utils';
+import { computed } from '@ember/object';
+import Mixin from '@ember/object/mixin';
 
 /**
  * Mixin to set the appropriate class for components with different sizes.
@@ -8,7 +10,7 @@ import Ember from 'ember';
  * @namespace Mixins
  * @private
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
   /**
    * Prefix for the size class, e.g. "btn" for button size classes ("btn-lg", "btn-sm" etc.)
    *
@@ -21,10 +23,10 @@ export default Ember.Mixin.create({
 
   classNameBindings: ['sizeClass'],
 
-  sizeClass: Ember.computed('size', function() {
+  sizeClass: computed('size', function() {
     let prefix = this.get('classTypePrefix');
     let size = this.get('size');
-    return Ember.isBlank(size) ? null : `${prefix}-${size}`;
+    return isBlank(size) ? null : `${prefix}-${size}`;
   }),
 
   /**

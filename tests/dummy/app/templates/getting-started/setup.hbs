@@ -1,0 +1,194 @@
+<h1>Setup</h1>
+
+<h2>Installation</h2>
+
+<p>Install the addon if you have not done so already:</p>
+
+<pre class="highlight">ember install ember-bootstrap</pre>
+
+<h2>Configuration</h2>
+
+<h3>Using the default blueprint</h3>
+
+<p>
+  By default, ember-bootstrap installs Bootstrap 3 and uses the installed preprocessor if there is one. You can use
+  the ember-bootstrap default blueprint to switch Bootstrap version or preprocessor.
+</p>
+
+<h4>Use a CSS preprocessor</h4>
+
+<p>To use a CSS preprocessor like Sass or Less instead of plain CSS (highly recommended!), you can use this command to install and set this up:</p>
+
+<pre class="highlight">ember generate ember-bootstrap --preprocessor=sass // or --preprocessor=less</pre>
+
+<p>See the {{#link-to "getting-started.assets"}}Assets guide{{/link-to}} for details.</p>
+
+<h4>Switch to Bootstrap 4</h4>
+
+<p>Bootstrap 4 is still in an alpha stage, so support for it in ember-bootstrap remains experimental. But you can easily make the switch by running this command:</p>
+
+<pre class="highlight">ember generate ember-bootstrap --bootstrap-version=4</pre>
+
+<p>See the {{#link-to "getting-started.bootstrap-4"}}Bootstrap 4 guide{{/link-to}} for details.</p>
+
+
+{{#bs-button onClick=(action "toggleBlueprintDetails")}}
+  About the default blueprint
+  <span class="glyphicon {{if blueprintDetailsCollapsed "glyphicon-menu-down" "glyphicon-menu-up"}}" aria-hidden="true"></span>
+{{/bs-button}}
+
+
+{{#bs-collapse collapsed=blueprintDetailsCollapsed}}
+  <hr>
+
+  {{#bs-alert type="info" dismissible=false}}
+
+    <h4>About the default blueprint</h4>
+
+    <p>The default blueprint does the following:</p>
+
+    <ul>
+      <li>
+        Removes any unneeded versions of bootstrap and bootstrap-sass from <code>package.json</code>
+        and <code>bower.json</code>
+      </li>
+      <li>
+        Installs the appropriate version of bootstrap or bootstrap-sass as an npm package
+      </li>
+      <li>
+        Removes unneeded dependencies on ember-cli-less and ember-cli-sass
+      </li>
+      <li>
+        Installs ember-cli-less or ember-cli-sass if appropriate
+      </li>
+      <li>
+        Creates <code>app.less</code> or <code>app.scss</code> if appropriate and it doesn't exist
+      </li>
+      <li>
+        Adds the appropriate "@import" statement to your <code>app.less</code> or <code>app.scss</code> if it&apos;s
+        not there already
+      </li>
+      <li>
+        Safely edits your
+        <code>ember-cli-build.js</code> to ensure the proper ember-bootstrap settings for your configuration
+      </li>
+    </ul>
+  {{/bs-alert}}
+{{/bs-collapse}}
+
+
+<h2>All configuration options</h2>
+
+<p>
+  Besides the above mentioned configuration options that ae handled explicitly using the default blueprint, you can
+  further customize your setup with the following options:
+</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Allowed values</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>bootstrapVersion</td>
+      <td>3 / 4</td>
+      <td>3</td>
+      <td>
+        <p>
+          Specify the Bootstrap version to use. To make sure you have the right dependencies installed, you should use the
+          default blueprint mentioned above to set this!
+        </p>
+        <p>See the {{#link-to "getting-started.bootstrap-4"}}Bootstrap 4 guide{{/link-to}} for more details.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>importBootstrapTheme</td>
+      <td><code>true</code> / <code>false</code></td>
+      <td><code>false</code></td>
+      <td>
+        <p>
+          Include the optional <code>bootstrap-theme.css</code>. Only applicable for Bootstrap 3 and when not using a
+          preprocessor.
+        </p>
+
+        <p>See the {{#link-to "getting-started.assets"}}Assets guide{{/link-to}} for more details.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>importBootstrapCSS</td>
+      <td><code>true</code> / <code>false</code></td>
+      <td><code>true</code> if no preprocessor</td>
+      <td>
+        <p>Include the default static <code>bootstrap.css</code>. Only applicable when not using a preprocessor.</p>
+        <p>See the {{#link-to "getting-started.assets"}}Assets guide{{/link-to}} for more details.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>importBootstrapFont</td>
+      <td><code>true</code> / <code>false</code></td>
+      <td><code>true</code> if Bootstrap 3</td>
+      <td>
+        <p>Include the Glyphicons font. Only applicable for Bootstrap 3.</p>
+        <p>See the {{#link-to "getting-started.assets"}}Assets guide{{/link-to}} for more details.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>insertEmberWormholeElementToDom</td>
+      <td><code>true</code> / <code>false</code></td>
+      <td><code>true</code></td>
+      <td>
+        Will automatically insert a div into your index.html, where Bootstrap's modals and tooltips will be rendered to.
+        If you set this to false, you will have to add an
+        <code>&lt;div id=&quot;ember-bootstrap-wormhole&quot;&gt;&lt;/div&gt;</code> element by yourself.
+      </td>
+    </tr>
+    <tr>
+      <td>whitelist</td>
+      <td>Array of component names</td>
+      <td></td>
+      <td>
+        <p>
+          Component tree shaking: include only the listed components into your build, to reduce your JavaScript bundle size. Components not listed here will not be available.
+          You should use either <code>whitelist</code> or <code>blacklist</code>, not both.
+        </p>
+
+        <p>Example:</p>
+        <pre class="highlight"><code>whitelist: ['bs-button', 'bs-modal', 'bs-form']</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>blacklist</td>
+      <td>Array of component names</td>
+      <td></td>
+      <td>
+        <p>
+          Exclude the listed components from your build, to reduce your JavaScript bundle size. See
+          <code>whitelist</code>.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+
+<p>These options can be set in your <code>ember-cli-build.js</code> file:</p>
+
+{{! template-lint-disable block-indentation }}
+<pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
+
+module.exports = function(defaults) {
+  let app = new EmberApp(defaults, {
+    'ember-bootstrap': {
+      importBootstrapCSS: false,
+      blacklist: ['bs-popover', 'bs-accordion']
+    }
+  });
+
+  return app.toTree();
+};
+</code></pre>

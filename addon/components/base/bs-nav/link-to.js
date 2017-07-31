@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import LinkComponent from '@ember/routing/link-component';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 
 /**
@@ -11,5 +11,5 @@ import ComponentChild from 'ember-bootstrap/mixins/component-child';
  @uses Mixins.ComponentChild
  @public
  */
-export default Ember.LinkComponent.extend(ComponentChild, {
+export default LinkComponent.extend(ComponentChild, {
 });

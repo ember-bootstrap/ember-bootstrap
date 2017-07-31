@@ -1,9 +1,11 @@
 /* globals alert */
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-const { computed, A, run: { next } } = Ember;
+import { computed } from '@ember/object';
+import { A } from '@ember/array';
+import { next } from '@ember/runloop';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   modal1: false,
   modal2: true,
   modal3: false,

@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { observer, computed } from '@ember/object';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import layout from 'ember-bootstrap/templates/components/bs-navbar';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
-
-const { observer } = Ember;
 
 /**
  Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
@@ -95,7 +94,7 @@ const { observer } = Ember;
  @public
 
  */
-export default Ember.Component.extend(TypeClass, {
+export default Component.extend(TypeClass, {
   layout,
 
   tagName: 'nav',
@@ -142,7 +141,7 @@ export default Ember.Component.extend(TypeClass, {
    */
   position: null,
 
-  positionClass: Ember.computed('position', function() {
+  positionClass: computed('position', function() {
     let position = this.get('position');
     let validPositions = this.get('_validPositions');
     let positionPrefix = this.get('_positionPrefix');

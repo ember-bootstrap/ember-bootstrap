@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-const Router = Ember.Router.extend({
+const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL
 });
@@ -27,6 +27,7 @@ Router.map(function() {
     });
   });
   this.route('getting-started', function() {
+    this.route('setup');
     this.route('assets');
     this.route('migrating-to-1-0');
     this.route('bootstrap-4');

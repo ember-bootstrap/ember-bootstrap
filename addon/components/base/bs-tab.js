@@ -1,14 +1,11 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { isPresent } from '@ember/utils';
+import { A } from '@ember/array';
 import layout from 'ember-bootstrap/templates/components/bs-tab';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import TabPane from 'ember-bootstrap/components/bs-tab/pane';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
-
-const {
-  computed,
-  isPresent,
-  A
-} = Ember;
 
 /**
  Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,
@@ -110,7 +107,7 @@ const {
  @uses Mixins.ComponentParent
  @public
  */
-export default Ember.Component.extend(ComponentParent, {
+export default Component.extend(ComponentParent, {
   layout,
 
   /**

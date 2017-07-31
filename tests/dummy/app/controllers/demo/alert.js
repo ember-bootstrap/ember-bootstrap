@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { A } from '@ember/array';
+import { computed } from '@ember/object';
 
-const { A, computed } = Ember;
-
-export default Ember.Controller.extend({
+export default Controller.extend({
   visible: true,
   fade: true,
   dismissible: true,

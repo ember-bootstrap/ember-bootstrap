@@ -1,7 +1,11 @@
 import { find, findAll } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { placementClassFor, test, visibilityClass } from '../../../helpers/bootstrap-test';
+import {
+  placementClassFor,
+  test,
+  visibilityClass
+} from '../../../helpers/bootstrap-test';
 
 moduleForComponent('bs-tooltip/element', 'Integration | Component | bs-tooltip/element', {
   integration: true

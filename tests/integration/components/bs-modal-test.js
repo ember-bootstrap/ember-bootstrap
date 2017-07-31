@@ -1,8 +1,8 @@
+import Component from '@ember/component';
 import { find, findAll, click } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import { test, visibilityClass } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
 
 moduleForComponent('bs-modal', 'Integration | Component | bs-modal', {
   integration: true
@@ -28,7 +28,7 @@ test('Modal yields header, footer and body components', function(assert) {
 });
 
 test('clicking ok button closes modal when autoClose=true with custom component hierarchy', function(assert) {
-  this.register('component:my-component', Ember.Component.extend({
+  this.register('component:my-component', Component.extend({
     layout: hbs`{{yield}}`
   }));
 

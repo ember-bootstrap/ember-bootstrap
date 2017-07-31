@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import { not } from '@ember/object/computed';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   collapsed: true,
-  notCollapsed: Ember.computed.not('collapsed'),
+  notCollapsed: not('collapsed'),
 
   actions: {
     toggle() {

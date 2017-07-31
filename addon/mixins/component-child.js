@@ -1,7 +1,6 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
+import { computed } from '@ember/object';
 import ComponentParentMixin from 'ember-bootstrap/mixins/component-parent';
-
-const { computed } = Ember;
 
 /**
  * Mixin for components that act as a child component in a parent-child relationship of components
@@ -10,7 +9,7 @@ const { computed } = Ember;
  * @namespace Mixins
  * @private
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   /**
    * The parent component

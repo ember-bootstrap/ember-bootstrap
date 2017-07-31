@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import { later, cancel, join } from '@ember/runloop';
 import transitionEnd from './transition-support';
-
-const { run: { join, cancel, later } } = Ember;
 
 export default function onTransitionEnd(node, handler, context, duration = 0) {
   if (!node) {
@@ -25,7 +23,7 @@ export default function onTransitionEnd(node, handler, context, duration = 0) {
     if (backup) {
       cancel(backup);
     }
-    event.target.removeEventListener(transitionEnd, done);
+    node.removeEventListener(transitionEnd, done);
     join(context, handler, event);
   }
 }

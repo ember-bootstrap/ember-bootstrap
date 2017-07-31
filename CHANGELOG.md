@@ -1,3 +1,20 @@
+<a name="1.0.0-rc.1"></a>
+# [1.0.0-rc.1](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-beta.2...1.0.0-rc.1) (2017-07-26)
+
+
+### Features
+
+* **Build:** add support for (explicit) tree shaking, removing unused components from build ([8852021](https://github.com/kaliber5/ember-bootstrap/commit/8852021)), closes [#140](https://github.com/kaliber5/ember-bootstrap/issues/140)
+  See [Setup guide](http://www.ember-bootstrap.com/#/getting-started/setup) for instructions.
+* **Button:** setting `bubble=true` will cause a click event to bubble up, even when the button has an `onClick` handler ([2a4cd24](https://github.com/kaliber5/ember-bootstrap/commit/2a4cd24))
+* **Modal:** refactored visibility rendering of modals, making open modals render correctly in FastBoot ([565d805](https://github.com/kaliber5/ember-bootstrap/commit/565d805)), closes [#380](https://github.com/kaliber5/ember-bootstrap/issues/380)
+* register as Ember library, showing addon version in console and Ember Inspector ([47cc7ef](https://github.com/kaliber5/ember-bootstrap/commit/47cc7ef))
+
+### Bug Fixes
+
+* **Modal:** fix transitionend event listener removal, fixing occasional problems with modals. Thanks to [@lodrantl](https://github.com/lodrantl)
+
+
 <a name="1.0.0-beta.2"></a>
 # [1.0.0-beta.2](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-beta.1...1.0.0-beta.2) (2017-06-21)
 

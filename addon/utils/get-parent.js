@@ -1,6 +1,5 @@
+import { get } from '@ember/object';
 import Ember from 'ember';
-
-const { get } = Ember;
 
 export default function getParent(view) {
   if (get(view, 'tagName') === '') {

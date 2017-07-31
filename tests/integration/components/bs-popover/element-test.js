@@ -1,6 +1,10 @@
 import { find, findAll } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
-import { placementClassFor, test, visibilityClass } from '../../../helpers/bootstrap-test';
+import {
+  placementClassFor,
+  test,
+  visibilityClass
+} from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-popover/element', 'Integration | Component | bs-popover/element', {

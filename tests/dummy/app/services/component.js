@@ -1,7 +1,6 @@
-import Ember from 'ember';
+import Service from '@ember/service';
+import { A } from '@ember/array';
 import Component from '../models/component';
-
-const { A } = Ember;
 
 const componentData = A([
   {
@@ -100,7 +99,7 @@ const componentData = A([
 
 const components = A(componentData.map((data) => Component.create(data)));
 
-export default Ember.Service.extend({
+export default Service.extend({
 
   models: components,
 

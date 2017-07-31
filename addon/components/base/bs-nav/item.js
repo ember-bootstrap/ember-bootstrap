@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import LinkComponent from '@ember/routing/link-component';
 import layout from 'ember-bootstrap/templates/components/bs-nav/item';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
-
-const { computed, LinkComponent } = Ember;
 
 /**
 
@@ -15,7 +15,7 @@ const { computed, LinkComponent } = Ember;
  @public
  */
 export default
-Ember.Component.extend(ComponentParent, {
+Component.extend(ComponentParent, {
   layout,
   classNameBindings: ['disabled', 'active'],
   tagName: 'li',

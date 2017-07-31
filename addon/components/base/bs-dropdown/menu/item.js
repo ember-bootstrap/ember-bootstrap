@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
 /**
  Component for a dropdown menu item.
@@ -10,5 +10,5 @@ import Ember from 'ember';
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend({
+export default Component.extend({
 });

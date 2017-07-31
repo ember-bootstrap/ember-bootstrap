@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import { isBlank } from '@ember/utils';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import layout from 'ember-bootstrap/templates/components/bs-form/group';
 import Config from 'ember-bootstrap/config';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
-
-const { computed } = Ember;
 
 /**
  This component renders a `<div class="form-group">` element, with support for validation states and feedback icons.
@@ -27,7 +27,7 @@ const { computed } = Ember;
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend(SizeClass, {
+export default Component.extend(SizeClass, {
   layout,
 
   classNameBindings: ['validationClass'],
@@ -207,7 +207,7 @@ export default Ember.Component.extend(SizeClass, {
    */
   validationClass: computed('_validationType', function() {
     let validation = this.get('_validationType');
-    if (!Ember.isBlank(validation)) {
+    if (!isBlank(validation)) {
       return `has-${this.get('_validationType')}`;
     }
   }).readOnly()
