@@ -52,6 +52,19 @@ export default Component.extend({
   submitDisabled: false,
 
   /**
+   * Test navigator.platform to see if current platform is Windows. In this case Submit button goes on the left side,
+   * otherwise it goes right.
+   *
+   * @property _isPlatformWindows
+   * @type boolean
+   * @default false
+   * @private
+   */
+  _isPlatformWindows: computed(() => {
+    return /Win/.test(navigator.platform);
+  }),
+
+  /**
    * The action to send to the parent modal component when the modal footer's form is submitted
    *
    * @event onSubmit
