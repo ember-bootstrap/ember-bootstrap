@@ -365,9 +365,9 @@ export default Component.extend(TransitionSupport, {
         // trigger submit event on body forms
         let event = document.createEvent('Events');
         event.initEvent('submit', true, true);
-        for(let form of forms) {
+        for (let form of forms) {
           form.dispatchEvent(event);
-        };
+        }
       } else {
         // if we have no form, we send a submit action
         this.get('onSubmit')();
