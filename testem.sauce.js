@@ -5,8 +5,8 @@ module.exports = {
 
   'launch_in_ci': [
     // 'SLEdge',
-    'SLChrome'
-    // 'SLFirefox',
+    'SLChrome',
+    'SLFirefox'
     // 'SLIE11',
     // 'SLSafari'
   ],
