@@ -8,6 +8,9 @@
 [![Code Climate](https://codeclimate.com/github/kaliber5/ember-bootstrap/badges/gpa.svg)](https://codeclimate.com/github/kaliber5/ember-bootstrap)
 [![Test Coverage](https://codeclimate.com/github/kaliber5/ember-bootstrap/badges/coverage.svg)](https://codeclimate.com/github/kaliber5/ember-bootstrap/coverage)
 
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/ember-bootstrap.svg)](https://saucelabs.com/u/ember-bootstrap)
+
+
 An [ember-cli](http://www.ember-cli.com) addon for using [Twitter Bootstrap](http://getbootstrap.com/) in Ember applications.
 
 The addon includes the Bootstrap assets (CSS, Icons) in your project (can be disabled). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
