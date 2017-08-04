@@ -28,11 +28,11 @@ test('should adjust popover arrow', async function(assert) {
 
   await click('#target');
   let arrowPosition = parseInt(find('.arrow').style.left, 10);
-  assert.equal(arrowPosition, expectedArrowPosition);
+  assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1);
 
   // check again to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/361
   await click('#target');
   await click('#target');
   arrowPosition = parseInt(find('.arrow').style.left, 10);
-  assert.equal(arrowPosition, expectedArrowPosition);
+  assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1);
 });
