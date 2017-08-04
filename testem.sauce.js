@@ -6,10 +6,9 @@ module.exports = {
   'browser_start_timeout': 90,
   'browser_disconnect_timeout': 60,
   'launch_in_ci': [
-    // Edge is still disabled due to https://github.com/johanneswuerbach/ember-cli-sauce/issues/101
-    // 'SLEdge'
-    'SLChrome',
-    'SLFirefox'
+    'SLEdge'
+    // 'SLChrome'
+    // 'SLFirefox',
     // 'SLIE11',
     // 'SLSafari'
   ],
