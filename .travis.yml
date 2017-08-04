@@ -38,7 +38,7 @@ env:
     - EMBER_TRY_SCENARIO=ember-beta-bs4
     - EMBER_TRY_SCENARIO=fastboot-addon-tests
     - EMBER_TRY_SCENARIO=node-tests
-    - EMBER_TRY_SCENARIO=ember-release BEFORE_SCRIPT="ember sauce:connect" AFTER_SCRIPT="ember sauce:disconnect" TEST_COMMAND="ember test --config-file testem.sauce.js --test-port 7000"
+    - EMBER_TRY_SCENARIO=ember-default BEFORE_SCRIPT="ember sauce:connect" AFTER_SCRIPT="ember sauce:disconnect" TEST_COMMAND="ember test --config-file testem.sauce.js --test-port 7000"
 
 matrix:
   fast_finish: true

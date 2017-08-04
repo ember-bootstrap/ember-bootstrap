@@ -2,9 +2,12 @@
 module.exports = {
   'test_page': 'tests/index.html?hidepassed',
   'disable_watching': true,
-
+  'timeout': 540,
+  'browser_start_timeout': 90,
+  'browser_disconnect_timeout': 60,
   'launch_in_ci': [
-    // 'SLEdge',
+    // Edge is still disabled due to https://github.com/johanneswuerbach/ember-cli-sauce/issues/101
+    // 'SLEdge'
     'SLChrome',
     'SLFirefox'
     // 'SLIE11',
@@ -23,7 +26,7 @@ module.exports = {
         '-b',
         'MicrosoftEdge',
         '-v',
-        '14',
+        '15',
         '--visibility',
         'public',
         '-p',
