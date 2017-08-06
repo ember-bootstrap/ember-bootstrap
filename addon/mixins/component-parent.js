@@ -46,7 +46,7 @@ export default Mixin.create({
    * @public
    */
   removeChild(child) {
-    Ember.run.schedule('sync', this, function() {
+    schedule('sync', this, function() {
       this.get('children').removeObject(child);
     });
   }
