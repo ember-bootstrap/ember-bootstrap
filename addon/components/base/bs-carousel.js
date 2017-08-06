@@ -408,10 +408,17 @@ export default Ember.Component.extend(ComponentParent, {
       if (self.get('pauseOnMouseEnter')) {
         self.set('isMouseHovering', true);
         self.get('cycle').cancelAll();
+        self.get('waitIntervalToInitCycle').cancelAll();
       }
     });
     this.element.addEventListener('mouseleave', function() {
-      if (self.get('pauseOnMouseEnter') && self.get('transition.last') !== null) {
+      if (
+        self.get('pauseOnMouseEnter')
+        && (
+          self.get('transition.last') !== null
+          || self.get('waitIntervalToInitCycle.last') !== null
+        )
+      ) {
         self.set('isMouseHovering', false);
         self.get('waitIntervalToInitCycle').perform();
       }
