@@ -46,6 +46,8 @@ export default Mixin.create({
    * @public
    */
   removeChild(child) {
-    this.get('children').removeObject(child);
+    schedule('sync', this, function() {
+      this.get('children').removeObject(child);
+    });
   }
 });
