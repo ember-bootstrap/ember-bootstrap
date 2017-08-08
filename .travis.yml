@@ -56,8 +56,6 @@ before_install:
 
 install:
   - yarn install
-  # temporary workaround for https://github.com/yarnpkg/yarn/issues/3485
-  - npm rebuild node-sass
 
 script:
   - ember try:one $EMBER_TRY_SCENARIO --skip-cleanup --- $TEST_COMMAND
