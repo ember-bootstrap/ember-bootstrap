@@ -1,7 +1,8 @@
+import { assign } from '@ember/polyfills';
 import { find, findAll } from 'ember-native-dom-helpers';
 
 export function setupForPositioning() {
-  Object.assign(find('#wrapper').style, {
+  assign(find('#wrapper').style, {
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -10,7 +11,7 @@ export function setupForPositioning() {
     height: '300px'
   });
 
-  Object.assign(document.getElementById('ember-testing').style, {
+  assign(document.getElementById('ember-testing').style, {
     transform: 'none'
   });
 
