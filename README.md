@@ -1,5 +1,7 @@
 # ember-bootstrap
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kaliber5/ember-bootstrap.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/kaliber5/ember-bootstrap.svg?branch=master)](https://travis-ci.org/kaliber5/ember-bootstrap)
 [![Ember Observer Score](http://emberobserver.com/badges/ember-bootstrap.svg)](http://emberobserver.com/addons/ember-bootstrap)
 [![npm version](https://badge.fury.io/js/ember-bootstrap.svg)](https://badge.fury.io/js/ember-bootstrap)
