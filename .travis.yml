@@ -22,30 +22,27 @@ env:
   matrix:
     - EMBER_TRY_SCENARIO=ember-2.3
     - EMBER_TRY_SCENARIO=ember-lts-2.4
-    - EMBER_TRY_SCENARIO=ember-2.5
-    - EMBER_TRY_SCENARIO=ember-2.6
-    - EMBER_TRY_SCENARIO=ember-2.7
     - EMBER_TRY_SCENARIO=ember-lts-2.8
-    - EMBER_TRY_SCENARIO=ember-2.9
-    - EMBER_TRY_SCENARIO=ember-2.10
     - EMBER_TRY_SCENARIO=ember-lts-2.12
     - EMBER_TRY_SCENARIO=ember-2.13
     - EMBER_TRY_SCENARIO=ember-release
     - EMBER_TRY_SCENARIO=ember-beta
     - EMBER_TRY_SCENARIO=ember-canary
-    - EMBER_TRY_SCENARIO=ember-lts-2.4-bs4
     - EMBER_TRY_SCENARIO=ember-lts-2.8-bs4
     - EMBER_TRY_SCENARIO=ember-lts-2.12-bs4
     - EMBER_TRY_SCENARIO=ember-release-bs4
-    - EMBER_TRY_SCENARIO=ember-beta-bs4
     - EMBER_TRY_SCENARIO=fastboot-addon-tests
     - EMBER_TRY_SCENARIO=node-tests
-    - EMBER_TRY_SCENARIO=ember-release BEFORE_SCRIPT="ember sauce:connect" AFTER_SCRIPT="ember sauce:disconnect" TEST_COMMAND="ember test --config-file testem.sauce.js --test-port 7000"
+    - EMBER_TRY_SCENARIO=ember-default BEFORE_SCRIPT="ember sauce:connect" AFTER_SCRIPT="ember sauce:disconnect" TEST_COMMAND="ember test --config-file testem.sauce.js --test-port 7000"
 
 matrix:
   fast_finish: true
   allow_failures:
     - env: EMBER_TRY_SCENARIO=ember-canary
+
+branches:
+  only:
+    - master
 
 before_install:
   - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
