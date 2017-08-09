@@ -7,7 +7,7 @@ moduleForComponent('bs-tab/pane', 'Integration | Component | bs-tab/pane', {
   integration: true
 });
 
-const transitionTimeout = 150;
+const transitionTimeout = 250;
 
 test('it has correct markup', function(assert) {
   this.render(hbs`

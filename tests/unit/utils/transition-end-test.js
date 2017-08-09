@@ -1,20 +1,21 @@
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
+import transitionEvent from 'ember-bootstrap/utils/transition-support';
 import { module } from 'qunit';
 import { test } from '../../helpers/bootstrap-test';
 import { triggerEvent } from 'ember-native-dom-helpers';
 
 module('Unit | Utility | transition end');
 
-test('it triggers on event', async function(assert) {
+test('it triggers on event', function(assert) {
   let cb = this.spy();
   let node = document.createElement('div');
 
   transitionEnd(node, cb, this, 100);
-  await triggerEvent(node, 'tramnsitionEnd');
+  triggerEvent(node, transitionEvent);
   assert.ok(cb.calledOnce);
 });
 
-test('it triggers on timeout', async function(assert) {
+test('it triggers on timeout', function(assert) {
   let cb = this.spy();
   let node = document.createElement('div');
 
@@ -34,7 +35,7 @@ test('it triggers just once', function(assert) {
   transitionEnd(node, cb, this, 100);
 
   let done = assert.async();
-  triggerEvent(node, 'tramnsitionEnd');
+  triggerEvent(node, transitionEvent);
 
   setTimeout(() => {
     assert.ok(cb.calledOnce);

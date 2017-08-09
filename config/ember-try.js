@@ -303,6 +303,12 @@ module.exports = {
       npm: {
         devDependencies: {}
       }
+    },
+    {
+      name: 'ember-default',
+      npm: {
+        devDependencies: {}
+      }
     }
   ]
 };

@@ -2,10 +2,10 @@ function transitionSupport() {
   let el = document.createElement('bootstrap');
 
   let transEndEventNames = {
+    transition: 'transitionend',
     WebkitTransition: 'webkitTransitionEnd',
     MozTransition: 'transitionend',
-    OTransition: 'oTransitionEnd otransitionend',
-    transition: 'transitionend'
+    OTransition: 'oTransitionEnd otransitionend'
   };
 
   for (let name in transEndEventNames) {
