@@ -18,7 +18,7 @@ module.exports = {
 
   launchers: {
     SLEdge: {
-      'command': 'ember sauce:launch -b MicrosoftEdge -v 15 --visibility public -p "Windows 10" --no-connect --url "<url>"',
+      'command': 'ember sauce:launch -b MicrosoftEdge -v 14 --visibility public -p "Windows 10" --no-connect --url "<url>"',
       'protocol': 'tap'
     },
     SLChrome: {
