@@ -3,11 +3,9 @@ module.exports = {
   'test_page': 'tests/index.html?hidepassed',
   'disable_watching': true,
   'timeout': 540,
-  'browser_start_timeout': 90,
-  'browser_disconnect_timeout': 60,
+  'parallel': 5,
   'launch_in_ci': [
-    // Edge is still disabled due to https://github.com/johanneswuerbach/ember-cli-sauce/issues/101
-    // 'SLEdge'
+    'SLEdge',
     'SLChrome',
     'SLFirefox'
     // 'SLIE11',
@@ -20,24 +18,9 @@ module.exports = {
 
   launchers: {
     SLEdge: {
-      'exe': 'ember',
-      'args': [
-        'sauce:launch',
-        '-b',
-        'MicrosoftEdge',
-        '-v',
-        '15',
-        '--visibility',
-        'public',
-        '-p',
-        'Windows 10',
-        '--attach',
-        '--no-connect',
-        '--url'
-      ],
-      'protocol': 'browser'
+      'command': 'ember sauce:launch -b MicrosoftEdge -v 14 --visibility public -p "Windows 10" --no-connect --url "<url>"',
+      'protocol': 'tap'
     },
-
     SLChrome: {
       'exe': 'ember',
       'args': [

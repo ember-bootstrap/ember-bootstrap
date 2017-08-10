@@ -25,7 +25,7 @@ test('it triggers on timeout', function(assert) {
   setTimeout(() => {
     assert.ok(cb.calledOnce);
     done();
-  }, 101);
+  }, 150);
 });
 
 test('it triggers just once', function(assert) {
@@ -40,5 +40,5 @@ test('it triggers just once', function(assert) {
   setTimeout(() => {
     assert.ok(cb.calledOnce);
     done();
-  }, 101);
+  }, 150);
 });
