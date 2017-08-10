@@ -45,7 +45,7 @@ module.exports = {
         '-b',
         'Chrome',
         '-v',
-        '59',
+        '60',
         '--visibility',
         'public',
         '-p',
