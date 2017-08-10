@@ -5,9 +5,9 @@ module.exports = {
   'timeout': 540,
   'parallel': 5,
   'launch_in_ci': [
-    'SLEdge'
-    // 'SLChrome'
-    // 'SLFirefox',
+    'SLEdge',
+    'SLChrome',
+    'SLFirefox'
     // 'SLIE11',
     // 'SLSafari'
   ],
