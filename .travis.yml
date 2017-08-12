@@ -20,19 +20,19 @@ env:
     - secure: QKF4gJdgWzwTk6eMMVZvP+FBs7Ab3fFYnXfLHHNbQOkIVrwO0D7ns3Umtea9lMIt1bQOq6VHmcsf/BUhi4L+oLEXAZ827GShDKhojqGIDg4poaA9kECtUzsIUnKB+bYkvadRsuUP0KjxNbSM7nVchUDTgRvt0OZZ0rP3q4/oQC8=
 
   matrix:
-#    - EMBER_TRY_SCENARIO=ember-2.3
-#    - EMBER_TRY_SCENARIO=ember-lts-2.4
-#    - EMBER_TRY_SCENARIO=ember-lts-2.8
-#    - EMBER_TRY_SCENARIO=ember-lts-2.12
-#    - EMBER_TRY_SCENARIO=ember-2.13
-#    - EMBER_TRY_SCENARIO=ember-release
-#    - EMBER_TRY_SCENARIO=ember-beta
-#    - EMBER_TRY_SCENARIO=ember-canary
-#    - EMBER_TRY_SCENARIO=ember-lts-2.8-bs4
-#    - EMBER_TRY_SCENARIO=ember-lts-2.12-bs4
-#    - EMBER_TRY_SCENARIO=ember-release-bs4
-#    - EMBER_TRY_SCENARIO=fastboot-addon-tests
-#    - EMBER_TRY_SCENARIO=node-tests
+    - EMBER_TRY_SCENARIO=ember-2.3
+    - EMBER_TRY_SCENARIO=ember-lts-2.4
+    - EMBER_TRY_SCENARIO=ember-lts-2.8
+    - EMBER_TRY_SCENARIO=ember-lts-2.12
+    - EMBER_TRY_SCENARIO=ember-2.13
+    - EMBER_TRY_SCENARIO=ember-release
+    - EMBER_TRY_SCENARIO=ember-beta
+    - EMBER_TRY_SCENARIO=ember-canary
+    - EMBER_TRY_SCENARIO=ember-lts-2.8-bs4
+    - EMBER_TRY_SCENARIO=ember-lts-2.12-bs4
+    - EMBER_TRY_SCENARIO=ember-release-bs4
+    - EMBER_TRY_SCENARIO=fastboot-addon-tests
+    - EMBER_TRY_SCENARIO=node-tests
     - EMBER_TRY_SCENARIO=ember-default BEFORE_SCRIPT="ember sauce:connect" AFTER_SCRIPT="ember sauce:disconnect" TEST_COMMAND="ember test --config-file testem.sauce.js --test-port 7000"
 
 matrix:
