@@ -1,7 +1,7 @@
 /* eslint-env node */
 module.exports = {
   // temporary workaround for https://github.com/yarnpkg/yarn/issues/3485
-  command: 'npm rebuild node-sass && BOOTSTRAPVERSION=3 ember test',
+  command: 'BOOTSTRAPVERSION=3 ember test',
   scenarios: [
     {
       name: 'ember-2.3',
@@ -206,7 +206,7 @@ module.exports = {
     },
     {
       name: 'ember-lts-2.4-bs4',
-      command: 'npm rebuild node-sass && BOOTSTRAPVERSION=4 ember test',
+      command: 'BOOTSTRAPVERSION=4 ember test',
       bower: {
         dependencies: {
           'ember': 'components/ember#lts-2-4'
@@ -224,7 +224,7 @@ module.exports = {
     },
     {
       name: 'ember-lts-2.8-bs4',
-      command: 'npm rebuild node-sass && BOOTSTRAPVERSION=4 ember test',
+      command: 'BOOTSTRAPVERSION=4 ember test',
       bower: {
         dependencies: {
           'ember': 'components/ember#lts-2-8'
@@ -242,7 +242,7 @@ module.exports = {
     },
     {
       name: 'ember-lts-2.12-bs4',
-      command: 'npm rebuild node-sass && BOOTSTRAPVERSION=4 ember test',
+      command: 'BOOTSTRAPVERSION=4 ember test',
       npm: {
         devDependencies: {
           'ember-source': '~2.12.0',
@@ -252,7 +252,7 @@ module.exports = {
     },
     {
       name: 'ember-release-bs4',
-      command: 'npm rebuild node-sass && BOOTSTRAPVERSION=4 ember test',
+      command: 'BOOTSTRAPVERSION=4 ember test',
       bower: {
         dependencies: {
           'ember': 'components/ember#release'
@@ -269,7 +269,7 @@ module.exports = {
     },
     {
       name: 'ember-beta-bs4',
-      command: 'npm rebuild node-sass && BOOTSTRAPVERSION=4 ember test',
+      command: 'BOOTSTRAPVERSION=4 ember test',
       bower: {
         dependencies: {
           'ember': 'components/ember#beta'
@@ -286,14 +286,32 @@ module.exports = {
     },
     {
       name: 'fastboot-addon-tests',
-      command: 'npm rebuild node-sass && DEBUG=ember-cli-addon-tests ember fastboot:test',
+      command: 'DEBUG=ember-cli-addon-tests ember fastboot:test',
       npm: {
         devDependencies: {}
       }
     },
     {
       name: 'node-tests',
-      command: 'npm rebuild node-sass && yarn run nodetest',
+      command: 'yarn run nodetest',
+      npm: {
+        devDependencies: {}
+      }
+    },
+    {
+      name: 'ember-default',
+      npm: {
+        devDependencies: {}
+      }
+    },
+    {
+      name: 'ember-default',
+      npm: {
+        devDependencies: {}
+      }
+    },
+    {
+      name: 'ember-default',
       npm: {
         devDependencies: {}
       }

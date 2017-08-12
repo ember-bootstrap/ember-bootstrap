@@ -1,7 +1,7 @@
 import { click, find } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { test, versionDependent } from '../../helpers/bootstrap-test';
+import { test } from '../../helpers/bootstrap-test';
 import {
   setupForPositioning,
   assertPositioning
@@ -12,7 +12,7 @@ moduleForComponent('bs-popover', 'Integration | Component | bs-popover', {
 });
 
 test('should place popover on top of element', async function(assert) {
-  this.render(hbs`<div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{#bs-popover placement="top" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}</a></p></div>`);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{#bs-popover placement="top" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}</a></p></div>`);
 
   setupForPositioning();
 
@@ -21,8 +21,8 @@ test('should place popover on top of element', async function(assert) {
 });
 
 test('should adjust popover arrow', async function(assert) {
-  let expectedArrowPosition = versionDependent(83, 81);
-  this.render(hbs`<div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{#bs-popover placement="top" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}</a></p></div>`);
+  let expectedArrowPosition = 50;
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{#bs-popover placement="top" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}</a></p></div>`);
 
   setupForPositioning();
 

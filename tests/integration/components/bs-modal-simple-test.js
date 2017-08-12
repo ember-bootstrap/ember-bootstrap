@@ -2,8 +2,7 @@ import {
   find,
   findAll,
   click,
-  keyEvent,
-  waitUntil
+  keyEvent
 } from 'ember-native-dom-helpers';
 import wait from 'ember-test-helpers/wait';
 import { moduleForComponent } from 'ember-qunit';
@@ -12,6 +11,7 @@ import {
   defaultButtonClass,
   visibilityClass
 } from '../../helpers/bootstrap-test';
+import waitUntil from '../../helpers/wait-until';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-modal-simple', 'Integration | Component | bs-modal-simple', {

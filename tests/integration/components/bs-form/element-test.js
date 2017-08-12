@@ -318,6 +318,9 @@ test('supported textarea attributes propagate', function(assert) {
         assert.equal(find('textarea').getAttribute(attribute), value, `textarea attribute ${attribute} is ${value} [${formLayout}]`);
       }
     }
+
+    // Without this MSEdge will fail with an invalid argument exception in Glimmer!??
+    this.clearRender();
   });
 });
 
@@ -449,7 +452,10 @@ testBS3('adjusts validation icon position if there is an input group', async fun
 });
 
 test('shows validation state only when validator is present', async function(assert) {
-  this.set('model', EmberObject.create({ name: null, validate() {} }));
+  this.set('model', EmberObject.create({
+    name: null, validate() {
+    }
+  }));
   this.render(hbs`
       {{bs-form/element property='name' model=model}}
   `);
