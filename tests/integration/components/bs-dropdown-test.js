@@ -1,6 +1,6 @@
 import { find, click } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
-import { openClass, test } from '../../helpers/bootstrap-test';
+import { dropdownVisibilityElementSelector, isHidden, isVisible, openClass, test } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-dropdown', 'Integration | Component | bs-dropdown', {
@@ -53,39 +53,39 @@ test('dropdown container with dropdown button supports dropup style', function(a
 test('dropdown-toggle toggles dropdown visibility', async function(assert) {
   this.render(hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`);
 
-  assert.equal(find(':first-child').classList.contains(openClass()), false, 'Dropdown is closed');
+  assert.equal(find(dropdownVisibilityElementSelector()).classList.contains(openClass()), false, 'Dropdown is closed');
   await click('a.dropdown-toggle');
-  assert.equal(find(':first-child').classList.contains(openClass()), true, 'Dropdown is open');
+  assert.equal(find(dropdownVisibilityElementSelector()).classList.contains(openClass()), true, 'Dropdown is open');
   await click('a.dropdown-toggle');
-  assert.equal(find(':first-child').classList.contains(openClass()), false, 'Dropdown is closed');
+  assert.equal(find(dropdownVisibilityElementSelector()).classList.contains(openClass()), false, 'Dropdown is closed');
 });
 
 test('opened dropdown will close on outside click', async function(assert) {
   this.render(hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`);
 
   await click('a.dropdown-toggle');
-  assert.equal(find(':first-child').classList.contains(openClass()), true, 'Dropdown is open');
+  assert.equal(find(dropdownVisibilityElementSelector()).classList.contains(openClass()), true, 'Dropdown is open');
 
   await click('');
-  assert.equal(find(':first-child').classList.contains(openClass()), false, 'Dropdown is closed');
+  assert.equal(find(dropdownVisibilityElementSelector()).classList.contains(openClass()), false, 'Dropdown is closed');
 });
 
 test('clicking dropdown menu will close it', async function(assert) {
   this.render(hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`);
   await click('a.dropdown-toggle');
-  assert.equal(find(':first-child').classList.contains(openClass()), true, 'Dropdown is open');
+  assert.equal(find(dropdownVisibilityElementSelector()).classList.contains(openClass()), true, 'Dropdown is open');
 
   await click('.dropdown-menu a');
-  assert.equal(find(':first-child').classList.contains(openClass()), false, 'Dropdown is closed');
+  assert.equal(find(dropdownVisibilityElementSelector()).classList.contains(openClass()), false, 'Dropdown is closed');
 });
 
 test('clicking dropdown menu when closeOnMenuClick is false will not close it', async function(assert) {
   this.render(hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`);
   await click('a.dropdown-toggle');
-  assert.equal(find(':first-child').classList.contains(openClass()), true, 'Dropdown is open');
+  assert.equal(find(dropdownVisibilityElementSelector()).classList.contains(openClass()), true, 'Dropdown is open');
 
   await click('.dropdown-menu a');
-  assert.equal(find(':first-child').classList.contains(openClass()), true, 'Dropdown is open');
+  assert.equal(find(dropdownVisibilityElementSelector()).classList.contains(openClass()), true, 'Dropdown is open');
 });
 
 test('child components can access isOpen property', async function(assert) {
@@ -115,4 +115,24 @@ test('closing dropdown calls onHide action', async function(assert) {
   await click('a.dropdown-toggle');
   await click('.dropdown-menu a');
   assert.ok(action.calledOnce);
+});
+
+test('opening dropdown makes the menu visible', async function(assert) {
+  this.render(
+    hbs`
+    {{#bs-dropdown as |dd|}}
+      {{#dd.toggle}}Dropdown{{/dd.toggle}}
+      {{#dd.menu as |menu|}}
+        {{#menu.item}}
+          {{menu.link-to "Home" "index"}}
+        {{/menu.item}}
+      {{/dd.menu}}
+    {{/bs-dropdown}}`
+  );
+
+  assert.ok(isHidden(find('.dropdown-menu')));
+
+  await click('a.dropdown-toggle');
+  assert.ok(isVisible(find('.dropdown-menu a')));
+  assert.ok(find('.dropdown-menu').offsetParent !== null);
 });
