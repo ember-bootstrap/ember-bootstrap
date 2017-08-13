@@ -3,7 +3,6 @@ import { A } from '@ember/array';
 import { resolve, reject } from 'rsvp';
 import {
   click,
-  focus,
   findAll,
   find,
   fillIn,
@@ -178,11 +177,8 @@ test('Adds default onChange action to form elements that updates model\'s proper
 testRequiringFocus('Pressing enter on a form with submitOnEnter submits the form', async function(assert) {
   let submit = this.spy();
   this.on('submit', submit);
-  this.render(hbs`{{#bs-form onSubmit=(action "submit") submitOnEnter=true as |form|}}
-    {{form.element property="name"}}
-  {{/bs-form}}`);
-  await focus('input');
-  await keyEvent('input', 'keypress', 13);
+  this.render(hbs`{{#bs-form onSubmit=(action "submit") submitOnEnter=true as |form|}}{{/bs-form}}`);
+  await keyEvent('form', 'keypress', 13);
   assert.ok(submit.calledOnce, 'onSubmit action has been called');
 });
 
