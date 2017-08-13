@@ -7,9 +7,9 @@ module.exports = {
   'launch_in_ci': [
     'SLEdge',
     'SLChrome',
-    'SLFirefox'
+    'SLFirefox',
     // 'SLIE11',
-    // 'SLSafari'
+    'SLSafari'
   ],
 
   'launch_in_dev': [
@@ -79,22 +79,8 @@ module.exports = {
     },
 
     SLSafari: {
-      'exe': 'ember',
-      'args': [
-        'sauce:launch',
-        '-b',
-        'safari',
-        '-v',
-        '10',
-        '--visibility',
-        'public',
-        '-p',
-        'macOS 10.12',
-        '--attach',
-        '--no-connect',
-        '--url'
-      ],
-      'protocol': 'browser'
+      'command': 'ember sauce:launch -b safari -v 10 --visibility public -p "macOS 10.12" --no-connect --url "<url>"',
+      'protocol': 'tap'
     }
   }
 };
