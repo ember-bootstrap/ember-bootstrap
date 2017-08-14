@@ -8,7 +8,7 @@ module.exports = {
     'SLEdge',
     'SLChrome',
     'SLFirefox',
-    // 'SLIE11',
+    'SLIE11',
     'SLSafari'
   ],
 
