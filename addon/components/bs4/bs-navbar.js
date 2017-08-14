@@ -16,7 +16,7 @@ export default Navbar.extend({
    * @default 'md'
    * @public
    */
-  toggleBreakpoint: 'md',
+  toggleBreakpoint: 'lg',
 
   /**
    * Sets the background color for the navbar. Can be any color
@@ -32,7 +32,7 @@ export default Navbar.extend({
   breakpointClass: computed('toggleBreakpoint', function() {
     let toggleBreakpoint = this.get('toggleBreakpoint');
 
-    return `navbar-toggleable-${toggleBreakpoint}`;
+    return `navbar-expand-${toggleBreakpoint}`;
   }),
 
   backgroundClass: computed('backgroundColor', function() {
