@@ -1,5 +1,6 @@
 import config from 'dummy/config/environment';
 import test from 'ember-sinon-qunit/test-support/test';
+import { skip } from 'qunit';
 
 const currentBootstrapVersion = parseInt(config.bootstrapVersion);
 
@@ -81,3 +82,11 @@ export function accordionItemBodyClass() {
 }
 
 export { test };
+
+export function testRequiringFocus(name, fn) {
+  if (document.hasFocus()) {
+    return test(name, fn);
+  } else {
+    skip(name);
+  }
+}

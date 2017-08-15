@@ -8,6 +8,7 @@ import wait from 'ember-test-helpers/wait';
 import { moduleForComponent } from 'ember-qunit';
 import {
   test,
+  testRequiringFocus,
   defaultButtonClass,
   visibilityClass
 } from '../../helpers/bootstrap-test';
@@ -325,7 +326,7 @@ test('when modal has several forms and the submit button is clicked, those forms
   assert.notOk(modalSpy.called);
 });
 
-test('autofocus element is focused when present and fade=false', async function(assert) {
+testRequiringFocus('autofocus element is focused when present and fade=false', async function(assert) {
   let action = this.spy();
   this.on('focusAction', action);
 
@@ -341,7 +342,7 @@ test('autofocus element is focused when present and fade=false', async function(
   assert.ok(action.calledOnce, 'focus was triggered on the autofocus element');
 });
 
-test('Pressing escape key will close the modal if keyboard=true', async function(assert) {
+testRequiringFocus('Pressing escape key will close the modal if keyboard=true', async function(assert) {
   let action = this.spy();
   this.on('testAction', action);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=true}}Hello world!{{/bs-modal-simple}}`);
@@ -359,7 +360,7 @@ test('Pressing escape key will close the modal if keyboard=true', async function
   assert.ok(action.calledOnce, 'Action has been called.');
 });
 
-test('Pressing escape key will close the modal if keyboard=true and element is autofocused', async function(assert) {
+testRequiringFocus('Pressing escape key will close the modal if keyboard=true and element is autofocused', async function(assert) {
   let action = this.spy();
   this.on('testAction', action);
   this.render(hbs`
@@ -382,7 +383,7 @@ test('Pressing escape key will close the modal if keyboard=true and element is a
   assert.ok(action.calledOnce, 'Action has been called.');
 });
 
-test('Pressing escape key is ignored if keyboard=false', async function(assert) {
+testRequiringFocus('Pressing escape key is ignored if keyboard=false', async function(assert) {
   let hideSpy = this.spy();
   this.on('testAction', hideSpy);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=false}}Hello world!{{/bs-modal-simple}}`);
