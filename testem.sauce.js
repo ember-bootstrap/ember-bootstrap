@@ -9,7 +9,8 @@ module.exports = {
     'SLChrome',
     'SLFirefox',
     'SLIE11',
-    'SLSafari'
+    'SLSafari',
+    'SLSafariLast'
   ],
 
   'launch_in_dev': [
@@ -80,6 +81,10 @@ module.exports = {
 
     SLSafari: {
       'command': 'ember sauce:launch -b safari -v 10 --visibility public -p "macOS 10.12" --no-connect --url "<url>"',
+      'protocol': 'tap'
+    },
+    SLSafariLast: {
+      'command': 'ember sauce:launch -b safari -v 9 --visibility public -p "OS X 10.11" --no-connect --url "<url>"',
       'protocol': 'tap'
     }
   }
