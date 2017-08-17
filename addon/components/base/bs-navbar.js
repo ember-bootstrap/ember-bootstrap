@@ -82,7 +82,7 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
  Bootstrap 4 changed the default navbar styling option from `navbar-default` to `navbar-light`.
  If you explicitly specified "default" in Bootstrap 3 and are migrating, you will need to change
- this in your code. Bootstrap 4 changes navbar-inverse to navbar-dark.
+ this in your code. Bootstrap 4 changes `navbar-inverse` to `navbar-dark`.
 
  Bootstrap 4 navbars are fluid by default without the need for an additional container. An
  additional container is added like with Bootstrap 3 if `fluid` is `false`.
