@@ -68,7 +68,7 @@ module.exports = {
 
   included() {
     this._super.included.apply(this, arguments);
-    
+
     let findHost = this._findHost || findHostShim;
     let app = findHost.call(this);
 
