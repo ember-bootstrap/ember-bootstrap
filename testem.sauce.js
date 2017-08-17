@@ -4,6 +4,7 @@ module.exports = {
   'disable_watching': true,
   'timeout': 540,
   'parallel': 5,
+  'browser_start_timeout': 90,
   'launch_in_ci': [
     'SLEdge',
     'SLChrome',

@@ -2081,6 +2081,10 @@ class-utils@^0.3.4:
     lazy-cache "^2.0.2"
     static-extend "^0.1.1"
 
+classlist-polyfill@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/classlist-polyfill/-/classlist-polyfill-1.2.0.tgz#935bc2dfd9458a876b279617514638bcaa964a2e"
+
 clean-base-url@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/clean-base-url/-/clean-base-url-1.0.0.tgz#c901cf0a20b972435b0eccd52d056824a4351b7b"
@@ -3029,6 +3033,15 @@ ember-cli-build-config-editor@^0.5.0:
   dependencies:
     recast "^0.12.0"
 
+ember-cli-classlist-polyfill@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-classlist-polyfill/-/ember-cli-classlist-polyfill-0.0.1.tgz#9f2193be766143505b9ac3f13d1bff448c578d1b"
+  dependencies:
+    broccoli-funnel "^1.2.0"
+    classlist-polyfill "^1.2.0"
+    ember-cli-babel "^6.3.0"
+    fastboot-transform "^0.1.2"
+
 ember-cli-dependency-checker@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ember-cli-dependency-checker/-/ember-cli-dependency-checker-2.0.1.tgz#e44cd2f8cdbf6a1043092de1ebfd62e7b8c00dd1"
@@ -3600,9 +3613,9 @@ ember-runtime-enumerable-includes-polyfill@^2.0.0:
     ember-cli-babel "^6.0.0"
     ember-cli-version-checker "^1.1.6"
 
-ember-sinon-qunit@^1.6.0:
+ember-sinon-qunit@simonihmig/ember-sinon-qunit#fix-settimeout-ie:
   version "1.6.0"
-  resolved "https://registry.yarnpkg.com/ember-sinon-qunit/-/ember-sinon-qunit-1.6.0.tgz#5eb57523226fd2ab397c1e389587b5e66d59c458"
+  resolved "https://codeload.github.com/simonihmig/ember-sinon-qunit/tar.gz/7cf3a6bc330ce548a155fd55edc7a01635516ad1"
   dependencies:
     ember-cli-babel "^6.0.0"
     ember-sinon "~0.7.0"
@@ -4201,6 +4214,12 @@ fastboot-express-middleware@^1.0.0:
     chalk "^2.0.1"
     fastboot "^1.0.0"
     request "^2.81.0"
+
+fastboot-transform@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/fastboot-transform/-/fastboot-transform-0.1.2.tgz#f910d666ab93e75604492ea655270d1804bc8de7"
+  dependencies:
+    broccoli-stew "^1.5.0"
 
 fastboot@^1.0.0:
   version "1.0.0"
