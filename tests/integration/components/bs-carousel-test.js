@@ -58,7 +58,6 @@ test('carousel has correct markup', function(assert) {
   assert.ok(find(':first-child').classList.contains('carousel'), 'has carousel class');
   assert.ok(find(':first-child').classList.contains('slide'), 'has slide class');
   assert.equal(findAll('.carousel-inner').length, 1, 'has carousel-inner');
-  assert.equal(findAll('.carousel-indicators').length, 1, 'has carousel-indicators');
 });
 
 testBS3('carousel has correct controls markup', function(assert) {

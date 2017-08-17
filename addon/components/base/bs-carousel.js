@@ -165,6 +165,15 @@ export default Ember.Component.extend(ComponentParent, {
   isMouseHovering: false,
 
   /**
+   * The class name to append to the next control link element.
+   * 
+   * @property nextControlClassName
+   * @type string
+   * @private
+   */
+  nextControlClassName: null,
+
+  /**
    * Bootstrap style to indicate the next/previous slide.
    *
    * @property orderClassName
@@ -172,6 +181,15 @@ export default Ember.Component.extend(ComponentParent, {
    * @type string
    */
   orderClassName: null,
+
+  /**
+   * The class name to append to the previous control link element.
+   *
+   * @property prevControlClassName
+   * @type string
+   * @private
+   */
+  prevControlClassName: null,
 
   /**
    * @private
@@ -245,6 +263,24 @@ export default Ember.Component.extend(ComponentParent, {
   ltr: true,
 
   /**
+   * The next icon to be displayed to the user.
+   *
+   * @property nextIcon
+   * @type string
+   * @public
+   */
+  nextControlIcon: null,
+
+  /**
+   * Label for screen readers, defaults to 'Next'.
+   *
+   * @property nextLabel
+   * @type string
+   * @public
+   */
+  nextControlLabel: 'Next',
+
+  /**
    * Pauses automatic sliding if mouse cursor is hovering the component.
    * This parameter has no effect if interval is less than or equal to zero.
    * 
@@ -253,6 +289,33 @@ export default Ember.Component.extend(ComponentParent, {
    * @type boolean
    */
   pauseOnMouseEnter: true,
+
+  /**
+   * The previous icon to be displayed to the user.
+   *
+   * @property nextIcon
+   * @type string
+   * @public
+   */
+  prevControlIcon: null,
+
+  /**
+   * Label for screen readers, defaults to 'Previous'.
+   *
+   * @property prevLabel
+   * @type string
+   * @public
+   */
+  prevControlLabel: 'Previous',
+
+  /**
+   * Show or hide controls.
+   * 
+   * @property showControls
+   * @public
+   * @type boolean
+   */
+  showControls: true,
 
   /**
    * Show or hide indicators.

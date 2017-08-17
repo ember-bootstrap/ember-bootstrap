@@ -10,12 +10,14 @@
   {{yield (hash slide=(component 'bs-carousel/slide'))}}
 </div>
 
-{{yield
-  (hash
-    controls=(component 'bs-carousel/controls'
-      parentElementId=elementId
-      toNextSlide=(action 'toNextSlide')
-      toPrevSlide=(action 'toPrevSlide')
-    )
-  )
-}}
+{{#if showControls}}
+  <a class="{{prevControlClassName}}" href="#{{elementId}}" onclick={{action 'toPrevSlide'}} role="button">
+    <span aria-hidden="true" class="{{prevControlIcon}}"></span>
+    <span class="sr-only">{{prevControlLabel}}</span>
+  </a>
+  <a class="{{nextControlClassName}}" href="#{{elementId}}" onclick={{action 'toNextSlide'}} role="button">
+    <span aria-hidden="true" class="{{nextControlIcon}}"></span>
+    <span class="sr-only">{{nextControlLabel}}</span>
+  </a>
+{{/if}}
+
