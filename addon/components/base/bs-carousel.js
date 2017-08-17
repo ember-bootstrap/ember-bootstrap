@@ -150,8 +150,8 @@ export default Ember.Component.extend(ComponentParent, {
    * @property indicators
    * @private
    */
-  indicators: computed('childSlides.length', function() {
-    return new Array(this.get('childSlides.length'));
+  indicators: computed('childSlides', function() {
+    return new Array(this.get('childSlides.length')).fill(0);
   }),
 
   /**
