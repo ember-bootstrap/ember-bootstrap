@@ -8,7 +8,7 @@ export default Navbar.extend({
 
   /**
    * Defines the responsive toggle breakpoint size. Options are the standard
-   * two character Bootstrap size abbreviations. Used to set the `navbar-toggleable-*`
+   * two character Bootstrap size abbreviations. Used to set the `navbar-expand-*`
    * class.
    *
    * @property toggleBreakpoint
@@ -24,10 +24,10 @@ export default Navbar.extend({
    *
    * @property backgroundColor
    * @type String
-   * @default 'faded'
+   * @default 'light'
    * @public
    */
-  backgroundColor: 'faded',
+  backgroundColor: 'light',
 
   breakpointClass: computed('toggleBreakpoint', function() {
     let toggleBreakpoint = this.get('toggleBreakpoint');

@@ -6,8 +6,8 @@ export default AccordionItem.extend({
   /**
    * @property classTypePrefix
    * @type String
-   * @default 'card'
+   * @default 'bg'
    * @protected
    */
-  classTypePrefix: 'card'
+  classTypePrefix: 'bg'
 });
