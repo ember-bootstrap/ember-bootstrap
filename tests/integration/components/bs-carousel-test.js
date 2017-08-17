@@ -188,14 +188,14 @@ test('carousel has functional right control', async function(assert) {
   this.render(hbs`{{#bs-carousel as |car|}}{{car.controls}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   clickToNextSlide();
   await waitTransitionTime();
-  assert.ok(find('.item:nth-child(2).active'), 'right control changes slide');
+  assert.ok(getActivatedSlide(2), 'right control changes slide');
 });
 
 test('carousel has functional left control', async function(assert) {
   this.render(hbs`{{#bs-carousel index=1 as |car|}}{{car.controls}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   clickToPrevSlide();
   await waitTransitionTime();
-  assert.ok(find('.item:nth-child(1).active'), 'left control changes slide');
+  assert.ok(getActivatedSlide(1), 'left control changes slide');
 });
 
 test('carousel has functional indicators', async function(assert) {
