@@ -61,7 +61,7 @@ test('carousel has correct markup', function(assert) {
 });
 
 testBS3('carousel has correct controls markup', function(assert) {
-  this.render(hbs`{{#bs-carousel showIndicators=false as |car|}}{{car.controls}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel as |car|}}{{/bs-carousel}}`);
 
   let left = find('.left');
   let right = find('.right');
@@ -72,7 +72,7 @@ testBS3('carousel has correct controls markup', function(assert) {
 });
 
 testBS4('carousel has correct controls markup', function(assert) {
-  this.render(hbs`{{#bs-carousel showIndicators=false as |car|}}{{car.controls}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel as |car|}}{{/bs-carousel}}`);
 
   let prev = findAll('.carousel-control-prev');
   let next = findAll('.carousel-control-next');
@@ -111,28 +111,28 @@ test('carousel autoPlay=true must start sliding', async function(assert) {
 });
 
 test('carousel continuouslyCycle=false must not cross lower bound', async function(assert) {
-  this.render(hbs`{{#bs-carousel continuouslyCycle=false as |car|}}{{car.controls}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel continuouslyCycle=false as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   clickToPrevSlide();
   await waitTransitionTime();
   assert.ok(getActivatedSlide(1), 'continuouslyCycle has correct behavior');
 });
 
 test('carousel continuouslyCycle=false must not cross upper bound', async function(assert) {
-  this.render(hbs`{{#bs-carousel continuouslyCycle=false index=1 as |car|}}{{car.controls}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel continuouslyCycle=false index=1 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   clickToNextSlide();
   await waitTransitionTime();
   assert.ok(getActivatedSlide(2), 'continuouslyCycle has correct behavior');
 });
 
 test('carousel continuouslyCycle=true must cross lower bound', async function(assert) {
-  this.render(hbs`{{#bs-carousel continuouslyCycle=true as |car|}}{{car.controls}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel continuouslyCycle=true as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   clickToPrevSlide();
   await waitTransitionTime();
   assert.ok(getActivatedSlide(2), 'continuouslyCycle has correct behavior');
 });
 
 test('carousel continuouslyCycle=true must cross upper bound', async function(assert) {
-  this.render(hbs`{{#bs-carousel continuouslyCycle=true index=1 as |car|}}{{car.controls}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel continuouslyCycle=true index=1 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   clickToNextSlide();
   await waitTransitionTime();
   assert.ok(getActivatedSlide(1), 'continuouslyCycle has correct behavior');
@@ -184,14 +184,14 @@ test('carousel pauseOnMouseEnter=true must pause automatic sliding', async funct
 // User clicks
 
 test('carousel has functional right control', async function(assert) {
-  this.render(hbs`{{#bs-carousel as |car|}}{{car.controls}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   clickToNextSlide();
   await waitTransitionTime();
   assert.ok(getActivatedSlide(2), 'right control changes slide');
 });
 
 test('carousel has functional left control', async function(assert) {
-  this.render(hbs`{{#bs-carousel index=1 as |car|}}{{car.controls}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel index=1 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   clickToPrevSlide();
   await waitTransitionTime();
   assert.ok(getActivatedSlide(1), 'left control changes slide');
