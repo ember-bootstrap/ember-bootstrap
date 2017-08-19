@@ -264,7 +264,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * The next icon to be displayed to the user.
    *
-   * @property nextIcon
+   * @property nextControlIcon
    * @type string
    * @public
    */
@@ -273,7 +273,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * Label for screen readers, defaults to 'Next'.
    *
-   * @property nextLabel
+   * @property nextControlLabel
    * @type string
    * @public
    */
@@ -292,7 +292,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * The previous icon to be displayed to the user.
    *
-   * @property nextIcon
+   * @property prevControlIcon
    * @type string
    * @public
    */
@@ -301,7 +301,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * Label for screen readers, defaults to 'Previous'.
    *
-   * @property prevLabel
+   * @property prevControlLabel
    * @type string
    * @public
    */
