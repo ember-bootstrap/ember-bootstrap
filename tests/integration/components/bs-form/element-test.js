@@ -368,17 +368,17 @@ test('disabled property propagates', function(assert) {
 });
 
 test('if invisibleLabel is true sr-only class is added to label', function(assert) {
-  let formLayouts = [
-    'vertical',
-    'horizontal',
-    'inline'
-  ];
   this.render(hbs`{{bs-form/element label="myLabel"}}`);
   assert.notOk(find('label').classList.contains('sr-only'), 'sr-only class is not present as defaultText');
-  formLayouts.forEach((formLayout) => {
-    this.render(hbs`{{#bs-form formLayout=formLayout }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`);
-    assert.ok(find('label').classList.contains('sr-only'), `sr-only class is present for formLayout ${formLayout}`);
-  });
+
+  this.render(hbs`{{#bs-form formLayout="vertical" }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`);
+  assert.ok(find('label').classList.contains('sr-only'), 'sr-only class is present for formLayout vertical');
+
+  this.render(hbs`{{#bs-form formLayout="horizontal" }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`);
+  assert.ok(find('label').classList.contains('sr-only'), 'sr-only class is present for formLayout horizontal');
+
+  this.render(hbs`{{#bs-form formLayout="inline" }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`);
+  assert.ok(find('label').classList.contains('sr-only'), 'sr-only class is present for formLayout inline');
 });
 
 testBS3('adjusts validation icon position if there is an input group', async function(assert) {
