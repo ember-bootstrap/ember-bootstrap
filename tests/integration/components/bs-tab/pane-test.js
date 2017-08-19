@@ -1,6 +1,6 @@
 import { find, findAll } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
-import { test, visibilityClass } from '../../../helpers/bootstrap-test';
+import { test, testRequiringTransitions, visibilityClass } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-tab/pane', 'Integration | Component | bs-tab/pane', {
@@ -44,7 +44,7 @@ test('it has correct markup when switching active pane and fade=false', function
   assert.equal(find('div.tab-pane').classList.contains(visibilityClass()), false, 'tab-pane does not have visibility class');
 });
 
-test('it has correct markup when switching active pane and fade=true', function(assert) {
+testRequiringTransitions('it has correct markup when switching active pane and fade=true', function(assert) {
   this.set('activeId', null);
   this.render(hbs`
     {{#bs-tab/pane fade=true activeId=activeId elementId="pane1"}}

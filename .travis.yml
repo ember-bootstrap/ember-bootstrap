@@ -17,6 +17,9 @@ env:
     - AFTER_SCRIPT="true"
     - BEFORE_SCRIPT="true"
     - TEST_COMMAND=""
+    - SAUCE_USERNAME="ember-bootstrap"
+    - SAUCE_ACCESS_KEY="16ef42b7-b940-4a05-bb1e-9e3fef3bf634"
+    # greenkeeper
     - secure: QKF4gJdgWzwTk6eMMVZvP+FBs7Ab3fFYnXfLHHNbQOkIVrwO0D7ns3Umtea9lMIt1bQOq6VHmcsf/BUhi4L+oLEXAZ827GShDKhojqGIDg4poaA9kECtUzsIUnKB+bYkvadRsuUP0KjxNbSM7nVchUDTgRvt0OZZ0rP3q4/oQC8=
 
   matrix:

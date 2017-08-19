@@ -25,7 +25,6 @@ moduleForComponent('bs-form', 'Integration | Component | bs-form', {
 });
 
 testBS3('form has correct CSS class', function(assert) {
-  this.render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
 
   let classSpec = {
     vertical: 'form',
@@ -35,6 +34,7 @@ testBS3('form has correct CSS class', function(assert) {
 
   for (let layout in classSpec) {
     this.set('formLayout', layout);
+    this.render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
     assert.equal(find('form').classList.contains(classSpec[layout]), true, `form has expected class for ${layout}`);
   }
 });
