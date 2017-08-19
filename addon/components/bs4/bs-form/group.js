@@ -2,7 +2,7 @@ import { computed } from '@ember/object';
 import FormGroup from 'ember-bootstrap/components/base/bs-form/group';
 
 export default FormGroup.extend({
-  classNameBindings: ['isHorizontal:row', 'isCheckbox:form-check:form-group'],
+  classNameBindings: ['isHorizontal:row', 'isCheckbox:form-check:form-group', 'isInlineCheckbox:form-check-inline'],
   classTypePrefix: 'form-control',
 
   /**
@@ -22,6 +22,10 @@ export default FormGroup.extend({
    * @private
    */
   isHorizontal: computed.equal('formLayout', 'horizontal').readOnly(),
+
+  isInline: computed.equal('formLayout', 'inline').readOnly(),
+
+  isInlineCheckbox: computed.and('isCheckbox', 'isInline').readOnly(),
 
   _validationType: computed('validation', function() {
     let validation = this.get('validation');
