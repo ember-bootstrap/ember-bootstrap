@@ -150,7 +150,7 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   indicators: computed('childSlides', function() {
-    return new Array(this.get('childSlides.length')).fill(0);
+    return new Array.apply(null, Array(5)).map(Number.prototype.valueOf, 0);
   }),
 
   /**
