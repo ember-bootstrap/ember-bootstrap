@@ -527,11 +527,12 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   willTransit(currSlide, followingSlide) {
-    followingSlide.set(this.get('orderClassName'), true);
     next(this, function() {
-      this.element.offsetHeight;
-      currSlide.set(this.get('directionalClassName'), true);
-      followingSlide.set(this.get('directionalClassName'), true);
+      followingSlide.set(this.get('orderClassName'), true);
+      next(this, function() {
+        currSlide.set(this.get('directionalClassName'), true);
+        followingSlide.set(this.get('directionalClassName'), true);
+      });
     });
   }
 });
