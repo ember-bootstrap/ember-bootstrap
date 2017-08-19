@@ -4,12 +4,16 @@ module.exports = {
   'disable_watching': true,
   'timeout': 540,
   'parallel': 5,
+  'browser_start_timeout': 90,
   'launch_in_ci': [
     'SLEdge',
     'SLChrome',
-    'SLFirefox'
-    // 'SLIE11',
-    // 'SLSafari'
+    'SLFirefox',
+    'SLIE11',
+    'SLIE10',
+    'SLIE9',
+    'SLSafari',
+    'SLSafariLast'
   ],
 
   'launch_in_dev': [
@@ -78,23 +82,51 @@ module.exports = {
       'protocol': 'browser'
     },
 
-    SLSafari: {
+    SLIE10: {
       'exe': 'ember',
       'args': [
         'sauce:launch',
         '-b',
-        'safari',
+        'internet explorer',
         '-v',
         '10',
         '--visibility',
         'public',
         '-p',
-        'macOS 10.12',
+        'Windows 8',
         '--attach',
         '--no-connect',
         '--url'
       ],
       'protocol': 'browser'
+    },
+
+    SLIE9: {
+      'exe': 'ember',
+      'args': [
+        'sauce:launch',
+        '-b',
+        'internet explorer',
+        '-v',
+        '9',
+        '--visibility',
+        'public',
+        '-p',
+        'Windows 7',
+        '--attach',
+        '--no-connect',
+        '--url'
+      ],
+      'protocol': 'browser'
+    },
+
+    SLSafari: {
+      'command': 'ember sauce:launch -b safari -v 10 --visibility public -p "macOS 10.12" --no-connect --url "<url>"',
+      'protocol': 'tap'
+    },
+    SLSafariLast: {
+      'command': 'ember sauce:launch -b safari -v 9 --visibility public -p "OS X 10.11" --no-connect --url "<url>"',
+      'protocol': 'tap'
     }
   }
 };

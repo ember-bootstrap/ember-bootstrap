@@ -8,8 +8,10 @@ import wait from 'ember-test-helpers/wait';
 import { moduleForComponent } from 'ember-qunit';
 import {
   test,
+  testRequiringFocus,
   defaultButtonClass,
-  visibilityClass
+  visibilityClass,
+  testRequiringTransitions
 } from '../../helpers/bootstrap-test';
 import waitUntil from '../../helpers/wait-until';
 import hbs from 'htmlbars-inline-precompile';
@@ -63,7 +65,7 @@ test('open modal is immediately shown', function(assert) {
   assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
 });
 
-test('open modal is immediately shown [fade]', function(assert) {
+testRequiringTransitions('open modal is immediately shown [fade]', function(assert) {
   let done = assert.async();
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
 
@@ -92,7 +94,7 @@ test('open property shows modal', function(assert) {
   assert.notEqual(find('.modal').style.display, 'block', 'Modal is hidden');
 });
 
-test('open property shows modal [fade]', function(assert) {
+testRequiringTransitions('open property shows modal [fade]', function(assert) {
   let done = assert.async();
   this.set('open', false);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" open=open}}Hello world!{{/bs-modal-simple}}`);
@@ -246,7 +248,7 @@ test('onShow/onShown actions fire correctly with fade=false', function(assert) {
   assert.ok(shownSpy.calledOnce, 'onShown action fired after setting open=true');
 });
 
-test('onShow/onShown fire correctly with fade=true', function(assert) {
+testRequiringTransitions('onShow/onShown fire correctly with fade=true', function(assert) {
   this.set('open', false);
   let showSpy = this.spy();
   let shownSpy = this.spy();
@@ -325,7 +327,7 @@ test('when modal has several forms and the submit button is clicked, those forms
   assert.notOk(modalSpy.called);
 });
 
-test('autofocus element is focused when present and fade=false', async function(assert) {
+testRequiringFocus('autofocus element is focused when present and fade=false', async function(assert) {
   let action = this.spy();
   this.on('focusAction', action);
 
@@ -338,10 +340,11 @@ test('autofocus element is focused when present and fade=false', async function(
   await wait();
 
   this.set('open', true);
+  await wait();
   assert.ok(action.calledOnce, 'focus was triggered on the autofocus element');
 });
 
-test('Pressing escape key will close the modal if keyboard=true', async function(assert) {
+testRequiringFocus('Pressing escape key will close the modal if keyboard=true', async function(assert) {
   let action = this.spy();
   this.on('testAction', action);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=true}}Hello world!{{/bs-modal-simple}}`);
@@ -359,7 +362,7 @@ test('Pressing escape key will close the modal if keyboard=true', async function
   assert.ok(action.calledOnce, 'Action has been called.');
 });
 
-test('Pressing escape key will close the modal if keyboard=true and element is autofocused', async function(assert) {
+testRequiringFocus('Pressing escape key will close the modal if keyboard=true and element is autofocused', async function(assert) {
   let action = this.spy();
   this.on('testAction', action);
   this.render(hbs`
@@ -382,7 +385,7 @@ test('Pressing escape key will close the modal if keyboard=true and element is a
   assert.ok(action.calledOnce, 'Action has been called.');
 });
 
-test('Pressing escape key is ignored if keyboard=false', async function(assert) {
+testRequiringFocus('Pressing escape key is ignored if keyboard=false', async function(assert) {
   let hideSpy = this.spy();
   this.on('testAction', hideSpy);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=false}}Hello world!{{/bs-modal-simple}}`);

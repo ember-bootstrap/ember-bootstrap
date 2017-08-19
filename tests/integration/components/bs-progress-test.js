@@ -41,8 +41,8 @@ test('Progress bar has correct width according to value, minValue and maxValue',
     }
   ];
 
-  testData.forEach((data) => {
-    this.render(hbs`
+  this.render(hbs`
+      <style type="text/css">.progress-bar { transition: none; }</style>
       <div style="width: 500px">
         {{#bs-progress as |p|}}
           {{p.bar value=value minValue=minValue maxValue=maxValue}}
@@ -50,6 +50,7 @@ test('Progress bar has correct width according to value, minValue and maxValue',
       </div>
     `);
 
+  testData.forEach((data) => {
     let { value } = data;
     let minValue = data.minValue || 0;
     let maxValue = data.maxValue || 100;

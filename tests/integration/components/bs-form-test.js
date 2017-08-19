@@ -13,6 +13,7 @@ import { moduleForComponent } from 'ember-qunit';
 import {
   formFeedbackClass,
   test,
+  testRequiringFocus,
   testBS3,
   testBS4,
   validationErrorClass
@@ -24,7 +25,6 @@ moduleForComponent('bs-form', 'Integration | Component | bs-form', {
 });
 
 testBS3('form has correct CSS class', function(assert) {
-  this.render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
 
   let classSpec = {
     vertical: 'form',
@@ -34,6 +34,7 @@ testBS3('form has correct CSS class', function(assert) {
 
   for (let layout in classSpec) {
     this.set('formLayout', layout);
+    this.render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
     assert.equal(find('form').classList.contains(classSpec[layout]), true, `form has expected class for ${layout}`);
   }
 });
@@ -173,10 +174,10 @@ test('Adds default onChange action to form elements that updates model\'s proper
   assert.equal(model.get('name'), 'bar', 'model property was updated');
 });
 
-test('Pressing enter on a form with submitOnEnter submits the form', async function(assert) {
+testRequiringFocus('Pressing enter on a form with submitOnEnter submits the form', async function(assert) {
   let submit = this.spy();
   this.on('submit', submit);
-  this.render(hbs`{{#bs-form onSubmit=(action "submit") submitOnEnter=true}}Test{{/bs-form}}`);
+  this.render(hbs`{{#bs-form onSubmit=(action "submit") submitOnEnter=true as |form|}}{{/bs-form}}`);
   await keyEvent('form', 'keypress', 13);
   assert.ok(submit.calledOnce, 'onSubmit action has been called');
 });

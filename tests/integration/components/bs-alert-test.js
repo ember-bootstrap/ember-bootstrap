@@ -1,6 +1,6 @@
 import { find, findAll, click } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
-import test from 'ember-sinon-qunit/test-support/test';
+import { test, testRequiringTransitions } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-alert', 'Integration | Component | bs-alert', {
@@ -26,7 +26,7 @@ test('dismissible alert can be hidden by clicking close button with fade=false',
 
 });
 
-test('dismissible alert can be hidden by clicking close button with fade=true', async function(assert) {
+testRequiringTransitions('dismissible alert can be hidden by clicking close button with fade=true', async function(assert) {
   this.render(hbs`{{#bs-alert type="success" fade=true}}Test{{/bs-alert}}`);
 
   assert.equal(findAll('button.close').length, 1, 'alert has close button');

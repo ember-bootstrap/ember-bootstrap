@@ -15,6 +15,7 @@ import { moduleForComponent } from 'ember-qunit';
 import {
   formFeedbackClass,
   test,
+  testRequiringFocus,
   testBS3,
   validationErrorClass,
   validationWarningClass,
@@ -367,17 +368,17 @@ test('disabled property propagates', function(assert) {
 });
 
 test('if invisibleLabel is true sr-only class is added to label', function(assert) {
-  let formLayouts = [
-    'vertical',
-    'horizontal',
-    'inline'
-  ];
   this.render(hbs`{{bs-form/element label="myLabel"}}`);
   assert.notOk(find('label').classList.contains('sr-only'), 'sr-only class is not present as defaultText');
-  formLayouts.forEach((formLayout) => {
-    this.render(hbs`{{#bs-form formLayout=formLayout }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`);
-    assert.ok(find('label').classList.contains('sr-only'), `sr-only class is present for formLayout ${formLayout}`);
-  });
+
+  this.render(hbs`{{#bs-form formLayout="vertical" }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`);
+  assert.ok(find('label').classList.contains('sr-only'), 'sr-only class is present for formLayout vertical');
+
+  this.render(hbs`{{#bs-form formLayout="horizontal" }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`);
+  assert.ok(find('label').classList.contains('sr-only'), 'sr-only class is present for formLayout horizontal');
+
+  this.render(hbs`{{#bs-form formLayout="inline" }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`);
+  assert.ok(find('label').classList.contains('sr-only'), 'sr-only class is present for formLayout inline');
 });
 
 testBS3('adjusts validation icon position if there is an input group', async function(assert) {
@@ -451,7 +452,7 @@ testBS3('adjusts validation icon position if there is an input group', async fun
   );
 });
 
-test('shows validation state only when validator is present', async function(assert) {
+testRequiringFocus('shows validation state only when validator is present', async function(assert) {
   this.set('model', EmberObject.create({
     name: null, validate() {
     }
@@ -467,7 +468,7 @@ test('shows validation state only when validator is present', async function(ass
   );
 });
 
-test('shows validation errors', async function(assert) {
+testRequiringFocus('shows validation errors', async function(assert) {
   this.set('errors', A(['Invalid']));
   this.set('model', EmberObject.create({ name: null }));
   this.render(hbs`
@@ -493,7 +494,7 @@ test('shows validation errors', async function(assert) {
   );
 });
 
-test('shows validation warnings', async function(assert) {
+testRequiringFocus('shows validation warnings', async function(assert) {
   this.set('warnings', A(['Insecure']));
   this.set('model', EmberObject.create({ name: null }));
   this.render(hbs`
@@ -559,7 +560,7 @@ test('shows custom warning immediately', function(assert) {
   );
 });
 
-test('shows validation errors in preference to custom warning', async function(assert) {
+testRequiringFocus('shows validation errors in preference to custom warning', async function(assert) {
   this.set('errors', A(['Invalid']));
   this.set('warning', 'some warning');
   this.set('model', EmberObject.create({ name: null }));
@@ -599,7 +600,7 @@ test('shows validation errors in preference to custom warning', async function(a
   );
 });
 
-test('events enabling validation rendering are configurable per `showValidationOn` (array)', async function(assert) {
+testRequiringFocus('events enabling validation rendering are configurable per `showValidationOn` (array)', async function(assert) {
   this.set('errors', A(['Invalid']));
   this.set('model', EmberObject.create({ name: null }));
   this.set('showValidationOn', ['change']);
@@ -624,7 +625,7 @@ test('events enabling validation rendering are configurable per `showValidationO
   );
 });
 
-test('events enabling validation rendering are configurable per `showValidationOn` (string)', async function(assert) {
+testRequiringFocus('events enabling validation rendering are configurable per `showValidationOn` (string)', async function(assert) {
   this.set('errors', A(['Invalid']));
   this.set('model', EmberObject.create({ name: null }));
   this.render(hbs`

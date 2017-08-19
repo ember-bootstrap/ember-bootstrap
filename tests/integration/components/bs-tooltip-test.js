@@ -9,7 +9,11 @@ import {
 } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { test, visibilityClass } from '../../helpers/bootstrap-test';
+import {
+  test,
+  testRequiringFocus,
+  visibilityClass
+} from '../../helpers/bootstrap-test';
 import {
   setupForPositioning,
   assertPositioning
@@ -55,7 +59,7 @@ test('it shows and hides immediately when hovering [fade=false]', async function
   assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
 });
 
-test('it shows and hides immediately when focusing [fade=false]', async function(assert) {
+testRequiringFocus('it shows and hides immediately when focusing [fade=false]', async function(assert) {
   this.render(hbs`<button id="target">{{bs-tooltip title="Dummy" fade=false}}</button>`);
 
   await focus('#target');
@@ -150,7 +154,7 @@ test('it aborts hiding if onHide action returns false', async function(assert) {
   assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
 });
 
-test('it keeps showing when leaving the mouse but is still focused [fade=false]', async function(assert) {
+testRequiringFocus('it keeps showing when leaving the mouse but is still focused [fade=false]', async function(assert) {
   this.render(hbs`<a href="#" id="target">{{bs-tooltip title="Dummy" fade=false}}</a>`);
 
   await focus('#target');
