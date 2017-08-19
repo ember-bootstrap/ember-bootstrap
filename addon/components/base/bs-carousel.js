@@ -4,7 +4,7 @@ import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 import { computed, observer } from '@ember/object';
-import { schedule } from '@ember/runloop';
+import { next, schedule } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 
 /**
@@ -150,11 +150,7 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   indicators: computed('childSlides', function() {
-    let array = new Array(this.get('childSlides.length'));
-    for (let a = 0; a < this.get('childSlides.length'); a++) {
-      array[a] = 0;
-    }
-    return array;
+    return new Array(this.get('childSlides.length') + 1).join('0').split('');
   }),
 
   /**
@@ -528,7 +524,7 @@ export default Ember.Component.extend(ComponentParent, {
    */
   willTransit(currSlide, followingSlide) {
     followingSlide.set(this.get('orderClassName'), true);
-    schedule('afterRender', this, function() {
+    next(this, function() {
       this.element.offsetHeight;
       currSlide.set(this.get('directionalClassName'), true);
       followingSlide.set(this.get('directionalClassName'), true);
