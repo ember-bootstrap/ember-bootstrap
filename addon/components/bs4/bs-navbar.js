@@ -4,7 +4,19 @@ import Navbar from 'ember-bootstrap/components/base/bs-navbar';
 export default Navbar.extend({
   classNameBindings: ['breakpointClass', 'backgroundClass'],
 
-  type: 'light',
+  type: computed('appliedType', {
+    get() {
+      return this.get('appliedType');
+    },
+
+    set(key, value) { // eslint-disable-line no-unused
+      let newValue = (!value || value === 'default') ? 'light' : value;
+      this.set('appliedType', newValue);
+      return newValue;
+    }
+  }),
+
+  appliedType: 'light',
 
   /**
    * Defines the responsive toggle breakpoint size. Options are the standard
