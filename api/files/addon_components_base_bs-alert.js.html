@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.1.f582de1a</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,17 +53,13 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { observer, computed } from &#x27;@ember/object&#x27;;
+import { later } from &#x27;@ember/runloop&#x27;;
 import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-alert&#x27;;
 import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
 import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
-
-const {
-  computed,
-  observer,
-  run: { later }
-} = Ember;
 
 /**
  Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -86,7 +82,7 @@ const {
  @uses Mixins.TransitionSupport
  @public
  */
-export default Ember.Component.extend(TypeClass, TransitionSupport, {
+export default Component.extend(TypeClass, TransitionSupport, {
   layout,
   classNameBindings: [&#x27;alert&#x27;, &#x27;fade&#x27;, &#x27;dismissible:alert-dismissible&#x27;],
 

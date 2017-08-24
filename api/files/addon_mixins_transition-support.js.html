@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.1.f582de1a</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,10 +53,10 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import { getOwner } from &#x27;@ember/application&#x27;;
+import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
 import transitionSupport from &#x27;ember-bootstrap/utils/transition-support&#x27;;
-
-const { computed } = Ember;
 
 /**
  * Mixin for components that support transitions
@@ -65,7 +65,7 @@ const { computed } = Ember;
  * @namespace Mixins
  * @private
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   /**
    * @property transitionsEnabled
@@ -81,8 +81,8 @@ export default Ember.Mixin.create({
    * @type {Ember.Service}
    * @private
    */
-  fastboot: Ember.computed(function() {
-    let owner = Ember.getOwner(this);
+  fastboot: computed(function() {
+    let owner = getOwner(this);
     return owner.lookup(&#x27;service:fastboot&#x27;);
   }),
 

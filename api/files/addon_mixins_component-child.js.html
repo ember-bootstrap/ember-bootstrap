@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.1.f582de1a</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,10 +53,9 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
 import ComponentParentMixin from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
-
-const { computed } = Ember;
 
 /**
  * Mixin for components that act as a child component in a parent-child relationship of components
@@ -65,7 +64,7 @@ const { computed } = Ember;
  * @namespace Mixins
  * @private
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   /**
    * The parent component

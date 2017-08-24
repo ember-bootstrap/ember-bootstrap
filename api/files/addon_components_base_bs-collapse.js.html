@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.1.f582de1a</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,22 +53,12 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { isPresent, isEmpty } from &#x27;@ember/utils&#x27;;
+import { observer, computed } from &#x27;@ember/object&#x27;;
+import { next } from &#x27;@ember/runloop&#x27;;
+import { htmlSafe, camelize } from &#x27;@ember/string&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
-
-const {
-  computed,
-  isEmpty,
-  isPresent,
-  observer,
-  run: {
-    next
-  },
-  String: {
-    camelize,
-    htmlSafe
-  }
-} = Ember;
 
 /**
  An Ember component that mimics the behaviour of [Bootstrap&#x27;s collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -89,7 +79,7 @@ const {
  @extends Ember.Component
  @public
  */
-export default Ember.Component.extend({
+export default Component.extend({
 
   classNameBindings: [&#x27;collapse&#x27;, &#x27;collapsing&#x27;],
   attributeBindings: [&#x27;style&#x27;],

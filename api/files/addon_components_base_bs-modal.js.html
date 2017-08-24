@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.1.f582de1a</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,21 +53,15 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { getOwner } from &#x27;@ember/application&#x27;;
+import { observer, get, computed } from &#x27;@ember/object&#x27;;
+import { schedule, next, bind } from &#x27;@ember/runloop&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-modal&#x27;;
 import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
 import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
-
-const {
-  computed,
-  get,
-  getOwner,
-  observer,
-  run: {
-    schedule
-  }
-} = Ember;
 
 /**
 
@@ -109,7 +103,7 @@ const {
  @uses Mixins.TransitionSupport
  @public
  */
-export default Ember.Component.extend(TransitionSupport, {
+export default Component.extend(TransitionSupport, {
   layout,
 
   /**
@@ -426,9 +420,7 @@ export default Ember.Component.extend(TransitionSupport, {
         // trigger submit event on body forms
         let event = document.createEvent(&#x27;Events&#x27;);
         event.initEvent(&#x27;submit&#x27;, true, true);
-        forms.forEach((form) =&gt; {
-          form.dispatchEvent(event);
-        });
+        Array.prototype.slice.call(forms).forEach((form) =&gt; form.dispatchEvent(event));
       } else {
         // if we have no form, we send a submit action
         this.get(&#x27;onSubmit&#x27;)();
@@ -561,9 +553,9 @@ export default Ember.Component.extend(TransitionSupport, {
       }
 
       if (doAnimate) {
-        Ember.run.schedule(&#x27;afterRender&#x27;, this, function() {
+        schedule(&#x27;afterRender&#x27;, this, function() {
           let backdrop = this.get(&#x27;backdropElement&#x27;);
-          Ember.assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
+          assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
           transitionEnd(backdrop, callback, this, this.get(&#x27;backdropTransitionDuration&#x27;));
         });
       } else {
@@ -571,7 +563,7 @@ export default Ember.Component.extend(TransitionSupport, {
       }
     } else if (!this.get(&#x27;isOpen&#x27;) &amp;&amp; this.get(&#x27;backdrop&#x27;)) {
       let backdrop = this.get(&#x27;backdropElement&#x27;);
-      Ember.assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
+      assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
 
       let callbackRemove = function() {
         this.set(&#x27;showBackdrop&#x27;, false);
@@ -585,7 +577,7 @@ export default Ember.Component.extend(TransitionSupport, {
         callbackRemove.call(this);
       }
     } else if (callback) {
-      Ember.run.next(this, callback);
+      next(this, callback);
     }
   },
 
@@ -597,7 +589,7 @@ export default Ember.Component.extend(TransitionSupport, {
    */
   resize() {
     if (this.get(&#x27;isOpen&#x27;)) {
-      this._handleUpdate = Ember.run.bind(this, this.handleUpdate);
+      this._handleUpdate = bind(this, this.handleUpdate);
       window.addEventListener(&#x27;resize&#x27;, this._handleUpdate, false);
     } else {
       window.removeEventListener(&#x27;resize&#x27;, this._handleUpdate, false);

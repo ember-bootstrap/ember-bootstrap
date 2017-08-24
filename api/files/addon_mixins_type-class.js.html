@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.1.f582de1a</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,7 +53,8 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import Mixin from &#x27;@ember/object/mixin&#x27;;
 
 /**
  * Mixin to set the appropriate class for components with differently styled types (&quot;success&quot;, &quot;danger&quot; etc.)
@@ -62,7 +63,7 @@ import Ember from &#x27;ember&#x27;;
  * @namespace Mixins
  * @private
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
   /**
    * Prefix for the type class, e.g. &quot;btn&quot; for button type classes (&quot;btn-primary2 etc.)
    *
@@ -75,7 +76,7 @@ export default Ember.Mixin.create({
 
   classNameBindings: [&#x27;typeClass&#x27;],
 
-  typeClass: Ember.computed(&#x27;type&#x27;, function() {
+  typeClass: computed(&#x27;type&#x27;, function() {
     let prefix = this.get(&#x27;classTypePrefix&#x27;);
     let type = this.get(&#x27;type&#x27;) || &#x27;default&#x27;;
     return &#x60;${prefix}-${type}&#x60;;

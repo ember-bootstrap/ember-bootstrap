@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.1.f582de1a</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,16 +53,12 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { copy } from &#x27;@ember/object/internals&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { isArray, A } from &#x27;@ember/array&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-button-group&#x27;;
 import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
-
-const {
-  A,
-  copy,
-  computed,
-  isArray
-} = Ember;
 
 /**
  Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
@@ -121,7 +117,7 @@ const {
  @uses Mixins.SizeClass
  @public
  */
-export default Ember.Component.extend(SizeClass, {
+export default Component.extend(SizeClass, {
   layout,
   ariaRole: &#x27;group&#x27;,
   classNameBindings: [&#x27;vertical:btn-group-vertical:btn-group&#x27;, &#x27;justified:btn-group-justified&#x27;],

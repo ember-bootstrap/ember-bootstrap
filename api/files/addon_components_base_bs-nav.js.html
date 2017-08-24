@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.1.f582de1a</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,10 +53,10 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { isPresent } from &#x27;@ember/utils&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
-
-const { isPresent } = Ember;
 
 /**
 
@@ -126,7 +126,7 @@ const { isPresent } = Ember;
  @public
 
  */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
 
   tagName: &#x27;ul&#x27;,
@@ -134,7 +134,7 @@ export default Ember.Component.extend({
 
   classNameBindings: [&#x27;typeClass&#x27;, &#x27;justified:nav-justified&#x27;],
 
-  typeClass: Ember.computed(&#x27;type&#x27;, function() {
+  typeClass: computed(&#x27;type&#x27;, function() {
     let type = this.get(&#x27;type&#x27;);
     if (isPresent(type)) {
       return &#x60;nav-${type}&#x60;;

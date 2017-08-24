@@ -1,4 +1,23 @@
 
+# [1.0.0-rc.2](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.1...1.0.0-rc.2) (2017-08-24)
+
+
+### Bug Fixes
+
+* **BS4:** Pin Bootstrap4 version to 4.0.0-alpha.6 until -beta issues have been fixed, see [#410](https://github.com/kaliber5/ember-bootstrap/issues/410) ([ad2dcee](https://github.com/kaliber5/ember-bootstrap/commit/ad2dcee))
+* **Form:** assert valid `formLayout`. Thanks to [@donaldwasserman](https://github.com/donaldwasserman) ([c03bdf5](https://github.com/kaliber5/ember-bootstrap/commit/c03bdf5)), closes [#418](https://github.com/kaliber5/ember-bootstrap/issues/418)
+* **Modal:** fixed Modals in IE9 by using polyfill for unsupported `classlist` ([5b90e44](https://github.com/kaliber5/ember-bootstrap/commit/5b90e44))
+* **modal:** fix error in older browsers ([e18bc81](https://github.com/kaliber5/ember-bootstrap/commit/e18bc81)), closes [#395](https://github.com/kaliber5/ember-bootstrap/issues/395)
+
+
+### Features
+
+* **Accordion:** enable setting custom class to accordion item body. Thanks to [@Techn1x](https://github.com/Techn1x) ([36646a7](https://github.com/kaliber5/ember-bootstrap/commit/36646a7)), closes [#404](https://github.com/kaliber5/ember-bootstrap/issues/404)
+* **Install:** Use findHost function in included hook. Thanks to [@synaptiko](https://github.com/synaptiko) ([dfe2344](https://github.com/kaliber5/ember-bootstrap/commit/dfe2344))
+
+
+
+
 # [1.0.0-rc.1](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-beta.2...1.0.0-rc.1) (2017-07-26)
 
 

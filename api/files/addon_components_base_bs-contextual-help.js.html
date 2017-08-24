@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.1.f582de1a</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,7 +53,13 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { guidFor } from &#x27;@ember/object/internals&#x27;;
+import { isArray } from &#x27;@ember/array&#x27;;
+import { isBlank } from &#x27;@ember/utils&#x27;;
+import EmberObject, { observer, computed } from &#x27;@ember/object&#x27;;
+import { next, schedule, cancel, later, run } from &#x27;@ember/runloop&#x27;;
 import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
 import getPosition from &#x27;ember-bootstrap/utils/get-position&#x27;;
 import getCalculatedOffset from &#x27;ember-bootstrap/utils/get-calculated-offset&#x27;;
@@ -61,24 +67,7 @@ import getParent from &#x27;ember-bootstrap/utils/get-parent&#x27;;
 import setOffset from &#x27;ember-bootstrap/utils/set-offset&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 
-const {
-  assert,
-  Component,
-  computed,
-  guidFor,
-  isArray,
-  isBlank,
-  observer,
-  run,
-  run: {
-    later,
-    cancel,
-    schedule,
-    next
-  }
-} = Ember;
-
-const InState = Ember.Object.extend({
+const InState = EmberObject.extend({
   hover: false,
   focus: false,
   click: false,
