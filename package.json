@@ -40,7 +40,7 @@
     "ember-cli-sass": "^7.0.0",
     "ember-cli-sauce": "^2.1.0",
     "ember-cli-shims": "^1.1.0",
-    "ember-cli-showdown": "^3.2.2",
+    "ember-cli-showdown": "^4.0.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-template-lint": "^0.7.3",
     "ember-cli-test-loader": "^2.1.0",
