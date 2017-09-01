@@ -35,6 +35,7 @@ Router.map(function() {
   this.route('changelog');
   this.route('acceptance', function() {
     this.route('modal');
+    this.route('link', { path: '/link/:model' });
   });
 });
 
