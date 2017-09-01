@@ -1,6 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
-import { visit, currentURL, findAll } from 'ember-native-dom-helpers';
+import { visit, findAll } from 'ember-native-dom-helpers';
 
 moduleForAcceptance('Acceptance | bs-nav-link');
 
