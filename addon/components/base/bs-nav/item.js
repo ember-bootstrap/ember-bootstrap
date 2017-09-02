@@ -1,5 +1,7 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
+import { reads } from '@ember/object/computed';
+import { scheduleOnce } from '@ember/runloop';
 import LinkComponent from '@ember/routing/link-component';
 import layout from 'ember-bootstrap/templates/components/bs-nav/item';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
@@ -14,8 +16,7 @@ import ComponentParent from 'ember-bootstrap/mixins/component-parent';
  @uses Mixins.ComponentParent
  @public
  */
-export default
-Component.extend(ComponentParent, {
+export default Component.extend(ComponentParent, {
   layout,
   classNameBindings: ['disabled', 'active'],
   tagName: 'li',
@@ -30,7 +31,8 @@ Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  disabled: computed.gt('disabledChildLinks.length', 0),
+  disabled: reads('_disabled'),
+  _disabled: false,
 
   /**
    * Render the nav item as active.
@@ -42,7 +44,8 @@ Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  active: computed.gt('activeChildLinks.length', 0),
+  active: reads('_active'),
+  _active: false,
 
   /**
    * Collection of all `Ember.LinkComponent`s that are children
@@ -55,7 +58,10 @@ Component.extend(ComponentParent, {
   }),
 
   activeChildLinks: computed.filterBy('childLinks', 'active'),
+  hasActiveChildLinks: computed.gt('activeChildLinks.length', 0),
+
   disabledChildLinks: computed.filterBy('childLinks', 'disabled'),
+  hasDisabledChildLinks: computed.gt('disabledChildLinks.length', 0),
 
   /**
    * Called when clicking the nav item
@@ -67,5 +73,27 @@ Component.extend(ComponentParent, {
 
   click() {
     this.onClick();
+  },
+
+  init() {
+    this._super(...arguments);
+    this.get('activeChildLinks');
+    this.get('disabledChildLinks');
+  },
+
+  _observeActive: observer('activeChildLinks.[]', function() {
+    scheduleOnce('afterRender', this, this._updateActive);
+  }),
+
+  _updateActive() {
+    this.set('_active', this.get('hasActiveChildLinks'));
+  },
+
+  _observeDisabled: observer('disabledChildLinks.[]', function() {
+    scheduleOnce('afterRender', this, this._updateDisabled);
+  }),
+
+  _updateDisabled() {
+    this.set('_disabled', this.get('hasDisabledChildLinks'));
   }
 });
