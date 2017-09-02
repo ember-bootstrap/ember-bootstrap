@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-tooltip/element';
+import { computed } from '@ember/object';
 
 /**
  Internal component for tooltip's markup. Should not be used directly.
@@ -11,10 +12,9 @@ import layout from 'ember-bootstrap/templates/components/bs-tooltip/element';
  */
 export default Component.extend({
   layout,
+  tagName: '',
 
-  classNames: ['tooltip'],
-  classNameBindings: ['fade'],
-  ariaRole: 'tooltip',
+  // ariaRole: 'tooltip', // @todo
 
   /**
    * @property placement
@@ -38,5 +38,20 @@ export default Component.extend({
    * @default false
    * @public
    */
-  showHelp: false
+  showHelp: false,
+
+  renderInPlace: true,
+
+  target: null,
+
+  popperClassNames: [],
+
+  popperClass: computed('popperClassNames.[]', 'class', function() {
+    let classes = this.get('popperClassNames');
+    let classProperty = this.get('class');
+    if (typeof classProperty === 'string') {
+      classes = classes.concat(classProperty.split(' '));
+    }
+    return classes.join(' ');
+  })
 });

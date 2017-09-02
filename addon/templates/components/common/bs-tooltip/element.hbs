@@ -1,4 +1,13 @@
-<div class="tooltip-arrow"></div>
-<div class="tooltip-inner">
-  {{yield}}
-</div>
+{{#ember-popper
+  id=id
+  class=popperClass
+  placement=placement
+  renderInPlace=renderInPlace
+  target=target
+  popperContainer="#ember-bootstrap-wormhole"
+}}
+  <div class="tooltip-arrow"></div>
+  <div class="tooltip-inner">
+    {{yield}}
+  </div>
+{{/ember-popper}}
