@@ -1,5 +1,6 @@
-import Component from '@ember/component';
+import ContextualHelpElement from '../bs-contextual-help/element';
 import { computed } from '@ember/object';
+import { notEmpty } from '@ember/object/computed';
 import layout from 'ember-bootstrap/templates/components/bs-popover/element';
 
 /**
@@ -7,39 +8,11 @@ import layout from 'ember-bootstrap/templates/components/bs-popover/element';
 
  @class PopoverElement
  @namespace Components
- @extends Ember.Component
+ @extends Components.ContextualHelpElement
  @private
  */
-export default Component.extend({
+export default ContextualHelpElement.extend({
   layout,
-
-  classNames: ['popover'],
-  classNameBindings: ['fade'],
-  ariaRole: 'tooltip',
-
-  /**
-   * @property placement
-   * @type string
-   * @default 'top'
-   * @public
-   */
-  placement: 'top',
-
-  /**
-   * @property fade
-   * @type boolean
-   * @default true
-   * @public
-   */
-  fade: true,
-
-  /**
-   * @property showHelp
-   * @type boolean
-   * @default false
-   * @public
-   */
-  showHelp: false,
 
   /**
    * @property title
@@ -53,5 +26,5 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  hasTitle: computed.notEmpty('title')
+  hasTitle: notEmpty('title')
 });

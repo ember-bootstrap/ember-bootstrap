@@ -2,3 +2,11 @@
 .panel-heading[role='tab'] {
     cursor: pointer;
 }
+
+/*
+we need to override this for BS3 popovers as they are `display: none` be default, and we use popper.js instead of
+proprietary display and positioning logic
+*/
+.ember-bootstrap-popover.popover {
+    display: block;
+}
