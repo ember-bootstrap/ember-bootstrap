@@ -202,17 +202,22 @@ test('should place tooltip on top of element if already visible', function(asser
   setTimeout(function() {
     assertPositioning(assert);
     done();
-  }, 0);
+  }, 1);
 });
 
 test('should place tooltip on top of element if visible is set to true', function(assert) {
+  assert.expect(2);
+  let done = assert.async();
   this.set('visible', false);
   this.render(hbs`<div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=visible}}</a></p></div>`);
 
   setupForPositioning();
 
   this.set('visible', true);
-  assertPositioning(assert);
+  setTimeout(function() {
+    assertPositioning(assert);
+    done();
+  }, 1);
 });
 
 test('should show tooltip if leave event hasn\'t occurred before delay expires', function(assert) {

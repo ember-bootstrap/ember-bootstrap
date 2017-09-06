@@ -14,7 +14,7 @@ moduleForComponent('bs-popover/element', 'Integration | Component | bs-popover/e
 test('it has correct markup', function(assert) {
   // Template block usage:
   this.render(hbs`
-    {{#bs-popover/element fade=true showHelp=true title="dummy title"}}
+    {{#bs-popover/element id="popover-element" fade=true showHelp=true title="dummy title"}}
       template block text
     {{/bs-popover/element}}
   `);
@@ -30,8 +30,9 @@ test('it has correct markup', function(assert) {
 
 test('it supports different placements', function(assert) {
   let placements = ['top', 'left', 'bottom', 'right'];
+  this.set('placement', placements[0]);
   this.render(hbs`
-    {{#bs-popover/element placement=placement title="dummy title"}}
+    {{#bs-popover/element id="popover-element" placement=placement title="dummy title"}}
       template block text
     {{/bs-popover/element}}
   `);
@@ -44,7 +45,7 @@ test('it supports different placements', function(assert) {
 
 test('it passes along class attribute', function(assert) {
   this.render(hbs`
-    {{#bs-popover/element placement=placement title="dummy title" class="wide"}}
+    {{#bs-popover/element id="popover-element" title="dummy title" class="wide"}}
       template block text
     {{/bs-popover/element}}
   `);
