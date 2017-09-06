@@ -78,5 +78,11 @@ export default Component.extend({
       classes = classes.concat(classProperty.split(' '));
     }
     return classes.join(' ');
-  })
+  }),
+
+  popperModifiers: {
+    arrow: {
+      element: '.arrow'
+    }
+  }
 });

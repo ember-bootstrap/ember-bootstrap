@@ -1,5 +1,4 @@
 import ContextualHelpElement from '../bs-contextual-help/element';
-import { computed } from '@ember/object';
 import { notEmpty } from '@ember/object/computed';
 import layout from 'ember-bootstrap/templates/components/bs-popover/element';
 

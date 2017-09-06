@@ -1,11 +1,11 @@
 import { assign } from '@ember/polyfills';
 import { find, findAll } from 'ember-native-dom-helpers';
 
-export function setupForPositioning() {
+export function setupForPositioning(align = 'left') {
   assign(find('#wrapper').style, {
     position: 'absolute',
     bottom: 0,
-    left: 0,
+    [align]: 0,
     textAlign: 'right',
     width: '300px',
     height: '300px'

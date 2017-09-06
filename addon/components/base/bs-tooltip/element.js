@@ -10,5 +10,11 @@ import ContextualHelpElement from '../bs-contextual-help/element';
  @private
  */
 export default ContextualHelpElement.extend({
-  layout
+  layout,
+
+  popperModifiers: {
+    arrow: {
+      element: '.tooltip-arrow'
+    }
+  }
 });
