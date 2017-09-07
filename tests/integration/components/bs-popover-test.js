@@ -21,7 +21,7 @@ test('should place popover on top of element', async function(assert) {
 });
 
 test('should adjust popover arrow', async function(assert) {
-  let expectedArrowPosition = 244;
+  let expectedArrowPosition = 238;
   this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{#bs-popover placement="top" autoPlacement=true viewportSelector="#wrapper" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}</a></p></div>`);
 
   setupForPositioning('right');

@@ -23,6 +23,7 @@ test('it has correct markup', function(assert) {
   assert.ok(find(':first-child').classList.contains(placementClassFor('tooltip', 'top')), 'has placement class');
   assert.ok(find(':first-child').classList.contains('fade'), 'has fade class');
   assert.ok(find(':first-child').classList.contains(visibilityClass()), 'has visibility class');
+  assert.equal(find(':first-child').getAttribute('role'), 'tooltip', 'has ARIA role');
   assert.equal(findAll('.tooltip-arrow').length, 1, 'has arrow');
   assert.equal(find('.tooltip-inner').textContent.trim(), 'template block text', 'shows title');
 });

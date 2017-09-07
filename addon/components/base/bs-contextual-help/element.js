@@ -15,8 +15,7 @@ import { scheduleOnce } from '@ember/runloop';
 export default Component.extend({
   layout,
   tagName: '',
-
-  // ariaRole: 'tooltip', // @todo
+  ariaRole: 'tooltip',
 
   /**
    * @property placement
