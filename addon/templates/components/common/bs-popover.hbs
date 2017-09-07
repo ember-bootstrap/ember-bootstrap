@@ -1,13 +1,17 @@
 {{#if inDom}}
   {{#bs-popover/element
     id=overlayId
-    placement=_placement
+    parent=this
+    placement=placement
     fade=fade
     showHelp=showHelp
     title=title
     class=class
     renderInPlace=_renderInPlace
     target=triggerTargetElement
+    autoPlacement=autoPlacement
+    viewportElement=viewportElement
+    viewportPadding=viewportPadding
   }}
     {{#if hasBlock}}
       {{yield}}

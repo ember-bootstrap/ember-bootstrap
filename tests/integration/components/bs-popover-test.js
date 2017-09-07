@@ -21,18 +21,18 @@ test('should place popover on top of element', async function(assert) {
 });
 
 test('should adjust popover arrow', async function(assert) {
-  let expectedArrowPosition = 248;
-  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{#bs-popover placement="top" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}</a></p></div>`);
+  let expectedArrowPosition = 244;
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{#bs-popover placement="top" autoPlacement=true viewportSelector="#wrapper" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}</a></p></div>`);
 
   setupForPositioning('right');
 
   await click('#target');
   let arrowPosition = parseInt(find('.arrow').style.left, 10);
-  assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1);
+  assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
 
   // check again to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/361
   await click('#target');
   await click('#target');
   arrowPosition = parseInt(find('.arrow').style.left, 10);
-  assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1);
+  assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
 });

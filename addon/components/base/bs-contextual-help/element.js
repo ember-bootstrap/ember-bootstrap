@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-tooltip/element';
 import { computed } from '@ember/object';
 import { assert } from '@ember/debug';
+import { scheduleOnce } from '@ember/runloop';
 
 /**
  Internal (abstract) component for contextual help markup. Should not be used directly.
@@ -24,6 +25,8 @@ export default Component.extend({
    * @public
    */
   placement: 'top',
+
+  actualPlacement: computed.reads('placement'),
 
   /**
    * @property fade
@@ -59,6 +62,12 @@ export default Component.extend({
    * @public
    */
   target: null,
+
+  autoPlacement: true,
+
+  viewportElement: null,
+
+  viewportPadding: 0,
 
   /**
    * @property arrowClass
@@ -103,10 +112,10 @@ export default Component.extend({
           let marginLeft = parseInt(window.getComputedStyle(tip).marginLeft, 10);
 
           // we must check for NaN for ie 8/9
-          if (isNaN(marginTop)) {
+          if (isNaN(marginTop) || marginTop > 0) {
             marginTop = 0;
           }
-          if (isNaN(marginLeft)) {
+          if (isNaN(marginLeft) || marginLeft > 0) {
             marginLeft = 0;
           }
 
@@ -115,11 +124,32 @@ export default Component.extend({
 
           return window.Popper.Defaults.modifiers.offset.fn.apply(this, arguments);
         }
+      },
+      preventOverflow: {
+        enabled: this.get('autoPlacement'),
+        boundariesElement: this.get('viewportElement'),
+        padding: this.get('viewportPadding')
+      },
+      hide: {
+        enabled: this.get('autoPlacement')
+      },
+      flip: {
+        enabled: this.get('autoPlacement')
       }
     };
   }),
 
   didReceiveAttrs() {
     assert('Contextual help element needs id for popper element', this.get('id'));
+  },
+
+  actions: {
+    updatePlacement(popperDataObject) {
+      if (this.get('actualPlacement') === popperDataObject.placement) {
+        return;
+      }
+      this.set('actualPlacement', popperDataObject.placement);
+      scheduleOnce('afterRender', popperDataObject.instance, popperDataObject.instance.scheduleUpdate);
+    }
   }
 });

@@ -10,3 +10,28 @@ proprietary display and positioning logic
 .ember-bootstrap-popover.popover {
     display: block;
 }
+
+/**
+arrow placement with popper.js will take margins into account
+(see https://github.com/FezVrasta/popper.js/blob/e80f27c85bdaa8ef7d700f936e536bb43aea9b53/packages/popper/src/utils/getOuterSizes.js#L9-L15)
+So we need to reset them here, otherwise arrow positioning will be slightly off
+ */
+.ember-bootstrap-tooltip.tooltip.top .tooltip-arrow,
+ .ember-bootstrap-tooltip.tooltip.bottom .tooltip-arrow {
+     margin-left: 0;
+ }
+
+.ember-bootstrap-tooltip.tooltip.left .tooltip-arrow,
+.ember-bootstrap-tooltip.tooltip.right .tooltip-arrow {
+    margin-top: 0;
+}
+
+.ember-bootstrap-popover.popover.top .arrow,
+.ember-bootstrap-popover.popover.bottom .arrow {
+    margin-left: 0;
+}
+
+.ember-bootstrap-popover.popover.left .arrow,
+.ember-bootstrap-popover.popover.right .arrow {
+    margin-top: 0;
+}

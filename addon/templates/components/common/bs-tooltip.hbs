@@ -1,12 +1,15 @@
 {{#if inDom}}
   {{#bs-tooltip/element
     id=overlayId
-    placement=_placement
+    placement=placement
     fade=fade
     showHelp=showHelp
     class=class
     renderInPlace=_renderInPlace
     target=triggerTargetElement
+    autoPlacement=autoPlacement
+    viewportElement=viewportElement
+    viewportPadding=viewportPadding
   }}
     {{#if hasBlock}}
       {{yield}}
