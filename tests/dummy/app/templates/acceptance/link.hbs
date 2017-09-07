@@ -1,0 +1,5 @@
+{{#bs-nav id="nav-link-test" as |nav|}}
+  {{#nav.item}}{{#nav.link-to "acceptance.link" "1"}}first{{/nav.link-to}}{{/nav.item}}
+  {{#nav.item}}{{#nav.link-to "acceptance.link" "2"}}second{{/nav.link-to}}{{/nav.item}}
+  {{#nav.item}}{{#nav.link-to "acceptance.link" model}}current{{/nav.link-to}}{{/nav.item}}
+{{/bs-nav}}
