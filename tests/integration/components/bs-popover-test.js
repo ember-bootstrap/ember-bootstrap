@@ -1,7 +1,7 @@
 import { click, find } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { test } from '../../helpers/bootstrap-test';
+import { test, testBS3 } from '../../helpers/bootstrap-test';
 import {
   setupForPositioning,
   assertPositioning
@@ -20,7 +20,8 @@ test('should place popover on top of element', async function(assert) {
   assertPositioning(assert, '.popover');
 });
 
-test('should adjust popover arrow', async function(assert) {
+// @todo reenable BS4 testing when switching to BS4 beta, see tooltip tests...
+testBS3('should adjust popover arrow', async function(assert) {
   let expectedArrowPosition = 238;
   this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{#bs-popover placement="top" autoPlacement=true viewportSelector="#wrapper" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}</a></p></div>`);
 

@@ -50,10 +50,10 @@ export default Component.extend(TransitionSupport, {
    *
    * @property autoPlacement
    * @type boolean
-   * @default false
+   * @default true
    * @public
    */
-  autoPlacement: false,
+  autoPlacement: true,
 
   /**
    * You can programmatically show the tooltip/popover by setting this to `true`

@@ -62,10 +62,31 @@ export default Component.extend({
    */
   target: null,
 
+  /**
+   * @property autoPlacement
+   * @type boolean
+   * @default true
+   * @public
+   */
   autoPlacement: true,
 
+  /**
+   * The DOM element of the viewport element.
+   *
+   * @property viewportElement
+   * @type object
+   * @public
+   */
   viewportElement: null,
 
+  /**
+   * Take a padding into account for keeping the tooltip/popover within the bounds of the element given by `viewportElement`.
+   *
+   * @property viewportPadding
+   * @type number
+   * @default 0
+   * @public
+   */
   viewportPadding: 0,
 
   /**
@@ -95,7 +116,14 @@ export default Component.extend({
     return classes.join(' ');
   }),
 
-  popperModifiers: computed('arrowClass', function() {
+  /**
+   * popper.js modifier config
+   *
+   * @property popperModifiers
+   * @type {object}
+   * @private
+   */
+  popperModifiers: computed('arrowClass', 'autoPlacement', 'viewportElement', 'viewportPadding', function() {
     let self = this;
     return {
       arrow: {

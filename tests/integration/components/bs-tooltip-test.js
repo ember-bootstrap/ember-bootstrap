@@ -11,8 +11,10 @@ import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import {
   test,
+  testBS3,
   testRequiringFocus,
-  visibilityClass
+  visibilityClass,
+  tooltipPositionClass
 } from '../../helpers/bootstrap-test';
 import {
   setupForPositioning,
@@ -313,7 +315,10 @@ test('show pass along class attribute', function(assert) {
   triggerEvent('#target', 'mouseenter');
 });
 
-test('should position tooltip arrow centered', async function(assert) {
+// tooltip arrow in BS4 alpha is just a pseudo element that does not allow arbitrary positioning
+// so these tests are disabled for BS4. BS4 beta uses a dedicated div again, so tests should be enabled again
+// when switching to BS4 beta! @todo
+testBS3('should position tooltip arrow centered', async function(assert) {
   let expectedArrowPosition = 95;
   this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{bs-tooltip placement="top" title="very very very very very very very long popover" fade=false}}</a></p></div>`);
 
@@ -324,7 +329,7 @@ test('should position tooltip arrow centered', async function(assert) {
   assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
 });
 
-test('should adjust tooltip arrow', async function(assert) {
+testBS3('should adjust tooltip arrow', async function(assert) {
   let expectedArrowPosition = 168;
   this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long popover" fade=false}}</a></p></div>`);
 
@@ -348,7 +353,7 @@ test('should adjust placement if not fitting in viewport', async function(assert
   setupForPositioning('right');
   await click('#target');
 
-  assert.ok(find('.tooltip').classList.contains('top'));
+  assert.ok(find('.tooltip').classList.contains(tooltipPositionClass('top')));
 
   setTimeout(function() {
     assertPositioning(assert);
