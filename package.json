@@ -93,7 +93,7 @@
     "ember-cli-htmlbars": "^2.0.2",
     "ember-runtime-enumerable-includes-polyfill": "^2.0.0",
     "ember-wormhole": "^0.5.2",
-    "findup-sync": "^2.0.0",
+    "findup-sync": "^1.0.0",
     "fs-extra": "^4.0.1",
     "rsvp": "^4.0.1",
     "silent-error": "^1.0.1"
