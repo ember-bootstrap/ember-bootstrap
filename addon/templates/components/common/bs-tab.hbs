@@ -23,7 +23,7 @@
           {{/dd.menu}}
         {{/nav.dropdown}}
       {{else}}
-        {{#nav.item active=(bs-eq item.elementId isActiveId)}}
+        {{#nav.item active=(bs-eq item.elementId isActiveId) pullRight=pullRight}}
           <a href="#{{item.elementId}}" role="tab" class={{if (bs-eq isActiveId item.elementId) "nav-link active" "nav-link"}} {{action "select" item.elementId}}>
             {{item.title}}
           </a>

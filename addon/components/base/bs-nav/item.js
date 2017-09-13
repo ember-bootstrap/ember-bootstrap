@@ -18,7 +18,7 @@ import ComponentParent from 'ember-bootstrap/mixins/component-parent';
  */
 export default Component.extend(ComponentParent, {
   layout,
-  classNameBindings: ['disabled', 'active'],
+  classNameBindings: ['disabled', 'active', 'pullRight'],
   tagName: 'li',
   ariaRole: 'presentation',
 
