@@ -1,6 +1,6 @@
 {{yield
   (hash
-    button=(component "bs-dropdown/button" dropdown=this onClick=(action "toggleDropdown"))
+    button=(component "bs-dropdown/button" dropdown=this onClick=(action "toggleDropdown") bubble=true)
     toggle=(component "bs-dropdown/toggle" dropdown=this inNav=inNav onClick=(action "toggleDropdown"))
     menu=(component "bs-dropdown/menu")
     isOpen=isOpen
