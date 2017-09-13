@@ -224,13 +224,13 @@ export default Component.extend({
   addClickListener() {
     if (!this.clickListener) {
       this.clickListener = bind(this, this.closeOnClickHandler);
-      document.addEventListener('click', this.clickListener);
+      document.addEventListener('click', this.clickListener, true);
     }
   },
 
   removeClickListener() {
     if (this.clickListener)  {
-      document.removeEventListener('click', this.clickListener);
+      document.removeEventListener('click', this.clickListener, true);
       this.clickListener = null;
     }
   },

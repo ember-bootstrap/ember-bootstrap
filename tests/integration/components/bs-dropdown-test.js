@@ -79,6 +79,24 @@ test('clicking dropdown menu will close it', async function(assert) {
   assert.equal(find(':first-child').classList.contains(openClass()), false, 'Dropdown is closed');
 });
 
+test('dropdown will close on click, when default is prevented, propagation is stopped', async function(assert) {
+  assert.expect(3);
+
+  this.set('stopEvent', (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    assert.ok('stopped event');
+  });
+
+  this.render(hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}<div id="target" onClick={{action stopEvent}} />`);
+
+  await click('a.dropdown-toggle');
+  assert.equal(find(':first-child').classList.contains(openClass()), true, 'Dropdown is open');
+
+  await click('#target');
+  assert.equal(find(':first-child').classList.contains(openClass()), false, 'Dropdown is closed');
+});
+
 test('clicking dropdown menu when closeOnMenuClick is false will not close it', async function(assert) {
   this.render(hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`);
   await click('a.dropdown-toggle');
