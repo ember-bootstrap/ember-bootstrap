@@ -52,7 +52,7 @@ export default Component.extend(TransitionSupport, {
   layout,
 
   /**
-   * Visibility of the modal. Toggle to to show/hide with CSS transitions.
+   * Visibility of the modal. Toggle to show/hide with CSS transitions.
    *
    * When the modal is closed by user interaction this property will not update by using two-way bindings in order
    * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onHide` action

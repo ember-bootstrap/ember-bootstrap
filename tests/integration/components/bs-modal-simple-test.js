@@ -2,7 +2,8 @@ import {
   find,
   findAll,
   click,
-  keyEvent
+  keyEvent,
+  waitUntil
 } from 'ember-native-dom-helpers';
 import wait from 'ember-test-helpers/wait';
 import { moduleForComponent } from 'ember-qunit';
@@ -10,9 +11,9 @@ import {
   test,
   testRequiringFocus,
   defaultButtonClass,
-  visibilityClass
+  visibilityClass,
+  testRequiringTransitions
 } from '../../helpers/bootstrap-test';
-import waitUntil from '../../helpers/wait-until';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-modal-simple', 'Integration | Component | bs-modal-simple', {
@@ -64,7 +65,7 @@ test('open modal is immediately shown', function(assert) {
   assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
 });
 
-test('open modal is immediately shown [fade]', function(assert) {
+testRequiringTransitions('open modal is immediately shown [fade]', function(assert) {
   let done = assert.async();
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
 
@@ -93,7 +94,7 @@ test('open property shows modal', function(assert) {
   assert.notEqual(find('.modal').style.display, 'block', 'Modal is hidden');
 });
 
-test('open property shows modal [fade]', function(assert) {
+testRequiringTransitions('open property shows modal [fade]', function(assert) {
   let done = assert.async();
   this.set('open', false);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" open=open}}Hello world!{{/bs-modal-simple}}`);
@@ -247,7 +248,7 @@ test('onShow/onShown actions fire correctly with fade=false', function(assert) {
   assert.ok(shownSpy.calledOnce, 'onShown action fired after setting open=true');
 });
 
-test('onShow/onShown fire correctly with fade=true', function(assert) {
+testRequiringTransitions('onShow/onShown fire correctly with fade=true', function(assert) {
   this.set('open', false);
   let showSpy = this.spy();
   let shownSpy = this.spy();
@@ -339,6 +340,7 @@ testRequiringFocus('autofocus element is focused when present and fade=false', a
   await wait();
 
   this.set('open', true);
+  await wait();
   assert.ok(action.calledOnce, 'focus was triggered on the autofocus element');
 });
 
