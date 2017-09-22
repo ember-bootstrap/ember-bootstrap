@@ -1,5 +1,6 @@
 import { computed } from '@ember/object';
 import Navbar from 'ember-bootstrap/components/base/bs-navbar';
+import { isBlank } from 'ember';
 
 export default Navbar.extend({
   classNameBindings: ['breakpointClass', 'backgroundClass'],
@@ -44,7 +45,11 @@ export default Navbar.extend({
   breakpointClass: computed('toggleBreakpoint', function() {
     let toggleBreakpoint = this.get('toggleBreakpoint');
 
-    return `navbar-expand-${toggleBreakpoint}`;
+    if (isBlank(toggleBreakpoint)) {
+      return 'navbar-expand';
+    } else {
+      return `navbar-expand-${toggleBreakpoint}`;
+    }
   }),
 
   backgroundClass: computed('backgroundColor', function() {
