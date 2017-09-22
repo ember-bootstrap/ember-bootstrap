@@ -151,7 +151,9 @@ testBS4('it handles navbar-expand[-*] properly', function(assert) {
   this.render(hbs`{{bs-navbar toggleBreakpoint="sm"}}`);
   assert.notOk(find('nav').classList.contains('navbar-expand-lg'), 'it does not have default navbar-expand-lg');
   assert.ok(find('nav').classList.contains('navbar-expand-sm'), 'it has navbar-expand-sm');
+});
 
+testBS4('it handles navbar-expand properly', function(assert) {
   this.render(hbs`{{bs-navbar toggleBreakpoint=""}}`);
   assert.ok(find('nav').classList.contains('navbar-expand'), 'it has navbar-expand');
 });
