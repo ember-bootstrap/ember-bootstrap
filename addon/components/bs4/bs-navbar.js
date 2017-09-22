@@ -1,6 +1,6 @@
 import { computed } from '@ember/object';
 import Navbar from 'ember-bootstrap/components/base/bs-navbar';
-import { isBlank } from 'ember';
+import { isBlank } from '@ember/utils';
 
 export default Navbar.extend({
   classNameBindings: ['breakpointClass', 'backgroundClass'],
