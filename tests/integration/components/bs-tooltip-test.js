@@ -358,5 +358,5 @@ test('should adjust placement if not fitting in viewport', async function(assert
   setTimeout(function() {
     assertPositioning(assert);
     done();
-  }, 10);
+  }, 50);
 });
