@@ -230,7 +230,7 @@ test('can implement custom close buttons', function(assert) {
 });
 
 test('size property adds size class', function(assert) {
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" size="lg"}}Hello world!{{/bs-modal-simple}}`);
+  this.render(hbs`{{#bs-modal-simple title="Simple Dialog" size="lg" fade=false}}Hello world!{{/bs-modal-simple}}`);
   assert.ok(find('.modal-dialog').classList.contains('modal-lg'), 'Modal has size class.');
 });
 

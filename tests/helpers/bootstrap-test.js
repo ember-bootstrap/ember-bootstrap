@@ -82,6 +82,10 @@ export function accordionItemBodyClass() {
   return versionDependent('panel-body', 'card-block');
 }
 
+export function tooltipPositionClass(pos) {
+  return versionDependent(pos, `tooltip-${pos}`);
+}
+
 export { test };
 
 export function testRequiringFocus(name, fn) {
