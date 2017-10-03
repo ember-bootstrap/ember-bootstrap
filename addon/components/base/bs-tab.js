@@ -1,3 +1,4 @@
+import { oneWay, filter } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
@@ -153,7 +154,7 @@ export default Component.extend(ComponentParent, {
    * @type string
    * @public
    */
-  activeId: computed.oneWay('childPanes.firstObject.elementId'),
+  activeId: oneWay('childPanes.firstObject.elementId'),
 
   /**
    * @property isActiveId
@@ -200,7 +201,7 @@ export default Component.extend(ComponentParent, {
    * @readonly
    * @private
    */
-  childPanes: computed.filter('children', function(view) {
+  childPanes: filter('children', function(view) {
     return view instanceof TabPane;
   }),
 

@@ -1,3 +1,4 @@
+import { equal } from '@ember/object/computed';
 import { computed } from '@ember/object';
 import FormGroup from 'ember-bootstrap/components/base/bs-form/group';
 
@@ -12,7 +13,7 @@ export default FormGroup.extend({
    * @type boolean
    * @private
    */
-  isCheckbox: computed.equal('controlType', 'checkbox').readOnly(),
+  isCheckbox: equal('controlType', 'checkbox').readOnly(),
 
   /**
    * Indicates whether the form type equals `horizontal`
@@ -21,7 +22,7 @@ export default FormGroup.extend({
    * @type boolean
    * @private
    */
-  isHorizontal: computed.equal('formLayout', 'horizontal').readOnly(),
+  isHorizontal: equal('formLayout', 'horizontal').readOnly(),
 
   _validationType: computed('validation', function() {
     let validation = this.get('validation');

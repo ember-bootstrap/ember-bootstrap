@@ -1,7 +1,6 @@
 /* globals alert */
+import { oneWay } from '@ember/object/computed';
 import Controller from '@ember/controller';
-
-import { computed } from '@ember/object';
 import { A } from '@ember/array';
 import { next } from '@ember/runloop';
 
@@ -13,7 +12,7 @@ export default Controller.extend({
 
   title: 'Simple Modal',
   sizes: A(['', 'sm', 'lg']),
-  size: computed.oneWay('sizes.firstObject'),
+  size: oneWay('sizes.firstObject'),
   closeButton: true,
   closeTitle: 'Ok',
   submitTitle: null,

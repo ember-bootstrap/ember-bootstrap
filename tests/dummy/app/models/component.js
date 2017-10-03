@@ -1,3 +1,4 @@
+import { reads } from '@ember/object/computed';
 import EmberObject, { computed } from '@ember/object';
 import config from 'dummy/config/environment';
 
@@ -6,7 +7,7 @@ export default EmberObject.extend({
   title: null,
   description: null,
 
-  className: computed.reads('title'),
+  className: reads('title'),
   nameSpace: 'Components',
 
   bsUrl: null,

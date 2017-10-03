@@ -1,3 +1,4 @@
+import { oneWay, not } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
@@ -34,7 +35,7 @@ export default Component.extend(ComponentChild, TypeClass, {
    * @property value
    * @public
    */
-  value: computed.oneWay('elementId'),
+  value: oneWay('elementId'),
 
   /**
    * @property selected
@@ -58,7 +59,7 @@ export default Component.extend(ComponentChild, TypeClass, {
    * @readonly
    * @private
    */
-  active: computed.not('collapsed'),
+  active: not('collapsed'),
 
   /**
    * Reference to the parent `Components.Accordion` class.

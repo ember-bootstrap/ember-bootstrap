@@ -1,5 +1,5 @@
+import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/label';
 
 /**
@@ -81,7 +81,7 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  isCheckbox: computed.equal('controlType', 'checkbox').readOnly(),
+  isCheckbox: equal('controlType', 'checkbox').readOnly(),
 
   /**
    * Indicates whether the form type equals `horizontal`
@@ -90,5 +90,5 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  isHorizontal: computed.equal('formLayout', 'horizontal').readOnly()
+  isHorizontal: equal('formLayout', 'horizontal').readOnly()
 });

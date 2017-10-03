@@ -1,17 +1,14 @@
-import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
+import { readOnly, notEmpty } from '@ember/object/computed';
+import Controller, { inject as controller } from '@ember/controller';
 import { computed } from '@ember/object';
-import Ember from 'ember';
-
-const {
-  inject
-} = Ember;
 
 export default Controller.extend({
-  application: inject.controller(),
-  component: inject.service(),
-  currentRouteName: computed.readOnly('application.currentRouteName'),
+  application: controller(),
+  component: service(),
+  currentRouteName: readOnly('application.currentRouteName'),
 
-  isDetailPage: computed.notEmpty('currentComponent'),
+  isDetailPage: notEmpty('currentComponent'),
 
   currentComponent: computed('currentRouteName', function() {
     let routeName = this.get('currentRouteName');
