@@ -1,6 +1,7 @@
 ---
 language: node_js
 node_js:
+  # revert to node 4 once https://github.com/kybishop/ember-popper/pull/45 is merged and released
   - "6"
 
 sudo: false
