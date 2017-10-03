@@ -1,5 +1,5 @@
 import Mixin from '@ember/object/mixin';
-import { next } from '@ember/runloop';
+import { schedule } from '@ember/runloop';
 
 /**
  * Mixin for components that act as dropdown toggles.
@@ -32,7 +32,7 @@ export default Mixin.create({
     this._super(...arguments);
     let dropdown = this.get('dropdown');
     if (dropdown) {
-      next(this, function() {
+      schedule('sync', this, function() {
         if (!this.get('isDestroyed')) {
           dropdown.set('toggle', this);
         }
