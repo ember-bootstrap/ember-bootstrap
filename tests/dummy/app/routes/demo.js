@@ -1,10 +1,8 @@
+import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
-import Ember from 'ember';
-
-const { inject } = Ember;
 
 export default Route.extend({
-  component: inject.service(),
+  component: service(),
 
   model() {
     return this.get('component').findAll();

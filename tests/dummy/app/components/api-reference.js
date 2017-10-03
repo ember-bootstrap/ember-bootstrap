@@ -1,5 +1,5 @@
+import { readOnly } from '@ember/object/computed';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
 import layout from '../templates/components/api-reference';
 
 export default Component.extend({
@@ -8,8 +8,8 @@ export default Component.extend({
 
   model: null,
 
-  title: computed.readOnly('model.title'),
-  apiUrl: computed.readOnly('model.apiUrl'),
-  apiUnstableUrl: computed.readOnly('model.apiUnstableUrl'),
-  bsUrl: computed.readOnly('model.bsUrl')
+  title: readOnly('model.title'),
+  apiUrl: readOnly('model.apiUrl'),
+  apiUnstableUrl: readOnly('model.apiUnstableUrl'),
+  bsUrl: readOnly('model.bsUrl')
 });

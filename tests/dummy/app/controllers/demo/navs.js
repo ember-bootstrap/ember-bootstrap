@@ -1,9 +1,9 @@
+import { oneWay } from '@ember/object/computed';
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
 import { A } from '@ember/array';
 
 export default Controller.extend({
-  type: computed.oneWay('typeChoices.firstObject'),
+  type: oneWay('typeChoices.firstObject'),
   stacked: false,
   justified: false,
   typeChoices: A([

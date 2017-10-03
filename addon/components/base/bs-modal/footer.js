@@ -1,5 +1,5 @@
+import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
 import layout from 'ember-bootstrap/templates/components/bs-modal/footer';
 
 /**
@@ -38,7 +38,7 @@ export default Component.extend({
    */
   submitTitle: null,
 
-  hasSubmitButton: computed.notEmpty('submitTitle'),
+  hasSubmitButton: notEmpty('submitTitle'),
 
   /**
    * Set to true to disable the submit button. If you bind this to some property that indicates if submitting is allowed

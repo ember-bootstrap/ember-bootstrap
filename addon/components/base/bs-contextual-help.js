@@ -1,3 +1,4 @@
+import { or, reads, gt } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import Component from '@ember/component';
 import { guidFor } from '@ember/object/internals';
@@ -13,7 +14,7 @@ const InState = EmberObject.extend({
   hover: false,
   focus: false,
   click: false,
-  showHelp: computed.or('hover', 'focus', 'click')
+  showHelp: or('hover', 'focus', 'click')
 });
 
 /**
@@ -70,7 +71,7 @@ export default Component.extend(TransitionSupport, {
    * @type boolean
    * @private
    */
-  inDom: computed.reads('visible'),
+  inDom: reads('visible'),
 
   /**
    * Set to false to disable fade animations.
@@ -90,7 +91,7 @@ export default Component.extend(TransitionSupport, {
    * @default false
    * @private
    */
-  showHelp: computed.reads('visible'),
+  showHelp: reads('visible'),
 
   /**
    * Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the
@@ -111,7 +112,7 @@ export default Component.extend(TransitionSupport, {
    * @default 0
    * @public
    */
-  delayShow: computed.reads('delay'),
+  delayShow: reads('delay'),
 
   /**
    * Delay hiding the tooltip/popover. This property overrides the general delay set with the `delay` property.
@@ -121,10 +122,10 @@ export default Component.extend(TransitionSupport, {
    * @default 0
    * @public
    */
-  delayHide: computed.reads('delay'),
+  delayHide: reads('delay'),
 
-  hasDelayShow: computed.gt('delayShow', 0),
-  hasDelayHide: computed.gt('delayHide', 0),
+  hasDelayShow: gt('delayShow', 0),
+  hasDelayHide: gt('delayHide', 0),
 
   /**
    * The duration of the fade transition

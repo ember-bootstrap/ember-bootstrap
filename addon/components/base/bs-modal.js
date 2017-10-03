@@ -1,3 +1,4 @@
+import { not } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import Component from '@ember/component';
 import { getOwner } from '@ember/application';
@@ -84,14 +85,14 @@ export default Component.extend(TransitionSupport, {
    * @default true
    * @public
    */
-  fade: computed.not('isFastBoot'),
+  fade: not('isFastBoot'),
 
   /**
    * @property notFade
    * @type boolean
    * @private
    */
-  notFade: computed.not('fade'),
+  notFade: not('fade'),
 
   /**
    * Used to apply Bootstrap's visibility classes.

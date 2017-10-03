@@ -1,3 +1,11 @@
+import {
+  notEmpty,
+  gt,
+  or,
+  and,
+  equal,
+  alias
+} from '@ember/object/computed';
 import { observer, defineProperty, computed } from '@ember/object';
 import { on } from '@ember/object/evented';
 import { scheduleOnce } from '@ember/runloop';
@@ -351,7 +359,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasLabel: computed.notEmpty('label'),
+  hasLabel: notEmpty('label'),
 
   /**
    * The type of the control widget.
@@ -423,7 +431,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasHelpText: computed.notEmpty('helpText').readOnly(),
+  hasHelpText: notEmpty('helpText').readOnly(),
 
   /**
    * The array of error messages from the `model`'s validation.
@@ -440,7 +448,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasErrors: computed.gt('errors.length', 0),
+  hasErrors: gt('errors.length', 0),
 
   /**
    * The array of warning messages from the `model`'s validation.
@@ -457,7 +465,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasWarnings: computed.gt('warnings.length', 0),
+  hasWarnings: gt('warnings.length', 0),
 
   /**
    * Show a custom error message that does not come from the model's validation. Will be immediately shown, regardless
@@ -475,7 +483,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasCustomError: computed.notEmpty('customError'),
+  hasCustomError: notEmpty('customError'),
 
   /**
    * Show a custom warning message that does not come from the model's validation. Will be immediately shown, regardless
@@ -494,7 +502,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasCustomWarning: computed.notEmpty('customWarning'),
+  hasCustomWarning: notEmpty('customWarning'),
 
   /**
    * The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model's validation
@@ -525,7 +533,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasValidationMessages: computed.gt('validationMessages.length', 0),
+  hasValidationMessages: gt('validationMessages.length', 0),
 
   /**
    * @property hasValidator
@@ -553,7 +561,7 @@ export default FormGroup.extend({
    * @default false
    * @private
    */
-  showValidation: computed.or('showOwnValidation', 'showAllValidations', 'hasCustomError', 'hasCustomWarning'),
+  showValidation: or('showOwnValidation', 'showAllValidations', 'hasCustomError', 'hasCustomWarning'),
 
   /**
    * @property showOwnValidation
@@ -577,7 +585,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  showModelValidation: computed.or('showOwnValidation', 'showAllValidations'),
+  showModelValidation: or('showOwnValidation', 'showAllValidations'),
 
   /**
    * @property showValidationMessages
@@ -585,7 +593,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  showValidationMessages: computed.and('showValidation', 'hasValidationMessages'),
+  showValidationMessages: and('showValidation', 'hasValidationMessages'),
 
   /**
    * Event or list of events which enable form validation markup rendering.
@@ -657,7 +665,7 @@ export default FormGroup.extend({
    * @readonly
    * @public
    */
-  useIcons: computed.equal('controlComponent', 'bs-form/element/control/input'),
+  useIcons: equal('controlComponent', 'bs-form/element/control/input'),
 
   /**
    * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
@@ -824,7 +832,7 @@ export default FormGroup.extend({
   init() {
     this._super(...arguments);
     if (!isBlank(this.get('property'))) {
-      defineProperty(this, 'value', computed.alias(`model.${this.get('property')}`));
+      defineProperty(this, 'value', alias(`model.${this.get('property')}`));
       this.setupValidations();
     }
   },

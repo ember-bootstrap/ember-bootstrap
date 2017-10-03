@@ -1,3 +1,4 @@
+import { reads } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-tooltip/element';
 import { computed } from '@ember/object';
@@ -25,7 +26,7 @@ export default Component.extend({
    */
   placement: 'top',
 
-  actualPlacement: computed.reads('placement'),
+  actualPlacement: reads('placement'),
 
   /**
    * @property fade
