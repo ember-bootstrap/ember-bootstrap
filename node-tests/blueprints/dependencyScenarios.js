@@ -1,7 +1,7 @@
 'use strict';
 
 const bs3Regex = '\\^3\\.\\d+\\.\\d+';
-const bs4Regex = '\\^4\\.0\\.0-alpha\\.6';
+const bs4Regex = '4\\.0\\.0-alpha\\.6';
 const scenarios = [
   {
     dependencies: {
