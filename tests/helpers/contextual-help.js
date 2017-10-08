@@ -14,8 +14,6 @@ export function setupForPositioning(align = 'left') {
   assign(document.getElementById('ember-testing').style, {
     transform: 'none'
   });
-
-  find('a').style.marginTop = 200;
 }
 
 function offset(el) {

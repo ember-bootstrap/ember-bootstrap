@@ -87,7 +87,7 @@ export function accordionItemBodyClass() {
 }
 
 export function tooltipPositionClass(pos) {
-  return versionDependent(pos, `tooltip-${pos}`);
+  return versionDependent(pos, `bs-tooltip-${pos}`);
 }
 
 export function isVisible(el) {

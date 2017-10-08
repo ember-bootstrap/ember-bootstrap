@@ -320,7 +320,7 @@ test('show pass along class attribute', function(assert) {
 // when switching to BS4 beta! @todo
 testBS3('should position tooltip arrow centered', async function(assert) {
   let expectedArrowPosition = 95;
-  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{bs-tooltip placement="top" title="very very very very very very very long popover" fade=false}}</a></p></div>`);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button id="target">Click me{{bs-tooltip placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`);
 
   setupForPositioning();
 
@@ -331,7 +331,7 @@ testBS3('should position tooltip arrow centered', async function(assert) {
 
 testBS3('should adjust tooltip arrow', async function(assert) {
   let expectedArrowPosition = 168;
-  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long popover" fade=false}}</a></p></div>`);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button id="target">Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`);
 
   setupForPositioning('right');
 
@@ -348,7 +348,7 @@ testBS3('should adjust tooltip arrow', async function(assert) {
 
 test('should adjust placement if not fitting in viewport', async function(assert) {
   let done = assert.async();
-  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 300px"><a href="#" id="target">Click me{{bs-tooltip placement="bottom" autoPlacement=true title="very very very very very very very long popover" fade=false}}</a></p></div>`);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 300px"><button id="target">Click me{{bs-tooltip placement="bottom" autoPlacement=true title="very very very very very very very long popover" fade=false}}</button></p></div>`);
 
   setupForPositioning('right');
   await click('#target');
