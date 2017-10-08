@@ -1,4 +1,5 @@
 /.publish
+/.github
 /.idea
 /config/ember-try.js
 /dist
@@ -13,6 +14,7 @@
 .eslintrc.js
 .watchmanconfig
 .travis.yml
+.template-lintrc.js
 ember-cli-build.js
 testem.*
 yuidoc.json
