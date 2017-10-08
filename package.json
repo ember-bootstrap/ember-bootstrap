@@ -21,7 +21,7 @@
   "author": "Simon Ihmig <ihmig@kaliber5.de>",
   "license": "MIT",
   "devDependencies": {
-    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap": "4.0.0-alpha.6",
     "bootstrap-sass": "^3.3.7",
     "broccoli-asset-rev": "^2.4.5",
     "chai": "^4.0.0",
