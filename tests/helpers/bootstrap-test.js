@@ -90,6 +90,10 @@ export function tooltipPositionClass(pos) {
   return versionDependent(pos, `bs-tooltip-${pos}`);
 }
 
+export function popoverPositionClass(pos) {
+  return versionDependent(pos, `bs-popover-${pos}`);
+}
+
 export function isVisible(el) {
   return !isHidden(el);
 }
