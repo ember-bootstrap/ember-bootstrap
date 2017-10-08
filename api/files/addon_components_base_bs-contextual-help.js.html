@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,6 +53,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { or, reads, gt } from &#x27;@ember/object/computed&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { guidFor } from &#x27;@ember/object/internals&#x27;;
@@ -61,17 +62,14 @@ import { isBlank } from &#x27;@ember/utils&#x27;;
 import EmberObject, { observer, computed } from &#x27;@ember/object&#x27;;
 import { next, schedule, cancel, later, run } from &#x27;@ember/runloop&#x27;;
 import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
-import getPosition from &#x27;ember-bootstrap/utils/get-position&#x27;;
-import getCalculatedOffset from &#x27;ember-bootstrap/utils/get-calculated-offset&#x27;;
 import getParent from &#x27;ember-bootstrap/utils/get-parent&#x27;;
-import setOffset from &#x27;ember-bootstrap/utils/set-offset&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 
 const InState = EmberObject.extend({
   hover: false,
   focus: false,
   click: false,
-  showHelp: computed.or(&#x27;hover&#x27;, &#x27;focus&#x27;, &#x27;click&#x27;)
+  showHelp: or(&#x27;hover&#x27;, &#x27;focus&#x27;, &#x27;click&#x27;)
 });
 
 /**
@@ -93,7 +91,7 @@ export default Component.extend(TransitionSupport, {
   title: null,
 
   /**
-   * How to position the tooltip/popover - top | bottom | left | right
+   * How to position the tooltip/popover - top | bottom | left | right | auto
    *
    * @property title
    * @type string
@@ -102,18 +100,16 @@ export default Component.extend(TransitionSupport, {
    */
   placement: &#x27;top&#x27;,
 
-  _placement: computed.reads(&#x27;placement&#x27;),
-
   /**
    * When &#x60;true&#x60; it will dynamically reorient the tooltip/popover. For example, if &#x60;placement&#x60; is &quot;left&quot;, the
    * tooltip/popover will display to the left when possible, otherwise it will display right.
    *
    * @property autoPlacement
    * @type boolean
-   * @default false
+   * @default true
    * @public
    */
-  autoPlacement: false,
+  autoPlacement: true,
 
   /**
    * You can programmatically show the tooltip/popover by setting this to &#x60;true&#x60;
@@ -130,7 +126,7 @@ export default Component.extend(TransitionSupport, {
    * @type boolean
    * @private
    */
-  inDom: computed.reads(&#x27;visible&#x27;),
+  inDom: reads(&#x27;visible&#x27;),
 
   /**
    * Set to false to disable fade animations.
@@ -150,7 +146,7 @@ export default Component.extend(TransitionSupport, {
    * @default false
    * @private
    */
-  showHelp: computed.reads(&#x27;visible&#x27;),
+  showHelp: reads(&#x27;visible&#x27;),
 
   /**
    * Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the
@@ -171,7 +167,7 @@ export default Component.extend(TransitionSupport, {
    * @default 0
    * @public
    */
-  delayShow: computed.reads(&#x27;delay&#x27;),
+  delayShow: reads(&#x27;delay&#x27;),
 
   /**
    * Delay hiding the tooltip/popover. This property overrides the general delay set with the &#x60;delay&#x60; property.
@@ -181,10 +177,10 @@ export default Component.extend(TransitionSupport, {
    * @default 0
    * @public
    */
-  delayHide: computed.reads(&#x27;delay&#x27;),
+  delayHide: reads(&#x27;delay&#x27;),
 
-  hasDelayShow: computed.gt(&#x27;delayShow&#x27;, 0),
-  hasDelayHide: computed.gt(&#x27;delayHide&#x27;, 0),
+  hasDelayShow: gt(&#x27;delayShow&#x27;, 0),
+  hasDelayHide: gt(&#x27;delayHide&#x27;, 0),
 
   /**
    * The duration of the fade transition
@@ -287,7 +283,11 @@ export default Component.extend(TransitionSupport, {
     let el;
 
     if (isBlank(triggerElement)) {
-      el = getParent(this);
+      try {
+        el = getParent(this);
+      } catch(e) {
+        return;
+      }
     } else if (triggerElement === &#x27;parentView&#x27;) {
       el = this.get(&#x27;parentView.element&#x27;);
     } else {
@@ -295,7 +295,7 @@ export default Component.extend(TransitionSupport, {
     }
     assert(&#x27;Trigger element for tooltip/popover must be present&#x27;, el);
     return el;
-  }),
+  }).volatile(),
 
   /**
    * The event(s) that should trigger the tooltip/popover - click | hover | focus.
@@ -524,34 +524,7 @@ export default Component.extend(TransitionSupport, {
   },
 
   _show(skipTransition = false) {
-    let element = this.get(&#x27;triggerTargetElement&#x27;);
-    let placement = this.get(&#x27;placement&#x27;);
-
-    // this.$element.attr(&#x27;aria-describedby&#x27;, tipId) @todo ?
-
-    let tip = this.get(&#x27;overlayElement&#x27;);
-    tip.style.top = 0;
-    tip.style.left = 0;
-    tip.style.display = &#x27;block&#x27;;
-
-    let pos = getPosition(element);
-    let actualWidth = tip.offsetWidth;
-    let actualHeight = tip.offsetHeight;
-
-    if (this.get(&#x27;autoPlacement&#x27;)) {
-      let viewportDim = getPosition(this.get(&#x27;viewportElement&#x27;));
-
-      placement = placement === &#x27;bottom&#x27; &amp;&amp; pos.bottom + actualHeight &gt; viewportDim.bottom ? &#x27;top&#x27;
-        : placement === &#x27;top&#x27; &amp;&amp; pos.top - actualHeight &lt; viewportDim.top ? &#x27;bottom&#x27;
-          : placement === &#x27;right&#x27; &amp;&amp; pos.right + actualWidth &gt; viewportDim.width ? &#x27;left&#x27;
-            : placement === &#x27;left&#x27; &amp;&amp; pos.left - actualWidth &lt; viewportDim.left ? &#x27;right&#x27;
-              : placement;
-    }
-
-    this.set(&#x27;_placement&#x27;, placement);
-
-    let calculatedOffset = getCalculatedOffset(placement, pos, actualWidth, actualHeight);
-    this.applyPlacement(calculatedOffset, placement);
+    this.set(&#x27;showHelp&#x27;, true);
 
     function tooltipShowComplete() {
       if (this.get(&#x27;isDestroyed&#x27;)) {
@@ -572,104 +545,6 @@ export default Component.extend(TransitionSupport, {
     } else {
       tooltipShowComplete.call(this);
     }
-  },
-
-  /**
-   * Position the tooltip/popover
-   *
-   * @method applyPlacement
-   * @param offset
-   * @param placement
-   * @private
-   */
-  applyPlacement(offset, placement) {
-    let tip = this.get(&#x27;overlayElement&#x27;);
-    let width = tip.offsetWidth;
-    let height = tip.offsetHeight;
-
-    // manually read margins because getBoundingClientRect includes difference
-    let marginTop = parseInt(window.getComputedStyle(tip).marginTop, 10);
-    let marginLeft = parseInt(window.getComputedStyle(tip).marginLeft, 10);
-
-    // we must check for NaN for ie 8/9
-    if (isNaN(marginTop)) {
-      marginTop = 0;
-    }
-    if (isNaN(marginLeft)) {
-      marginLeft = 0;
-    }
-
-    offset.top += marginTop;
-    offset.left += marginLeft;
-
-    setOffset(tip, offset);
-
-    this.set(&#x27;showHelp&#x27;, true);
-
-    schedule(&#x27;afterRender&#x27;, () =&gt; {
-      // check to see if placing tip in new offset caused the tip to resize itself
-      let actualWidth = tip.offsetWidth;
-      let actualHeight = tip.offsetHeight;
-
-      if (placement === &#x27;top&#x27; &amp;&amp; actualHeight !== height) {
-        offset.top = offset.top + height - actualHeight;
-      }
-
-      let delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight);
-
-      if (delta.left) {
-        offset.left += delta.left;
-      } else {
-        offset.top += delta.top;
-      }
-
-      let isVertical = /top|bottom/.test(placement);
-      let arrowDelta = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight;
-      let arrowOffsetPosition = isVertical ? &#x27;offsetWidth&#x27; : &#x27;offsetHeight&#x27;;
-
-      setOffset(tip, offset);
-      this.replaceArrow(arrowDelta, tip[arrowOffsetPosition], isVertical);
-    });
-  },
-
-  /**
-   * @method getViewportAdjustedDelta
-   * @param placement
-   * @param pos
-   * @param actualWidth
-   * @param actualHeight
-   * @return {{top: number, left: number}}
-   * @private
-   */
-  getViewportAdjustedDelta(placement, pos, actualWidth, actualHeight) {
-    let delta = { top: 0, left: 0 };
-    let viewport = this.get(&#x27;viewportElement&#x27;);
-    if (!viewport) {
-      return delta;
-    }
-
-    let viewportPadding = this.get(&#x27;viewportPadding&#x27;);
-    let viewportDimensions = getPosition(viewport);
-
-    if (/right|left/.test(placement)) {
-      let topEdgeOffset = pos.top - viewportPadding - viewportDimensions.scroll;
-      let bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight;
-      if (topEdgeOffset &lt; viewportDimensions.top) { // top overflow
-        delta.top = viewportDimensions.top - topEdgeOffset;
-      } else if (bottomEdgeOffset &gt; viewportDimensions.top + viewportDimensions.height) { // bottom overflow
-        delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset;
-      }
-    } else {
-      let leftEdgeOffset = pos.left - viewportPadding;
-      let rightEdgeOffset = pos.left + viewportPadding + actualWidth;
-      if (leftEdgeOffset &lt; viewportDimensions.left) { // left overflow
-        delta.left = viewportDimensions.left - leftEdgeOffset;
-      } else if (rightEdgeOffset &gt; viewportDimensions.right) { // right overflow
-        delta.left = viewportDimensions.left + viewportDimensions.width - rightEdgeOffset;
-      }
-    }
-
-    return delta;
   },
 
   /**
@@ -810,6 +685,7 @@ export default Component.extend(TransitionSupport, {
                     <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelpElement.html">Components.ContextualHelpElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>

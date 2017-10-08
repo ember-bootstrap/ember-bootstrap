@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -54,7 +54,7 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Mixin from &#x27;@ember/object/mixin&#x27;;
-import { next } from &#x27;@ember/runloop&#x27;;
+import { schedule } from &#x27;@ember/runloop&#x27;;
 
 /**
  * Mixin for components that act as dropdown toggles.
@@ -87,7 +87,7 @@ export default Mixin.create({
     this._super(...arguments);
     let dropdown = this.get(&#x27;dropdown&#x27;);
     if (dropdown) {
-      next(this, function() {
+      schedule(&#x27;sync&#x27;, this, function() {
         if (!this.get(&#x27;isDestroyed&#x27;)) {
           dropdown.set(&#x27;toggle&#x27;, this);
         }
@@ -116,6 +116,7 @@ export default Mixin.create({
                     <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelpElement.html">Components.ContextualHelpElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>

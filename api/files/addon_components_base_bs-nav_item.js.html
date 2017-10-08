@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -54,7 +54,9 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Component from &#x27;@ember/component&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
+import { observer } from &#x27;@ember/object&#x27;;
+import { reads, filter, filterBy, gt } from &#x27;@ember/object/computed&#x27;;
+import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
 import LinkComponent from &#x27;@ember/routing/link-component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-nav/item&#x27;;
 import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
@@ -69,8 +71,7 @@ import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
  @uses Mixins.ComponentParent
  @public
  */
-export default
-Component.extend(ComponentParent, {
+export default Component.extend(ComponentParent, {
   layout,
   classNameBindings: [&#x27;disabled&#x27;, &#x27;active&#x27;],
   tagName: &#x27;li&#x27;,
@@ -85,7 +86,8 @@ Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  disabled: computed.gt(&#x27;disabledChildLinks.length&#x27;, 0),
+  disabled: reads(&#x27;_disabled&#x27;),
+  _disabled: false,
 
   /**
    * Render the nav item as active.
@@ -97,7 +99,8 @@ Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  active: computed.gt(&#x27;activeChildLinks.length&#x27;, 0),
+  active: reads(&#x27;_active&#x27;),
+  _active: false,
 
   /**
    * Collection of all &#x60;Ember.LinkComponent&#x60;s that are children
@@ -105,12 +108,15 @@ Component.extend(ComponentParent, {
    * @property childLinks
    * @private
    */
-  childLinks: computed.filter(&#x27;children&#x27;, function(view) {
+  childLinks: filter(&#x27;children&#x27;, function(view) {
     return view instanceof LinkComponent;
   }),
 
-  activeChildLinks: computed.filterBy(&#x27;childLinks&#x27;, &#x27;active&#x27;),
-  disabledChildLinks: computed.filterBy(&#x27;childLinks&#x27;, &#x27;disabled&#x27;),
+  activeChildLinks: filterBy(&#x27;childLinks&#x27;, &#x27;active&#x27;),
+  hasActiveChildLinks: gt(&#x27;activeChildLinks.length&#x27;, 0),
+
+  disabledChildLinks: filterBy(&#x27;childLinks&#x27;, &#x27;disabled&#x27;),
+  hasDisabledChildLinks: gt(&#x27;disabledChildLinks.length&#x27;, 0),
 
   /**
    * Called when clicking the nav item
@@ -122,6 +128,28 @@ Component.extend(ComponentParent, {
 
   click() {
     this.onClick();
+  },
+
+  init() {
+    this._super(...arguments);
+    this.get(&#x27;activeChildLinks&#x27;);
+    this.get(&#x27;disabledChildLinks&#x27;);
+  },
+
+  _observeActive: observer(&#x27;activeChildLinks.[]&#x27;, function() {
+    scheduleOnce(&#x27;afterRender&#x27;, this, this._updateActive);
+  }),
+
+  _updateActive() {
+    this.set(&#x27;_active&#x27;, this.get(&#x27;hasActiveChildLinks&#x27;));
+  },
+
+  _observeDisabled: observer(&#x27;disabledChildLinks.[]&#x27;, function() {
+    scheduleOnce(&#x27;afterRender&#x27;, this, this._updateDisabled);
+  }),
+
+  _updateDisabled() {
+    this.set(&#x27;_disabled&#x27;, this.get(&#x27;hasDisabledChildLinks&#x27;));
   }
 });
 
@@ -145,6 +173,7 @@ Component.extend(ComponentParent, {
                     <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelpElement.html">Components.ContextualHelpElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>

@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,6 +53,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { notEmpty, and } from &#x27;@ember/object/computed&#x27;;
 import { isBlank } from &#x27;@ember/utils&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
@@ -113,7 +114,7 @@ export default Component.extend(SizeClass, {
    * @private
    * @readonly
    */
-  hasValidation: computed.notEmpty(&#x27;validation&#x27;).readOnly(),
+  hasValidation: notEmpty(&#x27;validation&#x27;).readOnly(),
 
   /**
    * Computed property which is true if the form group is showing a validation icon
@@ -123,7 +124,7 @@ export default Component.extend(SizeClass, {
    * @private
    * @readonly
    */
-  hasFeedback: computed.and(&#x27;hasValidation&#x27;, &#x27;useIcons&#x27;, &#x27;hasIconForValidationState&#x27;).readOnly(),
+  hasFeedback: and(&#x27;hasValidation&#x27;, &#x27;useIcons&#x27;, &#x27;hasIconForValidationState&#x27;).readOnly(),
 
   /**
    * The icon classes to be used for a feedback icon in a &quot;success&quot; validation state.
@@ -235,7 +236,7 @@ export default Component.extend(SizeClass, {
    * @readonly
    * @private
    */
-  hasIconForValidationState: computed.notEmpty(&#x27;iconName&#x27;).readOnly(),
+  hasIconForValidationState: notEmpty(&#x27;iconName&#x27;).readOnly(),
 
   /**
    * Set to a validation state to render the form-group with a validation style.
@@ -288,6 +289,7 @@ export default Component.extend(SizeClass, {
                     <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelpElement.html">Components.ContextualHelpElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>

@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,8 +53,8 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { equal } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/label&#x27;;
 
 /**
@@ -136,7 +136,7 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  isCheckbox: computed.equal(&#x27;controlType&#x27;, &#x27;checkbox&#x27;).readOnly(),
+  isCheckbox: equal(&#x27;controlType&#x27;, &#x27;checkbox&#x27;).readOnly(),
 
   /**
    * Indicates whether the form type equals &#x60;horizontal&#x60;
@@ -145,7 +145,7 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  isHorizontal: computed.equal(&#x27;formLayout&#x27;, &#x27;horizontal&#x27;).readOnly()
+  isHorizontal: equal(&#x27;formLayout&#x27;, &#x27;horizontal&#x27;).readOnly()
 });
 
     </pre>
@@ -168,6 +168,7 @@ export default Component.extend({
                     <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelpElement.html">Components.ContextualHelpElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.PopoverElement - ember-bootstrap</title>
+    <title>Components.ContextualHelpElement - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -48,7 +48,7 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.PopoverElement <small>Class</small></h1>
+    <h1>Components.ContextualHelpElement <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
@@ -56,11 +56,11 @@
 
 
         <div class="extends">
-            Extends <a href="../classes/Components.ContextualHelpElement.html" class="crosslink">Components.ContextualHelpElement</a>
+            Extends Ember.Component
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_base_bs-popover_element.js.html#l5"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover&#x2F;element.js:5</code></a>
+            Defined in: <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l8"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:8</code></a>
         </div>
 
 
@@ -68,7 +68,7 @@
 
 
 <div class="well well-small">
-    <p>Internal component for popover's markup. Should not be used directly.</p>
+    <p>Internal (abstract) component for contextual help markup. Should not be used directly.</p>
 
 </div>
 
@@ -113,59 +113,51 @@
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
-                            <li class="index-item property private inherited">
+                            <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_arrowClass" data-tablink="arrowClass">arrowClass</a>
 
                             </li>
-                            <li class="index-item property public inherited">
+                            <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_autoPlacement" data-tablink="autoPlacement">autoPlacement</a>
 
                             </li>
-                            <li class="index-item property public inherited">
+                            <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
 
                             </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_hasTitle" data-tablink="hasTitle">hasTitle</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
+                            <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_placement" data-tablink="placement">placement</a>
 
                             </li>
-                            <li class="index-item property private inherited">
+                            <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_popperClass" data-tablink="popperClass">popperClass</a>
 
                             </li>
-                            <li class="index-item property private inherited">
+                            <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_popperClassNames" data-tablink="popperClassNames">popperClassNames</a>
 
                             </li>
-                            <li class="index-item property private inherited">
+                            <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_popperModifiers" data-tablink="popperModifiers">popperModifiers</a>
 
                             </li>
-                            <li class="index-item property public inherited">
+                            <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_renderInPlace" data-tablink="renderInPlace">renderInPlace</a>
 
                             </li>
-                            <li class="index-item property public inherited">
+                            <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_showHelp" data-tablink="showHelp">showHelp</a>
 
                             </li>
-                            <li class="index-item property public inherited">
+                            <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_target" data-tablink="target">target</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_title" data-tablink="title">title</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_viewportElement" data-tablink="viewportElement">viewportElement</a>
 
                             </li>
-                            <li class="index-item property public inherited">
+                            <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_viewportPadding" data-tablink="viewportPadding">viewportPadding</a>
 
                             </li>
@@ -179,7 +171,7 @@
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_arrowClass" class="property item private inherited">
+                    <div id="property_arrowClass" class="property item private">
                         <h3 class="name">arrowClass
                             <span class="small">unknown</span>
                         </h3>
@@ -193,8 +185,8 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.ContextualHelpElement.html#property_arrowClass">Components.ContextualHelpElement</a>:
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l93"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:93</code></a>
                             </p>
                     
@@ -208,7 +200,7 @@
                     
                     
                     </div>
-                    <div id="property_autoPlacement" class="property item public inherited">
+                    <div id="property_autoPlacement" class="property item public">
                         <h3 class="name">autoPlacement
                             <span class="small">boolean</span>
                         </h3>
@@ -222,8 +214,8 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.ContextualHelpElement.html#property_autoPlacement">Components.ContextualHelpElement</a>:
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l66"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:66</code></a>
                             </p>
                     
@@ -238,7 +230,7 @@
                     
                     
                     </div>
-                    <div id="property_fade" class="property item public inherited">
+                    <div id="property_fade" class="property item public">
                         <h3 class="name">fade
                             <span class="small">boolean</span>
                         </h3>
@@ -252,8 +244,8 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.ContextualHelpElement.html#property_fade">Components.ContextualHelpElement</a>:
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l31"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:31</code></a>
                             </p>
                     
@@ -268,36 +260,7 @@
                     
                     
                     </div>
-                    <div id="property_hasTitle" class="property item private">
-                        <h3 class="name">hasTitle
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-popover_element.js.html#l23"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover&#x2F;element.js:23</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_placement" class="property item public inherited">
+                    <div id="property_placement" class="property item public">
                         <h3 class="name">placement
                             <span class="small">string</span>
                         </h3>
@@ -311,8 +274,8 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.ContextualHelpElement.html#property_placement">Components.ContextualHelpElement</a>:
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l21"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:21</code></a>
                             </p>
                     
@@ -327,7 +290,7 @@
                     
                     
                     </div>
-                    <div id="property_popperClass" class="property item private inherited">
+                    <div id="property_popperClass" class="property item private">
                         <h3 class="name">popperClass
                             <span class="small">{string}</span>
                         </h3>
@@ -341,8 +304,8 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.ContextualHelpElement.html#property_popperClass">Components.ContextualHelpElement</a>:
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l106"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:106</code></a>
                             </p>
                     
@@ -356,7 +319,7 @@
                     
                     
                     </div>
-                    <div id="property_popperClassNames" class="property item private inherited">
+                    <div id="property_popperClassNames" class="property item private">
                         <h3 class="name">popperClassNames
                             <span class="small">{array}</span>
                         </h3>
@@ -370,8 +333,8 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.ContextualHelpElement.html#property_popperClassNames">Components.ContextualHelpElement</a>:
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l99"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:99</code></a>
                             </p>
                     
@@ -385,7 +348,7 @@
                     
                     
                     </div>
-                    <div id="property_popperModifiers" class="property item private inherited">
+                    <div id="property_popperModifiers" class="property item private">
                         <h3 class="name">popperModifiers
                             <span class="small">{object}</span>
                         </h3>
@@ -399,8 +362,8 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.ContextualHelpElement.html#property_popperModifiers">Components.ContextualHelpElement</a>:
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l120"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:120</code></a>
                             </p>
                     
@@ -415,7 +378,7 @@
                     
                     
                     </div>
-                    <div id="property_renderInPlace" class="property item public inherited">
+                    <div id="property_renderInPlace" class="property item public">
                         <h3 class="name">renderInPlace
                             <span class="small">boolean</span>
                         </h3>
@@ -429,8 +392,8 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.ContextualHelpElement.html#property_renderInPlace">Components.ContextualHelpElement</a>:
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l47"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:47</code></a>
                             </p>
                     
@@ -446,7 +409,7 @@
                     
                     
                     </div>
-                    <div id="property_showHelp" class="property item public inherited">
+                    <div id="property_showHelp" class="property item public">
                         <h3 class="name">showHelp
                             <span class="small">boolean</span>
                         </h3>
@@ -460,8 +423,8 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.ContextualHelpElement.html#property_showHelp">Components.ContextualHelpElement</a>:
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l39"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:39</code></a>
                             </p>
                     
@@ -476,7 +439,7 @@
                     
                     
                     </div>
-                    <div id="property_target" class="property item public inherited">
+                    <div id="property_target" class="property item public">
                         <h3 class="name">target
                             <span class="small">{string|HTMLElement}</span>
                         </h3>
@@ -490,8 +453,8 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.ContextualHelpElement.html#property_target">Components.ContextualHelpElement</a>:
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l57"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:57</code></a>
                             </p>
                     
@@ -506,36 +469,7 @@
                     
                     
                     </div>
-                    <div id="property_title" class="property item public">
-                        <h3 class="name">title
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-popover_element.js.html#l16"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover&#x2F;element.js:16</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_viewportElement" class="property item public inherited">
+                    <div id="property_viewportElement" class="property item public">
                         <h3 class="name">viewportElement
                             <span class="small">object</span>
                         </h3>
@@ -549,8 +483,8 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.ContextualHelpElement.html#property_viewportElement">Components.ContextualHelpElement</a>:
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l74"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:74</code></a>
                             </p>
                     
@@ -565,7 +499,7 @@
                     
                     
                     </div>
-                    <div id="property_viewportPadding" class="property item public inherited">
+                    <div id="property_viewportPadding" class="property item public">
                         <h3 class="name">viewportPadding
                             <span class="small">number</span>
                         </h3>
@@ -579,8 +513,8 @@
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.ContextualHelpElement.html#property_viewportPadding">Components.ContextualHelpElement</a>:
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-contextual-help_element.js.html#l83"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help&#x2F;element.js:83</code></a>
                             </p>
                     

@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,6 +53,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { not } from &#x27;@ember/object/computed&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { getOwner } from &#x27;@ember/application&#x27;;
@@ -107,7 +108,7 @@ export default Component.extend(TransitionSupport, {
   layout,
 
   /**
-   * Visibility of the modal. Toggle to to show/hide with CSS transitions.
+   * Visibility of the modal. Toggle to show/hide with CSS transitions.
    *
    * When the modal is closed by user interaction this property will not update by using two-way bindings in order
    * to follow DDAU best practices. If you want to react to such changes, subscribe to the &#x60;onHide&#x60; action
@@ -139,14 +140,14 @@ export default Component.extend(TransitionSupport, {
    * @default true
    * @public
    */
-  fade: computed.not(&#x27;isFastBoot&#x27;),
+  fade: not(&#x27;isFastBoot&#x27;),
 
   /**
    * @property notFade
    * @type boolean
    * @private
    */
-  notFade: computed.not(&#x27;fade&#x27;),
+  notFade: not(&#x27;fade&#x27;),
 
   /**
    * Used to apply Bootstrap&#x27;s visibility classes.
@@ -730,6 +731,7 @@ export default Component.extend(TransitionSupport, {
                     <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelpElement.html">Components.ContextualHelpElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>

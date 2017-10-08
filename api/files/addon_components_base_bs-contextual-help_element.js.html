@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/components/base/bs-form/element/control/checkbox.js - ember-bootstrap</title>
+    <title>addon/components/base/bs-contextual-help/element.js - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -48,39 +48,195 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/components/base/bs-form/element/control/checkbox.js <small>File</small></h1>
+    <h1>addon/components/base/bs-contextual-help/element.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Control from &#x27;../control&#x27;;
-import ControlAttributes from &#x27;ember-bootstrap/mixins/control-attributes&#x27;;
+import { reads } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-tooltip/element&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
+import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
 
 /**
+ Internal (abstract) component for contextual help markup. Should not be used directly.
 
- @class FormElementControlCheckbox
+ @class ContextualHelpElement
  @namespace Components
- @extends Components.FormElementControl
+ @extends Ember.Component
  @private
  */
-export default Control.extend(ControlAttributes, {
-  attributeBindings: [
-    &#x27;value:checked&#x27;,
-    &#x27;type&#x27;
-  ],
+export default Component.extend({
+  layout,
+  tagName: &#x27;&#x27;,
+  ariaRole: &#x27;tooltip&#x27;,
 
   /**
-   * @property type
-   * @type {String}
-   * @readonly
+   * @property placement
+   * @type string
+   * @default &#x27;top&#x27;
+   * @public
+   */
+  placement: &#x27;top&#x27;,
+
+  actualPlacement: reads(&#x27;placement&#x27;),
+
+  /**
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  fade: true,
+
+  /**
+   * @property showHelp
+   * @type boolean
+   * @default false
+   * @public
+   */
+  showHelp: false,
+
+  /**
+   * If true component will render in place, rather than be wormholed.
+   *
+   * @property renderInPlace
+   * @type boolean
+   * @default true
+   * @public
+   */
+  renderInPlace: true,
+
+  /**
+   * Which element to align to
+   *
+   * @property target
+   * @type {string|HTMLElement}
+   * @public
+   */
+  target: null,
+
+  /**
+   * @property autoPlacement
+   * @type boolean
+   * @default true
+   * @public
+   */
+  autoPlacement: true,
+
+  /**
+   * The DOM element of the viewport element.
+   *
+   * @property viewportElement
+   * @type object
+   * @public
+   */
+  viewportElement: null,
+
+  /**
+   * Take a padding into account for keeping the tooltip/popover within the bounds of the element given by &#x60;viewportElement&#x60;.
+   *
+   * @property viewportPadding
+   * @type number
+   * @default 0
+   * @public
+   */
+  viewportPadding: 0,
+
+  /**
+   * @property arrowClass
    * @private
    */
-  type: &#x27;checkbox&#x27;,
+  arrowClass: &#x27;arrow&#x27;,
 
-  click(event) {
-    this.get(&#x27;onChange&#x27;)(event.target.checked);
+  /**
+   * @property popperClassNames
+   * @type {array}
+   * @private
+   */
+  popperClassNames: [],
+
+  /**
+   * @property popperClass
+   * @type {string}
+   * @private
+   */
+  popperClass: computed(&#x27;popperClassNames.[]&#x27;, &#x27;class&#x27;, function() {
+    let classes = this.get(&#x27;popperClassNames&#x27;);
+    let classProperty = this.get(&#x27;class&#x27;);
+    if (typeof classProperty === &#x27;string&#x27;) {
+      classes = classes.concat(classProperty.split(&#x27; &#x27;));
+    }
+    return classes.join(&#x27; &#x27;);
+  }),
+
+  /**
+   * popper.js modifier config
+   *
+   * @property popperModifiers
+   * @type {object}
+   * @private
+   */
+  popperModifiers: computed(&#x27;arrowClass&#x27;, &#x27;autoPlacement&#x27;, &#x27;viewportElement&#x27;, &#x27;viewportPadding&#x27;, function() {
+    let self = this;
+    return {
+      arrow: {
+        element: &#x60;.${this.get(&#x27;arrowClass&#x27;)}&#x60;
+      },
+      offset: {
+        fn(data) {
+          let tip = document.getElementById(self.get(&#x27;id&#x27;));
+          assert(&#x27;Contextual help element needs existing popper element&#x27;, tip);
+
+          // manually read margins because getBoundingClientRect includes difference
+          let marginTop = parseInt(window.getComputedStyle(tip).marginTop, 10);
+          let marginLeft = parseInt(window.getComputedStyle(tip).marginLeft, 10);
+
+          // we must check for NaN for ie 8/9
+          if (isNaN(marginTop) || marginTop &gt; 0) {
+            marginTop = 0;
+          }
+          if (isNaN(marginLeft) || marginLeft &gt; 0) {
+            marginLeft = 0;
+          }
+
+          data.offsets.popper.top += marginTop;
+          data.offsets.popper.left += marginLeft;
+
+          return window.Popper.Defaults.modifiers.offset.fn.apply(this, arguments);
+        }
+      },
+      preventOverflow: {
+        enabled: this.get(&#x27;autoPlacement&#x27;),
+        boundariesElement: this.get(&#x27;viewportElement&#x27;),
+        padding: this.get(&#x27;viewportPadding&#x27;)
+      },
+      hide: {
+        enabled: this.get(&#x27;autoPlacement&#x27;)
+      },
+      flip: {
+        enabled: this.get(&#x27;autoPlacement&#x27;)
+      }
+    };
+  }),
+
+  didReceiveAttrs() {
+    assert(&#x27;Contextual help element needs id for popper element&#x27;, this.get(&#x27;id&#x27;));
+  },
+
+  actions: {
+    updatePlacement(popperDataObject) {
+      if (this.get(&#x27;actualPlacement&#x27;) === popperDataObject.placement) {
+        return;
+      }
+      this.set(&#x27;actualPlacement&#x27;, popperDataObject.placement);
+      scheduleOnce(&#x27;afterRender&#x27;, popperDataObject.instance, popperDataObject.instance.scheduleUpdate);
+    }
   }
 });
+
     </pre>
 </div>
                     </div>

@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,6 +53,14 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import {
+  notEmpty,
+  gt,
+  or,
+  and,
+  equal,
+  alias
+} from &#x27;@ember/object/computed&#x27;;
 import { observer, defineProperty, computed } from &#x27;@ember/object&#x27;;
 import { on } from &#x27;@ember/object/evented&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
@@ -406,7 +414,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasLabel: computed.notEmpty(&#x27;label&#x27;),
+  hasLabel: notEmpty(&#x27;label&#x27;),
 
   /**
    * The type of the control widget.
@@ -478,7 +486,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasHelpText: computed.notEmpty(&#x27;helpText&#x27;).readOnly(),
+  hasHelpText: notEmpty(&#x27;helpText&#x27;).readOnly(),
 
   /**
    * The array of error messages from the &#x60;model&#x60;&#x27;s validation.
@@ -495,7 +503,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasErrors: computed.gt(&#x27;errors.length&#x27;, 0),
+  hasErrors: gt(&#x27;errors.length&#x27;, 0),
 
   /**
    * The array of warning messages from the &#x60;model&#x60;&#x27;s validation.
@@ -512,7 +520,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasWarnings: computed.gt(&#x27;warnings.length&#x27;, 0),
+  hasWarnings: gt(&#x27;warnings.length&#x27;, 0),
 
   /**
    * Show a custom error message that does not come from the model&#x27;s validation. Will be immediately shown, regardless
@@ -530,7 +538,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasCustomError: computed.notEmpty(&#x27;customError&#x27;),
+  hasCustomError: notEmpty(&#x27;customError&#x27;),
 
   /**
    * Show a custom warning message that does not come from the model&#x27;s validation. Will be immediately shown, regardless
@@ -549,7 +557,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasCustomWarning: computed.notEmpty(&#x27;customWarning&#x27;),
+  hasCustomWarning: notEmpty(&#x27;customWarning&#x27;),
 
   /**
    * The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model&#x27;s validation
@@ -580,7 +588,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasValidationMessages: computed.gt(&#x27;validationMessages.length&#x27;, 0),
+  hasValidationMessages: gt(&#x27;validationMessages.length&#x27;, 0),
 
   /**
    * @property hasValidator
@@ -608,7 +616,7 @@ export default FormGroup.extend({
    * @default false
    * @private
    */
-  showValidation: computed.or(&#x27;showOwnValidation&#x27;, &#x27;showAllValidations&#x27;, &#x27;hasCustomError&#x27;, &#x27;hasCustomWarning&#x27;),
+  showValidation: or(&#x27;showOwnValidation&#x27;, &#x27;showAllValidations&#x27;, &#x27;hasCustomError&#x27;, &#x27;hasCustomWarning&#x27;),
 
   /**
    * @property showOwnValidation
@@ -632,7 +640,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  showModelValidation: computed.or(&#x27;showOwnValidation&#x27;, &#x27;showAllValidations&#x27;),
+  showModelValidation: or(&#x27;showOwnValidation&#x27;, &#x27;showAllValidations&#x27;),
 
   /**
    * @property showValidationMessages
@@ -640,7 +648,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  showValidationMessages: computed.and(&#x27;showValidation&#x27;, &#x27;hasValidationMessages&#x27;),
+  showValidationMessages: and(&#x27;showValidation&#x27;, &#x27;hasValidationMessages&#x27;),
 
   /**
    * Event or list of events which enable form validation markup rendering.
@@ -712,7 +720,7 @@ export default FormGroup.extend({
    * @readonly
    * @public
    */
-  useIcons: computed.equal(&#x27;controlComponent&#x27;, &#x27;bs-form/element/control/input&#x27;),
+  useIcons: equal(&#x27;controlComponent&#x27;, &#x27;bs-form/element/control/input&#x27;),
 
   /**
    * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
@@ -879,7 +887,7 @@ export default FormGroup.extend({
   init() {
     this._super(...arguments);
     if (!isBlank(this.get(&#x27;property&#x27;))) {
-      defineProperty(this, &#x27;value&#x27;, computed.alias(&#x60;model.${this.get(&#x27;property&#x27;)}&#x60;));
+      defineProperty(this, &#x27;value&#x27;, alias(&#x60;model.${this.get(&#x27;property&#x27;)}&#x60;));
       this.setupValidations();
     }
   },
@@ -954,6 +962,7 @@ export default FormGroup.extend({
                     <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelpElement.html">Components.ContextualHelpElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>

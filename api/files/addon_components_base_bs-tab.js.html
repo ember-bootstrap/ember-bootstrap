@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.2</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.3</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,6 +53,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { oneWay, filter } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import { isPresent } from &#x27;@ember/utils&#x27;;
@@ -208,7 +209,7 @@ export default Component.extend(ComponentParent, {
    * @type string
    * @public
    */
-  activeId: computed.oneWay(&#x27;childPanes.firstObject.elementId&#x27;),
+  activeId: oneWay(&#x27;childPanes.firstObject.elementId&#x27;),
 
   /**
    * @property isActiveId
@@ -255,7 +256,7 @@ export default Component.extend(ComponentParent, {
    * @readonly
    * @private
    */
-  childPanes: computed.filter(&#x27;children&#x27;, function(view) {
+  childPanes: filter(&#x27;children&#x27;, function(view) {
     return view instanceof TabPane;
   }),
 
@@ -323,6 +324,7 @@ export default Component.extend(ComponentParent, {
                     <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
+                    <li class="nav-private"><a href="../classes/Components.ContextualHelpElement.html">Components.ContextualHelpElement</a></li>
                     <li class="nav-public"><a href="../classes/Components.Dropdown.html">Components.Dropdown</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownButton.html">Components.DropdownButton</a></li>
                     <li class="nav-public"><a href="../classes/Components.DropdownMenu.html">Components.DropdownMenu</a></li>

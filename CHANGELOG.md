@@ -1,4 +1,29 @@
 
+# [1.0.0-rc.3](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.2...1.0.0-rc.3) (2017-10-08)
+
+
+### Bug Fixes
+
+* **Dropdown:** Close dropdowns during event capture phase. Thanks to [jeloba](https://github.com/jeloba) ([b220432](https://github.com/kaliber5/ember-bootstrap/commit/b220432))
+* **Dropdown:** fix rendering in FastBoot w/ Ember 2.15 ([070a3ec](https://github.com/kaliber5/ember-bootstrap/commit/070a3ec))
+* **Install:** downgrade findup-sync dependency to work around a Windows installation issue ([6dc9a39](https://github.com/kaliber5/ember-bootstrap/commit/6dc9a39))
+* **Install:** lock in bootstrap 4 to alpha 6. Thanks to [@bgentry](https://github.com/bgentry) ([f514ac3](https://github.com/kaliber5/ember-bootstrap/commit/f514ac3))
+* **Nav:** fixed 'You modified "active" twice on in a single render' exception when `nav.link-to` has dynamic link ([09e8fa7](https://github.com/kaliber5/ember-bootstrap/commit/09e8fa7))
+
+
+### Features
+
+* **Browser support:** support for IE 9/10 has been dropped ([343865f](https://github.com/kaliber5/ember-bootstrap/commit/343865f))
+* **Tooltip/Popover:** usage of ember-popper/popper.js replaces homegrown positioning logic ([0e76009](https://github.com/kaliber5/ember-bootstrap/commit/0e76009))
+
+
+### BREAKING CHANGES
+
+* **Browser support:** support for IE 9/10 has been dropped
+
+
+
+
 # [1.0.0-rc.2](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.1...1.0.0-rc.2) (2017-08-24)
 
 

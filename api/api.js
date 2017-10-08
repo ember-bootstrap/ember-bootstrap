@@ -11,6 +11,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.ButtonGroupButton",
         "Components.Collapse",
         "Components.ContextualHelp",
+        "Components.ContextualHelpElement",
         "Components.Dropdown",
         "Components.DropdownButton",
         "Components.DropdownMenu",
