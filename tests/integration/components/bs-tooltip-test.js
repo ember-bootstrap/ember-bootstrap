@@ -11,10 +11,11 @@ import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import {
   test,
-  testBS3,
+  versionDependent,
   testRequiringFocus,
   visibilityClass,
-  tooltipPositionClass
+  tooltipPositionClass,
+  tooltipArrowClass
 } from '../../helpers/bootstrap-test';
 import {
   setupForPositioning,
@@ -315,34 +316,31 @@ test('show pass along class attribute', function(assert) {
   triggerEvent('#target', 'mouseenter');
 });
 
-// tooltip arrow in BS4 alpha is just a pseudo element that does not allow arbitrary positioning
-// so these tests are disabled for BS4. BS4 beta uses a dedicated div again, so tests should be enabled again
-// when switching to BS4 beta! @todo
-testBS3('should position tooltip arrow centered', async function(assert) {
-  let expectedArrowPosition = 95;
+test('should position tooltip arrow centered', async function(assert) {
+  let expectedArrowPosition = versionDependent(95, 98);
   this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button id="target">Click me{{bs-tooltip placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`);
 
   setupForPositioning();
 
   await click('#target');
-  let arrowPosition = parseInt(find('.tooltip-arrow').style.left, 10);
+  let arrowPosition = parseInt(find(`.${tooltipArrowClass()}`).style.left, 10);
   assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
 });
 
-testBS3('should adjust tooltip arrow', async function(assert) {
-  let expectedArrowPosition = 168;
+test('should adjust tooltip arrow', async function(assert) {
+  let expectedArrowPosition = versionDependent(160, 159);
   this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button id="target">Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`);
 
   setupForPositioning('right');
 
   await click('#target');
-  let arrowPosition = parseInt(find('.tooltip-arrow').style.left, 10);
+  let arrowPosition = parseInt(find(`.${tooltipArrowClass()}`).style.left, 10);
   assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
 
   // check again to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/361
   await click('#target');
   await click('#target');
-  arrowPosition = parseInt(find('.tooltip-arrow').style.left, 10);
+  arrowPosition = parseInt(find(`.${tooltipArrowClass()}`).style.left, 10);
   assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
 });
 
