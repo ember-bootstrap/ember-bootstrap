@@ -1,4 +1,4 @@
-import { computed } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
 import FormGroup from 'ember-bootstrap/components/base/bs-form/group';
 
 export default FormGroup.extend({
@@ -7,5 +7,5 @@ export default FormGroup.extend({
 
   classTypePrefix: 'form-group',
 
-  _validationType: computed.readOnly('validation')
+  _validationType: readOnly('validation')
 });

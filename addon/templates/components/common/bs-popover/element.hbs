@@ -1,5 +1,18 @@
-<div class="arrow"></div>
-{{#if hasTitle}}
-  <h3 class="popover-title">{{title}}</h3>
-{{/if}}
-<div class="popover-content">{{yield}}</div>
+{{#ember-popper
+  id=id
+  class=popperClass
+  ariaRole=ariaRole
+  placement=placement
+  renderInPlace=renderInPlace
+  target=target
+  modifiers=popperModifiers
+  popperContainer="#ember-bootstrap-wormhole"
+  onCreate=(action "updatePlacement")
+  onUpdate=(action "updatePlacement")
+}}
+  <div class="arrow"></div>
+  {{#if hasTitle}}
+    <h3 class="popover-title">{{title}}</h3>
+  {{/if}}
+  <div class="popover-content">{{yield}}</div>
+{{/ember-popper}}

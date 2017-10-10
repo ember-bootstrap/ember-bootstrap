@@ -1,6 +1,10 @@
 import { find, findAll } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
-import { test, testRequiringTransitions, visibilityClass } from '../../../helpers/bootstrap-test';
+import {
+  test,
+  testRequiringTransitions,
+  visibilityClass
+} from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-tab/pane', 'Integration | Component | bs-tab/pane', {

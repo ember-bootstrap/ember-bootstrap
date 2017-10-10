@@ -32,8 +32,6 @@ ember-bootstrap works and is fully [tested](https://travis-ci.org/kaliber5/ember
 * Ember.js 2.3+
 * Bootstrap 3 and 4. *Support for Bootstrap 4 is currently considered experimental and not covered by SemVer, as Bootstrap 4 itself is not yet stable.*
 * all modern evergreen browsers (Chrome, Firefox, Safari, Edge) and IE 11. 
-*It currently also supports IE 9 and 10, but maintaining that support is
-not guaranteed according to SemVer. Support of these might be dropped with a clear message in a minor release.*
 * FastBoot 1.0+ 
 * jQuery-less builds using [ember-native-dom-event-dispatcher](https://github.com/rwjblue/ember-native-dom-event-dispatcher)
 

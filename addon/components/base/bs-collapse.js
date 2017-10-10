@@ -1,3 +1,4 @@
+import { not, alias, and } from '@ember/object/computed';
 import Component from '@ember/component';
 import { isPresent, isEmpty } from '@ember/utils';
 import { observer, computed } from '@ember/object';
@@ -47,9 +48,9 @@ export default Component.extend({
    */
   active: false,
 
-  collapse: computed.not('transitioning'),
-  collapsing: computed.alias('transitioning'),
-  showContent: computed.and('collapse', 'active'),
+  collapse: not('transitioning'),
+  collapsing: alias('transitioning'),
+  showContent: and('collapse', 'active'),
 
   /**
    * true if the component is currently transitioning

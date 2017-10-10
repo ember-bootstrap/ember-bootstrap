@@ -1,10 +1,10 @@
+import { notEmpty } from '@ember/object/computed';
 import ObjectProxy from '@ember/object/proxy';
 import { Promise as EmberPromise } from 'rsvp';
-import { computed } from '@ember/object';
 import BsForm from 'ember-bootstrap/components/bs-form';
 
 export default BsForm.extend({
-  hasValidator: computed.notEmpty('model.validate'),
+  hasValidator: notEmpty('model.validate'),
 
   validate(model) {
     return new EmberPromise((resolve, reject) => {

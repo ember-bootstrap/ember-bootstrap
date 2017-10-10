@@ -1,3 +1,4 @@
+import { readOnly } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/string';
@@ -101,12 +102,12 @@ export default Component.extend(TypeClass, {
    */
   roundDigits: 0,
 
-  progressBarStriped: computed.readOnly('striped'),
-  progressBarAnimate: computed.readOnly('animate'),
+  progressBarStriped: readOnly('striped'),
+  progressBarAnimate: readOnly('animate'),
 
-  ariaValuenow: computed.readOnly('value'),
-  ariaValuemin: computed.readOnly('minValue'),
-  ariaValuemax: computed.readOnly('maxValue'),
+  ariaValuenow: readOnly('value'),
+  ariaValuemin: readOnly('minValue'),
+  ariaValuemax: readOnly('maxValue'),
 
   /**
    * The percentage of `value`

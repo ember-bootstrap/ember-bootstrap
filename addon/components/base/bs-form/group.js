@@ -1,3 +1,4 @@
+import { notEmpty, and } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
@@ -58,7 +59,7 @@ export default Component.extend(SizeClass, {
    * @private
    * @readonly
    */
-  hasValidation: computed.notEmpty('validation').readOnly(),
+  hasValidation: notEmpty('validation').readOnly(),
 
   /**
    * Computed property which is true if the form group is showing a validation icon
@@ -68,7 +69,7 @@ export default Component.extend(SizeClass, {
    * @private
    * @readonly
    */
-  hasFeedback: computed.and('hasValidation', 'useIcons', 'hasIconForValidationState').readOnly(),
+  hasFeedback: and('hasValidation', 'useIcons', 'hasIconForValidationState').readOnly(),
 
   /**
    * The icon classes to be used for a feedback icon in a "success" validation state.
@@ -180,7 +181,7 @@ export default Component.extend(SizeClass, {
    * @readonly
    * @private
    */
-  hasIconForValidationState: computed.notEmpty('iconName').readOnly(),
+  hasIconForValidationState: notEmpty('iconName').readOnly(),
 
   /**
    * Set to a validation state to render the form-group with a validation style.

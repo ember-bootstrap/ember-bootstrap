@@ -1,6 +1,6 @@
 import Component from '@ember/component';
-import { computed, observer } from '@ember/object';
-import { reads } from '@ember/object/computed';
+import { observer } from '@ember/object';
+import { reads, filter, filterBy, gt } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
 import LinkComponent from '@ember/routing/link-component';
 import layout from 'ember-bootstrap/templates/components/bs-nav/item';
@@ -53,15 +53,15 @@ export default Component.extend(ComponentParent, {
    * @property childLinks
    * @private
    */
-  childLinks: computed.filter('children', function(view) {
+  childLinks: filter('children', function(view) {
     return view instanceof LinkComponent;
   }),
 
-  activeChildLinks: computed.filterBy('childLinks', 'active'),
-  hasActiveChildLinks: computed.gt('activeChildLinks.length', 0),
+  activeChildLinks: filterBy('childLinks', 'active'),
+  hasActiveChildLinks: gt('activeChildLinks.length', 0),
 
-  disabledChildLinks: computed.filterBy('childLinks', 'disabled'),
-  hasDisabledChildLinks: computed.gt('disabledChildLinks.length', 0),
+  disabledChildLinks: filterBy('childLinks', 'disabled'),
+  hasDisabledChildLinks: gt('disabledChildLinks.length', 0),
 
   /**
    * Called when clicking the nav item

@@ -1,3 +1,4 @@
+import { reads } from '@ember/object/computed';
 import { getOwner } from '@ember/application';
 import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
@@ -17,7 +18,7 @@ export default Mixin.create({
    * @type boolean
    * @private
    */
-  transitionsEnabled: computed.reads('fade'),
+  transitionsEnabled: reads('fade'),
 
   /**
    * Access to the fastboot service if available
