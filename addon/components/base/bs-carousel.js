@@ -56,8 +56,10 @@ import { task, timeout } from 'ember-concurrency';
   @public
  */
 export default Ember.Component.extend(ComponentParent, {
+  attributeBindings: ['tabindex'],
   classNames: ['carousel', 'slide'],
   layout,
+  tabindex: '1',
 
   /**
    * If a slide can turn to left, including corners.
@@ -465,8 +467,7 @@ export default Ember.Component.extend(ComponentParent, {
   },
 
   /**
-   * For some reason Ember's mouseEnter() and mouseLeave() doesn't work and keypress() doesn't 
-   * work without tabindex (IE11+).
+   * For some reason Ember's keypress(), mouseEnter() and mouseLeave() doesn't work.
    * 
    * @method registerEvents
    * @private
@@ -492,7 +493,7 @@ export default Ember.Component.extend(ComponentParent, {
         self.get('waitIntervalToInitCycle').perform();
       }
     });
-    window.addEventListener('keypress', function(e) {
+    this.element.addEventListener('keydown', function(e) {
       if (self.get('keyboard')) {
         let code = e.keyCode || e.which;
         switch (code) {
