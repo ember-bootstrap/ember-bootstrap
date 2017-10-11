@@ -75,8 +75,8 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    * @property canTurnToRight
    */
-  canTurnToRight: computed('childSlides', 'continuouslyCycle', 'currentIndex', function() {
-    return this.get('continuouslyCycle') || this.get('currentIndex') < this.get('childSlides').length - 1;
+  canTurnToRight: computed('childSlides.length', 'continuouslyCycle', 'currentIndex', function() {
+    return this.get('continuouslyCycle') || this.get('currentIndex') < this.get('childSlides.length') - 1;
   }),
 
   /**
@@ -149,7 +149,7 @@ export default Ember.Component.extend(ComponentParent, {
    * @property indicators
    * @private
    */
-  indicators: computed('childSlides', function() {
+  indicators: computed('childSlides.length', function() {
     return new Array(this.get('childSlides.length') + 1).join('0').split('');
   }),
 
