@@ -442,13 +442,7 @@ export default Ember.Component.extend(ComponentParent, {
   didInsertElement() {
     this._super(...arguments);
     this.registerEvents();
-    // Weird bug?! On page load, any carousel without indicators doesn't
-    // trigger the 'childSlidesObserver', thus, nothing happens.
-    schedule('sync', this, function() {
-      if (this.get('showIndicators') === false) {
-        this.notifyPropertyChange('childSlides');
-      }
-    });
+    this.triggerChildSlidesObserver();
   },
 
   /**
@@ -529,6 +523,10 @@ export default Ember.Component.extend(ComponentParent, {
     } else {
       this.set('followingIndex', toIndex);
     }
+  },
+
+  triggerChildSlidesObserver() {
+    this.get('childSlides');
   },
 
   /**
