@@ -4,7 +4,7 @@ import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 import { computed, observer } from '@ember/object';
-import { next, schedule } from '@ember/runloop';
+import { next } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 
 /**
