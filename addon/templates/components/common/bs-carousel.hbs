@@ -1,21 +1,21 @@
 {{#if showIndicators}}
-  <ol class='carousel-indicators'>
+  <ol class="carousel-indicators">
     {{#each indicators as |indicator index|}}
-      <li class='{{if (bs-eq currentIndex index) 'active'}}' onclick={{action 'toSlide' index}} role='button'></li>
+      <li class="{{if (bs-eq currentIndex index) "active"}}" onclick={{action "toSlide" index}} role="button"></li>
     {{/each}}
   </ol>
 {{/if}}
 
-<div class='carousel-inner' role='listbox'>
-  {{yield (hash slide=(component 'bs-carousel/slide'))}}
+<div class="carousel-inner" role="listbox">
+  {{yield (hash slide=(component "bs-carousel/slide"))}}
 </div>
 
 {{#if showControls}}
-  <a class="{{prevControlClassName}}" href="#{{elementId}}" onclick={{action 'toPrevSlide'}} role="button">
+  <a class="{{prevControlClassName}}" href="#{{elementId}}" onclick={{action "toPrevSlide"}} role="button">
     <span aria-hidden="true" class="{{prevControlIcon}}"></span>
     <span class="sr-only">{{prevControlLabel}}</span>
   </a>
-  <a class="{{nextControlClassName}}" href="#{{elementId}}" onclick={{action 'toNextSlide'}} role="button">
+  <a class="{{nextControlClassName}}" href="#{{elementId}}" onclick={{action "toNextSlide"}} role="button">
     <span aria-hidden="true" class="{{nextControlIcon}}"></span>
     <span class="sr-only">{{nextControlLabel}}</span>
   </a>
