@@ -208,6 +208,7 @@ export default Ember.Component.extend(ComponentParent, {
    * Starts automatic sliding on page load.
    * This parameter has no effect if interval is less than or equal to zero.
    *
+   * @default false
    * @property autoPlay
    * @public
    * @type boolean
@@ -217,6 +218,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * Should have hard stop on slides indexes corners.
    *
+   * @default true
    * @property continuouslyCycle
    * @public
    * @type boolean
@@ -226,6 +228,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * Index of starting slide.
    *
+   * @default 0
    * @property index
    * @public
    * @type number
@@ -236,6 +239,7 @@ export default Ember.Component.extend(ComponentParent, {
    * Waiting time before automatically show another slide.
    * Automatic sliding is canceled if interval is less than or equal to zero.
    *
+   * @default 5000
    * @property interval
    * @public
    * @type number
@@ -245,6 +249,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * Should bind keyboard events into sliding.
    *
+   * @default true
    * @property keyboard
    * @public
    * @type boolean
@@ -255,6 +260,7 @@ export default Ember.Component.extend(ComponentParent, {
    * If automatic sliding should be left-to-right or right-to-left.
    * This parameter has no effect if interval is less than or equal to zero.
    *
+   * @default true
    * @property ltr
    * @public
    * @type boolean
@@ -264,6 +270,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * The next icon to be displayed to the user.
    *
+   * @default null
    * @property nextControlIcon
    * @type string
    * @public
@@ -273,6 +280,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * Label for screen readers, defaults to 'Next'.
    *
+   * @default 'next'
    * @property nextControlLabel
    * @type string
    * @public
@@ -283,6 +291,7 @@ export default Ember.Component.extend(ComponentParent, {
    * Pauses automatic sliding if mouse cursor is hovering the component.
    * This parameter has no effect if interval is less than or equal to zero.
    * 
+   * @default true
    * @property pauseOnMouseEnter
    * @public
    * @type boolean
@@ -292,6 +301,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * The previous icon to be displayed to the user.
    *
+   * @default null
    * @property prevControlIcon
    * @type string
    * @public
@@ -301,6 +311,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * Label for screen readers, defaults to 'Previous'.
    *
+   * @default 'Previous'
    * @property prevControlLabel
    * @type string
    * @public
@@ -310,6 +321,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * Show or hide controls.
    * 
+   * @default true
    * @property showControls
    * @public
    * @type boolean
@@ -319,6 +331,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * Show or hide indicators.
    * 
+   * @default true
    * @property showIndicators
    * @public
    * @type boolean
