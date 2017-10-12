@@ -121,7 +121,7 @@ export default Component.extend(ComponentParent, {
    */
   type: 'tabs',
 
-  tagName: "",
+  tagName: '',
 
   /**
    * By default the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)

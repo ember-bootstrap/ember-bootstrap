@@ -75,9 +75,18 @@ export default Component.extend({
   layout,
 
   tagName: 'ul',
-  classNames: ['nav'],
 
-  classNameBindings: ['typeClass', 'justified:nav-justified'],
+  classNameBindings: 'classes',
+
+  classes: computed('customClass', 'typeClass', function() {
+    let customClasses = this.get('customClass');
+    if (isPresent(customClasses)) {
+      return customClasses;
+    }
+    let classes = ['nav'];
+    classes.push(this.get('typeClass'), 'justified:nav-justified');
+    return classes.join(' ');
+  }),
 
   typeClass: computed('type', function() {
     let type = this.get('type');
