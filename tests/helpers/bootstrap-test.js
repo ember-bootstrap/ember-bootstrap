@@ -71,7 +71,11 @@ export function formHelpTextClass() {
 
 export function accordionClassFor(type) {
   type = type ? `-${type}` : '';
-  return versionDependent(`panel${type}`, `card${type}`);
+  return versionDependent(`panel${type}`, type ? `bg${type}` : 'card');
+}
+
+export function accordionTitleSelector() {
+  return versionDependent('.panel-title', 'h5');
 }
 
 export function accordionItemHeadClass() {
@@ -83,7 +87,7 @@ export function dropdownVisibilityElementSelector() {
 }
 
 export function accordionItemBodyClass() {
-  return versionDependent('panel-body', 'card-block');
+  return versionDependent('panel-body', 'card-body');
 }
 
 export function tooltipPositionClass(pos) {
