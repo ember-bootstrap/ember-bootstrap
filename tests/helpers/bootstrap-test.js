@@ -42,15 +42,23 @@ export function defaultButtonClass() {
 }
 
 export function formFeedbackClass() {
-  return versionDependent('help-block', 'form-control-feedback');
+  return versionDependent('help-block', 'invalid-feedback');
+}
+
+export function formFeedbackElement() {
+  return versionDependent('.form-group', '.form-control');
+}
+
+export function validationSuccessClass() {
+  return versionDependent('has-success', 'is-valid');
 }
 
 export function validationErrorClass() {
-  return versionDependent('has-error', 'has-danger');
+  return versionDependent('has-error', 'is-invalid');
 }
 
 export function validationWarningClass() {
-  return 'has-warning';
+  return versionDependent('has-warning', 'is-warning');
 }
 
 export function placementClassFor(type, placement) {
@@ -117,6 +125,22 @@ export { test };
 export function testRequiringFocus(name, fn) {
   if (document.hasFocus()) {
     return test(name, fn);
+  } else {
+    skip(name);
+  }
+}
+
+export function testRequiringFocusBS3(name, fn) {
+  if (document.hasFocus()) {
+    return testBS3(name, fn);
+  } else {
+    skip(name);
+  }
+}
+
+export function testRequiringFocusBS4(name, fn) {
+  if (document.hasFocus()) {
+    return testBS4(name, fn);
   } else {
     skip(name);
   }

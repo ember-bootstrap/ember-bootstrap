@@ -17,8 +17,10 @@ import {
   test,
   testRequiringFocus,
   testBS3,
+  validationSuccessClass,
   validationErrorClass,
   validationWarningClass,
+  formFeedbackElement,
   formHelpTextClass
 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
@@ -463,8 +465,19 @@ testRequiringFocus('shows validation state only when validator is present', asyn
   await focus('input');
   await blur('input');
   assert.notOk(
-    find('.form-group').classList.contains('has-success'),
+    find(formFeedbackElement()).classList.contains(validationSuccessClass()),
     'form group isn\'t shown as having errors if there is no validator'
+  );
+});
+
+test('shows validation success', async function(assert) {
+  this.set('model', EmberObject.create({ name: null }));
+  this.render(hbs`
+      {{bs-form/element property='name' showAllValidations=true hasValidator=true model=model}}
+  `);
+  assert.ok(
+    find(formFeedbackElement()).classList.contains(validationSuccessClass()),
+    'validation succcess is shown when form signals to show all validations'
   );
 });
 
@@ -475,13 +488,13 @@ testRequiringFocus('shows validation errors', async function(assert) {
       {{bs-form/element property='name' hasValidator=true errors=errors model=model}}
   `);
   assert.notOk(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'validation errors aren\'t shown before user interaction'
   );
   await focus('input');
   await blur('input');
   assert.ok(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'validation errors are shown after user interaction when errors are present'
   );
   assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Invalid');
@@ -489,7 +502,7 @@ testRequiringFocus('shows validation errors', async function(assert) {
     this.set('errors', A());
   });
   assert.notOk(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'form group isn\'t shown as having errors if there aren\'t any'
   );
 });
@@ -501,13 +514,13 @@ testRequiringFocus('shows validation warnings', async function(assert) {
       {{bs-form/element property='name' hasValidator=true warnings=warnings model=model}}
   `);
   assert.notOk(
-    find('.form-group').classList.contains('has-warning'),
+    find(formFeedbackElement()).classList.contains(validationWarningClass()),
     'validation warnings aren\'t shown before user interaction'
   );
   await focus('input');
   await blur('input');
   assert.ok(
-    find('.form-group').classList.contains('has-warning'),
+    find(formFeedbackElement()).classList.contains(validationWarningClass()),
     'validation warnings are shown after user interaction when warnings are present'
   );
   assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Insecure');
@@ -515,7 +528,7 @@ testRequiringFocus('shows validation warnings', async function(assert) {
     this.set('warnings', A());
   });
   assert.notOk(
-    find('.form-group').classList.contains('has-warning'),
+    find(formFeedbackElement()).classList.contains(validationWarningClass()),
     'form group isn\'t shown as having warnings if there are\'t any'
   );
 });
@@ -527,7 +540,7 @@ test('shows custom error immediately', function(assert) {
       {{bs-form/element property='name' hasValidator=true customError=error model=model}}
   `);
   assert.ok(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'custom error is shown immediately'
   );
   assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'some error');
@@ -535,7 +548,7 @@ test('shows custom error immediately', function(assert) {
     this.set('error', null);
   });
   assert.notOk(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'form group isn\'t shown as having errors if there aren\'t any'
   );
 });
@@ -547,7 +560,7 @@ test('shows custom warning immediately', function(assert) {
       {{bs-form/element property='name' hasValidator=true customWarning=warning model=model}}
   `);
   assert.ok(
-    find('.form-group').classList.contains(validationWarningClass()),
+    find(formFeedbackElement()).classList.contains(validationWarningClass()),
     'custom warning is shown immediately'
   );
   assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'some warning');
@@ -555,7 +568,7 @@ test('shows custom warning immediately', function(assert) {
     this.set('warning', null);
   });
   assert.notOk(
-    find('.form-group').classList.contains(validationWarningClass()),
+    find(formFeedbackElement()).classList.contains(validationWarningClass()),
     'form group isn\'t shown as having warning if there aren\'t any'
   );
 });
@@ -568,22 +581,22 @@ testRequiringFocus('shows validation errors in preference to custom warning', as
       {{bs-form/element property='name' hasValidator=true errors=errors customWarning=warning model=model}}
   `);
   assert.notOk(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'validation errors aren\'t shown before user interaction'
   );
   assert.ok(
-    find('.form-group').classList.contains(validationWarningClass()),
+    find(formFeedbackElement()).classList.contains(validationWarningClass()),
     'custom warning is shown immediately'
   );
   assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'some warning', 'Custom Warning is shown');
   await focus('input');
   await blur('input');
   assert.ok(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'validation errors are shown after user interaction when errors are present'
   );
   assert.notOk(
-    find('.form-group').classList.contains(validationWarningClass()),
+    find(formFeedbackElement()).classList.contains(validationWarningClass()),
     'custom warning is removed when errors are shown'
   );
   assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Invalid', 'Validation error is shown');
@@ -591,11 +604,11 @@ testRequiringFocus('shows validation errors in preference to custom warning', as
     this.set('errors', A());
   });
   assert.notOk(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'form group isn\'t shown as having errors if there aren\'t any'
   );
   assert.ok(
-    find('.form-group').classList.contains(validationWarningClass()),
+    find(formFeedbackElement()).classList.contains(validationWarningClass()),
     'custom warning is shown when errors are removed'
   );
 });
@@ -608,19 +621,19 @@ testRequiringFocus('events enabling validation rendering are configurable per `s
       {{bs-form/element property='name' hasValidator=true errors=errors model=model showValidationOn=showValidationOn}}
   `);
   assert.notOk(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'validation warnings aren\'t shown before user interaction'
   );
   await focus('input');
   await blur('input');
   assert.notOk(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'events not present in `showValidationOn` are ignored'
   );
   await fillIn('input', 'foo');
   await triggerEvent('input', 'change');
   assert.ok(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'events present in `showValidationOn` trigger validation'
   );
 });
@@ -632,18 +645,18 @@ testRequiringFocus('events enabling validation rendering are configurable per `s
       {{bs-form/element property='name' hasValidator=true errors=errors model=model showValidationOn='change'}}
   `);
   assert.notOk(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'validation warnings aren\'t shown before user interaction'
   );
   await focus('input');
   await blur('input');
   assert.notOk(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'events not present in `showValidationOn` are ignored'
   );
   await triggerEvent('input', 'change');
   assert.ok(
-    find('.form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'events present in `showValidationOn` trigger validation'
   );
 });

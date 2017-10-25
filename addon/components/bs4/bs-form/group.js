@@ -26,10 +26,5 @@ export default FormGroup.extend({
 
   isInline: computed.equal('formLayout', 'inline').readOnly(),
 
-  isInlineCheckbox: computed.and('isCheckbox', 'isInline').readOnly(),
-
-  _validationType: computed('validation', function() {
-    let validation = this.get('validation');
-    return validation === 'error' ? 'danger' : validation;
-  }).readOnly()
+  isInlineCheckbox: computed.and('isCheckbox', 'isInline').readOnly()
 });
