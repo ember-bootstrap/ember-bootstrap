@@ -83,19 +83,3 @@ testBS3('component with warning validation has warning classes and warning icon'
 testBS3('component with error validation has error classes and error icon', function(assert) {
   testValidationState.call(this, assert, 'error');
 });
-
-testBS4('component with successful validation has validation class', function(assert) {
-  let validationClasses = {
-    success: 'has-success',
-    warning: 'has-warning',
-    error: 'has-danger'
-  };
-
-  this.render(hbs`{{#bs-form/group validation=validation}}{{/bs-form/group}}`);
-
-  Object.keys(validationClasses).forEach((validation) => {
-    let className = validationClasses[validation];
-    this.set('validation', validation);
-    assert.equal(find(':first-child').classList.contains(className), true, `component has ${className} class`);
-  });
-});

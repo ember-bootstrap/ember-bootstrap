@@ -16,7 +16,8 @@ import {
   testRequiringFocus,
   testBS3,
   testBS4,
-  validationErrorClass
+  validationErrorClass,
+  formFeedbackElement
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -138,7 +139,7 @@ test('Submitting the form with invalid validation shows validation errors', asyn
   this.render(hbs`{{#bs-form model=model hasValidator=true validate=validateStub as |form|}}{{form.element hasValidator=true errors=errors}}{{/bs-form}}`);
 
   assert.notOk(
-    find('form .form-group').classList.contains(validationErrorClass()),
+    find(formFeedbackElement()).classList.contains(validationErrorClass()),
     'validation errors aren\'t shown before user interaction'
   );
   await triggerEvent('form', 'submit');
@@ -146,11 +147,11 @@ test('Submitting the form with invalid validation shows validation errors', asyn
   let done = assert.async();
   setTimeout(() => {
     assert.ok(
-      find('form .form-group').classList.contains(validationErrorClass()),
+      find(formFeedbackElement()).classList.contains(validationErrorClass()),
       'validation errors are shown after form submission'
     );
     assert.equal(
-      find(`form .form-group .${formFeedbackClass()}`).textContent.trim(),
+      find(`.${formFeedbackClass()}`).textContent.trim(),
       'There is an error'
     );
     done();
