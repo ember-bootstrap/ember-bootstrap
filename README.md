@@ -10,7 +10,7 @@
 [![Browser Status](https://badges.herokuapp.com/sauce/ember-bootstrap)](https://saucelabs.com/u/ember-bootstrap)
 
 
-An [ember-cli](http://www.ember-cli.com) addon for using [Twitter Bootstrap](http://getbootstrap.com/) 3 or 4 (experimental) in Ember applications.
+An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getbootstrap.com/) 3 or 4 (experimental) in Ember applications.
 
 The addon includes the Bootstrap assets (CSS, Icons) in your project (can be disabled). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
 
