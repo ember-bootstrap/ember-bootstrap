@@ -11,11 +11,11 @@
 </div>
 
 {{#if showControls}}
-  <a class="{{prevControlClassName}}" href="#{{elementId}}" onclick={{action "toPrevSlide"}} role="button">
+  <a class="{{prevControlClassName}}" href="#{{elementId}}" {{action "toPrevSlide"}} role="button">
     <span aria-hidden="true" class="{{prevControlIcon}}"></span>
     <span class="sr-only">{{prevControlLabel}}</span>
   </a>
-  <a class="{{nextControlClassName}}" href="#{{elementId}}" onclick={{action "toNextSlide"}} role="button">
+  <a class="{{nextControlClassName}}" href="#{{elementId}}" {{action "toNextSlide"}} role="button">
     <span aria-hidden="true" class="{{nextControlIcon}}"></span>
     <span class="sr-only">{{nextControlLabel}}</span>
   </a>
