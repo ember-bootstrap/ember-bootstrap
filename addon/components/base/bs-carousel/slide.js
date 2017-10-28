@@ -10,7 +10,7 @@ import layout from 'ember-bootstrap/templates/components/bs-carousel/slide';
   @class CarouselSlide
   @namespace Components
   @extends Ember.Component
-  @public  
+  @public
  */
 export default Ember.Component.extend(ComponentChild, {
   classNameBindings: ['active'],
