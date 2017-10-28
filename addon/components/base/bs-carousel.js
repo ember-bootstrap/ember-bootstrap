@@ -494,17 +494,22 @@ export default Ember.Component.extend(ComponentParent, {
       }
     });
     this.element.addEventListener('keydown', function(e) {
-      if (self.get('keyboard')) {
-        let code = e.keyCode || e.which;
-        switch (code) {
-          case 37:
-            self.send('toPrevSlide');
-            break;
-          case 39:
-            self.send('toNextSlide');
-            break;
-          default: break;
-        }
+      let code = e.keyCode || e.which;
+      console.log(e.target.tagName)
+      if (
+        self.get('keyboard') === false
+        || /input|textarea/i.test(e.target.tagName)
+      ) {
+        return;
+      }
+      switch (code) {
+        case 37:
+          self.send('toPrevSlide');
+          break;
+        case 39:
+          self.send('toNextSlide');
+          break;
+        default: break;
       }
     });
   },
