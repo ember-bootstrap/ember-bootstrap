@@ -63,7 +63,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * If a slide can turn to left, including corners.
-   * 
+   *
    * @private
    * @property canTurnToLeft
    */
@@ -73,7 +73,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * If a slide can turn to right, including corners.
-   * 
+   *
    * @private
    * @property canTurnToRight
    */
@@ -95,7 +95,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * This observer is the entry point for real time insertion and removing of slides.
-   * 
+   *
    * @private
    * @property childSlidesObserver
    */
@@ -123,7 +123,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * Listen to the provided starting index, you should see the mixin for more information.
-   * 
+   *
    * @property currentIndex
    * @private
    */
@@ -167,7 +167,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * The class name to append to the next control link element.
-   * 
+   *
    * @property nextControlClassName
    * @type string
    * @private
@@ -292,7 +292,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * Pauses automatic sliding if mouse cursor is hovering the component.
    * This parameter has no effect if interval is less than or equal to zero.
-   * 
+   *
    * @default true
    * @property pauseOnMouseEnter
    * @public
@@ -322,7 +322,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * Show or hide controls.
-   * 
+   *
    * @default true
    * @property showControls
    * @public
@@ -332,7 +332,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * Show or hide indicators.
-   * 
+   *
    * @default true
    * @property showIndicators
    * @public
@@ -352,7 +352,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * Do a presentation and calls itself to perform a cycle.
-   * 
+   *
    * @method cycle
    * @private
    */
@@ -381,8 +381,8 @@ export default Ember.Component.extend(ComponentParent, {
   }).drop(),
 
   /**
-   * Waits a interval time to start a cycle.
-   * 
+   * Waits an interval time to start a cycle.
+   *
    * @method waitIntervalToInitCycle
    * @private
    */
@@ -426,8 +426,8 @@ export default Ember.Component.extend(ComponentParent, {
   },
 
   /**
-   * Indicates what class names should be applicable to the current transition slides. 
-   * 
+   * Indicates what class names should be applicable to the current transition slides.
+   *
    * @method assignClassNameControls
    * @private
    */
@@ -450,7 +450,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * Applies class names to slides, sets the current index as the following index and
    * indicates that the transition has finished.
-   * 
+   *
    * @method didTransition
    * @private
    */
@@ -468,7 +468,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * For some reason Ember's keypress(), mouseEnter() and mouseLeave() doesn't work.
-   * 
+   *
    * @method registerEvents
    * @private
    */
@@ -511,7 +511,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * Sets the following slide index within the lower and upper bounds.
-   * 
+   *
    * @method setfollowingIndex
    * @private
    */
