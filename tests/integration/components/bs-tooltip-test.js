@@ -63,7 +63,7 @@ test('it shows and hides immediately when hovering [fade=false]', async function
 });
 
 testRequiringFocus('it shows and hides immediately when focusing [fade=false]', async function(assert) {
-  this.render(hbs`<button id="target">{{bs-tooltip title="Dummy" fade=false}}</button>`);
+  this.render(hbs`<button class="btn" id="target">{{bs-tooltip title="Dummy" fade=false}}</button>`);
 
   await focus('#target');
   assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
@@ -318,7 +318,7 @@ test('show pass along class attribute', function(assert) {
 
 test('should position tooltip arrow centered', async function(assert) {
   let expectedArrowPosition = versionDependent(95, 98);
-  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button id="target">Click me{{bs-tooltip placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{bs-tooltip placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`);
 
   setupForPositioning();
 
@@ -328,8 +328,8 @@ test('should position tooltip arrow centered', async function(assert) {
 });
 
 test('should adjust tooltip arrow', async function(assert) {
-  let expectedArrowPosition = versionDependent(160, 159);
-  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button id="target">Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`);
+  let expectedArrowPosition = versionDependent(155, 154);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`);
 
   setupForPositioning('right');
 
@@ -346,7 +346,7 @@ test('should adjust tooltip arrow', async function(assert) {
 
 test('should adjust placement if not fitting in viewport', async function(assert) {
   let done = assert.async();
-  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 300px"><button id="target">Click me{{bs-tooltip placement="bottom" autoPlacement=true title="very very very very very very very long popover" fade=false}}</button></p></div>`);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 300px"><button class="btn" id="target">Click me{{bs-tooltip placement="bottom" autoPlacement=true title="very very very very very very very long popover" fade=false}}</button></p></div>`);
 
   setupForPositioning('right');
   await click('#target');
