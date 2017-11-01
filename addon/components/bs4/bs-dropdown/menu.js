@@ -4,9 +4,20 @@ import { computed } from '@ember/object';
 export default DropdownMenu.extend({
   tagName: '',
 
-  isOpen: false,
+  isOpen: computed({
+    get() {
+      return false;
+    },
+    set(key, value) {
+      let update = this.get('_popperApi.update');
+      update && update();
+      return value;
+    }
+  }),
 
   flip: true,
+
+  _popperApi: null,
 
   popperPlacement: computed('direction', 'align', function() {
     let placement = 'bottom-start';
@@ -32,5 +43,11 @@ export default DropdownMenu.extend({
         enabled: this.get('flip')
       }
     };
-  })
+  }),
+
+  actions: {
+    registerPopperApi(api) {
+      this.set('_popperApi', api);
+    }
+  }
 });

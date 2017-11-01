@@ -5,18 +5,13 @@
   target=toggleElement
   renderInPlace=true
   modifiers=popperModifiers
-  as |emberPopper|
+  registerAPI=(action "registerPopperApi")
 }}
-  {{#bs-dropdown/menu/-inner
-    isOpen=isOpen
-    updatePopper=emberPopper.update
+  {{yield
+    (hash
+      item=(component "bs-dropdown/menu/item")
+      link-to=(component "bs-dropdown/menu/link-to")
+      divider=(component "bs-dropdown/menu/divider")
+    )
   }}
-    {{yield
-      (hash
-        item=(component "bs-dropdown/menu/item")
-        link-to=(component "bs-dropdown/menu/link-to")
-        divider=(component "bs-dropdown/menu/divider")
-      )
-    }}
-  {{/bs-dropdown/menu/-inner}}
 {{/ember-popper}}

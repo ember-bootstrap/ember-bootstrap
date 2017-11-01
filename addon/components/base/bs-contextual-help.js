@@ -231,7 +231,7 @@ export default Component.extend(TransitionSupport, {
       try {
         el = getParent(this);
       } catch(e) {
-        return;
+        return null;
       }
     } else if (triggerElement === 'parentView') {
       el = this.get('parentView.element');

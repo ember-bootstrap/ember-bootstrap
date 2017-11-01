@@ -172,7 +172,7 @@ export default Component.extend({
    * @private
    */
   toggleElement: computed('toggle', function() {
-    return typeof FastBoot === 'undefined' ? this.get('toggle.element') : null;
+    return typeof FastBoot === 'undefined' ? this.get('toggle.element') || null : null;
   }),
 
   /**
