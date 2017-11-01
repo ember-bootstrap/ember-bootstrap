@@ -4,7 +4,7 @@ import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 import { computed, observer } from '@ember/object';
-import { next } from '@ember/runloop';
+import { schedule } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 
 /**
@@ -45,7 +45,7 @@ import { task, timeout } from 'ember-concurrency';
   | ------ | ------ |
   | Transition | Swaps two slides. |
   | Interval | Waiting time after a transition. |
-  | Presentation | (Transition ⋁ Interval) of a single slide. |
+  | Presentation | Represents a single transition, or a single interval, or the union of both. |
   | Cycle | Presents all slides until it reaches first or last slide. |
   | Continuously cycle | Infinite cycling without stops. |
   ```
@@ -91,7 +91,7 @@ export default Ember.Component.extend(ComponentParent, {
    */
   childSlides: computed.filter('children', function(view) {
     return view instanceof CarouselSlide;
-  }),
+  }).readOnly(),
 
   /**
    * This observer is the entry point for real time insertion and removing of slides.
@@ -112,12 +112,8 @@ export default Ember.Component.extend(ComponentParent, {
       if (this.get('autoPlay')) {
         this.get('waitIntervalToInitCycle').perform();
       }
-      // Default starting slide parameters
-      if (this.get('directionalClassName') !== null && this.get('orderClassName') !== null) {
-        childSlides[currentIndex].set(this.get('orderClassName'), false);
-        childSlides[currentIndex].set(this.get('directionalClassName'), false);
-      }
-      childSlides[currentIndex].set('active', true);
+      // Initial slide state
+      this.set('state', 'initialization');
     }
   }),
 
@@ -128,6 +124,16 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   currentIndex: listenTo('index'),
+
+  /**
+   * The current slide object that is going to be used by the nested slides components.
+   *
+   * @property currentSlide
+   * @private
+   */
+  currentSlide: computed('childSlides', 'currentIndex', function() {
+    return this.get('childSlides').objectAt(this.get('currentIndex'));
+  }),
 
   /**
    * Bootstrap style to indicate that a given slide should be moving to left/right.
@@ -148,6 +154,16 @@ export default Ember.Component.extend(ComponentParent, {
   followingIndex: null,
 
   /**
+   * The following slide object that is going to be used by the nested slides components.
+   *
+   * @property followingIndex
+   * @private
+   */
+  followingSlide: computed('childSlides', 'followingIndex', function() {
+    return this.get('childSlides').objectAt(this.get('followingIndex'));
+  }),
+
+  /**
    * @property indicators
    * @private
    */
@@ -157,7 +173,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * If user is hovering its cursor on component.
-   * This property is only manipulated when 'pauseOneMouseEnter' is true.
+   * This property is only manipulated when 'pauseOnMouseEnter' is true.
    *
    * @property isMouseHovering
    * @private
@@ -197,7 +213,7 @@ export default Ember.Component.extend(ComponentParent, {
    * @property shouldNotDoPresentation
    * @type boolean
    */
-  shouldNotDoPresentation: computed.lt('childSlides.length', 2),
+  shouldNotDoPresentation: computed.lte('childSlides.length', 1),
 
   /**
    * @private
@@ -205,6 +221,16 @@ export default Ember.Component.extend(ComponentParent, {
    * @type boolean
    */
   shouldRunAutomatically: computed.gt('interval', 0),
+
+  /**
+   * The current state of the current presentation, can be either "initialization", "didTransition"
+   * or "willTransite".
+   *
+   * @private
+   * @property state
+   * @type string
+   */
+  state: false,
 
   /**
    * Starts automatic sliding on page load.
@@ -218,7 +244,8 @@ export default Ember.Component.extend(ComponentParent, {
   autoPlay: false,
 
   /**
-   * Should have hard stop on slides indexes corners.
+   * Should have hard stop on corners, i.e., first slide won't make a transition to the
+   * last slide and vice versa.
    *
    * @default true
    * @property continuouslyCycle
@@ -270,7 +297,7 @@ export default Ember.Component.extend(ComponentParent, {
   ltr: true,
 
   /**
-   * The next icon to be displayed to the user.
+   * The next control icon to be displayed.
    *
    * @default null
    * @property nextControlIcon
@@ -282,7 +309,7 @@ export default Ember.Component.extend(ComponentParent, {
   /**
    * Label for screen readers, defaults to 'Next'.
    *
-   * @default 'next'
+   * @default 'Next'
    * @property nextControlLabel
    * @type string
    * @public
@@ -301,7 +328,7 @@ export default Ember.Component.extend(ComponentParent, {
   pauseOnMouseEnter: true,
 
   /**
-   * The previous icon to be displayed to the user.
+   * The previous control icon to be displayed.
    *
    * @default null
    * @property prevControlIcon
@@ -342,6 +369,7 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * The duration of the slide transition.
+   * You should also change this parameter in Bootstrap CSS file.
    *
    * @default 600
    * @property transitionDuration
@@ -359,11 +387,7 @@ export default Ember.Component.extend(ComponentParent, {
   cycle: task(function* () {
     this.get('transition').perform();
     yield timeout(this.get('interval') + this.get('transitionDuration'));
-    if (this.get('ltr')) {
-      this.send('toNextSlide');
-    } else {
-      this.send('toPrevSlide');
-    }
+    this.toAppropriateSlide();
   }).restartable(),
 
   /**
@@ -371,13 +395,10 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   transition: task(function* () {
-    let slides = this.get('childSlides');
-    let currSlide = slides[this.get('currentIndex')];
-    let followingSlide = slides[this.get('followingIndex')];
-    this.set('currentIndex', this.get('followingIndex'));
-    this.willTransit(currSlide, followingSlide);
+    this.set('state', 'willTransit');
     yield timeout(this.get('transitionDuration'));
-    this.didTransition(currSlide, followingSlide);
+    this.set('state', 'didTransition');
+    this.setCurrentIndex();
   }).drop(),
 
   /**
@@ -391,11 +412,7 @@ export default Ember.Component.extend(ComponentParent, {
       return;
     }
     yield timeout(this.get('interval'));
-    if (this.get('ltr')) {
-      this.send('toNextSlide');
-    } else {
-      this.send('toPrevSlide');
-    }
+    this.toAppropriateSlide();
   }).restartable(),
 
   actions: {
@@ -404,7 +421,7 @@ export default Ember.Component.extend(ComponentParent, {
         return;
       }
       this.assignClassNameControls(toIndex);
-      this.setfollowingIndex(toIndex);
+      this.setFollowingIndex(toIndex);
       if (this.get('shouldRunAutomatically') === false || this.get('isMouseHovering')) {
         this.get('transition').perform();
       } else {
@@ -445,25 +462,6 @@ export default Ember.Component.extend(ComponentParent, {
     this._super(...arguments);
     this.registerEvents();
     this.triggerChildSlidesObserver();
-  },
-
-  /**
-   * Applies class names to slides, sets the current index as the following index and
-   * indicates that the transition has finished.
-   *
-   * @method didTransition
-   * @private
-   */
-  didTransition(currSlide, followingSlide) {
-    if (currSlide.isDestroyed === false) {
-      currSlide.set('active', false);
-      currSlide.set(this.get('directionalClassName'), false);
-    }
-    if (followingSlide.isDestroyed === false) {
-      followingSlide.set('active', true);
-      followingSlide.set(this.get('directionalClassName'), false);
-      followingSlide.set(this.get('orderClassName'), false);
-    }
   },
 
   /**
@@ -514,12 +512,21 @@ export default Ember.Component.extend(ComponentParent, {
   },
 
   /**
+   * Must change current index after execution of 'stateObserver' method from child components.
+   */
+  setCurrentIndex() {
+    schedule('afterRender', this, function() {
+      this.set('currentIndex', this.get('followingIndex'));
+    });
+  },
+
+  /**
    * Sets the following slide index within the lower and upper bounds.
    *
-   * @method setfollowingIndex
+   * @method setFollowingIndex
    * @private
    */
-  setfollowingIndex(toIndex) {
+  setFollowingIndex(toIndex) {
     let slidesLengthMinusOne = this.get('childSlides').length - 1;
     if (toIndex > slidesLengthMinusOne) {
       this.set('followingIndex', 0);
@@ -530,20 +537,18 @@ export default Ember.Component.extend(ComponentParent, {
     }
   },
 
-  triggerChildSlidesObserver() {
-    this.get('childSlides');
+  /**
+   * Coordinates the correct slide movement direction.
+   */
+  toAppropriateSlide() {
+    if (this.get('ltr')) {
+      this.send('toNextSlide');
+    } else {
+      this.send('toPrevSlide');
+    }
   },
 
-  /**
-   * @method willTransit
-   * @private
-   */
-  willTransit(currSlide, followingSlide) {
-    followingSlide.set(this.get('orderClassName'), true);
-    next(this, function() {
-      this.element.offsetHeight;
-      currSlide.set(this.get('directionalClassName'), true);
-      followingSlide.set(this.get('directionalClassName'), true);
-    });
+  triggerChildSlidesObserver() {
+    this.get('childSlides');
   }
 });
