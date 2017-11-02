@@ -10,8 +10,7 @@ module.exports = {
     'SLChrome',
     'SLFirefox',
     'SLIE11',
-    'SLSafari',
-    'SLSafariLast'
+    'SLSafari'
   ],
 
   'launch_in_dev': [
