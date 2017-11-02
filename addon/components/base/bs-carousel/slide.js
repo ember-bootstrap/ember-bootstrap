@@ -24,12 +24,24 @@ export default Ember.Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  active: false,
+  active: computed('isCurrentSlide', 'presentationState', function() {
+    return this.get('isCurrentSlide') && this.get('presentationState') === null;
+  }),
 
+  /**
+   * @private
+   * @property isCurrentSlide
+   * @type boolean
+   */
   isCurrentSlide: computed('currentSlide', function() {
     return this.get('currentSlide') === this;
   }),
 
+  /**
+   * @private
+   * @property isFollowingSlide
+   * @type boolean
+   */
   isFollowingSlide: computed('followingSlide', function() {
     return this.get('followingSlide') === this;
   }),
@@ -70,15 +82,18 @@ export default Ember.Component.extend(ComponentChild, {
    */
   right: false,
 
-  stateObserver: observer('state', function() {
-    let state = this.get('state');
+  /**
+   * Coordinates the execution of a presentation.
+   *
+   * @method presentationStateObserver
+   * @private
+   */
+  presentationStateObserver: observer('presentationState', function() {
+    let presentationState = this.get('presentationState');
     if (this.get('isCurrentSlide')) {
-      switch (state) {
+      switch (presentationState) {
         case 'didTransition':
           this.currentSlideDidTransition();
-          break;
-        case 'initialization':
-          this.currentSlideInitialization();
           break;
         case 'willTransit':
           this.currentSlideWillTransit();
@@ -86,7 +101,7 @@ export default Ember.Component.extend(ComponentChild, {
       }
     }
     if (this.get('isFollowingSlide')) {
-      switch (state) {
+      switch (presentationState) {
         case 'didTransition':
           this.followingSlideDidTransition();
           break;
@@ -97,35 +112,52 @@ export default Ember.Component.extend(ComponentChild, {
     }
   }),
 
-  currentSlideInitialization() {
-    if (this.get('directionalClassName') !== null && this.get('orderClassName') !== null) {
-      this.set(this.get('directionalClassName'), false);
-      this.set(this.get('orderClassName'), false);
-    }
-    this.set('active', true);
-  },
-
+  /**
+   * @method currentSlideDidTransition
+   * @private
+   */
   currentSlideDidTransition() {
     this.set(this.get('directionalClassName'), false);
     this.set('active', false);
   },
 
+  /**
+   * @method currentSlideWillTransit
+   * @private
+   */
   currentSlideWillTransit() {
+    this.set('active', true);
     next(this, function() {
       this.set(this.get('directionalClassName'), true);
     });
   },
 
+  /**
+   * @method followingSlideDidTransition
+   * @private
+   */
   followingSlideDidTransition() {
     this.set('active', true);
     this.set(this.get('directionalClassName'), false);
     this.set(this.get('orderClassName'), false);
   },
 
+  /**
+   * @method followingSlideWillTransit
+   * @private
+   */
   followingSlideWillTransit() {
     this.set(this.get('orderClassName'), true);
     next(this, function() {
+      this.reflow();
       this.set(this.get('directionalClassName'), true);
     });
+  },
+
+  /**
+   * Makes things more stable, especially when fast changing.
+   */
+  reflow() {
+    this.element.offsetHeight;
   }
 });

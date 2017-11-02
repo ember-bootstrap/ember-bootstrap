@@ -1,7 +1,7 @@
 {{#if showIndicators}}
   <ol class="carousel-indicators">
-    {{#each indicators as |indicator index|}}
-      <li class="{{if (bs-eq currentIndex index) "active"}}" onclick={{action "toSlide" index}} role="button"></li>
+    {{#each indicators as |indicator _index|}}
+      <li class="{{if (bs-eq currentIndex _index) "active"}}" onclick={{action "toSlide" _index}} role="button"></li>
     {{/each}}
   </ol>
 {{/if}}
@@ -12,7 +12,7 @@
     directionalClassName=directionalClassName
     followingSlide=followingSlide
     orderClassName=orderClassName
-    state=state
+    presentationState=presentationState
   ))}}
 </div>
 

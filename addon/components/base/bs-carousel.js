@@ -2,7 +2,6 @@ import CarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import Ember from 'ember';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
-import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 import { computed, observer } from '@ember/object';
 import { schedule } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
@@ -101,35 +100,37 @@ export default Ember.Component.extend(ComponentParent, {
    */
   childSlidesObserver: observer('childSlides', function() {
     let childSlides = this.get('childSlides');
-    if (childSlides.length > 0) {
-      // Sets new current index
-      let currentIndex = this.get('currentIndex');
-      if (currentIndex >= childSlides.length) {
-        currentIndex = childSlides.length - 1;
-        this.set('currentIndex', currentIndex);
-      }
-      // Automatic sliding
-      if (this.get('autoPlay')) {
-        this.get('waitIntervalToInitCycle').perform();
-      }
-      // Initial slide state
-      this.set('state', 'initialization');
+    if (childSlides.length <= 0) {
+      return;
     }
+    // Sets new current index
+    let currentIndex = this.get('currentIndex');
+    if (currentIndex >= childSlides.length) {
+      currentIndex = childSlides.length - 1;
+      this.set('currentIndex', currentIndex);
+    }
+    // Automatic sliding
+    if (this.get('autoPlay')) {
+      this.get('waitIntervalToInitCycle').perform();
+    }
+    // Initial slide state
+    this.set('presentationState', null);
   }),
 
   /**
-   * Listen to the provided starting index, you should see the mixin for more information.
+   * Indicates the current index of the current slide.
    *
    * @property currentIndex
    * @private
    */
-  currentIndex: listenTo('index'),
+  currentIndex: null,
 
   /**
    * The current slide object that is going to be used by the nested slides components.
    *
    * @property currentSlide
    * @private
+   *
    */
   currentSlide: computed('childSlides', 'currentIndex', function() {
     return this.get('childSlides').objectAt(this.get('currentIndex'));
@@ -161,6 +162,16 @@ export default Ember.Component.extend(ComponentParent, {
    */
   followingSlide: computed('childSlides', 'followingIndex', function() {
     return this.get('childSlides').objectAt(this.get('followingIndex'));
+  }),
+
+  /**
+   * This observer is the entry point for programmatically slide changing.
+   *
+   * @property indexObserver
+   * @private
+   */
+  indexObserver: observer('index', function() {
+    this.send('toSlide', this.get('index'));
   }),
 
   /**
@@ -200,6 +211,16 @@ export default Ember.Component.extend(ComponentParent, {
   orderClassName: null,
 
   /**
+   * The current state of the current presentation, can be either "didTransition"
+   * or "willTransit".
+   *
+   * @private
+   * @property presentationState
+   * @type string
+   */
+  presentationState: null,
+
+  /**
    * The class name to append to the previous control link element.
    *
    * @property prevControlClassName
@@ -221,16 +242,6 @@ export default Ember.Component.extend(ComponentParent, {
    * @type boolean
    */
   shouldRunAutomatically: computed.gt('interval', 0),
-
-  /**
-   * The current state of the current presentation, can be either "initialization", "didTransition"
-   * or "willTransite".
-   *
-   * @private
-   * @property state
-   * @type string
-   */
-  state: false,
 
   /**
    * Starts automatic sliding on page load.
@@ -385,8 +396,8 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   cycle: task(function* () {
-    this.get('transition').perform();
-    yield timeout(this.get('interval') + this.get('transitionDuration'));
+    yield this.get('transition').perform();
+    yield timeout(this.get('interval'));
     this.toAppropriateSlide();
   }).restartable(),
 
@@ -395,10 +406,14 @@ export default Ember.Component.extend(ComponentParent, {
    * @private
    */
   transition: task(function* () {
-    this.set('state', 'willTransit');
+    this.set('presentationState', 'willTransit');
     yield timeout(this.get('transitionDuration'));
-    this.set('state', 'didTransition');
-    this.setCurrentIndex();
+    this.set('presentationState', 'didTransition');
+    // Must change current index after execution of 'presentationStateObserver' method
+    // from child components.
+    schedule('afterRender', this, function() {
+      this.set('currentIndex', this.get('followingIndex'));
+    });
   }).drop(),
 
   /**
@@ -458,9 +473,13 @@ export default Ember.Component.extend(ComponentParent, {
     }
   },
 
+  /**
+   * Initial page loading configuration.
+   */
   didInsertElement() {
     this._super(...arguments);
     this.registerEvents();
+    this.set('currentIndex', this.get('index'));
     this.triggerChildSlidesObserver();
   },
 
@@ -512,15 +531,6 @@ export default Ember.Component.extend(ComponentParent, {
   },
 
   /**
-   * Must change current index after execution of 'stateObserver' method from child components.
-   */
-  setCurrentIndex() {
-    schedule('afterRender', this, function() {
-      this.set('currentIndex', this.get('followingIndex'));
-    });
-  },
-
-  /**
    * Sets the following slide index within the lower and upper bounds.
    *
    * @method setFollowingIndex
@@ -539,6 +549,9 @@ export default Ember.Component.extend(ComponentParent, {
 
   /**
    * Coordinates the correct slide movement direction.
+   *
+   * @method toAppropriateSlide
+   * @private
    */
   toAppropriateSlide() {
     if (this.get('ltr')) {
@@ -548,6 +561,10 @@ export default Ember.Component.extend(ComponentParent, {
     }
   },
 
+  /**
+   * @method triggerChildSlidesObserver
+   * @private
+   */
   triggerChildSlidesObserver() {
     this.get('childSlides');
   }
