@@ -1,38 +1,41 @@
 <h2>Carousel playground</h2>
 
-<p>You can change some parameters at runtime.</p>
+{{#bs-form model=this as |form|}}
+  <div class="row my-4">
+    <div class="col-sm-6">
+      {{form.element controlType='checkbox' label='continuouslyCycle' property='continuouslyCycle'}}
+      {{form.element controlType='number' label='index' max='2' min='0' property='index'}}
+      {{form.element controlType='number' label='interval' min='1' property='interval'}}
+      {{form.element controlType='checkbox' label='keyboard' property='keyboard'}}
+    </div>
+    <div class="col-sm-6">
+      {{form.element controlType='checkbox' label='ltr (left to right)' property='ltr'}}
+      {{form.element controlType='number' label='Number of slides' max='3' min='0' property='numberOfSlides'}}
+      {{form.element controlType='checkbox' label='pauseOnMouseEnter' property='pauseOnMouseEnter'}}
+      {{form.element controlType='checkbox' label='showControls' property='showControls'}}
+      {{form.element controlType='checkbox' label='showIndicators' property='showIndicators'}}
+    </div>
+  </div>
+{{/bs-form}}
 
-<div class='row'>
-  {{#bs-form class='col-md-3' model=this as |form|}}
-    {{form.element controlType='checkbox' label='continuouslyCycle' property='continuouslyCycle'}}
-    {{form.element controlType='number' label='interval' min='1' property='interval'}}
-    {{form.element controlType='checkbox' label='keyboard' property='keyboard'}}
-    {{form.element controlType='checkbox' label='Left-to-right' property='ltr'}}
-    {{form.element controlType='number' label='Number of slides' max='3' min='0' property='numberOfSlides'}}
-    {{form.element controlType='checkbox' label='pauseOnMouseEnter' property='pauseOnMouseEnter'}}
-    {{form.element controlType='checkbox' label='showControls' property='showControls'}}
-    {{form.element controlType='checkbox' label='showIndicators' property='showIndicators'}}
-  {{/bs-form}}
-
-  {{#bs-carousel 
-    autoPlay=true
-    class='col-md-9'
-    continuouslyCycle=continuouslyCycle
-    interval=integerInterval
-    keyboard=keyboard
-    ltr=ltr
-    model=this
-    pauseOnMouseEnter=pauseOnMouseEnter
-    showControls=showControls
-    showIndicators=showIndicators
-    as |car|}}
-    {{#each slides as |slide|}}
-      {{#car.slide}}
-        <img alt='{{slide.alt}}' src='{{slide.src}}'>
-      {{/car.slide}}
-    {{/each}}
-  {{/bs-carousel}}
-</div>
+{{#bs-carousel 
+  autoPlay=true
+  continuouslyCycle=continuouslyCycle
+  index=integerIndex
+  interval=integerInterval
+  keyboard=keyboard
+  ltr=ltr
+  model=this
+  pauseOnMouseEnter=pauseOnMouseEnter
+  showControls=showControls
+  showIndicators=showIndicators
+  as |car|}}
+  {{#each slides as |slide|}}
+    {{#car.slide}}
+      <img alt='{{slide.alt}}' src='{{slide.src}}'>
+    {{/car.slide}}
+  {{/each}}
+{{/bs-carousel}}
 
 <h2>Some controls properties are customizables.</h2>
 
