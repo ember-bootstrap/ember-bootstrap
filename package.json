@@ -90,7 +90,7 @@
     "ember-cli-babel": "^6.8.2",
     "ember-cli-build-config-editor": "0.5.0",
     "ember-cli-htmlbars": "^2.0.2",
-    "ember-popper": "^0.6.6",
+    "ember-popper": "^0.7.0",
     "ember-runtime-enumerable-includes-polyfill": "^2.0.0",
     "ember-wormhole": "^0.5.2",
     "findup-sync": "^1.0.0",
