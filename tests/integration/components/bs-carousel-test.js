@@ -42,11 +42,11 @@ function getActivatedSlide(index) {
   return find(`.carousel-inner div:nth-child(${index}).active`);
 }
 
-function waitTransitionTime(surplus = 225) {
+function waitTransitionTime(interval = 450) {
   return new Promise(function(resolve) {
     setTimeout(function() {
       resolve();
-    }, TRANSITION_DURATION + surplus);
+    }, TRANSITION_DURATION + interval);
   });
 }
 
@@ -99,13 +99,13 @@ testBS4('carousel has correct indicators and slides markup', function(assert) {
 // Parameters
 
 test('carousel autoPlay=false must not start sliding', async function(assert) {
-  this.render(hbs`{{#bs-carousel autoPlay=false interval=150 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel autoPlay=false interval=300 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   await waitTransitionTime();
   assert.ok(getActivatedSlide(1), 'autoPlay has correct behavior');
 });
 
 test('carousel autoPlay=true must start sliding', async function(assert) {
-  this.render(hbs`{{#bs-carousel autoPlay=true interval=150 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel autoPlay=true interval=300 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   await waitTransitionTime();
   assert.ok(getActivatedSlide(2), 'autoPlay has correct behavior');
 });
@@ -150,32 +150,32 @@ test('carousel interval=0 must not trigger automatic sliding', async function(as
 });
 
 test('carousel interval=(>0) must trigger automatic sliding', async function(assert) {
-  this.render(hbs`{{#bs-carousel autoPlay=true interval=150 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel autoPlay=true interval=300 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   await waitTransitionTime();
   assert.ok(getActivatedSlide(2), 'interval has correct behavior');
 });
 
 test('carousel ltr=false does right-to-left automatic sliding', async function(assert) {
-  this.render(hbs`{{#bs-carousel autoPlay=true interval=150 ltr=false as |car|}}{{car.slide}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel autoPlay=true interval=300 ltr=false as |car|}}{{car.slide}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   await waitTransitionTime();
   assert.ok(getActivatedSlide(3), 'ltr has correct behavior');
 });
 
 test('carousel ltr=true does left-to-right automatic sliding', async function(assert) {
-  this.render(hbs`{{#bs-carousel autoPlay=true interval=150 ltr=true as |car|}}{{car.slide}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel autoPlay=true interval=300 ltr=true as |car|}}{{car.slide}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   await waitTransitionTime();
   assert.ok(getActivatedSlide(2), 'ltr has correct behavior');
 });
 
 test('carousel pauseOnMouseEnter=false must not pause automatic sliding', async function(assert) {
-  this.render(hbs`{{#bs-carousel autoPlay=true interval=150 pauseOnMouseEnter=false as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel autoPlay=true interval=300 pauseOnMouseEnter=false as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   triggerEvent('.carousel', 'mouseenter');
   await waitTransitionTime();
   assert.ok(getActivatedSlide(2), 'pauseOnMouseEnter has correct behavior');
 });
 
 test('carousel pauseOnMouseEnter=true must pause automatic sliding', async function(assert) {
-  this.render(hbs`{{#bs-carousel autoPlay=true interval=150 pauseOnMouseEnter=true as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  this.render(hbs`{{#bs-carousel autoPlay=true interval=300 pauseOnMouseEnter=true as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
   triggerEvent('.carousel', 'mouseenter');
   await waitTransitionTime();
   assert.ok(getActivatedSlide(1), 'pauseOnMouseEnter has correct behavior');
