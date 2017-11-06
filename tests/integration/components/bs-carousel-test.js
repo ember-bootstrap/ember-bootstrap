@@ -157,13 +157,13 @@ test('carousel interval=(>0) must trigger automatic sliding', async function(ass
 
 test('carousel ltr=false does right-to-left automatic sliding', async function(assert) {
   this.render(hbs`{{#bs-carousel autoPlay=true interval=30 ltr=false as |car|}}{{car.slide}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
-  await waitTransitionTime(TRANSITION_DURATION + 50);
+  await waitTransitionTime();
   assert.ok(getActivatedSlide(3), 'ltr has correct behavior');
 });
 
 test('carousel ltr=true does left-to-right automatic sliding', async function(assert) {
   this.render(hbs`{{#bs-carousel autoPlay=true interval=30 ltr=true as |car|}}{{car.slide}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
-  await waitTransitionTime(TRANSITION_DURATION + 50);
+  await waitTransitionTime();
   assert.ok(getActivatedSlide(2), 'ltr has correct behavior');
 });
 
