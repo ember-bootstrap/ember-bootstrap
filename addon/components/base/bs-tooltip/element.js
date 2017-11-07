@@ -10,11 +10,5 @@ import ContextualHelpElement from '../bs-contextual-help/element';
  @private
  */
 export default ContextualHelpElement.extend({
-  layout,
-
-  /**
-   * @property arrowClass
-   * @private
-   */
-  arrowClass: 'tooltip-arrow'
+  layout
 });

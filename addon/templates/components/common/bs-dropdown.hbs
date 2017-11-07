@@ -2,7 +2,7 @@
   (hash
     button=(component "bs-dropdown/button" dropdown=this onClick=(action "toggleDropdown"))
     toggle=(component "bs-dropdown/toggle" dropdown=this inNav=inNav onClick=(action "toggleDropdown"))
-    menu=(component "bs-dropdown/menu")
+    menu=(component "bs-dropdown/menu" isOpen=isOpen direction=direction inNav=inNav toggleElement=toggleElement)
     isOpen=isOpen
   )
 }}

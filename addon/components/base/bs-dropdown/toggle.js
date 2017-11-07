@@ -28,6 +28,13 @@ export default Component.extend(DropdownToggle, {
   attributeBindings: ['href'],
 
   /**
+   * @property inNav
+   * @type {boolean}
+   * @private
+   */
+  inNav: false,
+
+  /**
    * Computed property to generate a `href="#"` attribute when `tagName` is "a".
    *
    * @property href

@@ -14,8 +14,6 @@ export function setupForPositioning(align = 'left') {
   assign(document.getElementById('ember-testing').style, {
     transform: 'none'
   });
-
-  find('a').style.marginTop = 200;
 }
 
 function offset(el) {
@@ -32,8 +30,8 @@ export function assertPositioning(assert, selector = '.tooltip') {
 
   let tooltip = find(selector);
   let trigger = find('#target');
-  let marginTop = parseInt(window.getComputedStyle(tooltip).marginTop, 10);
-  let tooltipPos = Math.round(offset(tooltip).top + tooltip.offsetHeight - marginTop);
+  let margin = -parseInt(window.getComputedStyle(tooltip).marginTop, 10) + parseInt(window.getComputedStyle(tooltip).marginBottom, 10);
+  let tooltipPos = Math.round(offset(tooltip).top + tooltip.offsetHeight + margin);
   let triggerPos = Math.round(offset(trigger).top);
   assert.ok(Math.abs(triggerPos - tooltipPos) <= 1, `Expected position: ${triggerPos}, actual: ${tooltipPos}`);
 }

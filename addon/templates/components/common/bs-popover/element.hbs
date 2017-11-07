@@ -10,9 +10,9 @@
   onCreate=(action "updatePlacement")
   onUpdate=(action "updatePlacement")
 }}
-  <div class="arrow"></div>
+  <div class={{arrowClass}}></div>
   {{#if hasTitle}}
-    <h3 class="popover-title">{{title}}</h3>
+    <h3 class={{titleClass}}>{{title}}</h3>
   {{/if}}
-  <div class="popover-content">{{yield}}</div>
+  <div class={{contentClass}}>{{yield}}</div>
 {{/ember-popper}}

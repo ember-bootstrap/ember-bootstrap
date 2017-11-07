@@ -1,4 +1,3 @@
-import { readOnly } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { bind } from '@ember/runloop';
@@ -172,7 +171,9 @@ export default Component.extend({
    * @property toggleElement
    * @private
    */
-  toggleElement: readOnly('toggle.element'),
+  toggleElement: computed('toggle', function() {
+    return typeof FastBoot === 'undefined' ? this.get('toggle.element') || null : null;
+  }),
 
   /**
    * Reference to the child toggle (Toggle or Button)

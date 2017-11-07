@@ -39,8 +39,8 @@ test('accordion with preselected item has this item expanded', function(assert) 
   {{/bs-accordion}}`);
 
   assert.notOk(find(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).classList.contains('collapsed'), `${accordionItemHeadClass()} has not collapsed class`);
-  assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains('collapse'), `${accordionClassFor('collapse')} has collapse class`);
-  assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains(visibilityClass()), `${accordionClassFor('collapse')} has ${visibilityClass()} class`);
+  assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains('collapse'), 'tabpanel has collapse class');
+  assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains(visibilityClass()), `tabpanel has ${visibilityClass()} class`);
 });
 
 test('changing selected item expands this item', function(assert) {
@@ -56,8 +56,8 @@ test('changing selected item expands this item', function(assert) {
   // wait for transitions to complete
   setTimeout(() => {
     assert.notOk(find(`.${accordionClassFor()}:last-child .${accordionItemHeadClass()}`).classList.contains('collapsed'), `${accordionItemHeadClass()} has not collapsed class`);
-    assert.ok(find(`.${accordionClassFor()}:last-child .${accordionClassFor('collapse')}`).classList.contains('collapse'), `${accordionClassFor('collapse')} has collapse class`);
-    assert.ok(find(`.${accordionClassFor()}:last-child .${accordionClassFor('collapse')}`).classList.contains(visibilityClass()), `${accordionClassFor('collapse')} is visible`);
+    assert.ok(find(`.${accordionClassFor()}:last-child [role="tabpanel"]`).classList.contains('collapse'), 'tabpanel has collapse class');
+    assert.ok(find(`.${accordionClassFor()}:last-child [role="tabpanel"]`).classList.contains(visibilityClass()), 'tabpanel is visible');
 
     done();
   }, 500);
@@ -74,8 +74,8 @@ test('clicking collapsed item expands it', async function(assert) {
   // wait for transitions to complete
   setTimeout(() => {
     assert.notOk(find(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).classList.contains('collapsed'), `${accordionItemHeadClass()} has not collapsed class`);
-    assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains('collapse'), `${accordionClassFor('collapse')} has collapse class`);
-    assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains(visibilityClass()), `${accordionClassFor('collapse')} is visible`);
+    assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains('collapse'), 'tabpanel has collapse class');
+    assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains(visibilityClass()), 'tabpanel is visible');
 
     done();
   }, 500);
@@ -88,8 +88,8 @@ test('clicking expanded item collapses it', async function(assert) {
   {{/bs-accordion}}`);
 
   assert.notOk(find(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).classList.contains('collapsed'), `${accordionItemHeadClass()} has not collapsed class`);
-  assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains('collapse'), `${accordionClassFor('collapse')} has collapse class`);
-  assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains(visibilityClass()), `${accordionClassFor('collapse')} is visible`);
+  assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains('collapse'), 'tabpanel has collapse class');
+  assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains(visibilityClass()), 'tabpanel is visible');
 
   await click(`.${accordionItemHeadClass()}`);
   let done = assert.async();
@@ -97,8 +97,8 @@ test('clicking expanded item collapses it', async function(assert) {
   // wait for transitions to complete
   setTimeout(() => {
     assert.ok(find(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).classList.contains('collapsed'), `${accordionItemHeadClass()} has collapsed class`);
-    assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains('collapse'), `${accordionClassFor('collapse')} has collapse class`);
-    assert.notOk(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains(visibilityClass()), `${accordionClassFor('collapse')} is hidden`);
+    assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains('collapse'), 'tabpanel has collapse class');
+    assert.notOk(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains(visibilityClass()), 'tabpanel is hidden');
 
     done();
   }, 500);
@@ -132,8 +132,8 @@ test('prevents changing selection when onChange returns false', async function(a
   // wait for transitions to complete
   setTimeout(() => {
     assert.ok(find(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).classList.contains('collapsed'), `${accordionItemHeadClass()} has collapsed class`);
-    assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains('collapse'), `${accordionClassFor('collapse')} has collapse class`);
-    assert.notOk(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains(visibilityClass()), `${accordionClassFor('collapse')} is hidden`);
+    assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains('collapse'), 'tabpanel has collapse class');
+    assert.notOk(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains(visibilityClass()), 'tabpanel is hidden');
 
     done();
   }, 500);
@@ -163,8 +163,8 @@ test('yields change action to add custom behaviour', async function(assert) {
   // wait for transitions to complete
   setTimeout(() => {
     assert.notOk(find(`.${accordionClassFor()}:last-child .${accordionItemHeadClass()}`).classList.contains('collapsed'), `${accordionItemHeadClass()} has not collapsed class`);
-    assert.ok(find(`.${accordionClassFor()}:last-child .${accordionClassFor('collapse')}`).classList.contains('collapse'), `${accordionClassFor('collapse')} has collapse class`);
-    assert.ok(find(`.${accordionClassFor()}:last-child .${accordionClassFor('collapse')}`).classList.contains(visibilityClass()), `${accordionClassFor('collapse')} is visible`);
+    assert.ok(find(`.${accordionClassFor()}:last-child [role="tabpanel"]`).classList.contains('collapse'), 'tabpanel has collapse class');
+    assert.ok(find(`.${accordionClassFor()}:last-child [role="tabpanel"]`).classList.contains(visibilityClass()), 'tabpanel is visible');
 
     done();
   }, 500);
@@ -185,8 +185,8 @@ test('clicking collapsed item with contextual title expands it', async function(
   // wait for transitions to complete
   setTimeout(() => {
     assert.notOk(find(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).classList.contains('collapsed'), `${accordionItemHeadClass()} has not collapsed class`);
-    assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains('collapse'), `${accordionClassFor('collapse')} has collapse class`);
-    assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains(visibilityClass()), `${accordionClassFor('collapse')} is visible`);
+    assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains('collapse'), 'tabpanel has collapse class');
+    assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains(visibilityClass()), 'tabpanel is visible');
 
     done();
   }, 500);
@@ -202,8 +202,8 @@ test('clicking expanded item with contextual title collapses it', async function
   {{/bs-accordion}}`);
 
   assert.notOk(find(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).classList.contains('collapsed'), `${accordionItemHeadClass()} has not collapsed class`);
-  assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains('collapse'), `${accordionClassFor('collapse')} has collapse class`);
-  assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains(visibilityClass()), `${accordionClassFor('collapse')} is visible`);
+  assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains('collapse'), 'tabpanel has collapse class');
+  assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains(visibilityClass()), 'tabpanel is visible');
 
   await click(`.${accordionItemHeadClass()}`);
 
@@ -211,8 +211,8 @@ test('clicking expanded item with contextual title collapses it', async function
   // wait for transitions to complete
   setTimeout(() => {
     assert.ok(find(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).classList.contains('collapsed'), `${accordionItemHeadClass()} has collapsed class`);
-    assert.ok(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains('collapse'), `${accordionClassFor('collapse')} has collapse class`);
-    assert.notOk(find(`.${accordionClassFor()}:first-child .${accordionClassFor('collapse')}`).classList.contains(visibilityClass()), `${accordionClassFor('collapse')} is hidden`);
+    assert.ok(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains('collapse'), 'tabpanel has collapse class');
+    assert.notOk(find(`.${accordionClassFor()}:first-child [role="tabpanel"]`).classList.contains(visibilityClass()), 'tabpanel is hidden');
 
     done();
   }, 500);

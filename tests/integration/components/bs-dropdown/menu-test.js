@@ -17,7 +17,7 @@ testBS3('dropdown menu has correct markup', function(assert) {
 });
 
 testBS4('dropdown menu has correct markup', function(assert) {
-  this.render(hbs`{{#bs-dropdown/menu align="right"}}Something{{/bs-dropdown/menu}}`);
+  this.render(hbs`{{#bs-dropdown/menu align="right" toggleElement=null}}Something{{/bs-dropdown/menu}}`);
 
   assert.equal(find(':first-child').tagName, 'DIV', 'menu is a div (<div>) by default');
   assert.equal(find('div').classList.contains('dropdown-menu'), true, 'menu has dropdown-menu class');
@@ -32,7 +32,7 @@ testBS3('dropdown menu yields item component', function(assert) {
 });
 
 testBS4('dropdown menu yields item component', function(assert) {
-  this.render(hbs`{{#bs-dropdown/menu as |ddm|}}{{#ddm.item}}Dummy{{/ddm.item}}{{/bs-dropdown/menu}}`);
+  this.render(hbs`{{#bs-dropdown/menu toggleElement=null as |ddm|}}{{#ddm.item}}Dummy{{/ddm.item}}{{/bs-dropdown/menu}}`);
 
   assert.equal(findAll('.dropdown-item').length, 0, 'has item component with no markup');
 });

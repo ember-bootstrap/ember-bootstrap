@@ -1,22 +1,35 @@
 import { computed } from '@ember/object';
 import Navbar from 'ember-bootstrap/components/base/bs-navbar';
+import { isBlank } from '@ember/utils';
 
 export default Navbar.extend({
   classNameBindings: ['breakpointClass', 'backgroundClass'],
 
-  type: 'light',
+  type: computed('appliedType', {
+    get() {
+      return this.get('appliedType');
+    },
+
+    set(key, value) { // eslint-disable-line no-unused
+      let newValue = (!value || value === 'default') ? 'light' : value;
+      this.set('appliedType', newValue);
+      return newValue;
+    }
+  }),
+
+  appliedType: 'light',
 
   /**
    * Defines the responsive toggle breakpoint size. Options are the standard
-   * two character Bootstrap size abbreviations. Used to set the `navbar-toggleable-*`
+   * two character Bootstrap size abbreviations. Used to set the `navbar-expand[-*]`
    * class.
    *
    * @property toggleBreakpoint
    * @type String
-   * @default 'md'
+   * @default 'lg'
    * @public
    */
-  toggleBreakpoint: 'md',
+  toggleBreakpoint: 'lg',
 
   /**
    * Sets the background color for the navbar. Can be any color
@@ -24,15 +37,19 @@ export default Navbar.extend({
    *
    * @property backgroundColor
    * @type String
-   * @default 'faded'
+   * @default 'light'
    * @public
    */
-  backgroundColor: 'faded',
+  backgroundColor: 'light',
 
   breakpointClass: computed('toggleBreakpoint', function() {
     let toggleBreakpoint = this.get('toggleBreakpoint');
 
-    return `navbar-toggleable-${toggleBreakpoint}`;
+    if (isBlank(toggleBreakpoint)) {
+      return 'navbar-expand';
+    } else {
+      return `navbar-expand-${toggleBreakpoint}`;
+    }
   }),
 
   backgroundClass: computed('backgroundColor', function() {

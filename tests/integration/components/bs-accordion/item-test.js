@@ -7,6 +7,7 @@ import {
   accordionClassFor,
   accordionItemBodyClass,
   accordionItemHeadClass,
+  accordionTitleSelector,
   test,
   visibilityClass
 } from '../../../helpers/bootstrap-test';
@@ -20,9 +21,9 @@ test('accordion item has correct default markup', function(assert) {
   assert.equal(find(':first-child').classList.contains(accordionClassFor()), true, `has ${accordionClassFor()} class`);
   assert.equal(find(':first-child').classList.contains(accordionClassFor('default')), true, `has ${accordionClassFor('default')} class`);
   assert.equal(find(`.${accordionItemHeadClass()}`).classList.contains('collapsed'), true, `has ${accordionItemHeadClass()} class`);
-  assert.equal(find(`.${accordionClassFor('collapse')}`).classList.contains('collapse'), true, `${accordionClassFor('collapse')} has collapse class`);
-  assert.equal(find(`.${accordionClassFor('collapse')}`).classList.contains(visibilityClass()), false, `${accordionClassFor('collapse')} is hidden`);
-  assert.equal(find(`.${accordionClassFor('title')}`).textContent.trim(), 'TITLE', `${accordionClassFor('title')} has correct title`);
+  assert.equal(find('[role="tabpanel"]').classList.contains('collapse'), true, 'has collapse class');
+  assert.equal(find('.collapse').classList.contains(visibilityClass()), false, '.collapse is hidden');
+  assert.equal(find(accordionTitleSelector()).textContent.trim(), 'TITLE', `${accordionTitleSelector()} has correct title`);
   assert.equal(find(`.${accordionItemBodyClass()}`).textContent.trim(), 'CONTENT', `${accordionItemBodyClass()} has correct title`);
 });
 
@@ -41,6 +42,6 @@ test('renders a contextual title block', function(assert) {
     {{#aitem.body}}CONTENT{{/aitem.body}}
   {{/bs-accordion/item}}`);
 
-  assert.equal(find(`.${accordionClassFor('title')}`).textContent.trim(), 'TITLE', `${accordionClassFor('title')} has correct title`);
+  assert.equal(find(accordionTitleSelector()).textContent.trim(), 'TITLE', `${accordionClassFor('title')} has correct title`);
   assert.equal(find(`.${accordionItemBodyClass()}`).textContent.trim(), 'CONTENT', `${accordionItemBodyClass()} has correct content`);
 });
