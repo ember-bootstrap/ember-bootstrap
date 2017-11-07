@@ -1,8 +1,9 @@
 ---
 language: node_js
 node_js:
-  # revert to node 4 once https://github.com/kybishop/ember-popper/pull/45 is merged and released
-  - "6"
+  # we recommend testing addons with the same minimum supported node version as Ember CLI
+  # so that your addon works for all apps
+  - "4"
 
 sudo: false
 dist: trusty
@@ -22,6 +23,8 @@ env:
     - SAUCE_ACCESS_KEY="16ef42b7-b940-4a05-bb1e-9e3fef3bf634"
     # greenkeeper
     - secure: QKF4gJdgWzwTk6eMMVZvP+FBs7Ab3fFYnXfLHHNbQOkIVrwO0D7ns3Umtea9lMIt1bQOq6VHmcsf/BUhi4L+oLEXAZ827GShDKhojqGIDg4poaA9kECtUzsIUnKB+bYkvadRsuUP0KjxNbSM7nVchUDTgRvt0OZZ0rP3q4/oQC8=
+    # See https://git.io/vdao3 for details.
+    - JOBS=1
 
   matrix:
     - EMBER_TRY_SCENARIO=ember-2.3
