@@ -60,7 +60,7 @@
     "ember-power-select-blockless": "^0.3.0",
     "ember-resolver": "^4.0.0",
     "ember-sinon": "^1.0.0",
-    "ember-sinon-qunit": "simonihmig/ember-sinon-qunit#fix-settimeout-ie",
+    "ember-sinon-qunit": "^2.0.0",
     "ember-source": "~2.16.0",
     "eslint-plugin-ember-suave": "^1.0.0",
     "glob": "^7.1.1",
