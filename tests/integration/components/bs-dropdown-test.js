@@ -1,6 +1,12 @@
 import { find, click } from 'ember-native-dom-helpers';
 import { moduleForComponent } from 'ember-qunit';
-import { dropdownVisibilityElementSelector, isHidden, isVisible, openClass, test } from '../../helpers/bootstrap-test';
+import {
+  dropdownVisibilityElementSelector,
+  isHidden,
+  isVisible,
+  openClass,
+  test
+} from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('bs-dropdown', 'Integration | Component | bs-dropdown', {

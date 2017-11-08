@@ -1,5 +1,4 @@
-import { equal } from '@ember/object/computed';
-import { computed } from '@ember/object';
+import { equal, and } from '@ember/object/computed';
 import FormGroup from 'ember-bootstrap/components/base/bs-form/group';
 
 export default FormGroup.extend({
@@ -24,7 +23,7 @@ export default FormGroup.extend({
    */
   isHorizontal: equal('formLayout', 'horizontal').readOnly(),
 
-  isInline: computed.equal('formLayout', 'inline').readOnly(),
+  isInline: equal('formLayout', 'inline').readOnly(),
 
-  isInlineCheckbox: computed.and('isCheckbox', 'isInline').readOnly()
+  isInlineCheckbox: and('isCheckbox', 'isInline').readOnly()
 });
