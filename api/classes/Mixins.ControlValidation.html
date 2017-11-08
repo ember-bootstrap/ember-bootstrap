@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/mixins/dropdown-toggle.js - ember-bootstrap</title>
+    <title>Mixins.ControlValidation - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -48,55 +48,71 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/dropdown-toggle.js <small>File</small></h1>
+    <h1>Mixins.ControlValidation <small>Class</small></h1>
 </div>
 
-<div class="file">
-    <pre class="prettyprint linenums">
-import Mixin from &#x27;@ember/object/mixin&#x27;;
-import { schedule } from &#x27;@ember/runloop&#x27;;
+<div class="well well-small">
+        <span class="label label-private">private</span>
 
-/**
- * Mixin for components that act as dropdown toggles.
- *
- * @class DropdownToggle
- * @namespace Mixins
- * @private
- */
-export default Mixin.create({
-  classNames: [&#x27;dropdown-toggle&#x27;],
 
-  /**
-   * @property ariaRole
-   * @default button
-   * @type string
-   * @protected
-   */
-  ariaRole: &#x27;button&#x27;,
 
-  /**
-   * Reference to the parent dropdown component
-   *
-   * @property dropdown
-   * @type {Components.Dropdown}
-   * @private
-   */
-  dropdown: null,
+        <div class="foundat">
+            Defined in: <a href="../files/addon_mixins_control-validation.js.html#l4"><code>addon&#x2F;mixins&#x2F;control-validation.js:4</code></a>
+        </div>
 
-  didReceiveAttrs() {
-    this._super(...arguments);
-    let dropdown = this.get(&#x27;dropdown&#x27;);
-    if (dropdown) {
-      schedule(&#x27;sync&#x27;, this, function() {
-        if (!this.get(&#x27;isDestroyed&#x27;)) {
-          dropdown.set(&#x27;toggle&#x27;, this);
-        }
-      });
-    }
-  }
-});
 
-    </pre>
+</div>
+
+
+<div class="well well-small">
+    <p>Mixin for BS4 validation styles added to form controls</p>
+
+</div>
+
+
+    <form id="options-form" class="form-inline" style="margin-bottom: 1em;">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
+
+    </ul>
+
+    <div class="tab-content">
+        <div id="index" class="tab-pane active">
+            <h2 class="off-left">Item Index</h2>
+
+
+
+
+        </div>
+
+
+
+
+    </div>
 </div>
                     </div>
                 </div>

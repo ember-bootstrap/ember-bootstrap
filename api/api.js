@@ -64,6 +64,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Mixins.ComponentChild",
         "Mixins.ComponentParent",
         "Mixins.ControlAttributes",
+        "Mixins.ControlValidation",
         "Mixins.DropdownToggle",
         "Mixins.SizeClass",
         "Mixins.SubComponent",

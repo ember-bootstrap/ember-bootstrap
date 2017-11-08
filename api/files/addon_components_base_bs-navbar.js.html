@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.3</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -137,7 +137,7 @@ import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
 
  Bootstrap 4 changed the default navbar styling option from &#x60;navbar-default&#x60; to &#x60;navbar-light&#x60;.
  If you explicitly specified &quot;default&quot; in Bootstrap 3 and are migrating, you will need to change
- this in your code. Both versions retain the &#x60;navbar-inverse&#x60; style.
+ this in your code. Bootstrap 4 changes &#x60;navbar-inverse&#x60; to &#x60;navbar-dark&#x60;.
 
  Bootstrap 4 navbars are fluid by default without the need for an additional container. An
  additional container is added like with Bootstrap 3 if &#x60;fluid&#x60; is &#x60;false&#x60;.
@@ -297,12 +297,12 @@ export default Component.extend(TypeClass, {
 
   /**
    * Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard
-   * two character Bootstrap size abbreviations. Used to set the &#x60;navbar-toggleable-*&#x60;
+   * two character Bootstrap size abbreviations. Used to set the &#x60;navbar-expand-*&#x60;
    * class.
    *
    * @property toggleBreakpoint
    * @type String
-   * @default &#x27;md&#x27;
+   * @default &#x27;lg&#x27;
    * @public
    */
 
@@ -313,7 +313,7 @@ export default Component.extend(TypeClass, {
    *
    * @property backgroundColor
    * @type String
-   * @default &#x27;faded&#x27;
+   * @default &#x27;light&#x27;
    * @public
    */
 });
@@ -391,6 +391,7 @@ export default Component.extend(TypeClass, {
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>

@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.3</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -427,10 +427,6 @@ to customize that existing component:</p>
                                 <a href="#" data-tabid="#properties" data-anchor="#property_customWarning" data-tablink="customWarning">customWarning</a>
 
                             </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_errorIcon" data-tablink="errorIcon">errorIcon</a>
-
-                            </li>
                             <li class="index-item property protected">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_errors" data-tablink="errors">errors</a>
 
@@ -467,16 +463,8 @@ to customize that existing component:</p>
                                 <a href="#" data-tabid="#properties" data-anchor="#property_hasErrors" data-tablink="hasErrors">hasErrors</a>
 
                             </li>
-                            <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_hasFeedback" data-tablink="hasFeedback">hasFeedback</a>
-
-                            </li>
                             <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_hasHelpText" data-tablink="hasHelpText">hasHelpText</a>
-
-                            </li>
-                            <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_hasIconForValidationState" data-tablink="hasIconForValidationState">hasIconForValidationState</a>
 
                             </li>
                             <li class="index-item property private">
@@ -509,14 +497,6 @@ to customize that existing component:</p>
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_horizontalLabelGridClass" data-tablink="horizontalLabelGridClass">horizontalLabelGridClass</a>
-
-                            </li>
-                            <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_iconName" data-tablink="iconName">iconName</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_infoIcon" data-tablink="infoIcon">infoIcon</a>
 
                             </li>
                             <li class="index-item property public">
@@ -571,20 +551,12 @@ to customize that existing component:</p>
                                 <a href="#" data-tabid="#properties" data-anchor="#property_showValidationOn" data-tablink="showValidationOn">showValidationOn</a>
 
                             </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_successIcon" data-tablink="successIcon">successIcon</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
+                            <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_useIcons" data-tablink="useIcons">useIcons</a>
 
                             </li>
                             <li class="index-item property private inherited">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_validation" data-tablink="validation">validation</a>
-
-                            </li>
-                            <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_validationClass" data-tablink="validationClass">validationClass</a>
 
                             </li>
                             <li class="index-item property private">
@@ -593,10 +565,6 @@ to customize that existing component:</p>
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_value" data-tablink="value">value</a>
-
-                            </li>
-                            <li class="index-item property public inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_warningIcon" data-tablink="warningIcon">warningIcon</a>
 
                             </li>
                     </ul>
@@ -772,7 +740,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_classTypePrefix">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l36"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:36</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l31"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:31</code></a>
                             </p>
                     
                     
@@ -917,42 +885,31 @@ to customize that existing component:</p>
                     
                     
                     </div>
-                    <div id="property_errorIcon" class="property item public inherited">
-                        <h3 class="name">errorIcon
-                            <span class="small">string</span>
+                    <div id="property_errors" class="property item protected">
+                        <h3 class="name">errors
+                            <span class="small">array</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-public">public</span>
+                            <span class="label label-protected">protected</span>
                     
                     
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.FormGroup.html#property_errorIcon">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l96"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:96</code></a>
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-form_element.js.html#l453"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:453</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            The icon classes to be used for a feedback icon in a "error" validation state.
-                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-                    rendered if <code>useIcons</code> is false.
+                            <p>The array of warning messages from the <code>model</code>'s validation.</p>
                     
-                    You can change this globally by setting the <code>formValidationErrorIcon</code> property of
-                    the ember-bootstrap configuration in your config/environment.js file. If your are
-                    using FontAwesome for example:
-                    
-                    <code>&#x60;</code>js
-                    ENV['ember-bootstrap'] = {
-                      formValidationErrorIcon: 'fa fa-times'
-                    }
-                    <code>&#x60;</code>
                         </div>
                     
                     
@@ -982,36 +939,6 @@ to customize that existing component:</p>
                     
                         <div class="description">
                             <p>The array of error messages from the <code>model</code>'s validation.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_errors" class="property item protected">
-                        <h3 class="name">errors
-                            <span class="small">array</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-protected">protected</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_element.js.html#l453"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:453</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The array of warning messages from the <code>model</code>'s validation.</p>
                     
                         </div>
                     
@@ -1230,35 +1157,6 @@ to customize that existing component:</p>
                     
                     
                     </div>
-                    <div id="property_hasFeedback" class="property item private inherited">
-                        <h3 class="name">hasFeedback
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.FormGroup.html#property_hasFeedback">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l64"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:64</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            Computed property which is true if the form group is showing a validation icon
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_hasHelpText" class="property item private">
                         <h3 class="name">hasHelpText
                             <span class="small">boolean</span>
@@ -1276,35 +1174,6 @@ to customize that existing component:</p>
                                     <p>
                                     Defined in
                             <a href="../files/addon_components_base_bs-form_element.js.html#l428"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:428</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_hasIconForValidationState" class="property item private inherited">
-                        <h3 class="name">hasIconForValidationState
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.FormGroup.html#property_hasIconForValidationState">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l178"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:178</code></a>
                             </p>
                     
                     
@@ -1362,7 +1231,7 @@ to customize that existing component:</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Components.FormGroup.html#property_hasValidation">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l54"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:54</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l38"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:38</code></a>
                             </p>
                     
                     
@@ -1548,84 +1417,6 @@ to customize that existing component:</p>
                             <p>The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
                     property of the parent form. The corresponding grid class for form controls is automatically computed.</p>
                     
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_iconName" class="property item private inherited">
-                        <h3 class="name">iconName
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.FormGroup.html#property_iconName">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l167"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:167</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_infoIcon" class="property item public inherited">
-                        <h3 class="name">infoIcon
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.FormGroup.html#property_infoIcon">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l138"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:138</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The icon classes to be used for a feedback icon in a "info" validation state.
-                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-                    rendered if <code>useIcons</code> is false.
-                    
-                    You can change this globally by setting the <code>formValidationInfoIcon</code> property of
-                    the ember-bootstrap configuration in your config/environment.js file. If your are
-                    using FontAwesome for example:
-                    
-                    <code>&#x60;</code>js
-                    ENV['ember-bootstrap'] = {
-                      formValidationInfoIcon: 'fa fa-info-circle
-                    }
-                    <code>&#x60;</code>
-                    
-                    The "info" validation state is not supported in Bootstrap CSS, but can be easily added
-                    using the following LESS style:
-                    <code>&#x60;</code>less
-                    .has-info {
-                      .form-control-validation(@state-info-text; @state-info-text; @state-info-bg);
-                    }
-                    <code>&#x60;</code>
                         </div>
                     
                     
@@ -2028,48 +1819,6 @@ to customize that existing component:</p>
                     
                     
                     </div>
-                    <div id="property_successIcon" class="property item public inherited">
-                        <h3 class="name">successIcon
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.FormGroup.html#property_successIcon">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l74"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:74</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The icon classes to be used for a feedback icon in a "success" validation state.
-                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-                    rendered if <code>useIcons</code> is false.
-                    
-                    You can change this globally by setting the <code>formValidationSuccessIcon</code> property of
-                    the ember-bootstrap configuration in your config/environment.js file. If your are
-                    using FontAwesome for example:
-                    
-                    <code>&#x60;</code>js
-                    ENV['ember-bootstrap'] = {
-                      formValidationSuccessIcon: 'fa fa-check'
-                    }
-                    <code>&#x60;</code>
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;glyphicon glyphicon-ok&#x27;</p>
-                    
-                    
-                    </div>
                     <div id="property_useIcons" class="property item public">
                         <h3 class="name">useIcons
                             <span class="small">boolean</span>
@@ -2084,11 +1833,8 @@ to customize that existing component:</p>
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="../classes/Components.FormGroup.html#property_useIcons">
-                                    Components.FormGroup
-                                </a>
-                                but overwritten in
+                                    <p>
+                                    Defined in
                             <a href="../files/addon_components_base_bs-form_element.js.html#l660"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:660</code></a>
                             </p>
                     
@@ -2132,35 +1878,6 @@ to customize that existing component:</p>
                             <p>The validation (&quot;error&quot; (BS3)/&quot;danger&quot; (BS4), &quot;warning&quot;, or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
                     models validation state.</p>
                     
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_validationClass" class="property item private inherited">
-                        <h3 class="name">validationClass
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.FormGroup.html#property_validationClass">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l203"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:203</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
                         </div>
                     
                     
@@ -2226,47 +1943,6 @@ to customize that existing component:</p>
                     <p>Note: you lose the ability to validate this form element by directly binding to its value. It is recommended
                     to use the <code>property</code> feature instead.</p>
                     
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_warningIcon" class="property item public inherited">
-                        <h3 class="name">warningIcon
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Components.FormGroup.html#property_warningIcon">Components.FormGroup</a>:
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l117"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:117</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The icon classes to be used for a feedback icon in a "warning" validation state.
-                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-                    rendered if <code>useIcons</code> is false.
-                    
-                    You can change this globally by setting the <code>formValidationWarningIcon</code> property of
-                    the ember-bootstrap configuration in your config/environment.js file. If your are
-                    using FontAwesome for example:
-                    
-                    <code>&#x60;</code>js
-                    ENV['ember-bootstrap'] = {
-                      formValidationWarningIcon: 'fa fa-warning'
-                    }
-                    <code>&#x60;</code>
                         </div>
                     
                     
@@ -2498,6 +2174,7 @@ to customize that existing component:</p>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>

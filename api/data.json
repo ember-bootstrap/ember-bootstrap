@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "1.0.0-rc.3"
+        "version": "1.0.0-rc.4"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -698,6 +698,17 @@
                 "Mixins": 1
             }
         },
+        "addon/mixins/control-validation.js": {
+            "name": "addon/mixins/control-validation.js",
+            "modules": {},
+            "classes": {
+                "Mixins.ControlValidation": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Mixins": 1
+            }
+        },
         "addon/mixins/dropdown-toggle.js": {
             "name": "addon/mixins/dropdown-toggle.js",
             "modules": {},
@@ -1193,8 +1204,8 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-form/group.js",
-            "line": 9,
-            "description": "This component renders a `<div class=\"form-group\">` element, with support for validation states and feedback icons.\nYou can use it as a block level component. The following shows Bootstrap 3 usage for the internal markup.\n\n```hbs\n{{#bs-form as |form|}}\n  {{#form.group validation=firstNameValidation}}\n    <label class=\"control-label\">First name</label>\n    <input value={{firstname}} class=\"form-control\" oninput={{action (mut firstname) value=\"target.value\"}} type=\"text\">\n  {{/form.group}}\n{{/bs-form}}\n```\n\nIf the `validation` property is set to some state (usually Bootstrap's predefined states \"success\",\n\"warning\" or \"error\"), the appropriate styles will be added, together with a feedback icon.\nSee http://getbootstrap.com/css/#forms-control-validation",
+            "line": 6,
+            "description": "This component renders a `<div class=\"form-group\">` element, with support for validation states and feedback icons (only for BS3).\nYou can use it as a block level component. The following shows Bootstrap 3 usage for the internal markup.\n\n```hbs\n{{#bs-form as |form|}}\n  {{#form.group validation=firstNameValidation}}\n    <label class=\"control-label\">First name</label>\n    <input value={{firstname}} class=\"form-control\" oninput={{action (mut firstname) value=\"target.value\"}} type=\"text\">\n  {{/form.group}}\n{{/bs-form}}\n```\n\nIf the `validation` property is set to some state (usually Bootstrap's predefined states \"success\",\n\"warning\" or \"error\"), the appropriate styles will be added, together with a feedback icon.\nSee http://getbootstrap.com/css/#forms-control-validation",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -1584,7 +1595,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 7,
+            "line": 6,
             "description": "Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting\nof a toggle element, and the dropdown menu itself.\n\n### Usage\n\nUse this component together with the yielded contextual components:\n* [Components.DropdownToggle](Components.DropdownToggle.html)\n* [Components.DropdownButton](Components.DropdownButton.html)\n* [Components.DropdownMenu](Components.DropdownMenu.html)\n  * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)\n  * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)\n  * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)\n\n```hbs\n{{#bs-dropdown as |dd|}}\n  {{#dd.toggle}}Dropdown <span class=\"caret\"></span>{{/dd.toggle}}\n  {{#dd.menu as |ddm|}}\n    {{#ddm.item}}\n      {{#ddm.link-to \"index\"}}Something{{/ddm.link-to}}\n    {{/ddm.item}}\n    {{ddm.divider}}\n    {{#ddm.item}}\n      {{#ddm.link-to \"index\"}}Something different{{/ddm.link-to}}\n    {{/ddm.item}}\n  {{/dd.menu}}\n{{/bs-dropdown}}\n```\n\nIf you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`\ncontextual component rather than a standalone dropdown to ensure the correct styling\nregardless of your Bootstrap version.\n\n### Button dropdowns\n\nTo use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the\n`Components.DropdownButton` component as the toggle:\n\n```hbs\n{{#bs-dropdown as |dd|}}\n  {{#dd.button}}Dropdown <span class=\"caret\"></span>{{/dd.button}}\n  {{#dd.menu as |ddm|}}\n      {{#ddm.item}}{{#ddm.link-to \"index\"}}Something{{/ddm.link-to}}{{/ddm.item}}\n      {{#ddm.item}}{{#ddm.link-to \"index\"}}Something different{{/ddm.link-to}}{{/ddm.item}}\n    {{/dd.menu}}\n{{/bs-dropdown}}\n```\n\nIt has all the functionality of a `Components.Button` with additional dropdown support.\n\n### Split button dropdowns\n\nTo have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a\n`Components.Button` component and a `Components.DropdownButton`:\n\n```hbs\n{{#bs-dropdown as |dd|}}\n  {{#bs-button}}Dropdown{{/bs-button}}\n  {{#dd.button}}Dropdown <span class=\"caret\"></span>{{/dd.button}}\n  {{#dd.menu as |ddm|}}\n    {{#ddm.item}}{{#ddm.link-to \"index\"}}Something{{/ddm.link-to}}{{/ddm.item}}\n    {{#ddm.item}}{{#ddm.link-to \"index\"}}Something different{{/ddm.link-to}}{{/ddm.item}}\n  {{/dd.menu}}\n  {{/bs-dropdown}}\n```\n\n### Dropup style\n\nSet the `direction` property to \"up\" to switch to a \"dropup\" style:\n\n```hbs\n{{#bs-dropdown direction=\"up\" as |dd|}}\n...\n{{/bs-dropdown}}\n```\n\n### Bootstrap 3/4 Notes\n\nIf you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`\ncontextual component rather than a standalone dropdown to ensure the correct styling\nregardless of your Bootstrap version.\n\nIf you use the [dropdown divider](Component.DropdownMenuDivider), you don't have to worry\nabout differences in the markup between versions.\n\nBe sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application\nlinks as dropdown menu items. This is essential for proper styling regardless of Bootstrap\nversion and will also provide automatic `active` highlighting on dropdown menu items. If you\nwish to have a dropdown menu item refer to an external link, be sure to apply the `dropdown-item`\nclass to the `<a>` tag for Bootstrap 4 compatibility.",
             "extends": "Ember.Component",
             "access": "public",
@@ -1668,7 +1679,7 @@
             "namespace": "Components",
             "file": "addon/components/base/bs-navbar.js",
             "line": 7,
-            "description": "Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).\n\n### Usage\n\nUses the following components by a contextual reference:\n\n```hbs\n{{#bs-navbar as |navbar|}}\n  <div class=\"navbar-header\">\n    {{navbar.toggle}}\n    <a class=\"navbar-brand\" href=\"#\">Brand</a>\n  </div>\n  {{#navbar.content}}\n    {{#navbar.nav as |nav|}}\n      {{#nav.item}}\n        {{#nav.link-to \"home\"}}Home{{/nav.link-to}}\n      {{/nav.item}}\n      {{#nav.item}}\n        {{#nav.link-to \"navbars\"}}Navbars{{/nav.link-to}}\n      {{/nav.item}}\n    {{/navbar.nav}}\n  {{/navbar.content}}\n{{/bs-navbar}}\n```\n\nThe component yields references to the following contextual components:\n\n* [Components.NavbarContent](Components.NavbarContent.html)\n* [Components.NavbarToggle](Components.NavbarToggle.html)\n* [Components.NavbarNav](Components.NavbarNav.html)\n\nFurthermore references to the following actions are yielded:\n\n* `collapse`: triggers the `onCollapse` action and collapses the navbar (mobile)\n* `expand`: triggers the `onExpand` action and expands the navbar (mobile)\n\n### Responsive Design\n\nFor the mobile breakpoint the Bootstrap styles will hide the navbar content (`{{navbar.content}}`). Clicking on the\nnavbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all nav links (`{{nav.link-to}}`) are already\nwired up to call the navbar's `collapse` action, so clicking any of them will collapse the navbar. To selectively\nprevent that, you can set its `collapseNavbar` property to false:\n\n```hbs\n{{#nav.item}}\n  {{#nav.link-to \"index\" collapseNavbar=false}}Don't collapse{{/nav.link-to}}\n{{/nav.item}}\n```\n\nTo collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded `collapse`\naction:\n\n```hbs\n{#bs-navbar as |navbar|}}\n  {{#navbar.content}}\n    {{#navbar.nav as |nav|}}\n      {{#nav.item}}\n        <a {{action navbar.collapse}}>Collapse</a>\n      {{/nav.item}}\n    {{/navbar.nav}}\n  {{/navbar.content}}\n{{/bs-navbar}}\n```\n\n### Navbar styles\n\nThe component supports the default bootstrap navbar styling options through the `type`\nproperty. Bootstrap navbars [do not currently support justified nav links](http://getbootstrap.com/components/#navbar-default),\nso those are explicitly disallowed.\n\nOther bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of\nbootstrap styles applied through the `class` attribute on the components.\n\n### Bootstrap 3/4 Notes\n\nBootstrap 4 changed the default navbar styling option from `navbar-default` to `navbar-light`.\nIf you explicitly specified \"default\" in Bootstrap 3 and are migrating, you will need to change\nthis in your code. Both versions retain the `navbar-inverse` style.\n\nBootstrap 4 navbars are fluid by default without the need for an additional container. An\nadditional container is added like with Bootstrap 3 if `fluid` is `false`.",
+            "description": "Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).\n\n### Usage\n\nUses the following components by a contextual reference:\n\n```hbs\n{{#bs-navbar as |navbar|}}\n  <div class=\"navbar-header\">\n    {{navbar.toggle}}\n    <a class=\"navbar-brand\" href=\"#\">Brand</a>\n  </div>\n  {{#navbar.content}}\n    {{#navbar.nav as |nav|}}\n      {{#nav.item}}\n        {{#nav.link-to \"home\"}}Home{{/nav.link-to}}\n      {{/nav.item}}\n      {{#nav.item}}\n        {{#nav.link-to \"navbars\"}}Navbars{{/nav.link-to}}\n      {{/nav.item}}\n    {{/navbar.nav}}\n  {{/navbar.content}}\n{{/bs-navbar}}\n```\n\nThe component yields references to the following contextual components:\n\n* [Components.NavbarContent](Components.NavbarContent.html)\n* [Components.NavbarToggle](Components.NavbarToggle.html)\n* [Components.NavbarNav](Components.NavbarNav.html)\n\nFurthermore references to the following actions are yielded:\n\n* `collapse`: triggers the `onCollapse` action and collapses the navbar (mobile)\n* `expand`: triggers the `onExpand` action and expands the navbar (mobile)\n\n### Responsive Design\n\nFor the mobile breakpoint the Bootstrap styles will hide the navbar content (`{{navbar.content}}`). Clicking on the\nnavbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all nav links (`{{nav.link-to}}`) are already\nwired up to call the navbar's `collapse` action, so clicking any of them will collapse the navbar. To selectively\nprevent that, you can set its `collapseNavbar` property to false:\n\n```hbs\n{{#nav.item}}\n  {{#nav.link-to \"index\" collapseNavbar=false}}Don't collapse{{/nav.link-to}}\n{{/nav.item}}\n```\n\nTo collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded `collapse`\naction:\n\n```hbs\n{#bs-navbar as |navbar|}}\n  {{#navbar.content}}\n    {{#navbar.nav as |nav|}}\n      {{#nav.item}}\n        <a {{action navbar.collapse}}>Collapse</a>\n      {{/nav.item}}\n    {{/navbar.nav}}\n  {{/navbar.content}}\n{{/bs-navbar}}\n```\n\n### Navbar styles\n\nThe component supports the default bootstrap navbar styling options through the `type`\nproperty. Bootstrap navbars [do not currently support justified nav links](http://getbootstrap.com/components/#navbar-default),\nso those are explicitly disallowed.\n\nOther bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of\nbootstrap styles applied through the `class` attribute on the components.\n\n### Bootstrap 3/4 Notes\n\nBootstrap 4 changed the default navbar styling option from `navbar-default` to `navbar-light`.\nIf you explicitly specified \"default\" in Bootstrap 3 and are migrating, you will need to change\nthis in your code. Bootstrap 4 changes `navbar-inverse` to `navbar-dark`.\n\nBootstrap 4 navbars are fluid by default without the need for an additional container. An\nadditional container is added like with Bootstrap 3 if `fluid` is `false`.",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.TypeClass"
@@ -1792,6 +1803,21 @@
             "file": "addon/mixins/control-attributes.js",
             "line": 3,
             "description": "Mixin for control components to add standard HTML attributes",
+            "access": "private",
+            "tagname": ""
+        },
+        "Mixins.ControlValidation": {
+            "name": "Mixins.ControlValidation",
+            "shortname": "Mixins.ControlValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "Mixins",
+            "file": "addon/mixins/control-validation.js",
+            "line": 4,
+            "description": "Mixin for BS4 validation styles added to form controls",
             "access": "private",
             "tagname": ""
         },
@@ -2189,7 +2215,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 30,
+            "line": 27,
             "itemtype": "property",
             "name": "ariaRole",
             "default": "menu",
@@ -2201,13 +2227,36 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 38,
+            "line": 35,
             "description": "Alignment of the menu, either \"left\" or \"right\"",
             "itemtype": "property",
             "name": "align",
             "type": "string",
             "default": "left",
             "access": "public",
+            "tagname": "",
+            "class": "Components.DropdownMenu",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-dropdown/menu.js",
+            "line": 45,
+            "itemtype": "property",
+            "name": "direction",
+            "default": "'down'",
+            "type": "string",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.DropdownMenu",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-dropdown/menu.js",
+            "line": 53,
+            "itemtype": "property",
+            "name": "inNav",
+            "type": "{boolean}",
+            "access": "private",
             "tagname": "",
             "class": "Components.DropdownMenu",
             "namespace": "Components"
@@ -2228,6 +2277,17 @@
         {
             "file": "addon/components/base/bs-dropdown/toggle.js",
             "line": 30,
+            "itemtype": "property",
+            "name": "inNav",
+            "type": "{boolean}",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.DropdownToggle",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-dropdown/toggle.js",
+            "line": 37,
             "description": "Computed property to generate a `href=\"#\"` attribute when `tagName` is \"a\".",
             "itemtype": "property",
             "name": "href",
@@ -2240,7 +2300,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/toggle.js",
-            "line": 44,
+            "line": 51,
             "description": "When clicking the toggle this action is called.",
             "itemtype": "event",
             "name": "onClick",
@@ -3135,7 +3195,7 @@
         },
         {
             "file": "addon/components/base/bs-form/group.js",
-            "line": 36,
+            "line": 31,
             "itemtype": "property",
             "name": "classTypePrefix",
             "type": "String",
@@ -3147,20 +3207,7 @@
         },
         {
             "file": "addon/components/base/bs-form/group.js",
-            "line": 43,
-            "description": "Whether to show validation state icons.\nSee http://getbootstrap.com/css/#forms-control-validation",
-            "itemtype": "property",
-            "name": "useIcons",
-            "type": "boolean",
-            "default": "true",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.FormGroup",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-form/group.js",
-            "line": 54,
+            "line": 38,
             "description": "Computed property which is true if the form group is in a validation state",
             "itemtype": "property",
             "name": "hasValidation",
@@ -3173,110 +3220,12 @@
         },
         {
             "file": "addon/components/base/bs-form/group.js",
-            "line": 64,
-            "description": "Computed property which is true if the form group is showing a validation icon",
-            "itemtype": "property",
-            "name": "hasFeedback",
-            "type": "boolean",
-            "access": "private",
-            "tagname": "",
-            "readonly": "",
-            "class": "Components.FormGroup",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-form/group.js",
-            "line": 74,
-            "description": "The icon classes to be used for a feedback icon in a \"success\" validation state.\nDefaults to the usual glyphicon classes. This is ignored, and no feedback icon is\nrendered if `useIcons` is false.\n\nYou can change this globally by setting the `formValidationSuccessIcon` property of\nthe ember-bootstrap configuration in your config/environment.js file. If your are\nusing FontAwesome for example:\n\n```js\nENV['ember-bootstrap'] = {\n  formValidationSuccessIcon: 'fa fa-check'\n}\n```",
-            "itemtype": "property",
-            "name": "successIcon",
-            "type": "string",
-            "default": "'glyphicon glyphicon-ok'",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.FormGroup",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-form/group.js",
-            "line": 96,
-            "description": "The icon classes to be used for a feedback icon in a \"error\" validation state.\nDefaults to the usual glyphicon classes. This is ignored, and no feedback icon is\nrendered if `useIcons` is false.\n\nYou can change this globally by setting the `formValidationErrorIcon` property of\nthe ember-bootstrap configuration in your config/environment.js file. If your are\nusing FontAwesome for example:\n\n```js\nENV['ember-bootstrap'] = {\n  formValidationErrorIcon: 'fa fa-times'\n}\n```",
-            "itemtype": "property",
-            "name": "errorIcon",
-            "type": "string",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.FormGroup",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-form/group.js",
-            "line": 117,
-            "description": "The icon classes to be used for a feedback icon in a \"warning\" validation state.\nDefaults to the usual glyphicon classes. This is ignored, and no feedback icon is\nrendered if `useIcons` is false.\n\nYou can change this globally by setting the `formValidationWarningIcon` property of\nthe ember-bootstrap configuration in your config/environment.js file. If your are\nusing FontAwesome for example:\n\n```js\nENV['ember-bootstrap'] = {\n  formValidationWarningIcon: 'fa fa-warning'\n}\n```",
-            "itemtype": "property",
-            "name": "warningIcon",
-            "type": "string",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.FormGroup",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-form/group.js",
-            "line": 138,
-            "description": "The icon classes to be used for a feedback icon in a \"info\" validation state.\nDefaults to the usual glyphicon classes. This is ignored, and no feedback icon is\nrendered if `useIcons` is false.\n\nYou can change this globally by setting the `formValidationInfoIcon` property of\nthe ember-bootstrap configuration in your config/environment.js file. If your are\nusing FontAwesome for example:\n\n```js\nENV['ember-bootstrap'] = {\n  formValidationInfoIcon: 'fa fa-info-circle\n}\n```\n\nThe \"info\" validation state is not supported in Bootstrap CSS, but can be easily added\nusing the following LESS style:\n```less\n.has-info {\n  .form-control-validation(@state-info-text; @state-info-text; @state-info-bg);\n}\n```",
-            "itemtype": "property",
-            "name": "infoIcon",
-            "type": "string",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.FormGroup",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-form/group.js",
-            "line": 167,
-            "itemtype": "property",
-            "name": "iconName",
-            "type": "string",
-            "readonly": "",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.FormGroup",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-form/group.js",
-            "line": 178,
-            "itemtype": "property",
-            "name": "hasIconForValidationState",
-            "type": "boolean",
-            "readonly": "",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.FormGroup",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-form/group.js",
-            "line": 186,
-            "description": "Set to a validation state to render the form-group with a validation style.\nSee http://getbootstrap.com/css/#forms-control-validation\n\nThe default states of \"success\", \"warning\" and \"error\" are supported by Bootstrap out-of-the-box.\nBut you can use custom states as well. This will set a has-<state> class, and (if `useIcons`is true)\na feedback whose class is taken from the <state>Icon property\n\nNote that BS4 uses the `has-danger` class for the `error` validation state and does not automatically\nimport glyphicons.",
+            "line": 48,
+            "description": "Set to a validation state to render the form-group with a validation style (only for BS3).\nSee http://getbootstrap.com/css/#forms-control-validation\n\nThe default states of \"success\", \"warning\" and \"error\" are supported by Bootstrap out-of-the-box.\nBut you can use custom states as well. This will set a has-<state> class, and (if `useIcons`is true)\na feedback whose class is taken from the <state>Icon property",
             "itemtype": "property",
             "name": "validation",
             "type": "string",
             "access": "public",
-            "tagname": "",
-            "class": "Components.FormGroup",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-form/group.js",
-            "line": 203,
-            "itemtype": "property",
-            "name": "validationClass",
-            "type": "string",
-            "readonly": "",
-            "access": "private",
             "tagname": "",
             "class": "Components.FormGroup",
             "namespace": "Components"
@@ -3875,16 +3824,6 @@
             "access": "protected",
             "tagname": "",
             "class": "Components.TabPane",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-tooltip/element.js",
-            "line": 15,
-            "itemtype": "property",
-            "name": "arrowClass",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.TooltipElement",
             "namespace": "Components"
         },
         {
@@ -5073,7 +5012,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 107,
+            "line": 106,
             "description": "This property reflects the state of the dropdown, whether it is open or closed.",
             "itemtype": "property",
             "name": "isOpen",
@@ -5086,7 +5025,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 117,
+            "line": 116,
             "description": "By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.",
             "itemtype": "property",
             "name": "closeOnMenuClick",
@@ -5099,7 +5038,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 127,
+            "line": 126,
             "description": "By default the dropdown menu will expand downwards. Set to 'up' to expand upwards.",
             "itemtype": "property",
             "name": "direction",
@@ -5112,7 +5051,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 137,
+            "line": 136,
             "description": "Indicates the dropdown is being used as a navigation item dropdown.",
             "itemtype": "property",
             "name": "inNav",
@@ -5125,7 +5064,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 147,
+            "line": 146,
             "description": "A computed property to generate the suiting class for the dropdown container, either \"dropdown\", \"dropup\" or \"btn-group\".",
             "itemtype": "property",
             "name": "containerClass",
@@ -5138,7 +5077,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 163,
+            "line": 162,
             "itemtype": "property",
             "name": "menuElement",
             "access": "private",
@@ -5148,7 +5087,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 171,
+            "line": 170,
             "itemtype": "property",
             "name": "toggleElement",
             "access": "private",
@@ -5158,7 +5097,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 177,
+            "line": 178,
             "description": "Reference to the child toggle (Toggle or Button)",
             "itemtype": "property",
             "name": "toggle",
@@ -5169,7 +5108,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 185,
+            "line": 186,
             "description": "Action is called when dropdown is about to be shown",
             "itemtype": "event",
             "name": "onShow",
@@ -5187,7 +5126,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 194,
+            "line": 195,
             "description": "Action is called when dropdown is about to be hidden",
             "itemtype": "event",
             "name": "onHide",
@@ -5205,7 +5144,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 244,
+            "line": 245,
             "description": "Handler for click events to close the dropdown",
             "itemtype": "method",
             "name": "closeOnClickHandler",
@@ -6146,11 +6085,11 @@
         {
             "file": "addon/components/base/bs-navbar.js",
             "line": 243,
-            "description": "Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard\ntwo character Bootstrap size abbreviations. Used to set the `navbar-toggleable-*`\nclass.",
+            "description": "Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard\ntwo character Bootstrap size abbreviations. Used to set the `navbar-expand-*`\nclass.",
             "itemtype": "property",
             "name": "toggleBreakpoint",
             "type": "String",
-            "default": "'md'",
+            "default": "'lg'",
             "access": "public",
             "tagname": "",
             "class": "Components.Navbar",
@@ -6163,7 +6102,7 @@
             "itemtype": "property",
             "name": "backgroundColor",
             "type": "String",
-            "default": "'faded'",
+            "default": "'light'",
             "access": "public",
             "tagname": "",
             "class": "Components.Navbar",

@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.3</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -53,7 +53,6 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { readOnly } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import { bind } from &#x27;@ember/runloop&#x27;;
@@ -227,7 +226,9 @@ export default Component.extend({
    * @property toggleElement
    * @private
    */
-  toggleElement: readOnly(&#x27;toggle.element&#x27;),
+  toggleElement: computed(&#x27;toggle&#x27;, function() {
+    return typeof FastBoot === &#x27;undefined&#x27; ? this.get(&#x27;toggle.element&#x27;) || null : null;
+  }),
 
   /**
    * Reference to the child toggle (Toggle or Button)
@@ -388,6 +389,7 @@ export default Component.extend({
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>

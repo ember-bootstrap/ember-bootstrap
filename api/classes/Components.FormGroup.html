@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.3</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.4</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -60,7 +60,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_base_bs-form_group.js.html#l9"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:9</code></a>
+            Defined in: <a href="../files/addon_components_base_bs-form_group.js.html#l6"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:6</code></a>
         </div>
 
 
@@ -68,7 +68,7 @@
 
 
 <div class="well well-small">
-    <p>This component renders a <code>&lt;div class=&quot;form-group&quot;&gt;</code> element, with support for validation states and feedback icons.
+    <p>This component renders a <code>&lt;div class=&quot;form-group&quot;&gt;</code> element, with support for validation states and feedback icons (only for BS3).
 You can use it as a block level component. The following shows Bootstrap 3 usage for the internal markup.</p>
 <pre class="code prettyprint"><code class="language-hbs">{{#bs-form as |form|}}
   {{#form.group validation=firstNameValidation}}
@@ -128,48 +128,12 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                                 <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix" data-tablink="classTypePrefix">classTypePrefix</a>
 
                             </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_errorIcon" data-tablink="errorIcon">errorIcon</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_hasFeedback" data-tablink="hasFeedback">hasFeedback</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_hasIconForValidationState" data-tablink="hasIconForValidationState">hasIconForValidationState</a>
-
-                            </li>
                             <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_hasValidation" data-tablink="hasValidation">hasValidation</a>
 
                             </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_iconName" data-tablink="iconName">iconName</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_infoIcon" data-tablink="infoIcon">infoIcon</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_successIcon" data-tablink="successIcon">successIcon</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_useIcons" data-tablink="useIcons">useIcons</a>
-
-                            </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_validation" data-tablink="validation">validation</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_validationClass" data-tablink="validationClass">validationClass</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_warningIcon" data-tablink="warningIcon">warningIcon</a>
 
                             </li>
                     </ul>
@@ -198,7 +162,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l36"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:36</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l31"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:31</code></a>
                             </p>
                     
                     
@@ -209,104 +173,6 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         </div>
                     
                             <p><strong>Default:</strong> &#x27;form-group&#x27; (BS3) or &#x27;form-control&#x27; (BS4)</p>
-                    
-                    
-                    </div>
-                    <div id="property_errorIcon" class="property item public">
-                        <h3 class="name">errorIcon
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l96"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:96</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The icon classes to be used for a feedback icon in a &quot;error&quot; validation state.
-                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-                    rendered if <code>useIcons</code> is false.</p>
-                    <p>You can change this globally by setting the <code>formValidationErrorIcon</code> property of
-                    the ember-bootstrap configuration in your config/environment.js file. If your are
-                    using FontAwesome for example:</p>
-                    <pre class="code prettyprint"><code class="language-js">ENV['ember-bootstrap'] = {
-                      formValidationErrorIcon: 'fa fa-times'
-                    }
-                    </code></pre>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_hasFeedback" class="property item private">
-                        <h3 class="name">hasFeedback
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l64"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:64</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Computed property which is true if the form group is showing a validation icon</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_hasIconForValidationState" class="property item private">
-                        <h3 class="name">hasIconForValidationState
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l178"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:178</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
                     
                     
                     </div>
@@ -326,7 +192,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l54"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:54</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l38"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:38</code></a>
                             </p>
                     
                     
@@ -337,152 +203,6 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                     
                         </div>
                     
-                    
-                    
-                    </div>
-                    <div id="property_iconName" class="property item private">
-                        <h3 class="name">iconName
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l167"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:167</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_infoIcon" class="property item public">
-                        <h3 class="name">infoIcon
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l138"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:138</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The icon classes to be used for a feedback icon in a &quot;info&quot; validation state.
-                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-                    rendered if <code>useIcons</code> is false.</p>
-                    <p>You can change this globally by setting the <code>formValidationInfoIcon</code> property of
-                    the ember-bootstrap configuration in your config/environment.js file. If your are
-                    using FontAwesome for example:</p>
-                    <pre class="code prettyprint"><code class="language-js">ENV['ember-bootstrap'] = {
-                      formValidationInfoIcon: 'fa fa-info-circle
-                    }
-                    </code></pre>
-                    <p>The &quot;info&quot; validation state is not supported in Bootstrap CSS, but can be easily added
-                    using the following LESS style:</p>
-                    <pre class="code prettyprint"><code class="language-less">.has-info {
-                      .form-control-validation(@state-info-text; @state-info-text; @state-info-bg);
-                    }
-                    </code></pre>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_successIcon" class="property item public">
-                        <h3 class="name">successIcon
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l74"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:74</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The icon classes to be used for a feedback icon in a &quot;success&quot; validation state.
-                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-                    rendered if <code>useIcons</code> is false.</p>
-                    <p>You can change this globally by setting the <code>formValidationSuccessIcon</code> property of
-                    the ember-bootstrap configuration in your config/environment.js file. If your are
-                    using FontAwesome for example:</p>
-                    <pre class="code prettyprint"><code class="language-js">ENV['ember-bootstrap'] = {
-                      formValidationSuccessIcon: 'fa fa-check'
-                    }
-                    </code></pre>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;glyphicon glyphicon-ok&#x27;</p>
-                    
-                    
-                    </div>
-                    <div id="property_useIcons" class="property item public">
-                        <h3 class="name">useIcons
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l43"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:43</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Whether to show validation state icons.
-                    See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbootstrap.com/css/#forms-control-validation</a></p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
                     
                     
                     </div>
@@ -502,88 +222,18 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l186"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:186</code></a>
+                            <a href="../files/addon_components_base_bs-form_group.js.html#l48"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:48</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Set to a validation state to render the form-group with a validation style.
+                            <p>Set to a validation state to render the form-group with a validation style (only for BS3).
                     See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbootstrap.com/css/#forms-control-validation</a></p>
                     <p>The default states of &quot;success&quot;, &quot;warning&quot; and &quot;error&quot; are supported by Bootstrap out-of-the-box.
                     But you can use custom states as well. This will set a has-<state> class, and (if <code>useIcons</code>is true)
                     a feedback whose class is taken from the <state>Icon property</p>
-                    <p>Note that BS4 uses the <code>has-danger</code> class for the <code>error</code> validation state and does not automatically
-                    import glyphicons.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_validationClass" class="property item private">
-                        <h3 class="name">validationClass
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l203"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:203</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_warningIcon" class="property item public">
-                        <h3 class="name">warningIcon
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_group.js.html#l117"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:117</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The icon classes to be used for a feedback icon in a &quot;warning&quot; validation state.
-                    Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-                    rendered if <code>useIcons</code> is false.</p>
-                    <p>You can change this globally by setting the <code>formValidationWarningIcon</code> property of
-                    the ember-bootstrap configuration in your config/environment.js file. If your are
-                    using FontAwesome for example:</p>
-                    <pre class="code prettyprint"><code class="language-js">ENV['ember-bootstrap'] = {
-                      formValidationWarningIcon: 'fa fa-warning'
-                    }
-                    </code></pre>
                     
                         </div>
                     
@@ -666,6 +316,7 @@ See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbo
                     <li class="nav-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
+                    <li class="nav-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
                     <li class="nav-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>

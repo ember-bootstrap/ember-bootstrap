@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/mixins/dropdown-toggle.js - ember-bootstrap</title>
+    <title>addon/mixins/control-validation.js - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -48,52 +48,37 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>addon/mixins/dropdown-toggle.js <small>File</small></h1>
+    <h1>addon/mixins/control-validation.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums">
 import Mixin from &#x27;@ember/object/mixin&#x27;;
-import { schedule } from &#x27;@ember/runloop&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
 
 /**
- * Mixin for components that act as dropdown toggles.
+ * Mixin for BS4 validation styles added to form controls
  *
- * @class DropdownToggle
+ * @class ControlValidation
  * @namespace Mixins
  * @private
  */
 export default Mixin.create({
-  classNames: [&#x27;dropdown-toggle&#x27;],
+  classNameBindings: [&#x27;formFeedbackClass&#x27;],
 
-  /**
-   * @property ariaRole
-   * @default button
-   * @type string
-   * @protected
-   */
-  ariaRole: &#x27;button&#x27;,
+  validationType: null,
 
-  /**
-   * Reference to the parent dropdown component
-   *
-   * @property dropdown
-   * @type {Components.Dropdown}
-   * @private
-   */
-  dropdown: null,
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-    let dropdown = this.get(&#x27;dropdown&#x27;);
-    if (dropdown) {
-      schedule(&#x27;sync&#x27;, this, function() {
-        if (!this.get(&#x27;isDestroyed&#x27;)) {
-          dropdown.set(&#x27;toggle&#x27;, this);
-        }
-      });
+  formFeedbackClass: computed(&#x27;validationType&#x27;, function() {
+    let validationType = this.get(&#x27;validationType&#x27;);
+    switch (validationType) {
+      case &#x27;error&#x27;:
+        return &#x27;is-invalid&#x27;;
+      case &#x27;success&#x27;:
+        return &#x27;is-valid&#x27;;
+      case &#x27;warning&#x27;:
+        return &#x27;is-warning&#x27;; // not officially supported in BS4 :(
     }
-  }
+  })
 });
 
     </pre>
