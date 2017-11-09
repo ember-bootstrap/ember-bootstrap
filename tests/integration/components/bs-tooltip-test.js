@@ -11,10 +11,11 @@ import { moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import {
   test,
-  testBS3,
+  versionDependent,
   testRequiringFocus,
   visibilityClass,
-  tooltipPositionClass
+  tooltipPositionClass,
+  tooltipArrowClass
 } from '../../helpers/bootstrap-test';
 import {
   setupForPositioning,
@@ -62,7 +63,7 @@ test('it shows and hides immediately when hovering [fade=false]', async function
 });
 
 testRequiringFocus('it shows and hides immediately when focusing [fade=false]', async function(assert) {
-  this.render(hbs`<button id="target">{{bs-tooltip title="Dummy" fade=false}}</button>`);
+  this.render(hbs`<button class="btn" id="target">{{bs-tooltip title="Dummy" fade=false}}</button>`);
 
   await focus('#target');
   assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
@@ -315,40 +316,37 @@ test('show pass along class attribute', function(assert) {
   triggerEvent('#target', 'mouseenter');
 });
 
-// tooltip arrow in BS4 alpha is just a pseudo element that does not allow arbitrary positioning
-// so these tests are disabled for BS4. BS4 beta uses a dedicated div again, so tests should be enabled again
-// when switching to BS4 beta! @todo
-testBS3('should position tooltip arrow centered', async function(assert) {
-  let expectedArrowPosition = 95;
-  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{bs-tooltip placement="top" title="very very very very very very very long popover" fade=false}}</a></p></div>`);
+test('should position tooltip arrow centered', async function(assert) {
+  let expectedArrowPosition = versionDependent(95, 98);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{bs-tooltip placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`);
 
   setupForPositioning();
 
   await click('#target');
-  let arrowPosition = parseInt(find('.tooltip-arrow').style.left, 10);
+  let arrowPosition = parseInt(find(`.${tooltipArrowClass()}`).style.left, 10);
   assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
 });
 
-testBS3('should adjust tooltip arrow', async function(assert) {
-  let expectedArrowPosition = 168;
-  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long popover" fade=false}}</a></p></div>`);
+test('should adjust tooltip arrow', async function(assert) {
+  let expectedArrowPosition = versionDependent(155, 154);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`);
 
   setupForPositioning('right');
 
   await click('#target');
-  let arrowPosition = parseInt(find('.tooltip-arrow').style.left, 10);
+  let arrowPosition = parseInt(find(`.${tooltipArrowClass()}`).style.left, 10);
   assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
 
   // check again to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/361
   await click('#target');
   await click('#target');
-  arrowPosition = parseInt(find('.tooltip-arrow').style.left, 10);
+  arrowPosition = parseInt(find(`.${tooltipArrowClass()}`).style.left, 10);
   assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
 });
 
 test('should adjust placement if not fitting in viewport', async function(assert) {
   let done = assert.async();
-  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 300px"><a href="#" id="target">Click me{{bs-tooltip placement="bottom" autoPlacement=true title="very very very very very very very long popover" fade=false}}</a></p></div>`);
+  this.render(hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 300px"><button class="btn" id="target">Click me{{bs-tooltip placement="bottom" autoPlacement=true title="very very very very very very very long popover" fade=false}}</button></p></div>`);
 
   setupForPositioning('right');
   await click('#target');

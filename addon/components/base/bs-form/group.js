@@ -1,13 +1,10 @@
-import { notEmpty, and } from '@ember/object/computed';
-import { isBlank } from '@ember/utils';
+import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
 import layout from 'ember-bootstrap/templates/components/bs-form/group';
-import Config from 'ember-bootstrap/config';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
 
 /**
- This component renders a `<div class="form-group">` element, with support for validation states and feedback icons.
+ This component renders a `<div class="form-group">` element, with support for validation states and feedback icons (only for BS3).
  You can use it as a block level component. The following shows Bootstrap 3 usage for the internal markup.
 
  ```hbs
@@ -31,25 +28,12 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
 export default Component.extend(SizeClass, {
   layout,
 
-  classNameBindings: ['validationClass'],
-
   /**
    * @property classTypePrefix
    * @type String
    * @default 'form-group' (BS3) or 'form-control' (BS4)
    * @private
    */
-
-  /**
-   * Whether to show validation state icons.
-   * See http://getbootstrap.com/css/#forms-control-validation
-   *
-   * @property useIcons
-   * @type boolean
-   * @default true
-   * @public
-   */
-  useIcons: true,
 
   /**
    * Computed property which is true if the form group is in a validation state
@@ -62,154 +46,16 @@ export default Component.extend(SizeClass, {
   hasValidation: notEmpty('validation').readOnly(),
 
   /**
-   * Computed property which is true if the form group is showing a validation icon
-   *
-   * @property hasFeedback
-   * @type boolean
-   * @private
-   * @readonly
-   */
-  hasFeedback: and('hasValidation', 'useIcons', 'hasIconForValidationState').readOnly(),
-
-  /**
-   * The icon classes to be used for a feedback icon in a "success" validation state.
-   * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-   * rendered if `useIcons` is false.
-   *
-   * You can change this globally by setting the `formValidationSuccessIcon` property of
-   * the ember-bootstrap configuration in your config/environment.js file. If your are
-   * using FontAwesome for example:
-   *
-   * ```js
-   * ENV['ember-bootstrap'] = {
-     *   formValidationSuccessIcon: 'fa fa-check'
-     * }
-   * ```
-   *
-   * @property successIcon
-   * @type string
-   * @default 'glyphicon glyphicon-ok'
-   * @public
-   */
-  successIcon: Config.formValidationSuccessIcon,
-
-  /**
-   * The icon classes to be used for a feedback icon in a "error" validation state.
-   * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-   * rendered if `useIcons` is false.
-   *
-   * You can change this globally by setting the `formValidationErrorIcon` property of
-   * the ember-bootstrap configuration in your config/environment.js file. If your are
-   * using FontAwesome for example:
-   *
-   * ```js
-   * ENV['ember-bootstrap'] = {
-     *   formValidationErrorIcon: 'fa fa-times'
-     * }
-   * ```
-   *
-   * @property errorIcon
-   * @type string
-   * @public
-   */
-  errorIcon: Config.formValidationErrorIcon,
-
-  /**
-   * The icon classes to be used for a feedback icon in a "warning" validation state.
-   * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-   * rendered if `useIcons` is false.
-   *
-   * You can change this globally by setting the `formValidationWarningIcon` property of
-   * the ember-bootstrap configuration in your config/environment.js file. If your are
-   * using FontAwesome for example:
-   *
-   * ```js
-   * ENV['ember-bootstrap'] = {
-     *   formValidationWarningIcon: 'fa fa-warning'
-     * }
-   * ```
-   *
-   * @property warningIcon
-   * @type string
-   * @public
-   */
-  warningIcon: Config.formValidationWarningIcon,
-
-  /**
-   * The icon classes to be used for a feedback icon in a "info" validation state.
-   * Defaults to the usual glyphicon classes. This is ignored, and no feedback icon is
-   * rendered if `useIcons` is false.
-   *
-   * You can change this globally by setting the `formValidationInfoIcon` property of
-   * the ember-bootstrap configuration in your config/environment.js file. If your are
-   * using FontAwesome for example:
-   *
-   * ```js
-   * ENV['ember-bootstrap'] = {
-     *   formValidationInfoIcon: 'fa fa-info-circle
-     * }
-   * ```
-   *
-   * The "info" validation state is not supported in Bootstrap CSS, but can be easily added
-   * using the following LESS style:
-   * ```less
-   * .has-info {
-     *   .form-control-validation(@state-info-text; @state-info-text; @state-info-bg);
-     * }
-   * ```
-   *
-   * @property infoIcon
-   * @type string
-   * @public
-   */
-  infoIcon: Config.formValidationInfoIcon,
-
-  /**
-   * @property iconName
-   * @type string
-   * @readonly
-   * @private
-   */
-  iconName: computed('validation', function() {
-    let validation = this.get('validation') || 'success';
-    return this.get(`${validation}Icon`);
-  }).readOnly(),
-
-  /**
-   * @property hasIconForValidationState
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  hasIconForValidationState: notEmpty('iconName').readOnly(),
-
-  /**
-   * Set to a validation state to render the form-group with a validation style.
+   * Set to a validation state to render the form-group with a validation style (only for BS3).
    * See http://getbootstrap.com/css/#forms-control-validation
    *
    * The default states of "success", "warning" and "error" are supported by Bootstrap out-of-the-box.
    * But you can use custom states as well. This will set a has-<state> class, and (if `useIcons`is true)
    * a feedback whose class is taken from the <state>Icon property
    *
-   * Note that BS4 uses the `has-danger` class for the `error` validation state and does not automatically
-   * import glyphicons.
-   *
    * @property validation
    * @type string
    * @public
    */
-  validation: null,
-
-  /**
-   * @property validationClass
-   * @type string
-   * @readonly
-   * @private
-   */
-  validationClass: computed('_validationType', function() {
-    let validation = this.get('_validationType');
-    if (!isBlank(validation)) {
-      return `has-${this.get('_validationType')}`;
-    }
-  }).readOnly()
+  validation: null
 });

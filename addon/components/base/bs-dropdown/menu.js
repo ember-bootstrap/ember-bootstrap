@@ -24,9 +24,6 @@ export default Component.extend({
    * @public
    */
 
-  classNames: ['dropdown-menu'],
-  classNameBindings: ['alignClass'],
-
   /**
    * @property ariaRole
    * @default menu
@@ -44,6 +41,21 @@ export default Component.extend({
    * @public
    */
   align: 'left',
+
+  /**
+   * @property direction
+   * @default 'down'
+   * @type string
+   * @private
+   */
+  direction: 'down',
+
+  /**
+   * @property inNav
+   * @type {boolean}
+   * @private
+   */
+  inNav: false,
 
   alignClass: computed('align', function() {
     if (this.get('align') !== 'left') {

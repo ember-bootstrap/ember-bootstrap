@@ -147,6 +147,17 @@ test('it handles fixed-bottom properly', function(assert) {
   assert.notOk(find('nav').classList.contains(positionStickyClass()), `it does not have ${positionStickyClass()}`);
 });
 
+testBS4('it handles navbar-expand[-*] properly', function(assert) {
+  this.render(hbs`{{bs-navbar toggleBreakpoint="sm"}}`);
+  assert.notOk(find('nav').classList.contains('navbar-expand-lg'), 'it does not have default navbar-expand-lg');
+  assert.ok(find('nav').classList.contains('navbar-expand-sm'), 'it has navbar-expand-sm');
+});
+
+testBS4('it handles navbar-expand properly', function(assert) {
+  this.render(hbs`{{bs-navbar toggleBreakpoint=""}}`);
+  assert.ok(find('nav').classList.contains('navbar-expand'), 'it has navbar-expand');
+});
+
 testBS3('it handles static-top properly', function(assert) {
   this.render(hbs`{{bs-navbar position="static-top"}}`);
 

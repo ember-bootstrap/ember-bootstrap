@@ -11,5 +11,17 @@ export default PopoverElement.extend({
       classes.push('in');
     }
     return classes;
-  })
+  }),
+
+  /**
+   * @property titleClass
+   * @private
+   */
+  titleClass: 'popover-title',
+
+  /**
+   * @property contentClass
+   * @private
+   */
+  contentClass: 'popover-content'
 });

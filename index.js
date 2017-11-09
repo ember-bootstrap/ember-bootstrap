@@ -15,6 +15,7 @@ const rename = stew.rename;
 const BroccoliDebug = require('broccoli-debug');
 const chalk = require('chalk');
 const SilentError = require('silent-error'); // From ember-cli
+const VersionChecker = require('ember-cli-version-checker');
 
 const defaultOptions = {
   importBootstrapTheme: false,
@@ -39,6 +40,8 @@ const componentDependencies = {
   'bs-tab': ['bs-nav'],
   'bs-tooltip': ['bs-contextual-help']
 };
+
+const minimumBS4Version = '4.0.0-beta';
 
 // For ember-cli < 2.7 findHost doesnt exist so we backport from that version
 // for earlier version of ember-cli.
@@ -109,6 +112,15 @@ module.exports = {
 
   validateDependencies() {
     let bowerDependencies = this.app.project.bowerDependencies();
+
+    if (this.getBootstrapVersion() === 4) {
+      let checker = new VersionChecker(this);
+      let dep = checker.for('bootstrap');
+
+      if (!dep.gte(minimumBS4Version)) {
+        this.warn(`For Bootstrap 4 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS4Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`);
+      }
+    }
 
     if ('bootstrap' in bowerDependencies || 'bootstrap-sass' in bowerDependencies) {
       this.warn('The dependencies for ember-bootstrap may be outdated. Please run `ember generate ember-bootstrap` to install appropriate dependencies!');
