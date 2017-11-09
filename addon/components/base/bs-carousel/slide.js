@@ -35,7 +35,7 @@ export default Ember.Component.extend(ComponentChild, {
    */
   isCurrentSlide: computed('currentSlide', function() {
     return this.get('currentSlide') === this;
-  }),
+  }).readOnly(),
 
   /**
    * @private
@@ -44,7 +44,7 @@ export default Ember.Component.extend(ComponentChild, {
    */
   isFollowingSlide: computed('followingSlide', function() {
     return this.get('followingSlide') === this;
-  }),
+  }).readOnly(),
 
   /**
    * Slide is moving to the left.
