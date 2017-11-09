@@ -134,7 +134,7 @@ export default Ember.Component.extend(ComponentParent, {
    */
   currentSlide: computed('childSlides', 'currentIndex', function() {
     return this.get('childSlides').objectAt(this.get('currentIndex'));
-  }).readyOnly(),
+  }).readOnly(),
 
   /**
    * Bootstrap style to indicate that a given slide should be moving to left/right.
@@ -162,7 +162,7 @@ export default Ember.Component.extend(ComponentParent, {
    */
   followingSlide: computed('childSlides', 'followingIndex', function() {
     return this.get('childSlides').objectAt(this.get('followingIndex'));
-  }).readyOnly(),
+  }).readOnly(),
 
   /**
    * This observer is the entry point for programmatically slide changing.
