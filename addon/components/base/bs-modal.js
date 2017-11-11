@@ -418,7 +418,9 @@ export default Component.extend(TransitionSupport, {
       this.set('inDom', true);
       schedule('afterRender', () => {
         let modalEl = this.get('modalElement');
-        modalEl.scrollTop = 0;
+        if (!modalEl) {
+          return;
+        }
 
         this.handleUpdate();
         this.set('showModal', true);
@@ -512,6 +514,9 @@ export default Component.extend(TransitionSupport, {
       assert('Backdrop element should be in DOM', backdrop);
 
       let callbackRemove = function() {
+        if (this.get('isDestroyed')) {
+          return;
+        }
         this.set('showBackdrop', false);
         if (callback) {
           callback.call(this);
