@@ -422,6 +422,7 @@ export default Component.extend(TransitionSupport, {
           return;
         }
 
+        modalEl.scrollTop = 0;
         this.handleUpdate();
         this.set('showModal', true);
         this.get('onShow')();
