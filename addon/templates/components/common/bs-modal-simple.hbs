@@ -22,7 +22,13 @@
         )
       }}
     {{/bs-modal/body}}
-    {{bs-modal/footer closeTitle=closeTitle submitTitle=submitTitle onClose=(action "close") onSubmit=(action "submit")}}
+    {{bs-modal/footer
+      closeTitle=closeTitle
+      submitTitle=submitTitle
+      submitButtonType=submitButtonType
+      onClose=(action "close")
+      onSubmit=(action "submit")
+    }}
   {{/bs-modal/dialog}}
 
   <div>

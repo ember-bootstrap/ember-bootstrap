@@ -29,6 +29,11 @@ test('Footer can have submit button', function(assert) {
   assert.equal(find('.modal-footer button:last-child').textContent.trim(), 'submit', 'Submit button title is correct.');
 });
 
+test('Footer can have a custom submitButtonType', function(assert) {
+  this.render(hbs`{{bs-modal/footer closeTitle="close" submitTitle="submit" submitButtonType="danger"}}`);
+  assert.ok(find('.modal-footer button:last-child').classList.contains('btn-danger'), 'Submit button is a danger button.');
+});
+
 test('Footer can have custom block content', function(assert) {
   this.render(hbs`{{#bs-modal/footer closeTitle="close" submitTitle="submit"}}custom{{/bs-modal/footer}}`);
 
