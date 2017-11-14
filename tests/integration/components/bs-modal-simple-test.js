@@ -58,6 +58,11 @@ test('Simple modal supports custom buttons', function(assert) {
 
 });
 
+test('Simple modal supports a custom submit button type', function(assert) {
+  this.render(hbs`{{#bs-modal-simple closeTitle="Cancel" submitTitle="Ok" submitButtonType="danger"}}Hello world!{{/bs-modal-simple}}`);
+  assert.equal(findAll('.modal .modal-footer button.btn-danger').length, 1, 'Modal has submit button with btn-danger class.');
+});
+
 test('open modal is immediately shown', function(assert) {
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false}}Hello world!{{/bs-modal-simple}}`);
 

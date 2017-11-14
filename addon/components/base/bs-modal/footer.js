@@ -52,6 +52,16 @@ export default Component.extend({
   submitDisabled: false,
 
   /**
+   * The type of the submit button (primary button).
+   *
+   * @property submitButtonType
+   * @type string
+   * @default 'primary'
+   * @public
+   */
+  submitButtonType: 'primary',
+
+  /**
    * The action to send to the parent modal component when the modal footer's form is submitted
    *
    * @event onSubmit

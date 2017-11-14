@@ -111,6 +111,16 @@ export default Modal.extend({
   closeTitle: 'Ok',
 
   /**
+   * The type of the submit button (primary button).
+   *
+   * @property submitButtonType
+   * @type string
+   * @default 'primary'
+   * @public
+   */
+  submitButtonType: 'primary',
+
+  /**
    * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null.
    *
    * @property submitTitle
