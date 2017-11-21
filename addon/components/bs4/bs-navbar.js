@@ -22,7 +22,7 @@ export default Navbar.extend({
   /**
    * Defines the responsive toggle breakpoint size. Options are the standard
    * two character Bootstrap size abbreviations. Used to set the `navbar-expand[-*]`
-   * class.
+   * class. Set to `null` to disable collapsing.
    *
    * @property toggleBreakpoint
    * @type String

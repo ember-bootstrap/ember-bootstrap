@@ -243,7 +243,7 @@ export default Component.extend(TypeClass, {
   /**
    * Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard
    * two character Bootstrap size abbreviations. Used to set the `navbar-expand-*`
-   * class.
+   * class. Set to `null` to disable collapsing.
    *
    * @property toggleBreakpoint
    * @type String
