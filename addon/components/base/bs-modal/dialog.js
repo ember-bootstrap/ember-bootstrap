@@ -2,6 +2,7 @@ import { isBlank } from '@ember/utils';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/string';
+import { bind } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
 
 /**
@@ -146,11 +147,19 @@ export default Component.extend({
     }
   },
 
-  click(e) {
+  _click(e) {
     if (!e.target.classList.contains('modal') || !this.get('backdropClose')) {
       return;
     }
     this.get('onClose')();
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    // Ember events use event delegation, but we need to add an `onclick` handler directly on the modal element for
+    // iOS to allow clicking the div. So a `click(){}` method here won't work, we need to attach an event listener
+    // directly to the element
+    this.element.onclick = bind(this, this._click);
   }
 
 });
