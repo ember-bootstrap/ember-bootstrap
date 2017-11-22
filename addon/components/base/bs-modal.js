@@ -403,9 +403,6 @@ export default Component.extend(TransitionSupport, {
     }
     this._isOpen = true;
 
-    this.checkScrollbar();
-    this.setScrollbar();
-
     document.body.classList.add('modal-open');
 
     this.resize();
@@ -415,7 +412,9 @@ export default Component.extend(TransitionSupport, {
         return;
       }
 
-      this.set('inDom', true);
+      this.checkScrollbar();
+      this.setScrollbar();
+
       schedule('afterRender', () => {
         let modalEl = this.get('modalElement');
         if (!modalEl) {
@@ -438,6 +437,7 @@ export default Component.extend(TransitionSupport, {
         }
       });
     };
+    this.set('inDom', true);
     this.handleBackdrop(callback);
   },
 
@@ -474,12 +474,11 @@ export default Component.extend(TransitionSupport, {
       return;
     }
 
-    this.set('inDom', false);
-
     this.handleBackdrop(() => {
       document.body.classList.remove('modal-open');
       this.resetAdjustments();
       this.resetScrollbar();
+      this.set('inDom', false);
       this.get('onHidden')();
     });
   },
@@ -501,15 +500,16 @@ export default Component.extend(TransitionSupport, {
         return;
       }
 
-      if (doAnimate) {
-        schedule('afterRender', this, function() {
-          let backdrop = this.get('backdropElement');
-          assert('Backdrop element should be in DOM', backdrop);
+      schedule('afterRender', this, function() {
+        let backdrop = this.get('backdropElement');
+        assert('Backdrop element should be in DOM', backdrop);
+        if (doAnimate) {
           transitionEnd(backdrop, callback, this, this.get('backdropTransitionDuration'));
-        });
-      } else {
-        callback.call(this);
-      }
+        } else {
+          callback.call(this);
+        }
+      });
+
     } else if (!this.get('isOpen') && this.get('backdrop')) {
       let backdrop = this.get('backdropElement');
       assert('Backdrop element should be in DOM', backdrop);
@@ -657,7 +657,7 @@ export default Component.extend(TransitionSupport, {
     this.setProperties({
       showModal: isOpen && (!fade || isFastBoot),
       showBackdrop: isOpen && backdrop,
-      inDom: isOpen && isFastBoot
+      inDom: isOpen
     });
   }
 });

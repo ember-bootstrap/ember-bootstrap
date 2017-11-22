@@ -20,10 +20,11 @@ moduleForComponent('bs-modal-simple', 'Integration | Component | bs-modal-simple
   integration: true
 });
 
-const transitionTimeout = 500;
+const transitionTimeout = 600;
 
-test('Simple modal has header, footer and body', function(assert) {
-  this.render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
+test('Simple modal has header, footer and body', async function(assert) {
+  this.render(hbs`{{#bs-modal-simple fade=false title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
+  await wait();
 
   assert.equal(findAll('.modal').length, 1, 'Modal exists.');
   assert.equal(findAll('.modal .modal-header').length, 1, 'Modal has header.');
@@ -33,6 +34,12 @@ test('Simple modal has header, footer and body', function(assert) {
   assert.equal(find('.modal .modal-footer button').textContent.trim(), 'Ok', 'Modal button has default title.');
   assert.equal(findAll('.modal .modal-body').length, 1, 'Modal has body.');
   assert.equal(find('.modal .modal-body').textContent.trim(), 'Hello world!', 'Modal body has correct content.');
+});
+
+test('Hidden modal does not render', function(assert) {
+  this.render(hbs`{{#bs-modal-simple open=false title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
+
+  assert.equal(findAll('.modal *').length, 0, 'Modal does not exist.');
 });
 
 test('Simple modal has default CSS classes', function(assert) {
@@ -48,8 +55,9 @@ test('Simple modal has default CSS classes', function(assert) {
   }, transitionTimeout);
 });
 
-test('Simple modal supports custom buttons', function(assert) {
+test('Simple modal supports custom buttons', async function(assert) {
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok"}}Hello world!{{/bs-modal-simple}}`);
+  await wait();
 
   assert.equal(findAll(`.modal .modal-footer button.${defaultButtonClass()}`).length, 1, 'Modal has close button.');
   assert.equal(find(`.modal .modal-footer button.${defaultButtonClass()}`).textContent.trim(), 'Cancel', 'Close button has correct title.');
@@ -58,8 +66,10 @@ test('Simple modal supports custom buttons', function(assert) {
 
 });
 
-test('Simple modal supports a custom submit button type', function(assert) {
+test('Simple modal supports a custom submit button type', async function(assert) {
   this.render(hbs`{{#bs-modal-simple closeTitle="Cancel" submitTitle="Ok" submitButtonType="danger"}}Hello world!{{/bs-modal-simple}}`);
+  await wait();
+
   assert.equal(findAll('.modal .modal-footer button.btn-danger').length, 1, 'Modal has submit button with btn-danger class.');
 });
 
@@ -75,7 +85,7 @@ testRequiringTransitions('open modal is immediately shown [fade]', function(asse
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
 
   assert.notOk(find('.modal').classList.contains(visibilityClass()), 'Modal is hidden');
-  assert.notEqual(find('.modal').style.display, 'block', 'Modal is visible');
+  // assert.notEqual(find('.modal').style.display, 'block', 'Modal is visible');
 
   // wait for fade animation
   setTimeout(() => {
@@ -89,14 +99,12 @@ test('open property shows modal', function(assert) {
   this.set('open', false);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false open=open}}Hello world!{{/bs-modal-simple}}`);
 
-  assert.notOk(find('.modal').classList.contains(visibilityClass()), 'Modal is hidden');
-  assert.notEqual(find('.modal').style.display, 'block', 'Modal is hidden');
+  assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
   this.set('open', true);
   assert.ok(find('.modal').classList.contains(visibilityClass()), 'Modal is visible');
   assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
   this.set('open', false);
-  assert.notOk(find('.modal').classList.contains(visibilityClass()), 'Modal is hidden');
-  assert.notEqual(find('.modal').style.display, 'block', 'Modal is hidden');
+  assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
 });
 
 testRequiringTransitions('open property shows modal [fade]', function(assert) {
@@ -104,8 +112,7 @@ testRequiringTransitions('open property shows modal [fade]', function(assert) {
   this.set('open', false);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" open=open}}Hello world!{{/bs-modal-simple}}`);
 
-  assert.equal(find('.modal').classList.contains(visibilityClass()), false, 'Modal is hidden');
-  assert.notEqual(find('.modal').style.display, 'block', 'Modal is hidden');
+  assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
   this.set('open', true);
   // wait for fade animation
   setTimeout(() => {
@@ -113,16 +120,17 @@ testRequiringTransitions('open property shows modal [fade]', function(assert) {
     assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
     this.set('open', false);
     setTimeout(() => {
-      assert.equal(find('.modal').classList.contains(visibilityClass()), false, 'Modal is hidden');
-      assert.notEqual(find('.modal').style.display, 'block', 'Modal is hidden');
+      assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
       done();
     }, transitionTimeout);
   }, transitionTimeout);
 });
 
-test('closeButton property shows close button', function(assert) {
+test('closeButton property shows close button', async function(assert) {
   this.set('closeButton', false);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeButton=closeButton}}Hello world!{{/bs-modal-simple}}`);
+  await wait();
+
   assert.equal(findAll('.modal .modal-header .close').length, 0, 'Modal has no close button');
   this.set('closeButton', true);
   assert.equal(findAll('.modal .modal-header .close').length, 1, 'Modal has close button');
@@ -163,12 +171,13 @@ test('clicking close button closes modal', function(assert) {
 
   // wait for fade animation
   setTimeout(async() => {
+    assert.equal(findAll('.modal').length, 1, 'Modal is visible');
     assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is visible');
     await click('.modal .modal-header .close');
 
     // wait for fade animation
     setTimeout(() => {
-      assert.equal(find('.modal').classList.contains(visibilityClass()), false, 'Modal is hidden');
+      assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
       done();
     }, transitionTimeout);
   }, transitionTimeout);
@@ -180,12 +189,13 @@ test('clicking ok button closes modal', function(assert) {
 
   // wait for fade animation
   setTimeout(async() => {
+    assert.equal(findAll('.modal').length, 1, 'Modal is visible');
     assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is visible');
     await click('.modal .modal-footer button');
 
     // wait for fade animation
     setTimeout(() => {
-      assert.equal(find('.modal').classList.contains(visibilityClass()), false, 'Modal is hidden');
+      assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
       done();
     }, transitionTimeout);
   }, transitionTimeout);
@@ -201,6 +211,7 @@ test('clicking close button leaves modal open when onHide action returns false',
 
   // wait for fade animation
   setTimeout(async() => {
+    assert.equal(findAll('.modal').length, 1, 'Modal is visible');
     assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is visible');
     await click('.modal .modal-header .close');
 
@@ -223,12 +234,13 @@ test('can implement custom close buttons', function(assert) {
 
   // wait for fade animation
   setTimeout(async() => {
+    assert.equal(findAll('.modal').length, 1, 'Modal is visible');
     assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is visible');
     await click('.modal .close-link');
 
     // wait for fade animation
     setTimeout(() => {
-      assert.equal(find('.modal').classList.contains(visibilityClass()), false, 'Modal is hidden');
+      assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
       done();
     }, transitionTimeout);
   }, transitionTimeout);
@@ -303,6 +315,7 @@ test('onSubmit is called when clicking submit button', async function(assert) {
   let submitSpy = this.spy();
   this.on('testAction', submitSpy);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" onSubmit=(action "testAction") as |modal|}}Hello world!{{/bs-modal-simple}}`);
+  await wait();
   await click('.modal .modal-footer button.btn-primary');
   assert.ok(submitSpy.calledOnce);
 });
@@ -313,6 +326,7 @@ test('when modal has a form and the submit button is clicked, the form is submit
   this.on('modalSubmit', modalSpy);
   this.on('formSubmit', formSpy);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" onSubmit=(action "modalSubmit") as |modal|}}{{#bs-form onSubmit=(action "formSubmit")}}{{/bs-form}}{{/bs-modal-simple}}`);
+  await wait();
   await click('.modal .modal-footer button.btn-primary');
   assert.ok(formSpy.calledOnce);
   assert.notOk(modalSpy.called);
@@ -326,6 +340,7 @@ test('when modal has several forms and the submit button is clicked, those forms
   this.on('formOneSubmit', formOneSpy);
   this.on('formTwoSubmit', formTwoSpy);
   this.render(hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" onSubmit=(action "modalSubmit") as |modal|}}{{#bs-form onSubmit=(action "formOneSubmit")}}{{/bs-form}}{{#bs-form onSubmit=(action "formTwoSubmit")}}{{/bs-form}}{{/bs-modal-simple}}`);
+  await wait();
   await click('.modal .modal-footer button.btn-primary');
   assert.ok(formOneSpy.calledOnce);
   assert.ok(formTwoSpy.calledOnce);
@@ -362,7 +377,7 @@ testRequiringFocus('Pressing escape key will close the modal if keyboard=true', 
   await keyEvent('.modal', 'keydown', 27);
 
   // wait for fade animation
-  await waitUntil(() => !find('.modal').classList.contains(visibilityClass()));
+  await waitUntil(() => !find('.modal'));
 
   assert.ok(action.calledOnce, 'Action has been called.');
 });
@@ -385,7 +400,7 @@ testRequiringFocus('Pressing escape key will close the modal if keyboard=true an
   await keyEvent('.modal', 'keydown', 27);
 
   // wait for fade animation
-  await waitUntil(() => !find('.modal').classList.contains(visibilityClass()));
+  await waitUntil(() => !find('.modal'));
 
   assert.ok(action.calledOnce, 'Action has been called.');
 });
@@ -417,7 +432,7 @@ test('Clicking on the backdrop will close the modal', async function(assert) {
   await click('.modal');
 
   // wait for fade animation
-  await waitUntil(() => !find('.modal').classList.contains(visibilityClass()));
+  await waitUntil(() => !find('.modal'));
   assert.ok(hideSpy.calledOnce);
 });
 
@@ -492,6 +507,7 @@ test('Modal yields close action', async function(assert) {
   this.render(hbs`{{#bs-modal-simple onHide=(action "close") as |modal|}}
       <button id="close" {{action modal.close}}>Close</button>
   {{/bs-modal-simple}}`);
+  await wait();
 
   await click('#close');
   assert.ok(closeAction.calledOnce, 'close action has been called.');
@@ -504,6 +520,7 @@ test('Modal yields submit action', async function(assert) {
   this.render(hbs`{{#bs-modal-simple onSubmit=(action "submit") as |modal|}}
       <button id="submit" {{action modal.submit}}>Submit</button>
   {{/bs-modal-simple}}`);
+  await wait();
 
   await click('#submit');
   assert.ok(submitAction.calledOnce, 'submit action has been called.');
