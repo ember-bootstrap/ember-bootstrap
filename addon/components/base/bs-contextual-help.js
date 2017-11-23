@@ -567,17 +567,19 @@ export default Component.extend(TransitionSupport, {
    * @private
    */
   removeListeners() {
-    let target = this.get('triggerTargetElement');
-    this.get('_triggerEvents')
-      .forEach((event) => {
-        if (isArray(event)) {
-          let [inEvent, outEvent] = event;
-          target.removeEventListener(inEvent, this._handleEnter);
-          target.removeEventListener(outEvent, this._handleLeave);
-        } else {
-          target.removeEventListener(event, this._handleToggle);
-        }
-      });
+    try {
+      let target = this.get('triggerTargetElement');
+      this.get('_triggerEvents')
+        .forEach((event) => {
+          if (isArray(event)) {
+            let [inEvent, outEvent] = event;
+            target.removeEventListener(inEvent, this._handleEnter);
+            target.removeEventListener(outEvent, this._handleLeave);
+          } else {
+            target.removeEventListener(event, this._handleToggle);
+          }
+        });
+    } catch(e) {} // eslint-disable-line no-empty
   },
 
   init() {

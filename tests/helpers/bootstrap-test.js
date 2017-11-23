@@ -130,22 +130,6 @@ export function testRequiringFocus(name, fn) {
   }
 }
 
-export function testRequiringFocusBS3(name, fn) {
-  if (document.hasFocus()) {
-    return testBS3(name, fn);
-  } else {
-    skip(name);
-  }
-}
-
-export function testRequiringFocusBS4(name, fn) {
-  if (document.hasFocus()) {
-    return testBS4(name, fn);
-  } else {
-    skip(name);
-  }
-}
-
 export function testRequiringTransitions(name, fn) {
   if (transitionSupport) {
     return test(name, fn);
