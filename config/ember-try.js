@@ -2,6 +2,7 @@
 module.exports = {
   // temporary workaround for https://github.com/yarnpkg/yarn/issues/3485
   command: 'BOOTSTRAPVERSION=3 ember test',
+  useYarn: true,
   scenarios: [
     {
       name: 'ember-2.3',
