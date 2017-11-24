@@ -10,6 +10,7 @@ export default Controller.extend({
   striped: false,
   animate: false,
   roundDigits: 0,
+  /* eslint-disable ember/avoid-leaking-state-in-ember-objects */
   typeChoices: [
     '',
     'success',
