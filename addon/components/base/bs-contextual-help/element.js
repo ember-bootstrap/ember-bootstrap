@@ -101,7 +101,7 @@ export default Component.extend({
    * @type {array}
    * @private
    */
-  popperClassNames: [],
+  popperClassNames: null,
 
   /**
    * @property popperClass

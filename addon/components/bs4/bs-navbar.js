@@ -10,7 +10,7 @@ export default Navbar.extend({
       return this.get('appliedType');
     },
 
-    set(key, value) { // eslint-disable-line no-unused
+    set(key, value) {
       let newValue = (!value || value === 'default') ? 'light' : value;
       this.set('appliedType', newValue);
       return newValue;
@@ -58,7 +58,12 @@ export default Navbar.extend({
     return `bg-${backgroundColor}`;
   }),
 
-  _validPositions: ['fixed-top', 'fixed-bottom', 'sticky-top'],
+  _validPositions: null,
 
-  _positionPrefix: ''
+  _positionPrefix: '',
+
+  init() {
+    this._super(...arguments);
+    this.set('_validPositions', ['fixed-top', 'fixed-bottom', 'sticky-top']);
+  }
 });

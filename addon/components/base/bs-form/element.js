@@ -7,7 +7,6 @@ import {
   alias
 } from '@ember/object/computed';
 import { observer, defineProperty, computed } from '@ember/object';
-import { on } from '@ember/object/evented';
 import { scheduleOnce } from '@ember/runloop';
 import { assert } from '@ember/debug';
 import { typeOf, isBlank } from '@ember/utils';
@@ -604,7 +603,7 @@ export default FormGroup.extend({
    * @default ['focusOut']
    * @public
    */
-  showValidationOn: ['focusOut'],
+  showValidationOn: null,
 
   /**
    * @property _showValidationOn
@@ -612,7 +611,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  _showValidationOn: computed('showValidationOn', function() {
+  _showValidationOn: computed('showValidationOn.[]', function() {
     let showValidationOn = this.get('showValidationOn');
 
     assert('showValidationOn must be a String or an Array', isArray(showValidationOn) || typeOf(showValidationOn) === 'string');
@@ -831,6 +830,9 @@ export default FormGroup.extend({
 
   init() {
     this._super(...arguments);
+    if (this.get('showValidationOn') === null) {
+      this.set('showValidationOn', ['focusOut']);
+    }
     if (!isBlank(this.get('property'))) {
       defineProperty(this, 'value', alias(`model.${this.get('property')}`));
       this.setupValidations();
@@ -845,7 +847,7 @@ export default FormGroup.extend({
    *  with an add-on on the right. [...] For input groups, adjust the right
    *  value to an appropriate pixel value depending on the width of your addon.
    */
-  adjustFeedbackIcons: on('didInsertElement', observer('hasFeedback', 'formLayout', function() {
+  adjustFeedbackIcons: observer('hasFeedback', 'formLayout', function() {
     scheduleOnce('afterRender', () => {
       let el = this.get('element');
       let feedbackIcon;
@@ -877,7 +879,12 @@ export default FormGroup.extend({
         feedbackIcon.style.right = `${adjustedPosition}px`;
       }
     });
-  })),
+  }),
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.adjustFeedbackIcons();
+  },
 
   actions: {
     change(value) {

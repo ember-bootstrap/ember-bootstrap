@@ -4,14 +4,17 @@ module.exports = {
     ecmaVersion: 2017,
     sourceType: 'module'
   },
+  plugins: [
+    'ember'
+  ],
   extends: [
     'eslint:recommended',
-    'plugin:ember-suave/recommended'
+    'plugin:ember/recommended'
   ],
   env: {
     browser: true
   },
   rules: {
-    'ember-suave/no-direct-property-access': 'off'
+    'ember/no-jquery': 'error'
   }
 };
