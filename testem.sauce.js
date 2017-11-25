@@ -9,7 +9,7 @@ module.exports = {
     'SLEdge',
     'SLChrome',
     'SLFirefox',
-    'SLIE11',
+    // 'SLIE11', reenable when https://github.com/emberjs/ember-qunit/issues/298 has been fixed!
     'SLSafari'
   ],
 

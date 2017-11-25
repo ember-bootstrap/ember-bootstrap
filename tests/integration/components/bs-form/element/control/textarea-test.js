@@ -1,14 +1,16 @@
 import { findAll } from 'ember-native-dom-helpers';
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('bs-form/element/control/textarea', 'Integration | Component | bs form/element/control/textarea', {
-  integration: true
-});
+module('Integration | Component | bs form/element/control/textarea', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
+  test('it renders', async function(assert) {
 
-  this.render(hbs`{{bs-form/element/control/textarea}}`);
+    await render(hbs`{{bs-form/element/control/textarea}}`);
 
-  assert.equal(findAll('textarea').length, 1);
+    assert.equal(findAll('textarea').length, 1);
+  });
 });
