@@ -7,7 +7,7 @@
     )
   }}
 {{else}}
-  {{#bs-nav type=type as |nav|}}
+  {{#bs-nav customClass=class type=type as |nav|}}
     {{#each navItems as |item|}}
       {{#if item.isGroup}}
         {{#nav.dropdown tagName="li" class=(if (bs-contains item.childIds isActiveId) "active") as |dd|}}
