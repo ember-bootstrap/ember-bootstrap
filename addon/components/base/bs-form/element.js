@@ -282,7 +282,7 @@ const nonDefaultLayouts = A([
  <td></td>
  </tr>
  <tr>
- <td>size</td>
+ <td>size<br>via <code>controlSize</code> property</td>
  <td></td>
  <td></td>
  <td>✔︎</td>

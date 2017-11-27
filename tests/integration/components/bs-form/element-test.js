@@ -19,6 +19,7 @@ import {
   test,
   testRequiringFocus,
   testBS3,
+  testBS4,
   validationSuccessClass,
   validationErrorClass,
   validationWarningClass,
@@ -255,7 +256,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
         placeholder=placeholder
         disabled=disabled
         autofocus=autofocus
-        size=size
+        controlSize=size
         tabindex=tabindex
         minlength=minlength
         maxlength=maxlength
@@ -691,5 +692,22 @@ module('Integration | Component | bs-form/element', function(hooks) {
 
     assert.ok(find('input').getAttribute('aria-describedby'), 'control has aria-describedby attribute');
     assert.equal(find('input').getAttribute('aria-describedby'), find(helpTextClass).getAttribute('id'), 'aria-describedby matches id');
+  });
+
+  // test for size property here to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/492
+  testBS3('support size classes', async function(assert) {
+    await render(hbs`{{bs-form/element size="lg"}}`);
+    assert.equal(find('.form-group').classList.contains('form-group-lg'), true, 'form-group has large class');
+
+    await render(hbs`{{bs-form/element size="sm"}}`);
+    assert.equal(find('.form-group').classList.contains('form-group-sm'), true, 'form-group has small class');
+  });
+
+  testBS4('support size classes', async function(assert) {
+    await render(hbs`{{bs-form/element size="lg"}}`);
+    assert.equal(find('.form-group').classList.contains('form-control-lg'), true, 'form-group has large class');
+
+    await render(hbs`{{bs-form/element size="sm"}}`);
+    assert.equal(find('.form-group').classList.contains('form-control-sm'), true, 'form-group has small class');
   });
 });
