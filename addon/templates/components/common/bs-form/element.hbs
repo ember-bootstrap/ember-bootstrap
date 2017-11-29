@@ -16,6 +16,7 @@
     formElementId=formElementId
     controlType=controlType
     formLayout=formLayout
+    size=size
   )
   helpTextComponent=(if hasHelpText
     (component helpTextComponent
@@ -36,7 +37,7 @@
       disabled=disabled
       readonly=readonly
       required=required
-      size=controlSize
+      controlSize=controlSize
       tabindex=tabindex
       minlength=minlength
       maxlength=maxlength
@@ -60,6 +61,7 @@
       ariaDescribedBy=(if hasHelpText ariaDescribedBy)
       onChange=(action "change")
       validationType=validation
+      size=size
   ) as |control|}}
     {{#if hasBlock}}
       {{yield

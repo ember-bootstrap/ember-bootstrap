@@ -504,6 +504,15 @@ export default FormGroup.extend({
   hasCustomWarning: notEmpty('customWarning'),
 
   /**
+   * Property for size styling, set to 'lg', 'sm' or 'xs' (the latter only for BS3)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+
+  /**
    * The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model's validation
    *
    * @property validationMessages

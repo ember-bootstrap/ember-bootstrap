@@ -41,4 +41,18 @@ module('Integration | Component | bs form/element/label', function(hooks) {
     await render(hbs`{{bs-form/element/label controlType="checkbox"}}`);
     assert.equal(find('label').classList.contains('form-check-label'), true, 'component has form-check-label class');
   });
+
+  testBS4('support size classes when using horizontal forms', async function(assert) {
+    await render(hbs`{{bs-form/element/label size="lg" formLayout="horizontal"}}`);
+    assert.equal(find('label').classList.contains('col-form-label-lg'), true, 'label has large class');
+
+    await render(hbs`{{bs-form/element/label size="sm" formLayout="horizontal"}}`);
+    assert.equal(find('label').classList.contains('col-form-label-sm'), true, 'label has small class');
+
+    await render(hbs`{{bs-form/element/label size="lg"}}`);
+    assert.equal(find('label').classList.contains('col-form-label-lg'), false, 'label does not have large class');
+
+    await render(hbs`{{bs-form/element/label size="sm"}}`);
+    assert.equal(find('label').classList.contains('col-form-label-sm'), false, 'label does not have small class');
+  });
 });

@@ -704,10 +704,15 @@ module('Integration | Component | bs-form/element', function(hooks) {
   });
 
   testBS4('support size classes', async function(assert) {
-    await render(hbs`{{bs-form/element size="lg"}}`);
-    assert.equal(find('.form-group').classList.contains('form-control-lg'), true, 'form-group has large class');
+    await render(hbs`{{bs-form/element size="lg" label="foo" formLayout="horizontal"}}`);
+    assert.equal(find('.form-group').classList.contains('form-group-lg'), false, 'form-group has not large class');
+    assert.equal(find('input').classList.contains('form-control-lg'), true, 'input has large class');
+    assert.equal(find('label').classList.contains('col-form-label-lg'), true, 'label has large class');
 
-    await render(hbs`{{bs-form/element size="sm"}}`);
-    assert.equal(find('.form-group').classList.contains('form-control-sm'), true, 'form-group has small class');
+    await render(hbs`{{bs-form/element size="sm" label="foo" formLayout="horizontal"}}`);
+    assert.equal(find('.form-group').classList.contains('form-group-sm'), false, 'form-group has not small class');
+    assert.equal(find('input').classList.contains('form-control-sm'), true, 'input has small class');
+    assert.equal(find('label').classList.contains('col-form-label-sm'), true, 'label has large class');
   });
+
 });
