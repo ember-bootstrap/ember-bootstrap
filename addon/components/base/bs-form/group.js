@@ -1,7 +1,6 @@
 import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/group';
-import SizeClass from 'ember-bootstrap/mixins/size-class';
 
 /**
  This component renders a `<div class="form-group">` element, with support for validation states and feedback icons (only for BS3).
@@ -25,7 +24,7 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  @extends Ember.Component
  @public
  */
-export default Component.extend(SizeClass, {
+export default Component.extend({
   layout,
 
   /**

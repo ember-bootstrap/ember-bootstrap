@@ -3,7 +3,6 @@ import FormGroup from 'ember-bootstrap/components/base/bs-form/group';
 
 export default FormGroup.extend({
   classNameBindings: ['isHorizontal:row', 'isCheckbox:form-check:form-group', 'isInlineCheckbox:form-check-inline'],
-  classTypePrefix: 'form-control',
 
   /**
    * Indicates whether the type of the control widget equals `checkbox`

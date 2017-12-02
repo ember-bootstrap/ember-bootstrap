@@ -13,7 +13,7 @@ export default Control.extend(ControlAttributes, {
     'value',
     'type',
     'placeholder',
-    'size',
+    'controlSize:size',
     'minlength',
     'maxlength',
     'min',
