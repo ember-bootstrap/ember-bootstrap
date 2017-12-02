@@ -57,11 +57,11 @@ export default Component.extend({
   /**
    * Which element to align to
    *
-   * @property target
+   * @property popperTarget
    * @type {string|HTMLElement}
    * @public
    */
-  target: null,
+  popperTarget: null,
 
   /**
    * @property autoPlacement
