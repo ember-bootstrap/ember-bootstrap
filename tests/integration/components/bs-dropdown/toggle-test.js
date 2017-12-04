@@ -18,7 +18,7 @@ module('Integration | Component | bs-dropdown/toggle', function(hooks) {
 
     assert.equal(find(':first-child').tagName, 'A', 'toggle is an anchor tag by default');
     assert.equal(find(':first-child').getAttribute('href'), '#', 'has href attribute');
-    assert.equal(find(':first-child').classList.contains('dropdown-toggle'), true, 'has dropdown-toggle class');
+    assert.dom(':first-child').hasClass('dropdown-toggle', 'has dropdown-toggle class');
     assert.equal(find(':first-child').getAttribute('role'), 'button', 'has role=button');
   });
 

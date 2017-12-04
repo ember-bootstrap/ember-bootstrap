@@ -1,4 +1,3 @@
-import { find, findAll } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -21,10 +20,10 @@ module('Integration | Component | bs-tab/pane', function(hooks) {
       {{/bs-tab/pane}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text', 'Shows block content');
-    assert.equal(findAll('div.tab-pane').length, 1, 'has tab-pane class');
-    assert.equal(find('div.tab-pane').classList.contains('active'), true, 'tab-pane has active class');
-    assert.equal(find('div.tab-pane').classList.contains(visibilityClass()), true, 'tab-pane has visibility class');
+    assert.dom('*').hasText('template block text', 'Shows block content');
+    assert.dom('div.tab-pane').exists({ count: 1 }, 'has tab-pane class');
+    assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
+    assert.dom('div.tab-pane').hasClass(visibilityClass(), 'tab-pane has visibility class');
   });
 
   test('it has correct markup when switching active pane and fade=false', async function(assert) {
@@ -35,18 +34,18 @@ module('Integration | Component | bs-tab/pane', function(hooks) {
       {{/bs-tab/pane}}
     `);
 
-    assert.equal(find('div.tab-pane').classList.contains('fade'), false, 'tab-pane does not have fade class');
+    assert.dom('div.tab-pane').hasNoClass('fade', 'tab-pane does not have fade class');
 
-    assert.equal(find('div.tab-pane').classList.contains('active'), false, 'tab-pane does not have active class');
-    assert.equal(find('div.tab-pane').classList.contains(visibilityClass()), false, 'tab-pane does not have visibility class');
+    assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
     this.set('activeId', 'pane1');
-    assert.equal(find('div.tab-pane').classList.contains('active'), true, 'tab-pane has active class');
-    assert.equal(find('div.tab-pane').classList.contains(visibilityClass()), false, 'tab-pane does not have visibility class');
+    assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
     this.set('activeId', null);
-    assert.equal(find('div.tab-pane').classList.contains('active'), false, 'tab-pane does not have active class');
-    assert.equal(find('div.tab-pane').classList.contains(visibilityClass()), false, 'tab-pane does not have visibility class');
+    assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
   });
 
   testRequiringTransitions('it has correct markup when switching active pane and fade=true', async function(assert) {
@@ -57,28 +56,28 @@ module('Integration | Component | bs-tab/pane', function(hooks) {
       {{/bs-tab/pane}}
     `);
 
-    assert.equal(find('div.tab-pane').classList.contains('fade'), true, 'tab-pane has fade class');
-    assert.equal(find('div.tab-pane').classList.contains('active'), false, 'tab-pane does not have active class');
-    assert.equal(find('div.tab-pane').classList.contains(visibilityClass()), false, 'tab-pane does not have visibility class');
+    assert.dom('div.tab-pane').hasClass('fade', 'tab-pane has fade class');
+    assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
     this.set('activeId', 'pane1');
-    assert.equal(find('div.tab-pane').classList.contains('active'), false, 'tab-pane does not have active class');
-    assert.equal(find('div.tab-pane').classList.contains(visibilityClass()), false, 'tab-pane does not have visibility class');
+    assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
     let done = assert.async();
     // wait for fade animation
     setTimeout(() => {
-      assert.equal(find('div.tab-pane').classList.contains('active'), true, 'tab-pane has active class');
-      assert.equal(find('div.tab-pane').classList.contains(visibilityClass()), true, 'tab-pane has visibility class');
+      assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
+      assert.dom('div.tab-pane').hasClass(visibilityClass(), 'tab-pane has visibility class');
 
       this.set('activeId', null);
-      assert.equal(find('div.tab-pane').classList.contains('active'), true, 'tab-pane has active class');
-      assert.equal(find('div.tab-pane').classList.contains(visibilityClass()), false, 'tab-pane does not have visibility class');
+      assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
+      assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
       // wait for fade animation
       setTimeout(() => {
-        assert.equal(find('div.tab-pane').classList.contains('active'), false, 'tab-pane does not have active class');
-        assert.equal(find('div.tab-pane').classList.contains(visibilityClass()), false, 'tab-pane does not have visibility class');
+        assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
+        assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
         done();
       }, transitionTimeout);

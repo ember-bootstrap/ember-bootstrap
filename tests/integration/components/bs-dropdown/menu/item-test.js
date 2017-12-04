@@ -1,4 +1,3 @@
-import { find, findAll } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -16,8 +15,8 @@ module('Integration | Component | bs-dropdown/menu/item', function(hooks) {
       {{/bs-dropdown/menu/item}}
     `);
 
-    assert.equal(findAll('li').length, 1, 'renders as <li> element');
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('li').exists({ count: 1 }, 'renders as <li> element');
+    assert.dom('*').hasText('template block text');
   });
 
   testBS4('it has correct markup', async function(assert) {
@@ -30,7 +29,7 @@ module('Integration | Component | bs-dropdown/menu/item', function(hooks) {
       </span>
     `);
 
-    assert.equal(findAll('div').length, 0, 'renders as no element');
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('div').doesNotExist('renders as no element');
+    assert.dom('*').hasText('template block text');
   });
 });

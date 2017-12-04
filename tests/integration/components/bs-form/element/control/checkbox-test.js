@@ -1,4 +1,3 @@
-import { find, findAll } from 'ember-native-dom-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -12,11 +11,11 @@ module('Integration | Component | bs form/element/control/checkbox', function(ho
 
     await render(hbs`{{bs-form/element/control/checkbox}}`);
 
-    assert.equal(findAll('input[type=checkbox]').length, 1);
+    assert.dom('input[type=checkbox]').exists({ count: 1 });
   });
 
   testBS4('component has form-check-input class', async function(assert) {
     await render(hbs`{{bs-form/element/control/checkbox}}`);
-    assert.equal(find('input[type=checkbox]').classList.contains('form-check-input'), true, 'component has form-check-input class');
+    assert.dom('input[type=checkbox]').hasClass('form-check-input', 'component has form-check-input class');
   });
 });

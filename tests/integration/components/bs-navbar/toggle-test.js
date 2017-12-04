@@ -1,4 +1,3 @@
-import { find, findAll } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -11,13 +10,13 @@ module('Integration | Component | bs-navbar/toggle', function(hooks) {
   testBS3('it renders inline usage', async function(assert) {
     await render(hbs`{{bs-navbar/toggle}}`);
 
-    assert.equal(find('*').textContent.trim(), 'Toggle navigation');
+    assert.dom('*').hasText('Toggle navigation');
   });
 
   testBS4('it renders inline usage', async function(assert) {
     await render(hbs`{{bs-navbar/toggle}}`);
 
-    assert.ok(find('.navbar-toggler > span').classList.contains('navbar-toggler-icon'));
+    assert.dom('.navbar-toggler > span').hasClass('navbar-toggler-icon');
   });
 
   test('it renders block usage', async function(assert) {
@@ -27,24 +26,24 @@ module('Integration | Component | bs-navbar/toggle', function(hooks) {
       {{/bs-navbar/toggle}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 
   testBS3('it has correct markup', async function(assert) {
     await render(hbs`{{bs-navbar/toggle}}`);
 
-    assert.equal(findAll('button').length, 1, 'there is exactly one button element');
-    assert.ok(find('button').classList.contains('navbar-toggle'), 'the toggle has the navbar-toggle class');
-    assert.ok(find('button').classList.contains('collapsed'), 'the toggle has the collapsed class');
-    assert.ok(find('button').classList.contains('btn'), 'the toggle has the btn class indicating it derives from bs-button');
+    assert.dom('button').exists({ count: 1 }, 'there is exactly one button element');
+    assert.dom('button').hasClass('navbar-toggle', 'the toggle has the navbar-toggle class');
+    assert.dom('button').hasClass('collapsed', 'the toggle has the collapsed class');
+    assert.dom('button').hasClass('btn', 'the toggle has the btn class indicating it derives from bs-button');
   });
 
   testBS4('it has correct markup', async function(assert) {
     await render(hbs`{{bs-navbar/toggle}}`);
 
-    assert.equal(findAll('button').length, 1, 'there is exactly one button element');
-    assert.ok(find('button').classList.contains('navbar-toggler'), 'the toggle has the navbar-toggler class');
-    assert.ok(find('button').classList.contains('collapsed'), 'the toggle has the collapsed class');
-    assert.ok(find('button').classList.contains('btn'), 'the toggle has the btn class indicating it derives from bs-button');
+    assert.dom('button').exists({ count: 1 }, 'there is exactly one button element');
+    assert.dom('button').hasClass('navbar-toggler', 'the toggle has the navbar-toggler class');
+    assert.dom('button').hasClass('collapsed', 'the toggle has the collapsed class');
+    assert.dom('button').hasClass('btn', 'the toggle has the btn class indicating it derives from bs-button');
   });
 });

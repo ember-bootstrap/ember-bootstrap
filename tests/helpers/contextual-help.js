@@ -1,5 +1,5 @@
 import { assign } from '@ember/polyfills';
-import { find, findAll } from 'ember-native-dom-helpers';
+import { find } from 'ember-native-dom-helpers';
 
 export function setupForPositioning(align = 'left') {
   assign(find('#wrapper').style, {
@@ -26,7 +26,7 @@ function offset(el) {
 }
 
 export function assertPositioning(assert, selector = '.tooltip') {
-  assert.equal(findAll(selector).length, 1, 'Element exists.');
+  assert.dom(selector).exists({ count: 1 }, 'Element exists.');
 
   let tooltip = find(selector);
   let trigger = find('#target');

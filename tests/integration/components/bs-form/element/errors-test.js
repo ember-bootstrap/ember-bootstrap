@@ -1,5 +1,4 @@
 import { A } from '@ember/array';
-import { find, findAll } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -15,7 +14,7 @@ module('Integration | Component | bs form/element/errors', function(hooks) {
 
     await render(hbs`{{bs-form/element/errors show=false messages=messages}}`);
 
-    assert.equal(findAll(`.${formFeedbackClass()}`).length, 0);
+    assert.dom(`.${formFeedbackClass()}`).doesNotExist();
   });
 
   test('shows first message', async function(assert) {
@@ -24,7 +23,7 @@ module('Integration | Component | bs form/element/errors', function(hooks) {
 
     await render(hbs`{{bs-form/element/errors show=true messages=messages}}`);
 
-    assert.equal(findAll(`.${formFeedbackClass()}`).length, 1);
-    assert.equal(find(`.${formFeedbackClass()}`).textContent.trim(), 'foo');
+    assert.dom(`.${formFeedbackClass()}`).exists({ count: 1 });
+    assert.dom(`.${formFeedbackClass()}`).hasText('foo');
   });
 });

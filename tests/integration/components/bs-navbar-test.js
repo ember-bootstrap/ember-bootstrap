@@ -1,4 +1,4 @@
-import { find, findAll, click } from 'ember-native-dom-helpers';
+import { click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -23,34 +23,37 @@ module('Integration | Component | bs-navbar', function(hooks) {
   testBS3('it has correct default markup', async function(assert) {
     await render(hbs`{{bs-navbar}}`);
 
-    assert.equal(findAll('nav').length, 1, 'there is only one nav element');
-    assert.ok(find('nav').classList.contains('navbar'), 'the navbar has the navbar class');
-    assert.ok(find('nav').classList.contains('navbar-default'), 'the navbar has the navbar-default class');
-    assert.equal(findAll('nav > div').length, 1, 'there is a div right under the nav element');
-    assert.ok(find('nav > div').classList.contains('container-fluid'), 'the div is a fluid container');
+    assert.dom('nav').exists({ count: 1 }, 'there is only one nav element');
+    assert.dom('nav').hasClass('navbar', 'the navbar has the navbar class');
+    assert.dom('nav').hasClass('navbar-default', 'the navbar has the navbar-default class');
+    assert.dom('nav > div').exists({ count: 1 }, 'there is a div right under the nav element');
+    assert.dom('nav > div').hasClass('container-fluid', 'the div is a fluid container');
   });
 
   testBS4('it has correct default markup', async function(assert) {
     await render(hbs`{{bs-navbar}}`);
 
-    assert.equal(findAll('nav').length, 1, 'there is only one nav element');
-    assert.ok(find('nav').classList.contains('navbar'), 'the navbar has the navbar class');
-    assert.ok(find('nav').classList.contains('navbar-light'), 'the navbar has the navbar-default class');
+    assert.dom('nav').exists({ count: 1 }, 'there is only one nav element');
+    assert.dom('nav').hasClass('navbar', 'the navbar has the navbar class');
+    assert.dom('nav').hasClass('navbar-light', 'the navbar has the navbar-default class');
     // No container by default because fluid is automatic
   });
 
   test('it handles inverse navbars properly', async function(assert) {
     await render(hbs`{{bs-navbar type="inverse"}}`);
 
-    assert.ok(find('nav').classList.contains('navbar-inverse'), 'the navbar has the navbar-inverse class');
-    assert.notOk(find('nav').classList.contains('navbar-default'), 'the navbar does not have the navbar-default class');
+    assert.dom('nav').hasClass('navbar-inverse', 'the navbar has the navbar-inverse class');
+    assert.dom('nav').hasNoClass('navbar-default', 'the navbar does not have the navbar-default class');
   });
 
   test('it handles fluid containers properly', async function(assert) {
     await render(hbs`{{bs-navbar fluid=false}}`);
 
-    assert.ok(find('nav > div').classList.contains('container'), 'the wrapping div has the container class');
-    assert.notOk(find('nav > div').classList.contains('container-fluid'), 'the wrapping div does not have the container-fluid class');
+    assert.dom('nav > div').hasClass('container', 'the wrapping div has the container class');
+    assert.dom('nav > div').hasNoClass(
+      'container-fluid',
+      'the wrapping div does not have the container-fluid class'
+    );
   });
 
   testBS3('it handles the toggling action properly', async function(assert) {
@@ -60,13 +63,19 @@ module('Integration | Component | bs-navbar', function(hooks) {
       {{/bs-navbar}}
     `);
 
-    assert.ok(find('button.navbar-toggle').classList.contains('collapsed'), 'ensure the default state of the button through the active class');
+    assert.dom('button.navbar-toggle').hasClass(
+      'collapsed',
+      'ensure the default state of the button through the active class'
+    );
 
     let done = assert.async();
 
     await click('button');
     setTimeout(() => {
-      assert.notOk(find('button.navbar-toggle').classList.contains('collapsed'), 'ensure the toggled state of the button through the active class');
+      assert.dom('button.navbar-toggle').hasNoClass(
+        'collapsed',
+        'ensure the toggled state of the button through the active class'
+      );
 
       done();
     }, 500);
@@ -79,13 +88,19 @@ module('Integration | Component | bs-navbar', function(hooks) {
       {{/bs-navbar}}
     `);
 
-    assert.ok(find('button.navbar-toggler').classList.contains('collapsed'), 'ensure the default state of the button through the active class');
+    assert.dom('button.navbar-toggler').hasClass(
+      'collapsed',
+      'ensure the default state of the button through the active class'
+    );
 
     let done = assert.async();
 
     await click('button');
     setTimeout(() => {
-      assert.notOk(find('button.navbar-toggler').classList.contains('collapsed'), 'ensure the toggled state of the button through the active class');
+      assert.dom('button.navbar-toggler').hasNoClass(
+        'collapsed',
+        'ensure the toggled state of the button through the active class'
+      );
 
       done();
     }, 500);
@@ -104,10 +119,10 @@ module('Integration | Component | bs-navbar', function(hooks) {
       {{/bs-navbar}}
     `);
 
-    assert.equal(findAll('nav.navbar-default').length, 1, 'it has the navbar');
-    assert.equal(findAll('nav.navbar-default .navbar-header > button.navbar-toggle').length, 1, 'it has the navbar toggle');
-    assert.equal(findAll('nav.navbar-default .navbar-collapse').length, 1, 'it has the navbar content');
-    assert.equal(findAll('nav.navbar-default .navbar-collapse > .navbar-nav').length, 1, 'it has the navbar nav');
+    assert.dom('nav.navbar-default').exists({ count: 1 }, 'it has the navbar');
+    assert.dom('nav.navbar-default .navbar-header > button.navbar-toggle').exists({ count: 1 }, 'it has the navbar toggle');
+    assert.dom('nav.navbar-default .navbar-collapse').exists({ count: 1 }, 'it has the navbar content');
+    assert.dom('nav.navbar-default .navbar-collapse > .navbar-nav').exists({ count: 1 }, 'it has the navbar nav');
   });
 
   testBS4('it exposes all the requisite contextual components', async function(assert) {
@@ -123,61 +138,61 @@ module('Integration | Component | bs-navbar', function(hooks) {
       {{/bs-navbar}}
     `);
 
-    assert.equal(findAll('nav.navbar-light').length, 1, 'it has the navbar');
-    assert.equal(findAll('nav.navbar-light .navbar-header > button.navbar-toggler').length, 1, 'it has the navbar toggle');
-    assert.equal(findAll('nav.navbar-light .navbar-collapse').length, 1, 'it has the navbar content');
-    assert.equal(findAll('nav.navbar-light .navbar-collapse > .navbar-nav').length, 1, 'it has the navbar nav');
+    assert.dom('nav.navbar-light').exists({ count: 1 }, 'it has the navbar');
+    assert.dom('nav.navbar-light .navbar-header > button.navbar-toggler').exists({ count: 1 }, 'it has the navbar toggle');
+    assert.dom('nav.navbar-light .navbar-collapse').exists({ count: 1 }, 'it has the navbar content');
+    assert.dom('nav.navbar-light .navbar-collapse > .navbar-nav').exists({ count: 1 }, 'it has the navbar nav');
   });
 
   test('it nas no positional classes when position is not specified', async function(assert) {
     await render(hbs`{{bs-navbar}}`);
 
-    assert.notOk(find('nav').classList.contains(positionClassFor('fixed-top')), 'it does not have position fixed-top');
-    assert.notOk(find('nav').classList.contains(positionClassFor('fixed-bottom')), 'it does not have position fixed-bottom');
-    assert.notOk(find('nav').classList.contains(positionStickyClass()), `it does not have ${positionStickyClass()}`);
+    assert.dom('nav').hasNoClass(positionClassFor('fixed-top'), 'it does not have position fixed-top');
+    assert.dom('nav').hasNoClass(positionClassFor('fixed-bottom'), 'it does not have position fixed-bottom');
+    assert.dom('nav').hasNoClass(positionStickyClass(), `it does not have ${positionStickyClass()}`);
   });
 
   test('it handles fixed-top properly', async function(assert) {
     await render(hbs`{{bs-navbar position="fixed-top"}}`);
 
-    assert.ok(find('nav').classList.contains(positionClassFor('fixed-top')), 'it has position fixed-top');
-    assert.notOk(find('nav').classList.contains(positionClassFor('fixed-bottom')), 'it does not have position fixed-bottom');
-    assert.notOk(find('nav').classList.contains(positionStickyClass()), `it does not have ${positionStickyClass()}`);
+    assert.dom('nav').hasClass(positionClassFor('fixed-top'), 'it has position fixed-top');
+    assert.dom('nav').hasNoClass(positionClassFor('fixed-bottom'), 'it does not have position fixed-bottom');
+    assert.dom('nav').hasNoClass(positionStickyClass(), `it does not have ${positionStickyClass()}`);
   });
 
   test('it handles fixed-bottom properly', async function(assert) {
     await render(hbs`{{bs-navbar position="fixed-bottom"}}`);
 
-    assert.notOk(find('nav').classList.contains(positionClassFor('fixed-top')), 'it does not have position fixed-top');
-    assert.ok(find('nav').classList.contains(positionClassFor('fixed-bottom')), 'it has position fixed-bottom');
-    assert.notOk(find('nav').classList.contains(positionStickyClass()), `it does not have ${positionStickyClass()}`);
+    assert.dom('nav').hasNoClass(positionClassFor('fixed-top'), 'it does not have position fixed-top');
+    assert.dom('nav').hasClass(positionClassFor('fixed-bottom'), 'it has position fixed-bottom');
+    assert.dom('nav').hasNoClass(positionStickyClass(), `it does not have ${positionStickyClass()}`);
   });
 
   testBS4('it handles navbar-expand[-*] properly', async function(assert) {
     await render(hbs`{{bs-navbar toggleBreakpoint="sm"}}`);
-    assert.notOk(find('nav').classList.contains('navbar-expand-lg'), 'it does not have default navbar-expand-lg');
-    assert.ok(find('nav').classList.contains('navbar-expand-sm'), 'it has navbar-expand-sm');
+    assert.dom('nav').hasNoClass('navbar-expand-lg', 'it does not have default navbar-expand-lg');
+    assert.dom('nav').hasClass('navbar-expand-sm', 'it has navbar-expand-sm');
   });
 
   testBS4('it handles navbar-expand properly', async function(assert) {
     await render(hbs`{{bs-navbar toggleBreakpoint=null}}`);
-    assert.ok(find('nav').classList.contains('navbar-expand'), 'it has navbar-expand');
+    assert.dom('nav').hasClass('navbar-expand', 'it has navbar-expand');
   });
 
   testBS3('it handles static-top properly', async function(assert) {
     await render(hbs`{{bs-navbar position="static-top"}}`);
 
-    assert.notOk(find('nav').classList.contains(positionClassFor('fixed-top')), 'it does not have position fixed-top');
-    assert.notOk(find('nav').classList.contains(positionClassFor('fixed-bottom')), 'it does not have position fixed-bottom');
-    assert.ok(find('nav').classList.contains(positionStickyClass()), `it has ${positionStickyClass()}`);
+    assert.dom('nav').hasNoClass(positionClassFor('fixed-top'), 'it does not have position fixed-top');
+    assert.dom('nav').hasNoClass(positionClassFor('fixed-bottom'), 'it does not have position fixed-bottom');
+    assert.dom('nav').hasClass(positionStickyClass(), `it has ${positionStickyClass()}`);
   });
 
   testBS4('it handles sticky-top properly', async function(assert) {
     await render(hbs`{{bs-navbar position="sticky-top"}}`);
 
-    assert.notOk(find('nav').classList.contains(positionClassFor('fixed-top')), 'it does not have position fixed-top');
-    assert.notOk(find('nav').classList.contains(positionClassFor('fixed-bottom')), 'it does not have position fixed-bottom');
-    assert.ok(find('nav').classList.contains(positionStickyClass()), `it has ${positionStickyClass()}`);
+    assert.dom('nav').hasNoClass(positionClassFor('fixed-top'), 'it does not have position fixed-top');
+    assert.dom('nav').hasNoClass(positionClassFor('fixed-bottom'), 'it does not have position fixed-bottom');
+    assert.dom('nav').hasClass(positionStickyClass(), `it has ${positionStickyClass()}`);
   });
 
   test('setting collapse to false expands the navbar', async function(assert) {
@@ -198,15 +213,15 @@ module('Integration | Component | bs-navbar', function(hooks) {
     `);
     this.set('collapsed', false);
 
-    assert.equal(find('.navbar-collapse').classList.contains('collapsing'), true, 'collapse has collapsing class while transition is running');
+    assert.dom('.navbar-collapse').hasClass('collapsing', 'collapse has collapsing class while transition is running');
 
     let done = assert.async();
 
     // wait for transitions to complete
     setTimeout(() => {
       assert.ok(expandedAction.calledOnce, 'onExpanded action has been called');
-      assert.equal(find('.navbar-collapse').classList.contains('collapse'), true, 'collapse has collapse class');
-      assert.equal(find('.navbar-collapse').classList.contains(visibilityClass()), true, 'collapse has visibility class');
+      assert.dom('.navbar-collapse').hasClass('collapse', 'collapse has collapse class');
+      assert.dom('.navbar-collapse').hasClass(visibilityClass(), 'collapse has visibility class');
 
       done();
     }, 500);
@@ -230,15 +245,15 @@ module('Integration | Component | bs-navbar', function(hooks) {
     `);
     this.set('collapsed', true);
 
-    assert.equal(find('.navbar-collapse').classList.contains('collapsing'), true, 'collapse has collapsing class while transition is running');
+    assert.dom('.navbar-collapse').hasClass('collapsing', 'collapse has collapsing class while transition is running');
 
     let done = assert.async();
 
     // wait for transitions to complete
     setTimeout(() => {
       assert.ok(collapsedAction.calledOnce, 'onCollapsed action has been called');
-      assert.equal(find('.navbar-collapse').classList.contains('collapse'), true, 'collapse has collapse class');
-      assert.equal(find('.navbar-collapse').classList.contains('in'), false, 'collapse does not have in class');
+      assert.dom('.navbar-collapse').hasClass('collapse', 'collapse has collapse class');
+      assert.dom('.navbar-collapse').hasNoClass('in', 'collapse does not have in class');
 
       done();
     }, 500);
@@ -270,8 +285,8 @@ module('Integration | Component | bs-navbar', function(hooks) {
     // wait for transitions to complete
     setTimeout(() => {
       assert.ok(expandedAction.calledOnce, 'onExpanded action has been called');
-      assert.equal(find('.navbar-collapse').classList.contains('collapse'), true, 'collapse has collapse class');
-      assert.equal(find('.navbar-collapse').classList.contains(visibilityClass()), true, 'collapse has visibility class');
+      assert.dom('.navbar-collapse').hasClass('collapse', 'collapse has collapse class');
+      assert.dom('.navbar-collapse').hasClass(visibilityClass(), 'collapse has visibility class');
 
       done();
     }, 500);
@@ -303,8 +318,8 @@ module('Integration | Component | bs-navbar', function(hooks) {
     // wait for transitions to complete
     setTimeout(() => {
       assert.ok(collapsedAction.calledOnce, 'onCollapsed action has been called');
-      assert.equal(find('.navbar-collapse').classList.contains('collapse'), true, 'collapse has collapse class');
-      assert.equal(find('.navbar-collapse').classList.contains('in'), false, 'collapse does not have in class');
+      assert.dom('.navbar-collapse').hasClass('collapse', 'collapse has collapse class');
+      assert.dom('.navbar-collapse').hasNoClass('in', 'collapse does not have in class');
 
       done();
     }, 500);
@@ -329,7 +344,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
     await click('button');
     assert.ok(action.calledOnce, 'onExpand has been called.');
 
-    assert.equal(find(':first-child').classList.contains('collapsing'), false, 'no transition');
+    assert.dom(':first-child').hasNoClass('collapsing', 'no transition');
   });
 
   test('navbar is not collapsed when onCollapse action returns false', async function(assert) {
@@ -351,7 +366,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
     await click('button');
     assert.ok(action.calledOnce, 'onCollapse has been called.');
 
-    assert.equal(find(':first-child').classList.contains('collapsing'), false, 'no transition');
+    assert.dom(':first-child').hasNoClass('collapsing', 'no transition');
   });
 
   test('clicking the toggle does not modify the public collapsed property', async function(assert) {

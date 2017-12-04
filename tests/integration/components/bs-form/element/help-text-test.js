@@ -1,4 +1,3 @@
-import { find } from 'ember-native-dom-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -13,7 +12,7 @@ module('Integration | Component | bs form/element/help text', function(hooks) {
       {{bs-form/element/help-text text="foo bar"}}
     `);
 
-    assert.ok(find('div').classList.contains(formHelpTextClass()));
-    assert.equal(find('div').textContent.trim(), 'foo bar');
+    assert.dom('div').hasClass(formHelpTextClass());
+    assert.dom('div').hasText('foo bar');
   });
 });

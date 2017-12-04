@@ -1,4 +1,4 @@
-import { find, findAll } from 'ember-native-dom-helpers';
+import { find } from 'ember-native-dom-helpers';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -21,13 +21,13 @@ module('Integration | Component | bs-tooltip/element', function(hooks) {
       {{/bs-tooltip/element}}
     `);
 
-    assert.ok(find(':first-child').classList.contains('tooltip'), 'has tooltip class');
+    assert.dom(':first-child').hasClass('tooltip', 'has tooltip class');
     // assert.ok(find(':first-child').classList.contains(tooltipPositionClass('top')), 'has placement class');
-    assert.ok(find(':first-child').classList.contains('fade'), 'has fade class');
-    assert.ok(find(':first-child').classList.contains(visibilityClass()), 'has visibility class');
+    assert.dom(':first-child').hasClass('fade', 'has fade class');
+    assert.dom(':first-child').hasClass(visibilityClass(), 'has visibility class');
     assert.equal(find(':first-child').getAttribute('role'), 'tooltip', 'has ARIA role');
-    assert.equal(findAll(versionDependent('.tooltip-arrow', '.arrow')).length, 1, 'has arrow');
-    assert.equal(find('.tooltip-inner').textContent.trim(), 'template block text', 'shows title');
+    assert.dom(versionDependent('.tooltip-arrow', '.arrow')).exists({ count: 1 }, 'has arrow');
+    assert.dom('.tooltip-inner').hasText('template block text', 'shows title');
   });
 
   skip('it supports different placements', async function(assert) {
@@ -41,7 +41,7 @@ module('Integration | Component | bs-tooltip/element', function(hooks) {
     placements.forEach((placement) => {
       this.set('placement', placement);
       let placementClass = tooltipPositionClass(placement);
-      assert.ok(find(':first-child').classList.contains(placementClass), `has ${placementClass} class`);
+      assert.dom(':first-child').hasClass(placementClass, `has ${placementClass} class`);
     });
   });
 });

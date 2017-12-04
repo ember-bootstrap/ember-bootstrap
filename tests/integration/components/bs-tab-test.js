@@ -34,13 +34,13 @@ module('Integration | Component | bs-tab', function(hooks) {
       {{/bs-tab}}
     `);
 
-    assert.equal(findAll('.tab-pane').length, 2, 'yields tab pane component');
+    assert.dom('.tab-pane').exists({ count: 2 }, 'yields tab pane component');
 
     await click('#switch');
 
     assertActiveTab.call(this, assert, 0, false);
     assertActiveTab.call(this, assert, 1, true);
-    assert.equal(find('#activeId').textContent.trim(), 'pane2', 'yields activeId');
+    assert.dom('#activeId').hasText('pane2', 'yields activeId');
   });
 
   test('it yields expected values [customTabs=true]', async function(assert) {
@@ -59,13 +59,13 @@ module('Integration | Component | bs-tab', function(hooks) {
       {{/bs-tab}}
     `);
 
-    assert.equal(findAll('.tab-pane').length, 2, 'yields tab pane component');
+    assert.dom('.tab-pane').exists({ count: 2 }, 'yields tab pane component');
 
     await click('#switch');
 
     assertActiveTab.call(this, assert, 0, false);
     assertActiveTab.call(this, assert, 1, true);
-    assert.equal(find('#activeId').textContent.trim(), 'pane2', 'yields activeId');
+    assert.dom('#activeId').hasText('pane2', 'yields activeId');
   });
 
   test('it generates tab navigation', async function(assert) {
@@ -80,10 +80,10 @@ module('Integration | Component | bs-tab', function(hooks) {
       {{/bs-tab}}
     `);
 
-    assert.equal(findAll('ul.nav.nav-tabs').length, 1, 'has tabs navigation');
-    assert.equal(findAll('ul.nav.nav-tabs > li').length, 2, 'has tabs navigation items');
-    assert.equal(find('ul.nav.nav-tabs > li:nth-child(1) > a').textContent.trim(), 'Tab 1', 'navigation item shows pane title');
-    assert.equal(find('ul.nav.nav-tabs > li:nth-child(2) > a').textContent.trim(), 'Tab 2', 'navigation item shows pane title');
+    assert.dom('ul.nav.nav-tabs').exists({ count: 1 }, 'has tabs navigation');
+    assert.dom('ul.nav.nav-tabs > li').exists({ count: 2 }, 'has tabs navigation items');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(1) > a').hasText('Tab 1', 'navigation item shows pane title');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(2) > a').hasText('Tab 2', 'navigation item shows pane title');
   });
 
   test('first tab is active by default', async function(assert) {
@@ -142,19 +142,15 @@ module('Integration | Component | bs-tab', function(hooks) {
       {{/bs-tab}}
     `);
 
-    assert.equal(findAll('ul.nav.nav-tabs').length, 1, 'has tabs navigation');
-    assert.equal(findAll('ul.nav.nav-tabs > li').length, 3, 'has tabs navigation items');
-    assert.equal(find('ul.nav.nav-tabs > li:nth-child(1) > a').textContent.trim(), 'Tab 1', 'navigation item shows pane title');
-    assert.equal(find('ul.nav.nav-tabs > li:nth-child(2) > a').textContent.trim(), 'Tab 2', 'navigation item shows pane title');
-    assert.equal(find('ul.nav.nav-tabs > li:nth-child(3)').classList.contains('dropdown'), true, 'adds dropdown for grouped items');
-    assert.equal(find('ul.nav.nav-tabs > li:nth-child(3) > a').textContent.trim(), 'Dropdown', 'drop down item shows pane groupTitle');
+    assert.dom('ul.nav.nav-tabs').exists({ count: 1 }, 'has tabs navigation');
+    assert.dom('ul.nav.nav-tabs > li').exists({ count: 3 }, 'has tabs navigation items');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(1) > a').hasText('Tab 1', 'navigation item shows pane title');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(2) > a').hasText('Tab 2', 'navigation item shows pane title');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(3)').hasClass('dropdown', 'adds dropdown for grouped items');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(3) > a').hasText('Dropdown', 'drop down item shows pane groupTitle');
     assert.equal(find('ul.nav.nav-tabs > li:nth-child(3) > .dropdown-menu').children.length, 2, 'puts items with groupTitle under dropdown menu');
-    assert.equal(find(
-      'ul.nav.nav-tabs > li:nth-child(3) > .dropdown-menu > :nth-child(1)'
-    ).textContent.trim(), 'Tab 3', 'dropdown menu item shows pane title');
-    assert.equal(find(
-      'ul.nav.nav-tabs > li:nth-child(3) > .dropdown-menu > :nth-child(2)'
-    ).textContent.trim(), 'Tab 4', 'dropdown menu item shows pane title');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(3) > .dropdown-menu > :nth-child(1)').hasText('Tab 3', 'dropdown menu item shows pane title');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(3) > .dropdown-menu > :nth-child(2)').hasText('Tab 4', 'dropdown menu item shows pane title');
   });
 
   test('customTabs disables tab navigation generation', async function(assert) {
@@ -169,7 +165,7 @@ module('Integration | Component | bs-tab', function(hooks) {
       {{/bs-tab}}
     `);
 
-    assert.equal(findAll('ul.nav.nav-tabs').length, 0, 'has no tabs navigation');
+    assert.dom('ul.nav.nav-tabs').doesNotExist('has no tabs navigation');
   });
 
   test('type sets tab navigation type', async function(assert) {
@@ -184,8 +180,8 @@ module('Integration | Component | bs-tab', function(hooks) {
       {{/bs-tab}}
     `);
 
-    assert.equal(findAll('ul.nav.nav-pills').length, 1, 'has pills navigation');
-    assert.equal(findAll('ul.nav.nav-pills > li').length, 2, 'has tabs navigation items');
+    assert.dom('ul.nav.nav-pills').exists({ count: 1 }, 'has pills navigation');
+    assert.dom('ul.nav.nav-pills > li').exists({ count: 2 }, 'has tabs navigation items');
   });
 
   test('calls onChange when changing active tab', async function(assert) {

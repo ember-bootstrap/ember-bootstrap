@@ -87,14 +87,14 @@ module('Integration | Component | bs-form/element', function(hooks) {
 
   test('component has form-group bootstrap class', async function(assert) {
     await render(hbs`{{bs-form/element}}`);
-    assert.equal(find(':first-child').classList.contains('form-group'), true, 'component has form-group class');
+    assert.dom(':first-child').hasClass('form-group', 'component has form-group class');
   });
 
   test('setting label property displays label tag', async function(assert) {
     await render(hbs`{{bs-form/element label="myLabel"}}`);
 
-    assert.equal(findAll('label').length, 1, 'component has label tag');
-    assert.equal(find('label').textContent.trim(), 'myLabel', 'label has text');
+    assert.dom('label').exists({ count: 1 }, 'component has label tag');
+    assert.dom('label').hasText('myLabel', 'label has text');
   });
 
   async function controlTypeLayoutTest(assert, controlType, selector) {
@@ -103,7 +103,10 @@ module('Integration | Component | bs-form/element', function(hooks) {
 
     formLayouts.forEach((layout) => {
       this.set('formLayout', layout);
-      assert.equal(findAll(selector).length, 1, `component has ${controlType} control for form layout ${layout}`);
+      assert.dom(selector).exists(
+        { count: 1 },
+        `component has ${controlType} control for form layout ${layout}`
+      );
     });
   }
 
@@ -193,10 +196,10 @@ module('Integration | Component | bs-form/element', function(hooks) {
     this.set('model', model);
     await render(hbs`{{bs-form/element property="foo" model=model}}`);
 
-    assert.equal(find('input').value, 'bar', 'input has expected value from model');
+    assert.dom('input').hasValue('bar', 'input has expected value from model');
 
     this.set('model.foo', 'baz');
-    assert.equal(find('input').value, 'baz', 'input updates value from model');
+    assert.dom('input').hasValue('baz', 'input updates value from model');
   });
 
   test('Changing formLayout changes markup', async function(assert) {
@@ -204,16 +207,16 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await render(
       hbs`{{#bs-form horizontalLabelGridClass="col-sm-4" formLayout=formLayout as |form|}}{{form.element controlType="text" label="myLabel"}}{{/bs-form}}`
     );
-    assert.equal(find('form > div').classList.contains('form-group'), true, 'component has form-group class');
+    assert.dom('form > div').hasClass('form-group', 'component has form-group class');
     assert.equal(find('form > div > :nth-child(1)').tagName, 'LABEL', 'first child is a label');
     assert.equal(find('form > div > :nth-child(2)').tagName, 'INPUT', 'second child is a input');
 
     this.set('formLayout', 'horizontal');
-    assert.equal(find('form > div').classList.contains('form-group'), true, 'component has form-group class');
+    assert.dom('form > div').hasClass('form-group', 'component has form-group class');
     assert.equal(find('form > div > :nth-child(1)').tagName, 'LABEL', 'first child is a label');
-    assert.ok(find('form > div > :nth-child(1)').classList.contains('col-sm-4'), 'label has grid class');
+    assert.dom('form > div > :nth-child(1)').hasClass('col-sm-4', 'label has grid class');
     assert.equal(find('form > div > :nth-child(2)').tagName, 'DIV', 'second child is a div');
-    assert.ok(find('form > div > :nth-child(2)').classList.contains('col-sm-8'), 'div has grid class');
+    assert.dom('form > div > :nth-child(2)').hasClass('col-sm-8', 'div has grid class');
     assert.equal(find('form > div > :nth-child(2) > :first-child').tagName, 'INPUT', 'divs first child is an input');
   });
 
@@ -234,11 +237,14 @@ module('Integration | Component | bs-form/element', function(hooks) {
       {{/bs-form}}
     `);
 
-    assert.equal(findAll('#value').length, 1, 'block template is rendered');
-    assert.equal(find('#value').textContent.trim(), 'male', 'value is yielded to block template');
-    assert.equal(find('#id').textContent.trim(), `${find('.form-group').getAttribute('id')}-field`, 'id is yielded to block template');
-    assert.equal(find('#validation').textContent.trim(), 'success');
-    assert.equal(findAll('#control input[type=text]').length, 1, 'control component is yielded');
+    assert.dom('#value').exists({ count: 1 }, 'block template is rendered');
+    assert.dom('#value').hasText('male', 'value is yielded to block template');
+    assert.dom('#id').hasText(
+      `${find('.form-group').getAttribute('id')}-field`,
+      'id is yielded to block template'
+    );
+    assert.dom('#validation').hasText('success');
+    assert.dom('#control input[type=text]').exists({ count: 1 }, 'control component is yielded');
   });
 
   test('supported input attributes propagate', async function(assert) {
@@ -365,32 +371,32 @@ module('Integration | Component | bs-form/element', function(hooks) {
 
   test('required property propagates', async function(assert) {
     await render(hbs`{{bs-form/element label="myLabel" required=true}}`);
-    assert.ok(find('.form-group').classList.contains('is-required'), 'component has is-required class');
+    assert.dom('.form-group').hasClass('is-required', 'component has is-required class');
   });
 
   test('disabled property propagates', async function(assert) {
     await render(hbs`{{bs-form/element label="myLabel" disabled=true}}`);
-    assert.ok(find('.form-group').classList.contains('disabled'), 'component has disabled class');
+    assert.dom('.form-group').hasClass('disabled', 'component has disabled class');
   });
 
   test('if invisibleLabel is true sr-only class is added to label', async function(assert) {
     await render(hbs`{{bs-form/element label="myLabel"}}`);
-    assert.notOk(find('label').classList.contains('sr-only'), 'sr-only class is not present as defaultText');
+    assert.dom('label').hasNoClass('sr-only', 'sr-only class is not present as defaultText');
 
     await render(
       hbs`{{#bs-form formLayout="vertical" }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`
     );
-    assert.ok(find('label').classList.contains('sr-only'), 'sr-only class is present for formLayout vertical');
+    assert.dom('label').hasClass('sr-only', 'sr-only class is present for formLayout vertical');
 
     await render(
       hbs`{{#bs-form formLayout="horizontal" }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`
     );
-    assert.ok(find('label').classList.contains('sr-only'), 'sr-only class is present for formLayout horizontal');
+    assert.dom('label').hasClass('sr-only', 'sr-only class is present for formLayout horizontal');
 
     await render(
       hbs`{{#bs-form formLayout="inline" }}{{bs-form/element label="myLabel" invisibleLabel=true}}{{/bs-form}}`
     );
-    assert.ok(find('label').classList.contains('sr-only'), 'sr-only class is present for formLayout inline');
+    assert.dom('label').hasClass('sr-only', 'sr-only class is present for formLayout inline');
   });
 
   testBS3('adjusts validation icon position if there is an input group', async function(assert) {
@@ -474,8 +480,8 @@ module('Integration | Component | bs-form/element', function(hooks) {
     `);
     await focus('input');
     await blur('input');
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationSuccessClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationSuccessClass(),
       'form group isn\'t shown as having errors if there is no validator'
     );
   });
@@ -485,8 +491,8 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await render(hbs`
         {{bs-form/element property='name' showAllValidations=true hasValidator=true model=model}}
     `);
-    assert.ok(
-      find(formFeedbackElement()).classList.contains(validationSuccessClass()),
+    assert.dom(formFeedbackElement()).hasClass(
+      validationSuccessClass(),
       'validation succcess is shown when form signals to show all validations'
     );
   });
@@ -497,22 +503,22 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await render(hbs`
         {{bs-form/element property='name' hasValidator=true errors=errors model=model}}
     `);
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
       'validation errors aren\'t shown before user interaction'
     );
     await focus('input');
     await blur('input');
-    assert.ok(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasClass(
+      validationErrorClass(),
       'validation errors are shown after user interaction when errors are present'
     );
-    assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Invalid');
+    assert.dom(`.form-group .${formFeedbackClass()}`).hasText('Invalid');
     run(() => {
       this.set('errors', A());
     });
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
       'form group isn\'t shown as having errors if there aren\'t any'
     );
   });
@@ -523,22 +529,22 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await render(hbs`
         {{bs-form/element property='name' hasValidator=true warnings=warnings model=model}}
     `);
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationWarningClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationWarningClass(),
       'validation warnings aren\'t shown before user interaction'
     );
     await focus('input');
     await blur('input');
-    assert.ok(
-      find(formFeedbackElement()).classList.contains(validationWarningClass()),
+    assert.dom(formFeedbackElement()).hasClass(
+      validationWarningClass(),
       'validation warnings are shown after user interaction when warnings are present'
     );
-    assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Insecure');
+    assert.dom(`.form-group .${formFeedbackClass()}`).hasText('Insecure');
     run(() => {
       this.set('warnings', A());
     });
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationWarningClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationWarningClass(),
       'form group isn\'t shown as having warnings if there are\'t any'
     );
   });
@@ -549,16 +555,13 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await render(hbs`
         {{bs-form/element property='name' hasValidator=true customError=error model=model}}
     `);
-    assert.ok(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
-      'custom error is shown immediately'
-    );
-    assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'some error');
+    assert.dom(formFeedbackElement()).hasClass(validationErrorClass(), 'custom error is shown immediately');
+    assert.dom(`.form-group .${formFeedbackClass()}`).hasText('some error');
     run(() => {
       this.set('error', null);
     });
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
       'form group isn\'t shown as having errors if there aren\'t any'
     );
   });
@@ -569,16 +572,13 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await render(hbs`
         {{bs-form/element property='name' hasValidator=true customWarning=warning model=model}}
     `);
-    assert.ok(
-      find(formFeedbackElement()).classList.contains(validationWarningClass()),
-      'custom warning is shown immediately'
-    );
-    assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'some warning');
+    assert.dom(formFeedbackElement()).hasClass(validationWarningClass(), 'custom warning is shown immediately');
+    assert.dom(`.form-group .${formFeedbackClass()}`).hasText('some warning');
     run(() => {
       this.set('warning', null);
     });
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationWarningClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationWarningClass(),
       'form group isn\'t shown as having warning if there aren\'t any'
     );
   });
@@ -590,35 +590,32 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await render(hbs`
         {{bs-form/element property='name' hasValidator=true errors=errors customWarning=warning model=model}}
     `);
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
       'validation errors aren\'t shown before user interaction'
     );
-    assert.ok(
-      find(formFeedbackElement()).classList.contains(validationWarningClass()),
-      'custom warning is shown immediately'
-    );
-    assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'some warning', 'Custom Warning is shown');
+    assert.dom(formFeedbackElement()).hasClass(validationWarningClass(), 'custom warning is shown immediately');
+    assert.dom(`.form-group .${formFeedbackClass()}`).hasText('some warning', 'Custom Warning is shown');
     await focus('input');
     await blur('input');
-    assert.ok(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasClass(
+      validationErrorClass(),
       'validation errors are shown after user interaction when errors are present'
     );
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationWarningClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationWarningClass(),
       'custom warning is removed when errors are shown'
     );
-    assert.equal(find(`.form-group .${formFeedbackClass()}`).textContent.trim(), 'Invalid', 'Validation error is shown');
+    assert.dom(`.form-group .${formFeedbackClass()}`).hasText('Invalid', 'Validation error is shown');
     run(() => {
       this.set('errors', A());
     });
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
       'form group isn\'t shown as having errors if there aren\'t any'
     );
-    assert.ok(
-      find(formFeedbackElement()).classList.contains(validationWarningClass()),
+    assert.dom(formFeedbackElement()).hasClass(
+      validationWarningClass(),
       'custom warning is shown when errors are removed'
     );
   });
@@ -630,20 +627,20 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await render(hbs`
         {{bs-form/element property='name' hasValidator=true errors=errors model=model showValidationOn=showValidationOn}}
     `);
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
       'validation warnings aren\'t shown before user interaction'
     );
     await focus('input');
     await blur('input');
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
       'events not present in `showValidationOn` are ignored'
     );
     await fillIn('input', 'foo');
     await triggerEvent('input', 'change');
-    assert.ok(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasClass(
+      validationErrorClass(),
       'events present in `showValidationOn` trigger validation'
     );
   });
@@ -654,19 +651,19 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await render(hbs`
         {{bs-form/element property='name' hasValidator=true errors=errors model=model showValidationOn='change'}}
     `);
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
       'validation warnings aren\'t shown before user interaction'
     );
     await focus('input');
     await blur('input');
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
       'events not present in `showValidationOn` are ignored'
     );
     await triggerEvent('input', 'change');
-    assert.ok(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasClass(
+      validationErrorClass(),
       'events present in `showValidationOn` trigger validation'
     );
   });
@@ -678,7 +675,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await render(hbs`
         {{bs-form/element controlType="foo"}}
     `);
-    assert.equal(findAll('#foo').length, 1, 'Custom control is used');
+    assert.dom('#foo').exists({ count: 1 }, 'Custom control is used');
   });
 
   test('shows help text if available', async function(assert) {
@@ -687,8 +684,8 @@ module('Integration | Component | bs-form/element', function(hooks) {
     `);
 
     let helpTextClass = `.${formHelpTextClass()}`;
-    assert.equal(findAll(helpTextClass).length, 1, 'has help text element');
-    assert.equal(find(helpTextClass).textContent.trim(), 'foo', 'shows help text');
+    assert.dom(helpTextClass).exists({ count: 1 }, 'has help text element');
+    assert.dom(helpTextClass).hasText('foo', 'shows help text');
 
     assert.ok(find('input').getAttribute('aria-describedby'), 'control has aria-describedby attribute');
     assert.equal(find('input').getAttribute('aria-describedby'), find(helpTextClass).getAttribute('id'), 'aria-describedby matches id');
@@ -697,22 +694,22 @@ module('Integration | Component | bs-form/element', function(hooks) {
   // test for size property here to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/492
   testBS3('support size classes', async function(assert) {
     await render(hbs`{{bs-form/element size="lg"}}`);
-    assert.equal(find('.form-group').classList.contains('form-group-lg'), true, 'form-group has large class');
+    assert.dom('.form-group').hasClass('form-group-lg', 'form-group has large class');
 
     await render(hbs`{{bs-form/element size="sm"}}`);
-    assert.equal(find('.form-group').classList.contains('form-group-sm'), true, 'form-group has small class');
+    assert.dom('.form-group').hasClass('form-group-sm', 'form-group has small class');
   });
 
   testBS4('support size classes', async function(assert) {
     await render(hbs`{{bs-form/element size="lg" label="foo" formLayout="horizontal"}}`);
-    assert.equal(find('.form-group').classList.contains('form-group-lg'), false, 'form-group has not large class');
-    assert.equal(find('input').classList.contains('form-control-lg'), true, 'input has large class');
-    assert.equal(find('label').classList.contains('col-form-label-lg'), true, 'label has large class');
+    assert.dom('.form-group').hasNoClass('form-group-lg', 'form-group has not large class');
+    assert.dom('input').hasClass('form-control-lg', 'input has large class');
+    assert.dom('label').hasClass('col-form-label-lg', 'label has large class');
 
     await render(hbs`{{bs-form/element size="sm" label="foo" formLayout="horizontal"}}`);
-    assert.equal(find('.form-group').classList.contains('form-group-sm'), false, 'form-group has not small class');
-    assert.equal(find('input').classList.contains('form-control-sm'), true, 'input has small class');
-    assert.equal(find('label').classList.contains('col-form-label-sm'), true, 'label has large class');
+    assert.dom('.form-group').hasNoClass('form-group-sm', 'form-group has not small class');
+    assert.dom('input').hasClass('form-control-sm', 'input has small class');
+    assert.dom('label').hasClass('col-form-label-sm', 'label has large class');
   });
 
 });

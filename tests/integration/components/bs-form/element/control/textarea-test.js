@@ -1,4 +1,3 @@
-import { findAll } from 'ember-native-dom-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -11,6 +10,6 @@ module('Integration | Component | bs form/element/control/textarea', function(ho
 
     await render(hbs`{{bs-form/element/control/textarea}}`);
 
-    assert.equal(findAll('textarea').length, 1);
+    assert.dom('textarea').exists({ count: 1 });
   });
 });

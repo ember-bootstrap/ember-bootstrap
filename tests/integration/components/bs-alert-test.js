@@ -1,4 +1,4 @@
-import { find, findAll, click } from 'ember-native-dom-helpers';
+import { click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -16,34 +16,34 @@ module('Integration | Component | bs-alert', function(hooks) {
   test('alert has correct CSS classes', async function(assert) {
     await render(hbs`{{#bs-alert type="success" dismissible=true}}Test{{/bs-alert}}`);
 
-    assert.equal(find(':first-child').classList.contains('alert'), true, 'alert has alert class');
-    assert.equal(find(':first-child').classList.contains('alert-success'), true, 'alert has type class');
-    assert.equal(find(':first-child').classList.contains('alert-dismissible'), true, 'alert has dismissible class');
+    assert.dom(':first-child').hasClass('alert', 'alert has alert class');
+    assert.dom(':first-child').hasClass('alert-success', 'alert has type class');
+    assert.dom(':first-child').hasClass('alert-dismissible', 'alert has dismissible class');
   });
 
   test('dismissible alert can be hidden by clicking close button with fade=false', async function(assert) {
     await render(hbs`{{#bs-alert type="success" fade=false}}Test{{/bs-alert}}`);
 
-    assert.equal(findAll('button.close').length, 1, 'alert has close button');
+    assert.dom('button.close').exists({ count: 1 }, 'alert has close button');
     await click('button.close');
 
-    assert.equal(find(':first-child').classList.contains('alert'), false, 'alert has no alert class');
-    assert.equal(find(':first-child').textContent.trim(), '', 'alert has no content');
+    assert.dom(':first-child').hasNoClass('alert', 'alert has no alert class');
+    assert.dom(':first-child').hasText('', 'alert has no content');
 
   });
 
   testRequiringTransitions('dismissible alert can be hidden by clicking close button with fade=true', async function(assert) {
     await render(hbs`{{#bs-alert type="success" fade=true}}Test{{/bs-alert}}`);
 
-    assert.equal(findAll('button.close').length, 1, 'alert has close button');
+    assert.dom('button.close').exists({ count: 1 }, 'alert has close button');
     let promise = click('button.close');
 
-    assert.equal(find(':first-child').classList.contains('alert'), true, 'alert has alert class');
-    assert.equal(find(':first-child').classList.contains('in'), false, 'alert has no in class');
+    assert.dom(':first-child').hasClass('alert', 'alert has alert class');
+    assert.dom(':first-child').hasNoClass('in', 'alert has no in class');
 
     await promise;
-    assert.equal(find(':first-child').classList.contains('alert'), false, 'alert has no alert class');
-    assert.equal(find(':first-child').textContent.trim(), '', 'alert has no content');
+    assert.dom(':first-child').hasNoClass('alert', 'alert has no alert class');
+    assert.dom(':first-child').hasText('', 'alert has no content');
   });
 
   test('alert can be hidden by setting visible property', async function(assert) {
@@ -52,8 +52,8 @@ module('Integration | Component | bs-alert', function(hooks) {
 
     this.set('visible', false);
 
-    assert.equal(find(':first-child').classList.contains('alert'), false, 'alert has no alert class');
-    assert.equal(find(':first-child').textContent.trim(), '', 'alert has no content');
+    assert.dom(':first-child').hasNoClass('alert', 'alert has no alert class');
+    assert.dom(':first-child').hasText('', 'alert has no content');
 
   });
 
@@ -73,7 +73,7 @@ module('Integration | Component | bs-alert', function(hooks) {
     await click('button.close');
     assert.ok(action.calledOnce, 'onDismiss has been called.');
 
-    assert.equal(find(':first-child').classList.contains('alert'), true, 'alert is still visible');
+    assert.dom(':first-child').hasClass('alert', 'alert is still visible');
   });
 
   test('onDismissed is called after modal is closed', async function(assert) {
@@ -87,8 +87,8 @@ module('Integration | Component | bs-alert', function(hooks) {
   test('alert is initially hidden when visible=false', async function(assert) {
     await render(hbs`{{#bs-alert type="success" fade=false visible=false}}Test{{/bs-alert}}`);
 
-    assert.equal(find(':first-child').classList.contains('alert'), false, 'alert has no alert class');
-    assert.equal(find(':first-child').textContent.trim(), '', 'alert has no content');
+    assert.dom(':first-child').hasNoClass('alert', 'alert has no alert class');
+    assert.dom(':first-child').hasText('', 'alert has no content');
   });
 
   test('alert can be made visible when setting visible=true', async function(assert) {
@@ -96,8 +96,8 @@ module('Integration | Component | bs-alert', function(hooks) {
     await render(hbs`{{#bs-alert type="success" visible=visible fade=false}}Test{{/bs-alert}}`);
     this.set('visible', true);
 
-    assert.equal(find(':first-child').classList.contains('alert'), true, 'alert has alert class');
-    assert.equal(find(':first-child').classList.contains('alert-success'), true, 'alert has type class');
+    assert.dom(':first-child').hasClass('alert', 'alert has alert class');
+    assert.dom(':first-child').hasClass('alert-success', 'alert has type class');
   });
 
   test('dismissing alert does not change public visible property (DDAU)', async function(assert) {

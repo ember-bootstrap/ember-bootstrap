@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { find, findAll, click } from 'ember-native-dom-helpers';
+import { click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -21,14 +21,14 @@ module('Integration | Component | bs-modal', function(hooks) {
       {{modal.footer}}
     {{/bs-modal}}`);
 
-    assert.equal(findAll('.modal').length, 1, 'Modal exists.');
-    assert.equal(findAll('.modal .modal-header').length, 1, 'Modal has header.');
-    assert.equal(find('.modal .modal-header .modal-title').textContent.trim(), 'Dialog', 'Modal header has correct title.');
-    assert.equal(findAll('.modal .modal-footer').length, 1, 'Modal has footer.');
-    assert.equal(findAll('.modal .modal-footer button').length, 1, 'Modal has button in footer.');
-    assert.equal(find('.modal .modal-footer button').textContent.trim(), 'Ok', 'Modal button has default title.');
-    assert.equal(findAll('.modal .modal-body').length, 1, 'Modal has body.');
-    assert.equal(find('.modal .modal-body').textContent.trim(), 'Hello world!', 'Modal body has correct content.');
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('.modal .modal-header').exists({ count: 1 }, 'Modal has header.');
+    assert.dom('.modal .modal-header .modal-title').hasText('Dialog', 'Modal header has correct title.');
+    assert.dom('.modal .modal-footer').exists({ count: 1 }, 'Modal has footer.');
+    assert.dom('.modal .modal-footer button').exists({ count: 1 }, 'Modal has button in footer.');
+    assert.dom('.modal .modal-footer button').hasText('Ok', 'Modal button has default title.');
+    assert.dom('.modal .modal-body').exists({ count: 1 }, 'Modal has body.');
+    assert.dom('.modal .modal-body').hasText('Hello world!', 'Modal body has correct content.');
   });
 
   test('Hidden modal does not render', async function(assert) {
@@ -38,7 +38,7 @@ module('Integration | Component | bs-modal', function(hooks) {
       {{modal.footer}}
     {{/bs-modal}}`);
 
-    assert.equal(findAll('.modal *').length, 0, 'Modal does not exist.');
+    assert.dom('.modal *').doesNotExist('Modal does not exist.');
   });
 
   test('clicking ok button closes modal when autoClose=true with custom component hierarchy', async function(assert) {
@@ -57,7 +57,7 @@ module('Integration | Component | bs-modal', function(hooks) {
     `);
 
     await click('.modal .modal-footer button');
-    assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
+    assert.dom('.modal').doesNotExist('Modal is hidden');
   });
 
   test('Modal yields close action', async function(assert) {
