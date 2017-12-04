@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.4</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.5</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,6 +57,7 @@ import { isBlank } from &#x27;@ember/utils&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import { htmlSafe } from &#x27;@ember/string&#x27;;
+import { bind } from &#x27;@ember/runloop&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-modal/dialog&#x27;;
 
 /**
@@ -201,11 +202,19 @@ export default Component.extend({
     }
   },
 
-  click(e) {
+  _click(e) {
     if (!e.target.classList.contains(&#x27;modal&#x27;) || !this.get(&#x27;backdropClose&#x27;)) {
       return;
     }
     this.get(&#x27;onClose&#x27;)();
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    // Ember events use event delegation, but we need to add an &#x60;onclick&#x60; handler directly on the modal element for
+    // iOS to allow clicking the div. So a &#x60;click(){}&#x60; method here won&#x27;t work, we need to attach an event listener
+    // directly to the element
+    this.element.onclick = bind(this, this._click);
   }
 
 });

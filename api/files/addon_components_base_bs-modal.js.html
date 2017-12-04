@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.4</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.5</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -458,9 +458,6 @@ export default Component.extend(TransitionSupport, {
     }
     this._isOpen = true;
 
-    this.checkScrollbar();
-    this.setScrollbar();
-
     document.body.classList.add(&#x27;modal-open&#x27;);
 
     this.resize();
@@ -470,11 +467,16 @@ export default Component.extend(TransitionSupport, {
         return;
       }
 
-      this.set(&#x27;inDom&#x27;, true);
+      this.checkScrollbar();
+      this.setScrollbar();
+
       schedule(&#x27;afterRender&#x27;, () =&gt; {
         let modalEl = this.get(&#x27;modalElement&#x27;);
-        modalEl.scrollTop = 0;
+        if (!modalEl) {
+          return;
+        }
 
+        modalEl.scrollTop = 0;
         this.handleUpdate();
         this.set(&#x27;showModal&#x27;, true);
         this.get(&#x27;onShow&#x27;)();
@@ -490,6 +492,7 @@ export default Component.extend(TransitionSupport, {
         }
       });
     };
+    this.set(&#x27;inDom&#x27;, true);
     this.handleBackdrop(callback);
   },
 
@@ -526,12 +529,11 @@ export default Component.extend(TransitionSupport, {
       return;
     }
 
-    this.set(&#x27;inDom&#x27;, false);
-
     this.handleBackdrop(() =&gt; {
       document.body.classList.remove(&#x27;modal-open&#x27;);
       this.resetAdjustments();
       this.resetScrollbar();
+      this.set(&#x27;inDom&#x27;, false);
       this.get(&#x27;onHidden&#x27;)();
     });
   },
@@ -553,20 +555,24 @@ export default Component.extend(TransitionSupport, {
         return;
       }
 
-      if (doAnimate) {
-        schedule(&#x27;afterRender&#x27;, this, function() {
-          let backdrop = this.get(&#x27;backdropElement&#x27;);
-          assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
+      schedule(&#x27;afterRender&#x27;, this, function() {
+        let backdrop = this.get(&#x27;backdropElement&#x27;);
+        assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
+        if (doAnimate) {
           transitionEnd(backdrop, callback, this, this.get(&#x27;backdropTransitionDuration&#x27;));
-        });
-      } else {
-        callback.call(this);
-      }
+        } else {
+          callback.call(this);
+        }
+      });
+
     } else if (!this.get(&#x27;isOpen&#x27;) &amp;&amp; this.get(&#x27;backdrop&#x27;)) {
       let backdrop = this.get(&#x27;backdropElement&#x27;);
       assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
 
       let callbackRemove = function() {
+        if (this.get(&#x27;isDestroyed&#x27;)) {
+          return;
+        }
         this.set(&#x27;showBackdrop&#x27;, false);
         if (callback) {
           callback.call(this);
@@ -706,7 +712,7 @@ export default Component.extend(TransitionSupport, {
     this.setProperties({
       showModal: isOpen &amp;&amp; (!fade || isFastBoot),
       showBackdrop: isOpen &amp;&amp; backdrop,
-      inDom: isOpen &amp;&amp; isFastBoot
+      inDom: isOpen
     });
   }
 });

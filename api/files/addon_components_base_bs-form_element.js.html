@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.4</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.5</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -62,7 +62,6 @@ import {
   alias
 } from &#x27;@ember/object/computed&#x27;;
 import { observer, defineProperty, computed } from &#x27;@ember/object&#x27;;
-import { on } from &#x27;@ember/object/evented&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import { typeOf, isBlank } from &#x27;@ember/utils&#x27;;
@@ -338,7 +337,7 @@ const nonDefaultLayouts = A([
  &lt;td&gt;&lt;/td&gt;
  &lt;/tr&gt;
  &lt;tr&gt;
- &lt;td&gt;size&lt;/td&gt;
+ &lt;td&gt;size&lt;br&gt;via &lt;code&gt;controlSize&lt;/code&gt; property&lt;/td&gt;
  &lt;td&gt;&lt;/td&gt;
  &lt;td&gt;&lt;/td&gt;
  &lt;td&gt;✔︎&lt;/td&gt;
@@ -560,6 +559,15 @@ export default FormGroup.extend({
   hasCustomWarning: notEmpty(&#x27;customWarning&#x27;),
 
   /**
+   * Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27; (the latter only for BS3)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+
+  /**
    * The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model&#x27;s validation
    *
    * @property validationMessages
@@ -659,7 +667,7 @@ export default FormGroup.extend({
    * @default [&#x27;focusOut&#x27;]
    * @public
    */
-  showValidationOn: [&#x27;focusOut&#x27;],
+  showValidationOn: null,
 
   /**
    * @property _showValidationOn
@@ -667,7 +675,7 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  _showValidationOn: computed(&#x27;showValidationOn&#x27;, function() {
+  _showValidationOn: computed(&#x27;showValidationOn.[]&#x27;, function() {
     let showValidationOn = this.get(&#x27;showValidationOn&#x27;);
 
     assert(&#x27;showValidationOn must be a String or an Array&#x27;, isArray(showValidationOn) || typeOf(showValidationOn) === &#x27;string&#x27;);
@@ -886,6 +894,9 @@ export default FormGroup.extend({
 
   init() {
     this._super(...arguments);
+    if (this.get(&#x27;showValidationOn&#x27;) === null) {
+      this.set(&#x27;showValidationOn&#x27;, [&#x27;focusOut&#x27;]);
+    }
     if (!isBlank(this.get(&#x27;property&#x27;))) {
       defineProperty(this, &#x27;value&#x27;, alias(&#x60;model.${this.get(&#x27;property&#x27;)}&#x60;));
       this.setupValidations();
@@ -900,7 +911,7 @@ export default FormGroup.extend({
    *  with an add-on on the right. [...] For input groups, adjust the right
    *  value to an appropriate pixel value depending on the width of your addon.
    */
-  adjustFeedbackIcons: on(&#x27;didInsertElement&#x27;, observer(&#x27;hasFeedback&#x27;, &#x27;formLayout&#x27;, function() {
+  adjustFeedbackIcons: observer(&#x27;hasFeedback&#x27;, &#x27;formLayout&#x27;, function() {
     scheduleOnce(&#x27;afterRender&#x27;, () =&gt; {
       let el = this.get(&#x27;element&#x27;);
       let feedbackIcon;
@@ -932,7 +943,12 @@ export default FormGroup.extend({
         feedbackIcon.style.right = &#x60;${adjustedPosition}px&#x60;;
       }
     });
-  })),
+  }),
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.adjustFeedbackIcons();
+  },
 
   actions: {
     change(value) {

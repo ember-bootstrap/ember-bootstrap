@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.4</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.5</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -622,17 +622,19 @@ export default Component.extend(TransitionSupport, {
    * @private
    */
   removeListeners() {
-    let target = this.get(&#x27;triggerTargetElement&#x27;);
-    this.get(&#x27;_triggerEvents&#x27;)
-      .forEach((event) =&gt; {
-        if (isArray(event)) {
-          let [inEvent, outEvent] = event;
-          target.removeEventListener(inEvent, this._handleEnter);
-          target.removeEventListener(outEvent, this._handleLeave);
-        } else {
-          target.removeEventListener(event, this._handleToggle);
-        }
-      });
+    try {
+      let target = this.get(&#x27;triggerTargetElement&#x27;);
+      this.get(&#x27;_triggerEvents&#x27;)
+        .forEach((event) =&gt; {
+          if (isArray(event)) {
+            let [inEvent, outEvent] = event;
+            target.removeEventListener(inEvent, this._handleEnter);
+            target.removeEventListener(outEvent, this._handleLeave);
+          } else {
+            target.removeEventListener(event, this._handleToggle);
+          }
+        });
+    } catch(e) {} // eslint-disable-line no-empty
   },
 
   init() {

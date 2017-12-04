@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.4</span></h1>
+    <h1>API Docs <span class="small">1.0.0-rc.5</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -56,7 +56,6 @@
 import { notEmpty } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-form/group&#x27;;
-import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
 
 /**
  This component renders a &#x60;&lt;div class=&quot;form-group&quot;&gt;&#x60; element, with support for validation states and feedback icons (only for BS3).
@@ -80,7 +79,7 @@ import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
  @extends Ember.Component
  @public
  */
-export default Component.extend(SizeClass, {
+export default Component.extend({
   layout,
 
   /**
