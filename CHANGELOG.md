@@ -1,3 +1,27 @@
+<a name="1.0.0-rc.5"></a>
+# [1.0.0-rc.5](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.4...1.0.0-rc.5) (2017-12-04)
+
+
+### Bug Fixes
+
+* **FormElement:** fix conflicting usage of the `size` property for setting the Bootstrap size classes and the input's size attribute ([cdd2608](https://github.com/kaliber5/ember-bootstrap/commit/cdd2608)), closes [#492](https://github.com/kaliber5/ember-bootstrap/issues/492)
+* **FormElement:** fix sizing classes for Bootstrap 4 ([78e160e](https://github.com/kaliber5/ember-bootstrap/commit/78e160e)), closes [#494](https://github.com/kaliber5/ember-bootstrap/issues/494)
+* **Modal:** fix async callbacks throwing errors when component has already been destroyed. Thanks to [@larsklevan](https://github.com/larsklevan). ([5ffb806](https://github.com/kaliber5/ember-bootstrap/commit/5ffb806)), closes [#477](https://github.com/kaliber5/ember-bootstrap/issues/477)
+* **Modal:** fix clicking on modal backdrop to close the modal on iOS ([5ce1645](https://github.com/kaliber5/ember-bootstrap/commit/5ce1645)), closes [#482](https://github.com/kaliber5/ember-bootstrap/issues/482)
+
+
+### Features
+
+* **Modal:** customizable ModalSimple submit button type. Thanks to [@bgentry](https://github.com/bgentry) ([d45c5f2](https://github.com/kaliber5/ember-bootstrap/commit/d45c5f2)), closes [#232](https://github.com/kaliber5/ember-bootstrap/issues/232)
+* **Modal:** does not render modal to DOM unless visible ([0eb41de](https://github.com/kaliber5/ember-bootstrap/commit/0eb41de))
+
+
+### BREAKING CHANGES
+
+* **FormElement:** to set the `size` attribute of a FormElement's `<input>` element you will have to use the `controlSize` property, instead of `size`, which is used to set Bootstrap classes for larger or smaller form elements.
+
+
+
 <a name="1.0.0-rc.4"></a>
 # [1.0.0-rc.4](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.3...1.0.0-rc.4) (2017-11-08)
 
