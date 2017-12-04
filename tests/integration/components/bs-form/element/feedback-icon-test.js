@@ -1,4 +1,3 @@
-import { findAll } from 'ember-native-dom-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -11,13 +10,13 @@ module('Integration | Component | bs form/element/feedback icon', function(hooks
 
     await render(hbs`{{bs-form/element/feedback-icon show=false}}`);
 
-    assert.equal(findAll('.form-control-feedback').length, 0);
+    assert.dom('.form-control-feedback').doesNotExist();
   });
 
   test('shows icon', async function(assert) {
 
     await render(hbs`{{bs-form/element/feedback-icon show=true iconName="foo"}}`);
 
-    assert.equal(findAll('.form-control-feedback.foo').length, 1);
+    assert.dom('.form-control-feedback.foo').exists({ count: 1 });
   });
 });

@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import {
   find,
-  findAll,
   click,
   focus,
   blur,
@@ -39,8 +38,8 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   test('it shows visible tooltip', async function(assert) {
     await render(hbs`{{bs-tooltip title="Dummy" visible=true}}`);
 
-    assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
-    assert.equal(find('.tooltip .tooltip-inner').textContent.trim(), 'Dummy');
+    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
+    assert.dom('.tooltip .tooltip-inner').hasText('Dummy');
   });
 
   test('it shows visible tooltip with block content', async function(assert) {
@@ -48,44 +47,44 @@ module('Integration | Component | bs-tooltip', function(hooks) {
       BLOCK
       {{/bs-tooltip}}`);
 
-    assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
-    assert.equal(find('.tooltip .tooltip-inner').textContent.trim(), 'BLOCK');
+    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
+    assert.dom('.tooltip .tooltip-inner').hasText('BLOCK');
   });
 
   test('it hides invisible tooltip', async function(assert) {
     await render(hbs`{{bs-tooltip title="Dummy"}}`);
 
-    assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
+    assert.dom('.tooltip').doesNotExist('tooltip is not visible');
   });
 
   test('it shows and hides immediately when hovering [fade=false]', async function(assert) {
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false}}</div>`);
 
     await triggerEvent('#target', 'mouseenter');
-    assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
+    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
 
     await triggerEvent('#target', 'mouseleave');
-    assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
+    assert.dom('.tooltip').doesNotExist('tooltip is not visible');
   });
 
   testRequiringFocus('it shows and hides immediately when focusing [fade=false]', async function(assert) {
     await render(hbs`<button class="btn" id="target">{{bs-tooltip title="Dummy" fade=false}}</button>`);
 
     await focus('#target');
-    assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
+    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
 
     await blur('#target');
-    assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
+    assert.dom('.tooltip').doesNotExist('tooltip is not visible');
   });
 
   test('it shows and hides immediately when clicking [fade=false]', async function(assert) {
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false triggerEvents="click"}}</div>`);
 
     await click('#target');
-    assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
+    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
 
     await click('#target');
-    assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
+    assert.dom('.tooltip').doesNotExist('tooltip is not visible');
   });
 
   test('it allows changing the trigger element to some arbitrary element', async function(assert) {
@@ -94,10 +93,10 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     );
 
     await triggerEvent('#target', 'mouseenter');
-    assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
+    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
 
     await triggerEvent('#target', 'mouseleave');
-    assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
+    assert.dom('.tooltip').doesNotExist('tooltip is not visible');
   });
 
   test('it allows changing the trigger element to the parent view', async function(assert) {
@@ -111,10 +110,10 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     );
 
     await triggerEvent('#target', 'mouseenter');
-    assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
+    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
 
     await triggerEvent('#target', 'mouseleave');
-    assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
+    assert.dom('.tooltip').doesNotExist('tooltip is not visible');
   });
 
   test('it calls onShow/onShown actions when showing tooltip [fade=false]', async function(assert) {
@@ -142,7 +141,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     await triggerEvent('#target', 'mouseenter');
     assert.ok(showAction.calledOnce, 'show action has been called');
     assert.notOk(shownAction.calledOnce, 'show action has not been called');
-    assert.equal(findAll('.tooltip').length, 0, 'tooltip is not visible');
+    assert.dom('.tooltip').doesNotExist('tooltip is not visible');
   });
 
   test('it calls onHide/onHidden actions when hiding tooltip [fade=false]', async function(assert) {
@@ -172,19 +171,19 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     await triggerEvent('#target', 'mouseleave');
     assert.ok(hideAction.calledOnce, 'hide action has been called');
     assert.notOk(hiddenAction.calledOnce, 'hidden action has not been called');
-    assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
+    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
   });
 
   testRequiringFocus('it keeps showing when leaving the mouse but is still focused [fade=false]', async function(assert) {
     await render(hbs`<a href="#" id="target">{{bs-tooltip title="Dummy" fade=false}}</a>`);
 
     await focus('#target');
-    assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
+    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
 
     await triggerEvent('#target', 'mouseenter');
-    assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
+    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
     await triggerEvent('#target', 'mouseleave');
-    assert.equal(findAll('.tooltip').length, 1, 'tooltip is visible');
+    assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
   });
 
   test('Renders in wormhole if renderInPlace is not set', async function(assert) {
@@ -194,7 +193,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     );
     this.set('show', true);
 
-    assert.equal(findAll('.tooltip').length, 1, 'Tooltip exists.');
+    assert.dom('.tooltip').exists({ count: 1 }, 'Tooltip exists.');
     assert.equal(find('.tooltip').parentNode.getAttribute('id'), 'ember-bootstrap-wormhole');
   });
 
@@ -205,7 +204,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     );
     this.set('show', true);
 
-    assert.equal(findAll('.tooltip').length, 1, 'Tooltip exists.');
+    assert.dom('.tooltip').exists({ count: 1 }, 'Tooltip exists.');
     assert.notEqual(find('.tooltip').parentNode.getAttribute('id'), 'ember-bootstrap-wormhole');
   });
 
@@ -338,7 +337,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
 
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" class='wide' delay=150}}</div>`);
     setTimeout(function() {
-      assert.equal(findAll('.tooltip.wide').length, 1);
+      assert.dom('.tooltip.wide').exists({ count: 1 });
       done();
     }, 200);
 
@@ -386,7 +385,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     setupForPositioning('right');
     await click('#target');
 
-    assert.ok(find('.tooltip').classList.contains(tooltipPositionClass('top')));
+    assert.dom('.tooltip').hasClass(tooltipPositionClass('top'));
 
     setTimeout(function() {
       assertPositioning(assert);

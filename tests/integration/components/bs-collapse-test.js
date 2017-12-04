@@ -1,4 +1,3 @@
-import { find } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import {
   setupRenderingTest
@@ -17,15 +16,15 @@ module('Integration | Component | bs-collapse', function(hooks) {
 
   test('collapse has correct default markup', async function(assert) {
     await render(hbs`{{#bs-collapse}}<p>Just some content</p>{{/bs-collapse}}`);
-    assert.equal(find(':first-child').classList.contains('collapse'), true, 'collapse has collapse class');
-    assert.equal(find(':first-child').classList.contains(visibilityClass()), false, 'collapse does not have visibility class');
+    assert.dom(':first-child').hasClass('collapse', 'collapse has collapse class');
+    assert.dom(':first-child').hasNoClass(visibilityClass(), 'collapse does not have visibility class');
 
   });
 
   test('expanded collapse has correct default markup', async function(assert) {
     await render(hbs`{{#bs-collapse collapsed=false}}<p>Just some content</p>{{/bs-collapse}}`);
-    assert.equal(find(':first-child').classList.contains('collapse'), true, 'collapse has collapse class');
-    assert.equal(find(':first-child').classList.contains(visibilityClass()), true, 'collapse has visibility class');
+    assert.dom(':first-child').hasClass('collapse', 'collapse has collapse class');
+    assert.dom(':first-child').hasClass(visibilityClass(), 'collapse has visibility class');
   });
 
   test('setting collapse to false expands this item', async function(assert) {
@@ -41,15 +40,15 @@ module('Integration | Component | bs-collapse', function(hooks) {
     this.set('collapsed', false);
 
     assert.ok(showAction.calledOnce, 'onShow action has been called');
-    assert.equal(find(':first-child').classList.contains('collapsing'), true, 'collapse has collapsing class while transition is running');
+    assert.dom(':first-child').hasClass('collapsing', 'collapse has collapsing class while transition is running');
 
     let done = assert.async();
 
     // wait for transitions to complete
     setTimeout(() => {
       assert.ok(shownAction.calledOnce, 'onShown action has been called');
-      assert.equal(find(':first-child').classList.contains('collapse'), true, 'collapse has collapse class');
-      assert.equal(find(':first-child').classList.contains(visibilityClass()), true, 'collapse has visibility class');
+      assert.dom(':first-child').hasClass('collapse', 'collapse has collapse class');
+      assert.dom(':first-child').hasClass(visibilityClass(), 'collapse has visibility class');
 
       done();
     }, 500);
@@ -68,15 +67,15 @@ module('Integration | Component | bs-collapse', function(hooks) {
     this.set('collapsed', true);
 
     assert.ok(hideAction.calledOnce, 'onHide action has been called');
-    assert.equal(find(':first-child').classList.contains('collapsing'), true, 'collapse has collapsing class while transition is running');
+    assert.dom(':first-child').hasClass('collapsing', 'collapse has collapsing class while transition is running');
 
     let done = assert.async();
 
     // wait for transitions to complete
     setTimeout(() => {
       assert.ok(hiddenAction.calledOnce, 'onHidden action has been called');
-      assert.equal(find(':first-child').classList.contains('collapse'), true, 'collapse has collapse class');
-      assert.equal(find(':first-child').classList.contains('in'), false, 'collapse does not have in class');
+      assert.dom(':first-child').hasClass('collapse', 'collapse has collapse class');
+      assert.dom(':first-child').hasNoClass('in', 'collapse does not have in class');
 
       done();
     }, 500);

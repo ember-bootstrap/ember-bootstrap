@@ -11,7 +11,7 @@ module('Integration | Component | bs-dropdown/button', function(hooks) {
     await render(hbs`{{#bs-dropdown/button}}Test{{/bs-dropdown/button}}`);
 
     assert.equal(find(':first-child').tagName, 'BUTTON', 'dropdown button is a button');
-    assert.equal(find(':first-child').classList.contains('dropdown-toggle'), true, 'has dropdown-toggle class');
+    assert.dom(':first-child').hasClass('dropdown-toggle', 'has dropdown-toggle class');
     assert.equal(find(':first-child').getAttribute('role'), 'button', 'has role=button');
   });
 });

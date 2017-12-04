@@ -1,4 +1,3 @@
-import { find } from 'ember-native-dom-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -14,6 +13,6 @@ module('Integration | Component | bs nav/link to', function(hooks) {
       {{/bs-nav/link-to}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 });

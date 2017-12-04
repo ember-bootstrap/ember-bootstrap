@@ -1,4 +1,4 @@
-import { find, findAll } from 'ember-native-dom-helpers';
+import { find } from 'ember-native-dom-helpers';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -21,14 +21,14 @@ module('Integration | Component | bs-popover/element', function(hooks) {
       {{/bs-popover/element}}
     `);
 
-    assert.ok(find(':first-child').classList.contains('popover'), 'has popover class');
+    assert.dom(':first-child').hasClass('popover', 'has popover class');
     // assert.ok(find(':first-child').classList.contains(popoverPositionClass('top')), 'has placement class');
-    assert.ok(find(':first-child').classList.contains('fade'), 'has fade class');
-    assert.ok(find(':first-child').classList.contains(visibilityClass()), 'has visibility class');
+    assert.dom(':first-child').hasClass('fade', 'has fade class');
+    assert.dom(':first-child').hasClass(visibilityClass(), 'has visibility class');
     assert.equal(find(':first-child').getAttribute('role'), 'tooltip', 'has ARIA role');
-    assert.equal(findAll('.arrow').length, 1, 'has arrow');
-    assert.equal(find(versionDependent('.popover-title', '.popover-header')).textContent.trim(), 'dummy title', 'shows title');
-    assert.equal(find(versionDependent('.popover-content', '.popover-body')).textContent.trim(), 'template block text', 'shows content');
+    assert.dom('.arrow').exists({ count: 1 }, 'has arrow');
+    assert.dom(versionDependent('.popover-title', '.popover-header')).hasText('dummy title', 'shows title');
+    assert.dom(versionDependent('.popover-content', '.popover-body')).hasText('template block text', 'shows content');
   });
 
   skip('it supports different placements', async function(assert) {
@@ -44,7 +44,7 @@ module('Integration | Component | bs-popover/element', function(hooks) {
     for (let placement of placements) {
       this.set('placement', placement);
       let placementClass = popoverPositionClass(placement);
-      assert.ok(find(':first-child').classList.contains(placementClass), `has ${placementClass} class`);
+      assert.dom(':first-child').hasClass(placementClass, `has ${placementClass} class`);
     }
   });
 
@@ -55,6 +55,6 @@ module('Integration | Component | bs-popover/element', function(hooks) {
       {{/bs-popover/element}}
     `);
 
-    assert.equal(findAll('.popover.wide').length, 1);
+    assert.dom('.popover.wide').exists({ count: 1 });
   });
 });

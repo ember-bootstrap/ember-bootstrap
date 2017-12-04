@@ -1,4 +1,3 @@
-import { findAll } from 'ember-native-dom-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -12,7 +11,7 @@ module('Integration | Component | bs-progress/bar', function(hooks) {
       {{bs-progress/bar}}
     `);
 
-    assert.equal(findAll('div.progress-bar').length, 1, 'Has progress-bar class');
+    assert.dom('div.progress-bar').exists({ count: 1 }, 'Has progress-bar class');
 
   });
 });

@@ -1,4 +1,3 @@
-import { find, findAll } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -16,8 +15,8 @@ module('Integration | Component | bs dropdown/menu/link to', function(hooks) {
       {{/bs-dropdown/menu/link-to}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
-    assert.equal(findAll('a.dropdown-item').length, 0, 'renders as plain element with no dropdown item class');
+    assert.dom('*').hasText('template block text');
+    assert.dom('a.dropdown-item').doesNotExist('renders as plain element with no dropdown item class');
   });
 
   testBS4('it has correct markup', async function(assert) {
@@ -28,7 +27,7 @@ module('Integration | Component | bs dropdown/menu/link to', function(hooks) {
       {{/bs-dropdown/menu/link-to}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
-    assert.equal(findAll('a.dropdown-item').length, 1, 'renders as plain element with dropdown item class');
+    assert.dom('*').hasText('template block text');
+    assert.dom('a.dropdown-item').exists({ count: 1 }, 'renders as plain element with dropdown item class');
   });
 });

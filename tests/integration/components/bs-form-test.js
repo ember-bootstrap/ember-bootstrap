@@ -3,7 +3,6 @@ import { A } from '@ember/array';
 import { resolve, reject } from 'rsvp';
 import {
   click,
-  findAll,
   find,
   fillIn,
   keyEvent,
@@ -42,7 +41,7 @@ module('Integration | Component | bs-form', function(hooks) {
     for (let layout in classSpec) {
       this.set('formLayout', layout);
       await render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
-      assert.equal(find('form').classList.contains(classSpec[layout]), true, `form has expected class for ${layout}`);
+      assert.dom('form').hasClass(classSpec[layout], `form has expected class for ${layout}`);
     }
   });
 
@@ -65,7 +64,7 @@ module('Integration | Component | bs-form', function(hooks) {
   test('it yields form element component', async function(assert) {
     await render(hbs`{{#bs-form as |form|}}{{form.element}}{{/bs-form}}`);
 
-    assert.equal(findAll('.form-group').length, 1, 'form has element');
+    assert.dom('.form-group').exists({ count: 1 }, 'form has element');
   });
 
   test('Submitting the form calls onBeforeSubmit and onSubmit action', async function(assert) {
@@ -154,22 +153,19 @@ module('Integration | Component | bs-form', function(hooks) {
       hbs`{{#bs-form model=model hasValidator=true validate=validateStub as |form|}}{{form.element hasValidator=true errors=errors}}{{/bs-form}}`
     );
 
-    assert.notOk(
-      find(formFeedbackElement()).classList.contains(validationErrorClass()),
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
       'validation errors aren\'t shown before user interaction'
     );
     await triggerEvent('form', 'submit');
 
     let done = assert.async();
     setTimeout(() => {
-      assert.ok(
-        find(formFeedbackElement()).classList.contains(validationErrorClass()),
+      assert.dom(formFeedbackElement()).hasClass(
+        validationErrorClass(),
         'validation errors are shown after form submission'
       );
-      assert.equal(
-        find(`.${formFeedbackClass()}`).textContent.trim(),
-        'There is an error'
-      );
+      assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
       done();
     }, 1);
 
@@ -184,7 +180,7 @@ module('Integration | Component | bs-form', function(hooks) {
       {{form.element property="name"}}
     {{/bs-form}}`);
 
-    assert.equal(find('input').value, 'foo', 'input has model property value');
+    assert.dom('input').hasValue('foo', 'input has model property value');
 
     await fillIn('input', 'bar');
     await triggerEvent('input', 'input');

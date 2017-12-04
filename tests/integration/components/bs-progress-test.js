@@ -1,4 +1,4 @@
-import { find, findAll } from 'ember-native-dom-helpers';
+import { find } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -16,8 +16,8 @@ module('Integration | Component | bs-progress', function(hooks) {
       {{/bs-progress}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text', 'Shows block content');
-    assert.equal(findAll('div.progress').length, 1, 'Has progress class');
+    assert.dom('*').hasText('template block text', 'Shows block content');
+    assert.dom('div.progress').exists({ count: 1 }, 'Has progress class');
   });
 
   test('Progress bar has correct width according to value, minValue and maxValue', async function(assert) {
@@ -120,7 +120,7 @@ module('Integration | Component | bs-progress', function(hooks) {
       {{/bs-progress}}
     `);
 
-    assert.ok(find('.progress-bar').classList.contains('progress-bar-success'), 'Progress bar has type class');
+    assert.dom('.progress-bar').hasClass('progress-bar-success', 'Progress bar has type class');
 
   });
 
@@ -131,7 +131,7 @@ module('Integration | Component | bs-progress', function(hooks) {
       {{/bs-progress}}
     `);
 
-    assert.ok(find('.progress-bar').classList.contains('bg-success'), 'Progress bar has type class');
+    assert.dom('.progress-bar').hasClass('bg-success', 'Progress bar has type class');
 
   });
 
@@ -142,7 +142,7 @@ module('Integration | Component | bs-progress', function(hooks) {
       {{/bs-progress}}
     `);
 
-    assert.ok(find('.progress-bar').classList.contains('progress-bar-striped'), 'Progress bar has type class');
+    assert.dom('.progress-bar').hasClass('progress-bar-striped', 'Progress bar has type class');
 
   });
 
@@ -153,8 +153,8 @@ module('Integration | Component | bs-progress', function(hooks) {
       {{/bs-progress}}
     `);
 
-    assert.ok(find('.progress-bar').classList.contains('progress-bar-striped'), 'Progress bar has type class');
-    assert.ok(find('.progress-bar').classList.contains('active'), 'Progress bar has active class');
+    assert.dom('.progress-bar').hasClass('progress-bar-striped', 'Progress bar has type class');
+    assert.dom('.progress-bar').hasClass('active', 'Progress bar has active class');
 
   });
 
@@ -165,8 +165,8 @@ module('Integration | Component | bs-progress', function(hooks) {
       {{/bs-progress}}
     `);
 
-    assert.ok(find('.progress-bar').classList.contains('progress-bar-striped'), 'Progress bar has type class');
-    assert.ok(find('.progress-bar').classList.contains('progress-bar-animated'), 'Progress bar has animated class');
+    assert.dom('.progress-bar').hasClass('progress-bar-striped', 'Progress bar has type class');
+    assert.dom('.progress-bar').hasClass('progress-bar-animated', 'Progress bar has animated class');
 
   });
 
@@ -178,7 +178,7 @@ module('Integration | Component | bs-progress', function(hooks) {
       {{/bs-progress}}
     `);
 
-    assert.equal(findAll('.progress-bar').length, 2, 'Progress bar has two bars');
+    assert.dom('.progress-bar').exists({ count: 2 }, 'Progress bar has two bars');
 
   });
 });

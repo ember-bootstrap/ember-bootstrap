@@ -19,9 +19,9 @@ module('Integration | Component | bs-button-group', function(hooks) {
       hbs`{{#bs-button-group size="lg" justified=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
     );
 
-    assert.ok(find(':first-child').classList.contains('btn-group'), 'has btn-group class');
-    assert.ok(find(':first-child').classList.contains('btn-group-lg'), 'has size class');
-    assert.ok(find(':first-child').classList.contains('btn-group-justified'), 'has justified class');
+    assert.dom(':first-child').hasClass('btn-group', 'has btn-group class');
+    assert.dom(':first-child').hasClass('btn-group-lg', 'has size class');
+    assert.dom(':first-child').hasClass('btn-group-justified', 'has justified class');
   });
 
   test('button group supports vertical layout', async function(assert) {
@@ -29,8 +29,8 @@ module('Integration | Component | bs-button-group', function(hooks) {
       hbs`{{#bs-button-group vertical=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
     );
 
-    assert.notOk(find(':first-child').classList.contains('btn-group'), 'has not btn-group class');
-    assert.ok(find(':first-child').classList.contains('btn-group-vertical'), 'has vertical class');
+    assert.dom(':first-child').hasNoClass('btn-group', 'has not btn-group class');
+    assert.dom(':first-child').hasClass('btn-group-vertical', 'has vertical class');
   });
 
   test('radio button group calls onChange with value of selected button', async function(assert) {
@@ -141,7 +141,7 @@ module('Integration | Component | bs-button-group', function(hooks) {
       assert.equal(this.get('value'), null, 'value must be null');
       // check button's active property
       for (let k = 0; k < 3; k++) {
-        assert.equal(find(`button:nth-child(${k + 1})`).classList.contains('active'), false, 'button active state is true');
+        assert.dom(`button:nth-child(${k + 1})`).hasNoClass('active', 'button active state is true');
       }
     }
   });

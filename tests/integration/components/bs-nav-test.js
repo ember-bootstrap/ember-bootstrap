@@ -1,4 +1,3 @@
-import { find, findAll } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -16,9 +15,9 @@ module('Integration | Component | bs-nav', function(hooks) {
       {{/bs-nav}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text', 'Shows block content');
-    assert.equal(findAll('ul').length, 1, 'it is an unordered list');
-    assert.ok(find('ul').classList.contains('nav'), 'has nav class');
+    assert.dom('*').hasText('template block text', 'Shows block content');
+    assert.dom('ul').exists({ count: 1 }, 'it is an unordered list');
+    assert.dom('ul').hasClass('nav', 'has nav class');
   });
 
   testBS3('it supports bootstrap options', async function(assert) {
@@ -27,9 +26,9 @@ module('Integration | Component | bs-nav', function(hooks) {
       {{bs-nav justified=true stacked=true type="pills"}}
     `);
 
-    assert.ok(find('ul').classList.contains('nav-pills'), 'has pills class');
-    assert.ok(find('ul').classList.contains('nav-justified'), 'has justified class');
-    assert.ok(find('ul').classList.contains('nav-stacked'), 'has stacked class');
+    assert.dom('ul').hasClass('nav-pills', 'has pills class');
+    assert.dom('ul').hasClass('nav-justified', 'has justified class');
+    assert.dom('ul').hasClass('nav-stacked', 'has stacked class');
   });
 
   testBS4('it supports bootstrap options', async function(assert) {
@@ -38,9 +37,9 @@ module('Integration | Component | bs-nav', function(hooks) {
       {{bs-nav justified=true stacked=true type="pills"}}
     `);
 
-    assert.ok(find('ul').classList.contains('nav-pills'), 'has pills class');
-    assert.ok(find('ul').classList.contains('nav-justified'), 'has justified class');
-    assert.ok(find('ul').classList.contains('flex-column'), 'has stacked class');
+    assert.dom('ul').hasClass('nav-pills', 'has pills class');
+    assert.dom('ul').hasClass('nav-justified', 'has justified class');
+    assert.dom('ul').hasClass('flex-column', 'has stacked class');
   });
 
   test('it exposes contextual components', async function(assert) {
@@ -52,9 +51,9 @@ module('Integration | Component | bs-nav', function(hooks) {
       {{/bs-nav}}
     `);
 
-    assert.equal(findAll('.nav').length, 1, 'it has the nav');
-    assert.equal(findAll('.nav li').length, 1, 'it has the nav item');
-    assert.equal(findAll('.nav li a').length, 1, 'it has the nav link');
+    assert.dom('.nav').exists({ count: 1 }, 'it has the nav');
+    assert.dom('.nav li').exists({ count: 1 }, 'it has the nav item');
+    assert.dom('.nav li a').exists({ count: 1 }, 'it has the nav link');
     // TODO: Add nav.dropdown
   });
 });

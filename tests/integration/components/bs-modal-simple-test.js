@@ -1,6 +1,5 @@
 import {
   find,
-  findAll,
   click,
   keyEvent,
   waitUntil
@@ -31,31 +30,31 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(hbs`{{#bs-modal-simple fade=false title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
     await settled();
 
-    assert.equal(findAll('.modal').length, 1, 'Modal exists.');
-    assert.equal(findAll('.modal .modal-header').length, 1, 'Modal has header.');
-    assert.equal(find('.modal .modal-header .modal-title').textContent.trim(), 'Simple Dialog', 'Modal header has correct title.');
-    assert.equal(findAll('.modal .modal-footer').length, 1, 'Modal has footer.');
-    assert.equal(findAll('.modal .modal-footer button').length, 1, 'Modal has button in footer.');
-    assert.equal(find('.modal .modal-footer button').textContent.trim(), 'Ok', 'Modal button has default title.');
-    assert.equal(findAll('.modal .modal-body').length, 1, 'Modal has body.');
-    assert.equal(find('.modal .modal-body').textContent.trim(), 'Hello world!', 'Modal body has correct content.');
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('.modal .modal-header').exists({ count: 1 }, 'Modal has header.');
+    assert.dom('.modal .modal-header .modal-title').hasText('Simple Dialog', 'Modal header has correct title.');
+    assert.dom('.modal .modal-footer').exists({ count: 1 }, 'Modal has footer.');
+    assert.dom('.modal .modal-footer button').exists({ count: 1 }, 'Modal has button in footer.');
+    assert.dom('.modal .modal-footer button').hasText('Ok', 'Modal button has default title.');
+    assert.dom('.modal .modal-body').exists({ count: 1 }, 'Modal has body.');
+    assert.dom('.modal .modal-body').hasText('Hello world!', 'Modal body has correct content.');
   });
 
   test('Hidden modal does not render', async function(assert) {
     await render(hbs`{{#bs-modal-simple open=false title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
 
-    assert.equal(findAll('.modal *').length, 0, 'Modal does not exist.');
+    assert.dom('.modal *').doesNotExist('Modal does not exist.');
   });
 
   test('Simple modal has default CSS classes', async function(assert) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
 
-    assert.ok(find('.modal').classList.contains('fade'), 'Modal has fade class');
+    assert.dom('.modal').hasClass('fade', 'Modal has fade class');
 
     let done = assert.async();
     // wait for fade animation
     setTimeout(() => {
-      assert.ok(find('.modal').classList.contains(visibilityClass()), 'Modal has visibility class');
+      assert.dom('.modal').hasClass(visibilityClass(), 'Modal has visibility class');
       done();
     }, transitionTimeout);
   });
@@ -66,10 +65,10 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     );
     await settled();
 
-    assert.equal(findAll(`.modal .modal-footer button.${defaultButtonClass()}`).length, 1, 'Modal has close button.');
-    assert.equal(find(`.modal .modal-footer button.${defaultButtonClass()}`).textContent.trim(), 'Cancel', 'Close button has correct title.');
-    assert.equal(findAll('.modal .modal-footer button.btn-primary').length, 1, 'Modal has submit button.');
-    assert.equal(find('.modal .modal-footer button.btn-primary').textContent.trim(), 'Ok', 'Submit button has correct title.');
+    assert.dom(`.modal .modal-footer button.${defaultButtonClass()}`).exists({ count: 1 }, 'Modal has close button.');
+    assert.dom(`.modal .modal-footer button.${defaultButtonClass()}`).hasText('Cancel', 'Close button has correct title.');
+    assert.dom('.modal .modal-footer button.btn-primary').exists({ count: 1 }, 'Modal has submit button.');
+    assert.dom('.modal .modal-footer button.btn-primary').hasText('Ok', 'Submit button has correct title.');
 
   });
 
@@ -79,13 +78,13 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     );
     await settled();
 
-    assert.equal(findAll('.modal .modal-footer button.btn-danger').length, 1, 'Modal has submit button with btn-danger class.');
+    assert.dom('.modal .modal-footer button.btn-danger').exists({ count: 1 }, 'Modal has submit button with btn-danger class.');
   });
 
   test('open modal is immediately shown', async function(assert) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false}}Hello world!{{/bs-modal-simple}}`);
 
-    assert.ok(find('.modal').classList.contains(visibilityClass()), 'Modal is visible');
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
     assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
   });
 
@@ -93,12 +92,12 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     let done = assert.async();
     await render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
 
-    assert.notOk(find('.modal').classList.contains(visibilityClass()), 'Modal is hidden');
+    assert.dom('.modal').hasNoClass(visibilityClass(), 'Modal is hidden');
     // assert.notEqual(find('.modal').style.display, 'block', 'Modal is visible');
 
     // wait for fade animation
     setTimeout(() => {
-      assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is visible');
+      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
       assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
       done();
     }, transitionTimeout);
@@ -108,12 +107,12 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     this.set('open', false);
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false open=open}}Hello world!{{/bs-modal-simple}}`);
 
-    assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
+    assert.dom('.modal').doesNotExist('Modal is hidden');
     this.set('open', true);
-    assert.ok(find('.modal').classList.contains(visibilityClass()), 'Modal is visible');
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
     assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
     this.set('open', false);
-    assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
+    assert.dom('.modal').doesNotExist('Modal is hidden');
   });
 
   testRequiringTransitions('open property shows modal [fade]', async function(assert) {
@@ -121,15 +120,15 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     this.set('open', false);
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" open=open}}Hello world!{{/bs-modal-simple}}`);
 
-    assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
+    assert.dom('.modal').doesNotExist('Modal is hidden');
     this.set('open', true);
     // wait for fade animation
     setTimeout(() => {
-      assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is visible');
+      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
       assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
       this.set('open', false);
       setTimeout(() => {
-        assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
+        assert.dom('.modal').doesNotExist('Modal is hidden');
         done();
       }, transitionTimeout);
     }, transitionTimeout);
@@ -142,17 +141,17 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     );
     await settled();
 
-    assert.equal(findAll('.modal .modal-header .close').length, 0, 'Modal has no close button');
+    assert.dom('.modal .modal-header .close').doesNotExist('Modal has no close button');
     this.set('closeButton', true);
-    assert.equal(findAll('.modal .modal-header .close').length, 1, 'Modal has close button');
+    assert.dom('.modal .modal-header .close').exists({ count: 1 }, 'Modal has close button');
   });
 
   test('fade property toggles fade effect', async function(assert) {
     this.set('fade', false);
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=fade}}Hello world!{{/bs-modal-simple}}`);
-    assert.equal(find('.modal').classList.contains('fade'), false, 'Modal has no fade class');
+    assert.dom('.modal').hasNoClass('fade', 'Modal has no fade class');
     this.set('fade', true);
-    assert.equal(find('.modal').classList.contains('fade'), true, 'Modal has fade class');
+    assert.dom('.modal').hasClass('fade', 'Modal has fade class');
   });
 
   test('backdrop=true adds backdrop element', async function(assert) {
@@ -160,8 +159,8 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     let done = assert.async();
     // wait for fade animation
     setTimeout(() => {
-      assert.equal(findAll('.modal-backdrop').length, 1, 'Modal has backdrop element');
-      assert.ok(find('.modal-backdrop').classList.contains(visibilityClass()), 'Modal backdrop has visibility class');
+      assert.dom('.modal-backdrop').exists({ count: 1 }, 'Modal has backdrop element');
+      assert.dom('.modal-backdrop').hasClass(visibilityClass(), 'Modal backdrop has visibility class');
       done();
     }, transitionTimeout);
   });
@@ -171,7 +170,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     let done = assert.async();
     // wait for fade animation
     setTimeout(() => {
-      assert.equal(findAll('.modal-backdrop').length, 0, 'Modal has no backdrop element');
+      assert.dom('.modal-backdrop').doesNotExist('Modal has no backdrop element');
       done();
     }, transitionTimeout);
   });
@@ -182,13 +181,13 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
 
     // wait for fade animation
     setTimeout(async() => {
-      assert.equal(findAll('.modal').length, 1, 'Modal is visible');
-      assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is visible');
+      assert.dom('.modal').exists({ count: 1 }, 'Modal is visible');
+      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
       await click('.modal .modal-header .close');
 
       // wait for fade animation
       setTimeout(() => {
-        assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
+        assert.dom('.modal').doesNotExist('Modal is hidden');
         done();
       }, transitionTimeout);
     }, transitionTimeout);
@@ -200,13 +199,13 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
 
     // wait for fade animation
     setTimeout(async() => {
-      assert.equal(findAll('.modal').length, 1, 'Modal is visible');
-      assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is visible');
+      assert.dom('.modal').exists({ count: 1 }, 'Modal is visible');
+      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
       await click('.modal .modal-footer button');
 
       // wait for fade animation
       setTimeout(() => {
-        assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
+        assert.dom('.modal').doesNotExist('Modal is hidden');
         done();
       }, transitionTimeout);
     }, transitionTimeout);
@@ -224,13 +223,13 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
 
     // wait for fade animation
     setTimeout(async() => {
-      assert.equal(findAll('.modal').length, 1, 'Modal is visible');
-      assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is visible');
+      assert.dom('.modal').exists({ count: 1 }, 'Modal is visible');
+      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
       await click('.modal .modal-header .close');
 
       // wait for fade animation
       setTimeout(() => {
-        assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is still visible');
+        assert.dom('.modal').hasClass(visibilityClass(), 'Modal is still visible');
         done();
       }, transitionTimeout);
     }, transitionTimeout);
@@ -247,13 +246,13 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
 
     // wait for fade animation
     setTimeout(async() => {
-      assert.equal(findAll('.modal').length, 1, 'Modal is visible');
-      assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is visible');
+      assert.dom('.modal').exists({ count: 1 }, 'Modal is visible');
+      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
       await click('.modal .close-link');
 
       // wait for fade animation
       setTimeout(() => {
-        assert.equal(findAll('.modal').length, 0, 'Modal is hidden');
+        assert.dom('.modal').doesNotExist('Modal is hidden');
         done();
       }, transitionTimeout);
     }, transitionTimeout);
@@ -261,7 +260,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
 
   test('size property adds size class', async function(assert) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" size="lg" fade=false}}Hello world!{{/bs-modal-simple}}`);
-    assert.ok(find('.modal-dialog').classList.contains('modal-lg'), 'Modal has size class.');
+    assert.dom('.modal-dialog').hasClass('modal-lg', 'Modal has size class.');
   });
 
   test('onShow/onShown actions fire correctly with fade=false', async function(assert) {
@@ -484,7 +483,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
 
     // wait for fade animation
     setTimeout(() => {
-      assert.equal(find('.modal').classList.contains(visibilityClass()), true, 'Modal is still visible');
+      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is still visible');
       assert.notOk(hideSpy.called);
       done();
     }, transitionTimeout);
@@ -497,8 +496,8 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     );
     this.set('show', true);
 
-    assert.equal(findAll('.modal').length, 1, 'Modal exists.');
-    assert.equal(findAll('#ember-bootstrap-wormhole .modal').length, 1, 'Modal exists in wormhole');
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('#ember-bootstrap-wormhole .modal').exists({ count: 1 }, 'Modal exists in wormhole');
   });
 
   test('Renders in place (no wormhole) if renderInPlace is set', async function(assert) {
@@ -508,8 +507,8 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     );
     this.set('show', true);
 
-    assert.equal(findAll('.modal').length, 1, 'Modal exists.');
-    assert.equal(findAll('#ember-bootstrap-wormhole .modal').length, 0, 'Modal exists outside wormhole');
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('#ember-bootstrap-wormhole .modal').doesNotExist('Modal exists outside wormhole');
   });
 
   test('Removes "modal-open" class when component is removed from view', async function(assert) {
@@ -520,7 +519,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
 
     // wait for fade animation
     await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
-    assert.ok(document.body.classList.contains('modal-open'), 'body element has "modal-open" class.');
+    assert.dom(document.body).hasClass('modal-open', 'body element has "modal-open" class.');
 
     this.set('renderComponent', false);
 
@@ -576,7 +575,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
       {{/bs-modal-simple}}
     `);
 
-    assert.equal(findAll('.modal.custom').length, 1);
+    assert.dom('.modal.custom').exists({ count: 1 });
   });
 
   test('closing modal does not modify public open property', async function(assert) {

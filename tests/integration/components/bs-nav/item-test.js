@@ -1,4 +1,4 @@
-import { find, findAll, click } from 'ember-native-dom-helpers';
+import { find, click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -22,8 +22,8 @@ module('Integration | Component | bs-nav/item', function(hooks) {
       {{/bs-nav/item}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text', 'Shows block content');
-    assert.equal(findAll('li').length, 1, 'it is an list item');
+    assert.dom('*').hasText('template block text', 'Shows block content');
+    assert.dom('li').exists({ count: 1 }, 'it is an list item');
     assert.ok(!find('li').classList.contains('active'), 'has not active class');
     assert.ok(!find('li').classList.contains('disabled'), 'has not disabled class');
 
@@ -32,13 +32,13 @@ module('Integration | Component | bs-nav/item', function(hooks) {
   test('can be disabled', async function(assert) {
     await render(hbs`{{bs-nav/item disabled=true}}`);
 
-    assert.ok(find('li').classList.contains('disabled'), 'has disabled class');
+    assert.dom('li').hasClass('disabled', 'has disabled class');
   });
 
   test('can be active', async function(assert) {
     await render(hbs`{{bs-nav/item active=true}}`);
 
-    assert.ok(find('li').classList.contains('active'), 'has active class');
+    assert.dom('li').hasClass('active', 'has active class');
   });
 
   test('active link makes nav item active', async function(assert) {
@@ -50,7 +50,7 @@ module('Integration | Component | bs-nav/item', function(hooks) {
         {{#bs-nav/link-to "application" active="foo"}}Test{{/bs-nav/link-to}}
       {{/bs-nav/item}}
     `);
-    assert.ok(find('li').classList.contains('active'), 'has active class');
+    assert.dom('li').hasClass('active', 'has active class');
     destroyApp(application);
   });
 
@@ -63,7 +63,7 @@ module('Integration | Component | bs-nav/item', function(hooks) {
         {{#bs-nav/link-to "application" disabled="foo"}}Test{{/bs-nav/link-to}}
       {{/bs-nav/item}}
     `);
-    assert.ok(find('li').classList.contains('disabled'), 'has disabled class');
+    assert.dom('li').hasClass('disabled', 'has disabled class');
     destroyApp(application);
   });
 
