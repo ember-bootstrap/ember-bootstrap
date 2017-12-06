@@ -59,7 +59,7 @@ export default Component.extend(TypeClass, TransitionSupport, {
    * has completed.
    *
    * When the alert is dismissed by user interaction this property will not update by using two-way bindings in order
-   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onHide` action
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the `onDismiss` action
    *
    * @property visible
    * @type boolean
