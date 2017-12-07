@@ -15,6 +15,7 @@ const BroccoliDebug = require('broccoli-debug');
 const chalk = require('chalk');
 const SilentError = require('silent-error'); // From ember-cli
 const VersionChecker = require('ember-cli-version-checker');
+const resolve = require('resolve');
 
 const defaultOptions = {
   importBootstrapTheme: false,
@@ -151,29 +152,41 @@ module.exports = {
   },
 
   getBootstrapStylesPath() {
-    let nodeModulesPath = this.app.project.nodeModulesPath;
     switch (this.preprocessor) {
       case 'sass':
         if (this.getBootstrapVersion() === 4) {
-          return path.join(nodeModulesPath, 'bootstrap', 'scss');
+          return this.resolvePackagePath('bootstrap/scss');
         } else {
-          return path.join(nodeModulesPath, 'bootstrap-sass', 'assets', 'stylesheets');
+          return this.resolvePackagePath('bootstrap-sass/assets/stylesheets');
         }
       case 'less':
-        return path.join(nodeModulesPath, 'bootstrap', 'less');
+        return this.resolvePackagePath('bootstrap/less');
       default:
-        return path.join(nodeModulesPath, 'bootstrap', 'dist', 'css');
+        return this.resolvePackagePath('bootstrap/dist/css');
     }
   },
 
   getBootstrapFontPath() {
     switch (this.preprocessor) {
       case 'sass':
-        return path.join(this.app.project.nodeModulesPath, 'bootstrap-sass', 'assets', 'fonts');
+        return this.resolvePackagePath('bootstrap-sass/assets/fonts');
       case 'less':
       default:
-        return path.join(this.app.project.nodeModulesPath, 'bootstrap', 'fonts');
+        return this.resolvePackagePath('bootstrap/fonts');
     }
+  },
+
+  resolvePackagePath(pkgPath) {
+    let parts = pkgPath.split('/');
+    let pkg = parts[0];
+    let result = path.dirname(resolve.sync(`${pkg}/package.json`, { basedir: this.app.project.root }));
+
+    // add sub folders to path
+    if (parts.length > 1) {
+      let args = parts.map((part, i) => i === 0 ? result : part);
+      result = path.join.apply(path, args);
+    }
+    return result;
   },
 
   hasPreprocessor() {
