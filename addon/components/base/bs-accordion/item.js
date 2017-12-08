@@ -2,7 +2,6 @@ import { oneWay, not } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
-import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
 
 /**
@@ -13,11 +12,10 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
  @class AccordionItem
  @namespace Components
  @extends Ember.Component
- @uses Mixins.ComponentChild
  @uses Mixins.TypeClass
  @public
  */
-export default Component.extend(ComponentChild, TypeClass, {
+export default Component.extend(TypeClass, {
   layout,
 
   /**
