@@ -54,7 +54,7 @@
     "ember-load-initializers": "^1.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-native-dom-event-dispatcher": "^0.6.1",
-    "ember-native-dom-helpers": "^0.6.0",
+    "ember-native-dom-helpers": "0.6.0",
     "ember-power-select": "^1.8.4",
     "ember-power-select-blockless": "^0.3.0",
     "ember-resolver": "^4.0.0",
