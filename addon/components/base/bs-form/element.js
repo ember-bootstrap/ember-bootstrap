@@ -36,6 +36,10 @@ const nonDefaultLayouts = A([
  {{/bs-form}}
  ```
 
+ Suffixing the controlType with `-plain` will render an input type with the `form-control-plaintext` added to the
+ input. This will only work on text inputs.
+
+
  ### Form validation
 
  In the following example the control elements of the three form elements value will be bound to the properties
