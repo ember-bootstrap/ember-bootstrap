@@ -248,7 +248,8 @@ module('Integration | Component | bs-form/element', function(hooks) {
   });
 
   test('supported input attributes propagate', async function(assert) {
-    for (let formLayout of formLayouts) {
+    for (let i = 0; i < formLayouts.length; i++) {
+      let formLayout = formLayouts[i];
       this.set('formLayout', formLayout);
       let resetProps = Object.keys(supportedInputAttributes).reduce((prev, key) => {
         prev[key] = undefined;
@@ -295,7 +296,8 @@ module('Integration | Component | bs-form/element', function(hooks) {
   });
 
   test('supported textarea attributes propagate', async function(assert) {
-    for (let formLayout of formLayouts) {
+    for (let i = 0; i < formLayouts.length; i++) {
+      let formLayout = formLayouts[i];
       this.set('formLayout', formLayout);
       let resetProps = Object.keys(supportedTextareaAttributes).reduce((prev, key) => {
         prev[key] = undefined;
@@ -338,7 +340,8 @@ module('Integration | Component | bs-form/element', function(hooks) {
   });
 
   test('supported checkbox attributes propagate', async function(assert) {
-    for (let formLayout of formLayouts) {
+    for (let i = 0; i < formLayouts.length; i++) {
+      let formLayout = formLayouts[i];
       this.set('formLayout', formLayout);
       let resetProps = Object.keys(supportedCheckboxAttributes).reduce((prev, key) => {
         prev[key] = undefined;
