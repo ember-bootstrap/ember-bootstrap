@@ -109,22 +109,22 @@ module('Integration | Component | bs-button', function(hooks) {
     await render(hbs`{{bs-button defaultText="text1" loadingText="text2" textState=textState}}`);
     assert.dom('button').hasText('text1');
 
-    this.set('textState', 'loading');
+    run(() => this.set('textState', 'loading'));
 
     assert.dom('button').hasText('text2');
 
-    this.set('textState', 'default');
+    run(() => this.set('textState', 'default'));
 
     assert.dom('button').hasText('text1');
   });
 
   test('setting reset to true resets button state', async function(assert) {
     await render(hbs`{{bs-button defaultText="text1" loadingText="text2" textState=textState reset=reset}}`);
-    this.set('textState', 'loading');
+    run(() => this.set('textState', 'loading'));
 
     assert.dom('button').hasText('text2');
 
-    this.set('reset', true);
+    run(() => this.set('reset', true));
 
     assert.dom('button').hasText('text1');
   });

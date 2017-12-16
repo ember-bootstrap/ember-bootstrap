@@ -7,6 +7,7 @@ import {
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, settled } from '@ember/test-helpers';
+import { run } from '@ember/runloop';
 import {
   test,
   testRequiringFocus,
@@ -89,18 +90,10 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
   });
 
   testRequiringTransitions('open modal is immediately shown [fade]', async function(assert) {
-    let done = assert.async();
     await render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
 
-    assert.dom('.modal').hasNoClass(visibilityClass(), 'Modal is hidden');
-    // assert.notEqual(find('.modal').style.display, 'block', 'Modal is visible');
-
-    // wait for fade animation
-    setTimeout(() => {
-      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-      assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
-      done();
-    }, transitionTimeout);
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
+    assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
   });
 
   test('open property shows modal', async function(assert) {
@@ -108,10 +101,10 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false open=open}}Hello world!{{/bs-modal-simple}}`);
 
     assert.dom('.modal').doesNotExist('Modal is hidden');
-    this.set('open', true);
+    run(() => this.set('open', true));
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
     assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
-    this.set('open', false);
+    run(() => this.set('open', false));
     assert.dom('.modal').doesNotExist('Modal is hidden');
   });
 
