@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.5</span></h1>
+    <h1>API Docs <span class="small">1.0.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,7 +57,6 @@ import { oneWay, not } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
-import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-accordion/item&#x27;;
 
 /**
@@ -68,11 +67,10 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-accordion/item&
  @class AccordionItem
  @namespace Components
  @extends Ember.Component
- @uses Mixins.ComponentChild
  @uses Mixins.TypeClass
  @public
  */
-export default Component.extend(ComponentChild, TypeClass, {
+export default Component.extend(TypeClass, {
   layout,
 
   /**

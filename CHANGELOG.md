@@ -1,4 +1,15 @@
 
+# [1.0.0](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.5...1.0.0) (2017-12-19)
+
+
+### Bug Fixes
+
+* **Accordion:** fix accordion items wrongly registering as childs on the (wrong) parent, e.g. on tab component. ([37fac1c](https://github.com/kaliber5/ember-bootstrap/commit/37fac1c))
+* **Install:** remove usage of deprecated `nodeModulesPath` ember-cli property ([36444b6](https://github.com/kaliber5/ember-bootstrap/commit/36444b6)), closes [#506](https://github.com/kaliber5/ember-bootstrap/issues/506)
+
+
+
+
 # [1.0.0-rc.5](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.4...1.0.0-rc.5) (2017-12-04)
 
 

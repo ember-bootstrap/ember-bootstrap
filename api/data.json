@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "1.0.0-rc.5"
+        "version": "1.0.0"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -809,11 +809,10 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-accordion/item.js",
-            "line": 8,
+            "line": 7,
             "description": "A collapsible/expandable item within an accordion\n\nSee [Components.Accordion](Components.Accordion.html) for examples.",
             "extends": "Ember.Component",
             "uses": [
-                "Mixins.ComponentChild",
                 "Mixins.TypeClass"
             ],
             "access": "public",
@@ -1762,7 +1761,6 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [
-                "Components.AccordionItem",
                 "Components.NavLinkTo",
                 "Components.TabPane"
             ],
@@ -1949,7 +1947,7 @@
         },
         {
             "file": "addon/components/base/bs-accordion/item.js",
-            "line": 23,
+            "line": 21,
             "description": "The title of the accordion item, displayed as a .panel-title element",
             "itemtype": "property",
             "name": "title",
@@ -1961,7 +1959,7 @@
         },
         {
             "file": "addon/components/base/bs-accordion/item.js",
-            "line": 32,
+            "line": 30,
             "description": "The value of the accordion item, which is used as the value of the `selected` property of the parent [Components.Accordion](Components.Accordion.html) component",
             "itemtype": "property",
             "name": "value",
@@ -1972,7 +1970,7 @@
         },
         {
             "file": "addon/components/base/bs-accordion/item.js",
-            "line": 40,
+            "line": 38,
             "itemtype": "property",
             "name": "selected",
             "access": "private",
@@ -1982,7 +1980,7 @@
         },
         {
             "file": "addon/components/base/bs-accordion/item.js",
-            "line": 46,
+            "line": 44,
             "itemtype": "property",
             "name": "collapsed",
             "type": "boolean",
@@ -1994,7 +1992,7 @@
         },
         {
             "file": "addon/components/base/bs-accordion/item.js",
-            "line": 56,
+            "line": 54,
             "itemtype": "property",
             "name": "active",
             "type": "boolean",
@@ -2006,7 +2004,7 @@
         },
         {
             "file": "addon/components/base/bs-accordion/item.js",
-            "line": 64,
+            "line": 62,
             "description": "Reference to the parent `Components.Accordion` class.",
             "itemtype": "property",
             "name": "accordion",
@@ -2017,7 +2015,7 @@
         },
         {
             "file": "addon/components/base/bs-accordion/item.js",
-            "line": 72,
+            "line": 70,
             "itemtype": "event",
             "name": "onClick",
             "access": "public",
@@ -3924,7 +3922,7 @@
         {
             "file": "addon/components/base/bs-alert.js",
             "line": 57,
-            "description": "This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation\nhas completed.\n\nWhen the alert is dismissed by user interaction this property will not update by using two-way bindings in order\nto follow DDAU best practices. If you want to react to such changes, subscribe to the `onHide` action",
+            "description": "This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation\nhas completed.\n\nWhen the alert is dismissed by user interaction this property will not update by using two-way bindings in order\nto follow DDAU best practices. If you want to react to such changes, subscribe to the `onDismiss` action",
             "itemtype": "property",
             "name": "visible",
             "type": "boolean",

@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0-rc.5</span></h1>
+    <h1>API Docs <span class="small">1.0.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -57,7 +57,6 @@
         <div class="uses">
             Uses
             <ul class="inline commas">
-                    <li><a href="Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
                     <li><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
             </ul>
         </div>
@@ -67,7 +66,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_base_bs-accordion_item.js.html#l8"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:8</code></a>
+            Defined in: <a href="../files/addon_components_base_bs-accordion_item.js.html#l7"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:7</code></a>
         </div>
 
 
@@ -109,7 +108,6 @@
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
 
-            <li><a data-toggle="tab" href="#methods">Methods</a></li>
             <li><a data-toggle="tab" href="#properties">Properties</a></li>
             <li><a data-toggle="tab" href="#events">Events</a></li>
     </ul>
@@ -118,33 +116,11 @@
         <div id="index" class="tab-pane active">
             <h2 class="off-left">Item Index</h2>
 
-                <div class="index-section methods">
-                    <h3>Methods</h3>
-
-                    <ul class="index-list methods extends">
-                            <li class="index-item method private inherited">
-                                <a href="#" data-tabid="#methods" data-anchor="#method__registerWithParent" data-tablink="_registerWithParent">_registerWithParent</a>
-
-                            </li>
-                            <li class="index-item method private inherited">
-                                <a href="#" data-tabid="#methods" data-anchor="#method__unregisterFromParent" data-tablink="_unregisterFromParent">_unregisterFromParent</a>
-
-                            </li>
-                    </ul>
-                </div>
 
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
-                            <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property__didRegister" data-tablink="_didRegister">_didRegister</a>
-
-                            </li>
-                            <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property__parent" data-tablink="_parent">_parent</a>
-
-                            </li>
                             <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_accordion" data-tablink="accordion">accordion</a>
 
@@ -193,133 +169,10 @@
                 </div>
         </div>
 
-            <div id="methods" class="tab-pane">
-                <h2 class="off-left">Methods</h2>
-
-                    <div id="method__registerWithParent" class="method item private inherited">
-                        <h3 class="name">_registerWithParent
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.ComponentChild.html#method__registerWithParent">Mixins.ComponentChild</a>:
-                            <a href="../files/addon_mixins_component-child.js.html#l32"><code>addon&#x2F;mixins&#x2F;component-child.js:32</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            Register ourself as a child at the parent component
-                    We use the <code>willRender</code> event here to also support the fastboot environment, where there is no <code>didInsertElement</code>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method__unregisterFromParent" class="method item private inherited">
-                        <h3 class="name">_unregisterFromParent
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.ComponentChild.html#method__unregisterFromParent">Mixins.ComponentChild</a>:
-                            <a href="../files/addon_mixins_component-child.js.html#l49"><code>addon&#x2F;mixins&#x2F;component-child.js:49</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            Unregister from the parent component
-                        </div>
-                    
-                    
-                    
-                    </div>
-            </div>
 
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property__didRegister" class="property item private inherited">
-                        <h3 class="name">_didRegister
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.ComponentChild.html#property__didRegister">Mixins.ComponentChild</a>:
-                            <a href="../files/addon_mixins_component-child.js.html#l24"><code>addon&#x2F;mixins&#x2F;component-child.js:24</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            flag to check if component has already been registered
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property__parent" class="property item private inherited">
-                        <h3 class="name">_parent
-                            <span class="small">unknown</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.ComponentChild.html#property__parent">Mixins.ComponentChild</a>:
-                            <a href="../files/addon_mixins_component-child.js.html#l14"><code>addon&#x2F;mixins&#x2F;component-child.js:14</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The parent component
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_accordion" class="property item private">
                         <h3 class="name">accordion
                             <span class="small">unknown</span>
@@ -336,7 +189,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l64"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:64</code></a>
+                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l62"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:62</code></a>
                             </p>
                     
                     
@@ -366,7 +219,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l56"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:56</code></a>
+                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l54"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:54</code></a>
                             </p>
                     
                     
@@ -424,7 +277,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l46"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:46</code></a>
+                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l44"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:44</code></a>
                             </p>
                     
                     
@@ -453,7 +306,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l40"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:40</code></a>
+                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l38"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:38</code></a>
                             </p>
                     
                     
@@ -482,7 +335,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l23"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:23</code></a>
+                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l21"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:21</code></a>
                             </p>
                     
                     
@@ -544,7 +397,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l32"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:32</code></a>
+                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l30"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:30</code></a>
                             </p>
                     
                     
@@ -576,7 +429,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l72"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:72</code></a>
+                            <a href="../files/addon_components_base_bs-accordion_item.js.html#l70"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion&#x2F;item.js:70</code></a>
                             </p>
                     
                     
