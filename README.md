@@ -23,7 +23,7 @@ In your application's directory:
     ember install ember-bootstrap
     
 This will install Bootstrap 3 and will use the currently installed preprocessor or none if one is not installed.
-To switch Bootstrap version or preprocessor, see the documentation.
+To switch Bootstrap version or preprocessor, see the [setup documentation](http://www.ember-bootstrap.com/#/getting-started/setup).
 
 ## Compatibility
 
@@ -35,14 +35,7 @@ ember-bootstrap works and is fully [tested](https://travis-ci.org/kaliber5/ember
 * FastBoot 1.0+ 
 * jQuery-less builds using [ember-native-dom-event-dispatcher](https://github.com/rwjblue/ember-native-dom-event-dispatcher)
 
-### 1.0 RC
-
-The 1.0 release is currently in release candidate stage. There *should* not be any breaking changes anymore. So we encourage everybody
-to use it for new projects, and also to upgrade existing projects.
-
-The 1.0 alpha series consisted of a number of breaking changes compared to the previous 0.x releases, so be sure to check the 
-[CHANGELOG](CHANGELOG.md) for details. After the first stable 1.0 release the API will remain stable according to
-[SemVer](http://semver.org/).    
+This project follows [Semamtic Versioning](http://semver.org/).
 
 ## Updates
 

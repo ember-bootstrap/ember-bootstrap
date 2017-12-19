@@ -25,9 +25,13 @@
 
 <h4>Switch to Bootstrap 4</h4>
 
-<p>Bootstrap 4 is still in an alpha stage, so support for it in ember-bootstrap remains experimental. But you can easily make the switch by running this command:</p>
+<p>Bootstrap 4 is still in an beta stage, so support for it in ember-bootstrap remains experimental. But you can easily make the switch by running this command:</p>
 
 <pre class="highlight">ember generate ember-bootstrap --bootstrap-version=4</pre>
+
+<p>As Bootstrap 4 ships with Sass support, we highly recommend to enable that as well in your Ember app:</p>
+
+<pre class="highlight">ember generate ember-bootstrap --bootstrap-version=4 --preprocessor=sass</pre>
 
 <p>See the {{#link-to "getting-started.bootstrap-4"}}Bootstrap 4 guide{{/link-to}} for details.</p>
 
