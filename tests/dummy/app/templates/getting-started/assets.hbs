@@ -81,23 +81,67 @@ module.exports = function(defaults) {
 
 <p>You can also selectively import only the assets your app needs:</p>
 
-<pre><code class="language-less">// app.less
-@import "ember-bootstrap/variables.less";
-@import "ember-bootstrap/mixins.less";
-@import "ember-bootstrap/normalize.less";
-@import "ember-bootstrap/scaffolding.less";
-@import "ember-bootstrap/type.less";
-@import "ember-bootstrap/buttons.less";
-</code></pre>
-
-<pre><code class="language-sass">// app.scss
-@import "ember-bootstrap/bootstrap/variables.scss";
-@import "ember-bootstrap/bootstrap/mixins.scss";
-@import "ember-bootstrap/bootstrap/normalize.scss";
-@import "ember-bootstrap/bootstrap/scaffolding.scss";
-@import "ember-bootstrap/bootstrap/type.scss";
-@import "ember-bootstrap/bootstrap/buttons.scss";
-</code></pre>
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th class="text-center">File name</th>
+      <th class="text-center">BS3 - Less</th>
+      <th class="text-center">BS3 - Sass</th>
+      <th class="text-center">BS4 - Sass only</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><th>alerts</th><td>@import "ember-bootstrap/alerts.less";</td><td>@import "ember-bootstrap/bootstrap/alerts.scss";</td><td>@import "ember-bootstrap/alert.scss";</td></tr>
+    <tr><th>badges</th><td>@import "ember-bootstrap/badges.less";</td><td>@import "ember-bootstrap/bootstrap/badges.scss";</td><td>@import "ember-bootstrap/badge.scss";</td></tr>
+    <tr><th>breadcrumbs</th><td>@import "ember-bootstrap/breadcrumbs.less";</td><td>@import "ember-bootstrap/bootstrap/breadcrumbs.scss";</td><td>@import "ember-bootstrap/breadcrumb.scss";</td></tr>
+    <tr><th>button-groups</th><td>@import "ember-bootstrap/button-groups.less";</td><td>@import "ember-bootstrap/bootstrap/button-groups.scss";</td><td>@import "ember-bootstrap/button-group.scss";</td></tr>
+    <tr><th>buttons</th><td>@import "ember-bootstrap/buttons.less";</td><td>@import "ember-bootstrap/bootstrap/buttons.scss";</td><td>@import "ember-bootstrap/buttons.scss";</td></tr>
+    <tr><th>card</th><td></td><td></td><td>@import "ember-bootstrap/card.scss";</td></tr>
+    <tr><th>carousel</th><td>@import "ember-bootstrap/carousel.less";</td><td>@import "ember-bootstrap/bootstrap/carousel.scss";</td><td>@import "ember-bootstrap/carousel.scss";</td></tr>
+    <tr><th>close</th><td>@import "ember-bootstrap/close.less";</td><td>@import "ember-bootstrap/bootstrap/close.scss";</td><td>@import "ember-bootstrap/close.scss";</td></tr>
+    <tr><th>code</th><td>@import "ember-bootstrap/code.less";</td><td>@import "ember-bootstrap/bootstrap/code.scss";</td><td>@import "ember-bootstrap/code.scss";</td></tr>
+    <tr><th>component-animations</th><td>@import "ember-bootstrap/component-animations.less";</td><td>@import "ember-bootstrap/bootstrap/component-animations.scss";</td><td></td></tr>
+    <tr><th>custom-forms</th><td></td><td></td><td>@import "ember-bootstrap/custom-forms.scss";</td></tr>
+    <tr><th>dropdowns</th><td>@import "ember-bootstrap/dropdowns.less";</td><td>@import "ember-bootstrap/bootstrap/dropdowns.scss";</td><td>@import "ember-bootstrap/dropdown.scss";</td></tr>
+    <tr><th>forms</th><td>@import "ember-bootstrap/forms.less";</td><td>@import "ember-bootstrap/bootstrap/forms.scss";</td><td>@import "ember-bootstrap/forms.scss";</td></tr>
+    <tr><th>functions</th><td></td><td></td><td>@import "ember-bootstrap/functions.scss";</td></tr>
+    <tr><th>glyphicons</th><td>@import "ember-bootstrap/glyphicons.less";</td><td>@import "ember-bootstrap/bootstrap/glyphicons.scss";</td><td></td></tr>
+    <tr><th>grid</th><td>@import "ember-bootstrap/grid.less";</td><td>@import "ember-bootstrap/bootstrap/grid.scss";</td><td>@import "ember-bootstrap/grid.scss";</td></tr>
+    <tr><th>input-groups</th><td>@import "ember-bootstrap/input-groups.less";</td><td>@import "ember-bootstrap/bootstrap/input-groups.scss";</td><td>@import "ember-bootstrap/input-group.scss";</td></tr>
+    <tr><th>images.scss </th><td></td><td></td><td>@import "ember-bootstrap/images.scss";</td></tr>
+    <tr><th>jumbotron</th><td>@import "ember-bootstrap/jumbotron.less";</td><td>@import "ember-bootstrap/bootstrap/jumbotron.scss";</td><td>@import "ember-bootstrap/jumbotron.scss";</td></tr>
+    <tr><th>labels</th><td>@import "ember-bootstrap/labels.less";</td><td>@import "ember-bootstrap/bootstrap/labels.scss";</td><td></td></tr>
+    <tr><th>list-group</th><td>@import "ember-bootstrap/list-group.less";</td><td>@import "ember-bootstrap/bootstrap/list-group.scss";</td><td>@import "ember-bootstrap/list-group.scss";</td></tr>
+    <tr><th>media</th><td>@import "ember-bootstrap/media.less";</td><td>@import "ember-bootstrap/bootstrap/media.scss";</td><td>@import "ember-bootstrap/media.scss";</td></tr>
+    <tr><th>mixins</th><td>@import "ember-bootstrap/mixins.less";</td><td>@import "ember-bootstrap/bootstrap/mixins.scss";</td><td>@import "ember-bootstrap/mixins.scss";</td></tr>
+    <tr><th>modals</th><td>@import "ember-bootstrap/modals.less";</td><td>@import "ember-bootstrap/bootstrap/modals.scss";</td><td>@import "ember-bootstrap/modal.scss";</td></tr>
+    <tr><th>nav</th><td></td><td></td><td>@import "ember-bootstrap/nav.scss";</td></tr>
+    <tr><th>navbar</th><td>@import "ember-bootstrap/navbar.less";</td><td>@import "ember-bootstrap/bootstrap/navbar.scss";</td><td>@import "ember-bootstrap/navbar.scss";</td></tr>
+    <tr><th>navs</th><td>@import "ember-bootstrap/navs.less";</td><td>@import "ember-bootstrap/bootstrap/navs.scss";</td><td></td></tr>
+    <tr><th>normalize</th><td>@import "ember-bootstrap/normalize.less";</td><td>@import "ember-bootstrap/bootstrap/normalize.scss";</td><td></td></tr>
+    <tr><th>pager</th><td>@import "ember-bootstrap/pager.less";</td><td>@import "ember-bootstrap/bootstrap/pager.scss";</td><td></td></tr>
+    <tr><th>pagination</th><td>@import "ember-bootstrap/pagination.less";</td><td>@import "ember-bootstrap/bootstrap/pagination.scss";</td><td>@import "ember-bootstrap/pagination.scss";</td></tr>
+    <tr><th>panels</th><td>@import "ember-bootstrap/panels.less";</td><td>@import "ember-bootstrap/bootstrap/panels.scss";</td><td></td></tr>
+    <tr><th>popovers</th><td>@import "ember-bootstrap/popovers.less";</td><td>@import "ember-bootstrap/bootstrap/popovers.scss";</td><td>@import "ember-bootstrap/popover.scss";</td></tr>
+    <tr><th>print</th><td>@import "ember-bootstrap/print.less";</td><td>@import "ember-bootstrap/bootstrap/print.scss";</td><td>@import "ember-bootstrap/print.scss";</td></tr>
+    <tr><th>progress</th><td></td><td></td><td>@import "ember-bootstrap/progress.scss";</td></tr>
+    <tr><th>progress-bars</th><td>@import "ember-bootstrap/progress-bars.less";</td><td>@import "ember-bootstrap/bootstrap/progress-bars.scss";</td><td></td></tr>
+    <tr><th>reboot</th><td></td><td></td><td>@import "ember-bootstrap/reboot.scss";</td></tr>
+    <tr><th>responsive-embed</th><td>@import "ember-bootstrap/responsive-embed.less";</td><td>@import "ember-bootstrap/bootstrap/responsive-embed.scss";</td><td></td></tr>
+    <tr><th>responsive-utilities</th><td>@import "ember-bootstrap/responsive-utilities.less";</td><td>@import "ember-bootstrap/bootstrap/responsive-utilities.scss";</td><td></td></tr>
+    <tr><th>root</th><td></td><td></td><td>@import "ember-bootstrap/root.scss";</td></tr>
+    <tr><th>scaffolding</th><td>@import "ember-bootstrap/scaffolding.less";</td><td>@import "ember-bootstrap/bootstrap/scaffolding.scss";</td><td></td></tr>
+    <tr><th>tables</th><td>@import "ember-bootstrap/tables.less";</td><td>@import "ember-bootstrap/bootstrap/tables.scss";</td><td>@import "ember-bootstrap/tables.scss";</td></tr>
+    <tr><th>theme</th><td>@import "ember-bootstrap/theme.less";</td><td>@import "ember-bootstrap/bootstrap/theme.scss";</td><td></td></tr>
+    <tr><th>thumbnails</th><td>@import "ember-bootstrap/thumbnails.less";</td><td>@import "ember-bootstrap/bootstrap/thumbnails.scss";</td><td></td></tr>
+    <tr><th>tooltip</th><td>@import "ember-bootstrap/tooltip.less";</td><td>@import "ember-bootstrap/bootstrap/tooltip.scss";</td><td>@import "ember-bootstrap/tooltip.scss";</td></tr>
+    <tr><th>transitions </th><td></td><td></td><td>@import "ember-bootstrap/transitions.scss";</td></tr>
+    <tr><th>type</th><td>@import "ember-bootstrap/type.less";</td><td>@import "ember-bootstrap/bootstrap/type.scss";</td><td>@import "ember-bootstrap/type.scss";</td></tr>
+    <tr><th>utilities</th><td>@import "ember-bootstrap/utilities.less";</td><td>@import "ember-bootstrap/bootstrap/utilities.scss";</td><td>@import "ember-bootstrap/utilities.scss";</td></tr>
+    <tr><th>variables</th><td>@import "ember-bootstrap/variables.less";</td><td>@import "ember-bootstrap/bootstrap/variables.scss";</td><td>@import "ember-bootstrap/variables.scss";</td></tr>
+    <tr><th>wells</th><td>@import "ember-bootstrap/wells.less";</td><td>@import "ember-bootstrap/bootstrap/wells.scss";</td><td></td></tr>
+  </tbody>
+</table>
 
 <h2>Importing the Bootstrap Glyphicons font</h2>
 <p>By default the icon font that comes with Bootstrap is added to your app's assets folder.
