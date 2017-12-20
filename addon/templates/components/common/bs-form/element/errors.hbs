@@ -1,3 +1,11 @@
 {{#if show}}
-  <div class={{feedbackClass}}>{{messages.firstObject}}</div>
+  {{#if showMultipleErrors}}
+    <div class="{{feedbackClass}} pre-scrollable">
+      {{#each messages as |message|}}
+        <p>{{message}}</p>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class={{feedbackClass}}>{{messages.firstObject}}</div>
+  {{/if}}
 {{/if}}
