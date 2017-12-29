@@ -1,5 +1,5 @@
 {{#if inDom}}
-  {{#ember-wormhole to="ember-bootstrap-wormhole" renderInPlace=_renderInPlace}}
+  {{#maybe-in-element destinationElement _renderInPlace}}
     {{#bs-modal/dialog
       onClose=(action "close")
       fade=fade
@@ -29,5 +29,5 @@
         <div class="modal-backdrop {{if fade "fade"}} {{if showModal showClass}}" id="{{backdropId}}"></div>
       {{/if}}
     </div>
-  {{/ember-wormhole}}
+  {{/maybe-in-element}}
 {{/if}}
