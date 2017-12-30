@@ -39,57 +39,6 @@ module.exports = {
       }
     },
     {
-      name: 'ember-2.5',
-      bower: {
-        dependencies: {
-          'ember': '~2.5.0'
-        },
-        resolutions: {
-          'ember': '~2.5.0'
-        }
-      },
-      npm: {
-        devDependencies: {
-          'ember-source': null,
-          'ember-native-dom-event-dispatcher': null
-        }
-      }
-    },
-    {
-      name: 'ember-2.6',
-      bower: {
-        dependencies: {
-          'ember': '~2.6.0'
-        },
-        resolutions: {
-          'ember': '~2.6.0'
-        }
-      },
-      npm: {
-        devDependencies: {
-          'ember-source': null,
-          'ember-native-dom-event-dispatcher': null
-        }
-      }
-    },
-    {
-      name: 'ember-2.7',
-      bower: {
-        dependencies: {
-          'ember': '~2.7.0'
-        },
-        resolutions: {
-          'ember': '~2.7.0'
-        }
-      },
-      npm: {
-        devDependencies: {
-          'ember-source': null,
-          'ember-native-dom-event-dispatcher': null
-        }
-      }
-    },
-    {
       name: 'ember-lts-2.8',
       bower: {
         dependencies: {
@@ -97,40 +46,6 @@ module.exports = {
         },
         resolutions: {
           'ember': 'lts-2-8'
-        }
-      },
-      npm: {
-        devDependencies: {
-          'ember-source': null,
-          'ember-native-dom-event-dispatcher': null
-        }
-      }
-    },
-    {
-      name: 'ember-2.9',
-      bower: {
-        dependencies: {
-          'ember': '~2.9.0'
-        },
-        resolutions: {
-          'ember': '~2.9.0'
-        }
-      },
-      npm: {
-        devDependencies: {
-          'ember-source': null,
-          'ember-native-dom-event-dispatcher': null
-        }
-      }
-    },
-    {
-      name: 'ember-2.10',
-      bower: {
-        dependencies: {
-          'ember': '~2.10.0'
-        },
-        resolutions: {
-          'ember': '~2.10.0'
         }
       },
       npm: {
@@ -248,6 +163,15 @@ module.exports = {
         devDependencies: {
           'ember-source': '~2.12.0',
           'ember-native-dom-event-dispatcher': null
+        }
+      }
+    },
+    {
+      name: 'ember-lts-2.16-bs4',
+      command: 'BOOTSTRAPVERSION=4 ember test',
+      npm: {
+        devDependencies: {
+          'ember-source': '~2.16.0'
         }
       }
     },
