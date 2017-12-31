@@ -10,8 +10,8 @@
 **/.gitkeep
 .editorconfig
 .ember-cli
-.gitignore
 .eslintrc.js
+.gitignore
 .watchmanconfig
 .travis.yml
 .template-lintrc.js
