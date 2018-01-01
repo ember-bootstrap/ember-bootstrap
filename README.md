@@ -35,7 +35,7 @@ ember-bootstrap works and is fully [tested](https://travis-ci.org/kaliber5/ember
 * FastBoot 1.0+ 
 * jQuery-less builds using [ember-native-dom-event-dispatcher](https://github.com/rwjblue/ember-native-dom-event-dispatcher)
 
-This project follows [Semamtic Versioning](http://semver.org/).
+This project follows [Semantic Versioning](http://semver.org/).
 
 ## Updates
 
