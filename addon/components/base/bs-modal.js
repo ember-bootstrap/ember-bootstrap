@@ -8,6 +8,10 @@ import layout from 'ember-bootstrap/templates/components/bs-modal';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
+import {
+  findElementById,
+  getDOM
+} from '../../utils/dom';
 
 /**
 
@@ -195,7 +199,7 @@ export default Component.extend(TransitionSupport, {
   }),
 
   /**
-   * The DOM elemnt of the backdrop element.
+   * The DOM element of the backdrop element.
    *
    * @property backdropElement
    * @type object
@@ -204,6 +208,19 @@ export default Component.extend(TransitionSupport, {
    */
   backdropElement: computed('backdropId', function() {
     return document.getElementById(this.get('backdropId'));
+  }).volatile(),
+
+  /**
+   * The destination DOM element for in-element.
+   *
+   * @property destinationElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  destinationElement: computed(function() {
+    let dom = getDOM(this);
+    return findElementById(dom, 'ember-bootstrap-wormhole');
   }).volatile(),
 
   /**
@@ -242,8 +259,8 @@ export default Component.extend(TransitionSupport, {
    * @type boolean
    * @private
    */
-  _renderInPlace: computed('renderInPlace', 'isFastBoot', function() {
-    return this.get('renderInPlace') || !this.get('isFastBoot') && !document.getElementById('ember-bootstrap-wormhole');
+  _renderInPlace: computed('renderInPlace', 'destinationElement', function() {
+    return this.get('renderInPlace') || !this.get('destinationElement');
   }),
 
   /**
