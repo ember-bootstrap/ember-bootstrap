@@ -8,6 +8,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('demo', { path: '/components' }, function() {
+    this.route('carousel');
     this.route('dropdown');
     this.route('button');
     this.route('button-group');
