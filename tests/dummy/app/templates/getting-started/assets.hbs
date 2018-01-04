@@ -79,25 +79,66 @@ module.exports = function(defaults) {
   <code>ember generate ember-bootstrap</code>! This will execute the necessary setup steps as described above.
 {{/bs-alert}}
 
-<p>You can also selectively import only the assets your app needs:</p>
+<p>
+  It is possible to import only the assets your app needs but the definitions varies according to the chosen configuration.
+</p>
 
+<p><b>BS3 - Less</b></p>
 <pre><code class="language-less">// app.less
-@import "ember-bootstrap/variables.less";
-@import "ember-bootstrap/mixins.less";
-@import "ember-bootstrap/normalize.less";
-@import "ember-bootstrap/scaffolding.less";
-@import "ember-bootstrap/type.less";
-@import "ember-bootstrap/buttons.less";
+
+// Required
+@import "ember-bootstrap/variables";
+@import "ember-bootstrap/mixins";
+
+// Optional - Bootstrapping/Resetting
+@import "ember-bootstrap/normalize";
+@import "ember-bootstrap/print";
+
+// Optional - Everything else
+@import "ember-bootstrap/scaffolding";
+@import "ember-bootstrap/type";
+@import "ember-bootstrap/buttons";
 </code></pre>
 
+<p><b>BS3 - Sass</b></p>
 <pre><code class="language-sass">// app.scss
-@import "ember-bootstrap/bootstrap/variables.scss";
-@import "ember-bootstrap/bootstrap/mixins.scss";
-@import "ember-bootstrap/bootstrap/normalize.scss";
-@import "ember-bootstrap/bootstrap/scaffolding.scss";
-@import "ember-bootstrap/bootstrap/type.scss";
-@import "ember-bootstrap/bootstrap/buttons.scss";
+
+// Required
+@import "ember-bootstrap/bootstrap/variables";
+@import "ember-bootstrap/bootstrap/mixins";
+
+// Optional - Bootstrapping/Resetting
+@import "ember-bootstrap/bootstrap/normalize";
+@import "ember-bootstrap/bootstrap/print";
+
+// Optional - Everything else
+@import "ember-bootstrap/bootstrap/scaffolding";
+@import "ember-bootstrap/bootstrap/type";
+@import "ember-bootstrap/bootstrap/buttons";
 </code></pre>
+
+<p><b>BS4 - Sass only</b></p>
+<pre><code class="language-sass">// app.scss
+
+// Required
+@import "ember-bootstrap/functions";
+@import "ember-bootstrap/variables";
+@import "ember-bootstrap/mixins";
+
+// Optional - Bootstrapping/Resetting
+@import "ember-bootstrap/root";
+@import "ember-bootstrap/print";
+@import "ember-bootstrap/reboot";
+
+// Optional - Everything else
+@import "ember-bootstrap/type";
+@import "ember-bootstrap/buttons";
+</code></pre>
+
+<p>
+  You can also checkout which files are avaliables for import in <code>node_modules/bootstrap/less</code> for BS3 Less,
+  <code>node_modules/bootstrap-sass/assets/stylesheets/bootstrap</code> for BS3 Sass or <code>node_modules/bootstrap/scss</code> for BS4.
+</p>
 
 <h2>Importing the Bootstrap Glyphicons font</h2>
 <p>By default the icon font that comes with Bootstrap is added to your app's assets folder.
