@@ -345,7 +345,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should position tooltip arrow centered', async function(assert) {
-    let expectedArrowPosition = versionDependent(95, 98);
+    let expectedArrowPosition = versionDependent(95, 94);
     await render(
       hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{bs-tooltip placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`
     );
@@ -358,7 +358,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should adjust tooltip arrow', async function(assert) {
-    let expectedArrowPosition = versionDependent(155, 154);
+    let expectedArrowPosition = versionDependent(155, 150);
     await render(
       hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`
     );
