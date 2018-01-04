@@ -26,9 +26,12 @@ export default Component.extend({
   messages: null,
 
   /**
+   * Whether or not should display several errors at the same time.
+   *
+   * @default false
    * @property showMultipleErrors
-   * @type {Boolean}
    * @public
+   * @type {Boolean}
    */
   showMultipleErrors: false
 });
