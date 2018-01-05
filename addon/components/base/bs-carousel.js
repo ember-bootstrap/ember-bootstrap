@@ -1,3 +1,4 @@
+import { filter, lte, gt, and } from '@ember/object/computed';
 import CarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
 import Component from '@ember/component';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
@@ -88,7 +89,7 @@ export default Component.extend(ComponentParent, {
    * @readonly
    * @type array
    */
-  childSlides: computed.filter('children', function(view) {
+  childSlides: filter('children', function(view) {
     return view instanceof CarouselSlide;
   }).readOnly(),
 
@@ -98,9 +99,9 @@ export default Component.extend(ComponentParent, {
    * @private
    * @property childSlidesObserver
    */
-  childSlidesObserver: observer('childSlides', function() {
+  childSlidesObserver: observer('childSlides.[]', 'autoPlay', function() {
     let childSlides = this.get('childSlides');
-    if (childSlides.length <= 0) {
+    if (childSlides.length === 0) {
       return;
     }
     // Sets new current index
@@ -234,14 +235,21 @@ export default Component.extend(ComponentParent, {
    * @property shouldNotDoPresentation
    * @type boolean
    */
-  shouldNotDoPresentation: computed.lte('childSlides.length', 1),
+  shouldNotDoPresentation: lte('childSlides.length', 1),
+
+  /**
+   * @private
+   * @property hasInterval
+   * @type boolean
+   */
+  hasInterval: gt('interval', 0),
 
   /**
    * @private
    * @property shouldRunAutomatically
    * @type boolean
    */
-  shouldRunAutomatically: computed.gt('interval', 0),
+  shouldRunAutomatically: and('autoPlay', 'hasInterval'),
 
   /**
    * Starts automatic sliding on page load.
