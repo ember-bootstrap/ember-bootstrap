@@ -2,8 +2,8 @@ import hbs from 'htmlbars-inline-precompile';
 import { Promise } from 'rsvp';
 import { click, find, findAll, triggerEvent } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
+import { setupRenderingTest } from 'ember-qunit';
 import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 
 const TRANSITION_DURATION = 600;

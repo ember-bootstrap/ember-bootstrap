@@ -1,9 +1,9 @@
-import { filter, lte, gt, and } from '@ember/object/computed';
 import CarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
 import Component from '@ember/component';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
 import { computed, observer } from '@ember/object';
+import { filter, lte, gt, and } from '@ember/object/computed';
 import { schedule } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 
@@ -166,6 +166,13 @@ export default Component.extend(ComponentParent, {
   }).readOnly(),
 
   /**
+   * @private
+   * @property hasInterval
+   * @type boolean
+   */
+  hasInterval: gt('interval', 0),
+
+  /**
    * This observer is the entry point for programmatically slide changing.
    *
    * @property indexObserver
@@ -236,13 +243,6 @@ export default Component.extend(ComponentParent, {
    * @type boolean
    */
   shouldNotDoPresentation: lte('childSlides.length', 1),
-
-  /**
-   * @private
-   * @property hasInterval
-   * @type boolean
-   */
-  hasInterval: gt('interval', 0),
 
   /**
    * @private
@@ -492,8 +492,7 @@ export default Component.extend(ComponentParent, {
   },
 
   /**
-   * For some reason Ember's mouseEnter() and mouseLeave() doesn't work, maybe
-   * https://github.com/emberjs/ember.js/pull/14756 is related.
+   * mouseEnter() and mouseLeave() doesn't work with ember-native-dom-event-dispatcher.
    *
    * @method registerEvents
    * @private
