@@ -425,6 +425,17 @@ export default FormGroup.extend({
   helpText: null,
 
   /**
+   * Only if there is a validator, this property makes all errors to be displayed at once
+   * inside a scrollable container.
+   *
+   * @default false
+   * @property showMultipleErrors
+   * @public
+   * @type {Boolean}
+   */
+  showMultipleErrors: false,
+
+  /**
    * @property hasHelpText
    * @type boolean
    * @readonly
