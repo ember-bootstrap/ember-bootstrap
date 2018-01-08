@@ -1,9 +1,6 @@
-/* eslint-env node */
 'use strict';
 
 const path = require('path');
-const util = require('util');
-const extend = util._extend;
 const mergeTrees = require('broccoli-merge-trees');
 const Funnel = require('broccoli-funnel');
 const stew = require('broccoli-stew');
@@ -77,7 +74,7 @@ module.exports = {
 
     this.app = app;
 
-    let options = extend(extend({}, defaultOptions), app.options['ember-bootstrap']);
+    let options =Object.assign({}, defaultOptions, app.options['ember-bootstrap']);
     if (process.env.BOOTSTRAPVERSION) {
       // override bootstrapVersion config when environment variable is set
       options.bootstrapVersion = parseInt(process.env.BOOTSTRAPVERSION);

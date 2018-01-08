@@ -1,5 +1,6 @@
 /* eslint-env node */
-var RSVP = require('rsvp');
+'use strict';
+const RSVP = require('rsvp');
 
 function promptForCompletion(project) {
   return project.ui.prompt({
@@ -20,10 +21,10 @@ function promptForCompletion(project) {
 // For details on each option run `ember help release`
 module.exports = {
   manifest: [ 'package.json', 'bower.json', 'yuidoc.json' ],
-  beforeCommit: function(project, versions) {
-    var gulp = require('gulp');
+  beforeCommit(project) {
+    const gulp = require('gulp');
     require('../gulpfile.js');
-    var start = RSVP.denodeify(gulp.start.bind(gulp));
+    let start = RSVP.denodeify(gulp.start.bind(gulp));
 
     project.ui.startProgress('Collecting changes for CHANGELOG.md...');
     return start('changelog')
@@ -32,10 +33,10 @@ module.exports = {
         return promptForCompletion(project);
       });
   },
-  afterPush: function(project, versions) {
-    var gulp = require('gulp');
+  afterPush(project) {
+    const gulp = require('gulp');
     require('../gulpfile.js');
-    var start = RSVP.denodeify(gulp.start.bind(gulp));
+    let start = RSVP.denodeify(gulp.start.bind(gulp));
 
     project.ui.startProgress('Updating docs...');
     return start('docs')

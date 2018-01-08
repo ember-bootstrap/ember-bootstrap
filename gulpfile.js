@@ -1,11 +1,11 @@
 /* eslint-env node */
-var gulp = require('gulp');
-var conventionalChangelog = require('gulp-conventional-changelog');
-var ghPages = require('gulp-gh-pages');
-var exec = require('child_process').exec;
-var merge = require('merge-stream');
-var striptags = require('striptags')
-var transform = require('gulp-transform');
+const gulp = require('gulp');
+const conventionalChangelog = require('gulp-conventional-changelog');
+const ghPages = require('gulp-gh-pages');
+const exec = require('child_process').exec;
+const merge = require('merge-stream');
+const striptags = require('striptags');
+const transform = require('gulp-transform');
 
 gulp.task('docs', ['docs:publish']);
 
