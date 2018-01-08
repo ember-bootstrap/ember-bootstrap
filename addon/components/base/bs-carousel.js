@@ -3,7 +3,7 @@ import Component from '@ember/component';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
 import { computed, observer } from '@ember/object';
-import { filter, lte, gt, and } from '@ember/object/computed';
+import { filter, lte, gt, readOnly } from '@ember/object/computed';
 import { schedule } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 
@@ -170,7 +170,7 @@ export default Component.extend(ComponentParent, {
    * @property hasInterval
    * @type boolean
    */
-  hasInterval: gt('interval', 0),
+  hasInterval: gt('interval', 0).readOnly(),
 
   /**
    * This observer is the entry point for programmatically slide changing.
@@ -249,7 +249,7 @@ export default Component.extend(ComponentParent, {
    * @property shouldRunAutomatically
    * @type boolean
    */
-  shouldRunAutomatically: and('autoPlay', 'hasInterval'),
+  shouldRunAutomatically: readOnly('hasInterval'),
 
   /**
    * Starts automatic sliding on page load.
