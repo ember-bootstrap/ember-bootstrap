@@ -10,6 +10,7 @@ import { render, settled } from '@ember/test-helpers';
 import { run } from '@ember/runloop';
 import {
   test,
+  testBS4,
   testRequiringFocus,
   defaultButtonClass,
   visibilityClass,
@@ -577,4 +578,10 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await click('.modal .modal-header .close');
     assert.equal(this.get('open'), true, 'DOes not change open property');
   });
+
+  testBS4('modal can be centered vertically', async function(assert) {
+    await render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false position="center"}}Hello world!{{/bs-modal-simple}}`);
+    assert.dom('.modal-dialog').hasClass('modal-dialog-centered');
+  });
+
 });
