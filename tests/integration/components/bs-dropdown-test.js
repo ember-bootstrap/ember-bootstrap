@@ -7,7 +7,8 @@ import {
   isHidden,
   isVisible,
   openClass,
-  test
+  test,
+  testBS4
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -29,6 +30,18 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     await render(hbs`{{#bs-dropdown direction="up"}}Test{{/bs-dropdown}}`);
 
     assert.dom(':first-child').hasClass('dropup', 'has dropup class');
+  });
+
+  testBS4('dropdown container supports dropright style', async function(assert) {
+    await render(hbs`{{#bs-dropdown direction="right"}}Test{{/bs-dropdown}}`);
+
+    assert.dom(':first-child').hasClass('dropright', 'has dropright class');
+  });
+
+  testBS4('dropdown container supports dropleft style', async function(assert) {
+    await render(hbs`{{#bs-dropdown direction="left"}}Test{{/bs-dropdown}}`);
+
+    assert.dom(':first-child').hasClass('dropleft', 'has dropleft class');
   });
 
   test('dropdown container with dropdown button has btn-group class', async function(assert) {
