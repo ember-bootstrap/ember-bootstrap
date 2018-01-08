@@ -8,22 +8,23 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('demo', { path: '/components' }, function() {
-    this.route('dropdown');
+    this.route('accordion');
+    this.route('alert');
     this.route('button');
     this.route('button-group');
-    this.route('forms');
-    this.route('alert');
-    this.route('accordion');
+    this.route('carousel');
     this.route('collapse');
+    this.route('dropdown');
+    this.route('forms');
     this.route('modal');
-    this.route('progress');
-    this.route('navs');
     this.route('navbars');
-    this.route('tooltip');
+    this.route('navs');
     this.route('popover');
+    this.route('progress');
     this.route('tabs', function() {
       this.route('other');
     });
+    this.route('tooltip');
   });
   this.route('getting-started', function() {
     this.route('setup');

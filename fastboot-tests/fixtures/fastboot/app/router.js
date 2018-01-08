@@ -11,16 +11,17 @@ Router.map(function() {
   this.route('alert');
   this.route('button');
   this.route('buttonGroup');
+  this.route('carousel');
   this.route('collapse');
   this.route('dropdown');
   this.route('form');
   this.route('modal');
-  this.route('progress');
   this.route('nav');
   this.route('navBar');
+  this.route('popover');
+  this.route('progress');
   this.route('tabs');
   this.route('tooltip');
-  this.route('popover');
 });
 
 export default Router;
