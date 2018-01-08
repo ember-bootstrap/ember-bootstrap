@@ -8,13 +8,13 @@ import { schedule } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 
 /**
-  Ember implementation of Bootstrap's Carousel. Supports all original features but API is different:
+  Ember implementation of Bootstrap's Carousel. Supports all original features but API is partially different:
 
   | Description | Original | Component |
   | ------ | ------ | ------ |
   | Autoplays after first user event or on page load. | ride='carousel'\|false | autoPlay=false\|true |
   | Disable automatic cycle. | interval=false | interval=0 |
-  | If first slide should follow last slide on "previous" event, the  opposite will also be true for "next" event. | wrap=false\|true | continuouslyCicle=false\|true |
+  | If first slide should follow last slide on "previous" event, the opposite will also be true for "next" event. | wrap=false\|true | wrap=false\|true |
   | Jumps into specific slide index | data-slide-to=n | index=n |
   | Keyboard events. | keyboard=false\|true | keyboard=false\|true |
   | Left-to-right or right-to-left sliding. | N/A |  ltr=false\|true |
@@ -28,13 +28,13 @@ import { task, timeout } from 'ember-concurrency';
  ```hbs
   {{#bs-carousel as |car|}}
     {{#car.slide}}
-      <img alt="First slide" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzkwMHg1MDAvYXV0by8jNzc3OiM1NTUvdGV4dDpGaXJzdCBzbGlkZQpDcmVhdGVkIHdpdGggSG9sZGVyLmpzIDIuNi4wLgpMZWFybiBtb3JlIGF0IGh0dHA6Ly9ob2xkZXJqcy5jb20KKGMpIDIwMTItMjAxNSBJdmFuIE1hbG9waW5za3kgLSBodHRwOi8vaW1za3kuY28KLS0+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj48IVtDREFUQVsjaG9sZGVyXzE1Y2ZlYzcyYmI5IHRleHQgeyBmaWxsOiM1NTU7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6NDVwdCB9IF1dPjwvc3R5bGU+PC9kZWZzPjxnIGlkPSJob2xkZXJfMTVjZmVjNzJiYjkiPjxyZWN0IHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjNzc3Ii8+PGc+PHRleHQgeD0iMzA4IiB5PSIyNjcuMSI+Rmlyc3Qgc2xpZGU8L3RleHQ+PC9nPjwvZz48L3N2Zz4=">
+      <img alt="First slide" src="slide1.jpg">
     {{/car.slide}}
     {{#car.slide}}
-      <img alt="Second slide" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzkwMHg1MDAvYXV0by8jNjY2OiM0NDQvdGV4dDpTZWNvbmQgc2xpZGUKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWNmZWM3NGFmMSB0ZXh0IHsgZmlsbDojNDQ0O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjQ1cHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1Y2ZlYzc0YWYxIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiIvPjxnPjx0ZXh0IHg9IjI2NC41IiB5PSIyNjcuMSI+U2Vjb25kIHNsaWRlPC90ZXh0PjwvZz48L2c+PC9zdmc+">
+      <img alt="Second slide" src="slide2.jpg">
     {{/car.slide}}
     {{#car.slide}}
-      <img alt="Third slide" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzkwMHg1MDAvYXV0by8jNTU1OiMzMzMvdGV4dDpUaGlyZCBzbGlkZQpDcmVhdGVkIHdpdGggSG9sZGVyLmpzIDIuNi4wLgpMZWFybiBtb3JlIGF0IGh0dHA6Ly9ob2xkZXJqcy5jb20KKGMpIDIwMTItMjAxNSBJdmFuIE1hbG9waW5za3kgLSBodHRwOi8vaW1za3kuY28KLS0+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj48IVtDREFUQVsjaG9sZGVyXzE1Y2ZlYzZmYWFmIHRleHQgeyBmaWxsOiMzMzM7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6NDVwdCB9IF1dPjwvc3R5bGU+PC9kZWZzPjxnIGlkPSJob2xkZXJfMTVjZmVjNmZhYWYiPjxyZWN0IHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjNTU1Ii8+PGc+PHRleHQgeD0iMjk3LjUiIHk9IjI2Ny4xIj5UaGlyZCBzbGlkZTwvdGV4dD48L2c+PC9nPjwvc3ZnPg==">
+      <img alt="Third slide" src="slide3.jpg">
     {{/car.slide}}
   {{/bs-carousel}}
  ```
@@ -47,7 +47,7 @@ import { task, timeout } from 'ember-concurrency';
   | Interval | Waiting time after a transition. |
   | Presentation | Represents a single transition, or a single interval, or the union of both. |
   | Cycle | Presents all slides until it reaches first or last slide. |
-  | Continuously cycle | Infinite cycling without stops. |
+  | Wrap | wrap slides, cycles without stopping at first or last slide. |
   ```
 
   @class Carousel
@@ -67,8 +67,8 @@ export default Component.extend(ComponentParent, {
    * @private
    * @property canTurnToLeft
    */
-  canTurnToLeft: computed('continuouslyCycle', 'currentIndex', function() {
-    return this.get('continuouslyCycle') || this.get('currentIndex') > 0;
+  canTurnToLeft: computed('wrap', 'currentIndex', function() {
+    return this.get('wrap') || this.get('currentIndex') > 0;
   }),
 
   /**
@@ -77,8 +77,8 @@ export default Component.extend(ComponentParent, {
    * @private
    * @property canTurnToRight
    */
-  canTurnToRight: computed('childSlides.length', 'continuouslyCycle', 'currentIndex', function() {
-    return this.get('continuouslyCycle') || this.get('currentIndex') < this.get('childSlides.length') - 1;
+  canTurnToRight: computed('childSlides.length', 'wrap', 'currentIndex', function() {
+    return this.get('wrap') || this.get('currentIndex') < this.get('childSlides.length') - 1;
   }),
 
   /**
@@ -263,15 +263,15 @@ export default Component.extend(ComponentParent, {
   autoPlay: false,
 
   /**
-   * Should have hard stop on corners, i.e., first slide won't make a transition to the
+   * If false will hard stop on corners, i.e., first slide won't make a transition to the
    * last slide and vice versa.
    *
    * @default true
-   * @property continuouslyCycle
+   * @property wrap
    * @public
    * @type boolean
    */
-  continuouslyCycle: true,
+  wrap: true,
 
   /**
    * Index of starting slide.

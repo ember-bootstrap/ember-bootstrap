@@ -120,34 +120,34 @@ module('Integration | Component | bs-carousel', function(hooks) {
     this.stopCarousel();
   });
 
-  test('carousel continuouslyCycle=false must not cross lower bound', async function(assert) {
-    await render(hbs`{{#bs-carousel continuouslyCycle=false transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  test('carousel wrap=false must not cross lower bound', async function(assert) {
+    await render(hbs`{{#bs-carousel wrap=false transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     clickToPrevSlide();
     await waitTransitionTime();
-    assert.ok(getActivatedSlide(1), 'continuouslyCycle has correct behavior');
+    assert.ok(getActivatedSlide(1), 'wrap has correct behavior');
   });
 
-  test('carousel continuouslyCycle=false must not cross upper bound', async function(assert) {
+  test('carousel wrap=false must not cross upper bound', async function(assert) {
     await render(
-      hbs`{{#bs-carousel continuouslyCycle=false index=1 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
+      hbs`{{#bs-carousel wrap=false index=1 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
     );
     clickToNextSlide();
     await waitTransitionTime();
-    assert.ok(getActivatedSlide(2), 'continuouslyCycle has correct behavior');
+    assert.ok(getActivatedSlide(2), 'wrap has correct behavior');
   });
 
-  test('carousel continuouslyCycle=true must cross lower bound', async function(assert) {
-    await render(hbs`{{#bs-carousel interval=0 continuouslyCycle=true transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+  test('carousel wrap=true must cross lower bound', async function(assert) {
+    await render(hbs`{{#bs-carousel interval=0 wrap=true transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await clickToPrevSlide();
-    assert.ok(getActivatedSlide(2), 'continuouslyCycle has correct behavior');
+    assert.ok(getActivatedSlide(2), 'wrap has correct behavior');
   });
 
-  test('carousel continuouslyCycle=true must cross upper bound', async function(assert) {
+  test('carousel wrap=true must cross upper bound', async function(assert) {
     await render(
-      hbs`{{#bs-carousel interval=0 continuouslyCycle=true index=1 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
+      hbs`{{#bs-carousel interval=0 wrap=true index=1 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
     );
     await clickToNextSlide();
-    assert.ok(getActivatedSlide(1), 'continuouslyCycle has correct behavior');
+    assert.ok(getActivatedSlide(1), 'wrap has correct behavior');
   });
 
   test('carousel index=N specifies starting slide', async function(assert) {
