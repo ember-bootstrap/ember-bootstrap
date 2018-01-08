@@ -6,7 +6,7 @@ import { render } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 
-const TRANSITION_DURATION = 600;
+const TRANSITION_DURATION = 50;
 
 function clickIndicator(index) {
   return click(`.carousel-indicators li:nth-child(${index})`);
@@ -53,6 +53,7 @@ module('Integration | Component | bs-carousel', function(hooks) {
 
   hooks.beforeEach(function() {
     this.set('interval', 300);
+    this.set('transitionDuration', TRANSITION_DURATION);
     this.stopCarousel = () => {
       this.set('interval', 0);
     }
@@ -107,20 +108,20 @@ module('Integration | Component | bs-carousel', function(hooks) {
   // Parameters
 
   test('carousel autoPlay=false must not start sliding', async function(assert) {
-    await render(hbs`{{#bs-carousel autoPlay=false interval=300 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+    await render(hbs`{{#bs-carousel autoPlay=false interval=300 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await waitTransitionTime();
     assert.ok(getActivatedSlide(1), 'autoPlay has correct behavior');
   });
 
   test('carousel autoPlay=true must start sliding', async function(assert) {
-    render(hbs`{{#bs-carousel autoPlay=true interval=interval as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+    render(hbs`{{#bs-carousel autoPlay=true interval=interval transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await waitTransitionTime();
     assert.ok(getActivatedSlide(2), 'autoPlay has correct behavior');
     this.stopCarousel();
   });
 
   test('carousel continuouslyCycle=false must not cross lower bound', async function(assert) {
-    await render(hbs`{{#bs-carousel continuouslyCycle=false as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+    await render(hbs`{{#bs-carousel continuouslyCycle=false transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     clickToPrevSlide();
     await waitTransitionTime();
     assert.ok(getActivatedSlide(1), 'continuouslyCycle has correct behavior');
@@ -128,7 +129,7 @@ module('Integration | Component | bs-carousel', function(hooks) {
 
   test('carousel continuouslyCycle=false must not cross upper bound', async function(assert) {
     await render(
-      hbs`{{#bs-carousel continuouslyCycle=false index=1 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
+      hbs`{{#bs-carousel continuouslyCycle=false index=1 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
     );
     clickToNextSlide();
     await waitTransitionTime();
@@ -136,21 +137,17 @@ module('Integration | Component | bs-carousel', function(hooks) {
   });
 
   test('carousel continuouslyCycle=true must cross lower bound', async function(assert) {
-    await render(hbs`{{#bs-carousel interval=interval continuouslyCycle=true as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
-    clickToPrevSlide();
-    await waitTransitionTime();
+    await render(hbs`{{#bs-carousel interval=0 continuouslyCycle=true transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+    await clickToPrevSlide();
     assert.ok(getActivatedSlide(2), 'continuouslyCycle has correct behavior');
-    this.stopCarousel();
   });
 
   test('carousel continuouslyCycle=true must cross upper bound', async function(assert) {
     await render(
-      hbs`{{#bs-carousel interval=interval continuouslyCycle=true index=1 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
+      hbs`{{#bs-carousel interval=0 continuouslyCycle=true index=1 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
     );
-    clickToNextSlide();
-    await waitTransitionTime();
+    await clickToNextSlide();
     assert.ok(getActivatedSlide(1), 'continuouslyCycle has correct behavior');
-    this.stopCarousel();
   });
 
   test('carousel index=N specifies starting slide', async function(assert) {
@@ -159,14 +156,14 @@ module('Integration | Component | bs-carousel', function(hooks) {
   });
 
   test('carousel interval=0 must not trigger automatic sliding', async function(assert) {
-    await render(hbs`{{#bs-carousel autoPlay=true interval=0 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+    await render(hbs`{{#bs-carousel autoPlay=true interval=0 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await waitTransitionTime();
     assert.ok(getActivatedSlide(1), 'interval has correct behavior');
   });
 
   test('carousel ltr=false does right-to-left automatic sliding', async function(assert) {
     render(
-      hbs`{{#bs-carousel autoPlay=true interval=interval ltr=false as |car|}}{{car.slide}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
+      hbs`{{#bs-carousel autoPlay=true interval=interval transitionDuration=transitionDuration ltr=false as |car|}}{{car.slide}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
     );
     await waitTransitionTime();
     assert.ok(getActivatedSlide(3), 'ltr has correct behavior');
@@ -175,7 +172,7 @@ module('Integration | Component | bs-carousel', function(hooks) {
 
   test('carousel ltr=true does left-to-right automatic sliding', async function(assert) {
     render(
-      hbs`{{#bs-carousel autoPlay=true interval=interval ltr=true as |car|}}{{car.slide}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
+      hbs`{{#bs-carousel autoPlay=true interval=interval transitionDuration=transitionDuration ltr=true as |car|}}{{car.slide}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
     );
     await waitTransitionTime();
     assert.ok(getActivatedSlide(2), 'ltr has correct behavior');
@@ -184,7 +181,7 @@ module('Integration | Component | bs-carousel', function(hooks) {
 
   test('carousel pauseOnMouseEnter=false must not pause automatic sliding', async function(assert) {
     render(
-      hbs`{{#bs-carousel autoPlay=true interval=interval pauseOnMouseEnter=false as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
+      hbs`{{#bs-carousel autoPlay=true interval=interval transitionDuration=transitionDuration pauseOnMouseEnter=false as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
     );
     await waitTransitionTime(10);
     triggerEvent('.carousel', 'mouseenter');
@@ -195,7 +192,7 @@ module('Integration | Component | bs-carousel', function(hooks) {
 
   test('carousel pauseOnMouseEnter=true must pause automatic sliding', async function(assert) {
     render(
-      hbs`{{#bs-carousel autoPlay=true interval=interval pauseOnMouseEnter=true as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
+      hbs`{{#bs-carousel autoPlay=true interval=interval transitionDuration=transitionDuration pauseOnMouseEnter=true as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
     );
     await waitTransitionTime(10);
     triggerEvent('.carousel', 'mouseenter');
@@ -207,19 +204,19 @@ module('Integration | Component | bs-carousel', function(hooks) {
   // User clicks
 
   test('carousel has functional right control', async function(assert) {
-    await render(hbs`{{#bs-carousel interval=0 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+    await render(hbs`{{#bs-carousel interval=0 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await clickToNextSlide();
     assert.ok(getActivatedSlide(2), 'right control changes slide');
   });
 
   test('carousel has functional left control', async function(assert) {
-    await render(hbs`{{#bs-carousel interval=0 index=1 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+    await render(hbs`{{#bs-carousel interval=0 transitionDuration=transitionDuration index=1 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await clickToPrevSlide();
     assert.ok(getActivatedSlide(1), 'left control changes slide');
   });
 
   test('carousel has functional indicators', async function(assert) {
-    await render(hbs`{{#bs-carousel interval=0 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+    await render(hbs`{{#bs-carousel interval=0 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await clickIndicator(2);
     assert.dom('.carousel-indicators > li:nth-child(2).active').exists('indicators changes indicator index');
     assert.ok(getActivatedSlide(2), 'indicators changes slide index');
