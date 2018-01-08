@@ -2,7 +2,6 @@ import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/errors';
 
 /**
-
  @class FormElementErrors
  @namespace Components
  @extends Ember.Component
@@ -24,5 +23,15 @@ export default Component.extend({
    * @type {Ember.Array}
    * @public
    */
-  messages: null
+  messages: null,
+
+  /**
+   * Whether or not should display several errors at the same time.
+   *
+   * @default false
+   * @property showMultipleErrors
+   * @public
+   * @type {Boolean}
+   */
+  showMultipleErrors: false
 });
