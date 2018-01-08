@@ -125,6 +125,7 @@ export default Component.extend({
 
   /**
    * By default the dropdown menu will expand downwards. Set to 'up' to expand upwards.
+   * BS4 also allows 'left' and 'right'
    *
    * @property direction
    * @type string
@@ -145,6 +146,7 @@ export default Component.extend({
 
   /**
    * A computed property to generate the suiting class for the dropdown container, either "dropdown", "dropup" or "btn-group".
+   * BS4 only: "dropleft", "dropright"
    *
    * @property containerClass
    * @type string
@@ -153,9 +155,9 @@ export default Component.extend({
    */
   containerClass: computed('toggle.tagName', 'direction', function() {
     if (this.get('toggle.tagName') === 'button' && !this.get('toggle.block')) {
-      return this.get('direction') === 'up' ? 'btn-group dropup' : 'btn-group';
+      return this.get('direction') !== 'down' ? `btn-group drop${this.get('direction')}` : 'btn-group';
     } else {
-      return this.get('direction') === 'up' ? 'dropup' : 'dropdown';
+      return `drop${this.get('direction')}`;
     }
   }),
 
