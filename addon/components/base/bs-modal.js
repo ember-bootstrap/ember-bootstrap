@@ -163,6 +163,17 @@ export default Component.extend(TransitionSupport, {
   keyboard: true,
 
   /**
+   * [BS4 only!] Vertical position, either 'top' (default) or 'center'
+   * 'center' will apply the `modal-dialog-centered` class
+   *
+   * @property position
+   * @type {string}
+   * @default 'top'
+   * @public
+   */
+  position: 'top',
+
+  /**
    * The id of the `.modal` element.
    *
    * @property modalId
