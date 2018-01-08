@@ -21,13 +21,18 @@ export default DropdownMenu.extend({
 
   popperPlacement: computed('direction', 'align', function() {
     let placement = 'bottom-start';
+    let { direction, align } = this.getProperties('direction', 'align');
 
-    if (this.get('direction') === 'up') {
+    if (direction === 'up') {
       placement = 'top-start';
-      if (this.get('align') === 'right') {
+      if (align === 'right') {
         placement = 'top-end';
       }
-    } else if (this.get('align') === 'right') {
+    } else if (direction === 'left') {
+      placement = 'left-start';
+    } else if (direction === 'right') {
+      placement = 'right-start';
+    } else if (align === 'right') {
       placement = 'bottom-end';
     }
     return placement;
