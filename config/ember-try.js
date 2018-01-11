@@ -1,4 +1,3 @@
-/* eslint-env node */
 module.exports = {
   // temporary workaround for https://github.com/yarnpkg/yarn/issues/3485
   command: 'BOOTSTRAPVERSION=3 ember test',

@@ -2,6 +2,7 @@
 /.github
 /.idea
 /config/ember-try.js
+/config/release.js
 /dist
 /tests
 /tmp
