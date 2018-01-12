@@ -1,43 +1,48 @@
-<h2>Carousel playground</h2>
-
-{{#bs-form model=this as |form|}}
-  <div class="row">
-    <div class="col-sm-6">
-      {{form.element controlType='checkbox' label='continuouslyCycle' property='continuouslyCycle'}}
-      {{form.element controlType='number' label='index' max='2' min='0' property='index'}}
-      {{form.element controlType='number' label='interval' min='1' property='interval'}}
-      {{form.element controlType='checkbox' label='keyboard' property='keyboard'}}
+<div class="bs-example">
+  {{#bs-form model=this as |form|}}
+    <div class="row">
+      <div class="col-sm-6">
+        {{form.element controlType='checkbox' label='wrap' property='wrap'}}
+        {{form.element controlType='number' label='index' max='2' min='0' property='index'}}
+        {{form.element controlType='number' label='interval' min='1' property='interval'}}
+        {{form.element controlType='checkbox' label='keyboard' property='keyboard'}}
+      </div>
+      <div class="col-sm-6">
+        {{form.element controlType='checkbox' label='ltr (left to right)' property='ltr'}}
+        {{form.element controlType='number' label='Number of slides' max='3' min='0' property='numberOfSlides'}}
+        {{form.element controlType='checkbox' label='pauseOnMouseEnter' property='pauseOnMouseEnter'}}
+        {{form.element controlType='checkbox' label='showControls' property='showControls'}}
+        {{form.element controlType='checkbox' label='showIndicators' property='showIndicators'}}
+      </div>
     </div>
-    <div class="col-sm-6">
-      {{form.element controlType='checkbox' label='ltr (left to right)' property='ltr'}}
-      {{form.element controlType='number' label='Number of slides' max='3' min='0' property='numberOfSlides'}}
-      {{form.element controlType='checkbox' label='pauseOnMouseEnter' property='pauseOnMouseEnter'}}
-      {{form.element controlType='checkbox' label='showControls' property='showControls'}}
-      {{form.element controlType='checkbox' label='showIndicators' property='showIndicators'}}
-    </div>
-  </div>
-{{/bs-form}}
-
-{{#bs-carousel
-  autoPlay=true
-  continuouslyCycle=continuouslyCycle
-  index=integerIndex
-  interval=integerInterval
-  keyboard=keyboard
-  ltr=ltr
-  model=this
-  pauseOnMouseEnter=pauseOnMouseEnter
-  showControls=showControls
-  showIndicators=showIndicators
+  {{/bs-form}}
+  <hr>
+  <!-- BEGIN-SNIPPET carousel-demo -->
+  {{#bs-carousel
+    autoPlay=true
+    wrap=wrap
+    index=integerIndex
+    interval=integerInterval
+    keyboard=keyboard
+    ltr=ltr
+    model=this
+    pauseOnMouseEnter=pauseOnMouseEnter
+    showControls=showControls
+    showIndicators=showIndicators
   as |car|}}
-  {{#each slides as |slide|}}
-    {{#car.slide}}
-      <img alt='{{slide.alt}}' src='{{slide.src}}'>
-    {{/car.slide}}
-  {{/each}}
-{{/bs-carousel}}
+    {{#each slides as |slide|}}
+      {{#car.slide}}
+        <img alt='{{slide.alt}}' src='{{slide.src}}'>
+      {{/car.slide}}
+    {{/each}}
+  {{/bs-carousel}}
+  <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+  {{code-snippet name="carousel-demo.hbs"}}
+</div>
 
-<h2>Some controls properties are customizables.</h2>
+<h2>Customizable controls</h2>
 
 <div class='bs-example'>
   <!-- BEGIN-SNIPPET carousel-custom-icons -->
