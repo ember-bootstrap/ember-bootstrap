@@ -33,7 +33,7 @@ export default Mixin.create({
    * @public
    */
   registerChild(child) {
-    schedule('sync', this, function() {
+    schedule('actions', this, function() {
       this.get('children').addObject(child);
     });
   },
@@ -46,7 +46,7 @@ export default Mixin.create({
    * @public
    */
   removeChild(child) {
-    schedule('sync', this, function() {
+    schedule('actions', this, function() {
       this.get('children').removeObject(child);
     });
   }

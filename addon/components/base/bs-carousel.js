@@ -4,8 +4,9 @@ import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
 import { computed, observer } from '@ember/object';
 import { filter, lte, gt, readOnly } from '@ember/object/computed';
-import { schedule } from '@ember/runloop';
+import { schedule, scheduleOnce } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
+import RSVP from 'rsvp';
 
 /**
   Ember implementation of Bootstrap's Carousel. Supports all original features but API is partially different:
@@ -100,22 +101,24 @@ export default Component.extend(ComponentParent, {
    * @property childSlidesObserver
    */
   childSlidesObserver: observer('childSlides.[]', 'autoPlay', function() {
-    let childSlides = this.get('childSlides');
-    if (childSlides.length === 0) {
-      return;
-    }
-    // Sets new current index
-    let currentIndex = this.get('currentIndex');
-    if (currentIndex >= childSlides.length) {
-      currentIndex = childSlides.length - 1;
-      this.set('currentIndex', currentIndex);
-    }
-    // Automatic sliding
-    if (this.get('autoPlay')) {
-      this.get('waitIntervalToInitCycle').perform();
-    }
-    // Initial slide state
-    this.set('presentationState', null);
+    scheduleOnce('actions', () => {
+      let childSlides = this.get('childSlides');
+      if (childSlides.length === 0) {
+        return;
+      }
+      // Sets new current index
+      let currentIndex = this.get('currentIndex');
+      if (currentIndex >= childSlides.length) {
+        currentIndex = childSlides.length - 1;
+        this.set('currentIndex', currentIndex);
+      }
+      // Automatic sliding
+      if (this.get('autoPlay')) {
+        this.get('waitIntervalToInitCycle').perform();
+      }
+      // Initial slide state
+      this.set('presentationState', null);
+    });
   }),
 
   /**
@@ -419,8 +422,11 @@ export default Component.extend(ComponentParent, {
     this.set('presentationState', 'didTransition');
     // Must change current index after execution of 'presentationStateObserver' method
     // from child components.
-    schedule('afterRender', this, function() {
-      this.set('currentIndex', this.get('followingIndex'));
+    yield new RSVP.Promise((resolve) => {
+      schedule('afterRender', this, function() {
+        this.set('currentIndex', this.get('followingIndex'));
+        resolve();
+      });
     });
   }).drop(),
 
