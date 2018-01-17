@@ -32,7 +32,7 @@ export default Mixin.create({
     this._super(...arguments);
     let dropdown = this.get('dropdown');
     if (dropdown) {
-      schedule('sync', this, function() {
+      schedule('actions', this, function() {
         if (!this.get('isDestroyed')) {
           dropdown.set('toggle', this);
         }
