@@ -1,3 +1,18 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0...1.1.0) (2018-01-18)
+
+
+### Features
+
+* **Carousel:** Added brand new `bs-carousel` component, with a native Ember implementation of Bootstrap's Carousels. Thanks to [@c410-f3r](https://github.com/c410-f3r), closes [#138](https://github.com/kaliber5/ember-bootstrap/issues/138)
+* **Bootstrap 4:** added support for the latest 4.0.0-beta.3 release ([952ee5c](https://github.com/kaliber5/ember-bootstrap/commit/952ee5c))
+* **Dropdown:** support dropright and dropleft variations for Bootstrap 4.0.0-beta.3 ([1538e34](https://github.com/kaliber5/ember-bootstrap/commit/1538e34)), closes [#517](https://github.com/kaliber5/ember-bootstrap/issues/517)
+* **Form:** allow multiple form error messages. Thanks to [@c410-f3r](https://github.com/c410-f3r) ([35b27ca](https://github.com/kaliber5/ember-bootstrap/commit/35b27ca)), closes [#253](https://github.com/kaliber5/ember-bootstrap/issues/253)
+* **Modal:** enable centered modal for Bootstrap 4.0.0-beta.3 ([5f04af9](https://github.com/kaliber5/ember-bootstrap/commit/5f04af9))
+* **Modal:** Use the Glimmer `in-element` API ([4533ade](https://github.com/kaliber5/ember-bootstrap/commit/4533ade))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.5...1.0.0) (2017-12-19)
 
