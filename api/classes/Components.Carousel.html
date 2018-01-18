@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.Modal - ember-bootstrap</title>
+    <title>Components.Carousel - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -48,25 +48,19 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.Modal <small>Class</small></h1>
+    <h1>Components.Carousel <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
         <span class="label label-public">public</span>
 
-        <div class="uses">
-            Uses
-            <ul class="inline commas">
-                    <li><a href="Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
-            </ul>
-        </div>
 
         <div class="extends">
             Extends Ember.Component
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_base_bs-modal.js.html#l16"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:16</code></a>
+            Defined in: <a href="../files/addon_components_base_bs-carousel.js.html#l11"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:11</code></a>
         </div>
 
 
@@ -74,30 +68,113 @@
 
 
 <div class="well well-small">
-    <p>Component for creating <a href="http://getbootstrap.com/javascript/#modals">Bootstrap modals</a> with custom markup.</p>
-<h3>Usage</h3>
-<pre class="code prettyprint"><code class="language-hbs"> {{#bs-modal onSubmit=(action &quot;submit&quot;) as |modal|}}
-   {{#modal.header}}
-     &lt;h4 class=&quot;modal-title&quot;&gt;&lt;i class=&quot;glyphicon glyphicon-alert&quot;&gt;&lt;/i&gt; Alert&lt;/h4&gt;
-   {{/modal.header}}
-   {{#modal.body}}Are you absolutely sure you want to do that???{{/modal.body}}
-   {{#modal.footer as |footer|}}
-     {{#bs-button onClick=(action modal.close) type=&quot;danger&quot;}}Oh no, forget it!{{/bs-button}}
-     {{#bs-button onClick=(action modal.submit) type=&quot;success&quot;}}Yeah!{{/bs-button}}
-   {{/modal.footer}}
- {{/bs-modal}}
+    <p>Ember implementation of Bootstrap's Carousel. Supports all original features but API is partially different:</p>
+<table>
+<thead>
+<tr>
+<th>Description</th>
+<th>Original</th>
+<th>Component</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autoplays after first user event or on page load.</td>
+<td>ride='carousel'|false</td>
+<td>autoPlay=false|true</td>
+</tr>
+<tr>
+<td>Disable automatic cycle.</td>
+<td>interval=false</td>
+<td>interval=0</td>
+</tr>
+<tr>
+<td>If first slide should follow last slide on &quot;previous&quot; event, the opposite will also be true for &quot;next&quot; event.</td>
+<td>wrap=false|true</td>
+<td>wrap=false|true</td>
+</tr>
+<tr>
+<td>Jumps into specific slide index</td>
+<td>data-slide-to=n</td>
+<td>index=n</td>
+</tr>
+<tr>
+<td>Keyboard events.</td>
+<td>keyboard=false|true</td>
+<td>keyboard=false|true</td>
+</tr>
+<tr>
+<td>Left-to-right or right-to-left sliding.</td>
+<td>N/A</td>
+<td>ltr=false|true</td>
+</tr>
+<tr>
+<td>Pause current cycle on mouse enter.</td>
+<td>pause='hover'|null</td>
+<td>pauseOnMouseEnter=false|true</td>
+</tr>
+<tr>
+<td>Show or hide controls</td>
+<td>Tag manipulation.</td>
+<td>showControls=false|true</td>
+</tr>
+<tr>
+<td>Show or hide indicators</td>
+<td>Tag manipulation.</td>
+<td>showIndicators=false|true</td>
+</tr>
+<tr>
+<td>Waiting time of slides in a automatic cycle.</td>
+<td>interval=n</td>
+<td>interval=n</td>
+</tr>
+</tbody>
+</table>
+<p>Default settings are the same as the original so you don't have to worry about changing parameters.</p>
+<pre class="code prettyprint"><code class="language-hbs">{{#bs-carousel as |car|}}
+ {{#car.slide}}
+   &lt;img alt=&quot;First slide&quot; src=&quot;slide1.jpg&quot;&gt;
+ {{/car.slide}}
+ {{#car.slide}}
+   &lt;img alt=&quot;Second slide&quot; src=&quot;slide2.jpg&quot;&gt;
+ {{/car.slide}}
+ {{#car.slide}}
+   &lt;img alt=&quot;Third slide&quot; src=&quot;slide3.jpg&quot;&gt;
+ {{/car.slide}}
+{{/bs-carousel}}
 </code></pre>
-<p>The component yields references to the following contextual components, that you can use to further customize the output:</p>
-<ul>
-<li><a href="Components.ModalBody.html">modal.body</a></li>
-<li><a href="Components.ModalHeader.html">modal.header</a></li>
-<li><a href="Components.ModalFooter.html">modal.footer</a>
-Furthermore references to the following actions are yielded:</li>
-<li><code>close</code>: triggers the <code>onHide</code> action and closes the modal</li>
-<li><code>submit</code>: triggers the <code>onSubmit</code> action (or the submit event on a form if present in the body element)</li>
-</ul>
-<h3>Further reading</h3>
-<p>See the documentation of the <a href="Components.ModalSimple.html">bs-modal-simple</a> component for further examples.</p>
+<p>To better understand the whole documentation, you should be aware of the following operations:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transition</td>
+<td>Swaps two slides.</td>
+</tr>
+<tr>
+<td>Interval</td>
+<td>Waiting time after a transition.</td>
+</tr>
+<tr>
+<td>Presentation</td>
+<td>Represents a single transition, or a single interval, or the union of both.</td>
+</tr>
+<tr>
+<td>Cycle</td>
+<td>Presents all slides until it reaches first or last slide.</td>
+</tr>
+<tr>
+<td>Wrap</td>
+<td>wrap slides, cycles without stopping at first or last slide.</td>
+</tr>
+</tbody>
+</table>
+<pre class="code prettyprint"><code></code></pre>
 
 </div>
 
@@ -143,51 +220,35 @@ Furthermore references to the following actions are yielded:</li>
 
                     <ul class="index-list methods extends">
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_adjustDialog" data-tablink="adjustDialog">adjustDialog</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_assignClassNameControls" data-tablink="assignClassNameControls">assignClassNameControls</a>
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_checkScrollbar" data-tablink="checkScrollbar">checkScrollbar</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_cycle" data-tablink="cycle">cycle</a>
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_handleBackdrop" data-tablink="handleBackdrop">handleBackdrop</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_registerEvents" data-tablink="registerEvents">registerEvents</a>
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_handleUpdate" data-tablink="handleUpdate">handleUpdate</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_setFollowingIndex" data-tablink="setFollowingIndex">setFollowingIndex</a>
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_hide" data-tablink="hide">hide</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_toAppropriateSlide" data-tablink="toAppropriateSlide">toAppropriateSlide</a>
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_hideModal" data-tablink="hideModal">hideModal</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_transition" data-tablink="transition">transition</a>
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_resetAdjustments" data-tablink="resetAdjustments">resetAdjustments</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_triggerChildSlidesObserver" data-tablink="triggerChildSlidesObserver">triggerChildSlidesObserver</a>
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_resetScrollbar" data-tablink="resetScrollbar">resetScrollbar</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_resize" data-tablink="resize">resize</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_setScrollbar" data-tablink="setScrollbar">setScrollbar</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_show" data-tablink="show">show</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_takeFocus" data-tablink="takeFocus">takeFocus</a>
+                                <a href="#" data-tabid="#methods" data-anchor="#method_waitIntervalToInitCycle" data-tablink="waitIntervalToInitCycle">waitIntervalToInitCycle</a>
 
                             </li>
                     </ul>
@@ -197,140 +258,136 @@ Furthermore references to the following actions are yielded:</li>
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property__isOpen" data-tablink="_isOpen">_isOpen</a>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_autoPlay" data-tablink="autoPlay">autoPlay</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property__renderInPlace" data-tablink="_renderInPlace">_renderInPlace</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_canTurnToLeft" data-tablink="canTurnToLeft">canTurnToLeft</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_canTurnToRight" data-tablink="canTurnToRight">canTurnToRight</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_childSlides" data-tablink="childSlides">childSlides</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_childSlidesObserver" data-tablink="childSlidesObserver">childSlidesObserver</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_currentIndex" data-tablink="currentIndex">currentIndex</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_currentSlide" data-tablink="currentSlide">currentSlide</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_directionalClassName" data-tablink="directionalClassName">directionalClassName</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_followingIndex" data-tablink="followingIndex">followingIndex</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_followingIndex" data-tablink="followingIndex">followingIndex</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_hasInterval" data-tablink="hasInterval">hasInterval</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_backdrop" data-tablink="backdrop">backdrop</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_index" data-tablink="index">index</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_indexObserver" data-tablink="indexObserver">indexObserver</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_indicators" data-tablink="indicators">indicators</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_backdropClose" data-tablink="backdropClose">backdropClose</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_interval" data-tablink="interval">interval</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_backdropElement" data-tablink="backdropElement">backdropElement</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_backdropId" data-tablink="backdropId">backdropId</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_backdropTransitionDuration" data-tablink="backdropTransitionDuration">backdropTransitionDuration</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_destinationElement" data-tablink="destinationElement">destinationElement</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
-
-                            </li>
-                            <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_fastboot" data-tablink="fastboot">fastboot</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_inDom" data-tablink="inDom">inDom</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_isFastBoot" data-tablink="isFastBoot">isFastBoot</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_isOpen" data-tablink="isOpen">isOpen</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isMouseHovering" data-tablink="isMouseHovering">isMouseHovering</a>
 
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_keyboard" data-tablink="keyboard">keyboard</a>
 
                             </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_modalElement" data-tablink="modalElement">modalElement</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_modalId" data-tablink="modalId">modalId</a>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_ltr" data-tablink="ltr">ltr</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_notFade" data-tablink="notFade">notFade</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_nextControlClassName" data-tablink="nextControlClassName">nextControlClassName</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_onHidden" data-tablink="onHidden">onHidden</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_nextControlIcon" data-tablink="nextControlIcon">nextControlIcon</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_onHide" data-tablink="onHide">onHide</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_onShow" data-tablink="onShow">onShow</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_onShown" data-tablink="onShown">onShown</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_onSubmit" data-tablink="onSubmit">onSubmit</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_open" data-tablink="open">open</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_nextControlLabel" data-tablink="nextControlLabel">nextControlLabel</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_paddingLeft" data-tablink="paddingLeft">paddingLeft</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_paddingRight" data-tablink="paddingRight">paddingRight</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_orderClassName" data-tablink="orderClassName">orderClassName</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_position" data-tablink="position">position</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_pauseOnMouseEnter" data-tablink="pauseOnMouseEnter">pauseOnMouseEnter</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_presentationState" data-tablink="presentationState">presentationState</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_prevControlClassName" data-tablink="prevControlClassName">prevControlClassName</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_renderInPlace" data-tablink="renderInPlace">renderInPlace</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_scrollbarWidth" data-tablink="scrollbarWidth">scrollbarWidth</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_showBackdrop" data-tablink="showBackdrop">showBackdrop</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_showModal" data-tablink="showModal">showModal</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_prevControlIcon" data-tablink="prevControlIcon">prevControlIcon</a>
 
                             </li>
                             <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_size" data-tablink="size">size</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_prevControlLabel" data-tablink="prevControlLabel">prevControlLabel</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_shouldNotDoPresentation" data-tablink="shouldNotDoPresentation">shouldNotDoPresentation</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_shouldRunAutomatically" data-tablink="shouldRunAutomatically">shouldRunAutomatically</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showControls" data-tablink="showControls">showControls</a>
+
+                            </li>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_showIndicators" data-tablink="showIndicators">showIndicators</a>
 
                             </li>
                             <li class="index-item property public">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_transitionDuration" data-tablink="transitionDuration">transitionDuration</a>
 
                             </li>
-                            <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_transitionsEnabled" data-tablink="transitionsEnabled">transitionsEnabled</a>
-
-                            </li>
-                            <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_usesTransition" data-tablink="usesTransition">usesTransition</a>
+                            <li class="index-item property public">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_wrap" data-tablink="wrap">wrap</a>
 
                             </li>
                     </ul>
@@ -342,8 +399,8 @@ Furthermore references to the following actions are yielded:</li>
             <div id="methods" class="tab-pane">
                 <h2 class="off-left">Methods</h2>
 
-                    <div id="method_adjustDialog" class="method item private">
-                        <h3 class="name">adjustDialog
+                    <div id="method_assignClassNameControls" class="method item private">
+                        <h3 class="name">assignClassNameControls
                         <span class="small"> </span>
                         </h3>
                     
@@ -358,7 +415,162 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l587"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:587</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l474"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:474</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Indicates what class names should be applicable to the current transition slides.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_cycle" class="method item private">
+                        <h3 class="name">cycle
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l403"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:403</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Do a presentation and calls itself to perform a cycle.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_registerEvents" class="method item private">
+                        <h3 class="name">registerEvents
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l500"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:500</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>mouseEnter() and mouseLeave() doesn't work with ember-native-dom-event-dispatcher.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_setFollowingIndex" class="method item private">
+                        <h3 class="name">setFollowingIndex
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l548"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:548</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Sets the following slide index within the lower and upper bounds.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_toAppropriateSlide" class="method item private">
+                        <h3 class="name">toAppropriateSlide
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l565"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:565</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Coordinates the correct slide movement direction.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_transition" class="method item private">
+                        <h3 class="name">transition
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l415"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:415</code></a>
                             </p>
                     
                     
@@ -372,8 +584,8 @@ Furthermore references to the following actions are yielded:</li>
                     
                     
                     </div>
-                    <div id="method_checkScrollbar" class="method item private">
-                        <h3 class="name">checkScrollbar
+                    <div id="method_triggerChildSlidesObserver" class="method item private">
+                        <h3 class="name">triggerChildSlidesObserver
                         <span class="small"> </span>
                         </h3>
                     
@@ -388,7 +600,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l610"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:610</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l579"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:579</code></a>
                             </p>
                     
                     
@@ -402,8 +614,8 @@ Furthermore references to the following actions are yielded:</li>
                     
                     
                     </div>
-                    <div id="method_handleBackdrop" class="method item private">
-                        <h3 class="name">handleBackdrop
+                    <div id="method_waitIntervalToInitCycle" class="method item private">
+                        <h3 class="name">waitIntervalToInitCycle
                         <span class="small"> </span>
                         </h3>
                     
@@ -418,7 +630,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l514"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:514</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l433"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:433</code></a>
                             </p>
                     
                     
@@ -426,298 +638,7 @@ Furthermore references to the following actions are yielded:</li>
                         </div>
                     
                         <div class="description">
-                            <p>SHow/hide the backdrop</p>
-                    
-                        </div>
-                    
-                            <div class="params">
-                                <h4>Parameters:</h4>
-                    
-                                <ul class="params-list">
-                                    <li class="param">
-                                            <code class="param-name">callback</code>
-                                            <span class="type">Object</span>
-                    
-                    
-                                        <div class="param-description">
-                                            
-                                        </div>
-                    
-                                    </li>
-                                </ul>
-                            </div>
-                    
-                    
-                    </div>
-                    <div id="method_handleUpdate" class="method item private">
-                        <h3 class="name">handleUpdate
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l579"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:579</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method_hide" class="method item private">
-                        <h3 class="name">hide
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l472"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:472</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Hide the modal</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method_hideModal" class="method item private">
-                        <h3 class="name">hideModal
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l494"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:494</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Clean up after modal is hidden and call onHidden</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method_resetAdjustments" class="method item private">
-                        <h3 class="name">resetAdjustments
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l599"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:599</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method_resetScrollbar" class="method item private">
-                        <h3 class="name">resetScrollbar
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l636"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:636</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method_resize" class="method item private">
-                        <h3 class="name">resize
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l564"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:564</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Attach/Detach resize event listeners</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method_setScrollbar" class="method item private">
-                        <h3 class="name">setScrollbar
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l624"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:624</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method_show" class="method item private">
-                        <h3 class="name">show
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l422"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:422</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Show the modal</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="method_takeFocus" class="method item private">
-                        <h3 class="name">takeFocus
-                        <span class="small"> </span>
-                        </h3>
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l405"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:405</code></a>
-                            </p>
-                    
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Give the modal (or its autofocus element) focus</p>
+                            <p>Waits an interval time to start a cycle.</p>
                     
                         </div>
                     
@@ -729,8 +650,40 @@ Furthermore references to the following actions are yielded:</li>
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property__isOpen" class="property item private">
-                        <h3 class="name">_isOpen
+                    <div id="property_autoPlay" class="property item public">
+                        <h3 class="name">autoPlay
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l257"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:257</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Starts automatic sliding on page load.
+                    This parameter has no effect if interval is less than or equal to zero.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_canTurnToLeft" class="property item private">
+                        <h3 class="name">canTurnToLeft
                             <span class="small">unknown</span>
                         </h3>
                     
@@ -745,22 +698,23 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l78"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:78</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l65"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:65</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
+                            <p>If a slide can turn to left, including corners.</p>
+                    
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property__renderInPlace" class="property item private">
-                        <h3 class="name">_renderInPlace
-                            <span class="small">boolean</span>
+                    <div id="property_canTurnToRight" class="property item private">
+                        <h3 class="name">canTurnToRight
+                            <span class="small">unknown</span>
                         </h3>
                     
                     
@@ -774,84 +728,23 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l268"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:268</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l75"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:75</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
+                            <p>If a slide can turn to right, including corners.</p>
+                    
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_backdrop" class="property item public">
-                        <h3 class="name">backdrop
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l137"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:137</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Use a semi-transparent modal background to hide the rest of the page.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_backdropClose" class="property item public">
-                        <h3 class="name">backdropClose
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l248"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:248</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>If true clicking on the backdrop will close the modal.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_backdropElement" class="property item private">
-                        <h3 class="name">backdropElement
-                            <span class="small">object</span>
+                    <div id="property_childSlides" class="property item private">
+                        <h3 class="name">childSlides
+                            <span class="small">array</span>
                         </h3>
                     
                     
@@ -865,22 +758,112 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l212"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:212</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l85"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:85</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The DOM element of the backdrop element.</p>
+                            <p>All <code>CarouselSlide</code> child components.</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_backdropId" class="property item private">
-                        <h3 class="name">backdropId
+                    <div id="property_childSlidesObserver" class="property item private">
+                        <h3 class="name">childSlidesObserver
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l97"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:97</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>This observer is the entry point for real time insertion and removing of slides.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_currentIndex" class="property item private">
+                        <h3 class="name">currentIndex
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l124"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:124</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Indicates the current index of the current slide.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_currentSlide" class="property item private">
+                        <h3 class="name">currentSlide
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l132"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:132</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The current slide object that is going to be used by the nested slides components.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_directionalClassName" class="property item private">
+                        <h3 class="name">directionalClassName
                             <span class="small">string</span>
                         </h3>
                     
@@ -895,59 +878,28 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l200"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:200</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l143"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:143</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The id of the backdrop element.</p>
+                            <p>Bootstrap style to indicate that a given slide should be moving to left/right.</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_backdropTransitionDuration" class="property item public">
-                        <h3 class="name">backdropTransitionDuration
+                    <div id="property_followingIndex" class="property item private">
+                        <h3 class="name">followingIndex
                             <span class="small">number</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l287"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:287</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The duration of the backdrop fade transition</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> 150</p>
-                    
-                    
-                    </div>
-                    <div id="property_destinationElement" class="property item private">
-                        <h3 class="name">destinationElement
-                            <span class="small">object</span>
-                        </h3>
-                    
-                    
-                    
-                    
                             <span class="label label-private">private</span>
                     
                     
@@ -956,142 +908,22 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l224"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:224</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l152"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:152</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The destination DOM element for in-element.</p>
+                            <p>Indicates the next slide index to move into.</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_fade" class="property item public">
-                        <h3 class="name">fade
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l84"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:84</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Set to false to disable fade animations.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="property_fastboot" class="property item private inherited">
-                        <h3 class="name">fastboot
-                            <span class="small">{Ember.Service}</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.TransitionSupport.html#property_fastboot">Mixins.TransitionSupport</a>:
-                            <a href="../files/addon_mixins_transition-support.js.html#l23"><code>addon&#x2F;mixins&#x2F;transition-support.js:23</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            Access to the fastboot service if available
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_inDom" class="property item private">
-                        <h3 class="name">inDom
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l111"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:111</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Render modal markup?</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="property_isFastBoot" class="property item private">
-                        <h3 class="name">isFastBoot
-                            <span class="small">{Boolean}</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l297"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:297</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_isOpen" class="property item private">
-                        <h3 class="name">isOpen
+                    <div id="property_followingIndex" class="property item private">
+                        <h3 class="name">followingIndex
                             <span class="small">unknown</span>
                         </h3>
                     
@@ -1106,7 +938,37 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l72"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:72</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l161"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:161</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The following slide object that is going to be used by the nested slides components.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_hasInterval" class="property item private">
+                        <h3 class="name">hasInterval
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l171"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:171</code></a>
                             </p>
                     
                     
@@ -1114,6 +976,159 @@ Furthermore references to the following actions are yielded:</li>
                     
                         <div class="description">
                             
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_index" class="property item public">
+                        <h3 class="name">index
+                            <span class="small">number</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l279"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:279</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Index of starting slide.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 0</p>
+                    
+                    
+                    </div>
+                    <div id="property_indexObserver" class="property item private">
+                        <h3 class="name">indexObserver
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l178"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:178</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>This observer is the entry point for programmatically slide changing.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_indicators" class="property item private">
+                        <h3 class="name">indicators
+                            <span class="small">unknown</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l188"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:188</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_interval" class="property item public">
+                        <h3 class="name">interval
+                            <span class="small">number</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l289"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:289</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Waiting time before automatically show another slide.
+                    Automatic sliding is canceled if interval is less than or equal to zero.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 5000</p>
+                    
+                    
+                    </div>
+                    <div id="property_isMouseHovering" class="property item private">
+                        <h3 class="name">isMouseHovering
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l196"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:196</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>If user is hovering its cursor on component.
+                    This property is only manipulated when 'pauseOnMouseEnter' is true.</p>
+                    
                         </div>
                     
                     
@@ -1135,14 +1150,14 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l155"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:155</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l300"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:300</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Closes the modal when escape key is pressed.</p>
+                            <p>Should bind keyboard events into sliding.</p>
                     
                         </div>
                     
@@ -1150,15 +1165,15 @@ Furthermore references to the following actions are yielded:</li>
                     
                     
                     </div>
-                    <div id="property_modalElement" class="property item private">
-                        <h3 class="name">modalElement
-                            <span class="small">object</span>
+                    <div id="property_ltr" class="property item public">
+                        <h3 class="name">ltr
+                            <span class="small">boolean</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-private">private</span>
+                            <span class="label label-public">public</span>
                     
                     
                     
@@ -1166,22 +1181,24 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l188"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:188</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l310"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:310</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The DOM element of the <code>.modal</code> element.</p>
+                            <p>If automatic sliding should be left-to-right or right-to-left.
+                    This parameter has no effect if interval is less than or equal to zero.</p>
                     
                         </div>
                     
+                            <p><strong>Default:</strong> true</p>
                     
                     
                     </div>
-                    <div id="property_modalId" class="property item private">
-                        <h3 class="name">modalId
+                    <div id="property_nextControlClassName" class="property item private">
+                        <h3 class="name">nextControlClassName
                             <span class="small">string</span>
                         </h3>
                     
@@ -1196,23 +1213,85 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l176"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:176</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l206"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:206</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The id of the <code>.modal</code> element.</p>
+                            <p>The class name to append to the next control link element.</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_notFade" class="property item private">
-                        <h3 class="name">notFade
-                            <span class="small">boolean</span>
+                    <div id="property_nextControlIcon" class="property item public">
+                        <h3 class="name">nextControlIcon
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l321"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:321</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The next control icon to be displayed.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_nextControlLabel" class="property item public">
+                        <h3 class="name">nextControlLabel
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l331"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:331</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Label for screen readers, defaults to 'Next'.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;Next&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_orderClassName" class="property item private">
+                        <h3 class="name">orderClassName
+                            <span class="small">string</span>
                         </h3>
                     
                     
@@ -1226,184 +1305,22 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l94"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:94</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l215"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:215</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_onHidden" class="property item public">
-                        <h3 class="name">onHidden
-                            <span class="small">function</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l350"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:350</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent after the modal has been completely hidden (including the CSS transition).</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="property_onHide" class="property item public">
-                        <h3 class="name">onHide
-                            <span class="small">function</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l334"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:334</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent when the modal is closing.
-                    This will be triggered by pressing the modal header's close button (x button) or the modal footer's close button.
-                    Note that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some
-                    time to finish. Use the <code>onHidden</code> if you need the modal to be hidden when the action triggers.</p>
-                    <p>You can return false to prevent closing the modal automatically, and do that in your action by
-                    setting <code>open</code> to false.</p>
+                            <p>Bootstrap style to indicate the next/previous slide.</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_onShow" class="property item public">
-                        <h3 class="name">onShow
-                            <span class="small">function</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l361"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:361</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent when the modal is opening.
-                    This will be triggered immediately after the modal is shown (so it's safe to access the DOM for
-                    size calculations and the like). This means that if fade=true, it will be shown in between the
-                    backdrop animation and the fade animation.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="property_onShown" class="property item public">
-                        <h3 class="name">onShown
-                            <span class="small">function</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l375"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:375</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent after the modal has been completely shown (including the CSS transition).</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_onSubmit" class="property item public">
-                        <h3 class="name">onSubmit
-                            <span class="small">function</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l321"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:321</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The action to be sent when the modal footer's submit button (if present) is pressed.
-                    Note that if your modal body contains a form (e.g. <a href="Components.Form.html">Components.Form</a>{{/crossLink}}) this action will
-                    not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
-                    example.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_open" class="property item public">
-                        <h3 class="name">open
+                    <div id="property_pauseOnMouseEnter" class="property item public">
+                        <h3 class="name">pauseOnMouseEnter
                             <span class="small">boolean</span>
                         </h3>
                     
@@ -1418,16 +1335,15 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l59"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:59</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l341"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:341</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Visibility of the modal. Toggle to show/hide with CSS transitions.</p>
-                    <p>When the modal is closed by user interaction this property will not update by using two-way bindings in order
-                    to follow DDAU best practices. If you want to react to such changes, subscribe to the <code>onHide</code> action</p>
+                            <p>Pauses automatic sliding if mouse cursor is hovering the component.
+                    This parameter has no effect if interval is less than or equal to zero.</p>
                     
                         </div>
                     
@@ -1435,9 +1351,9 @@ Furthermore references to the following actions are yielded:</li>
                     
                     
                     </div>
-                    <div id="property_paddingLeft" class="property item private">
-                        <h3 class="name">paddingLeft
-                            <span class="small">number|null</span>
+                    <div id="property_presentationState" class="property item private">
+                        <h3 class="name">presentationState
+                            <span class="small">string</span>
                         </h3>
                     
                     
@@ -1451,53 +1367,85 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l121"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:121</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l224"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:224</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
+                            <p>The current state of the current presentation, can be either &quot;didTransition&quot;
+                    or &quot;willTransit&quot;.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_prevControlClassName" class="property item private">
+                        <h3 class="name">prevControlClassName
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l234"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:234</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The class name to append to the previous control link element.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_prevControlIcon" class="property item public">
+                        <h3 class="name">prevControlIcon
+                            <span class="small">string</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l352"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:352</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The previous control icon to be displayed.</p>
+                    
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
-                    <div id="property_paddingRight" class="property item private">
-                        <h3 class="name">paddingRight
-                            <span class="small">number|null</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l129"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:129</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="property_position" class="property item public">
-                        <h3 class="name">position
-                            <span class="small">{string}</span>
+                    <div id="property_prevControlLabel" class="property item public">
+                        <h3 class="name">prevControlLabel
+                            <span class="small">string</span>
                         </h3>
                     
                     
@@ -1511,84 +1459,23 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l165"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:165</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l362"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:362</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>[BS4 only!] Vertical position, either 'top' (default) or 'center'
-                    'center' will apply the <code>modal-dialog-centered</code> class</p>
+                            <p>Label for screen readers, defaults to 'Previous'.</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> &#x27;top&#x27;</p>
+                            <p><strong>Default:</strong> &#x27;Previous&#x27;</p>
                     
                     
                     </div>
-                    <div id="property_renderInPlace" class="property item public">
-                        <h3 class="name">renderInPlace
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l258"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:258</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>If true component will render in place, rather than be wormholed.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="property_scrollbarWidth" class="property item private">
-                        <h3 class="name">scrollbarWidth
-                            <span class="small">number</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l644"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:644</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_showBackdrop" class="property item private">
-                        <h3 class="name">showBackdrop
+                    <div id="property_shouldNotDoPresentation" class="property item private">
+                        <h3 class="name">shouldNotDoPresentation
                             <span class="small">boolean</span>
                         </h3>
                     
@@ -1603,7 +1490,7 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l147"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:147</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l243"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:243</code></a>
                             </p>
                     
                     
@@ -1613,12 +1500,11 @@ Furthermore references to the following actions are yielded:</li>
                             
                         </div>
                     
-                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
-                    <div id="property_showModal" class="property item private">
-                        <h3 class="name">showModal
+                    <div id="property_shouldRunAutomatically" class="property item private">
+                        <h3 class="name">shouldRunAutomatically
                             <span class="small">boolean</span>
                         </h3>
                     
@@ -1633,24 +1519,22 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l101"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:101</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l250"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:250</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Used to apply Bootstrap's visibility classes.</p>
-                    
+                            
                         </div>
                     
-                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
-                    <div id="property_size" class="property item public">
-                        <h3 class="name">size
-                            <span class="small">String</span>
+                    <div id="property_showControls" class="property item public">
+                        <h3 class="name">showControls
+                            <span class="small">boolean</span>
                         </h3>
                     
                     
@@ -1664,18 +1548,49 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l237"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:237</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l372"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:372</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Property for size styling, set to null (default), 'lg' or 'sm'</p>
-                    <p>Also see the <a href="http://getbootstrap.com/javascript/#modals-sizes">Bootstrap docs</a></p>
+                            <p>Show or hide controls.</p>
                     
                         </div>
                     
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_showIndicators" class="property item public">
+                        <h3 class="name">showIndicators
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-public">public</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l382"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:382</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Show or hide indicators.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
                     
                     
                     </div>
@@ -1695,76 +1610,51 @@ Furthermore references to the following actions are yielded:</li>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-modal.js.html#l277"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal.js:277</code></a>
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l392"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:392</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The duration of the fade transition</p>
+                            <p>The duration of the slide transition.
+                    You should also change this parameter in Bootstrap CSS file.</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> 300</p>
+                            <p><strong>Default:</strong> 600</p>
                     
                     
                     </div>
-                    <div id="property_transitionsEnabled" class="property item private inherited">
-                        <h3 class="name">transitionsEnabled
+                    <div id="property_wrap" class="property item public">
+                        <h3 class="name">wrap
                             <span class="small">boolean</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-private">private</span>
+                            <span class="label label-public">public</span>
                     
                     
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.TransitionSupport.html#property_transitionsEnabled">Mixins.TransitionSupport</a>:
-                            <a href="../files/addon_mixins_transition-support.js.html#l16"><code>addon&#x2F;mixins&#x2F;transition-support.js:16</code></a>
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel.js.html#l268"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel.js:268</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_usesTransition" class="property item private inherited">
-                        <h3 class="name">usesTransition
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.TransitionSupport.html#property_usesTransition">Mixins.TransitionSupport</a>:
-                            <a href="../files/addon_mixins_transition-support.js.html#l35"><code>addon&#x2F;mixins&#x2F;transition-support.js:35</code></a>
-                            </p>
-                    
+                            <p>If false will hard stop on corners, i.e., first slide won't make a transition to the
+                    last slide and vice versa.</p>
                     
                         </div>
                     
-                        <div class="description">
-                            Use CSS transitions?
-                        </div>
-                    
+                            <p><strong>Default:</strong> true</p>
                     
                     
                     </div>

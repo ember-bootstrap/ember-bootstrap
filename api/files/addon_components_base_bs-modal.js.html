@@ -41,7 +41,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.0.0.3fd2051c</span></h1>
+    <h1>API Docs <span class="small">1.1.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -63,6 +63,10 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-modal&#x27;;
 import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
 import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
+import {
+  findElementById,
+  getDOM
+} from &#x27;../../utils/dom&#x27;;
 
 /**
 
@@ -214,6 +218,17 @@ export default Component.extend(TransitionSupport, {
   keyboard: true,
 
   /**
+   * [BS4 only!] Vertical position, either &#x27;top&#x27; (default) or &#x27;center&#x27;
+   * &#x27;center&#x27; will apply the &#x60;modal-dialog-centered&#x60; class
+   *
+   * @property position
+   * @type {string}
+   * @default &#x27;top&#x27;
+   * @public
+   */
+  position: &#x27;top&#x27;,
+
+  /**
    * The id of the &#x60;.modal&#x60; element.
    *
    * @property modalId
@@ -250,7 +265,7 @@ export default Component.extend(TransitionSupport, {
   }),
 
   /**
-   * The DOM elemnt of the backdrop element.
+   * The DOM element of the backdrop element.
    *
    * @property backdropElement
    * @type object
@@ -259,6 +274,19 @@ export default Component.extend(TransitionSupport, {
    */
   backdropElement: computed(&#x27;backdropId&#x27;, function() {
     return document.getElementById(this.get(&#x27;backdropId&#x27;));
+  }).volatile(),
+
+  /**
+   * The destination DOM element for in-element.
+   *
+   * @property destinationElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  destinationElement: computed(function() {
+    let dom = getDOM(this);
+    return findElementById(dom, &#x27;ember-bootstrap-wormhole&#x27;);
   }).volatile(),
 
   /**
@@ -297,8 +325,8 @@ export default Component.extend(TransitionSupport, {
    * @type boolean
    * @private
    */
-  _renderInPlace: computed(&#x27;renderInPlace&#x27;, &#x27;isFastBoot&#x27;, function() {
-    return this.get(&#x27;renderInPlace&#x27;) || !this.get(&#x27;isFastBoot&#x27;) &amp;&amp; !document.getElementById(&#x27;ember-bootstrap-wormhole&#x27;);
+  _renderInPlace: computed(&#x27;renderInPlace&#x27;, &#x27;destinationElement&#x27;, function() {
+    return this.get(&#x27;renderInPlace&#x27;) || !this.get(&#x27;destinationElement&#x27;);
   }),
 
   /**
@@ -735,6 +763,8 @@ export default Component.extend(TransitionSupport, {
                     <li class="nav-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
                     <li class="nav-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
                     <li class="nav-private"><a href="../classes/Components.ButtonGroupButton.html">Components.ButtonGroupButton</a></li>
+                    <li class="nav-public"><a href="../classes/Components.Carousel.html">Components.Carousel</a></li>
+                    <li class="nav-public"><a href="../classes/Components.CarouselSlide.html">Components.CarouselSlide</a></li>
                     <li class="nav-public"><a href="../classes/Components.Collapse.html">Components.Collapse</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelp.html">Components.ContextualHelp</a></li>
                     <li class="nav-private"><a href="../classes/Components.ContextualHelpElement.html">Components.ContextualHelpElement</a></li>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.TabPane - ember-bootstrap</title>
+    <title>Components.CarouselSlide - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -48,25 +48,19 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.TabPane <small>Class</small></h1>
+    <h1>Components.CarouselSlide <small>Class</small></h1>
 </div>
 
 <div class="well well-small">
         <span class="label label-public">public</span>
 
-        <div class="uses">
-            Uses
-            <ul class="inline commas">
-                    <li><a href="Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
-            </ul>
-        </div>
 
         <div class="extends">
             Extends Ember.Component
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_components_base_bs-tab_pane.js.html#l9"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab&#x2F;pane.js:9</code></a>
+            Defined in: <a href="../files/addon_components_base_bs-carousel_slide.js.html#l6"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:6</code></a>
         </div>
 
 
@@ -74,8 +68,8 @@
 
 
 <div class="well well-small">
-    <p>The tab pane of a tab component.
-See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
+    <p>A visible user-defined slide.</p>
+<p>See <a href="Components.Carousel.html">Components.Carousel</a> for examples.</p>
 
 </div>
 
@@ -120,20 +114,24 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     <h3>Methods</h3>
 
                     <ul class="index-list methods extends">
-                            <li class="index-item method private inherited">
-                                <a href="#" data-tabid="#methods" data-anchor="#method__registerWithParent" data-tablink="_registerWithParent">_registerWithParent</a>
+                            <li class="index-item method private">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_currentSlideDidTransition" data-tablink="currentSlideDidTransition">currentSlideDidTransition</a>
 
                             </li>
-                            <li class="index-item method private inherited">
-                                <a href="#" data-tabid="#methods" data-anchor="#method__unregisterFromParent" data-tablink="_unregisterFromParent">_unregisterFromParent</a>
+                            <li class="index-item method private">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_currentSlideWillTransit" data-tablink="currentSlideWillTransit">currentSlideWillTransit</a>
 
                             </li>
-                            <li class="index-item method protected">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_hide" data-tablink="hide">hide</a>
+                            <li class="index-item method private">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_followingSlideDidTransition" data-tablink="followingSlideDidTransition">followingSlideDidTransition</a>
 
                             </li>
-                            <li class="index-item method protected">
-                                <a href="#" data-tabid="#methods" data-anchor="#method_show" data-tablink="show">show</a>
+                            <li class="index-item method private">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_followingSlideWillTransit" data-tablink="followingSlideWillTransit">followingSlideWillTransit</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_presentationStateObserver" data-tablink="presentationStateObserver">presentationStateObserver</a>
 
                             </li>
                     </ul>
@@ -143,44 +141,32 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
-                            <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property__didRegister" data-tablink="_didRegister">_didRegister</a>
-
-                            </li>
-                            <li class="index-item property private inherited">
-                                <a href="#" data-tabid="#properties" data-anchor="#property__parent" data-tablink="_parent">_parent</a>
-
-                            </li>
                             <li class="index-item property private">
                                 <a href="#" data-tabid="#properties" data-anchor="#property_active" data-tablink="active">active</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_activeId" data-tablink="activeId">activeId</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isCurrentSlide" data-tablink="isCurrentSlide">isCurrentSlide</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_fade" data-tablink="fade">fade</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_isFollowingSlide" data-tablink="isFollowingSlide">isFollowingSlide</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_fadeDuration" data-tablink="fadeDuration">fadeDuration</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_groupTitle" data-tablink="groupTitle">groupTitle</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_left" data-tablink="left">left</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_isActive" data-tablink="isActive">isActive</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_next" data-tablink="next">next</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_showContent" data-tablink="showContent">showContent</a>
+                                <a href="#" data-tabid="#properties" data-anchor="#property_prev" data-tablink="prev">prev</a>
 
                             </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_title" data-tablink="title">title</a>
+                            <li class="index-item property private">
+                                <a href="#" data-tabid="#properties" data-anchor="#property_right" data-tablink="right">right</a>
 
                             </li>
                     </ul>
@@ -192,8 +178,8 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
             <div id="methods" class="tab-pane">
                 <h2 class="off-left">Methods</h2>
 
-                    <div id="method__registerWithParent" class="method item private inherited">
-                        <h3 class="name">_registerWithParent
+                    <div id="method_currentSlideDidTransition" class="method item private">
+                        <h3 class="name">currentSlideDidTransition
                         <span class="small"> </span>
                         </h3>
                     
@@ -206,9 +192,9 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.ComponentChild.html#method__registerWithParent">Mixins.ComponentChild</a>:
-                            <a href="../files/addon_mixins_component-child.js.html#l32"><code>addon&#x2F;mixins&#x2F;component-child.js:32</code></a>
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel_slide.js.html#l115"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:115</code></a>
                             </p>
                     
                     
@@ -216,15 +202,14 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         </div>
                     
                         <div class="description">
-                            Register ourself as a child at the parent component
-                    We use the <code>willRender</code> event here to also support the fastboot environment, where there is no <code>didInsertElement</code>
+                            
                         </div>
                     
                     
                     
                     </div>
-                    <div id="method__unregisterFromParent" class="method item private inherited">
-                        <h3 class="name">_unregisterFromParent
+                    <div id="method_currentSlideWillTransit" class="method item private">
+                        <h3 class="name">currentSlideWillTransit
                         <span class="small"> </span>
                         </h3>
                     
@@ -237,9 +222,9 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                     
                         <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.ComponentChild.html#method__unregisterFromParent">Mixins.ComponentChild</a>:
-                            <a href="../files/addon_mixins_component-child.js.html#l49"><code>addon&#x2F;mixins&#x2F;component-child.js:49</code></a>
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel_slide.js.html#l124"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:124</code></a>
                             </p>
                     
                     
@@ -247,20 +232,20 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         </div>
                     
                         <div class="description">
-                            Unregister from the parent component
+                            
                         </div>
                     
                     
                     
                     </div>
-                    <div id="method_hide" class="method item protected">
-                        <h3 class="name">hide
+                    <div id="method_followingSlideDidTransition" class="method item private">
+                        <h3 class="name">followingSlideDidTransition
                         <span class="small"> </span>
                         </h3>
                     
                     
                     
-                            <span class="label label-protected">protected</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
@@ -269,7 +254,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-tab_pane.js.html#l127"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab&#x2F;pane.js:127</code></a>
+                            <a href="../files/addon_components_base_bs-carousel_slide.js.html#l135"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:135</code></a>
                             </p>
                     
                     
@@ -277,21 +262,20 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Hide the pane</p>
-                    
+                            
                         </div>
                     
                     
                     
                     </div>
-                    <div id="method_show" class="method item protected">
-                        <h3 class="name">show
+                    <div id="method_followingSlideWillTransit" class="method item private">
+                        <h3 class="name">followingSlideWillTransit
                         <span class="small"> </span>
                         </h3>
                     
                     
                     
-                            <span class="label label-protected">protected</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
@@ -300,7 +284,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-tab_pane.js.html#l106"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab&#x2F;pane.js:106</code></a>
+                            <a href="../files/addon_components_base_bs-carousel_slide.js.html#l145"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:145</code></a>
                             </p>
                     
                     
@@ -308,7 +292,37 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Show the pane</p>
+                            
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_presentationStateObserver" class="method item private">
+                        <h3 class="name">presentationStateObserver
+                        <span class="small"> </span>
+                        </h3>
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel_slide.js.html#l85"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:85</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Coordinates the execution of a presentation.</p>
                     
                         </div>
                     
@@ -320,64 +334,6 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
             <div id="properties" class="tab-pane">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property__didRegister" class="property item private inherited">
-                        <h3 class="name">_didRegister
-                            <span class="small">boolean</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.ComponentChild.html#property__didRegister">Mixins.ComponentChild</a>:
-                            <a href="../files/addon_mixins_component-child.js.html#l24"><code>addon&#x2F;mixins&#x2F;component-child.js:24</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            flag to check if component has already been registered
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property__parent" class="property item private inherited">
-                        <h3 class="name">_parent
-                            <span class="small">unknown</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/Mixins.ComponentChild.html#property__parent">Mixins.ComponentChild</a>:
-                            <a href="../files/addon_mixins_component-child.js.html#l14"><code>addon&#x2F;mixins&#x2F;component-child.js:14</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            The parent component
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_active" class="property item private">
                         <h3 class="name">active
                             <span class="small">boolean</span>
@@ -394,24 +350,23 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-tab_pane.js.html#l43"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab&#x2F;pane.js:43</code></a>
+                            <a href="../files/addon_components_base_bs-carousel_slide.js.html#l20"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:20</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Used to apply Bootstrap's &quot;active&quot; class</p>
+                            <p>Defines slide visibility.</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
-                    <div id="property_activeId" class="property item private">
-                        <h3 class="name">activeId
-                            <span class="small">unknown</span>
+                    <div id="property_isCurrentSlide" class="property item private">
+                        <h3 class="name">isCurrentSlide
+                            <span class="small">boolean</span>
                         </h3>
                     
                     
@@ -425,7 +380,7 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-tab_pane.js.html#l25"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab&#x2F;pane.js:25</code></a>
+                            <a href="../files/addon_components_base_bs-carousel_slide.js.html#l31"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:31</code></a>
                             </p>
                     
                     
@@ -438,8 +393,8 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                     
                     
                     </div>
-                    <div id="property_fade" class="property item private">
-                        <h3 class="name">fade
+                    <div id="property_isFollowingSlide" class="property item private">
+                        <h3 class="name">isFollowingSlide
                             <span class="small">boolean</span>
                         </h3>
                     
@@ -454,86 +409,21 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-tab_pane.js.html#l87"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab&#x2F;pane.js:87</code></a>
+                            <a href="../files/addon_components_base_bs-carousel_slide.js.html#l40"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:40</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Use fade animation when switching tabs.</p>
-                    
+                            
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_fadeDuration" class="property item private">
-                        <h3 class="name">fadeDuration
-                            <span class="small">integer</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-private">private</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-tab_pane.js.html#l96"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab&#x2F;pane.js:96</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The duration of the fade out animation</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> 150</p>
-                    
-                    
-                    </div>
-                    <div id="property_groupTitle" class="property item public">
-                        <h3 class="name">groupTitle
-                            <span class="small">string</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-tab_pane.js.html#l75"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab&#x2F;pane.js:75</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>An optional group title used by the <code>bs-tab</code> component to group all panes with the same group title
-                    under a common drop down in the tab navigation.
-                    See the <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="property_isActive" class="property item private">
-                        <h3 class="name">isActive
+                    <div id="property_left" class="property item private">
+                        <h3 class="name">left
                             <span class="small">boolean</span>
                         </h3>
                     
@@ -548,22 +438,22 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-tab_pane.js.html#l31"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab&#x2F;pane.js:31</code></a>
+                            <a href="../files/addon_components_base_bs-carousel_slide.js.html#l49"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:49</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>True if this pane is active (visible)</p>
+                            <p>Slide is moving to the left.</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_showContent" class="property item private">
-                        <h3 class="name">showContent
+                    <div id="property_next" class="property item private">
+                        <h3 class="name">next
                             <span class="small">boolean</span>
                         </h3>
                     
@@ -578,30 +468,29 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-tab_pane.js.html#l53"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab&#x2F;pane.js:53</code></a>
+                            <a href="../files/addon_components_base_bs-carousel_slide.js.html#l58"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:58</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Used to trigger the Bootstrap visibility classes.</p>
+                            <p>Next to appear in a left sliding.</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> false</p>
                     
                     
                     </div>
-                    <div id="property_title" class="property item public">
-                        <h3 class="name">title
-                            <span class="small">string</span>
+                    <div id="property_prev" class="property item private">
+                        <h3 class="name">prev
+                            <span class="small">boolean</span>
                         </h3>
                     
                     
                     
                     
-                            <span class="label label-public">public</span>
+                            <span class="label label-private">private</span>
                     
                     
                     
@@ -609,20 +498,47 @@ See <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_components_base_bs-tab_pane.js.html#l63"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab&#x2F;pane.js:63</code></a>
+                            <a href="../files/addon_components_base_bs-carousel_slide.js.html#l67"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:67</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The title for this tab pane. This is used by the <code>bs-tab</code> component to automatically generate
-                    the tab navigation.
-                    See the <a href="Components.Tab.html">Components.Tab</a> for examples.</p>
+                            <p>Next to appear in a right sliding.</p>
                     
                         </div>
                     
-                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_right" class="property item private">
+                        <h3 class="name">right
+                            <span class="small">boolean</span>
+                        </h3>
+                    
+                    
+                    
+                    
+                            <span class="label label-private">private</span>
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_components_base_bs-carousel_slide.js.html#l76"><code>addon&#x2F;components&#x2F;base&#x2F;bs-carousel&#x2F;slide.js:76</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Slide is moving to the right.</p>
+                    
+                        </div>
+                    
                     
                     
                     </div>

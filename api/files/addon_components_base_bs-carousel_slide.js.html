@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Components.FormElementErrors - ember-bootstrap</title>
+    <title>addon/components/base/bs-carousel/slide.js - ember-bootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../assets/css/api.css">
     <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -48,185 +48,176 @@
                 <div id="docs-main">
                     <div class="content">
 <div class="page-header">
-    <h1>Components.FormElementErrors <small>Class</small></h1>
+    <h1>addon/components/base/bs-carousel/slide.js <small>File</small></h1>
 </div>
 
-<div class="well well-small">
-        <span class="label label-private">private</span>
+<div class="file">
+    <pre class="prettyprint linenums">
+import Component from &#x27;@ember/component&#x27;;
+import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-carousel/slide&#x27;;
+import { computed, observer } from &#x27;@ember/object&#x27;;
+import { next } from &#x27;@ember/runloop&#x27;;
+/**
+  A visible user-defined slide.
 
+  See [Components.Carousel](Components.Carousel.html) for examples.
 
-        <div class="extends">
-            Extends Ember.Component
-        </div>
+  @class CarouselSlide
+  @namespace Components
+  @extends Ember.Component
+  @public
+ */
+export default Component.extend(ComponentChild, {
+  classNameBindings: [&#x27;active&#x27;],
+  layout,
 
-        <div class="foundat">
-            Defined in: <a href="../files/addon_components_base_bs-form_element_errors.js.html#l4"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;errors.js:4</code></a>
-        </div>
+  /**
+   * Defines slide visibility.
+   *
+   * @property active
+   * @type boolean
+   * @private
+   */
+  active: computed(&#x27;isCurrentSlide&#x27;, &#x27;presentationState&#x27;, function() {
+    return this.get(&#x27;isCurrentSlide&#x27;) &amp;&amp; this.get(&#x27;presentationState&#x27;) === null;
+  }),
 
+  /**
+   * @private
+   * @property isCurrentSlide
+   * @type boolean
+   */
+  isCurrentSlide: computed(&#x27;currentSlide&#x27;, function() {
+    return this.get(&#x27;currentSlide&#x27;) === this;
+  }).readOnly(),
 
-</div>
+  /**
+   * @private
+   * @property isFollowingSlide
+   * @type boolean
+   */
+  isFollowingSlide: computed(&#x27;followingSlide&#x27;, function() {
+    return this.get(&#x27;followingSlide&#x27;) === this;
+  }).readOnly(),
 
+  /**
+   * Slide is moving to the left.
+   *
+   * @property left
+   * @type boolean
+   * @private
+   */
+  left: false,
 
-<div class="well well-small">
-    
-</div>
+  /**
+   * Next to appear in a left sliding.
+   *
+   * @property next
+   * @type boolean
+   * @private
+   */
+  next: false,
 
+  /**
+   * Next to appear in a right sliding.
+   *
+   * @property prev
+   * @type boolean
+   * @private
+   */
+  prev: false,
 
-    <form id="options-form" class="form-inline" style="margin-bottom: 1em;">
-        Show:
-        <label for="api-show-inherited" class="checkbox">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
+  /**
+   * Slide is moving to the right.
+   *
+   * @property right
+   * @type boolean
+   * @private
+   */
+  right: false,
 
-        <label for="api-show-protected" class="checkbox">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
+  /**
+   * Coordinates the execution of a presentation.
+   *
+   * @method presentationStateObserver
+   * @private
+   */
+  presentationStateObserver: observer(&#x27;presentationState&#x27;, function() {
+    let presentationState = this.get(&#x27;presentationState&#x27;);
+    if (this.get(&#x27;isCurrentSlide&#x27;)) {
+      switch (presentationState) {
+        case &#x27;didTransition&#x27;:
+          this.currentSlideDidTransition();
+          break;
+        case &#x27;willTransit&#x27;:
+          this.currentSlideWillTransit();
+          break;
+      }
+    }
+    if (this.get(&#x27;isFollowingSlide&#x27;)) {
+      switch (presentationState) {
+        case &#x27;didTransition&#x27;:
+          this.followingSlideDidTransition();
+          break;
+        case &#x27;willTransit&#x27;:
+          this.followingSlideWillTransit();
+          break;
+      }
+    }
+  }),
 
-        <label for="api-show-private" class="checkbox">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated" class="checkbox">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
+  /**
+   * @method currentSlideDidTransition
+   * @private
+   */
+  currentSlideDidTransition() {
+    this.set(this.get(&#x27;directionalClassName&#x27;), false);
+    this.set(&#x27;active&#x27;, false);
+  },
 
-    </form>
+  /**
+   * @method currentSlideWillTransit
+   * @private
+   */
+  currentSlideWillTransit() {
+    this.set(&#x27;active&#x27;, true);
+    next(this, function() {
+      this.set(this.get(&#x27;directionalClassName&#x27;), true);
+    });
+  },
 
+  /**
+   * @method followingSlideDidTransition
+   * @private
+   */
+  followingSlideDidTransition() {
+    this.set(&#x27;active&#x27;, true);
+    this.set(this.get(&#x27;directionalClassName&#x27;), false);
+    this.set(this.get(&#x27;orderClassName&#x27;), false);
+  },
 
-<div>
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
+  /**
+   * @method followingSlideWillTransit
+   * @private
+   */
+  followingSlideWillTransit() {
+    this.set(this.get(&#x27;orderClassName&#x27;), true);
+    next(this, function() {
+      this.reflow();
+      this.set(this.get(&#x27;directionalClassName&#x27;), true);
+    });
+  },
 
-            <li><a data-toggle="tab" href="#properties">Properties</a></li>
-    </ul>
+  /**
+   * Makes things more stable, especially when fast changing.
+   */
+  reflow() {
+    this.element.offsetHeight;
+  }
+});
 
-    <div class="tab-content">
-        <div id="index" class="tab-pane active">
-            <h2 class="off-left">Item Index</h2>
-
-
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties extends">
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_messages" data-tablink="messages">messages</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_show" data-tablink="show">show</a>
-
-                            </li>
-                            <li class="index-item property public">
-                                <a href="#" data-tabid="#properties" data-anchor="#property_showMultipleErrors" data-tablink="showMultipleErrors">showMultipleErrors</a>
-
-                            </li>
-                    </ul>
-                </div>
-
-
-        </div>
-
-
-            <div id="properties" class="tab-pane">
-                <h2 class="off-left">Properties</h2>
-
-                    <div id="property_messages" class="property item public">
-                        <h3 class="name">messages
-                            <span class="small">{Ember.Array}</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_element_errors.js.html#l21"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;errors.js:21</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_show" class="property item public">
-                        <h3 class="name">show
-                            <span class="small">{Boolean}</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_element_errors.js.html#l14"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;errors.js:14</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_showMultipleErrors" class="property item public">
-                        <h3 class="name">showMultipleErrors
-                            <span class="small">{Boolean}</span>
-                        </h3>
-                    
-                    
-                    
-                    
-                            <span class="label label-public">public</span>
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_components_base_bs-form_element_errors.js.html#l28"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;errors.js:28</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Whether or not should display several errors at the same time.</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-            </div>
-
-
-    </div>
+    </pre>
 </div>
                     </div>
                 </div>

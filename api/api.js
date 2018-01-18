@@ -9,6 +9,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.Button",
         "Components.ButtonGroup",
         "Components.ButtonGroupButton",
+        "Components.Carousel",
+        "Components.CarouselSlide",
         "Components.Collapse",
         "Components.ContextualHelp",
         "Components.ContextualHelpElement",
