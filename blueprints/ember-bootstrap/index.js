@@ -10,7 +10,7 @@ const BuildConfigEditor = require('ember-cli-build-config-editor');
 const SilentError = require('silent-error'); // From ember-cli
 
 const bs3Version = '^3.3.7';
-const bs4Version = '4.0.0-beta.3';
+const bs4Version = '^4.0.0';
 
 const validPreprocessors = [
   'none',
