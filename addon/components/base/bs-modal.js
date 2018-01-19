@@ -389,7 +389,9 @@ export default Component.extend(TransitionSupport, {
       }
     },
     submit() {
-      let forms = this.get('modalElement').querySelectorAll('.modal-body form');
+      // replace modalId by :scope selector if supported by all target browsers
+      let modalId = this.get('modalId');
+      let forms = this.get('modalElement').querySelectorAll(`#${modalId} .modal-body form`);
       if (forms.length > 0) {
         // trigger submit event on body forms
         let event = document.createEvent('Events');
