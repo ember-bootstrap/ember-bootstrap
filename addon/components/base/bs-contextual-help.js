@@ -17,6 +17,8 @@ const InState = EmberObject.extend({
   showHelp: or('hover', 'focus', 'click')
 });
 
+function noop() {}
+
 /**
 
  @class Components.ContextualHelp
@@ -471,6 +473,19 @@ export default Component.extend(TransitionSupport, {
   _show(skipTransition = false) {
     this.set('showHelp', true);
 
+    // If this is a touch-enabled device we add extra
+    // empty mouseover listeners to the body's immediate children;
+    // only needed because of broken event delegation on iOS
+    // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+
+    // See https://github.com/twbs/bootstrap/pull/22481
+    if ('ontouchstart' in document.documentElement) {
+      let { children } = document.body;
+      for (let i = 0; i < children.length; i++) {
+        children[i].addEventListener('mouseover', noop);
+      }
+    }
+
     function tooltipShowComplete() {
       if (this.get('isDestroyed')) {
         return;
@@ -533,6 +548,15 @@ export default Component.extend(TransitionSupport, {
     }
 
     this.set('showHelp', false);
+
+    // if this is a touch-enabled device we remove the extra
+    // empty mouseover listeners we added for iOS support
+    if ('ontouchstart' in document.documentElement) {
+      let { children } = document.body;
+      for (let i = 0; i < children.length; i++) {
+        children[i].removeEventListener('mouseover', noop);
+      }
+    }
 
     if (this.get('usesTransition')) {
       transitionEnd(this.get('overlayElement'), tooltipHideComplete, this, this.get('transitionDuration'));

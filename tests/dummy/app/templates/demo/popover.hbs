@@ -22,7 +22,7 @@
 
   {{#bs-button}}
     Hover Popover
-    {{#bs-popover triggerEvents="hover focus" title="Hover Popover"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!{{/bs-popover}}
+    {{#bs-popover triggerEvents="hover" title="Hover Popover"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!{{/bs-popover}}
   {{/bs-button}}
   <!-- END-SNIPPET -->
 </div>
@@ -53,4 +53,23 @@
 </div>
 <div class="highlight">
   {{code-snippet name="popover-target.hbs"}}
+</div>
+
+<h2>Dismiss on next click</h2>
+<p>Use the focus trigger to dismiss popovers on the user’s next click of a different element than the toggle element.</p>
+
+{{#bs-alert type="info"}}
+  For proper cross-browser and cross-platform behavior, you must use the <code>&lt;a&gt;</code> tag, not the <code>&lt;button&gt;</code> tag, and you also must include a <code>tabindex</code> attribute.
+{{/bs-alert}}
+
+<div class="bs-example">
+  <!-- BEGIN-SNIPPET popover-focus -->
+  <a role="button" tabindex="0" class="btn btn-primary">
+    Focus me
+    {{#bs-popover triggerEvents="focus" title="Focused"}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similiquevoluptate!{{/bs-popover}}
+  </a>
+  <!-- END-SNIPPET -->
+</div>
+<div class="highlight">
+  {{code-snippet name="popover-focus.hbs"}}
 </div>
