@@ -29,8 +29,6 @@
                 <li><a href="/#/getting-started">Getting Started</a></li>
                 <li><a href="/#/components">Components</a></li>
                 <li><a href="/api">API v1.0</a></li>
-                <li><a href="//simonihmig.github.io/ember-bootstrap/api/">API v0.11</a></li>
-
             </ul>
             <ul class="navbar-nav nav navbar-right">
                 <li><a href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i class="fa fa-github"></i></a></li>
@@ -41,7 +39,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.1.0</span></h1>
+    <h1>API Docs <span class="small">1.2.0</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -71,6 +69,8 @@ const InState = EmberObject.extend({
   click: false,
   showHelp: or(&#x27;hover&#x27;, &#x27;focus&#x27;, &#x27;click&#x27;)
 });
+
+function noop() {}
 
 /**
 
@@ -526,6 +526,19 @@ export default Component.extend(TransitionSupport, {
   _show(skipTransition = false) {
     this.set(&#x27;showHelp&#x27;, true);
 
+    // If this is a touch-enabled device we add extra
+    // empty mouseover listeners to the body&#x27;s immediate children;
+    // only needed because of broken event delegation on iOS
+    // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+
+    // See https://github.com/twbs/bootstrap/pull/22481
+    if (&#x27;ontouchstart&#x27; in document.documentElement) {
+      let { children } = document.body;
+      for (let i = 0; i &lt; children.length; i++) {
+        children[i].addEventListener(&#x27;mouseover&#x27;, noop);
+      }
+    }
+
     function tooltipShowComplete() {
       if (this.get(&#x27;isDestroyed&#x27;)) {
         return;
@@ -588,6 +601,15 @@ export default Component.extend(TransitionSupport, {
     }
 
     this.set(&#x27;showHelp&#x27;, false);
+
+    // if this is a touch-enabled device we remove the extra
+    // empty mouseover listeners we added for iOS support
+    if (&#x27;ontouchstart&#x27; in document.documentElement) {
+      let { children } = document.body;
+      for (let i = 0; i &lt; children.length; i++) {
+        children[i].removeEventListener(&#x27;mouseover&#x27;, noop);
+      }
+    }
 
     if (this.get(&#x27;usesTransition&#x27;)) {
       transitionEnd(this.get(&#x27;overlayElement&#x27;), tooltipHideComplete, this, this.get(&#x27;transitionDuration&#x27;));

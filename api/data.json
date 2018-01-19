@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "1.1.0"
+        "version": "1.2.0"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -1630,7 +1630,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 20,
+            "line": 22,
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.TransitionSupport"
@@ -3785,12 +3785,22 @@
         },
         {
             "file": "addon/components/base/bs-navbar/toggle.js",
-            "line": 24,
+            "line": 25,
             "description": "Bootstrap 4 Only: Defines the alignment of the toggler. Valid values are 'left' and 'right'\nto set the `navbar-toggler-*` class.",
             "itemtype": "property",
             "name": "align",
             "type": "String",
             "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.NavbarToggle",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-navbar/toggle.js",
+            "line": 35,
+            "itemtype": "event",
+            "name": "onClick",
             "access": "public",
             "tagname": "",
             "class": "Components.NavbarToggle",
@@ -5265,7 +5275,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 31,
+            "line": 33,
             "itemtype": "property",
             "name": "title",
             "type": "string",
@@ -5276,7 +5286,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 38,
+            "line": 40,
             "description": "How to position the tooltip/popover - top | bottom | left | right | auto",
             "itemtype": "property",
             "name": "title",
@@ -5289,7 +5299,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 48,
+            "line": 50,
             "description": "When `true` it will dynamically reorient the tooltip/popover. For example, if `placement` is \"left\", the\ntooltip/popover will display to the left when possible, otherwise it will display right.",
             "itemtype": "property",
             "name": "autoPlacement",
@@ -5302,7 +5312,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 59,
+            "line": 61,
             "description": "You can programmatically show the tooltip/popover by setting this to `true`",
             "itemtype": "property",
             "name": "visible",
@@ -5315,7 +5325,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 69,
+            "line": 71,
             "itemtype": "property",
             "name": "inDom",
             "type": "boolean",
@@ -5326,7 +5336,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 76,
+            "line": 78,
             "description": "Set to false to disable fade animations.",
             "itemtype": "property",
             "name": "fade",
@@ -5339,7 +5349,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 86,
+            "line": 88,
             "description": "Used to apply Bootstrap's visibility class",
             "itemtype": "property",
             "name": "showHelp",
@@ -5352,7 +5362,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 96,
+            "line": 98,
             "description": "Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the\n`delayShow` and `delayHide` properties.",
             "itemtype": "property",
             "name": "delay",
@@ -5365,7 +5375,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 107,
+            "line": 109,
             "description": "Delay showing the tooltip/popover. This property overrides the general delay set with the `delay` property.",
             "itemtype": "property",
             "name": "delayShow",
@@ -5378,7 +5388,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 117,
+            "line": 119,
             "description": "Delay hiding the tooltip/popover. This property overrides the general delay set with the `delay` property.",
             "itemtype": "property",
             "name": "delayHide",
@@ -5391,7 +5401,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 130,
+            "line": 132,
             "description": "The duration of the fade transition",
             "itemtype": "property",
             "name": "transitionDuration",
@@ -5404,7 +5414,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 140,
+            "line": 142,
             "description": "Keeps the tooltip/popover within the bounds of this element when `autoPlacement` is true. Can be any valid CSS selector.",
             "itemtype": "property",
             "name": "viewportSelector",
@@ -5421,7 +5431,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 152,
+            "line": 154,
             "description": "Take a padding into account for keeping the tooltip/popover within the bounds of the element given by `viewportSelector`.",
             "itemtype": "property",
             "name": "viewportPadding",
@@ -5438,7 +5448,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 164,
+            "line": 166,
             "description": "The id of the overlay element.",
             "itemtype": "property",
             "name": "overlayId",
@@ -5451,7 +5461,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 176,
+            "line": 178,
             "description": "The DOM element of the overlay element.",
             "itemtype": "property",
             "name": "overlayElement",
@@ -5464,7 +5474,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 188,
+            "line": 190,
             "description": "The DOM element of the arrow element.",
             "itemtype": "property",
             "name": "arrowElement",
@@ -5477,7 +5487,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 198,
+            "line": 200,
             "description": "The DOM element of the viewport element.",
             "itemtype": "property",
             "name": "viewportElement",
@@ -5490,7 +5500,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 210,
+            "line": 212,
             "description": "The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.\nYou can set this to any CSS selector to have any other element trigger the tooltip/popover.\nWith the special value of \"parentView\" you can attach the tooltip/popover to the parent component's element.",
             "itemtype": "property",
             "name": "triggerElement",
@@ -5502,7 +5512,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 221,
+            "line": 223,
             "itemtype": "property",
             "name": "triggerTargetElement",
             "type": "{object}",
@@ -5513,7 +5523,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 245,
+            "line": 247,
             "description": "The event(s) that should trigger the tooltip/popover - click | hover | focus.\nYou can set this to a single event or multiple events, given as an array or a string separated by spaces.",
             "itemtype": "property",
             "name": "triggerEvents",
@@ -5526,7 +5536,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 274,
+            "line": 276,
             "description": "If true component will render in place, rather than be wormholed.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -5539,7 +5549,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 284,
+            "line": 286,
             "itemtype": "property",
             "name": "_renderInPlace",
             "type": "boolean",
@@ -5550,7 +5560,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 293,
+            "line": 295,
             "description": "Current hover state, 'in', 'out' or null",
             "itemtype": "property",
             "name": "hoverState",
@@ -5562,7 +5572,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 302,
+            "line": 304,
             "description": "Current state for events",
             "itemtype": "property",
             "name": "inState",
@@ -5574,7 +5584,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 313,
+            "line": 315,
             "description": "Ember.run timer",
             "itemtype": "property",
             "name": "timer",
@@ -5585,7 +5595,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 321,
+            "line": 323,
             "description": "This action is called immediately when the tooltip/popover is about to be shown.",
             "itemtype": "event",
             "name": "onShow",
@@ -5596,7 +5606,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 330,
+            "line": 332,
             "description": "This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).",
             "itemtype": "event",
             "name": "onShown",
@@ -5607,7 +5617,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 339,
+            "line": 341,
             "description": "This action is called immediately when the tooltip/popover is about to be hidden.",
             "itemtype": "event",
             "name": "onHide",
@@ -5618,7 +5628,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 348,
+            "line": 350,
             "description": "This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).",
             "itemtype": "event",
             "name": "onHidden",
@@ -5629,7 +5639,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 357,
+            "line": 359,
             "description": "Called when a show event has been received",
             "itemtype": "method",
             "name": "enter",
@@ -5646,7 +5656,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 390,
+            "line": 392,
             "description": "Called when a hide event has been received",
             "itemtype": "method",
             "name": "leave",
@@ -5663,7 +5673,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 422,
+            "line": 424,
             "description": "Called for a click event",
             "itemtype": "method",
             "name": "toggle",
@@ -5680,7 +5690,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 446,
+            "line": 448,
             "description": "Show the tooltip/popover",
             "itemtype": "method",
             "name": "show",
@@ -5691,7 +5701,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 495,
+            "line": 510,
             "description": "Position the tooltip/popover's arrow",
             "itemtype": "method",
             "name": "replaceArrow",
@@ -5716,7 +5726,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 510,
+            "line": 525,
             "description": "Hide the tooltip/popover",
             "itemtype": "method",
             "name": "hide",
@@ -5727,7 +5737,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 546,
+            "line": 570,
             "itemtype": "method",
             "name": "addListeners",
             "access": "private",
@@ -5737,7 +5747,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 565,
+            "line": 589,
             "itemtype": "method",
             "name": "removeListeners",
             "access": "private",
@@ -6529,7 +6539,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 405,
+            "line": 407,
             "description": "Give the modal (or its autofocus element) focus",
             "itemtype": "method",
             "name": "takeFocus",
@@ -6540,7 +6550,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 422,
+            "line": 424,
             "description": "Show the modal",
             "itemtype": "method",
             "name": "show",
@@ -6551,7 +6561,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 472,
+            "line": 474,
             "description": "Hide the modal",
             "itemtype": "method",
             "name": "hide",
@@ -6562,7 +6572,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 494,
+            "line": 496,
             "description": "Clean up after modal is hidden and call onHidden",
             "itemtype": "method",
             "name": "hideModal",
@@ -6573,7 +6583,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 514,
+            "line": 516,
             "description": "SHow/hide the backdrop",
             "itemtype": "method",
             "name": "handleBackdrop",
@@ -6590,7 +6600,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 564,
+            "line": 566,
             "description": "Attach/Detach resize event listeners",
             "itemtype": "method",
             "name": "resize",
@@ -6601,7 +6611,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 579,
+            "line": 581,
             "itemtype": "method",
             "name": "handleUpdate",
             "access": "private",
@@ -6611,7 +6621,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 587,
+            "line": 589,
             "itemtype": "method",
             "name": "adjustDialog",
             "access": "private",
@@ -6621,7 +6631,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 599,
+            "line": 601,
             "itemtype": "method",
             "name": "resetAdjustments",
             "access": "private",
@@ -6631,7 +6641,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 610,
+            "line": 612,
             "itemtype": "method",
             "name": "checkScrollbar",
             "access": "private",
@@ -6641,7 +6651,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 624,
+            "line": 626,
             "itemtype": "method",
             "name": "setScrollbar",
             "access": "private",
@@ -6651,7 +6661,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 636,
+            "line": 638,
             "itemtype": "method",
             "name": "resetScrollbar",
             "access": "private",
@@ -6661,7 +6671,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 644,
+            "line": 646,
             "itemtype": "property",
             "name": "scrollbarWidth",
             "type": "number",
