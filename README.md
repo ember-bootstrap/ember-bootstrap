@@ -10,7 +10,7 @@
 [![Browser Status](https://badges.herokuapp.com/sauce/ember-bootstrap)](https://saucelabs.com/u/ember-bootstrap)
 
 
-An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getbootstrap.com/) 3 or 4 (experimental) in Ember applications.
+An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getbootstrap.com/) 3 or 4 in Ember applications.
 
 The addon includes the Bootstrap assets (CSS, Icons) in your project (can be disabled). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
 
@@ -30,10 +30,11 @@ To switch Bootstrap version or preprocessor, see the [setup documentation](http:
 ember-bootstrap works and is fully [tested](https://travis-ci.org/kaliber5/ember-bootstrap) with
 
 * Ember.js 2.3+
-* Bootstrap 3 and 4. *Support for Bootstrap 4 is currently considered experimental and not covered by SemVer, as Bootstrap 4 itself is not yet stable.*
+* Bootstrap 3 and 4.
 * all modern evergreen browsers (Chrome, Firefox, Safari, Edge) and IE 11. 
 * FastBoot 1.0+ 
-* jQuery-less builds using [ember-native-dom-event-dispatcher](https://github.com/rwjblue/ember-native-dom-event-dispatcher)
+* jQuery-less builds (using [ember-native-dom-event-dispatcher](https://github.com/rwjblue/ember-native-dom-event-dispatcher)
+or Ember 3.x)
 
 This project follows [Semantic Versioning](http://semver.org/).
 
@@ -51,4 +52,4 @@ If you want to keep up to date with ember-bootstrap, you may want to [follow me 
 
 ## Copyright and license
 
-Code and documentation copyright 2017 [kaliber5](http://www.kaliber5.de) and contributors. Code released under [the MIT license](LICENSE.md).
+Code and documentation copyright 2018 [kaliber5](http://www.kaliber5.de) and contributors. Code released under [the MIT license](LICENSE.md).
