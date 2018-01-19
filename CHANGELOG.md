@@ -1,3 +1,21 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/kaliber5/ember-bootstrap/compare/1.1.0...1.2.0) (2018-01-19)
+
+
+### Bug Fixes
+
+* **Modal:** submitting form in nested bs-modal-simple throws ([9b64553](https://github.com/kaliber5/ember-bootstrap/commit/9b64553)), closes [#533](https://github.com/kaliber5/ember-bootstrap/issues/533)
+* **Navbar:** toggle button does not inherit from `bs-button` anymore, removing the extraneous `.btn`, `.btn-*` classes ([0cd00ea](https://github.com/kaliber5/ember-bootstrap/commit/0cd00ea)), closes [#531](https://github.com/kaliber5/ember-bootstrap/issues/531)
+* **Tooltip/Popover:** fix `focus` trigger event for iOS ([83c219e](https://github.com/kaliber5/ember-bootstrap/commit/83c219e))
+
+
+### Features
+
+* **Bootstrap 4:** uses now the recently released stable Bootstrap 4.0.0! 🎉 ([f3c6f7a](https://github.com/kaliber5/ember-bootstrap/commit/f3c6f7a))
+  Bootstrap 4 support can now be considered stable and official!
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0...1.1.0) (2018-01-18)
 
