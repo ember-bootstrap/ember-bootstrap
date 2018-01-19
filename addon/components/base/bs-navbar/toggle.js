@@ -1,4 +1,4 @@
-import BsButtonComponent from 'ember-bootstrap/components/bs-button';
+import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
 
 /**
@@ -15,11 +15,12 @@ import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
  * @extends Components.Button
  * @public
  */
-export default BsButtonComponent.extend({
+export default Component.extend({
   layout,
+  tagName: 'button',
 
   classNameBindings: ['collapsed'],
-  collapsed: true
+  collapsed: true,
 
   /**
    * Bootstrap 4 Only: Defines the alignment of the toggler. Valid values are 'left' and 'right'
@@ -30,5 +31,16 @@ export default BsButtonComponent.extend({
    * @default null
    * @public
    */
+
+  /**
+   * @event onClick
+   * @public
+   */
+  onClick() {
+  },
+
+  click() {
+    this.onClick();
+  }
 
 });
