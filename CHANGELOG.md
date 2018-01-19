@@ -13,6 +13,7 @@
 
 * **Bootstrap 4:** uses now the recently released stable Bootstrap 4.0.0! 🎉 ([f3c6f7a](https://github.com/kaliber5/ember-bootstrap/commit/f3c6f7a))
   Bootstrap 4 support can now be considered stable and official!
+  Make sure to update your dependencies if you used a pre-release version of Bootstrap 4 before, using `ember g ember-bootstrap`!
 
 
 
