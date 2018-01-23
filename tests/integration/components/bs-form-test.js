@@ -97,6 +97,17 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.ok(submit.called, 'onSubmit action has been called');
   });
 
+  test('Clicking a normal button that triggers the yielded submit action submits the form', async function(assert) {
+    let submit = this.spy();
+    this.actions.submit = submit;
+    await render(
+      hbs`{{#bs-form onSubmit=(action "submit") as |form|}}{{#bs-button onClick=form.submit}}Submit{{/bs-button}}{{/bs-form}}`
+    );
+
+    await click('button');
+    assert.ok(submit.called, 'onSubmit action has been called');
+  });
+
   test('Submitting the form with valid validation calls onBeforeSubmit and onSubmit action', async function(assert) {
     let submit = this.spy();
     let before = this.spy();
@@ -164,6 +175,35 @@ module('Integration | Component | bs-form', function(hooks) {
       assert.dom(formFeedbackElement()).hasClass(
         validationErrorClass(),
         'validation errors are shown after form submission'
+      );
+      assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
+      done();
+    }, 1);
+
+  });
+
+  test('Submitting the form with invalid validation shows validation errors', async function(assert) {
+    let model = {};
+    this.set('model', model);
+    this.set('errors', A(['There is an error']));
+    this.set('validateStub', function() {
+      return reject();
+    });
+    await render(
+      hbs`{{#bs-form model=model hasValidator=true validate=validateStub as |form|}}{{form.element hasValidator=true errors=errors}}<button {{action form.validate}}>Validate</button>{{/bs-form}}`
+    );
+
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
+      'validation errors aren\'t shown before user interaction'
+    );
+    await click('button');
+
+    let done = assert.async();
+    setTimeout(() => {
+      assert.dom(formFeedbackElement()).hasClass(
+        validationErrorClass(),
+        'validation errors are shown after form validation'
       );
       assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
       done();

@@ -44,6 +44,7 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
     {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
     {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
     {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
+    {{bs-button defaultText="Validate" type="info" onClick=(action form.validate)}}
     {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
   {{/bs-form}}
   ```
@@ -242,6 +243,24 @@ export default Component.extend({
     }
   },
 
+  _validate() {
+    let model = this.get('model');
+
+    let validationPromise = this.validate(model);
+    if (validationPromise && validationPromise instanceof RSVP.Promise) {
+      let validatedPromise = new RSVP.Promise((resolve, reject) => {
+        validationPromise
+          .then(() => { resolve() })
+          .catch(() => {
+            this.set('showAllValidations', true);
+            return reject();
+          });
+      });
+
+      return validatedPromise;
+    }
+  },
+
   keyPress(e) {
     let code = e.keyCode || e.which;
     if (code === 13 && this.get('submitOnEnter')) {
@@ -261,6 +280,38 @@ export default Component.extend({
         isPresent(model) && isPresent(property)
       );
       set(model, property, value);
+    },
+
+    /**
+     * Submit action yielded in the bs-form template and accessible as `form.submit`
+     *
+     * @method actions.submit
+     * @param {Object} [model] Optional, falls back to model passed to bs-form
+     * @return {Promise} (not yet implemented)
+     * @public
+     */
+    submit(model=null) {
+      if(model) {
+        this.set('model', model);
+      }
+      return this.submit();
+    },
+
+    /**
+     * Validate action yielded in the bs-form template and accessible as `form.validate`
+     * This action returns a promise that will either resolve if the model is valid
+     * or reject if it's not.
+     *
+     * @method actions.validate
+     * @param {Object} [model] Optional, falls back to model passed to bs-form
+     * @return {Promise}
+     * @public
+     */
+    validate(model=null) {
+      if(model) {
+        this.set('model', model);
+      }
+      return this._validate();
     }
   }
 });
