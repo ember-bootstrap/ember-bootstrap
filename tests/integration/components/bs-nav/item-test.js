@@ -1,7 +1,6 @@
-import { find, click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import startApp from '../../../helpers/start-app';
 import destroyApp from '../../../helpers/destroy-app';
@@ -24,8 +23,8 @@ module('Integration | Component | bs-nav/item', function(hooks) {
 
     assert.dom('*').hasText('template block text', 'Shows block content');
     assert.dom('li').exists({ count: 1 }, 'it is an list item');
-    assert.ok(!find('li').classList.contains('active'), 'has not active class');
-    assert.ok(!find('li').classList.contains('disabled'), 'has not disabled class');
+    assert.ok(!this.element.querySelector('li').classList.contains('active'), 'has not active class');
+    assert.ok(!this.element.querySelector('li').classList.contains('disabled'), 'has not disabled class');
 
   });
 

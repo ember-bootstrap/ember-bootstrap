@@ -1,12 +1,6 @@
-import {
-  find,
-  click,
-  keyEvent,
-  waitUntil
-} from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled } from '@ember/test-helpers';
+import { render, settled, click, triggerKeyEvent, waitUntil } from '@ember/test-helpers';
 import { run } from '@ember/runloop';
 import {
   test,
@@ -87,14 +81,14 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false}}Hello world!{{/bs-modal-simple}}`);
 
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-    assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
+    assert.equal(this.element.querySelector('.modal').style.display, 'block', 'Modal is visible');
   });
 
   testRequiringTransitions('open modal is immediately shown [fade]', async function(assert) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
 
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-    assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
+    assert.equal(this.element.querySelector('.modal').style.display, 'block', 'Modal is visible');
   });
 
   test('open property shows modal', async function(assert) {
@@ -104,7 +98,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     assert.dom('.modal').doesNotExist('Modal is hidden');
     run(() => this.set('open', true));
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-    assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
+    assert.equal(this.element.querySelector('.modal').style.display, 'block', 'Modal is visible');
     run(() => this.set('open', false));
     assert.dom('.modal').doesNotExist('Modal is hidden');
   });
@@ -119,7 +113,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     // wait for fade animation
     setTimeout(() => {
       assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-      assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
+      assert.equal(this.element.querySelector('.modal').style.display, 'block', 'Modal is visible');
       this.set('open', false);
       setTimeout(() => {
         assert.dom('.modal').doesNotExist('Modal is hidden');
@@ -393,13 +387,13 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await settled();
 
     // wait for fade animation
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
 
     // trigger escape key event
-    await keyEvent('.modal', 'keydown', 27);
+    await triggerKeyEvent('.modal', 'keydown', 27);
 
     // wait for fade animation
-    await waitUntil(() => !find('.modal'));
+    await waitUntil(() => !this.element.querySelector('.modal'));
 
     assert.ok(action.calledOnce, 'Action has been called.');
   });
@@ -416,13 +410,13 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await settled();
 
     // wait for fade animation
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
 
     // trigger escape key event
-    await keyEvent('.modal', 'keydown', 27);
+    await triggerKeyEvent('.modal', 'keydown', 27);
 
     // wait for fade animation
-    await waitUntil(() => !find('.modal'));
+    await waitUntil(() => !this.element.querySelector('.modal'));
 
     assert.ok(action.calledOnce, 'Action has been called.');
   });
@@ -436,10 +430,10 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await settled();
 
     // wait for fade animation
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
 
     // trigger escape key event
-    await keyEvent('.modal', 'keydown', 27);
+    await triggerKeyEvent('.modal', 'keydown', 27);
 
     assert.notOk(hideSpy.called);
   });
@@ -453,12 +447,12 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await settled();
 
     // wait for fade animation
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
 
     await click('.modal');
 
     // wait for fade animation
-    await waitUntil(() => !find('.modal'));
+    await waitUntil(() => !this.element.querySelector('.modal'));
     assert.ok(hideSpy.calledOnce);
   });
 
@@ -471,7 +465,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     let done = assert.async();
 
     // wait for fade animation
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
 
     await click('.modal');
 
@@ -512,7 +506,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     );
 
     // wait for fade animation
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
     assert.dom(document.body).hasClass('modal-open', 'body element has "modal-open" class.');
 
     this.set('renderComponent', false);
@@ -527,7 +521,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
       hbs`{{#if renderComponent}}{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}{{/if}}`
     );
 
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
 
     document.body.style.paddingRight = '0px';
     this.set('renderComponent', false);

@@ -1,9 +1,8 @@
-import { click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import {
   setupRenderingTest
 } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import {
   accordionClassFor,
@@ -118,7 +117,7 @@ module('Integration | Component | bs-accordion', function(hooks) {
       {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
     {{/bs-accordion}}`);
 
-    click(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`);
+    await click(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`);
     assert.ok(action.calledWith(1), 'onClick action has been called.');
   });
 

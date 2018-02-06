@@ -1,16 +1,9 @@
 import EmberObject from '@ember/object';
 import { A } from '@ember/array';
 import { resolve, reject } from 'rsvp';
-import {
-  click,
-  find,
-  fillIn,
-  keyEvent,
-  triggerEvent
-} from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click, fillIn, triggerKeyEvent, triggerEvent } from '@ember/test-helpers';
 import {
   formFeedbackClass,
   test,
@@ -57,7 +50,7 @@ module('Integration | Component | bs-form', function(hooks) {
     for (let layout in classSpec) {
       this.set('formLayout', layout);
       let expectation = classSpec[layout];
-      assert.equal(find('form').classList.contains(expectation[0]), expectation[1], `form has expected markup for ${layout}`);
+      assert.equal(this.element.querySelector('form').classList.contains(expectation[0]), expectation[1], `form has expected markup for ${layout}`);
     }
   });
 
@@ -191,7 +184,7 @@ module('Integration | Component | bs-form', function(hooks) {
     let submit = this.spy();
     this.actions.submit = submit;
     await render(hbs`{{#bs-form onSubmit=(action "submit") submitOnEnter=true as |form|}}{{/bs-form}}`);
-    await keyEvent('form', 'keypress', 13);
+    await triggerKeyEvent('form', 'keypress', 13);
     assert.ok(submit.calledOnce, 'onSubmit action has been called');
   });
 
@@ -199,13 +192,13 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.expect(2);
     await render(hbs`{{bs-form}}`);
     assert.equal(
-      find('form').getAttribute('novalidate'),
+      this.element.querySelector('form').getAttribute('novalidate'),
       null,
       'defaults to false'
     );
     await render(hbs`{{bs-form novalidate=true}}`);
     assert.ok(
-      find('form').getAttribute('novalidate') === ''
+      this.element.querySelector('form').getAttribute('novalidate') === ''
     );
   });
 });

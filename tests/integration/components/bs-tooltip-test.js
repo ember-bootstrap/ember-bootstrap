@@ -1,14 +1,7 @@
 import Component from '@ember/component';
-import {
-  find,
-  click,
-  focus,
-  blur,
-  triggerEvent
-} from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click, focus, blur, triggerEvent } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import {
   test,
@@ -194,7 +187,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     this.set('show', true);
 
     assert.dom('.tooltip').exists({ count: 1 }, 'Tooltip exists.');
-    assert.equal(find('.tooltip').parentNode.getAttribute('id'), 'ember-bootstrap-wormhole');
+    assert.equal(this.element.querySelector('.tooltip').parentNode.getAttribute('id'), 'ember-bootstrap-wormhole');
   });
 
   test('Renders in place (no wormhole) if renderInPlace is set', async function(assert) {
@@ -205,7 +198,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     this.set('show', true);
 
     assert.dom('.tooltip').exists({ count: 1 }, 'Tooltip exists.');
-    assert.notEqual(find('.tooltip').parentNode.getAttribute('id'), 'ember-bootstrap-wormhole');
+    assert.notEqual(this.element.querySelector('.tooltip').parentNode.getAttribute('id'), 'ember-bootstrap-wormhole');
   });
 
   test('should place tooltip on top of element', async function(assert) {
@@ -257,12 +250,12 @@ module('Integration | Component | bs-tooltip', function(hooks) {
 
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
 
-    setTimeout(function() {
-      assert.notOk(isVisible(find('.tooltip')), '100ms: tooltip is not faded in');
+    setTimeout(() => {
+      assert.notOk(isVisible(this.element.querySelector('.tooltip')), '100ms: tooltip is not faded in');
     }, 100);
 
-    setTimeout(function() {
-      assert.ok(isVisible(find('.tooltip')), '200ms: tooltip is faded in');
+    setTimeout(() => {
+      assert.ok(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip is faded in');
       done();
     }, 200);
 
@@ -275,13 +268,13 @@ module('Integration | Component | bs-tooltip', function(hooks) {
 
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
 
-    setTimeout(function() {
-      assert.notOk(isVisible(find('.tooltip')), '100ms: tooltip not faded in');
+    setTimeout(() => {
+      assert.notOk(isVisible(this.element.querySelector('.tooltip')), '100ms: tooltip not faded in');
       triggerEvent('#target', 'mouseleave');
     }, 100);
 
-    setTimeout(function() {
-      assert.notOk(isVisible(find('.tooltip')), '200ms: tooltip not faded in');
+    setTimeout(() => {
+      assert.notOk(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip not faded in');
       done();
     }, 200);
 
@@ -294,20 +287,20 @@ module('Integration | Component | bs-tooltip', function(hooks) {
 
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" delayShow=0 delayHide=150}}</div>`);
 
-    setTimeout(function() {
-      assert.ok(isVisible(find('.tooltip')), '1ms: tooltip faded in');
+    setTimeout(() => {
+      assert.ok(isVisible(this.element.querySelector('.tooltip')), '1ms: tooltip faded in');
       triggerEvent('#target', 'mouseleave');
 
-      setTimeout(function() {
-        assert.ok(isVisible(find('.tooltip')), '100ms: tooltip still faded in');
+      setTimeout(() => {
+        assert.ok(isVisible(this.element.querySelector('.tooltip')), '100ms: tooltip still faded in');
         triggerEvent('#target', 'mouseenter');
       }, 100);
 
-      setTimeout(function() {
-        assert.ok(isVisible(find('.tooltip')), '200ms: tooltip still faded in');
+      setTimeout(() => {
+        assert.ok(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip still faded in');
         done();
       }, 200);
-    }, 0);
+    }, 5);
 
     triggerEvent('#target', 'mouseenter');
   });
@@ -318,13 +311,13 @@ module('Integration | Component | bs-tooltip', function(hooks) {
 
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
 
-    setTimeout(function() {
-      assert.notOk(isVisible(find('.tooltip')), '100ms: tooltip not faded in');
+    setTimeout(() => {
+      assert.notOk(isVisible(this.element.querySelector('.tooltip')), '100ms: tooltip not faded in');
       triggerEvent('#target', 'mouseleave');
     }, 100);
 
-    setTimeout(function() {
-      assert.notOk(isVisible(find('.tooltip')), '200ms: tooltip not faded in');
+    setTimeout(() => {
+      assert.notOk(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip not faded in');
       done();
     }, 200);
 
@@ -336,7 +329,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     let done = assert.async();
 
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" class='wide' delay=150}}</div>`);
-    setTimeout(function() {
+    setTimeout(() => {
       assert.dom('.tooltip.wide').exists({ count: 1 });
       done();
     }, 200);
@@ -353,7 +346,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     setupForPositioning();
 
     await click('#target');
-    let arrowPosition = parseInt(find(`.${tooltipArrowClass()}`).style.left, 10);
+    let arrowPosition = parseInt(this.element.querySelector(`.${tooltipArrowClass()}`).style.left, 10);
     assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
   });
 
@@ -366,13 +359,13 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     setupForPositioning('right');
 
     await click('#target');
-    let arrowPosition = parseInt(find(`.${tooltipArrowClass()}`).style.left, 10);
+    let arrowPosition = parseInt(this.element.querySelector(`.${tooltipArrowClass()}`).style.left, 10);
     assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
 
     // check again to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/361
     await click('#target');
     await click('#target');
-    arrowPosition = parseInt(find(`.${tooltipArrowClass()}`).style.left, 10);
+    arrowPosition = parseInt(this.element.querySelector(`.${tooltipArrowClass()}`).style.left, 10);
     assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 1, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
   });
 

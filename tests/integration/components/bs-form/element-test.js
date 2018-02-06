@@ -2,18 +2,9 @@ import Component from '@ember/component';
 import { run } from '@ember/runloop';
 import EmberObject from '@ember/object';
 import { A, isArray } from '@ember/array';
-import {
-  click,
-  find,
-  findAll,
-  fillIn,
-  triggerEvent,
-  focus,
-  blur
-} from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { clearRender, render } from '@ember/test-helpers';
+import { clearRender, render, click, fillIn, triggerEvent, focus, blur } from '@ember/test-helpers';
 import {
   formFeedbackClass,
   test,
@@ -126,7 +117,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
 
     values.forEach((value) => {
       this.set('model.prop', value);
-      let hasValue = typeof getValueFn === 'function' ? getValueFn.call(find(selector)) : find(selector).value;
+      let hasValue = typeof getValueFn === 'function' ? getValueFn.call(this.element.querySelector(selector)) : this.element.querySelector(selector).value;
       let expectedValue = value || '';
       assert.equal(hasValue, expectedValue, `${controlType} control has correct values`);
     });
@@ -144,7 +135,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await render(hbs`{{bs-form/element controlType=controlType horizontalLabelGridClass="col-md-4" model=model property="name" onChange=(action change)}}`);
 
     if (typeof setValueFn === 'function') {
-      setValueFn.call(find(selector), value);
+      await setValueFn.call(this.element.querySelector(selector), value);
     } else {
       await fillIn(selector, value);
       // this.$(selector).val(value).change();
@@ -161,7 +152,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
 
     formLayouts.forEach((layout) => {
       this.set('formLayout', layout);
-      assert.equal(find(selector).getAttribute('id'), find('label').getAttribute('for'), `component and label ids do match for form layout ${layout}`);
+      assert.equal(this.element.querySelector(selector).getAttribute('id'), this.element.querySelector('label').getAttribute('for'), `component and label ids do match for form layout ${layout}`);
     });
   }
 
@@ -208,16 +199,16 @@ module('Integration | Component | bs-form/element', function(hooks) {
       hbs`{{#bs-form horizontalLabelGridClass="col-sm-4" formLayout=formLayout as |form|}}{{form.element controlType="text" label="myLabel"}}{{/bs-form}}`
     );
     assert.dom('form > div').hasClass('form-group', 'component has form-group class');
-    assert.equal(find('form > div > :nth-child(1)').tagName, 'LABEL', 'first child is a label');
-    assert.equal(find('form > div > :nth-child(2)').tagName, 'INPUT', 'second child is a input');
+    assert.equal(this.element.querySelector('form > div > :nth-child(1)').tagName, 'LABEL', 'first child is a label');
+    assert.equal(this.element.querySelector('form > div > :nth-child(2)').tagName, 'INPUT', 'second child is a input');
 
     this.set('formLayout', 'horizontal');
     assert.dom('form > div').hasClass('form-group', 'component has form-group class');
-    assert.equal(find('form > div > :nth-child(1)').tagName, 'LABEL', 'first child is a label');
+    assert.equal(this.element.querySelector('form > div > :nth-child(1)').tagName, 'LABEL', 'first child is a label');
     assert.dom('form > div > :nth-child(1)').hasClass('col-sm-4', 'label has grid class');
-    assert.equal(find('form > div > :nth-child(2)').tagName, 'DIV', 'second child is a div');
+    assert.equal(this.element.querySelector('form > div > :nth-child(2)').tagName, 'DIV', 'second child is a div');
     assert.dom('form > div > :nth-child(2)').hasClass('col-sm-8', 'div has grid class');
-    assert.equal(find('form > div > :nth-child(2) > :first-child').tagName, 'INPUT', 'divs first child is an input');
+    assert.equal(this.element.querySelector('form > div > :nth-child(2) > :first-child').tagName, 'INPUT', 'divs first child is an input');
   });
 
   test('Custom controls are supported', async function(assert) {
@@ -240,7 +231,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     assert.dom('#value').exists({ count: 1 }, 'block template is rendered');
     assert.dom('#value').hasText('male', 'value is yielded to block template');
     assert.dom('#id').hasText(
-      `${find('.form-group').getAttribute('id')}-field`,
+      `${this.element.querySelector('.form-group').getAttribute('id')}-field`,
       'id is yielded to block template'
     );
     assert.dom('#validation').hasText('success');
@@ -282,13 +273,13 @@ module('Integration | Component | bs-form/element', function(hooks) {
       }}`);
 
       for (let attribute in supportedInputAttributes) {
-        assert.equal(find('input').getAttribute(attribute), undefined, `input attribute ${attribute} is undefined [${formLayout}]`);
+        assert.equal(this.element.querySelector('input').getAttribute(attribute), undefined, `input attribute ${attribute} is undefined [${formLayout}]`);
         let value = supportedInputAttributes[attribute];
         this.set(attribute, value);
         if (value === true) {
-          assert.ok(find('input').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
+          assert.ok(this.element.querySelector('input').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
         } else {
-          assert.equal(find('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
+          assert.equal(this.element.querySelector('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
         }
       }
       await render(hbs``); // hack to prevent browser exception when setting size to undefined
@@ -324,13 +315,13 @@ module('Integration | Component | bs-form/element', function(hooks) {
       }}`);
 
       for (let attribute in supportedTextareaAttributes) {
-        assert.equal(find('textarea').getAttribute(attribute), undefined, `textarea attribute ${attribute} is undefined [${formLayout}]`);
+        assert.equal(this.element.querySelector('textarea').getAttribute(attribute), undefined, `textarea attribute ${attribute} is undefined [${formLayout}]`);
         let value = supportedTextareaAttributes[attribute];
         this.set(attribute, value);
         if (value === true) {
-          assert.ok(find('textarea').hasAttribute(attribute), `textarea has attribute ${attribute} [${formLayout}]`);
+          assert.ok(this.element.querySelector('textarea').hasAttribute(attribute), `textarea has attribute ${attribute} [${formLayout}]`);
         } else {
-          assert.equal(find('textarea').getAttribute(attribute), value, `textarea attribute ${attribute} is ${value} [${formLayout}]`);
+          assert.equal(this.element.querySelector('textarea').getAttribute(attribute), value, `textarea attribute ${attribute} is ${value} [${formLayout}]`);
         }
       }
 
@@ -360,13 +351,13 @@ module('Integration | Component | bs-form/element', function(hooks) {
       }}`);
 
       for (let attribute in supportedCheckboxAttributes) {
-        assert.equal(find('input').getAttribute(attribute), undefined, `checkbox attribute ${attribute} is undefined [${formLayout}]`);
+        assert.equal(this.element.querySelector('input').getAttribute(attribute), undefined, `checkbox attribute ${attribute} is undefined [${formLayout}]`);
         let value = supportedCheckboxAttributes[attribute];
         this.set(attribute, value);
         if (value === true) {
-          assert.ok(find('input').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
+          assert.ok(this.element.querySelector('input').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
         } else {
-          assert.equal(find('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
+          assert.equal(this.element.querySelector('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
         }
       }
     }
@@ -431,24 +422,24 @@ module('Integration | Component | bs-form/element', function(hooks) {
     // feedback icons does have right: 0px for vertical forms
     // https://github.com/twbs/bootstrap/blob/v3.3.6/less/forms.less#L400-L403
     assert.equal(
-      find('.addon .form-control-feedback').style.right,
-      `${find('.addon .input-group-addon').offsetWidth}px`,
+      this.element.querySelector('.addon .form-control-feedback').style.right,
+      `${this.element.querySelector('.addon .input-group-addon').offsetWidth}px`,
       'works for addon on init'
     );
     assert.equal(
-      find('.button .form-control-feedback').style.right,
-      `${find('.button .input-group-btn').offsetWidth}px`,
+      this.element.querySelector('.button .form-control-feedback').style.right,
+      `${this.element.querySelector('.button .input-group-btn').offsetWidth}px`,
       'works for button on init'
     );
-    let expectedRightValue = find('.addon .form-control-feedback').style.right;
+    let expectedRightValue = this.element.querySelector('.addon .form-control-feedback').style.right;
     this.set('validation', null);
     assert.ok(
-      findAll('.form-control-feedback').length === 0,
+      this.element.querySelectorAll('.form-control-feedback').length === 0,
       'assumption'
     );
     this.set('validation', 'error');
     assert.equal(
-      find('.addon .form-control-feedback').style.right,
+      this.element.querySelector('.addon .form-control-feedback').style.right,
       expectedRightValue,
       'adjusts correctly after validation changed from null'
     );
@@ -456,7 +447,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await fillIn('.addon input', 'foo');
     await triggerEvent('.addon input', 'change');
     assert.equal(
-      find('.addon .form-control-feedback').style.right,
+      this.element.querySelector('.addon .form-control-feedback').style.right,
       expectedRightValue,
       'adjusts correctly after validation changed form error to success'
     );
@@ -467,8 +458,8 @@ module('Integration | Component | bs-form/element', function(hooks) {
     this.set('formLayout', 'horizontal');
 
     assert.equal(
-      find('.addon .form-control-feedback').style.right,
-      `${find('.addon .input-group-addon').offsetWidth + 15}px`,
+      this.element.querySelector('.addon .form-control-feedback').style.right,
+      `${this.element.querySelector('.addon .input-group-addon').offsetWidth + 15}px`,
       'takes bootstrap default positioning into account'
     );
   });
@@ -690,8 +681,8 @@ module('Integration | Component | bs-form/element', function(hooks) {
     assert.dom(helpTextClass).exists({ count: 1 }, 'has help text element');
     assert.dom(helpTextClass).hasText('foo', 'shows help text');
 
-    assert.ok(find('input').getAttribute('aria-describedby'), 'control has aria-describedby attribute');
-    assert.equal(find('input').getAttribute('aria-describedby'), find(helpTextClass).getAttribute('id'), 'aria-describedby matches id');
+    assert.ok(this.element.querySelector('input').getAttribute('aria-describedby'), 'control has aria-describedby attribute');
+    assert.equal(this.element.querySelector('input').getAttribute('aria-describedby'), this.element.querySelector(helpTextClass).getAttribute('id'), 'aria-describedby matches id');
   });
 
   // test for size property here to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/492

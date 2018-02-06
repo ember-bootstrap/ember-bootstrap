@@ -1,9 +1,8 @@
 import { run } from '@ember/runloop';
 import { Promise as EmberPromise } from 'rsvp';
-import { find, click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import { test, defaultButtonClass } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -50,9 +49,9 @@ module('Integration | Component | bs-button', function(hooks) {
   test('button has HTML attributes', async function(assert) {
     await render(hbs`{{#bs-button id="test" disabled=true title="title"}}Test{{/bs-button}}`);
 
-    assert.equal(find('button').getAttribute('id'), 'test');
-    assert.equal(find('button').getAttribute('disabled'), '');
-    assert.equal(find('button').getAttribute('title'), 'title');
+    assert.equal(this.element.querySelector('button').getAttribute('id'), 'test');
+    assert.equal(this.element.querySelector('button').getAttribute('disabled'), '');
+    assert.equal(this.element.querySelector('button').getAttribute('title'), 'title');
   });
 
   test('button has default label', async function(assert) {
@@ -62,12 +61,12 @@ module('Integration | Component | bs-button', function(hooks) {
 
   test('button has default type "button"', async function(assert) {
     await render(hbs`{{bs-button}}`);
-    assert.equal(find('button').type, 'button');
+    assert.equal(this.element.querySelector('button').type, 'button');
   });
 
   test('buttonType property allows changing button type', async function(assert) {
     await render(hbs`{{bs-button buttonType="submit"}}`);
-    assert.equal(find('button').type, 'submit');
+    assert.equal(this.element.querySelector('button').type, 'submit');
   });
 
   test('button with icon property shows icon', async function(assert) {

@@ -1,7 +1,6 @@
-import { find, click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import {
   dropdownVisibilityElementSelector,
   isHidden,
@@ -101,7 +100,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     await click('a.dropdown-toggle');
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
 
-    await click('');
+    await click('*');
     assert.dom(dropdownVisibilityElementSelector()).hasNoClass(openClass(), 'Dropdown is closed');
   });
 
@@ -193,10 +192,10 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       {{/dd.menu}}
     {{/bs-dropdown}}`);
 
-    assert.ok(isHidden(find('.dropdown-menu')));
+    assert.ok(isHidden(this.element.querySelector('.dropdown-menu')));
 
     await click('a.dropdown-toggle');
-    assert.ok(isVisible(find('.dropdown-menu a')));
-    assert.ok(find('.dropdown-menu').offsetParent !== null);
+    assert.ok(isVisible(this.element.querySelector('.dropdown-menu a')));
+    assert.ok(this.element.querySelector('.dropdown-menu').offsetParent !== null);
   });
 });

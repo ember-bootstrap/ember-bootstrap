@@ -1,7 +1,6 @@
-import { click, find } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -16,17 +15,17 @@ module('Integration | Component | bs-dropdown/toggle', function(hooks) {
   test('toggle has correct default markup', async function(assert) {
     await render(hbs`{{#bs-dropdown/toggle}}Test{{/bs-dropdown/toggle}}`);
 
-    assert.equal(find(':first-child').tagName, 'A', 'toggle is an anchor tag by default');
-    assert.equal(find(':first-child').getAttribute('href'), '#', 'has href attribute');
+    assert.equal(this.element.querySelector(':first-child').tagName, 'A', 'toggle is an anchor tag by default');
+    assert.equal(this.element.querySelector(':first-child').getAttribute('href'), '#', 'has href attribute');
     assert.dom(':first-child').hasClass('dropdown-toggle', 'has dropdown-toggle class');
-    assert.equal(find(':first-child').getAttribute('role'), 'button', 'has role=button');
+    assert.equal(this.element.querySelector(':first-child').getAttribute('role'), 'button', 'has role=button');
   });
 
   test('toggle as button does not have href', async function(assert) {
     await render(hbs`{{#bs-dropdown/toggle tagName="button"}}Test{{/bs-dropdown/toggle}}`);
 
-    assert.equal(find(':first-child').tagName, 'BUTTON', 'toggle is a button');
-    assert.notOk(find(':first-child').hasAttribute('href'), 'does not have href attribute');
+    assert.equal(this.element.querySelector(':first-child').tagName, 'BUTTON', 'toggle is a button');
+    assert.notOk(this.element.querySelector(':first-child').hasAttribute('href'), 'does not have href attribute');
   });
 
   test('clicking toggle sends onClick action', async function(assert) {

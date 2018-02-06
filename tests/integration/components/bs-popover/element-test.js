@@ -1,4 +1,3 @@
-import { find } from 'ember-native-dom-helpers';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -25,7 +24,7 @@ module('Integration | Component | bs-popover/element', function(hooks) {
     // assert.ok(find(':first-child').classList.contains(popoverPositionClass('top')), 'has placement class');
     assert.dom(':first-child').hasClass('fade', 'has fade class');
     assert.dom(':first-child').hasClass(visibilityClass(), 'has visibility class');
-    assert.equal(find(':first-child').getAttribute('role'), 'tooltip', 'has ARIA role');
+    assert.equal(this.element.querySelector(':first-child').getAttribute('role'), 'tooltip', 'has ARIA role');
     assert.dom('.arrow').exists({ count: 1 }, 'has arrow');
     assert.dom(versionDependent('.popover-title', '.popover-header')).hasText('dummy title', 'shows title');
     assert.dom(versionDependent('.popover-content', '.popover-body')).hasText('template block text', 'shows content');

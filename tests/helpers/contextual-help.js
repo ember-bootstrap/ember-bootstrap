@@ -1,8 +1,8 @@
 import { assign } from '@ember/polyfills';
-import { find } from 'ember-native-dom-helpers';
+import { getContext } from '@ember/test-helpers';
 
 export function setupForPositioning(align = 'left') {
-  assign(find('#wrapper').style, {
+  assign(getContext().element.querySelector('#wrapper').style, {
     position: 'absolute',
     bottom: 0,
     [align]: 0,
@@ -28,8 +28,9 @@ function offset(el) {
 export function assertPositioning(assert, selector = '.tooltip') {
   assert.dom(selector).exists({ count: 1 }, 'Element exists.');
 
-  let tooltip = find(selector);
-  let trigger = find('#target');
+  let rootEl = getContext().element;
+  let tooltip = rootEl.querySelector(selector);
+  let trigger = rootEl.querySelector('#target');
   let margin = -parseInt(window.getComputedStyle(tooltip).marginTop, 10) + parseInt(window.getComputedStyle(tooltip).marginBottom, 10);
   let tooltipPos = Math.round(offset(tooltip).top + tooltip.offsetHeight + margin);
   let triggerPos = Math.round(offset(trigger).top);

@@ -1,8 +1,7 @@
 import Component from '@ember/component';
-import { click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import { test } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 

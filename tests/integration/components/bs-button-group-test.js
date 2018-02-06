@@ -1,8 +1,7 @@
 import { A } from '@ember/array';
-import { find, click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -69,7 +68,7 @@ module('Integration | Component | bs-button-group', function(hooks) {
 
     // check button's active property
     for (let k = 0; k < 3; k++) {
-      assert.equal(find(`button:nth-child(${k + 1})`).classList.contains('active'), 0 === k, 'only button with same value is active');
+      assert.equal(this.element.querySelector(`button:nth-child(${k + 1})`).classList.contains('active'), 0 === k, 'only button with same value is active');
     }
   });
 
@@ -84,7 +83,7 @@ module('Integration | Component | bs-button-group', function(hooks) {
 
     // check button's active property
     for (let k = 0; k < 3; k++) {
-      assert.equal(find(`button:nth-child(${k + 1})`).classList.contains('active'), value.includes(k + 1), 'only buttons with value contained in set value are active');
+      assert.equal(this.element.querySelector(`button:nth-child(${k + 1})`).classList.contains('active'), value.includes(k + 1), 'only buttons with value contained in set value are active');
     }
   });
 
@@ -99,7 +98,7 @@ module('Integration | Component | bs-button-group', function(hooks) {
 
       // check button's active property
       for (let k = 0; k < 3; k++) {
-        assert.equal(find(`button:nth-child(${k + 1})`).classList.contains('active'), i === k, 'only button with same value is active');
+        assert.equal(this.element.querySelector(`button:nth-child(${k + 1})`).classList.contains('active'), i === k, 'only button with same value is active');
       }
     }
   });
@@ -115,7 +114,7 @@ module('Integration | Component | bs-button-group', function(hooks) {
 
     // check button's active property
     for (let k = 0; k < 3; k++) {
-      assert.equal(find(`button:nth-child(${k + 1})`).classList.contains('active'), value.includes(k + 1), 'only buttons with value contained in set value is active');
+      assert.equal(this.element.querySelector(`button:nth-child(${k + 1})`).classList.contains('active'), value.includes(k + 1), 'only buttons with value contained in set value is active');
     }
   });
 

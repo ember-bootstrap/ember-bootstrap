@@ -1,4 +1,3 @@
-import { find } from 'ember-native-dom-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -20,7 +19,7 @@ module('Integration | Component | bs-modal/header', function(hooks) {
     await render(hbs`{{#bs-modal/header}}<div id="custom">Test</div>{{/bs-modal/header}}`);
 
     assert.dom('.modal-header div#custom').exists({ count: 1 }, 'Modal header custom block.');
-    assert.equal(find('.modal-header #custom').innerHTML.trim(), 'Test', 'Block content is shown.');
+    assert.equal(this.element.querySelector('.modal-header #custom').innerHTML.trim(), 'Test', 'Block content is shown.');
     assert.dom('.modal-header button.close').exists({ count: 1 }, 'Modal header has close button.');
 
   });
