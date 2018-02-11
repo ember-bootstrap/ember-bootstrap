@@ -22,6 +22,7 @@
   "author": "Simon Ihmig <ihmig@kaliber5.de>",
   "license": "MIT",
   "devDependencies": {
+    "@ember/test-helpers": "^0.7.16",
     "bootstrap": "^4.0.0",
     "bootstrap-sass": "^3.3.7",
     "broccoli-asset-rev": "^2.4.5",

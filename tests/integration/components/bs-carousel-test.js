@@ -1,10 +1,8 @@
 import hbs from 'htmlbars-inline-precompile';
-import { Promise } from 'rsvp';
-import { click, find, findAll, triggerEvent } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
-import { render } from '@ember/test-helpers';
+import { render, click, triggerEvent, getContext } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
+import { test, testBS3, testBS4, delay } from '../../helpers/bootstrap-test';
 
 const TRANSITION_DURATION = 50;
 
@@ -13,11 +11,12 @@ function clickIndicator(index) {
 }
 
 function clickToNextSlide() {
-  let control = find('.carousel-control.right');
+  let rootEl = getContext().element;
+  let control = rootEl.querySelector('.carousel-control.right');
   if (control !== null) {
     return click('.carousel-control.right');
   }
-  control = find('.carousel-control-next');
+  control = rootEl.querySelector('.carousel-control-next');
   if (control !== null) {
     return click('.carousel-control-next');
   }
@@ -25,11 +24,12 @@ function clickToNextSlide() {
 }
 
 function clickToPrevSlide() {
-  let control = find('.carousel-control.left');
+  let rootEl = getContext().element;
+  let control = rootEl.querySelector('.carousel-control.left');
   if (control !== null) {
     return click('.carousel-control.left');
   }
-  control = find('.carousel-control-prev');
+  control = rootEl.querySelector('.carousel-control-prev');
   if (control !== null) {
     return click('.carousel-control-prev');
   }
@@ -37,15 +37,12 @@ function clickToPrevSlide() {
 }
 
 function getActivatedSlide(index) {
-  return find(`.carousel-inner div:nth-child(${index}).active`);
+  let rootEl = getContext().element;
+  return rootEl.querySelector(`.carousel-inner div:nth-child(${index}).active`);
 }
 
 function waitTransitionTime(interval = 450) {
-  return new Promise(function(resolve) {
-    setTimeout(function() {
-      resolve();
-    }, TRANSITION_DURATION + interval);
-  });
+  return delay(TRANSITION_DURATION + interval);
 }
 
 module('Integration | Component | bs-carousel', function(hooks) {
@@ -72,8 +69,8 @@ module('Integration | Component | bs-carousel', function(hooks) {
   testBS3('carousel has correct controls markup', async function(assert) {
     await render(hbs`{{#bs-carousel interval=0 as |car|}}{{/bs-carousel}}`);
 
-    let left = find('.left');
-    let right = find('.right');
+    let left = this.element.querySelector('.left');
+    let right = this.element.querySelector('.right');
     assert.dom(left).hasClass('carousel-control', 'has left control class names');
     assert.dom(right).hasClass('carousel-control', 'has right control class names');
     assert.ok(left.querySelector('.sr-only'), 'left control has sr-only');
@@ -83,8 +80,8 @@ module('Integration | Component | bs-carousel', function(hooks) {
   testBS4('carousel has correct controls markup', async function(assert) {
     await render(hbs`{{#bs-carousel interval=0 as |car|}}{{/bs-carousel}}`);
 
-    let prev = findAll('.carousel-control-prev');
-    let next = findAll('.carousel-control-next');
+    let prev = this.element.querySelectorAll('.carousel-control-prev');
+    let next = this.element.querySelectorAll('.carousel-control-next');
     assert.equal(prev.length, 1, 'has left control class names');
     assert.equal(next.length, 1, 'has right control class names');
     assert.ok(prev[0].querySelector('.sr-only'), 'left control has sr-only');

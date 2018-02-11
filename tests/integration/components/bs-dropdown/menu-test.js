@@ -1,4 +1,3 @@
-import { find } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -11,19 +10,19 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
   testBS3('dropdown menu has correct markup', async function(assert) {
     await render(hbs`{{#bs-dropdown/menu align="right"}}Something{{/bs-dropdown/menu}}`);
 
-    assert.equal(find(':first-child').tagName, 'UL', 'menu is an unordered list (<ul>) by default');
+    assert.equal(this.element.querySelector(':first-child').tagName, 'UL', 'menu is an unordered list (<ul>) by default');
     assert.dom('ul').hasClass('dropdown-menu', 'menu has dropdown-menu class');
     assert.dom('ul').hasClass('dropdown-menu-right', 'menu has dropdown-menu-right class');
-    assert.equal(find('ul').innerHTML.trim(), 'Something', 'menu contains block contents');
+    assert.equal(this.element.querySelector('ul').innerHTML.trim(), 'Something', 'menu contains block contents');
   });
 
   testBS4('dropdown menu has correct markup', async function(assert) {
     await render(hbs`{{#bs-dropdown/menu align="right" toggleElement=null}}Something{{/bs-dropdown/menu}}`);
 
-    assert.equal(find(':first-child').tagName, 'DIV', 'menu is a div (<div>) by default');
+    assert.equal(this.element.querySelector(':first-child').tagName, 'DIV', 'menu is a div (<div>) by default');
     assert.dom('div').hasClass('dropdown-menu', 'menu has dropdown-menu class');
     assert.dom('div').hasClass('dropdown-menu-right', 'menu has dropdown-menu-right class');
-    assert.equal(find('div').innerHTML.trim(), 'Something', 'menu contains block contents');
+    assert.equal(this.element.querySelector('div').innerHTML.trim(), 'Something', 'menu contains block contents');
   });
 
   testBS3('dropdown menu yields item component', async function(assert) {

@@ -2,6 +2,7 @@ import config from 'dummy/config/environment';
 import test from 'ember-sinon-qunit/test-support/test';
 import { skip } from 'qunit';
 import transitionSupport from 'ember-bootstrap/utils/transition-support';
+import { Promise } from 'rsvp';
 
 const currentBootstrapVersion = parseInt(config.bootstrapVersion);
 
@@ -136,4 +137,8 @@ export function testRequiringTransitions(name, fn) {
   } else {
     skip(name);
   }
+}
+
+export function delay(delay) {
+  return new Promise((resolve) => setTimeout(resolve, delay));
 }

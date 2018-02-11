@@ -1,7 +1,6 @@
-import { click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click, waitFor } from '@ember/test-helpers';
 import { test, testRequiringTransitions } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -37,6 +36,7 @@ module('Integration | Component | bs-alert', function(hooks) {
 
     assert.dom('button.close').exists({ count: 1 }, 'alert has close button');
     let promise = click('button.close');
+    await waitFor('.alert:not(.in)');
 
     assert.dom(':first-child').hasClass('alert', 'alert has alert class');
     assert.dom(':first-child').hasNoClass('in', 'alert has no in class');

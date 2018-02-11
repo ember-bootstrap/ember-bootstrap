@@ -1,7 +1,6 @@
-import { find, click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import {
   dropdownVisibilityElementSelector,
   isHidden,
@@ -48,37 +47,22 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     await render(
       hbs`{{#bs-dropdown as |dd|}}{{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
     );
-    let done = assert.async();
-    // timeout is needed as class is set in next run loop
-    setTimeout(() => {
-      assert.dom(':first-child').hasClass('btn-group', 'has btn-group class');
-      done();
-    }, 0);
+    assert.dom(':first-child').hasClass('btn-group', 'has btn-group class');
   });
 
   test('dropdown container with block dropdown button has dropdown class', async function(assert) {
     await render(
       hbs`{{#bs-dropdown as |dd|}}{{#dd.button block=true}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
     );
-    let done = assert.async();
-    // timeout is needed as class is set in next run loop
-    setTimeout(() => {
-      assert.dom(':first-child').hasClass('dropdown', 'has dropdown class');
-      done();
-    }, 0);
+    assert.dom(':first-child').hasClass('dropdown', 'has dropdown class');
   });
 
   test('dropdown container with dropdown button supports dropup style', async function(assert) {
     await render(
       hbs`{{#bs-dropdown direction="up" as |dd|}}{{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
     );
-    let done = assert.async();
-    // timeout is needed as class is set in next run loop
-    setTimeout(() => {
-      assert.dom(':first-child').hasClass('btn-group', 'has btn-group class');
-      assert.dom(':first-child').hasClass('dropup', 'has dropup class');
-      done();
-    }, 0);
+    assert.dom(':first-child').hasClass('btn-group', 'has btn-group class');
+    assert.dom(':first-child').hasClass('dropup', 'has dropup class');
   });
 
   test('dropdown-toggle toggles dropdown visibility', async function(assert) {
@@ -101,7 +85,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     await click('a.dropdown-toggle');
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
 
-    await click('');
+    await click('*');
     assert.dom(dropdownVisibilityElementSelector()).hasNoClass(openClass(), 'Dropdown is closed');
   });
 
@@ -193,10 +177,10 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       {{/dd.menu}}
     {{/bs-dropdown}}`);
 
-    assert.ok(isHidden(find('.dropdown-menu')));
+    assert.ok(isHidden(this.element.querySelector('.dropdown-menu')));
 
     await click('a.dropdown-toggle');
-    assert.ok(isVisible(find('.dropdown-menu a')));
-    assert.ok(find('.dropdown-menu').offsetParent !== null);
+    assert.ok(isVisible(this.element.querySelector('.dropdown-menu a')));
+    assert.ok(this.element.querySelector('.dropdown-menu').offsetParent !== null);
   });
 });

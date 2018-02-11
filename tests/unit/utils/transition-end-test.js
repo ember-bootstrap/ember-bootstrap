@@ -1,16 +1,16 @@
+import { triggerEvent } from '@ember/test-helpers';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import transitionEvent from 'ember-bootstrap/utils/transition-support';
 import { module } from 'qunit';
 import { test, testRequiringTransitions } from '../../helpers/bootstrap-test';
-import { triggerEvent } from 'ember-native-dom-helpers';
 
 module('Unit | Utility | transition end', function() {
-  testRequiringTransitions('it triggers on event', function(assert) {
+  testRequiringTransitions('it triggers on event', async function(assert) {
     let cb = this.spy();
     let node = document.createElement('div');
 
     transitionEnd(node, cb, this, 100);
-    triggerEvent(node, transitionEvent);
+    await triggerEvent(node, transitionEvent);
     assert.ok(cb.calledOnce);
   });
 

@@ -1,4 +1,3 @@
-import { find } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -69,7 +68,7 @@ module('Integration | Component | bs-form/group', function(hooks) {
     });
     assert.dom('.form-control-feedback').exists({ count: 1 }, 'component has feedback icon');
     validationConfig.iconClasses.forEach((className) => {
-      assert.equal(find('.form-control-feedback').classList.contains(className), 1, `icon has ${className} class`);
+      assert.equal(this.element.querySelector('.form-control-feedback').classList.contains(className), 1, `icon has ${className} class`);
     });
   }
 

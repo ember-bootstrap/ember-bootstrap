@@ -1,12 +1,6 @@
-import {
-  find,
-  click,
-  keyEvent,
-  waitUntil
-} from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled } from '@ember/test-helpers';
+import { render, settled, click, triggerKeyEvent, waitUntil } from '@ember/test-helpers';
 import { run } from '@ember/runloop';
 import {
   test,
@@ -17,8 +11,6 @@ import {
   testRequiringTransitions
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
-
-const transitionTimeout = 600;
 
 module('Integration | Component | bs-modal-simple', function(hooks) {
   setupRenderingTest(hooks);
@@ -52,13 +44,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
 
     assert.dom('.modal').hasClass('fade', 'Modal has fade class');
-
-    let done = assert.async();
-    // wait for fade animation
-    setTimeout(() => {
-      assert.dom('.modal').hasClass(visibilityClass(), 'Modal has visibility class');
-      done();
-    }, transitionTimeout);
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal has visibility class');
   });
 
   test('Simple modal supports custom buttons', async function(assert) {
@@ -87,14 +73,14 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false}}Hello world!{{/bs-modal-simple}}`);
 
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-    assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
+    assert.equal(this.element.querySelector('.modal').style.display, 'block', 'Modal is visible');
   });
 
   testRequiringTransitions('open modal is immediately shown [fade]', async function(assert) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
 
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-    assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
+    assert.equal(this.element.querySelector('.modal').style.display, 'block', 'Modal is visible');
   });
 
   test('open property shows modal', async function(assert) {
@@ -103,29 +89,28 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
 
     assert.dom('.modal').doesNotExist('Modal is hidden');
     run(() => this.set('open', true));
+
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-    assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
+    assert.equal(this.element.querySelector('.modal').style.display, 'block', 'Modal is visible');
+
     run(() => this.set('open', false));
     assert.dom('.modal').doesNotExist('Modal is hidden');
   });
 
   testRequiringTransitions('open property shows modal [fade]', async function(assert) {
-    let done = assert.async();
     this.set('open', false);
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" open=open}}Hello world!{{/bs-modal-simple}}`);
 
     assert.dom('.modal').doesNotExist('Modal is hidden');
     this.set('open', true);
-    // wait for fade animation
-    setTimeout(() => {
-      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-      assert.equal(find('.modal').style.display, 'block', 'Modal is visible');
-      this.set('open', false);
-      setTimeout(() => {
-        assert.dom('.modal').doesNotExist('Modal is hidden');
-        done();
-      }, transitionTimeout);
-    }, transitionTimeout);
+
+    await settled();
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
+    assert.equal(this.element.querySelector('.modal').style.display, 'block', 'Modal is visible');
+    this.set('open', false);
+
+    await settled();
+    assert.dom('.modal').doesNotExist('Modal is hidden');
   });
 
   test('closeButton property shows close button', async function(assert) {
@@ -150,59 +135,35 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
 
   test('backdrop=true adds backdrop element', async function(assert) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" backdrop=true}}Hello world!{{/bs-modal-simple}}`);
-    let done = assert.async();
-    // wait for fade animation
-    setTimeout(() => {
-      assert.dom('.modal-backdrop').exists({ count: 1 }, 'Modal has backdrop element');
-      assert.dom('.modal-backdrop').hasClass(visibilityClass(), 'Modal backdrop has visibility class');
-      done();
-    }, transitionTimeout);
+
+    assert.dom('.modal-backdrop').exists({ count: 1 }, 'Modal has backdrop element');
+    assert.dom('.modal-backdrop').hasClass(visibilityClass(), 'Modal backdrop has visibility class');
   });
 
   test('backdrop=false removes backdrop element', async function(assert) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" backdrop=false}}Hello world!{{/bs-modal-simple}}`);
-    let done = assert.async();
-    // wait for fade animation
-    setTimeout(() => {
-      assert.dom('.modal-backdrop').doesNotExist('Modal has no backdrop element');
-      done();
-    }, transitionTimeout);
+
+    assert.dom('.modal-backdrop').doesNotExist('Modal has no backdrop element');
   });
 
   test('clicking close button closes modal', async function(assert) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
-    let done = assert.async();
 
-    // wait for fade animation
-    setTimeout(async() => {
-      assert.dom('.modal').exists({ count: 1 }, 'Modal is visible');
-      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-      await click('.modal .modal-header .close');
+    assert.dom('.modal').exists({ count: 1 }, 'Modal is visible');
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
+    await click('.modal .modal-header .close');
 
-      // wait for fade animation
-      setTimeout(() => {
-        assert.dom('.modal').doesNotExist('Modal is hidden');
-        done();
-      }, transitionTimeout);
-    }, transitionTimeout);
+    assert.dom('.modal').doesNotExist('Modal is hidden');
   });
 
   test('clicking ok button closes modal', async function(assert) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
-    let done = assert.async();
 
-    // wait for fade animation
-    setTimeout(async() => {
-      assert.dom('.modal').exists({ count: 1 }, 'Modal is visible');
-      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-      await click('.modal .modal-footer button');
+    assert.dom('.modal').exists({ count: 1 }, 'Modal is visible');
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
+    await click('.modal .modal-footer button');
 
-      // wait for fade animation
-      setTimeout(() => {
-        assert.dom('.modal').doesNotExist('Modal is hidden');
-        done();
-      }, transitionTimeout);
-    }, transitionTimeout);
+    assert.dom('.modal').doesNotExist('Modal is hidden');
   });
 
   test('clicking close button leaves modal open when onHide action returns false', async function(assert) {
@@ -213,20 +174,13 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(
       hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "hide")}}Hello world!{{/bs-modal-simple}}`
     );
-    let done = assert.async();
 
     // wait for fade animation
-    setTimeout(async() => {
-      assert.dom('.modal').exists({ count: 1 }, 'Modal is visible');
-      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-      await click('.modal .modal-header .close');
+    assert.dom('.modal').exists({ count: 1 }, 'Modal is visible');
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
+    await click('.modal .modal-header .close');
 
-      // wait for fade animation
-      setTimeout(() => {
-        assert.dom('.modal').hasClass(visibilityClass(), 'Modal is still visible');
-        done();
-      }, transitionTimeout);
-    }, transitionTimeout);
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is still visible');
   });
 
   test('can implement custom close buttons', async function(assert) {
@@ -236,20 +190,11 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
       {{/bs-modal-simple}}
     `);
 
-    let done = assert.async();
+    assert.dom('.modal').exists({ count: 1 }, 'Modal is visible');
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
+    await click('.modal .close-link');
 
-    // wait for fade animation
-    setTimeout(async() => {
-      assert.dom('.modal').exists({ count: 1 }, 'Modal is visible');
-      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-      await click('.modal .close-link');
-
-      // wait for fade animation
-      setTimeout(() => {
-        assert.dom('.modal').doesNotExist('Modal is hidden');
-        done();
-      }, transitionTimeout);
-    }, transitionTimeout);
+    assert.dom('.modal').doesNotExist('Modal is hidden');
   });
 
   test('size property adds size class', async function(assert) {
@@ -288,13 +233,9 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     assert.notOk(shownSpy.called, 'onShown action did not fire immediately');
 
     // wait for fade animation
-    let done = assert.async();
-    setTimeout(() => {
-      assert.ok(showSpy.calledOnce, 'onShow action did fire');
-      assert.ok(shownSpy.calledOnce, 'onShown action did fire');
-
-      done();
-    }, transitionTimeout);
+    await settled();
+    assert.ok(showSpy.calledOnce, 'onShow action did fire');
+    assert.ok(shownSpy.calledOnce, 'onShown action did fire');
   });
 
   test('onHide is called when clicking close button', async function(assert) {
@@ -316,13 +257,9 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     );
 
     this.set('open', false);
-    let done = assert.async();
     // wait for fade animation
-    setTimeout(() => {
-      assert.ok(hiddenSpy.calledOnce);
-      done();
-    }, transitionTimeout);
-
+    await settled();
+    assert.ok(hiddenSpy.calledOnce);
   });
 
   test('onSubmit is called when clicking submit button', async function(assert) {
@@ -393,13 +330,13 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await settled();
 
     // wait for fade animation
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
 
     // trigger escape key event
-    await keyEvent('.modal', 'keydown', 27);
+    await triggerKeyEvent('.modal', 'keydown', 27);
 
     // wait for fade animation
-    await waitUntil(() => !find('.modal'));
+    await waitUntil(() => !this.element.querySelector('.modal'));
 
     assert.ok(action.calledOnce, 'Action has been called.');
   });
@@ -416,13 +353,13 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await settled();
 
     // wait for fade animation
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
 
     // trigger escape key event
-    await keyEvent('.modal', 'keydown', 27);
+    await triggerKeyEvent('.modal', 'keydown', 27);
 
     // wait for fade animation
-    await waitUntil(() => !find('.modal'));
+    await waitUntil(() => !this.element.querySelector('.modal'));
 
     assert.ok(action.calledOnce, 'Action has been called.');
   });
@@ -436,10 +373,10 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await settled();
 
     // wait for fade animation
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
 
     // trigger escape key event
-    await keyEvent('.modal', 'keydown', 27);
+    await triggerKeyEvent('.modal', 'keydown', 27);
 
     assert.notOk(hideSpy.called);
   });
@@ -453,12 +390,12 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await settled();
 
     // wait for fade animation
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
 
     await click('.modal');
 
     // wait for fade animation
-    await waitUntil(() => !find('.modal'));
+    await waitUntil(() => !this.element.querySelector('.modal'));
     assert.ok(hideSpy.calledOnce);
   });
 
@@ -468,19 +405,12 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(
       hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") backdropClose=false}}Hello world!{{/bs-modal-simple}}`
     );
-    let done = assert.async();
-
     // wait for fade animation
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
-
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
     await click('.modal');
 
-    // wait for fade animation
-    setTimeout(() => {
-      assert.dom('.modal').hasClass(visibilityClass(), 'Modal is still visible');
-      assert.notOk(hideSpy.called);
-      done();
-    }, transitionTimeout);
+    assert.dom('.modal').hasClass(visibilityClass(), 'Modal is still visible');
+    assert.notOk(hideSpy.called);
   });
 
   test('Renders in wormhole if renderInPlace is not set', async function(assert) {
@@ -512,7 +442,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     );
 
     // wait for fade animation
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
     assert.dom(document.body).hasClass('modal-open', 'body element has "modal-open" class.');
 
     this.set('renderComponent', false);
@@ -527,7 +457,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
       hbs`{{#if renderComponent}}{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}{{/if}}`
     );
 
-    await waitUntil(() => find('.modal').classList.contains(visibilityClass()));
+    await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
 
     document.body.style.paddingRight = '0px';
     this.set('renderComponent', false);

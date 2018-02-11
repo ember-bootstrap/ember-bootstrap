@@ -1,4 +1,3 @@
-import { find } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -14,7 +13,7 @@ module('Integration | Component | bs-modal/footer', function(hooks) {
     assert.dom('.modal-footer').exists({ count: 1 }, 'Modal footer exists.');
     assert.dom('.modal-footer button').exists({ count: 1 }, 'Modal has button.');
     assert.dom('.modal-footer button').hasClass('btn-primary', 'Button is a primary button.');
-    assert.ok(find('.modal-footer button').getAttribute('type'), 'button', 'Submit button is of type submit.');
+    assert.ok(this.element.querySelector('.modal-footer button').getAttribute('type'), 'button', 'Submit button is of type submit.');
     assert.dom('.modal-footer button').hasText('close', 'Button title is correct.');
   });
 
@@ -23,10 +22,10 @@ module('Integration | Component | bs-modal/footer', function(hooks) {
 
     assert.dom('.modal-footer button').exists({ count: 2 }, 'Modal footer has two button.');
     assert.dom('.modal-footer button:first-child').hasClass(defaultButtonClass(), 'Close button is a default button.');
-    assert.ok(find('.modal-footer button:first-child').getAttribute('type'), 'button', 'Submit button is of type submit.');
+    assert.ok(this.element.querySelector('.modal-footer button:first-child').getAttribute('type'), 'button', 'Submit button is of type submit.');
     assert.dom('.modal-footer button:first-child').hasText('close', 'Close button title is correct.');
     assert.dom('.modal-footer button:last-child').hasClass('btn-primary', 'Submit button is a primary button.');
-    assert.ok(find('.modal-footer button:last-child').getAttribute('type'), 'submit', 'Submit button is of type submit.');
+    assert.ok(this.element.querySelector('.modal-footer button:last-child').getAttribute('type'), 'submit', 'Submit button is of type submit.');
     assert.dom('.modal-footer button:last-child').hasText('submit', 'Submit button title is correct.');
   });
 
@@ -47,12 +46,12 @@ module('Integration | Component | bs-modal/footer', function(hooks) {
     await render(hbs`{{bs-modal/footer closeTitle="close" submitTitle="submit" submitDisabled=disabled}}`);
 
     assert.dom('.modal-footer button').exists({ count: 2 }, 'Modal footer has two button.');
-    assert.notOk(find('.modal-footer button:first-child').disabled, 'Close button is not disabled.');
-    assert.ok(find('.modal-footer button:last-child').disabled, 'Submit button is disabled.');
+    assert.notOk(this.element.querySelector('.modal-footer button:first-child').disabled, 'Close button is not disabled.');
+    assert.ok(this.element.querySelector('.modal-footer button:last-child').disabled, 'Submit button is disabled.');
 
     this.set('disabled', false);
 
-    assert.notOk(find('.modal-footer button:last-child').disabled, 'Submit button is not disabled.');
+    assert.notOk(this.element.querySelector('.modal-footer button:last-child').disabled, 'Submit button is not disabled.');
 
   });
 });

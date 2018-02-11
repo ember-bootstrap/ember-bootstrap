@@ -1,7 +1,6 @@
-import { click, find } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { test, versionDependent } from '../../helpers/bootstrap-test';
 import {
@@ -32,13 +31,13 @@ module('Integration | Component | bs-popover', function(hooks) {
     setupForPositioning('right');
 
     await click('#target');
-    let arrowPosition = parseInt(find('.arrow').style.left, 10);
+    let arrowPosition = parseInt(this.element.querySelector('.arrow').style.left, 10);
     assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 2, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
 
     // check again to prevent regression of https://github.com/kaliber5/ember-bootstrap/issues/361
     await click('#target');
     await click('#target');
-    arrowPosition = parseInt(find('.arrow').style.left, 10);
+    arrowPosition = parseInt(this.element.querySelector('.arrow').style.left, 10);
     assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 2, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
   });
 });

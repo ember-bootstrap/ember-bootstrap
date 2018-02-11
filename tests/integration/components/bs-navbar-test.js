@@ -1,7 +1,6 @@
-import { click } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click, settled } from '@ember/test-helpers';
 import {
   positionClassFor,
   positionStickyClass,
@@ -68,17 +67,11 @@ module('Integration | Component | bs-navbar', function(hooks) {
       'ensure the default state of the button through the active class'
     );
 
-    let done = assert.async();
-
     await click('button');
-    setTimeout(() => {
-      assert.dom('button.navbar-toggle').hasNoClass(
-        'collapsed',
-        'ensure the toggled state of the button through the active class'
-      );
-
-      done();
-    }, 500);
+    assert.dom('button.navbar-toggle').hasNoClass(
+      'collapsed',
+      'ensure the toggled state of the button through the active class'
+    );
   });
 
   testBS4('it handles the toggling action properly', async function(assert) {
@@ -93,17 +86,11 @@ module('Integration | Component | bs-navbar', function(hooks) {
       'ensure the default state of the button through the active class'
     );
 
-    let done = assert.async();
-
     await click('button');
-    setTimeout(() => {
-      assert.dom('button.navbar-toggler').hasNoClass(
-        'collapsed',
-        'ensure the toggled state of the button through the active class'
-      );
-
-      done();
-    }, 500);
+    assert.dom('button.navbar-toggler').hasNoClass(
+      'collapsed',
+      'ensure the toggled state of the button through the active class'
+    );
   });
 
   testBS3('it exposes all the requisite contextual components', async function(assert) {
@@ -247,16 +234,11 @@ module('Integration | Component | bs-navbar', function(hooks) {
 
     assert.dom('.navbar-collapse').hasClass('collapsing', 'collapse has collapsing class while transition is running');
 
-    let done = assert.async();
-
     // wait for transitions to complete
-    setTimeout(() => {
-      assert.ok(collapsedAction.calledOnce, 'onCollapsed action has been called');
-      assert.dom('.navbar-collapse').hasClass('collapse', 'collapse has collapse class');
-      assert.dom('.navbar-collapse').hasNoClass('in', 'collapse does not have in class');
-
-      done();
-    }, 500);
+    await settled();
+    assert.ok(collapsedAction.calledOnce, 'onCollapsed action has been called');
+    assert.dom('.navbar-collapse').hasClass('collapse', 'collapse has collapse class');
+    assert.dom('.navbar-collapse').hasNoClass('in', 'collapse does not have in class');
   });
 
   test('Expanding the navbar calls onExpand/onExpanded actions', async function(assert) {
@@ -280,16 +262,11 @@ module('Integration | Component | bs-navbar', function(hooks) {
 
     assert.ok(expandAction.calledOnce, 'onExpand action has been called');
 
-    let done = assert.async();
-
     // wait for transitions to complete
-    setTimeout(() => {
-      assert.ok(expandedAction.calledOnce, 'onExpanded action has been called');
-      assert.dom('.navbar-collapse').hasClass('collapse', 'collapse has collapse class');
-      assert.dom('.navbar-collapse').hasClass(visibilityClass(), 'collapse has visibility class');
-
-      done();
-    }, 500);
+    await settled();
+    assert.ok(expandedAction.calledOnce, 'onExpanded action has been called');
+    assert.dom('.navbar-collapse').hasClass('collapse', 'collapse has collapse class');
+    assert.dom('.navbar-collapse').hasClass(visibilityClass(), 'collapse has visibility class');
   });
 
   test('Collapsing the navbar calls onCollapse/onCollapsed actions', async function(assert) {
@@ -313,16 +290,11 @@ module('Integration | Component | bs-navbar', function(hooks) {
 
     assert.ok(collapseAction.calledOnce, 'onCollapse action has been called');
 
-    let done = assert.async();
-
     // wait for transitions to complete
-    setTimeout(() => {
-      assert.ok(collapsedAction.calledOnce, 'onCollapsed action has been called');
-      assert.dom('.navbar-collapse').hasClass('collapse', 'collapse has collapse class');
-      assert.dom('.navbar-collapse').hasNoClass('in', 'collapse does not have in class');
-
-      done();
-    }, 500);
+    await settled();
+    assert.ok(collapsedAction.calledOnce, 'onCollapsed action has been called');
+    assert.dom('.navbar-collapse').hasClass('collapse', 'collapse has collapse class');
+    assert.dom('.navbar-collapse').hasNoClass('in', 'collapse does not have in class');
   });
 
   test('navbar is not expanded when onExpand action returns false', async function(assert) {
@@ -381,15 +353,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
     `);
 
     await click('button');
-
-    let done = assert.async();
-
-    // wait for transitions to complete
-    setTimeout(() => {
-      assert.equal(this.get('collapsed'), true, 'collapse property did not change');
-
-      done();
-    }, 500);
+    assert.equal(this.get('collapsed'), true, 'collapse property did not change');
   });
 
   test('Navbar yields collapse action', async function(assert) {

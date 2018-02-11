@@ -1,14 +1,12 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, settled } from '@ember/test-helpers';
 import {
   test,
   testRequiringTransitions,
   visibilityClass
 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
-
-const transitionTimeout = 250;
 
 module('Integration | Component | bs-tab/pane', function(hooks) {
   setupRenderingTest(hooks);
@@ -64,24 +62,18 @@ module('Integration | Component | bs-tab/pane', function(hooks) {
     assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
     assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
-    let done = assert.async();
     // wait for fade animation
-    setTimeout(() => {
-      assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
-      assert.dom('div.tab-pane').hasClass(visibilityClass(), 'tab-pane has visibility class');
+    await settled();
+    assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
+    assert.dom('div.tab-pane').hasClass(visibilityClass(), 'tab-pane has visibility class');
 
-      this.set('activeId', null);
-      assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
-      assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
+    this.set('activeId', null);
+    assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
-      // wait for fade animation
-      setTimeout(() => {
-        assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
-        assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
-
-        done();
-      }, transitionTimeout);
-
-    }, transitionTimeout);
+    // wait for fade animation
+    await settled();
+    assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
   });
 });

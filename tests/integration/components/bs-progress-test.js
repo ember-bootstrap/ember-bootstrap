@@ -1,4 +1,3 @@
-import { find } from 'ember-native-dom-helpers';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
@@ -59,7 +58,7 @@ module('Integration | Component | bs-progress', function(hooks) {
 
       this.setProperties(data);
 
-      assert.equal(find('.progress-bar').offsetWidth, expectedWidth, 'Progress bar has expected width.');
+      assert.equal(this.element.querySelector('.progress-bar').offsetWidth, expectedWidth, 'Progress bar has expected width.');
     });
 
   });
@@ -71,7 +70,7 @@ module('Integration | Component | bs-progress', function(hooks) {
       {{/bs-progress}}
     `);
 
-    assert.equal(find('.progress-bar .sr-only').innerHTML.trim(), '50%', 'Progress bar shows correct default label');
+    assert.equal(this.element.querySelector('.progress-bar .sr-only').innerHTML.trim(), '50%', 'Progress bar shows correct default label');
 
     await render(hbs`
       {{#bs-progress as |p|}}
@@ -79,7 +78,7 @@ module('Integration | Component | bs-progress', function(hooks) {
       {{/bs-progress}}
     `);
 
-    assert.equal(find('.progress-bar .sr-only').innerHTML.trim(), '5 (50%)', 'Progress bar shows correct custom label');
+    assert.equal(this.element.querySelector('.progress-bar .sr-only').innerHTML.trim(), '5 (50%)', 'Progress bar shows correct custom label');
 
   });
 
@@ -90,7 +89,7 @@ module('Integration | Component | bs-progress', function(hooks) {
       {{/bs-progress}}
     `);
 
-    assert.equal(find('.progress-bar').innerHTML.trim(), '50%', 'Progress bar shows correct default label');
+    assert.equal(this.element.querySelector('.progress-bar').innerHTML.trim(), '50%', 'Progress bar shows correct default label');
 
     await render(hbs`
       {{#bs-progress as |p|}}
@@ -98,7 +97,7 @@ module('Integration | Component | bs-progress', function(hooks) {
       {{/bs-progress}}
     `);
 
-    assert.equal(find('.progress-bar').innerHTML.trim(), '5 (50%)', 'Progress bar shows correct custom label');
+    assert.equal(this.element.querySelector('.progress-bar').innerHTML.trim(), '5 (50%)', 'Progress bar shows correct custom label');
 
   });
 
@@ -109,7 +108,7 @@ module('Integration | Component | bs-progress', function(hooks) {
       {{/bs-progress}}
     `);
 
-    assert.equal(find('.progress-bar').innerHTML.trim(), '83.33%', 'Progress bar shows correct default label');
+    assert.equal(this.element.querySelector('.progress-bar').innerHTML.trim(), '83.33%', 'Progress bar shows correct default label');
 
   });
 
