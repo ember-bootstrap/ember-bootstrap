@@ -2,7 +2,7 @@ import { module } from 'qunit';
 import {
   setupRenderingTest
 } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { test, visibilityClass } from '../../helpers/bootstrap-test';
 
@@ -42,16 +42,11 @@ module('Integration | Component | bs-collapse', function(hooks) {
     assert.ok(showAction.calledOnce, 'onShow action has been called');
     assert.dom(':first-child').hasClass('collapsing', 'collapse has collapsing class while transition is running');
 
-    let done = assert.async();
-
     // wait for transitions to complete
-    setTimeout(() => {
-      assert.ok(shownAction.calledOnce, 'onShown action has been called');
-      assert.dom(':first-child').hasClass('collapse', 'collapse has collapse class');
-      assert.dom(':first-child').hasClass(visibilityClass(), 'collapse has visibility class');
-
-      done();
-    }, 500);
+    await settled();
+    assert.ok(shownAction.calledOnce, 'onShown action has been called');
+    assert.dom(':first-child').hasClass('collapse', 'collapse has collapse class');
+    assert.dom(':first-child').hasClass(visibilityClass(), 'collapse has visibility class');
   });
 
   test('setting collapse to true collapses this item', async function(assert) {
@@ -69,15 +64,10 @@ module('Integration | Component | bs-collapse', function(hooks) {
     assert.ok(hideAction.calledOnce, 'onHide action has been called');
     assert.dom(':first-child').hasClass('collapsing', 'collapse has collapsing class while transition is running');
 
-    let done = assert.async();
-
     // wait for transitions to complete
-    setTimeout(() => {
-      assert.ok(hiddenAction.calledOnce, 'onHidden action has been called');
-      assert.dom(':first-child').hasClass('collapse', 'collapse has collapse class');
-      assert.dom(':first-child').hasNoClass('in', 'collapse does not have in class');
-
-      done();
-    }, 500);
+    await settled();
+    assert.ok(hiddenAction.calledOnce, 'onHidden action has been called');
+    assert.dom(':first-child').hasClass('collapse', 'collapse has collapse class');
+    assert.dom(':first-child').hasNoClass('in', 'collapse does not have in class');
   });
 });

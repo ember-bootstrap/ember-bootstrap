@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, focus, blur, triggerEvent } from '@ember/test-helpers';
+import { render, click, focus, blur, triggerEvent, waitUntil, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import {
   test,
@@ -9,7 +9,8 @@ import {
   testRequiringFocus,
   visibilityClass,
   tooltipPositionClass,
-  tooltipArrowClass
+  tooltipArrowClass,
+  delay
 } from '../../helpers/bootstrap-test';
 import {
   setupForPositioning,
@@ -213,23 +214,17 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should place tooltip on top of element if already visible', async function(assert) {
-    assert.expect(2);
-    let done = assert.async();
     await render(
       hbs`<div id="wrapper">{{#if visible}}<p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=true}}</a></p>{{/if}}</div>`
     );
 
     setupForPositioning();
     this.set('visible', true);
-    setTimeout(function() {
-      assertPositioning(assert);
-      done();
-    }, 1);
+    await settled();
+    assertPositioning(assert);
   });
 
   test('should place tooltip on top of element if visible is set to true', async function(assert) {
-    assert.expect(2);
-    let done = assert.async();
     this.set('visible', false);
     await render(
       hbs`<div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=visible}}</a></p></div>`
@@ -238,103 +233,66 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     setupForPositioning();
 
     this.set('visible', true);
-    setTimeout(function() {
-      assertPositioning(assert);
-      done();
-    }, 1);
+    await settled();
+    assertPositioning(assert);
   });
 
   test('should show tooltip if leave event hasn\'t occurred before delay expires', async function(assert) {
-    assert.expect(2);
-    let done = assert.async();
-
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
 
-    setTimeout(() => {
-      assert.notOk(isVisible(this.element.querySelector('.tooltip')), '100ms: tooltip is not faded in');
-    }, 100);
-
-    setTimeout(() => {
-      assert.ok(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip is faded in');
-      done();
-    }, 200);
-
     triggerEvent('#target', 'mouseenter');
+
+    await delay(100);
+    assert.notOk(isVisible(this.element.querySelector('.tooltip')), '100ms: tooltip is not faded in');
+
+    await delay(100);
+    assert.ok(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip is faded in');
   });
 
   test('should not show tooltip if leave event occurs before delay expires', async function(assert) {
-    assert.expect(2);
-    let done = assert.async();
-
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
 
-    setTimeout(() => {
-      assert.notOk(isVisible(this.element.querySelector('.tooltip')), '100ms: tooltip not faded in');
-      triggerEvent('#target', 'mouseleave');
-    }, 100);
-
-    setTimeout(() => {
-      assert.notOk(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip not faded in');
-      done();
-    }, 200);
-
     triggerEvent('#target', 'mouseenter');
+
+    await delay(100);
+    assert.notOk(isVisible(this.element.querySelector('.tooltip')), '100ms: tooltip not faded in');
+    triggerEvent('#target', 'mouseleave');
+
+    await delay(100);
+    assert.notOk(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip not faded in');
   });
 
   test('should not hide tooltip if leave event occurs and enter event occurs within the hide delay', async function(assert) {
-    assert.expect(3);
-    let done = assert.async();
-
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" delayShow=0 delayHide=150}}</div>`);
-
-    setTimeout(() => {
-      assert.ok(isVisible(this.element.querySelector('.tooltip')), '1ms: tooltip faded in');
-      triggerEvent('#target', 'mouseleave');
-
-      setTimeout(() => {
-        assert.ok(isVisible(this.element.querySelector('.tooltip')), '100ms: tooltip still faded in');
-        triggerEvent('#target', 'mouseenter');
-      }, 100);
-
-      setTimeout(() => {
-        assert.ok(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip still faded in');
-        done();
-      }, 200);
-    }, 5);
-
     triggerEvent('#target', 'mouseenter');
+
+    await waitUntil(() => isVisible(this.element.querySelector('.tooltip')));
+    triggerEvent('#target', 'mouseleave');
+
+    await delay(100);
+    assert.ok(isVisible(this.element.querySelector('.tooltip')), '100ms: tooltip still faded in');
+    triggerEvent('#target', 'mouseenter');
+
+    await delay(100);
+    assert.ok(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip still faded in');
   });
 
   test('should not show tooltip if leave event occurs before delay expires', async function(assert) {
-    assert.expect(2);
-    let done = assert.async();
-
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
-
-    setTimeout(() => {
-      assert.notOk(isVisible(this.element.querySelector('.tooltip')), '100ms: tooltip not faded in');
-      triggerEvent('#target', 'mouseleave');
-    }, 100);
-
-    setTimeout(() => {
-      assert.notOk(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip not faded in');
-      done();
-    }, 200);
-
     triggerEvent('#target', 'mouseenter');
+
+    await delay(100);
+    assert.notOk(isVisible(this.element.querySelector('.tooltip')), '100ms: tooltip not faded in');
+    triggerEvent('#target', 'mouseleave');
+
+    await delay(100);
+    assert.notOk(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip not faded in');
   });
 
   test('show pass along class attribute', async function(assert) {
-    assert.expect(1);
-    let done = assert.async();
-
     await render(hbs`<div id="target">{{bs-tooltip title="Dummy" class='wide' delay=150}}</div>`);
-    setTimeout(() => {
-      assert.dom('.tooltip.wide').exists({ count: 1 });
-      done();
-    }, 200);
-
-    triggerEvent('#target', 'mouseenter');
+    await triggerEvent('#target', 'mouseenter');
+    assert.dom('.tooltip.wide').exists({ count: 1 });
   });
 
   test('should position tooltip arrow centered', async function(assert) {
@@ -370,19 +328,15 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should adjust placement if not fitting in viewport', async function(assert) {
-    let done = assert.async();
     await render(
       hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 300px"><button class="btn" id="target">Click me{{bs-tooltip placement="bottom" autoPlacement=true title="very very very very very very very long popover" fade=false}}</button></p></div>`
     );
 
     setupForPositioning('right');
     await click('#target');
+    await delay(50);
 
     assert.dom('.tooltip').hasClass(tooltipPositionClass('top'));
-
-    setTimeout(function() {
-      assertPositioning(assert);
-      done();
-    }, 50);
+    assertPositioning(assert);
   });
 });

@@ -1,9 +1,8 @@
 import hbs from 'htmlbars-inline-precompile';
-import { Promise } from 'rsvp';
 import { module } from 'qunit';
 import { render, click, triggerEvent, getContext } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
-import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
+import { test, testBS3, testBS4, delay } from '../../helpers/bootstrap-test';
 
 const TRANSITION_DURATION = 50;
 
@@ -43,11 +42,7 @@ function getActivatedSlide(index) {
 }
 
 function waitTransitionTime(interval = 450) {
-  return new Promise(function(resolve) {
-    setTimeout(function() {
-      resolve();
-    }, TRANSITION_DURATION + interval);
-  });
+  return delay(TRANSITION_DURATION + interval);
 }
 
 module('Integration | Component | bs-carousel', function(hooks) {

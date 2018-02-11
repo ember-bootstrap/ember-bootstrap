@@ -152,16 +152,11 @@ module('Integration | Component | bs-form', function(hooks) {
     );
     await triggerEvent('form', 'submit');
 
-    let done = assert.async();
-    setTimeout(() => {
-      assert.dom(formFeedbackElement()).hasClass(
-        validationErrorClass(),
-        'validation errors are shown after form submission'
-      );
-      assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
-      done();
-    }, 1);
-
+    assert.dom(formFeedbackElement()).hasClass(
+      validationErrorClass(),
+      'validation errors are shown after form submission'
+    );
+    assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
   });
 
   test('Adds default onChange action to form elements that updates model\'s property', async function(assert) {
