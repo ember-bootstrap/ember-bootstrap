@@ -30,6 +30,9 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  {{/bs-navbar}}
  ```
 
+ **Note:** the `<div class="navbar-header">` is required for BS3 to hold the elements visible on a mobile breakpoint,
+ when the actual content is collapsed. It should *not* be used for BS4!
+
  The component yields references to the following contextual components:
 
  * [Components.NavbarContent](Components.NavbarContent.html)
