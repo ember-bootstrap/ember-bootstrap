@@ -49,8 +49,8 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
    {{#nav.dropdown tagName="li" as |dd|}}
      {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
      {{#dd.menu as |ddm|}}
-       {{#ddm.item}}{{#link-to "foo"}}Foo{{/link-to}}{{/ddm.item}}
-       {{#ddm.item}}{{#link-to "bar"}}Bar{{/link-to}}{{/ddm.item}}
+       {{#ddm.item}}{{#ddm.link-to "foo"}}Foo{{/ddm.link-to}}{{/ddm.item}}
+       {{#ddm.item}}{{#ddm.link-to "bar"}}Bar{{/ddm.link-to}}{{/ddm.item}}
      {{/dd.menu}}
    {{/nav.dropdown}}
  {{/bs-nav}}
