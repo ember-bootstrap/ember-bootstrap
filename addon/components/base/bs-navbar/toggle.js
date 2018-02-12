@@ -23,16 +23,6 @@ export default Component.extend({
   collapsed: true,
 
   /**
-   * Bootstrap 4 Only: Defines the alignment of the toggler. Valid values are 'left' and 'right'
-   * to set the `navbar-toggler-*` class.
-   *
-   * @property align
-   * @type String
-   * @default null
-   * @public
-   */
-
-  /**
    * @event onClick
    * @public
    */
