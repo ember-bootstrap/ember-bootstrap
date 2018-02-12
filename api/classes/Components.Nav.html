@@ -39,7 +39,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.2.0.3086ea03</span></h1>
+    <h1>API Docs <span class="small">1.2.0.2e1f5137</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -99,8 +99,8 @@ with a <code>tagName</code> of &quot;li&quot; to integrate a dropdown into your 
    {{#nav.dropdown tagName=&quot;li&quot; as |dd|}}
      {{#dd.toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.toggle}}
      {{#dd.menu as |ddm|}}
-       {{#ddm.item}}{{#link-to &quot;foo&quot;}}Foo{{/link-to}}{{/ddm.item}}
-       {{#ddm.item}}{{#link-to &quot;bar&quot;}}Bar{{/link-to}}{{/ddm.item}}
+       {{#ddm.item}}{{#ddm.link-to &quot;foo&quot;}}Foo{{/ddm.link-to}}{{/ddm.item}}
+       {{#ddm.item}}{{#ddm.link-to &quot;bar&quot;}}Bar{{/ddm.link-to}}{{/ddm.item}}
      {{/dd.menu}}
    {{/nav.dropdown}}
  {{/bs-nav}}

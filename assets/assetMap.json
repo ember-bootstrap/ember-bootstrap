@@ -3,9 +3,9 @@
     "assets/assetMap.json": "assets/assetMap.json",
     "assets/dummy-fastboot.js": "assets/dummy-fastboot-8af7c10f53bf3cdc4e024e178ab7d5b4.js",
     "assets/dummy.css": "assets/dummy-4adfd5185202f506c2e9323f556a30e7.css",
-    "assets/dummy.js": "assets/dummy-c87f78f173acff5326725b692c5d808e.js",
+    "assets/dummy.js": "assets/dummy-133941e455754da2aa8d8cff7d2fa258.js",
     "assets/vendor.css": "assets/vendor-4b8ac6bb7876058fd094c09cdc7b7912.css",
-    "assets/vendor.js": "assets/vendor-1dcd33cfd20cb02145e7abb9d785007a.js",
+    "assets/vendor.js": "assets/vendor-945d5cb71872bb1322a5f38a2e33a356.js",
     "ember-fetch/fastboot-fetch.js": "ember-fetch/fastboot-fetch-805e176077930c98aec5834ae48bd0f2.js",
     "img/kaliber5.png": "img/kaliber5-9d16d7736e217dbdc3c61c42dcd5bbf4.png"
   },
