@@ -54,9 +54,9 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@ember-decorators/argument@^0.8.3":
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/@ember-decorators/argument/-/argument-0.8.5.tgz#7c012b26cade7716adf01ace7a994a7e5d061e1e"
+"@ember-decorators/argument@^0.8.10":
+  version "0.8.11"
+  resolved "https://registry.yarnpkg.com/@ember-decorators/argument/-/argument-0.8.11.tgz#7f3064c8394138b9e69a7cdc739016d9296961fa"
   dependencies:
     babel-plugin-filter-imports "^1.1.1"
     broccoli-funnel "^2.0.1"
@@ -842,10 +842,6 @@ babel-plugin-debug-macros@^0.1.10, babel-plugin-debug-macros@^0.1.11:
   resolved "https://registry.yarnpkg.com/babel-plugin-debug-macros/-/babel-plugin-debug-macros-0.1.11.tgz#6c562bf561fccd406ce14ab04f42c218cf956605"
   dependencies:
     semver "^5.3.0"
-
-babel-plugin-ember-legacy-class-constructor@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/babel-plugin-ember-legacy-class-constructor/-/babel-plugin-ember-legacy-class-constructor-0.1.4.tgz#dfe715b9bdb66f6c7e9eccc620137c03b3fa89e0"
 
 babel-plugin-ember-modules-api-polyfill@^2.3.0:
   version "2.3.0"
@@ -3591,12 +3587,10 @@ ember-in-element-polyfill@^0.1.2:
     ember-cli-version-checker "^2.1.0"
     ember-wormhole "^0.5.4"
 
-ember-legacy-class-transform@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/ember-legacy-class-transform/-/ember-legacy-class-transform-0.1.4.tgz#0dd588b8561a4d31c080d5d7ada64521365b3806"
+ember-legacy-class-shim@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ember-legacy-class-shim/-/ember-legacy-class-shim-1.0.1.tgz#fc46e2c2595f3f746b2c6a122ed977ff424f103a"
   dependencies:
-    babel-plugin-ember-legacy-class-constructor "^0.1.4"
-    ember-cli-babel "^6.3.0"
     ember-cli-version-checker "^2.0.0"
 
 ember-load-initializers@^1.0.0:
@@ -3650,11 +3644,12 @@ ember-native-dom-helpers@^0.5.4:
     broccoli-funnel "^1.1.0"
     ember-cli-babel "^6.6.0"
 
-ember-popper@^0.8.2:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/ember-popper/-/ember-popper-0.8.2.tgz#3496232f1fa36dbce74aae8ca451a8ba43e1e275"
+ember-popper@^0.8.3:
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/ember-popper/-/ember-popper-0.8.3.tgz#547ec0e8d810805bd65bce7556f0a3377cb9730c"
   dependencies:
-    "@ember-decorators/argument" "^0.8.3"
+    "@ember-decorators/argument" "^0.8.10"
+    "@ember-decorators/babel-transforms" "^0.1.1"
     babel-eslint "^8.0.3"
     babel6-plugin-strip-class-callcheck "^6.0.0"
     broccoli-funnel "^2.0.0"
@@ -3664,7 +3659,7 @@ ember-popper@^0.8.2:
     ember-cli-version-checker "^2.1.0"
     ember-compatibility-helpers "^0.1.3"
     ember-decorators "^1.3.2"
-    ember-legacy-class-transform "^0.1.4"
+    ember-legacy-class-shim "^1.0.0"
     ember-raf-scheduler "^0.1.0"
     fastboot-transform "^0.1.0"
     popper.js "^1.12.9"
