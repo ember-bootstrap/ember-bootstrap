@@ -10,7 +10,7 @@
   {{#bs-nav type=type as |nav|}}
     {{#each navItems as |item|}}
       {{#if item.isGroup}}
-        {{#nav.dropdown tagName="li" class=(if (bs-contains item.childIds isActiveId) "active") as |dd|}}
+        {{#nav.dropdown class=(if (bs-contains item.childIds isActiveId) "active") as |dd|}}
           {{#dd.toggle}}{{item.groupTitle}} <span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu as |menu|}}
             {{#each item.children as |subItem|}}
