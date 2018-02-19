@@ -1,3 +1,19 @@
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/kaliber5/ember-bootstrap/compare/1.2.0...1.2.1) (2018-02-19)
+
+
+### Bug Fixes
+
+* **Modal:** fix memory leak, caused by not removed event listener ([f979cf2](https://github.com/kaliber5/ember-bootstrap/commit/f979cf2))
+* **Navbar:** removed the `align` property of the `nav-toggler` component for BS4 ([70a556b](https://github.com/kaliber5/ember-bootstrap/commit/70a556b))
+
+
+### Features
+
+* **Nav:** yielded DropDown automatically is a <li>, no need to set tagName="li" anymore ([aaef6be](https://github.com/kaliber5/ember-bootstrap/commit/aaef6be))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/kaliber5/ember-bootstrap/compare/1.1.0...1.2.0) (2018-01-19)
 
