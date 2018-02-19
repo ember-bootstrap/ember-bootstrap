@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "1.2.0.2e1f5137"
+        "version": "1.2.1"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -1716,7 +1716,7 @@
             "namespace": "Components",
             "file": "addon/components/base/bs-nav.js",
             "line": 6,
-            "description": "Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)\n### Usage\nUse in combination with the yielded components\n* [Components.NavItem](Components.NavItem.html)\n * [Components.NavLinkTo](Components.NavLinkTo.html)\n * [`nav.dropdown`](Components.Dropdown.html)\n```hbs\n {{#bs-nav type=\"pills\" as |nav|}}\n   {{#nav.item}}\n      {{#nav.link-to \"foo\"}}Foo{{/nav.link-to}}\n   {{/nav.item}}\n   {{#nav.item}}\n     {{#nav.link-to \"bar\"}}Bar{{/nav.link-to}}\n   {{/nav.item}}\n {{/bs-nav}}\n ```\n### Nav styles\nThe component supports the default bootstrap nav styling options \"pills\" and \"tabs\" through the `type`\n property, as well as the `justified` and `stacked` properties.\n### Active items\nBootstrap expects to have the `active` class on the `<li>` element that should be the active (highlighted)\n navigation item. To achieve that just use the `link-to` helper as usual. If the link is active, i.e\n it points to the current route, the `bs-nav-item` component will detect that and apply the `active` class\n automatically. The same applies for the `disabled` state.\n### Dropdowns\nUse the `nav.dropdown` contextual version of the [Components.Dropdown](Components.Dropdown.html) component\n with a `tagName` of \"li\" to integrate a dropdown into your nav:\n```hbs\n {{#bs-nav type=\"pills\" as |nav|}}\n   {{#nav.item}}{{#nav.link-to \"index\"}}Home{{/nav.link-to}}{{/nav.item}}\n   {{#nav.dropdown tagName=\"li\" as |dd|}}\n     {{#dd.toggle}}Dropdown <span class=\"caret\"></span>{{/dd.toggle}}\n     {{#dd.menu as |ddm|}}\n       {{#ddm.item}}{{#ddm.link-to \"foo\"}}Foo{{/ddm.link-to}}{{/ddm.item}}\n       {{#ddm.item}}{{#ddm.link-to \"bar\"}}Bar{{/ddm.link-to}}{{/ddm.item}}\n     {{/dd.menu}}\n   {{/nav.dropdown}}\n {{/bs-nav}}\n ```\n### Bootstrap 3/4 Notes\nUse [`nav.link-to`](Components.NavLinkTo.html) for in-app links to ensure proper styling regardless of\n Bootstrap version. Explicit use of `<a>` tags in Bootstrap 4 must apply the `nav-link` class and manage\n the `active` state explicitly.\nYou can override `tagName` if you want to use Bootstrap 4's ability to represent more structural\n components with `div` tags.",
+            "description": "Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)\n### Usage\nUse in combination with the yielded components\n* [Components.NavItem](Components.NavItem.html)\n * [Components.NavLinkTo](Components.NavLinkTo.html)\n * [`nav.dropdown`](Components.Dropdown.html)\n```hbs\n {{#bs-nav type=\"pills\" as |nav|}}\n   {{#nav.item}}\n      {{#nav.link-to \"foo\"}}Foo{{/nav.link-to}}\n   {{/nav.item}}\n   {{#nav.item}}\n     {{#nav.link-to \"bar\"}}Bar{{/nav.link-to}}\n   {{/nav.item}}\n {{/bs-nav}}\n ```\n### Nav styles\nThe component supports the default bootstrap nav styling options \"pills\" and \"tabs\" through the `type`\n property, as well as the `justified` and `stacked` properties.\n### Active items\nBootstrap expects to have the `active` class on the `<li>` element that should be the active (highlighted)\n navigation item. To achieve that just use the `link-to` helper as usual. If the link is active, i.e\n it points to the current route, the `bs-nav-item` component will detect that and apply the `active` class\n automatically. The same applies for the `disabled` state.\n### Dropdowns\nUse the `nav.dropdown` contextual version of the [Components.Dropdown](Components.Dropdown.html) component\n with a `tagName` of \"li\" to integrate a dropdown into your nav:\n```hbs\n {{#bs-nav type=\"pills\" as |nav|}}\n   {{#nav.item}}{{#nav.link-to \"index\"}}Home{{/nav.link-to}}{{/nav.item}}\n   {{#nav.dropdown as |dd|}}\n     {{#dd.toggle}}Dropdown <span class=\"caret\"></span>{{/dd.toggle}}\n     {{#dd.menu as |ddm|}}\n       {{#ddm.item}}{{#ddm.link-to \"foo\"}}Foo{{/ddm.link-to}}{{/ddm.item}}\n       {{#ddm.item}}{{#ddm.link-to \"bar\"}}Bar{{/ddm.link-to}}{{/ddm.item}}\n     {{/dd.menu}}\n   {{/nav.dropdown}}\n {{/bs-nav}}\n ```\n### Bootstrap 3/4 Notes\nUse [`nav.link-to`](Components.NavLinkTo.html) for in-app links to ensure proper styling regardless of\n Bootstrap version. Explicit use of `<a>` tags in Bootstrap 4 must apply the `nav-link` class and manage\n the `active` state explicitly.\nYou can override `tagName` if you want to use Bootstrap 4's ability to represent more structural\n components with `div` tags.",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -1732,7 +1732,7 @@
             "namespace": "Components",
             "file": "addon/components/base/bs-navbar.js",
             "line": 7,
-            "description": "Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).\n\n### Usage\n\nUses the following components by a contextual reference:\n\n```hbs\n{{#bs-navbar as |navbar|}}\n  <div class=\"navbar-header\">\n    {{navbar.toggle}}\n    <a class=\"navbar-brand\" href=\"#\">Brand</a>\n  </div>\n  {{#navbar.content}}\n    {{#navbar.nav as |nav|}}\n      {{#nav.item}}\n        {{#nav.link-to \"home\"}}Home{{/nav.link-to}}\n      {{/nav.item}}\n      {{#nav.item}}\n        {{#nav.link-to \"navbars\"}}Navbars{{/nav.link-to}}\n      {{/nav.item}}\n    {{/navbar.nav}}\n  {{/navbar.content}}\n{{/bs-navbar}}\n```\n\nThe component yields references to the following contextual components:\n\n* [Components.NavbarContent](Components.NavbarContent.html)\n* [Components.NavbarToggle](Components.NavbarToggle.html)\n* [Components.NavbarNav](Components.NavbarNav.html)\n\nFurthermore references to the following actions are yielded:\n\n* `collapse`: triggers the `onCollapse` action and collapses the navbar (mobile)\n* `expand`: triggers the `onExpand` action and expands the navbar (mobile)\n\n### Responsive Design\n\nFor the mobile breakpoint the Bootstrap styles will hide the navbar content (`{{navbar.content}}`). Clicking on the\nnavbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all nav links (`{{nav.link-to}}`) are already\nwired up to call the navbar's `collapse` action, so clicking any of them will collapse the navbar. To selectively\nprevent that, you can set its `collapseNavbar` property to false:\n\n```hbs\n{{#nav.item}}\n  {{#nav.link-to \"index\" collapseNavbar=false}}Don't collapse{{/nav.link-to}}\n{{/nav.item}}\n```\n\nTo collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded `collapse`\naction:\n\n```hbs\n{#bs-navbar as |navbar|}}\n  {{#navbar.content}}\n    {{#navbar.nav as |nav|}}\n      {{#nav.item}}\n        <a {{action navbar.collapse}}>Collapse</a>\n      {{/nav.item}}\n    {{/navbar.nav}}\n  {{/navbar.content}}\n{{/bs-navbar}}\n```\n\n### Navbar styles\n\nThe component supports the default bootstrap navbar styling options through the `type`\nproperty. Bootstrap navbars [do not currently support justified nav links](http://getbootstrap.com/components/#navbar-default),\nso those are explicitly disallowed.\n\nOther bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of\nbootstrap styles applied through the `class` attribute on the components.\n\n### Bootstrap 3/4 Notes\n\nBootstrap 4 changed the default navbar styling option from `navbar-default` to `navbar-light`.\nIf you explicitly specified \"default\" in Bootstrap 3 and are migrating, you will need to change\nthis in your code. Bootstrap 4 changes `navbar-inverse` to `navbar-dark`.\n\nBootstrap 4 navbars are fluid by default without the need for an additional container. An\nadditional container is added like with Bootstrap 3 if `fluid` is `false`.",
+            "description": "Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).\n\n### Usage\n\nUses the following components by a contextual reference:\n\n```hbs\n{{#bs-navbar as |navbar|}}\n  <div class=\"navbar-header\">\n    {{navbar.toggle}}\n    <a class=\"navbar-brand\" href=\"#\">Brand</a>\n  </div>\n  {{#navbar.content}}\n    {{#navbar.nav as |nav|}}\n      {{#nav.item}}\n        {{#nav.link-to \"home\"}}Home{{/nav.link-to}}\n      {{/nav.item}}\n      {{#nav.item}}\n        {{#nav.link-to \"navbars\"}}Navbars{{/nav.link-to}}\n      {{/nav.item}}\n    {{/navbar.nav}}\n  {{/navbar.content}}\n{{/bs-navbar}}\n```\n\n**Note:** the `<div class=\"navbar-header\">` is required for BS3 to hold the elements visible on a mobile breakpoint,\nwhen the actual content is collapsed. It should *not* be used for BS4!\n\nThe component yields references to the following contextual components:\n\n* [Components.NavbarContent](Components.NavbarContent.html)\n* [Components.NavbarToggle](Components.NavbarToggle.html)\n* [Components.NavbarNav](Components.NavbarNav.html)\n\nFurthermore references to the following actions are yielded:\n\n* `collapse`: triggers the `onCollapse` action and collapses the navbar (mobile)\n* `expand`: triggers the `onExpand` action and expands the navbar (mobile)\n\n### Responsive Design\n\nFor the mobile breakpoint the Bootstrap styles will hide the navbar content (`{{navbar.content}}`). Clicking on the\nnavbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all nav links (`{{nav.link-to}}`) are already\nwired up to call the navbar's `collapse` action, so clicking any of them will collapse the navbar. To selectively\nprevent that, you can set its `collapseNavbar` property to false:\n\n```hbs\n{{#nav.item}}\n  {{#nav.link-to \"index\" collapseNavbar=false}}Don't collapse{{/nav.link-to}}\n{{/nav.item}}\n```\n\nTo collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded `collapse`\naction:\n\n```hbs\n{#bs-navbar as |navbar|}}\n  {{#navbar.content}}\n    {{#navbar.nav as |nav|}}\n      {{#nav.item}}\n        <a {{action navbar.collapse}}>Collapse</a>\n      {{/nav.item}}\n    {{/navbar.nav}}\n  {{/navbar.content}}\n{{/bs-navbar}}\n```\n\n### Navbar styles\n\nThe component supports the default bootstrap navbar styling options through the `type`\nproperty. Bootstrap navbars [do not currently support justified nav links](http://getbootstrap.com/components/#navbar-default),\nso those are explicitly disallowed.\n\nOther bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of\nbootstrap styles applied through the `class` attribute on the components.\n\n### Bootstrap 3/4 Notes\n\nBootstrap 4 changed the default navbar styling option from `navbar-default` to `navbar-light`.\nIf you explicitly specified \"default\" in Bootstrap 3 and are migrating, you will need to change\nthis in your code. Bootstrap 4 changes `navbar-inverse` to `navbar-dark`.\n\nBootstrap 4 navbars are fluid by default without the need for an additional container. An\nadditional container is added like with Bootstrap 3 if `fluid` is `false`.",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.TypeClass"
@@ -3786,19 +3786,6 @@
         {
             "file": "addon/components/base/bs-navbar/toggle.js",
             "line": 25,
-            "description": "Bootstrap 4 Only: Defines the alignment of the toggler. Valid values are 'left' and 'right'\nto set the `navbar-toggler-*` class.",
-            "itemtype": "property",
-            "name": "align",
-            "type": "String",
-            "default": "null",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.NavbarToggle",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-navbar/toggle.js",
-            "line": 35,
             "itemtype": "event",
             "name": "onClick",
             "access": "public",
@@ -6755,7 +6742,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 106,
+            "line": 109,
             "description": "Manages the state for the responsive menu between the toggle and the content.",
             "itemtype": "property",
             "name": "collapsed",
@@ -6768,7 +6755,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 116,
+            "line": 119,
             "itemtype": "property",
             "name": "_collapsed",
             "access": "private",
@@ -6778,7 +6765,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 122,
+            "line": 125,
             "description": "Controls whether the wrapping div is a fluid container or not.",
             "itemtype": "property",
             "name": "fluid",
@@ -6791,7 +6778,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 132,
+            "line": 135,
             "description": "Specifies the position classes for the navbar, currently supporting none, \"fixed-top\", \"fixed-bottom\", and\neither \"static-top\" (BS3) or \"sticky-top\" (BS4).\nSee the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.",
             "itemtype": "property",
             "name": "position",
@@ -6804,7 +6791,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 156,
+            "line": 159,
             "description": "The action to be sent when the navbar is about to be collapsed.\n\nYou can return false to prevent collapsing the navbar automatically, and do that in your action by\nsetting `collapsed` to true.",
             "itemtype": "event",
             "name": "onCollapse",
@@ -6815,7 +6802,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 167,
+            "line": 170,
             "description": "The action to be sent after the navbar has been collapsed (including the CSS transition).",
             "itemtype": "event",
             "name": "onCollapsed",
@@ -6826,7 +6813,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 175,
+            "line": 178,
             "description": "The action to be sent when the navbar is about to be expanded.\n\nYou can return false to prevent expanding the navbar automatically, and do that in your action by\nsetting `collapsed` to false.",
             "itemtype": "event",
             "name": "onExpand",
@@ -6837,7 +6824,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 186,
+            "line": 189,
             "description": "The action to be sent after the navbar has been expanded (including the CSS transition).",
             "itemtype": "event",
             "name": "onExpanded",
@@ -6848,7 +6835,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 207,
+            "line": 210,
             "itemtype": "method",
             "name": "expand",
             "access": "private",
@@ -6858,7 +6845,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 217,
+            "line": 220,
             "itemtype": "method",
             "name": "collapse",
             "access": "private",
@@ -6868,7 +6855,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 243,
+            "line": 246,
             "description": "Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard\ntwo character Bootstrap size abbreviations. Used to set the `navbar-expand-*`\nclass. Set to `null` to disable collapsing.",
             "itemtype": "property",
             "name": "toggleBreakpoint",
@@ -6881,7 +6868,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 254,
+            "line": 257,
             "description": "Bootstrap 4 Only: Sets the background color for the navbar. Can be any color\nin the set that composes the `bg-*` classes and can be extended by creating your\nown `bg-*` classes.",
             "itemtype": "property",
             "name": "backgroundColor",

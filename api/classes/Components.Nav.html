@@ -39,7 +39,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.2.0.2e1f5137</span></h1>
+    <h1>API Docs <span class="small">1.2.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -96,7 +96,7 @@ automatically. The same applies for the <code>disabled</code> state.</p>
 with a <code>tagName</code> of &quot;li&quot; to integrate a dropdown into your nav:</p>
 <pre class="code prettyprint"><code class="language-hbs"> {{#bs-nav type=&quot;pills&quot; as |nav|}}
    {{#nav.item}}{{#nav.link-to &quot;index&quot;}}Home{{/nav.link-to}}{{/nav.item}}
-   {{#nav.dropdown tagName=&quot;li&quot; as |dd|}}
+   {{#nav.dropdown as |dd|}}
      {{#dd.toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.toggle}}
      {{#dd.menu as |ddm|}}
        {{#ddm.item}}{{#ddm.link-to &quot;foo&quot;}}Foo{{/ddm.link-to}}{{/ddm.item}}

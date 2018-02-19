@@ -39,7 +39,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.2.0.2e1f5137</span></h1>
+    <h1>API Docs <span class="small">1.2.1</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -213,6 +213,10 @@ export default Component.extend({
     // iOS to allow clicking the div. So a &#x60;click(){}&#x60; method here won&#x27;t work, we need to attach an event listener
     // directly to the element
     this.element.onclick = bind(this, this._click);
+  },
+
+  willDestroyElement() {
+    this.element.onclick = null;
   }
 
 });
