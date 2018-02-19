@@ -160,6 +160,10 @@ export default Component.extend({
     // iOS to allow clicking the div. So a `click(){}` method here won't work, we need to attach an event listener
     // directly to the element
     this.element.onclick = bind(this, this._click);
+  },
+
+  willDestroyElement() {
+    this.element.onclick = null;
   }
 
 });
