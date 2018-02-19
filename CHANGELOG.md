@@ -10,7 +10,7 @@
 
 ### Features
 
-* **Nav:** yielded DropDown automatically is a <li>, no need to set tagName="li" anymore ([aaef6be](https://github.com/kaliber5/ember-bootstrap/commit/aaef6be))
+* **Nav:** yielded DropDown automatically is a `<li>`, no need to set tagName="li" anymore ([aaef6be](https://github.com/kaliber5/ember-bootstrap/commit/aaef6be))
 
 
 
