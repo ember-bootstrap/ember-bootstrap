@@ -2,8 +2,6 @@ import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import startApp from '../../../helpers/start-app';
-import destroyApp from '../../../helpers/destroy-app';
 import test from 'ember-sinon-qunit/test-support/test';
 
 module('Integration | Component | bs-nav/item', function(hooks) {
@@ -42,20 +40,15 @@ module('Integration | Component | bs-nav/item', function(hooks) {
 
   test('active link makes nav item active', async function(assert) {
 
-    let application = startApp();
-
     await render(hbs`
       {{#bs-nav/item}}
         {{#bs-nav/link-to "application" active="foo"}}Test{{/bs-nav/link-to}}
       {{/bs-nav/item}}
     `);
     assert.dom('li').hasClass('active', 'has active class');
-    destroyApp(application);
   });
 
   test('disabled link makes nav item disabled', async function(assert) {
-
-    let application = startApp();
 
     await render(hbs`
       {{#bs-nav/item}}
@@ -63,7 +56,6 @@ module('Integration | Component | bs-nav/item', function(hooks) {
       {{/bs-nav/item}}
     `);
     assert.dom('li').hasClass('disabled', 'has disabled class');
-    destroyApp(application);
   });
 
   test('clicking item calls onClick action', async function(assert) {
