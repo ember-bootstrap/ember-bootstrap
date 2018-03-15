@@ -62,7 +62,7 @@
     "ember-power-select-blockless": "^0.3.0",
     "ember-resolver": "^4.0.0",
     "ember-sinon": "^1.0.0",
-    "ember-sinon-qunit": "^2.0.0",
+    "ember-sinon-qunit": "^3.0.0",
     "ember-source": "~2.18.0",
     "eslint-plugin-ember": "^5.0.0",
     "eslint-plugin-node": "^6.0.0",
