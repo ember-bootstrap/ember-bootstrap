@@ -1,5 +1,6 @@
 import DropdownMenu from 'ember-bootstrap/components/base/bs-dropdown/menu';
 import { computed } from '@ember/object';
+import { notEmpty } from '@ember/object/computed';
 
 export default DropdownMenu.extend({
   tagName: '',
@@ -18,6 +19,8 @@ export default DropdownMenu.extend({
   flip: true,
 
   _popperApi: null,
+
+  inDom: notEmpty('toggleElement').readOnly(),
 
   popperPlacement: computed('direction', 'align', function() {
     let placement = 'bottom-start';

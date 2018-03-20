@@ -1,5 +1,4 @@
-import { or, reads, gt } from '@ember/object/computed';
-import { assert } from '@ember/debug';
+import { and, or, reads, gt } from '@ember/object/computed';
 import Component from '@ember/component';
 import { guidFor } from '@ember/object/internals';
 import { isArray } from '@ember/array';
@@ -74,7 +73,7 @@ export default Component.extend(TransitionSupport, {
    * @type boolean
    * @private
    */
-  inDom: reads('visible'),
+  inDom: and('visible', 'triggerTargetElement'),
 
   /**
    * Set to false to disable fade animations.
@@ -241,7 +240,6 @@ export default Component.extend(TransitionSupport, {
     } else {
       el = document.querySelector(triggerElement);
     }
-    assert('Trigger element for tooltip/popover must be present', el);
     return el;
   }).volatile(),
 
@@ -618,7 +616,7 @@ export default Component.extend(TransitionSupport, {
     this._super(...arguments);
     this.addListeners();
     if (this.get('visible')) {
-      next(this, this._show, true);
+      next(this, this.show, true);
     }
   },
 

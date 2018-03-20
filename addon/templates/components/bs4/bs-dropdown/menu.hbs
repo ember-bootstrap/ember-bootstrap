@@ -1,18 +1,20 @@
-{{#ember-popper
-  class=(concat "dropdown-menu " alignClass (if isOpen " show"))
-  ariaRole=ariaRole
-  placement=popperPlacement
-  popperTarget=toggleElement
-  modifiers=popperModifiers
-  renderInPlace=renderInPlace
-  popperContainer="#ember-bootstrap-wormhole"
-  registerAPI=(action "registerPopperApi")
-}}
-  {{yield
-    (hash
-      item=(component "bs-dropdown/menu/item")
-      link-to=(component "bs-dropdown/menu/link-to")
-      divider=(component "bs-dropdown/menu/divider")
-    )
+{{#if inDom}}
+  {{#ember-popper
+    class=(concat "dropdown-menu " alignClass (if isOpen " show"))
+    ariaRole=ariaRole
+    placement=popperPlacement
+    popperTarget=toggleElement
+    renderInPlace=renderInPlace
+    popperContainer="#ember-bootstrap-wormhole"
+    modifiers=popperModifiers
+    registerAPI=(action "registerPopperApi")
   }}
-{{/ember-popper}}
+    {{yield
+      (hash
+        item=(component "bs-dropdown/menu/item")
+        link-to=(component "bs-dropdown/menu/link-to")
+        divider=(component "bs-dropdown/menu/divider")
+      )
+    }}
+  {{/ember-popper}}
+{{/if}}

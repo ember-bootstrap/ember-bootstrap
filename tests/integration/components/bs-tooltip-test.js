@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { module } from 'qunit';
+import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, focus, blur, triggerEvent, waitUntil, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
@@ -28,6 +28,38 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   function isVisible(tt) {
     return tt && tt.classList.contains('fade') && tt.classList.contains(visibilityClass());
   }
+
+  test('it has correct markup', async function(assert) {
+    // Template block usage:
+    await render(hbs`
+      {{#bs-tooltip id="tooltip-element" fade=true visible=true}}
+        template block text
+      {{/bs-tooltip}}
+    `);
+
+    assert.dom('.tooltip').exists({ count: 1 }, 'has tooltip class');
+    // assert.ok(find('.tooltip').classList.contains(tooltipPositionClass('top')), 'has placement class');
+    assert.dom('.tooltip').hasClass('fade', 'has fade class');
+    assert.dom('.tooltip').hasClass(visibilityClass(), 'has visibility class');
+    assert.equal(this.element.querySelector('.tooltip').getAttribute('role'), 'tooltip', 'has ARIA role');
+    assert.dom(versionDependent('.tooltip-arrow', '.arrow')).exists({ count: 1 }, 'has arrow');
+    assert.dom('.tooltip-inner').hasText('template block text', 'shows title');
+  });
+
+  skip('it supports different placements', async function(assert) {
+    let placements = ['top', 'left', 'bottom', 'right'];
+    this.set('placement', placements[0]);
+    await render(hbs`
+      {{#bs-tooltip/element id="tooltip-element" placement=placement}}
+        template block text
+      {{/bs-tooltip/element}}
+    `);
+    placements.forEach((placement) => {
+      this.set('placement', placement);
+      let placementClass = tooltipPositionClass(placement);
+      assert.dom('.tooltip').hasClass(placementClass, `has ${placementClass} class`);
+    });
+  });
 
   test('it shows visible tooltip', async function(assert) {
     await render(hbs`{{bs-tooltip title="Dummy" visible=true}}`);
@@ -186,6 +218,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
       hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false}}{{/if}}`
     );
     this.set('show', true);
+    await settled();
 
     assert.dom('.tooltip').exists({ count: 1 }, 'Tooltip exists.');
     assert.equal(this.element.querySelector('.tooltip').parentNode.getAttribute('id'), 'ember-bootstrap-wormhole');
@@ -197,6 +230,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
       hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false renderInPlace=true}}{{/if}}`
     );
     this.set('show', true);
+    await settled();
 
     assert.dom('.tooltip').exists({ count: 1 }, 'Tooltip exists.');
     assert.notEqual(this.element.querySelector('.tooltip').parentNode.getAttribute('id'), 'ember-bootstrap-wormhole');
@@ -298,7 +332,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   test('should position tooltip arrow centered', async function(assert) {
     let expectedArrowPosition = versionDependent(95, 94);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{bs-tooltip placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`
+      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{bs-tooltip placement="top" title="very very very very very very very long tooltip" fade=false}}</button></p></div>`
     );
 
     setupForPositioning();
@@ -311,7 +345,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   test('should adjust tooltip arrow', async function(assert) {
     let expectedArrowPosition = versionDependent(155, 150);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long popover" fade=false}}</button></p></div>`
+      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long tooltip" fade=false}}</button></p></div>`
     );
 
     setupForPositioning('right');
@@ -329,7 +363,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
 
   test('should adjust placement if not fitting in viewport', async function(assert) {
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 300px"><button class="btn" id="target">Click me{{bs-tooltip placement="bottom" autoPlacement=true title="very very very very very very very long popover" fade=false}}</button></p></div>`
+      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 300px"><button class="btn" id="target">Click me{{bs-tooltip placement="bottom" autoPlacement=true title="very very very very very very very long tooltip" fade=false}}</button></p></div>`
     );
 
     setupForPositioning('right');

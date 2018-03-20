@@ -110,7 +110,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     });
 
     await render(
-      hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}<div id="target" onClick={{action stopEvent}} />`
+      hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}<div id="target" onclick={{action stopEvent}} />`
     );
 
     await click('a.dropdown-toggle');
