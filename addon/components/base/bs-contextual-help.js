@@ -38,7 +38,7 @@ export default Component.extend(TransitionSupport, {
   title: null,
 
   /**
-   * How to position the tooltip/popover - top | bottom | left | right | auto
+   * How to position the tooltip/popover - top | bottom | left | right
    *
    * @property title
    * @type string
@@ -48,8 +48,9 @@ export default Component.extend(TransitionSupport, {
   placement: 'top',
 
   /**
-   * When `true` it will dynamically reorient the tooltip/popover. For example, if `placement` is "left", the
-   * tooltip/popover will display to the left when possible, otherwise it will display right.
+   * By default it will dynamically reorient the tooltip/popover based on the available space in the viewport. For
+   * example, if `placement` is "left", the tooltip/popover will display to the left when possible, otherwise it will
+   * display right. Set to `false` to force placement according to the `placement` property
    *
    * @property autoPlacement
    * @type boolean
