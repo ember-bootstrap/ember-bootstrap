@@ -17,8 +17,10 @@ const Promise = require('rsvp');
 
 const fs = require('fs');
 const path = require('path');
-
 const scenarios = require('./dependencyScenarios');
+
+const td = require('testdouble');
+const MockUI = require('console-ui/mock');
 
 chai.use(chaiThings);
 
@@ -35,6 +37,16 @@ function createStyleFixture(name) {
  */
 describe('Acceptance: ember generate ember-bootstrap', function() {
   setupTestHooks(this);
+
+  let prompt;
+  beforeEach(function() {
+    prompt = td.function();
+    td.replace(MockUI.prototype, 'prompt', prompt);
+  });
+
+  afterEach(function() {
+    td.reset();
+  });
 
   describe('import styles', function() {
 
@@ -308,6 +320,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
 
       it(`installs dependencies and config for ember g ember-bootstrap ${args.join(' ')}${preInstalledText}${configuredVersionText}`, function() {
         args = ['ember-bootstrap'].concat(args);
+        td.when(prompt(td.matchers.anything())).thenResolve(scenario.config);
 
         return emberNew()
           .then(() => modifyPackages(npmInstalled.map((pkg) => ({ name: pkg, dev: true }))))
