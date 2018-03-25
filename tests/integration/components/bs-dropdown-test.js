@@ -183,4 +183,17 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.ok(isVisible(this.element.querySelector('.dropdown-menu a')));
     assert.ok(this.element.querySelector('.dropdown-menu').offsetParent !== null);
   });
+
+  testBS4('dropdown menu can be rendered in a wormhole', async function(assert) {
+    await render(
+      hbs`
+        <div id="ember-bootstrap-wormhole"></div>
+        {{#bs-dropdown as |dd|}}
+          {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+          {{#dd.menu renderInPlace=false}}<li><a href="#">Something</a></li>{{/dd.menu}}
+        {{/bs-dropdown}}`
+    );
+
+    assert.dom('#ember-bootstrap-wormhole .dropdown-menu').exists({ count: 1 }, 'Menu is rendered in wormhole');
+  });
 });
