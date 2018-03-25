@@ -57,6 +57,17 @@ export default Component.extend({
    */
   inNav: false,
 
+  /**
+   * Applies only to BS4: by default the menu is rendered in the same place the dropdown. If you experience clipping
+   * issues, you can set this to false to render the menu in a wormhole at the top of the DOM.
+   *
+   * @property renderInPlace
+   * @type boolean
+   * @default true
+   * @public
+   */
+  renderInPlace: true,
+
   alignClass: computed('align', function() {
     if (this.get('align') !== 'left') {
       return `dropdown-menu-${this.get('align')}`;

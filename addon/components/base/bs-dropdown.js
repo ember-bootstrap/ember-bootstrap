@@ -94,6 +94,10 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
  wish to have a dropdown menu item refer to an external link, be sure to apply the `dropdown-item`
  class to the `<a>` tag for Bootstrap 4 compatibility.
 
+ In Bootstrap 4 the dropdown menu will be positioned using the `popper.js` library, just as the original Bootstrap
+ version does. This also allows you to set `renderInPlace=false` on the menu component to render it in a wormhole,
+ which you might want to do if you experience clipping issues by an outer `overflow: hidden` element.
+
  @class Dropdown
  @namespace Components
  @extends Ember.Component
