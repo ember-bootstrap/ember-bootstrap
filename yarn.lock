@@ -3110,16 +3110,17 @@ ember-cli-broccoli-sane-watcher@^2.0.4:
     rsvp "^3.0.18"
     sane "^1.1.1"
 
-ember-cli-build-config-editor@^0.5.0, ember-cli-build-config-editor@^0.5.1:
+ember-cli-build-config-editor@^0.5.0:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/ember-cli-build-config-editor/-/ember-cli-build-config-editor-0.5.1.tgz#0847d07b6cb6c80bc64d47c2b9dbe0d484707395"
   dependencies:
     recast "^0.12.0"
 
-ember-cli-config-builder@0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/ember-cli-config-builder/-/ember-cli-config-builder-0.1.4.tgz#b36041f15654746468a59f9ff8a55bdf3f21b4c7"
+ember-cli-config-builder@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/ember-cli-config-builder/-/ember-cli-config-builder-0.1.7.tgz#dfa40f9e2ee865db949ba1a51954ef394ef77124"
   dependencies:
+    javascript-stringify "^1.6.0"
     recast "^0.14.4"
 
 ember-cli-dependency-checker@^2.0.0:
@@ -5986,6 +5987,10 @@ istextorbinary@2.1.0:
     binaryextensions "1 || 2"
     editions "^1.1.1"
     textextensions "1 || 2"
+
+javascript-stringify@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/javascript-stringify/-/javascript-stringify-1.6.0.tgz#142d111f3a6e3dae8f4a9afd77d45855b5a9cce3"
 
 jquery-deferred@^0.3.0:
   version "0.3.1"

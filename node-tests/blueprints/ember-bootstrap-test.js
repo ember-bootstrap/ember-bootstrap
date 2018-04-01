@@ -6,8 +6,7 @@ const setupTestHooks = blueprintHelpers.setupTestHooks;
 const emberNew = blueprintHelpers.emberNew;
 const emberGenerate = blueprintHelpers.emberGenerate;
 const modifyPackages = blueprintHelpers.modifyPackages;
-
-const BuildConfigEditor = require('ember-cli-build-config-editor');
+const ConfigBuilder = require('ember-cli-config-builder');
 
 const chai = require('ember-cli-blueprint-test-helpers/chai');
 const file = chai.file;
@@ -17,7 +16,7 @@ const Promise = require('rsvp');
 
 const fs = require('fs');
 const path = require('path');
-const scenarios = require('./dependencyScenarios');
+const scenarios = require('./dependency-scenarios');
 
 const td = require('testdouble');
 const MockUI = require('console-ui/mock');
@@ -32,9 +31,6 @@ function createStyleFixture(name) {
   fs.writeFileSync(path.join(stylePath, name), 'body { color: red; }');
 }
 
-/*
- * Note: these tests fail, until https://github.com/ember-cli/ember-cli-internal-test-helpers/issues/22 is resolved
- */
 describe('Acceptance: ember generate ember-bootstrap', function() {
   setupTestHooks(this);
 
@@ -42,6 +38,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
   beforeEach(function() {
     prompt = td.function();
     td.replace(MockUI.prototype, 'prompt', prompt);
+    td.when(prompt(td.matchers.anything())).thenResolve({});
   });
 
   afterEach(function() {
@@ -276,10 +273,10 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
     }
 
     function editConfiguration(config) {
-      let source = fs.readFileSync(buildFile);
-      let editor = new BuildConfigEditor(source);
-      editor.edit('ember-bootstrap', config);
-      fs.writeFileSync(buildFile, editor.code());
+      return ConfigBuilder.create(buildFile).then((buildConfig) => {
+        buildConfig.set('ember-bootstrap', config);
+        return buildConfig.save();
+      });
     }
 
     function checkConfiguration(expectedConfig) {
@@ -287,9 +284,8 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
         return; // No expectation means nothing to check
       }
 
-      let source = fs.readFileSync(buildFile);
-      let editor = new BuildConfigEditor(source);
-      let config = editor.retrieve('ember-bootstrap');
+      let buildConfig = ConfigBuilder.createSync(buildFile);
+      let config = ConfigBuilder.parse(buildConfig.get('ember-bootstrap'));
 
       expect(config).to.exist;
       Object.keys(expectedConfig).forEach((key) => {
