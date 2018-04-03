@@ -138,6 +138,7 @@ module.exports = {
     );
     let toRemove = [];
     let toAdd = [];
+    let addons = [];
 
     for (let name in packages) {
       let pkg = packages[name];
@@ -146,6 +147,8 @@ module.exports = {
         toRemove.push({ name });
       } else if (pkg[0] === 'add') {
         toAdd.push({ name, target: pkg[1] });
+      } else if (pkg[0] === 'addon') {
+        addons.push({ name });
       }
     }
 
@@ -154,10 +157,13 @@ module.exports = {
         if (toRemove.length > 0) {
           return this.removePackagesFromProject(toRemove);
         }
-      })
-      .then(() => {
+      }).then(() => {
         if (toAdd.length > 0) {
           return this.addPackagesToProject(toAdd);
+        }
+      }).then(() => {
+        if (addons.length > 0) {
+          return this.addAddonsToProject({ packages: addons });
         }
       });
   },
@@ -240,13 +246,15 @@ module.exports = {
     let bootstrapVersion = this.addonConfig.bootstrapVersion;
     let preprocessor = this.addonConfig.preprocessor;
     let dependencies = this.project.dependencies();
+    let bsPkg = 'bootstrap';
+    let bsSassPkg = 'bootstrap-sass';
 
     let packages = {};
 
     // We need bootstrap-sass package only for bs 3 and preprocessor sass
     // so in most cases we need to delete it if present
-    if ('bootstrap-sass' in dependencies) {
-      packages['bootstrap-sass'] = ['remove'];
+    if (bsSassPkg in dependencies) {
+      packages[bsSassPkg] = ['remove'];
     }
 
     // For BS 4 we need to install bootstrap package
@@ -255,10 +263,10 @@ module.exports = {
     } else if (preprocessor === 'sass') {
       // For BS 3 and preprocessor sass we need install bootstrap-sass
       // and remove bootstrap if exists
-      if ('bootstrap' in dependencies) {
+      if (bsPkg in dependencies) {
         packages.bootstrap = ['remove'];
       }
-      packages['bootstrap-sass'] = ['add', bs3Version];
+      packages[bsSassPkg] = ['add', bs3Version];
     } else {
       // In any other case just install bootstrap package
       packages.bootstrap = ['add', bs3Version];
@@ -278,12 +286,15 @@ module.exports = {
       // remove sass if present
       if (sass in dependencies) packages[sass] = ['remove'];
       // install less if absent
-      if (!(less in dependencies)) packages[less] = ['add'];
+      if (!(less in dependencies)) packages[less] = ['addon'];
     } else if (preprocessor === 'sass') {
       // remove less if present
       if (less in dependencies) packages[less] = ['remove'];
       // install sass if absent
-      if (!(sass in dependencies)) packages[sass] = ['add'];
+      if (!(sass in dependencies)) packages[sass] = ['addon'];
+    } else {
+      if (less in dependencies) packages[less] = ['remove'];
+      if (sass in dependencies) packages[sass] = ['remove'];
     }
 
     return packages;

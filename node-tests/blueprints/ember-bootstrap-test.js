@@ -273,8 +273,9 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
     }
 
     function editConfiguration(config) {
+      if (!config) { return; }
       return ConfigBuilder.create(buildFile).then((buildConfig) => {
-        buildConfig.set('ember-bootstrap', config);
+        buildConfig.set('ember-bootstrap', ConfigBuilder.stringify(config));
         return buildConfig.save();
       });
     }
@@ -334,7 +335,6 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
             for (let pkg in scenario.dependencies.addon) {
               checkPackage('addon', pkg, scenario.dependencies.addon[pkg]);
             }
-
           })
           .then(() => checkConfiguration(config));
       });
