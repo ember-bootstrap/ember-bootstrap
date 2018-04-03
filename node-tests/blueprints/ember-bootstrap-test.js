@@ -6,7 +6,6 @@ const setupTestHooks = blueprintHelpers.setupTestHooks;
 const emberNew = blueprintHelpers.emberNew;
 const emberGenerate = blueprintHelpers.emberGenerate;
 const modifyPackages = blueprintHelpers.modifyPackages;
-const ConfigBuilder = require('ember-cli-config-builder');
 
 const chai = require('ember-cli-blueprint-test-helpers/chai');
 const file = chai.file;
@@ -16,6 +15,7 @@ const Promise = require('rsvp');
 
 const fs = require('fs');
 const path = require('path');
+const ConfigBuilder = require('ember-cli-config-builder');
 const scenarios = require('./dependency-scenarios');
 
 const td = require('testdouble');

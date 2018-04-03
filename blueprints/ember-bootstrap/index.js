@@ -9,21 +9,35 @@ const wizard = require('./wizard');
 
 const GEN_NAME = 'ember-bootstrap';
 const BUILD_FILE = 'ember-cli-build.js';
+const AVAILABLE_OPTIONS = [
+  'bootstrapVersion',
+  'importBootstrapTheme',
+  'importBootstrapCSS',
+  'importBootstrapFont',
+  'insertEmberWormholeElementToDom',
+  'whitelist'
+];
 
 function readConfig() {
   let configPath = resolve(BUILD_FILE);
 
-  return ConfigBuilder.create(configPath).then((configBuilder) => {
+  return ConfigBuilder.create(configPath).then(configBuilder => {
     let addonConfig = configBuilder.get(GEN_NAME);
     addonConfig = ConfigBuilder.parse(addonConfig);
+    if (!addonConfig) {
+      addonConfig = {};
+    }
 
     return { addonConfig, configBuilder };
   });
 }
 
 function outputConfig(ui, config) {
+  config = ConfigBuilder.stringify(config, null, '  ');
   ui.writeLine(
-    chalk.red(`Configuration file could not be edited. Manually update your ${BUILD_FILE} to include '${GEN_NAME}': ${config}`)
+    chalk.red(
+      `Configuration file could not be edited. Manually update your ${BUILD_FILE} to include '${GEN_NAME}': ${config}`
+    )
   );
 }
 
@@ -39,6 +53,27 @@ function normalizeOptions(options) {
   if (options.bootstrapVersion === 4 && options.preprocessor === 'less') {
     options.preprocessor = null;
   }
+}
+
+function normalizeConfig(config) {
+  return Object.keys(config).reduce((acc, key) => {
+    if (AVAILABLE_OPTIONS.indexOf(key) === -1) {
+      return acc;
+    }
+    acc[key] = config[key];
+    return acc;
+  }, {});
+}
+
+function stringifyConfig(config) {
+  return Object.keys(config).reduce((acc, key) => {
+    acc[`${GEN_NAME}.${key}`] = ConfigBuilder.stringify(
+      config[key],
+      null,
+      '  '
+    );
+    return acc;
+  }, {});
 }
 
 module.exports = {
@@ -61,27 +96,33 @@ module.exports = {
   beforeInstall(options) {
     normalizeOptions(options);
     // try to read config
-    return readConfig()
-      .then((config) => {
-        // save config builder to use later
-        this.configBuilder = config.configBuilder;
-        // and pass addon config to the next chain
-        return config.addonConfig;
-      })
-      // use empty object in case there are no way to read the current config
-      .catch(() => ({}))
-      .then((config) => {
-        config.preprocessor = this._detectPreprocessor(options);
-        this.addonConfig = config;
-        return this.ui.prompt(wizard.questions(options, config));
-      })
-      .then((answers) => {
-        this.addonConfig = Object.assign(
-          wizard.defaults(answers),
-          this.addonConfig,
-          answers
-        );
-      });
+    return (
+      readConfig()
+        .then(config => {
+          // save config builder to use later
+          this.configBuilder = config.configBuilder;
+          // and pass addon config to the next chain
+          return config.addonConfig;
+        })
+        // use empty object in case there are no way to read the current config
+        .catch(() => ({}))
+        .then(config => {
+          config.bootstrapVersion = this._detectBootstrapVersion(
+            options,
+            config
+          );
+          config.preprocessor = this._detectPreprocessor(options);
+          this.addonConfig = config;
+          return this.ui.prompt(wizard.questions(options, config));
+        })
+        .then(answers => {
+          this.addonConfig = Object.assign(
+            wizard.defaults(answers),
+            this.addonConfig,
+            answers
+          );
+        })
+    );
   },
 
   afterInstall() {
@@ -111,19 +152,21 @@ module.exports = {
     return this._removeBowerPackages()
       .then(() => {
         if (toRemove.length > 0) {
-          return this.removePackagesFromProject(toRemove)
+          return this.removePackagesFromProject(toRemove);
         }
       })
       .then(() => {
         if (toAdd.length > 0) {
-          return this.addPackagesToProject(toAdd)
+          return this.addPackagesToProject(toAdd);
         }
       });
   },
 
   addStyleImport() {
     let preprocessor = this.addonConfig.preprocessor;
-    if (preprocessor === 'none') { return; }
+    if (preprocessor === 'none') {
+      return;
+    }
 
     let importStatement = '\n@import "ember-bootstrap/bootstrap";\n';
     let extension = preprocessor === 'sass' ? 'scss' : 'less';
@@ -131,7 +174,9 @@ module.exports = {
     let filePath = join(stylesPath, `app.${extension}`);
 
     // Create styles folder if not exists
-    if (!fs.existsSync(stylesPath)) { fs.mkdirSync(stylesPath); }
+    if (!fs.existsSync(stylesPath)) {
+      fs.mkdirSync(stylesPath);
+    }
 
     let actionMessage = fs.existsSync(filePath)
       ? `Added import statement to ${filePath}`
@@ -142,14 +187,25 @@ module.exports = {
   },
 
   writeBuildConfig() {
-    let config = JSON.stringify(this.addonConfig);
+    let config = normalizeConfig(this.addonConfig);
+    if (Object.keys(config).length === 0) {
+      return;
+    }
     let configBuilder = this.configBuilder;
     let ui = this.ui;
 
     if (configBuilder) {
-      configBuilder.set(GEN_NAME, config);
-      return configBuilder.save()
-        .then(() => ui.writeLine(chalk.green(`Added ember-bootstrap configuration to '${BUILD_FILE}'.`)))
+      configBuilder.set(GEN_NAME, '{}');
+      configBuilder.setProperties(stringifyConfig(config));
+      return configBuilder
+        .save()
+        .then(() =>
+          ui.writeLine(
+            chalk.green(
+              `Added ember-bootstrap configuration to '${BUILD_FILE}'.`
+            )
+          )
+        )
         .catch(() => outputConfig(ui, config));
     }
 
@@ -162,12 +218,13 @@ module.exports = {
     let dependencies = this.project.bowerDependencies();
     let bowerJSONPath = resolve('bower.json');
 
-
-    let promises = packages.map((pkg) => {
+    let promises = packages.map(pkg => {
       if (pkg in dependencies) {
-        ui.writeLine(chalk.green(`  uninstall bower package ${chalk.white(pkg)}`));
+        ui.writeLine(
+          chalk.green(`  uninstall bower package ${chalk.white(pkg)}`)
+        );
 
-        return fs.readJson(bowerJSONPath).then((bowerJSON) => {
+        return fs.readJson(bowerJSONPath).then(bowerJSON => {
           delete bowerJSON.dependencies[pkg];
           return fs.writeJson(bowerJSONPath, bowerJSON, { spaces: 2 });
         });
@@ -251,5 +308,15 @@ module.exports = {
       preprocessor = 'none';
     }
     return preprocessor;
+  },
+
+  _detectBootstrapVersion(options, config) {
+    let bootstrapVersion = options.bootstrapVersion;
+
+    if (!bootstrapVersion) {
+      bootstrapVersion = config.bootstrapVersion || 3;
+    }
+
+    return bootstrapVersion;
   }
 };

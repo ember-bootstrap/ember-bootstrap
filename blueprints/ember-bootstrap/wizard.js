@@ -12,26 +12,32 @@ const GUARD = {
   bs3(config, answers) {
     return config.bootstrapVersion === 3 || answers.bootstrapVersion === 3;
   },
+  noBS(config /*, answers*/) {
+    return !config.bootstrapVersion;
+  },
   noPreprocessor(config, answers) {
-    return !config.preprocessor || config.preprocessor === 'none' || answers.preprocessor === 'none';
+    return (
+      !config.preprocessor ||
+      config.preprocessor === 'none' ||
+      answers.preprocessor === 'none'
+    );
   }
 };
 
 function buildGuards(config) {
-  return (...guards) => (answers) => guards.every((g) => g(config, answers));
+  return (...guards) => answers => guards.every(g => g(config, answers));
 }
 
 function defaults(answers) {
-  return ({
+  return {
     bootstrapVersion: 3,
     preprocessor: 'none',
     importBootstrapTheme: false,
     importBootstrapCSS: answers.preprocessor === 'none',
     importBootstrapFont: answers.bootstrapVersion === 3,
     insertEmberWormholeElementToDom: true,
-    whitelist: [],
-    blacklist: []
-  });
+    whitelist: []
+  };
 }
 
 function getDefault(config, key, fallback) {
@@ -41,17 +47,33 @@ function getDefault(config, key, fallback) {
   return fallback;
 }
 
-function buildComponentsChoices(answers) {
-  let componentsPath = path.resolve('app', 'components', '*.js');
-  return fg(componentsPath)
-    .then((files) => files.map((file) => path.basename(file, '.js')))
-    .then((components) => {
-      return components.map((component) => ({
-        name: component.replace('bs-', ''),
-        value: component,
-        checked: answers.indexOf(component) !== -1
-      }));
-    });
+function getComponents() {
+  let componentsPath = path.resolve(
+    __dirname,
+    '..',
+    '..',
+    'app',
+    'components',
+    '*.js'
+  );
+  let files = fg.sync(componentsPath);
+  return files.map(file => path.basename(file, '.js'));
+}
+
+function buildComponentsChoices(config) {
+  let isChecked = component => {
+    return (
+      !config.whitelist ||
+      config.whitelist.length === 0 ||
+      config.whitelist.indexOf(component) !== -1
+    );
+  };
+
+  return getComponents().map(component => ({
+    name: component.replace('bs-', ''),
+    value: component,
+    checked: isChecked(component)
+  }));
 }
 
 function questions(options, config) {
@@ -63,21 +85,21 @@ function questions(options, config) {
       name: 'customInstall',
       message: 'Do you want to customize installation of ember-bootstrap?',
       type: 'confirm',
-      default: false,
+      default: false
     },
     {
       name: 'bootstrapVersion',
       message: 'Choose desired Bootstrap version:',
       type: 'list',
-      default: BS_VERSIONS.indexOf(config.bootstrapVersion || 3),
-      choices: BS_VERSIONS.map((v) => ({ name: 'v' + v, value: v })),
-      when: !options.bootstrapVersion
+      default: BS_VERSIONS.indexOf(config.bootstrapVersion),
+      choices: BS_VERSIONS.map(v => ({ name: 'v' + v, value: v })),
+      when: guards(GUARD.customInstall, GUARD.noBS)
     },
     {
       name: 'preprocessor',
       message: 'Choose your CSS preprocessor:',
       type: 'list',
-      default: PREPROCESSORS.indexOf(config.preprocessor || 'none'),
+      default: PREPROCESSORS.indexOf(config.preprocessor),
       choices(answers) {
         let preprocessors = PREPROCESSORS;
         if (answers.bootstrapVersion === 4) {
@@ -85,7 +107,7 @@ function questions(options, config) {
         }
         return preprocessors;
       },
-      when: !options.preprocessor
+      when: guards(GUARD.customInstall, GUARD.noPreprocessor)
     },
     {
       name: 'importBootstrapTheme',
@@ -110,18 +132,22 @@ function questions(options, config) {
     },
     {
       name: 'insertEmberWormholeElementToDom',
-      message: 'Do you want to automatically insert a div into your index.html, where Bootstrap\'s modals and tooltips will be rendered to.\n' +
-               chalk.red('If you set this to false, you will have to add an <div id="ember-bootstrap-wormhole"></div> element by yourself.'),
+      message:
+        "Do you want to automatically insert a div into your index.html, where Bootstrap's modals and tooltips will be rendered to.\n" +
+        chalk.red(
+          'If you set this to false, you will have to add an <div id="ember-bootstrap-wormhole"></div> element by yourself.'
+        ),
       type: 'confirm',
       default: getDefault(config, 'insertEmberWormholeElementToDom', true),
       when: guards(GUARD.customInstall)
     },
     {
       name: 'whitelist',
-      message: 'Include only the chosen components into your build, to reduce your JavaScript bundle size.\n' +
-               chalk.red('Excluded components will not be available.'),
+      message:
+        'Include only the chosen components into your build, to reduce your JavaScript bundle size.\n' +
+        chalk.red('Excluded components will not be available.'),
       type: 'checkbox',
-      choices: buildComponentsChoices,
+      choices: buildComponentsChoices(config),
       when: guards(GUARD.customInstall)
     }
   ];
@@ -131,5 +157,6 @@ module.exports = {
   questions,
   PREPROCESSORS,
   BS_VERSIONS,
-  defaults
+  defaults,
+  getComponents
 };
