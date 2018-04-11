@@ -99,7 +99,7 @@
     "ember-concurrency": "^0.8.7",
     "ember-in-element-polyfill": "^0.1.2",
     "ember-maybe-in-element": "^0.1.3",
-    "ember-popper": "^0.8.3",
+    "ember-popper": "^0.9.0",
     "ember-runtime-enumerable-includes-polyfill": "^2.0.0",
     "findup-sync": "^1.0.0",
     "fs-extra": "^4.0.1",
