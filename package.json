@@ -8,9 +8,10 @@
   "scripts": {
     "lint:js": "eslint ./*.js addon addon-test-support app config lib server test-support tests",
     "start": "ember serve",
-    "test": "ember try:each",
+    "test": "ember test",
     "build": "ember build",
-    "nodetest": "mocha node-tests --recursive"
+    "nodetest": "mocha node-tests --recursive",
+    "test:all": "ember try:each"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,7 @@
     "chai": "^4.0.0",
     "chai-things": "^0.2.0",
     "ember-bootstrap-power-select": "^1.0.0-alpha.1",
-    "ember-cli": "~3.0.0",
+    "ember-cli": "~3.1.0",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-blueprint-test-helpers": "^0.18.0",
     "ember-cli-dependency-checker": "^2.0.0",
@@ -62,11 +63,11 @@
     "ember-resolver": "^4.0.0",
     "ember-sinon": "^2.1.0",
     "ember-sinon-qunit": "^2.0.0",
-    "ember-source": "~3.0.0",
+    "ember-source": "~3.1.0",
     "ember-source-channel-url": "^1.0.1",
     "ember-try": "^0.2.23",
     "eslint-plugin-ember": "^5.0.0",
-    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-node": "^6.0.1",
     "glob": "^7.1.1",
     "gulp": "^3.9.0",
     "gulp-conventional-changelog": "^1.1.0",
