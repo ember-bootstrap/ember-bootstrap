@@ -39,7 +39,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.2.1</span></h1>
+    <h1>API Docs <span class="small">1.2.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -51,8 +51,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { or, reads, gt } from &#x27;@ember/object/computed&#x27;;
-import { assert } from &#x27;@ember/debug&#x27;;
+import { and, or, reads, gt } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { guidFor } from &#x27;@ember/object/internals&#x27;;
 import { isArray } from &#x27;@ember/array&#x27;;
@@ -91,7 +90,7 @@ export default Component.extend(TransitionSupport, {
   title: null,
 
   /**
-   * How to position the tooltip/popover - top | bottom | left | right | auto
+   * How to position the tooltip/popover - top | bottom | left | right
    *
    * @property title
    * @type string
@@ -101,8 +100,9 @@ export default Component.extend(TransitionSupport, {
   placement: &#x27;top&#x27;,
 
   /**
-   * When &#x60;true&#x60; it will dynamically reorient the tooltip/popover. For example, if &#x60;placement&#x60; is &quot;left&quot;, the
-   * tooltip/popover will display to the left when possible, otherwise it will display right.
+   * By default it will dynamically reorient the tooltip/popover based on the available space in the viewport. For
+   * example, if &#x60;placement&#x60; is &quot;left&quot;, the tooltip/popover will display to the left when possible, otherwise it will
+   * display right. Set to &#x60;false&#x60; to force placement according to the &#x60;placement&#x60; property
    *
    * @property autoPlacement
    * @type boolean
@@ -126,7 +126,7 @@ export default Component.extend(TransitionSupport, {
    * @type boolean
    * @private
    */
-  inDom: reads(&#x27;visible&#x27;),
+  inDom: and(&#x27;visible&#x27;, &#x27;triggerTargetElement&#x27;),
 
   /**
    * Set to false to disable fade animations.
@@ -293,7 +293,6 @@ export default Component.extend(TransitionSupport, {
     } else {
       el = document.querySelector(triggerElement);
     }
-    assert(&#x27;Trigger element for tooltip/popover must be present&#x27;, el);
     return el;
   }).volatile(),
 
@@ -670,7 +669,7 @@ export default Component.extend(TransitionSupport, {
     this._super(...arguments);
     this.addListeners();
     if (this.get(&#x27;visible&#x27;)) {
-      next(this, this._show, true);
+      next(this, this.show, true);
     }
   },
 

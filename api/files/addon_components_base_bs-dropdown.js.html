@@ -39,7 +39,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>API Docs <span class="small">1.2.1</span></h1>
+    <h1>API Docs <span class="small">1.2.2</span></h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="apidocs">
@@ -146,6 +146,10 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
  version and will also provide automatic &#x60;active&#x60; highlighting on dropdown menu items. If you
  wish to have a dropdown menu item refer to an external link, be sure to apply the &#x60;dropdown-item&#x60;
  class to the &#x60;&lt;a&gt;&#x60; tag for Bootstrap 4 compatibility.
+
+ In Bootstrap 4 the dropdown menu will be positioned using the &#x60;popper.js&#x60; library, just as the original Bootstrap
+ version does. This also allows you to set &#x60;renderInPlace=false&#x60; on the menu component to render it in a wormhole,
+ which you might want to do if you experience clipping issues by an outer &#x60;overflow: hidden&#x60; element.
 
  @class Dropdown
  @namespace Components

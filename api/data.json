@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "1.2.1"
+        "version": "1.2.2"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -1630,7 +1630,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 22,
+            "line": 21,
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.TransitionSupport"
@@ -1649,7 +1649,7 @@
             "namespace": "Components",
             "file": "addon/components/base/bs-dropdown.js",
             "line": 6,
-            "description": "Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting\nof a toggle element, and the dropdown menu itself.\n\n### Usage\n\nUse this component together with the yielded contextual components:\n* [Components.DropdownToggle](Components.DropdownToggle.html)\n* [Components.DropdownButton](Components.DropdownButton.html)\n* [Components.DropdownMenu](Components.DropdownMenu.html)\n  * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)\n  * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)\n  * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)\n\n```hbs\n{{#bs-dropdown as |dd|}}\n  {{#dd.toggle}}Dropdown <span class=\"caret\"></span>{{/dd.toggle}}\n  {{#dd.menu as |ddm|}}\n    {{#ddm.item}}\n      {{#ddm.link-to \"index\"}}Something{{/ddm.link-to}}\n    {{/ddm.item}}\n    {{ddm.divider}}\n    {{#ddm.item}}\n      {{#ddm.link-to \"index\"}}Something different{{/ddm.link-to}}\n    {{/ddm.item}}\n  {{/dd.menu}}\n{{/bs-dropdown}}\n```\n\nIf you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`\ncontextual component rather than a standalone dropdown to ensure the correct styling\nregardless of your Bootstrap version.\n\n### Button dropdowns\n\nTo use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the\n`Components.DropdownButton` component as the toggle:\n\n```hbs\n{{#bs-dropdown as |dd|}}\n  {{#dd.button}}Dropdown <span class=\"caret\"></span>{{/dd.button}}\n  {{#dd.menu as |ddm|}}\n      {{#ddm.item}}{{#ddm.link-to \"index\"}}Something{{/ddm.link-to}}{{/ddm.item}}\n      {{#ddm.item}}{{#ddm.link-to \"index\"}}Something different{{/ddm.link-to}}{{/ddm.item}}\n    {{/dd.menu}}\n{{/bs-dropdown}}\n```\n\nIt has all the functionality of a `Components.Button` with additional dropdown support.\n\n### Split button dropdowns\n\nTo have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a\n`Components.Button` component and a `Components.DropdownButton`:\n\n```hbs\n{{#bs-dropdown as |dd|}}\n  {{#bs-button}}Dropdown{{/bs-button}}\n  {{#dd.button}}Dropdown <span class=\"caret\"></span>{{/dd.button}}\n  {{#dd.menu as |ddm|}}\n    {{#ddm.item}}{{#ddm.link-to \"index\"}}Something{{/ddm.link-to}}{{/ddm.item}}\n    {{#ddm.item}}{{#ddm.link-to \"index\"}}Something different{{/ddm.link-to}}{{/ddm.item}}\n  {{/dd.menu}}\n  {{/bs-dropdown}}\n```\n\n### Dropup style\n\nSet the `direction` property to \"up\" to switch to a \"dropup\" style:\n\n```hbs\n{{#bs-dropdown direction=\"up\" as |dd|}}\n...\n{{/bs-dropdown}}\n```\n\n### Bootstrap 3/4 Notes\n\nIf you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`\ncontextual component rather than a standalone dropdown to ensure the correct styling\nregardless of your Bootstrap version.\n\nIf you use the [dropdown divider](Component.DropdownMenuDivider), you don't have to worry\nabout differences in the markup between versions.\n\nBe sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application\nlinks as dropdown menu items. This is essential for proper styling regardless of Bootstrap\nversion and will also provide automatic `active` highlighting on dropdown menu items. If you\nwish to have a dropdown menu item refer to an external link, be sure to apply the `dropdown-item`\nclass to the `<a>` tag for Bootstrap 4 compatibility.",
+            "description": "Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting\nof a toggle element, and the dropdown menu itself.\n\n### Usage\n\nUse this component together with the yielded contextual components:\n* [Components.DropdownToggle](Components.DropdownToggle.html)\n* [Components.DropdownButton](Components.DropdownButton.html)\n* [Components.DropdownMenu](Components.DropdownMenu.html)\n  * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)\n  * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)\n  * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)\n\n```hbs\n{{#bs-dropdown as |dd|}}\n  {{#dd.toggle}}Dropdown <span class=\"caret\"></span>{{/dd.toggle}}\n  {{#dd.menu as |ddm|}}\n    {{#ddm.item}}\n      {{#ddm.link-to \"index\"}}Something{{/ddm.link-to}}\n    {{/ddm.item}}\n    {{ddm.divider}}\n    {{#ddm.item}}\n      {{#ddm.link-to \"index\"}}Something different{{/ddm.link-to}}\n    {{/ddm.item}}\n  {{/dd.menu}}\n{{/bs-dropdown}}\n```\n\nIf you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`\ncontextual component rather than a standalone dropdown to ensure the correct styling\nregardless of your Bootstrap version.\n\n### Button dropdowns\n\nTo use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the\n`Components.DropdownButton` component as the toggle:\n\n```hbs\n{{#bs-dropdown as |dd|}}\n  {{#dd.button}}Dropdown <span class=\"caret\"></span>{{/dd.button}}\n  {{#dd.menu as |ddm|}}\n      {{#ddm.item}}{{#ddm.link-to \"index\"}}Something{{/ddm.link-to}}{{/ddm.item}}\n      {{#ddm.item}}{{#ddm.link-to \"index\"}}Something different{{/ddm.link-to}}{{/ddm.item}}\n    {{/dd.menu}}\n{{/bs-dropdown}}\n```\n\nIt has all the functionality of a `Components.Button` with additional dropdown support.\n\n### Split button dropdowns\n\nTo have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a\n`Components.Button` component and a `Components.DropdownButton`:\n\n```hbs\n{{#bs-dropdown as |dd|}}\n  {{#bs-button}}Dropdown{{/bs-button}}\n  {{#dd.button}}Dropdown <span class=\"caret\"></span>{{/dd.button}}\n  {{#dd.menu as |ddm|}}\n    {{#ddm.item}}{{#ddm.link-to \"index\"}}Something{{/ddm.link-to}}{{/ddm.item}}\n    {{#ddm.item}}{{#ddm.link-to \"index\"}}Something different{{/ddm.link-to}}{{/ddm.item}}\n  {{/dd.menu}}\n  {{/bs-dropdown}}\n```\n\n### Dropup style\n\nSet the `direction` property to \"up\" to switch to a \"dropup\" style:\n\n```hbs\n{{#bs-dropdown direction=\"up\" as |dd|}}\n...\n{{/bs-dropdown}}\n```\n\n### Bootstrap 3/4 Notes\n\nIf you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`\ncontextual component rather than a standalone dropdown to ensure the correct styling\nregardless of your Bootstrap version.\n\nIf you use the [dropdown divider](Component.DropdownMenuDivider), you don't have to worry\nabout differences in the markup between versions.\n\nBe sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application\nlinks as dropdown menu items. This is essential for proper styling regardless of Bootstrap\nversion and will also provide automatic `active` highlighting on dropdown menu items. If you\nwish to have a dropdown menu item refer to an external link, be sure to apply the `dropdown-item`\nclass to the `<a>` tag for Bootstrap 4 compatibility.\n\nIn Bootstrap 4 the dropdown menu will be positioned using the `popper.js` library, just as the original Bootstrap\nversion does. This also allows you to set `renderInPlace=false` on the menu component to render it in a wormhole,\nwhich you might want to do if you experience clipping issues by an outer `overflow: hidden` element.",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -2449,6 +2449,19 @@
             "name": "inNav",
             "type": "{boolean}",
             "access": "private",
+            "tagname": "",
+            "class": "Components.DropdownMenu",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-dropdown/menu.js",
+            "line": 60,
+            "description": "Applies only to BS4: by default the menu is rendered in the same place the dropdown. If you experience clipping\nissues, you can set this to false to render the menu in a wormhole at the top of the DOM.",
+            "itemtype": "property",
+            "name": "renderInPlace",
+            "type": "boolean",
+            "default": "true",
+            "access": "public",
             "tagname": "",
             "class": "Components.DropdownMenu",
             "namespace": "Components"
@@ -5262,7 +5275,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 33,
+            "line": 32,
             "itemtype": "property",
             "name": "title",
             "type": "string",
@@ -5273,8 +5286,8 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 40,
-            "description": "How to position the tooltip/popover - top | bottom | left | right | auto",
+            "line": 39,
+            "description": "How to position the tooltip/popover - top | bottom | left | right",
             "itemtype": "property",
             "name": "title",
             "type": "string",
@@ -5286,8 +5299,8 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 50,
-            "description": "When `true` it will dynamically reorient the tooltip/popover. For example, if `placement` is \"left\", the\ntooltip/popover will display to the left when possible, otherwise it will display right.",
+            "line": 49,
+            "description": "By default it will dynamically reorient the tooltip/popover based on the available space in the viewport. For\nexample, if `placement` is \"left\", the tooltip/popover will display to the left when possible, otherwise it will\ndisplay right. Set to `false` to force placement according to the `placement` property",
             "itemtype": "property",
             "name": "autoPlacement",
             "type": "boolean",
@@ -5510,7 +5523,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 247,
+            "line": 246,
             "description": "The event(s) that should trigger the tooltip/popover - click | hover | focus.\nYou can set this to a single event or multiple events, given as an array or a string separated by spaces.",
             "itemtype": "property",
             "name": "triggerEvents",
@@ -5523,7 +5536,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 276,
+            "line": 275,
             "description": "If true component will render in place, rather than be wormholed.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -5536,7 +5549,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 286,
+            "line": 285,
             "itemtype": "property",
             "name": "_renderInPlace",
             "type": "boolean",
@@ -5547,7 +5560,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 295,
+            "line": 294,
             "description": "Current hover state, 'in', 'out' or null",
             "itemtype": "property",
             "name": "hoverState",
@@ -5559,7 +5572,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 304,
+            "line": 303,
             "description": "Current state for events",
             "itemtype": "property",
             "name": "inState",
@@ -5571,7 +5584,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 315,
+            "line": 314,
             "description": "Ember.run timer",
             "itemtype": "property",
             "name": "timer",
@@ -5582,7 +5595,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 323,
+            "line": 322,
             "description": "This action is called immediately when the tooltip/popover is about to be shown.",
             "itemtype": "event",
             "name": "onShow",
@@ -5593,7 +5606,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 332,
+            "line": 331,
             "description": "This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).",
             "itemtype": "event",
             "name": "onShown",
@@ -5604,7 +5617,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 341,
+            "line": 340,
             "description": "This action is called immediately when the tooltip/popover is about to be hidden.",
             "itemtype": "event",
             "name": "onHide",
@@ -5615,7 +5628,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 350,
+            "line": 349,
             "description": "This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).",
             "itemtype": "event",
             "name": "onHidden",
@@ -5626,7 +5639,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 359,
+            "line": 358,
             "description": "Called when a show event has been received",
             "itemtype": "method",
             "name": "enter",
@@ -5643,7 +5656,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 392,
+            "line": 391,
             "description": "Called when a hide event has been received",
             "itemtype": "method",
             "name": "leave",
@@ -5660,7 +5673,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 424,
+            "line": 423,
             "description": "Called for a click event",
             "itemtype": "method",
             "name": "toggle",
@@ -5677,7 +5690,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 448,
+            "line": 447,
             "description": "Show the tooltip/popover",
             "itemtype": "method",
             "name": "show",
@@ -5688,7 +5701,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 510,
+            "line": 509,
             "description": "Position the tooltip/popover's arrow",
             "itemtype": "method",
             "name": "replaceArrow",
@@ -5713,7 +5726,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 525,
+            "line": 524,
             "description": "Hide the tooltip/popover",
             "itemtype": "method",
             "name": "hide",
@@ -5724,7 +5737,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 570,
+            "line": 569,
             "itemtype": "method",
             "name": "addListeners",
             "access": "private",
@@ -5734,7 +5747,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 589,
+            "line": 588,
             "itemtype": "method",
             "name": "removeListeners",
             "access": "private",
@@ -5744,7 +5757,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 106,
+            "line": 110,
             "description": "This property reflects the state of the dropdown, whether it is open or closed.",
             "itemtype": "property",
             "name": "isOpen",
@@ -5757,7 +5770,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 116,
+            "line": 120,
             "description": "By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.",
             "itemtype": "property",
             "name": "closeOnMenuClick",
@@ -5770,7 +5783,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 126,
+            "line": 130,
             "description": "By default the dropdown menu will expand downwards. Set to 'up' to expand upwards.\nBS4 also allows 'left' and 'right'",
             "itemtype": "property",
             "name": "direction",
@@ -5783,7 +5796,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 137,
+            "line": 141,
             "description": "Indicates the dropdown is being used as a navigation item dropdown.",
             "itemtype": "property",
             "name": "inNav",
@@ -5796,7 +5809,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 147,
+            "line": 151,
             "description": "A computed property to generate the suiting class for the dropdown container, either \"dropdown\", \"dropup\" or \"btn-group\".\nBS4 only: \"dropleft\", \"dropright\"",
             "itemtype": "property",
             "name": "containerClass",
@@ -5809,7 +5822,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 164,
+            "line": 168,
             "itemtype": "property",
             "name": "menuElement",
             "access": "private",
@@ -5819,7 +5832,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 172,
+            "line": 176,
             "itemtype": "property",
             "name": "toggleElement",
             "access": "private",
@@ -5829,7 +5842,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 180,
+            "line": 184,
             "description": "Reference to the child toggle (Toggle or Button)",
             "itemtype": "property",
             "name": "toggle",
@@ -5840,7 +5853,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 188,
+            "line": 192,
             "description": "Action is called when dropdown is about to be shown",
             "itemtype": "event",
             "name": "onShow",
@@ -5858,7 +5871,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 197,
+            "line": 201,
             "description": "Action is called when dropdown is about to be hidden",
             "itemtype": "event",
             "name": "onHide",
@@ -5876,7 +5889,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 247,
+            "line": 251,
             "description": "Handler for click events to close the dropdown",
             "itemtype": "method",
             "name": "closeOnClickHandler",
