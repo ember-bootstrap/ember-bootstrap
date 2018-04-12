@@ -1,3 +1,18 @@
+<a name="1.2.2"></a>
+## [1.2.2](https://github.com/kaliber5/ember-bootstrap/compare/1.2.1...1.2.2) (2018-04-12)
+
+
+### Bug Fixes
+
+* **Tooltip/Popover:** updated ember-popper, which fixes incompatibility with Ember 3.1 ([0d81cc3](https://github.com/kaliber5/ember-bootstrap/commit/0d81cc3))
+
+
+### Features
+
+* **Dropdown:** in BS4 the dropdown menu can be rendered in a wormhole by setting `renderInPlace=false` to prevent clipping issues ([d0dcbb3](https://github.com/kaliber5/ember-bootstrap/commit/d0dcbb3)), closes [#561](https://github.com/kaliber5/ember-bootstrap/issues/561)
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/kaliber5/ember-bootstrap/compare/1.2.0...1.2.1) (2018-02-19)
 
