@@ -29,18 +29,18 @@ module('Integration | Component | bs-form/group', function(hooks) {
 
   test('component has form-group bootstrap class', async function(assert) {
     await render(hbs`{{bs-form/group}}`);
-    assert.dom(':first-child').hasClass('form-group', 'component has form-group class');
+    assert.dom('.form-group').exists('component has form-group class');
   });
 
   testBS4('component has row class for horizontal layouts', async function(assert) {
     await render(hbs`{{bs-form/group formLayout="horizontal"}}`);
-    assert.dom(':first-child').hasClass('row', 'component has row class');
+    assert.dom('.row').exists('component has row class');
   });
 
   testBS4('component has form-check class for group with checkbox control type', async function(assert) {
     await render(hbs`{{bs-form/group controlType="checkbox"}}`);
-    assert.dom(':first-child').hasClass('form-check', 'component has form-check class');
-    assert.dom(':first-child').hasNoClass('form-group', 'component has no form-group class');
+    assert.dom('.form-check').exists('component has form-check class');
+    assert.dom('.form-group').doesNotExist('component has no form-group class');
   });
 
   testBS3('support size classes', async function(assert) {
@@ -64,11 +64,11 @@ module('Integration | Component | bs-form/group', function(hooks) {
     await render(hbs`{{#bs-form/group validation=validation}}{{/bs-form/group}}`);
     this.set('validation', state);
     validationConfig.formGroupClasses.forEach((className) => {
-      assert.dom(':first-child').hasClass(className, `component has ${className} class`);
+      assert.dom(`.${className}`).exists(`component has ${className} class`);
     });
     assert.dom('.form-control-feedback').exists({ count: 1 }, 'component has feedback icon');
     validationConfig.iconClasses.forEach((className) => {
-      assert.equal(this.element.querySelector('.form-control-feedback').classList.contains(className), 1, `icon has ${className} class`);
+      assert.dom('.form-control-feedback').hasClass(className, `icon has ${className} class`);
     });
   }
 

@@ -78,7 +78,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
 
   test('component has form-group bootstrap class', async function(assert) {
     await render(hbs`{{bs-form/element}}`);
-    assert.dom(':first-child').hasClass('form-group', 'component has form-group class');
+    assert.dom('.form-group').exists('component has form-group class');
   });
 
   test('setting label property displays label tag', async function(assert) {

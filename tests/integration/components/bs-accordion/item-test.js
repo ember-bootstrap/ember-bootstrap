@@ -23,8 +23,8 @@ module('Integration | Component | bs-accordion-item', function(hooks) {
 
   test('accordion item has correct default markup', async function(assert) {
     await render(hbs`{{#bs-accordion/item title="TITLE"}}CONTENT{{/bs-accordion/item}}`);
-    assert.dom(':first-child').hasClass(accordionClassFor(), `has ${accordionClassFor()} class`);
-    assert.dom(':first-child').hasClass(accordionClassFor('default'), `has ${accordionClassFor('default')} class`);
+    assert.dom(`.${accordionClassFor()}`).exists(`has ${accordionClassFor()} class`);
+    assert.dom(`.${accordionClassFor()}`).hasClass(accordionClassFor('default'), `has ${accordionClassFor('default')} class`);
     assert.dom(`.${accordionItemHeadClass()}`).hasClass('collapsed', `has ${accordionItemHeadClass()} class`);
     assert.dom('[role="tabpanel"]').hasClass('collapse', 'has collapse class');
     assert.dom('.collapse').hasNoClass(visibilityClass(), '.collapse is hidden');

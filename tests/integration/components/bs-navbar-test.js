@@ -316,7 +316,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
     await click('button');
     assert.ok(action.calledOnce, 'onExpand has been called.');
 
-    assert.dom(':first-child').hasNoClass('collapsing', 'no transition');
+    assert.dom('.collapsing').doesNotExist('no transition');
   });
 
   test('navbar is not collapsed when onCollapse action returns false', async function(assert) {
@@ -338,7 +338,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
     await click('button');
     assert.ok(action.calledOnce, 'onCollapse has been called.');
 
-    assert.dom(':first-child').hasNoClass('collapsing', 'no transition');
+    assert.dom('.collapsing').doesNotExist('no transition');
   });
 
   test('clicking the toggle does not modify the public collapsed property', async function(assert) {

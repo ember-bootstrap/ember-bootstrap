@@ -29,7 +29,7 @@ module('Integration | Component | bs-dropdown/menu/item', function(hooks) {
       </span>
     `);
 
-    assert.dom('div').doesNotExist('renders as no element');
+    assert.dom('span > div').doesNotExist('renders as no element');
     assert.dom('*').hasText('template block text');
   });
 });

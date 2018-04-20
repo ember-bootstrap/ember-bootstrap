@@ -18,9 +18,9 @@ module('Integration | Component | bs-button-group', function(hooks) {
       hbs`{{#bs-button-group size="lg" justified=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
     );
 
-    assert.dom(':first-child').hasClass('btn-group', 'has btn-group class');
-    assert.dom(':first-child').hasClass('btn-group-lg', 'has size class');
-    assert.dom(':first-child').hasClass('btn-group-justified', 'has justified class');
+    assert.dom('.btn-group').exists('has btn-group class');
+    assert.dom('.btn-group').hasClass('btn-group-lg', 'has size class');
+    assert.dom('.btn-group').hasClass('btn-group-justified', 'has justified class');
   });
 
   test('button group supports vertical layout', async function(assert) {
@@ -28,8 +28,8 @@ module('Integration | Component | bs-button-group', function(hooks) {
       hbs`{{#bs-button-group vertical=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
     );
 
-    assert.dom(':first-child').hasNoClass('btn-group', 'has not btn-group class');
-    assert.dom(':first-child').hasClass('btn-group-vertical', 'has vertical class');
+    assert.dom('.btn-group').doesNotExist('has not btn-group class');
+    assert.dom('.btn-group-vertical').exists('has vertical class');
   });
 
   test('radio button group calls onChange with value of selected button', async function(assert) {

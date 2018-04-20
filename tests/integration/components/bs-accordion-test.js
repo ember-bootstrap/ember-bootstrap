@@ -25,7 +25,7 @@ module('Integration | Component | bs-accordion', function(hooks) {
       {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
       {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
     {{/bs-accordion}}`);
-    assert.dom(':first-child').hasClass('panel-group', 'accordion has panel-group class');
+    assert.dom('.panel-group').exists('accordion has panel-group class');
   });
 
   test('accordion has correct default markup', async function(assert) {
