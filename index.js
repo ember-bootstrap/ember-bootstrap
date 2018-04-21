@@ -231,6 +231,11 @@ module.exports = {
     return this.getBootstrapVersion() === 3 ? 4 : 3;
   },
 
+  treeForApp(tree) {
+    tree = this.filterComponents(tree);
+    return this._super.treeForApp.call(this, tree);
+  },
+
   treeForAddon(tree) {
     let bsVersion = this.getBootstrapVersion();
     let otherBsVersion = this.getOtherBootstrapVersion();
