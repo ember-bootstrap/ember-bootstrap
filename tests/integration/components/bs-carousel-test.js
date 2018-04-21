@@ -61,8 +61,8 @@ module('Integration | Component | bs-carousel', function(hooks) {
   test('carousel has correct markup', async function(assert) {
     await render(hbs`{{bs-carousel interval=0}}`);
 
-    assert.dom(':first-child').hasClass('carousel', 'has carousel class');
-    assert.dom(':first-child').hasClass('slide', 'has slide class');
+    assert.dom('.carousel').exists('has carousel class');
+    assert.dom('.carousel').hasClass('slide', 'has slide class');
     assert.dom('.carousel-inner').exists({ count: 1 }, 'has carousel-inner');
   });
 

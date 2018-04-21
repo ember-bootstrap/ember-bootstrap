@@ -12,7 +12,7 @@ module('Integration | Component | bs form/element/help text', function(hooks) {
       {{bs-form/element/help-text text="foo bar"}}
     `);
 
-    assert.dom('div').hasClass(formHelpTextClass());
-    assert.dom('div').hasText('foo bar');
+    assert.dom(`.${formHelpTextClass()}`).exists();
+    assert.dom('*').hasText('foo bar');
   });
 });

@@ -22,47 +22,47 @@ module('Integration | Component | bs-dropdown', function(hooks) {
   test('dropdown container has dropdown class', async function(assert) {
     await render(hbs`{{#bs-dropdown}}Test{{/bs-dropdown}}`);
 
-    assert.dom(':first-child').hasClass('dropdown', 'has dropdown class');
+    assert.dom('.dropdown').exists('has dropdown class');
   });
 
   test('dropdown container supports dropup style', async function(assert) {
     await render(hbs`{{#bs-dropdown direction="up"}}Test{{/bs-dropdown}}`);
 
-    assert.dom(':first-child').hasClass('dropup', 'has dropup class');
+    assert.dom('.dropup').exists('has dropup class');
   });
 
   testBS4('dropdown container supports dropright style', async function(assert) {
     await render(hbs`{{#bs-dropdown direction="right"}}Test{{/bs-dropdown}}`);
 
-    assert.dom(':first-child').hasClass('dropright', 'has dropright class');
+    assert.dom('.dropright').exists('has dropright class');
   });
 
   testBS4('dropdown container supports dropleft style', async function(assert) {
     await render(hbs`{{#bs-dropdown direction="left"}}Test{{/bs-dropdown}}`);
 
-    assert.dom(':first-child').hasClass('dropleft', 'has dropleft class');
+    assert.dom('.dropleft').exists('has dropleft class');
   });
 
   test('dropdown container with dropdown button has btn-group class', async function(assert) {
     await render(
       hbs`{{#bs-dropdown as |dd|}}{{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
     );
-    assert.dom(':first-child').hasClass('btn-group', 'has btn-group class');
+    assert.dom('.btn-group').exists('has btn-group class');
   });
 
   test('dropdown container with block dropdown button has dropdown class', async function(assert) {
     await render(
       hbs`{{#bs-dropdown as |dd|}}{{#dd.button block=true}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
     );
-    assert.dom(':first-child').hasClass('dropdown', 'has dropdown class');
+    assert.dom('.dropdown').exists('has dropdown class');
   });
 
   test('dropdown container with dropdown button supports dropup style', async function(assert) {
     await render(
       hbs`{{#bs-dropdown direction="up" as |dd|}}{{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
     );
-    assert.dom(':first-child').hasClass('btn-group', 'has btn-group class');
-    assert.dom(':first-child').hasClass('dropup', 'has dropup class');
+    assert.dom('.btn-group').exists('has btn-group class');
+    assert.dom('.dropup').exists('has dropup class');
   });
 
   test('dropdown-toggle toggles dropdown visibility', async function(assert) {
@@ -114,10 +114,10 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     );
 
     await click('a.dropdown-toggle');
-    assert.dom(':first-child').hasClass(openClass(), 'Dropdown is open');
+    assert.dom(`.${openClass()}`).exists('Dropdown is open');
 
     await click('#target');
-    assert.dom(':first-child').hasNoClass(openClass(), 'Dropdown is closed');
+    assert.dom(`.${openClass()}`).doesNotExist('Dropdown is closed');
   });
 
   test('clicking dropdown menu when closeOnMenuClick is false will not close it', async function(assert) {

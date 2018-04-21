@@ -15,17 +15,17 @@ module('Integration | Component | bs-dropdown/toggle', function(hooks) {
   test('toggle has correct default markup', async function(assert) {
     await render(hbs`{{#bs-dropdown/toggle}}Test{{/bs-dropdown/toggle}}`);
 
-    assert.equal(this.element.querySelector(':first-child').tagName, 'A', 'toggle is an anchor tag by default');
-    assert.equal(this.element.querySelector(':first-child').getAttribute('href'), '#', 'has href attribute');
-    assert.dom(':first-child').hasClass('dropdown-toggle', 'has dropdown-toggle class');
-    assert.equal(this.element.querySelector(':first-child').getAttribute('role'), 'button', 'has role=button');
+    assert.dom('a').exists('toggle is an anchor tag by default');
+    assert.dom('a').hasAttribute('href', '#', 'has href attribute');
+    assert.dom('.dropdown-toggle').exists('has dropdown-toggle class');
+    assert.dom('a').hasAttribute('role', 'button', 'has role=button');
   });
 
   test('toggle as button does not have href', async function(assert) {
     await render(hbs`{{#bs-dropdown/toggle tagName="button"}}Test{{/bs-dropdown/toggle}}`);
 
-    assert.equal(this.element.querySelector(':first-child').tagName, 'BUTTON', 'toggle is a button');
-    assert.notOk(this.element.querySelector(':first-child').hasAttribute('href'), 'does not have href attribute');
+    assert.dom('button').exists('toggle is a button');
+    assert.dom('button').doesNotHaveAttribute('href', 'does not have href attribute');
   });
 
   test('clicking toggle sends onClick action', async function(assert) {
