@@ -12,7 +12,11 @@
     viewportPadding=viewportPadding
   }}
     {{#if hasBlock}}
-      {{yield}}
+      {{yield
+        (hash
+          close=(action "close")
+        )
+      }}
     {{else}}
       {{title}}
     {{/if}}

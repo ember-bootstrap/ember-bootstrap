@@ -46,6 +46,11 @@ import layout from 'ember-bootstrap/templates/components/bs-popover';
  * `fade` to disable the fade in transition
  * `delay` (or `delayShow` and `delayHide`) to add a delay
  * `viewportSelector` and `viewportPadding` to customize the viewport that affects `autoPlacement`
+ *  a `close` action is yielded, that allows you to close the tooltip:
+
+ ```hbs
+ {{#bs-popover as |po|}}This is a popover <button {{action po.close}}>Close</button>{{/bs-popover}}
+ ```
 
  See the individual API docs for each property.
 

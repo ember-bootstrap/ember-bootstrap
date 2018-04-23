@@ -13,6 +13,10 @@
     viewportElement=viewportElement
     viewportPadding=viewportPadding
   }}
-    {{yield}}
+    {{yield
+      (hash
+        close=(action "close")
+      )
+    }}
   {{/bs-popover/element}}
 {{/if}}

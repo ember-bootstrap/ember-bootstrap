@@ -605,6 +605,12 @@ export default Component.extend(TransitionSupport, {
     } catch(e) {} // eslint-disable-line no-empty
   },
 
+  actions: {
+    close() {
+      this.hide();
+    }
+  },
+
   init() {
     this._super(...arguments);
     this._handleEnter = run.bind(this, this.enter);

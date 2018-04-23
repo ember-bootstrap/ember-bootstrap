@@ -54,6 +54,11 @@ import layout from 'ember-bootstrap/templates/components/bs-tooltip';
  * `fade` to disable the fade in transition
  * `delay` (or `delayShow` and `delayHide`) to add a delay
  * `viewportSelector` and `viewportPadding` to customize the viewport that affects `autoPlacement`
+ * a `close` action is yielded, that allows you to close the tooltip:
+
+ ```hbs
+ {{#bs-tooltip as |tt|}}This is a tooltip <button {{action tt.close}}>Close</button>{{/bs-tooltip}}
+ ```
 
  See the individual API docs for each property.
 

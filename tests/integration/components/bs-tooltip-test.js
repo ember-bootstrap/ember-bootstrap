@@ -373,4 +373,18 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     assert.dom('.tooltip').hasClass(tooltipPositionClass('top'));
     assertPositioning(assert);
   });
+
+  test('it yields close action', async function(assert) {
+    let hideAction = this.spy();
+    this.set('hide', hideAction);
+    let hiddenAction = this.spy();
+    this.set('hidden', hiddenAction);
+    await render(
+      hbs`<div id="target">{{#bs-tooltip visible=true onHide=(action hide) onHidden=(action hidden) as |tt|}}<div id="hide" {{action tt.close}}>Hide</div>{{/bs-tooltip}}</div>`
+    );
+    await click('#hide');
+    assert.ok(hideAction.calledOnce, 'hide action has been called');
+    assert.ok(hiddenAction.calledOnce, 'hidden action was called');
+    assert.dom('.tooltip').doesNotExist('tooltip is not visible');
+  });
 });
