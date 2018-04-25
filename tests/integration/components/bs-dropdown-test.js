@@ -166,6 +166,61 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.ok(action.calledOnce);
   });
 
+  test('dropdown yields the openDropdown action', async function(assert) {
+    let action = this.spy();
+    this.actions.show = action;
+    await render(
+      hbs`{{#bs-dropdown onShow=(action 'show') as |dd|}}
+            {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+            {{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}
+            <a {{action dd.openDropdown}} class='custom-open'>Custom open link</a>
+          {{/bs-dropdown}}`
+    );
+
+    await click('a.custom-open');
+    assert.ok(action.calledOnce);
+  });
+
+  test('dropdown yields the closeDropdown action', async function(assert) {
+    let hide = this.spy();
+    this.actions.hide = hide;
+    await render(
+      hbs`{{#bs-dropdown closeOnMenuClick=false onHide=(action 'hide') as |dd|}}
+            {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+            {{#dd.menu}}
+              <li>
+                <a href="#">Something</a>
+                <a {{action dd.closeDropdown}} class='custom-close'>Custom close link</a>
+              </li>
+            {{/dd.menu}}
+          {{/bs-dropdown}}`
+    );
+
+    await click('a.dropdown-toggle');
+    await click('.custom-close');
+    assert.ok(hide.calledOnce);
+  });
+
+  test('dropdown yields the toggleDropdown action', async function(assert) {
+    let show = this.spy();
+    let hide = this.spy();
+    this.actions.hide = hide;
+    this.actions.show = show;
+    await render(
+      hbs`{{#bs-dropdown onShow=(action 'show') onHide=(action 'hide') as |dd|}}
+            {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+            {{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}
+            <a {{action dd.toggleDropdown}} class='custom-toggle'>Custom toggle link</a>
+          {{/bs-dropdown}}`
+    );
+
+    await click('a.custom-toggle');
+    assert.ok(show.calledOnce);
+
+    await click('a.custom-toggle');
+    assert.ok(hide.calledOnce);
+  });
+
   test('opening dropdown makes the menu visible', async function(assert) {
     await render(hbs`
     {{#bs-dropdown as |dd|}}
