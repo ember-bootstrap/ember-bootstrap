@@ -43,6 +43,7 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
  * `collapse`: triggers the `onCollapse` action and collapses the navbar (mobile)
  * `expand`: triggers the `onExpand` action and expands the navbar (mobile)
+ * `toggleNavbar`: triggers the `toggleNavbar` action and toggles the navbar (mobile)
 
  ### Responsive Design
 
