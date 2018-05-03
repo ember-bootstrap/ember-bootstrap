@@ -872,8 +872,8 @@ export default FormGroup.extend({
       let el = this.get('element');
       let feedbackIcon;
       // validation state icons are only shown if form element has feedback
-      if (this.get('hasFeedback')
-        && !this.get('isDestroying')
+      if (!this.get('isDestroying')
+        && this.get('hasFeedback')
         // and form group element has
         // an input-group
         && el.querySelector('.input-group')
