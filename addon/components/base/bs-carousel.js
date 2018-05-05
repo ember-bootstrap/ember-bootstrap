@@ -401,22 +401,33 @@ export default Component.extend(ComponentParent, {
   transitionDuration: 600,
 
   /**
+   * The type slide transition to perform.
+   * Options are 'fade' or 'slide'. Note: BS4 only
+   *
+   * @default 'slide'
+   * @property transition
+   * @public
+   * @type string
+   */
+  transition: 'slide',
+
+  /**
    * Do a presentation and calls itself to perform a cycle.
    *
    * @method cycle
    * @private
    */
   cycle: task(function* () {
-    yield this.get('transition').perform();
+    yield this.get('transitioner').perform();
     yield timeout(this.get('interval'));
     this.toAppropriateSlide();
   }).restartable(),
 
   /**
-   * @method transition
+   * @method transitioner
    * @private
    */
-  transition: task(function* () {
+  transitioner: task(function* () {
     this.set('presentationState', 'willTransit');
     yield timeout(this.get('transitionDuration'));
     this.set('presentationState', 'didTransition');
@@ -452,7 +463,7 @@ export default Component.extend(ComponentParent, {
       this.assignClassNameControls(toIndex);
       this.setFollowingIndex(toIndex);
       if (this.get('shouldRunAutomatically') === false || this.get('isMouseHovering')) {
-        this.get('transition').perform();
+        this.get('transitioner').perform();
       } else {
         this.get('cycle').perform();
       }
@@ -516,7 +527,7 @@ export default Component.extend(ComponentParent, {
       if (
         self.get('pauseOnMouseEnter')
         && (
-          self.get('transition.last') !== null
+          self.get('transitioner.last') !== null
           || self.get('waitIntervalToInitCycle.last') !== null
         )
       ) {
