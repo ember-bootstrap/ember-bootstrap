@@ -104,6 +104,11 @@ module('Integration | Component | bs-carousel', function(hooks) {
 
   // Parameters
 
+  testBS4('carousel transition="fade" has correct markup', async function(assert) {
+    await render(hbs`{{bs-carousel interval=0 transition='fade'}}`);
+    assert.dom('.carousel').hasClass('carousel-fade', 'has carousel-fade class');
+  });
+
   test('carousel autoPlay=false must not start sliding', async function(assert) {
     await render(hbs`{{#bs-carousel autoPlay=false interval=300 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await waitTransitionTime();
