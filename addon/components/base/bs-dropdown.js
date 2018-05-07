@@ -85,7 +85,7 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
  contextual component rather than a standalone dropdown to ensure the correct styling
  regardless of your Bootstrap version.
 
- If you use the [dropdown divider](Component.DropdownMenuDivider), you don't have to worry
+ If you use the [dropdown divider](Components.DropdownMenuDivider), you don't have to worry
  about differences in the markup between versions.
 
  Be sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application
