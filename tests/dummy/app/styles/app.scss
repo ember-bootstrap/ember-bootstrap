@@ -14,8 +14,9 @@ body {
   content: '*';
 }
 
-.navbar-static-top {
-  border-width: 0 0 3px;
+body > div > .navbar {
+  border-bottom: solid 3px #7BBA1D;
+  margin-bottom: 20px;
 }
 
 .logo {
@@ -26,9 +27,9 @@ body {
   pre {
     font-size: 20px;
     padding: 20px;
-    background-color: $brand-primary;
+    background-color: $primary;
     color: #fff;
     border: none;
-    border-bottom: solid 3px $brand-secondary;
+    border-bottom: solid 3px $secondary;
   }
 }

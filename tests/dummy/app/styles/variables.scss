@@ -1,12 +1,8 @@
-$brand-primary: #EF5A31;
-$brand-secondary: #7BBA1D;
+$primary: #EF5A31;
+$secondary: #ccc;
 
-$navbar-inverse-color: #fff;
-$navbar-inverse-bg: $brand-primary;
-$navbar-inverse-border: $brand-secondary;
-$navbar-inverse-link-color: #fff;
-$navbar-inverse-toggle-border-color: #fff;
-$navbar-inverse-toggle-hover-bg: darken($navbar-inverse-bg, 10%);
+$navbar-dark-color:                 rgba(#fff, .8) !default;
+$navbar-dark-hover-color:           rgba(#fff, .9) !default;
 
 
 //$font-size-base: 16px;

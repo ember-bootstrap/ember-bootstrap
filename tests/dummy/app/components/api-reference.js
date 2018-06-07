@@ -4,7 +4,7 @@ import layout from '../templates/components/api-reference';
 
 export default Component.extend({
   layout,
-  classNames: ['panel', 'panel-default'],
+  classNames: ['card'],
 
   model: null,
 

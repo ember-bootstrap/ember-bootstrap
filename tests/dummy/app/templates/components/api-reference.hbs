@@ -1,14 +1,14 @@
 {{#if title}}
-  <div class="panel-heading">
-    <h3 class="panel-title">{{title}}</h3>
+  <div class="card-header">
+    {{title}}
   </div>
 {{/if}}
 {{#if hasBlock}}
-  <div class="panel-body">
+  <div class="card-body">
     {{yield}}
   </div>
 {{/if}}
-<ul class="list-group">
+<ul class="list-group list-group-flush">
   <li class="list-group-item">
     {{#if apiUrl}}
       <a href={{apiUrl}}>API Docs</a>
