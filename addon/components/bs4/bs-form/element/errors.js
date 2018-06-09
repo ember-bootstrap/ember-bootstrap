@@ -1,5 +1,5 @@
 import FormElementErrors from 'ember-bootstrap/components/base/bs-form/element/errors';
 
 export default FormElementErrors.extend({
-  feedbackClass: 'invalid-feedback'
+  feedbackClass: 'invalid-feedback d-block'
 });
