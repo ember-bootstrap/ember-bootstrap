@@ -8,6 +8,7 @@ import { next, schedule, cancel, later, run } from '@ember/runloop';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import getParent from 'ember-bootstrap/utils/get-parent';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
+import transitionDuration from 'ember-bootstrap/utils/transition-duration';
 
 const InState = EmberObject.extend({
   hover: false,
@@ -137,7 +138,7 @@ export default Component.extend(TransitionSupport, {
    * @default 150
    * @public
    */
-  transitionDuration: 150,
+  transitionDuration: transitionDuration(150),
 
   /**
    * Keeps the tooltip/popover within the bounds of this element when `autoPlacement` is true. Can be any valid CSS selector.

@@ -5,6 +5,7 @@ import { observer, computed } from '@ember/object';
 import { next } from '@ember/runloop';
 import { htmlSafe, camelize } from '@ember/string';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
+import transitionDuration from 'ember-bootstrap/utils/transition-duration';
 
 /**
  An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -118,7 +119,7 @@ export default Component.extend({
    * @default 350
    * @public
    */
-  transitionDuration: 350,
+  transitionDuration: transitionDuration(350),
 
   style: computed('collapseSize', function() {
     let size = this.get('collapseSize');

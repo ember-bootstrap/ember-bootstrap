@@ -6,6 +6,7 @@ import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import layout from 'ember-bootstrap/templates/components/bs-alert';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+import transitionDuration from 'ember-bootstrap/utils/transition-duration';
 
 /**
  Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -117,7 +118,7 @@ export default Component.extend(TypeClass, TransitionSupport, {
    * @default 150
    * @public
    */
-  fadeDuration: 150,
+  fadeDuration: transitionDuration(150),
 
   /**
    * The action to be sent after the alert has been dismissed (including the CSS transition).
