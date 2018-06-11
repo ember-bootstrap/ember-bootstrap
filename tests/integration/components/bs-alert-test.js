@@ -32,7 +32,7 @@ module('Integration | Component | bs-alert', function(hooks) {
   });
 
   testRequiringTransitions('dismissible alert can be hidden by clicking close button with fade=true', async function(assert) {
-    await render(hbs`{{#bs-alert type="success" fade=true}}Test{{/bs-alert}}`);
+    await render(hbs`{{#bs-alert type="success" fade=true fadeDuration=20}}Test{{/bs-alert}}`);
 
     assert.dom('button.close').exists({ count: 1 }, 'alert has close button');
     let promise = click('button.close');
