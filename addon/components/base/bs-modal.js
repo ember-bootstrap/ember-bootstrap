@@ -2,16 +2,13 @@ import { not } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import Component from '@ember/component';
 import { getOwner } from '@ember/application';
-import { observer, get, computed } from '@ember/object';
-import { schedule, next, bind } from '@ember/runloop';
+import { computed, get, observer } from '@ember/object';
+import { bind, next, schedule } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-modal';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
-import {
-  findElementById,
-  getDOM
-} from '../../utils/dom';
+import { findElementById, getDOM } from '../../utils/dom';
 
 /**
 
@@ -437,7 +434,7 @@ export default Component.extend(TransitionSupport, {
 
     this.resize();
 
-    let callback = function() {
+    let callback = () => {
       if (this.get('isDestroyed')) {
         return;
       }
@@ -457,10 +454,11 @@ export default Component.extend(TransitionSupport, {
         this.get('onShow')();
 
         if (this.get('usesTransition')) {
-          transitionEnd(this.get('modalElement'), function() {
-            this.takeFocus();
-            this.get('onShown')();
-          }, this, this.get('transitionDuration'));
+          transitionEnd(this.get('modalElement'), this.get('transitionDuration'))
+            .then(() => {
+              this.takeFocus();
+              this.get('onShown')();
+            });
         } else {
           this.takeFocus();
           this.get('onShown')();
@@ -487,7 +485,8 @@ export default Component.extend(TransitionSupport, {
     this.set('showModal', false);
 
     if (this.get('usesTransition')) {
-      transitionEnd(this.get('modalElement'), this.hideModal, this, this.get('transitionDuration'));
+      transitionEnd(this.get('modalElement'), this.get('transitionDuration'))
+        .then(() => this.hideModal());
     } else {
       this.hideModal();
     }
@@ -534,9 +533,10 @@ export default Component.extend(TransitionSupport, {
         let backdrop = this.get('backdropElement');
         assert('Backdrop element should be in DOM', backdrop);
         if (doAnimate) {
-          transitionEnd(backdrop, callback, this, this.get('backdropTransitionDuration'));
+          transitionEnd(backdrop, this.get('backdropTransitionDuration'))
+            .then(callback);
         } else {
-          callback.call(this);
+          callback();
         }
       });
 
@@ -544,7 +544,7 @@ export default Component.extend(TransitionSupport, {
       let backdrop = this.get('backdropElement');
       assert('Backdrop element should be in DOM', backdrop);
 
-      let callbackRemove = function() {
+      let callbackRemove = () => {
         if (this.get('isDestroyed')) {
           return;
         }
@@ -554,9 +554,10 @@ export default Component.extend(TransitionSupport, {
         }
       };
       if (doAnimate) {
-        transitionEnd(backdrop, callbackRemove, this, this.get('backdropTransitionDuration'));
+        transitionEnd(backdrop, this.get('backdropTransitionDuration'))
+          .then(callbackRemove);
       } else {
-        callbackRemove.call(this);
+        callbackRemove();
       }
     } else if (callback) {
       next(this, callback);

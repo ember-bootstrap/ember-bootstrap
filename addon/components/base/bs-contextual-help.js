@@ -485,7 +485,7 @@ export default Component.extend(TransitionSupport, {
       }
     }
 
-    function tooltipShowComplete() {
+    let tooltipShowComplete = () => {
       if (this.get('isDestroyed')) {
         return;
       }
@@ -497,12 +497,13 @@ export default Component.extend(TransitionSupport, {
       if (prevHoverState === 'out') {
         this.leave();
       }
-    }
+    };
 
     if (skipTransition === false && this.get('usesTransition')) {
-      transitionEnd(this.get('overlayElement'), tooltipShowComplete, this, this.get('transitionDuration'));
+      transitionEnd(this.get('overlayElement'), this.get('transitionDuration'))
+        .then(tooltipShowComplete);
     } else {
-      tooltipShowComplete.call(this);
+      tooltipShowComplete();
     }
   },
 
@@ -536,7 +537,7 @@ export default Component.extend(TransitionSupport, {
       return;
     }
 
-    function tooltipHideComplete() {
+    let tooltipHideComplete = () => {
       if (this.get('isDestroyed')) {
         return;
       }
@@ -558,9 +559,10 @@ export default Component.extend(TransitionSupport, {
     }
 
     if (this.get('usesTransition')) {
-      transitionEnd(this.get('overlayElement'), tooltipHideComplete, this, this.get('transitionDuration'));
+      transitionEnd(this.get('overlayElement'), this.get('transitionDuration'))
+        .then(tooltipHideComplete);
     } else {
-      tooltipHideComplete.call(this);
+      tooltipHideComplete();
     }
 
     this.set('hoverState', null);

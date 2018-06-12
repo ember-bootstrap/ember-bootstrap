@@ -1,6 +1,5 @@
 import { triggerEvent } from '@ember/test-helpers';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
-import transitionEvent from 'ember-bootstrap/utils/transition-support';
 import { module } from 'qunit';
 import { test, testRequiringTransitions } from '../../helpers/bootstrap-test';
 
@@ -9,8 +8,8 @@ module('Unit | Utility | transition end', function() {
     let cb = this.spy();
     let node = document.createElement('div');
 
-    transitionEnd(node, cb, this, 100);
-    await triggerEvent(node, transitionEvent);
+    transitionEnd(node, 0).then(cb);
+    await triggerEvent(node, 'transitionend');
     assert.ok(cb.calledOnce);
   });
 
@@ -18,27 +17,27 @@ module('Unit | Utility | transition end', function() {
     let cb = this.spy();
     let node = document.createElement('div');
 
-    transitionEnd(node, cb, this, 100);
+    transitionEnd(node, 0).then(cb);
 
     let done = assert.async();
     setTimeout(() => {
       assert.ok(cb.calledOnce);
       done();
-    }, 150);
+    }, 1);
   });
 
   test('it triggers just once', function(assert) {
     let cb = this.spy();
     let node = document.createElement('div');
 
-    transitionEnd(node, cb, this, 100);
+    transitionEnd(node, 0).then(cb);
 
     let done = assert.async();
-    triggerEvent(node, transitionEvent);
+    triggerEvent(node, 'transitionend');
 
     setTimeout(() => {
       assert.ok(cb.calledOnce);
       done();
-    }, 150);
+    }, 1);
   });
 });
