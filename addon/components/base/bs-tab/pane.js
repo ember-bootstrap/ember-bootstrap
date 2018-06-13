@@ -5,6 +5,7 @@ import layout from 'ember-bootstrap/templates/components/bs-tab/pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
+import transitionDuration from 'ember-bootstrap/utils/transition-duration';
 
 /**
  The tab pane of a tab component.
@@ -101,7 +102,7 @@ export default Component.extend(ComponentChild, TransitionSupport, {
    * @default 150
    * @private
    */
-  fadeDuration: 150,
+  fadeDuration: transitionDuration(150),
 
   /**
    * Show the pane

@@ -7,6 +7,7 @@ import { filter, lte, gt, readOnly } from '@ember/object/computed';
 import { schedule, scheduleOnce } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 import RSVP from 'rsvp';
+import transitionDuration from 'ember-bootstrap/utils/transition-duration';
 
 /**
   Ember implementation of Bootstrap's Carousel. Supports all original features but API is partially different:
@@ -398,7 +399,7 @@ export default Component.extend(ComponentParent, {
    * @public
    * @type number
    */
-  transitionDuration: 600,
+  transitionDuration: transitionDuration(600),
 
   /**
    * The type slide transition to perform.

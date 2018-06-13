@@ -12,6 +12,7 @@ import {
   findElementById,
   getDOM
 } from '../../utils/dom';
+import transitionDuration from 'ember-bootstrap/utils/transition-duration';
 
 /**
 
@@ -282,7 +283,7 @@ export default Component.extend(TransitionSupport, {
    * @default 300
    * @public
    */
-  transitionDuration: 300,
+  transitionDuration: transitionDuration(300),
 
   /**
    * The duration of the backdrop fade transition
@@ -292,7 +293,7 @@ export default Component.extend(TransitionSupport, {
    * @default 150
    * @public
    */
-  backdropTransitionDuration: 150,
+  backdropTransitionDuration: transitionDuration(150),
 
   /**
    * @property isFastBoot
