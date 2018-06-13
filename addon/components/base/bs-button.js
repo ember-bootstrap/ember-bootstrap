@@ -101,6 +101,36 @@ export default Component.extend(TypeClass, SizeClass, {
   defaultText: null,
 
   /**
+   * Label of the button used if `onClick` event has returned a Promise which is pending.
+   * Not considered if used as a block component.
+   *
+   * @property pendingText
+   * @type string
+   * @public
+   */
+  pendingText: null,
+
+  /**
+   * Label of the button used if `onClick` event has returned a Promise which resolved sucessfully.
+   * Not considered if used as a block component.
+   *
+   * @property resolvedText
+   * @type string
+   * @public
+   */
+  resolvedText: null,
+
+  /**
+   * Label of the button used if `onClick` event has returned a Promise which has been rejected.
+   * Not considered if used as a block component.
+   *
+   * @property rejectedText
+   * @type string
+   * @public
+   */
+  rejectedText: null,
+
+  /**
    * Property to disable the button
    *
    * @property disabled
