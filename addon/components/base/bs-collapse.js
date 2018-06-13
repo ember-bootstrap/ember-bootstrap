@@ -168,17 +168,6 @@ export default Component.extend({
    * @protected
    */
   show() {
-    let complete = function() {
-      if (this.get('isDestroyed')) {
-        return;
-      }
-      this.set('transitioning', false);
-      if (this.get('resetSizeWhenNotCollapsing')) {
-        this.set('collapseSize', null);
-      }
-      this.get('onShown')();
-    };
-
     this.get('onShow')();
 
     this.setProperties({
@@ -187,7 +176,16 @@ export default Component.extend({
       active: true
     });
 
-    transitionEnd(this.get('element'), complete, this, this.get('transitionDuration'));
+    transitionEnd(this.get('element'), this.get('transitionDuration')).then(() => {
+      if (this.get('isDestroyed')) {
+        return;
+      }
+      this.set('transitioning', false);
+      if (this.get('resetSizeWhenNotCollapsing')) {
+        this.set('collapseSize', null);
+      }
+      this.get('onShown')();
+    });
 
     next(this, function() {
       if (!this.get('isDestroyed')) {
@@ -223,18 +221,6 @@ export default Component.extend({
    * @protected
    */
   hide() {
-
-    let complete = function() {
-      if (this.get('isDestroyed')) {
-        return;
-      }
-      this.set('transitioning', false);
-      if (this.get('resetSizeWhenNotCollapsing')) {
-        this.set('collapseSize', null);
-      }
-      this.get('onHidden')();
-    };
-
     this.get('onHide')();
 
     this.setProperties({
@@ -243,7 +229,16 @@ export default Component.extend({
       active: false
     });
 
-    transitionEnd(this.get('element'), complete, this, this.get('transitionDuration'));
+    transitionEnd(this.get('element'), this.get('transitionDuration')).then(() => {
+      if (this.get('isDestroyed')) {
+        return;
+      }
+      this.set('transitioning', false);
+      if (this.get('resetSizeWhenNotCollapsing')) {
+        this.set('collapseSize', null);
+      }
+      this.get('onHidden')();
+    });
 
     next(this, function() {
       if (!this.get('isDestroyed')) {

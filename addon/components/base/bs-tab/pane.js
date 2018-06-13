@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { observer, computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-tab/pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
@@ -111,14 +111,15 @@ export default Component.extend(ComponentChild, TransitionSupport, {
    */
   show() {
     if (this.get('usesTransition')) {
-      transitionEnd(this.get('element'), function() {
-        if (!this.get('isDestroyed')) {
-          this.setProperties({
-            active: true,
-            showContent: true
-          });
-        }
-      }, this, this.get('fadeDuration'));
+      transitionEnd(this.get('element'), this.get('fadeDuration'))
+        .then(() => {
+          if (!this.get('isDestroyed')) {
+            this.setProperties({
+              active: true,
+              showContent: true
+            });
+          }
+        });
     } else {
       this.set('active', true);
     }
@@ -132,11 +133,12 @@ export default Component.extend(ComponentChild, TransitionSupport, {
    */
   hide() {
     if (this.get('usesTransition')) {
-      transitionEnd(this.get('element'), function() {
-        if (!this.get('isDestroyed')) {
-          this.set('active', false);
-        }
-      }, this, this.get('fadeDuration'));
+      transitionEnd(this.get('element'), this.get('fadeDuration'))
+        .then(() => {
+          if (!this.get('isDestroyed')) {
+            this.set('active', false);
+          }
+        });
       this.set('showContent', false);
     } else {
       this.set('active', false);

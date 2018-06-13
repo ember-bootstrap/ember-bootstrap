@@ -1,29 +1,23 @@
-import { later, cancel, join } from '@ember/runloop';
-import transitionEnd from './transition-support';
+import { later, cancel } from '@ember/runloop';
+import { Promise, reject } from 'rsvp';
 
-export default function onTransitionEnd(node, handler, context, duration = 0) {
+export default function waitForTransitionEnd(node, duration = 0) {
   if (!node) {
-    return;
+    return reject();
   }
-  let fakeEvent = {
-    target: node,
-    currentTarget: node
-  };
   let backup;
 
-  if (transitionEnd) {
-    node.addEventListener(transitionEnd, done, false);
+  return new Promise(function(resolve) {
+    let done = function() {
+      if (backup) {
+        cancel(backup);
+        backup = null;
+      }
+      node.removeEventListener('transitionend', done);
+      resolve();
+    };
 
-    backup = later(this, done, fakeEvent, duration);
-  } else {
-    later(this, done, fakeEvent, 0);
-  }
-
-  function done(event) {
-    if (backup) {
-      cancel(backup);
-    }
-    node.removeEventListener(transitionEnd, done);
-    join(context, handler, event);
-  }
+    node.addEventListener('transitionend', done, false);
+    backup = later(this, done, duration);
+  });
 }

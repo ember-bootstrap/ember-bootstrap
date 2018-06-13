@@ -2,7 +2,6 @@ import { reads } from '@ember/object/computed';
 import { getOwner } from '@ember/application';
 import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
-import transitionSupport from 'ember-bootstrap/utils/transition-support';
 
 /**
  * Mixin for components that support transitions
@@ -41,6 +40,6 @@ export default Mixin.create({
    * @private
    */
   usesTransition: computed('fade', 'fastboot.isFastBoot', function() {
-    return !this.get('fastboot.isFastBoot') && !!transitionSupport && this.get('transitionsEnabled');
+    return !this.get('fastboot.isFastBoot') && this.get('transitionsEnabled');
   })
 });
