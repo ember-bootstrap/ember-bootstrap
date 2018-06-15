@@ -1,12 +1,16 @@
 <div class="bs-example">
-  {{#bs-form formLayout="inline" model=this as |form|}}
-    {{form.element controlType="checkbox" label="Inverse" property="inverse" value=inverse}}
-    {{form.element controlType="checkbox" label="Fluid" property="fluid" value=fluid}}
+  {{#bs-form formLayout="horizontal" model=this as |form|}}
+    {{#form.element controlType="power-select" options=typeChoices label="Type" property="type" as |el|}}
+      {{el.control searchEnabled=false}}
+    {{/form.element}}
+    {{#form.element controlType="power-select" options=bgChoices label="Background" property="bg" as |el|}}
+      {{el.control searchEnabled=false}}
+    {{/form.element}}
     {{form.element controlType="checkbox" label="Collapsed (on mobile)" property="collapsed" value=collapsed}}
   {{/bs-form}}
   <hr>
   <!-- BEGIN-SNIPPET navbar-demo -->
-  {{#bs-navbar type=(if inverse 'inverse') fluid=fluid collapsed=collapsed onCollapse=(action (mut collapsed) true) onExpand=(action (mut collapsed) false) as |navbar|}}
+  {{#bs-navbar type=type backgroundColor=bg collapsed=collapsed onCollapse=(action (mut collapsed) true) onExpand=(action (mut collapsed) false) as |navbar|}}
     <div class="navbar-header">
       {{navbar.toggle}}
       {{#link-to "index" class="navbar-brand"}}Brand{{/link-to}}
