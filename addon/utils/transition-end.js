@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { later, cancel } from '@ember/runloop';
 import { Promise, reject } from 'rsvp';
 
@@ -6,6 +7,10 @@ export default function waitForTransitionEnd(node, duration = 0) {
     return reject();
   }
   let backup;
+
+  if (Ember.testing) {
+    duration = 0;
+  }
 
   return new Promise(function(resolve) {
     let done = function() {

@@ -1,13 +1,13 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, settled } from '@ember/test-helpers';
+import { click, render, settled } from '@ember/test-helpers';
 import {
   positionClassFor,
   positionStickyClass,
-  visibilityClass,
   test,
   testBS3,
-  testBS4
+  testBS4,
+  visibilityClass
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -199,19 +199,12 @@ module('Integration | Component | bs-navbar', function(hooks) {
       {{/bs-navbar}}
     `);
     this.set('collapsed', false);
-
     assert.dom('.navbar-collapse').hasClass('collapsing', 'collapse has collapsing class while transition is running');
 
-    let done = assert.async();
-
-    // wait for transitions to complete
-    setTimeout(() => {
-      assert.ok(expandedAction.calledOnce, 'onExpanded action has been called');
-      assert.dom('.navbar-collapse').hasClass('collapse', 'collapse has collapse class');
-      assert.dom('.navbar-collapse').hasClass(visibilityClass(), 'collapse has visibility class');
-
-      done();
-    }, 500);
+    await settled();
+    assert.ok(expandedAction.calledOnce, 'onExpanded action has been called');
+    assert.dom('.navbar-collapse').hasClass('collapse', 'collapse has collapse class');
+    assert.dom('.navbar-collapse').hasClass(visibilityClass(), 'collapse has visibility class');
   });
 
   test('setting collapse to true collapses the navbar', async function(assert) {
