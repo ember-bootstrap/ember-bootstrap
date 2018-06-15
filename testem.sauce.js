@@ -10,7 +10,8 @@ module.exports = {
     'SLChrome',
     'SLFirefox',
     'SLIE11',
-    'SLSafari'
+    'SLSafari',
+    'SLSafariLast'
   ],
 
   'launch_in_dev': [
@@ -28,8 +29,6 @@ module.exports = {
         'sauce:launch',
         '-b',
         'Chrome',
-        '-v',
-        '60',
         '--visibility',
         'public',
         '-p',
@@ -47,8 +46,6 @@ module.exports = {
         'sauce:launch',
         '-b',
         'Firefox',
-        '-v',
-        '54',
         '--visibility',
         'public',
         '-p',
@@ -78,51 +75,12 @@ module.exports = {
       ],
       'protocol': 'browser'
     },
-
-    SLIE10: {
-      'exe': 'ember',
-      'args': [
-        'sauce:launch',
-        '-b',
-        'internet explorer',
-        '-v',
-        '10',
-        '--visibility',
-        'public',
-        '-p',
-        'Windows 8',
-        '--attach',
-        '--no-connect',
-        '--url'
-      ],
-      'protocol': 'browser'
-    },
-
-    SLIE9: {
-      'exe': 'ember',
-      'args': [
-        'sauce:launch',
-        '-b',
-        'internet explorer',
-        '-v',
-        '9',
-        '--visibility',
-        'public',
-        '-p',
-        'Windows 7',
-        '--attach',
-        '--no-connect',
-        '--url'
-      ],
-      'protocol': 'browser'
-    },
-
     SLSafari: {
-      'command': 'ember sauce:launch -b safari -v 10 --visibility public -p "macOS 10.12" --no-connect --url "<url>"',
+      'command': 'ember sauce:launch -b safari -v 11 --visibility public -p "macOS 10.12" --no-connect --url "<url>"',
       'protocol': 'tap'
     },
     SLSafariLast: {
-      'command': 'ember sauce:launch -b safari -v 9 --visibility public -p "OS X 10.11" --no-connect --url "<url>"',
+      'command': 'ember sauce:launch -b safari -v 10 --visibility public -p "OS X 10.12" --no-connect --url "<url>"',
       'protocol': 'tap'
     }
   }
