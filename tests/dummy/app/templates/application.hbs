@@ -1,8 +1,6 @@
 {{#bs-navbar fluid=false type="dark" backgroundColor="primary" as |navbar|}}
-  <div class="navbar-header">
-    {{navbar.toggle}}
-    {{#link-to "index" class="navbar-brand"}}ember-bootstrap{{/link-to}}
-  </div>
+  {{#link-to "index" class="navbar-brand"}}ember-bootstrap{{/link-to}}
+  {{navbar.toggle}}
   {{#navbar.content}}
     {{#navbar.nav class="mr-auto" as |nav|}}
       {{#nav.item}}{{#nav.link-to "getting-started"}}Getting Started{{/nav.link-to}}{{/nav.item}}

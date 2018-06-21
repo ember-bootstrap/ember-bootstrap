@@ -1,7 +1,10 @@
-<h3>Classes</h3>
-
-<ul id="api-classes" class="nav nav-pills nav-stacked">
+<div class="card">
+  <div class="card-header">
+    Classes
+  </div>
+  <ul class="list-group list-group-flush">
     {{#classes}}
-        <li class="nav-{{access}}"><a href="{{../projectRoot}}classes/{{name}}.html">{{displayName}}</a></li>
+      <li class="list-group-item list-group-item-{{access}}"><a href="{{../projectRoot}}classes/{{name}}.html">{{displayName}}</a></li>
     {{/classes}}
-</ul>
+  </ul>
+</div>
