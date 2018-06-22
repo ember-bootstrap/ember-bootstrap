@@ -33,13 +33,13 @@
   <pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
 
 module.exports = function(defaults) {
-    let app = new EmberApp(defaults, {
-        'ember-bootstrap': {
-            'importBootstrapCSS': false
-        }
-    });
+  let app = new EmberApp(defaults, {
+    'ember-bootstrap': {
+      'importBootstrapCSS': false
+    }
+  });
 
-    return app.toTree();
+  return app.toTree();
 };
   </code></pre>
 </div>
@@ -63,11 +63,11 @@ module.exports = function(defaults) {
   <code>app.less</code> or <code>app.scss</code> file respectively:
 </p>
 
-<pre><code class="language-less">// app.less
+<pre class="highlight"><code class="language-less">// app.less
 @import "ember-bootstrap/bootstrap";
 </code></pre>
 
-<pre><code class="language-sass">// app.scss
+<pre class="highlight"><code class="language-sass">// app.scss
 @import "ember-bootstrap/bootstrap";
 </code></pre>
 
@@ -84,7 +84,7 @@ module.exports = function(defaults) {
 </p>
 
 <p><b>BS3 - Less</b></p>
-<pre><code class="language-less">// app.less
+<pre class="highlight"><code class="language-less">// app.less
 
 // Required
 @import "ember-bootstrap/variables";
@@ -101,7 +101,7 @@ module.exports = function(defaults) {
 </code></pre>
 
 <p><b>BS3 - Sass</b></p>
-<pre><code class="language-sass">// app.scss
+<pre class="highlight"><code class="language-sass">// app.scss
 
 // Required
 @import "ember-bootstrap/bootstrap/variables";
@@ -118,7 +118,7 @@ module.exports = function(defaults) {
 </code></pre>
 
 <p><b>BS4 - Sass only</b></p>
-<pre><code class="language-sass">// app.scss
+<pre class="highlight"><code class="language-sass">// app.scss
 
 // Required
 @import "ember-bootstrap/functions";
@@ -141,7 +141,7 @@ module.exports = function(defaults) {
 </p>
 
 <h2>Importing the Bootstrap Glyphicons font</h2>
-<p>By default the icon font that comes with Bootstrap is added to your app's assets folder.
+<p>By default the icon font that comes with Bootstrap 3(!) is added to your app's assets folder.
   When you do not want to use it (maybe because of replacing it for
   <a href="https://github.com/martndemus/ember-font-awesome" target="_blank" rel="noopener">Font Awesome</a>),
   you can opt out of the font import by setting the <code>importBootstrapFont</code> option
@@ -150,13 +150,13 @@ module.exports = function(defaults) {
 <div><pre class="highlight"><code>//your-bootstrap-app/ember-cli-build.js
 
 module.exports = function(defaults) {
-    var app = new EmberApp(defaults, {
-        'ember-bootstrap': {
-            'importBootstrapFont': false
-        }
-    });
+  var app = new EmberApp(defaults, {
+    'ember-bootstrap': {
+      'importBootstrapFont': false
+    }
+  });
 
-    return app.toTree();
+  return app.toTree();
 };
 </code></pre>
 </div>

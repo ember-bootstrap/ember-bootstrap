@@ -30,6 +30,8 @@ body > div > .navbar {
     background-color: $primary;
     color: #fff;
     border: none;
-    border-bottom: solid 3px $secondary;
+    border-bottom: solid 3px #7BBA1D;
+
+    border-radius: .25rem;
   }
 }

@@ -11,8 +11,8 @@
 <h3>Using the default blueprint</h3>
 
 <p>
-  By default, ember-bootstrap installs Bootstrap 3 and uses the installed preprocessor if there is one. You can use
-  the ember-bootstrap default blueprint to switch Bootstrap version or preprocessor.
+  By default, ember-bootstrap installs Bootstrap 4 and uses the installed preprocessor if there is one. You can use
+  the ember-bootstrap default blueprint to switch the Bootstrap version or preprocessor.
 </p>
 
 <h4>Use a CSS preprocessor</h4>
@@ -23,29 +23,24 @@
 
 <p>See the {{#link-to "getting-started.assets"}}Assets guide{{/link-to}} for details.</p>
 
-<h4>Switch to Bootstrap 4</h4>
+<h4>Switch to Bootstrap 3</h4>
 
-<p>You can switch to Bootstrap 4 by running this command:</p>
+<p>You can switch to Bootstrap 3 by running this command:</p>
 
-<pre class="highlight">ember generate ember-bootstrap --bootstrap-version=4</pre>
+<pre class="highlight">ember generate ember-bootstrap --bootstrap-version=3</pre>
 
-<p>As Bootstrap 4 ships with Sass support, we highly recommend to enable that as well in your Ember app:</p>
+<p>As Bootstrap 3 includes Less support, you can enable that as well in your Ember app:</p>
 
-<pre class="highlight">ember generate ember-bootstrap --bootstrap-version=4 --preprocessor=sass</pre>
+<pre class="highlight">ember generate ember-bootstrap --bootstrap-version=3 --preprocessor=less</pre>
 
-<p>See the {{#link-to "getting-started.bootstrap-4"}}Bootstrap 4 guide{{/link-to}} for details.</p>
-
-
-{{#bs-button onClick=(action "toggleBlueprintDetails")}}
+{{#bs-button type="info" onClick=(action "toggleBlueprintDetails")}}
   About the default blueprint
-  <span class="glyphicon {{if blueprintDetailsCollapsed "glyphicon-menu-down" "glyphicon-menu-up"}}" aria-hidden="true"></span>
 {{/bs-button}}
 
 
 {{#bs-collapse collapsed=blueprintDetailsCollapsed}}
-  <hr>
 
-  {{#bs-alert type="info" dismissible=false}}
+  {{#bs-alert class="mt-4" type="info" dismissible=false}}
 
     <h4>About the default blueprint</h4>
 
@@ -80,6 +75,7 @@
   {{/bs-alert}}
 {{/bs-collapse}}
 
+<hr>
 
 <h2>All configuration options</h2>
 
@@ -101,7 +97,7 @@
     <tr>
       <td>bootstrapVersion</td>
       <td>3 / 4</td>
-      <td>3</td>
+      <td>4</td>
       <td>
         <p>
           Specify the Bootstrap version to use. To make sure you have the right dependencies installed, you should use the

@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row mb-4">
   <div class="col-sm-9">
-    <div class="jumbotron">
+    <div class="jumbotron mb-0">
       <h1>ember-bootstrap</h1>
 
       <p class="lead">
@@ -17,60 +17,78 @@
   </div>
 
   <div class="col-sm-3 d-none d-sm-block">
+    <div class="card h-100">
+      <div class="card-body">
+        <a href="http://www.kaliber5.de"><img src="img/kaliber5.png" class="card-img-top" alt="kaliber5"></a>
 
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <a href="http://www.kaliber5.de"><img src="img/kaliber5.png" class="img-fluid logo" alt=""></a>
+        <p class="card-text">
+          Author: <a href="https://github.com/simonihmig">Simon Ihmig</a>
+          <br>
+          <i class="fa fa-twitter"></i> <a href="https://twitter.com/simonihmig">@simonihmig</a>
+        </p>
+
+        <p class="card-text">
+          Also special thanks to the many
+          <a href="https://github.com/kaliber5/ember-bootstrap/graphs/contributors">contributors</a>!
+        </p>
+
+        <p class="card-text">&copy; {{current-year}} kaliber5 GmbH. Code released under {{#link-to "license"}}MIT license{{/link-to}}.</p>
+
       </div>
     </div>
-
-    {{partial "partials/author"}}
-    {{partial "partials/copyright"}}
   </div>
-
 </div>
 
 
-<div class="row">
+<div class="card-deck">
 
-  <div class="col-sm-3">
-    <h2>Getting started</h2>
-    <p>For instruction on installing and configuring the addon, see the the Getting Started Guide...</p>
-    <p>{{#link-to "getting-started" class="btn btn-primary"}}Getting Started{{/link-to}}</p>
-
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">Getting started</h3>
+      <p class="card-text">
+        For instruction on installing and configuring the addon, see the the Getting Started
+        Guide.
+      </p>
+    </div>
+    <div class="card-footer">
+      {{#link-to "getting-started" class="btn btn-primary"}}Getting Started{{/link-to}}
+    </div>
   </div>
 
-  <div class="col-sm-3">
-    <h2>Components</h2>
-
-    <p>An overview of the available Ember.js Bootstrap components...</p>
-    <p>{{#link-to "demo" class="btn btn-primary"}}Component Overview{{/link-to}}</p>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">Components</h3>
+      <p class="card-text">An overview of the available Ember.js Bootstrap components.</p>
+    </div>
+    <div class="card-footer">
+      {{#link-to "demo" class="btn btn-primary"}}Component Overview{{/link-to}}
+    </div>
   </div>
 
-  <div class="col-sm-3">
-    <h2>API</h2>
-
-    <p>An overview of all components, their usage and detailed API can be found in the API documentation...</p>
-    <p><a class="btn btn-primary" href="/api">API Docs</a></p>
-
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">API</h3>
+      <p class="card-text">
+        An overview of all components, their usage and detailed API can be found in the API
+        documentation.
+      </p>
+    </div>
+    <div class="card-footer">
+      <a class="btn btn-primary" href="/api">API Docs</a>
+    </div>
   </div>
 
-  <div class="col-sm-3">
-    <h2>Updates</h2>
-    <p>
-      For the latest changes see the Changelog, and follow me on Twitter:
-      <a href="https://twitter.com/simonihmig">@simonihmig</a>
-    </p>
-    <p>{{#link-to "changelog" class="btn btn-primary"}}Changelog{{/link-to}}</p>
-
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">Updates</h3>
+      <p class="card-text">
+        For the latest changes see the Changelog, and follow me on Twitter:
+        <a href="https://twitter.com/simonihmig">@simonihmig</a>
+      </p>
+    </div>
+    <div class="card-footer">
+      {{#link-to "changelog" class="btn btn-primary"}}Changelog{{/link-to}}
+    </div>
   </div>
 
 </div>
-
-<div class="d-sm-none">
-  <hr>
-  {{partial "partials/author"}}
-  {{partial "partials/copyright"}}
-</div>
-
-
