@@ -17,9 +17,9 @@ const resolve = require('resolve');
 const defaultOptions = {
   importBootstrapTheme: false,
   importBootstrapCSS: true,
-  importBootstrapFont: true,
+  importBootstrapFont: false,
   insertEmberWormholeElementToDom: true,
-  bootstrapVersion: 3
+  bootstrapVersion: 4
 };
 
 const supportedPreprocessors = [

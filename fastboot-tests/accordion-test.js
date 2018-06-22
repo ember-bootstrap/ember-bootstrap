@@ -14,9 +14,9 @@ describe('accordion', function() {
 
         expect(response.statusCode).to.equal(200);
         expect($('#accordion').length).to.equal(1);
-        expect($('#accordion .panel').length).to.equal(3);
-        expect($('#accordion .panel:eq(0) .panel-title').text().trim()).to.equal('First item');
-        expect($('#accordion .panel:eq(1) .panel-title').text().trim()).to.equal('Second item');
+        expect($('#accordion .card').length).to.equal(3);
+        expect($('#accordion .card:eq(0) .card-header').text().trim()).to.equal('First item');
+        expect($('#accordion .card:eq(1) .card-header').text().trim()).to.equal('Second item');
       });
   });
 
