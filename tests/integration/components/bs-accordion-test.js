@@ -9,6 +9,7 @@ import {
   accordionItemHeadClass,
   test,
   testBS3,
+  testBS4,
   visibilityClass
 } from '../../helpers/bootstrap-test';
 
@@ -28,7 +29,15 @@ module('Integration | Component | bs-accordion', function(hooks) {
     assert.dom('.panel-group').exists('accordion has panel-group class');
   });
 
-  test('accordion has correct default markup', async function(assert) {
+  testBS4('accordion has correct default markup', async function(assert) {
+    await render(hbs`{{#bs-accordion as |acc|}}
+      {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
+      {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
+    {{/bs-accordion}}`);
+    assert.dom('.accordion .card').exists('accordion has card within accordion');
+  });
+
+  test('accordion yields items', async function(assert) {
     await render(hbs`{{#bs-accordion as |acc|}}
       {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
       {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
@@ -135,11 +144,11 @@ module('Integration | Component | bs-accordion', function(hooks) {
   test('yields change action to add custom behaviour', async function(assert) {
     this.set('selected', 1);
     await render(hbs`{{#bs-accordion selected=1 as |acc|}}
-      {{#acc.item value=1 title="TITLE1"}}CONTENT1 <button {{action acc.change 2}}>Next</button>{{/acc.item}}
+      {{#acc.item value=1 title="TITLE1"}}CONTENT1 <button id="btn" {{action acc.change 2}}>Next</button>{{/acc.item}}
       {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
     {{/bs-accordion}}`);
 
-    await click(`.${accordionClassFor()}:first-child button`);
+    await click('#btn');
 
     assert.dom(`.${accordionClassFor()}:last-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
     assert.dom(`.${accordionClassFor()}:last-child [role="tabpanel"]`).hasClass('collapse', 'tabpanel has collapse class');
