@@ -68,7 +68,7 @@ $(function() {
   }
 
   function setOptionDisplayState(box) {
-    var cssName = $.trim(box.parent('label').text()).toLowerCase();
+    var cssName = $.trim(box.siblings('label').text()).toLowerCase();
     if (box.is(':checked')) {
       $('div.' + cssName).css('display', 'block');
       $('li.' + cssName).css('display', '');
@@ -79,8 +79,7 @@ $(function() {
   }
 
   function scrollToAnchor($anchor) {
-    var navbarHeight = $('.navbar-fixed-top').outerHeight(true);
-    $(document).scrollTop($anchor.offset().top - navbarHeight);
+    $(document).scrollTop($anchor.offset().top);
   }
 
   $('[data-toggle=tab]').on('click', function(event, extraArgs) {
