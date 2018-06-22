@@ -7,7 +7,8 @@ module.exports = function(defaults) {
   let options = {
     snippetSearchPaths: [path.join('tests','dummy','app')],
     'ember-bootstrap': {
-      'importBootstrapCSS': false
+      bootstrapVersion: 4,
+      importBootstrapCSS: false
     }
   };
 

@@ -19,7 +19,7 @@ module.exports = function(environment) {
     },
 
     unstableApiURL: 'http://simonihmig.github.io/ember-bootstrap/',
-    bootstrapVersion: process.env.BOOTSTRAPVERSION || 3
+    bootstrapVersion: process.env.BOOTSTRAPVERSION || 4
   };
 
   if (environment === 'development') {

@@ -16,13 +16,15 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET button-options -->
   <p>
-    {{#bs-button type="primary" onClick=(action "submit")}}Primary Button{{/bs-button}}
-    {{#bs-button type="info" onClick=(action "submit")}}Info Button{{/bs-button}}
-    {{#bs-button type="success" onClick=(action "submit")}}Success Button{{/bs-button}}
-    {{#bs-button type="warning" onClick=(action "submit")}}Warning Button{{/bs-button}}
-    {{#bs-button type="danger" onClick=(action "submit")}}Danger Button{{/bs-button}}
-    {{#bs-button icon="glyphicon glyphicon-download" onClick=(action "submit")}}Icon Button{{/bs-button}}
-    {{#bs-button disabled=true onClick=(action "submit")}}Disabled Button{{/bs-button}}
+    {{#bs-button type="primary" onClick=(action "submit")}}Primary{{/bs-button}}
+    {{#bs-button type="secondary" onClick=(action "submit")}}Secondary{{/bs-button}}
+    {{#bs-button type="success" onClick=(action "submit")}}Success{{/bs-button}}
+    {{#bs-button type="danger" onClick=(action "submit")}}Danger{{/bs-button}}
+    {{#bs-button type="warning" onClick=(action "submit")}}Warning{{/bs-button}}
+    {{#bs-button type="info" onClick=(action "submit")}}Info{{/bs-button}}
+    {{#bs-button type="light" onClick=(action "submit")}}Light{{/bs-button}}
+    {{#bs-button type="dark" onClick=(action "submit")}}Dark{{/bs-button}}
+    {{#bs-button disabled=true onClick=(action "submit")}}Disabled{{/bs-button}}
   </p>
   <p>
     {{#bs-button block=true onClick=(action "submit")}}Block Button{{/bs-button}}
