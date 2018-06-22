@@ -16,15 +16,15 @@ describe('modal', function() {
 
         // default modal
         expect($('#modal').length).to.equal(1);
-        expect($('#modal .modal.in').length).to.equal(1);
+        expect($('#modal .modal.show').length).to.equal(1);
         expect($('#modal .modal').css('display')).to.equal('block');
-        expect($('#modal .modal-backdrop.in').length).to.equal(1);
+        expect($('#modal .modal-backdrop.show').length).to.equal(1);
         expect($('#modal .modal .modal-header .modal-title').text().trim()).to.equal('modal header');
         expect($('#modal .modal .modal-body').text().trim()).to.equal('modal body');
 
         // hidden modal
         expect($('#modal-hidden').length).to.equal(1);
-        expect($('#modal-hidden .modal.in').length).to.equal(0);
+        expect($('#modal-hidden .modal.show').length).to.equal(0);
       });
   });
 

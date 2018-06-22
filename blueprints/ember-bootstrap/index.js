@@ -36,7 +36,7 @@ module.exports = {
   existingConfiguration: null,
 
   beforeInstall(option) {
-    let bootstrapVersion = parseInt(option.bootstrapVersion, 10) || this.retrieveBootstrapVersion() || 3;
+    let bootstrapVersion = parseInt(option.bootstrapVersion, 10) || this.retrieveBootstrapVersion() || 4;
     let preprocessor = option.preprocessor;
 
     if (bootstrapVersion !== 3 && bootstrapVersion !== 4) {

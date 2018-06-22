@@ -16,7 +16,6 @@ describe('dropdown', function() {
         expect($('#dropdown').length).to.equal(1);
         expect($('#dropdown').hasClass('btn-group')).to.be.true;
         expect($('#dropdown button').hasClass('dropdown-toggle')).to.be.true;
-        expect($('#dropdown ul').hasClass('dropdown-menu')).to.be.true;
       });
   });
 

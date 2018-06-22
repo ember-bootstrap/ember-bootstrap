@@ -82,7 +82,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       });
 
       it('creates app.less if not existing and ember-cli-less is present', function() {
-        let args = ['ember-bootstrap'];
+        let args = ['ember-bootstrap', '--bootstrapVersion=3'];
 
         return emberNew()
           .then(() => modifyPackages([
@@ -97,7 +97,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       });
 
       it('adds @import to existing app.less if ember-cli-less is present', function() {
-        let args = ['ember-bootstrap'];
+        let args = ['ember-bootstrap', '--bootstrapVersion=3'];
 
         return emberNew()
           .then(() => modifyPackages([
@@ -153,7 +153,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       });
 
       it('creates app.less if not existing and --preprocessor=less', function() {
-        let args = ['ember-bootstrap', '--preprocessor=less'];
+        let args = ['ember-bootstrap', '--preprocessor=less', '--bootstrapVersion=3'];
 
         return emberNew()
           .then(() => emberGenerate(args))
@@ -165,7 +165,7 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       });
 
       it('adds @import to existing app.less if --preprocessor=less', function() {
-        let args = ['ember-bootstrap', '--preprocessor=less'];
+        let args = ['ember-bootstrap', '--preprocessor=less', '--bootstrapVersion=3'];
 
         return emberNew()
           .then(() => createStyleFixture('app.less'))
