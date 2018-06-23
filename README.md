@@ -12,7 +12,7 @@
 
 An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getbootstrap.com/) 3 or 4 in Ember applications.
 
-The addon includes the Bootstrap assets (CSS, Icons) in your project (can be disabled). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
+The addon includes the Bootstrap CSS (or Sass, Less) in your project (can be disabled). On top of that, it provides a set of native Ember components (no use of Bootstrap JavaScript!).</p>
 
 *See [www.ember-bootstrap.com](http://www.ember-bootstrap.com/) for full documentation.*
 
@@ -22,7 +22,7 @@ In your application's directory:
 
     ember install ember-bootstrap
     
-This will install Bootstrap 3 and will use the currently installed preprocessor or none if one is not installed.
+This will install Bootstrap 4 and will use the currently installed preprocessor or none if one is not installed.
 To switch Bootstrap version or preprocessor, see the [setup documentation](http://www.ember-bootstrap.com/#/getting-started/setup).
 
 ## Compatibility
