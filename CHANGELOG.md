@@ -1,3 +1,31 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/kaliber5/ember-bootstrap/compare/1.2.2...2.0.0) (2018-06-23)
+
+
+### Bug Fixes
+
+* **Accordion:** BS4: update markup to match Bootstrap 4's default markup ([6ace8a9](https://github.com/kaliber5/ember-bootstrap/commit/6ace8a9))
+* **Build:** also apply `whitelist`/`blacklist` based "tree shaking" to app tree (re-exports of addon tree) ([a8fa8d1](https://github.com/kaliber5/ember-bootstrap/commit/a8fa8d1)), closes [#472](https://github.com/kaliber5/ember-bootstrap/issues/472)
+* **FormElement:** always show validation errors in BS4, including for e.g. input groups ([396d59e](https://github.com/kaliber5/ember-bootstrap/commit/396d59e)), closes [#578](https://github.com/kaliber5/ember-bootstrap/issues/578)
+* **FormElement:** fix exception for destroyed elements. Thanks to @BartTK ([a3214f0](https://github.com/kaliber5/ember-bootstrap/commit/a3214f0))
+
+
+### Features
+
+* **Setup:** make Bootstrap 4 the new default ([ee0767b](https://github.com/kaliber5/ember-bootstrap/commit/ee0767b))
+* **Carousel:** support transition="slide" for BS4 carousels. Thanks to [@nbrookie](https://github.com/nbrookie) ([fa8550a](https://github.com/kaliber5/ember-bootstrap/commit/fa8550a)), closes [#591](https://github.com/kaliber5/ember-bootstrap/issues/591)
+* set all transitions to 0 in testing mode to speed up test runs ([fc38c0b](https://github.com/kaliber5/ember-bootstrap/commit/fc38c0b)), closes [#595](https://github.com/kaliber5/ember-bootstrap/issues/595)
+* **Tooltip/Popover:** yield `close` action to enable custom hiding behavior ([b901a92](https://github.com/kaliber5/ember-bootstrap/commit/b901a92)), closes [#475](https://github.com/kaliber5/ember-bootstrap/issues/475)
+
+
+### BREAKING CHANGES
+
+* **Setup:** If you are using Bootstrap 3 and you don't have `bootstrapVersion` explicitly in the bootstrap config of your
+`ember-cli-build.js`, then this change will implicitly switch to Bootstrap 4. In this case please run
+`ember g ember-bootstrap --bootstrapVersion=3` to fix it at version 3!
+* **Build:** Support for node.js 4 has been dropped!
+
+
 <a name="1.2.2"></a>
 ## [1.2.2](https://github.com/kaliber5/ember-bootstrap/compare/1.2.1...1.2.2) (2018-04-12)
 
