@@ -451,7 +451,7 @@ export default Component.extend(TransitionSupport, {
    * @private
    */
   show() {
-    if (this.get('isDestroyed')) {
+    if (this.get('isDestroyed') || this.get('isDestroying')) {
       return;
     }
 
