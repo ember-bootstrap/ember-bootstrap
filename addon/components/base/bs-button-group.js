@@ -15,7 +15,7 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  ```handlebars
  {{#bs-button-group as |bg|}}
    {{#bg.button}}1{{/bg.button}}
-   {{#bg.button}}2{{/s-bg.button}}
+   {{#bg.button}}2{{/bg.button}}
    {{#bg.button}}3{{/bg.button}}
  {{/bs-button-group}}
  ```
