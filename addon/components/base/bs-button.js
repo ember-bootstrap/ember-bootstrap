@@ -1,6 +1,7 @@
 import { scheduleOnce } from '@ember/runloop';
 import Component from '@ember/component';
 import { observer, computed } from '@ember/object';
+import { deprecatingAlias, equal, or }  from '@ember/object/computed';
 import layout from 'ember-bootstrap/templates/components/bs-button';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
@@ -28,33 +29,14 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  {{/bs-button}}
  ```
 
- ### States
-
- Use the `textState` property to change the label of the button. You can bind it to a controller property to set a "loading" state for example.
- The label of the button will be taken from the `<state>Text` property.
-
- ```hbs
- {{bs-button type="primary" icon="glyphicon glyphicon-download" textState=buttonState defaultText="Download" loadingText="Loading..." onClick="download"}}
- ```
-
- ```js
- App.ApplicationController = Ember.Controller.extend({
-   buttonState: "default"
-   actions: {
-     download: function() {
-       this.set("buttonState", "loading");
-     }
-   }
- });
- ```
-
  ### Promise support for automatic state change
 
  When returning a Promise for any asynchronous operation from the `onClick` closure action the button will
- manage an internal state ("default" > "pending" > "resolved"/"rejected") automatically, changing its label according to the state of the promise:
+ manage an internal state ("default" > "pending" > "fulfilled"/"rejected") automatically, changing its label
+ according to the state of the promise:
 
  ```hbs
- {{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." resolvedText="Completed!" rejectedText="Oups!?" onClick=(action "download")}}
+ {{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." fulfilledText="Completed!" rejectedText="Oups!?" onClick=(action "download")}}
  ```
 
  ```js
@@ -67,6 +49,20 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
    }
  });
  ```
+
+ For further customization `isPending`, `isFulfilled`, `isRejected` and `isSettled` properties are yielded:
+
+ ```hbs
+ {{#bs-button onClick=(action "download") as |button|}}
+  Download
+  {{#if button.isPending}}
+    <span class="loading-spinner"></span>
+  {{/if}}
+ {{/bs-button}}
+ ```
+
+ You can `reset` the state represented by these properties and used for button's text by setting `reset` property to
+ `true`.
 
  @class Button
  @namespace Components
@@ -111,17 +107,28 @@ export default Component.extend(TypeClass, SizeClass, {
   pendingText: null,
 
   /**
-   * Label of the button used if `onClick` event has returned a Promise which resolved sucessfully.
+   * Label of the button used if `onClick` event has returned a Promise which succeeded.
    * Not considered if used as a block component.
    *
-   * @property resolvedText
+   * @property fulfilledText
    * @type string
    * @public
    */
-  resolvedText: null,
+  fulfilledText: null,
 
   /**
-   * Label of the button used if `onClick` event has returned a Promise which has been rejected.
+   * @property resolvedText
+   * @type string
+   * @deprecated
+   * @public
+   */
+  resolvedText: deprecatingAlias('fulfilledText', {
+    id: 'ember-bootstrap.bs-button-resolved-text',
+    until: '3.0.0'
+  }),
+
+  /**
+   * Label of the button used if `onClick` event has returned a Promise which failed.
    * Not considered if used as a block component.
    *
    * @property rejectedText
@@ -230,14 +237,52 @@ export default Component.extend(TypeClass, SizeClass, {
   /**
    * State of the button. The button's label (if not used as a block component) will be set to the
    * `<state>Text` property.
-   * This property will automatically be set when using a click action that supplies the callback with an promise
+   * This property will automatically be set when using a click action that supplies the callback with a promise.
+   * Possible values are: "default" > "pending" > "fulfilled" / "rejected".
+   * It could be reseted by `reset` property.
    *
-   * @property textState
+   * @property state
    * @type String
    * @default 'default'
-   * @protected
+   * @private
    */
-  textState: 'default',
+  state: 'default',
+
+  /**
+   * Promise returned by `onClick` event is pending.
+   *
+   * @property isPending
+   * @type Boolean
+   * @private
+   */
+  isPending: equal('state', 'pending'),
+
+  /**
+   * Promise returned by `onClick` event has been succeeded.
+   *
+   * @property isFulfilled
+   * @type Boolean
+   * @private
+   */
+  isFulfilled: equal('state', 'fulfilled'),
+
+  /**
+   * Promise returned by `onClick` event has been rejected.
+   *
+   * @property isRejected
+   * @type Boolean
+   * @private
+   */
+  isRejected: equal('state', 'rejected'),
+
+  /**
+   * Promise returned by `onClick` event has been succeeded or rejected.
+   *
+   * @property isFulfilled
+   * @type Boolean
+   * @private
+   */
+  isSettled: or('isFulfilled', 'isRejected'),
 
   /**
    * Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.
@@ -259,7 +304,11 @@ export default Component.extend(TypeClass, SizeClass, {
 
   /**
    * When clicking the button this action is called with the value of the button (that is the value of the "value" property).
+   *
    * Return a promise object, and the buttons state will automatically set to "pending", "resolved" and/or "rejected".
+   * This could be used to automatically set the button's text depending on promise state (`defaultText`, `pendingText`,
+   * `fulfilledText`, `rejectedText`) and for futher customization using the yielded `isPending`, `isFulfilled`,
+   * `isRejected` properties.
    *
    * The click event will not bubble up, unless you set `bubble` to true.
    *
@@ -273,22 +322,22 @@ export default Component.extend(TypeClass, SizeClass, {
    * This will reset the state property to 'default', and with that the button's label to defaultText
    *
    * @method resetState
-   * @protected
+   * @private
    */
   resetState() {
-    this.set('textState', 'default');
+    this.set('state', 'default');
   },
 
   resetObserver: observer('reset', function() {
     if (this.get('reset')) {
       scheduleOnce('actions', this, function() {
-        this.set('textState', 'default');
+        this.set('state', 'default');
       });
     }
   }),
 
-  text: computed('textState', 'defaultText', 'pendingText', 'resolvedText', 'rejectedText', function() {
-    return this.getWithDefault(`${this.get('textState')}Text`, this.get('defaultText'));
+  text: computed('state', 'defaultText', 'pendingText', 'fulfilledText', 'rejectedText', function() {
+    return this.getWithDefault(`${this.get('state')}Text`, this.get('defaultText'));
   }),
 
   /**
@@ -300,14 +349,14 @@ export default Component.extend(TypeClass, SizeClass, {
     if (action !== null) {
       let promise = (action)(this.get('value'));
       if (promise && typeof promise.then === 'function' && !this.get('isDestroyed')) {
-        this.set('textState', 'pending');
+        this.set('state', 'pending');
         promise.then(() => {
           if (!this.get('isDestroyed')) {
-            this.set('textState', 'resolved');
+            this.set('state', 'fulfilled');
           }
         }, () => {
           if (!this.get('isDestroyed')) {
-            this.set('textState', 'rejected');
+            this.set('state', 'rejected');
           }
         }
         );
