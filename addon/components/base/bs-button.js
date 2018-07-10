@@ -334,9 +334,7 @@ export default Component.extend(TypeClass, SizeClass, {
 
   resetObserver: observer('reset', function() {
     if (this.get('reset')) {
-      scheduleOnce('actions', this, function() {
-        this.set('state', 'default');
-      });
+      scheduleOnce('actions', this, 'resetState');
     }
   }),
 
