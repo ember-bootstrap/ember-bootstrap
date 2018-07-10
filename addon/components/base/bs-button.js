@@ -285,7 +285,11 @@ export default Component.extend(TypeClass, SizeClass, {
   isSettled: or('isFulfilled', 'isRejected'),
 
   /**
-   * Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.
+   * Set this to `true` to reset the `state`. A typical use case is to bind this attribute with ember-data isDirty flag.
+   *
+   * The old value is not taken into consideration. Setting a `true` value to `true` again will also reset `state`.
+   * In that case it's even to notify the observer system that the property has changed by calling
+   * [`notifyPropertyChange()`](https://www.emberjs.com/api/ember/3.2/classes/EmberObject/methods/notifyPropertyChange?anchor=notifyPropertyChange).
    *
    * @property reset
    * @type boolean
