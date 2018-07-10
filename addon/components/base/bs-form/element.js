@@ -139,6 +139,11 @@ const nonDefaultLayouts = A([
  {{/bs-form}}
  ```
 
+ If you are using the custom control quite often, you should consider writing an integration plugin like
+ [`ember-bootstrap-power-select`](https://github.com/kaliber5/ember-bootstrap-power-select).
+ To do so, you need to provide a component `{{bs-form/element/control/my-custom-control}}` which extends
+ [`Components.FormElementControl`](Components.FormElementControl.html).
+
  ### HTML attributes
 
  To set HTML attributes on the control element provided by this component, set them as properties of this component:
