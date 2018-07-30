@@ -67,7 +67,7 @@
     "ember-source-channel-url": "^1.0.1",
     "ember-try": "^0.2.23",
     "eslint-plugin-ember": "^5.0.0",
-    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-node": "^7.0.0",
     "glob": "^7.1.1",
     "gulp": "^3.9.0",
     "gulp-conventional-changelog": "^2.0.0",
