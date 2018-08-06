@@ -70,6 +70,20 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
 
   See the above mentioned addons for examples.
 
+  ### Submission state
+
+  A `isSubmitting` property is yielded, which is `true` after submit has been triggered and before the Promise returned
+  by `onSubmit` is fulfilled. It could be used to disable form's submit button and showing a loading spinner for example:
+
+  ```
+  {{#bs-form onSubmit=(action 'save') as |form|}}
+    {{#bs-button type='submit' disabled=form.isSubmitting}}
+      Save
+      {{#if form.isSubmitting}} {{fa-icon 'spinner'}} {{/if}}
+    {{/bs-button}}
+  {{/bs-form}}
+  ```
+
   @class Form
   @namespace Components
   @extends Ember.Component
@@ -135,6 +149,28 @@ export default Component.extend({
    * @public
    */
   horizontalLabelGridClass: 'col-md-4',
+
+  /**
+   * `isSubmitting` is `true` after `submit` event has been triggered and until Promise returned by `onSubmit` is
+   * fulfilled. If `validate` returns a Promise that one is also taken into consideration.
+   *
+   * If multiple concurrent submit events are fired, it stays `true` until all submit events have been fulfilled.
+   *
+   * @property isSubmitting
+   * @type {Boolean}
+   * @readonly
+   * @private
+   */
+  isSubmitting: false,
+
+  /**
+   * Count of pending submissions.
+   *
+   * @property pendingSubmissions
+   * @type {Integer}
+   * @private
+   */
+  pendingSubmissions: 0,
 
   /**
    * If set to true pressing enter will submit the form, even if no submit button is present
@@ -220,6 +256,9 @@ export default Component.extend({
    * @private
    */
   submit(e) {
+    this.set('isSubmitting', true);
+    this.incrementProperty('pendingSubmissions');
+
     if (e) {
       e.preventDefault();
     }
@@ -227,19 +266,30 @@ export default Component.extend({
 
     this.get('onBefore')(model);
 
-    if (!this.get('hasValidator')) {
-      return this.get('onSubmit')(model);
-    } else {
-      let validationPromise = this.validate(this.get('model'));
-      if (validationPromise && validationPromise instanceof RSVP.Promise) {
-        validationPromise
-          .then((r) => this.get('onSubmit')(model, r))
-          .catch((err) => {
-            this.set('showAllValidations', true);
-            return this.get('onInvalid')(model, err);
+    RSVP.resolve(this.get('hasValidator') ? this.validate(this.get('model')) : null)
+      .then((r) => {
+        RSVP.resolve(this.get('onSubmit')(model, r))
+          .finally(() => {
+            if (!this.get('isDestroyed')) {
+              if (this.get('pendingSubmissions') === 1) {
+                this.set('isSubmitting', false);
+              }
+              this.decrementProperty('pendingSubmissions');
+            }
           });
-      }
-    }
+      })
+      .catch((err) => {
+        if (!this.get('isDestroyed')) {
+          this.set('showAllValidations', true);
+
+          if (this.get('pendingSubmissions') === 1) {
+            this.set('isSubmitting', false);
+          }
+          this.decrementProperty('pendingSubmissions');
+
+          this.get('onInvalid')(model, err);
+        }
+      });
   },
 
   keyPress(e) {

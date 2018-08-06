@@ -3,7 +3,7 @@ import { A } from '@ember/array';
 import { resolve, reject } from 'rsvp';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, fillIn, triggerKeyEvent, triggerEvent } from '@ember/test-helpers';
+import { render, click, fillIn, triggerKeyEvent, triggerEvent, waitFor, settled } from '@ember/test-helpers';
 import {
   formFeedbackClass,
   test,
@@ -14,6 +14,16 @@ import {
   formFeedbackElement
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import { defer } from 'rsvp';
+import { next } from '@ember/runloop';
+
+const nextRunloop = function() {
+  return new Promise((resolve) => {
+    next(() => {
+      resolve();
+    });
+  });
+};
 
 module('Integration | Component | bs-form', function(hooks) {
   setupRenderingTest(hooks);
@@ -157,6 +167,137 @@ module('Integration | Component | bs-form', function(hooks) {
       'validation errors are shown after form submission'
     );
     assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
+  });
+
+  test('Yields #isSubmitting', async function(assert) {
+    let deferredSubmitAction = defer();
+    this.set('submitAction', () => {
+      return deferredSubmitAction.promise;
+    });
+    await this.render(hbs`{{#bs-form onSubmit=submitAction as |form|}}
+      <div class='state {{if form.isSubmitting 'is-submitting'}}'></div>
+    {{/bs-form}}`);
+
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+
+    triggerEvent('form', 'submit');
+
+    await waitFor('form .state.is-submitting');
+
+    deferredSubmitAction.resolve();
+    await settled();
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+  });
+
+  test('Yielded #isSubmitting is never true if neither validate nor onSubmit returns Promise', async function(assert) {
+    this.set('submitAction', () => {});
+    this.set('validate', () => {});
+    this.set('hasValidator', true);
+    await this.render(hbs`{{#bs-form onSubmit=submitAction validate=validate hasValidator=hasValidator as |form|}}
+      <div class='state {{if form.isSubmitting 'is-submitting'}}'></div>
+    {{/bs-form}}`);
+
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+    triggerEvent('form', 'submit');
+    await nextRunloop();
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+  });
+
+  test('Yielded #isSubmitting is true as long as Promise returned by onSubmit is pending', async function(assert) {
+    let deferredSubmitAction = defer();
+    this.set('submitAction', () => {
+      return deferredSubmitAction.promise;
+    });
+    await this.render(hbs`{{#bs-form onSubmit=submitAction as |form|}}
+      <div class='state {{if form.isSubmitting 'is-submitting'}}'></div>
+    {{/bs-form}}`);
+
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+
+    triggerEvent('form', 'submit');
+    await waitFor('form .state.is-submitting');
+
+    deferredSubmitAction.resolve();
+    await settled();
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+  });
+
+  test('Yielded #isSubmitting is true as long as Promise returned by validate is pending', async function(assert) {
+    let deferredValidateAction = defer();
+    this.set('hasValidator', true);
+    this.set('validateAction', () => {
+      return deferredValidateAction.promise;
+    });
+    await this.render(hbs`{{#bs-form hasValidator=hasValidator validate=validateAction as |form|}}
+      <div class='state {{if form.isSubmitting 'is-submitting'}}'></div>
+    {{/bs-form}}`);
+
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+
+    triggerEvent('form', 'submit');
+    await waitFor('form .state.is-submitting');
+
+    deferredValidateAction.resolve();
+    await settled();
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+  });
+
+  test('Yielded #isSubmitting is true as long as Promises returned by onSubmit and validate are pending', async function(assert) {
+    let deferredSubmitAction = defer();
+    let deferredValidateAction = defer();
+    this.set('submitAction', () => {
+      return deferredSubmitAction.promise;
+    });
+    this.set('validateAction', () => {
+      return deferredValidateAction.promise;
+    });
+    await this.render(hbs`{{#bs-form onSubmit=submitAction validate=validateAction hasValidator=true as |form|}}
+      <div class='state {{if form.isSubmitting 'is-submitting'}}'></div>
+    {{/bs-form}}`);
+
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+
+    triggerEvent('form', 'submit');
+    await waitFor('form .state.is-submitting');
+
+    deferredValidateAction.resolve();
+    await nextRunloop();
+    assert.dom('form .state').hasClass('is-submitting');
+
+    deferredSubmitAction.resolve();
+    await settled();
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+  });
+
+  test('Yielded #isSubmitting stays true until all pending submit have been fulfilled', async function(assert) {
+    let deferredSubmitActions = [];
+    this.set('submitAction', () => {
+      let deferred = defer();
+      deferredSubmitActions.push(deferred);
+      return deferred.promise;
+    });
+    await this.render(hbs`{{#bs-form onSubmit=submitAction as |form|}}
+      <div class='state {{if form.isSubmitting 'is-submitting'}}'></div>
+    {{/bs-form}}`);
+
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+
+    triggerEvent('form', 'submit');
+    await waitFor('form .state.is-submitting');
+
+    triggerEvent('form', 'submit');
+    await nextRunloop();
+    // for ember <= 2.12 submitAction is not executed on the first runloop after submit has been triggered
+    await nextRunloop();
+    assert.equal(deferredSubmitActions.length, 2, 'assumption: submit action has been fired twice');
+
+    deferredSubmitActions[0].resolve();
+    await nextRunloop();
+    assert.dom('form .state').hasClass('is-submitting');
+
+    deferredSubmitActions[1].resolve();
+    await settled();
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
   });
 
   test('Adds default onChange action to form elements that updates model\'s property', async function(assert) {
