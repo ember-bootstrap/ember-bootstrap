@@ -128,8 +128,7 @@ export default Component.extend({
   closeOnMenuClick: true,
 
   /**
-   * By default the dropdown menu will expand downwards. Set to 'up' to expand upwards.
-   * BS4 also allows 'left' and 'right'
+   * By default the dropdown menu will expand downwards. Other options include, 'up', 'left' and 'right'
    *
    * @property direction
    * @type string
