@@ -17,6 +17,12 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
    * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)
    * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)
 
+ Furthermore references to the following actions are yielded:
+
+ * `toggleDropdown`
+ * `openDropdown`
+ * `closeDropdown`
+
  ```hbs
  {{#bs-dropdown as |dd|}}
    {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
@@ -78,6 +84,44 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
  ...
  {{/bs-dropdown}}
  ```
+
+ ### Open, close or toggle the dropdown programmatically
+
+ If you wanted to control when the dropdown opens and closes programmatically, the `bs-dropdown` component yields the
+ `openDropdown`, `closeDropdown` and `toggleDropdown` actions which you can then pass to your own handlers. For example:
+
+ ```hbs
+ {{#bs-dropdown closeOnMenuClick=false as |dd|}}
+   {{#bs-button}}Dropdown{{/bs-button}}
+   {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
+   {{#dd.menu as |ddm|}}
+     {{#each items as |item|}}
+       {{#ddm.item}}
+         <a href onclick={{action "changeItems" item dd.closeDropdown}}>
+           {{item.text}}
+         </a>
+       {{/ddm.item}}
+     {{/each}}
+   {{/dd.menu}}
+   {{/bs-dropdown}}
+ ```
+
+ Then in your controller or component, optionally close the dropdown:
+
+ ```js
+ ...
+ actions: {
+   handleDropdownClicked(item, closeDropdown) {
+     if(item.isTheRightOne) {
+       this.chosenItems.pushObject(item);
+       closeDropdown();
+     } else {
+       this.set('item', this.getRandomItems());
+     }
+   },
+ }
+ ```
+
 
  ### Bootstrap 3/4 Notes
 
