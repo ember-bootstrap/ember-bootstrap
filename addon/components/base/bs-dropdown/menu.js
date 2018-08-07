@@ -24,6 +24,7 @@ export default Component.extend({
    * @default ul
    * @public
    */
+  tagName: '',
 
   /**
    * @property ariaRole
