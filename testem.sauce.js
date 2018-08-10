@@ -10,7 +10,8 @@ module.exports = {
     'SLChrome',
     'SLFirefox',
     'SLIE11',
-    'SLSafari',
+    // causes Saucelabs timeouts, enable again when stable again
+    // 'SLSafari',
     'SLSafariLast'
   ],
 
