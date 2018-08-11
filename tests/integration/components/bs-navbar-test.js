@@ -93,6 +93,8 @@ module('Integration | Component | bs-navbar', function(hooks) {
     );
   });
 
+
+
   testBS3('it exposes all the requisite contextual components', async function(assert) {
     await render(hbs`
       {{#bs-navbar as | navbar | }}
@@ -371,6 +373,24 @@ module('Integration | Component | bs-navbar', function(hooks) {
 
     await click('button');
     assert.ok(action.calledOnce, 'onExpand action has been called.');
+  });
+
+  test('Navbar yields toggleNavbar action', async function(assert) {
+    let expanded = this.spy();
+    this.actions.expanded = expanded;
+
+    let collapsed = this.spy();
+    this.actions.collapsed = collapsed;
+
+    await render(hbs`{{#bs-navbar collapsed=true onExpand=(action "expanded") onCollapse=(action "collapsed") as |navbar|}}
+        <button {{action navbar.toggleNavbar}}>Expand</button>
+    {{/bs-navbar}}`);
+
+    await click('button');
+    assert.ok(expanded.calledOnce, 'onExpand action has been called.');
+
+    await click('button');
+    assert.ok(collapsed.calledOnce, 'onCollapse action has been called.');
   });
 
   test('Clicking expanded navbar link collapses navbar', async function(assert) {
