@@ -16,7 +16,7 @@
     "@ember/test-helpers": "^0.7.16",
     "bootstrap": "^4.0.0",
     "bootstrap-sass": "^3.3.7",
-    "broccoli-asset-rev": "^2.7.0",
+    "broccoli-asset-rev": "^3.0.0",
     "chai": "^4.0.0",
     "chai-things": "^0.2.0",
     "ember-bootstrap-power-select": "^1.0.0-alpha.1",
