@@ -35,3 +35,12 @@ So we need to reset them here, otherwise arrow positioning will be slightly off
 .ember-bootstrap-popover.popover.right .arrow {
     margin-top: 0;
 }
+
+/*
+When using ember-popper with a BS3 dropdown, for backwards compat reasons need the <ul class="dropdown-menu"> tag inside the popper element.
+That causes the popper element to not get .dropdown-menu applied to it, so it has no z-index defined, causing it to appear behind other elements.
+Adding this class ensures it appears in front of other elements.
+*/
+.ember-bootstrap-dropdown-bs3-popper {
+    z-index: 1000;
+}

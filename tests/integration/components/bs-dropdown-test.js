@@ -239,7 +239,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.ok(this.element.querySelector('.dropdown-menu').offsetParent !== null);
   });
 
-  testBS4('dropdown menu can be rendered in a wormhole', async function(assert) {
+  test('dropdown menu can be rendered in a wormhole', async function(assert) {
     await render(
       hbs`
         <div id="ember-bootstrap-wormhole"></div>
