@@ -219,7 +219,7 @@ export default Component.extend(TransitionSupport, {
   }).volatile(),
 
   /**
-   * The destination DOM element for in-element.
+   * The destination DOM element for ember-popper.
    *
    * @property destinationElement
    * @type object
