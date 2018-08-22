@@ -70,6 +70,15 @@ export default Component.extend({
    */
   renderInPlace: true,
 
+  /**
+   * @property _renderInPlace
+   * @type boolean
+   * @private
+   */
+  _renderInPlace: computed('renderInPlace', function() {
+    return this.get('renderInPlace') || typeof document === 'undefined' || !document.getElementById('ember-bootstrap-wormhole');
+  }),
+
   alignClass: computed('align', function() {
     if (this.get('align') !== 'left') {
       return `dropdown-menu-${this.get('align')}`;
