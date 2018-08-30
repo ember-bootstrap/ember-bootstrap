@@ -55,7 +55,7 @@
     "ember-sinon-qunit": "^3.2.0",
     "ember-source": "~3.3.2",
     "ember-source-channel-url": "^1.0.1",
-    "ember-try": "^0.2.23",
+    "ember-try": "^1.0.0",
     "eslint-plugin-ember": "^5.0.0",
     "eslint-plugin-node": "^7.0.0",
     "glob": "^7.1.1",
