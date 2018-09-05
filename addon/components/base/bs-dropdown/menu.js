@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { notEmpty } from '@ember/object/computed';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown/menu';
 
 /**
@@ -99,8 +98,6 @@ export default Component.extend({
   flip: true,
 
   _popperApi: null,
-
-  inDom: notEmpty('toggleElement').readOnly(),
 
   popperPlacement: computed('direction', 'align', function() {
     let placement = 'bottom-start';
