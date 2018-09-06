@@ -4,6 +4,6 @@
 module.exports = {
   extends: 'recommended',
   rules: {
-    'html-comments': false
+    'no-html-comments': false
   }
 };
