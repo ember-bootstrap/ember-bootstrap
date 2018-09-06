@@ -76,13 +76,14 @@
               layout,
             
               /**
-               * Defaults to a &#x60;&lt;ul&gt;&#x60; tag in BS3 and a &#x27;&lt;div&gt;&#x27; tag in BS4. Change for other types of dropdown menus.
+               * Defaults to a &#x60;&lt;ul&gt;&#x60; tag in BS3 and a &#x60;&lt;div&gt;&#x60; tag in BS4. Change for other types of dropdown menus.
                *
                * @property tagName
                * @type string
                * @default ul
                * @public
                */
+              tagName: &#x27;&#x27;,
             
               /**
                * @property ariaRole
@@ -118,7 +119,7 @@
               inNav: false,
             
               /**
-               * Applies only to BS4: by default the menu is rendered in the same place the dropdown. If you experience clipping
+               * By default the menu is rendered in the same place the dropdown. If you experience clipping
                * issues, you can set this to false to render the menu in a wormhole at the top of the DOM.
                *
                * @property renderInPlace
@@ -128,11 +129,72 @@
                */
               renderInPlace: true,
             
+              /**
+               * @property _renderInPlace
+               * @type boolean
+               * @private
+               */
+              _renderInPlace: computed(&#x27;renderInPlace&#x27;, function() {
+                return this.get(&#x27;renderInPlace&#x27;) || typeof document === &#x27;undefined&#x27; || !document.getElementById(&#x27;ember-bootstrap-wormhole&#x27;);
+              }),
+            
               alignClass: computed(&#x27;align&#x27;, function() {
                 if (this.get(&#x27;align&#x27;) !== &#x27;left&#x27;) {
                   return &#x60;dropdown-menu-${this.get(&#x27;align&#x27;)}&#x60;;
                 }
-              })
+              }),
+              
+              isOpen: computed({
+                get() {
+                  return false;
+                },
+                set(key, value) {
+                  let update = this.get(&#x27;_popperApi.update&#x27;);
+                  update &amp;&amp; update();
+                  return value;
+                }
+              }),
+            
+              flip: true,
+            
+              _popperApi: null,
+            
+              popperPlacement: computed(&#x27;direction&#x27;, &#x27;align&#x27;, function() {
+                let placement = &#x27;bottom-start&#x27;;
+                let { direction, align } = this.getProperties(&#x27;direction&#x27;, &#x27;align&#x27;);
+            
+                if (direction === &#x27;up&#x27;) {
+                  placement = &#x27;top-start&#x27;;
+                  if (align === &#x27;right&#x27;) {
+                    placement = &#x27;top-end&#x27;;
+                  }
+                } else if (direction === &#x27;left&#x27;) {
+                  placement = &#x27;left-start&#x27;;
+                } else if (direction === &#x27;right&#x27;) {
+                  placement = &#x27;right-start&#x27;;
+                } else if (align === &#x27;right&#x27;) {
+                  placement = &#x27;bottom-end&#x27;;
+                }
+                return placement;
+              }),
+            
+              popperModifiers: computed(&#x27;inNav&#x27;, &#x27;flip&#x27;, function() {
+                return {
+                  // @todo add offset config
+                  applyStyle: {
+                    enabled: !this.get(&#x27;inNav&#x27;)
+                  },
+                  flip: {
+                    enabled: this.get(&#x27;flip&#x27;)
+                  }
+                };
+              }),
+            
+              actions: {
+                registerPopperApi(api) {
+                  this.set(&#x27;_popperApi&#x27;, api);
+                }
+              }
             });
             
                 </pre>

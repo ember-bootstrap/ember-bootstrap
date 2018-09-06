@@ -130,6 +130,20 @@
             
               See the above mentioned addons for examples.
             
+              ### Submission state
+            
+              A &#x60;isSubmitting&#x60; property is yielded, which is &#x60;true&#x60; after submit has been triggered and before the Promise returned
+              by &#x60;onSubmit&#x60; is fulfilled. It could be used to disable form&#x27;s submit button and showing a loading spinner for example:
+            
+              &#x60;&#x60;&#x60;
+              {{#bs-form onSubmit=(action &#x27;save&#x27;) as |form|}}
+                {{#bs-button type=&#x27;submit&#x27; disabled=form.isSubmitting}}
+                  Save
+                  {{#if form.isSubmitting}} {{fa-icon &#x27;spinner&#x27;}} {{/if}}
+                {{/bs-button}}
+              {{/bs-form}}
+              &#x60;&#x60;&#x60;
+            
               @class Form
               @namespace Components
               @extends Ember.Component
@@ -195,6 +209,28 @@
                * @public
                */
               horizontalLabelGridClass: &#x27;col-md-4&#x27;,
+            
+              /**
+               * &#x60;isSubmitting&#x60; is &#x60;true&#x60; after &#x60;submit&#x60; event has been triggered and until Promise returned by &#x60;onSubmit&#x60; is
+               * fulfilled. If &#x60;validate&#x60; returns a Promise that one is also taken into consideration.
+               *
+               * If multiple concurrent submit events are fired, it stays &#x60;true&#x60; until all submit events have been fulfilled.
+               *
+               * @property isSubmitting
+               * @type {Boolean}
+               * @readonly
+               * @private
+               */
+              isSubmitting: false,
+            
+              /**
+               * Count of pending submissions.
+               *
+               * @property pendingSubmissions
+               * @type {Integer}
+               * @private
+               */
+              pendingSubmissions: 0,
             
               /**
                * If set to true pressing enter will submit the form, even if no submit button is present
@@ -280,6 +316,9 @@
                * @private
                */
               submit(e) {
+                this.set(&#x27;isSubmitting&#x27;, true);
+                this.incrementProperty(&#x27;pendingSubmissions&#x27;);
+            
                 if (e) {
                   e.preventDefault();
                 }
@@ -287,19 +326,30 @@
             
                 this.get(&#x27;onBefore&#x27;)(model);
             
-                if (!this.get(&#x27;hasValidator&#x27;)) {
-                  return this.get(&#x27;onSubmit&#x27;)(model);
-                } else {
-                  let validationPromise = this.validate(this.get(&#x27;model&#x27;));
-                  if (validationPromise &amp;&amp; validationPromise instanceof RSVP.Promise) {
-                    validationPromise
-                      .then((r) =&gt; this.get(&#x27;onSubmit&#x27;)(model, r))
-                      .catch((err) =&gt; {
-                        this.set(&#x27;showAllValidations&#x27;, true);
-                        return this.get(&#x27;onInvalid&#x27;)(model, err);
+                RSVP.resolve(this.get(&#x27;hasValidator&#x27;) ? this.validate(this.get(&#x27;model&#x27;)) : null)
+                  .then((r) =&gt; {
+                    RSVP.resolve(this.get(&#x27;onSubmit&#x27;)(model, r))
+                      .finally(() =&gt; {
+                        if (!this.get(&#x27;isDestroyed&#x27;)) {
+                          if (this.get(&#x27;pendingSubmissions&#x27;) === 1) {
+                            this.set(&#x27;isSubmitting&#x27;, false);
+                          }
+                          this.decrementProperty(&#x27;pendingSubmissions&#x27;);
+                        }
                       });
-                  }
-                }
+                  })
+                  .catch((err) =&gt; {
+                    if (!this.get(&#x27;isDestroyed&#x27;)) {
+                      this.set(&#x27;showAllValidations&#x27;, true);
+            
+                      if (this.get(&#x27;pendingSubmissions&#x27;) === 1) {
+                        this.set(&#x27;isSubmitting&#x27;, false);
+                      }
+                      this.decrementProperty(&#x27;pendingSubmissions&#x27;);
+            
+                      this.get(&#x27;onInvalid&#x27;)(model, err);
+                    }
+                  });
               },
             
               keyPress(e) {

@@ -153,6 +153,10 @@
               {{/form.element}}
             {{/bs-form}}
             </code></pre>
+            <p>If you are using the custom control quite often, you should consider writing an integration plugin like
+            <a href="https://github.com/kaliber5/ember-bootstrap-power-select"><code>ember-bootstrap-power-select</code></a>.
+            To do so, you need to provide a component <code>{{bs-form/element/control/my-custom-control}}</code> which extends
+            <a href="Components.FormElementControl.html"><code>Components.FormElementControl</code></a>.</p>
             <h3>HTML attributes</h3>
             <p>To set HTML attributes on the control element provided by this component, set them as properties of this component:</p>
             <pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
@@ -683,7 +687,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-form_element.js.html#l797"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:797</code></a>
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l802"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:802</code></a>
                                 </p>
                         
                         
@@ -715,7 +719,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-form_element.js.html#l648"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:648</code></a>
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l653"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:653</code></a>
                                 </p>
                         
                         
@@ -746,7 +750,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l628"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:628</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l633"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:633</code></a>
                           </p>
                         
                         
@@ -774,7 +778,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l726"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:726</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l731"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:731</code></a>
                           </p>
                         
                         
@@ -832,7 +836,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l753"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:753</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l758"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:758</code></a>
                           </p>
                         
                         
@@ -861,7 +865,7 @@
                               <p><strong>Default:</strong> &#x27;text&#x27;</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l363"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:363</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l368"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:368</code></a>
                           </p>
                         
                         
@@ -898,7 +902,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l480"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:480</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l485"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:485</code></a>
                           </p>
                         
                         
@@ -928,7 +932,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l498"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:498</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l503"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:503</code></a>
                           </p>
                         
                         
@@ -959,7 +963,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l446"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:446</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l451"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:451</code></a>
                           </p>
                         
                         
@@ -988,7 +992,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l463"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:463</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l468"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:468</code></a>
                           </p>
                         
                         
@@ -1017,7 +1021,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l769"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:769</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l774"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:774</code></a>
                           </p>
                         
                         
@@ -1045,7 +1049,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l776"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:776</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l781"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:781</code></a>
                           </p>
                         
                         
@@ -1073,7 +1077,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l715"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:715</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l720"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:720</code></a>
                           </p>
                         
                         
@@ -1103,7 +1107,7 @@
                               <p><strong>Default:</strong> &#x27;vertical&#x27;</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l689"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:689</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l694"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:694</code></a>
                           </p>
                         
                         
@@ -1138,7 +1142,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l490"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:490</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l495"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:495</code></a>
                           </p>
                         
                         
@@ -1166,7 +1170,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l509"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:509</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l514"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:514</code></a>
                           </p>
                         
                         
@@ -1194,7 +1198,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l455"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:455</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l460"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:460</code></a>
                           </p>
                         
                         
@@ -1222,7 +1226,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l438"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:438</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l443"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:443</code></a>
                           </p>
                         
                         
@@ -1250,7 +1254,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l355"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:355</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l360"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:360</code></a>
                           </p>
                         
                         
@@ -1306,7 +1310,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l549"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:549</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l554"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:554</code></a>
                           </p>
                         
                         
@@ -1335,7 +1339,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l557"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:557</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l562"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:562</code></a>
                           </p>
                         
                         
@@ -1363,7 +1367,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l472"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:472</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l477"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:477</code></a>
                           </p>
                         
                         
@@ -1391,7 +1395,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l418"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:418</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l423"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:423</code></a>
                           </p>
                         
                         
@@ -1420,7 +1424,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l790"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:790</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l795"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:795</code></a>
                           </p>
                         
                         
@@ -1448,7 +1452,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l705"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:705</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l710"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:710</code></a>
                           </p>
                         
                         
@@ -1479,7 +1483,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l345"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:345</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l350"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:350</code></a>
                           </p>
                         
                         
@@ -1509,7 +1513,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l565"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:565</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l570"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:570</code></a>
                           </p>
                         
                         
@@ -1538,7 +1542,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l332"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:332</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l337"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:337</code></a>
                           </p>
                         
                         
@@ -1570,7 +1574,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l783"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:783</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l788"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:788</code></a>
                           </p>
                         
                         
@@ -1598,7 +1602,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l737"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:737</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l742"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:742</code></a>
                           </p>
                         
                         
@@ -1626,7 +1630,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l410"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:410</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l415"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:415</code></a>
                           </p>
                         
                         
@@ -1655,7 +1659,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l397"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:397</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l402"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:402</code></a>
                           </p>
                         
                         
@@ -1688,7 +1692,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l593"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:593</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l598"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:598</code></a>
                           </p>
                         
                         
@@ -1716,7 +1720,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l601"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:601</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l606"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:606</code></a>
                           </p>
                         
                         
@@ -1745,7 +1749,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l427"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:427</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l432"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:432</code></a>
                           </p>
                         
                         
@@ -1776,7 +1780,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l585"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:585</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l590"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:590</code></a>
                           </p>
                         
                         
@@ -1805,7 +1809,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l575"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:575</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l580"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:580</code></a>
                           </p>
                         
                         
@@ -1834,7 +1838,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l609"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:609</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l614"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:614</code></a>
                           </p>
                         
                         
@@ -1863,7 +1867,7 @@
                               <p><strong>Default:</strong> [&#x27;focusOut&#x27;]</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l617"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:617</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l622"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:622</code></a>
                           </p>
                         
                         
@@ -1893,7 +1897,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l517"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:517</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l522"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:522</code></a>
                           </p>
                         
                         
@@ -1922,7 +1926,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l679"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:679</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l684"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:684</code></a>
                           </p>
                         
                         
@@ -1954,7 +1958,7 @@
                                 Components.FormGroup
                               </a>
                                 but overwritten in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l658"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:658</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l663"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:663</code></a>
                           </p>
                         
                         
@@ -1984,7 +1988,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l526"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:526</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l531"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:531</code></a>
                           </p>
                         
                         
@@ -2013,7 +2017,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l380"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:380</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l385"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:385</code></a>
                           </p>
                         
                         
@@ -2049,7 +2053,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-form_element.js.html#l818"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:818</code></a>
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l823"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:823</code></a>
                                 </p>
                         
                         
@@ -2076,7 +2080,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-form_element.js.html#l807"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:807</code></a>
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l812"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:812</code></a>
                                 </p>
                         
                         
@@ -2103,7 +2107,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-form_element.js.html#l829"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:829</code></a>
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l834"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:834</code></a>
                                 </p>
                         
                         
@@ -2130,7 +2134,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-form_element.js.html#l840"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:840</code></a>
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l845"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:845</code></a>
                                 </p>
                         
                         

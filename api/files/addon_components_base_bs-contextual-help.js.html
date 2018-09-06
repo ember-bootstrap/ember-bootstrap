@@ -511,7 +511,7 @@
                * @private
                */
               show() {
-                if (this.get(&#x27;isDestroyed&#x27;)) {
+                if (this.get(&#x27;isDestroyed&#x27;) || this.get(&#x27;isDestroying&#x27;)) {
                   return;
                 }
             

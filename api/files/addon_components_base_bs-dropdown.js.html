@@ -77,6 +77,12 @@
                * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)
                * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)
             
+             Furthermore references to the following actions are yielded:
+            
+             * &#x60;toggleDropdown&#x60;
+             * &#x60;openDropdown&#x60;
+             * &#x60;closeDropdown&#x60;
+            
              &#x60;&#x60;&#x60;hbs
              {{#bs-dropdown as |dd|}}
                {{#dd.toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.toggle}}
@@ -139,6 +145,44 @@
              {{/bs-dropdown}}
              &#x60;&#x60;&#x60;
             
+             ### Open, close or toggle the dropdown programmatically
+            
+             If you wanted to control when the dropdown opens and closes programmatically, the &#x60;bs-dropdown&#x60; component yields the
+             &#x60;openDropdown&#x60;, &#x60;closeDropdown&#x60; and &#x60;toggleDropdown&#x60; actions which you can then pass to your own handlers. For example:
+            
+             &#x60;&#x60;&#x60;hbs
+             {{#bs-dropdown closeOnMenuClick=false as |dd|}}
+               {{#bs-button}}Dropdown{{/bs-button}}
+               {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
+               {{#dd.menu as |ddm|}}
+                 {{#each items as |item|}}
+                   {{#ddm.item}}
+                     &lt;a href onclick={{action &quot;changeItems&quot; item dd.closeDropdown}}&gt;
+                       {{item.text}}
+                     &lt;/a&gt;
+                   {{/ddm.item}}
+                 {{/each}}
+               {{/dd.menu}}
+               {{/bs-dropdown}}
+             &#x60;&#x60;&#x60;
+            
+             Then in your controller or component, optionally close the dropdown:
+            
+             &#x60;&#x60;&#x60;js
+             ...
+             actions: {
+               handleDropdownClicked(item, closeDropdown) {
+                 if(item.isTheRightOne) {
+                   this.chosenItems.pushObject(item);
+                   closeDropdown();
+                 } else {
+                   this.set(&#x27;item&#x27;, this.getRandomItems());
+                 }
+               },
+             }
+             &#x60;&#x60;&#x60;
+            
+            
              ### Bootstrap 3/4 Notes
             
              If you need to use dropdowns in a [nav](Components.Nav.html), use the &#x60;bs-nav.dropdown&#x60;
@@ -154,7 +198,7 @@
              wish to have a dropdown menu item refer to an external link, be sure to apply the &#x60;dropdown-item&#x60;
              class to the &#x60;&lt;a&gt;&#x60; tag for Bootstrap 4 compatibility.
             
-             In Bootstrap 4 the dropdown menu will be positioned using the &#x60;popper.js&#x60; library, just as the original Bootstrap
+             The dropdown menu will be positioned using the &#x60;popper.js&#x60; library, just as the original Bootstrap
              version does. This also allows you to set &#x60;renderInPlace=false&#x60; on the menu component to render it in a wormhole,
              which you might want to do if you experience clipping issues by an outer &#x60;overflow: hidden&#x60; element.
             
@@ -188,8 +232,7 @@
               closeOnMenuClick: true,
             
               /**
-               * By default the dropdown menu will expand downwards. Set to &#x27;up&#x27; to expand upwards.
-               * BS4 also allows &#x27;left&#x27; and &#x27;right&#x27;
+               * By default the dropdown menu will expand downwards. Other options include, &#x27;up&#x27;, &#x27;left&#x27; and &#x27;right&#x27;
                *
                * @property direction
                * @type string

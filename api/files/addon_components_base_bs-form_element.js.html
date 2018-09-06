@@ -199,6 +199,11 @@
              {{/bs-form}}
              &#x60;&#x60;&#x60;
             
+             If you are using the custom control quite often, you should consider writing an integration plugin like
+             [&#x60;ember-bootstrap-power-select&#x60;](https://github.com/kaliber5/ember-bootstrap-power-select).
+             To do so, you need to provide a component &#x60;{{bs-form/element/control/my-custom-control}}&#x60; which extends
+             [&#x60;Components.FormElementControl&#x60;](Components.FormElementControl.html).
+            
              ### HTML attributes
             
              To set HTML attributes on the control element provided by this component, set them as properties of this component:

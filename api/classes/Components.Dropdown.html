@@ -71,6 +71,12 @@
             </ul>
             </li>
             </ul>
+            <p>Furthermore references to the following actions are yielded:</p>
+            <ul>
+            <li><code>toggleDropdown</code></li>
+            <li><code>openDropdown</code></li>
+            <li><code>closeDropdown</code></li>
+            </ul>
             <pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown as |dd|}}
               {{#dd.toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.toggle}}
               {{#dd.menu as |ddm|}}
@@ -117,6 +123,36 @@
             ...
             {{/bs-dropdown}}
             </code></pre>
+            <h3>Open, close or toggle the dropdown programmatically</h3>
+            <p>If you wanted to control when the dropdown opens and closes programmatically, the <code>bs-dropdown</code> component yields the
+            <code>openDropdown</code>, <code>closeDropdown</code> and <code>toggleDropdown</code> actions which you can then pass to your own handlers. For example:</p>
+            <pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown closeOnMenuClick=false as |dd|}}
+              {{#bs-button}}Dropdown{{/bs-button}}
+              {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
+              {{#dd.menu as |ddm|}}
+                {{#each items as |item|}}
+                  {{#ddm.item}}
+                    &lt;a href onclick={{action &quot;changeItems&quot; item dd.closeDropdown}}&gt;
+                      {{item.text}}
+                    &lt;/a&gt;
+                  {{/ddm.item}}
+                {{/each}}
+              {{/dd.menu}}
+              {{/bs-dropdown}}
+            </code></pre>
+            <p>Then in your controller or component, optionally close the dropdown:</p>
+            <pre class="code prettyprint"><code class="language-js">...
+            actions: {
+              handleDropdownClicked(item, closeDropdown) {
+                if(item.isTheRightOne) {
+                  this.chosenItems.pushObject(item);
+                  closeDropdown();
+                } else {
+                  this.set('item', this.getRandomItems());
+                }
+              },
+            }
+            </code></pre>
             <h3>Bootstrap 3/4 Notes</h3>
             <p>If you need to use dropdowns in a <a href="Components.Nav.html">nav</a>, use the <code>bs-nav.dropdown</code>
             contextual component rather than a standalone dropdown to ensure the correct styling
@@ -128,7 +164,7 @@
             version and will also provide automatic <code>active</code> highlighting on dropdown menu items. If you
             wish to have a dropdown menu item refer to an external link, be sure to apply the <code>dropdown-item</code>
             class to the <code>&lt;a&gt;</code> tag for Bootstrap 4 compatibility.</p>
-            <p>In Bootstrap 4 the dropdown menu will be positioned using the <code>popper.js</code> library, just as the original Bootstrap
+            <p>The dropdown menu will be positioned using the <code>popper.js</code> library, just as the original Bootstrap
             version does. This also allows you to set <code>renderInPlace=false</code> on the menu component to render it in a wormhole,
             which you might want to do if you experience clipping issues by an outer <code>overflow: hidden</code> element.</p>
             
@@ -295,7 +331,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-dropdown.js.html#l251"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:251</code></a>
+                                <a href="../files/addon_components_base_bs-dropdown.js.html#l294"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:294</code></a>
                                 </p>
                         
                         
@@ -344,7 +380,7 @@
                               <p><strong>Default:</strong> true</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l120"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:120</code></a>
+                              <a href="../files/addon_components_base_bs-dropdown.js.html#l164"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:164</code></a>
                           </p>
                         
                         
@@ -373,7 +409,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l151"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:151</code></a>
+                              <a href="../files/addon_components_base_bs-dropdown.js.html#l194"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:194</code></a>
                           </p>
                         
                         
@@ -404,15 +440,14 @@
                               <p><strong>Default:</strong> &#x27;down&#x27;</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l130"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:130</code></a>
+                              <a href="../files/addon_components_base_bs-dropdown.js.html#l174"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:174</code></a>
                           </p>
                         
                         
                           </div>
                         
                           <div class="description">
-                            <p>By default the dropdown menu will expand downwards. Set to 'up' to expand upwards.
-                        BS4 also allows 'left' and 'right'</p>
+                            <p>By default the dropdown menu will expand downwards. Other options include, 'up', 'left' and 'right'</p>
                         
                           </div>
                         
@@ -435,7 +470,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l141"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:141</code></a>
+                              <a href="../files/addon_components_base_bs-dropdown.js.html#l184"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:184</code></a>
                           </p>
                         
                         
@@ -465,7 +500,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l110"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:110</code></a>
+                              <a href="../files/addon_components_base_bs-dropdown.js.html#l154"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:154</code></a>
                           </p>
                         
                         
@@ -494,7 +529,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l168"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:168</code></a>
+                              <a href="../files/addon_components_base_bs-dropdown.js.html#l211"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:211</code></a>
                           </p>
                         
                         
@@ -522,7 +557,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l184"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:184</code></a>
+                              <a href="../files/addon_components_base_bs-dropdown.js.html#l227"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:227</code></a>
                           </p>
                         
                         
@@ -551,7 +586,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l176"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:176</code></a>
+                              <a href="../files/addon_components_base_bs-dropdown.js.html#l219"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:219</code></a>
                           </p>
                         
                         
@@ -581,7 +616,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-dropdown.js.html#l201"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:201</code></a>
+                                <a href="../files/addon_components_base_bs-dropdown.js.html#l244"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:244</code></a>
                                 </p>
                         
                         
@@ -623,7 +658,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-dropdown.js.html#l192"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:192</code></a>
+                                <a href="../files/addon_components_base_bs-dropdown.js.html#l235"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:235</code></a>
                                 </p>
                         
                         

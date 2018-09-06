@@ -61,6 +61,7 @@
             import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
             import Component from &#x27;@ember/component&#x27;;
             import { observer, computed } from &#x27;@ember/object&#x27;;
+            import { deprecatingAlias, equal, or }  from &#x27;@ember/object/computed&#x27;;
             import layout from &#x27;ember-bootstrap/templates/components/bs-button&#x27;;
             import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
             import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
@@ -88,33 +89,14 @@
              {{/bs-button}}
              &#x60;&#x60;&#x60;
             
-             ### States
-            
-             Use the &#x60;textState&#x60; property to change the label of the button. You can bind it to a controller property to set a &quot;loading&quot; state for example.
-             The label of the button will be taken from the &#x60;&lt;state&gt;Text&#x60; property.
-            
-             &#x60;&#x60;&#x60;hbs
-             {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; onClick=&quot;download&quot;}}
-             &#x60;&#x60;&#x60;
-            
-             &#x60;&#x60;&#x60;js
-             App.ApplicationController = Ember.Controller.extend({
-               buttonState: &quot;default&quot;
-               actions: {
-                 download: function() {
-                   this.set(&quot;buttonState&quot;, &quot;loading&quot;);
-                 }
-               }
-             });
-             &#x60;&#x60;&#x60;
-            
              ### Promise support for automatic state change
             
              When returning a Promise for any asynchronous operation from the &#x60;onClick&#x60; closure action the button will
-             manage an internal state (&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;) automatically, changing its label according to the state of the promise:
+             manage an internal state (&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;fulfilled&quot;/&quot;rejected&quot;) automatically, changing its label
+             according to the state of the promise:
             
              &#x60;&#x60;&#x60;hbs
-             {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; onClick=(action &quot;download&quot;)}}
+             {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; fulfilledText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; onClick=(action &quot;download&quot;)}}
              &#x60;&#x60;&#x60;
             
              &#x60;&#x60;&#x60;js
@@ -127,6 +109,20 @@
                }
              });
              &#x60;&#x60;&#x60;
+            
+             For further customization &#x60;isPending&#x60;, &#x60;isFulfilled&#x60;, &#x60;isRejected&#x60; and &#x60;isSettled&#x60; properties are yielded:
+            
+             &#x60;&#x60;&#x60;hbs
+             {{#bs-button onClick=(action &quot;download&quot;) as |button|}}
+              Download
+              {{#if button.isPending}}
+                &lt;span class=&quot;loading-spinner&quot;&gt;&lt;/span&gt;
+              {{/if}}
+             {{/bs-button}}
+             &#x60;&#x60;&#x60;
+            
+             You can &#x60;reset&#x60; the state represented by these properties and used for button&#x27;s text by setting &#x60;reset&#x60; property to
+             &#x60;true&#x60;.
             
              @class Button
              @namespace Components
@@ -171,17 +167,28 @@
               pendingText: null,
             
               /**
-               * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which resolved sucessfully.
+               * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which succeeded.
                * Not considered if used as a block component.
                *
-               * @property resolvedText
+               * @property fulfilledText
                * @type string
                * @public
                */
-              resolvedText: null,
+              fulfilledText: null,
             
               /**
-               * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which has been rejected.
+               * @property resolvedText
+               * @type string
+               * @deprecated
+               * @public
+               */
+              resolvedText: deprecatingAlias(&#x27;fulfilledText&#x27;, {
+                id: &#x27;ember-bootstrap.bs-button-resolved-text&#x27;,
+                until: &#x27;3.0.0&#x27;
+              }),
+            
+              /**
+               * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which failed.
                * Not considered if used as a block component.
                *
                * @property rejectedText
@@ -290,17 +297,59 @@
               /**
                * State of the button. The button&#x27;s label (if not used as a block component) will be set to the
                * &#x60;&lt;state&gt;Text&#x60; property.
-               * This property will automatically be set when using a click action that supplies the callback with an promise
+               * This property will automatically be set when using a click action that supplies the callback with a promise.
+               * Possible values are: &quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;fulfilled&quot; / &quot;rejected&quot;.
+               * It could be reseted by &#x60;reset&#x60; property.
                *
-               * @property textState
+               * @property state
                * @type String
                * @default &#x27;default&#x27;
-               * @protected
+               * @private
                */
-              textState: &#x27;default&#x27;,
+              state: &#x27;default&#x27;,
             
               /**
-               * Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.
+               * Promise returned by &#x60;onClick&#x60; event is pending.
+               *
+               * @property isPending
+               * @type Boolean
+               * @private
+               */
+              isPending: equal(&#x27;state&#x27;, &#x27;pending&#x27;),
+            
+              /**
+               * Promise returned by &#x60;onClick&#x60; event has been succeeded.
+               *
+               * @property isFulfilled
+               * @type Boolean
+               * @private
+               */
+              isFulfilled: equal(&#x27;state&#x27;, &#x27;fulfilled&#x27;),
+            
+              /**
+               * Promise returned by &#x60;onClick&#x60; event has been rejected.
+               *
+               * @property isRejected
+               * @type Boolean
+               * @private
+               */
+              isRejected: equal(&#x27;state&#x27;, &#x27;rejected&#x27;),
+            
+              /**
+               * Promise returned by &#x60;onClick&#x60; event has been succeeded or rejected.
+               *
+               * @property isFulfilled
+               * @type Boolean
+               * @private
+               */
+              isSettled: or(&#x27;isFulfilled&#x27;, &#x27;isRejected&#x27;),
+            
+              /**
+               * Set this to &#x60;true&#x60; to reset the &#x60;state&#x60;. A typical use case is to bind this attribute with ember-data isDirty flag.
+               *
+               * The old value is not taken into consideration. Setting a &#x60;true&#x60; value to &#x60;true&#x60; again will also reset &#x60;state&#x60;.
+               * In that case it&#x27;s even to notify the observer system that the property has changed by calling
+               * [&#x60;notifyPropertyChange()&#x60;](https://www.emberjs.com/api/ember/3.2/classes/EmberObject/methods/notifyPropertyChange?anchor=notifyPropertyChange).
                *
                * @property reset
                * @type boolean
@@ -319,7 +368,11 @@
             
               /**
                * When clicking the button this action is called with the value of the button (that is the value of the &quot;value&quot; property).
+               *
                * Return a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;.
+               * This could be used to automatically set the button&#x27;s text depending on promise state (&#x60;defaultText&#x60;, &#x60;pendingText&#x60;,
+               * &#x60;fulfilledText&#x60;, &#x60;rejectedText&#x60;) and for futher customization using the yielded &#x60;isPending&#x60;, &#x60;isFulfilled&#x60;,
+               * &#x60;isRejected&#x60; properties.
                *
                * The click event will not bubble up, unless you set &#x60;bubble&#x60; to true.
                *
@@ -333,22 +386,20 @@
                * This will reset the state property to &#x27;default&#x27;, and with that the button&#x27;s label to defaultText
                *
                * @method resetState
-               * @protected
+               * @private
                */
               resetState() {
-                this.set(&#x27;textState&#x27;, &#x27;default&#x27;);
+                this.set(&#x27;state&#x27;, &#x27;default&#x27;);
               },
             
               resetObserver: observer(&#x27;reset&#x27;, function() {
                 if (this.get(&#x27;reset&#x27;)) {
-                  scheduleOnce(&#x27;actions&#x27;, this, function() {
-                    this.set(&#x27;textState&#x27;, &#x27;default&#x27;);
-                  });
+                  scheduleOnce(&#x27;actions&#x27;, this, &#x27;resetState&#x27;);
                 }
               }),
             
-              text: computed(&#x27;textState&#x27;, &#x27;defaultText&#x27;, &#x27;pendingText&#x27;, &#x27;resolvedText&#x27;, &#x27;rejectedText&#x27;, function() {
-                return this.getWithDefault(&#x60;${this.get(&#x27;textState&#x27;)}Text&#x60;, this.get(&#x27;defaultText&#x27;));
+              text: computed(&#x27;state&#x27;, &#x27;defaultText&#x27;, &#x27;pendingText&#x27;, &#x27;fulfilledText&#x27;, &#x27;rejectedText&#x27;, function() {
+                return this.getWithDefault(&#x60;${this.get(&#x27;state&#x27;)}Text&#x60;, this.get(&#x27;defaultText&#x27;));
               }),
             
               /**
@@ -360,14 +411,14 @@
                 if (action !== null) {
                   let promise = (action)(this.get(&#x27;value&#x27;));
                   if (promise &amp;&amp; typeof promise.then === &#x27;function&#x27; &amp;&amp; !this.get(&#x27;isDestroyed&#x27;)) {
-                    this.set(&#x27;textState&#x27;, &#x27;pending&#x27;);
+                    this.set(&#x27;state&#x27;, &#x27;pending&#x27;);
                     promise.then(() =&gt; {
                       if (!this.get(&#x27;isDestroyed&#x27;)) {
-                        this.set(&#x27;textState&#x27;, &#x27;resolved&#x27;);
+                        this.set(&#x27;state&#x27;, &#x27;fulfilled&#x27;);
                       }
                     }, () =&gt; {
                       if (!this.get(&#x27;isDestroyed&#x27;)) {
-                        this.set(&#x27;textState&#x27;, &#x27;rejected&#x27;);
+                        this.set(&#x27;state&#x27;, &#x27;rejected&#x27;);
                       }
                     }
                     );

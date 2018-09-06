@@ -70,24 +70,11 @@
               Download
             {{/bs-button}}
             </code></pre>
-            <h3>States</h3>
-            <p>Use the <code>textState</code> property to change the label of the button. You can bind it to a controller property to set a &quot;loading&quot; state for example.
-            The label of the button will be taken from the <code>&lt;state&gt;Text</code> property.</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; textState=buttonState defaultText=&quot;Download&quot; loadingText=&quot;Loading...&quot; onClick=&quot;download&quot;}}
-            </code></pre>
-            <pre class="code prettyprint"><code class="language-js">App.ApplicationController = Ember.Controller.extend({
-              buttonState: &quot;default&quot;
-              actions: {
-                download: function() {
-                  this.set(&quot;buttonState&quot;, &quot;loading&quot;);
-                }
-              }
-            });
-            </code></pre>
             <h3>Promise support for automatic state change</h3>
             <p>When returning a Promise for any asynchronous operation from the <code>onClick</code> closure action the button will
-            manage an internal state (&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;resolved&quot;/&quot;rejected&quot;) automatically, changing its label according to the state of the promise:</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; resolvedText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; onClick=(action &quot;download&quot;)}}
+            manage an internal state (&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;fulfilled&quot;/&quot;rejected&quot;) automatically, changing its label
+            according to the state of the promise:</p>
+            <pre class="code prettyprint"><code class="language-hbs">{{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; fulfilledText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; onClick=(action &quot;download&quot;)}}
             </code></pre>
             <pre class="code prettyprint"><code class="language-js">// controller.js
             export default Ember.Controller.extend({
@@ -98,6 +85,16 @@
               }
             });
             </code></pre>
+            <p>For further customization <code>isPending</code>, <code>isFulfilled</code>, <code>isRejected</code> and <code>isSettled</code> properties are yielded:</p>
+            <pre class="code prettyprint"><code class="language-hbs">{{#bs-button onClick=(action &quot;download&quot;) as |button|}}
+             Download
+             {{#if button.isPending}}
+               &lt;span class=&quot;loading-spinner&quot;&gt;&lt;/span&gt;
+             {{/if}}
+            {{/bs-button}}
+            </code></pre>
+            <p>You can <code>reset</code> the state represented by these properties and used for button's text by setting <code>reset</code> property to
+            <code>true</code>.</p>
             
             
               </div>
@@ -123,7 +120,7 @@
                       Defined in
                     </dt>
                     <dd class="col-sm-9">
-                      <a href="../files/addon_components_base_bs-button.js.html#l8"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:8</code></a>
+                      <a href="../files/addon_components_base_bs-button.js.html#l9"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:9</code></a>
                     </dd>
             
                 </dl>
@@ -187,7 +184,7 @@
                               <a href="#" data-tabid="#methods" data-anchor="#method_click" data-tablink="click">click</a>
             
                             </li>
-                            <li class="index-item method protected">
+                            <li class="index-item method private">
                               <a href="#" data-tabid="#methods" data-anchor="#method_resetState" data-tablink="resetState">resetState</a>
             
                             </li>
@@ -233,6 +230,11 @@
                                  data-tablink="disabled">disabled</a>
             
                             </li>
+                            <li class="index-item property public">
+                              <a href="#" data-tabid="#properties" data-anchor="#property_fulfilledText"
+                                 data-tablink="fulfilledText">fulfilledText</a>
+            
+                            </li>
                             <li class="index-item property protected">
                               <a href="#" data-tabid="#properties" data-anchor="#property_icon"
                                  data-tablink="icon">icon</a>
@@ -246,6 +248,26 @@
                             <li class="index-item property public">
                               <a href="#" data-tabid="#properties" data-anchor="#property_iconInactive"
                                  data-tablink="iconInactive">iconInactive</a>
+            
+                            </li>
+                            <li class="index-item property private">
+                              <a href="#" data-tabid="#properties" data-anchor="#property_isFulfilled"
+                                 data-tablink="isFulfilled">isFulfilled</a>
+            
+                            </li>
+                            <li class="index-item property private">
+                              <a href="#" data-tabid="#properties" data-anchor="#property_isFulfilled"
+                                 data-tablink="isFulfilled">isFulfilled</a>
+            
+                            </li>
+                            <li class="index-item property private">
+                              <a href="#" data-tabid="#properties" data-anchor="#property_isPending"
+                                 data-tablink="isPending">isPending</a>
+            
+                            </li>
+                            <li class="index-item property private">
+                              <a href="#" data-tabid="#properties" data-anchor="#property_isRejected"
+                                 data-tablink="isRejected">isRejected</a>
             
                             </li>
                             <li class="index-item property public">
@@ -263,19 +285,20 @@
                                  data-tablink="reset">reset</a>
             
                             </li>
-                            <li class="index-item property public">
+                            <li class="index-item property public deprecated">
                               <a href="#" data-tabid="#properties" data-anchor="#property_resolvedText"
                                  data-tablink="resolvedText">resolvedText</a>
             
+                                <span class="badge badge-warning">deprecated</span>
                             </li>
                             <li class="index-item property public inherited">
                               <a href="#" data-tabid="#properties" data-anchor="#property_size"
                                  data-tablink="size">size</a>
             
                             </li>
-                            <li class="index-item property protected">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_textState"
-                                 data-tablink="textState">textState</a>
+                            <li class="index-item property private">
+                              <a href="#" data-tabid="#properties" data-anchor="#property_state"
+                                 data-tablink="state">state</a>
             
                             </li>
                             <li class="index-item property public">
@@ -326,7 +349,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-button.js.html#l294"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:294</code></a>
+                                <a href="../files/addon_components_base_bs-button.js.html#l345"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:345</code></a>
                                 </p>
                         
                         
@@ -340,14 +363,14 @@
                         
                         
                         </div>
-                        <div id="method_resetState" class="method item protected">
+                        <div id="method_resetState" class="method item private">
                             <h3 class="name">resetState
                             <span class="small"> </span>
                             </h3>
                         
                         
                         
-                                <span class="label label-protected">protected</span>
+                                <span class="label label-private">private</span>
                         
                         
                         
@@ -356,7 +379,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-button.js.html#l272"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:272</code></a>
+                                <a href="../files/addon_components_base_bs-button.js.html#l325"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:325</code></a>
                                 </p>
                         
                         
@@ -389,7 +412,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l153"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:153</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l160"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:160</code></a>
                           </p>
                         
                         
@@ -419,7 +442,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l163"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:163</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l170"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:170</code></a>
                           </p>
                         
                         
@@ -450,7 +473,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l174"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:174</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l181"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:181</code></a>
                           </p>
                         
                         
@@ -481,7 +504,7 @@
                               <p><strong>Default:</strong> &#x27;button&#x27;</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l143"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:143</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l150"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:150</code></a>
                           </p>
                         
                         
@@ -514,7 +537,7 @@
                                 Mixins.TypeClass
                               </a>
                                 but overwritten in
-                              <a href="../files/addon_components_base_bs-button.js.html#l84"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:84</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l80"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:80</code></a>
                           </p>
                         
                         
@@ -542,7 +565,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l94"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:94</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l90"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:90</code></a>
                           </p>
                         
                         
@@ -572,7 +595,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l133"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:133</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l140"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:140</code></a>
                           </p>
                         
                         
@@ -580,6 +603,36 @@
                         
                           <div class="description">
                             <p>Property to disable the button</p>
+                        
+                          </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="property_fulfilledText"
+                             class="property item public">
+                          <h3 class="name">fulfilledText
+                            <span class="badge badge-secondary small">string</span>
+                              <span class="badge badge-public small">public</span>
+                        
+                        
+                        
+                        
+                          </h3>
+                        
+                          <div class="meta">
+                              <p>
+                                  Defined in
+                              <a href="../files/addon_components_base_bs-button.js.html#l109"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:109</code></a>
+                          </p>
+                        
+                        
+                          </div>
+                        
+                          <div class="description">
+                            <p>Label of the button used if <code>onClick</code> event has returned a Promise which succeeded.
+                        Not considered if used as a block component.</p>
                         
                           </div>
                         
@@ -601,7 +654,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l203"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:203</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l210"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:210</code></a>
                           </p>
                         
                         
@@ -631,7 +684,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l185"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:185</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l192"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:192</code></a>
                           </p>
                         
                         
@@ -660,7 +713,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l194"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:194</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l201"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:201</code></a>
                           </p>
                         
                         
@@ -668,6 +721,122 @@
                         
                           <div class="description">
                             <p>If button is inactive and this is set, the icon property will match this property</p>
+                        
+                          </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="property_isFulfilled"
+                             class="property item private">
+                          <h3 class="name">isFulfilled
+                            <span class="badge badge-secondary small">Boolean</span>
+                              <span class="badge badge-private small">private</span>
+                        
+                        
+                        
+                        
+                          </h3>
+                        
+                          <div class="meta">
+                              <p>
+                                  Defined in
+                              <a href="../files/addon_components_base_bs-button.js.html#l260"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:260</code></a>
+                          </p>
+                        
+                        
+                          </div>
+                        
+                          <div class="description">
+                            <p>Promise returned by <code>onClick</code> event has been succeeded.</p>
+                        
+                          </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="property_isFulfilled"
+                             class="property item private">
+                          <h3 class="name">isFulfilled
+                            <span class="badge badge-secondary small">Boolean</span>
+                              <span class="badge badge-private small">private</span>
+                        
+                        
+                        
+                        
+                          </h3>
+                        
+                          <div class="meta">
+                              <p>
+                                  Defined in
+                              <a href="../files/addon_components_base_bs-button.js.html#l278"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:278</code></a>
+                          </p>
+                        
+                        
+                          </div>
+                        
+                          <div class="description">
+                            <p>Promise returned by <code>onClick</code> event has been succeeded or rejected.</p>
+                        
+                          </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="property_isPending"
+                             class="property item private">
+                          <h3 class="name">isPending
+                            <span class="badge badge-secondary small">Boolean</span>
+                              <span class="badge badge-private small">private</span>
+                        
+                        
+                        
+                        
+                          </h3>
+                        
+                          <div class="meta">
+                              <p>
+                                  Defined in
+                              <a href="../files/addon_components_base_bs-button.js.html#l251"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:251</code></a>
+                          </p>
+                        
+                        
+                          </div>
+                        
+                          <div class="description">
+                            <p>Promise returned by <code>onClick</code> event is pending.</p>
+                        
+                          </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="property_isRejected"
+                             class="property item private">
+                          <h3 class="name">isRejected
+                            <span class="badge badge-secondary small">Boolean</span>
+                              <span class="badge badge-private small">private</span>
+                        
+                        
+                        
+                        
+                          </h3>
+                        
+                          <div class="meta">
+                              <p>
+                                  Defined in
+                              <a href="../files/addon_components_base_bs-button.js.html#l269"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:269</code></a>
+                          </p>
+                        
+                        
+                          </div>
+                        
+                          <div class="description">
+                            <p>Promise returned by <code>onClick</code> event has been rejected.</p>
                         
                           </div>
                         
@@ -689,7 +858,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l103"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:103</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l99"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:99</code></a>
                           </p>
                         
                         
@@ -719,14 +888,14 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l123"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:123</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l130"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:130</code></a>
                           </p>
                         
                         
                           </div>
                         
                           <div class="description">
-                            <p>Label of the button used if <code>onClick</code> event has returned a Promise which has been rejected.
+                            <p>Label of the button used if <code>onClick</code> event has returned a Promise which failed.
                         Not considered if used as a block component.</p>
                         
                           </div>
@@ -749,14 +918,17 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l242"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:242</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l287"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:287</code></a>
                           </p>
                         
                         
                           </div>
                         
                           <div class="description">
-                            <p>Set this to true to reset the state. A typical use case is to bind this attribute with ember-data isDirty flag.</p>
+                            <p>Set this to <code>true</code> to reset the <code>state</code>. A typical use case is to bind this attribute with ember-data isDirty flag.</p>
+                        <p>The old value is not taken into consideration. Setting a <code>true</code> value to <code>true</code> again will also reset <code>state</code>.
+                        In that case it's even to notify the observer system that the property has changed by calling
+                        <a href="https://www.emberjs.com/api/ember/3.2/classes/EmberObject/methods/notifyPropertyChange?anchor=notifyPropertyChange"><code>notifyPropertyChange()</code></a>.</p>
                         
                           </div>
                         
@@ -765,29 +937,28 @@
                         
                         </div>
                         <div id="property_resolvedText"
-                             class="property item public">
+                             class="property item public deprecated">
                           <h3 class="name">resolvedText
                             <span class="badge badge-secondary small">string</span>
                               <span class="badge badge-public small">public</span>
                         
                         
                         
+                              <span class="badge badge-warning small">deprecated</span>
                         
                           </h3>
                         
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l113"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:113</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l119"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:119</code></a>
                           </p>
                         
                         
                           </div>
                         
                           <div class="description">
-                            <p>Label of the button used if <code>onClick</code> event has returned a Promise which resolved sucessfully.
-                        Not considered if used as a block component.</p>
-                        
+                            
                           </div>
                         
                         
@@ -824,11 +995,11 @@
                         
                         
                         </div>
-                        <div id="property_textState"
-                             class="property item protected">
-                          <h3 class="name">textState
+                        <div id="property_state"
+                             class="property item private">
+                          <h3 class="name">state
                             <span class="badge badge-secondary small">String</span>
-                              <span class="badge badge-protected small">protected</span>
+                              <span class="badge badge-private small">private</span>
                         
                         
                         
@@ -839,7 +1010,7 @@
                               <p><strong>Default:</strong> &#x27;default&#x27;</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l230"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:230</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l237"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:237</code></a>
                           </p>
                         
                         
@@ -848,7 +1019,9 @@
                           <div class="description">
                             <p>State of the button. The button's label (if not used as a block component) will be set to the
                         <code>&lt;state&gt;Text</code> property.
-                        This property will automatically be set when using a click action that supplies the callback with an promise</p>
+                        This property will automatically be set when using a click action that supplies the callback with a promise.
+                        Possible values are: &quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;fulfilled&quot; / &quot;rejected&quot;.
+                        It could be reseted by <code>reset</code> property.</p>
                         
                           </div>
                         
@@ -870,7 +1043,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l251"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:251</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l300"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:300</code></a>
                           </p>
                         
                         
@@ -930,7 +1103,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-button.js.html#l220"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:220</code></a>
+                              <a href="../files/addon_components_base_bs-button.js.html#l227"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:227</code></a>
                           </p>
                         
                         
@@ -962,15 +1135,18 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-button.js.html#l260"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:260</code></a>
+                                <a href="../files/addon_components_base_bs-button.js.html#l309"><code>addon&#x2F;components&#x2F;base&#x2F;bs-button.js:309</code></a>
                                 </p>
                         
                         
                             </div>
                         
                             <div class="description">
-                                <p>When clicking the button this action is called with the value of the button (that is the value of the &quot;value&quot; property).
-                        Return a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;.</p>
+                                <p>When clicking the button this action is called with the value of the button (that is the value of the &quot;value&quot; property).</p>
+                        <p>Return a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;.
+                        This could be used to automatically set the button's text depending on promise state (<code>defaultText</code>, <code>pendingText</code>,
+                        <code>fulfilledText</code>, <code>rejectedText</code>) and for futher customization using the yielded <code>isPending</code>, <code>isFulfilled</code>,
+                        <code>isRejected</code> properties.</p>
                         <p>The click event will not bubble up, unless you set <code>bubble</code> to true.</p>
                         
                             </div>

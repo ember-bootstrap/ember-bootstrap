@@ -1,4 +1,25 @@
 
+# [2.1.0](https://github.com/kaliber5/ember-bootstrap/compare/2.0.0...2.1.0) (2018-09-06)
+
+
+### Bug Fixes
+
+* **Button:** reset should not change `state` multiple times in one runloop ([1e6e05d](https://github.com/kaliber5/ember-bootstrap/commit/1e6e05d))
+* **Dropdown:** prevent missing popperContainer exception for dropdown with `renderInPlace=false` in tests ([c3668ae](https://github.com/kaliber5/ember-bootstrap/commit/c3668ae)), closes [#633](https://github.com/kaliber5/ember-bootstrap/issues/633)
+* **Dropdown:** render menu lazily only when opening it. ([e4b6ffd](https://github.com/kaliber5/ember-bootstrap/commit/e4b6ffd))
+* **Tooltip:** fix `calling set on destroyed element` issue for bs-tooltip. Thanks to [@brandynbenett](https://github.com/brandynbenett) ([263767b](https://github.com/kaliber5/ember-bootstrap/commit/263767b))
+
+
+### Features
+
+* **Button:** bs-button yields state and shorthands. Thanks to [@jelhan](https://github.com/jelhan) ([59631d6](https://github.com/kaliber5/ember-bootstrap/commit/59631d6))
+* **Dropdown:** dropdown actions are yielded. Thanks to [@sdhull](https://github.com/sdhull) ([db4d1ce](https://github.com/kaliber5/ember-bootstrap/commit/db4d1ce))
+* **Dropdown:** optionally render BS3 dropdowns in a wormhole. Thanks to [@Techn1x](https://github.com/Techn1x) ([8cd3d82](https://github.com/kaliber5/ember-bootstrap/commit/8cd3d82))
+* **Form:** yields isSubmitting state. Thanks to [@jelhan](https://github.com/jelhan) ([5be6974](https://github.com/kaliber5/ember-bootstrap/commit/5be6974))
+* **Navbar:** yield toggleNavBar action. Thanks to [@sdhull](https://github.com/sdhull) ([7e9e0e0](https://github.com/kaliber5/ember-bootstrap/commit/7e9e0e0))
+
+
+
 # [2.0.0](https://github.com/kaliber5/ember-bootstrap/compare/1.2.2...2.0.0) (2018-06-23)
 
 
