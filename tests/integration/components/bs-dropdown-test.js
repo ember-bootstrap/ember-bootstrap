@@ -70,11 +70,12 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
     );
 
-    assert.dom(dropdownVisibilityElementSelector()).hasNoClass(openClass(), 'Dropdown is closed');
+    assert.dom('.dropdown-menu').doesNotExist('Dropdown is closed');
     await click('a.dropdown-toggle');
+    assert.dom('.dropdown-menu').exists();
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
     await click('a.dropdown-toggle');
-    assert.dom(dropdownVisibilityElementSelector()).hasNoClass(openClass(), 'Dropdown is closed');
+    assert.dom('.dropdown-menu').doesNotExist('Dropdown is closed');
   });
 
   test('opened dropdown will close on outside click', async function(assert) {
@@ -86,7 +87,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
 
     await click('*');
-    assert.dom(dropdownVisibilityElementSelector()).hasNoClass(openClass(), 'Dropdown is closed');
+    assert.dom('.dropdown-menu').doesNotExist('Dropdown is closed');
   });
 
   test('clicking dropdown menu will close it', async function(assert) {
@@ -94,10 +95,11 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
     );
     await click('a.dropdown-toggle');
+    assert.dom('.dropdown-menu').exists();
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
 
     await click('.dropdown-menu a');
-    assert.dom(dropdownVisibilityElementSelector()).hasNoClass(openClass(), 'Dropdown is closed');
+    assert.dom('.dropdown-menu').doesNotExist('Dropdown is closed');
   });
 
   test('dropdown will close on click, when default is prevented, propagation is stopped', async function(assert) {
@@ -125,9 +127,11 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
     );
     await click('a.dropdown-toggle');
+    assert.dom('.dropdown-menu').exists();
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
 
     await click('.dropdown-menu a');
+    assert.dom('.dropdown-menu').exists();
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
   });
 
@@ -249,6 +253,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         {{/bs-dropdown}}`
     );
 
+    await click('a.dropdown-toggle');
     assert.dom('#ember-bootstrap-wormhole .dropdown-menu').exists({ count: 1 }, 'Menu is rendered in wormhole');
   });
 });

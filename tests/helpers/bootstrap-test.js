@@ -117,7 +117,7 @@ export function isVisible(el) {
 export function isHidden(el) {
   // A bit of an odd test, but taken from https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
   // referencing https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent
-  return el.offsetParent === null;
+  return !el || el.offsetParent === null;
 }
 
 export { test };

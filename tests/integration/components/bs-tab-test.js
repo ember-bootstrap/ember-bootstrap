@@ -147,6 +147,8 @@ module('Integration | Component | bs-tab', function(hooks) {
     assert.dom('ul.nav.nav-tabs > li:nth-child(2) > a').hasText('Tab 2', 'navigation item shows pane title');
     assert.dom('ul.nav.nav-tabs > li:nth-child(3)').hasClass('dropdown', 'adds dropdown for grouped items');
     assert.dom('ul.nav.nav-tabs > li:nth-child(3) > a').hasText('Dropdown', 'drop down item shows pane groupTitle');
+
+    await click('ul.nav.nav-tabs > li:nth-child(3) a');
     assert.equal(this.element.querySelector('ul.nav.nav-tabs > li:nth-child(3) .dropdown-menu').children.length, 2, 'puts items with groupTitle under dropdown menu');
     assert.dom('ul.nav.nav-tabs > li:nth-child(3) .dropdown-menu > :nth-child(1)').hasText('Tab 3', 'dropdown menu item shows pane title');
     assert.dom('ul.nav.nav-tabs > li:nth-child(3) .dropdown-menu > :nth-child(2)').hasText('Tab 4', 'dropdown menu item shows pane title');
