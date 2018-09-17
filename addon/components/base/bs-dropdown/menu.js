@@ -137,11 +137,5 @@ export default Component.extend({
         enabled: this.get('flip')
       }
     };
-  }),
-
-  actions: {
-    registerPopperApi(api) {
-      this.set('_popperApi', api);
-    }
-  }
+  })
 });
