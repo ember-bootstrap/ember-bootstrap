@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown/menu';
+import { next } from '@ember/runloop';
 
 /**
  Component for the dropdown menu.
@@ -89,11 +90,19 @@ export default Component.extend({
       return false;
     },
     set(key, value) {
-      let update = this.get('_popperApi.update');
-      update && update();
+      // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu's children
+      // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
+      next(() => {
+        if (this.get('isDestroying') || this.get('isDestroyed')) {
+          return;
+        }
+        this.set('_isOpen', value)
+      });
       return value;
     }
   }),
+
+  _isOpen: false,
 
   flip: true,
 
