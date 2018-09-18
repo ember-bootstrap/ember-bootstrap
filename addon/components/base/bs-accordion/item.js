@@ -19,6 +19,11 @@ export default Component.extend(TypeClass, {
   layout,
 
   /**
+   * We override the mixin here to include an extra class.
+   * @see TypeClass
+   */
+  classNameBindings: ['typeClass', 'disabled'],
+  /**
    * The title of the accordion item, displayed as a .panel-title element
    *
    * @property title
@@ -58,6 +63,13 @@ export default Component.extend(TypeClass, {
    * @private
    */
   active: not('collapsed'),
+
+  /**
+   * @property disabled
+   * @type boolean
+   * @public
+   */
+  disabled: false,
 
   /**
    * Reference to the parent `Components.Accordion` class.

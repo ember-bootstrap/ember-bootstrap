@@ -24,6 +24,13 @@ export default Component.extend({
   collapsed: null,
 
   /**
+   * @property disabled
+   * @type boolean
+   * @public
+   */
+  disabled: false,
+
+  /**
    * @event onClick
    * @public
    */
@@ -31,7 +38,9 @@ export default Component.extend({
 
   click(e) {
     e.preventDefault();
-    this.get('onClick')();
+    if (!this.get('disabled')) {
+      this.get('onClick')();
+    }
   }
 
 });

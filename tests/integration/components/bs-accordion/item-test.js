@@ -9,6 +9,7 @@ import {
   accordionItemBodyClass,
   accordionItemHeadClass,
   accordionTitleSelector,
+  accordionItemClickableSelector,
   test,
   visibilityClass
 } from '../../../helpers/bootstrap-test';
@@ -52,4 +53,15 @@ module('Integration | Component | bs-accordion-item', function(hooks) {
     assert.dom(accordionTitleSelector()).hasText('TITLE', `${accordionClassFor('title')} has correct title`);
     assert.dom(`.${accordionItemBodyClass()}`).hasText('CONTENT', `${accordionItemBodyClass()} has correct content`);
   });
+
+  test('accordion items can be disabled', async function(assert) {
+    let action = this.spy();
+    this.actions.click = action;
+    await render(hbs`{{#bs-accordion/item value=1 disabled=true onClick=(action "click") title="TITLE"}}CONTENT{{/bs-accordion/item}}`);
+    assert.dom(accordionItemClickableSelector()).hasAttribute('disabled', '', 'disabled property on button to toggle accordion');
+    assert.dom(`.${accordionClassFor()}`).hasClass('disabled', 'entire item has `.disabled` class');
+    await click(accordionItemClickableSelector());
+    assert.notOk(action.calledWith(1), 'onClick action should not be called');
+  });
+
 });
