@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "2.1.0"
+        "version": "2.1.1"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -965,7 +965,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 5,
+            "line": 6,
             "description": "Component for the dropdown menu.\n\nSee [Components.Dropdown](Components.Dropdown.html) for examples.",
             "extends": "Ember.Component",
             "access": "public",
@@ -2394,7 +2394,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 18,
+            "line": 19,
             "description": "Defaults to a `<ul>` tag in BS3 and a `<div>` tag in BS4. Change for other types of dropdown menus.",
             "itemtype": "property",
             "name": "tagName",
@@ -2407,7 +2407,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 28,
+            "line": 29,
             "itemtype": "property",
             "name": "ariaRole",
             "default": "menu",
@@ -2419,7 +2419,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 36,
+            "line": 37,
             "description": "Alignment of the menu, either \"left\" or \"right\"",
             "itemtype": "property",
             "name": "align",
@@ -2432,7 +2432,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 46,
+            "line": 47,
             "itemtype": "property",
             "name": "direction",
             "default": "'down'",
@@ -2444,7 +2444,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 54,
+            "line": 55,
             "itemtype": "property",
             "name": "inNav",
             "type": "{boolean}",
@@ -2455,7 +2455,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 61,
+            "line": 62,
             "description": "By default the menu is rendered in the same place the dropdown. If you experience clipping\nissues, you can set this to false to render the menu in a wormhole at the top of the DOM.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -2468,7 +2468,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 72,
+            "line": 73,
             "itemtype": "property",
             "name": "_renderInPlace",
             "type": "boolean",
