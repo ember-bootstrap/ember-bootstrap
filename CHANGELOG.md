@@ -1,3 +1,10 @@
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/kaliber5/ember-bootstrap/compare/2.1.0...2.1.1) (2018-09-18)
+
+### Bug Fixes
+
+* **Dropdown:** fixed actions on dropdown menu's children not being fired due to prematurely removing the menu from DOM (introduced in 2.1.0), closes [#660](https://github.com/kaliber5/ember-bootstrap/issues/660)
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/kaliber5/ember-bootstrap/compare/2.0.0...2.1.0) (2018-09-06)
 
