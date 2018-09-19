@@ -58,7 +58,7 @@ module('Integration | Component | bs-accordion-item', function(hooks) {
     let action = this.spy();
     this.actions.click = action;
     await render(hbs`{{#bs-accordion/item value=1 disabled=true onClick=(action "click") title="TITLE"}}CONTENT{{/bs-accordion/item}}`);
-    assert.dom(accordionItemClickableSelector()).hasAttribute('disabled', '', 'disabled property on button to toggle accordion');
+    assert.dom(accordionItemClickableSelector()).hasAttribute('disabled');
     assert.dom(`.${accordionClassFor()}`).hasClass('disabled', 'entire item has `.disabled` class');
     await click(accordionItemClickableSelector());
     assert.notOk(action.calledWith(1), 'onClick action should not be called');
