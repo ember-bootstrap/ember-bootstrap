@@ -139,6 +139,39 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.dom('button').hasText('text for rejected state');
   });
 
+  test('button text remains to default if no state text wasn\'t set', async function (assert) {
+    let deferredClickAction = defer();
+    this.set('clickAction', () => {
+      return deferredClickAction.promise;
+    });
+
+    await render(
+      hbs`{{bs-button
+      defaultText="default text"      
+      onClick=clickAction
+    }}`);
+    assert.dom('button').hasText('default text');
+
+    click('button');
+    await waitUntil(() => {
+      return find('button').textContent.trim() === 'default text';
+    });
+
+    deferredClickAction.resolve();
+    await settled();
+    assert.dom('button').hasText('default text');
+
+    deferredClickAction = defer();
+    click('button');
+    await waitUntil(() => {
+      return find('button').textContent.trim() === 'default text';
+    });
+
+    deferredClickAction.reject();
+    await settled();
+    assert.dom('button').hasText('default text');
+  });
+
   test('setting reset to true resets button text', async function(assert) {
     this.set('clickAction', () => {
       return resolve();

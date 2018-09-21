@@ -104,7 +104,7 @@ export default Component.extend(TypeClass, SizeClass, {
    * @type string
    * @public
    */
-  pendingText: null,
+  pendingText: undefined,
 
   /**
    * Label of the button used if `onClick` event has returned a Promise which succeeded.
@@ -114,7 +114,7 @@ export default Component.extend(TypeClass, SizeClass, {
    * @type string
    * @public
    */
-  fulfilledText: null,
+  fulfilledText: undefined,
 
   /**
    * @property resolvedText
@@ -135,7 +135,7 @@ export default Component.extend(TypeClass, SizeClass, {
    * @type string
    * @public
    */
-  rejectedText: null,
+  rejectedText: undefined,
 
   /**
    * Property to disable the button
