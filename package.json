@@ -23,7 +23,7 @@
     "ember-bootstrap-power-select": "^1.0.0-alpha.1",
     "ember-cli": "~3.3.0",
     "ember-cli-app-version": "^3.0.0",
-    "ember-cli-blueprint-test-helpers": "^0.18.0",
+    "ember-cli-blueprint-test-helpers": "^0.19.0",
     "ember-cli-dependency-checker": "^3.0.0",
     "ember-cli-eslint": "^4.2.1",
     "ember-cli-fastboot": "^1.1.3",
