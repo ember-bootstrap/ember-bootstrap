@@ -15,6 +15,8 @@ export default Control.extend(ControlAttributes, {
     'minlength',
     'maxlength',
     'autocomplete',
+    'autocapitalize',
+    'autocorrect',
     'spellcheck',
     'rows',
     'cols',
