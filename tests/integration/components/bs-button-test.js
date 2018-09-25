@@ -70,27 +70,27 @@ module('Integration | Component | bs-button', function(hooks) {
   });
 
   test('button with icon property shows icon', async function(assert) {
-    await render(hbs`{{bs-button icon="fa fa-check"}}`);
+    await render(hbs`{{bs-button icon="fas fa-check"}}`);
 
-    assert.dom('button i').hasClass('fa');
+    assert.dom('button i').hasClass('fas');
     assert.dom('button i').hasClass('fa-check');
   });
 
   test('button with iconActive and iconInactive properties shows icon depending on active state', async function(assert) {
     this.set('active', false);
-    await render(hbs`{{bs-button active=active iconInactive="fa fa-plus" iconActive="fa fa-minus"}}`);
+    await render(hbs`{{bs-button active=active iconInactive="fas fa-plus" iconActive="fas fa-minus"}}`);
 
-    assert.dom('button i').hasClass('fa');
+    assert.dom('button i').hasClass('fas');
     assert.dom('button i').hasClass('fa-plus');
 
     this.set('active', true);
 
-    assert.dom('button i').hasClass('fa');
+    assert.dom('button i').hasClass('fas');
     assert.dom('button i').hasClass('fa-minus');
 
     this.set('active', false);
 
-    assert.dom('button i').hasClass('fa');
+    assert.dom('button i').hasClass('fas');
     assert.dom('button i').hasClass('fa-plus');
   });
 

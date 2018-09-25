@@ -43,7 +43,7 @@ export default FormGroup.extend(SizeClass, {
    *
    * ```js
    * ENV['ember-bootstrap'] = {
-     *   formValidationSuccessIcon: 'fa fa-check'
+     *   formValidationSuccessIcon: 'fas fa-check'
      * }
    * ```
    *
@@ -65,7 +65,7 @@ export default FormGroup.extend(SizeClass, {
    *
    * ```js
    * ENV['ember-bootstrap'] = {
-     *   formValidationErrorIcon: 'fa fa-times'
+     *   formValidationErrorIcon: 'fas fa-times'
      * }
    * ```
    *
@@ -86,7 +86,7 @@ export default FormGroup.extend(SizeClass, {
    *
    * ```js
    * ENV['ember-bootstrap'] = {
-     *   formValidationWarningIcon: 'fa fa-warning'
+     *   formValidationWarningIcon: 'fas fa-exclamation-triangle'
      * }
    * ```
    *
