@@ -179,7 +179,19 @@ const nonDefaultLayouts = A([
  <td>✔︎</td>
  </tr>
  <tr>
+ <td>autocapitalize</td>
+ <td>✔︎</td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
  <td>autocomplete</td>
+ <td>✔︎</td>
+ <td></td>
+ <td>✔︎</td>
+ </tr>
+ <tr>
+ <td>autocorrect</td>
  <td>✔︎</td>
  <td></td>
  <td>✔︎</td>
