@@ -1,3 +1,8 @@
+<a name="2.1.2"></a>
+## [2.1.2](https://github.com/kaliber5/ember-bootstrap/compare/2.1.1...2.1.2) (2018-09-26)
+
+* **Button**: fixed empty title when button has Promise-based state and no state texts (`fulfillText` etc.). Thanks to [@andreasschacht](https://github.com/andreasschacht)
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/kaliber5/ember-bootstrap/compare/2.1.0...2.1.1) (2018-09-18)
 
