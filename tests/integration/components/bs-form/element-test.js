@@ -36,6 +36,8 @@ const supportedInputAttributes = {
   pattern: 'dummy',
   accept: 'dummy',
   autocomplete: 'on',
+  autocapitalize: 'on',
+  autocorrect: 'on',
   autosave: 'true',
   inputmode: 'latin',
   multiple: true,
@@ -57,6 +59,8 @@ const supportedTextareaAttributes = {
   maxlength: 50,
   minlength: 50,
   autocomplete: 'on',
+  autocapitalize: 'on',
+  autocorrect: 'on',
   form: 'dummy',
   spellcheck: true,
   wrap: 'hard',
@@ -263,6 +267,8 @@ module('Integration | Component | bs-form/element', function(hooks) {
         pattern=pattern
         accept=accept
         autocomplete=autocomplete
+        autocapitalize=autocapitalize
+        autocorrect=autocorrect
         autosave=autosave
         inputmode=inputmode
         multiple=multiple
@@ -308,6 +314,8 @@ module('Integration | Component | bs-form/element', function(hooks) {
         minlength=minlength
         maxlength=maxlength
         autocomplete=autocomplete
+        autocapitalize=autocapitalize
+        autocorrect=autocorrect
         form=form
         spellcheck=spellcheck
         wrap=wrap

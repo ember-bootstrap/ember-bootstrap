@@ -21,6 +21,8 @@ export default Control.extend(ControlAttributes, {
     'pattern',
     'accept',
     'autocomplete',
+    'autocapitalize',
+    'autocorrect',
     'autosave',
     'inputmode',
     'multiple',
