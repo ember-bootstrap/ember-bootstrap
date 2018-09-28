@@ -147,7 +147,7 @@ module('Integration | Component | bs-button', function(hooks) {
 
     await render(
       hbs`{{bs-button
-      defaultText="default text"      
+      defaultText="default text"
       onClick=clickAction
     }}`);
     assert.dom('button').hasText('default text');
@@ -286,5 +286,32 @@ module('Integration | Component | bs-button', function(hooks) {
     await click('button');
     assert.ok(buttonClick.called);
     assert.ok(parentClick.called);
+  });
+
+  test('preventConcurrency=true prevents onClick action to be fired concurrently', async function(assert) {
+    let deferredClickAction = defer();
+    let clickActionHasBeenExecuted = false;
+    this.set('clickAction', () => {
+      clickActionHasBeenExecuted = true;
+      return deferredClickAction.promise;
+    });
+
+    await render(hbs`{{bs-button onClick=clickAction preventConcurrency=true}}`);
+    click('button');
+    await waitUntil(() => clickActionHasBeenExecuted);
+
+    this.set('clickAction', () => {
+      assert.ok(false, 'onClick action is not executed concurrently');
+    });
+    await click('button');
+
+    deferredClickAction.resolve();
+    await settled();
+
+    this.set('clickAction', () => {
+      assert.step('onClick action');
+    });
+    await click('button');
+    assert.verifySteps(['onClick action'], 'onClick action is fired again after pending click action is settled');
   });
 });
