@@ -90,6 +90,10 @@ export function accordionItemHeadClass() {
   return versionDependent('panel-heading', 'card-header');
 }
 
+export function accordionItemClickableSelector() {
+  return versionDependent('.panel-title a', 'h5 button');
+}
+
 export function dropdownVisibilityElementSelector() {
   return versionDependent('.dropdown', '.dropdown-menu');
 }

@@ -19,6 +19,10 @@ export default Component.extend(TypeClass, {
   layout,
 
   /**
+   * Add additional binding to mark the entire component area disabled
+   */
+  classNameBindings: ['disabled'],
+  /**
    * The title of the accordion item, displayed as a .panel-title element
    *
    * @property title
@@ -58,6 +62,13 @@ export default Component.extend(TypeClass, {
    * @private
    */
   active: not('collapsed'),
+
+  /**
+   * @property disabled
+   * @type boolean
+   * @public
+   */
+  disabled: false,
 
   /**
    * Reference to the parent `Components.Accordion` class.
