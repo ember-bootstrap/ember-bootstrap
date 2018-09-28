@@ -26,7 +26,7 @@ export default Component.extend({
   /**
    * @property disabled
    * @type boolean
-   * @public
+   * @private
    */
   disabled: false,
 

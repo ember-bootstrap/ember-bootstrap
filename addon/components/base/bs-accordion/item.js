@@ -19,10 +19,9 @@ export default Component.extend(TypeClass, {
   layout,
 
   /**
-   * We override the mixin here to include an extra class.
-   * @see TypeClass
+   * Add additional binding to mark the entire component area disabled
    */
-  classNameBindings: ['typeClass', 'disabled'],
+  classNameBindings: ['disabled'],
   /**
    * The title of the accordion item, displayed as a .panel-title element
    *
