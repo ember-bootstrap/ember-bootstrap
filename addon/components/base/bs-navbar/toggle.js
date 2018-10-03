@@ -12,7 +12,7 @@ import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
  *
  * @class NavbarToggle
  * @namespace Components
- * @extends Components.Button
+ * @extends Ember.Component
  * @public
  */
 export default Component.extend({
