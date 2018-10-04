@@ -1,6 +1,6 @@
 import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
-import { copy } from '@ember/object/internals';
+import { copy } from 'ember-copy';
 import { isArray, A } from '@ember/array';
 import layout from 'ember-bootstrap/templates/components/bs-button-group';
 import SizeClass from 'ember-bootstrap/mixins/size-class';

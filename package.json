@@ -99,6 +99,7 @@
     "ember-cli-htmlbars": "^3.0.0",
     "ember-cli-version-checker": "^2.1.0",
     "ember-concurrency": "^0.8.7",
+    "ember-copy": "^1.0.0",
     "ember-in-element-polyfill": "^0.1.2",
     "ember-maybe-in-element": "^0.1.3",
     "ember-popper": "^0.9.0",
