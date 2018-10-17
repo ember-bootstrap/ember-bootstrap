@@ -8,34 +8,77 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
   setupRenderingTest(hooks);
 
   testBS3('dropdown menu has correct markup', async function(assert) {
-    await render(hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element}}Something{{/bs-dropdown/menu}}`);
+    await render(
+      hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element}}Something{{/bs-dropdown/menu}}`
+    );
 
-    assert.equal(this.element.querySelector('.dropdown-menu').tagName, 'UL', 'menu is an unordered list (<ul>) by default');
+    assert.equal(
+      this.element.querySelector('.dropdown-menu').tagName,
+      'UL',
+      'menu is an unordered list (<ul>) by default'
+    );
     assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
     assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
-    assert.dom('.dropdown-menu').hasClass('dropdown-menu-right', 'menu has dropdown-menu-right class');
+    assert
+      .dom('.dropdown-menu')
+      .hasClass('dropdown-menu-right', 'menu has dropdown-menu-right class');
     assert.dom('.dropdown-menu').hasText('Something');
   });
 
   testBS4('dropdown menu has correct markup', async function(assert) {
-    await render(hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element}}Something{{/bs-dropdown/menu}}`);
+    await render(
+      hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element}}Something{{/bs-dropdown/menu}}`
+    );
 
-    assert.equal(this.element.querySelector('.dropdown-menu').tagName, 'DIV', 'menu is a div (<div>) by default');
+    assert.equal(
+      this.element.querySelector('.dropdown-menu').tagName,
+      'DIV',
+      'menu is a div (<div>) by default'
+    );
     assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
-    assert.dom('.dropdown-menu').hasClass('dropdown-menu-right', 'menu has dropdown-menu-right class');
+    assert
+      .dom('.dropdown-menu')
+      .hasClass('dropdown-menu-right', 'menu has dropdown-menu-right class');
     assert.dom('.dropdown-menu').hasText('Something');
   });
 
   testBS3('dropdown menu yields item component', async function(assert) {
-    await render(hbs`{{#bs-dropdown/menu toggleElement=this.element isOpen=true as |ddm|}}{{#ddm.item}}Dummy{{/ddm.item}}{{/bs-dropdown/menu}}`);
+    await render(
+      hbs`{{#bs-dropdown/menu toggleElement=this.element isOpen=true as |ddm|}}{{#ddm.item}}Dummy{{/ddm.item}}{{/bs-dropdown/menu}}`
+    );
 
     assert.dom('li').exists({ count: 1 }, 'has item component');
   });
 
   testBS4('dropdown menu yields item component', async function(assert) {
-    await render(hbs`{{#bs-dropdown/menu toggleElement=this.element isOpen=true as |ddm|}}{{#ddm.item}}Dummy{{/ddm.item}}{{/bs-dropdown/menu}}`
+    await render(
+      hbs`{{#bs-dropdown/menu toggleElement=this.element isOpen=true as |ddm|}}{{#ddm.item}}Dummy{{/ddm.item}}{{/bs-dropdown/menu}}`
     );
 
-    assert.dom('.dropdown-item').doesNotExist('has item component with no markup');
+    assert
+      .dom('.dropdown-item')
+      .doesNotExist('has item component with no markup');
+  });
+
+  testBS3('dropdown menu propagates class names', async function(assert) {
+    await render(
+      hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element classNames="custom-class"}}Something{{/bs-dropdown/menu}}`
+    );
+
+    assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
+    assert
+      .dom('.dropdown-menu')
+      .hasClass('custom-class', 'menu has custom-class class');
+  });
+
+  testBS4('dropdown menu propagates class names', async function(assert) {
+    await render(
+      hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element classNames="custom-class"}}Something{{/bs-dropdown/menu}}`
+    );
+
+    assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
+    assert
+      .dom('.dropdown-menu')
+      .hasClass('custom-class', 'menu has custom-class class');
   });
 });
