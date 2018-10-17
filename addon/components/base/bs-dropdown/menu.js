@@ -76,15 +76,23 @@ export default Component.extend({
    * @private
    */
   _renderInPlace: computed('renderInPlace', function() {
-    return this.get('renderInPlace') || typeof document === 'undefined' || !document.getElementById('ember-bootstrap-wormhole');
+    return (
+      this.get('renderInPlace') ||
+      typeof document === 'undefined' ||
+      !document.getElementById('ember-bootstrap-wormhole')
+    );
   }),
+
+  _classNamesString: computed('classNames.[]', function() {
+    return (this.get('classNames') || []).join(' ');
+  }).readOnly(),
 
   alignClass: computed('align', function() {
     if (this.get('align') !== 'left') {
       return `dropdown-menu-${this.get('align')}`;
     }
   }),
-  
+
   isOpen: computed({
     get() {
       return false;
@@ -96,7 +104,7 @@ export default Component.extend({
         if (this.get('isDestroying') || this.get('isDestroyed')) {
           return;
         }
-        this.set('_isOpen', value)
+        this.set('_isOpen', value);
       });
       return value;
     }

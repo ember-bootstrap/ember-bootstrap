@@ -62,23 +62,29 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
 
   testBS3('dropdown menu propagates class names', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element classNames="custom-class"}}Something{{/bs-dropdown/menu}}`
+      hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element classNames="custom-class-1 custom-class-2"}}Something{{/bs-dropdown/menu}}`
     );
 
     assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
     assert
       .dom('.dropdown-menu')
-      .hasClass('custom-class', 'menu has custom-class class');
+      .hasClass('custom-class-1', 'menu has custom-class-1 class');
+    assert
+      .dom('.dropdown-menu')
+      .hasClass('custom-class-2', 'menu has custom-class-2 class');
   });
 
   testBS4('dropdown menu propagates class names', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element classNames="custom-class"}}Something{{/bs-dropdown/menu}}`
+      hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element classNames="custom-class-1 custom-class-2"}}Something{{/bs-dropdown/menu}}`
     );
 
     assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
     assert
       .dom('.dropdown-menu')
-      .hasClass('custom-class', 'menu has custom-class class');
+      .hasClass('custom-class-1', 'menu has custom-class-1 class');
+    assert
+      .dom('.dropdown-menu')
+      .hasClass('custom-class-2', 'menu has custom-class-2 class');
   });
 });
