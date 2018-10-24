@@ -1,4 +1,4 @@
-import { module } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { testBS3, testBS4 } from '../../../helpers/bootstrap-test';
@@ -60,21 +60,7 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
       .doesNotExist('has item component with no markup');
   });
 
-  testBS3('dropdown menu propagates class names', async function(assert) {
-    await render(
-      hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element class="custom-class-1 custom-class-2"}}Something{{/bs-dropdown/menu}}`
-    );
-
-    assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
-    assert
-      .dom('.dropdown-menu')
-      .hasClass('custom-class-1', 'menu has custom-class-1 class');
-    assert
-      .dom('.dropdown-menu')
-      .hasClass('custom-class-2', 'menu has custom-class-2 class');
-  });
-
-  testBS4('dropdown menu propagates class names', async function(assert) {
+  test('dropdown menu propagates class names', async function(assert) {
     await render(
       hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element class="custom-class-1 custom-class-2"}}Something{{/bs-dropdown/menu}}`
     );
