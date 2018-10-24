@@ -83,10 +83,6 @@ export default Component.extend({
     );
   }),
 
-  _classNamesString: computed('classNames.[]', function() {
-    return (this.get('classNames') || []).join(' ');
-  }).readOnly(),
-
   alignClass: computed('align', function() {
     if (this.get('align') !== 'left') {
       return `dropdown-menu-${this.get('align')}`;
