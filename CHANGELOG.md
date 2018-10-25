@@ -1,5 +1,23 @@
 
+# [2.2.0](https://github.com/kaliber5/ember-bootstrap/compare/v2.1.2...v2.2.0) (2018-10-25)
+
+
+### Bug Fixes
+
+* **Dropdown:** Propagate class to the menu dom element. Thanks to [@offirgolan](https://github.com/offirgolan) ([0ca7edb](https://github.com/kaliber5/ember-bootstrap/commit/0ca7edb))
+
+
+### Features
+
+* **Accordion:** add disabled property to Accordion. Thanks to [@donaldwasserman](https://github.com/donaldwasserman) ([d81b9fd](https://github.com/kaliber5/ember-bootstrap/commit/d81b9fd))
+* **Form:** support autocapitalize and autocorrect attributes. Thanks to [@CodingItWrong](https://github.com/CodingItWrong) ([402c975](https://github.com/kaliber5/ember-bootstrap/commit/402c975))
+
+
+
+
 ## [2.1.2](https://github.com/kaliber5/ember-bootstrap/compare/2.1.1...2.1.2) (2018-09-26)
+
+### Bug Fixes
 
 * **Button**: fixed empty title when button has Promise-based state and no state texts (`fulfillText` etc.). Thanks to [@andreasschacht](https://github.com/andreasschacht)
 

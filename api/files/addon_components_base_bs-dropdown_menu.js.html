@@ -12,7 +12,7 @@
     } catch(e) {
     }
   </script>
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
   <link rel="shortcut icon" href="//kaliber5.github.io/ember-bootstrap/favicon.ico">
 </head>
@@ -32,9 +32,9 @@
       </ul>
       <ul class="navbar-nav nav">
         <li class="navbar-nav"><a class="nav-link" href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i
-          class="fa fa-github"></i></a></li>
+          class="fab fa-github"></i></a></li>
         <li class="navbar-nav"><a class="nav-link" href="https://twitter.com/simonihmig" target="_blank"><i
-          class="fa fa-twitter"></i></a>
+          class="fab fa-twitter"></i></a>
         </li>
         <li class="navbar-nav">
           <div class="navbar-text">
@@ -136,7 +136,11 @@
                * @private
                */
               _renderInPlace: computed(&#x27;renderInPlace&#x27;, function() {
-                return this.get(&#x27;renderInPlace&#x27;) || typeof document === &#x27;undefined&#x27; || !document.getElementById(&#x27;ember-bootstrap-wormhole&#x27;);
+                return (
+                  this.get(&#x27;renderInPlace&#x27;) ||
+                  typeof document === &#x27;undefined&#x27; ||
+                  !document.getElementById(&#x27;ember-bootstrap-wormhole&#x27;)
+                );
               }),
             
               alignClass: computed(&#x27;align&#x27;, function() {
@@ -144,7 +148,7 @@
                   return &#x60;dropdown-menu-${this.get(&#x27;align&#x27;)}&#x60;;
                 }
               }),
-              
+            
               isOpen: computed({
                 get() {
                   return false;
@@ -156,7 +160,7 @@
                     if (this.get(&#x27;isDestroying&#x27;) || this.get(&#x27;isDestroyed&#x27;)) {
                       return;
                     }
-                    this.set(&#x27;_isOpen&#x27;, value)
+                    this.set(&#x27;_isOpen&#x27;, value);
                   });
                   return value;
                 }
