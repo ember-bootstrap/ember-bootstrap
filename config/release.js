@@ -1,6 +1,7 @@
 /* eslint-env node */
 'use strict';
 
+const RSVP = require('rsvp');
 const streamToPromise = require('stream-to-promise');
 
 function promptForCompletion(project) {
@@ -37,14 +38,12 @@ module.exports = {
   afterPush(project) {
     const gulp = require('gulp');
     require('../gulpfile.js');
-    let updateDocs = gulp.task('docs');
+    let updateDocs = RSVP.denodeify(gulp.task('docs'));
 
     project.ui.startProgress('Updating docs...');
-    return streamToPromise(updateDocs())
+    return updateDocs()
       .then(function() {
         project.ui.stopProgress();
       });
   }
 };
-
-
