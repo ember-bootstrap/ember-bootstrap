@@ -1,6 +1,6 @@
 {
   "name": "ember-bootstrap",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "scripts": {
     "lint:js": "eslint .",
     "start": "ember serve",
