@@ -3,7 +3,7 @@ import { A } from '@ember/array';
 import { resolve, reject } from 'rsvp';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, fillIn, triggerKeyEvent, triggerEvent, waitFor, settled } from '@ember/test-helpers';
+import { render, click, fillIn, triggerKeyEvent, triggerEvent, waitFor, waitUntil, settled } from '@ember/test-helpers';
 import {
   formFeedbackClass,
   test,
@@ -322,6 +322,47 @@ module('Integration | Component | bs-form', function(hooks) {
     await render(hbs`{{#bs-form onSubmit=(action "submit") submitOnEnter=true as |form|}}{{/bs-form}}`);
     await triggerKeyEvent('form', 'keypress', 13);
     assert.ok(submit.calledOnce, 'onSubmit action has been called');
+  });
+
+  test('preventConcurrency=true prevents submission to be fired concurrently', async function(assert) {
+    let deferredSubmitAction = defer();
+    let submitActionHasBeenExecuted = false;
+    this.set('submitAction', () => {
+      submitActionHasBeenExecuted = true;
+      return deferredSubmitAction.promise;
+    });
+    this.set('beforeAction', () => {});
+    this.set('validate', () => { return resolve(); });
+    await render(hbs`
+      {{#bs-form
+        preventConcurrency=true
+        onSubmit=submitAction onBefore=beforeAction validate=validate hasValidator=true
+      }}{{/bs-form}}
+    `);
+
+    triggerEvent('form', 'submit');
+    await waitUntil(() => submitActionHasBeenExecuted);
+
+    this.set('submitAction', () => {
+      assert.ok(false, 'onSubmit action is not executed concurrently');
+    });
+    this.set('beforeAction', () => {
+      assert.ok(false, 'onBefore action is not executed if concurrent submission has been dropped');
+    });
+    this.set('validate', () => {
+      assert.ok(false, 'validate is not executed if concurrent submission has been dropped');
+    });
+    await triggerEvent('form', 'submit');
+
+    deferredSubmitAction.resolve();
+    await settled();
+    this.set('submitAction', () => {
+      assert.step('onSubmit action');
+    });
+    this.set('beforeAction', () => {});
+    this.set('validate', () => { return resolve(); });
+    await triggerEvent('form', 'submit');
+    assert.verifySteps(['onSubmit action'], 'onSubmit action is fired again after pending submission is settled');
   });
 
   test('supports novalidate attribute', async function(assert) {
