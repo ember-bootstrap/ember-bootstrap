@@ -141,5 +141,26 @@ export default Component.extend({
         enabled: this.get('flip')
       }
     };
-  })
+  }),
+
+  /**
+   * @property itemComponent
+   * @type {String}
+   * @private
+   */
+  itemComponent: 'bs-dropdown/menu/item',
+
+  /**
+   * @property linkToComponent
+   * @type {String}
+   * @private
+   */
+  linkToComponent: 'bs-dropdown/menu/link-to',
+
+  /**
+   * @property dividerComponent
+   * @type {String}
+   * @private
+   */
+  dividerComponent: 'bs-dropdown/menu/divider'
 });

@@ -307,5 +307,26 @@ export default Component.extend({
       && ((menuElement && !menuElement.contains(target)) || this.get('closeOnMenuClick'))) {
       this.send('closeDropdown');
     }
-  }
+  },
+
+  /**
+   * @property buttonComponent
+   * @type {String}
+   * @private
+   */
+  buttonComponent: 'bs-dropdown/button',
+
+  /**
+   * @property toggleComponent
+   * @type {String}
+   * @private
+   */
+  toggleComponent: 'bs-dropdown/toggle',
+
+  /**
+   * @property menuComponent
+   * @type {String}
+   * @private
+   */
+  menuComponent: 'bs-dropdown/menu'
 });
