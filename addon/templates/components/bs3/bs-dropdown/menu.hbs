@@ -11,9 +11,9 @@
     <ul class={{concat "dropdown-menu " alignClass (if isOpen " show")}} role={{ariaRole}}>
       {{yield
         (hash
-          item=(component "bs-dropdown/menu/item")
-          link-to=(component "bs-dropdown/menu/link-to")
-          divider=(component "bs-dropdown/menu/divider")
+          item=(component itemComponent)
+          link-to=(component linkToComponent)
+          divider=(component dividerComponent)
         )
       }}
     </ul>
