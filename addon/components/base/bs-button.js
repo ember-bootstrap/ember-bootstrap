@@ -235,6 +235,19 @@ export default Component.extend(TypeClass, SizeClass, {
   value: null,
 
   /**
+   * Controls if `onClick` action is fired concurrently. If `true` clicking button multiple times will not trigger
+   * `onClick` action if a Promise returned by previous click is not settled yet.
+   *
+   * This does not affect event bubbling.
+   *
+   * @property preventConcurrency
+   * @type Boolean
+   * @default false
+   * @public
+   */
+  preventConcurrency: false,
+
+  /**
    * State of the button. The button's label (if not used as a block component) will be set to the
    * `<state>Text` property.
    * This property will automatically be set when using a click action that supplies the callback with a promise.
@@ -348,7 +361,13 @@ export default Component.extend(TypeClass, SizeClass, {
    */
   click() {
     let action = this.get('onClick');
-    if (action !== null) {
+    let preventConcurrency = this.get('preventConcurrency');
+
+    if (action === null) {
+      return;
+    }
+
+    if (!preventConcurrency || !this.get('isPending')) {
       let promise = (action)(this.get('value'));
       if (promise && typeof promise.then === 'function' && !this.get('isDestroyed')) {
         this.set('state', 'pending');
@@ -363,8 +382,9 @@ export default Component.extend(TypeClass, SizeClass, {
         }
         );
       }
-      return this.get('bubble');
     }
+
+    return this.get('bubble');
   },
 
   init() {
