@@ -23,22 +23,24 @@ module('Integration | Component | bs-nav', function(hooks) {
   testBS3('it supports bootstrap options', async function(assert) {
     // Template block usage:
     await render(hbs`
-      {{bs-nav justified=true stacked=true type="pills"}}
+      {{bs-nav justified=true stacked=true fill=true type="pills"}}
     `);
 
     assert.dom('ul').hasClass('nav-pills', 'has pills class');
     assert.dom('ul').hasClass('nav-justified', 'has justified class');
+    assert.dom('ul').hasClass('nav-fill', 'has fill class');
     assert.dom('ul').hasClass('nav-stacked', 'has stacked class');
   });
 
   testBS4('it supports bootstrap options', async function(assert) {
     // Template block usage:
     await render(hbs`
-      {{bs-nav justified=true stacked=true type="pills"}}
+      {{bs-nav justified=true stacked=true fill=true type="pills"}}
     `);
 
     assert.dom('ul').hasClass('nav-pills', 'has pills class');
     assert.dom('ul').hasClass('nav-justified', 'has justified class');
+    assert.dom('ul').hasClass('nav-fill', 'has fill class');
     assert.dom('ul').hasClass('flex-column', 'has stacked class');
   });
 

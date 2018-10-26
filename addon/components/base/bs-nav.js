@@ -29,7 +29,7 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
  ### Nav styles
 
  The component supports the default bootstrap nav styling options "pills" and "tabs" through the `type`
- property, as well as the `justified` and `stacked` properties.
+ property, as well as the `justified`, `fill` and `stacked` properties.
 
  ### Active items
 
@@ -65,6 +65,8 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
  You can override `tagName` if you want to use Bootstrap 4's ability to represent more structural
  components with `div` tags.
 
+ The `fill` styling is only available with Bootstrap 4
+
  @class Nav
  @namespace Components
  @extends Ember.Component
@@ -77,7 +79,7 @@ export default Component.extend({
   tagName: 'ul',
   classNames: ['nav'],
 
-  classNameBindings: ['typeClass', 'justified:nav-justified'],
+  classNameBindings: ['typeClass', 'justified:nav-justified', 'fill:nav-fill'],
 
   typeClass: computed('type', function() {
     let type = this.get('type');
@@ -105,6 +107,16 @@ export default Component.extend({
    * @public
    */
   justified: false,
+
+  /**
+   * Make the nav flex fill, see [bootstrap docs](http://getbootstrap.com/docs/4.1/components/navs/#fill-and-justify)
+   *
+   * @property fill
+   * @type boolean
+   * @default false
+   * @public
+   */
+  fill: false,
 
   /**
    * Make the nav pills stacked, see [bootstrap docs](http://getbootstrap.com/components/#nav-pills)

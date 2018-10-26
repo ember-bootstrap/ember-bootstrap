@@ -5,10 +5,11 @@
     {{/form.element}}
     {{form.element controlType="checkbox" disabled=(bs-eq type "tabs") label="Stacked" property="stacked" onChange=(action "updateStacked")}}
     {{form.element controlType="checkbox" disabled=stacked label="Justified" property="justified"}}
+    {{form.element controlType="checkbox" disabled=stacked label="Fill" property="fill"}}
   {{/bs-form}}
   <hr>
   <!-- BEGIN-SNIPPET nav-demo -->
-  {{#bs-nav type=type justified=justified stacked=stacked as |nav|}}
+  {{#bs-nav type=type justified=justified stacked=stacked fill=fill as |nav|}}
     {{#nav.item}}{{#nav.link-to "index"}}Home{{/nav.link-to}}{{/nav.item}}
     {{#nav.item}}{{#nav.link-to "demo.navs"}}Navs{{/nav.link-to}}{{/nav.item}}
     {{#nav.dropdown as |dd|}}
