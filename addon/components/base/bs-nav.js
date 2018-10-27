@@ -79,7 +79,7 @@ export default Component.extend({
   tagName: 'ul',
   classNames: ['nav'],
 
-  classNameBindings: ['typeClass', 'justified:nav-justified', 'fill:nav-fill'],
+  classNameBindings: ['typeClass', 'justified:nav-justified'],
 
   typeClass: computed('type', function() {
     let type = this.get('type');
@@ -107,16 +107,6 @@ export default Component.extend({
    * @public
    */
   justified: false,
-
-  /**
-   * Make the nav flex fill, see [bootstrap docs](http://getbootstrap.com/docs/4.1/components/navs/#fill-and-justify)
-   *
-   * @property fill
-   * @type boolean
-   * @default false
-   * @public
-   */
-  fill: false,
 
   /**
    * Make the nav pills stacked, see [bootstrap docs](http://getbootstrap.com/components/#nav-pills)
