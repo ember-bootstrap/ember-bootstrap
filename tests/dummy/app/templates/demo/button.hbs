@@ -15,6 +15,7 @@
 
 <div class="bs-example">
   <!-- BEGIN-SNIPPET button-options -->
+  <p> Solid buttons </p>
   <p>
     {{#bs-button type="primary" onClick=(action "submit")}}Primary{{/bs-button}}
     {{#bs-button type="secondary" onClick=(action "submit")}}Secondary{{/bs-button}}
@@ -25,6 +26,18 @@
     {{#bs-button type="light" onClick=(action "submit")}}Light{{/bs-button}}
     {{#bs-button type="dark" onClick=(action "submit")}}Dark{{/bs-button}}
     {{#bs-button disabled=true onClick=(action "submit")}}Disabled{{/bs-button}}
+  </p>
+   <p> Outlined buttons </p>
+   <p>
+    {{#bs-button type="primary" outline=true onClick=(action "submit")}}Primary{{/bs-button}}
+    {{#bs-button type="secondary" outline=true onClick=(action "submit")}}Secondary{{/bs-button}}
+    {{#bs-button type="success" outline=true onClick=(action "submit")}}Success{{/bs-button}}
+    {{#bs-button type="danger" outline=true onClick=(action "submit")}}Danger{{/bs-button}}
+    {{#bs-button type="warning" outline=true onClick=(action "submit")}}Warning{{/bs-button}}
+    {{#bs-button type="info" outline=true onClick=(action "submit")}}Info{{/bs-button}}
+    {{#bs-button type="light" outline=true onClick=(action "submit")}}Light{{/bs-button}}
+    {{#bs-button type="dark" outline=true onClick=(action "submit")}}Dark{{/bs-button}}
+    {{#bs-button disabled=true outline=true onClick=(action "submit")}}Disabled{{/bs-button}}
   </p>
   <p>
     {{#bs-button block=true onClick=(action "submit")}}Block Button{{/bs-button}}

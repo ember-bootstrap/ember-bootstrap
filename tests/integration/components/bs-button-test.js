@@ -3,7 +3,8 @@ import { defer, reject, resolve } from 'rsvp';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { find, render, click, settled, waitUntil } from '@ember/test-helpers';
-import { test, defaultButtonClass } from '../../helpers/bootstrap-test';
+import { test, testBS4, defaultButtonClass } from '../../helpers/bootstrap-test';
+
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | bs-button', function(hooks) {
@@ -74,6 +75,11 @@ module('Integration | Component | bs-button', function(hooks) {
 
     assert.dom('button i').hasClass('fas');
     assert.dom('button i').hasClass('fa-check');
+  });
+
+  testBS4('button with outline property shows as outline', async function(assert) {
+    await render(hbs`{{bs-button type="primary" outline=true}}`);
+    assert.dom('button').hasClass('btn-outline-primary');
   });
 
   test('button with iconActive and iconInactive properties shows icon depending on active state', async function(assert) {
@@ -147,7 +153,7 @@ module('Integration | Component | bs-button', function(hooks) {
 
     await render(
       hbs`{{bs-button
-      defaultText="default text"      
+      defaultText="default text"
       onClick=clickAction
     }}`);
     assert.dom('button').hasText('default text');

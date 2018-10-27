@@ -24,6 +24,10 @@ export default Mixin.create({
   typeClass: computed('type', function() {
     let prefix = this.get('classTypePrefix');
     let type = this.get('type') || 'default';
+
+    if (this.get('outline')) {
+      return `${prefix}-outline-${type}`;
+    }
     return `${prefix}-${type}`;
   }),
 
