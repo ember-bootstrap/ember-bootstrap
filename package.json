@@ -14,7 +14,7 @@
     "node": "6.* || 8.* || >= 10.*"
   },
   "devDependencies": {
-    "@ember/test-helpers": "^0.7.16",
+    "@ember/test-helpers": "^1.0.0",
     "bootstrap": "^4.0.0",
     "bootstrap-sass": "^3.3.7",
     "broccoli-asset-rev": "^3.0.0",
