@@ -46,6 +46,20 @@ export default Component.extend(TypeClass, {
   selected: null,
 
   /**
+   * @property titleComponent
+   * @type {String}
+   * @private
+   */
+  titleComponent: 'bs-accordion/item/title',
+
+  /**
+   * @property bodyComponent
+   * @type {String}
+   * @private
+   */
+  // bodyComponent: 'bs-accordion/item/body',
+
+  /**
    * @property collapsed
    * @type boolean
    * @readonly

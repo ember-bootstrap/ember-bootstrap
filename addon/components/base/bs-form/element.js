@@ -752,18 +752,26 @@ export default FormGroup.extend({
   }),
 
   /**
+   * @property formComponent
+   * @type {String}
+   * @private
+   */
+  formComponent: 'bs-form',
+
+  /**
    * @property layoutComponent
    * @type {String}
    * @private
    */
   layoutComponent: computed('formLayout', 'controlType', function() {
-    let formLayout = this.get('formLayout');
-    let controlType = this.get('controlType');
+    const formComponent = this.get('formComponent');
+    const formLayout = this.get('formLayout');
+    const controlType = this.get('controlType');
 
     if (nonDefaultLayouts.includes(controlType)) {
-      return `bs-form/element/layout/${formLayout}/${controlType}`;
+      return `${formComponent}/element/layout/${formLayout}/${controlType}`;
     } else {
-      return `bs-form/element/layout/${formLayout}`;
+      return `${formComponent}/element/layout/${formLayout}`;
     }
   }),
 
@@ -773,14 +781,15 @@ export default FormGroup.extend({
    * @private
    */
   controlComponent: computed('controlType', function() {
-    let controlType = this.get('controlType');
-    let componentName = `bs-form/element/control/${controlType}`;
+    const formComponent = this.get('formComponent');
+    const controlType = this.get('controlType');
+    const componentName = `${formComponent}/element/control/${controlType}`;
 
     if (getOwner(this).hasRegistration(`component:${componentName}`)) {
       return componentName;
     }
 
-    return 'bs-form/element/control/input';
+    return `${formComponent}/element/control/input`;
   }),
 
   /**

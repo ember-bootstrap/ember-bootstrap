@@ -151,6 +151,20 @@ export default Component.extend({
   horizontalLabelGridClass: 'col-md-4',
 
   /**
+   * @property elementComponent
+   * @type {String}
+   * @private
+   */
+  elementComponent: 'bs-form/element',
+
+  /**
+   * @property groupComponent
+   * @type {String}
+   * @private
+   */
+  groupComponent: 'bs-form/group',
+
+  /**
    * `isSubmitting` is `true` after `submit` event has been triggered and until Promise returned by `onSubmit` is
    * fulfilled. If `validate` returns a Promise that one is also taken into consideration.
    *
