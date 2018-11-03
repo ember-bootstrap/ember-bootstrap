@@ -82,6 +82,11 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.dom('button').hasClass('btn-outline-primary');
   });
 
+  testBS4('button with does not have outline class when outline is null', async function(assert) {
+    await render(hbs`{{bs-button type="primary"}}`);
+    assert.dom('button').doesNotHaveClass('btn-outline-primary');
+  });
+
   test('button with iconActive and iconInactive properties shows icon depending on active state', async function(assert) {
     this.set('active', false);
     await render(hbs`{{bs-button active=active iconInactive="fas fa-plus" iconActive="fas fa-minus"}}`);
