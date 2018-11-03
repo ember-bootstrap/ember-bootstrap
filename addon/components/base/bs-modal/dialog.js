@@ -3,7 +3,7 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/string';
 import { bind } from '@ember/runloop';
-import { alias } from '@ember/object/computed';
+import { readOnly } from '@ember/object/computed';
 import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
 
 /**
@@ -21,7 +21,7 @@ export default Component.extend({
   attributeBindings: ['tabindex', 'style', 'aria-labelledby'],
   ariaRole: 'dialog',
   tabindex: '-1',
-  "aria-labelledby": alias('titleId'),
+  "aria-labelledby": readOnly('titleId'),
 
   /**
    * Set to false to disable fade animations.
