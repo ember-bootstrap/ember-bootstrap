@@ -3,6 +3,7 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/string';
 import { bind } from '@ember/runloop';
+import { readOnly } from '@ember/object/computed';
 import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
 
 /**
@@ -17,9 +18,10 @@ export default Component.extend({
   layout,
   classNames: ['modal'],
   classNameBindings: ['fade'],
-  attributeBindings: ['tabindex', 'style'],
+  attributeBindings: ['tabindex', 'style', 'aria-labelledby'],
   ariaRole: 'dialog',
   tabindex: '-1',
+  "aria-labelledby": readOnly('titleId'),
 
   /**
    * Set to false to disable fade animations.
@@ -134,6 +136,44 @@ export default Component.extend({
     return isBlank(size) ? null : `modal-${size}`;
   }).readOnly(),
 
+
+   /**
+   * The id of the `.modal-title` element
+   *
+   * @property titleId
+   * @type string
+   * @default null
+   * @private
+   */
+  titleId: null,
+
+/**
+   * Gets or sets the id of the title element for aria accessibility tags
+   *
+   * @method getSetTitleID
+   * @private
+   */
+  getOrSetTitleId() {
+      //Title element may be set by user so we have to try and find it to set the id
+      const modalNode = this.get('element');
+      let nodeId = null;
+
+      if (modalNode) {
+        const titleNode = modalNode.querySelector('.modal-title');
+        if (titleNode) {
+          //Get title id of .modal-title
+          nodeId = titleNode.id
+          if (!nodeId) {
+            //no title id so we set one
+            nodeId = `${this.get('id')}-title`;
+            titleNode.id = nodeId;
+          }
+        }
+      }
+      this.set('titleId', nodeId)
+  },
+
+
   /**
    * @event onClose
    * @public
@@ -160,6 +200,7 @@ export default Component.extend({
     // iOS to allow clicking the div. So a `click(){}` method here won't work, we need to attach an event listener
     // directly to the element
     this.element.onclick = bind(this, this._click);
+    this.getOrSetTitleId();
   },
 
   willDestroyElement() {
