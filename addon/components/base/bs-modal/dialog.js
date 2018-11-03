@@ -155,18 +155,18 @@ export default Component.extend({
    */
   getOrSetTitleId() {
       //Title element may be set by user so we have to try and find it to set the id
-      const modalNode = document.getElementById(this.get('id'));
+      const modalNode = this.get('element');
       let nodeId = null;
 
       if (modalNode) {
-        const titleNode = modalNode.getElementsByClassName('modal-title');
-        if (titleNode[0]) {
+        const titleNode = modalNode.querySelector('.modal-title');
+        if (titleNode) {
           //Get title id of .modal-title
-          nodeId = titleNode[0].id
+          nodeId = titleNode.id
           if (!nodeId) {
             //no title id so we set one
             nodeId = `${this.get('id')}-title`;
-            titleNode[0].id = nodeId;
+            titleNode.id = nodeId;
           }
         }
       }
