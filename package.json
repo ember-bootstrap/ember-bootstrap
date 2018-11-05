@@ -50,7 +50,7 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-power-select": "^2.0.0",
     "ember-power-select-blockless": "^0.5.0",
-    "ember-qunit": "^3.4.1",
+    "ember-qunit": "^4.1.0",
     "ember-resolver": "^5.0.1",
     "ember-sinon": "^2.1.0",
     "ember-sinon-qunit": "^3.2.0",
