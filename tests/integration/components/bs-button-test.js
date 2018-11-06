@@ -3,7 +3,8 @@ import { defer, reject, resolve } from 'rsvp';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { find, render, click, settled, waitUntil } from '@ember/test-helpers';
-import { test, defaultButtonClass } from '../../helpers/bootstrap-test';
+import { test, testBS4, defaultButtonClass } from '../../helpers/bootstrap-test';
+
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | bs-button', function(hooks) {
@@ -32,6 +33,7 @@ module('Integration | Component | bs-button', function(hooks) {
 
     assert.dom('button').hasClass('btn', 'button has btn class');
     assert.dom('button').hasClass('btn-primary', 'button has type class');
+    assert.dom('button').doesNotHaveClass('btn-outline-primary', 'button does not have outline class');
   });
 
   test('button can be active', async function(assert) {
@@ -74,6 +76,12 @@ module('Integration | Component | bs-button', function(hooks) {
 
     assert.dom('button i').hasClass('fas');
     assert.dom('button i').hasClass('fa-check');
+  });
+
+  testBS4('button with outline property shows as outline', async function(assert) {
+    await render(hbs`{{bs-button type="primary" outline=true}}`);
+    assert.dom('button').hasClass('btn-outline-primary');
+    assert.dom('button').doesNotHaveClass('btn-primary');
   });
 
   test('button with iconActive and iconInactive properties shows icon depending on active state', async function(assert) {
@@ -147,7 +155,7 @@ module('Integration | Component | bs-button', function(hooks) {
 
     await render(
       hbs`{{bs-button
-      defaultText="default text"      
+      defaultText="default text"
       onClick=clickAction
     }}`);
     assert.dom('button').hasText('default text');
@@ -286,5 +294,32 @@ module('Integration | Component | bs-button', function(hooks) {
     await click('button');
     assert.ok(buttonClick.called);
     assert.ok(parentClick.called);
+  });
+
+  test('preventConcurrency=true prevents onClick action to be fired concurrently', async function(assert) {
+    let deferredClickAction = defer();
+    let clickActionHasBeenExecuted = false;
+    this.set('clickAction', () => {
+      clickActionHasBeenExecuted = true;
+      return deferredClickAction.promise;
+    });
+
+    await render(hbs`{{bs-button onClick=clickAction preventConcurrency=true}}`);
+    click('button');
+    await waitUntil(() => clickActionHasBeenExecuted);
+
+    this.set('clickAction', () => {
+      assert.ok(false, 'onClick action is not executed concurrently');
+    });
+    await click('button');
+
+    deferredClickAction.resolve();
+    await settled();
+
+    this.set('clickAction', () => {
+      assert.step('onClick action');
+    });
+    await click('button');
+    assert.verifySteps(['onClick action'], 'onClick action is fired again after pending click action is settled');
   });
 });

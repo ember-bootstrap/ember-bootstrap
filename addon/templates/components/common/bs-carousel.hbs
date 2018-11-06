@@ -1,7 +1,7 @@
 {{#if showIndicators}}
   <ol class="carousel-indicators">
     {{#each indicators as |indicator _index|}}
-      <li class="{{if (bs-eq currentIndex _index) "active"}}" onclick={{action "toSlide" _index}} role="button"></li>
+      <li class={{if (bs-eq currentIndex _index) "active"}} onclick={{action "toSlide" _index}} role="button"></li>
     {{/each}}
   </ol>
 {{/if}}
@@ -17,12 +17,12 @@
 </div>
 
 {{#if showControls}}
-  <a class="{{prevControlClassName}}" href="#{{elementId}}" {{action "toPrevSlide"}} role="button">
-    <span aria-hidden="true" class="{{prevControlIcon}}"></span>
+  <a class={{prevControlClassName}} href="#{{elementId}}" {{action "toPrevSlide"}} role="button">
+    <span aria-hidden="true" class={{prevControlIcon}}></span>
     <span class="sr-only">{{prevControlLabel}}</span>
   </a>
-  <a class="{{nextControlClassName}}" href="#{{elementId}}" {{action "toNextSlide"}} role="button">
-    <span aria-hidden="true" class="{{nextControlIcon}}"></span>
+  <a class={{nextControlClassName}} href="#{{elementId}}" {{action "toNextSlide"}} role="button">
+    <span aria-hidden="true" class={{nextControlIcon}}></span>
     <span class="sr-only">{{nextControlLabel}}</span>
   </a>
 {{/if}}

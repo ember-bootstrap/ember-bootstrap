@@ -514,4 +514,15 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     assert.dom('.modal-dialog').hasClass('modal-dialog-centered');
   });
 
+  test('Modal has accesibility attributes with default title', async function(assert) {
+    await render(hbs`{{#bs-modal-simple open=true title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
+    await settled();
+
+    const modalTitleId = document.getElementsByClassName('modal-title')[0].id;
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('.modal').hasAttribute('role', 'dialog');
+    assert.dom('.modal-dialog').hasAttribute('role', 'document');
+    assert.dom('.modal').hasAttribute('aria-labelledby', modalTitleId);
+  });
+
 });

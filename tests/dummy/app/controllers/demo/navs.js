@@ -6,6 +6,7 @@ export default Controller.extend({
   type: oneWay('typeChoices.firstObject'),
   stacked: false,
   justified: false,
+  fill: false,
   typeChoices: A([
     'pills',
     'tabs'

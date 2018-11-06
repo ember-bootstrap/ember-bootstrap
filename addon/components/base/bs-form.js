@@ -197,6 +197,20 @@ export default Component.extend({
   submitOnEnter: false,
 
   /**
+   * Controls if `onSubmit` action is fired concurrently. If `true` submitting form multiple
+   * times will not trigger `onSubmit` action if a Promise returned by previous submission is
+   * not settled yet.
+   *
+   * Droping a submission also prevents rerunning validation and `onBefore` hook.
+   *
+   * @property preventConcurrency
+   * @type Boolean
+   * @default false
+   * @public
+   */
+  preventConcurrency: false,
+
+  /**
    * If set to true novalidate attribute is present on form element
    *
    * @property novalidate
@@ -270,12 +284,17 @@ export default Component.extend({
    * @private
    */
   submit(e) {
-    this.set('isSubmitting', true);
-    this.incrementProperty('pendingSubmissions');
-
     if (e) {
       e.preventDefault();
     }
+
+    if (this.get('preventConcurrency') && this.get('isSubmitting')) {
+      return;
+    }
+
+    this.set('isSubmitting', true);
+    this.incrementProperty('pendingSubmissions');
+
     let model = this.get('model');
 
     this.get('onBefore')(model);

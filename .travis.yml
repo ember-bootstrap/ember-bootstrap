@@ -26,59 +26,65 @@ env:
     # See https://git.io/vdao3 for details.
     - JOBS=1
 
-  matrix:
-    - EMBER_TRY_SCENARIO=ember-2.3
-    - EMBER_TRY_SCENARIO=ember-lts-2.8
-    - EMBER_TRY_SCENARIO=ember-lts-2.12
-    - EMBER_TRY_SCENARIO=ember-lts-2.16
-    - EMBER_TRY_SCENARIO=ember-lts-2.18
-    - EMBER_TRY_SCENARIO=ember-release
-    - EMBER_TRY_SCENARIO=ember-beta
-    - EMBER_TRY_SCENARIO=ember-canary
-    - EMBER_TRY_SCENARIO=ember-lts-2.8 BOOTSTRAPVERSION=3
-    - EMBER_TRY_SCENARIO=ember-lts-2.12 BOOTSTRAPVERSION=3
-    - EMBER_TRY_SCENARIO=ember-lts-2.16 BOOTSTRAPVERSION=3
-    - EMBER_TRY_SCENARIO=ember-lts-2.18 BOOTSTRAPVERSION=3
-    - EMBER_TRY_SCENARIO=ember-release BOOTSTRAPVERSION=3
-    - EMBER_TRY_SCENARIO=ember-beta BOOTSTRAPVERSION=3
-    - EMBER_TRY_SCENARIO=fastboot-addon-tests
-    - EMBER_TRY_SCENARIO=node-tests
-    - EMBER_TRY_SCENARIO=ember-default BEFORE_SCRIPT="ember sauce:connect" AFTER_SCRIPT="ember sauce:disconnect" TEST_COMMAND="ember test --config-file testem.sauce.js --test-port 7000"
-
-matrix:
-  fast_finish: true
+jobs:
+  fail_fast: true
   allow_failures:
-    - env: EMBER_TRY_SCENARIO=ember-canary
+  - env: EMBER_TRY_SCENARIO=ember-canary
+
+  include:
+  # runs linting and tests with current locked deps
+
+  - stage: "Tests"
+    name: "Tests"
+    install:
+    - yarn install --non-interactive
+    script:
+    - yarn lint:hbs
+    - yarn lint:js
+    - yarn test
+
+  - name: "Floating Dependencies"
+    script:
+    - yarn test
+
+  # we recommend new addons test the current and previous LTS
+  # as well as latest stable release (bonus points to beta/canary)
+  - stage: "Additional Tests"
+    env: EMBER_TRY_SCENARIO=ember-2.3
+  - env: EMBER_TRY_SCENARIO=ember-lts-2.8
+  - env: EMBER_TRY_SCENARIO=ember-lts-2.12
+  - env: EMBER_TRY_SCENARIO=ember-lts-2.16
+  - env: EMBER_TRY_SCENARIO=ember-lts-2.18
+  - env: EMBER_TRY_SCENARIO=ember-release
+  - env: EMBER_TRY_SCENARIO=ember-beta
+  - env: EMBER_TRY_SCENARIO=ember-canary
+  - env: EMBER_TRY_SCENARIO=ember-default-with-jquery
+  - env: EMBER_TRY_SCENARIO=ember-lts-2.8 BOOTSTRAPVERSION=3
+  - env: EMBER_TRY_SCENARIO=ember-lts-2.12 BOOTSTRAPVERSION=3
+  - env: EMBER_TRY_SCENARIO=ember-lts-2.16 BOOTSTRAPVERSION=3
+  - env: EMBER_TRY_SCENARIO=ember-lts-2.18 BOOTSTRAPVERSION=3
+  - env: EMBER_TRY_SCENARIO=ember-release BOOTSTRAPVERSION=3
+  - env: EMBER_TRY_SCENARIO=ember-beta BOOTSTRAPVERSION=3
+  - env: EMBER_TRY_SCENARIO=fastboot-addon-tests
+  - env: EMBER_TRY_SCENARIO=node-tests
+  - env: EMBER_TRY_SCENARIO=ember-default BEFORE_SCRIPT="ember sauce:connect" AFTER_SCRIPT="ember sauce:disconnect" TEST_COMMAND="ember test --config-file testem.sauce.js --test-port 7000"
 
 branches:
   only:
     - master
 
 before_install:
-  - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
-  - npm config set spin false
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
-  - npm --version
-  - yarn --version
-  - google-chrome-stable --version
-  - yarn global add greenkeeper-lockfile@1
 
 install:
-  - yarn install
+  - yarn install --no-lockfile --non-interactive
 
 script:
-  - npm run lint:js
-  - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --skip-cleanup --- $TEST_COMMAND
+  - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --- $TEST_COMMAND
 
 before_script:
-  - greenkeeper-lockfile-update
   - $BEFORE_SCRIPT
 
 after_script:
   - $AFTER_SCRIPT
-  - greenkeeper-lockfile-upload
-
-addons:
-    code_climate:
-        repo_token: de4cedac171d091882efe2719ae10fbdb5e5054077123f8455b251719973a606

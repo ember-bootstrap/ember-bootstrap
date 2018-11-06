@@ -29,7 +29,7 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
  ### Nav styles
 
  The component supports the default bootstrap nav styling options "pills" and "tabs" through the `type`
- property, as well as the `justified` and `stacked` properties.
+ property, as well as the `justified`, `fill` and `stacked` properties.
 
  ### Active items
 
@@ -64,6 +64,8 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
 
  You can override `tagName` if you want to use Bootstrap 4's ability to represent more structural
  components with `div` tags.
+
+ The `fill` styling is only available with Bootstrap 4
 
  @class Nav
  @namespace Components
