@@ -35,9 +35,22 @@ export default Component.extend({
   title: null,
 
   /**
+   * @property titleComponent
+   * @type {String}
+   * @private
+   */
+  titleComponent: 'bs-modal/header/title',
+
+  /**
+   * @property closeComponent
+   * @type {String}
+   * @private
+   */
+  closeComponent: 'bs-modal/header/close',
+
+  /**
    * @event onClose
    * @public
    */
   onClose() {}
-
 });

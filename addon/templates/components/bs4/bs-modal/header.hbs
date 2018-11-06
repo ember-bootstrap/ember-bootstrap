@@ -1,8 +1,15 @@
 {{#if hasBlock}}
-  {{yield}}
+  {{yield
+    (hash
+      title=(component titleComponent)
+      close=(component closeComponent onClick=(action onClose))
+    )
+  }}
 {{else}}
-  {{#bs-modal/header/title}}{{title}}{{/bs-modal/header/title}}
+  {{#component titleComponent}}{{title}}{{/component}}
+
+  {{#if closeButton}}
+    {{component closeComponent onClick=(action onClose)}}
+  {{/if}}
 {{/if}}
-{{#if closeButton}}
-  {{bs-modal/header/close onClick=(action onClose)}}
-{{/if}}
+
