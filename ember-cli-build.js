@@ -12,17 +12,6 @@ module.exports = function(defaults) {
     }
   };
 
-  try {
-    let emberVersion = require('ember-source/package.json').version;
-
-    if (defaults.project.findAddonByName('ember-native-dom-event-dispatcher') || emberVersion.match(/^[\^~]?3.\d+.\d+.*$/)) {
-      options.vendorFiles = { 'jquery.js': null };
-    }
-  } catch (e) {
-    // test with jQuery
-  }
-
-
   let app = new EmberAddon(defaults, options);
 
   /*

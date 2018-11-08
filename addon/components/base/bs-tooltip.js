@@ -79,6 +79,13 @@ export default ContextualHelp.extend({
   layout,
 
   /**
+   * @property elementComponent
+   * @type {String}
+   * @private
+   */
+  elementComponent: 'bs-tooltip/element',
+
+  /**
    * The DOM element of the arrow element.
    *
    * @property arrowElement

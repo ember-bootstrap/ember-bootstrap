@@ -49,6 +49,13 @@ export default Component.extend({
   selected: null,
 
   /**
+   * @property itemComponent
+   * @type {String}
+   * @private
+   */
+  itemComponent: 'bs-accordion/item',
+
+  /**
    * The value of the currently selected accordion item
    *
    * @property isSelected

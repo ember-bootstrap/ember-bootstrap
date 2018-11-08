@@ -63,6 +63,13 @@ export default Component.extend(ComponentParent, {
   tabindex: '1',
 
   /**
+   * @property slideComponent
+   * @type {String}
+   * @private
+   */
+  slideComponent: 'bs-carousel/slide',
+
+  /**
    * If a slide can turn to left, including corners.
    *
    * @private

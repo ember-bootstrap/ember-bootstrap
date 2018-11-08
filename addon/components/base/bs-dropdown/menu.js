@@ -76,7 +76,11 @@ export default Component.extend({
    * @private
    */
   _renderInPlace: computed('renderInPlace', function() {
-    return this.get('renderInPlace') || typeof document === 'undefined' || !document.getElementById('ember-bootstrap-wormhole');
+    return (
+      this.get('renderInPlace') ||
+      typeof document === 'undefined' ||
+      !document.getElementById('ember-bootstrap-wormhole')
+    );
   }),
 
   alignClass: computed('align', function() {
@@ -84,7 +88,7 @@ export default Component.extend({
       return `dropdown-menu-${this.get('align')}`;
     }
   }),
-  
+
   isOpen: computed({
     get() {
       return false;
@@ -96,7 +100,7 @@ export default Component.extend({
         if (this.get('isDestroying') || this.get('isDestroyed')) {
           return;
         }
-        this.set('_isOpen', value)
+        this.set('_isOpen', value);
       });
       return value;
     }
@@ -137,5 +141,26 @@ export default Component.extend({
         enabled: this.get('flip')
       }
     };
-  })
+  }),
+
+  /**
+   * @property itemComponent
+   * @type {String}
+   * @private
+   */
+  itemComponent: 'bs-dropdown/menu/item',
+
+  /**
+   * @property linkToComponent
+   * @type {String}
+   * @private
+   */
+  linkToComponent: 'bs-dropdown/menu/link-to',
+
+  /**
+   * @property dividerComponent
+   * @type {String}
+   * @private
+   */
+  dividerComponent: 'bs-dropdown/menu/divider'
 });

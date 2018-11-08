@@ -242,7 +242,7 @@ export default Component.extend(TypeClass, {
         this.collapse();
       }
     }
-  }
+  },
 
   /**
    * Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard
@@ -265,4 +265,32 @@ export default Component.extend(TypeClass, {
    * @default 'light'
    * @public
    */
+
+  /**
+   * @property toggleComponent
+   * @type {String}
+   * @private
+   */
+  toggleComponent: 'bs-navbar/toggle',
+
+  /**
+   * @property contentComponent
+   * @type {String}
+   * @private
+   */
+  contentComponent: 'bs-navbar/content',
+
+  /**
+   * @property navComponent
+   * @type {String}
+   * @private
+   */
+  navComponent: 'bs-navbar/nav',
+
+  /**
+   * @property linkToComponent
+   * @type {String}
+   * @private
+   */
+  linkToComponent: 'bs-navbar/link-to'
 });

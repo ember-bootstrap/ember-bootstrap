@@ -36,5 +36,12 @@ import layout from 'ember-bootstrap/templates/components/bs-progress';
  */
 export default Component.extend({
   layout,
-  classNames: ['progress']
+  classNames: ['progress'],
+
+  /**
+   * @property progressBarComponent
+   * @type {String}
+   * @private
+   */
+  progressBarComponent: 'bs-progress/bar'
 });

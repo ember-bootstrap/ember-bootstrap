@@ -52,7 +52,7 @@ module('Integration | Component | bs-modal', function(hooks) {
           {{modal.footer}}
         {{/my-component}}
       {{/bs-modal}}
-      
+
     `);
 
     await click('.modal .modal-footer button');
@@ -89,5 +89,41 @@ module('Integration | Component | bs-modal', function(hooks) {
 
     await click('#submit');
     assert.ok(submitAction.calledOnce, 'submit action has been called.');
+  });
+
+  test('Modal has accesibility attributes with custom title', async function(assert) {
+
+    await render(hbs`{{#bs-modal as |modal|}}
+      {{#modal.header}}
+        <h4 class="modal-title">
+          Custom Dialog title
+        </h4>
+      {{/modal.header}}
+      {{#modal.body}}Hello world!{{/modal.body}}
+      {{modal.footer}}
+    {{/bs-modal}}`);
+
+    const modalTitleId = document.getElementsByClassName('modal-title')[0].id;
+
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('.modal').hasAttribute('role', 'dialog');
+    assert.dom('.modal-dialog').hasAttribute('role', 'document');
+    assert.dom('.modal').hasAttribute('aria-labelledby', modalTitleId);
+  });
+
+  test('Modal has accesibility attributes with default title', async function(assert) {
+
+    await render(hbs`{{#bs-modal as |modal|}}
+      {{modal.header title="Some title"}}
+      {{#modal.body}}Hello world!{{/modal.body}}
+      {{modal.footer}}
+    {{/bs-modal}}`);
+
+    const modalTitleId = document.getElementsByClassName('modal-title')[0].id;
+
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('.modal').hasAttribute('role', 'dialog');
+    assert.dom('.modal-dialog').hasAttribute('role', 'document');
+    assert.dom('.modal').hasAttribute('aria-labelledby', modalTitleId);
   });
 });

@@ -53,7 +53,7 @@ function findHostShim() {
 }
 
 module.exports = {
-  name: 'ember-bootstrap',
+  name: require('./package').name,
 
   init() {
     this._super.init.apply(this, arguments);

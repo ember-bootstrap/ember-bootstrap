@@ -2,7 +2,7 @@
   {{yield
     (hash
       title=(component titleComponent)
-      close=(component closeComponent)
+      close=(component closeComponent onClick=(action onClose))
     )
   }}
 {{else}}

@@ -1,12 +1,12 @@
 <div class={{if fluid "container-fluid" "container"}}>
   {{yield
     (hash
-      toggle=(component "bs-navbar/toggle" onClick=(action "toggleNavbar") collapsed=_collapsed)
-      content=(component "bs-navbar/content" collapsed=_collapsed onHidden=onCollapsed onShown=onExpanded)
-      nav=(component "bs-navbar/nav" linkToComponent=(component "bs-navbar/link-to" onCollapse=(action "collapse")))
+      toggle=(component toggleComponent onClick=(action "toggleNavbar") collapsed=_collapsed)
+      content=(component contentComponent collapsed=_collapsed onHidden=onCollapsed onShown=onExpanded)
+      nav=(component navComponent linkToComponent=(component linkToComponent onCollapse=(action "collapse")))
       collapse=(action "collapse")
       expand=(action "expand")
-      toggleNavbar=(action 'toggleNavbar')
+      toggleNavbar=(action "toggleNavbar")
     )
   }}
 </div>

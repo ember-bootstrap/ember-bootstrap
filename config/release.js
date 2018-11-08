@@ -1,6 +1,8 @@
 /* eslint-env node */
 'use strict';
+
 const RSVP = require('rsvp');
+const streamToPromise = require('stream-to-promise');
 
 function promptForCompletion(project) {
   return project.ui.prompt({
@@ -24,10 +26,10 @@ module.exports = {
   beforeCommit(project) {
     const gulp = require('gulp');
     require('../gulpfile.js');
-    let start = RSVP.denodeify(gulp.start.bind(gulp));
+    let updateChangelog = gulp.task('changelog');
 
     project.ui.startProgress('Collecting changes for CHANGELOG.md...');
-    return start('changelog')
+    return streamToPromise(updateChangelog())
       .then(function() {
         project.ui.stopProgress();
         return promptForCompletion(project);
@@ -36,14 +38,12 @@ module.exports = {
   afterPush(project) {
     const gulp = require('gulp');
     require('../gulpfile.js');
-    let start = RSVP.denodeify(gulp.start.bind(gulp));
+    let updateDocs = RSVP.denodeify(gulp.task('docs'));
 
     project.ui.startProgress('Updating docs...');
-    return start('docs')
+    return updateDocs()
       .then(function() {
         project.ui.stopProgress();
       });
   }
 };
-
-

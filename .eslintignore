@@ -11,9 +11,12 @@
 
 # misc
 /coverage/
+!.*
 
 # ember-try
 /.node_modules.ember-try/
+/bower.json.ember-try
+/package.json.ember-try
 
 /docs/
 /fastboot-tests/fixtures/

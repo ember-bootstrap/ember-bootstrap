@@ -87,7 +87,14 @@ export default ContextualHelp.extend({
   triggerEvents: 'click',
 
   /**
-   * The DOm element of the arrow element.
+   * @property elementComponent
+   * @type {String}
+   * @private
+   */
+  elementComponent: 'bs-popover/element',
+
+  /**
+   * The DOM element of the arrow element.
    *
    * @property arrowElement
    * @type object
