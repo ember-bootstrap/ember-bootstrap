@@ -1,5 +1,5 @@
 {{#if inDom}}
-  {{#bs-popover/element
+  {{#component elementComponent
     id=overlayId
     parent=this
     placement=placement
@@ -18,5 +18,5 @@
         close=(action "close")
       )
     }}
-  {{/bs-popover/element}}
+  {{/component}}
 {{/if}}

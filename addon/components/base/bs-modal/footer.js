@@ -62,6 +62,13 @@ export default Component.extend({
   submitButtonType: 'primary',
 
   /**
+   * @property buttonComponent
+   * @type {String}
+   * @private
+   */
+  buttonComponent: 'bs-button',
+
+  /**
    * The action to send to the parent modal component when the modal footer's form is submitted
    *
    * @event onSubmit

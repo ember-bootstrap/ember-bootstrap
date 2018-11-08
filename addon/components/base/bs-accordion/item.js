@@ -57,7 +57,7 @@ export default Component.extend(TypeClass, {
    * @type {String}
    * @private
    */
-  // bodyComponent: 'bs-accordion/item/body',
+  bodyComponent: 'bs-accordion/item/body',
 
   /**
    * @property collapsed

@@ -2,9 +2,9 @@
   {{yield}}
 {{else}}
   {{#if hasSubmitButton}}
-    {{#bs-button onClick=(action onClose)}}{{closeTitle}}{{/bs-button}}
-    {{#bs-button type=submitButtonType onClick=(action onSubmit) disabled=submitDisabled}}{{submitTitle}}{{/bs-button}}
+    {{#component buttonComponent onClick=(action onClose)}}{{closeTitle}}{{/component}}
+    {{#component buttonComponent type=submitButtonType onClick=(action onSubmit) disabled=submitDisabled}}{{submitTitle}}{{/component}}
   {{else}}
-    {{#bs-button type="primary" onClick=(action onClose)}}{{closeTitle}}{{/bs-button}}
+    {{#component buttonComponent type="primary" onClick=(action onClose)}}{{closeTitle}}{{/component}}
   {{/if}}
 {{/if}}

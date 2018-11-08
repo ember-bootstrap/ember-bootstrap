@@ -171,6 +171,34 @@ export default Component.extend(TransitionSupport, {
   position: 'top',
 
   /**
+   * @property dialogComponent
+   * @type {String}
+   * @private
+   */
+  dialogComponent: 'bs-modal/dialog',
+
+  /**
+   * @property headerComponent
+   * @type {String}
+   * @private
+   */
+  headerComponent: 'bs-modal/header',
+
+  /**
+   * @property bodyComponent
+   * @type {String}
+   * @private
+   */
+  bodyComponent: 'bs-modal/body',
+
+  /**
+   * @property footerComponent
+   * @type {String}
+   * @private
+   */
+  footerComponent: 'bs-modal/footer',
+
+  /**
    * The id of the `.modal` element.
    *
    * @property modalId
