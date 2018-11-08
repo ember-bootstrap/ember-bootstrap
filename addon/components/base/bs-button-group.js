@@ -68,6 +68,13 @@ export default Component.extend(SizeClass, {
   classNameBindings: ['vertical:btn-group-vertical:btn-group', 'justified:btn-group-justified'],
 
   /**
+   * @property buttonComponent
+   * @type {String}
+   * @private
+   */
+  buttonComponent: 'bs-button-group/button',
+
+  /**
    * @property classTypePrefix
    * @type String
    * @default 'btn-group'

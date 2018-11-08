@@ -20,6 +20,12 @@ export default Component.extend({
    * @type boolean
    * @public
    */
-  collapsed: null
+  collapsed: null,
 
+  /**
+   * @property collapseComponent
+   * @type {String}
+   * @private
+   */
+  collapseComponent: 'bs-collapse',
 });

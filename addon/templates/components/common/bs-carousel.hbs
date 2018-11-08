@@ -7,7 +7,7 @@
 {{/if}}
 
 <div class="carousel-inner" role="listbox">
-  {{yield (hash slide=(component "bs-carousel/slide"
+  {{yield (hash slide=(component slideComponent
     currentSlide=currentSlide
     directionalClassName=directionalClassName
     followingSlide=followingSlide

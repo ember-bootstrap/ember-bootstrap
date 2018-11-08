@@ -1,6 +1,6 @@
 {{#if inDom}}
   {{#maybe-in-element destinationElement _renderInPlace}}
-    {{#bs-modal/dialog
+    {{#component dialogComponent
       onClose=(action "close")
       fade=fade
       showModal=showModal
@@ -16,14 +16,14 @@
     }}
       {{yield
         (hash
-          header=(component "bs-modal/header" title=title onClose=(action "close"))
-          body=(component "bs-modal/body")
-          footer=(component "bs-modal/footer" onClose=(action "close") onSubmit=(action "submit"))
+          header=(component headerComponent title=title onClose=(action "close"))
+          body=(component bodyComponent)
+          footer=(component footerComponent onClose=(action "close") onSubmit=(action "submit"))
           close=(action "close")
           submit=(action "submit")
         )
       }}
-    {{/bs-modal/dialog}}
+    {{/component}}
 
     <div>
       {{#if showBackdrop}}

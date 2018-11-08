@@ -122,6 +122,20 @@ export default Component.extend(ComponentParent, {
   type: 'tabs',
 
   /**
+   * @property paneComponent
+   * @type {String}
+   * @private
+   */
+  paneComponent: 'bs-tab/pane',
+
+  /**
+   * @property navComponent
+   * @type {String}
+   * @private
+   */
+  navComponent: 'bs-nav',
+
+  /**
    * By default the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)
    * components. If set to true, you can deactivate this and setup the tabs manually. See the example above.
    *

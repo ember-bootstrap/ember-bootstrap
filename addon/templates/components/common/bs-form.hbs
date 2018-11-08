@@ -1,13 +1,13 @@
 {{yield
   (hash
-    element=(component "bs-form/element"
+    element=(component elementComponent
       model=model
       formLayout=formLayout
       horizontalLabelGridClass=horizontalLabelGridClass
       showAllValidations=showAllValidations
       onChange=(action "change")
     )
-    group=(component "bs-form/group" formLayout=formLayout)
+    group=(component groupComponent formLayout=formLayout)
     isSubmitting=isSubmitting
   )
 }}
