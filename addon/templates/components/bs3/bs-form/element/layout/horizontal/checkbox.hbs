@@ -1,7 +1,8 @@
 <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
   <div class="checkbox">
-    {{yield}}
-    {{component labelComponent}}
+    {{#component labelComponent}}
+      {{yield}}
+    {{/component}}
   </div>
   {{component errorsComponent}}
   {{component helpTextComponent}}
