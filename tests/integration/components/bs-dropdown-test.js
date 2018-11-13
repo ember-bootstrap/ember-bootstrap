@@ -135,6 +135,30 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
   });
 
+  test('clicking outside dropdown menu when closeOnMenuClick is false will close it', async function(assert) {
+    await render(
+      hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+    );
+    await click('a.dropdown-toggle');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+
+    await click(document.body);
+    assert.dom('.dropdown-menu').doesNotExist();
+  });
+
+  test('clicking outside dropdown menu when closeOnMenuClick is false and renderInPlace is false will close it', async function(assert) {
+    await render(
+      hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu renderInPlace=false}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+    );
+    await click('a.dropdown-toggle');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+
+    await click(document.body);
+    assert.dom('.dropdown-menu').doesNotExist();
+  });
+
   test('child components can access isOpen property', async function(assert) {
     await render(
       hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}<span id="toggleText">{{if dd.isOpen "open" "closed"}}</span>{{/dd.toggle}}{{/bs-dropdown}}`
