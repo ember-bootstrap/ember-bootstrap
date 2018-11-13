@@ -1,7 +1,6 @@
 <div class="{{horizontalInputGridClass}} {{horizontalInputOffsetGridClass}}">
-  {{#component labelComponent}}
-    {{yield}}
-  {{/component}}
+  {{yield}}
+  {{component labelComponent}}
   {{component errorsComponent}}
   {{component helpTextComponent}}
 </div>
