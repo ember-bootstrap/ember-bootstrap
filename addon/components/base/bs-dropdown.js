@@ -213,7 +213,7 @@ export default Component.extend({
    * @private
    */
   menuElement: computed(function() {
-    return this.get('element').querySelector('.dropdown-menu');
+    return document.getElementById(`${this.get('elementId')}__menu`);
   }).volatile(),
 
   /**
