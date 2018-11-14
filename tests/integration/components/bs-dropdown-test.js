@@ -149,7 +149,9 @@ module('Integration | Component | bs-dropdown', function(hooks) {
 
   test('clicking outside dropdown menu when closeOnMenuClick is false and renderInPlace is false will close it', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu renderInPlace=false}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+      hbs`
+        <div id="ember-bootstrap-wormhole"></div> 
+        {{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu renderInPlace=false}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
     );
     await click('a.dropdown-toggle');
     assert.dom('.dropdown-menu').exists();
