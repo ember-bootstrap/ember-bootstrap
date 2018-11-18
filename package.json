@@ -9,7 +9,8 @@
     "test:all": "ember try:each",
     "build": "ember build",
     "nodetest": "mocha node-tests --recursive",
-    "docs": "gulp docs"
+    "docs": "gulp docs",
+    "changelog": "lerna-changelog"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
@@ -59,12 +60,14 @@
     "ember-try": "^1.0.0",
     "eslint-plugin-ember": "^5.2.0",
     "eslint-plugin-node": "^7.0.1",
+    "execa": "^1.0.0",
     "glob": "^7.1.1",
     "gulp": "^4.0.0",
-    "gulp-conventional-changelog": "^2.0.0",
     "gulp-gh-pages": "^0.6.0-6",
+    "gulp-insert": "^0.5.0",
     "gulp-rename": "^1.4.0",
     "gulp-transform": "^3.0.5",
+    "lerna-changelog": "^0.8.2",
     "loader.js": "^4.7.0",
     "merge-stream": "^1.0.1",
     "mocha": "^5.0.0",
@@ -120,5 +123,14 @@
   "bugs": {
     "url": "https://github.com/kaliber5/ember-bootstrap/issues"
   },
-  "homepage": "http://kaliber5.github.io/ember-bootstrap/"
+  "homepage": "http://kaliber5.github.io/ember-bootstrap/",
+  "changelog": {
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "enhancement": "Features",
+      "bug": "Bug Fixes",
+      "documentation": "Documentation",
+      "internal": "Internal"
+    }
+  }
 }
