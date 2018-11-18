@@ -1,4 +1,27 @@
-<a name="2.2.0"></a>
+
+## v2.3.0 (2018-11-18)
+
+#### Features
+* [#698](https://github.com/kaliber5/ember-bootstrap/pull/698) Improve yielded components ([@lougreenwood](https://github.com/lougreenwood))
+* [#688](https://github.com/kaliber5/ember-bootstrap/pull/688) Modal: Improve accessibility with proper ARIA attributes ([@dgavey](https://github.com/dgavey))
+* [#686](https://github.com/kaliber5/ember-bootstrap/pull/686) Form: optionally prevent concurrent submissions ([@jelhan](https://github.com/jelhan))
+* [#669](https://github.com/kaliber5/ember-bootstrap/pull/669) Button: optional prevent concurrent click actions ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#706](https://github.com/kaliber5/ember-bootstrap/pull/706) Dropdown: Clicking outside should close the menu when closeOnMenuClick and renderInPlace are false ([@offirgolan](https://github.com/offirgolan))
+* [#702](https://github.com/kaliber5/ember-bootstrap/pull/702) Don't wrap checkboxes in labels [BS4] ([@lougreenwood](https://github.com/lougreenwood))
+
+#### Internal
+* [#709](https://github.com/kaliber5/ember-bootstrap/pull/709) Update ember-cli-release hook for changelog generation ([@simonihmig](https://github.com/simonihmig))
+* [#708](https://github.com/kaliber5/ember-bootstrap/pull/708) Use lerna-changelog for Changelog generation ([@simonihmig](https://github.com/simonihmig))
+* [#695](https://github.com/kaliber5/ember-bootstrap/pull/695) Update to Ember 3.5 ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 5
+- Derek Gavey ([@dgavey](https://github.com/dgavey))
+- Lou Greenwood ([@lougreenwood](https://github.com/lougreenwood))
+- Offir Golan ([@offirgolan](https://github.com/offirgolan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- jelhan ([@jelhan](https://github.com/jelhan))<a name="2.2.0"></a>
 ## [2.2.0](https://github.com/kaliber5/ember-bootstrap/compare/v2.1.2...v2.2.0) (2018-10-25)
 
 
