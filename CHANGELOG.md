@@ -1,13 +1,13 @@
 <a name="2.2.0"></a>
-# [2.2.0](https://github.com/kaliber5/ember-bootstrap/compare/v2.1.2...v2.2.0) (2018-10-25)
+## [2.2.0](https://github.com/kaliber5/ember-bootstrap/compare/v2.1.2...v2.2.0) (2018-10-25)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Dropdown:** Propagate class to the menu dom element. Thanks to [@offirgolan](https://github.com/offirgolan) ([0ca7edb](https://github.com/kaliber5/ember-bootstrap/commit/0ca7edb))
 
 
-### Features
+#### Features
 
 * **Accordion:** add disabled property to Accordion. Thanks to [@donaldwasserman](https://github.com/donaldwasserman) ([d81b9fd](https://github.com/kaliber5/ember-bootstrap/commit/d81b9fd))
 * **Form:** support autocapitalize and autocorrect attributes. Thanks to [@CodingItWrong](https://github.com/CodingItWrong) ([402c975](https://github.com/kaliber5/ember-bootstrap/commit/402c975))
@@ -17,22 +17,22 @@
 <a name="2.1.2"></a>
 ## [2.1.2](https://github.com/kaliber5/ember-bootstrap/compare/2.1.1...2.1.2) (2018-09-26)
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Button**: fixed empty title when button has Promise-based state and no state texts (`fulfillText` etc.). Thanks to [@andreasschacht](https://github.com/andreasschacht)
 
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/kaliber5/ember-bootstrap/compare/2.1.0...2.1.1) (2018-09-18)
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Dropdown:** fixed actions on dropdown menu's children not being fired due to prematurely removing the menu from DOM (introduced in 2.1.0), closes [#660](https://github.com/kaliber5/ember-bootstrap/issues/660)
 
 <a name="2.1.0"></a>
-# [2.1.0](https://github.com/kaliber5/ember-bootstrap/compare/2.0.0...2.1.0) (2018-09-06)
+## [2.1.0](https://github.com/kaliber5/ember-bootstrap/compare/2.0.0...2.1.0) (2018-09-06)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Button:** reset should not change `state` multiple times in one runloop ([1e6e05d](https://github.com/kaliber5/ember-bootstrap/commit/1e6e05d))
 * **Dropdown:** prevent missing popperContainer exception for dropdown with `renderInPlace=false` in tests ([c3668ae](https://github.com/kaliber5/ember-bootstrap/commit/c3668ae)), closes [#633](https://github.com/kaliber5/ember-bootstrap/issues/633)
@@ -40,7 +40,7 @@
 * **Tooltip:** fix `calling set on destroyed element` issue for bs-tooltip. Thanks to [@brandynbenett](https://github.com/brandynbenett) ([263767b](https://github.com/kaliber5/ember-bootstrap/commit/263767b))
 
 
-### Features
+#### Features
 
 * **Button:** bs-button yields state and shorthands. Thanks to [@jelhan](https://github.com/jelhan) ([59631d6](https://github.com/kaliber5/ember-bootstrap/commit/59631d6))
 * **Dropdown:** dropdown actions are yielded. Thanks to [@sdhull](https://github.com/sdhull) ([db4d1ce](https://github.com/kaliber5/ember-bootstrap/commit/db4d1ce))
@@ -50,10 +50,10 @@
 
 
 <a name="2.0.0"></a>
-# [2.0.0](https://github.com/kaliber5/ember-bootstrap/compare/1.2.2...2.0.0) (2018-06-23)
+## [2.0.0](https://github.com/kaliber5/ember-bootstrap/compare/1.2.2...2.0.0) (2018-06-23)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Accordion:** BS4: update markup to match Bootstrap 4's default markup ([6ace8a9](https://github.com/kaliber5/ember-bootstrap/commit/6ace8a9))
 * **Build:** also apply `whitelist`/`blacklist` based "tree shaking" to app tree (re-exports of addon tree) ([a8fa8d1](https://github.com/kaliber5/ember-bootstrap/commit/a8fa8d1)), closes [#472](https://github.com/kaliber5/ember-bootstrap/issues/472)
@@ -61,7 +61,7 @@
 * **FormElement:** fix exception for destroyed elements. Thanks to @BartTK ([a3214f0](https://github.com/kaliber5/ember-bootstrap/commit/a3214f0))
 
 
-### Features
+#### Features
 
 * **Setup:** make Bootstrap 4 the new default ([ee0767b](https://github.com/kaliber5/ember-bootstrap/commit/ee0767b))
 * **Carousel:** support transition="slide" for BS4 carousels. Thanks to [@nbrookie](https://github.com/nbrookie) ([fa8550a](https://github.com/kaliber5/ember-bootstrap/commit/fa8550a)), closes [#591](https://github.com/kaliber5/ember-bootstrap/issues/591)
@@ -81,12 +81,12 @@
 ## [1.2.2](https://github.com/kaliber5/ember-bootstrap/compare/1.2.1...1.2.2) (2018-04-12)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Tooltip/Popover:** updated ember-popper, which fixes incompatibility with Ember 3.1 ([0d81cc3](https://github.com/kaliber5/ember-bootstrap/commit/0d81cc3))
 
 
-### Features
+#### Features
 
 * **Dropdown:** in BS4 the dropdown menu can be rendered in a wormhole by setting `renderInPlace=false` to prevent clipping issues ([d0dcbb3](https://github.com/kaliber5/ember-bootstrap/commit/d0dcbb3)), closes [#561](https://github.com/kaliber5/ember-bootstrap/issues/561)
 
@@ -96,30 +96,30 @@
 ## [1.2.1](https://github.com/kaliber5/ember-bootstrap/compare/1.2.0...1.2.1) (2018-02-19)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Modal:** fix memory leak, caused by not removed event listener ([f979cf2](https://github.com/kaliber5/ember-bootstrap/commit/f979cf2))
 * **Navbar:** removed the `align` property of the `nav-toggler` component for BS4 ([70a556b](https://github.com/kaliber5/ember-bootstrap/commit/70a556b))
 
 
-### Features
+#### Features
 
 * **Nav:** yielded DropDown automatically is a `<li>`, no need to set tagName="li" anymore ([aaef6be](https://github.com/kaliber5/ember-bootstrap/commit/aaef6be))
 
 
 
 <a name="1.2.0"></a>
-# [1.2.0](https://github.com/kaliber5/ember-bootstrap/compare/1.1.0...1.2.0) (2018-01-19)
+## [1.2.0](https://github.com/kaliber5/ember-bootstrap/compare/1.1.0...1.2.0) (2018-01-19)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Modal:** submitting form in nested bs-modal-simple throws ([9b64553](https://github.com/kaliber5/ember-bootstrap/commit/9b64553)), closes [#533](https://github.com/kaliber5/ember-bootstrap/issues/533)
 * **Navbar:** toggle button does not inherit from `bs-button` anymore, removing the extraneous `.btn`, `.btn-*` classes ([0cd00ea](https://github.com/kaliber5/ember-bootstrap/commit/0cd00ea)), closes [#531](https://github.com/kaliber5/ember-bootstrap/issues/531)
 * **Tooltip/Popover:** fix `focus` trigger event for iOS ([83c219e](https://github.com/kaliber5/ember-bootstrap/commit/83c219e))
 
 
-### Features
+#### Features
 
 * **Bootstrap 4:** uses now the recently released stable Bootstrap 4.0.0! 🎉 ([f3c6f7a](https://github.com/kaliber5/ember-bootstrap/commit/f3c6f7a))
   Bootstrap 4 support can now be considered stable and official!
@@ -128,10 +128,10 @@
 
 
 <a name="1.1.0"></a>
-# [1.1.0](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0...1.1.0) (2018-01-18)
+## [1.1.0](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0...1.1.0) (2018-01-18)
 
 
-### Features
+#### Features
 
 * **Carousel:** Added brand new `bs-carousel` component, with a native Ember implementation of Bootstrap's Carousels. Thanks to [@c410-f3r](https://github.com/c410-f3r), closes [#138](https://github.com/kaliber5/ember-bootstrap/issues/138)
 * **Bootstrap 4:** added support for the latest 4.0.0-beta.3 release ([952ee5c](https://github.com/kaliber5/ember-bootstrap/commit/952ee5c))
@@ -143,10 +143,10 @@
 
 
 <a name="1.0.0"></a>
-# [1.0.0](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.5...1.0.0) (2017-12-19)
+## [1.0.0](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.5...1.0.0) (2017-12-19)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Accordion:** fix accordion items wrongly registering as childs on the (wrong) parent, e.g. on tab component. ([37fac1c](https://github.com/kaliber5/ember-bootstrap/commit/37fac1c))
 * **Install:** remove usage of deprecated `nodeModulesPath` ember-cli property ([36444b6](https://github.com/kaliber5/ember-bootstrap/commit/36444b6)), closes [#506](https://github.com/kaliber5/ember-bootstrap/issues/506)
@@ -154,10 +154,10 @@
 
 
 <a name="1.0.0-rc.5"></a>
-# [1.0.0-rc.5](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.4...1.0.0-rc.5) (2017-12-04)
+## [1.0.0-rc.5](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.4...1.0.0-rc.5) (2017-12-04)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **FormElement:** fix conflicting usage of the `size` property for setting the Bootstrap size classes and the input's size attribute ([cdd2608](https://github.com/kaliber5/ember-bootstrap/commit/cdd2608)), closes [#492](https://github.com/kaliber5/ember-bootstrap/issues/492)
 * **FormElement:** fix sizing classes for Bootstrap 4 ([78e160e](https://github.com/kaliber5/ember-bootstrap/commit/78e160e)), closes [#494](https://github.com/kaliber5/ember-bootstrap/issues/494)
@@ -165,7 +165,7 @@
 * **Modal:** fix clicking on modal backdrop to close the modal on iOS ([5ce1645](https://github.com/kaliber5/ember-bootstrap/commit/5ce1645)), closes [#482](https://github.com/kaliber5/ember-bootstrap/issues/482)
 
 
-### Features
+#### Features
 
 * **Modal:** customizable ModalSimple submit button type. Thanks to [@bgentry](https://github.com/bgentry) ([d45c5f2](https://github.com/kaliber5/ember-bootstrap/commit/d45c5f2)), closes [#232](https://github.com/kaliber5/ember-bootstrap/issues/232)
 * **Modal:** does not render modal to DOM unless visible ([0eb41de](https://github.com/kaliber5/ember-bootstrap/commit/0eb41de))
@@ -178,15 +178,15 @@
 
 
 <a name="1.0.0-rc.4"></a>
-# [1.0.0-rc.4](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.3...1.0.0-rc.4) (2017-11-08)
+## [1.0.0-rc.4](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.3...1.0.0-rc.4) (2017-11-08)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Build:** Update ember-popper to fix production build w/ sourcemaps ([db10cb4](https://github.com/kaliber5/ember-bootstrap/commit/db10cb4)), closes [#468](https://github.com/kaliber5/ember-bootstrap/issues/468)
 
 
-### Features
+#### Features
 
 * **Bootstrap 4: Added support for the most recent Bootstrap 4.0.0-beta release!**
   The Bootstrap 4 beta release contained a lot of breaking changes compared to the alpha releases, which required a lot 
@@ -196,10 +196,10 @@
 
 
 <a name="1.0.0-rc.3"></a>
-# [1.0.0-rc.3](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.2...1.0.0-rc.3) (2017-10-08)
+## [1.0.0-rc.3](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.2...1.0.0-rc.3) (2017-10-08)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Dropdown:** Close dropdowns during event capture phase. Thanks to [jeloba](https://github.com/jeloba) ([b220432](https://github.com/kaliber5/ember-bootstrap/commit/b220432))
 * **Dropdown:** fix rendering in FastBoot w/ Ember 2.15 ([070a3ec](https://github.com/kaliber5/ember-bootstrap/commit/070a3ec))
@@ -208,7 +208,7 @@
 * **Nav:** fixed 'You modified "active" twice on in a single render' exception when `nav.link-to` has dynamic link ([09e8fa7](https://github.com/kaliber5/ember-bootstrap/commit/09e8fa7))
 
 
-### Features
+#### Features
 
 * **Browser support:** support for IE 9/10 has been dropped ([343865f](https://github.com/kaliber5/ember-bootstrap/commit/343865f))
 * **Tooltip/Popover:** usage of ember-popper/popper.js replaces homegrown positioning logic ([0e76009](https://github.com/kaliber5/ember-bootstrap/commit/0e76009))
@@ -221,10 +221,10 @@
 
 
 <a name="1.0.0-rc.2"></a>
-# [1.0.0-rc.2](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.1...1.0.0-rc.2) (2017-08-24)
+## [1.0.0-rc.2](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-rc.1...1.0.0-rc.2) (2017-08-24)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **BS4:** Pin Bootstrap4 version to 4.0.0-alpha.6 until -beta issues have been fixed, see [#410](https://github.com/kaliber5/ember-bootstrap/issues/410) ([ad2dcee](https://github.com/kaliber5/ember-bootstrap/commit/ad2dcee))
 * **Form:** assert valid `formLayout`. Thanks to [@donaldwasserman](https://github.com/donaldwasserman) ([c03bdf5](https://github.com/kaliber5/ember-bootstrap/commit/c03bdf5)), closes [#418](https://github.com/kaliber5/ember-bootstrap/issues/418)
@@ -232,7 +232,7 @@
 * **modal:** fix error in older browsers ([e18bc81](https://github.com/kaliber5/ember-bootstrap/commit/e18bc81)), closes [#395](https://github.com/kaliber5/ember-bootstrap/issues/395)
 
 
-### Features
+#### Features
 
 * **Accordion:** enable setting custom class to accordion item body. Thanks to [@Techn1x](https://github.com/Techn1x) ([36646a7](https://github.com/kaliber5/ember-bootstrap/commit/36646a7)), closes [#404](https://github.com/kaliber5/ember-bootstrap/issues/404)
 * **Install:** Use findHost function in included hook. Thanks to [@synaptiko](https://github.com/synaptiko) ([dfe2344](https://github.com/kaliber5/ember-bootstrap/commit/dfe2344))
@@ -240,10 +240,10 @@
 
 
 <a name="1.0.0-rc.1"></a>
-# [1.0.0-rc.1](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-beta.2...1.0.0-rc.1) (2017-07-26)
+## [1.0.0-rc.1](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-beta.2...1.0.0-rc.1) (2017-07-26)
 
 
-### Features
+#### Features
 
 * **Build:** add support for (explicit) tree shaking, removing unused components from build ([8852021](https://github.com/kaliber5/ember-bootstrap/commit/8852021)), closes [#140](https://github.com/kaliber5/ember-bootstrap/issues/140)
   See [Setup guide](http://www.ember-bootstrap.com/#/getting-started/setup) for instructions.
@@ -251,16 +251,16 @@
 * **Modal:** refactored visibility rendering of modals, making open modals render correctly in FastBoot ([565d805](https://github.com/kaliber5/ember-bootstrap/commit/565d805)), closes [#380](https://github.com/kaliber5/ember-bootstrap/issues/380)
 * register as Ember library, showing addon version in console and Ember Inspector ([47cc7ef](https://github.com/kaliber5/ember-bootstrap/commit/47cc7ef))
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Modal:** fix transitionend event listener removal, fixing occasional problems with modals. Thanks to [@lodrantl](https://github.com/lodrantl)
 
 
 <a name="1.0.0-beta.2"></a>
-# [1.0.0-beta.2](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-beta.1...1.0.0-beta.2) (2017-06-21)
+## [1.0.0-beta.2](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-beta.1...1.0.0-beta.2) (2017-06-21)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Accordion:** add static CSS fix to enable clicking on whole header on iOS ([2a8fefe](https://github.com/kaliber5/ember-bootstrap/commit/2a8fefe)), closes [#355](https://github.com/kaliber5/ember-bootstrap/issues/355)
 * **Button:** fix event bubbling for submit buttons. Event bubbling is prevented when a `onClick` action handler has been set ([89c575d](https://github.com/kaliber5/ember-bootstrap/commit/89c575d))
@@ -275,7 +275,7 @@
 * **Tooltip/Popover:** Fixed removing event listeners of destroyed components ([33dfda7](https://github.com/kaliber5/ember-bootstrap/commit/33dfda7)), closes [#350](https://github.com/kaliber5/ember-bootstrap/issues/350)
 
 
-### Features
+#### Features
 
 * **FormElement:** Add customWarning property to show warnings independently of validation. Thanks to [@elgordino](https://github.com/elgordino) ([540e233](https://github.com/kaliber5/ember-bootstrap/commit/540e233))
 * **Navbar:** automatically collapse menu when clicking nav link on mobile ([2008884](https://github.com/kaliber5/ember-bootstrap/commit/2008884)), closes [#317](https://github.com/kaliber5/ember-bootstrap/issues/317)
@@ -284,17 +284,17 @@
 
 
 <a name="1.0.0-beta.1"></a>
-# [1.0.0-beta.1](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.12...v1.0.0-beta.1) (2017-06-05)
+## [1.0.0-beta.1](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.12...v1.0.0-beta.1) (2017-06-05)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **AccordionItem:** preventDefault click on title link. Thanks to [@dajk](https://github.com/dajk) ([78bb9e9](https://github.com/kaliber5/ember-bootstrap/commit/78bb9e9)), closes [#311](https://github.com/kaliber5/ember-bootstrap/issues/311)
 * **Modal:** Fixed `onClick` dummy action. Thanks to [@dajk](https://github.com/dajk) ([76dadf2](https://github.com/kaliber5/ember-bootstrap/commit/76dadf2))
 * **Setup:** Soften the build-time errors to warnings for non-standard configurations ([fec690e](https://github.com/kaliber5/ember-bootstrap/commit/fec690e)), closes [#322](https://github.com/kaliber5/ember-bootstrap/issues/322)
 
 
-### Features
+#### Features
 
 * **jQuery:** Removed jQuery-dependency ([ac489e8](https://github.com/kaliber5/ember-bootstrap/commit/ac489e8)), closes [#300](https://github.com/kaliber5/ember-bootstrap/issues/300)
 
@@ -306,10 +306,10 @@
 
 
 <a name="1.0.0-alpha.12"></a>
-# [1.0.0-alpha.12](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.11...v1.0.0-alpha.12) (2017-04-26)
+## [1.0.0-alpha.12](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.11...v1.0.0-alpha.12) (2017-04-26)
 
 
-### Features
+#### Features
 
 * **AccordionItem:** yield title and body as contextual components for better customization. Thanks to [@dajk](https://github.com/dajk) ([8d09cdf](https://github.com/kaliber5/ember-bootstrap/commit/8d09cdf)), closes [#283](https://github.com/kaliber5/ember-bootstrap/issues/283)
 * **Build:** Upgrade to ember-cli-babel@6 to enable new ember-cli targets feature ([cf9a77d](https://github.com/kaliber5/ember-bootstrap/commit/cf9a77d))
@@ -317,10 +317,10 @@
 
 
 <a name="1.0.0-alpha.11"></a>
-# [1.0.0-alpha.11](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.10...v1.0.0-alpha.11) (2017-04-21)
+## [1.0.0-alpha.11](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.10...v1.0.0-alpha.11) (2017-04-21)
 
 
-### Features
+#### Features
 
 * **FastBoot:** prepare for upcoming FastBoot 1.0 breaking changes. ember-bootstrap should now be compatible with pre and post 1.0 versions of FastBoot! ([7474e72](https://github.com/kaliber5/ember-bootstrap/commit/7474e72))
 * **FormElement:** `helpText` allows you to add a block of help text next to your form control ([c23af92](https://github.com/kaliber5/ember-bootstrap/commit/c23af92)), closes [#169](https://github.com/kaliber5/ember-bootstrap/issues/169)
@@ -329,42 +329,42 @@
 
 
 <a name="1.0.0-alpha.10"></a>
-# [1.0.0-alpha.10](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.9...v1.0.0-alpha.10) (2017-04-13)
+## [1.0.0-alpha.10](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.9...v1.0.0-alpha.10) (2017-04-13)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Install:** Fix dependency validator to allow having bootstrap in bower dependencies. Thanks to [Exelord](https://github.com/exelord).  ([2d5d254](https://github.com/kaliber5/ember-bootstrap/commit/2d5d254))
 
 
-### Features
+#### Features
 
 * **Form:** form element yields control component for easier customization ([7fa354a](https://github.com/kaliber5/ember-bootstrap/commit/7fa354a))
 
 
 
 <a name="1.0.0-alpha.9"></a>
-# [1.0.0-alpha.9](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.8...v1.0.0-alpha.9) (2017-04-01)
+## [1.0.0-alpha.9](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.8...v1.0.0-alpha.9) (2017-04-01)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Install:** Blueprint honor existing config ([#285](https://github.com/kaliber5/ember-bootstrap/issues/285)) ([030131e](https://github.com/kaliber5/ember-bootstrap/commit/030131e)), closes [#282](https://github.com/kaliber5/ember-bootstrap/issues/282)
 * **Install:** Use configured `bootstrapVersion` if present ([e68d372](https://github.com/kaliber5/ember-bootstrap/commit/e68d372)), closes [#276](https://github.com/kaliber5/ember-bootstrap/issues/276)
 * **Install:** Address the situation where `ember-cli-build.js` could not be edited, closes [#279](https://github.com/kaliber5/ember-bootstrap/issues/279)
 
 
-### Features
+#### Features
 
 * **Info command:** added `ember bootstrap:info` command ([2c54d3f](https://github.com/kaliber5/ember-bootstrap/commit/2c54d3f))
 
 
 
 <a name="1.0.0-alpha.8"></a>
-# [1.0.0-alpha.8](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.7...v1.0.0-alpha.8) (2017-03-20)
+## [1.0.0-alpha.8](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.7...v1.0.0-alpha.8) (2017-03-20)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Install:** fixed default options not being applied at addon installation, causing a `Bootstrap version must be 3 or 4` error ([1d753cb](https://github.com/kaliber5/ember-bootstrap/commit/1d753cb)), closes [#272](https://github.com/kaliber5/ember-bootstrap/issues/272)
 * **Install:** fixed wrong config being added to `ember-cli-build.js` when no preprocessor was used ([63210bf](https://github.com/kaliber5/ember-bootstrap/commit/63210bf))
@@ -373,27 +373,27 @@
 
 
 <a name="1.0.0-alpha.7"></a>
-# [1.0.0-alpha.7](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.6...v1.0.0-alpha.7) (2017-03-19)
+## [1.0.0-alpha.7](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.6...v1.0.0-alpha.7) (2017-03-19)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Install:** fixed missing dependency (`silent-error`) in package.json ([7f6cc7a](https://github.com/kaliber5/ember-bootstrap/commit/7f6cc7a))
 
 
 
 <a name="1.0.0-alpha.6"></a>
-# [1.0.0-alpha.6](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.5...v1.0.0-alpha.6) (2017-03-18)
+## [1.0.0-alpha.6](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.5...v1.0.0-alpha.6) (2017-03-18)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Build:** fix build issue with ember-cli 2.12.0. Thanks to [@rwjblue](https://github.com/rwjblue) ([377edb6](https://github.com/kaliber5/ember-bootstrap/commit/377edb6))
 * **Dropdown:** Dropdown with a `block=true` toggle button has 'dropdown' class instead of 'btn-group' ([5f9cd78](https://github.com/kaliber5/ember-bootstrap/commit/5f9cd78)), closes [#244](https://github.com/kaliber5/ember-bootstrap/issues/244)
 * **FormElement:** shows automatic validation state only when validator addon is present ([#266](https://github.com/kaliber5/ember-bootstrap/issues/266)) ([c163e54](https://github.com/kaliber5/ember-bootstrap/commit/c163e54)), closes [#240](https://github.com/kaliber5/ember-bootstrap/issues/240)
 
 
-### Features
+#### Features
 
 * **Installation:** Improved default blueprint (`ember g ember-bootstrap`) for addon installation. Installs only the necessary
   dependencies, based on your chosen Bootstrap version and optional CSS preprocessor. Introduces new options `--bootstrapVersion`
@@ -406,10 +406,10 @@
 
 
 <a name="1.0.0-alpha.5"></a>
-# [1.0.0-alpha.5](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.4...v1.0.0-alpha.5) (2017-02-27)
+## [1.0.0-alpha.5](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.4...v1.0.0-alpha.5) (2017-02-27)
 
 
-### Features
+#### Features
 
 * **Bootstrap 4:** experimental support for Bootstrap 4 added, thanks to the terrific work of [srvance](https://github.com/srvance). For instructions visit the [Getting started](http://www.ember-bootstrap.com/#/getting-started/bootstrap-4) guide. ([#206](https://github.com/kaliber5/ember-bootstrap/pull/206))
 * **FormElement:** `customError` shows custom error message independent of the model's validation ([93e451a](https://github.com/kaliber5/ember-bootstrap/commit/93e451a))
@@ -418,10 +418,10 @@
 
 
 <a name="1.0.0-alpha.4"></a>
-# [1.0.0-alpha.4](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.3...v1.0.0-alpha.4) (2017-02-09)
+## [1.0.0-alpha.4](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.3...v1.0.0-alpha.4) (2017-02-09)
 
 
-### Features
+#### Features
 
 * **FormElement:** Add input as available event for showValidationOn. Thanks to elgordino ([#210](https://github.com/kaliber5/ember-bootstrap/issues/210)) ([b153864](https://github.com/kaliber5/ember-bootstrap/commit/b153864))
 * **Modal:** container div for ember-wormhole renamed to `#ember-bootstrap-wormhole`, is added at build-time to index.html, not through initializer anymore ([9b4013a](https://github.com/kaliber5/ember-bootstrap/commit/9b4013a)), closes [#222](https://github.com/kaliber5/ember-bootstrap/issues/222)
@@ -430,10 +430,10 @@
 
 
 <a name="1.0.0-alpha.3"></a>
-# [1.0.0-alpha.3](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.2...v1.0.0-alpha.3) (2017-01-21)
+## [1.0.0-alpha.3](https://github.com/kaliber5/ember-bootstrap/compare/1.0.0-alpha.2...v1.0.0-alpha.3) (2017-01-21)
 
 
-### Features
+#### Features
 
 * **FormElement:** supports most common HTML5 attributes ([3ef492c](https://github.com/kaliber5/ember-bootstrap/commit/3ef492c)), closes [#179](https://github.com/kaliber5/ember-bootstrap/issues/179)
 * **FormGroup/FormElement:** supports control sizing through `size` property ([90ca70b](https://github.com/kaliber5/ember-bootstrap/commit/90ca70b)), closes [#202](https://github.com/kaliber5/ember-bootstrap/issues/202)
@@ -445,10 +445,10 @@
 
 
 <a name="1.0.0-alpha.2"></a>
-# [1.0.0-alpha.2](https://github.com/kaliber5/ember-bootstrap/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2017-01-10)
+## [1.0.0-alpha.2](https://github.com/kaliber5/ember-bootstrap/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2017-01-10)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **FormElement:** input elements also trigger on change event as well as on input event ([62600fc](https://github.com/kaliber5/ember-bootstrap/commit/62600fc))
 * **Modal:** Fixed missing close button for header yielded by bs-modal ([1100e3f](https://github.com/kaliber5/ember-bootstrap/commit/1100e3f))
@@ -456,16 +456,16 @@
 
 
 <a name="1.0.0-alpha.1"></a>
-# [1.0.0-alpha.1](https://github.com/kaliber5/ember-bootstrap/compare/v1.0.0-alpha...v1.0.0-alpha.1) (2017-01-02)
+## [1.0.0-alpha.1](https://github.com/kaliber5/ember-bootstrap/compare/v1.0.0-alpha...v1.0.0-alpha.1) (2017-01-02)
 
 
-### Bug Fixes
+#### Bug Fixes
 
 * **Form:** Restore the label for a checkbox in vertical layout
 * **Modal:** added guard to double invocation of show/hide methods ([eb63088](https://github.com/kaliber5/ember-bootstrap/commit/eb63088))
 
 
-### Features
+#### Features
 
 * **Dropdown:** menu item component is yielded as a contextual component from DropdownMenu ([55e508f](https://github.com/kaliber5/ember-bootstrap/commit/55e508f))
 * **Form:** FormGroup component is yielded as a contextual component from Form ([0941946](https://github.com/kaliber5/ember-bootstrap/commit/0941946)), closes [#186](https://github.com/kaliber5/ember-bootstrap/issues/186)
@@ -474,9 +474,9 @@
 
 
 <a name="1.0.0-alpha"></a>
-# [1.0.0-alpha](https://github.com/kaliber5/ember-bootstrap/compare/v0.11.3...v1.0.0-alpha) (2016-12-27)
+## [1.0.0-alpha](https://github.com/kaliber5/ember-bootstrap/compare/v0.11.3...v1.0.0-alpha) (2016-12-27)
 
-## Breaking Changes
+#### Breaking Changes
 
 Please note that the 1.0 release of ember-bootstrap will introduce several breaking changes to make use of modern Ember features, follow Data Down Actions Up (DDAU) best practises and to make its API consistent.
 Most changes will fall into one of the following categories:
@@ -489,7 +489,7 @@ Also ember-bootstrap 1.0 requires at least **Ember v2.3**!
 
 See the following list for details.
 
-### Features
+#### Features
 
 * **Accordion:** binding to `selected` property is one-way, thus preventing DDAU violations ([a44ec7d](https://github.com/kaliber5/ember-bootstrap/commit/a44ec7d))
 * **Accordion:** uses contectual components for items. Fires `onChange` action. ([bbab0f4](https://github.com/kaliber5/ember-bootstrap/commit/bbab0f4))
@@ -524,7 +524,7 @@ See the following list for details.
 
 
 <a name"0.11.3"></a>
-### 0.11.3 (2016-11-30)
+## 0.11.3 (2016-11-30)
 
 
 #### Features
@@ -534,7 +534,7 @@ See the following list for details.
 
 
 <a name"0.11.2"></a>
-### 0.11.2 (2016-11-08)
+## 0.11.2 (2016-11-08)
 
 
 #### Bug Fixes
@@ -549,7 +549,7 @@ See the following list for details.
 
 
 <a name"0.11.1"></a>
-### 0.11.1 (2016-10-27)
+## 0.11.1 (2016-10-27)
 
 
 #### Bug Fixes
@@ -601,7 +601,7 @@ See the following list for details.
 
 
 <a name"0.9.1"></a>
-### 0.9.1 (2016-08-20)
+## 0.9.1 (2016-08-20)
 
 
 #### Bug Fixes
@@ -651,7 +651,7 @@ See the following list for details.
 
 
 <a name"0.7.3"></a>
-### 0.7.3 (2016-06-22)
+## 0.7.3 (2016-06-22)
 
 
 #### Bug Fixes
@@ -668,7 +668,7 @@ See the following list for details.
 
 
 <a name"0.7.2"></a>
-### 0.7.2 (2016-05-29)
+## 0.7.2 (2016-05-29)
 
 #### Bug Fixes
 
@@ -682,7 +682,7 @@ See the following list for details.
 * **Form:** adds support for novalidate attribute. Thanks to [jelhan](https://github.com/jelhan)
 
 <a name"0.7.1"></a>
-### 0.7.1 (2016-05-11)
+## 0.7.1 (2016-05-11)
 
 
 #### Bug Fixes
@@ -720,7 +720,7 @@ enable support for it:
 Additional support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations) has been added by [Offir Golan](https://github.com/offirgolan) through [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations)
 
 <a name"0.6.4"></a>
-### 0.6.4 (2016-03-07)
+## 0.6.4 (2016-03-07)
 
 
 #### Bug Fixes
@@ -737,7 +737,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 
 
 <a name"0.6.3"></a>
-### 0.6.3 (2016-03-04)
+## 0.6.3 (2016-03-04)
 
 
 #### Bug Fixes
@@ -754,7 +754,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 
 
 <a name"0.6.2"></a>
-### 0.6.2 (2016-02-25)
+## 0.6.2 (2016-02-25)
 
 
 #### Bug Fixes
@@ -765,7 +765,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 
 
 <a name"0.6.1"></a>
-### 0.6.1 (2016-02-06)
+## 0.6.1 (2016-02-06)
 
 
 #### Bug Fixes
@@ -800,7 +800,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 
 
 <a name"0.5.1"></a>
-### 0.5.1 (2016-01-04)
+## 0.5.1 (2016-01-04)
 
 
 #### Bug Fixes
@@ -823,7 +823,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
   * added bs-modal component and sub components for creating Bootstrap modal dialogs
 
 <a name"0.4.1"></a>
-### 0.4.1 (2015-10-31)
+## 0.4.1 (2015-10-31)
 
 * **FormElement:**
   * Wire up <label> for attribute used in form-element component, thanks to [cyk](https://github.com/cyk) ([3ed081a](https://github.com/kaliber5/ember-bootstrap/commit/3ed081a400f8a83524339bb71eda2d027e01bc05))
@@ -855,7 +855,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 * **Select:** added Ember.Select replacement component ([19144085](https://github.com/kaliber5/ember-bootstrap/commit/19144085))
 
 <a name"0.1.4"></a>
-### 0.1.4 (2015-08-05)
+## 0.1.4 (2015-08-05)
 
 
 #### Bug Fixes
@@ -864,7 +864,7 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 
 
 <a name"0.1.3"></a>
-### 0.1.3 (2015-07-07)
+## 0.1.3 (2015-07-07)
 
 
 #### Bug Fixes
@@ -879,14 +879,14 @@ Additional support for [ember-cp-validations](https://github.com/offirgolan/embe
 
 
 <a name"0.1.2"></a>
-### 0.1.2 (2015-04-22)
+## 0.1.2 (2015-04-22)
 
 #### Features
 
 * **I18n:** support for ember-i18n added: selected components support translateable properties
 
 <a name"0.1.1"></a>
-### 0.1.1 (2015-04-21)
+## 0.1.1 (2015-04-21)
 
 #### Bug Fixes
 
@@ -905,7 +905,7 @@ New form classes to support creating powerful forms:
 * **FormElement:** extends FormGroup to implement automatic markup generation and model based validations
 
 <a name"0.0.9"></a>
-### 0.0.9 (2015-04-08)
+## 0.0.9 (2015-04-08)
 
 #### Bug Fixes
 
@@ -913,7 +913,7 @@ New form classes to support creating powerful forms:
   * initial value did not set active buttons properly
 
 <a name"0.0.8"></a>
-### 0.0.8 (2015-04-08)
+## 0.0.8 (2015-04-08)
 
 
 #### Bug Fixes
@@ -924,7 +924,7 @@ New form classes to support creating powerful forms:
 * **bower:** fixed missing bootstrap dependency in bower.json. Did not affect the host ember  ([5c00c2b9](https://github.com/kaliber5/ember-bootstrap/commit/5c00c2b9))
 
 <a name"0.0.7"></a>
-### 0.0.7 (2015-03-14)
+## 0.0.7 (2015-03-14)
 
 #### Features
 
@@ -936,16 +936,16 @@ New form classes to support creating powerful forms:
 * Updated to ember-cli 0.2.0, ember.js 1.10
 
 <a name"0.0.6"></a>
-### 0.0.6 (2015-03-10)
+## 0.0.6 (2015-03-10)
 
 * **Alert:** component for dismissible Bootstrap alerts
 
 <a name"0.0.5"></a>
-### 0.0.5 (2015-02-2)
+## 0.0.5 (2015-02-2)
 
 * **ButtonGroup:** component for groups of Buttons, with radio and checkbox style toggling
 
 <a name"0.0.4"></a>
-### 0.0.4 (2015-01-25)
+## 0.0.4 (2015-01-25)
 
 * Initial release
