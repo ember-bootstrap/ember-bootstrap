@@ -211,6 +211,20 @@
               horizontalLabelGridClass: &#x27;col-md-4&#x27;,
             
               /**
+               * @property elementComponent
+               * @type {String}
+               * @private
+               */
+              elementComponent: &#x27;bs-form/element&#x27;,
+            
+              /**
+               * @property groupComponent
+               * @type {String}
+               * @private
+               */
+              groupComponent: &#x27;bs-form/group&#x27;,
+            
+              /**
                * &#x60;isSubmitting&#x60; is &#x60;true&#x60; after &#x60;submit&#x60; event has been triggered and until Promise returned by &#x60;onSubmit&#x60; is
                * fulfilled. If &#x60;validate&#x60; returns a Promise that one is also taken into consideration.
                *
@@ -241,6 +255,20 @@
                * @public
                */
               submitOnEnter: false,
+            
+              /**
+               * Controls if &#x60;onSubmit&#x60; action is fired concurrently. If &#x60;true&#x60; submitting form multiple
+               * times will not trigger &#x60;onSubmit&#x60; action if a Promise returned by previous submission is
+               * not settled yet.
+               *
+               * Droping a submission also prevents rerunning validation and &#x60;onBefore&#x60; hook.
+               *
+               * @property preventConcurrency
+               * @type Boolean
+               * @default false
+               * @public
+               */
+              preventConcurrency: false,
             
               /**
                * If set to true novalidate attribute is present on form element
@@ -316,12 +344,17 @@
                * @private
                */
               submit(e) {
-                this.set(&#x27;isSubmitting&#x27;, true);
-                this.incrementProperty(&#x27;pendingSubmissions&#x27;);
-            
                 if (e) {
                   e.preventDefault();
                 }
+            
+                if (this.get(&#x27;preventConcurrency&#x27;) &amp;&amp; this.get(&#x27;isSubmitting&#x27;)) {
+                  return;
+                }
+            
+                this.set(&#x27;isSubmitting&#x27;, true);
+                this.incrementProperty(&#x27;pendingSubmissions&#x27;);
+            
                 let model = this.get(&#x27;model&#x27;);
             
                 this.get(&#x27;onBefore&#x27;)(model);

@@ -812,18 +812,26 @@
               }),
             
               /**
+               * @property formComponent
+               * @type {String}
+               * @private
+               */
+              formComponent: &#x27;bs-form&#x27;,
+            
+              /**
                * @property layoutComponent
                * @type {String}
                * @private
                */
               layoutComponent: computed(&#x27;formLayout&#x27;, &#x27;controlType&#x27;, function() {
-                let formLayout = this.get(&#x27;formLayout&#x27;);
-                let controlType = this.get(&#x27;controlType&#x27;);
+                const formComponent = this.get(&#x27;formComponent&#x27;);
+                const formLayout = this.get(&#x27;formLayout&#x27;);
+                const controlType = this.get(&#x27;controlType&#x27;);
             
                 if (nonDefaultLayouts.includes(controlType)) {
-                  return &#x60;bs-form/element/layout/${formLayout}/${controlType}&#x60;;
+                  return &#x60;${formComponent}/element/layout/${formLayout}/${controlType}&#x60;;
                 } else {
-                  return &#x60;bs-form/element/layout/${formLayout}&#x60;;
+                  return &#x60;${formComponent}/element/layout/${formLayout}&#x60;;
                 }
               }),
             
@@ -833,14 +841,15 @@
                * @private
                */
               controlComponent: computed(&#x27;controlType&#x27;, function() {
-                let controlType = this.get(&#x27;controlType&#x27;);
-                let componentName = &#x60;bs-form/element/control/${controlType}&#x60;;
+                const formComponent = this.get(&#x27;formComponent&#x27;);
+                const controlType = this.get(&#x27;controlType&#x27;);
+                const componentName = &#x60;${formComponent}/element/control/${controlType}&#x60;;
             
                 if (getOwner(this).hasRegistration(&#x60;component:${componentName}&#x60;)) {
                   return componentName;
                 }
             
-                return &#x27;bs-form/element/control/input&#x27;;
+                return &#x60;${formComponent}/element/control/input&#x60;;
               }),
             
               /**

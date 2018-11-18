@@ -84,6 +84,10 @@
               typeClass: computed(&#x27;type&#x27;, function() {
                 let prefix = this.get(&#x27;classTypePrefix&#x27;);
                 let type = this.get(&#x27;type&#x27;) || &#x27;default&#x27;;
+            
+                if (this.get(&#x27;outline&#x27;)) {
+                  return &#x60;${prefix}-outline-${type}&#x60;;
+                }
                 return &#x60;${prefix}-${type}&#x60;;
               }),
             

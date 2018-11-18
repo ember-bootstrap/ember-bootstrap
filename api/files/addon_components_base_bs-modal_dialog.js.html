@@ -63,6 +63,7 @@
             import { computed } from &#x27;@ember/object&#x27;;
             import { htmlSafe } from &#x27;@ember/string&#x27;;
             import { bind } from &#x27;@ember/runloop&#x27;;
+            import { readOnly } from &#x27;@ember/object/computed&#x27;;
             import layout from &#x27;ember-bootstrap/templates/components/bs-modal/dialog&#x27;;
             
             /**
@@ -77,9 +78,10 @@
               layout,
               classNames: [&#x27;modal&#x27;],
               classNameBindings: [&#x27;fade&#x27;],
-              attributeBindings: [&#x27;tabindex&#x27;, &#x27;style&#x27;],
+              attributeBindings: [&#x27;tabindex&#x27;, &#x27;style&#x27;, &#x27;aria-labelledby&#x27;],
               ariaRole: &#x27;dialog&#x27;,
               tabindex: &#x27;-1&#x27;,
+              &quot;aria-labelledby&quot;: readOnly(&#x27;titleId&#x27;),
             
               /**
                * Set to false to disable fade animations.
@@ -194,6 +196,44 @@
                 return isBlank(size) ? null : &#x60;modal-${size}&#x60;;
               }).readOnly(),
             
+            
+               /**
+               * The id of the &#x60;.modal-title&#x60; element
+               *
+               * @property titleId
+               * @type string
+               * @default null
+               * @private
+               */
+              titleId: null,
+            
+            /**
+               * Gets or sets the id of the title element for aria accessibility tags
+               *
+               * @method getSetTitleID
+               * @private
+               */
+              getOrSetTitleId() {
+                  //Title element may be set by user so we have to try and find it to set the id
+                  const modalNode = this.get(&#x27;element&#x27;);
+                  let nodeId = null;
+            
+                  if (modalNode) {
+                    const titleNode = modalNode.querySelector(&#x27;.modal-title&#x27;);
+                    if (titleNode) {
+                      //Get title id of .modal-title
+                      nodeId = titleNode.id
+                      if (!nodeId) {
+                        //no title id so we set one
+                        nodeId = &#x60;${this.get(&#x27;id&#x27;)}-title&#x60;;
+                        titleNode.id = nodeId;
+                      }
+                    }
+                  }
+                  this.set(&#x27;titleId&#x27;, nodeId)
+              },
+            
+            
               /**
                * @event onClose
                * @public
@@ -220,6 +260,7 @@
                 // iOS to allow clicking the div. So a &#x60;click(){}&#x60; method here won&#x27;t work, we need to attach an event listener
                 // directly to the element
                 this.element.onclick = bind(this, this._click);
+                this.getOrSetTitleId();
               },
             
               willDestroyElement() {

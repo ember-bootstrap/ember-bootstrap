@@ -295,6 +295,19 @@
               value: null,
             
               /**
+               * Controls if &#x60;onClick&#x60; action is fired concurrently. If &#x60;true&#x60; clicking button multiple times will not trigger
+               * &#x60;onClick&#x60; action if a Promise returned by previous click is not settled yet.
+               *
+               * This does not affect event bubbling.
+               *
+               * @property preventConcurrency
+               * @type Boolean
+               * @default false
+               * @public
+               */
+              preventConcurrency: false,
+            
+              /**
                * State of the button. The button&#x27;s label (if not used as a block component) will be set to the
                * &#x60;&lt;state&gt;Text&#x60; property.
                * This property will automatically be set when using a click action that supplies the callback with a promise.
@@ -408,7 +421,13 @@
                */
               click() {
                 let action = this.get(&#x27;onClick&#x27;);
-                if (action !== null) {
+                let preventConcurrency = this.get(&#x27;preventConcurrency&#x27;);
+            
+                if (action === null) {
+                  return;
+                }
+            
+                if (!preventConcurrency || !this.get(&#x27;isPending&#x27;)) {
                   let promise = (action)(this.get(&#x27;value&#x27;));
                   if (promise &amp;&amp; typeof promise.then === &#x27;function&#x27; &amp;&amp; !this.get(&#x27;isDestroyed&#x27;)) {
                     this.set(&#x27;state&#x27;, &#x27;pending&#x27;);
@@ -423,8 +442,9 @@
                     }
                     );
                   }
-                  return this.get(&#x27;bubble&#x27;);
                 }
+            
+                return this.get(&#x27;bubble&#x27;);
               },
             
               init() {
