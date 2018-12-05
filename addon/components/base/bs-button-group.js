@@ -169,17 +169,15 @@ export default Component.extend(SizeClass, {
 
   actions: {
     buttonPressed(pressedValue) {
-      let newValue = copy(this.get('value'));
+      let newValue;
 
       if (this.get('isRadio')) {
-        if (newValue !== pressedValue) {
-          newValue = pressedValue;
-        }
+        newValue = pressedValue;
       } else {
-        if (!isArray(newValue)) {
+        if (!isArray(this.get('value'))) {
           newValue = A([pressedValue]);
         } else {
-          newValue = A(newValue);
+          newValue = A(copy(this.get('value')));
           if (newValue.includes(pressedValue)) {
             newValue.removeObject(pressedValue);
           } else {
