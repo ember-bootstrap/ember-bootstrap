@@ -1,6 +1,5 @@
 import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
-import { copy } from '@ember/object/internals';
 import { isArray, A } from '@ember/array';
 import layout from 'ember-bootstrap/templates/components/bs-button-group';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
@@ -177,7 +176,7 @@ export default Component.extend(SizeClass, {
         if (!isArray(this.get('value'))) {
           newValue = A([pressedValue]);
         } else {
-          newValue = A(copy(this.get('value')));
+          newValue = A(this.get('value').slice());
           if (newValue.includes(pressedValue)) {
             newValue.removeObject(pressedValue);
           } else {
