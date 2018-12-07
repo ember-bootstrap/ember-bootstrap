@@ -1,17 +1,9 @@
-import { equal, and } from '@ember/object/computed';
+import { equal } from '@ember/object/computed';
 import FormGroup from 'ember-bootstrap/components/base/bs-form/group';
 
 export default FormGroup.extend({
-  classNameBindings: ['isHorizontal:row', 'isCheckbox:form-check:form-group', 'isInlineCheckbox:form-check-inline'],
-
-  /**
-   * Indicates whether the type of the control widget equals `checkbox`
-   *
-   * @property isCheckbox
-   * @type boolean
-   * @private
-   */
-  isCheckbox: equal('controlType', 'checkbox').readOnly(),
+  classNames: ['form-group'],
+  classNameBindings: ['isHorizontal:row'],
 
   /**
    * Indicates whether the form type equals `horizontal`
@@ -20,9 +12,5 @@ export default FormGroup.extend({
    * @type boolean
    * @private
    */
-  isHorizontal: equal('formLayout', 'horizontal').readOnly(),
-
-  isInline: equal('formLayout', 'inline').readOnly(),
-
-  isInlineCheckbox: and('isCheckbox', 'isInline').readOnly()
+  isHorizontal: equal('formLayout', 'horizontal').readOnly()
 });

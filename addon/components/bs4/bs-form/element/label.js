@@ -6,8 +6,12 @@ export default FormElementLabel.extend({
   tagName: 'label',
 
   classNames: [],
-  classNameBindings: ['invisibleLabel:sr-only', 'isHorizontal:col-form-label', 'isCheckbox:form-check-label', 'labelClass', 'sizeClass'],
+  classNameBindings: ['invisibleLabel:sr-only', 'isHorizontalAndNotCheckbox:col-form-label', 'isCheckbox:form-check-label', 'labelClass', 'sizeClass'],
   attributeBindings: ['formElementId:for'],
+
+  isHorizontalAndNotCheckbox: computed('isHorizontal', 'isCheckbox', function() {
+    return this.get('isHorizontal') && !this.get('isCheckbox');
+  }),
 
   sizeClass: computed('size', 'isHorizontal', function() {
     if (!this.get('isHorizontal')) {
