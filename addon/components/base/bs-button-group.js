@@ -1,6 +1,5 @@
 import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
-import { copy } from '@ember/object/internals';
 import { isArray, A } from '@ember/array';
 import layout from 'ember-bootstrap/templates/components/bs-button-group';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
@@ -169,17 +168,15 @@ export default Component.extend(SizeClass, {
 
   actions: {
     buttonPressed(pressedValue) {
-      let newValue = copy(this.get('value'));
+      let newValue;
 
       if (this.get('isRadio')) {
-        if (newValue !== pressedValue) {
-          newValue = pressedValue;
-        }
+        newValue = pressedValue;
       } else {
-        if (!isArray(newValue)) {
+        if (!isArray(this.get('value'))) {
           newValue = A([pressedValue]);
         } else {
-          newValue = A(newValue);
+          newValue = A(this.get('value').slice());
           if (newValue.includes(pressedValue)) {
             newValue.removeObject(pressedValue);
           } else {
