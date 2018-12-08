@@ -37,12 +37,6 @@ module('Integration | Component | bs-form/group', function(hooks) {
     assert.dom('.row').exists('component has row class');
   });
 
-  testBS4('component has form-check class for group with checkbox control type', async function(assert) {
-    await render(hbs`{{bs-form/group controlType="checkbox"}}`);
-    assert.dom('.form-check').exists('component has form-check class');
-    assert.dom('.form-group').doesNotExist('component has no form-group class');
-  });
-
   testBS3('support size classes', async function(assert) {
     await render(hbs`{{bs-form/group size="lg"}}`);
     assert.dom('.form-group').hasClass('form-group-lg', 'form-group has large class');
