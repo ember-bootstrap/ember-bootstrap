@@ -31,6 +31,7 @@ Router.map(function() {
     this.route('assets');
     this.route('bootstrap-4');
   });
+  this.route('addons');
   this.route('license');
   this.route('changelog');
   this.route('acceptance', function() {
