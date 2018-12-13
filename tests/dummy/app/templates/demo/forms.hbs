@@ -14,11 +14,11 @@
   {{/bs-form}}
   <hr>
   <!-- BEGIN-SNIPPET form-demo -->
-  {{#bs-form formLayout=formLayout model=this onSubmit=(action "submit") as |form|}}
-    {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=true}}
-    {{form.element controlType="password" label="Password" placeholder="Password" property="password" required=true helpText="Minimum 6 characters"}}
-    {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
-    {{form.element controlType="textarea" label="Comments" property="comments"}}
+  {{#bs-form formLayout=formLayout model=this onSubmit=(action "submit") as |f|}}
+    {{f.element controlType="email" label="Email" placeholder="Email" property="email" required=true}}
+    {{f.element controlType="password" label="Password" placeholder="Password" property="password" required=true helpText="Minimum 6 characters"}}
+    {{f.element controlType="checkbox" label="Remember me" property="rememberMe"}}
+    {{f.element controlType="textarea" label="Comments" property="comments"}}
     {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
   {{/bs-form}}
   <!-- END-SNIPPET -->
