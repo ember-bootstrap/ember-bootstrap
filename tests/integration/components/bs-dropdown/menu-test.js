@@ -73,4 +73,25 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
       .dom('.dropdown-menu')
       .hasClass('custom-class-2', 'menu has custom-class-2 class');
   });
+
+
+  test('dropdown menu propagates menuClassNames', async function(assert) {
+    await render(
+      hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element class="custom-class-1 custom-class-2" menuClassNames=(array "menu-class-one" "menu-class-two")}}Something{{/bs-dropdown/menu}}`
+    );
+
+    assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
+    assert
+      .dom('.dropdown-menu')
+      .hasClass('custom-class-1', 'menu has custom-class-1 class');
+    assert
+      .dom('.dropdown-menu')
+      .hasClass('custom-class-2', 'menu has custom-class-2 class');
+    assert
+      .dom('.dropdown-menu')
+      .hasClass('menu-class-one', 'menu has menu-class-one class');
+    assert
+      .dom('.dropdown-menu')
+      .hasClass('menu-class-two', 'menu has menu-class-two class');
+  });
 });
