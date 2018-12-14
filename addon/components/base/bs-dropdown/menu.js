@@ -120,7 +120,6 @@ export default Component.extend({
    */
   _menuClass: computed('menuClassNames.[]', 'class', function() {
     let classes = this.get('menuClassNames') || [];
-
     return classes.join(' ');
   }),
 
