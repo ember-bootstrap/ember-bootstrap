@@ -1,7 +1,7 @@
 {{#if _isOpen}}
   {{#ember-popper
     id=(concat dropdownElementId "__menu")
-    class=(concat "dropdown-menu " alignClass (if isOpen " show") " " class)
+    class=(concat "dropdown-menu " alignClass (if isOpen " show") " " class " " this._menuClass)
     ariaRole=ariaRole
     placement=popperPlacement
     popperTarget=toggleElement

@@ -43,6 +43,18 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom('.dropleft').exists('has dropleft class');
   });
 
+  test('dropdown menu has supplied menuClassNames applied', async function(assert) {
+    await render(
+      hbs`{{#bs-dropdown menuClassNames=(array "menu-class-one" "menu-class-two") as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+    );
+
+    await click('a.dropdown-toggle');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+    assert.dom('.dropdown-menu.menu-class-one').exists('has menuClassName class applied to dropdown menu');
+    assert.dom('.dropdown-menu.menu-class-two').exists('has menuClassName class applied to dropdown menu');
+  });
+
   test('dropdown container with dropdown button has btn-group class', async function(assert) {
     await render(
       hbs`{{#bs-dropdown as |dd|}}{{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`

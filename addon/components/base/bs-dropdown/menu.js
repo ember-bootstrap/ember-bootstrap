@@ -106,6 +106,24 @@ export default Component.extend({
     }
   }),
 
+  /**
+   * @property menuClassNames
+   * @type {array}
+   * @private
+   */
+  menuClassNames: null,
+
+  /**
+   * @property menuClass
+   * @type {string}
+   * @private
+   */
+  _menuClass: computed('menuClassNames.[]', 'class', function() {
+    let classes = this.get('menuClassNames') || [];
+
+    return classes.join(' ');
+  }),
+
   _isOpen: false,
 
   flip: true,

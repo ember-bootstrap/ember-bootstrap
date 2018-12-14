@@ -209,6 +209,13 @@ export default Component.extend({
   }),
 
   /**
+   * @property menuClassNames
+   * @type {array}
+   * @private
+   */
+  menuClassNames: null,
+
+  /**
    * @property menuElement
    * @private
    */
