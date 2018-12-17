@@ -29,10 +29,10 @@ const nonDefaultLayouts = A([
 
  ```hbs
  {{#bs-form formLayout="horizontal" onSubmit=(action "submit") as |form|}}
- {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
- {{form.element controlType="password" label="Password" placeholder="Password" value=password}}
- {{form.element controlType="checkbox" label="Remember me" value=rememberMe}}
- {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+   {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
+   {{form.element controlType="password" label="Password" placeholder="Password" value=password}}
+   {{form.element controlType="checkbox" label="Remember me" value=rememberMe}}
+   {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
  {{/bs-form}}
  ```
 
@@ -43,10 +43,10 @@ const nonDefaultLayouts = A([
 
  ```hbs
  {{#bs-form formLayout="horizontal" model=this onSubmit=(action "submit") as |form|}}
- {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
- {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
- {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
- {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+   {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
+   {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
+   {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
+   {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
  {{/bs-form}}
  ```
 
@@ -167,7 +167,7 @@ const nonDefaultLayouts = A([
  <tr>
  <th></th>
  <th>textarea</th>
- <th>checkbox</th>
+ <th>checkbox/radio</th>
  <th>all others</th>
  </tr>
  </thead>
@@ -283,7 +283,7 @@ const nonDefaultLayouts = A([
  <tr>
  <td>readonly</td>
  <td>✔︎</td>
- <td>✔︎</td>
+ <td>︎</td>
  <td>✔︎</td>
  </tr>
  <tr>

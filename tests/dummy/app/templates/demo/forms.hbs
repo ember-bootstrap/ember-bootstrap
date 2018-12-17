@@ -17,8 +17,9 @@
   {{#bs-form formLayout=formLayout model=this onSubmit=(action "submit") as |form|}}
     {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=true}}
     {{form.element controlType="password" label="Password" placeholder="Password" property="password" required=true helpText="Minimum 6 characters"}}
-    {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
-    {{form.element controlType="textarea" label="Comments" property="comments"}}
+    {{form.element controlType="radio" label="Radio" property="radio" options=radioOptions optionLabelPath="label"}}
+    {{form.element controlType="checkbox" label="Checkbox" property="checkbox"}}
+    {{form.element controlType="textarea" label="Textarea" property="textarea"}}
     {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
   {{/bs-form}}
   <!-- END-SNIPPET -->
