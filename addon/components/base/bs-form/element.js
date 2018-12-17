@@ -29,12 +29,84 @@ const nonDefaultLayouts = A([
 
  ```hbs
  {{#bs-form formLayout="horizontal" onSubmit=(action "submit") as |form|}}
- {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
- {{form.element controlType="password" label="Password" placeholder="Password" value=password}}
- {{form.element controlType="checkbox" label="Remember me" value=rememberMe}}
- {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+   {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
+   {{form.element controlType="password" label="Password" placeholder="Password" value=password}}
+   {{form.element controlType="checkbox" label="Remember me" value=rememberMe}}
+   {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
  {{/bs-form}}
  ```
+
+ ### Control types
+
+ The following control types are supported out of the box:
+
+ * Inputs (simple `text`, or any other HTML5 supported input types like `password`, `email` etc.)
+ * Checkbox (single)
+ * Radio Button (group)
+ * Textarea
+
+ #### Radio Buttons
+
+ For a group of mutually exclusive radio buttons to work, you must supply the `options` property with an array of
+ options, each of which will be rendered with an appropriate radio button and its label. It can be either a simple array
+ of strings or objects. In the latter case, you would have to set `optionLabelPath` to the property, that contains the
+ label on these objects.
+
+ ```hbs
+ {{#bs-form model=this onSubmit=(action "submit") as |form|}}
+   {{form.element label="Gender" options=genderOptions optionLabelPath="title" property="gender"}}
+ {{/bs-form}}
+ ```
+
+ The default layout for radios is stacked, but Bootstrap's inline layout is also supported using the `inline` property
+ of the yielded control component:
+
+ ```hbs
+ {{#bs-form model=this onSubmit=(action "submit") as |form|}}
+   {{#form.element label="Gender" options=genderOptions property="gender" as |el|}}
+     {{el.control inline=true}}
+   {{/form.element}}
+ {{/bs-form}}
+ ```
+
+ #### Custom controls
+
+ Apart from the standard built-in browser controls (see the `controlType` property), you can use any custom control simply
+ by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
+ (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
+
+ ```hbs
+ {{#bs-form model=this onSubmit=(action "submit") as |form|}}
+ {{#form.element label="Select-2" property="gender" useIcons=false as |el|}}
+ {{select-2 id=el.id content=genderChoices optionLabelPath="label" value=el.value searchEnabled=false}}
+ {{/form.element}}
+ {{/bs-form}}
+ ```
+
+ The component yields a hash with the following properties:
+ * `control`: the component that would be used for rendering the form control based on the given `controlType`
+ * `id`: id to be used for the form control, so it matches the labels `for` attribute
+ * `value`: the value of the form element
+ * `validation`: the validation state of the element, `null` if no validation is to be shown, otherwise 'success', 'error' or 'warning'
+
+ If your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports
+ feedback icons with textual `<input class="form-control">` elements.
+
+ If you just want to customize the existing control component, you can use the aforementioned yielded `control` component
+ to customize that existing component:
+
+ ```hbs
+ {{#bs-form model=this onSubmit=(action "submit") as |form|}}
+ {{#form.element label="Email" placeholder="Email" property="email" as |el|}}
+ {{el.control class="input-lg"}}
+ {{/form.element}}
+ {{/bs-form}}
+ ```
+
+ If you are using the custom control quite often, you should consider writing an integration plugin like
+ [`ember-bootstrap-power-select`](https://github.com/kaliber5/ember-bootstrap-power-select).
+ To do so, you need to provide a component `{{bs-form/element/control/my-custom-control}}` which extends
+ [`Components.FormElementControl`](Components.FormElementControl.html).
 
  ### Form validation
 
@@ -43,10 +115,10 @@ const nonDefaultLayouts = A([
 
  ```hbs
  {{#bs-form formLayout="horizontal" model=this onSubmit=(action "submit") as |form|}}
- {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
- {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
- {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
- {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+   {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
+   {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
+   {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
+   {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
  {{/bs-form}}
  ```
 
@@ -105,45 +177,6 @@ const nonDefaultLayouts = A([
  example to display a failure message on a login form after a failed authentication attempt (so not coming from
  the validation library), you can use the `customError` or `customWarning` properties to do so.
 
- ### Custom controls
-
- Apart from the standard built-in browser controls (see the `controlType` property), you can use any custom control simply
- by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
- (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
-
- ```hbs
- {{#bs-form model=this onSubmit=(action "submit") as |form|}}
-   {{#form.element label="Select-2" property="gender" useIcons=false as |el|}}
-     {{select-2 id=el.id content=genderChoices optionLabelPath="label" value=el.value searchEnabled=false}}
-   {{/form.element}}
- {{/bs-form}}
- ```
-
- The component yields a hash with the following properties:
- * `control`: the component that would be used for rendering the form control based on the given `controlType`
- * `id`: id to be used for the form control, so it matches the labels `for` attribute
- * `value`: the value of the form element
- * `validation`: the validation state of the element, `null` if no validation is to be shown, otherwise 'success', 'error' or 'warning'
-
- If your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports
- feedback icons with textual `<input class="form-control">` elements.
-
- If you just want to customize the existing control component, you can use the aforementioned yielded `control` component
- to customize that existing component:
-
- ```hbs
- {{#bs-form model=this onSubmit=(action "submit") as |form|}}
-   {{#form.element label="Email" placeholder="Email" property="email" as |el|}}
-     {{el.control class="input-lg"}}
-   {{/form.element}}
- {{/bs-form}}
- ```
-
- If you are using the custom control quite often, you should consider writing an integration plugin like
- [`ember-bootstrap-power-select`](https://github.com/kaliber5/ember-bootstrap-power-select).
- To do so, you need to provide a component `{{bs-form/element/control/my-custom-control}}` which extends
- [`Components.FormElementControl`](Components.FormElementControl.html).
-
  ### HTML attributes
 
  To set HTML attributes on the control element provided by this component, set them as properties of this component:
@@ -167,7 +200,7 @@ const nonDefaultLayouts = A([
  <tr>
  <th></th>
  <th>textarea</th>
- <th>checkbox</th>
+ <th>checkbox/radio</th>
  <th>all others</th>
  </tr>
  </thead>
@@ -283,7 +316,7 @@ const nonDefaultLayouts = A([
  <tr>
  <td>readonly</td>
  <td>✔︎</td>
- <td>✔︎</td>
+ <td>︎</td>
  <td>✔︎</td>
  </tr>
  <tr>
@@ -383,6 +416,7 @@ export default FormGroup.extend({
    *
    * * 'text'
    * * 'checkbox'
+   * * 'radio'
    * * 'textarea'
    * * any other type will use an input tag with the `controlType` value as the type attribute (for e.g. HTML5 input
    * types like 'email'), and the same layout as the 'text' type
@@ -451,6 +485,26 @@ export default FormGroup.extend({
    * @type {Boolean}
    */
   showMultipleErrors: false,
+
+  /**
+   * Array of options for control types that show a selection (e.g. radio button groups)
+   * Can be an array of simple strings or objects. For objects use `optionLabelPath` to specify the path containing the
+   * label.
+   *
+   * @property options
+   * @type {Array}
+   * @public
+   */
+  options: null,
+
+  /**
+   * Property path (e.g. 'title' or 'related.name') to render the label of an selection option. See `options`.s
+   *
+   * @property optionLabelPath
+   * @type {String}
+   * @public
+   */
+  optionLabelPath: null,
 
   /**
    * @property hasHelpText
