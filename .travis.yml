@@ -73,7 +73,7 @@ jobs:
   - env: EMBER_TRY_SCENARIO=ember-beta BOOTSTRAPVERSION=3
   - env: EMBER_TRY_SCENARIO=fastboot-addon-tests
   - env: EMBER_TRY_SCENARIO=node-tests
-  - env: EMBER_TRY_SCENARIO=ember-default BEFORE_SCRIPT="ember sauce:connect" AFTER_SCRIPT="ember sauce:disconnect" TEST_COMMAND="ember test --config-file testem.sauce.js --test-port 7000"
+#  - env: EMBER_TRY_SCENARIO=ember-default BEFORE_SCRIPT="ember sauce:connect" AFTER_SCRIPT="ember sauce:disconnect" TEST_COMMAND="ember test --config-file testem.sauce.js --test-port 7000"
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
