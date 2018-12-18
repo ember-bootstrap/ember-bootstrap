@@ -61,20 +61,76 @@
             <p>The appropriate Bootstrap markup for the given <code>formLayout</code> and <code>controlType</code> is automatically generated to easily
             create forms without coding the default Bootstrap form markup by hand:</p>
             <pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; onSubmit=(action &quot;submit&quot;) as |form|}}
-            {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
-            {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
-            {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
-            {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+              {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+              {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
+              {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
+              {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
             {{/bs-form}}
             </code></pre>
+            <h3>Control types</h3>
+            <p>The following control types are supported out of the box:</p>
+            <ul>
+            <li>Inputs (simple <code>text</code>, or any other HTML5 supported input types like <code>password</code>, <code>email</code> etc.)</li>
+            <li>Checkbox (single)</li>
+            <li>Radio Button (group)</li>
+            <li>Textarea</li>
+            </ul>
+            <h4>Radio Buttons</h4>
+            <p>For a group of mutually exclusive radio buttons to work, you must supply the <code>options</code> property with an array of
+            options, each of which will be rendered with an appropriate radio button and its label. It can be either a simple array
+            of strings or objects. In the latter case, you would have to set <code>optionLabelPath</code> to the property, that contains the
+            label on these objects.</p>
+            <pre class="code prettyprint"><code class="language-hbs">{{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
+              {{form.element label=&quot;Gender&quot; options=genderOptions optionLabelPath=&quot;title&quot; property=&quot;gender&quot;}}
+            {{/bs-form}}
+            </code></pre>
+            <p>The default layout for radios is stacked, but Bootstrap's inline layout is also supported using the <code>inline</code> property
+            of the yielded control component:</p>
+            <pre class="code prettyprint"><code class="language-hbs">{{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
+              {{#form.element label=&quot;Gender&quot; options=genderOptions property=&quot;gender&quot; as |el|}}
+                {{el.control inline=true}}
+              {{/form.element}}
+            {{/bs-form}}
+            </code></pre>
+            <h4>Custom controls</h4>
+            <p>Apart from the standard built-in browser controls (see the <code>controlType</code> property), you can use any custom control simply
+            by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
+            (from the <a href="https://istefo.github.io/ember-select-2">ember-select-2 addon</a>):</p>
+            <pre class="code prettyprint"><code class="language-hbs">{{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
+            {{#form.element label=&quot;Select-2&quot; property=&quot;gender&quot; useIcons=false as |el|}}
+            {{select-2 id=el.id content=genderChoices optionLabelPath=&quot;label&quot; value=el.value searchEnabled=false}}
+            {{/form.element}}
+            {{/bs-form}}
+            </code></pre>
+            <p>The component yields a hash with the following properties:</p>
+            <ul>
+            <li><code>control</code>: the component that would be used for rendering the form control based on the given <code>controlType</code></li>
+            <li><code>id</code>: id to be used for the form control, so it matches the labels <code>for</code> attribute</li>
+            <li><code>value</code>: the value of the form element</li>
+            <li><code>validation</code>: the validation state of the element, <code>null</code> if no validation is to be shown, otherwise 'success', 'error' or 'warning'</li>
+            </ul>
+            <p>If your custom control does not render an input element, you should set <code>useIcons</code> to <code>false</code> since bootstrap only supports
+            feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</code> elements.</p>
+            <p>If you just want to customize the existing control component, you can use the aforementioned yielded <code>control</code> component
+            to customize that existing component:</p>
+            <pre class="code prettyprint"><code class="language-hbs">{{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
+            {{#form.element label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot; as |el|}}
+            {{el.control class=&quot;input-lg&quot;}}
+            {{/form.element}}
+            {{/bs-form}}
+            </code></pre>
+            <p>If you are using the custom control quite often, you should consider writing an integration plugin like
+            <a href="https://github.com/kaliber5/ember-bootstrap-power-select"><code>ember-bootstrap-power-select</code></a>.
+            To do so, you need to provide a component <code>{{bs-form/element/control/my-custom-control}}</code> which extends
+            <a href="Components.FormElementControl.html"><code>Components.FormElementControl</code></a>.</p>
             <h3>Form validation</h3>
             <p>In the following example the control elements of the three form elements value will be bound to the properties
             (given by <code>property</code>) of the form's <code>model</code>, which in this case is its controller (see <code>model=this</code>):</p>
             <pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-            {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
-            {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
-            {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
-            {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+              {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+              {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+              {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+              {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
             {{/bs-form}}
             </code></pre>
             <p>By using this indirection in comparison to directly binding the <code>value</code> property, you get the benefit of automatic
@@ -126,37 +182,6 @@
             <p>In case you want to display some error or warning message that is independent of the model's validation, for
             example to display a failure message on a login form after a failed authentication attempt (so not coming from
             the validation library), you can use the <code>customError</code> or <code>customWarning</code> properties to do so.</p>
-            <h3>Custom controls</h3>
-            <p>Apart from the standard built-in browser controls (see the <code>controlType</code> property), you can use any custom control simply
-            by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
-            (from the <a href="https://istefo.github.io/ember-select-2">ember-select-2 addon</a>):</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-              {{#form.element label=&quot;Select-2&quot; property=&quot;gender&quot; useIcons=false as |el|}}
-                {{select-2 id=el.id content=genderChoices optionLabelPath=&quot;label&quot; value=el.value searchEnabled=false}}
-              {{/form.element}}
-            {{/bs-form}}
-            </code></pre>
-            <p>The component yields a hash with the following properties:</p>
-            <ul>
-            <li><code>control</code>: the component that would be used for rendering the form control based on the given <code>controlType</code></li>
-            <li><code>id</code>: id to be used for the form control, so it matches the labels <code>for</code> attribute</li>
-            <li><code>value</code>: the value of the form element</li>
-            <li><code>validation</code>: the validation state of the element, <code>null</code> if no validation is to be shown, otherwise 'success', 'error' or 'warning'</li>
-            </ul>
-            <p>If your custom control does not render an input element, you should set <code>useIcons</code> to <code>false</code> since bootstrap only supports
-            feedback icons with textual <code>&lt;input class=&quot;form-control&quot;&gt;</code> elements.</p>
-            <p>If you just want to customize the existing control component, you can use the aforementioned yielded <code>control</code> component
-            to customize that existing component:</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-              {{#form.element label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot; as |el|}}
-                {{el.control class=&quot;input-lg&quot;}}
-              {{/form.element}}
-            {{/bs-form}}
-            </code></pre>
-            <p>If you are using the custom control quite often, you should consider writing an integration plugin like
-            <a href="https://github.com/kaliber5/ember-bootstrap-power-select"><code>ember-bootstrap-power-select</code></a>.
-            To do so, you need to provide a component <code>{{bs-form/element/control/my-custom-control}}</code> which extends
-            <a href="Components.FormElementControl.html"><code>Components.FormElementControl</code></a>.</p>
             <h3>HTML attributes</h3>
             <p>To set HTML attributes on the control element provided by this component, set them as properties of this component:</p>
             <pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
@@ -175,7 +200,7 @@
             <tr>
             <th></th>
             <th>textarea</th>
-            <th>checkbox</th>
+            <th>checkbox/radio</th>
             <th>all others</th>
             </tr>
             </thead>
@@ -291,7 +316,7 @@
             <tr>
             <td>readonly</td>
             <td>✔︎</td>
-            <td>✔︎</td>
+            <td>︎</td>
             <td>✔︎</td>
             </tr>
             <tr>
@@ -595,6 +620,16 @@
             
                             </li>
                             <li class="index-item property public">
+                              <a href="#" data-tabid="#properties" data-anchor="#property_optionLabelPath"
+                                 data-tablink="optionLabelPath">optionLabelPath</a>
+            
+                            </li>
+                            <li class="index-item property public">
+                              <a href="#" data-tabid="#properties" data-anchor="#property_options"
+                                 data-tablink="options">options</a>
+            
+                            </li>
+                            <li class="index-item property public">
                               <a href="#" data-tabid="#properties" data-anchor="#property_property"
                                  data-tablink="property">property</a>
             
@@ -704,7 +739,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-form_element.js.html#l823"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:823</code></a>
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l877"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:877</code></a>
                                 </p>
                         
                         
@@ -736,7 +771,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-form_element.js.html#l665"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:665</code></a>
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l719"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:719</code></a>
                                 </p>
                         
                         
@@ -767,7 +802,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l645"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:645</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l699"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:699</code></a>
                           </p>
                         
                         
@@ -795,7 +830,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l743"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:743</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l797"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:797</code></a>
                           </p>
                         
                         
@@ -853,7 +888,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l778"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:778</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l832"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:832</code></a>
                           </p>
                         
                         
@@ -882,7 +917,7 @@
                               <p><strong>Default:</strong> &#x27;text&#x27;</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l380"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:380</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l413"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:413</code></a>
                           </p>
                         
                         
@@ -894,6 +929,7 @@
                         <ul>
                         <li>'text'</li>
                         <li>'checkbox'</li>
+                        <li>'radio'</li>
                         <li>'textarea'</li>
                         <li>any other type will use an input tag with the <code>controlType</code> value as the type attribute (for e.g. HTML5 input
                         types like 'email'), and the same layout as the 'text' type</li>
@@ -919,7 +955,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l497"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:497</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l551"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:551</code></a>
                           </p>
                         
                         
@@ -949,7 +985,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l515"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:515</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l569"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:569</code></a>
                           </p>
                         
                         
@@ -980,14 +1016,14 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l463"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:463</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l534"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:534</code></a>
                           </p>
                         
                         
                           </div>
                         
                           <div class="description">
-                            <p>The array of error messages from the <code>model</code>'s validation.</p>
+                            <p>The array of warning messages from the <code>model</code>'s validation.</p>
                         
                           </div>
                         
@@ -1009,14 +1045,14 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l480"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:480</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l517"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:517</code></a>
                           </p>
                         
                         
                           </div>
                         
                           <div class="description">
-                            <p>The array of warning messages from the <code>model</code>'s validation.</p>
+                            <p>The array of error messages from the <code>model</code>'s validation.</p>
                         
                           </div>
                         
@@ -1038,7 +1074,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l795"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:795</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l849"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:849</code></a>
                           </p>
                         
                         
@@ -1066,7 +1102,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l802"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:802</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l856"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:856</code></a>
                           </p>
                         
                         
@@ -1094,7 +1130,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l754"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:754</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l808"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:808</code></a>
                           </p>
                         
                         
@@ -1122,7 +1158,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l732"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:732</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l786"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:786</code></a>
                           </p>
                         
                         
@@ -1152,7 +1188,7 @@
                               <p><strong>Default:</strong> &#x27;vertical&#x27;</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l706"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:706</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l760"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:760</code></a>
                           </p>
                         
                         
@@ -1187,7 +1223,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l507"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:507</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l561"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:561</code></a>
                           </p>
                         
                         
@@ -1215,7 +1251,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l526"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:526</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l580"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:580</code></a>
                           </p>
                         
                         
@@ -1243,7 +1279,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l472"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:472</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l526"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:526</code></a>
                           </p>
                         
                         
@@ -1271,7 +1307,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l455"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:455</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l509"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:509</code></a>
                           </p>
                         
                         
@@ -1299,7 +1335,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l372"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:372</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l405"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:405</code></a>
                           </p>
                         
                         
@@ -1355,7 +1391,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l566"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:566</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l620"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:620</code></a>
                           </p>
                         
                         
@@ -1384,7 +1420,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l574"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:574</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l628"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:628</code></a>
                           </p>
                         
                         
@@ -1412,7 +1448,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l489"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:489</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l543"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:543</code></a>
                           </p>
                         
                         
@@ -1440,7 +1476,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l435"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:435</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l469"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:469</code></a>
                           </p>
                         
                         
@@ -1469,7 +1505,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l816"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:816</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l870"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:870</code></a>
                           </p>
                         
                         
@@ -1497,7 +1533,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l722"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:722</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l776"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:776</code></a>
                           </p>
                         
                         
@@ -1528,7 +1564,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l362"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:362</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l395"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:395</code></a>
                           </p>
                         
                         
@@ -1558,7 +1594,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l582"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:582</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l636"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:636</code></a>
                           </p>
                         
                         
@@ -1587,7 +1623,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l349"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:349</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l382"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:382</code></a>
                           </p>
                         
                         
@@ -1619,7 +1655,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l809"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:809</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l863"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:863</code></a>
                           </p>
                         
                         
@@ -1647,7 +1683,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l761"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:761</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l815"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:815</code></a>
                           </p>
                         
                         
@@ -1675,7 +1711,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l427"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:427</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l461"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:461</code></a>
                           </p>
                         
                         
@@ -1683,6 +1719,66 @@
                         
                           <div class="description">
                             <p>The model used for validation. Defaults to the parent <code>Components.Form</code>'s <code>model</code></p>
+                        
+                          </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="property_optionLabelPath"
+                             class="property item public">
+                          <h3 class="name">optionLabelPath
+                            <span class="badge badge-secondary small">{String}</span>
+                              <span class="badge badge-public small">public</span>
+                        
+                        
+                        
+                        
+                          </h3>
+                        
+                          <div class="meta">
+                              <p>
+                                  Defined in
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l500"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:500</code></a>
+                          </p>
+                        
+                        
+                          </div>
+                        
+                          <div class="description">
+                            <p>Property path (e.g. 'title' or '<a href="http://related.name">related.name</a>') to render the label of an selection option. See <code>options</code>.s</p>
+                        
+                          </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="property_options"
+                             class="property item public">
+                          <h3 class="name">options
+                            <span class="badge badge-secondary small">{Array}</span>
+                              <span class="badge badge-public small">public</span>
+                        
+                        
+                        
+                        
+                          </h3>
+                        
+                          <div class="meta">
+                              <p>
+                                  Defined in
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l489"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:489</code></a>
+                          </p>
+                        
+                        
+                          </div>
+                        
+                          <div class="description">
+                            <p>Array of options for control types that show a selection (e.g. radio button groups)
+                        Can be an array of simple strings or objects. For objects use <code>optionLabelPath</code> to specify the path containing the
+                        label.</p>
                         
                           </div>
                         
@@ -1704,7 +1800,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l414"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:414</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l448"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:448</code></a>
                           </p>
                         
                         
@@ -1737,7 +1833,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l610"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:610</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l664"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:664</code></a>
                           </p>
                         
                         
@@ -1765,7 +1861,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l618"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:618</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l672"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:672</code></a>
                           </p>
                         
                         
@@ -1794,7 +1890,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l444"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:444</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l478"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:478</code></a>
                           </p>
                         
                         
@@ -1825,7 +1921,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l602"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:602</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l656"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:656</code></a>
                           </p>
                         
                         
@@ -1854,7 +1950,7 @@
                               <p><strong>Default:</strong> false</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l592"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:592</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l646"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:646</code></a>
                           </p>
                         
                         
@@ -1883,7 +1979,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l626"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:626</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l680"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:680</code></a>
                           </p>
                         
                         
@@ -1912,7 +2008,7 @@
                               <p><strong>Default:</strong> [&#x27;focusOut&#x27;]</p>
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l634"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:634</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l688"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:688</code></a>
                           </p>
                         
                         
@@ -1942,7 +2038,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l534"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:534</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l588"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:588</code></a>
                           </p>
                         
                         
@@ -1971,7 +2067,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l696"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:696</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l750"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:750</code></a>
                           </p>
                         
                         
@@ -2003,7 +2099,7 @@
                                 Components.FormGroup
                               </a>
                                 but overwritten in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l675"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:675</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l729"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:729</code></a>
                           </p>
                         
                         
@@ -2033,7 +2129,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l543"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:543</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l597"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:597</code></a>
                           </p>
                         
                         
@@ -2062,7 +2158,7 @@
                           <div class="meta">
                               <p>
                                   Defined in
-                              <a href="../files/addon_components_base_bs-form_element.js.html#l397"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:397</code></a>
+                              <a href="../files/addon_components_base_bs-form_element.js.html#l431"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:431</code></a>
                           </p>
                         
                         
@@ -2098,7 +2194,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-form_element.js.html#l844"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:844</code></a>
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l898"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:898</code></a>
                                 </p>
                         
                         
@@ -2125,7 +2221,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-form_element.js.html#l833"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:833</code></a>
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l887"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:887</code></a>
                                 </p>
                         
                         
@@ -2152,7 +2248,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-form_element.js.html#l855"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:855</code></a>
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l909"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:909</code></a>
                                 </p>
                         
                         
@@ -2179,7 +2275,7 @@
                             <div class="meta">
                                         <p>
                                         Defined in
-                                <a href="../files/addon_components_base_bs-form_element.js.html#l866"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:866</code></a>
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l920"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:920</code></a>
                                 </p>
                         
                         
@@ -2271,6 +2367,7 @@
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControl.html">Components.FormElementControl</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlCheckbox.html">Components.FormElementControlCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlInput.html">Components.FormElementControlInput</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlRadio.html">Components.FormElementControlRadio</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
@@ -2278,7 +2375,6 @@
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontalCheckbox.html">Components.FormElementLayoutHorizontalCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInline.html">Components.FormElementLayoutInline</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>

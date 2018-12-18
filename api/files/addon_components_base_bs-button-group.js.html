@@ -60,7 +60,6 @@
                 <pre class="prettyprint linenums">
             import { equal } from &#x27;@ember/object/computed&#x27;;
             import Component from &#x27;@ember/component&#x27;;
-            import { copy } from &#x27;@ember/object/internals&#x27;;
             import { isArray, A } from &#x27;@ember/array&#x27;;
             import layout from &#x27;ember-bootstrap/templates/components/bs-button-group&#x27;;
             import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
@@ -229,17 +228,15 @@
             
               actions: {
                 buttonPressed(pressedValue) {
-                  let newValue = copy(this.get(&#x27;value&#x27;));
+                  let newValue;
             
                   if (this.get(&#x27;isRadio&#x27;)) {
-                    if (newValue !== pressedValue) {
-                      newValue = pressedValue;
-                    }
+                    newValue = pressedValue;
                   } else {
-                    if (!isArray(newValue)) {
+                    if (!isArray(this.get(&#x27;value&#x27;))) {
                       newValue = A([pressedValue]);
                     } else {
-                      newValue = A(newValue);
+                      newValue = A(this.get(&#x27;value&#x27;).slice());
                       if (newValue.includes(pressedValue)) {
                         newValue.removeObject(pressedValue);
                       } else {
@@ -290,6 +287,7 @@
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControl.html">Components.FormElementControl</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlCheckbox.html">Components.FormElementControlCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlInput.html">Components.FormElementControlInput</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlRadio.html">Components.FormElementControlRadio</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
@@ -297,7 +295,6 @@
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontalCheckbox.html">Components.FormElementLayoutHorizontalCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInline.html">Components.FormElementLayoutInline</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>

@@ -1,4 +1,26 @@
 
+## v2.4.0 (2018-12-18)
+
+#### Features
+* [#726](https://github.com/kaliber5/ember-bootstrap/pull/726) Add support for radio form elements ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#718](https://github.com/kaliber5/ember-bootstrap/pull/718) Fix layout of checkbox elements for Bootstrap 4 ([@simonihmig](https://github.com/simonihmig))
+* [#714](https://github.com/kaliber5/ember-bootstrap/pull/714) Remove deprecated copy method ([@jelhan](https://github.com/jelhan))
+
+#### Documentation
+* [#719](https://github.com/kaliber5/ember-bootstrap/pull/719) Add docs section about supplementary addons ([@simonihmig](https://github.com/simonihmig))
+* [#712](https://github.com/kaliber5/ember-bootstrap/pull/712) Add a Contribution Guide with detailed instructions for new contributors ([@simonihmig](https://github.com/simonihmig))
+* [#710](https://github.com/kaliber5/ember-bootstrap/pull/710) Remove broken crosslink closing tag ([@nickschot](https://github.com/nickschot))
+
+#### Internal
+* [#727](https://github.com/kaliber5/ember-bootstrap/pull/727) Update all dependencies ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- jelhan ([@jelhan](https://github.com/jelhan))
+
 ## v2.3.0 (2018-11-18)
 
 #### Features

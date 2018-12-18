@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>addon/components/base/bs-form/element/layout/horizontal/checkbox.js - ember-bootstrap</title>
+  <title>addon/components/base/bs-form/element/control/radio.js - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -53,23 +53,32 @@
         <div id="docs-main">
           <div class="content">
             <div class="page-header">
-                <h1>addon/components/base/bs-form/element/layout/horizontal/checkbox.js <small>File</small></h1>
+                <h1>addon/components/base/bs-form/element/control/radio.js <small>File</small></h1>
             </div>
             
             <div class="file">
                 <pre class="prettyprint linenums">
-            import FormElementLayoutHorizontal from &#x27;../horizontal&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/layout/horizontal/checkbox&#x27;;
+            import Control from &#x27;../control&#x27;;
+            import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/control/radio&#x27;;
             
             /**
             
-             @class FormElementLayoutHorizontalCheckbox
+             @class FormElementControlRadio
              @namespace Components
-             @extends Components.FormElementLayout
+             @extends Components.FormElementControl
              @private
              */
-            export default FormElementLayoutHorizontal.extend({
-              layout
+            export default Control.extend({
+              layout,
+              tagName: &#x27;&#x27;,
+            
+              /**
+               * @property inline
+               * @type {Boolean}
+               * @default false
+               * @public
+               */
+              inline: false
             });
             
                 </pre>
@@ -109,6 +118,7 @@
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControl.html">Components.FormElementControl</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlCheckbox.html">Components.FormElementControlCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlInput.html">Components.FormElementControlInput</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlRadio.html">Components.FormElementControlRadio</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
@@ -116,7 +126,6 @@
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontalCheckbox.html">Components.FormElementLayoutHorizontalCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInline.html">Components.FormElementLayoutInline</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Components.FormElementLayoutHorizontalCheckbox - ember-bootstrap</title>
+  <title>Components.FormElementControlRadio - ember-bootstrap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../assets/css/api.css">
   <script type="text/javascript" src="//use.typekit.net/dkq5epu.js"></script>
@@ -53,7 +53,7 @@
         <div id="docs-main">
           <div class="content">
             <div class="card">
-              <h1 class="card-header">Components.FormElementLayoutHorizontalCheckbox <span class="badge badge-private small">private</span></h1>
+              <h1 class="card-header">Components.FormElementControlRadio <span class="badge badge-private small">private</span></h1>
               <div class="card-body">
             
                 
@@ -66,13 +66,13 @@
                       Extends
                     </dt>
                     <dd class="col-sm-9">
-                      <a href="../classes/Components.FormElementLayout.html" class="crosslink">Components.FormElementLayout</a>
+                      <a href="../classes/Components.FormElementControl.html" class="crosslink">Components.FormElementControl</a>
                     </dd>
                     <dt class="col-sm-3">
                       Defined in
                     </dt>
                     <dd class="col-sm-9">
-                      <a href="../files/addon_components_base_bs-form_element_layout_horizontal_checkbox.js.html#l4"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;layout&#x2F;horizontal&#x2F;checkbox.js:4</code></a>
+                      <a href="../files/addon_components_base_bs-form_element_control_radio.js.html#l4"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;control&#x2F;radio.js:4</code></a>
                     </dd>
             
                 </dl>
@@ -119,6 +119,7 @@
                   <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
             
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
                 </ul>
               </div>
               <div class="card-body">
@@ -132,47 +133,42 @@
             
                         <ul class="index-list properties extends">
                             <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_errorsComponent"
-                                 data-tablink="errorsComponent">errorsComponent</a>
+                              <a href="#" data-tabid="#properties" data-anchor="#property_ariaDescribedBy"
+                                 data-tablink="ariaDescribedBy">ariaDescribedBy</a>
+            
+                            </li>
+                            <li class="index-item property public">
+                              <a href="#" data-tabid="#properties" data-anchor="#property_inline"
+                                 data-tablink="inline">inline</a>
             
                             </li>
                             <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_feedbackIconComponent"
-                                 data-tablink="feedbackIconComponent">feedbackIconComponent</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_formElementId"
-                                 data-tablink="formElementId">formElementId</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_hasLabel"
-                                 data-tablink="hasLabel">hasLabel</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_helpTextComponent"
-                                 data-tablink="helpTextComponent">helpTextComponent</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_labelComponent"
-                                 data-tablink="labelComponent">labelComponent</a>
+                              <a href="#" data-tabid="#properties" data-anchor="#property_value"
+                                 data-tablink="value">value</a>
             
                             </li>
                         </ul>
                       </div>
             
             
+                      <div class="index-section events">
+                        <h3>Events</h3>
+            
+                        <ul class="index-list events extends">
+                            <li class="index-item event public inherited">
+                              <a href="#" data-tabid="#events" data-anchor="#event_onChange" data-tablink="onChange">onChange</a>
+            
+                            </li>
+                        </ul>
+                      </div>
                   </div>
             
             
                     <div id="properties" class="tab-pane">
-                        <div id="property_errorsComponent"
+                        <div id="property_ariaDescribedBy"
                              class="property item public inherited">
-                          <h3 class="name">errorsComponent
-                            <span class="badge badge-secondary small">{Ember.Component}</span>
+                          <h3 class="name">ariaDescribedBy
+                            <span class="badge badge-secondary small">{string}</span>
                               <span class="badge badge-public small">public</span>
                         
                         
@@ -182,8 +178,8 @@
                         
                           <div class="meta">
                               <p>Inherited from
-                                <a href="../classes/Components.FormElementLayout.html#property_errorsComponent">Components.FormElementLayout</a>:
-                              <a href="../files/addon_components_base_bs-form_element_layout.js.html#l27"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;layout.js:27</code></a>
+                                <a href="../classes/Components.FormElementControl.html#property_ariaDescribedBy">Components.FormElementControl</a>:
+                              <a href="../files/addon_components_base_bs-form_element_control.js.html#l18"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;control.js:18</code></a>
                           </p>
                         
                         
@@ -197,10 +193,10 @@
                         
                         
                         </div>
-                        <div id="property_feedbackIconComponent"
-                             class="property item public inherited">
-                          <h3 class="name">feedbackIconComponent
-                            <span class="badge badge-secondary small">{Ember.Component}</span>
+                        <div id="property_inline"
+                             class="property item public">
+                          <h3 class="name">inline
+                            <span class="badge badge-secondary small">{Boolean}</span>
                               <span class="badge badge-public small">public</span>
                         
                         
@@ -209,9 +205,10 @@
                           </h3>
                         
                           <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.FormElementLayout.html#property_feedbackIconComponent">Components.FormElementLayout</a>:
-                              <a href="../files/addon_components_base_bs-form_element_layout.js.html#l34"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;layout.js:34</code></a>
+                              <p><strong>Default:</strong> false</p>
+                              <p>
+                                  Defined in
+                              <a href="../files/addon_components_base_bs-form_element_control_radio.js.html#l15"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;control&#x2F;radio.js:15</code></a>
                           </p>
                         
                         
@@ -225,10 +222,10 @@
                         
                         
                         </div>
-                        <div id="property_formElementId"
+                        <div id="property_value"
                              class="property item public inherited">
-                          <h3 class="name">formElementId
-                            <span class="badge badge-secondary small">{String}</span>
+                          <h3 class="name">value
+                            <span class="badge badge-secondary small">unknown</span>
                               <span class="badge badge-public small">public</span>
                         
                         
@@ -238,92 +235,8 @@
                         
                           <div class="meta">
                               <p>Inherited from
-                                <a href="../classes/Components.FormElementLayout.html#property_formElementId">Components.FormElementLayout</a>:
-                              <a href="../files/addon_components_base_bs-form_element_layout.js.html#l13"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;layout.js:13</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_hasLabel"
-                             class="property item public inherited">
-                          <h3 class="name">hasLabel
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.FormElementLayout.html#property_hasLabel">Components.FormElementLayout</a>:
-                              <a href="../files/addon_components_base_bs-form_element_layout.js.html#l20"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;layout.js:20</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_helpTextComponent"
-                             class="property item public inherited">
-                          <h3 class="name">helpTextComponent
-                            <span class="badge badge-secondary small">{Ember.Component}</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.FormElementLayout.html#property_helpTextComponent">Components.FormElementLayout</a>:
-                              <a href="../files/addon_components_base_bs-form_element_layout.js.html#l48"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;layout.js:48</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_labelComponent"
-                             class="property item public inherited">
-                          <h3 class="name">labelComponent
-                            <span class="badge badge-secondary small">{Ember.Component}</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.FormElementLayout.html#property_labelComponent">Components.FormElementLayout</a>:
-                              <a href="../files/addon_components_base_bs-form_element_layout.js.html#l41"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;layout.js:41</code></a>
+                                <a href="../classes/Components.FormElementControl.html#property_value">Components.FormElementControl</a>:
+                              <a href="../files/addon_components_base_bs-form_element_control.js.html#l12"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;control.js:12</code></a>
                           </p>
                         
                         
@@ -340,6 +253,49 @@
                     </div>
             
             
+                    <div id="events" class="tab-pane">
+                        <div id="event_onChange" class="events item public inherited">
+                            <h3 class="name"><code>onChange</code></h3>
+                            <span class="type"></span>
+                        
+                        
+                                <span class="flag public">public</span>
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>Inherited from
+                                        <a href="../classes/Components.FormElementControl.html#event_onChange">Components.FormElementControl</a>:
+                                <a href="../files/addon_components_base_bs-form_element_control.js.html#l25"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element&#x2F;control.js:25</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                This action is called whenever the <code>value</code> changes
+                            </div>
+                        
+                                <div class="params">
+                                    <h4>Event Payload:</h4>
+                        
+                                    <ul class="params-list">
+                                        <li class="param">
+                                                <code class="param-name">value</code>
+                                                <span class="type"></span>
+                        
+                        
+                                            <div class="param-description">
+                                                 
+                                            </div>
+                        
+                                        </li>
+                                    </ul>
+                                </div>
+                        
+                        
+                        </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -378,6 +334,7 @@
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControl.html">Components.FormElementControl</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlCheckbox.html">Components.FormElementControlCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlInput.html">Components.FormElementControlInput</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlRadio.html">Components.FormElementControlRadio</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
@@ -385,7 +342,6 @@
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontalCheckbox.html">Components.FormElementLayoutHorizontalCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInline.html">Components.FormElementLayoutInline</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>

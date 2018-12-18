@@ -89,12 +89,84 @@
             
              &#x60;&#x60;&#x60;hbs
              {{#bs-form formLayout=&quot;horizontal&quot; onSubmit=(action &quot;submit&quot;) as |form|}}
-             {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
-             {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
-             {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
-             {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+               {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+               {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
+               {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
+               {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
              {{/bs-form}}
              &#x60;&#x60;&#x60;
+            
+             ### Control types
+            
+             The following control types are supported out of the box:
+            
+             * Inputs (simple &#x60;text&#x60;, or any other HTML5 supported input types like &#x60;password&#x60;, &#x60;email&#x60; etc.)
+             * Checkbox (single)
+             * Radio Button (group)
+             * Textarea
+            
+             #### Radio Buttons
+            
+             For a group of mutually exclusive radio buttons to work, you must supply the &#x60;options&#x60; property with an array of
+             options, each of which will be rendered with an appropriate radio button and its label. It can be either a simple array
+             of strings or objects. In the latter case, you would have to set &#x60;optionLabelPath&#x60; to the property, that contains the
+             label on these objects.
+            
+             &#x60;&#x60;&#x60;hbs
+             {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
+               {{form.element label=&quot;Gender&quot; options=genderOptions optionLabelPath=&quot;title&quot; property=&quot;gender&quot;}}
+             {{/bs-form}}
+             &#x60;&#x60;&#x60;
+            
+             The default layout for radios is stacked, but Bootstrap&#x27;s inline layout is also supported using the &#x60;inline&#x60; property
+             of the yielded control component:
+            
+             &#x60;&#x60;&#x60;hbs
+             {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
+               {{#form.element label=&quot;Gender&quot; options=genderOptions property=&quot;gender&quot; as |el|}}
+                 {{el.control inline=true}}
+               {{/form.element}}
+             {{/bs-form}}
+             &#x60;&#x60;&#x60;
+            
+             #### Custom controls
+            
+             Apart from the standard built-in browser controls (see the &#x60;controlType&#x60; property), you can use any custom control simply
+             by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
+             (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
+            
+             &#x60;&#x60;&#x60;hbs
+             {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
+             {{#form.element label=&quot;Select-2&quot; property=&quot;gender&quot; useIcons=false as |el|}}
+             {{select-2 id=el.id content=genderChoices optionLabelPath=&quot;label&quot; value=el.value searchEnabled=false}}
+             {{/form.element}}
+             {{/bs-form}}
+             &#x60;&#x60;&#x60;
+            
+             The component yields a hash with the following properties:
+             * &#x60;control&#x60;: the component that would be used for rendering the form control based on the given &#x60;controlType&#x60;
+             * &#x60;id&#x60;: id to be used for the form control, so it matches the labels &#x60;for&#x60; attribute
+             * &#x60;value&#x60;: the value of the form element
+             * &#x60;validation&#x60;: the validation state of the element, &#x60;null&#x60; if no validation is to be shown, otherwise &#x27;success&#x27;, &#x27;error&#x27; or &#x27;warning&#x27;
+            
+             If your custom control does not render an input element, you should set &#x60;useIcons&#x60; to &#x60;false&#x60; since bootstrap only supports
+             feedback icons with textual &#x60;&lt;input class=&quot;form-control&quot;&gt;&#x60; elements.
+            
+             If you just want to customize the existing control component, you can use the aforementioned yielded &#x60;control&#x60; component
+             to customize that existing component:
+            
+             &#x60;&#x60;&#x60;hbs
+             {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
+             {{#form.element label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot; as |el|}}
+             {{el.control class=&quot;input-lg&quot;}}
+             {{/form.element}}
+             {{/bs-form}}
+             &#x60;&#x60;&#x60;
+            
+             If you are using the custom control quite often, you should consider writing an integration plugin like
+             [&#x60;ember-bootstrap-power-select&#x60;](https://github.com/kaliber5/ember-bootstrap-power-select).
+             To do so, you need to provide a component &#x60;{{bs-form/element/control/my-custom-control}}&#x60; which extends
+             [&#x60;Components.FormElementControl&#x60;](Components.FormElementControl.html).
             
              ### Form validation
             
@@ -103,10 +175,10 @@
             
              &#x60;&#x60;&#x60;hbs
              {{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-             {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
-             {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
-             {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
-             {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
+               {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
+               {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
+               {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
+               {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
              {{/bs-form}}
              &#x60;&#x60;&#x60;
             
@@ -165,45 +237,6 @@
              example to display a failure message on a login form after a failed authentication attempt (so not coming from
              the validation library), you can use the &#x60;customError&#x60; or &#x60;customWarning&#x60; properties to do so.
             
-             ### Custom controls
-            
-             Apart from the standard built-in browser controls (see the &#x60;controlType&#x60; property), you can use any custom control simply
-             by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
-             (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-               {{#form.element label=&quot;Select-2&quot; property=&quot;gender&quot; useIcons=false as |el|}}
-                 {{select-2 id=el.id content=genderChoices optionLabelPath=&quot;label&quot; value=el.value searchEnabled=false}}
-               {{/form.element}}
-             {{/bs-form}}
-             &#x60;&#x60;&#x60;
-            
-             The component yields a hash with the following properties:
-             * &#x60;control&#x60;: the component that would be used for rendering the form control based on the given &#x60;controlType&#x60;
-             * &#x60;id&#x60;: id to be used for the form control, so it matches the labels &#x60;for&#x60; attribute
-             * &#x60;value&#x60;: the value of the form element
-             * &#x60;validation&#x60;: the validation state of the element, &#x60;null&#x60; if no validation is to be shown, otherwise &#x27;success&#x27;, &#x27;error&#x27; or &#x27;warning&#x27;
-            
-             If your custom control does not render an input element, you should set &#x60;useIcons&#x60; to &#x60;false&#x60; since bootstrap only supports
-             feedback icons with textual &#x60;&lt;input class=&quot;form-control&quot;&gt;&#x60; elements.
-            
-             If you just want to customize the existing control component, you can use the aforementioned yielded &#x60;control&#x60; component
-             to customize that existing component:
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-               {{#form.element label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot; as |el|}}
-                 {{el.control class=&quot;input-lg&quot;}}
-               {{/form.element}}
-             {{/bs-form}}
-             &#x60;&#x60;&#x60;
-            
-             If you are using the custom control quite often, you should consider writing an integration plugin like
-             [&#x60;ember-bootstrap-power-select&#x60;](https://github.com/kaliber5/ember-bootstrap-power-select).
-             To do so, you need to provide a component &#x60;{{bs-form/element/control/my-custom-control}}&#x60; which extends
-             [&#x60;Components.FormElementControl&#x60;](Components.FormElementControl.html).
-            
              ### HTML attributes
             
              To set HTML attributes on the control element provided by this component, set them as properties of this component:
@@ -227,7 +260,7 @@
              &lt;tr&gt;
              &lt;th&gt;&lt;/th&gt;
              &lt;th&gt;textarea&lt;/th&gt;
-             &lt;th&gt;checkbox&lt;/th&gt;
+             &lt;th&gt;checkbox/radio&lt;/th&gt;
              &lt;th&gt;all others&lt;/th&gt;
              &lt;/tr&gt;
              &lt;/thead&gt;
@@ -343,7 +376,7 @@
              &lt;tr&gt;
              &lt;td&gt;readonly&lt;/td&gt;
              &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
+             &lt;td&gt;︎&lt;/td&gt;
              &lt;td&gt;✔︎&lt;/td&gt;
              &lt;/tr&gt;
              &lt;tr&gt;
@@ -443,6 +476,7 @@
                *
                * * &#x27;text&#x27;
                * * &#x27;checkbox&#x27;
+               * * &#x27;radio&#x27;
                * * &#x27;textarea&#x27;
                * * any other type will use an input tag with the &#x60;controlType&#x60; value as the type attribute (for e.g. HTML5 input
                * types like &#x27;email&#x27;), and the same layout as the &#x27;text&#x27; type
@@ -511,6 +545,26 @@
                * @type {Boolean}
                */
               showMultipleErrors: false,
+            
+              /**
+               * Array of options for control types that show a selection (e.g. radio button groups)
+               * Can be an array of simple strings or objects. For objects use &#x60;optionLabelPath&#x60; to specify the path containing the
+               * label.
+               *
+               * @property options
+               * @type {Array}
+               * @public
+               */
+              options: null,
+            
+              /**
+               * Property path (e.g. &#x27;title&#x27; or &#x27;related.name&#x27;) to render the label of an selection option. See &#x60;options&#x60;.s
+               *
+               * @property optionLabelPath
+               * @type {String}
+               * @public
+               */
+              optionLabelPath: null,
             
               /**
                * @property hasHelpText
@@ -1037,6 +1091,7 @@
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControl.html">Components.FormElementControl</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlCheckbox.html">Components.FormElementControlCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlInput.html">Components.FormElementControlInput</a></li>
+            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlRadio.html">Components.FormElementControlRadio</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementControlTextarea.html">Components.FormElementControlTextarea</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementErrors.html">Components.FormElementErrors</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementFeedbackIcon.html">Components.FormElementFeedbackIcon</a></li>
@@ -1044,7 +1099,6 @@
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLabel.html">Components.FormElementLabel</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayout.html">Components.FormElementLayout</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontal.html">Components.FormElementLayoutHorizontal</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutHorizontalCheckbox.html">Components.FormElementLayoutHorizontalCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInline.html">Components.FormElementLayoutInline</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutInlineCheckbox.html">Components.FormElementLayoutInlineCheckbox</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.FormElementLayoutVertical.html">Components.FormElementLayoutVertical</a></li>
