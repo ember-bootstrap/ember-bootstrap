@@ -1890,7 +1890,7 @@ broccoli-babel-transpiler@^6.5.0:
     rsvp "^4.8.2"
     workerpool "^2.3.0"
 
-broccoli-babel-transpiler@^7.1.0, broccoli-babel-transpiler@^7.1.1:
+broccoli-babel-transpiler@^7.1.0:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/broccoli-babel-transpiler/-/broccoli-babel-transpiler-7.1.1.tgz#4202cd0653845083ee744fb4eaa4a2b50292f03f"
   dependencies:
@@ -1961,7 +1961,7 @@ broccoli-clean-css@^1.1.0:
     inline-source-map-comment "^1.0.5"
     json-stable-stringify "^1.0.0"
 
-broccoli-concat@^3.2.2, broccoli-concat@^3.7.1, broccoli-concat@^3.7.3:
+broccoli-concat@^3.2.2, broccoli-concat@^3.5.1, broccoli-concat@^3.7.1:
   version "3.7.3"
   resolved "https://registry.yarnpkg.com/broccoli-concat/-/broccoli-concat-3.7.3.tgz#0dca01311567ffb13180e6b4eb111824628e4885"
   dependencies:
@@ -2654,9 +2654,9 @@ chownr@^1.0.1, chownr@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.1.tgz#54726b8b8fff4df053c42187e801fb4412df1494"
 
-ci-info@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-2.0.0.tgz#67a9e964be31a51e15e5010d58e6f12834002f46"
+ci-info@^1.1.3:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-1.6.0.tgz#2ca20dbb9ceb32d4524a683303313f0304b1e497"
 
 circular-json@^0.3.1:
   version "0.3.3"
@@ -3454,15 +3454,15 @@ ember-cli-blueprint-test-helpers@^0.19.1:
     testdouble "^3.2.6"
     tmp-sync "^1.0.0"
 
-ember-cli-broccoli-sane-watcher@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-broccoli-sane-watcher/-/ember-cli-broccoli-sane-watcher-3.0.0.tgz#dc1812c047e1ceec4413d3c41b51a9ffc61b4cfe"
+ember-cli-broccoli-sane-watcher@^2.1.1:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/ember-cli-broccoli-sane-watcher/-/ember-cli-broccoli-sane-watcher-2.2.2.tgz#9bb1b04ddeb2c086aecd8693cbaeca1d88dc160c"
   dependencies:
     broccoli-slow-trees "^3.0.1"
     heimdalljs "^0.2.1"
     heimdalljs-logger "^0.1.7"
     rsvp "^3.0.18"
-    sane "^4.0.0"
+    sane "^2.4.1"
 
 ember-cli-build-config-editor@0.5.0:
   version "0.5.0"
@@ -3724,20 +3724,19 @@ ember-cli-yuidoc@^0.8.7:
     rsvp "3.0.14"
     yuidocjs "^0.10.0"
 
-ember-cli@ember-cli/ember-cli#master:
-  version "3.7.0-beta.1"
-  resolved "https://codeload.github.com/ember-cli/ember-cli/tar.gz/08c01c0b4f1558e29506ba616b28465272fccbbb"
+ember-cli@~3.5.0:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-3.5.1.tgz#a1c7295eed935726891d40a81e0cc389f2d15fdf"
   dependencies:
-    "@babel/plugin-transform-modules-amd" "^7.2.0"
     amd-name-resolver "^1.2.0"
-    babel-plugin-module-resolver "^3.1.1"
+    babel-plugin-transform-es2015-modules-amd "^6.24.1"
     bower-config "^1.3.0"
     bower-endpoint-parser "0.2.2"
     broccoli "^2.0.0"
     broccoli-amd-funnel "^2.0.1"
-    broccoli-babel-transpiler "^7.1.1"
+    broccoli-babel-transpiler "^6.5.0"
     broccoli-builder "^0.18.14"
-    broccoli-concat "^3.7.3"
+    broccoli-concat "^3.5.1"
     broccoli-config-loader "^1.0.1"
     broccoli-config-replace "^1.1.2"
     broccoli-debug "^0.6.4"
@@ -3752,7 +3751,7 @@ ember-cli@ember-cli/ember-cli#master:
     calculate-cache-key-for-tree "^1.1.0"
     capture-exit "^1.2.0"
     chalk "^2.4.1"
-    ci-info "^2.0.0"
+    ci-info "^1.1.3"
     clean-base-url "^1.0.0"
     compression "^1.7.3"
     configstore "^4.0.0"
@@ -3760,14 +3759,14 @@ ember-cli@ember-cli/ember-cli#master:
     core-object "^3.1.5"
     dag-map "^2.0.2"
     diff "^3.5.0"
-    ember-cli-broccoli-sane-watcher "^3.0.0"
+    ember-cli-broccoli-sane-watcher "^2.1.1"
     ember-cli-is-package-missing "^1.0.0"
     ember-cli-lodash-subset "^2.0.1"
     ember-cli-normalize-entity-name "^1.0.0"
     ember-cli-preprocess-registry "^3.1.2"
     ember-cli-string-utils "^1.1.0"
     ensure-posix-path "^1.0.2"
-    execa "^1.0.0"
+    execa "^0.10.0"
     exit "^0.1.2"
     express "^4.16.3"
     filesize "^3.6.1"
@@ -3776,8 +3775,8 @@ ember-cli@ember-cli/ember-cli#master:
     fixturify "^0.3.4"
     fixturify-project "^1.5.3"
     fs-extra "^7.0.0"
-    fs-tree-diff "^1.0.0"
-    get-caller-file "^2.0.0"
+    fs-tree-diff "^0.5.7"
+    get-caller-file "^1.0.0"
     git-repo-info "^2.0.0"
     glob "^7.1.2"
     heimdalljs "^0.2.5"
@@ -3809,15 +3808,15 @@ ember-cli@ember-cli/ember-cli#master:
     silent-error "^1.1.0"
     sort-package-json "^1.15.0"
     symlink-or-copy "^1.2.0"
-    temp "0.9.0"
+    temp "0.8.3"
     testem "^2.9.2"
     tiny-lr "^1.1.1"
     tree-sync "^1.2.2"
     uuid "^3.3.2"
     validate-npm-package-name "^3.0.0"
-    walk-sync "^1.0.0"
+    walk-sync "^0.3.2"
     watch-detector "^0.1.0"
-    yam "^1.0.0"
+    yam "^0.0.24"
 
 ember-code-snippet@^2.3.1:
   version "2.3.1"
@@ -5105,15 +5104,6 @@ fs-tree-diff@^0.5.2, fs-tree-diff@^0.5.3, fs-tree-diff@^0.5.4, fs-tree-diff@^0.5
     path-posix "^1.0.0"
     symlink-or-copy "^1.1.8"
 
-fs-tree-diff@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/fs-tree-diff/-/fs-tree-diff-1.0.2.tgz#0e2931733a85b55feb3472c0b89a20b0c03ac0de"
-  dependencies:
-    heimdalljs-logger "^0.1.7"
-    object-assign "^4.1.0"
-    path-posix "^1.0.0"
-    symlink-or-copy "^1.1.8"
-
 fs-updater@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/fs-updater/-/fs-updater-1.0.4.tgz#2329980f99ae9176e9a0e84f7637538a182ce63b"
@@ -5137,7 +5127,7 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
-fsevents@^1.2.2:
+fsevents@^1.2.2, fsevents@^1.2.3:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.2.4.tgz#f41dcb1af2582af3692da36fc55cbd8e1041c426"
   dependencies:
@@ -5165,13 +5155,9 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
-get-caller-file@^1.0.1:
+get-caller-file@^1.0.0, get-caller-file@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.3.tgz#f978fa4c90d1dfe7ff2d6beda2a515e713bdcf4a"
-
-get-caller-file@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.1.tgz#25835260d3a2b9665fcdbb08cb039a7bbf7011c0"
 
 get-func-name@^2.0.0:
   version "2.0.0"
@@ -8863,6 +8849,21 @@ safe-regex@^1.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
+sane@^2.4.1:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/sane/-/sane-2.5.2.tgz#b4dc1861c21b427e929507a3e751e2a2cb8ab3fa"
+  dependencies:
+    anymatch "^2.0.0"
+    capture-exit "^1.2.0"
+    exec-sh "^0.2.0"
+    fb-watchman "^2.0.0"
+    micromatch "^3.1.4"
+    minimist "^1.1.1"
+    walker "~1.0.5"
+    watch "~0.18.0"
+  optionalDependencies:
+    fsevents "^1.2.3"
+
 sane@^4.0.0:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/sane/-/sane-4.0.2.tgz#5bd4a3f1268fd7a921a2dc657047de635c8f8f25"
@@ -9543,13 +9544,7 @@ tar@^4:
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
 
-temp@0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/temp/-/temp-0.9.0.tgz#61391795a11bd9738d4c4d7f55f012cb8f55edaa"
-  dependencies:
-    rimraf "~2.6.2"
-
-temp@^0.8.3:
+temp@0.8.3, temp@^0.8.3:
   version "0.8.3"
   resolved "http://registry.npmjs.org/temp/-/temp-0.8.3.tgz#e0c6bc4d26b903124410e4fed81103014dfc1f59"
   dependencies:
@@ -10161,13 +10156,6 @@ walk-sync@^0.3.0, walk-sync@^0.3.1, walk-sync@^0.3.2, walk-sync@^0.3.3:
     ensure-posix-path "^1.0.0"
     matcher-collection "^1.0.0"
 
-walk-sync@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/walk-sync/-/walk-sync-1.0.1.tgz#6f38270392e297e5fd7b51eec9241be4242557c8"
-  dependencies:
-    ensure-posix-path "^1.0.0"
-    matcher-collection "^1.0.0"
-
 walker@~1.0.5:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/walker/-/walker-1.0.7.tgz#2f7f9b8fd10d677262b18a884e28d19618e028fb"
@@ -10361,9 +10349,9 @@ yallist@^3.0.0, yallist@^3.0.2:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-3.0.3.tgz#b4b049e314be545e3ce802236d6cd22cd91c3de9"
 
-yam@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/yam/-/yam-1.0.0.tgz#7f6c91dc0f5de75a031e6da6b3907c3d25ab0de5"
+yam@^0.0.24:
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/yam/-/yam-0.0.24.tgz#11e9630444735f66a561d29221407de6d037cd95"
   dependencies:
     fs-extra "^4.0.2"
     lodash.merge "^4.6.0"
