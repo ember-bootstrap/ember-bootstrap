@@ -21,6 +21,7 @@
 .idea
 *.iml
 .publish
+.env
 
 # ember-try
 /.node_modules.ember-try/

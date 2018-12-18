@@ -18,6 +18,10 @@ module.exports = function(environment) {
       // when it is created
     },
 
+    fastboot: {
+      hostWhitelist: [/^localhost:\d+$/]
+    },
+
     unstableApiURL: 'http://simonihmig.github.io/ember-bootstrap/',
     bootstrapVersion: process.env.BOOTSTRAPVERSION || 4
   };
