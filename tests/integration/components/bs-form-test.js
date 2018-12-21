@@ -222,6 +222,28 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.dom('form .state').doesNotHaveClass('is-submitting');
   });
 
+  test('Yielded #isSubmitting is true as long as Promise returned by onInvalid is pending', async function(assert) {
+    let deferredSubmitAction = defer();
+    this.set('submitAction', () => {
+      return deferredSubmitAction.promise;
+    });
+    this.set('validate', function() {
+      return reject();
+    });
+    await this.render(hbs`{{#bs-form onInvalid=submitAction  hasValidator=true validate=validate as |form|}}
+      <div class='state {{if form.isSubmitting 'is-submitting'}}'></div>
+    {{/bs-form}}`);
+
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+
+    triggerEvent('form', 'submit');
+    await waitFor('form .state.is-submitting');
+
+    deferredSubmitAction.resolve();
+    await settled();
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
+  });
+
   test('Yielded #isSubmitting is true as long as Promise returned by validate is pending', async function(assert) {
     let deferredValidateAction = defer();
     this.set('hasValidator', true);
