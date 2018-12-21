@@ -300,27 +300,23 @@ export default Component.extend({
     this.get('onBefore')(model);
 
     RSVP.resolve(this.get('hasValidator') ? this.validate(this.get('model')) : null)
-      .then((r) => {
-        RSVP.resolve(this.get('onSubmit')(model, r))
-          .finally(() => {
-            if (!this.get('isDestroyed')) {
-              if (this.get('pendingSubmissions') === 1) {
-                this.set('isSubmitting', false);
-              }
-              this.decrementProperty('pendingSubmissions');
-            }
-          });
-      })
-      .catch((err) => {
-        if (!this.get('isDestroyed')) {
+      .then(
+        (r) => {
+          return this.get('onSubmit')(model, r);
+        },
+        (err) => {
           this.set('showAllValidations', true);
 
+          return this.get('onInvalid')(model, err);
+        }
+      )
+      .finally(() => {
+        if (!this.get('isDestroyed')) {
           if (this.get('pendingSubmissions') === 1) {
             this.set('isSubmitting', false);
           }
-          this.decrementProperty('pendingSubmissions');
 
-          this.get('onInvalid')(model, err);
+          this.decrementProperty('pendingSubmissions');
         }
       });
   },
