@@ -77,9 +77,21 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
 
   ```
   {{#bs-form onSubmit=(action 'save') as |form|}}
-    {{#bs-button type='submit' disabled=form.isSubmitting}}
+    {{#bs-button buttonType='submit' disabled=form.isSubmitting}}
       Save
       {{#if form.isSubmitting}} {{fa-icon 'spinner'}} {{/if}}
+    {{/bs-button}}
+  {{/bs-form}}
+  ```
+
+  Additionaly `isSubmitted` and `isRejected` proprties are yielded. `isSubmitted` is `true` if last submission was successful.
+  `isRejected` is `true` if last submission was rejected due to validation errors or by action bound to `onSubmit` event.
+  Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:
+
+  ```
+  {{#bs-form onSubmit=(action 'save') as |form|}}
+    {{#bs-button buttonType='submit' type=(if form.isRejected "danger" "primary")}}
+      Save
     {{/bs-button}}
   {{/bs-form}}
   ```
@@ -176,6 +188,33 @@ export default Component.extend({
    * @private
    */
   isSubmitting: false,
+
+  /**
+   * `isSubmitted` is `true` if last submission was successful.
+   * A change to any form element resets it's value to `false`.
+   *
+   * If not using `Components.FormElement`, `resetSubmissionState` action must be triggered on each change to reset
+   * form's submission state.
+   *
+   * @property isSubmitted
+   * @type {Boolean}
+   * @private
+   */
+  isSubmitted: false,
+
+  /**
+   * `isRejected` is `true` if last submission was rejected.
+   * A submission is considered as rejected if form is invalid as well as if `onSubmit` rejects.
+   * A change to any form element resets it's value to `false`.
+   *
+   * If not using `Components.FormElement`, `resetSubmissionState` action must be triggered on each change to reset
+   * form's submission state.
+   *
+   * @property isRejected
+   * @type {Boolean}
+   * @private
+   */
+  isRejected: false,
 
   /**
    * Count of pending submissions.
@@ -313,16 +352,39 @@ export default Component.extend({
 
     RSVP.resolve(this.get('hasValidator') ? this.validate(this.get('model')) : null)
       .then(
-        (r) => {
-          if (this.get('hideValidationsOnSubmit') === true) {
-            this.set('showAllValidations', false);
-          }
-          return this.get('onSubmit')(model, r);
+        (record) => {
+          return RSVP.resolve()
+            .then(() => {
+              if (this.get('hideValidationsOnSubmit') === true) {
+                this.set('showAllValidations', false);
+              }
+              return this.get('onSubmit')(model, record);
+            })
+            .then(
+              () => {
+                if (!this.get('isDestroyed')) {
+                  this.set('isSubmitted', true);
+                }
+              },
+              () => {
+                if (!this.get('isDestroyed')) {
+                  this.set('isRejected', true);
+                }
+              }
+            );
         },
-        (err) => {
+        (error) => {
           this.set('showAllValidations', true);
 
-          return this.get('onInvalid')(model, err);
+          return RSVP.resolve()
+            .then(() => {
+              return this.get('onInvalid')(model, error);
+            })
+            .finally(() => {
+              if (!this.get('isDestroyed')) {
+                this.set('isRejected', true);
+              }
+            });
         }
       )
       .finally(() => {
@@ -364,6 +426,11 @@ export default Component.extend({
       } else {
         set(model, property, value);
       }
+    },
+
+    resetSubmissionState() {
+      this.set('isSubmitted', false);
+      this.set('isRejected', false);
     }
   }
 });

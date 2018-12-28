@@ -6,8 +6,12 @@
       horizontalLabelGridClass=horizontalLabelGridClass
       showAllValidations=showAllValidations
       onChange=(action "change")
+      _onChange=(action "resetSubmissionState")
     )
     group=(component groupComponent formLayout=formLayout)
     isSubmitting=isSubmitting
+    isSubmitted=isSubmitted
+    isRejected=isRejected
+    resetSubmissionState=(action "resetSubmissionState")
   )
 }}
