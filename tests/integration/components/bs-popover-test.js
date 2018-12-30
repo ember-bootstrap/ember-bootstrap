@@ -76,6 +76,21 @@ module('Integration | Component | bs-popover', function(hooks) {
     assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 2, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
   });
 
+  test('it stays open when clicked when rendered in place', async function(assert) {
+    await render(hbs`
+      <div id="target">
+        {{#bs-popover as |po|}}
+          <div id="content">Content</div>
+        {{/bs-popover}}
+      </div>
+    `);
+
+    await click('#target');
+    assert.dom('.popover').exists('popover is visible');
+    await click('#content');
+    assert.dom('.popover').exists('popover is still visible');
+  });
+
   test('it yields close action', async function(assert) {
     let hideAction = this.spy();
     this.set('hide', hideAction);

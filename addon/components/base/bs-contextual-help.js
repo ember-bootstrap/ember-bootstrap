@@ -607,6 +607,18 @@ export default Component.extend(TransitionSupport, {
     } catch(e) {} // eslint-disable-line no-empty
   },
 
+  /**
+   * @method handleTriggerEvent
+   * @private
+   */
+  handleTriggerEvent(handler, e) {
+    let overlayElement = this.get('overlayElement');
+    if (overlayElement && overlayElement.contains(e.target)) {
+      return;
+    }
+    return handler.call(this, e);
+  },
+
   actions: {
     close() {
       this.hide();
@@ -615,9 +627,9 @@ export default Component.extend(TransitionSupport, {
 
   init() {
     this._super(...arguments);
-    this._handleEnter = run.bind(this, this.enter);
-    this._handleLeave = run.bind(this, this.leave);
-    this._handleToggle = run.bind(this, this.toggle);
+    this._handleEnter = run.bind(this, this.handleTriggerEvent, this.enter);
+    this._handleLeave = run.bind(this, this.handleTriggerEvent, this.leave);
+    this._handleToggle = run.bind(this, this.handleTriggerEvent, this.toggle);
   },
 
   didInsertElement() {
