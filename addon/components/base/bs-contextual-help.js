@@ -621,6 +621,11 @@ export default Component.extend(TransitionSupport, {
 
   actions: {
     close() {
+      // Make sure our click state is off, otherwise the next click would
+      // close the already-closed tooltip/popover. We don't need to worry
+      // about this for hover/focus because those aren't "stateful" toggle
+      // events like click.
+      this.set('inState.click', false);
       this.hide();
     }
   },
