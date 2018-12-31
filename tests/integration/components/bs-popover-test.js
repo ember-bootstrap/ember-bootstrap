@@ -1,6 +1,6 @@
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click } from '@ember/test-helpers';
+import { render, click, triggerEvent } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { test, versionDependent, visibilityClass, popoverPositionClass } from '../../helpers/bootstrap-test';
 import {
@@ -76,6 +76,21 @@ module('Integration | Component | bs-popover', function(hooks) {
     assert.ok(Math.abs(arrowPosition - expectedArrowPosition) <= 2, `Expected position: ${expectedArrowPosition}, actual: ${arrowPosition}`);
   });
 
+  test('it stays open when clicked when rendered in place', async function(assert) {
+    await render(hbs`
+      <div id="target">
+        {{#bs-popover as |po|}}
+          <div id="content">Content</div>
+        {{/bs-popover}}
+      </div>
+    `);
+
+    await click('#target');
+    assert.dom('.popover').exists('popover is visible');
+    await click('#content');
+    assert.dom('.popover').exists('popover is still visible');
+  });
+
   test('it yields close action', async function(assert) {
     let hideAction = this.spy();
     this.set('hide', hideAction);
@@ -89,4 +104,52 @@ module('Integration | Component | bs-popover', function(hooks) {
     assert.ok(hiddenAction.calledOnce, 'hidden action was called');
     assert.dom('.popover').doesNotExist('popover is not visible');
   });
+
+  test('click-initiated close action does not interfere with click-to-open', async function(assert) {
+    await render(
+      hbs`<div id="target">{{#bs-popover as |po|}}<div id="hide" onclick={{action po.close}}>Hide</div>{{/bs-popover}}</div>`
+    );
+    await click('#target');
+    assert.dom('.popover').exists('popover is visible');
+    await click('#hide');
+    assert.dom('.popover').doesNotExist('popover is not visible');
+    await click('#target');
+    assert.dom('.popover').exists('popover visible again');
+  });
+
+  test('click-initiated close action does not interfere with click-to-open when wormholed', async function(assert) {
+    await render(
+      hbs`<div id="ember-bootstrap-wormhole"></div><div id="target">{{#bs-popover as |po|}}<div id="hide" onclick={{action po.close}}>Hide</div>{{/bs-popover}}</div>`
+    );
+    await click('#target');
+    assert.dom('.popover').exists('popover is visible');
+    await click('#hide');
+    assert.dom('.popover').doesNotExist('popover is not visible');
+    await click('#target');
+    assert.dom('.popover').exists('popover visible again');
+  })
+
+  test('non-click-initiated close action does not interfere with click-to-open', async function(assert) {
+    await render(
+      hbs`<div id="target">{{#bs-popover as |po|}}<input id="hide" onblur={{action po.close}}>{{/bs-popover}}</div>`
+    );
+    await click('#target');
+    assert.dom('.popover').exists('popover is visible');
+    await triggerEvent('#hide', 'blur');
+    assert.dom('.popover').doesNotExist('popover is not visible');
+    await click('#target');
+    assert.dom('.popover').exists('popover visible again');
+  });
+
+  test('non-click-initiated close action does not interfere with click-to-open when wormholed', async function(assert) {
+    await render(
+      hbs`<div id="ember-bootstrap-wormhole"></div><div id="target">{{#bs-popover as |po|}}<input id="hide" onblur={{action po.close}}>{{/bs-popover}}</div>`
+    );
+    await click('#target');
+    assert.dom('.popover').exists('popover is visible');
+    await triggerEvent('#hide', 'blur');
+    assert.dom('.popover').doesNotExist('popover is not visible');
+    await click('#target');
+    assert.dom('.popover').exists('popover visible again');
+  })
 });

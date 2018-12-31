@@ -607,17 +607,34 @@ export default Component.extend(TransitionSupport, {
     } catch(e) {} // eslint-disable-line no-empty
   },
 
+  /**
+   * @method handleTriggerEvent
+   * @private
+   */
+  handleTriggerEvent(handler, e) {
+    let overlayElement = this.get('overlayElement');
+    if (overlayElement && overlayElement.contains(e.target)) {
+      return;
+    }
+    return handler.call(this, e);
+  },
+
   actions: {
     close() {
+      // Make sure our click state is off, otherwise the next click would
+      // close the already-closed tooltip/popover. We don't need to worry
+      // about this for hover/focus because those aren't "stateful" toggle
+      // events like click.
+      this.set('inState.click', false);
       this.hide();
     }
   },
 
   init() {
     this._super(...arguments);
-    this._handleEnter = run.bind(this, this.enter);
-    this._handleLeave = run.bind(this, this.leave);
-    this._handleToggle = run.bind(this, this.toggle);
+    this._handleEnter = run.bind(this, this.handleTriggerEvent, this.enter);
+    this._handleLeave = run.bind(this, this.handleTriggerEvent, this.leave);
+    this._handleToggle = run.bind(this, this.handleTriggerEvent, this.toggle);
   },
 
   didInsertElement() {
