@@ -270,7 +270,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
       await render(hbs`
         {{#bs-form/element controlType="radio" options=simpleOptions as |Element|}}
           {{Element.control inline=true}}
-        {{/bs-form/element}}  
+        {{/bs-form/element}}
       `);
 
       assert.dom('.radio').doesNotExist();
@@ -290,7 +290,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
       await render(hbs`
         {{#bs-form/element controlType="radio" options=simpleOptions as |Element|}}
           {{Element.control inline=true}}
-        {{/bs-form/element}}  
+        {{/bs-form/element}}
       `);
 
       assert.dom('.form-check.form-check-inline').exists({ count: 2 });
@@ -842,6 +842,28 @@ module('Integration | Component | bs-form/element', function(hooks) {
     assert.dom(formFeedbackElement()).hasClass(
       validationErrorClass(),
       'events present in `showValidationOn` trigger validation'
+    );
+  });
+
+  testRequiringFocus('event triggered on input group button does not enable validation', async function(assert) {
+    this.set('errors', A(['Invalid']));
+    this.set('model', EmberObject.create({ name: null }));
+    await render(hbs`
+      {{#bs-form as |form|}}
+        {{#form.element property='name' hasValidator=true errors=errors model=model as |el|}}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <button class="btn btn-outline-secondary" type="button">Button</button>
+            </div>
+            {{el.control}}
+          </div>
+        {{/form.element}}
+      {{/bs-form}}
+    `);
+    await click('button');
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
+      'validation warnings aren\'t shown before user interaction'
     );
   });
 

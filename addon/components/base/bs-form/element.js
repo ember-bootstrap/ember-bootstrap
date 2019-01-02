@@ -687,11 +687,11 @@ export default FormGroup.extend({
 
   /**
    * Event or list of events which enable form validation markup rendering.
-   * Supported events: ['focusOut', 'change', 'input']
+   * Supported events: ['focusout', 'change', 'input']
    *
    * @property showValidationOn
    * @type string|array
-   * @default ['focusOut']
+   * @default ['focusout']
    * @public
    */
   showValidationOn: null,
@@ -707,23 +707,45 @@ export default FormGroup.extend({
 
     assert('showValidationOn must be a String or an Array', isArray(showValidationOn) || typeOf(showValidationOn) === 'string');
     if (isArray(showValidationOn)) {
-      return showValidationOn;
+      return showValidationOn.map((type) => {
+        return type.toLowerCase();
+      });
     }
 
     if (typeof showValidationOn.toString === 'function') {
-      return [showValidationOn];
+      return [showValidationOn.toLowerCase()];
     }
     return [];
   }),
 
   /**
    * @method showValidationOnHandler
+   * @params {Event} event
    * @private
    */
-  showValidationOnHandler(event) {
-    if (this.get('_showValidationOn').indexOf(event) !== -1) {
-      this.set('showOwnValidation', true);
+  showValidationOnHandler({ target, type }) {
+    let inputGroupClasses = [
+      // Bootstrap 4
+      '.input-group-append',
+      '.input-group-prepend',
+      // Bootstrap 3
+      '.input-group-addon',
+      '.input-group-btn',
+    ];
+
+    // Should not do anything if
+    if (
+      // validations are already shown or
+      this.get('showOwnValidation') ||
+      // validations should not be shown for this event type or
+      this.get('_showValidationOn').indexOf(type) === -1 ||
+      // event target was inside an input group (e.g. a input group button)
+      [...this.element.querySelectorAll(inputGroupClasses.join(','))].some((el) => el.contains(target))
+    ) {
+      return;
     }
+
+    this.set('showOwnValidation', true);
   },
 
   /**
@@ -891,8 +913,8 @@ export default FormGroup.extend({
    * @event focusOut
    * @private
    */
-  focusOut() {
-    this.showValidationOnHandler('focusOut');
+  focusOut(event) {
+    this.showValidationOnHandler(event);
   },
 
   /**
@@ -902,8 +924,8 @@ export default FormGroup.extend({
    * @event change
    * @private
    */
-  change() {
-    this.showValidationOnHandler('change');
+  change(event) {
+    this.showValidationOnHandler(event);
   },
 
   /**
@@ -913,8 +935,8 @@ export default FormGroup.extend({
    * @event input
    * @private
    */
-  input() {
-    this.showValidationOnHandler('input');
+  input(event) {
+    this.showValidationOnHandler(event);
   },
 
   /**
