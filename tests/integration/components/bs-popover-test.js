@@ -33,12 +33,14 @@ module('Integration | Component | bs-popover', function(hooks) {
     let placements = ['top', 'left', 'bottom', 'right'];
     this.set('placement', placements[0]);
     await render(hbs`
-      <div style="margin: 200px">
+      <div id="wrapper">
         {{#bs-popover/element id="popover-element" placement=placement title="dummy title"}}
           template block text
         {{/bs-popover/element}}
       </div>
     `);
+    this.element.querySelector('wrapper').style.margin = '200px';
+
     for (let placement of placements) {
       this.set('placement', placement);
       let placementClass = popoverPositionClass(placement);
@@ -47,9 +49,17 @@ module('Integration | Component | bs-popover', function(hooks) {
   });
 
   test('should place popover on top of element', async function(assert) {
-    await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{#bs-popover placement="top" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}</button></p></div>`
+    await render(hbs`
+      <div id="ember-bootstrap-wormhole"></div>
+      <div id="wrapper">
+        <p>
+          <button class="btn" id="target">
+            Click me{{#bs-popover placement="top" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}
+          </button>
+        </p>
+      </div>`
     );
+    this.element.querySelector('#wrapper p').style.marginTop = '200px';
 
     setupForPositioning();
 
@@ -59,9 +69,17 @@ module('Integration | Component | bs-popover', function(hooks) {
 
   test('should adjust popover arrow', async function(assert) {
     let expectedArrowPosition = versionDependent(225, 219);
-    await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{#bs-popover placement="top" autoPlacement=true viewportSelector="#wrapper" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}</button></p></div>`
+    await render(hbs`
+      <div id="ember-bootstrap-wormhole"></div>
+      <div id="wrapper">
+        <p>
+          <button class="btn" id="target">
+            Click me{{#bs-popover placement="top" autoPlacement=true viewportSelector="#wrapper" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}
+          </button>
+        </p>
+      </div>`
     );
+    this.element.querySelector('#wrapper p').style.marginTop = '200px';
 
     setupForPositioning('right');
 
