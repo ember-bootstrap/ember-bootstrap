@@ -8,9 +8,11 @@ import { clearRender, render, click, fillIn, triggerEvent, focus, blur } from '@
 import {
   formFeedbackClass,
   test,
-  testRequiringFocus,
   testBS3,
   testBS4,
+  testRequiringFocus,
+  testBS3RequiringFocus,
+  testBS4RequiringFocus,
   validationSuccessClass,
   validationErrorClass,
   validationWarningClass,
@@ -845,7 +847,29 @@ module('Integration | Component | bs-form/element', function(hooks) {
     );
   });
 
-  testRequiringFocus('event triggered on input group button does not enable validation', async function(assert) {
+  testBS3RequiringFocus('event triggered on input group button does not enable validation', async function(assert) {
+    this.set('errors', A(['Invalid']));
+    this.set('model', EmberObject.create({ name: null }));
+    await render(hbs`
+      {{#bs-form as |form|}}
+        {{#form.element property='name' hasValidator=true errors=errors model=model as |el|}}
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Button</button>
+            </span>
+            {{el.control}}
+          </div>
+        {{/form.element}}
+      {{/bs-form}}
+    `);
+    await click('button');
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
+      'validation warnings aren\'t shown before user interaction'
+    );
+  });
+
+  testBS4RequiringFocus('event triggered on input group button does not enable validation', async function(assert) {
     this.set('errors', A(['Invalid']));
     this.set('model', EmberObject.create({ name: null }));
     await render(hbs`
@@ -865,6 +889,29 @@ module('Integration | Component | bs-form/element', function(hooks) {
       validationErrorClass(),
       'validation warnings aren\'t shown before user interaction'
     );
+  });
+
+  testRequiringFocus('event targets not enabling validation are configurable per `doNotShowValidationForEventTargets`', async function(assert) {
+    this.set('doNotShowValidationForEventTargets', ['[data-trigger-validation="false"]']);
+    this.set('errors', A(['Invalid']));
+    this.set('model', EmberObject.create({ name: null }));
+    await render(hbs`
+      {{#bs-form as |form|}}
+        {{#form.element property='name' hasValidator=true errors=errors model=model
+          doNotShowValidationForEventTargets=doNotShowValidationForEventTargets
+        as |el|
+        }}
+          {{el.control}}
+          <button data-trigger-validation="false">Test</button>
+        {{/form.element}}
+      {{/bs-form}}
+    `);
+    await click('button');
+    assert.dom(formFeedbackElement()).hasNoClass(validationErrorClass());
+
+    this.set('doNotShowValidationForEventTargets', []);
+    await click('button');
+    assert.dom(formFeedbackElement()).hasNoClass(validationErrorClass());
   });
 
   test('it uses custom control component when registered in DI container', async function(assert) {

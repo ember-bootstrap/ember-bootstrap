@@ -724,29 +724,41 @@ export default FormGroup.extend({
    * @private
    */
   showValidationOnHandler({ target, type }) {
-    let inputGroupClasses = [
-      // Bootstrap 4
-      '.input-group-append',
-      '.input-group-prepend',
-      // Bootstrap 3
-      '.input-group-addon',
-      '.input-group-btn',
-    ];
-
     // Should not do anything if
     if (
       // validations are already shown or
       this.get('showOwnValidation') ||
       // validations should not be shown for this event type or
       this.get('_showValidationOn').indexOf(type) === -1 ||
-      // event target was inside an input group (e.g. a input group button)
-      [...this.element.querySelectorAll(inputGroupClasses.join(','))].some((el) => el.contains(target))
+      // validation should not be shown for this event target
+      (
+        isArray(this.get('doNotShowValidationForEventTargets')) &&
+        this.get('doNotShowValidationForEventTargets.length') > 0 &&
+        [...this.element.querySelectorAll(this.get('doNotShowValidationForEventTargets').join(','))]
+          .some((el) => el.contains(target))
+      )
     ) {
       return;
     }
 
     this.set('showOwnValidation', true);
   },
+
+  /**
+   * Controls if validation should be shown for specified event targets.
+   *
+   * It expects an array of query selectors. If event target is a children of an event that matches
+   * these selectors, an event triggered for it will not trigger validation errors to be shown.
+   *
+   * By default events fired on elements inside an input group are skipped.
+   *
+   * If `null` or an empty array is passed validation errors are shown for all events regardless
+   * of event target.
+   *
+   * @property doNotShowValidationForEventTargets
+   * @type ?array
+   * @public
+   */
 
   /**
    * The validation ("error" (BS3)/"danger" (BS4), "warning", or "success") or null if no validation is to be shown. Automatically computed from the
