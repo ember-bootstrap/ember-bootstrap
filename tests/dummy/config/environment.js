@@ -18,6 +18,8 @@ module.exports = function(environment) {
       // when it is created
     },
 
+    contentSecurityPolicyMeta: true,
+
     fastboot: {
       hostWhitelist: [/^localhost:\d+$/]
     },
