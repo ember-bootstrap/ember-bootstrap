@@ -40,10 +40,19 @@ module('Integration | Component | bs-progress', function(hooks) {
         maxValue: 10
       }
     ];
+    let cssRules = [
+      '.progress-bar { transition: none; }',
+      '.width-500 { width: 500px }',
+    ];
+    let styleSheet = document.styleSheets[document.styleSheets.length - 1];
+
+    // inject css rules required for testing
+    cssRules.forEach((rule) => {
+      styleSheet.insertRule(rule, styleSheet.cssRules.length);
+    });
 
     await render(hbs`
-        <style type="text/css">.progress-bar { transition: none; }</style>
-        <div style="width: 500px">
+        <div class="width-500">
           {{#bs-progress as |p|}}
             {{p.bar value=value minValue=minValue maxValue=maxValue}}
           {{/bs-progress}}
@@ -61,6 +70,12 @@ module('Integration | Component | bs-progress', function(hooks) {
       assert.equal(this.element.querySelector('.progress-bar').offsetWidth, expectedWidth, 'Progress bar has expected width.');
     });
 
+    // remove CSS rules injected for testing
+    // since they had been injected at the end of the stylesheet,
+    // we could remove safely remove the last rules in stylesheet
+    for (let i = 0; i < cssRules.length; i++) {
+      styleSheet.deleteRule(styleSheet.cssRules.length - 1);
+    }
   });
 
   test('progress bar has invisible label for screen readers', async function(assert) {
