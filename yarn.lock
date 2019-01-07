@@ -4059,12 +4059,13 @@ ember-source-channel-url@^1.0.1, ember-source-channel-url@^1.1.0:
   dependencies:
     got "^8.0.1"
 
-ember-source@~3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.6.0.tgz#0229b4fe6802dcfadb81e27ebcf50fff166889ec"
+ember-source@~3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.7.0.tgz#99d8d306daf05a7a8063adcb944b04a9c9c94be7"
+  integrity sha512-4Ne361XAwLV0hYfFSbZP8NJUzD1IZLWHO1ON9Hb67K9B67H+3CF6SdbE+3+V+WiIom1n93/M35A72sNmh9CTjg==
   dependencies:
     broccoli-funnel "^2.0.1"
-    broccoli-merge-trees "^2.0.0"
+    broccoli-merge-trees "^3.0.2"
     chalk "^2.3.0"
     ember-cli-babel "^7.1.3"
     ember-cli-get-component-path-option "^1.0.0"
