@@ -23,12 +23,16 @@ module.exports = function(environment) {
       'script-src':  ["'self'"],
       'font-src':    ["'self'"],
       'connect-src': ["'self'"],
-      'img-src':     ["'self'"],
+      'img-src':     [
+        "'self'",
+        "data:", // Bootstrap 4 uses data URL for some SVG images in CSS
+      ],
       'style-src':   ["'self'"],
       'media-src':   ["'self'"],
-      'frame-src':   ["https://ghbtns.com/"],
+      'frame-src':   [
+        "https://ghbtns.com/", // iframe used in application template of dummy app
+      ],
     },
-    contentSecurityPolicyMeta: true,
 
     fastboot: {
       hostWhitelist: [/^localhost:\d+$/]
@@ -56,6 +60,13 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
+
+    // testem requires frame-src 'self' to run
+    // https://github.com/rwjblue/ember-cli-content-security-policy/blob/v1.0.0/index.js#L85-L88
+    ENV.contentSecurityPolicy['frame-src'].push('self');
+
+    // test should fail if they require a CSP violation
+    ENV.contentSecurityPolicyHeader = 'Content-Security-Policy';
   }
 
   if (environment === 'production') {
