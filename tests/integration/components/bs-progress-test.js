@@ -3,9 +3,11 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 
 module('Integration | Component | bs-progress', function(hooks) {
   setupRenderingTest(hooks);
+  setupStylesheetSupport(hooks);
 
   test('bs-progress has correct markup', async function(assert) {
     // Template block usage:
@@ -40,16 +42,9 @@ module('Integration | Component | bs-progress', function(hooks) {
         maxValue: 10
       }
     ];
-    let cssRules = [
-      '.progress-bar { transition: none; }',
-      '.width-500 { width: 500px }',
-    ];
-    let styleSheet = document.styleSheets[document.styleSheets.length - 1];
 
-    // inject css rules required for testing
-    cssRules.forEach((rule) => {
-      styleSheet.insertRule(rule, styleSheet.cssRules.length);
-    });
+    this.insertCSSRule('.progress-bar { transition: none; }');
+    this.insertCSSRule('.width-500 { width: 500px }');
 
     await render(hbs`
         <div class="width-500">
@@ -69,13 +64,6 @@ module('Integration | Component | bs-progress', function(hooks) {
 
       assert.equal(this.element.querySelector('.progress-bar').offsetWidth, expectedWidth, 'Progress bar has expected width.');
     });
-
-    // remove CSS rules injected for testing
-    // since they had been injected at the end of the stylesheet,
-    // we could remove safely remove the last rules in stylesheet
-    for (let i = 0; i < cssRules.length; i++) {
-      styleSheet.deleteRule(styleSheet.cssRules.length - 1);
-    }
   });
 
   test('progress bar has invisible label for screen readers', async function(assert) {
