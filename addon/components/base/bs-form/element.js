@@ -687,11 +687,11 @@ export default FormGroup.extend({
 
   /**
    * Event or list of events which enable form validation markup rendering.
-   * Supported events: ['focusOut', 'change', 'input']
+   * Supported events: ['focusout', 'change', 'input']
    *
    * @property showValidationOn
    * @type string|array
-   * @default ['focusOut']
+   * @default ['focusout']
    * @public
    */
   showValidationOn: null,
@@ -707,24 +707,58 @@ export default FormGroup.extend({
 
     assert('showValidationOn must be a String or an Array', isArray(showValidationOn) || typeOf(showValidationOn) === 'string');
     if (isArray(showValidationOn)) {
-      return showValidationOn;
+      return showValidationOn.map((type) => {
+        return type.toLowerCase();
+      });
     }
 
     if (typeof showValidationOn.toString === 'function') {
-      return [showValidationOn];
+      return [showValidationOn.toLowerCase()];
     }
     return [];
   }),
 
   /**
    * @method showValidationOnHandler
+   * @params {Event} event
    * @private
    */
-  showValidationOnHandler(event) {
-    if (this.get('_showValidationOn').indexOf(event) !== -1) {
-      this.set('showOwnValidation', true);
+  showValidationOnHandler({ target, type }) {
+    // Should not do anything if
+    if (
+      // validations are already shown or
+      this.get('showOwnValidation') ||
+      // validations should not be shown for this event type or
+      this.get('_showValidationOn').indexOf(type) === -1 ||
+      // validation should not be shown for this event target
+      (
+        isArray(this.get('doNotShowValidationForEventTargets')) &&
+        this.get('doNotShowValidationForEventTargets.length') > 0 &&
+        [...this.element.querySelectorAll(this.get('doNotShowValidationForEventTargets').join(','))]
+          .some((el) => el.contains(target))
+      )
+    ) {
+      return;
     }
+
+    this.set('showOwnValidation', true);
   },
+
+  /**
+   * Controls if validation should be shown for specified event targets.
+   *
+   * It expects an array of query selectors. If event target is a children of an event that matches
+   * these selectors, an event triggered for it will not trigger validation errors to be shown.
+   *
+   * By default events fired on elements inside an input group are skipped.
+   *
+   * If `null` or an empty array is passed validation errors are shown for all events regardless
+   * of event target.
+   *
+   * @property doNotShowValidationForEventTargets
+   * @type ?array
+   * @public
+   */
 
   /**
    * The validation ("error" (BS3)/"danger" (BS4), "warning", or "success") or null if no validation is to be shown. Automatically computed from the
@@ -891,8 +925,8 @@ export default FormGroup.extend({
    * @event focusOut
    * @private
    */
-  focusOut() {
-    this.showValidationOnHandler('focusOut');
+  focusOut(event) {
+    this.showValidationOnHandler(event);
   },
 
   /**
@@ -902,8 +936,8 @@ export default FormGroup.extend({
    * @event change
    * @private
    */
-  change() {
-    this.showValidationOnHandler('change');
+  change(event) {
+    this.showValidationOnHandler(event);
   },
 
   /**
@@ -913,8 +947,8 @@ export default FormGroup.extend({
    * @event input
    * @private
    */
-  input() {
-    this.showValidationOnHandler('input');
+  input(event) {
+    this.showValidationOnHandler(event);
   },
 
   /**
