@@ -7,9 +7,11 @@ import {
   setupForPositioning,
   assertPositioning
 } from '../../helpers/contextual-help';
+import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 
 module('Integration | Component | bs-popover', function(hooks) {
   setupRenderingTest(hooks);
+  setupStylesheetSupport(hooks);
 
   test('it has correct markup', async function(assert) {
     // Template block usage:
@@ -30,6 +32,8 @@ module('Integration | Component | bs-popover', function(hooks) {
   });
 
   skip('it supports different placements', async function(assert) {
+    this.insertCSSRule('#wrapper { margin: 200px }');
+
     let placements = ['top', 'left', 'bottom', 'right'];
     this.set('placement', placements[0]);
     await render(hbs`
@@ -39,7 +43,6 @@ module('Integration | Component | bs-popover', function(hooks) {
         {{/bs-popover/element}}
       </div>
     `);
-    this.element.querySelector('wrapper').style.margin = '200px';
 
     for (let placement of placements) {
       this.set('placement', placement);
@@ -49,6 +52,8 @@ module('Integration | Component | bs-popover', function(hooks) {
   });
 
   test('should place popover on top of element', async function(assert) {
+    this.insertCSSRule('#wrapper p { margin-top: 200px }');
+
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
@@ -59,7 +64,6 @@ module('Integration | Component | bs-popover', function(hooks) {
         </p>
       </div>`
     );
-    this.element.querySelector('#wrapper p').style.marginTop = '200px';
 
     setupForPositioning();
 
@@ -68,6 +72,8 @@ module('Integration | Component | bs-popover', function(hooks) {
   });
 
   test('should adjust popover arrow', async function(assert) {
+    this.insertCSSRule('#wrapper p { margin-top: 200px }');
+
     let expectedArrowPosition = versionDependent(225, 219);
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
@@ -79,7 +85,6 @@ module('Integration | Component | bs-popover', function(hooks) {
         </p>
       </div>`
     );
-    this.element.querySelector('#wrapper p').style.marginTop = '200px';
 
     setupForPositioning('right');
 
