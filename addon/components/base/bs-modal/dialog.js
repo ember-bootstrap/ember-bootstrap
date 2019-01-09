@@ -1,7 +1,6 @@
 import { isBlank } from '@ember/utils';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { htmlSafe } from '@ember/string';
 import { bind } from '@ember/runloop';
 import { readOnly } from '@ember/object/computed';
 import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
@@ -18,7 +17,7 @@ export default Component.extend({
   layout,
   classNames: ['modal'],
   classNameBindings: ['fade'],
-  attributeBindings: ['tabindex', 'style', 'aria-labelledby'],
+  attributeBindings: ['tabindex', 'aria-labelledby'],
   ariaRole: 'dialog',
   tabindex: '-1',
   "aria-labelledby": readOnly('titleId'),
@@ -101,29 +100,6 @@ export default Component.extend({
   backdropClose: true,
 
   /**
-   * @property style
-   * @type string
-   * @readOnly
-   * @private
-   */
-  style: computed('inDom', 'paddingLeft', 'paddingRight', function() {
-    let styles = [];
-    let { inDom, paddingLeft, paddingRight } = this.getProperties('inDom', 'paddingLeft', 'paddingRight');
-
-    if (inDom) {
-      styles.push('display: block');
-    }
-    if (paddingLeft) {
-      styles.push(`padding-left: ${paddingLeft}px`);
-    }
-    if (paddingRight) {
-      styles.push(`padding-right: ${paddingRight}px`);
-    }
-
-    return htmlSafe(styles.join(';'));
-  }),
-
-  /**
    * Name of the size class
    *
    * @property sizeClass
@@ -147,7 +123,7 @@ export default Component.extend({
    */
   titleId: null,
 
-/**
+  /**
    * Gets or sets the id of the title element for aria accessibility tags
    *
    * @method getSetTitleID
@@ -173,6 +149,23 @@ export default Component.extend({
       this.set('titleId', nodeId)
   },
 
+  /**
+   * Update the elements styles using CSSOM.
+   *
+   * This is necessary cause binding style attribute would require a
+   * Content-Security-Policy `style-src 'unsafe-line'`.
+   *
+   * @method updateStyle
+   * @return void
+   * @private
+   */
+  updateStyles() {
+    let { inDom, paddingLeft, paddingRight } = this.getProperties('inDom', 'paddingLeft', 'paddingRight');
+
+    this.element.style.display = inDom ? 'block' : '';
+    this.element.style.paddingLeft = paddingLeft || '';
+    this.element.style.paddingRight = paddingRight || '';
+  },
 
   /**
    * @event onClose
@@ -201,6 +194,11 @@ export default Component.extend({
     // directly to the element
     this.element.onclick = bind(this, this._click);
     this.getOrSetTitleId();
+    this.updateStyles();
+  },
+
+  didUpdateAttrs() {
+    this.updateStyles();
   },
 
   willDestroyElement() {
