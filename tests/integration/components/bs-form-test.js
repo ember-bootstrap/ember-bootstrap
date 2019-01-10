@@ -3,7 +3,7 @@ import { A } from '@ember/array';
 import { resolve, reject } from 'rsvp';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, fillIn, triggerKeyEvent, triggerEvent, waitFor, waitUntil, settled } from '@ember/test-helpers';
+import { render, click, fillIn, triggerKeyEvent, triggerEvent, waitFor, waitUntil, settled, focus, blur } from '@ember/test-helpers';
 import {
   formFeedbackClass,
   test,
@@ -15,7 +15,7 @@ import {
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import { defer } from 'rsvp';
-import { next } from '@ember/runloop';
+import { next, run } from '@ember/runloop';
 
 const nextRunloop = function() {
   return new Promise((resolve) => {
@@ -162,6 +162,101 @@ module('Integration | Component | bs-form', function(hooks) {
     );
     await triggerEvent('form', 'submit');
 
+    assert.dom(formFeedbackElement()).hasClass(
+      validationErrorClass(),
+      'validation errors are shown after form submission'
+    );
+    assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
+  });
+
+  testRequiringFocus('Submitting the form does not show validation errors while submitting', async function(assert) {
+    let model = {};
+    this.set('model', model);
+    this.set('errors', A([]));
+    this.set('validateStub', () => this.get('errors.length') > 0 ? reject() : resolve());
+    let deferredSubmitAction = defer();
+    this.set('submitAction', () => {
+      return deferredSubmitAction.promise;
+    });
+    await render(
+      hbs`
+        {{#bs-form model=model onSubmit=submitAction hasValidator=true validate=validateStub as |form|}}
+          {{form.element property="dummy" hasValidator=true errors=errors}}
+        {{/bs-form}}`
+    );
+
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
+      'validation errors aren\'t shown before user interaction'
+    );
+
+    await focus('input');
+    await blur('input');
+    await triggerEvent('form', 'submit');
+
+    // simulate validation errors being added while a submission is ongoing
+    run(() => this.get('errors').pushObject('There is an error'));
+    await settled();
+
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
+      'validation errors aren\'t shown while submitting'
+    );
+
+    deferredSubmitAction.resolve();
+    await settled();
+
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
+      'validation errors aren\'t shown after submitting'
+    );
+
+    await focus('input');
+    await blur('input');
+
+    // form element has been changed, and has errors now, so validations must show up
+    assert.dom(formFeedbackElement()).hasClass(
+      validationErrorClass(),
+      'validation errors are shown after form submission'
+    );
+    assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
+  });
+
+  testRequiringFocus('Submitting the form does not show validation errors after submission', async function(assert) {
+    let model = {};
+    this.set('model', model);
+    this.set('errors', A([]));
+    this.set('validateStub', () => this.get('errors.length') > 0 ? reject() : resolve());
+    this.set('submitAction', () => {});
+    await render(
+      hbs`
+        {{#bs-form model=model onSubmit=submitAction hasValidator=true validate=validateStub as |form|}}
+          {{form.element property="dummy" hasValidator=true errors=errors}}
+        {{/bs-form}}`
+    );
+
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
+      'validation errors aren\'t shown before user interaction'
+    );
+
+    await focus('input');
+    await blur('input');
+    await triggerEvent('form', 'submit');
+
+    // simulate validation errors being added while a submission is ongoing
+    run(() => this.get('errors').pushObject('There is an error'));
+    await settled();
+
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
+      'validation errors aren\'t shown after submitting'
+    );
+
+    await focus('input');
+    await blur('input');
+
+    // form element has been changed, and has errors now, so validations must show up
     assert.dom(formFeedbackElement()).hasClass(
       validationErrorClass(),
       'validation errors are shown after form submission'

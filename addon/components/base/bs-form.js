@@ -238,10 +238,10 @@ export default Component.extend({
   /**
    * @property showAllValidations
    * @type boolean
-   * @default false
+   * @default undefined
    * @private
    */
-  showAllValidations: false,
+  showAllValidations: undefined,
 
   /**
    * Action is called before the form is validated (if possible) and submitted.
@@ -302,6 +302,7 @@ export default Component.extend({
     RSVP.resolve(this.get('hasValidator') ? this.validate(this.get('model')) : null)
       .then(
         (r) => {
+          this.set('showAllValidations', false);
           return this.get('onSubmit')(model, r);
         },
         (err) => {
@@ -317,6 +318,11 @@ export default Component.extend({
           }
 
           this.decrementProperty('pendingSubmissions');
+
+          // reset forced hiding of validations
+          if (this.get('showAllValidations') === false) {
+            this.set('showAllValidations', undefined);
+          }
         }
       });
   },
