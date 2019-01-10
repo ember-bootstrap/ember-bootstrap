@@ -15,7 +15,7 @@ export default function({ beforeEach, afterEach }) {
     // since we insert the rules at the end of the stylesheet, we could safely
     // remove the same amount of rules from the end as we have inserted
     for (let i = 1; i <= numberOfInsertedRules; i++) {
-      styleSheet.removeRule(styleSheet.length);
+      styleSheet.deleteRule(styleSheet.length);
     }
   });
 }
