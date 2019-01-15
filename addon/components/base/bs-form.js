@@ -211,6 +211,18 @@ export default Component.extend({
   preventConcurrency: false,
 
   /**
+   * If true, after successful validation and upon submitting the form, all current element validations will be hidden.
+   * If the form remains visible, the user would have to focus out of elements of submit the form again for the
+   * validations to show up again, as if a fresh new form component had been rendered.
+   *
+   * @property hideValidationsOnSubmit
+   * @type {Boolean}
+   * @default false
+   * @public
+   */
+  hideValidationsOnSubmit: false,
+
+  /**
    * If set to true novalidate attribute is present on form element
    *
    * @property novalidate
@@ -302,7 +314,9 @@ export default Component.extend({
     RSVP.resolve(this.get('hasValidator') ? this.validate(this.get('model')) : null)
       .then(
         (r) => {
-          this.set('showAllValidations', false);
+          if (this.get('hideValidationsOnSubmit') === true) {
+            this.set('showAllValidations', false);
+          }
           return this.get('onSubmit')(model, r);
         },
         (err) => {
