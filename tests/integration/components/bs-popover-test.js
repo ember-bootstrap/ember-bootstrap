@@ -7,9 +7,11 @@ import {
   setupForPositioning,
   assertPositioning
 } from '../../helpers/contextual-help';
+import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 
 module('Integration | Component | bs-popover', function(hooks) {
   setupRenderingTest(hooks);
+  setupStylesheetSupport(hooks);
 
   test('it has correct markup', async function(assert) {
     // Template block usage:
@@ -30,15 +32,18 @@ module('Integration | Component | bs-popover', function(hooks) {
   });
 
   skip('it supports different placements', async function(assert) {
+    this.insertCSSRule('#wrapper { margin: 200px }');
+
     let placements = ['top', 'left', 'bottom', 'right'];
     this.set('placement', placements[0]);
     await render(hbs`
-      <div style="margin: 200px">
+      <div id="wrapper">
         {{#bs-popover/element id="popover-element" placement=placement title="dummy title"}}
           template block text
         {{/bs-popover/element}}
       </div>
     `);
+
     for (let placement of placements) {
       this.set('placement', placement);
       let placementClass = popoverPositionClass(placement);
@@ -47,8 +52,17 @@ module('Integration | Component | bs-popover', function(hooks) {
   });
 
   test('should place popover on top of element', async function(assert) {
-    await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{#bs-popover placement="top" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}</button></p></div>`
+    this.insertCSSRule('#wrapper p { margin-top: 200px }');
+
+    await render(hbs`
+      <div id="ember-bootstrap-wormhole"></div>
+      <div id="wrapper">
+        <p>
+          <button class="btn" id="target">
+            Click me{{#bs-popover placement="top" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}
+          </button>
+        </p>
+      </div>`
     );
 
     setupForPositioning();
@@ -58,9 +72,18 @@ module('Integration | Component | bs-popover', function(hooks) {
   });
 
   test('should adjust popover arrow', async function(assert) {
+    this.insertCSSRule('#wrapper p { margin-top: 200px }');
+
     let expectedArrowPosition = versionDependent(225, 219);
-    await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{#bs-popover placement="top" autoPlacement=true viewportSelector="#wrapper" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}</button></p></div>`
+    await render(hbs`
+      <div id="ember-bootstrap-wormhole"></div>
+      <div id="wrapper">
+        <p>
+          <button class="btn" id="target">
+            Click me{{#bs-popover placement="top" autoPlacement=true viewportSelector="#wrapper" title="very very very very very very very long popover" fade=false}}very very very very very very very long popover{{/bs-popover}}
+          </button>
+        </p>
+      </div>`
     );
 
     setupForPositioning('right');

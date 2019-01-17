@@ -3,9 +3,11 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 
 module('Integration | Component | bs-progress', function(hooks) {
   setupRenderingTest(hooks);
+  setupStylesheetSupport(hooks);
 
   test('bs-progress has correct markup', async function(assert) {
     // Template block usage:
@@ -41,9 +43,11 @@ module('Integration | Component | bs-progress', function(hooks) {
       }
     ];
 
+    this.insertCSSRule('.progress-bar { transition: none; }');
+    this.insertCSSRule('.width-500 { width: 500px }');
+
     await render(hbs`
-        <style type="text/css">.progress-bar { transition: none; }</style>
-        <div style="width: 500px">
+        <div class="width-500">
           {{#bs-progress as |p|}}
             {{p.bar value=value minValue=minValue maxValue=maxValue}}
           {{/bs-progress}}
@@ -60,7 +64,6 @@ module('Integration | Component | bs-progress', function(hooks) {
 
       assert.equal(this.element.querySelector('.progress-bar').offsetWidth, expectedWidth, 'Progress bar has expected width.');
     });
-
   });
 
   test('progress bar has invisible label for screen readers', async function(assert) {

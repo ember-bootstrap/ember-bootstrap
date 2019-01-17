@@ -16,9 +16,11 @@ import {
   setupForPositioning,
   assertPositioning
 } from '../../helpers/contextual-help';
+import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 
 module('Integration | Component | bs-tooltip', function(hooks) {
   setupRenderingTest(hooks);
+  setupStylesheetSupport(hooks);
 
   hooks.beforeEach(function() {
     this.actions = {};
@@ -237,8 +239,16 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should place tooltip on top of element', async function(assert) {
-    await render(
-      hbs`<div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false}}</a></p></div>`
+    this.insertCSSRule('.margin-top { margin-top: 200px; }');
+
+    await render(hbs`
+      <div id="wrapper">
+        <p class="margin-top">
+          <a href="#" id="target">
+            Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false}}
+          </a>
+        </p>
+      </div>`
     );
 
     setupForPositioning();
@@ -248,8 +258,18 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should place tooltip on top of element if already visible', async function(assert) {
-    await render(
-      hbs`<div id="wrapper">{{#if visible}}<p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=true}}</a></p>{{/if}}</div>`
+    this.insertCSSRule('.margin-top { margin-top: 200px; }');
+
+    await render(hbs`
+      <div id="wrapper">
+        {{#if visible}}
+          <p class="margin-top">
+            <a href="#" id="target">
+              Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=true}}
+            </a>
+          </p>
+        {{/if}}
+      </div>`
     );
 
     setupForPositioning();
@@ -259,9 +279,17 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should place tooltip on top of element if visible is set to true', async function(assert) {
+    this.insertCSSRule('.margin-top { margin-top: 200px; }');
+
     this.set('visible', false);
-    await render(
-      hbs`<div id="wrapper"><p style="margin-top: 200px"><a href="#" id="target">Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=visible}}</a></p></div>`
+    await render(hbs`
+      <div id="wrapper">
+        <p class="margin-top">
+          <a href="#" id="target">
+            Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=visible}}
+          </a>
+        </p>
+      </div>`
     );
 
     setupForPositioning();
@@ -330,9 +358,18 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should position tooltip arrow centered', async function(assert) {
+    this.insertCSSRule('.margin-top { margin-top: 200px; }');
+
     let expectedArrowPosition = versionDependent(95, 94);
-    await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{bs-tooltip placement="top" title="very very very very very very very long tooltip" fade=false}}</button></p></div>`
+    await render(hbs`
+      <div id="ember-bootstrap-wormhole"></div>
+      <div id="wrapper">
+        <p class="margin-top">
+          <button class="btn" id="target">
+            Click me{{bs-tooltip placement="top" title="very very very very very very very long tooltip" fade=false}}
+          </button>
+        </p>
+      </div>`
     );
 
     setupForPositioning();
@@ -343,9 +380,18 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should adjust tooltip arrow', async function(assert) {
+    this.insertCSSRule('.margin-top { margin-top: 200px; }');
+
     let expectedArrowPosition = versionDependent(155, 150);
-    await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 200px"><button class="btn" id="target">Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long tooltip" fade=false}}</button></p></div>`
+    await render(hbs`
+      <div id="ember-bootstrap-wormhole"></div>
+      <div id="wrapper">
+        <p class="margin-top">
+          <button class="btn" id="target">
+            Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long tooltip" fade=false}}
+          </button>
+        </p>
+      </div>`
     );
 
     setupForPositioning('right');
@@ -362,8 +408,17 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should adjust placement if not fitting in viewport', async function(assert) {
-    await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper"><p style="margin-top: 300px"><button class="btn" id="target">Click me{{bs-tooltip placement="bottom" autoPlacement=true title="very very very very very very very long tooltip" fade=false}}</button></p></div>`
+    this.insertCSSRule('.margin-top { margin-top: 300px; }');
+
+    await render(hbs`
+      <div id="ember-bootstrap-wormhole"></div>
+      <div id="wrapper">
+        <p class="margin-top">
+          <button class="btn" id="target">
+            Click me{{bs-tooltip placement="bottom" autoPlacement=true title="very very very very very very very long tooltip" fade=false}}
+          </button>
+        </p>
+      </div>`
     );
 
     setupForPositioning('right');
