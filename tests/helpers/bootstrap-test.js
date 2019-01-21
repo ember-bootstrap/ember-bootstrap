@@ -134,6 +134,22 @@ export function testRequiringFocus(name, fn) {
   }
 }
 
+export function testBS3RequiringFocus(name, fn) {
+  if (document.hasFocus()) {
+    return testBS3(name, fn);
+  } else {
+    skip(name);
+  }
+}
+
+export function testBS4RequiringFocus(name, fn) {
+  if (document.hasFocus()) {
+    return testBS4(name, fn);
+  } else {
+    skip(name);
+  }
+}
+
 export function testRequiringTransitions(name, fn) {
   return test(name, fn);
 }

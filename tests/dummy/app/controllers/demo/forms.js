@@ -7,7 +7,8 @@ export default Controller.extend({
   formLayout: 'vertical',
   email: null,
   password: null,
-  rememberMe: false,
+  checkbox: false,
+  radio: null,
 
   login: computed(function() {
     return Login.create(
@@ -19,6 +20,18 @@ export default Controller.extend({
     submit() {
       window.alert('Successfully submitted form data!');
     }
+  },
+
+  init() {
+    this._super(...arguments);
+    this.radioOptions = [
+      {
+        label: 'foo'
+      },
+      {
+        label: 'bar'
+      }
+    ];
   }
 
 });

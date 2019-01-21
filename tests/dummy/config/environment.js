@@ -18,6 +18,32 @@ module.exports = function(environment) {
       // when it is created
     },
 
+    contentSecurityPolicy: {
+      'default-src': ["'none'"],
+      'script-src':  [
+        "'self'",
+        // test file loaded assertion injected as <script> tag by ember-cli
+        "'sha256-37u63EBe1EibDZ3vZNr6mxLepqlY1CQw+4N89HrzP9s='",
+      ],
+      'font-src':    ["'self'"],
+      'connect-src': ["'self'"],
+      'img-src':     [
+        "'self'",
+        // Bootstrap 4 uses data URL for some SVG images in CSS
+        "data:",
+      ],
+      'style-src':   ["'self'"],
+      'media-src':   ["'self'"],
+      'frame-src':   [
+        // iframe used in application template of dummy app
+        "https://ghbtns.com/",
+      ],
+    },
+
+    fastboot: {
+      hostWhitelist: [/^localhost:\d+$/]
+    },
+
     unstableApiURL: 'http://simonihmig.github.io/ember-bootstrap/',
     bootstrapVersion: process.env.BOOTSTRAPVERSION || 4
   };
@@ -40,6 +66,10 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
+
+    // testem requires frame-src 'self' to run
+    // https://github.com/rwjblue/ember-cli-content-security-policy/blob/v1.0.0/index.js#L85-L88
+    ENV.contentSecurityPolicy['frame-src'].push('self');
   }
 
   if (environment === 'production') {
