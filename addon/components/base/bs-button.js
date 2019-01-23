@@ -363,7 +363,7 @@ export default Component.extend(TypeClass, SizeClass, {
     let action = this.get('onClick');
     let preventConcurrency = this.get('preventConcurrency');
 
-    if (action === null) {
+    if (action === null || action === undefined) {
       return;
     }
 
