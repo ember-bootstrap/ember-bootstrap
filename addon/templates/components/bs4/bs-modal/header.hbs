@@ -1,4 +1,4 @@
-{{#if hasBlock}}
+{{#if hasBlockParams}}
   {{yield
     (hash
       title=(component titleComponent)
@@ -6,7 +6,11 @@
     )
   }}
 {{else}}
-  {{#component titleComponent}}{{title}}{{/component}}
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    {{#component titleComponent}}{{title}}{{/component}}
+  {{/if}}
 
   {{#if closeButton}}
     {{component closeComponent onClick=(action onClose)}}
