@@ -11,7 +11,7 @@ const SilentError = require('silent-error'); // From ember-cli
 const isModuleUnificationProject = require('../module-unification').isModuleUnificationProject;
 
 
-const bs3Version = '^3.3.7';
+const bs3Version = '^3.4.0';
 const bs4Version = '^4.0.0';
 
 const validPreprocessors = [
