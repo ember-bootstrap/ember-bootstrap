@@ -60,11 +60,12 @@
                 <pre class="prettyprint linenums">
             import { not, alias, and } from &#x27;@ember/object/computed&#x27;;
             import Component from &#x27;@ember/component&#x27;;
-            import { isPresent, isEmpty } from &#x27;@ember/utils&#x27;;
-            import { observer, computed } from &#x27;@ember/object&#x27;;
+            import { isPresent } from &#x27;@ember/utils&#x27;;
+            import { observer } from &#x27;@ember/object&#x27;;
             import { next } from &#x27;@ember/runloop&#x27;;
-            import { htmlSafe, camelize } from &#x27;@ember/string&#x27;;
+            import { camelize } from &#x27;@ember/string&#x27;;
             import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
+            import { assert } from &#x27;@ember/debug&#x27;;
             
             /**
              An Ember component that mimics the behaviour of [Bootstrap&#x27;s collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -88,7 +89,6 @@
             export default Component.extend({
             
               classNameBindings: [&#x27;collapse&#x27;, &#x27;collapsing&#x27;],
-              attributeBindings: [&#x27;style&#x27;],
             
               /**
                * Collapsed/expanded state
@@ -120,13 +120,6 @@
                * @private
                */
               transitioning: false,
-            
-              /**
-               * @property collapseSize
-               * @type number
-               * @private
-               */
-              collapseSize: null,
             
               /**
                * The size of the element when collapsed. Defaults to 0.
@@ -180,14 +173,14 @@
                */
               transitionDuration: 350,
             
-              style: computed(&#x27;collapseSize&#x27;, function() {
-                let size = this.get(&#x27;collapseSize&#x27;);
-                let dimension = this.get(&#x27;collapseDimension&#x27;);
-                if (isEmpty(size)) {
-                  return htmlSafe(&#x27;&#x27;);
-                }
-                return htmlSafe(&#x60;${dimension}: ${size}px&#x60;);
-              }),
+              setCollapseSize() {
+                let { collapseSize: size, collapseDimension: dimension } = this.getProperties(&#x27;collapseSize&#x27;, &#x27;collapseDimension&#x27;);
+            
+                assert(&#x60;collapseDimension must be either &quot;width&quot; or &quot;height&quot;. ${dimension} given.&#x60;, [&quot;width&quot;, &quot;height&quot;].includes(dimension));
+            
+                this.element.style.width = dimension === &#x27;width&#x27; &amp;&amp; size ? &#x60;${size}px&#x60; : &#x27;&#x27;;
+                this.element.style.height = dimension === &#x27;height&#x27; &amp;&amp; size ? &#x60;${size}px&#x60; : &#x27;&#x27;;
+              },
             
               /**
                * The action to be sent when the element is about to be hidden.
@@ -242,14 +235,14 @@
                   }
                   this.set(&#x27;transitioning&#x27;, false);
                   if (this.get(&#x27;resetSizeWhenNotCollapsing&#x27;)) {
-                    this.set(&#x27;collapseSize&#x27;, null);
+                    this.setCollapseSize(null);
                   }
                   this.get(&#x27;onShown&#x27;)();
                 });
             
                 next(this, function() {
                   if (!this.get(&#x27;isDestroyed&#x27;)) {
-                    this.set(&#x27;collapseSize&#x27;, this.getExpandedSize(&#x27;show&#x27;));
+                    this.setCollapseSize(this.getExpandedSize(&#x27;show&#x27;));
                   }
                 });
               },
@@ -285,9 +278,9 @@
             
                 this.setProperties({
                   transitioning: true,
-                  collapseSize: this.getExpandedSize(&#x27;hide&#x27;),
                   active: false
                 });
+                this.setCollapseSize(this.getExpandedSize(&#x27;hide&#x27;));
             
                 transitionEnd(this.get(&#x27;element&#x27;), this.get(&#x27;transitionDuration&#x27;)).then(() =&gt; {
                   if (this.get(&#x27;isDestroyed&#x27;)) {
@@ -295,14 +288,14 @@
                   }
                   this.set(&#x27;transitioning&#x27;, false);
                   if (this.get(&#x27;resetSizeWhenNotCollapsing&#x27;)) {
-                    this.set(&#x27;collapseSize&#x27;, null);
+                    this.setCollapseSize(null);
                   }
                   this.get(&#x27;onHidden&#x27;)();
                 });
             
                 next(this, function() {
                   if (!this.get(&#x27;isDestroyed&#x27;)) {
-                    this.set(&#x27;collapseSize&#x27;, this.get(&#x27;collapsedSize&#x27;));
+                    this.setCollapseSize(this.get(&#x27;collapsedSize&#x27;));
                   }
                 });
               },
@@ -327,13 +320,13 @@
             
               _updateCollapsedSize: observer(&#x27;collapsedSize&#x27;, function() {
                 if (!this.get(&#x27;resetSizeWhenNotCollapsing&#x27;) &amp;&amp; this.get(&#x27;collapsed&#x27;) &amp;&amp; !this.get(&#x27;collapsing&#x27;)) {
-                  this.set(&#x27;collapseSize&#x27;, this.get(&#x27;collapsedSize&#x27;));
+                  this.setCollapseSize(this.get(&#x27;collapsedSize&#x27;));
                 }
               }),
             
               _updateExpandedSize: observer(&#x27;expandedSize&#x27;, function() {
                 if (!this.get(&#x27;resetSizeWhenNotCollapsing&#x27;) &amp;&amp; !this.get(&#x27;collapsed&#x27;) &amp;&amp; !this.get(&#x27;collapsing&#x27;)) {
-                  this.set(&#x27;collapseSize&#x27;, this.get(&#x27;expandedSize&#x27;));
+                  this.setCollapseSize(this.get(&#x27;expandedSize&#x27;));
                 }
               })
             });

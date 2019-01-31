@@ -423,7 +423,7 @@
                 let action = this.get(&#x27;onClick&#x27;);
                 let preventConcurrency = this.get(&#x27;preventConcurrency&#x27;);
             
-                if (action === null) {
+                if (action === null || action === undefined) {
                   return;
                 }
             

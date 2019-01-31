@@ -727,7 +727,14 @@
                * @default false
                * @private
                */
-              showAllValidations: false,
+              showAllValidations: computed({
+                get() {
+                },
+                set(key, value) {
+                  this.set(&#x27;showOwnValidation&#x27;, false);
+                  return value;
+                }
+              }),
             
               /**
                * @property showModelValidations
@@ -747,11 +754,11 @@
             
               /**
                * Event or list of events which enable form validation markup rendering.
-               * Supported events: [&#x27;focusOut&#x27;, &#x27;change&#x27;, &#x27;input&#x27;]
+               * Supported events: [&#x27;focusout&#x27;, &#x27;change&#x27;, &#x27;input&#x27;]
                *
                * @property showValidationOn
                * @type string|array
-               * @default [&#x27;focusOut&#x27;]
+               * @default [&#x27;focusout&#x27;]
                * @public
                */
               showValidationOn: null,
@@ -767,24 +774,58 @@
             
                 assert(&#x27;showValidationOn must be a String or an Array&#x27;, isArray(showValidationOn) || typeOf(showValidationOn) === &#x27;string&#x27;);
                 if (isArray(showValidationOn)) {
-                  return showValidationOn;
+                  return showValidationOn.map((type) =&gt; {
+                    return type.toLowerCase();
+                  });
                 }
             
                 if (typeof showValidationOn.toString === &#x27;function&#x27;) {
-                  return [showValidationOn];
+                  return [showValidationOn.toLowerCase()];
                 }
                 return [];
               }),
             
               /**
                * @method showValidationOnHandler
+               * @params {Event} event
                * @private
                */
-              showValidationOnHandler(event) {
-                if (this.get(&#x27;_showValidationOn&#x27;).indexOf(event) !== -1) {
-                  this.set(&#x27;showOwnValidation&#x27;, true);
+              showValidationOnHandler({ target, type }) {
+                // Should not do anything if
+                if (
+                  // validations are already shown or
+                  this.get(&#x27;showOwnValidation&#x27;) ||
+                  // validations should not be shown for this event type or
+                  this.get(&#x27;_showValidationOn&#x27;).indexOf(type) === -1 ||
+                  // validation should not be shown for this event target
+                  (
+                    isArray(this.get(&#x27;doNotShowValidationForEventTargets&#x27;)) &amp;&amp;
+                    this.get(&#x27;doNotShowValidationForEventTargets.length&#x27;) &gt; 0 &amp;&amp;
+                    [...this.element.querySelectorAll(this.get(&#x27;doNotShowValidationForEventTargets&#x27;).join(&#x27;,&#x27;))]
+                      .some((el) =&gt; el.contains(target))
+                  )
+                ) {
+                  return;
                 }
+            
+                this.set(&#x27;showOwnValidation&#x27;, true);
               },
+            
+              /**
+               * Controls if validation should be shown for specified event targets.
+               *
+               * It expects an array of query selectors. If event target is a children of an event that matches
+               * these selectors, an event triggered for it will not trigger validation errors to be shown.
+               *
+               * By default events fired on elements inside an input group are skipped.
+               *
+               * If &#x60;null&#x60; or an empty array is passed validation errors are shown for all events regardless
+               * of event target.
+               *
+               * @property doNotShowValidationForEventTargets
+               * @type ?array
+               * @public
+               */
             
               /**
                * The validation (&quot;error&quot; (BS3)/&quot;danger&quot; (BS4), &quot;warning&quot;, or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
@@ -951,8 +992,8 @@
                * @event focusOut
                * @private
                */
-              focusOut() {
-                this.showValidationOnHandler(&#x27;focusOut&#x27;);
+              focusOut(event) {
+                this.showValidationOnHandler(event);
               },
             
               /**
@@ -962,8 +1003,8 @@
                * @event change
                * @private
                */
-              change() {
-                this.showValidationOnHandler(&#x27;change&#x27;);
+              change(event) {
+                this.showValidationOnHandler(event);
               },
             
               /**
@@ -973,8 +1014,8 @@
                * @event input
                * @private
                */
-              input() {
-                this.showValidationOnHandler(&#x27;input&#x27;);
+              input(event) {
+                this.showValidationOnHandler(event);
               },
             
               /**

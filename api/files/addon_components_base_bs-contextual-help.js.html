@@ -62,11 +62,9 @@
             import Component from &#x27;@ember/component&#x27;;
             import { guidFor } from &#x27;@ember/object/internals&#x27;;
             import { isArray } from &#x27;@ember/array&#x27;;
-            import { isBlank } from &#x27;@ember/utils&#x27;;
             import EmberObject, { observer, computed } from &#x27;@ember/object&#x27;;
             import { next, schedule, cancel, later, run } from &#x27;@ember/runloop&#x27;;
             import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
-            import getParent from &#x27;ember-bootstrap/utils/get-parent&#x27;;
             import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
             
             const InState = EmberObject.extend({
@@ -287,20 +285,14 @@
                */
               triggerTargetElement: computed(&#x27;triggerElement&#x27;, function() {
                 let triggerElement = this.get(&#x27;triggerElement&#x27;);
-                let el;
             
-                if (isBlank(triggerElement)) {
-                  try {
-                    el = getParent(this);
-                  } catch(e) {
-                    return null;
-                  }
+                if (!triggerElement) {
+                  return this._parent;
                 } else if (triggerElement === &#x27;parentView&#x27;) {
-                  el = this.get(&#x27;parentView.element&#x27;);
+                  return this.get(&#x27;parentView.element&#x27;);
                 } else {
-                  el = document.querySelector(triggerElement);
+                  return document.querySelector(triggerElement);
                 }
-                return el;
               }).volatile(),
             
               /**
@@ -605,7 +597,7 @@
                     this.set(&#x27;inDom&#x27;, false);
                   }
                   this.get(&#x27;onHidden&#x27;)(this);
-                }
+                };
             
                 this.set(&#x27;showHelp&#x27;, false);
             
@@ -667,21 +659,40 @@
                 } catch(e) {} // eslint-disable-line no-empty
               },
             
+              /**
+               * @method handleTriggerEvent
+               * @private
+               */
+              handleTriggerEvent(handler, e) {
+                let overlayElement = this.get(&#x27;overlayElement&#x27;);
+                if (overlayElement &amp;&amp; overlayElement.contains(e.target)) {
+                  return;
+                }
+                return handler.call(this, e);
+              },
+            
               actions: {
                 close() {
+                  // Make sure our click state is off, otherwise the next click would
+                  // close the already-closed tooltip/popover. We don&#x27;t need to worry
+                  // about this for hover/focus because those aren&#x27;t &quot;stateful&quot; toggle
+                  // events like click.
+                  this.set(&#x27;inState.click&#x27;, false);
                   this.hide();
                 }
               },
             
               init() {
                 this._super(...arguments);
-                this._handleEnter = run.bind(this, this.enter);
-                this._handleLeave = run.bind(this, this.leave);
-                this._handleToggle = run.bind(this, this.toggle);
+                this._handleEnter = run.bind(this, this.handleTriggerEvent, this.enter);
+                this._handleLeave = run.bind(this, this.handleTriggerEvent, this.leave);
+                this._handleToggle = run.bind(this, this.handleTriggerEvent, this.toggle);
+                this._parentFinder = self.document ? self.document.createTextNode(&#x27;&#x27;) : &#x27;&#x27;;
               },
             
               didInsertElement() {
                 this._super(...arguments);
+                this._parent = this._parentFinder.parentNode;
                 this.addListeners();
                 if (this.get(&#x27;visible&#x27;)) {
                   next(this, this.show, true);

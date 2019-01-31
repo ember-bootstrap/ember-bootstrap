@@ -61,7 +61,6 @@
             import { readOnly } from &#x27;@ember/object/computed&#x27;;
             import Component from &#x27;@ember/component&#x27;;
             import { computed } from &#x27;@ember/object&#x27;;
-            import { htmlSafe } from &#x27;@ember/string&#x27;;
             import layout from &#x27;ember-bootstrap/templates/components/bs-progress/bar&#x27;;
             import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
             
@@ -80,7 +79,7 @@
               classNames: [&#x27;progress-bar&#x27;],
               classNameBindings: [&#x27;progressBarStriped&#x27;],
             
-              attributeBindings: [&#x27;style&#x27;, &#x27;ariaValuenow&#x27;, &#x27;ariaValuemin&#x27;, &#x27;ariaValuemax&#x27;],
+              attributeBindings: [&#x27;ariaValuenow&#x27;, &#x27;ariaValuemin&#x27;, &#x27;ariaValuemax&#x27;],
             
               /**
                * The lower limit of the value range
@@ -199,16 +198,21 @@
               }).readOnly(),
             
               /**
-               * @property style
-               * @type string
+               * @method updateStyles
+               * @return void
                * @private
-               * @readonly
                */
-              style: computed(&#x27;percent&#x27;, function() {
-                let percent = this.get(&#x27;percent&#x27;);
-                return htmlSafe(&#x60;width: ${percent}%&#x60;);
-              })
+              updateStyles() {
+                let percent = Number.parseFloat(this.get(&#x27;percent&#x27;));
+                this.element.style.width = !Number.isNaN(percent) ? &#x60;${percent}%&#x60; : &#x27;&#x27;;
+              },
             
+              didInsertElement() {
+                this.updateStyles();
+              },
+              didUpdateAttrs() {
+                this.updateStyles();
+              }
             });
             
                 </pre>

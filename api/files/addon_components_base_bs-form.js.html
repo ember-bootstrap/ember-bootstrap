@@ -271,6 +271,18 @@
               preventConcurrency: false,
             
               /**
+               * If true, after successful validation and upon submitting the form, all current element validations will be hidden.
+               * If the form remains visible, the user would have to focus out of elements of submit the form again for the
+               * validations to show up again, as if a fresh new form component had been rendered.
+               *
+               * @property hideValidationsOnSubmit
+               * @type {Boolean}
+               * @default false
+               * @public
+               */
+              hideValidationsOnSubmit: false,
+            
+              /**
                * If set to true novalidate attribute is present on form element
                *
                * @property novalidate
@@ -298,10 +310,10 @@
               /**
                * @property showAllValidations
                * @type boolean
-               * @default false
+               * @default undefined
                * @private
                */
-              showAllValidations: false,
+              showAllValidations: undefined,
             
               /**
                * Action is called before the form is validated (if possible) and submitted.
@@ -360,27 +372,31 @@
                 this.get(&#x27;onBefore&#x27;)(model);
             
                 RSVP.resolve(this.get(&#x27;hasValidator&#x27;) ? this.validate(this.get(&#x27;model&#x27;)) : null)
-                  .then((r) =&gt; {
-                    RSVP.resolve(this.get(&#x27;onSubmit&#x27;)(model, r))
-                      .finally(() =&gt; {
-                        if (!this.get(&#x27;isDestroyed&#x27;)) {
-                          if (this.get(&#x27;pendingSubmissions&#x27;) === 1) {
-                            this.set(&#x27;isSubmitting&#x27;, false);
-                          }
-                          this.decrementProperty(&#x27;pendingSubmissions&#x27;);
-                        }
-                      });
-                  })
-                  .catch((err) =&gt; {
-                    if (!this.get(&#x27;isDestroyed&#x27;)) {
+                  .then(
+                    (r) =&gt; {
+                      if (this.get(&#x27;hideValidationsOnSubmit&#x27;) === true) {
+                        this.set(&#x27;showAllValidations&#x27;, false);
+                      }
+                      return this.get(&#x27;onSubmit&#x27;)(model, r);
+                    },
+                    (err) =&gt; {
                       this.set(&#x27;showAllValidations&#x27;, true);
             
+                      return this.get(&#x27;onInvalid&#x27;)(model, err);
+                    }
+                  )
+                  .finally(() =&gt; {
+                    if (!this.get(&#x27;isDestroyed&#x27;)) {
                       if (this.get(&#x27;pendingSubmissions&#x27;) === 1) {
                         this.set(&#x27;isSubmitting&#x27;, false);
                       }
+            
                       this.decrementProperty(&#x27;pendingSubmissions&#x27;);
             
-                      this.get(&#x27;onInvalid&#x27;)(model, err);
+                      // reset forced hiding of validations
+                      if (this.get(&#x27;showAllValidations&#x27;) === false) {
+                        this.set(&#x27;showAllValidations&#x27;, undefined);
+                      }
                     }
                   });
               },

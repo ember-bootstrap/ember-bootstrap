@@ -1,4 +1,26 @@
 
+## v2.5.0 (2019-01-31)
+
+#### Features
+* [#741](https://github.com/kaliber5/ember-bootstrap/pull/741) Add option to hide all validations after form submission ([@simonihmig](https://github.com/simonihmig))
+* [#746](https://github.com/kaliber5/ember-bootstrap/pull/746) CSP: refactor to not require `style-src 'unsafe-inline` and add test coverage ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#745](https://github.com/kaliber5/ember-bootstrap/pull/745) Fix broken tooltips/popovers in Ember 3.8.0(-beta) ([@simonihmig](https://github.com/simonihmig))
+* [#737](https://github.com/kaliber5/ember-bootstrap/pull/737) Form: click on input group button should not show validations ([@jelhan](https://github.com/jelhan))
+* [#738](https://github.com/kaliber5/ember-bootstrap/pull/738) Modal should not violate CSP style-src 'none' ([@jelhan](https://github.com/jelhan))
+* [#735](https://github.com/kaliber5/ember-bootstrap/pull/735) Fix popover clicks ([@bendemboski](https://github.com/bendemboski))
+* [#730](https://github.com/kaliber5/ember-bootstrap/pull/730) Form submission state reflects Promise returned by onInvalid action ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#744](https://github.com/kaliber5/ember-bootstrap/pull/744) Fix failing build under node 6 ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 5
+- Ben Demboski ([@bendemboski](https://github.com/bendemboski))
+- Lou Greenwood ([@lougreenwood](https://github.com/lougreenwood))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- Sumeet Attree ([@sumeetattree](https://github.com/sumeetattree))
+- jelhan ([@jelhan](https://github.com/jelhan))
 ## v2.4.0 (2018-12-18)
 
 #### Features

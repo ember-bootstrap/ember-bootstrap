@@ -61,7 +61,6 @@
             import { isBlank } from &#x27;@ember/utils&#x27;;
             import Component from &#x27;@ember/component&#x27;;
             import { computed } from &#x27;@ember/object&#x27;;
-            import { htmlSafe } from &#x27;@ember/string&#x27;;
             import { bind } from &#x27;@ember/runloop&#x27;;
             import { readOnly } from &#x27;@ember/object/computed&#x27;;
             import layout from &#x27;ember-bootstrap/templates/components/bs-modal/dialog&#x27;;
@@ -78,7 +77,7 @@
               layout,
               classNames: [&#x27;modal&#x27;],
               classNameBindings: [&#x27;fade&#x27;],
-              attributeBindings: [&#x27;tabindex&#x27;, &#x27;style&#x27;, &#x27;aria-labelledby&#x27;],
+              attributeBindings: [&#x27;tabindex&#x27;, &#x27;aria-labelledby&#x27;],
               ariaRole: &#x27;dialog&#x27;,
               tabindex: &#x27;-1&#x27;,
               &quot;aria-labelledby&quot;: readOnly(&#x27;titleId&#x27;),
@@ -161,29 +160,6 @@
               backdropClose: true,
             
               /**
-               * @property style
-               * @type string
-               * @readOnly
-               * @private
-               */
-              style: computed(&#x27;inDom&#x27;, &#x27;paddingLeft&#x27;, &#x27;paddingRight&#x27;, function() {
-                let styles = [];
-                let { inDom, paddingLeft, paddingRight } = this.getProperties(&#x27;inDom&#x27;, &#x27;paddingLeft&#x27;, &#x27;paddingRight&#x27;);
-            
-                if (inDom) {
-                  styles.push(&#x27;display: block&#x27;);
-                }
-                if (paddingLeft) {
-                  styles.push(&#x60;padding-left: ${paddingLeft}px&#x60;);
-                }
-                if (paddingRight) {
-                  styles.push(&#x60;padding-right: ${paddingRight}px&#x60;);
-                }
-            
-                return htmlSafe(styles.join(&#x27;;&#x27;));
-              }),
-            
-              /**
                * Name of the size class
                *
                * @property sizeClass
@@ -207,7 +183,7 @@
                */
               titleId: null,
             
-            /**
+              /**
                * Gets or sets the id of the title element for aria accessibility tags
                *
                * @method getSetTitleID
@@ -233,6 +209,23 @@
                   this.set(&#x27;titleId&#x27;, nodeId)
               },
             
+              /**
+               * Update the elements styles using CSSOM.
+               *
+               * This is necessary cause binding style attribute would require a
+               * Content-Security-Policy &#x60;style-src &#x27;unsafe-line&#x27;&#x60;.
+               *
+               * @method updateStyle
+               * @return void
+               * @private
+               */
+              updateStyles() {
+                let { inDom, paddingLeft, paddingRight } = this.getProperties(&#x27;inDom&#x27;, &#x27;paddingLeft&#x27;, &#x27;paddingRight&#x27;);
+            
+                this.element.style.display = inDom ? &#x27;block&#x27; : &#x27;&#x27;;
+                this.element.style.paddingLeft = paddingLeft || &#x27;&#x27;;
+                this.element.style.paddingRight = paddingRight || &#x27;&#x27;;
+              },
             
               /**
                * @event onClose
@@ -261,6 +254,11 @@
                 // directly to the element
                 this.element.onclick = bind(this, this._click);
                 this.getOrSetTitleId();
+                this.updateStyles();
+              },
+            
+              didUpdateAttrs() {
+                this.updateStyles();
               },
             
               willDestroyElement() {
