@@ -260,7 +260,11 @@ export default Component.extend({
       assert('You cannot use the form element\'s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!',
         isPresent(model) && isPresent(property)
       );
-      set(model, property, value);
+      if (typeof model.set === 'function') {
+        model.set(property, value);
+      } else {
+        set(model, property, value);
+      }
     }
   }
 });
