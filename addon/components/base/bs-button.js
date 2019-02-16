@@ -214,13 +214,23 @@ export default Component.extend(TypeClass, SizeClass, {
    * @property icon
    * @type String
    * @readonly
-   * @protected
+   * @public
    */
-  icon: computed('active', function() {
-    if (this.get('active')) {
-      return this.get('iconActive');
-    } else {
-      return this.get('iconInactive');
+  icon: computed('active', {
+    get() {
+      if (this._icon) {
+        return this._icon;
+      }
+
+      if (this.get('active')) {
+        return this.get('iconActive');
+      } else {
+        return this.get('iconInactive');
+      }
+    },
+    set(key, val) {
+      this._icon = val;
+      return val;
     }
   }),
 
