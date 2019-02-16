@@ -3,9 +3,11 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-nav', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   test('it has correct markup', async function(assert) {
     // Template block usage:

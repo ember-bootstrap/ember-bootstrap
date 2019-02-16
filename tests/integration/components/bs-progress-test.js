@@ -4,10 +4,12 @@ import { render } from '@ember/test-helpers';
 import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
+import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-progress', function(hooks) {
   setupRenderingTest(hooks);
   setupStylesheetSupport(hooks);
+  setupNoDeprecations(hooks);
 
   test('bs-progress has correct markup', async function(assert) {
     // Template block usage:

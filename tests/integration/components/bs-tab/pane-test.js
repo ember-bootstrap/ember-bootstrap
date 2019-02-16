@@ -7,9 +7,11 @@ import {
   visibilityClass
 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-tab/pane', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   test('it has correct markup', async function(assert) {
     await render(hbs`

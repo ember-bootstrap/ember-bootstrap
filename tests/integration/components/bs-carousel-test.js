@@ -4,6 +4,7 @@ import { render, click, triggerEvent, getContext } from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import { test, testBS3, testBS4, delay } from '../../helpers/bootstrap-test';
 import { skip } from 'qunit';
+import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
 const TRANSITION_DURATION = 50;
 
@@ -48,6 +49,7 @@ function waitTransitionTime(interval = 450) {
 
 module('Integration | Component | bs-carousel', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   hooks.beforeEach(function() {
     this.set('interval', 300);

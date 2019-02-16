@@ -13,9 +13,11 @@ import {
   test,
   visibilityClass
 } from '../../../helpers/bootstrap-test';
+import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-accordion-item', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   hooks.beforeEach(function() {
     this.actions = {};
