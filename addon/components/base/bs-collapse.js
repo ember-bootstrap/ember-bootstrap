@@ -113,8 +113,8 @@ export default Component.extend({
    */
   transitionDuration: 350,
 
-  setCollapseSize() {
-    let { collapseSize: size, collapseDimension: dimension } = this.getProperties('collapseSize', 'collapseDimension');
+  setCollapseSize(size) {
+    let dimension = this.get('collapseDimension');
 
     assert(`collapseDimension must be either "width" or "height". ${dimension} given.`, ["width", "height"].includes(dimension));
 
@@ -165,9 +165,9 @@ export default Component.extend({
 
     this.setProperties({
       transitioning: true,
-      collapseSize: this.get('collapsedSize'),
       active: true
     });
+    this.setCollapseSize(this.get('collapsedSize'));
 
     transitionEnd(this.get('element'), this.get('transitionDuration')).then(() => {
       if (this.get('isDestroyed')) {
