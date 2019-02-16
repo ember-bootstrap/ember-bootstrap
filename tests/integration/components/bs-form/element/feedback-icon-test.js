@@ -2,9 +2,11 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs form/element/feedback icon', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   test('is empty by default', async function(assert) {
 

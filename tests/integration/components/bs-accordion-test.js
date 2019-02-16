@@ -12,9 +12,11 @@ import {
   testBS4,
   visibilityClass
 } from '../../helpers/bootstrap-test';
+import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-accordion', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   hooks.beforeEach(function() {
     this.actions = {};
