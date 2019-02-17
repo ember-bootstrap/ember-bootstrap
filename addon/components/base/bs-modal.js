@@ -493,7 +493,9 @@ export default Component.extend(TransitionSupport, {
         }
       });
     };
-    this.set('inDom', true);
+    if (this.get('inDom') !== true) {
+      this.set('inDom', true);
+    }
     this.handleBackdrop(callback);
   },
 
