@@ -95,5 +95,5 @@ export default ContextualHelp.extend({
    */
   arrowElement: computed('overlayElement', function() {
     return this.get('overlayElement').querySelector('.tooltip-arrow');
-  }).volatile()
+  })
 });
