@@ -50,7 +50,7 @@ import { findElementById, getDOM } from '../../utils/dom';
  @uses Mixins.TransitionSupport
  @public
  */
-export default Component.extend(TransitionSupport, {
+let component = Component.extend(TransitionSupport, {
   layout,
 
   /**
@@ -86,7 +86,7 @@ export default Component.extend(TransitionSupport, {
    * @default true
    * @public
    */
-  fade: not('isFastBoot'),
+  fade: undefined,
 
   /**
    * @property notFade
@@ -211,18 +211,6 @@ export default Component.extend(TransitionSupport, {
   }),
 
   /**
-   * The DOM element of the `.modal` element.
-   *
-   * @property modalElement
-   * @type object
-   * @readonly
-   * @private
-   */
-  modalElement: computed('modalId', function() {
-    return document.getElementById(this.get('modalId'));
-  }).volatile(),
-
-  /**
    * The id of the backdrop element.
    *
    * @property backdropId
@@ -233,31 +221,6 @@ export default Component.extend(TransitionSupport, {
   backdropId: computed('elementId', function() {
     return `${this.get('elementId')}-backdrop`;
   }),
-
-  /**
-   * The DOM element of the backdrop element.
-   *
-   * @property backdropElement
-   * @type object
-   * @readonly
-   * @private
-   */
-  backdropElement: computed('backdropId', function() {
-    return document.getElementById(this.get('backdropId'));
-  }).volatile(),
-
-  /**
-   * The destination DOM element for ember-popper.
-   *
-   * @property destinationElement
-   * @type object
-   * @readonly
-   * @private
-   */
-  destinationElement: computed(function() {
-    let dom = getDOM(this);
-    return findElementById(dom, 'ember-bootstrap-wormhole');
-  }).volatile(),
 
   /**
    * Property for size styling, set to null (default), 'lg' or 'sm'
@@ -715,10 +678,62 @@ export default Component.extend(TransitionSupport, {
   init() {
     this._super(...arguments);
     let { isOpen, backdrop, fade, isFastBoot } = this.getProperties('isOpen', 'backdrop', 'fade', 'isFastBoot');
+    if (fade === undefined) {
+      fade = !isFastBoot;
+    }
     this.setProperties({
       showModal: isOpen && (!fade || isFastBoot),
       showBackdrop: isOpen && backdrop,
-      inDom: isOpen
+      inDom: isOpen,
+      fade
     });
   }
 });
+
+Object.defineProperties(component.prototype, {
+
+  /**
+   * The DOM element of the `.modal` element.
+   *
+   * @property modalElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  modalElement: {
+    get() {
+      return document.getElementById(this.get('modalId'));
+    }
+  },
+
+  /**
+   * The DOM element of the backdrop element.
+   *
+   * @property backdropElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  backdropElement: {
+    get() {
+      return document.getElementById(this.get('backdropId'));
+    }
+  },
+
+  /**
+   * The destination DOM element for ember-popper.
+   *
+   * @property destinationElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  destinationElement: {
+    get() {
+      let dom = getDOM(this);
+      return findElementById(dom, 'ember-bootstrap-wormhole');
+    }
+  }
+});
+
+export default component;
