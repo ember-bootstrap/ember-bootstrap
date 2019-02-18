@@ -214,7 +214,7 @@ export default Component.extend({
    */
   menuElement: computed(function() {
     return document.getElementById(`${this.get('elementId')}__menu`);
-  }).volatile(),
+  }),
 
   /**
    * @property toggleElement
