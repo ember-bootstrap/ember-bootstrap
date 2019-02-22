@@ -22,8 +22,6 @@ module.exports = function(environment) {
       'default-src': ["'none'"],
       'script-src':  [
         "'self'",
-        // test file loaded assertion injected as <script> tag by ember-cli
-        "'sha256-37u63EBe1EibDZ3vZNr6mxLepqlY1CQw+4N89HrzP9s='",
       ],
       'font-src':    ["'self'"],
       'connect-src': ["'self'"],
