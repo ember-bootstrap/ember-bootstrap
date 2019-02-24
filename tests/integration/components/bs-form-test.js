@@ -470,9 +470,28 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.dom('form .state').doesNotHaveClass('is-submitting');
   });
 
-  test('Yields #isSubmitted', async function(assert) {
+  test('Yielded #isSubmitted is true if onSubmit resolves', async function(assert) {
     this.actions.submit = this.stub().resolves();
     await render(hbs`{{#bs-form onSubmit=(action "submit") as |form|}}
+      <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
+    {{/bs-form}}`);
+
+    await triggerEvent('form', 'submit');
+    assert.dom('form button').hasClass('is-submitted');
+  });
+
+  test('Yielded #isSubmitted is true if onSubmit is undefined', async function(assert) {
+    await render(hbs`{{#bs-form as |form|}}
+      <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
+    {{/bs-form}}`);
+
+    await triggerEvent('form', 'submit');
+    assert.dom('form button').hasClass('is-submitted');
+  });
+
+  test('Yielded #isSubmitted is true if validation passes', async function(assert) {
+    this.actions.validate = this.stub().resolves();
+    await render(hbs`{{#bs-form validate=(action "validate") hasValidator=true as |form|}}
       <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
     {{/bs-form}}`);
 
