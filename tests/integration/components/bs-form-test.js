@@ -470,6 +470,97 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.dom('form .state').doesNotHaveClass('is-submitting');
   });
 
+  test('Yielded #isSubmitted is true if onSubmit resolves', async function(assert) {
+    this.actions.submit = this.stub().resolves();
+    await render(hbs`{{#bs-form onSubmit=(action "submit") as |form|}}
+      <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
+    {{/bs-form}}`);
+
+    await triggerEvent('form', 'submit');
+    assert.dom('form button').hasClass('is-submitted');
+  });
+
+  test('Yielded #isSubmitted is true if onSubmit is undefined', async function(assert) {
+    await render(hbs`{{#bs-form as |form|}}
+      <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
+    {{/bs-form}}`);
+
+    await triggerEvent('form', 'submit');
+    assert.dom('form button').hasClass('is-submitted');
+  });
+
+  test('Yielded #isSubmitted is true if validation passes', async function(assert) {
+    this.actions.validate = this.stub().resolves();
+    await render(hbs`{{#bs-form validate=(action "validate") hasValidator=true as |form|}}
+      <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
+    {{/bs-form}}`);
+
+    await triggerEvent('form', 'submit');
+    assert.dom('form button').hasClass('is-submitted');
+  });
+
+  test('A change to a form elements resets yielded #isSubmitted', async function(assert) {
+    this.actions.submit = this.stub().resolves();
+    await render(hbs`{{#bs-form onSubmit=(action "submit") model=(hash) as |form|}}
+      {{form.element property="foo"}}
+      <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
+    {{/bs-form}}`);
+
+    await triggerEvent('form', 'submit');
+    assert.dom('form button').hasClass('is-submitted', 'assumption');
+
+    await fillIn('input', 'bar');
+    assert.dom('form button').doesNotHaveClass('is-submitted');
+  });
+
+  test('Yielded #isRejected is true if onSubmit action rejects', async function(assert) {
+    this.actions.submit = this.stub().rejects();
+    await render(hbs`{{#bs-form onSubmit=(action "submit") as |form|}}
+      <button type="submit" class={{if form.isRejected "is-rejected"}}>submit</button>
+    {{/bs-form}}`);
+
+    await triggerEvent('form', 'submit');
+    assert.dom('form button').hasClass('is-rejected');
+  });
+
+  test('Yielded #isRejected is true if validation fails', async function(assert) {
+    this.actions.validate = this.stub().rejects();
+    await render(hbs`{{#bs-form validate=(action "validate") hasValidator=true as |form|}}
+      <button type="submit" class={{if form.isRejected "is-rejected"}}>submit</button>
+    {{/bs-form}}`);
+
+    await triggerEvent('form', 'submit');
+    assert.dom('form button').hasClass('is-rejected');
+  });
+
+  test('A change to a form elements resets yielded #isRejected', async function(assert) {
+    this.actions.submit = this.stub().rejects();
+    await render(hbs`{{#bs-form onSubmit=(action "submit") model=(hash) as |form|}}
+      {{form.element property="foo"}}
+      <button type="submit" class={{if form.isRejected "is-rejected"}}>submit</button>
+    {{/bs-form}}`);
+
+    await triggerEvent('form', 'submit');
+    assert.dom('form button').hasClass('is-rejected', 'assumption');
+
+    await fillIn('input', 'bar');
+    assert.dom('form button').doesNotHaveClass('is-rejected');
+  });
+
+  test('Triggering resetSubmissionState resets submission state of form', async function(assert) {
+    this.actions.submit = this.stub().resolves();
+    await render(hbs`{{#bs-form onSubmit=(action "submit") model=(hash) as |form|}}
+      <input onchange={{form.resetSubmissionState}}>
+      <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
+    {{/bs-form}}`);
+
+    await triggerEvent('form', 'submit');
+    assert.dom('form button').hasClass('is-submitted', 'assumption');
+
+    await fillIn('input', 'bar');
+    assert.dom('form button').doesNotHaveClass('is-submitted');
+  });
+
   test('Adds default onChange action to form elements that updates model\'s property', async function(assert) {
     let model = EmberObject.create({
       name: 'foo'

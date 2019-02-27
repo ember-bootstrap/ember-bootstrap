@@ -969,6 +969,14 @@ export default FormGroup.extend({
    */
   onChange() {},
 
+  /**
+   * Private duplicate of onChange event used for internal state handling between form and it's elements.
+   *
+   * @event _onChange
+   * @private
+   */
+  _onChange() {},
+
   init() {
     this._super(...arguments);
     if (this.get('showValidationOn') === null) {
@@ -1029,8 +1037,9 @@ export default FormGroup.extend({
 
   actions: {
     change(value) {
-      let { onChange, model, property } = this.getProperties('onChange', 'model', 'property');
+      let { onChange, model, property, _onChange } = this.getProperties('onChange', 'model', 'property', '_onChange');
       onChange(value, model, property);
+      _onChange();
     }
   }
 });
