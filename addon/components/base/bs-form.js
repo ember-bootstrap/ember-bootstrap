@@ -85,7 +85,7 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
   ```
 
   Additionaly `isSubmitted` and `isRejected` properties are yielded. `isSubmitted` is `true` if last submission was successful.
-  `isRejected` is `true` if last submission was rejected due to validation errors or by action bound to `onSubmit` event.
+  `isRejected` is `true` if last submission was rejected due to validation errors or by an action bound to `onSubmit` event, returning a rejected promise.
   Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:
 
   ```
