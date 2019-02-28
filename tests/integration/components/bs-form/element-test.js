@@ -20,6 +20,7 @@ import {
   formHelpTextClass
 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
 const formLayouts = ['vertical', 'horizontal', 'inline'];
 const supportedInputAttributes = {
@@ -89,6 +90,7 @@ const supportedRadioAttributes = {
 
 module('Integration | Component | bs-form/element', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   test('component has form-group bootstrap class', async function(assert) {
     await render(hbs`{{bs-form/element}}`);
@@ -401,7 +403,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     );
     await render(hbs`
       {{#bs-form model=model as |form|}}
-        {{#form.element label="Gender" property="gender" validation="success" as |el|}}
+        {{#form.element label="Gender" property="gender" showAllValidations=true hasValidator=true as |el|}}
           <div id="value">{{el.value}}</div>
           <div id="id">{{el.id}}</div>
           <div id="validation">{{el.validation}}</div>
@@ -579,12 +581,12 @@ module('Integration | Component | bs-form/element', function(hooks) {
   });
 
   testBS3('adjusts validation icon position if there is an input group', async function(assert) {
-    assert.expect(6);
-    this.set('validation', 'success');
+    assert.expect(5);
+    this.set('errors', A([]));
     this.set('formLayout', 'vertical');
     await render(hbs`
       {{#bs-form formLayout=formLayout as |form|}}
-        {{#form.element validation=validation label='adjusts validation icon position' classNames='addon'}}
+        {{#form.element showAllValidations=true hasValidator=true errors=errors label='adjusts validation icon position' classNames='addon'}}
           <div class="input-group">
             <input class="form-control">
             <div class="input-group-addon">
@@ -592,7 +594,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
             </div>
           </div>
         {{/form.element}}
-        {{#form.element validation=validation label='adjusts validation icon position' classNames='button'}}
+        {{#form.element showAllValidations=true hasValidator=true errors=errors label='adjusts validation icon position' classNames='button'}}
           <div class="input-group">
             <input class="form-control">
             <div class="input-group-btn">
@@ -617,18 +619,14 @@ module('Integration | Component | bs-form/element', function(hooks) {
       'works for button on init'
     );
     let expectedRightValue = this.element.querySelector('.addon .form-control-feedback').style.right;
-    this.set('validation', null);
-    assert.ok(
-      this.element.querySelectorAll('.form-control-feedback').length === 0,
-      'assumption'
-    );
-    this.set('validation', 'error');
+
+    this.set('errors', A(['Some error']));
     assert.equal(
       this.element.querySelector('.addon .form-control-feedback').style.right,
       expectedRightValue,
       'adjusts correctly after validation changed from null'
     );
-    this.set('validation', 'success');
+    this.set('errors', A([]));
     await fillIn('.addon input', 'foo');
     await triggerEvent('.addon input', 'change');
     assert.equal(

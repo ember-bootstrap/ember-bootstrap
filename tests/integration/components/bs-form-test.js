@@ -16,6 +16,7 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 import { defer } from 'rsvp';
 import { next, run } from '@ember/runloop';
+import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
 const nextRunloop = function() {
   return new Promise((resolve) => {
@@ -27,6 +28,7 @@ const nextRunloop = function() {
 
 module('Integration | Component | bs-form', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   hooks.beforeEach(function() {
     this.actions = {};

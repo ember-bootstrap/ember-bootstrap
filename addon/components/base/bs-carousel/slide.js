@@ -3,6 +3,7 @@ import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import layout from 'ember-bootstrap/templates/components/bs-carousel/slide';
 import { computed, observer } from '@ember/object';
 import { next } from '@ember/runloop';
+import overrideableCP from '../../../utils/overrideable-cp';
 /**
   A visible user-defined slide.
 
@@ -24,7 +25,7 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  active: computed('isCurrentSlide', 'presentationState', function() {
+  active: overrideableCP('isCurrentSlide', 'presentationState', function() {
     return this.get('isCurrentSlide') && this.get('presentationState') === null;
   }),
 

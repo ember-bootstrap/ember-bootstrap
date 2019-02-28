@@ -91,6 +91,9 @@ module.exports = function() {
             devDependencies: {
               'ember-source': urls[0]
             }
+          },
+          env: {
+            FAIL_ON_DEPRECATION: true
           }
         },
         {
@@ -99,6 +102,9 @@ module.exports = function() {
             devDependencies: {
               'ember-source': urls[1]
             }
+          },
+          env: {
+            FAIL_ON_DEPRECATION: true
           }
         },
         {
@@ -107,6 +113,9 @@ module.exports = function() {
             devDependencies: {
               'ember-source': urls[2]
             }
+          },
+          env: {
+            FAIL_ON_DEPRECATION: true
           }
         },
         {

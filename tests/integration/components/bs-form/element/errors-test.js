@@ -4,9 +4,11 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { formFeedbackClass, test } from '../../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs form/element/errors', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   test('is empty by default', async function(assert) {
 

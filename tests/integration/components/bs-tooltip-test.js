@@ -17,10 +17,12 @@ import {
   assertPositioning
 } from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
+import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-tooltip', function(hooks) {
   setupRenderingTest(hooks);
   setupStylesheetSupport(hooks);
+  setupNoDeprecations(hooks);
 
   hooks.beforeEach(function() {
     this.actions = {};

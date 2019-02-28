@@ -11,9 +11,11 @@ import {
   testRequiringTransitions
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-modal-simple', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   hooks.beforeEach(function() {
     this.actions = {};
@@ -419,6 +421,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
       hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}{{/if}}`
     );
     this.set('show', true);
+    await settled();
 
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     assert.dom('#ember-bootstrap-wormhole .modal').exists({ count: 1 }, 'Modal exists in wormhole');

@@ -8,10 +8,12 @@ import {
   assertPositioning
 } from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
+import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-popover', function(hooks) {
   setupRenderingTest(hooks);
   setupStylesheetSupport(hooks);
+  setupNoDeprecations(hooks);
 
   test('it has correct markup', async function(assert) {
     // Template block usage:
