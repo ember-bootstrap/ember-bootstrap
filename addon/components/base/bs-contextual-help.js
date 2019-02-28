@@ -207,6 +207,22 @@ let component = Component.extend(TransitionSupport, {
   triggerElement: null,
 
   /**
+   * @method getTriggerTargetElement
+   * @private
+   */
+  getTriggerTargetElement() {
+    let triggerElement = this.get('triggerElement');
+
+    if (!triggerElement) {
+      return this._parent;
+    } else if (triggerElement === 'parentView') {
+      return this.get('parentView.element');
+    } else {
+      return document.querySelector(triggerElement);
+    }
+  },
+
+  /**
    * The event(s) that should trigger the tooltip/popover - click | hover | focus.
    * You can set this to a single event or multiple events, given as an array or a string separated by spaces.
    *
@@ -605,6 +621,7 @@ let component = Component.extend(TransitionSupport, {
   didInsertElement() {
     this._super(...arguments);
     this._parent = this._parentFinder.parentNode;
+    this.triggerTargetElement = this.getTriggerTargetElement();
     this.addListeners();
     if (this.get('visible')) {
       next(this, this.show, true);
@@ -627,24 +644,6 @@ let component = Component.extend(TransitionSupport, {
 });
 
 Object.defineProperties(component.prototype, {
-  /**
-   * @property triggerTargetElement
-   * @type {object}
-   * @private
-   */
-  triggerTargetElement: {
-    get() {
-      let triggerElement = this.get('triggerElement');
-
-      if (!triggerElement) {
-        return this._parent;
-      } else if (triggerElement === 'parentView') {
-        return this.get('parentView.element');
-      } else {
-        return document.querySelector(triggerElement);
-      }
-    }
-  },
 
   /**
    * The DOM element of the overlay element.

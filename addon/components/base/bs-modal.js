@@ -259,7 +259,7 @@ let component = Component.extend(TransitionSupport, {
    * @private
    */
   _renderInPlace: computed('renderInPlace', 'destinationElement', function() {
-    return this.get('renderInPlace') || !this.get('destinationElement');
+    return this.get('renderInPlace') || !this.destinationElement;
   }),
 
   /**
@@ -681,11 +681,14 @@ let component = Component.extend(TransitionSupport, {
     if (fade === undefined) {
       fade = !isFastBoot;
     }
+    let dom = getDOM(this);
+    let destinationElement = findElementById(dom, 'ember-bootstrap-wormhole');
     this.setProperties({
       showModal: isOpen && (!fade || isFastBoot),
       showBackdrop: isOpen && backdrop,
       inDom: isOpen,
-      fade
+      fade,
+      destinationElement
     });
   }
 });
@@ -717,21 +720,6 @@ Object.defineProperties(component.prototype, {
   backdropElement: {
     get() {
       return document.getElementById(this.get('backdropId'));
-    }
-  },
-
-  /**
-   * The destination DOM element for ember-popper.
-   *
-   * @property destinationElement
-   * @type object
-   * @readonly
-   * @private
-   */
-  destinationElement: {
-    get() {
-      let dom = getDOM(this);
-      return findElementById(dom, 'ember-bootstrap-wormhole');
     }
   }
 });
