@@ -1,11 +1,11 @@
 import FormElement from 'ember-bootstrap/components/base/bs-form/element';
-import { computed } from '@ember/object';
 
 export default FormElement.extend({
-  doNotShowValidationForEventTargets: computed(function() {
-    return [
+  init() {
+    this._super(...arguments);
+    this.set('doNotShowValidationForEventTargets', [
       '.input-group-addon',
       '.input-group-btn',
-    ];
-  }),
+    ]);
+  }
 });
