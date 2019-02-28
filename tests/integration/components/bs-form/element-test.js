@@ -620,13 +620,13 @@ module('Integration | Component | bs-form/element', function(hooks) {
     );
     let expectedRightValue = this.element.querySelector('.addon .form-control-feedback').style.right;
 
-    this.get('errors').pushObject('Some error');
+    this.set('errors', A(['Some error']));
     assert.equal(
       this.element.querySelector('.addon .form-control-feedback').style.right,
       expectedRightValue,
       'adjusts correctly after validation changed from null'
     );
-    this.set('validation', 'success');
+    this.set('errors', A([]));
     await fillIn('.addon input', 'foo');
     await triggerEvent('.addon input', 'change');
     assert.equal(
