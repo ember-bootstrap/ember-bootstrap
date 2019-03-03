@@ -5,6 +5,7 @@ import { render, click } from '@ember/test-helpers';
 import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import { testBS3 } from '../../helpers/bootstrap-test';
 
 module('Integration | Component | bs-button-group', function(hooks) {
   setupRenderingTest(hooks);
@@ -22,6 +23,14 @@ module('Integration | Component | bs-button-group', function(hooks) {
 
     assert.dom('.btn-group').exists('has btn-group class');
     assert.dom('.btn-group').hasClass('btn-group-lg', 'has size class');
+  });
+
+  testBS3('button group supports justified layout', async function(assert) {
+    await render(
+      hbs`{{#bs-button-group justified=true as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+    );
+
+    assert.dom('.btn-group').exists('has btn-group class');
     assert.dom('.btn-group').hasClass('btn-group-justified', 'has justified class');
   });
 
