@@ -50,6 +50,12 @@ If you want to keep up to date with ember-bootstrap, you may want to [follow me 
 * [Stephen Vance](https://github.com/srvance)
 * and many more [contributors](https://github.com/kaliber5/ember-bootstrap/graphs/contributors)
 
+## Credits
+
+Cross-browser testing provided by:
+
+<a href="https://www.browserstack.com"><img height="70" src="docs/Browserstack-logo.svg" alt="BrowserStack"></a>
+
 ## Copyright and license
 
 Code and documentation copyright 2018 [kaliber5](http://www.kaliber5.de) and contributors. Code released under [the MIT license](LICENSE.md).

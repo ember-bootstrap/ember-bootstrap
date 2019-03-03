@@ -22,6 +22,8 @@
 *.iml
 .publish
 .env
+*.pid
+*.log
 
 # ember-try
 /.node_modules.ember-try/
