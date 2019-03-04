@@ -54,7 +54,7 @@ const nonDefaultLayouts = A([
 
  ```hbs
  {{#bs-form model=this onSubmit=(action "submit") as |form|}}
-   {{form.element label="Gender" options=genderOptions optionLabelPath="title" property="gender"}}
+   {{form.element controlType="radio" label="Gender" options=genderOptions optionLabelPath="title" property="gender"}}
  {{/bs-form}}
  ```
 
@@ -63,7 +63,7 @@ const nonDefaultLayouts = A([
 
  ```hbs
  {{#bs-form model=this onSubmit=(action "submit") as |form|}}
-   {{#form.element label="Gender" options=genderOptions property="gender" as |el|}}
+   {{#form.element controlType="radio" label="Gender" options=genderOptions property="gender" as |el|}}
      {{el.control inline=true}}
    {{/form.element}}
  {{/bs-form}}
