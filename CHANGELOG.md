@@ -1,4 +1,29 @@
 
+## v2.6.0 (2019-03-05)
+
+#### Features
+* [#732](https://github.com/kaliber5/ember-bootstrap/pull/732) Form yields isSubmitted and isRejected properties ([@jelhan](https://github.com/jelhan))
+* [#753](https://github.com/kaliber5/ember-bootstrap/pull/753) Forms use the set function of the model if it is present ([@nickschot](https://github.com/nickschot))
+
+#### Bug Fixes
+* [#767](https://github.com/kaliber5/ember-bootstrap/pull/767) Fix IE11 errors in Collapse and Progress components ([@simonihmig](https://github.com/simonihmig))
+* [#766](https://github.com/kaliber5/ember-bootstrap/pull/766) Fix inline radio element used with optionLabelPath (BS3) ([@kumy](https://github.com/kumy))
+* [#756](https://github.com/kaliber5/ember-bootstrap/pull/756) Fixed deprecations in Ember 3.8.0-beta and 3.9-canary ([@simonihmig](https://github.com/simonihmig))
+* [#754](https://github.com/kaliber5/ember-bootstrap/pull/754) Fix transition for bs-collapse ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#765](https://github.com/kaliber5/ember-bootstrap/pull/765) Add controlType in radio examples ([@kumy](https://github.com/kumy))
+
+#### Internal
+* [#764](https://github.com/kaliber5/ember-bootstrap/pull/764) Drop Saucelabs in favour of Browserstack ([@simonihmig](https://github.com/simonihmig))
+* [#763](https://github.com/kaliber5/ember-bootstrap/pull/763) Make ButtonGroup's justified property BS3 only ([@simonihmig](https://github.com/simonihmig))
+* [#758](https://github.com/kaliber5/ember-bootstrap/pull/758) tests: remove work-a-round for qunit test runner CSP violation ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 4
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@kumy](https://github.com/kumy)
+- jelhan ([@jelhan](https://github.com/jelhan))
 ## v2.5.0 (2019-01-31)
 
 #### Features
