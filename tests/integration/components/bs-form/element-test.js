@@ -280,6 +280,29 @@ module('Integration | Component | bs-form/element', function(hooks) {
       assert.dom('label.radio-inline input[type=radio]').exists({ count: 2 });
     });
 
+    testBS3('supports inline for hash options', async function(assert) {
+      await render(hbs`
+        {{#bs-form/element controlType="radio" options=hashOptions optionLabelPath="title" as |Element|}}
+          {{Element.control inline=true}}
+        {{/bs-form/element}}
+      `);
+
+      // inline support
+      assert.dom('.radio').doesNotExist();
+      assert.dom('label.radio-inline').exists({ count: 2 });
+      assert.dom('label.radio-inline input[type=radio]').exists({ count: 2 });
+
+      // hash support
+      assert.dom(this.element.querySelectorAll('label')[0]).hasText('foo');
+      assert.dom(this.element.querySelectorAll('label')[1]).hasText('bar');
+      assert.dom(this.element.querySelectorAll('label')[0]).hasAttribute('for',
+        this.element.querySelectorAll('input[type=radio]')[0].getAttribute('id')
+      );
+      assert.dom(this.element.querySelectorAll('label')[1]).hasAttribute('for',
+        this.element.querySelectorAll('input[type=radio]')[1].getAttribute('id')
+      );
+    });
+
     testBS4('has correct markup', async function(assert) {
       await render(hbs`{{bs-form/element controlType="radio" options=simpleOptions}}`);
 
