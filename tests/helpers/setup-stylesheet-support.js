@@ -1,5 +1,7 @@
+import { A } from '@ember/array';
+
 export default function({ beforeEach, afterEach }) {
-  let styleSheet = [...document.styleSheets].find((sheet) => sheet.href.includes('test-support.css'));
+  let styleSheet = A(Array.prototype.slice.call(document.styleSheets)).find((sheet) => sheet.href.indexOf('test-support.css') !== -1);
   let numberOfInsertedRules;
 
   beforeEach(function() {

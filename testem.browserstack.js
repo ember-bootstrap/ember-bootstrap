@@ -6,7 +6,7 @@ module.exports = {
   browser_start_timeout: 2000,
   browser_disconnect_timeout: 120,
   'launch_in_ci': [
-    'BS_Firefox_Current', 'BS_Safari_Current', 'BS_MS_Edge'
+    'BS_Safari_Current', 'BS_MS_Edge', 'BS_IE_11'
   ],
 
   'launch_in_dev': [
