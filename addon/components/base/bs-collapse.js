@@ -116,7 +116,7 @@ export default Component.extend({
   setCollapseSize(size) {
     let dimension = this.get('collapseDimension');
 
-    assert(`collapseDimension must be either "width" or "height". ${dimension} given.`, ["width", "height"].includes(dimension));
+    assert(`collapseDimension must be either "width" or "height". ${dimension} given.`, ["width", "height"].indexOf(dimension) !== -1);
 
     this.element.style.width = dimension === 'width' && size ? `${size}px` : '';
     this.element.style.height = dimension === 'height' && size ? `${size}px` : '';
