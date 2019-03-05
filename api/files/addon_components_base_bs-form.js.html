@@ -137,9 +137,21 @@
             
               &#x60;&#x60;&#x60;
               {{#bs-form onSubmit=(action &#x27;save&#x27;) as |form|}}
-                {{#bs-button type=&#x27;submit&#x27; disabled=form.isSubmitting}}
+                {{#bs-button buttonType=&#x27;submit&#x27; disabled=form.isSubmitting}}
                   Save
                   {{#if form.isSubmitting}} {{fa-icon &#x27;spinner&#x27;}} {{/if}}
+                {{/bs-button}}
+              {{/bs-form}}
+              &#x60;&#x60;&#x60;
+            
+              Additionaly &#x60;isSubmitted&#x60; and &#x60;isRejected&#x60; properties are yielded. &#x60;isSubmitted&#x60; is &#x60;true&#x60; if last submission was successful.
+              &#x60;isRejected&#x60; is &#x60;true&#x60; if last submission was rejected due to validation errors or by an action bound to &#x60;onSubmit&#x60; event, returning a rejected promise.
+              Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:
+            
+              &#x60;&#x60;&#x60;
+              {{#bs-form onSubmit=(action &#x27;save&#x27;) as |form|}}
+                {{#bs-button buttonType=&#x27;submit&#x27; type=(if form.isRejected &quot;danger&quot; &quot;primary&quot;)}}
+                  Save
                 {{/bs-button}}
               {{/bs-form}}
               &#x60;&#x60;&#x60;
@@ -236,6 +248,33 @@
                * @private
                */
               isSubmitting: false,
+            
+              /**
+               * &#x60;isSubmitted&#x60; is &#x60;true&#x60; if last submission was successful.
+               * A change to any form element resets it&#x27;s value to &#x60;false&#x60;.
+               *
+               * If not using &#x60;Components.FormElement&#x60;, &#x60;resetSubmissionState&#x60; action must be triggered on each change to reset
+               * form&#x27;s submission state.
+               *
+               * @property isSubmitted
+               * @type {Boolean}
+               * @private
+               */
+              isSubmitted: false,
+            
+              /**
+               * &#x60;isRejected&#x60; is &#x60;true&#x60; if last submission was rejected.
+               * A submission is considered as rejected if form is invalid as well as if &#x60;onSubmit&#x60; rejects.
+               * A change to any form element resets it&#x27;s value to &#x60;false&#x60;.
+               *
+               * If not using &#x60;Components.FormElement&#x60;, &#x60;resetSubmissionState&#x60; action must be triggered on each change to reset
+               * form&#x27;s submission state.
+               *
+               * @property isRejected
+               * @type {Boolean}
+               * @private
+               */
+              isRejected: false,
             
               /**
                * Count of pending submissions.
@@ -373,16 +412,39 @@
             
                 RSVP.resolve(this.get(&#x27;hasValidator&#x27;) ? this.validate(this.get(&#x27;model&#x27;)) : null)
                   .then(
-                    (r) =&gt; {
-                      if (this.get(&#x27;hideValidationsOnSubmit&#x27;) === true) {
-                        this.set(&#x27;showAllValidations&#x27;, false);
-                      }
-                      return this.get(&#x27;onSubmit&#x27;)(model, r);
+                    (record) =&gt; {
+                      return RSVP.resolve()
+                        .then(() =&gt; {
+                          if (this.get(&#x27;hideValidationsOnSubmit&#x27;) === true) {
+                            this.set(&#x27;showAllValidations&#x27;, false);
+                          }
+                          return this.get(&#x27;onSubmit&#x27;)(model, record);
+                        })
+                        .then(
+                          () =&gt; {
+                            if (!this.get(&#x27;isDestroyed&#x27;)) {
+                              this.set(&#x27;isSubmitted&#x27;, true);
+                            }
+                          },
+                          () =&gt; {
+                            if (!this.get(&#x27;isDestroyed&#x27;)) {
+                              this.set(&#x27;isRejected&#x27;, true);
+                            }
+                          }
+                        );
                     },
-                    (err) =&gt; {
+                    (error) =&gt; {
                       this.set(&#x27;showAllValidations&#x27;, true);
             
-                      return this.get(&#x27;onInvalid&#x27;)(model, err);
+                      return RSVP.resolve()
+                        .then(() =&gt; {
+                          return this.get(&#x27;onInvalid&#x27;)(model, error);
+                        })
+                        .finally(() =&gt; {
+                          if (!this.get(&#x27;isDestroyed&#x27;)) {
+                            this.set(&#x27;isRejected&#x27;, true);
+                          }
+                        });
                     }
                   )
                   .finally(() =&gt; {
@@ -419,7 +481,16 @@
                   assert(&#x27;You cannot use the form element\&#x27;s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!&#x27;,
                     isPresent(model) &amp;&amp; isPresent(property)
                   );
-                  set(model, property, value);
+                  if (typeof model.set === &#x27;function&#x27;) {
+                    model.set(property, value);
+                  } else {
+                    set(model, property, value);
+                  }
+                },
+            
+                resetSubmissionState() {
+                  this.set(&#x27;isSubmitted&#x27;, false);
+                  this.set(&#x27;isRejected&#x27;, false);
                 }
               }
             });

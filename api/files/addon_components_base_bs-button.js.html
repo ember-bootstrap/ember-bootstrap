@@ -65,6 +65,7 @@
             import layout from &#x27;ember-bootstrap/templates/components/bs-button&#x27;;
             import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
             import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
+            import overrideableCP from &#x27;../../utils/overrideable-cp&#x27;;
             
             /**
              Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -274,9 +275,9 @@
                * @property icon
                * @type String
                * @readonly
-               * @protected
+               * @public
                */
-              icon: computed(&#x27;active&#x27;, function() {
+              icon: overrideableCP(&#x27;active&#x27;, function() {
                 if (this.get(&#x27;active&#x27;)) {
                   return this.get(&#x27;iconActive&#x27;);
                 } else {

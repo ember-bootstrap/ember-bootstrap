@@ -81,13 +81,13 @@
             of strings or objects. In the latter case, you would have to set <code>optionLabelPath</code> to the property, that contains the
             label on these objects.</p>
             <pre class="code prettyprint"><code class="language-hbs">{{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-              {{form.element label=&quot;Gender&quot; options=genderOptions optionLabelPath=&quot;title&quot; property=&quot;gender&quot;}}
+              {{form.element controlType=&quot;radio&quot; label=&quot;Gender&quot; options=genderOptions optionLabelPath=&quot;title&quot; property=&quot;gender&quot;}}
             {{/bs-form}}
             </code></pre>
             <p>The default layout for radios is stacked, but Bootstrap's inline layout is also supported using the <code>inline</code> property
             of the yielded control component:</p>
             <pre class="code prettyprint"><code class="language-hbs">{{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-              {{#form.element label=&quot;Gender&quot; options=genderOptions property=&quot;gender&quot; as |el|}}
+              {{#form.element controlType=&quot;radio&quot; label=&quot;Gender&quot; options=genderOptions property=&quot;gender&quot; as |el|}}
                 {{el.control inline=true}}
               {{/form.element}}
             {{/bs-form}}
@@ -707,6 +707,10 @@
                         <h3>Events</h3>
             
                         <ul class="index-list events extends">
+                            <li class="index-item event private">
+                              <a href="#" data-tabid="#events" data-anchor="#event__onChange" data-tablink="_onChange">_onChange</a>
+            
+                            </li>
                             <li class="index-item event private">
                               <a href="#" data-tabid="#events" data-anchor="#event_change" data-tablink="change">change</a>
             
@@ -2237,6 +2241,32 @@
             
             
                     <div id="events" class="tab-pane">
+                        <div id="event__onChange" class="events item private">
+                            <h3 class="name"><code>_onChange</code></h3>
+                            <span class="type"></span>
+                        
+                        
+                                <span class="flag private">private</span>
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/addon_components_base_bs-form_element.js.html#l972"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:972</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Private duplicate of onChange event used for internal state handling between form and it's elements.</p>
+                        
+                            </div>
+                        
+                        
+                        
+                        </div>
                         <div id="event_change" class="events item private">
                             <h3 class="name"><code>change</code></h3>
                             <span class="type"></span>

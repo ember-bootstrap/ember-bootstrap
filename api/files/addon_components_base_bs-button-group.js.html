@@ -124,7 +124,7 @@
             export default Component.extend(SizeClass, {
               layout,
               ariaRole: &#x27;group&#x27;,
-              classNameBindings: [&#x27;vertical:btn-group-vertical:btn-group&#x27;, &#x27;justified:btn-group-justified&#x27;],
+              classNameBindings: [&#x27;vertical:btn-group-vertical:btn-group&#x27;],
             
               /**
                * @property buttonComponent
@@ -150,26 +150,6 @@
                * @public
                */
               vertical: false,
-            
-              /**
-               * Set to true for the buttons to stretch at equal sizes to span the entire width of its parent.
-               *
-               * *Important*: You have to wrap every button component in a &#x60;div class=&quot;btn-group&quot;&gt;&#x60;:
-               *
-               * &#x60;&#x60;&#x60;handlebars
-               * &lt;div class=&quot;btn-group&quot; role=&quot;group&quot;&gt;
-               * {{#bs-button}}My Button{{/bs-button}}
-               * &lt;/div&gt;
-               * &#x60;&#x60;&#x60;
-               *
-               * See http://getbootstrap.com/components/#btn-groups-justified
-               *
-               * @property justified
-               * @type boolean
-               * @default false
-               * @public
-               */
-              justified: false,
             
               /**
                * The type of the button group specifies how child buttons behave and how the &#x60;value&#x60; property will be computed:

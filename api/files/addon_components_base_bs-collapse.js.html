@@ -173,10 +173,10 @@
                */
               transitionDuration: 350,
             
-              setCollapseSize() {
-                let { collapseSize: size, collapseDimension: dimension } = this.getProperties(&#x27;collapseSize&#x27;, &#x27;collapseDimension&#x27;);
+              setCollapseSize(size) {
+                let dimension = this.get(&#x27;collapseDimension&#x27;);
             
-                assert(&#x60;collapseDimension must be either &quot;width&quot; or &quot;height&quot;. ${dimension} given.&#x60;, [&quot;width&quot;, &quot;height&quot;].includes(dimension));
+                assert(&#x60;collapseDimension must be either &quot;width&quot; or &quot;height&quot;. ${dimension} given.&#x60;, [&quot;width&quot;, &quot;height&quot;].indexOf(dimension) !== -1);
             
                 this.element.style.width = dimension === &#x27;width&#x27; &amp;&amp; size ? &#x60;${size}px&#x60; : &#x27;&#x27;;
                 this.element.style.height = dimension === &#x27;height&#x27; &amp;&amp; size ? &#x60;${size}px&#x60; : &#x27;&#x27;;
@@ -225,9 +225,9 @@
             
                 this.setProperties({
                   transitioning: true,
-                  collapseSize: this.get(&#x27;collapsedSize&#x27;),
                   active: true
                 });
+                this.setCollapseSize(this.get(&#x27;collapsedSize&#x27;));
             
                 transitionEnd(this.get(&#x27;element&#x27;), this.get(&#x27;transitionDuration&#x27;)).then(() =&gt; {
                   if (this.get(&#x27;isDestroyed&#x27;)) {

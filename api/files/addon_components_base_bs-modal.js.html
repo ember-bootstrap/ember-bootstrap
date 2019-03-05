@@ -110,7 +110,7 @@
              @uses Mixins.TransitionSupport
              @public
              */
-            export default Component.extend(TransitionSupport, {
+            let component = Component.extend(TransitionSupport, {
               layout,
             
               /**
@@ -146,7 +146,7 @@
                * @default true
                * @public
                */
-              fade: not(&#x27;isFastBoot&#x27;),
+              fade: undefined,
             
               /**
                * @property notFade
@@ -271,18 +271,6 @@
               }),
             
               /**
-               * The DOM element of the &#x60;.modal&#x60; element.
-               *
-               * @property modalElement
-               * @type object
-               * @readonly
-               * @private
-               */
-              modalElement: computed(&#x27;modalId&#x27;, function() {
-                return document.getElementById(this.get(&#x27;modalId&#x27;));
-              }).volatile(),
-            
-              /**
                * The id of the backdrop element.
                *
                * @property backdropId
@@ -293,31 +281,6 @@
               backdropId: computed(&#x27;elementId&#x27;, function() {
                 return &#x60;${this.get(&#x27;elementId&#x27;)}-backdrop&#x60;;
               }),
-            
-              /**
-               * The DOM element of the backdrop element.
-               *
-               * @property backdropElement
-               * @type object
-               * @readonly
-               * @private
-               */
-              backdropElement: computed(&#x27;backdropId&#x27;, function() {
-                return document.getElementById(this.get(&#x27;backdropId&#x27;));
-              }).volatile(),
-            
-              /**
-               * The destination DOM element for ember-popper.
-               *
-               * @property destinationElement
-               * @type object
-               * @readonly
-               * @private
-               */
-              destinationElement: computed(function() {
-                let dom = getDOM(this);
-                return findElementById(dom, &#x27;ember-bootstrap-wormhole&#x27;);
-              }).volatile(),
             
               /**
                * Property for size styling, set to null (default), &#x27;lg&#x27; or &#x27;sm&#x27;
@@ -356,7 +319,7 @@
                * @private
                */
               _renderInPlace: computed(&#x27;renderInPlace&#x27;, &#x27;destinationElement&#x27;, function() {
-                return this.get(&#x27;renderInPlace&#x27;) || !this.get(&#x27;destinationElement&#x27;);
+                return this.get(&#x27;renderInPlace&#x27;) || !this.destinationElement;
               }),
             
               /**
@@ -553,7 +516,9 @@
                     }
                   });
                 };
-                this.set(&#x27;inDom&#x27;, true);
+                if (this.get(&#x27;inDom&#x27;) !== true) {
+                  this.set(&#x27;inDom&#x27;, true);
+                }
                 this.handleBackdrop(callback);
               },
             
@@ -773,13 +738,53 @@
               init() {
                 this._super(...arguments);
                 let { isOpen, backdrop, fade, isFastBoot } = this.getProperties(&#x27;isOpen&#x27;, &#x27;backdrop&#x27;, &#x27;fade&#x27;, &#x27;isFastBoot&#x27;);
+                if (fade === undefined) {
+                  fade = !isFastBoot;
+                }
+                let dom = getDOM(this);
+                let destinationElement = findElementById(dom, &#x27;ember-bootstrap-wormhole&#x27;);
                 this.setProperties({
                   showModal: isOpen &amp;&amp; (!fade || isFastBoot),
                   showBackdrop: isOpen &amp;&amp; backdrop,
-                  inDom: isOpen
+                  inDom: isOpen,
+                  fade,
+                  destinationElement
                 });
               }
             });
+            
+            Object.defineProperties(component.prototype, {
+            
+              /**
+               * The DOM element of the &#x60;.modal&#x60; element.
+               *
+               * @property modalElement
+               * @type object
+               * @readonly
+               * @private
+               */
+              modalElement: {
+                get() {
+                  return document.getElementById(this.get(&#x27;modalId&#x27;));
+                }
+              },
+            
+              /**
+               * The DOM element of the backdrop element.
+               *
+               * @property backdropElement
+               * @type object
+               * @readonly
+               * @private
+               */
+              backdropElement: {
+                get() {
+                  return document.getElementById(this.get(&#x27;backdropId&#x27;));
+                }
+              }
+            });
+            
+            export default component;
             
                 </pre>
             </div>

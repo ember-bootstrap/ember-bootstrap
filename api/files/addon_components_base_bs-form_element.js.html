@@ -114,7 +114,7 @@
             
              &#x60;&#x60;&#x60;hbs
              {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-               {{form.element label=&quot;Gender&quot; options=genderOptions optionLabelPath=&quot;title&quot; property=&quot;gender&quot;}}
+               {{form.element controlType=&quot;radio&quot; label=&quot;Gender&quot; options=genderOptions optionLabelPath=&quot;title&quot; property=&quot;gender&quot;}}
              {{/bs-form}}
              &#x60;&#x60;&#x60;
             
@@ -123,7 +123,7 @@
             
              &#x60;&#x60;&#x60;hbs
              {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-               {{#form.element label=&quot;Gender&quot; options=genderOptions property=&quot;gender&quot; as |el|}}
+               {{#form.element controlType=&quot;radio&quot; label=&quot;Gender&quot; options=genderOptions property=&quot;gender&quot; as |el|}}
                  {{el.control inline=true}}
                {{/form.element}}
              {{/bs-form}}
@@ -1029,6 +1029,14 @@
                */
               onChange() {},
             
+              /**
+               * Private duplicate of onChange event used for internal state handling between form and it&#x27;s elements.
+               *
+               * @event _onChange
+               * @private
+               */
+              _onChange() {},
+            
               init() {
                 this._super(...arguments);
                 if (this.get(&#x27;showValidationOn&#x27;) === null) {
@@ -1089,8 +1097,9 @@
             
               actions: {
                 change(value) {
-                  let { onChange, model, property } = this.getProperties(&#x27;onChange&#x27;, &#x27;model&#x27;, &#x27;property&#x27;);
+                  let { onChange, model, property, _onChange } = this.getProperties(&#x27;onChange&#x27;, &#x27;model&#x27;, &#x27;property&#x27;, &#x27;_onChange&#x27;);
                   onChange(value, model, property);
+                  _onChange();
                 }
               }
             });

@@ -60,11 +60,12 @@
                 <pre class="prettyprint linenums">
             import Component from &#x27;@ember/component&#x27;;
             import { observer } from &#x27;@ember/object&#x27;;
-            import { reads, filter, filterBy, gt } from &#x27;@ember/object/computed&#x27;;
+            import { filter, filterBy, gt } from &#x27;@ember/object/computed&#x27;;
             import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
             import LinkComponent from &#x27;@ember/routing/link-component&#x27;;
             import layout from &#x27;ember-bootstrap/templates/components/bs-nav/item&#x27;;
             import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
+            import overrideableCP from &#x27;../../../utils/overrideable-cp&#x27;;
             
             /**
             
@@ -91,7 +92,9 @@
                * @type boolean
                * @public
                */
-              disabled: reads(&#x27;_disabled&#x27;),
+              disabled: overrideableCP(&#x27;_disabled&#x27;, function() {
+                return this.get(&#x27;_disabled&#x27;);
+              }),
               _disabled: false,
             
               /**
@@ -104,7 +107,9 @@
                * @type boolean
                * @public
                */
-              active: reads(&#x27;_active&#x27;),
+              active: overrideableCP(&#x27;_active&#x27;, function() {
+                return this.get(&#x27;_active&#x27;);
+              }),
               _active: false,
             
               /**

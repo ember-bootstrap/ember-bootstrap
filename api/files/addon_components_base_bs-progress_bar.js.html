@@ -203,8 +203,8 @@
                * @private
                */
               updateStyles() {
-                let percent = Number.parseFloat(this.get(&#x27;percent&#x27;));
-                this.element.style.width = !Number.isNaN(percent) ? &#x60;${percent}%&#x60; : &#x27;&#x27;;
+                let percent = parseFloat(this.get(&#x27;percent&#x27;));
+                this.element.style.width = !isNaN(percent) ? &#x60;${percent}%&#x60; : &#x27;&#x27;;
               },
             
               didInsertElement() {

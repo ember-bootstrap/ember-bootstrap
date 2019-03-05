@@ -63,6 +63,7 @@
             import layout from &#x27;ember-bootstrap/templates/components/bs-carousel/slide&#x27;;
             import { computed, observer } from &#x27;@ember/object&#x27;;
             import { next } from &#x27;@ember/runloop&#x27;;
+            import overrideableCP from &#x27;../../../utils/overrideable-cp&#x27;;
             /**
               A visible user-defined slide.
             
@@ -84,7 +85,7 @@
                * @type boolean
                * @private
                */
-              active: computed(&#x27;isCurrentSlide&#x27;, &#x27;presentationState&#x27;, function() {
+              active: overrideableCP(&#x27;isCurrentSlide&#x27;, &#x27;presentationState&#x27;, function() {
                 return this.get(&#x27;isCurrentSlide&#x27;) &amp;&amp; this.get(&#x27;presentationState&#x27;) === null;
               }),
             

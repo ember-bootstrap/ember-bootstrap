@@ -58,7 +58,7 @@
             
             <div class="file">
                 <pre class="prettyprint linenums">
-            import { and, or, reads, gt } from &#x27;@ember/object/computed&#x27;;
+            import { or, reads, gt } from &#x27;@ember/object/computed&#x27;;
             import Component from &#x27;@ember/component&#x27;;
             import { guidFor } from &#x27;@ember/object/internals&#x27;;
             import { isArray } from &#x27;@ember/array&#x27;;
@@ -84,7 +84,7 @@
              @uses Mixins.TransitionSupport
              @private
              */
-            export default Component.extend(TransitionSupport, {
+            let component = Component.extend(TransitionSupport, {
               tagName: &#x27;&#x27;,
             
               /**
@@ -131,7 +131,7 @@
                * @type boolean
                * @private
                */
-              inDom: and(&#x27;visible&#x27;, &#x27;triggerTargetElement&#x27;),
+              inDom: false,
             
               /**
                * Set to false to disable fade animations.
@@ -234,18 +234,6 @@
               }),
             
               /**
-               * The DOM element of the overlay element.
-               *
-               * @property overlayElement
-               * @type object
-               * @readonly
-               * @private
-               */
-              overlayElement: computed(&#x27;overlayId&#x27;, function() {
-                return document.getElementById(this.get(&#x27;overlayId&#x27;));
-              }).volatile(),
-            
-              /**
                * The DOM element of the arrow element.
                *
                * @property arrowElement
@@ -279,11 +267,10 @@
               triggerElement: null,
             
               /**
-               * @property triggerTargetElement
-               * @type {object}
+               * @method getTriggerTargetElement
                * @private
                */
-              triggerTargetElement: computed(&#x27;triggerElement&#x27;, function() {
+              getTriggerTargetElement() {
                 let triggerElement = this.get(&#x27;triggerElement&#x27;);
             
                 if (!triggerElement) {
@@ -293,7 +280,7 @@
                 } else {
                   return document.querySelector(triggerElement);
                 }
-              }).volatile(),
+              },
             
               /**
                * The event(s) that should trigger the tooltip/popover - click | hover | focus.
@@ -688,11 +675,13 @@
                 this._handleLeave = run.bind(this, this.handleTriggerEvent, this.leave);
                 this._handleToggle = run.bind(this, this.handleTriggerEvent, this.toggle);
                 this._parentFinder = self.document ? self.document.createTextNode(&#x27;&#x27;) : &#x27;&#x27;;
+                this.inDom = this.get(&#x27;visible&#x27;) &amp;&amp; this.get(&#x27;triggerTargetElement&#x27;);
               },
             
               didInsertElement() {
                 this._super(...arguments);
                 this._parent = this._parentFinder.parentNode;
+                this.triggerTargetElement = this.getTriggerTargetElement();
                 this.addListeners();
                 if (this.get(&#x27;visible&#x27;)) {
                   next(this, this.show, true);
@@ -713,6 +702,25 @@
               })
             
             });
+            
+            Object.defineProperties(component.prototype, {
+            
+              /**
+               * The DOM element of the overlay element.
+               *
+               * @property overlayElement
+               * @type object
+               * @readonly
+               * @private
+               */
+              overlayElement: {
+                get() {
+                  return document.getElementById(this.get(&#x27;overlayId&#x27;));
+                }
+              }
+            });
+            
+            export default component;
             
                 </pre>
             </div>

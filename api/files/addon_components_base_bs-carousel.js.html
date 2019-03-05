@@ -571,8 +571,12 @@
               didInsertElement() {
                 this._super(...arguments);
                 this.registerEvents();
-                this.set(&#x27;currentIndex&#x27;, this.get(&#x27;index&#x27;));
                 this.triggerChildSlidesObserver();
+              },
+            
+              init() {
+                this._super(...arguments);
+                this.set(&#x27;currentIndex&#x27;, this.get(&#x27;index&#x27;));
               },
             
               /**
