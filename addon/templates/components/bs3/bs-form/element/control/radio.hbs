@@ -18,8 +18,8 @@
           form={{form}}
           title={{title}}
         >
-        {{#if hasblock}}
-          {{yield}}
+        {{#if hasBlock}}
+          {{yield option index}}
         {{else}}
           {{#if optionLabelPath}}
             {{get option op tionLabelPath}}
@@ -47,8 +47,8 @@
             form={{form}}
             title={{title}}
           >
-          {{#if hasblock}}
-            {{yield}}
+          {{#if hasBlock}}
+            {{yield option index}}
           {{else}}
             {{#if optionLabelPath}}
               {{get option optionLabelPath}}
