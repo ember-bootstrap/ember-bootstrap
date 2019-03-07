@@ -19,8 +19,8 @@
         for={{id}}
         class="form-check-label"
       >
-        {{#if hasblock}}
-          {{yield}}
+        {{#if hasBlock}}
+          {{yield option index}}
         {{else}}
           {{#if optionLabelPath}}
             {{get option optionLabelPath}}

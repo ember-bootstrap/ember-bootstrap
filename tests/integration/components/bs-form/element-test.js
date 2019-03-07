@@ -262,6 +262,32 @@ module('Integration | Component | bs-form/element', function(hooks) {
       );
     });
 
+    test('Block mode allows to customize label for each radio input', async function(assert) {
+      await render(hbs`
+        {{#bs-form/element controlType="radio" options=simpleOptions as |Element|}}
+          {{#Element.control as |option index|}}
+            {{index}}: {{option}}
+          {{/Element.control}}
+        {{/bs-form/element}}
+      `);
+
+      assert.dom(this.element.querySelectorAll('label')[0]).hasText('0: foo');
+      assert.dom(this.element.querySelectorAll('label')[1]).hasText('1: bar');
+    });
+
+    testBS3('Block mode allows to customize label for each radio input if used together with inline', async function(assert) {
+      await render(hbs`
+        {{#bs-form/element controlType="radio" options=simpleOptions as |Element|}}
+          {{#Element.control inline=true as |option index|}}
+            {{index}}: {{option}}
+          {{/Element.control}}
+        {{/bs-form/element}}
+      `);
+
+      assert.dom(this.element.querySelectorAll('label')[0]).hasText('0: foo');
+      assert.dom(this.element.querySelectorAll('label')[1]).hasText('1: bar');
+    });
+
     testBS3('has correct markup', async function(assert) {
       await render(hbs`{{bs-form/element controlType="radio" options=simpleOptions}}`);
 
@@ -336,7 +362,6 @@ module('Integration | Component | bs-form/element', function(hooks) {
       assert.ok(this.element.querySelector('input[type=radio]').checked);
     });
 
-
     test('sends updates', async function(assert) {
       let action = this.spy();
       this.set('change', action);
@@ -384,7 +409,6 @@ module('Integration | Component | bs-form/element', function(hooks) {
         await render(hbs``); // hack to prevent browser exception when setting size to undefined
       }
     });
-
   });
 
   test('using "property" creates binding to model property', async function(assert) {
