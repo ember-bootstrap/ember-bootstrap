@@ -10,7 +10,7 @@ import layout from 'ember-bootstrap/templates/components/bs-tooltip';
 
  ```hbs
  <button class="btn">
-   {{bs-tooltip title="This is a tooltip"}}
+  <BsTooltip @title="This is a toolip" />
  </button>
  ```
 
@@ -18,7 +18,9 @@ import layout from 'ember-bootstrap/templates/components/bs-tooltip';
 
  ```hbs
  <button class="btn">
-   {{#bs-tooltip}}This is a tooltip{{/bs-tooltip}}
+  <BsTooltip>
+    This is a toolip
+  </BsTooltip>
  </button>
  ```
 
@@ -32,9 +34,9 @@ import layout from 'ember-bootstrap/templates/components/bs-tooltip';
  With the special value "parentView" you can attach the tooltip to the DOM element of the parent component:
 
  ```hbs
- {{#my-component}}
-   {{bs-tooltip title="This is a tooltip" triggerElement="parentView"}}
- {{/my-component}}
+ <MyComponent>
+  <BsTooltip @title="This is a toolip" @triggerElement="parentView"/>
+ </MyComponent>
  ```
 
  To customize the events that will trigger the tooltip use the `triggerEvents` property, that accepts an array or a
@@ -57,7 +59,7 @@ import layout from 'ember-bootstrap/templates/components/bs-tooltip';
  * a `close` action is yielded, that allows you to close the tooltip:
 
  ```hbs
- {{#bs-tooltip as |tt|}}This is a tooltip <button {{action tt.close}}>Close</button>{{/bs-tooltip}}
+ <BsTooltip as |tt|>This is a toolip <button {{action tt.close}}>Close</button></BsTooltip>
  ```
 
  See the individual API docs for each property.

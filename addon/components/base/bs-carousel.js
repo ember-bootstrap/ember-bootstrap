@@ -27,17 +27,17 @@ import RSVP from 'rsvp';
   Default settings are the same as the original so you don't have to worry about changing parameters.
 
  ```hbs
-  {{#bs-carousel as |car|}}
-    {{#car.slide}}
-      <img alt="First slide" src="slide1.jpg">
-    {{/car.slide}}
-    {{#car.slide}}
-      <img alt="Second slide" src="slide2.jpg">
-    {{/car.slide}}
-    {{#car.slide}}
-      <img alt="Third slide" src="slide3.jpg">
-    {{/car.slide}}
-  {{/bs-carousel}}
+ <BsCarousel as |Car|>
+  <Car.slide>
+    <img alt="First slide" src="slide1.jpg">
+  </Car.slide>
+  <Car.slide>
+    <img alt="Second slide" src="slide2.jpg">
+  </Car.slide>
+  <Car.slide>
+    <img alt="Third slide" src="slide3.jpg">
+  </Car.slide>
+ </BsCarousel>
  ```
 
   To better understand the whole documentation, you should be aware of the following operations:

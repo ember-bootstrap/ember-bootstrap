@@ -11,9 +11,9 @@ import layout from 'ember-bootstrap/templates/components/bs-progress';
  Bootstrap, use the appropriate properties like `type`, `showLabel`, `striped` or `animate`.
 
  ```hbs
- {{#bs-progress as |p|}}
-   {{p.bar value=progressValue minValue=0 maxValue=10 showLabel=true type="danger"}}
- {{/bs-progress}}
+ <BsProgress as |P| >
+  <P.bar @value={{this.progressValue}} @minValue=0 @maxValue=10 @showLabel={{true}} @type="dange" />
+ </BsProgress>
  ```
 
  ### Stacked
@@ -22,11 +22,11 @@ import layout from 'ember-bootstrap/templates/components/bs-progress';
  create a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.
 
  ```hbs
- {{#bs-progress as |p|}}
-   {{p.bar value=progressValue1 type="success"}}
-   {{p.bar value=progressValue2 type="warning"}}
-   {{p.bar value=progressValue3 type="danger"}}
- {{/bs-progress}}
+ <BsProgress as |P| >
+  <P.bar @value={{this.progressValue1}} @type="success" />
+  <P.bar @value={{this.progressValue2}} @type="warning" />
+  <P.bar @value={{this.progressValue3}} @type="danger" />
+ </BsProgress>
  ```
 
  @class Progress

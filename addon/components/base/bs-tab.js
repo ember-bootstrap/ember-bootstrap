@@ -18,14 +18,14 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  The tab navigation is automatically generated from the tab panes' `title` property:
 
  ```hbs
- {{#bs-tab as |tab|}}
-   {{#tab.pane title="Tab 1"}}
-     <p>...</p>
-   {{/tab.pane}}
-   {{#tab.pane title="Tab 2"}}
-     <p>...</p>
-   {{/tab.pane}}
- {{/bs-tab}}
+ <BsTab as |Tab|>
+  <Tab.pane @title="Tab 1">
+    <p> ... </p>
+  </Tab.pane>
+  <Tab.pane @title="Tab 2">
+    <p> ... </p>
+  </Tab.pane>
+ </BsTab>
  ```
 
  ### Groupable (dropdown) tabs
@@ -35,20 +35,20 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  component with `groupTitle` being the dropdown's title:
 
  ```hbs
- {{#bs-tab as |tab|}}
-    {{#tab.pane title="Tab 1"}}
-      <p>...</p>
-    {{/tab.pane}}
-    {{#tab.pane title="Tab 2"}}
-      <p>...</p>
-    {{/tab.pane}}
-    {{#tab.pane title="Tab 3" groupTitle="Dropdown"}}
-      <p>...</p>
-    {{/tab.pane}}
-    {{#tab.pane title="Tab 4" groupTitle="Dropdown"}}
-      <p>...</p>
-    {{/tab.pane}}
- {{/bs-tab}}
+ <BsTab as |Tab|>
+  <Tab.pane @title="Tab 1">
+    <p> ... </p>
+  </Tab.pane>
+  <Tab.pane @title="Tab 2">
+    <p> ... </p>
+  </Tab.pane>
+  <Tab.pane @title="Tab 3" @groupTitle="Dropdown">
+    <p> ... </p>
+  </Tab.pane>
+  <Tab.pane @title="Tab 4" @groupTitle="Dropdown">
+    <p> ... </p>
+  </Tab.pane>
+ </BsTab>
  ```
 
  ### Custom tabs
@@ -63,21 +63,20 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  trigger the selection of the different tab panes, using their ids:
 
  ```hbs
- {{#bs-tab customTabs=true as |tab|}}
-    {{#bs-nav type="tabs" as |nav|}}
-        {{#nav.item active=(bs-eq tab.activeId "pane1")}}<a href="#pane1" role="tab" {{action tab.select "pane1"}}>Tab 1</a>{{/nav.item}}
-        {{#nav.item active=(bs-eq tab.activeId "pane2")}}<a href="#pane1" role="tab" {{action tab.select "pane2"}}>Tab 2 <span class="badge">{{badge}}</span></a>{{/nav.item}}
-    {{/bs-nav}}
-
-    <div class="tab-content">
-    {{#tab.pane id="pane1" title="Tab 1"}}
-        <p>...</p>
-    {{/tab.pane}}
-    {{#tab.pane id="pane2" title="Tab 2"}}
-        <p>...</p>
-    {{/tab.pane}}
-    </div>
- {{/bs-tab}}
+ <BsTab @customTabs={{true}} as |Tab|>
+  <BsNav @type="tabs" as |Nav|>
+    <Nav.item @active={{bs-eq Tab.activeId "pane1"}}> <a href="#pane1" role="tab" {{action tab.select "pane1"}}>Tab 1</a> </Nav.item>
+    <Nav.item @active={{bs-eq Tab.activeId "pane2"}}> <a href="#pane2" role="tab" {{action tab.select "pane2"}}>Tab 2 <span class="badge">{{badge}}</span> </a> </Nav.item>
+  </BsNav>
+  <div class="tab-content">
+    <Tab.pane @id="pane1" @title="Tab 1">
+      <p> ... </p>
+    </Tab.pane>
+    <Tab.pane @id="pane2" @title="Tab 2">
+      <p> ... </p>
+    </Tab.pane>
+  </div>
+ </BsTab>
  ```
 
  Note that the `bs-eq` helper used in the example above is a private helper, which is not guaranteed to be available for
@@ -94,11 +93,10 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
  ```hbs
  <div>
-   {{#bs-nav type="tabs" as |nav|}}
-     {{#nav.item}}{{#nav.link-to "tabs.index"}}Tab 1{{/nav.link-to}}{{/nav.item}}
-     {{#nav.item}}{{#nav.link-to "tabs.other"}}Tab 2{{/nav.link-to}}{{/nav.item}}
-   {{/bs-nav}}
-   {{outlet}}
+  <BsNav @type="tabs" as |Nav| >
+    <Nav.item><Nav.link-to "tabs.index">Tab 1</Nav.link-to></Nav.item>
+    <Nav.item><Nav.link-to "tabs.other">Tab 2</Nav.link-to></Nav.item>
+  </BsNav>
  </div>
  ```
 

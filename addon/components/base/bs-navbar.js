@@ -12,22 +12,22 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  Uses the following components by a contextual reference:
 
  ```hbs
- {{#bs-navbar as |navbar|}}
-   <div class="navbar-header">
-     {{navbar.toggle}}
+ <BsNavbar as |Navbar|>
+  <div class="navbar-header">
+     {{Navbar.toggle}}
      <a class="navbar-brand" href="#">Brand</a>
-   </div>
-   {{#navbar.content}}
-     {{#navbar.nav as |nav|}}
-       {{#nav.item}}
-         {{#nav.link-to "home"}}Home{{/nav.link-to}}
-       {{/nav.item}}
-       {{#nav.item}}
-         {{#nav.link-to "navbars"}}Navbars{{/nav.link-to}}
-       {{/nav.item}}
-     {{/navbar.nav}}
-   {{/navbar.content}}
- {{/bs-navbar}}
+  </div>
+  <Navbar.content>
+    <Navbar.nav as |Nav|>
+      <Nav.item>
+        <Nav.link-to "home">Home</Nav.link-to>
+      </Nav.item>
+      <Nav.item>
+        <Nav.link-to "navbars">Navbars</Nav.link-to>
+      </Nav.item>
+    </Navbar.nav>
+  </Navbar.content>
+ </BsNavBar>
  ```
 
  **Note:** the `<div class="navbar-header">` is required for BS3 to hold the elements visible on a mobile breakpoint,
@@ -53,24 +53,24 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  prevent that, you can set its `collapseNavbar` property to false:
 
  ```hbs
- {{#nav.item}}
-   {{#nav.link-to "index" collapseNavbar=false}}Don't collapse{{/nav.link-to}}
- {{/nav.item}}
+ <nav.item>
+  <nav.link-to "index" @collapseNavBar={{false}}>Don't collapse</nav.link-to>
+ </nav.item>
  ```
 
  To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded `collapse`
  action:
 
  ```hbs
- {#bs-navbar as |navbar|}}
-   {{#navbar.content}}
-     {{#navbar.nav as |nav|}}
-       {{#nav.item}}
-         <a {{action navbar.collapse}}>Collapse</a>
-       {{/nav.item}}
-     {{/navbar.nav}}
-   {{/navbar.content}}
- {{/bs-navbar}}
+ <BsNavbar as |Navbar|>
+  <Navbar.content>
+    <Navbar.nav as |Nav|>
+      <Nav.item>
+        <a {{action Navbar.collapse}}>Collapse</a>
+      </Nav.item>
+    </Navbar.nav>
+  </Navbar.content>
+ </BsNavBar>
  ```
 
  ### Navbar styles

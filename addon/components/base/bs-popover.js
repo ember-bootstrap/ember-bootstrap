@@ -10,7 +10,7 @@ import layout from 'ember-bootstrap/templates/components/bs-popover';
 
  ```hbs
  <button class="btn">
-   {{#bs-popover title="This is a title"}}and this the body{{/bs-popover}}
+  <BsPopover @title="this is a title">and this the body</BsPopover>
  </button>
  ```
 
@@ -24,9 +24,9 @@ import layout from 'ember-bootstrap/templates/components/bs-popover';
  With the special value "parentView" you can attach the popover to the DOM element of the parent component:
 
  ```hbs
- {{#my-component}}
-   {{#bs-popover triggerElement="parentView"}}This is a popover{{/bs-popover}}
- {{/my-component}}
+ <MyComponent>
+  <BsPopover @triggerElement="parentView">This is a popover</BsPopover>
+ </MyComponent>
  ```
 
  To customize the events that will trigger the popover use the `triggerEvents` property, that accepts an array or a
@@ -49,7 +49,7 @@ import layout from 'ember-bootstrap/templates/components/bs-popover';
  *  a `close` action is yielded, that allows you to close the tooltip:
 
  ```hbs
- {{#bs-popover as |po|}}This is a popover <button {{action po.close}}>Close</button>{{/bs-popover}}
+ <BsPopover as |Po| >This is a popover <button {{action Po.close}}>Close</button></BsPopover>
  ```
 
  See the individual API docs for each property.

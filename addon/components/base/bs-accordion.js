@@ -12,18 +12,18 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  components as children:
 
  ```handlebars
-  {{#bs-accordion as |acc|}}
-      {{#acc.item value=1 title="First item"}}
-        <p>Lorem ipsum...</p>
-        <button {{action acc.change 2}}>Next</button>
-      {{/acc.item}}
-      {{#acc.item value=2 title="Second item"}}
-        <p>Lorem ipsum...</p>
-      {{/acc.item}}
-      {{#acc.item value=3 title="Third item"}}
-        <p>Lorem ipsum...</p>
-      {{/acc.item}}
-  {{/bs-accordion}}
+  <BsAccordion as |Acc|>
+    <Acc.item @value=1 @title="First item">
+      <p>Lorem ipsum...</p>
+      <button {{action acc.change 2}}>Next</button>
+    </Acc.item>
+    <Acc.item @value=2 @title="Second item">
+      <p>Lorem ipsum...</p>
+    </Acc.item>
+    <Acc.item @value=2 @title="Third item">
+      <p>Lorem ipsum...</p>
+    </Acc.item>
+  </BsAccordion>
  ```
 
  In the example above the first accordion item utilizes the yielded `change` action to add some custom behaviour.

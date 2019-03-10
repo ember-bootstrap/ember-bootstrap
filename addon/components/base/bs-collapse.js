@@ -13,12 +13,12 @@ import { assert } from '@ember/debug';
  ### Usage
 
  ```hbs
- {{#bs-collapse collapsed=collapsed}}
-   <div class="well">
+ <BsCollapse @collapsed={{this.collapsed}} >
+  <div class="well">
      <h2>Collapse</h2>
      <p>This is collapsible content</p>
    </div>
- {{/bs-collapse}}
+ </BsCollapse>
  ```
 
  @class Collapse

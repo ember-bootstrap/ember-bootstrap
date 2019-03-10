@@ -16,9 +16,9 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  `type` property for proper styling.
 
  ```hbs
- {{#bs-alert type="success"}}
- <strong>Well done!</strong> You successfully read this important alert message.
- {{/bs-alert}}
+ <BsAlert @type="success">
+  <strong>Well done!</strong> You successfully read this important alert message.
+ </BsAlert>
  ```
 
  @class Alert

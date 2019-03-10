@@ -14,9 +14,9 @@ import overrideableCP from '../../utils/overrideable-cp';
  ### Basic Usage
 
  ```hbs
- {{#bs-button type="primary" icon="glyphicon glyphicon-download"}}
-   Downloads
- {{/bs-button}}
+ <BsButton @type="primary" @icon="glyphicon glyphicon-download"> 
+  Downloads
+ </BsButton>
  ```
 
  ### Actions
@@ -25,9 +25,9 @@ import overrideableCP from '../../utils/overrideable-cp';
  (see the `value` property) as an argument.
 
  ```hbs
- {{#bs-button type="primary" icon="glyphicon glyphicon-download" onClick=(action "download")}}
-   Download
- {{/bs-button}}
+ <BsButton @type="primary" @icon="glyphicon glyphicon-download" @onClick=(action "download")> 
+  Downloads
+ </BsButton>
  ```
 
  ### Promise support for automatic state change
@@ -37,7 +37,15 @@ import overrideableCP from '../../utils/overrideable-cp';
  according to the state of the promise:
 
  ```hbs
- {{bs-button type="primary" icon="glyphicon glyphicon-download" defaultText="Download" pendingText="Loading..." fulfilledText="Completed!" rejectedText="Oups!?" onClick=(action "download")}}
+  <BsButton 
+    @type="primary" 
+    @icon="glyphicon glyphicon-download" 
+    @defaultText="Download" 
+    @pendingText="Loading..."
+    @fulfilledText="Completed!"
+    @rejectedText="Oups!?" 
+    @onClick=(action "download")
+  />
  ```
 
  ```js
@@ -54,12 +62,12 @@ import overrideableCP from '../../utils/overrideable-cp';
  For further customization `isPending`, `isFulfilled`, `isRejected` and `isSettled` properties are yielded:
 
  ```hbs
- {{#bs-button onClick=(action "download") as |button|}}
+ <BsButton @onClick=(action "download") as |button|> 
   Download
   {{#if button.isPending}}
     <span class="loading-spinner"></span>
   {{/if}}
- {{/bs-button}}
+ </BsButton>
  ```
 
  You can `reset` the state represented by these properties and used for button's text by setting `reset` property to
