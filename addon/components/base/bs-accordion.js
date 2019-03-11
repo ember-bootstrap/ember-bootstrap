@@ -20,7 +20,7 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
     <Acc.item @value={{2}} @title="Second item">
       <p>Lorem ipsum...</p>
     </Acc.item>
-    <Acc.item @value={{2}} @title="Third item">
+    <Acc.item @value={{3}} @title="Third item">
       <p>Lorem ipsum...</p>
     </Acc.item>
   </BsAccordion>
