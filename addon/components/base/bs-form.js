@@ -88,12 +88,12 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
   `isRejected` is `true` if last submission was rejected due to validation errors or by an action bound to `onSubmit` event, returning a rejected promise.
   Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:
 
-  ```
-  {{#bs-form onSubmit=(action 'save') as |form|}}
-    {{#bs-button buttonType='submit' type=(if form.isRejected "danger" "primary")}}
+  ```hbs
+  <BsForm @onSubmit={{action 'save}} as |Form|>
+    <BsButton @buttonType="submit" @type={{if Form.isRejected "danger" "primary"}}>
       Save
-    {{/bs-button}}
-  {{/bs-form}}
+    </BsButton>
+  </BsForm>
   ```
 
   @class Form

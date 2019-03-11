@@ -62,7 +62,7 @@ import overrideableCP from '../../utils/overrideable-cp';
  For further customization `isPending`, `isFulfilled`, `isRejected` and `isSettled` properties are yielded:
 
  ```hbs
-  <BsButton @onClick=(action "download") as |button|> 
+  <BsButton @onClick=(action "download") as |button|>
     Download
     {{#if button.isPending}}
       <span class="loading-spinner"></span>

@@ -12,7 +12,7 @@ import layout from 'ember-bootstrap/templates/components/bs-progress';
 
  ```hbs
   <BsProgress as |P| >
-    <P.bar @value={{this.progressValue}} @minValue={{0}} @maxValue={{10}} @showLabel={{true}} @type="dange" />
+    <P.bar @value={{this.progressValue}} @minValue={{0}} @maxValue={{10}} @showLabel={{true}} @type="dange"/>
   </BsProgress>
  ```
 
@@ -23,9 +23,9 @@ import layout from 'ember-bootstrap/templates/components/bs-progress';
 
  ```hbs
   <BsProgress as |P| >
-    <P.bar @value={{this.progressValue1}} @type="success" />
-    <P.bar @value={{this.progressValue2}} @type="warning" />
-    <P.bar @value={{this.progressValue3}} @type="danger" />
+    <P.bar @value={{this.progressValue1}} @type="success"/>
+    <P.bar @value={{this.progressValue2}} @type="warning"/>
+    <P.bar @value={{this.progressValue3}} @type="danger"/>
   </BsProgress>
  ```
 

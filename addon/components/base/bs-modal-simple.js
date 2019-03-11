@@ -38,8 +38,8 @@ import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
  ```hbs
   <BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok">
     <BsForm @model={{this}} @onSubmit={{action "submit"}} as |Form|>
-      <Form.element @controlType="text" @label="first name" @property="firstname" />
-      <Form.element @controlType="text" @label="last name" @property="lastname" />
+      <Form.element @controlType="text" @label="first name" @property="firstname"/>
+      <Form.element @controlType="text" @label="last name" @property="lastname"/>
     </BsForm>
   </BsModalSimple>
  ```
@@ -57,7 +57,7 @@ import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
   <BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok">
     <BsForm @model={{this}} @onSubmit={{action "submit"}} as |Form|>
       <Form.element @controlType="text" @label="first name" @property="firstname" @autofocus={{true}}/>
-      <Form.element @controlType="text" @label="last name" @property="lastname" />
+      <Form.element @controlType="text" @label="last name" @property="lastname"/>
     </BsForm>
   </BsModalSimple>
 
