@@ -13,14 +13,14 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
  ```handlebars
   <BsAccordion as |Acc|>
-    <Acc.item @value=1 @title="First item">
+    <Acc.item @value={{1}} @title="First item">
       <p>Lorem ipsum...</p>
       <button {{action acc.change 2}}>Next</button>
     </Acc.item>
-    <Acc.item @value=2 @title="Second item">
+    <Acc.item @value={{2}} @title="Second item">
       <p>Lorem ipsum...</p>
     </Acc.item>
-    <Acc.item @value=2 @title="Third item">
+    <Acc.item @value={{2}} @title="Third item">
       <p>Lorem ipsum...</p>
     </Acc.item>
   </BsAccordion>

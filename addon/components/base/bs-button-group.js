@@ -12,11 +12,11 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  a yielded pre-configured contextual component:
 
  ```handlebars
- <BsButtonGroup as |Bg|>
-  <Bg.button>1</Bg.button>
-  <Bg.button>2</Bg.button>
-  <Bg.button>3</Bg.button>
- </BsButtonGroup>
+  <BsButtonGroup as |Bg|>
+    <Bg.button>1</Bg.button>
+    <Bg.button>2</Bg.button>
+    <Bg.button>3</Bg.button>
+  </BsButtonGroup>
  ```
 
  ### Radio-like behaviour
@@ -26,13 +26,13 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  the value of the active button:
 
  ```handlebars
- <BsButtonGroup @value={{this.buttonGroupValue}} @type="radio" onChange={{action (mut this.buttonGroupValue}} as |Bg|>
-  <Bg.button @type="default" @value=1 >1</Bg.button>
-  <Bg.button @type="default" @value=2 >2</Bg.button>
-  <Bg.button @type="default" @value=3 >3</Bg.button>
- </BsButtonGroup>
+  <BsButtonGroup @value={{this.buttonGroupValue}} @type="radio" onChange={{action (mut this.buttonGroupValue}} as |Bg|>
+    <Bg.button @type="default" @value={{1}}>1</Bg.button>
+    <Bg.button @type="default" @value={{2}}>2</Bg.button>
+    <Bg.button @type="default" @value={{3}}>3</Bg.button>
+  </BsButtonGroup>
 
- You selected: {{this.buttonGroupValue}}!
+  You selected: {{this.buttonGroupValue}}!
  ```
 
  ### Checkbox-like behaviour
@@ -41,18 +41,18 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  of all the values of the active buttons:
 
  ```handlebars
- <BsButtonGroup @value={{this.buttonGroupValue}} @type="checkbox" onChange={{action (mut this.buttonGroupValue}} as |Bg|>
-  <Bg.button @type="default" @value=1 >1</Bg.button>
-  <Bg.button @type="default" @value=2 >2</Bg.button>
-  <Bg.button @type="default" @value=3 >3</Bg.button>
- </BsButtonGroup>
+  <BsButtonGroup @value={{this.buttonGroupValue}} @type="checkbox" onChange={{action (mut this.buttonGroupValue}} as |Bg|>
+    <Bg.button @type="default" @value={{1}}>1</Bg.button>
+    <Bg.button @type="default" @value={{2}}>2</Bg.button>
+    <Bg.button @type="default" @value={{3}}>3</Bg.button>
+  </BsButtonGroup>
 
- You selected:
- <ul>
- {{#each value in this.buttonGroupValue}}
-   <li>{{value}}</li>
- {{/each}}
- </ul>
+  You selected:
+  <ul>
+    {{#each value in this.buttonGroupValue}}
+      <li>{{value}}</li>
+    {{/each}}
+  </ul>
  ```
 
  @class ButtonGroup
