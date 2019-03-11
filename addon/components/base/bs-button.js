@@ -25,7 +25,7 @@ import overrideableCP from '../../utils/overrideable-cp';
  (see the `value` property) as an argument.
 
  ```hbs
-  <BsButton @type="primary" @icon="glyphicon glyphicon-download" @onClick=(action "download")> 
+  <BsButton @type="primary" @icon="glyphicon glyphicon-download" @onClick=(action "download")>
     Downloads
   </BsButton>
  ```
