@@ -44,7 +44,7 @@ import overrideableCP from '../../utils/overrideable-cp';
     @pendingText="Loading..."
     @fulfilledText="Completed!"
     @rejectedText="Oups!?" 
-    @onClick=(action "download")
+    @onClick={{action "download"}}
   />
  ```
 
