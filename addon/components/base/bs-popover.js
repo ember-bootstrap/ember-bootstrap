@@ -49,7 +49,7 @@ import layout from 'ember-bootstrap/templates/components/bs-popover';
  *  a `close` action is yielded, that allows you to close the tooltip:
 
  ```hbs
-  <BsPopover as |Po| >This is a popover <button {{action Po.close}}>Close</button></BsPopover>
+  <BsPopover as |Po| >This is a popover <button onclick={{action Po.close}}>Close</button></BsPopover>
  ```
 
  See the individual API docs for each property.

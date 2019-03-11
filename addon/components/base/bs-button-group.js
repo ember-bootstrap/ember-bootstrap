@@ -26,7 +26,7 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  the value of the active button:
 
  ```handlebars
-  <BsButtonGroup @value={{this.buttonGroupValue}} @type="radio" onChange={{action (mut this.buttonGroupValue}} as |Bg|>
+  <BsButtonGroup @value={{this.buttonGroupValue}} @type="radio" @onChange={{action (mut this.buttonGroupValue}} as |Bg|>
     <Bg.button @type="default" @value={{1}}>1</Bg.button>
     <Bg.button @type="default" @value={{2}}>2</Bg.button>
     <Bg.button @type="default" @value={{3}}>3</Bg.button>
@@ -41,7 +41,7 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
  of all the values of the active buttons:
 
  ```handlebars
-  <BsButtonGroup @value={{this.buttonGroupValue}} @type="checkbox" onChange={{action (mut this.buttonGroupValue}} as |Bg|>
+  <BsButtonGroup @value={{this.buttonGroupValue}} @type="checkbox" @onChange={{action (mut this.buttonGroupValue}} as |Bg|>
     <Bg.button @type="default" @value={{1}}>1</Bg.button>
     <Bg.button @type="default" @value={{2}}>2</Bg.button>
     <Bg.button @type="default" @value={{3}}>3</Bg.button>

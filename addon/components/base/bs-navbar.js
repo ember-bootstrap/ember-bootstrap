@@ -66,7 +66,7 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
     <Navbar.content>
       <Navbar.nav as |Nav|>
         <Nav.item>
-          <a {{action Navbar.collapse}}>Collapse</a>
+          <a onclick={{action Navbar.collapse}}>Collapse</a>
         </Nav.item>
       </Navbar.nav>
     </Navbar.content>
