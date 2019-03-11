@@ -36,12 +36,12 @@ import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
  thus bypass the form validation feature of the form component.
 
  ```hbs
- <BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok">
-  <BsForm @model={{this}} @onSubmit={{action "submit"}} as |Form|>
-    <Form.element @controlType="text" @label="first name" @property="firstname" />
-    <Form.element @controlType="text" @label="last name" @property="lastname" />
-  </BsForm>
- </BsModalSimple>
+  <BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok">
+    <BsForm @model={{this}} @onSubmit={{action "submit"}} as |Form|>
+      <Form.element @controlType="text" @label="first name" @property="firstname" />
+      <Form.element @controlType="text" @label="last name" @property="lastname" />
+    </BsForm>
+  </BsModalSimple>
  ```
 
  The modal component supports this common case by triggering the submit event programmatically on the body's form if
@@ -54,12 +54,12 @@ import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
  then give it the HTML5 autofocus attribute:
 
  ```hbs
- <BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok">
-  <BsForm @model={{this}} @onSubmit={{action "submit"}} as |Form|>
-    <Form.element @controlType="text" @label="first name" @property="firstname" @autofocus={{true}}/>
-    <Form.element @controlType="text" @label="last name" @property="lastname" />
-  </BsForm>
- </BsModalSimple>
+  <BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok">
+    <BsForm @model={{this}} @onSubmit={{action "submit"}} as |Form|>
+      <Form.element @controlType="text" @label="first name" @property="firstname" @autofocus={{true}}/>
+      <Form.element @controlType="text" @label="last name" @property="lastname" />
+    </BsForm>
+  </BsModalSimple>
 
  ```
 

@@ -17,11 +17,11 @@ import layout from 'ember-bootstrap/templates/components/bs-tooltip';
  You can also use the component in a block form to set the title:
 
  ```hbs
- <button class="btn">
-  <BsTooltip>
-    This is a toolip
-  </BsTooltip>
- </button>
+  <button class="btn">
+    <BsTooltip>
+      This is a toolip
+    </BsTooltip>
+  </button>
  ```
 
  ### Trigger
@@ -59,7 +59,7 @@ import layout from 'ember-bootstrap/templates/components/bs-tooltip';
  * a `close` action is yielded, that allows you to close the tooltip:
 
  ```hbs
- <BsTooltip as |tt|>This is a toolip <button {{action tt.close}}>Close</button></BsTooltip>
+  <BsTooltip as |tt|>This is a toolip <button {{action tt.close}}>Close</button></BsTooltip>
  ```
 
  See the individual API docs for each property.

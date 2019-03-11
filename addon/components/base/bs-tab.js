@@ -18,14 +18,14 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  The tab navigation is automatically generated from the tab panes' `title` property:
 
  ```hbs
- <BsTab as |Tab|>
-  <Tab.pane @title="Tab 1">
-    <p> ... </p>
-  </Tab.pane>
-  <Tab.pane @title="Tab 2">
-    <p> ... </p>
-  </Tab.pane>
- </BsTab>
+  <BsTab as |Tab|>
+    <Tab.pane @title="Tab 1">
+      <p> ... </p>
+    </Tab.pane>
+    <Tab.pane @title="Tab 2">
+      <p> ... </p>
+    </Tab.pane>
+  </BsTab>
  ```
 
  ### Groupable (dropdown) tabs
@@ -35,20 +35,20 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  component with `groupTitle` being the dropdown's title:
 
  ```hbs
- <BsTab as |Tab|>
-  <Tab.pane @title="Tab 1">
-    <p> ... </p>
-  </Tab.pane>
-  <Tab.pane @title="Tab 2">
-    <p> ... </p>
-  </Tab.pane>
-  <Tab.pane @title="Tab 3" @groupTitle="Dropdown">
-    <p> ... </p>
-  </Tab.pane>
-  <Tab.pane @title="Tab 4" @groupTitle="Dropdown">
-    <p> ... </p>
-  </Tab.pane>
- </BsTab>
+  <BsTab as |Tab|>
+    <Tab.pane @title="Tab 1">
+      <p> ... </p>
+    </Tab.pane>
+    <Tab.pane @title="Tab 2">
+      <p> ... </p>
+    </Tab.pane>
+    <Tab.pane @title="Tab 3" @groupTitle="Dropdown">
+      <p> ... </p>
+    </Tab.pane>
+    <Tab.pane @title="Tab 4" @groupTitle="Dropdown">
+      <p> ... </p>
+    </Tab.pane>
+  </BsTab>
  ```
 
  ### Custom tabs
@@ -92,12 +92,12 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
  the [Components.Nav](Components.Nav.html) component and an `{{outlet}}` that show the nested routes' content:
 
  ```hbs
- <div>
-  <BsNav @type="tabs" as |Nav| >
-    <Nav.item><Nav.link-to "tabs.index">Tab 1</Nav.link-to></Nav.item>
-    <Nav.item><Nav.link-to "tabs.other">Tab 2</Nav.link-to></Nav.item>
-  </BsNav>
- </div>
+  <div>
+    <BsNav @type="tabs" as |Nav| >
+      <Nav.item><Nav.link-to "tabs.index">Tab 1</Nav.link-to></Nav.item>
+      <Nav.item><Nav.link-to "tabs.other">Tab 2</Nav.link-to></Nav.item>
+    </BsNav>
+  </div>
  ```
 
  @class Tab

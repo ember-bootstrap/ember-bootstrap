@@ -14,9 +14,9 @@ import overrideableCP from '../../utils/overrideable-cp';
  ### Basic Usage
 
  ```hbs
- <BsButton @type="primary" @icon="glyphicon glyphicon-download"> 
-  Downloads
- </BsButton>
+  <BsButton @type="primary" @icon="glyphicon glyphicon-download"> 
+    Downloads
+  </BsButton>
  ```
 
  ### Actions
@@ -25,9 +25,9 @@ import overrideableCP from '../../utils/overrideable-cp';
  (see the `value` property) as an argument.
 
  ```hbs
- <BsButton @type="primary" @icon="glyphicon glyphicon-download" @onClick=(action "download")> 
-  Downloads
- </BsButton>
+  <BsButton @type="primary" @icon="glyphicon glyphicon-download" @onClick=(action "download")> 
+    Downloads
+  </BsButton>
  ```
 
  ### Promise support for automatic state change
@@ -50,24 +50,24 @@ import overrideableCP from '../../utils/overrideable-cp';
 
  ```js
  // controller.js
- export default Ember.Controller.extend({
-   actions: {
-     download(value) {
-       return new Ember.RSVP.Promise(...);
-     }
-   }
- });
+  export default Ember.Controller.extend({
+    actions: {
+      download(value) {
+        return new Ember.RSVP.Promise(...);
+      }
+    }
+  });
  ```
 
  For further customization `isPending`, `isFulfilled`, `isRejected` and `isSettled` properties are yielded:
 
  ```hbs
- <BsButton @onClick=(action "download") as |button|> 
-  Download
-  {{#if button.isPending}}
-    <span class="loading-spinner"></span>
-  {{/if}}
- </BsButton>
+  <BsButton @onClick=(action "download") as |button|> 
+    Download
+    {{#if button.isPending}}
+      <span class="loading-spinner"></span>
+    {{/if}}
+  </BsButton>
  ```
 
  You can `reset` the state represented by these properties and used for button's text by setting `reset` property to

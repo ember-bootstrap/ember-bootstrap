@@ -17,18 +17,18 @@ import { findElementById, getDOM } from '../../utils/dom';
  ### Usage
 
  ```hbs
- <BsModal @onSubmit={{action "submit"}} as |Modal|>
-  <Modal.header>
-    <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Alert</h4>
-  </Modal.header>
-  <Modal.body>
-    Are you absolutely sure you want to do that???
-  </Modal.body>
-  <Modal.footer as |footer|>
-    <BsButton @onClick={{action Modal.close}} @type="danger">Oh no, forget it!</BsButton>
-    <BsButton @onClick={{action Modal.submit}} @type="success">Yeah!</BsButton>
-  </Modal.footer>
- </BsModal>
+  <BsModal @onSubmit={{action "submit"}} as |Modal|>
+    <Modal.header>
+      <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Alert</h4>
+    </Modal.header>
+    <Modal.body>
+      Are you absolutely sure you want to do that???
+    </Modal.body>
+    <Modal.footer as |footer|>
+      <BsButton @onClick={{action Modal.close}} @type="danger">Oh no, forget it!</BsButton>
+      <BsButton @onClick={{action Modal.submit}} @type="success">Yeah!</BsButton>
+    </Modal.footer>
+  </BsModal>
  ```
 
  The component yields references to the following contextual components, that you can use to further customize the output:

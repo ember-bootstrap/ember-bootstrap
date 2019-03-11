@@ -24,17 +24,17 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
  * `closeDropdown`
 
  ```hbs
- <BsDropdown as |dd|>
-  <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
-  <dd.menu as |ddm|>
-    <ddm.item>
-      <ddm.link-to "index">Something</ddm.link-to>
-    </ddm.item>
-    <ddm.item>
-      <ddm.link-to "index">Something different</ddm.link-to>
-    </ddm.item>
-  </dd.menu>
- </BsDropdown>
+  <BsDropdown as |dd|>
+    <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+    <dd.menu as |ddm|>
+      <ddm.item>
+        <ddm.link-to "index">Something</ddm.link-to>
+      </ddm.item>
+      <ddm.item>
+        <ddm.link-to "index">Something different</ddm.link-to>
+      </ddm.item>
+    </dd.menu>
+  </BsDropdown>
  ```
 
  If you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`
@@ -47,17 +47,17 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
  `Components.DropdownButton` component as the toggle:
 
  ```hbs
- <BsDropdown as |dd|>
-  <dd.button>Dropdown <span class="caret"></span></dd.button>
-  <dd.menu as |ddm|>
-    <ddm.item>
-      <ddm.link-to "index">Something</ddm.link-to>
-    </ddm.item>
-    <ddm.item>
-      <ddm.link-to "index">Something different</ddm.link-to>
-    </ddm.item>
-  </dd.menu>
- </BsDropdown>
+  <BsDropdown as |dd|>
+    <dd.button>Dropdown <span class="caret"></span></dd.button>
+    <dd.menu as |ddm|>
+      <ddm.item>
+        <ddm.link-to "index">Something</ddm.link-to>
+      </ddm.item>
+      <ddm.item>
+        <ddm.link-to "index">Something different</ddm.link-to>
+      </ddm.item>
+    </dd.menu>
+  </BsDropdown>
  ```
 
  It has all the functionality of a `Components.Button` with additional dropdown support.
@@ -68,18 +68,18 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
  `Components.Button` component and a `Components.DropdownButton`:
 
  ```hbs
- <BsDropdown as |dd|>
-  <BsButton>Dropdown</BsButton>
-  <dd.button>Dropdown <span class="caret"></span></dd.button>
-  <dd.menu as |ddm|>
-    <ddm.item>
-      <ddm.link-to "index">Something</ddm.link-to>
-    </ddm.item>
-    <ddm.item>
-      <ddm.link-to "index">Something different</ddm.link-to>
-    </ddm.item>
-  </dd.menu>
- </BsDropdown>
+  <BsDropdown as |dd|>
+    <BsButton>Dropdown</BsButton>
+    <dd.button>Dropdown <span class="caret"></span></dd.button>
+    <dd.menu as |ddm|>
+      <ddm.item>
+        <ddm.link-to "index">Something</ddm.link-to>
+      </ddm.item>
+      <ddm.item>
+        <ddm.link-to "index">Something different</ddm.link-to>
+      </ddm.item>
+    </dd.menu>
+  </BsDropdown>
  ```
 
  ### Dropup style
@@ -87,9 +87,9 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
  Set the `direction` property to "up" to switch to a "dropup" style:
 
  ```hbs
- <BsDropdown @direction="up" as |dd|>
-  ...
- </BsDropdown>
+  <BsDropdown @direction="up" as |dd|>
+    ...
+  </BsDropdown>
  ```
 
  ### Open, close or toggle the dropdown programmatically
@@ -98,35 +98,35 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
  `openDropdown`, `closeDropdown` and `toggleDropdown` actions which you can then pass to your own handlers. For example:
 
  ```hbs
- <BsDropdown @closeOnMenuClick={{false}} as |dd|>
-  <BsButton>Dropdown</BsButton>
-  <dd.button>Dropdown <span class="caret"></span></dd.button>
-  <dd.menu as |ddm|>
-    {{#each this.items as |item|}}
-      <ddm.item>
-        <a href onclick={{action "changeItems" item dd.closeDropdown}}>
-          {{item.text}}
-        </a>
-      </ddm.item>
-    {{/each}}
-  </dd.menu>
- </BsDropdown>
+  <BsDropdown @closeOnMenuClick={{false}} as |dd|>
+    <BsButton>Dropdown</BsButton>
+    <dd.button>Dropdown <span class="caret"></span></dd.button>
+    <dd.menu as |ddm|>
+      {{#each this.items as |item|}}
+        <ddm.item>
+          <a href onclick={{action "changeItems" item dd.closeDropdown}}>
+            {{item.text}}
+          </a>
+        </ddm.item>
+      {{/each}}
+    </dd.menu>
+  </BsDropdown>
  ```
 
  Then in your controller or component, optionally close the dropdown:
 
  ```js
- ...
- actions: {
-   handleDropdownClicked(item, closeDropdown) {
-     if(item.isTheRightOne) {
-       this.chosenItems.pushObject(item);
-       closeDropdown();
-     } else {
-       this.set('item', this.getRandomItems());
-     }
-   },
- }
+  ...
+  actions: {
+    handleDropdownClicked(item, closeDropdown) {
+      if(item.isTheRightOne) {
+        this.chosenItems.pushObject(item);
+        closeDropdown();
+      } else {
+        this.set('item', this.getRandomItems());
+      }
+    },
+  }
  ```
 
 

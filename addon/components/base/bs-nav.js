@@ -16,14 +16,14 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
  * [`nav.dropdown`](Components.Dropdown.html)
 
  ```hbs
- <BsNav @type="pills" as |Nav|>
-  <Nav.item>
-    <Nav.link-to "foo">Foo</Nav.link-to>
-  </Nav.item>
-  <Nav.item>
-    <Nav.link-to "bar">Bar</Nav.link-to>
-  </Nav.item>
- </BsNav>
+  <BsNav @type="pills" as |Nav|>
+    <Nav.item>
+      <Nav.link-to "foo">Foo</Nav.link-to>
+    </Nav.item>
+    <Nav.item>
+      <Nav.link-to "bar">Bar</Nav.link-to>
+    </Nav.item>
+  </BsNav>
  ```
 
  ### Nav styles
@@ -44,19 +44,19 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
  with a `tagName` of "li" to integrate a dropdown into your nav:
 
  ```hbs
- <BsNav @type="pills" as |Nav|>
-  <Nav.item><Nav.link-to "index">Home</Nav.link-to></Nav.item>
-  <Nav.dropdown as |dd|>
-    <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
-    <dd.menu as |ddm|>
-      <ddm.item><ddm.link-to "foo">Foo</ddm.link-to></ddm.item>
-      <ddm.item><ddm.link-to "bar">Bar</ddm.link-to></ddm.item>
-    </dd.menu>
-  </Nav.dropdown>
-  <Nav.item>
-    <Nav.link-to "bar">Bar</Nav.link-to>
-  </Nav.item>
- </BsNav>
+  <BsNav @type="pills" as |Nav|>
+    <Nav.item><Nav.link-to "index">Home</Nav.link-to></Nav.item>
+    <Nav.dropdown as |dd|>
+      <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+      <dd.menu as |ddm|>
+        <ddm.item><ddm.link-to "foo">Foo</ddm.link-to></ddm.item>
+        <ddm.item><ddm.link-to "bar">Bar</ddm.link-to></ddm.item>
+      </dd.menu>
+    </Nav.dropdown>
+    <Nav.item>
+      <Nav.link-to "bar">Bar</Nav.link-to>
+    </Nav.item>
+  </BsNav>
  ```
 
  ### Bootstrap 3/4 Notes
