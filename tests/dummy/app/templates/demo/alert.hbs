@@ -1,40 +1,66 @@
-<h2>Simple example</h2>
-
+<h2>
+  Simple example
+</h2>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET alert-simple -->
-  {{#bs-alert type="success"}}
-    <strong>Well done!</strong> You successfully read this important alert message.
-  {{/bs-alert}}
+  <BsAlert @type="success">
+    <strong>
+      Well done!
+    </strong>
+    You successfully read this important alert message.
+  </BsAlert>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="alert-simple.hbs"}}
+  <CodeSnippet @name="alert-simple.hbs" />
 </div>
-
-<h2>Options</h2>
-
+<h2>
+  Options
+</h2>
 <div class="bs-example">
-  {{#bs-form formLayout="inline" model=this as |form|}}
-    {{form.element controlType="checkbox" label="Show/Hide" property="visible"}}
-    {{form.element controlType="checkbox" label="Fade animation" property="fade"}}
-    {{form.element controlType="checkbox" label="Dismissible" property="dismissible"}}
-    {{#form.element controlType="power-select" options=typeChoices label="Type" property="type" as |el|}}
-      {{el.control searchEnabled=false}}
-    {{/form.element}}
-  {{/bs-form}}
-  <hr>
-  <!-- BEGIN-SNIPPET alert-options -->
-  {{#bs-alert
-    visible=visible
-    fade=fade
-    type=type
-    dismissible=dismissible
-  }}
-    <strong>Well done!</strong> You successfully read this important alert message.
-  {{/bs-alert}}
-  <!-- END-SNIPPET -->
+  <BsForm @formLayout="inline" @model={{this}} as |form|>
+    <Form.element
+      @controlType="checkbox"
+      label="Show/Hide"
+      @property="visible"
+     />
 
+    <Form.element
+      @controlType="checkbox"
+      label="Fade animation"
+      @property="fade"
+     />
+
+    <Form.element
+      @controlType="checkbox"
+      label="Dismissible"
+      @property="dismissible"
+     />
+
+    <Form.element
+      @controlType="power-select"
+      @options={{typeChoices}}
+      label="Type"
+      @property="type" as |el|
+    >
+      <El.control @searchEnabled />
+    </Form.element>
+  </BsForm>
+  <hr />
+  <!-- BEGIN-SNIPPET alert-options -->
+  <BsAlert
+    @visible={{visible}}
+    @fade={{fade}}
+    @type={{type}}
+    @dismissible={{dismissible}}
+  >
+    <strong>
+      Well done!
+    </strong>
+    You successfully read this important alert message.
+  </BsAlert>
+  <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="alert-options.hbs"}}
+  <CodeSnippet @name="alert-options.hbs" />
 </div>

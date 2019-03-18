@@ -1,61 +1,78 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET accordion-demo -->
-  {{#bs-accordion as |acc|}}
-    {{#acc.item value="1" title="First item"}}
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
-    {{/acc.item}}
-    {{#acc.item value="2" as |aitem|}}
-      {{#aitem.title}}
-        <strong>Second</strong> <i>item</i>
-      {{/aitem.title}}
-      {{#aitem.body}}
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
-      {{/aitem.body}}
-    {{/acc.item}}
-    {{#acc.item value="3" title="Third item"}}
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
-    {{/acc.item}}
-  {{/bs-accordion}}
+  <BsAccordion as |acc|>
+    <Acc.item value="1" title="First item">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?
+      </p>
+    </Acc.item>
+    <Acc.item value="2" as |aitem|>
+      <Aitem.title>
+        <strong>
+          Second
+        </strong>
+        <i>
+          item
+        </i>
+      </Aitem.title>
+      <Aitem.body>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?
+        </p>
+      </Aitem.body>
+    </Acc.item>
+    <Acc.item value="3" title="Third item">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?
+      </p>
+    </Acc.item>
+  </BsAccordion>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="accordion-demo.hbs"}}
+  <CodeSnippet @name="accordion-demo.hbs" />
 </div>
-
-<h2>Customization</h2>
-
-<p>You can apply Bootstrap 4's utility classes to customize the look of the accordion's card items.</p>
-
+<h2>
+  Customization
+</h2>
+<p>
+  You can apply Bootstrap 4's utility classes to customize the look of the accordion's card items.
+</p>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET accordion-styling-demo -->
-  {{#bs-accordion as |acc|}}
-    {{#acc.item value="1" title="Border" class="border-dark"}}
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
-    {{/acc.item}}
-    {{#acc.item value="2" class="bg-dark" as |aitem|}}
-      {{#aitem.title}}
+  <BsAccordion as |acc|>
+    <Acc.item value="1" title="Border" class="border-dark">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?
+      </p>
+    </Acc.item>
+    <Acc.item value="2" class="bg-dark" as |aitem|>
+      <Aitem.title>
         <span class="text-white">
           Dark
         </span>
-      {{/aitem.title}}
-      {{#aitem.body class="text-white"}}
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
-      {{/aitem.body}}
-    {{/acc.item}}
-    {{#acc.item value="3" class="bg-success" as |aitem|}}
-      {{#aitem.title}}
+      </Aitem.title>
+      <Aitem.body class="text-white">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?
+        </p>
+      </Aitem.body>
+    </Acc.item>
+    <Acc.item value="3" class="bg-success" as |aitem|>
+      <Aitem.title>
         <span class="text-white">
           Success
         </span>
-      {{/aitem.title}}
-      {{#aitem.body class="text-white"}}
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?</p>
-      {{/aitem.body}}
-    {{/acc.item}}
-  {{/bs-accordion}}
+      </Aitem.title>
+      <Aitem.body class="text-white">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?
+        </p>
+      </Aitem.body>
+    </Acc.item>
+  </BsAccordion>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="accordion-styling-demo.hbs"}}
+  <CodeSnippet @name="accordion-styling-demo.hbs" />
 </div>
-
