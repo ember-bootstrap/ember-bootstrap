@@ -1,70 +1,99 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET dropdown-demo -->
-  {{#bs-dropdown tagName="span" as |dd|}}
-    {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-    {{#dd.menu as |menu|}}
-      {{#menu.item}}
-        {{#menu.link-to "index"}}Home{{/menu.link-to}}
-      {{/menu.item}}
+  <BsDropdown @tagName="span" as |dd|>
+    <Dd.toggle>
+      Dropdown
+      <span class="caret"></span>
+    </Dd.toggle>
+    <Dd.menu as |menu|>
+      <Menu.item>
+        <Menu.linkTo>
+          Home
+        </Menu.linkTo>
+      </Menu.item>
       {{menu.divider}}
-      {{#menu.item}}
-        {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
-      {{/menu.item}}
+      <Menu.item>
+        <Menu.linkTo>
+          Dropdowns
+        </Menu.linkTo>
+      </Menu.item>
       {{menu.divider}}
-      {{#menu.item}}
-        <a href="https://example.com" class="dropdown-item">External</a>
-      {{/menu.item}}
-    {{/dd.menu}}
-  {{/bs-dropdown}}
-  {{#bs-dropdown direction="up" tagName="span" as |dd|}}
-    {{#dd.toggle}}Dropup <span class="caret"></span>{{/dd.toggle}}
-    {{#dd.menu align="right" as |menu|}}
-      {{#menu.item}}
-        {{#menu.link-to "index"}}Home{{/menu.link-to}}
-      {{/menu.item}}
+      <Menu.item>
+        <a href="https://example.com" class="dropdown-item">
+          External
+        </a>
+      </Menu.item>
+    </Dd.menu>
+  </BsDropdown>
+  <BsDropdown @direction="up" @tagName="span" as |dd|>
+    <Dd.toggle>
+      Dropup
+      <span class="caret"></span>
+    </Dd.toggle>
+    <Dd.menu @align="right" as |menu|>
+      <Menu.item>
+        <Menu.linkTo>
+          Home
+        </Menu.linkTo>
+      </Menu.item>
       {{menu.divider}}
-      {{#menu.item}}
-        {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
-      {{/menu.item}}
-    {{/dd.menu}}
-  {{/bs-dropdown}}
+      <Menu.item>
+        <Menu.linkTo>
+          Dropdowns
+        </Menu.linkTo>
+      </Menu.item>
+    </Dd.menu>
+  </BsDropdown>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="dropdown-demo.hbs"}}
+  <CodeSnippet @name="dropdown-demo.hbs" />
 </div>
-
-
-<h2>Button dropdowns</h2>
-
+<h2>
+  Button dropdowns
+</h2>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET dropdown-button -->
-  {{#bs-dropdown as |dd|}}
-    {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
-    {{#dd.menu as |menu|}}
-      {{#menu.item}}
-        {{#menu.link-to "index"}}Home{{/menu.link-to}}
-      {{/menu.item}}
-      {{#menu.item}}
-        {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
-      {{/menu.item}}
-    {{/dd.menu}}
-  {{/bs-dropdown}}
-
-  {{#bs-dropdown as |dd|}}
-    {{#bs-button}}Dropdown{{/bs-button}}
-    {{#dd.button}}<span class="caret"></span>{{/dd.button}}
-    {{#dd.menu as |menu|}}
-      {{#menu.item}}
-        {{#menu.link-to "index"}}Home{{/menu.link-to}}
-      {{/menu.item}}
-      {{#menu.item}}
-        {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
-      {{/menu.item}}
-    {{/dd.menu}}
-  {{/bs-dropdown}}
+  <BsDropdown as |dd|>
+    <Dd.button>
+      Dropdown
+      <span class="caret"></span>
+    </Dd.button>
+    <Dd.menu as |menu|>
+      <Menu.item>
+        <Menu.linkTo>
+          Home
+        </Menu.linkTo>
+      </Menu.item>
+      <Menu.item>
+        <Menu.linkTo>
+          Dropdowns
+        </Menu.linkTo>
+      </Menu.item>
+    </Dd.menu>
+  </BsDropdown>
+  <BsDropdown as |dd|>
+    <BsButton>
+      Dropdown
+    </BsButton>
+    <Dd.button>
+      <span class="caret"></span>
+    </Dd.button>
+    <Dd.menu as |menu|>
+      <Menu.item>
+        <Menu.linkTo>
+          Home
+        </Menu.linkTo>
+      </Menu.item>
+      <Menu.item>
+        <Menu.linkTo>
+          Dropdowns
+        </Menu.linkTo>
+      </Menu.item>
+    </Dd.menu>
+  </BsDropdown>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="dropdown-button.hbs"}}
+  <CodeSnippet @name="dropdown-button.hbs" />
 </div>

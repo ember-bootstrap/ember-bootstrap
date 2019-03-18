@@ -1,27 +1,75 @@
 <div class="bs-example">
-  {{#bs-form formLayout="inline" model=this as |form|}}
-    {{#form.element controlType="power-select" options=typeChoices label="Type" property="type" as |el|}}
-      {{el.control searchEnabled=false}}
-    {{/form.element}}
-    {{form.element controlType="checkbox" disabled=(bs-eq type "tabs") label="Stacked" property="stacked" onChange=(action "updateStacked")}}
-    {{form.element controlType="checkbox" disabled=stacked label="Justified" property="justified"}}
-    {{form.element controlType="checkbox" disabled=stacked label="Fill" property="fill"}}
-  {{/bs-form}}
-  <hr>
+  <BsForm @formLayout="inline" @model={{this}} as |form|>
+    <Form.element
+      @controlType="power-select"
+      @options={{typeChoices}}
+      label="Type"
+      @property="type" as |el|
+    >
+      <El.control @searchEnabled />
+    </Form.element>
+    <Form.element
+      @controlType="checkbox"
+      @disabled={{bs-eq type tabs}}
+      label="Stacked"
+      @property="stacked"
+      @onChange={{action updateStacked}}
+     />
+
+    <Form.element
+      @controlType="checkbox"
+      @disabled={{stacked}}
+      label="Justified"
+      @property="justified"
+     />
+
+    <Form.element
+      @controlType="checkbox"
+      @disabled={{stacked}}
+      label="Fill"
+      @property="fill"
+     />
+
+  </BsForm>
+  <hr />
   <!-- BEGIN-SNIPPET nav-demo -->
-  {{#bs-nav type=type justified=justified stacked=stacked fill=fill as |nav|}}
-    {{#nav.item}}{{#nav.link-to "index"}}Home{{/nav.link-to}}{{/nav.item}}
-    {{#nav.item}}{{#nav.link-to "demo.navs"}}Navs{{/nav.link-to}}{{/nav.item}}
-    {{#nav.dropdown as |dd|}}
-      {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-      {{#dd.menu as |ddm|}}
-        {{#ddm.item}}{{#ddm.link-to "index"}}Home{{/ddm.link-to}}{{/ddm.item}}
-        {{#ddm.item}}{{#ddm.link-to "demo.navs"}}Navs{{/ddm.link-to}}{{/ddm.item}}
-      {{/dd.menu}}
-    {{/nav.dropdown}}
-  {{/bs-nav}}
+  <BsNav
+    @type={{type}}
+    @justified={{justified}}
+    @stacked={{stacked}}
+    @fill={{fill}} as |nav|
+  >
+    <Nav.item>
+      <Nav.linkTo>
+        Home
+      </Nav.linkTo>
+    </Nav.item>
+    <Nav.item>
+      <Nav.linkTo>
+        Navs
+      </Nav.linkTo>
+    </Nav.item>
+    <Nav.dropdown as |dd|>
+      <Dd.toggle>
+        Dropdown
+        <span class="caret"></span>
+      </Dd.toggle>
+      <Dd.menu as |ddm|>
+        <Ddm.item>
+          <Ddm.linkTo>
+            Home
+          </Ddm.linkTo>
+        </Ddm.item>
+        <Ddm.item>
+          <Ddm.linkTo>
+            Navs
+          </Ddm.linkTo>
+        </Ddm.item>
+      </Dd.menu>
+    </Nav.dropdown>
+  </BsNav>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="nav-demo.hbs"}}
+  <CodeSnippet @name="nav-demo.hbs" />
 </div>
