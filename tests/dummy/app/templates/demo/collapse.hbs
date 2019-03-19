@@ -1,18 +1,18 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET collapse-demo -->
-  <BsButton @active={{notCollapsed}} @onClick={{action toggle}}>
+  <BsButton @active={{notCollapsed}} @onClick={{action "toggle"}}>
     {{#if collapsed}}
       Show
     {{else}}
       Hide
     {{/if}}
   </BsButton>
+
   <hr>
+
   <BsCollapse @collapsed={{collapsed}}>
     <div class="well">
-      <p>
-        This is collapsible content
-      </p>
+      <p>This is collapsible content</p>
     </div>
   </BsCollapse>
   <!-- END-SNIPPET -->
