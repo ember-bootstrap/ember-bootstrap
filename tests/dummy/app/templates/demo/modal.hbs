@@ -12,15 +12,12 @@
   <!-- BEGIN-SNIPPET modal-demo -->
   <BsModalSimple
     @open={{modal1}}
-    title="Simple Dialog"
+    @title="Simple Dialog"
     @size="sm"
-    @onHidden={{action false}}
-  >
+    @onHidden={{action (mut modal1) false}}>
     Hi there
   </BsModalSimple>
-  <BsButton @onClick={{action true}}>
-    Open Modal
-  </BsButton>
+  <BsButton @onClick={{action (mut modal1) true}}>Open Modal</BsButton>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
@@ -29,49 +26,48 @@
 <h3>
   Options
 </h3>
-<Bsform @formLayout="horizontal" @model={{this}} as |form|>
-  <form.element label="Title" @property="title" />
-  <form.element label="Close button" @property="closeTitle" />
+<BsForm @formLayout="horizontal" @model={{this}} as |form|>
+  <form.element @label="Title" @property="title" />
+  <form.element @label="Close button" @property="closeTitle" />
   <form.element
-    label="Submit button"
-    placeholder="Enter title to add a submit button"
+    @label="Submit button"
+    @placeholder="Enter title to add a submit button"
     @property="submitTitle"
    />
 
   <form.element
     @controlType="power-select"
     @options={{sizes}}
-    label="Size"
-    @property="size" as |el|
-  >
+    @label="Size"
+    @property="size" as |el|>
     <el.control @searchEnabled />
   </form.element>
   <form.element
     @controlType="checkbox"
-    label="Close button"
+    @label="Close button"
     @property="closeButton"
    />
 
   <form.element @controlType="checkbox" label="Fade" @property="fade" />
   <form.element
     @controlType="checkbox"
-    label="Backdrop"
+    @label="Backdrop"
     @property="backdrop"
-    @onChange={{action backdropChange}}
+    @onChange={{action "backdropChange"}}
    />
 
   <form.element
     @controlType="checkbox"
-    label="Backdrop close"
+    @label="Backdrop close"
     @property="backdropClose"
    />
 
-</Bsform>
+</BsForm>
 <div class="bs-example bs-example__modal">
   <!-- BEGIN-SNIPPET modal-options -->
   <BsModalSimple
     @open={{modal2}}
-    title={{title}}
+    @title={{title}}
     @closeTitle={{closeTitle}}
     @submitTitle={{submitTitle}}
     @size={{size}}
@@ -79,15 +75,12 @@
     @fade={{fade}}
     @backdrop={{backdrop}}
     @backdropClose={{backdropClose}}
-    @onSubmit={{action submit}}
-    @onHidden={{action close}}
-    @renderInPlace="true"
-  >
+    @onSubmit={{action "submit"}}
+    @onHidden={{action "close"}}
+    @renderInPlace={{true}}>
     Hi there
   </BsModalSimple>
-  <BsButton @onClick={{action open}}>
-    Reopen Modal
-  </BsButton>
+  <BsButton @onClick={{action "open"}}>Reopen Modal</BsButton>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
@@ -107,35 +100,24 @@
   <!-- BEGIN-SNIPPET modal-custom -->
   <BsModal
     @open={{modal3}}
-    @onSubmit={{action submit}}
-    @onHidden={{action false}} as |modal|
-  >
+    @onSubmit={{action "submit"}}
+    @onHidden={{action false}} as |modal|>
     <Modal.header>
       <h4 class="modal-title">
         Custom Dialog
-        <div class="badge">
-          2
-        </div>
+        <div class="badge">2</div>
       </h4>
     </Modal.header>
     <Modal.body>
       <input type="text" autofocus="autofocus">
     </Modal.body>
     <Modal.footer>
-      <BsButton @onClick={{action modal.close}}>
-        Cancel
-      </BsButton>
-      <BsButton @type="danger">
-        Delete
-      </BsButton>
-      <BsButton @type="success" @onClick={{action modal.submit}}>
-        Save
-      </BsButton>
+      <BsButton @onClick={{action modal.close}}>Cancel</BsButton>
+      <BsButton @type="danger">Delete</BsButton>
+      <BsButton @type="success" @onClick={{action modal.submit}}>Save</BsButton>
     </Modal.footer>
   </BsModal>
-  <BsButton @onClick={{action true}}>
-    Open Modal
-  </BsButton>
+  <BsButton @onClick={{action (mut modal3) true}}>Open Modal</BsButton>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
