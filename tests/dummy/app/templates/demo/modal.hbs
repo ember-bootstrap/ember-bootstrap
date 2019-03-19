@@ -101,7 +101,7 @@
   <BsModal
     @open={{modal3}}
     @onSubmit={{action "submit"}}
-    @onHidden={{action false}} as |modal|>
+    @onHidden={{action (mut modal3) false}} as |modal|>
     <Modal.header>
       <h4 class="modal-title">
         Custom Dialog
