@@ -53,7 +53,7 @@
 </p>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET tab-custom -->
-  <BsTab @customtabs="true" as |tab|>
+  <BsTab @customtabs={{true}} as |tab|>
     <BsNav @type="tabs" as |nav|>
       <nav.item @active={{bs-eq tab.activeId pane1}}>
         <a

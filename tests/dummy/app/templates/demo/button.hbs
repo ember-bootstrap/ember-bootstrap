@@ -3,9 +3,7 @@
 </h2>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET button-demo -->
-  <BsButton @onClick={{action submit}}>
-    Button
-  </BsButton>
+  <BsButton @onClick={{action "submit"}}>Button</BsButton>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
@@ -16,74 +14,32 @@
 </h2>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET button-options -->
+  <p> Solid buttons </p>
   <p>
-    Solid buttons
+    <BsButton @type="primary" @onClick={{action "submit"}}>Primary</BsButton>
+    <BsButton @type="secondary" @onClick={{action "submit"}}>Secondary</BsButton>
+    <BsButton @type="success" @onClick={{action "submit"}}>Success</BsButton>
+    <BsButton @type="danger" @onClick={{action "submit"}}>Danger</BsButton>
+    <BsButton @type="warning" @onClick={{action "submit"}}>Warning</BsButton>
+    <BsButton @type="info" @onClick={{action "submit"}}>Info</BsButton>
+    <BsButton @type="light" @onClick={{action "submit"}}>Light</BsButton>
+    <BsButton @type="dark" @onClick={{action "submit"}}>Dark</BsButton>
+    <BsButton @disabled={{true}} @onClick={{action "submit"}}>Disabled</BsButton>
+  </p>
+  <p> Outlined buttons </p>
+  <p>
+    <BsButton @type="primary" @outline={{true}} @onClick={{action "submit"}}>Primary</BsButton>
+    <BsButton @type="secondary" @outline={{true}} @onClick={{action "submit"}}>Secondary</BsButton>
+    <BsButton @type="success" @outline={{true}} @onClick={{action "submit"}}>Success</BsButton>
+    <BsButton @type="danger" @outline={{true}} @onClick={{action "submit"}}>Danger</BsButton>
+    <BsButton @type="warning" @outline={{true}} @onClick={{action "submit"}}>Warning</BsButton>
+    <BsButton @type="info" @outline={{true}} @onClick={{action "submit"}}>Info</BsButton>
+    <BsButton @type="light" @outline={{true}} @onClick={{action "submit"}}>Light</BsButton>
+    <BsButton @type="dark" @outline={{true}} @onClick={{action "submit"}}>Dark</BsButton>
+    <BsButton @disabled={{true}} @outline={{true}} @onClick={{action "submit"}}>Disabled</BsButton>
   </p>
   <p>
-    <BsButton @type="primary" @onClick={{action submit}}>
-      Primary
-    </BsButton>
-    <BsButton @type="secondary" @onClick={{action submit}}>
-      Secondary
-    </BsButton>
-    <BsButton @type="success" @onClick={{action submit}}>
-      Success
-    </BsButton>
-    <BsButton @type="danger" @onClick={{action submit}}>
-      Danger
-    </BsButton>
-    <BsButton @type="warning" @onClick={{action submit}}>
-      Warning
-    </BsButton>
-    <BsButton @type="info" @onClick={{action submit}}>
-      Info
-    </BsButton>
-    <BsButton @type="light" @onClick={{action submit}}>
-      Light
-    </BsButton>
-    <BsButton @type="dark" @onClick={{action submit}}>
-      Dark
-    </BsButton>
-    <BsButton @disabled="true" @onClick={{action submit}}>
-      Disabled
-    </BsButton>
-  </p>
-  <p>
-    Outlined buttons
-  </p>
-  <p>
-    <BsButton @type="primary" @outline="true" @onClick={{action submit}}>
-      Primary
-    </BsButton>
-    <BsButton @type="secondary" @outline="true" @onClick={{action submit}}>
-      Secondary
-    </BsButton>
-    <BsButton @type="success" @outline="true" @onClick={{action submit}}>
-      Success
-    </BsButton>
-    <BsButton @type="danger" @outline="true" @onClick={{action submit}}>
-      Danger
-    </BsButton>
-    <BsButton @type="warning" @outline="true" @onClick={{action submit}}>
-      Warning
-    </BsButton>
-    <BsButton @type="info" @outline="true" @onClick={{action submit}}>
-      Info
-    </BsButton>
-    <BsButton @type="light" @outline="true" @onClick={{action submit}}>
-      Light
-    </BsButton>
-    <BsButton @type="dark" @outline="true" @onClick={{action submit}}>
-      Dark
-    </BsButton>
-    <BsButton @disabled="true" @outline="true" @onClick={{action submit}}>
-      Disabled
-    </BsButton>
-  </p>
-  <p>
-    <BsButton @block="true" @onClick={{action submit}}>
-      Block Button
-    </BsButton>
+    <BsButton @block={{true}} @onClick={{action "submit"}}>Block Button</BsButton>
   </p>
   <!-- END-SNIPPET -->
 </div>
@@ -106,7 +62,7 @@
     @defaultText="Start download"
     @pendingText="Downloading..."
     @resolvedText="Download complete!"
-    @onClick={{action download}}
+    @onClick={{action "download"}}
    />
 
   <!-- END-SNIPPET -->
