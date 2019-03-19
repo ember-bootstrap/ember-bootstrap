@@ -2,33 +2,23 @@
   <!-- BEGIN-SNIPPET tooltip-demo -->
   <BsButton>
     Tooltip on left
-    <BsTooltip @placement="left">
-      Tooltip on left
-    </BsTooltip>
+    <BsTooltip @placement="left">Tooltip on left</BsTooltip>
   </BsButton>
   <BsButton>
     Tooltip on top
-    <BsTooltip @placement="top">
-      Tooltip on top
-    </BsTooltip>
+    <BsTooltip @placement="top">Tooltip on top</BsTooltip>
   </BsButton>
   <BsButton>
     Tooltip on bottom
-    <BsTooltip @placement="bottom">
-      Tooltip on bottom
-    </BsTooltip>
+    <BsTooltip @placement="bottom">Tooltip on bottom</BsTooltip>
   </BsButton>
   <BsButton>
     Tooltip on right
-    <BsTooltip @placement="right">
-      Tooltip on right
-    </BsTooltip>
+    <BsTooltip @placement="right">Tooltip on right</BsTooltip>
   </BsButton>
   <BsButton>
     Click tooltip
-    <BsTooltip @triggerEvents="click">
-      Click tooltip
-    </BsTooltip>
+    <BsTooltip @triggerEvents="click">Click tooltip</BsTooltip>
   </BsButton>
   <!-- END-SNIPPET -->
 </div>
@@ -45,16 +35,16 @@
   <!-- BEGIN-SNIPPET tooltip-target -->
   <button type="button" class="btn btn-default">
     DOM parent
-    <BsTooltip title="DOM parent" />
+    <BsTooltip @title="DOM parent" />
   </button>
   <BsButton>
     Parent component
-    <BsTooltip @triggerElement="parentView" title="Parent component" />
+    <BsTooltip @triggerElement="parentView" @title="Parent component" />
   </BsButton>
   <button id="Tooltip-button" class="btn btn-default">
     CSS selector
   </button>
-  <BsTooltip @triggerElement="#Tooltip-button" title="CSS selector" />
+  <BsTooltip @triggerElement="#Tooltip-button" @title="CSS selector" />
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">

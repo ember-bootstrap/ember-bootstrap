@@ -29,44 +29,44 @@
 <h3>
   Options
 </h3>
-<BsForm @formLayout="horizontal" @model={{this}} as |form|>
-  <Form.element label="Title" @property="title" />
-  <Form.element label="Close button" @property="closeTitle" />
-  <Form.element
+<Bsform @formLayout="horizontal" @model={{this}} as |form|>
+  <form.element label="Title" @property="title" />
+  <form.element label="Close button" @property="closeTitle" />
+  <form.element
     label="Submit button"
     placeholder="Enter title to add a submit button"
     @property="submitTitle"
    />
 
-  <Form.element
+  <form.element
     @controlType="power-select"
     @options={{sizes}}
     label="Size"
     @property="size" as |el|
   >
-    <El.control @searchEnabled />
-  </Form.element>
-  <Form.element
+    <el.control @searchEnabled />
+  </form.element>
+  <form.element
     @controlType="checkbox"
     label="Close button"
     @property="closeButton"
    />
 
-  <Form.element @controlType="checkbox" label="Fade" @property="fade" />
-  <Form.element
+  <form.element @controlType="checkbox" label="Fade" @property="fade" />
+  <form.element
     @controlType="checkbox"
     label="Backdrop"
     @property="backdrop"
     @onChange={{action backdropChange}}
    />
 
-  <Form.element
+  <form.element
     @controlType="checkbox"
     label="Backdrop close"
     @property="backdropClose"
    />
 
-</BsForm>
+</Bsform>
 <div class="bs-example bs-example__modal">
   <!-- BEGIN-SNIPPET modal-options -->
   <BsModalSimple
@@ -119,7 +119,7 @@
       </h4>
     </Modal.header>
     <Modal.body>
-      <input type="text" autofocus="autofocus" />
+      <input type="text" autofocus="autofocus">
     </Modal.body>
     <Modal.footer>
       <BsButton @onClick={{action modal.close}}>

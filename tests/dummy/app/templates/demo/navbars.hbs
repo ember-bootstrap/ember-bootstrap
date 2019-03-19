@@ -1,32 +1,32 @@
 <div class="bs-example">
-  <BsForm @formLayout="horizontal" @model={{this}} as |form|>
-    <Form.element
+  <Bsform @formLayout="horizontal" @model={{this}} as |form|>
+    <form.element
       @controlType="power-select"
       @options={{typeChoices}}
       label="Type"
       @property="type" as |el|
     >
-      <El.control @searchEnabled />
-    </Form.element>
-    <Form.element
+      <el.control @searchEnabled />
+    </form.element>
+    <form.element
       @controlType="power-select"
       @options={{bgChoices}}
       label="Background"
       @property="bg" as |el|
     >
-      <El.control @searchEnabled />
-    </Form.element>
-    <Form.element
+      <el.control @searchEnabled />
+    </form.element>
+    <form.element
       @controlType="checkbox"
       label="Collapsed (on mobile)"
       @property="collapsed"
       value={{collapsed}}
      />
 
-  </BsForm>
-  <hr />
+  </Bsform>
+  <hr>
   <!-- BEGIN-SNIPPET navbar-demo -->
-  <BsNavbar
+  <Bsnavbar
     @type={{type}}
     @backgroundColor={{bg}}
     @collapsed={{collapsed}}
@@ -39,39 +39,39 @@
         Brand
       </LinkTo>
     </div>
-    <Navbar.content>
-      <Navbar.nav as |nav|>
-        <Nav.item>
-          <Nav.linkTo>
+    <navbar.content>
+      <navbar.nav as |nav|>
+        <nav.item>
+          <nav.linkTo>
             Home
-          </Nav.linkTo>
-        </Nav.item>
-        <Nav.item>
-          <Nav.linkTo>
-            Navbars
-          </Nav.linkTo>
-        </Nav.item>
-        <Nav.dropdown as |dd|>
-          <Dd.toggle>
+          </nav.linkTo>
+        </nav.item>
+        <nav.item>
+          <nav.linkTo>
+            navbars
+          </nav.linkTo>
+        </nav.item>
+        <nav.dropdown as |dd|>
+          <dd.toggle>
             Dropdown
             <span class="caret"></span>
-          </Dd.toggle>
-          <Dd.menu as |ddm|>
-            <Ddm.item>
-              <Ddm.linkTo>
+          </dd.toggle>
+          <dd.menu as |ddm|>
+            <ddm.item>
+              <ddm.linkTo>
                 Home
-              </Ddm.linkTo>
-            </Ddm.item>
-            <Ddm.item>
-              <Ddm.linkTo>
-                Navbars
-              </Ddm.linkTo>
-            </Ddm.item>
-          </Dd.menu>
-        </Nav.dropdown>
-      </Navbar.nav>
-    </Navbar.content>
-  </BsNavbar>
+              </ddm.linkTo>
+            </ddm.item>
+            <ddm.item>
+              <ddm.linkTo>
+                navbars
+              </ddm.linkTo>
+            </ddm.item>
+          </dd.menu>
+        </nav.dropdown>
+      </navbar.nav>
+    </navbar.content>
+  </Bsnavbar>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">

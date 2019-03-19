@@ -1,7 +1,7 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET progress-demo -->
   <BsProgress as |p|>
-    <P.bar value="50" />
+    <p.bar value="50" />
   </BsProgress>
   <!-- END-SNIPPET -->
 </div>
@@ -12,43 +12,43 @@
   Options
 </h2>
 <div class="bs-example">
-  <BsForm @formLayout="horizontal" @model={{this}} as |form|>
-    <Form.element @controlType="number" label="Value" @property="value" />
-    <Form.element @controlType="number" label="Min" @property="minValue" />
-    <Form.element @controlType="number" label="Max" @property="maxValue" />
-    <Form.element
+  <Bsform @formLayout="horizontal" @model={{this}} as |form|>
+    <form.element @controlType="number" label="Value" @property="value" />
+    <form.element @controlType="number" label="Min" @property="minValue" />
+    <form.element @controlType="number" label="Max" @property="maxValue" />
+    <form.element
       @controlType="power-select"
       @options={{typeChoices}}
       label="Type"
       @property="type" as |el|
     >
-      <El.control @searchEnabled />
-    </Form.element>
-    <Form.element
+      <el.control @searchEnabled />
+    </form.element>
+    <form.element
       @controlType="checkbox"
       label="Show label"
       @property="showLabel"
      />
 
-    <Form.element
+    <form.element
       @controlType="number"
       label="Round to digits"
       @property="roundDigits"
      />
 
-    <Form.element @controlType="checkbox" label="Striped" @property="striped" />
-    <Form.element
+    <form.element @controlType="checkbox" label="Striped" @property="striped" />
+    <form.element
       @controlType="checkbox"
       @disabled={{notStriped}}
       label="Animate"
       @property="animate"
      />
 
-  </BsForm>
-  <hr />
+  </Bsform>
+  <hr>
   <!-- BEGIN-SNIPPET progress-options -->
   <BsProgress as |p|>
-    <P.bar
+    <p.bar
       value={{value}}
       @minValue={{minValue}}
       @maxValue={{maxValue}}
@@ -71,7 +71,7 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET progress-stacked -->
   <BsProgress as |p|>
-    <P.bar
+    <p.bar
       value={{value}}
       @minValue={{minValue}}
       @maxValue={{maxValue}}
