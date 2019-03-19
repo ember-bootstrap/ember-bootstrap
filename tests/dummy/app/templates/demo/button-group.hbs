@@ -6,26 +6,15 @@
   <BsButtonGroup
     value={{buttonGroupValue}}
     @type="checkbox"
-    @onChange={{action}} as |bg|
-  >
-    <Bg.button value="1">
-      1
-    </Bg.button>
-    <Bg.button value="2">
-      2
-    </Bg.button>
-    <Bg.button value="3">
-      3
-    </Bg.button>
+    @onChange={{action (mut buttonGroupValue)}} as |bg|>
+    <bg.button value="1"> 1 </bg.button>
+    <bg.button value="2"> 2 </bg.button>
+    <bg.button value="3"> 3 </bg.button>
   </BsButtonGroup>
-  <p>
-    You selected:
-  </p>
+  <p> You selected: </p>
   <ul>
     {{#each buttonGroupValue as |value|}}
-      <li>
-        {{value}}
-      </li>
+      <li> {{value}} </li>
     {{/each}}
   </ul>
   <!-- END-SNIPPET -->
@@ -41,22 +30,12 @@
   <BsButtonGroup
     value={{buttonGroupValue2}}
     @type="radio"
-    @onChange={{action}} as |bg|
-  >
-    <Bg.button value="1">
-      1
-    </Bg.button>
-    <Bg.button value="2">
-      2
-    </Bg.button>
-    <Bg.button value="3">
-      3
-    </Bg.button>
+    @onChange={{action (mut buttonGroupValue2)}} as |bg|>
+    <bg.button value="1"> 1 </bg.button>
+    <bg.button value="2"> 2 </bg.button>
+    <bg.button value="3"> 3 </bg.button>
   </BsButtonGroup>
-  <p>
-    You selected:
-    {{buttonGroupValue2}}
-  </p>
+  <p> You selected: {{buttonGroupValue2}} </p>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">

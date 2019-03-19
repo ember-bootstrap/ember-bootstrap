@@ -1,14 +1,14 @@
 <div class="bs-example">
-  <BsForm @formLayout="inline" @model={{this}} as |form|>
-    <Form.element
+  <Bsform @formLayout="inline" @model={{this}} as |form|>
+    <form.element
       @controlType="power-select"
       @options={{typeChoices}}
       label="Type"
       @property="type" as |el|
     >
-      <El.control @searchEnabled />
-    </Form.element>
-    <Form.element
+      <el.control @searchEnabled />
+    </form.element>
+    <form.element
       @controlType="checkbox"
       @disabled={{bs-eq type tabs}}
       label="Stacked"
@@ -16,58 +16,58 @@
       @onChange={{action updateStacked}}
      />
 
-    <Form.element
+    <form.element
       @controlType="checkbox"
       @disabled={{stacked}}
       label="Justified"
       @property="justified"
      />
 
-    <Form.element
+    <form.element
       @controlType="checkbox"
       @disabled={{stacked}}
       label="Fill"
       @property="fill"
      />
 
-  </BsForm>
-  <hr />
+  </Bsform>
+  <hr>
   <!-- BEGIN-SNIPPET nav-demo -->
-  <BsNav
+  <Bsnav
     @type={{type}}
     @justified={{justified}}
     @stacked={{stacked}}
     @fill={{fill}} as |nav|
   >
-    <Nav.item>
-      <Nav.linkTo>
+    <nav.item>
+      <nav.linkTo>
         Home
-      </Nav.linkTo>
-    </Nav.item>
-    <Nav.item>
-      <Nav.linkTo>
-        Navs
-      </Nav.linkTo>
-    </Nav.item>
-    <Nav.dropdown as |dd|>
-      <Dd.toggle>
+      </nav.linkTo>
+    </nav.item>
+    <nav.item>
+      <nav.linkTo>
+        navs
+      </nav.linkTo>
+    </nav.item>
+    <nav.dropdown as |dd|>
+      <dd.toggle>
         Dropdown
         <span class="caret"></span>
-      </Dd.toggle>
-      <Dd.menu as |ddm|>
-        <Ddm.item>
-          <Ddm.linkTo>
+      </dd.toggle>
+      <dd.menu as |ddm|>
+        <ddm.item>
+          <ddm.linkTo>
             Home
-          </Ddm.linkTo>
-        </Ddm.item>
-        <Ddm.item>
-          <Ddm.linkTo>
-            Navs
-          </Ddm.linkTo>
-        </Ddm.item>
-      </Dd.menu>
-    </Nav.dropdown>
-  </BsNav>
+          </ddm.linkTo>
+        </ddm.item>
+        <ddm.item>
+          <ddm.linkTo>
+            navs
+          </ddm.linkTo>
+        </ddm.item>
+      </dd.menu>
+    </nav.dropdown>
+  </Bsnav>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
