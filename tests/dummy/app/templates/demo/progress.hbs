@@ -13,9 +13,9 @@
 </h2>
 <div class="bs-example">
   <BsForm @formLayout="horizontal" @model={{this}} as |form|>
-    <form.element @controlType="number" label="Value" @property="value" />
-    <form.element @controlType="number" label="Min" @property="minValue" />
-    <form.element @controlType="number" label="Max" @property="maxValue" />
+    <form.element @controlType="number" @label="Value" @property="value" />
+    <form.element @controlType="number" @label="Min" @property="minValue" />
+    <form.element @controlType="number" @label="Max" @property="maxValue" />
     <form.element
       @controlType="power-select"
       @options={{typeChoices}}
@@ -35,7 +35,7 @@
       @property="roundDigits"
      />
 
-    <form.element @controlType="checkbox" label="Striped" @property="striped" />
+    <form.element @controlType="checkbox" @label="Striped" @property="striped" />
     <form.element
       @controlType="checkbox"
       @disabled={{notStriped}}
