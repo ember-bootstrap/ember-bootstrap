@@ -1,53 +1,48 @@
 <div class="bs-example">
-  <Bsform @formLayout="inline" @model={{this}} as |form|>
+  <BsForm @formLayout="inline" @model={{this}} as |form|>
     <form.element
       @controlType="power-select"
       @options={{typeChoices}}
-      label="Type"
-      @property="type" as |el|
-    >
+      @label="Type"
+      @property="type" as |el|>
       <el.control @searchEnabled />
     </form.element>
     <form.element
       @controlType="checkbox"
       @disabled={{bs-eq type tabs}}
-      label="Stacked"
+      @label="Stacked"
       @property="stacked"
-      @onChange={{action updateStacked}}
+      @onChange={{action "updateStacked"}}
      />
 
     <form.element
       @controlType="checkbox"
       @disabled={{stacked}}
-      label="Justified"
+      @label="Justified"
       @property="justified"
      />
 
     <form.element
       @controlType="checkbox"
       @disabled={{stacked}}
-      label="Fill"
+      @label="Fill"
       @property="fill"
      />
 
-  </Bsform>
+  </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET nav-demo -->
-  <Bsnav
+  <BsNav
     @type={{type}}
     @justified={{justified}}
     @stacked={{stacked}}
     @fill={{fill}} as |nav|
   >
     <nav.item>
-      <nav.linkTo>
-        Home
-      </nav.linkTo>
+      <nav.linkTo>Home</nav.linkTo>
     </nav.item>
     <nav.item>
-      <nav.linkTo>
-        navs
-      </nav.linkTo>
+      <nav.linkTo>navs</nav.linkTo>
     </nav.item>
     <nav.dropdown as |dd|>
       <dd.toggle>
@@ -56,18 +51,14 @@
       </dd.toggle>
       <dd.menu as |ddm|>
         <ddm.item>
-          <ddm.linkTo>
-            Home
-          </ddm.linkTo>
+          <ddm.linkTo>Home</ddm.linkTo>
         </ddm.item>
         <ddm.item>
-          <ddm.linkTo>
-            navs
-          </ddm.linkTo>
+          <ddm.linkTo>navs</ddm.linkTo>
         </ddm.item>
       </dd.menu>
     </nav.dropdown>
-  </Bsnav>
+  </BsNav>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
