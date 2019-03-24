@@ -1,3 +1,4 @@
+import QUnit from 'qunit';
 import { registerDeprecationHandler } from '@ember/debug';
 import config from 'dummy/config/environment';
 
@@ -25,4 +26,22 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
       }
     });
   }
+
+  QUnit.assert.deprecations = function(count = 1) {
+    this.equal(deprecations.length, count, 'Expected deprecations during test.');
+
+    deprecations = [];
+  };
+
+  QUnit.assert.deprecationsInclude = function(expected) {
+    let foundIndex = deprecations.indexOf(expected);
+    this.pushResult({
+      result: foundIndex > -1,
+      actual: deprecations,
+      message: `expected to find \`${expected}\` deprecation. Found ${deprecations.map(d => `!${d}`).join(', ')}`,
+    });
+
+    deprecations.splice(foundIndex, 1);
+  };
 }
+

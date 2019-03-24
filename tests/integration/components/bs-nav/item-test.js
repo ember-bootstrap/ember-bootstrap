@@ -84,6 +84,7 @@ module('Integration | Component | bs-nav/item', function(hooks) {
       {{/bs-nav/item}}
     `);
     assert.dom('li').hasClass('active', 'has active class');
+    assert.deprecations();
   });
 
   test('[DEPRECATED] disabled link makes nav item disabled', async function(assert) {
@@ -94,6 +95,7 @@ module('Integration | Component | bs-nav/item', function(hooks) {
       {{/bs-nav/item}}
     `);
     assert.dom('li').hasClass('disabled', 'has disabled class');
+    assert.deprecations();
   });
 
   test('clicking item calls onClick action', async function(assert) {

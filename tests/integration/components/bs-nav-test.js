@@ -65,5 +65,6 @@ module('Integration | Component | bs-nav', function(hooks) {
     assert.dom('.nav > li').exists({ count: 2 }, 'it has the nav item');
     assert.dom('.nav > li > a[href="/"]').exists({ count: 1 }, 'it has the nav link');
     assert.dom('.nav > li.dropdown').exists({ count: 1 }, 'it has a dropdown as a nav item');
+    assert.deprecations();
   });
 });

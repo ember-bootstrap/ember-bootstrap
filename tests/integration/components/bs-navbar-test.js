@@ -415,6 +415,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
     await click('#link');
 
     assert.ok(collapseAction.calledOnce, 'onCollapse action has been called');
+    assert.deprecations();
   });
 
   test('[DEPRECATED] Clicking expanded navbar link does not collapse navbar when collapseNavbar is false', async function(assert) {
@@ -437,6 +438,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
     await click('#link');
 
     assert.notOk(collapseAction.called, 'onCollapse action has not been called');
+    assert.deprecations();
   });
 
   test('Clicking expanded navbar link collapses navbar', async function(assert) {

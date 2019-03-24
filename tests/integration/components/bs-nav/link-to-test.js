@@ -16,5 +16,8 @@ module('Integration | Component | bs nav/link to', function(hooks) {
     `);
 
     assert.dom('*').hasText('template block text');
+    assert.deprecationsInclude('The link-to component yielded by bs-nav is deprecated. Use the linkTo property of the yielded item component instead!\n' +
+      'Before: {{#nav.item}}{{#nav.link-to "index"}}foo{{/nav.link-to}}{{/nav.item}}\n' +
+      'After: {{#nav.item linkTo="index"}}foo{{/nav.item}}');
   });
 });
