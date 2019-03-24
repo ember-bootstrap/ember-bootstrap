@@ -19,12 +19,8 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
     </div>
     <navbar.content>
       <navbar.nav as |nav|>
-        <nav.item>
-          {{#nav.link-to "home"}}Home{{/nav.link-to}}
-        </nav.item>
-        <nav.item>
-          {{#nav.link-to "navbars"}}Navbars{{/nav.link-to}}
-        </nav.item>
+        <nav.item @linkTo="home">Home</nav.item>
+        <nav.item @linkTo="navbars">Navbars</nav.item>
       </navbar.nav>
     </navbar.content>
   </BsNavBar>
@@ -48,14 +44,12 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
   ### Responsive Design
 
   For the mobile breakpoint the Bootstrap styles will hide the navbar content (`{{navbar.content}}`). Clicking on the
-  navbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all nav links (`{{nav.link-to}}`) are already
+  navbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all nav links (`<nav.item @linkTo="...">`) are already
   wired up to call the navbar's `collapse` action, so clicking any of them will collapse the navbar. To selectively
   prevent that, you can set its `collapseNavbar` property to false:
 
   ```hbs
-  <nav.item>
-    {{#nav.link-to "index" collapseNavBar={{false}}}}Don't collapse{{/nav.link-to}}
-  </nav.item>
+  <nav.item @linkTo="index" @collapseNavbar={{false}}>Don't collapse</nav.item>
   ```
 
   To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded `collapse`
@@ -291,5 +285,12 @@ export default Component.extend(TypeClass, {
    * @type {String}
    * @private
    */
-  linkToComponent: 'bs-navbar/link-to'
+  linkToComponent: 'bs-navbar/link-to',
+
+  /**
+   * @property navItemComponent
+   * @type {String}
+   * @private
+   */
+  navItemComponent: 'bs-navbar/nav-item'
 });

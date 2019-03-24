@@ -16,11 +16,11 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
 
   ```hbs
   <BsNav @type="pills" as |nav|>
-    <nav.item>
-      {{#nav.link-to "foo"}}Foo{{/nav.link-to}}
+    <nav.item @linkTo="foo">
+      Foo
     </nav.item>
-    <nav.item>
-      {{#nav.link-to "bar"}}Bar{{/nav.link-to}}
+    <nav.item @linkTo=(array "bar" model)>
+      Bar
     </nav.item>
   </BsNav>
   ```
@@ -44,7 +44,7 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
 
   ```hbs
   <BsNav @type="pills" as |nav|>
-    <nav.item><nav.link-to "index">Home</nav.link-to></nav.item>
+    <nav.item @linkTo="index">Home</nav.item>
     <nav.dropdown as |dd|>
       <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
       <dd.menu as |ddm|>
@@ -52,15 +52,12 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
         <ddm.item>{{#ddm.link-to "bar"}}Bar{{/ddm.link-to}}</ddm.item>
       </dd.menu>
     </nav.dropdown>
-    <nav.item>
-      {{#nav.link-to "bar"}}Bar{{/nav.link-to}}
-    </nav.item>
   </BsNav>
   ```
 
   ### Bootstrap 3/4 Notes
 
-  Use [`nav.link-to`](Components.NavLinkTo.html) for in-app links to ensure proper styling regardless of
+  Use [`nav.item#linkTo`](Components.NavItem.html) for in-app links to ensure proper styling regardless of
   Bootstrap version. Explicit use of `<a>` tags in Bootstrap 4 must apply the `nav-link` class and manage
   the `active` state explicitly.
 

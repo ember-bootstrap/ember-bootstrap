@@ -395,7 +395,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
     assert.ok(collapsed.calledOnce, 'onCollapse action has been called.');
   });
 
-  test('Clicking expanded navbar link collapses navbar', async function(assert) {
+  test('[DEPRECATED] Clicking expanded navbar link collapses navbar', async function(assert) {
     let collapseAction = this.spy();
     this.actions.collapseAction = collapseAction;
 
@@ -417,7 +417,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
     assert.ok(collapseAction.calledOnce, 'onCollapse action has been called');
   });
 
-  test('Clicking expanded navbar link does not collapse navbar when collapseNavbar is false', async function(assert) {
+  test('[DEPRECATED] Clicking expanded navbar link does not collapse navbar when collapseNavbar is false', async function(assert) {
     let collapseAction = this.spy();
     this.actions.collapseAction = collapseAction;
 
@@ -430,6 +430,54 @@ module('Integration | Component | bs-navbar', function(hooks) {
         {{#navbar.content}}
           {{#navbar.nav as |nav|}}
             {{#nav.item}}{{#nav.link-to "index" id="link" disabled=true collapseNavbar=false}}Home{{/nav.link-to}}{{/nav.item}}
+          {{/navbar.nav}}
+        {{/navbar.content}}
+      {{/bs-navbar}}
+    `);
+    await click('#link');
+
+    assert.notOk(collapseAction.called, 'onCollapse action has not been called');
+  });
+
+  test('Clicking expanded navbar link collapses navbar', async function(assert) {
+    this.owner.lookup('router:main').setupRouter();
+
+    let collapseAction = this.spy();
+    this.actions.collapseAction = collapseAction;
+
+    await render(hbs`
+      {{#bs-navbar as collapsed=false onCollapse=(action "collapseAction") as |navbar|}}
+        <div class="navbar-header">
+          {{navbar.toggle}}
+          <a class="navbar-brand" href="#">Brand</a>
+        </div>
+        {{#navbar.content}}
+          {{#navbar.nav as |nav|}}
+            {{#nav.item linkTo="index" id="link" disabled=true}}Home{{/nav.item}}
+          {{/navbar.nav}}
+        {{/navbar.content}}
+      {{/bs-navbar}}
+    `);
+    await click('#link');
+
+    assert.ok(collapseAction.calledOnce, 'onCollapse action has been called');
+  });
+
+  test('Clicking expanded navbar link does not collapse navbar when collapseNavbar is false', async function(assert) {
+    this.owner.lookup('router:main').setupRouter();
+
+    let collapseAction = this.spy();
+    this.actions.collapseAction = collapseAction;
+
+    await render(hbs`
+      {{#bs-navbar as collapsed=false onCollapse=(action "collapseAction") as |navbar|}}
+        <div class="navbar-header">
+          {{navbar.toggle}}
+          <a class="navbar-brand" href="#">Brand</a>
+        </div>
+        {{#navbar.content}}
+          {{#navbar.nav as |nav|}}
+            {{#nav.item linkTo="index" id="link" disabled=true collapseNavbar=false}}Home{{/nav.item}}
           {{/navbar.nav}}
         {{/navbar.content}}
       {{/bs-navbar}}

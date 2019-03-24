@@ -46,6 +46,7 @@ module('Integration | Component | bs-nav', function(hooks) {
   });
 
   test('it exposes contextual components', async function(assert) {
+    this.owner.lookup('router:main').setupRouter();
     await render(hbs`
       {{#bs-nav as |nav|}}
         {{#nav.item}}
@@ -62,7 +63,7 @@ module('Integration | Component | bs-nav', function(hooks) {
 
     assert.dom('.nav').exists({ count: 1 }, 'it has the nav');
     assert.dom('.nav > li').exists({ count: 2 }, 'it has the nav item');
-    assert.dom('.nav > li > a[href]').exists({ count: 1 }, 'it has the nav link');
+    assert.dom('.nav > li > a[href="/"]').exists({ count: 1 }, 'it has the nav link');
     assert.dom('.nav > li.dropdown').exists({ count: 1 }, 'it has a dropdown as a nav item');
   });
 });

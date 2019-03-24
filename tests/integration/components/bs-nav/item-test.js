@@ -1,9 +1,10 @@
-import { module, skip } from 'qunit';
+import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import test from 'ember-sinon-qunit/test-support/test';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
+import { testBS4 } from '../../../helpers/bootstrap-test';
 
 module('Integration | Component | bs-nav/item', function(hooks) {
   setupRenderingTest(hooks);
@@ -12,6 +13,7 @@ module('Integration | Component | bs-nav/item', function(hooks) {
   hooks.beforeEach(function() {
     this.actions = {};
     this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
+    this.owner.lookup('router:main').setupRouter();
   });
 
   test('it has correct markup', async function(assert) {
@@ -48,9 +50,33 @@ module('Integration | Component | bs-nav/item', function(hooks) {
     assert.dom('li').hasClass('active', 'has active class');
   });
 
-  // @todo add new test when refactoring component to user routing service, instead of current ugly hack
-  // see https://github.com/kaliber5/ember-bootstrap/issues/762
-  skip('active link makes nav item active', async function(assert) {
+  test('simple linkTo property adds link', async function(assert) {
+    await render(hbs`{{bs-nav/item linkTo="index"}}`);
+
+    assert.dom('li a').exists({ count: 1 });
+    assert.dom('li a').hasAttribute('href', '/');
+  });
+
+  test('complex linkTo property adds link', async function(assert) {
+    await render(hbs`{{bs-nav/item linkTo=(array "acceptance.link" "1" (query-params foo="bar"))}}`);
+
+    assert.dom('li a').exists({ count: 1 });
+    assert.dom('li a').hasAttribute('href', '/acceptance/link/1?foo=bar');
+  });
+
+  testBS4('link has nav-link class', async function(assert) {
+    await render(hbs`{{bs-nav/item linkTo="index"}}`);
+
+    assert.dom('li a').hasClass('nav-link');
+  });
+
+  test('disabled and linkTo property adds disabled link', async function(assert) {
+    await render(hbs`{{bs-nav/item linkTo="index" disabled=true}}`);
+
+    assert.dom('li a').hasClass('disabled');
+  });
+
+  test('[DEPRECATED] active link-to makes nav item active', async function(assert) {
 
     await render(hbs`
       {{#bs-nav/item}}
@@ -60,7 +86,7 @@ module('Integration | Component | bs-nav/item', function(hooks) {
     assert.dom('li').hasClass('active', 'has active class');
   });
 
-  test('disabled link makes nav item disabled', async function(assert) {
+  test('[DEPRECATED] disabled link makes nav item disabled', async function(assert) {
 
     await render(hbs`
       {{#bs-nav/item}}

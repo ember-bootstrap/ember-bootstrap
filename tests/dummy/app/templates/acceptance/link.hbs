@@ -3,3 +3,9 @@
   {{#nav.item}}{{#nav.link-to "acceptance.link" "2"}}second{{/nav.link-to}}{{/nav.item}}
   {{#nav.item}}{{#nav.link-to "acceptance.link" model}}current{{/nav.link-to}}{{/nav.item}}
 {{/bs-nav}}
+
+{{#bs-nav id="nav-link-test2" as |nav|}}
+  {{#nav.item linkTo=(array "acceptance.link" "1")}}first{{/nav.item}}
+  {{#nav.item linkTo=(array "acceptance.link" "2")}}second{{/nav.item}}
+  {{#nav.item linkTo=(array "acceptance.link" model)}}current{{/nav.item}}
+{{/bs-nav}}
