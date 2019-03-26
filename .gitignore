@@ -9,6 +9,8 @@
 /node_modules/
 
 # misc
+/.env*
+/.pnp*
 /.sass-cache
 /_site
 /connect.lock

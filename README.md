@@ -16,7 +16,7 @@ The addon includes the Bootstrap CSS (or Sass, Less) in your project (can be dis
 
 *See [www.ember-bootstrap.com](http://www.ember-bootstrap.com/) for full documentation.*
 
-## Install in ember-cli application
+## Installation
 
 In your application's directory:
 
@@ -50,6 +50,10 @@ If you want to keep up to date with ember-bootstrap, you may want to [follow me 
 * [Stephen Vance](https://github.com/srvance)
 * and many more [contributors](https://github.com/kaliber5/ember-bootstrap/graphs/contributors)
 
+## Contributing
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
 ## Credits
 
 Cross-browser testing provided by:
@@ -58,4 +62,4 @@ Cross-browser testing provided by:
 
 ## Copyright and license
 
-Code and documentation copyright 2018 [kaliber5](http://www.kaliber5.de) and contributors. Code released under [the MIT license](LICENSE.md).
+Code and documentation copyright 2019 [kaliber5](http://www.kaliber5.de) and contributors. Code released under [the MIT license](LICENSE.md).
