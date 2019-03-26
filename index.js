@@ -40,18 +40,6 @@ const componentDependencies = {
 
 const minimumBS4Version = '4.0.0-beta';
 
-// For ember-cli < 2.7 findHost doesnt exist so we backport from that version
-// for earlier version of ember-cli.
-// https://github.com/ember-cli/ember-cli/blame/16e4492c9ebf3348eb0f31df17215810674dbdf6/lib/models/addon.js#L533
-function findHostShim() {
-  let current = this;
-  let app;
-  do {
-    app = current.app || app;
-  } while (current.parent.parent && (current = current.parent));
-  return app;
-}
-
 module.exports = {
   name: require('./package').name,
 
@@ -69,12 +57,10 @@ module.exports = {
   included() {
     this._super.included.apply(this, arguments);
 
-    let findHost = this._findHost || findHostShim;
-    let app = findHost.call(this);
-
+    let app = this._findHost(this);
     this.app = app;
 
-    let options =Object.assign({}, defaultOptions, app.options['ember-bootstrap']);
+    let options = Object.assign({}, defaultOptions, app.options['ember-bootstrap']);
     if (process.env.BOOTSTRAPVERSION) {
       // override bootstrapVersion config when environment variable is set
       options.bootstrapVersion = parseInt(process.env.BOOTSTRAPVERSION);
@@ -90,21 +76,21 @@ module.exports = {
     if (!this.hasPreprocessor()) {
       // / Import css from bootstrap
       if (options.importBootstrapCSS) {
-        app.import(path.join(vendorPath, 'bootstrap.css'));
-        app.import(path.join(vendorPath, 'bootstrap.css.map'), { destDir: 'assets' });
+        this.import(path.join(vendorPath, 'bootstrap.css'));
+        this.import(path.join(vendorPath, 'bootstrap.css.map'), { destDir: 'assets' });
       }
 
       if (options.importBootstrapTheme) {
-        app.import(path.join(vendorPath, 'bootstrap-theme.css'));
-        app.import(path.join(vendorPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
+        this.import(path.join(vendorPath, 'bootstrap-theme.css'));
+        this.import(path.join(vendorPath, 'bootstrap-theme.css.map'), { destDir: 'assets' });
       }
     }
 
     // import custom addon CSS
-    app.import(path.join(vendorPath, `bs${options.bootstrapVersion}.css`));
+    this.import(path.join(vendorPath, `bs${options.bootstrapVersion}.css`));
 
     // register library version
-    app.import(path.join(vendorPath, 'register-version.js'));
+    this.import(path.join(vendorPath, 'register-version.js'));
   },
 
   validateDependencies() {

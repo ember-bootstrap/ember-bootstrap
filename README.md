@@ -29,7 +29,7 @@ To switch Bootstrap version or preprocessor, see the [setup documentation](http:
 
 ember-bootstrap works and is fully [tested](https://travis-ci.org/kaliber5/ember-bootstrap) with
 
-* Ember.js 2.3+
+* Ember.js 2.18+ / Ember CLI 2.18+
 * Bootstrap 3 and 4.
 * all modern evergreen browsers (Chrome, Firefox, Safari, Edge) and IE 11. 
 * FastBoot 1.0+ 
