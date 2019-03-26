@@ -4,6 +4,7 @@ import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import test from 'ember-sinon-qunit/test-support/test';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
+import { testBS3, testBS4 } from '../../../helpers/bootstrap-test';
 
 module('Integration | Component | bs-nav/item', function(hooks) {
   setupRenderingTest(hooks);
@@ -26,6 +27,18 @@ module('Integration | Component | bs-nav/item', function(hooks) {
     assert.ok(!this.element.querySelector('li').classList.contains('active'), 'has not active class');
     assert.ok(!this.element.querySelector('li').classList.contains('disabled'), 'has not disabled class');
 
+  });
+
+  testBS3('it has aria role="presentation"', async function(assert) {
+    await render(hbs`{{bs-nav/item disabled=true}}`);
+
+    assert.dom('li').hasAttribute('role', 'presentation');
+  });
+
+  testBS4('it does not have aria role="presentation"', async function(assert) {
+    await render(hbs`{{bs-nav/item disabled=true}}`);
+
+    assert.dom('li').doesNotHaveAttribute('role');
   });
 
   test('can be disabled', async function(assert) {
