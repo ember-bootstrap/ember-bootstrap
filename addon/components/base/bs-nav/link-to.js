@@ -21,7 +21,7 @@ export default LinkComponent.extend(ComponentChild, {
       false,
       {
         id: 'ember-bootstrap.nav.link-to',
-        until: '3.0'
+        until: '4.0'
       });
   }
 });
