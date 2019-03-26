@@ -12,68 +12,6 @@ module.exports = function() {
       useYarn: true,
       scenarios: [
         {
-          name: 'ember-2.3',
-          env: {
-            EMBER_OPTIONAL_FEATURES: JSON.stringify({ 'jquery-integration': true }),
-          },
-          bower: {
-            dependencies: {
-              'ember': '~2.3.0'
-            },
-            resolutions: {
-              'ember': '~2.3.0'
-            }
-          },
-          npm: {
-            devDependencies: {
-              'ember-source': null
-            }
-          }
-        },
-        {
-          name: 'ember-lts-2.8',
-          env: {
-            EMBER_OPTIONAL_FEATURES: JSON.stringify({ 'jquery-integration': true }),
-          },
-          bower: {
-            dependencies: {
-              'ember': 'components/ember#lts-2-8'
-            },
-            resolutions: {
-              'ember': 'lts-2-8'
-            }
-          },
-          npm: {
-            devDependencies: {
-              'ember-source': null
-            }
-          }
-        },
-        {
-          name: 'ember-lts-2.12',
-          env: {
-            EMBER_OPTIONAL_FEATURES: JSON.stringify({ 'jquery-integration': true }),
-          },
-          npm: {
-            devDependencies: {
-              '@ember/jquery': '^0.5.1',
-              'ember-source': '~2.12.0'
-            }
-          }
-        },
-        {
-          name: 'ember-lts-2.16',
-          env: {
-            EMBER_OPTIONAL_FEATURES: JSON.stringify({ 'jquery-integration': true })
-          },
-          npm: {
-            devDependencies: {
-              '@ember/jquery': '^0.5.1',
-              'ember-source': '~2.16.0'
-            }
-          }
-        },
-        {
           name: 'ember-lts-2.18',
           env: {
             EMBER_OPTIONAL_FEATURES: JSON.stringify({ 'jquery-integration': true })
