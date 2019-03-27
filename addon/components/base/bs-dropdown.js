@@ -147,7 +147,7 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
  @extends Ember.Component
  @public
  */
-export default Component.extend({
+let component = Component.extend({
   layout,
   classNameBindings: ['containerClass'],
 
@@ -207,14 +207,6 @@ export default Component.extend({
       return `drop${this.get('direction')}`;
     }
   }),
-
-  /**
-   * @property menuElement
-   * @private
-   */
-  menuElement: computed(function() {
-    return document.getElementById(`${this.get('elementId')}__menu`);
-  }).volatile(),
 
   /**
    * @property toggleElement
@@ -330,3 +322,20 @@ export default Component.extend({
    */
   menuComponent: 'bs-dropdown/menu'
 });
+
+Object.defineProperties(component.prototype, {
+
+  /**
+   * The DOM element of the `.dropdown-menu` element
+   * @type object
+   * @readonly
+   * @private
+   */
+  menuElement: {
+    get() {
+      return document.getElementById(`${this.get('elementId')}__menu`);
+    }
+  }
+});
+
+export default component;
