@@ -431,6 +431,10 @@ export default Component.extend({
     resetSubmissionState() {
       this.set('isSubmitted', false);
       this.set('isRejected', false);
-    }
+    },
+
+    submit() {
+      this.submit();
+    },
   }
 });

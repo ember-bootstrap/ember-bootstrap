@@ -99,7 +99,7 @@ module('Integration | Component | bs-form', function(hooks) {
     );
 
     await click('button');
-    assert.ok(submit.called, 'onSubmit action has been called');
+    assert.ok(submit.calledOnce, 'onSubmit action has been called');
   });
 
   test('Submitting the form with valid validation calls onBeforeSubmit and onSubmit action', async function(assert) {
@@ -318,6 +318,19 @@ module('Integration | Component | bs-form', function(hooks) {
       );
       assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
     });
+
+  test('it yields submit action', async function(assert) {
+    let submit = this.spy();
+    this.actions.submit = submit;
+    await render(hbs`
+      {{#bs-form onSubmit=(action "submit") as |form|}}
+        <a role="button" onclick={{action form.submit}}>submit</a>
+      {{/bs-form}}
+    `);
+
+    await click('a');
+    assert.ok(submit.calledOnce, 'onSubmit action has been called');
+  });
 
   test('Yields #isSubmitting', async function(assert) {
     let deferredSubmitAction = defer();
