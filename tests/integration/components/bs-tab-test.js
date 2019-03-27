@@ -4,7 +4,6 @@ import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import test from 'ember-sinon-qunit/test-support/test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
-import { testBS3, testBS4 } from '../../helpers/bootstrap-test';
 
 module('Integration | Component | bs-tab', function(hooks) {
   setupRenderingTest(hooks);
@@ -88,19 +87,9 @@ module('Integration | Component | bs-tab', function(hooks) {
     assert.dom('ul.nav.nav-tabs > li:nth-child(2) > a').hasText('Tab 2', 'navigation item shows pane title');
   });
 
-  testBS3('tab navigation items have aria role presentation', async function(assert) {
-    await render(hbs`
-      {{#bs-tab as |tab|}}
-        {{#tab.pane title="Tab 1"}}
-          tabcontent 1
-        {{/tab.pane}}
-      {{/bs-tab}}
-    `);
-
-    assert.dom('ul.nav.nav-tabs > li').hasAttribute('role', 'presentation');
-  });
-
-  testBS4('tab navigation items does not have aria role presentation', async function(assert) {
+  test('tab navigation items does not have aria role presentation', async function(assert) {
+    // Should not have role="presentation" even so Bootstrap 3 docs have it.
+    // This was discussed at https://github.com/kaliber5/ember-bootstrap/pull/782.
     await render(hbs`
       {{#bs-tab as |tab|}}
         {{#tab.pane title="Tab 1"}}

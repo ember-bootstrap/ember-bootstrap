@@ -4,7 +4,6 @@ import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import test from 'ember-sinon-qunit/test-support/test';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
-import { testBS3, testBS4 } from '../../../helpers/bootstrap-test';
 
 module('Integration | Component | bs-nav/item', function(hooks) {
   setupRenderingTest(hooks);
@@ -29,13 +28,9 @@ module('Integration | Component | bs-nav/item', function(hooks) {
 
   });
 
-  testBS3('it has aria role="presentation"', async function(assert) {
-    await render(hbs`{{bs-nav/item disabled=true}}`);
-
-    assert.dom('li').hasAttribute('role', 'presentation');
-  });
-
-  testBS4('it does not have aria role="presentation"', async function(assert) {
+  test('it does not have aria role="presentation"', async function(assert) {
+    // Should not have role="presentation" even so Bootstrap 3 docs have it.
+    // This was discussed at https://github.com/kaliber5/ember-bootstrap/pull/782.
     await render(hbs`{{bs-nav/item disabled=true}}`);
 
     assert.dom('li').doesNotHaveAttribute('role');
