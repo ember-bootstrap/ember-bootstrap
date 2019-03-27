@@ -21,7 +21,6 @@ export default Component.extend(ComponentParent, {
   layout,
   classNameBindings: ['disabled', 'active'],
   tagName: 'li',
-  ariaRole: 'presentation',
 
   /**
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
