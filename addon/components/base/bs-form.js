@@ -1,6 +1,6 @@
 import Component from '@ember/component';
-import RSVP from 'rsvp';
 import { set, computed } from '@ember/object';
+import { gt } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import layout from 'ember-bootstrap/templates/components/bs-form';
@@ -187,7 +187,7 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  isSubmitting: false,
+  isSubmitting: gt('pendingSubmissions', 0),
 
   /**
    * `isSubmitted` is `true` if last submission was successful.
@@ -334,7 +334,7 @@ export default Component.extend({
    * @method submit
    * @private
    */
-  submit(e) {
+  async submit(e) {
     if (e) {
       e.preventDefault();
     }
@@ -343,64 +343,58 @@ export default Component.extend({
       return;
     }
 
-    this.set('isSubmitting', true);
-    this.incrementProperty('pendingSubmissions');
-
     let model = this.get('model');
+    let record;
 
+    this.incrementProperty('pendingSubmissions');
     this.get('onBefore')(model);
 
-    RSVP.resolve(this.get('hasValidator') ? this.validate(this.get('model')) : null)
-      .then(
-        (record) => {
-          return RSVP.resolve()
-            .then(() => {
-              if (this.get('hideValidationsOnSubmit') === true) {
-                this.set('showAllValidations', false);
-              }
-              return this.get('onSubmit')(model, record);
-            })
-            .then(
-              () => {
-                if (!this.get('isDestroyed')) {
-                  this.set('isSubmitted', true);
-                }
-              },
-              () => {
-                if (!this.get('isDestroyed')) {
-                  this.set('isRejected', true);
-                }
-              }
-            );
-        },
-        (error) => {
-          this.set('showAllValidations', true);
+    try {
+      record = await (this.get('hasValidator') ? this.validate(model) : null);
+    } catch (error) {
+      // model is invalid
+      this.set('showAllValidations', true);
 
-          return RSVP.resolve()
-            .then(() => {
-              return this.get('onInvalid')(model, error);
-            })
-            .finally(() => {
-              if (!this.get('isDestroyed')) {
-                this.set('isRejected', true);
-              }
-            });
-        }
-      )
-      .finally(() => {
-        if (!this.get('isDestroyed')) {
-          if (this.get('pendingSubmissions') === 1) {
-            this.set('isSubmitting', false);
-          }
+      await this.get('onInvalid')(model, error);
 
-          this.decrementProperty('pendingSubmissions');
+      if (this.get('isDestroyed')) {
+        return;
+      }
 
-          // reset forced hiding of validations
-          if (this.get('showAllValidations') === false) {
-            this.set('showAllValidations', undefined);
-          }
-        }
-      });
+      this.set('isRejected', true);
+      this.decrementProperty('pendingSubmissions');
+
+      throw error;
+    }
+
+    if (this.get('hideValidationsOnSubmit') === true) {
+      this.set('showAllValidations', false);
+    }
+
+    try {
+      await this.get('onSubmit')(model, record);
+
+      if (this.get('isDestroyed')) {
+        return;
+      }
+
+      this.set('isSubmitted', true);
+    } catch (error) {
+      if (this.get('isDestroyed')) {
+        return;
+      }
+
+      this.set('isRejected', true);
+
+      throw error;
+    } finally {
+      this.decrementProperty('pendingSubmissions');
+
+      // reset forced hiding of validations
+      if (this.get('showAllValidations') === false) {
+        this.set('showAllValidations', undefined);
+      }
+    }
   },
 
   keyPress(e) {
@@ -434,7 +428,7 @@ export default Component.extend({
     },
 
     submit() {
-      this.submit();
+      return this.submit();
     },
   }
 });
