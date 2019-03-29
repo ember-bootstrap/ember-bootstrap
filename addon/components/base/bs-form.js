@@ -263,16 +263,19 @@ export default Component.extend({
 
   /**
    * If set to true novalidate attribute is present on form element
+   * Will be true by default if validation support is enabled.
    *
    * @property novalidate
    * @type boolean
    * @default null
    * @public
    */
-  novalidate: false,
+  novalidate: null,
 
-  _novalidate: computed('novalidate', function() {
-    return this.get('novalidate') === true ? '' : undefined;
+  _novalidate: computed('novalidate', 'hasValidator', function() {
+    return (this.get('hasValidator') && this.get('novalidate') !== false) || this.get('novalidate') === true
+        ? ''
+        : undefined;
   }),
 
   /**
