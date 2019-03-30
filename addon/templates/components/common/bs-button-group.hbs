@@ -1,5 +1,5 @@
 {{yield
   (hash
-    button=(component buttonComponent buttonGroupType=type groupValue=value onClick=(action "buttonPressed"))
+    button=(component this.buttonComponent buttonGroupType=@type groupValue=@value onClick=(action "buttonPressed"))
   )
 }}
