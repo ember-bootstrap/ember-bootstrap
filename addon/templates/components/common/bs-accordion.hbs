@@ -1,6 +1,6 @@
 {{yield
   (hash
-    item=(component itemComponent selected=isSelected onClick=(action "change"))
+    item=(component this.itemComponent selected=this.isSelected onClick=(action "change"))
     change=(action "change")
   )
 }}

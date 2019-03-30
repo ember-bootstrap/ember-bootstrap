@@ -1,5 +1,5 @@
-{{#component collapseComponent ariaRole="tabpanel" collapsed=collapsed class="panel-collapse"}}
-  <div class="panel-body {{class}}">
+{{#component this.collapseComponent ariaRole="tabpanel" collapsed=@collapsed class="panel-collapse"}}
+  <div class="panel-body {{@class}}">
     {{yield}}
   </div>
 {{/component}}

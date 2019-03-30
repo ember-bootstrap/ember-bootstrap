@@ -21,14 +21,12 @@ export default Component.extend({
    * @type boolean
    * @public
    */
-  collapsed: null,
 
   /**
    * @property disabled
    * @type boolean
    * @private
    */
-  disabled: false,
 
   /**
    * @event onClick
