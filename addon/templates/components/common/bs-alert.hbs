@@ -1,5 +1,5 @@
-{{#unless hidden}}
-  {{#if dismissible}}
+{{#unless this.hidden}}
+  {{#if this.dismissible}}
     <button type="button" class="close" aria-label="Close" {{action "dismiss"}}>
       <span aria-hidden="true">&times;</span>
     </button>
