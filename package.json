@@ -22,6 +22,7 @@
     "broccoli-asset-rev": "^3.0.0",
     "chai": "^4.0.0",
     "chai-things": "^0.2.0",
+    "ember-angle-bracket-invocation-polyfill": "^1.2.5",
     "ember-bootstrap-power-select": "^1.0.0-alpha.1",
     "ember-cli": "~3.8.1",
     "ember-cli-app-version": "^3.0.0",
