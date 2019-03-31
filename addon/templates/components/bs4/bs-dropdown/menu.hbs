@@ -1,20 +1,21 @@
-{{#if _isOpen}}
-  {{#ember-popper
-    id=(concat dropdownElementId "__menu")
-    class=(concat "dropdown-menu " alignClass (if isOpen " show") " " class)
-    ariaRole=ariaRole
-    placement=popperPlacement
-    popperTarget=toggleElement
-    renderInPlace=_renderInPlace
-    popperContainer="#ember-bootstrap-wormhole"
-    modifiers=popperModifiers
-  }}
+{{#if this._isOpen}}
+  <EmberPopper
+    @id="{{@dropdownElementId}}__menu"
+    @class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
+    @placement={{this.popperPlacement}}
+    @popperTarget={{this.toggleElement}}
+    @renderInPlace={{this._renderInPlace}}
+    @popperContainer="#ember-bootstrap-wormhole"
+    @modifiers={{this.popperModifiers}}
+    {{!-- not yet supported, see https://github.com/kybishop/ember-popper/issues/98 --}}
+    ...attributes
+  >
     {{yield
       (hash
-        item=(component itemComponent)
-        link-to=(component linkToComponent)
-        divider=(component dividerComponent)
+        item=(component this.itemComponent)
+        link-to=(component this.linkToComponent)
+        divider=(component this.dividerComponent)
       )
     }}
-  {{/ember-popper}}
+  </EmberPopper>
 {{/if}}

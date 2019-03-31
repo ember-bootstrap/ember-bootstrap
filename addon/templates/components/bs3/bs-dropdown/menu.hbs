@@ -1,21 +1,25 @@
-{{#if _isOpen}}
-  {{#ember-popper
+{{#if this._isOpen}}
+  <EmberPopper
     class="ember-bootstrap-dropdown-bs3-popper"
-    ariaRole=ariaRole
-    placement=popperPlacement
-    popperTarget=toggleElement
-    renderInPlace=_renderInPlace
-    popperContainer="#ember-bootstrap-wormhole"
-    modifiers=popperModifiers
-  }}
-    <ul id={{concat dropdownElementId "__menu"}} class={{concat "dropdown-menu " alignClass (if isOpen " show") " " class}} role={{ariaRole}}>
+    @placement={{this.popperPlacement}}
+    @popperTarget={{this.toggleElement}}
+    @renderInPlace={{this._renderInPlace}}
+    @popperContainer="#ember-bootstrap-wormhole"
+    @modifiers={{this.popperModifiers}}
+  >
+    <ul
+      id="{{@dropdownElementId}}__menu"
+      class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
+      role={{this.ariaRole}}
+      ...attributes
+    >
       {{yield
         (hash
-          item=(component itemComponent)
-          link-to=(component linkToComponent)
-          divider=(component dividerComponent)
+          item=(component this.itemComponent)
+          link-to=(component this.linkToComponent)
+          divider=(component this.dividerComponent)
         )
       }}
     </ul>
-  {{/ember-popper}}
+  </EmberPopper>
 {{/if}}
