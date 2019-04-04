@@ -207,7 +207,7 @@
              @extends Ember.Component
              @public
              */
-            export default Component.extend({
+            let component = Component.extend({
               layout,
               classNameBindings: [&#x27;containerClass&#x27;],
             
@@ -266,14 +266,6 @@
                 } else {
                   return &#x60;drop${this.get(&#x27;direction&#x27;)}&#x60;;
                 }
-              }),
-            
-              /**
-               * @property menuElement
-               * @private
-               */
-              menuElement: computed(function() {
-                return document.getElementById(&#x60;${this.get(&#x27;elementId&#x27;)}__menu&#x60;);
               }),
             
               /**
@@ -390,6 +382,23 @@
                */
               menuComponent: &#x27;bs-dropdown/menu&#x27;
             });
+            
+            Object.defineProperties(component.prototype, {
+            
+              /**
+               * The DOM element of the &#x60;.dropdown-menu&#x60; element
+               * @type object
+               * @readonly
+               * @private
+               */
+              menuElement: {
+                get() {
+                  return document.getElementById(&#x60;${this.get(&#x27;elementId&#x27;)}__menu&#x60;);
+                }
+              }
+            });
+            
+            export default component;
             
                 </pre>
             </div>

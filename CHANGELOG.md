@@ -1,4 +1,24 @@
 
+## v2.6.1 (2019-04-04)
+
+#### Bug Fixes
+* [#782](https://github.com/kaliber5/ember-bootstrap/pull/782) nav items should not have role="presentation" ([@jelhan](https://github.com/jelhan))
+* [#786](https://github.com/kaliber5/ember-bootstrap/pull/786) Dropdown respects closeOnMenuClick=false even after re-opening the menu ([@marceloandrader](https://github.com/marceloandrader))
+* [#775](https://github.com/kaliber5/ember-bootstrap/pull/775) Fix IE 11 throws if form.element is used with a not-supported controlType ([@jelhan](https://github.com/jelhan))
+* [#770](https://github.com/kaliber5/ember-bootstrap/pull/770) radio controls should be usable in block mode ([@jelhan](https://github.com/jelhan))
+
+#### Documentation
+* [#791](https://github.com/kaliber5/ember-bootstrap/pull/791) Add ember-bootstrap-model-select to addon integrations ([@nickschot](https://github.com/nickschot))
+
+#### Internal
+* [#785](https://github.com/kaliber5/ember-bootstrap/pull/785) Update to Ember 3.8 ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 5
+- Marcelo Andrade ([@marceloandrader](https://github.com/marceloandrader))
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@kumy](https://github.com/kumy)
+- jelhan ([@jelhan](https://github.com/jelhan))
 ## v2.6.0 (2019-03-05)
 
 #### Features

@@ -60,6 +60,29 @@
                 <pre class="prettyprint linenums">
             import Control from &#x27;../control&#x27;;
             import ControlAttributes from &#x27;ember-bootstrap/mixins/control-attributes&#x27;;
+            import { computed } from &#x27;@ember/object&#x27;;
+            import { isEmpty } from &#x27;@ember/utils&#x27;;
+            
+            const allowedTypes = new Map();
+            function canUseType(type) {
+              if (typeof document !== &#x27;object&#x27; || typeof document.createElement !== &#x27;function&#x27;) {
+                // consider all types as supported if running in an
+                // environment that doesn&#x27;t support DOM
+                return true;
+              }
+            
+              if (!allowedTypes.has(type)) {
+                try {
+                  let inputElement = document.createElement(&#x27;input&#x27;);
+                  inputElement.type = type;
+                  allowedTypes.set(type, true);
+                } catch (error) {
+                  allowedTypes.set(type, false);
+                }
+              }
+            
+              return allowedTypes.get(type);
+            }
             
             /**
             
@@ -96,7 +119,28 @@
                * @type {String}
                * @public
                */
-              type: &#x27;text&#x27;,
+              type: computed({
+                get() {
+                  return &#x27;text&#x27;;
+                },
+                set(key, value) {
+                  // fallback to &#x27;text&#x27; if value is empty
+                  if (isEmpty(value)) {
+                    return &#x27;text&#x27;;
+                  }
+            
+                  // IE 11 throws if setting an unsupported type via DOM.
+                  // We guard against that behaviour by testing if user
+                  // agent throws on setting the provided type.
+                  // This is inspired by input helper shipped with Ember.js:
+                  // https://github.com/emberjs/ember.js/blob/30137796af42c63b28ead127cba0e43e45a773c1/packages/%40ember/-internals/glimmer/lib/components/text_field.ts#L93-L115
+                  if (!canUseType(value)) {
+                    return &#x27;text&#x27;;
+                  }
+            
+                  return value;
+                },
+              }),
             
               change(event) {
                 this.get(&#x27;onChange&#x27;)(event.target.value);
@@ -107,6 +151,7 @@
               }
             
             });
+            
                 </pre>
             </div>
           </div>

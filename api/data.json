@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v2.6.0"
+        "version": "v2.6.1"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -1015,7 +1015,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-form/element/control/input.js",
-            "line": 4,
+            "line": 27,
             "extends": "Components.FormElementControl",
             "access": "private",
             "tagname": ""
@@ -2641,7 +2641,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element/control/input.js",
-            "line": 34,
+            "line": 57,
             "itemtype": "property",
             "name": "type",
             "type": "{String}",
@@ -3959,7 +3959,7 @@
         },
         {
             "file": "addon/components/base/bs-nav/item.js",
-            "line": 26,
+            "line": 25,
             "description": "Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).\nBy default it will look at any nested `link-to` components and make itself disabled if there is a disabled link.\nSee the [link-to API](http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_disabling-the-code-link-to-code-component)",
             "itemtype": "property",
             "name": "disabled",
@@ -3971,7 +3971,7 @@
         },
         {
             "file": "addon/components/base/bs-nav/item.js",
-            "line": 40,
+            "line": 39,
             "description": "Render the nav item as active.\nBy default it will look at any nested `link-to` components and make itself active if there is an active link\n(i.e. the link points to the current route).\nSee the [link-to API](http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_handling-current-route)",
             "itemtype": "property",
             "name": "active",
@@ -3983,7 +3983,7 @@
         },
         {
             "file": "addon/components/base/bs-nav/item.js",
-            "line": 55,
+            "line": 54,
             "description": "Collection of all `Ember.LinkComponent`s that are children",
             "itemtype": "property",
             "name": "childLinks",
@@ -3994,7 +3994,7 @@
         },
         {
             "file": "addon/components/base/bs-nav/item.js",
-            "line": 71,
+            "line": 70,
             "description": "Called when clicking the nav item",
             "itemtype": "event",
             "name": "onClick",
@@ -6194,16 +6194,6 @@
             "file": "addon/components/base/bs-dropdown.js",
             "line": 211,
             "itemtype": "property",
-            "name": "menuElement",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.Dropdown",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-dropdown.js",
-            "line": 219,
-            "itemtype": "property",
             "name": "toggleElement",
             "access": "private",
             "tagname": "",
@@ -6212,7 +6202,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 227,
+            "line": 219,
             "description": "Reference to the child toggle (Toggle or Button)",
             "itemtype": "property",
             "name": "toggle",
@@ -6223,7 +6213,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 235,
+            "line": 227,
             "description": "Action is called when dropdown is about to be shown",
             "itemtype": "event",
             "name": "onShow",
@@ -6241,7 +6231,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 244,
+            "line": 236,
             "description": "Action is called when dropdown is about to be hidden",
             "itemtype": "event",
             "name": "onHide",
@@ -6259,7 +6249,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 294,
+            "line": 286,
             "description": "Handler for click events to close the dropdown",
             "itemtype": "method",
             "name": "closeOnClickHandler",
@@ -6276,7 +6266,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 312,
+            "line": 304,
             "itemtype": "property",
             "name": "buttonComponent",
             "type": "{String}",
@@ -6287,7 +6277,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 319,
+            "line": 311,
             "itemtype": "property",
             "name": "toggleComponent",
             "type": "{String}",
@@ -6298,10 +6288,21 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 326,
+            "line": 318,
             "itemtype": "property",
             "name": "menuComponent",
             "type": "{String}",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.Dropdown",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-dropdown.js",
+            "line": 328,
+            "description": "The DOM element of the `.dropdown-menu` element",
+            "type": "object",
+            "readonly": "",
             "access": "private",
             "tagname": "",
             "class": "Components.Dropdown",
@@ -7902,6 +7903,10 @@
         {
             "message": "Missing item type\nInitial page loading configuration.",
             "line": " addon/components/base/bs-carousel.js:508"
+        },
+        {
+            "message": "Missing item type\nThe DOM element of the `.dropdown-menu` element",
+            "line": " addon/components/base/bs-dropdown.js:328"
         }
     ]
 }
