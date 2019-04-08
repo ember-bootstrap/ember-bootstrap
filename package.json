@@ -23,7 +23,7 @@
     "chai": "^4.0.0",
     "chai-things": "^0.2.0",
     "ember-bootstrap-power-select": "^1.0.0-alpha.1",
-    "ember-cli": "~3.8.1",
+    "ember-cli": "~3.9.0",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-blueprint-test-helpers": "^0.19.1",
     "ember-cli-browserstack": "^0.0.7",
