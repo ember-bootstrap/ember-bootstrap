@@ -36,7 +36,6 @@ export default Component.extend({
    * @default null
    * @public
    */
-  submitTitle: null,
 
   hasSubmitButton: notEmpty('submitTitle'),
 
@@ -74,13 +73,11 @@ export default Component.extend({
    * @event onSubmit
    * @public
    */
-  onSubmit() {},
 
   /**
    * @event onClose
    * @public
    */
-  onClose() {},
 
   submit(e) {
     e.preventDefault();

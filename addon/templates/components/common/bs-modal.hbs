@@ -1,24 +1,24 @@
-{{#if inDom}}
-  {{#maybe-in-element destinationElement _renderInPlace}}
-    {{#component dialogComponent
+{{#if this.inDom}}
+  {{#maybe-in-element this.destinationElement this._renderInPlace}}
+    {{#component this.dialogComponent
       onClose=(action "close")
-      fade=fade
-      showModal=showModal
-      id=modalId
-      keyboard=keyboard
-      size=size
-      backdropClose=backdropClose
-      class=class
-      inDom=inDom
-      paddingLeft=paddingLeft
-      paddingRight=paddingRight
-      centered=(bs-eq position "center")
+      fade=this.fade
+      showModal=this.showModal
+      id=this.modalId
+      keyboard=this.keyboard
+      size=@size
+      backdropClose=this.backdropClose
+      class=@class
+      inDom=this.inDom
+      paddingLeft=this.paddingLeft
+      paddingRight=this.paddingRight
+      centered=(bs-eq this.position "center")
     }}
       {{yield
         (hash
-          header=(component headerComponent title=title onClose=(action "close"))
-          body=(component bodyComponent)
-          footer=(component footerComponent onClose=(action "close") onSubmit=(action "submit"))
+          header=(component this.headerComponent onClose=(action "close"))
+          body=(component this.bodyComponent)
+          footer=(component this.footerComponent onClose=(action "close") onSubmit=(action "submit"))
           close=(action "close")
           submit=(action "submit")
         )
@@ -26,8 +26,8 @@
     {{/component}}
 
     <div>
-      {{#if showBackdrop}}
-        <div class="modal-backdrop {{if fade "fade"}} {{if showModal showClass}}" id={{backdropId}} ></div>
+      {{#if this.showBackdrop}}
+        <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal this.showClass}}" id={{this.backdropId}} ></div>
       {{/if}}
     </div>
   {{/maybe-in-element}}

@@ -1,19 +1,18 @@
 {{#if hasBlockParams}}
   {{yield
     (hash
-      title=(component titleComponent)
-      close=(component closeComponent onClick=(action onClose))
+      title=(component this.titleComponent)
+      close=(component this.closeComponent onClick=(action @onClose))
     )
   }}
 {{else}}
   {{#if hasBlock}}
     {{yield}}
   {{else}}
-    {{#component titleComponent}}{{title}}{{/component}}
+    {{#component this.titleComponent}}{{@title}}{{/component}}
   {{/if}}
 
-  {{#if closeButton}}
-    {{component closeComponent onClick=(action onClose)}}
+  {{#if this.closeButton}}
+    {{component this.closeComponent onClick=(action @onClose)}}
   {{/if}}
 {{/if}}
-

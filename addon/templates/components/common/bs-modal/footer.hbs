@@ -1,10 +1,10 @@
 {{#if hasBlock}}
   {{yield}}
 {{else}}
-  {{#if hasSubmitButton}}
-    {{#component buttonComponent onClick=(action onClose)}}{{closeTitle}}{{/component}}
-    {{#component buttonComponent type=submitButtonType onClick=(action onSubmit) disabled=submitDisabled}}{{submitTitle}}{{/component}}
+  {{#if this.hasSubmitButton}}
+    {{#component this.buttonComponent onClick=@onClose}}{{this.closeTitle}}{{/component}}
+    {{#component this.buttonComponent type=this.submitButtonType onClick=@onSubmit disabled=this.submitDisabled}}{{@submitTitle}}{{/component}}
   {{else}}
-    {{#component buttonComponent type="primary" onClick=(action onClose)}}{{closeTitle}}{{/component}}
+    {{#component this.buttonComponent type="primary" onClick=@onClose}}{{this.closeTitle}}{{/component}}
   {{/if}}
 {{/if}}
