@@ -1,7 +1,8 @@
 import EmberObject from '@ember/object';
+import Component from '@ember/component';
 import { A } from '@ember/array';
 import { resolve, reject } from 'rsvp';
-import { module } from 'qunit';
+import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, fillIn, triggerKeyEvent, triggerEvent, waitFor, waitUntil, settled, focus, blur } from '@ember/test-helpers';
 import {
@@ -330,6 +331,93 @@ module('Integration | Component | bs-form', function(hooks) {
 
     await click('a');
     assert.ok(submit.calledOnce, 'onSubmit action has been called');
+  });
+
+  test('yielded submit action returns a promise', async function(assert) {
+    let TestComponent = Component.extend({
+      tagName: 'button',
+
+      click() {
+        let ret = this.get('onSubmit')();
+        assert.ok(ret instanceof Promise);
+      }
+    });
+    this.owner.register('component:test-component', TestComponent);
+
+    await render(hbs`
+      {{#bs-form as |form|}}
+        {{test-component onSubmit=form.submit}}
+      {{/bs-form}}
+    `);
+    await click('button');
+  });
+
+  skip('yielded submit action resolves for expected scenarios', async function(assert) {
+    let scenarios = [
+      { },
+      { onSubmit: this.fake.resolves() },
+      { validate: this.fake.resolves() },
+      { onSubmit: this.fake.resolves(), validate: this.fake.resolves() },
+    ];
+
+    let TestComponent = Component.extend({
+      tagName: 'button',
+
+      async click() {
+        try {
+          this.get('onSubmit')();
+          assert.ok(true);
+        } catch(err) {
+          assert.ok(false);
+        }
+      }
+    });
+    this.owner.register('component:test-component', TestComponent);
+
+    assert.expect(scenarios.length);
+
+    for (let scenario of scenarios) {
+      this.setProperties(scenario);
+      await render(hbs`
+        {{#bs-form onSubmit=onSubmit validate=validate as |form|}}
+          {{test-component onSubmit=form.submit}}
+        {{/bs-form}}
+      `);
+      await click('button');
+    }
+  });
+
+  skip('yielded submit action rejects for expected scenarios', async function(assert) {
+    let scenarios = [
+      { validate: this.fake.rejects() },
+      { onSubmit: this.fake.rejects() },
+    ];
+
+    let TestComponent = Component.extend({
+      tagName: 'button',
+
+      async click() {
+        try {
+          this.get('onSubmit')();
+          assert.ok(false);
+        } catch(err) {
+          assert.ok(true);
+        }
+      }
+    });
+    this.owner.register('component:test-component', TestComponent);
+
+    assert.expect(scenarios.length);
+
+    for (let scenario of scenarios) {
+      this.setProperties(scenario);
+      await render(hbs`
+        {{#bs-form onSubmit=onSubmit validate=validate as |form|}}
+          {{test-component onSubmit=form.submit}}
+        {{/bs-form}}
+      `);
+      await click('button');
+    }
   });
 
   test('Yields #isSubmitting', async function(assert) {

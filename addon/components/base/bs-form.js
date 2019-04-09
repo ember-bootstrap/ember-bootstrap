@@ -334,7 +334,7 @@ export default Component.extend({
    * @method submit
    * @private
    */
-  async submit(e) {
+  async submitHandler(e) {
     if (e) {
       e.preventDefault();
     }
@@ -397,6 +397,15 @@ export default Component.extend({
     }
   },
 
+  async submit() {
+    try {
+      await this.submitHandler(...arguments);
+    } catch(err) {
+      // catch error throws by form's validation
+      // TODO: do not catch other errors
+    }
+  },
+
   keyPress(e) {
     let code = e.keyCode || e.which;
     if (code === 13 && this.get('submitOnEnter')) {
@@ -428,7 +437,7 @@ export default Component.extend({
     },
 
     submit() {
-      return this.submit();
+      return this.submitHandler();
     },
   }
 });
