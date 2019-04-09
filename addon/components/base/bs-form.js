@@ -436,8 +436,8 @@ export default Component.extend({
       this.set('isRejected', false);
     },
 
-    submit() {
-      return this.submitHandler();
+    async submit() {
+      await this.submitHandler();
     },
   }
 });

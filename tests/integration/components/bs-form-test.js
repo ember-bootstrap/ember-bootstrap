@@ -2,7 +2,7 @@ import EmberObject from '@ember/object';
 import Component from '@ember/component';
 import { A } from '@ember/array';
 import { resolve, reject } from 'rsvp';
-import { module, skip } from 'qunit';
+import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, fillIn, triggerKeyEvent, triggerEvent, waitFor, waitUntil, settled, focus, blur } from '@ember/test-helpers';
 import {
@@ -338,7 +338,7 @@ module('Integration | Component | bs-form', function(hooks) {
       tagName: 'button',
 
       click() {
-        let ret = this.get('onSubmit')();
+        let ret = this.get('onClick')();
         assert.ok(ret instanceof Promise);
       }
     });
@@ -346,17 +346,17 @@ module('Integration | Component | bs-form', function(hooks) {
 
     await render(hbs`
       {{#bs-form as |form|}}
-        {{test-component onSubmit=form.submit}}
+        {{test-component onClick=form.submit}}
       {{/bs-form}}
     `);
     await click('button');
   });
 
-  skip('yielded submit action resolves for expected scenarios', async function(assert) {
+  test('yielded submit action resolves for expected scenarios', async function(assert) {
     let scenarios = [
-      { },
+      { onSubmit() {} },
       { onSubmit: this.fake.resolves() },
-      { validate: this.fake.resolves() },
+      { onSubmit() {}, validate: this.fake.resolves() },
       { onSubmit: this.fake.resolves(), validate: this.fake.resolves() },
     ];
 
@@ -365,10 +365,10 @@ module('Integration | Component | bs-form', function(hooks) {
 
       async click() {
         try {
-          this.get('onSubmit')();
+          await this.get('onClick')();
           assert.ok(true);
         } catch(err) {
-          assert.ok(false);
+          assert.ok(false, err);
         }
       }
     });
@@ -380,14 +380,14 @@ module('Integration | Component | bs-form', function(hooks) {
       this.setProperties(scenario);
       await render(hbs`
         {{#bs-form onSubmit=onSubmit validate=validate as |form|}}
-          {{test-component onSubmit=form.submit}}
+          {{test-component onClick=form.submit}}
         {{/bs-form}}
       `);
       await click('button');
     }
   });
 
-  skip('yielded submit action rejects for expected scenarios', async function(assert) {
+  test('yielded submit action rejects for expected scenarios', async function(assert) {
     let scenarios = [
       { validate: this.fake.rejects() },
       { onSubmit: this.fake.rejects() },
@@ -396,13 +396,10 @@ module('Integration | Component | bs-form', function(hooks) {
     let TestComponent = Component.extend({
       tagName: 'button',
 
-      async click() {
-        try {
-          this.get('onSubmit')();
-          assert.ok(false);
-        } catch(err) {
-          assert.ok(true);
-        }
+      click() {
+        assert.rejects(
+          this.get('onSubmit')()
+        );
       }
     });
     this.owner.register('component:test-component', TestComponent);
