@@ -1,14 +1,13 @@
 {{#if showLabel}}
   {{#if hasBlock}}
-    {{yield percentRounded}}
+    {{yield this.percentRounded}}
   {{else}}
-    {{percentRounded}}%
+    {{this.percentRounded}}%
   {{/if}}
 {{else}}
   {{#if hasBlock}}
-    <span class="sr-only">{{yield percentRounded}}</span>
+    <span class="sr-only">{{yield this.percentRounded}}</span>
   {{else}}
-    <span class="sr-only">{{percentRounded}}%</span>
+    <span class="sr-only">{{this.percentRounded}}%</span>
   {{/if}}
-
 {{/if}}
