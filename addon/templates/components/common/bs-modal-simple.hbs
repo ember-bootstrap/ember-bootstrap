@@ -1,36 +1,37 @@
 {{#if inDom}}
   {{#maybe-in-element destinationElement _renderInPlace}}
-    {{#bs-modal/dialog
-      onClose=(action "close")
-      fade=this.fade
-      showModal=this.showModal
-      id=this.modalId
-      keyboard=this.keyboard
-      size=@size
-      backdropClose=this.backdropClose
-      class=@class
-      inDom=this.inDom
-      paddingLeft=this.paddingLeft
-      paddingRight=this.paddingRight
-      centered=(bs-eq this.position "center")
-    }}
-      {{bs-modal/header title=@title closeButton=this.closeButton onClose=(action "close")}}
-      {{#bs-modal/body}}
+    <BsModal::dialog
+      @onClose={{action "close"}}
+      @fade={{this.fade}}
+      @showModal={{this.showModal}}
+      @keyboard={{this.keyboard}}
+      @size={{@size}}
+      @backdropClose={{this.backdropClose}}
+      @inDom={{this.inDom}}
+      @paddingLeft={{this.paddingLeft}}
+      @paddingRight={{this.paddingRight}}
+      @centered={{bs-eq this.position "center"}}
+      ...attributes
+      @class={{@class}}
+      @id={{this.modalId}}
+    >
+      <BsModal::header @title={{@title}} @closeButton={{this.closeButton}} @onClose={{action "close"}} />
+      <BsModal::body>
         {{yield
           (hash
             close=(action "close")
             submit=(action "submit")
           )
         }}
-      {{/bs-modal/body}}
-      {{bs-modal/footer
-        closeTitle=this.closeTitle
-        submitTitle=@submitTitle
-        submitButtonType=this.submitButtonType
-        onClose=(action "close")
-        onSubmit=(action "submit")
-      }}
-    {{/bs-modal/dialog}}
+      </BsModal::body>
+      <BsModal::footer
+        @closeTitle={{this.closeTitle}}
+        @submitTitle={{@submitTitle}}
+        @submitButtonType={{this.submitButtonType}}
+        @onClose={{action "close"}}
+        @onSubmit={{action "submit"}}
+      />
+    </BsModal::dialog>
 
     <div>
       {{#if this.showBackdrop}}
