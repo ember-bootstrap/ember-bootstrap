@@ -401,8 +401,6 @@ export default Component.extend({
           }
         }
       });
-
-    return false;
   },
 
   keyPress(e) {

@@ -103,12 +103,10 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.ok(submit.called, 'onSubmit action has been called');
   });
 
-  test('Prevents submit event from bubbling', async function(assert) {
-    assert.expect(0);
-
+  test('Submit event bubbles', async function(assert) {
     let TestComponent = Component.extend({
       submit() {
-        assert.ok(false);
+        assert.step('bubbles');
       }
     });
     this.owner.register('component:test-component', TestComponent);
@@ -121,6 +119,8 @@ module('Integration | Component | bs-form', function(hooks) {
       {{/test-component}}
     `);
     await click('button');
+
+    assert.verifySteps(['bubbles']);
   });
 
   test('Submitting the form with valid validation calls onBeforeSubmit and onSubmit action', async function(assert) {
