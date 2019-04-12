@@ -1,18 +1,19 @@
-{{#ember-popper
-  id=id
-  class=popperClass
-  ariaRole=ariaRole
-  placement=placement
-  renderInPlace=renderInPlace
-  popperTarget=popperTarget
-  modifiers=popperModifiers
-  popperContainer="#ember-bootstrap-wormhole"
-  onCreate=(action "updatePlacement")
-  onUpdate=(action "updatePlacement")
-}}
-  <div class={{arrowClass}}></div>
-  {{#if hasTitle}}
-    <h3 class={{titleClass}}>{{title}}</h3>
+<EmberPopper
+  @ariaRole={{this.ariaRole}}
+  @placement={{this.placement}}
+  @renderInPlace={{this.renderInPlace}}
+  @popperTarget={{this.popperTarget}}
+  @modifiers={{this.popperModifiers}}
+  @popperContainer="#ember-bootstrap-wormhole"
+  @onCreate={{action "updatePlacement"}}
+  @onUpdate={{action "updatePlacement"}}
+  ...attributes
+  @id={{@id}}
+  @class={{this.popperClass}}
+>
+  <div class={{this.arrowClass}}></div>
+  {{#if this.hasTitle}}
+    <h3 class={{this.titleClass}}>{{@title}}</h3>
   {{/if}}
-  <div class={{contentClass}}>{{yield}}</div>
-{{/ember-popper}}
+  <div class={{this.contentClass}}>{{yield}}</div>
+</EmberPopper>

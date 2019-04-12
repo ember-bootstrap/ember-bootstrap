@@ -1,26 +1,29 @@
 {{! template-lint-disable no-unbound }}
 {{unbound _parentFinder}}
-{{#if inDom}}
-  {{#component elementComponent
-    id=overlayId
-    placement=placement
-    fade=fade
-    showHelp=showHelp
-    class=class
-    renderInPlace=_renderInPlace
-    popperTarget=triggerTargetElement
-    autoPlacement=autoPlacement
-    viewportElement=viewportElement
-    viewportPadding=viewportPadding
-  }}
-    {{#if hasBlock}}
-      {{yield
-        (hash
-          close=(action "close")
-        )
-      }}
-    {{else}}
-      {{title}}
-    {{/if}}
-  {{/component}}
+{{#if this.inDom}}
+  {{#let (component this.elementComponent) as |Element|}}
+    <Element
+      @placement={{this.placement}}
+      @fade={{this.fade}}
+      @showHelp={{this.showHelp}}
+      @renderInPlace={{this._renderInPlace}}
+      @popperTarget={{this.triggerTargetElement}}
+      @autoPlacement={{this.autoPlacement}}
+      @viewportElement={{this.viewportElement}}
+      @viewportPadding={{this.viewportPadding}}
+      ...attributes
+      @id={{this.overlayId}}
+      @class={{@class}}
+    >
+      {{#if hasBlock}}
+        {{yield
+          (hash
+            close=(action "close")
+          )
+        }}
+      {{else}}
+        {{@title}}
+      {{/if}}
+    </Element>
+  {{/let}}
 {{/if}}

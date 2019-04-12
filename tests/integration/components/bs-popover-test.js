@@ -152,7 +152,7 @@ module('Integration | Component | bs-popover', function(hooks) {
     assert.dom('.popover').doesNotExist('popover is not visible');
     await click('#target');
     assert.dom('.popover').exists('popover visible again');
-  })
+  });
 
   test('non-click-initiated close action does not interfere with click-to-open', async function(assert) {
     await render(
@@ -176,5 +176,20 @@ module('Integration | Component | bs-popover', function(hooks) {
     assert.dom('.popover').doesNotExist('popover is not visible');
     await click('#target');
     assert.dom('.popover').exists('popover visible again');
-  })
+  });
+
+  test('it passes along class attribute', async function(assert) {
+    await render(hbs`<div id="target">{{#bs-popover title="Dummy" class="wide"}}test{{/bs-popover}}</div>`);
+    await click('#target');
+    assert.dom('.popover').hasClass('wide');
+  });
+
+  // @todo skipped until https://github.com/kybishop/ember-popper/issues/98 is resolved
+  skip('it passes all HTML attribute', async function(assert) {
+    await render(hbs`<div id="target"><BsPopover @title="Dummy" class="wide" data-test role="foo">test</BsPopover></div>`);
+    await click('#target');
+    assert.dom('.popover').hasClass('wide');
+    assert.dom('.popover').hasAttribute('role', 'foo');
+    assert.dom('.popover').hasAttribute('data-test');
+  });
 });

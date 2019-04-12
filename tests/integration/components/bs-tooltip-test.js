@@ -353,12 +353,6 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     assert.notOk(isVisible(this.element.querySelector('.tooltip')), '200ms: tooltip not faded in');
   });
 
-  test('show pass along class attribute', async function(assert) {
-    await render(hbs`<div id="target">{{bs-tooltip title="Dummy" class='wide' delay=150}}</div>`);
-    await triggerEvent('#target', 'mouseenter');
-    assert.dom('.tooltip.wide').exists({ count: 1 });
-  });
-
   test('should position tooltip arrow centered', async function(assert) {
     this.insertCSSRule('.margin-top { margin-top: 200px; }');
 
@@ -443,5 +437,20 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     assert.ok(hideAction.calledOnce, 'hide action has been called');
     assert.ok(hiddenAction.calledOnce, 'hidden action was called');
     assert.dom('.tooltip').doesNotExist('tooltip is not visible');
+  });
+
+  test('it passes along class attribute', async function(assert) {
+    await render(hbs`<div id="target">{{bs-tooltip title="Dummy" class="wide"}}</div>`);
+    await triggerEvent('#target', 'mouseenter');
+    assert.dom('.tooltip').hasClass('wide');
+  });
+
+  // @todo skipped until https://github.com/kybishop/ember-popper/issues/98 is resolved
+  skip('it passes all HTML attribute', async function(assert) {
+    await render(hbs`<div id="target"><BsTooltip @title="Dummy" class="wide" data-test role="foo" /></div>`);
+    await triggerEvent('#target', 'mouseenter');
+    assert.dom('.tooltip').hasClass('wide');
+    assert.dom('.tooltip').hasAttribute('role', 'foo');
+    assert.dom('.tooltip').hasAttribute('data-test');
   });
 });

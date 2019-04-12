@@ -31,7 +31,6 @@ let component = Component.extend(TransitionSupport, {
    * @type string
    * @public
    */
-  title: null,
 
   /**
    * How to position the tooltip/popover - top | bottom | left | right
