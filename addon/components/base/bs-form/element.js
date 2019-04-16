@@ -983,6 +983,7 @@ export default FormGroup.extend({
       this.set('showValidationOn', ['focusOut']);
     }
     if (!isBlank(this.get('property'))) {
+      assert('You cannot set both property and value on a form element', isBlank(this.get('value')));
       defineProperty(this, 'value', alias(`model.${this.get('property')}`));
       this.setupValidations();
     }
