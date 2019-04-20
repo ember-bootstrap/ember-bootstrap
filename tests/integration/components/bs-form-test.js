@@ -365,8 +365,9 @@ module('Integration | Component | bs-form', function(hooks) {
 
       async click() {
         try {
-          await this.get('onClick')();
-          assert.ok(true);
+          let ret = await this.get('onClick')();
+          assert.ok(true, 'resolves');
+          assert.strictEqual(ret, undefined, 'resolves with undefined');
         } catch(err) {
           assert.ok(false, err);
         }
@@ -374,7 +375,7 @@ module('Integration | Component | bs-form', function(hooks) {
     });
     this.owner.register('component:test-component', TestComponent);
 
-    assert.expect(scenarios.length);
+    assert.expect(scenarios.length * 2);
 
     for (let scenario of scenarios) {
       this.setProperties(scenario);
@@ -389,8 +390,8 @@ module('Integration | Component | bs-form', function(hooks) {
 
   test('yielded submit action rejects for expected scenarios', async function(assert) {
     let scenarios = [
-      { validate: this.fake.rejects() },
-      { onSubmit: this.fake.rejects() },
+      { validate: this.fake.rejects('rejected value') },
+      { onSubmit: this.fake.rejects('rejected value') },
     ];
 
     let TestComponent = Component.extend({
@@ -398,7 +399,8 @@ module('Integration | Component | bs-form', function(hooks) {
 
       click() {
         assert.rejects(
-          this.get('onSubmit')()
+          this.get('onSubmit')(),
+          'rejected value'
         );
       }
     });
