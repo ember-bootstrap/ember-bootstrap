@@ -1,42 +1,45 @@
-{{#if customTabs}}
+{{#if this.customTabs}}
   {{yield
     (hash
-      pane=(component paneComponent parent=this activeId=isActiveId fade=fade fadeTransition=fadeTransition)
-      activeId=isActiveId
+      pane=(component this.paneComponent parent=this activeId=this.isActiveId fade=this.fade fadeTransition=this.fadeTransition)
+      activeId=this.isActiveId
       select=(action "select")
     )
   }}
 {{else}}
-  {{#component navComponent type=type as |nav|}}
-    {{#each navItems as |item|}}
-      {{#if item.isGroup}}
-        {{#nav.dropdown class=(if (bs-contains item.childIds isActiveId) "active") as |dd|}}
-          {{#dd.toggle}}{{item.groupTitle}} <span class="caret"></span>{{/dd.toggle}}
-          {{#dd.menu as |menu|}}
-            {{#each item.children as |subItem|}}
-              {{#menu.item class=(if (bs-eq isActiveId subItem.elementId) "active")}}
-                <a href="#{{subItem.elementId}}" role="tab" class={{if (bs-eq isActiveId subItem.elementId) "nav-link active" "nav-link"}} {{action "select" subItem.elementId}}>
-                  {{subItem.title}}
-                </a>
-              {{/menu.item}}
-            {{/each}}
-          {{/dd.menu}}
-        {{/nav.dropdown}}
-      {{else}}
-        {{#nav.item active=(bs-eq item.elementId isActiveId)}}
-          <a href="#{{item.elementId}}" role="tab" class={{if (bs-eq isActiveId item.elementId) "nav-link active" "nav-link"}} {{action "select" item.elementId}}>
-            {{item.title}}
-          </a>
-        {{/nav.item}}
-      {{/if}}
-    {{/each}}
-  {{/component}}
+  {{#let (component this.navComponent) as |NavComponent|}}
+
+    <NavComponent @type={{this.type}} as |Nav|>
+      {{#each this.navItems as |item|}}
+        {{#if item.isGroup}}
+          <Nav.dropdown class={{if (bs-contains item.childIds this.isActiveId) "active"}} as |DD|>
+            <DD.toggle>{{item.groupTitle}} <span class="caret"></span></DD.toggle>
+            <DD.menu as |Menu|>
+              {{#each item.children as |subItem|}}
+                <Menu.item class={{if (bs-eq this.isActiveId subItem.elementId) "active"}}>
+                  <a href="#{{subItem.elementId}}" role="tab" class={{if (bs-eq this.isActiveId subItem.elementId) "nav-link active" "nav-link"}} {{action "select" subItem.elementId}}>
+                    {{subItem.title}}
+                  </a>
+                </Menu.item>
+              {{/each}}
+            </DD.menu>
+          </Nav.dropdown>
+        {{else}}
+          <Nav.item @active={{bs-eq item.elementId this.isActiveId}}>
+            <a href="#{{item.elementId}}" role="tab" class={{if (bs-eq this.isActiveId item.elementId) "nav-link active" "nav-link"}} {{action "select" item.elementId}}>
+              {{item.title}}
+            </a>
+          </Nav.item>
+        {{/if}}
+      {{/each}}
+    </NavComponent>
+  {{/let}}
 
   <div class="tab-content">
     {{yield
       (hash
-        pane=(component paneComponent parent=this activeId=isActiveId fade=fade fadeTransition=fadeTransition)
-        activeId=isActiveId
+        pane=(component this.paneComponent parent=this activeId=this.isActiveId fade=this.fade fadeTransition=this.fadeTransition)
+        activeId=this.isActiveId
         select=(action "select")
       )
     }}
