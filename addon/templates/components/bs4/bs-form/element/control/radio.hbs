@@ -1,19 +1,20 @@
-{{#each options as |option index|}}
-  <div class="form-check{{if inline " form-check-inline"}}">
-    {{#with (concat this.elementId "-" index) as |id|}}
+{{#each @options as |option index|}}
+  <div class="form-check{{if this.inline " form-check-inline"}}">
+    {{#let (concat this.elementId "-" index) as |id|}}
       <input
         type="radio"
         class="form-check-input"
         id={{id}}
-        checked={{bs-eq option value}}
-        onclick={{action onChange option}}
-        name={{name}}
-        required={{required}}
-        disabled={{disabled}}
-        autofocus={{autofocus}}
-        tabindex={{tabindex}}
-        form={{form}}
-        title={{title}}
+        checked={{bs-eq option @value}}
+        onclick={{action this.onChange option}}
+        name={{@name}}
+        required={{@required}}
+        disabled={{@disabled}}
+        autofocus={{@autofocus}}
+        tabindex={{@tabindex}}
+        form={{@form}}
+        title={{@title}}
+        ...attributes
       >
       <label
         for={{id}}
@@ -22,13 +23,13 @@
         {{#if hasBlock}}
           {{yield option index}}
         {{else}}
-          {{#if optionLabelPath}}
-            {{get option optionLabelPath}}
+          {{#if @optionLabelPath}}
+            {{get option @optionLabelPath}}
           {{else}}
             {{option}}
           {{/if}}
         {{/if}}
       </label>
-    {{/with}}
+    {{/let}}
   </div>
 {{/each}}

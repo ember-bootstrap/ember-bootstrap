@@ -1,19 +1,19 @@
 {{yield
   (hash
-    element=(component elementComponent
-      model=model
-      formLayout=formLayout
-      horizontalLabelGridClass=horizontalLabelGridClass
-      showAllValidations=showAllValidations
+    element=(component this.elementComponent
+      model=@model
+      formLayout=this.formLayout
+      horizontalLabelGridClass=this.horizontalLabelGridClass
+      showAllValidations=this.showAllValidations
       disabled=this.disabled
       readonly=this.readonly
       onChange=(action "change")
       _onChange=(action "resetSubmissionState")
     )
-    group=(component groupComponent formLayout=formLayout)
-    isSubmitting=isSubmitting
-    isSubmitted=isSubmitted
-    isRejected=isRejected
+    group=(component this.groupComponent formLayout=this.formLayout)
+    isSubmitting=this.isSubmitting
+    isSubmitted=this.isSubmitted
+    isRejected=this.isRejected
     resetSubmissionState=(action "resetSubmissionState")
     submit=(action "submit")
   )

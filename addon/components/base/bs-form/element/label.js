@@ -18,7 +18,6 @@ export default Component.extend({
    * @type string
    * @public
    */
-  label: null,
 
   /**
    * @property invisibleLabel
@@ -32,14 +31,12 @@ export default Component.extend({
    * @type {String}
    * @public
    */
-  formElementId: null,
 
   /**
    * @property labelClass
    * @type {String}
    * @public
    */
-  labelClass: null,
 
   /**
    * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):

@@ -1,38 +1,38 @@
-{{#component layoutComponent
-  hasLabel=hasLabel
-  formElementId=formElementId
-  horizontalLabelGridClass=horizontalLabelGridClass
-  errorsComponent=(component errorsComponent
-    messages=validationMessages
-    show=showValidationMessages
-    showMultipleErrors=showMultipleErrors
+{{#component this.layoutComponent
+  hasLabel=this.hasLabel
+  formElementId=this.formElementId
+  horizontalLabelGridClass=this.horizontalLabelGridClass
+  errorsComponent=(component this.errorsComponent
+    messages=this.validationMessages
+    show=this.showValidationMessages
+    showMultipleErrors=this.showMultipleErrors
   )
-  feedbackIconComponent=(component feedbackIconComponent
-    iconName=iconName
-    show=hasFeedback
+  feedbackIconComponent=(component this.feedbackIconComponent
+    iconName=@iconName
+    show=this.hasFeedback
   )
-  labelComponent=(component labelComponent
-    label=label
-    invisibleLabel=invisibleLabel
-    formElementId=formElementId
-    controlType=controlType
-    formLayout=formLayout
-    size=size
+  labelComponent=(component this.labelComponent
+    label=@label
+    invisibleLabel=this.invisibleLabel
+    formElementId=this.formElementId
+    controlType=this.controlType
+    formLayout=this.formLayout
+    size=@size
   )
-  helpTextComponent=(if hasHelpText
-    (component helpTextComponent
-      text=helpText
-      id=ariaDescribedBy
+  helpTextComponent=(if this.hasHelpText
+    (component this.helpTextComponent
+      text=@helpText
+      id=this.ariaDescribedBy
     )
   )
 }}
-  {{#with
-    (component controlComponent
-      value=value
-      id=formElementId
-      name=name
-      type=controlType
-      label=label
+  {{#let
+    (component this.controlComponent
+      value=this.value
+      id=this.formElementId
+      name=@name
+      type=this.controlType
+      label=@label
       placeholder=placeholder
       autofocus=autofocus
       disabled=disabled
@@ -65,18 +65,18 @@
       onChange=(action "change")
       validationType=validation
       size=size
-  ) as |control|}}
+  ) as |Control|}}
     {{#if hasBlock}}
       {{yield
         (hash
           value=value
           id=formElementId
           validation=validation
-          control=control
+          control=Control
         )
       }}
     {{else}}
-      {{component control}}
+      <Control ...attributes />
     {{/if}}
-  {{/with}}
+  {{/let}}
 {{/component}}

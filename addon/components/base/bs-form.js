@@ -131,7 +131,6 @@ export default Component.extend({
    * @type Ember.Object
    * @public
    */
-  model: null,
 
   /**
    * Set the layout of the form to either "vertical", "horizontal" or "inline". See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal
