@@ -1043,6 +1043,7 @@
                   this.set(&#x27;showValidationOn&#x27;, [&#x27;focusOut&#x27;]);
                 }
                 if (!isBlank(this.get(&#x27;property&#x27;))) {
+                  assert(&#x27;You cannot set both property and value on a form element&#x27;, this.get(&#x27;value&#x27;) === null);
                   defineProperty(this, &#x27;value&#x27;, alias(&#x60;model.${this.get(&#x27;property&#x27;)}&#x60;));
                   this.setupValidations();
                 }

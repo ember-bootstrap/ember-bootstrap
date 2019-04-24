@@ -1,4 +1,16 @@
 
+## v2.6.2 (2019-04-24)
+
+#### Features
+* [#804](https://github.com/kaliber5/ember-bootstrap/pull/804) Assertion to prevent setting both property and value on a form element ([@rrglomsk](https://github.com/rrglomsk))
+
+#### Internal
+* [#802](https://github.com/kaliber5/ember-bootstrap/pull/802) Allow ember-concurrency 0.8.x - 0.10.x ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Rachel Glomski ([@rrglomsk](https://github.com/rrglomsk))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- jelhan ([@jelhan](https://github.com/jelhan))
 ## v2.6.1 (2019-04-04)
 
 #### Bug Fixes
