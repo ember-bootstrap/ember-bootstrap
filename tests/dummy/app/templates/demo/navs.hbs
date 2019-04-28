@@ -39,10 +39,10 @@
     @fill={{fill}} as |nav|
   >
     <nav.item>
-      <nav.linkTo>Home</nav.linkTo>
+      {{#nav.link-to "index"}}Home{{/nav.link-to}}
     </nav.item>
     <nav.item>
-      <nav.linkTo>navs</nav.linkTo>
+      {{#nav.link-to "demo.navs"}}Nav{{/nav.link-to}}
     </nav.item>
     <nav.dropdown as |dd|>
       <dd.toggle>
@@ -51,10 +51,10 @@
       </dd.toggle>
       <dd.menu as |ddm|>
         <ddm.item>
-          <ddm.linkTo>Home</ddm.linkTo>
+          {{#ddm.link-to "index"}}Home{{/ddm.link-to}}
         </ddm.item>
         <ddm.item>
-          <ddm.linkTo>navs</ddm.linkTo>
+          {{#ddm.link-to "demo.navs"}}Nav{{/ddm.link-to}}
         </ddm.item>
       </dd.menu>
     </nav.dropdown>

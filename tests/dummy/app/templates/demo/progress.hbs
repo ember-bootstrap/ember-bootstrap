@@ -1,7 +1,7 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET progress-demo -->
-  <BsProgress as |p|>
-    <p.bar @value="50" />
+  <BsProgress as |pg|>
+    <pg.bar @value="50" />
   </BsProgress>
   <!-- END-SNIPPET -->
 </div>
@@ -46,8 +46,8 @@
   </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET progress-options -->
-  <BsProgress as |p|>
-    <p.bar
+  <BsProgress as |pg|>
+    <pg.bar
       @value={{value}}
       @minValue={{minValue}}
       @maxValue={{maxValue}}
@@ -69,8 +69,8 @@
 </h2>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET progress-stacked -->
-  <BsProgress as |p|>
-    <p.bar
+  <BsProgress as |pg|>
+    <pg.bar
       @value={{value}}
       @minValue={{minValue}}
       @maxValue={{maxValue}}
@@ -79,7 +79,7 @@
       @type={{type}}
       @striped={{striped}}
       @animate={{animate}}/>
-    <p.bar
+    <pg.bar
       @value="20"
       @minValue={{minValue}}
       @maxValue={{maxValue}}
@@ -88,7 +88,7 @@
       @type="warning"
       @striped={{striped}}
       @animate={{animate}}/>
-    <p.bar
+    <pg.bar
       @value="5"
       @minValue={{minValue}}
       @maxValue={{maxValue}}

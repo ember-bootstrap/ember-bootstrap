@@ -6,12 +6,12 @@
       <span class="caret"></span>
     </dd.toggle>
     <dd.menu as |menu|>
-      <menu.item>
-        <menu.linkTo>Home</menu.linkTo>
-      </menu.item>
+      {{#menu.item}}
+        {{#menu.link-to "index"}}Home{{/menu.link-to}}
+      {{/menu.item}}
       {{menu.divider}}
       <menu.item>
-        <menu.linkTo>Dropdowns</menu.linkTo>
+        {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
       </menu.item>
       {{menu.divider}}
       <menu.item>
@@ -26,11 +26,11 @@
     </dd.toggle>
     <dd.menu @align="right" as |menu|>
       <menu.item>
-        <menu.linkTo>Home</menu.linkTo>
+        {{#menu.link-to "index"}}Home{{/menu.link-to}}
       </menu.item>
       {{menu.divider}}
       <menu.item>
-        <menu.linkTo>Dropdowns</menu.linkTo>
+        {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
       </menu.item>
     </dd.menu>
   </BsDropdown>
@@ -51,10 +51,10 @@
     </dd.button>
     <dd.menu as |menu|>
       <menu.item>
-        <menu.linkTo>Home</menu.linkTo>
+        {{#menu.link-to "index"}}Home{{/menu.link-to}}
       </menu.item>
       <menu.item>
-        <menu.linkTo>Dropdowns</menu.linkTo>
+        {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
       </menu.item>
     </dd.menu>
   </BsDropdown>
@@ -65,10 +65,10 @@
     </dd.button>
     <dd.menu as |menu|>
       <menu.item>
-        <menu.linkTo>Home</menu.linkTo>
+        {{#menu.link-to "index"}}Home{{/menu.link-to}}
       </menu.item>
       <menu.item>
-        <menu.linkTo>Dropdowns</menu.linkTo>
+        {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
       </menu.item>
     </dd.menu>
   </BsDropdown>

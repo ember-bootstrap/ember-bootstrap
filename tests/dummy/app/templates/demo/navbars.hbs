@@ -34,15 +34,15 @@
     @onExpand={{action (mut collapsed) false}} as |navbar|>
     <div class="navbar-header">
       {{navbar.toggle}}
-      <LinkTo class="navbar-brand">Brand</LinkTo>
+      {{#link-to "index" class="navbar-brand"}}Brand{{/link-to}}
     </div>
     <navbar.content>
       <navbar.nav as |nav|>
         <nav.item>
-          <nav.linkTo >Home</nav.linkTo>
+          {{#nav.link-to "index"}}Home{{/nav.link-to}}
         </nav.item>
         <nav.item>
-          <nav.linkTo >Navbars</nav.linkTo>
+          {{#nav.link-to "demo.navbars"}}Navbars{{/nav.link-to}}
         </nav.item>
         <nav.dropdown as |dd|>
           <dd.toggle>
@@ -51,10 +51,10 @@
           </dd.toggle>
           <dd.menu as |ddm|>
             <ddm.item>
-              <ddm.linkTo >Home</ddm.linkTo>
+              {{#ddm.link-to "index"}}Home{{/ddm.link-to}}
             </ddm.item>
             <ddm.item>
-              <ddm.linkTo >Navbars</ddm.linkTo>
+              {{#ddm.link-to "demo.navbars"}}Navbars{{/ddm.link-to}}
             </ddm.item>
           </dd.menu>
         </nav.dropdown>

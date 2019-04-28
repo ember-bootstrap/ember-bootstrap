@@ -1,10 +1,10 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET accordion-demo -->
   <BsAccordion as |acc|>
-    <acc.item value="1" @title="First item">
+    <acc.item @value="1" @title="First item">
       <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?  </p>
     </acc.item>
-    <acc.item value="2" as |aitem|>
+    <acc.item @value="2" as |aitem|>
       <aitem.title>
         <strong> Second </strong>
         <i> item </i>
@@ -13,7 +13,7 @@
         <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?  </p>
       </aitem.body>
     </acc.item>
-    <acc.item value="3" @title="Third item">
+    <acc.item @value="3" @title="Third item">
       <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?  </p>
     </acc.item>
   </BsAccordion>
@@ -31,10 +31,10 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET accordion-styling-demo -->
   <BsAccordion as |acc|>
-    <acc.item value="1" @title="Border" class="border-dark">
+    <acc.item @value="1" @title="Border" class="border-dark">
       <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?  </p>
     </acc.item>
-    <acc.item value="2" class="bg-dark" as |aitem|>
+    <acc.item @value="2" class="bg-dark" as |aitem|>
       <aitem.title>
         <span class="text-white"> Dark </span>
       </aitem.title>
@@ -42,7 +42,7 @@
         <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur ea eos hic neque quia sequi sunt. Amet at atque corporis earum et fugiat illum magnam nisi sapiente voluptatem. Laudantium, quam?  </p>
       </aitem.body>
     </acc.item>
-    <acc.item value="3" class="bg-success" as |aitem|>
+    <acc.item @value="3" class="bg-success" as |aitem|>
       <aitem.title>
         <span class="text-white"> Success </span>
       </aitem.title>
