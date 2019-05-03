@@ -1,4 +1,83 @@
 
+## v2.6.2 (2019-04-24)
+
+#### Features
+* [#804](https://github.com/kaliber5/ember-bootstrap/pull/804) Assertion to prevent setting both property and value on a form element ([@rrglomsk](https://github.com/rrglomsk))
+
+#### Internal
+* [#802](https://github.com/kaliber5/ember-bootstrap/pull/802) Allow ember-concurrency 0.8.x - 0.10.x ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Rachel Glomski ([@rrglomsk](https://github.com/rrglomsk))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- jelhan ([@jelhan](https://github.com/jelhan))
+## v2.6.1 (2019-04-04)
+
+#### Bug Fixes
+* [#782](https://github.com/kaliber5/ember-bootstrap/pull/782) nav items should not have role="presentation" ([@jelhan](https://github.com/jelhan))
+* [#786](https://github.com/kaliber5/ember-bootstrap/pull/786) Dropdown respects closeOnMenuClick=false even after re-opening the menu ([@marceloandrader](https://github.com/marceloandrader))
+* [#775](https://github.com/kaliber5/ember-bootstrap/pull/775) Fix IE 11 throws if form.element is used with a not-supported controlType ([@jelhan](https://github.com/jelhan))
+* [#770](https://github.com/kaliber5/ember-bootstrap/pull/770) radio controls should be usable in block mode ([@jelhan](https://github.com/jelhan))
+
+#### Documentation
+* [#791](https://github.com/kaliber5/ember-bootstrap/pull/791) Add ember-bootstrap-model-select to addon integrations ([@nickschot](https://github.com/nickschot))
+
+#### Internal
+* [#785](https://github.com/kaliber5/ember-bootstrap/pull/785) Update to Ember 3.8 ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 5
+- Marcelo Andrade ([@marceloandrader](https://github.com/marceloandrader))
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@kumy](https://github.com/kumy)
+- jelhan ([@jelhan](https://github.com/jelhan))
+## v2.6.0 (2019-03-05)
+
+#### Features
+* [#732](https://github.com/kaliber5/ember-bootstrap/pull/732) Form yields isSubmitted and isRejected properties ([@jelhan](https://github.com/jelhan))
+* [#753](https://github.com/kaliber5/ember-bootstrap/pull/753) Forms use the set function of the model if it is present ([@nickschot](https://github.com/nickschot))
+
+#### Bug Fixes
+* [#767](https://github.com/kaliber5/ember-bootstrap/pull/767) Fix IE11 errors in Collapse and Progress components ([@simonihmig](https://github.com/simonihmig))
+* [#766](https://github.com/kaliber5/ember-bootstrap/pull/766) Fix inline radio element used with optionLabelPath (BS3) ([@kumy](https://github.com/kumy))
+* [#756](https://github.com/kaliber5/ember-bootstrap/pull/756) Fixed deprecations in Ember 3.8.0-beta and 3.9-canary ([@simonihmig](https://github.com/simonihmig))
+* [#754](https://github.com/kaliber5/ember-bootstrap/pull/754) Fix transition for bs-collapse ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#765](https://github.com/kaliber5/ember-bootstrap/pull/765) Add controlType in radio examples ([@kumy](https://github.com/kumy))
+
+#### Internal
+* [#764](https://github.com/kaliber5/ember-bootstrap/pull/764) Drop Saucelabs in favour of Browserstack ([@simonihmig](https://github.com/simonihmig))
+* [#763](https://github.com/kaliber5/ember-bootstrap/pull/763) Make ButtonGroup's justified property BS3 only ([@simonihmig](https://github.com/simonihmig))
+* [#758](https://github.com/kaliber5/ember-bootstrap/pull/758) tests: remove work-a-round for qunit test runner CSP violation ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 4
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@kumy](https://github.com/kumy)
+- jelhan ([@jelhan](https://github.com/jelhan))
+## v2.5.0 (2019-01-31)
+
+#### Features
+* [#741](https://github.com/kaliber5/ember-bootstrap/pull/741) Add option to hide all validations after form submission ([@simonihmig](https://github.com/simonihmig))
+* [#746](https://github.com/kaliber5/ember-bootstrap/pull/746) CSP: refactor to not require `style-src 'unsafe-inline` and add test coverage ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#745](https://github.com/kaliber5/ember-bootstrap/pull/745) Fix broken tooltips/popovers in Ember 3.8.0(-beta) ([@simonihmig](https://github.com/simonihmig))
+* [#737](https://github.com/kaliber5/ember-bootstrap/pull/737) Form: click on input group button should not show validations ([@jelhan](https://github.com/jelhan))
+* [#738](https://github.com/kaliber5/ember-bootstrap/pull/738) Modal should not violate CSP style-src 'none' ([@jelhan](https://github.com/jelhan))
+* [#735](https://github.com/kaliber5/ember-bootstrap/pull/735) Fix popover clicks ([@bendemboski](https://github.com/bendemboski))
+* [#730](https://github.com/kaliber5/ember-bootstrap/pull/730) Form submission state reflects Promise returned by onInvalid action ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#744](https://github.com/kaliber5/ember-bootstrap/pull/744) Fix failing build under node 6 ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 5
+- Ben Demboski ([@bendemboski](https://github.com/bendemboski))
+- Lou Greenwood ([@lougreenwood](https://github.com/lougreenwood))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- Sumeet Attree ([@sumeetattree](https://github.com/sumeetattree))
+- jelhan ([@jelhan](https://github.com/jelhan))
 ## v2.4.0 (2018-12-18)
 
 #### Features

@@ -9,6 +9,7 @@
 /.bowerrc
 /.editorconfig
 /.ember-cli
+/.env*
 /.eslintignore
 /.eslintrc.js
 /.gitignore
@@ -39,3 +40,5 @@ gulpfile.js
 .codeclimate.yml
 /node-tests
 /DEBUG
+*.pid
+*.log

@@ -8,6 +8,7 @@ import {
   validationErrorClass
 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
 const validations = {
   success: {
@@ -26,6 +27,7 @@ const validations = {
 
 module('Integration | Component | bs-form/group', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   test('component has form-group bootstrap class', async function(assert) {
     await render(hbs`{{bs-form/group}}`);

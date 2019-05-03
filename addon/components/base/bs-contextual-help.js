@@ -1,4 +1,4 @@
-import { and, or, reads, gt } from '@ember/object/computed';
+import { or, reads, gt } from '@ember/object/computed';
 import Component from '@ember/component';
 import { guidFor } from '@ember/object/internals';
 import { isArray } from '@ember/array';
@@ -24,7 +24,7 @@ function noop() {}
  @uses Mixins.TransitionSupport
  @private
  */
-export default Component.extend(TransitionSupport, {
+let component = Component.extend(TransitionSupport, {
   tagName: '',
 
   /**
@@ -71,7 +71,7 @@ export default Component.extend(TransitionSupport, {
    * @type boolean
    * @private
    */
-  inDom: and('visible', 'triggerTargetElement'),
+  inDom: false,
 
   /**
    * Set to false to disable fade animations.
@@ -174,18 +174,6 @@ export default Component.extend(TransitionSupport, {
   }),
 
   /**
-   * The DOM element of the overlay element.
-   *
-   * @property overlayElement
-   * @type object
-   * @readonly
-   * @private
-   */
-  overlayElement: computed('overlayId', function() {
-    return document.getElementById(this.get('overlayId'));
-  }).volatile(),
-
-  /**
    * The DOM element of the arrow element.
    *
    * @property arrowElement
@@ -219,11 +207,10 @@ export default Component.extend(TransitionSupport, {
   triggerElement: null,
 
   /**
-   * @property triggerTargetElement
-   * @type {object}
+   * @method getTriggerTargetElement
    * @private
    */
-  triggerTargetElement: computed('triggerElement', function() {
+  getTriggerTargetElement() {
     let triggerElement = this.get('triggerElement');
 
     if (!triggerElement) {
@@ -233,7 +220,7 @@ export default Component.extend(TransitionSupport, {
     } else {
       return document.querySelector(triggerElement);
     }
-  }).volatile(),
+  },
 
   /**
    * The event(s) that should trigger the tooltip/popover - click | hover | focus.
@@ -628,11 +615,13 @@ export default Component.extend(TransitionSupport, {
     this._handleLeave = run.bind(this, this.handleTriggerEvent, this.leave);
     this._handleToggle = run.bind(this, this.handleTriggerEvent, this.toggle);
     this._parentFinder = self.document ? self.document.createTextNode('') : '';
+    this.inDom = this.get('visible') && this.get('triggerTargetElement');
   },
 
   didInsertElement() {
     this._super(...arguments);
     this._parent = this._parentFinder.parentNode;
+    this.triggerTargetElement = this.getTriggerTargetElement();
     this.addListeners();
     if (this.get('visible')) {
       next(this, this.show, true);
@@ -653,3 +642,22 @@ export default Component.extend(TransitionSupport, {
   })
 
 });
+
+Object.defineProperties(component.prototype, {
+
+  /**
+   * The DOM element of the overlay element.
+   *
+   * @property overlayElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  overlayElement: {
+    get() {
+      return document.getElementById(this.get('overlayId'));
+    }
+  }
+});
+
+export default component;

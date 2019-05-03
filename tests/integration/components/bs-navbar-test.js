@@ -10,9 +10,11 @@ import {
   visibilityClass
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-navbar', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   hooks.beforeEach(function() {
     this.actions = {};

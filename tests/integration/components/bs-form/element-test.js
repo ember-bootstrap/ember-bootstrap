@@ -20,6 +20,7 @@ import {
   formHelpTextClass
 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
 const formLayouts = ['vertical', 'horizontal', 'inline'];
 const supportedInputAttributes = {
@@ -89,6 +90,7 @@ const supportedRadioAttributes = {
 
 module('Integration | Component | bs-form/element', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   test('component has form-group bootstrap class', async function(assert) {
     await render(hbs`{{bs-form/element}}`);
@@ -260,6 +262,32 @@ module('Integration | Component | bs-form/element', function(hooks) {
       );
     });
 
+    test('Block mode allows to customize label for each radio input', async function(assert) {
+      await render(hbs`
+        {{#bs-form/element controlType="radio" options=simpleOptions as |Element|}}
+          {{#Element.control as |option index|}}
+            {{index}}: {{option}}
+          {{/Element.control}}
+        {{/bs-form/element}}
+      `);
+
+      assert.dom(this.element.querySelectorAll('label')[0]).hasText('0: foo');
+      assert.dom(this.element.querySelectorAll('label')[1]).hasText('1: bar');
+    });
+
+    testBS3('Block mode allows to customize label for each radio input if used together with inline', async function(assert) {
+      await render(hbs`
+        {{#bs-form/element controlType="radio" options=simpleOptions as |Element|}}
+          {{#Element.control inline=true as |option index|}}
+            {{index}}: {{option}}
+          {{/Element.control}}
+        {{/bs-form/element}}
+      `);
+
+      assert.dom(this.element.querySelectorAll('label')[0]).hasText('0: foo');
+      assert.dom(this.element.querySelectorAll('label')[1]).hasText('1: bar');
+    });
+
     testBS3('has correct markup', async function(assert) {
       await render(hbs`{{bs-form/element controlType="radio" options=simpleOptions}}`);
 
@@ -278,6 +306,29 @@ module('Integration | Component | bs-form/element', function(hooks) {
       assert.dom('.radio').doesNotExist();
       assert.dom('label.radio-inline').exists({ count: 2 });
       assert.dom('label.radio-inline input[type=radio]').exists({ count: 2 });
+    });
+
+    testBS3('supports inline for hash options', async function(assert) {
+      await render(hbs`
+        {{#bs-form/element controlType="radio" options=hashOptions optionLabelPath="title" as |Element|}}
+          {{Element.control inline=true}}
+        {{/bs-form/element}}
+      `);
+
+      // inline support
+      assert.dom('.radio').doesNotExist();
+      assert.dom('label.radio-inline').exists({ count: 2 });
+      assert.dom('label.radio-inline input[type=radio]').exists({ count: 2 });
+
+      // hash support
+      assert.dom(this.element.querySelectorAll('label')[0]).hasText('foo');
+      assert.dom(this.element.querySelectorAll('label')[1]).hasText('bar');
+      assert.dom(this.element.querySelectorAll('label')[0]).hasAttribute('for',
+        this.element.querySelectorAll('input[type=radio]')[0].getAttribute('id')
+      );
+      assert.dom(this.element.querySelectorAll('label')[1]).hasAttribute('for',
+        this.element.querySelectorAll('input[type=radio]')[1].getAttribute('id')
+      );
     });
 
     testBS4('has correct markup', async function(assert) {
@@ -310,7 +361,6 @@ module('Integration | Component | bs-form/element', function(hooks) {
       this.set('model.prop', 'foo');
       assert.ok(this.element.querySelector('input[type=radio]').checked);
     });
-
 
     test('sends updates', async function(assert) {
       let action = this.spy();
@@ -359,7 +409,6 @@ module('Integration | Component | bs-form/element', function(hooks) {
         await render(hbs``); // hack to prevent browser exception when setting size to undefined
       }
     });
-
   });
 
   test('using "property" creates binding to model property', async function(assert) {
@@ -401,7 +450,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     );
     await render(hbs`
       {{#bs-form model=model as |form|}}
-        {{#form.element label="Gender" property="gender" validation="success" as |el|}}
+        {{#form.element label="Gender" property="gender" showAllValidations=true hasValidator=true as |el|}}
           <div id="value">{{el.value}}</div>
           <div id="id">{{el.id}}</div>
           <div id="validation">{{el.validation}}</div>
@@ -579,12 +628,12 @@ module('Integration | Component | bs-form/element', function(hooks) {
   });
 
   testBS3('adjusts validation icon position if there is an input group', async function(assert) {
-    assert.expect(6);
-    this.set('validation', 'success');
+    assert.expect(5);
+    this.set('errors', A([]));
     this.set('formLayout', 'vertical');
     await render(hbs`
       {{#bs-form formLayout=formLayout as |form|}}
-        {{#form.element validation=validation label='adjusts validation icon position' classNames='addon'}}
+        {{#form.element showAllValidations=true hasValidator=true errors=errors label='adjusts validation icon position' classNames='addon'}}
           <div class="input-group">
             <input class="form-control">
             <div class="input-group-addon">
@@ -592,7 +641,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
             </div>
           </div>
         {{/form.element}}
-        {{#form.element validation=validation label='adjusts validation icon position' classNames='button'}}
+        {{#form.element showAllValidations=true hasValidator=true errors=errors label='adjusts validation icon position' classNames='button'}}
           <div class="input-group">
             <input class="form-control">
             <div class="input-group-btn">
@@ -617,18 +666,14 @@ module('Integration | Component | bs-form/element', function(hooks) {
       'works for button on init'
     );
     let expectedRightValue = this.element.querySelector('.addon .form-control-feedback').style.right;
-    this.set('validation', null);
-    assert.ok(
-      this.element.querySelectorAll('.form-control-feedback').length === 0,
-      'assumption'
-    );
-    this.set('validation', 'error');
+
+    this.set('errors', A(['Some error']));
     assert.equal(
       this.element.querySelector('.addon .form-control-feedback').style.right,
       expectedRightValue,
       'adjusts correctly after validation changed from null'
     );
-    this.set('validation', 'success');
+    this.set('errors', A([]));
     await fillIn('.addon input', 'foo');
     await triggerEvent('.addon input', 'change');
     assert.equal(

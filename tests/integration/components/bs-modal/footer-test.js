@@ -3,9 +3,11 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { test, defaultButtonClass } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-modal/footer', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   test('Footer has close button', async function(assert) {
     await render(hbs`{{bs-modal/footer closeTitle="close"}}`);

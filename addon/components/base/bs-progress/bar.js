@@ -143,8 +143,8 @@ export default Component.extend(TypeClass, {
    * @private
    */
   updateStyles() {
-    let percent = Number.parseFloat(this.get('percent'));
-    this.element.style.width = !Number.isNaN(percent) ? `${percent}%` : '';
+    let percent = parseFloat(this.get('percent'));
+    this.element.style.width = !isNaN(percent) ? `${percent}%` : '';
   },
 
   didInsertElement() {

@@ -54,7 +54,7 @@ const nonDefaultLayouts = A([
 
  ```hbs
  {{#bs-form model=this onSubmit=(action "submit") as |form|}}
-   {{form.element label="Gender" options=genderOptions optionLabelPath="title" property="gender"}}
+   {{form.element controlType="radio" label="Gender" options=genderOptions optionLabelPath="title" property="gender"}}
  {{/bs-form}}
  ```
 
@@ -63,7 +63,7 @@ const nonDefaultLayouts = A([
 
  ```hbs
  {{#bs-form model=this onSubmit=(action "submit") as |form|}}
-   {{#form.element label="Gender" options=genderOptions property="gender" as |el|}}
+   {{#form.element controlType="radio" label="Gender" options=genderOptions property="gender" as |el|}}
      {{el.control inline=true}}
    {{/form.element}}
  {{/bs-form}}
@@ -667,7 +667,14 @@ export default FormGroup.extend({
    * @default false
    * @private
    */
-  showAllValidations: false,
+  showAllValidations: computed({
+    get() {
+    },
+    set(key, value) {
+      this.set('showOwnValidation', false);
+      return value;
+    }
+  }),
 
   /**
    * @property showModelValidations
@@ -962,12 +969,21 @@ export default FormGroup.extend({
    */
   onChange() {},
 
+  /**
+   * Private duplicate of onChange event used for internal state handling between form and it's elements.
+   *
+   * @event _onChange
+   * @private
+   */
+  _onChange() {},
+
   init() {
     this._super(...arguments);
     if (this.get('showValidationOn') === null) {
       this.set('showValidationOn', ['focusOut']);
     }
     if (!isBlank(this.get('property'))) {
+      assert('You cannot set both property and value on a form element', this.get('value') === null);
       defineProperty(this, 'value', alias(`model.${this.get('property')}`));
       this.setupValidations();
     }
@@ -1022,8 +1038,9 @@ export default FormGroup.extend({
 
   actions: {
     change(value) {
-      let { onChange, model, property } = this.getProperties('onChange', 'model', 'property');
+      let { onChange, model, property, _onChange } = this.getProperties('onChange', 'model', 'property', '_onChange');
       onChange(value, model, property);
+      _onChange();
     }
   }
 });

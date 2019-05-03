@@ -3,9 +3,11 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import test from 'ember-sinon-qunit/test-support/test';
+import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-tab', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   hooks.beforeEach(function() {
     this.actions = {};
@@ -83,6 +85,20 @@ module('Integration | Component | bs-tab', function(hooks) {
     assert.dom('ul.nav.nav-tabs > li').exists({ count: 2 }, 'has tabs navigation items');
     assert.dom('ul.nav.nav-tabs > li:nth-child(1) > a').hasText('Tab 1', 'navigation item shows pane title');
     assert.dom('ul.nav.nav-tabs > li:nth-child(2) > a').hasText('Tab 2', 'navigation item shows pane title');
+  });
+
+  test('tab navigation items does not have aria role presentation', async function(assert) {
+    // Should not have role="presentation" even so Bootstrap 3 docs have it.
+    // This was discussed at https://github.com/kaliber5/ember-bootstrap/pull/782.
+    await render(hbs`
+      {{#bs-tab as |tab|}}
+        {{#tab.pane title="Tab 1"}}
+          tabcontent 1
+        {{/tab.pane}}
+      {{/bs-tab}}
+    `);
+
+    assert.dom('ul.nav.nav-tabs > li').doesNotHaveAttribute('role');
   });
 
   test('first tab is active by default', async function(assert) {

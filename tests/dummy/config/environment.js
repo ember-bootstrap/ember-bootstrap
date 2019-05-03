@@ -22,8 +22,6 @@ module.exports = function(environment) {
       'default-src': ["'none'"],
       'script-src':  [
         "'self'",
-        // test file loaded assertion injected as <script> tag by ember-cli
-        "'sha256-37u63EBe1EibDZ3vZNr6mxLepqlY1CQw+4N89HrzP9s='",
       ],
       'font-src':    ["'self'"],
       'connect-src': ["'self'"],
@@ -45,7 +43,8 @@ module.exports = function(environment) {
     },
 
     unstableApiURL: 'http://simonihmig.github.io/ember-bootstrap/',
-    bootstrapVersion: process.env.BOOTSTRAPVERSION || 4
+    bootstrapVersion: process.env.BOOTSTRAPVERSION || 4,
+    failOnDeprecation: !!process.env.FAIL_ON_DEPRECATION
   };
 
   if (environment === 'development') {

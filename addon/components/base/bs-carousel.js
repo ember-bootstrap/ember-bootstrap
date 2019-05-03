@@ -511,8 +511,12 @@ export default Component.extend(ComponentParent, {
   didInsertElement() {
     this._super(...arguments);
     this.registerEvents();
-    this.set('currentIndex', this.get('index'));
     this.triggerChildSlidesObserver();
+  },
+
+  init() {
+    this._super(...arguments);
+    this.set('currentIndex', this.get('index'));
   },
 
   /**
