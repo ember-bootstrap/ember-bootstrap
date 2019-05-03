@@ -1,10 +1,11 @@
 import Component from '@ember/component';
 import { observer } from '@ember/object';
-import { reads, filter, filterBy, gt } from '@ember/object/computed';
+import { filter, filterBy, gt } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
 import LinkComponent from '@ember/routing/link-component';
 import layout from 'ember-bootstrap/templates/components/bs-nav/item';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
+import overrideableCP from '../../../utils/overrideable-cp';
 
 /**
 
@@ -20,7 +21,6 @@ export default Component.extend(ComponentParent, {
   layout,
   classNameBindings: ['disabled', 'active'],
   tagName: 'li',
-  ariaRole: 'presentation',
 
   /**
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
@@ -31,7 +31,9 @@ export default Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  disabled: reads('_disabled'),
+  disabled: overrideableCP('_disabled', function() {
+    return this.get('_disabled');
+  }),
   _disabled: false,
 
   /**
@@ -44,7 +46,9 @@ export default Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  active: reads('_active'),
+  active: overrideableCP('_active', function() {
+    return this.get('_active');
+  }),
   _active: false,
 
   /**

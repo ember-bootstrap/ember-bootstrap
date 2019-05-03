@@ -5,6 +5,7 @@ import { deprecatingAlias, equal, or }  from '@ember/object/computed';
 import layout from 'ember-bootstrap/templates/components/bs-button';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
+import overrideableCP from '../../utils/overrideable-cp';
 
 /**
  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -214,9 +215,9 @@ export default Component.extend(TypeClass, SizeClass, {
    * @property icon
    * @type String
    * @readonly
-   * @protected
+   * @public
    */
-  icon: computed('active', function() {
+  icon: overrideableCP('active', function() {
     if (this.get('active')) {
       return this.get('iconActive');
     } else {
@@ -363,7 +364,7 @@ export default Component.extend(TypeClass, SizeClass, {
     let action = this.get('onClick');
     let preventConcurrency = this.get('preventConcurrency');
 
-    if (action === null) {
+    if (action === null || action === undefined) {
       return;
     }
 

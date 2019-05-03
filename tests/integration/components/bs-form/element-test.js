@@ -8,9 +8,11 @@ import { clearRender, render, click, fillIn, triggerEvent, focus, blur } from '@
 import {
   formFeedbackClass,
   test,
-  testRequiringFocus,
   testBS3,
   testBS4,
+  testRequiringFocus,
+  testBS3RequiringFocus,
+  testBS4RequiringFocus,
   validationSuccessClass,
   validationErrorClass,
   validationWarningClass,
@@ -18,6 +20,7 @@ import {
   formHelpTextClass
 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
 const formLayouts = ['vertical', 'horizontal', 'inline'];
 const supportedInputAttributes = {
@@ -69,7 +72,15 @@ const supportedTextareaAttributes = {
 const supportedCheckboxAttributes = {
   name: 'dummy',
   required: true,
-  readonly: true,
+  disabled: true,
+  autofocus: true,
+  tabindex: 50,
+  form: 'dummy',
+  title: 'dummy'
+};
+const supportedRadioAttributes = {
+  name: 'dummy',
+  required: true,
   disabled: true,
   autofocus: true,
   tabindex: 50,
@@ -79,6 +90,7 @@ const supportedCheckboxAttributes = {
 
 module('Integration | Component | bs-form/element', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   test('component has form-group bootstrap class', async function(assert) {
     await render(hbs`{{bs-form/element}}`);
@@ -184,6 +196,221 @@ module('Integration | Component | bs-form/element', function(hooks) {
     await labeledControlTest.call(this, assert, 'textarea', 'textarea');
   });
 
+  module('controlType "radio" is supported', function(hooks) {
+    const simpleOptions = [
+      'foo',
+      'bar'
+    ];
+
+    const hashOptions = [
+      {
+        title: 'foo'
+      },
+      {
+        title: 'bar'
+      }
+    ];
+
+    hooks.beforeEach(function() {
+      this.setProperties({
+        simpleOptions,
+        hashOptions
+      });
+    });
+
+    test('controlType "radio" is supported', async function(assert) {
+      await render(hbs`{{bs-form/element controlType="radio" formLayout=formLayout options=simpleOptions horizontalLabelGridClass="col-md-4"}}`);
+
+      formLayouts.forEach((layout) => {
+        this.set('formLayout', layout);
+        assert.dom('input[type=radio]').exists(
+          { count: 2 },
+          `component has radio control for form layout ${layout}`
+        );
+      });
+    });
+
+    test('it renders simple options', async function(assert) {
+      await render(hbs`{{bs-form/element controlType="radio" formLayout="horizontal" options=simpleOptions}}`);
+
+      assert.dom('input[type=radio]').exists({ count: 2 });
+      assert.dom('label').exists({ count: 2 });
+
+      assert.dom(this.element.querySelectorAll('label')[0]).hasText('foo');
+      assert.dom(this.element.querySelectorAll('label')[1]).hasText('bar');
+      assert.dom(this.element.querySelectorAll('label')[0]).hasAttribute('for',
+        this.element.querySelectorAll('input[type=radio]')[0].getAttribute('id')
+      );
+      assert.dom(this.element.querySelectorAll('label')[1]).hasAttribute('for',
+        this.element.querySelectorAll('input[type=radio]')[1].getAttribute('id')
+      );
+    });
+
+    test('it renders hash options', async function(assert) {
+      await render(hbs`{{bs-form/element controlType="radio" options=hashOptions optionLabelPath="title"}}`);
+
+      assert.dom('input[type=radio]').exists({ count: 2 });
+      assert.dom('label').exists({ count: 2 });
+
+      assert.dom(this.element.querySelectorAll('label')[0]).hasText('foo');
+      assert.dom(this.element.querySelectorAll('label')[1]).hasText('bar');
+      assert.dom(this.element.querySelectorAll('label')[0]).hasAttribute('for',
+        this.element.querySelectorAll('input[type=radio]')[0].getAttribute('id')
+      );
+      assert.dom(this.element.querySelectorAll('label')[1]).hasAttribute('for',
+        this.element.querySelectorAll('input[type=radio]')[1].getAttribute('id')
+      );
+    });
+
+    test('Block mode allows to customize label for each radio input', async function(assert) {
+      await render(hbs`
+        {{#bs-form/element controlType="radio" options=simpleOptions as |Element|}}
+          {{#Element.control as |option index|}}
+            {{index}}: {{option}}
+          {{/Element.control}}
+        {{/bs-form/element}}
+      `);
+
+      assert.dom(this.element.querySelectorAll('label')[0]).hasText('0: foo');
+      assert.dom(this.element.querySelectorAll('label')[1]).hasText('1: bar');
+    });
+
+    testBS3('Block mode allows to customize label for each radio input if used together with inline', async function(assert) {
+      await render(hbs`
+        {{#bs-form/element controlType="radio" options=simpleOptions as |Element|}}
+          {{#Element.control inline=true as |option index|}}
+            {{index}}: {{option}}
+          {{/Element.control}}
+        {{/bs-form/element}}
+      `);
+
+      assert.dom(this.element.querySelectorAll('label')[0]).hasText('0: foo');
+      assert.dom(this.element.querySelectorAll('label')[1]).hasText('1: bar');
+    });
+
+    testBS3('has correct markup', async function(assert) {
+      await render(hbs`{{bs-form/element controlType="radio" options=simpleOptions}}`);
+
+      assert.dom('.radio').exists({ count: 2 });
+      assert.dom('.radio label').exists({ count: 2 });
+      assert.dom('.radio label input[type=radio]').exists({ count: 2 });
+    });
+
+    testBS3('supports inline', async function(assert) {
+      await render(hbs`
+        {{#bs-form/element controlType="radio" options=simpleOptions as |Element|}}
+          {{Element.control inline=true}}
+        {{/bs-form/element}}
+      `);
+
+      assert.dom('.radio').doesNotExist();
+      assert.dom('label.radio-inline').exists({ count: 2 });
+      assert.dom('label.radio-inline input[type=radio]').exists({ count: 2 });
+    });
+
+    testBS3('supports inline for hash options', async function(assert) {
+      await render(hbs`
+        {{#bs-form/element controlType="radio" options=hashOptions optionLabelPath="title" as |Element|}}
+          {{Element.control inline=true}}
+        {{/bs-form/element}}
+      `);
+
+      // inline support
+      assert.dom('.radio').doesNotExist();
+      assert.dom('label.radio-inline').exists({ count: 2 });
+      assert.dom('label.radio-inline input[type=radio]').exists({ count: 2 });
+
+      // hash support
+      assert.dom(this.element.querySelectorAll('label')[0]).hasText('foo');
+      assert.dom(this.element.querySelectorAll('label')[1]).hasText('bar');
+      assert.dom(this.element.querySelectorAll('label')[0]).hasAttribute('for',
+        this.element.querySelectorAll('input[type=radio]')[0].getAttribute('id')
+      );
+      assert.dom(this.element.querySelectorAll('label')[1]).hasAttribute('for',
+        this.element.querySelectorAll('input[type=radio]')[1].getAttribute('id')
+      );
+    });
+
+    testBS4('has correct markup', async function(assert) {
+      await render(hbs`{{bs-form/element controlType="radio" options=simpleOptions}}`);
+
+      assert.dom('.form-check').exists({ count: 2 });
+      assert.dom('.form-check input[type=radio]').hasClass('form-check-input');
+      assert.dom('.form-check label').hasClass('form-check-label');
+    });
+
+    testBS4('supports inline', async function(assert) {
+      await render(hbs`
+        {{#bs-form/element controlType="radio" options=simpleOptions as |Element|}}
+          {{Element.control inline=true}}
+        {{/bs-form/element}}
+      `);
+
+      assert.dom('.form-check.form-check-inline').exists({ count: 2 });
+    });
+
+    test('has correct value', async function(assert) {
+      let model = EmberObject.create();
+      this.set('model', model);
+
+      await render(hbs`{{#bs-form model=model as |f|}}{{f.element controlType="radio" options=simpleOptions property="prop"}}{{/bs-form}}`);
+
+      this.set('model.prop', undefined);
+      assert.notOk(this.element.querySelector('input[type=radio]').checked);
+
+      this.set('model.prop', 'foo');
+      assert.ok(this.element.querySelector('input[type=radio]').checked);
+    });
+
+    test('sends updates', async function(assert) {
+      let action = this.spy();
+      this.set('change', action);
+
+      let model = EmberObject.create({
+        name: 'foo'
+      });
+      this.set('model', model);
+      await render(hbs`{{bs-form/element controlType="radio" options=simpleOptions model=model property="name" onChange=(action change)}}`);
+      await click(this.element.querySelectorAll('input[type=radio]')[1]);
+
+      assert.equal(this.get('model.name'), 'foo', `radio value has not changed`);
+      assert.ok(action.calledWith('bar', model, 'name'), `onChange action of radio has been called with expected args`);
+    });
+
+    test('supported attributes propagate', async function(assert) {
+      for (let i = 0; i < formLayouts.length; i++) {
+        let formLayout = formLayouts[i];
+        this.set('formLayout', formLayout);
+        let resetProps = Object.keys(supportedRadioAttributes).reduce((prev, key) => {
+          prev[key] = undefined;
+          return prev;
+        }, {});
+        this.setProperties(resetProps);
+        await render(hbs`{{bs-form/element options=simpleOptions controlType="radio" formLayout=formLayout
+          name=name
+          required=required
+          disabled=disabled
+          autofocus=autofocus
+          tabindex=tabindex
+          form=form
+          title=title
+        }}`);
+
+        for (let attribute in supportedRadioAttributes) {
+          assert.equal(this.element.querySelector('input[type=radio]').getAttribute(attribute), undefined, `input attribute ${attribute} is undefined [${formLayout}]`);
+          let value = supportedRadioAttributes[attribute];
+          this.set(attribute, value);
+          if (value === true) {
+            assert.ok(this.element.querySelector('input[type=radio]').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
+          } else {
+            assert.equal(this.element.querySelector('input[type=radio]').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
+          }
+        }
+        await render(hbs``); // hack to prevent browser exception when setting size to undefined
+      }
+    });
+  });
+
   test('using "property" creates binding to model property', async function(assert) {
     let model = EmberObject.create({
       foo: 'bar'
@@ -223,7 +450,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     );
     await render(hbs`
       {{#bs-form model=model as |form|}}
-        {{#form.element label="Gender" property="gender" validation="success" as |el|}}
+        {{#form.element label="Gender" property="gender" showAllValidations=true hasValidator=true as |el|}}
           <div id="value">{{el.value}}</div>
           <div id="id">{{el.id}}</div>
           <div id="validation">{{el.validation}}</div>
@@ -350,7 +577,6 @@ module('Integration | Component | bs-form/element', function(hooks) {
       await render(hbs`{{bs-form/element controlType="checkbox" formLayout=formLayout
         name=name
         required=required
-        readonly=readonly
         disabled=disabled
         autofocus=autofocus
         tabindex=tabindex
@@ -402,12 +628,12 @@ module('Integration | Component | bs-form/element', function(hooks) {
   });
 
   testBS3('adjusts validation icon position if there is an input group', async function(assert) {
-    assert.expect(6);
-    this.set('validation', 'success');
+    assert.expect(5);
+    this.set('errors', A([]));
     this.set('formLayout', 'vertical');
     await render(hbs`
       {{#bs-form formLayout=formLayout as |form|}}
-        {{#form.element validation=validation label='adjusts validation icon position' classNames='addon'}}
+        {{#form.element showAllValidations=true hasValidator=true errors=errors label='adjusts validation icon position' classNames='addon'}}
           <div class="input-group">
             <input class="form-control">
             <div class="input-group-addon">
@@ -415,7 +641,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
             </div>
           </div>
         {{/form.element}}
-        {{#form.element validation=validation label='adjusts validation icon position' classNames='button'}}
+        {{#form.element showAllValidations=true hasValidator=true errors=errors label='adjusts validation icon position' classNames='button'}}
           <div class="input-group">
             <input class="form-control">
             <div class="input-group-btn">
@@ -440,18 +666,14 @@ module('Integration | Component | bs-form/element', function(hooks) {
       'works for button on init'
     );
     let expectedRightValue = this.element.querySelector('.addon .form-control-feedback').style.right;
-    this.set('validation', null);
-    assert.ok(
-      this.element.querySelectorAll('.form-control-feedback').length === 0,
-      'assumption'
-    );
-    this.set('validation', 'error');
+
+    this.set('errors', A(['Some error']));
     assert.equal(
       this.element.querySelector('.addon .form-control-feedback').style.right,
       expectedRightValue,
       'adjusts correctly after validation changed from null'
     );
-    this.set('validation', 'success');
+    this.set('errors', A([]));
     await fillIn('.addon input', 'foo');
     await triggerEvent('.addon input', 'change');
     assert.equal(
@@ -668,6 +890,73 @@ module('Integration | Component | bs-form/element', function(hooks) {
       validationErrorClass(),
       'events present in `showValidationOn` trigger validation'
     );
+  });
+
+  testBS3RequiringFocus('event triggered on input group button does not enable validation', async function(assert) {
+    this.set('errors', A(['Invalid']));
+    this.set('model', EmberObject.create({ name: null }));
+    await render(hbs`
+      {{#bs-form as |form|}}
+        {{#form.element property='name' hasValidator=true errors=errors model=model as |el|}}
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Button</button>
+            </span>
+            {{el.control}}
+          </div>
+        {{/form.element}}
+      {{/bs-form}}
+    `);
+    await click('button');
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
+      'validation warnings aren\'t shown before user interaction'
+    );
+  });
+
+  testBS4RequiringFocus('event triggered on input group button does not enable validation', async function(assert) {
+    this.set('errors', A(['Invalid']));
+    this.set('model', EmberObject.create({ name: null }));
+    await render(hbs`
+      {{#bs-form as |form|}}
+        {{#form.element property='name' hasValidator=true errors=errors model=model as |el|}}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <button class="btn btn-outline-secondary" type="button">Button</button>
+            </div>
+            {{el.control}}
+          </div>
+        {{/form.element}}
+      {{/bs-form}}
+    `);
+    await click('button');
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
+      'validation warnings aren\'t shown before user interaction'
+    );
+  });
+
+  testRequiringFocus('event targets not enabling validation are configurable per `doNotShowValidationForEventTargets`', async function(assert) {
+    this.set('doNotShowValidationForEventTargets', ['[data-trigger-validation="false"]']);
+    this.set('errors', A(['Invalid']));
+    this.set('model', EmberObject.create({ name: null }));
+    await render(hbs`
+      {{#bs-form as |form|}}
+        {{#form.element property='name' hasValidator=true errors=errors model=model
+          doNotShowValidationForEventTargets=doNotShowValidationForEventTargets
+        as |el|
+        }}
+          {{el.control}}
+          <button data-trigger-validation="false">Test</button>
+        {{/form.element}}
+      {{/bs-form}}
+    `);
+    await click('button');
+    assert.dom(formFeedbackElement()).hasNoClass(validationErrorClass());
+
+    this.set('doNotShowValidationForEventTargets', []);
+    await click('button');
+    assert.dom(formFeedbackElement()).hasNoClass(validationErrorClass());
   });
 
   test('it uses custom control component when registered in DI container', async function(assert) {

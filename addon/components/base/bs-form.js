@@ -77,9 +77,21 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
 
   ```
   {{#bs-form onSubmit=(action 'save') as |form|}}
-    {{#bs-button type='submit' disabled=form.isSubmitting}}
+    {{#bs-button buttonType='submit' disabled=form.isSubmitting}}
       Save
       {{#if form.isSubmitting}} {{fa-icon 'spinner'}} {{/if}}
+    {{/bs-button}}
+  {{/bs-form}}
+  ```
+
+  Additionaly `isSubmitted` and `isRejected` properties are yielded. `isSubmitted` is `true` if last submission was successful.
+  `isRejected` is `true` if last submission was rejected due to validation errors or by an action bound to `onSubmit` event, returning a rejected promise.
+  Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:
+
+  ```
+  {{#bs-form onSubmit=(action 'save') as |form|}}
+    {{#bs-button buttonType='submit' type=(if form.isRejected "danger" "primary")}}
+      Save
     {{/bs-button}}
   {{/bs-form}}
   ```
@@ -178,6 +190,33 @@ export default Component.extend({
   isSubmitting: false,
 
   /**
+   * `isSubmitted` is `true` if last submission was successful.
+   * A change to any form element resets it's value to `false`.
+   *
+   * If not using `Components.FormElement`, `resetSubmissionState` action must be triggered on each change to reset
+   * form's submission state.
+   *
+   * @property isSubmitted
+   * @type {Boolean}
+   * @private
+   */
+  isSubmitted: false,
+
+  /**
+   * `isRejected` is `true` if last submission was rejected.
+   * A submission is considered as rejected if form is invalid as well as if `onSubmit` rejects.
+   * A change to any form element resets it's value to `false`.
+   *
+   * If not using `Components.FormElement`, `resetSubmissionState` action must be triggered on each change to reset
+   * form's submission state.
+   *
+   * @property isRejected
+   * @type {Boolean}
+   * @private
+   */
+  isRejected: false,
+
+  /**
    * Count of pending submissions.
    *
    * @property pendingSubmissions
@@ -211,6 +250,18 @@ export default Component.extend({
   preventConcurrency: false,
 
   /**
+   * If true, after successful validation and upon submitting the form, all current element validations will be hidden.
+   * If the form remains visible, the user would have to focus out of elements of submit the form again for the
+   * validations to show up again, as if a fresh new form component had been rendered.
+   *
+   * @property hideValidationsOnSubmit
+   * @type {Boolean}
+   * @default false
+   * @public
+   */
+  hideValidationsOnSubmit: false,
+
+  /**
    * If set to true novalidate attribute is present on form element
    *
    * @property novalidate
@@ -238,10 +289,10 @@ export default Component.extend({
   /**
    * @property showAllValidations
    * @type boolean
-   * @default false
+   * @default undefined
    * @private
    */
-  showAllValidations: false,
+  showAllValidations: undefined,
 
   /**
    * Action is called before the form is validated (if possible) and submitted.
@@ -300,27 +351,54 @@ export default Component.extend({
     this.get('onBefore')(model);
 
     RSVP.resolve(this.get('hasValidator') ? this.validate(this.get('model')) : null)
-      .then((r) => {
-        RSVP.resolve(this.get('onSubmit')(model, r))
-          .finally(() => {
-            if (!this.get('isDestroyed')) {
-              if (this.get('pendingSubmissions') === 1) {
-                this.set('isSubmitting', false);
+      .then(
+        (record) => {
+          return RSVP.resolve()
+            .then(() => {
+              if (this.get('hideValidationsOnSubmit') === true) {
+                this.set('showAllValidations', false);
               }
-              this.decrementProperty('pendingSubmissions');
-            }
-          });
-      })
-      .catch((err) => {
-        if (!this.get('isDestroyed')) {
+              return this.get('onSubmit')(model, record);
+            })
+            .then(
+              () => {
+                if (!this.get('isDestroyed')) {
+                  this.set('isSubmitted', true);
+                }
+              },
+              () => {
+                if (!this.get('isDestroyed')) {
+                  this.set('isRejected', true);
+                }
+              }
+            );
+        },
+        (error) => {
           this.set('showAllValidations', true);
 
+          return RSVP.resolve()
+            .then(() => {
+              return this.get('onInvalid')(model, error);
+            })
+            .finally(() => {
+              if (!this.get('isDestroyed')) {
+                this.set('isRejected', true);
+              }
+            });
+        }
+      )
+      .finally(() => {
+        if (!this.get('isDestroyed')) {
           if (this.get('pendingSubmissions') === 1) {
             this.set('isSubmitting', false);
           }
+
           this.decrementProperty('pendingSubmissions');
 
-          this.get('onInvalid')(model, err);
+          // reset forced hiding of validations
+          if (this.get('showAllValidations') === false) {
+            this.set('showAllValidations', undefined);
+          }
         }
       });
   },
@@ -343,7 +421,16 @@ export default Component.extend({
       assert('You cannot use the form element\'s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!',
         isPresent(model) && isPresent(property)
       );
-      set(model, property, value);
+      if (typeof model.set === 'function') {
+        model.set(property, value);
+      } else {
+        set(model, property, value);
+      }
+    },
+
+    resetSubmissionState() {
+      this.set('isSubmitted', false);
+      this.set('isRejected', false);
     }
   }
 });

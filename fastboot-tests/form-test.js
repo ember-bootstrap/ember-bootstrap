@@ -14,7 +14,7 @@ describe('form', function() {
 
         expect(response.statusCode).to.equal(200);
         expect($('form#form').length).to.equal(1);
-        expect($('form .form-group').length).to.equal(3);
+        expect($('form .form-group').length).to.equal(4);
         expect($('form .form-group:eq(0) label').text().trim()).to.equal('Email');
         expect($('form .form-group:eq(0) input[type=email]').length).to.equal(1);
       });

@@ -2,7 +2,7 @@
 'use strict';
 
 const RSVP = require('rsvp');
-const streamToPromise = require('stream-to-promise');
+const execa = require('execa');
 
 function promptForCompletion(project) {
   return project.ui.prompt({
@@ -23,13 +23,9 @@ function promptForCompletion(project) {
 // For details on each option run `ember help release`
 module.exports = {
   manifest: [ 'package.json', 'bower.json', 'yuidoc.json' ],
-  beforeCommit(project) {
-    const gulp = require('gulp');
-    require('../gulpfile.js');
-    let updateChangelog = gulp.task('changelog');
-
+  beforeCommit(project, tags) {
     project.ui.startProgress('Collecting changes for CHANGELOG.md...');
-    return streamToPromise(updateChangelog())
+    return execa('gulp', ['changelog', '--tag', tags.next])
       .then(function() {
         project.ui.stopProgress();
         return promptForCompletion(project);

@@ -8,5 +8,13 @@ if (typeof Promise === 'undefined') {
   window.Promise = EmberPromise;
 }
 
+document.addEventListener('securitypolicyviolation', function({ blockedURI, violatedDirective }) {
+  throw new Error(
+    'Content-Security-Policy violation detected: ' +
+    `Violated directive: ${violatedDirective}. ` +
+    `Blocked URI: ${blockedURI}`
+  );
+});
+
 setApplication(Application.create(config.APP));
 start();

@@ -1,0 +1,63 @@
+{{#each options as |option index|}}
+  {{#with (concat this.elementId "-" index) as |id|}}
+    {{#if inline}}
+      <label
+        for={{id}}
+        class="radio-inline"
+      >
+        <input
+          type="radio"
+          id={{id}}
+          checked={{bs-eq option value}}
+          onclick={{action onChange option}}
+          name={{name}}
+          required={{required}}
+          disabled={{disabled}}
+          autofocus={{autofocus}}
+          tabindex={{tabindex}}
+          form={{form}}
+          title={{title}}
+        >
+        {{#if hasBlock}}
+          {{yield option index}}
+        {{else}}
+          {{#if optionLabelPath}}
+            {{get option optionLabelPath}}
+          {{else}}
+            {{option}}
+          {{/if}}
+        {{/if}}
+      </label>
+    {{else}}
+      <div class="radio">
+
+        <label
+          for={{id}}
+        >
+          <input
+            type="radio"
+            id={{id}}
+            checked={{bs-eq option value}}
+            onclick={{action onChange option}}
+            name={{name}}
+            required={{required}}
+            disabled={{disabled}}
+            autofocus={{autofocus}}
+            tabindex={{tabindex}}
+            form={{form}}
+            title={{title}}
+          >
+          {{#if hasBlock}}
+            {{yield option index}}
+          {{else}}
+            {{#if optionLabelPath}}
+              {{get option optionLabelPath}}
+            {{else}}
+              {{option}}
+            {{/if}}
+          {{/if}}
+        </label>
+      </div>
+    {{/if}}
+  {{/with}}
+{{/each}}

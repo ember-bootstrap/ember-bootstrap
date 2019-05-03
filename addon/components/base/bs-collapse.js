@@ -1,10 +1,11 @@
 import { not, alias, and } from '@ember/object/computed';
 import Component from '@ember/component';
-import { isPresent, isEmpty } from '@ember/utils';
-import { observer, computed } from '@ember/object';
+import { isPresent } from '@ember/utils';
+import { observer } from '@ember/object';
 import { next } from '@ember/runloop';
-import { htmlSafe, camelize } from '@ember/string';
+import { camelize } from '@ember/string';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
+import { assert } from '@ember/debug';
 
 /**
  An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -28,7 +29,6 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 export default Component.extend({
 
   classNameBindings: ['collapse', 'collapsing'],
-  attributeBindings: ['style'],
 
   /**
    * Collapsed/expanded state
@@ -60,13 +60,6 @@ export default Component.extend({
    * @private
    */
   transitioning: false,
-
-  /**
-   * @property collapseSize
-   * @type number
-   * @private
-   */
-  collapseSize: null,
 
   /**
    * The size of the element when collapsed. Defaults to 0.
@@ -120,14 +113,14 @@ export default Component.extend({
    */
   transitionDuration: 350,
 
-  style: computed('collapseSize', function() {
-    let size = this.get('collapseSize');
+  setCollapseSize(size) {
     let dimension = this.get('collapseDimension');
-    if (isEmpty(size)) {
-      return htmlSafe('');
-    }
-    return htmlSafe(`${dimension}: ${size}px`);
-  }),
+
+    assert(`collapseDimension must be either "width" or "height". ${dimension} given.`, ["width", "height"].indexOf(dimension) !== -1);
+
+    this.element.style.width = dimension === 'width' && size ? `${size}px` : '';
+    this.element.style.height = dimension === 'height' && size ? `${size}px` : '';
+  },
 
   /**
    * The action to be sent when the element is about to be hidden.
@@ -172,9 +165,9 @@ export default Component.extend({
 
     this.setProperties({
       transitioning: true,
-      collapseSize: this.get('collapsedSize'),
       active: true
     });
+    this.setCollapseSize(this.get('collapsedSize'));
 
     transitionEnd(this.get('element'), this.get('transitionDuration')).then(() => {
       if (this.get('isDestroyed')) {
@@ -182,14 +175,14 @@ export default Component.extend({
       }
       this.set('transitioning', false);
       if (this.get('resetSizeWhenNotCollapsing')) {
-        this.set('collapseSize', null);
+        this.setCollapseSize(null);
       }
       this.get('onShown')();
     });
 
     next(this, function() {
       if (!this.get('isDestroyed')) {
-        this.set('collapseSize', this.getExpandedSize('show'));
+        this.setCollapseSize(this.getExpandedSize('show'));
       }
     });
   },
@@ -225,9 +218,9 @@ export default Component.extend({
 
     this.setProperties({
       transitioning: true,
-      collapseSize: this.getExpandedSize('hide'),
       active: false
     });
+    this.setCollapseSize(this.getExpandedSize('hide'));
 
     transitionEnd(this.get('element'), this.get('transitionDuration')).then(() => {
       if (this.get('isDestroyed')) {
@@ -235,14 +228,14 @@ export default Component.extend({
       }
       this.set('transitioning', false);
       if (this.get('resetSizeWhenNotCollapsing')) {
-        this.set('collapseSize', null);
+        this.setCollapseSize(null);
       }
       this.get('onHidden')();
     });
 
     next(this, function() {
       if (!this.get('isDestroyed')) {
-        this.set('collapseSize', this.get('collapsedSize'));
+        this.setCollapseSize(this.get('collapsedSize'));
       }
     });
   },
@@ -267,13 +260,13 @@ export default Component.extend({
 
   _updateCollapsedSize: observer('collapsedSize', function() {
     if (!this.get('resetSizeWhenNotCollapsing') && this.get('collapsed') && !this.get('collapsing')) {
-      this.set('collapseSize', this.get('collapsedSize'));
+      this.setCollapseSize(this.get('collapsedSize'));
     }
   }),
 
   _updateExpandedSize: observer('expandedSize', function() {
     if (!this.get('resetSizeWhenNotCollapsing') && !this.get('collapsed') && !this.get('collapsing')) {
-      this.set('collapseSize', this.get('expandedSize'));
+      this.setCollapseSize(this.get('expandedSize'));
     }
   })
 });

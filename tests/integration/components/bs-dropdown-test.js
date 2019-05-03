@@ -10,9 +10,11 @@ import {
   testBS4
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
 module('Integration | Component | bs-dropdown', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   hooks.beforeEach(function() {
     this.actions = {};
@@ -133,6 +135,58 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     await click('.dropdown-menu a');
     assert.dom('.dropdown-menu').exists();
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+  });
+
+  test('clicking dropdown menu when closeOnMenuClick is false will not close it, even after opening the menu again', async function (assert) {
+    await render(
+      hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+    );
+    await click('a.dropdown-toggle');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+
+    await click('.dropdown-menu a');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+
+    // close the menu to validate again
+    await click(document.body);
+    assert.dom('.dropdown-menu').doesNotExist();
+
+    // toggle the menu again
+    await click('a.dropdown-toggle');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+
+    await click('.dropdown-menu a');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+  });
+
+  test('clicking outside dropdown menu when closeOnMenuClick is false will close it', async function(assert) {
+    await render(
+      hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+    );
+    await click('a.dropdown-toggle');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+
+    await click(document.body);
+    assert.dom('.dropdown-menu').doesNotExist();
+  });
+
+  test('clicking outside dropdown menu when closeOnMenuClick is false and renderInPlace is false will close it', async function(assert) {
+    await render(
+      hbs`
+        <div id="ember-bootstrap-wormhole"></div> 
+        {{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu renderInPlace=false}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+    );
+    await click('a.dropdown-toggle');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+
+    await click(document.body);
+    assert.dom('.dropdown-menu').doesNotExist();
   });
 
   test('child components can access isOpen property', async function(assert) {

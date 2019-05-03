@@ -8,6 +8,7 @@ import {
   validationErrorClass
 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
+import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
 const validations = {
   success: {
@@ -26,6 +27,7 @@ const validations = {
 
 module('Integration | Component | bs-form/group', function(hooks) {
   setupRenderingTest(hooks);
+  setupNoDeprecations(hooks);
 
   test('component has form-group bootstrap class', async function(assert) {
     await render(hbs`{{bs-form/group}}`);
@@ -35,12 +37,6 @@ module('Integration | Component | bs-form/group', function(hooks) {
   testBS4('component has row class for horizontal layouts', async function(assert) {
     await render(hbs`{{bs-form/group formLayout="horizontal"}}`);
     assert.dom('.row').exists('component has row class');
-  });
-
-  testBS4('component has form-check class for group with checkbox control type', async function(assert) {
-    await render(hbs`{{bs-form/group controlType="checkbox"}}`);
-    assert.dom('.form-check').exists('component has form-check class');
-    assert.dom('.form-group').doesNotExist('component has no form-group class');
   });
 
   testBS3('support size classes', async function(assert) {

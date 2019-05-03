@@ -8,7 +8,7 @@
     popperContainer="#ember-bootstrap-wormhole"
     modifiers=popperModifiers
   }}
-    <ul class={{concat "dropdown-menu " alignClass (if isOpen " show") " " class}} role={{ariaRole}}>
+    <ul id={{concat dropdownElementId "__menu"}} class={{concat "dropdown-menu " alignClass (if isOpen " show") " " class}} role={{ariaRole}}>
       {{yield
         (hash
           item=(component itemComponent)

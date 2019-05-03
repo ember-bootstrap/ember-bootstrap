@@ -1,6 +1,5 @@
 import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
-import { copy } from '@ember/object/internals';
 import { isArray, A } from '@ember/array';
 import layout from 'ember-bootstrap/templates/components/bs-button-group';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
@@ -65,7 +64,7 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
 export default Component.extend(SizeClass, {
   layout,
   ariaRole: 'group',
-  classNameBindings: ['vertical:btn-group-vertical:btn-group', 'justified:btn-group-justified'],
+  classNameBindings: ['vertical:btn-group-vertical:btn-group'],
 
   /**
    * @property buttonComponent
@@ -91,26 +90,6 @@ export default Component.extend(SizeClass, {
    * @public
    */
   vertical: false,
-
-  /**
-   * Set to true for the buttons to stretch at equal sizes to span the entire width of its parent.
-   *
-   * *Important*: You have to wrap every button component in a `div class="btn-group">`:
-   *
-   * ```handlebars
-   * <div class="btn-group" role="group">
-   * {{#bs-button}}My Button{{/bs-button}}
-   * </div>
-   * ```
-   *
-   * See http://getbootstrap.com/components/#btn-groups-justified
-   *
-   * @property justified
-   * @type boolean
-   * @default false
-   * @public
-   */
-  justified: false,
 
   /**
    * The type of the button group specifies how child buttons behave and how the `value` property will be computed:
@@ -169,17 +148,15 @@ export default Component.extend(SizeClass, {
 
   actions: {
     buttonPressed(pressedValue) {
-      let newValue = copy(this.get('value'));
+      let newValue;
 
       if (this.get('isRadio')) {
-        if (newValue !== pressedValue) {
-          newValue = pressedValue;
-        }
+        newValue = pressedValue;
       } else {
-        if (!isArray(newValue)) {
+        if (!isArray(this.get('value'))) {
           newValue = A([pressedValue]);
         } else {
-          newValue = A(newValue);
+          newValue = A(this.get('value').slice());
           if (newValue.includes(pressedValue)) {
             newValue.removeObject(pressedValue);
           } else {

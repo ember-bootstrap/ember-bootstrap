@@ -2,7 +2,7 @@
   (hash
     button=(component buttonComponent dropdown=this onClick=(action "toggleDropdown"))
     toggle=(component toggleComponent dropdown=this inNav=inNav onClick=(action "toggleDropdown"))
-    menu=(component menuComponent isOpen=isOpen direction=direction inNav=inNav toggleElement=toggleElement)
+    menu=(component menuComponent isOpen=isOpen direction=direction inNav=inNav toggleElement=toggleElement dropdownElementId=elementId)
     toggleDropdown=(action "toggleDropdown")
     openDropdown=(action "openDropdown")
     closeDropdown=(action "closeDropdown")
