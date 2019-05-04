@@ -53,5 +53,4 @@ export default Component.extend({
    * @public
    */
   onClose() {}
-
 });
