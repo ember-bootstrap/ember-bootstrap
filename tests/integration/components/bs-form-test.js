@@ -1,4 +1,5 @@
 import EmberObject from '@ember/object';
+import Component from '@ember/component';
 import { A } from '@ember/array';
 import { resolve, reject } from 'rsvp';
 import { module } from 'qunit';
@@ -100,6 +101,26 @@ module('Integration | Component | bs-form', function(hooks) {
 
     await click('button');
     assert.ok(submit.called, 'onSubmit action has been called');
+  });
+
+  test('Submit event bubbles', async function(assert) {
+    let TestComponent = Component.extend({
+      submit() {
+        assert.step('bubbles');
+      }
+    });
+    this.owner.register('component:test-component', TestComponent);
+
+    await render(hbs`
+      {{#test-component}}
+        {{#bs-form}}
+          <button type="submit">submit</button>
+        {{/bs-form}}
+      {{/test-component}}
+    `);
+    await click('button');
+
+    assert.verifySteps(['bubbles']);
   });
 
   test('Submitting the form with valid validation calls onBeforeSubmit and onSubmit action', async function(assert) {
