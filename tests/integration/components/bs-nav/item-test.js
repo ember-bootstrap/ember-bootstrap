@@ -28,6 +28,14 @@ module('Integration | Component | bs-nav/item', function(hooks) {
 
   });
 
+  test('it does not have aria role="presentation"', async function(assert) {
+    // Should not have role="presentation" even so Bootstrap 3 docs have it.
+    // This was discussed at https://github.com/kaliber5/ember-bootstrap/pull/782.
+    await render(hbs`{{bs-nav/item disabled=true}}`);
+
+    assert.dom('li').doesNotHaveAttribute('role');
+  });
+
   test('can be disabled', async function(assert) {
     await render(hbs`{{bs-nav/item disabled=true}}`);
 

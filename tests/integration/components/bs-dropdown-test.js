@@ -137,6 +137,32 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
   });
 
+  test('clicking dropdown menu when closeOnMenuClick is false will not close it, even after opening the menu again', async function (assert) {
+    await render(
+      hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+    );
+    await click('a.dropdown-toggle');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+
+    await click('.dropdown-menu a');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+
+    // close the menu to validate again
+    await click(document.body);
+    assert.dom('.dropdown-menu').doesNotExist();
+
+    // toggle the menu again
+    await click('a.dropdown-toggle');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+
+    await click('.dropdown-menu a');
+    assert.dom('.dropdown-menu').exists();
+    assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+  });
+
   test('clicking outside dropdown menu when closeOnMenuClick is false will close it', async function(assert) {
     await render(
       hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`

@@ -1,4 +1,5 @@
 import EmberObject from '@ember/object';
+import Component from '@ember/component';
 import { A } from '@ember/array';
 import { resolve, reject } from 'rsvp';
 import { module } from 'qunit';
@@ -102,6 +103,26 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.ok(submit.called, 'onSubmit action has been called');
   });
 
+  test('Submit event bubbles', async function(assert) {
+    let TestComponent = Component.extend({
+      submit() {
+        assert.step('bubbles');
+      }
+    });
+    this.owner.register('component:test-component', TestComponent);
+
+    await render(hbs`
+      {{#test-component}}
+        {{#bs-form}}
+          <button type="submit">submit</button>
+        {{/bs-form}}
+      {{/test-component}}
+    `);
+    await click('button');
+
+    assert.verifySteps(['bubbles']);
+  });
+
   test('Submitting the form with valid validation calls onBeforeSubmit and onSubmit action', async function(assert) {
     let submit = this.spy();
     let before = this.spy();
@@ -169,6 +190,26 @@ module('Integration | Component | bs-form', function(hooks) {
       'validation errors are shown after form submission'
     );
     assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
+  });
+
+  test('form with validation has novalidate attribute', async function(assert) {
+    let model = {};
+    this.set('model', model);
+    await render(
+      hbs`{{#bs-form model=model hasValidator=true as |form|}}Test{{/bs-form}}`
+    );
+
+    assert.dom('form').hasAttribute('novalidate');
+  });
+
+  test('form with validation allows overriding novalidate attribute', async function(assert) {
+    let model = {};
+    this.set('model', model);
+    await render(
+      hbs`{{#bs-form model=model hasValidator=true novalidate=false as |form|}}Test{{/bs-form}}`
+    );
+
+    assert.dom('form').doesNotHaveAttribute('novalidate');
   });
 
   testRequiringFocus('Submitting a form continues to show validations', async function(assert) {
@@ -629,16 +670,9 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('supports novalidate attribute', async function(assert) {
-    assert.expect(2);
     await render(hbs`{{bs-form}}`);
-    assert.equal(
-      this.element.querySelector('form').getAttribute('novalidate'),
-      null,
-      'defaults to false'
-    );
+    assert.dom('form').doesNotHaveAttribute('novalidate');
     await render(hbs`{{bs-form novalidate=true}}`);
-    assert.ok(
-      this.element.querySelector('form').getAttribute('novalidate') === ''
-    );
+    assert.dom('form').hasAttribute('novalidate');
   });
 });
