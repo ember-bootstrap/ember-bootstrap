@@ -1,8 +1,17 @@
-{{#if closeButton}}
-  {{component closeComponent onClick=(action onClose)}}
-{{/if}}
-{{#if hasBlock}}
-  {{yield}}
+{{#if hasBlockParams}}
+  {{yield
+    (hash
+      title=(component titleComponent)
+      close=(component closeComponent onClick=(action onClose))
+    )
+  }}
 {{else}}
-  {{#component titleComponent}}{{title}}{{/component}}
+  {{#if closeButton}}
+    {{component closeComponent onClick=(action onClose)}}
+  {{/if}}
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    {{#component titleComponent}}{{title}}{{/component}}
+  {{/if}}
 {{/if}}

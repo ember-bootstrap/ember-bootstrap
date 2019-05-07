@@ -96,12 +96,7 @@ module.exports = function() {
         },
         {
           name: 'node-tests',
-          command: 'yarn run nodetest',
-          npm: {
-            devDependencies: {
-              'ember-cli': 'ember-cli/ember-cli#master' // we need canary for MU tests
-            }
-          }
+          command: 'yarn run nodetest'
         }
       ]
     };

@@ -15,7 +15,7 @@ module('Integration | Component | bs-tab/pane', function(hooks) {
 
   test('it has correct markup', async function(assert) {
     await render(hbs`
-      {{#bs-tab/pane fade=true activeId="pane1" elementId="pane1"}}
+      {{#bs-tab/pane fade=true activeId="pane1" id="pane1"}}
         template block text
       {{/bs-tab/pane}}
     `);
@@ -29,7 +29,7 @@ module('Integration | Component | bs-tab/pane', function(hooks) {
   test('it has correct markup when switching active pane and fade=false', async function(assert) {
     this.set('activeId', null);
     await render(hbs`
-      {{#bs-tab/pane fade=false activeId=activeId elementId="pane1"}}
+      {{#bs-tab/pane fade=false activeId=activeId id="pane1"}}
         template block text
       {{/bs-tab/pane}}
     `);
@@ -51,7 +51,7 @@ module('Integration | Component | bs-tab/pane', function(hooks) {
   testRequiringTransitions('it has correct markup when switching active pane and fade=true', async function(assert) {
     this.set('activeId', null);
     await render(hbs`
-      {{#bs-tab/pane fade=true activeId=activeId elementId="pane1"}}
+      {{#bs-tab/pane fade=true activeId=activeId id="pane1"}}
         template block text
       {{/bs-tab/pane}}
     `);
