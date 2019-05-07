@@ -6,14 +6,14 @@
       <span class="caret"></span>
     </dd.toggle>
     <dd.menu as |menu|>
-      {{#menu.item}}
+      <menu.item>
         {{#menu.link-to "index"}}Home{{/menu.link-to}}
-      {{/menu.item}}
-      {{menu.divider}}
+      </menu.item>
+      <menu.divider/>
       <menu.item>
         {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
       </menu.item>
-      {{menu.divider}}
+      <menu.divider/>
       <menu.item>
         <a href="https://example.com" class="dropdown-item">External</a>
       </menu.item>
@@ -28,7 +28,7 @@
       <menu.item>
         {{#menu.link-to "index"}}Home{{/menu.link-to}}
       </menu.item>
-      {{menu.divider}}
+      <menu.divider/>
       <menu.item>
         {{#menu.link-to "demo.dropdown"}}Dropdowns{{/menu.link-to}}
       </menu.item>
