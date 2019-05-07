@@ -24,10 +24,10 @@ module('Integration | Component | bs-tab', function(hooks) {
   test('it yields expected values', async function(assert) {
     await render(hbs`
       {{#bs-tab fade=false as |tab|}}
-        {{#tab.pane elementId="pane1" title="Tab 1"}}
+        {{#tab.pane id="pane1" title="Tab 1"}}
           tabcontent 1
         {{/tab.pane}}
-        {{#tab.pane elementId="pane2" title="Tab 2"}}
+        {{#tab.pane id="pane2" title="Tab 2"}}
           tabcontent 2
         {{/tab.pane}}
         <div id="activeId">{{tab.activeId}}</div>
@@ -48,10 +48,10 @@ module('Integration | Component | bs-tab', function(hooks) {
     await render(hbs`
       {{#bs-tab fade=false customTabs=true as |tab|}}
         <div class="tab-content">
-        {{#tab.pane elementId="pane1" title="Tab 1"}}
+        {{#tab.pane id="pane1" title="Tab 1"}}
           tabcontent 1
         {{/tab.pane}}
-        {{#tab.pane elementId="pane2" title="Tab 2"}}
+        {{#tab.pane id="pane2" title="Tab 2"}}
           tabcontent 2
         {{/tab.pane}}
         <div id="activeId">{{tab.activeId}}</div>
@@ -121,10 +121,10 @@ module('Integration | Component | bs-tab', function(hooks) {
     this.set('paneId', 'pane1');
     await render(hbs`
       {{#bs-tab fade=false activeId=paneId as |tab|}}
-        {{#tab.pane elementId="pane1" title="Tab 1"}}
+        {{#tab.pane id="pane1" title="Tab 1"}}
           tabcontent 1
         {{/tab.pane}}
-        {{#tab.pane elementId="pane2" title="Tab 2"}}
+        {{#tab.pane id="pane2" title="Tab 2"}}
           tabcontent 2
         {{/tab.pane}}
       {{/bs-tab}}
@@ -207,10 +207,10 @@ module('Integration | Component | bs-tab', function(hooks) {
 
     await render(hbs`
       {{#bs-tab fade=false onChange=(action "change") as |tab|}}
-        {{#tab.pane elementId="pane1" title="Tab 1"}}
+        {{#tab.pane id="pane1" title="Tab 1"}}
           tabcontent 1
         {{/tab.pane}}
-        {{#tab.pane elementId="pane2" title="Tab 2"}}
+        {{#tab.pane id="pane2" title="Tab 2"}}
           tabcontent 2
         {{/tab.pane}}
       {{/bs-tab}}
@@ -230,10 +230,10 @@ module('Integration | Component | bs-tab', function(hooks) {
 
     await render(hbs`
       {{#bs-tab fade=false onChange=(action "change") as |tab|}}
-        {{#tab.pane elementId="pane1" title="Tab 1"}}
+        {{#tab.pane id="pane1" title="Tab 1"}}
           tabcontent 1
         {{/tab.pane}}
-        {{#tab.pane elementId="pane2" title="Tab 2"}}
+        {{#tab.pane id="pane2" title="Tab 2"}}
           tabcontent 2
         {{/tab.pane}}
       {{/bs-tab}}
@@ -250,10 +250,10 @@ module('Integration | Component | bs-tab', function(hooks) {
     this.set('paneId', 'pane1');
     await render(hbs`
       {{#bs-tab fade=false activeId=paneId as |tab|}}
-        {{#tab.pane elementId="pane1" title="Tab 1"}}
+        {{#tab.pane id="pane1" title="Tab 1"}}
           tabcontent 1
         {{/tab.pane}}
-        {{#tab.pane elementId="pane2" title="Tab 2"}}
+        {{#tab.pane id="pane2" title="Tab 2"}}
           tabcontent 2
         {{/tab.pane}}
       {{/bs-tab}}

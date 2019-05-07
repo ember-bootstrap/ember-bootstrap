@@ -19,7 +19,6 @@ const expect = chai.expect;
 const Promise = require('rsvp');
 
 const scenarios = require('./dependencyScenarios');
-const isCanary = require(path.join(__dirname, '../../package.json')).devDependencies['ember-cli'] === 'ember-cli/ember-cli#master';
 
 chai.use(chaiThings);
 
@@ -100,10 +99,6 @@ describe('Acceptance: ember generate ember-bootstrap', function() {
       describe('module unification app', function() {
 
         beforeEach(function() {
-          if (!isCanary) {
-            this.skip();
-            return;
-          }
           return emberNew({ isModuleUnification: true });
         });
 

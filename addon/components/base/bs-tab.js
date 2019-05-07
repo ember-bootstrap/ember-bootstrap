@@ -70,10 +70,10 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
     {{/bs-nav}}
 
     <div class="tab-content">
-    {{#tab.pane elementId="pane1" title="Tab 1"}}
+    {{#tab.pane id="pane1" title="Tab 1"}}
         <p>...</p>
     {{/tab.pane}}
-    {{#tab.pane elementId="pane2" title="Tab 2"}}
+    {{#tab.pane id="pane2" title="Tab 2"}}
         <p>...</p>
     {{/tab.pane}}
     </div>
