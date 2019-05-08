@@ -2,7 +2,7 @@
   {{yield
     (hash
       title=(component this.titleComponent)
-      close=(component this.closeComponent onClick=(action @onClose))
+      close=(component this.closeComponent onClick=@onClose)
     )
   }}
 {{else}}
@@ -11,8 +11,7 @@
   {{else}}
     {{#component this.titleComponent}}{{@title}}{{/component}}
   {{/if}}
-
   {{#if this.closeButton}}
-    {{component this.closeComponent onClick=(action @onClose)}}
+    {{component this.closeComponent onClick=@onClose}}
   {{/if}}
 {{/if}}
