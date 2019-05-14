@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v2.6.2"
+        "version": "v2.7.0"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -1783,7 +1783,7 @@
             "namespace": "Components",
             "file": "addon/components/base/bs-tab.js",
             "line": 11,
-            "description": "Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,\nsee http://getbootstrap.com/javascript/#tabs\n\n### Usage\n\nJust nest any number of yielded [Components.TabPane](Components.TabPane.html) components that hold the tab content.\nThe tab navigation is automatically generated from the tab panes' `title` property:\n\n```hbs\n{{#bs-tab as |tab|}}\n  {{#tab.pane title=\"Tab 1\"}}\n    <p>...</p>\n  {{/tab.pane}}\n  {{#tab.pane title=\"Tab 2\"}}\n    <p>...</p>\n  {{/tab.pane}}\n{{/bs-tab}}\n```\n\n### Groupable (dropdown) tabs\n\nBootstrap's support for dropdown menus as tab navigation is mimiced by the use of the `groupTitle` property.\nAll panes with the same `groupTitle` will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)\ncomponent with `groupTitle` being the dropdown's title:\n\n```hbs\n{{#bs-tab as |tab|}}\n   {{#tab.pane title=\"Tab 1\"}}\n     <p>...</p>\n   {{/tab.pane}}\n   {{#tab.pane title=\"Tab 2\"}}\n     <p>...</p>\n   {{/tab.pane}}\n   {{#tab.pane title=\"Tab 3\" groupTitle=\"Dropdown\"}}\n     <p>...</p>\n   {{/tab.pane}}\n   {{#tab.pane title=\"Tab 4\" groupTitle=\"Dropdown\"}}\n     <p>...</p>\n   {{/tab.pane}}\n{{/bs-tab}}\n```\n\n### Custom tabs\n\nWhen having the tab pane's `title` as the tab navigation title is not sufficient, for example because you want to\nintegrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup\nyour navigation by yourself.\n\nSet `customTabs` to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably\nusing a [Components.Nav](Components.Nav.html) component. The tab component yields the `activeId` property as well as\nits `select` action, which you would have to use to manually set the `active` state of the navigation items and to\ntrigger the selection of the different tab panes, using their ids:\n\n```hbs\n{{#bs-tab customTabs=true as |tab|}}\n   {{#bs-nav type=\"tabs\" as |nav|}}\n       {{#nav.item active=(bs-eq tab.activeId \"pane1\")}}<a href=\"#pane1\" role=\"tab\" {{action tab.select \"pane1\"}}>Tab 1</a>{{/nav.item}}\n       {{#nav.item active=(bs-eq tab.activeId \"pane2\")}}<a href=\"#pane1\" role=\"tab\" {{action tab.select \"pane2\"}}>Tab 2 <span class=\"badge\">{{badge}}</span></a>{{/nav.item}}\n   {{/bs-nav}}\n\n   <div class=\"tab-content\">\n   {{#tab.pane elementId=\"pane1\" title=\"Tab 1\"}}\n       <p>...</p>\n   {{/tab.pane}}\n   {{#tab.pane elementId=\"pane2\" title=\"Tab 2\"}}\n       <p>...</p>\n   {{/tab.pane}}\n   </div>\n{{/bs-tab}}\n```\n\nNote that the `bs-eq` helper used in the example above is a private helper, which is not guaranteed to be available for\nthe future. Better use the corresponding `eq` helper of the\n[ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!\n\n### Routable tabs\n\nThe tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and\ndeactivated dynamically, just as the  original Bootstrap implementation.\n\nIf you want to have the content delivered through individual sub routes, just use\nthe [Components.Nav](Components.Nav.html) component and an `{{outlet}}` that show the nested routes' content:\n\n```hbs\n<div>\n  {{#bs-nav type=\"tabs\" as |nav|}}\n    {{#nav.item}}{{#nav.link-to \"tabs.index\"}}Tab 1{{/nav.link-to}}{{/nav.item}}\n    {{#nav.item}}{{#nav.link-to \"tabs.other\"}}Tab 2{{/nav.link-to}}{{/nav.item}}\n  {{/bs-nav}}\n  {{outlet}}\n</div>\n```",
+            "description": "Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,\nsee http://getbootstrap.com/javascript/#tabs\n\n### Usage\n\nJust nest any number of yielded [Components.TabPane](Components.TabPane.html) components that hold the tab content.\nThe tab navigation is automatically generated from the tab panes' `title` property:\n\n```hbs\n{{#bs-tab as |tab|}}\n  {{#tab.pane title=\"Tab 1\"}}\n    <p>...</p>\n  {{/tab.pane}}\n  {{#tab.pane title=\"Tab 2\"}}\n    <p>...</p>\n  {{/tab.pane}}\n{{/bs-tab}}\n```\n\n### Groupable (dropdown) tabs\n\nBootstrap's support for dropdown menus as tab navigation is mimiced by the use of the `groupTitle` property.\nAll panes with the same `groupTitle` will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)\ncomponent with `groupTitle` being the dropdown's title:\n\n```hbs\n{{#bs-tab as |tab|}}\n   {{#tab.pane title=\"Tab 1\"}}\n     <p>...</p>\n   {{/tab.pane}}\n   {{#tab.pane title=\"Tab 2\"}}\n     <p>...</p>\n   {{/tab.pane}}\n   {{#tab.pane title=\"Tab 3\" groupTitle=\"Dropdown\"}}\n     <p>...</p>\n   {{/tab.pane}}\n   {{#tab.pane title=\"Tab 4\" groupTitle=\"Dropdown\"}}\n     <p>...</p>\n   {{/tab.pane}}\n{{/bs-tab}}\n```\n\n### Custom tabs\n\nWhen having the tab pane's `title` as the tab navigation title is not sufficient, for example because you want to\nintegrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup\nyour navigation by yourself.\n\nSet `customTabs` to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably\nusing a [Components.Nav](Components.Nav.html) component. The tab component yields the `activeId` property as well as\nits `select` action, which you would have to use to manually set the `active` state of the navigation items and to\ntrigger the selection of the different tab panes, using their ids:\n\n```hbs\n{{#bs-tab customTabs=true as |tab|}}\n   {{#bs-nav type=\"tabs\" as |nav|}}\n       {{#nav.item active=(bs-eq tab.activeId \"pane1\")}}<a href=\"#pane1\" role=\"tab\" {{action tab.select \"pane1\"}}>Tab 1</a>{{/nav.item}}\n       {{#nav.item active=(bs-eq tab.activeId \"pane2\")}}<a href=\"#pane1\" role=\"tab\" {{action tab.select \"pane2\"}}>Tab 2 <span class=\"badge\">{{badge}}</span></a>{{/nav.item}}\n   {{/bs-nav}}\n\n   <div class=\"tab-content\">\n   {{#tab.pane id=\"pane1\" title=\"Tab 1\"}}\n       <p>...</p>\n   {{/tab.pane}}\n   {{#tab.pane id=\"pane2\" title=\"Tab 2\"}}\n       <p>...</p>\n   {{/tab.pane}}\n   </div>\n{{/bs-tab}}\n```\n\nNote that the `bs-eq` helper used in the example above is a private helper, which is not guaranteed to be available for\nthe future. Better use the corresponding `eq` helper of the\n[ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!\n\n### Routable tabs\n\nThe tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and\ndeactivated dynamically, just as the  original Bootstrap implementation.\n\nIf you want to have the content delivered through individual sub routes, just use\nthe [Components.Nav](Components.Nav.html) component and an `{{outlet}}` that show the nested routes' content:\n\n```hbs\n<div>\n  {{#bs-nav type=\"tabs\" as |nav|}}\n    {{#nav.item}}{{#nav.link-to \"tabs.index\"}}Tab 1{{/nav.link-to}}{{/nav.item}}\n    {{#nav.item}}{{#nav.link-to \"tabs.other\"}}Tab 2{{/nav.link-to}}{{/nav.item}}\n  {{/bs-nav}}\n  {{outlet}}\n</div>\n```",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.ComponentParent"
@@ -6497,6 +6497,32 @@
         {
             "file": "addon/components/base/bs-form.js",
             "line": 278,
+            "description": "If set to true the `readonly` property of all yielded form elements will be set, making their form controls read-only.",
+            "itemtype": "property",
+            "name": "readonly",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Form",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-form.js",
+            "line": 288,
+            "description": "If set to true the `disabled` property of all yielded form elements will be set, making their form controls disabled.",
+            "itemtype": "property",
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Form",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-form.js",
+            "line": 298,
             "description": "Validate hook which will return a promise that will either resolve if the model is valid\nor reject if it's not. This should be overridden to add validation support.",
             "itemtype": "method",
             "name": "validate",
@@ -6518,7 +6544,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 289,
+            "line": 309,
             "itemtype": "property",
             "name": "showAllValidations",
             "type": "boolean",
@@ -6530,7 +6556,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 297,
+            "line": 317,
             "description": "Action is called before the form is validated (if possible) and submitted.",
             "itemtype": "event",
             "name": "onBefore",
@@ -6548,7 +6574,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 306,
+            "line": 326,
             "description": "Action is called when submit has been triggered and the model has passed all validations (if present).",
             "itemtype": "event",
             "name": "onSubmit",
@@ -6571,7 +6597,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 316,
+            "line": 336,
             "description": "Action is called when validation of the model has failed.",
             "itemtype": "event",
             "name": "onInvalid",
@@ -6594,7 +6620,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 326,
+            "line": 346,
             "description": "Submit handler that will send the default action (\"action\") to the controller when submitting the form.\n\nIf there is a supplied `model` that supports validation (`hasValidator`) the model will be validated before, and\nonly if validation is successful the default action will be sent. Otherwise an \"invalid\" action will be sent, and\nall the `showValidation` property of all child `Components.FormElement`s will be set to true, so error state and\nmessages will be shown automatically.",
             "itemtype": "method",
             "name": "submit",
