@@ -662,4 +662,26 @@ module('Integration | Component | bs-form', function(hooks) {
       this.element.querySelector('form').getAttribute('novalidate') === ''
     );
   });
+
+  test('disabled property propagates to all its elements', async function(assert) {
+    await render(
+      hbs`
+        {{#bs-form model=this disabled=true as |form|}}
+          {{form.element property="dummy"}}
+        {{/bs-form}}`
+    );
+
+    assert.dom('.form-group input').hasAttribute('disabled');
+  });
+
+  test('readOnly property propagates to all its elements', async function(assert) {
+    await render(
+      hbs`
+        {{#bs-form model=this readonly=true as |form|}}
+          {{form.element property="dummy"}}
+        {{/bs-form}}`
+    );
+
+    assert.dom('.form-group input').hasAttribute('readonly');
+  });
 });
