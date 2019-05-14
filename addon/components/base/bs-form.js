@@ -276,6 +276,26 @@ export default Component.extend({
   }),
 
   /**
+   * If set to true the `readonly` property of all yielded form elements will be set, making their form controls read-only.
+   *
+   * @property readonly
+   * @type boolean
+   * @default false
+   * @public
+   */
+  readonly: false,
+
+  /**
+   * If set to true the `disabled` property of all yielded form elements will be set, making their form controls disabled.
+   *
+   * @property disabled
+   * @type boolean
+   * @default false
+   * @public
+   */
+  disabled: false,
+
+  /**
    * Validate hook which will return a promise that will either resolve if the model is valid
    * or reject if it's not. This should be overridden to add validation support.
    *
