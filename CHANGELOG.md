@@ -1,4 +1,13 @@
 
+## v2.7.0 (2019-05-14)
+
+#### Features
+* [#809](https://github.com/kaliber5/ember-bootstrap/pull/809) Propagate `disabled` and `readonly` property to all yielded form elements ([@simonihmig](https://github.com/simonihmig))
+* [#701](https://github.com/kaliber5/ember-bootstrap/pull/701) Modal header component yields title and close components ([@lougreenwood](https://github.com/lougreenwood))
+
+#### Committers: 2
+- Lou Greenwood ([@lougreenwood](https://github.com/lougreenwood))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
 ## v2.6.2 (2019-04-24)
 
 #### Features
