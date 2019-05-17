@@ -4,100 +4,100 @@ import { bind } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown';
 
 /**
- Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
- of a toggle element, and the dropdown menu itself.
+  Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
+  of a toggle element, and the dropdown menu itself.
 
- ### Usage
+  ### Usage
 
- Use this component together with the yielded contextual components:
- * [Components.DropdownToggle](Components.DropdownToggle.html)
- * [Components.DropdownButton](Components.DropdownButton.html)
- * [Components.DropdownMenu](Components.DropdownMenu.html)
-   * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)
-   * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)
-   * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)
+  Use this component together with the yielded contextual components:
+  * [Components.DropdownToggle](Components.DropdownToggle.html)
+  * [Components.DropdownButton](Components.DropdownButton.html)
+  * [Components.DropdownMenu](Components.DropdownMenu.html)
+    * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)
+    * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)
+    * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)
 
- Furthermore references to the following actions are yielded:
+  Furthermore references to the following actions are yielded:
 
- * `toggleDropdown`
- * `openDropdown`
- * `closeDropdown`
+  * `toggleDropdown`
+  * `openDropdown`
+  * `closeDropdown`
 
- ```hbs
+  ```hbs
   <BsDropdown as |dd|>
     <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
     <dd.menu as |ddm|>
       <ddm.item>
-        <ddm.link-to "index">Something</ddm.link-to>
+        {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
       </ddm.item>
       <ddm.item>
-        <ddm.link-to "index">Something different</ddm.link-to>
+        {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
       </ddm.item>
     </dd.menu>
   </BsDropdown>
- ```
+  ```
 
- If you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`
- contextual component rather than a standalone dropdown to ensure the correct styling
- regardless of your Bootstrap version.
+  If you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`
+  contextual component rather than a standalone dropdown to ensure the correct styling
+  regardless of your Bootstrap version.
 
- ### Button dropdowns
+  ### Button dropdowns
 
- To use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the
- `Components.DropdownButton` component as the toggle:
+  To use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the
+  `Components.DropdownButton` component as the toggle:
 
- ```hbs
+  ```hbs
   <BsDropdown as |dd|>
     <dd.button>Dropdown <span class="caret"></span></dd.button>
     <dd.menu as |ddm|>
       <ddm.item>
-        <ddm.link-to "index">Something</ddm.link-to>
+        {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
       </ddm.item>
       <ddm.item>
-        <ddm.link-to "index">Something different</ddm.link-to>
+        {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
       </ddm.item>
     </dd.menu>
   </BsDropdown>
- ```
+  ```
 
- It has all the functionality of a `Components.Button` with additional dropdown support.
+  It has all the functionality of a `Components.Button` with additional dropdown support.
 
- ### Split button dropdowns
+  ### Split button dropdowns
 
- To have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a
- `Components.Button` component and a `Components.DropdownButton`:
+  To have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a
+  `Components.Button` component and a `Components.DropdownButton`:
 
- ```hbs
+  ```hbs
   <BsDropdown as |dd|>
     <BsButton>Dropdown</BsButton>
     <dd.button>Dropdown <span class="caret"></span></dd.button>
     <dd.menu as |ddm|>
       <ddm.item>
-        <ddm.link-to "index">Something</ddm.link-to>
+        {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
       </ddm.item>
       <ddm.item>
-        <ddm.link-to "index">Something different</ddm.link-to>
+        {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
       </ddm.item>
     </dd.menu>
   </BsDropdown>
- ```
+  ```
 
- ### Dropup style
+  ### Dropup style
 
- Set the `direction` property to "up" to switch to a "dropup" style:
+  Set the `direction` property to "up" to switch to a "dropup" style:
 
- ```hbs
+  ```hbs
   <BsDropdown @direction="up" as |dd|>
     ...
   </BsDropdown>
- ```
+  ```
 
- ### Open, close or toggle the dropdown programmatically
+  ### Open, close or toggle the dropdown programmatically
 
- If you wanted to control when the dropdown opens and closes programmatically, the `bs-dropdown` component yields the
- `openDropdown`, `closeDropdown` and `toggleDropdown` actions which you can then pass to your own handlers. For example:
+  If you wanted to control when the dropdown opens and closes programmatically, the `bs-dropdown` component yields the
+  `openDropdown`, `closeDropdown` and `toggleDropdown` actions which you can then pass to your own handlers. For example:
 
- ```hbs
+  ```hbs
   <BsDropdown @closeOnMenuClick={{false}} as |dd|>
     <BsButton>Dropdown</BsButton>
     <dd.button>Dropdown <span class="caret"></span></dd.button>
@@ -111,11 +111,11 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
       {{/each}}
     </dd.menu>
   </BsDropdown>
- ```
+  ```
 
- Then in your controller or component, optionally close the dropdown:
+  Then in your controller or component, optionally close the dropdown:
 
- ```js
+  ```js
   ...
   actions: {
     handleDropdownClicked(item, closeDropdown) {
@@ -127,33 +127,33 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
       }
     },
   }
- ```
+  ```
 
 
- ### Bootstrap 3/4 Notes
+  ### Bootstrap 3/4 Notes
 
- If you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`
- contextual component rather than a standalone dropdown to ensure the correct styling
- regardless of your Bootstrap version.
+  If you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`
+  contextual component rather than a standalone dropdown to ensure the correct styling
+  regardless of your Bootstrap version.
 
- If you use the [dropdown divider](Components.DropdownMenuDivider), you don't have to worry
- about differences in the markup between versions.
+  If you use the [dropdown divider](Components.DropdownMenuDivider), you don't have to worry
+  about differences in the markup between versions.
 
- Be sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application
- links as dropdown menu items. This is essential for proper styling regardless of Bootstrap
- version and will also provide automatic `active` highlighting on dropdown menu items. If you
- wish to have a dropdown menu item refer to an external link, be sure to apply the `dropdown-item`
- class to the `<a>` tag for Bootstrap 4 compatibility.
+  Be sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application
+  links as dropdown menu items. This is essential for proper styling regardless of Bootstrap
+  version and will also provide automatic `active` highlighting on dropdown menu items. If you
+  wish to have a dropdown menu item refer to an external link, be sure to apply the `dropdown-item`
+  class to the `<a>` tag for Bootstrap 4 compatibility.
 
- The dropdown menu will be positioned using the `popper.js` library, just as the original Bootstrap
- version does. This also allows you to set `renderInPlace=false` on the menu component to render it in a wormhole,
- which you might want to do if you experience clipping issues by an outer `overflow: hidden` element.
+  The dropdown menu will be positioned using the `popper.js` library, just as the original Bootstrap
+  version does. This also allows you to set `renderInPlace=false` on the menu component to render it in a wormhole,
+  which you might want to do if you experience clipping issues by an outer `overflow: hidden` element.
 
- @class Dropdown
- @namespace Components
- @extends Ember.Component
- @public
- */
+  @class Dropdown
+  @namespace Components
+  @extends Ember.Component
+  @public
+s*/
 let component = Component.extend({
   layout,
   classNameBindings: ['containerClass'],

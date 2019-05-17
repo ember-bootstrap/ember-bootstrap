@@ -3,27 +3,27 @@ import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/group';
 
 /**
- This component renders a `<div class="form-group">` element, with support for validation states and feedback icons (only for BS3).
- You can use it as a block level component. The following shows Bootstrap 3 usage for the internal markup.
+  This component renders a `<div class="form-group">` element, with support for validation states and feedback icons (only for BS3).
+  You can use it as a block level component. The following shows Bootstrap 3 usage for the internal markup.
 
- ```hbs
- {{#bs-form as |form|}}
-   {{#form.group validation=firstNameValidation}}
-     <label class="control-label">First name</label>
-     <input value={{firstname}} class="form-control" oninput={{action (mut firstname) value="target.value"}} type="text">
-   {{/form.group}}
- {{/bs-form}}
- ```
+  ```hbs
+  <BsForm as |form|>
+    <form.group @validation={{this.firstNameValidation}}>
+      <label class="control-label">First name</label>
+      <input value={{this.firstname}} class="form-control" oninput={{action (mut this.firstname) value="target.value"}} type="text">
+    </form.group>
+  </bs-form>
+  ```
 
- If the `validation` property is set to some state (usually Bootstrap's predefined states "success",
- "warning" or "error"), the appropriate styles will be added, together with a feedback icon.
- See http://getbootstrap.com/css/#forms-control-validation
+  If the `validation` property is set to some state (usually Bootstrap's predefined states "success",
+  "warning" or "error"), the appropriate styles will be added, together with a feedback icon.
+  See http://getbootstrap.com/css/#forms-control-validation
 
- @class FormGroup
- @namespace Components
- @extends Ember.Component
- @public
- */
+  @class FormGroup
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
 export default Component.extend({
   layout,
 

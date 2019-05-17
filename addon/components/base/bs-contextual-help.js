@@ -17,13 +17,12 @@ const InState = EmberObject.extend({
 function noop() {}
 
 /**
-
- @class Components.ContextualHelp
- @namespace Components
- @extends Ember.Component
- @uses Mixins.TransitionSupport
- @private
- */
+  @class Components.ContextualHelp
+  @namespace Components
+  @extends Ember.Component
+  @uses Mixins.TransitionSupport
+  @private
+*/
 let component = Component.extend(TransitionSupport, {
   tagName: '',
 

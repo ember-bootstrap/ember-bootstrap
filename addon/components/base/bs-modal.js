@@ -11,12 +11,11 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { findElementById, getDOM } from '../../utils/dom';
 
 /**
+  Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
 
- Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
+  ### Usage
 
- ### Usage
-
- ```hbs
+  ```hbs
   <BsModal @onSubmit={{action "submit"}} as |Modal|>
     <Modal.header>
       <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i> Alert</h4>
@@ -29,29 +28,29 @@ import { findElementById, getDOM } from '../../utils/dom';
       <BsButton @onClick={{action Modal.submit}} @type="success">Yeah!</BsButton>
     </Modal.footer>
   </BsModal>
- ```
+  ```
 
- The component yields references to the following contextual components, that you can use to further customize the output:
+  The component yields references to the following contextual components, that you can use to further customize the output:
 
- * [modal.body](Components.ModalBody.html)
- * [modal.header](Components.ModalHeader.html)
- * [modal.footer](Components.ModalFooter.html)
+  * [modal.body](Components.ModalBody.html)
+  * [modal.header](Components.ModalHeader.html)
+  * [modal.footer](Components.ModalFooter.html)
 
- Furthermore references to the following actions are yielded:
+  Furthermore references to the following actions are yielded:
 
- * `close`: triggers the `onHide` action and closes the modal
- * `submit`: triggers the `onSubmit` action (or the submit event on a form if present in the body element)
+  * `close`: triggers the `onHide` action and closes the modal
+  * `submit`: triggers the `onSubmit` action (or the submit event on a form if present in the body element)
 
- ### Further reading
+  ### Further reading
 
- See the documentation of the [bs-modal-simple](Components.ModalSimple.html) component for further examples.
+  See the documentation of the [bs-modal-simple](Components.ModalSimple.html) component for further examples.
 
- @class Modal
- @namespace Components
- @extends Ember.Component
- @uses Mixins.TransitionSupport
- @public
- */
+  @class Modal
+  @namespace Components
+  @extends Ember.Component
+  @uses Mixins.TransitionSupport
+  @public
+*/
 let component = Component.extend(TransitionSupport, {
   layout,
 

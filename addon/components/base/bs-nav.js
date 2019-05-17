@@ -4,76 +4,75 @@ import { isPresent } from '@ember/utils';
 import layout from 'ember-bootstrap/templates/components/bs-nav';
 
 /**
+  Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)
 
- Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)
+  ### Usage
 
- ### Usage
+  Use in combination with the yielded components
 
- Use in combination with the yielded components
+  * [Components.NavItem](Components.NavItem.html)
+  * [Components.NavLinkTo](Components.NavLinkTo.html)
+  * [`nav.dropdown`](Components.Dropdown.html)
 
- * [Components.NavItem](Components.NavItem.html)
- * [Components.NavLinkTo](Components.NavLinkTo.html)
- * [`nav.dropdown`](Components.Dropdown.html)
-
- ```hbs
-  <BsNav @type="pills" as |Nav|>
-    <Nav.item>
-      <Nav.link-to "foo">Foo</Nav.link-to>
-    </Nav.item>
-    <Nav.item>
-      <Nav.link-to "bar">Bar</Nav.link-to>
-    </Nav.item>
+  ```hbs
+  <BsNav @type="pills" as |nav|>
+    <nav.item>
+      {{#nav.link-to "foo"}}Foo{{/nav.link-to}}
+    </nav.item>
+    <nav.item>
+      {{#nav.link-to "bar"}}Bar{{/nav.link-to}}
+    </nav.item>
   </BsNav>
- ```
+  ```
 
- ### Nav styles
+  ### Nav styles
 
- The component supports the default bootstrap nav styling options "pills" and "tabs" through the `type`
- property, as well as the `justified`, `fill` and `stacked` properties.
+  The component supports the default bootstrap nav styling options "pills" and "tabs" through the `type`
+  property, as well as the `justified`, `fill` and `stacked` properties.
 
- ### Active items
+  ### Active items
 
- Bootstrap expects to have the `active` class on the `<li>` element that should be the active (highlighted)
- navigation item. To achieve that just use the `link-to` helper as usual. If the link is active, i.e
- it points to the current route, the `bs-nav-item` component will detect that and apply the `active` class
- automatically. The same applies for the `disabled` state.
+  Bootstrap expects to have the `active` class on the `<li>` element that should be the active (highlighted)
+  navigation item. To achieve that just use the `link-to` helper as usual. If the link is active, i.e
+  it points to the current route, the `bs-nav-item` component will detect that and apply the `active` class
+  automatically. The same applies for the `disabled` state.
 
- ### Dropdowns
+  ### Dropdowns
 
- Use the `nav.dropdown` contextual version of the [Components.Dropdown](Components.Dropdown.html) component
- with a `tagName` of "li" to integrate a dropdown into your nav:
+  Use the `nav.dropdown` contextual version of the [Components.Dropdown](Components.Dropdown.html) component
+  with a `tagName` of "li" to integrate a dropdown into your nav:
 
- ```hbs
-  <BsNav @type="pills" as |Nav|>
-    <Nav.item><Nav.link-to "index">Home</Nav.link-to></Nav.item>
-    <Nav.dropdown as |dd|>
+  ```hbs
+  <BsNav @type="pills" as |nav|>
+    <nav.item><nav.link-to "index">Home</nav.link-to></nav.item>
+    <nav.dropdown as |dd|>
       <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
       <dd.menu as |ddm|>
-        <ddm.item><ddm.link-to "foo">Foo</ddm.link-to></ddm.item>
-        <ddm.item><ddm.link-to "bar">Bar</ddm.link-to></ddm.item>
+        <ddm.item>{{#ddm.link-to "foo"}}Foo{{/ddm.link-to}}</ddm.item>
+        <ddm.item>{{#ddm.link-to "bar"}}Bar{{/ddm.link-to}}</ddm.item>
       </dd.menu>
-    </Nav.dropdown>
-    <Nav.item>
-      <Nav.link-to "bar">Bar</Nav.link-to>
-    </Nav.item>
+    </nav.dropdown>
+    <nav.item>
+      {{#nav.link-to "bar"}}Bar{{/nav.link-to}}
+    </nav.item>
   </BsNav>
- ```
+  ```
 
- ### Bootstrap 3/4 Notes
+  ### Bootstrap 3/4 Notes
 
- Use [`nav.link-to`](Components.NavLinkTo.html) for in-app links to ensure proper styling regardless of
- Bootstrap version. Explicit use of `<a>` tags in Bootstrap 4 must apply the `nav-link` class and manage
- the `active` state explicitly.
+  Use [`nav.link-to`](Components.NavLinkTo.html) for in-app links to ensure proper styling regardless of
+  Bootstrap version. Explicit use of `<a>` tags in Bootstrap 4 must apply the `nav-link` class and manage
+  the `active` state explicitly.
 
- You can override `tagName` if you want to use Bootstrap 4's ability to represent more structural
- components with `div` tags.
+  You can override `tagName` if you want to use Bootstrap 4's ability to represent more structural
+  components with `div` tags.
 
- The `fill` styling is only available with Bootstrap 4
+  The `fill` styling is only available with Bootstrap 4
 
- @class Nav
- @namespace Components
- @extends Ember.Component
- @public
+  @class Nav
+  @namespace Components
+  @extends Ember.Component
+  @public
 
  */
 export default Component.extend({

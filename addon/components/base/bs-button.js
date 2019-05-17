@@ -8,78 +8,78 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
 import overrideableCP from '../../utils/overrideable-cp';
 
 /**
- Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
- as well as advanced functionality such as button states.
+  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
+  as well as advanced functionality such as button states.
 
- ### Basic Usage
+  ### Basic Usage
 
- ```hbs
-  <BsButton @type="primary" @icon="glyphicon glyphicon-download"> 
-    Downloads
-  </BsButton>
- ```
+  ```hbs
+   <BsButton @type="primary" @icon="glyphicon glyphicon-download">
+     Downloads
+   </BsButton>
+  ```
 
- ### Actions
+  ### Actions
 
- Use the `onClick` property of the component to send an action to your controller. It will receive the button's value
- (see the `value` property) as an argument.
+  Use the `onClick` property of the component to send an action to your controller. It will receive the button's value
+  (see the `value` property) as an argument.
 
- ```hbs
-  <BsButton @type="primary" @icon="glyphicon glyphicon-download" @onClick=(action "download")>
-    Downloads
-  </BsButton>
- ```
+  ```hbs
+   <BsButton @type="primary" @icon="glyphicon glyphicon-download" @onClick=(action "download")>
+     Downloads
+   </BsButton>
+  ```
 
- ### Promise support for automatic state change
+  ### Promise support for automatic state change
 
- When returning a Promise for any asynchronous operation from the `onClick` closure action the button will
- manage an internal state ("default" > "pending" > "fulfilled"/"rejected") automatically, changing its label
- according to the state of the promise:
+  When returning a Promise for any asynchronous operation from the `onClick` closure action the button will
+  manage an internal state ("default" > "pending" > "fulfilled"/"rejected") automatically, changing its label
+  according to the state of the promise:
 
- ```hbs
-  <BsButton 
-    @type="primary" 
-    @icon="glyphicon glyphicon-download" 
-    @defaultText="Download" 
-    @pendingText="Loading..."
-    @fulfilledText="Completed!"
-    @rejectedText="Oups!?" 
-    @onClick={{action "download"}}
-  />
- ```
+  ```hbs
+   <BsButton
+     @type="primary"
+     @icon="glyphicon glyphicon-download"
+     @defaultText="Download"
+     @pendingText="Loading..."
+     @fulfilledText="Completed!"
+     @rejectedText="Oups!?"
+     @onClick={{action "download"}}
+   />
+  ```
 
- ```js
- // controller.js
-  export default Ember.Controller.extend({
-    actions: {
-      download(value) {
-        return new Ember.RSVP.Promise(...);
-      }
-    }
-  });
- ```
+  ```js
+  // controller.js
+   export default Ember.Controller.extend({
+     actions: {
+       download(value) {
+         return new Ember.RSVP.Promise(...);
+       }
+     }
+   });
+  ```
 
- For further customization `isPending`, `isFulfilled`, `isRejected` and `isSettled` properties are yielded:
+  For further customization `isPending`, `isFulfilled`, `isRejected` and `isSettled` properties are yielded:
 
- ```hbs
-  <BsButton @onClick=(action "download") as |button|>
-    Download
-    {{#if button.isPending}}
-      <span class="loading-spinner"></span>
-    {{/if}}
-  </BsButton>
- ```
+  ```hbs
+   <BsButton @onClick=(action "download") as |button|>
+     Download
+     {{#if button.isPending}}
+       <span class="loading-spinner"></span>
+     {{/if}}
+   </BsButton>
+  ```
 
- You can `reset` the state represented by these properties and used for button's text by setting `reset` property to
- `true`.
+  You can `reset` the state represented by these properties and used for button's text by setting `reset` property to
+  `true`.
 
- @class Button
- @namespace Components
- @extends Ember.Component
- @uses Mixins.TypeClass
- @uses Mixins.SizeClass
- @public
- */
+  @class Button
+  @namespace Components
+  @extends Ember.Component
+  @uses Mixins.TypeClass
+  @uses Mixins.SizeClass
+  @public
+*/
 export default Component.extend(TypeClass, SizeClass, {
   layout,
   tagName: 'button',

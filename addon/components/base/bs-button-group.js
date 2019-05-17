@@ -5,46 +5,46 @@ import layout from 'ember-bootstrap/templates/components/bs-button-group';
 import SizeClass from 'ember-bootstrap/mixins/size-class';
 
 /**
- Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
- See http://getbootstrap.com/components/#btn-groups
+  Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
+  See http://getbootstrap.com/components/#btn-groups
 
- Use as a block level component with any number of [Components.Button](Components.Button.html) components provided as
- a yielded pre-configured contextual component:
+  Use as a block level component with any number of [Components.Button](Components.Button.html) components provided as
+  a yielded pre-configured contextual component:
 
- ```handlebars
-  <BsButtonGroup as |Bg|>
-    <Bg.button>1</Bg.button>
-    <Bg.button>2</Bg.button>
-    <Bg.button>3</Bg.button>
+  ```handlebars
+  <BsButtonGroup as |bg|>
+    <bg.button>1</bg.button>
+    <bg.button>2</bg.button>
+    <bg.button>3</bg.button>
   </BsButtonGroup>
- ```
+  ```
 
- ### Radio-like behaviour
+  ### Radio-like behaviour
 
- Use the `type` property set to "radio" to make the child buttons toggle like radio buttons, i.e. only one button can be active.
- Set the `value` property of the buttons to something meaningful. The `value` property of the button group will then reflect
- the value of the active button:
+  Use the `type` property set to "radio" to make the child buttons toggle like radio buttons, i.e. only one button can be active.
+  Set the `value` property of the buttons to something meaningful. The `value` property of the button group will then reflect
+  the value of the active button:
 
- ```handlebars
-  <BsButtonGroup @value={{this.buttonGroupValue}} @type="radio" @onChange={{action (mut this.buttonGroupValue}} as |Bg|>
-    <Bg.button @type="default" @value={{1}}>1</Bg.button>
-    <Bg.button @type="default" @value={{2}}>2</Bg.button>
-    <Bg.button @type="default" @value={{3}}>3</Bg.button>
+  ```handlebars
+  <BsButtonGroup @value={{this.buttonGroupValue}} @type="radio" @onChange={{action (mut this.buttonGroupValue}} as |bg|>
+    <bg.button @type="default" @value={{1}}>1</bg.button>
+    <bg.button @type="default" @value={{2}}>2</bg.button>
+    <bg.button @type="default" @value={{3}}>3</bg.button>
   </BsButtonGroup>
 
   You selected: {{this.buttonGroupValue}}!
- ```
+  ```
 
- ### Checkbox-like behaviour
+  ### Checkbox-like behaviour
 
- Set `type` to "checkbox" to make any number of child buttons selectable. The `value` property will be an array
- of all the values of the active buttons:
+  Set `type` to "checkbox" to make any number of child buttons selectable. The `value` property will be an array
+  of all the values of the active buttons:
 
- ```handlebars
-  <BsButtonGroup @value={{this.buttonGroupValue}} @type="checkbox" @onChange={{action (mut this.buttonGroupValue}} as |Bg|>
-    <Bg.button @type="default" @value={{1}}>1</Bg.button>
-    <Bg.button @type="default" @value={{2}}>2</Bg.button>
-    <Bg.button @type="default" @value={{3}}>3</Bg.button>
+  ```handlebars
+  <BsButtonGroup @value={{this.buttonGroupValue}} @type="checkbox" @onChange={{action (mut this.buttonGroupValue}} as |bg|>
+    <bg.button @type="default" @value={{1}}>1</bg.button>
+    <bg.button @type="default" @value={{2}}>2</bg.button>
+    <bg.button @type="default" @value={{3}}>3</bg.button>
   </BsButtonGroup>
 
   You selected:
@@ -53,14 +53,14 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
       <li>{{value}}</li>
     {{/each}}
   </ul>
- ```
+  ```
 
- @class ButtonGroup
- @namespace Components
- @extends Ember.Component
- @uses Mixins.SizeClass
- @public
- */
+  @class ButtonGroup
+  @namespace Components
+  @extends Ember.Component
+  @uses Mixins.SizeClass
+  @public
+*/
 export default Component.extend(SizeClass, {
   layout,
   ariaRole: 'group',

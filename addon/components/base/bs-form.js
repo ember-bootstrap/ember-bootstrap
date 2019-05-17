@@ -11,12 +11,12 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
 
   You can use whatever markup you like within the form. The following shows Bootstrap 3 usage for the internal markup.
 
- ```handlebars
-  <BsForm @onSubmit={{action "submit"}} as |Form|>
-    <Form.group>
+  ```handlebars
+  <BsForm @onSubmit={{action "submit"}} as |form|>
+    <form.group>
       <label class="control-label">First name</label>
       <input value={{this.firstname}} class="form-control" oninput={{action (mut this.firstname) value="target.value"}} type="text">
-    </Form.group>
+    </form.group>
   </BsForm>
   ```
 
@@ -40,10 +40,10 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
   with an invalid validation, or when focusing out of invalid inputs
 
   ```handlebars
-  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |Form|>
-    <Form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
-    <Form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" />
-    <Form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" />
+  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
+    <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" />
+    <form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" />
     <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
   </BsForm>
   ```
@@ -77,7 +77,7 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
 
   ```hbs
   <BsForm @onSubmit={{action "save"}} as |form|>
-    <BsButton @type="submit" @disabled={{form.isSubmitting}} >
+    <BsButton @buttonType="submit" @disabled={{form.isSubmitting}}>
       Save
       {{#if form.isSubmitting}} {{fa-icon "spinner"}} {{/if}}
     </BsButton>
@@ -89,8 +89,8 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
   Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:
 
   ```hbs
-  <BsForm @onSubmit={{action 'save}} as |Form|>
-    <BsButton @buttonType="submit" @type={{if Form.isRejected "danger" "primary"}}>
+  <BsForm @onSubmit={{action 'save}} as |form|>
+    <BsButton @buttonType="submit" @type={{if form.isRejected "danger" "primary"}}>
       Save
     </BsButton>
   </BsForm>
@@ -100,7 +100,7 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
   @namespace Components
   @extends Ember.Component
   @public
- */
+*/
 export default Component.extend({
   layout,
   tagName: 'form',
