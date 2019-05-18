@@ -11,13 +11,13 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
 
   You can use whatever markup you like within the form. The following shows Bootstrap 3 usage for the internal markup.
 
- ```handlebars
-   {{#bs-form onSubmit=(action "submit") as |form|}}
-     {{#form.group validation=firstNameValidation}}
-       <label class="control-label">First name</label>
-       <input value={{firstname}} class="form-control" oninput={{action (mut firstname) value="target.value"}} type="text">
-    {{/form.group}}
-  {{/bs-form}}
+  ```handlebars
+  <BsForm @onSubmit={{action "submit"}} as |form|>
+    <form.group>
+      <label class="control-label">First name</label>
+      <input value={{this.firstname}} class="form-control" oninput={{action (mut this.firstname) value="target.value"}} type="text">
+    </form.group>
+  </BsForm>
   ```
 
   However to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`
@@ -40,12 +40,12 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
   with an invalid validation, or when focusing out of invalid inputs
 
   ```handlebars
-  {{#bs-form formLayout="horizontal" model=this onSubmit=(action "submit") as |form|}}
-    {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
-    {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
-    {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
-    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
-  {{/bs-form}}
+  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
+    <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" />
+    <form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" />
+    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+  </BsForm>
   ```
 
   See the [Components.FormElement](Components.FormElement.html) API docs for further information.
@@ -75,32 +75,32 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
   A `isSubmitting` property is yielded, which is `true` after submit has been triggered and before the Promise returned
   by `onSubmit` is fulfilled. It could be used to disable form's submit button and showing a loading spinner for example:
 
-  ```
-  {{#bs-form onSubmit=(action 'save') as |form|}}
-    {{#bs-button buttonType='submit' disabled=form.isSubmitting}}
+  ```hbs
+  <BsForm @onSubmit={{action "save"}} as |form|>
+    <BsButton @buttonType="submit" @disabled={{form.isSubmitting}}>
       Save
-      {{#if form.isSubmitting}} {{fa-icon 'spinner'}} {{/if}}
-    {{/bs-button}}
-  {{/bs-form}}
+      {{#if form.isSubmitting}} {{fa-icon "spinner"}} {{/if}}
+    </BsButton>
+  </BsForm>
   ```
 
   Additionaly `isSubmitted` and `isRejected` properties are yielded. `isSubmitted` is `true` if last submission was successful.
   `isRejected` is `true` if last submission was rejected due to validation errors or by an action bound to `onSubmit` event, returning a rejected promise.
   Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:
 
-  ```
-  {{#bs-form onSubmit=(action 'save') as |form|}}
-    {{#bs-button buttonType='submit' type=(if form.isRejected "danger" "primary")}}
+  ```hbs
+  <BsForm @onSubmit={{action 'save}} as |form|>
+    <BsButton @buttonType="submit" @type={{if form.isRejected "danger" "primary"}}>
       Save
-    {{/bs-button}}
-  {{/bs-form}}
+    </BsButton>
+  </BsForm>
   ```
 
   @class Form
   @namespace Components
   @extends Ember.Component
   @public
- */
+*/
 export default Component.extend({
   layout,
   tagName: 'form',

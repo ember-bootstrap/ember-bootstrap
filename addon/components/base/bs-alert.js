@@ -8,26 +8,26 @@ import TypeClass from 'ember-bootstrap/mixins/type-class';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
 /**
- Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
+  Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
 
- ### Usage
+  ### Usage
 
- By default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
- `type` property for proper styling.
+  By default it is a user dismissible alert with a fade out animation, both of which can be disabled. Be sure to set the
+  `type` property for proper styling.
 
- ```hbs
- {{#bs-alert type="success"}}
- <strong>Well done!</strong> You successfully read this important alert message.
- {{/bs-alert}}
- ```
+  ```hbs
+  <BsAlert @type="success">
+    <strong>Well done!</strong> You successfully read this important alert message.
+  </BsAlert>
+  ```
 
- @class Alert
- @namespace Components
- @extends Ember.Component
- @uses Mixins.TypeClass
- @uses Mixins.TransitionSupport
- @public
- */
+  @class Alert
+  @namespace Components
+  @extends Ember.Component
+  @uses Mixins.TypeClass
+  @uses Mixins.TransitionSupport
+  @public
+*/
 export default Component.extend(TypeClass, TransitionSupport, {
   layout,
   classNameBindings: ['alert', 'fade', 'dismissible:alert-dismissible'],

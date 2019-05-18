@@ -8,24 +8,24 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { assert } from '@ember/debug';
 
 /**
- An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
+  An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
 
- ### Usage
+  ### Usage
 
- ```hbs
- {{#bs-collapse collapsed=collapsed}}
-   <div class="well">
-     <h2>Collapse</h2>
-     <p>This is collapsible content</p>
-   </div>
- {{/bs-collapse}}
- ```
+  ```hbs
+  <BsCollapse @collapsed={{this.collapsed}}>
+    <div class="well">
+      <h2>Collapse</h2>
+      <p>This is collapsible content</p>
+    </div>
+  </BsCollapse>
+  ```
 
- @class Collapse
- @namespace Components
- @extends Ember.Component
- @public
- */
+  @class Collapse
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
 export default Component.extend({
 
   classNameBindings: ['collapse', 'collapsing'],
