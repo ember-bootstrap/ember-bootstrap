@@ -15,7 +15,6 @@
       @onChange={{action "updateStacked"}}
       class="ml-sm-2"
      />
-
     <form.element
       @controlType="checkbox"
       @disabled={{stacked}}
@@ -23,7 +22,6 @@
       @property="justified"
       class="ml-sm-2"
      />
-
     <form.element
       @controlType="checkbox"
       @disabled={{stacked}}
@@ -31,7 +29,6 @@
       @property="fill"
       class="ml-sm-2"
      />
-
   </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET nav-demo -->
@@ -61,5 +58,13 @@
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  <CodeSnippet @name="nav-demo.hbs" />
+  <CodeSnippet
+    @name="nav-demo.hbs"
+    @dynamicProperties={{hash
+      type=type
+      stacked=stacked
+      justified=justified
+      fill=fill
+    }}
+  />
 </div>

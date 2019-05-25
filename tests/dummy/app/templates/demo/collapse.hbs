@@ -1,5 +1,4 @@
 <div class="bs-example">
-  <!-- BEGIN-SNIPPET collapse-demo -->
   <BsButton @active={{this.notCollapsed}} @onClick={{action "toggle"}}>
     {{#if this.collapsed}}
       Show
@@ -10,6 +9,7 @@
 
   <hr>
 
+  <!-- BEGIN-SNIPPET collapse-demo -->
   <BsCollapse @collapsed={{this.collapsed}}>
     <div class="well">
       <p>This is collapsible content</p>
@@ -18,5 +18,10 @@
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  <CodeSnippet @name="collapse-demo.hbs" />
+  <CodeSnippet
+    @name="collapse-demo.hbs"
+    @dynamicProperties={{hash
+      collapsed=collapsed
+    }}
+  />
 </div>

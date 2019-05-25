@@ -1,22 +1,22 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET tooltip-demo -->
-  <BsButton>
+  <BsButton class="mb-1">
     Tooltip on left
     <BsTooltip @placement="left">Tooltip on left</BsTooltip>
   </BsButton>
-  <BsButton>
+  <BsButton class="mb-1">
     Tooltip on top
     <BsTooltip @placement="top">Tooltip on top</BsTooltip>
   </BsButton>
-  <BsButton>
+  <BsButton class="mb-1">
     Tooltip on bottom
     <BsTooltip @placement="bottom">Tooltip on bottom</BsTooltip>
   </BsButton>
-  <BsButton>
+  <BsButton class="mb-1">
     Tooltip on right
     <BsTooltip @placement="right">Tooltip on right</BsTooltip>
   </BsButton>
-  <BsButton>
+  <BsButton class="mb-1">
     Click tooltip
     <BsTooltip @triggerEvents="click">Click tooltip</BsTooltip>
   </BsButton>
@@ -33,7 +33,7 @@
 </p>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET tooltip-target -->
-  <button type="button" class="btn btn-default">
+  <button type="button" class="btn btn-secondary">
     DOM parent
     <BsTooltip @title="DOM parent" />
   </button>
@@ -41,7 +41,7 @@
     Parent component
     <BsTooltip @triggerElement="parentView" @title="Parent component" />
   </BsButton>
-  <button id="Tooltip-button" class="btn btn-default">
+  <button id="Tooltip-button" class="btn btn-secondary">
     CSS selector
   </button>
   <BsTooltip @triggerElement="#Tooltip-button" @title="CSS selector" />
