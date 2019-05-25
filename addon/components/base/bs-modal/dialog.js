@@ -181,7 +181,7 @@ export default Component.extend({
   },
 
   _click(e) {
-    if (!e.target.classList.contains('modal') || !this.get('backdropClose')) {
+    if (e.target !== this.element || !this.get('backdropClose')) {
       return;
     }
     this.get('onClose')();
