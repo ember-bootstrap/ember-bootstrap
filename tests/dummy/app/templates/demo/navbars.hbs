@@ -38,17 +38,10 @@
     </div>
     <navbar.content>
       <navbar.nav as |nav|>
-        <nav.item>
-          {{#nav.link-to "index"}}Home{{/nav.link-to}}
-        </nav.item>
-        <nav.item>
-          {{#nav.link-to "demo.navbars"}}Navbars{{/nav.link-to}}
-        </nav.item>
+        <nav.item @linkTo="index">Home</nav.item>
+        <nav.item @linkTo="demo.navbars">Navbars</nav.item>
         <nav.dropdown as |dd|>
-          <dd.toggle>
-            Dropdown
-            <span class="caret"></span>
-          </dd.toggle>
+          <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
           <dd.menu as |ddm|>
             <ddm.item>
               {{#ddm.link-to "index"}}Home{{/ddm.link-to}}

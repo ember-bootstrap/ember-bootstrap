@@ -1,0 +1,1 @@
+export { default } from 'ember-bootstrap/components/base/bs-navbar/nav-item';

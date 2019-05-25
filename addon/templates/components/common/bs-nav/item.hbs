@@ -1,1 +1,5 @@
-{{yield}}
+{{#if this.linkTo}}
+  {{#link-to params=linkToParams class=this.linkClass disabled=this.disabled}}{{yield}}{{/link-to}}
+{{else}}
+  {{yield}}
+{{/if}}

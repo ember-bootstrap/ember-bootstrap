@@ -38,12 +38,8 @@
     @stacked={{stacked}}
     @fill={{fill}} as |nav|
   >
-    <nav.item>
-      {{#nav.link-to "index"}}Home{{/nav.link-to}}
-    </nav.item>
-    <nav.item>
-      {{#nav.link-to "demo.navs"}}Nav{{/nav.link-to}}
-    </nav.item>
+    <nav.item @linkTo="index">Home</nav.item>
+    <nav.item @linkTo="demo.navs">Nav</nav.item>
     <nav.dropdown as |dd|>
       <dd.toggle>
         Dropdown
