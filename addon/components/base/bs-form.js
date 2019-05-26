@@ -436,6 +436,13 @@ export default Component.extend({
     this.get('element').dispatchEvent(event);
   },
 
+  init() {
+    this._super(...arguments);
+
+    let formLayout = this.get('formLayout');
+    assert(`Invalid formLayout property given: ${formLayout}`, ['vertical', 'horizontal', 'inline'].indexOf(formLayout) >= 0);
+  },
+
   actions: {
     change(value, model, property) {
       assert('You cannot use the form element\'s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!',

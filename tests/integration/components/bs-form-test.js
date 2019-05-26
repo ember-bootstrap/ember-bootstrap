@@ -52,8 +52,6 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   testBS4('form has correct markup', async function(assert) {
-    await render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
-
     let classSpec = {
       vertical: ['form', false],
       horizontal: ['form-horizontal', false],
@@ -62,6 +60,8 @@ module('Integration | Component | bs-form', function(hooks) {
 
     for (let layout in classSpec) {
       this.set('formLayout', layout);
+      await render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
+
       let expectation = classSpec[layout];
       assert.equal(this.element.querySelector('form').classList.contains(expectation[0]), expectation[1], `form has expected markup for ${layout}`);
     }
