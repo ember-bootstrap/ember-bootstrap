@@ -496,6 +496,13 @@
                 this.get(&#x27;element&#x27;).dispatchEvent(event);
               },
             
+              init() {
+                this._super(...arguments);
+            
+                let formLayout = this.get(&#x27;formLayout&#x27;);
+                assert(&#x60;Invalid formLayout property given: ${formLayout}&#x60;, [&#x27;vertical&#x27;, &#x27;horizontal&#x27;, &#x27;inline&#x27;].indexOf(formLayout) &gt;= 0);
+              },
+            
               actions: {
                 change(value, model, property) {
                   assert(&#x27;You cannot use the form element\&#x27;s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!&#x27;,

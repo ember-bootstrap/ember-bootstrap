@@ -241,7 +241,7 @@
               },
             
               _click(e) {
-                if (!e.target.classList.contains(&#x27;modal&#x27;) || !this.get(&#x27;backdropClose&#x27;)) {
+                if (e.target !== this.element || !this.get(&#x27;backdropClose&#x27;)) {
                   return;
                 }
                 this.get(&#x27;onClose&#x27;)();
