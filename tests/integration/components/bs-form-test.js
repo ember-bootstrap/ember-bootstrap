@@ -16,8 +16,16 @@ import {
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import { defer } from 'rsvp';
-import { run } from '@ember/runloop';
+import { next, run } from '@ember/runloop';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+
+const nextRunloop = function() {
+  return new Promise((resolve) => {
+    next(() => {
+      resolve();
+    });
+  });
+};
 
 module('Integration | Component | bs-form', function(hooks) {
   setupRenderingTest(hooks);
@@ -438,7 +446,9 @@ module('Integration | Component | bs-form', function(hooks) {
 
     assert.dom('form .state').doesNotHaveClass('is-submitting');
     triggerEvent('form', 'submit');
-    await waitFor('form .state.is-submitting');
+    await nextRunloop();
+
+    assert.dom('form .state').doesNotHaveClass('is-submitting');
   });
 
   test('Yielded #isSubmitting is true as long as Promise returned by onSubmit is pending', async function(assert) {
