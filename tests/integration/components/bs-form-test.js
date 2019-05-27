@@ -18,6 +18,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { defer } from 'rsvp';
 import { next, run } from '@ember/runloop';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import RSVP from 'rsvp';
 
 const nextRunloop = function() {
   return new Promise((resolve) => {
@@ -336,7 +337,7 @@ module('Integration | Component | bs-form', function(hooks) {
 
       click() {
         let ret = this.get('onClick')();
-        assert.ok(ret instanceof Promise);
+        assert.ok(ret instanceof RSVP.Promise);
       }
     });
     this.owner.register('component:test-component', TestComponent);

@@ -4,6 +4,7 @@ import { gt } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import layout from 'ember-bootstrap/templates/components/bs-form';
+import RSVP from 'rsvp';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -334,76 +335,88 @@ export default Component.extend({
    * @method submit
    * @private
    */
-  async submitHandler(e) {
+  submitHandler(e) {
     if (e) {
       e.preventDefault();
     }
 
     if (this.get('preventConcurrency') && this.get('isSubmitting')) {
-      return;
+      return RSVP.resolve();
     }
 
     let model = this.get('model');
-    let record;
 
     this.incrementProperty('pendingSubmissions');
     this.get('onBefore')(model);
 
-    try {
-      record = await (this.get('hasValidator') ? this.validate(model) : null);
-    } catch (error) {
-      // model is invalid
-      this.set('showAllValidations', true);
+    return RSVP.resolve()
+      .then(() => {
+        return this.get('hasValidator') ? this.validate(model) : null;
+      })
+      .then(
+        (record) => {
+          if (this.get('hideValidationsOnSubmit') === true) {
+            this.set('showAllValidations', false);
+          }
 
-      await this.get('onInvalid')(model, error);
+          return RSVP.resolve()
+            .then(() => {
+              return this.get('onSubmit')(model, record);
+            })
+            .then(() => {
+              if (this.get('isDestroyed')) {
+                return;
+              }
 
-      if (this.get('isDestroyed')) {
-        return;
-      }
+              this.set('isSubmitted', true);
+            })
+            .catch((error) => {
+              if (this.get('isDestroyed')) {
+                return;
+              }
 
-      this.set('isRejected', true);
-      this.decrementProperty('pendingSubmissions');
+              this.set('isRejected', true);
 
-      throw error;
-    }
+              throw error;
+            })
+            .finally(() => {
+              if (this.get('isDestroyed')) {
+                return;
+              }
 
-    if (this.get('hideValidationsOnSubmit') === true) {
-      this.set('showAllValidations', false);
-    }
+              this.decrementProperty('pendingSubmissions');
 
-    try {
-      await this.get('onSubmit')(model, record);
+              // reset forced hiding of validations
+              if (this.get('showAllValidations') === false) {
+                this.set('showAllValidations', undefined);
+              }
+            });
+        },
+        (error) => {
+          // model is invalid
+          this.set('showAllValidations', true);
 
-      if (this.get('isDestroyed')) {
-        return;
-      }
+          return RSVP.resolve()
+            .then(() => {
+              return this.get('onInvalid')(model, error);
+            })
+            .finally(() => {
+              if (this.get('isDestroyed')) {
+                return;
+              }
 
-      this.set('isSubmitted', true);
-    } catch (error) {
-      if (this.get('isDestroyed')) {
-        return;
-      }
+              this.set('isRejected', true);
+              this.decrementProperty('pendingSubmissions');
 
-      this.set('isRejected', true);
-
-      throw error;
-    } finally {
-      this.decrementProperty('pendingSubmissions');
-
-      // reset forced hiding of validations
-      if (this.get('showAllValidations') === false) {
-        this.set('showAllValidations', undefined);
-      }
-    }
+              throw error;
+            });
+        }
+      )
   },
 
-  async submit() {
-    try {
-      await this.submitHandler(...arguments);
-    } catch(err) {
-      // catch error throws by form's validation
-      // TODO: do not catch other errors
-    }
+  submit() {
+    this.submitHandler(...arguments)
+      .catch(() => {});
   },
 
   keyPress(e) {
@@ -436,8 +449,8 @@ export default Component.extend({
       this.set('isRejected', false);
     },
 
-    async submit() {
-      await this.submitHandler();
+    submit() {
+      return this.submitHandler();
     },
   }
 });
