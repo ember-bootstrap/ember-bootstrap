@@ -375,8 +375,8 @@ module('Integration | Component | bs-form', function(hooks) {
 
     assert.expect(scenarios.length * 2);
 
-    for (let scenario of scenarios) {
-      this.setProperties(scenario);
+    for (let i = 0; i < scenarios.length; i++) {
+      this.setProperties(scenarios[i]);
       await render(hbs`
         {{#bs-form onSubmit=onSubmit validate=validate as |form|}}
           {{test-component onClick=form.submit}}
@@ -406,8 +406,8 @@ module('Integration | Component | bs-form', function(hooks) {
 
     assert.expect(scenarios.length);
 
-    for (let scenario of scenarios) {
-      this.setProperties(scenario);
+    for (let i = 0; i < scenarios.length; i++) {
+      this.setProperties(scenarios[i]);
       await render(hbs`
         {{#bs-form onSubmit=onSubmit validate=validate as |form|}}
           {{test-component onSubmit=form.submit}}
