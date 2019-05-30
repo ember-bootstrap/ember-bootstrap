@@ -5,6 +5,8 @@
       formLayout=formLayout
       horizontalLabelGridClass=horizontalLabelGridClass
       showAllValidations=showAllValidations
+      disabled=this.disabled
+      readonly=this.readonly
       onChange=(action "change")
       _onChange=(action "resetSubmissionState")
     )
@@ -13,5 +15,6 @@
     isSubmitted=isSubmitted
     isRejected=isRejected
     resetSubmissionState=(action "resetSubmissionState")
+    submit=(action "submit")
   )
 }}

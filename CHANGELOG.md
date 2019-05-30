@@ -1,4 +1,21 @@
 
+## v2.7.1 (2019-05-26)
+
+#### Bug Fixes
+* [#818](https://github.com/kaliber5/ember-bootstrap/pull/818) Form asserts for valid `formLayout` value ([@simonihmig](https://github.com/simonihmig))
+* [#815](https://github.com/kaliber5/ember-bootstrap/pull/815) Fixed modal error when clicking on SVG in IE11 ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 1
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+## v2.7.0 (2019-05-14)
+
+#### Features
+* [#809](https://github.com/kaliber5/ember-bootstrap/pull/809) Propagate `disabled` and `readonly` property to all yielded form elements ([@simonihmig](https://github.com/simonihmig))
+* [#701](https://github.com/kaliber5/ember-bootstrap/pull/701) Modal header component yields title and close components ([@lougreenwood](https://github.com/lougreenwood))
+
+#### Committers: 2
+- Lou Greenwood ([@lougreenwood](https://github.com/lougreenwood))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
 ## v2.6.2 (2019-04-24)
 
 #### Features

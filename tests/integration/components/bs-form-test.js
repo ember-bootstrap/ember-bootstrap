@@ -18,6 +18,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { defer } from 'rsvp';
 import { next, run } from '@ember/runloop';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import RSVP from 'rsvp';
 
 const nextRunloop = function() {
   return new Promise((resolve) => {
@@ -52,8 +53,6 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   testBS4('form has correct markup', async function(assert) {
-    await render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
-
     let classSpec = {
       vertical: ['form', false],
       horizontal: ['form-horizontal', false],
@@ -62,6 +61,8 @@ module('Integration | Component | bs-form', function(hooks) {
 
     for (let layout in classSpec) {
       this.set('formLayout', layout);
+      await render(hbs`{{#bs-form formLayout=formLayout}}Test{{/bs-form}}`);
+
       let expectation = classSpec[layout];
       assert.equal(this.element.querySelector('form').classList.contains(expectation[0]), expectation[1], `form has expected markup for ${layout}`);
     }
@@ -100,7 +101,7 @@ module('Integration | Component | bs-form', function(hooks) {
     );
 
     await click('button');
-    assert.ok(submit.called, 'onSubmit action has been called');
+    assert.ok(submit.calledOnce, 'onSubmit action has been called');
   });
 
   test('Submit event bubbles', async function(assert) {
@@ -149,14 +150,13 @@ module('Integration | Component | bs-form', function(hooks) {
     let submit = this.spy();
     let before = this.spy();
     let invalid = this.spy();
+    let rejectsWith = new Error();
     let model = {};
     this.set('model', model);
     this.actions.before = before;
     this.actions.submit = submit;
     this.actions.invalid = invalid;
-    this.set('validateStub', function() {
-      return reject('ERROR');
-    });
+    this.set('validateStub', this.fake.rejects(rejectsWith));
     await render(
       hbs`{{#bs-form model=model hasValidator=true validate=validateStub onBefore=(action "before") onSubmit=(action "submit") onInvalid=(action "invalid") as |form|}}Test{{/bs-form}}`
     );
@@ -164,7 +164,7 @@ module('Integration | Component | bs-form', function(hooks) {
     await triggerEvent('form', 'submit');
 
     assert.ok(before.calledWith(model), 'onBefore action has been called with model as parameter');
-    assert.ok(invalid.calledWith(model, 'ERROR'), 'onInvalid action has been called with model and validation result');
+    assert.ok(invalid.calledWith(model, rejectsWith), 'onInvalid action has been called with model and validation result');
     assert.notOk(submit.called, 'onSubmit action has not been called');
   });
 
@@ -172,9 +172,7 @@ module('Integration | Component | bs-form', function(hooks) {
     let model = {};
     this.set('model', model);
     this.set('errors', A(['There is an error']));
-    this.set('validateStub', function() {
-      return reject();
-    });
+    this.set('validateStub', this.fake.rejects());
     await render(
       hbs`{{#bs-form model=model hasValidator=true validate=validateStub as |form|}}{{form.element hasValidator=true errors=errors}}{{/bs-form}}`
     );
@@ -360,6 +358,105 @@ module('Integration | Component | bs-form', function(hooks) {
       assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
     });
 
+  test('it yields submit action', async function(assert) {
+    let submit = this.spy();
+    this.actions.submit = submit;
+    await render(hbs`
+      {{#bs-form onSubmit=(action "submit") as |form|}}
+        <a role="button" onclick={{action form.submit}}>submit</a>
+      {{/bs-form}}
+    `);
+
+    await click('a');
+    assert.ok(submit.calledOnce, 'onSubmit action has been called');
+  });
+
+  test('yielded submit action returns a promise', async function(assert) {
+    let TestComponent = Component.extend({
+      tagName: 'button',
+
+      click() {
+        let ret = this.get('onClick')();
+        assert.ok(ret instanceof RSVP.Promise);
+      }
+    });
+    this.owner.register('component:test-component', TestComponent);
+
+    await render(hbs`
+      {{#bs-form as |form|}}
+        {{test-component onClick=form.submit}}
+      {{/bs-form}}
+    `);
+    await click('button');
+  });
+
+  test('yielded submit action resolves for expected scenarios', async function(assert) {
+    let scenarios = [
+      { onSubmit() {} },
+      { onSubmit: this.fake.resolves() },
+      { onSubmit() {}, validate: this.fake.resolves() },
+      { onSubmit: this.fake.resolves(), validate: this.fake.resolves() },
+    ];
+
+    let TestComponent = Component.extend({
+      tagName: 'button',
+
+      async click() {
+        try {
+          let ret = await this.get('onClick')();
+          assert.ok(true, 'resolves');
+          assert.strictEqual(ret, undefined, 'resolves with undefined');
+        } catch(err) {
+          assert.ok(false, err);
+        }
+      }
+    });
+    this.owner.register('component:test-component', TestComponent);
+
+    assert.expect(scenarios.length * 2);
+
+    for (let i = 0; i < scenarios.length; i++) {
+      this.setProperties(scenarios[i]);
+      await render(hbs`
+        {{#bs-form onSubmit=onSubmit validate=validate as |form|}}
+          {{test-component onClick=form.submit}}
+        {{/bs-form}}
+      `);
+      await click('button');
+    }
+  });
+
+  test('yielded submit action rejects for expected scenarios', async function(assert) {
+    let scenarios = [
+      { validate: this.fake.rejects('rejected value') },
+      { onSubmit: this.fake.rejects('rejected value') },
+    ];
+
+    let TestComponent = Component.extend({
+      tagName: 'button',
+
+      click() {
+        assert.rejects(
+          this.get('onSubmit')(),
+          'rejected value'
+        );
+      }
+    });
+    this.owner.register('component:test-component', TestComponent);
+
+    assert.expect(scenarios.length);
+
+    for (let i = 0; i < scenarios.length; i++) {
+      this.setProperties(scenarios[i]);
+      await render(hbs`
+        {{#bs-form onSubmit=onSubmit validate=validate as |form|}}
+          {{test-component onSubmit=form.submit}}
+        {{/bs-form}}
+      `);
+      await click('button');
+    }
+  });
+
   test('Yields #isSubmitting', async function(assert) {
     let deferredSubmitAction = defer();
     this.set('submitAction', () => {
@@ -391,6 +488,7 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.dom('form .state').doesNotHaveClass('is-submitting');
     triggerEvent('form', 'submit');
     await nextRunloop();
+
     assert.dom('form .state').doesNotHaveClass('is-submitting');
   });
 
@@ -474,8 +572,7 @@ module('Integration | Component | bs-form', function(hooks) {
     await waitFor('form .state.is-submitting');
 
     deferredValidateAction.resolve();
-    await nextRunloop();
-    assert.dom('form .state').hasClass('is-submitting');
+    await waitFor('form .state.is-submitting');
 
     deferredSubmitAction.resolve();
     await settled();
@@ -499,14 +596,13 @@ module('Integration | Component | bs-form', function(hooks) {
     await waitFor('form .state.is-submitting');
 
     triggerEvent('form', 'submit');
-    await nextRunloop();
-    // for ember <= 2.12 submitAction is not executed on the first runloop after submit has been triggered
-    await nextRunloop();
-    assert.equal(deferredSubmitActions.length, 2, 'assumption: submit action has been fired twice');
+    await waitUntil(() => {
+      // assumption: submit action has been fired twice
+      return deferredSubmitActions.length === 2;
+    });
 
     deferredSubmitActions[0].resolve();
-    await nextRunloop();
-    assert.dom('form .state').hasClass('is-submitting');
+    await waitFor('form .state.is-submitting');
 
     deferredSubmitActions[1].resolve();
     await settled();
@@ -514,7 +610,7 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('Yielded #isSubmitted is true if onSubmit resolves', async function(assert) {
-    this.actions.submit = this.stub().resolves();
+    this.actions.submit = this.fake.resolves();
     await render(hbs`{{#bs-form onSubmit=(action "submit") as |form|}}
       <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
     {{/bs-form}}`);
@@ -533,7 +629,7 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('Yielded #isSubmitted is true if validation passes', async function(assert) {
-    this.actions.validate = this.stub().resolves();
+    this.actions.validate = this.fake.resolves();
     await render(hbs`{{#bs-form validate=(action "validate") hasValidator=true as |form|}}
       <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
     {{/bs-form}}`);
@@ -543,7 +639,7 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('A change to a form elements resets yielded #isSubmitted', async function(assert) {
-    this.actions.submit = this.stub().resolves();
+    this.actions.submit = this.fake.resolves();
     await render(hbs`{{#bs-form onSubmit=(action "submit") model=(hash) as |form|}}
       {{form.element property="foo"}}
       <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
@@ -557,7 +653,7 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('Yielded #isRejected is true if onSubmit action rejects', async function(assert) {
-    this.actions.submit = this.stub().rejects();
+    this.actions.submit = this.fake.rejects();
     await render(hbs`{{#bs-form onSubmit=(action "submit") as |form|}}
       <button type="submit" class={{if form.isRejected "is-rejected"}}>submit</button>
     {{/bs-form}}`);
@@ -567,7 +663,7 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('Yielded #isRejected is true if validation fails', async function(assert) {
-    this.actions.validate = this.stub().rejects();
+    this.actions.validate = this.fake.rejects();
     await render(hbs`{{#bs-form validate=(action "validate") hasValidator=true as |form|}}
       <button type="submit" class={{if form.isRejected "is-rejected"}}>submit</button>
     {{/bs-form}}`);
@@ -577,7 +673,7 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('A change to a form elements resets yielded #isRejected', async function(assert) {
-    this.actions.submit = this.stub().rejects();
+    this.actions.submit = this.fake.rejects();
     await render(hbs`{{#bs-form onSubmit=(action "submit") model=(hash) as |form|}}
       {{form.element property="foo"}}
       <button type="submit" class={{if form.isRejected "is-rejected"}}>submit</button>
@@ -591,7 +687,7 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('Triggering resetSubmissionState resets submission state of form', async function(assert) {
-    this.actions.submit = this.stub().resolves();
+    this.actions.submit = this.fake.resolves();
     await render(hbs`{{#bs-form onSubmit=(action "submit") model=(hash) as |form|}}
       <input onchange={{form.resetSubmissionState}}>
       <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
@@ -674,5 +770,27 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.dom('form').doesNotHaveAttribute('novalidate');
     await render(hbs`{{bs-form novalidate=true}}`);
     assert.dom('form').hasAttribute('novalidate');
+  });
+
+  test('disabled property propagates to all its elements', async function(assert) {
+    await render(
+      hbs`
+        {{#bs-form model=this disabled=true as |form|}}
+          {{form.element property="dummy"}}
+        {{/bs-form}}`
+    );
+
+    assert.dom('.form-group input').hasAttribute('disabled');
+  });
+
+  test('readOnly property propagates to all its elements', async function(assert) {
+    await render(
+      hbs`
+        {{#bs-form model=this readonly=true as |form|}}
+          {{form.element property="dummy"}}
+        {{/bs-form}}`
+    );
+
+    assert.dom('.form-group input').hasAttribute('readonly');
   });
 });
