@@ -1,9 +1,10 @@
 import Component from '@ember/component';
-import RSVP from 'rsvp';
 import { set, computed } from '@ember/object';
+import { gt } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import layout from 'ember-bootstrap/templates/components/bs-form';
+import RSVP from 'rsvp';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -187,7 +188,7 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  isSubmitting: false,
+  isSubmitting: gt('pendingSubmissions', 0),
 
   /**
    * `isSubmitted` is `true` if last submission was successful.
@@ -354,46 +355,65 @@ export default Component.extend({
    * @method submit
    * @private
    */
-  submit(e) {
+  submitHandler(e) {
     if (e) {
       e.preventDefault();
     }
 
     if (this.get('preventConcurrency') && this.get('isSubmitting')) {
-      return;
+      return RSVP.resolve();
     }
-
-    this.set('isSubmitting', true);
-    this.incrementProperty('pendingSubmissions');
 
     let model = this.get('model');
 
+    this.incrementProperty('pendingSubmissions');
     this.get('onBefore')(model);
 
-    RSVP.resolve(this.get('hasValidator') ? this.validate(this.get('model')) : null)
+    return RSVP.resolve()
+      .then(() => {
+        return this.get('hasValidator') ? this.validate(model) : null;
+      })
       .then(
         (record) => {
+          if (this.get('hideValidationsOnSubmit') === true) {
+            this.set('showAllValidations', false);
+          }
+
           return RSVP.resolve()
             .then(() => {
-              if (this.get('hideValidationsOnSubmit') === true) {
-                this.set('showAllValidations', false);
-              }
               return this.get('onSubmit')(model, record);
             })
-            .then(
-              () => {
-                if (!this.get('isDestroyed')) {
-                  this.set('isSubmitted', true);
-                }
-              },
-              () => {
-                if (!this.get('isDestroyed')) {
-                  this.set('isRejected', true);
-                }
+            .then(() => {
+              if (this.get('isDestroyed')) {
+                return;
               }
-            );
+
+              this.set('isSubmitted', true);
+            })
+            .catch((error) => {
+              if (this.get('isDestroyed')) {
+                return;
+              }
+
+              this.set('isRejected', true);
+
+              throw error;
+            })
+            .finally(() => {
+              if (this.get('isDestroyed')) {
+                return;
+              }
+
+              this.decrementProperty('pendingSubmissions');
+
+              // reset forced hiding of validations
+              if (this.get('showAllValidations') === false) {
+                this.set('showAllValidations', undefined);
+              }
+            });
         },
         (error) => {
+          // model is invalid
           this.set('showAllValidations', true);
 
           return RSVP.resolve()
@@ -401,26 +421,22 @@ export default Component.extend({
               return this.get('onInvalid')(model, error);
             })
             .finally(() => {
-              if (!this.get('isDestroyed')) {
-                this.set('isRejected', true);
+              if (this.get('isDestroyed')) {
+                return;
               }
+
+              this.set('isRejected', true);
+              this.decrementProperty('pendingSubmissions');
+
+              throw error;
             });
         }
       )
-      .finally(() => {
-        if (!this.get('isDestroyed')) {
-          if (this.get('pendingSubmissions') === 1) {
-            this.set('isSubmitting', false);
-          }
+  },
 
-          this.decrementProperty('pendingSubmissions');
-
-          // reset forced hiding of validations
-          if (this.get('showAllValidations') === false) {
-            this.set('showAllValidations', undefined);
-          }
-        }
-      });
+  submit() {
+    this.submitHandler(...arguments)
+      .catch(() => {});
   },
 
   keyPress(e) {
@@ -458,6 +474,10 @@ export default Component.extend({
     resetSubmissionState() {
       this.set('isSubmitted', false);
       this.set('isRejected', false);
-    }
+    },
+
+    submit() {
+      return this.submitHandler();
+    },
   }
 });
