@@ -416,9 +416,6 @@ export default Component.extend({
             });
         },
         (error) => {
-          // model is invalid
-          this.set('showAllValidations', true);
-
           return RSVP.resolve()
             .then(() => {
               return this.get('onInvalid')(model, error);
@@ -428,8 +425,11 @@ export default Component.extend({
                 return;
               }
 
-              this.set('isRejected', true);
-              this.decrementProperty('pendingSubmissions');
+              this.setProperties({
+                showAllValidations: true,
+                isRejected: true,
+                pendingSubmissions: this.get('pendingSubmissions') - 1
+              });
 
               throw error;
             });

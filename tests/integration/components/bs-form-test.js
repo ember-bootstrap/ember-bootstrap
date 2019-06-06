@@ -190,6 +190,35 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
   });
 
+  test('Submitting the form with invalid validation shows validation errors only after onInvalid promise resolves', async function(assert) {
+    let model = {};
+    this.set('model', model);
+    this.set('errors', A(['There is an error']));
+    this.set('validateStub', this.fake.rejects());
+    let deferredInvalidAction = defer();
+    this.set('invalid', () => deferredInvalidAction.promise);
+
+    await render(
+      hbs`{{#bs-form model=model hasValidator=true validate=validateStub onInvalid=this.invalid as |form|}}{{form.element hasValidator=true errors=errors}}{{/bs-form}}`
+    );
+
+    await triggerEvent('form', 'submit');
+
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
+      'validation errors aren\'t shown before onInvalid is settled'
+    );
+
+    deferredInvalidAction.resolve();
+    await settled();
+
+    assert.dom(formFeedbackElement()).hasClass(
+      validationErrorClass(),
+      'validation errors are shown after onInvalid is settled'
+    );
+    assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
+  });
+
   test('form with validation has novalidate attribute', async function(assert) {
     let model = {};
     this.set('model', model);
