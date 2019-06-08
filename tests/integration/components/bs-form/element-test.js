@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { run } from '@ember/runloop';
 import EmberObject from '@ember/object';
 import { A, isArray } from '@ember/array';
-import { module } from 'qunit';
+import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { clearRender, render, click, fillIn, triggerEvent, focus, blur } from '@ember/test-helpers';
 import {
@@ -21,6 +21,7 @@ import {
 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
+import { gte } from 'ember-compatibility-helpers';
 
 const formLayouts = ['vertical', 'horizontal', 'inline'];
 const supportedInputAttributes = {
@@ -519,7 +520,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     }
   });
 
-  test('supported input attributes propagate w/ angle brackets', async function(assert) {
+  (gte('3.4.0') ? test : skip)('supported input attributes propagate w/ angle brackets', async function(assert) {
     for (let i = 0; i < formLayouts.length; i++) {
       let formLayout = formLayouts[i];
       this.set('formLayout', formLayout);
@@ -615,7 +616,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     }
   });
 
-  test('supported textarea attributes propagate w/ angle brackets', async function(assert) {
+  (gte('3.4.0') ? test : skip)('supported textarea attributes propagate w/ angle brackets', async function(assert) {
     for (let i = 0; i < formLayouts.length; i++) {
       let formLayout = formLayouts[i];
       this.set('formLayout', formLayout);
@@ -693,7 +694,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     }
   });
 
-  test('supported checkbox attributes propagate w/ angle brackets', async function(assert) {
+  (gte('3.4.0') ? test : skip)('supported checkbox attributes propagate w/ angle brackets', async function(assert) {
     for (let i = 0; i < formLayouts.length; i++) {
       let formLayout = formLayouts[i];
       this.set('formLayout', formLayout);
@@ -758,7 +759,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     }
   });
 
-  test('supported radio attributes propagate w/ angle brackets', async function(assert) {
+  (gte('3.4.0') ? test : skip)('supported radio attributes propagate w/ angle brackets', async function(assert) {
     for (let i = 0; i < formLayouts.length; i++) {
       let formLayout = formLayouts[i];
       this.set('formLayout', formLayout);

@@ -18,6 +18,7 @@ import {
 } from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import { gte } from 'ember-compatibility-helpers';
 
 module('Integration | Component | bs-tooltip', function(hooks) {
   setupRenderingTest(hooks);
@@ -445,7 +446,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     assert.dom('.tooltip').hasClass('wide');
   });
 
-  test('it passes all HTML attribute', async function(assert) {
+  (gte('3.4.0') ? test : skip)('it passes all HTML attribute', async function(assert) {
     await render(hbs`<div id="target"><BsTooltip @title="Dummy" class="wide" data-test role="foo" /></div>`);
     await triggerEvent('#target', 'mouseenter');
     assert.dom('.tooltip').hasClass('wide');

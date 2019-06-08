@@ -9,6 +9,7 @@ import {
 } from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import { gte } from 'ember-compatibility-helpers';
 
 module('Integration | Component | bs-popover', function(hooks) {
   setupRenderingTest(hooks);
@@ -184,7 +185,7 @@ module('Integration | Component | bs-popover', function(hooks) {
     assert.dom('.popover').hasClass('wide');
   });
 
-  test('it passes all HTML attribute', async function(assert) {
+  (gte('3.4.0') ? test : skip)('it passes all HTML attribute', async function(assert) {
     await render(hbs`<div id="target"><BsPopover @title="Dummy" class="wide" data-test role="foo">test</BsPopover></div>`);
     await click('#target');
     assert.dom('.popover').hasClass('wide');
