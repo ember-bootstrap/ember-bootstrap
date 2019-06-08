@@ -1,4 +1,4 @@
-import { module, test, skip } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { testBS3, testBS4 } from '../../../helpers/bootstrap-test';
@@ -76,8 +76,7 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
       .hasClass('custom-class-2', 'menu has custom-class-2 class');
   });
 
-  // @todo skipped until https://github.com/kybishop/ember-popper/issues/98 is resolved
-  skip('dropdown menu supports arbitrary attributes w/ angle brackets', async function(assert) {
+  test('dropdown menu supports arbitrary attributes w/ angle brackets', async function(assert) {
     await render(
       hbs`<BsDropdown::menu @isOpen={{true}} @toggleElement={{this.element}} class="custom-class-1" data-test-menu>Something</BsDropdown::menu>`
     );
@@ -88,6 +87,6 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
       .hasClass('custom-class-1', 'menu has custom-class-1 class');
     assert
       .dom('.dropdown-menu')
-      .hasAttribute('data-test-menu', 'menu has data-test-menu attribute');
+      .hasAttribute('data-test-menu');
   });
 });

@@ -107,7 +107,7 @@
     "ember-let-polyfill": "^0.1.0",
     "ember-maybe-in-element": "^0.2.0",
     "ember-named-arguments-polyfill": "^1.0.0",
-    "ember-popper": "^0.9.0",
+    "ember-popper": "^0.10.0",
     "ember-router-service-polyfill": "^1.0.3",
     "findup-sync": "^3.0.0",
     "fs-extra": "^7.0.1",

@@ -445,8 +445,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     assert.dom('.tooltip').hasClass('wide');
   });
 
-  // @todo skipped until https://github.com/kybishop/ember-popper/issues/98 is resolved
-  skip('it passes all HTML attribute', async function(assert) {
+  test('it passes all HTML attribute', async function(assert) {
     await render(hbs`<div id="target"><BsTooltip @title="Dummy" class="wide" data-test role="foo" /></div>`);
     await triggerEvent('#target', 'mouseenter');
     assert.dom('.tooltip').hasClass('wide');
