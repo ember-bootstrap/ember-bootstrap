@@ -7,9 +7,9 @@
   @popperContainer="#ember-bootstrap-wormhole"
   @onCreate={{action "updatePlacement"}}
   @onUpdate={{action "updatePlacement"}}
-  ...attributes
   @id={{@id}}
   @class={{this.popperClass}}
+  ...attributes
 >
   <div class={{this.arrowClass}}></div>
   {{#if this.hasTitle}}
