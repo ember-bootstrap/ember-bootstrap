@@ -23,7 +23,6 @@ export default Component.extend({
    * @type {Ember.Array}
    * @public
    */
-  messages: null,
 
   /**
    * Whether or not should display several errors at the same time.

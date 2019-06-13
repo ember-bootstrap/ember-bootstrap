@@ -1,16 +1,15 @@
 {{#if hasBlockParams}}
   {{yield
     (hash
-      title=(component titleComponent collapsed=collapsed disabled=disabled onClick=(action onClick value))
-      body=(component bodyComponent collapsed=collapsed)
+      title=(component this.titleComponent collapsed=this.collapsed disabled=this.disabled onClick=(action onClick value))
+      body=(component this.bodyComponent collapsed=this.collapsed)
     )
   }}
-
 {{else}}
-  {{#component titleComponent collapsed=collapsed disabled=disabled onClick=(action onClick value)}}
+  {{#component this.titleComponent collapsed=this.collapsed disabled=this.disabled onClick=(action onClick value)}}
     {{title}}
   {{/component}}
-  {{#component bodyComponent collapsed=collapsed}}
+  {{#component this.bodyComponent collapsed=this.collapsed}}
     {{yield}}
   {{/component}}
 {{/if}}

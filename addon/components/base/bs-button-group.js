@@ -112,7 +112,6 @@ export default Component.extend(SizeClass, {
    * @default null
    * @public
    */
-  type: null,
 
   /**
    * The value of the button group, computed by its child buttons.
@@ -126,7 +125,6 @@ export default Component.extend(SizeClass, {
    * @type array
    * @public
    */
-  value: undefined,
 
   /**
    * @property isRadio

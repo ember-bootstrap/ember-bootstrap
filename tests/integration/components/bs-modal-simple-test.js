@@ -495,16 +495,6 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     assert.ok(submitAction.calledOnce, 'submit action has been called.');
   });
 
-  test('it passes along class attribute', async function(assert) {
-    await render(hbs`
-      {{#bs-modal-simple fade=false class="custom"}}
-        template block text
-      {{/bs-modal-simple}}
-    `);
-
-    assert.dom('.modal.custom').exists({ count: 1 });
-  });
-
   test('closing modal does not modify public open property', async function(assert) {
     this.set('open', true);
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false open=open}}Hello world!{{/bs-modal-simple}}`);
@@ -526,6 +516,29 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     assert.dom('.modal').hasAttribute('role', 'dialog');
     assert.dom('.modal-dialog').hasAttribute('role', 'document');
     assert.dom('.modal').hasAttribute('aria-labelledby', modalTitleId);
+  });
+
+  test('it passes along class attribute', async function(assert) {
+    await render(hbs`
+      {{#bs-modal-simple fade=false class="custom"}}
+        template block text
+      {{/bs-modal-simple}}
+    `);
+
+    assert.dom('.modal.custom').exists({ count: 1 });
+  });
+
+  test('it passes along HTML attributes', async function(assert) {
+    await render(hbs`
+      <BsModalSimple @fade={{false}} class="custom" role="alert" data-test>
+        template block text
+      </BsModalSimple>
+    `);
+
+    assert.dom('.modal').exists({ count: 1 });
+    assert.dom('.modal').hasClass('custom');
+    assert.dom('.modal').hasAttribute('role', 'alert');
+    assert.dom('.modal').hasAttribute('data-test');
   });
 
 });

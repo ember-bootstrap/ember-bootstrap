@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { run } from '@ember/runloop';
 import EmberObject from '@ember/object';
 import { A, isArray } from '@ember/array';
-import { module } from 'qunit';
+import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { clearRender, render, click, fillIn, triggerEvent, focus, blur } from '@ember/test-helpers';
 import {
@@ -21,6 +21,7 @@ import {
 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
+import { gte } from 'ember-compatibility-helpers';
 
 const formLayouts = ['vertical', 'horizontal', 'inline'];
 const supportedInputAttributes = {
@@ -519,6 +520,56 @@ module('Integration | Component | bs-form/element', function(hooks) {
     }
   });
 
+  (gte('3.4.0') ? test : skip)('supported input attributes propagate w/ angle brackets', async function(assert) {
+    for (let i = 0; i < formLayouts.length; i++) {
+      let formLayout = formLayouts[i];
+      this.set('formLayout', formLayout);
+      let resetProps = Object.keys(supportedInputAttributes).reduce((prev, key) => {
+        prev[key] = undefined;
+        return prev;
+      }, {});
+      this.setProperties(resetProps);
+      await render(hbs`<BsForm::element @formLayout={{this.formLayout}}
+        name={{this.name}}
+        required={{this.required}}
+        readonly={{this.readonly}}
+        placeholder={{this.placeholder}}
+        disabled={{this.disabled}}
+        autofocus={{this.autofocus}}
+        size={{this.size}}
+        tabindex={{this.tabindex}}
+        minlength={{this.minlength}}
+        maxlength={{this.maxlength}}
+        min={{this.min}}
+        max={{this.max}}
+        pattern={{this.pattern}}
+        accept={{this.accept}}
+        autocomplete={{this.autocomplete}}
+        autocapitalize={{this.autocapitalize}}
+        autocorrect={{this.autocorrect}}
+        autosave={{this.autosave}}
+        inputmode={{this.inputmode}}
+        multiple={{this.multiple}}
+        step={{this.step}}
+        form={{this.form}}
+        spellcheck={{this.spellcheck}}
+        title={{this.title}}
+      />`);
+
+      for (let attribute in supportedInputAttributes) {
+        assert.equal(this.element.querySelector('input').getAttribute(attribute), undefined, `input attribute ${attribute} is undefined [${formLayout}]`);
+        let value = supportedInputAttributes[attribute];
+        this.set(attribute, value);
+        if (value === true) {
+          assert.ok(this.element.querySelector('input').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
+        } else {
+          assert.equal(this.element.querySelector('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
+        }
+      }
+      await render(hbs``); // hack to prevent browser exception when setting size to undefined
+    }
+  });
+
   test('supported textarea attributes propagate', async function(assert) {
     for (let i = 0; i < formLayouts.length; i++) {
       let formLayout = formLayouts[i];
@@ -565,6 +616,52 @@ module('Integration | Component | bs-form/element', function(hooks) {
     }
   });
 
+  (gte('3.4.0') ? test : skip)('supported textarea attributes propagate w/ angle brackets', async function(assert) {
+    for (let i = 0; i < formLayouts.length; i++) {
+      let formLayout = formLayouts[i];
+      this.set('formLayout', formLayout);
+      let resetProps = Object.keys(supportedTextareaAttributes).reduce((prev, key) => {
+        prev[key] = undefined;
+        return prev;
+      }, {});
+      this.setProperties(resetProps);
+      await render(hbs`<BsForm::element @formLayout={{this.formLayout}} @controlType="textarea"
+        name={{this.name}}
+        rows={{this.rows}}
+        cols={{this.cols}}
+        required={{this.required}}
+        readonly={{this.readonly}}
+        placeholder={{this.placeholder}}
+        disabled={{this.disabled}}
+        autofocus={{this.autofocus}}
+        tabindex={{this.tabindex}}
+        minlength={{this.minlength}}
+        maxlength={{this.maxlength}}
+        autocomplete={{this.autocomplete}}
+        autocapitalize={{this.autocapitalize}}
+        autocorrect={{this.autocorrect}}
+        form={{this.form}}
+        spellcheck={{this.spellcheck}}
+        wrap={{this.wrap}}
+        title={{this.title}}
+      />`);
+
+      for (let attribute in supportedTextareaAttributes) {
+        assert.equal(this.element.querySelector('textarea').getAttribute(attribute), undefined, `textarea attribute ${attribute} is undefined [${formLayout}]`);
+        let value = supportedTextareaAttributes[attribute];
+        this.set(attribute, value);
+        if (value === true) {
+          assert.ok(this.element.querySelector('textarea').hasAttribute(attribute), `textarea has attribute ${attribute} [${formLayout}]`);
+        } else {
+          assert.equal(this.element.querySelector('textarea').getAttribute(attribute), value, `textarea attribute ${attribute} is ${value} [${formLayout}]`);
+        }
+      }
+
+      // Without this MSEdge will fail with an invalid argument exception in Glimmer!??
+      await clearRender();
+    }
+  });
+
   test('supported checkbox attributes propagate', async function(assert) {
     for (let i = 0; i < formLayouts.length; i++) {
       let formLayout = formLayouts[i];
@@ -583,6 +680,104 @@ module('Integration | Component | bs-form/element', function(hooks) {
         form=form
         title=title
       }}`);
+
+      for (let attribute in supportedCheckboxAttributes) {
+        assert.equal(this.element.querySelector('input').getAttribute(attribute), undefined, `checkbox attribute ${attribute} is undefined [${formLayout}]`);
+        let value = supportedCheckboxAttributes[attribute];
+        this.set(attribute, value);
+        if (value === true) {
+          assert.ok(this.element.querySelector('input').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
+        } else {
+          assert.equal(this.element.querySelector('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
+        }
+      }
+    }
+  });
+
+  (gte('3.4.0') ? test : skip)('supported checkbox attributes propagate w/ angle brackets', async function(assert) {
+    for (let i = 0; i < formLayouts.length; i++) {
+      let formLayout = formLayouts[i];
+      this.set('formLayout', formLayout);
+      let resetProps = Object.keys(supportedCheckboxAttributes).reduce((prev, key) => {
+        prev[key] = undefined;
+        return prev;
+      }, {});
+      this.setProperties(resetProps);
+      await render(hbs`<BsForm::element @controlType="checkbox" @formLayout={{this.formLayout}}
+        name={{this.name}}
+        required={{this.required}}
+        disabled={{this.disabled}}
+        autofocus={{this.autofocus}}
+        tabindex={{this.tabindex}}
+        form={{this.form}}
+        title={{this.title}}
+      />`);
+
+      for (let attribute in supportedCheckboxAttributes) {
+        assert.equal(this.element.querySelector('input').getAttribute(attribute), undefined, `checkbox attribute ${attribute} is undefined [${formLayout}]`);
+        let value = supportedCheckboxAttributes[attribute];
+        this.set(attribute, value);
+        if (value === true) {
+          assert.ok(this.element.querySelector('input').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
+        } else {
+          assert.equal(this.element.querySelector('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
+        }
+      }
+    }
+  });
+
+  test('supported radio attributes propagate', async function(assert) {
+    for (let i = 0; i < formLayouts.length; i++) {
+      let formLayout = formLayouts[i];
+      this.set('formLayout', formLayout);
+      this.set('options', [1]);
+      let resetProps = Object.keys(supportedCheckboxAttributes).reduce((prev, key) => {
+        prev[key] = undefined;
+        return prev;
+      }, {});
+      this.setProperties(resetProps);
+      await render(hbs`{{bs-form/element controlType="radio" formLayout=formLayout options=this.options
+        name=name
+        required=required
+        disabled=disabled
+        autofocus=autofocus
+        tabindex=tabindex
+        form=form
+        title=title
+      }}`);
+
+      for (let attribute in supportedCheckboxAttributes) {
+        assert.equal(this.element.querySelector('input').getAttribute(attribute), undefined, `checkbox attribute ${attribute} is undefined [${formLayout}]`);
+        let value = supportedCheckboxAttributes[attribute];
+        this.set(attribute, value);
+        if (value === true) {
+          assert.ok(this.element.querySelector('input').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
+        } else {
+          assert.equal(this.element.querySelector('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
+        }
+      }
+    }
+  });
+
+  (gte('3.4.0') ? test : skip)('supported radio attributes propagate w/ angle brackets', async function(assert) {
+    for (let i = 0; i < formLayouts.length; i++) {
+      let formLayout = formLayouts[i];
+      this.set('formLayout', formLayout);
+      this.set('options', [1]);
+      let resetProps = Object.keys(supportedCheckboxAttributes).reduce((prev, key) => {
+        prev[key] = undefined;
+        return prev;
+      }, {});
+      this.setProperties(resetProps);
+      await render(hbs`<BsForm::element @controlType="radio" @formLayout={{this.formLayout}} @options={{this.options}}
+        name={{this.name}}
+        required={{this.required}}
+        disabled={{this.disabled}}
+        autofocus={{this.autofocus}}
+        tabindex={{this.tabindex}}
+        form={{this.form}}
+        title={{this.title}}
+      />`);
 
       for (let attribute in supportedCheckboxAttributes) {
         assert.equal(this.element.querySelector('input').getAttribute(attribute), undefined, `checkbox attribute ${attribute} is undefined [${formLayout}]`);

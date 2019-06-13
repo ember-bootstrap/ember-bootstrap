@@ -9,6 +9,7 @@ import {
 } from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import { gte } from 'ember-compatibility-helpers';
 
 module('Integration | Component | bs-popover', function(hooks) {
   setupRenderingTest(hooks);
@@ -152,7 +153,7 @@ module('Integration | Component | bs-popover', function(hooks) {
     assert.dom('.popover').doesNotExist('popover is not visible');
     await click('#target');
     assert.dom('.popover').exists('popover visible again');
-  })
+  });
 
   test('non-click-initiated close action does not interfere with click-to-open', async function(assert) {
     await render(
@@ -176,5 +177,19 @@ module('Integration | Component | bs-popover', function(hooks) {
     assert.dom('.popover').doesNotExist('popover is not visible');
     await click('#target');
     assert.dom('.popover').exists('popover visible again');
-  })
+  });
+
+  test('it passes along class attribute', async function(assert) {
+    await render(hbs`<div id="target">{{#bs-popover title="Dummy" class="wide"}}test{{/bs-popover}}</div>`);
+    await click('#target');
+    assert.dom('.popover').hasClass('wide');
+  });
+
+  (gte('3.4.0') ? test : skip)('it passes all HTML attribute', async function(assert) {
+    await render(hbs`<div id="target"><BsPopover @title="Dummy" class="wide" data-test role="foo">test</BsPopover></div>`);
+    await click('#target');
+    assert.dom('.popover').hasClass('wide');
+    assert.dom('.popover').hasAttribute('role', 'foo');
+    assert.dom('.popover').hasAttribute('data-test');
+  });
 });

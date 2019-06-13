@@ -1,8 +1,8 @@
-{{#if icon}}<i class={{icon}}></i> {{/if}}{{text}}{{yield
+{{#if this.icon}}<i class={{this.icon}}></i> {{/if}}{{this.text}}{{yield
   (hash
-    isFulfilled=isFulfilled
-    isPending=isPending
-    isRejected=isRejected
-    isSettled=isSettled
+    isFulfilled=this.isFulfilled
+    isPending=this.isPending
+    isRejected=this.isRejected
+    isSettled=this.isSettled
   )
 }}
