@@ -26,21 +26,24 @@
       @controlType="checkbox"
       @label="Fade animation"
       @property="fade"
+      class="ml-sm-2"
      />
 
     <form.element
       @controlType="checkbox"
       @label="Dismissible"
       @property="dismissible"
+      class="ml-sm-2"
      />
-
     <form.element
       @controlType="power-select"
       @options={{typeChoices}}
       @label="Type"
-      @property="type" as |el|
+      @property="type"
+      class="ml-sm-2"
+      as |el|
     >
-      <el.control @searchEnabled />
+      <el.control @searchEnabled @class="ml-1" />
     </form.element>
   </BsForm>
   <hr>

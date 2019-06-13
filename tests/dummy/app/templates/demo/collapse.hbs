@@ -1,7 +1,7 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET collapse-demo -->
-  <BsButton @active={{notCollapsed}} @onClick={{action "toggle"}}>
-    {{#if collapsed}}
+  <BsButton @active={{this.notCollapsed}} @onClick={{action "toggle"}}>
+    {{#if this.collapsed}}
       Show
     {{else}}
       Hide
@@ -10,7 +10,7 @@
 
   <hr>
 
-  <BsCollapse @collapsed={{collapsed}}>
+  <BsCollapse @collapsed={{this.collapsed}}>
     <div class="well">
       <p>This is collapsible content</p>
     </div>

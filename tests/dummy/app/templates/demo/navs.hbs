@@ -5,7 +5,7 @@
       @options={{typeChoices}}
       @label="Type"
       @property="type" as |el|>
-      <el.control @searchEnabled />
+      <el.control @searchEnabled @class="ml-sm-1" />
     </form.element>
     <form.element
       @controlType="checkbox"
@@ -13,6 +13,7 @@
       @label="Stacked"
       @property="stacked"
       @onChange={{action "updateStacked"}}
+      class="ml-sm-2"
      />
 
     <form.element
@@ -20,6 +21,7 @@
       @disabled={{stacked}}
       @label="Justified"
       @property="justified"
+      class="ml-sm-2"
      />
 
     <form.element
@@ -27,6 +29,7 @@
       @disabled={{stacked}}
       @label="Fill"
       @property="fill"
+      class="ml-sm-2"
      />
 
   </BsForm>
