@@ -2,10 +2,10 @@
   <BsForm @model={{this}} as |form|>
     <div class="row">
       <div class="col-sm-6">
-        <form.element @controlType="checkbox" label="wrap" @property="wrap" />
+        <form.element @controlType="checkbox" @label="wrap" @property="wrap" />
         <form.element
           @controlType="number"
-          label="index"
+          @label="index"
           @max="2"
           @min="0"
           @property="index"
@@ -13,14 +13,14 @@
 
         <form.element
           @controlType="number"
-          label="interval"
+          @label="interval"
           @min="1"
           @property="interval"
          />
 
         <form.element
           @controlType="checkbox"
-          label="keyboard"
+          @label="keyboard"
           @property="keyboard"
          />
 
@@ -28,13 +28,13 @@
       <div class="col-sm-6">
         <form.element
           @controlType="checkbox"
-          label="ltr (left to right)"
+          @label="ltr (left to right)"
           @property="ltr"
          />
 
         <form.element
           @controlType="number"
-          label="Number of slides"
+          @label="Number of slides"
           @max="3"
           @min="0"
           @property="numberOfSlides"
@@ -42,19 +42,19 @@
 
         <form.element
           @controlType="checkbox"
-          label="pauseOnMouseEnter"
+          @label="pauseOnMouseEnter"
           @property="pauseOnMouseEnter"
          />
 
         <form.element
           @controlType="checkbox"
-          label="showControls"
+          @label="showControls"
           @property="showControls"
          />
 
         <form.element
           @controlType="checkbox"
-          label="showIndicators"
+          @label="showIndicators"
           @property="showIndicators"
          />
 
