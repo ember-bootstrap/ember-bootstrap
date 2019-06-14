@@ -59,11 +59,12 @@
             <div class="file">
                 <pre class="prettyprint linenums">
             import Component from &#x27;@ember/component&#x27;;
-            import RSVP from &#x27;rsvp&#x27;;
             import { set, computed } from &#x27;@ember/object&#x27;;
+            import { gt } from &#x27;@ember/object/computed&#x27;;
             import { assert } from &#x27;@ember/debug&#x27;;
             import { isPresent } from &#x27;@ember/utils&#x27;;
             import layout from &#x27;ember-bootstrap/templates/components/bs-form&#x27;;
+            import RSVP from &#x27;rsvp&#x27;;
             
             /**
               Render a form with the appropriate Bootstrap layout class (see &#x60;formLayout&#x60;).
@@ -247,7 +248,7 @@
                * @readonly
                * @private
                */
-              isSubmitting: false,
+              isSubmitting: gt(&#x27;pendingSubmissions&#x27;, 0),
             
               /**
                * &#x60;isSubmitted&#x60; is &#x60;true&#x60; if last submission was successful.
@@ -414,46 +415,65 @@
                * @method submit
                * @private
                */
-              submit(e) {
+              submitHandler(e) {
                 if (e) {
                   e.preventDefault();
                 }
             
                 if (this.get(&#x27;preventConcurrency&#x27;) &amp;&amp; this.get(&#x27;isSubmitting&#x27;)) {
-                  return;
+                  return RSVP.resolve();
                 }
-            
-                this.set(&#x27;isSubmitting&#x27;, true);
-                this.incrementProperty(&#x27;pendingSubmissions&#x27;);
             
                 let model = this.get(&#x27;model&#x27;);
             
+                this.incrementProperty(&#x27;pendingSubmissions&#x27;);
                 this.get(&#x27;onBefore&#x27;)(model);
             
-                RSVP.resolve(this.get(&#x27;hasValidator&#x27;) ? this.validate(this.get(&#x27;model&#x27;)) : null)
+                return RSVP.resolve()
+                  .then(() =&gt; {
+                    return this.get(&#x27;hasValidator&#x27;) ? this.validate(model) : null;
+                  })
                   .then(
                     (record) =&gt; {
+                      if (this.get(&#x27;hideValidationsOnSubmit&#x27;) === true) {
+                        this.set(&#x27;showAllValidations&#x27;, false);
+                      }
+            
                       return RSVP.resolve()
                         .then(() =&gt; {
-                          if (this.get(&#x27;hideValidationsOnSubmit&#x27;) === true) {
-                            this.set(&#x27;showAllValidations&#x27;, false);
-                          }
                           return this.get(&#x27;onSubmit&#x27;)(model, record);
                         })
-                        .then(
-                          () =&gt; {
-                            if (!this.get(&#x27;isDestroyed&#x27;)) {
-                              this.set(&#x27;isSubmitted&#x27;, true);
-                            }
-                          },
-                          () =&gt; {
-                            if (!this.get(&#x27;isDestroyed&#x27;)) {
-                              this.set(&#x27;isRejected&#x27;, true);
-                            }
+                        .then(() =&gt; {
+                          if (this.get(&#x27;isDestroyed&#x27;)) {
+                            return;
                           }
-                        );
+            
+                          this.set(&#x27;isSubmitted&#x27;, true);
+                        })
+                        .catch((error) =&gt; {
+                          if (this.get(&#x27;isDestroyed&#x27;)) {
+                            return;
+                          }
+            
+                          this.set(&#x27;isRejected&#x27;, true);
+            
+                          throw error;
+                        })
+                        .finally(() =&gt; {
+                          if (this.get(&#x27;isDestroyed&#x27;)) {
+                            return;
+                          }
+            
+                          this.decrementProperty(&#x27;pendingSubmissions&#x27;);
+            
+                          // reset forced hiding of validations
+                          if (this.get(&#x27;showAllValidations&#x27;) === false) {
+                            this.set(&#x27;showAllValidations&#x27;, undefined);
+                          }
+                        });
                     },
                     (error) =&gt; {
+                      // model is invalid
                       this.set(&#x27;showAllValidations&#x27;, true);
             
                       return RSVP.resolve()
@@ -461,26 +481,22 @@
                           return this.get(&#x27;onInvalid&#x27;)(model, error);
                         })
                         .finally(() =&gt; {
-                          if (!this.get(&#x27;isDestroyed&#x27;)) {
-                            this.set(&#x27;isRejected&#x27;, true);
+                          if (this.get(&#x27;isDestroyed&#x27;)) {
+                            return;
                           }
+            
+                          this.set(&#x27;isRejected&#x27;, true);
+                          this.decrementProperty(&#x27;pendingSubmissions&#x27;);
+            
+                          throw error;
                         });
                     }
                   )
-                  .finally(() =&gt; {
-                    if (!this.get(&#x27;isDestroyed&#x27;)) {
-                      if (this.get(&#x27;pendingSubmissions&#x27;) === 1) {
-                        this.set(&#x27;isSubmitting&#x27;, false);
-                      }
+              },
             
-                      this.decrementProperty(&#x27;pendingSubmissions&#x27;);
-            
-                      // reset forced hiding of validations
-                      if (this.get(&#x27;showAllValidations&#x27;) === false) {
-                        this.set(&#x27;showAllValidations&#x27;, undefined);
-                      }
-                    }
-                  });
+              submit() {
+                this.submitHandler(...arguments)
+                  .catch(() =&gt; {});
               },
             
               keyPress(e) {
@@ -518,7 +534,11 @@
                 resetSubmissionState() {
                   this.set(&#x27;isSubmitted&#x27;, false);
                   this.set(&#x27;isRejected&#x27;, false);
-                }
+                },
+            
+                submit() {
+                  return this.submitHandler();
+                },
               }
             });
             

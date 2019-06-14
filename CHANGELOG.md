@@ -1,4 +1,11 @@
 
+## v2.8.0 (2019-06-14)
+
+#### Features
+* [#789](https://github.com/kaliber5/ember-bootstrap/pull/789) Yield submit action from BsForm ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 1
+- jelhan ([@jelhan](https://github.com/jelhan))
 ## v2.7.1 (2019-05-26)
 
 #### Bug Fixes

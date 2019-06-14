@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "v2.7.1"
+        "version": "v2.8.0"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -1664,7 +1664,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-form.js",
-            "line": 8,
+            "line": 9,
             "description": "Render a form with the appropriate Bootstrap layout class (see `formLayout`).\nAllows setting a `model` that nested `Components.FormElement`s can access, and that can provide form validation (see below)\n\nYou can use whatever markup you like within the form. The following shows Bootstrap 3 usage for the internal markup.\n\n ```handlebars\n {{#bs-form onSubmit=(action \"submit\") as |form|}}\n   {{#form.group validation=firstNameValidation}}\n     <label class=\"control-label\">First name</label>\n     <input value={{firstname}} class=\"form-control\" oninput={{action (mut firstname) value=\"target.value\"}} type=\"text\">\n  {{/form.group}}\n{{/bs-form}}\n```\n\nHowever to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`\nas nested components. See below for an example.\n\n### Submitting the form\n\nWhen the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the `onSubmit` action\nwill be sent to the controller or parent component.\nIn case the form supports validation (see \"Form validation\" below), the `onBefore` action is called (which allows you to\ndo e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the `onInvalid`\naction is sent instead of `onSubmit`.\n\n### Use with Components.FormElement\n\nWhen using `Components.FormElement`s with their `property` set to property names of the form's validation enabled\n`model`, you gain some additional powerful features:\n* the appropriate Bootstrap markup for the given `formLayout` and the form element's `controlType` is automatically generated\n* markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form\nwith an invalid validation, or when focusing out of invalid inputs\n\n```handlebars\n{{#bs-form formLayout=\"horizontal\" model=this onSubmit=(action \"submit\") as |form|}}\n  {{form.element controlType=\"email\" label=\"Email\" placeholder=\"Email\" property=\"email\"}}\n  {{form.element controlType=\"password\" label=\"Password\" placeholder=\"Password\" property=\"password\"}}\n  {{form.element controlType=\"checkbox\" label=\"Remember me\" property=\"rememberMe\"}}\n  {{bs-button defaultText=\"Submit\" type=\"primary\" buttonType=\"submit\"}}\n{{/bs-form}}\n```\n\nSee the [Components.FormElement](Components.FormElement.html) API docs for further information.\n\n### Form validation\n\nAll version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.\nInstead support is added usually by additional Ember addons, for example:\n\n* [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)\n* [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)\n* [ember-bootstrap-changeset-validations](https://github.com/kaliber5/ember-bootstrap-changeset-validations): adds support for [ember-changeset](https://github.com/poteto/ember-changeset)\n\nTo add your own validation support, you have to:\n\n* extend this component, setting `hasValidator` to true if validations are available (by means of a computed property for example), and implementing the `validate` method\n* extend the [Components.FormElement](Components.FormElement.html) component and implement the `setupValidations` hook or simply override the `errors` property to add the validation error messages to be displayed\n\nWhen validation fails, the appropriate Bootstrap markup is added automatically, i.e. the error classes are applied and\nthe validation messages are shown for each form element. In case the validation library supports it, also warning messages\nare shown. See the [Components.FormElement](Components.FormElement.html) documentation for further details.\n\nSee the above mentioned addons for examples.\n\n### Submission state\n\nA `isSubmitting` property is yielded, which is `true` after submit has been triggered and before the Promise returned\nby `onSubmit` is fulfilled. It could be used to disable form's submit button and showing a loading spinner for example:\n\n```\n{{#bs-form onSubmit=(action 'save') as |form|}}\n  {{#bs-button buttonType='submit' disabled=form.isSubmitting}}\n    Save\n    {{#if form.isSubmitting}} {{fa-icon 'spinner'}} {{/if}}\n  {{/bs-button}}\n{{/bs-form}}\n```\n\nAdditionaly `isSubmitted` and `isRejected` properties are yielded. `isSubmitted` is `true` if last submission was successful.\n`isRejected` is `true` if last submission was rejected due to validation errors or by an action bound to `onSubmit` event, returning a rejected promise.\nBoth are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:\n\n```\n{{#bs-form onSubmit=(action 'save') as |form|}}\n  {{#bs-button buttonType='submit' type=(if form.isRejected \"danger\" \"primary\")}}\n    Save\n  {{/bs-button}}\n{{/bs-form}}\n```",
             "extends": "Ember.Component",
             "access": "public",
@@ -6310,7 +6310,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 111,
+            "line": 112,
             "description": "Bootstrap form class name (computed)",
             "itemtype": "property",
             "name": "layoutClass",
@@ -6323,7 +6323,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 121,
+            "line": 122,
             "description": "Set a model that this form should represent. This serves several purposes:\n\n* child `Components.FormElement`s can access and bind to this model by their `property`\n* when the model supports validation by using the [ember-validations](https://github.com/dockyard/ember-validations) mixin,\nchild `Components.FormElement`s will look at the validation information of their `property` and render their form group accordingly.\nMoreover the form's `submit` event handler will validate the model and deny submitting if the model is not validated successfully.",
             "itemtype": "property",
             "name": "model",
@@ -6335,7 +6335,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 135,
+            "line": 136,
             "description": "Set the layout of the form to either \"vertical\", \"horizontal\" or \"inline\". See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal",
             "itemtype": "property",
             "name": "formLayout",
@@ -6347,7 +6347,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 144,
+            "line": 145,
             "description": "Check if validating the model is supported. This needs to be implemented by another addon.",
             "itemtype": "property",
             "name": "hasValidator",
@@ -6360,7 +6360,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 154,
+            "line": 155,
             "description": "The Bootstrap grid class for form labels. This is used by the `Components.FormElement` class as a default for the\nwhole form.",
             "itemtype": "property",
             "name": "horizontalLabelGridClass",
@@ -6373,7 +6373,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 165,
+            "line": 166,
             "itemtype": "property",
             "name": "elementComponent",
             "type": "{String}",
@@ -6384,7 +6384,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 172,
+            "line": 173,
             "itemtype": "property",
             "name": "groupComponent",
             "type": "{String}",
@@ -6395,7 +6395,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 179,
+            "line": 180,
             "description": "`isSubmitting` is `true` after `submit` event has been triggered and until Promise returned by `onSubmit` is\nfulfilled. If `validate` returns a Promise that one is also taken into consideration.\n\nIf multiple concurrent submit events are fired, it stays `true` until all submit events have been fulfilled.",
             "itemtype": "property",
             "name": "isSubmitting",
@@ -6408,7 +6408,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 192,
+            "line": 193,
             "description": "`isSubmitted` is `true` if last submission was successful.\nA change to any form element resets it's value to `false`.\n\nIf not using `Components.FormElement`, `resetSubmissionState` action must be triggered on each change to reset\nform's submission state.",
             "itemtype": "property",
             "name": "isSubmitted",
@@ -6420,7 +6420,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 205,
+            "line": 206,
             "description": "`isRejected` is `true` if last submission was rejected.\nA submission is considered as rejected if form is invalid as well as if `onSubmit` rejects.\nA change to any form element resets it's value to `false`.\n\nIf not using `Components.FormElement`, `resetSubmissionState` action must be triggered on each change to reset\nform's submission state.",
             "itemtype": "property",
             "name": "isRejected",
@@ -6432,7 +6432,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 219,
+            "line": 220,
             "description": "Count of pending submissions.",
             "itemtype": "property",
             "name": "pendingSubmissions",
@@ -6444,7 +6444,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 228,
+            "line": 229,
             "description": "If set to true pressing enter will submit the form, even if no submit button is present",
             "itemtype": "property",
             "name": "submitOnEnter",
@@ -6457,7 +6457,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 238,
+            "line": 239,
             "description": "Controls if `onSubmit` action is fired concurrently. If `true` submitting form multiple\ntimes will not trigger `onSubmit` action if a Promise returned by previous submission is\nnot settled yet.\n\nDroping a submission also prevents rerunning validation and `onBefore` hook.",
             "itemtype": "property",
             "name": "preventConcurrency",
@@ -6470,7 +6470,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 252,
+            "line": 253,
             "description": "If true, after successful validation and upon submitting the form, all current element validations will be hidden.\nIf the form remains visible, the user would have to focus out of elements of submit the form again for the\nvalidations to show up again, as if a fresh new form component had been rendered.",
             "itemtype": "property",
             "name": "hideValidationsOnSubmit",
@@ -6483,7 +6483,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 264,
+            "line": 265,
             "description": "If set to true novalidate attribute is present on form element",
             "itemtype": "property",
             "name": "novalidate",
@@ -6496,7 +6496,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 278,
+            "line": 279,
             "description": "If set to true the `readonly` property of all yielded form elements will be set, making their form controls read-only.",
             "itemtype": "property",
             "name": "readonly",
@@ -6509,7 +6509,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 288,
+            "line": 289,
             "description": "If set to true the `disabled` property of all yielded form elements will be set, making their form controls disabled.",
             "itemtype": "property",
             "name": "disabled",
@@ -6522,7 +6522,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 298,
+            "line": 299,
             "description": "Validate hook which will return a promise that will either resolve if the model is valid\nor reject if it's not. This should be overridden to add validation support.",
             "itemtype": "method",
             "name": "validate",
@@ -6544,7 +6544,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 309,
+            "line": 310,
             "itemtype": "property",
             "name": "showAllValidations",
             "type": "boolean",
@@ -6556,7 +6556,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 317,
+            "line": 318,
             "description": "Action is called before the form is validated (if possible) and submitted.",
             "itemtype": "event",
             "name": "onBefore",
@@ -6574,7 +6574,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 326,
+            "line": 327,
             "description": "Action is called when submit has been triggered and the model has passed all validations (if present).",
             "itemtype": "event",
             "name": "onSubmit",
@@ -6597,7 +6597,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 336,
+            "line": 337,
             "description": "Action is called when validation of the model has failed.",
             "itemtype": "event",
             "name": "onInvalid",
@@ -6620,7 +6620,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 346,
+            "line": 347,
             "description": "Submit handler that will send the default action (\"action\") to the controller when submitting the form.\n\nIf there is a supplied `model` that supports validation (`hasValidator`) the model will be validated before, and\nonly if validation is successful the default action will be sent. Otherwise an \"invalid\" action will be sent, and\nall the `showValidation` property of all child `Components.FormElement`s will be set to true, so error state and\nmessages will be shown automatically.",
             "itemtype": "method",
             "name": "submit",
