@@ -4292,7 +4292,7 @@ ember-cli-version-checker@^3.0.0:
     resolve "^1.9.0"
     semver "^5.6.0"
 
-ember-cli-yuidoc@^0.8.7:
+ember-cli-yuidoc@^0.8.8:
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/ember-cli-yuidoc/-/ember-cli-yuidoc-0.8.8.tgz#3858baaf85388a976024f9de40f1075fea58f606"
   integrity sha1-OFi6r4U4ipdgJPneQPEHX+pY9gY=
