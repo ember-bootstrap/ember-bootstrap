@@ -727,7 +727,7 @@ export default FormGroup.extend({
 
   /**
    * @method showValidationOnHandler
-   * @params {Event} event
+   * @param {Event} event
    * @private
    */
   showValidationOnHandler({ target, type }) {
