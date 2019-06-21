@@ -20,361 +20,361 @@ const nonDefaultLayouts = A([
 ]);
 
 /**
- Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.
+  Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.
 
- ### Form layout
+  ### Form layout
 
- The appropriate Bootstrap markup for the given `formLayout` and `controlType` is automatically generated to easily
- create forms without coding the default Bootstrap form markup by hand:
+  The appropriate Bootstrap markup for the given `formLayout` and `controlType` is automatically generated to easily
+  create forms without coding the default Bootstrap form markup by hand:
 
- ```hbs
- {{#bs-form formLayout="horizontal" onSubmit=(action "submit") as |form|}}
-   {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
-   {{form.element controlType="password" label="Password" placeholder="Password" value=password}}
-   {{form.element controlType="checkbox" label="Remember me" value=rememberMe}}
-   {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
- {{/bs-form}}
- ```
+  ```handlebars
+  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @controlType="email" @label="Email" @placeholder="Email" @value={{this.email}}" />
+    <form.element @controlType="password" @label="Password" @placeholder="Password" @value={{this.password}} />
+    <form.element @controlType="checkbox" @label="Remember me" @value={{this.rememberMe}} />
+    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+  </BsForm>
+  ```
 
- ### Control types
+  ### Control types
 
- The following control types are supported out of the box:
+  The following control types are supported out of the box:
 
- * Inputs (simple `text`, or any other HTML5 supported input types like `password`, `email` etc.)
- * Checkbox (single)
- * Radio Button (group)
- * Textarea
+  * Inputs (simple `text`, or any other HTML5 supported input types like `password`, `email` etc.)
+  * Checkbox (single)
+  * Radio Button (group)
+  * Textarea
 
- #### Radio Buttons
+  #### Radio Buttons
 
- For a group of mutually exclusive radio buttons to work, you must supply the `options` property with an array of
- options, each of which will be rendered with an appropriate radio button and its label. It can be either a simple array
- of strings or objects. In the latter case, you would have to set `optionLabelPath` to the property, that contains the
- label on these objects.
+  For a group of mutually exclusive radio buttons to work, you must supply the `options` property with an array of
+  options, each of which will be rendered with an appropriate radio button and its label. It can be either a simple array
+  of strings or objects. In the latter case, you would have to set `optionLabelPath` to the property, that contains the
+  label on these objects.
 
- ```hbs
- {{#bs-form model=this onSubmit=(action "submit") as |form|}}
-   {{form.element controlType="radio" label="Gender" options=genderOptions optionLabelPath="title" property="gender"}}
- {{/bs-form}}
- ```
+  ```hbs
+  <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @controlType="radio" @label="Gender" @options={{this.genderOptions}} @optionLabelPath="title" @property="gender" />
+  </BsForm>
+  ```
 
- The default layout for radios is stacked, but Bootstrap's inline layout is also supported using the `inline` property
- of the yielded control component:
+  The default layout for radios is stacked, but Bootstrap's inline layout is also supported using the `inline` property
+  of the yielded control component:
 
- ```hbs
- {{#bs-form model=this onSubmit=(action "submit") as |form|}}
-   {{#form.element controlType="radio" label="Gender" options=genderOptions property="gender" as |el|}}
-     {{el.control inline=true}}
-   {{/form.element}}
- {{/bs-form}}
- ```
+  ```hbs
+  <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @controlType="radio" @label="Gender" @options={{this.genderOptions}} @property="gender" as |el|>
+      <el.control @inline={{true}} />
+    </form.element>
+  </BsForm>
+  ```
 
- #### Custom controls
+  #### Custom controls
 
- Apart from the standard built-in browser controls (see the `controlType` property), you can use any custom control simply
- by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
- (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
+  Apart from the standard built-in browser controls (see the `controlType` property), you can use any custom control simply
+  by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
+  (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
 
- ```hbs
- {{#bs-form model=this onSubmit=(action "submit") as |form|}}
- {{#form.element label="Select-2" property="gender" useIcons=false as |el|}}
- {{select-2 id=el.id content=genderChoices optionLabelPath="label" value=el.value searchEnabled=false}}
- {{/form.element}}
- {{/bs-form}}
- ```
+  ```hbs
+  <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @label="Select-2" @property="gender" @useIcons={{false}} as |el|>
+      {{select-2 id=el.id content=genderChoices optionLabelPath="label" value=el.value searchEnabled=false}}
+    </form.element>
+  </BsForm>
+  ```
 
- The component yields a hash with the following properties:
- * `control`: the component that would be used for rendering the form control based on the given `controlType`
- * `id`: id to be used for the form control, so it matches the labels `for` attribute
- * `value`: the value of the form element
- * `validation`: the validation state of the element, `null` if no validation is to be shown, otherwise 'success', 'error' or 'warning'
+  The component yields a hash with the following properties:
+  * `control`: the component that would be used for rendering the form control based on the given `controlType`
+  * `id`: id to be used for the form control, so it matches the labels `for` attribute
+  * `value`: the value of the form element
+  * `validation`: the validation state of the element, `null` if no validation is to be shown, otherwise 'success', 'error' or 'warning'
 
- If your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports
- feedback icons with textual `<input class="form-control">` elements.
+  If your custom control does not render an input element, you should set `useIcons` to `false` since bootstrap only supports
+  feedback icons with textual `<input class="form-control">` elements.
 
- If you just want to customize the existing control component, you can use the aforementioned yielded `control` component
- to customize that existing component:
+  If you just want to customize the existing control component, you can use the aforementioned yielded `control` component
+  to customize that existing component:
 
- ```hbs
- {{#bs-form model=this onSubmit=(action "submit") as |form|}}
- {{#form.element label="Email" placeholder="Email" property="email" as |el|}}
- {{el.control class="input-lg"}}
- {{/form.element}}
- {{/bs-form}}
- ```
+  ```hbs
+  <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
+      <el.control class="input-lg" />
+    </form.element>
+  </BsForm>
+  ```
 
- If you are using the custom control quite often, you should consider writing an integration plugin like
- [`ember-bootstrap-power-select`](https://github.com/kaliber5/ember-bootstrap-power-select).
- To do so, you need to provide a component `{{bs-form/element/control/my-custom-control}}` which extends
- [`Components.FormElementControl`](Components.FormElementControl.html).
+  If you are using the custom control quite often, you should consider writing an integration plugin like
+  [`ember-bootstrap-power-select`](https://github.com/kaliber5/ember-bootstrap-power-select).
+  To do so, you need to provide a component `{{bs-form/element/control/my-custom-control}}` which extends
+  [`Components.FormElementControl`](Components.FormElementControl.html).
 
- ### Form validation
+  ### Form validation
 
- In the following example the control elements of the three form elements value will be bound to the properties
- (given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):
+  In the following example the control elements of the three form elements value will be bound to the properties
+  (given by `property`) of the form's `model`, which in this case is its controller (see `model=this`):
 
- ```hbs
- {{#bs-form formLayout="horizontal" model=this onSubmit=(action "submit") as |form|}}
-   {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
-   {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
-   {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
-   {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
- {{/bs-form}}
- ```
+  ```handlebars
+  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
+    <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" />
+    <form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" />
+    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+  </BsForm>
+  ```
 
- By using this indirection in comparison to directly binding the `value` property, you get the benefit of automatic
- form validation, given that your `model` has a supported means of validating itself.
- See [Components.Form](Components.Form.html) for details on how to enable form validation.
+  By using this indirection in comparison to directly binding the `value` property, you get the benefit of automatic
+  form validation, given that your `model` has a supported means of validating itself.
+  See [Components.Form](Components.Form.html) for details on how to enable form validation.
 
- In the example above the `model` was our controller itself, so the control elements were bound to the appropriate
- properties of our controller. A controller implementing validations on those properties could look like this:
+  In the example above the `model` was our controller itself, so the control elements were bound to the appropriate
+  properties of our controller. A controller implementing validations on those properties could look like this:
 
- ```js
- import Ember from 'ember';
- import EmberValidations from 'ember-validations';
+  ```js
+  import Ember from 'ember';
+  import EmberValidations from 'ember-validations';
 
- export default Ember.Controller.extend(EmberValidations,{
-   email: null,
-   password: null,
-   rememberMe: false,
-   validations: {
-     email: {
-       presence: true,
-       format: {
-         with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-       }
-     },
-     password: {
-       presence: true,
-       length: { minimum: 6, maximum: 10}
-     },
-     comments: {
-       length: { minimum: 5, maximum: 20}
-     }
-   }
- });
- ```
+  export default Ember.Controller.extend(EmberValidations,{
+    email: null,
+    password: null,
+    rememberMe: false,
+    validations: {
+      email: {
+        presence: true,
+        format: {
+          with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+        }
+      },
+      password: {
+        presence: true,
+        length: { minimum: 6, maximum: 10}
+      },
+      comments: {
+        length: { minimum: 5, maximum: 20}
+      }
+    }
+  });
+  ```
 
- If the `showValidation` property is `true` (which is automatically the case if a `focusOut` event is captured from the
- control element or the containing `Components.Form` was submitted with its `model` failing validation) and there are
- validation errors for the `model`'s `property`, the appropriate Bootstrap validation markup (see
- http://getbootstrap.com/css/#forms-control-validation) is applied:
+  If the `showValidation` property is `true` (which is automatically the case if a `focusOut` event is captured from the
+  control element or the containing `Components.Form` was submitted with its `model` failing validation) and there are
+  validation errors for the `model`'s `property`, the appropriate Bootstrap validation markup (see
+  http://getbootstrap.com/css/#forms-control-validation) is applied:
 
- * `validation` is set to 'error', which will set the `has-error` CSS class
- * the `errorIcon` feedback icon is displayed if `controlType` is a text field
- * the validation messages are displayed as Bootstrap `help-block`s in BS3 and `form-control-feedback` in BS4
+  * `validation` is set to 'error', which will set the `has-error` CSS class
+  * the `errorIcon` feedback icon is displayed if `controlType` is a text field
+  * the validation messages are displayed as Bootstrap `help-block`s in BS3 and `form-control-feedback` in BS4
 
- The same applies for warning messages, if the used validation library supports this. (Currently only
- [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations))
+  The same applies for warning messages, if the used validation library supports this. (Currently only
+  [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations))
 
- As soon as the validation is successful again...
+  As soon as the validation is successful again...
 
- * `validation` is set to 'success', which will set the `has-success` CSS class
- * the `successIcon` feedback icon is displayed if `controlType` is a text field
- * the validation messages are removed
+  * `validation` is set to 'success', which will set the `has-success` CSS class
+  * the `successIcon` feedback icon is displayed if `controlType` is a text field
+  * the validation messages are removed
 
- In case you want to display some error or warning message that is independent of the model's validation, for
- example to display a failure message on a login form after a failed authentication attempt (so not coming from
- the validation library), you can use the `customError` or `customWarning` properties to do so.
+  In case you want to display some error or warning message that is independent of the model's validation, for
+  example to display a failure message on a login form after a failed authentication attempt (so not coming from
+  the validation library), you can use the `customError` or `customWarning` properties to do so.
 
- ### HTML attributes
+  ### HTML attributes
 
- To set HTML attributes on the control element provided by this component, set them as properties of this component:
+  To set HTML attributes on the control element provided by this component, set them as properties of this component:
 
- ```hbs
- {{#bs-form formLayout="horizontal" model=this onSubmit=(action "submit") as |form|}}
- {{form.element controlType="email" label="Email" property="email"
-   placeholder="Email"
-   required=true
-   multiple=true
-   tabIndex=5
- }}
- ...
- {{/bs-form}}
- ```
+  ```hbs
+  {{#bs-form formLayout="horizontal" model=this onSubmit=(action "submit") as |form|}}
+  {{form.element controlType="email" label="Email" property="email"
+    placeholder="Email"
+    required=true
+    multiple=true
+    tabIndex=5
+  }}
+  ...
+  {{/bs-form}}
+  ```
 
- The following attributes are supported depending on the `controlType`:
+  The following attributes are supported depending on the `controlType`:
 
- <table class="table table-striped">
- <thead>
- <tr>
- <th></th>
- <th>textarea</th>
- <th>checkbox/radio</th>
- <th>all others</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td>accept</td>
- <td></td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>autocapitalize</td>
- <td>✔︎</td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>autocomplete</td>
- <td>✔︎</td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>autocorrect</td>
- <td>✔︎</td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>autofocus</td>
- <td>✔︎</td>
- <td>✔︎</td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>autosave</td>
- <td></td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>cols</td>
- <td>✔︎</td>
- <td></td>
- <td></td>
- </tr>
- <tr>
- <td>disabled</td>
- <td></td>
- <td>✔︎</td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>form</td>
- <td>✔︎</td>
- <td>✔︎</td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>inputmode</td>
- <td></td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>max</td>
- <td></td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>maxlength</td>
- <td>✔︎</td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>min</td>
- <td></td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>minlength</td>
- <td>✔︎</td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>multiple</td>
- <td></td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>name</td>
- <td>✔︎</td>
- <td>✔︎</td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>pattern</td>
- <td></td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>placeholder</td>
- <td>✔︎</td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>readonly</td>
- <td>✔︎</td>
- <td>︎</td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>required</td>
- <td>✔︎</td>
- <td>✔︎</td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>rows</td>
- <td>✔︎</td>
- <td></td>
- <td></td>
- </tr>
- <tr>
- <td>size<br>via <code>controlSize</code> property</td>
- <td></td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>spellcheck</td>
- <td>✔︎</td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>step</td>
- <td></td>
- <td></td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>tabindex</td>
- <td>✔︎</td>
- <td>✔︎</td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>title</td>
- <td>✔︎</td>
- <td>✔︎</td>
- <td>✔︎</td>
- </tr>
- <tr>
- <td>wrap</td>
- <td>✔︎</td>
- <td></td>
- <td></td>
- </tr>
- </tbody>
- </table>
+  <table class="table table-striped">
+  <thead>
+  <tr>
+  <th></th>
+  <th>textarea</th>
+  <th>checkbox/radio</th>
+  <th>all others</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>accept</td>
+  <td></td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>autocapitalize</td>
+  <td>✔︎</td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>autocomplete</td>
+  <td>✔︎</td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>autocorrect</td>
+  <td>✔︎</td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>autofocus</td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>autosave</td>
+  <td></td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>cols</td>
+  <td>✔︎</td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr>
+  <td>disabled</td>
+  <td></td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>form</td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>inputmode</td>
+  <td></td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>max</td>
+  <td></td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>maxlength</td>
+  <td>✔︎</td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>min</td>
+  <td></td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>minlength</td>
+  <td>✔︎</td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>multiple</td>
+  <td></td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>name</td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>pattern</td>
+  <td></td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>placeholder</td>
+  <td>✔︎</td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>readonly</td>
+  <td>✔︎</td>
+  <td>︎</td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>required</td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>rows</td>
+  <td>✔︎</td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr>
+  <td>size<br>via <code>controlSize</code> property</td>
+  <td></td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>spellcheck</td>
+  <td>✔︎</td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>step</td>
+  <td></td>
+  <td></td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>tabindex</td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>title</td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  <td>✔︎</td>
+  </tr>
+  <tr>
+  <td>wrap</td>
+  <td>✔︎</td>
+  <td></td>
+  <td></td>
+  </tr>
+  </tbody>
+  </table>
 
- @class FormElement
- @namespace Components
- @extends Components.FormGroup
- @public
- */
+  @class FormElement
+  @namespace Components
+  @extends Components.FormGroup
+  @public
+*/
 export default FormGroup.extend({
   layout,
   classNameBindings: ['disabled:disabled', 'required:is-required', 'isValidating'],
@@ -727,7 +727,7 @@ export default FormGroup.extend({
 
   /**
    * @method showValidationOnHandler
-   * @params {Event} event
+   * @param {Event} event
    * @private
    */
   showValidationOnHandler({ target, type }) {

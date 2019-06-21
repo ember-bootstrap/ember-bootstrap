@@ -1,63 +1,72 @@
-<h2>Simple example</h2>
-
+<h2>
+  Simple example
+</h2>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET button-demo -->
-  {{#bs-button onClick=(action "submit")}}
-    Button
-  {{/bs-button}}
+  <BsButton @onClick={{action "submit"}}>Button</BsButton>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="button-demo.hbs"}}
+  <CodeSnippet @name="button-demo.hbs" />
 </div>
-
-<h2>Options</h2>
-
+<h2>
+  Options
+</h2>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET button-options -->
-  <p> Solid buttons </p>
+  <p>Solid buttons</p>
   <p>
-    {{#bs-button type="primary" onClick=(action "submit")}}Primary{{/bs-button}}
-    {{#bs-button type="secondary" onClick=(action "submit")}}Secondary{{/bs-button}}
-    {{#bs-button type="success" onClick=(action "submit")}}Success{{/bs-button}}
-    {{#bs-button type="danger" onClick=(action "submit")}}Danger{{/bs-button}}
-    {{#bs-button type="warning" onClick=(action "submit")}}Warning{{/bs-button}}
-    {{#bs-button type="info" onClick=(action "submit")}}Info{{/bs-button}}
-    {{#bs-button type="light" onClick=(action "submit")}}Light{{/bs-button}}
-    {{#bs-button type="dark" onClick=(action "submit")}}Dark{{/bs-button}}
-    {{#bs-button disabled=true onClick=(action "submit")}}Disabled{{/bs-button}}
+    <BsButton @type="primary" @onClick={{action "submit"}}>Primary</BsButton>
+    <BsButton @type="secondary" @onClick={{action "submit"}}>Secondary</BsButton>
+    <BsButton @type="success" @onClick={{action "submit"}}>Success</BsButton>
+    <BsButton @type="danger" @onClick={{action "submit"}}>Danger</BsButton>
+    <BsButton @type="warning" @onClick={{action "submit"}}>Warning</BsButton>
+    <BsButton @type="info" @onClick={{action "submit"}}>Info</BsButton>
+    <BsButton @type="light" @onClick={{action "submit"}}>Light</BsButton>
+    <BsButton @type="dark" @onClick={{action "submit"}}>Dark</BsButton>
+    <BsButton @disabled={{true}} @onClick={{action "submit"}}>Disabled</BsButton>
   </p>
-  <p> Outlined buttons </p>
+  <p>Outlined buttons</p>
   <p>
-    {{#bs-button type="primary" outline=true onClick=(action "submit")}}Primary{{/bs-button}}
-    {{#bs-button type="secondary" outline=true onClick=(action "submit")}}Secondary{{/bs-button}}
-    {{#bs-button type="success" outline=true onClick=(action "submit")}}Success{{/bs-button}}
-    {{#bs-button type="danger" outline=true onClick=(action "submit")}}Danger{{/bs-button}}
-    {{#bs-button type="warning" outline=true onClick=(action "submit")}}Warning{{/bs-button}}
-    {{#bs-button type="info" outline=true onClick=(action "submit")}}Info{{/bs-button}}
-    {{#bs-button type="light" outline=true onClick=(action "submit")}}Light{{/bs-button}}
-    {{#bs-button type="dark" outline=true onClick=(action "submit")}}Dark{{/bs-button}}
-    {{#bs-button disabled=true outline=true onClick=(action "submit")}}Disabled{{/bs-button}}
+    <BsButton @type="primary" @outline={{true}} @onClick={{action "submit"}}>Primary</BsButton>
+    <BsButton @type="secondary" @outline={{true}} @onClick={{action "submit"}}>Secondary</BsButton>
+    <BsButton @type="success" @outline={{true}} @onClick={{action "submit"}}>Success</BsButton>
+    <BsButton @type="danger" @outline={{true}} @onClick={{action "submit"}}>Danger</BsButton>
+    <BsButton @type="warning" @outline={{true}} @onClick={{action "submit"}}>Warning</BsButton>
+    <BsButton @type="info" @outline={{true}} @onClick={{action "submit"}}>Info</BsButton>
+    <BsButton @type="light" @outline={{true}} @onClick={{action "submit"}}>Light</BsButton>
+    <BsButton @type="dark" @outline={{true}} @onClick={{action "submit"}}>Dark</BsButton>
+    <BsButton @disabled={{true}} @outline={{true}} @onClick={{action "submit"}}>Disabled</BsButton>
   </p>
   <p>
-    {{#bs-button block=true onClick=(action "submit")}}Block Button{{/bs-button}}
+    <BsButton @block={{true}} @onClick={{action "submit"}}>Block Button</BsButton>
   </p>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="button-options.hbs"}}
+  <CodeSnippet @name="button-options.hbs" />
 </div>
-
-
-<h2>Promise support</h2>
-
-<p>Return a Promise from the <code>onClick</code> action for custom text based on the Promise state.</p>
-
+<h2>
+  Promise support
+</h2>
+<p>
+  Return a Promise from the
+  <code>
+    onClick
+  </code>
+  action for custom text based on the Promise state.
+</p>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET button-promise -->
-  {{bs-button defaultText="Start download" pendingText="Downloading..." resolvedText="Download complete!" onClick=(action "download")}}
+  <BsButton
+    @defaultText="Start download"
+    @pendingText="Downloading..."
+    @resolvedText="Download complete!"
+    @onClick={{action "download"}}
+   />
+
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="button-promise.hbs"}}
+  <CodeSnippet @name="button-promise.hbs" />
 </div>

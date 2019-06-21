@@ -5,7 +5,7 @@
 
     {{#bs-nav type="pills" stacked=true as |nav|}}
       {{#each model as |comp|}}
-        {{#nav.item}}{{#nav.link-to comp.demoRoute}}{{comp.title}}{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item linkTo=comp.demoRoute}}{{comp.title}}{{/nav.item}}
       {{/each}}
     {{/bs-nav}}
   </div>

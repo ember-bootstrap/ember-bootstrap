@@ -16,5 +16,4 @@ export default Component.extend({
    * @type {string}
    * @public
    */
-  text: null
 });

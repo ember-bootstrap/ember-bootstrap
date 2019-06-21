@@ -9,6 +9,7 @@
     ],
     "exclude": "vendor",
     "outdir": "docs/api",
-    "themedir": "docs/yuidoc-theme"
+    "themedir": "docs/yuidoc-theme",
+    "helpers": ["docs/yuidoc-theme/helpers/index.js"]
   }
 }

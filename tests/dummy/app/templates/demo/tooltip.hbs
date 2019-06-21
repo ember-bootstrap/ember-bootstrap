@@ -1,56 +1,52 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET tooltip-demo -->
-  {{#bs-button}}
+  <BsButton>
     Tooltip on left
-    {{#bs-tooltip placement="left"}}Tooltip on left{{/bs-tooltip}}
-  {{/bs-button}}
-
-  {{#bs-button}}
+    <BsTooltip @placement="left">Tooltip on left</BsTooltip>
+  </BsButton>
+  <BsButton>
     Tooltip on top
-    {{#bs-tooltip placement="top"}}Tooltip on top{{/bs-tooltip}}
-  {{/bs-button}}
-
-  {{#bs-button}}
+    <BsTooltip @placement="top">Tooltip on top</BsTooltip>
+  </BsButton>
+  <BsButton>
     Tooltip on bottom
-    {{#bs-tooltip placement="bottom"}}Tooltip on bottom{{/bs-tooltip}}
-  {{/bs-button}}
-
-  {{#bs-button}}
+    <BsTooltip @placement="bottom">Tooltip on bottom</BsTooltip>
+  </BsButton>
+  <BsButton>
     Tooltip on right
-    {{#bs-tooltip placement="right"}}Tooltip on right{{/bs-tooltip}}
-  {{/bs-button}}
-
-  {{#bs-button}}
+    <BsTooltip @placement="right">Tooltip on right</BsTooltip>
+  </BsButton>
+  <BsButton>
     Click tooltip
-    {{#bs-tooltip triggerEvents="click"}}Click tooltip{{/bs-tooltip}}
-  {{/bs-button}}
+    <BsTooltip @triggerEvents="click">Click tooltip</BsTooltip>
+  </BsButton>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="tooltip-demo.hbs"}}
+  <CodeSnippet @name="tooltip-demo.hbs" />
 </div>
-
-<h2>Tooltip trigger</h2>
-
-<p>By default the tooltip will attach itself to the parent DOM element, but there are ways to customize this:</p>
-
+<h2>
+  Tooltip trigger
+</h2>
+<p>
+  By default the tooltip will attach itself to the parent DOM element, but there are ways to customize this:
+</p>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET tooltip-target -->
   <button type="button" class="btn btn-default">
     DOM parent
-    {{bs-tooltip title="DOM parent"}}
+    <BsTooltip @title="DOM parent" />
   </button>
-
-  {{#bs-button}}
+  <BsButton>
     Parent component
-    {{bs-tooltip triggerElement="parentView" title="Parent component"}}
-  {{/bs-button}}
-
-  <button id="Tooltip-button" class="btn btn-default">CSS selector</button>
-  {{bs-tooltip triggerElement="#Tooltip-button" title="CSS selector"}}
-
+    <BsTooltip @triggerElement="parentView" @title="Parent component" />
+  </BsButton>
+  <button id="Tooltip-button" class="btn btn-default">
+    CSS selector
+  </button>
+  <BsTooltip @triggerElement="#Tooltip-button" @title="CSS selector" />
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="tooltip-target.hbs"}}
+  <CodeSnippet @name="tooltip-target.hbs" />
 </div>

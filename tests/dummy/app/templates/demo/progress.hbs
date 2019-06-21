@@ -1,52 +1,108 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET progress-demo -->
-  {{#bs-progress as |p|}}
-    {{p.bar value=50}}
-  {{/bs-progress}}
+  <BsProgress as |pg|>
+    <pg.bar @value="50" />
+  </BsProgress>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="progress-demo.hbs"}}
+  <CodeSnippet @name="progress-demo.hbs" />
 </div>
-
-<h2>Options</h2>
-
+<h2>
+  Options
+</h2>
 <div class="bs-example">
-  {{#bs-form formLayout="horizontal" model=this as |form|}}
-    {{form.element controlType="number" label="Value" property="value"}}
-    {{form.element controlType="number" label="Min" property="minValue"}}
-    {{form.element controlType="number" label="Max" property="maxValue"}}
-    {{#form.element controlType="power-select" options=typeChoices label="Type" property="type" as |el|}}
-      {{el.control searchEnabled=false}}
-    {{/form.element}}
-    {{form.element controlType="checkbox" label="Show label" property="showLabel"}}
-    {{form.element controlType="number" label="Round to digits" property="roundDigits"}}
-    {{form.element controlType="checkbox" label="Striped" property="striped"}}
-    {{form.element controlType="checkbox" disabled=notStriped label="Animate" property="animate"}}
-  {{/bs-form}}
+  <BsForm @formLayout="horizontal" @model={{this}} as |form|>
+    <form.element @controlType="number" @label="Value" @property="value" />
+    <form.element @controlType="number" @label="Min" @property="minValue" />
+    <form.element @controlType="number" @label="Max" @property="maxValue" />
+    <form.element
+      @controlType="power-select"
+      @options={{typeChoices}}
+      @label="Type"
+      @property="type" as |el|>
+      <el.control @searchEnabled />
+    </form.element>
+    <form.element
+      @controlType="checkbox"
+      @label="Show label"
+      @property="showLabel"
+     />
+
+    <form.element
+      @controlType="number"
+      @label="Round to digits"
+      @property="roundDigits"
+     />
+
+    <form.element @controlType="checkbox" @label="Striped" @property="striped" />
+    <form.element
+      @controlType="checkbox"
+      @disabled={{notStriped}}
+      @label="Animate"
+      @property="animate"
+     />
+
+  </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET progress-options -->
-  {{#bs-progress as |p|}}
-    {{p.bar value=value minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type=type striped=striped animate=animate}}
-  {{/bs-progress}}
+  <BsProgress as |pg|>
+    <pg.bar
+      @value={{value}}
+      @minValue={{minValue}}
+      @maxValue={{maxValue}}
+      @showLabel={{showLabel}}
+      @roundDigits={{roundDigits}}
+      @type={{type}}
+      @striped={{striped}}
+      @animate={{animate}}
+     />
+
+  </BsProgress>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="progress-options.hbs"}}
+  <CodeSnippet @name="progress-options.hbs" />
 </div>
-
-<h2>Stacked</h2>
-
+<h2>
+  Stacked
+</h2>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET progress-stacked -->
-  {{#bs-progress as |p|}}
-    {{p.bar value=value minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type=type striped=striped animate=animate}}
-    {{p.bar value=20 minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type="warning" striped=striped animate=animate}}
-    {{p.bar value=5 minValue=minValue maxValue=maxValue showLabel=showLabel roundDigits=roundDigits type="danger" striped=striped animate=animate}}
-  {{/bs-progress}}
+  <BsProgress as |pg|>
+    <pg.bar
+      @value={{value}}
+      @minValue={{minValue}}
+      @maxValue={{maxValue}}
+      @showLabel={{showLabel}}
+      @roundDigits={{roundDigits}}
+      @type={{type}}
+      @striped={{striped}}
+      @animate={{animate}}
+    />
+    <pg.bar
+      @value="20"
+      @minValue={{minValue}}
+      @maxValue={{maxValue}}
+      @showLabel={{showLabel}}
+      @roundDigits={{roundDigits}}
+      @type="warning"
+      @striped={{striped}}
+      @animate={{animate}}
+    />
+    <pg.bar
+      @value="5"
+      @minValue={{minValue}}
+      @maxValue={{maxValue}}
+      @showLabel={{showLabel}}
+      @roundDigits={{roundDigits}}
+      @type="danger"
+      @striped={{striped}}
+      @animate={{animate}}
+    />
+  </BsProgress>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="progress-stacked.hbs"}}
+  <CodeSnippet @name="progress-stacked.hbs" />
 </div>
-

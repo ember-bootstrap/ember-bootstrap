@@ -3,10 +3,10 @@
   {{navbar.toggle}}
   {{#navbar.content}}
     {{#navbar.nav class="mr-auto" as |nav|}}
-      {{#nav.item}}{{#nav.link-to "getting-started"}}Getting Started{{/nav.link-to}}{{/nav.item}}
-      {{#nav.item}}{{#nav.link-to "demo"}}Components{{/nav.link-to}}{{/nav.item}}
+      {{#nav.item linkTo="getting-started"}}Getting Started{{/nav.item}}
+      {{#nav.item linkTo="demo"}}Components{{/nav.item}}
       {{#nav.item}}<a href="/api" class="nav-link">API</a>{{/nav.item}}
-      {{#nav.item}}{{#nav.link-to "addons"}}Addons{{/nav.link-to}}{{/nav.item}}
+      {{#nav.item linkTo="addons"}}Addons{{/nav.item}}
     {{/navbar.nav}}
     {{#navbar.nav as |nav|}}
       {{#nav.item}}

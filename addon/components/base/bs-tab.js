@@ -9,105 +9,103 @@ import TabPane from 'ember-bootstrap/components/bs-tab/pane';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 
 /**
- Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,
- see http://getbootstrap.com/javascript/#tabs
+  Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,
+  see http://getbootstrap.com/javascript/#tabs
 
- ### Usage
+  ### Usage
 
- Just nest any number of yielded [Components.TabPane](Components.TabPane.html) components that hold the tab content.
- The tab navigation is automatically generated from the tab panes' `title` property:
+  Just nest any number of yielded [Components.TabPane](Components.TabPane.html) components that hold the tab content.
+  The tab navigation is automatically generated from the tab panes' `title` property:
 
- ```hbs
- {{#bs-tab as |tab|}}
-   {{#tab.pane title="Tab 1"}}
-     <p>...</p>
-   {{/tab.pane}}
-   {{#tab.pane title="Tab 2"}}
-     <p>...</p>
-   {{/tab.pane}}
- {{/bs-tab}}
- ```
+  ```hbs
+  <BsTab as |tab|>
+    <tab.pane @title="Tab 1">
+      <p> ... </p>
+    </tab.pane>
+    <tab.pane @title="Tab 2">
+      <p> ... </p>
+    </tab.pane>
+  </BsTab>
+  ```
 
- ### Groupable (dropdown) tabs
+  ### Groupable (dropdown) tabs
 
- Bootstrap's support for dropdown menus as tab navigation is mimiced by the use of the `groupTitle` property.
- All panes with the same `groupTitle` will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)
- component with `groupTitle` being the dropdown's title:
+  Bootstrap's support for dropdown menus as tab navigation is mimiced by the use of the `groupTitle` property.
+  All panes with the same `groupTitle` will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)
+  component with `groupTitle` being the dropdown's title:
 
- ```hbs
- {{#bs-tab as |tab|}}
-    {{#tab.pane title="Tab 1"}}
-      <p>...</p>
-    {{/tab.pane}}
-    {{#tab.pane title="Tab 2"}}
-      <p>...</p>
-    {{/tab.pane}}
-    {{#tab.pane title="Tab 3" groupTitle="Dropdown"}}
-      <p>...</p>
-    {{/tab.pane}}
-    {{#tab.pane title="Tab 4" groupTitle="Dropdown"}}
-      <p>...</p>
-    {{/tab.pane}}
- {{/bs-tab}}
- ```
+  ```hbs
+  <BsTab as |tab|>
+    <tab.pane @title="Tab 1">
+      <p> ... </p>
+    </tab.pane>
+    <tab.pane @title="Tab 2">
+      <p> ... </p>
+    </tab.pane>
+    <tab.pane @title="Tab 3" @groupTitle="Dropdown">
+      <p> ... </p>
+    </tab.pane>
+    <tab.pane @title="Tab 4" @groupTitle="Dropdown">
+      <p> ... </p>
+    </tab.pane>
+  </BsTab>
+  ```
 
- ### Custom tabs
+  ### Custom tabs
 
- When having the tab pane's `title` as the tab navigation title is not sufficient, for example because you want to
- integrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup
- your navigation by yourself.
+  When having the tab pane's `title` as the tab navigation title is not sufficient, for example because you want to
+  integrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup
+  your navigation by yourself.
 
- Set `customTabs` to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably
- using a [Components.Nav](Components.Nav.html) component. The tab component yields the `activeId` property as well as
- its `select` action, which you would have to use to manually set the `active` state of the navigation items and to
- trigger the selection of the different tab panes, using their ids:
+  Set `customTabs` to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably
+  using a [Components.Nav](Components.Nav.html) component. The tab component yields the `activeId` property as well as
+  its `select` action, which you would have to use to manually set the `active` state of the navigation items and to
+  trigger the selection of the different tab panes, using their ids:
 
- ```hbs
- {{#bs-tab customTabs=true as |tab|}}
-    {{#bs-nav type="tabs" as |nav|}}
-        {{#nav.item active=(bs-eq tab.activeId "pane1")}}<a href="#pane1" role="tab" {{action tab.select "pane1"}}>Tab 1</a>{{/nav.item}}
-        {{#nav.item active=(bs-eq tab.activeId "pane2")}}<a href="#pane1" role="tab" {{action tab.select "pane2"}}>Tab 2 <span class="badge">{{badge}}</span></a>{{/nav.item}}
-    {{/bs-nav}}
-
+  ```hbs
+  <BsTab @customTabs={{true}} as |tab|>
+    <BsNav @type="tabs" as |nav|>
+      <nav.item @active={{bs-eq Tab.activeId "pane1"}}><a href="#pane1" role="tab" onclick={{action Tab.select "pane1"}}>Tab 1</a></nav.item>
+      <nav.item @active={{bs-eq Tab.activeId "pane2"}}><a href="#pane2" role="tab" onclick={{action Tab.select "pane2"}}>Tab 2 <span class="badge">{{badge}}</span></a></nav.item>
+    </BsNav>
     <div class="tab-content">
-    {{#tab.pane id="pane1" title="Tab 1"}}
-        <p>...</p>
-    {{/tab.pane}}
-    {{#tab.pane id="pane2" title="Tab 2"}}
-        <p>...</p>
-    {{/tab.pane}}
+      <tab.pane @id="pane1" @title="Tab 1">
+        <p> ... </p>
+      </tab.pane>
+      <tab.pane @id="pane2" @title="Tab 2">
+        <p> ... </p>
+      </tab.pane>
     </div>
- {{/bs-tab}}
- ```
+  </BsTab>
+  ```
 
- Note that the `bs-eq` helper used in the example above is a private helper, which is not guaranteed to be available for
- the future. Better use the corresponding `eq` helper of the
- [ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!
+  Note that the `bs-eq` helper used in the example above is a private helper, which is not guaranteed to be available for
+  the future. Better use the corresponding `eq` helper of the
+  [ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!
 
- ### Routable tabs
+  ### Routable tabs
 
- The tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and
- deactivated dynamically, just as the  original Bootstrap implementation.
+  The tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and
+  deactivated dynamically, just as the  original Bootstrap implementation.
 
- If you want to have the content delivered through individual sub routes, just use
- the [Components.Nav](Components.Nav.html) component and an `{{outlet}}` that show the nested routes' content:
+  If you want to have the content delivered through individual sub routes, just use
+  the [Components.Nav](Components.Nav.html) component and an `{{outlet}}` that show the nested routes' content:
 
- ```hbs
- <div>
-   {{#bs-nav type="tabs" as |nav|}}
-     {{#nav.item}}{{#nav.link-to "tabs.index"}}Tab 1{{/nav.link-to}}{{/nav.item}}
-     {{#nav.item}}{{#nav.link-to "tabs.other"}}Tab 2{{/nav.link-to}}{{/nav.item}}
-   {{/bs-nav}}
-   {{outlet}}
- </div>
- ```
+  ```hbs
+  <div>
+    <BsNav @type="tabs" as |nav|>
+      <nav.item @linkTo="tabs.index">Tab 1</nav.item>
+      <nav.item @linkTo="tabs.other">Tab 3</nav.item>
+    </BsNav>
+  </div>
+  ```
 
- @class Tab
- @namespace Components
- @extends Ember.Component
- @uses Mixins.ComponentParent
- @public
- */
+  @class Tab
+  @namespace Components
+  @extends Ember.Component
+  @uses Mixins.ComponentParent
+  @public
+*/
 export default Component.extend(ComponentParent, {
   layout,
 

@@ -1,28 +1,28 @@
-{{#if showIndicators}}
+{{#if this.showIndicators}}
   <ol class="carousel-indicators">
-    {{#each indicators as |indicator _index|}}
-      <li class={{if (bs-eq currentIndex _index) "active"}} onclick={{action "toSlide" _index}} role="button"></li>
+    {{#each this.indicators as |indicator _index|}}
+      <li class={{if (bs-eq this.currentIndex _index) "active"}} onclick={{action "toSlide" _index}} role="button"></li>
     {{/each}}
   </ol>
 {{/if}}
 
 <div class="carousel-inner" role="listbox">
-  {{yield (hash slide=(component slideComponent
-    currentSlide=currentSlide
-    directionalClassName=directionalClassName
-    followingSlide=followingSlide
-    orderClassName=orderClassName
-    presentationState=presentationState
+  {{yield (hash slide=(component this.slideComponent
+    currentSlide=this.currentSlide
+    directionalClassName=this.directionalClassName
+    followingSlide=this.followingSlide
+    orderClassName=this.orderClassName
+    presentationState=this.presentationState
   ))}}
 </div>
 
-{{#if showControls}}
-  <a class={{prevControlClassName}} href="#{{elementId}}" {{action "toPrevSlide"}} role="button">
-    <span aria-hidden="true" class={{prevControlIcon}}></span>
-    <span class="sr-only">{{prevControlLabel}}</span>
+{{#if this.showControls}}
+  <a class={{this.prevControlClassName}} href="#{{this.elementId}}" {{action "toPrevSlide"}} role="button">
+    <span aria-hidden="true" class={{this.prevControlIcon}}></span>
+    <span class="sr-only">{{this.prevControlLabel}}</span>
   </a>
-  <a class={{nextControlClassName}} href="#{{elementId}}" {{action "toNextSlide"}} role="button">
-    <span aria-hidden="true" class={{nextControlIcon}}></span>
-    <span class="sr-only">{{nextControlLabel}}</span>
+  <a class={{this.nextControlClassName}} href="#{{this.elementId}}" {{action "toNextSlide"}} role="button">
+    <span aria-hidden="true" class={{this.nextControlIcon}}></span>
+    <span class="sr-only">{{this.nextControlLabel}}</span>
   </a>
 {{/if}}

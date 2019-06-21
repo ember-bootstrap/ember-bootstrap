@@ -3,29 +3,29 @@
 <p>The forms component lets you easily create forms with automatic markup generation based on the chosen form layout:</p>
 
 <div class="bs-example">
-  {{#bs-form formLayout="horizontal" model=this as |form|}}
-    {{#form.element label="Layout" property="formLayout"}}
-      {{#bs-button-group value=formLayout type="radio" onChange=(action (mut formLayout)) as |bg|}}
-        {{#bg.button value="vertical"}}Vertical{{/bg.button}}
-        {{#bg.button value="horizontal"}}Horizontal{{/bg.button}}
-        {{#bg.button value="inline"}}Inline{{/bg.button}}
-      {{/bs-button-group}}
-    {{/form.element}}
-  {{/bs-form}}
+  <BsForm @formLayout="horizontal" @model={{this}} as |form|>
+    <form.element @label="Layout" @property="formLayout">
+      <BsButton-group @value={{formLayout}} @type="radio" @onChange={{action (mut formLayout)}} as |bg|>
+        <bg.button @value="vertical">Vertical</bg.button>
+        <bg.button @value="horizontal">Horizontal</bg.button>
+        <bg.button @value="inline">Inline</bg.button>
+      </BsButton-group>
+    </form.element>
+  </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET form-demo -->
-  {{#bs-form formLayout=formLayout model=this onSubmit=(action "submit") as |form|}}
-    {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=true}}
-    {{form.element controlType="password" label="Password" placeholder="Password" property="password" required=true helpText="Minimum 6 characters"}}
-    {{form.element controlType="radio" label="Radio" property="radio" options=radioOptions optionLabelPath="label"}}
-    {{form.element controlType="checkbox" label="Checkbox" property="checkbox"}}
-    {{form.element controlType="textarea" label="Textarea" property="textarea"}}
-    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
-  {{/bs-form}}
+  <BsForm @formLayout={{formLayout}} @model={{this}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" @required={{true}} />
+    <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" @required={{true}} @helpText="Minimum 6 characters" />
+    <form.element @controlType="radio" @label="Radio" @property="radio" @options={{radioOptions}} @optionLabelPath="label" />
+    <form.element @controlType="checkbox" @label="Checkbox" @property="checkbox" />
+    <form.element @controlType="textarea" @label="Textarea" @property="textarea" />
+    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+  </BsForm>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="form-demo.hbs"}}
+  <CodeSnippet @name="form-demo.hbs" />
 </div>
 
 
@@ -58,32 +58,32 @@ This is needed for the correct code sample as we have no bs-form with validation
 the original one in tests. -bs-form contains the (copy pasted) validation support from ember-bootstrap-cp-validations
 
 <!-- BEGIN-SNIPPET form-validation -->
-{{#bs-form model=login onSubmit=(action "submit") novalidate=true as |form|}}
-    {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
-    {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
-    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
-{{/bs-form}}
+<BsForm @model={{login}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
+    <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" />
+    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+</BsForm>
 <!-- END-SNIPPET -->
 --}}
 <div class="bs-example">
-  {{#-bs-form model=login onSubmit=(action "submit") novalidate=true as |form|}}
-    {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
-    {{form.element controlType="password" label="Password" placeholder="Password" property="password" helpText="Minimum 6 characters"}}
-    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+  {{#-bs-form model=login onSubmit=(action "submit") as |form|}}
+    <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
+    <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" @helpText="Minimum 6 characters" />
+    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
   {{/-bs-form}}
 </div>
-{{#bs-tab as |tab|}}
-  {{#tab.pane title="template.hbs"}}
+<BsTab as |tab|>
+  <tab.pane @title="template.hbs">
     <div class="highlight">
-      {{code-snippet name="form-validation.hbs"}}
+      <CodeSnippet @name="form-validation.hbs" />
     </div>
-  {{/tab.pane}}
-  {{#tab.pane title="models/login.js"}}
+  </tab.pane>
+  <tab.pane @title="models/login.js">
     <div class="highlight">
-      {{code-snippet name="login-model.js"}}
+      <CodeSnippet @name="login-model.js" />
     </div>
-  {{/tab.pane}}
-{{/bs-tab}}
+  </tab.pane>
+</BsTab>
 
 <h2>Custom controls</h2>
 
@@ -92,51 +92,51 @@ the original one in tests. -bs-form contains the (copy pasted) validation suppor
 <div class="bs-example">
   {{!--
   <!-- BEGIN-SNIPPET form-custom -->
-  {{#bs-form model=login onSubmit=(action "submit") novalidate=true as |form|}}
-    {{#form.element label="Email" placeholder="Email" property="email" as |el|}}
+  <BsForm @model={{login}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
       <div class="input-group">
         <input value={{el.value}} class="form-control" placeholder="Email" oninput={{action (mut el.value) value="target.value"}} onchange={{action (mut el.value) value="target.value"}} id={{el.id}} type="text">
         <div class="input-group-append">
           <span class="input-group-text">@example.com</span>
         </div>
       </div>
-    {{/form.element}}
-    {{form.element size="lg" controlType="password" label="Password" placeholder="Password" property="password" helpText="Minimum 6 characters"}}
-    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
-  {{/bs-form}}
+    </form.element>
+    <form.element @size="lg" @controlType="password" @label="Password" @placeholder="Password" @property="password" @helpText="Minimum 6 characters" />
+    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+  </BsForm>
   <!-- END-SNIPPET -->
   --}}
-  {{#-bs-form model=login onSubmit=(action "submit") novalidate=true as |form|}}
-    {{#form.element label="Email" placeholder="Email" property="email" as |el|}}
+  {{#-bs-form model=login onSubmit=(action "submit") as |form|}}
+    <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
       <div class="input-group">
-        {{el.control}}
+        <el.control />
         <div class="input-group-append">
           <span class="input-group-text">@example.com</span>
         </div>
       </div>
-    {{/form.element}}
-    {{form.element size="lg" controlType="password" label="Password" placeholder="Password" property="password" helpText="Minimum 6 characters"}}
-    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
+    </form.element>
+    <form.element @size="lg" @controlType="password" @label="Password" @placeholder="Password" @property="password" @helpText="Minimum 6 characters" />
+    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
   {{/-bs-form}}
 </div>
 <div class="highlight">
-  {{code-snippet name="form-custom.hbs"}}
+  <CodeSnippet @name="form-custom.hbs" />
 </div>
 
 <p>You can also just customize the existing control component:</p>
 
 <div class="bs-example">
   <!-- BEGIN-SNIPPET form-customized -->
-  {{#bs-form model=this onSubmit=(action "submit") as |form|}}
-    {{#form.element label="Email" placeholder="Email" property="email" as |el|}}
-      {{el.control class="border-info"}}
-    {{/form.element}}
-    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
-  {{/bs-form}}
+  <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
+      <el.control class="border-info" />
+    </form.element>
+    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+  </BsForm>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="form-customized.hbs"}}
+  <CodeSnippet @name="form-customized.hbs" />
 </div>
 
 <h3>Custom control addons</h3>

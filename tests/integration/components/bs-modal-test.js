@@ -128,4 +128,27 @@ module('Integration | Component | bs-modal', function(hooks) {
     assert.dom('.modal-dialog').hasAttribute('role', 'document');
     assert.dom('.modal').hasAttribute('aria-labelledby', modalTitleId);
   });
+
+  test('it passes along class attribute', async function(assert) {
+    await render(hbs`
+      {{#bs-modal fade=false class="custom"}}
+        template block text
+      {{/bs-modal}}
+    `);
+
+    assert.dom('.modal.custom').exists({ count: 1 });
+  });
+
+  test('it passes along HTML attributes', async function(assert) {
+    await render(hbs`
+      <BsModal @fade={{false}} class="custom" role="alert" data-test>
+        template block text
+      </BsModal>
+    `);
+
+    assert.dom('.modal').exists({ count: 1 });
+    assert.dom('.modal').hasClass('custom');
+    assert.dom('.modal').hasAttribute('role', 'alert');
+    assert.dom('.modal').hasAttribute('data-test');
+  });
 });

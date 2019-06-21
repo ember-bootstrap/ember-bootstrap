@@ -13,7 +13,7 @@
     "changelog": "lerna-changelog"
   },
   "engines": {
-    "node": "6.* || 8.* || >= 10.*"
+    "node": "8.* || >= 10.*"
   },
   "devDependencies": {
     "@ember/optional-features": "^0.7.0",
@@ -22,6 +22,7 @@
     "broccoli-asset-rev": "^3.0.0",
     "chai": "^4.0.0",
     "chai-things": "^0.2.0",
+    "ember-array-helper": "^5.0.0",
     "ember-bootstrap-power-select": "^1.0.0-alpha.1",
     "ember-cli": "~3.8.1",
     "ember-cli-app-version": "^3.0.0",
@@ -40,8 +41,9 @@
     "ember-cli-template-lint": "^1.0.0-beta.2",
     "ember-cli-test-loader": "^2.1.0",
     "ember-cli-uglify": "^2.1.0",
-    "ember-cli-yuidoc": "^0.8.7",
+    "ember-cli-yuidoc": "^0.8.8",
     "ember-code-snippet": "^2.3.1",
+    "ember-compatibility-helpers": "^1.2.0",
     "ember-cp-validations": "^3.1.4",
     "ember-disable-prototype-extensions": "^1.1.3",
     "ember-export-application-global": "^2.0.0",
@@ -49,7 +51,7 @@
     "ember-fetch": "^6.3.1",
     "ember-load-initializers": "^2.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
-    "ember-power-select": "^2.2.1",
+    "ember-power-select": "^2.3.2",
     "ember-power-select-blockless": "^0.5.0",
     "ember-qunit": "^4.2.0",
     "ember-resolver": "^5.0.1",
@@ -76,7 +78,7 @@
     "sass": "^1.15.2",
     "striptags": "^3.0.0"
   },
-  "description": "Twitter Bootstrap components for Ember.js",
+  "description": "Bootstrap components for Ember.js",
   "keywords": [
     "ember-addon",
     "bootstrap"
@@ -97,16 +99,17 @@
     "broccoli-merge-trees": "^3.0.1",
     "broccoli-stew": "^2.0.0",
     "chalk": "^2.1.0",
-    "ember-assign-polyfill": "^2.0.1",
-    "ember-cli-babel": "^6.16.0",
+    "ember-angle-bracket-invocation-polyfill": "^1.3.1",
+    "ember-cli-babel": "^7.1.2",
     "ember-cli-build-config-editor": "0.5.0",
     "ember-cli-htmlbars": "^3.0.0",
     "ember-cli-version-checker": "^3.0.0",
     "ember-concurrency": "^0.8.0 || ^0.9.0 || ^0.10.0",
-    "ember-in-element-polyfill": "^0.1.2",
-    "ember-maybe-in-element": "^0.1.3",
-    "ember-popper": "^0.9.0",
-    "ember-runtime-enumerable-includes-polyfill": "^2.0.0",
+    "ember-let-polyfill": "^0.1.0",
+    "ember-maybe-in-element": "^0.2.0",
+    "ember-named-arguments-polyfill": "^1.0.0",
+    "ember-popper": "^0.10.0",
+    "ember-router-service-polyfill": "^1.0.3",
     "findup-sync": "^3.0.0",
     "fs-extra": "^7.0.1",
     "resolve": "^1.5.0",
@@ -134,6 +137,7 @@
     }
   },
   "resolutions": {
-    "ip-regex": "^2.1.0"
+    "ip-regex": "^2.1.0",
+    "ember-concurrency": "^0.10.0"
   }
 }

@@ -1,36 +1,61 @@
 <div class="bs-example">
-  {{#bs-form formLayout="horizontal" model=this as |form|}}
-    {{#form.element controlType="power-select" options=typeChoices label="Type" property="type" as |el|}}
-      {{el.control searchEnabled=false}}
-    {{/form.element}}
-    {{#form.element controlType="power-select" options=bgChoices label="Background" property="bg" as |el|}}
-      {{el.control searchEnabled=false}}
-    {{/form.element}}
-    {{form.element controlType="checkbox" label="Collapsed (on mobile)" property="collapsed" value=collapsed}}
-  {{/bs-form}}
+  <BsForm @formLayout="horizontal" @model={{this}} as |form|>
+    <form.element
+      @controlType="power-select"
+      @options={{typeChoices}}
+      @label="Type"
+      @property="type" as |el|
+    >
+      <el.control @searchEnabled />
+    </form.element>
+    <form.element
+      @controlType="power-select"
+      @options={{bgChoices}}
+      @label="Background"
+      @property="bg" as |el|
+    >
+      <el.control @searchEnabled />
+    </form.element>
+    <form.element
+      @controlType="checkbox"
+      @label="Collapsed (on mobile)"
+      @property="collapsed"
+      value={{collapsed}}
+     />
+
+  </BsForm>
   <hr>
   <!-- BEGIN-SNIPPET navbar-demo -->
-  {{#bs-navbar type=type backgroundColor=bg collapsed=collapsed onCollapse=(action (mut collapsed) true) onExpand=(action (mut collapsed) false) as |navbar|}}
+  <BsNavbar
+    @type={{type}}
+    @backgroundColor={{bg}}
+    @collapsed={{collapsed}}
+    @onCollapse={{action (mut collapsed) true}}
+    @onExpand={{action (mut collapsed) false}} as |navbar|>
     <div class="navbar-header">
       {{navbar.toggle}}
       {{#link-to "index" class="navbar-brand"}}Brand{{/link-to}}
     </div>
-    {{#navbar.content}}
-      {{#navbar.nav as |nav|}}
-        {{#nav.item}}{{#nav.link-to "index"}}Home{{/nav.link-to}}{{/nav.item}}
-        {{#nav.item}}{{#nav.link-to "demo.navbars"}}Navbars{{/nav.link-to}}{{/nav.item}}
-        {{#nav.dropdown as |dd|}}
-          {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-          {{#dd.menu as |ddm|}}
-            {{#ddm.item}}{{#ddm.link-to "index"}}Home{{/ddm.link-to}}{{/ddm.item}}
-            {{#ddm.item}}{{#ddm.link-to "demo.navbars"}}Navbars{{/ddm.link-to}}{{/ddm.item}}
-          {{/dd.menu}}
-        {{/nav.dropdown}}
-      {{/navbar.nav}}
-    {{/navbar.content}}
-  {{/bs-navbar}}
+    <navbar.content>
+      <navbar.nav as |nav|>
+        <nav.item @linkTo="index">Home</nav.item>
+        <nav.item @linkTo="demo.navbars">Navbars</nav.item>
+        <nav.dropdown as |dd|>
+          <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+          <dd.menu as |ddm|>
+            <ddm.item>
+              {{#ddm.link-to "index"}}Home{{/ddm.link-to}}
+            </ddm.item>
+            <ddm.item>
+              {{#ddm.link-to "demo.navbars"}}Navbars{{/ddm.link-to}}
+            </ddm.item>
+          </dd.menu>
+        </nav.dropdown>
+      </navbar.nav>
+    </navbar.content>
+  </BsNavbar>
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  {{code-snippet name="navbar-demo.hbs"}}
+  <CodeSnippet @name="navbar-demo.hbs" />
 </div>

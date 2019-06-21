@@ -190,6 +190,55 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
   });
 
+  test('Submitting the form with invalid validation shows validation errors only after onInvalid promise resolves', async function(assert) {
+    let model = {};
+    this.set('model', model);
+    this.set('errors', A(['There is an error']));
+    this.set('validateStub', this.fake.rejects());
+    let deferredInvalidAction = defer();
+    this.set('invalid', () => deferredInvalidAction.promise);
+
+    await render(
+      hbs`{{#bs-form model=model hasValidator=true validate=validateStub onInvalid=this.invalid as |form|}}{{form.element hasValidator=true errors=errors}}{{/bs-form}}`
+    );
+
+    await triggerEvent('form', 'submit');
+
+    assert.dom(formFeedbackElement()).hasNoClass(
+      validationErrorClass(),
+      'validation errors aren\'t shown before onInvalid is settled'
+    );
+
+    deferredInvalidAction.resolve();
+    await settled();
+
+    assert.dom(formFeedbackElement()).hasClass(
+      validationErrorClass(),
+      'validation errors are shown after onInvalid is settled'
+    );
+    assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
+  });
+
+  test('form with validation has novalidate attribute', async function(assert) {
+    let model = {};
+    this.set('model', model);
+    await render(
+      hbs`{{#bs-form model=model hasValidator=true as |form|}}Test{{/bs-form}}`
+    );
+
+    assert.dom('form').hasAttribute('novalidate');
+  });
+
+  test('form with validation allows overriding novalidate attribute', async function(assert) {
+    let model = {};
+    this.set('model', model);
+    await render(
+      hbs`{{#bs-form model=model hasValidator=true novalidate=false as |form|}}Test{{/bs-form}}`
+    );
+
+    assert.dom('form').doesNotHaveAttribute('novalidate');
+  });
+
   testRequiringFocus('Submitting a form continues to show validations', async function(assert) {
     let model = {};
     this.set('model', model);
@@ -746,17 +795,10 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('supports novalidate attribute', async function(assert) {
-    assert.expect(2);
     await render(hbs`{{bs-form}}`);
-    assert.equal(
-      this.element.querySelector('form').getAttribute('novalidate'),
-      null,
-      'defaults to false'
-    );
+    assert.dom('form').doesNotHaveAttribute('novalidate');
     await render(hbs`{{bs-form novalidate=true}}`);
-    assert.ok(
-      this.element.querySelector('form').getAttribute('novalidate') === ''
-    );
+    assert.dom('form').hasAttribute('novalidate');
   });
 
   test('disabled property propagates to all its elements', async function(assert) {

@@ -1,9 +1,10 @@
-import { module, test } from 'qunit';
+import { module, test, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { testBS3, testBS4 } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
+import { gte } from 'ember-compatibility-helpers';
 
 module('Integration | Component | bs-dropdown/menu', function(hooks) {
   setupRenderingTest(hooks);
@@ -74,5 +75,19 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
     assert
       .dom('.dropdown-menu')
       .hasClass('custom-class-2', 'menu has custom-class-2 class');
+  });
+
+  (gte('3.4.0') ? test : skip)('dropdown menu supports arbitrary attributes w/ angle brackets', async function(assert) {
+    await render(
+      hbs`<BsDropdown::menu @isOpen={{true}} @toggleElement={{this.element}} class="custom-class-1" data-test-menu>Something</BsDropdown::menu>`
+    );
+
+    assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
+    assert
+      .dom('.dropdown-menu')
+      .hasClass('custom-class-1', 'menu has custom-class-1 class');
+    assert
+      .dom('.dropdown-menu')
+      .hasAttribute('data-test-menu');
   });
 });

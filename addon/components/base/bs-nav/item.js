@@ -1,11 +1,13 @@
 import Component from '@ember/component';
-import { observer } from '@ember/object';
+import { observer, computed } from '@ember/object';
 import { filter, filterBy, gt } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
 import LinkComponent from '@ember/routing/link-component';
 import layout from 'ember-bootstrap/templates/components/bs-nav/item';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import overrideableCP from '../../../utils/overrideable-cp';
+import { inject as service } from '@ember/service';
+import { isArray } from '@ember/array';
 
 /**
 
@@ -21,6 +23,22 @@ export default Component.extend(ComponentParent, {
   layout,
   classNameBindings: ['disabled', 'active'],
   tagName: 'li',
+  router: service(),
+
+  /**
+   * If set will wrap the item's content in a link. Accepts either a string with the route name, or an array
+   * with the route name and one or multiple models / query params, similar to the positional params of `{{link-to ...}}`
+   *
+   * @property linkTo
+   * @type {string|array}
+   * @public
+   */
+  linkTo: undefined,
+
+  linkToParams: computed('linkTo', function() {
+    let params = this.get('linkTo');
+    return params ? (isArray(params) ? params : [params]) : undefined;
+  }),
 
   /**
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
@@ -46,8 +64,10 @@ export default Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  active: overrideableCP('_active', function() {
-    return this.get('_active');
+  active: overrideableCP('_active', 'linkToParams.[]', 'router.currentURL', function() {
+    let params = this.get('linkToParams');
+
+    return params ? this.get('router').isActive(...params) : this.get('_active');
   }),
   _active: false,
 

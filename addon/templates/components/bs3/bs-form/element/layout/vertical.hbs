@@ -1,7 +1,7 @@
-{{#if hasLabel}}
-  {{component labelComponent}}
+{{#if this.hasLabel}}
+  {{component @labelComponent}}
 {{/if}}
 {{yield}}
-{{component feedbackIconComponent}}
-{{component errorsComponent}}
-{{component helpTextComponent}}
+{{component @feedbackIconComponent}}
+{{component @errorsComponent}}
+{{component @helpTextComponent}}

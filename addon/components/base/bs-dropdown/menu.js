@@ -15,15 +15,6 @@ import { next } from '@ember/runloop';
  */
 export default Component.extend({
   layout,
-
-  /**
-   * Defaults to a `<ul>` tag in BS3 and a `<div>` tag in BS4. Change for other types of dropdown menus.
-   *
-   * @property tagName
-   * @type string
-   * @default ul
-   * @public
-   */
   tagName: '',
 
   /**

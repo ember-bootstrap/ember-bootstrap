@@ -18,7 +18,6 @@ export default ContextualHelpElement.extend({
    * @type string
    * @public
    */
-  title: undefined,
 
   /**
    * @property hasTitle

@@ -12,13 +12,13 @@ import RSVP from 'rsvp';
 
   You can use whatever markup you like within the form. The following shows Bootstrap 3 usage for the internal markup.
 
- ```handlebars
-   {{#bs-form onSubmit=(action "submit") as |form|}}
-     {{#form.group validation=firstNameValidation}}
-       <label class="control-label">First name</label>
-       <input value={{firstname}} class="form-control" oninput={{action (mut firstname) value="target.value"}} type="text">
-    {{/form.group}}
-  {{/bs-form}}
+  ```handlebars
+  <BsForm @onSubmit={{action "submit"}} as |form|>
+    <form.group>
+      <label class="control-label">First name</label>
+      <input value={{this.firstname}} class="form-control" oninput={{action (mut this.firstname) value="target.value"}} type="text">
+    </form.group>
+  </BsForm>
   ```
 
   However to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`
@@ -41,12 +41,12 @@ import RSVP from 'rsvp';
   with an invalid validation, or when focusing out of invalid inputs
 
   ```handlebars
-  {{#bs-form formLayout="horizontal" model=this onSubmit=(action "submit") as |form|}}
-    {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
-    {{form.element controlType="password" label="Password" placeholder="Password" property="password"}}
-    {{form.element controlType="checkbox" label="Remember me" property="rememberMe"}}
-    {{bs-button defaultText="Submit" type="primary" buttonType="submit"}}
-  {{/bs-form}}
+  <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|>
+    <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
+    <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" />
+    <form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" />
+    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+  </BsForm>
   ```
 
   See the [Components.FormElement](Components.FormElement.html) API docs for further information.
@@ -76,32 +76,32 @@ import RSVP from 'rsvp';
   A `isSubmitting` property is yielded, which is `true` after submit has been triggered and before the Promise returned
   by `onSubmit` is fulfilled. It could be used to disable form's submit button and showing a loading spinner for example:
 
-  ```
-  {{#bs-form onSubmit=(action 'save') as |form|}}
-    {{#bs-button buttonType='submit' disabled=form.isSubmitting}}
+  ```hbs
+  <BsForm @onSubmit={{action "save"}} as |form|>
+    <BsButton @buttonType="submit" @disabled={{form.isSubmitting}}>
       Save
-      {{#if form.isSubmitting}} {{fa-icon 'spinner'}} {{/if}}
-    {{/bs-button}}
-  {{/bs-form}}
+      {{#if form.isSubmitting}} {{fa-icon "spinner"}} {{/if}}
+    </BsButton>
+  </BsForm>
   ```
 
   Additionaly `isSubmitted` and `isRejected` properties are yielded. `isSubmitted` is `true` if last submission was successful.
   `isRejected` is `true` if last submission was rejected due to validation errors or by an action bound to `onSubmit` event, returning a rejected promise.
   Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:
 
-  ```
-  {{#bs-form onSubmit=(action 'save') as |form|}}
-    {{#bs-button buttonType='submit' type=(if form.isRejected "danger" "primary")}}
+  ```hbs
+  <BsForm @onSubmit={{action 'save}} as |form|>
+    <BsButton @buttonType="submit" @type={{if form.isRejected "danger" "primary"}}>
       Save
-    {{/bs-button}}
-  {{/bs-form}}
+    </BsButton>
+  </BsForm>
   ```
 
   @class Form
   @namespace Components
   @extends Ember.Component
   @public
- */
+*/
 export default Component.extend({
   layout,
   tagName: 'form',
@@ -131,7 +131,6 @@ export default Component.extend({
    * @type Ember.Object
    * @public
    */
-  model: null,
 
   /**
    * Set the layout of the form to either "vertical", "horizontal" or "inline". See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal
@@ -264,16 +263,19 @@ export default Component.extend({
 
   /**
    * If set to true novalidate attribute is present on form element
+   * Will be true by default if validation support is enabled.
    *
    * @property novalidate
    * @type boolean
    * @default null
    * @public
    */
-  novalidate: false,
+  novalidate: null,
 
-  _novalidate: computed('novalidate', function() {
-    return this.get('novalidate') === true ? '' : undefined;
+  _novalidate: computed('novalidate', 'hasValidator', function() {
+    return (this.get('hasValidator') && this.get('novalidate') !== false) || this.get('novalidate') === true
+        ? ''
+        : undefined;
   }),
 
   /**
@@ -413,9 +415,6 @@ export default Component.extend({
             });
         },
         (error) => {
-          // model is invalid
-          this.set('showAllValidations', true);
-
           return RSVP.resolve()
             .then(() => {
               return this.get('onInvalid')(model, error);
@@ -425,8 +424,11 @@ export default Component.extend({
                 return;
               }
 
-              this.set('isRejected', true);
-              this.decrementProperty('pendingSubmissions');
+              this.setProperties({
+                showAllValidations: true,
+                isRejected: true,
+                pendingSubmissions: this.get('pendingSubmissions') - 1
+              });
 
               throw error;
             });

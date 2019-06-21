@@ -1,9 +1,13 @@
-<div class={{if fluid "container-fluid" "container"}}>
+<div class={{if this.fluid "container-fluid" "container"}}>
   {{yield
     (hash
-      toggle=(component toggleComponent onClick=(action "toggleNavbar") collapsed=_collapsed)
-      content=(component contentComponent collapsed=_collapsed onHidden=onCollapsed onShown=onExpanded)
-      nav=(component navComponent linkToComponent=(component linkToComponent onCollapse=(action "collapse")))
+      toggle=(component this.toggleComponent onClick=(action "toggleNavbar") collapsed=_collapsed)
+      content=(component this.contentComponent collapsed=_collapsed onHidden=onCollapsed onShown=onExpanded)
+      nav=(component
+        this.navComponent
+        itemComponent=(component this.navItemComponent onCollapse=(action "collapse"))
+        linkToComponent=(component this.linkToComponent onCollapse=(action "collapse"))
+      )
       collapse=(action "collapse")
       expand=(action "expand")
       toggleNavbar=(action "toggleNavbar")
