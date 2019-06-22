@@ -251,10 +251,10 @@ export default Component.extend(TypeClass, SizeClass, {
    *
    * @property preventConcurrency
    * @type Boolean
-   * @default false
+   * @default true
    * @public
    */
-  preventConcurrency: false,
+  preventConcurrency: true,
 
   /**
    * State of the button. The button's label (if not used as a block component) will be set to the
