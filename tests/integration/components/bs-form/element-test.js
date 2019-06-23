@@ -106,6 +106,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
   });
 
   async function controlTypeLayoutTest(assert, controlType, selector) {
+    this.set('formLayout', 'vertical');
     this.set('controlType', controlType);
     await render(hbs`{{bs-form/element controlType=controlType formLayout=formLayout horizontalLabelGridClass="col-md-4"}}`);
 
@@ -220,6 +221,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     });
 
     test('controlType "radio" is supported', async function(assert) {
+      this.set('formLayout', 'vertical');
       await render(hbs`{{bs-form/element controlType="radio" formLayout=formLayout options=simpleOptions horizontalLabelGridClass="col-md-4"}}`);
 
       formLayouts.forEach((layout) => {
