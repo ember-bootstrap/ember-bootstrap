@@ -5,11 +5,11 @@
 <div class="bs-example">
   <BsForm @formLayout="horizontal" @model={{this}} as |form|>
     <form.element @label="Layout" @property="formLayout">
-      <BsButton-group @value={{formLayout}} @type="radio" @onChange={{action (mut formLayout)}} as |bg|>
+      <BsButtonGroup @value={{formLayout}} @type="radio" @onChange={{action (mut formLayout)}} as |bg|>
         <bg.button @value="vertical">Vertical</bg.button>
         <bg.button @value="horizontal">Horizontal</bg.button>
         <bg.button @value="inline">Inline</bg.button>
-      </BsButton-group>
+      </BsButtonGroup>
     </form.element>
   </BsForm>
   <hr>
