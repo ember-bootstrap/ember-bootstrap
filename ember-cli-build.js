@@ -11,7 +11,10 @@ module.exports = function(defaults) {
       importBootstrapCSS: false
     },
     'ember-prism': {
-      'components': ['markup-templating', 'handlebars', 'javascript']
+      'components': ['markup-templating', 'handlebars', 'javascript'],
+      plugins: [
+        'line-numbers',
+      ],
     }
   };
 

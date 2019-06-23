@@ -3,7 +3,6 @@
 @import 'bs-example';
 @import "ember-power-select/themes/bootstrap";
 @import "ember-power-select";
-@import "highlight-style";
 
 body {
   //position: relative;
@@ -33,5 +32,16 @@ body > div > .navbar {
     border-bottom: solid 3px #7BBA1D;
 
     border-radius: .25rem;
+  }
+}
+
+code {
+  .line-numbers-rows {
+    opacity: 0.3;
+    transition: opacity 0.5s;
+  }
+
+  &:hover .line-numbers-rows {
+    opacity: 1;
   }
 }
