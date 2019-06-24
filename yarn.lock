@@ -4420,10 +4420,20 @@ ember-compatibility-helpers@^1.0.2, ember-compatibility-helpers@^1.2.0:
     ember-cli-version-checker "^2.1.1"
     semver "^5.4.1"
 
-ember-concurrency@^0.10.0, "ember-concurrency@^0.8.0 || ^0.9.0 || ^0.10.0", ember-concurrency@^0.8.26, "ember-concurrency@^0.8.27 || ^0.9.0 || ^0.10.0":
+ember-concurrency@^0.10.0, ember-concurrency@^0.8.26, "ember-concurrency@^0.8.27 || ^0.9.0 || ^0.10.0":
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-0.10.0.tgz#9c7c79dca411e01466119f02d7197c0a4ff0df08"
   integrity sha512-KhNNkUqnAN0isuAwSHaTJtmY/MdHJogSSAj7lCigzfJn2+21yafQcwzoVqf5LdMOn2+owWYURr1YiwzuOvlGyQ==
+  dependencies:
+    babel-core "^6.24.1"
+    ember-cli-babel "^6.8.2"
+    ember-compatibility-helpers "^1.2.0"
+    ember-maybe-import-regenerator "^0.1.5"
+
+ember-concurrency@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-1.0.0.tgz#3b650672fdd5dc1d45007626119135829076c2b6"
+  integrity sha512-76aKC0lo2LAPoQYz7vMRlpolWTIQerszr8PPf3JMM5cTOzPwXUtzDcjfso3JAEDdhyUF9fkv2V1DmHagFbC2YQ==
   dependencies:
     babel-core "^6.24.1"
     ember-cli-babel "^6.8.2"
@@ -4555,10 +4565,10 @@ ember-named-arguments-polyfill@^1.0.0:
     ember-cli-babel "^6.6.0"
     ember-cli-version-checker "^2.1.2"
 
-ember-popper@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/ember-popper/-/ember-popper-0.10.0.tgz#7247a5553a15b53f5bfc9d80be06122ff3257cc7"
-  integrity sha512-KfSfWCWfGs1bgmhaOQVr8RMJqLlS2KBCdjySVygXVCmroKeWCIQ5SuCeCib6tKALkwmyzNsI7MMBhp5MmwzZjA==
+ember-popper@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/ember-popper/-/ember-popper-0.10.1.tgz#021529c1686babf16867bf2d715e6d669cdbfa78"
+  integrity sha512-yMQv9idNaJ/2M4pvcu1Fa4YYRKwAyHu5Yfa1Y1cCac1y6Ea+Q6txDYMGoyPstwF7019wA6gnt8NLShlR5zvHRQ==
   dependencies:
     babel6-plugin-strip-class-callcheck "^6.0.0"
     ember-angle-bracket-invocation-polyfill "^1.3.1"
