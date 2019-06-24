@@ -298,7 +298,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.ok(parentClick.called);
   });
 
-  test('preventConcurrency=true prevents onClick action to be fired concurrently', async function(assert) {
+  test('prevents onClick action to be fired concurrently', async function(assert) {
     let deferredClickAction = defer();
     let clickActionHasBeenExecuted = false;
     this.set('clickAction', () => {
@@ -306,7 +306,7 @@ module('Integration | Component | bs-button', function(hooks) {
       return deferredClickAction.promise;
     });
 
-    await render(hbs`{{bs-button onClick=clickAction preventConcurrency=true}}`);
+    await render(hbs`{{bs-button onClick=clickAction}}`);
     click('button');
     await waitUntil(() => clickActionHasBeenExecuted);
 
@@ -323,5 +323,24 @@ module('Integration | Component | bs-button', function(hooks) {
     });
     await click('button');
     assert.verifySteps(['onClick action'], 'onClick action is fired again after pending click action is settled');
+  });
+
+  test('preventConcurrency=false allows onClick action to be fired concurrently', async function(assert) {
+    let deferredClickAction = defer();
+    let clickActionExecutionCount = 0;
+
+    this.set('clickAction', () => {
+      clickActionExecutionCount++;
+      return deferredClickAction.promise;
+    });
+    await render(hbs`{{bs-button onClick=clickAction preventConcurrency=false}}`);
+
+    await click('button');
+    assert.equal(clickActionExecutionCount, 1);
+
+    await click('button');
+    assert.equal(clickActionExecutionCount, 2);
+
+    deferredClickAction.resolve();
   });
 });

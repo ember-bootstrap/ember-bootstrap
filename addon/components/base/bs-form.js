@@ -244,10 +244,10 @@ export default Component.extend({
    *
    * @property preventConcurrency
    * @type Boolean
-   * @default false
+   * @default true
    * @public
    */
-  preventConcurrency: false,
+  preventConcurrency: true,
 
   /**
    * If true, after successful validation and upon submitting the form, all current element validations will be hidden.

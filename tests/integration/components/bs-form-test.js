@@ -615,7 +615,7 @@ module('Integration | Component | bs-form', function(hooks) {
       deferredSubmitActions.push(deferred);
       return deferred.promise;
     });
-    await this.render(hbs`{{#bs-form onSubmit=submitAction as |form|}}
+    await this.render(hbs`{{#bs-form onSubmit=submitAction preventConcurrency=false as |form|}}
       <div class='state {{if form.isSubmitting 'is-submitting'}}'></div>
     {{/bs-form}}`);
 
@@ -753,7 +753,7 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.ok(submit.calledOnce, 'onSubmit action has been called');
   });
 
-  test('preventConcurrency=true prevents submission to be fired concurrently', async function(assert) {
+  test('prevents submission to be fired concurrently', async function(assert) {
     let deferredSubmitAction = defer();
     let submitActionHasBeenExecuted = false;
     this.set('submitAction', () => {
@@ -763,10 +763,7 @@ module('Integration | Component | bs-form', function(hooks) {
     this.set('beforeAction', () => {});
     this.set('validate', () => { return resolve(); });
     await render(hbs`
-      {{#bs-form
-        preventConcurrency=true
-        onSubmit=submitAction onBefore=beforeAction validate=validate hasValidator=true
-      }}{{/bs-form}}
+      {{#bs-form onSubmit=submitAction onBefore=beforeAction validate=validate hasValidator=true}}{{/bs-form}}
     `);
 
     triggerEvent('form', 'submit');
@@ -792,6 +789,36 @@ module('Integration | Component | bs-form', function(hooks) {
     this.set('validate', () => { return resolve(); });
     await triggerEvent('form', 'submit');
     assert.verifySteps(['onSubmit action'], 'onSubmit action is fired again after pending submission is settled');
+  });
+
+  test('preventConcurrency=false allows submission to be fired concurrently', async function(assert) {
+    let deferredSubmitAction = defer();
+    let submitActionExecutionCounter = 0;
+
+    let beforeActionFake = this.fake();
+    let validateFake = this.fake();
+
+    this.set('submitAction', () => {
+      submitActionExecutionCounter++;
+      return deferredSubmitAction.promise;
+    });
+    this.set('beforeAction', beforeActionFake);
+    this.set('validate', validateFake);
+    await render(hbs`
+      {{#bs-form preventConcurrency=false onSubmit=submitAction onBefore=beforeAction validate=validate hasValidator=true}}
+      {{/bs-form}}
+    `);
+
+    await triggerEvent('form', 'submit');
+    assert.equal(submitActionExecutionCounter, 1);
+
+    await triggerEvent('form', 'submit');
+    assert.equal(submitActionExecutionCounter, 2);
+
+    assert.ok(beforeActionFake.calledTwice);
+    assert.ok(validateFake.calledTwice);
+
+    deferredSubmitAction.resolve();
   });
 
   test('supports novalidate attribute', async function(assert) {
