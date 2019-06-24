@@ -326,9 +326,6 @@ module('Integration | Component | bs-button', function(hooks) {
   });
 
   test('preventConcurrency=false allows onClick action to be fired concurrently', async function(assert) {
-    // assertions are done implicitly by awaiting the expected result
-    assert.expect(0);
-
     let deferredClickAction = defer();
     let clickActionExecutionCount = 0;
 
@@ -338,10 +335,11 @@ module('Integration | Component | bs-button', function(hooks) {
     });
     await render(hbs`{{bs-button onClick=clickAction preventConcurrency=false}}`);
 
-    click('button');
-    await waitUntil(() => clickActionExecutionCount === 1);
-    click('button');
-    await waitUntil(() => clickActionExecutionCount === 2);
+    await click('button');
+    assert.equal(clickActionExecutionCount, 1);
+
+    await click('button');
+    assert.equal(clickActionExecutionCount, 2);
 
     deferredClickAction.resolve();
   });

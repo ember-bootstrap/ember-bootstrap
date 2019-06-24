@@ -809,10 +809,11 @@ module('Integration | Component | bs-form', function(hooks) {
       {{/bs-form}}
     `);
 
-    triggerEvent('form', 'submit');
-    await waitUntil(() => submitActionExecutionCounter === 1);
-    triggerEvent('form', 'submit');
-    await waitUntil(() => submitActionExecutionCounter === 2);
+    await triggerEvent('form', 'submit');
+    assert.equal(submitActionExecutionCounter, 1);
+
+    await triggerEvent('form', 'submit');
+    assert.equal(submitActionExecutionCounter, 2);
 
     assert.ok(beforeActionFake.calledTwice);
     assert.ok(validateFake.calledTwice);
