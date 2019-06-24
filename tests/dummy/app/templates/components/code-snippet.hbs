@@ -1,0 +1,7 @@
+{{#let (get-code-snippet @name) as |snippet|}}
+  <CodeBlock
+    @language="handlebars"
+    @code={{dynamic-code-snippet snippet.source language=snippet.language dynamic=@dynamicProperties}}
+    class="line-numbers"
+  />
+{{/let}}

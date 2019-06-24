@@ -57,5 +57,12 @@
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  <CodeSnippet @name="navbar-demo.hbs" />
+  <CodeSnippet
+    @name="navbar-demo.hbs"
+    @dynamicProperties={{hash
+      type=type
+      bg=bg
+      collapsed=collapsed
+    }}
+  />
 </div>

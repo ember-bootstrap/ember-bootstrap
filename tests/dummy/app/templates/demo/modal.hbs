@@ -17,8 +17,8 @@
     @onHidden={{action (mut modal1) false}}>
     Hi there
   </BsModalSimple>
-  <BsButton @onClick={{action (mut modal1) true}}>Open Modal</BsButton>
   <!-- END-SNIPPET -->
+  <BsButton @onClick={{action (mut modal1) true}}>Open Modal</BsButton>
 </div>
 <div class="highlight">
   <CodeSnippet @name="modal-demo.hbs" />
@@ -80,11 +80,24 @@
     @renderInPlace={{true}}>
     Hi there
   </BsModalSimple>
-  <BsButton @onClick={{action "open"}}>Reopen Modal</BsButton>
   <!-- END-SNIPPET -->
+  <BsButton @onClick={{action "open"}}>Reopen Modal</BsButton>
 </div>
 <div class="highlight">
-  <CodeSnippet @name="modal-options.hbs" />
+  <CodeSnippet
+    @name="modal-options.hbs"
+    @dynamicProperties={{hash
+      modal2=modal2
+      title=title
+      closeTitle=closeTitle
+      submitTitle=submitTitle
+      size=size
+      closeButton=closeButton
+      fade=fade
+      backdrop=backdrop
+      backdropClose=backdropClose
+    }}
+  />
 </div>
 <h2>
   Custom markup
@@ -102,24 +115,29 @@
     @open={{modal3}}
     @onSubmit={{action "submit"}}
     @onHidden={{action (mut modal3) false}} as |modal|>
-    <Modal.header>
+    <modal.header>
       <h4 class="modal-title">
         Custom Dialog
         <div class="badge">2</div>
       </h4>
-    </Modal.header>
-    <Modal.body>
+    </modal.header>
+    <modal.body>
       <input type="text" autofocus="autofocus">
-    </Modal.body>
-    <Modal.footer>
+    </modal.body>
+    <modal.footer>
       <BsButton @onClick={{action modal.close}}>Cancel</BsButton>
       <BsButton @type="danger">Delete</BsButton>
       <BsButton @type="success" @onClick={{action modal.submit}}>Save</BsButton>
-    </Modal.footer>
+    </modal.footer>
   </BsModal>
-  <BsButton @onClick={{action (mut modal3) true}}>Open Modal</BsButton>
   <!-- END-SNIPPET -->
+  <BsButton @onClick={{action (mut modal3) true}}>Open Modal</BsButton>
 </div>
 <div class="highlight">
-  <CodeSnippet @name="modal-custom.hbs" />
+  <CodeSnippet
+    @name="modal-custom.hbs"
+    @dynamicProperties={{hash
+      modal3=modal3
+    }}
+  />
 </div>

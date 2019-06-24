@@ -1,30 +1,30 @@
 <div class="bs-example">
   <!-- BEGIN-SNIPPET popover-demo -->
-  <BsButton>
+  <BsButton class="mb-1">
     Popover on left
     <BsPopover @placement="left" title="Popover on left">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
     </BsPopover>
   </BsButton>
-  <BsButton>
+  <BsButton class="mb-1">
     Popover on top
     <BsPopover @placement="top" title="Popover on top">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
     </BsPopover>
   </BsButton>
-  <BsButton>
+  <BsButton class="mb-1">
     Popover on bottom
     <BsPopover @placement="bottom" title="Popover on bottom">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
     </BsPopover>
   </BsButton>
-  <BsButton>
+  <BsButton class="mb-1">
     Popover on right
     <BsPopover @placement="right" title="Popover on right">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
     </BsPopover>
   </BsButton>
-  <BsButton>
+  <BsButton class="mb-1">
     Hover Popover
     <BsPopover @triggerEvents="hover" title="Hover Popover">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
@@ -43,7 +43,7 @@
 </p>
 <div class="bs-example">
   <!-- BEGIN-SNIPPET popover-target -->
-  <button type="button" class="btn btn-default">
+  <button type="button" class="btn btn-secondary">
     DOM parent
     <BsPopover title="DOM parent">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
@@ -55,7 +55,7 @@
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magnam similique voluptate!
     </BsPopover>
   </BsButton>
-  <button id="popover-button" class="btn btn-default">
+  <button id="popover-button" class="btn btn-secondary">
     CSS selector
   </button>
   <BsPopover @triggerElement="#popover-button" title="CSS selector">
@@ -72,7 +72,7 @@
 <p>
   Use the focus trigger to dismiss popovers on the user’s next click of a different element than the toggle element.
 </p>
-<BsAlert @type="info">
+<BsAlert @type="info" @dismissible={{false}}>
   For proper cross-browser and cross-platform behavior, you must use the <code>&lt;a&gt;</code> tag, not the <code>&lt;button&gt;</code>
   tag, and you also must include a <code>tabindex</code> attribute.
 </BsAlert>

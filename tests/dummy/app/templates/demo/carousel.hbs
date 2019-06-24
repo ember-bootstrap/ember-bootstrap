@@ -70,10 +70,10 @@
     @interval={{integerInterval}}
     @keyboard={{keyboard}}
     @ltr={{ltr}}
-    @model={{this}}
     @pauseOnMouseEnter={{pauseOnMouseEnter}}
     @showControls={{showControls}}
-    @showIndicators={{showIndicators}} as |car|>
+    @showIndicators={{showIndicators}}
+    as |car|>
     {{#each slides as |slide|}}
       <car.slide>
         <img alt={{slide.alt}} src={{slide.src}}>
@@ -83,7 +83,19 @@
   <!-- END-SNIPPET -->
 </div>
 <div class="highlight">
-  <CodeSnippet @name="carousel-demo.hbs" />
+  <CodeSnippet
+    @name="carousel-demo.hbs"
+    @dynamicProperties={{hash
+      wrap=wrap
+      integerIndex=integerIndex
+      integerInterval=integerInterval
+      keyboard=keyboard
+      ltr=ltr
+      pauseOnMouseEnter=pauseOnMouseEnter
+      showControls=showControls
+      showIndicators=showIndicators
+    }}
+  />
 </div>
 <h2>
   Customizable controls

@@ -6,13 +6,13 @@ export default Controller.extend({
   minValue: 0,
   maxValue: 100,
   showLabel: false,
-  type: null,
+  type: 'default',
   striped: false,
   animate: false,
   roundDigits: 0,
   /* eslint-disable ember/avoid-leaking-state-in-ember-objects */
   typeChoices: [
-    '',
+    'default',
     'success',
     'info',
     'warning',
