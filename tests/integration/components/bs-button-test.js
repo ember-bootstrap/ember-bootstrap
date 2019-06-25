@@ -199,6 +199,65 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.dom('button').hasText('default text');
   });
 
+  test('button is disabled while in pending state', async function(assert) {
+    let deferredClickAction = defer();
+    this.set('clickAction', () => {
+      return deferredClickAction.promise;
+    });
+
+    await render(hbs`{{bs-button onClick=clickAction}}`);
+    assert.dom('button').isNotDisabled();
+
+    await click('button');
+    assert.dom('button').isDisabled();
+
+    deferredClickAction.resolve();
+    await settled();
+    assert.dom('button').isNotDisabled();
+  });
+
+  test('button is not disabled while in pending state if preventConcurrency is false', async function(assert) {
+    let deferredClickAction = defer();
+    this.set('clickAction', () => {
+      return deferredClickAction.promise;
+    });
+
+    await render(hbs`<BsButton @onClick={{clickAction}} @preventConcurrency={{false}} />`);
+    await click('button');
+    assert.dom('button').isNotDisabled();
+
+    deferredClickAction.resolve();
+    await settled();
+  });
+
+  test('setting @disabled property to false prevents button from being disabled while in pending state', async function(assert) {
+    let deferredClickAction = defer();
+    this.set('clickAction', () => {
+      return deferredClickAction.promise;
+    });
+
+    await render(hbs`<BsButton @disabled={{false}} @onClick={{clickAction}} />`);
+    await click('button');
+    assert.dom('button').isNotDisabled();
+
+    deferredClickAction.resolve();
+    await settled();
+  });
+
+  test('setting disabled HTML attribute to false prevents button from being disabled while in pending state', async function(assert) {
+    let deferredClickAction = defer();
+    this.set('clickAction', () => {
+      return deferredClickAction.promise;
+    });
+
+    await render(hbs`<BsButton @onClick={{clickAction}} disabled={{false}} />`);
+    await click('button');
+    assert.dom('button').isNotDisabled();
+
+    deferredClickAction.resolve();
+    await settled();
+  });
+
   test('isPending, isFulfilled and isRejected properties are yielded', async function (assert) {
     let deferredClickAction = defer();
     this.set('clickAction', () => {

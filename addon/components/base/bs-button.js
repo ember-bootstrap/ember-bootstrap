@@ -94,7 +94,7 @@ export default Component.extend(TypeClass, SizeClass, {
    */
   classTypePrefix: 'btn',
 
-  attributeBindings: ['disabled', 'buttonType:type', 'title'],
+  attributeBindings: ['_disabled:disabled', 'buttonType:type', 'title'],
 
   /**
    * Default label of the button. Not need if used as a block component
@@ -149,12 +149,25 @@ export default Component.extend(TypeClass, SizeClass, {
   /**
    * Property to disable the button
    *
+   * The button is disabled by default if `preventConcurrency` is `true` and
+   * a Promise returned by `onClick` action is pending. You may explicitly
+   * enable / disable the button by setting `disabled` to `true` or `false`.
+   * Setting it to `null` restores the default behavior.
+   *
    * @property disabled
-   * @type boolean
-   * @default false
+   * @type ?boolean
+   * @default null
    * @public
    */
-  disabled: false,
+  disabled: null,
+
+  _disabled: computed('disabled', 'isPending', 'preventConcurrency', function() {
+    if (this.get('disabled') !== null) {
+      return this.get('disabled');
+    }
+
+    return this.get('isPending') && this.get('preventConcurrency');
+  }),
 
   /**
    * Set the type of the button, either 'button' or 'submit'
