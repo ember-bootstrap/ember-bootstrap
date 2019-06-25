@@ -1,9 +1,10 @@
 import { run } from '@ember/runloop';
 import { defer, reject, resolve } from 'rsvp';
-import { module } from 'qunit';
+import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { find, render, click, settled, waitUntil } from '@ember/test-helpers';
 import { test, testBS4, defaultButtonClass } from '../../helpers/bootstrap-test';
+import { gte } from 'ember-compatibility-helpers';
 
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -244,7 +245,7 @@ module('Integration | Component | bs-button', function(hooks) {
     await settled();
   });
 
-  test('setting disabled HTML attribute to false prevents button from being disabled while in pending state', async function(assert) {
+  (gte('3.4.0') ? test : skip)('setting disabled HTML attribute to false prevents button from being disabled while in pending state', async function(assert) {
     let deferredClickAction = defer();
     this.set('clickAction', () => {
       return deferredClickAction.promise;
