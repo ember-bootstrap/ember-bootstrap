@@ -63,7 +63,7 @@
     "ember-try": "^1.0.0",
     "eslint-plugin-ember": "^6.2.0",
     "eslint-plugin-node": "^9.1.0",
-    "execa": "^1.0.0",
+    "execa": "^2.0.0",
     "glob": "^7.1.1",
     "gulp": "^4.0.0",
     "gulp-gh-pages": "^0.6.0-6",
