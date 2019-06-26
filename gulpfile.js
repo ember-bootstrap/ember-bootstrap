@@ -31,7 +31,7 @@ gulp.task('changelog', function() {
     let tag = process.argv[index + 1];
     args.push('--next-version', tag);
   }
-  return execa('lerna-changelog', args)
+  return execa('node_modules/lerna-changelog/bin/cli.js', args)
     .then(({ stdout }) => {
       return gulp.src('CHANGELOG.md')
         .pipe(insert.prepend(stdout))
