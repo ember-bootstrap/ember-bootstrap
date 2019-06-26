@@ -1,6 +1,6 @@
 {
   "name": "ember-bootstrap",
-  "version": "2.8.0",
+  "version": "3.0.0-rc.0",
   "scripts": {
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",

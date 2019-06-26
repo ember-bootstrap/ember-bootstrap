@@ -1,4 +1,34 @@
 
+## 3.0.0-rc.0 (2019-06-26)
+
+#### :boom: Breaking Change
+* [#842](https://github.com/kaliber5/ember-bootstrap/pull/842) Button is disabled by default if in pending state ([@jelhan](https://github.com/jelhan))
+* [#834](https://github.com/kaliber5/ember-bootstrap/pull/834) Form's and Button's preventConcurrency defaults to true ([@jelhan](https://github.com/jelhan))
+* [#820](https://github.com/kaliber5/ember-bootstrap/pull/820) Form validations are shown only after an eventual promise returned from onInvalid action resolves ([@simonihmig](https://github.com/simonihmig))
+* [#794](https://github.com/kaliber5/ember-bootstrap/pull/794) Add novalidate attribute to forms by default if they support client-side validations ([@simonihmig](https://github.com/simonihmig))
+
+#### Features
+* [#842](https://github.com/kaliber5/ember-bootstrap/pull/842) Button is disabled by default if in pending state ([@jelhan](https://github.com/jelhan))
+* [#834](https://github.com/kaliber5/ember-bootstrap/pull/834) Form's and Button's preventConcurrency defaults to true ([@jelhan](https://github.com/jelhan))
+* [#795](https://github.com/kaliber5/ember-bootstrap/pull/795) Refactored templates to Octane style (angle bracket invocation, named args, this.args), allows setting HTML attributes using angle bracket invocation to the proper element ([@simonihmig](https://github.com/simonihmig))
+* [#820](https://github.com/kaliber5/ember-bootstrap/pull/820) Form validations are shown only after an eventual promise returned from onInvalid action resolves ([@simonihmig](https://github.com/simonihmig))
+* [#783](https://github.com/kaliber5/ember-bootstrap/pull/783) Add linkTo support for nav.item, deprecate nav.link-to ([@simonihmig](https://github.com/simonihmig))
+* [#794](https://github.com/kaliber5/ember-bootstrap/pull/794) Add novalidate attribute to forms by default if they support client-side validations ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#819](https://github.com/kaliber5/ember-bootstrap/pull/819) Add dynamic snippets to demo app ([@simonihmig](https://github.com/simonihmig))
+* [#777](https://github.com/kaliber5/ember-bootstrap/pull/777) Update API docs for Angle Bracket Invocation ([@betocantu93](https://github.com/betocantu93))
+* [#778](https://github.com/kaliber5/ember-bootstrap/pull/778) Updated demo examples to angle brackets syntax ([@rajasegar](https://github.com/rajasegar))
+
+#### Internal
+* [#840](https://github.com/kaliber5/ember-bootstrap/pull/840) Update all dependencies ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 5
+- Alberto Cantú Gómez ([@betocantu93](https://github.com/betocantu93))
+- Andrey Mikhaylov (lolmaus) ([@lolmaus](https://github.com/lolmaus))
+- Rajasegar Chandran ([@rajasegar](https://github.com/rajasegar))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- jelhan ([@jelhan](https://github.com/jelhan))
 ## v2.8.0 (2019-06-14)
 
 #### Features
