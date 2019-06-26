@@ -1,11 +1,12 @@
-
-## 3.0.0-rc.0 (2019-06-26)
+## v3.0.0-rc.0 (2019-06-26)
 
 #### :boom: Breaking Change
 * [#842](https://github.com/kaliber5/ember-bootstrap/pull/842) Button is disabled by default if in pending state ([@jelhan](https://github.com/jelhan))
 * [#834](https://github.com/kaliber5/ember-bootstrap/pull/834) Form's and Button's preventConcurrency defaults to true ([@jelhan](https://github.com/jelhan))
 * [#820](https://github.com/kaliber5/ember-bootstrap/pull/820) Form validations are shown only after an eventual promise returned from onInvalid action resolves ([@simonihmig](https://github.com/simonihmig))
 * [#794](https://github.com/kaliber5/ember-bootstrap/pull/794) Add novalidate attribute to forms by default if they support client-side validations ([@simonihmig](https://github.com/simonihmig))
+* [#788](https://github.com/kaliber5/ember-bootstrap/pull/788) Drop node 6 support ([@simonihmig](https://github.com/simonihmig))
+* [#787](https://github.com/kaliber5/ember-bootstrap/pull/787) Dropped support for Ember < 2.18 ([@simonihmig](https://github.com/simonihmig))
 
 #### Features
 * [#842](https://github.com/kaliber5/ember-bootstrap/pull/842) Button is disabled by default if in pending state ([@jelhan](https://github.com/jelhan))
@@ -29,6 +30,8 @@
 - Rajasegar Chandran ([@rajasegar](https://github.com/rajasegar))
 - Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
 - jelhan ([@jelhan](https://github.com/jelhan))
+
+
 ## v2.8.0 (2019-06-14)
 
 #### Features
