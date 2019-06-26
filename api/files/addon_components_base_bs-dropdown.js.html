@@ -52,356 +52,362 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-dropdown.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import Component from &#x27;@ember/component&#x27;;
-            import { computed } from &#x27;@ember/object&#x27;;
-            import { bind } from &#x27;@ember/runloop&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
-            
-            /**
-             Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
-             of a toggle element, and the dropdown menu itself.
-            
-             ### Usage
-            
-             Use this component together with the yielded contextual components:
-             * [Components.DropdownToggle](Components.DropdownToggle.html)
-             * [Components.DropdownButton](Components.DropdownButton.html)
-             * [Components.DropdownMenu](Components.DropdownMenu.html)
-               * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)
-               * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)
-               * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)
-            
-             Furthermore references to the following actions are yielded:
-            
-             * &#x60;toggleDropdown&#x60;
-             * &#x60;openDropdown&#x60;
-             * &#x60;closeDropdown&#x60;
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-dropdown as |dd|}}
-               {{#dd.toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.toggle}}
-               {{#dd.menu as |ddm|}}
-                 {{#ddm.item}}
-                   {{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}
-                 {{/ddm.item}}
-                 {{ddm.divider}}
-                 {{#ddm.item}}
-                   {{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}
-                 {{/ddm.item}}
-               {{/dd.menu}}
-             {{/bs-dropdown}}
-             &#x60;&#x60;&#x60;
-            
-             If you need to use dropdowns in a [nav](Components.Nav.html), use the &#x60;bs-nav.dropdown&#x60;
-             contextual component rather than a standalone dropdown to ensure the correct styling
-             regardless of your Bootstrap version.
-            
-             ### Button dropdowns
-            
-             To use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the
-             &#x60;Components.DropdownButton&#x60; component as the toggle:
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-dropdown as |dd|}}
-               {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
-               {{#dd.menu as |ddm|}}
-                   {{#ddm.item}}{{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}{{/ddm.item}}
-                   {{#ddm.item}}{{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}{{/ddm.item}}
-                 {{/dd.menu}}
-             {{/bs-dropdown}}
-             &#x60;&#x60;&#x60;
-            
-             It has all the functionality of a &#x60;Components.Button&#x60; with additional dropdown support.
-            
-             ### Split button dropdowns
-            
-             To have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a
-             &#x60;Components.Button&#x60; component and a &#x60;Components.DropdownButton&#x60;:
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-dropdown as |dd|}}
-               {{#bs-button}}Dropdown{{/bs-button}}
-               {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
-               {{#dd.menu as |ddm|}}
-                 {{#ddm.item}}{{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}{{/ddm.item}}
-                 {{#ddm.item}}{{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}{{/ddm.item}}
-               {{/dd.menu}}
-               {{/bs-dropdown}}
-             &#x60;&#x60;&#x60;
-            
-             ### Dropup style
-            
-             Set the &#x60;direction&#x60; property to &quot;up&quot; to switch to a &quot;dropup&quot; style:
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-dropdown direction=&quot;up&quot; as |dd|}}
-             ...
-             {{/bs-dropdown}}
-             &#x60;&#x60;&#x60;
-            
-             ### Open, close or toggle the dropdown programmatically
-            
-             If you wanted to control when the dropdown opens and closes programmatically, the &#x60;bs-dropdown&#x60; component yields the
-             &#x60;openDropdown&#x60;, &#x60;closeDropdown&#x60; and &#x60;toggleDropdown&#x60; actions which you can then pass to your own handlers. For example:
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-dropdown closeOnMenuClick=false as |dd|}}
-               {{#bs-button}}Dropdown{{/bs-button}}
-               {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
-               {{#dd.menu as |ddm|}}
-                 {{#each items as |item|}}
-                   {{#ddm.item}}
-                     &lt;a href onclick={{action &quot;changeItems&quot; item dd.closeDropdown}}&gt;
-                       {{item.text}}
-                     &lt;/a&gt;
-                   {{/ddm.item}}
-                 {{/each}}
-               {{/dd.menu}}
-               {{/bs-dropdown}}
-             &#x60;&#x60;&#x60;
-            
-             Then in your controller or component, optionally close the dropdown:
-            
-             &#x60;&#x60;&#x60;js
-             ...
-             actions: {
-               handleDropdownClicked(item, closeDropdown) {
-                 if(item.isTheRightOne) {
-                   this.chosenItems.pushObject(item);
-                   closeDropdown();
-                 } else {
-                   this.set(&#x27;item&#x27;, this.getRandomItems());
-                 }
-               },
-             }
-             &#x60;&#x60;&#x60;
-            
-            
-             ### Bootstrap 3/4 Notes
-            
-             If you need to use dropdowns in a [nav](Components.Nav.html), use the &#x60;bs-nav.dropdown&#x60;
-             contextual component rather than a standalone dropdown to ensure the correct styling
-             regardless of your Bootstrap version.
-            
-             If you use the [dropdown divider](Components.DropdownMenuDivider), you don&#x27;t have to worry
-             about differences in the markup between versions.
-            
-             Be sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application
-             links as dropdown menu items. This is essential for proper styling regardless of Bootstrap
-             version and will also provide automatic &#x60;active&#x60; highlighting on dropdown menu items. If you
-             wish to have a dropdown menu item refer to an external link, be sure to apply the &#x60;dropdown-item&#x60;
-             class to the &#x60;&lt;a&gt;&#x60; tag for Bootstrap 4 compatibility.
-            
-             The dropdown menu will be positioned using the &#x60;popper.js&#x60; library, just as the original Bootstrap
-             version does. This also allows you to set &#x60;renderInPlace=false&#x60; on the menu component to render it in a wormhole,
-             which you might want to do if you experience clipping issues by an outer &#x60;overflow: hidden&#x60; element.
-            
-             @class Dropdown
-             @namespace Components
-             @extends Ember.Component
-             @public
-             */
-            let component = Component.extend({
-              layout,
-              classNameBindings: [&#x27;containerClass&#x27;],
-            
-              /**
-               * This property reflects the state of the dropdown, whether it is open or closed.
-               *
-               * @property isOpen
-               * @default false
-               * @type boolean
-               * @private
-               */
-              isOpen: false,
-            
-              /**
-               * By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.
-               *
-               * @property closeOnMenuClick
-               * @default true
-               * @type boolean
-               * @public
-               */
-              closeOnMenuClick: true,
-            
-              /**
-               * By default the dropdown menu will expand downwards. Other options include, &#x27;up&#x27;, &#x27;left&#x27; and &#x27;right&#x27;
-               *
-               * @property direction
-               * @type string
-               * @default &#x27;down&#x27;
-               * @public
-               */
-              direction: &#x27;down&#x27;,
-            
-              /**
-               * Indicates the dropdown is being used as a navigation item dropdown.
-               *
-               * @property inNav
-               * @type boolean
-               * @default false
-               * @private
-               */
-              inNav: false,
-            
-              /**
-               * A computed property to generate the suiting class for the dropdown container, either &quot;dropdown&quot;, &quot;dropup&quot; or &quot;btn-group&quot;.
-               * BS4 only: &quot;dropleft&quot;, &quot;dropright&quot;
-               *
-               * @property containerClass
-               * @type string
-               * @readonly
-               * @private
-               */
-              containerClass: computed(&#x27;toggle.tagName&#x27;, &#x27;direction&#x27;, function() {
-                if (this.get(&#x27;toggle.tagName&#x27;) === &#x27;button&#x27; &amp;&amp; !this.get(&#x27;toggle.block&#x27;)) {
-                  return this.get(&#x27;direction&#x27;) !== &#x27;down&#x27; ? &#x60;btn-group drop${this.get(&#x27;direction&#x27;)}&#x60; : &#x27;btn-group&#x27;;
-                } else {
-                  return &#x60;drop${this.get(&#x27;direction&#x27;)}&#x60;;
-                }
-              }),
-            
-              /**
-               * @property toggleElement
-               * @private
-               */
-              toggleElement: computed(&#x27;toggle&#x27;, function() {
-                return typeof FastBoot === &#x27;undefined&#x27; ? this.get(&#x27;toggle.element&#x27;) || null : null;
-              }),
-            
-              /**
-               * Reference to the child toggle (Toggle or Button)
-               *
-               * @property toggle
-               * @private
-               */
-              toggle: null,
-            
-              /**
-               * Action is called when dropdown is about to be shown
-               *
-               * @event onShow
-               * @param {*} value
-               * @public
-               */
-              onShow(value) {}, // eslint-disable-line no-unused-vars
-            
-              /**
-               * Action is called when dropdown is about to be hidden
-               *
-               * @event onHide
-               * @param {*} value
-               * @public
-               */
-              onHide(value) {}, // eslint-disable-line no-unused-vars
-            
-              actions: {
-                toggleDropdown() {
-                  if (this.get(&#x27;isOpen&#x27;)) {
-                    this.send(&#x27;closeDropdown&#x27;);
-                  } else {
-                    this.send(&#x27;openDropdown&#x27;);
-                  }
-                },
-            
-                openDropdown() {
-                  this.set(&#x27;isOpen&#x27;, true);
-                  this.addClickListener();
-                  this.get(&#x27;onShow&#x27;)();
-                },
-            
-                closeDropdown() {
-                  this.set(&#x27;isOpen&#x27;, false);
-                  this.removeClickListener();
-                  this.get(&#x27;onHide&#x27;)();
-                }
-              },
-            
-              addClickListener() {
-                if (!this.clickListener) {
-                  this.clickListener = bind(this, this.closeOnClickHandler);
-                  document.addEventListener(&#x27;click&#x27;, this.clickListener, true);
-                }
-              },
-            
-              removeClickListener() {
-                if (this.clickListener)  {
-                  document.removeEventListener(&#x27;click&#x27;, this.clickListener, true);
-                  this.clickListener = null;
-                }
-              },
-            
-              willDestroyElement() {
-                this._super(...arguments);
-                this.removeClickListener();
-              },
-            
-              /**
-               * Handler for click events to close the dropdown
-               *
-               * @method closeOnClickHandler
-               * @param e
-               * @protected
-               */
-              closeOnClickHandler(e) {
-                let { target } = e;
-                let { toggleElement, menuElement } = this.getProperties(&#x27;toggleElement&#x27;, &#x27;menuElement&#x27;);
-            
-                if (!this.get(&#x27;isDestroyed&#x27;)
-                  &amp;&amp; (toggleElement &amp;&amp; !toggleElement.contains(target))
-                  &amp;&amp; ((menuElement &amp;&amp; !menuElement.contains(target)) || this.get(&#x27;closeOnMenuClick&#x27;))) {
-                  this.send(&#x27;closeDropdown&#x27;);
-                }
-              },
-            
-              /**
-               * @property buttonComponent
-               * @type {String}
-               * @private
-               */
-              buttonComponent: &#x27;bs-dropdown/button&#x27;,
-            
-              /**
-               * @property toggleComponent
-               * @type {String}
-               * @private
-               */
-              toggleComponent: &#x27;bs-dropdown/toggle&#x27;,
-            
-              /**
-               * @property menuComponent
-               * @type {String}
-               * @private
-               */
-              menuComponent: &#x27;bs-dropdown/menu&#x27;
-            });
-            
-            Object.defineProperties(component.prototype, {
-            
-              /**
-               * The DOM element of the &#x60;.dropdown-menu&#x60; element
-               * @type object
-               * @readonly
-               * @private
-               */
-              menuElement: {
-                get() {
-                  return document.getElementById(&#x60;${this.get(&#x27;elementId&#x27;)}__menu&#x60;);
-                }
-              }
-            });
-            
-            export default component;
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-dropdown.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Component from &#x27;@ember/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { bind } from &#x27;@ember/runloop&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
+
+/**
+  Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
+  of a toggle element, and the dropdown menu itself.
+
+  ### Usage
+
+  Use this component together with the yielded contextual components:
+  * [Components.DropdownToggle](Components.DropdownToggle.html)
+  * [Components.DropdownButton](Components.DropdownButton.html)
+  * [Components.DropdownMenu](Components.DropdownMenu.html)
+    * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)
+    * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)
+    * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)
+
+  Furthermore references to the following actions are yielded:
+
+  * &#x60;toggleDropdown&#x60;
+  * &#x60;openDropdown&#x60;
+  * &#x60;closeDropdown&#x60;
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsDropdown as |dd|&gt;
+    &lt;dd.toggle&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/dd.toggle&gt;
+    &lt;dd.menu as |ddm|&gt;
+      &lt;ddm.item&gt;
+        {{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}
+      &lt;/ddm.item&gt;
+      &lt;ddm.item&gt;
+        {{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}
+      &lt;/ddm.item&gt;
+    &lt;/dd.menu&gt;
+  &lt;/BsDropdown&gt;
+  &#x60;&#x60;&#x60;
+
+  If you need to use dropdowns in a [nav](Components.Nav.html), use the &#x60;bs-nav.dropdown&#x60;
+  contextual component rather than a standalone dropdown to ensure the correct styling
+  regardless of your Bootstrap version.
+
+  ### Button dropdowns
+
+  To use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the
+  &#x60;Components.DropdownButton&#x60; component as the toggle:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsDropdown as |dd|&gt;
+    &lt;dd.button&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/dd.button&gt;
+    &lt;dd.menu as |ddm|&gt;
+      &lt;ddm.item&gt;
+        {{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}
+      &lt;/ddm.item&gt;
+      &lt;ddm.item&gt;
+        {{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}
+      &lt;/ddm.item&gt;
+    &lt;/dd.menu&gt;
+  &lt;/BsDropdown&gt;
+  &#x60;&#x60;&#x60;
+
+  It has all the functionality of a &#x60;Components.Button&#x60; with additional dropdown support.
+
+  ### Split button dropdowns
+
+  To have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a
+  &#x60;Components.Button&#x60; component and a &#x60;Components.DropdownButton&#x60;:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsDropdown as |dd|&gt;
+    &lt;BsButton&gt;Dropdown&lt;/BsButton&gt;
+    &lt;dd.button&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/dd.button&gt;
+    &lt;dd.menu as |ddm|&gt;
+      &lt;ddm.item&gt;
+        {{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}
+      &lt;/ddm.item&gt;
+      &lt;ddm.item&gt;
+        {{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}
+      &lt;/ddm.item&gt;
+    &lt;/dd.menu&gt;
+  &lt;/BsDropdown&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Dropup style
+
+  Set the &#x60;direction&#x60; property to &quot;up&quot; to switch to a &quot;dropup&quot; style:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsDropdown @direction=&quot;up&quot; as |dd|&gt;
+    ...
+  &lt;/BsDropdown&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Open, close or toggle the dropdown programmatically
+
+  If you wanted to control when the dropdown opens and closes programmatically, the &#x60;bs-dropdown&#x60; component yields the
+  &#x60;openDropdown&#x60;, &#x60;closeDropdown&#x60; and &#x60;toggleDropdown&#x60; actions which you can then pass to your own handlers. For example:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsDropdown @closeOnMenuClick={{false}} as |dd|&gt;
+    &lt;BsButton&gt;Dropdown&lt;/BsButton&gt;
+    &lt;dd.button&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/dd.button&gt;
+    &lt;dd.menu as |ddm|&gt;
+      {{#each this.items as |item|}}
+        &lt;ddm.item&gt;
+          &lt;a href onclick={{action &quot;changeItems&quot; item dd.closeDropdown}}&gt;
+            {{item.text}}
+          &lt;/a&gt;
+        &lt;/ddm.item&gt;
+      {{/each}}
+    &lt;/dd.menu&gt;
+  &lt;/BsDropdown&gt;
+  &#x60;&#x60;&#x60;
+
+  Then in your controller or component, optionally close the dropdown:
+
+  &#x60;&#x60;&#x60;js
+  ...
+  actions: {
+    handleDropdownClicked(item, closeDropdown) {
+      if(item.isTheRightOne) {
+        this.chosenItems.pushObject(item);
+        closeDropdown();
+      } else {
+        this.set(&#x27;item&#x27;, this.getRandomItems());
+      }
+    },
+  }
+  &#x60;&#x60;&#x60;
+
+
+  ### Bootstrap 3/4 Notes
+
+  If you need to use dropdowns in a [nav](Components.Nav.html), use the &#x60;bs-nav.dropdown&#x60;
+  contextual component rather than a standalone dropdown to ensure the correct styling
+  regardless of your Bootstrap version.
+
+  If you use the [dropdown divider](Components.DropdownMenuDivider), you don&#x27;t have to worry
+  about differences in the markup between versions.
+
+  Be sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application
+  links as dropdown menu items. This is essential for proper styling regardless of Bootstrap
+  version and will also provide automatic &#x60;active&#x60; highlighting on dropdown menu items. If you
+  wish to have a dropdown menu item refer to an external link, be sure to apply the &#x60;dropdown-item&#x60;
+  class to the &#x60;&lt;a&gt;&#x60; tag for Bootstrap 4 compatibility.
+
+  The dropdown menu will be positioned using the &#x60;popper.js&#x60; library, just as the original Bootstrap
+  version does. This also allows you to set &#x60;renderInPlace=false&#x60; on the menu component to render it in a wormhole,
+  which you might want to do if you experience clipping issues by an outer &#x60;overflow: hidden&#x60; element.
+
+  @class Dropdown
+  @namespace Components
+  @extends Ember.Component
+  @public
+s*/
+let component = Component.extend({
+  layout,
+  classNameBindings: [&#x27;containerClass&#x27;],
+
+  /**
+   * This property reflects the state of the dropdown, whether it is open or closed.
+   *
+   * @property isOpen
+   * @default false
+   * @type boolean
+   * @private
+   */
+  isOpen: false,
+
+  /**
+   * By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.
+   *
+   * @property closeOnMenuClick
+   * @default true
+   * @type boolean
+   * @public
+   */
+  closeOnMenuClick: true,
+
+  /**
+   * By default the dropdown menu will expand downwards. Other options include, &#x27;up&#x27;, &#x27;left&#x27; and &#x27;right&#x27;
+   *
+   * @property direction
+   * @type string
+   * @default &#x27;down&#x27;
+   * @public
+   */
+  direction: &#x27;down&#x27;,
+
+  /**
+   * Indicates the dropdown is being used as a navigation item dropdown.
+   *
+   * @property inNav
+   * @type boolean
+   * @default false
+   * @private
+   */
+
+  /**
+   * A computed property to generate the suiting class for the dropdown container, either &quot;dropdown&quot;, &quot;dropup&quot; or &quot;btn-group&quot;.
+   * BS4 only: &quot;dropleft&quot;, &quot;dropright&quot;
+   *
+   * @property containerClass
+   * @type string
+   * @readonly
+   * @private
+   */
+  containerClass: computed(&#x27;toggle.tagName&#x27;, &#x27;direction&#x27;, function() {
+    if (this.get(&#x27;toggle.tagName&#x27;) === &#x27;button&#x27; &amp;&amp; !this.get(&#x27;toggle.block&#x27;)) {
+      return this.get(&#x27;direction&#x27;) !== &#x27;down&#x27; ? &#x60;btn-group drop${this.get(&#x27;direction&#x27;)}&#x60; : &#x27;btn-group&#x27;;
+    } else {
+      return &#x60;drop${this.get(&#x27;direction&#x27;)}&#x60;;
+    }
+  }),
+
+  /**
+   * @property toggleElement
+   * @private
+   */
+  toggleElement: computed(&#x27;toggle&#x27;, function() {
+    return typeof FastBoot === &#x27;undefined&#x27; ? this.get(&#x27;toggle.element&#x27;) || null : null;
+  }),
+
+  /**
+   * Reference to the child toggle (Toggle or Button)
+   *
+   * @property toggle
+   * @private
+   */
+  toggle: null,
+
+  /**
+   * Action is called when dropdown is about to be shown
+   *
+   * @event onShow
+   * @param {*} value
+   * @public
+   */
+  onShow(value) {}, // eslint-disable-line no-unused-vars
+
+  /**
+   * Action is called when dropdown is about to be hidden
+   *
+   * @event onHide
+   * @param {*} value
+   * @public
+   */
+  onHide(value) {}, // eslint-disable-line no-unused-vars
+
+  actions: {
+    toggleDropdown() {
+      if (this.get(&#x27;isOpen&#x27;)) {
+        this.send(&#x27;closeDropdown&#x27;);
+      } else {
+        this.send(&#x27;openDropdown&#x27;);
+      }
+    },
+
+    openDropdown() {
+      this.set(&#x27;isOpen&#x27;, true);
+      this.addClickListener();
+      this.get(&#x27;onShow&#x27;)();
+    },
+
+    closeDropdown() {
+      this.set(&#x27;isOpen&#x27;, false);
+      this.removeClickListener();
+      this.get(&#x27;onHide&#x27;)();
+    }
+  },
+
+  addClickListener() {
+    if (!this.clickListener) {
+      this.clickListener = bind(this, this.closeOnClickHandler);
+      document.addEventListener(&#x27;click&#x27;, this.clickListener, true);
+    }
+  },
+
+  removeClickListener() {
+    if (this.clickListener)  {
+      document.removeEventListener(&#x27;click&#x27;, this.clickListener, true);
+      this.clickListener = null;
+    }
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    this.removeClickListener();
+  },
+
+  /**
+   * Handler for click events to close the dropdown
+   *
+   * @method closeOnClickHandler
+   * @param e
+   * @protected
+   */
+  closeOnClickHandler(e) {
+    let { target } = e;
+    let { toggleElement, menuElement } = this.getProperties(&#x27;toggleElement&#x27;, &#x27;menuElement&#x27;);
+
+    if (!this.get(&#x27;isDestroyed&#x27;)
+      &amp;&amp; (toggleElement &amp;&amp; !toggleElement.contains(target))
+      &amp;&amp; ((menuElement &amp;&amp; !menuElement.contains(target)) || this.get(&#x27;closeOnMenuClick&#x27;))) {
+      this.send(&#x27;closeDropdown&#x27;);
+    }
+  },
+
+  /**
+   * @property buttonComponent
+   * @type {String}
+   * @private
+   */
+  buttonComponent: &#x27;bs-dropdown/button&#x27;,
+
+  /**
+   * @property toggleComponent
+   * @type {String}
+   * @private
+   */
+  toggleComponent: &#x27;bs-dropdown/toggle&#x27;,
+
+  /**
+   * @property menuComponent
+   * @type {String}
+   * @private
+   */
+  menuComponent: &#x27;bs-dropdown/menu&#x27;
+});
+
+Object.defineProperties(component.prototype, {
+
+  /**
+   * The DOM element of the &#x60;.dropdown-menu&#x60; element
+   * @type object
+   * @readonly
+   * @private
+   */
+  menuElement: {
+    get() {
+      return document.getElementById(&#x60;${this.get(&#x27;elementId&#x27;)}__menu&#x60;);
+    }
+  }
+});
+
+export default component;
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -463,6 +469,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

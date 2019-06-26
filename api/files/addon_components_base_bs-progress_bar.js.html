@@ -52,171 +52,171 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-progress/bar.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import { readOnly } from &#x27;@ember/object/computed&#x27;;
-            import Component from &#x27;@ember/component&#x27;;
-            import { computed } from &#x27;@ember/object&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-progress/bar&#x27;;
-            import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
-            
-            /**
-            
-             Component for a single progress bar, see [Components.Progress](Components.Progress.html) for more examples.
-            
-             @class ProgressBar
-             @namespace Components
-             @extends Ember.Component
-             @uses Mixins.TypeClass
-             @public
-             */
-            export default Component.extend(TypeClass, {
-              layout,
-              classNames: [&#x27;progress-bar&#x27;],
-              classNameBindings: [&#x27;progressBarStriped&#x27;],
-            
-              attributeBindings: [&#x27;ariaValuenow&#x27;, &#x27;ariaValuemin&#x27;, &#x27;ariaValuemax&#x27;],
-            
-              /**
-               * The lower limit of the value range
-               *
-               * @property minValue
-               * @type number
-               * @default 0
-               * @public
-               */
-              minValue: 0,
-            
-              /**
-               * The upper limit of the value range
-               *
-               * @property maxValue
-               * @type number
-               * @default 100
-               * @public
-               */
-              maxValue: 100,
-            
-              /**
-               * The value the progress bar should represent
-               *
-               * @property value
-               * @type number
-               * @default 0
-               * @public
-               */
-              value: 0,
-            
-              /**
-               If true a label will be shown inside the progress bar.
-            
-               By default it will be the percentage corresponding to the &#x60;value&#x60; property, rounded to &#x60;roundDigits&#x60; digits.
-               You can customize it by using the component with a block template, which the component yields the percentage
-               value to:
-            
-               &#x60;&#x60;&#x60;hbs
-               {{#bs-progress}}
-                 {{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}
-               {{/bs-progress}}
-               &#x60;&#x60;&#x60;
-            
-               @property showLabel
-               @type boolean
-               @default false
-               @public
-               */
-              showLabel: false,
-            
-              /**
-               * Create a striped effect, see http://getbootstrap.com/components/#progress-striped
-               *
-               * @property striped
-               * @type boolean
-               * @default false
-               * @public
-               */
-              striped: false,
-            
-              /**
-               * Animate the stripes, see http://getbootstrap.com/components/#progress-animated
-               *
-               * @property animate
-               * @type boolean
-               * @default false
-               * @public
-               */
-              animate: false,
-            
-              /**
-               * Specify to how many digits the progress bar label should be rounded.
-               *
-               * @property roundDigits
-               * @type number
-               * @default 0
-               * @public
-               */
-              roundDigits: 0,
-            
-              progressBarStriped: readOnly(&#x27;striped&#x27;),
-              progressBarAnimate: readOnly(&#x27;animate&#x27;),
-            
-              ariaValuenow: readOnly(&#x27;value&#x27;),
-              ariaValuemin: readOnly(&#x27;minValue&#x27;),
-              ariaValuemax: readOnly(&#x27;maxValue&#x27;),
-            
-              /**
-               * The percentage of &#x60;value&#x60;
-               *
-               * @property percent
-               * @type number
-               * @protected
-               * @readonly
-               */
-              percent: computed(&#x27;value&#x27;, &#x27;minValue&#x27;, &#x27;maxValue&#x27;, function() {
-                let value = parseFloat(this.get(&#x27;value&#x27;));
-                let minValue = parseFloat(this.get(&#x27;minValue&#x27;));
-                let maxValue = parseFloat(this.get(&#x27;maxValue&#x27;));
-            
-                return Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100;
-              }).readOnly(),
-            
-              /**
-               * The percentage of &#x60;value&#x60;, rounded to &#x60;roundDigits&#x60; digits
-               *
-               * @property percentRounded
-               * @type number
-               * @protected
-               * @readonly
-               */
-              percentRounded: computed(&#x27;percent&#x27;, &#x27;roundDigits&#x27;, function() {
-                let roundFactor = Math.pow(10, this.get(&#x27;roundDigits&#x27;));
-                return Math.round(this.get(&#x27;percent&#x27;) * roundFactor) / roundFactor;
-              }).readOnly(),
-            
-              /**
-               * @method updateStyles
-               * @return void
-               * @private
-               */
-              updateStyles() {
-                let percent = parseFloat(this.get(&#x27;percent&#x27;));
-                this.element.style.width = !isNaN(percent) ? &#x60;${percent}%&#x60; : &#x27;&#x27;;
-              },
-            
-              didInsertElement() {
-                this.updateStyles();
-              },
-              didUpdateAttrs() {
-                this.updateStyles();
-              }
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-progress/bar.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { readOnly } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-progress/bar&#x27;;
+import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
+
+/**
+
+ Component for a single progress bar, see [Components.Progress](Components.Progress.html) for more examples.
+
+ @class ProgressBar
+ @namespace Components
+ @extends Ember.Component
+ @uses Mixins.TypeClass
+ @public
+ */
+export default Component.extend(TypeClass, {
+  layout,
+  classNames: [&#x27;progress-bar&#x27;],
+  classNameBindings: [&#x27;progressBarStriped&#x27;],
+
+  attributeBindings: [&#x27;ariaValuenow&#x27;, &#x27;ariaValuemin&#x27;, &#x27;ariaValuemax&#x27;],
+
+  /**
+   * The lower limit of the value range
+   *
+   * @property minValue
+   * @type number
+   * @default 0
+   * @public
+   */
+  minValue: 0,
+
+  /**
+   * The upper limit of the value range
+   *
+   * @property maxValue
+   * @type number
+   * @default 100
+   * @public
+   */
+  maxValue: 100,
+
+  /**
+   * The value the progress bar should represent
+   *
+   * @property value
+   * @type number
+   * @default 0
+   * @public
+   */
+  value: 0,
+
+  /**
+   If true a label will be shown inside the progress bar.
+
+   By default it will be the percentage corresponding to the &#x60;value&#x60; property, rounded to &#x60;roundDigits&#x60; digits.
+   You can customize it by using the component with a block template, which the component yields the percentage
+   value to:
+
+   &#x60;&#x60;&#x60;hbs
+   {{#bs-progress}}
+     {{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}
+   {{/bs-progress}}
+   &#x60;&#x60;&#x60;
+
+   @property showLabel
+   @type boolean
+   @default false
+   @public
+   */
+  showLabel: false,
+
+  /**
+   * Create a striped effect, see http://getbootstrap.com/components/#progress-striped
+   *
+   * @property striped
+   * @type boolean
+   * @default false
+   * @public
+   */
+  striped: false,
+
+  /**
+   * Animate the stripes, see http://getbootstrap.com/components/#progress-animated
+   *
+   * @property animate
+   * @type boolean
+   * @default false
+   * @public
+   */
+  animate: false,
+
+  /**
+   * Specify to how many digits the progress bar label should be rounded.
+   *
+   * @property roundDigits
+   * @type number
+   * @default 0
+   * @public
+   */
+  roundDigits: 0,
+
+  progressBarStriped: readOnly(&#x27;striped&#x27;),
+  progressBarAnimate: readOnly(&#x27;animate&#x27;),
+
+  ariaValuenow: readOnly(&#x27;value&#x27;),
+  ariaValuemin: readOnly(&#x27;minValue&#x27;),
+  ariaValuemax: readOnly(&#x27;maxValue&#x27;),
+
+  /**
+   * The percentage of &#x60;value&#x60;
+   *
+   * @property percent
+   * @type number
+   * @protected
+   * @readonly
+   */
+  percent: computed(&#x27;value&#x27;, &#x27;minValue&#x27;, &#x27;maxValue&#x27;, function() {
+    let value = parseFloat(this.get(&#x27;value&#x27;));
+    let minValue = parseFloat(this.get(&#x27;minValue&#x27;));
+    let maxValue = parseFloat(this.get(&#x27;maxValue&#x27;));
+
+    return Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100;
+  }).readOnly(),
+
+  /**
+   * The percentage of &#x60;value&#x60;, rounded to &#x60;roundDigits&#x60; digits
+   *
+   * @property percentRounded
+   * @type number
+   * @protected
+   * @readonly
+   */
+  percentRounded: computed(&#x27;percent&#x27;, &#x27;roundDigits&#x27;, function() {
+    let roundFactor = Math.pow(10, this.get(&#x27;roundDigits&#x27;));
+    return Math.round(this.get(&#x27;percent&#x27;) * roundFactor) / roundFactor;
+  }).readOnly(),
+
+  /**
+   * @method updateStyles
+   * @return void
+   * @private
+   */
+  updateStyles() {
+    let percent = parseFloat(this.get(&#x27;percent&#x27;));
+    this.element.style.width = !isNaN(percent) ? &#x60;${percent}%&#x60; : &#x27;&#x27;;
+  },
+
+  didInsertElement() {
+    this.updateStyles();
+  },
+  didUpdateAttrs() {
+    this.updateStyles();
+  }
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -278,6 +278,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

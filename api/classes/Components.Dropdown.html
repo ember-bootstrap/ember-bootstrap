@@ -52,712 +52,719 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="card">
-              <h1 class="card-header">Components.Dropdown <span class="badge badge-public small">public</span></h1>
-              <div class="card-body">
-            
-                <p>Bootstrap style <a href="http://getbootstrap.com/components/#dropdowns">dropdown menus</a>, consisting
-            of a toggle element, and the dropdown menu itself.</p>
-            <h3>Usage</h3>
-            <p>Use this component together with the yielded contextual components:</p>
-            <ul>
-            <li><a href="Components.DropdownToggle.html">Components.DropdownToggle</a></li>
-            <li><a href="Components.DropdownButton.html">Components.DropdownButton</a></li>
-            <li><a href="Components.DropdownMenu.html">Components.DropdownMenu</a>
-            <ul>
-            <li><a href="Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
-            <li><a href="Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
-            <li><a href="Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
+<div class="card">
+  <h1 class="card-header">Components.Dropdown <span class="badge badge-public small">public</span></h1>
+  <div class="card-body">
+
+<p>Bootstrap style <a href="http://getbootstrap.com/components/#dropdowns">dropdown menus</a>, consisting
+of a toggle element, and the dropdown menu itself.</p>
+<h3>Usage</h3>
+<p>Use this component together with the yielded contextual components:</p>
+<ul>
+<li><a href="Components.DropdownToggle.html">Components.DropdownToggle</a></li>
+<li><a href="Components.DropdownButton.html">Components.DropdownButton</a></li>
+<li><a href="Components.DropdownMenu.html">Components.DropdownMenu</a>
+<ul>
+<li><a href="Components.DropdownMenuItem.html">Components.DropdownMenuItem</a></li>
+<li><a href="Components.DropdownMenuDivider.html">Components.DropdownMenuDivider</a></li>
+<li><a href="Components.DropdownMenuLinkTo.html">Components.DropdownMenuLinkTo</a></li>
+</ul>
+</li>
+</ul>
+<p>Furthermore references to the following actions are yielded:</p>
+<ul>
+<li><code>toggleDropdown</code></li>
+<li><code>openDropdown</code></li>
+<li><code>closeDropdown</code></li>
+</ul>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsDropdown as |dd|&gt;
+  &lt;dd.toggle&gt;Dropdown &lt;span class="caret"&gt;&lt;/span&gt;&lt;/dd.toggle&gt;
+  &lt;dd.menu as |ddm|&gt;
+    &lt;ddm.item&gt;
+      {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+    &lt;/ddm.item&gt;
+    &lt;ddm.item&gt;
+      {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+    &lt;/ddm.item&gt;
+  &lt;/dd.menu&gt;
+&lt;/BsDropdown&gt;
+</code></pre>
+<p>If you need to use dropdowns in a <a href="Components.Nav.html">nav</a>, use the <code>bs-nav.dropdown</code>
+contextual component rather than a standalone dropdown to ensure the correct styling
+regardless of your Bootstrap version.</p>
+<h3>Button dropdowns</h3>
+<p>To use a button as the dropdown toggle element (see <a href="http://getbootstrap.com/components/#btn-dropdowns">http://getbootstrap.com/components/#btn-dropdowns</a>), use the
+<code>Components.DropdownButton</code> component as the toggle:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsDropdown as |dd|&gt;
+  &lt;dd.button&gt;Dropdown &lt;span class="caret"&gt;&lt;/span&gt;&lt;/dd.button&gt;
+  &lt;dd.menu as |ddm|&gt;
+    &lt;ddm.item&gt;
+      {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+    &lt;/ddm.item&gt;
+    &lt;ddm.item&gt;
+      {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+    &lt;/ddm.item&gt;
+  &lt;/dd.menu&gt;
+&lt;/BsDropdown&gt;
+</code></pre>
+<p>It has all the functionality of a <code>Components.Button</code> with additional dropdown support.</p>
+<h3>Split button dropdowns</h3>
+<p>To have a regular button with a dropdown button as in <a href="http://getbootstrap.com/components/#btn-dropdowns-split">http://getbootstrap.com/components/#btn-dropdowns-split</a>, use a
+<code>Components.Button</code> component and a <code>Components.DropdownButton</code>:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsDropdown as |dd|&gt;
+  &lt;BsButton&gt;Dropdown&lt;/BsButton&gt;
+  &lt;dd.button&gt;Dropdown &lt;span class="caret"&gt;&lt;/span&gt;&lt;/dd.button&gt;
+  &lt;dd.menu as |ddm|&gt;
+    &lt;ddm.item&gt;
+      {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+    &lt;/ddm.item&gt;
+    &lt;ddm.item&gt;
+      {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+    &lt;/ddm.item&gt;
+  &lt;/dd.menu&gt;
+&lt;/BsDropdown&gt;
+</code></pre>
+<h3>Dropup style</h3>
+<p>Set the <code>direction</code> property to "up" to switch to a "dropup" style:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsDropdown @direction="up" as |dd|&gt;
+  ...
+&lt;/BsDropdown&gt;
+</code></pre>
+<h3>Open, close or toggle the dropdown programmatically</h3>
+<p>If you wanted to control when the dropdown opens and closes programmatically, the <code>bs-dropdown</code> component yields the
+<code>openDropdown</code>, <code>closeDropdown</code> and <code>toggleDropdown</code> actions which you can then pass to your own handlers. For example:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsDropdown @closeOnMenuClick={{false}} as |dd|&gt;
+  &lt;BsButton&gt;Dropdown&lt;/BsButton&gt;
+  &lt;dd.button&gt;Dropdown &lt;span class="caret"&gt;&lt;/span&gt;&lt;/dd.button&gt;
+  &lt;dd.menu as |ddm|&gt;
+    {{#each this.items as |item|}}
+      &lt;ddm.item&gt;
+        &lt;a href onclick={{action "changeItems" item dd.closeDropdown}}&gt;
+          {{item.text}}
+        &lt;/a&gt;
+      &lt;/ddm.item&gt;
+    {{/each}}
+  &lt;/dd.menu&gt;
+&lt;/BsDropdown&gt;
+</code></pre>
+<p>Then in your controller or component, optionally close the dropdown:</p>
+<pre class="code prettyprint"><code class="language-js">...
+actions: {
+  handleDropdownClicked(item, closeDropdown) {
+    if(item.isTheRightOne) {
+      this.chosenItems.pushObject(item);
+      closeDropdown();
+    } else {
+      this.set('item', this.getRandomItems());
+    }
+  },
+}
+</code></pre>
+<h3>Bootstrap 3/4 Notes</h3>
+<p>If you need to use dropdowns in a <a href="Components.Nav.html">nav</a>, use the <code>bs-nav.dropdown</code>
+contextual component rather than a standalone dropdown to ensure the correct styling
+regardless of your Bootstrap version.</p>
+<p>If you use the <a href="Components.DropdownMenuDivider">dropdown divider</a>, you don't have to worry
+about differences in the markup between versions.</p>
+<p>Be sure to use the <a href="Component.DropdownMenuLinkTo">dropdown menu link-to</a>, for in-application
+links as dropdown menu items. This is essential for proper styling regardless of Bootstrap
+version and will also provide automatic <code>active</code> highlighting on dropdown menu items. If you
+wish to have a dropdown menu item refer to an external link, be sure to apply the <code>dropdown-item</code>
+class to the <code>&lt;a&gt;</code> tag for Bootstrap 4 compatibility.</p>
+<p>The dropdown menu will be positioned using the <code>popper.js</code> library, just as the original Bootstrap
+version does. This also allows you to set <code>renderInPlace=false</code> on the menu component to render it in a wormhole,
+which you might want to do if you experience clipping issues by an outer <code>overflow: hidden</code> element.</p>
+
+
+  </div>
+
+  <div class="card-footer text-muted">
+    <dl class="row m-0">
+        <dt class="col-sm-3">
+          Extends
+        </dt>
+        <dd class="col-sm-9">
+          Ember.Component
+        </dd>
+        <dt class="col-sm-3">
+          Defined in
+        </dt>
+        <dd class="col-sm-9">
+          <a href="../files/addon_components_base_bs-dropdown.js.html#l6"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:6</code></a>
+        </dd>
+
+    </dl>
+  </div>
+</div>
+
+
+
+<form id="options-form" class="form-inline mb-1 mt-4">
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
+    <label class="form-check-label" for="api-show-inherited">
+      Inherited
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-protected">
+    <label class="form-check-label" for="api-show-protected">
+      Protected
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-private">
+    <label class="form-check-label" for="api-show-private">
+      Private
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
+    <label class="form-check-label" for="api-show-deprecated">
+      Deprecated
+    </label>
+  </div>
+
+</form>
+
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
+
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods">Methods</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div id="index" class="tab-pane active">
+        <h2 class="off-left">Item Index</h2>
+
+          <div class="index-section methods">
+            <h3>Methods</h3>
+
+            <ul class="index-list methods extends">
+                <li class="index-item method protected">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_closeOnClickHandler" data-tablink="closeOnClickHandler">closeOnClickHandler</a>
+
+                </li>
             </ul>
-            </li>
+          </div>
+
+          <div class="index-section properties">
+            <h3>Properties</h3>
+
+            <ul class="index-list properties extends">
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_buttonComponent"
+                     data-tablink="buttonComponent">buttonComponent</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_closeOnMenuClick"
+                     data-tablink="closeOnMenuClick">closeOnMenuClick</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_containerClass"
+                     data-tablink="containerClass">containerClass</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_direction"
+                     data-tablink="direction">direction</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_inNav"
+                     data-tablink="inNav">inNav</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_isOpen"
+                     data-tablink="isOpen">isOpen</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_menuComponent"
+                     data-tablink="menuComponent">menuComponent</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_toggle"
+                     data-tablink="toggle">toggle</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_toggleComponent"
+                     data-tablink="toggleComponent">toggleComponent</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_toggleElement"
+                     data-tablink="toggleElement">toggleElement</a>
+
+                </li>
             </ul>
-            <p>Furthermore references to the following actions are yielded:</p>
-            <ul>
-            <li><code>toggleDropdown</code></li>
-            <li><code>openDropdown</code></li>
-            <li><code>closeDropdown</code></li>
+          </div>
+
+
+          <div class="index-section events">
+            <h3>Events</h3>
+
+            <ul class="index-list events extends">
+                <li class="index-item event public">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onHide" data-tablink="onHide">onHide</a>
+
+                </li>
+                <li class="index-item event public">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onShow" data-tablink="onShow">onShow</a>
+
+                </li>
             </ul>
-            <pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown as |dd|}}
-              {{#dd.toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.toggle}}
-              {{#dd.menu as |ddm|}}
-                {{#ddm.item}}
-                  {{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}
-                {{/ddm.item}}
-                {{ddm.divider}}
-                {{#ddm.item}}
-                  {{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}
-                {{/ddm.item}}
-              {{/dd.menu}}
-            {{/bs-dropdown}}
-            </code></pre>
-            <p>If you need to use dropdowns in a <a href="Components.Nav.html">nav</a>, use the <code>bs-nav.dropdown</code>
-            contextual component rather than a standalone dropdown to ensure the correct styling
-            regardless of your Bootstrap version.</p>
-            <h3>Button dropdowns</h3>
-            <p>To use a button as the dropdown toggle element (see <a href="http://getbootstrap.com/components/#btn-dropdowns">http://getbootstrap.com/components/#btn-dropdowns</a>), use the
-            <code>Components.DropdownButton</code> component as the toggle:</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown as |dd|}}
-              {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
-              {{#dd.menu as |ddm|}}
-                  {{#ddm.item}}{{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}{{/ddm.item}}
-                  {{#ddm.item}}{{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}{{/ddm.item}}
-                {{/dd.menu}}
-            {{/bs-dropdown}}
-            </code></pre>
-            <p>It has all the functionality of a <code>Components.Button</code> with additional dropdown support.</p>
-            <h3>Split button dropdowns</h3>
-            <p>To have a regular button with a dropdown button as in <a href="http://getbootstrap.com/components/#btn-dropdowns-split">http://getbootstrap.com/components/#btn-dropdowns-split</a>, use a
-            <code>Components.Button</code> component and a <code>Components.DropdownButton</code>:</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown as |dd|}}
-              {{#bs-button}}Dropdown{{/bs-button}}
-              {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
-              {{#dd.menu as |ddm|}}
-                {{#ddm.item}}{{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}{{/ddm.item}}
-                {{#ddm.item}}{{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}{{/ddm.item}}
-              {{/dd.menu}}
-              {{/bs-dropdown}}
-            </code></pre>
-            <h3>Dropup style</h3>
-            <p>Set the <code>direction</code> property to &quot;up&quot; to switch to a &quot;dropup&quot; style:</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown direction=&quot;up&quot; as |dd|}}
-            ...
-            {{/bs-dropdown}}
-            </code></pre>
-            <h3>Open, close or toggle the dropdown programmatically</h3>
-            <p>If you wanted to control when the dropdown opens and closes programmatically, the <code>bs-dropdown</code> component yields the
-            <code>openDropdown</code>, <code>closeDropdown</code> and <code>toggleDropdown</code> actions which you can then pass to your own handlers. For example:</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{#bs-dropdown closeOnMenuClick=false as |dd|}}
-              {{#bs-button}}Dropdown{{/bs-button}}
-              {{#dd.button}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.button}}
-              {{#dd.menu as |ddm|}}
-                {{#each items as |item|}}
-                  {{#ddm.item}}
-                    &lt;a href onclick={{action &quot;changeItems&quot; item dd.closeDropdown}}&gt;
-                      {{item.text}}
-                    &lt;/a&gt;
-                  {{/ddm.item}}
-                {{/each}}
-              {{/dd.menu}}
-              {{/bs-dropdown}}
-            </code></pre>
-            <p>Then in your controller or component, optionally close the dropdown:</p>
-            <pre class="code prettyprint"><code class="language-js">...
-            actions: {
-              handleDropdownClicked(item, closeDropdown) {
-                if(item.isTheRightOne) {
-                  this.chosenItems.pushObject(item);
-                  closeDropdown();
-                } else {
-                  this.set('item', this.getRandomItems());
-                }
-              },
-            }
-            </code></pre>
-            <h3>Bootstrap 3/4 Notes</h3>
-            <p>If you need to use dropdowns in a <a href="Components.Nav.html">nav</a>, use the <code>bs-nav.dropdown</code>
-            contextual component rather than a standalone dropdown to ensure the correct styling
-            regardless of your Bootstrap version.</p>
-            <p>If you use the <a href="Components.DropdownMenuDivider">dropdown divider</a>, you don't have to worry
-            about differences in the markup between versions.</p>
-            <p>Be sure to use the <a href="Component.DropdownMenuLinkTo">dropdown menu link-to</a>, for in-application
-            links as dropdown menu items. This is essential for proper styling regardless of Bootstrap
-            version and will also provide automatic <code>active</code> highlighting on dropdown menu items. If you
-            wish to have a dropdown menu item refer to an external link, be sure to apply the <code>dropdown-item</code>
-            class to the <code>&lt;a&gt;</code> tag for Bootstrap 4 compatibility.</p>
-            <p>The dropdown menu will be positioned using the <code>popper.js</code> library, just as the original Bootstrap
-            version does. This also allows you to set <code>renderInPlace=false</code> on the menu component to render it in a wormhole,
-            which you might want to do if you experience clipping issues by an outer <code>overflow: hidden</code> element.</p>
-            
-            
-              </div>
-            
-              <div class="card-footer text-muted">
-                <dl class="row m-0">
-                    <dt class="col-sm-3">
-                      Extends
-                    </dt>
-                    <dd class="col-sm-9">
-                      Ember.Component
-                    </dd>
-                    <dt class="col-sm-3">
-                      Defined in
-                    </dt>
-                    <dd class="col-sm-9">
-                      <a href="../files/addon_components_base_bs-dropdown.js.html#l6"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:6</code></a>
-                    </dd>
-            
-                </dl>
-              </div>
-            </div>
+          </div>
+      </div>
+
+        <div id="methods" class="tab-pane">
+            <div id="method_closeOnClickHandler" class="method item protected">
+                <h3 class="name">closeOnClickHandler
+                <span class="small"> </span>
+                </h3>
             
             
             
-            <form id="options-form" class="form-inline mb-1 mt-4">
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
-                <label class="form-check-label" for="api-show-inherited">
-                  Inherited
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-protected">
-                <label class="form-check-label" for="api-show-protected">
-                  Protected
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-private">
-                <label class="form-check-label" for="api-show-private">
-                  Private
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
-                <label class="form-check-label" for="api-show-deprecated">
-                  Deprecated
-                </label>
-              </div>
-            
-            </form>
-            
-            <div class="card">
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                  <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
-            
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods">Methods</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div id="index" class="tab-pane active">
-                    <h2 class="off-left">Item Index</h2>
-            
-                      <div class="index-section methods">
-                        <h3>Methods</h3>
-            
-                        <ul class="index-list methods extends">
-                            <li class="index-item method protected">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_closeOnClickHandler" data-tablink="closeOnClickHandler">closeOnClickHandler</a>
-            
-                            </li>
-                        </ul>
-                      </div>
-            
-                      <div class="index-section properties">
-                        <h3>Properties</h3>
-            
-                        <ul class="index-list properties extends">
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_buttonComponent"
-                                 data-tablink="buttonComponent">buttonComponent</a>
-            
-                            </li>
-                            <li class="index-item property public">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_closeOnMenuClick"
-                                 data-tablink="closeOnMenuClick">closeOnMenuClick</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_containerClass"
-                                 data-tablink="containerClass">containerClass</a>
-            
-                            </li>
-                            <li class="index-item property public">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_direction"
-                                 data-tablink="direction">direction</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_inNav"
-                                 data-tablink="inNav">inNav</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_isOpen"
-                                 data-tablink="isOpen">isOpen</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_menuComponent"
-                                 data-tablink="menuComponent">menuComponent</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_toggle"
-                                 data-tablink="toggle">toggle</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_toggleComponent"
-                                 data-tablink="toggleComponent">toggleComponent</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_toggleElement"
-                                 data-tablink="toggleElement">toggleElement</a>
-            
-                            </li>
-                        </ul>
-                      </div>
+                    <span class="label label-protected">protected</span>
             
             
-                      <div class="index-section events">
-                        <h3>Events</h3>
-            
-                        <ul class="index-list events extends">
-                            <li class="index-item event public">
-                              <a href="#" data-tabid="#events" data-anchor="#event_onHide" data-tablink="onHide">onHide</a>
-            
-                            </li>
-                            <li class="index-item event public">
-                              <a href="#" data-tabid="#events" data-anchor="#event_onShow" data-tablink="onShow">onShow</a>
-            
-                            </li>
-                        </ul>
-                      </div>
-                  </div>
-            
-                    <div id="methods" class="tab-pane">
-                        <div id="method_closeOnClickHandler" class="method item protected">
-                            <h3 class="name">closeOnClickHandler
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-protected">protected</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>
-                                        Defined in
-                                <a href="../files/addon_components_base_bs-dropdown.js.html#l286"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:286</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>Handler for click events to close the dropdown</p>
-                        
-                            </div>
-                        
-                                <div class="params">
-                                    <h4>Parameters:</h4>
-                        
-                                    <ul class="params-list">
-                                        <li class="param">
-                                                <code class="param-name">e</code>
-                                                <span class="type">Object</span>
-                        
-                        
-                                            <div class="param-description">
-                                                 
-                                            </div>
-                        
-                                        </li>
-                                    </ul>
-                                </div>
-                        
-                        
-                        </div>
-                    </div>
-            
-                    <div id="properties" class="tab-pane">
-                        <div id="property_buttonComponent"
-                             class="property item private">
-                          <h3 class="name">buttonComponent
-                            <span class="badge badge-secondary small">{String}</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l304"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:304</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_closeOnMenuClick"
-                             class="property item public">
-                          <h3 class="name">closeOnMenuClick
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> true</p>
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l164"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:164</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_containerClass"
-                             class="property item private">
-                          <h3 class="name">containerClass
-                            <span class="badge badge-secondary small">string</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l194"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:194</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>A computed property to generate the suiting class for the dropdown container, either &quot;dropdown&quot;, &quot;dropup&quot; or &quot;btn-group&quot;.
-                        BS4 only: &quot;dropleft&quot;, &quot;dropright&quot;</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_direction"
-                             class="property item public">
-                          <h3 class="name">direction
-                            <span class="badge badge-secondary small">string</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> &#x27;down&#x27;</p>
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l174"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:174</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>By default the dropdown menu will expand downwards. Other options include, 'up', 'left' and 'right'</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_inNav"
-                             class="property item private">
-                          <h3 class="name">inNav
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> false</p>
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l184"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:184</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Indicates the dropdown is being used as a navigation item dropdown.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_isOpen"
-                             class="property item private">
-                          <h3 class="name">isOpen
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> false</p>
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l154"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:154</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>This property reflects the state of the dropdown, whether it is open or closed.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_menuComponent"
-                             class="property item private">
-                          <h3 class="name">menuComponent
-                            <span class="badge badge-secondary small">{String}</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l318"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:318</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_toggle"
-                             class="property item private">
-                          <h3 class="name">toggle
-                            <span class="badge badge-secondary small">unknown</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l219"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:219</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Reference to the child toggle (Toggle or Button)</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_toggleComponent"
-                             class="property item private">
-                          <h3 class="name">toggleComponent
-                            <span class="badge badge-secondary small">{String}</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l311"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:311</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_toggleElement"
-                             class="property item private">
-                          <h3 class="name">toggleElement
-                            <span class="badge badge-secondary small">unknown</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-dropdown.js.html#l211"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:211</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                    </div>
             
             
-                    <div id="events" class="tab-pane">
-                        <div id="event_onHide" class="events item public">
-                            <h3 class="name"><code>onHide</code></h3>
-                            <span class="type"></span>
-                        
-                        
-                                <span class="flag public">public</span>
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>
-                                        Defined in
-                                <a href="../files/addon_components_base_bs-dropdown.js.html#l236"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:236</code></a>
-                                </p>
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>Action is called when dropdown is about to be hidden</p>
-                        
-                            </div>
-                        
-                                <div class="params">
-                                    <h4>Event Payload:</h4>
-                        
-                                    <ul class="params-list">
-                                        <li class="param">
-                                                <code class="param-name">value</code>
-                                                <span class="type"></span>
-                        
-                        
-                                            <div class="param-description">
-                                                 
-                                            </div>
-                        
-                                        </li>
-                                    </ul>
-                                </div>
-                        
-                        
-                        </div>
-                        <div id="event_onShow" class="events item public">
-                            <h3 class="name"><code>onShow</code></h3>
-                            <span class="type"></span>
-                        
-                        
-                                <span class="flag public">public</span>
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>
-                                        Defined in
-                                <a href="../files/addon_components_base_bs-dropdown.js.html#l227"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:227</code></a>
-                                </p>
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>Action is called when dropdown is about to be shown</p>
-                        
-                            </div>
-                        
-                                <div class="params">
-                                    <h4>Event Payload:</h4>
-                        
-                                    <ul class="params-list">
-                                        <li class="param">
-                                                <code class="param-name">value</code>
-                                                <span class="type"></span>
-                        
-                        
-                                            <div class="param-description">
-                                                 
-                                            </div>
-                        
-                                        </li>
-                                    </ul>
-                                </div>
-                        
-                        
-                        </div>
-                    </div>
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_base_bs-dropdown.js.html#l292"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:292</code></a>
+                    </p>
+            
+            
+            
                 </div>
-              </div>
+            
+                <div class="description">
+                    <p>Handler for click events to close the dropdown</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Parameters:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">e</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+            
             </div>
+        </div>
+
+        <div id="properties" class="tab-pane">
+            <div id="property_buttonComponent"
+                 class="property item private">
+              <h3 class="name">buttonComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l310"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:310</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_closeOnMenuClick"
+                 class="property item public">
+              <h3 class="name">closeOnMenuClick
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> true</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l171"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:171</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_containerClass"
+                 class="property item private">
+              <h3 class="name">containerClass
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l200"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:200</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>A computed property to generate the suiting class for the dropdown container, either "dropdown", "dropup" or "btn-group".
+            BS4 only: "dropleft", "dropright"</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_direction"
+                 class="property item public">
+              <h3 class="name">direction
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;down&#x27;</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l181"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:181</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>By default the dropdown menu will expand downwards. Other options include, 'up', 'left' and 'right'</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_inNav"
+                 class="property item private">
+              <h3 class="name">inNav
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> false</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l191"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:191</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Indicates the dropdown is being used as a navigation item dropdown.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_isOpen"
+                 class="property item private">
+              <h3 class="name">isOpen
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> false</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l161"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:161</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>This property reflects the state of the dropdown, whether it is open or closed.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_menuComponent"
+                 class="property item private">
+              <h3 class="name">menuComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l324"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:324</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_toggle"
+                 class="property item private">
+              <h3 class="name">toggle
+                <span class="badge badge-secondary small">unknown</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l225"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:225</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Reference to the child toggle (Toggle or Button)</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_toggleComponent"
+                 class="property item private">
+              <h3 class="name">toggleComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l317"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:317</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_toggleElement"
+                 class="property item private">
+              <h3 class="name">toggleElement
+                <span class="badge badge-secondary small">unknown</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l217"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:217</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+        </div>
+
+
+        <div id="events" class="tab-pane">
+            <div id="event_onHide" class="events item public">
+                <h3 class="name"><code>onHide</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_base_bs-dropdown.js.html#l242"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:242</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Action is called when dropdown is about to be hidden</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Event Payload:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">value</code>
+                                    <span class="type"></span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+            
+            </div>
+            <div id="event_onShow" class="events item public">
+                <h3 class="name"><code>onShow</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_base_bs-dropdown.js.html#l233"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:233</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Action is called when dropdown is about to be shown</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Event Payload:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">value</code>
+                                    <span class="type"></span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+            
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </div>
@@ -819,6 +826,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

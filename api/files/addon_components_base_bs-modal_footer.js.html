@@ -52,106 +52,103 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-modal/footer.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import { notEmpty } from &#x27;@ember/object/computed&#x27;;
-            import Component from &#x27;@ember/component&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-modal/footer&#x27;;
-            
-            /**
-            
-             Modal footer element used within [Components.Modal](Components.Modal.html) components. See there for examples.
-            
-             @class ModalFooter
-             @namespace Components
-             @extends Ember.Component
-             @public
-             */
-            export default Component.extend({
-              layout,
-              tagName: &#x27;form&#x27;,
-              classNames: [&#x27;modal-footer&#x27;],
-            
-              /**
-               * The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block
-               * template.
-               *
-               * @property closeTitle
-               * @type string
-               * @default &#x27;Ok&#x27;
-               * @public
-               */
-              closeTitle: &#x27;Ok&#x27;,
-            
-              /**
-               * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null or if you provide
-               * your own block template.
-               *
-               * @property submitTitle
-               * @type string
-               * @default null
-               * @public
-               */
-              submitTitle: null,
-            
-              hasSubmitButton: notEmpty(&#x27;submitTitle&#x27;),
-            
-              /**
-               * Set to true to disable the submit button. If you bind this to some property that indicates if submitting is allowed
-               * (form validation for example) this can be used to prevent the user from pressing the submit button.
-               *
-               * @property submitDisabled
-               * @type boolean
-               * @default false
-               * @public
-               */
-              submitDisabled: false,
-            
-              /**
-               * The type of the submit button (primary button).
-               *
-               * @property submitButtonType
-               * @type string
-               * @default &#x27;primary&#x27;
-               * @public
-               */
-              submitButtonType: &#x27;primary&#x27;,
-            
-              /**
-               * @property buttonComponent
-               * @type {String}
-               * @private
-               */
-              buttonComponent: &#x27;bs-button&#x27;,
-            
-              /**
-               * The action to send to the parent modal component when the modal footer&#x27;s form is submitted
-               *
-               * @event onSubmit
-               * @public
-               */
-              onSubmit() {},
-            
-              /**
-               * @event onClose
-               * @public
-               */
-              onClose() {},
-            
-              submit(e) {
-                e.preventDefault();
-                // send to parent bs-modal component
-                this.get(&#x27;onSubmit&#x27;)();
-              }
-            
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-modal/footer.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { notEmpty } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-modal/footer&#x27;;
+
+/**
+
+ Modal footer element used within [Components.Modal](Components.Modal.html) components. See there for examples.
+
+ @class ModalFooter
+ @namespace Components
+ @extends Ember.Component
+ @public
+ */
+export default Component.extend({
+  layout,
+  tagName: &#x27;form&#x27;,
+  classNames: [&#x27;modal-footer&#x27;],
+
+  /**
+   * The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block
+   * template.
+   *
+   * @property closeTitle
+   * @type string
+   * @default &#x27;Ok&#x27;
+   * @public
+   */
+  closeTitle: &#x27;Ok&#x27;,
+
+  /**
+   * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null or if you provide
+   * your own block template.
+   *
+   * @property submitTitle
+   * @type string
+   * @default null
+   * @public
+   */
+
+  hasSubmitButton: notEmpty(&#x27;submitTitle&#x27;),
+
+  /**
+   * Set to true to disable the submit button. If you bind this to some property that indicates if submitting is allowed
+   * (form validation for example) this can be used to prevent the user from pressing the submit button.
+   *
+   * @property submitDisabled
+   * @type boolean
+   * @default false
+   * @public
+   */
+  submitDisabled: false,
+
+  /**
+   * The type of the submit button (primary button).
+   *
+   * @property submitButtonType
+   * @type string
+   * @default &#x27;primary&#x27;
+   * @public
+   */
+  submitButtonType: &#x27;primary&#x27;,
+
+  /**
+   * @property buttonComponent
+   * @type {String}
+   * @private
+   */
+  buttonComponent: &#x27;bs-button&#x27;,
+
+  /**
+   * The action to send to the parent modal component when the modal footer&#x27;s form is submitted
+   *
+   * @event onSubmit
+   * @public
+   */
+
+  /**
+   * @event onClose
+   * @public
+   */
+
+  submit(e) {
+    e.preventDefault();
+    // send to parent bs-modal component
+    this.get(&#x27;onSubmit&#x27;)();
+  }
+
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -213,6 +210,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

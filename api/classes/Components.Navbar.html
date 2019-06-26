@@ -52,799 +52,826 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="card">
-              <h1 class="card-header">Components.Navbar <span class="badge badge-public small">public</span></h1>
-              <div class="card-body">
-            
-                <p>Component to generate <a href="http://getbootstrap.com/components/#navbar">Bootstrap navbars</a>.</p>
-            <h3>Usage</h3>
-            <p>Uses the following components by a contextual reference:</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{#bs-navbar as |navbar|}}
-              &lt;div class=&quot;navbar-header&quot;&gt;
-                {{navbar.toggle}}
-                &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;Brand&lt;/a&gt;
-              &lt;/div&gt;
-              {{#navbar.content}}
-                {{#navbar.nav as |nav|}}
-                  {{#nav.item}}
-                    {{#nav.link-to &quot;home&quot;}}Home{{/nav.link-to}}
-                  {{/nav.item}}
-                  {{#nav.item}}
-                    {{#nav.link-to &quot;navbars&quot;}}Navbars{{/nav.link-to}}
-                  {{/nav.item}}
-                {{/navbar.nav}}
-              {{/navbar.content}}
-            {{/bs-navbar}}
-            </code></pre>
-            <p><strong>Note:</strong> the <code>&lt;div class=&quot;navbar-header&quot;&gt;</code> is required for BS3 to hold the elements visible on a mobile breakpoint,
-            when the actual content is collapsed. It should <em>not</em> be used for BS4!</p>
-            <p>The component yields references to the following contextual components:</p>
-            <ul>
-            <li><a href="Components.NavbarContent.html">Components.NavbarContent</a></li>
-            <li><a href="Components.NavbarToggle.html">Components.NavbarToggle</a></li>
-            <li><a href="Components.NavbarNav.html">Components.NavbarNav</a></li>
+<div class="card">
+  <h1 class="card-header">Components.Navbar <span class="badge badge-public small">public</span></h1>
+  <div class="card-body">
+
+<p>Component to generate <a href="http://getbootstrap.com/components/#navbar">Bootstrap navbars</a>.</p>
+<h3>Usage</h3>
+<p>Uses the following components by a contextual reference:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsNavbar as |navbar|&gt;
+  &lt;div class="navbar-header"&gt;
+     {{navbar.toggle}}
+     &lt;a class="navbar-brand" href="#"&gt;Brand&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;navbar.content&gt;
+    &lt;navbar.nav as |nav|&gt;
+      &lt;nav.item @linkTo="home"&gt;Home&lt;/nav.item&gt;
+      &lt;nav.item @linkTo="navbars"&gt;Navbars&lt;/nav.item&gt;
+    &lt;/navbar.nav&gt;
+  &lt;/navbar.content&gt;
+&lt;/BsNavBar&gt;
+</code></pre>
+<p><strong>Note:</strong> the <code>&lt;div class="navbar-header"&gt;</code> is required for BS3 to hold the elements visible on a mobile breakpoint,
+when the actual content is collapsed. It should <em>not</em> be used for BS4!</p>
+<p>The component yields references to the following contextual components:</p>
+<ul>
+<li><a href="Components.NavbarContent.html">Components.NavbarContent</a></li>
+<li><a href="Components.NavbarToggle.html">Components.NavbarToggle</a></li>
+<li><a href="Components.NavbarNav.html">Components.NavbarNav</a></li>
+</ul>
+<p>Furthermore references to the following actions are yielded:</p>
+<ul>
+<li><code>collapse</code>: triggers the <code>onCollapse</code> action and collapses the navbar (mobile)</li>
+<li><code>expand</code>: triggers the <code>onExpand</code> action and expands the navbar (mobile)</li>
+<li><code>toggleNavbar</code>: triggers the <code>toggleNavbar</code> action and toggles the navbar (mobile)</li>
+</ul>
+<h3>Responsive Design</h3>
+<p>For the mobile breakpoint the Bootstrap styles will hide the navbar content (<code>{{navbar.content}}</code>). Clicking on the
+navbar toggle button (<code>{{navbar.toggle}}</code>) will expand the menu. By default all nav links (<code>&lt;nav.item @linkTo="..."&gt;</code>) are already
+wired up to call the navbar's <code>collapse</code> action, so clicking any of them will collapse the navbar. To selectively
+prevent that, you can set its <code>collapseNavbar</code> property to false:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;nav.item @linkTo="index" @collapseNavbar={{false}}&gt;Don't collapse&lt;/nav.item&gt;
+</code></pre>
+<p>To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded <code>collapse</code>
+action:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsNavbar as |navbar|&gt;
+  &lt;navbar.content&gt;
+    &lt;navbar.nav as |nav|&gt;
+      &lt;nav.item&gt;
+        &lt;a onclick={{action navbar.collapse}}&gt;Collapse&lt;/a&gt;
+      &lt;/nav.item&gt;
+    &lt;/navbar.nav&gt;
+  &lt;/navbar.content&gt;
+&lt;/BsNavBar&gt;
+</code></pre>
+<h3>Navbar styles</h3>
+<p>The component supports the default bootstrap navbar styling options through the <code>type</code>
+property. Bootstrap navbars <a href="http://getbootstrap.com/components/#navbar-default">do not currently support justified nav links</a>,
+so those are explicitly disallowed.</p>
+<p>Other bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of
+bootstrap styles applied through the <code>class</code> attribute on the components.</p>
+<h3>Bootstrap 3/4 Notes</h3>
+<p>Bootstrap 4 changed the default navbar styling option from <code>navbar-default</code> to <code>navbar-light</code>.
+If you explicitly specified "default" in Bootstrap 3 and are migrating, you will need to change
+this in your code. Bootstrap 4 changes <code>navbar-inverse</code> to <code>navbar-dark</code>.</p>
+<p>Bootstrap 4 navbars are fluid by default without the need for an additional container. An
+additional container is added like with Bootstrap 3 if <code>fluid</code> is <code>false</code>.</p>
+
+
+  </div>
+
+  <div class="card-footer text-muted">
+    <dl class="row m-0">
+        <dt class="col-sm-3">
+          Uses
+        </dt>
+        <dd class="col-sm-9">
+          <ul class="list-inline mb-0">
+              <li class="list-inline-item"><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
+          </ul>
+        </dd>
+        <dt class="col-sm-3">
+          Extends
+        </dt>
+        <dd class="col-sm-9">
+          Ember.Component
+        </dd>
+        <dt class="col-sm-3">
+          Defined in
+        </dt>
+        <dd class="col-sm-9">
+          <a href="../files/addon_components_base_bs-navbar.js.html#l7"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:7</code></a>
+        </dd>
+
+    </dl>
+  </div>
+</div>
+
+
+
+<form id="options-form" class="form-inline mb-1 mt-4">
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
+    <label class="form-check-label" for="api-show-inherited">
+      Inherited
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-protected">
+    <label class="form-check-label" for="api-show-protected">
+      Protected
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-private">
+    <label class="form-check-label" for="api-show-private">
+      Private
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
+    <label class="form-check-label" for="api-show-deprecated">
+      Deprecated
+    </label>
+  </div>
+
+</form>
+
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
+
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods">Methods</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div id="index" class="tab-pane active">
+        <h2 class="off-left">Item Index</h2>
+
+          <div class="index-section methods">
+            <h3>Methods</h3>
+
+            <ul class="index-list methods extends">
+                <li class="index-item method private">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_collapse" data-tablink="collapse">collapse</a>
+
+                </li>
+                <li class="index-item method private">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_expand" data-tablink="expand">expand</a>
+
+                </li>
             </ul>
-            <p>Furthermore references to the following actions are yielded:</p>
-            <ul>
-            <li><code>collapse</code>: triggers the <code>onCollapse</code> action and collapses the navbar (mobile)</li>
-            <li><code>expand</code>: triggers the <code>onExpand</code> action and expands the navbar (mobile)</li>
-            <li><code>toggleNavbar</code>: triggers the <code>toggleNavbar</code> action and toggles the navbar (mobile)</li>
+          </div>
+
+          <div class="index-section properties">
+            <h3>Properties</h3>
+
+            <ul class="index-list properties extends">
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property__collapsed"
+                     data-tablink="_collapsed">_collapsed</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_backgroundColor"
+                     data-tablink="backgroundColor">backgroundColor</a>
+
+                </li>
+                <li class="index-item property protected inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix"
+                     data-tablink="classTypePrefix">classTypePrefix</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_collapsed"
+                     data-tablink="collapsed">collapsed</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_contentComponent"
+                     data-tablink="contentComponent">contentComponent</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_fluid"
+                     data-tablink="fluid">fluid</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_linkToComponent"
+                     data-tablink="linkToComponent">linkToComponent</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_navComponent"
+                     data-tablink="navComponent">navComponent</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_navItemComponent"
+                     data-tablink="navItemComponent">navItemComponent</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_position"
+                     data-tablink="position">position</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_toggleBreakpoint"
+                     data-tablink="toggleBreakpoint">toggleBreakpoint</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_toggleComponent"
+                     data-tablink="toggleComponent">toggleComponent</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_type"
+                     data-tablink="type">type</a>
+
+                </li>
             </ul>
-            <h3>Responsive Design</h3>
-            <p>For the mobile breakpoint the Bootstrap styles will hide the navbar content (<code>{{navbar.content}}</code>). Clicking on the
-            navbar toggle button (<code>{{navbar.toggle}}</code>) will expand the menu. By default all nav links (<code>{{nav.link-to}}</code>) are already
-            wired up to call the navbar's <code>collapse</code> action, so clicking any of them will collapse the navbar. To selectively
-            prevent that, you can set its <code>collapseNavbar</code> property to false:</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{#nav.item}}
-              {{#nav.link-to &quot;index&quot; collapseNavbar=false}}Don't collapse{{/nav.link-to}}
-            {{/nav.item}}
-            </code></pre>
-            <p>To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded <code>collapse</code>
-            action:</p>
-            <pre class="code prettyprint"><code class="language-hbs">{#bs-navbar as |navbar|}}
-              {{#navbar.content}}
-                {{#navbar.nav as |nav|}}
-                  {{#nav.item}}
-                    &lt;a {{action navbar.collapse}}&gt;Collapse&lt;/a&gt;
-                  {{/nav.item}}
-                {{/navbar.nav}}
-              {{/navbar.content}}
-            {{/bs-navbar}}
-            </code></pre>
-            <h3>Navbar styles</h3>
-            <p>The component supports the default bootstrap navbar styling options through the <code>type</code>
-            property. Bootstrap navbars <a href="http://getbootstrap.com/components/#navbar-default">do not currently support justified nav links</a>,
-            so those are explicitly disallowed.</p>
-            <p>Other bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of
-            bootstrap styles applied through the <code>class</code> attribute on the components.</p>
-            <h3>Bootstrap 3/4 Notes</h3>
-            <p>Bootstrap 4 changed the default navbar styling option from <code>navbar-default</code> to <code>navbar-light</code>.
-            If you explicitly specified &quot;default&quot; in Bootstrap 3 and are migrating, you will need to change
-            this in your code. Bootstrap 4 changes <code>navbar-inverse</code> to <code>navbar-dark</code>.</p>
-            <p>Bootstrap 4 navbars are fluid by default without the need for an additional container. An
-            additional container is added like with Bootstrap 3 if <code>fluid</code> is <code>false</code>.</p>
-            
-            
-              </div>
-            
-              <div class="card-footer text-muted">
-                <dl class="row m-0">
-                    <dt class="col-sm-3">
-                      Uses
-                    </dt>
-                    <dd class="col-sm-9">
-                      <ul class="list-inline mb-0">
-                          <li class="list-inline-item"><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
-                      </ul>
-                    </dd>
-                    <dt class="col-sm-3">
-                      Extends
-                    </dt>
-                    <dd class="col-sm-9">
-                      Ember.Component
-                    </dd>
-                    <dt class="col-sm-3">
-                      Defined in
-                    </dt>
-                    <dd class="col-sm-9">
-                      <a href="../files/addon_components_base_bs-navbar.js.html#l7"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:7</code></a>
-                    </dd>
-            
-                </dl>
-              </div>
-            </div>
+          </div>
+
+
+          <div class="index-section events">
+            <h3>Events</h3>
+
+            <ul class="index-list events extends">
+                <li class="index-item event public">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onCollapse" data-tablink="onCollapse">onCollapse</a>
+
+                </li>
+                <li class="index-item event public">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onCollapsed" data-tablink="onCollapsed">onCollapsed</a>
+
+                </li>
+                <li class="index-item event public">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onExpand" data-tablink="onExpand">onExpand</a>
+
+                </li>
+                <li class="index-item event public">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onExpanded" data-tablink="onExpanded">onExpanded</a>
+
+                </li>
+            </ul>
+          </div>
+      </div>
+
+        <div id="methods" class="tab-pane">
+            <div id="method_collapse" class="method item private">
+                <h3 class="name">collapse
+                <span class="small"> </span>
+                </h3>
             
             
             
-            <form id="options-form" class="form-inline mb-1 mt-4">
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
-                <label class="form-check-label" for="api-show-inherited">
-                  Inherited
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-protected">
-                <label class="form-check-label" for="api-show-protected">
-                  Protected
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-private">
-                <label class="form-check-label" for="api-show-private">
-                  Private
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
-                <label class="form-check-label" for="api-show-deprecated">
-                  Deprecated
-                </label>
-              </div>
-            
-            </form>
-            
-            <div class="card">
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                  <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
-            
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods">Methods</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div id="index" class="tab-pane active">
-                    <h2 class="off-left">Item Index</h2>
-            
-                      <div class="index-section methods">
-                        <h3>Methods</h3>
-            
-                        <ul class="index-list methods extends">
-                            <li class="index-item method private">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_collapse" data-tablink="collapse">collapse</a>
-            
-                            </li>
-                            <li class="index-item method private">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_expand" data-tablink="expand">expand</a>
-            
-                            </li>
-                        </ul>
-                      </div>
-            
-                      <div class="index-section properties">
-                        <h3>Properties</h3>
-            
-                        <ul class="index-list properties extends">
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property__collapsed"
-                                 data-tablink="_collapsed">_collapsed</a>
-            
-                            </li>
-                            <li class="index-item property public">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_backgroundColor"
-                                 data-tablink="backgroundColor">backgroundColor</a>
-            
-                            </li>
-                            <li class="index-item property protected inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix"
-                                 data-tablink="classTypePrefix">classTypePrefix</a>
-            
-                            </li>
-                            <li class="index-item property public">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_collapsed"
-                                 data-tablink="collapsed">collapsed</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_contentComponent"
-                                 data-tablink="contentComponent">contentComponent</a>
-            
-                            </li>
-                            <li class="index-item property public">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_fluid"
-                                 data-tablink="fluid">fluid</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_linkToComponent"
-                                 data-tablink="linkToComponent">linkToComponent</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_navComponent"
-                                 data-tablink="navComponent">navComponent</a>
-            
-                            </li>
-                            <li class="index-item property public">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_position"
-                                 data-tablink="position">position</a>
-            
-                            </li>
-                            <li class="index-item property public">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_toggleBreakpoint"
-                                 data-tablink="toggleBreakpoint">toggleBreakpoint</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_toggleComponent"
-                                 data-tablink="toggleComponent">toggleComponent</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_type"
-                                 data-tablink="type">type</a>
-            
-                            </li>
-                        </ul>
-                      </div>
+                    <span class="label label-private">private</span>
             
             
-                      <div class="index-section events">
-                        <h3>Events</h3>
-            
-                        <ul class="index-list events extends">
-                            <li class="index-item event public">
-                              <a href="#" data-tabid="#events" data-anchor="#event_onCollapse" data-tablink="onCollapse">onCollapse</a>
-            
-                            </li>
-                            <li class="index-item event public">
-                              <a href="#" data-tabid="#events" data-anchor="#event_onCollapsed" data-tablink="onCollapsed">onCollapsed</a>
-            
-                            </li>
-                            <li class="index-item event public">
-                              <a href="#" data-tabid="#events" data-anchor="#event_onExpand" data-tablink="onExpand">onExpand</a>
-            
-                            </li>
-                            <li class="index-item event public">
-                              <a href="#" data-tabid="#events" data-anchor="#event_onExpanded" data-tablink="onExpanded">onExpanded</a>
-            
-                            </li>
-                        </ul>
-                      </div>
-                  </div>
-            
-                    <div id="methods" class="tab-pane">
-                        <div id="method_collapse" class="method item private">
-                            <h3 class="name">collapse
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-private">private</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>
-                                        Defined in
-                                <a href="../files/addon_components_base_bs-navbar.js.html#l221"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:221</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="method_expand" class="method item private">
-                            <h3 class="name">expand
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-private">private</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>
-                                        Defined in
-                                <a href="../files/addon_components_base_bs-navbar.js.html#l211"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:211</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                
-                            </div>
-                        
-                        
-                        
-                        </div>
-                    </div>
-            
-                    <div id="properties" class="tab-pane">
-                        <div id="property__collapsed"
-                             class="property item private">
-                          <h3 class="name">_collapsed
-                            <span class="badge badge-secondary small">unknown</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-navbar.js.html#l120"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:120</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_backgroundColor"
-                             class="property item public">
-                          <h3 class="name">backgroundColor
-                            <span class="badge badge-secondary small">String</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> &#x27;light&#x27;</p>
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-navbar.js.html#l258"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:258</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Bootstrap 4 Only: Sets the background color for the navbar. Can be any color
-                        in the set that composes the <code>bg-*</code> classes and can be extended by creating your
-                        own <code>bg-*</code> classes.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_classTypePrefix"
-                             class="property item protected inherited">
-                          <h3 class="name">classTypePrefix
-                            <span class="badge badge-secondary small">string</span>
-                              <span class="badge badge-protected small">protected</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Mixins.TypeClass.html#property_classTypePrefix">Mixins.TypeClass</a>:
-                              <a href="../files/addon_mixins_type-class.js.html#l12"><code>addon&#x2F;mixins&#x2F;type-class.js:12</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            Prefix for the type class, e.g. "btn" for button type classes ("btn-primary2 etc.)
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_collapsed"
-                             class="property item public">
-                          <h3 class="name">collapsed
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> true</p>
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-navbar.js.html#l110"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:110</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Manages the state for the responsive menu between the toggle and the content.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_contentComponent"
-                             class="property item private">
-                          <h3 class="name">contentComponent
-                            <span class="badge badge-secondary small">{String}</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-navbar.js.html#l276"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:276</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_fluid"
-                             class="property item public">
-                          <h3 class="name">fluid
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> true</p>
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-navbar.js.html#l126"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:126</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Controls whether the wrapping div is a fluid container or not.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_linkToComponent"
-                             class="property item private">
-                          <h3 class="name">linkToComponent
-                            <span class="badge badge-secondary small">{String}</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-navbar.js.html#l290"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:290</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_navComponent"
-                             class="property item private">
-                          <h3 class="name">navComponent
-                            <span class="badge badge-secondary small">{String}</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-navbar.js.html#l283"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:283</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_position"
-                             class="property item public">
-                          <h3 class="name">position
-                            <span class="badge badge-secondary small">String</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> null</p>
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-navbar.js.html#l136"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:136</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Specifies the position classes for the navbar, currently supporting none, &quot;fixed-top&quot;, &quot;fixed-bottom&quot;, and
-                        either &quot;static-top&quot; (BS3) or &quot;sticky-top&quot; (BS4).
-                        See the <a href="http://getbootstrap.com/components/#navbar-fixed-top">bootstrap docs</a> for details.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_toggleBreakpoint"
-                             class="property item public">
-                          <h3 class="name">toggleBreakpoint
-                            <span class="badge badge-secondary small">String</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> &#x27;lg&#x27;</p>
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-navbar.js.html#l247"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:247</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard
-                        two character Bootstrap size abbreviations. Used to set the <code>navbar-expand-*</code>
-                        class. Set to <code>null</code> to disable collapsing.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_toggleComponent"
-                             class="property item private">
-                          <h3 class="name">toggleComponent
-                            <span class="badge badge-secondary small">{String}</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-navbar.js.html#l269"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:269</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_type"
-                             class="property item public inherited">
-                          <h3 class="name">type
-                            <span class="badge badge-secondary small">String</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> &#x27;default&#x27;</p>
-                              <p>Inherited from
-                                <a href="../classes/Mixins.TypeClass.html#property_type">Mixins.TypeClass</a>:
-                              <a href="../files/addon_mixins_type-class.js.html#l34"><code>addon&#x2F;mixins&#x2F;type-class.js:34</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            Property for type styling
-                        
-                        For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without "btn-" prefix)
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                    </div>
             
             
-                    <div id="events" class="tab-pane">
-                        <div id="event_onCollapse" class="events item public">
-                            <h3 class="name"><code>onCollapse</code></h3>
-                            <span class="type"></span>
-                        
-                        
-                                <span class="flag public">public</span>
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>
-                                        Defined in
-                                <a href="../files/addon_components_base_bs-navbar.js.html#l160"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:160</code></a>
-                                </p>
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>The action to be sent when the navbar is about to be collapsed.</p>
-                        <p>You can return false to prevent collapsing the navbar automatically, and do that in your action by
-                        setting <code>collapsed</code> to true.</p>
-                        
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="event_onCollapsed" class="events item public">
-                            <h3 class="name"><code>onCollapsed</code></h3>
-                            <span class="type"></span>
-                        
-                        
-                                <span class="flag public">public</span>
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>
-                                        Defined in
-                                <a href="../files/addon_components_base_bs-navbar.js.html#l171"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:171</code></a>
-                                </p>
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>The action to be sent after the navbar has been collapsed (including the CSS transition).</p>
-                        
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="event_onExpand" class="events item public">
-                            <h3 class="name"><code>onExpand</code></h3>
-                            <span class="type"></span>
-                        
-                        
-                                <span class="flag public">public</span>
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>
-                                        Defined in
-                                <a href="../files/addon_components_base_bs-navbar.js.html#l179"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:179</code></a>
-                                </p>
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>The action to be sent when the navbar is about to be expanded.</p>
-                        <p>You can return false to prevent expanding the navbar automatically, and do that in your action by
-                        setting <code>collapsed</code> to false.</p>
-                        
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="event_onExpanded" class="events item public">
-                            <h3 class="name"><code>onExpanded</code></h3>
-                            <span class="type"></span>
-                        
-                        
-                                <span class="flag public">public</span>
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>
-                                        Defined in
-                                <a href="../files/addon_components_base_bs-navbar.js.html#l190"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:190</code></a>
-                                </p>
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>The action to be sent after the navbar has been expanded (including the CSS transition).</p>
-                        
-                            </div>
-                        
-                        
-                        
-                        </div>
-                    </div>
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l214"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:214</code></a>
+                    </p>
+            
+            
+            
                 </div>
-              </div>
+            
+                <div class="description">
+                    
+                </div>
+            
+            
+            
             </div>
+            <div id="method_expand" class="method item private">
+                <h3 class="name">expand
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-private">private</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l204"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:204</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    
+                </div>
+            
+            
+            
+            </div>
+        </div>
+
+        <div id="properties" class="tab-pane">
+            <div id="property__collapsed"
+                 class="property item private">
+              <h3 class="name">_collapsed
+                <span class="badge badge-secondary small">unknown</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l113"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:113</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_backgroundColor"
+                 class="property item public">
+              <h3 class="name">backgroundColor
+                <span class="badge badge-secondary small">String</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;light&#x27;</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l251"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:251</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Bootstrap 4 Only: Sets the background color for the navbar. Can be any color
+            in the set that composes the <code>bg-*</code> classes and can be extended by creating your
+            own <code>bg-*</code> classes.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_classTypePrefix"
+                 class="property item protected inherited">
+              <h3 class="name">classTypePrefix
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-protected small">protected</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Mixins.TypeClass.html#property_classTypePrefix">Mixins.TypeClass</a>:
+                  <a href="../files/addon_mixins_type-class.js.html#l12"><code>addon&#x2F;mixins&#x2F;type-class.js:12</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                Prefix for the type class, e.g. "btn" for button type classes ("btn-primary2 etc.)
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_collapsed"
+                 class="property item public">
+              <h3 class="name">collapsed
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> true</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l103"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:103</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Manages the state for the responsive menu between the toggle and the content.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_contentComponent"
+                 class="property item private">
+              <h3 class="name">contentComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l269"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:269</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_fluid"
+                 class="property item public">
+              <h3 class="name">fluid
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> true</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l119"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:119</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Controls whether the wrapping div is a fluid container or not.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_linkToComponent"
+                 class="property item private">
+              <h3 class="name">linkToComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l283"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:283</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_navComponent"
+                 class="property item private">
+              <h3 class="name">navComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l276"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:276</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_navItemComponent"
+                 class="property item private">
+              <h3 class="name">navItemComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l290"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:290</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_position"
+                 class="property item public">
+              <h3 class="name">position
+                <span class="badge badge-secondary small">String</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> null</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l129"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:129</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Specifies the position classes for the navbar, currently supporting none, "fixed-top", "fixed-bottom", and
+            either "static-top" (BS3) or "sticky-top" (BS4).
+            See the <a href="http://getbootstrap.com/components/#navbar-fixed-top">bootstrap docs</a> for details.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_toggleBreakpoint"
+                 class="property item public">
+              <h3 class="name">toggleBreakpoint
+                <span class="badge badge-secondary small">String</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;lg&#x27;</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l240"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:240</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard
+            two character Bootstrap size abbreviations. Used to set the <code>navbar-expand-*</code>
+            class. Set to <code>null</code> to disable collapsing.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_toggleComponent"
+                 class="property item private">
+              <h3 class="name">toggleComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l262"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:262</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_type"
+                 class="property item public inherited">
+              <h3 class="name">type
+                <span class="badge badge-secondary small">String</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;default&#x27;</p>
+                  <p>Inherited from
+                    <a href="../classes/Mixins.TypeClass.html#property_type">Mixins.TypeClass</a>:
+                  <a href="../files/addon_mixins_type-class.js.html#l34"><code>addon&#x2F;mixins&#x2F;type-class.js:34</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                Property for type styling
+            
+            For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without "btn-" prefix)
+              </div>
+            
+            
+            
+            
+            </div>
+        </div>
+
+
+        <div id="events" class="tab-pane">
+            <div id="event_onCollapse" class="events item public">
+                <h3 class="name"><code>onCollapse</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l153"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:153</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>The action to be sent when the navbar is about to be collapsed.</p>
+            <p>You can return false to prevent collapsing the navbar automatically, and do that in your action by
+            setting <code>collapsed</code> to true.</p>
+            
+                </div>
+            
+            
+            
+            </div>
+            <div id="event_onCollapsed" class="events item public">
+                <h3 class="name"><code>onCollapsed</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l164"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:164</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>The action to be sent after the navbar has been collapsed (including the CSS transition).</p>
+            
+                </div>
+            
+            
+            
+            </div>
+            <div id="event_onExpand" class="events item public">
+                <h3 class="name"><code>onExpand</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l172"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:172</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>The action to be sent when the navbar is about to be expanded.</p>
+            <p>You can return false to prevent expanding the navbar automatically, and do that in your action by
+            setting <code>collapsed</code> to false.</p>
+            
+                </div>
+            
+            
+            
+            </div>
+            <div id="event_onExpanded" class="events item public">
+                <h3 class="name"><code>onExpanded</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l183"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:183</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>The action to be sent after the navbar has been expanded (including the CSS transition).</p>
+            
+                </div>
+            
+            
+            
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </div>
@@ -906,6 +933,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

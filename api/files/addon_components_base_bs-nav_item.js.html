@@ -52,118 +52,138 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-nav/item.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import Component from &#x27;@ember/component&#x27;;
-            import { observer } from &#x27;@ember/object&#x27;;
-            import { filter, filterBy, gt } from &#x27;@ember/object/computed&#x27;;
-            import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
-            import LinkComponent from &#x27;@ember/routing/link-component&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-nav/item&#x27;;
-            import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
-            import overrideableCP from &#x27;../../../utils/overrideable-cp&#x27;;
-            
-            /**
-            
-             Component for each item within a [Components.Nav](Components.Nav.html) component. Have a look there for examples.
-            
-             @class NavItem
-             @namespace Components
-             @extends Ember.Component
-             @uses Mixins.ComponentParent
-             @public
-             */
-            export default Component.extend(ComponentParent, {
-              layout,
-              classNameBindings: [&#x27;disabled&#x27;, &#x27;active&#x27;],
-              tagName: &#x27;li&#x27;,
-            
-              /**
-               * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
-               * By default it will look at any nested &#x60;link-to&#x60; components and make itself disabled if there is a disabled link.
-               * See the [link-to API](http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_disabling-the-code-link-to-code-component)
-               *
-               * @property disabled
-               * @type boolean
-               * @public
-               */
-              disabled: overrideableCP(&#x27;_disabled&#x27;, function() {
-                return this.get(&#x27;_disabled&#x27;);
-              }),
-              _disabled: false,
-            
-              /**
-               * Render the nav item as active.
-               * By default it will look at any nested &#x60;link-to&#x60; components and make itself active if there is an active link
-               * (i.e. the link points to the current route).
-               * See the [link-to API](http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_handling-current-route)
-               *
-               * @property active
-               * @type boolean
-               * @public
-               */
-              active: overrideableCP(&#x27;_active&#x27;, function() {
-                return this.get(&#x27;_active&#x27;);
-              }),
-              _active: false,
-            
-              /**
-               * Collection of all &#x60;Ember.LinkComponent&#x60;s that are children
-               *
-               * @property childLinks
-               * @private
-               */
-              childLinks: filter(&#x27;children&#x27;, function(view) {
-                return view instanceof LinkComponent;
-              }),
-            
-              activeChildLinks: filterBy(&#x27;childLinks&#x27;, &#x27;active&#x27;),
-              hasActiveChildLinks: gt(&#x27;activeChildLinks.length&#x27;, 0),
-            
-              disabledChildLinks: filterBy(&#x27;childLinks&#x27;, &#x27;disabled&#x27;),
-              hasDisabledChildLinks: gt(&#x27;disabledChildLinks.length&#x27;, 0),
-            
-              /**
-               * Called when clicking the nav item
-               *
-               * @event onClick
-               * @public
-               */
-              onClick() {},
-            
-              click() {
-                this.onClick();
-              },
-            
-              init() {
-                this._super(...arguments);
-                this.get(&#x27;activeChildLinks&#x27;);
-                this.get(&#x27;disabledChildLinks&#x27;);
-              },
-            
-              _observeActive: observer(&#x27;activeChildLinks.[]&#x27;, function() {
-                scheduleOnce(&#x27;afterRender&#x27;, this, this._updateActive);
-              }),
-            
-              _updateActive() {
-                this.set(&#x27;_active&#x27;, this.get(&#x27;hasActiveChildLinks&#x27;));
-              },
-            
-              _observeDisabled: observer(&#x27;disabledChildLinks.[]&#x27;, function() {
-                scheduleOnce(&#x27;afterRender&#x27;, this, this._updateDisabled);
-              }),
-            
-              _updateDisabled() {
-                this.set(&#x27;_disabled&#x27;, this.get(&#x27;hasDisabledChildLinks&#x27;));
-              }
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-nav/item.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Component from &#x27;@ember/component&#x27;;
+import { observer, computed } from &#x27;@ember/object&#x27;;
+import { filter, filterBy, gt } from &#x27;@ember/object/computed&#x27;;
+import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
+import LinkComponent from &#x27;@ember/routing/link-component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-nav/item&#x27;;
+import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
+import overrideableCP from &#x27;../../../utils/overrideable-cp&#x27;;
+import { inject as service } from &#x27;@ember/service&#x27;;
+import { isArray } from &#x27;@ember/array&#x27;;
+
+/**
+
+ Component for each item within a [Components.Nav](Components.Nav.html) component. Have a look there for examples.
+
+ @class NavItem
+ @namespace Components
+ @extends Ember.Component
+ @uses Mixins.ComponentParent
+ @public
+ */
+export default Component.extend(ComponentParent, {
+  layout,
+  classNameBindings: [&#x27;disabled&#x27;, &#x27;active&#x27;],
+  tagName: &#x27;li&#x27;,
+  router: service(),
+
+  /**
+   * If set will wrap the item&#x27;s content in a link. Accepts either a string with the route name, or an array
+   * with the route name and one or multiple models / query params, similar to the positional params of &#x60;{{link-to ...}}&#x60;
+   *
+   * @property linkTo
+   * @type {string|array}
+   * @public
+   */
+  linkTo: undefined,
+
+  linkToParams: computed(&#x27;linkTo&#x27;, function() {
+    let params = this.get(&#x27;linkTo&#x27;);
+    return params ? (isArray(params) ? params : [params]) : undefined;
+  }),
+
+  /**
+   * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
+   * By default it will look at any nested &#x60;link-to&#x60; components and make itself disabled if there is a disabled link.
+   * See the [link-to API](http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_disabling-the-code-link-to-code-component)
+   *
+   * @property disabled
+   * @type boolean
+   * @public
+   */
+  disabled: overrideableCP(&#x27;_disabled&#x27;, function() {
+    return this.get(&#x27;_disabled&#x27;);
+  }),
+  _disabled: false,
+
+  /**
+   * Render the nav item as active.
+   * By default it will look at any nested &#x60;link-to&#x60; components and make itself active if there is an active link
+   * (i.e. the link points to the current route).
+   * See the [link-to API](http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_handling-current-route)
+   *
+   * @property active
+   * @type boolean
+   * @public
+   */
+  active: overrideableCP(&#x27;_active&#x27;, &#x27;linkToParams.[]&#x27;, &#x27;router.currentURL&#x27;, function() {
+    let params = this.get(&#x27;linkToParams&#x27;);
+
+    return params ? this.get(&#x27;router&#x27;).isActive(...params) : this.get(&#x27;_active&#x27;);
+  }),
+  _active: false,
+
+  /**
+   * Collection of all &#x60;Ember.LinkComponent&#x60;s that are children
+   *
+   * @property childLinks
+   * @private
+   */
+  childLinks: filter(&#x27;children&#x27;, function(view) {
+    return view instanceof LinkComponent;
+  }),
+
+  activeChildLinks: filterBy(&#x27;childLinks&#x27;, &#x27;active&#x27;),
+  hasActiveChildLinks: gt(&#x27;activeChildLinks.length&#x27;, 0),
+
+  disabledChildLinks: filterBy(&#x27;childLinks&#x27;, &#x27;disabled&#x27;),
+  hasDisabledChildLinks: gt(&#x27;disabledChildLinks.length&#x27;, 0),
+
+  /**
+   * Called when clicking the nav item
+   *
+   * @event onClick
+   * @public
+   */
+  onClick() {},
+
+  click() {
+    this.onClick();
+  },
+
+  init() {
+    this._super(...arguments);
+    this.get(&#x27;activeChildLinks&#x27;);
+    this.get(&#x27;disabledChildLinks&#x27;);
+  },
+
+  _observeActive: observer(&#x27;activeChildLinks.[]&#x27;, function() {
+    scheduleOnce(&#x27;afterRender&#x27;, this, this._updateActive);
+  }),
+
+  _updateActive() {
+    this.set(&#x27;_active&#x27;, this.get(&#x27;hasActiveChildLinks&#x27;));
+  },
+
+  _observeDisabled: observer(&#x27;disabledChildLinks.[]&#x27;, function() {
+    scheduleOnce(&#x27;afterRender&#x27;, this, this._updateDisabled);
+  }),
+
+  _updateDisabled() {
+    this.set(&#x27;_disabled&#x27;, this.get(&#x27;hasDisabledChildLinks&#x27;));
+  }
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -225,6 +245,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

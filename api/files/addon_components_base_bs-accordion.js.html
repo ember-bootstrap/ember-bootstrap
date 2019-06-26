@@ -52,106 +52,106 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-accordion.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import Component from &#x27;@ember/component&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-accordion&#x27;;
-            import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
-            
-            /**
-             Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),
-             with collapsible/expandable items.
-            
-             ### Usage
-            
-             Use as a block level component with any number of yielded [Components.AccordionItem](Components.AccordionItem.html)
-             components as children:
-            
-             &#x60;&#x60;&#x60;handlebars
-              {{#bs-accordion as |acc|}}
-                  {{#acc.item value=1 title=&quot;First item&quot;}}
-                    &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-                    &lt;button {{action acc.change 2}}&gt;Next&lt;/button&gt;
-                  {{/acc.item}}
-                  {{#acc.item value=2 title=&quot;Second item&quot;}}
-                    &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-                  {{/acc.item}}
-                  {{#acc.item value=3 title=&quot;Third item&quot;}}
-                    &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-                  {{/acc.item}}
-              {{/bs-accordion}}
-             &#x60;&#x60;&#x60;
-            
-             In the example above the first accordion item utilizes the yielded &#x60;change&#x60; action to add some custom behaviour.
-            
-             @class Accordion
-             @namespace Components
-             @extends Ember.Component
-             @public
-             */
-            export default Component.extend({
-              layout,
-              ariaRole: &#x27;tablist&#x27;,
-            
-              /**
-               * The value of the currently selected accordion item. Set this to change selection programmatically.
-               *
-               * When the selection is changed by user interaction this property will not update by using two-way bindings in order
-               * to follow DDAU best practices. If you want to react to such changes, subscribe to the &#x60;onChange&#x60; action
-               *
-               * @property selected
-               * @public
-               */
-              selected: null,
-            
-              /**
-               * @property itemComponent
-               * @type {String}
-               * @private
-               */
-              itemComponent: &#x27;bs-accordion/item&#x27;,
-            
-              /**
-               * The value of the currently selected accordion item
-               *
-               * @property isSelected
-               * @private
-               */
-              isSelected: listenTo(&#x27;selected&#x27;),
-            
-              /**
-               * Action when the selected accordion item is about to be changed.
-               *
-               * You can return false to prevent changing the active item, and do that in your action by
-               * setting the &#x60;selected&#x60; accordingly.
-               *
-               * @event onChange
-               * @param newValue
-               * @param oldValue
-               * @public
-               */
-              onChange(newValue, oldValue) {}, // eslint-disable-line no-unused-vars
-            
-              actions: {
-                change(newValue) {
-                  let oldValue = this.get(&#x27;isSelected&#x27;);
-                  if (oldValue === newValue) {
-                    newValue = null;
-                  }
-                  if (this.get(&#x27;onChange&#x27;)(newValue, oldValue) !== false) {
-                    this.set(&#x27;isSelected&#x27;, newValue);
-                  }
-                }
-              }
-            
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-accordion.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-accordion&#x27;;
+import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
+
+/**
+  Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),
+  with collapsible/expandable items.
+
+  ### Usage
+
+  Use as a block level component with any number of yielded [Components.AccordionItem](Components.AccordionItem.html)
+  components as children:
+
+  &#x60;&#x60;&#x60;handlebars
+  &lt;BsAccordion as |Acc|&gt;
+    &lt;Acc.item @value={{1}} @title=&quot;First item&quot;&gt;
+      &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+      &lt;button onclick={{action acc.change 2}}&gt;Next&lt;/button&gt;
+    &lt;/Acc.item&gt;
+    &lt;Acc.item @value={{2}} @title=&quot;Second item&quot;&gt;
+      &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+    &lt;/Acc.item&gt;
+    &lt;Acc.item @value={{3}} @title=&quot;Third item&quot;&gt;
+      &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+    &lt;/Acc.item&gt;
+  &lt;/BsAccordion&gt;
+  &#x60;&#x60;&#x60;
+
+  In the example above the first accordion item utilizes the yielded &#x60;change&#x60; action to add some custom behaviour.
+
+  @class Accordion
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+export default Component.extend({
+  layout,
+  ariaRole: &#x27;tablist&#x27;,
+
+  /**
+   * The value of the currently selected accordion item. Set this to change selection programmatically.
+   *
+   * When the selection is changed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the &#x60;onChange&#x60; action
+   *
+   * @property selected
+   * @public
+   */
+  selected: null,
+
+  /**
+   * @property itemComponent
+   * @type {String}
+   * @private
+   */
+  itemComponent: &#x27;bs-accordion/item&#x27;,
+
+  /**
+   * The value of the currently selected accordion item
+   *
+   * @property isSelected
+   * @private
+   */
+  isSelected: listenTo(&#x27;selected&#x27;),
+
+  /**
+   * Action when the selected accordion item is about to be changed.
+   *
+   * You can return false to prevent changing the active item, and do that in your action by
+   * setting the &#x60;selected&#x60; accordingly.
+   *
+   * @event onChange
+   * @param newValue
+   * @param oldValue
+   * @public
+   */
+  onChange(newValue, oldValue) {}, // eslint-disable-line no-unused-vars
+
+  actions: {
+    change(newValue) {
+      let oldValue = this.get(&#x27;isSelected&#x27;);
+      if (oldValue === newValue) {
+        newValue = null;
+      }
+      if (this.get(&#x27;onChange&#x27;)(newValue, oldValue) !== false) {
+        this.set(&#x27;isSelected&#x27;, newValue);
+      }
+    }
+  }
+
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -213,6 +213,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

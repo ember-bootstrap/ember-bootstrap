@@ -52,411 +52,432 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-button.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
-            import Component from &#x27;@ember/component&#x27;;
-            import { observer, computed } from &#x27;@ember/object&#x27;;
-            import { deprecatingAlias, equal, or }  from &#x27;@ember/object/computed&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-button&#x27;;
-            import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
-            import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
-            import overrideableCP from &#x27;../../utils/overrideable-cp&#x27;;
-            
-            /**
-             Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
-             as well as advanced functionality such as button states.
-            
-             ### Basic Usage
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot;}}
-               Downloads
-             {{/bs-button}}
-             &#x60;&#x60;&#x60;
-            
-             ### Actions
-            
-             Use the &#x60;onClick&#x60; property of the component to send an action to your controller. It will receive the button&#x27;s value
-             (see the &#x60;value&#x60; property) as an argument.
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; onClick=(action &quot;download&quot;)}}
-               Download
-             {{/bs-button}}
-             &#x60;&#x60;&#x60;
-            
-             ### Promise support for automatic state change
-            
-             When returning a Promise for any asynchronous operation from the &#x60;onClick&#x60; closure action the button will
-             manage an internal state (&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;fulfilled&quot;/&quot;rejected&quot;) automatically, changing its label
-             according to the state of the promise:
-            
-             &#x60;&#x60;&#x60;hbs
-             {{bs-button type=&quot;primary&quot; icon=&quot;glyphicon glyphicon-download&quot; defaultText=&quot;Download&quot; pendingText=&quot;Loading...&quot; fulfilledText=&quot;Completed!&quot; rejectedText=&quot;Oups!?&quot; onClick=(action &quot;download&quot;)}}
-             &#x60;&#x60;&#x60;
-            
-             &#x60;&#x60;&#x60;js
-             // controller.js
-             export default Ember.Controller.extend({
-               actions: {
-                 download(value) {
-                   return new Ember.RSVP.Promise(...);
-                 }
-               }
-             });
-             &#x60;&#x60;&#x60;
-            
-             For further customization &#x60;isPending&#x60;, &#x60;isFulfilled&#x60;, &#x60;isRejected&#x60; and &#x60;isSettled&#x60; properties are yielded:
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-button onClick=(action &quot;download&quot;) as |button|}}
-              Download
-              {{#if button.isPending}}
-                &lt;span class=&quot;loading-spinner&quot;&gt;&lt;/span&gt;
-              {{/if}}
-             {{/bs-button}}
-             &#x60;&#x60;&#x60;
-            
-             You can &#x60;reset&#x60; the state represented by these properties and used for button&#x27;s text by setting &#x60;reset&#x60; property to
-             &#x60;true&#x60;.
-            
-             @class Button
-             @namespace Components
-             @extends Ember.Component
-             @uses Mixins.TypeClass
-             @uses Mixins.SizeClass
-             @public
-             */
-            export default Component.extend(TypeClass, SizeClass, {
-              layout,
-              tagName: &#x27;button&#x27;,
-              classNames: [&#x27;btn&#x27;],
-              classNameBindings: [&#x27;active&#x27;, &#x27;block:btn-block&#x27;],
-            
-              /**
-               * @property classTypePrefix
-               * @type String
-               * @default &#x27;btn&#x27;
-               * @private
-               */
-              classTypePrefix: &#x27;btn&#x27;,
-            
-              attributeBindings: [&#x27;disabled&#x27;, &#x27;buttonType:type&#x27;, &#x27;title&#x27;],
-            
-              /**
-               * Default label of the button. Not need if used as a block component
-               *
-               * @property defaultText
-               * @type string
-               * @public
-               */
-              defaultText: null,
-            
-              /**
-               * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which is pending.
-               * Not considered if used as a block component.
-               *
-               * @property pendingText
-               * @type string
-               * @public
-               */
-              pendingText: undefined,
-            
-              /**
-               * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which succeeded.
-               * Not considered if used as a block component.
-               *
-               * @property fulfilledText
-               * @type string
-               * @public
-               */
-              fulfilledText: undefined,
-            
-              /**
-               * @property resolvedText
-               * @type string
-               * @deprecated
-               * @public
-               */
-              resolvedText: deprecatingAlias(&#x27;fulfilledText&#x27;, {
-                id: &#x27;ember-bootstrap.bs-button-resolved-text&#x27;,
-                until: &#x27;3.0.0&#x27;
-              }),
-            
-              /**
-               * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which failed.
-               * Not considered if used as a block component.
-               *
-               * @property rejectedText
-               * @type string
-               * @public
-               */
-              rejectedText: undefined,
-            
-              /**
-               * Property to disable the button
-               *
-               * @property disabled
-               * @type boolean
-               * @default false
-               * @public
-               */
-              disabled: false,
-            
-              /**
-               * Set the type of the button, either &#x27;button&#x27; or &#x27;submit&#x27;
-               *
-               * @property buttonType
-               * @type String
-               * @default &#x27;button&#x27;
-               * @public
-               */
-              buttonType: &#x27;button&#x27;,
-            
-              /**
-               * Set the &#x27;active&#x27; class to apply active/pressed CSS styling
-               *
-               * @property active
-               * @type boolean
-               * @default false
-               * @public
-               */
-              active: false,
-            
-              /**
-               * Property for block level buttons
-               *
-               * See the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)
-               * @property block
-               * @type boolean
-               * @default false
-               * @public
-               */
-              block: false,
-            
-              /**
-               * A click event on a button will not bubble up the DOM tree if it has an &#x60;onClick&#x60; action handler. Set to true to
-               * enable the event to bubble
-               *
-               * @property bubble
-               * @type boolean
-               * @default false
-               * @public
-               */
-              bubble: false,
-            
-              /**
-               * If button is active and this is set, the icon property will match this property
-               *
-               * @property iconActive
-               * @type String
-               * @public
-               */
-              iconActive: null,
-            
-              /**
-               * If button is inactive and this is set, the icon property will match this property
-               *
-               * @property iconInactive
-               * @type String
-               * @public
-               */
-              iconInactive: null,
-            
-              /**
-               * Class(es) (e.g. glyphicons or font awesome) to use as a button icon
-               * This will render a &lt;i class=&quot;{{icon}}&quot;&gt;&lt;/i&gt; element in front of the button&#x27;s label
-               *
-               * @property icon
-               * @type String
-               * @readonly
-               * @public
-               */
-              icon: overrideableCP(&#x27;active&#x27;, function() {
-                if (this.get(&#x27;active&#x27;)) {
-                  return this.get(&#x27;iconActive&#x27;);
-                } else {
-                  return this.get(&#x27;iconInactive&#x27;);
-                }
-              }),
-            
-              /**
-               * Supply a value that will be associated with this button. This will be send
-               * as a parameter of the default action triggered when clicking the button
-               *
-               * @property value
-               * @type any
-               * @public
-               */
-              value: null,
-            
-              /**
-               * Controls if &#x60;onClick&#x60; action is fired concurrently. If &#x60;true&#x60; clicking button multiple times will not trigger
-               * &#x60;onClick&#x60; action if a Promise returned by previous click is not settled yet.
-               *
-               * This does not affect event bubbling.
-               *
-               * @property preventConcurrency
-               * @type Boolean
-               * @default false
-               * @public
-               */
-              preventConcurrency: false,
-            
-              /**
-               * State of the button. The button&#x27;s label (if not used as a block component) will be set to the
-               * &#x60;&lt;state&gt;Text&#x60; property.
-               * This property will automatically be set when using a click action that supplies the callback with a promise.
-               * Possible values are: &quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;fulfilled&quot; / &quot;rejected&quot;.
-               * It could be reseted by &#x60;reset&#x60; property.
-               *
-               * @property state
-               * @type String
-               * @default &#x27;default&#x27;
-               * @private
-               */
-              state: &#x27;default&#x27;,
-            
-              /**
-               * Promise returned by &#x60;onClick&#x60; event is pending.
-               *
-               * @property isPending
-               * @type Boolean
-               * @private
-               */
-              isPending: equal(&#x27;state&#x27;, &#x27;pending&#x27;),
-            
-              /**
-               * Promise returned by &#x60;onClick&#x60; event has been succeeded.
-               *
-               * @property isFulfilled
-               * @type Boolean
-               * @private
-               */
-              isFulfilled: equal(&#x27;state&#x27;, &#x27;fulfilled&#x27;),
-            
-              /**
-               * Promise returned by &#x60;onClick&#x60; event has been rejected.
-               *
-               * @property isRejected
-               * @type Boolean
-               * @private
-               */
-              isRejected: equal(&#x27;state&#x27;, &#x27;rejected&#x27;),
-            
-              /**
-               * Promise returned by &#x60;onClick&#x60; event has been succeeded or rejected.
-               *
-               * @property isFulfilled
-               * @type Boolean
-               * @private
-               */
-              isSettled: or(&#x27;isFulfilled&#x27;, &#x27;isRejected&#x27;),
-            
-              /**
-               * Set this to &#x60;true&#x60; to reset the &#x60;state&#x60;. A typical use case is to bind this attribute with ember-data isDirty flag.
-               *
-               * The old value is not taken into consideration. Setting a &#x60;true&#x60; value to &#x60;true&#x60; again will also reset &#x60;state&#x60;.
-               * In that case it&#x27;s even to notify the observer system that the property has changed by calling
-               * [&#x60;notifyPropertyChange()&#x60;](https://www.emberjs.com/api/ember/3.2/classes/EmberObject/methods/notifyPropertyChange?anchor=notifyPropertyChange).
-               *
-               * @property reset
-               * @type boolean
-               * @public
-               */
-              reset: null,
-            
-              /**
-               * The HTML title attribute
-               *
-               * @property title
-               * @type string
-               * @public
-               */
-              title: null,
-            
-              /**
-               * When clicking the button this action is called with the value of the button (that is the value of the &quot;value&quot; property).
-               *
-               * Return a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;.
-               * This could be used to automatically set the button&#x27;s text depending on promise state (&#x60;defaultText&#x60;, &#x60;pendingText&#x60;,
-               * &#x60;fulfilledText&#x60;, &#x60;rejectedText&#x60;) and for futher customization using the yielded &#x60;isPending&#x60;, &#x60;isFulfilled&#x60;,
-               * &#x60;isRejected&#x60; properties.
-               *
-               * The click event will not bubble up, unless you set &#x60;bubble&#x60; to true.
-               *
-               * @event onClick
-               * @param {*} value
-               * @public
-               */
-              onClick: null,
-            
-              /**
-               * This will reset the state property to &#x27;default&#x27;, and with that the button&#x27;s label to defaultText
-               *
-               * @method resetState
-               * @private
-               */
-              resetState() {
-                this.set(&#x27;state&#x27;, &#x27;default&#x27;);
-              },
-            
-              resetObserver: observer(&#x27;reset&#x27;, function() {
-                if (this.get(&#x27;reset&#x27;)) {
-                  scheduleOnce(&#x27;actions&#x27;, this, &#x27;resetState&#x27;);
-                }
-              }),
-            
-              text: computed(&#x27;state&#x27;, &#x27;defaultText&#x27;, &#x27;pendingText&#x27;, &#x27;fulfilledText&#x27;, &#x27;rejectedText&#x27;, function() {
-                return this.getWithDefault(&#x60;${this.get(&#x27;state&#x27;)}Text&#x60;, this.get(&#x27;defaultText&#x27;));
-              }),
-            
-              /**
-               * @method click
-               * @private
-               */
-              click() {
-                let action = this.get(&#x27;onClick&#x27;);
-                let preventConcurrency = this.get(&#x27;preventConcurrency&#x27;);
-            
-                if (action === null || action === undefined) {
-                  return;
-                }
-            
-                if (!preventConcurrency || !this.get(&#x27;isPending&#x27;)) {
-                  let promise = (action)(this.get(&#x27;value&#x27;));
-                  if (promise &amp;&amp; typeof promise.then === &#x27;function&#x27; &amp;&amp; !this.get(&#x27;isDestroyed&#x27;)) {
-                    this.set(&#x27;state&#x27;, &#x27;pending&#x27;);
-                    promise.then(() =&gt; {
-                      if (!this.get(&#x27;isDestroyed&#x27;)) {
-                        this.set(&#x27;state&#x27;, &#x27;fulfilled&#x27;);
-                      }
-                    }, () =&gt; {
-                      if (!this.get(&#x27;isDestroyed&#x27;)) {
-                        this.set(&#x27;state&#x27;, &#x27;rejected&#x27;);
-                      }
-                    }
-                    );
-                  }
-                }
-            
-                return this.get(&#x27;bubble&#x27;);
-              },
-            
-              init() {
-                this._super(...arguments);
-                this.get(&#x27;reset&#x27;);
-              }
-            
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-button.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { observer, computed } from &#x27;@ember/object&#x27;;
+import { deprecatingAlias, equal, or }  from &#x27;@ember/object/computed&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-button&#x27;;
+import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
+import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
+import overrideableCP from &#x27;../../utils/overrideable-cp&#x27;;
+
+/**
+  Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
+  as well as advanced functionality such as button states.
+
+  ### Basic Usage
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsButton @type=&quot;primary&quot; @icon=&quot;glyphicon glyphicon-download&quot;&gt;
+    Downloads
+  &lt;/BsButton&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Actions
+
+  Use the &#x60;onClick&#x60; property of the component to send an action to your controller. It will receive the button&#x27;s value
+  (see the &#x60;value&#x60; property) as an argument.
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsButton @type=&quot;primary&quot; @icon=&quot;glyphicon glyphicon-download&quot; @onClick=(action &quot;download&quot;)&gt;
+    Downloads
+  &lt;/BsButton&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Promise support for automatic state change
+
+  When returning a Promise for any asynchronous operation from the &#x60;onClick&#x60; closure action the button will
+  manage an internal state (&quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;fulfilled&quot;/&quot;rejected&quot;) automatically, changing its label
+  according to the state of the promise:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsButton
+    (at)type=&quot;primary&quot;
+    (at)icon=&quot;glyphicon glyphicon-download&quot;
+    (at)defaultText=&quot;Download&quot;
+    (at)pendingText=&quot;Loading...&quot;
+    (at)fulfilledText=&quot;Completed!&quot;
+    (at)rejectedText=&quot;Oups!?&quot;
+    (at)onClick={{action &quot;download&quot;}}
+  /&gt;
+  &#x60;&#x60;&#x60;
+
+  &#x60;&#x60;&#x60;js
+  // controller.js
+  export default Ember.Controller.extend({
+    actions: {
+      download(value) {
+        return new Ember.RSVP.Promise(...);
+      }
+    }
+  });
+  &#x60;&#x60;&#x60;
+
+  For further customization &#x60;isPending&#x60;, &#x60;isFulfilled&#x60;, &#x60;isRejected&#x60; and &#x60;isSettled&#x60; properties are yielded:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsButton @onClick=(action &quot;download&quot;) as |button|&gt;
+    Download
+    {{#if button.isPending}}
+      &lt;span class=&quot;loading-spinner&quot;&gt;&lt;/span&gt;
+    {{/if}}
+  &lt;/BsButton&gt;
+  &#x60;&#x60;&#x60;
+
+  You can &#x60;reset&#x60; the state represented by these properties and used for button&#x27;s text by setting &#x60;reset&#x60; property to
+  &#x60;true&#x60;.
+
+  @class Button
+  @namespace Components
+  @extends Ember.Component
+  @uses Mixins.TypeClass
+  @uses Mixins.SizeClass
+  @public
+*/
+export default Component.extend(TypeClass, SizeClass, {
+  layout,
+  tagName: &#x27;button&#x27;,
+  classNames: [&#x27;btn&#x27;],
+  classNameBindings: [&#x27;active&#x27;, &#x27;block:btn-block&#x27;],
+
+  /**
+   * @property classTypePrefix
+   * @type String
+   * @default &#x27;btn&#x27;
+   * @private
+   */
+  classTypePrefix: &#x27;btn&#x27;,
+
+  attributeBindings: [&#x27;_disabled:disabled&#x27;, &#x27;buttonType:type&#x27;, &#x27;title&#x27;],
+
+  /**
+   * Default label of the button. Not need if used as a block component
+   *
+   * @property defaultText
+   * @type string
+   * @public
+   */
+  defaultText: null,
+
+  /**
+   * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which is pending.
+   * Not considered if used as a block component.
+   *
+   * @property pendingText
+   * @type string
+   * @public
+   */
+  pendingText: undefined,
+
+  /**
+   * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which succeeded.
+   * Not considered if used as a block component.
+   *
+   * @property fulfilledText
+   * @type string
+   * @public
+   */
+  fulfilledText: undefined,
+
+  /**
+   * @property resolvedText
+   * @type string
+   * @deprecated
+   * @public
+   */
+  resolvedText: deprecatingAlias(&#x27;fulfilledText&#x27;, {
+    id: &#x27;ember-bootstrap.bs-button-resolved-text&#x27;,
+    until: &#x27;3.0.0&#x27;
+  }),
+
+  /**
+   * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which failed.
+   * Not considered if used as a block component.
+   *
+   * @property rejectedText
+   * @type string
+   * @public
+   */
+  rejectedText: undefined,
+
+  /**
+   * Property to disable the button
+   *
+   * The button is disabled by default if &#x60;preventConcurrency&#x60; is &#x60;true&#x60; and
+   * a Promise returned by &#x60;onClick&#x60; action is pending. You may explicitly
+   * enable / disable the button by setting &#x60;disabled&#x60; to &#x60;true&#x60; or &#x60;false&#x60;.
+   * Setting it to &#x60;null&#x60; restores the default behavior.
+   *
+   * @property disabled
+   * @type ?boolean
+   * @default null
+   * @public
+   */
+  disabled: null,
+
+  _disabled: computed(&#x27;disabled&#x27;, &#x27;isPending&#x27;, &#x27;preventConcurrency&#x27;, function() {
+    if (this.get(&#x27;disabled&#x27;) !== null) {
+      return this.get(&#x27;disabled&#x27;);
+    }
+
+    return this.get(&#x27;isPending&#x27;) &amp;&amp; this.get(&#x27;preventConcurrency&#x27;);
+  }),
+
+  /**
+   * Set the type of the button, either &#x27;button&#x27; or &#x27;submit&#x27;
+   *
+   * @property buttonType
+   * @type String
+   * @default &#x27;button&#x27;
+   * @public
+   */
+  buttonType: &#x27;button&#x27;,
+
+  /**
+   * Set the &#x27;active&#x27; class to apply active/pressed CSS styling
+   *
+   * @property active
+   * @type boolean
+   * @default false
+   * @public
+   */
+  active: false,
+
+  /**
+   * Property for block level buttons
+   *
+   * See the [Bootstrap docs](http://getbootstrap.com/css/#buttons-sizes)
+   * @property block
+   * @type boolean
+   * @default false
+   * @public
+   */
+  block: false,
+
+  /**
+   * A click event on a button will not bubble up the DOM tree if it has an &#x60;onClick&#x60; action handler. Set to true to
+   * enable the event to bubble
+   *
+   * @property bubble
+   * @type boolean
+   * @default false
+   * @public
+   */
+  bubble: false,
+
+  /**
+   * If button is active and this is set, the icon property will match this property
+   *
+   * @property iconActive
+   * @type String
+   * @public
+   */
+  iconActive: null,
+
+  /**
+   * If button is inactive and this is set, the icon property will match this property
+   *
+   * @property iconInactive
+   * @type String
+   * @public
+   */
+  iconInactive: null,
+
+  /**
+   * Class(es) (e.g. glyphicons or font awesome) to use as a button icon
+   * This will render a &lt;i class=&quot;{{icon}}&quot;&gt;&lt;/i&gt; element in front of the button&#x27;s label
+   *
+   * @property icon
+   * @type String
+   * @readonly
+   * @public
+   */
+  icon: overrideableCP(&#x27;active&#x27;, function() {
+    if (this.get(&#x27;active&#x27;)) {
+      return this.get(&#x27;iconActive&#x27;);
+    } else {
+      return this.get(&#x27;iconInactive&#x27;);
+    }
+  }),
+
+  /**
+   * Supply a value that will be associated with this button. This will be send
+   * as a parameter of the default action triggered when clicking the button
+   *
+   * @property value
+   * @type any
+   * @public
+   */
+  value: null,
+
+  /**
+   * Controls if &#x60;onClick&#x60; action is fired concurrently. If &#x60;true&#x60; clicking button multiple times will not trigger
+   * &#x60;onClick&#x60; action if a Promise returned by previous click is not settled yet.
+   *
+   * This does not affect event bubbling.
+   *
+   * @property preventConcurrency
+   * @type Boolean
+   * @default true
+   * @public
+   */
+  preventConcurrency: true,
+
+  /**
+   * State of the button. The button&#x27;s label (if not used as a block component) will be set to the
+   * &#x60;&lt;state&gt;Text&#x60; property.
+   * This property will automatically be set when using a click action that supplies the callback with a promise.
+   * Possible values are: &quot;default&quot; &gt; &quot;pending&quot; &gt; &quot;fulfilled&quot; / &quot;rejected&quot;.
+   * It could be reseted by &#x60;reset&#x60; property.
+   *
+   * @property state
+   * @type String
+   * @default &#x27;default&#x27;
+   * @private
+   */
+  state: &#x27;default&#x27;,
+
+  /**
+   * Promise returned by &#x60;onClick&#x60; event is pending.
+   *
+   * @property isPending
+   * @type Boolean
+   * @private
+   */
+  isPending: equal(&#x27;state&#x27;, &#x27;pending&#x27;),
+
+  /**
+   * Promise returned by &#x60;onClick&#x60; event has been succeeded.
+   *
+   * @property isFulfilled
+   * @type Boolean
+   * @private
+   */
+  isFulfilled: equal(&#x27;state&#x27;, &#x27;fulfilled&#x27;),
+
+  /**
+   * Promise returned by &#x60;onClick&#x60; event has been rejected.
+   *
+   * @property isRejected
+   * @type Boolean
+   * @private
+   */
+  isRejected: equal(&#x27;state&#x27;, &#x27;rejected&#x27;),
+
+  /**
+   * Promise returned by &#x60;onClick&#x60; event has been succeeded or rejected.
+   *
+   * @property isFulfilled
+   * @type Boolean
+   * @private
+   */
+  isSettled: or(&#x27;isFulfilled&#x27;, &#x27;isRejected&#x27;),
+
+  /**
+   * Set this to &#x60;true&#x60; to reset the &#x60;state&#x60;. A typical use case is to bind this attribute with ember-data isDirty flag.
+   *
+   * The old value is not taken into consideration. Setting a &#x60;true&#x60; value to &#x60;true&#x60; again will also reset &#x60;state&#x60;.
+   * In that case it&#x27;s even to notify the observer system that the property has changed by calling
+   * [&#x60;notifyPropertyChange()&#x60;](https://www.emberjs.com/api/ember/3.2/classes/EmberObject/methods/notifyPropertyChange?anchor=notifyPropertyChange).
+   *
+   * @property reset
+   * @type boolean
+   * @public
+   */
+  reset: null,
+
+  /**
+   * The HTML title attribute
+   *
+   * @property title
+   * @type string
+   * @public
+   */
+  title: null,
+
+  /**
+   * When clicking the button this action is called with the value of the button (that is the value of the &quot;value&quot; property).
+   *
+   * Return a promise object, and the buttons state will automatically set to &quot;pending&quot;, &quot;resolved&quot; and/or &quot;rejected&quot;.
+   * This could be used to automatically set the button&#x27;s text depending on promise state (&#x60;defaultText&#x60;, &#x60;pendingText&#x60;,
+   * &#x60;fulfilledText&#x60;, &#x60;rejectedText&#x60;) and for futher customization using the yielded &#x60;isPending&#x60;, &#x60;isFulfilled&#x60;,
+   * &#x60;isRejected&#x60; properties.
+   *
+   * The click event will not bubble up, unless you set &#x60;bubble&#x60; to true.
+   *
+   * @event onClick
+   * @param {*} value
+   * @public
+   */
+  onClick: null,
+
+  /**
+   * This will reset the state property to &#x27;default&#x27;, and with that the button&#x27;s label to defaultText
+   *
+   * @method resetState
+   * @private
+   */
+  resetState() {
+    this.set(&#x27;state&#x27;, &#x27;default&#x27;);
+  },
+
+  resetObserver: observer(&#x27;reset&#x27;, function() {
+    if (this.get(&#x27;reset&#x27;)) {
+      scheduleOnce(&#x27;actions&#x27;, this, &#x27;resetState&#x27;);
+    }
+  }),
+
+  text: computed(&#x27;state&#x27;, &#x27;defaultText&#x27;, &#x27;pendingText&#x27;, &#x27;fulfilledText&#x27;, &#x27;rejectedText&#x27;, function() {
+    return this.getWithDefault(&#x60;${this.get(&#x27;state&#x27;)}Text&#x60;, this.get(&#x27;defaultText&#x27;));
+  }),
+
+  /**
+   * @method click
+   * @private
+   */
+  click() {
+    let action = this.get(&#x27;onClick&#x27;);
+    let preventConcurrency = this.get(&#x27;preventConcurrency&#x27;);
+
+    if (action === null || action === undefined) {
+      return;
+    }
+
+    if (!preventConcurrency || !this.get(&#x27;isPending&#x27;)) {
+      let promise = (action)(this.get(&#x27;value&#x27;));
+      if (promise &amp;&amp; typeof promise.then === &#x27;function&#x27; &amp;&amp; !this.get(&#x27;isDestroyed&#x27;)) {
+        this.set(&#x27;state&#x27;, &#x27;pending&#x27;);
+        promise.then(() =&gt; {
+          if (!this.get(&#x27;isDestroyed&#x27;)) {
+            this.set(&#x27;state&#x27;, &#x27;fulfilled&#x27;);
+          }
+        }, () =&gt; {
+          if (!this.get(&#x27;isDestroyed&#x27;)) {
+            this.set(&#x27;state&#x27;, &#x27;rejected&#x27;);
+          }
+        }
+        );
+      }
+    }
+
+    return this.get(&#x27;bubble&#x27;);
+  },
+
+  init() {
+    this._super(...arguments);
+    this.get(&#x27;reset&#x27;);
+  }
+
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -518,6 +539,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

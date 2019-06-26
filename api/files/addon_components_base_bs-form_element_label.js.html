@@ -52,109 +52,106 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-form/element/label.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import { equal } from &#x27;@ember/object/computed&#x27;;
-            import Component from &#x27;@ember/component&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/label&#x27;;
-            
-            /**
-            
-             @class FormElementLabel
-             @namespace Components
-             @extends Ember.Component
-             @private
-             */
-            export default Component.extend({
-              layout,
-              tagName: &#x27;&#x27;,
-            
-              /**
-               * @property label
-               * @type string
-               * @public
-               */
-              label: null,
-            
-              /**
-               * @property invisibleLabel
-               * @type boolean
-               * @public
-               */
-              invisibleLabel: false,
-            
-              /**
-               * @property formElementId
-               * @type {String}
-               * @public
-               */
-              formElementId: null,
-            
-              /**
-               * @property labelClass
-               * @type {String}
-               * @public
-               */
-              labelClass: null,
-            
-              /**
-               * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
-               *
-               * * &#x27;horizontal&#x27;
-               * * &#x27;vertical&#x27;
-               * * &#x27;inline&#x27;
-               *
-               * Defaults to the parent &#x60;form&#x60;&#x27;s &#x60;formLayout&#x60; property.
-               *
-               * @property formLayout
-               * @type string
-               * @default &#x27;vertical&#x27;
-               * @public
-               */
-              formLayout: &#x27;vertical&#x27;,
-            
-              /**
-               * The type of the control widget.
-               * Supported types:
-               *
-               * * &#x27;text&#x27;
-               * * &#x27;checkbox&#x27;
-               * * &#x27;textarea&#x27;
-               * * any other type will use an input tag with the &#x60;controlType&#x60; value as the type attribute (for e.g. HTML5 input
-               * types like &#x27;email&#x27;), and the same layout as the &#x27;text&#x27; type
-               *
-               * @property controlType
-               * @type string
-               * @default &#x27;text&#x27;
-               * @public
-               */
-              controlType: &#x27;text&#x27;,
-            
-              /**
-               * Indicates whether the type of the control widget equals &#x60;checkbox&#x60;
-               *
-               * @property isCheckbox
-               * @type boolean
-               * @private
-               */
-              isCheckbox: equal(&#x27;controlType&#x27;, &#x27;checkbox&#x27;).readOnly(),
-            
-              /**
-               * Indicates whether the form type equals &#x60;horizontal&#x60;
-               *
-               * @property isHorizontal
-               * @type boolean
-               * @private
-               */
-              isHorizontal: equal(&#x27;formLayout&#x27;, &#x27;horizontal&#x27;).readOnly()
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-form/element/label.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { equal } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/label&#x27;;
+
+/**
+
+ @class FormElementLabel
+ @namespace Components
+ @extends Ember.Component
+ @private
+ */
+export default Component.extend({
+  layout,
+  tagName: &#x27;&#x27;,
+
+  /**
+   * @property label
+   * @type string
+   * @public
+   */
+
+  /**
+   * @property invisibleLabel
+   * @type boolean
+   * @public
+   */
+  invisibleLabel: false,
+
+  /**
+   * @property formElementId
+   * @type {String}
+   * @public
+   */
+
+  /**
+   * @property labelClass
+   * @type {String}
+   * @public
+   */
+
+  /**
+   * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
+   *
+   * * &#x27;horizontal&#x27;
+   * * &#x27;vertical&#x27;
+   * * &#x27;inline&#x27;
+   *
+   * Defaults to the parent &#x60;form&#x60;&#x27;s &#x60;formLayout&#x60; property.
+   *
+   * @property formLayout
+   * @type string
+   * @default &#x27;vertical&#x27;
+   * @public
+   */
+  formLayout: &#x27;vertical&#x27;,
+
+  /**
+   * The type of the control widget.
+   * Supported types:
+   *
+   * * &#x27;text&#x27;
+   * * &#x27;checkbox&#x27;
+   * * &#x27;textarea&#x27;
+   * * any other type will use an input tag with the &#x60;controlType&#x60; value as the type attribute (for e.g. HTML5 input
+   * types like &#x27;email&#x27;), and the same layout as the &#x27;text&#x27; type
+   *
+   * @property controlType
+   * @type string
+   * @default &#x27;text&#x27;
+   * @public
+   */
+  controlType: &#x27;text&#x27;,
+
+  /**
+   * Indicates whether the type of the control widget equals &#x60;checkbox&#x60;
+   *
+   * @property isCheckbox
+   * @type boolean
+   * @private
+   */
+  isCheckbox: equal(&#x27;controlType&#x27;, &#x27;checkbox&#x27;).readOnly(),
+
+  /**
+   * Indicates whether the form type equals &#x60;horizontal&#x60;
+   *
+   * @property isHorizontal
+   * @type boolean
+   * @private
+   */
+  isHorizontal: equal(&#x27;formLayout&#x27;, &#x27;horizontal&#x27;).readOnly()
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -216,6 +213,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

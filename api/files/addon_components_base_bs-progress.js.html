@@ -52,62 +52,62 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-progress.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import Component from &#x27;@ember/component&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-progress&#x27;;
-            
-            /**
-             Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.
-            
-             ### Usage
-            
-             The component yields a [Components.ProgressBar)(Components.ProgressBar.html) component that represents a single bar.
-             Use the &#x60;value&#x60; property to control the progress bar&#x27;s width. To apply the different styling options supplied by
-             Bootstrap, use the appropriate properties like &#x60;type&#x60;, &#x60;showLabel&#x60;, &#x60;striped&#x60; or &#x60;animate&#x60;.
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-progress as |p|}}
-               {{p.bar value=progressValue minValue=0 maxValue=10 showLabel=true type=&quot;danger&quot;}}
-             {{/bs-progress}}
-             &#x60;&#x60;&#x60;
-            
-             ### Stacked
-            
-             You can place multiple progress bar components in a single progress component to
-             create a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-progress as |p|}}
-               {{p.bar value=progressValue1 type=&quot;success&quot;}}
-               {{p.bar value=progressValue2 type=&quot;warning&quot;}}
-               {{p.bar value=progressValue3 type=&quot;danger&quot;}}
-             {{/bs-progress}}
-             &#x60;&#x60;&#x60;
-            
-             @class Progress
-             @namespace Components
-             @extends Ember.Component
-             @public
-             */
-            export default Component.extend({
-              layout,
-              classNames: [&#x27;progress&#x27;],
-            
-              /**
-               * @property progressBarComponent
-               * @type {String}
-               * @private
-               */
-              progressBarComponent: &#x27;bs-progress/bar&#x27;
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-progress.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-progress&#x27;;
+
+/**
+  Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.
+
+  ### Usage
+
+  The component yields a [Components.ProgressBar)(Components.ProgressBar.html) component that represents a single bar.
+  Use the &#x60;value&#x60; property to control the progress bar&#x27;s width. To apply the different styling options supplied by
+  Bootstrap, use the appropriate properties like &#x60;type&#x60;, &#x60;showLabel&#x60;, &#x60;striped&#x60; or &#x60;animate&#x60;.
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsProgress as |pg| &gt;
+    &lt;pg.bar @value={{this.progressValue}} @minValue={{0}} @maxValue={{10}} @showLabel={{true}} @type=&quot;danger&quot; /&gt;
+  &lt;/BsProgress&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Stacked
+
+  You can place multiple progress bar components in a single progress component to
+  create a stack of progress bars as seen in http://getbootstrap.com/components/#progress-stacked.
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsProgress as |pg| &gt;
+    &lt;pg.bar @value={{this.progressValue1}} @type=&quot;success&quot; /&gt;
+    &lt;pg.bar @value={{this.progressValue2}} @type=&quot;warning&quot; /&gt;
+    &lt;pg.bar @value={{this.progressValue3}} @type=&quot;danger&quot; /&gt;
+  &lt;/BsProgress&gt;
+  &#x60;&#x60;&#x60;
+
+  @class Progress
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+export default Component.extend({
+  layout,
+  classNames: [&#x27;progress&#x27;],
+
+  /**
+   * @property progressBarComponent
+   * @type {String}
+   * @private
+   */
+  progressBarComponent: &#x27;bs-progress/bar&#x27;
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -169,6 +169,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

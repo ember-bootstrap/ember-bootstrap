@@ -52,179 +52,180 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-carousel/slide.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import Component from &#x27;@ember/component&#x27;;
-            import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-carousel/slide&#x27;;
-            import { computed, observer } from &#x27;@ember/object&#x27;;
-            import { next } from &#x27;@ember/runloop&#x27;;
-            import overrideableCP from &#x27;../../../utils/overrideable-cp&#x27;;
-            /**
-              A visible user-defined slide.
-            
-              See [Components.Carousel](Components.Carousel.html) for examples.
-            
-              @class CarouselSlide
-              @namespace Components
-              @extends Ember.Component
-              @public
-             */
-            export default Component.extend(ComponentChild, {
-              classNameBindings: [&#x27;active&#x27;],
-              layout,
-            
-              /**
-               * Defines slide visibility.
-               *
-               * @property active
-               * @type boolean
-               * @private
-               */
-              active: overrideableCP(&#x27;isCurrentSlide&#x27;, &#x27;presentationState&#x27;, function() {
-                return this.get(&#x27;isCurrentSlide&#x27;) &amp;&amp; this.get(&#x27;presentationState&#x27;) === null;
-              }),
-            
-              /**
-               * @private
-               * @property isCurrentSlide
-               * @type boolean
-               */
-              isCurrentSlide: computed(&#x27;currentSlide&#x27;, function() {
-                return this.get(&#x27;currentSlide&#x27;) === this;
-              }).readOnly(),
-            
-              /**
-               * @private
-               * @property isFollowingSlide
-               * @type boolean
-               */
-              isFollowingSlide: computed(&#x27;followingSlide&#x27;, function() {
-                return this.get(&#x27;followingSlide&#x27;) === this;
-              }).readOnly(),
-            
-              /**
-               * Slide is moving to the left.
-               *
-               * @property left
-               * @type boolean
-               * @private
-               */
-              left: false,
-            
-              /**
-               * Next to appear in a left sliding.
-               *
-               * @property next
-               * @type boolean
-               * @private
-               */
-              next: false,
-            
-              /**
-               * Next to appear in a right sliding.
-               *
-               * @property prev
-               * @type boolean
-               * @private
-               */
-              prev: false,
-            
-              /**
-               * Slide is moving to the right.
-               *
-               * @property right
-               * @type boolean
-               * @private
-               */
-              right: false,
-            
-              /**
-               * Coordinates the execution of a presentation.
-               *
-               * @method presentationStateObserver
-               * @private
-               */
-              presentationStateObserver: observer(&#x27;presentationState&#x27;, function() {
-                let presentationState = this.get(&#x27;presentationState&#x27;);
-                if (this.get(&#x27;isCurrentSlide&#x27;)) {
-                  switch (presentationState) {
-                    case &#x27;didTransition&#x27;:
-                      this.currentSlideDidTransition();
-                      break;
-                    case &#x27;willTransit&#x27;:
-                      this.currentSlideWillTransit();
-                      break;
-                  }
-                }
-                if (this.get(&#x27;isFollowingSlide&#x27;)) {
-                  switch (presentationState) {
-                    case &#x27;didTransition&#x27;:
-                      this.followingSlideDidTransition();
-                      break;
-                    case &#x27;willTransit&#x27;:
-                      this.followingSlideWillTransit();
-                      break;
-                  }
-                }
-              }),
-            
-              /**
-               * @method currentSlideDidTransition
-               * @private
-               */
-              currentSlideDidTransition() {
-                this.set(this.get(&#x27;directionalClassName&#x27;), false);
-                this.set(&#x27;active&#x27;, false);
-              },
-            
-              /**
-               * @method currentSlideWillTransit
-               * @private
-               */
-              currentSlideWillTransit() {
-                this.set(&#x27;active&#x27;, true);
-                next(this, function() {
-                  this.set(this.get(&#x27;directionalClassName&#x27;), true);
-                });
-              },
-            
-              /**
-               * @method followingSlideDidTransition
-               * @private
-               */
-              followingSlideDidTransition() {
-                this.set(&#x27;active&#x27;, true);
-                this.set(this.get(&#x27;directionalClassName&#x27;), false);
-                this.set(this.get(&#x27;orderClassName&#x27;), false);
-              },
-            
-              /**
-               * @method followingSlideWillTransit
-               * @private
-               */
-              followingSlideWillTransit() {
-                this.set(this.get(&#x27;orderClassName&#x27;), true);
-                next(this, function() {
-                  this.reflow();
-                  this.set(this.get(&#x27;directionalClassName&#x27;), true);
-                });
-              },
-            
-              /**
-               * Makes things more stable, especially when fast changing.
-               */
-              reflow() {
-                this.element.offsetHeight;
-              }
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-carousel/slide.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Component from &#x27;@ember/component&#x27;;
+import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-carousel/slide&#x27;;
+import { computed, observer } from &#x27;@ember/object&#x27;;
+import { next } from &#x27;@ember/runloop&#x27;;
+import overrideableCP from &#x27;../../../utils/overrideable-cp&#x27;;
+
+/**
+  A visible user-defined slide.
+
+  See [Components.Carousel](Components.Carousel.html) for examples.
+
+  @class CarouselSlide
+  @namespace Components
+  @extends Ember.Component
+  @public
+ */
+export default Component.extend(ComponentChild, {
+  classNameBindings: [&#x27;active&#x27;],
+  layout,
+
+  /**
+   * Defines slide visibility.
+   *
+   * @property active
+   * @type boolean
+   * @private
+   */
+  active: overrideableCP(&#x27;isCurrentSlide&#x27;, &#x27;presentationState&#x27;, function() {
+    return this.get(&#x27;isCurrentSlide&#x27;) &amp;&amp; this.get(&#x27;presentationState&#x27;) === null;
+  }),
+
+  /**
+   * @private
+   * @property isCurrentSlide
+   * @type boolean
+   */
+  isCurrentSlide: computed(&#x27;currentSlide&#x27;, function() {
+    return this.get(&#x27;currentSlide&#x27;) === this;
+  }).readOnly(),
+
+  /**
+   * @private
+   * @property isFollowingSlide
+   * @type boolean
+   */
+  isFollowingSlide: computed(&#x27;followingSlide&#x27;, function() {
+    return this.get(&#x27;followingSlide&#x27;) === this;
+  }).readOnly(),
+
+  /**
+   * Slide is moving to the left.
+   *
+   * @property left
+   * @type boolean
+   * @private
+   */
+  left: false,
+
+  /**
+   * Next to appear in a left sliding.
+   *
+   * @property next
+   * @type boolean
+   * @private
+   */
+  next: false,
+
+  /**
+   * Next to appear in a right sliding.
+   *
+   * @property prev
+   * @type boolean
+   * @private
+   */
+  prev: false,
+
+  /**
+   * Slide is moving to the right.
+   *
+   * @property right
+   * @type boolean
+   * @private
+   */
+  right: false,
+
+  /**
+   * Coordinates the execution of a presentation.
+   *
+   * @method presentationStateObserver
+   * @private
+   */
+  presentationStateObserver: observer(&#x27;presentationState&#x27;, function() {
+    let presentationState = this.get(&#x27;presentationState&#x27;);
+    if (this.get(&#x27;isCurrentSlide&#x27;)) {
+      switch (presentationState) {
+        case &#x27;didTransition&#x27;:
+          this.currentSlideDidTransition();
+          break;
+        case &#x27;willTransit&#x27;:
+          this.currentSlideWillTransit();
+          break;
+      }
+    }
+    if (this.get(&#x27;isFollowingSlide&#x27;)) {
+      switch (presentationState) {
+        case &#x27;didTransition&#x27;:
+          this.followingSlideDidTransition();
+          break;
+        case &#x27;willTransit&#x27;:
+          this.followingSlideWillTransit();
+          break;
+      }
+    }
+  }),
+
+  /**
+   * @method currentSlideDidTransition
+   * @private
+   */
+  currentSlideDidTransition() {
+    this.set(this.get(&#x27;directionalClassName&#x27;), false);
+    this.set(&#x27;active&#x27;, false);
+  },
+
+  /**
+   * @method currentSlideWillTransit
+   * @private
+   */
+  currentSlideWillTransit() {
+    this.set(&#x27;active&#x27;, true);
+    next(this, function() {
+      this.set(this.get(&#x27;directionalClassName&#x27;), true);
+    });
+  },
+
+  /**
+   * @method followingSlideDidTransition
+   * @private
+   */
+  followingSlideDidTransition() {
+    this.set(&#x27;active&#x27;, true);
+    this.set(this.get(&#x27;directionalClassName&#x27;), false);
+    this.set(this.get(&#x27;orderClassName&#x27;), false);
+  },
+
+  /**
+   * @method followingSlideWillTransit
+   * @private
+   */
+  followingSlideWillTransit() {
+    this.set(this.get(&#x27;orderClassName&#x27;), true);
+    next(this, function() {
+      this.reflow();
+      this.set(this.get(&#x27;directionalClassName&#x27;), true);
+    });
+  },
+
+  /**
+   * Makes things more stable, especially when fast changing.
+   */
+  reflow() {
+    this.element.offsetHeight;
+  }
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -286,6 +287,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

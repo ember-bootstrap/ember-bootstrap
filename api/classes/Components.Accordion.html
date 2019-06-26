@@ -52,288 +52,288 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="card">
-              <h1 class="card-header">Components.Accordion <span class="badge badge-public small">public</span></h1>
-              <div class="card-body">
+<div class="card">
+  <h1 class="card-header">Components.Accordion <span class="badge badge-public small">public</span></h1>
+  <div class="card-body">
+
+<p>Bootstrap-style <a href="http://getbootstrap.com/javascript/#collapse-example-accordion">accordion group</a>,
+with collapsible/expandable items.</p>
+<h3>Usage</h3>
+<p>Use as a block level component with any number of yielded <a href="Components.AccordionItem.html">Components.AccordionItem</a>
+components as children:</p>
+<pre class="code prettyprint"><code class="language-handlebars">&lt;BsAccordion as |Acc|&gt;
+  &lt;Acc.item @value={{1}} @title="First item"&gt;
+    &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+    &lt;button onclick={{action acc.change 2}}&gt;Next&lt;/button&gt;
+  &lt;/Acc.item&gt;
+  &lt;Acc.item @value={{2}} @title="Second item"&gt;
+    &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+  &lt;/Acc.item&gt;
+  &lt;Acc.item @value={{3}} @title="Third item"&gt;
+    &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+  &lt;/Acc.item&gt;
+&lt;/BsAccordion&gt;
+</code></pre>
+<p>In the example above the first accordion item utilizes the yielded <code>change</code> action to add some custom behaviour.</p>
+
+
+  </div>
+
+  <div class="card-footer text-muted">
+    <dl class="row m-0">
+        <dt class="col-sm-3">
+          Extends
+        </dt>
+        <dd class="col-sm-9">
+          Ember.Component
+        </dd>
+        <dt class="col-sm-3">
+          Defined in
+        </dt>
+        <dd class="col-sm-9">
+          <a href="../files/addon_components_base_bs-accordion.js.html#l5"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion.js:5</code></a>
+        </dd>
+
+    </dl>
+  </div>
+</div>
+
+
+
+<form id="options-form" class="form-inline mb-1 mt-4">
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
+    <label class="form-check-label" for="api-show-inherited">
+      Inherited
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-protected">
+    <label class="form-check-label" for="api-show-protected">
+      Protected
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-private">
+    <label class="form-check-label" for="api-show-private">
+      Private
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
+    <label class="form-check-label" for="api-show-deprecated">
+      Deprecated
+    </label>
+  </div>
+
+</form>
+
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
+
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div id="index" class="tab-pane active">
+        <h2 class="off-left">Item Index</h2>
+
+
+          <div class="index-section properties">
+            <h3>Properties</h3>
+
+            <ul class="index-list properties extends">
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_isSelected"
+                     data-tablink="isSelected">isSelected</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_itemComponent"
+                     data-tablink="itemComponent">itemComponent</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_selected"
+                     data-tablink="selected">selected</a>
+
+                </li>
+            </ul>
+          </div>
+
+
+          <div class="index-section events">
+            <h3>Events</h3>
+
+            <ul class="index-list events extends">
+                <li class="index-item event public">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onChange" data-tablink="onChange">onChange</a>
+
+                </li>
+            </ul>
+          </div>
+      </div>
+
+
+        <div id="properties" class="tab-pane">
+            <div id="property_isSelected"
+                 class="property item private">
+              <h3 class="name">isSelected
+                <span class="badge badge-secondary small">unknown</span>
+                  <span class="badge badge-private small">private</span>
             
-                <p>Bootstrap-style <a href="http://getbootstrap.com/javascript/#collapse-example-accordion">accordion group</a>,
-            with collapsible/expandable items.</p>
-            <h3>Usage</h3>
-            <p>Use as a block level component with any number of yielded <a href="Components.AccordionItem.html">Components.AccordionItem</a>
-            components as children:</p>
-            <pre class="code prettyprint"><code class="language-handlebars"> {{#bs-accordion as |acc|}}
-                 {{#acc.item value=1 title=&quot;First item&quot;}}
-                   &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-                   &lt;button {{action acc.change 2}}&gt;Next&lt;/button&gt;
-                 {{/acc.item}}
-                 {{#acc.item value=2 title=&quot;Second item&quot;}}
-                   &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-                 {{/acc.item}}
-                 {{#acc.item value=3 title=&quot;Third item&quot;}}
-                   &lt;p&gt;Lorem ipsum...&lt;/p&gt;
-                 {{/acc.item}}
-             {{/bs-accordion}}
-            </code></pre>
-            <p>In the example above the first accordion item utilizes the yielded <code>change</code> action to add some custom behaviour.</p>
             
             
-              </div>
             
-              <div class="card-footer text-muted">
-                <dl class="row m-0">
-                    <dt class="col-sm-3">
-                      Extends
-                    </dt>
-                    <dd class="col-sm-9">
-                      Ember.Component
-                    </dd>
-                    <dt class="col-sm-3">
+              </h3>
+            
+              <div class="meta">
+                  <p>
                       Defined in
-                    </dt>
-                    <dd class="col-sm-9">
-                      <a href="../files/addon_components_base_bs-accordion.js.html#l5"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion.js:5</code></a>
-                    </dd>
+                  <a href="../files/addon_components_base_bs-accordion.js.html#l58"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion.js:58</code></a>
+              </p>
             
-                </dl>
+            
               </div>
+            
+              <div class="description">
+                <p>The value of the currently selected accordion item</p>
+            
+              </div>
+            
+            
+            
+            
             </div>
+            <div id="property_itemComponent"
+                 class="property item private">
+              <h3 class="name">itemComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
             
             
             
-            <form id="options-form" class="form-inline mb-1 mt-4">
             
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
-                <label class="form-check-label" for="api-show-inherited">
-                  Inherited
-                </label>
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-accordion.js.html#l51"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion.js:51</code></a>
+              </p>
+            
+            
               </div>
             
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-protected">
-                <label class="form-check-label" for="api-show-protected">
-                  Protected
-                </label>
+              <div class="description">
+                
               </div>
             
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-private">
-                <label class="form-check-label" for="api-show-private">
-                  Private
-                </label>
+            
+            
+            
+            </div>
+            <div id="property_selected"
+                 class="property item public">
+              <h3 class="name">selected
+                <span class="badge badge-secondary small">unknown</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-accordion.js.html#l40"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion.js:40</code></a>
+              </p>
+            
+            
               </div>
             
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
-                <label class="form-check-label" for="api-show-deprecated">
-                  Deprecated
-                </label>
+              <div class="description">
+                <p>The value of the currently selected accordion item. Set this to change selection programmatically.</p>
+            <p>When the selection is changed by user interaction this property will not update by using two-way bindings in order
+            to follow DDAU best practices. If you want to react to such changes, subscribe to the <code>onChange</code> action</p>
+            
               </div>
             
-            </form>
-            
-            <div class="card">
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                  <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
-            
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div id="index" class="tab-pane active">
-                    <h2 class="off-left">Item Index</h2>
             
             
-                      <div class="index-section properties">
-                        <h3>Properties</h3>
             
-                        <ul class="index-list properties extends">
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_isSelected"
-                                 data-tablink="isSelected">isSelected</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_itemComponent"
-                                 data-tablink="itemComponent">itemComponent</a>
-            
-                            </li>
-                            <li class="index-item property public">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_selected"
-                                 data-tablink="selected">selected</a>
-            
-                            </li>
-                        </ul>
-                      </div>
+            </div>
+        </div>
+
+
+        <div id="events" class="tab-pane">
+            <div id="event_onChange" class="events item public">
+                <h3 class="name"><code>onChange</code></h3>
+                <span class="type"></span>
             
             
-                      <div class="index-section events">
-                        <h3>Events</h3>
-            
-                        <ul class="index-list events extends">
-                            <li class="index-item event public">
-                              <a href="#" data-tabid="#events" data-anchor="#event_onChange" data-tablink="onChange">onChange</a>
-            
-                            </li>
-                        </ul>
-                      </div>
-                  </div>
+                    <span class="flag public">public</span>
             
             
-                    <div id="properties" class="tab-pane">
-                        <div id="property_isSelected"
-                             class="property item private">
-                          <h3 class="name">isSelected
-                            <span class="badge badge-secondary small">unknown</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-accordion.js.html#l58"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion.js:58</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>The value of the currently selected accordion item</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_itemComponent"
-                             class="property item private">
-                          <h3 class="name">itemComponent
-                            <span class="badge badge-secondary small">{String}</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-accordion.js.html#l51"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion.js:51</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_selected"
-                             class="property item public">
-                          <h3 class="name">selected
-                            <span class="badge badge-secondary small">unknown</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-accordion.js.html#l40"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion.js:40</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>The value of the currently selected accordion item. Set this to change selection programmatically.</p>
-                        <p>When the selection is changed by user interaction this property will not update by using two-way bindings in order
-                        to follow DDAU best practices. If you want to react to such changes, subscribe to the <code>onChange</code> action</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                    </div>
+            
+                <div class="meta">
+                            <p>
+                            Defined in
+                    <a href="../files/addon_components_base_bs-accordion.js.html#l66"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion.js:66</code></a>
+                    </p>
             
             
-                    <div id="events" class="tab-pane">
-                        <div id="event_onChange" class="events item public">
-                            <h3 class="name"><code>onChange</code></h3>
-                            <span class="type"></span>
-                        
-                        
-                                <span class="flag public">public</span>
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>
-                                        Defined in
-                                <a href="../files/addon_components_base_bs-accordion.js.html#l66"><code>addon&#x2F;components&#x2F;base&#x2F;bs-accordion.js:66</code></a>
-                                </p>
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>Action when the selected accordion item is about to be changed.</p>
-                        <p>You can return false to prevent changing the active item, and do that in your action by
-                        setting the <code>selected</code> accordingly.</p>
-                        
-                            </div>
-                        
-                                <div class="params">
-                                    <h4>Event Payload:</h4>
-                        
-                                    <ul class="params-list">
-                                        <li class="param">
-                                                <code class="param-name">newValue</code>
-                                                <span class="type">Object</span>
-                        
-                        
-                                            <div class="param-description">
-                                                 
-                                            </div>
-                        
-                                        </li>
-                                        <li class="param">
-                                                <code class="param-name">oldValue</code>
-                                                <span class="type">Object</span>
-                        
-                        
-                                            <div class="param-description">
-                                                 
-                                            </div>
-                        
-                                        </li>
-                                    </ul>
-                                </div>
-                        
-                        
-                        </div>
-                    </div>
                 </div>
-              </div>
+            
+                <div class="description">
+                    <p>Action when the selected accordion item is about to be changed.</p>
+            <p>You can return false to prevent changing the active item, and do that in your action by
+            setting the <code>selected</code> accordingly.</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Event Payload:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">newValue</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                            <li class="param">
+                                    <code class="param-name">oldValue</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+            
             </div>
+        </div>
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </div>
@@ -395,6 +395,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

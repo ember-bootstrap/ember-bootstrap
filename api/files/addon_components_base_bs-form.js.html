@@ -52,498 +52,500 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-form.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import Component from &#x27;@ember/component&#x27;;
-            import { set, computed } from &#x27;@ember/object&#x27;;
-            import { gt } from &#x27;@ember/object/computed&#x27;;
-            import { assert } from &#x27;@ember/debug&#x27;;
-            import { isPresent } from &#x27;@ember/utils&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-form&#x27;;
-            import RSVP from &#x27;rsvp&#x27;;
-            
-            /**
-              Render a form with the appropriate Bootstrap layout class (see &#x60;formLayout&#x60;).
-              Allows setting a &#x60;model&#x60; that nested &#x60;Components.FormElement&#x60;s can access, and that can provide form validation (see below)
-            
-              You can use whatever markup you like within the form. The following shows Bootstrap 3 usage for the internal markup.
-            
-             &#x60;&#x60;&#x60;handlebars
-               {{#bs-form onSubmit=(action &quot;submit&quot;) as |form|}}
-                 {{#form.group validation=firstNameValidation}}
-                   &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
-                   &lt;input value={{firstname}} class=&quot;form-control&quot; oninput={{action (mut firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
-                {{/form.group}}
-              {{/bs-form}}
-              &#x60;&#x60;&#x60;
-            
-              However to benefit from features such as automatic form markup, validations and validation markup, use &#x60;Components.FormElement&#x60;
-              as nested components. See below for an example.
-            
-              ### Submitting the form
-            
-              When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the &#x60;onSubmit&#x60; action
-              will be sent to the controller or parent component.
-              In case the form supports validation (see &quot;Form validation&quot; below), the &#x60;onBefore&#x60; action is called (which allows you to
-              do e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the &#x60;onInvalid&#x60;
-              action is sent instead of &#x60;onSubmit&#x60;.
-            
-              ### Use with Components.FormElement
-            
-              When using &#x60;Components.FormElement&#x60;s with their &#x60;property&#x60; set to property names of the form&#x27;s validation enabled
-              &#x60;model&#x60;, you gain some additional powerful features:
-              * the appropriate Bootstrap markup for the given &#x60;formLayout&#x60; and the form element&#x27;s &#x60;controlType&#x60; is automatically generated
-              * markup for validation states and error messages is generated based on the model&#x27;s validation (if available), when submitting the form
-              with an invalid validation, or when focusing out of invalid inputs
-            
-              &#x60;&#x60;&#x60;handlebars
-              {{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-                {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
-                {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
-                {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
-                {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
-              {{/bs-form}}
-              &#x60;&#x60;&#x60;
-            
-              See the [Components.FormElement](Components.FormElement.html) API docs for further information.
-            
-              ### Form validation
-            
-              All version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.
-              Instead support is added usually by additional Ember addons, for example:
-            
-              * [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)
-              * [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)
-              * [ember-bootstrap-changeset-validations](https://github.com/kaliber5/ember-bootstrap-changeset-validations): adds support for [ember-changeset](https://github.com/poteto/ember-changeset)
-            
-              To add your own validation support, you have to:
-            
-              * extend this component, setting &#x60;hasValidator&#x60; to true if validations are available (by means of a computed property for example), and implementing the &#x60;validate&#x60; method
-              * extend the [Components.FormElement](Components.FormElement.html) component and implement the &#x60;setupValidations&#x60; hook or simply override the &#x60;errors&#x60; property to add the validation error messages to be displayed
-            
-              When validation fails, the appropriate Bootstrap markup is added automatically, i.e. the error classes are applied and
-              the validation messages are shown for each form element. In case the validation library supports it, also warning messages
-              are shown. See the [Components.FormElement](Components.FormElement.html) documentation for further details.
-            
-              See the above mentioned addons for examples.
-            
-              ### Submission state
-            
-              A &#x60;isSubmitting&#x60; property is yielded, which is &#x60;true&#x60; after submit has been triggered and before the Promise returned
-              by &#x60;onSubmit&#x60; is fulfilled. It could be used to disable form&#x27;s submit button and showing a loading spinner for example:
-            
-              &#x60;&#x60;&#x60;
-              {{#bs-form onSubmit=(action &#x27;save&#x27;) as |form|}}
-                {{#bs-button buttonType=&#x27;submit&#x27; disabled=form.isSubmitting}}
-                  Save
-                  {{#if form.isSubmitting}} {{fa-icon &#x27;spinner&#x27;}} {{/if}}
-                {{/bs-button}}
-              {{/bs-form}}
-              &#x60;&#x60;&#x60;
-            
-              Additionaly &#x60;isSubmitted&#x60; and &#x60;isRejected&#x60; properties are yielded. &#x60;isSubmitted&#x60; is &#x60;true&#x60; if last submission was successful.
-              &#x60;isRejected&#x60; is &#x60;true&#x60; if last submission was rejected due to validation errors or by an action bound to &#x60;onSubmit&#x60; event, returning a rejected promise.
-              Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:
-            
-              &#x60;&#x60;&#x60;
-              {{#bs-form onSubmit=(action &#x27;save&#x27;) as |form|}}
-                {{#bs-button buttonType=&#x27;submit&#x27; type=(if form.isRejected &quot;danger&quot; &quot;primary&quot;)}}
-                  Save
-                {{/bs-button}}
-              {{/bs-form}}
-              &#x60;&#x60;&#x60;
-            
-              @class Form
-              @namespace Components
-              @extends Ember.Component
-              @public
-             */
-            export default Component.extend({
-              layout,
-              tagName: &#x27;form&#x27;,
-              classNameBindings: [&#x27;layoutClass&#x27;],
-              attributeBindings: [&#x27;_novalidate:novalidate&#x27;],
-              ariaRole: &#x27;form&#x27;,
-            
-              /**
-               * Bootstrap form class name (computed)
-               *
-               * @property layoutClass
-               * @type string
-               * @readonly
-               * @protected
-               *
-               */
-            
-              /**
-               * Set a model that this form should represent. This serves several purposes:
-               *
-               * * child &#x60;Components.FormElement&#x60;s can access and bind to this model by their &#x60;property&#x60;
-               * * when the model supports validation by using the [ember-validations](https://github.com/dockyard/ember-validations) mixin,
-               * child &#x60;Components.FormElement&#x60;s will look at the validation information of their &#x60;property&#x60; and render their form group accordingly.
-               * Moreover the form&#x27;s &#x60;submit&#x60; event handler will validate the model and deny submitting if the model is not validated successfully.
-               *
-               * @property model
-               * @type Ember.Object
-               * @public
-               */
-              model: null,
-            
-              /**
-               * Set the layout of the form to either &quot;vertical&quot;, &quot;horizontal&quot; or &quot;inline&quot;. See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal
-               *
-               * @property formLayout
-               * @type string
-               * @public
-               */
-              formLayout: &#x27;vertical&#x27;,
-            
-              /**
-               * Check if validating the model is supported. This needs to be implemented by another addon.
-               *
-               * @property hasValidator
-               * @type boolean
-               * @readonly
-               * @protected
-               */
-              hasValidator: false,
-            
-              /**
-               * The Bootstrap grid class for form labels. This is used by the &#x60;Components.FormElement&#x60; class as a default for the
-               * whole form.
-               *
-               * @property horizontalLabelGridClass
-               * @type string
-               * @default &#x27;col-md-4&#x27;
-               * @public
-               */
-              horizontalLabelGridClass: &#x27;col-md-4&#x27;,
-            
-              /**
-               * @property elementComponent
-               * @type {String}
-               * @private
-               */
-              elementComponent: &#x27;bs-form/element&#x27;,
-            
-              /**
-               * @property groupComponent
-               * @type {String}
-               * @private
-               */
-              groupComponent: &#x27;bs-form/group&#x27;,
-            
-              /**
-               * &#x60;isSubmitting&#x60; is &#x60;true&#x60; after &#x60;submit&#x60; event has been triggered and until Promise returned by &#x60;onSubmit&#x60; is
-               * fulfilled. If &#x60;validate&#x60; returns a Promise that one is also taken into consideration.
-               *
-               * If multiple concurrent submit events are fired, it stays &#x60;true&#x60; until all submit events have been fulfilled.
-               *
-               * @property isSubmitting
-               * @type {Boolean}
-               * @readonly
-               * @private
-               */
-              isSubmitting: gt(&#x27;pendingSubmissions&#x27;, 0),
-            
-              /**
-               * &#x60;isSubmitted&#x60; is &#x60;true&#x60; if last submission was successful.
-               * A change to any form element resets it&#x27;s value to &#x60;false&#x60;.
-               *
-               * If not using &#x60;Components.FormElement&#x60;, &#x60;resetSubmissionState&#x60; action must be triggered on each change to reset
-               * form&#x27;s submission state.
-               *
-               * @property isSubmitted
-               * @type {Boolean}
-               * @private
-               */
-              isSubmitted: false,
-            
-              /**
-               * &#x60;isRejected&#x60; is &#x60;true&#x60; if last submission was rejected.
-               * A submission is considered as rejected if form is invalid as well as if &#x60;onSubmit&#x60; rejects.
-               * A change to any form element resets it&#x27;s value to &#x60;false&#x60;.
-               *
-               * If not using &#x60;Components.FormElement&#x60;, &#x60;resetSubmissionState&#x60; action must be triggered on each change to reset
-               * form&#x27;s submission state.
-               *
-               * @property isRejected
-               * @type {Boolean}
-               * @private
-               */
-              isRejected: false,
-            
-              /**
-               * Count of pending submissions.
-               *
-               * @property pendingSubmissions
-               * @type {Integer}
-               * @private
-               */
-              pendingSubmissions: 0,
-            
-              /**
-               * If set to true pressing enter will submit the form, even if no submit button is present
-               *
-               * @property submitOnEnter
-               * @type boolean
-               * @default false
-               * @public
-               */
-              submitOnEnter: false,
-            
-              /**
-               * Controls if &#x60;onSubmit&#x60; action is fired concurrently. If &#x60;true&#x60; submitting form multiple
-               * times will not trigger &#x60;onSubmit&#x60; action if a Promise returned by previous submission is
-               * not settled yet.
-               *
-               * Droping a submission also prevents rerunning validation and &#x60;onBefore&#x60; hook.
-               *
-               * @property preventConcurrency
-               * @type Boolean
-               * @default false
-               * @public
-               */
-              preventConcurrency: false,
-            
-              /**
-               * If true, after successful validation and upon submitting the form, all current element validations will be hidden.
-               * If the form remains visible, the user would have to focus out of elements of submit the form again for the
-               * validations to show up again, as if a fresh new form component had been rendered.
-               *
-               * @property hideValidationsOnSubmit
-               * @type {Boolean}
-               * @default false
-               * @public
-               */
-              hideValidationsOnSubmit: false,
-            
-              /**
-               * If set to true novalidate attribute is present on form element
-               *
-               * @property novalidate
-               * @type boolean
-               * @default null
-               * @public
-               */
-              novalidate: false,
-            
-              _novalidate: computed(&#x27;novalidate&#x27;, function() {
-                return this.get(&#x27;novalidate&#x27;) === true ? &#x27;&#x27; : undefined;
-              }),
-            
-              /**
-               * If set to true the &#x60;readonly&#x60; property of all yielded form elements will be set, making their form controls read-only.
-               *
-               * @property readonly
-               * @type boolean
-               * @default false
-               * @public
-               */
-              readonly: false,
-            
-              /**
-               * If set to true the &#x60;disabled&#x60; property of all yielded form elements will be set, making their form controls disabled.
-               *
-               * @property disabled
-               * @type boolean
-               * @default false
-               * @public
-               */
-              disabled: false,
-            
-              /**
-               * Validate hook which will return a promise that will either resolve if the model is valid
-               * or reject if it&#x27;s not. This should be overridden to add validation support.
-               *
-               * @method validate
-               * @param {Object} model
-               * @return {Promise}
-               * @public
-               */
-              validate(model) {}, // eslint-disable-line no-unused-vars
-            
-              /**
-               * @property showAllValidations
-               * @type boolean
-               * @default undefined
-               * @private
-               */
-              showAllValidations: undefined,
-            
-              /**
-               * Action is called before the form is validated (if possible) and submitted.
-               *
-               * @event onBefore
-               * @param { Object } model  The form&#x27;s &#x60;model&#x60;
-               * @public
-               */
-              onBefore(model) {}, // eslint-disable-line no-unused-vars
-            
-              /**
-               * Action is called when submit has been triggered and the model has passed all validations (if present).
-               *
-               * @event onSubmit
-               * @param { Object } model  The form&#x27;s &#x60;model&#x60;
-               * @param { Object } result The returned result from the validate method, if validation is available
-               * @public
-               */
-              onSubmit(model, result) {}, // eslint-disable-line no-unused-vars
-            
-              /**
-               * Action is called when validation of the model has failed.
-               *
-               * @event onInvalid
-               * @param { Object } model  The form&#x27;s &#x60;model&#x60;
-               * @param { Object } error
-               * @public
-               */
-              onInvalid(model, error) {}, // eslint-disable-line no-unused-vars
-            
-              /**
-               * Submit handler that will send the default action (&quot;action&quot;) to the controller when submitting the form.
-               *
-               * If there is a supplied &#x60;model&#x60; that supports validation (&#x60;hasValidator&#x60;) the model will be validated before, and
-               * only if validation is successful the default action will be sent. Otherwise an &quot;invalid&quot; action will be sent, and
-               * all the &#x60;showValidation&#x60; property of all child &#x60;Components.FormElement&#x60;s will be set to true, so error state and
-               * messages will be shown automatically.
-               *
-               * @method submit
-               * @private
-               */
-              submitHandler(e) {
-                if (e) {
-                  e.preventDefault();
-                }
-            
-                if (this.get(&#x27;preventConcurrency&#x27;) &amp;&amp; this.get(&#x27;isSubmitting&#x27;)) {
-                  return RSVP.resolve();
-                }
-            
-                let model = this.get(&#x27;model&#x27;);
-            
-                this.incrementProperty(&#x27;pendingSubmissions&#x27;);
-                this.get(&#x27;onBefore&#x27;)(model);
-            
-                return RSVP.resolve()
-                  .then(() =&gt; {
-                    return this.get(&#x27;hasValidator&#x27;) ? this.validate(model) : null;
-                  })
-                  .then(
-                    (record) =&gt; {
-                      if (this.get(&#x27;hideValidationsOnSubmit&#x27;) === true) {
-                        this.set(&#x27;showAllValidations&#x27;, false);
-                      }
-            
-                      return RSVP.resolve()
-                        .then(() =&gt; {
-                          return this.get(&#x27;onSubmit&#x27;)(model, record);
-                        })
-                        .then(() =&gt; {
-                          if (this.get(&#x27;isDestroyed&#x27;)) {
-                            return;
-                          }
-            
-                          this.set(&#x27;isSubmitted&#x27;, true);
-                        })
-                        .catch((error) =&gt; {
-                          if (this.get(&#x27;isDestroyed&#x27;)) {
-                            return;
-                          }
-            
-                          this.set(&#x27;isRejected&#x27;, true);
-            
-                          throw error;
-                        })
-                        .finally(() =&gt; {
-                          if (this.get(&#x27;isDestroyed&#x27;)) {
-                            return;
-                          }
-            
-                          this.decrementProperty(&#x27;pendingSubmissions&#x27;);
-            
-                          // reset forced hiding of validations
-                          if (this.get(&#x27;showAllValidations&#x27;) === false) {
-                            this.set(&#x27;showAllValidations&#x27;, undefined);
-                          }
-                        });
-                    },
-                    (error) =&gt; {
-                      // model is invalid
-                      this.set(&#x27;showAllValidations&#x27;, true);
-            
-                      return RSVP.resolve()
-                        .then(() =&gt; {
-                          return this.get(&#x27;onInvalid&#x27;)(model, error);
-                        })
-                        .finally(() =&gt; {
-                          if (this.get(&#x27;isDestroyed&#x27;)) {
-                            return;
-                          }
-            
-                          this.set(&#x27;isRejected&#x27;, true);
-                          this.decrementProperty(&#x27;pendingSubmissions&#x27;);
-            
-                          throw error;
-                        });
-                    }
-                  )
-              },
-            
-              submit() {
-                this.submitHandler(...arguments)
-                  .catch(() =&gt; {});
-              },
-            
-              keyPress(e) {
-                let code = e.keyCode || e.which;
-                if (code === 13 &amp;&amp; this.get(&#x27;submitOnEnter&#x27;)) {
-                  this.triggerSubmit();
-                }
-              },
-            
-              triggerSubmit() {
-                let event = document.createEvent(&#x27;Event&#x27;);
-                event.initEvent(&#x27;submit&#x27;, true, true);
-                this.get(&#x27;element&#x27;).dispatchEvent(event);
-              },
-            
-              init() {
-                this._super(...arguments);
-            
-                let formLayout = this.get(&#x27;formLayout&#x27;);
-                assert(&#x60;Invalid formLayout property given: ${formLayout}&#x60;, [&#x27;vertical&#x27;, &#x27;horizontal&#x27;, &#x27;inline&#x27;].indexOf(formLayout) &gt;= 0);
-              },
-            
-              actions: {
-                change(value, model, property) {
-                  assert(&#x27;You cannot use the form element\&#x27;s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!&#x27;,
-                    isPresent(model) &amp;&amp; isPresent(property)
-                  );
-                  if (typeof model.set === &#x27;function&#x27;) {
-                    model.set(property, value);
-                  } else {
-                    set(model, property, value);
-                  }
-                },
-            
-                resetSubmissionState() {
-                  this.set(&#x27;isSubmitted&#x27;, false);
-                  this.set(&#x27;isRejected&#x27;, false);
-                },
-            
-                submit() {
-                  return this.submitHandler();
-                },
+<div class="page-header">
+    <h1>addon/components/base/bs-form.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Component from &#x27;@ember/component&#x27;;
+import { set, computed } from &#x27;@ember/object&#x27;;
+import { gt } from &#x27;@ember/object/computed&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
+import { isPresent } from &#x27;@ember/utils&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-form&#x27;;
+import RSVP from &#x27;rsvp&#x27;;
+
+/**
+  Render a form with the appropriate Bootstrap layout class (see &#x60;formLayout&#x60;).
+  Allows setting a &#x60;model&#x60; that nested &#x60;Components.FormElement&#x60;s can access, and that can provide form validation (see below)
+
+  You can use whatever markup you like within the form. The following shows Bootstrap 3 usage for the internal markup.
+
+  &#x60;&#x60;&#x60;handlebars
+  &lt;BsForm @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
+    &lt;form.group&gt;
+      &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
+      &lt;input value={{this.firstname}} class=&quot;form-control&quot; oninput={{action (mut this.firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
+    &lt;/form.group&gt;
+  &lt;/BsForm&gt;
+  &#x60;&#x60;&#x60;
+
+  However to benefit from features such as automatic form markup, validations and validation markup, use &#x60;Components.FormElement&#x60;
+  as nested components. See below for an example.
+
+  ### Submitting the form
+
+  When the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the &#x60;onSubmit&#x60; action
+  will be sent to the controller or parent component.
+  In case the form supports validation (see &quot;Form validation&quot; below), the &#x60;onBefore&#x60; action is called (which allows you to
+  do e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the &#x60;onInvalid&#x60;
+  action is sent instead of &#x60;onSubmit&#x60;.
+
+  ### Use with Components.FormElement
+
+  When using &#x60;Components.FormElement&#x60;s with their &#x60;property&#x60; set to property names of the form&#x27;s validation enabled
+  &#x60;model&#x60;, you gain some additional powerful features:
+  * the appropriate Bootstrap markup for the given &#x60;formLayout&#x60; and the form element&#x27;s &#x60;controlType&#x60; is automatically generated
+  * markup for validation states and error messages is generated based on the model&#x27;s validation (if available), when submitting the form
+  with an invalid validation, or when focusing out of invalid inputs
+
+  &#x60;&#x60;&#x60;handlebars
+  &lt;BsForm @formLayout=&quot;horizontal&quot; @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
+    &lt;form.element @controlType=&quot;email&quot; @label=&quot;Email&quot; @placeholder=&quot;Email&quot; @property=&quot;email&quot; /&gt;
+    &lt;form.element @controlType=&quot;password&quot; @label=&quot;Password&quot; @placeholder=&quot;Password&quot; @property=&quot;password&quot; /&gt;
+    &lt;form.element @controlType=&quot;checkbox&quot; @label=&quot;Remember me&quot; @property=&quot;rememberMe&quot; /&gt;
+    &lt;BsButton @defaultText=&quot;Submit&quot; @type=&quot;primary&quot; @buttonType=&quot;submit&quot; /&gt;
+  &lt;/BsForm&gt;
+  &#x60;&#x60;&#x60;
+
+  See the [Components.FormElement](Components.FormElement.html) API docs for further information.
+
+  ### Form validation
+
+  All version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.
+  Instead support is added usually by additional Ember addons, for example:
+
+  * [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)
+  * [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)
+  * [ember-bootstrap-changeset-validations](https://github.com/kaliber5/ember-bootstrap-changeset-validations): adds support for [ember-changeset](https://github.com/poteto/ember-changeset)
+
+  To add your own validation support, you have to:
+
+  * extend this component, setting &#x60;hasValidator&#x60; to true if validations are available (by means of a computed property for example), and implementing the &#x60;validate&#x60; method
+  * extend the [Components.FormElement](Components.FormElement.html) component and implement the &#x60;setupValidations&#x60; hook or simply override the &#x60;errors&#x60; property to add the validation error messages to be displayed
+
+  When validation fails, the appropriate Bootstrap markup is added automatically, i.e. the error classes are applied and
+  the validation messages are shown for each form element. In case the validation library supports it, also warning messages
+  are shown. See the [Components.FormElement](Components.FormElement.html) documentation for further details.
+
+  See the above mentioned addons for examples.
+
+  ### Submission state
+
+  A &#x60;isSubmitting&#x60; property is yielded, which is &#x60;true&#x60; after submit has been triggered and before the Promise returned
+  by &#x60;onSubmit&#x60; is fulfilled. It could be used to disable form&#x27;s submit button and showing a loading spinner for example:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsForm @onSubmit={{action &quot;save&quot;}} as |form|&gt;
+    &lt;BsButton @buttonType=&quot;submit&quot; @disabled={{form.isSubmitting}}&gt;
+      Save
+      {{#if form.isSubmitting}} {{fa-icon &quot;spinner&quot;}} {{/if}}
+    &lt;/BsButton&gt;
+  &lt;/BsForm&gt;
+  &#x60;&#x60;&#x60;
+
+  Additionaly &#x60;isSubmitted&#x60; and &#x60;isRejected&#x60; properties are yielded. &#x60;isSubmitted&#x60; is &#x60;true&#x60; if last submission was successful.
+  &#x60;isRejected&#x60; is &#x60;true&#x60; if last submission was rejected due to validation errors or by an action bound to &#x60;onSubmit&#x60; event, returning a rejected promise.
+  Both are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsForm @onSubmit={{action &#x27;save}} as |form|&gt;
+    &lt;BsButton @buttonType=&quot;submit&quot; @type={{if form.isRejected &quot;danger&quot; &quot;primary&quot;}}&gt;
+      Save
+    &lt;/BsButton&gt;
+  &lt;/BsForm&gt;
+  &#x60;&#x60;&#x60;
+
+  @class Form
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+export default Component.extend({
+  layout,
+  tagName: &#x27;form&#x27;,
+  classNameBindings: [&#x27;layoutClass&#x27;],
+  attributeBindings: [&#x27;_novalidate:novalidate&#x27;],
+  ariaRole: &#x27;form&#x27;,
+
+  /**
+   * Bootstrap form class name (computed)
+   *
+   * @property layoutClass
+   * @type string
+   * @readonly
+   * @protected
+   *
+   */
+
+  /**
+   * Set a model that this form should represent. This serves several purposes:
+   *
+   * * child &#x60;Components.FormElement&#x60;s can access and bind to this model by their &#x60;property&#x60;
+   * * when the model supports validation by using the [ember-validations](https://github.com/dockyard/ember-validations) mixin,
+   * child &#x60;Components.FormElement&#x60;s will look at the validation information of their &#x60;property&#x60; and render their form group accordingly.
+   * Moreover the form&#x27;s &#x60;submit&#x60; event handler will validate the model and deny submitting if the model is not validated successfully.
+   *
+   * @property model
+   * @type Ember.Object
+   * @public
+   */
+
+  /**
+   * Set the layout of the form to either &quot;vertical&quot;, &quot;horizontal&quot; or &quot;inline&quot;. See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal
+   *
+   * @property formLayout
+   * @type string
+   * @public
+   */
+  formLayout: &#x27;vertical&#x27;,
+
+  /**
+   * Check if validating the model is supported. This needs to be implemented by another addon.
+   *
+   * @property hasValidator
+   * @type boolean
+   * @readonly
+   * @protected
+   */
+  hasValidator: false,
+
+  /**
+   * The Bootstrap grid class for form labels. This is used by the &#x60;Components.FormElement&#x60; class as a default for the
+   * whole form.
+   *
+   * @property horizontalLabelGridClass
+   * @type string
+   * @default &#x27;col-md-4&#x27;
+   * @public
+   */
+  horizontalLabelGridClass: &#x27;col-md-4&#x27;,
+
+  /**
+   * @property elementComponent
+   * @type {String}
+   * @private
+   */
+  elementComponent: &#x27;bs-form/element&#x27;,
+
+  /**
+   * @property groupComponent
+   * @type {String}
+   * @private
+   */
+  groupComponent: &#x27;bs-form/group&#x27;,
+
+  /**
+   * &#x60;isSubmitting&#x60; is &#x60;true&#x60; after &#x60;submit&#x60; event has been triggered and until Promise returned by &#x60;onSubmit&#x60; is
+   * fulfilled. If &#x60;validate&#x60; returns a Promise that one is also taken into consideration.
+   *
+   * If multiple concurrent submit events are fired, it stays &#x60;true&#x60; until all submit events have been fulfilled.
+   *
+   * @property isSubmitting
+   * @type {Boolean}
+   * @readonly
+   * @private
+   */
+  isSubmitting: gt(&#x27;pendingSubmissions&#x27;, 0),
+
+  /**
+   * &#x60;isSubmitted&#x60; is &#x60;true&#x60; if last submission was successful.
+   * A change to any form element resets it&#x27;s value to &#x60;false&#x60;.
+   *
+   * If not using &#x60;Components.FormElement&#x60;, &#x60;resetSubmissionState&#x60; action must be triggered on each change to reset
+   * form&#x27;s submission state.
+   *
+   * @property isSubmitted
+   * @type {Boolean}
+   * @private
+   */
+  isSubmitted: false,
+
+  /**
+   * &#x60;isRejected&#x60; is &#x60;true&#x60; if last submission was rejected.
+   * A submission is considered as rejected if form is invalid as well as if &#x60;onSubmit&#x60; rejects.
+   * A change to any form element resets it&#x27;s value to &#x60;false&#x60;.
+   *
+   * If not using &#x60;Components.FormElement&#x60;, &#x60;resetSubmissionState&#x60; action must be triggered on each change to reset
+   * form&#x27;s submission state.
+   *
+   * @property isRejected
+   * @type {Boolean}
+   * @private
+   */
+  isRejected: false,
+
+  /**
+   * Count of pending submissions.
+   *
+   * @property pendingSubmissions
+   * @type {Integer}
+   * @private
+   */
+  pendingSubmissions: 0,
+
+  /**
+   * If set to true pressing enter will submit the form, even if no submit button is present
+   *
+   * @property submitOnEnter
+   * @type boolean
+   * @default false
+   * @public
+   */
+  submitOnEnter: false,
+
+  /**
+   * Controls if &#x60;onSubmit&#x60; action is fired concurrently. If &#x60;true&#x60; submitting form multiple
+   * times will not trigger &#x60;onSubmit&#x60; action if a Promise returned by previous submission is
+   * not settled yet.
+   *
+   * Droping a submission also prevents rerunning validation and &#x60;onBefore&#x60; hook.
+   *
+   * @property preventConcurrency
+   * @type Boolean
+   * @default true
+   * @public
+   */
+  preventConcurrency: true,
+
+  /**
+   * If true, after successful validation and upon submitting the form, all current element validations will be hidden.
+   * If the form remains visible, the user would have to focus out of elements of submit the form again for the
+   * validations to show up again, as if a fresh new form component had been rendered.
+   *
+   * @property hideValidationsOnSubmit
+   * @type {Boolean}
+   * @default false
+   * @public
+   */
+  hideValidationsOnSubmit: false,
+
+  /**
+   * If set to true novalidate attribute is present on form element
+   * Will be true by default if validation support is enabled.
+   *
+   * @property novalidate
+   * @type boolean
+   * @default null
+   * @public
+   */
+  novalidate: null,
+
+  _novalidate: computed(&#x27;novalidate&#x27;, &#x27;hasValidator&#x27;, function() {
+    return (this.get(&#x27;hasValidator&#x27;) &amp;&amp; this.get(&#x27;novalidate&#x27;) !== false) || this.get(&#x27;novalidate&#x27;) === true
+        ? &#x27;&#x27;
+        : undefined;
+  }),
+
+  /**
+   * If set to true the &#x60;readonly&#x60; property of all yielded form elements will be set, making their form controls read-only.
+   *
+   * @property readonly
+   * @type boolean
+   * @default false
+   * @public
+   */
+  readonly: false,
+
+  /**
+   * If set to true the &#x60;disabled&#x60; property of all yielded form elements will be set, making their form controls disabled.
+   *
+   * @property disabled
+   * @type boolean
+   * @default false
+   * @public
+   */
+  disabled: false,
+
+  /**
+   * Validate hook which will return a promise that will either resolve if the model is valid
+   * or reject if it&#x27;s not. This should be overridden to add validation support.
+   *
+   * @method validate
+   * @param {Object} model
+   * @return {Promise}
+   * @public
+   */
+  validate(model) {}, // eslint-disable-line no-unused-vars
+
+  /**
+   * @property showAllValidations
+   * @type boolean
+   * @default undefined
+   * @private
+   */
+  showAllValidations: undefined,
+
+  /**
+   * Action is called before the form is validated (if possible) and submitted.
+   *
+   * @event onBefore
+   * @param { Object } model  The form&#x27;s &#x60;model&#x60;
+   * @public
+   */
+  onBefore(model) {}, // eslint-disable-line no-unused-vars
+
+  /**
+   * Action is called when submit has been triggered and the model has passed all validations (if present).
+   *
+   * @event onSubmit
+   * @param { Object } model  The form&#x27;s &#x60;model&#x60;
+   * @param { Object } result The returned result from the validate method, if validation is available
+   * @public
+   */
+  onSubmit(model, result) {}, // eslint-disable-line no-unused-vars
+
+  /**
+   * Action is called when validation of the model has failed.
+   *
+   * @event onInvalid
+   * @param { Object } model  The form&#x27;s &#x60;model&#x60;
+   * @param { Object } error
+   * @public
+   */
+  onInvalid(model, error) {}, // eslint-disable-line no-unused-vars
+
+  /**
+   * Submit handler that will send the default action (&quot;action&quot;) to the controller when submitting the form.
+   *
+   * If there is a supplied &#x60;model&#x60; that supports validation (&#x60;hasValidator&#x60;) the model will be validated before, and
+   * only if validation is successful the default action will be sent. Otherwise an &quot;invalid&quot; action will be sent, and
+   * all the &#x60;showValidation&#x60; property of all child &#x60;Components.FormElement&#x60;s will be set to true, so error state and
+   * messages will be shown automatically.
+   *
+   * @method submit
+   * @private
+   */
+  submitHandler(e) {
+    if (e) {
+      e.preventDefault();
+    }
+
+    if (this.get(&#x27;preventConcurrency&#x27;) &amp;&amp; this.get(&#x27;isSubmitting&#x27;)) {
+      return RSVP.resolve();
+    }
+
+    let model = this.get(&#x27;model&#x27;);
+
+    this.incrementProperty(&#x27;pendingSubmissions&#x27;);
+    this.get(&#x27;onBefore&#x27;)(model);
+
+    return RSVP.resolve()
+      .then(() =&gt; {
+        return this.get(&#x27;hasValidator&#x27;) ? this.validate(model) : null;
+      })
+      .then(
+        (record) =&gt; {
+          if (this.get(&#x27;hideValidationsOnSubmit&#x27;) === true) {
+            this.set(&#x27;showAllValidations&#x27;, false);
+          }
+
+          return RSVP.resolve()
+            .then(() =&gt; {
+              return this.get(&#x27;onSubmit&#x27;)(model, record);
+            })
+            .then(() =&gt; {
+              if (this.get(&#x27;isDestroyed&#x27;)) {
+                return;
+              }
+
+              this.set(&#x27;isSubmitted&#x27;, true);
+            })
+            .catch((error) =&gt; {
+              if (this.get(&#x27;isDestroyed&#x27;)) {
+                return;
+              }
+
+              this.set(&#x27;isRejected&#x27;, true);
+
+              throw error;
+            })
+            .finally(() =&gt; {
+              if (this.get(&#x27;isDestroyed&#x27;)) {
+                return;
+              }
+
+              this.decrementProperty(&#x27;pendingSubmissions&#x27;);
+
+              // reset forced hiding of validations
+              if (this.get(&#x27;showAllValidations&#x27;) === false) {
+                this.set(&#x27;showAllValidations&#x27;, undefined);
               }
             });
-            
-                </pre>
-            </div>
+        },
+        (error) =&gt; {
+          return RSVP.resolve()
+            .then(() =&gt; {
+              return this.get(&#x27;onInvalid&#x27;)(model, error);
+            })
+            .finally(() =&gt; {
+              if (this.get(&#x27;isDestroyed&#x27;)) {
+                return;
+              }
+
+              this.setProperties({
+                showAllValidations: true,
+                isRejected: true,
+                pendingSubmissions: this.get(&#x27;pendingSubmissions&#x27;) - 1
+              });
+
+              throw error;
+            });
+        }
+      )
+  },
+
+  submit() {
+    this.submitHandler(...arguments)
+      .catch(() =&gt; {});
+  },
+
+  keyPress(e) {
+    let code = e.keyCode || e.which;
+    if (code === 13 &amp;&amp; this.get(&#x27;submitOnEnter&#x27;)) {
+      this.triggerSubmit();
+    }
+  },
+
+  triggerSubmit() {
+    let event = document.createEvent(&#x27;Event&#x27;);
+    event.initEvent(&#x27;submit&#x27;, true, true);
+    this.get(&#x27;element&#x27;).dispatchEvent(event);
+  },
+
+  init() {
+    this._super(...arguments);
+
+    let formLayout = this.get(&#x27;formLayout&#x27;);
+    assert(&#x60;Invalid formLayout property given: ${formLayout}&#x60;, [&#x27;vertical&#x27;, &#x27;horizontal&#x27;, &#x27;inline&#x27;].indexOf(formLayout) &gt;= 0);
+  },
+
+  actions: {
+    change(value, model, property) {
+      assert(&#x27;You cannot use the form element\&#x27;s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!&#x27;,
+        isPresent(model) &amp;&amp; isPresent(property)
+      );
+      if (typeof model.set === &#x27;function&#x27;) {
+        model.set(property, value);
+      } else {
+        set(model, property, value);
+      }
+    },
+
+    resetSubmissionState() {
+      this.set(&#x27;isSubmitted&#x27;, false);
+      this.set(&#x27;isRejected&#x27;, false);
+    },
+
+    submit() {
+      return this.submitHandler();
+    },
+  }
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -605,6 +607,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

@@ -52,92 +52,92 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/mixins/component-child.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import Mixin from &#x27;@ember/object/mixin&#x27;;
-            import { computed } from &#x27;@ember/object&#x27;;
-            import ComponentParentMixin from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
-            
-            /**
-             * Mixin for components that act as a child component in a parent-child relationship of components
-             *
-             * @class ComponentChild
-             * @namespace Mixins
-             * @private
-             */
-            export default Mixin.create({
-            
-              /**
-               * The parent component
-               *
-               * @property _parent
-               * @private
-               */
-              _parent: computed(function() {
-                return this.nearestOfType(ComponentParentMixin);
-              }),
-            
-              /**
-               * flag to check if component has already been registered
-               * @property _didRegister
-               * @type boolean
-               * @private
-               */
-              _didRegister: false,
-            
-              /**
-               * Register ourself as a child at the parent component
-               * We use the &#x60;willRender&#x60; event here to also support the fastboot environment, where there is no &#x60;didInsertElement&#x60;
-               *
-               * @method _registerWithParent
-               * @private
-               */
-              _registerWithParent() {
-                if (!this._didRegister) {
-                  let parent = this.get(&#x27;_parent&#x27;);
-                  if (parent) {
-                    parent.registerChild(this);
-                    this._didRegister = true;
-                  }
-                }
-              },
-            
-              /**
-               * Unregister from the parent component
-               *
-               * @method _unregisterFromParent
-               * @private
-               */
-              _unregisterFromParent() {
-                let parent = this.get(&#x27;_parent&#x27;);
-                if (this._didRegister &amp;&amp; parent) {
-                  parent.removeChild(this);
-                  this._didRegister = false;
-                }
-              },
-            
-              didReceiveAttrs() {
-                this._super(...arguments);
-                this._registerWithParent();
-              },
-            
-              willRender() {
-                this._super(...arguments);
-                this._registerWithParent();
-              },
-            
-              willDestroyElement() {
-                this._super(...arguments);
-                this._unregisterFromParent();
-              }
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/mixins/component-child.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import ComponentParentMixin from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
+
+/**
+ * Mixin for components that act as a child component in a parent-child relationship of components
+ *
+ * @class ComponentChild
+ * @namespace Mixins
+ * @private
+ */
+export default Mixin.create({
+
+  /**
+   * The parent component
+   *
+   * @property _parent
+   * @private
+   */
+  _parent: computed(function() {
+    return this.nearestOfType(ComponentParentMixin);
+  }),
+
+  /**
+   * flag to check if component has already been registered
+   * @property _didRegister
+   * @type boolean
+   * @private
+   */
+  _didRegister: false,
+
+  /**
+   * Register ourself as a child at the parent component
+   * We use the &#x60;willRender&#x60; event here to also support the fastboot environment, where there is no &#x60;didInsertElement&#x60;
+   *
+   * @method _registerWithParent
+   * @private
+   */
+  _registerWithParent() {
+    if (!this._didRegister) {
+      let parent = this.get(&#x27;_parent&#x27;);
+      if (parent) {
+        parent.registerChild(this);
+        this._didRegister = true;
+      }
+    }
+  },
+
+  /**
+   * Unregister from the parent component
+   *
+   * @method _unregisterFromParent
+   * @private
+   */
+  _unregisterFromParent() {
+    let parent = this.get(&#x27;_parent&#x27;);
+    if (this._didRegister &amp;&amp; parent) {
+      parent.removeChild(this);
+      this._didRegister = false;
+    }
+  },
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+    this._registerWithParent();
+  },
+
+  willRender() {
+    this._super(...arguments);
+    this._registerWithParent();
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    this._unregisterFromParent();
+  }
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -199,6 +199,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

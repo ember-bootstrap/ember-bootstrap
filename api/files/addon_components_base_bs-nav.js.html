@@ -52,156 +52,155 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-nav.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import { computed } from &#x27;@ember/object&#x27;;
-            import Component from &#x27;@ember/component&#x27;;
-            import { isPresent } from &#x27;@ember/utils&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
-            
-            /**
-            
-             Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)
-            
-             ### Usage
-            
-             Use in combination with the yielded components
-            
-             * [Components.NavItem](Components.NavItem.html)
-             * [Components.NavLinkTo](Components.NavLinkTo.html)
-             * [&#x60;nav.dropdown&#x60;](Components.Dropdown.html)
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-nav type=&quot;pills&quot; as |nav|}}
-               {{#nav.item}}
-                  {{#nav.link-to &quot;foo&quot;}}Foo{{/nav.link-to}}
-               {{/nav.item}}
-               {{#nav.item}}
-                 {{#nav.link-to &quot;bar&quot;}}Bar{{/nav.link-to}}
-               {{/nav.item}}
-             {{/bs-nav}}
-             &#x60;&#x60;&#x60;
-            
-             ### Nav styles
-            
-             The component supports the default bootstrap nav styling options &quot;pills&quot; and &quot;tabs&quot; through the &#x60;type&#x60;
-             property, as well as the &#x60;justified&#x60;, &#x60;fill&#x60; and &#x60;stacked&#x60; properties.
-            
-             ### Active items
-            
-             Bootstrap expects to have the &#x60;active&#x60; class on the &#x60;&lt;li&gt;&#x60; element that should be the active (highlighted)
-             navigation item. To achieve that just use the &#x60;link-to&#x60; helper as usual. If the link is active, i.e
-             it points to the current route, the &#x60;bs-nav-item&#x60; component will detect that and apply the &#x60;active&#x60; class
-             automatically. The same applies for the &#x60;disabled&#x60; state.
-            
-             ### Dropdowns
-            
-             Use the &#x60;nav.dropdown&#x60; contextual version of the [Components.Dropdown](Components.Dropdown.html) component
-             with a &#x60;tagName&#x60; of &quot;li&quot; to integrate a dropdown into your nav:
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-nav type=&quot;pills&quot; as |nav|}}
-               {{#nav.item}}{{#nav.link-to &quot;index&quot;}}Home{{/nav.link-to}}{{/nav.item}}
-               {{#nav.dropdown as |dd|}}
-                 {{#dd.toggle}}Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;{{/dd.toggle}}
-                 {{#dd.menu as |ddm|}}
-                   {{#ddm.item}}{{#ddm.link-to &quot;foo&quot;}}Foo{{/ddm.link-to}}{{/ddm.item}}
-                   {{#ddm.item}}{{#ddm.link-to &quot;bar&quot;}}Bar{{/ddm.link-to}}{{/ddm.item}}
-                 {{/dd.menu}}
-               {{/nav.dropdown}}
-             {{/bs-nav}}
-             &#x60;&#x60;&#x60;
-            
-             ### Bootstrap 3/4 Notes
-            
-             Use [&#x60;nav.link-to&#x60;](Components.NavLinkTo.html) for in-app links to ensure proper styling regardless of
-             Bootstrap version. Explicit use of &#x60;&lt;a&gt;&#x60; tags in Bootstrap 4 must apply the &#x60;nav-link&#x60; class and manage
-             the &#x60;active&#x60; state explicitly.
-            
-             You can override &#x60;tagName&#x60; if you want to use Bootstrap 4&#x27;s ability to represent more structural
-             components with &#x60;div&#x60; tags.
-            
-             The &#x60;fill&#x60; styling is only available with Bootstrap 4
-            
-             @class Nav
-             @namespace Components
-             @extends Ember.Component
-             @public
-            
-             */
-            export default Component.extend({
-              layout,
-            
-              tagName: &#x27;ul&#x27;,
-              classNames: [&#x27;nav&#x27;],
-            
-              classNameBindings: [&#x27;typeClass&#x27;, &#x27;justified:nav-justified&#x27;],
-            
-              typeClass: computed(&#x27;type&#x27;, function() {
-                let type = this.get(&#x27;type&#x27;);
-                if (isPresent(type)) {
-                  return &#x60;nav-${type}&#x60;;
-                }
-              }),
-            
-              /**
-               * Special type of nav, either &quot;pills&quot; or &quot;tabs&quot;
-               *
-               * @property type
-               * @type String
-               * @default null
-               * @public
-               */
-              type: null,
-            
-              /**
-               * Make the nav justified, see [bootstrap docs](http://getbootstrap.com/components/#nav-justified)
-               *
-               * @property justified
-               * @type boolean
-               * @default false
-               * @public
-               */
-              justified: false,
-            
-              /**
-               * Make the nav pills stacked, see [bootstrap docs](http://getbootstrap.com/components/#nav-pills)
-               *
-               * @property stacked
-               * @type boolean
-               * @default false
-               * @public
-               */
-              stacked: false,
-            
-              /**
-               * @property itemComponent
-               * @type {String}
-               * @private
-               */
-              itemComponent: &#x27;bs-nav/item&#x27;,
-            
-              /**
-               * @property linkToComponent
-               * @type {String}
-               * @private
-               */
-              linkToComponent: &#x27;bs-nav/link-to&#x27;,
-            
-              /**
-               * @property dropdownComponent
-               * @type {String}
-               * @private
-               */
-              dropdownComponent: &#x27;bs-dropdown&#x27;
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-nav.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { computed } from &#x27;@ember/object&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { isPresent } from &#x27;@ember/utils&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
+
+/**
+  Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)
+
+  ### Usage
+
+  Use in combination with the yielded components
+
+  * [Components.NavItem](Components.NavItem.html)
+  * [Components.NavLinkTo](Components.NavLinkTo.html)
+  * [&#x60;nav.dropdown&#x60;](Components.Dropdown.html)
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsNav @type=&quot;pills&quot; as |nav|&gt;
+    &lt;nav.item @linkTo=&quot;foo&quot;&gt;
+      Foo
+    &lt;/nav.item&gt;
+    &lt;nav.item @linkTo=(array &quot;bar&quot; model)&gt;
+      Bar
+    &lt;/nav.item&gt;
+  &lt;/BsNav&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Nav styles
+
+  The component supports the default bootstrap nav styling options &quot;pills&quot; and &quot;tabs&quot; through the &#x60;type&#x60;
+  property, as well as the &#x60;justified&#x60;, &#x60;fill&#x60; and &#x60;stacked&#x60; properties.
+
+  ### Active items
+
+  Bootstrap expects to have the &#x60;active&#x60; class on the &#x60;&lt;li&gt;&#x60; element that should be the active (highlighted)
+  navigation item. To achieve that just use the &#x60;link-to&#x60; helper as usual. If the link is active, i.e
+  it points to the current route, the &#x60;bs-nav-item&#x60; component will detect that and apply the &#x60;active&#x60; class
+  automatically. The same applies for the &#x60;disabled&#x60; state.
+
+  ### Dropdowns
+
+  Use the &#x60;nav.dropdown&#x60; contextual version of the [Components.Dropdown](Components.Dropdown.html) component
+  with a &#x60;tagName&#x60; of &quot;li&quot; to integrate a dropdown into your nav:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsNav @type=&quot;pills&quot; as |nav|&gt;
+    &lt;nav.item @linkTo=&quot;index&quot;&gt;Home&lt;/nav.item&gt;
+    &lt;nav.dropdown as |dd|&gt;
+      &lt;dd.toggle&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/dd.toggle&gt;
+      &lt;dd.menu as |ddm|&gt;
+        &lt;ddm.item&gt;{{#ddm.link-to &quot;foo&quot;}}Foo{{/ddm.link-to}}&lt;/ddm.item&gt;
+        &lt;ddm.item&gt;{{#ddm.link-to &quot;bar&quot;}}Bar{{/ddm.link-to}}&lt;/ddm.item&gt;
+      &lt;/dd.menu&gt;
+    &lt;/nav.dropdown&gt;
+  &lt;/BsNav&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Bootstrap 3/4 Notes
+
+  Use [&#x60;nav.item#linkTo&#x60;](Components.NavItem.html) for in-app links to ensure proper styling regardless of
+  Bootstrap version. Explicit use of &#x60;&lt;a&gt;&#x60; tags in Bootstrap 4 must apply the &#x60;nav-link&#x60; class and manage
+  the &#x60;active&#x60; state explicitly.
+
+  You can override &#x60;tagName&#x60; if you want to use Bootstrap 4&#x27;s ability to represent more structural
+  components with &#x60;div&#x60; tags.
+
+  The &#x60;fill&#x60; styling is only available with Bootstrap 4
+
+  @class Nav
+  @namespace Components
+  @extends Ember.Component
+  @public
+
+ */
+export default Component.extend({
+  layout,
+
+  tagName: &#x27;ul&#x27;,
+  classNames: [&#x27;nav&#x27;],
+
+  classNameBindings: [&#x27;typeClass&#x27;, &#x27;justified:nav-justified&#x27;],
+
+  typeClass: computed(&#x27;type&#x27;, function() {
+    let type = this.get(&#x27;type&#x27;);
+    if (isPresent(type)) {
+      return &#x60;nav-${type}&#x60;;
+    }
+  }),
+
+  /**
+   * Special type of nav, either &quot;pills&quot; or &quot;tabs&quot;
+   *
+   * @property type
+   * @type String
+   * @default null
+   * @public
+   */
+  type: null,
+
+  /**
+   * Make the nav justified, see [bootstrap docs](http://getbootstrap.com/components/#nav-justified)
+   *
+   * @property justified
+   * @type boolean
+   * @default false
+   * @public
+   */
+  justified: false,
+
+  /**
+   * Make the nav pills stacked, see [bootstrap docs](http://getbootstrap.com/components/#nav-pills)
+   *
+   * @property stacked
+   * @type boolean
+   * @default false
+   * @public
+   */
+  stacked: false,
+
+  /**
+   * @property itemComponent
+   * @type {String}
+   * @private
+   */
+  itemComponent: &#x27;bs-nav/item&#x27;,
+
+  /**
+   * @property linkToComponent
+   * @type {String}
+   * @private
+   */
+  linkToComponent: &#x27;bs-nav/link-to&#x27;,
+
+  /**
+   * @property dropdownComponent
+   * @type {String}
+   * @private
+   */
+  dropdownComponent: &#x27;bs-dropdown&#x27;
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -263,6 +262,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

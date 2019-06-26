@@ -52,75 +52,75 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-form/group.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import { notEmpty } from &#x27;@ember/object/computed&#x27;;
-            import Component from &#x27;@ember/component&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-form/group&#x27;;
-            
-            /**
-             This component renders a &#x60;&lt;div class=&quot;form-group&quot;&gt;&#x60; element, with support for validation states and feedback icons (only for BS3).
-             You can use it as a block level component. The following shows Bootstrap 3 usage for the internal markup.
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-form as |form|}}
-               {{#form.group validation=firstNameValidation}}
-                 &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
-                 &lt;input value={{firstname}} class=&quot;form-control&quot; oninput={{action (mut firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
-               {{/form.group}}
-             {{/bs-form}}
-             &#x60;&#x60;&#x60;
-            
-             If the &#x60;validation&#x60; property is set to some state (usually Bootstrap&#x27;s predefined states &quot;success&quot;,
-             &quot;warning&quot; or &quot;error&quot;), the appropriate styles will be added, together with a feedback icon.
-             See http://getbootstrap.com/css/#forms-control-validation
-            
-             @class FormGroup
-             @namespace Components
-             @extends Ember.Component
-             @public
-             */
-            export default Component.extend({
-              layout,
-            
-              /**
-               * @property classTypePrefix
-               * @type String
-               * @default &#x27;form-group&#x27; (BS3) or &#x27;form-control&#x27; (BS4)
-               * @private
-               */
-            
-              /**
-               * Computed property which is true if the form group is in a validation state
-               *
-               * @property hasValidation
-               * @type boolean
-               * @private
-               * @readonly
-               */
-              hasValidation: notEmpty(&#x27;validation&#x27;).readOnly(),
-            
-              /**
-               * Set to a validation state to render the form-group with a validation style (only for BS3).
-               * See http://getbootstrap.com/css/#forms-control-validation
-               *
-               * The default states of &quot;success&quot;, &quot;warning&quot; and &quot;error&quot; are supported by Bootstrap out-of-the-box.
-               * But you can use custom states as well. This will set a has-&lt;state&gt; class, and (if &#x60;useIcons&#x60;is true)
-               * a feedback whose class is taken from the &lt;state&gt;Icon property
-               *
-               * @property validation
-               * @type string
-               * @public
-               */
-              validation: null
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-form/group.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { notEmpty } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-form/group&#x27;;
+
+/**
+  This component renders a &#x60;&lt;div class=&quot;form-group&quot;&gt;&#x60; element, with support for validation states and feedback icons (only for BS3).
+  You can use it as a block level component. The following shows Bootstrap 3 usage for the internal markup.
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsForm as |form|&gt;
+    &lt;form.group @validation={{this.firstNameValidation}}&gt;
+      &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
+      &lt;input value={{this.firstname}} class=&quot;form-control&quot; oninput={{action (mut this.firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
+    &lt;/form.group&gt;
+  &lt;/bs-form&gt;
+  &#x60;&#x60;&#x60;
+
+  If the &#x60;validation&#x60; property is set to some state (usually Bootstrap&#x27;s predefined states &quot;success&quot;,
+  &quot;warning&quot; or &quot;error&quot;), the appropriate styles will be added, together with a feedback icon.
+  See http://getbootstrap.com/css/#forms-control-validation
+
+  @class FormGroup
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+export default Component.extend({
+  layout,
+
+  /**
+   * @property classTypePrefix
+   * @type String
+   * @default &#x27;form-group&#x27; (BS3) or &#x27;form-control&#x27; (BS4)
+   * @private
+   */
+
+  /**
+   * Computed property which is true if the form group is in a validation state
+   *
+   * @property hasValidation
+   * @type boolean
+   * @private
+   * @readonly
+   */
+  hasValidation: notEmpty(&#x27;validation&#x27;).readOnly(),
+
+  /**
+   * Set to a validation state to render the form-group with a validation style (only for BS3).
+   * See http://getbootstrap.com/css/#forms-control-validation
+   *
+   * The default states of &quot;success&quot;, &quot;warning&quot; and &quot;error&quot; are supported by Bootstrap out-of-the-box.
+   * But you can use custom states as well. This will set a has-&lt;state&gt; class, and (if &#x60;useIcons&#x60;is true)
+   * a feedback whose class is taken from the &lt;state&gt;Icon property
+   *
+   * @property validation
+   * @type string
+   * @public
+   */
+  validation: null
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -182,6 +182,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

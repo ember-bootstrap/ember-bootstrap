@@ -52,1061 +52,1061 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-form/element.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import {
-              notEmpty,
-              gt,
-              or,
-              and,
-              equal,
-              alias
-            } from &#x27;@ember/object/computed&#x27;;
-            import { observer, defineProperty, computed } from &#x27;@ember/object&#x27;;
-            import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
-            import { assert } from &#x27;@ember/debug&#x27;;
-            import { typeOf, isBlank } from &#x27;@ember/utils&#x27;;
-            import { A, isArray } from &#x27;@ember/array&#x27;;
-            import { getOwner } from &#x27;@ember/application&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-form/element&#x27;;
-            import FormGroup from &#x27;ember-bootstrap/components/bs-form/group&#x27;;
-            
-            const nonDefaultLayouts = A([
-              &#x27;checkbox&#x27;
-            ]);
-            
-            /**
-             Sub class of &#x60;Components.FormGroup&#x60; that adds automatic form layout markup and form validation features.
-            
-             ### Form layout
-            
-             The appropriate Bootstrap markup for the given &#x60;formLayout&#x60; and &#x60;controlType&#x60; is automatically generated to easily
-             create forms without coding the default Bootstrap form markup by hand:
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-form formLayout=&quot;horizontal&quot; onSubmit=(action &quot;submit&quot;) as |form|}}
-               {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
-               {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; value=password}}
-               {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; value=rememberMe}}
-               {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
-             {{/bs-form}}
-             &#x60;&#x60;&#x60;
-            
-             ### Control types
-            
-             The following control types are supported out of the box:
-            
-             * Inputs (simple &#x60;text&#x60;, or any other HTML5 supported input types like &#x60;password&#x60;, &#x60;email&#x60; etc.)
-             * Checkbox (single)
-             * Radio Button (group)
-             * Textarea
-            
-             #### Radio Buttons
-            
-             For a group of mutually exclusive radio buttons to work, you must supply the &#x60;options&#x60; property with an array of
-             options, each of which will be rendered with an appropriate radio button and its label. It can be either a simple array
-             of strings or objects. In the latter case, you would have to set &#x60;optionLabelPath&#x60; to the property, that contains the
-             label on these objects.
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-               {{form.element controlType=&quot;radio&quot; label=&quot;Gender&quot; options=genderOptions optionLabelPath=&quot;title&quot; property=&quot;gender&quot;}}
-             {{/bs-form}}
-             &#x60;&#x60;&#x60;
-            
-             The default layout for radios is stacked, but Bootstrap&#x27;s inline layout is also supported using the &#x60;inline&#x60; property
-             of the yielded control component:
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-               {{#form.element controlType=&quot;radio&quot; label=&quot;Gender&quot; options=genderOptions property=&quot;gender&quot; as |el|}}
-                 {{el.control inline=true}}
-               {{/form.element}}
-             {{/bs-form}}
-             &#x60;&#x60;&#x60;
-            
-             #### Custom controls
-            
-             Apart from the standard built-in browser controls (see the &#x60;controlType&#x60; property), you can use any custom control simply
-             by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
-             (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-             {{#form.element label=&quot;Select-2&quot; property=&quot;gender&quot; useIcons=false as |el|}}
-             {{select-2 id=el.id content=genderChoices optionLabelPath=&quot;label&quot; value=el.value searchEnabled=false}}
-             {{/form.element}}
-             {{/bs-form}}
-             &#x60;&#x60;&#x60;
-            
-             The component yields a hash with the following properties:
-             * &#x60;control&#x60;: the component that would be used for rendering the form control based on the given &#x60;controlType&#x60;
-             * &#x60;id&#x60;: id to be used for the form control, so it matches the labels &#x60;for&#x60; attribute
-             * &#x60;value&#x60;: the value of the form element
-             * &#x60;validation&#x60;: the validation state of the element, &#x60;null&#x60; if no validation is to be shown, otherwise &#x27;success&#x27;, &#x27;error&#x27; or &#x27;warning&#x27;
-            
-             If your custom control does not render an input element, you should set &#x60;useIcons&#x60; to &#x60;false&#x60; since bootstrap only supports
-             feedback icons with textual &#x60;&lt;input class=&quot;form-control&quot;&gt;&#x60; elements.
-            
-             If you just want to customize the existing control component, you can use the aforementioned yielded &#x60;control&#x60; component
-             to customize that existing component:
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-form model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-             {{#form.element label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot; as |el|}}
-             {{el.control class=&quot;input-lg&quot;}}
-             {{/form.element}}
-             {{/bs-form}}
-             &#x60;&#x60;&#x60;
-            
-             If you are using the custom control quite often, you should consider writing an integration plugin like
-             [&#x60;ember-bootstrap-power-select&#x60;](https://github.com/kaliber5/ember-bootstrap-power-select).
-             To do so, you need to provide a component &#x60;{{bs-form/element/control/my-custom-control}}&#x60; which extends
-             [&#x60;Components.FormElementControl&#x60;](Components.FormElementControl.html).
-            
-             ### Form validation
-            
-             In the following example the control elements of the three form elements value will be bound to the properties
-             (given by &#x60;property&#x60;) of the form&#x27;s &#x60;model&#x60;, which in this case is its controller (see &#x60;model=this&#x60;):
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-               {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; property=&quot;email&quot;}}
-               {{form.element controlType=&quot;password&quot; label=&quot;Password&quot; placeholder=&quot;Password&quot; property=&quot;password&quot;}}
-               {{form.element controlType=&quot;checkbox&quot; label=&quot;Remember me&quot; property=&quot;rememberMe&quot;}}
-               {{bs-button defaultText=&quot;Submit&quot; type=&quot;primary&quot; buttonType=&quot;submit&quot;}}
-             {{/bs-form}}
-             &#x60;&#x60;&#x60;
-            
-             By using this indirection in comparison to directly binding the &#x60;value&#x60; property, you get the benefit of automatic
-             form validation, given that your &#x60;model&#x60; has a supported means of validating itself.
-             See [Components.Form](Components.Form.html) for details on how to enable form validation.
-            
-             In the example above the &#x60;model&#x60; was our controller itself, so the control elements were bound to the appropriate
-             properties of our controller. A controller implementing validations on those properties could look like this:
-            
-             &#x60;&#x60;&#x60;js
-             import Ember from &#x27;ember&#x27;;
-             import EmberValidations from &#x27;ember-validations&#x27;;
-            
-             export default Ember.Controller.extend(EmberValidations,{
-               email: null,
-               password: null,
-               rememberMe: false,
-               validations: {
-                 email: {
-                   presence: true,
-                   format: {
-                     with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-                   }
-                 },
-                 password: {
-                   presence: true,
-                   length: { minimum: 6, maximum: 10}
-                 },
-                 comments: {
-                   length: { minimum: 5, maximum: 20}
-                 }
-               }
-             });
-             &#x60;&#x60;&#x60;
-            
-             If the &#x60;showValidation&#x60; property is &#x60;true&#x60; (which is automatically the case if a &#x60;focusOut&#x60; event is captured from the
-             control element or the containing &#x60;Components.Form&#x60; was submitted with its &#x60;model&#x60; failing validation) and there are
-             validation errors for the &#x60;model&#x60;&#x27;s &#x60;property&#x60;, the appropriate Bootstrap validation markup (see
-             http://getbootstrap.com/css/#forms-control-validation) is applied:
-            
-             * &#x60;validation&#x60; is set to &#x27;error&#x27;, which will set the &#x60;has-error&#x60; CSS class
-             * the &#x60;errorIcon&#x60; feedback icon is displayed if &#x60;controlType&#x60; is a text field
-             * the validation messages are displayed as Bootstrap &#x60;help-block&#x60;s in BS3 and &#x60;form-control-feedback&#x60; in BS4
-            
-             The same applies for warning messages, if the used validation library supports this. (Currently only
-             [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations))
-            
-             As soon as the validation is successful again...
-            
-             * &#x60;validation&#x60; is set to &#x27;success&#x27;, which will set the &#x60;has-success&#x60; CSS class
-             * the &#x60;successIcon&#x60; feedback icon is displayed if &#x60;controlType&#x60; is a text field
-             * the validation messages are removed
-            
-             In case you want to display some error or warning message that is independent of the model&#x27;s validation, for
-             example to display a failure message on a login form after a failed authentication attempt (so not coming from
-             the validation library), you can use the &#x60;customError&#x60; or &#x60;customWarning&#x60; properties to do so.
-            
-             ### HTML attributes
-            
-             To set HTML attributes on the control element provided by this component, set them as properties of this component:
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
-             {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; property=&quot;email&quot;
-               placeholder=&quot;Email&quot;
-               required=true
-               multiple=true
-               tabIndex=5
-             }}
-             ...
-             {{/bs-form}}
-             &#x60;&#x60;&#x60;
-            
-             The following attributes are supported depending on the &#x60;controlType&#x60;:
-            
-             &lt;table class=&quot;table table-striped&quot;&gt;
-             &lt;thead&gt;
-             &lt;tr&gt;
-             &lt;th&gt;&lt;/th&gt;
-             &lt;th&gt;textarea&lt;/th&gt;
-             &lt;th&gt;checkbox/radio&lt;/th&gt;
-             &lt;th&gt;all others&lt;/th&gt;
-             &lt;/tr&gt;
-             &lt;/thead&gt;
-             &lt;tbody&gt;
-             &lt;tr&gt;
-             &lt;td&gt;accept&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;autocapitalize&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;autocomplete&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;autocorrect&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;autofocus&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;autosave&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;cols&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;disabled&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;form&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;inputmode&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;max&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;maxlength&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;min&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;minlength&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;multiple&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;name&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;pattern&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;placeholder&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;readonly&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;required&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;rows&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;size&lt;br&gt;via &lt;code&gt;controlSize&lt;/code&gt; property&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;spellcheck&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;step&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;tabindex&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;title&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;tr&gt;
-             &lt;td&gt;wrap&lt;/td&gt;
-             &lt;td&gt;✔︎&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;td&gt;&lt;/td&gt;
-             &lt;/tr&gt;
-             &lt;/tbody&gt;
-             &lt;/table&gt;
-            
-             @class FormElement
-             @namespace Components
-             @extends Components.FormGroup
-             @public
-             */
-            export default FormGroup.extend({
-              layout,
-              classNameBindings: [&#x27;disabled:disabled&#x27;, &#x27;required:is-required&#x27;, &#x27;isValidating&#x27;],
-            
-              /**
-               * Text to display within a &#x60;&lt;label&gt;&#x60; tag.
-               *
-               * You should include a label for every form input cause otherwise screen readers
-               * will have trouble with your forms. Use &#x60;invisibleLabel&#x60; property if you want
-               * to hide them.
-               *
-               * @property label
-               * @type string
-               * @public
-               */
-              label: null,
-            
-              /**
-               * Controls label visibility by adding &#x27;sr-only&#x27; class.
-               *
-               * @property invisibleLabel
-               * @type boolean
-               * @default false
-               * @public
-               */
-              invisibleLabel: false,
-            
-              /**
-               * @property hasLabel
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              hasLabel: notEmpty(&#x27;label&#x27;),
-            
-              /**
-               * The type of the control widget.
-               * Supported types:
-               *
-               * * &#x27;text&#x27;
-               * * &#x27;checkbox&#x27;
-               * * &#x27;radio&#x27;
-               * * &#x27;textarea&#x27;
-               * * any other type will use an input tag with the &#x60;controlType&#x60; value as the type attribute (for e.g. HTML5 input
-               * types like &#x27;email&#x27;), and the same layout as the &#x27;text&#x27; type
-               *
-               * @property controlType
-               * @type string
-               * @default &#x27;text&#x27;
-               * @public
-               */
-              controlType: &#x27;text&#x27;,
-            
-              /**
-               * The value of the control element is bound to this property. You can bind it to some controller property to
-               * get/set the control element&#x27;s value:
-               *
-               * &#x60;&#x60;&#x60;hbs
-               * {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
-               * &#x60;&#x60;&#x60;
-               *
-               * Note: you lose the ability to validate this form element by directly binding to its value. It is recommended
-               * to use the &#x60;property&#x60; feature instead.
-               *
-               *
-               * @property value
-               * @public
-               */
-              value: null,
-            
-              /**
-               The property name of the form element&#x27;s &#x60;model&#x60; (by default the &#x60;model&#x60; of its parent &#x60;Components.Form&#x60;) that this
-               form element should represent. The control element&#x27;s value will automatically be bound to the model property&#x27;s
-               value.
-            
-               Using this property enables form validation on this element.
-            
-               @property property
-               @type string
-               @public
-               */
-              property: null,
-            
-              /**
-               * The model used for validation. Defaults to the parent &#x60;Components.Form&#x60;&#x27;s &#x60;model&#x60;
-               *
-               * @property model
-               * @public
-               */
-              model: null,
-            
-              /**
-               * Show a help text next to the control
-               *
-               * @property helpText
-               * @type {string}
-               * @public
-               */
-              helpText: null,
-            
-              /**
-               * Only if there is a validator, this property makes all errors to be displayed at once
-               * inside a scrollable container.
-               *
-               * @default false
-               * @property showMultipleErrors
-               * @public
-               * @type {Boolean}
-               */
-              showMultipleErrors: false,
-            
-              /**
-               * Array of options for control types that show a selection (e.g. radio button groups)
-               * Can be an array of simple strings or objects. For objects use &#x60;optionLabelPath&#x60; to specify the path containing the
-               * label.
-               *
-               * @property options
-               * @type {Array}
-               * @public
-               */
-              options: null,
-            
-              /**
-               * Property path (e.g. &#x27;title&#x27; or &#x27;related.name&#x27;) to render the label of an selection option. See &#x60;options&#x60;.s
-               *
-               * @property optionLabelPath
-               * @type {String}
-               * @public
-               */
-              optionLabelPath: null,
-            
-              /**
-               * @property hasHelpText
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              hasHelpText: notEmpty(&#x27;helpText&#x27;).readOnly(),
-            
-              /**
-               * The array of error messages from the &#x60;model&#x60;&#x27;s validation.
-               *
-               * @property errors
-               * @type array
-               * @protected
-               */
-              errors: null,
-            
-              /**
-               * @property hasErrors
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              hasErrors: gt(&#x27;errors.length&#x27;, 0),
-            
-              /**
-               * The array of warning messages from the &#x60;model&#x60;&#x27;s validation.
-               *
-               * @property errors
-               * @type array
-               * @protected
-               */
-              warnings: null,
-            
-              /**
-               * @property hasWarnings
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              hasWarnings: gt(&#x27;warnings.length&#x27;, 0),
-            
-              /**
-               * Show a custom error message that does not come from the model&#x27;s validation. Will be immediately shown, regardless
-               * of any user interaction (i.e. no &#x60;focusOut&#x60; event required)
-               *
-               * @property customError
-               * @type string
-               * @public
-               */
-              customError: null,
-            
-              /**
-               * @property hasCustomError
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              hasCustomError: notEmpty(&#x27;customError&#x27;),
-            
-              /**
-               * Show a custom warning message that does not come from the model&#x27;s validation. Will be immediately shown, regardless
-               * of any user interaction (i.e. no &#x60;focusOut&#x60; event required). If the model&#x27;s validation has an error then the error
-               * will be shown in place of this warning.
-               *
-               * @property customWarning
-               * @type string
-               * @public
-               */
-              customWarning: null,
-            
-              /**
-               * @property hasCustomWarning
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              hasCustomWarning: notEmpty(&#x27;customWarning&#x27;),
-            
-              /**
-               * Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27; (the latter only for BS3)
-               *
-               * @property size
-               * @type String
-               * @public
-               */
-              size: null,
-            
-              /**
-               * The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model&#x27;s validation
-               *
-               * @property validationMessages
-               * @type array
-               * @private
-               */
-              validationMessages: computed(&#x27;hasCustomError&#x27;, &#x27;customError&#x27;, &#x27;hasErrors&#x27;, &#x27;hasCustomWarning&#x27;, &#x27;customWarning&#x27;, &#x27;hasWarnings&#x27;, &#x27;errors.[]&#x27;, &#x27;warnings.[]&#x27;, &#x27;showModelValidation&#x27;, function() {
-                if (this.get(&#x27;hasCustomError&#x27;)) {
-                  return A([this.get(&#x27;customError&#x27;)]);
-                }
-                if (this.get(&#x27;hasErrors&#x27;) &amp;&amp; this.get(&#x27;showModelValidation&#x27;)) {
-                  return A(this.get(&#x27;errors&#x27;));
-                }
-                if (this.get(&#x27;hasCustomWarning&#x27;)) {
-                  return A([this.get(&#x27;customWarning&#x27;)]);
-                }
-                if (this.get(&#x27;hasWarnings&#x27;) &amp;&amp; this.get(&#x27;showModelValidation&#x27;)) {
-                  return A(this.get(&#x27;warnings&#x27;));
-                }
-                return null;
-              }),
-            
-              /**
-               * @property hasValidationMessages
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              hasValidationMessages: gt(&#x27;validationMessages.length&#x27;, 0),
-            
-              /**
-               * @property hasValidator
-               * @type boolean
-               * @default false
-               * @protected
-               */
-              hasValidator: false,
-            
-              /**
-               * Set a validating state for async validations
-               *
-               * @property isValidating
-               * @type boolean
-               * @default false
-               * @protected
-               */
-              isValidating: false,
-            
-              /**
-               * If &#x60;true&#x60; form validation markup is rendered (requires a validatable &#x60;model&#x60;).
-               *
-               * @property showValidation
-               * @type boolean
-               * @default false
-               * @private
-               */
-              showValidation: or(&#x27;showOwnValidation&#x27;, &#x27;showAllValidations&#x27;, &#x27;hasCustomError&#x27;, &#x27;hasCustomWarning&#x27;),
-            
-              /**
-               * @property showOwnValidation
-               * @type boolean
-               * @default false
-               * @private
-               */
-              showOwnValidation: false,
-            
-              /**
-               * @property showAllValidations
-               * @type boolean
-               * @default false
-               * @private
-               */
-              showAllValidations: computed({
-                get() {
-                },
-                set(key, value) {
-                  this.set(&#x27;showOwnValidation&#x27;, false);
-                  return value;
-                }
-              }),
-            
-              /**
-               * @property showModelValidations
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              showModelValidation: or(&#x27;showOwnValidation&#x27;, &#x27;showAllValidations&#x27;),
-            
-              /**
-               * @property showValidationMessages
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              showValidationMessages: and(&#x27;showValidation&#x27;, &#x27;hasValidationMessages&#x27;),
-            
-              /**
-               * Event or list of events which enable form validation markup rendering.
-               * Supported events: [&#x27;focusout&#x27;, &#x27;change&#x27;, &#x27;input&#x27;]
-               *
-               * @property showValidationOn
-               * @type string|array
-               * @default [&#x27;focusout&#x27;]
-               * @public
-               */
-              showValidationOn: null,
-            
-              /**
-               * @property _showValidationOn
-               * @type array
-               * @readonly
-               * @private
-               */
-              _showValidationOn: computed(&#x27;showValidationOn.[]&#x27;, function() {
-                let showValidationOn = this.get(&#x27;showValidationOn&#x27;);
-            
-                assert(&#x27;showValidationOn must be a String or an Array&#x27;, isArray(showValidationOn) || typeOf(showValidationOn) === &#x27;string&#x27;);
-                if (isArray(showValidationOn)) {
-                  return showValidationOn.map((type) =&gt; {
-                    return type.toLowerCase();
-                  });
-                }
-            
-                if (typeof showValidationOn.toString === &#x27;function&#x27;) {
-                  return [showValidationOn.toLowerCase()];
-                }
-                return [];
-              }),
-            
-              /**
-               * @method showValidationOnHandler
-               * @params {Event} event
-               * @private
-               */
-              showValidationOnHandler({ target, type }) {
-                // Should not do anything if
-                if (
-                  // validations are already shown or
-                  this.get(&#x27;showOwnValidation&#x27;) ||
-                  // validations should not be shown for this event type or
-                  this.get(&#x27;_showValidationOn&#x27;).indexOf(type) === -1 ||
-                  // validation should not be shown for this event target
-                  (
-                    isArray(this.get(&#x27;doNotShowValidationForEventTargets&#x27;)) &amp;&amp;
-                    this.get(&#x27;doNotShowValidationForEventTargets.length&#x27;) &gt; 0 &amp;&amp;
-                    [...this.element.querySelectorAll(this.get(&#x27;doNotShowValidationForEventTargets&#x27;).join(&#x27;,&#x27;))]
-                      .some((el) =&gt; el.contains(target))
-                  )
-                ) {
-                  return;
-                }
-            
-                this.set(&#x27;showOwnValidation&#x27;, true);
-              },
-            
-              /**
-               * Controls if validation should be shown for specified event targets.
-               *
-               * It expects an array of query selectors. If event target is a children of an event that matches
-               * these selectors, an event triggered for it will not trigger validation errors to be shown.
-               *
-               * By default events fired on elements inside an input group are skipped.
-               *
-               * If &#x60;null&#x60; or an empty array is passed validation errors are shown for all events regardless
-               * of event target.
-               *
-               * @property doNotShowValidationForEventTargets
-               * @type ?array
-               * @public
-               */
-            
-              /**
-               * The validation (&quot;error&quot; (BS3)/&quot;danger&quot; (BS4), &quot;warning&quot;, or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
-               * models validation state.
-               *
-               * @property validation
-               * @readonly
-               * @type string
-               * @private
-               */
-              validation: computed(&#x27;hasCustomError&#x27;, &#x27;hasErrors&#x27;, &#x27;hasCustomWarning&#x27;, &#x27;hasWarnings&#x27;, &#x27;hasValidator&#x27;, &#x27;showValidation&#x27;, &#x27;showModelValidation&#x27;, &#x27;isValidating&#x27;, &#x27;disabled&#x27;, function() {
-                if (!this.get(&#x27;showValidation&#x27;) || !this.get(&#x27;hasValidator&#x27;) || this.get(&#x27;isValidating&#x27;) || this.get(&#x27;disabled&#x27;)) {
-                  return null;
-                } else if (this.get(&#x27;showModelValidation&#x27;)) {
-                  /* The display of model validation messages has been triggered */
-                  return this.get(&#x27;hasErrors&#x27;) || this.get(&#x27;hasCustomError&#x27;) ? &#x27;error&#x27; : (this.get(&#x27;hasWarnings&#x27;) || this.get(&#x27;hasCustomWarning&#x27;) ? &#x27;warning&#x27; : &#x27;success&#x27;);
-                } else {
-                  /* If there are custom errors or warnings these should always be shown */
-                  return this.get(&#x27;hasCustomError&#x27;) ? &#x27;error&#x27; : &#x27;warning&#x27;;
-                }
-              }),
-            
-              /**
-               * True for text field &#x60;controlType&#x60;s
-               *
-               * @property useIcons
-               * @type boolean
-               * @readonly
-               * @public
-               */
-              useIcons: equal(&#x27;controlComponent&#x27;, &#x27;bs-form/element/control/input&#x27;),
-            
-              /**
-               * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
-               *
-               * * &#x27;horizontal&#x27;
-               * * &#x27;vertical&#x27;
-               * * &#x27;inline&#x27;
-               *
-               * Defaults to the parent &#x60;form&#x60;&#x27;s &#x60;formLayout&#x60; property.
-               *
-               * @property formLayout
-               * @type string
-               * @default &#x27;vertical&#x27;
-               * @public
-               */
-              formLayout: &#x27;vertical&#x27;,
-            
-              /**
-               * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
-               * property of the parent form. The corresponding grid class for form controls is automatically computed.
-               *
-               * @property horizontalLabelGridClass
-               * @type string
-               * @public
-               */
-              horizontalLabelGridClass: null,
-            
-              /**
-               * ID for input field and the corresponding label&#x27;s &quot;for&quot; attribute
-               *
-               * @property formElementId
-               * @type string
-               * @private
-               */
-              formElementId: computed(&#x27;elementId&#x27;, function() {
-                return &#x60;${this.get(&#x27;elementId&#x27;)}-field&#x60;;
-              }),
-            
-              /**
-               * ID of the helpText, used for aria-describedby attribute of the control element
-               *
-               * @property ariaDescribedBy
-               * @type string
-               * @private
-               */
-              ariaDescribedBy: computed(&#x27;elementId&#x27;, function() {
-                return &#x60;${this.get(&#x27;elementId&#x27;)}-help&#x60;;
-              }),
-            
-              /**
-               * @property formComponent
-               * @type {String}
-               * @private
-               */
-              formComponent: &#x27;bs-form&#x27;,
-            
-              /**
-               * @property layoutComponent
-               * @type {String}
-               * @private
-               */
-              layoutComponent: computed(&#x27;formLayout&#x27;, &#x27;controlType&#x27;, function() {
-                const formComponent = this.get(&#x27;formComponent&#x27;);
-                const formLayout = this.get(&#x27;formLayout&#x27;);
-                const controlType = this.get(&#x27;controlType&#x27;);
-            
-                if (nonDefaultLayouts.includes(controlType)) {
-                  return &#x60;${formComponent}/element/layout/${formLayout}/${controlType}&#x60;;
-                } else {
-                  return &#x60;${formComponent}/element/layout/${formLayout}&#x60;;
-                }
-              }),
-            
-              /**
-               * @property controlComponent
-               * @type {String}
-               * @private
-               */
-              controlComponent: computed(&#x27;controlType&#x27;, function() {
-                const formComponent = this.get(&#x27;formComponent&#x27;);
-                const controlType = this.get(&#x27;controlType&#x27;);
-                const componentName = &#x60;${formComponent}/element/control/${controlType}&#x60;;
-            
-                if (getOwner(this).hasRegistration(&#x60;component:${componentName}&#x60;)) {
-                  return componentName;
-                }
-            
-                return &#x60;${formComponent}/element/control/input&#x60;;
-              }),
-            
-              /**
-               * @property errorsComponent
-               * @type {String}
-               * @private
-               */
-              errorsComponent: &#x27;bs-form/element/errors&#x27;,
-            
-              /**
-               * @property feedbackIconComponent
-               * @type {String}
-               * @private
-               */
-              feedbackIconComponent: &#x27;bs-form/element/feedback-icon&#x27;,
-            
-              /**
-               * @property labelComponent
-               * @type {String}
-               * @private
-               */
-              labelComponent: &#x27;bs-form/element/label&#x27;,
-            
-              /**
-               * @property helpTextComponent
-               * @type {String}
-               * @private
-               */
-              helpTextComponent: &#x27;bs-form/element/help-text&#x27;,
-            
-              /**
-               * Setup validation properties. This method acts as a hook for external validation
-               * libraries to overwrite. In case of failed validations the &#x60;errors&#x60; property should contain an array of error messages.
-               *
-               * @method setupValidations
-               * @private
-               */
-              setupValidations() {
-              },
-            
-              /**
-               * Listen for focusOut events from the control element to automatically set &#x60;showOwnValidation&#x60; to true to enable
-               * form validation markup rendering if &#x60;showValidationsOn&#x60; contains &#x60;focusOut&#x60;.
-               *
-               * @event focusOut
-               * @private
-               */
-              focusOut(event) {
-                this.showValidationOnHandler(event);
-              },
-            
-              /**
-               * Listen for change events from the control element to automatically set &#x60;showOwnValidation&#x60; to true to enable
-               * form validation markup rendering if &#x60;showValidationsOn&#x60; contains &#x60;change&#x60;.
-               *
-               * @event change
-               * @private
-               */
-              change(event) {
-                this.showValidationOnHandler(event);
-              },
-            
-              /**
-               * Listen for input events from the control element to automatically set &#x60;showOwnValidation&#x60; to true to enable
-               * form validation markup rendering if &#x60;showValidationsOn&#x60; contains &#x60;input&#x60;.
-               *
-               * @event input
-               * @private
-               */
-              input(event) {
-                this.showValidationOnHandler(event);
-              },
-            
-              /**
-               * The action is called whenever the input value is changed, e.g. by typing text
-               *
-               * @event onChange
-               * @param {String} value The new value of the form control
-               * @param {Object} model The form element&#x27;s model
-               * @param {String} property The value of &#x60;property&#x60;
-               * @public
-               */
-              onChange() {},
-            
-              /**
-               * Private duplicate of onChange event used for internal state handling between form and it&#x27;s elements.
-               *
-               * @event _onChange
-               * @private
-               */
-              _onChange() {},
-            
-              init() {
-                this._super(...arguments);
-                if (this.get(&#x27;showValidationOn&#x27;) === null) {
-                  this.set(&#x27;showValidationOn&#x27;, [&#x27;focusOut&#x27;]);
-                }
-                if (!isBlank(this.get(&#x27;property&#x27;))) {
-                  assert(&#x27;You cannot set both property and value on a form element&#x27;, this.get(&#x27;value&#x27;) === null);
-                  defineProperty(this, &#x27;value&#x27;, alias(&#x60;model.${this.get(&#x27;property&#x27;)}&#x60;));
-                  this.setupValidations();
-                }
-              },
-            
-              /*
-               * adjust feedback icon position
-               *
-               * Bootstrap documentation:
-               *  Manual positioning of feedback icons is required for [...] input groups
-               *  with an add-on on the right. [...] For input groups, adjust the right
-               *  value to an appropriate pixel value depending on the width of your addon.
-               */
-              adjustFeedbackIcons: observer(&#x27;hasFeedback&#x27;, &#x27;formLayout&#x27;, function() {
-                scheduleOnce(&#x27;afterRender&#x27;, () =&gt; {
-                  let el = this.get(&#x27;element&#x27;);
-                  let feedbackIcon;
-                  // validation state icons are only shown if form element has feedback
-                  if (!this.get(&#x27;isDestroying&#x27;)
-                    &amp;&amp; this.get(&#x27;hasFeedback&#x27;)
-                    // and form group element has
-                    // an input-group
-                    &amp;&amp; el.querySelector(&#x27;.input-group&#x27;)
-                    // an addon or button on right side
-                    &amp;&amp; el.querySelector(&#x27;.input-group input + .input-group-addon, .input-group input + .input-group-btn&#x27;)
-                    // an icon showing validation state
-                    &amp;&amp; (feedbackIcon = el.querySelector(&#x27;.form-control-feedback&#x27;))
-                  ) {
-                    // clear existing adjustment
-                    feedbackIcon.style.right = &#x27;&#x27;;
-            
-                    let defaultPosition = 0;
-                    let match = getComputedStyle(feedbackIcon).right.match(/^(\d+)px$/);
-                    if (match) {
-                      defaultPosition = parseInt(match[1]);
-                    }
-                    // Bootstrap documentation:
-                    //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
-                    // therefore we could rely on having only one input-group-addon or input-group-btn
-                    let inputGroupWidth = el.querySelector(&#x27;input + .input-group-addon, input + .input-group-btn&#x27;).offsetWidth;
-                    let adjustedPosition = defaultPosition + inputGroupWidth;
-            
-                    feedbackIcon.style.right = &#x60;${adjustedPosition}px&#x60;;
-                  }
-                });
-              }),
-            
-              didInsertElement() {
-                this._super(...arguments);
-                this.adjustFeedbackIcons();
-              },
-            
-              actions: {
-                change(value) {
-                  let { onChange, model, property, _onChange } = this.getProperties(&#x27;onChange&#x27;, &#x27;model&#x27;, &#x27;property&#x27;, &#x27;_onChange&#x27;);
-                  onChange(value, model, property);
-                  _onChange();
-                }
-              }
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-form/element.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import {
+  notEmpty,
+  gt,
+  or,
+  and,
+  equal,
+  alias
+} from &#x27;@ember/object/computed&#x27;;
+import { observer, defineProperty, computed } from &#x27;@ember/object&#x27;;
+import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
+import { typeOf, isBlank } from &#x27;@ember/utils&#x27;;
+import { A, isArray } from &#x27;@ember/array&#x27;;
+import { getOwner } from &#x27;@ember/application&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-form/element&#x27;;
+import FormGroup from &#x27;ember-bootstrap/components/bs-form/group&#x27;;
+
+const nonDefaultLayouts = A([
+  &#x27;checkbox&#x27;
+]);
+
+/**
+  Sub class of &#x60;Components.FormGroup&#x60; that adds automatic form layout markup and form validation features.
+
+  ### Form layout
+
+  The appropriate Bootstrap markup for the given &#x60;formLayout&#x60; and &#x60;controlType&#x60; is automatically generated to easily
+  create forms without coding the default Bootstrap form markup by hand:
+
+  &#x60;&#x60;&#x60;handlebars
+  &lt;BsForm @formLayout=&quot;horizontal&quot; @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
+    &lt;form.element @controlType=&quot;email&quot; @label=&quot;Email&quot; @placeholder=&quot;Email&quot; @value={{this.email}}&quot; /&gt;
+    &lt;form.element @controlType=&quot;password&quot; @label=&quot;Password&quot; @placeholder=&quot;Password&quot; @value={{this.password}} /&gt;
+    &lt;form.element @controlType=&quot;checkbox&quot; @label=&quot;Remember me&quot; @value={{this.rememberMe}} /&gt;
+    &lt;BsButton @defaultText=&quot;Submit&quot; @type=&quot;primary&quot; @buttonType=&quot;submit&quot; /&gt;
+  &lt;/BsForm&gt;
+  &#x60;&#x60;&#x60;
+
+  ### Control types
+
+  The following control types are supported out of the box:
+
+  * Inputs (simple &#x60;text&#x60;, or any other HTML5 supported input types like &#x60;password&#x60;, &#x60;email&#x60; etc.)
+  * Checkbox (single)
+  * Radio Button (group)
+  * Textarea
+
+  #### Radio Buttons
+
+  For a group of mutually exclusive radio buttons to work, you must supply the &#x60;options&#x60; property with an array of
+  options, each of which will be rendered with an appropriate radio button and its label. It can be either a simple array
+  of strings or objects. In the latter case, you would have to set &#x60;optionLabelPath&#x60; to the property, that contains the
+  label on these objects.
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
+    &lt;form.element @controlType=&quot;radio&quot; @label=&quot;Gender&quot; @options={{this.genderOptions}} @optionLabelPath=&quot;title&quot; @property=&quot;gender&quot; /&gt;
+  &lt;/BsForm&gt;
+  &#x60;&#x60;&#x60;
+
+  The default layout for radios is stacked, but Bootstrap&#x27;s inline layout is also supported using the &#x60;inline&#x60; property
+  of the yielded control component:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
+    &lt;form.element @controlType=&quot;radio&quot; @label=&quot;Gender&quot; @options={{this.genderOptions}} @property=&quot;gender&quot; as |el|&gt;
+      &lt;el.control @inline={{true}} /&gt;
+    &lt;/form.element&gt;
+  &lt;/BsForm&gt;
+  &#x60;&#x60;&#x60;
+
+  #### Custom controls
+
+  Apart from the standard built-in browser controls (see the &#x60;controlType&#x60; property), you can use any custom control simply
+  by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
+  (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
+    &lt;form.element @label=&quot;Select-2&quot; @property=&quot;gender&quot; @useIcons={{false}} as |el|&gt;
+      {{select-2 id=el.id content=genderChoices optionLabelPath=&quot;label&quot; value=el.value searchEnabled=false}}
+    &lt;/form.element&gt;
+  &lt;/BsForm&gt;
+  &#x60;&#x60;&#x60;
+
+  The component yields a hash with the following properties:
+  * &#x60;control&#x60;: the component that would be used for rendering the form control based on the given &#x60;controlType&#x60;
+  * &#x60;id&#x60;: id to be used for the form control, so it matches the labels &#x60;for&#x60; attribute
+  * &#x60;value&#x60;: the value of the form element
+  * &#x60;validation&#x60;: the validation state of the element, &#x60;null&#x60; if no validation is to be shown, otherwise &#x27;success&#x27;, &#x27;error&#x27; or &#x27;warning&#x27;
+
+  If your custom control does not render an input element, you should set &#x60;useIcons&#x60; to &#x60;false&#x60; since bootstrap only supports
+  feedback icons with textual &#x60;&lt;input class=&quot;form-control&quot;&gt;&#x60; elements.
+
+  If you just want to customize the existing control component, you can use the aforementioned yielded &#x60;control&#x60; component
+  to customize that existing component:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
+    &lt;form.element @label=&quot;Email&quot; @placeholder=&quot;Email&quot; @property=&quot;email&quot; as |el|&gt;
+      &lt;el.control class=&quot;input-lg&quot; /&gt;
+    &lt;/form.element&gt;
+  &lt;/BsForm&gt;
+  &#x60;&#x60;&#x60;
+
+  If you are using the custom control quite often, you should consider writing an integration plugin like
+  [&#x60;ember-bootstrap-power-select&#x60;](https://github.com/kaliber5/ember-bootstrap-power-select).
+  To do so, you need to provide a component &#x60;{{bs-form/element/control/my-custom-control}}&#x60; which extends
+  [&#x60;Components.FormElementControl&#x60;](Components.FormElementControl.html).
+
+  ### Form validation
+
+  In the following example the control elements of the three form elements value will be bound to the properties
+  (given by &#x60;property&#x60;) of the form&#x27;s &#x60;model&#x60;, which in this case is its controller (see &#x60;model=this&#x60;):
+
+  &#x60;&#x60;&#x60;handlebars
+  &lt;BsForm @formLayout=&quot;horizontal&quot; @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
+    &lt;form.element @controlType=&quot;email&quot; @label=&quot;Email&quot; @placeholder=&quot;Email&quot; @property=&quot;email&quot; /&gt;
+    &lt;form.element @controlType=&quot;password&quot; @label=&quot;Password&quot; @placeholder=&quot;Password&quot; @property=&quot;password&quot; /&gt;
+    &lt;form.element @controlType=&quot;checkbox&quot; @label=&quot;Remember me&quot; @property=&quot;rememberMe&quot; /&gt;
+    &lt;BsButton @defaultText=&quot;Submit&quot; @type=&quot;primary&quot; @buttonType=&quot;submit&quot; /&gt;
+  &lt;/BsForm&gt;
+  &#x60;&#x60;&#x60;
+
+  By using this indirection in comparison to directly binding the &#x60;value&#x60; property, you get the benefit of automatic
+  form validation, given that your &#x60;model&#x60; has a supported means of validating itself.
+  See [Components.Form](Components.Form.html) for details on how to enable form validation.
+
+  In the example above the &#x60;model&#x60; was our controller itself, so the control elements were bound to the appropriate
+  properties of our controller. A controller implementing validations on those properties could look like this:
+
+  &#x60;&#x60;&#x60;js
+  import Ember from &#x27;ember&#x27;;
+  import EmberValidations from &#x27;ember-validations&#x27;;
+
+  export default Ember.Controller.extend(EmberValidations,{
+    email: null,
+    password: null,
+    rememberMe: false,
+    validations: {
+      email: {
+        presence: true,
+        format: {
+          with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+        }
+      },
+      password: {
+        presence: true,
+        length: { minimum: 6, maximum: 10}
+      },
+      comments: {
+        length: { minimum: 5, maximum: 20}
+      }
+    }
+  });
+  &#x60;&#x60;&#x60;
+
+  If the &#x60;showValidation&#x60; property is &#x60;true&#x60; (which is automatically the case if a &#x60;focusOut&#x60; event is captured from the
+  control element or the containing &#x60;Components.Form&#x60; was submitted with its &#x60;model&#x60; failing validation) and there are
+  validation errors for the &#x60;model&#x60;&#x27;s &#x60;property&#x60;, the appropriate Bootstrap validation markup (see
+  http://getbootstrap.com/css/#forms-control-validation) is applied:
+
+  * &#x60;validation&#x60; is set to &#x27;error&#x27;, which will set the &#x60;has-error&#x60; CSS class
+  * the &#x60;errorIcon&#x60; feedback icon is displayed if &#x60;controlType&#x60; is a text field
+  * the validation messages are displayed as Bootstrap &#x60;help-block&#x60;s in BS3 and &#x60;form-control-feedback&#x60; in BS4
+
+  The same applies for warning messages, if the used validation library supports this. (Currently only
+  [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations))
+
+  As soon as the validation is successful again...
+
+  * &#x60;validation&#x60; is set to &#x27;success&#x27;, which will set the &#x60;has-success&#x60; CSS class
+  * the &#x60;successIcon&#x60; feedback icon is displayed if &#x60;controlType&#x60; is a text field
+  * the validation messages are removed
+
+  In case you want to display some error or warning message that is independent of the model&#x27;s validation, for
+  example to display a failure message on a login form after a failed authentication attempt (so not coming from
+  the validation library), you can use the &#x60;customError&#x60; or &#x60;customWarning&#x60; properties to do so.
+
+  ### HTML attributes
+
+  To set HTML attributes on the control element provided by this component, set them as properties of this component:
+
+  &#x60;&#x60;&#x60;hbs
+  {{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}
+  {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; property=&quot;email&quot;
+    placeholder=&quot;Email&quot;
+    required=true
+    multiple=true
+    tabIndex=5
+  }}
+  ...
+  {{/bs-form}}
+  &#x60;&#x60;&#x60;
+
+  The following attributes are supported depending on the &#x60;controlType&#x60;:
+
+  &lt;table class=&quot;table table-striped&quot;&gt;
+  &lt;thead&gt;
+  &lt;tr&gt;
+  &lt;th&gt;&lt;/th&gt;
+  &lt;th&gt;textarea&lt;/th&gt;
+  &lt;th&gt;checkbox/radio&lt;/th&gt;
+  &lt;th&gt;all others&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+  &lt;tr&gt;
+  &lt;td&gt;accept&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;autocapitalize&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;autocomplete&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;autocorrect&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;autofocus&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;autosave&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;cols&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;disabled&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;form&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;inputmode&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;max&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;maxlength&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;min&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;minlength&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;multiple&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;name&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;pattern&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;placeholder&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;readonly&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;required&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;rows&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;size&lt;br&gt;via &lt;code&gt;controlSize&lt;/code&gt; property&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;spellcheck&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;step&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;tabindex&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;title&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  &lt;td&gt;wrap&lt;/td&gt;
+  &lt;td&gt;✔︎&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  @class FormElement
+  @namespace Components
+  @extends Components.FormGroup
+  @public
+*/
+export default FormGroup.extend({
+  layout,
+  classNameBindings: [&#x27;disabled:disabled&#x27;, &#x27;required:is-required&#x27;, &#x27;isValidating&#x27;],
+
+  /**
+   * Text to display within a &#x60;&lt;label&gt;&#x60; tag.
+   *
+   * You should include a label for every form input cause otherwise screen readers
+   * will have trouble with your forms. Use &#x60;invisibleLabel&#x60; property if you want
+   * to hide them.
+   *
+   * @property label
+   * @type string
+   * @public
+   */
+  label: null,
+
+  /**
+   * Controls label visibility by adding &#x27;sr-only&#x27; class.
+   *
+   * @property invisibleLabel
+   * @type boolean
+   * @default false
+   * @public
+   */
+  invisibleLabel: false,
+
+  /**
+   * @property hasLabel
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasLabel: notEmpty(&#x27;label&#x27;),
+
+  /**
+   * The type of the control widget.
+   * Supported types:
+   *
+   * * &#x27;text&#x27;
+   * * &#x27;checkbox&#x27;
+   * * &#x27;radio&#x27;
+   * * &#x27;textarea&#x27;
+   * * any other type will use an input tag with the &#x60;controlType&#x60; value as the type attribute (for e.g. HTML5 input
+   * types like &#x27;email&#x27;), and the same layout as the &#x27;text&#x27; type
+   *
+   * @property controlType
+   * @type string
+   * @default &#x27;text&#x27;
+   * @public
+   */
+  controlType: &#x27;text&#x27;,
+
+  /**
+   * The value of the control element is bound to this property. You can bind it to some controller property to
+   * get/set the control element&#x27;s value:
+   *
+   * &#x60;&#x60;&#x60;hbs
+   * {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+   * &#x60;&#x60;&#x60;
+   *
+   * Note: you lose the ability to validate this form element by directly binding to its value. It is recommended
+   * to use the &#x60;property&#x60; feature instead.
+   *
+   *
+   * @property value
+   * @public
+   */
+  value: null,
+
+  /**
+   The property name of the form element&#x27;s &#x60;model&#x60; (by default the &#x60;model&#x60; of its parent &#x60;Components.Form&#x60;) that this
+   form element should represent. The control element&#x27;s value will automatically be bound to the model property&#x27;s
+   value.
+
+   Using this property enables form validation on this element.
+
+   @property property
+   @type string
+   @public
+   */
+  property: null,
+
+  /**
+   * The model used for validation. Defaults to the parent &#x60;Components.Form&#x60;&#x27;s &#x60;model&#x60;
+   *
+   * @property model
+   * @public
+   */
+  model: null,
+
+  /**
+   * Show a help text next to the control
+   *
+   * @property helpText
+   * @type {string}
+   * @public
+   */
+  helpText: null,
+
+  /**
+   * Only if there is a validator, this property makes all errors to be displayed at once
+   * inside a scrollable container.
+   *
+   * @default false
+   * @property showMultipleErrors
+   * @public
+   * @type {Boolean}
+   */
+  showMultipleErrors: false,
+
+  /**
+   * Array of options for control types that show a selection (e.g. radio button groups)
+   * Can be an array of simple strings or objects. For objects use &#x60;optionLabelPath&#x60; to specify the path containing the
+   * label.
+   *
+   * @property options
+   * @type {Array}
+   * @public
+   */
+  options: null,
+
+  /**
+   * Property path (e.g. &#x27;title&#x27; or &#x27;related.name&#x27;) to render the label of an selection option. See &#x60;options&#x60;.s
+   *
+   * @property optionLabelPath
+   * @type {String}
+   * @public
+   */
+  optionLabelPath: null,
+
+  /**
+   * @property hasHelpText
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasHelpText: notEmpty(&#x27;helpText&#x27;).readOnly(),
+
+  /**
+   * The array of error messages from the &#x60;model&#x60;&#x27;s validation.
+   *
+   * @property errors
+   * @type array
+   * @protected
+   */
+  errors: null,
+
+  /**
+   * @property hasErrors
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasErrors: gt(&#x27;errors.length&#x27;, 0),
+
+  /**
+   * The array of warning messages from the &#x60;model&#x60;&#x27;s validation.
+   *
+   * @property errors
+   * @type array
+   * @protected
+   */
+  warnings: null,
+
+  /**
+   * @property hasWarnings
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasWarnings: gt(&#x27;warnings.length&#x27;, 0),
+
+  /**
+   * Show a custom error message that does not come from the model&#x27;s validation. Will be immediately shown, regardless
+   * of any user interaction (i.e. no &#x60;focusOut&#x60; event required)
+   *
+   * @property customError
+   * @type string
+   * @public
+   */
+  customError: null,
+
+  /**
+   * @property hasCustomError
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasCustomError: notEmpty(&#x27;customError&#x27;),
+
+  /**
+   * Show a custom warning message that does not come from the model&#x27;s validation. Will be immediately shown, regardless
+   * of any user interaction (i.e. no &#x60;focusOut&#x60; event required). If the model&#x27;s validation has an error then the error
+   * will be shown in place of this warning.
+   *
+   * @property customWarning
+   * @type string
+   * @public
+   */
+  customWarning: null,
+
+  /**
+   * @property hasCustomWarning
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasCustomWarning: notEmpty(&#x27;customWarning&#x27;),
+
+  /**
+   * Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27; (the latter only for BS3)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+
+  /**
+   * The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model&#x27;s validation
+   *
+   * @property validationMessages
+   * @type array
+   * @private
+   */
+  validationMessages: computed(&#x27;hasCustomError&#x27;, &#x27;customError&#x27;, &#x27;hasErrors&#x27;, &#x27;hasCustomWarning&#x27;, &#x27;customWarning&#x27;, &#x27;hasWarnings&#x27;, &#x27;errors.[]&#x27;, &#x27;warnings.[]&#x27;, &#x27;showModelValidation&#x27;, function() {
+    if (this.get(&#x27;hasCustomError&#x27;)) {
+      return A([this.get(&#x27;customError&#x27;)]);
+    }
+    if (this.get(&#x27;hasErrors&#x27;) &amp;&amp; this.get(&#x27;showModelValidation&#x27;)) {
+      return A(this.get(&#x27;errors&#x27;));
+    }
+    if (this.get(&#x27;hasCustomWarning&#x27;)) {
+      return A([this.get(&#x27;customWarning&#x27;)]);
+    }
+    if (this.get(&#x27;hasWarnings&#x27;) &amp;&amp; this.get(&#x27;showModelValidation&#x27;)) {
+      return A(this.get(&#x27;warnings&#x27;));
+    }
+    return null;
+  }),
+
+  /**
+   * @property hasValidationMessages
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  hasValidationMessages: gt(&#x27;validationMessages.length&#x27;, 0),
+
+  /**
+   * @property hasValidator
+   * @type boolean
+   * @default false
+   * @protected
+   */
+  hasValidator: false,
+
+  /**
+   * Set a validating state for async validations
+   *
+   * @property isValidating
+   * @type boolean
+   * @default false
+   * @protected
+   */
+  isValidating: false,
+
+  /**
+   * If &#x60;true&#x60; form validation markup is rendered (requires a validatable &#x60;model&#x60;).
+   *
+   * @property showValidation
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showValidation: or(&#x27;showOwnValidation&#x27;, &#x27;showAllValidations&#x27;, &#x27;hasCustomError&#x27;, &#x27;hasCustomWarning&#x27;),
+
+  /**
+   * @property showOwnValidation
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showOwnValidation: false,
+
+  /**
+   * @property showAllValidations
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showAllValidations: computed({
+    get() {
+    },
+    set(key, value) {
+      this.set(&#x27;showOwnValidation&#x27;, false);
+      return value;
+    }
+  }),
+
+  /**
+   * @property showModelValidations
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  showModelValidation: or(&#x27;showOwnValidation&#x27;, &#x27;showAllValidations&#x27;),
+
+  /**
+   * @property showValidationMessages
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  showValidationMessages: and(&#x27;showValidation&#x27;, &#x27;hasValidationMessages&#x27;),
+
+  /**
+   * Event or list of events which enable form validation markup rendering.
+   * Supported events: [&#x27;focusout&#x27;, &#x27;change&#x27;, &#x27;input&#x27;]
+   *
+   * @property showValidationOn
+   * @type string|array
+   * @default [&#x27;focusout&#x27;]
+   * @public
+   */
+  showValidationOn: null,
+
+  /**
+   * @property _showValidationOn
+   * @type array
+   * @readonly
+   * @private
+   */
+  _showValidationOn: computed(&#x27;showValidationOn.[]&#x27;, function() {
+    let showValidationOn = this.get(&#x27;showValidationOn&#x27;);
+
+    assert(&#x27;showValidationOn must be a String or an Array&#x27;, isArray(showValidationOn) || typeOf(showValidationOn) === &#x27;string&#x27;);
+    if (isArray(showValidationOn)) {
+      return showValidationOn.map((type) =&gt; {
+        return type.toLowerCase();
+      });
+    }
+
+    if (typeof showValidationOn.toString === &#x27;function&#x27;) {
+      return [showValidationOn.toLowerCase()];
+    }
+    return [];
+  }),
+
+  /**
+   * @method showValidationOnHandler
+   * @param {Event} event
+   * @private
+   */
+  showValidationOnHandler({ target, type }) {
+    // Should not do anything if
+    if (
+      // validations are already shown or
+      this.get(&#x27;showOwnValidation&#x27;) ||
+      // validations should not be shown for this event type or
+      this.get(&#x27;_showValidationOn&#x27;).indexOf(type) === -1 ||
+      // validation should not be shown for this event target
+      (
+        isArray(this.get(&#x27;doNotShowValidationForEventTargets&#x27;)) &amp;&amp;
+        this.get(&#x27;doNotShowValidationForEventTargets.length&#x27;) &gt; 0 &amp;&amp;
+        [...this.element.querySelectorAll(this.get(&#x27;doNotShowValidationForEventTargets&#x27;).join(&#x27;,&#x27;))]
+          .some((el) =&gt; el.contains(target))
+      )
+    ) {
+      return;
+    }
+
+    this.set(&#x27;showOwnValidation&#x27;, true);
+  },
+
+  /**
+   * Controls if validation should be shown for specified event targets.
+   *
+   * It expects an array of query selectors. If event target is a children of an event that matches
+   * these selectors, an event triggered for it will not trigger validation errors to be shown.
+   *
+   * By default events fired on elements inside an input group are skipped.
+   *
+   * If &#x60;null&#x60; or an empty array is passed validation errors are shown for all events regardless
+   * of event target.
+   *
+   * @property doNotShowValidationForEventTargets
+   * @type ?array
+   * @public
+   */
+
+  /**
+   * The validation (&quot;error&quot; (BS3)/&quot;danger&quot; (BS4), &quot;warning&quot;, or &quot;success&quot;) or null if no validation is to be shown. Automatically computed from the
+   * models validation state.
+   *
+   * @property validation
+   * @readonly
+   * @type string
+   * @private
+   */
+  validation: computed(&#x27;hasCustomError&#x27;, &#x27;hasErrors&#x27;, &#x27;hasCustomWarning&#x27;, &#x27;hasWarnings&#x27;, &#x27;hasValidator&#x27;, &#x27;showValidation&#x27;, &#x27;showModelValidation&#x27;, &#x27;isValidating&#x27;, &#x27;disabled&#x27;, function() {
+    if (!this.get(&#x27;showValidation&#x27;) || !this.get(&#x27;hasValidator&#x27;) || this.get(&#x27;isValidating&#x27;) || this.get(&#x27;disabled&#x27;)) {
+      return null;
+    } else if (this.get(&#x27;showModelValidation&#x27;)) {
+      /* The display of model validation messages has been triggered */
+      return this.get(&#x27;hasErrors&#x27;) || this.get(&#x27;hasCustomError&#x27;) ? &#x27;error&#x27; : (this.get(&#x27;hasWarnings&#x27;) || this.get(&#x27;hasCustomWarning&#x27;) ? &#x27;warning&#x27; : &#x27;success&#x27;);
+    } else {
+      /* If there are custom errors or warnings these should always be shown */
+      return this.get(&#x27;hasCustomError&#x27;) ? &#x27;error&#x27; : &#x27;warning&#x27;;
+    }
+  }),
+
+  /**
+   * True for text field &#x60;controlType&#x60;s
+   *
+   * @property useIcons
+   * @type boolean
+   * @readonly
+   * @public
+   */
+  useIcons: equal(&#x27;controlComponent&#x27;, &#x27;bs-form/element/control/input&#x27;),
+
+  /**
+   * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
+   *
+   * * &#x27;horizontal&#x27;
+   * * &#x27;vertical&#x27;
+   * * &#x27;inline&#x27;
+   *
+   * Defaults to the parent &#x60;form&#x60;&#x27;s &#x60;formLayout&#x60; property.
+   *
+   * @property formLayout
+   * @type string
+   * @default &#x27;vertical&#x27;
+   * @public
+   */
+  formLayout: &#x27;vertical&#x27;,
+
+  /**
+   * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
+   * property of the parent form. The corresponding grid class for form controls is automatically computed.
+   *
+   * @property horizontalLabelGridClass
+   * @type string
+   * @public
+   */
+  horizontalLabelGridClass: null,
+
+  /**
+   * ID for input field and the corresponding label&#x27;s &quot;for&quot; attribute
+   *
+   * @property formElementId
+   * @type string
+   * @private
+   */
+  formElementId: computed(&#x27;elementId&#x27;, function() {
+    return &#x60;${this.get(&#x27;elementId&#x27;)}-field&#x60;;
+  }),
+
+  /**
+   * ID of the helpText, used for aria-describedby attribute of the control element
+   *
+   * @property ariaDescribedBy
+   * @type string
+   * @private
+   */
+  ariaDescribedBy: computed(&#x27;elementId&#x27;, function() {
+    return &#x60;${this.get(&#x27;elementId&#x27;)}-help&#x60;;
+  }),
+
+  /**
+   * @property formComponent
+   * @type {String}
+   * @private
+   */
+  formComponent: &#x27;bs-form&#x27;,
+
+  /**
+   * @property layoutComponent
+   * @type {String}
+   * @private
+   */
+  layoutComponent: computed(&#x27;formLayout&#x27;, &#x27;controlType&#x27;, function() {
+    const formComponent = this.get(&#x27;formComponent&#x27;);
+    const formLayout = this.get(&#x27;formLayout&#x27;);
+    const controlType = this.get(&#x27;controlType&#x27;);
+
+    if (nonDefaultLayouts.includes(controlType)) {
+      return &#x60;${formComponent}/element/layout/${formLayout}/${controlType}&#x60;;
+    } else {
+      return &#x60;${formComponent}/element/layout/${formLayout}&#x60;;
+    }
+  }),
+
+  /**
+   * @property controlComponent
+   * @type {String}
+   * @private
+   */
+  controlComponent: computed(&#x27;controlType&#x27;, function() {
+    const formComponent = this.get(&#x27;formComponent&#x27;);
+    const controlType = this.get(&#x27;controlType&#x27;);
+    const componentName = &#x60;${formComponent}/element/control/${controlType}&#x60;;
+
+    if (getOwner(this).hasRegistration(&#x60;component:${componentName}&#x60;)) {
+      return componentName;
+    }
+
+    return &#x60;${formComponent}/element/control/input&#x60;;
+  }),
+
+  /**
+   * @property errorsComponent
+   * @type {String}
+   * @private
+   */
+  errorsComponent: &#x27;bs-form/element/errors&#x27;,
+
+  /**
+   * @property feedbackIconComponent
+   * @type {String}
+   * @private
+   */
+  feedbackIconComponent: &#x27;bs-form/element/feedback-icon&#x27;,
+
+  /**
+   * @property labelComponent
+   * @type {String}
+   * @private
+   */
+  labelComponent: &#x27;bs-form/element/label&#x27;,
+
+  /**
+   * @property helpTextComponent
+   * @type {String}
+   * @private
+   */
+  helpTextComponent: &#x27;bs-form/element/help-text&#x27;,
+
+  /**
+   * Setup validation properties. This method acts as a hook for external validation
+   * libraries to overwrite. In case of failed validations the &#x60;errors&#x60; property should contain an array of error messages.
+   *
+   * @method setupValidations
+   * @private
+   */
+  setupValidations() {
+  },
+
+  /**
+   * Listen for focusOut events from the control element to automatically set &#x60;showOwnValidation&#x60; to true to enable
+   * form validation markup rendering if &#x60;showValidationsOn&#x60; contains &#x60;focusOut&#x60;.
+   *
+   * @event focusOut
+   * @private
+   */
+  focusOut(event) {
+    this.showValidationOnHandler(event);
+  },
+
+  /**
+   * Listen for change events from the control element to automatically set &#x60;showOwnValidation&#x60; to true to enable
+   * form validation markup rendering if &#x60;showValidationsOn&#x60; contains &#x60;change&#x60;.
+   *
+   * @event change
+   * @private
+   */
+  change(event) {
+    this.showValidationOnHandler(event);
+  },
+
+  /**
+   * Listen for input events from the control element to automatically set &#x60;showOwnValidation&#x60; to true to enable
+   * form validation markup rendering if &#x60;showValidationsOn&#x60; contains &#x60;input&#x60;.
+   *
+   * @event input
+   * @private
+   */
+  input(event) {
+    this.showValidationOnHandler(event);
+  },
+
+  /**
+   * The action is called whenever the input value is changed, e.g. by typing text
+   *
+   * @event onChange
+   * @param {String} value The new value of the form control
+   * @param {Object} model The form element&#x27;s model
+   * @param {String} property The value of &#x60;property&#x60;
+   * @public
+   */
+  onChange() {},
+
+  /**
+   * Private duplicate of onChange event used for internal state handling between form and it&#x27;s elements.
+   *
+   * @event _onChange
+   * @private
+   */
+  _onChange() {},
+
+  init() {
+    this._super(...arguments);
+    if (this.get(&#x27;showValidationOn&#x27;) === null) {
+      this.set(&#x27;showValidationOn&#x27;, [&#x27;focusOut&#x27;]);
+    }
+    if (!isBlank(this.get(&#x27;property&#x27;))) {
+      assert(&#x27;You cannot set both property and value on a form element&#x27;, this.get(&#x27;value&#x27;) === null);
+      defineProperty(this, &#x27;value&#x27;, alias(&#x60;model.${this.get(&#x27;property&#x27;)}&#x60;));
+      this.setupValidations();
+    }
+  },
+
+  /*
+   * adjust feedback icon position
+   *
+   * Bootstrap documentation:
+   *  Manual positioning of feedback icons is required for [...] input groups
+   *  with an add-on on the right. [...] For input groups, adjust the right
+   *  value to an appropriate pixel value depending on the width of your addon.
+   */
+  adjustFeedbackIcons: observer(&#x27;hasFeedback&#x27;, &#x27;formLayout&#x27;, function() {
+    scheduleOnce(&#x27;afterRender&#x27;, () =&gt; {
+      let el = this.get(&#x27;element&#x27;);
+      let feedbackIcon;
+      // validation state icons are only shown if form element has feedback
+      if (!this.get(&#x27;isDestroying&#x27;)
+        &amp;&amp; this.get(&#x27;hasFeedback&#x27;)
+        // and form group element has
+        // an input-group
+        &amp;&amp; el.querySelector(&#x27;.input-group&#x27;)
+        // an addon or button on right side
+        &amp;&amp; el.querySelector(&#x27;.input-group input + .input-group-addon, .input-group input + .input-group-btn&#x27;)
+        // an icon showing validation state
+        &amp;&amp; (feedbackIcon = el.querySelector(&#x27;.form-control-feedback&#x27;))
+      ) {
+        // clear existing adjustment
+        feedbackIcon.style.right = &#x27;&#x27;;
+
+        let defaultPosition = 0;
+        let match = getComputedStyle(feedbackIcon).right.match(/^(\d+)px$/);
+        if (match) {
+          defaultPosition = parseInt(match[1]);
+        }
+        // Bootstrap documentation:
+        //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
+        // therefore we could rely on having only one input-group-addon or input-group-btn
+        let inputGroupWidth = el.querySelector(&#x27;input + .input-group-addon, input + .input-group-btn&#x27;).offsetWidth;
+        let adjustedPosition = defaultPosition + inputGroupWidth;
+
+        feedbackIcon.style.right = &#x60;${adjustedPosition}px&#x60;;
+      }
+    });
+  }),
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.adjustFeedbackIcons();
+  },
+
+  actions: {
+    change(value) {
+      let { onChange, model, property, _onChange } = this.getProperties(&#x27;onChange&#x27;, &#x27;model&#x27;, &#x27;property&#x27;, &#x27;_onChange&#x27;);
+      onChange(value, model, property);
+      _onChange();
+    }
+  }
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -1168,6 +1168,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

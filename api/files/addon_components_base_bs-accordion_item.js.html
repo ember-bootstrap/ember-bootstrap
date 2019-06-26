@@ -52,116 +52,116 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-accordion/item.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import { oneWay, not } from &#x27;@ember/object/computed&#x27;;
-            import Component from &#x27;@ember/component&#x27;;
-            import { computed } from &#x27;@ember/object&#x27;;
-            import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-accordion/item&#x27;;
-            
-            /**
-             A collapsible/expandable item within an accordion
-            
-             See [Components.Accordion](Components.Accordion.html) for examples.
-            
-             @class AccordionItem
-             @namespace Components
-             @extends Ember.Component
-             @uses Mixins.TypeClass
-             @public
-             */
-            export default Component.extend(TypeClass, {
-              layout,
-            
-              /**
-               * Add additional binding to mark the entire component area disabled
-               */
-              classNameBindings: [&#x27;disabled&#x27;],
-              /**
-               * The title of the accordion item, displayed as a .panel-title element
-               *
-               * @property title
-               * @type string
-               * @public
-               */
-              title: null,
-            
-              /**
-               * The value of the accordion item, which is used as the value of the &#x60;selected&#x60; property of the parent [Components.Accordion](Components.Accordion.html) component
-               *
-               * @property value
-               * @public
-               */
-              value: oneWay(&#x27;elementId&#x27;),
-            
-              /**
-               * @property selected
-               * @private
-               */
-              selected: null,
-            
-              /**
-               * @property titleComponent
-               * @type {String}
-               * @private
-               */
-              titleComponent: &#x27;bs-accordion/item/title&#x27;,
-            
-              /**
-               * @property bodyComponent
-               * @type {String}
-               * @private
-               */
-              bodyComponent: &#x27;bs-accordion/item/body&#x27;,
-            
-              /**
-               * @property collapsed
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              collapsed: computed(&#x27;value&#x27;, &#x27;selected&#x27;, function() {
-                return this.get(&#x27;value&#x27;) !== this.get(&#x27;selected&#x27;);
-              }).readOnly(),
-            
-              /**
-               * @property active
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              active: not(&#x27;collapsed&#x27;),
-            
-              /**
-               * @property disabled
-               * @type boolean
-               * @public
-               */
-              disabled: false,
-            
-              /**
-               * Reference to the parent &#x60;Components.Accordion&#x60; class.
-               *
-               * @property accordion
-               * @private
-               */
-              accordion: null,
-            
-              /**
-               * @event onClick
-               * @public
-               */
-              onClick() {}
-            
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-accordion/item.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { oneWay, not } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-accordion/item&#x27;;
+
+/**
+ A collapsible/expandable item within an accordion
+
+ See [Components.Accordion](Components.Accordion.html) for examples.
+
+ @class AccordionItem
+ @namespace Components
+ @extends Ember.Component
+ @uses Mixins.TypeClass
+ @public
+ */
+export default Component.extend(TypeClass, {
+  layout,
+
+  /**
+   * Add additional binding to mark the entire component area disabled
+   */
+  classNameBindings: [&#x27;disabled&#x27;],
+  /**
+   * The title of the accordion item, displayed as a .panel-title element
+   *
+   * @property title
+   * @type string
+   * @public
+   */
+  title: null,
+
+  /**
+   * The value of the accordion item, which is used as the value of the &#x60;selected&#x60; property of the parent [Components.Accordion](Components.Accordion.html) component
+   *
+   * @property value
+   * @public
+   */
+  value: oneWay(&#x27;elementId&#x27;),
+
+  /**
+   * @property selected
+   * @private
+   */
+  selected: null,
+
+  /**
+   * @property titleComponent
+   * @type {String}
+   * @private
+   */
+  titleComponent: &#x27;bs-accordion/item/title&#x27;,
+
+  /**
+   * @property bodyComponent
+   * @type {String}
+   * @private
+   */
+  bodyComponent: &#x27;bs-accordion/item/body&#x27;,
+
+  /**
+   * @property collapsed
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  collapsed: computed(&#x27;value&#x27;, &#x27;selected&#x27;, function() {
+    return this.get(&#x27;value&#x27;) !== this.get(&#x27;selected&#x27;);
+  }).readOnly(),
+
+  /**
+   * @property active
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  active: not(&#x27;collapsed&#x27;),
+
+  /**
+   * @property disabled
+   * @type boolean
+   * @public
+   */
+  disabled: false,
+
+  /**
+   * Reference to the parent &#x60;Components.Accordion&#x60; class.
+   *
+   * @property accordion
+   * @private
+   */
+  accordion: null,
+
+  /**
+   * @event onClick
+   * @public
+   */
+  onClick() {}
+
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -223,6 +223,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

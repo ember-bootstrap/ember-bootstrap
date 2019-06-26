@@ -52,59 +52,59 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-form/element/layout/horizontal.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import { assert } from &#x27;@ember/debug&#x27;;
-            import { computed } from &#x27;@ember/object&#x27;;
-            import { isBlank } from &#x27;@ember/utils&#x27;;
-            import FormElementLayout from &#x27;../layout&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/layout/horizontal&#x27;;
-            
-            /**
-            
-             @class FormElementLayoutHorizontal
-             @namespace Components
-             @extends Components.FormElementLayout
-             @private
-             */
-            export default FormElementLayout.extend({
-              layout,
-            
-              /**
-               * The Bootstrap grid class for form labels within a horizontal layout form.
-               *
-               * @property horizontalLabelGridClass
-               * @type string
-               * @public
-               */
-              horizontalLabelGridClass: null,
-            
-              /**
-               * Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.
-               *
-               * @property horizontalInputGridClass
-               * @type string
-               * @readonly
-               * @private
-               */
-              horizontalInputGridClass: computed(&#x27;horizontalLabelGridClass&#x27;, function() {
-                if (isBlank(this.get(&#x27;horizontalLabelGridClass&#x27;))) {
-                  return;
-                }
-                let parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
-                assert(&#x27;horizontalInputGridClass must match format bootstrap grid column class&#x27;, parts.length === 3);
-                parts[2] = 12 - parts[2];
-                return parts.join(&#x27;-&#x27;);
-              }).readOnly(),
-            
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-form/element/layout/horizontal.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { assert } from &#x27;@ember/debug&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { isBlank } from &#x27;@ember/utils&#x27;;
+import FormElementLayout from &#x27;../layout&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/layout/horizontal&#x27;;
+
+/**
+
+ @class FormElementLayoutHorizontal
+ @namespace Components
+ @extends Components.FormElementLayout
+ @private
+ */
+export default FormElementLayout.extend({
+  layout,
+
+  /**
+   * The Bootstrap grid class for form labels within a horizontal layout form.
+   *
+   * @property horizontalLabelGridClass
+   * @type string
+   * @public
+   */
+  horizontalLabelGridClass: null,
+
+  /**
+   * Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.
+   *
+   * @property horizontalInputGridClass
+   * @type string
+   * @readonly
+   * @private
+   */
+  horizontalInputGridClass: computed(&#x27;horizontalLabelGridClass&#x27;, function() {
+    if (isBlank(this.get(&#x27;horizontalLabelGridClass&#x27;))) {
+      return;
+    }
+    let parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
+    assert(&#x27;horizontalInputGridClass must match format bootstrap grid column class&#x27;, parts.length === 3);
+    parts[2] = 12 - parts[2];
+    return parts.join(&#x27;-&#x27;);
+  }).readOnly(),
+
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -166,6 +166,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

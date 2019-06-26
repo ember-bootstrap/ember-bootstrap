@@ -52,50 +52,50 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-form/element/control/textarea.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import Control from &#x27;../control&#x27;;
-            import ControlAttributes from &#x27;ember-bootstrap/mixins/control-attributes&#x27;;
-            
-            /**
-            
-             @class FormElementControlTextarea
-             @namespace Components
-             @extends Components.FormElementControl
-             @private
-             */
-            export default Control.extend(ControlAttributes, {
-              attributeBindings: [
-                &#x27;value&#x27;,
-                &#x27;placeholder&#x27;,
-                &#x27;minlength&#x27;,
-                &#x27;maxlength&#x27;,
-                &#x27;autocomplete&#x27;,
-                &#x27;autocapitalize&#x27;,
-                &#x27;autocorrect&#x27;,
-                &#x27;spellcheck&#x27;,
-                &#x27;rows&#x27;,
-                &#x27;cols&#x27;,
-                &#x27;wrap&#x27;
-              ],
-              tagName: &#x27;textarea&#x27;,
-              classNames: [&#x27;form-control&#x27;],
-            
-              change(event) {
-                this.get(&#x27;onChange&#x27;)(event.target.value);
-              },
-            
-              input(event) {
-                this.get(&#x27;onChange&#x27;)(event.target.value);
-              }
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-form/element/control/textarea.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Control from &#x27;../control&#x27;;
+import ControlAttributes from &#x27;ember-bootstrap/mixins/control-attributes&#x27;;
+
+/**
+
+ @class FormElementControlTextarea
+ @namespace Components
+ @extends Components.FormElementControl
+ @private
+ */
+export default Control.extend(ControlAttributes, {
+  attributeBindings: [
+    &#x27;value&#x27;,
+    &#x27;placeholder&#x27;,
+    &#x27;minlength&#x27;,
+    &#x27;maxlength&#x27;,
+    &#x27;autocomplete&#x27;,
+    &#x27;autocapitalize&#x27;,
+    &#x27;autocorrect&#x27;,
+    &#x27;spellcheck&#x27;,
+    &#x27;rows&#x27;,
+    &#x27;cols&#x27;,
+    &#x27;wrap&#x27;
+  ],
+  tagName: &#x27;textarea&#x27;,
+  classNames: [&#x27;form-control&#x27;],
+
+  change(event) {
+    this.get(&#x27;onChange&#x27;)(event.target.value);
+  },
+
+  input(event) {
+    this.get(&#x27;onChange&#x27;)(event.target.value);
+  }
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -157,6 +157,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

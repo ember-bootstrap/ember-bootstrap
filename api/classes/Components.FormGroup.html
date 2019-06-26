@@ -52,217 +52,217 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="card">
-              <h1 class="card-header">Components.FormGroup <span class="badge badge-public small">public</span></h1>
-              <div class="card-body">
+<div class="card">
+  <h1 class="card-header">Components.FormGroup <span class="badge badge-public small">public</span></h1>
+  <div class="card-body">
+
+<p>This component renders a <code>&lt;div class="form-group"&gt;</code> element, with support for validation states and feedback icons (only for BS3).
+You can use it as a block level component. The following shows Bootstrap 3 usage for the internal markup.</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm as |form|&gt;
+  &lt;form.group @validation={{this.firstNameValidation}}&gt;
+    &lt;label class="control-label"&gt;First name&lt;/label&gt;
+    &lt;input value={{this.firstname}} class="form-control" oninput={{action (mut this.firstname) value="target.value"}} type="text"&gt;
+  &lt;/form.group&gt;
+&lt;/bs-form&gt;
+</code></pre>
+<p>If the <code>validation</code> property is set to some state (usually Bootstrap's predefined states "success",
+"warning" or "error"), the appropriate styles will be added, together with a feedback icon.
+See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbootstrap.com/css/#forms-control-validation</a></p>
+
+
+  </div>
+
+  <div class="card-footer text-muted">
+    <dl class="row m-0">
+        <dt class="col-sm-3">
+          Extends
+        </dt>
+        <dd class="col-sm-9">
+          Ember.Component
+        </dd>
+        <dt class="col-sm-3">
+          Defined in
+        </dt>
+        <dd class="col-sm-9">
+          <a href="../files/addon_components_base_bs-form_group.js.html#l5"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:5</code></a>
+        </dd>
+
+    </dl>
+  </div>
+</div>
+
+
+
+<form id="options-form" class="form-inline mb-1 mt-4">
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
+    <label class="form-check-label" for="api-show-inherited">
+      Inherited
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-protected">
+    <label class="form-check-label" for="api-show-protected">
+      Protected
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-private">
+    <label class="form-check-label" for="api-show-private">
+      Private
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
+    <label class="form-check-label" for="api-show-deprecated">
+      Deprecated
+    </label>
+  </div>
+
+</form>
+
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
+
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div id="index" class="tab-pane active">
+        <h2 class="off-left">Item Index</h2>
+
+
+          <div class="index-section properties">
+            <h3>Properties</h3>
+
+            <ul class="index-list properties extends">
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix"
+                     data-tablink="classTypePrefix">classTypePrefix</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_hasValidation"
+                     data-tablink="hasValidation">hasValidation</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_validation"
+                     data-tablink="validation">validation</a>
+
+                </li>
+            </ul>
+          </div>
+
+
+      </div>
+
+
+        <div id="properties" class="tab-pane">
+            <div id="property_classTypePrefix"
+                 class="property item private">
+              <h3 class="name">classTypePrefix
+                <span class="badge badge-secondary small">String</span>
+                  <span class="badge badge-private small">private</span>
             
-                <p>This component renders a <code>&lt;div class=&quot;form-group&quot;&gt;</code> element, with support for validation states and feedback icons (only for BS3).
-            You can use it as a block level component. The following shows Bootstrap 3 usage for the internal markup.</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{#bs-form as |form|}}
-              {{#form.group validation=firstNameValidation}}
-                &lt;label class=&quot;control-label&quot;&gt;First name&lt;/label&gt;
-                &lt;input value={{firstname}} class=&quot;form-control&quot; oninput={{action (mut firstname) value=&quot;target.value&quot;}} type=&quot;text&quot;&gt;
-              {{/form.group}}
-            {{/bs-form}}
-            </code></pre>
-            <p>If the <code>validation</code> property is set to some state (usually Bootstrap's predefined states &quot;success&quot;,
-            &quot;warning&quot; or &quot;error&quot;), the appropriate styles will be added, together with a feedback icon.
-            See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbootstrap.com/css/#forms-control-validation</a></p>
             
             
-              </div>
             
-              <div class="card-footer text-muted">
-                <dl class="row m-0">
-                    <dt class="col-sm-3">
-                      Extends
-                    </dt>
-                    <dd class="col-sm-9">
-                      Ember.Component
-                    </dd>
-                    <dt class="col-sm-3">
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;form-group&#x27; (BS3) or &#x27;form-control&#x27; (BS4)</p>
+                  <p>
                       Defined in
-                    </dt>
-                    <dd class="col-sm-9">
-                      <a href="../files/addon_components_base_bs-form_group.js.html#l5"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:5</code></a>
-                    </dd>
+                  <a href="../files/addon_components_base_bs-form_group.js.html#l30"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:30</code></a>
+              </p>
             
-                </dl>
+            
               </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
             </div>
+            <div id="property_hasValidation"
+                 class="property item private">
+              <h3 class="name">hasValidation
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
             
             
             
-            <form id="options-form" class="form-inline mb-1 mt-4">
             
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
-                <label class="form-check-label" for="api-show-inherited">
-                  Inherited
-                </label>
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-form_group.js.html#l37"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:37</code></a>
+              </p>
+            
+            
               </div>
             
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-protected">
-                <label class="form-check-label" for="api-show-protected">
-                  Protected
-                </label>
+              <div class="description">
+                <p>Computed property which is true if the form group is in a validation state</p>
+            
               </div>
             
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-private">
-                <label class="form-check-label" for="api-show-private">
-                  Private
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
-                <label class="form-check-label" for="api-show-deprecated">
-                  Deprecated
-                </label>
-              </div>
-            
-            </form>
-            
-            <div class="card">
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                  <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
-            
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div id="index" class="tab-pane active">
-                    <h2 class="off-left">Item Index</h2>
             
             
-                      <div class="index-section properties">
-                        <h3>Properties</h3>
             
-                        <ul class="index-list properties extends">
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix"
-                                 data-tablink="classTypePrefix">classTypePrefix</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_hasValidation"
-                                 data-tablink="hasValidation">hasValidation</a>
-            
-                            </li>
-                            <li class="index-item property public">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_validation"
-                                 data-tablink="validation">validation</a>
-            
-                            </li>
-                        </ul>
-                      </div>
-            
-            
-                  </div>
-            
-            
-                    <div id="properties" class="tab-pane">
-                        <div id="property_classTypePrefix"
-                             class="property item private">
-                          <h3 class="name">classTypePrefix
-                            <span class="badge badge-secondary small">String</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> &#x27;form-group&#x27; (BS3) or &#x27;form-control&#x27; (BS4)</p>
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-form_group.js.html#l30"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:30</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_hasValidation"
-                             class="property item private">
-                          <h3 class="name">hasValidation
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-form_group.js.html#l37"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:37</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Computed property which is true if the form group is in a validation state</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_validation"
-                             class="property item public">
-                          <h3 class="name">validation
-                            <span class="badge badge-secondary small">string</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-form_group.js.html#l47"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:47</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Set to a validation state to render the form-group with a validation style (only for BS3).
-                        See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbootstrap.com/css/#forms-control-validation</a></p>
-                        <p>The default states of &quot;success&quot;, &quot;warning&quot; and &quot;error&quot; are supported by Bootstrap out-of-the-box.
-                        But you can use custom states as well. This will set a has-<state> class, and (if <code>useIcons</code>is true)
-                        a feedback whose class is taken from the <state>Icon property</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                    </div>
-            
-            
-                </div>
-              </div>
             </div>
+            <div id="property_validation"
+                 class="property item public">
+              <h3 class="name">validation
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-form_group.js.html#l47"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;group.js:47</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Set to a validation state to render the form-group with a validation style (only for BS3).
+            See <a href="http://getbootstrap.com/css/#forms-control-validation">http://getbootstrap.com/css/#forms-control-validation</a></p>
+            <p>The default states of "success", "warning" and "error" are supported by Bootstrap out-of-the-box.
+            But you can use custom states as well. This will set a has-<state> class, and (if <code>useIcons</code>is true)
+            a feedback whose class is taken from the <state>Icon property</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+        </div>
+
+
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </div>
@@ -324,6 +324,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

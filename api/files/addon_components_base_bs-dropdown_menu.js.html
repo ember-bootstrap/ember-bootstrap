@@ -52,181 +52,172 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-dropdown/menu.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import Component from &#x27;@ember/component&#x27;;
-            import { computed } from &#x27;@ember/object&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown/menu&#x27;;
-            import { next } from &#x27;@ember/runloop&#x27;;
-            
-            /**
-             Component for the dropdown menu.
-            
-             See [Components.Dropdown](Components.Dropdown.html) for examples.
-            
-             @class DropdownMenu
-             @namespace Components
-             @extends Ember.Component
-             @public
-             */
-            export default Component.extend({
-              layout,
-            
-              /**
-               * Defaults to a &#x60;&lt;ul&gt;&#x60; tag in BS3 and a &#x60;&lt;div&gt;&#x60; tag in BS4. Change for other types of dropdown menus.
-               *
-               * @property tagName
-               * @type string
-               * @default ul
-               * @public
-               */
-              tagName: &#x27;&#x27;,
-            
-              /**
-               * @property ariaRole
-               * @default menu
-               * @type string
-               * @protected
-               */
-              ariaRole: &#x27;menu&#x27;,
-            
-              /**
-               * Alignment of the menu, either &quot;left&quot; or &quot;right&quot;
-               *
-               * @property align
-               * @type string
-               * @default left
-               * @public
-               */
-              align: &#x27;left&#x27;,
-            
-              /**
-               * @property direction
-               * @default &#x27;down&#x27;
-               * @type string
-               * @private
-               */
-              direction: &#x27;down&#x27;,
-            
-              /**
-               * @property inNav
-               * @type {boolean}
-               * @private
-               */
-              inNav: false,
-            
-              /**
-               * By default the menu is rendered in the same place the dropdown. If you experience clipping
-               * issues, you can set this to false to render the menu in a wormhole at the top of the DOM.
-               *
-               * @property renderInPlace
-               * @type boolean
-               * @default true
-               * @public
-               */
-              renderInPlace: true,
-            
-              /**
-               * @property _renderInPlace
-               * @type boolean
-               * @private
-               */
-              _renderInPlace: computed(&#x27;renderInPlace&#x27;, function() {
-                return (
-                  this.get(&#x27;renderInPlace&#x27;) ||
-                  typeof document === &#x27;undefined&#x27; ||
-                  !document.getElementById(&#x27;ember-bootstrap-wormhole&#x27;)
-                );
-              }),
-            
-              alignClass: computed(&#x27;align&#x27;, function() {
-                if (this.get(&#x27;align&#x27;) !== &#x27;left&#x27;) {
-                  return &#x60;dropdown-menu-${this.get(&#x27;align&#x27;)}&#x60;;
-                }
-              }),
-            
-              isOpen: computed({
-                get() {
-                  return false;
-                },
-                set(key, value) {
-                  // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu&#x27;s children
-                  // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
-                  next(() =&gt; {
-                    if (this.get(&#x27;isDestroying&#x27;) || this.get(&#x27;isDestroyed&#x27;)) {
-                      return;
-                    }
-                    this.set(&#x27;_isOpen&#x27;, value);
-                  });
-                  return value;
-                }
-              }),
-            
-              _isOpen: false,
-            
-              flip: true,
-            
-              _popperApi: null,
-            
-              popperPlacement: computed(&#x27;direction&#x27;, &#x27;align&#x27;, function() {
-                let placement = &#x27;bottom-start&#x27;;
-                let { direction, align } = this.getProperties(&#x27;direction&#x27;, &#x27;align&#x27;);
-            
-                if (direction === &#x27;up&#x27;) {
-                  placement = &#x27;top-start&#x27;;
-                  if (align === &#x27;right&#x27;) {
-                    placement = &#x27;top-end&#x27;;
-                  }
-                } else if (direction === &#x27;left&#x27;) {
-                  placement = &#x27;left-start&#x27;;
-                } else if (direction === &#x27;right&#x27;) {
-                  placement = &#x27;right-start&#x27;;
-                } else if (align === &#x27;right&#x27;) {
-                  placement = &#x27;bottom-end&#x27;;
-                }
-                return placement;
-              }),
-            
-              popperModifiers: computed(&#x27;inNav&#x27;, &#x27;flip&#x27;, function() {
-                return {
-                  // @todo add offset config
-                  applyStyle: {
-                    enabled: !this.get(&#x27;inNav&#x27;)
-                  },
-                  flip: {
-                    enabled: this.get(&#x27;flip&#x27;)
-                  }
-                };
-              }),
-            
-              /**
-               * @property itemComponent
-               * @type {String}
-               * @private
-               */
-              itemComponent: &#x27;bs-dropdown/menu/item&#x27;,
-            
-              /**
-               * @property linkToComponent
-               * @type {String}
-               * @private
-               */
-              linkToComponent: &#x27;bs-dropdown/menu/link-to&#x27;,
-            
-              /**
-               * @property dividerComponent
-               * @type {String}
-               * @private
-               */
-              dividerComponent: &#x27;bs-dropdown/menu/divider&#x27;
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-dropdown/menu.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Component from &#x27;@ember/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown/menu&#x27;;
+import { next } from &#x27;@ember/runloop&#x27;;
+
+/**
+ Component for the dropdown menu.
+
+ See [Components.Dropdown](Components.Dropdown.html) for examples.
+
+ @class DropdownMenu
+ @namespace Components
+ @extends Ember.Component
+ @public
+ */
+export default Component.extend({
+  layout,
+  tagName: &#x27;&#x27;,
+
+  /**
+   * @property ariaRole
+   * @default menu
+   * @type string
+   * @protected
+   */
+  ariaRole: &#x27;menu&#x27;,
+
+  /**
+   * Alignment of the menu, either &quot;left&quot; or &quot;right&quot;
+   *
+   * @property align
+   * @type string
+   * @default left
+   * @public
+   */
+  align: &#x27;left&#x27;,
+
+  /**
+   * @property direction
+   * @default &#x27;down&#x27;
+   * @type string
+   * @private
+   */
+  direction: &#x27;down&#x27;,
+
+  /**
+   * @property inNav
+   * @type {boolean}
+   * @private
+   */
+  inNav: false,
+
+  /**
+   * By default the menu is rendered in the same place the dropdown. If you experience clipping
+   * issues, you can set this to false to render the menu in a wormhole at the top of the DOM.
+   *
+   * @property renderInPlace
+   * @type boolean
+   * @default true
+   * @public
+   */
+  renderInPlace: true,
+
+  /**
+   * @property _renderInPlace
+   * @type boolean
+   * @private
+   */
+  _renderInPlace: computed(&#x27;renderInPlace&#x27;, function() {
+    return (
+      this.get(&#x27;renderInPlace&#x27;) ||
+      typeof document === &#x27;undefined&#x27; ||
+      !document.getElementById(&#x27;ember-bootstrap-wormhole&#x27;)
+    );
+  }),
+
+  alignClass: computed(&#x27;align&#x27;, function() {
+    if (this.get(&#x27;align&#x27;) !== &#x27;left&#x27;) {
+      return &#x60;dropdown-menu-${this.get(&#x27;align&#x27;)}&#x60;;
+    }
+  }),
+
+  isOpen: computed({
+    get() {
+      return false;
+    },
+    set(key, value) {
+      // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu&#x27;s children
+      // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
+      next(() =&gt; {
+        if (this.get(&#x27;isDestroying&#x27;) || this.get(&#x27;isDestroyed&#x27;)) {
+          return;
+        }
+        this.set(&#x27;_isOpen&#x27;, value);
+      });
+      return value;
+    }
+  }),
+
+  _isOpen: false,
+
+  flip: true,
+
+  _popperApi: null,
+
+  popperPlacement: computed(&#x27;direction&#x27;, &#x27;align&#x27;, function() {
+    let placement = &#x27;bottom-start&#x27;;
+    let { direction, align } = this.getProperties(&#x27;direction&#x27;, &#x27;align&#x27;);
+
+    if (direction === &#x27;up&#x27;) {
+      placement = &#x27;top-start&#x27;;
+      if (align === &#x27;right&#x27;) {
+        placement = &#x27;top-end&#x27;;
+      }
+    } else if (direction === &#x27;left&#x27;) {
+      placement = &#x27;left-start&#x27;;
+    } else if (direction === &#x27;right&#x27;) {
+      placement = &#x27;right-start&#x27;;
+    } else if (align === &#x27;right&#x27;) {
+      placement = &#x27;bottom-end&#x27;;
+    }
+    return placement;
+  }),
+
+  popperModifiers: computed(&#x27;inNav&#x27;, &#x27;flip&#x27;, function() {
+    return {
+      // @todo add offset config
+      applyStyle: {
+        enabled: !this.get(&#x27;inNav&#x27;)
+      },
+      flip: {
+        enabled: this.get(&#x27;flip&#x27;)
+      }
+    };
+  }),
+
+  /**
+   * @property itemComponent
+   * @type {String}
+   * @private
+   */
+  itemComponent: &#x27;bs-dropdown/menu/item&#x27;,
+
+  /**
+   * @property linkToComponent
+   * @type {String}
+   * @private
+   */
+  linkToComponent: &#x27;bs-dropdown/menu/link-to&#x27;,
+
+  /**
+   * @property dividerComponent
+   * @type {String}
+   * @private
+   */
+  dividerComponent: &#x27;bs-dropdown/menu/divider&#x27;
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -288,6 +279,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

@@ -52,1681 +52,1681 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="card">
-              <h1 class="card-header">Components.Popover <span class="badge badge-public small">public</span></h1>
-              <div class="card-body">
-            
-                <p>Component that implements Bootstrap <a href="http://getbootstrap.com/javascript/#popovers">popovers</a>.</p>
-            <p>By default it will attach its listeners (click) to the parent DOM element to trigger
-            the popover:</p>
-            <pre class="code prettyprint"><code class="language-hbs">&lt;button class=&quot;btn&quot;&gt;
-              {{#bs-popover title=&quot;This is a title&quot;}}and this the body{{/bs-popover}}
-            &lt;/button&gt;
-            </code></pre>
-            <h3>Trigger</h3>
-            <p>The trigger element is the DOM element that will cause the popover to be shown when one of the trigger events occur on
-            that element. By default the trigger element is the parent DOM element of the component, and the trigger event will be
-            &quot;click&quot;.</p>
-            <p>The <code>triggerElement</code> property accepts any CSS selector to attach the popover to any other existing DOM element.
-            With the special value &quot;parentView&quot; you can attach the popover to the DOM element of the parent component:</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{#my-component}}
-              {{#bs-popover triggerElement=&quot;parentView&quot;}}This is a popover{{/bs-popover}}
-            {{/my-component}}
-            </code></pre>
-            <p>To customize the events that will trigger the popover use the <code>triggerEvents</code> property, that accepts an array or a
-            string of events, with &quot;hover&quot;, &quot;focus&quot; and &quot;click&quot; being supported.</p>
-            <h3>Placement options</h3>
-            <p>By default the popover will show up to the right of the trigger element. Use the <code>placement</code> property to change that
-            (&quot;top&quot;, &quot;bottom&quot;, &quot;left&quot; and &quot;right&quot;). To make sure the popover will not exceed the viewport (see Advanced customization)
-            you can set <code>autoPlacement</code> to true. A popover with `placement=&quot;right&quot; will be placed to the right if there is enough
-            space, otherwise to the left.</p>
-            <h3>Advanced customization</h3>
-            <p>Several other properties allow for some advanced customization:</p>
-            <ul>
-            <li><code>visible</code> to show/hide the popover programmatically</li>
-            <li><code>fade</code> to disable the fade in transition</li>
-            <li><code>delay</code> (or <code>delayShow</code> and <code>delayHide</code>) to add a delay</li>
-            <li><code>viewportSelector</code> and <code>viewportPadding</code> to customize the viewport that affects <code>autoPlacement</code></li>
-            <li>a <code>close</code> action is yielded, that allows you to close the tooltip:</li>
+<div class="card">
+  <h1 class="card-header">Components.Popover <span class="badge badge-public small">public</span></h1>
+  <div class="card-body">
+
+<p>Component that implements Bootstrap <a href="http://getbootstrap.com/javascript/#popovers">popovers</a>.</p>
+<p>By default it will attach its listeners (click) to the parent DOM element to trigger
+the popover:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;button class="btn"&gt;
+  &lt;BsPopover @title="this is a title"&gt;and this the body&lt;/BsPopover&gt;
+&lt;/button&gt;
+</code></pre>
+<h3>Trigger</h3>
+<p>The trigger element is the DOM element that will cause the popover to be shown when one of the trigger events occur on
+that element. By default the trigger element is the parent DOM element of the component, and the trigger event will be
+"click".</p>
+<p>The <code>triggerElement</code> property accepts any CSS selector to attach the popover to any other existing DOM element.
+With the special value "parentView" you can attach the popover to the DOM element of the parent component:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;MyComponent&gt;
+  &lt;BsPopover @triggerElement="parentView"&gt;This is a popover&lt;/BsPopover&gt;
+&lt;/MyComponent&gt;
+</code></pre>
+<p>To customize the events that will trigger the popover use the <code>triggerEvents</code> property, that accepts an array or a
+string of events, with "hover", "focus" and "click" being supported.</p>
+<h3>Placement options</h3>
+<p>By default the popover will show up to the right of the trigger element. Use the <code>placement</code> property to change that
+("top", "bottom", "left" and "right"). To make sure the popover will not exceed the viewport (see Advanced customization)
+you can set <code>autoPlacement</code> to true. A popover with `placement="right" will be placed to the right if there is enough
+space, otherwise to the left.</p>
+<h3>Advanced customization</h3>
+<p>Several other properties allow for some advanced customization:</p>
+<ul>
+<li><code>visible</code> to show/hide the popover programmatically</li>
+<li><code>fade</code> to disable the fade in transition</li>
+<li><code>delay</code> (or <code>delayShow</code> and <code>delayHide</code>) to add a delay</li>
+<li><code>viewportSelector</code> and <code>viewportPadding</code> to customize the viewport that affects <code>autoPlacement</code></li>
+<li>a <code>close</code> action is yielded, that allows you to close the tooltip:</li>
+</ul>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsPopover as |po| &gt;This is a popover &lt;button onclick={{action po.close}}&gt;Close&lt;/button&gt;&lt;/BsPopover&gt;
+</code></pre>
+<p>See the individual API docs for each property.</p>
+<h3>Actions</h3>
+<p>When you want to react on the popover being shown or hidden, you can use one of the following supported actions:</p>
+<ul>
+<li><code>onShow</code></li>
+<li><code>onShown</code></li>
+<li><code>onHide</code></li>
+<li><code>onHidden</code></li>
+</ul>
+
+
+  </div>
+
+  <div class="card-footer text-muted">
+    <dl class="row m-0">
+        <dt class="col-sm-3">
+          Extends
+        </dt>
+        <dd class="col-sm-9">
+          <a href="../classes/Components.ContextualHelp.html" class="crosslink">Components.ContextualHelp</a>
+        </dd>
+        <dt class="col-sm-3">
+          Defined in
+        </dt>
+        <dd class="col-sm-9">
+          <a href="../files/addon_components_base_bs-popover.js.html#l5"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover.js:5</code></a>
+        </dd>
+
+    </dl>
+  </div>
+</div>
+
+
+
+<form id="options-form" class="form-inline mb-1 mt-4">
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
+    <label class="form-check-label" for="api-show-inherited">
+      Inherited
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-protected">
+    <label class="form-check-label" for="api-show-protected">
+      Protected
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-private">
+    <label class="form-check-label" for="api-show-private">
+      Private
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
+    <label class="form-check-label" for="api-show-deprecated">
+      Deprecated
+    </label>
+  </div>
+
+</form>
+
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
+
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods">Methods</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div id="index" class="tab-pane active">
+        <h2 class="off-left">Item Index</h2>
+
+          <div class="index-section methods">
+            <h3>Methods</h3>
+
+            <ul class="index-list methods extends">
+                <li class="index-item method private inherited">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_addListeners" data-tablink="addListeners">addListeners</a>
+
+                </li>
+                <li class="index-item method private inherited">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_enter" data-tablink="enter">enter</a>
+
+                </li>
+                <li class="index-item method private inherited">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_getTriggerTargetElement" data-tablink="getTriggerTargetElement">getTriggerTargetElement</a>
+
+                </li>
+                <li class="index-item method private inherited">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_handleTriggerEvent" data-tablink="handleTriggerEvent">handleTriggerEvent</a>
+
+                </li>
+                <li class="index-item method private inherited">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_hide" data-tablink="hide">hide</a>
+
+                </li>
+                <li class="index-item method private inherited">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_leave" data-tablink="leave">leave</a>
+
+                </li>
+                <li class="index-item method private inherited">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_removeListeners" data-tablink="removeListeners">removeListeners</a>
+
+                </li>
+                <li class="index-item method private inherited">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_replaceArrow" data-tablink="replaceArrow">replaceArrow</a>
+
+                </li>
+                <li class="index-item method private inherited">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_show" data-tablink="show">show</a>
+
+                </li>
+                <li class="index-item method private inherited">
+                  <a href="#" data-tabid="#methods" data-anchor="#method_toggle" data-tablink="toggle">toggle</a>
+
+                </li>
             </ul>
-            <pre class="code prettyprint"><code class="language-hbs">{{#bs-popover as |po|}}This is a popover &lt;button {{action po.close}}&gt;Close&lt;/button&gt;{{/bs-popover}}
-            </code></pre>
-            <p>See the individual API docs for each property.</p>
-            <h3>Actions</h3>
-            <p>When you want to react on the popover being shown or hidden, you can use one of the following supported actions:</p>
-            <ul>
-            <li><code>onShow</code></li>
-            <li><code>onShown</code></li>
-            <li><code>onHide</code></li>
-            <li><code>onHidden</code></li>
+          </div>
+
+          <div class="index-section properties">
+            <h3>Properties</h3>
+
+            <ul class="index-list properties extends">
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property__renderInPlace"
+                     data-tablink="_renderInPlace">_renderInPlace</a>
+
+                </li>
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_arrowElement"
+                     data-tablink="arrowElement">arrowElement</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_autoPlacement"
+                     data-tablink="autoPlacement">autoPlacement</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_delay"
+                     data-tablink="delay">delay</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_delayHide"
+                     data-tablink="delayHide">delayHide</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_delayShow"
+                     data-tablink="delayShow">delayShow</a>
+
+                </li>
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_elementComponent"
+                     data-tablink="elementComponent">elementComponent</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_fade"
+                     data-tablink="fade">fade</a>
+
+                </li>
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_fastboot"
+                     data-tablink="fastboot">fastboot</a>
+
+                </li>
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_hoverState"
+                     data-tablink="hoverState">hoverState</a>
+
+                </li>
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_inDom"
+                     data-tablink="inDom">inDom</a>
+
+                </li>
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_inState"
+                     data-tablink="inState">inState</a>
+
+                </li>
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_overlayElement"
+                     data-tablink="overlayElement">overlayElement</a>
+
+                </li>
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_overlayId"
+                     data-tablink="overlayId">overlayId</a>
+
+                </li>
+                <li class="index-item property public">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_placement"
+                     data-tablink="placement">placement</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_renderInPlace"
+                     data-tablink="renderInPlace">renderInPlace</a>
+
+                </li>
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_showHelp"
+                     data-tablink="showHelp">showHelp</a>
+
+                </li>
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_timer"
+                     data-tablink="timer">timer</a>
+
+                </li>
+                <li class="index-item property public inherited inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_title"
+                     data-tablink="title">title</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_transitionDuration"
+                     data-tablink="transitionDuration">transitionDuration</a>
+
+                </li>
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_transitionsEnabled"
+                     data-tablink="transitionsEnabled">transitionsEnabled</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_triggerElement"
+                     data-tablink="triggerElement">triggerElement</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_triggerEvents"
+                     data-tablink="triggerEvents">triggerEvents</a>
+
+                </li>
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_usesTransition"
+                     data-tablink="usesTransition">usesTransition</a>
+
+                </li>
+                <li class="index-item property private inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_viewportElement"
+                     data-tablink="viewportElement">viewportElement</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_viewportPadding"
+                     data-tablink="viewportPadding">viewportPadding</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_viewportSelector"
+                     data-tablink="viewportSelector">viewportSelector</a>
+
+                </li>
+                <li class="index-item property public inherited">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_visible"
+                     data-tablink="visible">visible</a>
+
+                </li>
             </ul>
-            
-            
-              </div>
-            
-              <div class="card-footer text-muted">
-                <dl class="row m-0">
-                    <dt class="col-sm-3">
-                      Extends
-                    </dt>
-                    <dd class="col-sm-9">
-                      <a href="../classes/Components.ContextualHelp.html" class="crosslink">Components.ContextualHelp</a>
-                    </dd>
-                    <dt class="col-sm-3">
-                      Defined in
-                    </dt>
-                    <dd class="col-sm-9">
-                      <a href="../files/addon_components_base_bs-popover.js.html#l5"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover.js:5</code></a>
-                    </dd>
-            
-                </dl>
-              </div>
-            </div>
-            
-            
-            
-            <form id="options-form" class="form-inline mb-1 mt-4">
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
-                <label class="form-check-label" for="api-show-inherited">
-                  Inherited
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-protected">
-                <label class="form-check-label" for="api-show-protected">
-                  Protected
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-private">
-                <label class="form-check-label" for="api-show-private">
-                  Private
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
-                <label class="form-check-label" for="api-show-deprecated">
-                  Deprecated
-                </label>
-              </div>
-            
-            </form>
-            
-            <div class="card">
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                  <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
-            
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods">Methods</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events">Events</a></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div id="index" class="tab-pane active">
-                    <h2 class="off-left">Item Index</h2>
-            
-                      <div class="index-section methods">
-                        <h3>Methods</h3>
-            
-                        <ul class="index-list methods extends">
-                            <li class="index-item method private inherited">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_addListeners" data-tablink="addListeners">addListeners</a>
-            
-                            </li>
-                            <li class="index-item method private inherited">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_enter" data-tablink="enter">enter</a>
-            
-                            </li>
-                            <li class="index-item method private inherited">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_getTriggerTargetElement" data-tablink="getTriggerTargetElement">getTriggerTargetElement</a>
-            
-                            </li>
-                            <li class="index-item method private inherited">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_handleTriggerEvent" data-tablink="handleTriggerEvent">handleTriggerEvent</a>
-            
-                            </li>
-                            <li class="index-item method private inherited">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_hide" data-tablink="hide">hide</a>
-            
-                            </li>
-                            <li class="index-item method private inherited">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_leave" data-tablink="leave">leave</a>
-            
-                            </li>
-                            <li class="index-item method private inherited">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_removeListeners" data-tablink="removeListeners">removeListeners</a>
-            
-                            </li>
-                            <li class="index-item method private inherited">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_replaceArrow" data-tablink="replaceArrow">replaceArrow</a>
-            
-                            </li>
-                            <li class="index-item method private inherited">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_show" data-tablink="show">show</a>
-            
-                            </li>
-                            <li class="index-item method private inherited">
-                              <a href="#" data-tabid="#methods" data-anchor="#method_toggle" data-tablink="toggle">toggle</a>
-            
-                            </li>
-                        </ul>
-                      </div>
-            
-                      <div class="index-section properties">
-                        <h3>Properties</h3>
-            
-                        <ul class="index-list properties extends">
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property__renderInPlace"
-                                 data-tablink="_renderInPlace">_renderInPlace</a>
-            
-                            </li>
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_arrowElement"
-                                 data-tablink="arrowElement">arrowElement</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_autoPlacement"
-                                 data-tablink="autoPlacement">autoPlacement</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_delay"
-                                 data-tablink="delay">delay</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_delayHide"
-                                 data-tablink="delayHide">delayHide</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_delayShow"
-                                 data-tablink="delayShow">delayShow</a>
-            
-                            </li>
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_elementComponent"
-                                 data-tablink="elementComponent">elementComponent</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_fade"
-                                 data-tablink="fade">fade</a>
-            
-                            </li>
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_fastboot"
-                                 data-tablink="fastboot">fastboot</a>
-            
-                            </li>
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_hoverState"
-                                 data-tablink="hoverState">hoverState</a>
-            
-                            </li>
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_inDom"
-                                 data-tablink="inDom">inDom</a>
-            
-                            </li>
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_inState"
-                                 data-tablink="inState">inState</a>
-            
-                            </li>
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_overlayElement"
-                                 data-tablink="overlayElement">overlayElement</a>
-            
-                            </li>
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_overlayId"
-                                 data-tablink="overlayId">overlayId</a>
-            
-                            </li>
-                            <li class="index-item property public">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_placement"
-                                 data-tablink="placement">placement</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_renderInPlace"
-                                 data-tablink="renderInPlace">renderInPlace</a>
-            
-                            </li>
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_showHelp"
-                                 data-tablink="showHelp">showHelp</a>
-            
-                            </li>
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_timer"
-                                 data-tablink="timer">timer</a>
-            
-                            </li>
-                            <li class="index-item property public inherited inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_title"
-                                 data-tablink="title">title</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_transitionDuration"
-                                 data-tablink="transitionDuration">transitionDuration</a>
-            
-                            </li>
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_transitionsEnabled"
-                                 data-tablink="transitionsEnabled">transitionsEnabled</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_triggerElement"
-                                 data-tablink="triggerElement">triggerElement</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_triggerEvents"
-                                 data-tablink="triggerEvents">triggerEvents</a>
-            
-                            </li>
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_usesTransition"
-                                 data-tablink="usesTransition">usesTransition</a>
-            
-                            </li>
-                            <li class="index-item property private inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_viewportElement"
-                                 data-tablink="viewportElement">viewportElement</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_viewportPadding"
-                                 data-tablink="viewportPadding">viewportPadding</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_viewportSelector"
-                                 data-tablink="viewportSelector">viewportSelector</a>
-            
-                            </li>
-                            <li class="index-item property public inherited">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_visible"
-                                 data-tablink="visible">visible</a>
-            
-                            </li>
-                        </ul>
-                      </div>
-            
-            
-                      <div class="index-section events">
-                        <h3>Events</h3>
-            
-                        <ul class="index-list events extends">
-                            <li class="index-item event public inherited">
-                              <a href="#" data-tabid="#events" data-anchor="#event_onHidden" data-tablink="onHidden">onHidden</a>
-            
-                            </li>
-                            <li class="index-item event public inherited">
-                              <a href="#" data-tabid="#events" data-anchor="#event_onHide" data-tablink="onHide">onHide</a>
-            
-                            </li>
-                            <li class="index-item event public inherited">
-                              <a href="#" data-tabid="#events" data-anchor="#event_onShow" data-tablink="onShow">onShow</a>
-            
-                            </li>
-                            <li class="index-item event public inherited">
-                              <a href="#" data-tabid="#events" data-anchor="#event_onShown" data-tablink="onShown">onShown</a>
-            
-                            </li>
-                        </ul>
-                      </div>
-                  </div>
-            
-                    <div id="methods" class="tab-pane">
-                        <div id="method_addListeners" class="method item private inherited">
-                            <h3 class="name">addListeners
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-private">private</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#method_addListeners">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l550"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:550</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="method_enter" class="method item private inherited">
-                            <h3 class="name">enter
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-private">private</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#method_enter">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l337"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:337</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>Called when a show event has been received</p>
-                        
-                            </div>
-                        
-                                <div class="params">
-                                    <h4>Parameters:</h4>
-                        
-                                    <ul class="params-list">
-                                        <li class="param">
-                                                <code class="param-name">e</code>
-                                                <span class="type">Object</span>
-                        
-                        
-                                            <div class="param-description">
-                                                 
-                                            </div>
-                        
-                                        </li>
-                                    </ul>
-                                </div>
-                        
-                        
-                        </div>
-                        <div id="method_getTriggerTargetElement" class="method item private inherited">
-                            <h3 class="name">getTriggerTargetElement
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-private">private</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#method_getTriggerTargetElement">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l209"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:209</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="method_handleTriggerEvent" class="method item private inherited">
-                            <h3 class="name">handleTriggerEvent
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-private">private</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#method_handleTriggerEvent">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l589"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:589</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="method_hide" class="method item private inherited">
-                            <h3 class="name">hide
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-private">private</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#method_hide">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l504"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:504</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>Hide the tooltip/popover</p>
-                        
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="method_leave" class="method item private inherited">
-                            <h3 class="name">leave
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-private">private</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#method_leave">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l370"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:370</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>Called when a hide event has been received</p>
-                        
-                            </div>
-                        
-                                <div class="params">
-                                    <h4>Parameters:</h4>
-                        
-                                    <ul class="params-list">
-                                        <li class="param">
-                                                <code class="param-name">e</code>
-                                                <span class="type">Object</span>
-                        
-                        
-                                            <div class="param-description">
-                                                 
-                                            </div>
-                        
-                                        </li>
-                                    </ul>
-                                </div>
-                        
-                        
-                        </div>
-                        <div id="method_removeListeners" class="method item private inherited">
-                            <h3 class="name">removeListeners
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-private">private</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#method_removeListeners">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l569"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:569</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="method_replaceArrow" class="method item private inherited">
-                            <h3 class="name">replaceArrow
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-private">private</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#method_replaceArrow">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l489"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:489</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>Position the tooltip/popover's arrow</p>
-                        
-                            </div>
-                        
-                                <div class="params">
-                                    <h4>Parameters:</h4>
-                        
-                                    <ul class="params-list">
-                                        <li class="param">
-                                                <code class="param-name">delta</code>
-                                                <span class="type">Object</span>
-                        
-                        
-                                            <div class="param-description">
-                                                 
-                                            </div>
-                        
-                                        </li>
-                                        <li class="param">
-                                                <code class="param-name">dimension</code>
-                                                <span class="type">Object</span>
-                        
-                        
-                                            <div class="param-description">
-                                                 
-                                            </div>
-                        
-                                        </li>
-                                        <li class="param">
-                                                <code class="param-name">isVertical</code>
-                                                <span class="type">Object</span>
-                        
-                        
-                                            <div class="param-description">
-                                                 
-                                            </div>
-                        
-                                        </li>
-                                    </ul>
-                                </div>
-                        
-                        
-                        </div>
-                        <div id="method_show" class="method item private inherited">
-                            <h3 class="name">show
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-private">private</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#method_show">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l426"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:426</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>Show the tooltip/popover</p>
-                        
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="method_toggle" class="method item private inherited">
-                            <h3 class="name">toggle
-                            <span class="small"> </span>
-                            </h3>
-                        
-                        
-                        
-                                <span class="label label-private">private</span>
-                        
-                        
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#method_toggle">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l402"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:402</code></a>
-                                </p>
-                        
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>Called for a click event</p>
-                        
-                            </div>
-                        
-                                <div class="params">
-                                    <h4>Parameters:</h4>
-                        
-                                    <ul class="params-list">
-                                        <li class="param">
-                                                <code class="param-name">e</code>
-                                                <span class="type">Object</span>
-                        
-                        
-                                            <div class="param-description">
-                                                 
-                                            </div>
-                        
-                                        </li>
-                                    </ul>
-                                </div>
-                        
-                        
-                        </div>
-                    </div>
-            
-                    <div id="properties" class="tab-pane">
-                        <div id="property__renderInPlace"
-                             class="property item private inherited">
-                          <h3 class="name">_renderInPlace
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property__renderInPlace">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l264"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:264</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_arrowElement"
-                             class="property item private">
-                          <h3 class="name">arrowElement
-                            <span class="badge badge-secondary small">object</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
+          </div>
+
+
+          <div class="index-section events">
+            <h3>Events</h3>
+
+            <ul class="index-list events extends">
+                <li class="index-item event public inherited">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onHidden" data-tablink="onHidden">onHidden</a>
+
+                </li>
+                <li class="index-item event public inherited">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onHide" data-tablink="onHide">onHide</a>
+
+                </li>
+                <li class="index-item event public inherited">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onShow" data-tablink="onShow">onShow</a>
+
+                </li>
+                <li class="index-item event public inherited">
+                  <a href="#" data-tabid="#events" data-anchor="#event_onShown" data-tablink="onShown">onShown</a>
+
+                </li>
+            </ul>
+          </div>
+      </div>
+
+        <div id="methods" class="tab-pane">
+            <div id="method_addListeners" class="method item private inherited">
+                <h3 class="name">addListeners
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-private">private</span>
+            
+            
+            
+            
+            
+                <div class="meta">
                             <p>Inherited from
-                              <a href="../classes/Components.ContextualHelp.html#property_arrowElement">
-                                Components.ContextualHelp
-                              </a>
-                                but overwritten in
-                              <a href="../files/addon_components_base_bs-popover.js.html#l96"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover.js:96</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>The DOM element of the arrow element.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_autoPlacement"
-                             class="property item public inherited">
-                          <h3 class="name">autoPlacement
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> true</p>
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_autoPlacement">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l47"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:47</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>By default it will dynamically reorient the tooltip/popover based on the available space in the viewport. For
-                        example, if <code>placement</code> is &quot;left&quot;, the tooltip/popover will display to the left when possible, otherwise it will
-                        display right. Set to <code>false</code> to force placement according to the <code>placement</code> property</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_delay"
-                             class="property item public inherited">
-                          <h3 class="name">delay
-                            <span class="badge badge-secondary small">number</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> 0</p>
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_delay">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l96"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:96</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the
-                        <code>delayShow</code> and <code>delayHide</code> properties.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_delayHide"
-                             class="property item public inherited">
-                          <h3 class="name">delayHide
-                            <span class="badge badge-secondary small">number</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> 0</p>
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_delayHide">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l117"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:117</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Delay hiding the tooltip/popover. This property overrides the general delay set with the <code>delay</code> property.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_delayShow"
-                             class="property item public inherited">
-                          <h3 class="name">delayShow
-                            <span class="badge badge-secondary small">number</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> 0</p>
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_delayShow">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l107"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:107</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Delay showing the tooltip/popover. This property overrides the general delay set with the <code>delay</code> property.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_elementComponent"
-                             class="property item private">
-                          <h3 class="name">elementComponent
-                            <span class="badge badge-secondary small">{String}</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-popover.js.html#l89"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover.js:89</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_fade"
-                             class="property item public inherited">
-                          <h3 class="name">fade
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> true</p>
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_fade">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l76"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:76</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Set to false to disable fade animations.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_fastboot"
-                             class="property item private inherited">
-                          <h3 class="name">fastboot
-                            <span class="badge badge-secondary small">{Ember.Service}</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Mixins.TransitionSupport.html#property_fastboot">Mixins.TransitionSupport</a>:
-                              <a href="../files/addon_mixins_transition-support.js.html#l22"><code>addon&#x2F;mixins&#x2F;transition-support.js:22</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            Access to the fastboot service if available
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_hoverState"
-                             class="property item private inherited">
-                          <h3 class="name">hoverState
-                            <span class="badge badge-secondary small">string</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_hoverState">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l273"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:273</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Current hover state, 'in', 'out' or null</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_inDom"
-                             class="property item private inherited">
-                          <h3 class="name">inDom
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_inDom">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l69"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:69</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_inState"
-                             class="property item private inherited">
-                          <h3 class="name">inState
-                            <span class="badge badge-secondary small">{InState}</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_inState">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l282"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:282</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Current state for events</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_overlayElement"
-                             class="property item private inherited">
-                          <h3 class="name">overlayElement
-                            <span class="badge badge-secondary small">object</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_overlayElement">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l648"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:648</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>The DOM element of the overlay element.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_overlayId"
-                             class="property item private inherited">
-                          <h3 class="name">overlayId
-                            <span class="badge badge-secondary small">string</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_overlayId">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l164"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:164</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>The id of the overlay element.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_placement"
-                             class="property item public">
-                          <h3 class="name">placement
-                            <span class="badge badge-secondary small">string</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> &#x27;right&#x27;</p>
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-popover.js.html#l73"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover.js:73</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_renderInPlace"
-                             class="property item public inherited">
-                          <h3 class="name">renderInPlace
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> false</p>
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_renderInPlace">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l254"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:254</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>If true component will render in place, rather than be wormholed.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_showHelp"
-                             class="property item private inherited">
-                          <h3 class="name">showHelp
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> false</p>
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_showHelp">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l86"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:86</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Used to apply Bootstrap's visibility class</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_timer"
-                             class="property item private inherited">
-                          <h3 class="name">timer
-                            <span class="badge badge-secondary small">unknown</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_timer">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l293"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:293</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Ember.run timer</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_title"
-                             class="property item public inherited">
-                          <h3 class="name">title
-                            <span class="badge badge-secondary small">string</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                            <p>Inherited from
-                              <a href="../classes/Components.ContextualHelp.html#property_title">
-                                Components.ContextualHelp
-                              </a>
-                                but overwritten in
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l30"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:30</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_transitionDuration"
-                             class="property item public inherited">
-                          <h3 class="name">transitionDuration
-                            <span class="badge badge-secondary small">number</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> 150</p>
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_transitionDuration">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l130"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:130</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>The duration of the fade transition</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_transitionsEnabled"
-                             class="property item private inherited">
-                          <h3 class="name">transitionsEnabled
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Mixins.TransitionSupport.html#property_transitionsEnabled">Mixins.TransitionSupport</a>:
-                              <a href="../files/addon_mixins_transition-support.js.html#l15"><code>addon&#x2F;mixins&#x2F;transition-support.js:15</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_triggerElement"
-                             class="property item public inherited">
-                          <h3 class="name">triggerElement
-                            <span class="badge badge-secondary small">string</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_triggerElement">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l198"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:198</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.
-                        You can set this to any CSS selector to have any other element trigger the tooltip/popover.
-                        With the special value of &quot;parentView&quot; you can attach the tooltip/popover to the parent component's element.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_triggerEvents"
-                             class="property item public">
-                          <h3 class="name">triggerEvents
-                            <span class="badge badge-secondary small">array|string</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> &#x27;click&#x27;</p>
-                            <p>Inherited from
-                              <a href="../classes/Components.ContextualHelp.html#property_triggerEvents">
-                                Components.ContextualHelp
-                              </a>
-                                but overwritten in
-                              <a href="../files/addon_components_base_bs-popover.js.html#l81"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover.js:81</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_usesTransition"
-                             class="property item private inherited">
-                          <h3 class="name">usesTransition
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Mixins.TransitionSupport.html#property_usesTransition">Mixins.TransitionSupport</a>:
-                              <a href="../files/addon_mixins_transition-support.js.html#l34"><code>addon&#x2F;mixins&#x2F;transition-support.js:34</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            Use CSS transitions?
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_viewportElement"
-                             class="property item private inherited">
-                          <h3 class="name">viewportElement
-                            <span class="badge badge-secondary small">object</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_viewportElement">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l186"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:186</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>The DOM element of the viewport element.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_viewportPadding"
-                             class="property item public inherited">
-                          <h3 class="name">viewportPadding
-                            <span class="badge badge-secondary small">number</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> 0</p>
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_viewportPadding">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l152"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:152</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Take a padding into account for keeping the tooltip/popover within the bounds of the element given by <code>viewportSelector</code>.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_viewportSelector"
-                             class="property item public inherited">
-                          <h3 class="name">viewportSelector
-                            <span class="badge badge-secondary small">string</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> &#x27;body&#x27;</p>
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_viewportSelector">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l140"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:140</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>Keeps the tooltip/popover within the bounds of this element when <code>autoPlacement</code> is true. Can be any valid CSS selector.</p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                        <div id="property_visible"
-                             class="property item public inherited">
-                          <h3 class="name">visible
-                            <span class="badge badge-secondary small">boolean</span>
-                              <span class="badge badge-public small">public</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p><strong>Default:</strong> false</p>
-                              <p>Inherited from
-                                <a href="../classes/Components.ContextualHelp.html#property_visible">Components.ContextualHelp</a>:
-                              <a href="../files/addon_components_base_bs-contextual-help.js.html#l59"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:59</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            <p>You can programmatically show the tooltip/popover by setting this to <code>true</code></p>
-                        
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                    </div>
+                            <a href="../classes/Components.ContextualHelp.html#method_addListeners">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l548"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:548</code></a>
+                    </p>
             
             
-                    <div id="events" class="tab-pane">
-                        <div id="event_onHidden" class="events item public inherited">
-                            <h3 class="name"><code>onHidden</code></h3>
-                            <span class="type"></span>
-                        
-                        
-                                <span class="flag public">public</span>
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#event_onHidden">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l328"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:328</code></a>
-                                </p>
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).</p>
-                        
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="event_onHide" class="events item public inherited">
-                            <h3 class="name"><code>onHide</code></h3>
-                            <span class="type"></span>
-                        
-                        
-                                <span class="flag public">public</span>
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#event_onHide">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l319"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:319</code></a>
-                                </p>
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>This action is called immediately when the tooltip/popover is about to be hidden.</p>
-                        
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="event_onShow" class="events item public inherited">
-                            <h3 class="name"><code>onShow</code></h3>
-                            <span class="type"></span>
-                        
-                        
-                                <span class="flag public">public</span>
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#event_onShow">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l301"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:301</code></a>
-                                </p>
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>This action is called immediately when the tooltip/popover is about to be shown.</p>
-                        
-                            </div>
-                        
-                        
-                        
-                        </div>
-                        <div id="event_onShown" class="events item public inherited">
-                            <h3 class="name"><code>onShown</code></h3>
-                            <span class="type"></span>
-                        
-                        
-                                <span class="flag public">public</span>
-                        
-                        
-                        
-                            <div class="meta">
-                                        <p>Inherited from
-                                        <a href="../classes/Components.ContextualHelp.html#event_onShown">Components.ContextualHelp</a>:
-                                <a href="../files/addon_components_base_bs-contextual-help.js.html#l310"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:310</code></a>
-                                </p>
-                        
-                        
-                            </div>
-                        
-                            <div class="description">
-                                <p>This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).</p>
-                        
-                            </div>
-                        
-                        
-                        
-                        </div>
-                    </div>
+            
                 </div>
-              </div>
+            
+                <div class="description">
+                    
+                </div>
+            
+            
+            
             </div>
+            <div id="method_enter" class="method item private inherited">
+                <h3 class="name">enter
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-private">private</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#method_enter">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l335"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:335</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Called when a show event has been received</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Parameters:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">e</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+            
+            </div>
+            <div id="method_getTriggerTargetElement" class="method item private inherited">
+                <h3 class="name">getTriggerTargetElement
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-private">private</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#method_getTriggerTargetElement">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l207"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:207</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    
+                </div>
+            
+            
+            
+            </div>
+            <div id="method_handleTriggerEvent" class="method item private inherited">
+                <h3 class="name">handleTriggerEvent
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-private">private</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#method_handleTriggerEvent">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l587"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:587</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    
+                </div>
+            
+            
+            
+            </div>
+            <div id="method_hide" class="method item private inherited">
+                <h3 class="name">hide
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-private">private</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#method_hide">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l502"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:502</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Hide the tooltip/popover</p>
+            
+                </div>
+            
+            
+            
+            </div>
+            <div id="method_leave" class="method item private inherited">
+                <h3 class="name">leave
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-private">private</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#method_leave">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l368"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:368</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Called when a hide event has been received</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Parameters:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">e</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+            
+            </div>
+            <div id="method_removeListeners" class="method item private inherited">
+                <h3 class="name">removeListeners
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-private">private</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#method_removeListeners">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l567"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:567</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    
+                </div>
+            
+            
+            
+            </div>
+            <div id="method_replaceArrow" class="method item private inherited">
+                <h3 class="name">replaceArrow
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-private">private</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#method_replaceArrow">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l487"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:487</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Position the tooltip/popover's arrow</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Parameters:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">delta</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                            <li class="param">
+                                    <code class="param-name">dimension</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                            <li class="param">
+                                    <code class="param-name">isVertical</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+            
+            </div>
+            <div id="method_show" class="method item private inherited">
+                <h3 class="name">show
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-private">private</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#method_show">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l424"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:424</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Show the tooltip/popover</p>
+            
+                </div>
+            
+            
+            
+            </div>
+            <div id="method_toggle" class="method item private inherited">
+                <h3 class="name">toggle
+                <span class="small"> </span>
+                </h3>
+            
+            
+            
+                    <span class="label label-private">private</span>
+            
+            
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#method_toggle">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l400"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:400</code></a>
+                    </p>
+            
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>Called for a click event</p>
+            
+                </div>
+            
+                    <div class="params">
+                        <h4>Parameters:</h4>
+            
+                        <ul class="params-list">
+                            <li class="param">
+                                    <code class="param-name">e</code>
+                                    <span class="type">Object</span>
+            
+            
+                                <div class="param-description">
+                                     
+                                </div>
+            
+                            </li>
+                        </ul>
+                    </div>
+            
+            
+            </div>
+        </div>
+
+        <div id="properties" class="tab-pane">
+            <div id="property__renderInPlace"
+                 class="property item private inherited">
+              <h3 class="name">_renderInPlace
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property__renderInPlace">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l262"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:262</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_arrowElement"
+                 class="property item private">
+              <h3 class="name">arrowElement
+                <span class="badge badge-secondary small">object</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                <p>Inherited from
+                  <a href="../classes/Components.ContextualHelp.html#property_arrowElement">
+                    Components.ContextualHelp
+                  </a>
+                    but overwritten in
+                  <a href="../files/addon_components_base_bs-popover.js.html#l96"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover.js:96</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The DOM element of the arrow element.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_autoPlacement"
+                 class="property item public inherited">
+              <h3 class="name">autoPlacement
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> true</p>
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_autoPlacement">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l45"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:45</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>By default it will dynamically reorient the tooltip/popover based on the available space in the viewport. For
+            example, if <code>placement</code> is "left", the tooltip/popover will display to the left when possible, otherwise it will
+            display right. Set to <code>false</code> to force placement according to the <code>placement</code> property</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_delay"
+                 class="property item public inherited">
+              <h3 class="name">delay
+                <span class="badge badge-secondary small">number</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> 0</p>
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_delay">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l94"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:94</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the
+            <code>delayShow</code> and <code>delayHide</code> properties.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_delayHide"
+                 class="property item public inherited">
+              <h3 class="name">delayHide
+                <span class="badge badge-secondary small">number</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> 0</p>
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_delayHide">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l115"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:115</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Delay hiding the tooltip/popover. This property overrides the general delay set with the <code>delay</code> property.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_delayShow"
+                 class="property item public inherited">
+              <h3 class="name">delayShow
+                <span class="badge badge-secondary small">number</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> 0</p>
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_delayShow">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l105"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:105</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Delay showing the tooltip/popover. This property overrides the general delay set with the <code>delay</code> property.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_elementComponent"
+                 class="property item private">
+              <h3 class="name">elementComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-popover.js.html#l89"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover.js:89</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_fade"
+                 class="property item public inherited">
+              <h3 class="name">fade
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> true</p>
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_fade">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l74"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:74</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Set to false to disable fade animations.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_fastboot"
+                 class="property item private inherited">
+              <h3 class="name">fastboot
+                <span class="badge badge-secondary small">{Ember.Service}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Mixins.TransitionSupport.html#property_fastboot">Mixins.TransitionSupport</a>:
+                  <a href="../files/addon_mixins_transition-support.js.html#l22"><code>addon&#x2F;mixins&#x2F;transition-support.js:22</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                Access to the fastboot service if available
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_hoverState"
+                 class="property item private inherited">
+              <h3 class="name">hoverState
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_hoverState">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l271"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:271</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Current hover state, 'in', 'out' or null</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_inDom"
+                 class="property item private inherited">
+              <h3 class="name">inDom
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_inDom">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l67"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:67</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_inState"
+                 class="property item private inherited">
+              <h3 class="name">inState
+                <span class="badge badge-secondary small">{InState}</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_inState">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l280"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:280</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Current state for events</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_overlayElement"
+                 class="property item private inherited">
+              <h3 class="name">overlayElement
+                <span class="badge badge-secondary small">object</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_overlayElement">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l646"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:646</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The DOM element of the overlay element.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_overlayId"
+                 class="property item private inherited">
+              <h3 class="name">overlayId
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_overlayId">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l162"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:162</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The id of the overlay element.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_placement"
+                 class="property item public">
+              <h3 class="name">placement
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;right&#x27;</p>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-popover.js.html#l73"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover.js:73</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_renderInPlace"
+                 class="property item public inherited">
+              <h3 class="name">renderInPlace
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> false</p>
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_renderInPlace">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l252"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:252</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>If true component will render in place, rather than be wormholed.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_showHelp"
+                 class="property item private inherited">
+              <h3 class="name">showHelp
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> false</p>
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_showHelp">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l84"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:84</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Used to apply Bootstrap's visibility class</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_timer"
+                 class="property item private inherited">
+              <h3 class="name">timer
+                <span class="badge badge-secondary small">unknown</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_timer">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l291"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:291</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Ember.run timer</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_title"
+                 class="property item public inherited">
+              <h3 class="name">title
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                <p>Inherited from
+                  <a href="../classes/Components.ContextualHelp.html#property_title">
+                    Components.ContextualHelp
+                  </a>
+                    but overwritten in
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l29"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:29</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_transitionDuration"
+                 class="property item public inherited">
+              <h3 class="name">transitionDuration
+                <span class="badge badge-secondary small">number</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> 150</p>
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_transitionDuration">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l128"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:128</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The duration of the fade transition</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_transitionsEnabled"
+                 class="property item private inherited">
+              <h3 class="name">transitionsEnabled
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Mixins.TransitionSupport.html#property_transitionsEnabled">Mixins.TransitionSupport</a>:
+                  <a href="../files/addon_mixins_transition-support.js.html#l15"><code>addon&#x2F;mixins&#x2F;transition-support.js:15</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_triggerElement"
+                 class="property item public inherited">
+              <h3 class="name">triggerElement
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_triggerElement">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l196"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:196</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.
+            You can set this to any CSS selector to have any other element trigger the tooltip/popover.
+            With the special value of "parentView" you can attach the tooltip/popover to the parent component's element.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_triggerEvents"
+                 class="property item public">
+              <h3 class="name">triggerEvents
+                <span class="badge badge-secondary small">array|string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;click&#x27;</p>
+                <p>Inherited from
+                  <a href="../classes/Components.ContextualHelp.html#property_triggerEvents">
+                    Components.ContextualHelp
+                  </a>
+                    but overwritten in
+                  <a href="../files/addon_components_base_bs-popover.js.html#l81"><code>addon&#x2F;components&#x2F;base&#x2F;bs-popover.js:81</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_usesTransition"
+                 class="property item private inherited">
+              <h3 class="name">usesTransition
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Mixins.TransitionSupport.html#property_usesTransition">Mixins.TransitionSupport</a>:
+                  <a href="../files/addon_mixins_transition-support.js.html#l34"><code>addon&#x2F;mixins&#x2F;transition-support.js:34</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                Use CSS transitions?
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_viewportElement"
+                 class="property item private inherited">
+              <h3 class="name">viewportElement
+                <span class="badge badge-secondary small">object</span>
+                  <span class="badge badge-private small">private</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_viewportElement">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l184"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:184</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>The DOM element of the viewport element.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_viewportPadding"
+                 class="property item public inherited">
+              <h3 class="name">viewportPadding
+                <span class="badge badge-secondary small">number</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> 0</p>
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_viewportPadding">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l150"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:150</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Take a padding into account for keeping the tooltip/popover within the bounds of the element given by <code>viewportSelector</code>.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_viewportSelector"
+                 class="property item public inherited">
+              <h3 class="name">viewportSelector
+                <span class="badge badge-secondary small">string</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> &#x27;body&#x27;</p>
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_viewportSelector">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l138"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:138</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>Keeps the tooltip/popover within the bounds of this element when <code>autoPlacement</code> is true. Can be any valid CSS selector.</p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+            <div id="property_visible"
+                 class="property item public inherited">
+              <h3 class="name">visible
+                <span class="badge badge-secondary small">boolean</span>
+                  <span class="badge badge-public small">public</span>
+            
+            
+            
+            
+              </h3>
+            
+              <div class="meta">
+                  <p><strong>Default:</strong> false</p>
+                  <p>Inherited from
+                    <a href="../classes/Components.ContextualHelp.html#property_visible">Components.ContextualHelp</a>:
+                  <a href="../files/addon_components_base_bs-contextual-help.js.html#l57"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:57</code></a>
+              </p>
+            
+            
+              </div>
+            
+              <div class="description">
+                <p>You can programmatically show the tooltip/popover by setting this to <code>true</code></p>
+            
+              </div>
+            
+            
+            
+            
+            </div>
+        </div>
+
+
+        <div id="events" class="tab-pane">
+            <div id="event_onHidden" class="events item public inherited">
+                <h3 class="name"><code>onHidden</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#event_onHidden">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l326"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:326</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).</p>
+            
+                </div>
+            
+            
+            
+            </div>
+            <div id="event_onHide" class="events item public inherited">
+                <h3 class="name"><code>onHide</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#event_onHide">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l317"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:317</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>This action is called immediately when the tooltip/popover is about to be hidden.</p>
+            
+                </div>
+            
+            
+            
+            </div>
+            <div id="event_onShow" class="events item public inherited">
+                <h3 class="name"><code>onShow</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#event_onShow">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l299"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:299</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>This action is called immediately when the tooltip/popover is about to be shown.</p>
+            
+                </div>
+            
+            
+            
+            </div>
+            <div id="event_onShown" class="events item public inherited">
+                <h3 class="name"><code>onShown</code></h3>
+                <span class="type"></span>
+            
+            
+                    <span class="flag public">public</span>
+            
+            
+            
+                <div class="meta">
+                            <p>Inherited from
+                            <a href="../classes/Components.ContextualHelp.html#event_onShown">Components.ContextualHelp</a>:
+                    <a href="../files/addon_components_base_bs-contextual-help.js.html#l308"><code>addon&#x2F;components&#x2F;base&#x2F;bs-contextual-help.js:308</code></a>
+                    </p>
+            
+            
+                </div>
+            
+                <div class="description">
+                    <p>This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).</p>
+            
+                </div>
+            
+            
+            
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </div>
@@ -1788,6 +1788,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

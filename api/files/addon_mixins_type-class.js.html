@@ -52,60 +52,60 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/mixins/type-class.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import { computed } from &#x27;@ember/object&#x27;;
-            import Mixin from &#x27;@ember/object/mixin&#x27;;
-            
-            /**
-             * Mixin to set the appropriate class for components with differently styled types (&quot;success&quot;, &quot;danger&quot; etc.)
-             *
-             * @class TypeClass
-             * @namespace Mixins
-             * @private
-             */
-            export default Mixin.create({
-              /**
-               * Prefix for the type class, e.g. &quot;btn&quot; for button type classes (&quot;btn-primary2 etc.)
-               *
-               * @property classTypePrefix
-               * @type string
-               * @required
-               * @protected
-               */
-              classTypePrefix: null,
-            
-              classNameBindings: [&#x27;typeClass&#x27;],
-            
-              typeClass: computed(&#x27;type&#x27;, function() {
-                let prefix = this.get(&#x27;classTypePrefix&#x27;);
-                let type = this.get(&#x27;type&#x27;) || &#x27;default&#x27;;
-            
-                if (this.get(&#x27;outline&#x27;)) {
-                  return &#x60;${prefix}-outline-${type}&#x60;;
-                }
-                return &#x60;${prefix}-${type}&#x60;;
-              }),
-            
-              /**
-               * Property for type styling
-               *
-               * For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without &quot;btn-&quot; prefix)
-               *
-               * @property type
-               * @type String
-               * @default &#x27;default&#x27;
-               * @public
-               */
-              type: &#x27;default&#x27;
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/mixins/type-class.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { computed } from &#x27;@ember/object&#x27;;
+import Mixin from &#x27;@ember/object/mixin&#x27;;
+
+/**
+ * Mixin to set the appropriate class for components with differently styled types (&quot;success&quot;, &quot;danger&quot; etc.)
+ *
+ * @class TypeClass
+ * @namespace Mixins
+ * @private
+ */
+export default Mixin.create({
+  /**
+   * Prefix for the type class, e.g. &quot;btn&quot; for button type classes (&quot;btn-primary2 etc.)
+   *
+   * @property classTypePrefix
+   * @type string
+   * @required
+   * @protected
+   */
+  classTypePrefix: null,
+
+  classNameBindings: [&#x27;typeClass&#x27;],
+
+  typeClass: computed(&#x27;type&#x27;, function() {
+    let prefix = this.get(&#x27;classTypePrefix&#x27;);
+    let type = this.get(&#x27;type&#x27;) || &#x27;default&#x27;;
+
+    if (this.get(&#x27;outline&#x27;)) {
+      return &#x60;${prefix}-outline-${type}&#x60;;
+    }
+    return &#x60;${prefix}-${type}&#x60;;
+  }),
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without &quot;btn-&quot; prefix)
+   *
+   * @property type
+   * @type String
+   * @default &#x27;default&#x27;
+   * @public
+   */
+  type: &#x27;default&#x27;
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -167,6 +167,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

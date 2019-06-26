@@ -52,60 +52,60 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/mixins/transition-support.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import { reads } from &#x27;@ember/object/computed&#x27;;
-            import { getOwner } from &#x27;@ember/application&#x27;;
-            import Mixin from &#x27;@ember/object/mixin&#x27;;
-            import { computed } from &#x27;@ember/object&#x27;;
-            
-            /**
-             * Mixin for components that support transitions
-             *
-             * @class TransitionSupport
-             * @namespace Mixins
-             * @private
-             */
-            export default Mixin.create({
-            
-              /**
-               * @property transitionsEnabled
-               * @type boolean
-               * @private
-               */
-              transitionsEnabled: reads(&#x27;fade&#x27;),
-            
-              /**
-               * Access to the fastboot service if available
-               *
-               * @property fastboot
-               * @type {Ember.Service}
-               * @private
-               */
-              fastboot: computed(function() {
-                let owner = getOwner(this);
-                return owner.lookup(&#x27;service:fastboot&#x27;);
-              }),
-            
-              /**
-               * Use CSS transitions?
-               *
-               * @property usesTransition
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              usesTransition: computed(&#x27;fade&#x27;, &#x27;fastboot.isFastBoot&#x27;, function() {
-                return !this.get(&#x27;fastboot.isFastBoot&#x27;) &amp;&amp; this.get(&#x27;transitionsEnabled&#x27;);
-              })
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/mixins/transition-support.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { reads } from &#x27;@ember/object/computed&#x27;;
+import { getOwner } from &#x27;@ember/application&#x27;;
+import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+
+/**
+ * Mixin for components that support transitions
+ *
+ * @class TransitionSupport
+ * @namespace Mixins
+ * @private
+ */
+export default Mixin.create({
+
+  /**
+   * @property transitionsEnabled
+   * @type boolean
+   * @private
+   */
+  transitionsEnabled: reads(&#x27;fade&#x27;),
+
+  /**
+   * Access to the fastboot service if available
+   *
+   * @property fastboot
+   * @type {Ember.Service}
+   * @private
+   */
+  fastboot: computed(function() {
+    let owner = getOwner(this);
+    return owner.lookup(&#x27;service:fastboot&#x27;);
+  }),
+
+  /**
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  usesTransition: computed(&#x27;fade&#x27;, &#x27;fastboot.isFastBoot&#x27;, function() {
+    return !this.get(&#x27;fastboot.isFastBoot&#x27;) &amp;&amp; this.get(&#x27;transitionsEnabled&#x27;);
+  })
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -167,6 +167,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

@@ -52,57 +52,57 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/mixins/dropdown-toggle.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import Mixin from &#x27;@ember/object/mixin&#x27;;
-            import { schedule } from &#x27;@ember/runloop&#x27;;
-            
-            /**
-             * Mixin for components that act as dropdown toggles.
-             *
-             * @class DropdownToggle
-             * @namespace Mixins
-             * @private
-             */
-            export default Mixin.create({
-              classNames: [&#x27;dropdown-toggle&#x27;],
-            
-              /**
-               * @property ariaRole
-               * @default button
-               * @type string
-               * @protected
-               */
-              ariaRole: &#x27;button&#x27;,
-            
-              /**
-               * Reference to the parent dropdown component
-               *
-               * @property dropdown
-               * @type {Components.Dropdown}
-               * @private
-               */
-              dropdown: null,
-            
-              didReceiveAttrs() {
-                this._super(...arguments);
-                let dropdown = this.get(&#x27;dropdown&#x27;);
-                if (dropdown) {
-                  schedule(&#x27;actions&#x27;, this, function() {
-                    if (!this.get(&#x27;isDestroyed&#x27;)) {
-                      dropdown.set(&#x27;toggle&#x27;, this);
-                    }
-                  });
-                }
-              }
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/mixins/dropdown-toggle.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Mixin from &#x27;@ember/object/mixin&#x27;;
+import { schedule } from &#x27;@ember/runloop&#x27;;
+
+/**
+ * Mixin for components that act as dropdown toggles.
+ *
+ * @class DropdownToggle
+ * @namespace Mixins
+ * @private
+ */
+export default Mixin.create({
+  classNames: [&#x27;dropdown-toggle&#x27;],
+
+  /**
+   * @property ariaRole
+   * @default button
+   * @type string
+   * @protected
+   */
+  ariaRole: &#x27;button&#x27;,
+
+  /**
+   * Reference to the parent dropdown component
+   *
+   * @property dropdown
+   * @type {Components.Dropdown}
+   * @private
+   */
+  dropdown: null,
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+    let dropdown = this.get(&#x27;dropdown&#x27;);
+    if (dropdown) {
+      schedule(&#x27;actions&#x27;, this, function() {
+        if (!this.get(&#x27;isDestroyed&#x27;)) {
+          dropdown.set(&#x27;toggle&#x27;, this);
+        }
+      });
+    }
+  }
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -164,6 +164,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

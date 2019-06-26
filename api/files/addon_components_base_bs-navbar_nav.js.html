@@ -52,37 +52,37 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-navbar/nav.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import BsNavComponent from &#x27;ember-bootstrap/components/bs-nav&#x27;;
-            
-            /**
-             * Component for the &#x60;.nav&#x60; element within a [Components.Navbar](Components.Navbar.html)
-             * component. Have a look there for examples.
-             *
-             * Per [the bootstrap docs](http://getbootstrap.com/components/#navbar),
-             * justified navbar nav links are not supported.
-             *
-             * @class NavbarNav
-             * @namespace Components
-             * @extends Components.Nav
-             * @public
-             */
-            export default BsNavComponent.extend({
-              classNames: [&#x27;navbar-nav&#x27;],
-            
-              didReceiveAttrs() {
-                this._super(...arguments);
-                this.set(&#x27;justified&#x27;, false);
-              }
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-navbar/nav.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import BsNavComponent from &#x27;ember-bootstrap/components/bs-nav&#x27;;
+
+/**
+ * Component for the &#x60;.nav&#x60; element within a [Components.Navbar](Components.Navbar.html)
+ * component. Have a look there for examples.
+ *
+ * Per [the bootstrap docs](http://getbootstrap.com/components/#navbar),
+ * justified navbar nav links are not supported.
+ *
+ * @class NavbarNav
+ * @namespace Components
+ * @extends Components.Nav
+ * @public
+ */
+export default BsNavComponent.extend({
+  classNames: [&#x27;navbar-nav&#x27;],
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+    this.set(&#x27;justified&#x27;, false);
+  }
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -144,6 +144,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

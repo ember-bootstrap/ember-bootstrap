@@ -52,623 +52,623 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-carousel.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import CarouselSlide from &#x27;ember-bootstrap/components/bs-carousel/slide&#x27;;
-            import Component from &#x27;@ember/component&#x27;;
-            import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-carousel&#x27;;
-            import { computed, observer } from &#x27;@ember/object&#x27;;
-            import { filter, lte, gt, readOnly } from &#x27;@ember/object/computed&#x27;;
-            import { schedule, scheduleOnce } from &#x27;@ember/runloop&#x27;;
-            import { task, timeout } from &#x27;ember-concurrency&#x27;;
-            import RSVP from &#x27;rsvp&#x27;;
-            
-            /**
-              Ember implementation of Bootstrap&#x27;s Carousel. Supports all original features but API is partially different:
-            
-              | Description | Original | Component |
-              | ------ | ------ | ------ |
-              | Autoplays after first user event or on page load. | ride=&#x27;carousel&#x27;\|false | autoPlay=false\|true |
-              | Disable automatic cycle. | interval=false | interval=0 |
-              | If first slide should follow last slide on &quot;previous&quot; event, the opposite will also be true for &quot;next&quot; event. | wrap=false\|true | wrap=false\|true |
-              | Jumps into specific slide index | data-slide-to=n | index=n |
-              | Keyboard events. | keyboard=false\|true | keyboard=false\|true |
-              | Left-to-right or right-to-left sliding. | N/A |  ltr=false\|true |
-              | Pause current cycle on mouse enter. | pause=&#x27;hover&#x27;\|null | pauseOnMouseEnter=false\|true |
-              | Show or hide controls  | Tag manipulation. | showControls=false\|true |
-              | Show or hide indicators  | Tag manipulation. | showIndicators=false\|true |
-              | Waiting time of slides in a automatic cycle. | interval=n | interval=n |
-            
-              Default settings are the same as the original so you don&#x27;t have to worry about changing parameters.
-            
-             &#x60;&#x60;&#x60;hbs
-              {{#bs-carousel as |car|}}
-                {{#car.slide}}
-                  &lt;img alt=&quot;First slide&quot; src=&quot;slide1.jpg&quot;&gt;
-                {{/car.slide}}
-                {{#car.slide}}
-                  &lt;img alt=&quot;Second slide&quot; src=&quot;slide2.jpg&quot;&gt;
-                {{/car.slide}}
-                {{#car.slide}}
-                  &lt;img alt=&quot;Third slide&quot; src=&quot;slide3.jpg&quot;&gt;
-                {{/car.slide}}
-              {{/bs-carousel}}
-             &#x60;&#x60;&#x60;
-            
-              To better understand the whole documentation, you should be aware of the following operations:
-            
-              | Operation | Description |
-              | ------ | ------ |
-              | Transition | Swaps two slides. |
-              | Interval | Waiting time after a transition. |
-              | Presentation | Represents a single transition, or a single interval, or the union of both. |
-              | Cycle | Presents all slides until it reaches first or last slide. |
-              | Wrap | wrap slides, cycles without stopping at first or last slide. |
-              &#x60;&#x60;&#x60;
-            
-              @class Carousel
-              @namespace Components
-              @extends Ember.Component
-              @public
-             */
-            export default Component.extend(ComponentParent, {
-              attributeBindings: [&#x27;tabindex&#x27;],
-              classNames: [&#x27;carousel&#x27;, &#x27;slide&#x27;],
-              layout,
-              tabindex: &#x27;1&#x27;,
-            
-              /**
-               * @property slideComponent
-               * @type {String}
-               * @private
-               */
-              slideComponent: &#x27;bs-carousel/slide&#x27;,
-            
-              /**
-               * If a slide can turn to left, including corners.
-               *
-               * @private
-               * @property canTurnToLeft
-               */
-              canTurnToLeft: computed(&#x27;wrap&#x27;, &#x27;currentIndex&#x27;, function() {
-                return this.get(&#x27;wrap&#x27;) || this.get(&#x27;currentIndex&#x27;) &gt; 0;
-              }),
-            
-              /**
-               * If a slide can turn to right, including corners.
-               *
-               * @private
-               * @property canTurnToRight
-               */
-              canTurnToRight: computed(&#x27;childSlides.length&#x27;, &#x27;wrap&#x27;, &#x27;currentIndex&#x27;, function() {
-                return this.get(&#x27;wrap&#x27;) || this.get(&#x27;currentIndex&#x27;) &lt; this.get(&#x27;childSlides.length&#x27;) - 1;
-              }),
-            
-              /**
-               * All &#x60;CarouselSlide&#x60; child components.
-               *
-               * @private
-               * @property childSlides
-               * @readonly
-               * @type array
-               */
-              childSlides: filter(&#x27;children&#x27;, function(view) {
-                return view instanceof CarouselSlide;
-              }).readOnly(),
-            
-              /**
-               * This observer is the entry point for real time insertion and removing of slides.
-               *
-               * @private
-               * @property childSlidesObserver
-               */
-              childSlidesObserver: observer(&#x27;childSlides.[]&#x27;, &#x27;autoPlay&#x27;, function() {
-                scheduleOnce(&#x27;actions&#x27;, () =&gt; {
-                  let childSlides = this.get(&#x27;childSlides&#x27;);
-                  if (childSlides.length === 0) {
-                    return;
-                  }
-                  // Sets new current index
-                  let currentIndex = this.get(&#x27;currentIndex&#x27;);
-                  if (currentIndex &gt;= childSlides.length) {
-                    currentIndex = childSlides.length - 1;
-                    this.set(&#x27;currentIndex&#x27;, currentIndex);
-                  }
-                  // Automatic sliding
-                  if (this.get(&#x27;autoPlay&#x27;)) {
-                    this.get(&#x27;waitIntervalToInitCycle&#x27;).perform();
-                  }
-                  // Initial slide state
-                  this.set(&#x27;presentationState&#x27;, null);
-                });
-              }),
-            
-              /**
-               * Indicates the current index of the current slide.
-               *
-               * @property currentIndex
-               * @private
-               */
-              currentIndex: null,
-            
-              /**
-               * The current slide object that is going to be used by the nested slides components.
-               *
-               * @property currentSlide
-               * @private
-               *
-               */
-              currentSlide: computed(&#x27;childSlides&#x27;, &#x27;currentIndex&#x27;, function() {
-                return this.get(&#x27;childSlides&#x27;).objectAt(this.get(&#x27;currentIndex&#x27;));
-              }).readOnly(),
-            
-              /**
-               * Bootstrap style to indicate that a given slide should be moving to left/right.
-               *
-               * @property directionalClassName
-               * @private
-               * @type string
-               */
-              directionalClassName: null,
-            
-              /**
-               * Indicates the next slide index to move into.
-               *
-               * @property followingIndex
-               * @private
-               * @type number
-               */
-              followingIndex: null,
-            
-              /**
-               * The following slide object that is going to be used by the nested slides components.
-               *
-               * @property followingIndex
-               * @private
-               */
-              followingSlide: computed(&#x27;childSlides&#x27;, &#x27;followingIndex&#x27;, function() {
-                return this.get(&#x27;childSlides&#x27;).objectAt(this.get(&#x27;followingIndex&#x27;));
-              }).readOnly(),
-            
-              /**
-               * @private
-               * @property hasInterval
-               * @type boolean
-               */
-              hasInterval: gt(&#x27;interval&#x27;, 0).readOnly(),
-            
-              /**
-               * This observer is the entry point for programmatically slide changing.
-               *
-               * @property indexObserver
-               * @private
-               */
-              indexObserver: observer(&#x27;index&#x27;, function() {
-                this.send(&#x27;toSlide&#x27;, this.get(&#x27;index&#x27;));
-              }),
-            
-              /**
-               * @property indicators
-               * @private
-               */
-              indicators: computed(&#x27;childSlides.length&#x27;, function() {
-                return [...Array(this.get(&#x27;childSlides.length&#x27;))];
-              }),
-            
-              /**
-               * If user is hovering its cursor on component.
-               * This property is only manipulated when &#x27;pauseOnMouseEnter&#x27; is true.
-               *
-               * @property isMouseHovering
-               * @private
-               * @type boolean
-               */
-              isMouseHovering: false,
-            
-              /**
-               * The class name to append to the next control link element.
-               *
-               * @property nextControlClassName
-               * @type string
-               * @private
-               */
-              nextControlClassName: null,
-            
-              /**
-               * Bootstrap style to indicate the next/previous slide.
-               *
-               * @property orderClassName
-               * @private
-               * @type string
-               */
-              orderClassName: null,
-            
-              /**
-               * The current state of the current presentation, can be either &quot;didTransition&quot;
-               * or &quot;willTransit&quot;.
-               *
-               * @private
-               * @property presentationState
-               * @type string
-               */
-              presentationState: null,
-            
-              /**
-               * The class name to append to the previous control link element.
-               *
-               * @property prevControlClassName
-               * @type string
-               * @private
-               */
-              prevControlClassName: null,
-            
-              /**
-               * @private
-               * @property shouldNotDoPresentation
-               * @type boolean
-               */
-              shouldNotDoPresentation: lte(&#x27;childSlides.length&#x27;, 1),
-            
-              /**
-               * @private
-               * @property shouldRunAutomatically
-               * @type boolean
-               */
-              shouldRunAutomatically: readOnly(&#x27;hasInterval&#x27;),
-            
-              /**
-               * Starts automatic sliding on page load.
-               * This parameter has no effect if interval is less than or equal to zero.
-               *
-               * @default false
-               * @property autoPlay
-               * @public
-               * @type boolean
-               */
-              autoPlay: false,
-            
-              /**
-               * If false will hard stop on corners, i.e., first slide won&#x27;t make a transition to the
-               * last slide and vice versa.
-               *
-               * @default true
-               * @property wrap
-               * @public
-               * @type boolean
-               */
-              wrap: true,
-            
-              /**
-               * Index of starting slide.
-               *
-               * @default 0
-               * @property index
-               * @public
-               * @type number
-               */
-              index: 0,
-            
-              /**
-               * Waiting time before automatically show another slide.
-               * Automatic sliding is canceled if interval is less than or equal to zero.
-               *
-               * @default 5000
-               * @property interval
-               * @public
-               * @type number
-               */
-              interval: 5000,
-            
-              /**
-               * Should bind keyboard events into sliding.
-               *
-               * @default true
-               * @property keyboard
-               * @public
-               * @type boolean
-               */
-              keyboard: true,
-            
-              /**
-               * If automatic sliding should be left-to-right or right-to-left.
-               * This parameter has no effect if interval is less than or equal to zero.
-               *
-               * @default true
-               * @property ltr
-               * @public
-               * @type boolean
-               */
-              ltr: true,
-            
-              /**
-               * The next control icon to be displayed.
-               *
-               * @default null
-               * @property nextControlIcon
-               * @type string
-               * @public
-               */
-              nextControlIcon: null,
-            
-              /**
-               * Label for screen readers, defaults to &#x27;Next&#x27;.
-               *
-               * @default &#x27;Next&#x27;
-               * @property nextControlLabel
-               * @type string
-               * @public
-               */
-              nextControlLabel: &#x27;Next&#x27;,
-            
-              /**
-               * Pauses automatic sliding if mouse cursor is hovering the component.
-               * This parameter has no effect if interval is less than or equal to zero.
-               *
-               * @default true
-               * @property pauseOnMouseEnter
-               * @public
-               * @type boolean
-               */
-              pauseOnMouseEnter: true,
-            
-              /**
-               * The previous control icon to be displayed.
-               *
-               * @default null
-               * @property prevControlIcon
-               * @type string
-               * @public
-               */
-              prevControlIcon: null,
-            
-              /**
-               * Label for screen readers, defaults to &#x27;Previous&#x27;.
-               *
-               * @default &#x27;Previous&#x27;
-               * @property prevControlLabel
-               * @type string
-               * @public
-               */
-              prevControlLabel: &#x27;Previous&#x27;,
-            
-              /**
-               * Show or hide controls.
-               *
-               * @default true
-               * @property showControls
-               * @public
-               * @type boolean
-               */
-              showControls: true,
-            
-              /**
-               * Show or hide indicators.
-               *
-               * @default true
-               * @property showIndicators
-               * @public
-               * @type boolean
-               */
-              showIndicators: true,
-            
-              /**
-               * The duration of the slide transition.
-               * You should also change this parameter in Bootstrap CSS file.
-               *
-               * @default 600
-               * @property transitionDuration
-               * @public
-               * @type number
-               */
-              transitionDuration: 600,
-            
-              /**
-               * The type slide transition to perform.
-               * Options are &#x27;fade&#x27; or &#x27;slide&#x27;. Note: BS4 only
-               *
-               * @default &#x27;slide&#x27;
-               * @property transition
-               * @public
-               * @type string
-               */
-              transition: &#x27;slide&#x27;,
-            
-              /**
-               * Do a presentation and calls itself to perform a cycle.
-               *
-               * @method cycle
-               * @private
-               */
-              cycle: task(function* () {
-                yield this.get(&#x27;transitioner&#x27;).perform();
-                yield timeout(this.get(&#x27;interval&#x27;));
-                this.toAppropriateSlide();
-              }).restartable(),
-            
-              /**
-               * @method transitioner
-               * @private
-               */
-              transitioner: task(function* () {
-                this.set(&#x27;presentationState&#x27;, &#x27;willTransit&#x27;);
-                yield timeout(this.get(&#x27;transitionDuration&#x27;));
-                this.set(&#x27;presentationState&#x27;, &#x27;didTransition&#x27;);
-                // Must change current index after execution of &#x27;presentationStateObserver&#x27; method
-                // from child components.
-                yield new RSVP.Promise((resolve) =&gt; {
-                  schedule(&#x27;afterRender&#x27;, this, function() {
-                    this.set(&#x27;currentIndex&#x27;, this.get(&#x27;followingIndex&#x27;));
-                    resolve();
-                  });
-                });
-              }).drop(),
-            
-              /**
-               * Waits an interval time to start a cycle.
-               *
-               * @method waitIntervalToInitCycle
-               * @private
-               */
-              waitIntervalToInitCycle: task(function* () {
-                if (this.get(&#x27;shouldRunAutomatically&#x27;) === false) {
-                  return;
-                }
-                yield timeout(this.get(&#x27;interval&#x27;));
-                this.toAppropriateSlide();
-              }).restartable(),
-            
-              actions: {
-                toSlide(toIndex) {
-                  if (this.get(&#x27;currentIndex&#x27;) === toIndex || this.get(&#x27;shouldNotDoPresentation&#x27;)) {
-                    return;
-                  }
-                  this.assignClassNameControls(toIndex);
-                  this.setFollowingIndex(toIndex);
-                  if (this.get(&#x27;shouldRunAutomatically&#x27;) === false || this.get(&#x27;isMouseHovering&#x27;)) {
-                    this.get(&#x27;transitioner&#x27;).perform();
-                  } else {
-                    this.get(&#x27;cycle&#x27;).perform();
-                  }
-                },
-            
-                toNextSlide() {
-                  if (this.get(&#x27;canTurnToRight&#x27;)) {
-                    this.send(&#x27;toSlide&#x27;, this.get(&#x27;currentIndex&#x27;) + 1);
-                  }
-                },
-            
-                toPrevSlide() {
-                  if (this.get(&#x27;canTurnToLeft&#x27;)) {
-                    this.send(&#x27;toSlide&#x27;, this.get(&#x27;currentIndex&#x27;) - 1);
-                  }
-                }
-              },
-            
-              /**
-               * Indicates what class names should be applicable to the current transition slides.
-               *
-               * @method assignClassNameControls
-               * @private
-               */
-              assignClassNameControls(toIndex) {
-                if (toIndex &lt; this.get(&#x27;currentIndex&#x27;)) {
-                  this.set(&#x27;directionalClassName&#x27;, &#x27;right&#x27;);
-                  this.set(&#x27;orderClassName&#x27;, &#x27;prev&#x27;);
-                } else {
-                  this.set(&#x27;directionalClassName&#x27;, &#x27;left&#x27;);
-                  this.set(&#x27;orderClassName&#x27;, &#x27;next&#x27;);
-                }
-              },
-            
-              /**
-               * Initial page loading configuration.
-               */
-              didInsertElement() {
-                this._super(...arguments);
-                this.registerEvents();
-                this.triggerChildSlidesObserver();
-              },
-            
-              init() {
-                this._super(...arguments);
-                this.set(&#x27;currentIndex&#x27;, this.get(&#x27;index&#x27;));
-              },
-            
-              /**
-               * mouseEnter() and mouseLeave() doesn&#x27;t work with ember-native-dom-event-dispatcher.
-               *
-               * @method registerEvents
-               * @private
-               */
-              registerEvents() {
-                let self = this;
-                this.element.addEventListener(&#x27;mouseenter&#x27;, function() {
-                  if (self.get(&#x27;pauseOnMouseEnter&#x27;)) {
-                    self.set(&#x27;isMouseHovering&#x27;, true);
-                    self.get(&#x27;cycle&#x27;).cancelAll();
-                    self.get(&#x27;waitIntervalToInitCycle&#x27;).cancelAll();
-                  }
-                });
-                this.element.addEventListener(&#x27;mouseleave&#x27;, function() {
-                  if (
-                    self.get(&#x27;pauseOnMouseEnter&#x27;)
-                    &amp;&amp; (
-                      self.get(&#x27;transitioner.last&#x27;) !== null
-                      || self.get(&#x27;waitIntervalToInitCycle.last&#x27;) !== null
-                    )
-                  ) {
-                    self.set(&#x27;isMouseHovering&#x27;, false);
-                    self.get(&#x27;waitIntervalToInitCycle&#x27;).perform();
-                  }
-                });
-              },
-            
-              keyDown: function(e) {
-                let code = e.keyCode || e.which;
-                if (
-                  this.get(&#x27;keyboard&#x27;) === false
-                  || /input|textarea/i.test(e.target.tagName)
-                ) {
-                  return;
-                }
-                switch (code) {
-                  case 37:
-                    this.send(&#x27;toPrevSlide&#x27;);
-                    break;
-                  case 39:
-                    this.send(&#x27;toNextSlide&#x27;);
-                    break;
-                  default: break;
-                }
-              },
-            
-              /**
-               * Sets the following slide index within the lower and upper bounds.
-               *
-               * @method setFollowingIndex
-               * @private
-               */
-              setFollowingIndex(toIndex) {
-                let slidesLengthMinusOne = this.get(&#x27;childSlides&#x27;).length - 1;
-                if (toIndex &gt; slidesLengthMinusOne) {
-                  this.set(&#x27;followingIndex&#x27;, 0);
-                } else if (toIndex &lt; 0) {
-                  this.set(&#x27;followingIndex&#x27;, slidesLengthMinusOne);
-                } else {
-                  this.set(&#x27;followingIndex&#x27;, toIndex);
-                }
-              },
-            
-              /**
-               * Coordinates the correct slide movement direction.
-               *
-               * @method toAppropriateSlide
-               * @private
-               */
-              toAppropriateSlide() {
-                if (this.get(&#x27;ltr&#x27;)) {
-                  this.send(&#x27;toNextSlide&#x27;);
-                } else {
-                  this.send(&#x27;toPrevSlide&#x27;);
-                }
-              },
-            
-              /**
-               * @method triggerChildSlidesObserver
-               * @private
-               */
-              triggerChildSlidesObserver() {
-                this.get(&#x27;childSlides&#x27;);
-              }
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-carousel.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import CarouselSlide from &#x27;ember-bootstrap/components/bs-carousel/slide&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-carousel&#x27;;
+import { computed, observer } from &#x27;@ember/object&#x27;;
+import { filter, lte, gt, readOnly } from &#x27;@ember/object/computed&#x27;;
+import { schedule, scheduleOnce } from &#x27;@ember/runloop&#x27;;
+import { task, timeout } from &#x27;ember-concurrency&#x27;;
+import RSVP from &#x27;rsvp&#x27;;
+
+/**
+  Ember implementation of Bootstrap&#x27;s Carousel. Supports all original features but API is partially different:
+
+  | Description | Original | Component |
+  | ------ | ------ | ------ |
+  | Autoplays after first user event or on page load. | ride=&#x27;carousel&#x27;\|false | autoPlay=false\|true |
+  | Disable automatic cycle. | interval=false | interval=0 |
+  | If first slide should follow last slide on &quot;previous&quot; event, the opposite will also be true for &quot;next&quot; event. | wrap=false\|true | wrap=false\|true |
+  | Jumps into specific slide index | data-slide-to=n | index=n |
+  | Keyboard events. | keyboard=false\|true | keyboard=false\|true |
+  | Left-to-right or right-to-left sliding. | N/A |  ltr=false\|true |
+  | Pause current cycle on mouse enter. | pause=&#x27;hover&#x27;\|null | pauseOnMouseEnter=false\|true |
+  | Show or hide controls  | Tag manipulation. | showControls=false\|true |
+  | Show or hide indicators  | Tag manipulation. | showIndicators=false\|true |
+  | Waiting time of slides in a automatic cycle. | interval=n | interval=n |
+
+  Default settings are the same as the original so you don&#x27;t have to worry about changing parameters.
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsCarousel as |car|&gt;
+    &lt;car.slide&gt;
+      &lt;img alt=&quot;First slide&quot; src=&quot;slide1.jpg&quot;&gt;
+    &lt;/car.slide&gt;
+    &lt;car.slide&gt;
+      &lt;img alt=&quot;Second slide&quot; src=&quot;slide2.jpg&quot;&gt;
+    &lt;/car.slide&gt;
+    &lt;car.slide&gt;
+      &lt;img alt=&quot;Third slide&quot; src=&quot;slide3.jpg&quot;&gt;
+    &lt;/car.slide&gt;
+  &lt;/BsCarousel&gt;
+  &#x60;&#x60;&#x60;
+
+  To better understand the whole documentation, you should be aware of the following operations:
+
+  | Operation | Description |
+  | ------ | ------ |
+  | Transition | Swaps two slides. |
+  | Interval | Waiting time after a transition. |
+  | Presentation | Represents a single transition, or a single interval, or the union of both. |
+  | Cycle | Presents all slides until it reaches first or last slide. |
+  | Wrap | wrap slides, cycles without stopping at first or last slide. |
+  &#x60;&#x60;&#x60;
+
+  @class Carousel
+  @namespace Components
+  @extends Ember.Component
+  @public
+*/
+export default Component.extend(ComponentParent, {
+  attributeBindings: [&#x27;tabindex&#x27;],
+  classNames: [&#x27;carousel&#x27;, &#x27;slide&#x27;],
+  layout,
+  tabindex: &#x27;1&#x27;,
+
+  /**
+   * @property slideComponent
+   * @type {String}
+   * @private
+   */
+  slideComponent: &#x27;bs-carousel/slide&#x27;,
+
+  /**
+   * If a slide can turn to left, including corners.
+   *
+   * @private
+   * @property canTurnToLeft
+   */
+  canTurnToLeft: computed(&#x27;wrap&#x27;, &#x27;currentIndex&#x27;, function() {
+    return this.get(&#x27;wrap&#x27;) || this.get(&#x27;currentIndex&#x27;) &gt; 0;
+  }),
+
+  /**
+   * If a slide can turn to right, including corners.
+   *
+   * @private
+   * @property canTurnToRight
+   */
+  canTurnToRight: computed(&#x27;childSlides.length&#x27;, &#x27;wrap&#x27;, &#x27;currentIndex&#x27;, function() {
+    return this.get(&#x27;wrap&#x27;) || this.get(&#x27;currentIndex&#x27;) &lt; this.get(&#x27;childSlides.length&#x27;) - 1;
+  }),
+
+  /**
+   * All &#x60;CarouselSlide&#x60; child components.
+   *
+   * @private
+   * @property childSlides
+   * @readonly
+   * @type array
+   */
+  childSlides: filter(&#x27;children&#x27;, function(view) {
+    return view instanceof CarouselSlide;
+  }).readOnly(),
+
+  /**
+   * This observer is the entry point for real time insertion and removing of slides.
+   *
+   * @private
+   * @property childSlidesObserver
+   */
+  childSlidesObserver: observer(&#x27;childSlides.[]&#x27;, &#x27;autoPlay&#x27;, function() {
+    scheduleOnce(&#x27;actions&#x27;, () =&gt; {
+      let childSlides = this.get(&#x27;childSlides&#x27;);
+      if (childSlides.length === 0) {
+        return;
+      }
+      // Sets new current index
+      let currentIndex = this.get(&#x27;currentIndex&#x27;);
+      if (currentIndex &gt;= childSlides.length) {
+        currentIndex = childSlides.length - 1;
+        this.set(&#x27;currentIndex&#x27;, currentIndex);
+      }
+      // Automatic sliding
+      if (this.get(&#x27;autoPlay&#x27;)) {
+        this.get(&#x27;waitIntervalToInitCycle&#x27;).perform();
+      }
+      // Initial slide state
+      this.set(&#x27;presentationState&#x27;, null);
+    });
+  }),
+
+  /**
+   * Indicates the current index of the current slide.
+   *
+   * @property currentIndex
+   * @private
+   */
+  currentIndex: null,
+
+  /**
+   * The current slide object that is going to be used by the nested slides components.
+   *
+   * @property currentSlide
+   * @private
+   *
+   */
+  currentSlide: computed(&#x27;childSlides&#x27;, &#x27;currentIndex&#x27;, function() {
+    return this.get(&#x27;childSlides&#x27;).objectAt(this.get(&#x27;currentIndex&#x27;));
+  }).readOnly(),
+
+  /**
+   * Bootstrap style to indicate that a given slide should be moving to left/right.
+   *
+   * @property directionalClassName
+   * @private
+   * @type string
+   */
+  directionalClassName: null,
+
+  /**
+   * Indicates the next slide index to move into.
+   *
+   * @property followingIndex
+   * @private
+   * @type number
+   */
+  followingIndex: null,
+
+  /**
+   * The following slide object that is going to be used by the nested slides components.
+   *
+   * @property followingIndex
+   * @private
+   */
+  followingSlide: computed(&#x27;childSlides&#x27;, &#x27;followingIndex&#x27;, function() {
+    return this.get(&#x27;childSlides&#x27;).objectAt(this.get(&#x27;followingIndex&#x27;));
+  }).readOnly(),
+
+  /**
+   * @private
+   * @property hasInterval
+   * @type boolean
+   */
+  hasInterval: gt(&#x27;interval&#x27;, 0).readOnly(),
+
+  /**
+   * This observer is the entry point for programmatically slide changing.
+   *
+   * @property indexObserver
+   * @private
+   */
+  indexObserver: observer(&#x27;index&#x27;, function() {
+    this.send(&#x27;toSlide&#x27;, this.get(&#x27;index&#x27;));
+  }),
+
+  /**
+   * @property indicators
+   * @private
+   */
+  indicators: computed(&#x27;childSlides.length&#x27;, function() {
+    return [...Array(this.get(&#x27;childSlides.length&#x27;))];
+  }),
+
+  /**
+   * If user is hovering its cursor on component.
+   * This property is only manipulated when &#x27;pauseOnMouseEnter&#x27; is true.
+   *
+   * @property isMouseHovering
+   * @private
+   * @type boolean
+   */
+  isMouseHovering: false,
+
+  /**
+   * The class name to append to the next control link element.
+   *
+   * @property nextControlClassName
+   * @type string
+   * @private
+   */
+  nextControlClassName: null,
+
+  /**
+   * Bootstrap style to indicate the next/previous slide.
+   *
+   * @property orderClassName
+   * @private
+   * @type string
+   */
+  orderClassName: null,
+
+  /**
+   * The current state of the current presentation, can be either &quot;didTransition&quot;
+   * or &quot;willTransit&quot;.
+   *
+   * @private
+   * @property presentationState
+   * @type string
+   */
+  presentationState: null,
+
+  /**
+   * The class name to append to the previous control link element.
+   *
+   * @property prevControlClassName
+   * @type string
+   * @private
+   */
+  prevControlClassName: null,
+
+  /**
+   * @private
+   * @property shouldNotDoPresentation
+   * @type boolean
+   */
+  shouldNotDoPresentation: lte(&#x27;childSlides.length&#x27;, 1),
+
+  /**
+   * @private
+   * @property shouldRunAutomatically
+   * @type boolean
+   */
+  shouldRunAutomatically: readOnly(&#x27;hasInterval&#x27;),
+
+  /**
+   * Starts automatic sliding on page load.
+   * This parameter has no effect if interval is less than or equal to zero.
+   *
+   * @default false
+   * @property autoPlay
+   * @public
+   * @type boolean
+   */
+  autoPlay: false,
+
+  /**
+   * If false will hard stop on corners, i.e., first slide won&#x27;t make a transition to the
+   * last slide and vice versa.
+   *
+   * @default true
+   * @property wrap
+   * @public
+   * @type boolean
+   */
+  wrap: true,
+
+  /**
+   * Index of starting slide.
+   *
+   * @default 0
+   * @property index
+   * @public
+   * @type number
+   */
+  index: 0,
+
+  /**
+   * Waiting time before automatically show another slide.
+   * Automatic sliding is canceled if interval is less than or equal to zero.
+   *
+   * @default 5000
+   * @property interval
+   * @public
+   * @type number
+   */
+  interval: 5000,
+
+  /**
+   * Should bind keyboard events into sliding.
+   *
+   * @default true
+   * @property keyboard
+   * @public
+   * @type boolean
+   */
+  keyboard: true,
+
+  /**
+   * If automatic sliding should be left-to-right or right-to-left.
+   * This parameter has no effect if interval is less than or equal to zero.
+   *
+   * @default true
+   * @property ltr
+   * @public
+   * @type boolean
+   */
+  ltr: true,
+
+  /**
+   * The next control icon to be displayed.
+   *
+   * @default null
+   * @property nextControlIcon
+   * @type string
+   * @public
+   */
+  nextControlIcon: null,
+
+  /**
+   * Label for screen readers, defaults to &#x27;Next&#x27;.
+   *
+   * @default &#x27;Next&#x27;
+   * @property nextControlLabel
+   * @type string
+   * @public
+   */
+  nextControlLabel: &#x27;Next&#x27;,
+
+  /**
+   * Pauses automatic sliding if mouse cursor is hovering the component.
+   * This parameter has no effect if interval is less than or equal to zero.
+   *
+   * @default true
+   * @property pauseOnMouseEnter
+   * @public
+   * @type boolean
+   */
+  pauseOnMouseEnter: true,
+
+  /**
+   * The previous control icon to be displayed.
+   *
+   * @default null
+   * @property prevControlIcon
+   * @type string
+   * @public
+   */
+  prevControlIcon: null,
+
+  /**
+   * Label for screen readers, defaults to &#x27;Previous&#x27;.
+   *
+   * @default &#x27;Previous&#x27;
+   * @property prevControlLabel
+   * @type string
+   * @public
+   */
+  prevControlLabel: &#x27;Previous&#x27;,
+
+  /**
+   * Show or hide controls.
+   *
+   * @default true
+   * @property showControls
+   * @public
+   * @type boolean
+   */
+  showControls: true,
+
+  /**
+   * Show or hide indicators.
+   *
+   * @default true
+   * @property showIndicators
+   * @public
+   * @type boolean
+   */
+  showIndicators: true,
+
+  /**
+   * The duration of the slide transition.
+   * You should also change this parameter in Bootstrap CSS file.
+   *
+   * @default 600
+   * @property transitionDuration
+   * @public
+   * @type number
+   */
+  transitionDuration: 600,
+
+  /**
+   * The type slide transition to perform.
+   * Options are &#x27;fade&#x27; or &#x27;slide&#x27;. Note: BS4 only
+   *
+   * @default &#x27;slide&#x27;
+   * @property transition
+   * @public
+   * @type string
+   */
+  transition: &#x27;slide&#x27;,
+
+  /**
+   * Do a presentation and calls itself to perform a cycle.
+   *
+   * @method cycle
+   * @private
+   */
+  cycle: task(function* () {
+    yield this.get(&#x27;transitioner&#x27;).perform();
+    yield timeout(this.get(&#x27;interval&#x27;));
+    this.toAppropriateSlide();
+  }).restartable(),
+
+  /**
+   * @method transitioner
+   * @private
+   */
+  transitioner: task(function* () {
+    this.set(&#x27;presentationState&#x27;, &#x27;willTransit&#x27;);
+    yield timeout(this.get(&#x27;transitionDuration&#x27;));
+    this.set(&#x27;presentationState&#x27;, &#x27;didTransition&#x27;);
+    // Must change current index after execution of &#x27;presentationStateObserver&#x27; method
+    // from child components.
+    yield new RSVP.Promise((resolve) =&gt; {
+      schedule(&#x27;afterRender&#x27;, this, function() {
+        this.set(&#x27;currentIndex&#x27;, this.get(&#x27;followingIndex&#x27;));
+        resolve();
+      });
+    });
+  }).drop(),
+
+  /**
+   * Waits an interval time to start a cycle.
+   *
+   * @method waitIntervalToInitCycle
+   * @private
+   */
+  waitIntervalToInitCycle: task(function* () {
+    if (this.get(&#x27;shouldRunAutomatically&#x27;) === false) {
+      return;
+    }
+    yield timeout(this.get(&#x27;interval&#x27;));
+    this.toAppropriateSlide();
+  }).restartable(),
+
+  actions: {
+    toSlide(toIndex) {
+      if (this.get(&#x27;currentIndex&#x27;) === toIndex || this.get(&#x27;shouldNotDoPresentation&#x27;)) {
+        return;
+      }
+      this.assignClassNameControls(toIndex);
+      this.setFollowingIndex(toIndex);
+      if (this.get(&#x27;shouldRunAutomatically&#x27;) === false || this.get(&#x27;isMouseHovering&#x27;)) {
+        this.get(&#x27;transitioner&#x27;).perform();
+      } else {
+        this.get(&#x27;cycle&#x27;).perform();
+      }
+    },
+
+    toNextSlide() {
+      if (this.get(&#x27;canTurnToRight&#x27;)) {
+        this.send(&#x27;toSlide&#x27;, this.get(&#x27;currentIndex&#x27;) + 1);
+      }
+    },
+
+    toPrevSlide() {
+      if (this.get(&#x27;canTurnToLeft&#x27;)) {
+        this.send(&#x27;toSlide&#x27;, this.get(&#x27;currentIndex&#x27;) - 1);
+      }
+    }
+  },
+
+  /**
+   * Indicates what class names should be applicable to the current transition slides.
+   *
+   * @method assignClassNameControls
+   * @private
+   */
+  assignClassNameControls(toIndex) {
+    if (toIndex &lt; this.get(&#x27;currentIndex&#x27;)) {
+      this.set(&#x27;directionalClassName&#x27;, &#x27;right&#x27;);
+      this.set(&#x27;orderClassName&#x27;, &#x27;prev&#x27;);
+    } else {
+      this.set(&#x27;directionalClassName&#x27;, &#x27;left&#x27;);
+      this.set(&#x27;orderClassName&#x27;, &#x27;next&#x27;);
+    }
+  },
+
+  /**
+   * Initial page loading configuration.
+   */
+  didInsertElement() {
+    this._super(...arguments);
+    this.registerEvents();
+    this.triggerChildSlidesObserver();
+  },
+
+  init() {
+    this._super(...arguments);
+    this.set(&#x27;currentIndex&#x27;, this.get(&#x27;index&#x27;));
+  },
+
+  /**
+   * mouseEnter() and mouseLeave() doesn&#x27;t work with ember-native-dom-event-dispatcher.
+   *
+   * @method registerEvents
+   * @private
+   */
+  registerEvents() {
+    let self = this;
+    this.element.addEventListener(&#x27;mouseenter&#x27;, function() {
+      if (self.get(&#x27;pauseOnMouseEnter&#x27;)) {
+        self.set(&#x27;isMouseHovering&#x27;, true);
+        self.get(&#x27;cycle&#x27;).cancelAll();
+        self.get(&#x27;waitIntervalToInitCycle&#x27;).cancelAll();
+      }
+    });
+    this.element.addEventListener(&#x27;mouseleave&#x27;, function() {
+      if (
+        self.get(&#x27;pauseOnMouseEnter&#x27;)
+        &amp;&amp; (
+          self.get(&#x27;transitioner.last&#x27;) !== null
+          || self.get(&#x27;waitIntervalToInitCycle.last&#x27;) !== null
+        )
+      ) {
+        self.set(&#x27;isMouseHovering&#x27;, false);
+        self.get(&#x27;waitIntervalToInitCycle&#x27;).perform();
+      }
+    });
+  },
+
+  keyDown: function(e) {
+    let code = e.keyCode || e.which;
+    if (
+      this.get(&#x27;keyboard&#x27;) === false
+      || /input|textarea/i.test(e.target.tagName)
+    ) {
+      return;
+    }
+    switch (code) {
+      case 37:
+        this.send(&#x27;toPrevSlide&#x27;);
+        break;
+      case 39:
+        this.send(&#x27;toNextSlide&#x27;);
+        break;
+      default: break;
+    }
+  },
+
+  /**
+   * Sets the following slide index within the lower and upper bounds.
+   *
+   * @method setFollowingIndex
+   * @private
+   */
+  setFollowingIndex(toIndex) {
+    let slidesLengthMinusOne = this.get(&#x27;childSlides&#x27;).length - 1;
+    if (toIndex &gt; slidesLengthMinusOne) {
+      this.set(&#x27;followingIndex&#x27;, 0);
+    } else if (toIndex &lt; 0) {
+      this.set(&#x27;followingIndex&#x27;, slidesLengthMinusOne);
+    } else {
+      this.set(&#x27;followingIndex&#x27;, toIndex);
+    }
+  },
+
+  /**
+   * Coordinates the correct slide movement direction.
+   *
+   * @method toAppropriateSlide
+   * @private
+   */
+  toAppropriateSlide() {
+    if (this.get(&#x27;ltr&#x27;)) {
+      this.send(&#x27;toNextSlide&#x27;);
+    } else {
+      this.send(&#x27;toPrevSlide&#x27;);
+    }
+  },
+
+  /**
+   * @method triggerChildSlidesObserver
+   * @private
+   */
+  triggerChildSlidesObserver() {
+    this.get(&#x27;childSlides&#x27;);
+  }
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -730,6 +730,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

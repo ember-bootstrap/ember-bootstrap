@@ -52,223 +52,223 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-modal/dialog.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import { isBlank } from &#x27;@ember/utils&#x27;;
-            import Component from &#x27;@ember/component&#x27;;
-            import { computed } from &#x27;@ember/object&#x27;;
-            import { bind } from &#x27;@ember/runloop&#x27;;
-            import { readOnly } from &#x27;@ember/object/computed&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-modal/dialog&#x27;;
-            
-            /**
-              Internal component for modal&#x27;s markup and event handling. Should not be used directly.
-            
-              @class ModalDialog
-              @namespace Components
-              @extends Ember.Component
-              @private
-             */
-            export default Component.extend({
-              layout,
-              classNames: [&#x27;modal&#x27;],
-              classNameBindings: [&#x27;fade&#x27;],
-              attributeBindings: [&#x27;tabindex&#x27;, &#x27;aria-labelledby&#x27;],
-              ariaRole: &#x27;dialog&#x27;,
-              tabindex: &#x27;-1&#x27;,
-              &quot;aria-labelledby&quot;: readOnly(&#x27;titleId&#x27;),
-            
-              /**
-               * Set to false to disable fade animations.
-               *
-               * @property fade
-               * @type boolean
-               * @default true
-               * @public
-               */
-              fade: true,
-            
-              /**
-               * Used to apply Bootstrap&#x27;s visibility classes
-               *
-               * @property showModal
-               * @type boolean
-               * @default false
-               * @private
-               */
-              showModal: false,
-            
-              /**
-               * Render modal markup?
-               *
-               * @property inDom
-               * @type boolean
-               * @default false
-               * @private
-               */
-              inDom: false,
-            
-              /**
-               * @property paddingLeft
-               * @type number|null
-               * @default null
-               * @private
-               */
-              paddingLeft: null,
-            
-              /**
-               * @property paddingRight
-               * @type number|null
-               * @default null
-               * @private
-               */
-              paddingRight: null,
-            
-              /**
-               * Closes the modal when escape key is pressed.
-               *
-               * @property keyboard
-               * @type boolean
-               * @default true
-               * @public
-               */
-              keyboard: true,
-            
-              /**
-               * Property for size styling, set to null (default), &#x27;lg&#x27; or &#x27;sm&#x27;
-               *
-               * Also see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)
-               *
-               * @property size
-               * @type String
-               * @public
-               */
-              size: null,
-            
-              /**
-               * If true clicking on the backdrop will close the modal.
-               *
-               * @property backdropClose
-               * @type boolean
-               * @default true
-               * @public
-               */
-              backdropClose: true,
-            
-              /**
-               * Name of the size class
-               *
-               * @property sizeClass
-               * @type string
-               * @readOnly
-               * @private
-               */
-              sizeClass: computed(&#x27;size&#x27;, function() {
-                let size = this.get(&#x27;size&#x27;);
-                return isBlank(size) ? null : &#x60;modal-${size}&#x60;;
-              }).readOnly(),
-            
-            
-               /**
-               * The id of the &#x60;.modal-title&#x60; element
-               *
-               * @property titleId
-               * @type string
-               * @default null
-               * @private
-               */
-              titleId: null,
-            
-              /**
-               * Gets or sets the id of the title element for aria accessibility tags
-               *
-               * @method getSetTitleID
-               * @private
-               */
-              getOrSetTitleId() {
-                  //Title element may be set by user so we have to try and find it to set the id
-                  const modalNode = this.get(&#x27;element&#x27;);
-                  let nodeId = null;
-            
-                  if (modalNode) {
-                    const titleNode = modalNode.querySelector(&#x27;.modal-title&#x27;);
-                    if (titleNode) {
-                      //Get title id of .modal-title
-                      nodeId = titleNode.id
-                      if (!nodeId) {
-                        //no title id so we set one
-                        nodeId = &#x60;${this.get(&#x27;id&#x27;)}-title&#x60;;
-                        titleNode.id = nodeId;
-                      }
-                    }
-                  }
-                  this.set(&#x27;titleId&#x27;, nodeId)
-              },
-            
-              /**
-               * Update the elements styles using CSSOM.
-               *
-               * This is necessary cause binding style attribute would require a
-               * Content-Security-Policy &#x60;style-src &#x27;unsafe-line&#x27;&#x60;.
-               *
-               * @method updateStyle
-               * @return void
-               * @private
-               */
-              updateStyles() {
-                let { inDom, paddingLeft, paddingRight } = this.getProperties(&#x27;inDom&#x27;, &#x27;paddingLeft&#x27;, &#x27;paddingRight&#x27;);
-            
-                this.element.style.display = inDom ? &#x27;block&#x27; : &#x27;&#x27;;
-                this.element.style.paddingLeft = paddingLeft || &#x27;&#x27;;
-                this.element.style.paddingRight = paddingRight || &#x27;&#x27;;
-              },
-            
-              /**
-               * @event onClose
-               * @public
-               */
-              onClose() {},
-            
-              keyDown(e) {
-                let code = e.keyCode || e.which;
-                if (code === 27 &amp;&amp; this.get(&#x27;keyboard&#x27;)) {
-                  this.get(&#x27;onClose&#x27;)();
-                }
-              },
-            
-              _click(e) {
-                if (e.target !== this.element || !this.get(&#x27;backdropClose&#x27;)) {
-                  return;
-                }
-                this.get(&#x27;onClose&#x27;)();
-              },
-            
-              didInsertElement() {
-                this._super(...arguments);
-                // Ember events use event delegation, but we need to add an &#x60;onclick&#x60; handler directly on the modal element for
-                // iOS to allow clicking the div. So a &#x60;click(){}&#x60; method here won&#x27;t work, we need to attach an event listener
-                // directly to the element
-                this.element.onclick = bind(this, this._click);
-                this.getOrSetTitleId();
-                this.updateStyles();
-              },
-            
-              didUpdateAttrs() {
-                this.updateStyles();
-              },
-            
-              willDestroyElement() {
-                this.element.onclick = null;
-              }
-            
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-modal/dialog.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { isBlank } from &#x27;@ember/utils&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { bind } from &#x27;@ember/runloop&#x27;;
+import { readOnly } from &#x27;@ember/object/computed&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-modal/dialog&#x27;;
+
+/**
+  Internal component for modal&#x27;s markup and event handling. Should not be used directly.
+
+  @class ModalDialog
+  @namespace Components
+  @extends Ember.Component
+  @private
+ */
+export default Component.extend({
+  layout,
+  classNames: [&#x27;modal&#x27;],
+  classNameBindings: [&#x27;fade&#x27;],
+  attributeBindings: [&#x27;tabindex&#x27;, &#x27;aria-labelledby&#x27;],
+  ariaRole: &#x27;dialog&#x27;,
+  tabindex: &#x27;-1&#x27;,
+  &quot;aria-labelledby&quot;: readOnly(&#x27;titleId&#x27;),
+
+  /**
+   * Set to false to disable fade animations.
+   *
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  fade: true,
+
+  /**
+   * Used to apply Bootstrap&#x27;s visibility classes
+   *
+   * @property showModal
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showModal: false,
+
+  /**
+   * Render modal markup?
+   *
+   * @property inDom
+   * @type boolean
+   * @default false
+   * @private
+   */
+  inDom: false,
+
+  /**
+   * @property paddingLeft
+   * @type number|null
+   * @default null
+   * @private
+   */
+  paddingLeft: null,
+
+  /**
+   * @property paddingRight
+   * @type number|null
+   * @default null
+   * @private
+   */
+  paddingRight: null,
+
+  /**
+   * Closes the modal when escape key is pressed.
+   *
+   * @property keyboard
+   * @type boolean
+   * @default true
+   * @public
+   */
+  keyboard: true,
+
+  /**
+   * Property for size styling, set to null (default), &#x27;lg&#x27; or &#x27;sm&#x27;
+   *
+   * Also see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+
+  /**
+   * If true clicking on the backdrop will close the modal.
+   *
+   * @property backdropClose
+   * @type boolean
+   * @default true
+   * @public
+   */
+  backdropClose: true,
+
+  /**
+   * Name of the size class
+   *
+   * @property sizeClass
+   * @type string
+   * @readOnly
+   * @private
+   */
+  sizeClass: computed(&#x27;size&#x27;, function() {
+    let size = this.get(&#x27;size&#x27;);
+    return isBlank(size) ? null : &#x60;modal-${size}&#x60;;
+  }).readOnly(),
+
+
+   /**
+   * The id of the &#x60;.modal-title&#x60; element
+   *
+   * @property titleId
+   * @type string
+   * @default null
+   * @private
+   */
+  titleId: null,
+
+  /**
+   * Gets or sets the id of the title element for aria accessibility tags
+   *
+   * @method getSetTitleID
+   * @private
+   */
+  getOrSetTitleId() {
+      //Title element may be set by user so we have to try and find it to set the id
+      const modalNode = this.get(&#x27;element&#x27;);
+      let nodeId = null;
+
+      if (modalNode) {
+        const titleNode = modalNode.querySelector(&#x27;.modal-title&#x27;);
+        if (titleNode) {
+          //Get title id of .modal-title
+          nodeId = titleNode.id
+          if (!nodeId) {
+            //no title id so we set one
+            nodeId = &#x60;${this.get(&#x27;id&#x27;)}-title&#x60;;
+            titleNode.id = nodeId;
+          }
+        }
+      }
+      this.set(&#x27;titleId&#x27;, nodeId)
+  },
+
+  /**
+   * Update the elements styles using CSSOM.
+   *
+   * This is necessary cause binding style attribute would require a
+   * Content-Security-Policy &#x60;style-src &#x27;unsafe-line&#x27;&#x60;.
+   *
+   * @method updateStyle
+   * @return void
+   * @private
+   */
+  updateStyles() {
+    let { inDom, paddingLeft, paddingRight } = this.getProperties(&#x27;inDom&#x27;, &#x27;paddingLeft&#x27;, &#x27;paddingRight&#x27;);
+
+    this.element.style.display = inDom ? &#x27;block&#x27; : &#x27;&#x27;;
+    this.element.style.paddingLeft = paddingLeft || &#x27;&#x27;;
+    this.element.style.paddingRight = paddingRight || &#x27;&#x27;;
+  },
+
+  /**
+   * @event onClose
+   * @public
+   */
+  onClose() {},
+
+  keyDown(e) {
+    let code = e.keyCode || e.which;
+    if (code === 27 &amp;&amp; this.get(&#x27;keyboard&#x27;)) {
+      this.get(&#x27;onClose&#x27;)();
+    }
+  },
+
+  _click(e) {
+    if (e.target !== this.element || !this.get(&#x27;backdropClose&#x27;)) {
+      return;
+    }
+    this.get(&#x27;onClose&#x27;)();
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    // Ember events use event delegation, but we need to add an &#x60;onclick&#x60; handler directly on the modal element for
+    // iOS to allow clicking the div. So a &#x60;click(){}&#x60; method here won&#x27;t work, we need to attach an event listener
+    // directly to the element
+    this.element.onclick = bind(this, this._click);
+    this.getOrSetTitleId();
+    this.updateStyles();
+  },
+
+  didUpdateAttrs() {
+    this.updateStyles();
+  },
+
+  willDestroyElement() {
+    this.element.onclick = null;
+  }
+
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -330,6 +330,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

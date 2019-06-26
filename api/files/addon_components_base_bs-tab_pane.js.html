@@ -52,180 +52,180 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-tab/pane.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import Component from &#x27;@ember/component&#x27;;
-            import { computed, observer } from &#x27;@ember/object&#x27;;
-            import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-tab/pane&#x27;;
-            import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
-            import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
-            import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
-            
-            /**
-             The tab pane of a tab component.
-             See [Components.Tab](Components.Tab.html) for examples.
-            
-             @class TabPane
-             @namespace Components
-             @extends Ember.Component
-             @uses Mixins.ComponentChild
-             @public
-             */
-            export default Component.extend(ComponentChild, TransitionSupport, {
-              layout,
-              classNameBindings: [&#x27;active&#x27;, &#x27;usesTransition:fade&#x27;],
-              classNames: [&#x27;tab-pane&#x27;],
-              ariaRole: &#x27;tabpanel&#x27;,
-            
-              /**
-               * @property activeId
-               * @private
-               */
-              activeId: null,
-            
-              /**
-               * True if this pane is active (visible)
-               *
-               * @property isActive
-               * @type boolean
-               * @readonly
-               * @private
-               */
-              isActive: computed(&#x27;activeId&#x27;, &#x27;elementId&#x27;, function() {
-                return this.get(&#x27;activeId&#x27;) === this.get(&#x27;elementId&#x27;);
-              }).readOnly(),
-            
-              /**
-               * Used to apply Bootstrap&#x27;s &quot;active&quot; class
-               *
-               * @property active
-               * @type boolean
-               * @default false
-               * @private
-               */
-              active: false,
-            
-              /**
-               * Used to trigger the Bootstrap visibility classes.
-               *
-               * @property showContent
-               * @type boolean
-               * @default false
-               * @private
-               */
-              showContent: false,
-            
-              /**
-               * The title for this tab pane. This is used by the &#x60;bs-tab&#x60; component to automatically generate
-               * the tab navigation.
-               * See the [Components.Tab](Components.Tab.html) for examples.
-               *
-               * @property title
-               * @type string
-               * @default null
-               * @public
-               */
-              title: null,
-            
-              /**
-               * An optional group title used by the &#x60;bs-tab&#x60; component to group all panes with the same group title
-               * under a common drop down in the tab navigation.
-               * See the [Components.Tab](Components.Tab.html) for examples.
-               *
-               * @property groupTitle
-               * @type string
-               * @default null
-               * @public
-               */
-              groupTitle: null,
-            
-              /**
-               * Use fade animation when switching tabs.
-               *
-               * @property fade
-               * @type boolean
-               * @private
-               */
-              fade: true,
-            
-              /**
-               * The duration of the fade out animation
-               *
-               * @property fadeDuration
-               * @type integer
-               * @default 150
-               * @private
-               */
-              fadeDuration: 150,
-            
-              /**
-               * Show the pane
-               *
-               * @method show
-               * @protected
-               */
-              show() {
-                if (this.get(&#x27;usesTransition&#x27;)) {
-                  transitionEnd(this.get(&#x27;element&#x27;), this.get(&#x27;fadeDuration&#x27;))
-                    .then(() =&gt; {
-                      if (!this.get(&#x27;isDestroyed&#x27;)) {
-                        this.setProperties({
-                          active: true,
-                          showContent: true
-                        });
-                      }
-                    });
-                } else {
-                  this.set(&#x27;active&#x27;, true);
-                }
-              },
-            
-              /**
-               * Hide the pane
-               *
-               * @method hide
-               * @protected
-               */
-              hide() {
-                if (this.get(&#x27;usesTransition&#x27;)) {
-                  transitionEnd(this.get(&#x27;element&#x27;), this.get(&#x27;fadeDuration&#x27;))
-                    .then(() =&gt; {
-                      if (!this.get(&#x27;isDestroyed&#x27;)) {
-                        this.set(&#x27;active&#x27;, false);
-                      }
-                    });
-                  this.set(&#x27;showContent&#x27;, false);
-                } else {
-                  this.set(&#x27;active&#x27;, false);
-                }
-              },
-            
-              _showHide: observer(&#x27;isActive&#x27;, function() {
-                if (this.get(&#x27;isActive&#x27;)) {
-                  this.show();
-                } else {
-                  this.hide();
-                }
-              }),
-            
-              init() {
-                this._super(...arguments);
-                scheduleOnce(&#x27;afterRender&#x27;, this, function() {
-                  // isActive comes from parent component, so only available after render...
-                  this.set(&#x27;active&#x27;, this.get(&#x27;isActive&#x27;));
-                  this.set(&#x27;showContent&#x27;, this.get(&#x27;isActive&#x27;) &amp;&amp; this.get(&#x27;fade&#x27;));
-                });
-              }
-            
+<div class="page-header">
+    <h1>addon/components/base/bs-tab/pane.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Component from &#x27;@ember/component&#x27;;
+import { computed, observer } from &#x27;@ember/object&#x27;;
+import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-tab/pane&#x27;;
+import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
+import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
+import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
+
+/**
+ The tab pane of a tab component.
+ See [Components.Tab](Components.Tab.html) for examples.
+
+ @class TabPane
+ @namespace Components
+ @extends Ember.Component
+ @uses Mixins.ComponentChild
+ @public
+ */
+export default Component.extend(ComponentChild, TransitionSupport, {
+  layout,
+  classNameBindings: [&#x27;active&#x27;, &#x27;usesTransition:fade&#x27;],
+  classNames: [&#x27;tab-pane&#x27;],
+  ariaRole: &#x27;tabpanel&#x27;,
+
+  /**
+   * @property activeId
+   * @private
+   */
+  activeId: null,
+
+  /**
+   * True if this pane is active (visible)
+   *
+   * @property isActive
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  isActive: computed(&#x27;activeId&#x27;, &#x27;elementId&#x27;, function() {
+    return this.get(&#x27;activeId&#x27;) === this.get(&#x27;elementId&#x27;);
+  }).readOnly(),
+
+  /**
+   * Used to apply Bootstrap&#x27;s &quot;active&quot; class
+   *
+   * @property active
+   * @type boolean
+   * @default false
+   * @private
+   */
+  active: false,
+
+  /**
+   * Used to trigger the Bootstrap visibility classes.
+   *
+   * @property showContent
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showContent: false,
+
+  /**
+   * The title for this tab pane. This is used by the &#x60;bs-tab&#x60; component to automatically generate
+   * the tab navigation.
+   * See the [Components.Tab](Components.Tab.html) for examples.
+   *
+   * @property title
+   * @type string
+   * @default null
+   * @public
+   */
+  title: null,
+
+  /**
+   * An optional group title used by the &#x60;bs-tab&#x60; component to group all panes with the same group title
+   * under a common drop down in the tab navigation.
+   * See the [Components.Tab](Components.Tab.html) for examples.
+   *
+   * @property groupTitle
+   * @type string
+   * @default null
+   * @public
+   */
+  groupTitle: null,
+
+  /**
+   * Use fade animation when switching tabs.
+   *
+   * @property fade
+   * @type boolean
+   * @private
+   */
+  fade: true,
+
+  /**
+   * The duration of the fade out animation
+   *
+   * @property fadeDuration
+   * @type integer
+   * @default 150
+   * @private
+   */
+  fadeDuration: 150,
+
+  /**
+   * Show the pane
+   *
+   * @method show
+   * @protected
+   */
+  show() {
+    if (this.get(&#x27;usesTransition&#x27;)) {
+      transitionEnd(this.get(&#x27;element&#x27;), this.get(&#x27;fadeDuration&#x27;))
+        .then(() =&gt; {
+          if (!this.get(&#x27;isDestroyed&#x27;)) {
+            this.setProperties({
+              active: true,
+              showContent: true
             });
-            
-                </pre>
-            </div>
+          }
+        });
+    } else {
+      this.set(&#x27;active&#x27;, true);
+    }
+  },
+
+  /**
+   * Hide the pane
+   *
+   * @method hide
+   * @protected
+   */
+  hide() {
+    if (this.get(&#x27;usesTransition&#x27;)) {
+      transitionEnd(this.get(&#x27;element&#x27;), this.get(&#x27;fadeDuration&#x27;))
+        .then(() =&gt; {
+          if (!this.get(&#x27;isDestroyed&#x27;)) {
+            this.set(&#x27;active&#x27;, false);
+          }
+        });
+      this.set(&#x27;showContent&#x27;, false);
+    } else {
+      this.set(&#x27;active&#x27;, false);
+    }
+  },
+
+  _showHide: observer(&#x27;isActive&#x27;, function() {
+    if (this.get(&#x27;isActive&#x27;)) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }),
+
+  init() {
+    this._super(...arguments);
+    scheduleOnce(&#x27;afterRender&#x27;, this, function() {
+      // isActive comes from parent component, so only available after render...
+      this.set(&#x27;active&#x27;, this.get(&#x27;isActive&#x27;));
+      this.set(&#x27;showContent&#x27;, this.get(&#x27;isActive&#x27;) &amp;&amp; this.get(&#x27;fade&#x27;));
+    });
+  }
+
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -287,6 +287,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

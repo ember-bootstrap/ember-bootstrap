@@ -52,61 +52,59 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-accordion/item/title.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import Component from &#x27;@ember/component&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-accordion/title&#x27;;
-            
-            /**
-             Component for an accordion item title.
-            
-             See [Components.Accordion](Components.Accordion.html) for examples.
-            
-             @class AccordionTitle
-             @namespace Components
-             @extends Ember.Component
-             @public
-             */
-            export default Component.extend({
-              layout,
-              ariaRole: &#x27;tab&#x27;,
-              classNameBindings: [&#x27;collapsed:collapsed:expanded&#x27;],
-            
-              /**
-               * @property collapsed
-               * @type boolean
-               * @public
-               */
-              collapsed: null,
-            
-              /**
-               * @property disabled
-               * @type boolean
-               * @private
-               */
-              disabled: false,
-            
-              /**
-               * @event onClick
-               * @public
-               */
-              onClick() {},
-            
-              click(e) {
-                e.preventDefault();
-                if (!this.get(&#x27;disabled&#x27;)) {
-                  this.get(&#x27;onClick&#x27;)();
-                }
-              }
-            
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-accordion/item/title.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import Component from &#x27;@ember/component&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-accordion/title&#x27;;
+
+/**
+ Component for an accordion item title.
+
+ See [Components.Accordion](Components.Accordion.html) for examples.
+
+ @class AccordionTitle
+ @namespace Components
+ @extends Ember.Component
+ @public
+ */
+export default Component.extend({
+  layout,
+  ariaRole: &#x27;tab&#x27;,
+  classNameBindings: [&#x27;collapsed:collapsed:expanded&#x27;],
+
+  /**
+   * @property collapsed
+   * @type boolean
+   * @public
+   */
+
+  /**
+   * @property disabled
+   * @type boolean
+   * @private
+   */
+
+  /**
+   * @event onClick
+   * @public
+   */
+  onClick() {},
+
+  click(e) {
+    e.preventDefault();
+    if (!this.get(&#x27;disabled&#x27;)) {
+      this.get(&#x27;onClick&#x27;)();
+    }
+  }
+
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -168,6 +166,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

@@ -52,742 +52,744 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-modal.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import { not } from &#x27;@ember/object/computed&#x27;;
-            import { assert } from &#x27;@ember/debug&#x27;;
-            import Component from &#x27;@ember/component&#x27;;
-            import { getOwner } from &#x27;@ember/application&#x27;;
-            import { computed, get, observer } from &#x27;@ember/object&#x27;;
-            import { bind, next, schedule } from &#x27;@ember/runloop&#x27;;
-            import layout from &#x27;ember-bootstrap/templates/components/bs-modal&#x27;;
-            import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
-            import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
-            import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
-            import { findElementById, getDOM } from &#x27;../../utils/dom&#x27;;
-            
-            /**
-            
-             Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
-            
-             ### Usage
-            
-             &#x60;&#x60;&#x60;hbs
-             {{#bs-modal onSubmit=(action &quot;submit&quot;) as |modal|}}
-               {{#modal.header}}
-                 &lt;h4 class=&quot;modal-title&quot;&gt;&lt;i class=&quot;glyphicon glyphicon-alert&quot;&gt;&lt;/i&gt; Alert&lt;/h4&gt;
-               {{/modal.header}}
-               {{#modal.body}}Are you absolutely sure you want to do that???{{/modal.body}}
-               {{#modal.footer as |footer|}}
-                 {{#bs-button onClick=(action modal.close) type=&quot;danger&quot;}}Oh no, forget it!{{/bs-button}}
-                 {{#bs-button onClick=(action modal.submit) type=&quot;success&quot;}}Yeah!{{/bs-button}}
-               {{/modal.footer}}
-             {{/bs-modal}}
-             &#x60;&#x60;&#x60;
-            
-             The component yields references to the following contextual components, that you can use to further customize the output:
-            
-             * [modal.body](Components.ModalBody.html)
-             * [modal.header](Components.ModalHeader.html)
-             * [modal.footer](Components.ModalFooter.html)
-            
-             Furthermore references to the following actions are yielded:
-            
-             * &#x60;close&#x60;: triggers the &#x60;onHide&#x60; action and closes the modal
-             * &#x60;submit&#x60;: triggers the &#x60;onSubmit&#x60; action (or the submit event on a form if present in the body element)
-            
-             ### Further reading
-            
-             See the documentation of the [bs-modal-simple](Components.ModalSimple.html) component for further examples.
-            
-             @class Modal
-             @namespace Components
-             @extends Ember.Component
-             @uses Mixins.TransitionSupport
-             @public
-             */
-            let component = Component.extend(TransitionSupport, {
-              layout,
-            
-              /**
-               * Visibility of the modal. Toggle to show/hide with CSS transitions.
-               *
-               * When the modal is closed by user interaction this property will not update by using two-way bindings in order
-               * to follow DDAU best practices. If you want to react to such changes, subscribe to the &#x60;onHide&#x60; action
-               *
-               * @property open
-               * @type boolean
-               * @default true
-               * @public
-               */
-              open: true,
-            
-              /**
-               * @property isOpen
-               * @private
-               */
-              isOpen: listenTo(&#x27;open&#x27;),
-            
-              /**
-               * @property _isOpen
-               * @private
-               */
-              _isOpen: false,
-            
-              /**
-               * Set to false to disable fade animations.
-               *
-               * @property fade
-               * @type boolean
-               * @default true
-               * @public
-               */
-              fade: undefined,
-            
-              /**
-               * @property notFade
-               * @type boolean
-               * @private
-               */
-              notFade: not(&#x27;fade&#x27;),
-            
-              /**
-               * Used to apply Bootstrap&#x27;s visibility classes.
-               *
-               * @property showModal
-               * @type boolean
-               * @default false
-               * @private
-               */
-              showModal: false,
-            
-              /**
-               * Render modal markup?
-               *
-               * @property inDom
-               * @type boolean
-               * @default false
-               * @private
-               */
-              inDom: false,
-            
-              /**
-               * @property paddingLeft
-               * @type number|null
-               * @default null
-               * @private
-               */
-              paddingLeft: null,
-            
-              /**
-               * @property paddingRight
-               * @type number|null
-               * @default null
-               * @private
-               */
-              paddingRight: null,
-            
-              /**
-               * Use a semi-transparent modal background to hide the rest of the page.
-               *
-               * @property backdrop
-               * @type boolean
-               * @default true
-               * @public
-               */
-              backdrop: true,
-            
-              /**
-               * @property showBackdrop
-               * @type boolean
-               * @default false
-               * @private
-               */
-              showBackdrop: false,
-            
-              /**
-               * Closes the modal when escape key is pressed.
-               *
-               * @property keyboard
-               * @type boolean
-               * @default true
-               * @public
-               */
-              keyboard: true,
-            
-              /**
-               * [BS4 only!] Vertical position, either &#x27;top&#x27; (default) or &#x27;center&#x27;
-               * &#x27;center&#x27; will apply the &#x60;modal-dialog-centered&#x60; class
-               *
-               * @property position
-               * @type {string}
-               * @default &#x27;top&#x27;
-               * @public
-               */
-              position: &#x27;top&#x27;,
-            
-              /**
-               * @property dialogComponent
-               * @type {String}
-               * @private
-               */
-              dialogComponent: &#x27;bs-modal/dialog&#x27;,
-            
-              /**
-               * @property headerComponent
-               * @type {String}
-               * @private
-               */
-              headerComponent: &#x27;bs-modal/header&#x27;,
-            
-              /**
-               * @property bodyComponent
-               * @type {String}
-               * @private
-               */
-              bodyComponent: &#x27;bs-modal/body&#x27;,
-            
-              /**
-               * @property footerComponent
-               * @type {String}
-               * @private
-               */
-              footerComponent: &#x27;bs-modal/footer&#x27;,
-            
-              /**
-               * The id of the &#x60;.modal&#x60; element.
-               *
-               * @property modalId
-               * @type string
-               * @readonly
-               * @private
-               */
-              modalId: computed(&#x27;elementId&#x27;, function() {
-                return &#x60;${this.get(&#x27;elementId&#x27;)}-modal&#x60;;
-              }),
-            
-              /**
-               * The id of the backdrop element.
-               *
-               * @property backdropId
-               * @type string
-               * @readonly
-               * @private
-               */
-              backdropId: computed(&#x27;elementId&#x27;, function() {
-                return &#x60;${this.get(&#x27;elementId&#x27;)}-backdrop&#x60;;
-              }),
-            
-              /**
-               * Property for size styling, set to null (default), &#x27;lg&#x27; or &#x27;sm&#x27;
-               *
-               * Also see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)
-               *
-               * @property size
-               * @type String
-               * @public
-               */
-              size: null,
-            
-              /**
-               * If true clicking on the backdrop will close the modal.
-               *
-               * @property backdropClose
-               * @type boolean
-               * @default true
-               * @public
-               */
-              backdropClose: true,
-            
-              /**
-               * If true component will render in place, rather than be wormholed.
-               *
-               * @property renderInPlace
-               * @type boolean
-               * @default false
-               * @public
-               */
-              renderInPlace: false,
-            
-              /**
-               * @property _renderInPlace
-               * @type boolean
-               * @private
-               */
-              _renderInPlace: computed(&#x27;renderInPlace&#x27;, &#x27;destinationElement&#x27;, function() {
-                return this.get(&#x27;renderInPlace&#x27;) || !this.destinationElement;
-              }),
-            
-              /**
-               * The duration of the fade transition
-               *
-               * @property transitionDuration
-               * @type number
-               * @default 300
-               * @public
-               */
-              transitionDuration: 300,
-            
-              /**
-               * The duration of the backdrop fade transition
-               *
-               * @property backdropTransitionDuration
-               * @type number
-               * @default 150
-               * @public
-               */
-              backdropTransitionDuration: 150,
-            
-              /**
-               * @property isFastBoot
-               * @type {Boolean}
-               * @private
-               */
-              isFastBoot: computed(function() {
-                if (!getOwner) {
-                  // Ember.getOwner is available as of Ember 2.3, while FastBoot requires 2.4. So just return false...
-                  return false;
-                }
-            
-                let owner = getOwner(this);
-                if (!owner) {
-                  return false;
-                }
-            
-                let fastboot = owner.lookup(&#x27;service:fastboot&#x27;);
-                if (!fastboot) {
-                  return false;
-                }
-            
-                return get(fastboot, &#x27;isFastBoot&#x27;);
-              }),
-            
-              /**
-               * The action to be sent when the modal footer&#x27;s submit button (if present) is pressed.
-               * Note that if your modal body contains a form (e.g. [Components.Form](Components.Form.html)) this action will
-               * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
-               * example.
-               *
-               * @property onSubmit
-               * @type function
-               * @public
-               */
-              onSubmit() {
-              },
-            
-              /**
-               * The action to be sent when the modal is closing.
-               * This will be triggered by pressing the modal header&#x27;s close button (x button) or the modal footer&#x27;s close button.
-               * Note that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some
-               * time to finish. Use the &#x60;onHidden&#x60; if you need the modal to be hidden when the action triggers.
-               *
-               * You can return false to prevent closing the modal automatically, and do that in your action by
-               * setting &#x60;open&#x60; to false.
-               *
-               * @property onHide
-               * @type function
-               * @public
-               */
-              onHide() {
-              },
-            
-              /**
-               * The action to be sent after the modal has been completely hidden (including the CSS transition).
-               *
-               * @property onHidden
-               * @type function
-               * @default null
-               * @public
-               */
-              onHidden() {
-              },
-            
-              /**
-               * The action to be sent when the modal is opening.
-               * This will be triggered immediately after the modal is shown (so it&#x27;s safe to access the DOM for
-               * size calculations and the like). This means that if fade=true, it will be shown in between the
-               * backdrop animation and the fade animation.
-               *
-               * @property onShow
-               * @type function
-               * @default null
-               * @public
-               */
-              onShow() {
-              },
-            
-              /**
-               * The action to be sent after the modal has been completely shown (including the CSS transition).
-               *
-               * @property onShown
-               * @type function
-               * @public
-               */
-              onShown() {
-              },
-            
-              actions: {
-                close() {
-                  if (this.get(&#x27;onHide&#x27;)() !== false) {
-                    this.set(&#x27;isOpen&#x27;, false);
-                  }
-                },
-                submit() {
-                  // replace modalId by :scope selector if supported by all target browsers
-                  let modalId = this.get(&#x27;modalId&#x27;);
-                  let forms = this.get(&#x27;modalElement&#x27;).querySelectorAll(&#x60;#${modalId} .modal-body form&#x60;);
-                  if (forms.length &gt; 0) {
-                    // trigger submit event on body forms
-                    let event = document.createEvent(&#x27;Events&#x27;);
-                    event.initEvent(&#x27;submit&#x27;, true, true);
-                    Array.prototype.slice.call(forms).forEach((form) =&gt; form.dispatchEvent(event));
-                  } else {
-                    // if we have no form, we send a submit action
-                    this.get(&#x27;onSubmit&#x27;)();
-                  }
-                }
-              },
-            
-              /**
-               * Give the modal (or its autofocus element) focus
-               *
-               * @method takeFocus
-               * @private
-               */
-              takeFocus() {
-                let modalEl = this.get(&#x27;modalElement&#x27;);
-                let focusElement = modalEl &amp;&amp; modalEl.querySelector(&#x27;[autofocus]&#x27;);
-                if (!focusElement) {
-                  focusElement = modalEl;
-                }
-                if (focusElement) {
-                  focusElement.focus();
-                }
-              },
-            
-              /**
-               * Show the modal
-               *
-               * @method show
-               * @private
-               */
-              show() {
-                if (this._isOpen) {
-                  return;
-                }
-                this._isOpen = true;
-            
-                document.body.classList.add(&#x27;modal-open&#x27;);
-            
-                this.resize();
-            
-                let callback = () =&gt; {
-                  if (this.get(&#x27;isDestroyed&#x27;)) {
-                    return;
-                  }
-            
-                  this.checkScrollbar();
-                  this.setScrollbar();
-            
-                  schedule(&#x27;afterRender&#x27;, () =&gt; {
-                    let modalEl = this.get(&#x27;modalElement&#x27;);
-                    if (!modalEl) {
-                      return;
-                    }
-            
-                    modalEl.scrollTop = 0;
-                    this.handleUpdate();
-                    this.set(&#x27;showModal&#x27;, true);
-                    this.get(&#x27;onShow&#x27;)();
-            
-                    if (this.get(&#x27;usesTransition&#x27;)) {
-                      transitionEnd(this.get(&#x27;modalElement&#x27;), this.get(&#x27;transitionDuration&#x27;))
-                        .then(() =&gt; {
-                          this.takeFocus();
-                          this.get(&#x27;onShown&#x27;)();
-                        });
-                    } else {
-                      this.takeFocus();
-                      this.get(&#x27;onShown&#x27;)();
-                    }
-                  });
-                };
-                if (this.get(&#x27;inDom&#x27;) !== true) {
-                  this.set(&#x27;inDom&#x27;, true);
-                }
-                this.handleBackdrop(callback);
-              },
-            
-              /**
-               * Hide the modal
-               *
-               * @method hide
-               * @private
-               */
-              hide() {
-                if (!this._isOpen) {
-                  return;
-                }
-                this._isOpen = false;
-            
-                this.resize();
-                this.set(&#x27;showModal&#x27;, false);
-            
-                if (this.get(&#x27;usesTransition&#x27;)) {
-                  transitionEnd(this.get(&#x27;modalElement&#x27;), this.get(&#x27;transitionDuration&#x27;))
-                    .then(() =&gt; this.hideModal());
-                } else {
-                  this.hideModal();
-                }
-              },
-            
-              /**
-               * Clean up after modal is hidden and call onHidden
-               *
-               * @method hideModal
-               * @private
-               */
-              hideModal() {
-                if (this.get(&#x27;isDestroyed&#x27;)) {
-                  return;
-                }
-            
-                this.handleBackdrop(() =&gt; {
-                  document.body.classList.remove(&#x27;modal-open&#x27;);
-                  this.resetAdjustments();
-                  this.resetScrollbar();
-                  this.set(&#x27;inDom&#x27;, false);
-                  this.get(&#x27;onHidden&#x27;)();
-                });
-              },
-            
-              /**
-               * SHow/hide the backdrop
-               *
-               * @method handleBackdrop
-               * @param callback
-               * @private
-               */
-              handleBackdrop(callback) {
-                let doAnimate = this.get(&#x27;usesTransition&#x27;);
-            
-                if (this.get(&#x27;isOpen&#x27;) &amp;&amp; this.get(&#x27;backdrop&#x27;)) {
-                  this.set(&#x27;showBackdrop&#x27;, true);
-            
-                  if (!callback) {
-                    return;
-                  }
-            
-                  schedule(&#x27;afterRender&#x27;, this, function() {
-                    let backdrop = this.get(&#x27;backdropElement&#x27;);
-                    assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
-                    if (doAnimate) {
-                      transitionEnd(backdrop, this.get(&#x27;backdropTransitionDuration&#x27;))
-                        .then(callback);
-                    } else {
-                      callback();
-                    }
-                  });
-            
-                } else if (!this.get(&#x27;isOpen&#x27;) &amp;&amp; this.get(&#x27;backdrop&#x27;)) {
-                  let backdrop = this.get(&#x27;backdropElement&#x27;);
-                  assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
-            
-                  let callbackRemove = () =&gt; {
-                    if (this.get(&#x27;isDestroyed&#x27;)) {
-                      return;
-                    }
-                    this.set(&#x27;showBackdrop&#x27;, false);
-                    if (callback) {
-                      callback.call(this);
-                    }
-                  };
-                  if (doAnimate) {
-                    transitionEnd(backdrop, this.get(&#x27;backdropTransitionDuration&#x27;))
-                      .then(callbackRemove);
-                  } else {
-                    callbackRemove();
-                  }
-                } else if (callback) {
-                  next(this, callback);
-                }
-              },
-            
-              /**
-               * Attach/Detach resize event listeners
-               *
-               * @method resize
-               * @private
-               */
-              resize() {
-                if (this.get(&#x27;isOpen&#x27;)) {
-                  this._handleUpdate = bind(this, this.handleUpdate);
-                  window.addEventListener(&#x27;resize&#x27;, this._handleUpdate, false);
-                } else {
-                  window.removeEventListener(&#x27;resize&#x27;, this._handleUpdate, false);
-                }
-              },
-            
-              /**
-               * @method handleUpdate
-               * @private
-               */
-              handleUpdate() {
-                this.adjustDialog();
-              },
-            
-              /**
-               * @method adjustDialog
-               * @private
-               */
-              adjustDialog() {
-                let modalIsOverflowing = this.get(&#x27;modalElement&#x27;).scrollHeight &gt; document.documentElement.clientHeight;
-                this.setProperties({
-                  paddingLeft: !this.bodyIsOverflowing &amp;&amp; modalIsOverflowing ? this.get(&#x27;scrollbarWidth&#x27;) : null,
-                  paddingRight: this.bodyIsOverflowing &amp;&amp; !modalIsOverflowing ? this.get(&#x27;scrollbarWidth&#x27;) : null
-                });
-              },
-            
-              /**
-               * @method resetAdjustments
-               * @private
-               */
-              resetAdjustments() {
-                this.setProperties({
-                  paddingLeft: null,
-                  paddingRight: null
-                });
-              },
-            
-              /**
-               * @method checkScrollbar
-               * @private
-               */
-              checkScrollbar() {
-                let fullWindowWidth = window.innerWidth;
-                if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
-                  let documentElementRect = document.documentElement.getBoundingClientRect();
-                  fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
-                }
-            
-                this.bodyIsOverflowing = document.body.clientWidth &lt; fullWindowWidth;
-              },
-            
-              /**
-               * @method setScrollbar
-               * @private
-               */
-              setScrollbar() {
-                let bodyPad = parseInt((document.body.style.paddingRight || 0), 10);
-                this._originalBodyPad = document.body.style.paddingRight || &#x27;&#x27;;
-                if (this.bodyIsOverflowing) {
-                  document.body.style.paddingRight = bodyPad + this.get(&#x27;scrollbarWidth&#x27;);
-                }
-              },
-            
-              /**
-               * @method resetScrollbar
-               * @private
-               */
-              resetScrollbar() {
-                document.body.style.paddingRight = this._originalBodyPad;
-              },
-            
-              /**
-               * @property scrollbarWidth
-               * @type number
-               * @readonly
-               * @private
-               */
-              scrollbarWidth: computed(function() {
-                let scrollDiv = document.createElement(&#x27;div&#x27;);
-                scrollDiv.className = &#x27;modal-scrollbar-measure&#x27;;
-                let modalEl = this.get(&#x27;modalElement&#x27;);
-                modalEl.parentNode.insertBefore(scrollDiv, modalEl.nextSibling);
-                let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-                scrollDiv.parentNode.removeChild(scrollDiv);
-                return scrollbarWidth;
-              }),
-            
-              didInsertElement() {
-                this._super(...arguments);
-                if (this.get(&#x27;isOpen&#x27;)) {
-                  this.show();
-                }
-              },
-            
-              willDestroyElement() {
-                this._super(...arguments);
-                window.removeEventListener(&#x27;resize&#x27;, this._handleUpdate, false);
-                document.body.classList.remove(&#x27;modal-open&#x27;);
-                this.resetScrollbar();
-              },
-            
-              _observeOpen: observer(&#x27;isOpen&#x27;, function() {
-                if (this.get(&#x27;isOpen&#x27;)) {
-                  this.show();
-                } else {
-                  this.hide();
-                }
-              }),
-            
-              init() {
-                this._super(...arguments);
-                let { isOpen, backdrop, fade, isFastBoot } = this.getProperties(&#x27;isOpen&#x27;, &#x27;backdrop&#x27;, &#x27;fade&#x27;, &#x27;isFastBoot&#x27;);
-                if (fade === undefined) {
-                  fade = !isFastBoot;
-                }
-                let dom = getDOM(this);
-                let destinationElement = findElementById(dom, &#x27;ember-bootstrap-wormhole&#x27;);
-                this.setProperties({
-                  showModal: isOpen &amp;&amp; (!fade || isFastBoot),
-                  showBackdrop: isOpen &amp;&amp; backdrop,
-                  inDom: isOpen,
-                  fade,
-                  destinationElement
-                });
-              }
+<div class="page-header">
+    <h1>addon/components/base/bs-modal.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import { not } from &#x27;@ember/object/computed&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { getOwner } from &#x27;@ember/application&#x27;;
+import { computed, get, observer } from &#x27;@ember/object&#x27;;
+import { bind, next, schedule } from &#x27;@ember/runloop&#x27;;
+import layout from &#x27;ember-bootstrap/templates/components/bs-modal&#x27;;
+import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
+import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
+import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
+import { findElementById, getDOM } from &#x27;../../utils/dom&#x27;;
+
+/**
+  Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
+
+  ### Usage
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsModal @onSubmit={{action &quot;submit&quot;}} as |Modal|&gt;
+    &lt;Modal.header&gt;
+      &lt;h4 class=&quot;modal-title&quot;&gt;&lt;i class=&quot;glyphicon glyphicon-alert&quot;&gt;&lt;/i&gt; Alert&lt;/h4&gt;
+    &lt;/Modal.header&gt;
+    &lt;Modal.body&gt;
+      Are you absolutely sure you want to do that???
+    &lt;/Modal.body&gt;
+    &lt;Modal.footer as |footer|&gt;
+      &lt;BsButton @onClick={{action Modal.close}} @type=&quot;danger&quot;&gt;Oh no, forget it!&lt;/BsButton&gt;
+      &lt;BsButton @onClick={{action Modal.submit}} @type=&quot;success&quot;&gt;Yeah!&lt;/BsButton&gt;
+    &lt;/Modal.footer&gt;
+  &lt;/BsModal&gt;
+  &#x60;&#x60;&#x60;
+
+  The component yields references to the following contextual components, that you can use to further customize the output:
+
+  * [modal.body](Components.ModalBody.html)
+  * [modal.header](Components.ModalHeader.html)
+  * [modal.footer](Components.ModalFooter.html)
+
+  Furthermore references to the following actions are yielded:
+
+  * &#x60;close&#x60;: triggers the &#x60;onHide&#x60; action and closes the modal
+  * &#x60;submit&#x60;: triggers the &#x60;onSubmit&#x60; action (or the submit event on a form if present in the body element)
+
+  ### Further reading
+
+  See the documentation of the [bs-modal-simple](Components.ModalSimple.html) component for further examples.
+
+  @class Modal
+  @namespace Components
+  @extends Ember.Component
+  @uses Mixins.TransitionSupport
+  @public
+*/
+let component = Component.extend(TransitionSupport, {
+  layout,
+  tagName: &#x27;&#x27;,
+
+  /**
+   * Visibility of the modal. Toggle to show/hide with CSS transitions.
+   *
+   * When the modal is closed by user interaction this property will not update by using two-way bindings in order
+   * to follow DDAU best practices. If you want to react to such changes, subscribe to the &#x60;onHide&#x60; action
+   *
+   * @property open
+   * @type boolean
+   * @default true
+   * @public
+   */
+  open: true,
+
+  /**
+   * @property isOpen
+   * @private
+   */
+  isOpen: listenTo(&#x27;open&#x27;),
+
+  /**
+   * @property _isOpen
+   * @private
+   */
+  _isOpen: false,
+
+  /**
+   * Set to false to disable fade animations.
+   *
+   * @property fade
+   * @type boolean
+   * @default true
+   * @public
+   */
+  fade: undefined,
+
+  /**
+   * @property notFade
+   * @type boolean
+   * @private
+   */
+  notFade: not(&#x27;fade&#x27;),
+
+  /**
+   * Used to apply Bootstrap&#x27;s visibility classes.
+   *
+   * @property showModal
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showModal: false,
+
+  /**
+   * Render modal markup?
+   *
+   * @property inDom
+   * @type boolean
+   * @default false
+   * @private
+   */
+  inDom: false,
+
+  /**
+   * @property paddingLeft
+   * @type number|null
+   * @default null
+   * @private
+   */
+  paddingLeft: null,
+
+  /**
+   * @property paddingRight
+   * @type number|null
+   * @default null
+   * @private
+   */
+  paddingRight: null,
+
+  /**
+   * Use a semi-transparent modal background to hide the rest of the page.
+   *
+   * @property backdrop
+   * @type boolean
+   * @default true
+   * @public
+   */
+  backdrop: true,
+
+  /**
+   * @property showBackdrop
+   * @type boolean
+   * @default false
+   * @private
+   */
+  showBackdrop: false,
+
+  /**
+   * Closes the modal when escape key is pressed.
+   *
+   * @property keyboard
+   * @type boolean
+   * @default true
+   * @public
+   */
+  keyboard: true,
+
+  /**
+   * [BS4 only!] Vertical position, either &#x27;top&#x27; (default) or &#x27;center&#x27;
+   * &#x27;center&#x27; will apply the &#x60;modal-dialog-centered&#x60; class
+   *
+   * @property position
+   * @type {string}
+   * @default &#x27;top&#x27;
+   * @public
+   */
+  position: &#x27;top&#x27;,
+
+  /**
+   * @property dialogComponent
+   * @type {String}
+   * @private
+   */
+  dialogComponent: &#x27;bs-modal/dialog&#x27;,
+
+  /**
+   * @property headerComponent
+   * @type {String}
+   * @private
+   */
+  headerComponent: &#x27;bs-modal/header&#x27;,
+
+  /**
+   * @property bodyComponent
+   * @type {String}
+   * @private
+   */
+  bodyComponent: &#x27;bs-modal/body&#x27;,
+
+  /**
+   * @property footerComponent
+   * @type {String}
+   * @private
+   */
+  footerComponent: &#x27;bs-modal/footer&#x27;,
+
+  /**
+   * The id of the &#x60;.modal&#x60; element.
+   *
+   * @property modalId
+   * @type string
+   * @readonly
+   * @private
+   */
+  modalId: computed(&#x27;elementId&#x27;, function() {
+    return &#x60;${this.get(&#x27;elementId&#x27;)}-modal&#x60;;
+  }),
+
+  /**
+   * The id of the backdrop element.
+   *
+   * @property backdropId
+   * @type string
+   * @readonly
+   * @private
+   */
+  backdropId: computed(&#x27;elementId&#x27;, function() {
+    return &#x60;${this.get(&#x27;elementId&#x27;)}-backdrop&#x60;;
+  }),
+
+  /**
+   * Property for size styling, set to null (default), &#x27;lg&#x27; or &#x27;sm&#x27;
+   *
+   * Also see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+
+  /**
+   * If true clicking on the backdrop will close the modal.
+   *
+   * @property backdropClose
+   * @type boolean
+   * @default true
+   * @public
+   */
+  backdropClose: true,
+
+  /**
+   * If true component will render in place, rather than be wormholed.
+   *
+   * @property renderInPlace
+   * @type boolean
+   * @default false
+   * @public
+   */
+  renderInPlace: false,
+
+  /**
+   * @property _renderInPlace
+   * @type boolean
+   * @private
+   */
+  _renderInPlace: computed(&#x27;renderInPlace&#x27;, &#x27;destinationElement&#x27;, function() {
+    return this.get(&#x27;renderInPlace&#x27;) || !this.destinationElement;
+  }),
+
+  /**
+   * The duration of the fade transition
+   *
+   * @property transitionDuration
+   * @type number
+   * @default 300
+   * @public
+   */
+  transitionDuration: 300,
+
+  /**
+   * The duration of the backdrop fade transition
+   *
+   * @property backdropTransitionDuration
+   * @type number
+   * @default 150
+   * @public
+   */
+  backdropTransitionDuration: 150,
+
+  /**
+   * @property isFastBoot
+   * @type {Boolean}
+   * @private
+   */
+  isFastBoot: computed(function() {
+    if (!getOwner) {
+      // Ember.getOwner is available as of Ember 2.3, while FastBoot requires 2.4. So just return false...
+      return false;
+    }
+
+    let owner = getOwner(this);
+    if (!owner) {
+      return false;
+    }
+
+    let fastboot = owner.lookup(&#x27;service:fastboot&#x27;);
+    if (!fastboot) {
+      return false;
+    }
+
+    return get(fastboot, &#x27;isFastBoot&#x27;);
+  }),
+
+  /**
+   * The action to be sent when the modal footer&#x27;s submit button (if present) is pressed.
+   * Note that if your modal body contains a form (e.g. [Components.Form](Components.Form.html)) this action will
+   * not be triggered. Instead a submit event will be triggered on the form itself. See the class description for an
+   * example.
+   *
+   * @property onSubmit
+   * @type function
+   * @public
+   */
+  onSubmit() {
+  },
+
+  /**
+   * The action to be sent when the modal is closing.
+   * This will be triggered by pressing the modal header&#x27;s close button (x button) or the modal footer&#x27;s close button.
+   * Note that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some
+   * time to finish. Use the &#x60;onHidden&#x60; if you need the modal to be hidden when the action triggers.
+   *
+   * You can return false to prevent closing the modal automatically, and do that in your action by
+   * setting &#x60;open&#x60; to false.
+   *
+   * @property onHide
+   * @type function
+   * @public
+   */
+  onHide() {
+  },
+
+  /**
+   * The action to be sent after the modal has been completely hidden (including the CSS transition).
+   *
+   * @property onHidden
+   * @type function
+   * @default null
+   * @public
+   */
+  onHidden() {
+  },
+
+  /**
+   * The action to be sent when the modal is opening.
+   * This will be triggered immediately after the modal is shown (so it&#x27;s safe to access the DOM for
+   * size calculations and the like). This means that if fade=true, it will be shown in between the
+   * backdrop animation and the fade animation.
+   *
+   * @property onShow
+   * @type function
+   * @default null
+   * @public
+   */
+  onShow() {
+  },
+
+  /**
+   * The action to be sent after the modal has been completely shown (including the CSS transition).
+   *
+   * @property onShown
+   * @type function
+   * @public
+   */
+  onShown() {
+  },
+
+  actions: {
+    close() {
+      if (this.get(&#x27;onHide&#x27;)() !== false) {
+        this.set(&#x27;isOpen&#x27;, false);
+      }
+    },
+    submit() {
+      // replace modalId by :scope selector if supported by all target browsers
+      let modalId = this.get(&#x27;modalId&#x27;);
+      let forms = this.get(&#x27;modalElement&#x27;).querySelectorAll(&#x60;#${modalId} .modal-body form&#x60;);
+      if (forms.length &gt; 0) {
+        // trigger submit event on body forms
+        let event = document.createEvent(&#x27;Events&#x27;);
+        event.initEvent(&#x27;submit&#x27;, true, true);
+        Array.prototype.slice.call(forms).forEach((form) =&gt; form.dispatchEvent(event));
+      } else {
+        // if we have no form, we send a submit action
+        this.get(&#x27;onSubmit&#x27;)();
+      }
+    }
+  },
+
+  /**
+   * Give the modal (or its autofocus element) focus
+   *
+   * @method takeFocus
+   * @private
+   */
+  takeFocus() {
+    let modalEl = this.get(&#x27;modalElement&#x27;);
+    let focusElement = modalEl &amp;&amp; modalEl.querySelector(&#x27;[autofocus]&#x27;);
+    if (!focusElement) {
+      focusElement = modalEl;
+    }
+    if (focusElement) {
+      focusElement.focus();
+    }
+  },
+
+  /**
+   * Show the modal
+   *
+   * @method show
+   * @private
+   */
+  show() {
+    if (this._isOpen) {
+      return;
+    }
+    this._isOpen = true;
+
+    document.body.classList.add(&#x27;modal-open&#x27;);
+
+    this.resize();
+
+    let callback = () =&gt; {
+      if (this.get(&#x27;isDestroyed&#x27;)) {
+        return;
+      }
+
+      this.checkScrollbar();
+      this.setScrollbar();
+
+      schedule(&#x27;afterRender&#x27;, () =&gt; {
+        let modalEl = this.get(&#x27;modalElement&#x27;);
+        if (!modalEl) {
+          return;
+        }
+
+        modalEl.scrollTop = 0;
+        this.handleUpdate();
+        this.set(&#x27;showModal&#x27;, true);
+        this.get(&#x27;onShow&#x27;)();
+
+        if (this.get(&#x27;usesTransition&#x27;)) {
+          transitionEnd(this.get(&#x27;modalElement&#x27;), this.get(&#x27;transitionDuration&#x27;))
+            .then(() =&gt; {
+              this.takeFocus();
+              this.get(&#x27;onShown&#x27;)();
             });
-            
-            Object.defineProperties(component.prototype, {
-            
-              /**
-               * The DOM element of the &#x60;.modal&#x60; element.
-               *
-               * @property modalElement
-               * @type object
-               * @readonly
-               * @private
-               */
-              modalElement: {
-                get() {
-                  return document.getElementById(this.get(&#x27;modalId&#x27;));
-                }
-              },
-            
-              /**
-               * The DOM element of the backdrop element.
-               *
-               * @property backdropElement
-               * @type object
-               * @readonly
-               * @private
-               */
-              backdropElement: {
-                get() {
-                  return document.getElementById(this.get(&#x27;backdropId&#x27;));
-                }
-              }
-            });
-            
-            export default component;
-            
-                </pre>
-            </div>
+        } else {
+          this.takeFocus();
+          this.get(&#x27;onShown&#x27;)();
+        }
+      });
+    };
+    if (this.get(&#x27;inDom&#x27;) !== true) {
+      this.set(&#x27;inDom&#x27;, true);
+    }
+    this.handleBackdrop(callback);
+  },
+
+  /**
+   * Hide the modal
+   *
+   * @method hide
+   * @private
+   */
+  hide() {
+    if (!this._isOpen) {
+      return;
+    }
+    this._isOpen = false;
+
+    this.resize();
+    this.set(&#x27;showModal&#x27;, false);
+
+    if (this.get(&#x27;usesTransition&#x27;)) {
+      transitionEnd(this.get(&#x27;modalElement&#x27;), this.get(&#x27;transitionDuration&#x27;))
+        .then(() =&gt; this.hideModal());
+    } else {
+      this.hideModal();
+    }
+  },
+
+  /**
+   * Clean up after modal is hidden and call onHidden
+   *
+   * @method hideModal
+   * @private
+   */
+  hideModal() {
+    if (this.get(&#x27;isDestroyed&#x27;)) {
+      return;
+    }
+
+    this.handleBackdrop(() =&gt; {
+      document.body.classList.remove(&#x27;modal-open&#x27;);
+      this.resetAdjustments();
+      this.resetScrollbar();
+      this.set(&#x27;inDom&#x27;, false);
+      this.get(&#x27;onHidden&#x27;)();
+    });
+  },
+
+  /**
+   * SHow/hide the backdrop
+   *
+   * @method handleBackdrop
+   * @param callback
+   * @private
+   */
+  handleBackdrop(callback) {
+    let doAnimate = this.get(&#x27;usesTransition&#x27;);
+
+    if (this.get(&#x27;isOpen&#x27;) &amp;&amp; this.get(&#x27;backdrop&#x27;)) {
+      this.set(&#x27;showBackdrop&#x27;, true);
+
+      if (!callback) {
+        return;
+      }
+
+      schedule(&#x27;afterRender&#x27;, this, function() {
+        let backdrop = this.get(&#x27;backdropElement&#x27;);
+        assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
+        if (doAnimate) {
+          transitionEnd(backdrop, this.get(&#x27;backdropTransitionDuration&#x27;))
+            .then(callback);
+        } else {
+          callback();
+        }
+      });
+
+    } else if (!this.get(&#x27;isOpen&#x27;) &amp;&amp; this.get(&#x27;backdrop&#x27;)) {
+      let backdrop = this.get(&#x27;backdropElement&#x27;);
+      assert(&#x27;Backdrop element should be in DOM&#x27;, backdrop);
+
+      let callbackRemove = () =&gt; {
+        if (this.get(&#x27;isDestroyed&#x27;)) {
+          return;
+        }
+        this.set(&#x27;showBackdrop&#x27;, false);
+        if (callback) {
+          callback.call(this);
+        }
+      };
+      if (doAnimate) {
+        transitionEnd(backdrop, this.get(&#x27;backdropTransitionDuration&#x27;))
+          .then(callbackRemove);
+      } else {
+        callbackRemove();
+      }
+    } else if (callback) {
+      next(this, callback);
+    }
+  },
+
+  /**
+   * Attach/Detach resize event listeners
+   *
+   * @method resize
+   * @private
+   */
+  resize() {
+    if (this.get(&#x27;isOpen&#x27;)) {
+      this._handleUpdate = bind(this, this.handleUpdate);
+      window.addEventListener(&#x27;resize&#x27;, this._handleUpdate, false);
+    } else {
+      window.removeEventListener(&#x27;resize&#x27;, this._handleUpdate, false);
+    }
+  },
+
+  /**
+   * @method handleUpdate
+   * @private
+   */
+  handleUpdate() {
+    this.adjustDialog();
+  },
+
+  /**
+   * @method adjustDialog
+   * @private
+   */
+  adjustDialog() {
+    let modalIsOverflowing = this.get(&#x27;modalElement&#x27;).scrollHeight &gt; document.documentElement.clientHeight;
+    this.setProperties({
+      paddingLeft: !this.bodyIsOverflowing &amp;&amp; modalIsOverflowing ? this.get(&#x27;scrollbarWidth&#x27;) : null,
+      paddingRight: this.bodyIsOverflowing &amp;&amp; !modalIsOverflowing ? this.get(&#x27;scrollbarWidth&#x27;) : null
+    });
+  },
+
+  /**
+   * @method resetAdjustments
+   * @private
+   */
+  resetAdjustments() {
+    this.setProperties({
+      paddingLeft: null,
+      paddingRight: null
+    });
+  },
+
+  /**
+   * @method checkScrollbar
+   * @private
+   */
+  checkScrollbar() {
+    let fullWindowWidth = window.innerWidth;
+    if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
+      let documentElementRect = document.documentElement.getBoundingClientRect();
+      fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
+    }
+
+    this.bodyIsOverflowing = document.body.clientWidth &lt; fullWindowWidth;
+  },
+
+  /**
+   * @method setScrollbar
+   * @private
+   */
+  setScrollbar() {
+    let bodyPad = parseInt((document.body.style.paddingRight || 0), 10);
+    this._originalBodyPad = document.body.style.paddingRight || &#x27;&#x27;;
+    if (this.bodyIsOverflowing) {
+      document.body.style.paddingRight = bodyPad + this.get(&#x27;scrollbarWidth&#x27;);
+    }
+  },
+
+  /**
+   * @method resetScrollbar
+   * @private
+   */
+  resetScrollbar() {
+    document.body.style.paddingRight = this._originalBodyPad;
+  },
+
+  /**
+   * @property scrollbarWidth
+   * @type number
+   * @readonly
+   * @private
+   */
+  scrollbarWidth: computed(function() {
+    let scrollDiv = document.createElement(&#x27;div&#x27;);
+    scrollDiv.className = &#x27;modal-scrollbar-measure&#x27;;
+    let modalEl = this.get(&#x27;modalElement&#x27;);
+    modalEl.parentNode.insertBefore(scrollDiv, modalEl.nextSibling);
+    let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+    scrollDiv.parentNode.removeChild(scrollDiv);
+    return scrollbarWidth;
+  }),
+
+  didInsertElement() {
+    this._super(...arguments);
+    if (this.get(&#x27;isOpen&#x27;)) {
+      this.show();
+    }
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    window.removeEventListener(&#x27;resize&#x27;, this._handleUpdate, false);
+    document.body.classList.remove(&#x27;modal-open&#x27;);
+    this.resetScrollbar();
+  },
+
+  _observeOpen: observer(&#x27;isOpen&#x27;, function() {
+    if (this.get(&#x27;isOpen&#x27;)) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }),
+
+  init() {
+    this._super(...arguments);
+    let { isOpen, backdrop, fade, isFastBoot } = this.getProperties(&#x27;isOpen&#x27;, &#x27;backdrop&#x27;, &#x27;fade&#x27;, &#x27;isFastBoot&#x27;);
+    if (fade === undefined) {
+      fade = !isFastBoot;
+    }
+    let dom = getDOM(this);
+    let destinationElement = findElementById(dom, &#x27;ember-bootstrap-wormhole&#x27;);
+    this.setProperties({
+      showModal: isOpen &amp;&amp; (!fade || isFastBoot),
+      showBackdrop: isOpen &amp;&amp; backdrop,
+      inDom: isOpen,
+      fade,
+      destinationElement
+    });
+  }
+});
+
+Object.defineProperties(component.prototype, {
+
+  /**
+   * The DOM element of the &#x60;.modal&#x60; element.
+   *
+   * @property modalElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  modalElement: {
+    get() {
+      return document.getElementById(this.get(&#x27;modalId&#x27;));
+    }
+  },
+
+  /**
+   * The DOM element of the backdrop element.
+   *
+   * @property backdropElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  backdropElement: {
+    get() {
+      return document.getElementById(this.get(&#x27;backdropId&#x27;));
+    }
+  }
+});
+
+export default component;
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -849,6 +851,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

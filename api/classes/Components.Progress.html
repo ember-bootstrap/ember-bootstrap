@@ -52,150 +52,150 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="card">
-              <h1 class="card-header">Components.Progress <span class="badge badge-public small">public</span></h1>
-              <div class="card-body">
+<div class="card">
+  <h1 class="card-header">Components.Progress <span class="badge badge-public small">public</span></h1>
+  <div class="card-body">
+
+<p>Component to display a Bootstrap progress bar, see <a href="http://getbootstrap.com/components/#progress">http://getbootstrap.com/components/#progress</a>.</p>
+<h3>Usage</h3>
+<p>The component yields a [Components.ProgressBar)(Components.ProgressBar.html) component that represents a single bar.
+Use the <code>value</code> property to control the progress bar's width. To apply the different styling options supplied by
+Bootstrap, use the appropriate properties like <code>type</code>, <code>showLabel</code>, <code>striped</code> or <code>animate</code>.</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsProgress as |pg| &gt;
+  &lt;pg.bar @value={{this.progressValue}} @minValue={{0}} @maxValue={{10}} @showLabel={{true}} @type="danger" /&gt;
+&lt;/BsProgress&gt;
+</code></pre>
+<h3>Stacked</h3>
+<p>You can place multiple progress bar components in a single progress component to
+create a stack of progress bars as seen in <a href="http://getbootstrap.com/components/#progress-stacked">http://getbootstrap.com/components/#progress-stacked</a>.</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsProgress as |pg| &gt;
+  &lt;pg.bar @value={{this.progressValue1}} @type="success" /&gt;
+  &lt;pg.bar @value={{this.progressValue2}} @type="warning" /&gt;
+  &lt;pg.bar @value={{this.progressValue3}} @type="danger" /&gt;
+&lt;/BsProgress&gt;
+</code></pre>
+
+
+  </div>
+
+  <div class="card-footer text-muted">
+    <dl class="row m-0">
+        <dt class="col-sm-3">
+          Extends
+        </dt>
+        <dd class="col-sm-9">
+          Ember.Component
+        </dd>
+        <dt class="col-sm-3">
+          Defined in
+        </dt>
+        <dd class="col-sm-9">
+          <a href="../files/addon_components_base_bs-progress.js.html#l4"><code>addon&#x2F;components&#x2F;base&#x2F;bs-progress.js:4</code></a>
+        </dd>
+
+    </dl>
+  </div>
+</div>
+
+
+
+<form id="options-form" class="form-inline mb-1 mt-4">
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
+    <label class="form-check-label" for="api-show-inherited">
+      Inherited
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-protected">
+    <label class="form-check-label" for="api-show-protected">
+      Protected
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-private">
+    <label class="form-check-label" for="api-show-private">
+      Private
+    </label>
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2">
+    <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
+    <label class="form-check-label" for="api-show-deprecated">
+      Deprecated
+    </label>
+  </div>
+
+</form>
+
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
+
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div id="index" class="tab-pane active">
+        <h2 class="off-left">Item Index</h2>
+
+
+          <div class="index-section properties">
+            <h3>Properties</h3>
+
+            <ul class="index-list properties extends">
+                <li class="index-item property private">
+                  <a href="#" data-tabid="#properties" data-anchor="#property_progressBarComponent"
+                     data-tablink="progressBarComponent">progressBarComponent</a>
+
+                </li>
+            </ul>
+          </div>
+
+
+      </div>
+
+
+        <div id="properties" class="tab-pane">
+            <div id="property_progressBarComponent"
+                 class="property item private">
+              <h3 class="name">progressBarComponent
+                <span class="badge badge-secondary small">{String}</span>
+                  <span class="badge badge-private small">private</span>
             
-                <p>Component to display a Bootstrap progress bar, see <a href="http://getbootstrap.com/components/#progress">http://getbootstrap.com/components/#progress</a>.</p>
-            <h3>Usage</h3>
-            <p>The component yields a [Components.ProgressBar)(Components.ProgressBar.html) component that represents a single bar.
-            Use the <code>value</code> property to control the progress bar's width. To apply the different styling options supplied by
-            Bootstrap, use the appropriate properties like <code>type</code>, <code>showLabel</code>, <code>striped</code> or <code>animate</code>.</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{#bs-progress as |p|}}
-              {{p.bar value=progressValue minValue=0 maxValue=10 showLabel=true type=&quot;danger&quot;}}
-            {{/bs-progress}}
-            </code></pre>
-            <h3>Stacked</h3>
-            <p>You can place multiple progress bar components in a single progress component to
-            create a stack of progress bars as seen in <a href="http://getbootstrap.com/components/#progress-stacked">http://getbootstrap.com/components/#progress-stacked</a>.</p>
-            <pre class="code prettyprint"><code class="language-hbs">{{#bs-progress as |p|}}
-              {{p.bar value=progressValue1 type=&quot;success&quot;}}
-              {{p.bar value=progressValue2 type=&quot;warning&quot;}}
-              {{p.bar value=progressValue3 type=&quot;danger&quot;}}
-            {{/bs-progress}}
-            </code></pre>
             
             
-              </div>
             
-              <div class="card-footer text-muted">
-                <dl class="row m-0">
-                    <dt class="col-sm-3">
-                      Extends
-                    </dt>
-                    <dd class="col-sm-9">
-                      Ember.Component
-                    </dd>
-                    <dt class="col-sm-3">
+              </h3>
+            
+              <div class="meta">
+                  <p>
                       Defined in
-                    </dt>
-                    <dd class="col-sm-9">
-                      <a href="../files/addon_components_base_bs-progress.js.html#l4"><code>addon&#x2F;components&#x2F;base&#x2F;bs-progress.js:4</code></a>
-                    </dd>
+                  <a href="../files/addon_components_base_bs-progress.js.html#l41"><code>addon&#x2F;components&#x2F;base&#x2F;bs-progress.js:41</code></a>
+              </p>
             
-                </dl>
+            
               </div>
+            
+              <div class="description">
+                
+              </div>
+            
+            
+            
+            
             </div>
-            
-            
-            
-            <form id="options-form" class="form-inline mb-1 mt-4">
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-inherited" checked>
-                <label class="form-check-label" for="api-show-inherited">
-                  Inherited
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-protected">
-                <label class="form-check-label" for="api-show-protected">
-                  Protected
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-private">
-                <label class="form-check-label" for="api-show-private">
-                  Private
-                </label>
-              </div>
-            
-              <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-inline" type="checkbox" id="api-show-deprecated">
-                <label class="form-check-label" for="api-show-deprecated">
-                  Deprecated
-                </label>
-              </div>
-            
-            </form>
-            
-            <div class="card">
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                  <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#index">Index</a></li>
-            
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties">Properties</a></li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div id="index" class="tab-pane active">
-                    <h2 class="off-left">Item Index</h2>
-            
-            
-                      <div class="index-section properties">
-                        <h3>Properties</h3>
-            
-                        <ul class="index-list properties extends">
-                            <li class="index-item property private">
-                              <a href="#" data-tabid="#properties" data-anchor="#property_progressBarComponent"
-                                 data-tablink="progressBarComponent">progressBarComponent</a>
-            
-                            </li>
-                        </ul>
-                      </div>
-            
-            
-                  </div>
-            
-            
-                    <div id="properties" class="tab-pane">
-                        <div id="property_progressBarComponent"
-                             class="property item private">
-                          <h3 class="name">progressBarComponent
-                            <span class="badge badge-secondary small">{String}</span>
-                              <span class="badge badge-private small">private</span>
-                        
-                        
-                        
-                        
-                          </h3>
-                        
-                          <div class="meta">
-                              <p>
-                                  Defined in
-                              <a href="../files/addon_components_base_bs-progress.js.html#l41"><code>addon&#x2F;components&#x2F;base&#x2F;bs-progress.js:41</code></a>
-                          </p>
-                        
-                        
-                          </div>
-                        
-                          <div class="description">
-                            
-                          </div>
-                        
-                        
-                        
-                        
-                        </div>
-                    </div>
-            
-            
-                </div>
-              </div>
-            </div>
+        </div>
+
+
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </div>
@@ -257,6 +257,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

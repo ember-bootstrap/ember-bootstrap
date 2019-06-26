@@ -52,30 +52,42 @@
       <div class="apidocs">
         <div id="docs-main">
           <div class="content">
-            <div class="page-header">
-                <h1>addon/components/base/bs-nav/link-to.js <small>File</small></h1>
-            </div>
-            
-            <div class="file">
-                <pre class="prettyprint linenums">
-            import LinkComponent from &#x27;@ember/routing/link-component&#x27;;
-            import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
-            
-            /**
-            
-             Extended &#x60;{{link-to}}&#x60; component for use within Navs.
-            
-             @class NavLinkTo
-             @namespace Components
-             @extends Ember.LinkComponent
-             @uses Mixins.ComponentChild
-             @public
-             */
-            export default LinkComponent.extend(ComponentChild, {
-            });
-            
-                </pre>
-            </div>
+<div class="page-header">
+    <h1>addon/components/base/bs-nav/link-to.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+import LinkComponent from &#x27;@ember/routing/link-component&#x27;;
+import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
+import { deprecate } from &#x27;@ember/application/deprecations&#x27;;
+
+/**
+
+ Extended &#x60;{{link-to}}&#x60; component for use within Navs.
+
+ @class NavLinkTo
+ @namespace Components
+ @extends Ember.LinkComponent
+ @uses Mixins.ComponentChild
+ @public
+ */
+export default LinkComponent.extend(ComponentChild, {
+  init() {
+    this._super(...arguments);
+    deprecate(&#x27;The link-to component yielded by bs-nav is deprecated. Use the linkTo property of the yielded item component instead!\n&#x27; +
+      &#x27;Before: {{#nav.item}}{{#nav.link-to &quot;index&quot;}}foo{{/nav.link-to}}{{/nav.item}}\n&#x27; +
+      &#x27;After: {{#nav.item linkTo=&quot;index&quot;}}foo{{/nav.item}}&#x27;,
+      false,
+      {
+        id: &#x27;ember-bootstrap.nav.link-to&#x27;,
+        until: &#x27;4.0&#x27;
+      });
+  }
+});
+
+    </pre>
+</div>
           </div>
         </div>
       </div>
@@ -137,6 +149,7 @@
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>
