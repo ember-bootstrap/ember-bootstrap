@@ -1,82 +1,91 @@
-{{#component this.layoutComponent
-  hasLabel=this.hasLabel
-  formElementId=this.formElementId
-  horizontalLabelGridClass=this.horizontalLabelGridClass
-  errorsComponent=(component this.errorsComponent
-    messages=this.validationMessages
-    show=this.showValidationMessages
-    showMultipleErrors=this.showMultipleErrors
-  )
-  feedbackIconComponent=(component this.feedbackIconComponent
-    iconName=@iconName
-    show=this.hasFeedback
-  )
-  labelComponent=(component this.labelComponent
-    label=@label
-    invisibleLabel=this.invisibleLabel
+<BsForm::Group
+  @validation={{this.validation}}
+  @focusOut={{action "handleEvent"}}
+  @change={{action "handleEvent"}}
+  @input={{action "handleEvent"}}
+  class="{{if @disabled "disabled"}} {{if @required "is-required"}} {{if this.isValidating "isValidating"}}"
+  id={{this.groupElementId}}
+>
+  {{#component this.layoutComponent
+    hasLabel=this.hasLabel
     formElementId=this.formElementId
-    controlType=this.controlType
-    formLayout=this.formLayout
-    size=@size
-  )
-  helpTextComponent=(if this.hasHelpText
-    (component this.helpTextComponent
-      text=@helpText
-      id=this.ariaDescribedBy
+    horizontalLabelGridClass=this.horizontalLabelGridClass
+    errorsComponent=(component this.errorsComponent
+      messages=this.validationMessages
+      show=this.showValidationMessages
+      showMultipleErrors=this.showMultipleErrors
     )
-  )
-}}
-  {{#let
-    (component this.controlComponent
-      value=this.value
-      id=this.formElementId
-      name=@name
-      type=this.controlType
+    feedbackIconComponent=(component this.feedbackIconComponent
+      iconName=@iconName
+      show=this.hasFeedback
+    )
+    labelComponent=(component this.labelComponent
       label=@label
-      placeholder=placeholder
-      autofocus=autofocus
-      disabled=disabled
-      readonly=readonly
-      required=required
-      controlSize=controlSize
-      tabindex=tabindex
-      minlength=minlength
-      maxlength=maxlength
-      min=min
-      max=max
-      pattern=pattern
-      accept=accept
-      autocomplete=autocomplete
-      autocapitalize=autocapitalize
-      autocorrect=autocorrect
-      autosave=autosave
-      inputmode=inputmode
-      multiple=multiple
-      step=step
-      form=form
-      spellcheck=spellcheck
-      cols=cols
-      rows=rows
-      wrap=wrap
-      title=title
-      options=options
-      optionLabelPath=optionLabelPath
-      ariaDescribedBy=(if hasHelpText ariaDescribedBy)
-      onChange=(action "change")
-      validationType=validation
-      size=size
-  ) as |Control|}}
-    {{#if hasBlock}}
-      {{yield
-        (hash
-          value=value
-          id=formElementId
-          validation=validation
-          control=Control
-        )
-      }}
-    {{else}}
-      <Control ...attributes />
-    {{/if}}
-  {{/let}}
-{{/component}}
+      invisibleLabel=this.invisibleLabel
+      formElementId=this.formElementId
+      controlType=this.controlType
+      formLayout=this.formLayout
+      size=@size
+    )
+    helpTextComponent=(if this.hasHelpText
+      (component this.helpTextComponent
+        text=@helpText
+        id=this.ariaDescribedBy
+      )
+    )
+  }}
+    {{#let
+      (component this.controlComponent
+        value=this.value
+        id=this.formElementId
+        name=@name
+        type=this.controlType
+        label=@label
+        placeholder=placeholder
+        autofocus=autofocus
+        disabled=disabled
+        readonly=readonly
+        required=required
+        controlSize=controlSize
+        tabindex=tabindex
+        minlength=minlength
+        maxlength=maxlength
+        min=min
+        max=max
+        pattern=pattern
+        accept=accept
+        autocomplete=autocomplete
+        autocapitalize=autocapitalize
+        autocorrect=autocorrect
+        autosave=autosave
+        inputmode=inputmode
+        multiple=multiple
+        step=step
+        form=form
+        spellcheck=spellcheck
+        cols=cols
+        rows=rows
+        wrap=wrap
+        title=title
+        options=options
+        optionLabelPath=optionLabelPath
+        ariaDescribedBy=(if hasHelpText ariaDescribedBy)
+        onChange=(action "change")
+        validationType=validation
+        size=size
+    ) as |Control|}}
+      {{#if hasBlock}}
+        {{yield
+          (hash
+            value=this.value
+            id=this.formElementId
+            validation=this.validation
+            control=Control
+          )
+        }}
+      {{else}}
+        <Control ...attributes />
+      {{/if}}
+    {{/let}}
+  {{/component}}
+</BsForm::Group>

@@ -465,7 +465,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     assert.dom('#value').exists({ count: 1 }, 'block template is rendered');
     assert.dom('#value').hasText('male', 'value is yielded to block template');
     assert.dom('#id').hasText(
-      `${this.element.querySelector('.form-group').getAttribute('id')}-field`,
+      this.element.querySelector('#control > *').getAttribute('id'),
       'id is yielded to block template'
     );
     assert.dom('#validation').hasText('success');
@@ -792,6 +792,12 @@ module('Integration | Component | bs-form/element', function(hooks) {
         }
       }
     }
+  });
+
+  (gte('3.4.0') ? test : skip)('input attributes are applied only once w/ angle brackets', async function(assert) {
+    await render(hbs`<BsForm::element data-test-foo />`);
+
+    assert.dom('[data-test-foo').exists({ count: 1 });
   });
 
   test('required property propagates', async function(assert) {

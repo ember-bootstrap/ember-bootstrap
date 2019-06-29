@@ -13,7 +13,8 @@ import { typeOf, isBlank } from '@ember/utils';
 import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
 import layout from 'ember-bootstrap/templates/components/bs-form/element';
-import FormGroup from 'ember-bootstrap/components/bs-form/group';
+import Component from '@ember/component';
+import { guidFor } from '@ember/object/internals';
 
 const nonDefaultLayouts = A([
   'checkbox'
@@ -375,9 +376,9 @@ const nonDefaultLayouts = A([
   @extends Components.FormGroup
   @public
 */
-export default FormGroup.extend({
+export default Component.extend({
   layout,
-  classNameBindings: ['disabled:disabled', 'required:is-required', 'isValidating'],
+  tagName: '',
 
   /**
    * Text to display within a `<label>` tag.
@@ -731,6 +732,7 @@ export default FormGroup.extend({
    * @private
    */
   showValidationOnHandler({ target, type }) {
+    let el = document.getElementById(this.get('groupElementId'));
     // Should not do anything if
     if (
       // validations are already shown or
@@ -741,7 +743,7 @@ export default FormGroup.extend({
       (
         isArray(this.get('doNotShowValidationForEventTargets')) &&
         this.get('doNotShowValidationForEventTargets.length') > 0 &&
-        [...this.element.querySelectorAll(this.get('doNotShowValidationForEventTargets').join(','))]
+        [...el.querySelectorAll(this.get('doNotShowValidationForEventTargets').join(','))]
           .some((el) => el.contains(target))
       )
     ) {
@@ -825,14 +827,25 @@ export default FormGroup.extend({
   horizontalLabelGridClass: null,
 
   /**
+   * ID for form group
+   *
+   * @property groupElementId
+   * @type string
+   * @private
+   */
+  groupElementId: computed(function() {
+    return `${guidFor(this)}-group`;
+  }),
+
+  /**
    * ID for input field and the corresponding label's "for" attribute
    *
    * @property formElementId
    * @type string
    * @private
    */
-  formElementId: computed('elementId', function() {
-    return `${this.get('elementId')}-field`;
+  formElementId: computed(function() {
+    return `${guidFor(this)}-field`;
   }),
 
   /**
@@ -843,7 +856,7 @@ export default FormGroup.extend({
    * @private
    */
   ariaDescribedBy: computed('elementId', function() {
-    return `${this.get('elementId')}-help`;
+    return `${guidFor(this)}-help`;
   }),
 
   /**
@@ -926,39 +939,6 @@ export default FormGroup.extend({
   },
 
   /**
-   * Listen for focusOut events from the control element to automatically set `showOwnValidation` to true to enable
-   * form validation markup rendering if `showValidationsOn` contains `focusOut`.
-   *
-   * @event focusOut
-   * @private
-   */
-  focusOut(event) {
-    this.showValidationOnHandler(event);
-  },
-
-  /**
-   * Listen for change events from the control element to automatically set `showOwnValidation` to true to enable
-   * form validation markup rendering if `showValidationsOn` contains `change`.
-   *
-   * @event change
-   * @private
-   */
-  change(event) {
-    this.showValidationOnHandler(event);
-  },
-
-  /**
-   * Listen for input events from the control element to automatically set `showOwnValidation` to true to enable
-   * form validation markup rendering if `showValidationsOn` contains `input`.
-   *
-   * @event input
-   * @private
-   */
-  input(event) {
-    this.showValidationOnHandler(event);
-  },
-
-  /**
    * The action is called whenever the input value is changed, e.g. by typing text
    *
    * @event onChange
@@ -999,7 +979,7 @@ export default FormGroup.extend({
    */
   adjustFeedbackIcons: observer('hasFeedback', 'formLayout', function() {
     scheduleOnce('afterRender', () => {
-      let el = this.get('element');
+      let el = document.getElementById(this.get('groupElementId'));
       let feedbackIcon;
       // validation state icons are only shown if form element has feedback
       if (!this.get('isDestroying')
@@ -1041,6 +1021,10 @@ export default FormGroup.extend({
       let { onChange, model, property, _onChange } = this.getProperties('onChange', 'model', 'property', '_onChange');
       onChange(value, model, property);
       _onChange();
+    },
+
+    handleEvent(event) {
+      this.showValidationOnHandler(event);
     }
   }
 });
