@@ -522,7 +522,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     }
   });
 
-  (gte('3.4.0') ? test : skip)('supported input attributes propagate w/ angle brackets', async function(assert) {
+  (gte('3.4.0') ? test : skip)('supported input attributes propagate to yielded control w/ angle brackets', async function(assert) {
     for (let i = 0; i < formLayouts.length; i++) {
       let formLayout = formLayouts[i];
       this.set('formLayout', formLayout);
@@ -531,31 +531,34 @@ module('Integration | Component | bs-form/element', function(hooks) {
         return prev;
       }, {});
       this.setProperties(resetProps);
-      await render(hbs`<BsForm::element @formLayout={{this.formLayout}}
-        name={{this.name}}
-        required={{this.required}}
-        readonly={{this.readonly}}
-        placeholder={{this.placeholder}}
-        disabled={{this.disabled}}
-        autofocus={{this.autofocus}}
-        size={{this.size}}
-        tabindex={{this.tabindex}}
-        minlength={{this.minlength}}
-        maxlength={{this.maxlength}}
-        min={{this.min}}
-        max={{this.max}}
-        pattern={{this.pattern}}
-        accept={{this.accept}}
-        autocomplete={{this.autocomplete}}
-        autocapitalize={{this.autocapitalize}}
-        autocorrect={{this.autocorrect}}
-        autosave={{this.autosave}}
-        inputmode={{this.inputmode}}
-        multiple={{this.multiple}}
-        step={{this.step}}
-        form={{this.form}}
-        spellcheck={{this.spellcheck}}
-        title={{this.title}}
+      await render(hbs`<BsForm::element @formLayout={{this.formLayout}} as |el|>
+        <el.control
+          name={{this.name}}
+          required={{this.required}}
+          readonly={{this.readonly}}
+          placeholder={{this.placeholder}}
+          disabled={{this.disabled}}
+          autofocus={{this.autofocus}}
+          size={{this.size}}
+          tabindex={{this.tabindex}}
+          minlength={{this.minlength}}
+          maxlength={{this.maxlength}}
+          min={{this.min}}
+          max={{this.max}}
+          pattern={{this.pattern}}
+          accept={{this.accept}}
+          autocomplete={{this.autocomplete}}
+          autocapitalize={{this.autocapitalize}}
+          autocorrect={{this.autocorrect}}
+          autosave={{this.autosave}}
+          inputmode={{this.inputmode}}
+          multiple={{this.multiple}}
+          step={{this.step}}
+          form={{this.form}}
+          spellcheck={{this.spellcheck}}
+          title={{this.title}}
+        />
+        </BsForm::element>
       />`);
 
       for (let attribute in supportedInputAttributes) {
@@ -618,7 +621,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     }
   });
 
-  (gte('3.4.0') ? test : skip)('supported textarea attributes propagate w/ angle brackets', async function(assert) {
+  (gte('3.4.0') ? test : skip)('supported textarea attributes propagate to yielded control w/ angle brackets', async function(assert) {
     for (let i = 0; i < formLayouts.length; i++) {
       let formLayout = formLayouts[i];
       this.set('formLayout', formLayout);
@@ -627,25 +630,28 @@ module('Integration | Component | bs-form/element', function(hooks) {
         return prev;
       }, {});
       this.setProperties(resetProps);
-      await render(hbs`<BsForm::element @formLayout={{this.formLayout}} @controlType="textarea"
-        name={{this.name}}
-        rows={{this.rows}}
-        cols={{this.cols}}
-        required={{this.required}}
-        readonly={{this.readonly}}
-        placeholder={{this.placeholder}}
-        disabled={{this.disabled}}
-        autofocus={{this.autofocus}}
-        tabindex={{this.tabindex}}
-        minlength={{this.minlength}}
-        maxlength={{this.maxlength}}
-        autocomplete={{this.autocomplete}}
-        autocapitalize={{this.autocapitalize}}
-        autocorrect={{this.autocorrect}}
-        form={{this.form}}
-        spellcheck={{this.spellcheck}}
-        wrap={{this.wrap}}
-        title={{this.title}}
+      await render(hbs`<BsForm::element @formLayout={{this.formLayout}} @controlType="textarea" as |el|>
+        <el.control
+          name={{this.name}}
+          rows={{this.rows}}
+          cols={{this.cols}}
+          required={{this.required}}
+          readonly={{this.readonly}}
+          placeholder={{this.placeholder}}
+          disabled={{this.disabled}}
+          autofocus={{this.autofocus}}
+          tabindex={{this.tabindex}}
+          minlength={{this.minlength}}
+          maxlength={{this.maxlength}}
+          autocomplete={{this.autocomplete}}
+          autocapitalize={{this.autocapitalize}}
+          autocorrect={{this.autocorrect}}
+          form={{this.form}}
+          spellcheck={{this.spellcheck}}
+          wrap={{this.wrap}}
+          title={{this.title}}
+         />
+       </BsForm::element>
       />`);
 
       for (let attribute in supportedTextareaAttributes) {
@@ -696,7 +702,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     }
   });
 
-  (gte('3.4.0') ? test : skip)('supported checkbox attributes propagate w/ angle brackets', async function(assert) {
+  (gte('3.4.0') ? test : skip)('supported checkbox attributes propagate to yielded control w/ angle brackets', async function(assert) {
     for (let i = 0; i < formLayouts.length; i++) {
       let formLayout = formLayouts[i];
       this.set('formLayout', formLayout);
@@ -705,14 +711,17 @@ module('Integration | Component | bs-form/element', function(hooks) {
         return prev;
       }, {});
       this.setProperties(resetProps);
-      await render(hbs`<BsForm::element @controlType="checkbox" @formLayout={{this.formLayout}}
-        name={{this.name}}
-        required={{this.required}}
-        disabled={{this.disabled}}
-        autofocus={{this.autofocus}}
-        tabindex={{this.tabindex}}
-        form={{this.form}}
-        title={{this.title}}
+      await render(hbs`<BsForm::element @controlType="checkbox" @formLayout={{this.formLayout}} as |el|>
+        <el.control
+          name={{this.name}}
+          required={{this.required}}
+          disabled={{this.disabled}}
+          autofocus={{this.autofocus}}
+          tabindex={{this.tabindex}}
+          form={{this.form}}
+          title={{this.title}}
+         />
+       </BsForm::element>
       />`);
 
       for (let attribute in supportedCheckboxAttributes) {
@@ -761,7 +770,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     }
   });
 
-  (gte('3.4.0') ? test : skip)('supported radio attributes propagate w/ angle brackets', async function(assert) {
+  (gte('3.4.0') ? test : skip)('supported radio attributes propagate to yielded control w/ angle brackets', async function(assert) {
     for (let i = 0; i < formLayouts.length; i++) {
       let formLayout = formLayouts[i];
       this.set('formLayout', formLayout);
@@ -771,14 +780,17 @@ module('Integration | Component | bs-form/element', function(hooks) {
         return prev;
       }, {});
       this.setProperties(resetProps);
-      await render(hbs`<BsForm::element @controlType="radio" @formLayout={{this.formLayout}} @options={{this.options}}
-        name={{this.name}}
-        required={{this.required}}
-        disabled={{this.disabled}}
-        autofocus={{this.autofocus}}
-        tabindex={{this.tabindex}}
-        form={{this.form}}
-        title={{this.title}}
+      await render(hbs`<BsForm::element @controlType="radio" @formLayout={{this.formLayout}} @options={{this.options}} as |el|>
+        <el.control
+          name={{this.name}}
+          required={{this.required}}
+          disabled={{this.disabled}}
+          autofocus={{this.autofocus}}
+          tabindex={{this.tabindex}}
+          form={{this.form}}
+          title={{this.title}}
+        />
+        </BsForm::element>
       />`);
 
       for (let attribute in supportedCheckboxAttributes) {
@@ -1200,4 +1212,10 @@ module('Integration | Component | bs-form/element', function(hooks) {
     assert.dom('label').hasClass('col-form-label-sm', 'label has large class');
   });
 
+  (gte('3.4.0') ? test : skip)('supports setting HTML attributes to form group w/ angle brackets', async function(assert) {
+    await render(hbs`<BsForm::element data-test-foo />`);
+
+    assert.dom('.form-group').hasAttribute('data-test-foo');
+    assert.dom('[data-test-foo]').exists({ count: 1 });
+  });
 });
