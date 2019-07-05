@@ -9,6 +9,7 @@ import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { findElementById, getDOM } from '../../utils/dom';
+import { guidFor } from '@ember/object/internals';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -208,8 +209,8 @@ let component = Component.extend(TransitionSupport, {
    * @readonly
    * @private
    */
-  modalId: computed('elementId', function() {
-    return `${this.get('elementId')}-modal`;
+  modalId: computed(function() {
+    return `${guidFor(this)}-modal`;
   }),
 
   /**
@@ -220,8 +221,8 @@ let component = Component.extend(TransitionSupport, {
    * @readonly
    * @private
    */
-  backdropId: computed('elementId', function() {
-    return `${this.get('elementId')}-backdrop`;
+  backdropId: computed(function() {
+    return `${guidFor(this)}-backdrop`;
   }),
 
   /**

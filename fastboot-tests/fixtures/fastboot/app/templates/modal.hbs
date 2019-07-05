@@ -1,9 +1,13 @@
 <h1>modal</h1>
 
-{{#bs-modal-simple id="modal" title="modal header" size="sm"}}
-  modal body
-{{/bs-modal-simple}}
+<div id="modal">
+  {{#bs-modal-simple title="modal header" size="sm"}}
+    modal body
+  {{/bs-modal-simple}}
+</div>
 
-{{#bs-modal-simple id="modal-hidden" open=false title="modal header" size="sm"}}
-  modal body
-{{/bs-modal-simple}}
+<div id="modal-hidden">
+  {{#bs-modal-simple open=false title="modal header" size="sm"}}
+    modal body
+  {{/bs-modal-simple}}
+</div>
