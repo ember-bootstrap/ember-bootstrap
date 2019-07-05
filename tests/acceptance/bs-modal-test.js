@@ -10,9 +10,9 @@ module('Acceptance | bs-modal', function(hooks) {
 
     await visit('/acceptance/modal');
     await click('#openModal');
-    await click('#modal-modal .close');
+    await click('.modal .close');
 
-    assert.dom('#modal').doesNotExist('Modal is removed, that means the fade transition has finished.');
+    assert.dom('.modal').doesNotExist('Modal is removed, that means the fade transition has finished.');
   });
 
 });
