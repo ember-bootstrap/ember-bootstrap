@@ -6,6 +6,8 @@
  */
 
 import { getOwner } from '@ember/application';
+import { DEBUG } from '@glimmer/env';
+import requirejs from 'require';
 
 function childNodesOfElement(element) {
   let children = [];
@@ -43,7 +45,9 @@ export function getDOM(context) {
     let container = getOwner ? getOwner(context) : context.container;
     let documentService = container.lookup('service:-document');
 
-    if (documentService) { return documentService; }
+    if (documentService) {
+      return documentService;
+    }
 
     renderer = container.lookup('renderer:-dom');
   }
@@ -53,4 +57,29 @@ export function getDOM(context) {
   } else {
     throw new Error('Could not get DOM');
   }
+}
+
+export function getDestinationElement(context) {
+  let dom = getDOM(context);
+  let destinationElement = findElementById(dom, 'ember-bootstrap-wormhole');
+
+  if (DEBUG && !destinationElement) {
+    let config = getOwner(context).resolveRegistration('config:environment');
+    if (config.environment === 'test' && (typeof FastBoot === 'undefined')) {
+      let id;
+      if (requirejs.has('@ember/test-helpers/dom/get-root-element')) {
+        try {
+          id = requirejs('@ember/test-helpers/dom/get-root-element').default().id;
+        } catch(ex) {
+          // no op
+        }
+      }
+      if (!id) {
+        return document.querySelector('#ember-testing > .ember-view');
+      }
+      return document.getElementById(id)
+    }
+  }
+
+  return destinationElement;
 }

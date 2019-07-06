@@ -1,6 +1,6 @@
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, triggerEvent } from '@ember/test-helpers';
+import { render, click, triggerEvent, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { test, versionDependent, visibilityClass, popoverPositionClass } from '../../helpers/bootstrap-test';
 import {
@@ -191,5 +191,39 @@ module('Integration | Component | bs-popover', function(hooks) {
     assert.dom('.popover').hasClass('wide');
     assert.dom('.popover').hasAttribute('role', 'foo');
     assert.dom('.popover').hasAttribute('data-test');
+  });
+
+  test('Renders in wormhole\'s default destination if renderInPlace is not set', async function(assert) {
+    this.set('show', false);
+    await render(
+      hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{bs-popover title="Simple popover" visible=true fade=false}}{{/if}}`
+    );
+    this.set('show', true);
+    await settled();
+
+    assert.dom('#ember-bootstrap-wormhole .popover').exists({ count: 1 }, 'Popover exists in wormhole');
+  });
+
+  test('Renders in test container if renderInPlace is not set', async function(assert) {
+    this.set('show', false);
+    await render(
+      hbs`{{#if show}}{{bs-popover title="Simple popover" visible=true fade=false}}{{/if}}`
+    );
+    this.set('show', true);
+    await settled();
+
+    assert.dom('.popover').exists({ count: 1 }, 'Popover exists.');
+    assert.dom('#wrapper .popover').doesNotExist();
+  });
+
+  test('Renders in place (no wormhole) if renderInPlace is set', async function(assert) {
+    this.set('show', false);
+    await render(
+      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if show}}{{bs-popover title="Simple popover" visible=true fade=false renderInPlace=true}}{{/if}}</div>`
+    );
+    this.set('show', true);
+    await settled();
+
+    assert.dom('#wrapper .popover').exists({ count: 1 }, 'Popover exists in place.');
   });
 });
