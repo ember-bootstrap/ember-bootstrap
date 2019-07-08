@@ -8,6 +8,7 @@
 import { getOwner } from '@ember/application';
 import { DEBUG } from '@glimmer/env';
 import requirejs from 'require';
+import { warn } from '@ember/debug';
 
 function childNodesOfElement(element) {
   let children = [];
@@ -79,6 +80,12 @@ export function getDestinationElement(context) {
       }
       return document.getElementById(id)
     }
+
+    warn(
+      `No wormhole destination element found for component ${context}. If you have set \`insertEmberWormholeElementToDom\` to false, you should insert a \`div#ember-bootstrap-wormhole\` manually!`,
+      false,
+      { id: 'ember-bootstrap.no-destination-element' }
+    );
   }
 
   return destinationElement;
