@@ -6,6 +6,7 @@ import EmberObject, { observer, computed } from '@ember/object';
 import { next, schedule, cancel, later, run } from '@ember/runloop';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
+import { getDestinationElement } from '../../utils/dom';
 
 const InState = EmberObject.extend({
   hover: false,
@@ -182,6 +183,18 @@ let component = Component.extend(TransitionSupport, {
   arrowElement: null,
 
   /**
+   * The wormhole destinationElement
+   *
+   * @property destinationElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  destinationElement: computed(function() {
+    return getDestinationElement(this)
+  }),
+
+  /**
    * The DOM element of the viewport element.
    *
    * @property viewportElement
@@ -265,7 +278,7 @@ let component = Component.extend(TransitionSupport, {
    * @private
    */
   _renderInPlace: computed('renderInPlace', function() {
-    return this.get('renderInPlace') || typeof document === 'undefined' || !document.getElementById('ember-bootstrap-wormhole');
+    return this.get('renderInPlace') || !this.destinationElement;
   }),
 
   /**

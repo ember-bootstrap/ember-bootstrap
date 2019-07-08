@@ -8,7 +8,7 @@ import layout from 'ember-bootstrap/templates/components/bs-modal';
 import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
-import { findElementById, getDOM } from '../../utils/dom';
+import { getDestinationElement } from '../../utils/dom';
 import { guidFor } from '@ember/object/internals';
 
 /**
@@ -684,14 +684,12 @@ let component = Component.extend(TransitionSupport, {
     if (fade === undefined) {
       fade = !isFastBoot;
     }
-    let dom = getDOM(this);
-    let destinationElement = findElementById(dom, 'ember-bootstrap-wormhole');
     this.setProperties({
       showModal: isOpen && (!fade || isFastBoot),
       showBackdrop: isOpen && backdrop,
       inDom: isOpen,
       fade,
-      destinationElement
+      destinationElement: getDestinationElement(this)
     });
   }
 });

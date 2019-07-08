@@ -415,7 +415,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     assert.notOk(hideSpy.called);
   });
 
-  test('Renders in wormhole if renderInPlace is not set', async function(assert) {
+  test('Renders in wormhole\'s default destination if renderInPlace is not set', async function(assert) {
     this.set('show', false);
     await render(
       hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}{{/if}}`
@@ -427,15 +427,26 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     assert.dom('#ember-bootstrap-wormhole .modal').exists({ count: 1 }, 'Modal exists in wormhole');
   });
 
+  test('Renders in test container if renderInPlace is not set', async function(assert) {
+    this.set('show', false);
+    await render(
+      hbs`<div id="wrapper">{{#if show}}{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}{{/if}}</div>`
+    );
+    this.set('show', true);
+    await settled();
+
+    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
+    assert.dom('#wrapper .modal').doesNotExist();
+  });
+
   test('Renders in place (no wormhole) if renderInPlace is set', async function(assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{#bs-modal-simple title="Simple Dialog" renderInPlace=true}}Hello world!{{/bs-modal-simple}}{{/if}}`
+      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if show}}{{#bs-modal-simple title="Simple Dialog" renderInPlace=true}}Hello world!{{/bs-modal-simple}}{{/if}}</div>`
     );
     this.set('show', true);
 
-    assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
-    assert.dom('#ember-bootstrap-wormhole .modal').doesNotExist('Modal exists outside wormhole');
+    assert.dom('#wrapper .modal').exists({ count: 1 }, 'Modal exists in place');
   });
 
   test('Removes "modal-open" class when component is removed from view', async function(assert) {

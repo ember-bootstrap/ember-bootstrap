@@ -217,7 +217,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
   });
 
-  test('Renders in wormhole if renderInPlace is not set', async function(assert) {
+  test('Renders in wormhole\'s default destination if renderInPlace is not set', async function(assert) {
     this.set('show', false);
     await render(
       hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false}}{{/if}}`
@@ -225,20 +225,30 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     this.set('show', true);
     await settled();
 
-    assert.dom('.tooltip').exists({ count: 1 }, 'Tooltip exists.');
-    assert.equal(this.element.querySelector('.tooltip').parentNode.getAttribute('id'), 'ember-bootstrap-wormhole');
+    assert.dom('#ember-bootstrap-wormhole .tooltip').exists({ count: 1 }, 'Tooltip exists in wormhole');
   });
 
-  test('Renders in place (no wormhole) if renderInPlace is set', async function(assert) {
+  test('Renders in test container if renderInPlace is not set', async function(assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false renderInPlace=true}}{{/if}}`
+      hbs`{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false}}{{/if}}`
     );
     this.set('show', true);
     await settled();
 
     assert.dom('.tooltip').exists({ count: 1 }, 'Tooltip exists.');
-    assert.notEqual(this.element.querySelector('.tooltip').parentNode.getAttribute('id'), 'ember-bootstrap-wormhole');
+    assert.dom('#wrapper .tooltip').doesNotExist();
+  });
+
+  test('Renders in place (no wormhole) if renderInPlace is set', async function(assert) {
+    this.set('show', false);
+    await render(
+      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false renderInPlace=true}}{{/if}}</div>`
+    );
+    this.set('show', true);
+    await settled();
+
+    assert.dom('#wrapper .tooltip').exists({ count: 1 }, 'Tooltip exists in place.');
   });
 
   test('should place tooltip on top of element', async function(assert) {
