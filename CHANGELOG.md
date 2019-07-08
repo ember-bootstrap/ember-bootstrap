@@ -1,3 +1,15 @@
+
+## 3.0.0-rc.1 (2019-07-08)
+
+#### :boom: Breaking Change
+* [#851](https://github.com/kaliber5/ember-bootstrap/pull/851) Render Modals, Tooltips and Popovers in a wormhole even in tests ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#847](https://github.com/kaliber5/ember-bootstrap/pull/847) FormElement: revert passing HTML attributes to its control component w/ angle brackets ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 1
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
 ## v3.0.0-rc.0 (2019-06-26)
 
 #### :boom: Breaking Change
@@ -7,6 +19,8 @@
 * [#794](https://github.com/kaliber5/ember-bootstrap/pull/794) Add novalidate attribute to forms by default if they support client-side validations ([@simonihmig](https://github.com/simonihmig))
 * [#788](https://github.com/kaliber5/ember-bootstrap/pull/788) Drop node 6 support ([@simonihmig](https://github.com/simonihmig))
 * [#787](https://github.com/kaliber5/ember-bootstrap/pull/787) Dropped support for Ember < 2.18 ([@simonihmig](https://github.com/simonihmig))
+* [#795](https://github.com/kaliber5/ember-bootstrap/pull/795) Modals are tagless (wrapping div has been removed), which might break when setting an ID or `ember-test-selectors` attribute on curly component invocation.
+ Angle bracket component invocation syntax should be used for that use case. E.g. `{{#bs-modal data-test-foo}}` should be refactored to ``.
 
 #### Features
 * [#842](https://github.com/kaliber5/ember-bootstrap/pull/842) Button is disabled by default if in pending state ([@jelhan](https://github.com/jelhan))

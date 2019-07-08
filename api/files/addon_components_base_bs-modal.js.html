@@ -68,7 +68,8 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-modal&#x27;;
 import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
 import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
-import { findElementById, getDOM } from &#x27;../../utils/dom&#x27;;
+import { getDestinationElement } from &#x27;../../utils/dom&#x27;;
+import { guidFor } from &#x27;@ember/object/internals&#x27;;
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -268,8 +269,8 @@ let component = Component.extend(TransitionSupport, {
    * @readonly
    * @private
    */
-  modalId: computed(&#x27;elementId&#x27;, function() {
-    return &#x60;${this.get(&#x27;elementId&#x27;)}-modal&#x60;;
+  modalId: computed(function() {
+    return &#x60;${guidFor(this)}-modal&#x60;;
   }),
 
   /**
@@ -280,8 +281,8 @@ let component = Component.extend(TransitionSupport, {
    * @readonly
    * @private
    */
-  backdropId: computed(&#x27;elementId&#x27;, function() {
-    return &#x60;${this.get(&#x27;elementId&#x27;)}-backdrop&#x60;;
+  backdropId: computed(function() {
+    return &#x60;${guidFor(this)}-backdrop&#x60;;
   }),
 
   /**
@@ -743,14 +744,12 @@ let component = Component.extend(TransitionSupport, {
     if (fade === undefined) {
       fade = !isFastBoot;
     }
-    let dom = getDOM(this);
-    let destinationElement = findElementById(dom, &#x27;ember-bootstrap-wormhole&#x27;);
     this.setProperties({
       showModal: isOpen &amp;&amp; (!fade || isFastBoot),
       showBackdrop: isOpen &amp;&amp; backdrop,
       inDom: isOpen,
       fade,
-      destinationElement
+      destinationElement: getDestinationElement(this)
     });
   }
 });

@@ -183,7 +183,21 @@ validation errors for the <code>model</code>'s <code>property</code>, the approp
 example to display a failure message on a login form after a failed authentication attempt (so not coming from
 the validation library), you can use the <code>customError</code> or <code>customWarning</code> properties to do so.</p>
 <h3>HTML attributes</h3>
-<p>To set HTML attributes on the control element provided by this component, set them as properties of this component:</p>
+<p>To set HTML attributes on the control element provided by this component when using the modern angle bracket invocation,
+you can pass them to the yielded <code>control</code> component:</p>
+<pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
+&lt;form.element @controlType="email" @label="Email" @property="email" as |el|&gt;
+  &lt;el.control
+    placeholder="Email"
+    required={{true}}
+    multiple={{true}}
+    tabIndex={{5}}
+  /&gt;
+&lt;/form.element&gt;
+...
+&lt;/BsForm&gt;
+</code></pre>
+<p>If you are using the older curly component syntax, you can set them as properties of this component:</p>
 <pre class="code prettyprint"><code class="language-hbs">{{#bs-form formLayout="horizontal" model=this onSubmit=(action "submit") as |form|}}
 {{form.element controlType="email" label="Email" property="email"
   placeholder="Email"
@@ -748,7 +762,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l918"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:918</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l935"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:935</code></a>
                     </p>
             
             
@@ -780,7 +794,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l728"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:728</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l745"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:745</code></a>
                     </p>
             
             
@@ -827,7 +841,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l706"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:706</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l723"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:723</code></a>
               </p>
             
             
@@ -855,7 +869,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l838"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:838</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l855"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:855</code></a>
               </p>
             
             
@@ -913,7 +927,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l873"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:873</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l890"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:890</code></a>
               </p>
             
             
@@ -942,7 +956,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                   <p><strong>Default:</strong> &#x27;text&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l413"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:413</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l430"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:430</code></a>
               </p>
             
             
@@ -980,7 +994,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l551"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:551</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l568"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:568</code></a>
               </p>
             
             
@@ -1010,7 +1024,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l569"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:569</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l586"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:586</code></a>
               </p>
             
             
@@ -1041,7 +1055,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l754"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:754</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l771"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:771</code></a>
               </p>
             
             
@@ -1075,7 +1089,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l534"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:534</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l551"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:551</code></a>
               </p>
             
             
@@ -1104,7 +1118,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l517"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:517</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l534"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:534</code></a>
               </p>
             
             
@@ -1133,7 +1147,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l890"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:890</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l907"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:907</code></a>
               </p>
             
             
@@ -1161,7 +1175,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l897"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:897</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l914"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:914</code></a>
               </p>
             
             
@@ -1189,7 +1203,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l849"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:849</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l866"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:866</code></a>
               </p>
             
             
@@ -1217,7 +1231,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l827"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:827</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l844"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:844</code></a>
               </p>
             
             
@@ -1247,7 +1261,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                   <p><strong>Default:</strong> &#x27;vertical&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l801"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:801</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l818"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:818</code></a>
               </p>
             
             
@@ -1282,7 +1296,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l561"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:561</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l578"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:578</code></a>
               </p>
             
             
@@ -1310,7 +1324,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l580"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:580</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l597"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:597</code></a>
               </p>
             
             
@@ -1338,7 +1352,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l526"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:526</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l543"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:543</code></a>
               </p>
             
             
@@ -1366,7 +1380,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l509"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:509</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l526"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:526</code></a>
               </p>
             
             
@@ -1394,7 +1408,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l405"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:405</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l422"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:422</code></a>
               </p>
             
             
@@ -1450,7 +1464,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l620"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:620</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l637"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:637</code></a>
               </p>
             
             
@@ -1479,7 +1493,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l628"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:628</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l645"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:645</code></a>
               </p>
             
             
@@ -1507,7 +1521,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l543"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:543</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l560"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:560</code></a>
               </p>
             
             
@@ -1535,7 +1549,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l469"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:469</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l486"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:486</code></a>
               </p>
             
             
@@ -1564,7 +1578,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l911"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:911</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l928"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:928</code></a>
               </p>
             
             
@@ -1592,7 +1606,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l817"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:817</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l834"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:834</code></a>
               </p>
             
             
@@ -1623,7 +1637,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l395"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:395</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l412"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:412</code></a>
               </p>
             
             
@@ -1653,7 +1667,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l636"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:636</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l653"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:653</code></a>
               </p>
             
             
@@ -1682,7 +1696,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l382"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:382</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l399"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:399</code></a>
               </p>
             
             
@@ -1714,7 +1728,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l904"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:904</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l921"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:921</code></a>
               </p>
             
             
@@ -1742,7 +1756,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l856"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:856</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l873"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:873</code></a>
               </p>
             
             
@@ -1770,7 +1784,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l461"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:461</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l478"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:478</code></a>
               </p>
             
             
@@ -1799,7 +1813,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l500"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:500</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l517"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:517</code></a>
               </p>
             
             
@@ -1828,7 +1842,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l489"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:489</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l506"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:506</code></a>
               </p>
             
             
@@ -1859,7 +1873,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l448"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:448</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l465"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:465</code></a>
               </p>
             
             
@@ -1892,7 +1906,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l664"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:664</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l681"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:681</code></a>
               </p>
             
             
@@ -1920,7 +1934,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l679"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:679</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l696"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:696</code></a>
               </p>
             
             
@@ -1949,7 +1963,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l478"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:478</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l495"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:495</code></a>
               </p>
             
             
@@ -1980,7 +1994,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l656"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:656</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l673"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:673</code></a>
               </p>
             
             
@@ -2009,7 +2023,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l646"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:646</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l663"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:663</code></a>
               </p>
             
             
@@ -2038,7 +2052,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l687"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:687</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l704"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:704</code></a>
               </p>
             
             
@@ -2067,7 +2081,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                   <p><strong>Default:</strong> [&#x27;focusout&#x27;]</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l695"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:695</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l712"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:712</code></a>
               </p>
             
             
@@ -2097,7 +2111,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l588"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:588</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l605"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:605</code></a>
               </p>
             
             
@@ -2126,7 +2140,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l791"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:791</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l808"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:808</code></a>
               </p>
             
             
@@ -2158,7 +2172,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                     Components.FormGroup
                   </a>
                     but overwritten in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l770"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:770</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l787"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:787</code></a>
               </p>
             
             
@@ -2188,7 +2202,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l597"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:597</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l614"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:614</code></a>
               </p>
             
             
@@ -2217,7 +2231,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l431"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:431</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l448"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:448</code></a>
               </p>
             
             
@@ -2253,7 +2267,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l972"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:972</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l989"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:989</code></a>
                     </p>
             
             
@@ -2279,7 +2293,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l939"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:939</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l956"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:956</code></a>
                     </p>
             
             
@@ -2306,7 +2320,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l928"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:928</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l945"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:945</code></a>
                     </p>
             
             
@@ -2333,7 +2347,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l950"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:950</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l967"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:967</code></a>
                     </p>
             
             
@@ -2360,7 +2374,7 @@ the validation library), you can use the <code>customError</code> or <code>custo
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l961"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:961</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l978"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:978</code></a>
                     </p>
             
             

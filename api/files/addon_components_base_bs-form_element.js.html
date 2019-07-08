@@ -239,7 +239,24 @@ const nonDefaultLayouts = A([
 
   ### HTML attributes
 
-  To set HTML attributes on the control element provided by this component, set them as properties of this component:
+  To set HTML attributes on the control element provided by this component when using the modern angle bracket invocation,
+  you can pass them to the yielded &#x60;control&#x60; component:
+
+  &#x60;&#x60;&#x60;hbs
+  &lt;BsForm @formLayout=&quot;horizontal&quot; @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
+  &lt;form.element @controlType=&quot;email&quot; @label=&quot;Email&quot; @property=&quot;email&quot; as |el|&gt;
+    &lt;el.control
+      placeholder=&quot;Email&quot;
+      required={{true}}
+      multiple={{true}}
+      tabIndex={{5}}
+    /&gt;
+  &lt;/form.element&gt;
+  ...
+  &lt;/BsForm&gt;
+  &#x60;&#x60;&#x60;
+
+  If you are using the older curly component syntax, you can set them as properties of this component:
 
   &#x60;&#x60;&#x60;hbs
   {{#bs-form formLayout=&quot;horizontal&quot; model=this onSubmit=(action &quot;submit&quot;) as |form|}}

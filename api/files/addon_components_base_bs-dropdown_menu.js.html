@@ -62,6 +62,7 @@ import Component from &#x27;@ember/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown/menu&#x27;;
 import { next } from &#x27;@ember/runloop&#x27;;
+import { getDestinationElement } from &#x27;../../../utils/dom&#x27;;
 
 /**
  Component for the dropdown menu.
@@ -129,9 +130,20 @@ export default Component.extend({
   _renderInPlace: computed(&#x27;renderInPlace&#x27;, function() {
     return (
       this.get(&#x27;renderInPlace&#x27;) ||
-      typeof document === &#x27;undefined&#x27; ||
-      !document.getElementById(&#x27;ember-bootstrap-wormhole&#x27;)
+      !this.destinationElement
     );
+  }),
+
+  /**
+   * The wormhole destinationElement
+   *
+   * @property destinationElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  destinationElement: computed(function() {
+    return getDestinationElement(this)
   }),
 
   alignClass: computed(&#x27;align&#x27;, function() {
