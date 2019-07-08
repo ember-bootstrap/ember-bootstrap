@@ -1,3 +1,15 @@
+
+## 3.0.0-rc.1 (2019-07-08)
+
+#### :boom: Breaking Change
+* [#851](https://github.com/kaliber5/ember-bootstrap/pull/851) Render Modals, Tooltips and Popovers in a wormhole even in tests ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#847](https://github.com/kaliber5/ember-bootstrap/pull/847) FormElement: revert passing HTML attributes to its control component w/ angle brackets ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 1
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
 ## v3.0.0-rc.0 (2019-06-26)
 
 #### :boom: Breaking Change
