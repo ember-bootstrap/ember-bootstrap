@@ -20,7 +20,7 @@
 * [#788](https://github.com/kaliber5/ember-bootstrap/pull/788) Drop node 6 support ([@simonihmig](https://github.com/simonihmig))
 * [#787](https://github.com/kaliber5/ember-bootstrap/pull/787) Dropped support for Ember < 2.18 ([@simonihmig](https://github.com/simonihmig))
 * [#795](https://github.com/kaliber5/ember-bootstrap/pull/795) Modals are tagless (wrapping div has been removed), which might break when setting an ID or `ember-test-selectors` attribute on curly component invocation.
- Angle bracket component invocation syntax should be used for that use case. E.g. `{{#bs-modal data-test-foo}}` should be refactored to `<BsModal data-test-foo>`.
+ Angle bracket component invocation syntax should be used for that use case. E.g. `{{#bs-modal data-test-foo=true}}` should be refactored to `<BsModal data-test-foo>`.
 
 #### Features
 * [#842](https://github.com/kaliber5/ember-bootstrap/pull/842) Button is disabled by default if in pending state ([@jelhan](https://github.com/jelhan))
