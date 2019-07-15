@@ -24,7 +24,7 @@
     "chai-things": "^0.2.0",
     "ember-array-helper": "^5.0.0",
     "ember-bootstrap-power-select": "^1.1.0",
-    "ember-cli": "~3.10.1",
+    "ember-cli": "~3.11.0",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-blueprint-test-helpers": "^0.19.1",
     "ember-cli-browserstack": "^0.0.7",
