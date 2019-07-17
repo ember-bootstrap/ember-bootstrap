@@ -190,12 +190,8 @@ module.exports = {
       bootstrapVersion
     };
 
-    if (bootstrapVersion === 4) {
-      settings.importBootstrapFont = false;
-    } else if (config.hasOwnProperty('importBootstrapFont')) {
-      settings.importBootstrapFont = config.importBootstrapFont;
-    } else {
-      settings.importBootstrapFont = true;
+    if (bootstrapVersion === 3) {
+      settings.importBootstrapFont = config.hasOwnProperty('importBootstrapFont') ? config.importBootstrapFont : true;
     }
 
     if (preprocessor !== 'none') {
