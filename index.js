@@ -61,6 +61,12 @@ module.exports = {
     this.app = app;
 
     let options = Object.assign({}, defaultOptions, app.options['ember-bootstrap']);
+    if (options.bootstrapVersion === 4 && app.options['ember-bootstrap'].importBootstrapFont) {
+      this.warn(
+        'Inclusion of the Glyphicon font is only supported for Bootstrap 3. ' +
+        'Set Ember Bootstrap\'s `importBootstrapFont` option to `false` to hide this warning.'
+      );
+    }
     if (process.env.BOOTSTRAPVERSION) {
       // override bootstrapVersion config when environment variable is set
       options.bootstrapVersion = parseInt(process.env.BOOTSTRAPVERSION);
