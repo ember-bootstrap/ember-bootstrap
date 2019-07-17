@@ -46,6 +46,7 @@ If you want to keep up to date with ember-bootstrap, you may want to [follow me 
 
 * [Simon Ihmig](https://github.com/simonihmig)
 * [Stephen Vance](https://github.com/srvance)
+* [Jeldrik Hanschke](https://github.com/jelhan)
 * and many more [contributors](https://github.com/kaliber5/ember-bootstrap/graphs/contributors)
 
 ## Contributing
