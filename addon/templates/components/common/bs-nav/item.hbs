@@ -1,4 +1,4 @@
-{{#if @route}}
+{{#if this.hasLink}}
   {{#if @model}}
     <LinkTo @route={{@route}} @model={{@model}} @query={{@query}} @disabled={{this.disabled}} class={{this.linkClass}}>
       {{yield}}

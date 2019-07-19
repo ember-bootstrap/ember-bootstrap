@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { observer } from '@ember/object';
-import { filter, filterBy, gt } from '@ember/object/computed';
+import { filter, filterBy, gt, or } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
 import LinkComponent from '@ember/routing/link-component';
 import layout from 'ember-bootstrap/templates/components/bs-nav/item';
@@ -124,6 +124,8 @@ export default Component.extend(ComponentParent, {
 
   disabledChildLinks: filterBy('childLinks', 'disabled'),
   hasDisabledChildLinks: gt('disabledChildLinks.length', 0),
+
+  hasLink: or('route', 'model', 'models', 'query'),
 
   /**
    * Called when clicking the nav item
