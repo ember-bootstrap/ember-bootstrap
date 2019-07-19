@@ -1,33 +1,32 @@
 <div class="row">
   <div class="col-sm-4 col-md-3 order-last">
-
-    <h3 class="sr-only">Components</h3>
-
-    {{#bs-nav type="pills" stacked=true as |nav|}}
-      {{#each model as |comp|}}
-        {{#nav.item linkTo=comp.demoRoute}}{{comp.title}}{{/nav.item}}
+    <h3 class="sr-only">
+      Components
+    </h3>
+    <BsNav @type="pills" @stacked={{true}} as |nav|>
+      {{#each this.model as |comp|}}
+        <nav.item @route={{comp.demoRoute}}>
+          {{comp.title}}
+        </nav.item>
       {{/each}}
-    {{/bs-nav}}
+    </BsNav>
   </div>
   <div class="col-sm-8 col-sm-pull-4 col-md-9 col-md-pull-3">
-
-    {{#if isDetailPage}}
-      <h1>{{currentComponent.title}}</h1>
-
+    {{#if this.isDetailPage}}
+      <h1>
+        {{currentComponent.title}}
+      </h1>
       <div class="row">
         <div class="col-md-8">
-
-          <p class="lead">{{currentComponent.description}}</p>
+          <p class="lead">
+            {{currentComponent.description}}
+          </p>
         </div>
-
         <div class="col-md-4">
-          {{api-reference model=currentComponent}}
+          <ApiReference @model={{this.currentComponent}} />
         </div>
-
       </div>
-
     {{/if}}
-
     {{outlet}}
   </div>
 </div>
