@@ -357,7 +357,7 @@ export default Component.extend({
    * @method submit
    * @private
    */
-  submitHandler(e) {
+  submitHandler(e, throwValidationErrors = true) {
     if (e) {
       e.preventDefault();
     }
@@ -430,15 +430,16 @@ export default Component.extend({
                 pendingSubmissions: this.get('pendingSubmissions') - 1
               });
 
-              throw error;
+              if (throwValidationErrors) {
+                throw error;
+              }
             });
         }
       )
   },
 
-  submit() {
-    this.submitHandler(...arguments)
-      .catch(() => {});
+  submit(event) {
+    this.submitHandler(event, false);
   },
 
   keyPress(e) {

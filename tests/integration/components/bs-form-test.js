@@ -19,6 +19,7 @@ import { defer } from 'rsvp';
 import { next, run } from '@ember/runloop';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import RSVP from 'rsvp';
+/* global Ember */
 
 const nextRunloop = function() {
   return new Promise((resolve) => {
@@ -217,6 +218,22 @@ module('Integration | Component | bs-form', function(hooks) {
       'validation errors are shown after onInvalid is settled'
     );
     assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
+  });
+
+  test('it does not catch errors thrown by onSubmit action', async function(assert) {
+    let onErrorStub = this.stub();
+    let expectedError = new Error();
+
+    this.set('submitAction', this.fake.rejects(expectedError));
+    Ember.onerror = onErrorStub;
+
+    await render(hbs`
+      {{#bs-form onSubmit=submitAction}}
+        <button type="submit">submit</button>
+      {{/bs-form}}
+    `);
+    await click('button');
+    assert.ok(onErrorStub.calledOnceWith(expectedError));
   });
 
   test('form with validation has novalidate attribute', async function(assert) {
@@ -682,7 +699,15 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('Yielded #isRejected is true if onSubmit action rejects', async function(assert) {
-    this.actions.submit = this.fake.rejects();
+    // tests fail by default on unhandled errors
+    let expectedError = new Error();
+    Ember.onerror = (error) => {
+      if (error !== expectedError) {
+        throw error;
+      }
+    };
+
+    this.actions.submit = this.fake.rejects(expectedError);
     await render(hbs`{{#bs-form onSubmit=(action "submit") as |form|}}
       <button type="submit" class={{if form.isRejected "is-rejected"}}>submit</button>
     {{/bs-form}}`);
@@ -702,7 +727,15 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('A change to a form elements resets yielded #isRejected', async function(assert) {
-    this.actions.submit = this.fake.rejects();
+    // tests fail by default on unhandled errors
+    let expectedError = new Error();
+    Ember.onerror = (error) => {
+      if (error !== expectedError) {
+        throw error;
+      }
+    };
+
+    this.actions.submit = this.fake.rejects(expectedError);
     await render(hbs`{{#bs-form onSubmit=(action "submit") model=(hash) as |form|}}
       {{form.element property="foo"}}
       <button type="submit" class={{if form.isRejected "is-rejected"}}>submit</button>
