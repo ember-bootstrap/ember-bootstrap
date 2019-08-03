@@ -1,6 +1,8 @@
 import FormElementControlCheckbox from 'ember-bootstrap/components/base/bs-form/element/control/checkbox';
-import ControlValidationMixin from 'ember-bootstrap/mixins/control-validation';
+import formValidationClass from 'ember-bootstrap/utils/form-validation-class';
 
-export default FormElementControlCheckbox.extend(ControlValidationMixin, {
-  classNames: ['form-check-input']
+export default FormElementControlCheckbox.extend({
+  classNames: ['form-check-input'],
+  classNameBindings: ['formValidationClass'],
+  formValidationClass: formValidationClass()
 });
