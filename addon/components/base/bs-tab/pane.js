@@ -3,8 +3,9 @@ import { computed, observer } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-tab/pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
-import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
+import usesTransition from 'ember-bootstrap/utils/uses-transition';
+import fastboot from 'ember-bootstrap/utils/fastboot';
 
 /**
  The tab pane of a tab component.
@@ -16,7 +17,7 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
  @uses Mixins.ComponentChild
  @public
  */
-export default Component.extend(ComponentChild, TransitionSupport, {
+export default Component.extend(ComponentChild, {
   layout,
   classNameBindings: ['active', 'usesTransition:fade'],
   classNames: ['tab-pane'],
@@ -102,6 +103,25 @@ export default Component.extend(ComponentChild, TransitionSupport, {
    * @private
    */
   fadeDuration: 150,
+
+  /**
+   * Access to the fastboot service if available
+   *
+   * @property fastboot
+   * @type {Ember.Service}
+   * @private
+   */
+  fastboot: fastboot(),
+
+  /**
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  usesTransition: usesTransition(),
 
   /**
    * Show the pane

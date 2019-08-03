@@ -2,10 +2,11 @@ import { not, and } from '@ember/object/computed';
 import Component from '@ember/component';
 import { observer } from '@ember/object';
 import { later } from '@ember/runloop';
-import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import layout from 'ember-bootstrap/templates/components/bs-alert';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+import usesTransition from 'ember-bootstrap/utils/uses-transition';
+import fastboot from 'ember-bootstrap/utils/fastboot';
 
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -28,7 +29,7 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
   @uses Mixins.TransitionSupport
   @public
 */
-export default Component.extend(TypeClass, TransitionSupport, {
+export default Component.extend(TypeClass, {
   layout,
   classNameBindings: ['alert', 'fade', 'dismissible:alert-dismissible'],
 
@@ -118,6 +119,25 @@ export default Component.extend(TypeClass, TransitionSupport, {
    * @public
    */
   fadeDuration: 150,
+
+  /**
+   * Access to the fastboot service if available
+   *
+   * @property fastboot
+   * @type {Ember.Service}
+   * @private
+   */
+  fastboot: fastboot(),
+
+  /**
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  usesTransition: usesTransition(),
 
   /**
    * The action to be sent after the alert has been dismissed (including the CSS transition).

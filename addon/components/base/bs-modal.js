@@ -1,15 +1,15 @@
-import { not } from '@ember/object/computed';
+import { not, readOnly } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import Component from '@ember/component';
-import { getOwner } from '@ember/application';
-import { computed, get, observer } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import { bind, next, schedule } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-modal';
-import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import listenTo from 'ember-bootstrap/utils/listen-to-cp';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from '../../utils/dom';
 import { guidFor } from '@ember/object/internals';
+import usesTransition from 'ember-bootstrap/utils/uses-transition';
+import fastboot from 'ember-bootstrap/utils/fastboot';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -52,7 +52,7 @@ import { guidFor } from '@ember/object/internals';
   @uses Mixins.TransitionSupport
   @public
 */
-let component = Component.extend(TransitionSupport, {
+let component = Component.extend({
   layout,
   tagName: '',
 
@@ -290,24 +290,26 @@ let component = Component.extend(TransitionSupport, {
    * @type {Boolean}
    * @private
    */
-  isFastBoot: computed(function() {
-    if (!getOwner) {
-      // Ember.getOwner is available as of Ember 2.3, while FastBoot requires 2.4. So just return false...
-      return false;
-    }
+  isFastBoot: readOnly('fastboot.isFastBoot'),
 
-    let owner = getOwner(this);
-    if (!owner) {
-      return false;
-    }
+  /**
+   * Access to the fastboot service if available
+   *
+   * @property fastboot
+   * @type {Ember.Service}
+   * @private
+   */
+  fastboot: fastboot(),
 
-    let fastboot = owner.lookup('service:fastboot');
-    if (!fastboot) {
-      return false;
-    }
-
-    return get(fastboot, 'isFastBoot');
-  }),
+  /**
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  usesTransition: usesTransition(),
 
   /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
