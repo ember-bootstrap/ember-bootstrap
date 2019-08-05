@@ -1,7 +1,6 @@
 import { oneWay, not } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import TypeClass from 'ember-bootstrap/mixins/type-class';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
 
 /**
@@ -12,16 +11,16 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
  @class AccordionItem
  @namespace Components
  @extends Ember.Component
- @uses Mixins.TypeClass
  @public
  */
-export default Component.extend(TypeClass, {
+export default Component.extend({
   layout,
 
   /**
    * Add additional binding to mark the entire component area disabled
    */
-  classNameBindings: ['disabled'],
+  classNameBindings: ['disabled', 'typeClass'],
+
   /**
    * The title of the accordion item, displayed as a .panel-title element
    *
@@ -83,6 +82,19 @@ export default Component.extend(TypeClass, {
    * @public
    */
   disabled: false,
+
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes)
+   *
+   * @property type
+   * @type String
+   * @default 'default'
+   * @public
+   */
+  type: 'default',
 
   /**
    * Reference to the parent `Components.Accordion` class.

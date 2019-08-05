@@ -3,8 +3,8 @@ import Component from '@ember/component';
 import { observer, computed } from '@ember/object';
 import { deprecatingAlias, equal, or }  from '@ember/object/computed';
 import layout from 'ember-bootstrap/templates/components/bs-button';
-import TypeClass from 'ember-bootstrap/mixins/type-class';
 import sizeClass from 'ember-bootstrap/utils/size-class';
+import typeClass from 'ember-bootstrap/utils/type-class';
 import overrideableCP from '../../utils/overrideable-cp';
 
 /**
@@ -80,19 +80,11 @@ import overrideableCP from '../../utils/overrideable-cp';
   @uses Mixins.SizeClass
   @public
 */
-export default Component.extend(TypeClass, {
+export default Component.extend({
   layout,
   tagName: 'button',
   classNames: ['btn'],
-  classNameBindings: ['active', 'block:btn-block', 'sizeClass'],
-
-  /**
-   * @property classTypePrefix
-   * @type String
-   * @default 'btn'
-   * @private
-   */
-  classTypePrefix: 'btn',
+  classNameBindings: ['active', 'block:btn-block', 'sizeClass', 'typeClass'],
 
   attributeBindings: ['_disabled:disabled', 'buttonType:type', 'title'],
 
@@ -343,6 +335,19 @@ export default Component.extend(TypeClass, {
    */
   size: null,
   sizeClass: sizeClass('btn'),
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/buttons/)
+   *
+   * @property type
+   * @type String
+   * @default 'default'
+   * @public
+   */
+
+  typeClass: typeClass('btn'),
 
   /**
    * The HTML title attribute

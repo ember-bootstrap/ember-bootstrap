@@ -2,7 +2,6 @@ import { readOnly } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import layout from 'ember-bootstrap/templates/components/bs-progress/bar';
-import TypeClass from 'ember-bootstrap/mixins/type-class';
 
 /**
 
@@ -11,13 +10,12 @@ import TypeClass from 'ember-bootstrap/mixins/type-class';
  @class ProgressBar
  @namespace Components
  @extends Ember.Component
- @uses Mixins.TypeClass
  @public
  */
-export default Component.extend(TypeClass, {
+export default Component.extend({
   layout,
   classNames: ['progress-bar'],
-  classNameBindings: ['progressBarStriped'],
+  classNameBindings: ['progressBarStriped', 'typeClass'],
 
   attributeBindings: ['ariaValuenow', 'ariaValuemin', 'ariaValuemax'],
 
@@ -100,6 +98,18 @@ export default Component.extend(TypeClass, {
    * @public
    */
   roundDigits: 0,
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/progress/#backgrounds)
+   *
+   * @property type
+   * @type String
+   * @default 'default'
+   * @public
+   */
+  type: 'default',
 
   progressBarStriped: readOnly('striped'),
   progressBarAnimate: readOnly('animate'),
