@@ -2,7 +2,7 @@ import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
 import { isArray, A } from '@ember/array';
 import layout from 'ember-bootstrap/templates/components/bs-button-group';
-import SizeClass from 'ember-bootstrap/mixins/size-class';
+import sizeClass from 'ember-bootstrap/utils/size-class';
 
 /**
   Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
@@ -58,13 +58,12 @@ import SizeClass from 'ember-bootstrap/mixins/size-class';
   @class ButtonGroup
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.SizeClass
   @public
 */
-export default Component.extend(SizeClass, {
+export default Component.extend({
   layout,
   ariaRole: 'group',
-  classNameBindings: ['vertical:btn-group-vertical:btn-group'],
+  classNameBindings: ['vertical:btn-group-vertical:btn-group', 'sizeClass'],
 
   /**
    * @property buttonComponent
@@ -72,14 +71,6 @@ export default Component.extend(SizeClass, {
    * @private
    */
   buttonComponent: 'bs-button-group/button',
-
-  /**
-   * @property classTypePrefix
-   * @type String
-   * @default 'btn-group'
-   * @protected
-   */
-  classTypePrefix: 'btn-group',
 
   /**
    * Set to true for a vertically stacked button group, see http://getbootstrap.com/components/#btn-groups-vertical
@@ -132,6 +123,18 @@ export default Component.extend(SizeClass, {
    * @private
    */
   isRadio: equal('type', 'radio').readOnly(),
+
+  /**
+   * Property for size styling, set to 'lg', 'sm' or 'xs'
+   *
+   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/button-group/#sizing)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+  sizeClass: sizeClass('btn-group'),
 
   /**
    * This action is called whenever the button group's value should be changed because the user clicked a button.

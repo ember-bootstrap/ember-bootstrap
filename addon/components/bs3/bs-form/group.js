@@ -3,13 +3,11 @@ import FormGroup from 'ember-bootstrap/components/base/bs-form/group';
 import Config from 'ember-bootstrap/config';
 import { isBlank } from '@ember/utils';
 import { computed } from '@ember/object';
-import SizeClass from 'ember-bootstrap/mixins/size-class';
+import sizeClass from 'ember-bootstrap/utils/size-class';
 
-export default FormGroup.extend(SizeClass, {
+export default FormGroup.extend({
   classNames: ['form-group'],
-  classNameBindings: ['validationClass', 'hasFeedback'],
-
-  classTypePrefix: 'form-group',
+  classNameBindings: ['validationClass', 'hasFeedback', 'sizeClass'],
 
   /**
    * Whether to show validation state icons.
@@ -124,6 +122,18 @@ export default FormGroup.extend(SizeClass, {
    * @public
    */
   infoIcon: Config.formValidationInfoIcon,
+
+  /**
+   * Property for size styling, set to 'lg', 'sm' or 'xs'
+   *
+   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/3.4/css/#forms-control-sizes)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+  sizeClass: sizeClass('form-group'),
 
   /**
    * @property iconName

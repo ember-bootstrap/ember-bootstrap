@@ -4,7 +4,7 @@ import { observer, computed } from '@ember/object';
 import { deprecatingAlias, equal, or }  from '@ember/object/computed';
 import layout from 'ember-bootstrap/templates/components/bs-button';
 import TypeClass from 'ember-bootstrap/mixins/type-class';
-import SizeClass from 'ember-bootstrap/mixins/size-class';
+import sizeClass from 'ember-bootstrap/utils/size-class';
 import overrideableCP from '../../utils/overrideable-cp';
 
 /**
@@ -80,11 +80,11 @@ import overrideableCP from '../../utils/overrideable-cp';
   @uses Mixins.SizeClass
   @public
 */
-export default Component.extend(TypeClass, SizeClass, {
+export default Component.extend(TypeClass, {
   layout,
   tagName: 'button',
   classNames: ['btn'],
-  classNameBindings: ['active', 'block:btn-block'],
+  classNameBindings: ['active', 'block:btn-block', 'sizeClass'],
 
   /**
    * @property classTypePrefix
@@ -331,6 +331,18 @@ export default Component.extend(TypeClass, SizeClass, {
    * @public
    */
   reset: null,
+
+  /**
+   * Property for size styling, set to 'lg', 'sm' or 'xs'
+   *
+   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/buttons/#sizes)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+  sizeClass: sizeClass('btn'),
 
   /**
    * The HTML title attribute
