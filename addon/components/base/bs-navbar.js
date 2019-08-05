@@ -1,8 +1,8 @@
 import Component from '@ember/component';
 import { observer, computed } from '@ember/object';
-import typeClass from 'ember-bootstrap/utils/type-class';
+import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import layout from 'ember-bootstrap/templates/components/bs-navbar';
-import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 
 /**
   Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).

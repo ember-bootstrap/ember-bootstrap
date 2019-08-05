@@ -3,10 +3,10 @@ import Component from '@ember/component';
 import { observer } from '@ember/object';
 import { later } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-alert';
-import typeClass from 'ember-bootstrap/utils/type-class';
-import listenTo from 'ember-bootstrap/utils/listen-to-cp';
-import usesTransition from 'ember-bootstrap/utils/uses-transition';
-import fastboot from 'ember-bootstrap/utils/fastboot';
+import typeClass from 'ember-bootstrap/utils/cp/type-class';
+import listenTo from 'ember-bootstrap/utils/cp/listen-to';
+import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
+import fastboot from 'ember-bootstrap/utils/cp/fastboot';
 
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -25,8 +25,6 @@ import fastboot from 'ember-bootstrap/utils/fastboot';
   @class Alert
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.TypeClass
-  @uses Mixins.TransitionSupport
   @public
 */
 export default Component.extend({

@@ -3,7 +3,7 @@ import FormGroup from 'ember-bootstrap/components/base/bs-form/group';
 import Config from 'ember-bootstrap/config';
 import { isBlank } from '@ember/utils';
 import { computed } from '@ember/object';
-import sizeClass from 'ember-bootstrap/utils/size-class';
+import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 
 export default FormGroup.extend({
   classNames: ['form-group'],

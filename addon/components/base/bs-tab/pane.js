@@ -4,8 +4,8 @@ import { scheduleOnce } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-tab/pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
-import usesTransition from 'ember-bootstrap/utils/uses-transition';
-import fastboot from 'ember-bootstrap/utils/fastboot';
+import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
+import fastboot from 'ember-bootstrap/utils/cp/fastboot';
 
 /**
  The tab pane of a tab component.

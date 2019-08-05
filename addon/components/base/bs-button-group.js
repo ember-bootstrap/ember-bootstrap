@@ -2,7 +2,7 @@ import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
 import { isArray, A } from '@ember/array';
 import layout from 'ember-bootstrap/templates/components/bs-button-group';
-import sizeClass from 'ember-bootstrap/utils/size-class';
+import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 
 /**
   Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.

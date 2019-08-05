@@ -1,6 +1,6 @@
 import FormElementControlInput from 'ember-bootstrap/components/base/bs-form/element/control/input';
-import formValidationClass from 'ember-bootstrap/utils/form-validation-class';
-import sizeClass from 'ember-bootstrap/utils/size-class';
+import formValidationClass from 'ember-bootstrap/utils/cp/form-validation-class';
+import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 
 export default FormElementControlInput.extend({
   classNameBindings: ['formValidationClass', 'sizeClass'],

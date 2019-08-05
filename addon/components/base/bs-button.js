@@ -3,9 +3,9 @@ import Component from '@ember/component';
 import { observer, computed } from '@ember/object';
 import { deprecatingAlias, equal, or }  from '@ember/object/computed';
 import layout from 'ember-bootstrap/templates/components/bs-button';
-import sizeClass from 'ember-bootstrap/utils/size-class';
-import typeClass from 'ember-bootstrap/utils/type-class';
-import overrideableCP from '../../utils/overrideable-cp';
+import sizeClass from 'ember-bootstrap/utils/cp/size-class';
+import typeClass from 'ember-bootstrap/utils/cp/type-class';
+import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -76,8 +76,6 @@ import overrideableCP from '../../utils/overrideable-cp';
   @class Button
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.TypeClass
-  @uses Mixins.SizeClass
   @public
 */
 export default Component.extend({

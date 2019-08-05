@@ -4,12 +4,12 @@ import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
 import { bind, next, schedule } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-modal';
-import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from '../../utils/dom';
 import { guidFor } from '@ember/object/internals';
-import usesTransition from 'ember-bootstrap/utils/uses-transition';
-import fastboot from 'ember-bootstrap/utils/fastboot';
+import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
+import fastboot from 'ember-bootstrap/utils/cp/fastboot';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -49,7 +49,6 @@ import fastboot from 'ember-bootstrap/utils/fastboot';
   @class Modal
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.TransitionSupport
   @public
 */
 let component = Component.extend({
