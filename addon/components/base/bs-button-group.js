@@ -134,7 +134,7 @@ export default Component.extend({
    * @public
    */
   size: null,
-  sizeClass: sizeClass('btn-group'),
+  sizeClass: sizeClass('btn-group', 'size'),
 
   /**
    * This action is called whenever the button group's value should be changed because the user clicked a button.

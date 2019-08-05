@@ -133,7 +133,7 @@ export default FormGroup.extend({
    * @public
    */
   size: null,
-  sizeClass: sizeClass('form-group'),
+  sizeClass: sizeClass('form-group', 'size'),
 
   /**
    * @property iconName

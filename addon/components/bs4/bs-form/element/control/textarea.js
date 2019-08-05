@@ -3,5 +3,5 @@ import formValidationClass from 'ember-bootstrap/utils/cp/form-validation-class'
 
 export default FormElementControlTextarea.extend({
   classNameBindings: ['formValidationClass'],
-  formValidationClass: formValidationClass()
+  formValidationClass: formValidationClass('validationType')
 });

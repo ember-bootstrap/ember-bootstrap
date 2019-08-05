@@ -3,5 +3,5 @@ import typeClass from 'ember-bootstrap/utils/cp/type-class';
 
 export default AccordionItem.extend({
   classNames: ['panel'],
-  typeClass: typeClass('panel')
+  typeClass: typeClass('panel', 'type')
 });

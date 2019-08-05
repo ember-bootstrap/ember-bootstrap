@@ -158,7 +158,7 @@ export default Component.extend({
    * @public
    */
   type: 'default',
-  typeClass: typeClass('navbar'),
+  typeClass: typeClass('navbar', 'type'),
 
   /**
    * The action to be sent when the navbar is about to be collapsed.

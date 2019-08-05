@@ -4,7 +4,7 @@ import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 
 export default FormElementControlInput.extend({
   classNameBindings: ['formValidationClass', 'sizeClass'],
-  formValidationClass: formValidationClass(),
+  formValidationClass: formValidationClass('validationType'),
 
   /**
    * Property for size styling, set to 'lg', 'sm' or 'xs'
@@ -16,5 +16,5 @@ export default FormElementControlInput.extend({
    * @public
    */
   size: null,
-  sizeClass: sizeClass('form-control'),
+  sizeClass: sizeClass('form-control', 'size'),
 });

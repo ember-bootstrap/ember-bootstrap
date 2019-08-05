@@ -6,7 +6,6 @@ import layout from 'ember-bootstrap/templates/components/bs-alert';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
-import fastboot from 'ember-bootstrap/utils/cp/fastboot';
 
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -121,16 +120,7 @@ export default Component.extend({
    * @public
    */
   type: 'default',
-  typeClass: typeClass('alert'),
-
-  /**
-   * Access to the fastboot service if available
-   *
-   * @property fastboot
-   * @type {Ember.Service}
-   * @private
-   */
-  fastboot: fastboot(),
+  typeClass: typeClass('alert', 'type'),
 
   /**
    * Use CSS transitions?
@@ -140,7 +130,7 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  usesTransition: usesTransition(),
+  usesTransition: usesTransition('fade'),
 
   /**
    * The action to be sent after the alert has been dismissed (including the CSS transition).

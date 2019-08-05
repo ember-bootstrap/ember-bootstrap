@@ -5,7 +5,6 @@ import layout from 'ember-bootstrap/templates/components/bs-tab/pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
-import fastboot from 'ember-bootstrap/utils/cp/fastboot';
 
 /**
  The tab pane of a tab component.
@@ -105,15 +104,6 @@ export default Component.extend(ComponentChild, {
   fadeDuration: 150,
 
   /**
-   * Access to the fastboot service if available
-   *
-   * @property fastboot
-   * @type {Ember.Service}
-   * @private
-   */
-  fastboot: fastboot(),
-
-  /**
    * Use CSS transitions?
    *
    * @property usesTransition
@@ -121,7 +111,7 @@ export default Component.extend(ComponentChild, {
    * @readonly
    * @private
    */
-  usesTransition: usesTransition(),
+  usesTransition: usesTransition('fade'),
 
   /**
    * Show the pane

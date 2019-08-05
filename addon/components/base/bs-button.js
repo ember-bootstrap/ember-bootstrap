@@ -332,7 +332,7 @@ export default Component.extend({
    * @public
    */
   size: null,
-  sizeClass: sizeClass('btn'),
+  sizeClass: sizeClass('btn', 'size'),
 
   /**
    * Property for type styling
@@ -345,7 +345,7 @@ export default Component.extend({
    * @public
    */
 
-  typeClass: typeClass('btn'),
+  typeClass: typeClass('btn', 'type'),
 
   /**
    * The HTML title attribute

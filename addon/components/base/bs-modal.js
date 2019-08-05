@@ -1,4 +1,4 @@
-import { not, readOnly } from '@ember/object/computed';
+import { not } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import Component from '@ember/component';
 import { computed, observer } from '@ember/object';
@@ -9,7 +9,7 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from '../../utils/dom';
 import { guidFor } from '@ember/object/internals';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
-import fastboot from 'ember-bootstrap/utils/cp/fastboot';
+import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -285,22 +285,6 @@ let component = Component.extend({
   backdropTransitionDuration: 150,
 
   /**
-   * @property isFastBoot
-   * @type {Boolean}
-   * @private
-   */
-  isFastBoot: readOnly('fastboot.isFastBoot'),
-
-  /**
-   * Access to the fastboot service if available
-   *
-   * @property fastboot
-   * @type {Ember.Service}
-   * @private
-   */
-  fastboot: fastboot(),
-
-  /**
    * Use CSS transitions?
    *
    * @property usesTransition
@@ -308,7 +292,7 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  usesTransition: usesTransition(),
+  usesTransition: usesTransition('fade'),
 
   /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
@@ -681,12 +665,13 @@ let component = Component.extend({
 
   init() {
     this._super(...arguments);
-    let { isOpen, backdrop, fade, isFastBoot } = this.getProperties('isOpen', 'backdrop', 'fade', 'isFastBoot');
+    let { isOpen, backdrop, fade } = this.getProperties('isOpen', 'backdrop', 'fade');
+    let isFB = isFastBoot(this);
     if (fade === undefined) {
-      fade = !isFastBoot;
+      fade = !isFB;
     }
     this.setProperties({
-      showModal: isOpen && (!fade || isFastBoot),
+      showModal: isOpen && (!fade || isFB),
       showBackdrop: isOpen && backdrop,
       inDom: isOpen,
       fade,

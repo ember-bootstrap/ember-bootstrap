@@ -7,7 +7,6 @@ import { cancel, later, next, run, schedule } from '@ember/runloop';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from '../../utils/dom';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
-import fastboot from 'ember-bootstrap/utils/cp/fastboot';
 
 const InState = EmberObject.extend({
   hover: false,
@@ -310,15 +309,6 @@ let component = Component.extend({
   timer: null,
 
   /**
-   * Access to the fastboot service if available
-   *
-   * @property fastboot
-   * @type {Ember.Service}
-   * @private
-   */
-  fastboot: fastboot(),
-
-  /**
    * Use CSS transitions?
    *
    * @property usesTransition
@@ -326,7 +316,7 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  usesTransition: usesTransition(),
+  usesTransition: usesTransition('fade'),
 
   /**
    * This action is called immediately when the tooltip/popover is about to be shown.

@@ -4,5 +4,5 @@ import formValidationClass from 'ember-bootstrap/utils/cp/form-validation-class'
 export default FormElementControlCheckbox.extend({
   classNames: ['form-check-input'],
   classNameBindings: ['formValidationClass'],
-  formValidationClass: formValidationClass()
+  formValidationClass: formValidationClass('validationType')
 });
