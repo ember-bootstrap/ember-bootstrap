@@ -1,7 +1,20 @@
 import FormElementControlInput from 'ember-bootstrap/components/base/bs-form/element/control/input';
-import ControlValidationMixin from 'ember-bootstrap/mixins/control-validation';
-import SizeClass from 'ember-bootstrap/mixins/size-class';
+import formValidationClass from 'ember-bootstrap/utils/cp/form-validation-class';
+import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 
-export default FormElementControlInput.extend(ControlValidationMixin, SizeClass, {
-  classTypePrefix: 'form-control'
+export default FormElementControlInput.extend({
+  classNameBindings: ['formValidationClass', 'sizeClass'],
+  formValidationClass: formValidationClass('validationType'),
+
+  /**
+   * Property for size styling, set to 'lg', 'sm' or 'xs'
+   *
+   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/forms/#sizing)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+  sizeClass: sizeClass('form-control', 'size'),
 });

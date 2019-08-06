@@ -1,8 +1,8 @@
 import Component from '@ember/component';
 import { observer, computed } from '@ember/object';
-import TypeClass from 'ember-bootstrap/mixins/type-class';
+import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import layout from 'ember-bootstrap/templates/components/bs-navbar';
-import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 
 /**
   Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
@@ -88,17 +88,14 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
   @class Navbar
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.TypeClass
   @public
 */
-export default Component.extend(TypeClass, {
+export default Component.extend({
   layout,
 
   tagName: 'nav',
   classNames: ['navbar'],
-  classNameBindings: ['positionClass'],
-
-  classTypePrefix: 'navbar',
+  classNameBindings: ['positionClass', 'typeClass'],
 
   /**
    * Manages the state for the responsive menu between the toggle and the content.
@@ -149,6 +146,19 @@ export default Component.extend(TypeClass, {
 
     return `${positionPrefix}${position}`;
   }),
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes)
+   *
+   * @property type
+   * @type String
+   * @default 'default'
+   * @public
+   */
+  type: 'default',
+  typeClass: typeClass('navbar', 'type'),
 
   /**
    * The action to be sent when the navbar is about to be collapsed.

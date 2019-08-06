@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion';
-import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 
 /**
   Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),

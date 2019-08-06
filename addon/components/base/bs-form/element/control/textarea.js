@@ -1,5 +1,5 @@
 import Control from '../control';
-import ControlAttributes from 'ember-bootstrap/mixins/control-attributes';
+import { baseAttributes } from './input';
 
 /**
 
@@ -8,8 +8,9 @@ import ControlAttributes from 'ember-bootstrap/mixins/control-attributes';
  @extends Components.FormElementControl
  @private
  */
-export default Control.extend(ControlAttributes, {
+export default Control.extend({
   attributeBindings: [
+    ...baseAttributes,
     'value',
     'placeholder',
     'minlength',

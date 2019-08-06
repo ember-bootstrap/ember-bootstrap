@@ -3,7 +3,7 @@ import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import layout from 'ember-bootstrap/templates/components/bs-carousel/slide';
 import { computed, observer } from '@ember/object';
 import { next } from '@ember/runloop';
-import overrideableCP from '../../../utils/overrideable-cp';
+import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
 
 /**
   A visible user-defined slide.

@@ -1,5 +1,4 @@
 import Control from '../control';
-import ControlAttributes from 'ember-bootstrap/mixins/control-attributes';
 import { computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 
@@ -24,6 +23,18 @@ function canUseType(type) {
   return allowedTypes.get(type);
 }
 
+export const baseAttributes = [
+  'name',
+  'autofocus',
+  'disabled',
+  'readonly',
+  'required',
+  'tabindex',
+  'form',
+  'title',
+  'ariaDescribedBy:aria-describedby'
+];
+
 /**
 
  @class FormElementControlInput
@@ -31,8 +42,10 @@ function canUseType(type) {
  @extends Components.FormElementControl
  @private
  */
-export default Control.extend(ControlAttributes, {
+export default Control.extend({
+  tagName: 'input',
   attributeBindings: [
+    ...baseAttributes,
     'value',
     'type',
     'placeholder',

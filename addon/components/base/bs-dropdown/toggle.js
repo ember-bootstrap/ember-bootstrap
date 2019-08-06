@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import DropdownToggle from 'ember-bootstrap/mixins/dropdown-toggle';
+import { schedule } from '@ember/runloop';
 
 /**
  Anchor element that triggers the parent dropdown to open.
@@ -11,10 +11,12 @@ import DropdownToggle from 'ember-bootstrap/mixins/dropdown-toggle';
  @class DropdownToggle
  @namespace Components
  @extends Ember.Component
- @uses Mixins.DropdownToggle
- @public
+ @publicø
  */
-export default Component.extend(DropdownToggle, {
+export default Component.extend({
+  classNames: ['dropdown-toggle'],
+  ariaRole: 'button',
+
   /**
    * Defaults to a `<a>` tag. Change for other types of dropdown toggles.
    *
@@ -60,6 +62,17 @@ export default Component.extend(DropdownToggle, {
   click(e) {
     e.preventDefault();
     this.get('onClick')();
-  }
+  },
 
+  didReceiveAttrs() {
+    this._super(...arguments);
+    let dropdown = this.get('dropdown');
+    if (dropdown) {
+      schedule('actions', this, function() {
+        if (!this.get('isDestroyed')) {
+          dropdown.set('toggle', this);
+        }
+      });
+    }
+  }
 });

@@ -6,7 +6,7 @@ import { A } from '@ember/array';
 import layout from 'ember-bootstrap/templates/components/bs-tab';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import TabPane from 'ember-bootstrap/components/bs-tab/pane';
-import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 
 /**
   Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,

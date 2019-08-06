@@ -2,10 +2,10 @@ import { not, and } from '@ember/object/computed';
 import Component from '@ember/component';
 import { observer } from '@ember/object';
 import { later } from '@ember/runloop';
-import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
 import layout from 'ember-bootstrap/templates/components/bs-alert';
-import TypeClass from 'ember-bootstrap/mixins/type-class';
-import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+import typeClass from 'ember-bootstrap/utils/cp/type-class';
+import listenTo from 'ember-bootstrap/utils/cp/listen-to';
+import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
 
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -24,13 +24,11 @@ import listenTo from 'ember-bootstrap/utils/listen-to-cp';
   @class Alert
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.TypeClass
-  @uses Mixins.TransitionSupport
   @public
 */
-export default Component.extend(TypeClass, TransitionSupport, {
+export default Component.extend({
   layout,
-  classNameBindings: ['alert', 'fade', 'dismissible:alert-dismissible'],
+  classNameBindings: ['alert', 'fade', 'dismissible:alert-dismissible', 'typeClass'],
 
   /**
    * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
@@ -102,14 +100,6 @@ export default Component.extend(TypeClass, TransitionSupport, {
   showAlert: and('_visible', 'fade'),
 
   /**
-   * @property classTypePrefix
-   * @type String
-   * @default 'alert'
-   * @private
-   */
-  classTypePrefix: 'alert',
-
-  /**
    * The duration of the fade out animation
    *
    * @property fadeDuration
@@ -118,6 +108,29 @@ export default Component.extend(TypeClass, TransitionSupport, {
    * @public
    */
   fadeDuration: 150,
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/alerts/)
+   *
+   * @property type
+   * @type String
+   * @default 'default'
+   * @public
+   */
+  type: 'default',
+  typeClass: typeClass('alert', 'type'),
+
+  /**
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  usesTransition: usesTransition('fade'),
 
   /**
    * The action to be sent after the alert has been dismissed (including the CSS transition).

@@ -5,7 +5,7 @@ import { scheduleOnce } from '@ember/runloop';
 import LinkComponent from '@ember/routing/link-component';
 import layout from 'ember-bootstrap/templates/components/bs-nav/item';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
-import overrideableCP from '../../../utils/overrideable-cp';
+import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
 import { inject as service } from '@ember/service';
 import { isArray } from '@ember/array';
 

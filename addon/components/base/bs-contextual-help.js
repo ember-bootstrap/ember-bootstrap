@@ -1,12 +1,12 @@
-import { or, reads, gt } from '@ember/object/computed';
+import { gt, or, reads } from '@ember/object/computed';
 import Component from '@ember/component';
 import { guidFor } from '@ember/object/internals';
 import { isArray } from '@ember/array';
-import EmberObject, { observer, computed } from '@ember/object';
-import { next, schedule, cancel, later, run } from '@ember/runloop';
-import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
+import EmberObject, { computed, observer } from '@ember/object';
+import { cancel, later, next, run, schedule } from '@ember/runloop';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from '../../utils/dom';
+import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
 
 const InState = EmberObject.extend({
   hover: false,
@@ -21,10 +21,9 @@ function noop() {}
   @class Components.ContextualHelp
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.TransitionSupport
   @private
 */
-let component = Component.extend(TransitionSupport, {
+let component = Component.extend({
   tagName: '',
 
   /**
@@ -308,6 +307,16 @@ let component = Component.extend(TransitionSupport, {
    * @private
    */
   timer: null,
+
+  /**
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  usesTransition: usesTransition('fade'),
 
   /**
    * This action is called immediately when the tooltip/popover is about to be shown.

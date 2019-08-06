@@ -1,4 +1,7 @@
 import FormElementControlTextarea from 'ember-bootstrap/components/base/bs-form/element/control/textarea';
-import ControlValidationMixin from 'ember-bootstrap/mixins/control-validation';
+import formValidationClass from 'ember-bootstrap/utils/cp/form-validation-class';
 
-export default FormElementControlTextarea.extend(ControlValidationMixin);
+export default FormElementControlTextarea.extend({
+  classNameBindings: ['formValidationClass'],
+  formValidationClass: formValidationClass('validationType')
+});

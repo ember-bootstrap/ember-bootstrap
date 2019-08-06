@@ -1,15 +1,15 @@
 import { not } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import Component from '@ember/component';
-import { getOwner } from '@ember/application';
-import { computed, get, observer } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import { bind, next, schedule } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-modal';
-import TransitionSupport from 'ember-bootstrap/mixins/transition-support';
-import listenTo from 'ember-bootstrap/utils/listen-to-cp';
+import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from '../../utils/dom';
 import { guidFor } from '@ember/object/internals';
+import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
+import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -49,10 +49,9 @@ import { guidFor } from '@ember/object/internals';
   @class Modal
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.TransitionSupport
   @public
 */
-let component = Component.extend(TransitionSupport, {
+let component = Component.extend({
   layout,
   tagName: '',
 
@@ -286,28 +285,14 @@ let component = Component.extend(TransitionSupport, {
   backdropTransitionDuration: 150,
 
   /**
-   * @property isFastBoot
-   * @type {Boolean}
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
    * @private
    */
-  isFastBoot: computed(function() {
-    if (!getOwner) {
-      // Ember.getOwner is available as of Ember 2.3, while FastBoot requires 2.4. So just return false...
-      return false;
-    }
-
-    let owner = getOwner(this);
-    if (!owner) {
-      return false;
-    }
-
-    let fastboot = owner.lookup('service:fastboot');
-    if (!fastboot) {
-      return false;
-    }
-
-    return get(fastboot, 'isFastBoot');
-  }),
+  usesTransition: usesTransition('fade'),
 
   /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
@@ -680,12 +665,13 @@ let component = Component.extend(TransitionSupport, {
 
   init() {
     this._super(...arguments);
-    let { isOpen, backdrop, fade, isFastBoot } = this.getProperties('isOpen', 'backdrop', 'fade', 'isFastBoot');
+    let { isOpen, backdrop, fade } = this.getProperties('isOpen', 'backdrop', 'fade');
+    let isFB = isFastBoot(this);
     if (fade === undefined) {
-      fade = !isFastBoot;
+      fade = !isFB;
     }
     this.setProperties({
-      showModal: isOpen && (!fade || isFastBoot),
+      showModal: isOpen && (!fade || isFB),
       showBackdrop: isOpen && backdrop,
       inDom: isOpen,
       fade,
