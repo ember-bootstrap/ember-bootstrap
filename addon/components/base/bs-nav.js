@@ -16,10 +16,10 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
 
   ```hbs
   <BsNav @type="pills" as |nav|>
-    <nav.item @linkTo="foo">
+    <nav.item @route="foo">
       Foo
     </nav.item>
-    <nav.item @linkTo=(array "bar" model)>
+    <nav.item @route="bar" @model={{this.model}}>
       Bar
     </nav.item>
   </BsNav>
@@ -33,9 +33,9 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
   ### Active items
 
   Bootstrap expects to have the `active` class on the `<li>` element that should be the active (highlighted)
-  navigation item. To achieve that just use the `link-to` helper as usual. If the link is active, i.e
-  it points to the current route, the `bs-nav-item` component will detect that and apply the `active` class
-  automatically. The same applies for the `disabled` state.
+  navigation item. To achieve that use the `@route` and optionally `@model` (or `@models`) and `@query` properties
+  of the yielded `nav.item` component just as you would for Ember's `<LinkTo>` component to create a link with proper
+  `active` class support.
 
   ### Dropdowns
 
@@ -44,7 +44,7 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
 
   ```hbs
   <BsNav @type="pills" as |nav|>
-    <nav.item @linkTo="index">Home</nav.item>
+    <nav.item @route="index">Home</nav.item>
     <nav.dropdown as |dd|>
       <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
       <dd.menu as |ddm|>
@@ -57,12 +57,9 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
 
   ### Bootstrap 3/4 Notes
 
-  Use [`nav.item#linkTo`](Components.NavItem.html) for in-app links to ensure proper styling regardless of
+  Use [`nav.item#route`](Components.NavItem.html) for in-app links to ensure proper styling regardless of
   Bootstrap version. Explicit use of `<a>` tags in Bootstrap 4 must apply the `nav-link` class and manage
   the `active` state explicitly.
-
-  You can override `tagName` if you want to use Bootstrap 4's ability to represent more structural
-  components with `div` tags.
 
   The `fill` styling is only available with Bootstrap 4
 

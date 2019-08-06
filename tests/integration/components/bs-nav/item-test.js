@@ -1,6 +1,6 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click } from '@ember/test-helpers';
+import { click, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import test from 'ember-sinon-qunit/test-support/test';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
@@ -13,7 +13,7 @@ module('Integration | Component | bs-nav/item', function(hooks) {
   hooks.beforeEach(function() {
     this.actions = {};
     this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
-    this.owner.lookup('router:main').setupRouter();
+    this.owner.setupRouter();
   });
 
   test('it has correct markup', async function(assert) {
@@ -50,32 +50,6 @@ module('Integration | Component | bs-nav/item', function(hooks) {
     assert.dom('li').hasClass('active', 'has active class');
   });
 
-  test('simple linkTo property adds link', async function(assert) {
-    await render(hbs`{{bs-nav/item linkTo="index"}}`);
-
-    assert.dom('li a').exists({ count: 1 });
-    assert.dom('li a').hasAttribute('href', '/');
-  });
-
-  test('complex linkTo property adds link', async function(assert) {
-    await render(hbs`{{bs-nav/item linkTo=(array "acceptance.link" "1" (query-params foo="bar"))}}`);
-
-    assert.dom('li a').exists({ count: 1 });
-    assert.dom('li a').hasAttribute('href', '/acceptance/link/1?foo=bar');
-  });
-
-  testBS4('link has nav-link class', async function(assert) {
-    await render(hbs`{{bs-nav/item linkTo="index"}}`);
-
-    assert.dom('li a').hasClass('nav-link');
-  });
-
-  test('disabled and linkTo property adds disabled link', async function(assert) {
-    await render(hbs`{{bs-nav/item linkTo="index" disabled=true}}`);
-
-    assert.dom('li a').hasClass('disabled');
-  });
-
   test('[DEPRECATED] active link-to makes nav item active', async function(assert) {
 
     await render(hbs`
@@ -105,5 +79,40 @@ module('Integration | Component | bs-nav/item', function(hooks) {
     await click('li');
 
     assert.ok(action.calledOnce, 'action has been called');
+  });
+
+  module('link', function() {
+    test('simple route link', async function(assert) {
+      await render(hbs`<BsNav::item @route="index" />`);
+
+      assert.dom('li a').exists({ count: 1 });
+      assert.dom('li a').hasAttribute('href', '/');
+    });
+
+    test('link with model', async function(assert) {
+      await render(hbs`<BsNav::item @route="acceptance.link" @model="1" @query={{hash foo="bar"}} />`);
+
+      assert.dom('li a').exists({ count: 1 });
+      assert.dom('li a').hasAttribute('href', '/acceptance/link/1?foo=bar');
+    });
+
+    test('link with models', async function(assert) {
+      await render(hbs`<BsNav::item @route="acceptance.link" @models={{array "1"}} @query={{hash foo="bar"}} />`);
+
+      assert.dom('li a').exists({ count: 1 });
+      assert.dom('li a').hasAttribute('href', '/acceptance/link/1?foo=bar');
+    });
+
+    testBS4('link has nav-link class', async function(assert) {
+      await render(hbs`<BsNav::item @route="index" />`);
+
+      assert.dom('li a').hasClass('nav-link');
+    });
+
+    test('disabled link', async function(assert) {
+      await render(hbs`<BsNav::item @route="index" @disabled={{true}} />`);
+
+      assert.dom('li a').hasClass('disabled');
+    });
   });
 });

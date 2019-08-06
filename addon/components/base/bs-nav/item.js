@@ -1,13 +1,13 @@
 import Component from '@ember/component';
-import { observer, computed } from '@ember/object';
-import { filter, filterBy, gt } from '@ember/object/computed';
+import { observer } from '@ember/object';
+import { filter, filterBy, gt, or } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
 import LinkComponent from '@ember/routing/link-component';
 import layout from 'ember-bootstrap/templates/components/bs-nav/item';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
 import { inject as service } from '@ember/service';
-import { isArray } from '@ember/array';
+import { assert } from '@ember/debug';
 
 /**
 
@@ -26,19 +26,40 @@ export default Component.extend(ComponentParent, {
   router: service(),
 
   /**
-   * If set will wrap the item's content in a link. Accepts either a string with the route name, or an array
-   * with the route name and one or multiple models / query params, similar to the positional params of `{{link-to ...}}`
+   * If set will wrap the item's content in a link to the given route name. Same as the `route` property of `<LinkTo>`,
+   * see https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=route
    *
-   * @property linkTo
-   * @type {string|array}
+   * @property route
+   * @type {string}
    * @public
    */
-  linkTo: undefined,
 
-  linkToParams: computed('linkTo', function() {
-    let params = this.get('linkTo');
-    return params ? (isArray(params) ? params : [params]) : undefined;
-  }),
+  /**
+   * The model of a dynamic route. Same as the `model` property of `<LinkTo>`,
+   * see https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=model
+   *
+   * @property model
+   * @type {object|string}
+   * @public
+   */
+
+  /**
+   * The models of a dynamic route. Same as the `models` property of `<LinkTo>`,
+   * see https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=models
+   *
+   * @property models
+   * @type {array}
+   * @public
+   */
+
+  /**
+   * The query params of a dynamic route. Same as the `query` property of `<LinkTo>`,
+   * see https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=query
+   *
+   * @property query
+   * @type {object}
+   * @public
+   */
 
   /**
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
@@ -64,10 +85,27 @@ export default Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  active: overrideableCP('_active', 'linkToParams.[]', 'router.currentURL', function() {
-    let params = this.get('linkToParams');
+  active: overrideableCP('_active', 'route', 'model', 'models', 'query', 'router.currentURL', function() {
+    let { route, model, models, query } = this.getProperties('route', 'model', 'models', 'query');
+    let params = [];
 
-    return params ? this.get('router').isActive(...params) : this.get('_active');
+    if (route) {
+      params.push(route);
+    }
+
+    if (model) {
+      params.push(model);
+    }
+
+    if (models) {
+      params.push(...models);
+    }
+
+    if (query) {
+      params.push({ queryParams: true, ...query});
+    }
+
+    return params.length ? this.get('router').isActive(...params) : this.get('_active');
   }),
   _active: false,
 
@@ -87,6 +125,8 @@ export default Component.extend(ComponentParent, {
   disabledChildLinks: filterBy('childLinks', 'disabled'),
   hasDisabledChildLinks: gt('disabledChildLinks.length', 0),
 
+  hasLink: or('route', 'model', 'models', 'query'),
+
   /**
    * Called when clicking the nav item
    *
@@ -101,6 +141,9 @@ export default Component.extend(ComponentParent, {
 
   init() {
     this._super(...arguments);
+    let { model, models } = this.getProperties('model', 'models');
+    assert('You cannot pass both `@model` and `@models` to a nav item component!', !model || !models);
+
     this.get('activeChildLinks');
     this.get('disabledChildLinks');
   },

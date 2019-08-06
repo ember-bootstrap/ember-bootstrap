@@ -87,8 +87,8 @@
   <!-- BEGIN-SNIPPET tab-route-->
   <div>
     <BsNav @type="tabs" as |nav|>
-      <nav.item @linkTo="demo.tabs.index">Tab 1</nav.item>
-      <nav.item @linkTo="demo.tabs.other">Tab 2</nav.item>
+      <nav.item @route="demo.tabs.index">Tab 1</nav.item>
+      <nav.item @route="demo.tabs.other">Tab 2</nav.item>
     </BsNav>
     {{outlet}}
   </div>
