@@ -11,7 +11,6 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
   Use in combination with the yielded components
 
   * [Components.NavItem](Components.NavItem.html)
-  * [Components.NavLinkTo](Components.NavLinkTo.html)
   * [`nav.dropdown`](Components.Dropdown.html)
 
   ```hbs
