@@ -15,9 +15,9 @@ import { deprecate } from '@ember/application/deprecations';
 export default LinkComponent.extend(ComponentChild, {
   init() {
     this._super(...arguments);
-    deprecate('The link-to component yielded by bs-nav is deprecated. Use the linkTo property of the yielded item component instead!\n' +
+    deprecate('The link-to component yielded by bs-nav is deprecated. Use the route property of the yielded item component instead!\n' +
       'Before: {{#nav.item}}{{#nav.link-to "index"}}foo{{/nav.link-to}}{{/nav.item}}\n' +
-      'After: {{#nav.item linkTo="index"}}foo{{/nav.item}}',
+      'After: {{#nav.item route="index"}}foo{{/nav.item}} or: <nav.item @route="index">foo</nav.item>',
       false,
       {
         id: 'ember-bootstrap.nav.link-to',
