@@ -1,4 +1,23 @@
 
+## 3.0.0-rc.2 (2019-08-12)
+
+#### :boom: Breaking Change
+* [#861](https://github.com/kaliber5/ember-bootstrap/pull/861) Change nav.item link support to match Ember's `<LinkTo>` ([@simonihmig](https://github.com/simonihmig))
+* [#862](https://github.com/kaliber5/ember-bootstrap/pull/862) BsForm should not catch errors thrown by onSubmit action ([@jelhan](https://github.com/jelhan))
+
+#### Features
+* [#861](https://github.com/kaliber5/ember-bootstrap/pull/861) Change nav.item link support to match Ember's `<LinkTo>` ([@simonihmig](https://github.com/simonihmig))
+* [#859](https://github.com/kaliber5/ember-bootstrap/pull/859) Warn if configured to import Glyphicon but Boostrap 4 is used ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#862](https://github.com/kaliber5/ember-bootstrap/pull/862) BsForm should not catch errors thrown by onSubmit action ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#864](https://github.com/kaliber5/ember-bootstrap/pull/864) Refactored mixins ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
 ## 3.0.0-rc.1 (2019-07-08)
 
 #### :boom: Breaking Change
