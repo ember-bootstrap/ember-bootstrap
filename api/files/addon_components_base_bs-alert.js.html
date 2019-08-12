@@ -62,10 +62,10 @@ import { not, and } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { observer } from &#x27;@ember/object&#x27;;
 import { later } from &#x27;@ember/runloop&#x27;;
-import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-alert&#x27;;
-import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
-import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
+import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
+import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
+import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
 
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -84,13 +84,11 @@ import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
   @class Alert
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.TypeClass
-  @uses Mixins.TransitionSupport
   @public
 */
-export default Component.extend(TypeClass, TransitionSupport, {
+export default Component.extend({
   layout,
-  classNameBindings: [&#x27;alert&#x27;, &#x27;fade&#x27;, &#x27;dismissible:alert-dismissible&#x27;],
+  classNameBindings: [&#x27;alert&#x27;, &#x27;fade&#x27;, &#x27;dismissible:alert-dismissible&#x27;, &#x27;typeClass&#x27;],
 
   /**
    * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
@@ -162,14 +160,6 @@ export default Component.extend(TypeClass, TransitionSupport, {
   showAlert: and(&#x27;_visible&#x27;, &#x27;fade&#x27;),
 
   /**
-   * @property classTypePrefix
-   * @type String
-   * @default &#x27;alert&#x27;
-   * @private
-   */
-  classTypePrefix: &#x27;alert&#x27;,
-
-  /**
    * The duration of the fade out animation
    *
    * @property fadeDuration
@@ -178,6 +168,29 @@ export default Component.extend(TypeClass, TransitionSupport, {
    * @public
    */
   fadeDuration: 150,
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/alerts/)
+   *
+   * @property type
+   * @type String
+   * @default &#x27;default&#x27;
+   * @public
+   */
+  type: &#x27;default&#x27;,
+  typeClass: typeClass(&#x27;alert&#x27;, &#x27;type&#x27;),
+
+  /**
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  usesTransition: usesTransition(&#x27;fade&#x27;),
 
   /**
    * The action to be sent after the alert has been dismissed (including the CSS transition).
@@ -328,13 +341,6 @@ export default Component.extend(TypeClass, TransitionSupport, {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
         </ul>
       </div>
     </div>

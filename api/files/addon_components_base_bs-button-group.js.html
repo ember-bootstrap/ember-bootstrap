@@ -62,7 +62,7 @@ import { equal } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { isArray, A } from &#x27;@ember/array&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-button-group&#x27;;
-import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
+import sizeClass from &#x27;ember-bootstrap/utils/cp/size-class&#x27;;
 
 /**
   Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
@@ -118,13 +118,12 @@ import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
   @class ButtonGroup
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.SizeClass
   @public
 */
-export default Component.extend(SizeClass, {
+export default Component.extend({
   layout,
   ariaRole: &#x27;group&#x27;,
-  classNameBindings: [&#x27;vertical:btn-group-vertical:btn-group&#x27;],
+  classNameBindings: [&#x27;vertical:btn-group-vertical:btn-group&#x27;, &#x27;sizeClass&#x27;],
 
   /**
    * @property buttonComponent
@@ -132,14 +131,6 @@ export default Component.extend(SizeClass, {
    * @private
    */
   buttonComponent: &#x27;bs-button-group/button&#x27;,
-
-  /**
-   * @property classTypePrefix
-   * @type String
-   * @default &#x27;btn-group&#x27;
-   * @protected
-   */
-  classTypePrefix: &#x27;btn-group&#x27;,
 
   /**
    * Set to true for a vertically stacked button group, see http://getbootstrap.com/components/#btn-groups-vertical
@@ -192,6 +183,18 @@ export default Component.extend(SizeClass, {
    * @private
    */
   isRadio: equal(&#x27;type&#x27;, &#x27;radio&#x27;).readOnly(),
+
+  /**
+   * Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27;
+   *
+   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/button-group/#sizing)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+  sizeClass: sizeClass(&#x27;btn-group&#x27;, &#x27;size&#x27;),
 
   /**
    * This action is called whenever the button group&#x27;s value should be changed because the user clicked a button.
@@ -305,13 +308,6 @@ export default Component.extend(SizeClass, {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
         </ul>
       </div>
     </div>

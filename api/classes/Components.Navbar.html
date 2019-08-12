@@ -66,8 +66,8 @@
   &lt;/div&gt;
   &lt;navbar.content&gt;
     &lt;navbar.nav as |nav|&gt;
-      &lt;nav.item @linkTo="home"&gt;Home&lt;/nav.item&gt;
-      &lt;nav.item @linkTo="navbars"&gt;Navbars&lt;/nav.item&gt;
+      &lt;nav.item @route="home"&gt;Home&lt;/nav.item&gt;
+      &lt;nav.item @route="navbars"&gt;Navbars&lt;/nav.item&gt;
     &lt;/navbar.nav&gt;
   &lt;/navbar.content&gt;
 &lt;/BsNavBar&gt;
@@ -88,10 +88,10 @@ when the actual content is collapsed. It should <em>not</em> be used for BS4!</p
 </ul>
 <h3>Responsive Design</h3>
 <p>For the mobile breakpoint the Bootstrap styles will hide the navbar content (<code>{{navbar.content}}</code>). Clicking on the
-navbar toggle button (<code>{{navbar.toggle}}</code>) will expand the menu. By default all nav links (<code>&lt;nav.item @linkTo="..."&gt;</code>) are already
+navbar toggle button (<code>{{navbar.toggle}}</code>) will expand the menu. By default all nav links (<code>&lt;nav.item @route="..."&gt;</code>) are already
 wired up to call the navbar's <code>collapse</code> action, so clicking any of them will collapse the navbar. To selectively
 prevent that, you can set its <code>collapseNavbar</code> property to false:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;nav.item @linkTo="index" @collapseNavbar={{false}}&gt;Don't collapse&lt;/nav.item&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;nav.item @route="index" @collapseNavbar={{false}}&gt;Don't collapse&lt;/nav.item&gt;
 </code></pre>
 <p>To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded <code>collapse</code>
 action:</p>
@@ -123,14 +123,6 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
 
   <div class="card-footer text-muted">
     <dl class="row m-0">
-        <dt class="col-sm-3">
-          Uses
-        </dt>
-        <dd class="col-sm-9">
-          <ul class="list-inline mb-0">
-              <li class="list-inline-item"><a href="Mixins.TypeClass.html">Mixins.TypeClass</a></li>
-          </ul>
-        </dd>
         <dt class="col-sm-3">
           Extends
         </dt>
@@ -226,11 +218,6 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                      data-tablink="backgroundColor">backgroundColor</a>
 
                 </li>
-                <li class="index-item property protected inherited">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_classTypePrefix"
-                     data-tablink="classTypePrefix">classTypePrefix</a>
-
-                </li>
                 <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_collapsed"
                      data-tablink="collapsed">collapsed</a>
@@ -276,7 +263,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                      data-tablink="toggleComponent">toggleComponent</a>
 
                 </li>
-                <li class="index-item property public inherited">
+                <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_type"
                      data-tablink="type">type</a>
 
@@ -326,7 +313,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-navbar.js.html#l214"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:214</code></a>
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l224"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:224</code></a>
                     </p>
             
             
@@ -356,7 +343,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-navbar.js.html#l204"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:204</code></a>
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l214"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:214</code></a>
                     </p>
             
             
@@ -387,7 +374,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l113"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:113</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l110"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:110</code></a>
               </p>
             
             
@@ -416,7 +403,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> &#x27;light&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l251"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:251</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l261"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:261</code></a>
               </p>
             
             
@@ -427,34 +414,6 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             in the set that composes the <code>bg-*</code> classes and can be extended by creating your
             own <code>bg-*</code> classes.</p>
             
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_classTypePrefix"
-                 class="property item protected inherited">
-              <h3 class="name">classTypePrefix
-                <span class="badge badge-secondary small">string</span>
-                  <span class="badge badge-protected small">protected</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>Inherited from
-                    <a href="../classes/Mixins.TypeClass.html#property_classTypePrefix">Mixins.TypeClass</a>:
-                  <a href="../files/addon_mixins_type-class.js.html#l12"><code>addon&#x2F;mixins&#x2F;type-class.js:12</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                Prefix for the type class, e.g. "btn" for button type classes ("btn-primary2 etc.)
               </div>
             
             
@@ -476,7 +435,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l103"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:103</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l100"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:100</code></a>
               </p>
             
             
@@ -505,7 +464,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l269"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:269</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l279"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:279</code></a>
               </p>
             
             
@@ -534,7 +493,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l119"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:119</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l116"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:116</code></a>
               </p>
             
             
@@ -563,7 +522,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l283"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:283</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l293"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:293</code></a>
               </p>
             
             
@@ -591,7 +550,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l276"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:276</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l286"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:286</code></a>
               </p>
             
             
@@ -619,7 +578,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l290"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:290</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l300"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:300</code></a>
               </p>
             
             
@@ -648,7 +607,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> null</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l129"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:129</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l126"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:126</code></a>
               </p>
             
             
@@ -680,7 +639,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> &#x27;lg&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l240"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:240</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l250"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:250</code></a>
               </p>
             
             
@@ -711,7 +670,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l262"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:262</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l272"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:272</code></a>
               </p>
             
             
@@ -726,7 +685,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             
             </div>
             <div id="property_type"
-                 class="property item public inherited">
+                 class="property item public">
               <h3 class="name">type
                 <span class="badge badge-secondary small">String</span>
                   <span class="badge badge-public small">public</span>
@@ -738,18 +697,18 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             
               <div class="meta">
                   <p><strong>Default:</strong> &#x27;default&#x27;</p>
-                  <p>Inherited from
-                    <a href="../classes/Mixins.TypeClass.html#property_type">Mixins.TypeClass</a>:
-                  <a href="../files/addon_mixins_type-class.js.html#l34"><code>addon&#x2F;mixins&#x2F;type-class.js:34</code></a>
+                  <p>
+                      Defined in
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l150"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:150</code></a>
               </p>
             
             
               </div>
             
               <div class="description">
-                Property for type styling
+                <p>Property for type styling</p>
+            <p>For the available types see the <a href="https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes">Bootstrap docs</a></p>
             
-            For the available types see the [Bootstrap docs](http://getbootstrap.com/css/#buttons-options) (use without "btn-" prefix)
               </div>
             
             
@@ -772,7 +731,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-navbar.js.html#l153"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:153</code></a>
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l163"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:163</code></a>
                     </p>
             
             
@@ -800,7 +759,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-navbar.js.html#l164"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:164</code></a>
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l174"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:174</code></a>
                     </p>
             
             
@@ -826,7 +785,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-navbar.js.html#l172"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:172</code></a>
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l182"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:182</code></a>
                     </p>
             
             
@@ -854,7 +813,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-navbar.js.html#l183"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:183</code></a>
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l193"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:193</code></a>
                     </p>
             
             
@@ -947,13 +906,6 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
         </ul>
       </div>
     </div>

@@ -59,7 +59,7 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import Control from &#x27;../control&#x27;;
-import ControlAttributes from &#x27;ember-bootstrap/mixins/control-attributes&#x27;;
+import { baseAttributes } from &#x27;./input&#x27;;
 
 /**
 
@@ -68,8 +68,9 @@ import ControlAttributes from &#x27;ember-bootstrap/mixins/control-attributes&#x
  @extends Components.FormElementControl
  @private
  */
-export default Control.extend(ControlAttributes, {
+export default Control.extend({
   attributeBindings: [
+    ...baseAttributes,
     &#x27;value&#x27;,
     &#x27;placeholder&#x27;,
     &#x27;minlength&#x27;,
@@ -171,13 +172,6 @@ export default Control.extend(ControlAttributes, {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
         </ul>
       </div>
     </div>

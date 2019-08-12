@@ -63,9 +63,9 @@ import Component from &#x27;@ember/component&#x27;;
 import { observer, computed } from &#x27;@ember/object&#x27;;
 import { deprecatingAlias, equal, or }  from &#x27;@ember/object/computed&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-button&#x27;;
-import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
-import SizeClass from &#x27;ember-bootstrap/mixins/size-class&#x27;;
-import overrideableCP from &#x27;../../utils/overrideable-cp&#x27;;
+import sizeClass from &#x27;ember-bootstrap/utils/cp/size-class&#x27;;
+import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
+import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -136,23 +136,13 @@ import overrideableCP from &#x27;../../utils/overrideable-cp&#x27;;
   @class Button
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.TypeClass
-  @uses Mixins.SizeClass
   @public
 */
-export default Component.extend(TypeClass, SizeClass, {
+export default Component.extend({
   layout,
   tagName: &#x27;button&#x27;,
   classNames: [&#x27;btn&#x27;],
-  classNameBindings: [&#x27;active&#x27;, &#x27;block:btn-block&#x27;],
-
-  /**
-   * @property classTypePrefix
-   * @type String
-   * @default &#x27;btn&#x27;
-   * @private
-   */
-  classTypePrefix: &#x27;btn&#x27;,
+  classNameBindings: [&#x27;active&#x27;, &#x27;block:btn-block&#x27;, &#x27;sizeClass&#x27;, &#x27;typeClass&#x27;],
 
   attributeBindings: [&#x27;_disabled:disabled&#x27;, &#x27;buttonType:type&#x27;, &#x27;title&#x27;],
 
@@ -393,6 +383,31 @@ export default Component.extend(TypeClass, SizeClass, {
   reset: null,
 
   /**
+   * Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27;
+   *
+   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/buttons/#sizes)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  size: null,
+  sizeClass: sizeClass(&#x27;btn&#x27;, &#x27;size&#x27;),
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/buttons/)
+   *
+   * @property type
+   * @type String
+   * @default &#x27;default&#x27;
+   * @public
+   */
+
+  typeClass: typeClass(&#x27;btn&#x27;, &#x27;type&#x27;),
+
+  /**
    * The HTML title attribute
    *
    * @property title
@@ -553,13 +568,6 @@ export default Component.extend(TypeClass, SizeClass, {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
         </ul>
       </div>
     </div>

@@ -65,14 +65,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.Tooltip",
         "Components.TooltipElement",
         "Mixins.ComponentChild",
-        "Mixins.ComponentParent",
-        "Mixins.ControlAttributes",
-        "Mixins.ControlValidation",
-        "Mixins.DropdownToggle",
-        "Mixins.SizeClass",
-        "Mixins.SubComponent",
-        "Mixins.TransitionSupport",
-        "Mixins.TypeClass"
+        "Mixins.ComponentParent"
     ],
     "modules": [],
     "allModules": [],

@@ -60,9 +60,9 @@
     <pre class="prettyprint linenums">
 import Component from &#x27;@ember/component&#x27;;
 import { observer, computed } from &#x27;@ember/object&#x27;;
-import TypeClass from &#x27;ember-bootstrap/mixins/type-class&#x27;;
+import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-navbar&#x27;;
-import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
+import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
 
 /**
   Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
@@ -79,8 +79,8 @@ import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
     &lt;/div&gt;
     &lt;navbar.content&gt;
       &lt;navbar.nav as |nav|&gt;
-        &lt;nav.item @linkTo=&quot;home&quot;&gt;Home&lt;/nav.item&gt;
-        &lt;nav.item @linkTo=&quot;navbars&quot;&gt;Navbars&lt;/nav.item&gt;
+        &lt;nav.item @route=&quot;home&quot;&gt;Home&lt;/nav.item&gt;
+        &lt;nav.item @route=&quot;navbars&quot;&gt;Navbars&lt;/nav.item&gt;
       &lt;/navbar.nav&gt;
     &lt;/navbar.content&gt;
   &lt;/BsNavBar&gt;
@@ -104,12 +104,12 @@ import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
   ### Responsive Design
 
   For the mobile breakpoint the Bootstrap styles will hide the navbar content (&#x60;{{navbar.content}}&#x60;). Clicking on the
-  navbar toggle button (&#x60;{{navbar.toggle}}&#x60;) will expand the menu. By default all nav links (&#x60;&lt;nav.item @linkTo=&quot;...&quot;&gt;&#x60;) are already
+  navbar toggle button (&#x60;{{navbar.toggle}}&#x60;) will expand the menu. By default all nav links (&#x60;&lt;nav.item @route=&quot;...&quot;&gt;&#x60;) are already
   wired up to call the navbar&#x27;s &#x60;collapse&#x60; action, so clicking any of them will collapse the navbar. To selectively
   prevent that, you can set its &#x60;collapseNavbar&#x60; property to false:
 
   &#x60;&#x60;&#x60;hbs
-  &lt;nav.item @linkTo=&quot;index&quot; @collapseNavbar={{false}}&gt;Don&#x27;t collapse&lt;/nav.item&gt;
+  &lt;nav.item @route=&quot;index&quot; @collapseNavbar={{false}}&gt;Don&#x27;t collapse&lt;/nav.item&gt;
   &#x60;&#x60;&#x60;
 
   To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded &#x60;collapse&#x60;
@@ -148,17 +148,14 @@ import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
   @class Navbar
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.TypeClass
   @public
 */
-export default Component.extend(TypeClass, {
+export default Component.extend({
   layout,
 
   tagName: &#x27;nav&#x27;,
   classNames: [&#x27;navbar&#x27;],
-  classNameBindings: [&#x27;positionClass&#x27;],
-
-  classTypePrefix: &#x27;navbar&#x27;,
+  classNameBindings: [&#x27;positionClass&#x27;, &#x27;typeClass&#x27;],
 
   /**
    * Manages the state for the responsive menu between the toggle and the content.
@@ -209,6 +206,19 @@ export default Component.extend(TypeClass, {
 
     return &#x60;${positionPrefix}${position}&#x60;;
   }),
+
+  /**
+   * Property for type styling
+   *
+   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes)
+   *
+   * @property type
+   * @type String
+   * @default &#x27;default&#x27;
+   * @public
+   */
+  type: &#x27;default&#x27;,
+  typeClass: typeClass(&#x27;navbar&#x27;, &#x27;type&#x27;),
 
   /**
    * The action to be sent when the navbar is about to be collapsed.
@@ -432,13 +442,6 @@ export default Component.extend(TypeClass, {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
         </ul>
       </div>
     </div>

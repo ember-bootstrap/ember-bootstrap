@@ -75,9 +75,9 @@ import { deprecate } from &#x27;@ember/application/deprecations&#x27;;
 export default LinkComponent.extend(ComponentChild, {
   init() {
     this._super(...arguments);
-    deprecate(&#x27;The link-to component yielded by bs-nav is deprecated. Use the linkTo property of the yielded item component instead!\n&#x27; +
+    deprecate(&#x27;The link-to component yielded by bs-nav is deprecated. Use the route property of the yielded item component instead!\n&#x27; +
       &#x27;Before: {{#nav.item}}{{#nav.link-to &quot;index&quot;}}foo{{/nav.link-to}}{{/nav.item}}\n&#x27; +
-      &#x27;After: {{#nav.item linkTo=&quot;index&quot;}}foo{{/nav.item}}&#x27;,
+      &#x27;After: {{#nav.item route=&quot;index&quot;}}foo{{/nav.item}} or: &lt;nav.item @route=&quot;index&quot;&gt;foo&lt;/nav.item&gt;&#x27;,
       false,
       {
         id: &#x27;ember-bootstrap.nav.link-to&#x27;,
@@ -163,13 +163,6 @@ export default LinkComponent.extend(ComponentChild, {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
         </ul>
       </div>
     </div>

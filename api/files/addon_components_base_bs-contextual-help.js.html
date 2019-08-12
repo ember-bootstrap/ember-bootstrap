@@ -58,15 +58,15 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { or, reads, gt } from &#x27;@ember/object/computed&#x27;;
+import { gt, or, reads } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { guidFor } from &#x27;@ember/object/internals&#x27;;
 import { isArray } from &#x27;@ember/array&#x27;;
-import EmberObject, { observer, computed } from &#x27;@ember/object&#x27;;
-import { next, schedule, cancel, later, run } from &#x27;@ember/runloop&#x27;;
-import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
+import EmberObject, { computed, observer } from &#x27;@ember/object&#x27;;
+import { cancel, later, next, run, schedule } from &#x27;@ember/runloop&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 import { getDestinationElement } from &#x27;../../utils/dom&#x27;;
+import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
 
 const InState = EmberObject.extend({
   hover: false,
@@ -81,10 +81,9 @@ function noop() {}
   @class Components.ContextualHelp
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.TransitionSupport
   @private
 */
-let component = Component.extend(TransitionSupport, {
+let component = Component.extend({
   tagName: &#x27;&#x27;,
 
   /**
@@ -368,6 +367,16 @@ let component = Component.extend(TransitionSupport, {
    * @private
    */
   timer: null,
+
+  /**
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
+   * @private
+   */
+  usesTransition: usesTransition(&#x27;fade&#x27;),
 
   /**
    * This action is called immediately when the tooltip/popover is about to be shown.
@@ -810,13 +819,6 @@ export default component;
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
         </ul>
       </div>
     </div>

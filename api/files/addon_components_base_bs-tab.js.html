@@ -66,7 +66,7 @@ import { A } from &#x27;@ember/array&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-tab&#x27;;
 import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
 import TabPane from &#x27;ember-bootstrap/components/bs-tab/pane&#x27;;
-import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
+import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
 
 /**
   Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap&#x27;s tab.js plugin,
@@ -154,8 +154,8 @@ import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
   &#x60;&#x60;&#x60;hbs
   &lt;div&gt;
     &lt;BsNav @type=&quot;tabs&quot; as |nav|&gt;
-      &lt;nav.item @linkTo=&quot;tabs.index&quot;&gt;Tab 1&lt;/nav.item&gt;
-      &lt;nav.item @linkTo=&quot;tabs.other&quot;&gt;Tab 3&lt;/nav.item&gt;
+      &lt;nav.item @route=&quot;tabs.index&quot;&gt;Tab 1&lt;/nav.item&gt;
+      &lt;nav.item @route=&quot;tabs.other&quot;&gt;Tab 3&lt;/nav.item&gt;
     &lt;/BsNav&gt;
   &lt;/div&gt;
   &#x60;&#x60;&#x60;
@@ -398,13 +398,6 @@ export default Component.extend(ComponentParent, {
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
         </ul>
       </div>
     </div>

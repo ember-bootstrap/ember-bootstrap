@@ -61,15 +61,15 @@
 import { not } from &#x27;@ember/object/computed&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { getOwner } from &#x27;@ember/application&#x27;;
-import { computed, get, observer } from &#x27;@ember/object&#x27;;
+import { computed, observer } from &#x27;@ember/object&#x27;;
 import { bind, next, schedule } from &#x27;@ember/runloop&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-modal&#x27;;
-import TransitionSupport from &#x27;ember-bootstrap/mixins/transition-support&#x27;;
-import listenTo from &#x27;ember-bootstrap/utils/listen-to-cp&#x27;;
+import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 import { getDestinationElement } from &#x27;../../utils/dom&#x27;;
 import { guidFor } from &#x27;@ember/object/internals&#x27;;
+import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
+import isFastBoot from &#x27;ember-bootstrap/utils/is-fastboot&#x27;;
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -109,10 +109,9 @@ import { guidFor } from &#x27;@ember/object/internals&#x27;;
   @class Modal
   @namespace Components
   @extends Ember.Component
-  @uses Mixins.TransitionSupport
   @public
 */
-let component = Component.extend(TransitionSupport, {
+let component = Component.extend({
   layout,
   tagName: &#x27;&#x27;,
 
@@ -346,28 +345,14 @@ let component = Component.extend(TransitionSupport, {
   backdropTransitionDuration: 150,
 
   /**
-   * @property isFastBoot
-   * @type {Boolean}
+   * Use CSS transitions?
+   *
+   * @property usesTransition
+   * @type boolean
+   * @readonly
    * @private
    */
-  isFastBoot: computed(function() {
-    if (!getOwner) {
-      // Ember.getOwner is available as of Ember 2.3, while FastBoot requires 2.4. So just return false...
-      return false;
-    }
-
-    let owner = getOwner(this);
-    if (!owner) {
-      return false;
-    }
-
-    let fastboot = owner.lookup(&#x27;service:fastboot&#x27;);
-    if (!fastboot) {
-      return false;
-    }
-
-    return get(fastboot, &#x27;isFastBoot&#x27;);
-  }),
+  usesTransition: usesTransition(&#x27;fade&#x27;),
 
   /**
    * The action to be sent when the modal footer&#x27;s submit button (if present) is pressed.
@@ -740,12 +725,13 @@ let component = Component.extend(TransitionSupport, {
 
   init() {
     this._super(...arguments);
-    let { isOpen, backdrop, fade, isFastBoot } = this.getProperties(&#x27;isOpen&#x27;, &#x27;backdrop&#x27;, &#x27;fade&#x27;, &#x27;isFastBoot&#x27;);
+    let { isOpen, backdrop, fade } = this.getProperties(&#x27;isOpen&#x27;, &#x27;backdrop&#x27;, &#x27;fade&#x27;);
+    let isFB = isFastBoot(this);
     if (fade === undefined) {
-      fade = !isFastBoot;
+      fade = !isFB;
     }
     this.setProperties({
-      showModal: isOpen &amp;&amp; (!fade || isFastBoot),
+      showModal: isOpen &amp;&amp; (!fade || isFB),
       showBackdrop: isOpen &amp;&amp; backdrop,
       inDom: isOpen,
       fade,
@@ -864,13 +850,6 @@ export default component;
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
         </ul>
       </div>
     </div>

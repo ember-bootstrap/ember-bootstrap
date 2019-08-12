@@ -1,4 +1,23 @@
 
+## 3.0.0-rc.2 (2019-08-12)
+
+#### :boom: Breaking Change
+* [#861](https://github.com/kaliber5/ember-bootstrap/pull/861) Change nav.item link support to match Ember's `` ([@simonihmig](https://github.com/simonihmig))
+* [#862](https://github.com/kaliber5/ember-bootstrap/pull/862) BsForm should not catch errors thrown by onSubmit action ([@jelhan](https://github.com/jelhan))
+
+#### Features
+* [#861](https://github.com/kaliber5/ember-bootstrap/pull/861) Change nav.item link support to match Ember's `` ([@simonihmig](https://github.com/simonihmig))
+* [#859](https://github.com/kaliber5/ember-bootstrap/pull/859) Warn if configured to import Glyphicon but Boostrap 4 is used ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#862](https://github.com/kaliber5/ember-bootstrap/pull/862) BsForm should not catch errors thrown by onSubmit action ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#864](https://github.com/kaliber5/ember-bootstrap/pull/864) Refactored mixins ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
 ## 3.0.0-rc.1 (2019-07-08)
 
 #### :boom: Breaking Change
@@ -20,7 +39,7 @@
 * [#788](https://github.com/kaliber5/ember-bootstrap/pull/788) Drop node 6 support ([@simonihmig](https://github.com/simonihmig))
 * [#787](https://github.com/kaliber5/ember-bootstrap/pull/787) Dropped support for Ember < 2.18 ([@simonihmig](https://github.com/simonihmig))
 * [#795](https://github.com/kaliber5/ember-bootstrap/pull/795) Modals are tagless (wrapping div has been removed), which might break when setting an ID or `ember-test-selectors` attribute on curly component invocation.
- Angle bracket component invocation syntax should be used for that use case. E.g. `{{#bs-modal data-test-foo}}` should be refactored to ``.
+ Angle bracket component invocation syntax should be used for that use case. E.g. `{{#bs-modal data-test-foo=true}}` should be refactored to ``.
 
 #### Features
 * [#842](https://github.com/kaliber5/ember-bootstrap/pull/842) Button is disabled by default if in pending state ([@jelhan](https://github.com/jelhan))

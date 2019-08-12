@@ -71,15 +71,14 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
   Use in combination with the yielded components
 
   * [Components.NavItem](Components.NavItem.html)
-  * [Components.NavLinkTo](Components.NavLinkTo.html)
   * [&#x60;nav.dropdown&#x60;](Components.Dropdown.html)
 
   &#x60;&#x60;&#x60;hbs
   &lt;BsNav @type=&quot;pills&quot; as |nav|&gt;
-    &lt;nav.item @linkTo=&quot;foo&quot;&gt;
+    &lt;nav.item @route=&quot;foo&quot;&gt;
       Foo
     &lt;/nav.item&gt;
-    &lt;nav.item @linkTo=(array &quot;bar&quot; model)&gt;
+    &lt;nav.item @route=&quot;bar&quot; @model={{this.model}}&gt;
       Bar
     &lt;/nav.item&gt;
   &lt;/BsNav&gt;
@@ -93,9 +92,9 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
   ### Active items
 
   Bootstrap expects to have the &#x60;active&#x60; class on the &#x60;&lt;li&gt;&#x60; element that should be the active (highlighted)
-  navigation item. To achieve that just use the &#x60;link-to&#x60; helper as usual. If the link is active, i.e
-  it points to the current route, the &#x60;bs-nav-item&#x60; component will detect that and apply the &#x60;active&#x60; class
-  automatically. The same applies for the &#x60;disabled&#x60; state.
+  navigation item. To achieve that use the &#x60;@route&#x60; and optionally &#x60;@model&#x60; (or &#x60;@models&#x60;) and &#x60;@query&#x60; properties
+  of the yielded &#x60;nav.item&#x60; component just as you would for Ember&#x27;s &#x60;&lt;LinkTo&gt;&#x60; component to create a link with proper
+  &#x60;active&#x60; class support.
 
   ### Dropdowns
 
@@ -104,7 +103,7 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
 
   &#x60;&#x60;&#x60;hbs
   &lt;BsNav @type=&quot;pills&quot; as |nav|&gt;
-    &lt;nav.item @linkTo=&quot;index&quot;&gt;Home&lt;/nav.item&gt;
+    &lt;nav.item @route=&quot;index&quot;&gt;Home&lt;/nav.item&gt;
     &lt;nav.dropdown as |dd|&gt;
       &lt;dd.toggle&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/dd.toggle&gt;
       &lt;dd.menu as |ddm|&gt;
@@ -117,12 +116,9 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
 
   ### Bootstrap 3/4 Notes
 
-  Use [&#x60;nav.item#linkTo&#x60;](Components.NavItem.html) for in-app links to ensure proper styling regardless of
+  Use [&#x60;nav.item#route&#x60;](Components.NavItem.html) for in-app links to ensure proper styling regardless of
   Bootstrap version. Explicit use of &#x60;&lt;a&gt;&#x60; tags in Bootstrap 4 must apply the &#x60;nav-link&#x60; class and manage
   the &#x60;active&#x60; state explicitly.
-
-  You can override &#x60;tagName&#x60; if you want to use Bootstrap 4&#x27;s ability to represent more structural
-  components with &#x60;div&#x60; tags.
 
   The &#x60;fill&#x60; styling is only available with Bootstrap 4
 
@@ -276,13 +272,6 @@ export default Component.extend({
             <li class="list-group-item list-group-item-private"><a href="../classes/Components.TooltipElement.html">Components.TooltipElement</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a></li>
             <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlAttributes.html">Mixins.ControlAttributes</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.ControlValidation.html">Mixins.ControlValidation</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.DropdownToggle.html">Mixins.DropdownToggle</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SizeClass.html">Mixins.SizeClass</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.SubComponent.html">Mixins.SubComponent</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TransitionSupport.html">Mixins.TransitionSupport</a></li>
-            <li class="list-group-item list-group-item-private"><a href="../classes/Mixins.TypeClass.html">Mixins.TypeClass</a></li>
         </ul>
       </div>
     </div>
