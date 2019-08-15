@@ -68,7 +68,6 @@ jobs:
   - env: EMBER_TRY_SCENARIO=ember-lts-3.4 BOOTSTRAPVERSION=3
   - env: EMBER_TRY_SCENARIO=ember-release BOOTSTRAPVERSION=3
   - env: EMBER_TRY_SCENARIO=ember-beta BOOTSTRAPVERSION=3
-  - env: EMBER_TRY_SCENARIO=fastboot-addon-tests
   - env: EMBER_TRY_SCENARIO=node-tests
 
 before_install:

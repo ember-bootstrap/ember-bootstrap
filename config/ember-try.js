@@ -85,13 +85,6 @@ module.exports = function() {
           }
         },
         {
-          name: 'fastboot-addon-tests',
-          command: 'DEBUG=ember-cli-addon-tests ember fastboot:test --ember-data-version=3.10.0',
-          npm: {
-            devDependencies: {}
-          }
-        },
-        {
           name: 'node-tests',
           command: 'yarn run nodetest'
         }
