@@ -4819,19 +4819,14 @@ ember-concurrency@^1.0.0:
     ember-compatibility-helpers "^1.2.0"
     ember-maybe-import-regenerator "^0.1.5"
 
-ember-cp-validations@^3.1.4:
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/ember-cp-validations/-/ember-cp-validations-3.5.4.tgz#95c09d30071958972600d63e659b65fc05062c84"
-  integrity sha512-ZzvTAli3nghmrAvV099MSFwYAVag7TQVXPAFSG3/ijPZ5PM0MnNGopmAi13q1RysbDtG7AcPBLANJmoxcmqpLw==
+ember-cp-validations@^4.0.0-beta.9:
+  version "4.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/ember-cp-validations/-/ember-cp-validations-4.0.0-beta.9.tgz#372a2d772457a92949ebd80aad703e839d7c17fc"
+  integrity sha512-TfUBOkQFzhLvphtFauuTu0ogdY/JRXCtR4yF5++TS3cHPe/SJKwykGzKjjpu+mvO57NacNC8rh8GCanzzHQVxg==
   dependencies:
-    ember-cli-babel "^6.6.0"
-    ember-cli-version-checker "^2.0.0"
-    ember-getowner-polyfill "^2.2.0"
-    ember-require-module "0.1.3"
-    ember-string-ishtmlsafe-polyfill "^2.0.0"
-    ember-validators "1.0.4"
-    exists-sync "0.0.4"
-    walk-sync "^0.3.1"
+    ember-cli-babel "^7.1.2"
+    ember-require-module "^0.3.0"
+    ember-validators "^2.0.0"
 
 ember-disable-prototype-extensions@^1.1.3:
   version "1.1.3"
@@ -4887,7 +4882,7 @@ ember-fetch@^6.3.1:
     node-fetch "^2.3.0"
     whatwg-fetch "^3.0.0"
 
-ember-getowner-polyfill@^2.0.1, ember-getowner-polyfill@^2.2.0:
+ember-getowner-polyfill@^2.0.1:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/ember-getowner-polyfill/-/ember-getowner-polyfill-2.2.0.tgz#38e7dccbcac69d5ec694000329ec0b2be651d2b2"
   integrity sha512-rwGMJgbGzxIAiWYjdpAh04Abvt0s3HuS/VjHzUFhVyVg2pzAuz45B9AzOxYXzkp88vFC7FPaiA4kE8NxNk4A4Q==
@@ -5042,10 +5037,10 @@ ember-ref-modifier@^0.1.2:
     ember-cli-babel "^7.1.2"
     ember-modifier-manager-polyfill "^1.0.1"
 
-ember-require-module@0.1.3, ember-require-module@^0.1.2:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/ember-require-module/-/ember-require-module-0.1.3.tgz#f82f60552142179152d28ec97ebd75d967cae1dc"
-  integrity sha1-+C9gVSFCF5FS0o7Jfr112WfK4dw=
+ember-require-module@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/ember-require-module/-/ember-require-module-0.3.0.tgz#65aff7908b5b846467e4526594d33cfe0c23456b"
+  integrity sha512-rYN4YoWbR9VlJISSmx0ZcYZOgMcXZLGR7kdvp3zDerjIvYmHm/3p+K56fEAYmJILA6W4F+cBe41Tq2HuQAZizA==
   dependencies:
     ember-cli-babel "^6.9.2"
 
@@ -5124,9 +5119,9 @@ ember-source-channel-url@^2.0.1:
     got "^8.0.1"
 
 ember-source@~3.11.0:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.11.0.tgz#03515692782404ce3b2ca37d45a78af8e66c0cb9"
-  integrity sha512-88M+5xUQz03PKy1HyTfwykN7wtm6Ty4GHEnDPoe1JPXA+9tn33j+JpOyS8ga0i+Vpj5DkEJeXcckNadX9+9iBQ==
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.11.1.tgz#2318fbe600c88d3a8abbf56fc2f3a61645ee42d8"
+  integrity sha512-FPHHHu/5FBbKQ3o1D2HXEIniBUVqG1N4vDB66BaP0ht2ZcO6EB3HMjGxVH8Ad3Of8QOcXtZrBfXDHZdIWLW4lQ==
   dependencies:
     broccoli-funnel "^2.0.2"
     broccoli-merge-trees "^3.0.2"
@@ -5142,13 +5137,6 @@ ember-source@~3.11.0:
     inflection "^1.12.0"
     jquery "^3.4.1"
     resolve "^1.10.1"
-
-ember-string-ishtmlsafe-polyfill@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/ember-string-ishtmlsafe-polyfill/-/ember-string-ishtmlsafe-polyfill-2.0.2.tgz#f7c1beb2fcb95599f499af41772477284b16ed74"
-  integrity sha512-C6i9H4NFw6nzYG+hxSrJyl5XA2xkGdWlJdN5otr0wl9k1IHCQe8n1PQr4vIpJsWcz5EYQC2+I/dPWZzOHIh1Mw==
-  dependencies:
-    ember-cli-version-checker "^2.1.0"
 
 ember-template-lint@^1.1.0:
   version "1.3.0"
@@ -5214,13 +5202,13 @@ ember-try@^1.0.0:
     rsvp "^4.7.0"
     walk-sync "^0.3.3"
 
-ember-validators@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/ember-validators/-/ember-validators-1.0.4.tgz#7d89c2511945c52bd20c5384e715138f902133bb"
-  integrity sha1-fYnCURlFxSvSDFOE5xUTj5AhM7s=
+ember-validators@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ember-validators/-/ember-validators-2.0.0.tgz#4100e17feb9c3a6cf4072732010697bbd674f8cb"
+  integrity sha512-OhXGN2UbFQY+lhkWOdW347NZsIWGj/fpTJbOfNxjyMQW/c3fvPEIvrhlvWf1JwHGKQTJDHpMQJgA/Luq39GDgQ==
   dependencies:
     ember-cli-babel "^6.9.2"
-    ember-require-module "^0.1.2"
+    ember-require-module "^0.3.0"
 
 emit-function@0.0.2:
   version "0.0.2"
