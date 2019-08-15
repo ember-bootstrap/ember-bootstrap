@@ -688,7 +688,9 @@ export default FormGroup.extend({
     get() {
     },
     set(key, value) {
-      this.set('showOwnValidation', false);
+      if (value === false) {
+        this.set('showOwnValidation', false);
+      }
       return value;
     }
   }),
