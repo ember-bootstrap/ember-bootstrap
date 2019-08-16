@@ -404,6 +404,24 @@ module('Integration | Component | bs-form', function(hooks) {
       assert.dom(`.${formFeedbackClass()}`).hasText('There is an error');
     });
 
+  test('it supports hash helper as model', async function(assert) {
+    this.set('submitAction', function(model) {
+      assert.step('submit');
+      assert.equal(model.name, 'Moritz');
+    });
+
+    await render(hbs`
+      <BsForm @model={{hash name="Max"}} @onSubmit={{this.submitAction}} as |form|>
+        <form.element @property="name" />
+      </BsForm>
+    `);
+
+    await fillIn('input', 'Moritz');
+    await triggerEvent('form', 'submit');
+
+    assert.verifySteps(['submit']);
+  });
+
   test('it yields submit action', async function(assert) {
     let submit = this.spy();
     this.actions.submit = submit;
