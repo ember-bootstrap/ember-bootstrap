@@ -37,6 +37,7 @@ module.exports = function(environment) {
         "https://ghbtns.com/",
       ],
     },
+    contentSecurityPolicyMeta: true,
 
     fastboot: {
       hostWhitelist: [/^localhost:\d+$/]
@@ -68,7 +69,7 @@ module.exports = function(environment) {
 
     // testem requires frame-src 'self' to run
     // https://github.com/rwjblue/ember-cli-content-security-policy/blob/v1.0.0/index.js#L85-L88
-    ENV.contentSecurityPolicy['frame-src'].push('self');
+    ENV.contentSecurityPolicy['frame-src'].push("'self'");
   }
 
   if (environment === 'production') {
