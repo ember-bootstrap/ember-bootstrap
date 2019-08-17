@@ -4854,13 +4854,6 @@ ember-angle-bracket-invocation-polyfill@^2.0.1:
     ember-compatibility-helpers "^1.0.2"
     silent-error "^1.1.1"
 
-ember-array-helper@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/ember-array-helper/-/ember-array-helper-5.0.0.tgz#d2d72f170e15d120bdaffe456d5cdfd8d335de75"
-  integrity sha512-TkmHoOgPmv4QOs8Z/DPA80kas8m8yl3aeuxC1Ph40V3byFEq1A4Z/JNnUNkfRYmWiYveBc996NV/y2wwK/2ptw==
-  dependencies:
-    ember-cli-babel "^7.1.2"
-
 ember-assign-polyfill@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/ember-assign-polyfill/-/ember-assign-polyfill-2.6.0.tgz#07847e3357ee35b33f886a0b5fbec6873f6860eb"
@@ -5766,13 +5759,6 @@ ember-router-generator@^1.2.3:
   integrity sha1-jtLKhv8yM2MSD8FCeBkeno8TFe4=
   dependencies:
     recast "^0.11.3"
-
-ember-router-service-polyfill@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/ember-router-service-polyfill/-/ember-router-service-polyfill-1.0.3.tgz#506d7fbd7179951410b7ffe8db171540601d88b1"
-  integrity sha1-UG1/vXF5lRQQt//o2xcVQGAdiLE=
-  dependencies:
-    ember-cli-babel "^6.8.2"
 
 ember-sinon-qunit@^3.4.0:
   version "3.4.0"

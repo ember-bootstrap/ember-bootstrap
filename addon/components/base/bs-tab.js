@@ -94,8 +94,12 @@ import listenTo from 'ember-bootstrap/utils/cp/listen-to';
   ```hbs
   <div>
     <BsNav @type="tabs" as |nav|>
-      <nav.item @route="tabs.index">Tab 1</nav.item>
-      <nav.item @route="tabs.other">Tab 3</nav.item>
+      <nav.item>
+        <nav.link-to @route="tabs.index">Tab 1</nav.link-to>
+      </nav.item>
+      <nav.item>
+        <nav.link-to @route="tabs.other">Tab 3</nav.link-to>
+      </nav.item>
     </BsNav>
   </div>
   ```

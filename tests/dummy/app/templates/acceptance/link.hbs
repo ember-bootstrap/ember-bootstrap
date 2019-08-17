@@ -17,13 +17,19 @@
 </BsNav>
 
 <BsNav @id="nav-link-test2" as |nav|>
-  <nav.item @route="acceptance.link" @model="1">
-    first
+  <nav.item>
+    <nav.link-to @route="acceptance.link" @model="1">
+      first
+    </nav.link-to>
   </nav.item>
-  <nav.item @route="acceptance.link" @model="2">
-    second
+  <nav.item>
+    <nav.link-to @route="acceptance.link" @model="2">
+      second
+    </nav.link-to>
   </nav.item>
-  <nav.item @route="acceptance.link" @model={{this.model}}>
-    current
+  <nav.item>
+    <nav.link-to @route="acceptance.link" @model={{this.model}}>
+      current
+    </nav.link-to>
   </nav.item>
 </BsNav>

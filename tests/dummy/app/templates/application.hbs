@@ -5,19 +5,25 @@
   {{navbar.toggle}}
   <navbar.content>
     <navbar.nav class="mr-auto" as |nav|>
-      <nav.item @route="getting-started">
-        Getting Started
+      <nav.item>
+        <nav.link-to @route="getting-started">
+          Getting Started
+        </nav.link-to>
       </nav.item>
-      <nav.item @route="demo">
-        Components
+      <nav.item>
+        <nav.link-to @route="demo">
+          Components
+        </nav.link-to>
       </nav.item>
       <nav.item>
         <a href="/api" class="nav-link">
           API
         </a>
       </nav.item>
-      <nav.item @route="addons">
-        Addons
+      <nav.item>
+        <nav.link-to @route="addons">
+          Addons
+        </nav.link-to>
       </nav.item>
     </navbar.nav>
     <navbar.nav as |nav|>

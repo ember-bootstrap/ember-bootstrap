@@ -1,12 +1,11 @@
 import Component from '@ember/component';
 import { observer } from '@ember/object';
-import { filter, filterBy, gt, or } from '@ember/object/computed';
+import { filter, filterBy, gt } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
 import LinkComponent from '@ember/routing/link-component';
 import layout from 'ember-bootstrap/templates/components/bs-nav/item';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
-import { inject as service } from '@ember/service';
 import { assert } from '@ember/debug';
 
 /**
@@ -23,43 +22,6 @@ export default Component.extend(ComponentParent, {
   layout,
   classNameBindings: ['disabled', 'active'],
   tagName: 'li',
-  router: service(),
-
-  /**
-   * If set will wrap the item's content in a link to the given route name. Same as the `route` property of `<LinkTo>`,
-   * see https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=route
-   *
-   * @property route
-   * @type {string}
-   * @public
-   */
-
-  /**
-   * The model of a dynamic route. Same as the `model` property of `<LinkTo>`,
-   * see https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=model
-   *
-   * @property model
-   * @type {object|string}
-   * @public
-   */
-
-  /**
-   * The models of a dynamic route. Same as the `models` property of `<LinkTo>`,
-   * see https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=models
-   *
-   * @property models
-   * @type {array}
-   * @public
-   */
-
-  /**
-   * The query params of a dynamic route. Same as the `query` property of `<LinkTo>`,
-   * see https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=query
-   *
-   * @property query
-   * @type {object}
-   * @public
-   */
 
   /**
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
@@ -85,31 +47,8 @@ export default Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  active: overrideableCP('_active', 'route', 'model', 'models', 'query', 'router.currentURL', function() {
-    let { route, model, models, query } = this.getProperties('route', 'model', 'models', 'query');
-    let params = [];
-
-    if (route) {
-      params.push(route);
-    }
-
-    if (model) {
-      params.push(model);
-    }
-
-    if (models) {
-      params.push(...models);
-    }
-
-    if (query) {
-      params.push({ queryParams: true, ...query});
-    }
-
-    // workaround for https://github.com/emberjs/ember.js/issues/18264
-    // @todo remove once this is resolved
-    this.get('router.currentURL');
-
-    return params.length > 0 ? this.get('router').isActive(...params) : this.get('_active');
+  active: overrideableCP('_active', function() {
+    return this.get('_active');
   }),
   _active: false,
 
@@ -128,8 +67,6 @@ export default Component.extend(ComponentParent, {
 
   disabledChildLinks: filterBy('childLinks', 'disabled'),
   hasDisabledChildLinks: gt('disabledChildLinks.length', 0),
-
-  hasLink: or('route', 'model', 'models', 'query'),
 
   /**
    * Called when clicking the nav item

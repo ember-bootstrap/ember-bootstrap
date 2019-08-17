@@ -1,17 +1,1 @@
-{{#if this.hasLink}}
-  {{#if @model}}
-    <LinkTo @route={{@route}} @model={{@model}} @query={{@query}} @disabled={{this.disabled}} class={{this.linkClass}}>
-      {{yield}}
-    </LinkTo>
-  {{else if @models}}
-    <LinkTo @route={{@route}} @models={{@models}} @query={{@query}} @disabled={{this.disabled}} class={{this.linkClass}}>
-      {{yield}}
-    </LinkTo>
-  {{else}}
-    <LinkTo @route={{@route}} @query={{@query}} @disabled={{this.disabled}} class={{this.linkClass}}>
-      {{yield}}
-    </LinkTo>
-  {{/if}}
-{{else}}
-  {{yield}}
-{{/if}}
+{{yield}}
