@@ -1,6 +1,7 @@
 import { module, test } from 'qunit';
 import { setup, visit, /* mockServer */ } from 'ember-cli-fastboot-testing/test-support';
 import setupFastBootRootElement from '../helpers/setup-fastboot';
+import { defaultButtonClass } from '../helpers/bootstrap-test';
 
 module('FastBoot | button', function(hooks) {
   setup(hooks);
@@ -10,7 +11,7 @@ module('FastBoot | button', function(hooks) {
     await visit('/components/button');
 
     assert.dom('.btn').exists();
-    assert.dom('.btn').hasClass('btn-secondary');
+    assert.dom('.btn').hasClass(defaultButtonClass());
     assert.dom('.btn').hasText('Button');
   });
 

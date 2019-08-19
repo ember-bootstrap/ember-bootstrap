@@ -10,8 +10,8 @@ module('FastBoot | nav', function(hooks) {
     await visit('/components/navs');
 
     assert.dom('.nav').exists();
-    assert.dom('.nav .nav-item').exists({ count: 3 });
-    assert.dom('.nav .nav-item a').exists({ count: 3 });
+    assert.dom('.nav li').exists({ count: 3 });
+    assert.dom('.nav li a').exists({ count: 3 });
   });
 
 });

@@ -10,8 +10,8 @@ module('FastBoot | tab', function(hooks) {
     await visit('/components/tabs');
 
     assert.dom('ul.nav.nav-tabs').exists();
-    assert.dom('ul.nav li.nav-item').exists({ count: 2 });
-    assert.dom('ul.nav li.nav-item.active').exists({ count: 1 });
+    assert.dom('ul.nav li').exists({ count: 2 });
+    assert.dom('ul.nav li.active').exists({ count: 1 });
     assert.dom('.tab-pane').exists({ count: 2 });
     assert.dom('.tab-pane.active').exists({ count: 1 });
   });
