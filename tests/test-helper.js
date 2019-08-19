@@ -8,7 +8,11 @@ if (typeof Promise === 'undefined') {
   window.Promise = EmberPromise;
 }
 
-document.addEventListener('securitypolicyviolation', function({ blockedURI, violatedDirective }) {
+document.addEventListener('securitypolicyviolation', function({ target, blockedURI, violatedDirective }) {
+  if (target.className.match(/ember-basic-dropdown/)) {
+    return;
+  }
+
   throw new Error(
     'Content-Security-Policy violation detected: ' +
     `Violated directive: ${violatedDirective}. ` +
