@@ -10,6 +10,7 @@ module.exports = function() {
   ]).then((urls) => {
     return {
       useYarn: true,
+      command: 'ember test --filter !FastBoot',
       scenarios: [
         {
           name: 'ember-lts-2.18',
@@ -83,6 +84,10 @@ module.exports = function() {
               '@ember/jquery': '^0.5.1'
             }
           }
+        },
+        {
+          name: 'fastboot-tests',
+          command: 'ember test --filter FastBoot'
         },
         {
           name: 'node-tests',
