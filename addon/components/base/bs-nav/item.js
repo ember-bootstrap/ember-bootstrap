@@ -105,7 +105,11 @@ export default Component.extend(ComponentParent, {
       params.push({ queryParams: true, ...query});
     }
 
-    return params.length ? this.get('router').isActive(...params) : this.get('_active');
+    // workaround for https://github.com/emberjs/ember.js/issues/18264
+    // @todo remove once this is resolved
+    this.get('router.currentURL');
+
+    return params.length > 0 ? this.get('router').isActive(...params) : this.get('_active');
   }),
   _active: false,
 
