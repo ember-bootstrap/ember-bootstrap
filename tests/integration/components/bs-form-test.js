@@ -422,6 +422,19 @@ module('Integration | Component | bs-form', function(hooks) {
     assert.verifySteps(['submit']);
   });
 
+  test('it yields model', async function(assert) {
+    await render(hbs`
+      <BsForm @model={{hash name="Max"}} as |form|>
+        <p>{{form.model.name}}</p>
+        <form.element @property="name" />
+      </BsForm>
+    `);
+    assert.dom('p').hasText('Max');
+
+    await fillIn('input', 'Moritz');
+    assert.dom('p').hasText('Moritz');
+  });
+
   test('it yields submit action', async function(assert) {
     let submit = this.spy();
     this.actions.submit = submit;
