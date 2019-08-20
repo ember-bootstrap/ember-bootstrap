@@ -31,8 +31,7 @@ module.exports = {
         'config/**/*.js',
         'tests/dummy/config/**/*.js',
         'lib/**/*.js',
-        'node-tests/**/*.js',
-        'fastboot-tests/*.js'
+        'node-tests/**/*.js'
       ],
       excludedFiles: [
         'addon/**',

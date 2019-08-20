@@ -15,6 +15,9 @@ module.exports = function(defaults) {
       plugins: [
         'line-numbers',
       ],
+    },
+    autoImport: {
+      forbidEval: true
     }
   };
 

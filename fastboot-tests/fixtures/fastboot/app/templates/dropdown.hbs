@@ -1,9 +1,0 @@
-<h1>dropdown</h1>
-
-{{#bs-dropdown id="dropdown" as |dd|}}
-    {{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}
-    {{#dd.menu as |ddm|}}
-        {{#ddm.item}}{{#ddm.link-to "index"}}Home{{/ddm.link-to}}{{/ddm.item}}
-        {{#ddm.item}}{{#ddm.link-to "dropdown"}}Dropdowns{{/ddm.link-to}}{{/ddm.item}}
-    {{/dd.menu}}
-{{/bs-dropdown}}

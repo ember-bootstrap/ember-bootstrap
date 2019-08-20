@@ -10,6 +10,7 @@ module.exports = function() {
   ]).then((urls) => {
     return {
       useYarn: true,
+      command: 'ember test --filter !FastBoot',
       scenarios: [
         {
           name: 'ember-lts-2.18',
@@ -85,11 +86,8 @@ module.exports = function() {
           }
         },
         {
-          name: 'fastboot-addon-tests',
-          command: 'DEBUG=ember-cli-addon-tests ember fastboot:test --ember-data-version=3.10.0',
-          npm: {
-            devDependencies: {}
-          }
+          name: 'fastboot-tests',
+          command: 'ember test --filter FastBoot'
         },
         {
           name: 'node-tests',

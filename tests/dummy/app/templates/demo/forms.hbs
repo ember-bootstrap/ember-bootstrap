@@ -2,7 +2,7 @@
 
 <p>The forms component lets you easily create forms with automatic markup generation based on the chosen form layout:</p>
 
-<div class="bs-example">
+<div class="bs-example" data-test-fastboot-container>
   <BsForm @formLayout="horizontal" @model={{this}} as |form|>
     <form.element @label="Layout" @property="formLayout" as |el|>
       <BsButtonGroup @value={{el.value}} @type="radio" @onChange={{action (mut el.value)}} as |bg|>
