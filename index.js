@@ -232,7 +232,9 @@ module.exports = {
     let bsVersion = this.getBootstrapVersion();
     let otherBsVersion = this.getOtherBootstrapVersion();
     let componentsPath = 'components/';
+    let templatePath = 'templates/components/';
 
+    // Merge bs3 or bs4 component files
     tree = this.debugTree(tree, 'addon-tree:input');
     tree = mv(tree, `${componentsPath}bs${bsVersion}/`, componentsPath);
     tree = rm(tree, `${componentsPath}bs${otherBsVersion}/**/*`);
@@ -241,14 +243,7 @@ module.exports = {
     tree = this.filterComponents(tree);
     tree = this.debugTree(tree, 'addon-tree:tree-shaken');
 
-    return this._super.treeForAddon.call(this, tree);
-  },
-
-  treeForAddonTemplates(tree) {
-    let bsVersion = this.getBootstrapVersion();
-    let otherBsVersion = this.getOtherBootstrapVersion();
-    let templatePath = 'components/';
-
+    // Merge bs3 or bs4 template files
     tree = this.debugTree(tree, 'addon-templates-tree:input');
     tree = mv(tree, `${templatePath}common/`, templatePath);
     tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
@@ -258,7 +253,7 @@ module.exports = {
     tree = this.filterComponents(tree);
     tree = this.debugTree(tree, 'addon-templates-tree:tree-shaken');
 
-    return this._super.treeForAddonTemplates.call(this, tree);
+    return this._super.treeForAddon.call(this, tree);
   },
 
   contentFor(type, config) {
