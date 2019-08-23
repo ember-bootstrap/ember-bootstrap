@@ -75,14 +75,22 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
 
   &#x60;&#x60;&#x60;hbs
   &lt;BsNav @type=&quot;pills&quot; as |nav|&gt;
-    &lt;nav.item @route=&quot;foo&quot;&gt;
-      Foo
+    &lt;nav.item&gt;
+      &lt;nav.linkTo @route=&quot;foo&quot;&gt;
+        Foo
+      &lt;/nav.linkTo&gt;
     &lt;/nav.item&gt;
-    &lt;nav.item @route=&quot;bar&quot; @model={{this.model}}&gt;
-      Bar
+    &lt;nav.item&gt;
+      &lt;nav.linkTo @route=&quot;bar&quot; @model={{this.model}}&gt;
+        Bar
+      &lt;/nav.linkTo&gt;
     &lt;/nav.item&gt;
   &lt;/BsNav&gt;
   &#x60;&#x60;&#x60;
+
+  &gt; Note: the use of angle brackets &#x60;&lt;nav.linkTo&gt;&#x60; as shown above is only supported for Ember 3.10, as it relies on its
+  &gt; own native implementation of the &#x60;LinkComponent&#x60;. For older Ember versions please use the legacy syntax with positional
+  &gt; arguments: &#x60;{{#nav.link-to &quot;bar&quot; this.model}}Bar{{/nav.link-to}}&#x60;
 
   ### Nav styles
 
@@ -91,9 +99,9 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
 
   ### Active items
 
-  Bootstrap expects to have the &#x60;active&#x60; class on the &#x60;&lt;li&gt;&#x60; element that should be the active (highlighted)
+  Bootstrap 3 expects to have the &#x60;active&#x60; class on the &#x60;&lt;li&gt;&#x60; element that should be the active (highlighted)
   navigation item. To achieve that use the &#x60;@route&#x60; and optionally &#x60;@model&#x60; (or &#x60;@models&#x60;) and &#x60;@query&#x60; properties
-  of the yielded &#x60;nav.item&#x60; component just as you would for Ember&#x27;s &#x60;&lt;LinkTo&gt;&#x60; component to create a link with proper
+  of the yielded &#x60;nav.linkTo&#x60; component just as you would for Ember&#x27;s &#x60;&lt;LinkTo&gt;&#x60; component to create a link with proper
   &#x60;active&#x60; class support.
 
   ### Dropdowns
@@ -103,12 +111,16 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
 
   &#x60;&#x60;&#x60;hbs
   &lt;BsNav @type=&quot;pills&quot; as |nav|&gt;
-    &lt;nav.item @route=&quot;index&quot;&gt;Home&lt;/nav.item&gt;
+    &lt;nav.item&gt;
+      &lt;nav.linkTo @route=&quot;index&quot;&gt;
+        Home
+      &lt;/nav.linkTo&gt;
+    &lt;/nav.item&gt;
     &lt;nav.dropdown as |dd|&gt;
       &lt;dd.toggle&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/dd.toggle&gt;
       &lt;dd.menu as |ddm|&gt;
-        &lt;ddm.item&gt;{{#ddm.link-to &quot;foo&quot;}}Foo{{/ddm.link-to}}&lt;/ddm.item&gt;
-        &lt;ddm.item&gt;{{#ddm.link-to &quot;bar&quot;}}Bar{{/ddm.link-to}}&lt;/ddm.item&gt;
+        &lt;ddm.item&gt;&lt;ddm.linkTo @route=&quot;foo&quot;&gt;Foo&lt;/ddm.linkTo&gt;&lt;/ddm.item&gt;
+        &lt;ddm.item&gt;&lt;ddm.linkTo @route=&quot;bar&quot;&gt;Bar&lt;/ddm.linkTo&gt;&lt;/ddm.item&gt;
       &lt;/dd.menu&gt;
     &lt;/nav.dropdown&gt;
   &lt;/BsNav&gt;
@@ -116,7 +128,7 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
 
   ### Bootstrap 3/4 Notes
 
-  Use [&#x60;nav.item#route&#x60;](Components.NavItem.html) for in-app links to ensure proper styling regardless of
+  Use [&#x60;nav.linkTo&#x60;](Components.NavLinkTo.html) for in-app links to ensure proper styling regardless of
   Bootstrap version. Explicit use of &#x60;&lt;a&gt;&#x60; tags in Bootstrap 4 must apply the &#x60;nav-link&#x60; class and manage
   the &#x60;active&#x60; state explicitly.
 
@@ -258,7 +270,6 @@ export default Component.extend({
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

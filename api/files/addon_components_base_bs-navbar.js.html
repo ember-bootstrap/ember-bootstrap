@@ -79,8 +79,12 @@ import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
     &lt;/div&gt;
     &lt;navbar.content&gt;
       &lt;navbar.nav as |nav|&gt;
-        &lt;nav.item @route=&quot;home&quot;&gt;Home&lt;/nav.item&gt;
-        &lt;nav.item @route=&quot;navbars&quot;&gt;Navbars&lt;/nav.item&gt;
+        &lt;nav.item&gt;
+          &lt;nav.linkTo @route=&quot;home&quot;&gt;Home&lt;/nav.linkTo&gt;
+        &lt;/nav.item&gt;
+        &lt;nav.item&gt;
+          &lt;nav.linkTo @route=&quot;navbars&quot;&gt;Navbars&lt;/nav.linkTo&gt;
+        &lt;/nav.item&gt;
       &lt;/navbar.nav&gt;
     &lt;/navbar.content&gt;
   &lt;/BsNavBar&gt;
@@ -104,12 +108,14 @@ import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
   ### Responsive Design
 
   For the mobile breakpoint the Bootstrap styles will hide the navbar content (&#x60;{{navbar.content}}&#x60;). Clicking on the
-  navbar toggle button (&#x60;{{navbar.toggle}}&#x60;) will expand the menu. By default all nav links (&#x60;&lt;nav.item @route=&quot;...&quot;&gt;&#x60;) are already
+  navbar toggle button (&#x60;{{navbar.toggle}}&#x60;) will expand the menu. By default all nav links (&#x60;&lt;nav.linkTo @route=&quot;...&quot;&gt;&#x60;) are already
   wired up to call the navbar&#x27;s &#x60;collapse&#x60; action, so clicking any of them will collapse the navbar. To selectively
   prevent that, you can set its &#x60;collapseNavbar&#x60; property to false:
 
   &#x60;&#x60;&#x60;hbs
-  &lt;nav.item @route=&quot;index&quot; @collapseNavbar={{false}}&gt;Don&#x27;t collapse&lt;/nav.item&gt;
+  &lt;nav.item&gt;
+    &lt;nav.linkTo @route=&quot;index&quot; @collapseNavbar={{false}}&gt;Don&#x27;t collapse&lt;/nav.linkTo&gt;
+  &lt;/nav.item&gt;
   &#x60;&#x60;&#x60;
 
   To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded &#x60;collapse&#x60;
@@ -355,14 +361,7 @@ export default Component.extend({
    * @type {String}
    * @private
    */
-  linkToComponent: &#x27;bs-navbar/link-to&#x27;,
-
-  /**
-   * @property navItemComponent
-   * @type {String}
-   * @private
-   */
-  navItemComponent: &#x27;bs-navbar/nav-item&#x27;
+  linkToComponent: &#x27;bs-navbar/link-to&#x27;
 });
 
     </pre>
@@ -428,7 +427,6 @@ export default Component.extend({
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

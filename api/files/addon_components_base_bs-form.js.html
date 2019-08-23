@@ -63,6 +63,7 @@ import { set, computed } from &#x27;@ember/object&#x27;;
 import { gt } from &#x27;@ember/object/computed&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import { isPresent } from &#x27;@ember/utils&#x27;;
+import { schedule } from &#x27;@ember/runloop&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-form&#x27;;
 import RSVP from &#x27;rsvp&#x27;;
 
@@ -470,7 +471,7 @@ export default Component.extend({
 
               // reset forced hiding of validations
               if (this.get(&#x27;showAllValidations&#x27;) === false) {
-                this.set(&#x27;showAllValidations&#x27;, undefined);
+                schedule(&#x27;afterRender&#x27;, () =&gt; this.set(&#x27;showAllValidations&#x27;, undefined));
               }
             });
         },
@@ -608,7 +609,6 @@ export default Component.extend({
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

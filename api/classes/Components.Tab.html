@@ -122,8 +122,12 @@ deactivated dynamically, just as the  original Bootstrap implementation.</p>
 the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{outlet}}</code> that show the nested routes' content:</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;div&gt;
   &lt;BsNav @type="tabs" as |nav|&gt;
-    &lt;nav.item @route="tabs.index"&gt;Tab 1&lt;/nav.item&gt;
-    &lt;nav.item @route="tabs.other"&gt;Tab 3&lt;/nav.item&gt;
+    &lt;nav.item&gt;
+      &lt;nav.linkTo @route="tabs.index"&gt;Tab 1&lt;/nav.linkTo&gt;
+    &lt;/nav.item&gt;
+    &lt;nav.item&gt;
+      &lt;nav.linkTo @route="tabs.other"&gt;Tab 3&lt;/nav.linkTo&gt;
+    &lt;/nav.item&gt;
   &lt;/BsNav&gt;
 &lt;/div&gt;
 </code></pre>
@@ -407,7 +411,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-tab.js.html#l147"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:147</code></a>
+                  <a href="../files/addon_components_base_bs-tab.js.html#l151"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:151</code></a>
               </p>
             
             
@@ -440,7 +444,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-tab.js.html#l208"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:208</code></a>
+                  <a href="../files/addon_components_base_bs-tab.js.html#l212"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:212</code></a>
               </p>
             
             
@@ -498,7 +502,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-tab.js.html#l136"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:136</code></a>
+                  <a href="../files/addon_components_base_bs-tab.js.html#l140"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:140</code></a>
               </p>
             
             
@@ -529,7 +533,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-tab.js.html#l177"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:177</code></a>
+                  <a href="../files/addon_components_base_bs-tab.js.html#l181"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:181</code></a>
               </p>
             
             
@@ -559,7 +563,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                   <p><strong>Default:</strong> 150</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-tab.js.html#l187"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:187</code></a>
+                  <a href="../files/addon_components_base_bs-tab.js.html#l191"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:191</code></a>
               </p>
             
             
@@ -588,7 +592,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-tab.js.html#l171"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:171</code></a>
+                  <a href="../files/addon_components_base_bs-tab.js.html#l175"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:175</code></a>
               </p>
             
             
@@ -616,7 +620,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-tab.js.html#l129"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:129</code></a>
+                  <a href="../files/addon_components_base_bs-tab.js.html#l133"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:133</code></a>
               </p>
             
             
@@ -644,7 +648,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-tab.js.html#l220"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:220</code></a>
+                  <a href="../files/addon_components_base_bs-tab.js.html#l224"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:224</code></a>
               </p>
             
             
@@ -673,7 +677,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-tab.js.html#l122"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:122</code></a>
+                  <a href="../files/addon_components_base_bs-tab.js.html#l126"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:126</code></a>
               </p>
             
             
@@ -702,7 +706,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                   <p><strong>Default:</strong> &#x27;tabs&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-tab.js.html#l112"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:112</code></a>
+                  <a href="../files/addon_components_base_bs-tab.js.html#l116"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:116</code></a>
               </p>
             
             
@@ -733,7 +737,7 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-tab.js.html#l197"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:197</code></a>
+                    <a href="../files/addon_components_base_bs-tab.js.html#l201"><code>addon&#x2F;components&#x2F;base&#x2F;bs-tab.js:201</code></a>
                     </p>
             
             
@@ -814,7 +818,6 @@ the <a href="Components.Nav.html">Components.Nav</a> component and an <code>{{ou
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

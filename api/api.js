@@ -54,7 +54,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "Components.NavbarContent",
         "Components.NavbarLinkTo",
         "Components.NavbarNav",
-        "Components.NavbarNavItem",
         "Components.NavbarToggle",
         "Components.Popover",
         "Components.PopoverElement",

@@ -81,10 +81,10 @@ of a toggle element, and the dropdown menu itself.</p>
   &lt;dd.toggle&gt;Dropdown &lt;span class="caret"&gt;&lt;/span&gt;&lt;/dd.toggle&gt;
   &lt;dd.menu as |ddm|&gt;
     &lt;ddm.item&gt;
-      {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+      &lt;ddm.linkTo @route="index"&gt;Something&lt;/ddm.linkTo&gt;
     &lt;/ddm.item&gt;
     &lt;ddm.item&gt;
-      {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+      &lt;ddm.linkTo @route="index"&gt;Something different&lt;/ddm.linkTo&gt;
     &lt;/ddm.item&gt;
   &lt;/dd.menu&gt;
 &lt;/BsDropdown&gt;
@@ -92,6 +92,11 @@ of a toggle element, and the dropdown menu itself.</p>
 <p>If you need to use dropdowns in a <a href="Components.Nav.html">nav</a>, use the <code>bs-nav.dropdown</code>
 contextual component rather than a standalone dropdown to ensure the correct styling
 regardless of your Bootstrap version.</p>
+<blockquote>
+<p>Note: the use of angle brackets <code>&lt;ddm.linkTo&gt;</code> as shown above is only supported for Ember 3.10, as it relies on its
+own native implementation of the <code>LinkComponent</code>. For older Ember versions please use the legacy syntax with positional
+arguments: <code>{{#ddm.link-to "bar" this.model}}Bar{{/ddm.link-to}}</code></p>
+</blockquote>
 <h3>Button dropdowns</h3>
 <p>To use a button as the dropdown toggle element (see <a href="http://getbootstrap.com/components/#btn-dropdowns">http://getbootstrap.com/components/#btn-dropdowns</a>), use the
 <code>Components.DropdownButton</code> component as the toggle:</p>
@@ -99,10 +104,10 @@ regardless of your Bootstrap version.</p>
   &lt;dd.button&gt;Dropdown &lt;span class="caret"&gt;&lt;/span&gt;&lt;/dd.button&gt;
   &lt;dd.menu as |ddm|&gt;
     &lt;ddm.item&gt;
-      {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+      &lt;ddm.linkTo @route="index"&gt;Something&lt;/ddm.linkTo&gt;
     &lt;/ddm.item&gt;
     &lt;ddm.item&gt;
-      {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+      &lt;ddm.linkTo @route="index"&gt;Something different&lt;/ddm.linkTo&gt;
     &lt;/ddm.item&gt;
   &lt;/dd.menu&gt;
 &lt;/BsDropdown&gt;
@@ -116,10 +121,10 @@ regardless of your Bootstrap version.</p>
   &lt;dd.button&gt;Dropdown &lt;span class="caret"&gt;&lt;/span&gt;&lt;/dd.button&gt;
   &lt;dd.menu as |ddm|&gt;
     &lt;ddm.item&gt;
-      {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+      &lt;ddm.linkTo @route="index"&gt;Something&lt;/ddm.linkTo&gt;
     &lt;/ddm.item&gt;
     &lt;ddm.item&gt;
-      {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+      &lt;ddm.linkTo @route="index"&gt;Something different&lt;/ddm.linkTo&gt;
     &lt;/ddm.item&gt;
   &lt;/dd.menu&gt;
 &lt;/BsDropdown&gt;
@@ -348,7 +353,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-dropdown.js.html#l292"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:292</code></a>
+                    <a href="../files/addon_components_base_bs-dropdown.js.html#l296"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:296</code></a>
                     </p>
             
             
@@ -396,7 +401,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-dropdown.js.html#l310"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:310</code></a>
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l314"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:314</code></a>
               </p>
             
             
@@ -425,7 +430,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-dropdown.js.html#l171"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:171</code></a>
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l175"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:175</code></a>
               </p>
             
             
@@ -454,7 +459,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-dropdown.js.html#l200"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:200</code></a>
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l204"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:204</code></a>
               </p>
             
             
@@ -485,7 +490,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
                   <p><strong>Default:</strong> &#x27;down&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-dropdown.js.html#l181"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:181</code></a>
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l185"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:185</code></a>
               </p>
             
             
@@ -515,7 +520,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-dropdown.js.html#l191"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:191</code></a>
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l195"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:195</code></a>
               </p>
             
             
@@ -545,7 +550,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-dropdown.js.html#l161"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:161</code></a>
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l165"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:165</code></a>
               </p>
             
             
@@ -574,7 +579,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-dropdown.js.html#l324"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:324</code></a>
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l328"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:328</code></a>
               </p>
             
             
@@ -602,7 +607,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-dropdown.js.html#l225"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:225</code></a>
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l229"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:229</code></a>
               </p>
             
             
@@ -631,7 +636,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-dropdown.js.html#l317"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:317</code></a>
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l321"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:321</code></a>
               </p>
             
             
@@ -659,7 +664,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-dropdown.js.html#l217"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:217</code></a>
+                  <a href="../files/addon_components_base_bs-dropdown.js.html#l221"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:221</code></a>
               </p>
             
             
@@ -689,7 +694,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-dropdown.js.html#l242"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:242</code></a>
+                    <a href="../files/addon_components_base_bs-dropdown.js.html#l246"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:246</code></a>
                     </p>
             
             
@@ -731,7 +736,7 @@ which you might want to do if you experience clipping issues by an outer <code>o
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-dropdown.js.html#l233"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:233</code></a>
+                    <a href="../files/addon_components_base_bs-dropdown.js.html#l237"><code>addon&#x2F;components&#x2F;base&#x2F;bs-dropdown.js:237</code></a>
                     </p>
             
             
@@ -826,7 +831,6 @@ which you might want to do if you experience clipping issues by an outer <code>o
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "3.0.0-rc.2"
+        "version": "3.0.0-rc.3"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -428,17 +428,6 @@
             "modules": {},
             "classes": {
                 "Components.NavbarLinkTo": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "Components": 1
-            }
-        },
-        "addon/components/base/bs-navbar/nav-item.js": {
-            "name": "addon/components/base/bs-navbar/nav-item.js",
-            "modules": {},
-            "classes": {
-                "Components.NavbarNavItem": 1
             },
             "fors": {},
             "namespaces": {
@@ -1276,7 +1265,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-nav/item.js",
-            "line": 12,
+            "line": 11,
             "description": "Component for each item within a [Components.Nav](Components.Nav.html) component. Have a look there for examples.",
             "extends": "Ember.Component",
             "uses": [
@@ -1295,7 +1284,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-nav/link-to.js",
-            "line": 5,
+            "line": 4,
             "description": "Extended `{{link-to}}` component for use within Navs.",
             "extends": "Ember.LinkComponent",
             "uses": [
@@ -1333,21 +1322,6 @@
             "line": 3,
             "description": "Extended `{{link-to}}` component for use within Navbars.",
             "extends": "Components.NavLinkTo",
-            "access": "public",
-            "tagname": ""
-        },
-        "Components.NavbarNavItem": {
-            "name": "Components.NavbarNavItem",
-            "shortname": "Components.NavbarNavItem",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "namespace": "Components",
-            "file": "addon/components/base/bs-navbar/nav-item.js",
-            "line": 3,
-            "extends": "Components.NavItem",
             "access": "public",
             "tagname": ""
         },
@@ -1572,7 +1546,7 @@
             "namespace": "Components",
             "file": "addon/components/base/bs-dropdown.js",
             "line": 6,
-            "description": "Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting\nof a toggle element, and the dropdown menu itself.\n\n### Usage\n\nUse this component together with the yielded contextual components:\n* [Components.DropdownToggle](Components.DropdownToggle.html)\n* [Components.DropdownButton](Components.DropdownButton.html)\n* [Components.DropdownMenu](Components.DropdownMenu.html)\n  * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)\n  * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)\n  * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)\n\nFurthermore references to the following actions are yielded:\n\n* `toggleDropdown`\n* `openDropdown`\n* `closeDropdown`\n\n```hbs\n<BsDropdown as |dd|>\n  <dd.toggle>Dropdown <span class=\"caret\"></span></dd.toggle>\n  <dd.menu as |ddm|>\n    <ddm.item>\n      {{#ddm.link-to \"index\"}}Something{{/ddm.link-to}}\n    </ddm.item>\n    <ddm.item>\n      {{#ddm.link-to \"index\"}}Something different{{/ddm.link-to}}\n    </ddm.item>\n  </dd.menu>\n</BsDropdown>\n```\n\nIf you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`\ncontextual component rather than a standalone dropdown to ensure the correct styling\nregardless of your Bootstrap version.\n\n### Button dropdowns\n\nTo use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the\n`Components.DropdownButton` component as the toggle:\n\n```hbs\n<BsDropdown as |dd|>\n  <dd.button>Dropdown <span class=\"caret\"></span></dd.button>\n  <dd.menu as |ddm|>\n    <ddm.item>\n      {{#ddm.link-to \"index\"}}Something{{/ddm.link-to}}\n    </ddm.item>\n    <ddm.item>\n      {{#ddm.link-to \"index\"}}Something different{{/ddm.link-to}}\n    </ddm.item>\n  </dd.menu>\n</BsDropdown>\n```\n\nIt has all the functionality of a `Components.Button` with additional dropdown support.\n\n### Split button dropdowns\n\nTo have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a\n`Components.Button` component and a `Components.DropdownButton`:\n\n```hbs\n<BsDropdown as |dd|>\n  <BsButton>Dropdown</BsButton>\n  <dd.button>Dropdown <span class=\"caret\"></span></dd.button>\n  <dd.menu as |ddm|>\n    <ddm.item>\n      {{#ddm.link-to \"index\"}}Something{{/ddm.link-to}}\n    </ddm.item>\n    <ddm.item>\n      {{#ddm.link-to \"index\"}}Something different{{/ddm.link-to}}\n    </ddm.item>\n  </dd.menu>\n</BsDropdown>\n```\n\n### Dropup style\n\nSet the `direction` property to \"up\" to switch to a \"dropup\" style:\n\n```hbs\n<BsDropdown @direction=\"up\" as |dd|>\n  ...\n</BsDropdown>\n```\n\n### Open, close or toggle the dropdown programmatically\n\nIf you wanted to control when the dropdown opens and closes programmatically, the `bs-dropdown` component yields the\n`openDropdown`, `closeDropdown` and `toggleDropdown` actions which you can then pass to your own handlers. For example:\n\n```hbs\n<BsDropdown @closeOnMenuClick={{false}} as |dd|>\n  <BsButton>Dropdown</BsButton>\n  <dd.button>Dropdown <span class=\"caret\"></span></dd.button>\n  <dd.menu as |ddm|>\n    {{#each this.items as |item|}}\n      <ddm.item>\n        <a href onclick={{action \"changeItems\" item dd.closeDropdown}}>\n          {{item.text}}\n        </a>\n      </ddm.item>\n    {{/each}}\n  </dd.menu>\n</BsDropdown>\n```\n\nThen in your controller or component, optionally close the dropdown:\n\n```js\n...\nactions: {\n  handleDropdownClicked(item, closeDropdown) {\n    if(item.isTheRightOne) {\n      this.chosenItems.pushObject(item);\n      closeDropdown();\n    } else {\n      this.set('item', this.getRandomItems());\n    }\n  },\n}\n```\n\n\n### Bootstrap 3/4 Notes\n\nIf you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`\ncontextual component rather than a standalone dropdown to ensure the correct styling\nregardless of your Bootstrap version.\n\nIf you use the [dropdown divider](Components.DropdownMenuDivider), you don't have to worry\nabout differences in the markup between versions.\n\nBe sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application\nlinks as dropdown menu items. This is essential for proper styling regardless of Bootstrap\nversion and will also provide automatic `active` highlighting on dropdown menu items. If you\nwish to have a dropdown menu item refer to an external link, be sure to apply the `dropdown-item`\nclass to the `<a>` tag for Bootstrap 4 compatibility.\n\nThe dropdown menu will be positioned using the `popper.js` library, just as the original Bootstrap\nversion does. This also allows you to set `renderInPlace=false` on the menu component to render it in a wormhole,\nwhich you might want to do if you experience clipping issues by an outer `overflow: hidden` element.",
+            "description": "Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting\nof a toggle element, and the dropdown menu itself.\n\n### Usage\n\nUse this component together with the yielded contextual components:\n* [Components.DropdownToggle](Components.DropdownToggle.html)\n* [Components.DropdownButton](Components.DropdownButton.html)\n* [Components.DropdownMenu](Components.DropdownMenu.html)\n  * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)\n  * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)\n  * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)\n\nFurthermore references to the following actions are yielded:\n\n* `toggleDropdown`\n* `openDropdown`\n* `closeDropdown`\n\n```hbs\n<BsDropdown as |dd|>\n  <dd.toggle>Dropdown <span class=\"caret\"></span></dd.toggle>\n  <dd.menu as |ddm|>\n    <ddm.item>\n      <ddm.linkTo @route=\"index\">Something</ddm.linkTo>\n    </ddm.item>\n    <ddm.item>\n      <ddm.linkTo @route=\"index\">Something different</ddm.linkTo>\n    </ddm.item>\n  </dd.menu>\n</BsDropdown>\n```\n\nIf you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`\ncontextual component rather than a standalone dropdown to ensure the correct styling\nregardless of your Bootstrap version.\n\n> Note: the use of angle brackets `<ddm.linkTo>` as shown above is only supported for Ember 3.10, as it relies on its\n> own native implementation of the `LinkComponent`. For older Ember versions please use the legacy syntax with positional\n> arguments: `{{#ddm.link-to \"bar\" this.model}}Bar{{/ddm.link-to}}`\n\n### Button dropdowns\n\nTo use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the\n`Components.DropdownButton` component as the toggle:\n\n```hbs\n<BsDropdown as |dd|>\n  <dd.button>Dropdown <span class=\"caret\"></span></dd.button>\n  <dd.menu as |ddm|>\n    <ddm.item>\n      <ddm.linkTo @route=\"index\">Something</ddm.linkTo>\n    </ddm.item>\n    <ddm.item>\n      <ddm.linkTo @route=\"index\">Something different</ddm.linkTo>\n    </ddm.item>\n  </dd.menu>\n</BsDropdown>\n```\n\nIt has all the functionality of a `Components.Button` with additional dropdown support.\n\n### Split button dropdowns\n\nTo have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a\n`Components.Button` component and a `Components.DropdownButton`:\n\n```hbs\n<BsDropdown as |dd|>\n  <BsButton>Dropdown</BsButton>\n  <dd.button>Dropdown <span class=\"caret\"></span></dd.button>\n  <dd.menu as |ddm|>\n    <ddm.item>\n      <ddm.linkTo @route=\"index\">Something</ddm.linkTo>\n    </ddm.item>\n    <ddm.item>\n      <ddm.linkTo @route=\"index\">Something different</ddm.linkTo>\n    </ddm.item>\n  </dd.menu>\n</BsDropdown>\n```\n\n### Dropup style\n\nSet the `direction` property to \"up\" to switch to a \"dropup\" style:\n\n```hbs\n<BsDropdown @direction=\"up\" as |dd|>\n  ...\n</BsDropdown>\n```\n\n### Open, close or toggle the dropdown programmatically\n\nIf you wanted to control when the dropdown opens and closes programmatically, the `bs-dropdown` component yields the\n`openDropdown`, `closeDropdown` and `toggleDropdown` actions which you can then pass to your own handlers. For example:\n\n```hbs\n<BsDropdown @closeOnMenuClick={{false}} as |dd|>\n  <BsButton>Dropdown</BsButton>\n  <dd.button>Dropdown <span class=\"caret\"></span></dd.button>\n  <dd.menu as |ddm|>\n    {{#each this.items as |item|}}\n      <ddm.item>\n        <a href onclick={{action \"changeItems\" item dd.closeDropdown}}>\n          {{item.text}}\n        </a>\n      </ddm.item>\n    {{/each}}\n  </dd.menu>\n</BsDropdown>\n```\n\nThen in your controller or component, optionally close the dropdown:\n\n```js\n...\nactions: {\n  handleDropdownClicked(item, closeDropdown) {\n    if(item.isTheRightOne) {\n      this.chosenItems.pushObject(item);\n      closeDropdown();\n    } else {\n      this.set('item', this.getRandomItems());\n    }\n  },\n}\n```\n\n\n### Bootstrap 3/4 Notes\n\nIf you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`\ncontextual component rather than a standalone dropdown to ensure the correct styling\nregardless of your Bootstrap version.\n\nIf you use the [dropdown divider](Components.DropdownMenuDivider), you don't have to worry\nabout differences in the markup between versions.\n\nBe sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application\nlinks as dropdown menu items. This is essential for proper styling regardless of Bootstrap\nversion and will also provide automatic `active` highlighting on dropdown menu items. If you\nwish to have a dropdown menu item refer to an external link, be sure to apply the `dropdown-item`\nclass to the `<a>` tag for Bootstrap 4 compatibility.\n\nThe dropdown menu will be positioned using the `popper.js` library, just as the original Bootstrap\nversion does. This also allows you to set `renderInPlace=false` on the menu component to render it in a wormhole,\nwhich you might want to do if you experience clipping issues by an outer `overflow: hidden` element.",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -1587,7 +1561,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-form.js",
-            "line": 9,
+            "line": 10,
             "description": "Render a form with the appropriate Bootstrap layout class (see `formLayout`).\nAllows setting a `model` that nested `Components.FormElement`s can access, and that can provide form validation (see below)\n\nYou can use whatever markup you like within the form. The following shows Bootstrap 3 usage for the internal markup.\n\n```handlebars\n<BsForm @onSubmit={{action \"submit\"}} as |form|>\n  <form.group>\n    <label class=\"control-label\">First name</label>\n    <input value={{this.firstname}} class=\"form-control\" oninput={{action (mut this.firstname) value=\"target.value\"}} type=\"text\">\n  </form.group>\n</BsForm>\n```\n\nHowever to benefit from features such as automatic form markup, validations and validation markup, use `Components.FormElement`\nas nested components. See below for an example.\n\n### Submitting the form\n\nWhen the form is submitted (e.g. by clicking a submit button), the event will be intercepted and the `onSubmit` action\nwill be sent to the controller or parent component.\nIn case the form supports validation (see \"Form validation\" below), the `onBefore` action is called (which allows you to\ndo e.g. model data normalization), then the available validation rules are evaluated, and if those fail, the `onInvalid`\naction is sent instead of `onSubmit`.\n\n### Use with Components.FormElement\n\nWhen using `Components.FormElement`s with their `property` set to property names of the form's validation enabled\n`model`, you gain some additional powerful features:\n* the appropriate Bootstrap markup for the given `formLayout` and the form element's `controlType` is automatically generated\n* markup for validation states and error messages is generated based on the model's validation (if available), when submitting the form\nwith an invalid validation, or when focusing out of invalid inputs\n\n```handlebars\n<BsForm @formLayout=\"horizontal\" @model={{this}} @onSubmit={{action \"submit\"}} as |form|>\n  <form.element @controlType=\"email\" @label=\"Email\" @placeholder=\"Email\" @property=\"email\" />\n  <form.element @controlType=\"password\" @label=\"Password\" @placeholder=\"Password\" @property=\"password\" />\n  <form.element @controlType=\"checkbox\" @label=\"Remember me\" @property=\"rememberMe\" />\n  <BsButton @defaultText=\"Submit\" @type=\"primary\" @buttonType=\"submit\" />\n</BsForm>\n```\n\nSee the [Components.FormElement](Components.FormElement.html) API docs for further information.\n\n### Form validation\n\nAll version of ember-bootstrap beginning from 0.7.0 do not come with built-in support for validation engines anymore.\nInstead support is added usually by additional Ember addons, for example:\n\n* [ember-bootstrap-validations](https://github.com/kaliber5/ember-bootstrap-validations): adds support for [ember-validations](https://github.com/DockYard/ember-validations)\n* [ember-bootstrap-cp-validations](https://github.com/offirgolan/ember-bootstrap-cp-validations): adds support for [ember-cp-validations](https://github.com/offirgolan/ember-cp-validations)\n* [ember-bootstrap-changeset-validations](https://github.com/kaliber5/ember-bootstrap-changeset-validations): adds support for [ember-changeset](https://github.com/poteto/ember-changeset)\n\nTo add your own validation support, you have to:\n\n* extend this component, setting `hasValidator` to true if validations are available (by means of a computed property for example), and implementing the `validate` method\n* extend the [Components.FormElement](Components.FormElement.html) component and implement the `setupValidations` hook or simply override the `errors` property to add the validation error messages to be displayed\n\nWhen validation fails, the appropriate Bootstrap markup is added automatically, i.e. the error classes are applied and\nthe validation messages are shown for each form element. In case the validation library supports it, also warning messages\nare shown. See the [Components.FormElement](Components.FormElement.html) documentation for further details.\n\nSee the above mentioned addons for examples.\n\n### Submission state\n\nA `isSubmitting` property is yielded, which is `true` after submit has been triggered and before the Promise returned\nby `onSubmit` is fulfilled. It could be used to disable form's submit button and showing a loading spinner for example:\n\n```hbs\n<BsForm @onSubmit={{action \"save\"}} as |form|>\n  <BsButton @buttonType=\"submit\" @disabled={{form.isSubmitting}}>\n    Save\n    {{#if form.isSubmitting}} {{fa-icon \"spinner\"}} {{/if}}\n  </BsButton>\n</BsForm>\n```\n\nAdditionaly `isSubmitted` and `isRejected` properties are yielded. `isSubmitted` is `true` if last submission was successful.\n`isRejected` is `true` if last submission was rejected due to validation errors or by an action bound to `onSubmit` event, returning a rejected promise.\nBoth are reset as soon as any value of a form element changes. It could be used for visual feedback about last submission:\n\n```hbs\n<BsForm @onSubmit={{action 'save}} as |form|>\n  <BsButton @buttonType=\"submit\" @type={{if form.isRejected \"danger\" \"primary\"}}>\n    Save\n  </BsButton>\n</BsForm>\n```",
             "extends": "Ember.Component",
             "access": "public",
@@ -1636,7 +1610,7 @@
             "namespace": "Components",
             "file": "addon/components/base/bs-nav.js",
             "line": 6,
-            "description": "Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)\n\n### Usage\n\nUse in combination with the yielded components\n\n* [Components.NavItem](Components.NavItem.html)\n* [`nav.dropdown`](Components.Dropdown.html)\n\n```hbs\n<BsNav @type=\"pills\" as |nav|>\n  <nav.item @route=\"foo\">\n    Foo\n  </nav.item>\n  <nav.item @route=\"bar\" @model={{this.model}}>\n    Bar\n  </nav.item>\n</BsNav>\n```\n\n### Nav styles\n\nThe component supports the default bootstrap nav styling options \"pills\" and \"tabs\" through the `type`\nproperty, as well as the `justified`, `fill` and `stacked` properties.\n\n### Active items\n\nBootstrap expects to have the `active` class on the `<li>` element that should be the active (highlighted)\nnavigation item. To achieve that use the `@route` and optionally `@model` (or `@models`) and `@query` properties\nof the yielded `nav.item` component just as you would for Ember's `<LinkTo>` component to create a link with proper\n`active` class support.\n\n### Dropdowns\n\nUse the `nav.dropdown` contextual version of the [Components.Dropdown](Components.Dropdown.html) component\nwith a `tagName` of \"li\" to integrate a dropdown into your nav:\n\n```hbs\n<BsNav @type=\"pills\" as |nav|>\n  <nav.item @route=\"index\">Home</nav.item>\n  <nav.dropdown as |dd|>\n    <dd.toggle>Dropdown <span class=\"caret\"></span></dd.toggle>\n    <dd.menu as |ddm|>\n      <ddm.item>{{#ddm.link-to \"foo\"}}Foo{{/ddm.link-to}}</ddm.item>\n      <ddm.item>{{#ddm.link-to \"bar\"}}Bar{{/ddm.link-to}}</ddm.item>\n    </dd.menu>\n  </nav.dropdown>\n</BsNav>\n```\n\n### Bootstrap 3/4 Notes\n\nUse [`nav.item#route`](Components.NavItem.html) for in-app links to ensure proper styling regardless of\nBootstrap version. Explicit use of `<a>` tags in Bootstrap 4 must apply the `nav-link` class and manage\nthe `active` state explicitly.\n\nThe `fill` styling is only available with Bootstrap 4",
+            "description": "Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)\n\n### Usage\n\nUse in combination with the yielded components\n\n* [Components.NavItem](Components.NavItem.html)\n* [`nav.dropdown`](Components.Dropdown.html)\n\n```hbs\n<BsNav @type=\"pills\" as |nav|>\n  <nav.item>\n    <nav.linkTo @route=\"foo\">\n      Foo\n    </nav.linkTo>\n  </nav.item>\n  <nav.item>\n    <nav.linkTo @route=\"bar\" @model={{this.model}}>\n      Bar\n    </nav.linkTo>\n  </nav.item>\n</BsNav>\n```\n\n> Note: the use of angle brackets `<nav.linkTo>` as shown above is only supported for Ember 3.10, as it relies on its\n> own native implementation of the `LinkComponent`. For older Ember versions please use the legacy syntax with positional\n> arguments: `{{#nav.link-to \"bar\" this.model}}Bar{{/nav.link-to}}`\n\n### Nav styles\n\nThe component supports the default bootstrap nav styling options \"pills\" and \"tabs\" through the `type`\nproperty, as well as the `justified`, `fill` and `stacked` properties.\n\n### Active items\n\nBootstrap 3 expects to have the `active` class on the `<li>` element that should be the active (highlighted)\nnavigation item. To achieve that use the `@route` and optionally `@model` (or `@models`) and `@query` properties\nof the yielded `nav.linkTo` component just as you would for Ember's `<LinkTo>` component to create a link with proper\n`active` class support.\n\n### Dropdowns\n\nUse the `nav.dropdown` contextual version of the [Components.Dropdown](Components.Dropdown.html) component\nwith a `tagName` of \"li\" to integrate a dropdown into your nav:\n\n```hbs\n<BsNav @type=\"pills\" as |nav|>\n  <nav.item>\n    <nav.linkTo @route=\"index\">\n      Home\n    </nav.linkTo>\n  </nav.item>\n  <nav.dropdown as |dd|>\n    <dd.toggle>Dropdown <span class=\"caret\"></span></dd.toggle>\n    <dd.menu as |ddm|>\n      <ddm.item><ddm.linkTo @route=\"foo\">Foo</ddm.linkTo></ddm.item>\n      <ddm.item><ddm.linkTo @route=\"bar\">Bar</ddm.linkTo></ddm.item>\n    </dd.menu>\n  </nav.dropdown>\n</BsNav>\n```\n\n### Bootstrap 3/4 Notes\n\nUse [`nav.linkTo`](Components.NavLinkTo.html) for in-app links to ensure proper styling regardless of\nBootstrap version. Explicit use of `<a>` tags in Bootstrap 4 must apply the `nav-link` class and manage\nthe `active` state explicitly.\n\nThe `fill` styling is only available with Bootstrap 4",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -1652,7 +1626,7 @@
             "namespace": "Components",
             "file": "addon/components/base/bs-navbar.js",
             "line": 7,
-            "description": "Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).\n\n### Usage\n\nUses the following components by a contextual reference:\n\n```hbs\n<BsNavbar as |navbar|>\n  <div class=\"navbar-header\">\n     {{navbar.toggle}}\n     <a class=\"navbar-brand\" href=\"#\">Brand</a>\n  </div>\n  <navbar.content>\n    <navbar.nav as |nav|>\n      <nav.item @route=\"home\">Home</nav.item>\n      <nav.item @route=\"navbars\">Navbars</nav.item>\n    </navbar.nav>\n  </navbar.content>\n</BsNavBar>\n```\n\n**Note:** the `<div class=\"navbar-header\">` is required for BS3 to hold the elements visible on a mobile breakpoint,\nwhen the actual content is collapsed. It should *not* be used for BS4!\n\nThe component yields references to the following contextual components:\n\n* [Components.NavbarContent](Components.NavbarContent.html)\n* [Components.NavbarToggle](Components.NavbarToggle.html)\n* [Components.NavbarNav](Components.NavbarNav.html)\n\nFurthermore references to the following actions are yielded:\n\n* `collapse`: triggers the `onCollapse` action and collapses the navbar (mobile)\n* `expand`: triggers the `onExpand` action and expands the navbar (mobile)\n* `toggleNavbar`: triggers the `toggleNavbar` action and toggles the navbar (mobile)\n\n### Responsive Design\n\nFor the mobile breakpoint the Bootstrap styles will hide the navbar content (`{{navbar.content}}`). Clicking on the\nnavbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all nav links (`<nav.item @route=\"...\">`) are already\nwired up to call the navbar's `collapse` action, so clicking any of them will collapse the navbar. To selectively\nprevent that, you can set its `collapseNavbar` property to false:\n\n```hbs\n<nav.item @route=\"index\" @collapseNavbar={{false}}>Don't collapse</nav.item>\n```\n\nTo collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded `collapse`\naction:\n\n```hbs\n<BsNavbar as |navbar|>\n  <navbar.content>\n    <navbar.nav as |nav|>\n      <nav.item>\n        <a onclick={{action navbar.collapse}}>Collapse</a>\n      </nav.item>\n    </navbar.nav>\n  </navbar.content>\n</BsNavBar>\n```\n\n### Navbar styles\n\nThe component supports the default bootstrap navbar styling options through the `type`\nproperty. Bootstrap navbars [do not currently support justified nav links](http://getbootstrap.com/components/#navbar-default),\nso those are explicitly disallowed.\n\nOther bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of\nbootstrap styles applied through the `class` attribute on the components.\n\n### Bootstrap 3/4 Notes\n\nBootstrap 4 changed the default navbar styling option from `navbar-default` to `navbar-light`.\nIf you explicitly specified \"default\" in Bootstrap 3 and are migrating, you will need to change\nthis in your code. Bootstrap 4 changes `navbar-inverse` to `navbar-dark`.\n\nBootstrap 4 navbars are fluid by default without the need for an additional container. An\nadditional container is added like with Bootstrap 3 if `fluid` is `false`.",
+            "description": "Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).\n\n### Usage\n\nUses the following components by a contextual reference:\n\n```hbs\n<BsNavbar as |navbar|>\n  <div class=\"navbar-header\">\n     {{navbar.toggle}}\n     <a class=\"navbar-brand\" href=\"#\">Brand</a>\n  </div>\n  <navbar.content>\n    <navbar.nav as |nav|>\n      <nav.item>\n        <nav.linkTo @route=\"home\">Home</nav.linkTo>\n      </nav.item>\n      <nav.item>\n        <nav.linkTo @route=\"navbars\">Navbars</nav.linkTo>\n      </nav.item>\n    </navbar.nav>\n  </navbar.content>\n</BsNavBar>\n```\n\n**Note:** the `<div class=\"navbar-header\">` is required for BS3 to hold the elements visible on a mobile breakpoint,\nwhen the actual content is collapsed. It should *not* be used for BS4!\n\nThe component yields references to the following contextual components:\n\n* [Components.NavbarContent](Components.NavbarContent.html)\n* [Components.NavbarToggle](Components.NavbarToggle.html)\n* [Components.NavbarNav](Components.NavbarNav.html)\n\nFurthermore references to the following actions are yielded:\n\n* `collapse`: triggers the `onCollapse` action and collapses the navbar (mobile)\n* `expand`: triggers the `onExpand` action and expands the navbar (mobile)\n* `toggleNavbar`: triggers the `toggleNavbar` action and toggles the navbar (mobile)\n\n### Responsive Design\n\nFor the mobile breakpoint the Bootstrap styles will hide the navbar content (`{{navbar.content}}`). Clicking on the\nnavbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all nav links (`<nav.linkTo @route=\"...\">`) are already\nwired up to call the navbar's `collapse` action, so clicking any of them will collapse the navbar. To selectively\nprevent that, you can set its `collapseNavbar` property to false:\n\n```hbs\n<nav.item>\n  <nav.linkTo @route=\"index\" @collapseNavbar={{false}}>Don't collapse</nav.linkTo>\n</nav.item>\n```\n\nTo collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded `collapse`\naction:\n\n```hbs\n<BsNavbar as |navbar|>\n  <navbar.content>\n    <navbar.nav as |nav|>\n      <nav.item>\n        <a onclick={{action navbar.collapse}}>Collapse</a>\n      </nav.item>\n    </navbar.nav>\n  </navbar.content>\n</BsNavBar>\n```\n\n### Navbar styles\n\nThe component supports the default bootstrap navbar styling options through the `type`\nproperty. Bootstrap navbars [do not currently support justified nav links](http://getbootstrap.com/components/#navbar-default),\nso those are explicitly disallowed.\n\nOther bootstrap navbar variations, such as forms, buttons, etc. can be supported through direct use of\nbootstrap styles applied through the `class` attribute on the components.\n\n### Bootstrap 3/4 Notes\n\nBootstrap 4 changed the default navbar styling option from `navbar-default` to `navbar-light`.\nIf you explicitly specified \"default\" in Bootstrap 3 and are migrating, you will need to change\nthis in your code. Bootstrap 4 changes `navbar-inverse` to `navbar-dark`.\n\nBootstrap 4 navbars are fluid by default without the need for an additional container. An\nadditional container is added like with Bootstrap 3 if `fluid` is `false`.",
             "extends": "Ember.Component",
             "access": "public",
             "tagname": ""
@@ -1700,7 +1674,7 @@
             "namespace": "Components",
             "file": "addon/components/base/bs-tab.js",
             "line": 11,
-            "description": "Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,\nsee http://getbootstrap.com/javascript/#tabs\n\n### Usage\n\nJust nest any number of yielded [Components.TabPane](Components.TabPane.html) components that hold the tab content.\nThe tab navigation is automatically generated from the tab panes' `title` property:\n\n```hbs\n<BsTab as |tab|>\n  <tab.pane @title=\"Tab 1\">\n    <p> ... </p>\n  </tab.pane>\n  <tab.pane @title=\"Tab 2\">\n    <p> ... </p>\n  </tab.pane>\n</BsTab>\n```\n\n### Groupable (dropdown) tabs\n\nBootstrap's support for dropdown menus as tab navigation is mimiced by the use of the `groupTitle` property.\nAll panes with the same `groupTitle` will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)\ncomponent with `groupTitle` being the dropdown's title:\n\n```hbs\n<BsTab as |tab|>\n  <tab.pane @title=\"Tab 1\">\n    <p> ... </p>\n  </tab.pane>\n  <tab.pane @title=\"Tab 2\">\n    <p> ... </p>\n  </tab.pane>\n  <tab.pane @title=\"Tab 3\" @groupTitle=\"Dropdown\">\n    <p> ... </p>\n  </tab.pane>\n  <tab.pane @title=\"Tab 4\" @groupTitle=\"Dropdown\">\n    <p> ... </p>\n  </tab.pane>\n</BsTab>\n```\n\n### Custom tabs\n\nWhen having the tab pane's `title` as the tab navigation title is not sufficient, for example because you want to\nintegrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup\nyour navigation by yourself.\n\nSet `customTabs` to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably\nusing a [Components.Nav](Components.Nav.html) component. The tab component yields the `activeId` property as well as\nits `select` action, which you would have to use to manually set the `active` state of the navigation items and to\ntrigger the selection of the different tab panes, using their ids:\n\n```hbs\n<BsTab @customTabs={{true}} as |tab|>\n  <BsNav @type=\"tabs\" as |nav|>\n    <nav.item @active={{bs-eq Tab.activeId \"pane1\"}}><a href=\"#pane1\" role=\"tab\" onclick={{action Tab.select \"pane1\"}}>Tab 1</a></nav.item>\n    <nav.item @active={{bs-eq Tab.activeId \"pane2\"}}><a href=\"#pane2\" role=\"tab\" onclick={{action Tab.select \"pane2\"}}>Tab 2 <span class=\"badge\">{{badge}}</span></a></nav.item>\n  </BsNav>\n  <div class=\"tab-content\">\n    <tab.pane @id=\"pane1\" @title=\"Tab 1\">\n      <p> ... </p>\n    </tab.pane>\n    <tab.pane @id=\"pane2\" @title=\"Tab 2\">\n      <p> ... </p>\n    </tab.pane>\n  </div>\n</BsTab>\n```\n\nNote that the `bs-eq` helper used in the example above is a private helper, which is not guaranteed to be available for\nthe future. Better use the corresponding `eq` helper of the\n[ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!\n\n### Routable tabs\n\nThe tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and\ndeactivated dynamically, just as the  original Bootstrap implementation.\n\nIf you want to have the content delivered through individual sub routes, just use\nthe [Components.Nav](Components.Nav.html) component and an `{{outlet}}` that show the nested routes' content:\n\n```hbs\n<div>\n  <BsNav @type=\"tabs\" as |nav|>\n    <nav.item @route=\"tabs.index\">Tab 1</nav.item>\n    <nav.item @route=\"tabs.other\">Tab 3</nav.item>\n  </BsNav>\n</div>\n```",
+            "description": "Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,\nsee http://getbootstrap.com/javascript/#tabs\n\n### Usage\n\nJust nest any number of yielded [Components.TabPane](Components.TabPane.html) components that hold the tab content.\nThe tab navigation is automatically generated from the tab panes' `title` property:\n\n```hbs\n<BsTab as |tab|>\n  <tab.pane @title=\"Tab 1\">\n    <p> ... </p>\n  </tab.pane>\n  <tab.pane @title=\"Tab 2\">\n    <p> ... </p>\n  </tab.pane>\n</BsTab>\n```\n\n### Groupable (dropdown) tabs\n\nBootstrap's support for dropdown menus as tab navigation is mimiced by the use of the `groupTitle` property.\nAll panes with the same `groupTitle` will be put inside the menu of a [Components.Dropdown](Components.Dropdown.html)\ncomponent with `groupTitle` being the dropdown's title:\n\n```hbs\n<BsTab as |tab|>\n  <tab.pane @title=\"Tab 1\">\n    <p> ... </p>\n  </tab.pane>\n  <tab.pane @title=\"Tab 2\">\n    <p> ... </p>\n  </tab.pane>\n  <tab.pane @title=\"Tab 3\" @groupTitle=\"Dropdown\">\n    <p> ... </p>\n  </tab.pane>\n  <tab.pane @title=\"Tab 4\" @groupTitle=\"Dropdown\">\n    <p> ... </p>\n  </tab.pane>\n</BsTab>\n```\n\n### Custom tabs\n\nWhen having the tab pane's `title` as the tab navigation title is not sufficient, for example because you want to\nintegrate some other dynamic content, maybe even other components in the tab navigation item, then you have to setup\nyour navigation by yourself.\n\nSet `customTabs` to true to deactivate the automatic tab navigation generation. Then setup your navigation, probably\nusing a [Components.Nav](Components.Nav.html) component. The tab component yields the `activeId` property as well as\nits `select` action, which you would have to use to manually set the `active` state of the navigation items and to\ntrigger the selection of the different tab panes, using their ids:\n\n```hbs\n<BsTab @customTabs={{true}} as |tab|>\n  <BsNav @type=\"tabs\" as |nav|>\n    <nav.item @active={{bs-eq Tab.activeId \"pane1\"}}><a href=\"#pane1\" role=\"tab\" onclick={{action Tab.select \"pane1\"}}>Tab 1</a></nav.item>\n    <nav.item @active={{bs-eq Tab.activeId \"pane2\"}}><a href=\"#pane2\" role=\"tab\" onclick={{action Tab.select \"pane2\"}}>Tab 2 <span class=\"badge\">{{badge}}</span></a></nav.item>\n  </BsNav>\n  <div class=\"tab-content\">\n    <tab.pane @id=\"pane1\" @title=\"Tab 1\">\n      <p> ... </p>\n    </tab.pane>\n    <tab.pane @id=\"pane2\" @title=\"Tab 2\">\n      <p> ... </p>\n    </tab.pane>\n  </div>\n</BsTab>\n```\n\nNote that the `bs-eq` helper used in the example above is a private helper, which is not guaranteed to be available for\nthe future. Better use the corresponding `eq` helper of the\n[ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers) addon for example!\n\n### Routable tabs\n\nThe tab component purpose is to have panes of content, that are all in DOM at the same time and that are activated and\ndeactivated dynamically, just as the  original Bootstrap implementation.\n\nIf you want to have the content delivered through individual sub routes, just use\nthe [Components.Nav](Components.Nav.html) component and an `{{outlet}}` that show the nested routes' content:\n\n```hbs\n<div>\n  <BsNav @type=\"tabs\" as |nav|>\n    <nav.item>\n      <nav.linkTo @route=\"tabs.index\">Tab 1</nav.linkTo>\n    </nav.item>\n    <nav.item>\n      <nav.linkTo @route=\"tabs.other\">Tab 3</nav.linkTo>\n    </nav.item>\n  </BsNav>\n</div>\n```",
             "extends": "Ember.Component",
             "uses": [
                 "Mixins.ComponentParent"
@@ -3104,7 +3078,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 696,
+            "line": 698,
             "itemtype": "property",
             "name": "showModelValidations",
             "type": "boolean",
@@ -3116,7 +3090,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 704,
+            "line": 706,
             "itemtype": "property",
             "name": "showValidationMessages",
             "type": "boolean",
@@ -3128,7 +3102,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 712,
+            "line": 714,
             "description": "Event or list of events which enable form validation markup rendering.\nSupported events: ['focusout', 'change', 'input']",
             "itemtype": "property",
             "name": "showValidationOn",
@@ -3141,7 +3115,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 723,
+            "line": 725,
             "itemtype": "property",
             "name": "_showValidationOn",
             "type": "array",
@@ -3153,7 +3127,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 745,
+            "line": 747,
             "itemtype": "method",
             "name": "showValidationOnHandler",
             "params": [
@@ -3170,7 +3144,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 771,
+            "line": 773,
             "description": "Controls if validation should be shown for specified event targets.\n\nIt expects an array of query selectors. If event target is a children of an event that matches\nthese selectors, an event triggered for it will not trigger validation errors to be shown.\n\nBy default events fired on elements inside an input group are skipped.\n\nIf `null` or an empty array is passed validation errors are shown for all events regardless\nof event target.",
             "itemtype": "property",
             "name": "doNotShowValidationForEventTargets",
@@ -3182,7 +3156,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 787,
+            "line": 789,
             "description": "The validation (\"error\" (BS3)/\"danger\" (BS4), \"warning\", or \"success\") or null if no validation is to be shown. Automatically computed from the\nmodels validation state.",
             "itemtype": "property",
             "name": "validation",
@@ -3195,7 +3169,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 808,
+            "line": 810,
             "description": "True for text field `controlType`s",
             "itemtype": "property",
             "name": "useIcons",
@@ -3208,7 +3182,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 818,
+            "line": 820,
             "description": "The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):\n\n* 'horizontal'\n* 'vertical'\n* 'inline'\n\nDefaults to the parent `form`'s `formLayout` property.",
             "itemtype": "property",
             "name": "formLayout",
@@ -3221,7 +3195,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 834,
+            "line": 836,
             "description": "The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same\nproperty of the parent form. The corresponding grid class for form controls is automatically computed.",
             "itemtype": "property",
             "name": "horizontalLabelGridClass",
@@ -3233,7 +3207,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 844,
+            "line": 846,
             "description": "ID for input field and the corresponding label's \"for\" attribute",
             "itemtype": "property",
             "name": "formElementId",
@@ -3245,7 +3219,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 855,
+            "line": 857,
             "description": "ID of the helpText, used for aria-describedby attribute of the control element",
             "itemtype": "property",
             "name": "ariaDescribedBy",
@@ -3257,7 +3231,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 866,
+            "line": 868,
             "itemtype": "property",
             "name": "formComponent",
             "type": "{String}",
@@ -3268,7 +3242,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 873,
+            "line": 875,
             "itemtype": "property",
             "name": "layoutComponent",
             "type": "{String}",
@@ -3279,7 +3253,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 890,
+            "line": 892,
             "itemtype": "property",
             "name": "controlComponent",
             "type": "{String}",
@@ -3290,7 +3264,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 907,
+            "line": 909,
             "itemtype": "property",
             "name": "errorsComponent",
             "type": "{String}",
@@ -3301,7 +3275,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 914,
+            "line": 916,
             "itemtype": "property",
             "name": "feedbackIconComponent",
             "type": "{String}",
@@ -3312,7 +3286,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 921,
+            "line": 923,
             "itemtype": "property",
             "name": "labelComponent",
             "type": "{String}",
@@ -3323,7 +3297,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 928,
+            "line": 930,
             "itemtype": "property",
             "name": "helpTextComponent",
             "type": "{String}",
@@ -3334,7 +3308,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 935,
+            "line": 937,
             "description": "Setup validation properties. This method acts as a hook for external validation\nlibraries to overwrite. In case of failed validations the `errors` property should contain an array of error messages.",
             "itemtype": "method",
             "name": "setupValidations",
@@ -3345,7 +3319,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 945,
+            "line": 947,
             "description": "Listen for focusOut events from the control element to automatically set `showOwnValidation` to true to enable\nform validation markup rendering if `showValidationsOn` contains `focusOut`.",
             "itemtype": "event",
             "name": "focusOut",
@@ -3356,7 +3330,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 956,
+            "line": 958,
             "description": "Listen for change events from the control element to automatically set `showOwnValidation` to true to enable\nform validation markup rendering if `showValidationsOn` contains `change`.",
             "itemtype": "event",
             "name": "change",
@@ -3367,7 +3341,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 967,
+            "line": 969,
             "description": "Listen for input events from the control element to automatically set `showOwnValidation` to true to enable\nform validation markup rendering if `showValidationsOn` contains `input`.",
             "itemtype": "event",
             "name": "input",
@@ -3378,7 +3352,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 978,
+            "line": 980,
             "description": "The action is called whenever the input value is changed, e.g. by typing text",
             "itemtype": "event",
             "name": "onChange",
@@ -3406,7 +3380,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 989,
+            "line": 991,
             "description": "Private duplicate of onChange event used for internal state handling between form and it's elements.",
             "itemtype": "event",
             "name": "_onChange",
@@ -3768,55 +3742,7 @@
         },
         {
             "file": "addon/components/base/bs-nav/item.js",
-            "line": 28,
-            "description": "If set will wrap the item's content in a link to the given route name. Same as the `route` property of `<LinkTo>`,\nsee https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=route",
-            "itemtype": "property",
-            "name": "route",
-            "type": "{string}",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.NavItem",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-nav/item.js",
-            "line": 37,
-            "description": "The model of a dynamic route. Same as the `model` property of `<LinkTo>`,\nsee https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=model",
-            "itemtype": "property",
-            "name": "model",
-            "type": "{object|string}",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.NavItem",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-nav/item.js",
-            "line": 46,
-            "description": "The models of a dynamic route. Same as the `models` property of `<LinkTo>`,\nsee https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=models",
-            "itemtype": "property",
-            "name": "models",
-            "type": "{array}",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.NavItem",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-nav/item.js",
-            "line": 55,
-            "description": "The query params of a dynamic route. Same as the `query` property of `<LinkTo>`,\nsee https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=query",
-            "itemtype": "property",
-            "name": "query",
-            "type": "{object}",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.NavItem",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-nav/item.js",
-            "line": 64,
+            "line": 26,
             "description": "Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).\nBy default it will look at any nested `link-to` components and make itself disabled if there is a disabled link.\nSee the [link-to API](http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_disabling-the-code-link-to-code-component)",
             "itemtype": "property",
             "name": "disabled",
@@ -3828,7 +3754,7 @@
         },
         {
             "file": "addon/components/base/bs-nav/item.js",
-            "line": 78,
+            "line": 40,
             "description": "Render the nav item as active.\nBy default it will look at any nested `link-to` components and make itself active if there is an active link\n(i.e. the link points to the current route).\nSee the [link-to API](http://emberjs.com/api/classes/Ember.Templates.helpers.html#toc_handling-current-route)",
             "itemtype": "property",
             "name": "active",
@@ -3840,7 +3766,7 @@
         },
         {
             "file": "addon/components/base/bs-nav/item.js",
-            "line": 112,
+            "line": 55,
             "description": "Collection of all `Ember.LinkComponent`s that are children",
             "itemtype": "property",
             "name": "childLinks",
@@ -3851,7 +3777,7 @@
         },
         {
             "file": "addon/components/base/bs-nav/item.js",
-            "line": 130,
+            "line": 71,
             "description": "Called when clicking the nav item",
             "itemtype": "event",
             "name": "onClick",
@@ -3880,28 +3806,6 @@
             "access": "private",
             "tagname": "",
             "class": "Components.NavbarLinkTo",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-navbar/nav-item.js",
-            "line": 11,
-            "itemtype": "property",
-            "name": "collapseNavbar",
-            "type": "{Boolean}",
-            "default": "true",
-            "access": "public",
-            "tagname": "",
-            "class": "Components.NavbarNavItem",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-navbar/nav-item.js",
-            "line": 19,
-            "itemtype": "event",
-            "name": "onCollapse",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.NavbarNavItem",
             "namespace": "Components"
         },
         {
@@ -6085,7 +5989,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 161,
+            "line": 165,
             "description": "This property reflects the state of the dropdown, whether it is open or closed.",
             "itemtype": "property",
             "name": "isOpen",
@@ -6098,7 +6002,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 171,
+            "line": 175,
             "description": "By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.",
             "itemtype": "property",
             "name": "closeOnMenuClick",
@@ -6111,7 +6015,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 181,
+            "line": 185,
             "description": "By default the dropdown menu will expand downwards. Other options include, 'up', 'left' and 'right'",
             "itemtype": "property",
             "name": "direction",
@@ -6124,7 +6028,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 191,
+            "line": 195,
             "description": "Indicates the dropdown is being used as a navigation item dropdown.",
             "itemtype": "property",
             "name": "inNav",
@@ -6137,7 +6041,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 200,
+            "line": 204,
             "description": "A computed property to generate the suiting class for the dropdown container, either \"dropdown\", \"dropup\" or \"btn-group\".\nBS4 only: \"dropleft\", \"dropright\"",
             "itemtype": "property",
             "name": "containerClass",
@@ -6150,7 +6054,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 217,
+            "line": 221,
             "itemtype": "property",
             "name": "toggleElement",
             "access": "private",
@@ -6160,7 +6064,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 225,
+            "line": 229,
             "description": "Reference to the child toggle (Toggle or Button)",
             "itemtype": "property",
             "name": "toggle",
@@ -6171,7 +6075,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 233,
+            "line": 237,
             "description": "Action is called when dropdown is about to be shown",
             "itemtype": "event",
             "name": "onShow",
@@ -6189,7 +6093,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 242,
+            "line": 246,
             "description": "Action is called when dropdown is about to be hidden",
             "itemtype": "event",
             "name": "onHide",
@@ -6207,7 +6111,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 292,
+            "line": 296,
             "description": "Handler for click events to close the dropdown",
             "itemtype": "method",
             "name": "closeOnClickHandler",
@@ -6224,7 +6128,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 310,
+            "line": 314,
             "itemtype": "property",
             "name": "buttonComponent",
             "type": "{String}",
@@ -6235,7 +6139,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 317,
+            "line": 321,
             "itemtype": "property",
             "name": "toggleComponent",
             "type": "{String}",
@@ -6246,7 +6150,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 324,
+            "line": 328,
             "itemtype": "property",
             "name": "menuComponent",
             "type": "{String}",
@@ -6257,7 +6161,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 334,
+            "line": 338,
             "description": "The DOM element of the `.dropdown-menu` element",
             "type": "object",
             "readonly": "",
@@ -6268,7 +6172,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 112,
+            "line": 113,
             "description": "Bootstrap form class name (computed)",
             "itemtype": "property",
             "name": "layoutClass",
@@ -6281,7 +6185,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 122,
+            "line": 123,
             "description": "Set a model that this form should represent. This serves several purposes:\n\n* child `Components.FormElement`s can access and bind to this model by their `property`\n* when the model supports validation by using the [ember-validations](https://github.com/dockyard/ember-validations) mixin,\nchild `Components.FormElement`s will look at the validation information of their `property` and render their form group accordingly.\nMoreover the form's `submit` event handler will validate the model and deny submitting if the model is not validated successfully.",
             "itemtype": "property",
             "name": "model",
@@ -6293,7 +6197,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 135,
+            "line": 136,
             "description": "Set the layout of the form to either \"vertical\", \"horizontal\" or \"inline\". See http://getbootstrap.com/css/#forms-inline and http://getbootstrap.com/css/#forms-horizontal",
             "itemtype": "property",
             "name": "formLayout",
@@ -6305,7 +6209,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 144,
+            "line": 145,
             "description": "Check if validating the model is supported. This needs to be implemented by another addon.",
             "itemtype": "property",
             "name": "hasValidator",
@@ -6318,7 +6222,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 154,
+            "line": 155,
             "description": "The Bootstrap grid class for form labels. This is used by the `Components.FormElement` class as a default for the\nwhole form.",
             "itemtype": "property",
             "name": "horizontalLabelGridClass",
@@ -6331,7 +6235,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 165,
+            "line": 166,
             "itemtype": "property",
             "name": "elementComponent",
             "type": "{String}",
@@ -6342,7 +6246,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 172,
+            "line": 173,
             "itemtype": "property",
             "name": "groupComponent",
             "type": "{String}",
@@ -6353,7 +6257,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 179,
+            "line": 180,
             "description": "`isSubmitting` is `true` after `submit` event has been triggered and until Promise returned by `onSubmit` is\nfulfilled. If `validate` returns a Promise that one is also taken into consideration.\n\nIf multiple concurrent submit events are fired, it stays `true` until all submit events have been fulfilled.",
             "itemtype": "property",
             "name": "isSubmitting",
@@ -6366,7 +6270,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 192,
+            "line": 193,
             "description": "`isSubmitted` is `true` if last submission was successful.\nA change to any form element resets it's value to `false`.\n\nIf not using `Components.FormElement`, `resetSubmissionState` action must be triggered on each change to reset\nform's submission state.",
             "itemtype": "property",
             "name": "isSubmitted",
@@ -6378,7 +6282,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 205,
+            "line": 206,
             "description": "`isRejected` is `true` if last submission was rejected.\nA submission is considered as rejected if form is invalid as well as if `onSubmit` rejects.\nA change to any form element resets it's value to `false`.\n\nIf not using `Components.FormElement`, `resetSubmissionState` action must be triggered on each change to reset\nform's submission state.",
             "itemtype": "property",
             "name": "isRejected",
@@ -6390,7 +6294,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 219,
+            "line": 220,
             "description": "Count of pending submissions.",
             "itemtype": "property",
             "name": "pendingSubmissions",
@@ -6402,7 +6306,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 228,
+            "line": 229,
             "description": "If set to true pressing enter will submit the form, even if no submit button is present",
             "itemtype": "property",
             "name": "submitOnEnter",
@@ -6415,7 +6319,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 238,
+            "line": 239,
             "description": "Controls if `onSubmit` action is fired concurrently. If `true` submitting form multiple\ntimes will not trigger `onSubmit` action if a Promise returned by previous submission is\nnot settled yet.\n\nDroping a submission also prevents rerunning validation and `onBefore` hook.",
             "itemtype": "property",
             "name": "preventConcurrency",
@@ -6428,7 +6332,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 252,
+            "line": 253,
             "description": "If true, after successful validation and upon submitting the form, all current element validations will be hidden.\nIf the form remains visible, the user would have to focus out of elements of submit the form again for the\nvalidations to show up again, as if a fresh new form component had been rendered.",
             "itemtype": "property",
             "name": "hideValidationsOnSubmit",
@@ -6441,7 +6345,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 264,
+            "line": 265,
             "description": "If set to true novalidate attribute is present on form element\nWill be true by default if validation support is enabled.",
             "itemtype": "property",
             "name": "novalidate",
@@ -6454,7 +6358,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 281,
+            "line": 282,
             "description": "If set to true the `readonly` property of all yielded form elements will be set, making their form controls read-only.",
             "itemtype": "property",
             "name": "readonly",
@@ -6467,7 +6371,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 291,
+            "line": 292,
             "description": "If set to true the `disabled` property of all yielded form elements will be set, making their form controls disabled.",
             "itemtype": "property",
             "name": "disabled",
@@ -6480,7 +6384,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 301,
+            "line": 302,
             "description": "Validate hook which will return a promise that will either resolve if the model is valid\nor reject if it's not. This should be overridden to add validation support.",
             "itemtype": "method",
             "name": "validate",
@@ -6502,7 +6406,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 312,
+            "line": 313,
             "itemtype": "property",
             "name": "showAllValidations",
             "type": "boolean",
@@ -6514,7 +6418,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 320,
+            "line": 321,
             "description": "Action is called before the form is validated (if possible) and submitted.",
             "itemtype": "event",
             "name": "onBefore",
@@ -6532,7 +6436,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 329,
+            "line": 330,
             "description": "Action is called when submit has been triggered and the model has passed all validations (if present).",
             "itemtype": "event",
             "name": "onSubmit",
@@ -6555,7 +6459,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 339,
+            "line": 340,
             "description": "Action is called when validation of the model has failed.",
             "itemtype": "event",
             "name": "onInvalid",
@@ -6578,7 +6482,7 @@
         },
         {
             "file": "addon/components/base/bs-form.js",
-            "line": 349,
+            "line": 350,
             "description": "Submit handler that will send the default action (\"action\") to the controller when submitting the form.\n\nIf there is a supplied `model` that supports validation (`hasValidator`) the model will be validated before, and\nonly if validation is successful the default action will be sent. Otherwise an \"invalid\" action will be sent, and\nall the `showValidation` property of all child `Components.FormElement`s will be set to true, so error state and\nmessages will be shown automatically.",
             "itemtype": "method",
             "name": "submit",
@@ -7201,7 +7105,7 @@
         },
         {
             "file": "addon/components/base/bs-nav.js",
-            "line": 86,
+            "line": 98,
             "description": "Special type of nav, either \"pills\" or \"tabs\"",
             "itemtype": "property",
             "name": "type",
@@ -7214,7 +7118,7 @@
         },
         {
             "file": "addon/components/base/bs-nav.js",
-            "line": 96,
+            "line": 108,
             "description": "Make the nav justified, see [bootstrap docs](http://getbootstrap.com/components/#nav-justified)",
             "itemtype": "property",
             "name": "justified",
@@ -7227,7 +7131,7 @@
         },
         {
             "file": "addon/components/base/bs-nav.js",
-            "line": 106,
+            "line": 118,
             "description": "Make the nav pills stacked, see [bootstrap docs](http://getbootstrap.com/components/#nav-pills)",
             "itemtype": "property",
             "name": "stacked",
@@ -7240,7 +7144,7 @@
         },
         {
             "file": "addon/components/base/bs-nav.js",
-            "line": 116,
+            "line": 128,
             "itemtype": "property",
             "name": "itemComponent",
             "type": "{String}",
@@ -7251,7 +7155,7 @@
         },
         {
             "file": "addon/components/base/bs-nav.js",
-            "line": 123,
+            "line": 135,
             "itemtype": "property",
             "name": "linkToComponent",
             "type": "{String}",
@@ -7262,7 +7166,7 @@
         },
         {
             "file": "addon/components/base/bs-nav.js",
-            "line": 130,
+            "line": 142,
             "itemtype": "property",
             "name": "dropdownComponent",
             "type": "{String}",
@@ -7273,7 +7177,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 100,
+            "line": 106,
             "description": "Manages the state for the responsive menu between the toggle and the content.",
             "itemtype": "property",
             "name": "collapsed",
@@ -7286,7 +7190,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 110,
+            "line": 116,
             "itemtype": "property",
             "name": "_collapsed",
             "access": "private",
@@ -7296,7 +7200,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 116,
+            "line": 122,
             "description": "Controls whether the wrapping div is a fluid container or not.",
             "itemtype": "property",
             "name": "fluid",
@@ -7309,7 +7213,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 126,
+            "line": 132,
             "description": "Specifies the position classes for the navbar, currently supporting none, \"fixed-top\", \"fixed-bottom\", and\neither \"static-top\" (BS3) or \"sticky-top\" (BS4).\nSee the [bootstrap docs](http://getbootstrap.com/components/#navbar-fixed-top) for details.",
             "itemtype": "property",
             "name": "position",
@@ -7322,7 +7226,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 150,
+            "line": 156,
             "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes)",
             "itemtype": "property",
             "name": "type",
@@ -7335,7 +7239,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 163,
+            "line": 169,
             "description": "The action to be sent when the navbar is about to be collapsed.\n\nYou can return false to prevent collapsing the navbar automatically, and do that in your action by\nsetting `collapsed` to true.",
             "itemtype": "event",
             "name": "onCollapse",
@@ -7346,7 +7250,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 174,
+            "line": 180,
             "description": "The action to be sent after the navbar has been collapsed (including the CSS transition).",
             "itemtype": "event",
             "name": "onCollapsed",
@@ -7357,7 +7261,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 182,
+            "line": 188,
             "description": "The action to be sent when the navbar is about to be expanded.\n\nYou can return false to prevent expanding the navbar automatically, and do that in your action by\nsetting `collapsed` to false.",
             "itemtype": "event",
             "name": "onExpand",
@@ -7368,7 +7272,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 193,
+            "line": 199,
             "description": "The action to be sent after the navbar has been expanded (including the CSS transition).",
             "itemtype": "event",
             "name": "onExpanded",
@@ -7379,7 +7283,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 214,
+            "line": 220,
             "itemtype": "method",
             "name": "expand",
             "access": "private",
@@ -7389,7 +7293,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 224,
+            "line": 230,
             "itemtype": "method",
             "name": "collapse",
             "access": "private",
@@ -7399,7 +7303,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 250,
+            "line": 256,
             "description": "Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard\ntwo character Bootstrap size abbreviations. Used to set the `navbar-expand-*`\nclass. Set to `null` to disable collapsing.",
             "itemtype": "property",
             "name": "toggleBreakpoint",
@@ -7412,7 +7316,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 261,
+            "line": 267,
             "description": "Bootstrap 4 Only: Sets the background color for the navbar. Can be any color\nin the set that composes the `bg-*` classes and can be extended by creating your\nown `bg-*` classes.",
             "itemtype": "property",
             "name": "backgroundColor",
@@ -7425,7 +7329,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 272,
+            "line": 278,
             "itemtype": "property",
             "name": "toggleComponent",
             "type": "{String}",
@@ -7436,7 +7340,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 279,
+            "line": 285,
             "itemtype": "property",
             "name": "contentComponent",
             "type": "{String}",
@@ -7447,7 +7351,7 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 286,
+            "line": 292,
             "itemtype": "property",
             "name": "navComponent",
             "type": "{String}",
@@ -7458,20 +7362,9 @@
         },
         {
             "file": "addon/components/base/bs-navbar.js",
-            "line": 293,
+            "line": 299,
             "itemtype": "property",
             "name": "linkToComponent",
-            "type": "{String}",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.Navbar",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-navbar.js",
-            "line": 300,
-            "itemtype": "property",
-            "name": "navItemComponent",
             "type": "{String}",
             "access": "private",
             "tagname": "",
@@ -7539,7 +7432,7 @@
         },
         {
             "file": "addon/components/base/bs-tab.js",
-            "line": 112,
+            "line": 116,
             "description": "Type of nav, either \"pills\" or \"tabs\"",
             "itemtype": "property",
             "name": "type",
@@ -7552,7 +7445,7 @@
         },
         {
             "file": "addon/components/base/bs-tab.js",
-            "line": 122,
+            "line": 126,
             "itemtype": "property",
             "name": "paneComponent",
             "type": "{String}",
@@ -7563,7 +7456,7 @@
         },
         {
             "file": "addon/components/base/bs-tab.js",
-            "line": 129,
+            "line": 133,
             "itemtype": "property",
             "name": "navComponent",
             "type": "{String}",
@@ -7574,7 +7467,7 @@
         },
         {
             "file": "addon/components/base/bs-tab.js",
-            "line": 136,
+            "line": 140,
             "description": "By default the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)\ncomponents. If set to true, you can deactivate this and setup the tabs manually. See the example above.",
             "itemtype": "property",
             "name": "customTabs",
@@ -7587,7 +7480,7 @@
         },
         {
             "file": "addon/components/base/bs-tab.js",
-            "line": 147,
+            "line": 151,
             "description": "The id (`elementId`) of the active [TabPane](Components.TabPane.html).\nBy default the first tab will be active, but this can be changed by setting this property\n\n```hbs\n{{#bs-tab activeId=\"pane2\"}}\n  {{#tab.pane id=\"pane1\" title=\"Tab 1\"}}\n     ...\n  {{/tab.pane}}\n  {{#tab.pane id=\"pane1\" title=\"Tab 1\"}}\n    ...\n  {{/tab.pane}}\n{{/bs-tab}}\n```\n\nWhen the selection is changed by user interaction this property will not update by using two-way bindings in order\nto follow DDAU best practices. If you want to react to such changes, subscribe to the `onChange` action",
             "itemtype": "property",
             "name": "activeId",
@@ -7599,7 +7492,7 @@
         },
         {
             "file": "addon/components/base/bs-tab.js",
-            "line": 171,
+            "line": 175,
             "itemtype": "property",
             "name": "isActiveId",
             "access": "private",
@@ -7609,7 +7502,7 @@
         },
         {
             "file": "addon/components/base/bs-tab.js",
-            "line": 177,
+            "line": 181,
             "description": "Set to false to disable the fade animation when switching tabs.",
             "itemtype": "property",
             "name": "fade",
@@ -7622,7 +7515,7 @@
         },
         {
             "file": "addon/components/base/bs-tab.js",
-            "line": 187,
+            "line": 191,
             "description": "The duration of the fade animation",
             "itemtype": "property",
             "name": "fadeDuration",
@@ -7635,7 +7528,7 @@
         },
         {
             "file": "addon/components/base/bs-tab.js",
-            "line": 197,
+            "line": 201,
             "description": "This action is called when switching the active tab, with the new and previous pane id\n\nYou can return false to prevent changing the active tab automatically, and do that in your action by\nsetting `activeId`.",
             "itemtype": "event",
             "name": "onChange",
@@ -7646,7 +7539,7 @@
         },
         {
             "file": "addon/components/base/bs-tab.js",
-            "line": 208,
+            "line": 212,
             "description": "All `TabPane` child components",
             "itemtype": "property",
             "name": "childPanes",
@@ -7659,7 +7552,7 @@
         },
         {
             "file": "addon/components/base/bs-tab.js",
-            "line": 220,
+            "line": 224,
             "description": "Array of objects that define the tab structure",
             "itemtype": "property",
             "name": "navItems",
@@ -7801,7 +7694,7 @@
         },
         {
             "message": "Missing item type\nThe DOM element of the `.dropdown-menu` element",
-            "line": " addon/components/base/bs-dropdown.js:334"
+            "line": " addon/components/base/bs-dropdown.js:338"
         }
     ]
 }

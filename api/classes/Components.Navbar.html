@@ -66,8 +66,12 @@
   &lt;/div&gt;
   &lt;navbar.content&gt;
     &lt;navbar.nav as |nav|&gt;
-      &lt;nav.item @route="home"&gt;Home&lt;/nav.item&gt;
-      &lt;nav.item @route="navbars"&gt;Navbars&lt;/nav.item&gt;
+      &lt;nav.item&gt;
+        &lt;nav.linkTo @route="home"&gt;Home&lt;/nav.linkTo&gt;
+      &lt;/nav.item&gt;
+      &lt;nav.item&gt;
+        &lt;nav.linkTo @route="navbars"&gt;Navbars&lt;/nav.linkTo&gt;
+      &lt;/nav.item&gt;
     &lt;/navbar.nav&gt;
   &lt;/navbar.content&gt;
 &lt;/BsNavBar&gt;
@@ -88,10 +92,12 @@ when the actual content is collapsed. It should <em>not</em> be used for BS4!</p
 </ul>
 <h3>Responsive Design</h3>
 <p>For the mobile breakpoint the Bootstrap styles will hide the navbar content (<code>{{navbar.content}}</code>). Clicking on the
-navbar toggle button (<code>{{navbar.toggle}}</code>) will expand the menu. By default all nav links (<code>&lt;nav.item @route="..."&gt;</code>) are already
+navbar toggle button (<code>{{navbar.toggle}}</code>) will expand the menu. By default all nav links (<code>&lt;nav.linkTo @route="..."&gt;</code>) are already
 wired up to call the navbar's <code>collapse</code> action, so clicking any of them will collapse the navbar. To selectively
 prevent that, you can set its <code>collapseNavbar</code> property to false:</p>
-<pre class="code prettyprint"><code class="language-hbs">&lt;nav.item @route="index" @collapseNavbar={{false}}&gt;Don't collapse&lt;/nav.item&gt;
+<pre class="code prettyprint"><code class="language-hbs">&lt;nav.item&gt;
+  &lt;nav.linkTo @route="index" @collapseNavbar={{false}}&gt;Don't collapse&lt;/nav.linkTo&gt;
+&lt;/nav.item&gt;
 </code></pre>
 <p>To collapse the navbar when clicking on some nav items that are not internal links, you can use the yielded <code>collapse</code>
 action:</p>
@@ -243,11 +249,6 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                      data-tablink="navComponent">navComponent</a>
 
                 </li>
-                <li class="index-item property private">
-                  <a href="#" data-tabid="#properties" data-anchor="#property_navItemComponent"
-                     data-tablink="navItemComponent">navItemComponent</a>
-
-                </li>
                 <li class="index-item property public">
                   <a href="#" data-tabid="#properties" data-anchor="#property_position"
                      data-tablink="position">position</a>
@@ -313,7 +314,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-navbar.js.html#l224"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:224</code></a>
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l230"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:230</code></a>
                     </p>
             
             
@@ -343,7 +344,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-navbar.js.html#l214"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:214</code></a>
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l220"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:220</code></a>
                     </p>
             
             
@@ -374,7 +375,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l110"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:110</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l116"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:116</code></a>
               </p>
             
             
@@ -403,7 +404,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> &#x27;light&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l261"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:261</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l267"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:267</code></a>
               </p>
             
             
@@ -435,7 +436,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l100"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:100</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l106"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:106</code></a>
               </p>
             
             
@@ -464,7 +465,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l279"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:279</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l285"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:285</code></a>
               </p>
             
             
@@ -493,7 +494,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l116"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:116</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l122"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:122</code></a>
               </p>
             
             
@@ -522,7 +523,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l293"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:293</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l299"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:299</code></a>
               </p>
             
             
@@ -550,35 +551,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l286"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:286</code></a>
-              </p>
-            
-            
-              </div>
-            
-              <div class="description">
-                
-              </div>
-            
-            
-            
-            
-            </div>
-            <div id="property_navItemComponent"
-                 class="property item private">
-              <h3 class="name">navItemComponent
-                <span class="badge badge-secondary small">{String}</span>
-                  <span class="badge badge-private small">private</span>
-            
-            
-            
-            
-              </h3>
-            
-              <div class="meta">
-                  <p>
-                      Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l300"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:300</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l292"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:292</code></a>
               </p>
             
             
@@ -607,7 +580,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> null</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l126"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:126</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l132"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:132</code></a>
               </p>
             
             
@@ -639,7 +612,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> &#x27;lg&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l250"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:250</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l256"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:256</code></a>
               </p>
             
             
@@ -670,7 +643,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l272"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:272</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l278"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:278</code></a>
               </p>
             
             
@@ -699,7 +672,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                   <p><strong>Default:</strong> &#x27;default&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-navbar.js.html#l150"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:150</code></a>
+                  <a href="../files/addon_components_base_bs-navbar.js.html#l156"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:156</code></a>
               </p>
             
             
@@ -731,7 +704,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-navbar.js.html#l163"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:163</code></a>
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l169"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:169</code></a>
                     </p>
             
             
@@ -759,7 +732,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-navbar.js.html#l174"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:174</code></a>
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l180"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:180</code></a>
                     </p>
             
             
@@ -785,7 +758,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-navbar.js.html#l182"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:182</code></a>
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l188"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:188</code></a>
                     </p>
             
             
@@ -813,7 +786,7 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-navbar.js.html#l193"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:193</code></a>
+                    <a href="../files/addon_components_base_bs-navbar.js.html#l199"><code>addon&#x2F;components&#x2F;base&#x2F;bs-navbar.js:199</code></a>
                     </p>
             
             
@@ -892,7 +865,6 @@ additional container is added like with Bootstrap 3 if <code>fluid</code> is <co
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

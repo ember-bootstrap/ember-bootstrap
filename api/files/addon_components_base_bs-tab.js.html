@@ -154,8 +154,12 @@ import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
   &#x60;&#x60;&#x60;hbs
   &lt;div&gt;
     &lt;BsNav @type=&quot;tabs&quot; as |nav|&gt;
-      &lt;nav.item @route=&quot;tabs.index&quot;&gt;Tab 1&lt;/nav.item&gt;
-      &lt;nav.item @route=&quot;tabs.other&quot;&gt;Tab 3&lt;/nav.item&gt;
+      &lt;nav.item&gt;
+        &lt;nav.linkTo @route=&quot;tabs.index&quot;&gt;Tab 1&lt;/nav.linkTo&gt;
+      &lt;/nav.item&gt;
+      &lt;nav.item&gt;
+        &lt;nav.linkTo @route=&quot;tabs.other&quot;&gt;Tab 3&lt;/nav.linkTo&gt;
+      &lt;/nav.item&gt;
     &lt;/BsNav&gt;
   &lt;/div&gt;
   &#x60;&#x60;&#x60;
@@ -384,7 +388,6 @@ export default Component.extend(ComponentParent, {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

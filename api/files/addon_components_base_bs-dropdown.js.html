@@ -88,10 +88,10 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
     &lt;dd.toggle&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/dd.toggle&gt;
     &lt;dd.menu as |ddm|&gt;
       &lt;ddm.item&gt;
-        {{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}
+        &lt;ddm.linkTo @route=&quot;index&quot;&gt;Something&lt;/ddm.linkTo&gt;
       &lt;/ddm.item&gt;
       &lt;ddm.item&gt;
-        {{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}
+        &lt;ddm.linkTo @route=&quot;index&quot;&gt;Something different&lt;/ddm.linkTo&gt;
       &lt;/ddm.item&gt;
     &lt;/dd.menu&gt;
   &lt;/BsDropdown&gt;
@@ -100,6 +100,10 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
   If you need to use dropdowns in a [nav](Components.Nav.html), use the &#x60;bs-nav.dropdown&#x60;
   contextual component rather than a standalone dropdown to ensure the correct styling
   regardless of your Bootstrap version.
+
+  &gt; Note: the use of angle brackets &#x60;&lt;ddm.linkTo&gt;&#x60; as shown above is only supported for Ember 3.10, as it relies on its
+  &gt; own native implementation of the &#x60;LinkComponent&#x60;. For older Ember versions please use the legacy syntax with positional
+  &gt; arguments: &#x60;{{#ddm.link-to &quot;bar&quot; this.model}}Bar{{/ddm.link-to}}&#x60;
 
   ### Button dropdowns
 
@@ -111,10 +115,10 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
     &lt;dd.button&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/dd.button&gt;
     &lt;dd.menu as |ddm|&gt;
       &lt;ddm.item&gt;
-        {{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}
+        &lt;ddm.linkTo @route=&quot;index&quot;&gt;Something&lt;/ddm.linkTo&gt;
       &lt;/ddm.item&gt;
       &lt;ddm.item&gt;
-        {{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}
+        &lt;ddm.linkTo @route=&quot;index&quot;&gt;Something different&lt;/ddm.linkTo&gt;
       &lt;/ddm.item&gt;
     &lt;/dd.menu&gt;
   &lt;/BsDropdown&gt;
@@ -133,10 +137,10 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
     &lt;dd.button&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/dd.button&gt;
     &lt;dd.menu as |ddm|&gt;
       &lt;ddm.item&gt;
-        {{#ddm.link-to &quot;index&quot;}}Something{{/ddm.link-to}}
+        &lt;ddm.linkTo @route=&quot;index&quot;&gt;Something&lt;/ddm.linkTo&gt;
       &lt;/ddm.item&gt;
       &lt;ddm.item&gt;
-        {{#ddm.link-to &quot;index&quot;}}Something different{{/ddm.link-to}}
+        &lt;ddm.linkTo @route=&quot;index&quot;&gt;Something different&lt;/ddm.linkTo&gt;
       &lt;/ddm.item&gt;
     &lt;/dd.menu&gt;
   &lt;/BsDropdown&gt;
@@ -469,7 +473,6 @@ export default component;
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>

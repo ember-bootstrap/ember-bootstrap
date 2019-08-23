@@ -60,13 +60,12 @@
     <pre class="prettyprint linenums">
 import Component from &#x27;@ember/component&#x27;;
 import { observer } from &#x27;@ember/object&#x27;;
-import { filter, filterBy, gt, or } from &#x27;@ember/object/computed&#x27;;
+import { filter, filterBy, gt } from &#x27;@ember/object/computed&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
 import LinkComponent from &#x27;@ember/routing/link-component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-nav/item&#x27;;
 import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
 import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
-import { inject as service } from &#x27;@ember/service&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 
 /**
@@ -83,43 +82,6 @@ export default Component.extend(ComponentParent, {
   layout,
   classNameBindings: [&#x27;disabled&#x27;, &#x27;active&#x27;],
   tagName: &#x27;li&#x27;,
-  router: service(),
-
-  /**
-   * If set will wrap the item&#x27;s content in a link to the given route name. Same as the &#x60;route&#x60; property of &#x60;&lt;LinkTo&gt;&#x60;,
-   * see https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=route
-   *
-   * @property route
-   * @type {string}
-   * @public
-   */
-
-  /**
-   * The model of a dynamic route. Same as the &#x60;model&#x60; property of &#x60;&lt;LinkTo&gt;&#x60;,
-   * see https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=model
-   *
-   * @property model
-   * @type {object|string}
-   * @public
-   */
-
-  /**
-   * The models of a dynamic route. Same as the &#x60;models&#x60; property of &#x60;&lt;LinkTo&gt;&#x60;,
-   * see https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=models
-   *
-   * @property models
-   * @type {array}
-   * @public
-   */
-
-  /**
-   * The query params of a dynamic route. Same as the &#x60;query&#x60; property of &#x60;&lt;LinkTo&gt;&#x60;,
-   * see https://api.emberjs.com/ember/3.10/classes/LinkComponent/properties/route?anchor=query
-   *
-   * @property query
-   * @type {object}
-   * @public
-   */
 
   /**
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
@@ -145,27 +107,8 @@ export default Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  active: overrideableCP(&#x27;_active&#x27;, &#x27;route&#x27;, &#x27;model&#x27;, &#x27;models&#x27;, &#x27;query&#x27;, &#x27;router.currentURL&#x27;, function() {
-    let { route, model, models, query } = this.getProperties(&#x27;route&#x27;, &#x27;model&#x27;, &#x27;models&#x27;, &#x27;query&#x27;);
-    let params = [];
-
-    if (route) {
-      params.push(route);
-    }
-
-    if (model) {
-      params.push(model);
-    }
-
-    if (models) {
-      params.push(...models);
-    }
-
-    if (query) {
-      params.push({ queryParams: true, ...query});
-    }
-
-    return params.length ? this.get(&#x27;router&#x27;).isActive(...params) : this.get(&#x27;_active&#x27;);
+  active: overrideableCP(&#x27;_active&#x27;, function() {
+    return this.get(&#x27;_active&#x27;);
   }),
   _active: false,
 
@@ -184,8 +127,6 @@ export default Component.extend(ComponentParent, {
 
   disabledChildLinks: filterBy(&#x27;childLinks&#x27;, &#x27;disabled&#x27;),
   hasDisabledChildLinks: gt(&#x27;disabledChildLinks.length&#x27;, 0),
-
-  hasLink: or(&#x27;route&#x27;, &#x27;model&#x27;, &#x27;models&#x27;, &#x27;query&#x27;),
 
   /**
    * Called when clicking the nav item
@@ -288,7 +229,6 @@ export default Component.extend(ComponentParent, {
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarContent.html">Components.NavbarContent</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarLinkTo.html">Components.NavbarLinkTo</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNav.html">Components.NavbarNav</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarNavItem.html">Components.NavbarNavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavbarToggle.html">Components.NavbarToggle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavItem.html">Components.NavItem</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.NavLinkTo.html">Components.NavLinkTo</a></li>
