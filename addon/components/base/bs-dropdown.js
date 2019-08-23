@@ -28,10 +28,10 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
     <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
     <dd.menu as |ddm|>
       <ddm.item>
-        {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+        <ddm.link-to @route="index">Something</ddm.link-to>
       </ddm.item>
       <ddm.item>
-        {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+        <ddm.link-to @route="index">Something different</ddm.link-to>
       </ddm.item>
     </dd.menu>
   </BsDropdown>
@@ -40,6 +40,10 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
   If you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`
   contextual component rather than a standalone dropdown to ensure the correct styling
   regardless of your Bootstrap version.
+
+  > Note: the use of angle brackets `<ddm.link-to>` as shown above is only supported for Ember 3.10, as it relies on its
+  > own native implementation of the `LinkComponent`. For older Ember versions please use the legacy syntax with positional
+  > arguments: `{{#ddm.link-to "bar" this.model}}Bar{{/ddm.link-to}}`
 
   ### Button dropdowns
 
@@ -51,10 +55,10 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
     <dd.button>Dropdown <span class="caret"></span></dd.button>
     <dd.menu as |ddm|>
       <ddm.item>
-        {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+        <ddm.link-to @route="index">Something</ddm.link-to>
       </ddm.item>
       <ddm.item>
-        {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+        <ddm.link-to @route="index">Something different</ddm.link-to>
       </ddm.item>
     </dd.menu>
   </BsDropdown>
@@ -73,10 +77,10 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
     <dd.button>Dropdown <span class="caret"></span></dd.button>
     <dd.menu as |ddm|>
       <ddm.item>
-        {{#ddm.link-to "index"}}Something{{/ddm.link-to}}
+        <ddm.link-to @route="index">Something</ddm.link-to>
       </ddm.item>
       <ddm.item>
-        {{#ddm.link-to "index"}}Something different{{/ddm.link-to}}
+        <ddm.link-to @route="index">Something different</ddm.link-to>
       </ddm.item>
     </dd.menu>
   </BsDropdown>

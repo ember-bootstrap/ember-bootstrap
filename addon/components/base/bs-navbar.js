@@ -54,7 +54,7 @@ import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 
   ```hbs
   <nav.item>
-    <nav-link-to @route="index" @collapseNavbar={{false}}>Don't collapse</nav.link-to>
+    <nav.link-to @route="index" @collapseNavbar={{false}}>Don't collapse</nav.link-to>
   </nav.item>
   ```
 
