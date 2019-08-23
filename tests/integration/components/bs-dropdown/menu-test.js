@@ -63,6 +63,18 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
       .doesNotExist('has item component with no markup');
   });
 
+  test('dropdown menu yields linkTo component', async function(assert) {
+    await render(
+      hbs`
+      <BsDropdown::menu @toggleElement={{this.element}} @isOpen={{true}} as |ddm|>
+        {{#ddm.link-to "index"}}Link{{/ddm.link-to}}
+        {{#ddm.linkTo "index"}}Link{{/ddm.linkTo}}
+      </BsDropdown::menu>`
+    );
+
+    assert.dom('a').exists({ count: 2 });
+  });
+
   test('dropdown menu propagates class names', async function(assert) {
     await render(
       hbs`{{#bs-dropdown/menu align="right" isOpen=true toggleElement=this.element class="custom-class-1 custom-class-2"}}Something{{/bs-dropdown/menu}}`
