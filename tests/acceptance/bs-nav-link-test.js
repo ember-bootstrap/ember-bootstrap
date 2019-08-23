@@ -1,30 +1,34 @@
 import { visit } from '@ember/test-helpers';
 import { test, module } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
+import hasEmberVersion from '@ember/test-helpers/has-ember-version';
+
+const supportsAngleBracketsLinkTo = hasEmberVersion(3, 10);
 
 module('Acceptance | bs-nav-link', function(hooks) {
   setupApplicationTest(hooks);
 
   test('active link-to component marks nav item as active', async function(assert) {
     await visit('/acceptance/link/1');
-    assert.dom(this.element.querySelectorAll('#nav-link-test li')[0]).hasClass('active');
-    assert.dom(this.element.querySelectorAll('#nav-link-test li')[1]).hasNoClass('active');
-    assert.dom(this.element.querySelectorAll('#nav-link-test li')[2]).hasClass('active');
+    assert.dom(this.element.querySelectorAll('.nav li')[0]).hasClass('active');
+    assert.dom(this.element.querySelectorAll('.nav li')[1]).hasNoClass('active');
+    assert.dom(this.element.querySelectorAll('.nav li')[2]).hasClass('active');
     await visit('/acceptance/link/2');
-    assert.dom(this.element.querySelectorAll('#nav-link-test li')[0]).hasNoClass('active');
-    assert.dom(this.element.querySelectorAll('#nav-link-test li')[1]).hasClass('active');
-    assert.dom(this.element.querySelectorAll('#nav-link-test li')[2]).hasClass('active');
+    assert.dom(this.element.querySelectorAll('.nav li')[0]).hasNoClass('active');
+    assert.dom(this.element.querySelectorAll('.nav li')[1]).hasClass('active');
+    assert.dom(this.element.querySelectorAll('.nav li')[2]).hasClass('active');
   });
 
-  test('active @route property marks nav item as active', async function(assert) {
-    await visit('/acceptance/link/1');
-    assert.dom(this.element.querySelectorAll('#nav-link-test2 li')[0]).hasClass('active');
-    assert.dom(this.element.querySelectorAll('#nav-link-test2 li')[1]).hasNoClass('active');
-    assert.dom(this.element.querySelectorAll('#nav-link-test2 li')[2]).hasClass('active');
-    await visit('/acceptance/link/2');
-    assert.dom(this.element.querySelectorAll('#nav-link-test2 li')[0]).hasNoClass('active');
-    assert.dom(this.element.querySelectorAll('#nav-link-test2 li')[1]).hasClass('active');
-    assert.dom(this.element.querySelectorAll('#nav-link-test2 li')[2]).hasClass('active');
-  });
-
+  if (supportsAngleBracketsLinkTo) {
+    test('active @route property marks nav item as active', async function(assert) {
+      await visit('/acceptance/linkto/1');
+      assert.dom(this.element.querySelectorAll('.nav li')[0]).hasClass('active');
+      assert.dom(this.element.querySelectorAll('.nav li')[1]).hasNoClass('active');
+      assert.dom(this.element.querySelectorAll('.nav li')[2]).hasClass('active');
+      await visit('/acceptance/linkto/2');
+      assert.dom(this.element.querySelectorAll('.nav li')[0]).hasNoClass('active');
+      assert.dom(this.element.querySelectorAll('.nav li')[1]).hasClass('active');
+      assert.dom(this.element.querySelectorAll('.nav li')[2]).hasClass('active');
+    });
+  }
 });

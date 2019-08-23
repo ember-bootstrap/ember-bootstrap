@@ -5,8 +5,10 @@
     </h3>
     <BsNav @type="pills" @stacked={{true}} as |nav|>
       {{#each this.model as |comp|}}
-        <nav.item @route={{comp.demoRoute}}>
-          {{comp.title}}
+        <nav.item>
+          <nav.link-to @route={{comp.demoRoute}}>
+            {{comp.title}}
+          </nav.link-to>
         </nav.item>
       {{/each}}
     </BsNav>

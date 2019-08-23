@@ -1,4 +1,4 @@
-<BsNav @id="nav-link-test" as |nav|>
+<BsNav as |nav|>
   <nav.item>
     {{#nav.link-to "acceptance.link" "1"}}
       first
@@ -13,17 +13,5 @@
     {{#nav.link-to "acceptance.link" model}}
       current
     {{/nav.link-to}}
-  </nav.item>
-</BsNav>
-
-<BsNav @id="nav-link-test2" as |nav|>
-  <nav.item @route="acceptance.link" @model="1">
-    first
-  </nav.item>
-  <nav.item @route="acceptance.link" @model="2">
-    second
-  </nav.item>
-  <nav.item @route="acceptance.link" @model={{this.model}}>
-    current
   </nav.item>
 </BsNav>
