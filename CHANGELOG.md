@@ -1,4 +1,29 @@
 
+## 3.0.0-rc.3 (2019-08-23)
+
+#### :boom: Breaking Change
+* [#879](https://github.com/kaliber5/ember-bootstrap/pull/879) Revert the link support of nav.item and the deprecation of nav.link-to ([@simonihmig](https://github.com/simonihmig))
+  
+  *Note: this is a breaking change only compared to `3.0.0-rc.x`, but not compared to previous versions, as it reverts the changes in `3.0.0-rc.0`*
+
+#### Features
+* [#886](https://github.com/kaliber5/ember-bootstrap/pull/886) Add `linkTo` alias for yielded nav and dropdown link components, for better angle brackets style ([@simonihmig](https://github.com/simonihmig))
+
+#### Bug Fixes
+* [#884](https://github.com/kaliber5/ember-bootstrap/pull/884) Fix FastBoot rendering of opened modals ([@simonihmig](https://github.com/simonihmig))
+* [#871](https://github.com/kaliber5/ember-bootstrap/pull/871) Workaround nav.item not applying `active` class correctly due to Ember 3.12-beta bug ([@simonihmig](https://github.com/simonihmig))
+* [#877](https://github.com/kaliber5/ember-bootstrap/pull/877) support hash helper used as form model ([@jelhan](https://github.com/jelhan))
+* [#872](https://github.com/kaliber5/ember-bootstrap/pull/872) Fix form validation for Ember 3.12-beta ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#885](https://github.com/kaliber5/ember-bootstrap/pull/885) Update docs to show angle bracket syntax for dropdown link-to ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#875](https://github.com/kaliber5/ember-bootstrap/pull/875) Refactor FastBoot tests to use ember-cli-fastboot-testing ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
 ## 3.0.0-rc.2 (2019-08-12)
 
 #### :boom: Breaking Change
