@@ -12,6 +12,7 @@ module('FastBoot | modal', function(hooks) {
 
     assert.dom('.modal').exists();
     assert.dom('.modal').hasClass(visibilityClass());
+    assert.dom('.modal').isVisible();
     assert.dom('.modal-backdrop').hasClass(visibilityClass());
     assert.dom('.modal .modal-header .modal-title').hasText('Simple Modal');
     assert.dom('.modal .modal-body').hasText('Hi there');

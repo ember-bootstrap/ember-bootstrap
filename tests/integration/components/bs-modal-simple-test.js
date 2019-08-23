@@ -75,14 +75,14 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false}}Hello world!{{/bs-modal-simple}}`);
 
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-    assert.equal(this.element.querySelector('.modal').style.display, 'block', 'Modal is visible');
+    assert.dom('.modal').isVisible();
   });
 
   testRequiringTransitions('open modal is immediately shown [fade]', async function(assert) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog"}}Hello world!{{/bs-modal-simple}}`);
 
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-    assert.equal(this.element.querySelector('.modal').style.display, 'block', 'Modal is visible');
+    assert.dom('.modal').isVisible();
   });
 
   test('open property shows modal', async function(assert) {
@@ -93,7 +93,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     run(() => this.set('open', true));
 
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-    assert.equal(this.element.querySelector('.modal').style.display, 'block', 'Modal is visible');
+    assert.dom('.modal').isVisible();
 
     run(() => this.set('open', false));
     assert.dom('.modal').doesNotExist('Modal is hidden');
@@ -108,7 +108,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
 
     await settled();
     assert.dom('.modal').hasClass(visibilityClass(), 'Modal is visible');
-    assert.equal(this.element.querySelector('.modal').style.display, 'block', 'Modal is visible');
+    assert.dom('.modal').isVisible();
     this.set('open', false);
 
     await settled();
