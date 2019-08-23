@@ -52,6 +52,9 @@ module('Integration | Component | bs-nav', function(hooks) {
         {{#nav.item}}
           {{#nav.link-to "application"}}Dummy{{/nav.link-to}}
         {{/nav.item}}
+        {{#nav.item}}
+          {{#nav.linkTo "application"}}Dummy{{/nav.linkTo}}
+        {{/nav.item}}
         {{#nav.dropdown as |dd|}}
           {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu as |ddm|}}
@@ -62,8 +65,8 @@ module('Integration | Component | bs-nav', function(hooks) {
     `);
 
     assert.dom('.nav').exists({ count: 1 }, 'it has the nav');
-    assert.dom('.nav > li').exists({ count: 2 }, 'it has the nav item');
-    assert.dom('.nav > li > a[href="/"]').exists({ count: 1 }, 'it has the nav link');
+    assert.dom('.nav > li').exists({ count: 3 }, 'it has the nav item');
+    assert.dom('.nav > li > a[href="/"]').exists({ count: 2 }, 'it has the nav link');
     assert.dom('.nav > li.dropdown').exists({ count: 1 }, 'it has a dropdown as a nav item');
   });
 });

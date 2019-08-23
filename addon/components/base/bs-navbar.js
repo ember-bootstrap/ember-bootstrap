@@ -20,10 +20,10 @@ import listenTo from 'ember-bootstrap/utils/cp/listen-to';
     <navbar.content>
       <navbar.nav as |nav|>
         <nav.item>
-          <nav.link-to @route="home">Home</nav.link-to>
+          <nav.linkTo @route="home">Home</nav.linkTo>
         </nav.item>
         <nav.item>
-          <nav.link-to @route="navbars">Navbars</nav.link-to>
+          <nav.linkTo @route="navbars">Navbars</nav.linkTo>
         </nav.item>
       </navbar.nav>
     </navbar.content>
@@ -48,13 +48,13 @@ import listenTo from 'ember-bootstrap/utils/cp/listen-to';
   ### Responsive Design
 
   For the mobile breakpoint the Bootstrap styles will hide the navbar content (`{{navbar.content}}`). Clicking on the
-  navbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all nav links (`<nav.link-to @route="...">`) are already
+  navbar toggle button (`{{navbar.toggle}}`) will expand the menu. By default all nav links (`<nav.linkTo @route="...">`) are already
   wired up to call the navbar's `collapse` action, so clicking any of them will collapse the navbar. To selectively
   prevent that, you can set its `collapseNavbar` property to false:
 
   ```hbs
   <nav.item>
-    <nav.link-to @route="index" @collapseNavbar={{false}}>Don't collapse</nav.link-to>
+    <nav.linkTo @route="index" @collapseNavbar={{false}}>Don't collapse</nav.linkTo>
   </nav.item>
   ```
 

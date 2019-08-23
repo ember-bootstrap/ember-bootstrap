@@ -16,19 +16,19 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
   ```hbs
   <BsNav @type="pills" as |nav|>
     <nav.item>
-      <nav.link-to @route="foo">
+      <nav.linkTo @route="foo">
         Foo
-      </nav.link-to>
+      </nav.linkTo>
     </nav.item>
     <nav.item>
-      <nav.link-to @route="bar" @model={{this.model}}>
+      <nav.linkTo @route="bar" @model={{this.model}}>
         Bar
-      </nav.link-to>
+      </nav.linkTo>
     </nav.item>
   </BsNav>
   ```
 
-  > Note: the use of angle brackets `<nav.link-to>` as shown above is only supported for Ember 3.10, as it relies on its
+  > Note: the use of angle brackets `<nav.linkTo>` as shown above is only supported for Ember 3.10, as it relies on its
   > own native implementation of the `LinkComponent`. For older Ember versions please use the legacy syntax with positional
   > arguments: `{{#nav.link-to "bar" this.model}}Bar{{/nav.link-to}}`
 
@@ -41,7 +41,7 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
 
   Bootstrap 3 expects to have the `active` class on the `<li>` element that should be the active (highlighted)
   navigation item. To achieve that use the `@route` and optionally `@model` (or `@models`) and `@query` properties
-  of the yielded `nav.link-to` component just as you would for Ember's `<LinkTo>` component to create a link with proper
+  of the yielded `nav.linkTo` component just as you would for Ember's `<LinkTo>` component to create a link with proper
   `active` class support.
 
   ### Dropdowns
@@ -52,15 +52,15 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
   ```hbs
   <BsNav @type="pills" as |nav|>
     <nav.item>
-      <nav.link-to @route="index">
+      <nav.linkTo @route="index">
         Home
-      </nav.link-to>
+      </nav.linkTo>
     </nav.item>
     <nav.dropdown as |dd|>
       <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
       <dd.menu as |ddm|>
-        <ddm.item><ddm.link-to @route="foo">Foo</ddm.link-to></ddm.item>
-        <ddm.item><ddm.link-to @route="bar">Bar</ddm.link-to></ddm.item>
+        <ddm.item><ddm.linkTo @route="foo">Foo</ddm.linkTo></ddm.item>
+        <ddm.item><ddm.linkTo @route="bar">Bar</ddm.linkTo></ddm.item>
       </dd.menu>
     </nav.dropdown>
   </BsNav>
@@ -68,7 +68,7 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
 
   ### Bootstrap 3/4 Notes
 
-  Use [`nav.link-to`](Components.NavLinkTo.html) for in-app links to ensure proper styling regardless of
+  Use [`nav.linkTo`](Components.NavLinkTo.html) for in-app links to ensure proper styling regardless of
   Bootstrap version. Explicit use of `<a>` tags in Bootstrap 4 must apply the `nav-link` class and manage
   the `active` state explicitly.
 
