@@ -48,10 +48,10 @@
           <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
           <dd.menu as |ddm|>
             <ddm.item>
-              {{#ddm.link-to "index"}}Home{{/ddm.link-to}}
+              <ddm.link-to @route="index">Home</ddm.link-to>
             </ddm.item>
             <ddm.item>
-              {{#ddm.link-to "demo.navbars"}}Navbars{{/ddm.link-to}}
+              <ddm.link-to @route="demo.navbars">Navbars</ddm.link-to>
             </ddm.item>
           </dd.menu>
         </nav.dropdown>
