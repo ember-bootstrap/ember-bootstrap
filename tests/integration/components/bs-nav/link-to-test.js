@@ -4,8 +4,11 @@ import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import { testBS4 } from '../../../helpers/bootstrap-test';
+import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 
-module('Integration | Component | bs nav/link to', function(hooks) {
+const supportsAngleBracketsLinkTo = hasEmberVersion(3, 10);
+
+module('Integration | Component | bs-nav/link-to', function(hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
   hooks.beforeEach(function() {
@@ -41,32 +44,34 @@ module('Integration | Component | bs nav/link to', function(hooks) {
     });
   });
 
-  module('<LinkTo> properties', function() {
-    test('simple route link', async function(assert) {
-      await render(hbs`<BsNav::link-to @route="index">Link</BsNav::link-to>`);
+  if (supportsAngleBracketsLinkTo) {
+    module('<LinkTo> properties', function() {
+      test('simple route link', async function(assert) {
+        await render(hbs`<BsNav::link-to @route="index">Link</BsNav::link-to>`);
 
-      assert.dom('a').exists({ count: 1 });
-      assert.dom('a').hasText('Link');
-      assert.dom('a').hasAttribute('href', '/');
+        assert.dom('a').exists({ count: 1 });
+        assert.dom('a').hasText('Link');
+        assert.dom('a').hasAttribute('href', '/');
+      });
+
+      test('link with model', async function(assert) {
+        await render(hbs`<BsNav::link-to @route="acceptance.link" @model="1" @query={{hash foo="bar"}}>Link</BsNav::link-to>`);
+
+        assert.dom('a').exists({ count: 1 });
+        assert.dom('a').hasAttribute('href', '/acceptance/link/1?foo=bar');
+      });
+
+      testBS4('link has nav-link class', async function(assert) {
+        await render(hbs`<BsNav::link-to @route="index">Link</BsNav::link-to>`);
+
+        assert.dom('a').hasClass('nav-link');
+      });
+
+      test('disabled link', async function(assert) {
+        await render(hbs`<BsNav::link-to @route="index" @disabled={{true}}>Link</BsNav::link-to>`);
+
+        assert.dom('a').hasClass('disabled');
+      });
     });
-
-    test('link with model', async function(assert) {
-      await render(hbs`<BsNav::link-to @route="acceptance.link" @model="1" @query={{hash foo="bar"}}>Link</BsNav::link-to>`);
-
-      assert.dom('a').exists({ count: 1 });
-      assert.dom('a').hasAttribute('href', '/acceptance/link/1?foo=bar');
-    });
-
-    testBS4('link has nav-link class', async function(assert) {
-      await render(hbs`<BsNav::link-to @route="index">Link</BsNav::link-to>`);
-
-      assert.dom('a').hasClass('nav-link');
-    });
-
-    test('disabled link', async function(assert) {
-      await render(hbs`<BsNav::link-to @route="index" @disabled={{true}}>Link</BsNav::link-to>`);
-
-      assert.dom('a').hasClass('disabled');
-    });
-  });
+  }
 });
