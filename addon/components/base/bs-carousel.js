@@ -1,9 +1,12 @@
+import classic from 'ember-classic-decorator';
+import { classNames, attributeBindings, layout as templateLayout } from '@ember-decorators/component';
+import { observes } from '@ember-decorators/object';
+import { action, computed } from '@ember/object';
+import { readOnly, gt, lte, filter } from '@ember/object/computed';
 import CarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
 import Component from '@ember/component';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import layout from 'ember-bootstrap/templates/components/bs-carousel';
-import { computed, observer } from '@ember/object';
-import { filter, lte, gt, readOnly } from '@ember/object/computed';
 import { schedule, scheduleOnce } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 import RSVP from 'rsvp';
@@ -56,18 +59,19 @@ import RSVP from 'rsvp';
   @extends Ember.Component
   @public
 */
-export default Component.extend(ComponentParent, {
-  attributeBindings: ['tabindex'],
-  classNames: ['carousel', 'slide'],
-  layout,
-  tabindex: '1',
+@classic
+@attributeBindings('tabindex')
+@classNames('carousel', 'slide')
+@templateLayout(layout)
+export default class BsCarousel extends Component.extend(ComponentParent) {
+  tabindex = '1';
 
   /**
    * @property slideComponent
    * @type {String}
    * @private
    */
-  slideComponent: 'bs-carousel/slide',
+  slideComponent = 'bs-carousel/slide';
 
   /**
    * If a slide can turn to left, including corners.
@@ -75,9 +79,10 @@ export default Component.extend(ComponentParent, {
    * @private
    * @property canTurnToLeft
    */
-  canTurnToLeft: computed('wrap', 'currentIndex', function() {
+  @computed('wrap', 'currentIndex')
+  get canTurnToLeft() {
     return this.get('wrap') || this.get('currentIndex') > 0;
-  }),
+  }
 
   /**
    * If a slide can turn to right, including corners.
@@ -85,9 +90,10 @@ export default Component.extend(ComponentParent, {
    * @private
    * @property canTurnToRight
    */
-  canTurnToRight: computed('childSlides.length', 'wrap', 'currentIndex', function() {
+  @computed('childSlides.length', 'wrap', 'currentIndex')
+  get canTurnToRight() {
     return this.get('wrap') || this.get('currentIndex') < this.get('childSlides.length') - 1;
-  }),
+  }
 
   /**
    * All `CarouselSlide` child components.
@@ -97,9 +103,10 @@ export default Component.extend(ComponentParent, {
    * @readonly
    * @type array
    */
-  childSlides: filter('children', function(view) {
+  @(filter('children', function(view) {
     return view instanceof CarouselSlide;
-  }).readOnly(),
+  }).readOnly())
+  childSlides;
 
   /**
    * This observer is the entry point for real time insertion and removing of slides.
@@ -107,7 +114,8 @@ export default Component.extend(ComponentParent, {
    * @private
    * @property childSlidesObserver
    */
-  childSlidesObserver: observer('childSlides.[]', 'autoPlay', function() {
+  @observes('childSlides.[]', 'autoPlay')
+  childSlidesObserver() {
     scheduleOnce('actions', () => {
       let childSlides = this.get('childSlides');
       if (childSlides.length === 0) {
@@ -126,7 +134,7 @@ export default Component.extend(ComponentParent, {
       // Initial slide state
       this.set('presentationState', null);
     });
-  }),
+  }
 
   /**
    * Indicates the current index of the current slide.
@@ -134,7 +142,7 @@ export default Component.extend(ComponentParent, {
    * @property currentIndex
    * @private
    */
-  currentIndex: null,
+  currentIndex = null;
 
   /**
    * The current slide object that is going to be used by the nested slides components.
@@ -143,9 +151,10 @@ export default Component.extend(ComponentParent, {
    * @private
    *
    */
-  currentSlide: computed('childSlides', 'currentIndex', function() {
+  @(computed('childSlides', 'currentIndex').readOnly())
+  get currentSlide() {
     return this.get('childSlides').objectAt(this.get('currentIndex'));
-  }).readOnly(),
+  }
 
   /**
    * Bootstrap style to indicate that a given slide should be moving to left/right.
@@ -154,7 +163,7 @@ export default Component.extend(ComponentParent, {
    * @private
    * @type string
    */
-  directionalClassName: null,
+  directionalClassName = null;
 
   /**
    * Indicates the next slide index to move into.
@@ -163,7 +172,7 @@ export default Component.extend(ComponentParent, {
    * @private
    * @type number
    */
-  followingIndex: null,
+  followingIndex = null;
 
   /**
    * The following slide object that is going to be used by the nested slides components.
@@ -171,16 +180,18 @@ export default Component.extend(ComponentParent, {
    * @property followingIndex
    * @private
    */
-  followingSlide: computed('childSlides', 'followingIndex', function() {
+  @(computed('childSlides', 'followingIndex').readOnly())
+  get followingSlide() {
     return this.get('childSlides').objectAt(this.get('followingIndex'));
-  }).readOnly(),
+  }
 
   /**
    * @private
    * @property hasInterval
    * @type boolean
    */
-  hasInterval: gt('interval', 0).readOnly(),
+  @(gt('interval', 0).readOnly())
+  hasInterval;
 
   /**
    * This observer is the entry point for programmatically slide changing.
@@ -188,17 +199,19 @@ export default Component.extend(ComponentParent, {
    * @property indexObserver
    * @private
    */
-  indexObserver: observer('index', function() {
+  @observes('index')
+  indexObserver() {
     this.send('toSlide', this.get('index'));
-  }),
+  }
 
   /**
    * @property indicators
    * @private
    */
-  indicators: computed('childSlides.length', function() {
+  @computed('childSlides.length')
+  get indicators() {
     return [...Array(this.get('childSlides.length'))];
-  }),
+  }
 
   /**
    * If user is hovering its cursor on component.
@@ -208,7 +221,7 @@ export default Component.extend(ComponentParent, {
    * @private
    * @type boolean
    */
-  isMouseHovering: false,
+  isMouseHovering = false;
 
   /**
    * The class name to append to the next control link element.
@@ -217,7 +230,7 @@ export default Component.extend(ComponentParent, {
    * @type string
    * @private
    */
-  nextControlClassName: null,
+  nextControlClassName = null;
 
   /**
    * Bootstrap style to indicate the next/previous slide.
@@ -226,7 +239,7 @@ export default Component.extend(ComponentParent, {
    * @private
    * @type string
    */
-  orderClassName: null,
+  orderClassName = null;
 
   /**
    * The current state of the current presentation, can be either "didTransition"
@@ -236,7 +249,7 @@ export default Component.extend(ComponentParent, {
    * @property presentationState
    * @type string
    */
-  presentationState: null,
+  presentationState = null;
 
   /**
    * The class name to append to the previous control link element.
@@ -245,21 +258,23 @@ export default Component.extend(ComponentParent, {
    * @type string
    * @private
    */
-  prevControlClassName: null,
+  prevControlClassName = null;
 
   /**
    * @private
    * @property shouldNotDoPresentation
    * @type boolean
    */
-  shouldNotDoPresentation: lte('childSlides.length', 1),
+  @lte('childSlides.length', 1)
+  shouldNotDoPresentation;
 
   /**
    * @private
    * @property shouldRunAutomatically
    * @type boolean
    */
-  shouldRunAutomatically: readOnly('hasInterval'),
+  @readOnly('hasInterval')
+  shouldRunAutomatically;
 
   /**
    * Starts automatic sliding on page load.
@@ -270,7 +285,7 @@ export default Component.extend(ComponentParent, {
    * @public
    * @type boolean
    */
-  autoPlay: false,
+  autoPlay = false;
 
   /**
    * If false will hard stop on corners, i.e., first slide won't make a transition to the
@@ -281,7 +296,7 @@ export default Component.extend(ComponentParent, {
    * @public
    * @type boolean
    */
-  wrap: true,
+  wrap = true;
 
   /**
    * Index of starting slide.
@@ -291,7 +306,7 @@ export default Component.extend(ComponentParent, {
    * @public
    * @type number
    */
-  index: 0,
+  index = 0;
 
   /**
    * Waiting time before automatically show another slide.
@@ -302,7 +317,7 @@ export default Component.extend(ComponentParent, {
    * @public
    * @type number
    */
-  interval: 5000,
+  interval = 5000;
 
   /**
    * Should bind keyboard events into sliding.
@@ -312,7 +327,7 @@ export default Component.extend(ComponentParent, {
    * @public
    * @type boolean
    */
-  keyboard: true,
+  keyboard = true;
 
   /**
    * If automatic sliding should be left-to-right or right-to-left.
@@ -323,7 +338,7 @@ export default Component.extend(ComponentParent, {
    * @public
    * @type boolean
    */
-  ltr: true,
+  ltr = true;
 
   /**
    * The next control icon to be displayed.
@@ -333,7 +348,7 @@ export default Component.extend(ComponentParent, {
    * @type string
    * @public
    */
-  nextControlIcon: null,
+  nextControlIcon = null;
 
   /**
    * Label for screen readers, defaults to 'Next'.
@@ -343,7 +358,7 @@ export default Component.extend(ComponentParent, {
    * @type string
    * @public
    */
-  nextControlLabel: 'Next',
+  nextControlLabel = 'Next';
 
   /**
    * Pauses automatic sliding if mouse cursor is hovering the component.
@@ -354,7 +369,7 @@ export default Component.extend(ComponentParent, {
    * @public
    * @type boolean
    */
-  pauseOnMouseEnter: true,
+  pauseOnMouseEnter = true;
 
   /**
    * The previous control icon to be displayed.
@@ -364,7 +379,7 @@ export default Component.extend(ComponentParent, {
    * @type string
    * @public
    */
-  prevControlIcon: null,
+  prevControlIcon = null;
 
   /**
    * Label for screen readers, defaults to 'Previous'.
@@ -374,7 +389,7 @@ export default Component.extend(ComponentParent, {
    * @type string
    * @public
    */
-  prevControlLabel: 'Previous',
+  prevControlLabel = 'Previous';
 
   /**
    * Show or hide controls.
@@ -384,7 +399,7 @@ export default Component.extend(ComponentParent, {
    * @public
    * @type boolean
    */
-  showControls: true,
+  showControls = true;
 
   /**
    * Show or hide indicators.
@@ -394,7 +409,7 @@ export default Component.extend(ComponentParent, {
    * @public
    * @type boolean
    */
-  showIndicators: true,
+  showIndicators = true;
 
   /**
    * The duration of the slide transition.
@@ -405,7 +420,7 @@ export default Component.extend(ComponentParent, {
    * @public
    * @type number
    */
-  transitionDuration: 600,
+  transitionDuration = 600;
 
   /**
    * The type slide transition to perform.
@@ -416,7 +431,7 @@ export default Component.extend(ComponentParent, {
    * @public
    * @type string
    */
-  transition: 'slide',
+  transition = 'slide';
 
   /**
    * Do a presentation and calls itself to perform a cycle.
@@ -424,17 +439,18 @@ export default Component.extend(ComponentParent, {
    * @method cycle
    * @private
    */
-  cycle: task(function* () {
+  @(task(function* () {
     yield this.get('transitioner').perform();
     yield timeout(this.get('interval'));
     this.toAppropriateSlide();
-  }).restartable(),
+  }).restartable())
+  cycle;
 
   /**
    * @method transitioner
    * @private
    */
-  transitioner: task(function* () {
+  @(task(function* () {
     this.set('presentationState', 'willTransit');
     yield timeout(this.get('transitionDuration'));
     this.set('presentationState', 'didTransition');
@@ -446,7 +462,8 @@ export default Component.extend(ComponentParent, {
         resolve();
       });
     });
-  }).drop(),
+  }).drop())
+  transitioner;
 
   /**
    * Waits an interval time to start a cycle.
@@ -454,40 +471,42 @@ export default Component.extend(ComponentParent, {
    * @method waitIntervalToInitCycle
    * @private
    */
-  waitIntervalToInitCycle: task(function* () {
+  @(task(function* () {
     if (this.get('shouldRunAutomatically') === false) {
       return;
     }
     yield timeout(this.get('interval'));
     this.toAppropriateSlide();
-  }).restartable(),
+  }).restartable())
+  waitIntervalToInitCycle;
 
-  actions: {
-    toSlide(toIndex) {
-      if (this.get('currentIndex') === toIndex || this.get('shouldNotDoPresentation')) {
-        return;
-      }
-      this.assignClassNameControls(toIndex);
-      this.setFollowingIndex(toIndex);
-      if (this.get('shouldRunAutomatically') === false || this.get('isMouseHovering')) {
-        this.get('transitioner').perform();
-      } else {
-        this.get('cycle').perform();
-      }
-    },
-
-    toNextSlide() {
-      if (this.get('canTurnToRight')) {
-        this.send('toSlide', this.get('currentIndex') + 1);
-      }
-    },
-
-    toPrevSlide() {
-      if (this.get('canTurnToLeft')) {
-        this.send('toSlide', this.get('currentIndex') - 1);
-      }
+  @action
+  toSlide(toIndex) {
+    if (this.get('currentIndex') === toIndex || this.get('shouldNotDoPresentation')) {
+      return;
     }
-  },
+    this.assignClassNameControls(toIndex);
+    this.setFollowingIndex(toIndex);
+    if (this.get('shouldRunAutomatically') === false || this.get('isMouseHovering')) {
+      this.get('transitioner').perform();
+    } else {
+      this.get('cycle').perform();
+    }
+  }
+
+  @action
+  toNextSlide() {
+    if (this.get('canTurnToRight')) {
+      this.send('toSlide', this.get('currentIndex') + 1);
+    }
+  }
+
+  @action
+  toPrevSlide() {
+    if (this.get('canTurnToLeft')) {
+      this.send('toSlide', this.get('currentIndex') - 1);
+    }
+  }
 
   /**
    * Indicates what class names should be applicable to the current transition slides.
@@ -503,21 +522,21 @@ export default Component.extend(ComponentParent, {
       this.set('directionalClassName', 'left');
       this.set('orderClassName', 'next');
     }
-  },
+  }
 
   /**
    * Initial page loading configuration.
    */
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
     this.registerEvents();
     this.triggerChildSlidesObserver();
-  },
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     this.set('currentIndex', this.get('index'));
-  },
+  }
 
   /**
    * mouseEnter() and mouseLeave() doesn't work with ember-native-dom-event-dispatcher.
@@ -546,9 +565,9 @@ export default Component.extend(ComponentParent, {
         self.get('waitIntervalToInitCycle').perform();
       }
     });
-  },
+  }
 
-  keyDown: function(e) {
+  keyDown(e) {
     let code = e.keyCode || e.which;
     if (
       this.get('keyboard') === false
@@ -565,7 +584,7 @@ export default Component.extend(ComponentParent, {
         break;
       default: break;
     }
-  },
+  }
 
   /**
    * Sets the following slide index within the lower and upper bounds.
@@ -582,7 +601,7 @@ export default Component.extend(ComponentParent, {
     } else {
       this.set('followingIndex', toIndex);
     }
-  },
+  }
 
   /**
    * Coordinates the correct slide movement direction.
@@ -596,7 +615,7 @@ export default Component.extend(ComponentParent, {
     } else {
       this.send('toPrevSlide');
     }
-  },
+  }
 
   /**
    * @method triggerChildSlidesObserver
@@ -605,4 +624,4 @@ export default Component.extend(ComponentParent, {
   triggerChildSlidesObserver() {
     this.get('childSlides');
   }
-});
+}

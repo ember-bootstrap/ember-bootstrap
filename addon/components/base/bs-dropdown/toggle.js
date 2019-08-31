@@ -1,5 +1,6 @@
+import classic from 'ember-classic-decorator';
+import { classNames, attributeBindings, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
 import { schedule } from '@ember/runloop';
 
 /**
@@ -13,28 +14,19 @@ import { schedule } from '@ember/runloop';
  @extends Ember.Component
  @publicø
  */
-export default Component.extend({
-  classNames: ['dropdown-toggle'],
-  ariaRole: 'button',
-
-  /**
-   * Defaults to a `<a>` tag. Change for other types of dropdown toggles.
-   *
-   * @property tagName
-   * @type string
-   * @default a
-   * @public
-   */
-  tagName: 'a',
-
-  attributeBindings: ['href'],
+@classic
+@classNames('dropdown-toggle')
+@tagName('a')
+@attributeBindings('href')
+export default class Toggle extends Component {
+  ariaRole = 'button';
 
   /**
    * @property inNav
    * @type {boolean}
    * @private
    */
-  inNav: false,
+  inNav = false;
 
   /**
    * Computed property to generate a `href="#"` attribute when `tagName` is "a".
@@ -44,11 +36,9 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  href: computed('tagName', function() {
-    if (this.get('tagName').toUpperCase() === 'A') {
-      return '#';
-    }
-  }),
+  get href() {
+    return this.get('tagName').toUpperCase() === 'A' ? '#' : undefined;
+  }
 
   /**
    * When clicking the toggle this action is called.
@@ -57,15 +47,15 @@ export default Component.extend({
    * @param {*} value
    * @public
    */
-  onClick() {},
+  onClick() {}
 
   click(e) {
     e.preventDefault();
     this.get('onClick')();
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
     let dropdown = this.get('dropdown');
     if (dropdown) {
       schedule('actions', this, function() {
@@ -75,4 +65,4 @@ export default Component.extend({
       });
     }
   }
-});
+}

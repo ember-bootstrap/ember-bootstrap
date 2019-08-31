@@ -1,7 +1,10 @@
+import classic from 'ember-classic-decorator';
+import { tagName, layout as templateLayout } from '@ember-decorators/component';
+import { observes } from '@ember-decorators/object';
+import { action, computed } from '@ember/object';
 import { not } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import Component from '@ember/component';
-import { computed, observer } from '@ember/object';
 import { bind, next, schedule } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-modal';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
@@ -51,10 +54,10 @@ import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
   @extends Ember.Component
   @public
 */
-let component = Component.extend({
-  layout,
-  tagName: '',
-
+@classic
+@templateLayout(layout)
+@tagName('')
+class component extends Component {
   /**
    * Visibility of the modal. Toggle to show/hide with CSS transitions.
    *
@@ -66,19 +69,20 @@ let component = Component.extend({
    * @default true
    * @public
    */
-  open: true,
+  open = true;
 
   /**
    * @property isOpen
    * @private
    */
-  isOpen: listenTo('open'),
+  @listenTo('open')
+  isOpen;
 
   /**
    * @property _isOpen
    * @private
    */
-  _isOpen: false,
+  _isOpen = false;
 
   /**
    * Set to false to disable fade animations.
@@ -88,14 +92,15 @@ let component = Component.extend({
    * @default true
    * @public
    */
-  fade: undefined,
+  fade = undefined;
 
   /**
    * @property notFade
    * @type boolean
    * @private
    */
-  notFade: not('fade'),
+  @not('fade')
+  notFade;
 
   /**
    * Used to apply Bootstrap's visibility classes.
@@ -105,7 +110,7 @@ let component = Component.extend({
    * @default false
    * @private
    */
-  showModal: false,
+  showModal = false;
 
   /**
    * Render modal markup?
@@ -115,7 +120,7 @@ let component = Component.extend({
    * @default false
    * @private
    */
-  inDom: false,
+  inDom = false;
 
   /**
    * @property paddingLeft
@@ -123,7 +128,7 @@ let component = Component.extend({
    * @default null
    * @private
    */
-  paddingLeft: null,
+  paddingLeft = null;
 
   /**
    * @property paddingRight
@@ -131,7 +136,7 @@ let component = Component.extend({
    * @default null
    * @private
    */
-  paddingRight: null,
+  paddingRight = null;
 
   /**
    * Use a semi-transparent modal background to hide the rest of the page.
@@ -141,7 +146,7 @@ let component = Component.extend({
    * @default true
    * @public
    */
-  backdrop: true,
+  backdrop = true;
 
   /**
    * @property showBackdrop
@@ -149,7 +154,7 @@ let component = Component.extend({
    * @default false
    * @private
    */
-  showBackdrop: false,
+  showBackdrop = false;
 
   /**
    * Closes the modal when escape key is pressed.
@@ -159,7 +164,7 @@ let component = Component.extend({
    * @default true
    * @public
    */
-  keyboard: true,
+  keyboard = true;
 
   /**
    * [BS4 only!] Vertical position, either 'top' (default) or 'center'
@@ -170,35 +175,35 @@ let component = Component.extend({
    * @default 'top'
    * @public
    */
-  position: 'top',
+  position = 'top';
 
   /**
    * @property dialogComponent
    * @type {String}
    * @private
    */
-  dialogComponent: 'bs-modal/dialog',
+  dialogComponent = 'bs-modal/dialog';
 
   /**
    * @property headerComponent
    * @type {String}
    * @private
    */
-  headerComponent: 'bs-modal/header',
+  headerComponent = 'bs-modal/header';
 
   /**
    * @property bodyComponent
    * @type {String}
    * @private
    */
-  bodyComponent: 'bs-modal/body',
+  bodyComponent = 'bs-modal/body';
 
   /**
    * @property footerComponent
    * @type {String}
    * @private
    */
-  footerComponent: 'bs-modal/footer',
+  footerComponent = 'bs-modal/footer';
 
   /**
    * The id of the `.modal` element.
@@ -208,9 +213,10 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  modalId: computed(function() {
+  @computed
+  get modalId() {
     return `${guidFor(this)}-modal`;
-  }),
+  }
 
   /**
    * The id of the backdrop element.
@@ -220,9 +226,10 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  backdropId: computed(function() {
+  @computed
+  get backdropId() {
     return `${guidFor(this)}-backdrop`;
-  }),
+  }
 
   /**
    * Property for size styling, set to null (default), 'lg' or 'sm'
@@ -233,7 +240,7 @@ let component = Component.extend({
    * @type String
    * @public
    */
-  size: null,
+  size = null;
 
   /**
    * If true clicking on the backdrop will close the modal.
@@ -243,7 +250,7 @@ let component = Component.extend({
    * @default true
    * @public
    */
-  backdropClose: true,
+  backdropClose = true;
 
   /**
    * If true component will render in place, rather than be wormholed.
@@ -253,16 +260,17 @@ let component = Component.extend({
    * @default false
    * @public
    */
-  renderInPlace: false,
+  renderInPlace = false;
 
   /**
    * @property _renderInPlace
    * @type boolean
    * @private
    */
-  _renderInPlace: computed('renderInPlace', 'destinationElement', function() {
+  @computed('renderInPlace', 'destinationElement')
+  get _renderInPlace() {
     return this.get('renderInPlace') || !this.destinationElement;
-  }),
+  }
 
   /**
    * The duration of the fade transition
@@ -272,7 +280,7 @@ let component = Component.extend({
    * @default 300
    * @public
    */
-  transitionDuration: 300,
+  transitionDuration = 300;
 
   /**
    * The duration of the backdrop fade transition
@@ -282,7 +290,7 @@ let component = Component.extend({
    * @default 150
    * @public
    */
-  backdropTransitionDuration: 150,
+  backdropTransitionDuration = 150;
 
   /**
    * Use CSS transitions?
@@ -292,7 +300,8 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  usesTransition: usesTransition('fade'),
+  @usesTransition('fade')
+  usesTransition;
 
   /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
@@ -305,7 +314,7 @@ let component = Component.extend({
    * @public
    */
   onSubmit() {
-  },
+  }
 
   /**
    * The action to be sent when the modal is closing.
@@ -321,7 +330,7 @@ let component = Component.extend({
    * @public
    */
   onHide() {
-  },
+  }
 
   /**
    * The action to be sent after the modal has been completely hidden (including the CSS transition).
@@ -332,7 +341,7 @@ let component = Component.extend({
    * @public
    */
   onHidden() {
-  },
+  }
 
   /**
    * The action to be sent when the modal is opening.
@@ -346,7 +355,7 @@ let component = Component.extend({
    * @public
    */
   onShow() {
-  },
+  }
 
   /**
    * The action to be sent after the modal has been completely shown (including the CSS transition).
@@ -356,29 +365,30 @@ let component = Component.extend({
    * @public
    */
   onShown() {
-  },
+  }
 
-  actions: {
-    close() {
-      if (this.get('onHide')() !== false) {
-        this.set('isOpen', false);
-      }
-    },
-    submit() {
-      // replace modalId by :scope selector if supported by all target browsers
-      let modalId = this.get('modalId');
-      let forms = this.get('modalElement').querySelectorAll(`#${modalId} .modal-body form`);
-      if (forms.length > 0) {
-        // trigger submit event on body forms
-        let event = document.createEvent('Events');
-        event.initEvent('submit', true, true);
-        Array.prototype.slice.call(forms).forEach((form) => form.dispatchEvent(event));
-      } else {
-        // if we have no form, we send a submit action
-        this.get('onSubmit')();
-      }
+  @action
+  close() {
+    if (this.get('onHide')() !== false) {
+      this.set('isOpen', false);
     }
-  },
+  }
+
+  @action
+  doSubmit() {
+    // replace modalId by :scope selector if supported by all target browsers
+    let modalId = this.get('modalId');
+    let forms = this.get('modalElement').querySelectorAll(`#${modalId} .modal-body form`);
+    if (forms.length > 0) {
+      // trigger submit event on body forms
+      let event = document.createEvent('Events');
+      event.initEvent('submit', true, true);
+      Array.prototype.slice.call(forms).forEach((form) => form.dispatchEvent(event));
+    } else {
+      // if we have no form, we send a submit action
+      this.get('onSubmit')();
+    }
+  }
 
   /**
    * Give the modal (or its autofocus element) focus
@@ -395,7 +405,7 @@ let component = Component.extend({
     if (focusElement) {
       focusElement.focus();
     }
-  },
+  }
 
   /**
    * Show the modal
@@ -448,7 +458,7 @@ let component = Component.extend({
       this.set('inDom', true);
     }
     this.handleBackdrop(callback);
-  },
+  }
 
   /**
    * Hide the modal
@@ -471,7 +481,7 @@ let component = Component.extend({
     } else {
       this.hideModal();
     }
-  },
+  }
 
   /**
    * Clean up after modal is hidden and call onHidden
@@ -491,7 +501,7 @@ let component = Component.extend({
       this.set('inDom', false);
       this.get('onHidden')();
     });
-  },
+  }
 
   /**
    * SHow/hide the backdrop
@@ -543,7 +553,7 @@ let component = Component.extend({
     } else if (callback) {
       next(this, callback);
     }
-  },
+  }
 
   /**
    * Attach/Detach resize event listeners
@@ -558,7 +568,7 @@ let component = Component.extend({
     } else {
       window.removeEventListener('resize', this._handleUpdate, false);
     }
-  },
+  }
 
   /**
    * @method handleUpdate
@@ -566,7 +576,7 @@ let component = Component.extend({
    */
   handleUpdate() {
     this.adjustDialog();
-  },
+  }
 
   /**
    * @method adjustDialog
@@ -578,7 +588,7 @@ let component = Component.extend({
       paddingLeft: !this.bodyIsOverflowing && modalIsOverflowing ? this.get('scrollbarWidth') : null,
       paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.get('scrollbarWidth') : null
     });
-  },
+  }
 
   /**
    * @method resetAdjustments
@@ -589,7 +599,7 @@ let component = Component.extend({
       paddingLeft: null,
       paddingRight: null
     });
-  },
+  }
 
   /**
    * @method checkScrollbar
@@ -603,7 +613,7 @@ let component = Component.extend({
     }
 
     this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth;
-  },
+  }
 
   /**
    * @method setScrollbar
@@ -615,7 +625,7 @@ let component = Component.extend({
     if (this.bodyIsOverflowing) {
       document.body.style.paddingRight = bodyPad + this.get('scrollbarWidth');
     }
-  },
+  }
 
   /**
    * @method resetScrollbar
@@ -623,7 +633,7 @@ let component = Component.extend({
    */
   resetScrollbar() {
     document.body.style.paddingRight = this._originalBodyPad;
-  },
+  }
 
   /**
    * @property scrollbarWidth
@@ -631,7 +641,8 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  scrollbarWidth: computed(function() {
+  @computed
+  get scrollbarWidth() {
     let scrollDiv = document.createElement('div');
     scrollDiv.className = 'modal-scrollbar-measure';
     let modalEl = this.get('modalElement');
@@ -639,32 +650,33 @@ let component = Component.extend({
     let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
     scrollDiv.parentNode.removeChild(scrollDiv);
     return scrollbarWidth;
-  }),
+  }
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
     if (this.get('isOpen')) {
       this.show();
     }
-  },
+  }
 
   willDestroyElement() {
-    this._super(...arguments);
+    super.willDestroyElement(...arguments);
     window.removeEventListener('resize', this._handleUpdate, false);
     document.body.classList.remove('modal-open');
     this.resetScrollbar();
-  },
+  }
 
-  _observeOpen: observer('isOpen', function() {
+  @observes('isOpen')
+  _observeOpen() {
     if (this.get('isOpen')) {
       this.show();
     } else {
       this.hide();
     }
-  }),
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     let { isOpen, backdrop, fade } = this.getProperties('isOpen', 'backdrop', 'fade');
     let isFB = isFastBoot(this);
     if (fade === undefined) {
@@ -678,7 +690,7 @@ let component = Component.extend({
       destinationElement: getDestinationElement(this)
     });
   }
-});
+}
 
 Object.defineProperties(component.prototype, {
 

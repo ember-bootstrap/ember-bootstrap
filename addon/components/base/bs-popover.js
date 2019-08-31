@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { layout as templateLayout } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import ContextualHelp from './bs-contextual-help';
 import layout from 'ember-bootstrap/templates/components/bs-popover';
@@ -67,16 +69,16 @@ import layout from 'ember-bootstrap/templates/components/bs-popover';
   @extends Components.ContextualHelp
   @public
 */
-export default ContextualHelp.extend({
-  layout,
-
+@classic
+@templateLayout(layout)
+export default class BsPopover extends ContextualHelp {
   /**
    * @property placement
    * @type string
    * @default 'right'
    * @public
    */
-  placement: 'right',
+  placement = 'right';
 
   /**
    * @property triggerEvents
@@ -84,14 +86,14 @@ export default ContextualHelp.extend({
    * @default 'click'
    * @public
    */
-  triggerEvents: 'click',
+  triggerEvents = 'click';
 
   /**
    * @property elementComponent
    * @type {String}
    * @private
    */
-  elementComponent: 'bs-popover/element',
+  elementComponent = 'bs-popover/element';
 
   /**
    * The DOM element of the arrow element.
@@ -101,7 +103,8 @@ export default ContextualHelp.extend({
    * @readonly
    * @private
    */
-  arrowElement: computed('overlayElement', function() {
+  @computed('overlayElement')
+  get arrowElement() {
     return this.get('overlayElement').querySelector('.arrow');
-  })
-});
+  }
+}

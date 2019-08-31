@@ -1,5 +1,7 @@
+import classic from 'ember-classic-decorator';
 import Modal from 'ember-bootstrap/components/base/bs-modal';
 
-export default Modal.extend({
-  showClass: 'show'
-});
+@classic
+export default class BsModal extends Modal {
+  showClass = 'show';
+}

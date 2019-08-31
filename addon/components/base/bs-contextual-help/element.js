@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
+import { tagName, layout as templateLayout } from '@ember-decorators/component';
+import { action, computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-tooltip/element';
-import { computed } from '@ember/object';
 import { assert } from '@ember/debug';
 import { scheduleOnce } from '@ember/runloop';
 
@@ -13,10 +15,11 @@ import { scheduleOnce } from '@ember/runloop';
  @extends Ember.Component
  @private
  */
-export default Component.extend({
-  layout,
-  tagName: '',
-  ariaRole: 'tooltip',
+@classic
+@templateLayout(layout)
+@tagName('')
+export default class Element extends Component {
+  ariaRole = 'tooltip';
 
   /**
    * @property placement
@@ -24,9 +27,10 @@ export default Component.extend({
    * @default 'top'
    * @public
    */
-  placement: 'top',
+  placement = 'top';
 
-  actualPlacement: reads('placement'),
+  @reads('placement')
+  actualPlacement;
 
   /**
    * @property fade
@@ -34,7 +38,7 @@ export default Component.extend({
    * @default true
    * @public
    */
-  fade: true,
+  fade = true;
 
   /**
    * @property showHelp
@@ -42,7 +46,7 @@ export default Component.extend({
    * @default false
    * @public
    */
-  showHelp: false,
+  showHelp = false;
 
   /**
    * If true component will render in place, rather than be wormholed.
@@ -52,7 +56,7 @@ export default Component.extend({
    * @default true
    * @public
    */
-  renderInPlace: true,
+  renderInPlace = true;
 
   /**
    * Which element to align to
@@ -61,7 +65,7 @@ export default Component.extend({
    * @type {string|HTMLElement}
    * @public
    */
-  popperTarget: null,
+  popperTarget = null;
 
   /**
    * @property autoPlacement
@@ -69,7 +73,7 @@ export default Component.extend({
    * @default true
    * @public
    */
-  autoPlacement: true,
+  autoPlacement = true;
 
   /**
    * The DOM element of the viewport element.
@@ -78,7 +82,7 @@ export default Component.extend({
    * @type object
    * @public
    */
-  viewportElement: null,
+  viewportElement = null;
 
   /**
    * Take a padding into account for keeping the tooltip/popover within the bounds of the element given by `viewportElement`.
@@ -88,34 +92,34 @@ export default Component.extend({
    * @default 0
    * @public
    */
-  viewportPadding: 0,
+  viewportPadding = 0;
 
   /**
    * @property arrowClass
    * @private
    */
-  arrowClass: 'arrow',
+  arrowClass = 'arrow';
 
   /**
    * @property popperClassNames
    * @type {array}
    * @private
    */
-  popperClassNames: null,
 
   /**
    * @property popperClass
    * @type {string}
    * @private
    */
-  popperClass: computed('popperClassNames.[]', 'class', function() {
+  @computed('popperClassNames.[]', 'class')
+  get popperClass() {
     let classes = this.get('popperClassNames');
     let classProperty = this.get('class');
     if (typeof classProperty === 'string') {
       classes = classes.concat(classProperty.split(' '));
     }
     return classes.join(' ');
-  }),
+  }
 
   /**
    * popper.js modifier config
@@ -124,7 +128,8 @@ export default Component.extend({
    * @type {object}
    * @private
    */
-  popperModifiers: computed('arrowClass', 'autoPlacement', 'viewportElement', 'viewportPadding', function() {
+  @computed('arrowClass', 'autoPlacement', 'viewportElement', 'viewportPadding')
+  get popperModifiers() {
     let self = this;
     return {
       arrow: {
@@ -165,19 +170,18 @@ export default Component.extend({
         enabled: this.get('autoPlacement')
       }
     };
-  }),
+  }
 
   didReceiveAttrs() {
     assert('Contextual help element needs id for popper element', this.get('id'));
-  },
-
-  actions: {
-    updatePlacement(popperDataObject) {
-      if (this.get('actualPlacement') === popperDataObject.placement) {
-        return;
-      }
-      this.set('actualPlacement', popperDataObject.placement);
-      scheduleOnce('afterRender', popperDataObject.instance, popperDataObject.instance.scheduleUpdate);
-    }
   }
-});
+
+  @action
+  updatePlacement(popperDataObject) {
+    if (this.get('actualPlacement') === popperDataObject.placement) {
+      return;
+    }
+    this.set('actualPlacement', popperDataObject.placement);
+    scheduleOnce('afterRender', popperDataObject.instance, popperDataObject.instance.scheduleUpdate);
+  }
+}

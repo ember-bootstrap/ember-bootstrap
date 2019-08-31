@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { classNames } from '@ember-decorators/component';
 import Button from 'ember-bootstrap/components/bs-button';
 import { schedule } from '@ember/runloop';
 
@@ -11,11 +13,11 @@ import { schedule } from '@ember/runloop';
  @extends Components.Button
  @public
  */
-export default Button.extend({
-  classNames: ['dropdown-toggle'],
-
+@classic
+@classNames('dropdown-toggle')
+export default class _Button extends Button {
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
     let dropdown = this.get('dropdown');
     if (dropdown) {
       schedule('actions', this, function() {
@@ -25,4 +27,4 @@ export default Button.extend({
       });
     }
   }
-});
+}

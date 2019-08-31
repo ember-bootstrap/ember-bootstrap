@@ -62,7 +62,7 @@
       options=options
       optionLabelPath=optionLabelPath
       ariaDescribedBy=(if hasHelpText ariaDescribedBy)
-      onChange=(action "change")
+      onChange=(action this.doChange)
       validationType=validation
       size=size
   ) as |Control|}}

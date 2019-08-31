@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { tagName, layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/body';
 
@@ -11,20 +13,20 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/body';
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  tagName: '',
+@classic
+@templateLayout(layout)
+@tagName('')
+export default class Body extends Component {
+ /**
+  * @property collapsed
+  * @type boolean
+  * @public
+  */
 
-  /**
-   * @property collapsed
-   * @type boolean
-   * @public
-   */
-
-  /**
-   * @property collapseComponent
-   * @type {String}
-   * @private
-   */
-  collapseComponent: 'bs-collapse',
-});
+ /**
+  * @property collapseComponent
+  * @type {String}
+  * @private
+  */
+ collapseComponent = 'bs-collapse';
+}

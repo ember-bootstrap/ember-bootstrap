@@ -1,6 +1,6 @@
 import EmberObject from '@ember/object';
 
-const Config = EmberObject.extend();
+class Config extends EmberObject {}
 
 Config.reopenClass({
   formValidationSuccessIcon: 'glyphicon glyphicon-ok',

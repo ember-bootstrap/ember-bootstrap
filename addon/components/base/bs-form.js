@@ -1,6 +1,8 @@
-import Component from '@ember/component';
-import { set, computed } from '@ember/object';
+import classic from 'ember-classic-decorator';
+import { attributeBindings, classNameBindings, tagName, layout as templateLayout } from '@ember-decorators/component';
 import { gt } from '@ember/object/computed';
+import Component from '@ember/component';
+import { set, action, computed } from '@ember/object';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import { schedule } from '@ember/runloop';
@@ -103,12 +105,13 @@ import RSVP from 'rsvp';
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-  layout,
-  tagName: 'form',
-  classNameBindings: ['layoutClass'],
-  attributeBindings: ['_novalidate:novalidate'],
-  ariaRole: 'form',
+@classic
+@templateLayout(layout)
+@tagName('form')
+@classNameBindings('layoutClass')
+@attributeBindings('_novalidate:novalidate')
+export default class BsForm extends Component {
+  ariaRole = 'form';
 
   /**
    * Bootstrap form class name (computed)
@@ -140,7 +143,7 @@ export default Component.extend({
    * @type string
    * @public
    */
-  formLayout: 'vertical',
+  formLayout = 'vertical';
 
   /**
    * Check if validating the model is supported. This needs to be implemented by another addon.
@@ -150,7 +153,6 @@ export default Component.extend({
    * @readonly
    * @protected
    */
-  hasValidator: false,
 
   /**
    * The Bootstrap grid class for form labels. This is used by the `Components.FormElement` class as a default for the
@@ -161,21 +163,21 @@ export default Component.extend({
    * @default 'col-md-4'
    * @public
    */
-  horizontalLabelGridClass: 'col-md-4',
+  horizontalLabelGridClass = 'col-md-4';
 
   /**
    * @property elementComponent
    * @type {String}
    * @private
    */
-  elementComponent: 'bs-form/element',
+  elementComponent = 'bs-form/element';
 
   /**
    * @property groupComponent
    * @type {String}
    * @private
    */
-  groupComponent: 'bs-form/group',
+  groupComponent = 'bs-form/group';
 
   /**
    * `isSubmitting` is `true` after `submit` event has been triggered and until Promise returned by `onSubmit` is
@@ -188,7 +190,8 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  isSubmitting: gt('pendingSubmissions', 0),
+  @gt('pendingSubmissions', 0)
+  isSubmitting;
 
   /**
    * `isSubmitted` is `true` if last submission was successful.
@@ -201,7 +204,7 @@ export default Component.extend({
    * @type {Boolean}
    * @private
    */
-  isSubmitted: false,
+  isSubmitted = false;
 
   /**
    * `isRejected` is `true` if last submission was rejected.
@@ -215,7 +218,7 @@ export default Component.extend({
    * @type {Boolean}
    * @private
    */
-  isRejected: false,
+  isRejected = false;
 
   /**
    * Count of pending submissions.
@@ -224,7 +227,7 @@ export default Component.extend({
    * @type {Integer}
    * @private
    */
-  pendingSubmissions: 0,
+  pendingSubmissions = 0;
 
   /**
    * If set to true pressing enter will submit the form, even if no submit button is present
@@ -234,7 +237,7 @@ export default Component.extend({
    * @default false
    * @public
    */
-  submitOnEnter: false,
+  submitOnEnter = false;
 
   /**
    * Controls if `onSubmit` action is fired concurrently. If `true` submitting form multiple
@@ -248,7 +251,7 @@ export default Component.extend({
    * @default true
    * @public
    */
-  preventConcurrency: true,
+  preventConcurrency = true;
 
   /**
    * If true, after successful validation and upon submitting the form, all current element validations will be hidden.
@@ -260,7 +263,7 @@ export default Component.extend({
    * @default false
    * @public
    */
-  hideValidationsOnSubmit: false,
+  hideValidationsOnSubmit = false;
 
   /**
    * If set to true novalidate attribute is present on form element
@@ -271,13 +274,14 @@ export default Component.extend({
    * @default null
    * @public
    */
-  novalidate: null,
+  novalidate = null;
 
-  _novalidate: computed('novalidate', 'hasValidator', function() {
+  @computed('novalidate', 'hasValidator')
+  get _novalidate() {
     return (this.get('hasValidator') && this.get('novalidate') !== false) || this.get('novalidate') === true
         ? ''
         : undefined;
-  }),
+  }
 
   /**
    * If set to true the `readonly` property of all yielded form elements will be set, making their form controls read-only.
@@ -287,7 +291,7 @@ export default Component.extend({
    * @default false
    * @public
    */
-  readonly: false,
+  readonly = false;
 
   /**
    * If set to true the `disabled` property of all yielded form elements will be set, making their form controls disabled.
@@ -297,7 +301,7 @@ export default Component.extend({
    * @default false
    * @public
    */
-  disabled: false,
+  disabled = false;
 
   /**
    * Validate hook which will return a promise that will either resolve if the model is valid
@@ -308,7 +312,7 @@ export default Component.extend({
    * @return {Promise}
    * @public
    */
-  validate(model) {}, // eslint-disable-line no-unused-vars
+  validate(model) {} // eslint-disable-line no-unused-vars
 
   /**
    * @property showAllValidations
@@ -316,7 +320,7 @@ export default Component.extend({
    * @default undefined
    * @private
    */
-  showAllValidations: undefined,
+  showAllValidations = undefined;
 
   /**
    * Action is called before the form is validated (if possible) and submitted.
@@ -325,7 +329,7 @@ export default Component.extend({
    * @param { Object } model  The form's `model`
    * @public
    */
-  onBefore(model) {}, // eslint-disable-line no-unused-vars
+  onBefore(model) {} // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when submit has been triggered and the model has passed all validations (if present).
@@ -335,7 +339,7 @@ export default Component.extend({
    * @param { Object } result The returned result from the validate method, if validation is available
    * @public
    */
-  onSubmit(model, result) {}, // eslint-disable-line no-unused-vars
+  onSubmit(model, result) {} // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when validation of the model has failed.
@@ -345,7 +349,7 @@ export default Component.extend({
    * @param { Object } error
    * @public
    */
-  onInvalid(model, error) {}, // eslint-disable-line no-unused-vars
+  onInvalid(model, error) {} // eslint-disable-line no-unused-vars
 
   /**
    * Submit handler that will send the default action ("action") to the controller when submitting the form.
@@ -437,51 +441,52 @@ export default Component.extend({
             });
         }
       )
-  },
+  }
 
   submit(event) {
     this.submitHandler(event, false);
-  },
+  }
 
   keyPress(e) {
     let code = e.keyCode || e.which;
     if (code === 13 && this.get('submitOnEnter')) {
       this.triggerSubmit();
     }
-  },
+  }
 
   triggerSubmit() {
     let event = document.createEvent('Event');
     event.initEvent('submit', true, true);
     this.get('element').dispatchEvent(event);
-  },
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     let formLayout = this.get('formLayout');
     assert(`Invalid formLayout property given: ${formLayout}`, ['vertical', 'horizontal', 'inline'].indexOf(formLayout) >= 0);
-  },
-
-  actions: {
-    change(value, model, property) {
-      assert('You cannot use the form element\'s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!',
-        isPresent(model) && isPresent(property)
-      );
-      if (typeof model.set === 'function') {
-        model.set(property, value);
-      } else {
-        set(model, property, value);
-      }
-    },
-
-    resetSubmissionState() {
-      this.set('isSubmitted', false);
-      this.set('isRejected', false);
-    },
-
-    submit() {
-      return this.submitHandler();
-    },
   }
-});
+
+  @action
+  elementChanged(value, model, property) {
+    assert('You cannot use the form element\'s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!',
+      isPresent(model) && isPresent(property)
+    );
+    if (typeof model.set === 'function') {
+      model.set(property, value);
+    } else {
+      set(model, property, value);
+    }
+  }
+
+  @action
+  resetSubmissionState() {
+    this.set('isSubmitted', false);
+    this.set('isRejected', false);
+  }
+
+  @action
+  doSubmit() {
+    return this.submitHandler();
+  }
+}

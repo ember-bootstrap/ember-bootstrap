@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { tagName, layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/errors';
 
@@ -7,30 +9,30 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/errors'
  @extends Ember.Component
  @private
  */
-export default Component.extend({
-  layout,
-  tagName: '',
+@classic
+@templateLayout(layout)
+@tagName('')
+export default class Errors extends Component {
+ /**
+  * @property show
+  * @type {Boolean}
+  * @public
+  */
+ show = false;
 
-  /**
-   * @property show
-   * @type {Boolean}
-   * @public
-   */
-  show: false,
+ /**
+  * @property messages
+  * @type {Ember.Array}
+  * @public
+  */
 
-  /**
-   * @property messages
-   * @type {Ember.Array}
-   * @public
-   */
-
-  /**
-   * Whether or not should display several errors at the same time.
-   *
-   * @default false
-   * @property showMultipleErrors
-   * @public
-   * @type {Boolean}
-   */
-  showMultipleErrors: false
-});
+ /**
+  * Whether or not should display several errors at the same time.
+  *
+  * @default false
+  * @property showMultipleErrors
+  * @public
+  * @type {Boolean}
+  */
+ showMultipleErrors = false;
+}

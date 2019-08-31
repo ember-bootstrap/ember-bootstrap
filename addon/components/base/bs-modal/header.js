@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { classNames, layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/header';
 
@@ -10,46 +12,45 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/header';
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  classNames: ['modal-header'],
+@classic
+@templateLayout(layout)
+@classNames('modal-header')
+export default class Header extends Component {
+ /**
+  * Show a close button (x icon)
+  *
+  * @property closeButton
+  * @type boolean
+  * @default true
+  * @public
+  */
+ closeButton = true;
 
-  /**
-   * Show a close button (x icon)
-   *
-   * @property closeButton
-   * @type boolean
-   * @default true
-   * @public
-   */
-  closeButton: true,
+ /**
+  * The title to display in the modal header
+  *
+  * @property title
+  * @type string
+  * @default null
+  * @public
+  */
 
-  /**
-   * The title to display in the modal header
-   *
-   * @property title
-   * @type string
-   * @default null
-   * @public
-   */
+ /**
+  * @property titleComponent
+  * @type {String}
+  * @private
+  */
+ titleComponent = 'bs-modal/header/title';
 
-  /**
-   * @property titleComponent
-   * @type {String}
-   * @private
-   */
-  titleComponent: 'bs-modal/header/title',
+ /**
+  * @property closeComponent
+  * @type {String}
+  * @private
+  */
+ closeComponent = 'bs-modal/header/close';
 
-  /**
-   * @property closeComponent
-   * @type {String}
-   * @private
-   */
-  closeComponent: 'bs-modal/header/close',
-
-  /**
-   * @event onClose
-   * @public
-   */
-
-});
+ /**
+  * @event onClose
+  * @public
+  */
+}

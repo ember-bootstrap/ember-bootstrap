@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { classNames, tagName, layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/header/title';
 
@@ -8,8 +10,8 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/header/title';
  @extends Ember.Component
  @private
  */
-export default Component.extend({
-  layout,
-  tagName: 'h4',
-  classNames: ['modal-title']
-});
+@classic
+@templateLayout(layout)
+@tagName('h4')
+@classNames('modal-title')
+export default class Title extends Component {}

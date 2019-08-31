@@ -1,5 +1,7 @@
+import classic from 'ember-classic-decorator';
+import { tagName } from '@ember-decorators/component';
 import DropDownMenuItem from 'ember-bootstrap/components/base/bs-dropdown/menu/item';
 
-export default DropDownMenuItem.extend({
-  tagName: ''
-});
+@classic
+@tagName('')
+export default class Item extends DropDownMenuItem {}

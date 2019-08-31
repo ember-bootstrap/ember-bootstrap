@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { classNames, attributeBindings, tagName } from '@ember-decorators/component';
 import Control from '../control';
 import { baseAttributes } from './input';
 
@@ -8,29 +10,29 @@ import { baseAttributes } from './input';
  @extends Components.FormElementControl
  @private
  */
-export default Control.extend({
-  attributeBindings: [
-    ...baseAttributes,
-    'value',
-    'placeholder',
-    'minlength',
-    'maxlength',
-    'autocomplete',
-    'autocapitalize',
-    'autocorrect',
-    'spellcheck',
-    'rows',
-    'cols',
-    'wrap'
-  ],
-  tagName: 'textarea',
-  classNames: ['form-control'],
-
+@classic
+@attributeBindings(
+  ...baseAttributes,
+  'value',
+  'placeholder',
+  'minlength',
+  'maxlength',
+  'autocomplete',
+  'autocapitalize',
+  'autocorrect',
+  'spellcheck',
+  'rows',
+  'cols',
+  'wrap'
+)
+@tagName('textarea')
+@classNames('form-control')
+export default class Textarea extends Control {
   change(event) {
     this.get('onChange')(event.target.value);
-  },
+  }
 
   input(event) {
     this.get('onChange')(event.target.value);
   }
-});
+}

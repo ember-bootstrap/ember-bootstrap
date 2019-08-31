@@ -1,3 +1,6 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
 import { isArray, A } from '@ember/array';
@@ -60,17 +63,18 @@ import sizeClass from 'ember-bootstrap/utils/cp/size-class';
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-  layout,
-  ariaRole: 'group',
-  classNameBindings: ['vertical:btn-group-vertical:btn-group', 'sizeClass'],
+@classic
+@templateLayout(layout)
+@classNameBindings('vertical:btn-group-vertical:btn-group', 'sizeClass')
+export default class BsButtonGroup extends Component {
+  ariaRole = 'group';
 
   /**
    * @property buttonComponent
    * @type {String}
    * @private
    */
-  buttonComponent: 'bs-button-group/button',
+  buttonComponent = 'bs-button-group/button';
 
   /**
    * Set to true for a vertically stacked button group, see http://getbootstrap.com/components/#btn-groups-vertical
@@ -80,7 +84,7 @@ export default Component.extend({
    * @default false
    * @public
    */
-  vertical: false,
+  vertical = false;
 
   /**
    * The type of the button group specifies how child buttons behave and how the `value` property will be computed:
@@ -122,7 +126,8 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  isRadio: equal('type', 'radio').readOnly(),
+  @(equal('type', 'radio').readOnly())
+  isRadio;
 
   /**
    * Property for size styling, set to 'lg', 'sm' or 'xs'
@@ -133,8 +138,10 @@ export default Component.extend({
    * @type String
    * @public
    */
-  size: null,
-  sizeClass: sizeClass('btn-group', 'size'),
+  size = null;
+
+  @sizeClass('btn-group', 'size')
+  sizeClass;
 
   /**
    * This action is called whenever the button group's value should be changed because the user clicked a button.
@@ -145,28 +152,27 @@ export default Component.extend({
    * @param {*} value
    * @public
    */
-  onChange() {},
+  onChange() {}
 
-  actions: {
-    buttonPressed(pressedValue) {
-      let newValue;
+  @action
+  buttonPressed(pressedValue) {
+    let newValue;
 
-      if (this.get('isRadio')) {
-        newValue = pressedValue;
+    if (this.get('isRadio')) {
+      newValue = pressedValue;
+    } else {
+      if (!isArray(this.get('value'))) {
+        newValue = A([pressedValue]);
       } else {
-        if (!isArray(this.get('value'))) {
-          newValue = A([pressedValue]);
+        newValue = A(this.get('value').slice());
+        if (newValue.includes(pressedValue)) {
+          newValue.removeObject(pressedValue);
         } else {
-          newValue = A(this.get('value').slice());
-          if (newValue.includes(pressedValue)) {
-            newValue.removeObject(pressedValue);
-          } else {
-            newValue.pushObject(pressedValue);
-          }
+          newValue.pushObject(pressedValue);
         }
       }
-
-      this.get('onChange')(newValue);
     }
+
+    this.get('onChange')(newValue);
   }
-});
+}

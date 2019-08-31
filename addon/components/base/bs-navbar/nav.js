@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { classNames } from '@ember-decorators/component';
 import BsNavComponent from 'ember-bootstrap/components/bs-nav';
 
 /**
@@ -12,11 +14,11 @@ import BsNavComponent from 'ember-bootstrap/components/bs-nav';
  * @extends Components.Nav
  * @public
  */
-export default BsNavComponent.extend({
-  classNames: ['navbar-nav'],
-
+@classic
+@classNames('navbar-nav')
+export default class Nav extends BsNavComponent {
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
     this.set('justified', false);
   }
-});
+}

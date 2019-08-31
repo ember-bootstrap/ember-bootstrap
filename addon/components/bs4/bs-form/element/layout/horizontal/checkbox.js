@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { layout as templateLayout } from '@ember-decorators/component';
 import FormElementLayoutHorizontal from '../horizontal';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/horizontal/checkbox';
 
@@ -8,6 +10,6 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/
  @extends Components.FormElementLayout
  @private
  */
-export default FormElementLayoutHorizontal.extend({
-  layout
-});
+@classic
+@templateLayout(layout)
+export default class Checkbox extends FormElementLayoutHorizontal {}

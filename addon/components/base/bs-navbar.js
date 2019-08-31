@@ -1,5 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { classNames, classNameBindings, tagName, layout as templateLayout } from '@ember-decorators/component';
+import { observes } from '@ember-decorators/object';
+import { action, computed } from '@ember/object';
 import Component from '@ember/component';
-import { observer, computed } from '@ember/object';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import layout from 'ember-bootstrap/templates/components/bs-navbar';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
@@ -96,13 +99,12 @@ import listenTo from 'ember-bootstrap/utils/cp/listen-to';
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-  layout,
-
-  tagName: 'nav',
-  classNames: ['navbar'],
-  classNameBindings: ['positionClass', 'typeClass'],
-
+@classic
+@templateLayout(layout)
+@tagName('nav')
+@classNames('navbar')
+@classNameBindings('positionClass', 'typeClass')
+export default class BsNavbar extends Component {
   /**
    * Manages the state for the responsive menu between the toggle and the content.
    *
@@ -111,13 +113,14 @@ export default Component.extend({
    * @default true
    * @public
    */
-  collapsed: true,
+  collapsed = true;
 
   /**
    * @property _collapsed
    * @private
    */
-  _collapsed: listenTo('collapsed'),
+  @listenTo('collapsed')
+  _collapsed;
 
   /**
    * Controls whether the wrapping div is a fluid container or not.
@@ -127,7 +130,7 @@ export default Component.extend({
    * @default true
    * @public
    */
-  fluid: true,
+  fluid = true;
 
   /**
    * Specifies the position classes for the navbar, currently supporting none, "fixed-top", "fixed-bottom", and
@@ -139,9 +142,10 @@ export default Component.extend({
    * @default null
    * @public
    */
-  position: null,
+  position = null;
 
-  positionClass: computed('position', function() {
+  @computed('position')
+  get positionClass() {
     let position = this.get('position');
     let validPositions = this.get('_validPositions');
     let positionPrefix = this.get('_positionPrefix');
@@ -151,7 +155,7 @@ export default Component.extend({
     }
 
     return `${positionPrefix}${position}`;
-  }),
+  }
 
   /**
    * Property for type styling
@@ -163,8 +167,10 @@ export default Component.extend({
    * @default 'default'
    * @public
    */
-  type: 'default',
-  typeClass: typeClass('navbar', 'type'),
+  type = 'default';
+
+  @typeClass('navbar', 'type')
+  typeClass;
 
   /**
    * The action to be sent when the navbar is about to be collapsed.
@@ -175,7 +181,7 @@ export default Component.extend({
    * @event onCollapse
    * @public
    */
-  onCollapse() {},
+  onCollapse() {}
 
   /**
    * The action to be sent after the navbar has been collapsed (including the CSS transition).
@@ -183,7 +189,7 @@ export default Component.extend({
    * @event onCollapsed
    * @public
    */
-  onCollapsed() {},
+  onCollapsed() {}
 
   /**
    * The action to be sent when the navbar is about to be expanded.
@@ -194,7 +200,7 @@ export default Component.extend({
    * @event onExpand
    * @public
    */
-  onExpand() {},
+  onExpand() {}
 
   /**
    * The action to be sent after the navbar has been expanded (including the CSS transition).
@@ -202,9 +208,10 @@ export default Component.extend({
    * @event onExpanded
    * @public
    */
-  onExpanded() {},
+  onExpanded() {}
 
-  _onCollapsedChange: observer('_collapsed', function() {
+  @observes('_collapsed')
+  _onCollapsedChange() {
     let collapsed = this.get('_collapsed');
     let active = this.get('active');
     if (collapsed !== active) {
@@ -215,43 +222,38 @@ export default Component.extend({
     } else {
       this.hide();
     }
-  }),
+  }
 
   /**
    * @method expand
    * @private
    */
+  @action
   expand() {
     if (this.onExpand() !== false) {
       this.set('_collapsed', false);
     }
-  },
+  }
 
   /**
    * @method collapse
    * @private
    */
+  @action
   collapse() {
     if (this.onCollapse() !== false) {
       this.set('_collapsed', true);
     }
-  },
+  }
 
-  actions: {
-    expand() {
+  @action
+  toggleNavbar() {
+    if (this.get('_collapsed')) {
       this.expand();
-    },
-    collapse() {
+    } else {
       this.collapse();
-    },
-    toggleNavbar() {
-      if (this.get('_collapsed')) {
-        this.expand();
-      } else {
-        this.collapse();
-      }
     }
-  },
+  }
 
   /**
    * Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard
@@ -280,26 +282,26 @@ export default Component.extend({
    * @type {String}
    * @private
    */
-  toggleComponent: 'bs-navbar/toggle',
+  toggleComponent = 'bs-navbar/toggle';
 
   /**
    * @property contentComponent
    * @type {String}
    * @private
    */
-  contentComponent: 'bs-navbar/content',
+  contentComponent = 'bs-navbar/content';
 
   /**
    * @property navComponent
    * @type {String}
    * @private
    */
-  navComponent: 'bs-navbar/nav',
+  navComponent = 'bs-navbar/nav';
 
   /**
    * @property linkToComponent
    * @type {String}
    * @private
    */
-  linkToComponent: 'bs-navbar/link-to'
-});
+  linkToComponent = 'bs-navbar/link-to';
+}

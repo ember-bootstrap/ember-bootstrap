@@ -1,5 +1,7 @@
-import ContextualHelpElement from '../bs-contextual-help/element';
+import classic from 'ember-classic-decorator';
+import { layout as templateLayout } from '@ember-decorators/component';
 import { notEmpty } from '@ember/object/computed';
+import ContextualHelpElement from '../bs-contextual-help/element';
 import layout from 'ember-bootstrap/templates/components/bs-popover/element';
 
 /**
@@ -10,19 +12,20 @@ import layout from 'ember-bootstrap/templates/components/bs-popover/element';
  @extends Components.ContextualHelpElement
  @private
  */
-export default ContextualHelpElement.extend({
-  layout,
+@classic
+@templateLayout(layout)
+export default class Element extends ContextualHelpElement {
+ /**
+  * @property title
+  * @type string
+  * @public
+  */
 
-  /**
-   * @property title
-   * @type string
-   * @public
-   */
-
-  /**
-   * @property hasTitle
-   * @type boolean
-   * @private
-   */
-  hasTitle: notEmpty('title')
-});
+ /**
+  * @property hasTitle
+  * @type boolean
+  * @private
+  */
+ @notEmpty('title')
+ hasTitle;
+}

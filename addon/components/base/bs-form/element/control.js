@@ -1,3 +1,4 @@
+import classic from 'ember-classic-decorator';
 import Component from '@ember/component';
 
 /**
@@ -7,27 +8,27 @@ import Component from '@ember/component';
  @extends Ember.Component
  @private
  */
-export default Component.extend({
+@classic
+export default class Control extends Component {
+ /**
+  * @property value
+  * @public
+  */
+ value = null;
 
-  /**
-   * @property value
-   * @public
-   */
-  value: null,
+ /**
+  * @property ariaDescribedBy
+  * @type {string}
+  * @public
+  */
+ ariaDescribedBy = null;
 
-  /**
-   * @property ariaDescribedBy
-   * @type {string}
-   * @public
-   */
-  ariaDescribedBy: null,
-
-  /**
-   * This action is called whenever the `value` changes
-   *
-   * @event onChange
-   * @param {*} value
-   * @public
-   */
-  onChange() {}
-});
+ /**
+  * This action is called whenever the `value` changes
+  *
+  * @event onChange
+  * @param {*} value
+  * @public
+  */
+ onChange() {}
+}

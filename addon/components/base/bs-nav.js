@@ -1,6 +1,7 @@
+import classic from 'ember-classic-decorator';
+import { classNameBindings, classNames, layout as templateLayout, tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
-import { isPresent } from '@ember/utils';
 import layout from 'ember-bootstrap/templates/components/bs-nav';
 
 /**
@@ -80,20 +81,17 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
   @public
 
  */
-export default Component.extend({
-  layout,
-
-  tagName: 'ul',
-  classNames: ['nav'],
-
-  classNameBindings: ['typeClass', 'justified:nav-justified'],
-
-  typeClass: computed('type', function() {
+@classic
+@templateLayout(layout)
+@tagName('ul')
+@classNames('nav')
+@classNameBindings('typeClass', 'justified:nav-justified')
+export default class BsNav extends Component {
+  @computed('type')
+  get typeClass() {
     let type = this.get('type');
-    if (isPresent(type)) {
-      return `nav-${type}`;
-    }
-  }),
+    return type ? `nav-${type}` : undefined;
+  }
 
   /**
    * Special type of nav, either "pills" or "tabs"
@@ -103,7 +101,7 @@ export default Component.extend({
    * @default null
    * @public
    */
-  type: null,
+  type = null;
 
   /**
    * Make the nav justified, see [bootstrap docs](http://getbootstrap.com/components/#nav-justified)
@@ -113,7 +111,7 @@ export default Component.extend({
    * @default false
    * @public
    */
-  justified: false,
+  justified = false;
 
   /**
    * Make the nav pills stacked, see [bootstrap docs](http://getbootstrap.com/components/#nav-pills)
@@ -123,26 +121,26 @@ export default Component.extend({
    * @default false
    * @public
    */
-  stacked: false,
+  stacked = false;
 
   /**
    * @property itemComponent
    * @type {String}
    * @private
    */
-  itemComponent: 'bs-nav/item',
+  itemComponent = 'bs-nav/item';
 
   /**
    * @property linkToComponent
    * @type {String}
    * @private
    */
-  linkToComponent: 'bs-nav/link-to',
+  linkToComponent = 'bs-nav/link-to';
 
   /**
    * @property dropdownComponent
    * @type {String}
    * @private
    */
-  dropdownComponent: 'bs-dropdown'
-});
+  dropdownComponent = 'bs-dropdown';
+}

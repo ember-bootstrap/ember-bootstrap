@@ -1,3 +1,4 @@
+import classic from 'ember-classic-decorator';
 import Component from '@ember/component';
 
 /**
@@ -10,5 +11,5 @@ import Component from '@ember/component';
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-});
+@classic
+export default class Item extends Component {}

@@ -1,7 +1,10 @@
-import { not, alias, and } from '@ember/object/computed';
+import classic from 'ember-classic-decorator';
+import { classNameBindings } from '@ember-decorators/component';
+import { observes } from '@ember-decorators/object';
+import { and, alias, not } from '@ember/object/computed';
 import Component from '@ember/component';
 import { isPresent } from '@ember/utils';
-import { observer } from '@ember/object';
+import '@ember/object';
 import { next } from '@ember/runloop';
 import { camelize } from '@ember/string';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
@@ -26,10 +29,9 @@ import { assert } from '@ember/debug';
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-
-  classNameBindings: ['collapse', 'collapsing'],
-
+@classic
+@classNameBindings('collapse', 'collapsing')
+export default class BsCollapse extends Component {
   /**
    * Collapsed/expanded state
    *
@@ -38,7 +40,7 @@ export default Component.extend({
    * @default true
    * @public
    */
-  collapsed: true,
+  collapsed = true;
 
   /**
    * True if this item is expanded
@@ -46,11 +48,16 @@ export default Component.extend({
    * @property active
    * @private
    */
-  active: false,
+  active = false;
 
-  collapse: not('transitioning'),
-  collapsing: alias('transitioning'),
-  showContent: and('collapse', 'active'),
+  @not('transitioning')
+  collapse;
+
+  @alias('transitioning')
+  collapsing;
+
+  @and('collapse', 'active')
+  showContent;
 
   /**
    * true if the component is currently transitioning
@@ -59,7 +66,7 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  transitioning: false,
+  transitioning = false;
 
   /**
    * The size of the element when collapsed. Defaults to 0.
@@ -69,7 +76,7 @@ export default Component.extend({
    * @default 0
    * @public
    */
-  collapsedSize: 0,
+  collapsedSize = 0;
 
   /**
    * The size of the element when expanded. When null the value is calculated automatically to fit the containing elements.
@@ -79,7 +86,7 @@ export default Component.extend({
    * @default null
    * @public
    */
-  expandedSize: null,
+  expandedSize = null;
 
   /**
    * Usually the size (height) of the element is only set while transitioning, and reseted afterwards. Set to true to always set a size.
@@ -89,7 +96,7 @@ export default Component.extend({
    * @default true
    * @private
    */
-  resetSizeWhenNotCollapsing: true,
+  resetSizeWhenNotCollapsing = true;
 
   /**
    * The direction (height/width) of the collapse animation.
@@ -101,7 +108,7 @@ export default Component.extend({
    * @default 'height'
    * @public
    */
-  collapseDimension: 'height',
+  collapseDimension = 'height';
 
   /**
    * The duration of the fade transition
@@ -111,7 +118,7 @@ export default Component.extend({
    * @default 350
    * @public
    */
-  transitionDuration: 350,
+  transitionDuration = 350;
 
   setCollapseSize(size) {
     let dimension = this.get('collapseDimension');
@@ -120,7 +127,7 @@ export default Component.extend({
 
     this.element.style.width = dimension === 'width' && size ? `${size}px` : '';
     this.element.style.height = dimension === 'height' && size ? `${size}px` : '';
-  },
+  }
 
   /**
    * The action to be sent when the element is about to be hidden.
@@ -128,7 +135,7 @@ export default Component.extend({
    * @event onHide
    * @public
    */
-  onHide() {},
+  onHide() {}
 
   /**
    * The action to be sent after the element has been completely hidden (including the CSS transition).
@@ -136,7 +143,7 @@ export default Component.extend({
    * @event onHidden
    * @public
    */
-  onHidden() {},
+  onHidden() {}
 
   /**
    * The action to be sent when the element is about to be shown.
@@ -144,7 +151,7 @@ export default Component.extend({
    * @event onShow
    * @public
    */
-  onShow() {},
+  onShow() {}
 
   /**
    * The action to be sent after the element has been completely shown (including the CSS transition).
@@ -152,7 +159,7 @@ export default Component.extend({
    * @event onShown
    * @public
    */
-  onShown() {},
+  onShown() {}
 
   /**
    * Triggers the show transition
@@ -185,7 +192,7 @@ export default Component.extend({
         this.setCollapseSize(this.getExpandedSize('show'));
       }
     });
-  },
+  }
 
   /**
    * Get the size of the element when expanded
@@ -205,7 +212,7 @@ export default Component.extend({
     let prefix = action === 'show' ? 'scroll' : 'offset';
     let measureProperty = camelize(`${prefix}-${this.get('collapseDimension')}`);
     return collapseElement[measureProperty];
-  },
+  }
 
   /**
    * Triggers the hide transition
@@ -238,9 +245,10 @@ export default Component.extend({
         this.setCollapseSize(this.get('collapsedSize'));
       }
     });
-  },
+  }
 
-  _onCollapsedChange: observer('collapsed', function() {
+  @observes('collapsed')
+  _onCollapsedChange() {
     let collapsed = this.get('collapsed');
     let active = this.get('active');
     if (collapsed !== active) {
@@ -251,22 +259,24 @@ export default Component.extend({
     } else {
       this.hide();
     }
-  }),
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     this.set('active', !this.get('collapsed'));
-  },
+  }
 
-  _updateCollapsedSize: observer('collapsedSize', function() {
+  @observes('collapsedSize')
+  _updateCollapsedSize() {
     if (!this.get('resetSizeWhenNotCollapsing') && this.get('collapsed') && !this.get('collapsing')) {
       this.setCollapseSize(this.get('collapsedSize'));
     }
-  }),
+  }
 
-  _updateExpandedSize: observer('expandedSize', function() {
+  @observes('expandedSize')
+  _updateExpandedSize() {
     if (!this.get('resetSizeWhenNotCollapsing') && !this.get('collapsed') && !this.get('collapsing')) {
       this.setCollapseSize(this.get('expandedSize'));
     }
-  })
-});
+  }
+}

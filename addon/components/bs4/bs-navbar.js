@@ -1,23 +1,24 @@
+import classic from 'ember-classic-decorator';
+import { classNameBindings } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import Navbar from 'ember-bootstrap/components/base/bs-navbar';
 import { isBlank } from '@ember/utils';
 
-export default Navbar.extend({
-  classNameBindings: ['breakpointClass', 'backgroundClass'],
+@classic
+@classNameBindings('breakpointClass', 'backgroundClass')
+export default class BsNavbar extends Navbar {
+  @computed('appliedType')
+  get type() {
+    return this.get('appliedType');
+  }
 
-  type: computed('appliedType', {
-    get() {
-      return this.get('appliedType');
-    },
+  set type(value) {
+    let newValue = (!value || value === 'default') ? 'light' : value;
+    this.set('appliedType', newValue);
+    return newValue;
+  }
 
-    set(key, value) {
-      let newValue = (!value || value === 'default') ? 'light' : value;
-      this.set('appliedType', newValue);
-      return newValue;
-    }
-  }),
-
-  appliedType: 'light',
+  appliedType = 'light';
 
   /**
    * Defines the responsive toggle breakpoint size. Options are the standard
@@ -29,7 +30,7 @@ export default Navbar.extend({
    * @default 'lg'
    * @public
    */
-  toggleBreakpoint: 'lg',
+  toggleBreakpoint = 'lg';
 
   /**
    * Sets the background color for the navbar. Can be any color
@@ -40,9 +41,10 @@ export default Navbar.extend({
    * @default 'light'
    * @public
    */
-  backgroundColor: 'light',
+  backgroundColor = 'light';
 
-  breakpointClass: computed('toggleBreakpoint', function() {
+  @computed('toggleBreakpoint')
+  get breakpointClass() {
     let toggleBreakpoint = this.get('toggleBreakpoint');
 
     if (isBlank(toggleBreakpoint)) {
@@ -50,20 +52,20 @@ export default Navbar.extend({
     } else {
       return `navbar-expand-${toggleBreakpoint}`;
     }
-  }),
+  }
 
-  backgroundClass: computed('backgroundColor', function() {
+  @computed('backgroundColor')
+  get backgroundClass() {
     let backgroundColor = this.get('backgroundColor');
 
     return `bg-${backgroundColor}`;
-  }),
+  }
 
-  _validPositions: null,
-
-  _positionPrefix: '',
+  _validPositions = null;
+  _positionPrefix = '';
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     this.set('_validPositions', ['fixed-top', 'fixed-bottom', 'sticky-top']);
   }
-});
+}

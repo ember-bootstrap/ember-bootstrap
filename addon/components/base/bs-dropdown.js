@@ -1,5 +1,7 @@
+import classic from 'ember-classic-decorator';
+import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { action, computed } from '@ember/object';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
 import { bind } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown';
 
@@ -158,10 +160,10 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
   @extends Ember.Component
   @public
 s*/
-let component = Component.extend({
-  layout,
-  classNameBindings: ['containerClass'],
-
+@classic
+@templateLayout(layout)
+@classNameBindings('containerClass')
+class component extends Component {
   /**
    * This property reflects the state of the dropdown, whether it is open or closed.
    *
@@ -170,7 +172,7 @@ let component = Component.extend({
    * @type boolean
    * @private
    */
-  isOpen: false,
+  isOpen = false;
 
   /**
    * By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.
@@ -180,7 +182,7 @@ let component = Component.extend({
    * @type boolean
    * @public
    */
-  closeOnMenuClick: true,
+  closeOnMenuClick = true;
 
   /**
    * By default the dropdown menu will expand downwards. Other options include, 'up', 'left' and 'right'
@@ -190,7 +192,7 @@ let component = Component.extend({
    * @default 'down'
    * @public
    */
-  direction: 'down',
+  direction = 'down';
 
   /**
    * Indicates the dropdown is being used as a navigation item dropdown.
@@ -210,21 +212,23 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  containerClass: computed('toggle.tagName', 'direction', function() {
+  @computed('toggle.tagName', 'direction')
+  get containerClass() {
     if (this.get('toggle.tagName') === 'button' && !this.get('toggle.block')) {
       return this.get('direction') !== 'down' ? `btn-group drop${this.get('direction')}` : 'btn-group';
     } else {
       return `drop${this.get('direction')}`;
     }
-  }),
+  }
 
   /**
    * @property toggleElement
    * @private
    */
-  toggleElement: computed('toggle', function() {
+  @computed('toggle')
+  get toggleElement() {
     return typeof FastBoot === 'undefined' ? this.get('toggle.element') || null : null;
-  }),
+  }
 
   /**
    * Reference to the child toggle (Toggle or Button)
@@ -232,7 +236,7 @@ let component = Component.extend({
    * @property toggle
    * @private
    */
-  toggle: null,
+  toggle = null;
 
   /**
    * Action is called when dropdown is about to be shown
@@ -241,7 +245,7 @@ let component = Component.extend({
    * @param {*} value
    * @public
    */
-  onShow(value) {}, // eslint-disable-line no-unused-vars
+  onShow(value) {} // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when dropdown is about to be hidden
@@ -250,48 +254,49 @@ let component = Component.extend({
    * @param {*} value
    * @public
    */
-  onHide(value) {}, // eslint-disable-line no-unused-vars
+  onHide(value) {} // eslint-disable-line no-unused-vars
 
-  actions: {
-    toggleDropdown() {
-      if (this.get('isOpen')) {
-        this.send('closeDropdown');
-      } else {
-        this.send('openDropdown');
-      }
-    },
-
-    openDropdown() {
-      this.set('isOpen', true);
-      this.addClickListener();
-      this.get('onShow')();
-    },
-
-    closeDropdown() {
-      this.set('isOpen', false);
-      this.removeClickListener();
-      this.get('onHide')();
+  @action
+  toggleDropdown() {
+    if (this.get('isOpen')) {
+      this.send('closeDropdown');
+    } else {
+      this.send('openDropdown');
     }
-  },
+  }
+
+  @action
+  openDropdown() {
+    this.set('isOpen', true);
+    this.addClickListener();
+    this.get('onShow')();
+  }
+
+  @action
+  closeDropdown() {
+    this.set('isOpen', false);
+    this.removeClickListener();
+    this.get('onHide')();
+  }
 
   addClickListener() {
     if (!this.clickListener) {
       this.clickListener = bind(this, this.closeOnClickHandler);
       document.addEventListener('click', this.clickListener, true);
     }
-  },
+  }
 
   removeClickListener() {
     if (this.clickListener)  {
       document.removeEventListener('click', this.clickListener, true);
       this.clickListener = null;
     }
-  },
+  }
 
   willDestroyElement() {
-    this._super(...arguments);
+    super.willDestroyElement(...arguments);
     this.removeClickListener();
-  },
+  }
 
   /**
    * Handler for click events to close the dropdown
@@ -309,29 +314,29 @@ let component = Component.extend({
       && ((menuElement && !menuElement.contains(target)) || this.get('closeOnMenuClick'))) {
       this.send('closeDropdown');
     }
-  },
+  }
 
   /**
    * @property buttonComponent
    * @type {String}
    * @private
    */
-  buttonComponent: 'bs-dropdown/button',
+  buttonComponent = 'bs-dropdown/button';
 
   /**
    * @property toggleComponent
    * @type {String}
    * @private
    */
-  toggleComponent: 'bs-dropdown/toggle',
+  toggleComponent = 'bs-dropdown/toggle';
 
   /**
    * @property menuComponent
    * @type {String}
    * @private
    */
-  menuComponent: 'bs-dropdown/menu'
-});
+  menuComponent = 'bs-dropdown/menu';
+}
 
 Object.defineProperties(component.prototype, {
 

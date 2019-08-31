@@ -1,5 +1,7 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { tagName, layout as templateLayout } from '@ember-decorators/component';
 import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown/menu';
 import { next } from '@ember/runloop';
 import { getDestinationElement } from '../../../utils/dom';
@@ -14,17 +16,17 @@ import { getDestinationElement } from '../../../utils/dom';
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  tagName: '',
-
+@classic
+@templateLayout(layout)
+@tagName('')
+export default class Menu extends Component {
   /**
    * @property ariaRole
    * @default menu
    * @type string
    * @protected
    */
-  ariaRole: 'menu',
+  ariaRole = 'menu';
 
   /**
    * Alignment of the menu, either "left" or "right"
@@ -34,7 +36,7 @@ export default Component.extend({
    * @default left
    * @public
    */
-  align: 'left',
+  align = 'left';
 
   /**
    * @property direction
@@ -42,14 +44,14 @@ export default Component.extend({
    * @type string
    * @private
    */
-  direction: 'down',
+  direction = 'down';
 
   /**
    * @property inNav
    * @type {boolean}
    * @private
    */
-  inNav: false,
+  inNav = false;
 
   /**
    * By default the menu is rendered in the same place the dropdown. If you experience clipping
@@ -60,19 +62,20 @@ export default Component.extend({
    * @default true
    * @public
    */
-  renderInPlace: true,
+  renderInPlace = true;
 
   /**
    * @property _renderInPlace
    * @type boolean
    * @private
    */
-  _renderInPlace: computed('renderInPlace', function() {
+  @computed('renderInPlace')
+  get _renderInPlace() {
     return (
       this.get('renderInPlace') ||
       !this.destinationElement
     );
-  }),
+  }
 
   /**
    * The wormhole destinationElement
@@ -82,40 +85,39 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  destinationElement: computed(function() {
+  @computed
+  get destinationElement() {
     return getDestinationElement(this)
-  }),
+  }
 
-  alignClass: computed('align', function() {
-    if (this.get('align') !== 'left') {
-      return `dropdown-menu-${this.get('align')}`;
-    }
-  }),
+  @computed('align')
+  get alignClass() {
+    return this.get('align') !== 'left' ? `dropdown-menu-${this.get('align')}` : undefined;
+  }
 
-  isOpen: computed({
-    get() {
-      return false;
-    },
-    set(key, value) {
-      // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu's children
-      // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
-      next(() => {
-        if (this.get('isDestroying') || this.get('isDestroyed')) {
-          return;
-        }
-        this.set('_isOpen', value);
-      });
-      return value;
-    }
-  }),
+  @computed
+  get isOpen() {
+    return false;
+  }
 
-  _isOpen: false,
+  set isOpen(value) {
+    // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu's children
+    // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
+    next(() => {
+      if (this.get('isDestroying') || this.get('isDestroyed')) {
+        return;
+      }
+      this.set('_isOpen', value);
+    });
+    return value;
+  }
 
-  flip: true,
+  _isOpen = false;
+  flip = true;
+  _popperApi = null;
 
-  _popperApi: null,
-
-  popperPlacement: computed('direction', 'align', function() {
+  @computed('direction', 'align')
+  get popperPlacement() {
     let placement = 'bottom-start';
     let { direction, align } = this.getProperties('direction', 'align');
 
@@ -132,9 +134,10 @@ export default Component.extend({
       placement = 'bottom-end';
     }
     return placement;
-  }),
+  }
 
-  popperModifiers: computed('inNav', 'flip', function() {
+  @computed('inNav', 'flip')
+  get popperModifiers() {
     return {
       // @todo add offset config
       applyStyle: {
@@ -144,26 +147,26 @@ export default Component.extend({
         enabled: this.get('flip')
       }
     };
-  }),
+  }
 
   /**
    * @property itemComponent
    * @type {String}
    * @private
    */
-  itemComponent: 'bs-dropdown/menu/item',
+  itemComponent = 'bs-dropdown/menu/item';
 
   /**
    * @property linkToComponent
    * @type {String}
    * @private
    */
-  linkToComponent: 'bs-dropdown/menu/link-to',
+  linkToComponent = 'bs-dropdown/menu/link-to';
 
   /**
    * @property dividerComponent
    * @type {String}
    * @private
    */
-  dividerComponent: 'bs-dropdown/menu/divider'
-});
+  dividerComponent = 'bs-dropdown/menu/divider';
+}

@@ -1,5 +1,7 @@
+import classic from 'ember-classic-decorator';
 import FormElementErrors from 'ember-bootstrap/components/base/bs-form/element/errors';
 
-export default FormElementErrors.extend({
-  feedbackClass: 'invalid-feedback d-block'
-});
+@classic
+export default class Errors extends FormElementErrors {
+  feedbackClass = 'invalid-feedback d-block';
+}

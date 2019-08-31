@@ -1,12 +1,8 @@
-import {
-  notEmpty,
-  gt,
-  or,
-  and,
-  equal,
-  alias
-} from '@ember/object/computed';
-import { observer, defineProperty, computed } from '@ember/object';
+import classic from 'ember-classic-decorator';
+import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { observes } from '@ember-decorators/object';
+import { alias, equal, and, or, gt, notEmpty } from '@ember/object/computed';
+import { defineProperty, action, computed } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import { assert } from '@ember/debug';
 import { typeOf, isBlank } from '@ember/utils';
@@ -14,6 +10,7 @@ import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
 import layout from 'ember-bootstrap/templates/components/bs-form/element';
 import FormGroup from 'ember-bootstrap/components/bs-form/group';
+import defaultValue from '../../../utils/default-decorator';
 
 const nonDefaultLayouts = A([
   'checkbox'
@@ -392,10 +389,10 @@ const nonDefaultLayouts = A([
   @extends Components.FormGroup
   @public
 */
-export default FormGroup.extend({
-  layout,
-  classNameBindings: ['disabled:disabled', 'required:is-required', 'isValidating'],
-
+@classic
+@templateLayout(layout)
+@classNameBindings('disabled:disabled', 'required:is-required', 'isValidating')
+export default class Element extends FormGroup {
   /**
    * Text to display within a `<label>` tag.
    *
@@ -407,7 +404,7 @@ export default FormGroup.extend({
    * @type string
    * @public
    */
-  label: null,
+  label = null;
 
   /**
    * Controls label visibility by adding 'sr-only' class.
@@ -417,7 +414,7 @@ export default FormGroup.extend({
    * @default false
    * @public
    */
-  invisibleLabel: false,
+  invisibleLabel = false;
 
   /**
    * @property hasLabel
@@ -425,7 +422,8 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasLabel: notEmpty('label'),
+  @notEmpty('label')
+  hasLabel;
 
   /**
    * The type of the control widget.
@@ -443,7 +441,7 @@ export default FormGroup.extend({
    * @default 'text'
    * @public
    */
-  controlType: 'text',
+  controlType = 'text';
 
   /**
    * The value of the control element is bound to this property. You can bind it to some controller property to
@@ -460,7 +458,7 @@ export default FormGroup.extend({
    * @property value
    * @public
    */
-  value: null,
+  value = null;
 
   /**
    The property name of the form element's `model` (by default the `model` of its parent `Components.Form`) that this
@@ -473,7 +471,7 @@ export default FormGroup.extend({
    @type string
    @public
    */
-  property: null,
+  property = null;
 
   /**
    * The model used for validation. Defaults to the parent `Components.Form`'s `model`
@@ -481,7 +479,7 @@ export default FormGroup.extend({
    * @property model
    * @public
    */
-  model: null,
+  model = null;
 
   /**
    * Show a help text next to the control
@@ -490,7 +488,7 @@ export default FormGroup.extend({
    * @type {string}
    * @public
    */
-  helpText: null,
+  helpText = null;
 
   /**
    * Only if there is a validator, this property makes all errors to be displayed at once
@@ -501,7 +499,7 @@ export default FormGroup.extend({
    * @public
    * @type {Boolean}
    */
-  showMultipleErrors: false,
+  showMultipleErrors = false;
 
   /**
    * Array of options for control types that show a selection (e.g. radio button groups)
@@ -512,7 +510,7 @@ export default FormGroup.extend({
    * @type {Array}
    * @public
    */
-  options: null,
+  options = null;
 
   /**
    * Property path (e.g. 'title' or 'related.name') to render the label of an selection option. See `options`.s
@@ -521,7 +519,7 @@ export default FormGroup.extend({
    * @type {String}
    * @public
    */
-  optionLabelPath: null,
+  optionLabelPath = null;
 
   /**
    * @property hasHelpText
@@ -529,7 +527,8 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasHelpText: notEmpty('helpText').readOnly(),
+  @(notEmpty('helpText').readOnly())
+  hasHelpText;
 
   /**
    * The array of error messages from the `model`'s validation.
@@ -538,7 +537,7 @@ export default FormGroup.extend({
    * @type array
    * @protected
    */
-  errors: null,
+  errors = null;
 
   /**
    * @property hasErrors
@@ -546,7 +545,8 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasErrors: gt('errors.length', 0),
+  @gt('errors.length', 0)
+  hasErrors;
 
   /**
    * The array of warning messages from the `model`'s validation.
@@ -555,7 +555,7 @@ export default FormGroup.extend({
    * @type array
    * @protected
    */
-  warnings: null,
+  warnings = null;
 
   /**
    * @property hasWarnings
@@ -563,7 +563,8 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasWarnings: gt('warnings.length', 0),
+  @gt('warnings.length', 0)
+  hasWarnings;
 
   /**
    * Show a custom error message that does not come from the model's validation. Will be immediately shown, regardless
@@ -573,7 +574,7 @@ export default FormGroup.extend({
    * @type string
    * @public
    */
-  customError: null,
+  customError = null;
 
   /**
    * @property hasCustomError
@@ -581,7 +582,8 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasCustomError: notEmpty('customError'),
+  @notEmpty('customError')
+  hasCustomError;
 
   /**
    * Show a custom warning message that does not come from the model's validation. Will be immediately shown, regardless
@@ -592,7 +594,7 @@ export default FormGroup.extend({
    * @type string
    * @public
    */
-  customWarning: null,
+  customWarning = null;
 
   /**
    * @property hasCustomWarning
@@ -600,7 +602,8 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasCustomWarning: notEmpty('customWarning'),
+  @notEmpty('customWarning')
+  hasCustomWarning;
 
   /**
    * Property for size styling, set to 'lg', 'sm' or 'xs' (the latter only for BS3)
@@ -609,7 +612,7 @@ export default FormGroup.extend({
    * @type String
    * @public
    */
-  size: null,
+  size = null;
 
   /**
    * The array of validation messages (either errors or warnings) from either custom error/warnings or , if we are showing model validation messages, the model's validation
@@ -618,7 +621,18 @@ export default FormGroup.extend({
    * @type array
    * @private
    */
-  validationMessages: computed('hasCustomError', 'customError', 'hasErrors', 'hasCustomWarning', 'customWarning', 'hasWarnings', 'errors.[]', 'warnings.[]', 'showModelValidation', function() {
+  @computed(
+    'hasCustomError',
+    'customError',
+    'hasErrors',
+    'hasCustomWarning',
+    'customWarning',
+    'hasWarnings',
+    'errors.[]',
+    'warnings.[]',
+    'showModelValidation'
+  )
+  get validationMessages() {
     if (this.get('hasCustomError')) {
       return A([this.get('customError')]);
     }
@@ -632,7 +646,7 @@ export default FormGroup.extend({
       return A(this.get('warnings'));
     }
     return null;
-  }),
+  }
 
   /**
    * @property hasValidationMessages
@@ -640,7 +654,8 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  hasValidationMessages: gt('validationMessages.length', 0),
+  @gt('validationMessages.length', 0)
+  hasValidationMessages;
 
   /**
    * @property hasValidator
@@ -648,7 +663,8 @@ export default FormGroup.extend({
    * @default false
    * @protected
    */
-  hasValidator: false,
+  @defaultValue
+  hasValidator = false;
 
   /**
    * Set a validating state for async validations
@@ -658,7 +674,8 @@ export default FormGroup.extend({
    * @default false
    * @protected
    */
-  isValidating: false,
+  @defaultValue
+  isValidating = false;
 
   /**
    * If `true` form validation markup is rendered (requires a validatable `model`).
@@ -668,7 +685,13 @@ export default FormGroup.extend({
    * @default false
    * @private
    */
-  showValidation: or('showOwnValidation', 'showAllValidations', 'hasCustomError', 'hasCustomWarning'),
+  @or(
+    'showOwnValidation',
+    'showAllValidations',
+    'hasCustomError',
+    'hasCustomWarning'
+  )
+  showValidation;
 
   /**
    * @property showOwnValidation
@@ -676,7 +699,7 @@ export default FormGroup.extend({
    * @default false
    * @private
    */
-  showOwnValidation: false,
+  showOwnValidation = false;
 
   /**
    * @property showAllValidations
@@ -684,16 +707,17 @@ export default FormGroup.extend({
    * @default false
    * @private
    */
-  showAllValidations: computed({
-    get() {
-    },
-    set(key, value) {
-      if (value === false) {
-        this.set('showOwnValidation', false);
-      }
-      return value;
+  @computed
+  get showAllValidations() {
+    return false;
+  }
+
+  set showAllValidations(value) {
+    if (value === false) {
+      this.set('showOwnValidation', false);
     }
-  }),
+    return value;
+  }
 
   /**
    * @property showModelValidations
@@ -701,7 +725,8 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  showModelValidation: or('showOwnValidation', 'showAllValidations'),
+  @or('showOwnValidation', 'showAllValidations')
+  showModelValidation;
 
   /**
    * @property showValidationMessages
@@ -709,7 +734,8 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  showValidationMessages: and('showValidation', 'hasValidationMessages'),
+  @and('showValidation', 'hasValidationMessages')
+  showValidationMessages;
 
   /**
    * Event or list of events which enable form validation markup rendering.
@@ -720,7 +746,7 @@ export default FormGroup.extend({
    * @default ['focusout']
    * @public
    */
-  showValidationOn: null,
+  showValidationOn = null;
 
   /**
    * @property _showValidationOn
@@ -728,7 +754,8 @@ export default FormGroup.extend({
    * @readonly
    * @private
    */
-  _showValidationOn: computed('showValidationOn.[]', function() {
+  @computed('showValidationOn.[]')
+  get _showValidationOn() {
     let showValidationOn = this.get('showValidationOn');
 
     assert('showValidationOn must be a String or an Array', isArray(showValidationOn) || typeOf(showValidationOn) === 'string');
@@ -742,7 +769,7 @@ export default FormGroup.extend({
       return [showValidationOn.toLowerCase()];
     }
     return [];
-  }),
+  }
 
   /**
    * @method showValidationOnHandler
@@ -768,7 +795,7 @@ export default FormGroup.extend({
     }
 
     this.set('showOwnValidation', true);
-  },
+  }
 
   /**
    * Controls if validation should be shown for specified event targets.
@@ -795,7 +822,18 @@ export default FormGroup.extend({
    * @type string
    * @private
    */
-  validation: computed('hasCustomError', 'hasErrors', 'hasCustomWarning', 'hasWarnings', 'hasValidator', 'showValidation', 'showModelValidation', 'isValidating', 'disabled', function() {
+  @computed(
+    'hasCustomError',
+    'hasErrors',
+    'hasCustomWarning',
+    'hasWarnings',
+    'hasValidator',
+    'showValidation',
+    'showModelValidation',
+    'isValidating',
+    'disabled'
+  )
+  get validation() {
     if (!this.get('showValidation') || !this.get('hasValidator') || this.get('isValidating') || this.get('disabled')) {
       return null;
     } else if (this.get('showModelValidation')) {
@@ -805,7 +843,7 @@ export default FormGroup.extend({
       /* If there are custom errors or warnings these should always be shown */
       return this.get('hasCustomError') ? 'error' : 'warning';
     }
-  }),
+  }
 
   /**
    * True for text field `controlType`s
@@ -815,7 +853,8 @@ export default FormGroup.extend({
    * @readonly
    * @public
    */
-  useIcons: equal('controlComponent', 'bs-form/element/control/input'),
+  @equal('controlComponent', 'bs-form/element/control/input')
+  useIcons;
 
   /**
    * The form layout used for the markup generation (see http://getbootstrap.com/css/#forms):
@@ -831,7 +870,7 @@ export default FormGroup.extend({
    * @default 'vertical'
    * @public
    */
-  formLayout: 'vertical',
+  formLayout = 'vertical';
 
   /**
    * The Bootstrap grid class for form labels within a horizontal layout form. Defaults to the value of the same
@@ -841,7 +880,7 @@ export default FormGroup.extend({
    * @type string
    * @public
    */
-  horizontalLabelGridClass: null,
+  horizontalLabelGridClass = null;
 
   /**
    * ID for input field and the corresponding label's "for" attribute
@@ -850,9 +889,10 @@ export default FormGroup.extend({
    * @type string
    * @private
    */
-  formElementId: computed('elementId', function() {
+  @computed('elementId')
+  get formElementId() {
     return `${this.get('elementId')}-field`;
-  }),
+  }
 
   /**
    * ID of the helpText, used for aria-describedby attribute of the control element
@@ -861,23 +901,25 @@ export default FormGroup.extend({
    * @type string
    * @private
    */
-  ariaDescribedBy: computed('elementId', function() {
+  @computed('elementId')
+  get ariaDescribedBy() {
     return `${this.get('elementId')}-help`;
-  }),
+  }
 
   /**
    * @property formComponent
    * @type {String}
    * @private
    */
-  formComponent: 'bs-form',
+  formComponent = 'bs-form';
 
   /**
    * @property layoutComponent
    * @type {String}
    * @private
    */
-  layoutComponent: computed('formLayout', 'controlType', function() {
+  @computed('formLayout', 'controlType')
+  get layoutComponent() {
     const formComponent = this.get('formComponent');
     const formLayout = this.get('formLayout');
     const controlType = this.get('controlType');
@@ -887,14 +929,15 @@ export default FormGroup.extend({
     } else {
       return `${formComponent}/element/layout/${formLayout}`;
     }
-  }),
+  }
 
   /**
    * @property controlComponent
    * @type {String}
    * @private
    */
-  controlComponent: computed('controlType', function() {
+  @computed('controlType')
+  get controlComponent() {
     const formComponent = this.get('formComponent');
     const controlType = this.get('controlType');
     const componentName = `${formComponent}/element/control/${controlType}`;
@@ -904,35 +947,35 @@ export default FormGroup.extend({
     }
 
     return `${formComponent}/element/control/input`;
-  }),
+  }
 
   /**
    * @property errorsComponent
    * @type {String}
    * @private
    */
-  errorsComponent: 'bs-form/element/errors',
+  errorsComponent = 'bs-form/element/errors';
 
   /**
    * @property feedbackIconComponent
    * @type {String}
    * @private
    */
-  feedbackIconComponent: 'bs-form/element/feedback-icon',
+  feedbackIconComponent = 'bs-form/element/feedback-icon';
 
   /**
    * @property labelComponent
    * @type {String}
    * @private
    */
-  labelComponent: 'bs-form/element/label',
+  labelComponent = 'bs-form/element/label';
 
   /**
    * @property helpTextComponent
    * @type {String}
    * @private
    */
-  helpTextComponent: 'bs-form/element/help-text',
+  helpTextComponent = 'bs-form/element/help-text';
 
   /**
    * Setup validation properties. This method acts as a hook for external validation
@@ -942,7 +985,7 @@ export default FormGroup.extend({
    * @private
    */
   setupValidations() {
-  },
+  }
 
   /**
    * Listen for focusOut events from the control element to automatically set `showOwnValidation` to true to enable
@@ -953,7 +996,7 @@ export default FormGroup.extend({
    */
   focusOut(event) {
     this.showValidationOnHandler(event);
-  },
+  }
 
   /**
    * Listen for change events from the control element to automatically set `showOwnValidation` to true to enable
@@ -964,7 +1007,7 @@ export default FormGroup.extend({
    */
   change(event) {
     this.showValidationOnHandler(event);
-  },
+  }
 
   /**
    * Listen for input events from the control element to automatically set `showOwnValidation` to true to enable
@@ -975,7 +1018,7 @@ export default FormGroup.extend({
    */
   input(event) {
     this.showValidationOnHandler(event);
-  },
+  }
 
   /**
    * The action is called whenever the input value is changed, e.g. by typing text
@@ -986,7 +1029,7 @@ export default FormGroup.extend({
    * @param {String} property The value of `property`
    * @public
    */
-  onChange() {},
+  onChange() {}
 
   /**
    * Private duplicate of onChange event used for internal state handling between form and it's elements.
@@ -994,10 +1037,10 @@ export default FormGroup.extend({
    * @event _onChange
    * @private
    */
-  _onChange() {},
+  _onChange() {}
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     if (this.get('showValidationOn') === null) {
       this.set('showValidationOn', ['focusOut']);
     }
@@ -1006,7 +1049,7 @@ export default FormGroup.extend({
       defineProperty(this, 'value', alias(`model.${this.get('property')}`));
       this.setupValidations();
     }
-  },
+  }
 
   /*
    * adjust feedback icon position
@@ -1016,7 +1059,8 @@ export default FormGroup.extend({
    *  with an add-on on the right. [...] For input groups, adjust the right
    *  value to an appropriate pixel value depending on the width of your addon.
    */
-  adjustFeedbackIcons: observer('hasFeedback', 'formLayout', function() {
+  @observes('hasFeedback', 'formLayout')
+  adjustFeedbackIcons() {
     scheduleOnce('afterRender', () => {
       let el = this.get('element');
       let feedbackIcon;
@@ -1048,18 +1092,17 @@ export default FormGroup.extend({
         feedbackIcon.style.right = `${adjustedPosition}px`;
       }
     });
-  }),
+  }
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
     this.adjustFeedbackIcons();
-  },
-
-  actions: {
-    change(value) {
-      let { onChange, model, property, _onChange } = this.getProperties('onChange', 'model', 'property', '_onChange');
-      onChange(value, model, property);
-      _onChange();
-    }
   }
-});
+
+  @action
+  doChange(value) {
+    let { onChange, model, property, _onChange } = this.getProperties('onChange', 'model', 'property', '_onChange');
+    onChange(value, model, property);
+    _onChange();
+  }
+}

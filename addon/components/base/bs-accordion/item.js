@@ -1,6 +1,8 @@
-import { oneWay, not } from '@ember/object/computed';
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import { computed } from '@ember/object';
+import { not, oneWay } from '@ember/object/computed';
+import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
 
 /**
@@ -13,101 +15,98 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
+@classic
+@templateLayout(layout)
+@classNameBindings('disabled', 'typeClass')
+export default class Item extends Component {
+ /**
+  * The title of the accordion item, displayed as a .panel-title element
+  *
+  * @property title
+  * @type string
+  * @public
+  */
+ title = null;
 
-  /**
-   * Add additional binding to mark the entire component area disabled
-   */
-  classNameBindings: ['disabled', 'typeClass'],
+ /**
+  * The value of the accordion item, which is used as the value of the `selected` property of the parent [Components.Accordion](Components.Accordion.html) component
+  *
+  * @property value
+  * @public
+  */
+ @oneWay('elementId')
+ value;
 
-  /**
-   * The title of the accordion item, displayed as a .panel-title element
-   *
-   * @property title
-   * @type string
-   * @public
-   */
-  title: null,
+ /**
+  * @property selected
+  * @private
+  */
+ selected = null;
 
-  /**
-   * The value of the accordion item, which is used as the value of the `selected` property of the parent [Components.Accordion](Components.Accordion.html) component
-   *
-   * @property value
-   * @public
-   */
-  value: oneWay('elementId'),
+ /**
+  * @property titleComponent
+  * @type {String}
+  * @private
+  */
+ titleComponent = 'bs-accordion/item/title';
 
-  /**
-   * @property selected
-   * @private
-   */
-  selected: null,
+ /**
+  * @property bodyComponent
+  * @type {String}
+  * @private
+  */
+ bodyComponent = 'bs-accordion/item/body';
 
-  /**
-   * @property titleComponent
-   * @type {String}
-   * @private
-   */
-  titleComponent: 'bs-accordion/item/title',
+ /**
+  * @property collapsed
+  * @type boolean
+  * @readonly
+  * @private
+  */
+ @(computed('value', 'selected').readOnly())
+ get collapsed() {
+   return this.get('value') !== this.get('selected');
+ }
 
-  /**
-   * @property bodyComponent
-   * @type {String}
-   * @private
-   */
-  bodyComponent: 'bs-accordion/item/body',
+ /**
+  * @property active
+  * @type boolean
+  * @readonly
+  * @private
+  */
+ @not('collapsed')
+ active;
 
-  /**
-   * @property collapsed
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  collapsed: computed('value', 'selected', function() {
-    return this.get('value') !== this.get('selected');
-  }).readOnly(),
+ /**
+  * @property disabled
+  * @type boolean
+  * @public
+  */
+ disabled = false;
 
-  /**
-   * @property active
-   * @type boolean
-   * @readonly
-   * @private
-   */
-  active: not('collapsed'),
+ /**
+  * Property for type styling
+  *
+  * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes)
+  *
+  * @property type
+  * @type String
+  * @default 'default'
+  * @public
+  */
+ type = 'default';
 
-  /**
-   * @property disabled
-   * @type boolean
-   * @public
-   */
-  disabled: false,
+ /**
+  * Reference to the parent `Components.Accordion` class.
+  *
+  * @property accordion
+  * @private
+  */
+ accordion = null;
 
-
-  /**
-   * Property for type styling
-   *
-   * For the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/navbar/#color-schemes)
-   *
-   * @property type
-   * @type String
-   * @default 'default'
-   * @public
-   */
-  type: 'default',
-
-  /**
-   * Reference to the parent `Components.Accordion` class.
-   *
-   * @property accordion
-   * @private
-   */
-  accordion: null,
-
-  /**
-   * @event onClick
-   * @public
-   */
-  onClick() {}
-
-});
+ /**
+  * @event onClick
+  * @public
+  */
+ onClick() {}
+}

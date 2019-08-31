@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { classNames, tagName, layout as templateLayout } from '@ember-decorators/component';
 import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/footer';
@@ -11,78 +13,78 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/footer';
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  tagName: 'form',
-  classNames: ['modal-footer'],
+@classic
+@templateLayout(layout)
+@tagName('form')
+@classNames('modal-footer')
+export default class Footer extends Component {
+ /**
+  * The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block
+  * template.
+  *
+  * @property closeTitle
+  * @type string
+  * @default 'Ok'
+  * @public
+  */
+ closeTitle = 'Ok';
 
-  /**
-   * The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block
-   * template.
-   *
-   * @property closeTitle
-   * @type string
-   * @default 'Ok'
-   * @public
-   */
-  closeTitle: 'Ok',
+ /**
+  * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null or if you provide
+  * your own block template.
+  *
+  * @property submitTitle
+  * @type string
+  * @default null
+  * @public
+  */
 
-  /**
-   * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null or if you provide
-   * your own block template.
-   *
-   * @property submitTitle
-   * @type string
-   * @default null
-   * @public
-   */
+ @notEmpty('submitTitle')
+ hasSubmitButton;
 
-  hasSubmitButton: notEmpty('submitTitle'),
+ /**
+  * Set to true to disable the submit button. If you bind this to some property that indicates if submitting is allowed
+  * (form validation for example) this can be used to prevent the user from pressing the submit button.
+  *
+  * @property submitDisabled
+  * @type boolean
+  * @default false
+  * @public
+  */
+ submitDisabled = false;
 
-  /**
-   * Set to true to disable the submit button. If you bind this to some property that indicates if submitting is allowed
-   * (form validation for example) this can be used to prevent the user from pressing the submit button.
-   *
-   * @property submitDisabled
-   * @type boolean
-   * @default false
-   * @public
-   */
-  submitDisabled: false,
+ /**
+  * The type of the submit button (primary button).
+  *
+  * @property submitButtonType
+  * @type string
+  * @default 'primary'
+  * @public
+  */
+ submitButtonType = 'primary';
 
-  /**
-   * The type of the submit button (primary button).
-   *
-   * @property submitButtonType
-   * @type string
-   * @default 'primary'
-   * @public
-   */
-  submitButtonType: 'primary',
+ /**
+  * @property buttonComponent
+  * @type {String}
+  * @private
+  */
+ buttonComponent = 'bs-button';
 
-  /**
-   * @property buttonComponent
-   * @type {String}
-   * @private
-   */
-  buttonComponent: 'bs-button',
+ /**
+  * The action to send to the parent modal component when the modal footer's form is submitted
+  *
+  * @event onSubmit
+  * @public
+  */
 
-  /**
-   * The action to send to the parent modal component when the modal footer's form is submitted
-   *
-   * @event onSubmit
-   * @public
-   */
+ /**
+  * @event onClose
+  * @public
+  */
 
-  /**
-   * @event onClose
-   * @public
-   */
-
-  submit(e) {
-    e.preventDefault();
-    // send to parent bs-modal component
-    this.get('onSubmit')();
-  }
-
-});
+ submit(e) {
+   e.preventDefault();
+   // send to parent bs-modal component
+   this.get('onSubmit')();
+ }
+}

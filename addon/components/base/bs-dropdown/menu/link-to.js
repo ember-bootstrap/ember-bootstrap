@@ -1,3 +1,4 @@
+import classic from 'ember-classic-decorator';
 import LinkComponent from '@ember/routing/link-component';
 
 /**
@@ -9,5 +10,5 @@ import LinkComponent from '@ember/routing/link-component';
  @extends Ember.LinkComponent
  @public
  */
-export default LinkComponent.extend({
-});
+@classic
+export default class LinkTo extends LinkComponent {}

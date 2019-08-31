@@ -1,3 +1,4 @@
+import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { isArray } from '@ember/array';
 import Button from 'ember-bootstrap/components/bs-button';
@@ -10,20 +11,20 @@ import Button from 'ember-bootstrap/components/bs-button';
  @extends Components.Button
  @private
  */
-export default Button.extend({
-
+@classic
+export default class ButtonGroupButton extends Button {
   /**
    * @property groupValue
    * @private
    */
-  groupValue: null,
+  groupValue = null;
 
   /**
    * @property buttonGroupType
    * @type string
    * @private
    */
-  buttonGroupType: false,
+  buttonGroupType = false;
 
   /**
    * @property active
@@ -31,7 +32,8 @@ export default Button.extend({
    * @readonly
    * @private
    */
-  active: computed('buttonGroupType', 'groupValue.[]', 'value', function() {
+  @(computed('buttonGroupType', 'groupValue.[]', 'value').readOnly())
+  get active() {
     let { value, groupValue } = this.getProperties('value', 'groupValue');
     if (this.get('buttonGroupType') === 'radio') {
       return value === groupValue;
@@ -41,6 +43,5 @@ export default Button.extend({
       }
     }
     return false;
-  }).readOnly()
-
-});
+  }
+}

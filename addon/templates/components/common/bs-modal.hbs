@@ -2,7 +2,7 @@
   {{#maybe-in-element this.destinationElement this._renderInPlace}}
     {{#let (component this.dialogComponent) as |Dialog|}}
       <Dialog
-        @onClose={{action "close"}}
+        @onClose={{this.close}}
         @fade={{this.fade}}
         @showModal={{this.showModal}}
         @keyboard={{this.keyboard}}
@@ -18,11 +18,11 @@
       >
         {{yield
           (hash
-            header=(component this.headerComponent onClose=(action "close"))
+            header=(component this.headerComponent onClose=this.close)
             body=(component this.bodyComponent)
-            footer=(component this.footerComponent onClose=(action "close") onSubmit=(action "submit"))
-            close=(action "close")
-            submit=(action "submit")
+            footer=(component this.footerComponent onClose=this.close onSubmit=this.doSubmit)
+            close=this.close
+            submit=this.doSubmit
           )
         }}
       </Dialog>

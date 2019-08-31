@@ -1,5 +1,7 @@
+import classic from 'ember-classic-decorator';
+import { classNames } from '@ember-decorators/component';
 import NavLinkTo from 'ember-bootstrap/components/base/bs-nav/link-to';
 
-export default NavLinkTo.extend({
-  classNames: ['nav-link']
-});
+@classic
+@classNames('nav-link')
+export default class LinkTo extends NavLinkTo {}

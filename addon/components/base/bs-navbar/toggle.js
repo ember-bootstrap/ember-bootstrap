@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { classNameBindings, tagName, layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
 
@@ -15,22 +17,21 @@ import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
  * @extends Ember.Component
  * @public
  */
-export default Component.extend({
-  layout,
-  tagName: 'button',
+@classic
+@templateLayout(layout)
+@tagName('button')
+@classNameBindings('collapsed')
+export default class Toggle extends Component {
+ collapsed = true;
 
-  classNameBindings: ['collapsed'],
-  collapsed: true,
+ /**
+  * @event onClick
+  * @public
+  */
+ onClick() {
+ }
 
-  /**
-   * @event onClick
-   * @public
-   */
-  onClick() {
-  },
-
-  click() {
-    this.onClick();
-  }
-
-});
+ click() {
+   this.onClick();
+ }
+}

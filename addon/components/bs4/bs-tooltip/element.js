@@ -1,8 +1,11 @@
+import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import TooltipElement from 'ember-bootstrap/components/base/bs-tooltip/element';
 
-export default TooltipElement.extend({
-  popperClassNames: computed('fade', 'actualPlacement', 'showHelp', function() {
+@classic
+export default class Element extends TooltipElement {
+  @computed('fade', 'actualPlacement', 'showHelp')
+  get popperClassNames() {
     let classes = ['tooltip', `bs-tooltip-${this.get('actualPlacement')}`];
     if (this.get('fade')) {
       classes.push('fade');
@@ -11,5 +14,5 @@ export default TooltipElement.extend({
       classes.push('show');
     }
     return classes;
-  })
-});
+  }
+}

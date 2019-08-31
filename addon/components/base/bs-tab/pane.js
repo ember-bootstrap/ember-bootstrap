@@ -1,5 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { classNames, classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { observes } from '@ember-decorators/object';
+import { computed } from '@ember/object';
 import Component from '@ember/component';
-import { computed, observer } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-tab/pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
@@ -16,17 +19,18 @@ import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
  @uses Mixins.ComponentChild
  @public
  */
-export default Component.extend(ComponentChild, {
-  layout,
-  classNameBindings: ['active', 'usesTransition:fade'],
-  classNames: ['tab-pane'],
-  ariaRole: 'tabpanel',
+@classic
+@templateLayout(layout)
+@classNameBindings('active', 'usesTransition:fade')
+@classNames('tab-pane')
+export default class Pane extends Component.extend(ComponentChild) {
+  ariaRole = 'tabpanel';
 
   /**
    * @property activeId
    * @private
    */
-  activeId: null,
+  activeId = null;
 
   /**
    * True if this pane is active (visible)
@@ -36,9 +40,10 @@ export default Component.extend(ComponentChild, {
    * @readonly
    * @private
    */
-  isActive: computed('activeId', 'elementId', function() {
+  @(computed('activeId', 'elementId').readOnly())
+  get isActive() {
     return this.get('activeId') === this.get('elementId');
-  }).readOnly(),
+  }
 
   /**
    * Used to apply Bootstrap's "active" class
@@ -48,7 +53,7 @@ export default Component.extend(ComponentChild, {
    * @default false
    * @private
    */
-  active: false,
+  active = false;
 
   /**
    * Used to trigger the Bootstrap visibility classes.
@@ -58,7 +63,7 @@ export default Component.extend(ComponentChild, {
    * @default false
    * @private
    */
-  showContent: false,
+  showContent = false;
 
   /**
    * The title for this tab pane. This is used by the `bs-tab` component to automatically generate
@@ -70,7 +75,7 @@ export default Component.extend(ComponentChild, {
    * @default null
    * @public
    */
-  title: null,
+  title = null;
 
   /**
    * An optional group title used by the `bs-tab` component to group all panes with the same group title
@@ -82,7 +87,7 @@ export default Component.extend(ComponentChild, {
    * @default null
    * @public
    */
-  groupTitle: null,
+  groupTitle = null;
 
   /**
    * Use fade animation when switching tabs.
@@ -91,7 +96,7 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  fade: true,
+  fade = true;
 
   /**
    * The duration of the fade out animation
@@ -101,7 +106,7 @@ export default Component.extend(ComponentChild, {
    * @default 150
    * @private
    */
-  fadeDuration: 150,
+  fadeDuration = 150;
 
   /**
    * Use CSS transitions?
@@ -111,7 +116,8 @@ export default Component.extend(ComponentChild, {
    * @readonly
    * @private
    */
-  usesTransition: usesTransition('fade'),
+  @usesTransition('fade')
+  usesTransition;
 
   /**
    * Show the pane
@@ -133,7 +139,7 @@ export default Component.extend(ComponentChild, {
     } else {
       this.set('active', true);
     }
-  },
+  }
 
   /**
    * Hide the pane
@@ -153,23 +159,23 @@ export default Component.extend(ComponentChild, {
     } else {
       this.set('active', false);
     }
-  },
+  }
 
-  _showHide: observer('isActive', function() {
+  @observes('isActive')
+  _showHide() {
     if (this.get('isActive')) {
       this.show();
     } else {
       this.hide();
     }
-  }),
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     scheduleOnce('afterRender', this, function() {
       // isActive comes from parent component, so only available after render...
       this.set('active', this.get('isActive'));
       this.set('showContent', this.get('isActive') && this.get('fade'));
     });
   }
-
-});
+}
