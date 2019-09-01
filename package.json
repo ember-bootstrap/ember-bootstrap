@@ -107,6 +107,7 @@
     "ember-cli-htmlbars": "^3.0.1",
     "ember-cli-version-checker": "^3.0.0",
     "ember-concurrency": "^1.0.0",
+    "ember-decorators-polyfill": "^1.0.6",
     "ember-let-polyfill": "^0.1.0",
     "ember-maybe-in-element": "^0.2.0",
     "ember-named-arguments-polyfill": "^1.0.0",
