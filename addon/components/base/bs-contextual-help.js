@@ -31,7 +31,7 @@ function noop() {}
 */
 @classic
 @tagName('')
-class component extends Component {
+export default class BsContextualHelp extends Component {
   /**
    * @property title
    * @type string
@@ -335,6 +335,18 @@ class component extends Component {
    */
   @usesTransition('fade')
   usesTransition;
+
+  /**
+   * The DOM element of the overlay element.
+   *
+   * @property overlayElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  get overlayElement() {
+    return document.getElementById(this.get('overlayId'));
+  }
 
   /**
    * This action is called immediately when the tooltip/popover is about to be shown.
@@ -679,22 +691,3 @@ class component extends Component {
     }
   }
 }
-
-Object.defineProperties(component.prototype, {
-
-  /**
-   * The DOM element of the overlay element.
-   *
-   * @property overlayElement
-   * @type object
-   * @readonly
-   * @private
-   */
-  overlayElement: {
-    get() {
-      return document.getElementById(this.get('overlayId'));
-    }
-  }
-});
-
-export default component;

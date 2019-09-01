@@ -57,7 +57,7 @@ import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
 @classic
 @templateLayout(layout)
 @tagName('')
-class component extends Component {
+export default class BsModal extends Component {
   /**
    * Visibility of the modal. Toggle to show/hide with CSS transitions.
    *
@@ -302,6 +302,30 @@ class component extends Component {
    */
   @usesTransition('fade')
   usesTransition;
+
+  /**
+   * The DOM element of the `.modal` element.
+   *
+   * @property modalElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  get modalElement() {
+    return document.getElementById(this.get('modalId'));
+  }
+
+  /**
+   * The DOM element of the backdrop element.
+   *
+   * @property backdropElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  get backdropElement() {
+    return document.getElementById(this.get('backdropId'));
+  }
 
   /**
    * The action to be sent when the modal footer's submit button (if present) is pressed.
@@ -691,36 +715,3 @@ class component extends Component {
     });
   }
 }
-
-Object.defineProperties(component.prototype, {
-
-  /**
-   * The DOM element of the `.modal` element.
-   *
-   * @property modalElement
-   * @type object
-   * @readonly
-   * @private
-   */
-  modalElement: {
-    get() {
-      return document.getElementById(this.get('modalId'));
-    }
-  },
-
-  /**
-   * The DOM element of the backdrop element.
-   *
-   * @property backdropElement
-   * @type object
-   * @readonly
-   * @private
-   */
-  backdropElement: {
-    get() {
-      return document.getElementById(this.get('backdropId'));
-    }
-  }
-});
-
-export default component;

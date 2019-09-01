@@ -163,7 +163,7 @@ s*/
 @classic
 @templateLayout(layout)
 @classNameBindings('containerClass')
-class component extends Component {
+export default class BsDropdown extends Component {
   /**
    * This property reflects the state of the dropdown, whether it is open or closed.
    *
@@ -237,6 +237,16 @@ class component extends Component {
    * @private
    */
   toggle = null;
+
+  /**
+   * The DOM element of the `.dropdown-menu` element
+   * @type object
+   * @readonly
+   * @private
+   */
+  get menuElement() {
+    return document.getElementById(`${this.get('elementId')}__menu`);
+  }
 
   /**
    * Action is called when dropdown is about to be shown
@@ -337,20 +347,3 @@ class component extends Component {
    */
   menuComponent = 'bs-dropdown/menu';
 }
-
-Object.defineProperties(component.prototype, {
-
-  /**
-   * The DOM element of the `.dropdown-menu` element
-   * @type object
-   * @readonly
-   * @private
-   */
-  menuElement: {
-    get() {
-      return document.getElementById(`${this.get('elementId')}__menu`);
-    }
-  }
-});
-
-export default component;
