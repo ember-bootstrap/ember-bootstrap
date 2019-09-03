@@ -15,16 +15,16 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/body';
 @templateLayout(layout)
 @tagName('')
 export default class AccordionItemBody extends Component {
- /**
-  * @property collapsed
-  * @type boolean
-  * @public
-  */
+  /**
+   * @property collapsed
+   * @type boolean
+   * @public
+   */
 
- /**
-  * @property collapseComponent
-  * @type {String}
-  * @private
-  */
- collapseComponent = 'bs-collapse';
+  /**
+   * @property collapseComponent
+   * @type {String}
+   * @private
+   */
+  collapseComponent = 'bs-collapse';
 }

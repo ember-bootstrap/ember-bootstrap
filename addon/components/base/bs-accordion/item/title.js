@@ -15,30 +15,31 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/title';
 @templateLayout(layout)
 @classNameBindings('collapsed:collapsed:expanded')
 export default class AccordionItemTitle extends Component {
- ariaRole = 'tab';
+  ariaRole = 'tab';
 
- /**
-  * @property collapsed
-  * @type boolean
-  * @public
-  */
+  /**
+   * @property collapsed
+   * @type boolean
+   * @public
+   */
 
- /**
-  * @property disabled
-  * @type boolean
-  * @private
-  */
+  /**
+   * @property disabled
+   * @type boolean
+   * @private
+   */
 
- /**
-  * @event onClick
-  * @public
-  */
- onClick() {}
+  /**
+   * @event onClick
+   * @public
+   */
+  onClick() {
+  }
 
- click(e) {
-   e.preventDefault();
-   if (!this.get('disabled')) {
-     this.get('onClick')();
-   }
- }
+  click(e) {
+    e.preventDefault();
+    if (!this.get('disabled')) {
+      this.get('onClick')();
+    }
+  }
 }

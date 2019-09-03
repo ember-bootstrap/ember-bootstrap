@@ -9,23 +9,24 @@ import BsNavLinkToComponent from 'ember-bootstrap/components/bs-nav/link-to';
  * @public
  */
 export default class NavbarLinkTo extends BsNavLinkToComponent {
- /**
-  * @property collapseNavbar
-  * @type {Boolean}
-  * @default true
-  * @public
-  */
- collapseNavbar = true;
+  /**
+   * @property collapseNavbar
+   * @type {Boolean}
+   * @default true
+   * @public
+   */
+  collapseNavbar = true;
 
- /**
-  * @event onCollapse
-  * @private
-  */
- onCollapse() {}
+  /**
+   * @event onCollapse
+   * @private
+   */
+  onCollapse() {
+  }
 
- click() {
-   if (this.get('collapseNavbar')) {
-     this.onCollapse();
-   }
- }
+  click() {
+    if (this.get('collapseNavbar')) {
+      this.onCollapse();
+    }
+  }
 }

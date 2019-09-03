@@ -13,17 +13,17 @@ import layout from 'ember-bootstrap/templates/components/bs-popover/element';
  */
 @templateLayout(layout)
 export default class PopoverElement extends ContextualHelpElement {
- /**
-  * @property title
-  * @type string
-  * @public
-  */
+  /**
+   * @property title
+   * @type string
+   * @public
+   */
 
- /**
-  * @property hasTitle
-  * @type boolean
-  * @private
-  */
- @notEmpty('title')
- hasTitle;
+  /**
+   * @property hasTitle
+   * @type boolean
+   * @private
+   */
+  @notEmpty('title')
+  hasTitle;
 }

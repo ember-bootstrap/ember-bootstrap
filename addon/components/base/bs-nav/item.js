@@ -86,7 +86,8 @@ export default class NavItem extends Component.extend(ComponentParent) {
    * @event onClick
    * @public
    */
-  onClick() {}
+  onClick() {
+  }
 
   click() {
     this.onClick();

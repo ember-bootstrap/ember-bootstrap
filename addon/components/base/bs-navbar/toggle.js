@@ -20,16 +20,16 @@ import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
 @tagName('button')
 @classNameBindings('collapsed')
 export default class NavbarToggle extends Component {
- collapsed = true;
+  collapsed = true;
 
- /**
-  * @event onClick
-  * @public
-  */
- onClick() {
- }
+  /**
+   * @event onClick
+   * @public
+   */
+  onClick() {
+  }
 
- click() {
-   this.onClick();
- }
+  click() {
+    this.onClick();
+  }
 }

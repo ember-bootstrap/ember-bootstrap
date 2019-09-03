@@ -14,16 +14,17 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/header/close';
 @classNames('close')
 @attributeBindings('type', 'aria-label')
 export default class ModalHeaderClose extends Component {
- 'aria-label' = 'Close';
- type = 'button';
+  'aria-label' = 'Close';
+  type = 'button';
 
- /**
-  * @event onClick
-  * @public
-  */
- onClick() {}
+  /**
+   * @event onClick
+   * @public
+   */
+  onClick() {
+  }
 
- click() {
-   this.get('onClick')();
- }
+  click() {
+    this.get('onClick')();
+  }
 }

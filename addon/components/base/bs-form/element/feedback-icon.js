@@ -12,17 +12,17 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/feedbac
 @templateLayout(layout)
 @tagName('')
 export default class FormElementFeedbackIcon extends Component {
- /**
-  * @property show
-  * @type {Boolean}
-  * @public
-  */
- show = false;
+  /**
+   * @property show
+   * @type {Boolean}
+   * @public
+   */
+  show = false;
 
- /**
-  * @property iconName
-  * @type {String}
-  * @public
-  */
- iconName = null;
+  /**
+   * @property iconName
+   * @type {String}
+   * @public
+   */
+  iconName = null;
 }
