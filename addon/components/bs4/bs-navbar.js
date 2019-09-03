@@ -7,7 +7,7 @@ import { isBlank } from '@ember/utils';
 export default class Navbar extends BaseNavbar {
   @computed('appliedType')
   get type() {
-    return this.get('appliedType');
+    return this.get('appliedType') || 'light';
   }
 
   set type(value) {
@@ -15,8 +15,6 @@ export default class Navbar extends BaseNavbar {
     this.set('appliedType', newValue);
     return newValue;
   }
-
-  appliedType = 'light';
 
   /**
    * Defines the responsive toggle breakpoint size. Options are the standard
@@ -59,11 +57,6 @@ export default class Navbar extends BaseNavbar {
     return `bg-${backgroundColor}`;
   }
 
-  _validPositions = null;
+  _validPositions = ['fixed-top', 'fixed-bottom', 'sticky-top'];
   _positionPrefix = '';
-
-  init() {
-    super.init(...arguments);
-    this.set('_validPositions', ['fixed-top', 'fixed-bottom', 'sticky-top']);
-  }
 }

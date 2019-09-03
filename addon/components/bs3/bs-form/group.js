@@ -5,6 +5,7 @@ import BaseFormGroup from 'ember-bootstrap/components/base/bs-form/group';
 import Config from 'ember-bootstrap/config';
 import { isBlank } from '@ember/utils';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 @classNames('form-group')
 @classNameBindings('validationClass', 'hasFeedback', 'sizeClass')
@@ -18,6 +19,7 @@ export default class FormGroup extends BaseFormGroup {
   * @default true
   * @public
   */
+ @defaultValue
  useIcons = true;
 
  /**
