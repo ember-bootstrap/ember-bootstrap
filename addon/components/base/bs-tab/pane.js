@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { classNames, classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { classNameBindings, classNames, layout as templateLayout } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
@@ -19,11 +18,10 @@ import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
  @uses Mixins.ComponentChild
  @public
  */
-@classic
 @templateLayout(layout)
 @classNameBindings('active', 'usesTransition:fade')
 @classNames('tab-pane')
-export default class Pane extends Component.extend(ComponentChild) {
+export default class TabPane extends Component.extend(ComponentChild) {
   ariaRole = 'tabpanel';
 
   /**

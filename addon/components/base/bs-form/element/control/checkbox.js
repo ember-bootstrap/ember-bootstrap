@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { attributeBindings, tagName } from '@ember-decorators/component';
 import Control from '../control';
 import { baseAttributes } from './input';
@@ -10,10 +9,9 @@ import { baseAttributes } from './input';
  @extends Components.FormElementControl
  @private
  */
-@classic
 @tagName('input')
 @attributeBindings(...baseAttributes, 'value:checked', 'type')
-export default class Checkbox extends Control {
+export default class FormElementControlCheckbox extends Control {
   /**
    * @property type
    * @type {String}

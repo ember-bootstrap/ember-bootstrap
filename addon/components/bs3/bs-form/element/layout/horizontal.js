@@ -1,10 +1,8 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
-import FormElementLayoutHorizontal from 'ember-bootstrap/components/base/bs-form/element/layout/horizontal';
+import BaseFormElementLayoutHorizontal from 'ember-bootstrap/components/base/bs-form/element/layout/horizontal';
 import { isBlank } from '@ember/utils';
 
-@classic
-export default class Horizontal extends FormElementLayoutHorizontal {
+export default class FormElementLayoutHorizontal extends BaseFormElementLayoutHorizontal {
   /**
    * Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout
    * form, that have no label.

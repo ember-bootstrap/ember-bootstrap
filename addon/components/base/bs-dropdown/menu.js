@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { tagName, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown/menu';
@@ -16,10 +15,9 @@ import { getDestinationElement } from '../../../utils/dom';
  @extends Ember.Component
  @public
  */
-@classic
 @templateLayout(layout)
 @tagName('')
-export default class Menu extends Component {
+export default class DropdownMenu extends Component {
   /**
    * @property ariaRole
    * @default menu

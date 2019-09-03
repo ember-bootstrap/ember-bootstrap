@@ -1,8 +1,6 @@
-import classic from 'ember-classic-decorator';
-import Button from 'ember-bootstrap/components/base/bs-button';
+import BaseButton from 'ember-bootstrap/components/base/bs-button';
 
-@classic
-export default class BsButton extends Button {
+export default class Button extends BaseButton {
  type = 'secondary';
 
  /**

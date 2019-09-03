@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import LinkComponent from '@ember/routing/link-component';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 
@@ -12,5 +11,4 @@ import ComponentChild from 'ember-bootstrap/mixins/component-child';
  @uses Mixins.ComponentChild
  @public
  */
-@classic
-export default class LinkTo extends LinkComponent.extend(ComponentChild) {}
+export default class NavLinkTo extends LinkComponent.extend(ComponentChild) {}

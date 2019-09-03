@@ -1,12 +1,10 @@
-import classic from 'ember-classic-decorator';
 import { classNameBindings } from '@ember-decorators/component';
 import { computed } from '@ember/object';
-import Navbar from 'ember-bootstrap/components/base/bs-navbar';
+import BaseNavbar from 'ember-bootstrap/components/base/bs-navbar';
 import { isBlank } from '@ember/utils';
 
-@classic
 @classNameBindings('breakpointClass', 'backgroundClass')
-export default class BsNavbar extends Navbar {
+export default class Navbar extends BaseNavbar {
   @computed('appliedType')
   get type() {
     return this.get('appliedType');

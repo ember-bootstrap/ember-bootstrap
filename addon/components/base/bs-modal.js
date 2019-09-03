@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { tagName, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { action, computed } from '@ember/object';
 import { not } from '@ember/object/computed';
@@ -54,10 +53,9 @@ import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
   @extends Ember.Component
   @public
 */
-@classic
 @templateLayout(layout)
 @tagName('')
-export default class BsModal extends Component {
+export default class Modal extends Component {
   /**
    * Visibility of the modal. Toggle to show/hide with CSS transitions.
    *

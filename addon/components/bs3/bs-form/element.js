@@ -1,6 +1,6 @@
-import FormElement from 'ember-bootstrap/components/base/bs-form/element';
+import BaseFormElement from 'ember-bootstrap/components/base/bs-form/element';
 
-export default class BsFormElement extends FormElement {
+export default class FormElement extends BaseFormElement {
   doNotShowValidationForEventTargets = [
     '.input-group-addon',
     '.input-group-btn',

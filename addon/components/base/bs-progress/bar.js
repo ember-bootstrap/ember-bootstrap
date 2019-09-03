@@ -1,5 +1,9 @@
-import classic from 'ember-classic-decorator';
-import { classNames, attributeBindings, classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import {
+  attributeBindings,
+  classNameBindings,
+  classNames,
+  layout as templateLayout
+} from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import Component from '@ember/component';
@@ -14,12 +18,11 @@ import layout from 'ember-bootstrap/templates/components/bs-progress/bar';
  @extends Ember.Component
  @public
  */
-@classic
 @templateLayout(layout)
 @classNames('progress-bar')
 @classNameBindings('progressBarStriped', 'typeClass')
 @attributeBindings('ariaValuenow', 'ariaValuemin', 'ariaValuemax')
-export default class Bar extends Component {
+export default class ProgressBar extends Component {
  /**
   * The lower limit of the value range
   *

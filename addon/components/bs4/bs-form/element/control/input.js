@@ -1,12 +1,10 @@
-import classic from 'ember-classic-decorator';
 import { classNameBindings } from '@ember-decorators/component';
-import FormElementControlInput from 'ember-bootstrap/components/base/bs-form/element/control/input';
+import BaseFormElementControlInput from 'ember-bootstrap/components/base/bs-form/element/control/input';
 import formValidationClass from 'ember-bootstrap/utils/cp/form-validation-class';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 
-@classic
 @classNameBindings('formValidationClass', 'sizeClass')
-export default class Input extends FormElementControlInput {
+export default class FormElementControlInput extends BaseFormElementControlInput {
  @formValidationClass('validationType')
  formValidationClass;
 

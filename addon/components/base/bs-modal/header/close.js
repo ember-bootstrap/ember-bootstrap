@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { classNames, attributeBindings, tagName, layout as templateLayout } from '@ember-decorators/component';
+import { attributeBindings, classNames, layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/header/close';
 
@@ -10,12 +9,11 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/header/close';
  @extends Ember.Component
  @private
  */
-@classic
 @templateLayout(layout)
 @tagName('button')
 @classNames('close')
 @attributeBindings('type', 'aria-label')
-export default class Close extends Component {
+export default class ModalHeaderClose extends Component {
  'aria-label' = 'Close';
  type = 'button';
 

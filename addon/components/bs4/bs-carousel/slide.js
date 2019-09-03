@@ -1,8 +1,6 @@
-import classic from 'ember-classic-decorator';
-import { classNames, classNameBindings } from '@ember-decorators/component';
-import CarouselSlide from 'ember-bootstrap/components/base/bs-carousel/slide';
+import { classNameBindings, classNames } from '@ember-decorators/component';
+import BaseCarouselSlide from 'ember-bootstrap/components/base/bs-carousel/slide';
 
-@classic
 @classNameBindings(
   'left:carousel-item-left',
   'next:carousel-item-next',
@@ -10,4 +8,4 @@ import CarouselSlide from 'ember-bootstrap/components/base/bs-carousel/slide';
   'right:carousel-item-right'
 )
 @classNames('carousel-item')
-export default class Slide extends CarouselSlide {}
+export default class CarouselSlide extends BaseCarouselSlide {}

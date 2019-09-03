@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { classNames, classNameBindings, tagName, layout as templateLayout } from '@ember-decorators/component';
+import { classNameBindings, classNames, layout as templateLayout, tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { action, computed } from '@ember/object';
 import Component from '@ember/component';
@@ -99,12 +98,11 @@ import listenTo from 'ember-bootstrap/utils/cp/listen-to';
   @extends Ember.Component
   @public
 */
-@classic
 @templateLayout(layout)
 @tagName('nav')
 @classNames('navbar')
 @classNameBindings('positionClass', 'typeClass')
-export default class BsNavbar extends Component {
+export default class Navbar extends Component {
   /**
    * Manages the state for the responsive menu between the toggle and the content.
    *

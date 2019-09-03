@@ -1,8 +1,6 @@
-import classic from 'ember-classic-decorator';
-import Navbar from 'ember-bootstrap/components/base/bs-navbar';
+import BaseNavbar from 'ember-bootstrap/components/base/bs-navbar';
 
-@classic
-export default class BsNavbar extends Navbar {
+export default class Navbar extends BaseNavbar {
   _positionPrefix = 'navbar-';
 
   init() {

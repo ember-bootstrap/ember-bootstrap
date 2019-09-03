@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { layout as templateLayout } from '@ember-decorators/component';
 import { notEmpty } from '@ember/object/computed';
 import ContextualHelpElement from '../bs-contextual-help/element';
@@ -12,9 +11,8 @@ import layout from 'ember-bootstrap/templates/components/bs-popover/element';
  @extends Components.ContextualHelpElement
  @private
  */
-@classic
 @templateLayout(layout)
-export default class Element extends ContextualHelpElement {
+export default class PopoverElement extends ContextualHelpElement {
  /**
   * @property title
   * @type string

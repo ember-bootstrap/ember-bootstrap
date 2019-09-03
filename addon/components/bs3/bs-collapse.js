@@ -1,7 +1,5 @@
-import classic from 'ember-classic-decorator';
+import BaseCollapse from 'ember-bootstrap/components/base/bs-collapse';
 import { classNameBindings } from '@ember-decorators/component';
-import Collapse from 'ember-bootstrap/components/base/bs-collapse';
 
-@classic
 @classNameBindings('showContent:in')
-export default class BsCollapse extends Collapse {}
+export default class Collapse extends BaseCollapse {}

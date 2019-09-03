@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { not, oneWay } from '@ember/object/computed';
@@ -15,10 +14,9 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
  @extends Ember.Component
  @public
  */
-@classic
 @templateLayout(layout)
 @classNameBindings('disabled', 'typeClass')
-export default class Item extends Component {
+export default class AccordionItem extends Component {
  /**
   * The title of the accordion item, displayed as a .panel-title element
   *

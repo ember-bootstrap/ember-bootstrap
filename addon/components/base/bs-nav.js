@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { classNameBindings, classNames, layout as templateLayout, tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
@@ -81,12 +80,11 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
   @public
 
  */
-@classic
 @templateLayout(layout)
 @tagName('ul')
 @classNames('nav')
 @classNameBindings('typeClass', 'justified:nav-justified')
-export default class BsNav extends Component {
+export default class Nav extends Component {
   @computed('type')
   get typeClass() {
     let type = this.get('type');

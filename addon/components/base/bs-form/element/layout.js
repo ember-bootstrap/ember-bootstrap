@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 
@@ -9,9 +8,8 @@ import Component from '@ember/component';
  @extends Ember.Component
  @private
  */
-@classic
 @tagName('')
-export default class Layout extends Component {
+export default class FormElementLayout extends Component {
  /**
   * @property formElementId
   * @type {String}

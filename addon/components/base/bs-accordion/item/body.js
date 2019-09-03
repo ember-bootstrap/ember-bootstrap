@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { tagName, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/body';
 
@@ -8,15 +7,14 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/body';
 
  See [Components.Accordion](Components.Accordion.html) for examples.
 
- @class AccordionBody
+ @class AccordionItemBody
  @namespace Components
  @extends Ember.Component
  @public
  */
-@classic
 @templateLayout(layout)
 @tagName('')
-export default class Body extends Component {
+export default class AccordionItemBody extends Component {
  /**
   * @property collapsed
   * @type boolean

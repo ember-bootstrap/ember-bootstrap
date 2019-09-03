@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { layout as templateLayout } from '@ember-decorators/component';
 import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
@@ -26,9 +25,8 @@ import layout from 'ember-bootstrap/templates/components/bs-form/group';
   @extends Ember.Component
   @public
 */
-@classic
 @templateLayout(layout)
-export default class Group extends Component {
+export default class FormGroup extends Component {
   /**
    * @property classTypePrefix
    * @type String

@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { tagName, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/errors';
 
@@ -9,10 +8,9 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/errors'
  @extends Ember.Component
  @private
  */
-@classic
 @templateLayout(layout)
 @tagName('')
-export default class Errors extends Component {
+export default class FormElementErrors extends Component {
  /**
   * @property show
   * @type {Boolean}

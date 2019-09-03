@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { classNames, tagName, layout as templateLayout } from '@ember-decorators/component';
+import { classNames, layout as templateLayout, tagName } from '@ember-decorators/component';
 import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/footer';
@@ -13,11 +12,10 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/footer';
  @extends Ember.Component
  @public
  */
-@classic
 @templateLayout(layout)
 @tagName('form')
 @classNames('modal-footer')
-export default class Footer extends Component {
+export default class ModalFooter extends Component {
  /**
   * The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block
   * template.

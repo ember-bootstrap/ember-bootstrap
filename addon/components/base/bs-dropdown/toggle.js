@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { classNames, attributeBindings, tagName } from '@ember-decorators/component';
+import { attributeBindings, classNames, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import { schedule } from '@ember/runloop';
 
@@ -14,11 +13,10 @@ import { schedule } from '@ember/runloop';
  @extends Ember.Component
  @publicø
  */
-@classic
 @classNames('dropdown-toggle')
 @tagName('a')
 @attributeBindings('href')
-export default class Toggle extends Component {
+export default class DropdownToggle extends Component {
   ariaRole = 'button';
 
   /**

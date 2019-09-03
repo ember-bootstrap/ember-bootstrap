@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import Component from '@ember/component';
 
 /**
@@ -8,8 +7,7 @@ import Component from '@ember/component';
  @extends Ember.Component
  @private
  */
-@classic
-export default class Control extends Component {
+export default class FormElementControl extends Component {
  /**
   * @property value
   * @public

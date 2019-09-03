@@ -1,10 +1,7 @@
-import classic from 'ember-classic-decorator';
+import BaseForm from 'ember-bootstrap/components/base/bs-form';
 import { computed } from '@ember/object';
 
-import Form from 'ember-bootstrap/components/base/bs-form';
-
-@classic
-export default class BsForm extends Form {
+export default class Form extends BaseForm {
   @(computed('formLayout').readOnly())
   get layoutClass() {
     let layout = this.get('formLayout');

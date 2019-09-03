@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import Component from '@ember/component';
@@ -160,10 +159,9 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
   @extends Ember.Component
   @public
 s*/
-@classic
 @templateLayout(layout)
 @classNameBindings('containerClass')
-export default class BsDropdown extends Component {
+export default class Dropdown extends Component {
   /**
    * This property reflects the state of the dropdown, whether it is open or closed.
    *

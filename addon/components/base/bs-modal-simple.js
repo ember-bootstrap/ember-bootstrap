@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { layout as templateLayout } from '@ember-decorators/component';
 import Modal from 'ember-bootstrap/components/bs-modal';
 import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
@@ -78,9 +77,8 @@ import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
   @extends Components.Modal
   @public
 */
-@classic
 @templateLayout(layout)
-export default class BsModalSimple extends Modal {
+export default class ModalSimple extends Modal {
   /**
    * The title of the modal, visible in the modal header. Is ignored if `header` is false.
    *

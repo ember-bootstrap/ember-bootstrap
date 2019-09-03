@@ -1,7 +1,5 @@
-import classic from 'ember-classic-decorator';
+import BaseDropDown from 'ember-bootstrap/components/base/bs-dropdown';
 import { classNameBindings } from '@ember-decorators/component';
-import DropDown from 'ember-bootstrap/components/base/bs-dropdown';
 
-@classic
 @classNameBindings('isOpen:open')
-export default class BsDropdown extends DropDown {}
+export default class Dropdown extends BaseDropDown {}

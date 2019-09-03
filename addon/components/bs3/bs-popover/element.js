@@ -1,9 +1,7 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
-import PopoverElement from 'ember-bootstrap/components/base/bs-popover/element';
+import BasePopoverElement from 'ember-bootstrap/components/base/bs-popover/element';
 
-@classic
-export default class Element extends PopoverElement {
+export default class PopoverElement extends BasePopoverElement {
   @computed('fade', 'actualPlacement', 'showHelp')
   get popperClassNames() {
     let classes = ['popover', 'ember-bootstrap-popover', this.get('actualPlacement')];

@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { classNameBindings, tagName, layout as templateLayout } from '@ember-decorators/component';
+import { classNameBindings, layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
 
@@ -17,11 +16,10 @@ import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
  * @extends Ember.Component
  * @public
  */
-@classic
 @templateLayout(layout)
 @tagName('button')
 @classNameBindings('collapsed')
-export default class Toggle extends Component {
+export default class NavbarToggle extends Component {
  collapsed = true;
 
  /**

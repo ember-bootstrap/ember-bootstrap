@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { layout as templateLayout } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { assert } from '@ember/debug';
@@ -13,9 +12,8 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/
  @extends Components.FormElementLayout
  @private
  */
-@classic
 @templateLayout(layout)
-export default class Horizontal extends FormElementLayout {
+export default class FormElementLayoutHorizontal extends FormElementLayout {
  /**
   * The Bootstrap grid class for form labels within a horizontal layout form.
   *

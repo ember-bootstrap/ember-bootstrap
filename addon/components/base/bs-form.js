@@ -1,8 +1,7 @@
-import classic from 'ember-classic-decorator';
-import { attributeBindings, classNameBindings, tagName, layout as templateLayout } from '@ember-decorators/component';
+import { attributeBindings, classNameBindings, layout as templateLayout, tagName } from '@ember-decorators/component';
 import { gt } from '@ember/object/computed';
 import Component from '@ember/component';
-import { set, action, computed } from '@ember/object';
+import { action, computed, set } from '@ember/object';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import { schedule } from '@ember/runloop';
@@ -105,12 +104,11 @@ import RSVP from 'rsvp';
   @extends Ember.Component
   @public
 */
-@classic
 @templateLayout(layout)
 @tagName('form')
 @classNameBindings('layoutClass')
 @attributeBindings('_novalidate:novalidate')
-export default class BsForm extends Component {
+export default class Form extends Component {
   ariaRole = 'form';
 
   /**

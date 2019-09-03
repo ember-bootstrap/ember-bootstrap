@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { layout as templateLayout } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import { filter, oneWay } from '@ember/object/computed';
@@ -112,9 +111,8 @@ import listenTo from 'ember-bootstrap/utils/cp/listen-to';
   @uses Mixins.ComponentParent
   @public
 */
-@classic
 @templateLayout(layout)
-export default class BsTab extends Component.extend(ComponentParent) {
+export default class Tab extends Component.extend(ComponentParent) {
   /**
    * Type of nav, either "pills" or "tabs"
    *

@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { action } from '@ember/object';
@@ -29,10 +28,9 @@ import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
   @extends Ember.Component
   @public
 */
-@classic
 @templateLayout(layout)
 @classNameBindings('alert', 'fade', 'dismissible:alert-dismissible', 'typeClass')
-export default class BsAlert extends Component {
+export default class Alert extends Component {
   /**
    * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
    * the alert.

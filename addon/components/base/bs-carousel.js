@@ -1,8 +1,7 @@
-import classic from 'ember-classic-decorator';
-import { classNames, attributeBindings, layout as templateLayout } from '@ember-decorators/component';
+import { attributeBindings, classNames, layout as templateLayout } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { action, computed } from '@ember/object';
-import { readOnly, gt, lte, filter } from '@ember/object/computed';
+import { filter, gt, lte, readOnly } from '@ember/object/computed';
 import CarouselSlide from 'ember-bootstrap/components/bs-carousel/slide';
 import Component from '@ember/component';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
@@ -59,11 +58,10 @@ import RSVP from 'rsvp';
   @extends Ember.Component
   @public
 */
-@classic
 @attributeBindings('tabindex')
 @classNames('carousel', 'slide')
 @templateLayout(layout)
-export default class BsCarousel extends Component.extend(ComponentParent) {
+export default class Carousel extends Component.extend(ComponentParent) {
   tabindex = '1';
 
   /**

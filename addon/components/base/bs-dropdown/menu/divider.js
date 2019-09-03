@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import Component from '@ember/component';
 
 /**
@@ -11,5 +10,4 @@ import Component from '@ember/component';
  @extends Ember.Component
  @public
  */
-@classic
-export default class Divider extends Component {}
+export default class DropdownMenuDivider extends Component {}

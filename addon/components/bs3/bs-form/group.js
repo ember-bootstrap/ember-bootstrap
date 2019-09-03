@@ -1,16 +1,14 @@
-import classic from 'ember-classic-decorator';
-import { classNames, classNameBindings } from '@ember-decorators/component';
+import { classNameBindings, classNames } from '@ember-decorators/component';
 import { computed } from '@ember/object';
-import { notEmpty, and } from '@ember/object/computed';
-import FormGroup from 'ember-bootstrap/components/base/bs-form/group';
+import { and, notEmpty } from '@ember/object/computed';
+import BaseFormGroup from 'ember-bootstrap/components/base/bs-form/group';
 import Config from 'ember-bootstrap/config';
 import { isBlank } from '@ember/utils';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 
-@classic
 @classNames('form-group')
 @classNameBindings('validationClass', 'hasFeedback', 'sizeClass')
-export default class Group extends FormGroup {
+export default class FormGroup extends BaseFormGroup {
  /**
   * Whether to show validation state icons.
   * See http://getbootstrap.com/css/#forms-control-validation

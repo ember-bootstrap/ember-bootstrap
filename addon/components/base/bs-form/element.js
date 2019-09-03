@@ -1,11 +1,10 @@
-import classic from 'ember-classic-decorator';
 import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
-import { alias, equal, and, or, gt, notEmpty } from '@ember/object/computed';
-import { defineProperty, action, computed } from '@ember/object';
+import { alias, and, equal, gt, notEmpty, or } from '@ember/object/computed';
+import { action, computed, defineProperty } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import { assert } from '@ember/debug';
-import { typeOf, isBlank } from '@ember/utils';
+import { isBlank, typeOf } from '@ember/utils';
 import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
 import layout from 'ember-bootstrap/templates/components/bs-form/element';
@@ -389,10 +388,9 @@ const nonDefaultLayouts = A([
   @extends Components.FormGroup
   @public
 */
-@classic
 @templateLayout(layout)
 @classNameBindings('disabled:disabled', 'required:is-required', 'isValidating')
-export default class Element extends FormGroup {
+export default class FormElement extends FormGroup {
   /**
    * Text to display within a `<label>` tag.
    *

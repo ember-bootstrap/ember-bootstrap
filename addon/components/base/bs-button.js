@@ -1,16 +1,14 @@
-import classic from 'ember-classic-decorator';
-
 import {
-  classNames,
   attributeBindings,
   classNameBindings,
-  tagName,
+  classNames,
   layout as templateLayout,
+  tagName,
 } from '@ember-decorators/component';
 
 import { observes } from '@ember-decorators/object';
 import { computed } from '@ember/object';
-import { or, equal, deprecatingAlias } from '@ember/object/computed';
+import { deprecatingAlias, equal, or } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-button';
@@ -90,13 +88,12 @@ import defaultValue from '../../utils/default-decorator';
   @extends Ember.Component
   @public
 */
-@classic
 @templateLayout(layout)
 @tagName('button')
 @classNames('btn')
 @classNameBindings('active', 'block:btn-block', 'sizeClass', 'typeClass')
 @attributeBindings('_disabled:disabled', 'buttonType:type', 'title')
-export default class BsButton extends Component {
+export default class Button extends Component {
   /**
    * Default label of the button. Not need if used as a block component
    *

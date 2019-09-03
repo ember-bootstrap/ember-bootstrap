@@ -2254,14 +2254,6 @@ babel-plugin-ember-modules-api-polyfill@^2.7.0:
   dependencies:
     ember-rfc176-data "^0.3.7"
 
-babel-plugin-filter-imports@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-filter-imports/-/babel-plugin-filter-imports-3.0.0.tgz#a849683837ad29960da17492fb32789ab6b09a11"
-  integrity sha512-p/chjzVTgCxUqyLM0q/pfWVZS7IJTwGQMwNg0LOvuQpKiTftQgZDtkGB8XvETnUw19rRcL7bJCTopSwibTN2tA==
-  dependencies:
-    "@babel/types" "^7.4.0"
-    lodash "^4.17.11"
-
 babel-plugin-htmlbars-inline-precompile@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-htmlbars-inline-precompile/-/babel-plugin-htmlbars-inline-precompile-1.0.0.tgz#a9d2f6eaad8a3f3d361602de593a8cbef8179c22"
@@ -5056,14 +5048,6 @@ ember-bootstrap-power-select@^1.1.0:
     ember-cli-htmlbars "^2.0.2"
     fs-extra "^7.0.0"
     rsvp "^4.0.1"
-
-ember-classic-decorator@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/ember-classic-decorator/-/ember-classic-decorator-0.1.2.tgz#0cfaa145ac3a8763a5205e0f3584edacafa9664f"
-  integrity sha512-kjCMnCPgz2UsqyqrJs+vQQ4aPzG+E9eAlSmSVAzCPoa9xzvpeP/rQyqWoIJqjZxBm+1NIk32/aISjdl5Lg+1gA==
-  dependencies:
-    babel-plugin-filter-imports "^3.0.0"
-    ember-cli-babel "^7.7.3"
 
 ember-cli-app-version@^3.0.0:
   version "3.2.0"

@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { tagName, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import Component from '@ember/component';
@@ -15,10 +14,9 @@ import { scheduleOnce } from '@ember/runloop';
  @extends Ember.Component
  @private
  */
-@classic
 @templateLayout(layout)
 @tagName('')
-export default class Element extends Component {
+export default class ContextualHelpElement extends Component {
   ariaRole = 'tooltip';
 
   /**

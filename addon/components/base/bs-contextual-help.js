@@ -1,7 +1,6 @@
-import classic from 'ember-classic-decorator';
 import { tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
-import { reads, or, gt } from '@ember/object/computed';
+import { gt, or, reads } from '@ember/object/computed';
 import Component from '@ember/component';
 import { guidFor } from '@ember/object/internals';
 import { isArray } from '@ember/array';
@@ -11,7 +10,6 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from '../../utils/dom';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
 
-@classic
 class InState extends EmberObject {
   hover = false;
   focus = false;
@@ -24,14 +22,13 @@ class InState extends EmberObject {
 function noop() {}
 
 /**
-  @class Components.ContextualHelp
+  @class ContextualHelp
   @namespace Components
   @extends Ember.Component
   @private
 */
-@classic
 @tagName('')
-export default class BsContextualHelp extends Component {
+export default class ContextualHelp extends Component {
   /**
    * @property title
    * @type string

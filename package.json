@@ -24,7 +24,6 @@
     "chai": "^4.0.0",
     "chai-things": "^0.2.0",
     "ember-bootstrap-power-select": "^1.1.0",
-    "ember-classic-decorator": "^0.1.2",
     "ember-cli": "~3.11.0",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-blueprint-test-helpers": "^0.19.1",

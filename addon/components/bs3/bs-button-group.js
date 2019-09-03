@@ -1,10 +1,8 @@
-import classic from 'ember-classic-decorator';
 import { classNameBindings } from '@ember-decorators/component';
-import ButtonGroup from 'ember-bootstrap/components/base/bs-button-group';
+import BaseButtonGroup from 'ember-bootstrap/components/base/bs-button-group';
 
-@classic
 @classNameBindings('justified:btn-group-justified')
-export default class BsButtonGroup extends ButtonGroup {
+export default class ButtonGroup extends BaseButtonGroup {
  /**
   * Set to true for the buttons to stretch at equal sizes to span the entire width of its parent.
   *

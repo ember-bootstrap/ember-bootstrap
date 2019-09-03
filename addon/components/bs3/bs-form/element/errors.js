@@ -1,7 +1,5 @@
-import classic from 'ember-classic-decorator';
-import FormElementErrors from 'ember-bootstrap/components/base/bs-form/element/errors';
+import BaseFormElementErrors from 'ember-bootstrap/components/base/bs-form/element/errors';
 
-@classic
-export default class Errors extends FormElementErrors {
+export default class FormElementErrors extends BaseFormElementErrors {
   feedbackClass = 'help-block';
 }

@@ -1,7 +1,6 @@
-import classic from 'ember-classic-decorator';
 import { classNameBindings } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
-import { and, alias, not } from '@ember/object/computed';
+import { alias, and, not } from '@ember/object/computed';
 import Component from '@ember/component';
 import { isPresent } from '@ember/utils';
 import '@ember/object';
@@ -29,9 +28,8 @@ import { assert } from '@ember/debug';
   @extends Ember.Component
   @public
 */
-@classic
 @classNameBindings('collapse', 'collapsing')
-export default class BsCollapse extends Component {
+export default class Collapse extends Component {
   /**
    * Collapsed/expanded state
    *

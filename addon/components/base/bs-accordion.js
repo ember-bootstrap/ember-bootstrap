@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { action } from '@ember/object';
 import { layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
@@ -36,9 +35,8 @@ import listenTo from 'ember-bootstrap/utils/cp/listen-to';
   @extends Ember.Component
   @public
 */
-@classic
 @templateLayout(layout)
-export default class BsAccordion extends Component {
+export default class Accordion extends Component {
   ariaRole = 'tablist';
 
   /**

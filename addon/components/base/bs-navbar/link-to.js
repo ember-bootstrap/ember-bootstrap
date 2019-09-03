@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import BsNavLinkToComponent from 'ember-bootstrap/components/bs-nav/link-to';
 
 /**
@@ -9,8 +8,7 @@ import BsNavLinkToComponent from 'ember-bootstrap/components/bs-nav/link-to';
  * @extends Components.NavLinkTo
  * @public
  */
-@classic
-export default class LinkTo extends BsNavLinkToComponent {
+export default class NavbarLinkTo extends BsNavLinkToComponent {
  /**
   * @property collapseNavbar
   * @type {Boolean}

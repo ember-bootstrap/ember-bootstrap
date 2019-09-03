@@ -1,7 +1,6 @@
-import classic from 'ember-classic-decorator';
-import { classNameBindings, tagName, layout as templateLayout } from '@ember-decorators/component';
+import { classNameBindings, layout as templateLayout, tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
-import { gt, filterBy, filter } from '@ember/object/computed';
+import { filter, filterBy, gt } from '@ember/object/computed';
 import Component from '@ember/component';
 import '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
@@ -21,11 +20,10 @@ import { assert } from '@ember/debug';
  @uses Mixins.ComponentParent
  @public
  */
-@classic
 @templateLayout(layout)
 @classNameBindings('disabled', 'active')
 @tagName('li')
-export default class Item extends Component.extend(ComponentParent) {
+export default class NavItem extends Component.extend(ComponentParent) {
   /**
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
    * By default it will look at any nested `link-to` components and make itself disabled if there is a disabled link.

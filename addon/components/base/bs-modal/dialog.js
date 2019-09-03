@@ -1,5 +1,9 @@
-import classic from 'ember-classic-decorator';
-import { classNames, attributeBindings, classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import {
+  attributeBindings,
+  classNameBindings,
+  classNames,
+  layout as templateLayout
+} from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
@@ -15,12 +19,11 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
   @extends Ember.Component
   @private
  */
-@classic
 @templateLayout(layout)
 @classNames('modal')
 @classNameBindings('fade')
 @attributeBindings('tabindex', 'ariaLabelledby:aria-labelledby')
-export default class Dialog extends Component {
+export default class ModalDialog extends Component {
  ariaRole = 'dialog';
  tabindex = '-1';
 
@@ -143,7 +146,7 @@ export default class Dialog extends Component {
        const titleNode = modalNode.querySelector('.modal-title');
        if (titleNode) {
          //Get title id of .modal-title
-         nodeId = titleNode.id
+         nodeId = titleNode.id;
          if (!nodeId) {
            //no title id so we set one
            nodeId = `${this.get('id')}-title`;

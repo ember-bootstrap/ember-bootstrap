@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { layout as templateLayout } from '@ember-decorators/component';
 import FormElementLayoutInline from '../inline';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/vertical/checkbox';
@@ -10,6 +9,5 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/
  @extends Components.FormElementLayout
  @private
  */
-@classic
 @templateLayout(layout)
-export default class Checkbox extends FormElementLayoutInline {}
+export default class FormElementLayoutInlineCheckbox extends FormElementLayoutInline {}

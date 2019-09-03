@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { tagName, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Control from '../control';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/control/radio';
 
@@ -10,10 +9,9 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/control
  @extends Components.FormElementControl
  @private
  */
-@classic
 @templateLayout(layout)
 @tagName('')
-export default class Radio extends Control {
+export default class FormElementControlRadio extends Control {
  /**
   * @property inline
   * @type {Boolean}

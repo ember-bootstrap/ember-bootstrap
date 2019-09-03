@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { isArray } from '@ember/array';
 import Button from 'ember-bootstrap/components/bs-button';
@@ -11,7 +10,6 @@ import Button from 'ember-bootstrap/components/bs-button';
  @extends Components.Button
  @private
  */
-@classic
 export default class ButtonGroupButton extends Button {
   /**
    * @property groupValue

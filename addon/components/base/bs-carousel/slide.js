@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { computed } from '@ember/object';
@@ -18,10 +17,9 @@ import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
   @extends Ember.Component
   @public
  */
-@classic
 @classNameBindings('active')
 @templateLayout(layout)
-export default class Slide extends Component.extend(ComponentChild) {
+export default class CarouselSlide extends Component.extend(ComponentChild) {
   /**
    * Defines slide visibility.
    *

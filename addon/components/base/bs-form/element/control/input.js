@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { classNames, attributeBindings, tagName } from '@ember-decorators/component';
+import { attributeBindings, classNames, tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import Control from '../control';
 import { isEmpty } from '@ember/utils';
@@ -44,7 +43,6 @@ export const baseAttributes = [
  @extends Components.FormElementControl
  @private
  */
-@classic
 @tagName('input')
 @attributeBindings(
   ...baseAttributes,
@@ -68,7 +66,7 @@ export const baseAttributes = [
   'spellcheck'
 )
 @classNames('form-control')
-export default class Input extends Control {
+export default class FormElementControlInput extends Control {
   /**
    * @property type
    * @type {String}
