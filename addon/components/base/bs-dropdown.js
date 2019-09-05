@@ -41,9 +41,10 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
   contextual component rather than a standalone dropdown to ensure the correct styling
   regardless of your Bootstrap version.
 
-  > Note: the use of angle brackets `<ddm.linkTo>` as shown above is only supported for Ember 3.10, as it relies on its
-  > own native implementation of the `LinkComponent`. For older Ember versions please use the legacy syntax with positional
-  > arguments: `{{#ddm.link-to "bar" this.model}}Bar{{/ddm.link-to}}`
+  > Note: the use of angle brackets `<ddm.linkTo>` as shown above is only supported for Ember >= 3.10, as it relies on its
+  > Ember's native implementation of the [`LinkComponent`](https://api.emberjs.com/ember/3.12/classes/Ember.Templates.helpers/methods/link-to?anchor=link-to).
+  > For older Ember versions please use the legacy syntax with positional arguments:
+  > `{{#ddm.link-to "bar" this.model}}Bar{{/ddm.link-to}}`
 
   ### Button dropdowns
 
