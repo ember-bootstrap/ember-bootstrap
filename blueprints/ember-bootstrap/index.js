@@ -8,7 +8,6 @@ const writeFile = rsvp.denodeify(fs.writeFile);
 const chalk = require('chalk');
 const BuildConfigEditor = require('ember-cli-build-config-editor');
 const SilentError = require('silent-error'); // From ember-cli
-const isModuleUnificationProject = require('../module-unification').isModuleUnificationProject;
 
 
 const bs3Version = '^3.4.1';
@@ -163,9 +162,6 @@ module.exports = {
 
     let extension = preprocessor === 'sass' ? 'scss' : 'less';
     let stylePath = path.join('app', 'styles');
-    if (isModuleUnificationProject(this.project)) {
-      stylePath = path.join('src', 'ui', 'styles');
-    }
 
     let file = path.join(stylePath, `app.${extension}`);
 
