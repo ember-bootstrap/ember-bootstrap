@@ -28,9 +28,9 @@ import layout from 'ember-bootstrap/templates/components/bs-nav';
   </BsNav>
   ```
 
-  > Note: the use of angle brackets `<nav.linkTo>` as shown above is only supported for Ember 3.10, as it relies on its
-  > own native implementation of the `LinkComponent`. For older Ember versions please use the legacy syntax with positional
-  > arguments: `{{#nav.link-to "bar" this.model}}Bar{{/nav.link-to}}`
+  > Note: the use of angle brackets `<nav.linkTo>` as shown above is only supported for Ember >= 3.10, as it relies on
+  > Ember's native implementation of the [`LinkComponent`](https://api.emberjs.com/ember/3.12/classes/Ember.Templates.helpers/methods/link-to?anchor=link-to).
+  > For older Ember versions please use the legacy syntax with positional arguments: `{{#nav.link-to "bar" this.model}}Bar{{/nav.link-to}}`
 
   ### Nav styles
 
