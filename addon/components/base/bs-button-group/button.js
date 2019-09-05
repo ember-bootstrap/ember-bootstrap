@@ -1,6 +1,7 @@
 import { computed } from '@ember/object';
 import { isArray } from '@ember/array';
 import Button from 'ember-bootstrap/components/bs-button';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  Internal component for button-group buttons
@@ -15,6 +16,7 @@ export default class ButtonGroupButton extends Button {
    * @property groupValue
    * @private
    */
+  @defaultValue
   groupValue = null;
 
   /**
@@ -22,6 +24,7 @@ export default class ButtonGroupButton extends Button {
    * @type string
    * @private
    */
+  @defaultValue
   buttonGroupType = false;
 
   /**

@@ -2,6 +2,7 @@ import { classNames, layout as templateLayout, tagName } from '@ember-decorators
 import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/footer';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -25,6 +26,7 @@ export default class ModalFooter extends Component {
    * @default 'Ok'
    * @public
    */
+  @defaultValue
   closeTitle = 'Ok';
 
   /**
@@ -36,7 +38,6 @@ export default class ModalFooter extends Component {
    * @default null
    * @public
    */
-
   @notEmpty('submitTitle')
   hasSubmitButton;
 
@@ -49,6 +50,7 @@ export default class ModalFooter extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   submitDisabled = false;
 
   /**
@@ -59,6 +61,7 @@ export default class ModalFooter extends Component {
    * @default 'primary'
    * @public
    */
+  @defaultValue
   submitButtonType = 'primary';
 
   /**
@@ -66,6 +69,7 @@ export default class ModalFooter extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   buttonComponent = 'bs-button';
 
   /**

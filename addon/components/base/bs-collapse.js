@@ -8,6 +8,7 @@ import { next } from '@ember/runloop';
 import { camelize } from '@ember/string';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { assert } from '@ember/debug';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -38,6 +39,7 @@ export default class Collapse extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   collapsed = true;
 
   /**
@@ -46,7 +48,8 @@ export default class Collapse extends Component {
    * @property active
    * @private
    */
-  active = false;
+  @defaultValue
+  active = !this.get('collapsed');
 
   @not('transitioning')
   collapse;
@@ -64,6 +67,7 @@ export default class Collapse extends Component {
    * @type boolean
    * @private
    */
+  @defaultValue
   transitioning = false;
 
   /**
@@ -74,6 +78,7 @@ export default class Collapse extends Component {
    * @default 0
    * @public
    */
+  @defaultValue
   collapsedSize = 0;
 
   /**
@@ -257,11 +262,6 @@ export default class Collapse extends Component {
     } else {
       this.hide();
     }
-  }
-
-  init() {
-    super.init(...arguments);
-    this.set('active', !this.get('collapsed'));
   }
 
   @observes('collapsedSize')

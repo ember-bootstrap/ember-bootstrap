@@ -1,5 +1,6 @@
 import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -15,6 +16,7 @@ export default class FormElementLayout extends Component {
    * @type {String}
    * @public
    */
+  @defaultValue
   formElementId = null;
 
   /**
@@ -22,6 +24,7 @@ export default class FormElementLayout extends Component {
    * @type boolean
    * @public
    */
+  @defaultValue
   hasLabel = true;
 
   /**
@@ -29,6 +32,7 @@ export default class FormElementLayout extends Component {
    * @type {Ember.Component}
    * @public
    */
+  @defaultValue
   errorsComponent = null;
 
   /**
@@ -36,6 +40,7 @@ export default class FormElementLayout extends Component {
    * @type {Ember.Component}
    * @public
    */
+  @defaultValue
   feedbackIconComponent = null;
 
   /**
@@ -43,6 +48,7 @@ export default class FormElementLayout extends Component {
    * @type {Ember.Component}
    * @public
    */
+  @defaultValue
   labelComponent = null;
 
   /**
@@ -50,5 +56,6 @@ export default class FormElementLayout extends Component {
    * @type {Ember.Component}
    * @public
    */
+  @defaultValue
   helpTextComponent = null;
 }

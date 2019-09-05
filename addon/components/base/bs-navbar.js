@@ -5,6 +5,7 @@ import Component from '@ember/component';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import layout from 'ember-bootstrap/templates/components/bs-navbar';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
@@ -111,6 +112,7 @@ export default class Navbar extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   collapsed = true;
 
   /**
@@ -128,6 +130,7 @@ export default class Navbar extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   fluid = true;
 
   /**
@@ -140,6 +143,7 @@ export default class Navbar extends Component {
    * @default null
    * @public
    */
+  @defaultValue
   position = null;
 
   @computed('position')
@@ -165,6 +169,7 @@ export default class Navbar extends Component {
    * @default 'default'
    * @public
    */
+  @defaultValue
   type = 'default';
 
   @typeClass('navbar', 'type')
@@ -280,6 +285,7 @@ export default class Navbar extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   toggleComponent = 'bs-navbar/toggle';
 
   /**
@@ -287,6 +293,7 @@ export default class Navbar extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   contentComponent = 'bs-navbar/content';
 
   /**
@@ -294,6 +301,7 @@ export default class Navbar extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   navComponent = 'bs-navbar/nav';
 
   /**
@@ -301,5 +309,6 @@ export default class Navbar extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   linkToComponent = 'bs-navbar/link-to';
 }

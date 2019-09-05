@@ -4,6 +4,7 @@ import { assert } from '@ember/debug';
 import { isBlank } from '@ember/utils';
 import FormElementLayout from '../layout';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/horizontal';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -21,6 +22,7 @@ export default class FormElementLayoutHorizontal extends FormElementLayout {
    * @type string
    * @public
    */
+  @defaultValue
   horizontalLabelGridClass = null;
 
   /**

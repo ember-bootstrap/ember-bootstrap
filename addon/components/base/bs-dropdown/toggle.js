@@ -1,6 +1,7 @@
 import { attributeBindings, classNames, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import { schedule } from '@ember/runloop';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  Anchor element that triggers the parent dropdown to open.
@@ -24,6 +25,7 @@ export default class DropdownToggle extends Component {
    * @type {boolean}
    * @private
    */
+  @defaultValue
   inNav = false;
 
   /**
@@ -53,7 +55,7 @@ export default class DropdownToggle extends Component {
   }
 
   didReceiveAttrs() {
-    super.didReceiveAttrs(...arguments);
+    // super.didReceiveAttrs(...arguments);
     let dropdown = this.get('dropdown');
     if (dropdown) {
       schedule('actions', this, function() {

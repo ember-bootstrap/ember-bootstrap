@@ -7,6 +7,7 @@ import layout from 'ember-bootstrap/templates/components/bs-tab/pane';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  The tab pane of a tab component.
@@ -28,6 +29,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @property activeId
    * @private
    */
+  @defaultValue
   activeId = null;
 
   /**
@@ -51,6 +53,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @default false
    * @private
    */
+  @defaultValue
   active = false;
 
   /**
@@ -61,6 +64,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @default false
    * @private
    */
+  @defaultValue
   showContent = false;
 
   /**
@@ -73,6 +77,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @default null
    * @public
    */
+  @defaultValue
   title = null;
 
   /**
@@ -85,6 +90,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @default null
    * @public
    */
+  @defaultValue
   groupTitle = null;
 
   /**
@@ -94,6 +100,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @type boolean
    * @private
    */
+  @defaultValue
   fade = true;
 
   /**
@@ -104,6 +111,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @default 150
    * @private
    */
+  @defaultValue
   fadeDuration = 150;
 
   /**

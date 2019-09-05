@@ -4,6 +4,7 @@ import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown/menu';
 import { next } from '@ember/runloop';
 import { getDestinationElement } from '../../../utils/dom';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  Component for the dropdown menu.
@@ -34,6 +35,7 @@ export default class DropdownMenu extends Component {
    * @default left
    * @public
    */
+  @defaultValue
   align = 'left';
 
   /**
@@ -42,6 +44,7 @@ export default class DropdownMenu extends Component {
    * @type string
    * @private
    */
+  @defaultValue
   direction = 'down';
 
   /**
@@ -60,6 +63,7 @@ export default class DropdownMenu extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   renderInPlace = true;
 
   /**

@@ -2,6 +2,7 @@ import { layout as templateLayout } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import ContextualHelp from './bs-contextual-help';
 import layout from 'ember-bootstrap/templates/components/bs-popover';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Component that implements Bootstrap [popovers](http://getbootstrap.com/javascript/#popovers).
@@ -76,6 +77,7 @@ export default class Popover extends ContextualHelp {
    * @default 'right'
    * @public
    */
+  @defaultValue
   placement = 'right';
 
   /**
@@ -84,6 +86,7 @@ export default class Popover extends ContextualHelp {
    * @default 'click'
    * @public
    */
+  @defaultValue
   triggerEvents = 'click';
 
   /**
@@ -91,6 +94,7 @@ export default class Popover extends ContextualHelp {
    * @type {String}
    * @private
    */
+  @defaultValue
   elementComponent = 'bs-popover/element';
 
   /**

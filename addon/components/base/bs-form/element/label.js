@@ -2,6 +2,7 @@ import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/label';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -24,6 +25,7 @@ export default class FormElementLabel extends Component {
    * @type boolean
    * @public
    */
+  @defaultValue
   invisibleLabel = false;
 
   /**
@@ -52,6 +54,7 @@ export default class FormElementLabel extends Component {
    * @default 'vertical'
    * @public
    */
+  @defaultValue
   formLayout = 'vertical';
 
   /**
@@ -69,6 +72,7 @@ export default class FormElementLabel extends Component {
    * @default 'text'
    * @public
    */
+  @defaultValue
   controlType = 'text';
 
   /**

@@ -402,6 +402,7 @@ export default class FormElement extends FormGroup {
    * @type string
    * @public
    */
+  @defaultValue
   label = null;
 
   /**
@@ -412,6 +413,7 @@ export default class FormElement extends FormGroup {
    * @default false
    * @public
    */
+  @defaultValue
   invisibleLabel = false;
 
   /**
@@ -439,6 +441,7 @@ export default class FormElement extends FormGroup {
    * @default 'text'
    * @public
    */
+  @defaultValue
   controlType = 'text';
 
   /**
@@ -456,6 +459,7 @@ export default class FormElement extends FormGroup {
    * @property value
    * @public
    */
+  @defaultValue
   value = null;
 
   /**
@@ -469,6 +473,7 @@ export default class FormElement extends FormGroup {
    @type string
    @public
    */
+  @defaultValue
   property = null;
 
   /**
@@ -477,6 +482,7 @@ export default class FormElement extends FormGroup {
    * @property model
    * @public
    */
+  @defaultValue
   model = null;
 
   /**
@@ -486,6 +492,7 @@ export default class FormElement extends FormGroup {
    * @type {string}
    * @public
    */
+  @defaultValue
   helpText = null;
 
   /**
@@ -497,6 +504,7 @@ export default class FormElement extends FormGroup {
    * @public
    * @type {Boolean}
    */
+  @defaultValue
   showMultipleErrors = false;
 
   /**
@@ -508,6 +516,7 @@ export default class FormElement extends FormGroup {
    * @type {Array}
    * @public
    */
+  @defaultValue
   options = null;
 
   /**
@@ -517,6 +526,7 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @public
    */
+  @defaultValue
   optionLabelPath = null;
 
   /**
@@ -535,6 +545,7 @@ export default class FormElement extends FormGroup {
    * @type array
    * @protected
    */
+  @defaultValue
   errors = null;
 
   /**
@@ -553,6 +564,7 @@ export default class FormElement extends FormGroup {
    * @type array
    * @protected
    */
+  @defaultValue
   warnings = null;
 
   /**
@@ -572,6 +584,7 @@ export default class FormElement extends FormGroup {
    * @type string
    * @public
    */
+  @defaultValue
   customError = null;
 
   /**
@@ -592,6 +605,7 @@ export default class FormElement extends FormGroup {
    * @type string
    * @public
    */
+  @defaultValue
   customWarning = null;
 
   /**
@@ -610,6 +624,7 @@ export default class FormElement extends FormGroup {
    * @type String
    * @public
    */
+  @defaultValue
   size = null;
 
   /**
@@ -697,6 +712,7 @@ export default class FormElement extends FormGroup {
    * @default false
    * @private
    */
+  @defaultValue
   showOwnValidation = false;
 
   /**
@@ -744,6 +760,7 @@ export default class FormElement extends FormGroup {
    * @default ['focusout']
    * @public
    */
+  @defaultValue
   showValidationOn = null;
 
   /**
@@ -868,6 +885,7 @@ export default class FormElement extends FormGroup {
    * @default 'vertical'
    * @public
    */
+  @defaultValue
   formLayout = 'vertical';
 
   /**
@@ -878,6 +896,7 @@ export default class FormElement extends FormGroup {
    * @type string
    * @public
    */
+  @defaultValue
   horizontalLabelGridClass = null;
 
   /**
@@ -909,6 +928,7 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
+  @defaultValue
   formComponent = 'bs-form';
 
   /**
@@ -952,6 +972,7 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
+  @defaultValue
   errorsComponent = 'bs-form/element/errors';
 
   /**
@@ -959,6 +980,7 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
+  @defaultValue
   feedbackIconComponent = 'bs-form/element/feedback-icon';
 
   /**
@@ -966,6 +988,7 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
+  @defaultValue
   labelComponent = 'bs-form/element/label';
 
   /**
@@ -973,6 +996,7 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
+  @defaultValue
   helpTextComponent = 'bs-form/element/help-text';
 
   /**

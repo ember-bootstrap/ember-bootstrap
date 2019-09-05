@@ -5,6 +5,7 @@ import Component from '@ember/component';
 import { A, isArray } from '@ember/array';
 import layout from 'ember-bootstrap/templates/components/bs-button-group';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
@@ -72,6 +73,7 @@ export default class ButtonGroup extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   buttonComponent = 'bs-button-group/button';
 
   /**
@@ -82,6 +84,7 @@ export default class ButtonGroup extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   vertical = false;
 
   /**
@@ -136,6 +139,7 @@ export default class ButtonGroup extends Component {
    * @type String
    * @public
    */
+  @defaultValue
   size = null;
 
   @sizeClass('btn-group', 'size')

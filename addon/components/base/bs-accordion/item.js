@@ -3,6 +3,7 @@ import { computed } from '@ember/object';
 import { not, oneWay } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  A collapsible/expandable item within an accordion
@@ -24,6 +25,7 @@ export default class AccordionItem extends Component {
    * @type string
    * @public
    */
+  @defaultValue
   title = null;
 
   /**
@@ -39,6 +41,7 @@ export default class AccordionItem extends Component {
    * @property selected
    * @private
    */
+  @defaultValue
   selected = null;
 
   /**
@@ -46,6 +49,7 @@ export default class AccordionItem extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   titleComponent = 'bs-accordion/item/title';
 
   /**
@@ -53,6 +57,7 @@ export default class AccordionItem extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   bodyComponent = 'bs-accordion/item/body';
 
   /**
@@ -80,6 +85,7 @@ export default class AccordionItem extends Component {
    * @type boolean
    * @public
    */
+  @defaultValue
   disabled = false;
 
   /**
@@ -92,6 +98,7 @@ export default class AccordionItem extends Component {
    * @default 'default'
    * @public
    */
+  @defaultValue
   type = 'default';
 
   /**
@@ -100,7 +107,6 @@ export default class AccordionItem extends Component {
    * @property accordion
    * @private
    */
-  accordion = null;
 
   /**
    * @event onClick

@@ -1,6 +1,7 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/feedback-icon';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -17,6 +18,7 @@ export default class FormElementFeedbackIcon extends Component {
    * @type {Boolean}
    * @public
    */
+  @defaultValue
   show = false;
 
   /**
@@ -24,5 +26,6 @@ export default class FormElementFeedbackIcon extends Component {
    * @type {String}
    * @public
    */
+  @defaultValue
   iconName = null;
 }

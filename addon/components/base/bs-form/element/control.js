@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -12,6 +13,7 @@ export default class FormElementControl extends Component {
    * @property value
    * @public
    */
+  @defaultValue
   value = null;
 
   /**
@@ -19,6 +21,7 @@ export default class FormElementControl extends Component {
    * @type {string}
    * @public
    */
+  @defaultValue
   ariaDescribedBy = null;
 
   /**

@@ -8,6 +8,7 @@ import layout from 'ember-bootstrap/templates/components/bs-tab';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import TabPane from 'ember-bootstrap/components/bs-tab/pane';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,
@@ -121,6 +122,7 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @default 'tabs'
    * @public
    */
+  @defaultValue
   type = 'tabs';
 
   /**
@@ -128,6 +130,7 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @type {String}
    * @private
    */
+  @defaultValue
   paneComponent = 'bs-tab/pane';
 
   /**
@@ -135,6 +138,7 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @type {String}
    * @private
    */
+  @defaultValue
   navComponent = 'bs-nav';
 
   /**
@@ -146,6 +150,7 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @default false
    * @public
    */
+  @defaultValue
   customTabs = false;
 
   /**
@@ -188,6 +193,7 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @default true
    * @public
    */
+  @defaultValue
   fade = true;
 
   /**
@@ -198,6 +204,7 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @default 150
    * @public
    */
+  @defaultValue
   fadeDuration = 150;
 
   /**

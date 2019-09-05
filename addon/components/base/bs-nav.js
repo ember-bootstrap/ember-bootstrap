@@ -2,6 +2,7 @@ import { classNameBindings, classNames, layout as templateLayout, tagName } from
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-nav';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)
@@ -99,6 +100,7 @@ export default class Nav extends Component {
    * @default null
    * @public
    */
+  @defaultValue
   type = null;
 
   /**
@@ -109,6 +111,7 @@ export default class Nav extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   justified = false;
 
   /**
@@ -119,6 +122,7 @@ export default class Nav extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   stacked = false;
 
   /**
@@ -126,6 +130,7 @@ export default class Nav extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   itemComponent = 'bs-nav/item';
 
   /**
@@ -133,6 +138,7 @@ export default class Nav extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   linkToComponent = 'bs-nav/link-to';
 
   /**
@@ -140,5 +146,6 @@ export default class Nav extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   dropdownComponent = 'bs-dropdown';
 }

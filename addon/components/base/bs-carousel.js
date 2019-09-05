@@ -9,6 +9,7 @@ import layout from 'ember-bootstrap/templates/components/bs-carousel';
 import { schedule, scheduleOnce } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 import RSVP from 'rsvp';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Ember implementation of Bootstrap's Carousel. Supports all original features but API is partially different:
@@ -69,6 +70,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @type {String}
    * @private
    */
+  @defaultValue
   slideComponent = 'bs-carousel/slide';
 
   /**
@@ -140,7 +142,8 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @property currentIndex
    * @private
    */
-  currentIndex = null;
+  @defaultValue
+  currentIndex = this.get('index');
 
   /**
    * The current slide object that is going to be used by the nested slides components.
@@ -161,6 +164,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @private
    * @type string
    */
+  @defaultValue
   directionalClassName = null;
 
   /**
@@ -170,6 +174,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @private
    * @type number
    */
+  @defaultValue
   followingIndex = null;
 
   /**
@@ -219,6 +224,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @private
    * @type boolean
    */
+  @defaultValue
   isMouseHovering = false;
 
   /**
@@ -228,7 +234,6 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @type string
    * @private
    */
-  nextControlClassName = null;
 
   /**
    * Bootstrap style to indicate the next/previous slide.
@@ -237,7 +242,6 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @private
    * @type string
    */
-  orderClassName = null;
 
   /**
    * The current state of the current presentation, can be either "didTransition"
@@ -247,6 +251,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @property presentationState
    * @type string
    */
+  @defaultValue
   presentationState = null;
 
   /**
@@ -256,7 +261,6 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @type string
    * @private
    */
-  prevControlClassName = null;
 
   /**
    * @private
@@ -283,6 +287,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @public
    * @type boolean
    */
+  @defaultValue
   autoPlay = false;
 
   /**
@@ -294,6 +299,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @public
    * @type boolean
    */
+  @defaultValue
   wrap = true;
 
   /**
@@ -304,6 +310,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @public
    * @type number
    */
+  @defaultValue
   index = 0;
 
   /**
@@ -315,6 +322,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @public
    * @type number
    */
+  @defaultValue
   interval = 5000;
 
   /**
@@ -325,6 +333,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @public
    * @type boolean
    */
+  @defaultValue
   keyboard = true;
 
   /**
@@ -336,6 +345,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @public
    * @type boolean
    */
+  @defaultValue
   ltr = true;
 
   /**
@@ -346,7 +356,6 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @type string
    * @public
    */
-  nextControlIcon = null;
 
   /**
    * Label for screen readers, defaults to 'Next'.
@@ -356,6 +365,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @type string
    * @public
    */
+  @defaultValue
   nextControlLabel = 'Next';
 
   /**
@@ -367,6 +377,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @public
    * @type boolean
    */
+  @defaultValue
   pauseOnMouseEnter = true;
 
   /**
@@ -377,7 +388,6 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @type string
    * @public
    */
-  prevControlIcon = null;
 
   /**
    * Label for screen readers, defaults to 'Previous'.
@@ -387,6 +397,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @type string
    * @public
    */
+  @defaultValue
   prevControlLabel = 'Previous';
 
   /**
@@ -397,6 +408,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @public
    * @type boolean
    */
+  @defaultValue
   showControls = true;
 
   /**
@@ -407,6 +419,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @public
    * @type boolean
    */
+  @defaultValue
   showIndicators = true;
 
   /**
@@ -418,6 +431,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @public
    * @type number
    */
+  @defaultValue
   transitionDuration = 600;
 
   /**
@@ -429,6 +443,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @public
    * @type string
    */
+  @defaultValue
   transition = 'slide';
 
   /**
@@ -529,11 +544,6 @@ export default class Carousel extends Component.extend(ComponentParent) {
     super.didInsertElement(...arguments);
     this.registerEvents();
     this.triggerChildSlidesObserver();
-  }
-
-  init() {
-    super.init(...arguments);
-    this.set('currentIndex', this.get('index'));
   }
 
   /**

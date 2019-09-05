@@ -3,6 +3,7 @@ import { layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),
@@ -37,6 +38,7 @@ import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 */
 @templateLayout(layout)
 export default class Accordion extends Component {
+  @defaultValue
   ariaRole = 'tablist';
 
   /**
@@ -48,6 +50,7 @@ export default class Accordion extends Component {
    * @property selected
    * @public
    */
+  @defaultValue
   selected = null;
 
   /**
@@ -55,6 +58,7 @@ export default class Accordion extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   itemComponent = 'bs-accordion/item';
 
   /**

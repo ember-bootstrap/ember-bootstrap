@@ -1,6 +1,7 @@
 import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/title';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  Component for an accordion item title.
@@ -15,6 +16,7 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/title';
 @templateLayout(layout)
 @classNameBindings('collapsed:collapsed:expanded')
 export default class AccordionItemTitle extends Component {
+  @defaultValue
   ariaRole = 'tab';
 
   /**

@@ -1,5 +1,6 @@
 import { classNameBindings } from '@ember-decorators/component';
 import BaseButtonGroup from 'ember-bootstrap/components/base/bs-button-group';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 @classNameBindings('justified:btn-group-justified')
 export default class ButtonGroup extends BaseButtonGroup {
@@ -21,5 +22,6 @@ export default class ButtonGroup extends BaseButtonGroup {
    * @default false
    * @public
    */
+  @defaultValue
   justified = false;
 }

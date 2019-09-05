@@ -2,6 +2,7 @@ import { layout as templateLayout } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import ContextualHelp from './bs-contextual-help';
 import layout from 'ember-bootstrap/templates/components/bs-tooltip';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Component that implements Bootstrap [tooltips](http://getbootstrap.com/javascript/#tooltips).
@@ -85,6 +86,7 @@ export default class Tooltip extends ContextualHelp {
    * @type {String}
    * @private
    */
+  @defaultValue
   elementComponent = 'bs-tooltip/element';
 
   /**

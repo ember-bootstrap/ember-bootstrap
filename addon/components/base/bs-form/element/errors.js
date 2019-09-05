@@ -1,6 +1,7 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/errors';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  @class FormElementErrors
@@ -16,6 +17,7 @@ export default class FormElementErrors extends Component {
   * @type {Boolean}
   * @public
   */
+ @defaultValue
  show = false;
 
  /**
@@ -32,5 +34,6 @@ export default class FormElementErrors extends Component {
   * @public
   * @type {Boolean}
   */
+ @defaultValue
  showMultipleErrors = false;
 }

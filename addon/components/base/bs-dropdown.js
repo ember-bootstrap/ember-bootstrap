@@ -3,6 +3,7 @@ import { action, computed } from '@ember/object';
 import Component from '@ember/component';
 import { bind } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
@@ -170,6 +171,7 @@ export default class Dropdown extends Component {
    * @type boolean
    * @private
    */
+  @defaultValue
   isOpen = false;
 
   /**
@@ -180,6 +182,7 @@ export default class Dropdown extends Component {
    * @type boolean
    * @public
    */
+  @defaultValue
   closeOnMenuClick = true;
 
   /**
@@ -190,6 +193,7 @@ export default class Dropdown extends Component {
    * @default 'down'
    * @public
    */
+  @defaultValue
   direction = 'down';
 
   /**

@@ -7,6 +7,7 @@ import { isPresent } from '@ember/utils';
 import { schedule } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-form';
 import RSVP from 'rsvp';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -141,6 +142,7 @@ export default class Form extends Component {
    * @type string
    * @public
    */
+  @defaultValue
   formLayout = 'vertical';
 
   /**
@@ -161,6 +163,7 @@ export default class Form extends Component {
    * @default 'col-md-4'
    * @public
    */
+  @defaultValue
   horizontalLabelGridClass = 'col-md-4';
 
   /**
@@ -168,6 +171,7 @@ export default class Form extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   elementComponent = 'bs-form/element';
 
   /**
@@ -175,6 +179,7 @@ export default class Form extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   groupComponent = 'bs-form/group';
 
   /**
@@ -202,6 +207,7 @@ export default class Form extends Component {
    * @type {Boolean}
    * @private
    */
+  @defaultValue
   isSubmitted = false;
 
   /**
@@ -216,6 +222,7 @@ export default class Form extends Component {
    * @type {Boolean}
    * @private
    */
+  @defaultValue
   isRejected = false;
 
   /**
@@ -225,6 +232,7 @@ export default class Form extends Component {
    * @type {Integer}
    * @private
    */
+  @defaultValue
   pendingSubmissions = 0;
 
   /**
@@ -235,6 +243,7 @@ export default class Form extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   submitOnEnter = false;
 
   /**
@@ -249,6 +258,7 @@ export default class Form extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   preventConcurrency = true;
 
   /**
@@ -261,6 +271,7 @@ export default class Form extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   hideValidationsOnSubmit = false;
 
   /**
@@ -272,6 +283,7 @@ export default class Form extends Component {
    * @default null
    * @public
    */
+  @defaultValue
   novalidate = null;
 
   @computed('novalidate', 'hasValidator')
@@ -289,6 +301,7 @@ export default class Form extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   readonly = false;
 
   /**
@@ -299,6 +312,7 @@ export default class Form extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   disabled = false;
 
   /**
@@ -318,6 +332,7 @@ export default class Form extends Component {
    * @default undefined
    * @private
    */
+  @defaultValue
   showAllValidations = undefined;
 
   /**

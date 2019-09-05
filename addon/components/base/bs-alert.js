@@ -8,6 +8,7 @@ import layout from 'ember-bootstrap/templates/components/bs-alert';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -40,6 +41,7 @@ export default class Alert extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   dismissible = true;
 
   /**
@@ -51,7 +53,8 @@ export default class Alert extends Component {
    * @readonly
    * @private
    */
-  hidden = false;
+  @defaultValue
+  hidden = !this.get('_visible');
 
   /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
@@ -65,6 +68,7 @@ export default class Alert extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   visible = true;
 
   /**
@@ -89,6 +93,7 @@ export default class Alert extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   fade = true;
 
   /**
@@ -113,6 +118,7 @@ export default class Alert extends Component {
    * @default 150
    * @public
    */
+  @defaultValue
   fadeDuration = 150;
 
   /**
@@ -125,6 +131,7 @@ export default class Alert extends Component {
    * @default 'default'
    * @public
    */
+  @defaultValue
   type = 'default';
 
   @typeClass('alert', 'type')
@@ -196,11 +203,6 @@ export default class Alert extends Component {
       this.set('hidden', true);
       this.get('onDismissed')();
     }
-  }
-
-  init() {
-    super.init(...arguments);
-    this.set('hidden', !this.get('_visible'));
   }
 
   @observes('_visible')

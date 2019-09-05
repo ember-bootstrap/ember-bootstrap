@@ -2,6 +2,7 @@ import { classNameBindings } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import BaseNavbar from 'ember-bootstrap/components/base/bs-navbar';
 import { isBlank } from '@ember/utils';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 @classNameBindings('breakpointClass', 'backgroundClass')
 export default class Navbar extends BaseNavbar {
@@ -26,6 +27,7 @@ export default class Navbar extends BaseNavbar {
    * @default 'lg'
    * @public
    */
+  @defaultValue
   toggleBreakpoint = 'lg';
 
   /**
@@ -37,6 +39,7 @@ export default class Navbar extends BaseNavbar {
    * @default 'light'
    * @public
    */
+  @defaultValue
   backgroundColor = 'light';
 
   @computed('toggleBreakpoint')

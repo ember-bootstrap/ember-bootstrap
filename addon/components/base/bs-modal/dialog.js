@@ -10,6 +10,7 @@ import { isBlank } from '@ember/utils';
 import Component from '@ember/component';
 import { bind } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  Internal component for modal's markup and event handling. Should not be used directly.
@@ -38,6 +39,7 @@ export default class ModalDialog extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   fade = true;
 
   /**
@@ -48,6 +50,7 @@ export default class ModalDialog extends Component {
    * @default false
    * @private
    */
+  @defaultValue
   showModal = false;
 
   /**
@@ -58,6 +61,7 @@ export default class ModalDialog extends Component {
    * @default false
    * @private
    */
+  @defaultValue
   inDom = false;
 
   /**
@@ -66,6 +70,7 @@ export default class ModalDialog extends Component {
    * @default null
    * @private
    */
+  @defaultValue
   paddingLeft = null;
 
   /**
@@ -74,6 +79,7 @@ export default class ModalDialog extends Component {
    * @default null
    * @private
    */
+  @defaultValue
   paddingRight = null;
 
   /**
@@ -84,6 +90,7 @@ export default class ModalDialog extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   keyboard = true;
 
   /**
@@ -95,6 +102,7 @@ export default class ModalDialog extends Component {
    * @type String
    * @public
    */
+  @defaultValue
   size = null;
 
   /**
@@ -105,6 +113,7 @@ export default class ModalDialog extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   backdropClose = true;
 
   /**

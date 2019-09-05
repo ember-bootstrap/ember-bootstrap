@@ -2,6 +2,7 @@ import { attributeBindings, classNameBindings, tagName } from '@ember-decorators
 import { computed } from '@ember/object';
 import BaseFormElementLabel from 'ember-bootstrap/components/base/bs-form/element/label';
 import { isBlank } from '@ember/utils';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 @tagName('label')
 @classNameBindings(
@@ -34,5 +35,6 @@ export default class FormElementLabel extends BaseFormElementLabel {
    * @type String
    * @public
    */
+  @defaultValue
   size = null;
 }

@@ -1,6 +1,7 @@
 import { classNames, layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-progress';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.
@@ -43,5 +44,6 @@ export default class Progress extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   progressBarComponent = 'bs-progress/bar';
 }

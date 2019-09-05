@@ -5,6 +5,7 @@ import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-tooltip/element';
 import { assert } from '@ember/debug';
 import { scheduleOnce } from '@ember/runloop';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  Internal (abstract) component for contextual help markup. Should not be used directly.
@@ -25,6 +26,7 @@ export default class ContextualHelpElement extends Component {
    * @default 'top'
    * @public
    */
+  @defaultValue
   placement = 'top';
 
   @reads('placement')
@@ -36,6 +38,7 @@ export default class ContextualHelpElement extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   fade = true;
 
   /**
@@ -44,6 +47,7 @@ export default class ContextualHelpElement extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   showHelp = false;
 
   /**
@@ -54,6 +58,7 @@ export default class ContextualHelpElement extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   renderInPlace = true;
 
   /**
@@ -63,6 +68,7 @@ export default class ContextualHelpElement extends Component {
    * @type {string|HTMLElement}
    * @public
    */
+  @defaultValue
   popperTarget = null;
 
   /**
@@ -71,6 +77,7 @@ export default class ContextualHelpElement extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   autoPlacement = true;
 
   /**
@@ -80,6 +87,7 @@ export default class ContextualHelpElement extends Component {
    * @type object
    * @public
    */
+  @defaultValue
   viewportElement = null;
 
   /**
@@ -90,12 +98,14 @@ export default class ContextualHelpElement extends Component {
    * @default 0
    * @public
    */
+  @defaultValue
   viewportPadding = 0;
 
   /**
    * @property arrowClass
    * @private
    */
+  @defaultValue
   arrowClass = 'arrow';
 
   /**

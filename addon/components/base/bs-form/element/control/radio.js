@@ -1,6 +1,7 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Control from '../control';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/control/radio';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -18,5 +19,6 @@ export default class FormElementControlRadio extends Control {
   * @default false
   * @public
   */
+ @defaultValue
  inline = false;
 }

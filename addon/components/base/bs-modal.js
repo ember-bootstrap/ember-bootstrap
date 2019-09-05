@@ -12,6 +12,7 @@ import { getDestinationElement } from '../../utils/dom';
 import { guidFor } from '@ember/object/internals';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
 import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -67,6 +68,7 @@ export default class Modal extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   open = true;
 
   /**
@@ -90,6 +92,7 @@ export default class Modal extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   fade = undefined;
 
   /**
@@ -108,6 +111,7 @@ export default class Modal extends Component {
    * @default false
    * @private
    */
+  @defaultValue
   showModal = false;
 
   /**
@@ -118,6 +122,7 @@ export default class Modal extends Component {
    * @default false
    * @private
    */
+  @defaultValue
   inDom = false;
 
   /**
@@ -126,6 +131,7 @@ export default class Modal extends Component {
    * @default null
    * @private
    */
+  @defaultValue
   paddingLeft = null;
 
   /**
@@ -134,6 +140,7 @@ export default class Modal extends Component {
    * @default null
    * @private
    */
+  @defaultValue
   paddingRight = null;
 
   /**
@@ -144,6 +151,7 @@ export default class Modal extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   backdrop = true;
 
   /**
@@ -152,6 +160,7 @@ export default class Modal extends Component {
    * @default false
    * @private
    */
+  @defaultValue
   showBackdrop = false;
 
   /**
@@ -162,6 +171,7 @@ export default class Modal extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   keyboard = true;
 
   /**
@@ -173,6 +183,7 @@ export default class Modal extends Component {
    * @default 'top'
    * @public
    */
+  @defaultValue
   position = 'top';
 
   /**
@@ -180,6 +191,7 @@ export default class Modal extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   dialogComponent = 'bs-modal/dialog';
 
   /**
@@ -187,6 +199,7 @@ export default class Modal extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   headerComponent = 'bs-modal/header';
 
   /**
@@ -194,6 +207,7 @@ export default class Modal extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   bodyComponent = 'bs-modal/body';
 
   /**
@@ -201,6 +215,7 @@ export default class Modal extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   footerComponent = 'bs-modal/footer';
 
   /**
@@ -238,6 +253,7 @@ export default class Modal extends Component {
    * @type String
    * @public
    */
+  @defaultValue
   size = null;
 
   /**
@@ -248,6 +264,7 @@ export default class Modal extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   backdropClose = true;
 
   /**
@@ -258,6 +275,7 @@ export default class Modal extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   renderInPlace = false;
 
   /**
@@ -278,6 +296,7 @@ export default class Modal extends Component {
    * @default 300
    * @public
    */
+  @defaultValue
   transitionDuration = 300;
 
   /**
@@ -288,6 +307,7 @@ export default class Modal extends Component {
    * @default 150
    * @public
    */
+  @defaultValue
   backdropTransitionDuration = 150;
 
   /**

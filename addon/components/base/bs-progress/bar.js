@@ -8,6 +8,7 @@ import { computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-progress/bar';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -31,6 +32,7 @@ export default class ProgressBar extends Component {
    * @default 0
    * @public
    */
+  @defaultValue
   minValue = 0;
 
   /**
@@ -41,6 +43,7 @@ export default class ProgressBar extends Component {
    * @default 100
    * @public
    */
+  @defaultValue
   maxValue = 100;
 
   /**
@@ -51,6 +54,7 @@ export default class ProgressBar extends Component {
    * @default 0
    * @public
    */
+  @defaultValue
   value = 0;
 
   /**
@@ -71,6 +75,7 @@ export default class ProgressBar extends Component {
    @default false
    @public
    */
+  @defaultValue
   showLabel = false;
 
   /**
@@ -81,6 +86,7 @@ export default class ProgressBar extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   striped = false;
 
   /**
@@ -91,6 +97,7 @@ export default class ProgressBar extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   animate = false;
 
   /**
@@ -101,6 +108,7 @@ export default class ProgressBar extends Component {
    * @default 0
    * @public
    */
+  @defaultValue
   roundDigits = 0;
 
   /**
@@ -113,6 +121,7 @@ export default class ProgressBar extends Component {
    * @default 'default'
    * @public
    */
+  @defaultValue
   type = 'default';
 
   @readOnly('striped')

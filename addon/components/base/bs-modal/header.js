@@ -1,6 +1,7 @@
 import { classNames, layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/header';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -22,6 +23,7 @@ export default class ModalHeader extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   closeButton = true;
 
   /**
@@ -38,6 +40,7 @@ export default class ModalHeader extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   titleComponent = 'bs-modal/header/title';
 
   /**
@@ -45,6 +48,7 @@ export default class ModalHeader extends Component {
    * @type {String}
    * @private
    */
+  @defaultValue
   closeComponent = 'bs-modal/header/close';
 
   /**

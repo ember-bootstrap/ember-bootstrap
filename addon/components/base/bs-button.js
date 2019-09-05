@@ -15,7 +15,7 @@ import layout from 'ember-bootstrap/templates/components/bs-button';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
-import defaultValue from '../../utils/default-decorator';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -101,6 +101,7 @@ export default class Button extends Component {
    * @type string
    * @public
    */
+  @defaultValue
   defaultText = null;
 
   /**
@@ -111,6 +112,7 @@ export default class Button extends Component {
    * @type string
    * @public
    */
+  @defaultValue
   pendingText = undefined;
 
   /**
@@ -121,6 +123,7 @@ export default class Button extends Component {
    * @type string
    * @public
    */
+  @defaultValue
   fulfilledText = undefined;
 
   /**
@@ -143,6 +146,7 @@ export default class Button extends Component {
    * @type string
    * @public
    */
+  @defaultValue
   rejectedText = undefined;
 
   /**
@@ -158,6 +162,7 @@ export default class Button extends Component {
    * @default null
    * @public
    */
+  @defaultValue
   disabled = null;
 
   @computed('disabled', 'isPending', 'preventConcurrency')
@@ -177,6 +182,7 @@ export default class Button extends Component {
    * @default 'button'
    * @public
    */
+  @defaultValue
   buttonType = 'button';
 
   /**
@@ -199,6 +205,7 @@ export default class Button extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   block = false;
 
   /**
@@ -210,6 +217,7 @@ export default class Button extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   bubble = false;
 
   /**
@@ -219,6 +227,7 @@ export default class Button extends Component {
    * @type String
    * @public
    */
+  @defaultValue
   iconActive = null;
 
   /**
@@ -228,6 +237,7 @@ export default class Button extends Component {
    * @type String
    * @public
    */
+  @defaultValue
   iconInactive = null;
 
   /**
@@ -256,6 +266,7 @@ export default class Button extends Component {
    * @type any
    * @public
    */
+  @defaultValue
   value = null;
 
   /**
@@ -269,6 +280,7 @@ export default class Button extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   preventConcurrency = true;
 
   /**
@@ -283,6 +295,7 @@ export default class Button extends Component {
    * @default 'default'
    * @private
    */
+  @defaultValue
   state = 'default';
 
   /**
@@ -336,6 +349,7 @@ export default class Button extends Component {
    * @type boolean
    * @public
    */
+  @defaultValue
   reset = null;
 
   /**
@@ -347,6 +361,7 @@ export default class Button extends Component {
    * @type String
    * @public
    */
+  @defaultValue
   size = null;
 
   @sizeClass('btn', 'size')
@@ -373,6 +388,7 @@ export default class Button extends Component {
    * @type string
    * @public
    */
+  @defaultValue
   title = null;
 
   /**
@@ -389,6 +405,7 @@ export default class Button extends Component {
    * @param {*} value
    * @public
    */
+  @defaultValue
   onClick = null;
 
   /**
@@ -443,10 +460,5 @@ export default class Button extends Component {
     }
 
     return this.get('bubble');
-  }
-
-  init() {
-    super.init(...arguments);
-    this.get('reset');
   }
 }

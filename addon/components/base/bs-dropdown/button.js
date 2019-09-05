@@ -15,7 +15,7 @@ import { schedule } from '@ember/runloop';
 @classNames('dropdown-toggle')
 export default class DropdownButton extends Button {
   didReceiveAttrs() {
-    super.didReceiveAttrs(...arguments);
+    // super.didReceiveAttrs(...arguments);
     let dropdown = this.get('dropdown');
     if (dropdown) {
       schedule('actions', this, function() {

@@ -53,6 +53,7 @@ export default class FormGroup extends BaseFormGroup {
   * @default 'glyphicon glyphicon-ok'
   * @public
   */
+ @defaultValue
  successIcon = Config.formValidationSuccessIcon;
 
  /**
@@ -74,6 +75,7 @@ export default class FormGroup extends BaseFormGroup {
   * @type string
   * @public
   */
+ @defaultValue
  errorIcon = Config.formValidationErrorIcon;
 
  /**
@@ -95,6 +97,7 @@ export default class FormGroup extends BaseFormGroup {
   * @type string
   * @public
   */
+ @defaultValue
  warningIcon = Config.formValidationWarningIcon;
 
  /**
@@ -124,6 +127,7 @@ export default class FormGroup extends BaseFormGroup {
   * @type string
   * @public
   */
+ @defaultValue
  infoIcon = Config.formValidationInfoIcon;
 
  /**
@@ -135,6 +139,7 @@ export default class FormGroup extends BaseFormGroup {
   * @type String
   * @public
   */
+ @defaultValue
  size = null;
 
  @sizeClass('form-group', 'size')

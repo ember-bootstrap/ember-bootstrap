@@ -76,7 +76,6 @@ export default class FormElementControlInput extends Control {
   get type() {
     return 'text';
   }
-
   set type(value) {
     // fallback to 'text' if value is empty
     if (isEmpty(value)) {

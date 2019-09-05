@@ -5,10 +5,11 @@ import Component from '@ember/component';
 import { guidFor } from '@ember/object/internals';
 import { isArray } from '@ember/array';
 import EmberObject, { action, computed } from '@ember/object';
-import { cancel, later, next, run, schedule } from '@ember/runloop';
+import { cancel, later, next, schedule } from '@ember/runloop';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { getDestinationElement } from '../../utils/dom';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 class InState extends EmberObject {
   hover = false;
@@ -43,6 +44,7 @@ export default class ContextualHelp extends Component {
    * @default 'top'
    * @public
    */
+  @defaultValue
   placement = 'top';
 
   /**
@@ -55,6 +57,7 @@ export default class ContextualHelp extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   autoPlacement = true;
 
   /**
@@ -65,6 +68,7 @@ export default class ContextualHelp extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   visible = false;
 
   /**
@@ -72,7 +76,8 @@ export default class ContextualHelp extends Component {
    * @type boolean
    * @private
    */
-  inDom = false;
+  @defaultValue
+  inDom = this.get('visible') && this.get('triggerTargetElement');
 
   /**
    * Set to false to disable fade animations.
@@ -82,6 +87,7 @@ export default class ContextualHelp extends Component {
    * @default true
    * @public
    */
+  @defaultValue
   fade = true;
 
   /**
@@ -104,6 +110,7 @@ export default class ContextualHelp extends Component {
    * @default 0
    * @public
    */
+  @defaultValue
   delay = 0;
 
   /**
@@ -142,6 +149,7 @@ export default class ContextualHelp extends Component {
    * @default 150
    * @public
    */
+  @defaultValue
   transitionDuration = 150;
 
   /**
@@ -154,6 +162,7 @@ export default class ContextualHelp extends Component {
    * @see autoPlacement
    * @public
    */
+  @defaultValue
   viewportSelector = 'body';
 
   /**
@@ -166,7 +175,10 @@ export default class ContextualHelp extends Component {
    * @see autoPlacement
    * @public
    */
+  @defaultValue
   viewportPadding = 0;
+
+  _parentFinder = self.document ? self.document.createTextNode('') : '';
 
   /**
    * The id of the overlay element.
@@ -225,6 +237,7 @@ export default class ContextualHelp extends Component {
    * @type string
    * @public
    */
+  @defaultValue
   triggerElement = null;
 
   /**
@@ -252,6 +265,7 @@ export default class ContextualHelp extends Component {
    * @default 'hover focus'
    * @public
    */
+  @defaultValue
   triggerEvents = 'hover focus';
 
   @computed('triggerEvents')
@@ -281,6 +295,7 @@ export default class ContextualHelp extends Component {
    * @default false
    * @public
    */
+  @defaultValue
   renderInPlace = false;
 
   /**
@@ -300,6 +315,7 @@ export default class ContextualHelp extends Component {
    * @type string
    * @private
    */
+  @defaultValue
   hoverState = null;
 
   /**
@@ -646,6 +662,21 @@ export default class ContextualHelp extends Component {
   }
 
   @action
+  _handleEnter(e) {
+    this.handleTriggerEvent(this.enter, e);
+  }
+
+  @action
+  _handleLeave(e) {
+    this.handleTriggerEvent(this.leave, e);
+  }
+
+  @action
+  _handleToggle(e) {
+    this.handleTriggerEvent(this.toggle, e);
+  }
+
+  @action
   close() {
     // Make sure our click state is off, otherwise the next click would
     // close the already-closed tooltip/popover. We don't need to worry
@@ -653,15 +684,6 @@ export default class ContextualHelp extends Component {
     // events like click.
     this.set('inState.click', false);
     this.hide();
-  }
-
-  init() {
-    super.init(...arguments);
-    this._handleEnter = run.bind(this, this.handleTriggerEvent, this.enter);
-    this._handleLeave = run.bind(this, this.handleTriggerEvent, this.leave);
-    this._handleToggle = run.bind(this, this.handleTriggerEvent, this.toggle);
-    this._parentFinder = self.document ? self.document.createTextNode('') : '';
-    this.inDom = this.get('visible') && this.get('triggerTargetElement');
   }
 
   didInsertElement() {

@@ -1,6 +1,7 @@
 import { layout as templateLayout } from '@ember-decorators/component';
 import Modal from 'ember-bootstrap/components/bs-modal';
 import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with a some common default markup
@@ -95,6 +96,7 @@ export default class ModalSimple extends Modal {
    * @default true
    * @public
    */
+  @defaultValue
   closeButton = true;
 
   /**
@@ -105,6 +107,7 @@ export default class ModalSimple extends Modal {
    * @default 'Ok'
    * @public
    */
+  @defaultValue
   closeTitle = 'Ok';
 
   /**
@@ -115,6 +118,7 @@ export default class ModalSimple extends Modal {
    * @default 'primary'
    * @public
    */
+  @defaultValue
   submitButtonType = 'primary';
 
   /**
