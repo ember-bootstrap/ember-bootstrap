@@ -43,7 +43,6 @@ module.exports = function(environment) {
       hostWhitelist: [/^localhost:\d+$/]
     },
 
-    unstableApiURL: 'http://simonihmig.github.io/ember-bootstrap/',
     bootstrapVersion: process.env.BOOTSTRAPVERSION || 4,
     failOnDeprecation: !!process.env.FAIL_ON_DEPRECATION
   };

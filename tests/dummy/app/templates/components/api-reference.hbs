@@ -1,20 +1,5 @@
-{{#if title}}
-  <div class="card-header">
-    {{title}}
-  </div>
-{{/if}}
-{{#if hasBlock}}
-  <div class="card-body">
-    {{yield}}
-  </div>
-{{/if}}
-<ul class="list-group list-group-flush">
-  <li class="list-group-item">
-    {{#if apiUrl}}
-      <a href={{apiUrl}}>API Docs</a>
-    {{/if}}
-  </li>
-  {{#if bsUrl}}
-    <li class="list-group-item"><a href={{bsUrl}} target="_blank" rel="noopener">Bootstrap Docs</a></li>
-  {{/if}}
-</ul>
+<BsAlert @type="info" @dismissible={{false}}>
+  This page shows some example usage of the <code>&lt;{{@component.templateName}}&gt;</code> component. For the full documentation please refer to
+  the <a href={{@component.apiUrl}} class="alert-link">API Docs</a>. You might also want to consult the official
+  <a href={{@component.bsUrl}} class="alert-link" target="_blank" rel="noopener">Bootstrap Docs</a> for general information.
+</BsAlert>

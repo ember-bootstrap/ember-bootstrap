@@ -1,12 +1,12 @@
 import { inject as service } from '@ember/service';
 import { readOnly, notEmpty } from '@ember/object/computed';
-import Controller, { inject as controller } from '@ember/controller';
+import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 
 export default Controller.extend({
-  application: controller(),
+  router: service(),
   component: service(),
-  currentRouteName: readOnly('application.currentRouteName'),
+  currentRouteName: readOnly('router.currentRouteName'),
 
   isDetailPage: notEmpty('currentComponent'),
 
