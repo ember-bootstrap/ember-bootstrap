@@ -13,8 +13,7 @@ export default class FormElementControl extends Component {
    * @property value
    * @public
    */
-  @defaultValue
-  value = null;
+
 
   /**
    * @property ariaDescribedBy

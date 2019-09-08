@@ -459,8 +459,6 @@ export default class FormElement extends FormGroup {
    * @property value
    * @public
    */
-  @defaultValue
-  value = null;
 
   /**
    The property name of the form element's `model` (by default the `model` of its parent `Components.Form`) that this
@@ -1067,7 +1065,7 @@ export default class FormElement extends FormGroup {
       this.set('showValidationOn', ['focusOut']);
     }
     if (!isBlank(this.get('property'))) {
-      assert('You cannot set both property and value on a form element', this.get('value') === null);
+      assert('You cannot set both property and value on a form element', this.get('value') === null || this.get('value') === undefined);
       defineProperty(this, 'value', alias(`model.${this.get('property')}`));
       this.setupValidations();
     }

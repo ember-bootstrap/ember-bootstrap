@@ -5,7 +5,7 @@ import Login from '../../models/login';
 
 export default Controller.extend({
   formLayout: 'vertical',
-  email: null,
+  email: 'foo@example.com',
   password: null,
   checkbox: false,
   radio: null,
