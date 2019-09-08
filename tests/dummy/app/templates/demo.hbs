@@ -18,16 +18,10 @@
       <h1>
         {{currentComponent.title}}
       </h1>
-      <div class="row">
-        <div class="col-md-8">
-          <p class="lead">
-            {{currentComponent.description}}
-          </p>
-        </div>
-        <div class="col-md-4">
-          <ApiReference @model={{this.currentComponent}} />
-        </div>
-      </div>
+      <p class="lead">
+        {{currentComponent.description}}
+      </p>
+      <ApiReference @component={{this.currentComponent}} />
     {{/if}}
     {{outlet}}
   </div>
