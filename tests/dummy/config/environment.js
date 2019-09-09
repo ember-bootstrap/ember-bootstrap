@@ -20,19 +20,34 @@ module.exports = function(environment) {
 
     contentSecurityPolicy: {
       'default-src': ["'none'"],
-      'script-src':  [
+      'script-src': [
         "'self'",
+        "'sha256-1xtiB6mV1iIKZ5iz9CxA5lEnfEg8d0XEH3FL9L8NBqo='",
+        "use.typekit.net"
       ],
-      'font-src':    ["'self'"],
-      'connect-src': ["'self'"],
-      'img-src':     [
+      'font-src': [
+        "'self'",
+        "use.typekit.net",
+        "use.fontawesome.com"
+      ],
+      'connect-src': [
+        "'self'",
+        "performance.typekit.net"
+      ],
+      'img-src': [
         "'self'",
         // Bootstrap 4 uses data URL for some SVG images in CSS
         "data:",
+        "p.typekit.net"
       ],
-      'style-src':   ["'self'"],
-      'media-src':   ["'self'"],
-      'frame-src':   [
+      'style-src': [
+        "'self'",
+        "'unsafe-inline'",
+        "use.typekit.net",
+        "use.fontawesome.com"
+      ],
+      'media-src': ["'self'"],
+      'frame-src': [
         // iframe used in application template of dummy app
         "https://ghbtns.com/",
       ],
@@ -66,9 +81,27 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
 
-    // testem requires frame-src 'self' to run
-    // https://github.com/rwjblue/ember-cli-content-security-policy/blob/v1.0.0/index.js#L85-L88
-    ENV.contentSecurityPolicy['frame-src'].push("'self'");
+    ENV.contentSecurityPolicy = {
+      'default-src': ["'none'"],
+      'script-src': [
+        "'self'",
+      ],
+      'font-src': ["'self'"],
+      'connect-src': ["'self'"],
+      'img-src': [
+        "'self'",
+        // Bootstrap 4 uses data URL for some SVG images in CSS
+        "data:",
+      ],
+      'style-src': ["'self'"],
+      'media-src': ["'self'"],
+      'frame-src': [
+        "https://ghbtns.com/",
+        // testem requires frame-src 'self' to run
+        // https://github.com/rwjblue/ember-cli-content-security-policy/blob/v1.0.0/index.js#L85-L88
+        "'self'"
+      ]
+    };
   }
 
   if (environment === 'production') {
