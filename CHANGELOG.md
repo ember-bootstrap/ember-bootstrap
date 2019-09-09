@@ -1,4 +1,19 @@
 
+## 3.0.0-rc.4 (2019-09-09)
+
+#### :boom: Breaking Change
+* [#888](https://github.com/kaliber5/ember-bootstrap/pull/888) Migrated all components to native classes. Requires Babel-Polyfill for IE11 ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#892](https://github.com/kaliber5/ember-bootstrap/pull/892) Fix CSP for demo app ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#888](https://github.com/kaliber5/ember-bootstrap/pull/888) Migrated all components to native classes. Requires Babel-Polyfill for IE11 ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Cyrille David ([@dcyriller](https://github.com/dcyriller))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
 ## 3.0.0-rc.3 (2019-08-23)
 
 #### :boom: Breaking Change
