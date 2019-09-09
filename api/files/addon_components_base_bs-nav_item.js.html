@@ -58,9 +58,11 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Component from &#x27;@ember/component&#x27;;
-import { observer } from &#x27;@ember/object&#x27;;
+import { classNameBindings, layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { observes } from &#x27;@ember-decorators/object&#x27;;
 import { filter, filterBy, gt } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import &#x27;@ember/object&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
 import LinkComponent from &#x27;@ember/routing/link-component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-nav/item&#x27;;
@@ -78,11 +80,10 @@ import { assert } from &#x27;@ember/debug&#x27;;
  @uses Mixins.ComponentParent
  @public
  */
-export default Component.extend(ComponentParent, {
-  layout,
-  classNameBindings: [&#x27;disabled&#x27;, &#x27;active&#x27;],
-  tagName: &#x27;li&#x27;,
-
+@templateLayout(layout)
+@classNameBindings(&#x27;disabled&#x27;, &#x27;active&#x27;)
+@tagName(&#x27;li&#x27;)
+export default class NavItem extends Component.extend(ComponentParent) {
   /**
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
    * By default it will look at any nested &#x60;link-to&#x60; components and make itself disabled if there is a disabled link.
@@ -92,10 +93,12 @@ export default Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  disabled: overrideableCP(&#x27;_disabled&#x27;, function() {
+  @overrideableCP(&#x27;_disabled&#x27;, function() {
     return this.get(&#x27;_disabled&#x27;);
-  }),
-  _disabled: false,
+  })
+  disabled;
+
+  _disabled = false;
 
   /**
    * Render the nav item as active.
@@ -107,10 +110,12 @@ export default Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  active: overrideableCP(&#x27;_active&#x27;, function() {
+  @overrideableCP(&#x27;_active&#x27;, function() {
     return this.get(&#x27;_active&#x27;);
-  }),
-  _active: false,
+  })
+  active;
+
+  _active = false;
 
   /**
    * Collection of all &#x60;Ember.LinkComponent&#x60;s that are children
@@ -118,15 +123,22 @@ export default Component.extend(ComponentParent, {
    * @property childLinks
    * @private
    */
-  childLinks: filter(&#x27;children&#x27;, function(view) {
+  @filter(&#x27;children&#x27;, function(view) {
     return view instanceof LinkComponent;
-  }),
+  })
+  childLinks;
 
-  activeChildLinks: filterBy(&#x27;childLinks&#x27;, &#x27;active&#x27;),
-  hasActiveChildLinks: gt(&#x27;activeChildLinks.length&#x27;, 0),
+  @filterBy(&#x27;childLinks&#x27;, &#x27;active&#x27;)
+  activeChildLinks;
 
-  disabledChildLinks: filterBy(&#x27;childLinks&#x27;, &#x27;disabled&#x27;),
-  hasDisabledChildLinks: gt(&#x27;disabledChildLinks.length&#x27;, 0),
+  @gt(&#x27;activeChildLinks.length&#x27;, 0)
+  hasActiveChildLinks;
+
+  @filterBy(&#x27;childLinks&#x27;, &#x27;disabled&#x27;)
+  disabledChildLinks;
+
+  @gt(&#x27;disabledChildLinks.length&#x27;, 0)
+  hasDisabledChildLinks;
 
   /**
    * Called when clicking the nav item
@@ -134,37 +146,40 @@ export default Component.extend(ComponentParent, {
    * @event onClick
    * @public
    */
-  onClick() {},
+  onClick() {
+  }
 
   click() {
     this.onClick();
-  },
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     let { model, models } = this.getProperties(&#x27;model&#x27;, &#x27;models&#x27;);
     assert(&#x27;You cannot pass both &#x60;@model&#x60; and &#x60;@models&#x60; to a nav item component!&#x27;, !model || !models);
 
     this.get(&#x27;activeChildLinks&#x27;);
     this.get(&#x27;disabledChildLinks&#x27;);
-  },
+  }
 
-  _observeActive: observer(&#x27;activeChildLinks.[]&#x27;, function() {
+  @observes(&#x27;activeChildLinks.[]&#x27;)
+  _observeActive() {
     scheduleOnce(&#x27;afterRender&#x27;, this, this._updateActive);
-  }),
+  }
 
   _updateActive() {
     this.set(&#x27;_active&#x27;, this.get(&#x27;hasActiveChildLinks&#x27;));
-  },
+  }
 
-  _observeDisabled: observer(&#x27;disabledChildLinks.[]&#x27;, function() {
+  @observes(&#x27;disabledChildLinks.[]&#x27;)
+  _observeDisabled() {
     scheduleOnce(&#x27;afterRender&#x27;, this, this._updateDisabled);
-  }),
+  }
 
   _updateDisabled() {
     this.set(&#x27;_disabled&#x27;, this.get(&#x27;hasDisabledChildLinks&#x27;));
   }
-});
+}
 
     </pre>
 </div>
@@ -179,9 +194,9 @@ export default Component.extend(ComponentParent, {
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

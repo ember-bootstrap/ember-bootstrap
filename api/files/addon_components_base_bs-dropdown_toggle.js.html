@@ -58,9 +58,10 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { attributeBindings, classNames, tagName } from &#x27;@ember-decorators/component&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
 import { schedule } from &#x27;@ember/runloop&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
  Anchor element that triggers the parent dropdown to open.
@@ -73,28 +74,19 @@ import { schedule } from &#x27;@ember/runloop&#x27;;
  @extends Ember.Component
  @publicø
  */
-export default Component.extend({
-  classNames: [&#x27;dropdown-toggle&#x27;],
-  ariaRole: &#x27;button&#x27;,
-
-  /**
-   * Defaults to a &#x60;&lt;a&gt;&#x60; tag. Change for other types of dropdown toggles.
-   *
-   * @property tagName
-   * @type string
-   * @default a
-   * @public
-   */
-  tagName: &#x27;a&#x27;,
-
-  attributeBindings: [&#x27;href&#x27;],
+@classNames(&#x27;dropdown-toggle&#x27;)
+@tagName(&#x27;a&#x27;)
+@attributeBindings(&#x27;href&#x27;)
+export default class DropdownToggle extends Component {
+  ariaRole = &#x27;button&#x27;;
 
   /**
    * @property inNav
    * @type {boolean}
    * @private
    */
-  inNav: false,
+  @defaultValue
+  inNav = false;
 
   /**
    * Computed property to generate a &#x60;href=&quot;#&quot;&#x60; attribute when &#x60;tagName&#x60; is &quot;a&quot;.
@@ -104,11 +96,9 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  href: computed(&#x27;tagName&#x27;, function() {
-    if (this.get(&#x27;tagName&#x27;).toUpperCase() === &#x27;A&#x27;) {
-      return &#x27;#&#x27;;
-    }
-  }),
+  get href() {
+    return this.get(&#x27;tagName&#x27;).toUpperCase() === &#x27;A&#x27; ? &#x27;#&#x27; : undefined;
+  }
 
   /**
    * When clicking the toggle this action is called.
@@ -117,15 +107,15 @@ export default Component.extend({
    * @param {*} value
    * @public
    */
-  onClick() {},
+  onClick() {}
 
   click(e) {
     e.preventDefault();
     this.get(&#x27;onClick&#x27;)();
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    // super.didReceiveAttrs(...arguments);
     let dropdown = this.get(&#x27;dropdown&#x27;);
     if (dropdown) {
       schedule(&#x27;actions&#x27;, this, function() {
@@ -135,7 +125,7 @@ export default Component.extend({
       });
     }
   }
-});
+}
 
     </pre>
 </div>
@@ -150,9 +140,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

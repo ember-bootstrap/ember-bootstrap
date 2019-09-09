@@ -58,23 +58,26 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { classNameBindings, layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-accordion/title&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
  Component for an accordion item title.
 
  See [Components.Accordion](Components.Accordion.html) for examples.
 
- @class AccordionTitle
+ @class AccordionItemTitle
  @namespace Components
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  ariaRole: &#x27;tab&#x27;,
-  classNameBindings: [&#x27;collapsed:collapsed:expanded&#x27;],
+@templateLayout(layout)
+@classNameBindings(&#x27;collapsed:collapsed:expanded&#x27;)
+export default class AccordionItemTitle extends Component {
+  @defaultValue
+  ariaRole = &#x27;tab&#x27;;
 
   /**
    * @property collapsed
@@ -92,7 +95,8 @@ export default Component.extend({
    * @event onClick
    * @public
    */
-  onClick() {},
+  onClick() {
+  }
 
   click(e) {
     e.preventDefault();
@@ -100,8 +104,7 @@ export default Component.extend({
       this.get(&#x27;onClick&#x27;)();
     }
   }
-
-});
+}
 
     </pre>
 </div>
@@ -116,9 +119,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

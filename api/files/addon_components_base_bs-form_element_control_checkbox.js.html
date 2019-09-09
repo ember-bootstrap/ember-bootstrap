@@ -58,6 +58,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { attributeBindings, tagName } from &#x27;@ember-decorators/component&#x27;;
 import Control from &#x27;../control&#x27;;
 import { baseAttributes } from &#x27;./input&#x27;;
 
@@ -68,26 +69,22 @@ import { baseAttributes } from &#x27;./input&#x27;;
  @extends Components.FormElementControl
  @private
  */
-export default Control.extend({
-  tagName: &#x27;input&#x27;,
-  attributeBindings: [
-    ...baseAttributes,
-    &#x27;value:checked&#x27;,
-    &#x27;type&#x27;
-  ],
-
+@tagName(&#x27;input&#x27;)
+@attributeBindings(...baseAttributes, &#x27;value:checked&#x27;, &#x27;type&#x27;)
+export default class FormElementControlCheckbox extends Control {
   /**
    * @property type
    * @type {String}
    * @readonly
    * @private
    */
-  type: &#x27;checkbox&#x27;,
+  type = &#x27;checkbox&#x27;;
 
   click(event) {
     this.get(&#x27;onChange&#x27;)(event.target.checked);
   }
-});
+}
+
     </pre>
 </div>
           </div>
@@ -101,9 +98,9 @@ export default Control.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

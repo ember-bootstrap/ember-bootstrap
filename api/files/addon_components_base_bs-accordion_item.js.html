@@ -58,10 +58,12 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { oneWay, not } from &#x27;@ember/object/computed&#x27;;
-import Component from &#x27;@ember/component&#x27;;
+import { classNameBindings, layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
+import { not, oneWay } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-accordion/item&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
  A collapsible/expandable item within an accordion
@@ -73,14 +75,9 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-accordion/item&
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-
-  /**
-   * Add additional binding to mark the entire component area disabled
-   */
-  classNameBindings: [&#x27;disabled&#x27;, &#x27;typeClass&#x27;],
-
+@templateLayout(layout)
+@classNameBindings(&#x27;disabled&#x27;, &#x27;typeClass&#x27;)
+export default class AccordionItem extends Component {
   /**
    * The title of the accordion item, displayed as a .panel-title element
    *
@@ -88,7 +85,8 @@ export default Component.extend({
    * @type string
    * @public
    */
-  title: null,
+  @defaultValue
+  title = null;
 
   /**
    * The value of the accordion item, which is used as the value of the &#x60;selected&#x60; property of the parent [Components.Accordion](Components.Accordion.html) component
@@ -96,27 +94,31 @@ export default Component.extend({
    * @property value
    * @public
    */
-  value: oneWay(&#x27;elementId&#x27;),
+  @oneWay(&#x27;elementId&#x27;)
+  value;
 
   /**
    * @property selected
    * @private
    */
-  selected: null,
+  @defaultValue
+  selected = null;
 
   /**
    * @property titleComponent
    * @type {String}
    * @private
    */
-  titleComponent: &#x27;bs-accordion/item/title&#x27;,
+  @defaultValue
+  titleComponent = &#x27;bs-accordion/item/title&#x27;;
 
   /**
    * @property bodyComponent
    * @type {String}
    * @private
    */
-  bodyComponent: &#x27;bs-accordion/item/body&#x27;,
+  @defaultValue
+  bodyComponent = &#x27;bs-accordion/item/body&#x27;;
 
   /**
    * @property collapsed
@@ -124,9 +126,10 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  collapsed: computed(&#x27;value&#x27;, &#x27;selected&#x27;, function() {
+  @(computed(&#x27;value&#x27;, &#x27;selected&#x27;).readOnly())
+  get collapsed() {
     return this.get(&#x27;value&#x27;) !== this.get(&#x27;selected&#x27;);
-  }).readOnly(),
+  }
 
   /**
    * @property active
@@ -134,15 +137,16 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  active: not(&#x27;collapsed&#x27;),
+  @not(&#x27;collapsed&#x27;)
+  active;
 
   /**
    * @property disabled
    * @type boolean
    * @public
    */
-  disabled: false,
-
+  @defaultValue
+  disabled = false;
 
   /**
    * Property for type styling
@@ -154,7 +158,8 @@ export default Component.extend({
    * @default &#x27;default&#x27;
    * @public
    */
-  type: &#x27;default&#x27;,
+  @defaultValue
+  type = &#x27;default&#x27;;
 
   /**
    * Reference to the parent &#x60;Components.Accordion&#x60; class.
@@ -162,15 +167,14 @@ export default Component.extend({
    * @property accordion
    * @private
    */
-  accordion: null,
 
   /**
    * @event onClick
    * @public
    */
-  onClick() {}
-
-});
+  onClick() {
+  }
+}
 
     </pre>
 </div>
@@ -185,9 +189,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

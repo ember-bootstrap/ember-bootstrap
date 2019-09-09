@@ -58,6 +58,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { classNames } from &#x27;@ember-decorators/component&#x27;;
 import Button from &#x27;ember-bootstrap/components/bs-button&#x27;;
 import { schedule } from &#x27;@ember/runloop&#x27;;
 
@@ -71,11 +72,10 @@ import { schedule } from &#x27;@ember/runloop&#x27;;
  @extends Components.Button
  @public
  */
-export default Button.extend({
-  classNames: [&#x27;dropdown-toggle&#x27;],
-
+@classNames(&#x27;dropdown-toggle&#x27;)
+export default class DropdownButton extends Button {
   didReceiveAttrs() {
-    this._super(...arguments);
+    // super.didReceiveAttrs(...arguments);
     let dropdown = this.get(&#x27;dropdown&#x27;);
     if (dropdown) {
       schedule(&#x27;actions&#x27;, this, function() {
@@ -85,7 +85,7 @@ export default Button.extend({
       });
     }
   }
-});
+}
 
     </pre>
 </div>
@@ -100,9 +100,9 @@ export default Button.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

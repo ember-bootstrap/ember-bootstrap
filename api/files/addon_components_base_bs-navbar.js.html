@@ -58,11 +58,14 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { classNameBindings, classNames, layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { observes } from &#x27;@ember-decorators/object&#x27;;
+import { action, computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { observer, computed } from &#x27;@ember/object&#x27;;
 import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-navbar&#x27;;
 import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
   Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
@@ -156,13 +159,11 @@ import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-  layout,
-
-  tagName: &#x27;nav&#x27;,
-  classNames: [&#x27;navbar&#x27;],
-  classNameBindings: [&#x27;positionClass&#x27;, &#x27;typeClass&#x27;],
-
+@templateLayout(layout)
+@tagName(&#x27;nav&#x27;)
+@classNames(&#x27;navbar&#x27;)
+@classNameBindings(&#x27;positionClass&#x27;, &#x27;typeClass&#x27;)
+export default class Navbar extends Component {
   /**
    * Manages the state for the responsive menu between the toggle and the content.
    *
@@ -171,13 +172,15 @@ export default Component.extend({
    * @default true
    * @public
    */
-  collapsed: true,
+  @defaultValue
+  collapsed = true;
 
   /**
    * @property _collapsed
    * @private
    */
-  _collapsed: listenTo(&#x27;collapsed&#x27;),
+  @listenTo(&#x27;collapsed&#x27;)
+  _collapsed;
 
   /**
    * Controls whether the wrapping div is a fluid container or not.
@@ -187,7 +190,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  fluid: true,
+  @defaultValue
+  fluid = true;
 
   /**
    * Specifies the position classes for the navbar, currently supporting none, &quot;fixed-top&quot;, &quot;fixed-bottom&quot;, and
@@ -199,9 +203,11 @@ export default Component.extend({
    * @default null
    * @public
    */
-  position: null,
+  @defaultValue
+  position = null;
 
-  positionClass: computed(&#x27;position&#x27;, function() {
+  @computed(&#x27;position&#x27;)
+  get positionClass() {
     let position = this.get(&#x27;position&#x27;);
     let validPositions = this.get(&#x27;_validPositions&#x27;);
     let positionPrefix = this.get(&#x27;_positionPrefix&#x27;);
@@ -211,7 +217,7 @@ export default Component.extend({
     }
 
     return &#x60;${positionPrefix}${position}&#x60;;
-  }),
+  }
 
   /**
    * Property for type styling
@@ -223,8 +229,11 @@ export default Component.extend({
    * @default &#x27;default&#x27;
    * @public
    */
-  type: &#x27;default&#x27;,
-  typeClass: typeClass(&#x27;navbar&#x27;, &#x27;type&#x27;),
+  @defaultValue
+  type = &#x27;default&#x27;;
+
+  @typeClass(&#x27;navbar&#x27;, &#x27;type&#x27;)
+  typeClass;
 
   /**
    * The action to be sent when the navbar is about to be collapsed.
@@ -235,7 +244,7 @@ export default Component.extend({
    * @event onCollapse
    * @public
    */
-  onCollapse() {},
+  onCollapse() {}
 
   /**
    * The action to be sent after the navbar has been collapsed (including the CSS transition).
@@ -243,7 +252,7 @@ export default Component.extend({
    * @event onCollapsed
    * @public
    */
-  onCollapsed() {},
+  onCollapsed() {}
 
   /**
    * The action to be sent when the navbar is about to be expanded.
@@ -254,7 +263,7 @@ export default Component.extend({
    * @event onExpand
    * @public
    */
-  onExpand() {},
+  onExpand() {}
 
   /**
    * The action to be sent after the navbar has been expanded (including the CSS transition).
@@ -262,9 +271,10 @@ export default Component.extend({
    * @event onExpanded
    * @public
    */
-  onExpanded() {},
+  onExpanded() {}
 
-  _onCollapsedChange: observer(&#x27;_collapsed&#x27;, function() {
+  @observes(&#x27;_collapsed&#x27;)
+  _onCollapsedChange() {
     let collapsed = this.get(&#x27;_collapsed&#x27;);
     let active = this.get(&#x27;active&#x27;);
     if (collapsed !== active) {
@@ -275,43 +285,38 @@ export default Component.extend({
     } else {
       this.hide();
     }
-  }),
+  }
 
   /**
    * @method expand
    * @private
    */
+  @action
   expand() {
     if (this.onExpand() !== false) {
       this.set(&#x27;_collapsed&#x27;, false);
     }
-  },
+  }
 
   /**
    * @method collapse
    * @private
    */
+  @action
   collapse() {
     if (this.onCollapse() !== false) {
       this.set(&#x27;_collapsed&#x27;, true);
     }
-  },
+  }
 
-  actions: {
-    expand() {
+  @action
+  toggleNavbar() {
+    if (this.get(&#x27;_collapsed&#x27;)) {
       this.expand();
-    },
-    collapse() {
+    } else {
       this.collapse();
-    },
-    toggleNavbar() {
-      if (this.get(&#x27;_collapsed&#x27;)) {
-        this.expand();
-      } else {
-        this.collapse();
-      }
     }
-  },
+  }
 
   /**
    * Bootstrap 4 Only: Defines the responsive toggle breakpoint size. Options are the standard
@@ -340,29 +345,33 @@ export default Component.extend({
    * @type {String}
    * @private
    */
-  toggleComponent: &#x27;bs-navbar/toggle&#x27;,
+  @defaultValue
+  toggleComponent = &#x27;bs-navbar/toggle&#x27;;
 
   /**
    * @property contentComponent
    * @type {String}
    * @private
    */
-  contentComponent: &#x27;bs-navbar/content&#x27;,
+  @defaultValue
+  contentComponent = &#x27;bs-navbar/content&#x27;;
 
   /**
    * @property navComponent
    * @type {String}
    * @private
    */
-  navComponent: &#x27;bs-navbar/nav&#x27;,
+  @defaultValue
+  navComponent = &#x27;bs-navbar/nav&#x27;;
 
   /**
    * @property linkToComponent
    * @type {String}
    * @private
    */
-  linkToComponent: &#x27;bs-navbar/link-to&#x27;
-});
+  @defaultValue
+  linkToComponent = &#x27;bs-navbar/link-to&#x27;;
+}
 
     </pre>
 </div>
@@ -377,9 +386,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

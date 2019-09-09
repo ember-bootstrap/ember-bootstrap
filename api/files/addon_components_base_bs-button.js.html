@@ -58,14 +58,24 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import {
+  attributeBindings,
+  classNameBindings,
+  classNames,
+  layout as templateLayout,
+  tagName,
+} from &#x27;@ember-decorators/component&#x27;;
+
+import { observes } from &#x27;@ember-decorators/object&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { equal, or } from &#x27;@ember/object/computed&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { observer, computed } from &#x27;@ember/object&#x27;;
-import { deprecatingAlias, equal, or }  from &#x27;@ember/object/computed&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-button&#x27;;
 import sizeClass from &#x27;ember-bootstrap/utils/cp/size-class&#x27;;
 import typeClass from &#x27;ember-bootstrap/utils/cp/type-class&#x27;;
 import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -138,14 +148,12 @@ import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-  layout,
-  tagName: &#x27;button&#x27;,
-  classNames: [&#x27;btn&#x27;],
-  classNameBindings: [&#x27;active&#x27;, &#x27;block:btn-block&#x27;, &#x27;sizeClass&#x27;, &#x27;typeClass&#x27;],
-
-  attributeBindings: [&#x27;_disabled:disabled&#x27;, &#x27;buttonType:type&#x27;, &#x27;title&#x27;],
-
+@templateLayout(layout)
+@tagName(&#x27;button&#x27;)
+@classNames(&#x27;btn&#x27;)
+@classNameBindings(&#x27;active&#x27;, &#x27;block:btn-block&#x27;, &#x27;sizeClass&#x27;, &#x27;typeClass&#x27;)
+@attributeBindings(&#x27;_disabled:disabled&#x27;, &#x27;buttonType:type&#x27;, &#x27;title&#x27;)
+export default class Button extends Component {
   /**
    * Default label of the button. Not need if used as a block component
    *
@@ -153,7 +161,8 @@ export default Component.extend({
    * @type string
    * @public
    */
-  defaultText: null,
+  @defaultValue
+  defaultText = null;
 
   /**
    * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which is pending.
@@ -163,7 +172,8 @@ export default Component.extend({
    * @type string
    * @public
    */
-  pendingText: undefined,
+  @defaultValue
+  pendingText = undefined;
 
   /**
    * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which succeeded.
@@ -173,18 +183,8 @@ export default Component.extend({
    * @type string
    * @public
    */
-  fulfilledText: undefined,
-
-  /**
-   * @property resolvedText
-   * @type string
-   * @deprecated
-   * @public
-   */
-  resolvedText: deprecatingAlias(&#x27;fulfilledText&#x27;, {
-    id: &#x27;ember-bootstrap.bs-button-resolved-text&#x27;,
-    until: &#x27;3.0.0&#x27;
-  }),
+  @defaultValue
+  fulfilledText = undefined;
 
   /**
    * Label of the button used if &#x60;onClick&#x60; event has returned a Promise which failed.
@@ -194,7 +194,8 @@ export default Component.extend({
    * @type string
    * @public
    */
-  rejectedText: undefined,
+  @defaultValue
+  rejectedText = undefined;
 
   /**
    * Property to disable the button
@@ -209,15 +210,17 @@ export default Component.extend({
    * @default null
    * @public
    */
-  disabled: null,
+  @defaultValue
+  disabled = null;
 
-  _disabled: computed(&#x27;disabled&#x27;, &#x27;isPending&#x27;, &#x27;preventConcurrency&#x27;, function() {
+  @computed(&#x27;disabled&#x27;, &#x27;isPending&#x27;, &#x27;preventConcurrency&#x27;)
+  get _disabled() {
     if (this.get(&#x27;disabled&#x27;) !== null) {
       return this.get(&#x27;disabled&#x27;);
     }
 
     return this.get(&#x27;isPending&#x27;) &amp;&amp; this.get(&#x27;preventConcurrency&#x27;);
-  }),
+  }
 
   /**
    * Set the type of the button, either &#x27;button&#x27; or &#x27;submit&#x27;
@@ -227,7 +230,8 @@ export default Component.extend({
    * @default &#x27;button&#x27;
    * @public
    */
-  buttonType: &#x27;button&#x27;,
+  @defaultValue
+  buttonType = &#x27;button&#x27;;
 
   /**
    * Set the &#x27;active&#x27; class to apply active/pressed CSS styling
@@ -237,7 +241,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  active: false,
+  @defaultValue
+  active = false;
 
   /**
    * Property for block level buttons
@@ -248,7 +253,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  block: false,
+  @defaultValue
+  block = false;
 
   /**
    * A click event on a button will not bubble up the DOM tree if it has an &#x60;onClick&#x60; action handler. Set to true to
@@ -259,7 +265,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  bubble: false,
+  @defaultValue
+  bubble = false;
 
   /**
    * If button is active and this is set, the icon property will match this property
@@ -268,7 +275,8 @@ export default Component.extend({
    * @type String
    * @public
    */
-  iconActive: null,
+  @defaultValue
+  iconActive = null;
 
   /**
    * If button is inactive and this is set, the icon property will match this property
@@ -277,7 +285,8 @@ export default Component.extend({
    * @type String
    * @public
    */
-  iconInactive: null,
+  @defaultValue
+  iconInactive = null;
 
   /**
    * Class(es) (e.g. glyphicons or font awesome) to use as a button icon
@@ -288,13 +297,14 @@ export default Component.extend({
    * @readonly
    * @public
    */
-  icon: overrideableCP(&#x27;active&#x27;, function() {
+  @overrideableCP(&#x27;active&#x27;, function() {
     if (this.get(&#x27;active&#x27;)) {
       return this.get(&#x27;iconActive&#x27;);
     } else {
       return this.get(&#x27;iconInactive&#x27;);
     }
-  }),
+  })
+  icon;
 
   /**
    * Supply a value that will be associated with this button. This will be send
@@ -304,7 +314,8 @@ export default Component.extend({
    * @type any
    * @public
    */
-  value: null,
+  @defaultValue
+  value = null;
 
   /**
    * Controls if &#x60;onClick&#x60; action is fired concurrently. If &#x60;true&#x60; clicking button multiple times will not trigger
@@ -317,7 +328,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  preventConcurrency: true,
+  @defaultValue
+  preventConcurrency = true;
 
   /**
    * State of the button. The button&#x27;s label (if not used as a block component) will be set to the
@@ -331,7 +343,8 @@ export default Component.extend({
    * @default &#x27;default&#x27;
    * @private
    */
-  state: &#x27;default&#x27;,
+  @defaultValue
+  state = &#x27;default&#x27;;
 
   /**
    * Promise returned by &#x60;onClick&#x60; event is pending.
@@ -340,7 +353,8 @@ export default Component.extend({
    * @type Boolean
    * @private
    */
-  isPending: equal(&#x27;state&#x27;, &#x27;pending&#x27;),
+  @equal(&#x27;state&#x27;, &#x27;pending&#x27;)
+  isPending;
 
   /**
    * Promise returned by &#x60;onClick&#x60; event has been succeeded.
@@ -349,7 +363,8 @@ export default Component.extend({
    * @type Boolean
    * @private
    */
-  isFulfilled: equal(&#x27;state&#x27;, &#x27;fulfilled&#x27;),
+  @equal(&#x27;state&#x27;, &#x27;fulfilled&#x27;)
+  isFulfilled;
 
   /**
    * Promise returned by &#x60;onClick&#x60; event has been rejected.
@@ -358,7 +373,8 @@ export default Component.extend({
    * @type Boolean
    * @private
    */
-  isRejected: equal(&#x27;state&#x27;, &#x27;rejected&#x27;),
+  @equal(&#x27;state&#x27;, &#x27;rejected&#x27;)
+  isRejected;
 
   /**
    * Promise returned by &#x60;onClick&#x60; event has been succeeded or rejected.
@@ -367,7 +383,8 @@ export default Component.extend({
    * @type Boolean
    * @private
    */
-  isSettled: or(&#x27;isFulfilled&#x27;, &#x27;isRejected&#x27;),
+  @or(&#x27;isFulfilled&#x27;, &#x27;isRejected&#x27;)
+  isSettled;
 
   /**
    * Set this to &#x60;true&#x60; to reset the &#x60;state&#x60;. A typical use case is to bind this attribute with ember-data isDirty flag.
@@ -380,7 +397,8 @@ export default Component.extend({
    * @type boolean
    * @public
    */
-  reset: null,
+  @defaultValue
+  reset = null;
 
   /**
    * Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27;
@@ -391,8 +409,11 @@ export default Component.extend({
    * @type String
    * @public
    */
-  size: null,
-  sizeClass: sizeClass(&#x27;btn&#x27;, &#x27;size&#x27;),
+  @defaultValue
+  size = null;
+
+  @sizeClass(&#x27;btn&#x27;, &#x27;size&#x27;)
+  sizeClass;
 
   /**
    * Property for type styling
@@ -405,7 +426,8 @@ export default Component.extend({
    * @public
    */
 
-  typeClass: typeClass(&#x27;btn&#x27;, &#x27;type&#x27;),
+  @typeClass(&#x27;btn&#x27;, &#x27;type&#x27;)
+  typeClass;
 
   /**
    * The HTML title attribute
@@ -414,7 +436,8 @@ export default Component.extend({
    * @type string
    * @public
    */
-  title: null,
+  @defaultValue
+  title = null;
 
   /**
    * When clicking the button this action is called with the value of the button (that is the value of the &quot;value&quot; property).
@@ -430,7 +453,8 @@ export default Component.extend({
    * @param {*} value
    * @public
    */
-  onClick: null,
+  @defaultValue
+  onClick = null;
 
   /**
    * This will reset the state property to &#x27;default&#x27;, and with that the button&#x27;s label to defaultText
@@ -440,17 +464,19 @@ export default Component.extend({
    */
   resetState() {
     this.set(&#x27;state&#x27;, &#x27;default&#x27;);
-  },
+  }
 
-  resetObserver: observer(&#x27;reset&#x27;, function() {
+  @observes(&#x27;reset&#x27;)
+  resetObserver() {
     if (this.get(&#x27;reset&#x27;)) {
       scheduleOnce(&#x27;actions&#x27;, this, &#x27;resetState&#x27;);
     }
-  }),
+  }
 
-  text: computed(&#x27;state&#x27;, &#x27;defaultText&#x27;, &#x27;pendingText&#x27;, &#x27;fulfilledText&#x27;, &#x27;rejectedText&#x27;, function() {
+  @computed(&#x27;state&#x27;, &#x27;defaultText&#x27;, &#x27;pendingText&#x27;, &#x27;fulfilledText&#x27;, &#x27;rejectedText&#x27;)
+  get text() {
     return this.getWithDefault(&#x60;${this.get(&#x27;state&#x27;)}Text&#x60;, this.get(&#x27;defaultText&#x27;));
-  }),
+  }
 
   /**
    * @method click
@@ -482,14 +508,8 @@ export default Component.extend({
     }
 
     return this.get(&#x27;bubble&#x27;);
-  },
-
-  init() {
-    this._super(...arguments);
-    this.get(&#x27;reset&#x27;);
   }
-
-});
+}
 
     </pre>
 </div>
@@ -504,9 +524,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

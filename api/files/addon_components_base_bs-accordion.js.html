@@ -58,9 +58,12 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { action } from &#x27;@ember/object&#x27;;
+import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-accordion&#x27;;
 import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
   Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),
@@ -93,9 +96,10 @@ import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-  layout,
-  ariaRole: &#x27;tablist&#x27;,
+@templateLayout(layout)
+export default class Accordion extends Component {
+  @defaultValue
+  ariaRole = &#x27;tablist&#x27;;
 
   /**
    * The value of the currently selected accordion item. Set this to change selection programmatically.
@@ -106,14 +110,16 @@ export default Component.extend({
    * @property selected
    * @public
    */
-  selected: null,
+  @defaultValue
+  selected = null;
 
   /**
    * @property itemComponent
    * @type {String}
    * @private
    */
-  itemComponent: &#x27;bs-accordion/item&#x27;,
+  @defaultValue
+  itemComponent = &#x27;bs-accordion/item&#x27;;
 
   /**
    * The value of the currently selected accordion item
@@ -121,7 +127,8 @@ export default Component.extend({
    * @property isSelected
    * @private
    */
-  isSelected: listenTo(&#x27;selected&#x27;),
+  @listenTo(&#x27;selected&#x27;)
+  isSelected;
 
   /**
    * Action when the selected accordion item is about to be changed.
@@ -134,21 +141,19 @@ export default Component.extend({
    * @param oldValue
    * @public
    */
-  onChange(newValue, oldValue) {}, // eslint-disable-line no-unused-vars
+  onChange(newValue, oldValue) {} // eslint-disable-line no-unused-vars
 
-  actions: {
-    change(newValue) {
-      let oldValue = this.get(&#x27;isSelected&#x27;);
-      if (oldValue === newValue) {
-        newValue = null;
-      }
-      if (this.get(&#x27;onChange&#x27;)(newValue, oldValue) !== false) {
-        this.set(&#x27;isSelected&#x27;, newValue);
-      }
+  @action
+  doChange(newValue) {
+    let oldValue = this.get(&#x27;isSelected&#x27;);
+    if (oldValue === newValue) {
+      newValue = null;
+    }
+    if (this.get(&#x27;onChange&#x27;)(newValue, oldValue) !== false) {
+      this.set(&#x27;isSelected&#x27;, newValue);
     }
   }
-
-});
+}
 
     </pre>
 </div>
@@ -163,9 +168,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

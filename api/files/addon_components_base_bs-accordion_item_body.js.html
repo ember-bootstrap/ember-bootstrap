@@ -58,23 +58,24 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-accordion/body&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
  Component for an accordion item body.
 
  See [Components.Accordion](Components.Accordion.html) for examples.
 
- @class AccordionBody
+ @class AccordionItemBody
  @namespace Components
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  tagName: &#x27;&#x27;,
-
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class AccordionItemBody extends Component {
   /**
    * @property collapsed
    * @type boolean
@@ -86,8 +87,9 @@ export default Component.extend({
    * @type {String}
    * @private
    */
-  collapseComponent: &#x27;bs-collapse&#x27;,
-});
+  @defaultValue
+  collapseComponent = &#x27;bs-collapse&#x27;;
+}
 
     </pre>
 </div>
@@ -102,9 +104,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

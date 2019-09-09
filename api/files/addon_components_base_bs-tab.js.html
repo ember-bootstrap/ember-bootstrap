@@ -58,15 +58,17 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { oneWay, filter } from &#x27;@ember/object/computed&#x27;;
+import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
+import { action, computed } from &#x27;@ember/object&#x27;;
+import { filter, oneWay } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
 import { isPresent } from &#x27;@ember/utils&#x27;;
 import { A } from &#x27;@ember/array&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-tab&#x27;;
 import ComponentParent from &#x27;ember-bootstrap/mixins/component-parent&#x27;;
 import TabPane from &#x27;ember-bootstrap/components/bs-tab/pane&#x27;;
 import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
   Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap&#x27;s tab.js plugin,
@@ -170,9 +172,8 @@ import listenTo from &#x27;ember-bootstrap/utils/cp/listen-to&#x27;;
   @uses Mixins.ComponentParent
   @public
 */
-export default Component.extend(ComponentParent, {
-  layout,
-
+@templateLayout(layout)
+export default class Tab extends Component.extend(ComponentParent) {
   /**
    * Type of nav, either &quot;pills&quot; or &quot;tabs&quot;
    *
@@ -181,21 +182,24 @@ export default Component.extend(ComponentParent, {
    * @default &#x27;tabs&#x27;
    * @public
    */
-  type: &#x27;tabs&#x27;,
+  @defaultValue
+  type = &#x27;tabs&#x27;;
 
   /**
    * @property paneComponent
    * @type {String}
    * @private
    */
-  paneComponent: &#x27;bs-tab/pane&#x27;,
+  @defaultValue
+  paneComponent = &#x27;bs-tab/pane&#x27;;
 
   /**
    * @property navComponent
    * @type {String}
    * @private
    */
-  navComponent: &#x27;bs-nav&#x27;,
+  @defaultValue
+  navComponent = &#x27;bs-nav&#x27;;
 
   /**
    * By default the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)
@@ -206,7 +210,8 @@ export default Component.extend(ComponentParent, {
    * @default false
    * @public
    */
-  customTabs: false,
+  @defaultValue
+  customTabs = false;
 
   /**
    * The id (&#x60;elementId&#x60;) of the active [TabPane](Components.TabPane.html).
@@ -230,13 +235,15 @@ export default Component.extend(ComponentParent, {
    * @type string
    * @public
    */
-  activeId: oneWay(&#x27;childPanes.firstObject.elementId&#x27;),
+  @oneWay(&#x27;childPanes.firstObject.elementId&#x27;)
+  activeId;
 
   /**
    * @property isActiveId
    * @private
    */
-  isActiveId: listenTo(&#x27;activeId&#x27;),
+  @listenTo(&#x27;activeId&#x27;)
+  isActiveId;
 
   /**
    * Set to false to disable the fade animation when switching tabs.
@@ -246,7 +253,8 @@ export default Component.extend(ComponentParent, {
    * @default true
    * @public
    */
-  fade: true,
+  @defaultValue
+  fade = true;
 
   /**
    * The duration of the fade animation
@@ -256,7 +264,8 @@ export default Component.extend(ComponentParent, {
    * @default 150
    * @public
    */
-  fadeDuration: 150,
+  @defaultValue
+  fadeDuration = 150;
 
   /**
    * This action is called when switching the active tab, with the new and previous pane id
@@ -267,7 +276,7 @@ export default Component.extend(ComponentParent, {
    * @event onChange
    * @public
    */
-  onChange() {},
+  onChange() {}
 
   /**
    * All &#x60;TabPane&#x60; child components
@@ -277,9 +286,10 @@ export default Component.extend(ComponentParent, {
    * @readonly
    * @private
    */
-  childPanes: filter(&#x27;children&#x27;, function(view) {
+  @filter(&#x27;children&#x27;, function(view) {
     return view instanceof TabPane;
-  }),
+  })
+  childPanes;
 
   /**
    * Array of objects that define the tab structure
@@ -289,7 +299,8 @@ export default Component.extend(ComponentParent, {
    * @readonly
    * @private
    */
-  navItems: computed(&#x27;childPanes.@each.{elementId,title,group}&#x27;, function() {
+  @computed(&#x27;childPanes.@each.{elementId,title,group}&#x27;)
+  get navItems() {
     let items = A();
     this.get(&#x27;childPanes&#x27;).forEach((pane) =&gt; {
       let groupTitle = pane.get(&#x27;groupTitle&#x27;);
@@ -312,18 +323,17 @@ export default Component.extend(ComponentParent, {
       }
     });
     return items;
-  }),
+  }
 
-  actions: {
-    select(id) {
-      let previous = this.get(&#x27;isActiveId&#x27;);
-      if (this.get(&#x27;onChange&#x27;)(id, previous) !== false) {
-        // change active tab when &#x60;onChange&#x60; does not return false
-        this.set(&#x27;isActiveId&#x27;, id);
-      }
+  @action
+  select(id) {
+    let previous = this.get(&#x27;isActiveId&#x27;);
+    if (this.get(&#x27;onChange&#x27;)(id, previous) !== false) {
+      // change active tab when &#x60;onChange&#x60; does not return false
+      this.set(&#x27;isActiveId&#x27;, id);
     }
   }
-});
+}
 
     </pre>
 </div>
@@ -338,9 +348,9 @@ export default Component.extend(ComponentParent, {
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

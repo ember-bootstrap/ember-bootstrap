@@ -58,11 +58,13 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Component from &#x27;@ember/component&#x27;;
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
+import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown/menu&#x27;;
 import { next } from &#x27;@ember/runloop&#x27;;
 import { getDestinationElement } from &#x27;../../../utils/dom&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
  Component for the dropdown menu.
@@ -74,17 +76,16 @@ import { getDestinationElement } from &#x27;../../../utils/dom&#x27;;
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  tagName: &#x27;&#x27;,
-
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class DropdownMenu extends Component {
   /**
    * @property ariaRole
    * @default menu
    * @type string
    * @protected
    */
-  ariaRole: &#x27;menu&#x27;,
+  ariaRole = &#x27;menu&#x27;;
 
   /**
    * Alignment of the menu, either &quot;left&quot; or &quot;right&quot;
@@ -94,7 +95,8 @@ export default Component.extend({
    * @default left
    * @public
    */
-  align: &#x27;left&#x27;,
+  @defaultValue
+  align = &#x27;left&#x27;;
 
   /**
    * @property direction
@@ -102,14 +104,15 @@ export default Component.extend({
    * @type string
    * @private
    */
-  direction: &#x27;down&#x27;,
+  @defaultValue
+  direction = &#x27;down&#x27;;
 
   /**
    * @property inNav
    * @type {boolean}
    * @private
    */
-  inNav: false,
+  inNav = false;
 
   /**
    * By default the menu is rendered in the same place the dropdown. If you experience clipping
@@ -120,19 +123,21 @@ export default Component.extend({
    * @default true
    * @public
    */
-  renderInPlace: true,
+  @defaultValue
+  renderInPlace = true;
 
   /**
    * @property _renderInPlace
    * @type boolean
    * @private
    */
-  _renderInPlace: computed(&#x27;renderInPlace&#x27;, function() {
+  @computed(&#x27;renderInPlace&#x27;)
+  get _renderInPlace() {
     return (
       this.get(&#x27;renderInPlace&#x27;) ||
       !this.destinationElement
     );
-  }),
+  }
 
   /**
    * The wormhole destinationElement
@@ -142,40 +147,39 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  destinationElement: computed(function() {
+  @computed
+  get destinationElement() {
     return getDestinationElement(this)
-  }),
+  }
 
-  alignClass: computed(&#x27;align&#x27;, function() {
-    if (this.get(&#x27;align&#x27;) !== &#x27;left&#x27;) {
-      return &#x60;dropdown-menu-${this.get(&#x27;align&#x27;)}&#x60;;
-    }
-  }),
+  @computed(&#x27;align&#x27;)
+  get alignClass() {
+    return this.get(&#x27;align&#x27;) !== &#x27;left&#x27; ? &#x60;dropdown-menu-${this.get(&#x27;align&#x27;)}&#x60; : undefined;
+  }
 
-  isOpen: computed({
-    get() {
-      return false;
-    },
-    set(key, value) {
-      // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu&#x27;s children
-      // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
-      next(() =&gt; {
-        if (this.get(&#x27;isDestroying&#x27;) || this.get(&#x27;isDestroyed&#x27;)) {
-          return;
-        }
-        this.set(&#x27;_isOpen&#x27;, value);
-      });
-      return value;
-    }
-  }),
+  @computed
+  get isOpen() {
+    return false;
+  }
 
-  _isOpen: false,
+  set isOpen(value) {
+    // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu&#x27;s children
+    // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
+    next(() =&gt; {
+      if (this.get(&#x27;isDestroying&#x27;) || this.get(&#x27;isDestroyed&#x27;)) {
+        return;
+      }
+      this.set(&#x27;_isOpen&#x27;, value);
+    });
+    return value;
+  }
 
-  flip: true,
+  _isOpen = false;
+  flip = true;
+  _popperApi = null;
 
-  _popperApi: null,
-
-  popperPlacement: computed(&#x27;direction&#x27;, &#x27;align&#x27;, function() {
+  @computed(&#x27;direction&#x27;, &#x27;align&#x27;)
+  get popperPlacement() {
     let placement = &#x27;bottom-start&#x27;;
     let { direction, align } = this.getProperties(&#x27;direction&#x27;, &#x27;align&#x27;);
 
@@ -192,9 +196,10 @@ export default Component.extend({
       placement = &#x27;bottom-end&#x27;;
     }
     return placement;
-  }),
+  }
 
-  popperModifiers: computed(&#x27;inNav&#x27;, &#x27;flip&#x27;, function() {
+  @computed(&#x27;inNav&#x27;, &#x27;flip&#x27;)
+  get popperModifiers() {
     return {
       // @todo add offset config
       applyStyle: {
@@ -204,29 +209,29 @@ export default Component.extend({
         enabled: this.get(&#x27;flip&#x27;)
       }
     };
-  }),
+  }
 
   /**
    * @property itemComponent
    * @type {String}
    * @private
    */
-  itemComponent: &#x27;bs-dropdown/menu/item&#x27;,
+  itemComponent = &#x27;bs-dropdown/menu/item&#x27;;
 
   /**
    * @property linkToComponent
    * @type {String}
    * @private
    */
-  linkToComponent: &#x27;bs-dropdown/menu/link-to&#x27;,
+  linkToComponent = &#x27;bs-dropdown/menu/link-to&#x27;;
 
   /**
    * @property dividerComponent
    * @type {String}
    * @private
    */
-  dividerComponent: &#x27;bs-dropdown/menu/divider&#x27;
-});
+  dividerComponent = &#x27;bs-dropdown/menu/divider&#x27;;
+}
 
     </pre>
 </div>
@@ -241,9 +246,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

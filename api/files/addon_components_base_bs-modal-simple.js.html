@@ -58,8 +58,10 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import Modal from &#x27;ember-bootstrap/components/bs-modal&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-modal-simple&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with a some common default markup
@@ -136,9 +138,8 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-modal-simple&#x
   @extends Components.Modal
   @public
 */
-export default Modal.extend({
-  layout,
-
+@templateLayout(layout)
+export default class ModalSimple extends Modal {
   /**
    * The title of the modal, visible in the modal header. Is ignored if &#x60;header&#x60; is false.
    *
@@ -155,7 +156,8 @@ export default Modal.extend({
    * @default true
    * @public
    */
-  closeButton: true,
+  @defaultValue
+  closeButton = true;
 
   /**
    * The title of the default close button.
@@ -165,7 +167,8 @@ export default Modal.extend({
    * @default &#x27;Ok&#x27;
    * @public
    */
-  closeTitle: &#x27;Ok&#x27;,
+  @defaultValue
+  closeTitle = &#x27;Ok&#x27;;
 
   /**
    * The type of the submit button (primary button).
@@ -175,7 +178,8 @@ export default Modal.extend({
    * @default &#x27;primary&#x27;
    * @public
    */
-  submitButtonType: &#x27;primary&#x27;,
+  @defaultValue
+  submitButtonType = &#x27;primary&#x27;;
 
   /**
    * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null.
@@ -185,8 +189,7 @@ export default Modal.extend({
    * @default null
    * @public
    */
-
-});
+}
 
     </pre>
 </div>
@@ -201,9 +204,9 @@ export default Modal.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

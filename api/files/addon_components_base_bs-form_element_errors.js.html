@@ -58,8 +58,10 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/errors&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
  @class FormElementErrors
@@ -67,33 +69,34 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/er
  @extends Ember.Component
  @private
  */
-export default Component.extend({
-  layout,
-  tagName: &#x27;&#x27;,
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class FormElementErrors extends Component {
+ /**
+  * @property show
+  * @type {Boolean}
+  * @public
+  */
+ @defaultValue
+ show = false;
 
-  /**
-   * @property show
-   * @type {Boolean}
-   * @public
-   */
-  show: false,
+ /**
+  * @property messages
+  * @type {Ember.Array}
+  * @public
+  */
 
-  /**
-   * @property messages
-   * @type {Ember.Array}
-   * @public
-   */
-
-  /**
-   * Whether or not should display several errors at the same time.
-   *
-   * @default false
-   * @property showMultipleErrors
-   * @public
-   * @type {Boolean}
-   */
-  showMultipleErrors: false
-});
+ /**
+  * Whether or not should display several errors at the same time.
+  *
+  * @default false
+  * @property showMultipleErrors
+  * @public
+  * @type {Boolean}
+  */
+ @defaultValue
+ showMultipleErrors = false;
+}
 
     </pre>
 </div>
@@ -108,9 +111,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

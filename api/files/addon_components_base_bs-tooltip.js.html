@@ -58,9 +58,11 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import ContextualHelp from &#x27;./bs-contextual-help&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-tooltip&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
   Component that implements Bootstrap [tooltips](http://getbootstrap.com/javascript/#tooltips).
@@ -137,15 +139,15 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-tooltip&#x27;;
   @extends Components.ContextualHelp
   @public
 */
-export default ContextualHelp.extend({
-  layout,
-
+@templateLayout(layout)
+export default class Tooltip extends ContextualHelp {
   /**
    * @property elementComponent
    * @type {String}
    * @private
    */
-  elementComponent: &#x27;bs-tooltip/element&#x27;,
+  @defaultValue
+  elementComponent = &#x27;bs-tooltip/element&#x27;;
 
   /**
    * The DOM element of the arrow element.
@@ -155,10 +157,11 @@ export default ContextualHelp.extend({
    * @readonly
    * @private
    */
-  arrowElement: computed(&#x27;overlayElement&#x27;, function() {
+  @computed(&#x27;overlayElement&#x27;)
+  get arrowElement() {
     return this.get(&#x27;overlayElement&#x27;).querySelector(&#x27;.tooltip-arrow&#x27;);
-  })
-});
+  }
+}
 
     </pre>
 </div>
@@ -173,9 +176,9 @@ export default ContextualHelp.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

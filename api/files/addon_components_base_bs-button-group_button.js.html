@@ -61,6 +61,7 @@
 import { computed } from &#x27;@ember/object&#x27;;
 import { isArray } from &#x27;@ember/array&#x27;;
 import Button from &#x27;ember-bootstrap/components/bs-button&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
  Internal component for button-group buttons
@@ -70,20 +71,21 @@ import Button from &#x27;ember-bootstrap/components/bs-button&#x27;;
  @extends Components.Button
  @private
  */
-export default Button.extend({
-
+export default class ButtonGroupButton extends Button {
   /**
    * @property groupValue
    * @private
    */
-  groupValue: null,
+  @defaultValue
+  groupValue = null;
 
   /**
    * @property buttonGroupType
    * @type string
    * @private
    */
-  buttonGroupType: false,
+  @defaultValue
+  buttonGroupType = false;
 
   /**
    * @property active
@@ -91,7 +93,8 @@ export default Button.extend({
    * @readonly
    * @private
    */
-  active: computed(&#x27;buttonGroupType&#x27;, &#x27;groupValue.[]&#x27;, &#x27;value&#x27;, function() {
+  @(computed(&#x27;buttonGroupType&#x27;, &#x27;groupValue.[]&#x27;, &#x27;value&#x27;).readOnly())
+  get active() {
     let { value, groupValue } = this.getProperties(&#x27;value&#x27;, &#x27;groupValue&#x27;);
     if (this.get(&#x27;buttonGroupType&#x27;) === &#x27;radio&#x27;) {
       return value === groupValue;
@@ -101,9 +104,8 @@ export default Button.extend({
       }
     }
     return false;
-  }).readOnly()
-
-});
+  }
+}
 
     </pre>
 </div>
@@ -118,9 +120,9 @@ export default Button.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

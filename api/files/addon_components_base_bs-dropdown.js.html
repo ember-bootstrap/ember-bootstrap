@@ -58,10 +58,12 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { classNameBindings, layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
+import { action, computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
 import { bind } from &#x27;@ember/runloop&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
   Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
@@ -101,9 +103,10 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
   contextual component rather than a standalone dropdown to ensure the correct styling
   regardless of your Bootstrap version.
 
-  &gt; Note: the use of angle brackets &#x60;&lt;ddm.linkTo&gt;&#x60; as shown above is only supported for Ember 3.10, as it relies on its
-  &gt; own native implementation of the &#x60;LinkComponent&#x60;. For older Ember versions please use the legacy syntax with positional
-  &gt; arguments: &#x60;{{#ddm.link-to &quot;bar&quot; this.model}}Bar{{/ddm.link-to}}&#x60;
+  &gt; Note: the use of angle brackets &#x60;&lt;ddm.linkTo&gt;&#x60; as shown above is only supported for Ember &gt;= 3.10, as it relies on its
+  &gt; Ember&#x27;s native implementation of the [&#x60;LinkComponent&#x60;](https://api.emberjs.com/ember/3.12/classes/Ember.Templates.helpers/methods/link-to?anchor=link-to).
+  &gt; For older Ember versions please use the legacy syntax with positional arguments:
+  &gt; &#x60;{{#ddm.link-to &quot;bar&quot; this.model}}Bar{{/ddm.link-to}}&#x60;
 
   ### Button dropdowns
 
@@ -218,10 +221,9 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
   @extends Ember.Component
   @public
 s*/
-let component = Component.extend({
-  layout,
-  classNameBindings: [&#x27;containerClass&#x27;],
-
+@templateLayout(layout)
+@classNameBindings(&#x27;containerClass&#x27;)
+export default class Dropdown extends Component {
   /**
    * This property reflects the state of the dropdown, whether it is open or closed.
    *
@@ -230,7 +232,8 @@ let component = Component.extend({
    * @type boolean
    * @private
    */
-  isOpen: false,
+  @defaultValue
+  isOpen = false;
 
   /**
    * By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.
@@ -240,7 +243,8 @@ let component = Component.extend({
    * @type boolean
    * @public
    */
-  closeOnMenuClick: true,
+  @defaultValue
+  closeOnMenuClick = true;
 
   /**
    * By default the dropdown menu will expand downwards. Other options include, &#x27;up&#x27;, &#x27;left&#x27; and &#x27;right&#x27;
@@ -250,7 +254,8 @@ let component = Component.extend({
    * @default &#x27;down&#x27;
    * @public
    */
-  direction: &#x27;down&#x27;,
+  @defaultValue
+  direction = &#x27;down&#x27;;
 
   /**
    * Indicates the dropdown is being used as a navigation item dropdown.
@@ -270,21 +275,23 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  containerClass: computed(&#x27;toggle.tagName&#x27;, &#x27;direction&#x27;, function() {
+  @computed(&#x27;toggle.tagName&#x27;, &#x27;direction&#x27;)
+  get containerClass() {
     if (this.get(&#x27;toggle.tagName&#x27;) === &#x27;button&#x27; &amp;&amp; !this.get(&#x27;toggle.block&#x27;)) {
       return this.get(&#x27;direction&#x27;) !== &#x27;down&#x27; ? &#x60;btn-group drop${this.get(&#x27;direction&#x27;)}&#x60; : &#x27;btn-group&#x27;;
     } else {
       return &#x60;drop${this.get(&#x27;direction&#x27;)}&#x60;;
     }
-  }),
+  }
 
   /**
    * @property toggleElement
    * @private
    */
-  toggleElement: computed(&#x27;toggle&#x27;, function() {
+  @computed(&#x27;toggle&#x27;)
+  get toggleElement() {
     return typeof FastBoot === &#x27;undefined&#x27; ? this.get(&#x27;toggle.element&#x27;) || null : null;
-  }),
+  }
 
   /**
    * Reference to the child toggle (Toggle or Button)
@@ -292,7 +299,17 @@ let component = Component.extend({
    * @property toggle
    * @private
    */
-  toggle: null,
+  toggle = null;
+
+  /**
+   * The DOM element of the &#x60;.dropdown-menu&#x60; element
+   * @type object
+   * @readonly
+   * @private
+   */
+  get menuElement() {
+    return document.getElementById(&#x60;${this.get(&#x27;elementId&#x27;)}__menu&#x60;);
+  }
 
   /**
    * Action is called when dropdown is about to be shown
@@ -301,7 +318,7 @@ let component = Component.extend({
    * @param {*} value
    * @public
    */
-  onShow(value) {}, // eslint-disable-line no-unused-vars
+  onShow(value) {} // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when dropdown is about to be hidden
@@ -310,48 +327,49 @@ let component = Component.extend({
    * @param {*} value
    * @public
    */
-  onHide(value) {}, // eslint-disable-line no-unused-vars
+  onHide(value) {} // eslint-disable-line no-unused-vars
 
-  actions: {
-    toggleDropdown() {
-      if (this.get(&#x27;isOpen&#x27;)) {
-        this.send(&#x27;closeDropdown&#x27;);
-      } else {
-        this.send(&#x27;openDropdown&#x27;);
-      }
-    },
-
-    openDropdown() {
-      this.set(&#x27;isOpen&#x27;, true);
-      this.addClickListener();
-      this.get(&#x27;onShow&#x27;)();
-    },
-
-    closeDropdown() {
-      this.set(&#x27;isOpen&#x27;, false);
-      this.removeClickListener();
-      this.get(&#x27;onHide&#x27;)();
+  @action
+  toggleDropdown() {
+    if (this.get(&#x27;isOpen&#x27;)) {
+      this.send(&#x27;closeDropdown&#x27;);
+    } else {
+      this.send(&#x27;openDropdown&#x27;);
     }
-  },
+  }
+
+  @action
+  openDropdown() {
+    this.set(&#x27;isOpen&#x27;, true);
+    this.addClickListener();
+    this.get(&#x27;onShow&#x27;)();
+  }
+
+  @action
+  closeDropdown() {
+    this.set(&#x27;isOpen&#x27;, false);
+    this.removeClickListener();
+    this.get(&#x27;onHide&#x27;)();
+  }
 
   addClickListener() {
     if (!this.clickListener) {
       this.clickListener = bind(this, this.closeOnClickHandler);
       document.addEventListener(&#x27;click&#x27;, this.clickListener, true);
     }
-  },
+  }
 
   removeClickListener() {
     if (this.clickListener)  {
       document.removeEventListener(&#x27;click&#x27;, this.clickListener, true);
       this.clickListener = null;
     }
-  },
+  }
 
   willDestroyElement() {
-    this._super(...arguments);
+    super.willDestroyElement(...arguments);
     this.removeClickListener();
-  },
+  }
 
   /**
    * Handler for click events to close the dropdown
@@ -369,46 +387,29 @@ let component = Component.extend({
       &amp;&amp; ((menuElement &amp;&amp; !menuElement.contains(target)) || this.get(&#x27;closeOnMenuClick&#x27;))) {
       this.send(&#x27;closeDropdown&#x27;);
     }
-  },
+  }
 
   /**
    * @property buttonComponent
    * @type {String}
    * @private
    */
-  buttonComponent: &#x27;bs-dropdown/button&#x27;,
+  buttonComponent = &#x27;bs-dropdown/button&#x27;;
 
   /**
    * @property toggleComponent
    * @type {String}
    * @private
    */
-  toggleComponent: &#x27;bs-dropdown/toggle&#x27;,
+  toggleComponent = &#x27;bs-dropdown/toggle&#x27;;
 
   /**
    * @property menuComponent
    * @type {String}
    * @private
    */
-  menuComponent: &#x27;bs-dropdown/menu&#x27;
-});
-
-Object.defineProperties(component.prototype, {
-
-  /**
-   * The DOM element of the &#x60;.dropdown-menu&#x60; element
-   * @type object
-   * @readonly
-   * @private
-   */
-  menuElement: {
-    get() {
-      return document.getElementById(&#x60;${this.get(&#x27;elementId&#x27;)}__menu&#x60;);
-    }
-  }
-});
-
-export default component;
+  menuComponent = &#x27;bs-dropdown/menu&#x27;;
+}
 
     </pre>
 </div>
@@ -423,9 +424,9 @@ export default component;
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

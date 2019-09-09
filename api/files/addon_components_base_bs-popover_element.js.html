@@ -58,8 +58,9 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import ContextualHelpElement from &#x27;../bs-contextual-help/element&#x27;;
+import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import { notEmpty } from &#x27;@ember/object/computed&#x27;;
+import ContextualHelpElement from &#x27;../bs-contextual-help/element&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-popover/element&#x27;;
 
 /**
@@ -70,9 +71,8 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-popover/element
  @extends Components.ContextualHelpElement
  @private
  */
-export default ContextualHelpElement.extend({
-  layout,
-
+@templateLayout(layout)
+export default class PopoverElement extends ContextualHelpElement {
   /**
    * @property title
    * @type string
@@ -84,8 +84,9 @@ export default ContextualHelpElement.extend({
    * @type boolean
    * @private
    */
-  hasTitle: notEmpty(&#x27;title&#x27;)
-});
+  @notEmpty(&#x27;title&#x27;)
+  hasTitle;
+}
 
     </pre>
 </div>
@@ -100,9 +101,9 @@ export default ContextualHelpElement.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

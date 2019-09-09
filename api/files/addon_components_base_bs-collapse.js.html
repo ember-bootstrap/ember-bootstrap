@@ -58,14 +58,17 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { not, alias, and } from &#x27;@ember/object/computed&#x27;;
+import { classNameBindings } from &#x27;@ember-decorators/component&#x27;;
+import { observes } from &#x27;@ember-decorators/object&#x27;;
+import { alias, and, not } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { isPresent } from &#x27;@ember/utils&#x27;;
-import { observer } from &#x27;@ember/object&#x27;;
+import &#x27;@ember/object&#x27;;
 import { next } from &#x27;@ember/runloop&#x27;;
 import { camelize } from &#x27;@ember/string&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
   An Ember component that mimics the behaviour of [Bootstrap&#x27;s collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -86,10 +89,8 @@ import { assert } from &#x27;@ember/debug&#x27;;
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-
-  classNameBindings: [&#x27;collapse&#x27;, &#x27;collapsing&#x27;],
-
+@classNameBindings(&#x27;collapse&#x27;, &#x27;collapsing&#x27;)
+export default class Collapse extends Component {
   /**
    * Collapsed/expanded state
    *
@@ -98,7 +99,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  collapsed: true,
+  @defaultValue
+  collapsed = true;
 
   /**
    * True if this item is expanded
@@ -106,11 +108,17 @@ export default Component.extend({
    * @property active
    * @private
    */
-  active: false,
+  @defaultValue
+  active = !this.get(&#x27;collapsed&#x27;);
 
-  collapse: not(&#x27;transitioning&#x27;),
-  collapsing: alias(&#x27;transitioning&#x27;),
-  showContent: and(&#x27;collapse&#x27;, &#x27;active&#x27;),
+  @not(&#x27;transitioning&#x27;)
+  collapse;
+
+  @alias(&#x27;transitioning&#x27;)
+  collapsing;
+
+  @and(&#x27;collapse&#x27;, &#x27;active&#x27;)
+  showContent;
 
   /**
    * true if the component is currently transitioning
@@ -119,7 +127,8 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  transitioning: false,
+  @defaultValue
+  transitioning = false;
 
   /**
    * The size of the element when collapsed. Defaults to 0.
@@ -129,7 +138,8 @@ export default Component.extend({
    * @default 0
    * @public
    */
-  collapsedSize: 0,
+  @defaultValue
+  collapsedSize = 0;
 
   /**
    * The size of the element when expanded. When null the value is calculated automatically to fit the containing elements.
@@ -139,7 +149,7 @@ export default Component.extend({
    * @default null
    * @public
    */
-  expandedSize: null,
+  expandedSize = null;
 
   /**
    * Usually the size (height) of the element is only set while transitioning, and reseted afterwards. Set to true to always set a size.
@@ -149,7 +159,7 @@ export default Component.extend({
    * @default true
    * @private
    */
-  resetSizeWhenNotCollapsing: true,
+  resetSizeWhenNotCollapsing = true;
 
   /**
    * The direction (height/width) of the collapse animation.
@@ -161,7 +171,7 @@ export default Component.extend({
    * @default &#x27;height&#x27;
    * @public
    */
-  collapseDimension: &#x27;height&#x27;,
+  collapseDimension = &#x27;height&#x27;;
 
   /**
    * The duration of the fade transition
@@ -171,7 +181,7 @@ export default Component.extend({
    * @default 350
    * @public
    */
-  transitionDuration: 350,
+  transitionDuration = 350;
 
   setCollapseSize(size) {
     let dimension = this.get(&#x27;collapseDimension&#x27;);
@@ -180,7 +190,7 @@ export default Component.extend({
 
     this.element.style.width = dimension === &#x27;width&#x27; &amp;&amp; size ? &#x60;${size}px&#x60; : &#x27;&#x27;;
     this.element.style.height = dimension === &#x27;height&#x27; &amp;&amp; size ? &#x60;${size}px&#x60; : &#x27;&#x27;;
-  },
+  }
 
   /**
    * The action to be sent when the element is about to be hidden.
@@ -188,7 +198,7 @@ export default Component.extend({
    * @event onHide
    * @public
    */
-  onHide() {},
+  onHide() {}
 
   /**
    * The action to be sent after the element has been completely hidden (including the CSS transition).
@@ -196,7 +206,7 @@ export default Component.extend({
    * @event onHidden
    * @public
    */
-  onHidden() {},
+  onHidden() {}
 
   /**
    * The action to be sent when the element is about to be shown.
@@ -204,7 +214,7 @@ export default Component.extend({
    * @event onShow
    * @public
    */
-  onShow() {},
+  onShow() {}
 
   /**
    * The action to be sent after the element has been completely shown (including the CSS transition).
@@ -212,7 +222,7 @@ export default Component.extend({
    * @event onShown
    * @public
    */
-  onShown() {},
+  onShown() {}
 
   /**
    * Triggers the show transition
@@ -245,7 +255,7 @@ export default Component.extend({
         this.setCollapseSize(this.getExpandedSize(&#x27;show&#x27;));
       }
     });
-  },
+  }
 
   /**
    * Get the size of the element when expanded
@@ -265,7 +275,7 @@ export default Component.extend({
     let prefix = action === &#x27;show&#x27; ? &#x27;scroll&#x27; : &#x27;offset&#x27;;
     let measureProperty = camelize(&#x60;${prefix}-${this.get(&#x27;collapseDimension&#x27;)}&#x60;);
     return collapseElement[measureProperty];
-  },
+  }
 
   /**
    * Triggers the hide transition
@@ -298,9 +308,10 @@ export default Component.extend({
         this.setCollapseSize(this.get(&#x27;collapsedSize&#x27;));
       }
     });
-  },
+  }
 
-  _onCollapsedChange: observer(&#x27;collapsed&#x27;, function() {
+  @observes(&#x27;collapsed&#x27;)
+  _onCollapsedChange() {
     let collapsed = this.get(&#x27;collapsed&#x27;);
     let active = this.get(&#x27;active&#x27;);
     if (collapsed !== active) {
@@ -311,25 +322,22 @@ export default Component.extend({
     } else {
       this.hide();
     }
-  }),
+  }
 
-  init() {
-    this._super(...arguments);
-    this.set(&#x27;active&#x27;, !this.get(&#x27;collapsed&#x27;));
-  },
-
-  _updateCollapsedSize: observer(&#x27;collapsedSize&#x27;, function() {
+  @observes(&#x27;collapsedSize&#x27;)
+  _updateCollapsedSize() {
     if (!this.get(&#x27;resetSizeWhenNotCollapsing&#x27;) &amp;&amp; this.get(&#x27;collapsed&#x27;) &amp;&amp; !this.get(&#x27;collapsing&#x27;)) {
       this.setCollapseSize(this.get(&#x27;collapsedSize&#x27;));
     }
-  }),
+  }
 
-  _updateExpandedSize: observer(&#x27;expandedSize&#x27;, function() {
+  @observes(&#x27;expandedSize&#x27;)
+  _updateExpandedSize() {
     if (!this.get(&#x27;resetSizeWhenNotCollapsing&#x27;) &amp;&amp; !this.get(&#x27;collapsed&#x27;) &amp;&amp; !this.get(&#x27;collapsing&#x27;)) {
       this.setCollapseSize(this.get(&#x27;expandedSize&#x27;));
     }
-  })
-});
+  }
+}
 
     </pre>
 </div>
@@ -344,9 +352,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

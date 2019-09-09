@@ -58,9 +58,11 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
 import { equal } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/label&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
 
@@ -69,10 +71,9 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/la
  @extends Ember.Component
  @private
  */
-export default Component.extend({
-  layout,
-  tagName: &#x27;&#x27;,
-
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class FormElementLabel extends Component {
   /**
    * @property label
    * @type string
@@ -84,7 +85,8 @@ export default Component.extend({
    * @type boolean
    * @public
    */
-  invisibleLabel: false,
+  @defaultValue
+  invisibleLabel = false;
 
   /**
    * @property formElementId
@@ -112,7 +114,8 @@ export default Component.extend({
    * @default &#x27;vertical&#x27;
    * @public
    */
-  formLayout: &#x27;vertical&#x27;,
+  @defaultValue
+  formLayout = &#x27;vertical&#x27;;
 
   /**
    * The type of the control widget.
@@ -129,7 +132,8 @@ export default Component.extend({
    * @default &#x27;text&#x27;
    * @public
    */
-  controlType: &#x27;text&#x27;,
+  @defaultValue
+  controlType = &#x27;text&#x27;;
 
   /**
    * Indicates whether the type of the control widget equals &#x60;checkbox&#x60;
@@ -138,7 +142,8 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  isCheckbox: equal(&#x27;controlType&#x27;, &#x27;checkbox&#x27;).readOnly(),
+  @(equal(&#x27;controlType&#x27;, &#x27;checkbox&#x27;).readOnly())
+  isCheckbox;
 
   /**
    * Indicates whether the form type equals &#x60;horizontal&#x60;
@@ -147,8 +152,9 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  isHorizontal: equal(&#x27;formLayout&#x27;, &#x27;horizontal&#x27;).readOnly()
-});
+  @(equal(&#x27;formLayout&#x27;, &#x27;horizontal&#x27;).readOnly())
+  isHorizontal;
+}
 
     </pre>
 </div>
@@ -163,9 +169,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

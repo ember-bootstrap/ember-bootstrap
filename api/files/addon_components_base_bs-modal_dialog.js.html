@@ -58,29 +58,38 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import {
+  attributeBindings,
+  classNameBindings,
+  classNames,
+  layout as templateLayout
+} from &#x27;@ember-decorators/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
+import { readOnly } from &#x27;@ember/object/computed&#x27;;
 import { isBlank } from &#x27;@ember/utils&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
 import { bind } from &#x27;@ember/runloop&#x27;;
-import { readOnly } from &#x27;@ember/object/computed&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-modal/dialog&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
-  Internal component for modal&#x27;s markup and event handling. Should not be used directly.
+ Internal component for modal&#x27;s markup and event handling. Should not be used directly.
 
-  @class ModalDialog
-  @namespace Components
-  @extends Ember.Component
-  @private
+ @class ModalDialog
+ @namespace Components
+ @extends Ember.Component
+ @private
  */
-export default Component.extend({
-  layout,
-  classNames: [&#x27;modal&#x27;],
-  classNameBindings: [&#x27;fade&#x27;],
-  attributeBindings: [&#x27;tabindex&#x27;, &#x27;aria-labelledby&#x27;],
-  ariaRole: &#x27;dialog&#x27;,
-  tabindex: &#x27;-1&#x27;,
-  &quot;aria-labelledby&quot;: readOnly(&#x27;titleId&#x27;),
+@templateLayout(layout)
+@classNames(&#x27;modal&#x27;)
+@classNameBindings(&#x27;fade&#x27;)
+@attributeBindings(&#x27;tabindex&#x27;, &#x27;ariaLabelledby:aria-labelledby&#x27;)
+export default class ModalDialog extends Component {
+  ariaRole = &#x27;dialog&#x27;;
+  tabindex = &#x27;-1&#x27;;
+
+  @readOnly(&#x27;titleId&#x27;)
+  ariaLabelledby;
 
   /**
    * Set to false to disable fade animations.
@@ -90,7 +99,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  fade: true,
+  @defaultValue
+  fade = true;
 
   /**
    * Used to apply Bootstrap&#x27;s visibility classes
@@ -100,7 +110,8 @@ export default Component.extend({
    * @default false
    * @private
    */
-  showModal: false,
+  @defaultValue
+  showModal = false;
 
   /**
    * Render modal markup?
@@ -110,7 +121,8 @@ export default Component.extend({
    * @default false
    * @private
    */
-  inDom: false,
+  @defaultValue
+  inDom = false;
 
   /**
    * @property paddingLeft
@@ -118,7 +130,8 @@ export default Component.extend({
    * @default null
    * @private
    */
-  paddingLeft: null,
+  @defaultValue
+  paddingLeft = null;
 
   /**
    * @property paddingRight
@@ -126,7 +139,8 @@ export default Component.extend({
    * @default null
    * @private
    */
-  paddingRight: null,
+  @defaultValue
+  paddingRight = null;
 
   /**
    * Closes the modal when escape key is pressed.
@@ -136,7 +150,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  keyboard: true,
+  @defaultValue
+  keyboard = true;
 
   /**
    * Property for size styling, set to null (default), &#x27;lg&#x27; or &#x27;sm&#x27;
@@ -147,7 +162,8 @@ export default Component.extend({
    * @type String
    * @public
    */
-  size: null,
+  @defaultValue
+  size = null;
 
   /**
    * If true clicking on the backdrop will close the modal.
@@ -157,7 +173,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  backdropClose: true,
+  @defaultValue
+  backdropClose = true;
 
   /**
    * Name of the size class
@@ -167,13 +184,13 @@ export default Component.extend({
    * @readOnly
    * @private
    */
-  sizeClass: computed(&#x27;size&#x27;, function() {
+  @(computed(&#x27;size&#x27;).readOnly())
+  get sizeClass() {
     let size = this.get(&#x27;size&#x27;);
     return isBlank(size) ? null : &#x60;modal-${size}&#x60;;
-  }).readOnly(),
+  }
 
-
-   /**
+  /**
    * The id of the &#x60;.modal-title&#x60; element
    *
    * @property titleId
@@ -181,7 +198,7 @@ export default Component.extend({
    * @default null
    * @private
    */
-  titleId: null,
+  titleId = null;
 
   /**
    * Gets or sets the id of the title element for aria accessibility tags
@@ -190,24 +207,24 @@ export default Component.extend({
    * @private
    */
   getOrSetTitleId() {
-      //Title element may be set by user so we have to try and find it to set the id
-      const modalNode = this.get(&#x27;element&#x27;);
-      let nodeId = null;
+    //Title element may be set by user so we have to try and find it to set the id
+    const modalNode = this.get(&#x27;element&#x27;);
+    let nodeId = null;
 
-      if (modalNode) {
-        const titleNode = modalNode.querySelector(&#x27;.modal-title&#x27;);
-        if (titleNode) {
-          //Get title id of .modal-title
-          nodeId = titleNode.id
-          if (!nodeId) {
-            //no title id so we set one
-            nodeId = &#x60;${this.get(&#x27;id&#x27;)}-title&#x60;;
-            titleNode.id = nodeId;
-          }
+    if (modalNode) {
+      const titleNode = modalNode.querySelector(&#x27;.modal-title&#x27;);
+      if (titleNode) {
+        //Get title id of .modal-title
+        nodeId = titleNode.id;
+        if (!nodeId) {
+          //no title id so we set one
+          nodeId = &#x60;${this.get(&#x27;id&#x27;)}-title&#x60;;
+          titleNode.id = nodeId;
         }
       }
-      this.set(&#x27;titleId&#x27;, nodeId)
-  },
+    }
+    this.set(&#x27;titleId&#x27;, nodeId)
+  }
 
   /**
    * Update the elements styles using CSSOM.
@@ -225,47 +242,47 @@ export default Component.extend({
     this.element.style.display = inDom ? &#x27;block&#x27; : &#x27;&#x27;;
     this.element.style.paddingLeft = paddingLeft || &#x27;&#x27;;
     this.element.style.paddingRight = paddingRight || &#x27;&#x27;;
-  },
+  }
 
   /**
    * @event onClose
    * @public
    */
-  onClose() {},
+  onClose() {
+  }
 
   keyDown(e) {
     let code = e.keyCode || e.which;
     if (code === 27 &amp;&amp; this.get(&#x27;keyboard&#x27;)) {
       this.get(&#x27;onClose&#x27;)();
     }
-  },
+  }
 
   _click(e) {
     if (e.target !== this.element || !this.get(&#x27;backdropClose&#x27;)) {
       return;
     }
     this.get(&#x27;onClose&#x27;)();
-  },
+  }
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
     // Ember events use event delegation, but we need to add an &#x60;onclick&#x60; handler directly on the modal element for
     // iOS to allow clicking the div. So a &#x60;click(){}&#x60; method here won&#x27;t work, we need to attach an event listener
     // directly to the element
     this.element.onclick = bind(this, this._click);
     this.getOrSetTitleId();
     this.updateStyles();
-  },
+  }
 
   didUpdateAttrs() {
     this.updateStyles();
-  },
+  }
 
   willDestroyElement() {
     this.element.onclick = null;
   }
-
-});
+}
 
     </pre>
 </div>
@@ -280,9 +297,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

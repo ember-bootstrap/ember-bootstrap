@@ -58,13 +58,16 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { classNameBindings, classNames, layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
+import { observes } from &#x27;@ember-decorators/object&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { computed, observer } from &#x27;@ember/object&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-tab/pane&#x27;;
 import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
  The tab pane of a tab component.
@@ -76,17 +79,18 @@ import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
  @uses Mixins.ComponentChild
  @public
  */
-export default Component.extend(ComponentChild, {
-  layout,
-  classNameBindings: [&#x27;active&#x27;, &#x27;usesTransition:fade&#x27;],
-  classNames: [&#x27;tab-pane&#x27;],
-  ariaRole: &#x27;tabpanel&#x27;,
+@templateLayout(layout)
+@classNameBindings(&#x27;active&#x27;, &#x27;usesTransition:fade&#x27;)
+@classNames(&#x27;tab-pane&#x27;)
+export default class TabPane extends Component.extend(ComponentChild) {
+  ariaRole = &#x27;tabpanel&#x27;;
 
   /**
    * @property activeId
    * @private
    */
-  activeId: null,
+  @defaultValue
+  activeId = null;
 
   /**
    * True if this pane is active (visible)
@@ -96,9 +100,10 @@ export default Component.extend(ComponentChild, {
    * @readonly
    * @private
    */
-  isActive: computed(&#x27;activeId&#x27;, &#x27;elementId&#x27;, function() {
+  @(computed(&#x27;activeId&#x27;, &#x27;elementId&#x27;).readOnly())
+  get isActive() {
     return this.get(&#x27;activeId&#x27;) === this.get(&#x27;elementId&#x27;);
-  }).readOnly(),
+  }
 
   /**
    * Used to apply Bootstrap&#x27;s &quot;active&quot; class
@@ -108,7 +113,8 @@ export default Component.extend(ComponentChild, {
    * @default false
    * @private
    */
-  active: false,
+  @defaultValue
+  active = false;
 
   /**
    * Used to trigger the Bootstrap visibility classes.
@@ -118,7 +124,8 @@ export default Component.extend(ComponentChild, {
    * @default false
    * @private
    */
-  showContent: false,
+  @defaultValue
+  showContent = false;
 
   /**
    * The title for this tab pane. This is used by the &#x60;bs-tab&#x60; component to automatically generate
@@ -130,7 +137,8 @@ export default Component.extend(ComponentChild, {
    * @default null
    * @public
    */
-  title: null,
+  @defaultValue
+  title = null;
 
   /**
    * An optional group title used by the &#x60;bs-tab&#x60; component to group all panes with the same group title
@@ -142,7 +150,8 @@ export default Component.extend(ComponentChild, {
    * @default null
    * @public
    */
-  groupTitle: null,
+  @defaultValue
+  groupTitle = null;
 
   /**
    * Use fade animation when switching tabs.
@@ -151,7 +160,8 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  fade: true,
+  @defaultValue
+  fade = true;
 
   /**
    * The duration of the fade out animation
@@ -161,7 +171,8 @@ export default Component.extend(ComponentChild, {
    * @default 150
    * @private
    */
-  fadeDuration: 150,
+  @defaultValue
+  fadeDuration = 150;
 
   /**
    * Use CSS transitions?
@@ -171,7 +182,8 @@ export default Component.extend(ComponentChild, {
    * @readonly
    * @private
    */
-  usesTransition: usesTransition(&#x27;fade&#x27;),
+  @usesTransition(&#x27;fade&#x27;)
+  usesTransition;
 
   /**
    * Show the pane
@@ -193,7 +205,7 @@ export default Component.extend(ComponentChild, {
     } else {
       this.set(&#x27;active&#x27;, true);
     }
-  },
+  }
 
   /**
    * Hide the pane
@@ -213,26 +225,26 @@ export default Component.extend(ComponentChild, {
     } else {
       this.set(&#x27;active&#x27;, false);
     }
-  },
+  }
 
-  _showHide: observer(&#x27;isActive&#x27;, function() {
+  @observes(&#x27;isActive&#x27;)
+  _showHide() {
     if (this.get(&#x27;isActive&#x27;)) {
       this.show();
     } else {
       this.hide();
     }
-  }),
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     scheduleOnce(&#x27;afterRender&#x27;, this, function() {
       // isActive comes from parent component, so only available after render...
       this.set(&#x27;active&#x27;, this.get(&#x27;isActive&#x27;));
       this.set(&#x27;showContent&#x27;, this.get(&#x27;isActive&#x27;) &amp;&amp; this.get(&#x27;fade&#x27;));
     });
   }
-
-});
+}
 
     </pre>
 </div>
@@ -247,9 +259,9 @@ export default Component.extend(ComponentChild, {
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

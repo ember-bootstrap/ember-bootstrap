@@ -58,11 +58,14 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { action } from &#x27;@ember/object&#x27;;
+import { classNameBindings, layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import { equal } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { isArray, A } from &#x27;@ember/array&#x27;;
+import { A, isArray } from &#x27;@ember/array&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-button-group&#x27;;
 import sizeClass from &#x27;ember-bootstrap/utils/cp/size-class&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
   Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
@@ -120,17 +123,18 @@ import sizeClass from &#x27;ember-bootstrap/utils/cp/size-class&#x27;;
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-  layout,
-  ariaRole: &#x27;group&#x27;,
-  classNameBindings: [&#x27;vertical:btn-group-vertical:btn-group&#x27;, &#x27;sizeClass&#x27;],
+@templateLayout(layout)
+@classNameBindings(&#x27;vertical:btn-group-vertical:btn-group&#x27;, &#x27;sizeClass&#x27;)
+export default class ButtonGroup extends Component {
+  ariaRole = &#x27;group&#x27;;
 
   /**
    * @property buttonComponent
    * @type {String}
    * @private
    */
-  buttonComponent: &#x27;bs-button-group/button&#x27;,
+  @defaultValue
+  buttonComponent = &#x27;bs-button-group/button&#x27;;
 
   /**
    * Set to true for a vertically stacked button group, see http://getbootstrap.com/components/#btn-groups-vertical
@@ -140,7 +144,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  vertical: false,
+  @defaultValue
+  vertical = false;
 
   /**
    * The type of the button group specifies how child buttons behave and how the &#x60;value&#x60; property will be computed:
@@ -182,7 +187,8 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  isRadio: equal(&#x27;type&#x27;, &#x27;radio&#x27;).readOnly(),
+  @(equal(&#x27;type&#x27;, &#x27;radio&#x27;).readOnly())
+  isRadio;
 
   /**
    * Property for size styling, set to &#x27;lg&#x27;, &#x27;sm&#x27; or &#x27;xs&#x27;
@@ -193,8 +199,11 @@ export default Component.extend({
    * @type String
    * @public
    */
-  size: null,
-  sizeClass: sizeClass(&#x27;btn-group&#x27;, &#x27;size&#x27;),
+  @defaultValue
+  size = null;
+
+  @sizeClass(&#x27;btn-group&#x27;, &#x27;size&#x27;)
+  sizeClass;
 
   /**
    * This action is called whenever the button group&#x27;s value should be changed because the user clicked a button.
@@ -205,31 +214,30 @@ export default Component.extend({
    * @param {*} value
    * @public
    */
-  onChange() {},
+  onChange() {}
 
-  actions: {
-    buttonPressed(pressedValue) {
-      let newValue;
+  @action
+  buttonPressed(pressedValue) {
+    let newValue;
 
-      if (this.get(&#x27;isRadio&#x27;)) {
-        newValue = pressedValue;
+    if (this.get(&#x27;isRadio&#x27;)) {
+      newValue = pressedValue;
+    } else {
+      if (!isArray(this.get(&#x27;value&#x27;))) {
+        newValue = A([pressedValue]);
       } else {
-        if (!isArray(this.get(&#x27;value&#x27;))) {
-          newValue = A([pressedValue]);
+        newValue = A(this.get(&#x27;value&#x27;).slice());
+        if (newValue.includes(pressedValue)) {
+          newValue.removeObject(pressedValue);
         } else {
-          newValue = A(this.get(&#x27;value&#x27;).slice());
-          if (newValue.includes(pressedValue)) {
-            newValue.removeObject(pressedValue);
-          } else {
-            newValue.pushObject(pressedValue);
-          }
+          newValue.pushObject(pressedValue);
         }
       }
-
-      this.get(&#x27;onChange&#x27;)(newValue);
     }
+
+    this.get(&#x27;onChange&#x27;)(newValue);
   }
-});
+}
 
     </pre>
 </div>
@@ -244,9 +252,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

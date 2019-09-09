@@ -58,6 +58,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { classNames, layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-modal/body&#x27;;
 
@@ -70,10 +71,9 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-modal/body&#x27
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  classNames: [&#x27;modal-body&#x27;]
-});
+@templateLayout(layout)
+@classNames(&#x27;modal-body&#x27;)
+export default class ModalBody extends Component {}
 
     </pre>
 </div>
@@ -88,9 +88,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

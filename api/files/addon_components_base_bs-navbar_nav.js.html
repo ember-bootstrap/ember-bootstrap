@@ -58,7 +58,9 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { classNames } from &#x27;@ember-decorators/component&#x27;;
 import BsNavComponent from &#x27;ember-bootstrap/components/bs-nav&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
  * Component for the &#x60;.nav&#x60; element within a [Components.Navbar](Components.Navbar.html)
@@ -72,14 +74,11 @@ import BsNavComponent from &#x27;ember-bootstrap/components/bs-nav&#x27;;
  * @extends Components.Nav
  * @public
  */
-export default BsNavComponent.extend({
-  classNames: [&#x27;navbar-nav&#x27;],
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-    this.set(&#x27;justified&#x27;, false);
-  }
-});
+@classNames(&#x27;navbar-nav&#x27;)
+export default class NavbarNav extends BsNavComponent {
+  @defaultValue
+  justified = false;
+}
 
     </pre>
 </div>
@@ -94,9 +93,9 @@ export default BsNavComponent.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

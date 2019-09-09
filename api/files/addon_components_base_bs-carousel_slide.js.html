@@ -58,10 +58,12 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { classNameBindings, layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
+import { observes } from &#x27;@ember-decorators/object&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-carousel/slide&#x27;;
-import { computed, observer } from &#x27;@ember/object&#x27;;
 import { next } from &#x27;@ember/runloop&#x27;;
 import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
 
@@ -75,10 +77,9 @@ import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
   @extends Ember.Component
   @public
  */
-export default Component.extend(ComponentChild, {
-  classNameBindings: [&#x27;active&#x27;],
-  layout,
-
+@classNameBindings(&#x27;active&#x27;)
+@templateLayout(layout)
+export default class CarouselSlide extends Component.extend(ComponentChild) {
   /**
    * Defines slide visibility.
    *
@@ -86,27 +87,30 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  active: overrideableCP(&#x27;isCurrentSlide&#x27;, &#x27;presentationState&#x27;, function() {
+  @overrideableCP(&#x27;isCurrentSlide&#x27;, &#x27;presentationState&#x27;, function() {
     return this.get(&#x27;isCurrentSlide&#x27;) &amp;&amp; this.get(&#x27;presentationState&#x27;) === null;
-  }),
+  })
+  active;
 
   /**
    * @private
    * @property isCurrentSlide
    * @type boolean
    */
-  isCurrentSlide: computed(&#x27;currentSlide&#x27;, function() {
+  @(computed(&#x27;currentSlide&#x27;).readOnly())
+  get isCurrentSlide() {
     return this.get(&#x27;currentSlide&#x27;) === this;
-  }).readOnly(),
+  }
 
   /**
    * @private
    * @property isFollowingSlide
    * @type boolean
    */
-  isFollowingSlide: computed(&#x27;followingSlide&#x27;, function() {
+  @(computed(&#x27;followingSlide&#x27;).readOnly())
+  get isFollowingSlide() {
     return this.get(&#x27;followingSlide&#x27;) === this;
-  }).readOnly(),
+  }
 
   /**
    * Slide is moving to the left.
@@ -115,7 +119,7 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  left: false,
+  left = false;
 
   /**
    * Next to appear in a left sliding.
@@ -124,7 +128,7 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  next: false,
+  next = false;
 
   /**
    * Next to appear in a right sliding.
@@ -133,7 +137,7 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  prev: false,
+  prev = false;
 
   /**
    * Slide is moving to the right.
@@ -142,7 +146,7 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  right: false,
+  right = false;
 
   /**
    * Coordinates the execution of a presentation.
@@ -150,7 +154,8 @@ export default Component.extend(ComponentChild, {
    * @method presentationStateObserver
    * @private
    */
-  presentationStateObserver: observer(&#x27;presentationState&#x27;, function() {
+  @observes(&#x27;presentationState&#x27;)
+  presentationStateObserver() {
     let presentationState = this.get(&#x27;presentationState&#x27;);
     if (this.get(&#x27;isCurrentSlide&#x27;)) {
       switch (presentationState) {
@@ -172,7 +177,7 @@ export default Component.extend(ComponentChild, {
           break;
       }
     }
-  }),
+  }
 
   /**
    * @method currentSlideDidTransition
@@ -181,7 +186,7 @@ export default Component.extend(ComponentChild, {
   currentSlideDidTransition() {
     this.set(this.get(&#x27;directionalClassName&#x27;), false);
     this.set(&#x27;active&#x27;, false);
-  },
+  }
 
   /**
    * @method currentSlideWillTransit
@@ -192,7 +197,7 @@ export default Component.extend(ComponentChild, {
     next(this, function() {
       this.set(this.get(&#x27;directionalClassName&#x27;), true);
     });
-  },
+  }
 
   /**
    * @method followingSlideDidTransition
@@ -202,7 +207,7 @@ export default Component.extend(ComponentChild, {
     this.set(&#x27;active&#x27;, true);
     this.set(this.get(&#x27;directionalClassName&#x27;), false);
     this.set(this.get(&#x27;orderClassName&#x27;), false);
-  },
+  }
 
   /**
    * @method followingSlideWillTransit
@@ -214,7 +219,7 @@ export default Component.extend(ComponentChild, {
       this.reflow();
       this.set(this.get(&#x27;directionalClassName&#x27;), true);
     });
-  },
+  }
 
   /**
    * Makes things more stable, especially when fast changing.
@@ -222,7 +227,7 @@ export default Component.extend(ComponentChild, {
   reflow() {
     this.element.offsetHeight;
   }
-});
+}
 
     </pre>
 </div>
@@ -237,9 +242,9 @@ export default Component.extend(ComponentChild, {
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

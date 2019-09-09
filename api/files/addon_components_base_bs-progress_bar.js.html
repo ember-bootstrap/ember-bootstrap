@@ -58,10 +58,17 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import {
+  attributeBindings,
+  classNameBindings,
+  classNames,
+  layout as templateLayout
+} from &#x27;@ember-decorators/component&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
 import { readOnly } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-progress/bar&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
 
@@ -72,13 +79,11 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-progress/bar&#x
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  classNames: [&#x27;progress-bar&#x27;],
-  classNameBindings: [&#x27;progressBarStriped&#x27;, &#x27;typeClass&#x27;],
-
-  attributeBindings: [&#x27;ariaValuenow&#x27;, &#x27;ariaValuemin&#x27;, &#x27;ariaValuemax&#x27;],
-
+@templateLayout(layout)
+@classNames(&#x27;progress-bar&#x27;)
+@classNameBindings(&#x27;progressBarStriped&#x27;, &#x27;typeClass&#x27;)
+@attributeBindings(&#x27;ariaValuenow&#x27;, &#x27;ariaValuemin&#x27;, &#x27;ariaValuemax&#x27;)
+export default class ProgressBar extends Component {
   /**
    * The lower limit of the value range
    *
@@ -87,7 +92,8 @@ export default Component.extend({
    * @default 0
    * @public
    */
-  minValue: 0,
+  @defaultValue
+  minValue = 0;
 
   /**
    * The upper limit of the value range
@@ -97,7 +103,8 @@ export default Component.extend({
    * @default 100
    * @public
    */
-  maxValue: 100,
+  @defaultValue
+  maxValue = 100;
 
   /**
    * The value the progress bar should represent
@@ -107,7 +114,8 @@ export default Component.extend({
    * @default 0
    * @public
    */
-  value: 0,
+  @defaultValue
+  value = 0;
 
   /**
    If true a label will be shown inside the progress bar.
@@ -118,7 +126,7 @@ export default Component.extend({
 
    &#x60;&#x60;&#x60;hbs
    {{#bs-progress}}
-     {{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}
+   {{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}
    {{/bs-progress}}
    &#x60;&#x60;&#x60;
 
@@ -127,7 +135,8 @@ export default Component.extend({
    @default false
    @public
    */
-  showLabel: false,
+  @defaultValue
+  showLabel = false;
 
   /**
    * Create a striped effect, see http://getbootstrap.com/components/#progress-striped
@@ -137,7 +146,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  striped: false,
+  @defaultValue
+  striped = false;
 
   /**
    * Animate the stripes, see http://getbootstrap.com/components/#progress-animated
@@ -147,7 +157,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  animate: false,
+  @defaultValue
+  animate = false;
 
   /**
    * Specify to how many digits the progress bar label should be rounded.
@@ -157,7 +168,8 @@ export default Component.extend({
    * @default 0
    * @public
    */
-  roundDigits: 0,
+  @defaultValue
+  roundDigits = 0;
 
   /**
    * Property for type styling
@@ -169,14 +181,23 @@ export default Component.extend({
    * @default &#x27;default&#x27;
    * @public
    */
-  type: &#x27;default&#x27;,
+  @defaultValue
+  type = &#x27;default&#x27;;
 
-  progressBarStriped: readOnly(&#x27;striped&#x27;),
-  progressBarAnimate: readOnly(&#x27;animate&#x27;),
+  @readOnly(&#x27;striped&#x27;)
+  progressBarStriped;
 
-  ariaValuenow: readOnly(&#x27;value&#x27;),
-  ariaValuemin: readOnly(&#x27;minValue&#x27;),
-  ariaValuemax: readOnly(&#x27;maxValue&#x27;),
+  @readOnly(&#x27;animate&#x27;)
+  progressBarAnimate;
+
+  @readOnly(&#x27;value&#x27;)
+  ariaValuenow;
+
+  @readOnly(&#x27;minValue&#x27;)
+  ariaValuemin;
+
+  @readOnly(&#x27;maxValue&#x27;)
+  ariaValuemax;
 
   /**
    * The percentage of &#x60;value&#x60;
@@ -186,13 +207,14 @@ export default Component.extend({
    * @protected
    * @readonly
    */
-  percent: computed(&#x27;value&#x27;, &#x27;minValue&#x27;, &#x27;maxValue&#x27;, function() {
+  @(computed(&#x27;value&#x27;, &#x27;minValue&#x27;, &#x27;maxValue&#x27;).readOnly())
+  get percent() {
     let value = parseFloat(this.get(&#x27;value&#x27;));
     let minValue = parseFloat(this.get(&#x27;minValue&#x27;));
     let maxValue = parseFloat(this.get(&#x27;maxValue&#x27;));
 
     return Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100;
-  }).readOnly(),
+  }
 
   /**
    * The percentage of &#x60;value&#x60;, rounded to &#x60;roundDigits&#x60; digits
@@ -202,10 +224,11 @@ export default Component.extend({
    * @protected
    * @readonly
    */
-  percentRounded: computed(&#x27;percent&#x27;, &#x27;roundDigits&#x27;, function() {
+  @(computed(&#x27;percent&#x27;, &#x27;roundDigits&#x27;).readOnly())
+  get percentRounded() {
     let roundFactor = Math.pow(10, this.get(&#x27;roundDigits&#x27;));
     return Math.round(this.get(&#x27;percent&#x27;) * roundFactor) / roundFactor;
-  }).readOnly(),
+  }
 
   /**
    * @method updateStyles
@@ -215,15 +238,16 @@ export default Component.extend({
   updateStyles() {
     let percent = parseFloat(this.get(&#x27;percent&#x27;));
     this.element.style.width = !isNaN(percent) ? &#x60;${percent}%&#x60; : &#x27;&#x27;;
-  },
+  }
 
   didInsertElement() {
     this.updateStyles();
-  },
+  }
+
   didUpdateAttrs() {
     this.updateStyles();
   }
-});
+}
 
     </pre>
 </div>
@@ -238,9 +262,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

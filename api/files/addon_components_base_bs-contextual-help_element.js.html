@@ -58,12 +58,14 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
+import { action, computed } from &#x27;@ember/object&#x27;;
 import { reads } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-tooltip/element&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
  Internal (abstract) component for contextual help markup. Should not be used directly.
@@ -73,10 +75,10 @@ import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
  @extends Ember.Component
  @private
  */
-export default Component.extend({
-  layout,
-  tagName: &#x27;&#x27;,
-  ariaRole: &#x27;tooltip&#x27;,
+@templateLayout(layout)
+@tagName(&#x27;&#x27;)
+export default class ContextualHelpElement extends Component {
+  ariaRole = &#x27;tooltip&#x27;;
 
   /**
    * @property placement
@@ -84,9 +86,11 @@ export default Component.extend({
    * @default &#x27;top&#x27;
    * @public
    */
-  placement: &#x27;top&#x27;,
+  @defaultValue
+  placement = &#x27;top&#x27;;
 
-  actualPlacement: reads(&#x27;placement&#x27;),
+  @reads(&#x27;placement&#x27;)
+  actualPlacement;
 
   /**
    * @property fade
@@ -94,7 +98,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  fade: true,
+  @defaultValue
+  fade = true;
 
   /**
    * @property showHelp
@@ -102,7 +107,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  showHelp: false,
+  @defaultValue
+  showHelp = false;
 
   /**
    * If true component will render in place, rather than be wormholed.
@@ -112,7 +118,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  renderInPlace: true,
+  @defaultValue
+  renderInPlace = true;
 
   /**
    * Which element to align to
@@ -121,7 +128,8 @@ export default Component.extend({
    * @type {string|HTMLElement}
    * @public
    */
-  popperTarget: null,
+  @defaultValue
+  popperTarget = null;
 
   /**
    * @property autoPlacement
@@ -129,7 +137,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  autoPlacement: true,
+  @defaultValue
+  autoPlacement = true;
 
   /**
    * The DOM element of the viewport element.
@@ -138,7 +147,8 @@ export default Component.extend({
    * @type object
    * @public
    */
-  viewportElement: null,
+  @defaultValue
+  viewportElement = null;
 
   /**
    * Take a padding into account for keeping the tooltip/popover within the bounds of the element given by &#x60;viewportElement&#x60;.
@@ -148,34 +158,36 @@ export default Component.extend({
    * @default 0
    * @public
    */
-  viewportPadding: 0,
+  @defaultValue
+  viewportPadding = 0;
 
   /**
    * @property arrowClass
    * @private
    */
-  arrowClass: &#x27;arrow&#x27;,
+  @defaultValue
+  arrowClass = &#x27;arrow&#x27;;
 
   /**
    * @property popperClassNames
    * @type {array}
    * @private
    */
-  popperClassNames: null,
 
   /**
    * @property popperClass
    * @type {string}
    * @private
    */
-  popperClass: computed(&#x27;popperClassNames.[]&#x27;, &#x27;class&#x27;, function() {
+  @computed(&#x27;popperClassNames.[]&#x27;, &#x27;class&#x27;)
+  get popperClass() {
     let classes = this.get(&#x27;popperClassNames&#x27;);
     let classProperty = this.get(&#x27;class&#x27;);
     if (typeof classProperty === &#x27;string&#x27;) {
       classes = classes.concat(classProperty.split(&#x27; &#x27;));
     }
     return classes.join(&#x27; &#x27;);
-  }),
+  }
 
   /**
    * popper.js modifier config
@@ -184,7 +196,8 @@ export default Component.extend({
    * @type {object}
    * @private
    */
-  popperModifiers: computed(&#x27;arrowClass&#x27;, &#x27;autoPlacement&#x27;, &#x27;viewportElement&#x27;, &#x27;viewportPadding&#x27;, function() {
+  @computed(&#x27;arrowClass&#x27;, &#x27;autoPlacement&#x27;, &#x27;viewportElement&#x27;, &#x27;viewportPadding&#x27;)
+  get popperModifiers() {
     let self = this;
     return {
       arrow: {
@@ -225,22 +238,21 @@ export default Component.extend({
         enabled: this.get(&#x27;autoPlacement&#x27;)
       }
     };
-  }),
+  }
 
   didReceiveAttrs() {
     assert(&#x27;Contextual help element needs id for popper element&#x27;, this.get(&#x27;id&#x27;));
-  },
-
-  actions: {
-    updatePlacement(popperDataObject) {
-      if (this.get(&#x27;actualPlacement&#x27;) === popperDataObject.placement) {
-        return;
-      }
-      this.set(&#x27;actualPlacement&#x27;, popperDataObject.placement);
-      scheduleOnce(&#x27;afterRender&#x27;, popperDataObject.instance, popperDataObject.instance.scheduleUpdate);
-    }
   }
-});
+
+  @action
+  updatePlacement(popperDataObject) {
+    if (this.get(&#x27;actualPlacement&#x27;) === popperDataObject.placement) {
+      return;
+    }
+    this.set(&#x27;actualPlacement&#x27;, popperDataObject.placement);
+    scheduleOnce(&#x27;afterRender&#x27;, popperDataObject.instance, popperDataObject.instance.scheduleUpdate);
+  }
+}
 
     </pre>
 </div>
@@ -255,9 +267,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

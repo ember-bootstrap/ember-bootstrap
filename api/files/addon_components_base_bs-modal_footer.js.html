@@ -58,9 +58,11 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { classNames, layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
 import { notEmpty } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-modal/footer&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
 
@@ -71,11 +73,10 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-modal/footer&#x
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  tagName: &#x27;form&#x27;,
-  classNames: [&#x27;modal-footer&#x27;],
-
+@templateLayout(layout)
+@tagName(&#x27;form&#x27;)
+@classNames(&#x27;modal-footer&#x27;)
+export default class ModalFooter extends Component {
   /**
    * The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block
    * template.
@@ -85,7 +86,8 @@ export default Component.extend({
    * @default &#x27;Ok&#x27;
    * @public
    */
-  closeTitle: &#x27;Ok&#x27;,
+  @defaultValue
+  closeTitle = &#x27;Ok&#x27;;
 
   /**
    * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null or if you provide
@@ -96,8 +98,8 @@ export default Component.extend({
    * @default null
    * @public
    */
-
-  hasSubmitButton: notEmpty(&#x27;submitTitle&#x27;),
+  @notEmpty(&#x27;submitTitle&#x27;)
+  hasSubmitButton;
 
   /**
    * Set to true to disable the submit button. If you bind this to some property that indicates if submitting is allowed
@@ -108,7 +110,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  submitDisabled: false,
+  @defaultValue
+  submitDisabled = false;
 
   /**
    * The type of the submit button (primary button).
@@ -118,14 +121,16 @@ export default Component.extend({
    * @default &#x27;primary&#x27;
    * @public
    */
-  submitButtonType: &#x27;primary&#x27;,
+  @defaultValue
+  submitButtonType = &#x27;primary&#x27;;
 
   /**
    * @property buttonComponent
    * @type {String}
    * @private
    */
-  buttonComponent: &#x27;bs-button&#x27;,
+  @defaultValue
+  buttonComponent = &#x27;bs-button&#x27;;
 
   /**
    * The action to send to the parent modal component when the modal footer&#x27;s form is submitted
@@ -144,8 +149,7 @@ export default Component.extend({
     // send to parent bs-modal component
     this.get(&#x27;onSubmit&#x27;)();
   }
-
-});
+}
 
     </pre>
 </div>
@@ -160,9 +164,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

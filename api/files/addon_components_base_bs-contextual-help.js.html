@@ -58,34 +58,38 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { tagName } from &#x27;@ember-decorators/component&#x27;;
+import { observes } from &#x27;@ember-decorators/object&#x27;;
 import { gt, or, reads } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { guidFor } from &#x27;@ember/object/internals&#x27;;
 import { isArray } from &#x27;@ember/array&#x27;;
-import EmberObject, { computed, observer } from &#x27;@ember/object&#x27;;
-import { cancel, later, next, run, schedule } from &#x27;@ember/runloop&#x27;;
+import EmberObject, { action, computed } from &#x27;@ember/object&#x27;;
+import { cancel, later, next, schedule } from &#x27;@ember/runloop&#x27;;
 import transitionEnd from &#x27;ember-bootstrap/utils/transition-end&#x27;;
 import { getDestinationElement } from &#x27;../../utils/dom&#x27;;
 import usesTransition from &#x27;ember-bootstrap/utils/cp/uses-transition&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
-const InState = EmberObject.extend({
-  hover: false,
-  focus: false,
-  click: false,
-  showHelp: or(&#x27;hover&#x27;, &#x27;focus&#x27;, &#x27;click&#x27;)
-});
+class InState extends EmberObject {
+  hover = false;
+  focus = false;
+  click = false;
+
+  @or(&#x27;hover&#x27;, &#x27;focus&#x27;, &#x27;click&#x27;)
+  showHelp;
+}
 
 function noop() {}
 
 /**
-  @class Components.ContextualHelp
+  @class ContextualHelp
   @namespace Components
   @extends Ember.Component
   @private
 */
-let component = Component.extend({
-  tagName: &#x27;&#x27;,
-
+@tagName(&#x27;&#x27;)
+export default class ContextualHelp extends Component {
   /**
    * @property title
    * @type string
@@ -100,7 +104,8 @@ let component = Component.extend({
    * @default &#x27;top&#x27;
    * @public
    */
-  placement: &#x27;top&#x27;,
+  @defaultValue
+  placement = &#x27;top&#x27;;
 
   /**
    * By default it will dynamically reorient the tooltip/popover based on the available space in the viewport. For
@@ -112,7 +117,8 @@ let component = Component.extend({
    * @default true
    * @public
    */
-  autoPlacement: true,
+  @defaultValue
+  autoPlacement = true;
 
   /**
    * You can programmatically show the tooltip/popover by setting this to &#x60;true&#x60;
@@ -122,14 +128,16 @@ let component = Component.extend({
    * @default false
    * @public
    */
-  visible: false,
+  @defaultValue
+  visible = false;
 
   /**
    * @property inDom
    * @type boolean
    * @private
    */
-  inDom: false,
+  @defaultValue
+  inDom = this.get(&#x27;visible&#x27;) &amp;&amp; this.get(&#x27;triggerTargetElement&#x27;);
 
   /**
    * Set to false to disable fade animations.
@@ -139,7 +147,8 @@ let component = Component.extend({
    * @default true
    * @public
    */
-  fade: true,
+  @defaultValue
+  fade = true;
 
   /**
    * Used to apply Bootstrap&#x27;s visibility class
@@ -149,7 +158,8 @@ let component = Component.extend({
    * @default false
    * @private
    */
-  showHelp: reads(&#x27;visible&#x27;),
+  @reads(&#x27;visible&#x27;)
+  showHelp;
 
   /**
    * Delay showing and hiding the tooltip/popover (ms). Individual delays for showing and hiding can be specified by using the
@@ -160,7 +170,8 @@ let component = Component.extend({
    * @default 0
    * @public
    */
-  delay: 0,
+  @defaultValue
+  delay = 0;
 
   /**
    * Delay showing the tooltip/popover. This property overrides the general delay set with the &#x60;delay&#x60; property.
@@ -170,7 +181,8 @@ let component = Component.extend({
    * @default 0
    * @public
    */
-  delayShow: reads(&#x27;delay&#x27;),
+  @reads(&#x27;delay&#x27;)
+  delayShow;
 
   /**
    * Delay hiding the tooltip/popover. This property overrides the general delay set with the &#x60;delay&#x60; property.
@@ -180,10 +192,14 @@ let component = Component.extend({
    * @default 0
    * @public
    */
-  delayHide: reads(&#x27;delay&#x27;),
+  @reads(&#x27;delay&#x27;)
+  delayHide;
 
-  hasDelayShow: gt(&#x27;delayShow&#x27;, 0),
-  hasDelayHide: gt(&#x27;delayHide&#x27;, 0),
+  @gt(&#x27;delayShow&#x27;, 0)
+  hasDelayShow;
+
+  @gt(&#x27;delayHide&#x27;, 0)
+  hasDelayHide;
 
   /**
    * The duration of the fade transition
@@ -193,7 +209,8 @@ let component = Component.extend({
    * @default 150
    * @public
    */
-  transitionDuration: 150,
+  @defaultValue
+  transitionDuration = 150;
 
   /**
    * Keeps the tooltip/popover within the bounds of this element when &#x60;autoPlacement&#x60; is true. Can be any valid CSS selector.
@@ -205,7 +222,8 @@ let component = Component.extend({
    * @see autoPlacement
    * @public
    */
-  viewportSelector: &#x27;body&#x27;,
+  @defaultValue
+  viewportSelector = &#x27;body&#x27;;
 
   /**
    * Take a padding into account for keeping the tooltip/popover within the bounds of the element given by &#x60;viewportSelector&#x60;.
@@ -217,7 +235,10 @@ let component = Component.extend({
    * @see autoPlacement
    * @public
    */
-  viewportPadding: 0,
+  @defaultValue
+  viewportPadding = 0;
+
+  _parentFinder = self.document ? self.document.createTextNode(&#x27;&#x27;) : &#x27;&#x27;;
 
   /**
    * The id of the overlay element.
@@ -227,9 +248,10 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  overlayId: computed(function() {
+  @computed
+  get overlayId() {
     return &#x60;overlay-${guidFor(this)}&#x60;;
-  }),
+  }
 
   /**
    * The DOM element of the arrow element.
@@ -239,7 +261,6 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  arrowElement: null,
 
   /**
    * The wormhole destinationElement
@@ -249,9 +270,10 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  destinationElement: computed(function() {
+  @computed
+  get destinationElement() {
     return getDestinationElement(this)
-  }),
+  }
 
   /**
    * The DOM element of the viewport element.
@@ -261,9 +283,10 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  viewportElement: computed(&#x27;viewportSelector&#x27;, function() {
+  @computed(&#x27;viewportSelector&#x27;)
+  get viewportElement() {
     return document.querySelector(this.get(&#x27;viewportSelector&#x27;));
-  }),
+  }
 
   /**
    * The DOM element that triggers the tooltip/popover. By default it is the parent element of this component.
@@ -274,7 +297,8 @@ let component = Component.extend({
    * @type string
    * @public
    */
-  triggerElement: null,
+  @defaultValue
+  triggerElement = null;
 
   /**
    * @method getTriggerTargetElement
@@ -290,7 +314,7 @@ let component = Component.extend({
     } else {
       return document.querySelector(triggerElement);
     }
-  },
+  }
 
   /**
    * The event(s) that should trigger the tooltip/popover - click | hover | focus.
@@ -301,9 +325,11 @@ let component = Component.extend({
    * @default &#x27;hover focus&#x27;
    * @public
    */
-  triggerEvents: &#x27;hover focus&#x27;,
+  @defaultValue
+  triggerEvents = &#x27;hover focus&#x27;;
 
-  _triggerEvents: computed(&#x27;triggerEvents&#x27;, function() {
+  @computed(&#x27;triggerEvents&#x27;)
+  get _triggerEvents() {
     let events = this.get(&#x27;triggerEvents&#x27;);
     if (!isArray(events)) {
       events = events.split(&#x27; &#x27;);
@@ -319,7 +345,7 @@ let component = Component.extend({
           return event;
       }
     });
-  }),
+  }
 
   /**
    * If true component will render in place, rather than be wormholed.
@@ -329,16 +355,18 @@ let component = Component.extend({
    * @default false
    * @public
    */
-  renderInPlace: false,
+  @defaultValue
+  renderInPlace = false;
 
   /**
    * @property _renderInPlace
    * @type boolean
    * @private
    */
-  _renderInPlace: computed(&#x27;renderInPlace&#x27;, function() {
+  @computed(&#x27;renderInPlace&#x27;)
+  get _renderInPlace() {
     return this.get(&#x27;renderInPlace&#x27;) || !this.destinationElement;
-  }),
+  }
 
   /**
    * Current hover state, &#x27;in&#x27;, &#x27;out&#x27; or null
@@ -347,7 +375,8 @@ let component = Component.extend({
    * @type string
    * @private
    */
-  hoverState: null,
+  @defaultValue
+  hoverState = null;
 
   /**
    * Current state for events
@@ -356,9 +385,10 @@ let component = Component.extend({
    * @type {InState}
    * @private
    */
-  inState: computed(function() {
+  @computed
+  get inState() {
     return InState.create();
-  }),
+  }
 
   /**
    * Ember.run timer
@@ -366,7 +396,7 @@ let component = Component.extend({
    * @property timer
    * @private
    */
-  timer: null,
+  timer = null;
 
   /**
    * Use CSS transitions?
@@ -376,7 +406,20 @@ let component = Component.extend({
    * @readonly
    * @private
    */
-  usesTransition: usesTransition(&#x27;fade&#x27;),
+  @usesTransition(&#x27;fade&#x27;)
+  usesTransition;
+
+  /**
+   * The DOM element of the overlay element.
+   *
+   * @property overlayElement
+   * @type object
+   * @readonly
+   * @private
+   */
+  get overlayElement() {
+    return document.getElementById(this.get(&#x27;overlayId&#x27;));
+  }
 
   /**
    * This action is called immediately when the tooltip/popover is about to be shown.
@@ -385,7 +428,7 @@ let component = Component.extend({
    * @public
    */
   onShow() {
-  },
+  }
 
   /**
    * This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).
@@ -394,7 +437,7 @@ let component = Component.extend({
    * @public
    */
   onShown() {
-  },
+  }
 
   /**
    * This action is called immediately when the tooltip/popover is about to be hidden.
@@ -403,7 +446,7 @@ let component = Component.extend({
    * @public
    */
   onHide() {
-  },
+  }
 
   /**
    * This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).
@@ -412,7 +455,7 @@ let component = Component.extend({
    * @public
    */
   onHidden() {
-  },
+  }
 
   /**
    * Called when a show event has been received
@@ -445,7 +488,7 @@ let component = Component.extend({
         this.show();
       }
     }, this.get(&#x27;delayShow&#x27;));
-  },
+  }
 
   /**
    * Called when a hide event has been received
@@ -477,7 +520,7 @@ let component = Component.extend({
         this.hide();
       }
     }, this.get(&#x27;delayHide&#x27;));
-  },
+  }
 
   /**
    * Called for a click event
@@ -501,7 +544,7 @@ let component = Component.extend({
         this.enter();
       }
     }
-  },
+  }
 
   /**
    * Show the tooltip/popover
@@ -526,7 +569,7 @@ let component = Component.extend({
 
     this.set(&#x27;inDom&#x27;, true);
     delayFn(this, this._show);
-  },
+  }
 
   _show(skipTransition = false) {
     this.set(&#x27;showHelp&#x27;, true);
@@ -564,7 +607,7 @@ let component = Component.extend({
     } else {
       tooltipShowComplete();
     }
-  },
+  }
 
   /**
    * Position the tooltip/popover&#x27;s arrow
@@ -579,7 +622,7 @@ let component = Component.extend({
     let el = this.get(&#x27;arrowElement&#x27;);
     el.style[isVertical ? &#x27;left&#x27; : &#x27;top&#x27;] = &#x60;${50 * (1 - delta / dimension)}%&#x60;;
     el.style[isVertical ? &#x27;top&#x27; : &#x27;left&#x27;] = null;
-  },
+  }
 
   /**
    * Hide the tooltip/popover
@@ -625,7 +668,7 @@ let component = Component.extend({
     }
 
     this.set(&#x27;hoverState&#x27;, null);
-  },
+  }
 
   /**
    * @method addListeners
@@ -644,7 +687,7 @@ let component = Component.extend({
           target.addEventListener(event, this._handleToggle);
         }
       });
-  },
+  }
 
   /**
    * @method removeListeners
@@ -664,7 +707,7 @@ let component = Component.extend({
           }
         });
     } catch(e) {} // eslint-disable-line no-empty
-  },
+  }
 
   /**
    * @method handleTriggerEvent
@@ -676,71 +719,57 @@ let component = Component.extend({
       return;
     }
     return handler.call(this, e);
-  },
+  }
 
-  actions: {
-    close() {
-      // Make sure our click state is off, otherwise the next click would
-      // close the already-closed tooltip/popover. We don&#x27;t need to worry
-      // about this for hover/focus because those aren&#x27;t &quot;stateful&quot; toggle
-      // events like click.
-      this.set(&#x27;inState.click&#x27;, false);
-      this.hide();
-    }
-  },
+  @action
+  _handleEnter(e) {
+    this.handleTriggerEvent(this.enter, e);
+  }
 
-  init() {
-    this._super(...arguments);
-    this._handleEnter = run.bind(this, this.handleTriggerEvent, this.enter);
-    this._handleLeave = run.bind(this, this.handleTriggerEvent, this.leave);
-    this._handleToggle = run.bind(this, this.handleTriggerEvent, this.toggle);
-    this._parentFinder = self.document ? self.document.createTextNode(&#x27;&#x27;) : &#x27;&#x27;;
-    this.inDom = this.get(&#x27;visible&#x27;) &amp;&amp; this.get(&#x27;triggerTargetElement&#x27;);
-  },
+  @action
+  _handleLeave(e) {
+    this.handleTriggerEvent(this.leave, e);
+  }
+
+  @action
+  _handleToggle(e) {
+    this.handleTriggerEvent(this.toggle, e);
+  }
+
+  @action
+  close() {
+    // Make sure our click state is off, otherwise the next click would
+    // close the already-closed tooltip/popover. We don&#x27;t need to worry
+    // about this for hover/focus because those aren&#x27;t &quot;stateful&quot; toggle
+    // events like click.
+    this.set(&#x27;inState.click&#x27;, false);
+    this.hide();
+  }
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
     this._parent = this._parentFinder.parentNode;
     this.triggerTargetElement = this.getTriggerTargetElement();
     this.addListeners();
     if (this.get(&#x27;visible&#x27;)) {
       next(this, this.show, true);
     }
-  },
+  }
 
   willDestroyElement() {
-    this._super(...arguments);
+    super.willDestroyElement(...arguments);
     this.removeListeners();
-  },
+  }
 
-  _watchVisible: observer(&#x27;visible&#x27;, function() {
+  @observes(&#x27;visible&#x27;)
+  _watchVisible() {
     if (this.get(&#x27;visible&#x27;)) {
       this.show();
     } else {
       this.hide();
     }
-  })
-
-});
-
-Object.defineProperties(component.prototype, {
-
-  /**
-   * The DOM element of the overlay element.
-   *
-   * @property overlayElement
-   * @type object
-   * @readonly
-   * @private
-   */
-  overlayElement: {
-    get() {
-      return document.getElementById(this.get(&#x27;overlayId&#x27;));
-    }
   }
-});
-
-export default component;
+}
 
     </pre>
 </div>
@@ -755,9 +784,9 @@ export default component;
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

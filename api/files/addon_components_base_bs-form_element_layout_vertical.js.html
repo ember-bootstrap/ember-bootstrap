@@ -58,6 +58,7 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import FormElementLayout from &#x27;../layout&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/layout/vertical&#x27;;
 
@@ -68,9 +69,8 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/la
  @extends Components.FormElementLayout
  @private
  */
-export default FormElementLayout.extend({
-  layout
-});
+@templateLayout(layout)
+export default class FormElementLayoutVertical extends FormElementLayout {}
 
     </pre>
 </div>
@@ -85,9 +85,9 @@ export default FormElementLayout.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

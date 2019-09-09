@@ -58,11 +58,13 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { assert } from &#x27;@ember/debug&#x27;;
+import { layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
+import { assert } from &#x27;@ember/debug&#x27;;
 import { isBlank } from &#x27;@ember/utils&#x27;;
 import FormElementLayout from &#x27;../layout&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/layout/horizontal&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
 
@@ -71,9 +73,8 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-form/element/la
  @extends Components.FormElementLayout
  @private
  */
-export default FormElementLayout.extend({
-  layout,
-
+@templateLayout(layout)
+export default class FormElementLayoutHorizontal extends FormElementLayout {
   /**
    * The Bootstrap grid class for form labels within a horizontal layout form.
    *
@@ -81,7 +82,8 @@ export default FormElementLayout.extend({
    * @type string
    * @public
    */
-  horizontalLabelGridClass: null,
+  @defaultValue
+  horizontalLabelGridClass = null;
 
   /**
    * Computed property that specifies the Bootstrap grid class for form controls within a horizontal layout form.
@@ -91,17 +93,17 @@ export default FormElementLayout.extend({
    * @readonly
    * @private
    */
-  horizontalInputGridClass: computed(&#x27;horizontalLabelGridClass&#x27;, function() {
+  @(computed(&#x27;horizontalLabelGridClass&#x27;).readOnly())
+  get horizontalInputGridClass() {
     if (isBlank(this.get(&#x27;horizontalLabelGridClass&#x27;))) {
-      return;
+      return undefined;
     }
     let parts = this.get(&#x27;horizontalLabelGridClass&#x27;).split(&#x27;-&#x27;);
     assert(&#x27;horizontalInputGridClass must match format bootstrap grid column class&#x27;, parts.length === 3);
     parts[2] = 12 - parts[2];
     return parts.join(&#x27;-&#x27;);
-  }).readOnly(),
-
-});
+  }
+}
 
     </pre>
 </div>
@@ -116,9 +118,9 @@ export default FormElementLayout.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

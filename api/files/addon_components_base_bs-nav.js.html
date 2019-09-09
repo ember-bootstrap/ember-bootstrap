@@ -58,10 +58,11 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { classNameBindings, classNames, layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { isPresent } from &#x27;@ember/utils&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
   Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)
@@ -88,9 +89,9 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
   &lt;/BsNav&gt;
   &#x60;&#x60;&#x60;
 
-  &gt; Note: the use of angle brackets &#x60;&lt;nav.linkTo&gt;&#x60; as shown above is only supported for Ember 3.10, as it relies on its
-  &gt; own native implementation of the &#x60;LinkComponent&#x60;. For older Ember versions please use the legacy syntax with positional
-  &gt; arguments: &#x60;{{#nav.link-to &quot;bar&quot; this.model}}Bar{{/nav.link-to}}&#x60;
+  &gt; Note: the use of angle brackets &#x60;&lt;nav.linkTo&gt;&#x60; as shown above is only supported for Ember &gt;= 3.10, as it relies on
+  &gt; Ember&#x27;s native implementation of the [&#x60;LinkComponent&#x60;](https://api.emberjs.com/ember/3.12/classes/Ember.Templates.helpers/methods/link-to?anchor=link-to).
+  &gt; For older Ember versions please use the legacy syntax with positional arguments: &#x60;{{#nav.link-to &quot;bar&quot; this.model}}Bar{{/nav.link-to}}&#x60;
 
   ### Nav styles
 
@@ -140,20 +141,16 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-nav&#x27;;
   @public
 
  */
-export default Component.extend({
-  layout,
-
-  tagName: &#x27;ul&#x27;,
-  classNames: [&#x27;nav&#x27;],
-
-  classNameBindings: [&#x27;typeClass&#x27;, &#x27;justified:nav-justified&#x27;],
-
-  typeClass: computed(&#x27;type&#x27;, function() {
+@templateLayout(layout)
+@tagName(&#x27;ul&#x27;)
+@classNames(&#x27;nav&#x27;)
+@classNameBindings(&#x27;typeClass&#x27;, &#x27;justified:nav-justified&#x27;)
+export default class Nav extends Component {
+  @computed(&#x27;type&#x27;)
+  get typeClass() {
     let type = this.get(&#x27;type&#x27;);
-    if (isPresent(type)) {
-      return &#x60;nav-${type}&#x60;;
-    }
-  }),
+    return type ? &#x60;nav-${type}&#x60; : undefined;
+  }
 
   /**
    * Special type of nav, either &quot;pills&quot; or &quot;tabs&quot;
@@ -163,7 +160,8 @@ export default Component.extend({
    * @default null
    * @public
    */
-  type: null,
+  @defaultValue
+  type = null;
 
   /**
    * Make the nav justified, see [bootstrap docs](http://getbootstrap.com/components/#nav-justified)
@@ -173,7 +171,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  justified: false,
+  @defaultValue
+  justified = false;
 
   /**
    * Make the nav pills stacked, see [bootstrap docs](http://getbootstrap.com/components/#nav-pills)
@@ -183,29 +182,33 @@ export default Component.extend({
    * @default false
    * @public
    */
-  stacked: false,
+  @defaultValue
+  stacked = false;
 
   /**
    * @property itemComponent
    * @type {String}
    * @private
    */
-  itemComponent: &#x27;bs-nav/item&#x27;,
+  @defaultValue
+  itemComponent = &#x27;bs-nav/item&#x27;;
 
   /**
    * @property linkToComponent
    * @type {String}
    * @private
    */
-  linkToComponent: &#x27;bs-nav/link-to&#x27;,
+  @defaultValue
+  linkToComponent = &#x27;bs-nav/link-to&#x27;;
 
   /**
    * @property dropdownComponent
    * @type {String}
    * @private
    */
-  dropdownComponent: &#x27;bs-dropdown&#x27;
-});
+  @defaultValue
+  dropdownComponent = &#x27;bs-dropdown&#x27;;
+}
 
     </pre>
 </div>
@@ -220,9 +223,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

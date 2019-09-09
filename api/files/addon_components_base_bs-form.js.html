@@ -58,14 +58,16 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Component from &#x27;@ember/component&#x27;;
-import { set, computed } from &#x27;@ember/object&#x27;;
+import { attributeBindings, classNameBindings, layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
 import { gt } from &#x27;@ember/object/computed&#x27;;
+import Component from &#x27;@ember/component&#x27;;
+import { action, computed, set } from &#x27;@ember/object&#x27;;
 import { assert } from &#x27;@ember/debug&#x27;;
 import { isPresent } from &#x27;@ember/utils&#x27;;
 import { schedule } from &#x27;@ember/runloop&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-form&#x27;;
 import RSVP from &#x27;rsvp&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
   Render a form with the appropriate Bootstrap layout class (see &#x60;formLayout&#x60;).
@@ -163,12 +165,12 @@ import RSVP from &#x27;rsvp&#x27;;
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-  layout,
-  tagName: &#x27;form&#x27;,
-  classNameBindings: [&#x27;layoutClass&#x27;],
-  attributeBindings: [&#x27;_novalidate:novalidate&#x27;],
-  ariaRole: &#x27;form&#x27;,
+@templateLayout(layout)
+@tagName(&#x27;form&#x27;)
+@classNameBindings(&#x27;layoutClass&#x27;)
+@attributeBindings(&#x27;_novalidate:novalidate&#x27;)
+export default class Form extends Component {
+  ariaRole = &#x27;form&#x27;;
 
   /**
    * Bootstrap form class name (computed)
@@ -200,7 +202,8 @@ export default Component.extend({
    * @type string
    * @public
    */
-  formLayout: &#x27;vertical&#x27;,
+  @defaultValue
+  formLayout = &#x27;vertical&#x27;;
 
   /**
    * Check if validating the model is supported. This needs to be implemented by another addon.
@@ -210,7 +213,6 @@ export default Component.extend({
    * @readonly
    * @protected
    */
-  hasValidator: false,
 
   /**
    * The Bootstrap grid class for form labels. This is used by the &#x60;Components.FormElement&#x60; class as a default for the
@@ -221,21 +223,24 @@ export default Component.extend({
    * @default &#x27;col-md-4&#x27;
    * @public
    */
-  horizontalLabelGridClass: &#x27;col-md-4&#x27;,
+  @defaultValue
+  horizontalLabelGridClass = &#x27;col-md-4&#x27;;
 
   /**
    * @property elementComponent
    * @type {String}
    * @private
    */
-  elementComponent: &#x27;bs-form/element&#x27;,
+  @defaultValue
+  elementComponent = &#x27;bs-form/element&#x27;;
 
   /**
    * @property groupComponent
    * @type {String}
    * @private
    */
-  groupComponent: &#x27;bs-form/group&#x27;,
+  @defaultValue
+  groupComponent = &#x27;bs-form/group&#x27;;
 
   /**
    * &#x60;isSubmitting&#x60; is &#x60;true&#x60; after &#x60;submit&#x60; event has been triggered and until Promise returned by &#x60;onSubmit&#x60; is
@@ -248,7 +253,8 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  isSubmitting: gt(&#x27;pendingSubmissions&#x27;, 0),
+  @gt(&#x27;pendingSubmissions&#x27;, 0)
+  isSubmitting;
 
   /**
    * &#x60;isSubmitted&#x60; is &#x60;true&#x60; if last submission was successful.
@@ -261,7 +267,8 @@ export default Component.extend({
    * @type {Boolean}
    * @private
    */
-  isSubmitted: false,
+  @defaultValue
+  isSubmitted = false;
 
   /**
    * &#x60;isRejected&#x60; is &#x60;true&#x60; if last submission was rejected.
@@ -275,7 +282,8 @@ export default Component.extend({
    * @type {Boolean}
    * @private
    */
-  isRejected: false,
+  @defaultValue
+  isRejected = false;
 
   /**
    * Count of pending submissions.
@@ -284,7 +292,8 @@ export default Component.extend({
    * @type {Integer}
    * @private
    */
-  pendingSubmissions: 0,
+  @defaultValue
+  pendingSubmissions = 0;
 
   /**
    * If set to true pressing enter will submit the form, even if no submit button is present
@@ -294,7 +303,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  submitOnEnter: false,
+  @defaultValue
+  submitOnEnter = false;
 
   /**
    * Controls if &#x60;onSubmit&#x60; action is fired concurrently. If &#x60;true&#x60; submitting form multiple
@@ -308,7 +318,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  preventConcurrency: true,
+  @defaultValue
+  preventConcurrency = true;
 
   /**
    * If true, after successful validation and upon submitting the form, all current element validations will be hidden.
@@ -320,7 +331,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  hideValidationsOnSubmit: false,
+  @defaultValue
+  hideValidationsOnSubmit = false;
 
   /**
    * If set to true novalidate attribute is present on form element
@@ -331,13 +343,15 @@ export default Component.extend({
    * @default null
    * @public
    */
-  novalidate: null,
+  @defaultValue
+  novalidate = null;
 
-  _novalidate: computed(&#x27;novalidate&#x27;, &#x27;hasValidator&#x27;, function() {
+  @computed(&#x27;novalidate&#x27;, &#x27;hasValidator&#x27;)
+  get _novalidate() {
     return (this.get(&#x27;hasValidator&#x27;) &amp;&amp; this.get(&#x27;novalidate&#x27;) !== false) || this.get(&#x27;novalidate&#x27;) === true
         ? &#x27;&#x27;
         : undefined;
-  }),
+  }
 
   /**
    * If set to true the &#x60;readonly&#x60; property of all yielded form elements will be set, making their form controls read-only.
@@ -347,7 +361,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  readonly: false,
+  @defaultValue
+  readonly = false;
 
   /**
    * If set to true the &#x60;disabled&#x60; property of all yielded form elements will be set, making their form controls disabled.
@@ -357,7 +372,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  disabled: false,
+  @defaultValue
+  disabled = false;
 
   /**
    * Validate hook which will return a promise that will either resolve if the model is valid
@@ -368,7 +384,7 @@ export default Component.extend({
    * @return {Promise}
    * @public
    */
-  validate(model) {}, // eslint-disable-line no-unused-vars
+  validate(model) {} // eslint-disable-line no-unused-vars
 
   /**
    * @property showAllValidations
@@ -376,7 +392,8 @@ export default Component.extend({
    * @default undefined
    * @private
    */
-  showAllValidations: undefined,
+  @defaultValue
+  showAllValidations = undefined;
 
   /**
    * Action is called before the form is validated (if possible) and submitted.
@@ -385,7 +402,7 @@ export default Component.extend({
    * @param { Object } model  The form&#x27;s &#x60;model&#x60;
    * @public
    */
-  onBefore(model) {}, // eslint-disable-line no-unused-vars
+  onBefore(model) {} // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when submit has been triggered and the model has passed all validations (if present).
@@ -395,7 +412,7 @@ export default Component.extend({
    * @param { Object } result The returned result from the validate method, if validation is available
    * @public
    */
-  onSubmit(model, result) {}, // eslint-disable-line no-unused-vars
+  onSubmit(model, result) {} // eslint-disable-line no-unused-vars
 
   /**
    * Action is called when validation of the model has failed.
@@ -405,7 +422,7 @@ export default Component.extend({
    * @param { Object } error
    * @public
    */
-  onInvalid(model, error) {}, // eslint-disable-line no-unused-vars
+  onInvalid(model, error) {} // eslint-disable-line no-unused-vars
 
   /**
    * Submit handler that will send the default action (&quot;action&quot;) to the controller when submitting the form.
@@ -497,54 +514,55 @@ export default Component.extend({
             });
         }
       )
-  },
+  }
 
   submit(event) {
     this.submitHandler(event, false);
-  },
+  }
 
   keyPress(e) {
     let code = e.keyCode || e.which;
     if (code === 13 &amp;&amp; this.get(&#x27;submitOnEnter&#x27;)) {
       this.triggerSubmit();
     }
-  },
+  }
 
   triggerSubmit() {
     let event = document.createEvent(&#x27;Event&#x27;);
     event.initEvent(&#x27;submit&#x27;, true, true);
     this.get(&#x27;element&#x27;).dispatchEvent(event);
-  },
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     let formLayout = this.get(&#x27;formLayout&#x27;);
     assert(&#x60;Invalid formLayout property given: ${formLayout}&#x60;, [&#x27;vertical&#x27;, &#x27;horizontal&#x27;, &#x27;inline&#x27;].indexOf(formLayout) &gt;= 0);
-  },
-
-  actions: {
-    change(value, model, property) {
-      assert(&#x27;You cannot use the form element\&#x27;s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!&#x27;,
-        isPresent(model) &amp;&amp; isPresent(property)
-      );
-      if (typeof model.set === &#x27;function&#x27;) {
-        model.set(property, value);
-      } else {
-        set(model, property, value);
-      }
-    },
-
-    resetSubmissionState() {
-      this.set(&#x27;isSubmitted&#x27;, false);
-      this.set(&#x27;isRejected&#x27;, false);
-    },
-
-    submit() {
-      return this.submitHandler();
-    },
   }
-});
+
+  @action
+  elementChanged(value, model, property) {
+    assert(&#x27;You cannot use the form element\&#x27;s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!&#x27;,
+      isPresent(model) &amp;&amp; isPresent(property)
+    );
+    if (typeof model.set === &#x27;function&#x27;) {
+      model.set(property, value);
+    } else {
+      set(model, property, value);
+    }
+  }
+
+  @action
+  resetSubmissionState() {
+    this.set(&#x27;isSubmitted&#x27;, false);
+    this.set(&#x27;isRejected&#x27;, false);
+  }
+
+  @action
+  doSubmit() {
+    return this.submitHandler();
+  }
+}
 
     </pre>
 </div>
@@ -559,9 +577,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>

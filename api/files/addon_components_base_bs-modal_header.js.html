@@ -58,8 +58,10 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
+import { classNames, layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-modal/header&#x27;;
+import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
 /**
 
@@ -70,10 +72,9 @@ import layout from &#x27;ember-bootstrap/templates/components/bs-modal/header&#x
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  classNames: [&#x27;modal-header&#x27;],
-
+@templateLayout(layout)
+@classNames(&#x27;modal-header&#x27;)
+export default class ModalHeader extends Component {
   /**
    * Show a close button (x icon)
    *
@@ -82,7 +83,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  closeButton: true,
+  @defaultValue
+  closeButton = true;
 
   /**
    * The title to display in the modal header
@@ -98,21 +100,22 @@ export default Component.extend({
    * @type {String}
    * @private
    */
-  titleComponent: &#x27;bs-modal/header/title&#x27;,
+  @defaultValue
+  titleComponent = &#x27;bs-modal/header/title&#x27;;
 
   /**
    * @property closeComponent
    * @type {String}
    * @private
    */
-  closeComponent: &#x27;bs-modal/header/close&#x27;,
+  @defaultValue
+  closeComponent = &#x27;bs-modal/header/close&#x27;;
 
   /**
    * @event onClose
    * @public
    */
-
-});
+}
 
     </pre>
 </div>
@@ -127,9 +130,9 @@ export default Component.extend({
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Accordion.html">Components.Accordion</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionBody.html">Components.AccordionBody</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItem.html">Components.AccordionItem</a></li>
-            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionTitle.html">Components.AccordionTitle</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemBody.html">Components.AccordionItemBody</a></li>
+            <li class="list-group-item list-group-item-public"><a href="../classes/Components.AccordionItemTitle.html">Components.AccordionItemTitle</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Alert.html">Components.Alert</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.Button.html">Components.Button</a></li>
             <li class="list-group-item list-group-item-public"><a href="../classes/Components.ButtonGroup.html">Components.ButtonGroup</a></li>
