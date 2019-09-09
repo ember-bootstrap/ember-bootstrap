@@ -8,7 +8,7 @@ import {
 
 import { observes } from '@ember-decorators/object';
 import { computed } from '@ember/object';
-import { deprecatingAlias, equal, or } from '@ember/object/computed';
+import { equal, or } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-button';
@@ -125,18 +125,6 @@ export default class Button extends Component {
    */
   @defaultValue
   fulfilledText = undefined;
-
-  /**
-   * @property resolvedText
-   * @type string
-   * @deprecated
-   * @public
-   */
-  @deprecatingAlias('fulfilledText', {
-    id: 'ember-bootstrap.bs-button-resolved-text',
-    until: '3.0.0'
-  })
-  resolvedText;
 
   /**
    * Label of the button used if `onClick` event has returned a Promise which failed.
