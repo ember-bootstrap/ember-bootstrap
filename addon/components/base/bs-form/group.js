@@ -1,3 +1,4 @@
+import { layout as templateLayout } from '@ember-decorators/component';
 import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/group';
@@ -24,9 +25,8 @@ import layout from 'ember-bootstrap/templates/components/bs-form/group';
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-  layout,
-
+@templateLayout(layout)
+export default class FormGroup extends Component {
   /**
    * @property classTypePrefix
    * @type String
@@ -42,7 +42,8 @@ export default Component.extend({
    * @private
    * @readonly
    */
-  hasValidation: notEmpty('validation').readOnly(),
+  @(notEmpty('validation').readOnly())
+  hasValidation;
 
   /**
    * Set to a validation state to render the form-group with a validation style (only for BS3).
@@ -56,5 +57,4 @@ export default Component.extend({
    * @type string
    * @public
    */
-  validation: null
-});
+}

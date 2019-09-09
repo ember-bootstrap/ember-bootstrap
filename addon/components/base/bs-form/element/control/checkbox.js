@@ -1,3 +1,4 @@
+import { attributeBindings, tagName } from '@ember-decorators/component';
 import Control from '../control';
 import { baseAttributes } from './input';
 
@@ -8,23 +9,18 @@ import { baseAttributes } from './input';
  @extends Components.FormElementControl
  @private
  */
-export default Control.extend({
-  tagName: 'input',
-  attributeBindings: [
-    ...baseAttributes,
-    'value:checked',
-    'type'
-  ],
-
+@tagName('input')
+@attributeBindings(...baseAttributes, 'value:checked', 'type')
+export default class FormElementControlCheckbox extends Control {
   /**
    * @property type
    * @type {String}
    * @readonly
    * @private
    */
-  type: 'checkbox',
+  type = 'checkbox';
 
   click(event) {
     this.get('onChange')(event.target.checked);
   }
-});
+}

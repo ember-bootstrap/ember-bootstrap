@@ -1,6 +1,8 @@
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/label';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -9,10 +11,9 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/label';
  @extends Ember.Component
  @private
  */
-export default Component.extend({
-  layout,
-  tagName: '',
-
+@templateLayout(layout)
+@tagName('')
+export default class FormElementLabel extends Component {
   /**
    * @property label
    * @type string
@@ -24,7 +25,8 @@ export default Component.extend({
    * @type boolean
    * @public
    */
-  invisibleLabel: false,
+  @defaultValue
+  invisibleLabel = false;
 
   /**
    * @property formElementId
@@ -52,7 +54,8 @@ export default Component.extend({
    * @default 'vertical'
    * @public
    */
-  formLayout: 'vertical',
+  @defaultValue
+  formLayout = 'vertical';
 
   /**
    * The type of the control widget.
@@ -69,7 +72,8 @@ export default Component.extend({
    * @default 'text'
    * @public
    */
-  controlType: 'text',
+  @defaultValue
+  controlType = 'text';
 
   /**
    * Indicates whether the type of the control widget equals `checkbox`
@@ -78,7 +82,8 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  isCheckbox: equal('controlType', 'checkbox').readOnly(),
+  @(equal('controlType', 'checkbox').readOnly())
+  isCheckbox;
 
   /**
    * Indicates whether the form type equals `horizontal`
@@ -87,5 +92,6 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  isHorizontal: equal('formLayout', 'horizontal').readOnly()
-});
+  @(equal('formLayout', 'horizontal').readOnly())
+  isHorizontal;
+}

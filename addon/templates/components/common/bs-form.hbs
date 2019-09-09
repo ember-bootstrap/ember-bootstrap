@@ -7,14 +7,14 @@
       showAllValidations=this.showAllValidations
       disabled=this.disabled
       readonly=this.readonly
-      onChange=(action "change")
-      _onChange=(action "resetSubmissionState")
+      onChange=this.elementChanged
+      _onChange=this.resetSubmissionState
     )
     group=(component this.groupComponent formLayout=this.formLayout)
     isSubmitting=this.isSubmitting
     isSubmitted=this.isSubmitted
     isRejected=this.isRejected
-    resetSubmissionState=(action "resetSubmissionState")
-    submit=(action "submit")
+    resetSubmissionState=this.resetSubmissionState
+    submit=this.doSubmit
   )
 }}

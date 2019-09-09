@@ -1,6 +1,7 @@
-import ModalDialog from 'ember-bootstrap/components/base/bs-modal/dialog';
+import { classNameBindings } from '@ember-decorators/component';
+import BaseModalDialog from 'ember-bootstrap/components/base/bs-modal/dialog';
 
-export default ModalDialog.extend({
-  classNameBindings: ['showModal:show', 'inDom:d-block'],
-  centered: false
-});
+@classNameBindings('showModal:show', 'inDom:d-block')
+export default class ModalDialog extends BaseModalDialog {
+  centered = false;
+}

@@ -1,3 +1,4 @@
+import { layout as templateLayout } from '@ember-decorators/component';
 import layout from 'ember-bootstrap/templates/components/bs-tooltip/element';
 import ContextualHelpElement from '../bs-contextual-help/element';
 
@@ -9,6 +10,5 @@ import ContextualHelpElement from '../bs-contextual-help/element';
  @extends Components.ContextualHelpElement
  @private
  */
-export default ContextualHelpElement.extend({
-  layout
-});
+@templateLayout(layout)
+export default class TooltipElement extends ContextualHelpElement {}

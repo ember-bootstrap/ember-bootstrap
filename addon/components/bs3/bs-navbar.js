@@ -1,10 +1,6 @@
-import Navbar from 'ember-bootstrap/components/base/bs-navbar';
+import BaseNavbar from 'ember-bootstrap/components/base/bs-navbar';
 
-export default Navbar.extend({
-  _positionPrefix: 'navbar-',
-
-  init() {
-    this._super(...arguments);
-    this.set('_validPositions', ['fixed-top', 'fixed-bottom', 'static-top']);
-  }
-});
+export default class Navbar extends BaseNavbar {
+  _positionPrefix = 'navbar-';
+  _validPositions = ['fixed-top', 'fixed-bottom', 'static-top'];
+}

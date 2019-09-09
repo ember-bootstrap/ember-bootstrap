@@ -5,8 +5,8 @@
   @popperTarget={{this.popperTarget}}
   @modifiers={{this.popperModifiers}}
   @popperContainer={{@destinationElement}}
-  @onCreate={{action "updatePlacement"}}
-  @onUpdate={{action "updatePlacement"}}
+  @onCreate={{this.updatePlacement}}
+  @onUpdate={{this.updatePlacement}}
   @id={{@id}}
   @class={{this.popperClass}}
   ...attributes

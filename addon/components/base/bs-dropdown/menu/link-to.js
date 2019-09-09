@@ -9,5 +9,4 @@ import LinkComponent from '@ember/routing/link-component';
  @extends Ember.LinkComponent
  @public
  */
-export default LinkComponent.extend({
-});
+export default class DropdownMenuLinkTo extends LinkComponent {}

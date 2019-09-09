@@ -1,10 +1,10 @@
+import BaseForm from 'ember-bootstrap/components/base/bs-form';
 import { computed } from '@ember/object';
 
-import Form from 'ember-bootstrap/components/base/bs-form';
-
-export default Form.extend({
-  layoutClass: computed('formLayout', function() {
+export default class Form extends BaseForm {
+  @(computed('formLayout').readOnly())
+  get layoutClass() {
     let layout = this.get('formLayout');
     return layout === 'vertical' ? 'form' : `form-${layout}`;
-  }).readOnly()
-});
+  }
+}

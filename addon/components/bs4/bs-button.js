@@ -1,7 +1,9 @@
-import Button from 'ember-bootstrap/components/base/bs-button';
+import BaseButton from 'ember-bootstrap/components/base/bs-button';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
-export default Button.extend({
-  type: 'secondary',
+export default class Button extends BaseButton {
+  @defaultValue
+  type = 'secondary';
 
   /**
    * Property to create outline buttons (BS4+ only)
@@ -11,5 +13,6 @@ export default Button.extend({
    * @default false
    * @public
    */
-  outline: false
-});
+  @defaultValue
+  outline = false;
+}

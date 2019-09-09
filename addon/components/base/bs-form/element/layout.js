@@ -1,4 +1,6 @@
+import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -7,48 +9,53 @@ import Component from '@ember/component';
  @extends Ember.Component
  @private
  */
-export default Component.extend({
-  tagName: '',
-
+@tagName('')
+export default class FormElementLayout extends Component {
   /**
    * @property formElementId
    * @type {String}
    * @public
    */
-  formElementId: null,
+  @defaultValue
+  formElementId = null;
 
   /**
    * @property hasLabel
    * @type boolean
    * @public
    */
-  hasLabel: true,
+  @defaultValue
+  hasLabel = true;
 
   /**
    * @property errorsComponent
    * @type {Ember.Component}
    * @public
    */
-  errorsComponent: null,
+  @defaultValue
+  errorsComponent = null;
 
   /**
    * @property feedbackIconComponent
    * @type {Ember.Component}
    * @public
    */
-  feedbackIconComponent: null,
+  @defaultValue
+  feedbackIconComponent = null;
 
   /**
    * @property labelComponent
    * @type {Ember.Component}
    * @public
    */
-  labelComponent: null,
+  @defaultValue
+  labelComponent = null;
 
   /**
    * @property helpTextComponent
    * @type {Ember.Component}
    * @public
    */
-  helpTextComponent: null
-});
+  @defaultValue
+  helpTextComponent = null;
+}

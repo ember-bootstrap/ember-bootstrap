@@ -1,7 +1,9 @@
-import { oneWay, not } from '@ember/object/computed';
-import Component from '@ember/component';
+import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import { computed } from '@ember/object';
+import { not, oneWay } from '@ember/object/computed';
+import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  A collapsible/expandable item within an accordion
@@ -13,14 +15,9 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-
-  /**
-   * Add additional binding to mark the entire component area disabled
-   */
-  classNameBindings: ['disabled', 'typeClass'],
-
+@templateLayout(layout)
+@classNameBindings('disabled', 'typeClass')
+export default class AccordionItem extends Component {
   /**
    * The title of the accordion item, displayed as a .panel-title element
    *
@@ -28,7 +25,8 @@ export default Component.extend({
    * @type string
    * @public
    */
-  title: null,
+  @defaultValue
+  title = null;
 
   /**
    * The value of the accordion item, which is used as the value of the `selected` property of the parent [Components.Accordion](Components.Accordion.html) component
@@ -36,27 +34,31 @@ export default Component.extend({
    * @property value
    * @public
    */
-  value: oneWay('elementId'),
+  @oneWay('elementId')
+  value;
 
   /**
    * @property selected
    * @private
    */
-  selected: null,
+  @defaultValue
+  selected = null;
 
   /**
    * @property titleComponent
    * @type {String}
    * @private
    */
-  titleComponent: 'bs-accordion/item/title',
+  @defaultValue
+  titleComponent = 'bs-accordion/item/title';
 
   /**
    * @property bodyComponent
    * @type {String}
    * @private
    */
-  bodyComponent: 'bs-accordion/item/body',
+  @defaultValue
+  bodyComponent = 'bs-accordion/item/body';
 
   /**
    * @property collapsed
@@ -64,9 +66,10 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  collapsed: computed('value', 'selected', function() {
+  @(computed('value', 'selected').readOnly())
+  get collapsed() {
     return this.get('value') !== this.get('selected');
-  }).readOnly(),
+  }
 
   /**
    * @property active
@@ -74,15 +77,16 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  active: not('collapsed'),
+  @not('collapsed')
+  active;
 
   /**
    * @property disabled
    * @type boolean
    * @public
    */
-  disabled: false,
-
+  @defaultValue
+  disabled = false;
 
   /**
    * Property for type styling
@@ -94,7 +98,8 @@ export default Component.extend({
    * @default 'default'
    * @public
    */
-  type: 'default',
+  @defaultValue
+  type = 'default';
 
   /**
    * Reference to the parent `Components.Accordion` class.
@@ -102,12 +107,11 @@ export default Component.extend({
    * @property accordion
    * @private
    */
-  accordion: null,
 
   /**
    * @event onClick
    * @public
    */
-  onClick() {}
-
-});
+  onClick() {
+  }
+}

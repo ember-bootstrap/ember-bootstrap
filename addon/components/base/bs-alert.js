@@ -1,11 +1,14 @@
-import { not, and } from '@ember/object/computed';
+import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { observes } from '@ember-decorators/object';
+import { action } from '@ember/object';
+import { and, not } from '@ember/object/computed';
 import Component from '@ember/component';
-import { observer } from '@ember/object';
 import { later } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-alert';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -26,10 +29,9 @@ import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-  layout,
-  classNameBindings: ['alert', 'fade', 'dismissible:alert-dismissible', 'typeClass'],
-
+@templateLayout(layout)
+@classNameBindings('alert', 'fade', 'dismissible:alert-dismissible', 'typeClass')
+export default class Alert extends Component {
   /**
    * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss
    * the alert.
@@ -39,7 +41,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  dismissible: true,
+  @defaultValue
+  dismissible = true;
 
   /**
    * If true the alert is completely hidden. Will be set when the fade animation has finished.
@@ -50,7 +53,8 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  hidden: false,
+  @defaultValue
+  hidden = !this.get('_visible');
 
   /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
@@ -64,19 +68,22 @@ export default Component.extend({
    * @default true
    * @public
    */
-  visible: true,
+  @defaultValue
+  visible = true;
 
   /**
    * @property _visible
    * @private
    */
-  _visible: listenTo('visible'),
+  @listenTo('visible')
+  _visible;
 
   /**
    * @property notVisible
    * @private
    */
-  notVisible: not('_visible'),
+  @not('_visible')
+  notVisible;
 
   /**
    * Set to false to disable the fade out animation when hiding the alert.
@@ -86,7 +93,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  fade: true,
+  @defaultValue
+  fade = true;
 
   /**
    * Computed property to set the alert class to the component div. Will be false when dismissed to have the component
@@ -96,8 +104,11 @@ export default Component.extend({
    * @type boolean
    * @private
    */
-  alert: not('hidden'),
-  showAlert: and('_visible', 'fade'),
+  @not('hidden')
+  alert;
+
+  @and('_visible', 'fade')
+  showAlert;
 
   /**
    * The duration of the fade out animation
@@ -107,7 +118,8 @@ export default Component.extend({
    * @default 150
    * @public
    */
-  fadeDuration: 150,
+  @defaultValue
+  fadeDuration = 150;
 
   /**
    * Property for type styling
@@ -119,8 +131,11 @@ export default Component.extend({
    * @default 'default'
    * @public
    */
-  type: 'default',
-  typeClass: typeClass('alert', 'type'),
+  @defaultValue
+  type = 'default';
+
+  @typeClass('alert', 'type')
+  typeClass;
 
   /**
    * Use CSS transitions?
@@ -130,7 +145,8 @@ export default Component.extend({
    * @readonly
    * @private
    */
-  usesTransition: usesTransition('fade'),
+  @usesTransition('fade')
+  usesTransition;
 
   /**
    * The action to be sent after the alert has been dismissed (including the CSS transition).
@@ -138,7 +154,7 @@ export default Component.extend({
    * @event onDismissed
    * @public
    */
-  onDismissed() {},
+  onDismissed() {}
 
   /**
    * The action is called when the close button is clicked.
@@ -149,15 +165,14 @@ export default Component.extend({
    * @event onDismiss
    * @public
    */
-  onDismiss() {},
+  onDismiss() {}
 
-  actions: {
-    dismiss() {
-      if (this.get('onDismiss')() !== false) {
-        this.set('_visible', false);
-      }
+  @action
+  dismiss() {
+    if (this.get('onDismiss')() !== false) {
+      this.set('_visible', false);
     }
-  },
+  }
 
   /**
    * Call to make the alert visible again after it has been hidden
@@ -167,7 +182,7 @@ export default Component.extend({
    */
   show() {
     this.set('hidden', false);
-  },
+  }
 
   /**
    * Call to hide the alert. If the `fade` property is true, this will fade out the alert before being finally
@@ -188,18 +203,14 @@ export default Component.extend({
       this.set('hidden', true);
       this.get('onDismissed')();
     }
-  },
+  }
 
-  init() {
-    this._super(...arguments);
-    this.set('hidden', !this.get('_visible'));
-  },
-
-  _observeIsVisible: observer('_visible', function() {
+  @observes('_visible')
+  _observeIsVisible() {
     if (this.get('_visible')) {
       this.show();
     } else {
       this.hide();
     }
-  })
-});
+  }
+}

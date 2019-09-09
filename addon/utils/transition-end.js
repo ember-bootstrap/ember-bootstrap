@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { later, cancel } from '@ember/runloop';
+import { cancel, later } from '@ember/runloop';
 import { Promise, reject } from 'rsvp';
 
 export default function waitForTransitionEnd(node, duration = 0) {

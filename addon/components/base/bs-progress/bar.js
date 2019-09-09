@@ -1,7 +1,14 @@
+import {
+  attributeBindings,
+  classNameBindings,
+  classNames,
+  layout as templateLayout
+} from '@ember-decorators/component';
+import { computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
 import layout from 'ember-bootstrap/templates/components/bs-progress/bar';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -12,13 +19,11 @@ import layout from 'ember-bootstrap/templates/components/bs-progress/bar';
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  classNames: ['progress-bar'],
-  classNameBindings: ['progressBarStriped', 'typeClass'],
-
-  attributeBindings: ['ariaValuenow', 'ariaValuemin', 'ariaValuemax'],
-
+@templateLayout(layout)
+@classNames('progress-bar')
+@classNameBindings('progressBarStriped', 'typeClass')
+@attributeBindings('ariaValuenow', 'ariaValuemin', 'ariaValuemax')
+export default class ProgressBar extends Component {
   /**
    * The lower limit of the value range
    *
@@ -27,7 +32,8 @@ export default Component.extend({
    * @default 0
    * @public
    */
-  minValue: 0,
+  @defaultValue
+  minValue = 0;
 
   /**
    * The upper limit of the value range
@@ -37,7 +43,8 @@ export default Component.extend({
    * @default 100
    * @public
    */
-  maxValue: 100,
+  @defaultValue
+  maxValue = 100;
 
   /**
    * The value the progress bar should represent
@@ -47,7 +54,8 @@ export default Component.extend({
    * @default 0
    * @public
    */
-  value: 0,
+  @defaultValue
+  value = 0;
 
   /**
    If true a label will be shown inside the progress bar.
@@ -58,7 +66,7 @@ export default Component.extend({
 
    ```hbs
    {{#bs-progress}}
-     {{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}
+   {{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}
    {{/bs-progress}}
    ```
 
@@ -67,7 +75,8 @@ export default Component.extend({
    @default false
    @public
    */
-  showLabel: false,
+  @defaultValue
+  showLabel = false;
 
   /**
    * Create a striped effect, see http://getbootstrap.com/components/#progress-striped
@@ -77,7 +86,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  striped: false,
+  @defaultValue
+  striped = false;
 
   /**
    * Animate the stripes, see http://getbootstrap.com/components/#progress-animated
@@ -87,7 +97,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  animate: false,
+  @defaultValue
+  animate = false;
 
   /**
    * Specify to how many digits the progress bar label should be rounded.
@@ -97,7 +108,8 @@ export default Component.extend({
    * @default 0
    * @public
    */
-  roundDigits: 0,
+  @defaultValue
+  roundDigits = 0;
 
   /**
    * Property for type styling
@@ -109,14 +121,23 @@ export default Component.extend({
    * @default 'default'
    * @public
    */
-  type: 'default',
+  @defaultValue
+  type = 'default';
 
-  progressBarStriped: readOnly('striped'),
-  progressBarAnimate: readOnly('animate'),
+  @readOnly('striped')
+  progressBarStriped;
 
-  ariaValuenow: readOnly('value'),
-  ariaValuemin: readOnly('minValue'),
-  ariaValuemax: readOnly('maxValue'),
+  @readOnly('animate')
+  progressBarAnimate;
+
+  @readOnly('value')
+  ariaValuenow;
+
+  @readOnly('minValue')
+  ariaValuemin;
+
+  @readOnly('maxValue')
+  ariaValuemax;
 
   /**
    * The percentage of `value`
@@ -126,13 +147,14 @@ export default Component.extend({
    * @protected
    * @readonly
    */
-  percent: computed('value', 'minValue', 'maxValue', function() {
+  @(computed('value', 'minValue', 'maxValue').readOnly())
+  get percent() {
     let value = parseFloat(this.get('value'));
     let minValue = parseFloat(this.get('minValue'));
     let maxValue = parseFloat(this.get('maxValue'));
 
     return Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100;
-  }).readOnly(),
+  }
 
   /**
    * The percentage of `value`, rounded to `roundDigits` digits
@@ -142,10 +164,11 @@ export default Component.extend({
    * @protected
    * @readonly
    */
-  percentRounded: computed('percent', 'roundDigits', function() {
+  @(computed('percent', 'roundDigits').readOnly())
+  get percentRounded() {
     let roundFactor = Math.pow(10, this.get('roundDigits'));
     return Math.round(this.get('percent') * roundFactor) / roundFactor;
-  }).readOnly(),
+  }
 
   /**
    * @method updateStyles
@@ -155,12 +178,13 @@ export default Component.extend({
   updateStyles() {
     let percent = parseFloat(this.get('percent'));
     this.element.style.width = !isNaN(percent) ? `${percent}%` : '';
-  },
+  }
 
   didInsertElement() {
     this.updateStyles();
-  },
+  }
+
   didUpdateAttrs() {
     this.updateStyles();
   }
-});
+}

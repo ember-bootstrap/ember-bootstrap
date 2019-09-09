@@ -1,5 +1,5 @@
-import DropdownMenuItem from 'ember-bootstrap/components/base/bs-dropdown/menu/item';
+import { tagName } from '@ember-decorators/component';
+import BaseDropdownMenuItem from 'ember-bootstrap/components/base/bs-dropdown/menu/item';
 
-export default DropdownMenuItem.extend({
-  tagName: 'li'
-});
+@tagName('li')
+export default class DropdownMenuItem extends BaseDropdownMenuItem {}

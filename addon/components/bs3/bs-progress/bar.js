@@ -1,7 +1,9 @@
-import ProgressBar from 'ember-bootstrap/components/base/bs-progress/bar';
+import { classNameBindings } from '@ember-decorators/component';
+import BaseProgressBar from 'ember-bootstrap/components/base/bs-progress/bar';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 
-export default ProgressBar.extend({
-  classNameBindings: ['progressBarAnimate:active'],
-  typeClass: typeClass('progress-bar', 'type')
-});
+@classNameBindings('progressBarAnimate:active')
+export default class ProgressBar extends BaseProgressBar {
+  @typeClass('progress-bar', 'type')
+  typeClass;
+}

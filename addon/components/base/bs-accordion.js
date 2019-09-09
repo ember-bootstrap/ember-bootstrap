@@ -1,6 +1,9 @@
+import { action } from '@ember/object';
+import { layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),
@@ -33,9 +36,10 @@ import listenTo from 'ember-bootstrap/utils/cp/listen-to';
   @extends Ember.Component
   @public
 */
-export default Component.extend({
-  layout,
-  ariaRole: 'tablist',
+@templateLayout(layout)
+export default class Accordion extends Component {
+  @defaultValue
+  ariaRole = 'tablist';
 
   /**
    * The value of the currently selected accordion item. Set this to change selection programmatically.
@@ -46,14 +50,16 @@ export default Component.extend({
    * @property selected
    * @public
    */
-  selected: null,
+  @defaultValue
+  selected = null;
 
   /**
    * @property itemComponent
    * @type {String}
    * @private
    */
-  itemComponent: 'bs-accordion/item',
+  @defaultValue
+  itemComponent = 'bs-accordion/item';
 
   /**
    * The value of the currently selected accordion item
@@ -61,7 +67,8 @@ export default Component.extend({
    * @property isSelected
    * @private
    */
-  isSelected: listenTo('selected'),
+  @listenTo('selected')
+  isSelected;
 
   /**
    * Action when the selected accordion item is about to be changed.
@@ -74,18 +81,16 @@ export default Component.extend({
    * @param oldValue
    * @public
    */
-  onChange(newValue, oldValue) {}, // eslint-disable-line no-unused-vars
+  onChange(newValue, oldValue) {} // eslint-disable-line no-unused-vars
 
-  actions: {
-    change(newValue) {
-      let oldValue = this.get('isSelected');
-      if (oldValue === newValue) {
-        newValue = null;
-      }
-      if (this.get('onChange')(newValue, oldValue) !== false) {
-        this.set('isSelected', newValue);
-      }
+  @action
+  doChange(newValue) {
+    let oldValue = this.get('isSelected');
+    if (oldValue === newValue) {
+      newValue = null;
+    }
+    if (this.get('onChange')(newValue, oldValue) !== false) {
+      this.set('isSelected', newValue);
     }
   }
-
-});
+}

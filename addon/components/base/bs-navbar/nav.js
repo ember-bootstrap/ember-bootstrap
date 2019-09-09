@@ -1,4 +1,6 @@
+import { classNames } from '@ember-decorators/component';
 import BsNavComponent from 'ember-bootstrap/components/bs-nav';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  * Component for the `.nav` element within a [Components.Navbar](Components.Navbar.html)
@@ -12,11 +14,8 @@ import BsNavComponent from 'ember-bootstrap/components/bs-nav';
  * @extends Components.Nav
  * @public
  */
-export default BsNavComponent.extend({
-  classNames: ['navbar-nav'],
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-    this.set('justified', false);
-  }
-});
+@classNames('navbar-nav')
+export default class NavbarNav extends BsNavComponent {
+  @defaultValue
+  justified = false;
+}

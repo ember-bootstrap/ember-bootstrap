@@ -1,5 +1,7 @@
-import Button from 'ember-bootstrap/components/base/bs-button';
+import BaseButton from 'ember-bootstrap/components/base/bs-button';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
-export default Button.extend({
-  type: 'default'
-});
+export default class Button extends BaseButton {
+  @defaultValue
+  type = 'default';
+}

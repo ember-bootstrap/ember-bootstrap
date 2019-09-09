@@ -1,7 +1,7 @@
-import NavItem from 'ember-bootstrap/components/base/bs-nav/item';
+import { classNames } from '@ember-decorators/component';
+import BaseNavItem from 'ember-bootstrap/components/base/bs-nav/item';
 
-export default NavItem.extend({
-  classNames: ['nav-item'],
-
-  linkClass: 'nav-link'
-});
+@classNames('nav-item')
+export default class NavItem extends BaseNavItem {
+  linkClass = 'nav-link';
+}

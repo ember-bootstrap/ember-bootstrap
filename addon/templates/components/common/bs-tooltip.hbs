@@ -19,7 +19,7 @@
       {{#if hasBlock}}
         {{yield
           (hash
-            close=(action "close")
+            close=this.close
           )
         }}
       {{else}}

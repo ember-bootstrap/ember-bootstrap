@@ -1,6 +1,6 @@
-import Title from 'ember-bootstrap/components/base/bs-modal/header/title';
+import { tagName } from '@ember-decorators/component';
+import BaseModalHeaderTitle from 'ember-bootstrap/components/base/bs-modal/header/title';
 
-export default Title.extend({
-  tagName: 'h5'
-});
+@tagName('h5')
+export default class ModalHeaderTitle extends BaseModalHeaderTitle {}
 

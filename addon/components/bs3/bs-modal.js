@@ -1,5 +1,5 @@
-import Modal from 'ember-bootstrap/components/base/bs-modal';
+import BaseModal from 'ember-bootstrap/components/base/bs-modal';
 
-export default Modal.extend({
-  showClass: 'in'
-});
+export default class Modal extends BaseModal {
+  showClass = 'in';
+}

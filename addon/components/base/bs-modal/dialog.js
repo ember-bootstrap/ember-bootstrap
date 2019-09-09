@@ -1,26 +1,35 @@
+import {
+  attributeBindings,
+  classNameBindings,
+  classNames,
+  layout as templateLayout
+} from '@ember-decorators/component';
+import { computed } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
 import { bind } from '@ember/runloop';
-import { readOnly } from '@ember/object/computed';
 import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
-  Internal component for modal's markup and event handling. Should not be used directly.
+ Internal component for modal's markup and event handling. Should not be used directly.
 
-  @class ModalDialog
-  @namespace Components
-  @extends Ember.Component
-  @private
+ @class ModalDialog
+ @namespace Components
+ @extends Ember.Component
+ @private
  */
-export default Component.extend({
-  layout,
-  classNames: ['modal'],
-  classNameBindings: ['fade'],
-  attributeBindings: ['tabindex', 'aria-labelledby'],
-  ariaRole: 'dialog',
-  tabindex: '-1',
-  "aria-labelledby": readOnly('titleId'),
+@templateLayout(layout)
+@classNames('modal')
+@classNameBindings('fade')
+@attributeBindings('tabindex', 'ariaLabelledby:aria-labelledby')
+export default class ModalDialog extends Component {
+  ariaRole = 'dialog';
+  tabindex = '-1';
+
+  @readOnly('titleId')
+  ariaLabelledby;
 
   /**
    * Set to false to disable fade animations.
@@ -30,7 +39,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  fade: true,
+  @defaultValue
+  fade = true;
 
   /**
    * Used to apply Bootstrap's visibility classes
@@ -40,7 +50,8 @@ export default Component.extend({
    * @default false
    * @private
    */
-  showModal: false,
+  @defaultValue
+  showModal = false;
 
   /**
    * Render modal markup?
@@ -50,7 +61,8 @@ export default Component.extend({
    * @default false
    * @private
    */
-  inDom: false,
+  @defaultValue
+  inDom = false;
 
   /**
    * @property paddingLeft
@@ -58,7 +70,8 @@ export default Component.extend({
    * @default null
    * @private
    */
-  paddingLeft: null,
+  @defaultValue
+  paddingLeft = null;
 
   /**
    * @property paddingRight
@@ -66,7 +79,8 @@ export default Component.extend({
    * @default null
    * @private
    */
-  paddingRight: null,
+  @defaultValue
+  paddingRight = null;
 
   /**
    * Closes the modal when escape key is pressed.
@@ -76,7 +90,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  keyboard: true,
+  @defaultValue
+  keyboard = true;
 
   /**
    * Property for size styling, set to null (default), 'lg' or 'sm'
@@ -87,7 +102,8 @@ export default Component.extend({
    * @type String
    * @public
    */
-  size: null,
+  @defaultValue
+  size = null;
 
   /**
    * If true clicking on the backdrop will close the modal.
@@ -97,7 +113,8 @@ export default Component.extend({
    * @default true
    * @public
    */
-  backdropClose: true,
+  @defaultValue
+  backdropClose = true;
 
   /**
    * Name of the size class
@@ -107,13 +124,13 @@ export default Component.extend({
    * @readOnly
    * @private
    */
-  sizeClass: computed('size', function() {
+  @(computed('size').readOnly())
+  get sizeClass() {
     let size = this.get('size');
     return isBlank(size) ? null : `modal-${size}`;
-  }).readOnly(),
+  }
 
-
-   /**
+  /**
    * The id of the `.modal-title` element
    *
    * @property titleId
@@ -121,7 +138,7 @@ export default Component.extend({
    * @default null
    * @private
    */
-  titleId: null,
+  titleId = null;
 
   /**
    * Gets or sets the id of the title element for aria accessibility tags
@@ -130,24 +147,24 @@ export default Component.extend({
    * @private
    */
   getOrSetTitleId() {
-      //Title element may be set by user so we have to try and find it to set the id
-      const modalNode = this.get('element');
-      let nodeId = null;
+    //Title element may be set by user so we have to try and find it to set the id
+    const modalNode = this.get('element');
+    let nodeId = null;
 
-      if (modalNode) {
-        const titleNode = modalNode.querySelector('.modal-title');
-        if (titleNode) {
-          //Get title id of .modal-title
-          nodeId = titleNode.id
-          if (!nodeId) {
-            //no title id so we set one
-            nodeId = `${this.get('id')}-title`;
-            titleNode.id = nodeId;
-          }
+    if (modalNode) {
+      const titleNode = modalNode.querySelector('.modal-title');
+      if (titleNode) {
+        //Get title id of .modal-title
+        nodeId = titleNode.id;
+        if (!nodeId) {
+          //no title id so we set one
+          nodeId = `${this.get('id')}-title`;
+          titleNode.id = nodeId;
         }
       }
-      this.set('titleId', nodeId)
-  },
+    }
+    this.set('titleId', nodeId)
+  }
 
   /**
    * Update the elements styles using CSSOM.
@@ -165,44 +182,44 @@ export default Component.extend({
     this.element.style.display = inDom ? 'block' : '';
     this.element.style.paddingLeft = paddingLeft || '';
     this.element.style.paddingRight = paddingRight || '';
-  },
+  }
 
   /**
    * @event onClose
    * @public
    */
-  onClose() {},
+  onClose() {
+  }
 
   keyDown(e) {
     let code = e.keyCode || e.which;
     if (code === 27 && this.get('keyboard')) {
       this.get('onClose')();
     }
-  },
+  }
 
   _click(e) {
     if (e.target !== this.element || !this.get('backdropClose')) {
       return;
     }
     this.get('onClose')();
-  },
+  }
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
     // Ember events use event delegation, but we need to add an `onclick` handler directly on the modal element for
     // iOS to allow clicking the div. So a `click(){}` method here won't work, we need to attach an event listener
     // directly to the element
     this.element.onclick = bind(this, this._click);
     this.getOrSetTitleId();
     this.updateStyles();
-  },
+  }
 
   didUpdateAttrs() {
     this.updateStyles();
-  },
+  }
 
   willDestroyElement() {
     this.element.onclick = null;
   }
-
-});
+}

@@ -1,6 +1,8 @@
+import { layout as templateLayout } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import ContextualHelp from './bs-contextual-help';
 import layout from 'ember-bootstrap/templates/components/bs-tooltip';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Component that implements Bootstrap [tooltips](http://getbootstrap.com/javascript/#tooltips).
@@ -77,15 +79,15 @@ import layout from 'ember-bootstrap/templates/components/bs-tooltip';
   @extends Components.ContextualHelp
   @public
 */
-export default ContextualHelp.extend({
-  layout,
-
+@templateLayout(layout)
+export default class Tooltip extends ContextualHelp {
   /**
    * @property elementComponent
    * @type {String}
    * @private
    */
-  elementComponent: 'bs-tooltip/element',
+  @defaultValue
+  elementComponent = 'bs-tooltip/element';
 
   /**
    * The DOM element of the arrow element.
@@ -95,7 +97,8 @@ export default ContextualHelp.extend({
    * @readonly
    * @private
    */
-  arrowElement: computed('overlayElement', function() {
+  @computed('overlayElement')
+  get arrowElement() {
     return this.get('overlayElement').querySelector('.tooltip-arrow');
-  })
-});
+  }
+}

@@ -1,3 +1,4 @@
+import { classNames, layout as templateLayout } from '@ember-decorators/component';
 import layout from 'ember-bootstrap/templates/components/bs-navbar/content';
 import BsCollapseComponent from 'ember-bootstrap/components/bs-collapse';
 
@@ -10,8 +11,6 @@ import BsCollapseComponent from 'ember-bootstrap/components/bs-collapse';
  * @extends Components.Collapse
  * @public
  */
-export default BsCollapseComponent.extend({
-  layout,
-
-  classNames: ['navbar-collapse']
-});
+@templateLayout(layout)
+@classNames('navbar-collapse')
+export default class NavbarContent extends BsCollapseComponent {}

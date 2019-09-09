@@ -1,5 +1,5 @@
-import NavbarToggle from 'ember-bootstrap/components/base/bs-navbar/toggle';
+import { classNames } from '@ember-decorators/component';
+import BaseNavbarToggle from 'ember-bootstrap/components/base/bs-navbar/toggle';
 
-export default NavbarToggle.extend({
-  classNames: ['navbar-toggle']
-});
+@classNames('navbar-toggle')
+export default class NavbarToggle extends BaseNavbarToggle {}

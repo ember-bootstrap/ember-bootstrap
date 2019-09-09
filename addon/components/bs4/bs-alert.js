@@ -1,5 +1,5 @@
-import Alert from 'ember-bootstrap/components/base/bs-alert';
+import { classNameBindings } from '@ember-decorators/component';
+import BaseAlert from 'ember-bootstrap/components/base/bs-alert';
 
-export default Alert.extend({
-  classNameBindings: ['showAlert:show']
-});
+@classNameBindings('showAlert:show')
+export default class Alert extends BaseAlert {}

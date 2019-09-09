@@ -1,8 +1,18 @@
-import Carousel from 'ember-bootstrap/components/base/bs-carousel';
+import { classNameBindings } from '@ember-decorators/component';
+import BaseCarousel from 'ember-bootstrap/components/base/bs-carousel';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
-export default Carousel.extend({
-  nextControlClassName: 'carousel-control right',
-  nextControlIcon: 'icon-next',
-  prevControlClassName: 'carousel-control left',
-  prevControlIcon: 'icon-prev'
-});
+@classNameBindings('carouselFade')
+export default class Carousel extends BaseCarousel {
+  @defaultValue
+  nextControlClassName = 'carousel-control right';
+
+  @defaultValue
+  nextControlIcon = 'icon-next';
+
+  @defaultValue
+  prevControlClassName = 'carousel-control left';
+
+  @defaultValue
+  prevControlIcon = 'icon-prev';
+}

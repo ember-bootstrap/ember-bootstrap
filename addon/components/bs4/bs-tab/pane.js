@@ -1,5 +1,5 @@
-import TabPane from 'ember-bootstrap/components/base/bs-tab/pane';
+import { classNameBindings } from '@ember-decorators/component';
+import BaseTabPane from 'ember-bootstrap/components/base/bs-tab/pane';
 
-export default TabPane.extend({
-  classNameBindings: ['showContent:show']
-});
+@classNameBindings('showContent:show')
+export default class TabPane extends BaseTabPane {}

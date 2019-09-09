@@ -1,8 +1,9 @@
 import { computed } from '@ember/object';
-import PopoverElement from 'ember-bootstrap/components/base/bs-popover/element';
+import BasePopoverElement from 'ember-bootstrap/components/base/bs-popover/element';
 
-export default PopoverElement.extend({
-  popperClassNames: computed('fade', 'actualPlacement', 'showHelp', function() {
+export default class PopoverElement extends BasePopoverElement {
+  @computed('fade', 'actualPlacement', 'showHelp')
+  get popperClassNames() {
     let classes = ['popover', `bs-popover-${this.get('actualPlacement')}`];
     if (this.get('fade')) {
       classes.push('fade');
@@ -11,17 +12,17 @@ export default PopoverElement.extend({
       classes.push('show');
     }
     return classes;
-  }),
+  }
 
   /**
    * @property titleClass
    * @private
    */
-  titleClass: 'popover-header',
+  titleClass = 'popover-header';
 
   /**
    * @property contentClass
    * @private
    */
-  contentClass: 'popover-body'
-});
+  contentClass = 'popover-body';
+}

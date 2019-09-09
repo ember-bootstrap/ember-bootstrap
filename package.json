@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^0.7.0",
+    "babel-eslint": "^8.0.0",
     "bootstrap": "^4.0.0",
     "bootstrap-sass": "^3.3.7",
     "broccoli-asset-rev": "^3.0.0",
@@ -45,6 +46,7 @@
     "ember-code-snippet": "^3.0.0",
     "ember-compatibility-helpers": "^1.2.0",
     "ember-cp-validations": "^4.0.0-beta.9",
+    "ember-decorators": "^6.1.0",
     "ember-disable-prototype-extensions": "^1.1.3",
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^6.3.1",
@@ -104,6 +106,7 @@
     "ember-cli-htmlbars": "^3.0.1",
     "ember-cli-version-checker": "^3.0.0",
     "ember-concurrency": "^1.0.0",
+    "ember-decorators-polyfill": "^1.0.6",
     "ember-let-polyfill": "^0.1.0",
     "ember-maybe-in-element": "^0.2.0",
     "ember-named-arguments-polyfill": "^1.0.0",

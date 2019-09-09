@@ -18,6 +18,9 @@ module.exports = function(defaults) {
     },
     autoImport: {
       forbidEval: true
+    },
+    'ember-cli-babel': {
+      includePolyfill: !!process.env.BABELPOLYFILL
     }
   };
 

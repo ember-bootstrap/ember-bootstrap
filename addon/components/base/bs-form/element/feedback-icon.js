@@ -1,5 +1,7 @@
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/feedback-icon';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -8,21 +10,22 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/feedbac
  @extends Ember.Component
  @private
  */
-export default Component.extend({
-  layout,
-  tagName: '',
-
+@templateLayout(layout)
+@tagName('')
+export default class FormElementFeedbackIcon extends Component {
   /**
    * @property show
    * @type {Boolean}
    * @public
    */
-  show: false,
+  @defaultValue
+  show = false;
 
   /**
    * @property iconName
    * @type {String}
    * @public
    */
-  iconName: null
-});
+  @defaultValue
+  iconName = null;
+}

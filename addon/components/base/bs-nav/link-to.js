@@ -11,4 +11,4 @@ import ComponentChild from 'ember-bootstrap/mixins/component-child';
  @uses Mixins.ComponentChild
  @public
  */
-export default LinkComponent.extend(ComponentChild);
+export default class NavLinkTo extends LinkComponent.extend(ComponentChild) {}

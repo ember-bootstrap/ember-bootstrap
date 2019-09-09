@@ -1,6 +1,8 @@
-import Component from '@ember/component';
-import { observer } from '@ember/object';
+import { classNameBindings, layout as templateLayout, tagName } from '@ember-decorators/component';
+import { observes } from '@ember-decorators/object';
 import { filter, filterBy, gt } from '@ember/object/computed';
+import Component from '@ember/component';
+import '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import LinkComponent from '@ember/routing/link-component';
 import layout from 'ember-bootstrap/templates/components/bs-nav/item';
@@ -18,11 +20,10 @@ import { assert } from '@ember/debug';
  @uses Mixins.ComponentParent
  @public
  */
-export default Component.extend(ComponentParent, {
-  layout,
-  classNameBindings: ['disabled', 'active'],
-  tagName: 'li',
-
+@templateLayout(layout)
+@classNameBindings('disabled', 'active')
+@tagName('li')
+export default class NavItem extends Component.extend(ComponentParent) {
   /**
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
    * By default it will look at any nested `link-to` components and make itself disabled if there is a disabled link.
@@ -32,10 +33,12 @@ export default Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  disabled: overrideableCP('_disabled', function() {
+  @overrideableCP('_disabled', function() {
     return this.get('_disabled');
-  }),
-  _disabled: false,
+  })
+  disabled;
+
+  _disabled = false;
 
   /**
    * Render the nav item as active.
@@ -47,10 +50,12 @@ export default Component.extend(ComponentParent, {
    * @type boolean
    * @public
    */
-  active: overrideableCP('_active', function() {
+  @overrideableCP('_active', function() {
     return this.get('_active');
-  }),
-  _active: false,
+  })
+  active;
+
+  _active = false;
 
   /**
    * Collection of all `Ember.LinkComponent`s that are children
@@ -58,15 +63,22 @@ export default Component.extend(ComponentParent, {
    * @property childLinks
    * @private
    */
-  childLinks: filter('children', function(view) {
+  @filter('children', function(view) {
     return view instanceof LinkComponent;
-  }),
+  })
+  childLinks;
 
-  activeChildLinks: filterBy('childLinks', 'active'),
-  hasActiveChildLinks: gt('activeChildLinks.length', 0),
+  @filterBy('childLinks', 'active')
+  activeChildLinks;
 
-  disabledChildLinks: filterBy('childLinks', 'disabled'),
-  hasDisabledChildLinks: gt('disabledChildLinks.length', 0),
+  @gt('activeChildLinks.length', 0)
+  hasActiveChildLinks;
+
+  @filterBy('childLinks', 'disabled')
+  disabledChildLinks;
+
+  @gt('disabledChildLinks.length', 0)
+  hasDisabledChildLinks;
 
   /**
    * Called when clicking the nav item
@@ -74,34 +86,37 @@ export default Component.extend(ComponentParent, {
    * @event onClick
    * @public
    */
-  onClick() {},
+  onClick() {
+  }
 
   click() {
     this.onClick();
-  },
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     let { model, models } = this.getProperties('model', 'models');
     assert('You cannot pass both `@model` and `@models` to a nav item component!', !model || !models);
 
     this.get('activeChildLinks');
     this.get('disabledChildLinks');
-  },
+  }
 
-  _observeActive: observer('activeChildLinks.[]', function() {
+  @observes('activeChildLinks.[]')
+  _observeActive() {
     scheduleOnce('afterRender', this, this._updateActive);
-  }),
+  }
 
   _updateActive() {
     this.set('_active', this.get('hasActiveChildLinks'));
-  },
+  }
 
-  _observeDisabled: observer('disabledChildLinks.[]', function() {
+  @observes('disabledChildLinks.[]')
+  _observeDisabled() {
     scheduleOnce('afterRender', this, this._updateDisabled);
-  }),
+  }
 
   _updateDisabled() {
     this.set('_disabled', this.get('hasDisabledChildLinks'));
   }
-});
+}

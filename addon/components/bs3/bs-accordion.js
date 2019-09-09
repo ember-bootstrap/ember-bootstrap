@@ -1,5 +1,5 @@
-import Accordion from 'ember-bootstrap/components/base/bs-accordion';
+import { classNames } from '@ember-decorators/component';
+import BaseAccordion from 'ember-bootstrap/components/base/bs-accordion';
 
-export default Accordion.extend({
-  classNames: ['panel-group']
-});
+@classNames('panel-group')
+export default class Accordion extends BaseAccordion {}

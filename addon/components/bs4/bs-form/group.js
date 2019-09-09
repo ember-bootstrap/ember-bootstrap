@@ -1,10 +1,10 @@
+import { classNameBindings, classNames } from '@ember-decorators/component';
 import { equal } from '@ember/object/computed';
-import FormGroup from 'ember-bootstrap/components/base/bs-form/group';
+import BaseFormGroup from 'ember-bootstrap/components/base/bs-form/group';
 
-export default FormGroup.extend({
-  classNames: ['form-group'],
-  classNameBindings: ['isHorizontal:row'],
-
+@classNames('form-group')
+@classNameBindings('isHorizontal:row')
+export default class FormGroup extends BaseFormGroup {
   /**
    * Indicates whether the form type equals `horizontal`
    *
@@ -12,5 +12,6 @@ export default FormGroup.extend({
    * @type boolean
    * @private
    */
-  isHorizontal: equal('formLayout', 'horizontal').readOnly()
-});
+  @(equal('formLayout', 'horizontal').readOnly())
+  isHorizontal;
+}

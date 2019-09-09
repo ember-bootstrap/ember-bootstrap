@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -7,20 +8,20 @@ import Component from '@ember/component';
  @extends Ember.Component
  @private
  */
-export default Component.extend({
-
+export default class FormElementControl extends Component {
   /**
    * @property value
    * @public
    */
-  value: null,
+
 
   /**
    * @property ariaDescribedBy
    * @type {string}
    * @public
    */
-  ariaDescribedBy: null,
+  @defaultValue
+  ariaDescribedBy = null;
 
   /**
    * This action is called whenever the `value` changes
@@ -29,5 +30,6 @@ export default Component.extend({
    * @param {*} value
    * @public
    */
-  onChange() {}
-});
+  onChange() {
+  }
+}

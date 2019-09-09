@@ -1,5 +1,7 @@
+import { classNameBindings, layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  * Component to implement the responsive menu toggle behavior in a [Components.Navbar](Components.Navbar.html)
@@ -15,22 +17,21 @@ import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
  * @extends Ember.Component
  * @public
  */
-export default Component.extend({
-  layout,
-  tagName: 'button',
-
-  classNameBindings: ['collapsed'],
-  collapsed: true,
+@templateLayout(layout)
+@tagName('button')
+@classNameBindings('collapsed')
+export default class NavbarToggle extends Component {
+  @defaultValue
+  collapsed = true;
 
   /**
    * @event onClick
    * @public
    */
   onClick() {
-  },
+  }
 
   click() {
     this.onClick();
   }
-
-});
+}

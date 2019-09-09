@@ -1,4 +1,4 @@
-import { getWithDefault, computed } from '@ember/object';
+import { computed, getWithDefault } from '@ember/object';
 
 /**
  * CP macro that listens to dependent (external) property, but allows overriding it locally without violating DDAU

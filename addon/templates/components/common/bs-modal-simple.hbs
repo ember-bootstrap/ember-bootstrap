@@ -1,7 +1,7 @@
 {{#if inDom}}
   {{#maybe-in-element destinationElement _renderInPlace}}
     <BsModal::dialog
-      @onClose={{action "close"}}
+      @onClose={{this.close}}
       @fade={{this.fade}}
       @showModal={{this.showModal}}
       @keyboard={{this.keyboard}}
@@ -15,12 +15,12 @@
       @id={{this.modalId}}
       ...attributes
     >
-      <BsModal::header @title={{@title}} @closeButton={{this.closeButton}} @onClose={{action "close"}} />
+      <BsModal::header @title={{@title}} @closeButton={{this.closeButton}} @onClose={{this.close}} />
       <BsModal::body>
         {{yield
           (hash
-            close=(action "close")
-            submit=(action "submit")
+            close=this.close
+            submit=this.doSubmit
           )
         }}
       </BsModal::body>
@@ -28,8 +28,8 @@
         @closeTitle={{this.closeTitle}}
         @submitTitle={{@submitTitle}}
         @submitButtonType={{this.submitButtonType}}
-        @onClose={{action "close"}}
-        @onSubmit={{action "submit"}}
+        @onClose={{this.close}}
+        @onSubmit={{this.doSubmit}}
       />
     </BsModal::dialog>
 

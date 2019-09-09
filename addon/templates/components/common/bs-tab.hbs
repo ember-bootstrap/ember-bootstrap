@@ -3,7 +3,7 @@
     (hash
       pane=(component this.paneComponent parent=this activeId=this.isActiveId fade=this.fade fadeTransition=this.fadeTransition)
       activeId=this.isActiveId
-      select=(action "select")
+      select=this.select
     )
   }}
 {{else}}
@@ -40,7 +40,7 @@
       (hash
         pane=(component this.paneComponent parent=this activeId=this.isActiveId fade=this.fade fadeTransition=this.fadeTransition)
         activeId=this.isActiveId
-        select=(action "select")
+        select=this.select
       )
     }}
   </div>

@@ -1,5 +1,5 @@
-import AccordionItemTitle from 'ember-bootstrap/components/base/bs-accordion/item/title';
+import { classNames } from '@ember-decorators/component';
+import BaseAccordionItemTitle from 'ember-bootstrap/components/base/bs-accordion/item/title';
 
-export default AccordionItemTitle.extend({
-  classNames: ['panel-heading']
-});
+@classNames('panel-heading')
+export default class AccordionItemTitle extends BaseAccordionItemTitle {}

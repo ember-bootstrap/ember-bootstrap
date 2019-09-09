@@ -1,5 +1,5 @@
-import FormElementLabel from 'ember-bootstrap/components/base/bs-form/element/label';
+import { tagName } from '@ember-decorators/component';
+import BaseFormElementLabel from 'ember-bootstrap/components/base/bs-form/element/label';
 
-export default FormElementLabel.extend({
-  tagName: ''
-});
+@tagName('')
+export default class FormElementLabel extends BaseFormElementLabel {}

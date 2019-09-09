@@ -1,12 +1,14 @@
-import { oneWay, filter } from '@ember/object/computed';
+import { layout as templateLayout } from '@ember-decorators/component';
+import { action, computed } from '@ember/object';
+import { filter, oneWay } from '@ember/object/computed';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
 import { A } from '@ember/array';
 import layout from 'ember-bootstrap/templates/components/bs-tab';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import TabPane from 'ember-bootstrap/components/bs-tab/pane';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,
@@ -110,9 +112,8 @@ import listenTo from 'ember-bootstrap/utils/cp/listen-to';
   @uses Mixins.ComponentParent
   @public
 */
-export default Component.extend(ComponentParent, {
-  layout,
-
+@templateLayout(layout)
+export default class Tab extends Component.extend(ComponentParent) {
   /**
    * Type of nav, either "pills" or "tabs"
    *
@@ -121,21 +122,24 @@ export default Component.extend(ComponentParent, {
    * @default 'tabs'
    * @public
    */
-  type: 'tabs',
+  @defaultValue
+  type = 'tabs';
 
   /**
    * @property paneComponent
    * @type {String}
    * @private
    */
-  paneComponent: 'bs-tab/pane',
+  @defaultValue
+  paneComponent = 'bs-tab/pane';
 
   /**
    * @property navComponent
    * @type {String}
    * @private
    */
-  navComponent: 'bs-nav',
+  @defaultValue
+  navComponent = 'bs-nav';
 
   /**
    * By default the tabs will be automatically generated using the available [TabPane](Components.TabPane.html)
@@ -146,7 +150,8 @@ export default Component.extend(ComponentParent, {
    * @default false
    * @public
    */
-  customTabs: false,
+  @defaultValue
+  customTabs = false;
 
   /**
    * The id (`elementId`) of the active [TabPane](Components.TabPane.html).
@@ -170,13 +175,15 @@ export default Component.extend(ComponentParent, {
    * @type string
    * @public
    */
-  activeId: oneWay('childPanes.firstObject.elementId'),
+  @oneWay('childPanes.firstObject.elementId')
+  activeId;
 
   /**
    * @property isActiveId
    * @private
    */
-  isActiveId: listenTo('activeId'),
+  @listenTo('activeId')
+  isActiveId;
 
   /**
    * Set to false to disable the fade animation when switching tabs.
@@ -186,7 +193,8 @@ export default Component.extend(ComponentParent, {
    * @default true
    * @public
    */
-  fade: true,
+  @defaultValue
+  fade = true;
 
   /**
    * The duration of the fade animation
@@ -196,7 +204,8 @@ export default Component.extend(ComponentParent, {
    * @default 150
    * @public
    */
-  fadeDuration: 150,
+  @defaultValue
+  fadeDuration = 150;
 
   /**
    * This action is called when switching the active tab, with the new and previous pane id
@@ -207,7 +216,7 @@ export default Component.extend(ComponentParent, {
    * @event onChange
    * @public
    */
-  onChange() {},
+  onChange() {}
 
   /**
    * All `TabPane` child components
@@ -217,9 +226,10 @@ export default Component.extend(ComponentParent, {
    * @readonly
    * @private
    */
-  childPanes: filter('children', function(view) {
+  @filter('children', function(view) {
     return view instanceof TabPane;
-  }),
+  })
+  childPanes;
 
   /**
    * Array of objects that define the tab structure
@@ -229,7 +239,8 @@ export default Component.extend(ComponentParent, {
    * @readonly
    * @private
    */
-  navItems: computed('childPanes.@each.{elementId,title,group}', function() {
+  @computed('childPanes.@each.{elementId,title,group}')
+  get navItems() {
     let items = A();
     this.get('childPanes').forEach((pane) => {
       let groupTitle = pane.get('groupTitle');
@@ -252,15 +263,14 @@ export default Component.extend(ComponentParent, {
       }
     });
     return items;
-  }),
+  }
 
-  actions: {
-    select(id) {
-      let previous = this.get('isActiveId');
-      if (this.get('onChange')(id, previous) !== false) {
-        // change active tab when `onChange` does not return false
-        this.set('isActiveId', id);
-      }
+  @action
+  select(id) {
+    let previous = this.get('isActiveId');
+    if (this.get('onChange')(id, previous) !== false) {
+      // change active tab when `onChange` does not return false
+      this.set('isActiveId', id);
     }
   }
-});
+}

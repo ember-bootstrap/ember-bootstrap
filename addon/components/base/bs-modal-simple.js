@@ -1,5 +1,7 @@
+import { layout as templateLayout } from '@ember-decorators/component';
 import Modal from 'ember-bootstrap/components/bs-modal';
 import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with a some common default markup
@@ -76,9 +78,8 @@ import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
   @extends Components.Modal
   @public
 */
-export default Modal.extend({
-  layout,
-
+@templateLayout(layout)
+export default class ModalSimple extends Modal {
   /**
    * The title of the modal, visible in the modal header. Is ignored if `header` is false.
    *
@@ -95,7 +96,8 @@ export default Modal.extend({
    * @default true
    * @public
    */
-  closeButton: true,
+  @defaultValue
+  closeButton = true;
 
   /**
    * The title of the default close button.
@@ -105,7 +107,8 @@ export default Modal.extend({
    * @default 'Ok'
    * @public
    */
-  closeTitle: 'Ok',
+  @defaultValue
+  closeTitle = 'Ok';
 
   /**
    * The type of the submit button (primary button).
@@ -115,7 +118,8 @@ export default Modal.extend({
    * @default 'primary'
    * @public
    */
-  submitButtonType: 'primary',
+  @defaultValue
+  submitButtonType = 'primary';
 
   /**
    * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null.
@@ -125,5 +129,4 @@ export default Modal.extend({
    * @default null
    * @public
    */
-
-});
+}

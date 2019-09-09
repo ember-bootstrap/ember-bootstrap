@@ -1,5 +1,5 @@
-import Nav from 'ember-bootstrap/components/base/bs-nav';
+import { classNameBindings } from '@ember-decorators/component';
+import BaseNav from 'ember-bootstrap/components/base/bs-nav';
 
-export default Nav.extend({
-  classNameBindings: ['stacked:nav-stacked']
-});
+@classNameBindings('stacked:nav-stacked')
+export default class Nav extends BaseNav {}

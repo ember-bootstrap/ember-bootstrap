@@ -1,7 +1,7 @@
 {{yield
   (hash
-    button=(component this.buttonComponent dropdown=this onClick=(action "toggleDropdown"))
-    toggle=(component this.toggleComponent dropdown=this inNav=inNav onClick=(action "toggleDropdown"))
+    button=(component this.buttonComponent dropdown=this onClick=this.toggleDropdown)
+    toggle=(component this.toggleComponent dropdown=this inNav=inNav onClick=this.toggleDropdown)
     menu=(component this.menuComponent
       isOpen=this.isOpen
       direction=this.direction
@@ -9,9 +9,9 @@
       toggleElement=this.toggleElement
       dropdownElementId=this.elementId
     )
-    toggleDropdown=(action "toggleDropdown")
-    openDropdown=(action "openDropdown")
-    closeDropdown=(action "closeDropdown")
+    toggleDropdown=this.toggleDropdown
+    openDropdown=this.openDropdown
+    closeDropdown=this.closeDropdown
     isOpen=this.isOpen
   )
 }}

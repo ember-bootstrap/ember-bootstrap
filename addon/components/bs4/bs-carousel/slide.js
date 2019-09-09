@@ -1,11 +1,11 @@
-import CarouselSlide from 'ember-bootstrap/components/base/bs-carousel/slide';
+import { classNameBindings, classNames } from '@ember-decorators/component';
+import BaseCarouselSlide from 'ember-bootstrap/components/base/bs-carousel/slide';
 
-export default CarouselSlide.extend({
-  classNameBindings: [
-    'left:carousel-item-left',
-    'next:carousel-item-next',
-    'prev:carousel-item-prev',
-    'right:carousel-item-right'
-  ],
-  classNames: ['carousel-item']
-});
+@classNameBindings(
+  'left:carousel-item-left',
+  'next:carousel-item-next',
+  'prev:carousel-item-prev',
+  'right:carousel-item-right'
+)
+@classNames('carousel-item')
+export default class CarouselSlide extends BaseCarouselSlide {}

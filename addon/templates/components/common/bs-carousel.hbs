@@ -17,11 +17,11 @@
 </div>
 
 {{#if this.showControls}}
-  <a class={{this.prevControlClassName}} href="#{{this.elementId}}" {{action "toPrevSlide"}} role="button">
+  <a class={{this.prevControlClassName}} href="#{{this.elementId}}" {{action this.toPrevSlide}} role="button">
     <span aria-hidden="true" class={{this.prevControlIcon}}></span>
     <span class="sr-only">{{this.prevControlLabel}}</span>
   </a>
-  <a class={{this.nextControlClassName}} href="#{{this.elementId}}" {{action "toNextSlide"}} role="button">
+  <a class={{this.nextControlClassName}} href="#{{this.elementId}}" {{action this.toNextSlide}} role="button">
     <span aria-hidden="true" class={{this.nextControlIcon}}></span>
     <span class="sr-only">{{this.nextControlLabel}}</span>
   </a>

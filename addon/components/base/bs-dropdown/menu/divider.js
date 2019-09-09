@@ -10,4 +10,4 @@ import Component from '@ember/component';
  @extends Ember.Component
  @public
  */
-export default Component.extend({});
+export default class DropdownMenuDivider extends Component {}

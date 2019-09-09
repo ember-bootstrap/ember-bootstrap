@@ -15,6 +15,12 @@ module('Integration | Component | bs form/element/control/input', function(hooks
     assert.dom('input[type=text]').exists({ count: 1 });
   });
 
+  test('it sets value', async function(assert) {
+    await render(hbs`{{bs-form/element/control/input value="FOO"}}`);
+
+    assert.dom('input[type=text]').hasValue('FOO');
+  });
+
   test('it falls back to text if type is not supported by browser', async function(assert) {
     // This also asserts that IE 11 issue of throwing if setting an unsupported type
     // is set via DOM (e.g. document.createElement('input').type = "foo") is handled

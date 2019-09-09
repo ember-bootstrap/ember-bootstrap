@@ -1,7 +1,9 @@
+import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { observes } from '@ember-decorators/object';
+import { computed } from '@ember/object';
 import Component from '@ember/component';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import layout from 'ember-bootstrap/templates/components/bs-carousel/slide';
-import { computed, observer } from '@ember/object';
 import { next } from '@ember/runloop';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
 
@@ -15,10 +17,9 @@ import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
   @extends Ember.Component
   @public
  */
-export default Component.extend(ComponentChild, {
-  classNameBindings: ['active'],
-  layout,
-
+@classNameBindings('active')
+@templateLayout(layout)
+export default class CarouselSlide extends Component.extend(ComponentChild) {
   /**
    * Defines slide visibility.
    *
@@ -26,27 +27,30 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  active: overrideableCP('isCurrentSlide', 'presentationState', function() {
+  @overrideableCP('isCurrentSlide', 'presentationState', function() {
     return this.get('isCurrentSlide') && this.get('presentationState') === null;
-  }),
+  })
+  active;
 
   /**
    * @private
    * @property isCurrentSlide
    * @type boolean
    */
-  isCurrentSlide: computed('currentSlide', function() {
+  @(computed('currentSlide').readOnly())
+  get isCurrentSlide() {
     return this.get('currentSlide') === this;
-  }).readOnly(),
+  }
 
   /**
    * @private
    * @property isFollowingSlide
    * @type boolean
    */
-  isFollowingSlide: computed('followingSlide', function() {
+  @(computed('followingSlide').readOnly())
+  get isFollowingSlide() {
     return this.get('followingSlide') === this;
-  }).readOnly(),
+  }
 
   /**
    * Slide is moving to the left.
@@ -55,7 +59,7 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  left: false,
+  left = false;
 
   /**
    * Next to appear in a left sliding.
@@ -64,7 +68,7 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  next: false,
+  next = false;
 
   /**
    * Next to appear in a right sliding.
@@ -73,7 +77,7 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  prev: false,
+  prev = false;
 
   /**
    * Slide is moving to the right.
@@ -82,7 +86,7 @@ export default Component.extend(ComponentChild, {
    * @type boolean
    * @private
    */
-  right: false,
+  right = false;
 
   /**
    * Coordinates the execution of a presentation.
@@ -90,7 +94,8 @@ export default Component.extend(ComponentChild, {
    * @method presentationStateObserver
    * @private
    */
-  presentationStateObserver: observer('presentationState', function() {
+  @observes('presentationState')
+  presentationStateObserver() {
     let presentationState = this.get('presentationState');
     if (this.get('isCurrentSlide')) {
       switch (presentationState) {
@@ -112,7 +117,7 @@ export default Component.extend(ComponentChild, {
           break;
       }
     }
-  }),
+  }
 
   /**
    * @method currentSlideDidTransition
@@ -121,7 +126,7 @@ export default Component.extend(ComponentChild, {
   currentSlideDidTransition() {
     this.set(this.get('directionalClassName'), false);
     this.set('active', false);
-  },
+  }
 
   /**
    * @method currentSlideWillTransit
@@ -132,7 +137,7 @@ export default Component.extend(ComponentChild, {
     next(this, function() {
       this.set(this.get('directionalClassName'), true);
     });
-  },
+  }
 
   /**
    * @method followingSlideDidTransition
@@ -142,7 +147,7 @@ export default Component.extend(ComponentChild, {
     this.set('active', true);
     this.set(this.get('directionalClassName'), false);
     this.set(this.get('orderClassName'), false);
-  },
+  }
 
   /**
    * @method followingSlideWillTransit
@@ -154,7 +159,7 @@ export default Component.extend(ComponentChild, {
       this.reflow();
       this.set(this.get('directionalClassName'), true);
     });
-  },
+  }
 
   /**
    * Makes things more stable, especially when fast changing.
@@ -162,4 +167,4 @@ export default Component.extend(ComponentChild, {
   reflow() {
     this.element.offsetHeight;
   }
-});
+}

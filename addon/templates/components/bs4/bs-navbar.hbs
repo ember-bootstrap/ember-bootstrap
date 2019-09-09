@@ -1,30 +1,30 @@
 {{#if this.fluid}}
   {{yield
     (hash
-      toggle=(component this.toggleComponent onClick=(action "toggleNavbar") collapsed=this._collapsed)
+      toggle=(component this.toggleComponent onClick=this.toggleNavbar collapsed=this._collapsed)
       content=(component this.contentComponent collapsed=this._collapsed onHidden=this.onCollapsed onShown=this.onExpanded)
       nav=(component
         this.navComponent
-        linkToComponent=(component this.linkToComponent onCollapse=(action "collapse"))
+        linkToComponent=(component this.linkToComponent onCollapse=this.collapse)
       )
-      collapse=(action "collapse")
-      expand=(action "expand")
-      toggleNavbar=(action "toggleNavbar")
+      collapse=this.collapse
+      expand=this.expand
+      toggleNavbar=this.toggleNavbar
     )
   }}
 {{else}}
   <div class="container">
     {{yield
       (hash
-        toggle=(component this.toggleComponent onClick=(action "toggleNavbar") collapsed=this._collapsed)
+        toggle=(component this.toggleComponent onClick=this.toggleNavbar collapsed=this._collapsed)
         content=(component this.contentComponent collapsed=this._collapsed onHidden=this.onCollapsed onShown=this.onExpanded)
         nav=(component
           this.navComponent
-          linkToComponent=(component this.linkToComponent onCollapse=(action "collapse"))
+          linkToComponent=(component this.linkToComponent onCollapse=this.collapse)
         )
-        collapse=(action "collapse")
-        expand=(action "expand")
-        toggleNavbar=(action "toggleNavbar")
+        collapse=this.collapse
+        expand=this.expand
+        toggleNavbar=this.toggleNavbar
       )
     }}
   </div>

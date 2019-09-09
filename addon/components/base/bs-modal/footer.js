@@ -1,6 +1,8 @@
+import { classNames, layout as templateLayout, tagName } from '@ember-decorators/component';
 import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/footer';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
 
@@ -11,11 +13,10 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/footer';
  @extends Ember.Component
  @public
  */
-export default Component.extend({
-  layout,
-  tagName: 'form',
-  classNames: ['modal-footer'],
-
+@templateLayout(layout)
+@tagName('form')
+@classNames('modal-footer')
+export default class ModalFooter extends Component {
   /**
    * The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block
    * template.
@@ -25,7 +26,8 @@ export default Component.extend({
    * @default 'Ok'
    * @public
    */
-  closeTitle: 'Ok',
+  @defaultValue
+  closeTitle = 'Ok';
 
   /**
    * The title of the submit button (primary button). Will be ignored (i.e. no button) if set to null or if you provide
@@ -36,8 +38,8 @@ export default Component.extend({
    * @default null
    * @public
    */
-
-  hasSubmitButton: notEmpty('submitTitle'),
+  @notEmpty('submitTitle')
+  hasSubmitButton;
 
   /**
    * Set to true to disable the submit button. If you bind this to some property that indicates if submitting is allowed
@@ -48,7 +50,8 @@ export default Component.extend({
    * @default false
    * @public
    */
-  submitDisabled: false,
+  @defaultValue
+  submitDisabled = false;
 
   /**
    * The type of the submit button (primary button).
@@ -58,14 +61,16 @@ export default Component.extend({
    * @default 'primary'
    * @public
    */
-  submitButtonType: 'primary',
+  @defaultValue
+  submitButtonType = 'primary';
 
   /**
    * @property buttonComponent
    * @type {String}
    * @private
    */
-  buttonComponent: 'bs-button',
+  @defaultValue
+  buttonComponent = 'bs-button';
 
   /**
    * The action to send to the parent modal component when the modal footer's form is submitted
@@ -84,5 +89,4 @@ export default Component.extend({
     // send to parent bs-modal component
     this.get('onSubmit')();
   }
-
-});
+}
