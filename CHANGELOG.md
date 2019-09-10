@@ -1,4 +1,11 @@
 
+## 3.0.0-rc.5 (2019-09-10)
+
+#### Bug Fixes
+* [#894](https://github.com/kaliber5/ember-bootstrap/pull/894) Move ember-decorators to dependencies ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 1
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
 ## 3.0.0-rc.4 (2019-09-09)
 
 #### :boom: Breaking Change
