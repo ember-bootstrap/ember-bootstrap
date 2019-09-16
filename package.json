@@ -108,7 +108,7 @@
     "ember-decorators": "^6.1.0",
     "ember-decorators-polyfill": "^1.0.6",
     "ember-let-polyfill": "^0.1.0",
-    "ember-maybe-in-element": "^0.2.0",
+    "ember-maybe-in-element": "^0.4.0",
     "ember-named-arguments-polyfill": "^1.0.0",
     "ember-popper": "^0.10.1",
     "findup-sync": "^4.0.0",
