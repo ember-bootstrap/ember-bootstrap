@@ -240,18 +240,28 @@ module.exports = {
     let bsVersion = this.getBootstrapVersion();
     let otherBsVersion = this.getOtherBootstrapVersion();
     let componentsPath = 'components/';
+    let templatePath = 'templates/components/';
 
     tree = this.debugTree(tree, 'addon-tree:input');
     tree = mv(tree, `${componentsPath}bs${bsVersion}/`, componentsPath);
     tree = rm(tree, `${componentsPath}bs${otherBsVersion}/**/*`);
 
+    tree = mv(tree, `${templatePath}common/`, templatePath);
+    tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
+    tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
+    
     tree = this.debugTree(tree, 'addon-tree:bootstrap-version');
     tree = this.filterComponents(tree);
     tree = this.debugTree(tree, 'addon-tree:tree-shaken');
-
+  
     return this._super.treeForAddon.call(this, tree);
   },
 
+  /*
+    This method is depreciated by ember-cli when building other apps
+    but it is still called when building ember-bootstrap
+    https://github.com/kaliber5/ember-bootstrap/pull/883
+  */
   treeForAddonTemplates(tree) {
     let bsVersion = this.getBootstrapVersion();
     let otherBsVersion = this.getOtherBootstrapVersion();
