@@ -1,4 +1,11 @@
 
+## 3.0.0-rc.6 (2019-09-26)
+
+#### Bug Fixes
+* [#883](https://github.com/kaliber5/ember-bootstrap/pull/883) Workaround for Ember CLI 3.13 bug (Depreciated/Removed treeForAddonTemplates) ([@veebs](https://github.com/veebs))
+
+#### Committers: 1
+- Vibul Imtarnasan ([@veebs](https://github.com/veebs))
 ## 3.0.0-rc.5 (2019-09-10)
 
 #### Bug Fixes
