@@ -127,7 +127,7 @@
   "bugs": {
     "url": "https://github.com/kaliber5/ember-bootstrap/issues"
   },
-  "homepage": "http://kaliber5.github.io/ember-bootstrap/",
+  "homepage": "https://www.ember-bootstrap.com/",
   "changelog": {
     "labels": {
       "breaking": ":boom: Breaking Change",
