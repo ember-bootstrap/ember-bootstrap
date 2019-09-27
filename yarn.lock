@@ -4366,7 +4366,7 @@ ember-cli@~3.8.1:
     watch-detector "^0.1.0"
     yam "^1.0.0"
 
-ember-code-snippet@^2.3.1:
+ember-code-snippet@2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/ember-code-snippet/-/ember-code-snippet-2.4.0.tgz#3ed901ee0c6458019b67733e923056d5b9f74bc2"
   integrity sha512-MLnUxsbxoW1njWYrIRB0T0AbH8Ng2IJTUMXSmR/40z4Hnu6ykC7sCFJyzxcmdIj6IVPmOcFN7WpOMEfPWjKmIQ==
