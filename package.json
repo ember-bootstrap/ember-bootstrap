@@ -139,6 +139,6 @@
   },
   "resolutions": {
     "ip-regex": "^2.1.0",
-    "ember-concurrency": "^0.10.0"
+    "ember-concurrency": "^1.0.0"
   }
 }
