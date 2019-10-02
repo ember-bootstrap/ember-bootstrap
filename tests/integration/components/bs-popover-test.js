@@ -10,6 +10,7 @@ import {
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
+import { isFirefox } from '../../helpers/user-agent';
 
 module('Integration | Component | bs-popover', function(hooks) {
   setupRenderingTest(hooks);
@@ -78,6 +79,13 @@ module('Integration | Component | bs-popover', function(hooks) {
     this.insertCSSRule('#wrapper p { margin-top: 200px }');
 
     let expectedArrowPosition = versionDependent(225, 219);
+
+    if (isFirefox()) {
+      // Popover arrow has a different positioning by 4px on Firefox
+      // https://github.com/twbs/bootstrap/issues/29485
+      expectedArrowPosition = versionDependent(225 - 4, 219 - 4);
+    }
+
     await render(hbs`
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
