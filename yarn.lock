@@ -5434,7 +5434,7 @@ ember-named-arguments-polyfill@^1.0.0:
     ember-cli-babel "^6.6.0"
     ember-cli-version-checker "^2.1.2"
 
-ember-popper@^0.10.1:
+ember-popper@^0.10.3:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/ember-popper/-/ember-popper-0.10.3.tgz#222ecce35a6777364bec7ec293437f27a28713a1"
   integrity sha512-mSSUHIVGFYr8yYDjPhnIlma/vxMptm7a3pySZWK29YSEDDgsEviL7sAhOiNxvV8/uaRmCbJj/2M68dYYGed1Dw==
