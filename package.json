@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^0.7.0",
+    "@ember/render-modifiers": "^1.0.1",
     "babel-eslint": "^8.0.0",
     "bootstrap": "^4.0.0",
     "bootstrap-sass": "^3.3.7",
