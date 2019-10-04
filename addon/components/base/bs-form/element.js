@@ -68,13 +68,13 @@ const nonDefaultLayouts = A([
   #### Custom controls
 
   Apart from the standard built-in browser controls (see the `controlType` property), you can use any custom control simply
-  by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
-  (from the [ember-select-2 addon](https://istefo.github.io/ember-select-2)):
+  by invoking the component with a block template. Use whatever control you might want, for example a `<PickadayInput>`
+  component (from the [ember-pikaday addon](https://github.com/adopted-ember-addons/ember-pikaday)):
 
   ```hbs
   <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
     <form.element @label="Select-2" @property="gender" @useIcons={{false}} as |el|>
-      {{select-2 id=el.id content=genderChoices optionLabelPath="label" value=el.value searchEnabled=false}}
+      <PickadayInput @value={{el.value}} @onSelection={{action (mut el.value)}} id={{el.id}} />
     </form.element>
   </BsForm>
   ```
