@@ -83,7 +83,7 @@ module('Integration | Component | bs-popover', function(hooks) {
     if (isFirefox()) {
       // Popover arrow has a different positioning by 4px on Firefox
       // https://github.com/twbs/bootstrap/issues/29485
-      expectedArrowPosition = versionDependent(225 - 4, 219 - 4);
+      expectedArrowPosition = expectedArrowPosition - 4;
     }
 
     await render(hbs`
