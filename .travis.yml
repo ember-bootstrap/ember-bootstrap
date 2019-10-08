@@ -71,7 +71,6 @@ jobs:
   - env: EMBER_TRY_SCENARIO=fastboot-tests
   - env: EMBER_TRY_SCENARIO=node-tests
   - env: EMBER_TRY_SCENARIO=ember-default TEST_COMMAND="ember test --launch Firefox"
-  - env: EMBER_TRY_SCENARIO=ember-default BOOTSTRAPVERSION=3 TEST_COMMAND="ember test --launch Firefox"
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
