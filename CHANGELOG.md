@@ -1,4 +1,12 @@
 
+## 3.0.0 (2019-10-11)
+
+#### Documentation
+* [#907](https://github.com/kaliber5/ember-bootstrap/pull/907) Replace ember-select-2 example with ember-pikaday in form docs ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Michael Serna ([@sernadesigns](https://github.com/sernadesigns))
 ## 3.0.0-rc.6 (2019-09-26)
 
 #### Bug Fixes

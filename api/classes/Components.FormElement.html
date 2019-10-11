@@ -94,11 +94,11 @@ of the yielded control component:</p>
 </code></pre>
 <h4>Custom controls</h4>
 <p>Apart from the standard built-in browser controls (see the <code>controlType</code> property), you can use any custom control simply
-by invoking the component with a block template. Use whatever control you might want, for example a select-2 component
-(from the <a href="https://istefo.github.io/ember-select-2">ember-select-2 addon</a>):</p>
+by invoking the component with a block template. Use whatever control you might want, for example a <code>&lt;PickadayInput&gt;</code>
+component (from the <a href="https://github.com/adopted-ember-addons/ember-pikaday">ember-pikaday addon</a>):</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
   &lt;form.element @label="Select-2" @property="gender" @useIcons={{false}} as |el|&gt;
-    {{select-2 id=el.id content=genderChoices optionLabelPath="label" value=el.value searchEnabled=false}}
+    &lt;PickadayInput @value={{el.value}} @onSelection={{action (mut el.value)}} id={{el.id}} /&gt;
   &lt;/form.element&gt;
 &lt;/BsForm&gt;
 </code></pre>
