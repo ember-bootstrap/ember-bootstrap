@@ -17,8 +17,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   ```hbs
   <BsNavbar as |navbar|>
     <div class="navbar-header">
-       {{navbar.toggle}}
-       <a class="navbar-brand" href="#">Brand</a>
+      {{navbar.toggle}}
+      <a class="navbar-brand" href="#">Brand</a>
     </div>
     <navbar.content>
       <navbar.nav as |nav|>
@@ -30,7 +30,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
         </nav.item>
       </navbar.nav>
     </navbar.content>
-  </BsNavBar>
+  </BsNavbar>
   ```
 
   **Note:** the `<div class="navbar-header">` is required for BS3 to hold the elements visible on a mobile breakpoint,
@@ -73,7 +73,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
         </nav.item>
       </navbar.nav>
     </navbar.content>
-  </BsNavBar>
+  </BsNavbar>
   ```
 
   ### Navbar styles
