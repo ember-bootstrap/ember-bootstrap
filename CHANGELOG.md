@@ -1,4 +1,15 @@
 
+## 3.0.1 (2019-10-20)
+
+#### Bug Fixes
+* [#910](https://github.com/kaliber5/ember-bootstrap/pull/910) Fix compatibility with Embroider ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#908](https://github.com/kaliber5/ember-bootstrap/pull/908) fix wrong indentation and typo in component name ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
 ## 3.0.0 (2019-10-11)
 
 #### Documentation

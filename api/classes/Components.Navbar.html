@@ -61,8 +61,8 @@
 <p>Uses the following components by a contextual reference:</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsNavbar as |navbar|&gt;
   &lt;div class="navbar-header"&gt;
-     {{navbar.toggle}}
-     &lt;a class="navbar-brand" href="#"&gt;Brand&lt;/a&gt;
+    {{navbar.toggle}}
+    &lt;a class="navbar-brand" href="#"&gt;Brand&lt;/a&gt;
   &lt;/div&gt;
   &lt;navbar.content&gt;
     &lt;navbar.nav as |nav|&gt;
@@ -74,7 +74,7 @@
       &lt;/nav.item&gt;
     &lt;/navbar.nav&gt;
   &lt;/navbar.content&gt;
-&lt;/BsNavBar&gt;
+&lt;/BsNavbar&gt;
 </code></pre>
 <p><strong>Note:</strong> the <code>&lt;div class="navbar-header"&gt;</code> is required for BS3 to hold the elements visible on a mobile breakpoint,
 when the actual content is collapsed. It should <em>not</em> be used for BS4!</p>
@@ -109,7 +109,7 @@ action:</p>
       &lt;/nav.item&gt;
     &lt;/navbar.nav&gt;
   &lt;/navbar.content&gt;
-&lt;/BsNavBar&gt;
+&lt;/BsNavbar&gt;
 </code></pre>
 <h3>Navbar styles</h3>
 <p>The component supports the default bootstrap navbar styling options through the <code>type</code>
