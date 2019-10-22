@@ -187,6 +187,18 @@ export default class Modal extends Component {
   position = 'top';
 
   /**
+   * [BS4 only!] Allows scrolling within the modal body
+   * 'true' will apply the `modal-dialog-scrollable` class
+   *
+   * @property scrollable
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  scrollable = false
+
+  /**
    * @property dialogComponent
    * @type {String}
    * @private
