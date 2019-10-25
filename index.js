@@ -182,13 +182,12 @@ module.exports = {
     return !!this.preprocessor;
   },
 
-  treeForStyles(tree) {
+  treeForStyles() {
     if (this.hasPreprocessor()) {
-      tree = new Funnel(this.getBootstrapStylesPath(), {
+      return new Funnel(this.getBootstrapStylesPath(), {
         destDir: 'ember-bootstrap'
       });
     }
-    return this._super.treeForStyles.call(this, tree);
   },
 
   treeForPublic() {
@@ -242,11 +241,11 @@ module.exports = {
     tree = mv(tree, `${templatePath}common/`, templatePath);
     tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
     tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
-
+    
     tree = this.debugTree(tree, 'addon-tree:bootstrap-version');
     tree = this.filterComponents(tree);
     tree = this.debugTree(tree, 'addon-tree:tree-shaken');
-
+  
     return this._super.treeForAddon.call(this, tree);
   },
 
