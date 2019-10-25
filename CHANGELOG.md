@@ -1,4 +1,11 @@
 
+## 3.0.2 (2019-10-25)
+
+#### Bug Fixes
+* [#914](https://github.com/kaliber5/ember-bootstrap/pull/914) Revert Embroider Fix, which caused a Sass import regression ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 1
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
 ## 3.0.1 (2019-10-20)
 
 #### Bug Fixes
