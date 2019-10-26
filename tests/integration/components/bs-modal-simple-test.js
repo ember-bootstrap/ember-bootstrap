@@ -552,4 +552,8 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     assert.dom('.modal').hasAttribute('data-test');
   });
 
+  testBS4('modal can be set to scrollable', async function(assert) {
+    await render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false scrollable=true}}Hello world!{{/bs-modal-simple}}`);
+    assert.dom('.modal-dialog').hasClass('modal-dialog-scrollable');
+  });
 });
