@@ -130,8 +130,8 @@ module('Integration | Component | bs-carousel', function(hooks) {
     let action = this.spy();
     this.set('action', action);
     await render(hbs`{{#bs-carousel onSlideChanged=this.action wrap=false transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
-    assert.ok(action.notCalled, 'onSlideChanged action has not been called.');
     clickToNextSlide();
+    assert.ok(action.notCalled, 'onSlideChanged action has not been called.');
     await waitTransitionTime();
     assert.ok(action.calledWith(1), 'onSlideChanged action has been called.');
   });
