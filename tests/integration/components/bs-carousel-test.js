@@ -47,7 +47,7 @@ function waitTransitionTime(interval = 450) {
   return delay(TRANSITION_DURATION + interval);
 }
 
-module.only('Integration | Component | bs-carousel', function(hooks) {
+module('Integration | Component | bs-carousel', function(hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
