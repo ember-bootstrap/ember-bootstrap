@@ -47,7 +47,7 @@ function waitTransitionTime(interval = 450) {
   return delay(TRANSITION_DURATION + interval);
 }
 
-module('Integration | Component | bs-carousel', function(hooks) {
+module.only('Integration | Component | bs-carousel', function(hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
@@ -124,6 +124,15 @@ module('Integration | Component | bs-carousel', function(hooks) {
     await waitTransitionTime();
     assert.ok(getActivatedSlide(2), 'autoPlay has correct behavior');
     this.stopCarousel();
+  });
+
+  test('carousel calls onIndexChange when slide changes', async function(assert) {
+    let action = this.spy();
+    this.actions = { indexChange: action }
+    await render(hbs`{{#bs-carousel onIndexChange=(action "indexChange") wrap=false transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+    clickToNextSlide();
+    await waitTransitionTime();
+    assert.ok(action.calledWith(1), 'onIndexChange action has been called.');
   });
 
   test('carousel wrap=false must not cross lower bound', async function(assert) {
