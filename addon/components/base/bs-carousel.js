@@ -514,9 +514,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
     } else {
       this.get('cycle').perform();
     }
-    if (this.get('onSlideChanged')) {
-      this.get('onSlideChanged')(toIndex);
-    }
+    this.get('onSlideChanged')(toIndex);
   }
 
   @action
