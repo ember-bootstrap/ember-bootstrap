@@ -4,7 +4,7 @@ module.exports = {
   'disable_watching': true,
   'parallel': 5,
   browser_start_timeout: 2000,
-  browser_disconnect_timeout: 120,
+  browser_disconnect_timeout: 200,
   'launch_in_ci': [
     'BS_Safari_Current', 'BS_MS_Edge', 'BS_IE_11'
   ],

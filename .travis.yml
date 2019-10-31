@@ -57,7 +57,7 @@ jobs:
   # we recommend new addons test the current and previous LTS
   # as well as latest stable release (bonus points to beta/canary)
   - stage: "Additional Tests"
-    env: EMBER_TRY_SCENARIO=ember-default BABELPOLYFILL=true BEFORE_SCRIPT="ember browserstack:connect" AFTER_SCRIPT="ember browserstack:disconnect" TEST_COMMAND="ember test --filter !FastBoot --config-file testem.browserstack.js"
+    env: EMBER_TRY_SCENARIO=ember-default BABELPOLYFILL=true BEFORE_SCRIPT="ember browserstack:connect" AFTER_SCRIPT="ember browserstack:disconnect" TEST_COMMAND="travis_retry ember test --filter !FastBoot --config-file testem.browserstack.js"
   - env: EMBER_TRY_SCENARIO=ember-lts-2.18
   - env: EMBER_TRY_SCENARIO=ember-lts-3.4
   - env: EMBER_TRY_SCENARIO=ember-release
