@@ -126,6 +126,16 @@ module('Integration | Component | bs-carousel', function(hooks) {
     this.stopCarousel();
   });
 
+  test('carousel calls onSlideChanged when slide changes', async function(assert) {
+    let action = this.spy();
+    this.set('action', action);
+    await render(hbs`{{#bs-carousel onSlideChanged=this.action wrap=false transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+    clickToNextSlide();
+    assert.ok(action.notCalled, 'onSlideChanged action has not been called.');
+    await waitTransitionTime();
+    assert.ok(action.calledWith(1), 'onSlideChanged action has been called.');
+  });
+
   test('carousel wrap=false must not cross lower bound', async function(assert) {
     await render(hbs`{{#bs-carousel wrap=false transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     clickToPrevSlide();

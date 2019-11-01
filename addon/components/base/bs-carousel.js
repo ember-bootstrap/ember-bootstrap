@@ -447,6 +447,15 @@ export default class Carousel extends Component.extend(ComponentParent) {
   transition = 'slide';
 
   /**
+   * Action called after the slide has changed.
+   *
+   * @event onSlideChanged
+   * @param toIndex
+   * @public
+   */
+  onSlideChanged(toIndex) {} // eslint-disable-line no-unused-vars
+
+  /**
    * Do a presentation and calls itself to perform a cycle.
    *
    * @method cycle
@@ -505,6 +514,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
     } else {
       this.get('cycle').perform();
     }
+    this.get('onSlideChanged')(toIndex);
   }
 
   @action
