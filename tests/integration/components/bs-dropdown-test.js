@@ -352,7 +352,6 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       await triggerKeyEvent('a.dropdown-toggle', 'keydown', 40); // down
 
       assert.dom('.dropdown-menu').exists();
-      assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
     });
 
     test('should show if down key is pressed on button', async function(assert) {
@@ -370,7 +369,6 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       await triggerKeyEvent('button.dropdown-toggle', 'keydown', 40); // down
 
       assert.dom('.dropdown-menu').exists();
-      assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
     });
 
     test('should hide if pressing escape', async function(assert) {
@@ -387,7 +385,6 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       await click('a.dropdown-toggle');
 
       assert.dom('.dropdown-menu').exists();
-      assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
 
       await triggerKeyEvent(document.activeElement, 'keydown', 40); // down, to set focus to different element
 
@@ -411,7 +408,6 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       await click('a.dropdown-toggle');
 
       assert.dom('.dropdown-menu').exists();
-      assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
 
       await triggerKeyEvent(document, 'keyup', 9); // tab
 
@@ -432,7 +428,6 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       await click('a.dropdown-toggle');
 
       assert.dom('.dropdown-menu').exists();
-      assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
 
       await triggerKeyEvent('.dropdown-item', 'keyup', 9); // tab
 
