@@ -8,6 +8,7 @@
       inNav=@inNav
       toggleElement=this.toggleElement
       dropdownElementId=this.elementId
+      onKeyDown=this.handleKeyEvent
     )
     toggleDropdown=this.toggleDropdown
     openDropdown=this.openDropdown
@@ -15,3 +16,7 @@
     isOpen=this.isOpen
   )
 }}
+{{#if this.isOpen}}
+  {{on-document "click" this.closeHandler capture=true}}
+  {{on-document "keyup" this.closeHandler}}
+{{/if}}

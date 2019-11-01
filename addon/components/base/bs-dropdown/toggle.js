@@ -61,6 +61,10 @@ export default class DropdownToggle extends Component {
     this.get('onClick')();
   }
 
+  keyDown(e) {
+    this.get('onKeyDown')(e);
+  }
+
   didReceiveAttrs() {
     // super.didReceiveAttrs(...arguments);
     let dropdown = this.get('dropdown');

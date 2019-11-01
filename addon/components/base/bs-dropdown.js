@@ -1,9 +1,20 @@
 import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import Component from '@ember/component';
-import { bind } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+
+const ESCAPE_KEYCODE           = 27 // KeyboardEvent.which value for Escape (Esc) key
+const SPACE_KEYCODE            = 32 // KeyboardEvent.which value for space key
+const TAB_KEYCODE              = 9 // KeyboardEvent.which value for tab key
+const ARROW_UP_KEYCODE         = 38 // KeyboardEvent.which value for up arrow key
+const ARROW_DOWN_KEYCODE       = 40 // KeyboardEvent.which value for down arrow key
+
+const SUPPORTED_KEYCODES = [
+  ESCAPE_KEYCODE,
+  ARROW_DOWN_KEYCODE,
+  ARROW_UP_KEYCODE,
+];
 
 /**
   Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
@@ -272,43 +283,22 @@ export default class Dropdown extends Component {
   @action
   toggleDropdown() {
     if (this.get('isOpen')) {
-      this.send('closeDropdown');
+      this.closeDropdown();
     } else {
-      this.send('openDropdown');
+      this.openDropdown();
     }
   }
 
   @action
   openDropdown() {
     this.set('isOpen', true);
-    this.addClickListener();
     this.get('onShow')();
   }
 
   @action
   closeDropdown() {
     this.set('isOpen', false);
-    this.removeClickListener();
     this.get('onHide')();
-  }
-
-  addClickListener() {
-    if (!this.clickListener) {
-      this.clickListener = bind(this, this.closeOnClickHandler);
-      document.addEventListener('click', this.clickListener, true);
-    }
-  }
-
-  removeClickListener() {
-    if (this.clickListener)  {
-      document.removeEventListener('click', this.clickListener, true);
-      this.clickListener = null;
-    }
-  }
-
-  willDestroyElement() {
-    super.willDestroyElement(...arguments);
-    this.removeClickListener();
   }
 
   /**
@@ -318,15 +308,62 @@ export default class Dropdown extends Component {
    * @param e
    * @protected
    */
-  closeOnClickHandler(e) {
+  @action
+  closeHandler(e) {
     let { target } = e;
     let { toggleElement, menuElement } = this.getProperties('toggleElement', 'menuElement');
 
     if (!this.get('isDestroyed')
-      && (toggleElement && !toggleElement.contains(target))
-      && ((menuElement && !menuElement.contains(target)) || this.get('closeOnMenuClick'))) {
-      this.send('closeDropdown');
+      && (
+        (e.type === 'keyup' && e.which === TAB_KEYCODE && menuElement && !menuElement.contains(target))
+        || (e.type === 'click' && toggleElement && !toggleElement.contains(target) && ((menuElement && !menuElement.contains(target)) || this.get('closeOnMenuClick')))
+      )) {
+      this.closeDropdown();
     }
+  }
+
+  @action
+  handleKeyEvent(event) {
+    if (/input|textarea/i.test(event.target.tagName)
+      ? (
+        event.which === SPACE_KEYCODE
+        || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || this.get('menuElement').contains(event.target)))
+      : !SUPPORTED_KEYCODES.includes(event.which)) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (!this.get('isOpen')) {
+      this.openDropdown();
+      return;
+    } else if (event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE) {
+      this.closeDropdown();
+      return;
+    }
+
+    let items = [].slice.call(this.element.querySelectorAll('.dropdown-item:not(.disabled):not(:disabled)'));
+
+    if (items.length === 0) {
+      return;
+    }
+
+    let index = items.indexOf(event.target);
+
+    if (event.which === ARROW_UP_KEYCODE && index > 0) { // Up
+      index--;
+    }
+
+    if (event.which === ARROW_DOWN_KEYCODE && index < items.length - 1) { // Down
+      index++;
+    }
+
+    if (index < 0) {
+      index = 0;
+    }
+
+    items[index].focus();
   }
 
   /**

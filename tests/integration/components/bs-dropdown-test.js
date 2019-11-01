@@ -1,6 +1,6 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, triggerKeyEvent } from '@ember/test-helpers';
+import { render, click, triggerKeyEvent, focus } from '@ember/test-helpers';
 import {
   dropdownVisibilityElementSelector,
   isHidden,
@@ -337,58 +337,37 @@ module('Integration | Component | bs-dropdown', function(hooks) {
 
   module('keyboard control', function() {
 
-    test('should show if down key is pressed on trigger', async function(assert) {
+    test('should show if down key is pressed on toggle', async function(assert) {
       await render(
         hbs`
-        <div id="ember-bootstrap-wormhole"></div>
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
           <dd.menu as |menu|>
-            <menu.item><a href="#">Something</a></menu.item>
+            <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
       `);
 
       await focus('a.dropdown-toggle');
-      await triggerKeyEvent('a.dropdown-toggle', 'keyup', 40); // down
+      await triggerKeyEvent('a.dropdown-toggle', 'keydown', 40); // down
 
       assert.dom('.dropdown-menu').exists();
       assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
     });
 
-    test('should show if space key is pressed on trigger', async function(assert) {
+    test('should show if down key is pressed on button', async function(assert) {
       await render(
         hbs`
-        <div id="ember-bootstrap-wormhole"></div>
         <BsDropdown as |dd|>
-          <dd.toggle>Dropdown</dd.toggle>
+          <dd.button>Dropdown</dd.button>
           <dd.menu as |menu|>
-            <menu.item><a href="#">Something</a></menu.item>
+            <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
       `);
 
-      await focus('a.dropdown-toggle');
-      await triggerKeyEvent('a.dropdown-toggle', 'keyup', 32); // space
-
-      assert.dom('.dropdown-menu').exists();
-      assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
-    });
-
-    test('should show if enter key is pressed on trigger', async function(assert) {
-      await render(
-        hbs`
-        <div id="ember-bootstrap-wormhole"></div>
-        <BsDropdown as |dd|>
-          <dd.toggle>Dropdown</dd.toggle>
-          <dd.menu as |menu|>
-            <menu.item><a href="#">Something</a></menu.item>
-          </dd.menu>
-        </BsDropdown>
-      `);
-
-      await focus('a.dropdown-toggle');
-      await triggerKeyEvent('a.dropdown-toggle', 'keyup', 13); // enter
+      await focus('button.dropdown-toggle');
+      await triggerKeyEvent('button.dropdown-toggle', 'keydown', 40); // down
 
       assert.dom('.dropdown-menu').exists();
       assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
@@ -397,11 +376,10 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     test('should hide if pressing escape', async function(assert) {
       await render(
         hbs`
-        <div id="ember-bootstrap-wormhole"></div>
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
           <dd.menu as |menu|>
-            <menu.item><a href="#">Something</a></menu.item>
+            <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
       `);
@@ -411,19 +389,19 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       assert.dom('.dropdown-menu').exists();
       assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
 
-      await triggerKeyEvent(document, 'keyup', 27); // escape
+      await triggerKeyEvent(document.activeElement, 'keydown', 27); // escape
 
       assert.dom('.dropdown-menu').doesNotExist();
+      assert.dom('a.dropdown-toggle').isFocused();
     });
 
     test('should hide if tabbing outside of menu', async function(assert) {
       await render(
         hbs`
-        <div id="ember-bootstrap-wormhole"></div>
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
           <dd.menu as |menu|>
-            <menu.item><a href="#">Something</a></menu.item>
+            <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
       `);
@@ -438,39 +416,58 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       assert.dom('.dropdown-menu').doesNotExist();
     });
 
-    test('should focus next/previous element when using keyboard navigation', async function(assert) {
+    test('should not hide if tabbing inside of menu', async function(assert) {
       await render(
         hbs`
-        <div id="ember-bootstrap-wormhole"></div>
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
           <dd.menu as |menu|>
-            <menu.item><a href="#" id="item1">Something</a></menu.item>
-            <menu.item><a href="#" id="item2">Something</a></menu.item>
+            <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
       `);
 
       await click('a.dropdown-toggle');
 
-      await triggerKeyEvent(document, 'keyup', 40); // down
+      assert.dom('.dropdown-menu').exists();
+      assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
+
+      await triggerKeyEvent('.dropdown-item', 'keyup', 9); // tab
+
+      assert.dom('.dropdown-menu').exists();
+    });
+
+    test('should focus next/previous element when using keyboard navigation', async function(assert) {
+      await render(
+        hbs`
+        <BsDropdown as |dd|>
+          <dd.toggle>Dropdown</dd.toggle>
+          <dd.menu as |menu|>
+            <menu.item><a class="dropdown-item" href="#" id="item1">Something</a></menu.item>
+            <menu.item><a class="dropdown-item" href="#" id="item2">Something</a></menu.item>
+          </dd.menu>
+        </BsDropdown>
+      `);
+
+      await click('a.dropdown-toggle');
+
+      await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
       assert.dom('#item1').isFocused();
 
-      await triggerKeyEvent(document, 'keyup', 40); // down
+      await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
       assert.dom('#item2').isFocused();
 
-      await triggerKeyEvent(document, 'keyup', 38); // up
+      await triggerKeyEvent(document.activeElement, 'keydown', 38); // up
       assert.dom('#item1').isFocused();
     });
 
     test('should ignore keyboard events within <input>s and <textarea>s, except for escape key', async function(assert) {
       await render(
         hbs`
-        <div id="ember-bootstrap-wormhole"></div>
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
           <dd.menu as |menu|>
-            <a href="#" id="item1">Something</a>
+            <a class="dropdown-item" href="#" id="item1">Something</a>
             <input type="text" />
             <textarea></textarea>
           </dd.menu>
@@ -480,58 +477,35 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       await click('a.dropdown-toggle');
       await focus('input');
 
-      await triggerKeyEvent(document, 'keyup', 38); // up
+      await triggerKeyEvent(document.activeElement, 'keydown', 38); // up
       assert.dom('input').isFocused();
 
       await focus('textarea');
 
-      await triggerKeyEvent(document, 'keyup', 38); // up
+      await triggerKeyEvent(document.activeElement, 'keydown', 38); // up
       assert.dom('textarea').isFocused();
 
-      await triggerKeyEvent(document, 'keyup', 27); // escape
+      await triggerKeyEvent(document.activeElement, 'keydown', 27); // escape
       assert.dom('.dropdown-menu').doesNotExist();
     });
 
     test('should skip disabled element when using keyboard navigation', async function(assert) {
       await render(
         hbs`
-        <div id="ember-bootstrap-wormhole"></div>
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
           <dd.menu as |menu|>
             <a class="dropdown-item disabled" href="#sub1">Submenu 1</a>
             <button class="dropdown-item" type="button" disabled>Disabled button</button>
-            <a href="#" id="item1">Something</a>
+            <a class="dropdown-item" href="#" id="item1">Something</a>
           </dd.menu>
         </BsDropdown>
       `);
 
       await click('a.dropdown-toggle');
 
-      await triggerKeyEvent(document, 'keyup', 40); // down
+      await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
       assert.dom('#item1').isFocused();
     });
-
-    test('should skip hidden element when using keyboard navigation', async function(assert) {
-      await render(
-        hbs`
-        <div id="ember-bootstrap-wormhole"></div>
-        <BsDropdown as |dd|>
-          <dd.toggle>Dropdown</dd.toggle>
-          <dd.menu as |menu|>
-            <button class="dropdown-item d-none" type="button">Hidden button by class</button>
-            <a class="dropdown-item" href="#sub1" style="display: none">Hidden link</a>
-            <a class="dropdown-item" href="#sub1" style="visibility: hidden">Hidden link</a>
-            <a href="#" id="item1">Something</a>
-          </dd.menu>
-        </BsDropdown>
-      `);
-
-      await click('a.dropdown-toggle');
-
-      await triggerKeyEvent(document, 'keyup', 40); // down
-      assert.dom('#item1').isFocused();
-    });
-
   });
 });

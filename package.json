@@ -110,6 +110,8 @@
     "ember-let-polyfill": "^0.1.0",
     "ember-maybe-in-element": "^0.4.0",
     "ember-named-arguments-polyfill": "^1.0.0",
+    "ember-on-helper": "^0.1.0",
+    "ember-on-modifier": "^1.0.0",
     "ember-popper": "^0.10.3",
     "findup-sync": "^4.0.0",
     "fs-extra": "^7.0.1",
