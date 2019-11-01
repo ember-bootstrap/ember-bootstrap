@@ -324,7 +324,14 @@ export default class Dropdown extends Component {
 
   @action
   handleKeyEvent(event) {
-    if (/input|textarea/i.test(event.target.tagName)
+    // If not input/textarea:
+    //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
+    // If input/textarea:
+    //  - If space key => not a dropdown command
+    //  - If key is other than escape
+    //    - If key is not up or down => not a dropdown command
+    //    - If trigger inside the menu => not a dropdown command
+    if (['input', 'textarea'].includes(event.target.tagName.toLowerCase())
       ? (
         event.which === SPACE_KEYCODE
         || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || this.get('menuElement').contains(event.target)))
