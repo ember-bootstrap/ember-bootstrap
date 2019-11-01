@@ -389,6 +389,8 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       assert.dom('.dropdown-menu').exists();
       assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
 
+      await triggerKeyEvent(document.activeElement, 'keydown', 40); // down, to set focus to different element
+
       await triggerKeyEvent(document.activeElement, 'keydown', 27); // escape
 
       assert.dom('.dropdown-menu').doesNotExist();

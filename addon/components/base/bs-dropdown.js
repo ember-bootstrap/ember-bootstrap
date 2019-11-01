@@ -340,6 +340,7 @@ export default class Dropdown extends Component {
       return;
     } else if (event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE) {
       this.closeDropdown();
+      this.get('toggleElement').focus();
       return;
     }
 
