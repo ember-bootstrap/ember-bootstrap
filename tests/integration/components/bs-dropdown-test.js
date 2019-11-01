@@ -80,6 +80,30 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom('.dropdown-menu').doesNotExist('Dropdown is closed');
   });
 
+  test('dropdown toggle has aria-expanded attribute', async function(assert) {
+    await render(
+      hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+    );
+
+    assert.dom('.dropdown-toggle').hasAttribute('aria-expanded', 'false');
+    await click('a.dropdown-toggle');
+    assert.dom('.dropdown-toggle').hasAttribute('aria-expanded', 'true');
+    await click('a.dropdown-toggle');
+    assert.dom('.dropdown-toggle').hasAttribute('aria-expanded', 'false');
+  });
+
+  test('dropdown button has aria-expanded attribute', async function(assert) {
+    await render(
+      hbs`{{#bs-dropdown as |dd|}}{{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+    );
+
+    assert.dom('.dropdown-toggle').hasAttribute('aria-expanded', 'false');
+    await click('button.dropdown-toggle');
+    assert.dom('.dropdown-toggle').hasAttribute('aria-expanded', 'true');
+    await click('button.dropdown-toggle');
+    assert.dom('.dropdown-toggle').hasAttribute('aria-expanded', 'false');
+  });
+
   test('opened dropdown will close on outside click', async function(assert) {
     await render(
       hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`

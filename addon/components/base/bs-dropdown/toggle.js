@@ -2,6 +2,7 @@ import { attributeBindings, classNames, tagName } from '@ember-decorators/compon
 import Component from '@ember/component';
 import { schedule } from '@ember/runloop';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { computed } from '@ember/object';
 
 /**
  Anchor element that triggers the parent dropdown to open.
@@ -17,6 +18,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 @classNames('dropdown-toggle')
 @tagName('a')
 @attributeBindings('href')
+@attributeBindings('aria-expanded')
 export default class DropdownToggle extends Component {
   ariaRole = 'button';
 
@@ -27,6 +29,11 @@ export default class DropdownToggle extends Component {
    */
   @defaultValue
   inNav = false;
+
+  @computed('isOpen')
+  get 'aria-expanded'() {
+    return this.isOpen ? 'true' : 'false';
+  }
 
   /**
    * Computed property to generate a `href="#"` attribute when `tagName` is "a".
