@@ -5417,7 +5417,7 @@ ember-maybe-in-element@^0.4.0:
   dependencies:
     ember-cli-babel "^7.1.0"
 
-ember-modifier-manager-polyfill@^1.0.1, ember-modifier-manager-polyfill@^1.0.3:
+ember-modifier-manager-polyfill@^1.0.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ember-modifier-manager-polyfill/-/ember-modifier-manager-polyfill-1.2.0.tgz#cf4444e11a42ac84f5c8badd85e635df57565dda"
   integrity sha512-bnaKF1LLKMkBNeDoetvIJ4vhwRPKIIumWr6dbVuW6W6p4QV8ZiO+GdF8J7mxDNlog9CeL9Z/7wam4YS86G8BYA==
@@ -5440,16 +5440,6 @@ ember-on-helper@^0.1.0:
   integrity sha512-jjafBnWfoA4VSSje476ft5G+urlvvuSDddwAJjKDCjKY9mbe3hAEsJiMBAaPObJRMm1FOglCuKjQZfwDDls6MQ==
   dependencies:
     ember-cli-babel "^7.7.3"
-
-ember-on-modifier@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ember-on-modifier/-/ember-on-modifier-1.0.0.tgz#fb89c8d8a69df2f19a11160fa0b054395a5b947c"
-  integrity sha512-OPX5QrNiyXXQ//uN4cFj7gz5pt0rBK5c6LPEMP5iSK2I1J+WtiHM5Kg7mVCM7VziMiRUBVe3wp8CAE26m45hsA==
-  dependencies:
-    broccoli-funnel "^2.0.2"
-    ember-cli-babel "^7.8.0"
-    ember-cli-version-checker "^3.1.3"
-    ember-modifier-manager-polyfill "^1.0.3"
 
 ember-popper@^0.10.3:
   version "0.10.3"

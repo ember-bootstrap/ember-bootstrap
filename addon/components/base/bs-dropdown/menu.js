@@ -151,8 +151,6 @@ export default class DropdownMenu extends Component {
     };
   }
 
-  onKeyDown() {}
-
   /**
    * @property itemComponent
    * @type {String}
