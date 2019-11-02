@@ -1,6 +1,6 @@
 import { module } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render, settled, click, triggerKeyEvent, waitUntil } from '@ember/test-helpers';
+import { setupRenderingTest, skip } from 'ember-qunit';
+import { render, settled, click, triggerKeyEvent, waitUntil, focus } from '@ember/test-helpers';
 import { run } from '@ember/runloop';
 import {
   test,
@@ -307,21 +307,66 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
   });
 
   testRequiringFocus('autofocus element is focused when present and fade=false', async function(assert) {
-    let action = this.spy();
-    this.actions.focusAction = action;
-
     this.set('open', false);
     await render(hbs`
       {{#bs-modal-simple title="Simple Dialog" fade=false open=open}}
-        <input class="my-input" autofocus="autofocus" onfocus={{action "focusAction"}}> blahblahblah
+        <input data-test-autofocus autofocus="autofocus" />
       {{/bs-modal-simple}}
     `);
     await settled();
 
     this.set('open', true);
     await settled();
-    assert.ok(action.calledOnce, 'focus was triggered on the autofocus element');
+    assert.dom('input[data-test-autofocus]').isFocused();
   });
+
+  // unfortunately it seems we cannot simulate the user moving focus by tabbing by triggering key events :(
+  // keeping this around in case a working solution pops up...
+  skip('focus is trapped in modal', async function(assert) {
+    await render(hbs`
+      {{#bs-modal-simple title="Simple Dialog" fade=false}}
+        <input data-test-input />
+        <a href="#" data-test-link>Link</a>
+      {{/bs-modal-simple}}
+    `);
+    await settled();
+
+    await triggerKeyEvent(document, 'keyup', 9); // tab
+    assert.dom('.close').isFocused();
+
+    await triggerKeyEvent(document, 'keyup', 9); // tab
+    assert.dom('[data-test-input]').isFocused(); // input
+
+    await triggerKeyEvent(document, 'keyup', 9); // tab
+    assert.dom('[data-test-link]').isFocused(); // link
+
+    await triggerKeyEvent(document, 'keyup', 9); // tab
+    assert.dom('.btn').isFocused(); // default submit button
+
+    await triggerKeyEvent(document, 'keyup', 9); // tab
+    assert.dom('.close').isFocused(); // cycle to close button
+  });
+
+  testRequiringFocus('focus is reset to previously focused element', async function(assert) {
+    this.set('open', false);
+    await render(hbs`
+      <button data-test-button>Open</button>
+      {{#bs-modal-simple title="Simple Dialog" fade=false open=open}}
+        Hallo
+      {{/bs-modal-simple}}
+    `);
+    await settled();
+    await focus('[data-test-button]');
+
+    this.set('open', true);
+    await settled();
+
+    this.set('open', false);
+    await settled();
+
+    assert.dom('[data-test-button]').isFocused();
+  });
+
 
   testRequiringFocus('Pressing escape key will close the modal if keyboard=true', async function(assert) {
     let action = this.spy();
@@ -342,6 +387,8 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
 
     assert.ok(action.calledOnce, 'Action has been called.');
   });
+
+
 
   testRequiringFocus('Pressing escape key will close the modal if keyboard=true and element is autofocused', async function(assert) {
     let action = this.spy();

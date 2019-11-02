@@ -1,5 +1,12 @@
 <div class="modal-dialog {{this.sizeClass}} {{if @centered "modal-dialog-centered"}} {{if @scrollable "modal-dialog-scrollable"}}" role="document">
-  <div class="modal-content">
+  <div class="modal-content"
+    {{focus-trap
+      focusTrapOptions=(hash
+        initialFocus=this.initialFocus
+        clickOutsideDeactivates=true
+      )
+    }}
+  >
     {{yield}}
   </div>
 </div>
