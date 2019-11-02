@@ -61,9 +61,20 @@
 import { classNameBindings, layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
 import { action, computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
-import { bind } from &#x27;@ember/runloop&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+
+const ESCAPE_KEYCODE           = 27 // KeyboardEvent.which value for Escape (Esc) key
+const SPACE_KEYCODE            = 32 // KeyboardEvent.which value for space key
+const TAB_KEYCODE              = 9 // KeyboardEvent.which value for tab key
+const ARROW_UP_KEYCODE         = 38 // KeyboardEvent.which value for up arrow key
+const ARROW_DOWN_KEYCODE       = 40 // KeyboardEvent.which value for down arrow key
+
+const SUPPORTED_KEYCODES = [
+  ESCAPE_KEYCODE,
+  ARROW_DOWN_KEYCODE,
+  ARROW_UP_KEYCODE,
+];
 
 /**
   Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
@@ -332,43 +343,22 @@ export default class Dropdown extends Component {
   @action
   toggleDropdown() {
     if (this.get(&#x27;isOpen&#x27;)) {
-      this.send(&#x27;closeDropdown&#x27;);
+      this.closeDropdown();
     } else {
-      this.send(&#x27;openDropdown&#x27;);
+      this.openDropdown();
     }
   }
 
   @action
   openDropdown() {
     this.set(&#x27;isOpen&#x27;, true);
-    this.addClickListener();
     this.get(&#x27;onShow&#x27;)();
   }
 
   @action
   closeDropdown() {
     this.set(&#x27;isOpen&#x27;, false);
-    this.removeClickListener();
     this.get(&#x27;onHide&#x27;)();
-  }
-
-  addClickListener() {
-    if (!this.clickListener) {
-      this.clickListener = bind(this, this.closeOnClickHandler);
-      document.addEventListener(&#x27;click&#x27;, this.clickListener, true);
-    }
-  }
-
-  removeClickListener() {
-    if (this.clickListener)  {
-      document.removeEventListener(&#x27;click&#x27;, this.clickListener, true);
-      this.clickListener = null;
-    }
-  }
-
-  willDestroyElement() {
-    super.willDestroyElement(...arguments);
-    this.removeClickListener();
   }
 
   /**
@@ -378,15 +368,70 @@ export default class Dropdown extends Component {
    * @param e
    * @protected
    */
-  closeOnClickHandler(e) {
+  @action
+  closeHandler(e) {
     let { target } = e;
     let { toggleElement, menuElement } = this.getProperties(&#x27;toggleElement&#x27;, &#x27;menuElement&#x27;);
 
     if (!this.get(&#x27;isDestroyed&#x27;)
-      &amp;&amp; (toggleElement &amp;&amp; !toggleElement.contains(target))
-      &amp;&amp; ((menuElement &amp;&amp; !menuElement.contains(target)) || this.get(&#x27;closeOnMenuClick&#x27;))) {
-      this.send(&#x27;closeDropdown&#x27;);
+      &amp;&amp; (
+        (e.type === &#x27;keyup&#x27; &amp;&amp; e.which === TAB_KEYCODE &amp;&amp; menuElement &amp;&amp; !menuElement.contains(target))
+        || (e.type === &#x27;click&#x27; &amp;&amp; toggleElement &amp;&amp; !toggleElement.contains(target) &amp;&amp; ((menuElement &amp;&amp; !menuElement.contains(target)) || this.get(&#x27;closeOnMenuClick&#x27;)))
+      )) {
+      this.closeDropdown();
     }
+  }
+
+  @action
+  handleKeyEvent(event) {
+    // If not input/textarea:
+    //  - And not a key in REGEXP_KEYDOWN =&gt; not a dropdown command
+    // If input/textarea:
+    //  - If space key =&gt; not a dropdown command
+    //  - If key is other than escape
+    //    - If key is not up or down =&gt; not a dropdown command
+    //    - If trigger inside the menu =&gt; not a dropdown command
+    if ([&#x27;input&#x27;, &#x27;textarea&#x27;].includes(event.target.tagName.toLowerCase())
+      ? (
+        event.which === SPACE_KEYCODE
+        || event.which !== ESCAPE_KEYCODE &amp;&amp; (event.which !== ARROW_DOWN_KEYCODE &amp;&amp; event.which !== ARROW_UP_KEYCODE || this.get(&#x27;menuElement&#x27;).contains(event.target)))
+      : !SUPPORTED_KEYCODES.includes(event.which)) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (!this.get(&#x27;isOpen&#x27;)) {
+      this.openDropdown();
+      return;
+    } else if (event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE) {
+      this.closeDropdown();
+      this.get(&#x27;toggleElement&#x27;).focus();
+      return;
+    }
+
+    let items = [].slice.call(this.element.querySelectorAll(&#x27;.dropdown-item:not(.disabled):not(:disabled)&#x27;));
+
+    if (items.length === 0) {
+      return;
+    }
+
+    let index = items.indexOf(event.target);
+
+    if (event.which === ARROW_UP_KEYCODE &amp;&amp; index &gt; 0) { // Up
+      index--;
+    }
+
+    if (event.which === ARROW_DOWN_KEYCODE &amp;&amp; index &lt; items.length - 1) { // Down
+      index++;
+    }
+
+    if (index &lt; 0) {
+      index = 0;
+    }
+
+    items[index].focus();
   }
 
   /**

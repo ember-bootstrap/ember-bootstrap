@@ -62,6 +62,7 @@ import { attributeBindings, classNames, tagName } from &#x27;@ember-decorators/c
 import Component from &#x27;@ember/component&#x27;;
 import { schedule } from &#x27;@ember/runloop&#x27;;
 import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
 
 /**
  Anchor element that triggers the parent dropdown to open.
@@ -77,6 +78,7 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 @classNames(&#x27;dropdown-toggle&#x27;)
 @tagName(&#x27;a&#x27;)
 @attributeBindings(&#x27;href&#x27;)
+@attributeBindings(&#x27;aria-expanded&#x27;)
 export default class DropdownToggle extends Component {
   ariaRole = &#x27;button&#x27;;
 
@@ -87,6 +89,11 @@ export default class DropdownToggle extends Component {
    */
   @defaultValue
   inNav = false;
+
+  @computed(&#x27;isOpen&#x27;)
+  get &#x27;aria-expanded&#x27;() {
+    return this.isOpen ? &#x27;true&#x27; : &#x27;false&#x27;;
+  }
 
   /**
    * Computed property to generate a &#x60;href=&quot;#&quot;&#x60; attribute when &#x60;tagName&#x60; is &quot;a&quot;.
@@ -112,6 +119,10 @@ export default class DropdownToggle extends Component {
   click(e) {
     e.preventDefault();
     this.get(&#x27;onClick&#x27;)();
+  }
+
+  keyDown(e) {
+    this.get(&#x27;onKeyDown&#x27;)(e);
   }
 
   didReceiveAttrs() {

@@ -58,9 +58,10 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import { classNames } from &#x27;@ember-decorators/component&#x27;;
+import { attributeBindings, classNames } from &#x27;@ember-decorators/component&#x27;;
 import Button from &#x27;ember-bootstrap/components/bs-button&#x27;;
 import { schedule } from &#x27;@ember/runloop&#x27;;
+import { computed } from &#x27;@ember/object&#x27;;
 
 /**
  Button component with that can act as a dropdown toggler.
@@ -73,7 +74,17 @@ import { schedule } from &#x27;@ember/runloop&#x27;;
  @public
  */
 @classNames(&#x27;dropdown-toggle&#x27;)
+@attributeBindings(&#x27;aria-expanded&#x27;)
 export default class DropdownButton extends Button {
+  keyDown(e) {
+    this.get(&#x27;onKeyDown&#x27;)(e);
+  }
+
+  @computed(&#x27;isOpen&#x27;)
+  get &#x27;aria-expanded&#x27;() {
+    return this.isOpen ? &#x27;true&#x27; : &#x27;false&#x27;;
+  }
+
   didReceiveAttrs() {
     // super.didReceiveAttrs(...arguments);
     let dropdown = this.get(&#x27;dropdown&#x27;);

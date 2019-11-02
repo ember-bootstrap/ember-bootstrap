@@ -247,6 +247,18 @@ export default class Modal extends Component {
   position = &#x27;top&#x27;;
 
   /**
+   * [BS4 only!] Allows scrolling within the modal body
+   * &#x27;true&#x27; will apply the &#x60;modal-dialog-scrollable&#x60; class
+   *
+   * @property scrollable
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  scrollable = false
+
+  /**
    * @property dialogComponent
    * @type {String}
    * @private
@@ -493,23 +505,6 @@ export default class Modal extends Component {
   }
 
   /**
-   * Give the modal (or its autofocus element) focus
-   *
-   * @method takeFocus
-   * @private
-   */
-  takeFocus() {
-    let modalEl = this.get(&#x27;modalElement&#x27;);
-    let focusElement = modalEl &amp;&amp; modalEl.querySelector(&#x27;[autofocus]&#x27;);
-    if (!focusElement) {
-      focusElement = modalEl;
-    }
-    if (focusElement) {
-      focusElement.focus();
-    }
-  }
-
-  /**
    * Show the modal
    *
    * @method show
@@ -547,11 +542,9 @@ export default class Modal extends Component {
         if (this.get(&#x27;usesTransition&#x27;)) {
           transitionEnd(this.get(&#x27;modalElement&#x27;), this.get(&#x27;transitionDuration&#x27;))
             .then(() =&gt; {
-              this.takeFocus();
               this.get(&#x27;onShown&#x27;)();
             });
         } else {
-          this.takeFocus();
           this.get(&#x27;onShown&#x27;)();
         }
       });

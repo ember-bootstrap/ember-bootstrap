@@ -1,4 +1,25 @@
 
+## 3.1.0 (2019-11-02)
+
+#### Features
+* [#925](https://github.com/kaliber5/ember-bootstrap/pull/925) Trap focus inside Modals ([@simonihmig](https://github.com/simonihmig))
+* [#921](https://github.com/kaliber5/ember-bootstrap/pull/921) Add keyboard control to dropdowns ([@simonihmig](https://github.com/simonihmig))
+* [#923](https://github.com/kaliber5/ember-bootstrap/pull/923) Add aria-expanded attribute to dropdown toggle ([@simonihmig](https://github.com/simonihmig))
+* [#919](https://github.com/kaliber5/ember-bootstrap/pull/919) onSlideChange action added for bs-carousel ([@Techn1x](https://github.com/Techn1x))
+* [#911](https://github.com/kaliber5/ember-bootstrap/pull/911) Add scrollable content support for BS4 modal ([@rwachtler](https://github.com/rwachtler))
+
+#### Bug Fixes
+* [#926](https://github.com/kaliber5/ember-bootstrap/pull/926) Add tablist role to  ([@simonihmig](https://github.com/simonihmig))
+* [#924](https://github.com/kaliber5/ember-bootstrap/pull/924) app.options['ember-bootstrap'] may be undefined ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#927](https://github.com/kaliber5/ember-bootstrap/pull/927) Add ember-a11y-testing ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 4
+- Brad Overton ([@Techn1x](https://github.com/Techn1x))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Ramiz Wachtler ([@rwachtler](https://github.com/rwachtler))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
 ## 3.0.2 (2019-10-25)
 
 #### Bug Fixes

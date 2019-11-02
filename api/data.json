@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "3.0.2"
+        "version": "3.1.0"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -866,7 +866,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-dropdown/button.js",
-            "line": 5,
+            "line": 6,
             "description": "Button component with that can act as a dropdown toggler.\n\nSee [Components.Dropdown](Components.Dropdown.html) for examples.",
             "extends": "Components.Button",
             "access": "public",
@@ -898,7 +898,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-dropdown/toggle.js",
-            "line": 6,
+            "line": 7,
             "description": "Anchor element that triggers the parent dropdown to open.\nUse [Components.DropdownButton](Components.DropdownButton.html) if you want a button instead of an anchor tag.\n\nSee [Components.Dropdown](Components.Dropdown.html) for examples.",
             "extends": "Ember.Component",
             "access": "public",
@@ -1545,7 +1545,7 @@
             "extension_for": [],
             "namespace": "Components",
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 8,
+            "line": 19,
             "description": "Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting\nof a toggle element, and the dropdown menu itself.\n\n### Usage\n\nUse this component together with the yielded contextual components:\n* [Components.DropdownToggle](Components.DropdownToggle.html)\n* [Components.DropdownButton](Components.DropdownButton.html)\n* [Components.DropdownMenu](Components.DropdownMenu.html)\n  * [Components.DropdownMenuItem](Components.DropdownMenuItem.html)\n  * [Components.DropdownMenuDivider](Components.DropdownMenuDivider.html)\n  * [Components.DropdownMenuLinkTo](Components.DropdownMenuLinkTo.html)\n\nFurthermore references to the following actions are yielded:\n\n* `toggleDropdown`\n* `openDropdown`\n* `closeDropdown`\n\n```hbs\n<BsDropdown as |dd|>\n  <dd.toggle>Dropdown <span class=\"caret\"></span></dd.toggle>\n  <dd.menu as |ddm|>\n    <ddm.item>\n      <ddm.linkTo @route=\"index\">Something</ddm.linkTo>\n    </ddm.item>\n    <ddm.item>\n      <ddm.linkTo @route=\"index\">Something different</ddm.linkTo>\n    </ddm.item>\n  </dd.menu>\n</BsDropdown>\n```\n\nIf you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`\ncontextual component rather than a standalone dropdown to ensure the correct styling\nregardless of your Bootstrap version.\n\n> Note: the use of angle brackets `<ddm.linkTo>` as shown above is only supported for Ember >= 3.10, as it relies on its\n> Ember's native implementation of the [`LinkComponent`](https://api.emberjs.com/ember/3.12/classes/Ember.Templates.helpers/methods/link-to?anchor=link-to).\n> For older Ember versions please use the legacy syntax with positional arguments:\n> `{{#ddm.link-to \"bar\" this.model}}Bar{{/ddm.link-to}}`\n\n### Button dropdowns\n\nTo use a button as the dropdown toggle element (see http://getbootstrap.com/components/#btn-dropdowns), use the\n`Components.DropdownButton` component as the toggle:\n\n```hbs\n<BsDropdown as |dd|>\n  <dd.button>Dropdown <span class=\"caret\"></span></dd.button>\n  <dd.menu as |ddm|>\n    <ddm.item>\n      <ddm.linkTo @route=\"index\">Something</ddm.linkTo>\n    </ddm.item>\n    <ddm.item>\n      <ddm.linkTo @route=\"index\">Something different</ddm.linkTo>\n    </ddm.item>\n  </dd.menu>\n</BsDropdown>\n```\n\nIt has all the functionality of a `Components.Button` with additional dropdown support.\n\n### Split button dropdowns\n\nTo have a regular button with a dropdown button as in http://getbootstrap.com/components/#btn-dropdowns-split, use a\n`Components.Button` component and a `Components.DropdownButton`:\n\n```hbs\n<BsDropdown as |dd|>\n  <BsButton>Dropdown</BsButton>\n  <dd.button>Dropdown <span class=\"caret\"></span></dd.button>\n  <dd.menu as |ddm|>\n    <ddm.item>\n      <ddm.linkTo @route=\"index\">Something</ddm.linkTo>\n    </ddm.item>\n    <ddm.item>\n      <ddm.linkTo @route=\"index\">Something different</ddm.linkTo>\n    </ddm.item>\n  </dd.menu>\n</BsDropdown>\n```\n\n### Dropup style\n\nSet the `direction` property to \"up\" to switch to a \"dropup\" style:\n\n```hbs\n<BsDropdown @direction=\"up\" as |dd|>\n  ...\n</BsDropdown>\n```\n\n### Open, close or toggle the dropdown programmatically\n\nIf you wanted to control when the dropdown opens and closes programmatically, the `bs-dropdown` component yields the\n`openDropdown`, `closeDropdown` and `toggleDropdown` actions which you can then pass to your own handlers. For example:\n\n```hbs\n<BsDropdown @closeOnMenuClick={{false}} as |dd|>\n  <BsButton>Dropdown</BsButton>\n  <dd.button>Dropdown <span class=\"caret\"></span></dd.button>\n  <dd.menu as |ddm|>\n    {{#each this.items as |item|}}\n      <ddm.item>\n        <a href onclick={{action \"changeItems\" item dd.closeDropdown}}>\n          {{item.text}}\n        </a>\n      </ddm.item>\n    {{/each}}\n  </dd.menu>\n</BsDropdown>\n```\n\nThen in your controller or component, optionally close the dropdown:\n\n```js\n...\nactions: {\n  handleDropdownClicked(item, closeDropdown) {\n    if(item.isTheRightOne) {\n      this.chosenItems.pushObject(item);\n      closeDropdown();\n    } else {\n      this.set('item', this.getRandomItems());\n    }\n  },\n}\n```\n\n\n### Bootstrap 3/4 Notes\n\nIf you need to use dropdowns in a [nav](Components.Nav.html), use the `bs-nav.dropdown`\ncontextual component rather than a standalone dropdown to ensure the correct styling\nregardless of your Bootstrap version.\n\nIf you use the [dropdown divider](Components.DropdownMenuDivider), you don't have to worry\nabout differences in the markup between versions.\n\nBe sure to use the [dropdown menu link-to](Component.DropdownMenuLinkTo), for in-application\nlinks as dropdown menu items. This is essential for proper styling regardless of Bootstrap\nversion and will also provide automatic `active` highlighting on dropdown menu items. If you\nwish to have a dropdown menu item refer to an external link, be sure to apply the `dropdown-item`\nclass to the `<a>` tag for Bootstrap 4 compatibility.\n\nThe dropdown menu will be positioned using the `popper.js` library, just as the original Bootstrap\nversion does. This also allows you to set `renderInPlace=false` on the menu component to render it in a wormhole,\nwhich you might want to do if you experience clipping issues by an outer `overflow: hidden` element.",
             "extends": "Ember.Component",
             "access": "public",
@@ -2350,7 +2350,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/toggle.js",
-            "line": 23,
+            "line": 25,
             "itemtype": "property",
             "name": "inNav",
             "type": "{boolean}",
@@ -2361,7 +2361,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/toggle.js",
-            "line": 31,
+            "line": 38,
             "description": "Computed property to generate a `href=\"#\"` attribute when `tagName` is \"a\".",
             "itemtype": "property",
             "name": "href",
@@ -2374,7 +2374,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/toggle.js",
-            "line": 43,
+            "line": 50,
             "description": "When clicking the toggle this action is called.",
             "itemtype": "event",
             "name": "onClick",
@@ -3559,7 +3559,7 @@
         },
         {
             "file": "addon/components/base/bs-modal/dialog.js",
-            "line": 187,
+            "line": 192,
             "itemtype": "event",
             "name": "onClose",
             "access": "public",
@@ -5149,6 +5149,23 @@
         {
             "file": "addon/components/base/bs-carousel.js",
             "line": 449,
+            "description": "Action called after the slide has changed.",
+            "itemtype": "event",
+            "name": "onSlideChanged",
+            "params": [
+                {
+                    "name": "toIndex",
+                    "description": ""
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Carousel",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-carousel.js",
+            "line": 458,
             "description": "Do a presentation and calls itself to perform a cycle.",
             "itemtype": "method",
             "name": "cycle",
@@ -5159,7 +5176,7 @@
         },
         {
             "file": "addon/components/base/bs-carousel.js",
-            "line": 462,
+            "line": 471,
             "itemtype": "method",
             "name": "transitioner",
             "access": "private",
@@ -5169,7 +5186,7 @@
         },
         {
             "file": "addon/components/base/bs-carousel.js",
-            "line": 481,
+            "line": 490,
             "description": "Waits an interval time to start a cycle.",
             "itemtype": "method",
             "name": "waitIntervalToInitCycle",
@@ -5180,7 +5197,7 @@
         },
         {
             "file": "addon/components/base/bs-carousel.js",
-            "line": 524,
+            "line": 534,
             "description": "Indicates what class names should be applicable to the current transition slides.",
             "itemtype": "method",
             "name": "assignClassNameControls",
@@ -5191,14 +5208,14 @@
         },
         {
             "file": "addon/components/base/bs-carousel.js",
-            "line": 540,
+            "line": 550,
             "description": "Initial page loading configuration.",
             "class": "Components.Carousel",
             "namespace": "Components"
         },
         {
             "file": "addon/components/base/bs-carousel.js",
-            "line": 549,
+            "line": 559,
             "description": "mouseEnter() and mouseLeave() doesn't work with ember-native-dom-event-dispatcher.",
             "itemtype": "method",
             "name": "registerEvents",
@@ -5209,7 +5226,7 @@
         },
         {
             "file": "addon/components/base/bs-carousel.js",
-            "line": 597,
+            "line": 607,
             "description": "Sets the following slide index within the lower and upper bounds.",
             "itemtype": "method",
             "name": "setFollowingIndex",
@@ -5220,7 +5237,7 @@
         },
         {
             "file": "addon/components/base/bs-carousel.js",
-            "line": 614,
+            "line": 624,
             "description": "Coordinates the correct slide movement direction.",
             "itemtype": "method",
             "name": "toAppropriateSlide",
@@ -5231,7 +5248,7 @@
         },
         {
             "file": "addon/components/base/bs-carousel.js",
-            "line": 628,
+            "line": 638,
             "itemtype": "method",
             "name": "triggerChildSlidesObserver",
             "access": "private",
@@ -5946,7 +5963,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 167,
+            "line": 178,
             "description": "This property reflects the state of the dropdown, whether it is open or closed.",
             "itemtype": "property",
             "name": "isOpen",
@@ -5959,7 +5976,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 178,
+            "line": 189,
             "description": "By default clicking on an open dropdown menu will close it. Set this property to false for the menu to stay open.",
             "itemtype": "property",
             "name": "closeOnMenuClick",
@@ -5972,7 +5989,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 189,
+            "line": 200,
             "description": "By default the dropdown menu will expand downwards. Other options include, 'up', 'left' and 'right'",
             "itemtype": "property",
             "name": "direction",
@@ -5985,7 +6002,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 200,
+            "line": 211,
             "description": "Indicates the dropdown is being used as a navigation item dropdown.",
             "itemtype": "property",
             "name": "inNav",
@@ -5998,7 +6015,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 209,
+            "line": 220,
             "description": "A computed property to generate the suiting class for the dropdown container, either \"dropdown\", \"dropup\" or \"btn-group\".\nBS4 only: \"dropleft\", \"dropright\"",
             "itemtype": "property",
             "name": "containerClass",
@@ -6011,7 +6028,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 227,
+            "line": 238,
             "itemtype": "property",
             "name": "toggleElement",
             "access": "private",
@@ -6021,7 +6038,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 236,
+            "line": 247,
             "description": "Reference to the child toggle (Toggle or Button)",
             "itemtype": "property",
             "name": "toggle",
@@ -6032,7 +6049,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 244,
+            "line": 255,
             "description": "The DOM element of the `.dropdown-menu` element",
             "type": "object",
             "readonly": "",
@@ -6043,7 +6060,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 254,
+            "line": 265,
             "description": "Action is called when dropdown is about to be shown",
             "itemtype": "event",
             "name": "onShow",
@@ -6061,7 +6078,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 263,
+            "line": 274,
             "description": "Action is called when dropdown is about to be hidden",
             "itemtype": "event",
             "name": "onHide",
@@ -6079,7 +6096,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 314,
+            "line": 304,
             "description": "Handler for click events to close the dropdown",
             "itemtype": "method",
             "name": "closeOnClickHandler",
@@ -6096,7 +6113,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 332,
+            "line": 377,
             "itemtype": "property",
             "name": "buttonComponent",
             "type": "{String}",
@@ -6107,7 +6124,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 339,
+            "line": 384,
             "itemtype": "property",
             "name": "toggleComponent",
             "type": "{String}",
@@ -6118,7 +6135,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown.js",
-            "line": 346,
+            "line": 391,
             "itemtype": "property",
             "name": "menuComponent",
             "type": "{String}",
@@ -6673,6 +6690,19 @@
         {
             "file": "addon/components/base/bs-modal.js",
             "line": 189,
+            "description": "[BS4 only!] Allows scrolling within the modal body\n'true' will apply the `modal-dialog-scrollable` class",
+            "itemtype": "property",
+            "name": "scrollable",
+            "type": "boolean",
+            "default": "false",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.Modal",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-modal.js",
+            "line": 201,
             "itemtype": "property",
             "name": "dialogComponent",
             "type": "{String}",
@@ -6683,7 +6713,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 197,
+            "line": 209,
             "itemtype": "property",
             "name": "headerComponent",
             "type": "{String}",
@@ -6694,7 +6724,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 205,
+            "line": 217,
             "itemtype": "property",
             "name": "bodyComponent",
             "type": "{String}",
@@ -6705,7 +6735,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 213,
+            "line": 225,
             "itemtype": "property",
             "name": "footerComponent",
             "type": "{String}",
@@ -6716,7 +6746,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 221,
+            "line": 233,
             "description": "The id of the `.modal` element.",
             "itemtype": "property",
             "name": "modalId",
@@ -6729,7 +6759,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 234,
+            "line": 246,
             "description": "The id of the backdrop element.",
             "itemtype": "property",
             "name": "backdropId",
@@ -6742,7 +6772,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 247,
+            "line": 259,
             "description": "Property for size styling, set to null (default), 'lg' or 'sm'\n\nAlso see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)",
             "itemtype": "property",
             "name": "size",
@@ -6754,7 +6784,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 259,
+            "line": 271,
             "description": "If true clicking on the backdrop will close the modal.",
             "itemtype": "property",
             "name": "backdropClose",
@@ -6767,7 +6797,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 270,
+            "line": 282,
             "description": "If true component will render in place, rather than be wormholed.",
             "itemtype": "property",
             "name": "renderInPlace",
@@ -6780,7 +6810,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 281,
+            "line": 293,
             "itemtype": "property",
             "name": "_renderInPlace",
             "type": "boolean",
@@ -6791,7 +6821,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 291,
+            "line": 303,
             "description": "The duration of the fade transition",
             "itemtype": "property",
             "name": "transitionDuration",
@@ -6804,7 +6834,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 302,
+            "line": 314,
             "description": "The duration of the backdrop fade transition",
             "itemtype": "property",
             "name": "backdropTransitionDuration",
@@ -6817,7 +6847,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 313,
+            "line": 325,
             "description": "Use CSS transitions?",
             "itemtype": "property",
             "name": "usesTransition",
@@ -6830,7 +6860,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 324,
+            "line": 336,
             "description": "The DOM element of the `.modal` element.",
             "itemtype": "property",
             "name": "modalElement",
@@ -6843,7 +6873,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 336,
+            "line": 348,
             "description": "The DOM element of the backdrop element.",
             "itemtype": "property",
             "name": "backdropElement",
@@ -6856,7 +6886,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 348,
+            "line": 360,
             "description": "The action to be sent when the modal footer's submit button (if present) is pressed.\nNote that if your modal body contains a form (e.g. [Components.Form](Components.Form.html)) this action will\nnot be triggered. Instead a submit event will be triggered on the form itself. See the class description for an\nexample.",
             "itemtype": "property",
             "name": "onSubmit",
@@ -6868,7 +6898,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 361,
+            "line": 373,
             "description": "The action to be sent when the modal is closing.\nThis will be triggered by pressing the modal header's close button (x button) or the modal footer's close button.\nNote that this will happen before the modal is hidden from the DOM, as the fade transitions will still need some\ntime to finish. Use the `onHidden` if you need the modal to be hidden when the action triggers.\n\nYou can return false to prevent closing the modal automatically, and do that in your action by\nsetting `open` to false.",
             "itemtype": "property",
             "name": "onHide",
@@ -6880,7 +6910,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 377,
+            "line": 389,
             "description": "The action to be sent after the modal has been completely hidden (including the CSS transition).",
             "itemtype": "property",
             "name": "onHidden",
@@ -6893,7 +6923,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 388,
+            "line": 400,
             "description": "The action to be sent when the modal is opening.\nThis will be triggered immediately after the modal is shown (so it's safe to access the DOM for\nsize calculations and the like). This means that if fade=true, it will be shown in between the\nbackdrop animation and the fade animation.",
             "itemtype": "property",
             "name": "onShow",
@@ -6906,7 +6936,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 402,
+            "line": 414,
             "description": "The action to be sent after the modal has been completely shown (including the CSS transition).",
             "itemtype": "property",
             "name": "onShown",
@@ -6918,18 +6948,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 435,
-            "description": "Give the modal (or its autofocus element) focus",
-            "itemtype": "method",
-            "name": "takeFocus",
-            "access": "private",
-            "tagname": "",
-            "class": "Components.Modal",
-            "namespace": "Components"
-        },
-        {
-            "file": "addon/components/base/bs-modal.js",
-            "line": 452,
+            "line": 447,
             "description": "Show the modal",
             "itemtype": "method",
             "name": "show",
@@ -6940,7 +6959,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 505,
+            "line": 498,
             "description": "Hide the modal",
             "itemtype": "method",
             "name": "hide",
@@ -6951,7 +6970,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 528,
+            "line": 521,
             "description": "Clean up after modal is hidden and call onHidden",
             "itemtype": "method",
             "name": "hideModal",
@@ -6962,7 +6981,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 548,
+            "line": 541,
             "description": "SHow/hide the backdrop",
             "itemtype": "method",
             "name": "handleBackdrop",
@@ -6979,7 +6998,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 600,
+            "line": 593,
             "description": "Attach/Detach resize event listeners",
             "itemtype": "method",
             "name": "resize",
@@ -6990,7 +7009,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 615,
+            "line": 608,
             "itemtype": "method",
             "name": "handleUpdate",
             "access": "private",
@@ -7000,7 +7019,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 623,
+            "line": 616,
             "itemtype": "method",
             "name": "adjustDialog",
             "access": "private",
@@ -7010,7 +7029,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 635,
+            "line": 628,
             "itemtype": "method",
             "name": "resetAdjustments",
             "access": "private",
@@ -7020,7 +7039,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 646,
+            "line": 639,
             "itemtype": "method",
             "name": "checkScrollbar",
             "access": "private",
@@ -7030,7 +7049,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 660,
+            "line": 653,
             "itemtype": "method",
             "name": "setScrollbar",
             "access": "private",
@@ -7040,7 +7059,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 672,
+            "line": 665,
             "itemtype": "method",
             "name": "resetScrollbar",
             "access": "private",
@@ -7050,7 +7069,7 @@
         },
         {
             "file": "addon/components/base/bs-modal.js",
-            "line": 680,
+            "line": 673,
             "itemtype": "property",
             "name": "scrollbarWidth",
             "type": "number",
@@ -7643,11 +7662,11 @@
         },
         {
             "message": "Missing item type\nInitial page loading configuration.",
-            "line": " addon/components/base/bs-carousel.js:540"
+            "line": " addon/components/base/bs-carousel.js:550"
         },
         {
             "message": "Missing item type\nThe DOM element of the `.dropdown-menu` element",
-            "line": " addon/components/base/bs-dropdown.js:244"
+            "line": " addon/components/base/bs-dropdown.js:255"
         }
     ]
 }
