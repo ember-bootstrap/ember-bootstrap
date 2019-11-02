@@ -9,7 +9,7 @@
 {{else}}
   {{#let (component this.navComponent) as |NavComponent|}}
 
-    <NavComponent @type={{this.type}} as |Nav|>
+    <NavComponent @type={{this.type}} role="tablist" as |Nav|>
       {{#each this.navItems as |item|}}
         {{#if item.isGroup}}
           <Nav.dropdown class={{if (bs-contains item.childIds this.isActiveId) "active"}} as |DD|>
