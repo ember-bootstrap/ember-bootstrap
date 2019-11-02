@@ -445,23 +445,6 @@ export default class Modal extends Component {
   }
 
   /**
-   * Give the modal (or its autofocus element) focus
-   *
-   * @method takeFocus
-   * @private
-   */
-  takeFocus() {
-    let modalEl = this.get('modalElement');
-    let focusElement = modalEl && modalEl.querySelector('[autofocus]');
-    if (!focusElement) {
-      focusElement = modalEl;
-    }
-    if (focusElement) {
-      focusElement.focus();
-    }
-  }
-
-  /**
    * Show the modal
    *
    * @method show
@@ -499,11 +482,9 @@ export default class Modal extends Component {
         if (this.get('usesTransition')) {
           transitionEnd(this.get('modalElement'), this.get('transitionDuration'))
             .then(() => {
-              this.takeFocus();
               this.get('onShown')();
             });
         } else {
-          this.takeFocus();
           this.get('onShown')();
         }
       });

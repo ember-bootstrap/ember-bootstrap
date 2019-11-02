@@ -4,7 +4,7 @@ import {
   classNames,
   layout as templateLayout
 } from '@ember-decorators/component';
-import { computed } from '@ember/object';
+import { action, computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
 import Component from '@ember/component';
@@ -182,6 +182,11 @@ export default class ModalDialog extends Component {
     this.element.style.display = inDom ? 'block' : '';
     this.element.style.paddingLeft = paddingLeft || '';
     this.element.style.paddingRight = paddingRight || '';
+  }
+
+  @action
+  initialFocus() {
+    return this.element.querySelector('[autofocus]') || this.element;
   }
 
   /**

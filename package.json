@@ -107,6 +107,7 @@
     "ember-concurrency": "^1.0.0",
     "ember-decorators": "^6.1.0",
     "ember-decorators-polyfill": "^1.0.6",
+    "ember-focus-trap": "^0.3.2",
     "ember-let-polyfill": "^0.1.0",
     "ember-maybe-in-element": "^0.4.0",
     "ember-named-arguments-polyfill": "^1.0.0",
