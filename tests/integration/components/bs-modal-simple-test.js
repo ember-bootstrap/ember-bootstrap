@@ -270,7 +270,6 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(
       hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" onSubmit=(action "testAction") as |modal|}}Hello world!{{/bs-modal-simple}}`
     );
-    await settled();
     await click('.modal .modal-footer button.btn-primary');
     assert.ok(submitSpy.calledOnce);
   });
@@ -283,7 +282,6 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(
       hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" onSubmit=(action "modalSubmit") as |modal|}}{{#bs-form onSubmit=(action "formSubmit")}}{{/bs-form}}{{/bs-modal-simple}}`
     );
-    await settled();
     await click('.modal .modal-footer button.btn-primary');
     assert.ok(formSpy.calledOnce);
     assert.notOk(modalSpy.called);
@@ -299,7 +297,6 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(
       hbs`{{#bs-modal-simple title="Simple Dialog" closeTitle="Cancel" submitTitle="Ok" onSubmit=(action "modalSubmit") as |modal|}}{{#bs-form onSubmit=(action "formOneSubmit")}}{{/bs-form}}{{#bs-form onSubmit=(action "formTwoSubmit")}}{{/bs-form}}{{/bs-modal-simple}}`
     );
-    await settled();
     await click('.modal .modal-footer button.btn-primary');
     assert.ok(formOneSpy.calledOnce);
     assert.ok(formTwoSpy.calledOnce);
@@ -313,7 +310,6 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
         <input data-test-autofocus autofocus="autofocus" />
       {{/bs-modal-simple}}
     `);
-    await settled();
 
     this.set('open', true);
     await settled();
@@ -329,7 +325,6 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
         <a href="#" data-test-link>Link</a>
       {{/bs-modal-simple}}
     `);
-    await settled();
 
     await triggerKeyEvent(document, 'keyup', 9); // tab
     assert.dom('.close').isFocused();
@@ -355,7 +350,6 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
         Hallo
       {{/bs-modal-simple}}
     `);
-    await settled();
     await focus('[data-test-button]');
 
     this.set('open', true);
@@ -374,7 +368,6 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(
       hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=true}}Hello world!{{/bs-modal-simple}}`
     );
-    await settled();
 
     // wait for fade animation
     await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
@@ -388,8 +381,6 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     assert.ok(action.calledOnce, 'Action has been called.');
   });
 
-
-
   testRequiringFocus('Pressing escape key will close the modal if keyboard=true and element is autofocused', async function(assert) {
     let action = this.spy();
     this.actions.testAction = action;
@@ -399,7 +390,6 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
       {{/bs-modal-simple}}
 
     `);
-    await settled();
 
     // wait for fade animation
     await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
@@ -419,7 +409,6 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(
       hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction") keyboard=false}}Hello world!{{/bs-modal-simple}}`
     );
-    await settled();
 
     // wait for fade animation
     await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
@@ -436,7 +425,6 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     await render(
       hbs`{{#bs-modal-simple title="Simple Dialog" onHide=(action "testAction")}}Hello world!{{/bs-modal-simple}}`
     );
-    await settled();
 
     // wait for fade animation
     await waitUntil(() => this.element.querySelector('.modal').classList.contains(visibilityClass()));
