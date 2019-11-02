@@ -61,7 +61,7 @@ module.exports = {
     this.app = app;
 
     let options = Object.assign({}, defaultOptions, app.options['ember-bootstrap']);
-    if (options.bootstrapVersion === 4 && app.options['ember-bootstrap'].importBootstrapFont) {
+    if (options.bootstrapVersion === 4 && options.importBootstrapFont) {
       this.warn(
         'Inclusion of the Glyphicon font is only supported for Bootstrap 3. ' +
         'Set Ember Bootstrap\'s `importBootstrapFont` option to `false` to hide this warning.'
@@ -241,11 +241,11 @@ module.exports = {
     tree = mv(tree, `${templatePath}common/`, templatePath);
     tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
     tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
-    
+
     tree = this.debugTree(tree, 'addon-tree:bootstrap-version');
     tree = this.filterComponents(tree);
     tree = this.debugTree(tree, 'addon-tree:tree-shaken');
-  
+
     return this._super.treeForAddon.call(this, tree);
   },
 
