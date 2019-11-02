@@ -474,7 +474,11 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('it passes accessibility checks', async function (assert) {
-    await render(hbs`<button>Test<BsTooltip @title="Dummy" @visible={{true}}/></button>`);
+    await render(hbs`
+    <button>
+      Test
+      <BsTooltip @title="Dummy" @visible={{true}} />
+    </button>`);
 
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');
