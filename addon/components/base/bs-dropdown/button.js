@@ -16,6 +16,10 @@ import { computed } from '@ember/object';
 @classNames('dropdown-toggle')
 @attributeBindings('aria-expanded')
 export default class DropdownButton extends Button {
+  keyDown(e) {
+    this.get('onKeyDown')(e);
+  }
+
   @computed('isOpen')
   get 'aria-expanded'() {
     return this.isOpen ? 'true' : 'false';

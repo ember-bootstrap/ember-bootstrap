@@ -1,7 +1,7 @@
 {{yield
   (hash
-    button=(component this.buttonComponent dropdown=this isOpen=this.isOpen onClick=this.toggleDropdown)
-    toggle=(component this.toggleComponent dropdown=this isOpen=this.isOpen inNav=inNav onClick=this.toggleDropdown)
+    button=(component this.buttonComponent dropdown=this isOpen=this.isOpen onClick=this.toggleDropdown onKeyDown=this.handleKeyEvent)
+    toggle=(component this.toggleComponent dropdown=this isOpen=this.isOpen inNav=inNav onClick=this.toggleDropdown onKeyDown=this.handleKeyEvent)
     menu=(component this.menuComponent
       isOpen=this.isOpen
       direction=this.direction
@@ -15,3 +15,8 @@
     isOpen=this.isOpen
   )
 }}
+{{#if this.isOpen}}
+  {{on-document "keydown" this.handleKeyEvent}}
+  {{on-document "click" this.closeHandler capture=true}}
+  {{on-document "keyup" this.closeHandler}}
+{{/if}}

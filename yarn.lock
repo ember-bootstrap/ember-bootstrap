@@ -5434,6 +5434,13 @@ ember-named-arguments-polyfill@^1.0.0:
     ember-cli-babel "^6.6.0"
     ember-cli-version-checker "^2.1.2"
 
+ember-on-helper@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/ember-on-helper/-/ember-on-helper-0.1.0.tgz#c8b1fef9173fc8546c4933b57ecd7ffbcebad99e"
+  integrity sha512-jjafBnWfoA4VSSje476ft5G+urlvvuSDddwAJjKDCjKY9mbe3hAEsJiMBAaPObJRMm1FOglCuKjQZfwDDls6MQ==
+  dependencies:
+    ember-cli-babel "^7.7.3"
+
 ember-popper@^0.10.3:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/ember-popper/-/ember-popper-0.10.3.tgz#222ecce35a6777364bec7ec293437f27a28713a1"
