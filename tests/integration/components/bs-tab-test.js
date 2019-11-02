@@ -87,9 +87,7 @@ module('Integration | Component | bs-tab', function(hooks) {
     assert.dom('ul.nav.nav-tabs > li:nth-child(2) > a').hasText('Tab 2', 'navigation item shows pane title');
   });
 
-  test('tab navigation items does not have aria role presentation', async function(assert) {
-    // Should not have role="presentation" even so Bootstrap 3 docs have it.
-    // This was discussed at https://github.com/kaliber5/ember-bootstrap/pull/782.
+  test('tabs have proper aria roles', async function(assert) {
     await render(hbs`
       {{#bs-tab as |tab|}}
         {{#tab.pane title="Tab 1"}}
@@ -98,7 +96,12 @@ module('Integration | Component | bs-tab', function(hooks) {
       {{/bs-tab}}
     `);
 
+    assert.dom('ul.nav.nav-tabs').hasAttribute('role', 'tablist');
+    // Should not have role="presentation" even so Bootstrap 3 docs have it.
+    // This was discussed at https://github.com/kaliber5/ember-bootstrap/pull/782.
     assert.dom('ul.nav.nav-tabs > li').doesNotHaveAttribute('role');
+    assert.dom('ul.nav.nav-tabs > li > a').hasAttribute('role', 'tab');
+    assert.dom('.tab-pane').hasAttribute('role', 'tabpanel');
   });
 
   test('first tab is active by default', async function(assert) {
