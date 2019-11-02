@@ -19,6 +19,7 @@ import { defer } from 'rsvp';
 import { next, run } from '@ember/runloop';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import RSVP from 'rsvp';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 /* global Ember */
 
 const nextRunloop = function() {
@@ -899,5 +900,17 @@ module('Integration | Component | bs-form', function(hooks) {
     );
 
     assert.dom('.form-group input').hasAttribute('readonly');
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(
+      hbs`
+        {{#bs-form model=this as |form|}}
+          {{form.element property="dummy" label="Dummy"}}
+        {{/bs-form}}`
+    );
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });

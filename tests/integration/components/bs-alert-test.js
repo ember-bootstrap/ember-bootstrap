@@ -4,6 +4,7 @@ import { render, click, waitFor } from '@ember/test-helpers';
 import { test, testRequiringTransitions } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-alert', function(hooks) {
   setupRenderingTest(hooks);
@@ -109,5 +110,12 @@ module('Integration | Component | bs-alert', function(hooks) {
     await click('button.close');
 
     assert.equal(this.get('visible'), true, 'Does not modify visible property');
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(hbs`{{#bs-alert type="success"}}Test{{/bs-alert}}`);
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });

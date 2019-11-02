@@ -6,6 +6,7 @@ import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import { testBS3 } from '../../helpers/bootstrap-test';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-button-group', function(hooks) {
   setupRenderingTest(hooks);
@@ -165,5 +166,14 @@ module('Integration | Component | bs-button-group', function(hooks) {
 
     await click('button:nth-child(3)');
     assert.equal(this.get('value'), value, 'Does not change value property');
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(
+      hbs`{{#bs-button-group as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
+    );
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });

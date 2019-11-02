@@ -11,6 +11,7 @@ import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
 import { isFirefox } from '../../helpers/user-agent';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-popover', function(hooks) {
   setupRenderingTest(hooks);
@@ -233,5 +234,18 @@ module('Integration | Component | bs-popover', function(hooks) {
     await settled();
 
     assert.dom('#wrapper .popover').exists({ count: 1 }, 'Popover exists in place.');
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(hbs`
+      <button>Test
+        <BsPopover @title="dummy title" @visible={{true}}>
+          template block text
+        </BsPopover>
+      </button>
+    `);
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });

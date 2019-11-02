@@ -6,6 +6,7 @@ import { render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { test, visibilityClass } from '../../helpers/bootstrap-test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-collapse', function(hooks) {
   setupRenderingTest(hooks);
@@ -71,5 +72,12 @@ module('Integration | Component | bs-collapse', function(hooks) {
     assert.ok(hiddenAction.calledOnce, 'onHidden action has been called');
     assert.dom('.collapse').exists('collapse has collapse class');
     assert.dom('.collapse').hasNoClass('in', 'collapse does not have in class');
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(hbs`<button>Test</button>{{#bs-collapse}}<p>Just some content</p>{{/bs-collapse}}`);
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });

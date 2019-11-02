@@ -5,6 +5,7 @@ import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-progress', function(hooks) {
   setupRenderingTest(hooks);
@@ -184,5 +185,17 @@ module('Integration | Component | bs-progress', function(hooks) {
 
     assert.dom('.progress-bar').exists({ count: 2 }, 'Progress bar has two bars');
 
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(hbs`
+      <BsProgress as |p|>
+        <p.bar @value={{5}} @maxValue={{10}} />
+      </BsProgress>
+      <button>Test</button>
+    `);
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });

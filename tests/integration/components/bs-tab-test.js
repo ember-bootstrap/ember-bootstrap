@@ -4,6 +4,7 @@ import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import test from 'ember-sinon-qunit/test-support/test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-tab', function(hooks) {
   setupRenderingTest(hooks);
@@ -263,5 +264,29 @@ module('Integration | Component | bs-tab', function(hooks) {
     `);
     await click('ul.nav.nav-tabs li:nth-child(2) a');
     assert.equal(this.get('paneId'), 'pane1', 'Does not modify public activeId property');
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(hbs`
+      {{#bs-tab as |tab|}}
+        {{#tab.pane title="Tab 1"}}
+          tabcontent 1
+        {{/tab.pane}}
+        {{#tab.pane title="Tab 2"}}
+          tabcontent 2
+        {{/tab.pane}}
+      {{/bs-tab}}
+    `);
+
+    await a11yAudit({
+      rules: {
+        // the component generates the markup as seen in the Bootstrap example: https://getbootstrap.com/docs/4.3/components/navs/#javascript-behavior
+        // however aXe seems to not like having <li>s in a <ul> with a role of tablist
+        // disabling the rule for now, but may be revisited!
+        listitem: { enabled: false },
+        'color-contrast': { enabled: false }
+      }
+    });
+    assert.ok(true, 'A11y audit passed');
   });
 });

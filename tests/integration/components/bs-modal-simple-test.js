@@ -12,6 +12,7 @@ import {
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-modal-simple', function(hooks) {
   setupRenderingTest(hooks);
@@ -590,5 +591,16 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
   testBS4('modal can be set to scrollable', async function(assert) {
     await render(hbs`{{#bs-modal-simple title="Simple Dialog" fade=false scrollable=true}}Hello world!{{/bs-modal-simple}}`);
     assert.dom('.modal-dialog').hasClass('modal-dialog-scrollable');
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(hbs`
+      <BsModalSimple @title="Some Title">
+        template block text
+      </BsModalSimple>
+    `);
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });

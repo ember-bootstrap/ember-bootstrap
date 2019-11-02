@@ -11,6 +11,7 @@ import {
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-dropdown', function(hooks) {
   setupRenderingTest(hooks);
@@ -504,5 +505,20 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
       assert.dom('#item1').isFocused();
     });
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(
+      hbs`
+        <BsDropdown as |dd|>
+          <dd.toggle>Dropdown</dd.toggle>
+          <dd.menu as |menu|>
+            <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
+          </dd.menu>
+        </BsDropdown>
+      `);
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });
