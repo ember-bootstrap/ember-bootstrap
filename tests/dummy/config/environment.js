@@ -59,7 +59,20 @@ module.exports = function(environment) {
     },
 
     bootstrapVersion: process.env.BOOTSTRAPVERSION || 4,
-    failOnDeprecation: !!process.env.FAIL_ON_DEPRECATION
+    failOnDeprecation: !!process.env.FAIL_ON_DEPRECATION,
+
+    'ember-a11y-testing': {
+      componentOptions: {
+        turnAuditOff: true,
+        axeOptions: {
+          checks: {
+            // color checks unfortunately fail for custom colors defined in dummy app, but are controlled at the end by
+            // the user, so not a primary concern of the addon
+            'color-contrast': { enabled: false }
+          }
+        }
+      }
+    }
   };
 
   if (environment === 'development') {

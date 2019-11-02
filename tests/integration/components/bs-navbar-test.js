@@ -11,6 +11,7 @@ import {
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-navbar', function(hooks) {
   setupRenderingTest(hooks);
@@ -415,5 +416,24 @@ module('Integration | Component | bs-navbar', function(hooks) {
     await click('#link');
 
     assert.ok(collapseAction.calledOnce, 'onCollapse action has been called');
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(hbs`
+      {{#bs-navbar as |navbar|}}
+        <div class="navbar-header">
+          {{navbar.toggle}}
+          <a class="navbar-brand" href="#">Brand</a>
+        </div>
+        {{#navbar.content}}
+          {{#navbar.nav as |nav|}}
+            {{#nav.item}}{{#nav.link-to "index"}}Home{{/nav.link-to}}{{/nav.item}}
+          {{/navbar.nav}}
+        {{/navbar.content}}
+      {{/bs-navbar}}
+    `);
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });

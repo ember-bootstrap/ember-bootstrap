@@ -4,6 +4,7 @@ import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import test from 'ember-sinon-qunit/test-support/test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-tab', function(hooks) {
   setupRenderingTest(hooks);
@@ -263,5 +264,21 @@ module('Integration | Component | bs-tab', function(hooks) {
     `);
     await click('ul.nav.nav-tabs li:nth-child(2) a');
     assert.equal(this.get('paneId'), 'pane1', 'Does not modify public activeId property');
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(hbs`
+      {{#bs-tab as |tab|}}
+        {{#tab.pane title="Tab 1"}}
+          tabcontent 1
+        {{/tab.pane}}
+        {{#tab.pane title="Tab 2"}}
+          tabcontent 2
+        {{/tab.pane}}
+      {{/bs-tab}}
+    `);
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });

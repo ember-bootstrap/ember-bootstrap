@@ -4,6 +4,7 @@ import { render } from '@ember/test-helpers';
 import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-nav', function(hooks) {
   setupRenderingTest(hooks);
@@ -68,5 +69,27 @@ module('Integration | Component | bs-nav', function(hooks) {
     assert.dom('.nav > li').exists({ count: 3 }, 'it has the nav item');
     assert.dom('.nav > li > a[href="/"]').exists({ count: 2 }, 'it has the nav link');
     assert.dom('.nav > li.dropdown').exists({ count: 1 }, 'it has a dropdown as a nav item');
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(hbs`
+      {{#bs-nav as |nav|}}
+        {{#nav.item}}
+          {{#nav.link-to "application"}}Dummy{{/nav.link-to}}
+        {{/nav.item}}
+        {{#nav.item}}
+          {{#nav.linkTo "application"}}Dummy{{/nav.linkTo}}
+        {{/nav.item}}
+        {{#nav.dropdown as |dd|}}
+          {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
+          {{#dd.menu as |ddm|}}
+            {{#ddm.item}}{{#ddm.link-to "index"}}Home{{/ddm.link-to}}{{/ddm.item}}
+          {{/dd.menu}}
+        {{/nav.dropdown}}
+      {{/bs-nav}}
+    `);
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });

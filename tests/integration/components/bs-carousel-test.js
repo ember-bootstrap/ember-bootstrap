@@ -5,6 +5,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { test, testBS3, testBS4, delay } from '../../helpers/bootstrap-test';
 import { skip } from 'qunit';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 const TRANSITION_DURATION = 50;
 
@@ -238,5 +239,15 @@ module('Integration | Component | bs-carousel', function(hooks) {
     await clickIndicator(2);
     assert.dom('.carousel-indicators > li:nth-child(2).active').exists('indicators changes indicator index');
     assert.ok(getActivatedSlide(2), 'indicators changes slide index');
+  });
+
+  // Default carousel markup has a11y issues (buttons w/o content)
+  // Quote from https://getbootstrap.com/docs/4.0/components/carousel/:
+  // carousels are generally not compliant with accessibility standards.
+  skip('it passes accessibility checks', async function (assert) {
+    await render(hbs`{{#bs-carousel interval=0 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });

@@ -20,6 +20,7 @@ import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
 import { isFirefox } from '../../helpers/user-agent';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-tooltip', function(hooks) {
   setupRenderingTest(hooks);
@@ -470,5 +471,12 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     assert.dom('.tooltip').hasClass('wide');
     assert.dom('.tooltip').hasAttribute('role', 'foo');
     assert.dom('.tooltip').hasAttribute('data-test');
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(hbs`<button>Test<BsTooltip @title="Dummy" @visible={{true}}/></button>`);
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });

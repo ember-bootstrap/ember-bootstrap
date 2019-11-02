@@ -13,6 +13,7 @@ import {
   visibilityClass
 } from '../../helpers/bootstrap-test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import a11yAudit from 'ember-a11y-testing/test-support/audit'
 
 module('Integration | Component | bs-accordion', function(hooks) {
   setupRenderingTest(hooks);
@@ -191,5 +192,15 @@ module('Integration | Component | bs-accordion', function(hooks) {
     assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasClass('collapsed', `${accordionItemHeadClass()} has collapsed class`);
     assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasNoClass(visibilityClass(), 'tabpanel is hidden');
+  });
+
+  test('it passes accessibility checks', async function (assert) {
+    await render(hbs`{{#bs-accordion as |acc|}}
+      {{#acc.item value=1 title="TITLE1"}}CONTENT1{{/acc.item}}
+      {{#acc.item value=2 title="TITLE2"}}CONTENT2{{/acc.item}}
+    {{/bs-accordion}}`);
+
+    await a11yAudit();
+    assert.ok(true, 'A11y audit passed');
   });
 });
