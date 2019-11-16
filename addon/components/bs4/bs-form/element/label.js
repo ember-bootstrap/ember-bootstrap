@@ -1,5 +1,6 @@
 import { attributeBindings, classNameBindings, tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
 import BaseFormElementLabel from 'ember-bootstrap/components/base/bs-form/element/label';
 import { isBlank } from '@ember/utils';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
@@ -12,7 +13,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   'labelClass',
   'sizeClass'
 )
-@attributeBindings('formElementId:for')
+@attributeBindings('forAttribute:for')
 export default class FormElementLabel extends BaseFormElementLabel {
   @computed('isHorizontal', 'isCheckbox')
   get isHorizontalAndNotCheckbox() {
@@ -27,6 +28,8 @@ export default class FormElementLabel extends BaseFormElementLabel {
     let size = this.get('size');
     return isBlank(size) ? null : `col-form-label-${size}`;
   }
+
+  @readOnly('formElementId') forAttribute;
 
   /**
    * Property for size styling, set to 'lg', 'sm'
