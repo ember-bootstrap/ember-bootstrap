@@ -10,6 +10,7 @@ import { observes } from '@ember-decorators/object';
 import { computed } from '@ember/object';
 import { equal, or } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
+import { deprecate } from '@ember/debug';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-button';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
@@ -148,6 +149,7 @@ export default class Button extends Component {
    * @property disabled
    * @type ?boolean
    * @default null
+   * @deprecated
    * @public
    */
   @defaultValue
@@ -168,6 +170,7 @@ export default class Button extends Component {
    * @property buttonType
    * @type String
    * @default 'button'
+   * @deprecated
    * @public
    */
   @defaultValue
@@ -374,6 +377,7 @@ export default class Button extends Component {
    *
    * @property title
    * @type string
+   * @deprecated
    * @public
    */
   @defaultValue
@@ -448,5 +452,38 @@ export default class Button extends Component {
     }
 
     return this.get('bubble');
+  }
+
+  init() {
+    super.init(...arguments);
+
+    // deprecate arguments used for attribute bindings only
+    [
+      ['buttonType:type', 'submit'],
+      ['title', 'foo'],
+      ['disabled', true],
+    ].forEach(([mapping, value]) => {
+      let argument = mapping.split(':')[0];
+      let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
+      let deprecationMessage =
+        `Argument ${argument} of <BsButton> component is deprecated. It's only purpose ` +
+        `was setting the HTML attribute ${attribute} of the control element. You should use ` +
+        `angle bracket  component invocation syntax instead:\n` +
+        `Before:\n` +
+        `  {{bs-button ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
+        `  <BsButton @${attribute}=${typeof value === 'string' ? `"${value}"`: `{{${value}}}`} />\n` +
+        `After:\n` +
+        `  <BsButton ${typeof value === 'boolean' ? ( value ? attribute : '' ) : `${attribute}="${value}"`} />`;
+
+      deprecate(
+        deprecationMessage,
+        // eslint-disable-next-line ember/no-attrs-in-components
+        !Object.keys(this.attrs).includes(argument),
+        {
+          id: `ember-bootstrap.deprecated-argument.button#${argument}`,
+          until: '4.0.0',
+        }
+      );
+    });
   }
 }

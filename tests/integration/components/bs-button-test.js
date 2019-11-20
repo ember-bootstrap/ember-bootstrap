@@ -58,6 +58,9 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.equal(this.element.querySelector('button').getAttribute('id'), 'test');
     assert.equal(this.element.querySelector('button').getAttribute('disabled'), '');
     assert.equal(this.element.querySelector('button').getAttribute('title'), 'title');
+
+    assert.deprecationsInclude('Argument title of <BsButton> component is deprecated.');
+    assert.deprecationsInclude('Argument disabled of <BsButton> component is deprecated.');
   });
 
   test('button has default label', async function(assert) {
@@ -72,7 +75,9 @@ module('Integration | Component | bs-button', function(hooks) {
 
   test('buttonType property allows changing button type', async function(assert) {
     await render(hbs`{{bs-button buttonType="submit"}}`);
-    assert.equal(this.element.querySelector('button').type, 'submit');
+
+    assert.dom('button').hasAttribute('type', 'submit');
+    assert.deprecationsInclude('Argument buttonType of <BsButton> component is deprecated.');
   });
 
   test('button with icon property shows icon', async function(assert) {
