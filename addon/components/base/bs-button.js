@@ -149,7 +149,6 @@ export default class Button extends Component {
    * @property disabled
    * @type ?boolean
    * @default null
-   * @deprecated
    * @public
    */
   @defaultValue
@@ -461,7 +460,6 @@ export default class Button extends Component {
     [
       ['buttonType:type', 'submit'],
       ['title', 'foo'],
-      ['disabled', true],
     ].forEach(([mapping, value]) => {
       let argument = mapping.split(':')[0];
       let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
@@ -470,10 +468,10 @@ export default class Button extends Component {
         `was setting the HTML attribute ${attribute} of the control element. You should use ` +
         `angle bracket  component invocation syntax instead:\n` +
         `Before:\n` +
-        `  {{bs-button ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
-        `  <BsButton @${attribute}=${typeof value === 'string' ? `"${value}"`: `{{${value}}}`} />\n` +
+        `  {{bs-button ${attribute}="${value}"}}\n` +
+        `  <BsButton @${attribute}="${value}" />\n` +
         `After:\n` +
-        `  <BsButton ${typeof value === 'boolean' ? ( value ? attribute : '' ) : `${attribute}="${value}"`} />`;
+        `  <BsButton ${attribute}="${value}" />`;
 
       deprecate(
         deprecationMessage,

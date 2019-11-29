@@ -60,7 +60,6 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.equal(this.element.querySelector('button').getAttribute('title'), 'title');
 
     assert.deprecationsInclude('Argument title of <BsButton> component is deprecated.');
-    assert.deprecationsInclude('Argument disabled of <BsButton> component is deprecated.');
   });
 
   test('button has default label', async function(assert) {
@@ -244,22 +243,6 @@ module('Integration | Component | bs-button', function(hooks) {
     });
 
     await render(hbs`<BsButton @disabled={{false}} @onClick={{clickAction}} />`);
-    await click('button');
-    assert.dom('button').isNotDisabled();
-
-    deferredClickAction.resolve();
-    await settled();
-
-    assert.deprecationsInclude('Argument disabled of <BsButton> component is deprecated.');
-  });
-
-  test('setting disabled attribute to false prevents button from being disabled while in pending state', async function(assert) {
-    let deferredClickAction = defer();
-    this.set('clickAction', () => {
-      return deferredClickAction.promise;
-    });
-
-    await render(hbs`<BsButton @onClick={{clickAction}} disabled={{false}} />`);
     await click('button');
     assert.dom('button').isNotDisabled();
 
