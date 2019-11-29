@@ -88,6 +88,9 @@ const supportedRadioAttributes = {
   form: 'dummy',
   title: 'dummy'
 };
+const deprecatedAttributeBindings = Object.keys(supportedInputAttributes).filter((attr) => {
+  return !['disabled'].includes(attr);
+});
 
 module('Integration | Component | bs-form/element', function(hooks) {
   setupRenderingTest(hooks);
@@ -517,6 +520,11 @@ module('Integration | Component | bs-form/element', function(hooks) {
         } else {
           assert.equal(this.element.querySelector('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
         }
+
+        if (deprecatedAttributeBindings.includes(attribute)) {
+          let argument = attribute === 'size' ? 'controlSize' : attribute;
+          assert.deprecationsInclude(`Argument ${argument} of <element> component yielded by <BsForm> is deprecated.`);
+        }
       }
       await render(hbs``); // hack to prevent browser exception when setting size to undefined
     }
@@ -614,6 +622,10 @@ module('Integration | Component | bs-form/element', function(hooks) {
         } else {
           assert.equal(this.element.querySelector('textarea').getAttribute(attribute), value, `textarea attribute ${attribute} is ${value} [${formLayout}]`);
         }
+
+        if (deprecatedAttributeBindings.includes(attribute)) {
+          assert.deprecationsInclude(`Argument ${attribute} of <element> component yielded by <BsForm> is deprecated.`);
+        }
       }
 
       // Without this MSEdge will fail with an invalid argument exception in Glimmer!??
@@ -698,6 +710,10 @@ module('Integration | Component | bs-form/element', function(hooks) {
         } else {
           assert.equal(this.element.querySelector('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
         }
+
+        if (deprecatedAttributeBindings.includes(attribute)) {
+          assert.deprecationsInclude(`Argument ${attribute} of <element> component yielded by <BsForm> is deprecated.`);
+        }
       }
     }
   });
@@ -765,6 +781,10 @@ module('Integration | Component | bs-form/element', function(hooks) {
           assert.ok(this.element.querySelector('input').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
         } else {
           assert.equal(this.element.querySelector('input').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
+        }
+
+        if (deprecatedAttributeBindings.includes(attribute)) {
+          assert.deprecationsInclude(`Argument ${attribute} of <element> component yielded by <BsForm> is deprecated.`);
         }
       }
     }
