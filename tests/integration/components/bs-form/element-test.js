@@ -88,8 +88,13 @@ const supportedRadioAttributes = {
   form: 'dummy',
   title: 'dummy'
 };
-const deprecatedAttributeBindings = Object.keys(supportedInputAttributes).filter((attr) => {
-  return !['disabled'].includes(attr);
+const deprecatedAttributeBindings = [].concat(
+  Object.keys(supportedInputAttributes),
+  Object.keys(supportedTextareaAttributes),
+  Object.keys(supportedCheckboxAttributes),
+  Object.keys(supportedRadioAttributes),
+).filter((attr) => {
+  return !['disabled', 'readonly', 'required'].includes(attr);
 });
 
 module('Integration | Component | bs-form/element', function(hooks) {
@@ -410,6 +415,10 @@ module('Integration | Component | bs-form/element', function(hooks) {
             assert.ok(this.element.querySelector('input[type=radio]').hasAttribute(attribute), `input has attribute ${attribute} [${formLayout}]`);
           } else {
             assert.equal(this.element.querySelector('input[type=radio]').getAttribute(attribute), value, `input attribute ${attribute} is ${value} [${formLayout}]`);
+          }
+
+          if (deprecatedAttributeBindings.includes(attribute)) {
+            assert.deprecationsInclude(`Argument ${attribute} of <element> component yielded by <BsForm> is deprecated.`);
           }
         }
         await render(hbs``); // hack to prevent browser exception when setting size to undefined

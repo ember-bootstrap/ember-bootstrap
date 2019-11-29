@@ -1092,8 +1092,6 @@ export default class FormElement extends FormGroup {
       ['name', 'foo'],
       ['pattern', '^[0-9]{5}$'],
       ['placeholder', 'foo'],
-      ['readonly', true],
-      ['required', true],
       ['rows', '10'],
       ['spellcheck', true],
       ['step', '2'],
