@@ -59,6 +59,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.equal(this.element.querySelector('button').getAttribute('disabled'), '');
     assert.equal(this.element.querySelector('button').getAttribute('title'), 'title');
 
+    assert.deprecationsInclude('Argument disabled of <BsButton> component is deprecated.');
     assert.deprecationsInclude('Argument title of <BsButton> component is deprecated.');
   });
 
@@ -245,6 +246,8 @@ module('Integration | Component | bs-button', function(hooks) {
     await render(hbs`<BsButton @disabled={{false}} @onClick={{clickAction}} />`);
     await click('button');
     assert.dom('button').isNotDisabled();
+
+    assert.deprecationsInclude('Argument disabled of <BsButton> component is deprecated.');
 
     deferredClickAction.resolve();
     await settled();

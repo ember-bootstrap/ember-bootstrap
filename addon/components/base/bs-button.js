@@ -93,7 +93,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 @tagName('button')
 @classNames('btn')
 @classNameBindings('active', 'block:btn-block', 'sizeClass', 'typeClass')
-@attributeBindings('_disabled:disabled', 'buttonType:type', 'title')
+@attributeBindings('__disabled:disabled', 'buttonType:type', 'title')
 export default class Button extends Component {
   /**
    * Default label of the button. Not need if used as a block component
@@ -149,15 +149,31 @@ export default class Button extends Component {
    * @property disabled
    * @type ?boolean
    * @default null
+   * @deprecated
    * @public
    */
   @defaultValue
   disabled = null;
 
-  @computed('disabled', 'isPending', 'preventConcurrency')
-  get _disabled() {
+  /**
+   * Pproperty to disable the button only used in internal communication
+   * between Ember Boostrap components.
+   *
+   * @property _disabled
+   * @type ?boolean
+   * @default null
+   * @private
+   */
+  _disabled = null;
+
+  @computed('disabled', '_disabled', 'isPending', 'preventConcurrency')
+  get __disabled() {
     if (this.get('disabled') !== null) {
       return this.get('disabled');
+    }
+
+    if (this.get('_disabled') !== null) {
+      return this.get('_disabled');
     }
 
     return this.get('isPending') && this.get('preventConcurrency');
@@ -460,6 +476,7 @@ export default class Button extends Component {
     runInDebug(() => {
       [
         ['buttonType:type', 'submit'],
+        ['disabled', true],
         ['title', 'foo'],
       ].forEach(([mapping, value]) => {
         let argument = mapping.split(':')[0];
@@ -469,10 +486,10 @@ export default class Button extends Component {
           `was setting the HTML attribute ${attribute} of the control element. You should use ` +
           `angle bracket  component invocation syntax instead:\n` +
           `Before:\n` +
-          `  {{bs-button ${attribute}="${value}"}}\n` +
-          `  <BsButton @${attribute}="${value}" />\n` +
+          `  {{bs-button ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
+          `  <BsButton @${attribute}=${typeof value === 'string' ? `"${value}"`: `{{${value}}}`} />\n` +
           `After:\n` +
-          `  <BsButton ${attribute}="${value}" />`;
+          `  <BsButton ${typeof value === 'boolean' ? attribute : `${attribute}="${value}"`} />`;
 
         deprecate(
           deprecationMessage,
