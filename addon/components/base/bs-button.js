@@ -10,7 +10,7 @@ import { observes } from '@ember-decorators/object';
 import { computed } from '@ember/object';
 import { equal, or } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
-import { deprecate } from '@ember/debug';
+import { deprecate, runInDebug } from '@ember/debug';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-button';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
@@ -457,31 +457,33 @@ export default class Button extends Component {
     super.init(...arguments);
 
     // deprecate arguments used for attribute bindings only
-    [
-      ['buttonType:type', 'submit'],
-      ['title', 'foo'],
-    ].forEach(([mapping, value]) => {
-      let argument = mapping.split(':')[0];
-      let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
-      let deprecationMessage =
-        `Argument ${argument} of <BsButton> component is deprecated. It's only purpose ` +
-        `was setting the HTML attribute ${attribute} of the control element. You should use ` +
-        `angle bracket  component invocation syntax instead:\n` +
-        `Before:\n` +
-        `  {{bs-button ${attribute}="${value}"}}\n` +
-        `  <BsButton @${attribute}="${value}" />\n` +
-        `After:\n` +
-        `  <BsButton ${attribute}="${value}" />`;
+    runInDebug(() => {
+      [
+        ['buttonType:type', 'submit'],
+        ['title', 'foo'],
+      ].forEach(([mapping, value]) => {
+        let argument = mapping.split(':')[0];
+        let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
+        let deprecationMessage =
+          `Argument ${argument} of <BsButton> component is deprecated. It's only purpose ` +
+          `was setting the HTML attribute ${attribute} of the control element. You should use ` +
+          `angle bracket  component invocation syntax instead:\n` +
+          `Before:\n` +
+          `  {{bs-button ${attribute}="${value}"}}\n` +
+          `  <BsButton @${attribute}="${value}" />\n` +
+          `After:\n` +
+          `  <BsButton ${attribute}="${value}" />`;
 
-      deprecate(
-        deprecationMessage,
-        // eslint-disable-next-line ember/no-attrs-in-components
-        !Object.keys(this.attrs).includes(argument),
-        {
-          id: `ember-bootstrap.deprecated-argument.button#${argument}`,
-          until: '4.0.0',
-        }
-      );
+        deprecate(
+          deprecationMessage,
+          // eslint-disable-next-line ember/no-attrs-in-components
+          !Object.keys(this.attrs).includes(argument),
+          {
+            id: `ember-bootstrap.deprecated-argument.button#${argument}`,
+            until: '4.0.0',
+          }
+        );
+      });
     });
   }
 }

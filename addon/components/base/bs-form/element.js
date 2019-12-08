@@ -3,7 +3,7 @@ import { observes } from '@ember-decorators/object';
 import { alias, and, equal, gt, notEmpty, or } from '@ember/object/computed';
 import { action, computed, defineProperty } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
-import { assert, deprecate } from '@ember/debug';
+import { assert, deprecate, runInDebug } from '@ember/debug';
 import { isBlank, typeOf } from '@ember/utils';
 import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
@@ -1073,63 +1073,65 @@ export default class FormElement extends FormGroup {
     }
 
     // deprecate arguments used for attribute bindings only
-    [
-      ['accept', 'image/png'],
-      ['autocapitalize', 'words'],
-      ['autocomplete', 'on'],
-      ['autocorrect', 'off'],
-      ['autofocus', false],
-      ['autosave', 'someuniquevalue'],
-      ['cols', '10'],
-      ['controlSize:size', '10'],
-      ['form', 'myform'],
-      ['inputmode', 'tel'],
-      ['max', '5'],
-      ['maxlength', '5'],
-      ['min', '5'],
-      ['minlength', '5'],
-      ['multiple', true],
-      ['name', 'foo'],
-      ['pattern', '^[0-9]{5}$'],
-      ['placeholder', 'foo'],
-      ['rows', '10'],
-      ['spellcheck', true],
-      ['step', '2'],
-      ['tabindex', '-1'],
-      ['title', 'foo'],
-      ['wrap', 'hard'],
-    ].forEach(([mapping, value]) => {
-      let argument = mapping.split(':')[0];
-      let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
-      let deprecationMessage =
-        `Argument ${argument} of <element> component yielded by <BsForm> is deprecated. ` +
-        `It's only purpose was setting the HTML attribute ${attribute} of the control element. ` +
-        `You should use  angle bracket  component invocation syntax instead:\n` +
-        `Before:n` +
-        `  {{#bs-form as |form|}}\n` +
-        `    {{form.element ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
-        `  {{/bs-form}}\n` +
-        `  <BsForm as |form|>\n` +
-        `    <form.element as |el|>\n` +
-        `      <el.control @${attribute}=${typeof value === 'string' ? `"${value}"`: `{{${value}}}`} />\n` +
-        `    </form.element>\n` +
-        `  </BsForm>\n` +
-        `After:\n` +
-        `  <BsForm as |form|>\n` +
-        `    <form.element as |el|>\n` +
-        `      <el.control ${typeof value === 'boolean' ? ( value ? attribute : '' ) : `${attribute}="${value}"`} />\n` +
-        `    </form.element>\n` +
-        `  </BsForm>`;
+    runInDebug(() => {
+      [
+        ['accept', 'image/png'],
+        ['autocapitalize', 'words'],
+        ['autocomplete', 'on'],
+        ['autocorrect', 'off'],
+        ['autofocus', false],
+        ['autosave', 'someuniquevalue'],
+        ['cols', '10'],
+        ['controlSize:size', '10'],
+        ['form', 'myform'],
+        ['inputmode', 'tel'],
+        ['max', '5'],
+        ['maxlength', '5'],
+        ['min', '5'],
+        ['minlength', '5'],
+        ['multiple', true],
+        ['name', 'foo'],
+        ['pattern', '^[0-9]{5}$'],
+        ['placeholder', 'foo'],
+        ['rows', '10'],
+        ['spellcheck', true],
+        ['step', '2'],
+        ['tabindex', '-1'],
+        ['title', 'foo'],
+        ['wrap', 'hard'],
+      ].forEach(([mapping, value]) => {
+        let argument = mapping.split(':')[0];
+        let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
+        let deprecationMessage =
+          `Argument ${argument} of <element> component yielded by <BsForm> is deprecated. ` +
+          `It's only purpose was setting the HTML attribute ${attribute} of the control element. ` +
+          `You should use  angle bracket  component invocation syntax instead:\n` +
+          `Before:n` +
+          `  {{#bs-form as |form|}}\n` +
+          `    {{form.element ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
+          `  {{/bs-form}}\n` +
+          `  <BsForm as |form|>\n` +
+          `    <form.element as |el|>\n` +
+          `      <el.control @${attribute}=${typeof value === 'string' ? `"${value}"`: `{{${value}}}`} />\n` +
+          `    </form.element>\n` +
+          `  </BsForm>\n` +
+          `After:\n` +
+          `  <BsForm as |form|>\n` +
+          `    <form.element as |el|>\n` +
+          `      <el.control ${typeof value === 'boolean' ? ( value ? attribute : '' ) : `${attribute}="${value}"`} />\n` +
+          `    </form.element>\n` +
+          `  </BsForm>`;
 
-      deprecate(
-        deprecationMessage,
-        // eslint-disable-next-line ember/no-attrs-in-components
-        !Object.keys(this.attrs).includes(argument),
-        {
-          id: `ember-bootstrap.deprecated-argument.form-element#${argument}`,
-          until: '4.0.0',
-        }
-      );
+        deprecate(
+          deprecationMessage,
+          // eslint-disable-next-line ember/no-attrs-in-components
+          !Object.keys(this.attrs).includes(argument),
+          {
+            id: `ember-bootstrap.deprecated-argument.form-element#${argument}`,
+            until: '4.0.0',
+          }
+        );
+      });
     });
   }
 
