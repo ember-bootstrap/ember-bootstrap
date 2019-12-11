@@ -164,6 +164,7 @@ export default class Button extends Component {
    * @default null
    * @private
    */
+  @defaultValue
   _disabled = null;
 
   @computed('disabled', '_disabled', 'isPending', 'preventConcurrency')
