@@ -17,7 +17,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   ```hbs
   <BsNavbar as |navbar|>
     <div class="navbar-header">
-      {{navbar.toggle}}
+      <navbar.toggle />
       <a class="navbar-brand" href="#">Brand</a>
     </div>
     <navbar.content>
