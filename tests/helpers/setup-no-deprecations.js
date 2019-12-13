@@ -36,14 +36,16 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
   };
 
   QUnit.assert.deprecationsInclude = function(expected) {
-    let foundIndex = deprecations.indexOf(expected);
+    let found = deprecations.find((deprecation) => deprecation.includes(expected));
     this.pushResult({
-      result: foundIndex > -1,
+      result: !!found,
       actual: deprecations,
       message: `expected to find \`${expected}\` deprecation. Found ${deprecations.map(d => `!${d}`).join(', ')}`,
     });
 
-    deprecations.splice(foundIndex, 1);
+    if (found) {
+      deprecations.splice(deprecations.indexOf(found), 1);
+    }
   };
 }
 

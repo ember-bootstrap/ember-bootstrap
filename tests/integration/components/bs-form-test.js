@@ -104,6 +104,7 @@ module('Integration | Component | bs-form', function(hooks) {
 
     await click('button');
     assert.ok(submit.calledOnce, 'onSubmit action has been called');
+    assert.deprecations(1);
   });
 
   test('Submit event bubbles', async function(assert) {

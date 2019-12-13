@@ -3,7 +3,7 @@ import { observes } from '@ember-decorators/object';
 import { alias, and, equal, gt, notEmpty, or } from '@ember/object/computed';
 import { action, computed, defineProperty } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
-import { assert } from '@ember/debug';
+import { assert, deprecate, runInDebug } from '@ember/debug';
 import { isBlank, typeOf } from '@ember/utils';
 import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
@@ -25,10 +25,10 @@ const nonDefaultLayouts = A([
 
   ```handlebars
   <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|>
-    <form.element @controlType="email" @label="Email" @placeholder="Email" @value={{this.email}}" />
-    <form.element @controlType="password" @label="Password" @placeholder="Password" @value={{this.password}} />
+    <form.element @controlType="email" @label="Email" @value={{this.email}}" />
+    <form.element @controlType="password" @label="Password" @value={{this.password}} />
     <form.element @controlType="checkbox" @label="Remember me" @value={{this.rememberMe}} />
-    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
+    <BsButton @defaultText="Submit" @type="primary" type="submit" />
   </BsForm>
   ```
 
@@ -93,8 +93,8 @@ const nonDefaultLayouts = A([
 
   ```hbs
   <BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|>
-    <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
-      <el.control class="input-lg" />
+    <form.element @label="Email" @property="email" as |el|>
+      <el.control class="input-lg" placeholder="Email" />
     </form.element>
   </BsForm>
   ```
@@ -111,8 +111,8 @@ const nonDefaultLayouts = A([
 
   ```handlebars
   <BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|>
-    <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
-    <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" />
+    <form.element @controlType="email" @label="Email" @property="email" />
+    <form.element @controlType="password" @label="Password" @property="password" />
     <form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" />
     <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
   </BsForm>
@@ -183,9 +183,9 @@ const nonDefaultLayouts = A([
   <form.element @controlType="email" @label="Email" @property="email" as |el|>
     <el.control
       placeholder="Email"
-      required={{true}}
-      multiple={{true}}
       tabIndex={{5}}
+      multiple
+      required
     />
   </form.element>
   ...
@@ -205,6 +205,8 @@ const nonDefaultLayouts = A([
   ...
   {{/bs-form}}
   ```
+
+  But be aware that this is deprecated and will be removed in Ember Bootstrap v4.
 
   The following attributes are supported depending on the `controlType`:
 
@@ -449,7 +451,7 @@ export default class FormElement extends FormGroup {
    * get/set the control element's value:
    *
    * ```hbs
-   * {{form.element controlType="email" label="Email" placeholder="Email" value=email}}
+   * <form.element controlType="email" label="Email" value={{email}} />
    * ```
    *
    * Note: you lose the ability to validate this form element by directly binding to its value. It is recommended
@@ -1069,6 +1071,68 @@ export default class FormElement extends FormGroup {
       defineProperty(this, 'value', alias(`model.${this.get('property')}`));
       this.setupValidations();
     }
+
+    // deprecate arguments used for attribute bindings only
+    runInDebug(() => {
+      [
+        ['accept', 'image/png'],
+        ['autocapitalize', 'words'],
+        ['autocomplete', 'on'],
+        ['autocorrect', 'off'],
+        ['autofocus', false],
+        ['autosave', 'someuniquevalue'],
+        ['cols', '10'],
+        ['controlSize:size', '10'],
+        ['form', 'myform'],
+        ['inputmode', 'tel'],
+        ['max', '5'],
+        ['maxlength', '5'],
+        ['min', '5'],
+        ['minlength', '5'],
+        ['multiple', true],
+        ['name', 'foo'],
+        ['pattern', '^[0-9]{5}$'],
+        ['placeholder', 'foo'],
+        ['rows', '10'],
+        ['spellcheck', true],
+        ['step', '2'],
+        ['tabindex', '-1'],
+        ['title', 'foo'],
+        ['wrap', 'hard'],
+      ].forEach(([mapping, value]) => {
+        let argument = mapping.split(':')[0];
+        let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
+        let deprecationMessage =
+          `Argument ${argument} of <element> component yielded by <BsForm> is deprecated. ` +
+          `It's only purpose was setting the HTML attribute ${attribute} of the control element. ` +
+          `You should use  angle bracket  component invocation syntax instead:\n` +
+          `Before:n` +
+          `  {{#bs-form as |form|}}\n` +
+          `    {{form.element ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
+          `  {{/bs-form}}\n` +
+          `  <BsForm as |form|>\n` +
+          `    <form.element as |el|>\n` +
+          `      <el.control @${attribute}=${typeof value === 'string' ? `"${value}"`: `{{${value}}}`} />\n` +
+          `    </form.element>\n` +
+          `  </BsForm>\n` +
+          `After:\n` +
+          `  <BsForm as |form|>\n` +
+          `    <form.element as |el|>\n` +
+          `      <el.control ${typeof value === 'boolean' ? ( value ? attribute : '' ) : `${attribute}="${value}"`} />\n` +
+          `    </form.element>\n` +
+          `  </BsForm>`;
+
+        deprecate(
+          deprecationMessage,
+          // eslint-disable-next-line ember/no-attrs-in-components
+          !Object.keys(this.attrs).includes(argument),
+          {
+            id: `ember-bootstrap.deprecated-argument.form-element#${argument}`,
+            until: '4.0.0',
+          }
+        );
+      });
+    });
   }
 
   /*
