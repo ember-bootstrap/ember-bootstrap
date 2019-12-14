@@ -1,6 +1,6 @@
 import { reads } from '@ember/object/computed';
 import EmberObject, { computed } from '@ember/object';
-import config from 'dummy/config/environment';
+import config from 'ember-bootstrap-docs/config/environment';
 
 export default EmberObject.extend({
   id: null,
