@@ -9,7 +9,7 @@ if (typeof Promise === 'undefined') {
 }
 
 document.addEventListener('securitypolicyviolation', function({ target, blockedURI, violatedDirective }) {
-  if (target.className.match(/ember-basic-dropdown/) || target.hasAttribute('data-test-ignore-csp')) {
+  if (target.className && target.className.match(/ember-basic-dropdown/) || target.hasAttribute && target.hasAttribute('data-test-ignore-csp')) {
     return;
   }
 

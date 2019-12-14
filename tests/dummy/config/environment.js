@@ -20,6 +20,36 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    bootstrapVersion: process.env.BOOTSTRAPVERSION || 4,
+    failOnDeprecation: !!process.env.FAIL_ON_DEPRECATION,
+    contentSecurityPolicy: {
+      'script-src': [
+        "'self'",
+        "'unsafe-eval'"
+      ],
+      'img-src': [
+        "'self'",
+        // Bootstrap 4 uses data URL for some SVG images in CSS
+        "data:",
+      ]
+    },
+    contentSecurityPolicyMeta: true,
+    fastboot: {
+      hostWhitelist: [/^localhost:\d+$/]
+    },
+    'ember-a11y-testing': {
+      componentOptions: {
+        turnAuditOff: true,
+        axeOptions: {
+          checks: {
+            // color checks unfortunately fail for colors defined in dummy app, but are controlled at the end by
+            // the user, so not a primary concern of the addon
+            'color-contrast': { enabled: false }
+          }
+        }
+      }
     }
   };
 
