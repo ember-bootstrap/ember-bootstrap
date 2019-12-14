@@ -338,133 +338,161 @@ module('Integration | Component | bs-dropdown', function(hooks) {
 
   module('keyboard control', function() {
 
-    test('should show if down key is pressed on toggle', async function(assert) {
-      await render(
-        hbs`
+    function keyboardTest() {
+      test('should show if down key is pressed on toggle', async function(assert) {
+        await render(
+          hbs`
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
-          <dd.menu as |menu|>
+          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
             <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
       `);
 
-      await focus('a.dropdown-toggle');
-      await triggerKeyEvent('a.dropdown-toggle', 'keydown', 40); // down
+        await focus('a.dropdown-toggle');
+        await triggerKeyEvent('a.dropdown-toggle', 'keydown', 40); // down
 
-      assert.dom('.dropdown-menu').exists();
-    });
+        assert.dom('.dropdown-menu').exists();
+      });
 
-    test('should show if down key is pressed on button', async function(assert) {
-      await render(
-        hbs`
+      test('should show if down key is pressed on button', async function(assert) {
+        await render(
+          hbs`
         <BsDropdown as |dd|>
           <dd.button>Dropdown</dd.button>
-          <dd.menu as |menu|>
+          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
             <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
       `);
 
-      await focus('button.dropdown-toggle');
-      await triggerKeyEvent('button.dropdown-toggle', 'keydown', 40); // down
+        await focus('button.dropdown-toggle');
+        await triggerKeyEvent('button.dropdown-toggle', 'keydown', 40); // down
 
-      assert.dom('.dropdown-menu').exists();
-    });
+        assert.dom('.dropdown-menu').exists();
+      });
 
-    test('should hide if pressing escape', async function(assert) {
-      await render(
-        hbs`
+      test('should hide if pressing escape', async function(assert) {
+        await render(
+          hbs`
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
-          <dd.menu as |menu|>
+          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
             <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
       `);
 
-      await click('a.dropdown-toggle');
+        await click('a.dropdown-toggle');
 
-      assert.dom('.dropdown-menu').exists();
+        assert.dom('.dropdown-menu').exists();
 
-      await triggerKeyEvent(document.activeElement, 'keydown', 40); // down, to set focus to different element
+        await triggerKeyEvent(document.activeElement, 'keydown', 40); // down, to set focus to different element
 
-      await triggerKeyEvent(document.activeElement, 'keydown', 27); // escape
+        await triggerKeyEvent(document.activeElement, 'keydown', 27); // escape
 
-      assert.dom('.dropdown-menu').doesNotExist();
-      assert.dom('a.dropdown-toggle').isFocused();
-    });
+        assert.dom('.dropdown-menu').doesNotExist();
+        assert.dom('a.dropdown-toggle').isFocused();
+      });
 
-    test('should hide if tabbing outside of menu', async function(assert) {
-      await render(
-        hbs`
+      test('should hide if tabbing outside of menu', async function(assert) {
+        await render(
+          hbs`
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
-          <dd.menu as |menu|>
+          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
             <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
       `);
 
-      await click('a.dropdown-toggle');
+        await click('a.dropdown-toggle');
 
-      assert.dom('.dropdown-menu').exists();
+        assert.dom('.dropdown-menu').exists();
 
-      await triggerKeyEvent(document, 'keyup', 9); // tab
+        await triggerKeyEvent(document, 'keyup', 9); // tab
 
-      assert.dom('.dropdown-menu').doesNotExist();
-    });
+        assert.dom('.dropdown-menu').doesNotExist();
+      });
 
-    test('should not hide if tabbing inside of menu', async function(assert) {
-      await render(
-        hbs`
+      test('should not hide if tabbing inside of menu', async function(assert) {
+        await render(
+          hbs`
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
-          <dd.menu as |menu|>
+          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
             <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
       `);
 
-      await click('a.dropdown-toggle');
+        await click('a.dropdown-toggle');
 
-      assert.dom('.dropdown-menu').exists();
+        assert.dom('.dropdown-menu').exists();
 
-      await triggerKeyEvent('.dropdown-item', 'keyup', 9); // tab
+        await triggerKeyEvent('.dropdown-item', 'keyup', 9); // tab
 
-      assert.dom('.dropdown-menu').exists();
-    });
+        assert.dom('.dropdown-menu').exists();
+      });
 
-    test('should focus next/previous element when using keyboard navigation', async function(assert) {
-      await render(
-        hbs`
+      test('should focus next/previous element when using keyboard navigation', async function(assert) {
+        await render(
+          hbs`
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
-          <dd.menu as |menu|>
+          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
             <menu.item><a class="dropdown-item" href="#" id="item1">Something</a></menu.item>
             <menu.item><a class="dropdown-item" href="#" id="item2">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
       `);
 
-      await click('a.dropdown-toggle');
+        await click('a.dropdown-toggle');
 
-      await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
-      assert.dom('#item1').isFocused();
+        await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
+        assert.dom('#item1').isFocused();
 
-      await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
-      assert.dom('#item2').isFocused();
+        await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
+        assert.dom('#item2').isFocused();
 
-      await triggerKeyEvent(document.activeElement, 'keydown', 38); // up
-      assert.dom('#item1').isFocused();
-    });
+        await triggerKeyEvent(document.activeElement, 'keydown', 38); // up
+        assert.dom('#item1').isFocused();
+      });
 
-    test('should ignore keyboard events within <input>s and <textarea>s, except for escape key', async function(assert) {
-      await render(
-        hbs`
+      test('should hide and focus next element when tabbing outside of menu ', async function(assert) {
+        await render(
+          hbs`
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
-          <dd.menu as |menu|>
+          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
+            <menu.item><a class="dropdown-item" href="#" id="item1">Something</a></menu.item>
+            <menu.item><a class="dropdown-item" href="#" id="item2">Something</a></menu.item>
+          </dd.menu>
+          <button id="next">Next</button>
+        </BsDropdown>
+      `);
+
+        await click('a.dropdown-toggle');
+
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
+        assert.dom('#item1').isFocused();
+
+        await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
+        assert.dom('#item2').isFocused();
+
+        await triggerKeyEvent(document.activeElement, 'keydown', 38); // up
+        assert.dom('#item1').isFocused();
+      });
+
+      test('should ignore keyboard events within <input>s and <textarea>s, except for escape key', async function(assert) {
+        await render(
+          hbs`
+        <BsDropdown as |dd|>
+          <dd.toggle>Dropdown</dd.toggle>
+          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
             <a class="dropdown-item" href="#" id="item1">Something</a>
             <input type="text" />
             <textarea></textarea>
@@ -472,27 +500,27 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         </BsDropdown>
       `);
 
-      await click('a.dropdown-toggle');
-      await focus('input');
+        await click('a.dropdown-toggle');
+        await focus('input');
 
-      await triggerKeyEvent(document.activeElement, 'keydown', 38); // up
-      assert.dom('input').isFocused();
+        await triggerKeyEvent(document.activeElement, 'keydown', 38); // up
+        assert.dom('input').isFocused();
 
-      await focus('textarea');
+        await focus('textarea');
 
-      await triggerKeyEvent(document.activeElement, 'keydown', 38); // up
-      assert.dom('textarea').isFocused();
+        await triggerKeyEvent(document.activeElement, 'keydown', 38); // up
+        assert.dom('textarea').isFocused();
 
-      await triggerKeyEvent(document.activeElement, 'keydown', 27); // escape
-      assert.dom('.dropdown-menu').doesNotExist();
-    });
+        await triggerKeyEvent(document.activeElement, 'keydown', 27); // escape
+        assert.dom('.dropdown-menu').doesNotExist();
+      });
 
-    test('should skip disabled element when using keyboard navigation', async function(assert) {
-      await render(
-        hbs`
+      test('should skip disabled element when using keyboard navigation', async function(assert) {
+        await render(
+          hbs`
         <BsDropdown as |dd|>
           <dd.toggle>Dropdown</dd.toggle>
-          <dd.menu as |menu|>
+          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
             <a class="dropdown-item disabled" href="#sub1">Submenu 1</a>
             <button class="dropdown-item" type="button" disabled>Disabled button</button>
             <a class="dropdown-item" href="#" id="item1">Something</a>
@@ -500,10 +528,25 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         </BsDropdown>
       `);
 
-      await click('a.dropdown-toggle');
+        await click('a.dropdown-toggle');
 
-      await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
-      assert.dom('#item1').isFocused();
+        await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
+        assert.dom('#item1').isFocused();
+      });
+    }
+
+    module('in place', function(hooks) {
+      hooks.beforeEach(function() {
+        this.renderInPlace = true;
+      });
+      keyboardTest();
+    });
+
+    module('in wormhole', function() {
+      hooks.beforeEach(function() {
+        this.renderInPlace = false;
+      });
+      keyboardTest();
     });
   });
 

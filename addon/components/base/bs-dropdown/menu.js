@@ -1,5 +1,5 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
-import { computed } from '@ember/object';
+import { computed, action } from '@ember/object';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown/menu';
 import { next } from '@ember/runloop';
@@ -136,6 +136,14 @@ export default class DropdownMenu extends Component {
       placement = 'bottom-end';
     }
     return placement;
+  }
+
+  @action
+  setFocus() {
+    let menuElement = document.getElementById(`${this.get('dropdownElementId')}__menu`);
+    if (menuElement) {
+      menuElement.focus();
+    }
   }
 
   @computed('inNav', 'flip')

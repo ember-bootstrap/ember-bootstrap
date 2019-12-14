@@ -7,6 +7,8 @@
     @renderInPlace={{this._renderInPlace}}
     @popperContainer={{this.destinationElement}}
     @modifiers={{this.popperModifiers}}
+    @onCreate={{this.setFocus}}
+    tabindex="-1"
     ...attributes
   >
     {{yield
