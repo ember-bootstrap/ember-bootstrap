@@ -8,7 +8,7 @@ module('FastBoot | carousel', function(hooks) {
   setupFastBootRootElement(hooks);
 
   testBS4('it renders', async function(assert) {
-    await visit('/components/carousel');
+    await visit('/fastboot/carousel');
 
     assert.dom('.carousel.slide').exists();
     assert.dom('.carousel .carousel-control-next').exists();
@@ -17,7 +17,7 @@ module('FastBoot | carousel', function(hooks) {
   });
 
   testBS3('it renders', async function(assert) {
-    await visit('/components/carousel');
+    await visit('/fastboot/carousel');
 
     assert.dom('.carousel.slide').exists();
     assert.dom('.carousel .right').exists();

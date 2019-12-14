@@ -7,7 +7,7 @@ module('FastBoot | form', function(hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function(assert) {
-    await visit('/components/forms');
+    await visit('/fastboot/forms');
 
     assert.dom('form').exists();
     assert.dom('form .form-group').exists();

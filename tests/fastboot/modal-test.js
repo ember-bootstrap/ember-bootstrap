@@ -8,7 +8,7 @@ module('FastBoot | modal', function(hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function(assert) {
-    await visit('/components/modal');
+    await visit('/fastboot/modal');
 
     assert.dom('.modal').exists();
     assert.dom('.modal').hasClass(visibilityClass());

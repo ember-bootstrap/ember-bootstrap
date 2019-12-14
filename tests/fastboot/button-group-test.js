@@ -7,7 +7,7 @@ module('FastBoot | button-group', function(hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function(assert) {
-    await visit('/components/button-group');
+    await visit('/fastboot/button-group');
 
     assert.dom('.btn-group').exists();
     assert.dom('.btn-group .btn').exists({ count: 3 });

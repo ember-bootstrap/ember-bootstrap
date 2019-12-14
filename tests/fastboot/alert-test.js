@@ -7,7 +7,7 @@ module('FastBoot | alert', function(hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function(assert) {
-    await visit('/components/alert');
+    await visit('/fastboot/alert');
 
     assert.dom('.alert').exists();
     assert.dom('.alert').hasClass('alert-success');

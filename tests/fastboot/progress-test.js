@@ -7,7 +7,7 @@ module('FastBoot | progress', function(hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function(assert) {
-    await visit('/components/progress');
+    await visit('/fastboot/progress');
 
     assert.dom('.progress').exists();
     assert.dom('.progress .progress-bar').exists();

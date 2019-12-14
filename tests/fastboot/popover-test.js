@@ -7,7 +7,7 @@ module('FastBoot | popover', function(hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function(assert) {
-    await visit('/components/popover');
+    await visit('/fastboot/popover');
 
     assert.dom('.btn').exists();
     assert.dom('.popover').doesNotExist();

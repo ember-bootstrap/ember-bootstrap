@@ -7,7 +7,7 @@ module('FastBoot | tooltip', function(hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function(assert) {
-    await visit('/components/tooltip');
+    await visit('/fastboot/tooltip');
 
     assert.dom('.btn').exists();
     assert.dom('.tooltip').doesNotExist();

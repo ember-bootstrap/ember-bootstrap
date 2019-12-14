@@ -34,9 +34,4 @@ Router.map(function() {
   this.route('addons');
   this.route('license');
   this.route('changelog');
-  this.route('acceptance', function() {
-    this.route('modal');
-    this.route('link', { path: '/link/:model' });
-    this.route('linkto', { path: '/linkto/:model' });
-  });
 });

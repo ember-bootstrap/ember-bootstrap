@@ -7,7 +7,7 @@ module('FastBoot | collapse', function(hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function(assert) {
-    await visit('/components/collapse');
+    await visit('/fastboot/collapse');
 
     assert.dom('.collapse').exists();
     assert.dom('.collapse').hasText('This is collapsible content');

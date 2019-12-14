@@ -1,11 +1,9 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
-const path = require('path');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
-    // snippetSearchPaths: [path.join('tests','dummy','app')],
     'ember-bootstrap': {
       bootstrapVersion: 4,
       importBootstrapCSS: false
