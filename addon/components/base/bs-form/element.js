@@ -1145,37 +1145,39 @@ export default class FormElement extends FormGroup {
    */
   @observes('hasFeedback', 'formLayout')
   adjustFeedbackIcons() {
-    scheduleOnce('afterRender', () => {
-      let el = this.get('element');
-      let feedbackIcon;
-      // validation state icons are only shown if form element has feedback
-      if (!this.get('isDestroying')
-        && this.get('hasFeedback')
-        // and form group element has
-        // an input-group
-        && el.querySelector('.input-group')
-        // an addon or button on right side
-        && el.querySelector('.input-group input + .input-group-addon, .input-group input + .input-group-btn')
-        // an icon showing validation state
-        && (feedbackIcon = el.querySelector('.form-control-feedback'))
-      ) {
-        // clear existing adjustment
-        feedbackIcon.style.right = '';
+    scheduleOnce('afterRender', this, this._adjustFeedbackIcons);
+  }
 
-        let defaultPosition = 0;
-        let match = getComputedStyle(feedbackIcon).right.match(/^(\d+)px$/);
-        if (match) {
-          defaultPosition = parseInt(match[1]);
-        }
-        // Bootstrap documentation:
-        //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
-        // therefore we could rely on having only one input-group-addon or input-group-btn
-        let inputGroupWidth = el.querySelector('input + .input-group-addon, input + .input-group-btn').offsetWidth;
-        let adjustedPosition = defaultPosition + inputGroupWidth;
+  _adjustFeedbackIcons() {
+    let el = this.get('element');
+    let feedbackIcon;
+    // validation state icons are only shown if form element has feedback
+    if (!this.get('isDestroying')
+      && this.get('hasFeedback')
+      // and form group element has
+      // an input-group
+      && el.querySelector('.input-group')
+      // an addon or button on right side
+      && el.querySelector('.input-group input + .input-group-addon, .input-group input + .input-group-btn')
+      // an icon showing validation state
+      && (feedbackIcon = el.querySelector('.form-control-feedback'))
+    ) {
+      // clear existing adjustment
+      feedbackIcon.style.right = '';
 
-        feedbackIcon.style.right = `${adjustedPosition}px`;
+      let defaultPosition = 0;
+      let match = getComputedStyle(feedbackIcon).right.match(/^(\d+)px$/);
+      if (match) {
+        defaultPosition = parseInt(match[1]);
       }
-    });
+      // Bootstrap documentation:
+      //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
+      // therefore we could rely on having only one input-group-addon or input-group-btn
+      let inputGroupWidth = el.querySelector('input + .input-group-addon, input + .input-group-btn').offsetWidth;
+      let adjustedPosition = defaultPosition + inputGroupWidth;
+
+      feedbackIcon.style.right = `${adjustedPosition}px`;
+    }
   }
 
   didInsertElement() {

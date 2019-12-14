@@ -9,7 +9,7 @@ import Mixin from '@ember/object/mixin';
  * @namespace Mixins
  * @private
  */
-export default Mixin.create({
+export default Mixin.create({ // eslint-disable-line ember/no-new-mixins
 
   /**
    * Array of registered child components

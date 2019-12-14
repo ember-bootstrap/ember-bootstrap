@@ -13,6 +13,8 @@ export default function formValidationClass(validationTypeProperty) {
         return 'is-valid';
       case 'warning':
         return 'is-warning'; // not officially supported in BS4 :(
+      default:
+        return undefined;
     }
   });
 }
