@@ -38,7 +38,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
   ```hbs
   <BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok">
-    <BsForm @model={{this}} @onSubmit={{action "submit"}} as |Form|>
+    <BsForm @model={{this}} @onSubmit={{action "submit"}} @submitOnError={{true}} as |Form|>
       <Form.element @controlType="text" @label="first name" @property="firstname" />
       <Form.element @controlType="text" @label="last name" @property="lastname" />
     </BsForm>
@@ -46,7 +46,9 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   ```
 
   The modal component supports this common case by triggering the submit event programmatically on the body's form if
-  present whenever the footer's submit button is pressed, so the example above will work as expected.
+  present whenever the footer's submit button is pressed. To allow the form to be submitted by pressing the enter key
+  also, you must either set `@submitOnError={{true}}` on the `<BsForm>` or include an invisible submit button in the
+  form (`<button type="submit" class="d-hidden">Submit</button>`).
 
   ### Auto-focus
 
@@ -56,7 +58,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
   ```hbs
   <BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok">
-    <BsForm @model={{this}} @onSubmit={{action "submit"}} as |Form|>
+    <BsForm @model={{this}} @onSubmit={{action "submit"}} @submitOnError={{true}} as |Form|>
       <Form.element @controlType="text" @label="first name" @property="firstname" @autofocus={{true}} />
       <Form.element @controlType="text" @label="last name" @property="lastname" />
     </BsForm>
