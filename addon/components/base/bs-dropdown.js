@@ -351,7 +351,7 @@ export default class Dropdown extends Component {
       return;
     }
 
-    let items = [].slice.call(this.element.querySelectorAll('.dropdown-item:not(.disabled):not(:disabled)'));
+    let items = [].slice.call(this.menuElement.querySelectorAll('.dropdown-item:not(.disabled):not(:disabled)'));
 
     if (items.length === 0) {
       return;

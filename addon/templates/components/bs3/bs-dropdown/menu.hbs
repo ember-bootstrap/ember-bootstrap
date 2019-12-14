@@ -6,11 +6,13 @@
     @renderInPlace={{this._renderInPlace}}
     @popperContainer={{this.destinationElement}}
     @modifiers={{this.popperModifiers}}
+    @onCreate={{this.setFocus}}
   >
     <ul
       id="{{@dropdownElementId}}__menu"
       class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
       role={{this.ariaRole}}
+      tabindex="-1"
       ...attributes
     >
       {{yield
