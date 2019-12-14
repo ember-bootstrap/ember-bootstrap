@@ -176,12 +176,14 @@ export default class TabPane extends Component.extend(ComponentChild) {
     }
   }
 
+  _setActive() {
+    this.set('active', this.get('isActive'));
+    this.set('showContent', this.get('isActive') && this.get('fade'));
+  }
+
   init() {
     super.init(...arguments);
-    scheduleOnce('afterRender', this, function() {
-      // isActive comes from parent component, so only available after render...
-      this.set('active', this.get('isActive'));
-      this.set('showContent', this.get('isActive') && this.get('fade'));
-    });
+    // isActive comes from parent component, so only available after render...
+    scheduleOnce('afterRender', this, this._setActive);
   }
 }
