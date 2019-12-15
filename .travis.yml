@@ -64,6 +64,7 @@ jobs:
   - env: EMBER_TRY_SCENARIO=ember-beta
   - env: EMBER_TRY_SCENARIO=ember-canary
   - env: EMBER_TRY_SCENARIO=ember-default-with-jquery
+  - env: EMBER_TRY_SCENARIO=ember-default-with-async-observers
   - env: EMBER_TRY_SCENARIO=ember-lts-2.18 BOOTSTRAPVERSION=3
   - env: EMBER_TRY_SCENARIO=ember-lts-3.4 BOOTSTRAPVERSION=3
   - env: EMBER_TRY_SCENARIO=ember-release BOOTSTRAPVERSION=3

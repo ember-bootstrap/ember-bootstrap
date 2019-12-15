@@ -86,6 +86,14 @@ module.exports = function() {
           }
         },
         {
+          name: 'ember-default-with-async-observers',
+          env: {
+            EMBER_OPTIONAL_FEATURES: JSON.stringify({
+              'default-async-observers': true
+            })
+          },
+        },
+        {
           name: 'fastboot-tests',
           command: 'ember test --filter FastBoot'
         },
