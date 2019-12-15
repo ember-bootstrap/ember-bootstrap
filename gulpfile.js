@@ -12,13 +12,15 @@ gulp.task('docs:api', function() {
 });
 
 gulp.task('docs:app', function() {
-  return execa('ember', ['build', '--prod']);
+  return execa('ember', ['build', '--prod'], {
+    cwd: 'docs'
+  });
 });
 
 gulp.task('docs:publish', gulp.series(gulp.parallel('docs:api', 'docs:app'), function() {
   return merge(
     gulp.src('docs/api/**/*', { base: 'docs' }),
-    gulp.src('dist/**/*'),
+    gulp.src('docs/dist/**/*'),
     gulp.src('CHANGELOG.md').pipe(transform(striptags, { encoding: 'utf8' }))
   )
     .pipe(ghPages());
