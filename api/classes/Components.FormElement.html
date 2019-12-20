@@ -61,10 +61,10 @@
 <p>The appropriate Bootstrap markup for the given <code>formLayout</code> and <code>controlType</code> is automatically generated to easily
 create forms without coding the default Bootstrap form markup by hand:</p>
 <pre class="code prettyprint"><code class="language-handlebars">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
-  &lt;form.element @controlType="email" @label="Email" @placeholder="Email" @value={{this.email}}" /&gt;
-  &lt;form.element @controlType="password" @label="Password" @placeholder="Password" @value={{this.password}} /&gt;
+  &lt;form.element @controlType="email" @label="Email" @value={{this.email}}" /&gt;
+  &lt;form.element @controlType="password" @label="Password" @value={{this.password}} /&gt;
   &lt;form.element @controlType="checkbox" @label="Remember me" @value={{this.rememberMe}} /&gt;
-  &lt;BsButton @defaultText="Submit" @type="primary" @buttonType="submit" /&gt;
+  &lt;BsButton @defaultText="Submit" @type="primary" type="submit" /&gt;
 &lt;/BsForm&gt;
 </code></pre>
 <h3>Control types</h3>
@@ -94,11 +94,11 @@ of the yielded control component:</p>
 </code></pre>
 <h4>Custom controls</h4>
 <p>Apart from the standard built-in browser controls (see the <code>controlType</code> property), you can use any custom control simply
-by invoking the component with a block template. Use whatever control you might want, for example a <code>&lt;PickadayInput&gt;</code>
+by invoking the component with a block template. Use whatever control you might want, for example a <code>&lt;PikadayInput&gt;</code>
 component (from the <a href="https://github.com/adopted-ember-addons/ember-pikaday">ember-pikaday addon</a>):</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
   &lt;form.element @label="Select-2" @property="gender" @useIcons={{false}} as |el|&gt;
-    &lt;PickadayInput @value={{el.value}} @onSelection={{action (mut el.value)}} id={{el.id}} /&gt;
+    &lt;PikadayInput @value={{el.value}} @onSelection={{action (mut el.value)}} id={{el.id}} /&gt;
   &lt;/form.element&gt;
 &lt;/BsForm&gt;
 </code></pre>
@@ -114,8 +114,8 @@ feedback icons with textual <code>&lt;input class="form-control"&gt;</code> elem
 <p>If you just want to customize the existing control component, you can use the aforementioned yielded <code>control</code> component
 to customize that existing component:</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsForm @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
-  &lt;form.element @label="Email" @placeholder="Email" @property="email" as |el|&gt;
-    &lt;el.control class="input-lg" /&gt;
+  &lt;form.element @label="Email" @property="email" as |el|&gt;
+    &lt;el.control class="input-lg" placeholder="Email" /&gt;
   &lt;/form.element&gt;
 &lt;/BsForm&gt;
 </code></pre>
@@ -127,8 +127,8 @@ To do so, you need to provide a component <code>{{bs-form/element/control/my-cus
 <p>In the following example the control elements of the three form elements value will be bound to the properties
 (given by <code>property</code>) of the form's <code>model</code>, which in this case is its controller (see <code>model=this</code>):</p>
 <pre class="code prettyprint"><code class="language-handlebars">&lt;BsForm @formLayout="horizontal" @model={{this}} @onSubmit={{action "submit"}} as |form|&gt;
-  &lt;form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" /&gt;
-  &lt;form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" /&gt;
+  &lt;form.element @controlType="email" @label="Email" @property="email" /&gt;
+  &lt;form.element @controlType="password" @label="Password" @property="password" /&gt;
   &lt;form.element @controlType="checkbox" @label="Remember me" @property="rememberMe" /&gt;
   &lt;BsButton @defaultText="Submit" @type="primary" @buttonType="submit" /&gt;
 &lt;/BsForm&gt;
@@ -189,9 +189,9 @@ you can pass them to the yielded <code>control</code> component:</p>
 &lt;form.element @controlType="email" @label="Email" @property="email" as |el|&gt;
   &lt;el.control
     placeholder="Email"
-    required={{true}}
-    multiple={{true}}
     tabIndex={{5}}
+    multiple
+    required
   /&gt;
 &lt;/form.element&gt;
 ...
@@ -208,6 +208,7 @@ you can pass them to the yielded <code>control</code> component:</p>
 ...
 {{/bs-form}}
 </code></pre>
+<p>But be aware that this is deprecated and will be removed in Ember Bootstrap v4.</p>
 <p>The following attributes are supported depending on the <code>controlType</code>:</p>
 <table class="table table-striped">
 <thead>
@@ -762,7 +763,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l1000"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:1000</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l1002"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:1002</code></a>
                     </p>
             
             
@@ -794,7 +795,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l787"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:787</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l789"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:789</code></a>
                     </p>
             
             
@@ -841,7 +842,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l764"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:764</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l766"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:766</code></a>
               </p>
             
             
@@ -869,7 +870,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l912"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:912</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l914"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:914</code></a>
               </p>
             
             
@@ -927,7 +928,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l950"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:950</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l952"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:952</code></a>
               </p>
             
             
@@ -956,7 +957,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> &#x27;text&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l428"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:428</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l430"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:430</code></a>
               </p>
             
             
@@ -994,7 +995,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l577"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:577</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l579"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:579</code></a>
               </p>
             
             
@@ -1024,7 +1025,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l597"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:597</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l599"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:599</code></a>
               </p>
             
             
@@ -1055,7 +1056,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l813"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:813</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l815"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:815</code></a>
               </p>
             
             
@@ -1089,7 +1090,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l558"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:558</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l560"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:560</code></a>
               </p>
             
             
@@ -1118,7 +1119,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l539"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:539</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l541"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:541</code></a>
               </p>
             
             
@@ -1147,7 +1148,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l968"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:968</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l970"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:970</code></a>
               </p>
             
             
@@ -1175,7 +1176,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l976"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:976</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l978"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:978</code></a>
               </p>
             
             
@@ -1203,7 +1204,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l924"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:924</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l926"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:926</code></a>
               </p>
             
             
@@ -1231,7 +1232,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l900"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:900</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l902"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:902</code></a>
               </p>
             
             
@@ -1261,7 +1262,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> &#x27;vertical&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l872"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:872</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l874"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:874</code></a>
               </p>
             
             
@@ -1296,7 +1297,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l588"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:588</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l590"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:590</code></a>
               </p>
             
             
@@ -1324,7 +1325,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l609"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:609</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l611"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:611</code></a>
               </p>
             
             
@@ -1352,7 +1353,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l549"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:549</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l551"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:551</code></a>
               </p>
             
             
@@ -1380,7 +1381,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l530"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:530</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l532"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:532</code></a>
               </p>
             
             
@@ -1408,7 +1409,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l419"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:419</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l421"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:421</code></a>
               </p>
             
             
@@ -1464,7 +1465,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l662"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:662</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l664"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:664</code></a>
               </p>
             
             
@@ -1493,7 +1494,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l671"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:671</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l673"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:673</code></a>
               </p>
             
             
@@ -1521,7 +1522,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l568"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:568</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l570"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:570</code></a>
               </p>
             
             
@@ -1549,7 +1550,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l486"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:486</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l488"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:488</code></a>
               </p>
             
             
@@ -1578,7 +1579,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l992"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:992</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l994"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:994</code></a>
               </p>
             
             
@@ -1606,7 +1607,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l889"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:889</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l891"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:891</code></a>
               </p>
             
             
@@ -1637,7 +1638,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l408"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:408</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l410"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:410</code></a>
               </p>
             
             
@@ -1667,7 +1668,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l680"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:680</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l682"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:682</code></a>
               </p>
             
             
@@ -1696,7 +1697,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l394"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:394</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l396"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:396</code></a>
               </p>
             
             
@@ -1728,7 +1729,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l984"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:984</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l986"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:986</code></a>
               </p>
             
             
@@ -1756,7 +1757,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l932"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:932</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l934"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:934</code></a>
               </p>
             
             
@@ -1784,7 +1785,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l477"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:477</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l479"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:479</code></a>
               </p>
             
             
@@ -1813,7 +1814,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l520"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:520</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l522"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:522</code></a>
               </p>
             
             
@@ -1842,7 +1843,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l508"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:508</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l510"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:510</code></a>
               </p>
             
             
@@ -1873,7 +1874,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l463"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:463</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l465"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:465</code></a>
               </p>
             
             
@@ -1906,7 +1907,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l716"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:716</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l718"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:718</code></a>
               </p>
             
             
@@ -1934,7 +1935,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l734"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:734</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l736"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:736</code></a>
               </p>
             
             
@@ -1963,7 +1964,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l496"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:496</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l498"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:498</code></a>
               </p>
             
             
@@ -1994,7 +1995,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l707"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:707</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l709"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:709</code></a>
               </p>
             
             
@@ -2023,7 +2024,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> false</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l691"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:691</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l693"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:693</code></a>
               </p>
             
             
@@ -2052,7 +2053,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l743"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:743</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l745"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:745</code></a>
               </p>
             
             
@@ -2081,7 +2082,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                   <p><strong>Default:</strong> [&#x27;focusout&#x27;]</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l752"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:752</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l754"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:754</code></a>
               </p>
             
             
@@ -2111,7 +2112,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l618"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:618</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l620"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:620</code></a>
               </p>
             
             
@@ -2140,7 +2141,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l861"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:861</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l863"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:863</code></a>
               </p>
             
             
@@ -2172,7 +2173,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                     Components.FormGroup
                   </a>
                     but overwritten in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l829"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:829</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l831"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:831</code></a>
               </p>
             
             
@@ -2202,7 +2203,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l628"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:628</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l630"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:630</code></a>
               </p>
             
             
@@ -2231,7 +2232,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-form_element.js.html#l447"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:447</code></a>
+                  <a href="../files/addon_components_base_bs-form_element.js.html#l449"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:449</code></a>
               </p>
             
             
@@ -2240,7 +2241,7 @@ you can pass them to the yielded <code>control</code> component:</p>
               <div class="description">
                 <p>The value of the control element is bound to this property. You can bind it to some controller property to
             get/set the control element's value:</p>
-            <pre class="code prettyprint"><code class="language-hbs">
+            <pre class="code prettyprint"><code class="language-hbs">&lt;form.element controlType="email" label="Email" value= /&gt;
             </code></pre>
             <p>Note: you lose the ability to validate this form element by directly binding to its value. It is recommended
             to use the <code>property</code> feature instead.</p>
@@ -2267,7 +2268,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l1054"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:1054</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l1056"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:1056</code></a>
                     </p>
             
             
@@ -2293,7 +2294,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l1021"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:1021</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l1023"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:1023</code></a>
                     </p>
             
             
@@ -2320,7 +2321,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l1010"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:1010</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l1012"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:1012</code></a>
                     </p>
             
             
@@ -2347,7 +2348,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l1032"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:1032</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l1034"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:1034</code></a>
                     </p>
             
             
@@ -2374,7 +2375,7 @@ you can pass them to the yielded <code>control</code> component:</p>
                 <div class="meta">
                             <p>
                             Defined in
-                    <a href="../files/addon_components_base_bs-form_element.js.html#l1043"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:1043</code></a>
+                    <a href="../files/addon_components_base_bs-form_element.js.html#l1045"><code>addon&#x2F;components&#x2F;base&#x2F;bs-form&#x2F;element.js:1045</code></a>
                     </p>
             
             

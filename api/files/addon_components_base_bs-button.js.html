@@ -70,6 +70,7 @@ import { observes } from &#x27;@ember-decorators/object&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import { equal, or } from &#x27;@ember/object/computed&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
+import { deprecate, runInDebug } from &#x27;@ember/debug&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-button&#x27;;
 import sizeClass from &#x27;ember-bootstrap/utils/cp/size-class&#x27;;
@@ -152,7 +153,7 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 @tagName(&#x27;button&#x27;)
 @classNames(&#x27;btn&#x27;)
 @classNameBindings(&#x27;active&#x27;, &#x27;block:btn-block&#x27;, &#x27;sizeClass&#x27;, &#x27;typeClass&#x27;)
-@attributeBindings(&#x27;_disabled:disabled&#x27;, &#x27;buttonType:type&#x27;, &#x27;title&#x27;)
+@attributeBindings(&#x27;__disabled:disabled&#x27;, &#x27;buttonType:type&#x27;, &#x27;title&#x27;)
 export default class Button extends Component {
   /**
    * Default label of the button. Not need if used as a block component
@@ -208,15 +209,32 @@ export default class Button extends Component {
    * @property disabled
    * @type ?boolean
    * @default null
+   * @deprecated
    * @public
    */
   @defaultValue
   disabled = null;
 
-  @computed(&#x27;disabled&#x27;, &#x27;isPending&#x27;, &#x27;preventConcurrency&#x27;)
-  get _disabled() {
+  /**
+   * Pproperty to disable the button only used in internal communication
+   * between Ember Boostrap components.
+   *
+   * @property _disabled
+   * @type ?boolean
+   * @default null
+   * @private
+   */
+  @defaultValue
+  _disabled = null;
+
+  @computed(&#x27;disabled&#x27;, &#x27;_disabled&#x27;, &#x27;isPending&#x27;, &#x27;preventConcurrency&#x27;)
+  get __disabled() {
     if (this.get(&#x27;disabled&#x27;) !== null) {
       return this.get(&#x27;disabled&#x27;);
+    }
+
+    if (this.get(&#x27;_disabled&#x27;) !== null) {
+      return this.get(&#x27;_disabled&#x27;);
     }
 
     return this.get(&#x27;isPending&#x27;) &amp;&amp; this.get(&#x27;preventConcurrency&#x27;);
@@ -228,6 +246,7 @@ export default class Button extends Component {
    * @property buttonType
    * @type String
    * @default &#x27;button&#x27;
+   * @deprecated
    * @public
    */
   @defaultValue
@@ -434,6 +453,7 @@ export default class Button extends Component {
    *
    * @property title
    * @type string
+   * @deprecated
    * @public
    */
   @defaultValue
@@ -508,6 +528,41 @@ export default class Button extends Component {
     }
 
     return this.get(&#x27;bubble&#x27;);
+  }
+
+  init() {
+    super.init(...arguments);
+
+    // deprecate arguments used for attribute bindings only
+    runInDebug(() =&gt; {
+      [
+        [&#x27;buttonType:type&#x27;, &#x27;submit&#x27;],
+        [&#x27;disabled&#x27;, true],
+        [&#x27;title&#x27;, &#x27;foo&#x27;],
+      ].forEach(([mapping, value]) =&gt; {
+        let argument = mapping.split(&#x27;:&#x27;)[0];
+        let attribute = mapping.includes(&#x27;:&#x27;) ? mapping.split(&#x27;:&#x27;)[1] : argument;
+        let deprecationMessage =
+          &#x60;Argument ${argument} of &lt;BsButton&gt; component is deprecated. It&#x27;s only purpose &#x60; +
+          &#x60;was setting the HTML attribute ${attribute} of the control element. You should use &#x60; +
+          &#x60;angle bracket  component invocation syntax instead:\n&#x60; +
+          &#x60;Before:\n&#x60; +
+          &#x60;  {{bs-button ${attribute}=${typeof value === &#x27;string&#x27; ? &#x60;&quot;${value}&quot;&#x60; : value}}}\n&#x60; +
+          &#x60;  &lt;BsButton @${attribute}=${typeof value === &#x27;string&#x27; ? &#x60;&quot;${value}&quot;&#x60;: &#x60;{{${value}}}&#x60;} /&gt;\n&#x60; +
+          &#x60;After:\n&#x60; +
+          &#x60;  &lt;BsButton ${typeof value === &#x27;boolean&#x27; ? attribute : &#x60;${attribute}=&quot;${value}&quot;&#x60;} /&gt;&#x60;;
+
+        deprecate(
+          deprecationMessage,
+          // eslint-disable-next-line ember/no-attrs-in-components
+          !Object.keys(this.attrs).includes(argument),
+          {
+            id: &#x60;ember-bootstrap.deprecated-argument.button#${argument}&#x60;,
+            until: &#x27;4.0.0&#x27;,
+          }
+        );
+      });
+    });
   }
 }
 

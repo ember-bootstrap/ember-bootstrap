@@ -176,24 +176,26 @@ export default class Carousel extends Component.extend(ComponentParent) {
    */
   @observes(&#x27;childSlides.[]&#x27;, &#x27;autoPlay&#x27;)
   childSlidesObserver() {
-    scheduleOnce(&#x27;actions&#x27;, () =&gt; {
-      let childSlides = this.get(&#x27;childSlides&#x27;);
-      if (childSlides.length === 0) {
-        return;
-      }
-      // Sets new current index
-      let currentIndex = this.get(&#x27;currentIndex&#x27;);
-      if (currentIndex &gt;= childSlides.length) {
-        currentIndex = childSlides.length - 1;
-        this.set(&#x27;currentIndex&#x27;, currentIndex);
-      }
-      // Automatic sliding
-      if (this.get(&#x27;autoPlay&#x27;)) {
-        this.get(&#x27;waitIntervalToInitCycle&#x27;).perform();
-      }
-      // Initial slide state
-      this.set(&#x27;presentationState&#x27;, null);
-    });
+    scheduleOnce(&#x27;actions&#x27;, this, this._childSlidesObserver);
+  }
+
+  _childSlidesObserver() {
+    let childSlides = this.get(&#x27;childSlides&#x27;);
+    if (childSlides.length === 0) {
+      return;
+    }
+    // Sets new current index
+    let currentIndex = this.get(&#x27;currentIndex&#x27;);
+    if (currentIndex &gt;= childSlides.length) {
+      currentIndex = childSlides.length - 1;
+      this.set(&#x27;currentIndex&#x27;, currentIndex);
+    }
+    // Automatic sliding
+    if (this.get(&#x27;autoPlay&#x27;)) {
+      this.get(&#x27;waitIntervalToInitCycle&#x27;).perform();
+    }
+    // Initial slide state
+    this.set(&#x27;presentationState&#x27;, null);
   }
 
   /**

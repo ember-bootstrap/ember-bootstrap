@@ -78,20 +78,22 @@ within your form but instead in your modal footer. Hover pressing the submit but
 trigger the form data to be submitted. In the example below this would not trigger the submit action of the form, an
 thus bypass the form validation feature of the form component.</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok"&gt;
-  &lt;BsForm @model={{this}} @onSubmit={{action "submit"}} as |Form|&gt;
+  &lt;BsForm @model={{this}} @onSubmit={{action "submit"}} @submitOnError={{true}} as |Form|&gt;
     &lt;Form.element @controlType="text" @label="first name" @property="firstname" /&gt;
     &lt;Form.element @controlType="text" @label="last name" @property="lastname" /&gt;
   &lt;/BsForm&gt;
 &lt;/BsModalSimple&gt;
 </code></pre>
 <p>The modal component supports this common case by triggering the submit event programmatically on the body's form if
-present whenever the footer's submit button is pressed, so the example above will work as expected.</p>
+present whenever the footer's submit button is pressed. To allow the form to be submitted by pressing the enter key
+also, you must either set <code>@submitOnError={{true}}</code> on the <code>&lt;BsForm&gt;</code> or include an invisible submit button in the
+form (<code>&lt;button type="submit" class="d-hidden"&gt;Submit&lt;/button&gt;</code>).</p>
 <h3>Auto-focus</h3>
 <p>In order to allow key handling to function, the modal's root element is given focus once the modal is shown. If your
 modal contains an element such as a text input and you would like it to be given focus rather than the modal element,
 then give it the HTML5 autofocus attribute:</p>
 <pre class="code prettyprint"><code class="language-hbs">&lt;BsModalSimple @title="Form Example" @closeTitle="Cancel" @submitTitle="Ok"&gt;
-  &lt;BsForm @model={{this}} @onSubmit={{action "submit"}} as |Form|&gt;
+  &lt;BsForm @model={{this}} @onSubmit={{action "submit"}} @submitOnError={{true}} as |Form|&gt;
     &lt;Form.element @controlType="text" @label="first name" @property="firstname" @autofocus={{true}} /&gt;
     &lt;Form.element @controlType="text" @label="last name" @property="lastname" /&gt;
   &lt;/BsForm&gt;
@@ -1028,7 +1030,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> true</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-modal-simple.js.html#l91"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal-simple.js:91</code></a>
+                  <a href="../files/addon_components_base_bs-modal-simple.js.html#l93"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal-simple.js:93</code></a>
               </p>
             
             
@@ -1058,7 +1060,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> &#x27;Ok&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-modal-simple.js.html#l102"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal-simple.js:102</code></a>
+                  <a href="../files/addon_components_base_bs-modal-simple.js.html#l104"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal-simple.js:104</code></a>
               </p>
             
             
@@ -1820,7 +1822,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> &#x27;primary&#x27;</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-modal-simple.js.html#l113"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal-simple.js:113</code></a>
+                  <a href="../files/addon_components_base_bs-modal-simple.js.html#l115"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal-simple.js:115</code></a>
               </p>
             
             
@@ -1850,7 +1852,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
                   <p><strong>Default:</strong> null</p>
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-modal-simple.js.html#l124"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal-simple.js:124</code></a>
+                  <a href="../files/addon_components_base_bs-modal-simple.js.html#l126"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal-simple.js:126</code></a>
               </p>
             
             
@@ -1879,7 +1881,7 @@ are not effected by parent elements with <code>overflow: hidden</code> for examp
               <div class="meta">
                   <p>
                       Defined in
-                  <a href="../files/addon_components_base_bs-modal-simple.js.html#l83"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal-simple.js:83</code></a>
+                  <a href="../files/addon_components_base_bs-modal-simple.js.html#l85"><code>addon&#x2F;components&#x2F;base&#x2F;bs-modal-simple.js:85</code></a>
               </p>
             
             

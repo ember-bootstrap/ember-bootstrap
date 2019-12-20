@@ -59,7 +59,7 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import { layout as templateLayout, tagName } from &#x27;@ember-decorators/component&#x27;;
-import { computed } from &#x27;@ember/object&#x27;;
+import { computed, action } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-dropdown/menu&#x27;;
 import { next } from &#x27;@ember/runloop&#x27;;
@@ -196,6 +196,14 @@ export default class DropdownMenu extends Component {
       placement = &#x27;bottom-end&#x27;;
     }
     return placement;
+  }
+
+  @action
+  setFocus() {
+    let menuElement = document.getElementById(&#x60;${this.get(&#x27;dropdownElementId&#x27;)}__menu&#x60;);
+    if (menuElement) {
+      menuElement.focus();
+    }
   }
 
   @computed(&#x27;inNav&#x27;, &#x27;flip&#x27;)

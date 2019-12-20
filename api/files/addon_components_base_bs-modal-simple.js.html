@@ -98,7 +98,7 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
   &#x60;&#x60;&#x60;hbs
   &lt;BsModalSimple @title=&quot;Form Example&quot; @closeTitle=&quot;Cancel&quot; @submitTitle=&quot;Ok&quot;&gt;
-    &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |Form|&gt;
+    &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} @submitOnError={{true}} as |Form|&gt;
       &lt;Form.element @controlType=&quot;text&quot; @label=&quot;first name&quot; @property=&quot;firstname&quot; /&gt;
       &lt;Form.element @controlType=&quot;text&quot; @label=&quot;last name&quot; @property=&quot;lastname&quot; /&gt;
     &lt;/BsForm&gt;
@@ -106,7 +106,9 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
   &#x60;&#x60;&#x60;
 
   The modal component supports this common case by triggering the submit event programmatically on the body&#x27;s form if
-  present whenever the footer&#x27;s submit button is pressed, so the example above will work as expected.
+  present whenever the footer&#x27;s submit button is pressed. To allow the form to be submitted by pressing the enter key
+  also, you must either set &#x60;@submitOnError={{true}}&#x60; on the &#x60;&lt;BsForm&gt;&#x60; or include an invisible submit button in the
+  form (&#x60;&lt;button type=&quot;submit&quot; class=&quot;d-hidden&quot;&gt;Submit&lt;/button&gt;&#x60;).
 
   ### Auto-focus
 
@@ -116,7 +118,7 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 
   &#x60;&#x60;&#x60;hbs
   &lt;BsModalSimple @title=&quot;Form Example&quot; @closeTitle=&quot;Cancel&quot; @submitTitle=&quot;Ok&quot;&gt;
-    &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |Form|&gt;
+    &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} @submitOnError={{true}} as |Form|&gt;
       &lt;Form.element @controlType=&quot;text&quot; @label=&quot;first name&quot; @property=&quot;firstname&quot; @autofocus={{true}} /&gt;
       &lt;Form.element @controlType=&quot;text&quot; @label=&quot;last name&quot; @property=&quot;lastname&quot; /&gt;
     &lt;/BsForm&gt;

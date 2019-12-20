@@ -63,7 +63,7 @@ import { observes } from &#x27;@ember-decorators/object&#x27;;
 import { alias, and, equal, gt, notEmpty, or } from &#x27;@ember/object/computed&#x27;;
 import { action, computed, defineProperty } from &#x27;@ember/object&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
-import { assert } from &#x27;@ember/debug&#x27;;
+import { assert, deprecate, runInDebug } from &#x27;@ember/debug&#x27;;
 import { isBlank, typeOf } from &#x27;@ember/utils&#x27;;
 import { A, isArray } from &#x27;@ember/array&#x27;;
 import { getOwner } from &#x27;@ember/application&#x27;;
@@ -85,10 +85,10 @@ const nonDefaultLayouts = A([
 
   &#x60;&#x60;&#x60;handlebars
   &lt;BsForm @formLayout=&quot;horizontal&quot; @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
-    &lt;form.element @controlType=&quot;email&quot; @label=&quot;Email&quot; @placeholder=&quot;Email&quot; @value={{this.email}}&quot; /&gt;
-    &lt;form.element @controlType=&quot;password&quot; @label=&quot;Password&quot; @placeholder=&quot;Password&quot; @value={{this.password}} /&gt;
+    &lt;form.element @controlType=&quot;email&quot; @label=&quot;Email&quot; @value={{this.email}}&quot; /&gt;
+    &lt;form.element @controlType=&quot;password&quot; @label=&quot;Password&quot; @value={{this.password}} /&gt;
     &lt;form.element @controlType=&quot;checkbox&quot; @label=&quot;Remember me&quot; @value={{this.rememberMe}} /&gt;
-    &lt;BsButton @defaultText=&quot;Submit&quot; @type=&quot;primary&quot; @buttonType=&quot;submit&quot; /&gt;
+    &lt;BsButton @defaultText=&quot;Submit&quot; @type=&quot;primary&quot; type=&quot;submit&quot; /&gt;
   &lt;/BsForm&gt;
   &#x60;&#x60;&#x60;
 
@@ -128,13 +128,13 @@ const nonDefaultLayouts = A([
   #### Custom controls
 
   Apart from the standard built-in browser controls (see the &#x60;controlType&#x60; property), you can use any custom control simply
-  by invoking the component with a block template. Use whatever control you might want, for example a &#x60;&lt;PickadayInput&gt;&#x60;
+  by invoking the component with a block template. Use whatever control you might want, for example a &#x60;&lt;PikadayInput&gt;&#x60;
   component (from the [ember-pikaday addon](https://github.com/adopted-ember-addons/ember-pikaday)):
 
   &#x60;&#x60;&#x60;hbs
   &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
     &lt;form.element @label=&quot;Select-2&quot; @property=&quot;gender&quot; @useIcons={{false}} as |el|&gt;
-      &lt;PickadayInput @value={{el.value}} @onSelection={{action (mut el.value)}} id={{el.id}} /&gt;
+      &lt;PikadayInput @value={{el.value}} @onSelection={{action (mut el.value)}} id={{el.id}} /&gt;
     &lt;/form.element&gt;
   &lt;/BsForm&gt;
   &#x60;&#x60;&#x60;
@@ -153,8 +153,8 @@ const nonDefaultLayouts = A([
 
   &#x60;&#x60;&#x60;hbs
   &lt;BsForm @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
-    &lt;form.element @label=&quot;Email&quot; @placeholder=&quot;Email&quot; @property=&quot;email&quot; as |el|&gt;
-      &lt;el.control class=&quot;input-lg&quot; /&gt;
+    &lt;form.element @label=&quot;Email&quot; @property=&quot;email&quot; as |el|&gt;
+      &lt;el.control class=&quot;input-lg&quot; placeholder=&quot;Email&quot; /&gt;
     &lt;/form.element&gt;
   &lt;/BsForm&gt;
   &#x60;&#x60;&#x60;
@@ -171,8 +171,8 @@ const nonDefaultLayouts = A([
 
   &#x60;&#x60;&#x60;handlebars
   &lt;BsForm @formLayout=&quot;horizontal&quot; @model={{this}} @onSubmit={{action &quot;submit&quot;}} as |form|&gt;
-    &lt;form.element @controlType=&quot;email&quot; @label=&quot;Email&quot; @placeholder=&quot;Email&quot; @property=&quot;email&quot; /&gt;
-    &lt;form.element @controlType=&quot;password&quot; @label=&quot;Password&quot; @placeholder=&quot;Password&quot; @property=&quot;password&quot; /&gt;
+    &lt;form.element @controlType=&quot;email&quot; @label=&quot;Email&quot; @property=&quot;email&quot; /&gt;
+    &lt;form.element @controlType=&quot;password&quot; @label=&quot;Password&quot; @property=&quot;password&quot; /&gt;
     &lt;form.element @controlType=&quot;checkbox&quot; @label=&quot;Remember me&quot; @property=&quot;rememberMe&quot; /&gt;
     &lt;BsButton @defaultText=&quot;Submit&quot; @type=&quot;primary&quot; @buttonType=&quot;submit&quot; /&gt;
   &lt;/BsForm&gt;
@@ -243,9 +243,9 @@ const nonDefaultLayouts = A([
   &lt;form.element @controlType=&quot;email&quot; @label=&quot;Email&quot; @property=&quot;email&quot; as |el|&gt;
     &lt;el.control
       placeholder=&quot;Email&quot;
-      required={{true}}
-      multiple={{true}}
       tabIndex={{5}}
+      multiple
+      required
     /&gt;
   &lt;/form.element&gt;
   ...
@@ -265,6 +265,8 @@ const nonDefaultLayouts = A([
   ...
   {{/bs-form}}
   &#x60;&#x60;&#x60;
+
+  But be aware that this is deprecated and will be removed in Ember Bootstrap v4.
 
   The following attributes are supported depending on the &#x60;controlType&#x60;:
 
@@ -509,7 +511,7 @@ export default class FormElement extends FormGroup {
    * get/set the control element&#x27;s value:
    *
    * &#x60;&#x60;&#x60;hbs
-   * {{form.element controlType=&quot;email&quot; label=&quot;Email&quot; placeholder=&quot;Email&quot; value=email}}
+   * &lt;form.element controlType=&quot;email&quot; label=&quot;Email&quot; value={{email}} /&gt;
    * &#x60;&#x60;&#x60;
    *
    * Note: you lose the ability to validate this form element by directly binding to its value. It is recommended
@@ -1129,6 +1131,68 @@ export default class FormElement extends FormGroup {
       defineProperty(this, &#x27;value&#x27;, alias(&#x60;model.${this.get(&#x27;property&#x27;)}&#x60;));
       this.setupValidations();
     }
+
+    // deprecate arguments used for attribute bindings only
+    runInDebug(() =&gt; {
+      [
+        [&#x27;accept&#x27;, &#x27;image/png&#x27;],
+        [&#x27;autocapitalize&#x27;, &#x27;words&#x27;],
+        [&#x27;autocomplete&#x27;, &#x27;on&#x27;],
+        [&#x27;autocorrect&#x27;, &#x27;off&#x27;],
+        [&#x27;autofocus&#x27;, false],
+        [&#x27;autosave&#x27;, &#x27;someuniquevalue&#x27;],
+        [&#x27;cols&#x27;, &#x27;10&#x27;],
+        [&#x27;controlSize:size&#x27;, &#x27;10&#x27;],
+        [&#x27;form&#x27;, &#x27;myform&#x27;],
+        [&#x27;inputmode&#x27;, &#x27;tel&#x27;],
+        [&#x27;max&#x27;, &#x27;5&#x27;],
+        [&#x27;maxlength&#x27;, &#x27;5&#x27;],
+        [&#x27;min&#x27;, &#x27;5&#x27;],
+        [&#x27;minlength&#x27;, &#x27;5&#x27;],
+        [&#x27;multiple&#x27;, true],
+        [&#x27;name&#x27;, &#x27;foo&#x27;],
+        [&#x27;pattern&#x27;, &#x27;^[0-9]{5}$&#x27;],
+        [&#x27;placeholder&#x27;, &#x27;foo&#x27;],
+        [&#x27;rows&#x27;, &#x27;10&#x27;],
+        [&#x27;spellcheck&#x27;, true],
+        [&#x27;step&#x27;, &#x27;2&#x27;],
+        [&#x27;tabindex&#x27;, &#x27;-1&#x27;],
+        [&#x27;title&#x27;, &#x27;foo&#x27;],
+        [&#x27;wrap&#x27;, &#x27;hard&#x27;],
+      ].forEach(([mapping, value]) =&gt; {
+        let argument = mapping.split(&#x27;:&#x27;)[0];
+        let attribute = mapping.includes(&#x27;:&#x27;) ? mapping.split(&#x27;:&#x27;)[1] : argument;
+        let deprecationMessage =
+          &#x60;Argument ${argument} of &lt;element&gt; component yielded by &lt;BsForm&gt; is deprecated. &#x60; +
+          &#x60;It&#x27;s only purpose was setting the HTML attribute ${attribute} of the control element. &#x60; +
+          &#x60;You should use  angle bracket  component invocation syntax instead:\n&#x60; +
+          &#x60;Before:n&#x60; +
+          &#x60;  {{#bs-form as |form|}}\n&#x60; +
+          &#x60;    {{form.element ${attribute}=${typeof value === &#x27;string&#x27; ? &#x60;&quot;${value}&quot;&#x60; : value}}}\n&#x60; +
+          &#x60;  {{/bs-form}}\n&#x60; +
+          &#x60;  &lt;BsForm as |form|&gt;\n&#x60; +
+          &#x60;    &lt;form.element as |el|&gt;\n&#x60; +
+          &#x60;      &lt;el.control @${attribute}=${typeof value === &#x27;string&#x27; ? &#x60;&quot;${value}&quot;&#x60;: &#x60;{{${value}}}&#x60;} /&gt;\n&#x60; +
+          &#x60;    &lt;/form.element&gt;\n&#x60; +
+          &#x60;  &lt;/BsForm&gt;\n&#x60; +
+          &#x60;After:\n&#x60; +
+          &#x60;  &lt;BsForm as |form|&gt;\n&#x60; +
+          &#x60;    &lt;form.element as |el|&gt;\n&#x60; +
+          &#x60;      &lt;el.control ${typeof value === &#x27;boolean&#x27; ? ( value ? attribute : &#x27;&#x27; ) : &#x60;${attribute}=&quot;${value}&quot;&#x60;} /&gt;\n&#x60; +
+          &#x60;    &lt;/form.element&gt;\n&#x60; +
+          &#x60;  &lt;/BsForm&gt;&#x60;;
+
+        deprecate(
+          deprecationMessage,
+          // eslint-disable-next-line ember/no-attrs-in-components
+          !Object.keys(this.attrs).includes(argument),
+          {
+            id: &#x60;ember-bootstrap.deprecated-argument.form-element#${argument}&#x60;,
+            until: &#x27;4.0.0&#x27;,
+          }
+        );
+      });
+    });
   }
 
   /*
@@ -1141,37 +1205,39 @@ export default class FormElement extends FormGroup {
    */
   @observes(&#x27;hasFeedback&#x27;, &#x27;formLayout&#x27;)
   adjustFeedbackIcons() {
-    scheduleOnce(&#x27;afterRender&#x27;, () =&gt; {
-      let el = this.get(&#x27;element&#x27;);
-      let feedbackIcon;
-      // validation state icons are only shown if form element has feedback
-      if (!this.get(&#x27;isDestroying&#x27;)
-        &amp;&amp; this.get(&#x27;hasFeedback&#x27;)
-        // and form group element has
-        // an input-group
-        &amp;&amp; el.querySelector(&#x27;.input-group&#x27;)
-        // an addon or button on right side
-        &amp;&amp; el.querySelector(&#x27;.input-group input + .input-group-addon, .input-group input + .input-group-btn&#x27;)
-        // an icon showing validation state
-        &amp;&amp; (feedbackIcon = el.querySelector(&#x27;.form-control-feedback&#x27;))
-      ) {
-        // clear existing adjustment
-        feedbackIcon.style.right = &#x27;&#x27;;
+    scheduleOnce(&#x27;afterRender&#x27;, this, this._adjustFeedbackIcons);
+  }
 
-        let defaultPosition = 0;
-        let match = getComputedStyle(feedbackIcon).right.match(/^(\d+)px$/);
-        if (match) {
-          defaultPosition = parseInt(match[1]);
-        }
-        // Bootstrap documentation:
-        //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
-        // therefore we could rely on having only one input-group-addon or input-group-btn
-        let inputGroupWidth = el.querySelector(&#x27;input + .input-group-addon, input + .input-group-btn&#x27;).offsetWidth;
-        let adjustedPosition = defaultPosition + inputGroupWidth;
+  _adjustFeedbackIcons() {
+    let el = this.get(&#x27;element&#x27;);
+    let feedbackIcon;
+    // validation state icons are only shown if form element has feedback
+    if (!this.get(&#x27;isDestroying&#x27;)
+      &amp;&amp; this.get(&#x27;hasFeedback&#x27;)
+      // and form group element has
+      // an input-group
+      &amp;&amp; el.querySelector(&#x27;.input-group&#x27;)
+      // an addon or button on right side
+      &amp;&amp; el.querySelector(&#x27;.input-group input + .input-group-addon, .input-group input + .input-group-btn&#x27;)
+      // an icon showing validation state
+      &amp;&amp; (feedbackIcon = el.querySelector(&#x27;.form-control-feedback&#x27;))
+    ) {
+      // clear existing adjustment
+      feedbackIcon.style.right = &#x27;&#x27;;
 
-        feedbackIcon.style.right = &#x60;${adjustedPosition}px&#x60;;
+      let defaultPosition = 0;
+      let match = getComputedStyle(feedbackIcon).right.match(/^(\d+)px$/);
+      if (match) {
+        defaultPosition = parseInt(match[1]);
       }
-    });
+      // Bootstrap documentation:
+      //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
+      // therefore we could rely on having only one input-group-addon or input-group-btn
+      let inputGroupWidth = el.querySelector(&#x27;input + .input-group-addon, input + .input-group-btn&#x27;).offsetWidth;
+      let adjustedPosition = defaultPosition + inputGroupWidth;
+
+      feedbackIcon.style.right = &#x60;${adjustedPosition}px&#x60;;
+    }
   }
 
   didInsertElement() {
