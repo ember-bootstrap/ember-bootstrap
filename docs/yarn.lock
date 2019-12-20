@@ -4155,6 +4155,13 @@ ember-basic-dropdown@^1.1.0:
     ember-cli-htmlbars "^3.0.1"
     ember-maybe-in-element "^0.2.0"
 
+ember-bootstrap-cp-validations@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-bootstrap-cp-validations/-/ember-bootstrap-cp-validations-1.0.0.tgz#bd24db8dfa3576ff14be5a3f528ef76bed84d80b"
+  integrity sha512-JJWdvdm/SpAGrxJgYh7Pbndw9tZNW4b0pacZ3lo1Hj4dLjEr5g5GlyW+TGcg8LUMMU4b+BDVRIlRJ2TcHF+Zcg==
+  dependencies:
+    ember-cli-babel "^6.6.0"
+
 ember-bootstrap-power-select@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ember-bootstrap-power-select/-/ember-bootstrap-power-select-1.1.0.tgz#c3654f4b2691fa91c6efc88136bb440e10d0d564"
