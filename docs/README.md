@@ -1,7 +1,6 @@
 # ember-bootstrap-docs
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This is the documentation app for ember-bootstrap, hosted at https://ember-bootstrap.com.
 
 ## Prerequisites
 
@@ -16,14 +15,16 @@ You will need the following things properly installed on your computer.
 ## Installation
 
 * `git clone <repository-url>` this repository
-* `cd ember-bootstrap-docs`
+* `cd ember-bootstrap`
+* `yarn install`
+* `cd docs`
 * `yarn install`
 
 ## Running / Development
 
 * `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+* Visit your app at [http://localhost:4201](http://localhost:4200).
+* Visit your tests at [http://localhost:4201/tests](http://localhost:4200/tests).
 
 ### Code Generators
 
@@ -47,7 +48,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+* `gulp docs` (run in root directory)
 
 ## Further Reading / Useful Links
 
