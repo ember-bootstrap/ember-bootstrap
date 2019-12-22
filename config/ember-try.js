@@ -1,6 +1,7 @@
 'use strict';
 
 const getChannelURL = require('ember-source-channel-url');
+const bootstrapVersion = process.env.BOOTSTRAPVERSION === '3' ? '^3.4.1' : '^4.3.1';
 
 module.exports = function() {
   return Promise.all([
@@ -20,7 +21,8 @@ module.exports = function() {
           npm: {
             devDependencies: {
               '@ember/jquery': '^0.5.1',
-              'ember-source': '~2.18.0'
+              'ember-source': '~2.18.0',
+              'bootstrap': bootstrapVersion
             }
           }
         },
@@ -28,7 +30,8 @@ module.exports = function() {
           name: 'ember-lts-3.4',
           npm: {
             devDependencies: {
-              'ember-source': '~3.4.0'
+              'ember-source': '~3.4.0',
+              'bootstrap': bootstrapVersion
             }
           }
         },
@@ -36,7 +39,8 @@ module.exports = function() {
           name: 'ember-release',
           npm: {
             devDependencies: {
-              'ember-source': urls[0]
+              'ember-source': urls[0],
+              'bootstrap': bootstrapVersion
             }
           },
           env: {
@@ -47,7 +51,8 @@ module.exports = function() {
           name: 'ember-beta',
           npm: {
             devDependencies: {
-              'ember-source': urls[1]
+              'ember-source': urls[1],
+              'bootstrap': bootstrapVersion
             }
           }
         },
@@ -55,7 +60,8 @@ module.exports = function() {
           name: 'ember-canary',
           npm: {
             devDependencies: {
-              'ember-source': urls[2]
+              'ember-source': urls[2],
+              'bootstrap': bootstrapVersion
             }
           },
           env: {
@@ -69,7 +75,9 @@ module.exports = function() {
         {
           name: 'ember-default',
           npm: {
-            devDependencies: {}
+            devDependencies: {
+            'bootstrap': bootstrapVersion
+            }
           }
         },
         {
@@ -81,13 +89,19 @@ module.exports = function() {
           },
           npm: {
             devDependencies: {
-              '@ember/jquery': '^0.5.1'
+              '@ember/jquery': '^0.5.1',
+              'bootstrap': bootstrapVersion
             }
           }
         },
         {
           name: 'fastboot-tests',
-          command: 'ember test --filter FastBoot'
+          command: 'ember test --filter FastBoot',
+          npm: {
+            devDependencies: {
+              'bootstrap': bootstrapVersion
+            }
+          }
         },
         {
           name: 'node-tests',
