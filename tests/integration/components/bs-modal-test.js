@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click } from '@ember/test-helpers';
+import { render, click, triggerEvent } from '@ember/test-helpers';
 import { test } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -150,5 +150,29 @@ module('Integration | Component | bs-modal', function(hooks) {
     assert.dom('.modal').hasClass('custom');
     assert.dom('.modal').hasAttribute('role', 'alert');
     assert.dom('.modal').hasAttribute('data-test');
+  });
+
+  test('it keeps itself visible when mouse click is started from inside of the modal \
+    and dragged outside of the modal', async function(assert) {
+    await render(hbs`
+      <BsModal>
+        template block text
+      </BsModal>
+    `);
+    await triggerEvent('.modal-content', 'mousedown');
+    await triggerEvent('.modal', 'mouseup');
+
+    assert.dom('.modal').exists('Modal should be still visible');
+  });
+
+  test('it closes itself when backdrop is clicked', async function(assert) {
+    await render(hbs`
+      <BsModal>
+        template block text
+      </BsModal>
+    `);
+    await click('.modal');
+
+    assert.dom('.modal').doesNotExist('Modal closes itself as normal');
   });
 });
