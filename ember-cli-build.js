@@ -6,6 +6,9 @@ module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
     'ember-cli-babel': {
       includePolyfill: !!process.env.BABELPOLYFILL
+    },
+    autoImport: {
+      forbidEval: true
     }
   });
 

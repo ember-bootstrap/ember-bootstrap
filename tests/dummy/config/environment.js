@@ -26,8 +26,7 @@ module.exports = function(environment) {
     failOnDeprecation: !!process.env.FAIL_ON_DEPRECATION,
     contentSecurityPolicy: {
       'script-src': [
-        "'self'",
-        "'unsafe-eval'"
+        "'self'"
       ],
       'img-src': [
         "'self'",
