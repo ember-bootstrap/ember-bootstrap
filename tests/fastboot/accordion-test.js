@@ -8,7 +8,7 @@ module('FastBoot | accordion', function(hooks) {
   setupFastBootRootElement(hooks);
 
   testBS4('it renders', async function(assert) {
-    await visit('/components/accordion');
+    await visit('/fastboot/accordion');
 
     assert.dom('.accordion').exists();
     assert.dom('.accordion .card').exists({ count: 3 });
@@ -16,7 +16,7 @@ module('FastBoot | accordion', function(hooks) {
   });
 
   testBS3('it renders', async function(assert) {
-    await visit('/components/accordion');
+    await visit('/fastboot/accordion');
 
     assert.dom('.panel-group').exists();
     assert.dom('.panel-group .panel').exists({ count: 3 });

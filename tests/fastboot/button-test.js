@@ -8,7 +8,7 @@ module('FastBoot | button', function(hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function(assert) {
-    await visit('/components/button');
+    await visit('/fastboot/button');
 
     assert.dom('.btn').exists();
     assert.dom('.btn').hasClass(defaultButtonClass());

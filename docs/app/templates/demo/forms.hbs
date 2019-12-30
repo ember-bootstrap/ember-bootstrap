@@ -64,24 +64,14 @@
   The following example uses ember-cp-validations:
 </p>
 
-{{!--
-This is needed for the correct code sample as we have no bs-form with validation support in this addon to not override
-the original one in tests. -bs-form contains the (copy pasted) validation support from ember-bootstrap-cp-validations
-
-<!-- BEGIN-SNIPPET form-validation -->
-<BsForm @model={{login}} @onSubmit={{action "submit"}} as |form|>
-    <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
-    <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" />
-    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
-</BsForm>
-<!-- END-SNIPPET -->
---}}
 <div class="bs-example">
-  {{#-bs-form model=login onSubmit=(action "submit") as |form|}}
+  <!-- BEGIN-SNIPPET form-validation -->
+  <BsForm @model={{this.login}} @onSubmit={{action "submit"}} as |form|>
     <form.element @controlType="email" @label="Email" @placeholder="Email" @property="email" />
     <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password" @helpText="Minimum 6 characters" />
     <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
-  {{/-bs-form}}
+  </BsForm>
+  <!-- END-SNIPPET -->
 </div>
 <BsTab as |tab|>
   <tab.pane @title="template.hbs">
@@ -101,9 +91,8 @@ the original one in tests. -bs-form contains the (copy pasted) validation suppor
 <p>Use the form element in block form to add your custom controls:</p>
 
 <div class="bs-example">
-  {{!--
   <!-- BEGIN-SNIPPET form-custom -->
-  <BsForm @model={{login}} @onSubmit={{action "submit"}} as |form|>
+  <BsForm @model={{this.login}} @∆onSubmit={{action "submit"}} as |form|>
     <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
       <div class="input-group">
         <el.control />
@@ -116,19 +105,6 @@ the original one in tests. -bs-form contains the (copy pasted) validation suppor
     <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
   </BsForm>
   <!-- END-SNIPPET -->
-  --}}
-  {{#-bs-form model=this.login onSubmit=(action "submit") as |form|}}
-    <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
-      <div class="input-group">
-        <el.control />
-        <div class="input-group-append">
-          <span class="input-group-text">@example.com</span>
-        </div>
-      </div>
-    </form.element>
-    <form.element @size="lg" @controlType="password" @label="Password" @placeholder="Password" @property="password" @helpText="Minimum 6 characters" />
-    <BsButton @defaultText="Submit" @type="primary" @buttonType="submit" />
-  {{/-bs-form}}
 </div>
 <div class="highlight">
   <CodeSnippet @name="form-custom.hbs" />

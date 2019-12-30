@@ -1,30 +1,16 @@
 'use strict';
 /* eslint-env node */
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
-const path = require('path');
 
 module.exports = function(defaults) {
-  let options = {
-    snippetSearchPaths: [path.join('tests','dummy','app')],
-    'ember-bootstrap': {
-      bootstrapVersion: 4,
-      importBootstrapCSS: false
-    },
-    'ember-prism': {
-      'components': ['markup-templating', 'handlebars', 'javascript'],
-      plugins: [
-        'line-numbers',
-      ],
+  let app = new EmberAddon(defaults, {
+    'ember-cli-babel': {
+      includePolyfill: !!process.env.BABELPOLYFILL
     },
     autoImport: {
       forbidEval: true
-    },
-    'ember-cli-babel': {
-      includePolyfill: !!process.env.BABELPOLYFILL
     }
-  };
-
-  let app = new EmberAddon(defaults, options);
+  });
 
   /*
     This build file specifies the options for the dummy test app of this

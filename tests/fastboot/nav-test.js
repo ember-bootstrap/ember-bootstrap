@@ -7,7 +7,7 @@ module('FastBoot | nav', function(hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function(assert) {
-    await visit('/components/navs');
+    await visit('/fastboot/navs');
 
     assert.dom('.nav').exists();
     assert.dom('.nav li').exists({ count: 3 });

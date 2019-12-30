@@ -1,13 +1,19 @@
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-export default class Router extends EmberRouter {
-  location = config.locationType;
-  rootURL = config.rootURL;
-}
+const Router = EmberRouter.extend({
+  location: config.locationType,
+  rootURL: config.rootURL
+});
 
 Router.map(function() {
-  this.route('demo', { path: '/components' }, function() {
+  this.route('acceptance', function() {
+    this.route('modal');
+    this.route('link', { path: '/link/:model' });
+    this.route('linkto', { path: '/linkto/:model' });
+  });
+
+  this.route('fastboot', function() {
     this.route('accordion');
     this.route('alert');
     this.route('button');
@@ -21,22 +27,9 @@ Router.map(function() {
     this.route('navs');
     this.route('popover');
     this.route('progress');
-    this.route('tabs', function() {
-      this.route('other');
-    });
+    this.route('tabs');
     this.route('tooltip');
   });
-  this.route('getting-started', function() {
-    this.route('setup');
-    this.route('assets');
-    this.route('bootstrap-4');
-  });
-  this.route('addons');
-  this.route('license');
-  this.route('changelog');
-  this.route('acceptance', function() {
-    this.route('modal');
-    this.route('link', { path: '/link/:model' });
-    this.route('linkto', { path: '/linkto/:model' });
-  });
 });
+
+export default Router;

@@ -1,0 +1,79 @@
+{{#unless this.hideNav}}
+  <BsNavbar @fluid={{false}} @type="dark" @backgroundColor="primary" as |navbar|>
+    <LinkTo @route="index" class="navbar-brand">
+      ember-bootstrap
+    </LinkTo>
+    {{navbar.toggle}}
+    <navbar.content>
+      <navbar.nav class="mr-auto" as |nav|>
+        <nav.item>
+          <nav.link-to @route="getting-started">
+            Getting Started
+          </nav.link-to>
+        </nav.item>
+        <nav.item>
+          <nav.link-to @route="demo">
+            Components
+          </nav.link-to>
+        </nav.item>
+        <nav.item>
+          <a href="/api" class="nav-link">
+            API
+          </a>
+        </nav.item>
+        <nav.item>
+          <nav.link-to @route="addons">
+            Addons
+          </nav.link-to>
+        </nav.item>
+      </navbar.nav>
+      <navbar.nav as |nav|>
+        <nav.item>
+          <a
+            href="https://discord.gg/zT3asNS"
+            class="nav-link"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="fab fa-discord"></i>
+            e-bootstrap
+          </a>
+        </nav.item>
+        <nav.item>
+          <a
+            href="https://twitter.com/simonihmig"
+            class="nav-link"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+        </nav.item>
+        <nav.item class="visible-sm-block visible-xs-block">
+          <a
+            href="https://github.com/kaliber5/ember-bootstrap"
+            class="nav-link"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="fab fa-github"></i>
+          </a>
+        </nav.item>
+        <nav.item class="hidden-sm hidden-xs">
+          <div class="navbar-text">
+            <iframe
+              src="https://ghbtns.com/github-btn.html?user=kaliber5&repo=ember-bootstrap&type=star&count=true"
+              frameborder="0"
+              scrolling="0"
+              width="100px"
+              height="20px"
+            ></iframe>
+          </div>
+        </nav.item>
+      </navbar.nav>
+    </navbar.content>
+  </BsNavbar>
+{{/unless}}
+<div class="container mt-4">
+  {{outlet}}
+</div>

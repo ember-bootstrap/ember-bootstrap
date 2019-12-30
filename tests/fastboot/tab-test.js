@@ -7,7 +7,7 @@ module('FastBoot | tab', function(hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function(assert) {
-    await visit('/components/tabs');
+    await visit('/fastboot/tabs');
 
     assert.dom('ul.nav.nav-tabs').exists();
     assert.dom('ul.nav li').exists({ count: 2 });

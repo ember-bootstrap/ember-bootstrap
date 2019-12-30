@@ -7,7 +7,7 @@ module('FastBoot | dropdown', function(hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function(assert) {
-    await visit('/components/dropdown');
+    await visit('/fastboot/dropdown');
 
     assert.dom('.dropdown').exists();
     assert.dom('.dropdown .dropdown-toggle').exists();

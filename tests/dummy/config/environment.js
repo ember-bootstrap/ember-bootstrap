@@ -10,6 +10,10 @@ module.exports = function(environment) {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
+      },
+      EXTEND_PROTOTYPES: {
+        // Prevent Ember Data from overriding Date.parse.
+        Date: false
       }
     },
 
@@ -18,55 +22,28 @@ module.exports = function(environment) {
       // when it is created
     },
 
+    bootstrapVersion: process.env.BOOTSTRAPVERSION || 4,
+    failOnDeprecation: !!process.env.FAIL_ON_DEPRECATION,
     contentSecurityPolicy: {
-      'default-src': ["'none'"],
       'script-src': [
-        "'self'",
-        "'sha256-1xtiB6mV1iIKZ5iz9CxA5lEnfEg8d0XEH3FL9L8NBqo='",
-        "use.typekit.net"
-      ],
-      'font-src': [
-        "'self'",
-        "use.typekit.net",
-        "use.fontawesome.com"
-      ],
-      'connect-src': [
-        "'self'",
-        "performance.typekit.net"
+        "'self'"
       ],
       'img-src': [
         "'self'",
         // Bootstrap 4 uses data URL for some SVG images in CSS
         "data:",
-        "p.typekit.net"
-      ],
-      'style-src': [
-        "'self'",
-        "'unsafe-inline'",
-        "use.typekit.net",
-        "use.fontawesome.com"
-      ],
-      'media-src': ["'self'"],
-      'frame-src': [
-        // iframe used in application template of dummy app
-        "https://ghbtns.com/",
-      ],
+      ]
     },
     contentSecurityPolicyMeta: true,
-
     fastboot: {
       hostWhitelist: [/^localhost:\d+$/]
     },
-
-    bootstrapVersion: process.env.BOOTSTRAPVERSION || 4,
-    failOnDeprecation: !!process.env.FAIL_ON_DEPRECATION,
-
     'ember-a11y-testing': {
       componentOptions: {
         turnAuditOff: true,
         axeOptions: {
           checks: {
-            // color checks unfortunately fail for custom colors defined in dummy app, but are controlled at the end by
+            // color checks unfortunately fail for colors defined in dummy app, but are controlled at the end by
             // the user, so not a primary concern of the addon
             'color-contrast': { enabled: false }
           }
@@ -93,32 +70,10 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
-
-    ENV.contentSecurityPolicy = {
-      'default-src': ["'none'"],
-      'script-src': [
-        "'self'",
-      ],
-      'font-src': ["'self'"],
-      'connect-src': ["'self'"],
-      'img-src': [
-        "'self'",
-        // Bootstrap 4 uses data URL for some SVG images in CSS
-        "data:",
-      ],
-      'style-src': ["'self'"],
-      'media-src': ["'self'"],
-      'frame-src': [
-        "https://ghbtns.com/",
-        // testem requires frame-src 'self' to run
-        // https://github.com/rwjblue/ember-cli-content-security-policy/blob/v1.0.0/index.js#L85-L88
-        "'self'"
-      ]
-    };
   }
 
   if (environment === 'production') {
-    ENV.locationType = 'hash';
+    // here you can enable a production-specific feature
   }
 
   return ENV;
