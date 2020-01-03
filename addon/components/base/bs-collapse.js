@@ -1,6 +1,6 @@
 import { classNameBindings } from '@ember-decorators/component';
-import { observes } from '@ember-decorators/object';
 import { alias, and, not } from '@ember/object/computed';
+import { addObserver } from '@ember/object/observers';
 import Component from '@ember/component';
 import { isPresent } from '@ember/utils';
 import '@ember/object';
@@ -250,7 +250,6 @@ export default class Collapse extends Component {
     });
   }
 
-  @observes('collapsed')
   _onCollapsedChange() {
     let collapsed = this.get('collapsed');
     let active = this.get('active');
@@ -264,17 +263,23 @@ export default class Collapse extends Component {
     }
   }
 
-  @observes('collapsedSize')
   _updateCollapsedSize() {
     if (!this.get('resetSizeWhenNotCollapsing') && this.get('collapsed') && !this.get('collapsing')) {
       this.setCollapseSize(this.get('collapsedSize'));
     }
   }
 
-  @observes('expandedSize')
   _updateExpandedSize() {
     if (!this.get('resetSizeWhenNotCollapsing') && !this.get('collapsed') && !this.get('collapsing')) {
       this.setCollapseSize(this.get('expandedSize'));
     }
+  }
+
+  init() {
+    super.init(...arguments);
+
+    addObserver(this, 'collapsed', null, this._onCollapsedChange, true);
+    addObserver(this, 'collapsedSize', null, this._updateCollapsedSize, true);
+    addObserver(this, 'expandedSize', null, this._updateExpandedSize, true);
   }
 }

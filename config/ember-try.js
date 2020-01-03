@@ -95,6 +95,16 @@ module.exports = function() {
           }
         },
         {
+          name: 'ember-classic',
+          env: {
+            EMBER_OPTIONAL_FEATURES: JSON.stringify({
+              'application-template-wrapper': true,
+              'default-async-observers': false,
+              'template-only-glimmer-components': false
+            })
+          }
+        },
+        {
           name: 'fastboot-tests',
           command: 'ember test --filter FastBoot',
           npm: {

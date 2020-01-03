@@ -1,7 +1,7 @@
 import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
-import { observes } from '@ember-decorators/object';
 import { action } from '@ember/object';
 import { and, not } from '@ember/object/computed';
+import { addObserver } from '@ember/object/observers';
 import Component from '@ember/component';
 import { later } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-alert';
@@ -205,12 +205,17 @@ export default class Alert extends Component {
     }
   }
 
-  @observes('_visible')
   _observeIsVisible() {
     if (this.get('_visible')) {
       this.show();
     } else {
       this.hide();
     }
+  }
+
+  init() {
+    super.init(...arguments);
+
+    addObserver(this, '_visible', null, this._observeIsVisible, true);
   }
 }
