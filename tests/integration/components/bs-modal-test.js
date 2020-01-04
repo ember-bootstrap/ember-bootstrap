@@ -161,6 +161,7 @@ module('Integration | Component | bs-modal', function(hooks) {
     `);
     await triggerEvent('.modal-content', 'mousedown');
     await triggerEvent('.modal', 'mouseup');
+    await triggerEvent('.modal', 'click');
 
     assert.dom('.modal').exists('Modal should be still visible');
   });

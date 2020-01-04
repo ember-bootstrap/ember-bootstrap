@@ -234,11 +234,11 @@ export default class ModalDialog extends Component {
     this.get('onClose')();
   }
 
-  _mouseDown(e) {
+  mouseDown(e) {
     this.set('mouseDownElement', e.target);
   }
 
-  _mouseUp(e) {
+  mouseUp(e) {
     if (this.mouseDownElement !== this.element && e.target === this.element) {
       this.set('ignoreBackdropClick', true);
     }
@@ -250,8 +250,6 @@ export default class ModalDialog extends Component {
     // iOS to allow clicking the div. So a `click(){}` method here won't work, we need to attach an event listener
     // directly to the element
     this.element.onclick = bind(this, this._click);
-    this.element.onmousedown = bind(this, this._mouseDown);
-    this.element.onmouseup = bind(this, this._mouseUp);
     this.getOrSetTitleId();
     this.updateStyles();
   }
