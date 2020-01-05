@@ -163,8 +163,28 @@ export default class ModalDialog extends Component {
         }
       }
     }
-    this.set('titleId', nodeId)
+    this.set('titleId', nodeId);
   }
+
+  /**
+   * If true clicking on the backdrop will be ignored and will not close modal.
+   *
+   * @property ignoreBackdropClick
+   * @type boolean
+   * @default false
+   * @private
+   */
+  ignoreBackdropClick = false;
+
+  /**
+   * The target DOM element of mouse down event.
+   *
+   * @property mouseDownElement
+   * @type object
+   * @default null
+   * @private
+   */
+  mouseDownElement = null;
 
   /**
    * Update the elements styles using CSSOM.
@@ -204,10 +224,24 @@ export default class ModalDialog extends Component {
   }
 
   _click(e) {
+    if (this.ignoreBackdropClick) {
+      this.set('ignoreBackdropClick', false);
+      return;
+    }
     if (e.target !== this.element || !this.get('backdropClose')) {
       return;
     }
     this.get('onClose')();
+  }
+
+  mouseDown(e) {
+    this.set('mouseDownElement', e.target);
+  }
+
+  mouseUp(e) {
+    if (this.mouseDownElement !== this.element && e.target === this.element) {
+      this.set('ignoreBackdropClick', true);
+    }
   }
 
   didInsertElement() {
