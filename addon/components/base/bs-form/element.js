@@ -1,7 +1,7 @@
 import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
-import { observes } from '@ember-decorators/object';
 import { alias, and, equal, gt, notEmpty, or } from '@ember/object/computed';
 import { action, computed, defineProperty } from '@ember/object';
+import { addObserver } from '@ember/object/observers';
 import { scheduleOnce } from '@ember/runloop';
 import { assert, deprecate, runInDebug } from '@ember/debug';
 import { isBlank, typeOf } from '@ember/utils';
@@ -1133,6 +1133,9 @@ export default class FormElement extends FormGroup {
         );
       });
     });
+
+    addObserver(this, 'hasFeedback', null, this.adjustFeedbackIcons, true);
+    addObserver(this, 'formLayout', null, this.adjustFeedbackIcons, true);
   }
 
   /*
@@ -1143,7 +1146,6 @@ export default class FormElement extends FormGroup {
    *  with an add-on on the right. [...] For input groups, adjust the right
    *  value to an appropriate pixel value depending on the width of your addon.
    */
-  @observes('hasFeedback', 'formLayout')
   adjustFeedbackIcons() {
     scheduleOnce('afterRender', this, this._adjustFeedbackIcons);
   }

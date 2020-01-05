@@ -1,7 +1,7 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
-import { observes } from '@ember-decorators/object';
 import { action, computed } from '@ember/object';
 import { not } from '@ember/object/computed';
+import { addObserver } from '@ember/object/observers';
 import { assert } from '@ember/debug';
 import Component from '@ember/component';
 import { bind, next, schedule } from '@ember/runloop';
@@ -701,7 +701,6 @@ export default class Modal extends Component {
     this.resetScrollbar();
   }
 
-  @observes('isOpen')
   _observeOpen() {
     if (this.get('isOpen')) {
       this.show();
@@ -724,5 +723,7 @@ export default class Modal extends Component {
       fade,
       destinationElement: getDestinationElement(this)
     });
+
+    addObserver(this, 'isOpen', null, this._observeOpen, true);
   }
 }

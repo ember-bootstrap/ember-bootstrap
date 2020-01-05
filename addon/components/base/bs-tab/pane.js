@@ -1,6 +1,6 @@
 import { classNameBindings, classNames, layout as templateLayout } from '@ember-decorators/component';
-import { observes } from '@ember-decorators/object';
 import { computed } from '@ember/object';
+import { addObserver } from '@ember/object/observers';
 import Component from '@ember/component';
 import { scheduleOnce } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-tab/pane';
@@ -167,7 +167,6 @@ export default class TabPane extends Component.extend(ComponentChild) {
     }
   }
 
-  @observes('isActive')
   _showHide() {
     if (this.get('isActive')) {
       this.show();
@@ -183,7 +182,10 @@ export default class TabPane extends Component.extend(ComponentChild) {
 
   init() {
     super.init(...arguments);
+
     // isActive comes from parent component, so only available after render...
     scheduleOnce('afterRender', this, this._setActive);
+
+    addObserver(this, 'isActive', null, this._showHide, true);
   }
 }

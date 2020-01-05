@@ -76,7 +76,7 @@ module.exports = function() {
           name: 'ember-default',
           npm: {
             devDependencies: {
-            'bootstrap': bootstrapVersion
+              'bootstrap': bootstrapVersion
             }
           }
         },
@@ -90,6 +90,22 @@ module.exports = function() {
           npm: {
             devDependencies: {
               '@ember/jquery': '^0.5.1',
+              'bootstrap': bootstrapVersion
+            }
+          }
+        },
+        {
+          name: 'ember-classic',
+          env: {
+            EMBER_OPTIONAL_FEATURES: JSON.stringify({
+              // TODO: tests fail if optional feature application-template-wrapper is enabled
+              // 'application-template-wrapper': true,
+              'default-async-observers': false,
+              'template-only-glimmer-components': false
+            })
+          },
+          npm: {
+            devDependencies: {
               'bootstrap': bootstrapVersion
             }
           }
