@@ -6,8 +6,20 @@
 
 <pre class="highlight">ember install ember-bootstrap</pre>
 
-<BsAlert @type="warning">
-  If you need to support Internet Explorer 11, be sure to include the <a href="https://github.com/babel/ember-cli-babel#polyfill" class="alert-link">Babel polyfill</a>!
+<BsAlert @type="warning" @dismissible={{false}}>
+  <h4 class="alert-heading">Additional dependencies</h4>
+  <ul>
+    <li>
+      If you need to support Internet Explorer 11, be sure to include the
+      <a href="https://github.com/babel/ember-cli-babel#polyfill" class="alert-link">Babel polyfill</a>!
+    </li>
+    <li>
+      The examples in these docs use angle bracket invocation. If you are still using an Ember version less than v3.4,
+      you will need to install
+      <a href="https://github.com/rwjblue/ember-angle-bracket-invocation-polyfill" class="alert-link">ember-angle-bracket-invocation-polyfill</a>.
+      The older curly syntax still works without the polyfill.
+    </li>
+  </ul>
 </BsAlert>
 
 <h2>Configuration</h2>
