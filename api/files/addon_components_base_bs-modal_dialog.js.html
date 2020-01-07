@@ -29,6 +29,7 @@
         <li class="navbar-nav"><a class="nav-link" href="/#/getting-started">Getting Started</a></li>
         <li class="navbar-nav"><a class="nav-link" href="/#/components">Components</a></li>
         <li class="navbar-nav"><a class="nav-link" href="/api">API</a></li>
+        <li class="navbar-nav"><a class="nav-link" href="/#/addons">Addons</a></li>
       </ul>
       <ul class="navbar-nav nav">
         <li class="navbar-nav"><a class="nav-link" href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i
@@ -223,8 +224,28 @@ export default class ModalDialog extends Component {
         }
       }
     }
-    this.set(&#x27;titleId&#x27;, nodeId)
+    this.set(&#x27;titleId&#x27;, nodeId);
   }
+
+  /**
+   * If true clicking on the backdrop will be ignored and will not close modal.
+   *
+   * @property ignoreBackdropClick
+   * @type boolean
+   * @default false
+   * @private
+   */
+  ignoreBackdropClick = false;
+
+  /**
+   * The target DOM element of mouse down event.
+   *
+   * @property mouseDownElement
+   * @type object
+   * @default null
+   * @private
+   */
+  mouseDownElement = null;
 
   /**
    * Update the elements styles using CSSOM.
@@ -264,10 +285,24 @@ export default class ModalDialog extends Component {
   }
 
   _click(e) {
+    if (this.ignoreBackdropClick) {
+      this.set(&#x27;ignoreBackdropClick&#x27;, false);
+      return;
+    }
     if (e.target !== this.element || !this.get(&#x27;backdropClose&#x27;)) {
       return;
     }
     this.get(&#x27;onClose&#x27;)();
+  }
+
+  mouseDown(e) {
+    this.set(&#x27;mouseDownElement&#x27;, e.target);
+  }
+
+  mouseUp(e) {
+    if (this.mouseDownElement !== this.element &amp;&amp; e.target === this.element) {
+      this.set(&#x27;ignoreBackdropClick&#x27;, true);
+    }
   }
 
   didInsertElement() {

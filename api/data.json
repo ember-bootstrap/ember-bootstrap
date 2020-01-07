@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "3.1.0.79d494f9"
+        "version": "3.1.1"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -3546,6 +3546,32 @@
         {
             "file": "addon/components/base/bs-modal/dialog.js",
             "line": 169,
+            "description": "If true clicking on the backdrop will be ignored and will not close modal.",
+            "itemtype": "property",
+            "name": "ignoreBackdropClick",
+            "type": "boolean",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ModalDialog",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-modal/dialog.js",
+            "line": 179,
+            "description": "The target DOM element of mouse down event.",
+            "itemtype": "property",
+            "name": "mouseDownElement",
+            "type": "object",
+            "default": "null",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.ModalDialog",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-modal/dialog.js",
+            "line": 189,
             "description": "Update the elements styles using CSSOM.\n\nThis is necessary cause binding style attribute would require a\nContent-Security-Policy `style-src 'unsafe-line'`.",
             "itemtype": "method",
             "name": "updateStyle",
@@ -3559,7 +3585,7 @@
         },
         {
             "file": "addon/components/base/bs-modal/dialog.js",
-            "line": 192,
+            "line": 212,
             "itemtype": "event",
             "name": "onClose",
             "access": "public",

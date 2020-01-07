@@ -29,6 +29,7 @@
         <li class="navbar-nav"><a class="nav-link" href="/#/getting-started">Getting Started</a></li>
         <li class="navbar-nav"><a class="nav-link" href="/#/components">Components</a></li>
         <li class="navbar-nav"><a class="nav-link" href="/api">API</a></li>
+        <li class="navbar-nav"><a class="nav-link" href="/#/addons">Addons</a></li>
       </ul>
       <ul class="navbar-nav nav">
         <li class="navbar-nav"><a class="nav-link" href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i
@@ -59,8 +60,8 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import { classNameBindings, classNames, layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
-import { observes } from &#x27;@ember-decorators/object&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
+import { addObserver } from &#x27;@ember/object/observers&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { scheduleOnce } from &#x27;@ember/runloop&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-tab/pane&#x27;;
@@ -227,7 +228,6 @@ export default class TabPane extends Component.extend(ComponentChild) {
     }
   }
 
-  @observes(&#x27;isActive&#x27;)
   _showHide() {
     if (this.get(&#x27;isActive&#x27;)) {
       this.show();
@@ -243,8 +243,11 @@ export default class TabPane extends Component.extend(ComponentChild) {
 
   init() {
     super.init(...arguments);
+
     // isActive comes from parent component, so only available after render...
     scheduleOnce(&#x27;afterRender&#x27;, this, this._setActive);
+
+    addObserver(this, &#x27;isActive&#x27;, null, this._showHide, true);
   }
 }
 

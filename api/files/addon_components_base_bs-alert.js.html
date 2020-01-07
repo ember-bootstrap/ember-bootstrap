@@ -29,6 +29,7 @@
         <li class="navbar-nav"><a class="nav-link" href="/#/getting-started">Getting Started</a></li>
         <li class="navbar-nav"><a class="nav-link" href="/#/components">Components</a></li>
         <li class="navbar-nav"><a class="nav-link" href="/api">API</a></li>
+        <li class="navbar-nav"><a class="nav-link" href="/#/addons">Addons</a></li>
       </ul>
       <ul class="navbar-nav nav">
         <li class="navbar-nav"><a class="nav-link" href="https://github.com/kaliber5/ember-bootstrap" target="_blank"><i
@@ -59,9 +60,9 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import { classNameBindings, layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
-import { observes } from &#x27;@ember-decorators/object&#x27;;
 import { action } from &#x27;@ember/object&#x27;;
 import { and, not } from &#x27;@ember/object/computed&#x27;;
+import { addObserver } from &#x27;@ember/object/observers&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { later } from &#x27;@ember/runloop&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-alert&#x27;;
@@ -265,13 +266,18 @@ export default class Alert extends Component {
     }
   }
 
-  @observes(&#x27;_visible&#x27;)
   _observeIsVisible() {
     if (this.get(&#x27;_visible&#x27;)) {
       this.show();
     } else {
       this.hide();
     }
+  }
+
+  init() {
+    super.init(...arguments);
+
+    addObserver(this, &#x27;_visible&#x27;, null, this._observeIsVisible, true);
   }
 }
 
