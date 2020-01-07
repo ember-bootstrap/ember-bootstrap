@@ -1,4 +1,36 @@
 
+## 3.1.1 (2020-01-07)
+
+#### Deprecations
+* [#933](https://github.com/kaliber5/ember-bootstrap/pull/933) Deprecate arguments whose only purpose is supporting HTML attributes ([@jelhan](https://github.com/jelhan))
+
+  This deprecates *all* component arguments that are used to set HTML attributes. All of these will be removed in the next major version v4.0.
+  A deprecation warning will be issued in development for most arguments when used.
+  
+  The migration path is to use angle bracket invocation (available since Ember 3.4 or by installing [ember-angle-bracket-invocation-polyfill](https://github.com/rwjblue/ember-angle-bracket-invocation-polyfill)) to set them directly. 
+  E.g. use `<BsButton @type="primary" title="foo">Ok</BsButton>` instead of `{{#bs-button type="primary" title="foo">Ok{{/bs-button}}` to set `title`.
+
+#### Bug Fixes
+* [#948](https://github.com/kaliber5/ember-bootstrap/pull/948) Modals ignore clicking backdrop to close, if mousedown happened on dialog element, reflecting original bootstrap.js behaviour ([@eyupatis](https://github.com/eyupatis))
+* [#951](https://github.com/kaliber5/ember-bootstrap/pull/951) support optional feature default-async-observers ([@jelhan](https://github.com/jelhan))
+* [#942](https://github.com/kaliber5/ember-bootstrap/pull/942) Fix keyboard control of Dropdowns rendered in a wormhole ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#960](https://github.com/kaliber5/ember-bootstrap/pull/960) Add note to insertEmberWormholeElementToDom config when rendering app into custom element ([@simonihmig](https://github.com/simonihmig))
+* [#959](https://github.com/kaliber5/ember-bootstrap/pull/959) Mention ember-angle-bracket-invocation-polyfill in setup guide ([@simonihmig](https://github.com/simonihmig))
+* [#958](https://github.com/kaliber5/ember-bootstrap/pull/958) Fix missing "Addons" nav item in API docs ([@simonihmig](https://github.com/simonihmig))
+* [#949](https://github.com/kaliber5/ember-bootstrap/pull/949) Separate docs app ([@simonihmig](https://github.com/simonihmig))
+* [#947](https://github.com/kaliber5/ember-bootstrap/pull/947) Fix typo (Pikaday instead of PiCkaday) ([@gianlucatomasino](https://github.com/gianlucatomasino))
+
+#### Internal
+* [#954](https://github.com/kaliber5/ember-bootstrap/pull/954) run lint and tests for docs app in CI ([@jelhan](https://github.com/jelhan))
+* [#943](https://github.com/kaliber5/ember-bootstrap/pull/943) Update to Ember 3.14 ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 4
+- Eyüp Atiş ([@eyupatis](https://github.com/eyupatis))
+- Gianluca Tomasino ([@gianlucatomasino](https://github.com/gianlucatomasino))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
 ## 3.1.0 (2019-11-02)
 
 #### Features
