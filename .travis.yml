@@ -54,6 +54,17 @@ jobs:
     script:
     - yarn test
 
+  - name: "Docs App"
+    before_install:
+    - cd docs
+    install:
+    - yarn install --non-interactive
+    script:
+    - yarn lint:hbs
+    - yarn lint:js
+    - yarn test
+
+
   # we recommend new addons test the current and previous LTS
   # as well as latest stable release (bonus points to beta/canary)
   - stage: "Additional Tests"
