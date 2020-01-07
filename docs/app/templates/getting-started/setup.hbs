@@ -158,9 +158,16 @@
       <td><code>true</code> / <code>false</code></td>
       <td><code>true</code></td>
       <td>
-        Will automatically insert a div into your index.html, where Bootstrap's modals and tooltips will be rendered to.
-        If you set this to false, you will have to add an
-        <code>&lt;div id=&quot;ember-bootstrap-wormhole&quot;&gt;&lt;/div&gt;</code> element by yourself.
+        <p>
+          Will automatically insert a div into your index.html, where Bootstrap's modals and tooltips will be rendered to.
+          If you set this to false, you will have to add an
+          <code>&lt;div id=&quot;ember-bootstrap-wormhole&quot;&gt;&lt;/div&gt;</code> element by yourself, e.g. into your
+          <code>application.hbs</code>.
+        </p>
+        <p>
+          This is especially required if you render your Ember app into a custom application root element, e.g. on an
+          server rendered page, where the default div is not available.
+        </p>
       </td>
     </tr>
     <tr>
