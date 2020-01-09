@@ -1,7 +1,7 @@
-import { attributeBindings, classNameBindings, layout as templateLayout, tagName } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { gt } from '@ember/object/computed';
 import Component from '@ember/component';
-import { action, computed, set } from '@ember/object';
+import { action, set } from '@ember/object';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import { schedule } from '@ember/runloop';
@@ -106,22 +106,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @public
 */
 @templateLayout(layout)
-@tagName('form')
-@classNameBindings('layoutClass')
-@attributeBindings('_novalidate:novalidate')
+@tagName('')
 export default class Form extends Component {
-  ariaRole = 'form';
-
-  /**
-   * Bootstrap form class name (computed)
-   *
-   * @property layoutClass
-   * @type string
-   * @readonly
-   * @protected
-   *
-   */
-
   /**
    * Set a model that this form should represent. This serves several purposes:
    *
@@ -153,6 +139,7 @@ export default class Form extends Component {
    * @readonly
    * @protected
    */
+  hasValidator = false;
 
   /**
    * The Bootstrap grid class for form labels. This is used by the `Components.FormElement` class as a default for the
@@ -275,25 +262,6 @@ export default class Form extends Component {
   hideValidationsOnSubmit = false;
 
   /**
-   * If set to true novalidate attribute is present on form element
-   * Will be true by default if validation support is enabled.
-   *
-   * @property novalidate
-   * @type boolean
-   * @default null
-   * @public
-   */
-  @defaultValue
-  novalidate = null;
-
-  @computed('novalidate', 'hasValidator')
-  get _novalidate() {
-    return (this.get('hasValidator') && this.get('novalidate') !== false) || this.get('novalidate') === true
-        ? ''
-        : undefined;
-  }
-
-  /**
    * If set to true the `readonly` property of all yielded form elements will be set, making their form controls read-only.
    *
    * @property readonly
@@ -375,6 +343,10 @@ export default class Form extends Component {
    * @method submit
    * @private
    */
+  // TODO: Component uses to different methods to invoke `submitHandler`:
+  //       - `submit` for submits triggered by events and
+  //       - `doSubmit` for submits triggered by yielded action.
+  //       Investigate if that is still needed.
   submitHandler(e, throwValidationErrors = true) {
     if (e) {
       e.preventDefault();
@@ -456,21 +428,17 @@ export default class Form extends Component {
       )
   }
 
-  submit(event) {
+  @action
+  handleSubmitEvent(event) {
     this.submitHandler(event, false);
   }
 
-  keyPress(e) {
+  @action
+  handleKeyPressEvent(e) {
     let code = e.keyCode || e.which;
     if (code === 13 && this.get('submitOnEnter')) {
-      this.triggerSubmit();
+      this.submitHandler(null, false);
     }
-  }
-
-  triggerSubmit() {
-    let event = document.createEvent('Event');
-    event.initEvent('submit', true, true);
-    this.get('element').dispatchEvent(event);
   }
 
   init() {
