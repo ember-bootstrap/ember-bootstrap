@@ -135,6 +135,7 @@
   },
   "resolutions": {
     "ip-regex": "^2.1.0",
-    "ember-concurrency": "^1.0.0"
+    "ember-concurrency": "^1.0.0",
+    "ember-cli-htmlbars/semver": "~7.0.0"
   }
 }
