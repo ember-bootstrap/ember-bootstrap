@@ -20,20 +20,20 @@ module('Integration | Component | bs-button', function(hooks) {
   });
 
   test('button has correct default markup', async function(assert) {
-    await render(hbs`{{#bs-button}}Test{{/bs-button}}`);
+    await render(hbs`<BsButton>Test</BsButton>`);
 
     assert.dom('button').hasClass('btn', 'button has btn class');
     assert.dom('button').hasClass(defaultButtonClass(), 'button has type class');
   });
 
   test('button has correct size', async function(assert) {
-    await render(hbs`{{#bs-button size="lg"}}Test{{/bs-button}}`);
+    await render(hbs`<BsButton @size="lg">Test</BsButton>`);
 
     assert.dom('button').hasClass('btn-lg', 'button has size class');
   });
 
   test('button has correct type', async function(assert) {
-    await render(hbs`{{#bs-button type="primary"}}Test{{/bs-button}}`);
+    await render(hbs`<BsButton @type="primary">Test</BsButton>`);
 
     assert.dom('button').hasClass('btn', 'button has btn class');
     assert.dom('button').hasClass('btn-primary', 'button has type class');
@@ -41,19 +41,19 @@ module('Integration | Component | bs-button', function(hooks) {
   });
 
   test('button can be active', async function(assert) {
-    await render(hbs`{{#bs-button active=true}}Test{{/bs-button}}`);
+    await render(hbs`<BsButton @active={{true}}>Test</BsButton>`);
 
     assert.dom('button').hasClass('active', 'button has active class');
   });
 
   test('button can be block', async function(assert) {
-    await render(hbs`{{#bs-button block=true}}Test{{/bs-button}}`);
+    await render(hbs`<BsButton @block={{true}}>Test</BsButton>`);
 
     assert.dom('button').hasClass('btn-block', 'button has block class');
   });
 
   test('button has HTML attributes', async function(assert) {
-    await render(hbs`{{#bs-button id="test" disabled=true title="title"}}Test{{/bs-button}}`);
+    await render(hbs`<BsButton @id="test" @disabled={{true}} @title="title">Test</BsButton>`);
 
     assert.equal(this.element.querySelector('button').getAttribute('id'), 'test');
     assert.equal(this.element.querySelector('button').getAttribute('disabled'), '');
@@ -64,38 +64,38 @@ module('Integration | Component | bs-button', function(hooks) {
   });
 
   test('button has default label', async function(assert) {
-    await render(hbs`{{bs-button defaultText="test"}}`);
+    await render(hbs`<BsButton @defaultText="test" />`);
     assert.dom('button').hasText('test');
   });
 
   test('button has default type "button"', async function(assert) {
-    await render(hbs`{{bs-button}}`);
+    await render(hbs`<BsButton />`);
     assert.equal(this.element.querySelector('button').type, 'button');
   });
 
   test('buttonType property allows changing button type', async function(assert) {
-    await render(hbs`{{bs-button buttonType="submit"}}`);
+    await render(hbs`<BsButton @buttonType="submit" />`);
 
     assert.dom('button').hasAttribute('type', 'submit');
     assert.deprecationsInclude('Argument buttonType of <BsButton> component is deprecated.');
   });
 
   test('button with icon property shows icon', async function(assert) {
-    await render(hbs`{{bs-button icon="fas fa-check"}}`);
+    await render(hbs`<BsButton @icon="fas fa-check" />`);
 
     assert.dom('button i').hasClass('fas');
     assert.dom('button i').hasClass('fa-check');
   });
 
   testBS4('button with outline property shows as outline', async function(assert) {
-    await render(hbs`{{bs-button type="primary" outline=true}}`);
+    await render(hbs`<BsButton @type="primary" @outline={{true}} />`);
     assert.dom('button').hasClass('btn-outline-primary');
     assert.dom('button').doesNotHaveClass('btn-primary');
   });
 
   test('button with iconActive and iconInactive properties shows icon depending on active state', async function(assert) {
     this.set('active', false);
-    await render(hbs`{{bs-button active=active iconInactive="fas fa-plus" iconActive="fas fa-minus"}}`);
+    await render(hbs`<BsButton @active={{active}} @iconInactive="fas fa-plus" @iconActive="fas fa-minus" />`);
 
     assert.dom('button i').hasClass('fas');
     assert.dom('button i').hasClass('fa-plus');
@@ -114,7 +114,7 @@ module('Integration | Component | bs-button', function(hooks) {
   test('clicking a button sends onClick action with "value" property as a parameter', async function(assert) {
     let action = this.spy();
     this.actions.testAction = action;
-    await render(hbs`{{bs-button onClick=(action "testAction") value="dummy"}}`);
+    await render(hbs`<BsButton @onClick={{action "testAction"}} @value="dummy" />`);
 
     await click('button');
     assert.ok(action.calledWith('dummy'), 'onClick action has been called with button value');
@@ -126,14 +126,15 @@ module('Integration | Component | bs-button', function(hooks) {
       return deferredClickAction.promise;
     });
 
-    await render(
-      hbs`{{bs-button
-      defaultText="default text"
-      pendingText="text for pending state"
-      fulfilledText="text for fulfilled state"
-      rejectedText="text for rejected state"
-      onClick=clickAction
-    }}`);
+    await render(hbs`
+      <BsButton
+        @defaultText="default text"
+        @pendingText="text for pending state"
+        @fulfilledText="text for fulfilled state"
+        @rejectedText="text for rejected state"
+        @onClick={{clickAction}}
+      />
+    `);
     assert.dom('button').hasText('default text');
 
     click('button');
@@ -162,11 +163,7 @@ module('Integration | Component | bs-button', function(hooks) {
       return deferredClickAction.promise;
     });
 
-    await render(
-      hbs`{{bs-button
-      defaultText="default text"
-      onClick=clickAction
-    }}`);
+    await render(hbs`<BsButton @defaultText="default text" @onClick={{clickAction}} />`);
     assert.dom('button').hasText('default text');
 
     click('button');
@@ -195,7 +192,7 @@ module('Integration | Component | bs-button', function(hooks) {
     });
 
     await render(hbs`
-      {{bs-button defaultText="default text" fulfilledText="text for fulfilled state" reset=reset onClick=clickAction}}
+      <BsButton @defaultText="default text" @fulfilledText="text for fulfilled state" @reset={{reset}} @onClick={{clickAction}} />
     `);
     assert.dom('button').hasText('default text');
 
@@ -212,7 +209,7 @@ module('Integration | Component | bs-button', function(hooks) {
       return deferredClickAction.promise;
     });
 
-    await render(hbs`{{bs-button onClick=clickAction}}`);
+    await render(hbs`<BsButton @onClick={{clickAction}} />`);
     assert.dom('button').isNotDisabled();
 
     await click('button');
@@ -272,11 +269,13 @@ module('Integration | Component | bs-button', function(hooks) {
     this.set('clickAction', () => {
       return deferredClickAction.promise;
     });
-    await render(hbs`{{#bs-button reset=reset onClick=clickAction as |button|}}
-      {{#if button.isPending}}isPending{{/if}}
-      {{#if button.isFulfilled}}isFulfilled{{/if}}
-      {{#if button.isRejected}}isRejected{{/if}}
-    {{/bs-button}}`);
+    await render(hbs`
+      <BsButton @reset={{reset}} @onClick={{clickAction}} as |button|>
+        {{#if button.isPending}}isPending{{/if}}
+        {{#if button.isFulfilled}}isFulfilled{{/if}}
+        {{#if button.isRejected}}isRejected{{/if}}
+      </BsButton>
+    `);
     assert.dom('button').hasText('');
 
     click('button');
@@ -307,9 +306,11 @@ module('Integration | Component | bs-button', function(hooks) {
     this.set('clickAction', () => {
       return resolve();
     });
-    await render(hbs`{{#bs-button reset=reset onClick=clickAction as |button|}}
-      {{#if button.isSettled}}isSettled{{/if}}
-    {{/bs-button}}`);
+    await render(hbs`
+      <BsButton @reset={{reset}} @onClick={{clickAction}} as |button|>
+        {{#if button.isSettled}}isSettled{{/if}}
+      </BsButton>
+    `);
 
     assert.dom('button').hasText('');
 
@@ -333,7 +334,7 @@ module('Integration | Component | bs-button', function(hooks) {
     this.actions.parentClick = parentClick;
 
     await render(
-      hbs`<div {{action "parentClick"}}>{{#bs-button onClick=(action "buttonClick")}}Button{{/bs-button}}</div>`
+      hbs`<div {{action "parentClick"}} role="button"><BsButton @onClick={{action "buttonClick"}}>Button</BsButton></div>`
     );
 
     await click('button');
@@ -345,7 +346,7 @@ module('Integration | Component | bs-button', function(hooks) {
     let parentClick = this.spy();
     this.actions.parentClick = parentClick;
 
-    await render(hbs`<div {{action "parentClick"}}>{{#bs-button}}Button{{/bs-button}}</div>`);
+    await render(hbs`<div {{action "parentClick"}} role="button"><BsButton>Button</BsButton></div>`);
 
     await click('button');
     assert.ok(parentClick.called);
@@ -357,9 +358,11 @@ module('Integration | Component | bs-button', function(hooks) {
     let parentClick = this.spy();
     this.actions.parentClick = parentClick;
 
-    await render(
-      hbs`<div {{action "parentClick"}}>{{#bs-button bubble=true onClick=(action "buttonClick")}}Button{{/bs-button}}</div>`
-    );
+    await render(hbs`
+      <div {{action "parentClick"}} role="button">
+        <BsButton @bubble={{true}} @onClick={{action "buttonClick"}}>Button</BsButton>
+      </div>
+    `);
 
     await click('button');
     assert.ok(buttonClick.called);
@@ -374,7 +377,7 @@ module('Integration | Component | bs-button', function(hooks) {
       return deferredClickAction.promise;
     });
 
-    await render(hbs`{{bs-button onClick=clickAction}}`);
+    await render(hbs`<BsButton @onClick={{clickAction}} />`);
     click('button');
     await waitUntil(() => clickActionHasBeenExecuted);
 
@@ -401,7 +404,7 @@ module('Integration | Component | bs-button', function(hooks) {
       clickActionExecutionCount++;
       return deferredClickAction.promise;
     });
-    await render(hbs`{{bs-button onClick=clickAction preventConcurrency=false}}`);
+    await render(hbs`<BsButton @onClick={{clickAction}} @preventConcurrency={{false}} />`);
 
     await click('button');
     assert.equal(clickActionExecutionCount, 1);
@@ -413,7 +416,7 @@ module('Integration | Component | bs-button', function(hooks) {
   });
 
   test('it passes accessibility checks', async function (assert) {
-    await render(hbs`{{#bs-button}}Test{{/bs-button}}`);
+    await render(hbs`<BsButton>Test</BsButton>`);
 
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');
