@@ -1,17 +1,17 @@
 <BsNav as |nav|>
   <nav.item>
-    {{#nav.link-to "acceptance.link" "1"}}
+    <nav.linkTo @route="acceptance.link" @model="1">
       first
-    {{/nav.link-to}}
+    </nav.linkTo>
   </nav.item>
   <nav.item>
-    {{#nav.link-to "acceptance.link" "2"}}
+    <nav.linkTo @route="acceptance.link" @model="2">
       second
-    {{/nav.link-to}}
+    </nav.linkTo>
   </nav.item>
   <nav.item>
-    {{#nav.link-to "acceptance.link" model}}
+    <nav.linkTo @route="acceptance.link" @model={{@model}}>
       current
-    {{/nav.link-to}}
+    </nav.linkTo>
   </nav.item>
 </BsNav>

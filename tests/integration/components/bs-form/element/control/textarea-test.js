@@ -10,7 +10,7 @@ module('Integration | Component | bs form/element/control/textarea', function(ho
 
   test('it renders', async function(assert) {
 
-    await render(hbs`{{bs-form/element/control/textarea}}`);
+    await render(hbs`<BsForm::Element::Control::Textarea />`);
 
     assert.dom('textarea').exists({ count: 1 });
   });

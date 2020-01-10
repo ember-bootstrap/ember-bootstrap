@@ -10,29 +10,29 @@ module('Integration | Component | bs-navbar/toggle', function(hooks) {
   setupNoDeprecations(hooks);
 
   testBS3('it renders inline usage', async function(assert) {
-    await render(hbs`{{bs-navbar/toggle}}`);
+    await render(hbs`<BsNavbar::Toggle />`);
 
     assert.dom('*').hasText('Toggle navigation');
   });
 
   testBS4('it renders inline usage', async function(assert) {
-    await render(hbs`{{bs-navbar/toggle}}`);
+    await render(hbs`<BsNavbar::Toggle />`);
 
     assert.dom('.navbar-toggler > span').hasClass('navbar-toggler-icon');
   });
 
   test('it renders block usage', async function(assert) {
     await render(hbs`
-      {{#bs-navbar/toggle}}
+      <BsNavbar::Toggle>
         template block text
-      {{/bs-navbar/toggle}}
+      </BsNavbar::Toggle>
     `);
 
     assert.dom('*').hasText('template block text');
   });
 
   test('it has correct markup', async function(assert) {
-    await render(hbs`{{bs-navbar/toggle}}`);
+    await render(hbs`<BsNavbar::Toggle />`);
 
     assert.dom('button').exists({ count: 1 }, 'there is exactly one button element');
     assert.dom('button').hasClass(versionDependent('navbar-toggle','navbar-toggler'), 'the toggle has the appropriate toggle class');

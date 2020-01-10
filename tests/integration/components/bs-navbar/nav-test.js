@@ -9,15 +9,15 @@ module('Integration | Component | bs-navbar/nav', function(hooks) {
   setupNoDeprecations(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{bs-navbar/nav}}`);
+    await render(hbs`<BsNavbar::Nav />`);
 
     assert.dom('*').hasText('');
 
     // Template block usage:
     await render(hbs`
-      {{#bs-navbar/nav}}
+      <BsNavbar::Nav>
         template block text
-      {{/bs-navbar/nav}}
+      </BsNavbar::Nav>
     `);
 
     assert.dom('*').hasText('template block text');
@@ -25,9 +25,9 @@ module('Integration | Component | bs-navbar/nav', function(hooks) {
 
   test('it has correct markup', async function(assert) {
     await render(hbs`
-      {{#bs-navbar/nav}}
+      <BsNavbar::Nav>
         Nav
-      {{/bs-navbar/nav}}
+      </BsNavbar::Nav>
     `);
 
     assert.dom('*').hasText('Nav');
@@ -36,7 +36,7 @@ module('Integration | Component | bs-navbar/nav', function(hooks) {
   });
 
   test('it no longer supports the justified option', async function(assert) {
-    await render(hbs`{{bs-navbar/nav justified=true}}`);
+    await render(hbs`<BsNavbar::Nav @justified={{true}} />`);
 
     assert.dom('.navbar-justified').doesNotExist('the justified class was not applied');
   });
