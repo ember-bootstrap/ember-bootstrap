@@ -283,7 +283,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         <dd.menu>
           <li>
             <a href="#">Something</a>
-            <a role="button">{{action dd.closeDropdown}} class='custom-close'>Custom close link</a>
+            <a role="button" {{action dd.closeDropdown}} class="custom-close">Custom close link</a>
           </li>
         </dd.menu>
       </BsDropdown>
