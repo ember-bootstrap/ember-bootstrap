@@ -71,6 +71,8 @@ jobs:
     env: EMBER_TRY_SCENARIO=ember-default BABELPOLYFILL=true BEFORE_SCRIPT="ember browserstack:connect" AFTER_SCRIPT="ember browserstack:disconnect" TEST_COMMAND="ember test --filter !FastBoot --config-file testem.browserstack.js"
   - env: EMBER_TRY_SCENARIO=ember-lts-2.18
   - env: EMBER_TRY_SCENARIO=ember-lts-3.4
+  - env: EMBER_TRY_SCENARIO=ember-lts-3.8
+  - env: EMBER_TRY_SCENARIO=ember-lts-3.12
   - env: EMBER_TRY_SCENARIO=ember-release
   - env: EMBER_TRY_SCENARIO=ember-beta
   - env: EMBER_TRY_SCENARIO=ember-canary
@@ -78,6 +80,8 @@ jobs:
   - env: EMBER_TRY_SCENARIO=ember-classic
   - env: EMBER_TRY_SCENARIO=ember-lts-2.18 BOOTSTRAPVERSION=3
   - env: EMBER_TRY_SCENARIO=ember-lts-3.4 BOOTSTRAPVERSION=3
+  - env: EMBER_TRY_SCENARIO=ember-lts-3.8 BOOTSTRAPVERSION=3
+  - env: EMBER_TRY_SCENARIO=ember-lts-3.12 BOOTSTRAPVERSION=3
   - env: EMBER_TRY_SCENARIO=ember-release BOOTSTRAPVERSION=3
   - env: EMBER_TRY_SCENARIO=ember-beta BOOTSTRAPVERSION=3
   - env: EMBER_TRY_SCENARIO=ember-classic BOOTSTRAPVERSION=3
