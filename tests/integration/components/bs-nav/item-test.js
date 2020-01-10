@@ -53,7 +53,7 @@ module('Integration | Component | bs-nav/item', function(hooks) {
 
     await render(hbs`
       <BsNav::Item>
-        {{#bs-nav/link-to "application" disabled=true}}Test{{/bs-nav/link-to}}
+        <BsNav::LinkTo @route="application" @disabled={{true}}>Test</BsNav::LinkTo>
       </BsNav::Item>
     `);
     assert.dom('li').hasClass('disabled', 'has disabled class');
