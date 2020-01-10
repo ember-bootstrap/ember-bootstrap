@@ -29,7 +29,7 @@ env:
 branches:
   only:
     - master
-    - dev-v3
+    - dev-v4
     # npm version tags
     - /^v\d+\.\d+\.\d+/
 
