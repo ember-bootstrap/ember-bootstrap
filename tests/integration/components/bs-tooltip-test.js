@@ -38,9 +38,9 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   test('it has correct markup', async function(assert) {
     // Template block usage:
     await render(hbs`
-      {{#bs-tooltip id="tooltip-element" fade=true visible=true}}
+      <BsTooltip @id="tooltip-element" @fade={{true}} @visible={{true}}>
         template block text
-      {{/bs-tooltip}}
+      </BsTooltip>
     `);
 
     assert.dom('.tooltip').exists({ count: 1 }, 'has tooltip class');
@@ -56,9 +56,9 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     let placements = ['top', 'left', 'bottom', 'right'];
     this.set('placement', placements[0]);
     await render(hbs`
-      {{#bs-tooltip/element id="tooltip-element" placement=placement}}
+      <BsTooltip::Element @id="tooltip-element" @placement={{placement}}>
         template block text
-      {{/bs-tooltip/element}}
+      </BsTooltip::Element>
     `);
     placements.forEach((placement) => {
       this.set('placement', placement);
@@ -68,29 +68,29 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('it shows visible tooltip', async function(assert) {
-    await render(hbs`{{bs-tooltip title="Dummy" visible=true}}`);
+    await render(hbs`<BsTooltip @title="Dummy" @visible={{true}} />`);
 
     assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
     assert.dom('.tooltip .tooltip-inner').hasText('Dummy');
   });
 
   test('it shows visible tooltip with block content', async function(assert) {
-    await render(hbs`{{#bs-tooltip visible=true}}
+    await render(hbs`<BsTooltip @visible={{true}}>
       BLOCK
-      {{/bs-tooltip}}`);
+      </BsTooltip>`);
 
     assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
     assert.dom('.tooltip .tooltip-inner').hasText('BLOCK');
   });
 
   test('it hides invisible tooltip', async function(assert) {
-    await render(hbs`{{bs-tooltip title="Dummy"}}`);
+    await render(hbs`<BsTooltip @title="Dummy" />`);
 
     assert.dom('.tooltip').doesNotExist('tooltip is not visible');
   });
 
   test('it shows and hides immediately when hovering [fade=false]', async function(assert) {
-    await render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false}}</div>`);
+    await render(hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} /></div>`);
 
     await triggerEvent('#target', 'mouseenter');
     assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
@@ -100,7 +100,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   testRequiringFocus('it shows and hides immediately when focusing [fade=false]', async function(assert) {
-    await render(hbs`<button class="btn" id="target">{{bs-tooltip title="Dummy" fade=false}}</button>`);
+    await render(hbs`<button class="btn" id="target"><BsTooltip @title="Dummy" @fade={{false}} /></button>`);
 
     await focus('#target');
     assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
@@ -110,7 +110,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('it shows and hides immediately when clicking [fade=false]', async function(assert) {
-    await render(hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false triggerEvents="click"}}</div>`);
+    await render(hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @triggerEvents="click" /></div>`);
 
     await click('#target');
     assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
@@ -121,7 +121,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
 
   test('it allows changing the trigger element to some arbitrary element', async function(assert) {
     await render(
-      hbs`<div id="target"></div><div>{{bs-tooltip title="Dummy" fade=false triggerElement="#target"}}</div>`
+      hbs`<div id="target"></div><div><BsTooltip @title="Dummy" @fade={{false}} @triggerElement="#target" /></div>`
     );
 
     await triggerEvent('#target', 'mouseenter');
@@ -138,7 +138,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     this.owner.register('component:dum-my', dummyComponent);
 
     await render(
-      hbs`{{#dum-my id="target"}}{{bs-tooltip title="Dummy" fade=false triggerElement="parentView"}}{{/dum-my}}`
+      hbs`{{#dum-my id="target"}}<BsTooltip @title="Dummy" @fade={{false}} @triggerElement="parentView" />{{/dum-my}}`
     );
 
     await triggerEvent('#target', 'mouseenter');
@@ -154,7 +154,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     let shownAction = this.spy();
     this.actions.shown = shownAction;
     await render(
-      hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false onShow=(action "show") onShown=(action "shown")}}</div>`
+      hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onShow={{action "show"}} @onShown={{action "shown"}} /></div>`
     );
     await triggerEvent('#target', 'mouseenter');
     assert.ok(showAction.calledOnce, 'show action has been called');
@@ -168,7 +168,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     let shownAction = this.spy();
     this.actions.shown = shownAction;
     await render(
-      hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false onShow=(action "show") onShown=(action "shown")}}</div>`
+      hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onShow={{action "show"}} @onShown={{action "shown"}} /></div>`
     );
     await triggerEvent('#target', 'mouseenter');
     assert.ok(showAction.calledOnce, 'show action has been called');
@@ -182,7 +182,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     let hiddenAction = this.spy();
     this.actions.hidden = hiddenAction;
     await render(
-      hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false onHide=(action "hide") onHidden=(action "hidden")}}</div>`
+      hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onHide={{action "hide"}} @onHidden={{action "hidden"}} /></div>`
     );
     await triggerEvent('#target', 'mouseenter');
     await triggerEvent('#target', 'mouseleave');
@@ -197,7 +197,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     let hiddenAction = this.spy();
     this.actions.hidden = hiddenAction;
     await render(
-      hbs`<div id="target">{{bs-tooltip title="Dummy" fade=false onHide=(action "hide") onHidden=(action "hidden")}}</div>`
+      hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onHide={{action "hide"}} @onHidden={{action "hidden"}} /></div>`
     );
     await triggerEvent('#target', 'mouseenter');
     await triggerEvent('#target', 'mouseleave');
@@ -207,7 +207,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   testRequiringFocus('it keeps showing when leaving the mouse but is still focused [fade=false]', async function(assert) {
-    await render(hbs`<a href="#" id="target">{{bs-tooltip title="Dummy" fade=false}}</a>`);
+    await render(hbs`<a href="#" id="target"><BsTooltip @title="Dummy" @fade={{false}} /></a>`);
 
     await focus('#target');
     assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
@@ -221,7 +221,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   test('Renders in wormhole\'s default destination if renderInPlace is not set', async function(assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false}}{{/if}}`
+      hbs`<div id="ember-bootstrap-wormhole"></div>{{#if show}}<BsTooltip @title="Simple Tooltip" @visible={{true}} @fade={{false}} />{{/if}}`
     );
     this.set('show', true);
     await settled();
@@ -232,7 +232,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   test('Renders in test container if renderInPlace is not set', async function(assert) {
     this.set('show', false);
     await render(
-      hbs`{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false}}{{/if}}`
+      hbs`{{#if show}}<BsTooltip @title="Simple Tooltip" @visible={{true}} @fade={{false}} />{{/if}}`
     );
     this.set('show', true);
     await settled();
@@ -244,7 +244,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   test('Renders in place (no wormhole) if renderInPlace is set', async function(assert) {
     this.set('show', false);
     await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if show}}{{bs-tooltip title="Simple Tooltip" visible=true fade=false renderInPlace=true}}{{/if}}</div>`
+      hbs`<div id="ember-bootstrap-wormhole"></div><div id="wrapper">{{#if show}}<BsTooltip @title="Simple Tooltip" @visible={{true}} @fade={{false}} @renderInPlace={{true}} />{{/if}}</div>`
     );
     this.set('show', true);
     await settled();
@@ -259,7 +259,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
       <div id="wrapper">
         <p class="margin-top">
           <a href="#" id="target">
-            Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false}}
+            Hover me<BsTooltip @title="very very very very very very very long tooltip" @fade={{false}} />
           </a>
         </p>
       </div>`
@@ -279,7 +279,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
         {{#if visible}}
           <p class="margin-top">
             <a href="#" id="target">
-              Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=true}}
+              Hover me<BsTooltip @title="very very very very very very very long tooltip" @fade={{false}} @visible={{true}} />
             </a>
           </p>
         {{/if}}
@@ -300,7 +300,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
       <div id="wrapper">
         <p class="margin-top">
           <a href="#" id="target">
-            Hover me{{bs-tooltip title="very very very very very very very long tooltip" fade=false visible=visible}}
+            Hover me<BsTooltip @title="very very very very very very very long tooltip" @fade={{false}} @visible={{visible}} />
           </a>
         </p>
       </div>`
@@ -314,7 +314,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should show tooltip if leave event hasn\'t occurred before delay expires', async function(assert) {
-    await render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
+    await render(hbs`<div id="target"><BsTooltip @title="Dummy" @delay={{150}} /></div>`);
 
     triggerEvent('#target', 'mouseenter');
 
@@ -326,7 +326,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should not show tooltip if leave event occurs before delay expires', async function(assert) {
-    await render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
+    await render(hbs`<div id="target"><BsTooltip @title="Dummy" @delay={{150}} /></div>`);
 
     triggerEvent('#target', 'mouseenter');
 
@@ -339,7 +339,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should not hide tooltip if leave event occurs and enter event occurs within the hide delay', async function(assert) {
-    await render(hbs`<div id="target">{{bs-tooltip title="Dummy" delayShow=0 delayHide=150}}</div>`);
+    await render(hbs`<div id="target"><BsTooltip @title="Dummy" @delayShow={{0}} @delayHide={{150}} /></div>`);
     triggerEvent('#target', 'mouseenter');
 
     await waitUntil(() => isVisible(this.element.querySelector('.tooltip')));
@@ -354,7 +354,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('should not show tooltip if leave event occurs before delay expires', async function(assert) {
-    await render(hbs`<div id="target">{{bs-tooltip title="Dummy" delay=150}}</div>`);
+    await render(hbs`<div id="target"><BsTooltip @title="Dummy" @delay={{150}} /></div>`);
     triggerEvent('#target', 'mouseenter');
 
     await delay(100);
@@ -374,7 +374,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
       <div id="wrapper">
         <p class="margin-top">
           <button class="btn" id="target">
-            Click me{{bs-tooltip placement="top" title="very very very very very very very long tooltip" fade=false}}
+            Click me<BsTooltip @placement="top" @title="very very very very very very very long tooltip" @fade={{false}} />
           </button>
         </p>
       </div>`
@@ -397,7 +397,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
       <div id="wrapper">
         <p class="margin-top">
           <button class="btn" id="target">
-            Click me{{bs-tooltip autoPlacement=true viewportSelector="#wrapper" placement="top" title="very very very very very very very long tooltip" fade=false}}
+            Click me<BsTooltip @autoPlacement={{true}} @viewportSelector="#wrapper" @placement="top" @title="very very very very very very very long tooltip" @fade={{false}} />
           </button>
         </p>
       </div>`
@@ -424,7 +424,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
       <div id="wrapper">
         <p class="margin-top">
           <button class="btn" id="target">
-            Click me{{bs-tooltip placement="bottom" autoPlacement=true title="very very very very very very very long tooltip" fade=false}}
+            Click me<BsTooltip @placement="bottom" @autoPlacement={{true}} @title="very very very very very very very long tooltip" @fade={{false}} />
           </button>
         </p>
       </div>`
@@ -443,8 +443,12 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     this.set('hide', hideAction);
     let hiddenAction = this.spy();
     this.set('hidden', hiddenAction);
-    await render(
-      hbs`<div id="target">{{#bs-tooltip visible=true onHide=(action hide) onHidden=(action hidden) as |tt|}}<div id="hide" {{action tt.close}}>Hide</div>{{/bs-tooltip}}</div>`
+    await render(hbs`
+      <div id="target">
+        <BsTooltip @visible={{true}} @onHide={{action hide}} @onHidden={{action hidden}} as |tt|>
+          <div id="hide" {{action tt.close}} role="button">Hide</div>
+        </BsTooltip>
+      </div>`
     );
     await click('#hide');
     assert.ok(hideAction.calledOnce, 'hide action has been called');
@@ -453,7 +457,7 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('it passes along class attribute', async function(assert) {
-    await render(hbs`<div id="target">{{bs-tooltip title="Dummy" class="wide"}}</div>`);
+    await render(hbs`<div id="target"><BsTooltip @title="Dummy" @class="wide" /></div>`);
     await triggerEvent('#target', 'mouseenter');
     assert.dom('.tooltip').hasClass('wide');
   });
