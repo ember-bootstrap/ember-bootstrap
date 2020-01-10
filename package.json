@@ -13,7 +13,7 @@
     "changelog": "lerna-changelog"
   },
   "engines": {
-    "node": "8.* || >= 10.*"
+    "node": "10.* || >= 12.*"
   },
   "devDependencies": {
     "@ember/optional-features": "^1.1.0",
@@ -90,18 +90,14 @@
     "broccoli-merge-trees": "^3.0.1",
     "broccoli-stew": "^2.0.0",
     "chalk": "^2.1.0",
-    "ember-angle-bracket-invocation-polyfill": "^2.0.1",
     "ember-cli-babel": "^7.13.0",
     "ember-cli-build-config-editor": "0.5.0",
     "ember-cli-htmlbars": "^4.2.0",
     "ember-cli-version-checker": "^3.0.0",
     "ember-concurrency": "^1.0.0",
     "ember-decorators": "^6.1.0",
-    "ember-decorators-polyfill": "^1.0.6",
     "ember-focus-trap": "^0.3.2",
-    "ember-let-polyfill": "^0.1.0",
     "ember-maybe-in-element": "^0.4.0",
-    "ember-named-arguments-polyfill": "^1.0.0",
     "ember-on-helper": "^0.1.0",
     "ember-popper": "^0.10.3",
     "findup-sync": "^4.0.0",
