@@ -48,7 +48,7 @@ module('Integration | Component | bs-modal/header', function(hooks) {
   });
 
   test('close button can be removed in yield block form', async function(assert) {
-    await render(hbs`{{#bs-modal/header as |header|}}<div id="custom">Test</div>{{/bs-modal/header}}`);
+    await render(hbs`{{#bs-modal/header closeButton=false as |header|}}<div id="custom">Test</div>{{/bs-modal/header}}`);
 
     assert.dom('.modal-header div#custom').exists({ count: 1 }, 'Modal header custom block.');
     assert.equal(this.element.querySelector('.modal-header #custom').innerHTML.trim(), 'Test', 'Block content is shown.');
