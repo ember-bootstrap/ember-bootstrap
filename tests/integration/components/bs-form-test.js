@@ -256,6 +256,7 @@ module('Integration | Component | bs-form', function(hooks) {
     );
 
     assert.dom('form').doesNotHaveAttribute('novalidate');
+    assert.deprecationsInclude(`Argument novalidate of <BsForm> component is deprecated.`);
   });
 
   testRequiringFocus('Submitting a form continues to show validations', async function(assert) {
@@ -877,8 +878,10 @@ module('Integration | Component | bs-form', function(hooks) {
   test('supports novalidate attribute', async function(assert) {
     await render(hbs`{{bs-form}}`);
     assert.dom('form').doesNotHaveAttribute('novalidate');
+
     await render(hbs`{{bs-form novalidate=true}}`);
     assert.dom('form').hasAttribute('novalidate');
+    assert.deprecationsInclude(`Argument novalidate of <BsForm> component is deprecated.`);
   });
 
   test('disabled property propagates to all its elements', async function(assert) {
