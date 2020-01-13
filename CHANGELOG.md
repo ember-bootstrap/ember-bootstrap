@@ -8,7 +8,7 @@
   A deprecation warning will be issued in development for most arguments when used.
   
   The migration path is to use angle bracket invocation (available since Ember 3.4 or by installing [ember-angle-bracket-invocation-polyfill](https://github.com/rwjblue/ember-angle-bracket-invocation-polyfill)) to set them directly. 
-  E.g. use `<BsButton @type="primary" title="foo">Ok</BsButton>` instead of `{{#bs-button type="primary" title="foo">Ok{{/bs-button}}` to set `title`.
+  E.g. use `<BsButton @type="primary" title="foo">Ok</BsButton>` instead of `{{#bs-button type="primary" title="foo"}}Ok{{/bs-button}}` to set `title`.
 
 #### Bug Fixes
 * [#948](https://github.com/kaliber5/ember-bootstrap/pull/948) Modals ignore clicking backdrop to close, if mousedown happened on dialog element, reflecting original bootstrap.js behaviour ([@eyupatis](https://github.com/eyupatis))
