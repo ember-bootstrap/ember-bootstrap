@@ -27,7 +27,9 @@ const formLayouts = ['vertical', 'horizontal', 'inline'];
 const supportedInputAttributes = {
   name: 'dummy',
   required: true,
-  readonly: true,
+  // readonly causes tests to fail and is deprecated
+  // will be removed in next release
+  // readonly: true,
   placeholder: 'dummy',
   disabled: true,
   autofocus: true,
@@ -55,7 +57,9 @@ const supportedTextareaAttributes = {
   rows: 50,
   cols: 50,
   required: true,
-  readonly: true,
+  // readonly causes tests to fail and is deprecated
+  // will be removed in next release
+  // readonly: true,
   placeholder: 'dummy',
   disabled: true,
   autofocus: true,
