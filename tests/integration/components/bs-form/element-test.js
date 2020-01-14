@@ -492,7 +492,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
           // tests are failing for readonly attribute for unknown reason
           // but as it's deprecated and will be removed in next release
           // we don't care
-          break;
+          continue;
         }
 
         assert.equal(this.element.querySelector('input').getAttribute(attribute), undefined, `input attribute ${attribute} is undefined [${formLayout}]`);
@@ -582,7 +582,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
           // tests are failing for readonly attribute for unknown reason
           // but as it's deprecated and will be removed in next release
           // we don't care
-          break;
+          continue;
         }
 
         assert.equal(this.element.querySelector('textarea').getAttribute(attribute), undefined, `textarea attribute ${attribute} is undefined [${formLayout}]`);
