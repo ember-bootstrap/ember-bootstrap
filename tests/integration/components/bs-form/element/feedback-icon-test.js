@@ -10,14 +10,14 @@ module('Integration | Component | bs form/element/feedback icon', function(hooks
 
   test('is empty by default', async function(assert) {
 
-    await render(hbs`{{bs-form/element/feedback-icon show=false}}`);
+    await render(hbs`<BsForm::Element::FeedbackIcon @show={{false}} />`);
 
     assert.dom('.form-control-feedback').doesNotExist();
   });
 
   test('shows icon', async function(assert) {
 
-    await render(hbs`{{bs-form/element/feedback-icon show=true iconName="foo"}}`);
+    await render(hbs`<BsForm::Element::FeedbackIcon @show={{true}} @iconName="foo" />`);
 
     assert.dom('.form-control-feedback.foo').exists({ count: 1 });
   });

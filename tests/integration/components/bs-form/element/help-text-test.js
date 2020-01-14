@@ -11,7 +11,7 @@ module('Integration | Component | bs form/element/help text', function(hooks) {
 
   test('it renders help text', async function(assert) {
     await render(hbs`
-      {{bs-form/element/help-text text="foo bar"}}
+      <BsForm::Element::HelpText @text="foo bar" />
     `);
 
     assert.dom(`.${formHelpTextClass()}`).exists();

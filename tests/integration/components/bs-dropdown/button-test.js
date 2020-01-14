@@ -9,7 +9,7 @@ module('Integration | Component | bs-dropdown/button', function(hooks) {
   setupNoDeprecations(hooks);
 
   test('dropdown button has correct default markup', async function(assert) {
-    await render(hbs`{{#bs-dropdown/button}}Test{{/bs-dropdown/button}}`);
+    await render(hbs`<BsDropdown::Button>Test</BsDropdown::Button>`);
 
     assert.dom('button').exists('dropdown button is a button');
     assert.dom('.dropdown-toggle').exists('has dropdown-toggle class');

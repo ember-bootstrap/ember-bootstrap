@@ -15,7 +15,7 @@ module('Integration | Component | bs-dropdown/toggle', function(hooks) {
   });
 
   test('toggle has correct default markup', async function(assert) {
-    await render(hbs`{{#bs-dropdown/toggle}}Test{{/bs-dropdown/toggle}}`);
+    await render(hbs`<BsDropdown::Toggle>Test</BsDropdown::Toggle>`);
 
     assert.dom('a').exists('toggle is an anchor tag by default');
     assert.dom('a').hasAttribute('href', '#', 'has href attribute');
@@ -24,7 +24,7 @@ module('Integration | Component | bs-dropdown/toggle', function(hooks) {
   });
 
   test('toggle as button does not have href', async function(assert) {
-    await render(hbs`{{#bs-dropdown/toggle tagName="button"}}Test{{/bs-dropdown/toggle}}`);
+    await render(hbs`<BsDropdown::Toggle @tagName="button">Test</BsDropdown::Toggle>`);
 
     assert.dom('button').exists('toggle is a button');
     assert.dom('button').doesNotHaveAttribute('href', 'does not have href attribute');
@@ -33,7 +33,7 @@ module('Integration | Component | bs-dropdown/toggle', function(hooks) {
   test('clicking toggle sends onClick action', async function(assert) {
     let action = this.spy();
     this.actions.click = action;
-    await render(hbs`{{#bs-dropdown/toggle onClick=(action "click")}}Test{{/bs-dropdown/toggle}}`);
+    await render(hbs`<BsDropdown::Toggle @onClick={{action "click"}}>Test</BsDropdown::Toggle>`);
     await click('a');
     assert.ok(action.calledOnce, 'onClick action has been called.');
   });

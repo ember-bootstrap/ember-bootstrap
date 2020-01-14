@@ -23,7 +23,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
   });
 
   testBS3('it has correct default markup', async function(assert) {
-    await render(hbs`{{bs-navbar}}`);
+    await render(hbs`<BsNavbar />`);
 
     assert.dom('nav').exists({ count: 1 }, 'there is only one nav element');
     assert.dom('nav').hasClass('navbar', 'the navbar has the navbar class');
@@ -33,7 +33,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
   });
 
   testBS4('it has correct default markup', async function(assert) {
-    await render(hbs`{{bs-navbar}}`);
+    await render(hbs`<BsNavbar />`);
 
     assert.dom('nav').exists({ count: 1 }, 'there is only one nav element');
     assert.dom('nav').hasClass('navbar', 'the navbar has the navbar class');
@@ -42,14 +42,14 @@ module('Integration | Component | bs-navbar', function(hooks) {
   });
 
   test('it handles inverse navbars properly', async function(assert) {
-    await render(hbs`{{bs-navbar type="inverse"}}`);
+    await render(hbs`<BsNavbar @type="inverse" />`);
 
     assert.dom('nav').hasClass('navbar-inverse', 'the navbar has the navbar-inverse class');
     assert.dom('nav').hasNoClass('navbar-default', 'the navbar does not have the navbar-default class');
   });
 
   test('it handles fluid containers properly', async function(assert) {
-    await render(hbs`{{bs-navbar fluid=false}}`);
+    await render(hbs`<BsNavbar @fluid={{false}} />`);
 
     assert.dom('nav > div').hasClass('container', 'the wrapping div has the container class');
     assert.dom('nav > div').hasNoClass(
@@ -60,9 +60,9 @@ module('Integration | Component | bs-navbar', function(hooks) {
 
   testBS3('it handles the toggling action properly', async function(assert) {
     await render(hbs`
-      {{#bs-navbar as |navbar|}}
-        {{#navbar.toggle class="clickme"}}Button{{/navbar.toggle}}
-      {{/bs-navbar}}
+      <BsNavbar as |navbar|>
+        <navbar.toggle @class="clickme">Button</navbar.toggle>
+      </BsNavbar>
     `);
 
     assert.dom('button.navbar-toggle').hasClass(
@@ -79,9 +79,9 @@ module('Integration | Component | bs-navbar', function(hooks) {
 
   testBS4('it handles the toggling action properly', async function(assert) {
     await render(hbs`
-      {{#bs-navbar as |navbar|}}
-        {{#navbar.toggle class="clickme"}}Button{{/navbar.toggle}}
-      {{/bs-navbar}}
+      <BsNavbar as |navbar|>
+        <navbar.toggle @class="clickme">Button</navbar.toggle>
+      </BsNavbar>
     `);
 
     assert.dom('button.navbar-toggler').hasClass(
@@ -100,15 +100,15 @@ module('Integration | Component | bs-navbar', function(hooks) {
 
   testBS3('it exposes all the requisite contextual components', async function(assert) {
     await render(hbs`
-      {{#bs-navbar as | navbar | }}
+      <BsNavbar as |navbar|>
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
         </div>
-        {{#navbar.content}}
+        <navbar.content>
           {{navbar.nav}}
-        {{/navbar.content}}
-      {{/bs-navbar}}
+        </navbar.content>
+      </BsNavbar>
     `);
 
     assert.dom('nav.navbar-default').exists({ count: 1 }, 'it has the navbar');
@@ -119,15 +119,15 @@ module('Integration | Component | bs-navbar', function(hooks) {
 
   testBS4('it exposes all the requisite contextual components', async function(assert) {
     await render(hbs`
-      {{#bs-navbar as | navbar | }}
+      <BsNavbar as |navbar|>
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
         </div>
-        {{#navbar.content}}
+        <navbar.content>
           {{navbar.nav}}
-        {{/navbar.content}}
-      {{/bs-navbar}}
+        </navbar.content>
+      </BsNavbar>
     `);
 
     assert.dom('nav.navbar-light').exists({ count: 1 }, 'it has the navbar');
@@ -137,7 +137,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
   });
 
   test('it nas no positional classes when position is not specified', async function(assert) {
-    await render(hbs`{{bs-navbar}}`);
+    await render(hbs`<BsNavbar />`);
 
     assert.dom('nav').hasNoClass(positionClassFor('fixed-top'), 'it does not have position fixed-top');
     assert.dom('nav').hasNoClass(positionClassFor('fixed-bottom'), 'it does not have position fixed-bottom');
@@ -145,7 +145,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
   });
 
   test('it handles fixed-top properly', async function(assert) {
-    await render(hbs`{{bs-navbar position="fixed-top"}}`);
+    await render(hbs`<BsNavbar @position="fixed-top" />`);
 
     assert.dom('nav').hasClass(positionClassFor('fixed-top'), 'it has position fixed-top');
     assert.dom('nav').hasNoClass(positionClassFor('fixed-bottom'), 'it does not have position fixed-bottom');
@@ -153,7 +153,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
   });
 
   test('it handles fixed-bottom properly', async function(assert) {
-    await render(hbs`{{bs-navbar position="fixed-bottom"}}`);
+    await render(hbs`<BsNavbar @position="fixed-bottom" />`);
 
     assert.dom('nav').hasNoClass(positionClassFor('fixed-top'), 'it does not have position fixed-top');
     assert.dom('nav').hasClass(positionClassFor('fixed-bottom'), 'it has position fixed-bottom');
@@ -161,18 +161,18 @@ module('Integration | Component | bs-navbar', function(hooks) {
   });
 
   testBS4('it handles navbar-expand[-*] properly', async function(assert) {
-    await render(hbs`{{bs-navbar toggleBreakpoint="sm"}}`);
+    await render(hbs`<BsNavbar @toggleBreakpoint="sm" />`);
     assert.dom('nav').hasNoClass('navbar-expand-lg', 'it does not have default navbar-expand-lg');
     assert.dom('nav').hasClass('navbar-expand-sm', 'it has navbar-expand-sm');
   });
 
   testBS4('it handles navbar-expand properly', async function(assert) {
-    await render(hbs`{{bs-navbar toggleBreakpoint=null}}`);
+    await render(hbs`<BsNavbar @toggleBreakpoint={{null}} />`);
     assert.dom('nav').hasClass('navbar-expand', 'it has navbar-expand');
   });
 
   testBS3('it handles static-top properly', async function(assert) {
-    await render(hbs`{{bs-navbar position="static-top"}}`);
+    await render(hbs`<BsNavbar @position="static-top" />`);
 
     assert.dom('nav').hasNoClass(positionClassFor('fixed-top'), 'it does not have position fixed-top');
     assert.dom('nav').hasNoClass(positionClassFor('fixed-bottom'), 'it does not have position fixed-bottom');
@@ -180,7 +180,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
   });
 
   testBS4('it handles sticky-top properly', async function(assert) {
-    await render(hbs`{{bs-navbar position="sticky-top"}}`);
+    await render(hbs`<BsNavbar @position="sticky-top" />`);
 
     assert.dom('nav').hasNoClass(positionClassFor('fixed-top'), 'it does not have position fixed-top');
     assert.dom('nav').hasNoClass(positionClassFor('fixed-bottom'), 'it does not have position fixed-bottom');
@@ -198,9 +198,9 @@ module('Integration | Component | bs-navbar', function(hooks) {
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
         </div>
-        {{#navbar.content}}
+        <navbar.content>
           {{navbar.nav}}
-        {{/navbar.content}}
+        </navbar.content>
       {{/bs-navbar}}
     `);
     this.set('collapsed', false);
@@ -223,9 +223,9 @@ module('Integration | Component | bs-navbar', function(hooks) {
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
         </div>
-        {{#navbar.content}}
+        <navbar.content>
           {{navbar.nav}}
-        {{/navbar.content}}
+        </navbar.content>
       {{/bs-navbar}}
     `);
     this.set('collapsed', true);
@@ -251,9 +251,9 @@ module('Integration | Component | bs-navbar', function(hooks) {
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
         </div>
-        {{#navbar.content}}
+        <navbar.content>
           {{navbar.nav}}
-        {{/navbar.content}}
+        </navbar.content>
       {{/bs-navbar}}
     `);
     await click('button');
@@ -279,9 +279,9 @@ module('Integration | Component | bs-navbar', function(hooks) {
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
         </div>
-        {{#navbar.content}}
+        <navbar.content>
           {{navbar.nav}}
-        {{/navbar.content}}
+        </navbar.content>
       {{/bs-navbar}}
     `);
     await click('button');
@@ -301,15 +301,15 @@ module('Integration | Component | bs-navbar', function(hooks) {
     this.actions.expandAction = action;
 
     await render(hbs`
-      {{#bs-navbar collapsed=true onExpand=(action "expandAction") as |navbar|}}
+      <BsNavbar @collapsed={{true}} @onExpand={{action "expandAction"}} as |navbar|>
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
         </div>
-        {{#navbar.content}}
+        <navbar.content>
           {{navbar.nav}}
-        {{/navbar.content}}
-      {{/bs-navbar}}
+        </navbar.content>
+      </BsNavbar>
     `);
     await click('button');
     assert.ok(action.calledOnce, 'onExpand has been called.');
@@ -323,15 +323,15 @@ module('Integration | Component | bs-navbar', function(hooks) {
     this.actions.collapseAction = action;
 
     await render(hbs`
-      {{#bs-navbar collapsed=false onCollapse=(action "collapseAction") as |navbar|}}
+      <BsNavbar @collapsed={{false}} @onCollapse={{action "collapseAction"}} as |navbar|>
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
         </div>
-        {{#navbar.content}}
+        <navbar.content>
           {{navbar.nav}}
-        {{/navbar.content}}
-      {{/bs-navbar}}
+        </navbar.content>
+      </BsNavbar>
     `);
     await click('button');
     assert.ok(action.calledOnce, 'onCollapse has been called.');
@@ -342,12 +342,12 @@ module('Integration | Component | bs-navbar', function(hooks) {
   test('clicking the toggle does not modify the public collapsed property', async function(assert) {
     this.set('collapsed', true);
     await render(hbs`
-      {{#bs-navbar collapsed=collapsed as |navbar|}}
+      <BsNavbar @collapsed={{collapsed}} as |navbar|>
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
         </div>
-      {{/bs-navbar}}
+      </BsNavbar>
     `);
 
     await click('button');
@@ -358,9 +358,11 @@ module('Integration | Component | bs-navbar', function(hooks) {
     let action = this.spy();
     this.actions.action = action;
 
-    await render(hbs`{{#bs-navbar collapsed=false onCollapse=(action "action") as |navbar|}}
+    await render(hbs`
+      <BsNavbar @collapsed={{false}} @onCollapse={{action "action"}} as |navbar|>
         <button {{action navbar.collapse}}>Collapse</button>
-    {{/bs-navbar}}`);
+      </BsNavbar>
+    `);
 
     await click('button');
     assert.ok(action.calledOnce, 'onCollapse action has been called.');
@@ -370,9 +372,11 @@ module('Integration | Component | bs-navbar', function(hooks) {
     let action = this.spy();
     this.actions.action = action;
 
-    await render(hbs`{{#bs-navbar collapsed=true onExpand=(action "action") as |navbar|}}
+    await render(hbs`
+      <BsNavbar @collapsed={{true}} @onExpand={{action "action"}} as |navbar|>
         <button {{action navbar.expand}}>Expand</button>
-    {{/bs-navbar}}`);
+      </BsNavbar>
+    `);
 
     await click('button');
     assert.ok(action.calledOnce, 'onExpand action has been called.');
@@ -385,9 +389,11 @@ module('Integration | Component | bs-navbar', function(hooks) {
     let collapsed = this.spy();
     this.actions.collapsed = collapsed;
 
-    await render(hbs`{{#bs-navbar collapsed=true onExpand=(action "expanded") onCollapse=(action "collapsed") as |navbar|}}
+    await render(hbs`
+      <BsNavbar @collapsed={{true}} @onExpand={{action "expanded"}} @onCollapse={{action "collapsed"}} as |navbar|>
         <button {{action navbar.toggleNavbar}}>Expand</button>
-    {{/bs-navbar}}`);
+      </BsNavbar>
+    `);
 
     await click('button');
     assert.ok(expanded.calledOnce, 'onExpand action has been called.');
@@ -401,17 +407,17 @@ module('Integration | Component | bs-navbar', function(hooks) {
     this.actions.collapseAction = collapseAction;
 
     await render(hbs`
-      {{#bs-navbar as collapsed=false onCollapse=(action "collapseAction") as |navbar|}}
+      <BsNavbar @collapsed={{false}} @onCollapse={{action "collapseAction"}} as |navbar|>
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
         </div>
-        {{#navbar.content}}
-          {{#navbar.nav as |nav|}}
-            {{#nav.item}}{{#nav.link-to "index" id="link" disabled=true}}Home{{/nav.link-to}}{{/nav.item}}
-          {{/navbar.nav}}
-        {{/navbar.content}}
-      {{/bs-navbar}}
+        <navbar.content>
+          <navbar.nav as |nav|>
+            <nav.item><nav.linkTo @route="index" id="link" @disabled={{true}}>Home</nav.linkTo></nav.item>
+          </navbar.nav>
+        </navbar.content>
+      </BsNavbar>
     `);
     await click('#link');
 
@@ -420,17 +426,17 @@ module('Integration | Component | bs-navbar', function(hooks) {
 
   test('it passes accessibility checks', async function (assert) {
     await render(hbs`
-      {{#bs-navbar as |navbar|}}
+      <BsNavbar as |navbar|>
         <div class="navbar-header">
           {{navbar.toggle}}
           <a class="navbar-brand" href="#">Brand</a>
         </div>
-        {{#navbar.content}}
-          {{#navbar.nav as |nav|}}
-            {{#nav.item}}{{#nav.link-to "index"}}Home{{/nav.link-to}}{{/nav.item}}
-          {{/navbar.nav}}
-        {{/navbar.content}}
-      {{/bs-navbar}}
+        <navbar.content>
+          <navbar.nav as |nav|>
+            <nav.item><nav.linkTo @route="index">Home</nav.linkTo></nav.item>
+          </navbar.nav>
+        </navbar.content>
+      </BsNavbar>
     `);
 
     await a11yAudit();

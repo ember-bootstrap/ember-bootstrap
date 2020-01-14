@@ -10,7 +10,7 @@ module('Integration | Component | bs-progress/bar', function(hooks) {
 
   test('has correct markup', async function(assert) {
     await render(hbs`
-      {{bs-progress/bar}}
+      <BsProgress::Bar />
     `);
 
     assert.dom('div.progress-bar').exists({ count: 1 }, 'Has progress-bar class');

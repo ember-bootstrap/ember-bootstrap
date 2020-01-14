@@ -9,15 +9,15 @@ module('Integration | Component | bs-navbar/content', function(hooks) {
   setupNoDeprecations(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{bs-navbar/content}}`);
+    await render(hbs`<BsNavbar::Content />`);
 
     assert.dom('*').hasText('');
 
     // Template block usage:
     await render(hbs`
-      {{#bs-navbar/content}}
+      <BsNavbar::Content>
         template block text
-      {{/bs-navbar/content}}
+      </BsNavbar::Content>
     `);
 
     assert.dom('*').hasText('template block text');
@@ -25,9 +25,9 @@ module('Integration | Component | bs-navbar/content', function(hooks) {
 
   test('it has correct markup', async function(assert) {
     await render(hbs`
-      {{#bs-navbar/content}}
+      <BsNavbar::Content>
         Content
-      {{/bs-navbar/content}}
+      </BsNavbar::Content>
     `);
 
     assert.dom('*').hasText('Content');
