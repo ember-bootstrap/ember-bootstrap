@@ -75,9 +75,11 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('it shows visible tooltip with block content', async function(assert) {
-    await render(hbs`<BsTooltip @visible={{true}}>
-      BLOCK
-      </BsTooltip>`);
+    await render(hbs`
+      <BsTooltip @visible={{true}}>
+        BLOCK
+      </BsTooltip>
+    `);
 
     assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
     assert.dom('.tooltip .tooltip-inner').hasText('BLOCK');

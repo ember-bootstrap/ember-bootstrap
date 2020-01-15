@@ -522,35 +522,36 @@ module('Integration | Component | bs-form/element', function(hooks) {
         return prev;
       }, {});
       this.setProperties(resetProps);
-      await render(hbs`<BsForm::element @formLayout={{this.formLayout}} as |el|>
-        <el.control
-          name={{this.name}}
-          required={{this.required}}
-          readonly={{this.readonly}}
-          placeholder={{this.placeholder}}
-          disabled={{this.disabled}}
-          autofocus={{this.autofocus}}
-          size={{this.size}}
-          tabindex={{this.tabindex}}
-          minlength={{this.minlength}}
-          maxlength={{this.maxlength}}
-          min={{this.min}}
-          max={{this.max}}
-          pattern={{this.pattern}}
-          accept={{this.accept}}
-          autocomplete={{this.autocomplete}}
-          autocapitalize={{this.autocapitalize}}
-          autocorrect={{this.autocorrect}}
-          autosave={{this.autosave}}
-          inputmode={{this.inputmode}}
-          multiple={{this.multiple}}
-          step={{this.step}}
-          form={{this.form}}
-          spellcheck={{this.spellcheck}}
-          title={{this.title}}
-        />
+      await render(hbs`
+        <BsForm::element @formLayout={{this.formLayout}} as |el|>
+          <el.control
+            name={{this.name}}
+            required={{this.required}}
+            readonly={{this.readonly}}
+            placeholder={{this.placeholder}}
+            disabled={{this.disabled}}
+            autofocus={{this.autofocus}}
+            size={{this.size}}
+            tabindex={{this.tabindex}}
+            minlength={{this.minlength}}
+            maxlength={{this.maxlength}}
+            min={{this.min}}
+            max={{this.max}}
+            pattern={{this.pattern}}
+            accept={{this.accept}}
+            autocomplete={{this.autocomplete}}
+            autocapitalize={{this.autocapitalize}}
+            autocorrect={{this.autocorrect}}
+            autosave={{this.autosave}}
+            inputmode={{this.inputmode}}
+            multiple={{this.multiple}}
+            step={{this.step}}
+            form={{this.form}}
+            spellcheck={{this.spellcheck}}
+            title={{this.title}}
+          />
         </BsForm::element>
-      />`);
+      `);
 
       for (let attribute in supportedInputAttributes) {
         assert.equal(this.element.querySelector('input').getAttribute(attribute), undefined, `input attribute ${attribute} is undefined [${formLayout}]`);
@@ -613,29 +614,30 @@ module('Integration | Component | bs-form/element', function(hooks) {
         return prev;
       }, {});
       this.setProperties(resetProps);
-      await render(hbs`<BsForm::element @formLayout={{this.formLayout}} @controlType="textarea" as |el|>
-        <el.control
-          name={{this.name}}
-          rows={{this.rows}}
-          cols={{this.cols}}
-          required={{this.required}}
-          readonly={{this.readonly}}
-          placeholder={{this.placeholder}}
-          disabled={{this.disabled}}
-          autofocus={{this.autofocus}}
-          tabindex={{this.tabindex}}
-          minlength={{this.minlength}}
-          maxlength={{this.maxlength}}
-          autocomplete={{this.autocomplete}}
-          autocapitalize={{this.autocapitalize}}
-          autocorrect={{this.autocorrect}}
-          form={{this.form}}
-          spellcheck={{this.spellcheck}}
-          wrap={{this.wrap}}
-          title={{this.title}}
-         />
-       </BsForm::element>
-      />`);
+      await render(hbs`
+        <BsForm::element @formLayout={{this.formLayout}} @controlType="textarea" as |el|>
+          <el.control
+            name={{this.name}}
+            rows={{this.rows}}
+            cols={{this.cols}}
+            required={{this.required}}
+            readonly={{this.readonly}}
+            placeholder={{this.placeholder}}
+            disabled={{this.disabled}}
+            autofocus={{this.autofocus}}
+            tabindex={{this.tabindex}}
+            minlength={{this.minlength}}
+            maxlength={{this.maxlength}}
+            autocomplete={{this.autocomplete}}
+            autocapitalize={{this.autocapitalize}}
+            autocorrect={{this.autocorrect}}
+            form={{this.form}}
+            spellcheck={{this.spellcheck}}
+            wrap={{this.wrap}}
+            title={{this.title}}
+          />
+        </BsForm::element>
+      `);
 
       for (let attribute in supportedTextareaAttributes) {
         assert.equal(this.element.querySelector('textarea').getAttribute(attribute), undefined, `textarea attribute ${attribute} is undefined [${formLayout}]`);
@@ -690,18 +692,19 @@ module('Integration | Component | bs-form/element', function(hooks) {
         return prev;
       }, {});
       this.setProperties(resetProps);
-      await render(hbs`<BsForm::element @controlType="checkbox" @formLayout={{this.formLayout}} as |el|>
-        <el.control
-          name={{this.name}}
-          required={{this.required}}
-          disabled={{this.disabled}}
-          autofocus={{this.autofocus}}
-          tabindex={{this.tabindex}}
-          form={{this.form}}
-          title={{this.title}}
-         />
-       </BsForm::element>
-      />`);
+      await render(hbs`
+        <BsForm::element @controlType="checkbox" @formLayout={{this.formLayout}} as |el|>
+          <el.control
+            name={{this.name}}
+            required={{this.required}}
+            disabled={{this.disabled}}
+            autofocus={{this.autofocus}}
+            tabindex={{this.tabindex}}
+            form={{this.form}}
+            title={{this.title}}
+          />
+        </BsForm::element>
+      `);
 
       for (let attribute in supportedCheckboxAttributes) {
         assert.equal(this.element.querySelector('input').getAttribute(attribute), undefined, `checkbox attribute ${attribute} is undefined [${formLayout}]`);
@@ -755,18 +758,19 @@ module('Integration | Component | bs-form/element', function(hooks) {
         return prev;
       }, {});
       this.setProperties(resetProps);
-      await render(hbs`<BsForm::element @controlType="radio" @formLayout={{this.formLayout}} @options={{this.options}} as |el|>
-        <el.control
-          name={{this.name}}
-          required={{this.required}}
-          disabled={{this.disabled}}
-          autofocus={{this.autofocus}}
-          tabindex={{this.tabindex}}
-          form={{this.form}}
-          title={{this.title}}
-        />
+      await render(hbs`
+        <BsForm::element @controlType="radio" @formLayout={{this.formLayout}} @options={{this.options}} as |el|>
+          <el.control
+            name={{this.name}}
+            required={{this.required}}
+            disabled={{this.disabled}}
+            autofocus={{this.autofocus}}
+            tabindex={{this.tabindex}}
+            form={{this.form}}
+            title={{this.title}}
+          />
         </BsForm::element>
-      />`);
+      `);
 
       for (let attribute in supportedCheckboxAttributes) {
         assert.equal(this.element.querySelector('input').getAttribute(attribute), undefined, `checkbox attribute ${attribute} is undefined [${formLayout}]`);
