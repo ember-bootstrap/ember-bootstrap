@@ -124,9 +124,13 @@ module('Integration | Component | bs-popover', function(hooks) {
     this.set('hide', hideAction);
     let hiddenAction = this.spy();
     this.set('hidden', hiddenAction);
-    await render(
-      hbs`<div id="target"><BsPopover @visible={{true}} @onHide={{action hide}} @onHidden={{action hidden}} as |po|><div id="hide" {{action po.close}}>Hide</div></BsPopover></div>`
-    );
+    await render(hbs`
+      <div id="target">
+        <BsPopover @visible={{true}} @onHide={{action hide}} @onHidden={{action hidden}} as |po|>
+          <div id="hide" {{action po.close}} role="button">Hide</div>
+        </BsPopover>
+      </div>
+    `);
     await click('#hide');
     assert.ok(hideAction.calledOnce, 'hide action has been called');
     assert.ok(hiddenAction.calledOnce, 'hidden action was called');
@@ -134,9 +138,13 @@ module('Integration | Component | bs-popover', function(hooks) {
   });
 
   test('click-initiated close action does not interfere with click-to-open', async function(assert) {
-    await render(
-      hbs`<div id="target"><BsPopover as |po|><div id="hide" onclick={{action po.close}}>Hide</div></BsPopover></div>`
-    );
+    await render(hbs`
+      <div id="target">
+        <BsPopover as |po|>
+          <div id="hide" onclick={{action po.close}} role="button">Hide</div>
+        </BsPopover>
+      </div>
+    `);
     await click('#target');
     assert.dom('.popover').exists('popover is visible');
     await click('#hide');
@@ -146,9 +154,12 @@ module('Integration | Component | bs-popover', function(hooks) {
   });
 
   test('click-initiated close action does not interfere with click-to-open when wormholed', async function(assert) {
-    await render(
-      hbs`<div id="ember-bootstrap-wormhole"></div><div id="target"><BsPopover as |po|><div id="hide" onclick={{action po.close}}>Hide</div></BsPopover></div>`
-    );
+    await render(hbs`
+      <div id="ember-bootstrap-wormhole"></div>
+      <div id="target">
+        <BsPopover as |po|><div id="hide" onclick={{action po.close}} role="button">Hide</div></BsPopover>
+      </div>
+    `);
     await click('#target');
     assert.dom('.popover').exists('popover is visible');
     await click('#hide');
@@ -231,7 +242,8 @@ module('Integration | Component | bs-popover', function(hooks) {
 
   test('it passes accessibility checks', async function (assert) {
     await render(hbs`
-      <button>Test
+      <button>
+        Test
         <BsPopover @title="dummy title" @visible={{true}}>
           template block text
         </BsPopover>

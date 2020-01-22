@@ -24,16 +24,16 @@ module('Integration | Component | bs-tab', function(hooks) {
 
   test('it yields expected values', async function(assert) {
     await render(hbs`
-      {{#bs-tab fade=false as |tab|}}
-        {{#tab.pane id="pane1" title="Tab 1"}}
+      <BsTab @fade={{false}} as |tab|>
+        <tab.pane @id="pane1" @title="Tab 1">
           tabcontent 1
-        {{/tab.pane}}
-        {{#tab.pane id="pane2" title="Tab 2"}}
+        </tab.pane>
+        <tab.pane @id="pane2" @title="Tab 2">
           tabcontent 2
-        {{/tab.pane}}
+        </tab.pane>
         <div id="activeId">{{tab.activeId}}</div>
-        <div id="switch" {{action tab.select "pane2"}}></div>
-      {{/bs-tab}}
+        <div id="switch" {{action tab.select "pane2"}} role="button"></div>
+      </BsTab>
     `);
 
     assert.dom('.tab-pane').exists({ count: 2 }, 'yields tab pane component');
@@ -47,18 +47,18 @@ module('Integration | Component | bs-tab', function(hooks) {
 
   test('it yields expected values [customTabs=true]', async function(assert) {
     await render(hbs`
-      {{#bs-tab fade=false customTabs=true as |tab|}}
+      <BsTab @fade={{false}} @customTabs={{true}} as |tab|>
         <div class="tab-content">
-        {{#tab.pane id="pane1" title="Tab 1"}}
-          tabcontent 1
-        {{/tab.pane}}
-        {{#tab.pane id="pane2" title="Tab 2"}}
-          tabcontent 2
-        {{/tab.pane}}
-        <div id="activeId">{{tab.activeId}}</div>
-        <div id="switch" {{action tab.select "pane2"}}></div>
+          <tab.pane @id="pane1" @title="Tab 1">
+            tabcontent 1
+          </tab.pane>
+          <tab.pane @id="pane2" @title="Tab 2">
+            tabcontent 2
+          </tab.pane>
+          <div id="activeId">{{tab.activeId}}</div>
+          <div id="switch" {{action tab.select "pane2"}} role="button"></div>
         </div>
-      {{/bs-tab}}
+      </BsTab>
     `);
 
     assert.dom('.tab-pane').exists({ count: 2 }, 'yields tab pane component');
@@ -72,14 +72,14 @@ module('Integration | Component | bs-tab', function(hooks) {
 
   test('it generates tab navigation', async function(assert) {
     await render(hbs`
-      {{#bs-tab as |tab|}}
-        {{#tab.pane title="Tab 1"}}
+      <BsTab as |tab|>
+        <tab.pane @title="Tab 1">
           tabcontent 1
-        {{/tab.pane}}
-        {{#tab.pane title="Tab 2"}}
+        </tab.pane>
+        <tab.pane @title="Tab 2">
           tabcontent 2
-        {{/tab.pane}}
-      {{/bs-tab}}
+        </tab.pane>
+      </BsTab>
     `);
 
     assert.dom('ul.nav.nav-tabs').exists({ count: 1 }, 'has tabs navigation');
@@ -90,11 +90,11 @@ module('Integration | Component | bs-tab', function(hooks) {
 
   test('tabs have proper aria roles', async function(assert) {
     await render(hbs`
-      {{#bs-tab as |tab|}}
-        {{#tab.pane title="Tab 1"}}
+      <BsTab as |tab|>
+        <tab.pane @title="Tab 1">
           tabcontent 1
-        {{/tab.pane}}
-      {{/bs-tab}}
+        </tab.pane>
+      </BsTab>
     `);
 
     assert.dom('ul.nav.nav-tabs').hasAttribute('role', 'tablist');
@@ -107,14 +107,14 @@ module('Integration | Component | bs-tab', function(hooks) {
 
   test('first tab is active by default', async function(assert) {
     await render(hbs`
-      {{#bs-tab fade=false as |tab|}}
-        {{#tab.pane title="Tab 1"}}
+      <BsTab @fade={{false}} as |tab|>
+        <tab.pane @title="Tab 1">
           tabcontent 1
-        {{/tab.pane}}
-        {{#tab.pane title="Tab 2"}}
+        </tab.pane>
+        <tab.pane @title="Tab 2">
           tabcontent 2
-        {{/tab.pane}}
-      {{/bs-tab}}
+        </tab.pane>
+      </BsTab>
     `);
 
     assertActiveTab.call(this, assert, 0, true);
@@ -124,14 +124,14 @@ module('Integration | Component | bs-tab', function(hooks) {
   test('activeId activates tabs', async function(assert) {
     this.set('paneId', 'pane1');
     await render(hbs`
-      {{#bs-tab fade=false activeId=paneId as |tab|}}
-        {{#tab.pane id="pane1" title="Tab 1"}}
+      <BsTab @fade={{false}} @activeId={{paneId}} as |tab|>
+        <tab.pane @id="pane1" @title="Tab 1">
           tabcontent 1
-        {{/tab.pane}}
-        {{#tab.pane id="pane2" title="Tab 2"}}
+        </tab.pane>
+        <tab.pane @id="pane2" @title="Tab 2">
           tabcontent 2
-        {{/tab.pane}}
-      {{/bs-tab}}
+        </tab.pane>
+      </BsTab>
     `);
 
     assertActiveTab.call(this, assert, 0, true);
@@ -145,20 +145,20 @@ module('Integration | Component | bs-tab', function(hooks) {
 
   test('tab navigation is groupable', async function(assert) {
     await render(hbs`
-      {{#bs-tab as |tab|}}
-        {{#tab.pane title="Tab 1"}}
-            tabcontent 1
-        {{/tab.pane}}
-        {{#tab.pane title="Tab 2"}}
-            tabcontent 2
-        {{/tab.pane}}
-        {{#tab.pane title="Tab 3" groupTitle="Dropdown"}}
-            tabcontent 3
-        {{/tab.pane}}
-        {{#tab.pane title="Tab 4" groupTitle="Dropdown"}}
-            tabcontent 4
-        {{/tab.pane}}
-      {{/bs-tab}}
+      <BsTab as |tab|>
+        <tab.pane @title="Tab 1">
+          tabcontent 1
+        </tab.pane>
+        <tab.pane @title="Tab 2">
+          tabcontent 2
+        </tab.pane>
+        <tab.pane @title="Tab 3" @groupTitle="Dropdown">
+          tabcontent 3
+        </tab.pane>
+        <tab.pane @title="Tab 4" @groupTitle="Dropdown">
+          tabcontent 4
+        </tab.pane>
+      </BsTab>
     `);
 
     assert.dom('ul.nav.nav-tabs').exists({ count: 1 }, 'has tabs navigation');
@@ -176,14 +176,14 @@ module('Integration | Component | bs-tab', function(hooks) {
 
   test('customTabs disables tab navigation generation', async function(assert) {
     await render(hbs`
-      {{#bs-tab customTabs=true as |tab|}}
-        {{#tab.pane title="Tab 1"}}
+      <BsTab @customTabs={{true}} as |tab|>
+        <tab.pane @title="Tab 1">
           tabcontent 1
-        {{/tab.pane}}
-        {{#tab.pane title="Tab 2"}}
+        </tab.pane>
+        <tab.pane @title="Tab 2">
           tabcontent 2
-        {{/tab.pane}}
-      {{/bs-tab}}
+        </tab.pane>
+      </BsTab>
     `);
 
     assert.dom('ul.nav.nav-tabs').doesNotExist('has no tabs navigation');
@@ -191,14 +191,14 @@ module('Integration | Component | bs-tab', function(hooks) {
 
   test('type sets tab navigation type', async function(assert) {
     await render(hbs`
-      {{#bs-tab type="pills" as |tab|}}
-        {{#tab.pane title="Tab 1"}}
+      <BsTab @type="pills" as |tab|>
+        <tab.pane @title="Tab 1">
           tabcontent 1
-        {{/tab.pane}}
-        {{#tab.pane title="Tab 2"}}
+        </tab.pane>
+        <tab.pane @title="Tab 2">
           tabcontent 2
-        {{/tab.pane}}
-      {{/bs-tab}}
+        </tab.pane>
+      </BsTab>
     `);
 
     assert.dom('ul.nav.nav-pills').exists({ count: 1 }, 'has pills navigation');
@@ -210,14 +210,14 @@ module('Integration | Component | bs-tab', function(hooks) {
     this.actions.change = action;
 
     await render(hbs`
-      {{#bs-tab fade=false onChange=(action "change") as |tab|}}
-        {{#tab.pane id="pane1" title="Tab 1"}}
+      <BsTab @fade={{false}} @onChange={{action "change"}} as |tab|>
+        <tab.pane @id="pane1" @title="Tab 1">
           tabcontent 1
-        {{/tab.pane}}
-        {{#tab.pane id="pane2" title="Tab 2"}}
+        </tab.pane>
+        <tab.pane @id="pane2" @title="Tab 2">
           tabcontent 2
-        {{/tab.pane}}
-      {{/bs-tab}}
+        </tab.pane>
+      </BsTab>
     `);
 
     await click('ul.nav.nav-tabs li:nth-child(2) a');
@@ -233,14 +233,14 @@ module('Integration | Component | bs-tab', function(hooks) {
     this.actions.change = action;
 
     await render(hbs`
-      {{#bs-tab fade=false onChange=(action "change") as |tab|}}
-        {{#tab.pane id="pane1" title="Tab 1"}}
+      <BsTab @fade={{false}} @onChange={{action "change"}} as |tab|>
+        <tab.pane @id="pane1" @title="Tab 1">
           tabcontent 1
-        {{/tab.pane}}
-        {{#tab.pane id="pane2" title="Tab 2"}}
+        </tab.pane>
+        <tab.pane @id="pane2" @title="Tab 2">
           tabcontent 2
-        {{/tab.pane}}
-      {{/bs-tab}}
+        </tab.pane>
+      </BsTab>
     `);
 
     await click('ul.nav.nav-tabs li:nth-child(2) a');
@@ -253,14 +253,14 @@ module('Integration | Component | bs-tab', function(hooks) {
   test('changing active tab does not change public activeId property (DDAU)', async function(assert) {
     this.set('paneId', 'pane1');
     await render(hbs`
-      {{#bs-tab fade=false activeId=paneId as |tab|}}
-        {{#tab.pane id="pane1" title="Tab 1"}}
+      <BsTab @fade={{false}} @activeId={{paneId}} as |tab|>
+        <tab.pane @id="pane1" @title="Tab 1">
           tabcontent 1
-        {{/tab.pane}}
-        {{#tab.pane id="pane2" title="Tab 2"}}
+        </tab.pane>
+        <tab.pane @id="pane2" @title="Tab 2">
           tabcontent 2
-        {{/tab.pane}}
-      {{/bs-tab}}
+        </tab.pane>
+      </BsTab>
     `);
     await click('ul.nav.nav-tabs li:nth-child(2) a');
     assert.equal(this.get('paneId'), 'pane1', 'Does not modify public activeId property');
@@ -268,14 +268,14 @@ module('Integration | Component | bs-tab', function(hooks) {
 
   test('it passes accessibility checks', async function (assert) {
     await render(hbs`
-      {{#bs-tab as |tab|}}
-        {{#tab.pane title="Tab 1"}}
+      <BsTab as |tab|>
+        <tab.pane @title="Tab 1">
           tabcontent 1
-        {{/tab.pane}}
-        {{#tab.pane title="Tab 2"}}
+        </tab.pane>
+        <tab.pane @title="Tab 2">
           tabcontent 2
-        {{/tab.pane}}
-      {{/bs-tab}}
+        </tab.pane>
+      </BsTab>
     `);
 
     await a11yAudit({
