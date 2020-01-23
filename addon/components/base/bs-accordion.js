@@ -1,5 +1,5 @@
 import { action } from '@ember/object';
-import { layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
@@ -36,7 +36,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @extends Ember.Component
   @public
 */
-@templateLayout(layout)
+@tagName("")
 export default class Accordion extends Component {
   @defaultValue
   ariaRole = 'tablist';
