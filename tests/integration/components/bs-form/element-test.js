@@ -343,11 +343,27 @@ module('Integration | Component | bs-form/element', function(hooks) {
     });
 
     testBS4('has correct markup', async function(assert) {
-      await render(hbs`<BsForm::Element @controlType="radio" @options={{simpleOptions}} />`);
+      await render(hbs`<BsForm::Element @controlType="radio" @label="my radio group" @options={{simpleOptions}} />`);
+
+      assert.dom('legend').exists({ count: 1 }, 'renders a <legend> instead of a <label> for radio group');
+      assert.dom('legend').hasText('my radio group', 'renders value of label argument as text of <legend>');
+      assert.dom('legend').doesNotHaveAttribute('for', '<legend> does not have a for attribute');
 
       assert.dom('.form-check').exists({ count: 2 });
       assert.dom('.form-check input[type=radio]').hasClass('form-check-input');
       assert.dom('.form-check label').hasClass('form-check-label');
+    });
+
+    testBS4('supports horizontal from layout', async function(assert) {
+      await render(hbs`
+        <BsForm @formLayout="horizontal" as |form|>
+          <form.element @controlType="radio" @label="my radio group" @options={{simpleOptions}} />
+        </BsForm>
+      `);
+
+      assert.dom('legend').hasClass('col-form-label');
+      assert.dom('legend').hasClass('col-md-4');
+      assert.dom('.row > :not(legend)').hasClass('col-md-8');
     });
 
     testBS4('supports inline', async function(assert) {
