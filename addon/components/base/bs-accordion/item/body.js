@@ -1,6 +1,6 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-accordion/body';
+import layout from 'ember-bootstrap/templates/components/bs-accordion/item/body';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**

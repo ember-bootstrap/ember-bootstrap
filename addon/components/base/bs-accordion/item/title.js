@@ -1,6 +1,6 @@
 import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import Component from '@ember/component';
-import layout from 'ember-bootstrap/templates/components/bs-accordion/title';
+import layout from 'ember-bootstrap/templates/components/bs-accordion/item/title';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
