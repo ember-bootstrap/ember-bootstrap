@@ -1,4 +1,5 @@
-import { attributeBindings, classNames, layout as templateLayout, tagName } from '@ember-decorators/component';
+import { action } from "@ember/object";
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/header/close';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
@@ -11,9 +12,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @private
  */
 @templateLayout(layout)
-@tagName('button')
-@classNames('close')
-@attributeBindings('type', 'aria-label')
+@tagName("")
 export default class ModalHeaderClose extends Component {
   'aria-label' = 'Close';
 
@@ -27,7 +26,8 @@ export default class ModalHeaderClose extends Component {
   onClick() {
   }
 
-  click() {
+  @action
+  handleClick() {
     this.get('onClick')();
   }
 }

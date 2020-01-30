@@ -1,4 +1,4 @@
-import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown';
@@ -172,8 +172,8 @@ const SUPPORTED_KEYCODES = [
   @extends Ember.Component
   @public
 s*/
+@tagName("")
 @templateLayout(layout)
-@classNameBindings('containerClass')
 export default class Dropdown extends Component {
   /**
    * This property reflects the state of the dropdown, whether it is open or closed.

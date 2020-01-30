@@ -1,8 +1,11 @@
-{{#if hasBlock}}
-  {{yield}}
-{{else}}
-  <span class="sr-only">Toggle navigation</span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-{{/if}}
+<button class={{if this.collapsed "collapsed"}} ...attributes {{on "click" this.handleClick}}>
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  {{/if}}
+  
+</button>

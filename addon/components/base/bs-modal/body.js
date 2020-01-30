@@ -1,4 +1,4 @@
-import { classNames, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/body';
 
@@ -11,6 +11,6 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/body';
  @extends Ember.Component
  @public
  */
+@tagName("")
 @templateLayout(layout)
-@classNames('modal-body')
 export default class ModalBody extends Component {}

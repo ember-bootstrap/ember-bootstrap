@@ -1,5 +1,8 @@
-{{#if hasBlock}}
-  {{yield}}
-{{else}}
-  <span class="navbar-toggler-icon"></span>
-{{/if}}
+<button class={{if this.collapsed "collapsed"}} ...attributes {{on "click" this.handleClick}}>
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    <span class="navbar-toggler-icon"></span>
+  {{/if}}
+  
+</button>

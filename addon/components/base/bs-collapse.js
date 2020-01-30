@@ -1,9 +1,9 @@
-import { classNameBindings } from '@ember-decorators/component';
+import { layout as templateLayout, classNameBindings } from '@ember-decorators/component';
+import layout from 'ember-bootstrap/templates/components/bs-collapse';
 import { alias, and, not } from '@ember/object/computed';
 import { addObserver } from '@ember/object/observers';
 import Component from '@ember/component';
 import { isPresent } from '@ember/utils';
-import '@ember/object';
 import { next } from '@ember/runloop';
 import { camelize } from '@ember/string';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
@@ -30,6 +30,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @public
 */
 @classNameBindings('collapse', 'collapsing')
+@templateLayout(layout)
 export default class Collapse extends Component {
   /**
    * Collapsed/expanded state

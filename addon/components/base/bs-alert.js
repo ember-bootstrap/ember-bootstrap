@@ -1,4 +1,4 @@
-import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { action } from '@ember/object';
 import { and, not } from '@ember/object/computed';
 import { addObserver } from '@ember/object/observers';
@@ -29,8 +29,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @extends Ember.Component
   @public
 */
+@tagName("")
 @templateLayout(layout)
-@classNameBindings('alert', 'fade', 'dismissible:alert-dismissible', 'typeClass')
 export default class Alert extends Component {
   /**
    * A dismissible alert will have a close button in the upper right corner, that the user can click to dismiss

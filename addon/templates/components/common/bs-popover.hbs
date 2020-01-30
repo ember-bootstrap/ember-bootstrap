@@ -1,27 +1,30 @@
-{{! template-lint-disable no-unbound }}
-{{unbound _parentFinder}}
-{{#if this.inDom}}
-  {{#let (component this.elementComponent) as |Element|}}
-    <Element
-      @placement={{this.placement}}
-      @fade={{this.fade}}
-      @showHelp={{this.showHelp}}
-      @title={{@title}}
-      @renderInPlace={{this._renderInPlace}}
-      @popperTarget={{this.triggerTargetElement}}
-      @destinationElement={{this.destinationElement}}
-      @autoPlacement={{this.autoPlacement}}
-      @viewportElement={{this.viewportElement}}
-      @viewportPadding={{this.viewportPadding}}
-      @id={{this.overlayId}}
-      @class={{@class}}
-      ...attributes
-    >
-      {{yield
-        (hash
-          close=this.close
-        )
-      }}
-    </Element>
-  {{/let}}
-{{/if}}
+<div ...attributes>
+  {{! template-lint-disable no-unbound }}
+  {{unbound _parentFinder}}
+  {{#if this.inDom}}
+    {{#let (component this.elementComponent) as |Element|}}
+      <Element
+        @placement={{this.placement}}
+        @fade={{this.fade}}
+        @showHelp={{this.showHelp}}
+        @title={{@title}}
+        @renderInPlace={{this._renderInPlace}}
+        @popperTarget={{this.triggerTargetElement}}
+        @destinationElement={{this.destinationElement}}
+        @autoPlacement={{this.autoPlacement}}
+        @viewportElement={{this.viewportElement}}
+        @viewportPadding={{this.viewportPadding}}
+        @id={{this.overlayId}}
+        @class={{@class}}
+        ...attributes
+      >
+        {{yield
+          (hash
+            close=this.close
+          )
+        }}
+      </Element>
+    {{/let}}
+  {{/if}}
+  
+</div>

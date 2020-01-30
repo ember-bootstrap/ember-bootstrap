@@ -1,17 +1,20 @@
-{{#if hasBlockParams}}
-  {{yield
-    (hash
-      title=(component this.titleComponent)
-      close=(component this.closeComponent onClick=@onClose)
-    )
-  }}
-{{else}}
-  {{#if hasBlock}}
-    {{yield}}
+<div class="modal-header" ...attributes>
+  {{#if hasBlockParams}}
+    {{yield
+      (hash
+        title=(component this.titleComponent)
+        close=(component this.closeComponent onClick=@onClose)
+      )
+    }}
   {{else}}
-    {{#component this.titleComponent}}{{@title}}{{/component}}
+    {{#if hasBlock}}
+      {{yield}}
+    {{else}}
+      {{#component this.titleComponent}}{{@title}}{{/component}}
+    {{/if}}
+    {{#if this.closeButton}}
+      {{component this.closeComponent onClick=@onClose}}
+    {{/if}}
   {{/if}}
-  {{#if this.closeButton}}
-    {{component this.closeComponent onClick=@onClose}}
-  {{/if}}
-{{/if}}
+  
+</div>

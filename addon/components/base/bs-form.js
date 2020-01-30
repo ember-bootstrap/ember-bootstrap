@@ -1,4 +1,4 @@
-import { attributeBindings, classNameBindings, layout as templateLayout, tagName } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { gt } from '@ember/object/computed';
 import Component from '@ember/component';
 import { action, computed, set } from '@ember/object';
@@ -106,9 +106,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @public
 */
 @templateLayout(layout)
-@tagName('form')
-@classNameBindings('layoutClass')
-@attributeBindings('_novalidate:novalidate')
+@tagName("")
 export default class Form extends Component {
   ariaRole = 'form';
 
@@ -456,11 +454,13 @@ export default class Form extends Component {
       )
   }
 
-  submit(event) {
+  @action
+  handleSubmit(event) {
     this.submitHandler(event, false);
   }
 
-  keyPress(e) {
+  @action
+  handleKeyPress(e) {
     let code = e.keyCode || e.which;
     if (code === 13 && this.get('submitOnEnter')) {
       this.triggerSubmit();

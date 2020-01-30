@@ -1,4 +1,4 @@
-import { layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import { filter, oneWay } from '@ember/object/computed';
 import Component from '@ember/component';
@@ -112,6 +112,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @uses Mixins.ComponentParent
   @public
 */
+@tagName("")
 @templateLayout(layout)
 export default class Tab extends Component.extend(ComponentParent) {
   /**

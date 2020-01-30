@@ -1,15 +1,18 @@
-{{#if hasBlockParams}}
-  {{yield
-    (hash
-      title=(component this.titleComponent collapsed=this.collapsed disabled=this.disabled onClick=(action onClick value))
-      body=(component this.bodyComponent collapsed=this.collapsed)
-    )
-  }}
-{{else}}
-  {{#component this.titleComponent collapsed=this.collapsed disabled=this.disabled onClick=(action onClick value)}}
-    {{title}}
-  {{/component}}
-  {{#component this.bodyComponent collapsed=this.collapsed}}
-    {{yield}}
-  {{/component}}
-{{/if}}
+<div class="{{if this.disabled "disabled"}} {{this.typeClass}}" ...attributes>
+  {{#if hasBlockParams}}
+    {{yield
+      (hash
+        title=(component this.titleComponent collapsed=this.collapsed disabled=this.disabled onClick=(action onClick value))
+        body=(component this.bodyComponent collapsed=this.collapsed)
+      )
+    }}
+  {{else}}
+    {{#component this.titleComponent collapsed=this.collapsed disabled=this.disabled onClick=(action onClick value)}}
+      {{title}}
+    {{/component}}
+    {{#component this.bodyComponent collapsed=this.collapsed}}
+      {{yield}}
+    {{/component}}
+  {{/if}}
+  
+</div>

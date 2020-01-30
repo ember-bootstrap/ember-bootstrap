@@ -1,4 +1,4 @@
-import { layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Modal from 'ember-bootstrap/components/bs-modal';
 import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
@@ -80,6 +80,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @extends Components.Modal
   @public
 */
+@tagName("")
 @templateLayout(layout)
 export default class ModalSimple extends Modal {
   /**

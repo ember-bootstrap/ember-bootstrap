@@ -1,5 +1,8 @@
-<h5 class="mb-0">
-  <button class="btn btn-link {{if @disabled "disabled"}}" type="button" disabled={{@disabled}}>
-    {{yield}}
-  </button>
-</h5>
+<div class={{if this.collapsed "collapsed" "expanded"}} ...attributes {{on "click" this.handleClick}}>
+  <h5 class="mb-0">
+    <button class="btn btn-link {{if @disabled "disabled"}}" type="button" disabled={{@disabled}}>
+      {{yield}}
+    </button>
+  </h5>
+  
+</div>

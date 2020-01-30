@@ -1,4 +1,4 @@
-import { classNameBindings, classNames, layout as templateLayout, tagName } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { action, computed } from '@ember/object';
 import Component from '@ember/component';
@@ -100,9 +100,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @public
 */
 @templateLayout(layout)
-@tagName('nav')
-@classNames('navbar')
-@classNameBindings('positionClass', 'typeClass')
+@tagName("")
 export default class Navbar extends Component {
   /**
    * Manages the state for the responsive menu between the toggle and the content.

@@ -1,4 +1,4 @@
-import { classNameBindings, classNames, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { addObserver } from '@ember/object/observers';
 import Component from '@ember/component';
@@ -19,9 +19,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @uses Mixins.ComponentChild
  @public
  */
+@tagName("")
 @templateLayout(layout)
-@classNameBindings('active', 'usesTransition:fade')
-@classNames('tab-pane')
 export default class TabPane extends Component.extend(ComponentChild) {
   ariaRole = 'tabpanel';
 

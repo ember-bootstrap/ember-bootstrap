@@ -1,20 +1,23 @@
-{{yield
-  (hash
-    element=(component this.elementComponent
-      model=this.model
-      formLayout=this.formLayout
-      horizontalLabelGridClass=this.horizontalLabelGridClass
-      showAllValidations=this.showAllValidations
-      disabled=this.disabled
-      readonly=this.readonly
-      onChange=this.elementChanged
-      _onChange=this.resetSubmissionState
+<form novalidate={{this._novalidate}} class={{this.layoutClass}} ...attributes {{on "keyPress" this.handleKeyPress}} {{on "submit" this.handleSubmit}}>
+  {{yield
+    (hash
+      element=(component this.elementComponent
+        model=this.model
+        formLayout=this.formLayout
+        horizontalLabelGridClass=this.horizontalLabelGridClass
+        showAllValidations=this.showAllValidations
+        disabled=this.disabled
+        readonly=this.readonly
+        onChange=this.elementChanged
+        _onChange=this.resetSubmissionState
+      )
+      group=(component this.groupComponent formLayout=this.formLayout)
+      isSubmitting=this.isSubmitting
+      isSubmitted=this.isSubmitted
+      isRejected=this.isRejected
+      resetSubmissionState=this.resetSubmissionState
+      submit=this.doSubmit
     )
-    group=(component this.groupComponent formLayout=this.formLayout)
-    isSubmitting=this.isSubmitting
-    isSubmitted=this.isSubmitted
-    isRejected=this.isRejected
-    resetSubmissionState=this.resetSubmissionState
-    submit=this.doSubmit
-  )
-}}
+  }}
+  
+</form>

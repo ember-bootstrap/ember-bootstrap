@@ -1,13 +1,6 @@
-import {
-  attributeBindings,
-  classNameBindings,
-  classNames,
-  layout as templateLayout,
-  tagName,
-} from '@ember-decorators/component';
-
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
-import { computed } from '@ember/object';
+import { computed, action } from '@ember/object';
 import { equal, or } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
 import { deprecate, runInDebug } from '@ember/debug';
@@ -90,10 +83,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @public
 */
 @templateLayout(layout)
-@tagName('button')
-@classNames('btn')
-@classNameBindings('active', 'block:btn-block', 'sizeClass', 'typeClass')
-@attributeBindings('__disabled:disabled', 'buttonType:type', 'title')
+@tagName("")
 export default class Button extends Component {
   /**
    * Default label of the button. Not need if used as a block component
@@ -442,7 +432,8 @@ export default class Button extends Component {
    * @method click
    * @private
    */
-  click() {
+  // @action
+  handleClick() {
     let action = this.get('onClick');
     let preventConcurrency = this.get('preventConcurrency');
 
