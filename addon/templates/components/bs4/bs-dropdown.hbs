@@ -1,25 +1,27 @@
-<div class="{{this.containerClass}} {{if this.inNav "nav-item"}} {{if this.isOpen "show"}}" ...attributes>
-  {{yield
-    (hash
-      button=(component this.buttonComponent dropdown=this isOpen=this.isOpen onClick=this.toggleDropdown onKeyDown=this.handleKeyEvent)
-      toggle=(component this.toggleComponent dropdown=this isOpen=this.isOpen inNav=inNav onClick=this.toggleDropdown onKeyDown=this.handleKeyEvent)
-      menu=(component this.menuComponent
+{{#let (element this.htmlTag) as |Tag|}}
+  <Tag class="{{this.containerClass}} {{if this.inNav "nav-item"}} {{if this.isOpen "show"}}" ...attributes>
+    {{yield
+      (hash
+        button=(component this.buttonComponent dropdown=this isOpen=this.isOpen onClick=this.toggleDropdown onKeyDown=this.handleKeyEvent)
+        toggle=(component this.toggleComponent dropdown=this isOpen=this.isOpen inNav=inNav onClick=this.toggleDropdown onKeyDown=this.handleKeyEvent)
+        menu=(component this.menuComponent
+          isOpen=this.isOpen
+          direction=this.direction
+          inNav=@inNav
+          toggleElement=this.toggleElement
+          dropdown=this
+        )
+        toggleDropdown=this.toggleDropdown
+        openDropdown=this.openDropdown
+        closeDropdown=this.closeDropdown
         isOpen=this.isOpen
-        direction=this.direction
-        inNav=@inNav
-        toggleElement=this.toggleElement
-        dropdown=this
       )
-      toggleDropdown=this.toggleDropdown
-      openDropdown=this.openDropdown
-      closeDropdown=this.closeDropdown
-      isOpen=this.isOpen
-    )
-  }}
-  {{#if this.isOpen}}
-    {{on-document "keydown" this.handleKeyEvent}}
-    {{on-document "click" this.closeHandler capture=true}}
-    {{on-document "keyup" this.closeHandler}}
-  {{/if}}
+    }}
+    {{#if this.isOpen}}
+      {{on-document "keydown" this.handleKeyEvent}}
+      {{on-document "click" this.closeHandler capture=true}}
+      {{on-document "keyup" this.closeHandler}}
+    {{/if}}
 
-</div>
+  </Tag>
+{{/let}}

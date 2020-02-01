@@ -176,6 +176,16 @@ s*/
 @templateLayout(layout)
 export default class Dropdown extends Component {
   /**
+   * The tag name used for the dropdown element.
+   *
+   * @property htmlTag
+   * @default 'div'
+   * @type {string}
+   * @public
+   */
+  htmlTag = 'div';
+
+  /**
    * This property reflects the state of the dropdown, whether it is open or closed.
    *
    * @property isOpen
