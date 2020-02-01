@@ -1,4 +1,4 @@
-import { classNames, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-progress';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
@@ -36,8 +36,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @extends Ember.Component
   @public
 */
+@tagName("")
 @templateLayout(layout)
-@classNames('progress')
 export default class Progress extends Component {
   /**
    * @property progressBarComponent

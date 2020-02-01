@@ -1,11 +1,5 @@
-import {
-  attributeBindings,
-  classNameBindings,
-  classNames,
-  layout as templateLayout
-} from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
-import { readOnly } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-progress/bar';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
@@ -19,10 +13,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @extends Ember.Component
  @public
  */
+@tagName("")
 @templateLayout(layout)
-@classNames('progress-bar')
-@classNameBindings('progressBarStriped', 'typeClass')
-@attributeBindings('ariaValuenow', 'ariaValuemin', 'ariaValuemax')
 export default class ProgressBar extends Component {
   /**
    * The lower limit of the value range
@@ -124,21 +116,6 @@ export default class ProgressBar extends Component {
   @defaultValue
   type = 'default';
 
-  @readOnly('striped')
-  progressBarStriped;
-
-  @readOnly('animate')
-  progressBarAnimate;
-
-  @readOnly('value')
-  ariaValuenow;
-
-  @readOnly('minValue')
-  ariaValuemin;
-
-  @readOnly('maxValue')
-  ariaValuemax;
-
   /**
    * The percentage of `value`
    *
@@ -170,21 +147,8 @@ export default class ProgressBar extends Component {
     return Math.round(this.get('percent') * roundFactor) / roundFactor;
   }
 
-  /**
-   * @method updateStyles
-   * @return void
-   * @private
-   */
-  updateStyles() {
-    let percent = parseFloat(this.get('percent'));
-    this.element.style.width = !isNaN(percent) ? `${percent}%` : '';
-  }
-
-  didInsertElement() {
-    this.updateStyles();
-  }
-
-  didUpdateAttrs() {
-    this.updateStyles();
+  get percentStyleValue() {
+    let percent = this.percent;
+    return !isNaN(percent) ? `${percent}%` : '';
   }
 }
