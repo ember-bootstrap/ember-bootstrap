@@ -1,0 +1,21 @@
+<button
+  disabled={{this.__disabled}}
+  type={{this.buttonType}}
+  title={{this.title}}
+  aria-expanded={{this.aria-expanded}}
+  class="btn dropdown-toggle {{if this.active "active"}} {{if this.block "btn-block"}} {{this.sizeClass}} {{this.typeClass}}"
+  ...attributes
+  {{on "click" this.handleClick}}
+  {{on "keydown" this.handleKeyDown}}
+  {{ref @dropdown "toggleElement"}}
+>
+  {{#if this.icon}}<i class={{this.icon}}></i> {{/if}}{{this.text}}{{yield
+    (hash
+      isFulfilled=this.isFulfilled
+      isPending=this.isPending
+      isRejected=this.isRejected
+      isSettled=this.isSettled
+    )
+  }}
+
+</button>

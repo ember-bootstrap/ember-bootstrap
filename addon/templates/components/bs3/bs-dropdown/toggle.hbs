@@ -1,0 +1,12 @@
+<a
+  href="#"
+  class="dropdown-toggle"
+  aria-expanded={{this.aria-expanded}}
+  role="button"
+  ...attributes
+  {{on "keydown" this.handleKeyDown}}
+  {{on "click" this.handleClick}}
+  {{ref @dropdown "toggleElement"}}
+>
+  {{yield}}
+</a>
