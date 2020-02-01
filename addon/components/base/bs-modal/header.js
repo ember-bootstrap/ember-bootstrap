@@ -1,4 +1,4 @@
-import { classNames, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/header';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
@@ -12,8 +12,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @extends Ember.Component
  @public
  */
+@tagName("")
 @templateLayout(layout)
-@classNames('modal-header')
 export default class ModalHeader extends Component {
   /**
    * Show a close button (x icon)

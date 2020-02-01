@@ -11,9 +11,9 @@
       @paddingLeft={{this.paddingLeft}}
       @paddingRight={{this.paddingRight}}
       @centered={{bs-eq this.position "center"}}
-      @class={{@class}}
-      @id={{this.modalId}}
       @scrollable={{this.scrollable}}
+      class={{@class}}
+      id={{this.modalId}}
       ...attributes
     >
       <BsModal::header @title={{@title}} @closeButton={{this.closeButton}} @onClose={{this.close}} />

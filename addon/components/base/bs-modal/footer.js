@@ -1,4 +1,5 @@
-import { classNames, layout as templateLayout, tagName } from '@ember-decorators/component';
+import { action } from "@ember/object";
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/footer';
@@ -14,8 +15,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @public
  */
 @templateLayout(layout)
-@tagName('form')
-@classNames('modal-footer')
+@tagName("")
 export default class ModalFooter extends Component {
   /**
    * The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block
@@ -84,7 +84,8 @@ export default class ModalFooter extends Component {
    * @public
    */
 
-  submit(e) {
+  @action
+  handleSubmit(e) {
     e.preventDefault();
     // send to parent bs-modal component
     this.get('onSubmit')();

@@ -1,16 +1,9 @@
-import {
-  attributeBindings,
-  classNameBindings,
-  classNames,
-  layout as templateLayout
-} from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
 import Component from '@ember/component';
-import { bind } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  Internal component for modal's markup and event handling. Should not be used directly.
@@ -20,14 +13,9 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @extends Ember.Component
  @private
  */
+@tagName("")
 @templateLayout(layout)
-@classNames('modal')
-@classNameBindings('fade')
-@attributeBindings('tabindex', 'ariaLabelledby:aria-labelledby')
 export default class ModalDialog extends Component {
-  ariaRole = 'dialog';
-  tabindex = '-1';
-
   @readOnly('titleId')
   ariaLabelledby;
 
@@ -39,8 +27,6 @@ export default class ModalDialog extends Component {
    * @default true
    * @public
    */
-  @defaultValue
-  fade = true;
 
   /**
    * Used to apply Bootstrap's visibility classes
@@ -50,8 +36,6 @@ export default class ModalDialog extends Component {
    * @default false
    * @private
    */
-  @defaultValue
-  showModal = false;
 
   /**
    * Render modal markup?
@@ -61,8 +45,6 @@ export default class ModalDialog extends Component {
    * @default false
    * @private
    */
-  @defaultValue
-  inDom = false;
 
   /**
    * @property paddingLeft
@@ -70,8 +52,6 @@ export default class ModalDialog extends Component {
    * @default null
    * @private
    */
-  @defaultValue
-  paddingLeft = null;
 
   /**
    * @property paddingRight
@@ -79,8 +59,6 @@ export default class ModalDialog extends Component {
    * @default null
    * @private
    */
-  @defaultValue
-  paddingRight = null;
 
   /**
    * Closes the modal when escape key is pressed.
@@ -90,8 +68,6 @@ export default class ModalDialog extends Component {
    * @default true
    * @public
    */
-  @defaultValue
-  keyboard = true;
 
   /**
    * Property for size styling, set to null (default), 'lg' or 'sm'
@@ -102,8 +78,6 @@ export default class ModalDialog extends Component {
    * @type String
    * @public
    */
-  @defaultValue
-  size = null;
 
   /**
    * If true clicking on the backdrop will close the modal.
@@ -113,8 +87,6 @@ export default class ModalDialog extends Component {
    * @default true
    * @public
    */
-  @defaultValue
-  backdropClose = true;
 
   /**
    * Name of the size class
@@ -140,15 +112,26 @@ export default class ModalDialog extends Component {
    */
   titleId = null;
 
+  get _element() {
+    return this.__element;
+  }
+  set _element(element) {
+    this.__element = element;
+    this.getOrSetTitleId(element);
+    let autofocus = element && element.querySelector('[autofocus]');
+    if (autofocus) {
+      this.set('initialFocus', autofocus);
+    }
+  }
+
   /**
    * Gets or sets the id of the title element for aria accessibility tags
    *
    * @method getSetTitleID
    * @private
    */
-  getOrSetTitleId() {
+  getOrSetTitleId(modalNode) {
     //Title element may be set by user so we have to try and find it to set the id
-    const modalNode = this.get('element');
     let nodeId = null;
 
     if (modalNode) {
@@ -186,28 +169,7 @@ export default class ModalDialog extends Component {
    */
   mouseDownElement = null;
 
-  /**
-   * Update the elements styles using CSSOM.
-   *
-   * This is necessary cause binding style attribute would require a
-   * Content-Security-Policy `style-src 'unsafe-line'`.
-   *
-   * @method updateStyle
-   * @return void
-   * @private
-   */
-  updateStyles() {
-    let { inDom, paddingLeft, paddingRight } = this.getProperties('inDom', 'paddingLeft', 'paddingRight');
-
-    this.element.style.display = inDom ? 'block' : '';
-    this.element.style.paddingLeft = paddingLeft || '';
-    this.element.style.paddingRight = paddingRight || '';
-  }
-
-  @action
-  initialFocus() {
-    return this.element.querySelector('[autofocus]') || this.element;
-  }
+  initialFocus;
 
   /**
    * @event onClose
@@ -216,49 +178,35 @@ export default class ModalDialog extends Component {
   onClose() {
   }
 
-  keyDown(e) {
+  @action
+  handleKeyDown(e) {
     let code = e.keyCode || e.which;
     if (code === 27 && this.get('keyboard')) {
       this.get('onClose')();
     }
   }
 
-  _click(e) {
+  @action
+  handleClick(e) {
     if (this.ignoreBackdropClick) {
       this.set('ignoreBackdropClick', false);
       return;
     }
-    if (e.target !== this.element || !this.get('backdropClose')) {
+    if (e.target !== this._element || !this.get('backdropClose')) {
       return;
     }
     this.get('onClose')();
   }
 
-  mouseDown(e) {
+  @action
+  handleMouseDown(e) {
     this.set('mouseDownElement', e.target);
   }
 
-  mouseUp(e) {
-    if (this.mouseDownElement !== this.element && e.target === this.element) {
+  @action
+  handleMouseUp(e) {
+    if (this.mouseDownElement !== this._element && e.target === this._element) {
       this.set('ignoreBackdropClick', true);
     }
-  }
-
-  didInsertElement() {
-    super.didInsertElement(...arguments);
-    // Ember events use event delegation, but we need to add an `onclick` handler directly on the modal element for
-    // iOS to allow clicking the div. So a `click(){}` method here won't work, we need to attach an event listener
-    // directly to the element
-    this.element.onclick = bind(this, this._click);
-    this.getOrSetTitleId();
-    this.updateStyles();
-  }
-
-  didUpdateAttrs() {
-    this.updateStyles();
-  }
-
-  willDestroyElement() {
-    this.element.onclick = null;
   }
 }

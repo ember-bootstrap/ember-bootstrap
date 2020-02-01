@@ -1,0 +1,27 @@
+<div
+  role="dialog"
+  tabindex="-1"
+  aria-labelledby={{this.ariaLabelledby}}
+  class="modal {{if @fade "fade"}} {{if @showModal "in"}} {{if @inDom "show"}}"
+  ...attributes
+  {{on "keydown" this.handleKeyDown}}
+  {{on "mousedown" this.handleMouseDown}}
+  {{on "mouseup" this.handleMouseUp}}
+  {{on "click" this.handleClick}}
+  {{style paddingLeft=@paddingLeft paddingRight=@paddingRight display=(if @inDom "block" "")}}
+  {{ref this "_element"}}
+>
+  <div class="modal-dialog {{this.sizeClass}} {{if @centered "modal-dialog-centered"}} {{if @scrollable "modal-dialog-scrollable"}}" role="document">
+    <div class="modal-content"
+      {{focus-trap
+        shouldSelfFocus=true
+        focusTrapOptions=(hash
+          initialFocus=this.initialFocus
+          clickOutsideDeactivates=true
+        )
+      }}
+    >
+      {{yield}}
+    </div>
+  </div>
+</div>
