@@ -15,13 +15,19 @@ module('Integration | Component | bs-progress', function(hooks) {
   test('bs-progress has correct markup', async function(assert) {
     // Template block usage:
     await render(hbs`
-      <BsProgress>
-        template block text
+      <BsProgress as |p|>
+        <p.bar @value={{5}} @minValue={{0}} @maxValue={{10}} />
       </BsProgress>
     `);
 
-    assert.dom('*').hasText('template block text', 'Shows block content');
     assert.dom('div.progress').exists({ count: 1 }, 'Has progress class');
+    assert.dom('div.progress-bar').hasAttribute('role', 'progressbar');
+
+    assert.dom('div.progress-bar').exists({ count: 1 }, 'Has progress-bar class');
+    assert.dom('div.progress-bar').hasAttribute('aria-valuenow', '5');
+    assert.dom('div.progress-bar').hasAttribute('aria-valuemin', '0');
+    assert.dom('div.progress-bar').hasAttribute('aria-valuemax', '10');
+
   });
 
   test('Progress bar has correct width according to value, minValue and maxValue', async function(assert) {
