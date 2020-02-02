@@ -6213,6 +6213,13 @@ ember-ref-modifier@^0.1.2:
     ember-cli-babel "^7.10.0"
     ember-modifier-manager-polyfill "^1.0.1"
 
+ember-ref-modifier@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-ref-modifier/-/ember-ref-modifier-1.0.0.tgz#3e98d8c26eda7cf4da4b2d82d6a0c80c5058efed"
+  integrity sha512-JPCwlKerzZCbc5GO01xcgRJv5JcK1O61FF5PE6UxMNRwgDxT33mjTPO2JFhn4HGoG0NvpnkpLLxw+qf1KuX8kw==
+  dependencies:
+    ember-cli-babel "^7.13.2"
+
 ember-resolver@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/ember-resolver/-/ember-resolver-7.0.0.tgz#07ca86b3bae373395b44bba784b8c133f75d61c2"
