@@ -20,75 +20,6 @@ export default class ModalDialog extends Component {
   ariaLabelledby;
 
   /**
-   * Set to false to disable fade animations.
-   *
-   * @property fade
-   * @type boolean
-   * @default true
-   * @public
-   */
-
-  /**
-   * Used to apply Bootstrap's visibility classes
-   *
-   * @property showModal
-   * @type boolean
-   * @default false
-   * @private
-   */
-
-  /**
-   * Render modal markup?
-   *
-   * @property inDom
-   * @type boolean
-   * @default false
-   * @private
-   */
-
-  /**
-   * @property paddingLeft
-   * @type number|null
-   * @default null
-   * @private
-   */
-
-  /**
-   * @property paddingRight
-   * @type number|null
-   * @default null
-   * @private
-   */
-
-  /**
-   * Closes the modal when escape key is pressed.
-   *
-   * @property keyboard
-   * @type boolean
-   * @default true
-   * @public
-   */
-
-  /**
-   * Property for size styling, set to null (default), 'lg' or 'sm'
-   *
-   * Also see the [Bootstrap docs](http://getbootstrap.com/javascript/#modals-sizes)
-   *
-   * @property size
-   * @type String
-   * @public
-   */
-
-  /**
-   * If true clicking on the backdrop will close the modal.
-   *
-   * @property backdropClose
-   * @type boolean
-   * @default true
-   * @public
-   */
-
-  /**
    * Name of the size class
    *
    * @property sizeClass
@@ -112,24 +43,13 @@ export default class ModalDialog extends Component {
    */
   titleId = null;
 
-  get _element() {
-    return this.__element;
-  }
-  set _element(element) {
-    this.__element = element;
-    this.getOrSetTitleId(element);
-    let autofocus = element && element.querySelector('[autofocus]');
-    if (autofocus) {
-      this.set('initialFocus', autofocus);
-    }
-  }
-
   /**
    * Gets or sets the id of the title element for aria accessibility tags
    *
    * @method getSetTitleID
    * @private
    */
+  @action
   getOrSetTitleId(modalNode) {
     //Title element may be set by user so we have to try and find it to set the id
     let nodeId = null;
@@ -147,6 +67,14 @@ export default class ModalDialog extends Component {
       }
     }
     this.set('titleId', nodeId);
+  }
+
+  @action
+  setInitialFocus(element) {
+    let autofocus = element && element.querySelector('[autofocus]') || element;
+    if (autofocus) {
+      this.set('initialFocus', autofocus);
+    }
   }
 
   /**

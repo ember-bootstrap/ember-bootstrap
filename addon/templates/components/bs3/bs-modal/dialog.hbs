@@ -10,6 +10,8 @@
   {{on "click" this.handleClick}}
   {{style paddingLeft=@paddingLeft paddingRight=@paddingRight display=(if @inDom "block" "")}}
   {{ref this "_element"}}
+  {{did-insert this.getOrSetTitleId}}
+  {{did-insert this.setInitialFocus}}
 >
   <div class="modal-dialog {{this.sizeClass}} {{if @centered "modal-dialog-centered"}} {{if @scrollable "modal-dialog-scrollable"}}" role="document">
     <div class="modal-content"
