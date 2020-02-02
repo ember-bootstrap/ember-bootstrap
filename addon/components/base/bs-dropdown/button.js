@@ -21,7 +21,7 @@ export default class DropdownButton extends Button {
   }
 
   @computed('isOpen')
-  get 'aria-expanded'() {
+   get ariaExpanded() {
     return this.isOpen ? 'true' : 'false';
   }
 }
