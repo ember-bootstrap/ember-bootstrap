@@ -1,7 +1,7 @@
-import { attributeBindings, classNames } from '@ember-decorators/component';
 import Button from 'ember-bootstrap/components/bs-button';
-import { schedule } from '@ember/runloop';
-import { computed } from '@ember/object';
+import { layout as templateLayout } from '@ember-decorators/component';
+import layout from 'ember-bootstrap/templates/components/bs-dropdown/button';
+import { computed, action } from '@ember/object';
 
 /**
  Button component with that can act as a dropdown toggler.
@@ -13,27 +13,15 @@ import { computed } from '@ember/object';
  @extends Components.Button
  @public
  */
-@classNames('dropdown-toggle')
-@attributeBindings('aria-expanded')
+@templateLayout(layout)
 export default class DropdownButton extends Button {
-  keyDown(e) {
+  @action
+  handleKeyDown(e) {
     this.get('onKeyDown')(e);
   }
 
   @computed('isOpen')
-  get 'aria-expanded'() {
+   get ariaExpanded() {
     return this.isOpen ? 'true' : 'false';
-  }
-
-  didReceiveAttrs() {
-    // super.didReceiveAttrs(...arguments);
-    let dropdown = this.get('dropdown');
-    if (dropdown) {
-      schedule('actions', this, function() {
-        if (!this.get('isDestroyed')) {
-          dropdown.set('toggle', this);
-        }
-      });
-    }
   }
 }

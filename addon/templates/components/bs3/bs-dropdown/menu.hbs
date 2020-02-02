@@ -9,11 +9,12 @@
     @onCreate={{this.setFocus}}
   >
     <ul
-      id="{{@dropdownElementId}}__menu"
       class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
       role={{this.ariaRole}}
       tabindex="-1"
       ...attributes
+      {{did-insert @registerChildElement "menu"}}
+      {{will-destroy @unregisterChildElement "menu"}}
     >
       {{yield
         (hash

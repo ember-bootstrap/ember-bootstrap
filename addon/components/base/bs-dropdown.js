@@ -1,14 +1,15 @@
-import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { assert } from '@ember/debug';
 
-const ESCAPE_KEYCODE           = 27 // KeyboardEvent.which value for Escape (Esc) key
-const SPACE_KEYCODE            = 32 // KeyboardEvent.which value for space key
-const TAB_KEYCODE              = 9 // KeyboardEvent.which value for tab key
-const ARROW_UP_KEYCODE         = 38 // KeyboardEvent.which value for up arrow key
-const ARROW_DOWN_KEYCODE       = 40 // KeyboardEvent.which value for down arrow key
+const ESCAPE_KEYCODE           = 27; // KeyboardEvent.which value for Escape (Esc) key
+const SPACE_KEYCODE            = 32; // KeyboardEvent.which value for space key
+const TAB_KEYCODE              = 9;  // KeyboardEvent.which value for tab key
+const ARROW_UP_KEYCODE         = 38; // KeyboardEvent.which value for up arrow key
+const ARROW_DOWN_KEYCODE       = 40; // KeyboardEvent.which value for down arrow key
 
 const SUPPORTED_KEYCODES = [
   ESCAPE_KEYCODE,
@@ -172,9 +173,19 @@ const SUPPORTED_KEYCODES = [
   @extends Ember.Component
   @public
 s*/
+@tagName("")
 @templateLayout(layout)
-@classNameBindings('containerClass')
 export default class Dropdown extends Component {
+  /**
+   * The tag name used for the dropdown element.
+   *
+   * @property htmlTag
+   * @default 'div'
+   * @type {string}
+   * @public
+   */
+  htmlTag = 'div';
+
   /**
    * This property reflects the state of the dropdown, whether it is open or closed.
    *
@@ -226,31 +237,24 @@ export default class Dropdown extends Component {
    * @readonly
    * @private
    */
-  @computed('toggle.tagName', 'direction')
+  @computed('toggleElement', 'direction')
   get containerClass() {
-    if (this.get('toggle.tagName') === 'button' && !this.get('toggle.block')) {
+    if (this.hasButton && !this.toggleElement.classList.contains('btn-block')) {
       return this.get('direction') !== 'down' ? `btn-group drop${this.get('direction')}` : 'btn-group';
     } else {
       return `drop${this.get('direction')}`;
     }
   }
 
+  get hasButton() {
+    return this.toggleElement && this.toggleElement.tagName === 'BUTTON';
+  }
+
   /**
    * @property toggleElement
    * @private
    */
-  @computed('toggle')
-  get toggleElement() {
-    return typeof FastBoot === 'undefined' ? this.get('toggle.element') || null : null;
-  }
-
-  /**
-   * Reference to the child toggle (Toggle or Button)
-   *
-   * @property toggle
-   * @private
-   */
-  toggle = null;
+  toggleElement = null;
 
   /**
    * The DOM element of the `.dropdown-menu` element
@@ -258,9 +262,7 @@ export default class Dropdown extends Component {
    * @readonly
    * @private
    */
-  get menuElement() {
-    return document.getElementById(`${this.get('elementId')}__menu`);
-  }
+  menuElement = null;
 
   /**
    * Action is called when dropdown is about to be shown
@@ -372,6 +374,21 @@ export default class Dropdown extends Component {
     }
 
     items[index].focus();
+  }
+
+  @action
+  registerChildElement(element, [type]) {
+    assert(`Unknown child element type "${type}"`, type === 'toggle' || type === 'menu');
+    assert(`Registered ${type} element must be an HTMLElement`, element instanceof HTMLElement);
+
+    this.set(`${type}Element`, element);
+  }
+
+  @action
+  unregisterChildElement(element, [type]) {
+    assert(`Unknown child element type "${type}"`, type === 'toggle' || type === 'menu');
+
+    this.set(`${type}Element`, null);
   }
 
   /**

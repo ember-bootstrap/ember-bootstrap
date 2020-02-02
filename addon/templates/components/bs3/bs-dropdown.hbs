@@ -1,0 +1,41 @@
+{{#let (element this.htmlTag) as |Tag|}}
+  <Tag class="{{this.containerClass}} {{if this.isOpen "open"}}" ...attributes>
+    {{yield
+      (hash
+        button=(component this.buttonComponent
+          isOpen=this.isOpen
+          onClick=this.toggleDropdown
+          onKeyDown=this.handleKeyEvent
+          registerChildElement=this.registerChildElement
+          unregisterChildElement=this.unregisterChildElement
+        )
+        toggle=(component this.toggleComponent
+          isOpen=this.isOpen
+          inNav=inNav
+          onClick=this.toggleDropdown
+          onKeyDown=this.handleKeyEvent
+          registerChildElement=this.registerChildElement
+          unregisterChildElement=this.unregisterChildElement
+        )
+        menu=(component this.menuComponent
+          isOpen=this.isOpen
+          direction=this.direction
+          inNav=@inNav
+          toggleElement=this.toggleElement
+          registerChildElement=this.registerChildElement
+          unregisterChildElement=this.unregisterChildElement
+        )
+        toggleDropdown=this.toggleDropdown
+        openDropdown=this.openDropdown
+        closeDropdown=this.closeDropdown
+        isOpen=this.isOpen
+      )
+    }}
+    {{#if this.isOpen}}
+      {{on-document "keydown" this.handleKeyEvent}}
+      {{on-document "click" this.closeHandler capture=true}}
+      {{on-document "keyup" this.closeHandler}}
+    {{/if}}
+
+  </Tag>
+{{/let}}

@@ -1,4 +1,6 @@
 import Component from '@ember/component';
+import { layout as templateLayout } from '@ember-decorators/component';
+import layout from 'ember-bootstrap/templates/components/bs-dropdown/menu/divider';
 
 /**
  Component for a dropdown menu divider.
@@ -10,4 +12,5 @@ import Component from '@ember/component';
  @extends Ember.Component
  @public
  */
+@templateLayout(layout)
 export default class DropdownMenuDivider extends Component {}

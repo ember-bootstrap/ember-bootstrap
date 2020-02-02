@@ -1,6 +1,5 @@
 {{#if this._isOpen}}
   <EmberPopper
-    @id="{{@dropdownElementId}}__menu"
     @class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
     @placement={{this.popperPlacement}}
     @popperTarget={{this.toggleElement}}
@@ -10,6 +9,8 @@
     @onCreate={{this.setFocus}}
     tabindex="-1"
     ...attributes
+    {{did-insert @registerChildElement "menu"}}
+    {{will-destroy @unregisterChildElement "menu"}}
   >
     {{yield
       (hash

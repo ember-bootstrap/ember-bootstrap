@@ -1,4 +1,6 @@
 import Component from '@ember/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import layout from 'ember-bootstrap/templates/components/bs-dropdown/menu/item';
 
 /**
  Component for a dropdown menu item.
@@ -10,4 +12,6 @@ import Component from '@ember/component';
  @extends Ember.Component
  @public
  */
+@templateLayout(layout)
+@tagName('')
 export default class DropdownMenuItem extends Component {}

@@ -53,7 +53,7 @@ module('Integration | Component | bs-button', function(hooks) {
   });
 
   test('button has HTML attributes', async function(assert) {
-    await render(hbs`<BsButton @id="test" @disabled={{true}} @title="title">Test</BsButton>`);
+    await render(hbs`<BsButton id="test" @disabled={{true}} @title="title">Test</BsButton>`);
 
     assert.equal(this.element.querySelector('button').getAttribute('id'), 'test');
     assert.equal(this.element.querySelector('button').getAttribute('disabled'), '');

@@ -86,6 +86,7 @@
     "test": "tests"
   },
   "dependencies": {
+    "@ember/render-modifiers": "^1.0.2",
     "broccoli-debug": "^0.6.3",
     "broccoli-funnel": "^2.0.0",
     "broccoli-merge-trees": "^3.0.1",
@@ -97,10 +98,12 @@
     "ember-cli-version-checker": "^3.0.0",
     "ember-concurrency": "^1.0.0",
     "ember-decorators": "^6.1.0",
+    "ember-element-helper": "^0.2.0",
     "ember-focus-trap": "^0.3.2",
     "ember-maybe-in-element": "^0.4.0",
     "ember-on-helper": "^0.1.0",
     "ember-popper": "^0.10.3",
+    "ember-ref-modifier": "^1.0.0",
     "ember-style-modifier": "^0.5.0",
     "findup-sync": "^4.0.0",
     "fs-extra": "^7.0.1",

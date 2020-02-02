@@ -1,13 +1,6 @@
-import {
-  attributeBindings,
-  classNameBindings,
-  classNames,
-  layout as templateLayout,
-  tagName,
-} from '@ember-decorators/component';
-
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
-import { computed } from '@ember/object';
+import { computed, action } from '@ember/object';
 import { equal, or } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
 import { deprecate, runInDebug } from '@ember/debug';
@@ -90,10 +83,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @public
 */
 @templateLayout(layout)
-@tagName('button')
-@classNames('btn')
-@classNameBindings('active', 'block:btn-block', 'sizeClass', 'typeClass')
-@attributeBindings('__disabled:disabled', 'buttonType:type', 'title')
+@tagName("")
 export default class Button extends Component {
   /**
    * Default label of the button. Not need if used as a block component
@@ -442,16 +432,17 @@ export default class Button extends Component {
    * @method click
    * @private
    */
-  click() {
-    let action = this.get('onClick');
+  @action
+  handleClick(e) {
+    let onClick = this.get('onClick');
     let preventConcurrency = this.get('preventConcurrency');
 
-    if (action === null || action === undefined) {
+    if (onClick === null || onClick === undefined) {
       return;
     }
 
     if (!preventConcurrency || !this.get('isPending')) {
-      let promise = (action)(this.get('value'));
+      let promise = (onClick)(this.get('value'));
       if (promise && typeof promise.then === 'function' && !this.get('isDestroyed')) {
         this.set('state', 'pending');
         promise.then(() => {
@@ -467,7 +458,9 @@ export default class Button extends Component {
       }
     }
 
-    return this.get('bubble');
+    if (!this.get('bubble')) {
+      e.stopPropagation();
+    }
   }
 
   init() {
