@@ -22,8 +22,10 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 @templateLayout(layout)
 @classNames('progress-bar')
 @classNameBindings('progressBarStriped', 'typeClass')
-@attributeBindings('ariaValuenow', 'ariaValuemin', 'ariaValuemax')
+@attributeBindings('ariaValuenow:aria-valuenow', 'ariaValuemin:aria-valuemin', 'ariaValuemax:aria-valuemax')
 export default class ProgressBar extends Component {
+  ariaRole = 'progressbar';
+
   /**
    * The lower limit of the value range
    *
