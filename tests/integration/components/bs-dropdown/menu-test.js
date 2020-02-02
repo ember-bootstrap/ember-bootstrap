@@ -12,7 +12,7 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
 
   testBS3('dropdown menu has correct markup', async function(assert) {
     await render(
-      hbs`<BsDropdown::Menu @align="right" @isOpen={{true}} @toggleElement={{this.element}}>Something</BsDropdown::Menu>`
+      hbs`<BsDropdown as |dd|><dd.menu @align="right" @isOpen={{true}} @toggleElement={{this.element}}>Something</dd.menu></BsDropdown>`
     );
 
     assert.equal(
@@ -30,7 +30,7 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
 
   testBS4('dropdown menu has correct markup', async function(assert) {
     await render(
-      hbs`<BsDropdown::Menu @align="right" @isOpen={{true}} @toggleElement={{this.element}}>Something</BsDropdown::Menu>`
+      hbs`<BsDropdown as |dd|><dd.menu @align="right" @isOpen={{true}} @toggleElement={{this.element}}>Something</dd.menu></BsDropdown>`
     );
 
     assert.equal(
@@ -47,7 +47,7 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
 
   testBS3('dropdown menu yields item component', async function(assert) {
     await render(
-      hbs`<BsDropdown::Menu @toggleElement={{this.element}} @isOpen={{true}} as |ddm|><ddm.item>Dummy</ddm.item></BsDropdown::Menu>`
+      hbs`<BsDropdown as |dd|><dd.menu @toggleElement={{this.element}} @isOpen={{true}} as |ddm|><ddm.item>Dummy</ddm.item></dd.menu></BsDropdown>`
     );
 
     assert.dom('li').exists({ count: 1 }, 'has item component');
@@ -55,7 +55,7 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
 
   testBS4('dropdown menu yields item component', async function(assert) {
     await render(
-      hbs`<BsDropdown::Menu @toggleElement={{this.element}} @isOpen={{true}} as |ddm|><ddm.item>Dummy</ddm.item></BsDropdown::Menu>`
+      hbs`<BsDropdown as |dd|><dd.menu @toggleElement={{this.element}} @isOpen={{true}} as |ddm|><ddm.item>Dummy</ddm.item></dd.menu></BsDropdown>`
     );
 
     assert
@@ -63,21 +63,23 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
       .doesNotExist('has item component with no markup');
   });
 
-  test('dropdown menu yields linkTo component', async function(assert) {
+  test('dropdown menu `yields linkTo component', async function(assert) {
     await render(
       hbs`
-      <BsDropdown::menu @toggleElement={{this.element}} @isOpen={{true}} as |ddm|>
-        {{#ddm.link-to "index"}}Link{{/ddm.link-to}}
-        {{#ddm.linkTo "index"}}Link{{/ddm.linkTo}}
-      </BsDropdown::menu>`
-    );
+      <BsDropdown as |dd|>
+        <dd.menu @toggleElement={{this.element}} @isOpen={{true}} as |ddm|>
+          {{#ddm.link-to "index"}}Link{{/ddm.link-to}}
+          {{#ddm.linkTo "index"}}Link{{/ddm.linkTo}}
+        </dd.menu>
+      </BsDropdown>
+    `);
 
     assert.dom('a').exists({ count: 2 });
   });
 
   test('dropdown menu propagates class names', async function(assert) {
     await render(
-      hbs`<BsDropdown::Menu @align="right" @isOpen={{true}} @toggleElement={{this.element}} class="custom-class-1 custom-class-2">Something</BsDropdown::Menu>`
+      hbs`<BsDropdown as |dd|><dd.menu @align="right" @isOpen={{true}} @toggleElement={{this.element}} class="custom-class-1 custom-class-2">Something</dd.menu></BsDropdown>`
     );
 
     assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
@@ -91,7 +93,7 @@ module('Integration | Component | bs-dropdown/menu', function(hooks) {
 
   (gte('3.4.0') ? test : skip)('dropdown menu supports arbitrary attributes w/ angle brackets', async function(assert) {
     await render(
-      hbs`<BsDropdown::menu @isOpen={{true}} @toggleElement={{this.element}} class="custom-class-1" data-test-menu>Something</BsDropdown::menu>`
+      hbs`<BsDropdown as |dd|><dd.menu @isOpen={{true}} @toggleElement={{this.element}} class="custom-class-1" data-test-menu>Something</dd.menu></BsDropdown>`
     );
 
     assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');

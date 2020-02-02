@@ -7,7 +7,8 @@
   ...attributes
   {{on "click" this.handleClick}}
   {{on "keydown" this.handleKeyDown}}
-  {{ref @dropdown "toggleElement"}}
+  {{did-insert @registerChildElement "toggle"}}
+  {{will-destroy @unregisterChildElement "toggle"}}
 >
   {{#if this.icon}}<i class={{this.icon}}></i> {{/if}}{{this.text}}{{yield
     (hash

@@ -1563,6 +1563,14 @@
     silent-error "^1.1.1"
     util.promisify "^1.0.0"
 
+"@ember/render-modifiers@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@ember/render-modifiers/-/render-modifiers-1.0.2.tgz#2e87c48db49d922ce4850d707215caaac60d8444"
+  integrity sha512-6tEnHl5+62NTSAG2mwhGMFPhUrJQjoVqV+slsn+rlTknm2Zik+iwxBQEbwaiQOU1FUYxkS8RWcieovRNMR8inQ==
+  dependencies:
+    ember-cli-babel "^7.10.0"
+    ember-modifier-manager-polyfill "^1.1.0"
+
 "@ember/test-helpers@^1.7.1":
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-1.7.1.tgz#cc22a954b3b46856518f034bd492a74e0482389f"
@@ -6204,13 +6212,6 @@ ember-ref-modifier@^0.1.2:
   dependencies:
     ember-cli-babel "^7.10.0"
     ember-modifier-manager-polyfill "^1.0.1"
-
-ember-ref-modifier@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ember-ref-modifier/-/ember-ref-modifier-1.0.0.tgz#3e98d8c26eda7cf4da4b2d82d6a0c80c5058efed"
-  integrity sha512-JPCwlKerzZCbc5GO01xcgRJv5JcK1O61FF5PE6UxMNRwgDxT33mjTPO2JFhn4HGoG0NvpnkpLLxw+qf1KuX8kw==
-  dependencies:
-    ember-cli-babel "^7.13.2"
 
 ember-resolver@^7.0.0:
   version "7.0.0"

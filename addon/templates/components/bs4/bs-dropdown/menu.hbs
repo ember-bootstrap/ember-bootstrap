@@ -9,7 +9,8 @@
     @onCreate={{this.setFocus}}
     tabindex="-1"
     ...attributes
-    {{ref @dropdown "menuElement"}}
+    {{did-insert @registerChildElement "menu"}}
+    {{will-destroy @unregisterChildElement "menu"}}
   >
     {{yield
       (hash

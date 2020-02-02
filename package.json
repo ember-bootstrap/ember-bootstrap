@@ -86,6 +86,7 @@
     "test": "tests"
   },
   "dependencies": {
+    "@ember/render-modifiers": "^1.0.2",
     "broccoli-debug": "^0.6.3",
     "broccoli-funnel": "^2.0.0",
     "broccoli-merge-trees": "^3.0.1",

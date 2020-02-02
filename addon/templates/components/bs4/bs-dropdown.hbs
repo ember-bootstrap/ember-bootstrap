@@ -2,14 +2,28 @@
   <Tag class="{{this.containerClass}} {{if this.inNav "nav-item"}} {{if this.isOpen "show"}}" ...attributes>
     {{yield
       (hash
-        button=(component this.buttonComponent dropdown=this isOpen=this.isOpen onClick=this.toggleDropdown onKeyDown=this.handleKeyEvent)
-        toggle=(component this.toggleComponent dropdown=this isOpen=this.isOpen inNav=inNav onClick=this.toggleDropdown onKeyDown=this.handleKeyEvent)
+        button=(component this.buttonComponent
+          isOpen=this.isOpen
+          onClick=this.toggleDropdown
+          onKeyDown=this.handleKeyEvent
+          registerChildElement=this.registerChildElement
+          unregisterChildElement=this.unregisterChildElement
+        )
+        toggle=(component this.toggleComponent
+          isOpen=this.isOpen
+          inNav=inNav
+          onClick=this.toggleDropdown
+          onKeyDown=this.handleKeyEvent
+          registerChildElement=this.registerChildElement
+          unregisterChildElement=this.unregisterChildElement
+        )
         menu=(component this.menuComponent
           isOpen=this.isOpen
           direction=this.direction
           inNav=@inNav
           toggleElement=this.toggleElement
-          dropdown=this
+          registerChildElement=this.registerChildElement
+          unregisterChildElement=this.unregisterChildElement
         )
         toggleDropdown=this.toggleDropdown
         openDropdown=this.openDropdown

@@ -3,12 +3,13 @@ import { action, computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { assert } from '@ember/debug';
 
-const ESCAPE_KEYCODE           = 27 // KeyboardEvent.which value for Escape (Esc) key
-const SPACE_KEYCODE            = 32 // KeyboardEvent.which value for space key
-const TAB_KEYCODE              = 9 // KeyboardEvent.which value for tab key
-const ARROW_UP_KEYCODE         = 38 // KeyboardEvent.which value for up arrow key
-const ARROW_DOWN_KEYCODE       = 40 // KeyboardEvent.which value for down arrow key
+const ESCAPE_KEYCODE           = 27; // KeyboardEvent.which value for Escape (Esc) key
+const SPACE_KEYCODE            = 32; // KeyboardEvent.which value for space key
+const TAB_KEYCODE              = 9;  // KeyboardEvent.which value for tab key
+const ARROW_UP_KEYCODE         = 38; // KeyboardEvent.which value for up arrow key
+const ARROW_DOWN_KEYCODE       = 40; // KeyboardEvent.which value for down arrow key
 
 const SUPPORTED_KEYCODES = [
   ESCAPE_KEYCODE,
@@ -373,6 +374,21 @@ export default class Dropdown extends Component {
     }
 
     items[index].focus();
+  }
+
+  @action
+  registerChildElement(element, [type]) {
+    assert(`Unknown child element type "${type}"`, type === 'toggle' || type === 'menu');
+    assert(`Registered ${type} element must be an HTMLElement`, element instanceof HTMLElement);
+
+    this.set(`${type}Element`, element);
+  }
+
+  @action
+  unregisterChildElement(element, [type]) {
+    assert(`Unknown child element type "${type}"`, type === 'toggle' || type === 'menu');
+
+    this.set(`${type}Element`, null);
   }
 
   /**

@@ -6,7 +6,8 @@
   ...attributes
   {{on "keydown" this.handleKeyDown}}
   {{on "click" this.handleClick}}
-  {{ref @dropdown "toggleElement"}}
+  {{did-insert @registerChildElement "toggle"}}
+  {{will-destroy @unregisterChildElement "toggle"}}
 >
   {{yield}}
 </a>
