@@ -1,5 +1,5 @@
 import { action } from '@ember/object';
-import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
 import { A, isArray } from '@ember/array';
@@ -63,8 +63,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @extends Ember.Component
   @public
 */
+@tagName("")
 @templateLayout(layout)
-@classNameBindings('vertical:btn-group-vertical:btn-group', 'sizeClass')
 export default class ButtonGroup extends Component {
   ariaRole = 'group';
 
