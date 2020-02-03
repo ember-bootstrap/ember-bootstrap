@@ -1,0 +1,8 @@
+<div class="{{if this.vertical "btn-group-vertical" "btn-group"}} {{this.sizeClass}}" ...attributes>
+  {{yield
+    (hash
+      button=(component this.buttonComponent buttonGroupType=@type groupValue=@value onClick=this.buttonPressed)
+    )
+  }}
+  
+</div>
