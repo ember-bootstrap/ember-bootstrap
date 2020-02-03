@@ -71,9 +71,9 @@ export default class ModalDialog extends Component {
 
   @action
   setInitialFocus(element) {
-    let autofocus = element && element.querySelector('[autofocus]') || element;
+    let autofocus = element && element.querySelector('[autofocus]');
     if (autofocus) {
-      this.set('initialFocus', autofocus);
+      autofocus.focus();
     }
   }
 
@@ -96,8 +96,6 @@ export default class ModalDialog extends Component {
    * @private
    */
   mouseDownElement = null;
-
-  initialFocus;
 
   /**
    * @event onClose

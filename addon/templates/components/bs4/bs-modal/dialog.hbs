@@ -8,7 +8,7 @@
   {{on "mousedown" this.handleMouseDown}}
   {{on "mouseup" this.handleMouseUp}}
   {{on "click" this.handleClick}}
-  {{style paddingLeft=@paddingLeft paddingRight=@paddingRight display=(if @inDom "block" "")}}
+  {{style paddingLeft=(concat @paddingLeft "px") paddingRight=(concat @paddingRight "px") display=(if @inDom "block" "")}}
   {{ref this "_element"}}
   {{did-insert this.getOrSetTitleId}}
   {{did-insert this.setInitialFocus}}
@@ -18,7 +18,6 @@
       {{focus-trap
         shouldSelfFocus=true
         focusTrapOptions=(hash
-          initialFocus=this.initialFocus
           clickOutsideDeactivates=true
         )
       }}
