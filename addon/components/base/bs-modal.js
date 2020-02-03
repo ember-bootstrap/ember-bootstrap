@@ -128,20 +128,16 @@ export default class Modal extends Component {
   /**
    * @property paddingLeft
    * @type number|null
-   * @default null
    * @private
    */
-  @defaultValue
-  paddingLeft = null;
+  paddingLeft;
 
   /**
    * @property paddingRight
    * @type number|null
-   * @default null
    * @private
    */
-  @defaultValue
-  paddingRight = null;
+  paddingRight;
 
   /**
    * Use a semi-transparent modal background to hide the rest of the page.
@@ -620,8 +616,8 @@ export default class Modal extends Component {
   adjustDialog() {
     let modalIsOverflowing = this.get('modalElement').scrollHeight > document.documentElement.clientHeight;
     this.setProperties({
-      paddingLeft: !this.bodyIsOverflowing && modalIsOverflowing ? this.get('scrollbarWidth') : null,
-      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.get('scrollbarWidth') : null
+      paddingLeft: !this.bodyIsOverflowing && modalIsOverflowing ? this.get('scrollbarWidth') : undefined,
+      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.get('scrollbarWidth') : undefined
     });
   }
 
@@ -631,8 +627,8 @@ export default class Modal extends Component {
    */
   resetAdjustments() {
     this.setProperties({
-      paddingLeft: null,
-      paddingRight: null
+      paddingLeft: undefined,
+      paddingRight: undefined
     });
   }
 
