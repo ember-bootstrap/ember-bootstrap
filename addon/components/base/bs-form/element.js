@@ -3,7 +3,7 @@ import { alias, and, equal, gt, notEmpty, or } from '@ember/object/computed';
 import { action, computed, defineProperty } from '@ember/object';
 import { addObserver } from '@ember/object/observers';
 import { scheduleOnce } from '@ember/runloop';
-import { assert, deprecate, runInDebug } from '@ember/debug';
+import { assert, runInDebug, warn } from '@ember/debug';
 import { isBlank, typeOf } from '@ember/utils';
 import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
@@ -183,7 +183,7 @@ const nonDefaultLayouts = A([
   <form.element @controlType="email" @label="Email" @property="email" as |el|>
     <el.control
       placeholder="Email"
-      tabIndex={{5}}
+      tabindex={{5}}
       multiple
       required
     />
@@ -191,199 +191,6 @@ const nonDefaultLayouts = A([
   ...
   </BsForm>
   ```
-
-  If you are using the older curly component syntax, you can set them as properties of this component:
-
-  ```hbs
-  {{#bs-form formLayout="horizontal" model=this onSubmit=(action "submit") as |form|}}
-  {{form.element controlType="email" label="Email" property="email"
-    placeholder="Email"
-    required=true
-    multiple=true
-    tabIndex=5
-  }}
-  ...
-  {{/bs-form}}
-  ```
-
-  But be aware that this is deprecated and will be removed in Ember Bootstrap v4.
-
-  The following attributes are supported depending on the `controlType`:
-
-  <table class="table table-striped">
-  <thead>
-  <tr>
-  <th></th>
-  <th>textarea</th>
-  <th>checkbox/radio</th>
-  <th>all others</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-  <td>accept</td>
-  <td></td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>autocapitalize</td>
-  <td>✔︎</td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>autocomplete</td>
-  <td>✔︎</td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>autocorrect</td>
-  <td>✔︎</td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>autofocus</td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>autosave</td>
-  <td></td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>cols</td>
-  <td>✔︎</td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr>
-  <td>disabled</td>
-  <td></td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>form</td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>inputmode</td>
-  <td></td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>max</td>
-  <td></td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>maxlength</td>
-  <td>✔︎</td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>min</td>
-  <td></td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>minlength</td>
-  <td>✔︎</td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>multiple</td>
-  <td></td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>name</td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>pattern</td>
-  <td></td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>placeholder</td>
-  <td>✔︎</td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>readonly</td>
-  <td>✔︎</td>
-  <td>︎</td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>required</td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>rows</td>
-  <td>✔︎</td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr>
-  <td>size<br>via <code>controlSize</code> property</td>
-  <td></td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>spellcheck</td>
-  <td>✔︎</td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>step</td>
-  <td></td>
-  <td></td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>tabindex</td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>title</td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  <td>✔︎</td>
-  </tr>
-  <tr>
-  <td>wrap</td>
-  <td>✔︎</td>
-  <td></td>
-  <td></td>
-  </tr>
-  </tbody>
-  </table>
 
   @class FormElement
   @namespace Components
@@ -1102,8 +909,8 @@ export default class FormElement extends FormGroup {
       ].forEach(([mapping, value]) => {
         let argument = mapping.split(':')[0];
         let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
-        let deprecationMessage =
-          `Argument ${argument} of <element> component yielded by <BsForm> is deprecated. ` +
+        let warningMessage =
+          `Argument ${argument} of <element> component yielded by <BsForm> has been removed. ` +
           `It's only purpose was setting the HTML attribute ${attribute} of the control element. ` +
           `You should use  angle bracket  component invocation syntax instead:\n` +
           `Before:n` +
@@ -1122,13 +929,12 @@ export default class FormElement extends FormGroup {
           `    </form.element>\n` +
           `  </BsForm>`;
 
-        deprecate(
-          deprecationMessage,
+        warn(
+          warningMessage,
           // eslint-disable-next-line ember/no-attrs-in-components
           !Object.keys(this.attrs).includes(argument),
           {
-            id: `ember-bootstrap.deprecated-argument.form-element#${argument}`,
-            until: '4.0.0',
+            id: `ember-bootstrap.removed-argument.form-element#${argument}`,
           }
         );
       });
