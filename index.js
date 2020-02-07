@@ -4,6 +4,7 @@ const path = require('path');
 const mergeTrees = require('broccoli-merge-trees');
 const Funnel = require('broccoli-funnel');
 const stew = require('broccoli-stew');
+const replace = require('broccoli-string-replace');
 const mv = stew.mv;
 const rm = stew.rm;
 const map = stew.map;
@@ -241,6 +242,14 @@ module.exports = {
     tree = mv(tree, `${templatePath}common/`, templatePath);
     tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
     tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
+
+    tree = replace(tree, {
+      files: [ 'utils/has-bootstrap-version.js' ],
+      pattern: {
+        match: /BOOTSTRAP_VERSION/g,
+        replacement: bsVersion
+      }
+    });
 
     tree = this.debugTree(tree, 'addon-tree:bootstrap-version');
     tree = this.filterComponents(tree);
