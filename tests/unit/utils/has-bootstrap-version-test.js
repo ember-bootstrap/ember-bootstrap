@@ -1,4 +1,4 @@
-import hasBootstrapVersion from 'dummy/utils/has-bootstrap-version';
+import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
 import { module } from 'qunit';
 import { testBS3, testBS4 } from '../../helpers/bootstrap-test';
 

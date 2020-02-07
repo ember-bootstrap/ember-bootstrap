@@ -244,7 +244,7 @@ module.exports = {
     tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
 
     tree = replace(tree, {
-      files: [ 'utils/has-bootstrap-version.js' ],
+      files: [ 'compatibility-helpers.js' ],
       pattern: {
         match: /BOOTSTRAP_VERSION/g,
         replacement: bsVersion
