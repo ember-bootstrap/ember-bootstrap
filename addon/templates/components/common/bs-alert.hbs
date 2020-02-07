@@ -1,4 +1,4 @@
-<div class="{{if this.alert "alert"}} {{if this.fade "fade"}} {{if this.dismissible "alert-dismissible"}} {{this.typeClass}} {{if this.showAlert "in"}}" ...attributes>
+<div class="{{if this.alert "alert"}} {{if this.fade "fade"}} {{if this.dismissible "alert-dismissible"}} {{this.typeClass}} {{if this.showAlert (if (has-bootstrap-version 4) "show" "in")}}" ...attributes>
   {{#unless this.hidden}}
     {{#if this.dismissible}}
       <button type="button" class="close" aria-label="Close" {{action this.dismiss}}>

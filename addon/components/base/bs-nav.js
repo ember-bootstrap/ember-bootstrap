@@ -124,6 +124,17 @@ export default class Nav extends Component {
   stacked = false;
 
   /**
+   * Make the nav flex fill (BS4 only), see [bootstrap docs](http://getbootstrap.com/docs/4.1/components/navs/#fill-and-justify)
+   *
+   * @property fill
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  fill = false;
+
+  /**
    * @property itemComponent
    * @type {String}
    * @private

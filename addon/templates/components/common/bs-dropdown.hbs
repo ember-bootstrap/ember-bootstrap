@@ -1,5 +1,5 @@
 {{#let (element this.htmlTag) as |Tag|}}
-  <Tag class="{{this.containerClass}} {{if this.inNav "nav-item"}} {{if this.isOpen "show"}}" ...attributes>
+  <Tag class="{{this.containerClass}} {{if this.inNav (if (has-bootstrap-version 4) "nav-item")}} {{if this.isOpen (if (has-bootstrap-version 4) "show" "open")}}" ...attributes>
     {{yield
       (hash
         button=(component this.buttonComponent

@@ -30,7 +30,7 @@
     {{/let}}
     <div>
       {{#if this.showBackdrop}}
-        <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal this.showClass}}" id={{this.backdropId}} ></div>
+        <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (has-bootstrap-version 4) "show" "in")}}" id={{this.backdropId}} ></div>
       {{/if}}
     </div>
   {{/maybe-in-element}}

@@ -2,7 +2,7 @@
   role="dialog"
   tabindex="-1"
   aria-labelledby={{this.ariaLabelledby}}
-  class="modal {{if @fade "fade"}} {{if @showModal "show"}} {{if @inDom "d-block"}}"
+  class="modal {{if @fade "fade"}} {{if @showModal (if (has-bootstrap-version 4) "show" "in")}} {{if @inDom (if (has-bootstrap-version 4) "d-block" "show")}}"
   ...attributes
   {{on "keydown" this.handleKeyDown}}
   {{on "mousedown" this.handleMouseDown}}
