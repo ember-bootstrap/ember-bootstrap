@@ -1,18 +1,19 @@
 {{#if this.inDom}}
-  {{#if this._renderInPlace}}
-    {{#let (component this.dialogComponent) as |Dialog|}}
+  {{#let (component this.dialogComponent
+    onClose=this.close
+    fade=this.fade
+    showModal=this.showModal
+    keyboard=this.keyboard
+    size=@size
+    backdropClose=this.backdropClose
+    inDom=this.inDom
+    paddingLeft=this.paddingLeft
+    paddingRight=this.paddingRight
+    centered=(bs-eq this.position "center")
+    scrollable=this.scrollable
+  ) as |Dialog|}}
+    {{#if this._renderInPlace}}
       <Dialog
-        @onClose={{this.close}}
-        @fade={{this.fade}}
-        @showModal={{this.showModal}}
-        @keyboard={{this.keyboard}}
-        @size={{@size}}
-        @backdropClose={{this.backdropClose}}
-        @inDom={{this.inDom}}
-        @paddingLeft={{this.paddingLeft}}
-        @paddingRight={{this.paddingRight}}
-        @centered={{bs-eq this.position "center"}}
-        @scrollable={{this.scrollable}}
         class={{@class}}
         id={{this.modalId}}
         ...attributes
@@ -27,29 +28,16 @@
           )
         }}
       </Dialog>
-    {{/let}}
-    <div>
-      {{#if this.showBackdrop}}
-        <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (has-bootstrap-version 4) "show" "in")}}" id={{this.backdropId}} ></div>
-      {{/if}}
-    </div>
-  {{else}}
-    {{#-in-element this.destinationElement insertBefore=null}}
-      {{#let (component this.dialogComponent) as |Dialog|}}
+      <div>
+        {{#if this.showBackdrop}}
+          <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (has-bootstrap-version 4) "show" "in")}}" id={{this.backdropId}}></div>
+        {{/if}}
+      </div>
+    {{else}}
+      {{#in-element this.destinationElement insertBefore=null}}
         <Dialog
-          @onClose={{this.close}}
-          @fade={{this.fade}}
-          @showModal={{this.showModal}}
-          @keyboard={{this.keyboard}}
-          @size={{@size}}
-          @backdropClose={{this.backdropClose}}
-          @inDom={{this.inDom}}
-          @paddingLeft={{this.paddingLeft}}
-          @paddingRight={{this.paddingRight}}
-          @centered={{bs-eq this.position "center"}}
-          @class={{@class}}
-          @id={{this.modalId}}
-          @scrollable={{this.scrollable}}
+          class={{@class}}
+          id={{this.modalId}}
           ...attributes
         >
           {{yield
@@ -62,12 +50,12 @@
             )
           }}
         </Dialog>
-      {{/let}}
-      <div>
-        {{#if this.showBackdrop}}
-          <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal this.showClass}}" id={{this.backdropId}} ></div>
-        {{/if}}
-      </div>
-    {{/-in-element}}
-  {{/if}}
+        <div>
+          {{#if this.showBackdrop}}
+            <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal this.showClass}}" id={{this.backdropId}} ></div>
+          {{/if}}
+        </div>
+      {{/in-element}}
+    {{/if}}
+  {{/let}}
 {{/if}}

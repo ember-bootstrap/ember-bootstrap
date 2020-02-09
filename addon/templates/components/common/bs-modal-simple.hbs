@@ -1,5 +1,5 @@
 {{#if inDom}}
-  {{#maybe-in-element destinationElement _renderInPlace}}
+  {{#if this._renderInPlace}}
     <BsModal::dialog
       @onClose={{this.close}}
       @fade={{this.fade}}
@@ -39,5 +39,47 @@
         <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (has-bootstrap-version 4) "show" "in")}}" id={{this.backdropId}}></div>
       {{/if}}
     </div>
-  {{/maybe-in-element}}
+  {{else}}
+    {{#in-element this.destinationElement insertBefore=null}}
+      <BsModal::dialog
+        @onClose={{this.close}}
+        @fade={{this.fade}}
+        @showModal={{this.showModal}}
+        @keyboard={{this.keyboard}}
+        @size={{@size}}
+        @backdropClose={{this.backdropClose}}
+        @inDom={{this.inDom}}
+        @paddingLeft={{this.paddingLeft}}
+        @paddingRight={{this.paddingRight}}
+        @centered={{bs-eq this.position "center"}}
+        @scrollable={{this.scrollable}}
+        class={{@class}}
+        id={{this.modalId}}
+        ...attributes
+      >
+        <BsModal::header @title={{@title}} @closeButton={{this.closeButton}} @onClose={{this.close}} />
+        <BsModal::body>
+          {{yield
+            (hash
+              close=this.close
+              submit=this.doSubmit
+            )
+          }}
+        </BsModal::body>
+        <BsModal::footer
+          @closeTitle={{this.closeTitle}}
+          @submitTitle={{@submitTitle}}
+          @submitButtonType={{this.submitButtonType}}
+          @onClose={{this.close}}
+          @onSubmit={{this.doSubmit}}
+        />
+      </BsModal::dialog>
+
+      <div>
+        {{#if this.showBackdrop}}
+          <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (has-bootstrap-version 4) "show" "in")}}" id={{this.backdropId}}></div>
+        {{/if}}
+      </div>
+    {{/in-element}}
+  {{/if}}
 {{/if}}
