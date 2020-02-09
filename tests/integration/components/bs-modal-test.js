@@ -20,7 +20,7 @@ module('Integration | Component | bs-modal', function(hooks) {
       <BsModal as |modal|>
         <modal.header @title="Dialog" />
         <modal.body>Hello world!</modal.body>
-        {{modal.footer}}
+        <modal.footer />
       </BsModal>
     `);
 
@@ -39,7 +39,7 @@ module('Integration | Component | bs-modal', function(hooks) {
       <BsModal @open={{false}} as |modal|>
         <modal.header @title="Dialog" />
         <modal.body>Hello world!</modal.body>
-        {{modal.footer}}
+        <modal.footer />
       </BsModal>
     `);
 
@@ -55,7 +55,7 @@ module('Integration | Component | bs-modal', function(hooks) {
       <BsModal @title="Simple Dialog" @body={{false}} @footer={{false}} as |modal|>
         {{#my-component}}
           <modal.body>Hello world!</modal.body>
-          {{modal.footer}}
+          <modal.footer />
         {{/my-component}}
       </BsModal>
 
@@ -111,7 +111,7 @@ module('Integration | Component | bs-modal', function(hooks) {
           </h4>
         </modal.header>
         <modal.body>Hello world!</modal.body>
-        {{modal.footer}}
+        <modal.footer />
       </BsModal>
     `);
 
@@ -129,7 +129,7 @@ module('Integration | Component | bs-modal', function(hooks) {
       <BsModal as |modal|>
         <modal.header @title="Some title" />
         <modal.body>Hello world!</modal.body>
-        {{modal.footer}}
+        <modal.footer />
       </BsModal>
     `);
 
