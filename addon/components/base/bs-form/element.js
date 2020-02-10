@@ -391,7 +391,7 @@ const nonDefaultLayouts = A([
   @public
 */
 @templateLayout(layout)
-@classNameBindings('disabled:disabled', 'required:is-required', 'isValidating')
+@classNameBindings('__disabled:disabled', 'required:is-required', 'isValidating')
 export default class FormElement extends FormGroup {
   /**
    * Text to display within a `<label>` tag.
@@ -846,10 +846,10 @@ export default class FormElement extends FormGroup {
     'showValidation',
     'showModelValidation',
     'isValidating',
-    'disabled'
+    '__disabled'
   )
   get validation() {
-    if (!this.get('showValidation') || !this.get('hasValidator') || this.get('isValidating') || this.get('disabled')) {
+    if (!this.get('showValidation') || !this.get('hasValidator') || this.get('isValidating') || this.get('__disabled')) {
       return null;
     } else if (this.get('showModelValidation')) {
       /* The display of model validation messages has been triggered */
@@ -968,6 +968,44 @@ export default class FormElement extends FormGroup {
   }
 
   /**
+   * Interal argument to set disabled class and disabled HTML attribute by
+   * `<BsForm>`, which can not use angle bracket invocation syntax /
+   * splatattributes due to limitations of `{{component}}` helper.
+   *
+   * If both the deprecated public API `@disabled` and private API `@_disabled` are
+   * set, `@disabled` wins.
+   *
+   * @property _disabled
+   * @type {Boolean}
+   * @private
+   */
+  _disabled;
+
+  @computed('disabled', '_disabled')
+  get __disabled() {
+    return this.get('disabled') !== undefined ? this.get('disabled') : this.get('_disabled');
+  }
+
+  /**
+   * Interal argument to set readonly HTML attribute of control by `<BsForm>`,
+   * which can not use angle bracket invocation syntax / splatattributes due to
+   * limitations of `{{component}}` helper.
+   *
+   * If both the deprecated public API `@readonly` and private API `@_readonly`
+   * are set, `@readonly` wins.
+   *
+   * @property _readonly
+   * @type {Boolean}
+   * @private
+   */
+  _readonly;
+
+  @computed('readonly', '_readonly')
+  get __readonly() {
+    return this.get('readonly') !== undefined ? this.get('readonly') : this.get('_readonly');
+  }
+
+  /**
    * @property errorsComponent
    * @type {String}
    * @private
@@ -1083,6 +1121,7 @@ export default class FormElement extends FormGroup {
         ['autosave', 'someuniquevalue'],
         ['cols', '10'],
         ['controlSize:size', '10'],
+        ['disabled', true],
         ['form', 'myform'],
         ['inputmode', 'tel'],
         ['max', '5'],
@@ -1094,6 +1133,7 @@ export default class FormElement extends FormGroup {
         ['pattern', '^[0-9]{5}$'],
         ['placeholder', 'foo'],
         ['required', true],
+        ['readonly', true],
         ['rows', '10'],
         ['spellcheck', true],
         ['step', '2'],
