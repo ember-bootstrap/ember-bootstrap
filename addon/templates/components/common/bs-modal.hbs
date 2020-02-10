@@ -1,18 +1,19 @@
 {{#if this.inDom}}
-  {{#maybe-in-element this.destinationElement this._renderInPlace}}
-    {{#let (component this.dialogComponent) as |Dialog|}}
+  {{#let (component this.dialogComponent
+    onClose=this.close
+    fade=this.fade
+    showModal=this.showModal
+    keyboard=this.keyboard
+    size=@size
+    backdropClose=this.backdropClose
+    inDom=this.inDom
+    paddingLeft=this.paddingLeft
+    paddingRight=this.paddingRight
+    centered=(bs-eq this.position "center")
+    scrollable=this.scrollable
+  ) as |Dialog|}}
+    {{#if this._renderInPlace}}
       <Dialog
-        @onClose={{this.close}}
-        @fade={{this.fade}}
-        @showModal={{this.showModal}}
-        @keyboard={{this.keyboard}}
-        @size={{@size}}
-        @backdropClose={{this.backdropClose}}
-        @inDom={{this.inDom}}
-        @paddingLeft={{this.paddingLeft}}
-        @paddingRight={{this.paddingRight}}
-        @centered={{bs-eq this.position "center"}}
-        @scrollable={{this.scrollable}}
         class={{@class}}
         id={{this.modalId}}
         ...attributes
@@ -27,11 +28,34 @@
           )
         }}
       </Dialog>
-    {{/let}}
-    <div>
-      {{#if this.showBackdrop}}
-        <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (has-bootstrap-version 4) "show" "in")}}" id={{this.backdropId}} ></div>
-      {{/if}}
-    </div>
-  {{/maybe-in-element}}
+      <div>
+        {{#if this.showBackdrop}}
+          <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (has-bootstrap-version 4) "show" "in")}}" id={{this.backdropId}}></div>
+        {{/if}}
+      </div>
+    {{else}}
+      {{#in-element this.destinationElement insertBefore=null}}
+        <Dialog
+          class={{@class}}
+          id={{this.modalId}}
+          ...attributes
+        >
+          {{yield
+            (hash
+              header=(component this.headerComponent onClose=this.close)
+              body=(component this.bodyComponent)
+              footer=(component this.footerComponent onClose=this.close onSubmit=this.doSubmit)
+              close=this.close
+              submit=this.doSubmit
+            )
+          }}
+        </Dialog>
+        <div>
+          {{#if this.showBackdrop}}
+            <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal this.showClass}}" id={{this.backdropId}} ></div>
+          {{/if}}
+        </div>
+      {{/in-element}}
+    {{/if}}
+  {{/let}}
 {{/if}}
