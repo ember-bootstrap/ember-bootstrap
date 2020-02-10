@@ -10,6 +10,7 @@ import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -371,9 +372,23 @@ export default class Button extends Component {
    *
    * @property type
    * @type String
-   * @default 'default'
+   * @default 'secondary'
    * @public
    */
+  @defaultValue
+  type = hasBootstrapVersion(4) ? 'secondary' : 'default';
+
+  /**
+   * Property to create outline buttons (BS4+ only)
+   *
+   * @property disabled
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  outline = false;
+
 
   @typeClass('btn', 'type')
   typeClass;

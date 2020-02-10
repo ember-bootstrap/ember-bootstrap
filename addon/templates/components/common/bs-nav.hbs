@@ -1,0 +1,11 @@
+<ul class="nav {{this.typeClass}} {{this.additionalClass}} {{if this.justified "nav-justified"}} {{if this.stacked (if (has-bootstrap-version 4) "flex-column" "nav-stacked")}} {{if (has-bootstrap-version 4) (if this.fill "nav-fill")}}" ...attributes>
+  {{yield
+    (hash
+      item=(component this.itemComponent)
+      link-to=(component this.linkToComponent)
+      linkTo=(component this.linkToComponent)
+      dropdown=(component this.dropdownComponent inNav=true htmlTag="li")
+    )
+  }}
+
+</ul>

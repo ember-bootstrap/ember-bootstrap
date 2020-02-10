@@ -88,6 +88,27 @@ export default class ButtonGroup extends Component {
   vertical = false;
 
   /**
+   * Set to true for the buttons to stretch at equal sizes to span the entire width of its parent. (BS3 only!)
+   *
+   * *Important*: You have to wrap every button component in a `div class="btn-group">`:
+   *
+   * ```handlebars
+   * <div class="btn-group" role="group">
+   * {{#bs-button}}My Button{{/bs-button}}
+   * </div>
+   * ```
+   *
+   * See http://getbootstrap.com/components/#btn-groups-justified
+   *
+   * @property justified
+   * @type boolean
+   * @default false
+   * @public
+   */
+  @defaultValue
+  justified = false;
+
+  /**
    * The type of the button group specifies how child buttons behave and how the `value` property will be computed:
    *
    * ### null
