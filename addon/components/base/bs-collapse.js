@@ -1,9 +1,9 @@
-import { classNameBindings } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import layout from 'ember-bootstrap/templates/components/bs-collapse';
 import { alias, and, not } from '@ember/object/computed';
 import { addObserver } from '@ember/object/observers';
 import Component from '@ember/component';
 import { isPresent } from '@ember/utils';
-import '@ember/object';
 import { next } from '@ember/runloop';
 import { camelize } from '@ember/string';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
@@ -29,7 +29,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @extends Ember.Component
   @public
 */
-@classNameBindings('collapse', 'collapsing')
+@tagName("")
+@templateLayout(layout)
 export default class Collapse extends Component {
   /**
    * Collapsed/expanded state
@@ -123,13 +124,14 @@ export default class Collapse extends Component {
    */
   transitionDuration = 350;
 
+  collapseSize = null;
+
   setCollapseSize(size) {
     let dimension = this.get('collapseDimension');
 
     assert(`collapseDimension must be either "width" or "height". ${dimension} given.`, ["width", "height"].indexOf(dimension) !== -1);
 
-    this.element.style.width = dimension === 'width' && size ? `${size}px` : '';
-    this.element.style.height = dimension === 'height' && size ? `${size}px` : '';
+    this.set('collapseSize', size);
   }
 
   /**
@@ -179,7 +181,7 @@ export default class Collapse extends Component {
     });
     this.setCollapseSize(this.get('collapsedSize'));
 
-    transitionEnd(this.get('element'), this.get('transitionDuration')).then(() => {
+    transitionEnd(this._element, this.get('transitionDuration')).then(() => {
       if (this.get('isDestroyed')) {
         return;
       }
@@ -211,7 +213,7 @@ export default class Collapse extends Component {
       return expandedSize;
     }
 
-    let collapseElement = this.get('element');
+    let collapseElement = this._element;
     let prefix = action === 'show' ? 'scroll' : 'offset';
     let measureProperty = camelize(`${prefix}-${this.get('collapseDimension')}`);
     return collapseElement[measureProperty];
@@ -232,7 +234,7 @@ export default class Collapse extends Component {
     });
     this.setCollapseSize(this.getExpandedSize('hide'));
 
-    transitionEnd(this.get('element'), this.get('transitionDuration')).then(() => {
+    transitionEnd(this._element, this.get('transitionDuration')).then(() => {
       if (this.get('isDestroyed')) {
         return;
       }

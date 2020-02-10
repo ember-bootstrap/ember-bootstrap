@@ -1,7 +1,6 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item/body';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  Component for an accordion item body.
@@ -21,12 +20,4 @@ export default class AccordionItemBody extends Component {
    * @type boolean
    * @public
    */
-
-  /**
-   * @property collapseComponent
-   * @type {String}
-   * @private
-   */
-  @defaultValue
-  collapseComponent = 'bs-collapse';
 }

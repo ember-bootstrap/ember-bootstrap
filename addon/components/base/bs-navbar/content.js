@@ -1,6 +1,6 @@
-import { classNames, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import layout from 'ember-bootstrap/templates/components/bs-navbar/content';
-import BsCollapseComponent from 'ember-bootstrap/components/bs-collapse';
+import Component from '@ember/component';
 
 /**
  * Component to wrap the collapsible content of a [Components.Navbar](Components.Navbar.html) component.
@@ -11,6 +11,6 @@ import BsCollapseComponent from 'ember-bootstrap/components/bs-collapse';
  * @extends Components.Collapse
  * @public
  */
+@tagName("")
 @templateLayout(layout)
-@classNames('navbar-collapse')
-export default class NavbarContent extends BsCollapseComponent {}
+export default class NavbarContent extends Component {}

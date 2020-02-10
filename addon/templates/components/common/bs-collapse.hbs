@@ -1,0 +1,11 @@
+<div
+  class="{{if this.collapse "collapse"}} {{if this.collapsing "collapsing"}} {{if this.showContent (if (has-bootstrap-version 4) "show" "in")}}"
+  ...attributes
+  {{ref this "_element"}}
+  {{style
+    width=(if (bs-eq this.collapseDimension "width") (concat this.collapseSize "px"))
+    height=(if (bs-eq this.collapseDimension "height") (concat this.collapseSize "px"))
+  }}
+>
+  {{yield}}
+</div>
