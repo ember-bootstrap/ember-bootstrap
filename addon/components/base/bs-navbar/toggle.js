@@ -1,4 +1,5 @@
-import { classNameBindings, layout as templateLayout, tagName } from '@ember-decorators/component';
+import { action } from "@ember/object";
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
@@ -18,8 +19,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  * @public
  */
 @templateLayout(layout)
-@tagName('button')
-@classNameBindings('collapsed')
+@tagName("")
 export default class NavbarToggle extends Component {
   @defaultValue
   collapsed = true;
@@ -31,7 +31,8 @@ export default class NavbarToggle extends Component {
   onClick() {
   }
 
-  click() {
+  @action
+  handleClick() {
     this.onClick();
   }
 }

@@ -1,0 +1,14 @@
+<button class="{{if (has-bootstrap-version 4) "navbar-toggler" "navbar-toggle"}} {{if this.collapsed "collapsed"}}" ...attributes {{on "click" this.handleClick}}>
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    {{#if (has-bootstrap-version 4)}}
+      <span class="navbar-toggler-icon"></span>
+    {{else}}
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    {{/if}}
+  {{/if}}
+</button>
