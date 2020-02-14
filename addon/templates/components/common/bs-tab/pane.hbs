@@ -1,1 +1,8 @@
-{{yield}}
+<div
+  class="tab-pane {{if (has-bootstrap-version 4) (if this.showContent "show")}} {{if (has-bootstrap-version 3) (if this.showContent "in")}} {{if this.active "active"}} {{if this.usesTransition "fade"}}"
+  role="tabpanel"
+  ...attributes
+  {{ref this "_element"}}
+>
+  {{yield}}
+</div>

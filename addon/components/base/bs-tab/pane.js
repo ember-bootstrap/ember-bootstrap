@@ -1,4 +1,4 @@
-import { classNameBindings, classNames, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { addObserver } from '@ember/object/observers';
 import Component from '@ember/component';
@@ -8,6 +8,7 @@ import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { guidFor } from '@ember/object/internals';
 
 /**
  The tab pane of a tab component.
@@ -19,11 +20,15 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @uses Mixins.ComponentChild
  @public
  */
+@tagName("")
 @templateLayout(layout)
-@classNameBindings('active', 'usesTransition:fade')
-@classNames('tab-pane')
 export default class TabPane extends Component.extend(ComponentChild) {
-  ariaRole = 'tabpanel';
+  /**
+   * @property id
+   * @type string
+   * @public
+   */
+  id = guidFor(this);
 
   /**
    * @property activeId
@@ -40,9 +45,9 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @readonly
    * @private
    */
-  @(computed('activeId', 'elementId').readOnly())
+  @(computed('activeId', 'id').readOnly())
   get isActive() {
-    return this.get('activeId') === this.get('elementId');
+    return this.get('activeId') === this.get('id');
   }
 
   /**
@@ -133,7 +138,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
    */
   show() {
     if (this.get('usesTransition')) {
-      transitionEnd(this.get('element'), this.get('fadeDuration'))
+      transitionEnd(this._element, this.get('fadeDuration'))
         .then(() => {
           if (!this.get('isDestroyed')) {
             this.setProperties({
@@ -155,7 +160,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
    */
   hide() {
     if (this.get('usesTransition')) {
-      transitionEnd(this.get('element'), this.get('fadeDuration'))
+      transitionEnd(this._element, this.get('fadeDuration'))
         .then(() => {
           if (!this.get('isDestroyed')) {
             this.set('active', false);
