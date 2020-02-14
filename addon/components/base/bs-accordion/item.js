@@ -1,9 +1,12 @@
-import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
-import { not, oneWay } from '@ember/object/computed';
+import { not } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import typeClass from '../../../utils/cp/type-class';
+import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
+import { guidFor } from '@ember/object/internals';
 
 /**
  A collapsible/expandable item within an accordion
@@ -15,8 +18,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @extends Ember.Component
  @public
  */
+@tagName("")
 @templateLayout(layout)
-@classNameBindings('disabled', 'typeClass')
 export default class AccordionItem extends Component {
   /**
    * The title of the accordion item, displayed as a .panel-title element
@@ -34,8 +37,7 @@ export default class AccordionItem extends Component {
    * @property value
    * @public
    */
-  @oneWay('elementId')
-  value;
+  value = guidFor(this);
 
   /**
    * @property selected
@@ -100,6 +102,9 @@ export default class AccordionItem extends Component {
    */
   @defaultValue
   type = 'default';
+
+  @typeClass(hasBootstrapVersion(4) ? 'bg' : 'panel', 'type')
+  typeClass;
 
   /**
    * Reference to the parent `Components.Accordion` class.

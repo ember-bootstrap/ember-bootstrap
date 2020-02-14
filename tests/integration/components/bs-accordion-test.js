@@ -64,8 +64,8 @@ module('Integration | Component | bs-accordion', function(hooks) {
     `);
 
     assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass('collapse', 'tabpanel has collapse class');
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass(visibilityClass(), `tabpanel has ${visibilityClass()} class`);
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass(visibilityClass(), `tabpanel has ${visibilityClass()} class`);
   });
 
   test('changing selected item expands this item', async function(assert) {
@@ -81,8 +81,8 @@ module('Integration | Component | bs-accordion', function(hooks) {
     // wait for transitions to complete
     await settled();
     assert.dom(`.${accordionClassFor()}:last-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
-    assert.dom(`.${accordionClassFor()}:last-child [role="tabpanel"]`).hasClass('collapse', 'tabpanel has collapse class');
-    assert.dom(`.${accordionClassFor()}:last-child [role="tabpanel"]`).hasClass(visibilityClass(), 'tabpanel is visible');
+    assert.dom(`.${accordionClassFor()}:last-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
+    assert.dom(`.${accordionClassFor()}:last-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
   });
 
   test('clicking collapsed item expands it', async function(assert) {
@@ -95,8 +95,8 @@ module('Integration | Component | bs-accordion', function(hooks) {
     await click(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`);
 
     assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass('collapse', 'tabpanel has collapse class');
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass(visibilityClass(), 'tabpanel is visible');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
   });
 
   test('clicking expanded item collapses it', async function(assert) {
@@ -108,14 +108,14 @@ module('Integration | Component | bs-accordion', function(hooks) {
     `);
 
     assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass('collapse', 'tabpanel has collapse class');
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass(visibilityClass(), 'tabpanel is visible');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
 
     await click(`.${accordionItemHeadClass()}`);
 
     assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasClass('collapsed', `${accordionItemHeadClass()} has collapsed class`);
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass('collapse', 'tabpanel has collapse class');
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasNoClass(visibilityClass(), 'tabpanel is hidden');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasNoClass(visibilityClass(), 'tabpanel is hidden');
   });
 
   test('calls onChange action when changing selection', async function(assert) {
@@ -147,8 +147,8 @@ module('Integration | Component | bs-accordion', function(hooks) {
     assert.ok(action.calledWith(1), 'onClick action has been called.');
 
     assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasClass('collapsed', `${accordionItemHeadClass()} has collapsed class`);
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass('collapse', 'tabpanel has collapse class');
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasNoClass(visibilityClass(), 'tabpanel is hidden');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasNoClass(visibilityClass(), 'tabpanel is hidden');
   });
 
   test('changing selection does not leak to public selected property (DDAU)', async function(assert) {
@@ -176,8 +176,8 @@ module('Integration | Component | bs-accordion', function(hooks) {
     await click('#btn');
 
     assert.dom(`.${accordionClassFor()}:last-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
-    assert.dom(`.${accordionClassFor()}:last-child [role="tabpanel"]`).hasClass('collapse', 'tabpanel has collapse class');
-    assert.dom(`.${accordionClassFor()}:last-child [role="tabpanel"]`).hasClass(visibilityClass(), 'tabpanel is visible');
+    assert.dom(`.${accordionClassFor()}:last-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
+    assert.dom(`.${accordionClassFor()}:last-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
   });
 
   test('clicking collapsed item with contextual title expands it', async function(assert) {
@@ -194,8 +194,8 @@ module('Integration | Component | bs-accordion', function(hooks) {
     await click(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`);
 
     assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass('collapse', 'tabpanel has collapse class');
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass(visibilityClass(), 'tabpanel is visible');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
   });
 
   test('clicking expanded item with contextual title collapses it', async function(assert) {
@@ -210,14 +210,14 @@ module('Integration | Component | bs-accordion', function(hooks) {
     `);
 
     assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass('collapse', 'tabpanel has collapse class');
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass(visibilityClass(), 'tabpanel is visible');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
 
     await click(`.${accordionItemHeadClass()}`);
 
     assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasClass('collapsed', `${accordionItemHeadClass()} has collapsed class`);
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasClass('collapse', 'tabpanel has collapse class');
-    assert.dom(`.${accordionClassFor()}:first-child [role="tabpanel"]`).hasNoClass(visibilityClass(), 'tabpanel is hidden');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
+    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasNoClass(visibilityClass(), 'tabpanel is hidden');
   });
 
   test('it passes accessibility checks', async function (assert) {

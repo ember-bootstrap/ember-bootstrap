@@ -1,7 +1,7 @@
-import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { action } from "@ember/object";
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item/title';
-import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 /**
  Component for an accordion item title.
@@ -13,12 +13,9 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @extends Ember.Component
  @public
  */
+@tagName("")
 @templateLayout(layout)
-@classNameBindings('collapsed:collapsed:expanded')
 export default class AccordionItemTitle extends Component {
-  @defaultValue
-  ariaRole = 'tab';
-
   /**
    * @property collapsed
    * @type boolean
@@ -38,7 +35,8 @@ export default class AccordionItemTitle extends Component {
   onClick() {
   }
 
-  click(e) {
+  @action
+  handleClick(e) {
     e.preventDefault();
     if (!this.get('disabled')) {
       this.get('onClick')();
