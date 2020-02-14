@@ -1,4 +1,4 @@
-import { layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import { filter, oneWay } from '@ember/object/computed';
 import Component from '@ember/component';
@@ -112,6 +112,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @uses Mixins.ComponentParent
   @public
 */
+@tagName("")
 @templateLayout(layout)
 export default class Tab extends Component.extend(ComponentParent) {
   /**
@@ -154,7 +155,7 @@ export default class Tab extends Component.extend(ComponentParent) {
   customTabs = false;
 
   /**
-   * The id (`elementId`) of the active [TabPane](Components.TabPane.html).
+   * The id (`id`) of the active [TabPane](Components.TabPane.html).
    * By default the first tab will be active, but this can be changed by setting this property
    *
    * ```hbs
@@ -175,7 +176,7 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @type string
    * @public
    */
-  @oneWay('childPanes.firstObject.elementId')
+  @oneWay('childPanes.firstObject.id')
   activeId;
 
   /**
@@ -239,23 +240,23 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @readonly
    * @private
    */
-  @computed('childPanes.@each.{elementId,title,group}')
+  @computed('childPanes.@each.{id,title,group}')
   get navItems() {
     let items = A();
     this.get('childPanes').forEach((pane) => {
       let groupTitle = pane.get('groupTitle');
-      let item = pane.getProperties('elementId', 'title');
+      let item = pane.getProperties('id', 'title');
       if (isPresent(groupTitle)) {
         let group = items.findBy('groupTitle', groupTitle);
         if (group) {
           group.children.push(item);
-          group.childIds.push(item.elementId);
+          group.childIds.push(item.id);
         } else {
           items.push({
             isGroup: true,
             groupTitle,
             children: A([item]),
-            childIds: A([item.elementId])
+            childIds: A([item.id])
           });
         }
       } else {
