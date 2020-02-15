@@ -1,0 +1,23 @@
+{{!-- template-lint-disable no-nested-interactive --}}
+{{!-- @todo fix this, see https://github.com/kaliber5/ember-bootstrap/issues/999 --}}
+<div
+  class="{{if this.collapsed "collapsed" "expanded"}} {{if (has-bootstrap-version 4) "card-header"}} {{if (has-bootstrap-version 3) "panel-heading"}}"
+  role="tab"
+  ...attributes
+  {{on "click" this.handleClick}}
+>
+  {{#if (has-bootstrap-version 4)}}
+    <h5 class="mb-0">
+      <button class="btn btn-link {{if @disabled "disabled"}}" type="button" disabled={{@disabled}}>
+        {{yield}}
+      </button>
+    </h5>
+  {{/if}}
+  {{#if (has-bootstrap-version 3)}}
+    <h4 class="panel-title">
+      <a href="#" class={{if @disabled "disabled"}}>
+        {{yield}}
+      </a>
+    </h4>
+  {{/if}}
+</div>

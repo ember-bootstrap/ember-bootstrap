@@ -1,6 +1,12 @@
-{{yield
-  (hash
-    item=(component this.itemComponent selected=this.isSelected onClick=this.doChange)
-    change=this.doChange
-  )
-}}
+<div
+  class="{{if (has-bootstrap-version 4) "accordion"}} {{if (has-bootstrap-version 3) "panel-group"}}"
+  role="tablist"
+  ...attributes
+>
+  {{yield
+    (hash
+      item=(component this.itemComponent selected=this.isSelected onClick=this.doChange)
+      change=this.doChange
+    )
+  }}
+</div>

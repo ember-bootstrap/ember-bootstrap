@@ -1,0 +1,5 @@
+<BsCollapse @collapsed={{@collapsed}} class={{if (has-bootstrap-version 3) "panel-collapse"}} role="tabpanel">
+  <div class="{{if (has-bootstrap-version 4) "card-body"}} {{if (has-bootstrap-version 3) "panel-body"}} {{@class}}">
+    {{yield}}
+  </div>
+</BsCollapse>

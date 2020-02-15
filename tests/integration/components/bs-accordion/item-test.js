@@ -28,8 +28,8 @@ module('Integration | Component | bs-accordion-item', function(hooks) {
     await render(hbs`<BsAccordion::Item @title="TITLE">CONTENT</BsAccordion::Item>`);
     assert.dom(`.${accordionClassFor()}`).exists(`has ${accordionClassFor()} class`);
     assert.dom(`.${accordionClassFor()}`).hasClass(accordionClassFor('default'), `has ${accordionClassFor('default')} class`);
-    assert.dom(`.${accordionItemHeadClass()}`).hasClass('collapsed', `has ${accordionItemHeadClass()} class`);
-    assert.dom('[role="tabpanel"]').hasClass('collapse', 'has collapse class');
+    assert.dom(`.${accordionItemHeadClass()}`).hasClass('collapsed', `has collapsed class`);
+    assert.dom('.collapse').exists();
     assert.dom('.collapse').hasNoClass(visibilityClass(), '.collapse is hidden');
     assert.dom(accordionTitleSelector()).hasText('TITLE', `${accordionTitleSelector()} has correct title`);
     assert.dom(`.${accordionItemBodyClass()}`).hasText('CONTENT', `${accordionItemBodyClass()} has correct title`);
