@@ -1,0 +1,10 @@
+{{#if (has-bootstrap-version 4)}}
+  <h5 class="modal-title" ...attributes>
+    {{yield}}
+  </h5>
+{{/if}}
+{{#if (has-bootstrap-version 3)}}
+  <h4 class="modal-title" ...attributes>
+    {{yield}}
+  </h4>
+{{/if}}

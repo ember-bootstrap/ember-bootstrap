@@ -2,10 +2,13 @@ import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { action, computed } from '@ember/object';
 import Component from '@ember/component';
-import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import layout from 'ember-bootstrap/templates/components/bs-navbar';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { assert } from '@ember/debug';
+import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
+import { isBlank } from '@ember/utils';
+
 
 /**
   Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
@@ -147,8 +150,8 @@ export default class Navbar extends Component {
   @computed('position')
   get positionClass() {
     let position = this.get('position');
-    let validPositions = this.get('_validPositions');
-    let positionPrefix = this.get('_positionPrefix');
+    let validPositions = hasBootstrapVersion(3) ? ['fixed-top', 'fixed-bottom', 'static-top'] : ['fixed-top', 'fixed-bottom', 'sticky-top'];
+    let positionPrefix = hasBootstrapVersion(3) ? 'navbar-' : '';
 
     if (validPositions.indexOf(position) === -1) {
       return null;
@@ -170,8 +173,19 @@ export default class Navbar extends Component {
   @defaultValue
   type = 'default';
 
-  @typeClass('navbar', 'type')
-  typeClass;
+  @computed('type')
+  get typeClass() {
+    let type = this.type || 'default';
+    assert('The value of `type` must be a string', typeof type === 'string' && type !== '');
+
+    if (hasBootstrapVersion(4)) {
+      // 'default` is not a valid type in BS4, but still accepted for compatibility purposes, and mapped to `light'
+      if (type === 'default') {
+        type = 'light';
+      }
+    }
+    return `navbar-${type}`;
+  }
 
   /**
    * The action to be sent when the navbar is about to be collapsed.
@@ -266,6 +280,8 @@ export default class Navbar extends Component {
    * @default 'lg'
    * @public
    */
+  @defaultValue
+  toggleBreakpoint = 'lg';
 
   /**
    * Bootstrap 4 Only: Sets the background color for the navbar. Can be any color
@@ -277,6 +293,32 @@ export default class Navbar extends Component {
    * @default 'light'
    * @public
    */
+  @defaultValue
+  backgroundColor = 'light';
+
+  @computed('toggleBreakpoint')
+  get breakpointClass() {
+    if (hasBootstrapVersion(3)) {
+      return undefined;
+    } else {
+      let toggleBreakpoint = this.get('toggleBreakpoint');
+
+      if (isBlank(toggleBreakpoint)) {
+        return 'navbar-expand';
+      } else {
+        return `navbar-expand-${toggleBreakpoint}`;
+      }
+    }
+  }
+
+  @computed('backgroundColor')
+  get backgroundClass() {
+    if (hasBootstrapVersion(3)) {
+      return undefined;
+    } else {
+      return `bg-${this.backgroundColor}`;
+    }
+  }
 
   /**
    * @property toggleComponent
