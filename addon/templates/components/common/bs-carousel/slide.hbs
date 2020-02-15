@@ -1,1 +1,7 @@
-{{yield}}
+<div
+  class="{{if (has-bootstrap-version 4) "carousel-item"}} {{if (has-bootstrap-version 3) "item"}} {{if this.active "active"}} {{if (has-bootstrap-version 4) (if this.left "carousel-item-left")}} {{if (has-bootstrap-version 3) (if this.left "left")}} {{if (has-bootstrap-version 4) (if this.next "carousel-item-next")}} {{if (has-bootstrap-version 3) (if this.next "next")}} {{if (has-bootstrap-version 4) (if this.prev "carousel-item-prev")}} {{if (has-bootstrap-version 3) (if this.prev "prev")}} {{if (has-bootstrap-version 4) (if this.right "carousel-item-right")}} {{if (has-bootstrap-version 3) (if this.right "right")}}"
+  ...attributes
+  {{ref this "_element"}}
+>
+  {{yield}}
+</div>

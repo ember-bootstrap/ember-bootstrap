@@ -1,4 +1,4 @@
-import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
@@ -17,7 +17,7 @@ import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
   @extends Ember.Component
   @public
  */
-@classNameBindings('active')
+@tagName("")
 @templateLayout(layout)
 export default class CarouselSlide extends Component.extend(ComponentChild) {
   /**
@@ -165,6 +165,6 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    * Makes things more stable, especially when fast changing.
    */
   reflow() {
-    this.element.offsetHeight;
+    this._element.offsetHeight;
   }
 }
