@@ -1,4 +1,4 @@
-import { attributeBindings, classNames, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { action, computed } from '@ember/object';
 import { filter, gt, lte, readOnly } from '@ember/object/computed';
@@ -10,6 +10,7 @@ import { schedule, scheduleOnce } from '@ember/runloop';
 import { task, timeout } from 'ember-concurrency';
 import RSVP from 'rsvp';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { equal } from '@ember/object/computed';
 
 /**
   Ember implementation of Bootstrap's Carousel. Supports all original features but API is partially different:
@@ -59,8 +60,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @extends Ember.Component
   @public
 */
-@attributeBindings('tabindex')
-@classNames('carousel', 'slide')
+@tagName("")
 @templateLayout(layout)
 export default class Carousel extends Component.extend(ComponentParent) {
   tabindex = '1';
@@ -448,6 +448,9 @@ export default class Carousel extends Component.extend(ComponentParent) {
   @defaultValue
   transition = 'slide';
 
+  @(equal('transition', 'fade').readOnly())
+  carouselFade;
+
   /**
    * Action called after the slide has changed.
    *
@@ -554,40 +557,35 @@ export default class Carousel extends Component.extend(ComponentParent) {
    */
   didInsertElement() {
     super.didInsertElement(...arguments);
-    this.registerEvents();
     this.triggerChildSlidesObserver();
   }
 
-  /**
-   * mouseEnter() and mouseLeave() doesn't work with ember-native-dom-event-dispatcher.
-   *
-   * @method registerEvents
-   * @private
-   */
-  registerEvents() {
-    let self = this;
-    this.element.addEventListener('mouseenter', function() {
-      if (self.get('pauseOnMouseEnter')) {
-        self.set('isMouseHovering', true);
-        self.get('cycle').cancelAll();
-        self.get('waitIntervalToInitCycle').cancelAll();
-      }
-    });
-    this.element.addEventListener('mouseleave', function() {
-      if (
-        self.get('pauseOnMouseEnter')
-        && (
-          self.get('transitioner.last') !== null
-          || self.get('waitIntervalToInitCycle.last') !== null
-        )
-      ) {
-        self.set('isMouseHovering', false);
-        self.get('waitIntervalToInitCycle').perform();
-      }
-    });
+
+  @action
+  handleMouseEnter() {
+    if (this.get('pauseOnMouseEnter')) {
+      this.set('isMouseHovering', true);
+      this.get('cycle').cancelAll();
+      this.get('waitIntervalToInitCycle').cancelAll();
+    }
   }
 
-  keyDown(e) {
+  @action
+  handleMouseLeave() {
+    if (
+      this.get('pauseOnMouseEnter')
+      && (
+        this.get('transitioner.last') !== null
+        || this.get('waitIntervalToInitCycle.last') !== null
+      )
+    ) {
+      this.set('isMouseHovering', false);
+      this.get('waitIntervalToInitCycle').perform();
+    }
+  }
+
+  @action
+  handleKeyDown(e) {
     let code = e.keyCode || e.which;
     if (
       this.get('keyboard') === false

@@ -1,28 +1,38 @@
-{{#if this.showIndicators}}
-  <ol class="carousel-indicators">
-    {{#each this.indicators as |indicator _index|}}
-      <li class={{if (bs-eq this.currentIndex _index) "active"}} onclick={{action "toSlide" _index}} role="button"></li>
-    {{/each}}
-  </ol>
-{{/if}}
+<div
+  tabindex={{this.tabindex}}
+  class="carousel slide {{if (has-bootstrap-version 4) (if this.carouselFade "carousel-fade")}}"
+  ...attributes
+  {{on "keydown" this.handleKeyDown}}
+  {{on "mouseenter" this.handleMouseEnter}}
+  {{on "mouseleave" this.handleMouseLeave}}
+>
+  {{#if this.showIndicators}}
+    <ol class="carousel-indicators">
+      {{#each this.indicators as |indicator _index|}}
+        <li class={{if (bs-eq this.currentIndex _index) "active"}} onclick={{action "toSlide" _index}} role="button"></li>
+      {{/each}}
+    </ol>
+  {{/if}}
 
-<div class="carousel-inner" role="listbox">
-  {{yield (hash slide=(component this.slideComponent
-    currentSlide=this.currentSlide
-    directionalClassName=this.directionalClassName
-    followingSlide=this.followingSlide
-    orderClassName=this.orderClassName
-    presentationState=this.presentationState
-  ))}}
+  <div class="carousel-inner" role="listbox">
+    {{yield (hash slide=(component this.slideComponent
+      currentSlide=this.currentSlide
+      directionalClassName=this.directionalClassName
+      followingSlide=this.followingSlide
+      orderClassName=this.orderClassName
+      presentationState=this.presentationState
+    ))}}
+  </div>
+
+  {{#if this.showControls}}
+    <a class="{{if (has-bootstrap-version 4) "carousel-control-prev"}}{{if (has-bootstrap-version 3) "carousel-control left"}}" href="#{{this.elementId}}" {{action this.toPrevSlide}} role="button">
+      <span aria-hidden="true" class="{{if (has-bootstrap-version 4) "carousel-control-prev-icon"}}{{if (has-bootstrap-version 3) "icon-prev"}}"></span>
+      <span class="sr-only">{{this.prevControlLabel}}</span>
+    </a>
+    <a class="{{if (has-bootstrap-version 4) "carousel-control-next"}}{{if (has-bootstrap-version 3) "carousel-control right"}}" href="#{{this.elementId}}" {{action this.toNextSlide}} role="button">
+      <span aria-hidden="true" class="{{if (has-bootstrap-version 4) "carousel-control-next-icon"}}{{if (has-bootstrap-version 3) "icon-next"}}"></span>
+      <span class="sr-only">{{this.nextControlLabel}}</span>
+    </a>
+  {{/if}}
+
 </div>
-
-{{#if this.showControls}}
-  <a class={{this.prevControlClassName}} href="#{{this.elementId}}" {{action this.toPrevSlide}} role="button">
-    <span aria-hidden="true" class={{this.prevControlIcon}}></span>
-    <span class="sr-only">{{this.prevControlLabel}}</span>
-  </a>
-  <a class={{this.nextControlClassName}} href="#{{this.elementId}}" {{action this.toNextSlide}} role="button">
-    <span aria-hidden="true" class={{this.nextControlIcon}}></span>
-    <span class="sr-only">{{this.nextControlLabel}}</span>
-  </a>
-{{/if}}
