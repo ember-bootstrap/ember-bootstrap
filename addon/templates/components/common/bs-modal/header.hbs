@@ -17,15 +17,15 @@
         {{component this.closeComponent onClick=@onClose}}
       {{/if}}
     {{/if}}
-  {{/if}}
-  {{#if (has-bootstrap-version 3)}}
-    {{#if this.closeButton}}
-      {{component this.closeComponent onClick=@onClose}}
-    {{/if}}
-    {{#if hasBlock}}
-      {{yield}}
-    {{else}}
-      {{#component this.titleComponent}}{{@title}}{{/component}}
+    {{#if (has-bootstrap-version 3)}}
+      {{#if this.closeButton}}
+        {{component this.closeComponent onClick=@onClose}}
+      {{/if}}
+      {{#if hasBlock}}
+        {{yield}}
+      {{else}}
+        {{#component this.titleComponent}}{{@title}}{{/component}}
+      {{/if}}
     {{/if}}
   {{/if}}
 </div>
