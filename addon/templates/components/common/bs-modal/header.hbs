@@ -7,6 +7,18 @@
       )
     }}
   {{else}}
+    {{#if (has-bootstrap-version 4)}}
+      {{#if hasBlock}}
+        {{yield}}
+      {{else}}
+        {{#component this.titleComponent}}{{@title}}{{/component}}
+      {{/if}}
+      {{#if this.closeButton}}
+        {{component this.closeComponent onClick=@onClose}}
+      {{/if}}
+    {{/if}}
+  {{/if}}
+  {{#if (has-bootstrap-version 3)}}
     {{#if this.closeButton}}
       {{component this.closeComponent onClick=@onClose}}
     {{/if}}
@@ -16,5 +28,4 @@
       {{#component this.titleComponent}}{{@title}}{{/component}}
     {{/if}}
   {{/if}}
-  
 </div>
