@@ -8,7 +8,7 @@
   @onCreate={{this.updatePlacement}}
   @onUpdate={{this.updatePlacement}}
   @id={{@id}}
-  @class={{this.popperClass}}
+  @class="tooltip {{@class}} {{if this.fade "fade"}} {{if (has-bootstrap-version 4) (concat "bs-tooltip-" this.actualPlacement)}} {{if (has-bootstrap-version 3) this.actualPlacement}} {{if (has-bootstrap-version 4) (if this.showHelp "show")}} {{if (has-bootstrap-version 3) (if this.showHelp "in")}} {{if (has-bootstrap-version 3) "ember-bootstrap-tooltip"}}"
   ...attributes
 >
   <div class={{this.arrowClass}}></div>
