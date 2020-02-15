@@ -109,27 +109,6 @@ export default class ContextualHelpElement extends Component {
   arrowClass = 'arrow';
 
   /**
-   * @property popperClassNames
-   * @type {array}
-   * @private
-   */
-
-  /**
-   * @property popperClass
-   * @type {string}
-   * @private
-   */
-  @computed('popperClassNames.[]', 'class')
-  get popperClass() {
-    let classes = this.get('popperClassNames');
-    let classProperty = this.get('class');
-    if (typeof classProperty === 'string') {
-      classes = classes.concat(classProperty.split(' '));
-    }
-    return classes.join(' ');
-  }
-
-  /**
    * popper.js modifier config
    *
    * @property popperModifiers
