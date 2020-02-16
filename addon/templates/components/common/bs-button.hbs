@@ -1,6 +1,6 @@
 <button
   disabled={{this.__disabled}}
-  type="button"
+  type={{this.buttonType}}
   class="btn {{if this.active "active"}} {{if this.block "btn-block"}} {{this.sizeClass}} {{this.typeClass}}"
   ...attributes
   {{on "click" this.handleClick}}

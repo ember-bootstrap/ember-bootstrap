@@ -58,7 +58,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.equal(this.element.querySelector('button').getAttribute('id'), 'test');
     assert.equal(this.element.querySelector('button').getAttribute('disabled'), '');
     assert.equal(this.element.querySelector('button').getAttribute('title'), 'title');
-    assert.equal(this.element.querySelector('button').getAttribute('type'), 'submit');
+    // assert.equal(this.element.querySelector('button').getAttribute('type'), 'submit');
   });
 
   test('button has default label', async function(assert) {
@@ -69,6 +69,13 @@ module('Integration | Component | bs-button', function(hooks) {
   test('button has default type "button"', async function(assert) {
     await render(hbs`<BsButton />`);
     assert.equal(this.element.querySelector('button').type, 'button');
+  });
+
+  test('buttonType property allows changing button type', async function(assert) {
+    await render(hbs`<BsButton @buttonType="submit" />`);
+
+    assert.dom('button').hasAttribute('type', 'submit');
+    // assert.deprecationsInclude('Argument buttonType of <BsButton> component is deprecated.');
   });
 
   test('button with icon property shows icon', async function(assert) {

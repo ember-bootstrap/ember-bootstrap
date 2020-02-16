@@ -149,7 +149,7 @@ export default class Button extends Component {
   rejectedText = undefined;
 
   /**
-   * Pproperty to disable the button only used in internal communication
+   * Property to disable the button only used in internal communication
    * between Ember Boostrap components.
    *
    * @property _disabled
@@ -168,6 +168,18 @@ export default class Button extends Component {
 
     return this.get('isPending') && this.get('preventConcurrency');
   }
+
+  /**
+   * Set the type of the button, either 'button' or 'submit'
+   *
+   * @property buttonType
+   * @type String
+   * @default 'button'
+   * @deprecated
+   * @public
+   */
+  @defaultValue
+  buttonType = 'button';
 
   /**
    * Set the 'active' class to apply active/pressed CSS styling
@@ -459,7 +471,7 @@ export default class Button extends Component {
     // deprecate arguments used for attribute bindings only
     runInDebug(() => {
       [
-        ['buttonType:type', 'submit'],
+        // ['buttonType:type', 'submit'],
         ['disabled', true],
         ['title', 'foo'],
       ].forEach(([mapping, value]) => {

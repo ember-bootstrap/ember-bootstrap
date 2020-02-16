@@ -99,7 +99,7 @@ module('Integration | Component | bs-form', function(hooks) {
     let submit = this.spy();
     this.actions.submit = submit;
     await render(
-      hbs`<BsForm @onSubmit={{action "submit"}}><BsButton type="submit">Submit</BsButton></BsForm>`
+      hbs`<BsForm @onSubmit={{action "submit"}}><BsButton @buttonType="submit">Submit</BsButton></BsForm>`
     );
 
     await click('button');
