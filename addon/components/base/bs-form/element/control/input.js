@@ -24,18 +24,6 @@ function canUseType(type) {
   return allowedTypes.get(type);
 }
 
-export const baseAttributes = [
-  'name',
-  'autofocus',
-  'disabled',
-  'readonly',
-  'required',
-  'tabindex',
-  'form',
-  'title',
-  'ariaDescribedBy:aria-describedby'
-];
-
 /**
 
  @class FormElementControlInput
@@ -45,25 +33,11 @@ export const baseAttributes = [
  */
 @tagName('input')
 @attributeBindings(
-  ...baseAttributes,
+  'disabled',
+  'readonly',
+  'ariaDescribedBy:aria-describedby',
   'value',
   'type',
-  'placeholder',
-  'controlSize:size',
-  'minlength',
-  'maxlength',
-  'min',
-  'max',
-  'pattern',
-  'accept',
-  'autocomplete',
-  'autocapitalize',
-  'autocorrect',
-  'autosave',
-  'inputmode',
-  'multiple',
-  'step',
-  'spellcheck'
 )
 @classNames('form-control')
 export default class FormElementControlInput extends Control {
