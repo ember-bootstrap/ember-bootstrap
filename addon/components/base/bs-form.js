@@ -1,8 +1,8 @@
 import { attributeBindings, classNameBindings, layout as templateLayout, tagName } from '@ember-decorators/component';
 import { gt } from '@ember/object/computed';
 import Component from '@ember/component';
-import { action, computed, set } from '@ember/object';
-import { assert } from '@ember/debug';
+import { action, set } from '@ember/object';
+import { assert, warn } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import { schedule } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-form';
@@ -74,6 +74,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
   See the above mentioned addons for examples.
 
+  The `novalidate` HTML attribute is set by default for forms that have validation.
+
   ### Submission state
 
   A `isSubmitting` property is yielded, which is `true` after submit has been triggered and before the Promise returned
@@ -108,7 +110,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 @templateLayout(layout)
 @tagName('form')
 @classNameBindings('layoutClass')
-@attributeBindings('_novalidate:novalidate')
+@attributeBindings('hasValidator:novalidate')
 export default class Form extends Component {
   ariaRole = 'form';
 
@@ -273,25 +275,6 @@ export default class Form extends Component {
    */
   @defaultValue
   hideValidationsOnSubmit = false;
-
-  /**
-   * If set to true novalidate attribute is present on form element
-   * Will be true by default if validation support is enabled.
-   *
-   * @property novalidate
-   * @type boolean
-   * @default null
-   * @public
-   */
-  @defaultValue
-  novalidate = null;
-
-  @computed('novalidate', 'hasValidator')
-  get _novalidate() {
-    return (this.get('hasValidator') && this.get('novalidate') !== false) || this.get('novalidate') === true
-        ? ''
-        : undefined;
-  }
 
   /**
    * If set to true the `readonly` property of all yielded form elements will be set, making their form controls read-only.
@@ -478,6 +461,22 @@ export default class Form extends Component {
 
     let formLayout = this.get('formLayout');
     assert(`Invalid formLayout property given: ${formLayout}`, ['vertical', 'horizontal', 'inline'].indexOf(formLayout) >= 0);
+
+    warn(
+      `Argument novalidate of <BsForm> component has been removed. ` +
+      `It's only purpose was setting the HTML attribute novalidate of the <form> element. ` +
+      `You should use  angle bracket component invocation syntax instead:\n` +
+      `Before:n` +
+      `  {{bs-form novalidate=true}}\n` +
+      `  <BsForm @novalidate={{true}} />\n` +
+      `After:\n` +
+      `  <BsForm novalidate>`,
+      // eslint-disable-next-line ember/no-attrs-in-components
+      !Object.keys(this.attrs).includes('novalidate'),
+      {
+        id: `ember-bootstrap.removed-argument.form#novalidate`,
+      }
+    );
   }
 
   @action

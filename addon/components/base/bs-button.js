@@ -3,7 +3,7 @@ import { observes } from '@ember-decorators/object';
 import { computed, action } from '@ember/object';
 import { equal, or } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
-import { deprecate, runInDebug } from '@ember/debug';
+import { runInDebug, warn } from '@ember/debug';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-button';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
@@ -38,28 +38,47 @@ import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
   ### Promise support for automatic state change
 
   When returning a Promise for any asynchronous operation from the `onClick` closure action the button will
-  manage an internal state ("default" > "pending" > "fulfilled"/"rejected") automatically, changing its label
-  according to the state of the promise:
+  manage an internal state ("default" > "pending" > "fulfilled"/"rejected") automatically.
+
+  The button is disabled by default if it's in pending state. You could override this behavior by passing
+  the `disabled` HTML attribute or by setting `@preventConcurrency` to false.
 
   ```hbs
   <BsButton
-    (at)type="primary"
-    (at)icon="glyphicon glyphicon-download"
-    (at)defaultText="Download"
-    (at)pendingText="Loading..."
-    (at)fulfilledText="Completed!"
-    (at)rejectedText="Oups!?"
-    (at)onClick={{action "download"}}
+    disabled={{false}}
+  />
+  ```
+
+  ```hbs
+  <BsButton
+    @preventConcurrency={{false}}
+  />
+  ```
+
+  The label could be changed automatically according to the state of the promise with `@defaultText`,
+  `@pendingText`, `@fulfilledText` and `@rejectedText` arguments:
+
+  ```hbs
+  <BsButton
+    @type="primary"
+    @icon="glyphicon glyphicon-download"
+    @defaultText="Download"
+    @pendingText="Loading..."
+    @fulfilledText="Completed!"
+    @rejectedText="Oups!?"
+    @onClick={{this.download}}
   />
   ```
 
   ```js
   // controller.js
-  export default Ember.Controller.extend({
-    actions: {
-      download(value) {
-        return new Ember.RSVP.Promise(...);
-      }
+  import { Controller } from '@ember/controller';
+  import { action } from '@ember/object';
+
+  export default class MyController extends Controller {
+    @action
+    download(value) {
+      return new Promise(...);
     }
   });
   ```
@@ -130,24 +149,7 @@ export default class Button extends Component {
   rejectedText = undefined;
 
   /**
-   * Property to disable the button
-   *
-   * The button is disabled by default if `preventConcurrency` is `true` and
-   * a Promise returned by `onClick` action is pending. You may explicitly
-   * enable / disable the button by setting `disabled` to `true` or `false`.
-   * Setting it to `null` restores the default behavior.
-   *
-   * @property disabled
-   * @type ?boolean
-   * @default null
-   * @deprecated
-   * @public
-   */
-  @defaultValue
-  disabled = null;
-
-  /**
-   * Pproperty to disable the button only used in internal communication
+   * Property to disable the button only used in internal communication
    * between Ember Boostrap components.
    *
    * @property _disabled
@@ -158,12 +160,8 @@ export default class Button extends Component {
   @defaultValue
   _disabled = null;
 
-  @computed('disabled', '_disabled', 'isPending', 'preventConcurrency')
+  @computed('_disabled', 'isPending', 'preventConcurrency')
   get __disabled() {
-    if (this.get('disabled') !== null) {
-      return this.get('disabled');
-    }
-
     if (this.get('_disabled') !== null) {
       return this.get('_disabled');
     }
@@ -394,17 +392,6 @@ export default class Button extends Component {
   typeClass;
 
   /**
-   * The HTML title attribute
-   *
-   * @property title
-   * @type string
-   * @deprecated
-   * @public
-   */
-  @defaultValue
-  title = null;
-
-  /**
    * When clicking the button this action is called with the value of the button (that is the value of the "value" property).
    *
    * Return a promise object, and the buttons state will automatically set to "pending", "resolved" and/or "rejected".
@@ -484,14 +471,14 @@ export default class Button extends Component {
     // deprecate arguments used for attribute bindings only
     runInDebug(() => {
       [
-        ['buttonType:type', 'submit'],
+        // ['buttonType:type', 'submit'],
         ['disabled', true],
         ['title', 'foo'],
       ].forEach(([mapping, value]) => {
         let argument = mapping.split(':')[0];
         let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
-        let deprecationMessage =
-          `Argument ${argument} of <BsButton> component is deprecated. It's only purpose ` +
+        let warningMessage =
+          `Argument ${argument} of <BsButton> component has been removed. It's only purpose ` +
           `was setting the HTML attribute ${attribute} of the control element. You should use ` +
           `angle bracket  component invocation syntax instead:\n` +
           `Before:\n` +
@@ -500,13 +487,12 @@ export default class Button extends Component {
           `After:\n` +
           `  <BsButton ${typeof value === 'boolean' ? attribute : `${attribute}="${value}"`} />`;
 
-        deprecate(
-          deprecationMessage,
+        warn(
+          warningMessage,
           // eslint-disable-next-line ember/no-attrs-in-components
           !Object.keys(this.attrs).includes(argument),
           {
-            id: `ember-bootstrap.deprecated-argument.button#${argument}`,
-            until: '4.0.0',
+            id: `ember-bootstrap.removed-argument.button#${argument}`,
           }
         );
       });

@@ -104,7 +104,6 @@ module('Integration | Component | bs-form', function(hooks) {
 
     await click('button');
     assert.ok(submit.calledOnce, 'onSubmit action has been called');
-    assert.deprecations(1);
   });
 
   test('Submit event bubbles', async function(assert) {
@@ -261,7 +260,7 @@ module('Integration | Component | bs-form', function(hooks) {
     let model = {};
     this.set('model', model);
     await render(
-      hbs`<BsForm @model={{model}} @hasValidator={{true}} @novalidate={{false}}>Test</BsForm>`
+      hbs`<BsForm @model={{model}} @hasValidator={{true}} novalidate={{false}}>Test</BsForm>`
     );
 
     assert.dom('form').doesNotHaveAttribute('novalidate');
@@ -919,7 +918,7 @@ module('Integration | Component | bs-form', function(hooks) {
     await render(hbs`<BsForm />`);
     assert.dom('form').doesNotHaveAttribute('novalidate');
 
-    await render(hbs`<BsForm @novalidate={{true}} />`);
+    await render(hbs`<BsForm novalidate={{true}} />`);
     assert.dom('form').hasAttribute('novalidate');
   });
 

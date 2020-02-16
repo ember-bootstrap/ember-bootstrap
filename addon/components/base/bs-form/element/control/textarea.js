@@ -1,6 +1,5 @@
 import { attributeBindings, classNames, tagName } from '@ember-decorators/component';
 import Control from '../control';
-import { baseAttributes } from './input';
 
 /**
 
@@ -10,18 +9,10 @@ import { baseAttributes } from './input';
  @private
  */
 @attributeBindings(
-  ...baseAttributes,
-  'value',
-  'placeholder',
-  'minlength',
-  'maxlength',
-  'autocomplete',
-  'autocapitalize',
-  'autocorrect',
-  'spellcheck',
-  'rows',
-  'cols',
-  'wrap'
+  'disabled',
+  'readonly',
+  'ariaDescribedBy:aria-describedby',
+  'value'
 )
 @tagName('textarea')
 @classNames('form-control')

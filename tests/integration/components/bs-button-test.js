@@ -53,14 +53,12 @@ module('Integration | Component | bs-button', function(hooks) {
   });
 
   test('button has HTML attributes', async function(assert) {
-    await render(hbs`<BsButton id="test" @disabled={{true}} @title="title">Test</BsButton>`);
+    await render(hbs`<BsButton id="test" disabled={{true}} title="title" type="submit">Test</BsButton>`);
 
     assert.equal(this.element.querySelector('button').getAttribute('id'), 'test');
     assert.equal(this.element.querySelector('button').getAttribute('disabled'), '');
     assert.equal(this.element.querySelector('button').getAttribute('title'), 'title');
-
-    assert.deprecationsInclude('Argument disabled of <BsButton> component is deprecated.');
-    assert.deprecationsInclude('Argument title of <BsButton> component is deprecated.');
+    // assert.equal(this.element.querySelector('button').getAttribute('type'), 'submit');
   });
 
   test('button has default label', async function(assert) {
@@ -77,7 +75,7 @@ module('Integration | Component | bs-button', function(hooks) {
     await render(hbs`<BsButton @buttonType="submit" />`);
 
     assert.dom('button').hasAttribute('type', 'submit');
-    assert.deprecationsInclude('Argument buttonType of <BsButton> component is deprecated.');
+    // assert.deprecationsInclude('Argument buttonType of <BsButton> component is deprecated.');
   });
 
   test('button with icon property shows icon', async function(assert) {
@@ -229,22 +227,6 @@ module('Integration | Component | bs-button', function(hooks) {
     await render(hbs`<BsButton @onClick={{clickAction}} @preventConcurrency={{false}} />`);
     await click('button');
     assert.dom('button').isNotDisabled();
-
-    deferredClickAction.resolve();
-    await settled();
-  });
-
-  test('setting @disabled property to false prevents button from being disabled while in pending state', async function(assert) {
-    let deferredClickAction = defer();
-    this.set('clickAction', () => {
-      return deferredClickAction.promise;
-    });
-
-    await render(hbs`<BsButton @disabled={{false}} @onClick={{clickAction}} />`);
-    await click('button');
-    assert.dom('button').isNotDisabled();
-
-    assert.deprecationsInclude('Argument disabled of <BsButton> component is deprecated.');
 
     deferredClickAction.resolve();
     await settled();
