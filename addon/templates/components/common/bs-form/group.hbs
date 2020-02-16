@@ -1,4 +1,6 @@
-{{yield}}
-{{#if this.hasFeedback}}
-  <span class="form-control-feedback {{this.iconName}}" aria-hidden="true"></span>
-{{/if}}
+<div ...attributes>
+  {{yield}}
+  {{#if this.hasFeedback}}
+    <span class="form-control-feedback {{this.iconName}}" aria-hidden="true"></span>
+  {{/if}}
+</div>
