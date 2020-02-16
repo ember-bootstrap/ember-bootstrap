@@ -1,4 +1,6 @@
-import { attributeBindings, classNames, tagName } from '@ember-decorators/component';
+import { action } from "@ember/object";
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import layout from 'ember-bootstrap/templates/components/bs-form/element/control/textarea';
 import Control from '../control';
 
 /**
@@ -8,20 +10,16 @@ import Control from '../control';
  @extends Components.FormElementControl
  @private
  */
-@attributeBindings(
-  'disabled',
-  'readonly',
-  'ariaDescribedBy:aria-describedby',
-  'value'
-)
-@tagName('textarea')
-@classNames('form-control')
+@templateLayout(layout)
+@tagName("")
 export default class FormElementControlTextarea extends Control {
-  change(event) {
+  @action
+  handleChange(event) {
     this.get('onChange')(event.target.value);
   }
 
-  input(event) {
+  @action
+  handleInput(event) {
     this.get('onChange')(event.target.value);
   }
 }

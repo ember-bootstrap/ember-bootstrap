@@ -1,6 +1,6 @@
 <form
   role="form"
-  novalidate={{this._novalidate}}
+  novalidate={{this.hasValidator}}
   class={{this.layoutClass}}
   ...attributes
   {{on "keyPress" this.handleKeyPress}}

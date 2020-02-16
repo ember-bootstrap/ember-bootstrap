@@ -1,7 +1,7 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { gt } from '@ember/object/computed';
 import Component from '@ember/component';
-import { action, set } from '@ember/object';
+import { computed, action, set } from '@ember/object';
 import { assert, warn } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import { schedule } from '@ember/runloop';

@@ -1,8 +1,8 @@
-import { attributeBindings, classNames, tagName } from '@ember-decorators/component';
-import { computed } from '@ember/object';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import layout from 'ember-bootstrap/templates/components/bs-form/element/control/input';
+import { computed, action } from '@ember/object';
 import Control from '../control';
 import { isEmpty } from '@ember/utils';
-import formValidationClass from 'ember-bootstrap/utils/cp/form-validation-class';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
@@ -34,15 +34,8 @@ function canUseType(type) {
  @extends Components.FormElementControl
  @private
  */
-@tagName('input')
-@attributeBindings(
-  'disabled',
-  'readonly',
-  'ariaDescribedBy:aria-describedby',
-  'value',
-  'type',
-)
-@classNames('form-control')
+@templateLayout(layout)
+@tagName("")
 export default class FormElementControlInput extends Control {
   /**
    * @property type
@@ -71,16 +64,15 @@ export default class FormElementControlInput extends Control {
     return value;
   }
 
-  change(event) {
+  @action
+  handleChange(event) {
     this.get('onChange')(event.target.value);
   }
 
-  input(event) {
+  @action
+  handleInput(event) {
     this.get('onChange')(event.target.value);
   }
-
-  @formValidationClass('validationType')
-  formValidationClass;
 
   /**
    * [BS4 only] Property for size styling, set to 'lg', 'sm' or 'xs'
