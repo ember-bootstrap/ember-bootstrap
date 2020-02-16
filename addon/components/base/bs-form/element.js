@@ -1,8 +1,6 @@
 import { layout as templateLayout } from '@ember-decorators/component';
 import { alias, and, equal, gt, notEmpty, or } from '@ember/object/computed';
 import { action, computed, defineProperty } from '@ember/object';
-import { addObserver } from '@ember/object/observers';
-import { scheduleOnce } from '@ember/runloop';
 import { assert, runInDebug, warn } from '@ember/debug';
 import { isBlank, typeOf } from '@ember/utils';
 import { A, isArray } from '@ember/array';
