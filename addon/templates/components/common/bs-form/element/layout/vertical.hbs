@@ -1,8 +1,11 @@
 <div ...attributes>
-  {{#if hasLabel}}
+  {{#if this.hasLabel}}
     {{component @labelComponent}}
   {{/if}}
   {{yield}}
+  {{#if (has-bootstrap-version 3)}}
+    {{component @feedbackIconComponent}}
+  {{/if}}
   {{component @errorsComponent}}
   {{component @helpTextComponent}}
 </div>

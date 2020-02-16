@@ -2,6 +2,9 @@ import { attributeBindings, classNames, tagName } from '@ember-decorators/compon
 import { computed } from '@ember/object';
 import Control from '../control';
 import { isEmpty } from '@ember/utils';
+import formValidationClass from 'ember-bootstrap/utils/cp/form-validation-class';
+import sizeClass from 'ember-bootstrap/utils/cp/size-class';
+import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
 const allowedTypes = new Map();
 function canUseType(type) {
@@ -75,4 +78,22 @@ export default class FormElementControlInput extends Control {
   input(event) {
     this.get('onChange')(event.target.value);
   }
+
+  @formValidationClass('validationType')
+  formValidationClass;
+
+  /**
+   * [BS4 only] Property for size styling, set to 'lg', 'sm' or 'xs'
+   *
+   * Also see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/forms/#sizing)
+   *
+   * @property size
+   * @type String
+   * @public
+   */
+  @defaultValue
+  size = null;
+
+  @sizeClass('form-control', 'size')
+  sizeClass;
 }
