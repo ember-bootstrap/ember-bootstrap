@@ -1,4 +1,4 @@
-import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout } from '@ember-decorators/component';
 import { alias, and, equal, gt, notEmpty, or } from '@ember/object/computed';
 import { action, computed, defineProperty } from '@ember/object';
 import { addObserver } from '@ember/object/observers';
@@ -10,6 +10,8 @@ import { getOwner } from '@ember/application';
 import layout from 'ember-bootstrap/templates/components/bs-form/element';
 import FormGroup from 'ember-bootstrap/components/bs-form/group';
 import defaultValue from '../../../utils/default-decorator';
+import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
+import { guidFor } from '@ember/object/internals';
 
 const nonDefaultLayouts = A([
   'checkbox'
@@ -198,8 +200,16 @@ const nonDefaultLayouts = A([
   @public
 */
 @templateLayout(layout)
-@classNameBindings('disabled:disabled', 'required:is-required', 'isValidating')
 export default class FormElement extends FormGroup {
+  @defaultValue
+  doNotShowValidationForEventTargets = hasBootstrapVersion(3) ? [
+    '.input-group-addon',
+    '.input-group-btn',
+  ] : [
+    '.input-group-append',
+    '.input-group-prepend',
+  ];
+
   /**
    * Text to display within a `<label>` tag.
    *
@@ -598,6 +608,7 @@ export default class FormElement extends FormGroup {
    * @param {Event} event
    * @private
    */
+  @action
   showValidationOnHandler({ target, type }) {
     // Should not do anything if
     if (
@@ -706,6 +717,8 @@ export default class FormElement extends FormGroup {
   @defaultValue
   horizontalLabelGridClass = null;
 
+  _elementId = guidFor(this);
+
   /**
    * ID for input field and the corresponding label's "for" attribute
    *
@@ -713,9 +726,8 @@ export default class FormElement extends FormGroup {
    * @type string
    * @private
    */
-  @computed('elementId')
   get formElementId() {
-    return `${this.get('elementId')}-field`;
+    return `${this._elementId}-field`;
   }
 
   /**
@@ -725,9 +737,8 @@ export default class FormElement extends FormGroup {
    * @type string
    * @private
    */
-  @computed('elementId')
   get ariaDescribedBy() {
-    return `${this.get('elementId')}-help`;
+    return `${this._elementId}-help`;
   }
 
   /**
@@ -795,8 +806,10 @@ export default class FormElement extends FormGroup {
    * @type {String}
    * @private
    */
-  @defaultValue
-  labelComponent = 'bs-form/element/label';
+  @computed('controlType')
+  get labelComponent() {
+    return hasBootstrapVersion(3) ? 'bs-form/element/label' : this.get('controlType') === 'radio' ? 'bs-form/element/legend' : 'bs-form/element/label';
+  }
 
   /**
    * @property helpTextComponent
@@ -814,39 +827,6 @@ export default class FormElement extends FormGroup {
    * @private
    */
   setupValidations() {
-  }
-
-  /**
-   * Listen for focusOut events from the control element to automatically set `showOwnValidation` to true to enable
-   * form validation markup rendering if `showValidationsOn` contains `focusOut`.
-   *
-   * @event focusOut
-   * @private
-   */
-  focusOut(event) {
-    this.showValidationOnHandler(event);
-  }
-
-  /**
-   * Listen for change events from the control element to automatically set `showOwnValidation` to true to enable
-   * form validation markup rendering if `showValidationsOn` contains `change`.
-   *
-   * @event change
-   * @private
-   */
-  change(event) {
-    this.showValidationOnHandler(event);
-  }
-
-  /**
-   * Listen for input events from the control element to automatically set `showOwnValidation` to true to enable
-   * form validation markup rendering if `showValidationsOn` contains `input`.
-   *
-   * @event input
-   * @private
-   */
-  input(event) {
-    this.showValidationOnHandler(event);
   }
 
   /**
@@ -957,7 +937,7 @@ export default class FormElement extends FormGroup {
   }
 
   _adjustFeedbackIcons() {
-    let el = this.get('element');
+    let el = this._element;
     let feedbackIcon;
     // validation state icons are only shown if form element has feedback
     if (!this.get('isDestroying')
