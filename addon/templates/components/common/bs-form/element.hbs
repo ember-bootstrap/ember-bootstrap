@@ -5,6 +5,8 @@
   {{on "focusout" this.showValidationOnHandler}}
   {{on "change" this.showValidationOnHandler}}
   {{on "input" this.showValidationOnHandler}}
+  {{did-insert this.adjustFeedbackIcons}}
+  {{did-update this.adjustFeedbackIcons this.hasFeedback this.formLayout}}
 >
   {{#component this.layoutComponent
     hasLabel=this.hasLabel

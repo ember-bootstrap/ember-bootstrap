@@ -4,7 +4,7 @@ import EmberObject from '@ember/object';
 import { A, isArray } from '@ember/array';
 import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, fillIn, triggerEvent, focus, blur } from '@ember/test-helpers';
+import { render, click, fillIn, triggerEvent, focus, blur, settled } from '@ember/test-helpers';
 import {
   formFeedbackClass,
   test,
@@ -427,7 +427,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     this.set('formLayout', 'vertical');
     await render(hbs`
       <BsForm @formLayout={{formLayout}} as |form|>
-        <form.element @showAllValidations={{true}} @hasValidator={{true}} @errors={{errors}} @label="adjusts validation icon position" @classNames="addon">
+        <form.element @showAllValidations={{true}} @hasValidator={{true}} @errors={{errors}} @label="adjusts validation icon position" class="addon">
           <div class="input-group">
             <input class="form-control">
             <div class="input-group-addon">
@@ -435,7 +435,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
             </div>
           </div>
         </form.element>
-        <form.element @showAllValidations={{true}} @hasValidator={{true}} @errors={{errors}} @label="adjusts validation icon position" @classNames="button">
+        <form.element @showAllValidations={{true}} @hasValidator={{true}} @errors={{errors}} @label="adjusts validation icon position" class="button">
           <div class="input-group">
             <input class="form-control">
             <div class="input-group-btn">
@@ -480,6 +480,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
     // https://github.com/twbs/bootstrap/blob/v3.3.6/less/forms.less#L589-L591
     // https://github.com/twbs/bootstrap/blob/v3.3.6/less/variables.less#L326-L327
     this.set('formLayout', 'horizontal');
+    await settled();
 
     assert.equal(
       this.element.querySelector('.addon .form-control-feedback').style.right,

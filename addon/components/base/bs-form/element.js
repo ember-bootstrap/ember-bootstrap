@@ -620,7 +620,7 @@ export default class FormElement extends FormGroup {
       (
         isArray(this.get('doNotShowValidationForEventTargets')) &&
         this.get('doNotShowValidationForEventTargets.length') > 0 &&
-        [...this.element.querySelectorAll(this.get('doNotShowValidationForEventTargets').join(','))]
+        [...this._element.querySelectorAll(this.get('doNotShowValidationForEventTargets').join(','))]
           .some((el) => el.contains(target))
       )
     ) {
@@ -919,9 +919,6 @@ export default class FormElement extends FormGroup {
         );
       });
     });
-
-    addObserver(this, 'hasFeedback', null, this.adjustFeedbackIcons, true);
-    addObserver(this, 'formLayout', null, this.adjustFeedbackIcons, true);
   }
 
   /*
@@ -932,45 +929,38 @@ export default class FormElement extends FormGroup {
    *  with an add-on on the right. [...] For input groups, adjust the right
    *  value to an appropriate pixel value depending on the width of your addon.
    */
-  adjustFeedbackIcons() {
-    scheduleOnce('afterRender', this, this._adjustFeedbackIcons);
-  }
+  @action
+  adjustFeedbackIcons(el) {
+    if (hasBootstrapVersion(3)) {
+      let feedbackIcon;
+      // validation state icons are only shown if form element has feedback
+      if (!this.get('isDestroying')
+        && this.get('hasFeedback')
+        // and form group element has
+        // an input-group
+        && el.querySelector('.input-group')
+        // an addon or button on right side
+        && el.querySelector('.input-group input + .input-group-addon, .input-group input + .input-group-btn')
+        // an icon showing validation state
+        && (feedbackIcon = el.querySelector('.form-control-feedback'))
+      ) {
+        // clear existing adjustment
+        feedbackIcon.style.right = '';
 
-  _adjustFeedbackIcons() {
-    let el = this._element;
-    let feedbackIcon;
-    // validation state icons are only shown if form element has feedback
-    if (!this.get('isDestroying')
-      && this.get('hasFeedback')
-      // and form group element has
-      // an input-group
-      && el.querySelector('.input-group')
-      // an addon or button on right side
-      && el.querySelector('.input-group input + .input-group-addon, .input-group input + .input-group-btn')
-      // an icon showing validation state
-      && (feedbackIcon = el.querySelector('.form-control-feedback'))
-    ) {
-      // clear existing adjustment
-      feedbackIcon.style.right = '';
+        let defaultPosition = 0;
+        let match = getComputedStyle(feedbackIcon).right.match(/^(\d+)px$/);
+        if (match) {
+          defaultPosition = parseInt(match[1]);
+        }
+        // Bootstrap documentation:
+        //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
+        // therefore we could rely on having only one input-group-addon or input-group-btn
+        let inputGroupWidth = el.querySelector('input + .input-group-addon, input + .input-group-btn').offsetWidth;
+        let adjustedPosition = defaultPosition + inputGroupWidth;
 
-      let defaultPosition = 0;
-      let match = getComputedStyle(feedbackIcon).right.match(/^(\d+)px$/);
-      if (match) {
-        defaultPosition = parseInt(match[1]);
+        feedbackIcon.style.right = `${adjustedPosition}px`;
       }
-      // Bootstrap documentation:
-      //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
-      // therefore we could rely on having only one input-group-addon or input-group-btn
-      let inputGroupWidth = el.querySelector('input + .input-group-addon, input + .input-group-btn').offsetWidth;
-      let adjustedPosition = defaultPosition + inputGroupWidth;
-
-      feedbackIcon.style.right = `${adjustedPosition}px`;
     }
-  }
-
-  didInsertElement() {
-    super.didInsertElement(...arguments);
-    this.adjustFeedbackIcons();
   }
 
   @action
