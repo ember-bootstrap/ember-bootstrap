@@ -1,4 +1,7 @@
-<div ...attributes>
+<div
+  class="form-group {{if (has-bootstrap-version 3) this.validationClass}} {{if (has-bootstrap-version 3) (if this.hasFeedback "has-feedback")}} {{if (has-bootstrap-version 3) this.sizeClass}} {{if (has-bootstrap-version 4) (if this.isHorizontal "row")}}"
+  ...attributes
+>
   {{yield}}
   {{#if this.hasFeedback}}
     <span class="form-control-feedback {{this.iconName}}" aria-hidden="true"></span>
