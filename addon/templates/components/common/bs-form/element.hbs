@@ -1,3 +1,4 @@
+{{!-- template-lint-disable no-invalid-interactive --}}
 <div
   class="form-group {{if this.disabled "disabled"}} {{if this.required "is-required"}} {{if this.isValidating "is-validating"}} {{if (has-bootstrap-version 3) this.validationClass}} {{if (has-bootstrap-version 3) (if this.hasFeedback "has-feedback")}} {{if (has-bootstrap-version 3) this.sizeClass}} {{if (has-bootstrap-version 4) (if this.isHorizontal "row")}}"
   ...attributes
@@ -42,22 +43,22 @@
         id=this.formElementId
         type=this.controlType
         label=@label
-        disabled=disabled
-        readonly=readonly
-        required=required
-        options=options
-        optionLabelPath=optionLabelPath
-        ariaDescribedBy=(if hasHelpText ariaDescribedBy)
+        disabled=@disabled
+        readonly=@readonly
+        required=@required
+        options=this.options
+        optionLabelPath=this.optionLabelPath
+        ariaDescribedBy=(if this.hasHelpText this.ariaDescribedBy)
         onChange=(action this.doChange)
-        validationType=validation
-        size=size
+        validationType=this.validation
+        size=this.size
     ) as |Control|}}
       {{#if hasBlock}}
         {{yield
           (hash
-            value=value
-            id=formElementId
-            validation=validation
+            value=this.value
+            id=this.formElementId
+            validation=this.validation
             control=Control
           )
         }}

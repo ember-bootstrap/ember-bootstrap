@@ -383,8 +383,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
 
     assert.dom('#value').exists({ count: 1 }, 'block template is rendered');
     assert.dom('#value').hasText('male', 'value is yielded to block template');
-    assert.dom('#id').hasText(
-      `${this.element.querySelector('.form-group').getAttribute('id')}-field`,
+    assert.dom('#id').hasAnyText(
       'id is yielded to block template'
     );
     assert.dom('#validation').hasText('success');

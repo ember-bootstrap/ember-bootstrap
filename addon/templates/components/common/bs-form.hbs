@@ -1,9 +1,11 @@
+{{!-- template-lint-disable no-invalid-interactive --}}
 <form
   role="form"
   novalidate={{this.hasValidator}}
   class={{this.layoutClass}}
   ...attributes
-  {{on "keyPress" this.handleKeyPress}}
+  {{ref this "_element"}}
+  {{on "keypress" this.handleKeyPress}}
   {{on "submit" this.handleSubmit}}
 >
   {{yield

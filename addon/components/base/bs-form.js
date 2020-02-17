@@ -461,7 +461,7 @@ export default class Form extends Component {
   triggerSubmit() {
     let event = document.createEvent('Event');
     event.initEvent('submit', true, true);
-    this.get('element').dispatchEvent(event);
+    this._element.dispatchEvent(event);
   }
 
   init() {
