@@ -1,58 +1,70 @@
-{{#component this.layoutComponent
-  hasLabel=this.hasLabel
-  formElementId=this.formElementId
-  horizontalLabelGridClass=this.horizontalLabelGridClass
-  errorsComponent=(component this.errorsComponent
-    messages=this.validationMessages
-    show=this.showValidationMessages
-    showMultipleErrors=this.showMultipleErrors
-  )
-  feedbackIconComponent=(component this.feedbackIconComponent
-    iconName=@iconName
-    show=this.hasFeedback
-  )
-  labelComponent=(component this.labelComponent
-    label=@label
-    invisibleLabel=this.invisibleLabel
+{{!-- template-lint-disable no-invalid-interactive --}}
+<div
+  class="form-group {{if this.disabled "disabled"}} {{if this.required "is-required"}} {{if this.isValidating "is-validating"}} {{if (has-bootstrap-version 3) this.validationClass}} {{if (has-bootstrap-version 3) (if this.hasFeedback "has-feedback")}} {{if (has-bootstrap-version 3) this.sizeClass}} {{if (has-bootstrap-version 4) (if this.isHorizontal "row")}}"
+  ...attributes
+  {{ref this "_element"}}
+  {{on "focusout" this.showValidationOnHandler}}
+  {{on "change" this.showValidationOnHandler}}
+  {{on "input" this.showValidationOnHandler}}
+  {{did-insert this.adjustFeedbackIcons}}
+  {{did-update this.adjustFeedbackIcons this.hasFeedback this.formLayout}}
+>
+  {{#component this.layoutComponent
+    hasLabel=this.hasLabel
     formElementId=this.formElementId
-    controlType=this.controlType
-    formLayout=this.formLayout
-    size=@size
-  )
-  helpTextComponent=(if this.hasHelpText
-    (component this.helpTextComponent
-      text=@helpText
-      id=this.ariaDescribedBy
+    horizontalLabelGridClass=this.horizontalLabelGridClass
+    errorsComponent=(component this.errorsComponent
+      messages=this.validationMessages
+      show=this.showValidationMessages
+      showMultipleErrors=this.showMultipleErrors
     )
-  )
-}}
-  {{#let
-    (component this.controlComponent
-      value=this.value
-      id=this.formElementId
-      type=this.controlType
+    feedbackIconComponent=(component this.feedbackIconComponent
+      iconName=@iconName
+      show=this.hasFeedback
+    )
+    labelComponent=(component this.labelComponent
       label=@label
-      disabled=disabled
-      readonly=readonly
-      required=required
-      options=options
-      optionLabelPath=optionLabelPath
-      ariaDescribedBy=(if hasHelpText ariaDescribedBy)
-      onChange=(action this.doChange)
-      validationType=validation
-      size=size
-  ) as |Control|}}
-    {{#if hasBlock}}
-      {{yield
-        (hash
-          value=value
-          id=formElementId
-          validation=validation
-          control=Control
-        )
-      }}
-    {{else}}
-      <Control />
-    {{/if}}
-  {{/let}}
-{{/component}}
+      invisibleLabel=this.invisibleLabel
+      formElementId=this.formElementId
+      controlType=this.controlType
+      formLayout=this.formLayout
+      size=@size
+    )
+    helpTextComponent=(if this.hasHelpText
+      (component this.helpTextComponent
+        text=@helpText
+        id=this.ariaDescribedBy
+      )
+    )
+  }}
+    {{#let
+      (component this.controlComponent
+        value=this.value
+        id=this.formElementId
+        type=this.controlType
+        label=@label
+        disabled=@disabled
+        readonly=@readonly
+        required=@required
+        options=this.options
+        optionLabelPath=this.optionLabelPath
+        ariaDescribedBy=(if this.hasHelpText this.ariaDescribedBy)
+        onChange=(action this.doChange)
+        validationType=this.validation
+        size=this.size
+    ) as |Control|}}
+      {{#if hasBlock}}
+        {{yield
+          (hash
+            value=this.value
+            id=this.formElementId
+            validation=this.validation
+            control=Control
+          )
+        }}
+      {{else}}
+        <Control />
+      {{/if}}
+    {{/let}}
+  {{/component}}
+</div>

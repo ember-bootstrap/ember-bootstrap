@@ -1,10 +1,11 @@
-import { layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { assert } from '@ember/debug';
 import { isBlank } from '@ember/utils';
 import FormElementLayout from '../layout';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/horizontal';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
 
 /**
 
@@ -13,6 +14,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @extends Components.FormElementLayout
  @private
  */
+@tagName("")
 @templateLayout(layout)
 export default class FormElementLayoutHorizontal extends FormElementLayout {
   /**
@@ -41,6 +43,29 @@ export default class FormElementLayoutHorizontal extends FormElementLayout {
     let parts = this.get('horizontalLabelGridClass').split('-');
     assert('horizontalInputGridClass must match format bootstrap grid column class', parts.length === 3);
     parts[2] = 12 - parts[2];
+    return parts.join('-');
+  }
+
+  /**
+   * Computed property that specifies the Bootstrap offset grid class for form controls within a horizontal layout
+   * form, that have no label.
+   *
+   * @property horizontalInputOffsetGridClass
+   * @type string
+   * @readonly
+   * @private
+   */
+  @computed('horizontalLabelGridClass')
+  get horizontalInputOffsetGridClass() {
+    if (isBlank(this.get('horizontalLabelGridClass'))) {
+      return undefined;
+    }
+    let parts = this.get('horizontalLabelGridClass').split('-');
+    if (hasBootstrapVersion(3)) {
+      parts.splice(2, 0, 'offset');
+    } else {
+      parts.splice(0, 1, 'offset');
+    }
     return parts.join('-');
   }
 }

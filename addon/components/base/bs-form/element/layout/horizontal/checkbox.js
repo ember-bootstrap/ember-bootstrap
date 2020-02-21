@@ -1,6 +1,6 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import FormElementLayoutVertical from '../vertical';
-import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/vertical/checkbox';
+import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/horizontal/checkbox';
 
 /**
 

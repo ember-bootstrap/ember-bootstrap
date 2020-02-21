@@ -1,4 +1,6 @@
-import { attributeBindings, tagName } from '@ember-decorators/component';
+import { action } from "@ember/object";
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import layout from 'ember-bootstrap/templates/components/bs-form/element/control/checkbox';
 import Control from '../control';
 
 /**
@@ -8,24 +10,11 @@ import Control from '../control';
  @extends Components.FormElementControl
  @private
  */
-@tagName('input')
-@attributeBindings(
-  'disabled',
-  'readonly',
-  'ariaDescribedBy:aria-describedby',
-  'value:checked',
-  'type'
-)
+@templateLayout(layout)
+@tagName("")
 export default class FormElementControlCheckbox extends Control {
-  /**
-   * @property type
-   * @type {String}
-   * @readonly
-   * @private
-   */
-  type = 'checkbox';
-
-  click(event) {
+  @action
+  handleClick(event) {
     this.get('onChange')(event.target.checked);
   }
 }

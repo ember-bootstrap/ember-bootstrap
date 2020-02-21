@@ -1,4 +1,4 @@
-import { layout as templateLayout } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/help-text';
 
@@ -9,5 +9,6 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/help-te
  @extends Ember.Component
  @private
  */
+@tagName("")
 @templateLayout(layout)
 export default class FormElementHelpText extends Component {}

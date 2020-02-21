@@ -1,13 +1,14 @@
-import { attributeBindings, classNameBindings, layout as templateLayout, tagName } from '@ember-decorators/component';
+import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { gt } from '@ember/object/computed';
 import Component from '@ember/component';
-import { action, set } from '@ember/object';
+import { computed, action, set } from '@ember/object';
 import { assert, warn } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import { schedule } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-form';
 import RSVP from 'rsvp';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -108,12 +109,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @public
 */
 @templateLayout(layout)
-@tagName('form')
-@classNameBindings('layoutClass')
-@attributeBindings('hasValidator:novalidate')
+@tagName("")
 export default class Form extends Component {
-  ariaRole = 'form';
-
   /**
    * Bootstrap form class name (computed)
    *
@@ -123,6 +120,15 @@ export default class Form extends Component {
    * @protected
    *
    */
+  @computed('formLayout')
+  get layoutClass() {
+    let layout = this.get('formLayout');
+    if (hasBootstrapVersion(3)) {
+      return layout === 'vertical' ? 'form' : `form-${layout}`;
+    } else {
+      return layout === 'inline' ? 'form-inline' : null;
+    }
+  }
 
   /**
    * Set a model that this form should represent. This serves several purposes:
@@ -439,11 +445,13 @@ export default class Form extends Component {
       )
   }
 
-  submit(event) {
+  @action
+  handleSubmit(event) {
     this.submitHandler(event, false);
   }
 
-  keyPress(e) {
+  @action
+  handleKeyPress(e) {
     let code = e.keyCode || e.which;
     if (code === 13 && this.get('submitOnEnter')) {
       this.triggerSubmit();
@@ -453,7 +461,7 @@ export default class Form extends Component {
   triggerSubmit() {
     let event = document.createEvent('Event');
     event.initEvent('submit', true, true);
-    this.get('element').dispatchEvent(event);
+    this._element.dispatchEvent(event);
   }
 
   init() {

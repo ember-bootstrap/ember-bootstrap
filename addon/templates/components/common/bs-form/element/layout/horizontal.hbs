@@ -2,14 +2,18 @@
   {{component @labelComponent labelClass=@horizontalLabelGridClass}}
   <div class={{this.horizontalInputGridClass}}>
     {{yield}}
-    {{component @feedbackIconComponent}}
+    {{#if (has-bootstrap-version 3)}}
+      {{component @feedbackIconComponent}}
+    {{/if}}
     {{component @errorsComponent}}
     {{component @helpTextComponent}}
   </div>
 {{else}}
   <div class="{{this.horizontalInputGridClass}} {{this.horizontalInputOffsetGridClass}}">
     {{yield}}
-    {{component @feedbackIconComponent}}
+    {{#if (has-bootstrap-version 3)}}
+      {{component @feedbackIconComponent}}
+    {{/if}}
     {{component @errorsComponent}}
     {{component @helpTextComponent}}
   </div>

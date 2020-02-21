@@ -1,8 +1,0 @@
-{{#if hasBlock}}
-  <label>
-    {{yield}}
-    {{@label}}
-  </label>
-{{else}}
-  <label class="control-label {{if this.invisibleLabel "sr-only"}} {{@labelClass}}" for={{@formElementId}}>{{@label}}</label>
-{{/if}}

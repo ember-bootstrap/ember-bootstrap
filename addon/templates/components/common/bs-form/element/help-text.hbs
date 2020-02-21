@@ -1,1 +1,7 @@
-{{@text}}
+<div
+  id={{@id}}
+  class={{if (has-bootstrap-version 3) "help-block" "form-text"}}
+  ...attributes
+>
+  {{@text}}
+</div>

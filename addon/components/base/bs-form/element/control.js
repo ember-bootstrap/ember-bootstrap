@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import formValidationClass from 'ember-bootstrap/utils/cp/form-validation-class';
 
 /**
 
@@ -14,6 +15,8 @@ export default class FormElementControl extends Component {
    * @public
    */
 
+  @formValidationClass('validationType')
+  formValidationClass;
 
   /**
    * @property ariaDescribedBy

@@ -2,6 +2,8 @@
   {{component @labelComponent}}
 {{/if}}
 {{yield}}
-{{component @feedbackIconComponent}}
+{{#if (has-bootstrap-version 3)}}
+  {{component @feedbackIconComponent}}
+{{/if}}
 {{component @errorsComponent}}
 {{component @helpTextComponent}}
