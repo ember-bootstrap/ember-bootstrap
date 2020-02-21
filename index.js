@@ -5,8 +5,6 @@ const mergeTrees = require('broccoli-merge-trees');
 const Funnel = require('broccoli-funnel');
 const stew = require('broccoli-stew');
 const replace = require('broccoli-string-replace');
-const mv = stew.mv;
-const rm = stew.rm;
 const map = stew.map;
 const rename = stew.rename;
 const BroccoliDebug = require('broccoli-debug');
@@ -231,18 +229,8 @@ module.exports = {
 
   treeForAddon(tree) {
     let bsVersion = this.getBootstrapVersion();
-    let otherBsVersion = this.getOtherBootstrapVersion();
-    let componentsPath = 'components/';
-    let templatePath = 'templates/components/';
 
     tree = this.debugTree(tree, 'addon-tree:input');
-    tree = mv(tree, `${componentsPath}bs${bsVersion}/`, componentsPath);
-    tree = rm(tree, `${componentsPath}bs${otherBsVersion}/**/*`);
-
-    tree = mv(tree, `${templatePath}common/`, templatePath);
-    tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
-    tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
-
     tree = replace(tree, {
       files: [ 'compatibility-helpers.js' ],
       pattern: {
@@ -251,7 +239,6 @@ module.exports = {
       }
     });
 
-    tree = this.debugTree(tree, 'addon-tree:bootstrap-version');
     tree = this.filterComponents(tree);
     tree = this.debugTree(tree, 'addon-tree:tree-shaken');
 
@@ -264,16 +251,7 @@ module.exports = {
     https://github.com/kaliber5/ember-bootstrap/pull/883
   */
   treeForAddonTemplates(tree) {
-    let bsVersion = this.getBootstrapVersion();
-    let otherBsVersion = this.getOtherBootstrapVersion();
-    let templatePath = 'components/';
-
     tree = this.debugTree(tree, 'addon-templates-tree:input');
-    tree = mv(tree, `${templatePath}common/`, templatePath);
-    tree = mv(tree, `${templatePath}bs${bsVersion}/`, templatePath);
-    tree = rm(tree, `${templatePath}bs${otherBsVersion}/**/*`);
-
-    tree = this.debugTree(tree, 'addon-templates-tree:bootstrap-version');
     tree = this.filterComponents(tree);
     tree = this.debugTree(tree, 'addon-templates-tree:tree-shaken');
 
