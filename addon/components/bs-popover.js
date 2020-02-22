@@ -107,6 +107,6 @@ export default class Popover extends ContextualHelp {
    */
   @computed('overlayElement')
   get arrowElement() {
-    return this.get('overlayElement').querySelector('.arrow');
+    return this.overlayElement.querySelector('.arrow');
   }
 }

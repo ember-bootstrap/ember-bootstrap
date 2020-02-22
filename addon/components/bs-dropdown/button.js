@@ -17,7 +17,7 @@ import { computed, action } from '@ember/object';
 export default class DropdownButton extends Button {
   @action
   handleKeyDown(e) {
-    this.get('onKeyDown')(e);
+    this.onKeyDown(e);
   }
 
   @computed('isOpen')

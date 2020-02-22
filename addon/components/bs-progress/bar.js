@@ -131,9 +131,9 @@ export default class ProgressBar extends Component {
    */
   @(computed('value', 'minValue', 'maxValue').readOnly())
   get percent() {
-    let value = parseFloat(this.get('value'));
-    let minValue = parseFloat(this.get('minValue'));
-    let maxValue = parseFloat(this.get('maxValue'));
+    let value = parseFloat(this.value);
+    let minValue = parseFloat(this.minValue);
+    let maxValue = parseFloat(this.maxValue);
 
     return Math.min(Math.max((value - minValue) / (maxValue - minValue), 0), 1) * 100;
   }
@@ -148,8 +148,8 @@ export default class ProgressBar extends Component {
    */
   @(computed('percent', 'roundDigits').readOnly())
   get percentRounded() {
-    let roundFactor = Math.pow(10, this.get('roundDigits'));
-    return Math.round(this.get('percent') * roundFactor) / roundFactor;
+    let roundFactor = Math.pow(10, this.roundDigits);
+    return Math.round(this.percent * roundFactor) / roundFactor;
   }
 
   get percentStyleValue() {

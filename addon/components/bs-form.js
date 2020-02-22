@@ -122,7 +122,7 @@ export default class Form extends Component {
    */
   @computed('formLayout')
   get layoutClass() {
-    let layout = this.get('formLayout');
+    let layout = this.formLayout;
     if (hasBootstrapVersion(3)) {
       return layout === 'vertical' ? 'form' : `form-${layout}`;
     } else {
@@ -369,38 +369,38 @@ export default class Form extends Component {
       e.preventDefault();
     }
 
-    if (this.get('preventConcurrency') && this.get('isSubmitting')) {
+    if (this.preventConcurrency && this.isSubmitting) {
       return RSVP.resolve();
     }
 
-    let model = this.get('model');
+    let model = this.model;
 
     this.incrementProperty('pendingSubmissions');
-    this.get('onBefore')(model);
+    this.onBefore(model);
 
     return RSVP.resolve()
       .then(() => {
-        return this.get('hasValidator') ? this.validate(model) : null;
+        return this.hasValidator ? this.validate(model) : null;
       })
       .then(
         (record) => {
-          if (this.get('hideValidationsOnSubmit') === true) {
+          if (this.hideValidationsOnSubmit === true) {
             this.set('showAllValidations', false);
           }
 
           return RSVP.resolve()
             .then(() => {
-              return this.get('onSubmit')(model, record);
+              return this.onSubmit(model, record);
             })
             .then(() => {
-              if (this.get('isDestroyed')) {
+              if (this.isDestroyed) {
                 return;
               }
 
               this.set('isSubmitted', true);
             })
             .catch((error) => {
-              if (this.get('isDestroyed')) {
+              if (this.isDestroyed) {
                 return;
               }
 
@@ -409,14 +409,14 @@ export default class Form extends Component {
               throw error;
             })
             .finally(() => {
-              if (this.get('isDestroyed')) {
+              if (this.isDestroyed) {
                 return;
               }
 
               this.decrementProperty('pendingSubmissions');
 
               // reset forced hiding of validations
-              if (this.get('showAllValidations') === false) {
+              if (this.showAllValidations === false) {
                 schedule('afterRender', () => this.set('showAllValidations', undefined));
               }
             });
@@ -424,17 +424,17 @@ export default class Form extends Component {
         (error) => {
           return RSVP.resolve()
             .then(() => {
-              return this.get('onInvalid')(model, error);
+              return this.onInvalid(model, error);
             })
             .finally(() => {
-              if (this.get('isDestroyed')) {
+              if (this.isDestroyed) {
                 return;
               }
 
               this.setProperties({
                 showAllValidations: true,
                 isRejected: true,
-                pendingSubmissions: this.get('pendingSubmissions') - 1
+                pendingSubmissions: this.pendingSubmissions - 1
               });
 
               if (throwValidationErrors) {
@@ -442,7 +442,7 @@ export default class Form extends Component {
               }
             });
         }
-      )
+      );
   }
 
   @action
@@ -453,7 +453,7 @@ export default class Form extends Component {
   @action
   handleKeyPress(e) {
     let code = e.keyCode || e.which;
-    if (code === 13 && this.get('submitOnEnter')) {
+    if (code === 13 && this.submitOnEnter) {
       this.triggerSubmit();
     }
   }
@@ -467,7 +467,7 @@ export default class Form extends Component {
   init() {
     super.init(...arguments);
 
-    let formLayout = this.get('formLayout');
+    let formLayout = this.formLayout;
     assert(`Invalid formLayout property given: ${formLayout}`, ['vertical', 'horizontal', 'inline'].indexOf(formLayout) >= 0);
 
     warn(

@@ -461,17 +461,17 @@ export default class FormElement extends FormGroup {
     'showModelValidation'
   )
   get validationMessages() {
-    if (this.get('hasCustomError')) {
-      return A([this.get('customError')]);
+    if (this.hasCustomError) {
+      return A([this.customError]);
     }
-    if (this.get('hasErrors') && this.get('showModelValidation')) {
-      return A(this.get('errors'));
+    if (this.hasErrors && this.showModelValidation) {
+      return A(this.errors);
     }
-    if (this.get('hasCustomWarning')) {
-      return A([this.get('customWarning')]);
+    if (this.hasCustomWarning) {
+      return A([this.customWarning]);
     }
-    if (this.get('hasWarnings') && this.get('showModelValidation')) {
-      return A(this.get('warnings'));
+    if (this.hasWarnings && this.showModelValidation) {
+      return A(this.warnings);
     }
     return null;
   }
@@ -586,7 +586,7 @@ export default class FormElement extends FormGroup {
    */
   @computed('showValidationOn.[]')
   get _showValidationOn() {
-    let showValidationOn = this.get('showValidationOn');
+    let showValidationOn = this.showValidationOn;
 
     assert('showValidationOn must be a String or an Array', isArray(showValidationOn) || typeOf(showValidationOn) === 'string');
     if (isArray(showValidationOn)) {
@@ -611,14 +611,14 @@ export default class FormElement extends FormGroup {
     // Should not do anything if
     if (
       // validations are already shown or
-      this.get('showOwnValidation') ||
+      this.showOwnValidation ||
       // validations should not be shown for this event type or
-      this.get('_showValidationOn').indexOf(type) === -1 ||
+      this._showValidationOn.indexOf(type) === -1 ||
       // validation should not be shown for this event target
       (
-        isArray(this.get('doNotShowValidationForEventTargets')) &&
+        isArray(this.doNotShowValidationForEventTargets) &&
         this.get('doNotShowValidationForEventTargets.length') > 0 &&
-        [...this._element.querySelectorAll(this.get('doNotShowValidationForEventTargets').join(','))]
+        [...this._element.querySelectorAll(this.doNotShowValidationForEventTargets.join(','))]
           .some((el) => el.contains(target))
       )
     ) {
@@ -665,14 +665,14 @@ export default class FormElement extends FormGroup {
     'disabled'
   )
   get validation() {
-    if (!this.get('showValidation') || !this.get('hasValidator') || this.get('isValidating') || this.get('disabled')) {
+    if (!this.showValidation || !this.hasValidator || this.isValidating || this.disabled) {
       return null;
-    } else if (this.get('showModelValidation')) {
+    } else if (this.showModelValidation) {
       /* The display of model validation messages has been triggered */
-      return this.get('hasErrors') || this.get('hasCustomError') ? 'error' : (this.get('hasWarnings') || this.get('hasCustomWarning') ? 'warning' : 'success');
+      return this.hasErrors || this.hasCustomError ? 'error' : (this.hasWarnings || this.hasCustomWarning ? 'warning' : 'success');
     } else {
       /* If there are custom errors or warnings these should always be shown */
-      return this.get('hasCustomError') ? 'error' : 'warning';
+      return this.hasCustomError ? 'error' : 'warning';
     }
   }
 
@@ -754,9 +754,9 @@ export default class FormElement extends FormGroup {
    */
   @computed('formLayout', 'controlType')
   get layoutComponent() {
-    const formComponent = this.get('formComponent');
-    const formLayout = this.get('formLayout');
-    const controlType = this.get('controlType');
+    const formComponent = this.formComponent;
+    const formLayout = this.formLayout;
+    const controlType = this.controlType;
 
     if (nonDefaultLayouts.includes(controlType)) {
       return `${formComponent}/element/layout/${formLayout}/${controlType}`;
@@ -772,8 +772,8 @@ export default class FormElement extends FormGroup {
    */
   @computed('controlType')
   get controlComponent() {
-    const formComponent = this.get('formComponent');
-    const controlType = this.get('controlType');
+    const formComponent = this.formComponent;
+    const controlType = this.controlType;
     const componentName = `${formComponent}/element/control/${controlType}`;
 
     if (getOwner(this).hasRegistration(`component:${componentName}`)) {
@@ -806,7 +806,7 @@ export default class FormElement extends FormGroup {
    */
   @computed('controlType')
   get labelComponent() {
-    return hasBootstrapVersion(3) ? 'bs-form/element/label' : this.get('controlType') === 'radio' ? 'bs-form/element/legend' : 'bs-form/element/label';
+    return hasBootstrapVersion(3) ? 'bs-form/element/label' : this.controlType === 'radio' ? 'bs-form/element/legend' : 'bs-form/element/label';
   }
 
   /**
@@ -848,12 +848,12 @@ export default class FormElement extends FormGroup {
 
   init() {
     super.init(...arguments);
-    if (this.get('showValidationOn') === null) {
+    if (this.showValidationOn === null) {
       this.set('showValidationOn', ['focusOut']);
     }
-    if (!isBlank(this.get('property'))) {
-      assert('You cannot set both property and value on a form element', this.get('value') === null || this.get('value') === undefined);
-      defineProperty(this, 'value', alias(`model.${this.get('property')}`));
+    if (!isBlank(this.property)) {
+      assert('You cannot set both property and value on a form element', this.value === null || this.value === undefined);
+      defineProperty(this, 'value', alias(`model.${this.property}`));
       this.setupValidations();
     }
 
@@ -932,8 +932,8 @@ export default class FormElement extends FormGroup {
     if (hasBootstrapVersion(3)) {
       let feedbackIcon;
       // validation state icons are only shown if form element has feedback
-      if (!this.get('isDestroying')
-        && this.get('hasFeedback')
+      if (!this.isDestroying
+        && this.hasFeedback
         // and form group element has
         // an input-group
         && el.querySelector('.input-group')
@@ -963,7 +963,7 @@ export default class FormElement extends FormGroup {
 
   @action
   doChange(value) {
-    let { onChange, model, property, _onChange } = this.getProperties('onChange', 'model', 'property', '_onChange');
+    let { onChange, model, property, _onChange } = this;
     onChange(value, model, property);
     _onChange();
   }

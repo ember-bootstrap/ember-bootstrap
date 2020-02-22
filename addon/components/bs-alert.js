@@ -54,7 +54,7 @@ export default class Alert extends Component {
    * @private
    */
   @defaultValue
-  hidden = !this.get('_visible');
+  hidden = !this._visible;
 
   /**
    * This property controls if the alert should be visible. If false it might still be in the DOM until the fade animation
@@ -169,7 +169,7 @@ export default class Alert extends Component {
 
   @action
   dismiss() {
-    if (this.get('onDismiss')() !== false) {
+    if (this.onDismiss() !== false) {
       this.set('_visible', false);
     }
   }
@@ -192,21 +192,21 @@ export default class Alert extends Component {
    * @private
    */
   hide() {
-    if (this.get('usesTransition')) {
+    if (this.usesTransition) {
       later(this, function() {
-        if (!this.get('isDestroyed')) {
+        if (!this.isDestroyed) {
           this.set('hidden', true);
-          this.get('onDismissed')();
+          this.onDismissed();
         }
-      }, this.get('fadeDuration'));
+      }, this.fadeDuration);
     } else {
       this.set('hidden', true);
-      this.get('onDismissed')();
+      this.onDismissed();
     }
   }
 
   _observeIsVisible() {
-    if (this.get('_visible')) {
+    if (this._visible) {
       this.show();
     } else {
       this.hide();

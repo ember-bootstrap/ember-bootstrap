@@ -39,7 +39,7 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    */
   @(computed('currentSlide').readOnly())
   get isCurrentSlide() {
-    return this.get('currentSlide') === this;
+    return this.currentSlide === this;
   }
 
   /**
@@ -49,7 +49,7 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    */
   @(computed('followingSlide').readOnly())
   get isFollowingSlide() {
-    return this.get('followingSlide') === this;
+    return this.followingSlide === this;
   }
 
   /**
@@ -96,8 +96,8 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    */
   @observes('presentationState')
   presentationStateObserver() {
-    let presentationState = this.get('presentationState');
-    if (this.get('isCurrentSlide')) {
+    let presentationState = this.presentationState;
+    if (this.isCurrentSlide) {
       switch (presentationState) {
         case 'didTransition':
           this.currentSlideDidTransition();
@@ -107,7 +107,7 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
           break;
       }
     }
-    if (this.get('isFollowingSlide')) {
+    if (this.isFollowingSlide) {
       switch (presentationState) {
         case 'didTransition':
           this.followingSlideDidTransition();
@@ -124,7 +124,7 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    * @private
    */
   currentSlideDidTransition() {
-    this.set(this.get('directionalClassName'), false);
+    this.set(this.directionalClassName, false);
     this.set('active', false);
   }
 
@@ -135,7 +135,7 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
   currentSlideWillTransit() {
     this.set('active', true);
     next(this, function() {
-      this.set(this.get('directionalClassName'), true);
+      this.set(this.directionalClassName, true);
     });
   }
 
@@ -145,8 +145,8 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    */
   followingSlideDidTransition() {
     this.set('active', true);
-    this.set(this.get('directionalClassName'), false);
-    this.set(this.get('orderClassName'), false);
+    this.set(this.directionalClassName, false);
+    this.set(this.orderClassName, false);
   }
 
   /**
@@ -154,10 +154,10 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    * @private
    */
   followingSlideWillTransit() {
-    this.set(this.get('orderClassName'), true);
+    this.set(this.orderClassName, true);
     next(this, function() {
       this.reflow();
-      this.set(this.get('directionalClassName'), true);
+      this.set(this.directionalClassName, true);
     });
   }
 

@@ -86,7 +86,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 export default class Nav extends Component {
   @computed('type')
   get typeClass() {
-    let type = this.get('type');
+    let type = this.type;
     return type ? `nav-${type}` : undefined;
   }
 

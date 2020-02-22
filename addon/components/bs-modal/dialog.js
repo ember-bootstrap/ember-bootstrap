@@ -29,7 +29,7 @@ export default class ModalDialog extends Component {
    */
   @(computed('size').readOnly())
   get sizeClass() {
-    let size = this.get('size');
+    let size = this.size;
     return isBlank(size) ? null : `modal-${size}`;
   }
 
@@ -61,7 +61,7 @@ export default class ModalDialog extends Component {
         nodeId = titleNode.id;
         if (!nodeId) {
           //no title id so we set one
-          nodeId = `${this.get('id')}-title`;
+          nodeId = `${this.id}-title`;
           titleNode.id = nodeId;
         }
       }
@@ -107,8 +107,8 @@ export default class ModalDialog extends Component {
   @action
   handleKeyDown(e) {
     let code = e.keyCode || e.which;
-    if (code === 27 && this.get('keyboard')) {
-      this.get('onClose')();
+    if (code === 27 && this.keyboard) {
+      this.onClose();
     }
   }
 
@@ -118,10 +118,10 @@ export default class ModalDialog extends Component {
       this.set('ignoreBackdropClick', false);
       return;
     }
-    if (e.target !== this._element || !this.get('backdropClose')) {
+    if (e.target !== this._element || !this.backdropClose) {
       return;
     }
-    this.get('onClose')();
+    this.onClose();
   }
 
   @action

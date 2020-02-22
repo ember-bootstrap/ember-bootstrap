@@ -88,6 +88,6 @@ export default class ModalFooter extends Component {
   handleSubmit(e) {
     e.preventDefault();
     // send to parent bs-modal component
-    this.get('onSubmit')();
+    this.onSubmit();
   }
 }

@@ -210,7 +210,7 @@ export default class FormGroup extends Component {
    */
   @(computed('validation').readOnly())
   get iconName() {
-    let validation = this.get('validation') || 'success';
+    let validation = this.validation || 'success';
     return this.get(`${validation}Icon`);
   }
 
@@ -235,7 +235,7 @@ export default class FormGroup extends Component {
    */
   @(computed('validation').readOnly())
   get validationClass() {
-    let validation = this.get('validation');
+    let validation = this.validation;
     return !isBlank(validation) ? `has-${validation}` : undefined;
   }
 

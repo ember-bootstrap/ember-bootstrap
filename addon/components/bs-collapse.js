@@ -50,7 +50,7 @@ export default class Collapse extends Component {
    * @private
    */
   @defaultValue
-  active = !this.get('collapsed');
+  active = !this.collapsed;
 
   @not('transitioning')
   collapse;
@@ -127,7 +127,7 @@ export default class Collapse extends Component {
   collapseSize = null;
 
   setCollapseSize(size) {
-    let dimension = this.get('collapseDimension');
+    let dimension = this.collapseDimension;
 
     assert(`collapseDimension must be either "width" or "height". ${dimension} given.`, ["width", "height"].indexOf(dimension) !== -1);
 
@@ -173,27 +173,27 @@ export default class Collapse extends Component {
    * @protected
    */
   show() {
-    this.get('onShow')();
+    this.onShow();
 
     this.setProperties({
       transitioning: true,
       active: true
     });
-    this.setCollapseSize(this.get('collapsedSize'));
+    this.setCollapseSize(this.collapsedSize);
 
-    transitionEnd(this._element, this.get('transitionDuration')).then(() => {
-      if (this.get('isDestroyed')) {
+    transitionEnd(this._element, this.transitionDuration).then(() => {
+      if (this.isDestroyed) {
         return;
       }
       this.set('transitioning', false);
-      if (this.get('resetSizeWhenNotCollapsing')) {
+      if (this.resetSizeWhenNotCollapsing) {
         this.setCollapseSize(null);
       }
-      this.get('onShown')();
+      this.onShown();
     });
 
     next(this, function() {
-      if (!this.get('isDestroyed')) {
+      if (!this.isDestroyed) {
         this.setCollapseSize(this.getExpandedSize('show'));
       }
     });
@@ -208,14 +208,14 @@ export default class Collapse extends Component {
    * @private
    */
   getExpandedSize(action) {
-    let expandedSize = this.get('expandedSize');
+    let expandedSize = this.expandedSize;
     if (isPresent(expandedSize)) {
       return expandedSize;
     }
 
     let collapseElement = this._element;
     let prefix = action === 'show' ? 'scroll' : 'offset';
-    let measureProperty = camelize(`${prefix}-${this.get('collapseDimension')}`);
+    let measureProperty = camelize(`${prefix}-${this.collapseDimension}`);
     return collapseElement[measureProperty];
   }
 
@@ -226,7 +226,7 @@ export default class Collapse extends Component {
    * @protected
    */
   hide() {
-    this.get('onHide')();
+    this.onHide();
 
     this.setProperties({
       transitioning: true,
@@ -234,27 +234,27 @@ export default class Collapse extends Component {
     });
     this.setCollapseSize(this.getExpandedSize('hide'));
 
-    transitionEnd(this._element, this.get('transitionDuration')).then(() => {
-      if (this.get('isDestroyed')) {
+    transitionEnd(this._element, this.transitionDuration).then(() => {
+      if (this.isDestroyed) {
         return;
       }
       this.set('transitioning', false);
-      if (this.get('resetSizeWhenNotCollapsing')) {
+      if (this.resetSizeWhenNotCollapsing) {
         this.setCollapseSize(null);
       }
-      this.get('onHidden')();
+      this.onHidden();
     });
 
     next(this, function() {
-      if (!this.get('isDestroyed')) {
-        this.setCollapseSize(this.get('collapsedSize'));
+      if (!this.isDestroyed) {
+        this.setCollapseSize(this.collapsedSize);
       }
     });
   }
 
   _onCollapsedChange() {
-    let collapsed = this.get('collapsed');
-    let active = this.get('active');
+    let collapsed = this.collapsed;
+    let active = this.active;
     if (collapsed !== active) {
       return;
     }
@@ -266,14 +266,14 @@ export default class Collapse extends Component {
   }
 
   _updateCollapsedSize() {
-    if (!this.get('resetSizeWhenNotCollapsing') && this.get('collapsed') && !this.get('collapsing')) {
-      this.setCollapseSize(this.get('collapsedSize'));
+    if (!this.resetSizeWhenNotCollapsing && this.collapsed && !this.collapsing) {
+      this.setCollapseSize(this.collapsedSize);
     }
   }
 
   _updateExpandedSize() {
-    if (!this.get('resetSizeWhenNotCollapsing') && !this.get('collapsed') && !this.get('collapsing')) {
-      this.setCollapseSize(this.get('expandedSize'));
+    if (!this.resetSizeWhenNotCollapsing && !this.collapsed && !this.collapsing) {
+      this.setCollapseSize(this.expandedSize);
     }
   }
 

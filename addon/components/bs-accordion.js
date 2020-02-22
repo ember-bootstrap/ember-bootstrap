@@ -83,11 +83,11 @@ export default class Accordion extends Component {
 
   @action
   doChange(newValue) {
-    let oldValue = this.get('isSelected');
+    let oldValue = this.isSelected;
     if (oldValue === newValue) {
       newValue = null;
     }
-    if (this.get('onChange')(newValue, oldValue) !== false) {
+    if (this.onChange(newValue, oldValue) !== false) {
       this.set('isSelected', newValue);
     }
   }

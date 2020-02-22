@@ -22,6 +22,6 @@ export default class ModalHeaderClose extends Component {
 
   @action
   handleClick() {
-    this.get('onClick')();
+    this.onClick();
   }
 }

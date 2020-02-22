@@ -35,8 +35,8 @@ export default class ButtonGroupButton extends Button {
    */
   @(computed('buttonGroupType', 'groupValue.[]', 'value').readOnly())
   get active() {
-    let { value, groupValue } = this.getProperties('value', 'groupValue');
-    if (this.get('buttonGroupType') === 'radio') {
+    let { value, groupValue } = this;
+    if (this.buttonGroupType === 'radio') {
       return value === groupValue;
     } else {
       if (isArray(groupValue)) {

@@ -77,7 +77,7 @@ export default class ContextualHelp extends Component {
    * @private
    */
   @defaultValue
-  inDom = this.get('visible') && this.get('triggerTargetElement');
+  inDom = this.visible && this.triggerTargetElement;
 
   /**
    * Set to false to disable fade animations.
@@ -225,7 +225,7 @@ export default class ContextualHelp extends Component {
    */
   @computed('viewportSelector')
   get viewportElement() {
-    return document.querySelector(this.get('viewportSelector'));
+    return document.querySelector(this.viewportSelector);
   }
 
   /**
@@ -245,7 +245,7 @@ export default class ContextualHelp extends Component {
    * @private
    */
   getTriggerTargetElement() {
-    let triggerElement = this.get('triggerElement');
+    let triggerElement = this.triggerElement;
 
     if (!triggerElement) {
       return this._parent;
@@ -270,7 +270,7 @@ export default class ContextualHelp extends Component {
 
   @computed('triggerEvents')
   get _triggerEvents() {
-    let events = this.get('triggerEvents');
+    let events = this.triggerEvents;
     if (!isArray(events)) {
       events = events.split(' ');
     }
@@ -305,7 +305,7 @@ export default class ContextualHelp extends Component {
    */
   @computed('renderInPlace')
   get _renderInPlace() {
-    return this.get('renderInPlace') || !this.destinationElement;
+    return this.renderInPlace || !this.destinationElement;
   }
 
   /**
@@ -358,7 +358,7 @@ export default class ContextualHelp extends Component {
    * @private
    */
   get overlayElement() {
-    return document.getElementById(this.get('overlayId'));
+    return document.getElementById(this.overlayId);
   }
 
   /**
@@ -407,10 +407,10 @@ export default class ContextualHelp extends Component {
   enter(e) {
     if (e) {
       let eventType = e.type === 'focusin' ? 'focus' : 'hover';
-      this.get('inState').set(eventType, true);
+      this.inState.set(eventType, true);
     }
 
-    if (this.get('showHelp') || this.get('hoverState') === 'in') {
+    if (this.showHelp || this.hoverState === 'in') {
       this.set('hoverState', 'in');
       return;
     }
@@ -419,15 +419,15 @@ export default class ContextualHelp extends Component {
 
     this.set('hoverState', 'in');
 
-    if (!this.get('hasDelayShow')) {
+    if (!this.hasDelayShow) {
       return this.show();
     }
 
     this.timer = later(this, function() {
-      if (this.get('hoverState') === 'in') {
+      if (this.hoverState === 'in') {
         this.show();
       }
-    }, this.get('delayShow'));
+    }, this.delayShow);
   }
 
   /**
@@ -440,7 +440,7 @@ export default class ContextualHelp extends Component {
   leave(e) {
     if (e) {
       let eventType = e.type === 'focusout' ? 'focus' : 'hover';
-      this.get('inState').set(eventType, false);
+      this.inState.set(eventType, false);
     }
 
     if (this.get('inState.showHelp')) {
@@ -451,15 +451,15 @@ export default class ContextualHelp extends Component {
 
     this.set('hoverState', 'out');
 
-    if (!this.get('hasDelayHide')) {
+    if (!this.hasDelayHide) {
       return this.hide();
     }
 
     this.timer = later(this, function() {
-      if (this.get('hoverState') === 'out') {
+      if (this.hoverState === 'out') {
         this.hide();
       }
-    }, this.get('delayHide'));
+    }, this.delayHide);
   }
 
   /**
@@ -471,14 +471,14 @@ export default class ContextualHelp extends Component {
    */
   toggle(e) {
     if (e) {
-      this.get('inState').toggleProperty('click');
+      this.inState.toggleProperty('click');
       if (this.get('inState.showHelp')) {
         this.enter();
       } else {
         this.leave();
       }
     } else {
-      if (this.get('showHelp')) {
+      if (this.showHelp) {
         this.leave();
       } else {
         this.enter();
@@ -493,17 +493,17 @@ export default class ContextualHelp extends Component {
    * @private
    */
   show() {
-    if (this.get('isDestroyed') || this.get('isDestroying')) {
+    if (this.isDestroyed || this.isDestroying) {
       return;
     }
 
-    if (false === this.get('onShow')(this)) {
+    if (false === this.onShow(this)) {
       return;
     }
 
     // this waits for the tooltip/popover element to be created. when animating a wormholed tooltip/popover we need to wait until
     // ember-wormhole has moved things in the DOM for the animation to be correct, so use Ember.run.next in this case
-    let delayFn = !this.get('_renderInPlace') && this.get('fade') ? next : function(target, fn) {
+    let delayFn = !this._renderInPlace && this.fade ? next : function(target, fn) {
       schedule('afterRender', target, fn);
     };
 
@@ -528,12 +528,12 @@ export default class ContextualHelp extends Component {
     }
 
     let tooltipShowComplete = () => {
-      if (this.get('isDestroyed')) {
+      if (this.isDestroyed) {
         return;
       }
-      let prevHoverState = this.get('hoverState');
+      let prevHoverState = this.hoverState;
 
-      this.get('onShown')(this);
+      this.onShown(this);
       this.set('hoverState', null);
 
       if (prevHoverState === 'out') {
@@ -541,8 +541,8 @@ export default class ContextualHelp extends Component {
       }
     };
 
-    if (skipTransition === false && this.get('usesTransition')) {
-      transitionEnd(this.get('overlayElement'), this.get('transitionDuration'))
+    if (skipTransition === false && this.usesTransition) {
+      transitionEnd(this.overlayElement, this.transitionDuration)
         .then(tooltipShowComplete);
     } else {
       tooltipShowComplete();
@@ -559,7 +559,7 @@ export default class ContextualHelp extends Component {
    * @private
    */
   replaceArrow(delta, dimension, isVertical) {
-    let el = this.get('arrowElement');
+    let el = this.arrowElement;
     el.style[isVertical ? 'left' : 'top'] = `${50 * (1 - delta / dimension)}%`;
     el.style[isVertical ? 'top' : 'left'] = null;
   }
@@ -571,22 +571,22 @@ export default class ContextualHelp extends Component {
    * @private
    */
   hide() {
-    if (this.get('isDestroyed')) {
+    if (this.isDestroyed) {
       return;
     }
 
-    if (false === this.get('onHide')(this)) {
+    if (false === this.onHide(this)) {
       return;
     }
 
     let tooltipHideComplete = () => {
-      if (this.get('isDestroyed')) {
+      if (this.isDestroyed) {
         return;
       }
-      if (this.get('hoverState') !== 'in') {
+      if (this.hoverState !== 'in') {
         this.set('inDom', false);
       }
-      this.get('onHidden')(this);
+      this.onHidden(this);
     };
 
     this.set('showHelp', false);
@@ -600,8 +600,8 @@ export default class ContextualHelp extends Component {
       }
     }
 
-    if (this.get('usesTransition')) {
-      transitionEnd(this.get('overlayElement'), this.get('transitionDuration'))
+    if (this.usesTransition) {
+      transitionEnd(this.overlayElement, this.transitionDuration)
         .then(tooltipHideComplete);
     } else {
       tooltipHideComplete();
@@ -615,9 +615,9 @@ export default class ContextualHelp extends Component {
    * @private
    */
   addListeners() {
-    let target = this.get('triggerTargetElement');
+    let target = this.triggerTargetElement;
 
-    this.get('_triggerEvents')
+    this._triggerEvents
       .forEach((event) => {
         if (isArray(event)) {
           let [inEvent, outEvent] = event;
@@ -635,8 +635,8 @@ export default class ContextualHelp extends Component {
    */
   removeListeners() {
     try {
-      let target = this.get('triggerTargetElement');
-      this.get('_triggerEvents')
+      let target = this.triggerTargetElement;
+      this._triggerEvents
         .forEach((event) => {
           if (isArray(event)) {
             let [inEvent, outEvent] = event;
@@ -654,7 +654,7 @@ export default class ContextualHelp extends Component {
    * @private
    */
   handleTriggerEvent(handler, e) {
-    let overlayElement = this.get('overlayElement');
+    let overlayElement = this.overlayElement;
     if (overlayElement && overlayElement.contains(e.target)) {
       return;
     }
@@ -691,7 +691,7 @@ export default class ContextualHelp extends Component {
     this._parent = this._parentFinder.parentNode;
     this.triggerTargetElement = this.getTriggerTargetElement();
     this.addListeners();
-    if (this.get('visible')) {
+    if (this.visible) {
       next(this, this.show, true);
     }
   }
@@ -703,7 +703,7 @@ export default class ContextualHelp extends Component {
 
   @observes('visible')
   _watchVisible() {
-    if (this.get('visible')) {
+    if (this.visible) {
       this.show();
     } else {
       this.hide();

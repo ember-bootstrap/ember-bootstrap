@@ -37,10 +37,10 @@ export default class FormElementLayoutHorizontal extends FormElementLayout {
    */
   @(computed('horizontalLabelGridClass').readOnly())
   get horizontalInputGridClass() {
-    if (isBlank(this.get('horizontalLabelGridClass'))) {
+    if (isBlank(this.horizontalLabelGridClass)) {
       return undefined;
     }
-    let parts = this.get('horizontalLabelGridClass').split('-');
+    let parts = this.horizontalLabelGridClass.split('-');
     assert('horizontalInputGridClass must match format bootstrap grid column class', parts.length === 3);
     parts[2] = 12 - parts[2];
     return parts.join('-');
@@ -57,10 +57,10 @@ export default class FormElementLayoutHorizontal extends FormElementLayout {
    */
   @computed('horizontalLabelGridClass')
   get horizontalInputOffsetGridClass() {
-    if (isBlank(this.get('horizontalLabelGridClass'))) {
+    if (isBlank(this.horizontalLabelGridClass)) {
       return undefined;
     }
-    let parts = this.get('horizontalLabelGridClass').split('-');
+    let parts = this.horizontalLabelGridClass.split('-');
     if (hasBootstrapVersion(3)) {
       parts.splice(2, 0, 'offset');
     } else {

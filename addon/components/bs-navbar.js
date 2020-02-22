@@ -149,7 +149,7 @@ export default class Navbar extends Component {
 
   @computed('position')
   get positionClass() {
-    let position = this.get('position');
+    let position = this.position;
     let validPositions = hasBootstrapVersion(3) ? ['fixed-top', 'fixed-bottom', 'static-top'] : ['fixed-top', 'fixed-bottom', 'sticky-top'];
     let positionPrefix = hasBootstrapVersion(3) ? 'navbar-' : '';
 
@@ -227,8 +227,8 @@ export default class Navbar extends Component {
 
   @observes('_collapsed')
   _onCollapsedChange() {
-    let collapsed = this.get('_collapsed');
-    let active = this.get('active');
+    let collapsed = this._collapsed;
+    let active = this.active;
     if (collapsed !== active) {
       return;
     }
@@ -263,7 +263,7 @@ export default class Navbar extends Component {
 
   @action
   toggleNavbar() {
-    if (this.get('_collapsed')) {
+    if (this._collapsed) {
       this.expand();
     } else {
       this.collapse();
@@ -301,7 +301,7 @@ export default class Navbar extends Component {
     if (hasBootstrapVersion(3)) {
       return undefined;
     } else {
-      let toggleBreakpoint = this.get('toggleBreakpoint');
+      let toggleBreakpoint = this.toggleBreakpoint;
 
       if (isBlank(toggleBreakpoint)) {
         return 'navbar-expand';

@@ -66,12 +66,12 @@ export default class FormElementControlInput extends Control {
 
   @action
   handleChange(event) {
-    this.get('onChange')(event.target.value);
+    this.onChange(event.target.value);
   }
 
   @action
   handleInput(event) {
-    this.get('onChange')(event.target.value);
+    this.onChange(event.target.value);
   }
 
   /**

@@ -181,13 +181,13 @@ export default class ButtonGroup extends Component {
   buttonPressed(pressedValue) {
     let newValue;
 
-    if (this.get('isRadio')) {
+    if (this.isRadio) {
       newValue = pressedValue;
     } else {
-      if (!isArray(this.get('value'))) {
+      if (!isArray(this.value)) {
         newValue = A([pressedValue]);
       } else {
-        newValue = A(this.get('value').slice());
+        newValue = A(this.value.slice());
         if (newValue.includes(pressedValue)) {
           newValue.removeObject(pressedValue);
         } else {
@@ -196,6 +196,6 @@ export default class ButtonGroup extends Component {
       }
     }
 
-    this.get('onChange')(newValue);
+    this.onChange(newValue);
   }
 }

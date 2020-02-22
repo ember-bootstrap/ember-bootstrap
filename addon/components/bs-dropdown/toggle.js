@@ -44,11 +44,11 @@ export default class DropdownToggle extends Component {
   @action
   handleClick(e) {
     e.preventDefault();
-    this.get('onClick')();
+    this.onClick();
   }
 
   @action
   handleKeyDown(e) {
-    this.get('onKeyDown')(e);
+    this.onKeyDown(e);
   }
 }

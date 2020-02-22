@@ -70,7 +70,7 @@ export default class AccordionItem extends Component {
    */
   @(computed('value', 'selected').readOnly())
   get collapsed() {
-    return this.get('value') !== this.get('selected');
+    return this.value !== this.selected;
   }
 
   /**

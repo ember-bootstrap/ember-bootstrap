@@ -9,7 +9,7 @@ export default function typeClass(prefix, typeProperty) {
     let type = this.get(typeProperty) || 'default';
     assert('The value of `type` must be a string', typeof type === 'string' && type !== '');
 
-    if (this.get('outline')) {
+    if (this.outline) {
       return `${prefix}-outline-${type}`;
     }
     return `${prefix}-${type}`;

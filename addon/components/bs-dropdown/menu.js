@@ -73,10 +73,8 @@ export default class DropdownMenu extends Component {
    */
   @computed('renderInPlace')
   get _renderInPlace() {
-    return (
-      this.get('renderInPlace') ||
-      !this.destinationElement
-    );
+    return this.renderInPlace ||
+    !this.destinationElement;
   }
 
   /**
@@ -94,7 +92,7 @@ export default class DropdownMenu extends Component {
 
   @computed('align')
   get alignClass() {
-    return this.get('align') !== 'left' ? `dropdown-menu-${this.get('align')}` : undefined;
+    return this.align !== 'left' ? `dropdown-menu-${this.align}` : undefined;
   }
 
   @computed
@@ -106,7 +104,7 @@ export default class DropdownMenu extends Component {
     // delay removing the menu from DOM to allow (delegated Ember) event to fire for the menu's children
     // Fixes https://github.com/kaliber5/ember-bootstrap/issues/660
     next(() => {
-      if (this.get('isDestroying') || this.get('isDestroyed')) {
+      if (this.isDestroying || this.isDestroyed) {
         return;
       }
       this.set('_isOpen', value);
@@ -121,7 +119,7 @@ export default class DropdownMenu extends Component {
   @computed('direction', 'align')
   get popperPlacement() {
     let placement = 'bottom-start';
-    let { direction, align } = this.getProperties('direction', 'align');
+    let { direction, align } = this;
 
     if (direction === 'up') {
       placement = 'top-start';
@@ -140,7 +138,7 @@ export default class DropdownMenu extends Component {
 
   @action
   setFocus() {
-    let menuElement = document.getElementById(`${this.get('dropdownElementId')}__menu`);
+    let menuElement = document.getElementById(`${this.dropdownElementId}__menu`);
     if (menuElement) {
       menuElement.focus();
     }
@@ -151,10 +149,10 @@ export default class DropdownMenu extends Component {
     return {
       // @todo add offset config
       applyStyle: {
-        enabled: !this.get('inNav')
+        enabled: !this.inNav
       },
       flip: {
-        enabled: this.get('flip')
+        enabled: this.flip
       }
     };
   }
