@@ -38,7 +38,7 @@ export default Mixin.create({ // eslint-disable-line ember/no-new-mixins
    */
   _registerWithParent() {
     if (!this._didRegister) {
-      let parent = this.get('_parent');
+      let parent = this._parent;
       if (parent) {
         parent.registerChild(this);
         this._didRegister = true;
@@ -53,7 +53,7 @@ export default Mixin.create({ // eslint-disable-line ember/no-new-mixins
    * @private
    */
   _unregisterFromParent() {
-    let parent = this.get('_parent');
+    let parent = this._parent;
     if (this._didRegister && parent) {
       parent.removeChild(this);
       this._didRegister = false;

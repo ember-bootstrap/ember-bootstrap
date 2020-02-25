@@ -15,6 +15,6 @@ import Control from '../control';
 export default class FormElementControlCheckbox extends Control {
   @action
   handleClick(event) {
-    this.get('onChange')(event.target.checked);
+    this.onChange(event.target.checked);
   }
 }

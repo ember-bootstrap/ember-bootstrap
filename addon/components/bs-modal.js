@@ -293,7 +293,7 @@ export default class Modal extends Component {
    */
   @computed('renderInPlace', 'destinationElement')
   get _renderInPlace() {
-    return this.get('renderInPlace') || !this.destinationElement;
+    return this.renderInPlace || !this.destinationElement;
   }
 
   /**
@@ -338,7 +338,7 @@ export default class Modal extends Component {
    * @private
    */
   get modalElement() {
-    return document.getElementById(this.get('modalId'));
+    return document.getElementById(this.modalId);
   }
 
   /**
@@ -350,7 +350,7 @@ export default class Modal extends Component {
    * @private
    */
   get backdropElement() {
-    return document.getElementById(this.get('backdropId'));
+    return document.getElementById(this.backdropId);
   }
 
   /**
@@ -419,7 +419,7 @@ export default class Modal extends Component {
 
   @action
   close() {
-    if (this.get('onHide')() !== false) {
+    if (this.onHide() !== false) {
       this.set('isOpen', false);
     }
   }
@@ -427,8 +427,8 @@ export default class Modal extends Component {
   @action
   doSubmit() {
     // replace modalId by :scope selector if supported by all target browsers
-    let modalId = this.get('modalId');
-    let forms = this.get('modalElement').querySelectorAll(`#${modalId} .modal-body form`);
+    let modalId = this.modalId;
+    let forms = this.modalElement.querySelectorAll(`#${modalId} .modal-body form`);
     if (forms.length > 0) {
       // trigger submit event on body forms
       let event = document.createEvent('Events');
@@ -436,7 +436,7 @@ export default class Modal extends Component {
       Array.prototype.slice.call(forms).forEach((form) => form.dispatchEvent(event));
     } else {
       // if we have no form, we send a submit action
-      this.get('onSubmit')();
+      this.onSubmit();
     }
   }
 
@@ -457,7 +457,7 @@ export default class Modal extends Component {
     this.resize();
 
     let callback = () => {
-      if (this.get('isDestroyed')) {
+      if (this.isDestroyed) {
         return;
       }
 
@@ -465,7 +465,7 @@ export default class Modal extends Component {
       this.setScrollbar();
 
       schedule('afterRender', () => {
-        let modalEl = this.get('modalElement');
+        let modalEl = this.modalElement;
         if (!modalEl) {
           return;
         }
@@ -473,19 +473,19 @@ export default class Modal extends Component {
         modalEl.scrollTop = 0;
         this.handleUpdate();
         this.set('showModal', true);
-        this.get('onShow')();
+        this.onShow();
 
-        if (this.get('usesTransition')) {
-          transitionEnd(this.get('modalElement'), this.get('transitionDuration'))
+        if (this.usesTransition) {
+          transitionEnd(this.modalElement, this.transitionDuration)
             .then(() => {
-              this.get('onShown')();
+              this.onShown();
             });
         } else {
-          this.get('onShown')();
+          this.onShown();
         }
       });
     };
-    if (this.get('inDom') !== true) {
+    if (this.inDom !== true) {
       this.set('inDom', true);
     }
     this.handleBackdrop(callback);
@@ -506,8 +506,8 @@ export default class Modal extends Component {
     this.resize();
     this.set('showModal', false);
 
-    if (this.get('usesTransition')) {
-      transitionEnd(this.get('modalElement'), this.get('transitionDuration'))
+    if (this.usesTransition) {
+      transitionEnd(this.modalElement, this.transitionDuration)
         .then(() => this.hideModal());
     } else {
       this.hideModal();
@@ -521,7 +521,7 @@ export default class Modal extends Component {
    * @private
    */
   hideModal() {
-    if (this.get('isDestroyed')) {
+    if (this.isDestroyed) {
       return;
     }
 
@@ -530,7 +530,7 @@ export default class Modal extends Component {
       this.resetAdjustments();
       this.resetScrollbar();
       this.set('inDom', false);
-      this.get('onHidden')();
+      this.onHidden();
     });
   }
 
@@ -542,9 +542,9 @@ export default class Modal extends Component {
    * @private
    */
   handleBackdrop(callback) {
-    let doAnimate = this.get('usesTransition');
+    let doAnimate = this.usesTransition;
 
-    if (this.get('isOpen') && this.get('backdrop')) {
+    if (this.isOpen && this.backdrop) {
       this.set('showBackdrop', true);
 
       if (!callback) {
@@ -552,22 +552,22 @@ export default class Modal extends Component {
       }
 
       schedule('afterRender', this, function() {
-        let backdrop = this.get('backdropElement');
+        let backdrop = this.backdropElement;
         assert('Backdrop element should be in DOM', backdrop);
         if (doAnimate) {
-          transitionEnd(backdrop, this.get('backdropTransitionDuration'))
+          transitionEnd(backdrop, this.backdropTransitionDuration)
             .then(callback);
         } else {
           callback();
         }
       });
 
-    } else if (!this.get('isOpen') && this.get('backdrop')) {
-      let backdrop = this.get('backdropElement');
+    } else if (!this.isOpen && this.backdrop) {
+      let backdrop = this.backdropElement;
       assert('Backdrop element should be in DOM', backdrop);
 
       let callbackRemove = () => {
-        if (this.get('isDestroyed')) {
+        if (this.isDestroyed) {
           return;
         }
         this.set('showBackdrop', false);
@@ -576,7 +576,7 @@ export default class Modal extends Component {
         }
       };
       if (doAnimate) {
-        transitionEnd(backdrop, this.get('backdropTransitionDuration'))
+        transitionEnd(backdrop, this.backdropTransitionDuration)
           .then(callbackRemove);
       } else {
         callbackRemove();
@@ -593,7 +593,7 @@ export default class Modal extends Component {
    * @private
    */
   resize() {
-    if (this.get('isOpen')) {
+    if (this.isOpen) {
       this._handleUpdate = bind(this, this.handleUpdate);
       window.addEventListener('resize', this._handleUpdate, false);
     } else {
@@ -614,10 +614,10 @@ export default class Modal extends Component {
    * @private
    */
   adjustDialog() {
-    let modalIsOverflowing = this.get('modalElement').scrollHeight > document.documentElement.clientHeight;
+    let modalIsOverflowing = this.modalElement.scrollHeight > document.documentElement.clientHeight;
     this.setProperties({
-      paddingLeft: !this.bodyIsOverflowing && modalIsOverflowing ? this.get('scrollbarWidth') : undefined,
-      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.get('scrollbarWidth') : undefined
+      paddingLeft: !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : undefined,
+      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : undefined
     });
   }
 
@@ -654,7 +654,7 @@ export default class Modal extends Component {
     let bodyPad = parseInt((document.body.style.paddingRight || 0), 10);
     this._originalBodyPad = document.body.style.paddingRight || '';
     if (this.bodyIsOverflowing) {
-      document.body.style.paddingRight = bodyPad + this.get('scrollbarWidth');
+      document.body.style.paddingRight = bodyPad + this.scrollbarWidth;
     }
   }
 
@@ -676,7 +676,7 @@ export default class Modal extends Component {
   get scrollbarWidth() {
     let scrollDiv = document.createElement('div');
     scrollDiv.className = 'modal-scrollbar-measure';
-    let modalEl = this.get('modalElement');
+    let modalEl = this.modalElement;
     modalEl.parentNode.insertBefore(scrollDiv, modalEl.nextSibling);
     let scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
     scrollDiv.parentNode.removeChild(scrollDiv);
@@ -685,7 +685,7 @@ export default class Modal extends Component {
 
   didInsertElement() {
     super.didInsertElement(...arguments);
-    if (this.get('isOpen')) {
+    if (this.isOpen) {
       this.show();
     }
   }
@@ -698,7 +698,7 @@ export default class Modal extends Component {
   }
 
   _observeOpen() {
-    if (this.get('isOpen')) {
+    if (this.isOpen) {
       this.show();
     } else {
       this.hide();
@@ -707,7 +707,7 @@ export default class Modal extends Component {
 
   init() {
     super.init(...arguments);
-    let { isOpen, backdrop, fade } = this.getProperties('isOpen', 'backdrop', 'fade');
+    let { isOpen, backdrop, fade } = this;
     let isFB = isFastBoot(this);
     if (fade === undefined) {
       fade = !isFB;

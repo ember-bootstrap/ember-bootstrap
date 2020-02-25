@@ -95,11 +95,11 @@ export default class NavItem extends Component.extend(ComponentParent) {
 
   init() {
     super.init(...arguments);
-    let { model, models } = this.getProperties('model', 'models');
+    let { model, models } = this;
     assert('You cannot pass both `@model` and `@models` to a nav item component!', !model || !models);
 
-    this.get('activeChildLinks');
-    this.get('disabledChildLinks');
+    this.activeChildLinks;
+    this.disabledChildLinks;
   }
 
   @observes('activeChildLinks.[]')
@@ -108,7 +108,7 @@ export default class NavItem extends Component.extend(ComponentParent) {
   }
 
   _updateActive() {
-    this.set('_active', this.get('hasActiveChildLinks'));
+    this.set('_active', this.hasActiveChildLinks);
   }
 
   @observes('disabledChildLinks.[]')
@@ -117,6 +117,6 @@ export default class NavItem extends Component.extend(ComponentParent) {
   }
 
   _updateDisabled() {
-    this.set('_disabled', this.get('hasDisabledChildLinks'));
+    this.set('_disabled', this.hasDisabledChildLinks);
   }
 }

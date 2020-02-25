@@ -6,6 +6,6 @@ export default function usesTransition(fadeProperty) {
   assert('You have to provide a fadeProperty for typeClass', typeof fadeProperty === 'string');
 
   return computed(fadeProperty, function() {
-    return !isFastBoot(this) && this.get('fade');
-  })
+    return !isFastBoot(this) && this.fade;
+  });
 }

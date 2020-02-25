@@ -243,7 +243,7 @@ export default class Tab extends Component.extend(ComponentParent) {
   @computed('childPanes.@each.{id,title,group}')
   get navItems() {
     let items = A();
-    this.get('childPanes').forEach((pane) => {
+    this.childPanes.forEach((pane) => {
       let groupTitle = pane.get('groupTitle');
       let item = pane.getProperties('id', 'title');
       if (isPresent(groupTitle)) {
@@ -268,8 +268,8 @@ export default class Tab extends Component.extend(ComponentParent) {
 
   @action
   select(id) {
-    let previous = this.get('isActiveId');
-    if (this.get('onChange')(id, previous) !== false) {
+    let previous = this.isActiveId;
+    if (this.onChange(id, previous) !== false) {
       // change active tab when `onChange` does not return false
       this.set('isActiveId', id);
     }

@@ -240,9 +240,9 @@ export default class Dropdown extends Component {
   @computed('toggleElement', 'direction')
   get containerClass() {
     if (this.hasButton && !this.toggleElement.classList.contains('btn-block')) {
-      return this.get('direction') !== 'down' ? `btn-group drop${this.get('direction')}` : 'btn-group';
+      return this.direction !== 'down' ? `btn-group drop${this.direction}` : 'btn-group';
     } else {
-      return `drop${this.get('direction')}`;
+      return `drop${this.direction}`;
     }
   }
 
@@ -284,7 +284,7 @@ export default class Dropdown extends Component {
 
   @action
   toggleDropdown() {
-    if (this.get('isOpen')) {
+    if (this.isOpen) {
       this.closeDropdown();
     } else {
       this.openDropdown();
@@ -294,13 +294,13 @@ export default class Dropdown extends Component {
   @action
   openDropdown() {
     this.set('isOpen', true);
-    this.get('onShow')();
+    this.onShow();
   }
 
   @action
   closeDropdown() {
     this.set('isOpen', false);
-    this.get('onHide')();
+    this.onHide();
   }
 
   /**
@@ -313,12 +313,12 @@ export default class Dropdown extends Component {
   @action
   closeHandler(e) {
     let { target } = e;
-    let { toggleElement, menuElement } = this.getProperties('toggleElement', 'menuElement');
+    let { toggleElement, menuElement } = this;
 
-    if (!this.get('isDestroyed')
+    if (!this.isDestroyed
       && (
         (e.type === 'keyup' && e.which === TAB_KEYCODE && menuElement && !menuElement.contains(target))
-        || (e.type === 'click' && toggleElement && !toggleElement.contains(target) && ((menuElement && !menuElement.contains(target)) || this.get('closeOnMenuClick')))
+        || (e.type === 'click' && toggleElement && !toggleElement.contains(target) && ((menuElement && !menuElement.contains(target)) || this.closeOnMenuClick))
       )) {
       this.closeDropdown();
     }
@@ -336,7 +336,7 @@ export default class Dropdown extends Component {
     if (['input', 'textarea'].includes(event.target.tagName.toLowerCase())
       ? (
         event.which === SPACE_KEYCODE
-        || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || this.get('menuElement').contains(event.target)))
+        || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || this.menuElement.contains(event.target)))
       : !SUPPORTED_KEYCODES.includes(event.which)) {
       return;
     }
@@ -344,12 +344,12 @@ export default class Dropdown extends Component {
     event.preventDefault();
     event.stopPropagation();
 
-    if (!this.get('isOpen')) {
+    if (!this.isOpen) {
       this.openDropdown();
       return;
     } else if (event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE) {
       this.closeDropdown();
-      this.get('toggleElement').focus();
+      this.toggleElement.focus();
       return;
     }
 

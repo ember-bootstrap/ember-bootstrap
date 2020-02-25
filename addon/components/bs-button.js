@@ -162,11 +162,11 @@ export default class Button extends Component {
 
   @computed('_disabled', 'isPending', 'preventConcurrency')
   get __disabled() {
-    if (this.get('_disabled') !== null) {
-      return this.get('_disabled');
+    if (this._disabled !== null) {
+      return this._disabled;
     }
 
-    return this.get('isPending') && this.get('preventConcurrency');
+    return this.isPending && this.preventConcurrency;
   }
 
   /**
@@ -420,14 +420,14 @@ export default class Button extends Component {
 
   @observes('reset')
   resetObserver() {
-    if (this.get('reset')) {
+    if (this.reset) {
       scheduleOnce('actions', this, 'resetState');
     }
   }
 
   @computed('state', 'defaultText', 'pendingText', 'fulfilledText', 'rejectedText')
   get text() {
-    return this.getWithDefault(`${this.get('state')}Text`, this.get('defaultText'));
+    return this.getWithDefault(`${this.state}Text`, this.defaultText);
   }
 
   /**
@@ -436,23 +436,23 @@ export default class Button extends Component {
    */
   @action
   handleClick(e) {
-    let onClick = this.get('onClick');
-    let preventConcurrency = this.get('preventConcurrency');
+    let onClick = this.onClick;
+    let preventConcurrency = this.preventConcurrency;
 
     if (onClick === null || onClick === undefined) {
       return;
     }
 
-    if (!preventConcurrency || !this.get('isPending')) {
-      let promise = (onClick)(this.get('value'));
-      if (promise && typeof promise.then === 'function' && !this.get('isDestroyed')) {
+    if (!preventConcurrency || !this.isPending) {
+      let promise = (onClick)(this.value);
+      if (promise && typeof promise.then === 'function' && !this.isDestroyed) {
         this.set('state', 'pending');
         promise.then(() => {
-          if (!this.get('isDestroyed')) {
+          if (!this.isDestroyed) {
             this.set('state', 'fulfilled');
           }
         }, () => {
-          if (!this.get('isDestroyed')) {
+          if (!this.isDestroyed) {
             this.set('state', 'rejected');
           }
         }
@@ -460,7 +460,7 @@ export default class Button extends Component {
       }
     }
 
-    if (!this.get('bubble')) {
+    if (!this.bubble) {
       e.stopPropagation();
     }
   }

@@ -81,7 +81,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    */
   @computed('wrap', 'currentIndex')
   get canTurnToLeft() {
-    return this.get('wrap') || this.get('currentIndex') > 0;
+    return this.wrap || this.currentIndex > 0;
   }
 
   /**
@@ -92,7 +92,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    */
   @computed('childSlides.length', 'wrap', 'currentIndex')
   get canTurnToRight() {
-    return this.get('wrap') || this.get('currentIndex') < this.get('childSlides.length') - 1;
+    return this.wrap || this.currentIndex < this.get('childSlides.length') - 1;
   }
 
   /**
@@ -120,19 +120,19 @@ export default class Carousel extends Component.extend(ComponentParent) {
   }
 
   _childSlidesObserver() {
-    let childSlides = this.get('childSlides');
+    let childSlides = this.childSlides;
     if (childSlides.length === 0) {
       return;
     }
     // Sets new current index
-    let currentIndex = this.get('currentIndex');
+    let currentIndex = this.currentIndex;
     if (currentIndex >= childSlides.length) {
       currentIndex = childSlides.length - 1;
       this.set('currentIndex', currentIndex);
     }
     // Automatic sliding
-    if (this.get('autoPlay')) {
-      this.get('waitIntervalToInitCycle').perform();
+    if (this.autoPlay) {
+      this.waitIntervalToInitCycle.perform();
     }
     // Initial slide state
     this.set('presentationState', null);
@@ -145,7 +145,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @private
    */
   @defaultValue
-  currentIndex = this.get('index');
+  currentIndex = this.index;
 
   /**
    * The current slide object that is going to be used by the nested slides components.
@@ -156,7 +156,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    */
   @(computed('childSlides', 'currentIndex').readOnly())
   get currentSlide() {
-    return this.get('childSlides').objectAt(this.get('currentIndex'));
+    return this.childSlides.objectAt(this.currentIndex);
   }
 
   /**
@@ -187,7 +187,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    */
   @(computed('childSlides', 'followingIndex').readOnly())
   get followingSlide() {
-    return this.get('childSlides').objectAt(this.get('followingIndex'));
+    return this.childSlides.objectAt(this.followingIndex);
   }
 
   /**
@@ -206,7 +206,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    */
   @observes('index')
   indexObserver() {
-    this.send('toSlide', this.get('index'));
+    this.send('toSlide', this.index);
   }
 
   /**
@@ -509,30 +509,30 @@ export default class Carousel extends Component.extend(ComponentParent) {
 
   @action
   toSlide(toIndex) {
-    if (this.get('currentIndex') === toIndex || this.get('shouldNotDoPresentation')) {
+    if (this.currentIndex === toIndex || this.shouldNotDoPresentation) {
       return;
     }
     this.assignClassNameControls(toIndex);
     this.setFollowingIndex(toIndex);
-    if (this.get('shouldRunAutomatically') === false || this.get('isMouseHovering')) {
-      this.get('transitioner').perform();
+    if (this.shouldRunAutomatically === false || this.isMouseHovering) {
+      this.transitioner.perform();
     } else {
-      this.get('cycle').perform();
+      this.cycle.perform();
     }
-    this.get('onSlideChanged')(toIndex);
+    this.onSlideChanged(toIndex);
   }
 
   @action
   toNextSlide() {
-    if (this.get('canTurnToRight')) {
-      this.send('toSlide', this.get('currentIndex') + 1);
+    if (this.canTurnToRight) {
+      this.send('toSlide', this.currentIndex + 1);
     }
   }
 
   @action
   toPrevSlide() {
-    if (this.get('canTurnToLeft')) {
-      this.send('toSlide', this.get('currentIndex') - 1);
+    if (this.canTurnToLeft) {
+      this.send('toSlide', this.currentIndex - 1);
     }
   }
 
@@ -543,7 +543,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @private
    */
   assignClassNameControls(toIndex) {
-    if (toIndex < this.get('currentIndex')) {
+    if (toIndex < this.currentIndex) {
       this.set('directionalClassName', 'right');
       this.set('orderClassName', 'prev');
     } else {
@@ -563,24 +563,24 @@ export default class Carousel extends Component.extend(ComponentParent) {
 
   @action
   handleMouseEnter() {
-    if (this.get('pauseOnMouseEnter')) {
+    if (this.pauseOnMouseEnter) {
       this.set('isMouseHovering', true);
-      this.get('cycle').cancelAll();
-      this.get('waitIntervalToInitCycle').cancelAll();
+      this.cycle.cancelAll();
+      this.waitIntervalToInitCycle.cancelAll();
     }
   }
 
   @action
   handleMouseLeave() {
     if (
-      this.get('pauseOnMouseEnter')
+      this.pauseOnMouseEnter
       && (
         this.get('transitioner.last') !== null
         || this.get('waitIntervalToInitCycle.last') !== null
       )
     ) {
       this.set('isMouseHovering', false);
-      this.get('waitIntervalToInitCycle').perform();
+      this.waitIntervalToInitCycle.perform();
     }
   }
 
@@ -588,7 +588,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
   handleKeyDown(e) {
     let code = e.keyCode || e.which;
     if (
-      this.get('keyboard') === false
+      this.keyboard === false
       || /input|textarea/i.test(e.target.tagName)
     ) {
       return;
@@ -611,7 +611,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @private
    */
   setFollowingIndex(toIndex) {
-    let slidesLengthMinusOne = this.get('childSlides').length - 1;
+    let slidesLengthMinusOne = this.childSlides.length - 1;
     if (toIndex > slidesLengthMinusOne) {
       this.set('followingIndex', 0);
     } else if (toIndex < 0) {
@@ -628,7 +628,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @private
    */
   toAppropriateSlide() {
-    if (this.get('ltr')) {
+    if (this.ltr) {
       this.send('toNextSlide');
     } else {
       this.send('toPrevSlide');
@@ -640,6 +640,6 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @private
    */
   triggerChildSlidesObserver() {
-    this.get('childSlides');
+    this.childSlides;
   }
 }

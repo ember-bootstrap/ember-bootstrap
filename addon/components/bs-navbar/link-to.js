@@ -27,7 +27,7 @@ export default class NavbarLinkTo extends BsNavLinkToComponent {
   }
 
   click() {
-    if (this.get('collapseNavbar')) {
+    if (this.collapseNavbar) {
       this.onCollapse();
     }
   }

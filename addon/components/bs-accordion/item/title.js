@@ -38,8 +38,8 @@ export default class AccordionItemTitle extends Component {
   @action
   handleClick(e) {
     e.preventDefault();
-    if (!this.get('disabled')) {
-      this.get('onClick')();
+    if (!this.disabled) {
+      this.onClick();
     }
   }
 }

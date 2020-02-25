@@ -32,15 +32,15 @@ export default class FormElementLabel extends Component {
 
   @computed('isHorizontal', 'isCheckbox')
   get isHorizontalAndNotCheckbox() {
-    return this.get('isHorizontal') && !this.get('isCheckbox');
+    return this.isHorizontal && !this.isCheckbox;
   }
 
   @computed('size', 'isHorizontal')
   get sizeClass() {
-    if (!this.get('isHorizontal')) {
+    if (!this.isHorizontal) {
       return undefined;
     }
-    let size = this.get('size');
+    let size = this.size;
     return isBlank(size) ? null : `col-form-label-${size}`;
   }
 

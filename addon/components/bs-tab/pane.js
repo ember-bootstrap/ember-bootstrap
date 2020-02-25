@@ -47,7 +47,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
    */
   @(computed('activeId', 'id').readOnly())
   get isActive() {
-    return this.get('activeId') === this.get('id');
+    return this.activeId === this.id;
   }
 
   /**
@@ -137,10 +137,10 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @protected
    */
   show() {
-    if (this.get('usesTransition')) {
-      transitionEnd(this._element, this.get('fadeDuration'))
+    if (this.usesTransition) {
+      transitionEnd(this._element, this.fadeDuration)
         .then(() => {
-          if (!this.get('isDestroyed')) {
+          if (!this.isDestroyed) {
             this.setProperties({
               active: true,
               showContent: true
@@ -159,10 +159,10 @@ export default class TabPane extends Component.extend(ComponentChild) {
    * @protected
    */
   hide() {
-    if (this.get('usesTransition')) {
-      transitionEnd(this._element, this.get('fadeDuration'))
+    if (this.usesTransition) {
+      transitionEnd(this._element, this.fadeDuration)
         .then(() => {
-          if (!this.get('isDestroyed')) {
+          if (!this.isDestroyed) {
             this.set('active', false);
           }
         });
@@ -173,7 +173,7 @@ export default class TabPane extends Component.extend(ComponentChild) {
   }
 
   _showHide() {
-    if (this.get('isActive')) {
+    if (this.isActive) {
       this.show();
     } else {
       this.hide();
@@ -181,8 +181,8 @@ export default class TabPane extends Component.extend(ComponentChild) {
   }
 
   _setActive() {
-    this.set('active', this.get('isActive'));
-    this.set('showContent', this.get('isActive') && this.get('fade'));
+    this.set('active', this.isActive);
+    this.set('showContent', this.isActive && this.fade);
   }
 
   init() {

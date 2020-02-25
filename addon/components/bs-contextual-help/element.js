@@ -120,7 +120,7 @@ export default class ContextualHelpElement extends Component {
     let self = this;
     return {
       arrow: {
-        element: `.${this.get('arrowClass')}`
+        element: `.${this.arrowClass}`
       },
       offset: {
         fn(data) {
@@ -146,26 +146,26 @@ export default class ContextualHelpElement extends Component {
         }
       },
       preventOverflow: {
-        enabled: this.get('autoPlacement'),
-        boundariesElement: this.get('viewportElement'),
-        padding: this.get('viewportPadding')
+        enabled: this.autoPlacement,
+        boundariesElement: this.viewportElement,
+        padding: this.viewportPadding
       },
       hide: {
-        enabled: this.get('autoPlacement')
+        enabled: this.autoPlacement
       },
       flip: {
-        enabled: this.get('autoPlacement')
+        enabled: this.autoPlacement
       }
     };
   }
 
   didReceiveAttrs() {
-    assert('Contextual help element needs id for popper element', this.get('id'));
+    assert('Contextual help element needs id for popper element', this.id);
   }
 
   @action
   updatePlacement(popperDataObject) {
-    if (this.get('actualPlacement') === popperDataObject.placement) {
+    if (this.actualPlacement === popperDataObject.placement) {
       return;
     }
     this.set('actualPlacement', popperDataObject.placement);
