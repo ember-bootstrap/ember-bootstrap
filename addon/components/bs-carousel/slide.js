@@ -28,7 +28,7 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    * @private
    */
   @overrideableCP('isCurrentSlide', 'presentationState', function() {
-    return this.get('isCurrentSlide') && this.get('presentationState') === null;
+    return this.isCurrentSlide && this.presentationState === null;
   })
   active;
 

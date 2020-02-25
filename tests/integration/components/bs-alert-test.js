@@ -109,7 +109,7 @@ module('Integration | Component | bs-alert', function(hooks) {
 
     await click('button.close');
 
-    assert.equal(this.get('visible'), true, 'Does not modify visible property');
+    assert.equal(this.visible, true, 'Does not modify visible property');
   });
 
   test('it passes accessibility checks', async function (assert) {

@@ -9,6 +9,7 @@ import formValidationClass from 'ember-bootstrap/utils/cp/form-validation-class'
  @extends Ember.Component
  @private
  */
+// eslint-disable-next-line ember/require-tagless-components
 export default class FormElementControl extends Component {
   /**
    * @property value

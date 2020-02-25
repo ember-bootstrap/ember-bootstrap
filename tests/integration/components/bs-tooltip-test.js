@@ -134,10 +134,11 @@ module('Integration | Component | bs-tooltip', function(hooks) {
   });
 
   test('it allows changing the trigger element to the parent view', async function(assert) {
-    let dummyComponent = Component.extend({
-      layout: hbs`<div>{{yield}}</div>`
-    });
-    this.owner.register('component:dum-my', dummyComponent);
+    // eslint-disable-next-line ember/require-tagless-components
+    class DummyComponent extends Component {
+      layout = hbs`<div>{{yield}}</div>`;
+    }
+    this.owner.register('component:dum-my', DummyComponent);
 
     await render(
       hbs`{{#dum-my id="target"}}<BsTooltip @title="Dummy" @fade={{false}} @triggerElement="parentView" />{{/dum-my}}`

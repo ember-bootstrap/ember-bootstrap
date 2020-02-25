@@ -246,11 +246,7 @@ export default class Button extends Component {
    * @public
    */
   @overrideableCP('active', function() {
-    if (this.get('active')) {
-      return this.get('iconActive');
-    } else {
-      return this.get('iconInactive');
-    }
+    return this.active ? this.iconActive : this.iconInactive;
   })
   icon;
 
@@ -427,7 +423,7 @@ export default class Button extends Component {
 
   @computed('state', 'defaultText', 'pendingText', 'fulfilledText', 'rejectedText')
   get text() {
-    return this.getWithDefault(`${this.state}Text`, this.defaultText);
+    return this[`${this.state}Text`] || this.defaultText;
   }
 
   /**

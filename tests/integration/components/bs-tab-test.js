@@ -263,7 +263,7 @@ module('Integration | Component | bs-tab', function(hooks) {
       </BsTab>
     `);
     await click('ul.nav.nav-tabs li:nth-child(2) a');
-    assert.equal(this.get('paneId'), 'pane1', 'Does not modify public activeId property');
+    assert.equal(this.paneId, 'pane1', 'Does not modify public activeId property');
   });
 
   test('it passes accessibility checks', async function (assert) {

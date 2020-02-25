@@ -550,7 +550,7 @@ module('Integration | Component | bs-modal-simple', function(hooks) {
     this.set('open', true);
     await render(hbs`<BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{open}}>Hello world!</BsModalSimple>`);
     await click('.modal .modal-header .close');
-    assert.equal(this.get('open'), true, 'DOes not change open property');
+    assert.equal(this.open, true, 'DOes not change open property');
   });
 
   testBS4('modal can be centered vertically', async function(assert) {

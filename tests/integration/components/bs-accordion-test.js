@@ -161,7 +161,7 @@ module('Integration | Component | bs-accordion', function(hooks) {
     `);
 
     await click(`.${accordionClassFor()}:last-child .${accordionItemHeadClass()}`);
-    assert.equal(this.get('selected'), 1, 'Does not modify public selected property');
+    assert.equal(this.selected, 1, 'Does not modify public selected property');
   });
 
   test('yields change action to add custom behaviour', async function(assert) {

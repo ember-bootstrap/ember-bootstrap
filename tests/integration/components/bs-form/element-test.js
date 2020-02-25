@@ -751,9 +751,10 @@ module('Integration | Component | bs-form/element', function(hooks) {
   });
 
   test('it uses custom control component when registered in DI container', async function(assert) {
-    this.owner.register('component:bs-form/element/control/foo', Component.extend({
-      layout: hbs`<div id="foo"></div>`
-    }));
+    this.owner.register('component:bs-form/element/control/foo', class extends Component {
+      tagName = '';
+      layout = hbs`<div id="foo"></div>`;
+    });
     await render(hbs`
         <BsForm::Element @controlType="foo" />
     `);

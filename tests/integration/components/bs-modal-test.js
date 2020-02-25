@@ -47,9 +47,9 @@ module('Integration | Component | bs-modal', function(hooks) {
   });
 
   test('clicking ok button closes modal when autoClose=true with custom component hierarchy', async function(assert) {
-    this.owner.register('component:my-component', Component.extend({
-      layout: hbs`{{yield}}`
-    }));
+    this.owner.register('component:my-component', class extends Component {
+      layout = hbs`{{yield}}`;
+    });
 
     await render(hbs`
       <BsModal @title="Simple Dialog" @body={{false}} @footer={{false}} as |modal|>

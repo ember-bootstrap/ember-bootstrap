@@ -351,7 +351,7 @@ module('Integration | Component | bs-navbar', function(hooks) {
     `);
 
     await click('button');
-    assert.equal(this.get('collapsed'), true, 'collapse property did not change');
+    assert.equal(this.collapsed, true, 'collapse property did not change');
   });
 
   test('Navbar yields collapse action', async function(assert) {
