@@ -33,7 +33,7 @@ export default class NavItem extends Component.extend(ComponentParent) {
    * @public
    */
   @overrideableCP('_disabled', function() {
-    return this.get('_disabled');
+    return this._disabled;
   })
   disabled;
 
@@ -50,7 +50,7 @@ export default class NavItem extends Component.extend(ComponentParent) {
    * @public
    */
   @overrideableCP('_active', function() {
-    return this.get('_active');
+    return this._active;
   })
   active;
 

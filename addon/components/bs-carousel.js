@@ -467,8 +467,8 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @private
    */
   @(task(function* () {
-    yield this.get('transitioner').perform();
-    yield timeout(this.get('interval'));
+    yield this.transitioner.perform();
+    yield timeout(this.interval);
     this.toAppropriateSlide();
   }).restartable())
   cycle;
@@ -479,13 +479,13 @@ export default class Carousel extends Component.extend(ComponentParent) {
    */
   @(task(function* () {
     this.set('presentationState', 'willTransit');
-    yield timeout(this.get('transitionDuration'));
+    yield timeout(this.transitionDuration);
     this.set('presentationState', 'didTransition');
     // Must change current index after execution of 'presentationStateObserver' method
     // from child components.
     yield new RSVP.Promise((resolve) => {
       schedule('afterRender', this, function() {
-        this.set('currentIndex', this.get('followingIndex'));
+        this.set('currentIndex', this.followingIndex);
         resolve();
       });
     });
@@ -499,10 +499,10 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @private
    */
   @(task(function* () {
-    if (this.get('shouldRunAutomatically') === false) {
+    if (this.shouldRunAutomatically === false) {
       return;
     }
-    yield timeout(this.get('interval'));
+    yield timeout(this.interval);
     this.toAppropriateSlide();
   }).restartable())
   waitIntervalToInitCycle;

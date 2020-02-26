@@ -107,19 +107,15 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('Submit event bubbles', async function(assert) {
-    let TestComponent = Component.extend({
-      submit() {
-        assert.step('bubbles');
-      }
-    });
-    this.owner.register('component:test-component', TestComponent);
+    this.set('action', () => assert.step('bubbles'));
 
+    // eslint-disable-next-line hbs/check-hbs-template-literals
     await render(hbs`
-      {{#test-component}}
+      <div {{on "submit" this.action}}>
         <BsForm>
           <button type="submit">submit</button>
         </BsForm>
-      {{/test-component}}
+      </div>
     `);
     await click('button');
 
@@ -297,7 +293,7 @@ module('Integration | Component | bs-form', function(hooks) {
     );
 
     // simulate validation errors being added while a submission is ongoing
-    run(() => this.get('errors').pushObject('There is an error'));
+    run(() => this.errors.pushObject('There is an error'));
     await settled();
 
     assert.dom(formFeedbackElement()).hasClass(
@@ -342,7 +338,7 @@ module('Integration | Component | bs-form', function(hooks) {
       await triggerEvent('form', 'submit');
 
       // simulate validation errors being added while a submission is ongoing
-      run(() => this.get('errors').pushObject('There is an error'));
+      run(() => this.errors.pushObject('There is an error'));
       await settled();
 
       assert.dom(formFeedbackElement()).hasNoClass(
@@ -395,7 +391,7 @@ module('Integration | Component | bs-form', function(hooks) {
       await triggerEvent('form', 'submit');
 
       // simulate validation errors being added while a submission is ongoing
-      run(() => this.get('errors').pushObject('There is an error'));
+      run(() => this.errors.pushObject('There is an error'));
       await settled();
 
       assert.dom(formFeedbackElement()).hasNoClass(
@@ -446,14 +442,15 @@ module('Integration | Component | bs-form', function(hooks) {
   });
 
   test('yielded submit action returns a promise', async function(assert) {
-    let TestComponent = Component.extend({
-      tagName: 'button',
+    class TestComponent extends Component {
+      // eslint-disable-next-line ember/require-tagless-components
+      tagName = 'button';
 
       click() {
-        let ret = this.get('onClick')();
+        let ret = this.onClick();
         assert.ok(ret instanceof RSVP.Promise);
       }
-    });
+    }
     this.owner.register('component:test-component', TestComponent);
 
     await render(hbs`
@@ -472,19 +469,20 @@ module('Integration | Component | bs-form', function(hooks) {
       { onSubmit: this.fake.resolves(), validate: this.fake.resolves() },
     ];
 
-    let TestComponent = Component.extend({
-      tagName: 'button',
+    class TestComponent extends Component {
+      // eslint-disable-next-line ember/require-tagless-components
+      tagName = 'button';
 
       async click() {
         try {
-          let ret = await this.get('onClick')();
+          let ret = await this.onClick();
           assert.ok(true, 'resolves');
           assert.strictEqual(ret, undefined, 'resolves with undefined');
         } catch(err) {
           assert.ok(false, err);
         }
       }
-    });
+    }
     this.owner.register('component:test-component', TestComponent);
 
     assert.expect(scenarios.length * 2);
@@ -506,16 +504,17 @@ module('Integration | Component | bs-form', function(hooks) {
       { onSubmit: this.fake.rejects('rejected value') },
     ];
 
-    let TestComponent = Component.extend({
-      tagName: 'button',
+    class TestComponent extends Component {
+      // eslint-disable-next-line ember/require-tagless-components
+      tagName = 'button';
 
       click() {
         assert.rejects(
-          this.get('onSubmit')(),
+          this.onSubmit(),
           'rejected value'
         );
       }
-    });
+    }
     this.owner.register('component:test-component', TestComponent);
 
     assert.expect(scenarios.length);
