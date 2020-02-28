@@ -94,7 +94,7 @@ const deprecatedAttributeBindings = [].concat(
   Object.keys(supportedCheckboxAttributes),
   Object.keys(supportedRadioAttributes),
 ).filter((attr) => {
-  return !['disabled', 'readonly', 'required'].includes(attr);
+  return !['disabled', 'readonly'].includes(attr);
 });
 
 module('Integration | Component | bs-form/element', function(hooks) {
@@ -838,6 +838,7 @@ module('Integration | Component | bs-form/element', function(hooks) {
   test('required property propagates', async function(assert) {
     await render(hbs`{{bs-form/element label="myLabel" required=true}}`);
     assert.dom('.form-group').hasClass('is-required', 'component has is-required class');
+    assert.deprecationsInclude(`Argument required of <element> component yielded by <BsForm> is deprecated.`);
   });
 
   test('disabled property propagates', async function(assert) {
