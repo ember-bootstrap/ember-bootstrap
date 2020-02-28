@@ -1,11 +1,11 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
-import { observes } from '@ember-decorators/object';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import layout from 'ember-bootstrap/templates/components/bs-carousel/slide';
 import { next } from '@ember/runloop';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
+import { addObserver } from '@ember/object/observers';
 
 /**
   A visible user-defined slide.
@@ -94,7 +94,6 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    * @method presentationStateObserver
    * @private
    */
-  @observes('presentationState')
   presentationStateObserver() {
     let presentationState = this.presentationState;
     if (this.isCurrentSlide) {
@@ -117,6 +116,11 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
           break;
       }
     }
+  }
+
+  init() {
+    super.init(...arguments);
+    addObserver(this, 'presentationState', null, this.presentationStateObserver, true);
   }
 
   /**
