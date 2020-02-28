@@ -193,7 +193,7 @@ module('Integration | Component | bs-carousel', function(hooks) {
     );
     await waitTransitionTime();
     assert.notOk(getActivatedSlide(1), 'ltr has correct behavior');
-    assert.notOk(getActivatedSlide(1), 'ltr has correct behavior');
+    assert.notOk(getActivatedSlide(2), 'ltr has correct behavior');
     assert.ok(getActivatedSlide(3), 'ltr has correct behavior');
     this.stopCarousel();
   });

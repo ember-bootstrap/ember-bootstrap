@@ -5,7 +5,7 @@ import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import layout from 'ember-bootstrap/templates/components/bs-carousel/slide';
 import { next } from '@ember/runloop';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
-import { addObserver } from '@ember/object/observers'
+import { addObserver } from '@ember/object/observers';
 
 /**
   A visible user-defined slide.
