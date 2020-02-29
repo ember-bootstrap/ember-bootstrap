@@ -117,12 +117,14 @@ module('Integration | Component | bs-carousel', function(hooks) {
     await render(hbs`{{#bs-carousel autoPlay=false interval=300 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await waitTransitionTime();
     assert.ok(getActivatedSlide(1), 'autoPlay has correct behavior');
+    assert.notOk(getActivatedSlide(2), 'autoPlay has correct behavior');
   });
 
   // very flakey :-(
   skip('carousel autoPlay=true must start sliding', async function(assert) {
     render(hbs`{{#bs-carousel autoPlay=true interval=interval transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await waitTransitionTime();
+    assert.notOk(getActivatedSlide(1), 'autoPlay has correct behavior');
     assert.ok(getActivatedSlide(2), 'autoPlay has correct behavior');
     this.stopCarousel();
   });
@@ -142,6 +144,7 @@ module('Integration | Component | bs-carousel', function(hooks) {
     clickToPrevSlide();
     await waitTransitionTime();
     assert.ok(getActivatedSlide(1), 'wrap has correct behavior');
+    assert.notOk(getActivatedSlide(2), 'wrap has correct behavior');
   });
 
   test('carousel wrap=false must not cross upper bound', async function(assert) {
@@ -151,11 +154,13 @@ module('Integration | Component | bs-carousel', function(hooks) {
     clickToNextSlide();
     await waitTransitionTime();
     assert.ok(getActivatedSlide(2), 'wrap has correct behavior');
+    assert.notOk(getActivatedSlide(1), 'wrap has correct behavior');
   });
 
   test('carousel wrap=true must cross lower bound', async function(assert) {
     await render(hbs`{{#bs-carousel interval=0 wrap=true transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await clickToPrevSlide();
+    assert.notOk(getActivatedSlide(1), 'wrap has correct behavior');
     assert.ok(getActivatedSlide(2), 'wrap has correct behavior');
   });
 
@@ -165,10 +170,12 @@ module('Integration | Component | bs-carousel', function(hooks) {
     );
     await clickToNextSlide();
     assert.ok(getActivatedSlide(1), 'wrap has correct behavior');
+    assert.notOk(getActivatedSlide(2), 'wrap has correct behavior');
   });
 
   test('carousel index=N specifies starting slide', async function(assert) {
     await render(hbs`{{#bs-carousel index=1 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+    assert.notOk(getActivatedSlide(1), 'index has correct behavior');
     assert.ok(getActivatedSlide(2), 'index has correct behavior');
   });
 
@@ -176,6 +183,7 @@ module('Integration | Component | bs-carousel', function(hooks) {
     await render(hbs`{{#bs-carousel autoPlay=true interval=0 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await waitTransitionTime();
     assert.ok(getActivatedSlide(1), 'interval has correct behavior');
+    assert.notOk(getActivatedSlide(2), 'interval has correct behavior');
   });
 
   // very flakey :-(
@@ -184,6 +192,8 @@ module('Integration | Component | bs-carousel', function(hooks) {
       hbs`{{#bs-carousel autoPlay=true interval=interval transitionDuration=transitionDuration ltr=false as |car|}}{{car.slide}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`
     );
     await waitTransitionTime();
+    assert.notOk(getActivatedSlide(1), 'ltr has correct behavior');
+    assert.notOk(getActivatedSlide(2), 'ltr has correct behavior');
     assert.ok(getActivatedSlide(3), 'ltr has correct behavior');
     this.stopCarousel();
   });
@@ -205,6 +215,7 @@ module('Integration | Component | bs-carousel', function(hooks) {
     await waitTransitionTime(10);
     triggerEvent('.carousel', 'mouseenter');
     await waitTransitionTime();
+    assert.notOk(getActivatedSlide(1), 'pauseOnMouseEnter has correct behavior');
     assert.ok(getActivatedSlide(2), 'pauseOnMouseEnter has correct behavior');
     this.stopCarousel();
   });
@@ -217,6 +228,7 @@ module('Integration | Component | bs-carousel', function(hooks) {
     triggerEvent('.carousel', 'mouseenter');
     await waitTransitionTime();
     assert.ok(getActivatedSlide(1), 'pauseOnMouseEnter has correct behavior');
+    assert.notOk(getActivatedSlide(2), 'pauseOnMouseEnter has correct behavior');
     this.stopCarousel();
   });
 
@@ -225,6 +237,7 @@ module('Integration | Component | bs-carousel', function(hooks) {
   test('carousel has functional right control', async function(assert) {
     await render(hbs`{{#bs-carousel interval=0 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await clickToNextSlide();
+    assert.notOk(getActivatedSlide(1), 'right control changes slide');
     assert.ok(getActivatedSlide(2), 'right control changes slide');
   });
 
@@ -232,13 +245,23 @@ module('Integration | Component | bs-carousel', function(hooks) {
     await render(hbs`{{#bs-carousel interval=0 transitionDuration=transitionDuration index=1 as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await clickToPrevSlide();
     assert.ok(getActivatedSlide(1), 'left control changes slide');
+    assert.notOk(getActivatedSlide(2), 'autoPlay has correct behavior');
   });
 
   test('carousel has functional indicators', async function(assert) {
     await render(hbs`{{#bs-carousel interval=0 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
     await clickIndicator(2);
     assert.dom('.carousel-indicators > li:nth-child(2).active').exists('indicators changes indicator index');
+    assert.notOk(getActivatedSlide(1), 'indicators changes slide index');
     assert.ok(getActivatedSlide(2), 'indicators changes slide index');
+  });
+
+  test('carousel can move right then back to the left', async function(assert) {
+    await render(hbs`{{#bs-carousel interval=0 transitionDuration=transitionDuration as |car|}}{{car.slide}}{{car.slide}}{{/bs-carousel}}`);
+    await clickToNextSlide();
+    await clickToPrevSlide();
+    assert.ok(getActivatedSlide(1), 'carousel can move right then back to the left');
+    assert.notOk(getActivatedSlide(2), 'carousel can move right then back to the left');
   });
 
   // Default carousel markup has a11y issues (buttons w/o content)
