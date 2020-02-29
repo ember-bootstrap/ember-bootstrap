@@ -1107,7 +1107,7 @@ export default class FormElement extends FormGroup {
           `Argument ${argument} of <element> component yielded by <BsForm> is deprecated. ` +
           `It's only purpose was setting the HTML attribute ${attribute} of the control element. ` +
           `You should use  angle bracket  component invocation syntax instead:\n` +
-          `Before:n` +
+          `Before:\n` +
           `  {{#bs-form as |form|}}\n` +
           `    {{form.element ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
           `  {{/bs-form}}\n` +
