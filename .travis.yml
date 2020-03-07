@@ -55,9 +55,9 @@ jobs:
     - yarn test
 
   - name: "Docs App"
-    before_install:
-    - cd docs
     install:
+    - yarn install --non-interactive
+    - cd docs
     - yarn install --non-interactive
     script:
     - yarn lint:hbs
