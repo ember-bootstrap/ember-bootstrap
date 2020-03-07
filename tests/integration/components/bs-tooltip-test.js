@@ -466,6 +466,15 @@ module('Integration | Component | bs-tooltip', function(hooks) {
     assert.dom('.tooltip').hasAttribute('data-test');
   });
 
+  (gte('3.4.0') ? test : skip)('can be shown and disposed in same loop', async function(assert) {
+    this.set('show', true);
+    await render(hbs`{{#if this.show}}<div id="target">{{bs-tooltip title="Dummy" class="wide"}}</div>{{/if}}`);
+    triggerEvent('#target', 'mouseenter');
+    this.set('show', false);
+    await settled();
+    assert.dom('.tooltip').doesNotExist();
+  });
+
   test('it passes accessibility checks', async function (assert) {
     await render(hbs`
     <button>
