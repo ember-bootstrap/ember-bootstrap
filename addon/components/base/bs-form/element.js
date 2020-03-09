@@ -979,6 +979,7 @@ export default class FormElement extends FormGroup {
    * @type {Boolean}
    * @private
    */
+  @defaultValue
   _disabled;
 
   @computed('disabled', '_disabled')
@@ -998,6 +999,7 @@ export default class FormElement extends FormGroup {
    * @type {Boolean}
    * @private
    */
+  @defaultValue
   _readonly;
 
   @computed('readonly', '_readonly')
