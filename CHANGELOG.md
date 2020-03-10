@@ -1,4 +1,28 @@
 
+## 3.1.2 (2020-03-10)
+
+#### Deprecations
+* [#995](https://github.com/kaliber5/ember-bootstrap/pull/995) Deprecate readonly and disabled args of bs form element ([@jelhan](https://github.com/jelhan))
+* [#987](https://github.com/kaliber5/ember-bootstrap/pull/987) deprecate required arg of <BsForm::Element> ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#1014](https://github.com/kaliber5/ember-bootstrap/pull/1014) Fix `calling set on destroyed object` for tooltips when tooltip is disposed before being shown ([@simonihmig](https://github.com/simonihmig))
+* [#1011](https://github.com/kaliber5/ember-bootstrap/pull/1011) Fix a typo in deprecation message ([@ursm](https://github.com/ursm))
+* [#1009](https://github.com/kaliber5/ember-bootstrap/pull/1009) Fix bs-carousel with async observers ([@jakesjews](https://github.com/jakesjews))
+* [#983](https://github.com/kaliber5/ember-bootstrap/pull/983) Fix progress bar role and ARIA attributes ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#967](https://github.com/kaliber5/ember-bootstrap/pull/967) Fix typo in CHANGELOG.md ([@akashdsouza](https://github.com/akashdsouza))
+
+#### Internal
+* [#964](https://github.com/kaliber5/ember-bootstrap/pull/964) upgrade ember to 3.15 ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 5
+- Jacob Jewell ([@jakesjews](https://github.com/jakesjews))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Keita Urashima ([@ursm](https://github.com/ursm))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@akashdsouza](https://github.com/akashdsouza)
 ## 3.1.1 (2020-01-07)
 
 #### Deprecations
