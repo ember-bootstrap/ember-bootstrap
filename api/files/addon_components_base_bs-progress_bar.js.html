@@ -83,8 +83,10 @@ import defaultValue from &#x27;ember-bootstrap/utils/default-decorator&#x27;;
 @templateLayout(layout)
 @classNames(&#x27;progress-bar&#x27;)
 @classNameBindings(&#x27;progressBarStriped&#x27;, &#x27;typeClass&#x27;)
-@attributeBindings(&#x27;ariaValuenow&#x27;, &#x27;ariaValuemin&#x27;, &#x27;ariaValuemax&#x27;)
+@attributeBindings(&#x27;ariaValuenow:aria-valuenow&#x27;, &#x27;ariaValuemin:aria-valuemin&#x27;, &#x27;ariaValuemax:aria-valuemax&#x27;)
 export default class ProgressBar extends Component {
+  ariaRole = &#x27;progressbar&#x27;;
+
   /**
    * The lower limit of the value range
    *

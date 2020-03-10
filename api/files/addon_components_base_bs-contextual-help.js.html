@@ -573,6 +573,9 @@ export default class ContextualHelp extends Component {
   }
 
   _show(skipTransition = false) {
+    if (this.get(&#x27;isDestroyed&#x27;) || this.get(&#x27;isDestroying&#x27;)) {
+      return;
+    }
     this.set(&#x27;showHelp&#x27;, true);
 
     // If this is a touch-enabled device we add extra

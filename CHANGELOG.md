@@ -1,4 +1,28 @@
 
+## 3.1.2 (2020-03-10)
+
+#### Deprecations
+* [#995](https://github.com/kaliber5/ember-bootstrap/pull/995) Deprecate readonly and disabled args of bs form element ([@jelhan](https://github.com/jelhan))
+* [#987](https://github.com/kaliber5/ember-bootstrap/pull/987) deprecate required arg of  ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#1014](https://github.com/kaliber5/ember-bootstrap/pull/1014) Fix `calling set on destroyed object` for tooltips when tooltip is disposed before being shown ([@simonihmig](https://github.com/simonihmig))
+* [#1011](https://github.com/kaliber5/ember-bootstrap/pull/1011) Fix a typo in deprecation message ([@ursm](https://github.com/ursm))
+* [#1009](https://github.com/kaliber5/ember-bootstrap/pull/1009) Fix bs-carousel with async observers ([@jakesjews](https://github.com/jakesjews))
+* [#983](https://github.com/kaliber5/ember-bootstrap/pull/983) Fix progress bar role and ARIA attributes ([@simonihmig](https://github.com/simonihmig))
+
+#### Documentation
+* [#967](https://github.com/kaliber5/ember-bootstrap/pull/967) Fix typo in CHANGELOG.md ([@akashdsouza](https://github.com/akashdsouza))
+
+#### Internal
+* [#964](https://github.com/kaliber5/ember-bootstrap/pull/964) upgrade ember to 3.15 ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 5
+- Jacob Jewell ([@jakesjews](https://github.com/jakesjews))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Keita Urashima ([@ursm](https://github.com/ursm))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@akashdsouza](https://github.com/akashdsouza)
 ## 3.1.1 (2020-01-07)
 
 #### Deprecations
@@ -8,7 +32,7 @@
   A deprecation warning will be issued in development for most arguments when used.
   
   The migration path is to use angle bracket invocation (available since Ember 3.4 or by installing [ember-angle-bracket-invocation-polyfill](https://github.com/rwjblue/ember-angle-bracket-invocation-polyfill)) to set them directly. 
-  E.g. use `Ok` instead of `{{#bs-button type="primary" title="foo">Ok{{/bs-button}}` to set `title`.
+  E.g. use `Ok` instead of `{{#bs-button type="primary" title="foo"}}Ok{{/bs-button}}` to set `title`.
 
 #### Bug Fixes
 * [#948](https://github.com/kaliber5/ember-bootstrap/pull/948) Modals ignore clicking backdrop to close, if mousedown happened on dialog element, reflecting original bootstrap.js behaviour ([@eyupatis](https://github.com/eyupatis))

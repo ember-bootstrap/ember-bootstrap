@@ -60,13 +60,13 @@
 <div class="file">
     <pre class="prettyprint linenums">
 import { classNameBindings, layout as templateLayout } from &#x27;@ember-decorators/component&#x27;;
-import { observes } from &#x27;@ember-decorators/object&#x27;;
 import { computed } from &#x27;@ember/object&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import ComponentChild from &#x27;ember-bootstrap/mixins/component-child&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-carousel/slide&#x27;;
 import { next } from &#x27;@ember/runloop&#x27;;
 import overrideableCP from &#x27;ember-bootstrap/utils/cp/overrideable&#x27;;
+import { addObserver } from &#x27;@ember/object/observers&#x27;;
 
 /**
   A visible user-defined slide.
@@ -155,7 +155,6 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    * @method presentationStateObserver
    * @private
    */
-  @observes(&#x27;presentationState&#x27;)
   presentationStateObserver() {
     let presentationState = this.get(&#x27;presentationState&#x27;);
     if (this.get(&#x27;isCurrentSlide&#x27;)) {
@@ -178,6 +177,11 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
           break;
       }
     }
+  }
+
+  init() {
+    super.init(...arguments);
+    addObserver(this, &#x27;presentationState&#x27;, null, this.presentationStateObserver, true);
   }
 
   /**

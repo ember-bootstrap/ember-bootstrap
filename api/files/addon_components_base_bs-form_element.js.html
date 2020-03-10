@@ -452,7 +452,7 @@ const nonDefaultLayouts = A([
   @public
 */
 @templateLayout(layout)
-@classNameBindings(&#x27;disabled:disabled&#x27;, &#x27;required:is-required&#x27;, &#x27;isValidating&#x27;)
+@classNameBindings(&#x27;__disabled:disabled&#x27;, &#x27;required:is-required&#x27;, &#x27;isValidating&#x27;)
 export default class FormElement extends FormGroup {
   /**
    * Text to display within a &#x60;&lt;label&gt;&#x60; tag.
@@ -907,10 +907,10 @@ export default class FormElement extends FormGroup {
     &#x27;showValidation&#x27;,
     &#x27;showModelValidation&#x27;,
     &#x27;isValidating&#x27;,
-    &#x27;disabled&#x27;
+    &#x27;__disabled&#x27;
   )
   get validation() {
-    if (!this.get(&#x27;showValidation&#x27;) || !this.get(&#x27;hasValidator&#x27;) || this.get(&#x27;isValidating&#x27;) || this.get(&#x27;disabled&#x27;)) {
+    if (!this.get(&#x27;showValidation&#x27;) || !this.get(&#x27;hasValidator&#x27;) || this.get(&#x27;isValidating&#x27;) || this.get(&#x27;__disabled&#x27;)) {
       return null;
     } else if (this.get(&#x27;showModelValidation&#x27;)) {
       /* The display of model validation messages has been triggered */
@@ -1029,6 +1029,46 @@ export default class FormElement extends FormGroup {
   }
 
   /**
+   * Interal argument to set disabled class and disabled HTML attribute by
+   * &#x60;&lt;BsForm&gt;&#x60;, which can not use angle bracket invocation syntax /
+   * splatattributes due to limitations of &#x60;{{component}}&#x60; helper.
+   *
+   * If both the deprecated public API &#x60;@disabled&#x60; and private API &#x60;@_disabled&#x60; are
+   * set, &#x60;@disabled&#x60; wins.
+   *
+   * @property _disabled
+   * @type {Boolean}
+   * @private
+   */
+  @defaultValue
+  _disabled;
+
+  @computed(&#x27;disabled&#x27;, &#x27;_disabled&#x27;)
+  get __disabled() {
+    return this.get(&#x27;disabled&#x27;) !== undefined ? this.get(&#x27;disabled&#x27;) : this.get(&#x27;_disabled&#x27;);
+  }
+
+  /**
+   * Interal argument to set readonly HTML attribute of control by &#x60;&lt;BsForm&gt;&#x60;,
+   * which can not use angle bracket invocation syntax / splatattributes due to
+   * limitations of &#x60;{{component}}&#x60; helper.
+   *
+   * If both the deprecated public API &#x60;@readonly&#x60; and private API &#x60;@_readonly&#x60;
+   * are set, &#x60;@readonly&#x60; wins.
+   *
+   * @property _readonly
+   * @type {Boolean}
+   * @private
+   */
+  @defaultValue
+  _readonly;
+
+  @computed(&#x27;readonly&#x27;, &#x27;_readonly&#x27;)
+  get __readonly() {
+    return this.get(&#x27;readonly&#x27;) !== undefined ? this.get(&#x27;readonly&#x27;) : this.get(&#x27;_readonly&#x27;);
+  }
+
+  /**
    * @property errorsComponent
    * @type {String}
    * @private
@@ -1144,6 +1184,7 @@ export default class FormElement extends FormGroup {
         [&#x27;autosave&#x27;, &#x27;someuniquevalue&#x27;],
         [&#x27;cols&#x27;, &#x27;10&#x27;],
         [&#x27;controlSize:size&#x27;, &#x27;10&#x27;],
+        [&#x27;disabled&#x27;, true],
         [&#x27;form&#x27;, &#x27;myform&#x27;],
         [&#x27;inputmode&#x27;, &#x27;tel&#x27;],
         [&#x27;max&#x27;, &#x27;5&#x27;],
@@ -1154,6 +1195,8 @@ export default class FormElement extends FormGroup {
         [&#x27;name&#x27;, &#x27;foo&#x27;],
         [&#x27;pattern&#x27;, &#x27;^[0-9]{5}$&#x27;],
         [&#x27;placeholder&#x27;, &#x27;foo&#x27;],
+        [&#x27;required&#x27;, true],
+        [&#x27;readonly&#x27;, true],
         [&#x27;rows&#x27;, &#x27;10&#x27;],
         [&#x27;spellcheck&#x27;, true],
         [&#x27;step&#x27;, &#x27;2&#x27;],
@@ -1167,7 +1210,7 @@ export default class FormElement extends FormGroup {
           &#x60;Argument ${argument} of &lt;element&gt; component yielded by &lt;BsForm&gt; is deprecated. &#x60; +
           &#x60;It&#x27;s only purpose was setting the HTML attribute ${attribute} of the control element. &#x60; +
           &#x60;You should use  angle bracket  component invocation syntax instead:\n&#x60; +
-          &#x60;Before:n&#x60; +
+          &#x60;Before:\n&#x60; +
           &#x60;  {{#bs-form as |form|}}\n&#x60; +
           &#x60;    {{form.element ${attribute}=${typeof value === &#x27;string&#x27; ? &#x60;&quot;${value}&quot;&#x60; : value}}}\n&#x60; +
           &#x60;  {{/bs-form}}\n&#x60; +

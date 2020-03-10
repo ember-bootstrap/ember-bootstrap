@@ -63,7 +63,7 @@ import { attributeBindings, classNameBindings, layout as templateLayout, tagName
 import { gt } from &#x27;@ember/object/computed&#x27;;
 import Component from &#x27;@ember/component&#x27;;
 import { action, computed, set } from &#x27;@ember/object&#x27;;
-import { assert } from &#x27;@ember/debug&#x27;;
+import { assert, deprecate } from &#x27;@ember/debug&#x27;;
 import { isPresent } from &#x27;@ember/utils&#x27;;
 import { schedule } from &#x27;@ember/runloop&#x27;;
 import layout from &#x27;ember-bootstrap/templates/components/bs-form&#x27;;
@@ -539,6 +539,23 @@ export default class Form extends Component {
 
     let formLayout = this.get(&#x27;formLayout&#x27;);
     assert(&#x60;Invalid formLayout property given: ${formLayout}&#x60;, [&#x27;vertical&#x27;, &#x27;horizontal&#x27;, &#x27;inline&#x27;].indexOf(formLayout) &gt;= 0);
+
+    deprecate(
+      &#x60;Argument novalidate of &lt;BsForm&gt; component is deprecated. &#x60; +
+      &#x60;It&#x27;s only purpose was setting the HTML attribute novalidate of the &lt;form&gt; element. &#x60; +
+      &#x60;You should use  angle bracket component invocation syntax instead:\n&#x60; +
+      &#x60;Before:n&#x60; +
+      &#x60;  {{bs-form novalidate=true}}\n&#x60; +
+      &#x60;  &lt;BsForm @novalidate={{true}} /&gt;\n&#x60; +
+      &#x60;After:\n&#x60; +
+      &#x60;  &lt;BsForm novalidate&gt;&#x60;,
+      // eslint-disable-next-line ember/no-attrs-in-components
+      !Object.keys(this.attrs).includes(&#x27;novalidate&#x27;),
+      {
+        id: &#x60;ember-bootstrap.deprecated-argument.form#novalidate&#x60;,
+        until: &#x27;4.0.0&#x27;,
+      }
+    );
   }
 
   @action

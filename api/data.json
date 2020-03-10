@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "3.1.1"
+        "version": "3.1.2"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -2043,7 +2043,7 @@
         },
         {
             "file": "addon/components/base/bs-carousel/slide.js",
-            "line": 122,
+            "line": 126,
             "itemtype": "method",
             "name": "currentSlideDidTransition",
             "access": "private",
@@ -2053,7 +2053,7 @@
         },
         {
             "file": "addon/components/base/bs-carousel/slide.js",
-            "line": 131,
+            "line": 135,
             "itemtype": "method",
             "name": "currentSlideWillTransit",
             "access": "private",
@@ -2063,7 +2063,7 @@
         },
         {
             "file": "addon/components/base/bs-carousel/slide.js",
-            "line": 142,
+            "line": 146,
             "itemtype": "method",
             "name": "followingSlideDidTransition",
             "access": "private",
@@ -2073,7 +2073,7 @@
         },
         {
             "file": "addon/components/base/bs-carousel/slide.js",
-            "line": 152,
+            "line": 156,
             "itemtype": "method",
             "name": "followingSlideWillTransit",
             "access": "private",
@@ -2083,7 +2083,7 @@
         },
         {
             "file": "addon/components/base/bs-carousel/slide.js",
-            "line": 164,
+            "line": 168,
             "description": "Makes things more stable, especially when fast changing.",
             "class": "Components.CarouselSlide",
             "namespace": "Components"
@@ -3234,6 +3234,30 @@
         {
             "file": "addon/components/base/bs-form/element.js",
             "line": 970,
+            "description": "Interal argument to set disabled class and disabled HTML attribute by\n`<BsForm>`, which can not use angle bracket invocation syntax /\nsplatattributes due to limitations of `{{component}}` helper.\n\nIf both the deprecated public API `@disabled` and private API `@_disabled` are\nset, `@disabled` wins.",
+            "itemtype": "property",
+            "name": "_disabled",
+            "type": "{Boolean}",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.FormElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-form/element.js",
+            "line": 990,
+            "description": "Interal argument to set readonly HTML attribute of control by `<BsForm>`,\nwhich can not use angle bracket invocation syntax / splatattributes due to\nlimitations of `{{component}}` helper.\n\nIf both the deprecated public API `@readonly` and private API `@_readonly`\nare set, `@readonly` wins.",
+            "itemtype": "property",
+            "name": "_readonly",
+            "type": "{Boolean}",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.FormElement",
+            "namespace": "Components"
+        },
+        {
+            "file": "addon/components/base/bs-form/element.js",
+            "line": 1010,
             "itemtype": "property",
             "name": "errorsComponent",
             "type": "{String}",
@@ -3244,7 +3268,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 978,
+            "line": 1018,
             "itemtype": "property",
             "name": "feedbackIconComponent",
             "type": "{String}",
@@ -3255,7 +3279,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 986,
+            "line": 1026,
             "itemtype": "property",
             "name": "labelComponent",
             "type": "{String}",
@@ -3266,7 +3290,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 994,
+            "line": 1034,
             "itemtype": "property",
             "name": "helpTextComponent",
             "type": "{String}",
@@ -3277,7 +3301,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 1002,
+            "line": 1042,
             "description": "Setup validation properties. This method acts as a hook for external validation\nlibraries to overwrite. In case of failed validations the `errors` property should contain an array of error messages.",
             "itemtype": "method",
             "name": "setupValidations",
@@ -3288,7 +3312,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 1012,
+            "line": 1052,
             "description": "Listen for focusOut events from the control element to automatically set `showOwnValidation` to true to enable\nform validation markup rendering if `showValidationsOn` contains `focusOut`.",
             "itemtype": "event",
             "name": "focusOut",
@@ -3299,7 +3323,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 1023,
+            "line": 1063,
             "description": "Listen for change events from the control element to automatically set `showOwnValidation` to true to enable\nform validation markup rendering if `showValidationsOn` contains `change`.",
             "itemtype": "event",
             "name": "change",
@@ -3310,7 +3334,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 1034,
+            "line": 1074,
             "description": "Listen for input events from the control element to automatically set `showOwnValidation` to true to enable\nform validation markup rendering if `showValidationsOn` contains `input`.",
             "itemtype": "event",
             "name": "input",
@@ -3321,7 +3345,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 1045,
+            "line": 1085,
             "description": "The action is called whenever the input value is changed, e.g. by typing text",
             "itemtype": "event",
             "name": "onChange",
@@ -3349,7 +3373,7 @@
         },
         {
             "file": "addon/components/base/bs-form/element.js",
-            "line": 1056,
+            "line": 1096,
             "description": "Private duplicate of onChange event used for internal state handling between form and it's elements.",
             "itemtype": "event",
             "name": "_onChange",
@@ -3837,7 +3861,7 @@
         },
         {
             "file": "addon/components/base/bs-progress/bar.js",
-            "line": 27,
+            "line": 29,
             "description": "The lower limit of the value range",
             "itemtype": "property",
             "name": "minValue",
@@ -3850,7 +3874,7 @@
         },
         {
             "file": "addon/components/base/bs-progress/bar.js",
-            "line": 38,
+            "line": 40,
             "description": "The upper limit of the value range",
             "itemtype": "property",
             "name": "maxValue",
@@ -3863,7 +3887,7 @@
         },
         {
             "file": "addon/components/base/bs-progress/bar.js",
-            "line": 49,
+            "line": 51,
             "description": "The value the progress bar should represent",
             "itemtype": "property",
             "name": "value",
@@ -3876,7 +3900,7 @@
         },
         {
             "file": "addon/components/base/bs-progress/bar.js",
-            "line": 60,
+            "line": 62,
             "description": "If true a label will be shown inside the progress bar.\n\nBy default it will be the percentage corresponding to the `value` property, rounded to `roundDigits` digits.\nYou can customize it by using the component with a block template, which the component yields the percentage\nvalue to:\n\n```hbs\n{{#bs-progress}}\n{{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}\n{{/bs-progress}}\n```",
             "itemtype": "property",
             "name": "showLabel",
@@ -3889,7 +3913,7 @@
         },
         {
             "file": "addon/components/base/bs-progress/bar.js",
-            "line": 81,
+            "line": 83,
             "description": "Create a striped effect, see http://getbootstrap.com/components/#progress-striped",
             "itemtype": "property",
             "name": "striped",
@@ -3902,7 +3926,7 @@
         },
         {
             "file": "addon/components/base/bs-progress/bar.js",
-            "line": 92,
+            "line": 94,
             "description": "Animate the stripes, see http://getbootstrap.com/components/#progress-animated",
             "itemtype": "property",
             "name": "animate",
@@ -3915,7 +3939,7 @@
         },
         {
             "file": "addon/components/base/bs-progress/bar.js",
-            "line": 103,
+            "line": 105,
             "description": "Specify to how many digits the progress bar label should be rounded.",
             "itemtype": "property",
             "name": "roundDigits",
@@ -3928,7 +3952,7 @@
         },
         {
             "file": "addon/components/base/bs-progress/bar.js",
-            "line": 114,
+            "line": 116,
             "description": "Property for type styling\n\nFor the available types see the [Bootstrap docs](https://getbootstrap.com/docs/4.3/components/progress/#backgrounds)",
             "itemtype": "property",
             "name": "type",
@@ -3941,7 +3965,7 @@
         },
         {
             "file": "addon/components/base/bs-progress/bar.js",
-            "line": 142,
+            "line": 144,
             "description": "The percentage of `value`",
             "itemtype": "property",
             "name": "percent",
@@ -3954,7 +3978,7 @@
         },
         {
             "file": "addon/components/base/bs-progress/bar.js",
-            "line": 159,
+            "line": 161,
             "description": "The percentage of `value`, rounded to `roundDigits` digits",
             "itemtype": "property",
             "name": "percentRounded",
@@ -3967,7 +3991,7 @@
         },
         {
             "file": "addon/components/base/bs-progress/bar.js",
-            "line": 173,
+            "line": 175,
             "itemtype": "method",
             "name": "updateStyles",
             "return": {
@@ -5939,7 +5963,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 552,
+            "line": 555,
             "description": "Position the tooltip/popover's arrow",
             "itemtype": "method",
             "name": "replaceArrow",
@@ -5964,7 +5988,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 567,
+            "line": 570,
             "description": "Hide the tooltip/popover",
             "itemtype": "method",
             "name": "hide",
@@ -5975,7 +5999,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 613,
+            "line": 616,
             "itemtype": "method",
             "name": "addListeners",
             "access": "private",
@@ -5985,7 +6009,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 632,
+            "line": 635,
             "itemtype": "method",
             "name": "removeListeners",
             "access": "private",
@@ -5995,7 +6019,7 @@
         },
         {
             "file": "addon/components/base/bs-contextual-help.js",
-            "line": 652,
+            "line": 655,
             "itemtype": "method",
             "name": "handleTriggerEvent",
             "access": "private",
@@ -7700,7 +7724,7 @@
     "warnings": [
         {
             "message": "Missing item type\nMakes things more stable, especially when fast changing.",
-            "line": " addon/components/base/bs-carousel/slide.js:164"
+            "line": " addon/components/base/bs-carousel/slide.js:168"
         },
         {
             "message": "Missing item type\nInitial page loading configuration.",
