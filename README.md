@@ -4,9 +4,6 @@
 [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=UzdFQU9hSW1FdjhLU3hDU0I3ZXF6WG1YSWp2TGRHaU9tYmhNT0pPdUNhQT0tLWZqTkNQUzBjNFUvcFhlWTA0YitETmc9PQ==--2f9e373be422d4fcc56c8d658afc55f1938a721e)](https://www.browserstack.com/automate/public-build/UzdFQU9hSW1FdjhLU3hDU0I3ZXF6WG1YSWp2TGRHaU9tYmhNT0pPdUNhQT0tLWZqTkNQUzBjNFUvcFhlWTA0YitETmc9PQ==--2f9e373be422d4fcc56c8d658afc55f1938a721e)
 [![Ember Observer Score](http://emberobserver.com/badges/ember-bootstrap.svg)](http://emberobserver.com/addons/ember-bootstrap)
 [![npm version](https://badge.fury.io/js/ember-bootstrap.svg)](https://badge.fury.io/js/ember-bootstrap)
-[![Dependency Status](https://david-dm.org/kaliber5/ember-bootstrap.svg)](https://david-dm.org/kaliber5/ember-bootstrap)
-[![devDependency Status](https://david-dm.org/kaliber5/ember-bootstrap/dev-status.svg)](https://david-dm.org/kaliber5/ember-bootstrap#info=devDependencies)
-[![Greenkeeper badge](https://badges.greenkeeper.io/kaliber5/ember-bootstrap.svg)](https://greenkeeper.io/)
 
 An [ember-cli](http://www.ember-cli.com) addon for using [Bootstrap](http://getbootstrap.com/) 3 or 4 in Ember applications.
 
