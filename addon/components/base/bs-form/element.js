@@ -560,7 +560,7 @@ export default class FormElement extends FormGroup {
   /**
    * The array of warning messages from the `model`'s validation.
    *
-   * @property errors
+   * @property warnings
    * @type array
    * @protected
    */
