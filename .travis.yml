@@ -5,7 +5,6 @@ node_js:
   # so that your addon works for all apps
   - "8"
 
-sudo: false
 dist: trusty
 
 addons:
@@ -29,72 +28,67 @@ env:
 branches:
   only:
     - master
-    - dev-v3
     # npm version tags
     - /^v\d+\.\d+\.\d+/
 
 jobs:
-  fail_fast: true
+  fast_finish: true
   allow_failures:
-  - env: EMBER_TRY_SCENARIO=ember-canary
+    - env: EMBER_TRY_SCENARIO=ember-canary
 
   include:
-  # runs linting and tests with current locked deps
+    # runs linting and tests with current locked deps
+    - stage: "Tests"
+      name: "Tests"
+      script:
+        - yarn lint
+        - yarn test:ember
 
-  - stage: "Tests"
-    name: "Tests"
-    install:
-    - yarn install --non-interactive
-    script:
-    - yarn lint:hbs
-    - yarn lint:js
-    - yarn test
+    - stage: "Additional Tests"
+      name: "Floating Dependencies"
+      install:
+        - yarn install --no-lockfile --non-interactive
+      script:
+        - yarn test:ember
+        -
+    - name: "Docs App"
+      install:
+      - yarn install --non-interactive
+      - cd docs
+      - yarn install --non-interactive
+      script:
+      - yarn lint
+      - yarn test:ember
 
-  - name: "Floating Dependencies"
-    script:
-    - yarn test
-
-  - name: "Docs App"
-    install:
-    - yarn install --non-interactive
-    - cd docs
-    - yarn install --non-interactive
-    script:
-    - yarn lint:hbs
-    - yarn lint:js
-    - yarn test
-
-
-  # we recommend new addons test the current and previous LTS
-  # as well as latest stable release (bonus points to beta/canary)
-  - stage: "Additional Tests"
-    env: EMBER_TRY_SCENARIO=ember-default BABELPOLYFILL=true BEFORE_SCRIPT="ember browserstack:connect" AFTER_SCRIPT="ember browserstack:disconnect" TEST_COMMAND="ember test --filter !FastBoot --config-file testem.browserstack.js"
-  - env: EMBER_TRY_SCENARIO=ember-lts-2.18
-  - env: EMBER_TRY_SCENARIO=ember-lts-3.4
-  - env: EMBER_TRY_SCENARIO=ember-lts-3.8
-  - env: EMBER_TRY_SCENARIO=ember-lts-3.12
-  - env: EMBER_TRY_SCENARIO=ember-release
-  - env: EMBER_TRY_SCENARIO=ember-beta
-  - env: EMBER_TRY_SCENARIO=ember-canary
-  - env: EMBER_TRY_SCENARIO=ember-default-with-jquery
-  - env: EMBER_TRY_SCENARIO=ember-classic
-  - env: EMBER_TRY_SCENARIO=ember-lts-2.18 BOOTSTRAPVERSION=3
-  - env: EMBER_TRY_SCENARIO=ember-lts-3.4 BOOTSTRAPVERSION=3
-  - env: EMBER_TRY_SCENARIO=ember-lts-3.8 BOOTSTRAPVERSION=3
-  - env: EMBER_TRY_SCENARIO=ember-lts-3.12 BOOTSTRAPVERSION=3
-  - env: EMBER_TRY_SCENARIO=ember-release BOOTSTRAPVERSION=3
-  - env: EMBER_TRY_SCENARIO=ember-beta BOOTSTRAPVERSION=3
-  - env: EMBER_TRY_SCENARIO=ember-classic BOOTSTRAPVERSION=3
-  - env: EMBER_TRY_SCENARIO=fastboot-tests
-  - env: EMBER_TRY_SCENARIO=node-tests
-  - env: EMBER_TRY_SCENARIO=ember-default TEST_COMMAND="ember test --launch Firefox"
+    # we recommend new addons test the current and previous LTS
+    # as well as latest stable release (bonus points to beta/canary)
+    - env: EMBER_TRY_SCENARIO=ember-default BABELPOLYFILL=true BEFORE_SCRIPT="ember browserstack:connect" AFTER_SCRIPT="ember browserstack:disconnect" TEST_COMMAND="ember test:ember --filter !FastBoot --config-file testem.browserstack.js"
+    - env: EMBER_TRY_SCENARIO=ember-lts-2.18
+    - env: EMBER_TRY_SCENARIO=ember-lts-3.4
+    - env: EMBER_TRY_SCENARIO=ember-lts-3.8
+    - env: EMBER_TRY_SCENARIO=ember-lts-3.12
+    - env: EMBER_TRY_SCENARIO=ember-release
+    - env: EMBER_TRY_SCENARIO=ember-beta
+    - env: EMBER_TRY_SCENARIO=ember-canary
+    - env: EMBER_TRY_SCENARIO=ember-default-with-jquery
+    - env: EMBER_TRY_SCENARIO=ember-classic
+    - env: EMBER_TRY_SCENARIO=ember-lts-2.18 BOOTSTRAPVERSION=3
+    - env: EMBER_TRY_SCENARIO=ember-lts-3.4 BOOTSTRAPVERSION=3
+    - env: EMBER_TRY_SCENARIO=ember-lts-3.8 BOOTSTRAPVERSION=3
+    - env: EMBER_TRY_SCENARIO=ember-lts-3.12 BOOTSTRAPVERSION=3
+    - env: EMBER_TRY_SCENARIO=ember-release BOOTSTRAPVERSION=3
+    - env: EMBER_TRY_SCENARIO=ember-beta BOOTSTRAPVERSION=3
+    - env: EMBER_TRY_SCENARIO=ember-classic BOOTSTRAPVERSION=3
+    - env: EMBER_TRY_SCENARIO=fastboot-tests
+    - env: EMBER_TRY_SCENARIO=node-tests
+    - env: EMBER_TRY_SCENARIO=ember-default TEST_COMMAND="ember test:ember --launch Firefox"
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
 
 install:
-  - yarn install --no-lockfile --non-interactive
+  - yarn install --non-interactive
 
 script:
   - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --- $TEST_COMMAND
