@@ -11,6 +11,7 @@ Config.reopenClass({
 
   load(config = {}) {
     for (let property in config) {
+      // eslint-disable-next-line no-prototype-builtins
       if (this.hasOwnProperty(property) && typeof this[property] !== 'function') {
         this[property] = config[property];
       }
