@@ -1,5 +1,5 @@
 <div class="{{this.horizontalInputGridClass}} {{this.horizontalInputOffsetGridClass}}">
-  {{#if (has-bootstrap-version 3)}}
+  {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
     <div class="checkbox">
       {{#component @labelComponent}}
         {{yield}}

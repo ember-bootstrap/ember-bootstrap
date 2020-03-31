@@ -2,10 +2,10 @@
   {{#if this.showMultipleErrors}}
     <div class="pre-scrollable">
       {{#each @messages as |message|}}
-        <div class={{if (has-bootstrap-version 3) "help-block" "invalid-feedback d-block"}}>{{message}}</div>
+        <div class={{if (macroCondition (macroGetOwnConfig "isBS3")) "help-block" "invalid-feedback d-block"}}>{{message}}</div>
       {{/each}}
     </div>
   {{else}}
-    <div class={{if (has-bootstrap-version 3) "help-block" "invalid-feedback d-block"}}>{{@messages.firstObject}}</div>
+    <div class={{if (macroCondition (macroGetOwnConfig "isBS3")) "help-block" "invalid-feedback d-block"}}>{{@messages.firstObject}}</div>
   {{/if}}
 {{/if}}

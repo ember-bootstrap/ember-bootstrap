@@ -1,5 +1,5 @@
 {{#if this._isOpen}}
-  {{#if (has-bootstrap-version 4)}}
+  {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
     <EmberPopper
       class="dropdown-menu {{this.alignClass}} {{if this.isOpen "show"}} {{@class}}"
       @placement={{this.popperPlacement}}
@@ -23,7 +23,7 @@
       }}
     </EmberPopper>
   {{/if}}
-  {{#if (has-bootstrap-version 3)}}
+  {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
     <EmberPopper
       class="ember-bootstrap-dropdown-bs3-popper"
       @placement={{this.popperPlacement}}

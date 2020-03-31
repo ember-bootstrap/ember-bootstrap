@@ -1,5 +1,5 @@
 <div
-  class="{{if (has-bootstrap-version 4) "accordion"}} {{if (has-bootstrap-version 3) "panel-group"}}"
+  class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "accordion"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "panel-group"}}"
   role="tablist"
   ...attributes
 >

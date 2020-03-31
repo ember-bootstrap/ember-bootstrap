@@ -1,8 +1,8 @@
-<button class="{{if (has-bootstrap-version 4) "navbar-toggler" "navbar-toggle"}} {{if this.collapsed "collapsed"}}" ...attributes {{on "click" this.handleClick}}>
+<button class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "navbar-toggler" "navbar-toggle"}} {{if this.collapsed "collapsed"}}" ...attributes {{on "click" this.handleClick}}>
   {{#if hasBlock}}
     {{yield}}
   {{else}}
-    {{#if (has-bootstrap-version 4)}}
+    {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
       <span class="navbar-toggler-icon"></span>
     {{else}}
       <span class="sr-only">Toggle navigation</span>

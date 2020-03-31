@@ -1,3 +1,3 @@
-<div class={{if (has-bootstrap-version 4) "dropdown-divider" "divider"}}>
+<div class={{if (macroCondition (macroGetOwnConfig "isBS4")) "dropdown-divider" "divider"}}>
   {{yield}}
 </div>

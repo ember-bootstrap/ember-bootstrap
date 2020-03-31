@@ -1,9 +1,9 @@
-{{#if (has-bootstrap-version 4)}}
+{{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
   <h5 class="modal-title" ...attributes>
     {{yield}}
   </h5>
 {{/if}}
-{{#if (has-bootstrap-version 3)}}
+{{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
   <h4 class="modal-title" ...attributes>
     {{yield}}
   </h4>

@@ -98,6 +98,15 @@ module.exports = {
     this.import(path.join(vendorPath, 'register-version.js'));
   },
 
+  options: {
+    '@embroider/macros': {
+      setOwnConfig: {
+        isBS3: false,
+        isBS4: true
+      }
+    },
+  },
+
   validateDependencies() {
     let bowerDependencies = this.app.project.bowerDependencies();
 
