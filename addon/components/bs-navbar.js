@@ -6,7 +6,7 @@ import layout from 'ember-bootstrap/templates/components/bs-navbar';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { assert } from '@ember/debug';
-import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
+import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { isBlank } from '@ember/utils';
 
 
@@ -150,8 +150,8 @@ export default class Navbar extends Component {
   @computed('position')
   get positionClass() {
     let position = this.position;
-    let validPositions = hasBootstrapVersion(3) ? ['fixed-top', 'fixed-bottom', 'static-top'] : ['fixed-top', 'fixed-bottom', 'sticky-top'];
-    let positionPrefix = hasBootstrapVersion(3) ? 'navbar-' : '';
+    let validPositions = macroCondition(getOwnConfig().isBS3) ? ['fixed-top', 'fixed-bottom', 'static-top'] : ['fixed-top', 'fixed-bottom', 'sticky-top'];
+    let positionPrefix = macroCondition(getOwnConfig().isBS3) ? 'navbar-' : '';
 
     if (validPositions.indexOf(position) === -1) {
       return null;
@@ -178,7 +178,7 @@ export default class Navbar extends Component {
     let type = this.type || 'default';
     assert('The value of `type` must be a string', typeof type === 'string' && type !== '');
 
-    if (hasBootstrapVersion(4)) {
+    if (macroCondition(getOwnConfig().isBS4)) {
       // 'default` is not a valid type in BS4, but still accepted for compatibility purposes, and mapped to `light'
       if (type === 'default') {
         type = 'light';
@@ -298,7 +298,7 @@ export default class Navbar extends Component {
 
   @computed('toggleBreakpoint')
   get breakpointClass() {
-    if (hasBootstrapVersion(3)) {
+    if (macroCondition(getOwnConfig().isBS3)) {
       return undefined;
     } else {
       let toggleBreakpoint = this.toggleBreakpoint;
@@ -313,7 +313,7 @@ export default class Navbar extends Component {
 
   @computed('backgroundColor')
   get backgroundClass() {
-    if (hasBootstrapVersion(3)) {
+    if (macroCondition(getOwnConfig().isBS3)) {
       return undefined;
     } else {
       return `bg-${this.backgroundColor}`;

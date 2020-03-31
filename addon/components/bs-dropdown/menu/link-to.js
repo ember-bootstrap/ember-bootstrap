@@ -1,6 +1,6 @@
 import LinkComponent from '@ember/routing/link-component';
 import { classNames } from '@ember-decorators/component';
-import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
+import { macroCondition, getOwnConfig } from '@embroider/macros';
 
 /**
 
@@ -11,5 +11,5 @@ import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
  @extends Ember.LinkComponent
  @public
  */
-@classNames(hasBootstrapVersion(4) ? 'dropdown-item' : '')
+@classNames(macroCondition(getOwnConfig().isBS4) ? 'dropdown-item' : '')
 export default class DropdownMenuLinkTo extends LinkComponent {}

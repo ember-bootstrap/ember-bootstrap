@@ -96,13 +96,15 @@ module.exports = {
 
     // register library version
     this.import(path.join(vendorPath, 'register-version.js'));
+
+    // setup config for @embroider/macros
+    this.options['@embroider/macros'].setOwnConfig.isBS3 = this.getBootstrapVersion() === 3;
+    this.options['@embroider/macros'].setOwnConfig.isBS4 = this.getBootstrapVersion() === 4;
   },
 
   options: {
     '@embroider/macros': {
       setOwnConfig: {
-        isBS3: false,
-        isBS4: true
       }
     },
   },

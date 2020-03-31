@@ -8,7 +8,7 @@ import { getOwner } from '@ember/application';
 import layout from 'ember-bootstrap/templates/components/bs-form/element';
 import FormGroup from 'ember-bootstrap/components/bs-form/group';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
+import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { guidFor } from '@ember/object/internals';
 
 const nonDefaultLayouts = A([
@@ -200,7 +200,7 @@ const nonDefaultLayouts = A([
 @templateLayout(layout)
 export default class FormElement extends FormGroup {
   @defaultValue
-  doNotShowValidationForEventTargets = hasBootstrapVersion(3) ? [
+  doNotShowValidationForEventTargets = macroCondition(getOwnConfig().isBS3) ? [
     '.input-group-addon',
     '.input-group-btn',
   ] : [
@@ -806,7 +806,7 @@ export default class FormElement extends FormGroup {
    */
   @computed('controlType')
   get labelComponent() {
-    return hasBootstrapVersion(3) ? 'bs-form/element/label' : this.controlType === 'radio' ? 'bs-form/element/legend' : 'bs-form/element/label';
+    return macroCondition(getOwnConfig().isBS3) ? 'bs-form/element/label' : this.controlType === 'radio' ? 'bs-form/element/legend' : 'bs-form/element/label';
   }
 
   /**
@@ -929,7 +929,7 @@ export default class FormElement extends FormGroup {
    */
   @action
   adjustFeedbackIcons(el) {
-    if (hasBootstrapVersion(3)) {
+    if (macroCondition(getOwnConfig().isBS3)) {
       let feedbackIcon;
       // validation state icons are only shown if form element has feedback
       if (!this.isDestroying
