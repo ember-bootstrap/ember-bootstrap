@@ -103,7 +103,7 @@ module.exports = {
     let bowerDependencies = this.app.project.bowerDependencies();
 
     if (this.getBootstrapVersion() === 4) {
-      let checker = new VersionChecker(this);
+      let checker = new VersionChecker(this.project);
       let dep = checker.for('bootstrap');
 
       if (!dep.gte(minimumBS4Version)) {
