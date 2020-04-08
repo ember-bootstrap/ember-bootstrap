@@ -85,6 +85,7 @@
     "test": "tests"
   },
   "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "broccoli-debug": "^0.6.3",
     "broccoli-funnel": "^2.0.0",
     "broccoli-merge-trees": "^3.0.1",

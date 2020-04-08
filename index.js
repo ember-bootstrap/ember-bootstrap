@@ -343,5 +343,11 @@ module.exports = {
 
     whitelist.forEach(_addToWhitelist);
     return list;
+  },
+
+  options: {
+    babel: {
+      plugins: ['transform-object-rest-spread']
+    }
   }
 };
