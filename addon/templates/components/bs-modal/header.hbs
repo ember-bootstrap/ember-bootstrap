@@ -7,7 +7,7 @@
       )
     }}
   {{else}}
-    {{#if (has-bootstrap-version 4)}}
+    {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
       {{#if hasBlock}}
         {{yield}}
       {{else}}
@@ -17,7 +17,7 @@
         {{component this.closeComponent onClick=@onClose}}
       {{/if}}
     {{/if}}
-    {{#if (has-bootstrap-version 3)}}
+    {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
       {{#if this.closeButton}}
         {{component this.closeComponent onClick=@onClose}}
       {{/if}}

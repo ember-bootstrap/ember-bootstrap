@@ -1,5 +1,5 @@
 <div
-  class="{{if this.disabled "disabled"}} {{this.typeClass}} {{if (has-bootstrap-version 4) "card"}} {{if (has-bootstrap-version 3) "panel"}}"
+  class="{{if this.disabled "disabled"}} {{this.typeClass}} {{if (macroCondition (macroGetOwnConfig "isBS4")) "card"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "panel"}}"
   ...attributes
 >
   {{#if hasBlockParams}}

@@ -10,7 +10,7 @@ import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
+import { macroCondition, getOwnConfig } from '@embroider/macros';
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -370,7 +370,7 @@ export default class Button extends Component {
    * @public
    */
   @defaultValue
-  type = hasBootstrapVersion(4) ? 'secondary' : 'default';
+  type = macroCondition(getOwnConfig().isBS4) ? 'secondary' : 'default';
 
   /**
    * Property to create outline buttons (BS4+ only)

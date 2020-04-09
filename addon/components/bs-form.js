@@ -8,7 +8,7 @@ import { schedule } from '@ember/runloop';
 import layout from 'ember-bootstrap/templates/components/bs-form';
 import RSVP from 'rsvp';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
+import { macroCondition, getOwnConfig } from '@embroider/macros';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -123,7 +123,7 @@ export default class Form extends Component {
   @computed('formLayout')
   get layoutClass() {
     let layout = this.formLayout;
-    if (hasBootstrapVersion(3)) {
+    if (macroCondition(getOwnConfig().isBS3)) {
       return layout === 'vertical' ? 'form' : `form-${layout}`;
     } else {
       return layout === 'inline' ? 'form-inline' : null;

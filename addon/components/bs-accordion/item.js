@@ -5,7 +5,7 @@ import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
-import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
+import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { guidFor } from '@ember/object/internals';
 
 /**
@@ -103,7 +103,7 @@ export default class AccordionItem extends Component {
   @defaultValue
   type = 'default';
 
-  @typeClass(hasBootstrapVersion(4) ? 'bg' : 'panel', 'type')
+  @typeClass(macroCondition(getOwnConfig().isBS4) ? 'bg' : 'panel', 'type')
   typeClass;
 
   /**

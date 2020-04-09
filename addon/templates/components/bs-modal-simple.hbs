@@ -36,7 +36,7 @@
 
     <div>
       {{#if this.showBackdrop}}
-        <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (has-bootstrap-version 4) "show" "in")}}" id={{this.backdropId}}></div>
+        <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
       {{/if}}
     </div>
   {{else}}
@@ -77,7 +77,7 @@
 
       <div>
         {{#if this.showBackdrop}}
-          <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (has-bootstrap-version 4) "show" "in")}}" id={{this.backdropId}}></div>
+          <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
         {{/if}}
       </div>
     {{/in-element}}

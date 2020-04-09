@@ -1,7 +1,7 @@
 import LinkComponent from '@ember/routing/link-component';
 import ComponentChild from 'ember-bootstrap/mixins/component-child';
 import { classNames } from '@ember-decorators/component';
-import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
+import { macroCondition, getOwnConfig } from '@embroider/macros';
 
 /**
 
@@ -13,5 +13,5 @@ import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
  @uses Mixins.ComponentChild
  @public
  */
-@classNames(hasBootstrapVersion(4) ? 'nav-link' : '')
+@classNames(macroCondition(getOwnConfig().isBS4) ? 'nav-link' : '')
 export default class NavLinkTo extends LinkComponent.extend(ComponentChild) {}

@@ -2,7 +2,7 @@
   {{component @labelComponent labelClass=@horizontalLabelGridClass}}
   <div class={{this.horizontalInputGridClass}}>
     {{yield}}
-    {{#if (has-bootstrap-version 3)}}
+    {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
       {{component @feedbackIconComponent}}
     {{/if}}
     {{component @errorsComponent}}
@@ -11,7 +11,7 @@
 {{else}}
   <div class="{{this.horizontalInputGridClass}} {{this.horizontalInputOffsetGridClass}}">
     {{yield}}
-    {{#if (has-bootstrap-version 3)}}
+    {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
       {{component @feedbackIconComponent}}
     {{/if}}
     {{component @errorsComponent}}

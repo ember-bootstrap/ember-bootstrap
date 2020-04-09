@@ -4,7 +4,7 @@ import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-progress/bar';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
-import { hasBootstrapVersion } from 'ember-bootstrap/compatibility-helpers';
+import { macroCondition, getOwnConfig } from '@embroider/macros';
 
 /**
 
@@ -118,7 +118,7 @@ export default class ProgressBar extends Component {
   @defaultValue
   type = 'default';
 
-  @typeClass(hasBootstrapVersion(4) ? 'bg' : 'progress-bar', 'type')
+  @typeClass(macroCondition(getOwnConfig().isBS4) ? 'bg' : 'progress-bar', 'type')
   typeClass;
 
   /**

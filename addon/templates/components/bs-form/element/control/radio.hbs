@@ -1,6 +1,6 @@
 {{#each @options as |option index|}}
   {{#let (concat @id "-" index) as |id|}}
-    {{#if (has-bootstrap-version 3)}}
+    {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
       {{#if this.inline}}
         <label
           for={{id}}

@@ -1,4 +1,4 @@
-{{#if (has-bootstrap-version 3)}}
+{{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
   {{#if hasBlock}}
     <label>
       {{yield}}
