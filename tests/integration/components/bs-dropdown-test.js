@@ -203,7 +203,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
   test('clicking outside dropdown menu when closeOnMenuClick is false and renderInPlace is false will close it', async function(assert) {
     await render(
       hbs`
-        <div id="ember-bootstrap-wormhole"></div> 
+        <div id="ember-bootstrap-wormhole"></div>
         {{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu renderInPlace=false}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
     );
     await click('a.dropdown-toggle');
@@ -339,6 +339,23 @@ module('Integration | Component | bs-dropdown', function(hooks) {
   module('keyboard control', function() {
 
     function keyboardTest() {
+      test(`should have correct default element focused`, async function(assert) {
+        await render(
+          hbs`
+        <BsDropdown as |dd|>
+          <dd.toggle>Dropdown</dd.toggle>
+          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
+            <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
+          </dd.menu>
+        </BsDropdown>
+      `);
+
+        await click('a.dropdown-toggle');
+        let expectedFocusElement = this.renderInPlace ? 'a.dropdown-toggle' : '.dropdown-menu';
+
+        assert.dom(expectedFocusElement).isFocused();
+      });
+
       test('should show if down key is pressed on toggle', async function(assert) {
         await render(
           hbs`

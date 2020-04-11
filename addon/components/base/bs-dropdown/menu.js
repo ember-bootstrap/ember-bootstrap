@@ -55,7 +55,7 @@ export default class DropdownMenu extends Component {
   inNav = false;
 
   /**
-   * By default the menu is rendered in the same place the dropdown. If you experience clipping
+   * By default the menu is rendered in the same place as the dropdown. If you experience clipping
    * issues, you can set this to false to render the menu in a wormhole at the top of the DOM.
    *
    * @property renderInPlace
@@ -140,6 +140,11 @@ export default class DropdownMenu extends Component {
 
   @action
   setFocus() {
+    // when the dropdown menu is rendered in place, focus can stay on the toggle element
+    if (this.get('_renderInPlace')) {
+      return;
+    }
+
     let menuElement = document.getElementById(`${this.get('dropdownElementId')}__menu`);
     if (menuElement) {
       menuElement.focus();
