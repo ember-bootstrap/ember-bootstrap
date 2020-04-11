@@ -1,4 +1,14 @@
 
+## 3.1.3 (2020-04-11)
+
+#### Bug Fixes
+* [#1029](https://github.com/kaliber5/ember-bootstrap/pull/1029) Fix dropdown focus to stay on toggle element ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 4
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Keita Urashima ([@ursm](https://github.com/ursm))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@JamesS-M](https://github.com/JamesS-M)
 ## 3.1.2 (2020-03-10)
 
 #### Deprecations
