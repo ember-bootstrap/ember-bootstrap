@@ -2,7 +2,7 @@
     "project": {
         "name": "ember-bootstrap",
         "description": "Twitter Bootstrap components for Ember.js",
-        "version": "3.1.2"
+        "version": "3.1.3"
     },
     "files": {
         "addon/components/base/bs-accordion/item/body.js": {
@@ -2281,7 +2281,7 @@
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
             "line": 57,
-            "description": "By default the menu is rendered in the same place the dropdown. If you experience clipping\nissues, you can set this to false to render the menu in a wormhole at the top of the DOM.",
+            "description": "By default the menu is rendered in the same place as the dropdown. If you experience clipping\nissues, you can set this to false to render the menu in a wormhole at the top of the DOM.",
             "itemtype": "property",
             "name": "renderInPlace",
             "type": "boolean",
@@ -2317,7 +2317,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 162,
+            "line": 167,
             "itemtype": "property",
             "name": "itemComponent",
             "type": "{String}",
@@ -2328,7 +2328,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 169,
+            "line": 174,
             "itemtype": "property",
             "name": "linkToComponent",
             "type": "{String}",
@@ -2339,7 +2339,7 @@
         },
         {
             "file": "addon/components/base/bs-dropdown/menu.js",
-            "line": 176,
+            "line": 181,
             "itemtype": "property",
             "name": "dividerComponent",
             "type": "{String}",
@@ -2880,7 +2880,7 @@
             "line": 560,
             "description": "The array of warning messages from the `model`'s validation.",
             "itemtype": "property",
-            "name": "errors",
+            "name": "warnings",
             "type": "array",
             "access": "protected",
             "tagname": "",
