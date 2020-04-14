@@ -349,6 +349,23 @@ module('Integration | Component | bs-dropdown', function(hooks) {
   module('keyboard control', function() {
 
     function keyboardTest() {
+      test(`should have correct default element focused`, async function(assert) {
+        await render(
+          hbs`
+        <BsDropdown as |dd|>
+          <dd.toggle>Dropdown</dd.toggle>
+          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
+            <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
+          </dd.menu>
+        </BsDropdown>
+      `);
+
+        await click('a.dropdown-toggle');
+        let expectedFocusElement = this.renderInPlace ? 'a.dropdown-toggle' : '.dropdown-menu';
+
+        assert.dom(expectedFocusElement).isFocused();
+      });
+
       test('should show if down key is pressed on toggle', async function(assert) {
         await render(
           hbs`

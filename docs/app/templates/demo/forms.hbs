@@ -92,7 +92,7 @@
 
 <div class="bs-example">
   <!-- BEGIN-SNIPPET form-custom -->
-  <BsForm @model={{this.login}} @∆onSubmit={{action "submit"}} as |form|>
+  <BsForm @model={{this.login}} @onSubmit={{action "submit"}} as |form|>
     <form.element @label="Email" @placeholder="Email" @property="email" as |el|>
       <div class="input-group">
         <el.control />
