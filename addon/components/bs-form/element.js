@@ -375,7 +375,7 @@ export default class FormElement extends FormGroup {
   /**
    * The array of warning messages from the `model`'s validation.
    *
-   * @property errors
+   * @property warnings
    * @type array
    * @protected
    */
@@ -662,7 +662,7 @@ export default class FormElement extends FormGroup {
     'showValidation',
     'showModelValidation',
     'isValidating',
-    'disabled'
+    '__disabled'
   )
   get validation() {
     if (!this.showValidation || !this.hasValidator || this.isValidating || this.disabled) {
@@ -868,6 +868,7 @@ export default class FormElement extends FormGroup {
         ['autosave', 'someuniquevalue'],
         ['cols', '10'],
         ['controlSize:size', '10'],
+        ['disabled', true],
         ['form', 'myform'],
         ['inputmode', 'tel'],
         ['max', '5'],
@@ -878,6 +879,8 @@ export default class FormElement extends FormGroup {
         ['name', 'foo'],
         ['pattern', '^[0-9]{5}$'],
         ['placeholder', 'foo'],
+        ['required', true],
+        ['readonly', true],
         ['rows', '10'],
         ['spellcheck', true],
         ['step', '2'],
@@ -891,7 +894,7 @@ export default class FormElement extends FormGroup {
           `Argument ${argument} of <element> component yielded by <BsForm> has been removed. ` +
           `It's only purpose was setting the HTML attribute ${attribute} of the control element. ` +
           `You should use  angle bracket  component invocation syntax instead:\n` +
-          `Before:n` +
+          `Before:\n` +
           `  {{#bs-form as |form|}}\n` +
           `    {{form.element ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
           `  {{/bs-form}}\n` +
