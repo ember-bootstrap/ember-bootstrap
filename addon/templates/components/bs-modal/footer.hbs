@@ -1,0 +1,13 @@
+<form class="modal-footer" ...attributes {{on "submit" this.handleSubmit}}>
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    {{#if this.hasSubmitButton}}
+      {{#component this.buttonComponent onClick=@onClose}}{{this.closeTitle}}{{/component}}
+      {{#component this.buttonComponent type=this.submitButtonType onClick=@onSubmit _disabled=this.submitDisabled}}{{@submitTitle}}{{/component}}
+    {{else}}
+      {{#component this.buttonComponent type="primary" onClick=@onClose}}{{this.closeTitle}}{{/component}}
+    {{/if}}
+  {{/if}}
+  
+</form>

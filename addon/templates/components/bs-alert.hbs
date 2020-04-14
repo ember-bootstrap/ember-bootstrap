@@ -1,0 +1,11 @@
+<div class="{{if this.alert "alert"}} {{if this.fade "fade"}} {{if this.dismissible "alert-dismissible"}} {{this.typeClass}} {{if this.showAlert (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" ...attributes>
+  {{#unless this.hidden}}
+    {{#if this.dismissible}}
+      <button type="button" class="close" aria-label="Close" {{action this.dismiss}}>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    {{/if}}
+    {{yield}}
+  {{/unless}}
+
+</div>

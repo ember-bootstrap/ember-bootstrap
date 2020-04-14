@@ -1,4 +1,4 @@
-import { computed, getWithDefault } from '@ember/object';
+import { computed } from '@ember/object';
 
 /**
  * CP macro that listens to dependent (external) property, but allows overriding it locally without violating DDAU
@@ -15,7 +15,7 @@ import { computed, getWithDefault } from '@ember/object';
 export default function(dependentKey, defaultValue = null) {
   return computed(dependentKey, {
     get() {
-      return getWithDefault(this, dependentKey, defaultValue);
+      return this[dependentKey] ?? defaultValue;
     },
     set(key, value) { // eslint-disable-line no-unused-vars
       return value;

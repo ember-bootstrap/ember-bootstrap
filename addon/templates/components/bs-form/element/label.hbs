@@ -1,0 +1,17 @@
+{{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
+  {{#if hasBlock}}
+    <label>
+      {{yield}}
+      {{@label}}
+    </label>
+  {{else}}
+    <label class="control-label {{if this.invisibleLabel "sr-only"}} {{this.labelClass}}" for={{@formElementId}}>{{@label}}</label>
+  {{/if}}
+{{else}}
+  <label class="{{if this.invisibleLabel "sr-only"}} {{this.labelClass}} {{if this.isHorizontalAndNotCheckbox "col-form-label"}} {{if this.isCheckbox "form-check-label"}} {{this.sizeClass}}" for={{@formElementId}}>
+    {{#if hasBlock}}
+      {{yield}}
+    {{/if}}
+    {{@label}}
+  </label>
+{{/if}}

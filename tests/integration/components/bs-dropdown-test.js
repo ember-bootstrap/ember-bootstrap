@@ -23,46 +23,46 @@ module('Integration | Component | bs-dropdown', function(hooks) {
   });
 
   test('dropdown container has dropdown class', async function(assert) {
-    await render(hbs`{{#bs-dropdown}}Test{{/bs-dropdown}}`);
+    await render(hbs`<BsDropdown>Test</BsDropdown>`);
 
     assert.dom('.dropdown').exists('has dropdown class');
   });
 
   test('dropdown container supports dropup style', async function(assert) {
-    await render(hbs`{{#bs-dropdown direction="up"}}Test{{/bs-dropdown}}`);
+    await render(hbs`<BsDropdown @direction="up">Test</BsDropdown>`);
 
     assert.dom('.dropup').exists('has dropup class');
   });
 
   testBS4('dropdown container supports dropright style', async function(assert) {
-    await render(hbs`{{#bs-dropdown direction="right"}}Test{{/bs-dropdown}}`);
+    await render(hbs`<BsDropdown @direction="right">Test</BsDropdown>`);
 
     assert.dom('.dropright').exists('has dropright class');
   });
 
   testBS4('dropdown container supports dropleft style', async function(assert) {
-    await render(hbs`{{#bs-dropdown direction="left"}}Test{{/bs-dropdown}}`);
+    await render(hbs`<BsDropdown @direction="left">Test</BsDropdown>`);
 
     assert.dom('.dropleft').exists('has dropleft class');
   });
 
   test('dropdown container with dropdown button has btn-group class', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown as |dd|}}{{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+      hbs`<BsDropdown as |dd|><dd.button>Dropdown <span class="caret"></span></dd.button><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
     assert.dom('.btn-group').exists('has btn-group class');
   });
 
   test('dropdown container with block dropdown button has dropdown class', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown as |dd|}}{{#dd.button block=true}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+      hbs`<BsDropdown as |dd|><dd.button @block={{true}}>Dropdown <span class="caret"></span></dd.button><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
     assert.dom('.dropdown').exists('has dropdown class');
   });
 
   test('dropdown container with dropdown button supports dropup style', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown direction="up" as |dd|}}{{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+      hbs`<BsDropdown @direction="up" as |dd|><dd.button>Dropdown <span class="caret"></span></dd.button><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
     assert.dom('.btn-group').exists('has btn-group class');
     assert.dom('.dropup').exists('has dropup class');
@@ -70,7 +70,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
 
   test('dropdown-toggle toggles dropdown visibility', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+      hbs`<BsDropdown as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
 
     assert.dom('.dropdown-menu').doesNotExist('Dropdown is closed');
@@ -83,7 +83,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
 
   test('dropdown toggle has aria-expanded attribute', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+      hbs`<BsDropdown as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
 
     assert.dom('.dropdown-toggle').hasAttribute('aria-expanded', 'false');
@@ -95,7 +95,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
 
   test('dropdown button has aria-expanded attribute', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown as |dd|}}{{#dd.button}}Dropdown <span class="caret"></span>{{/dd.button}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+      hbs`<BsDropdown as |dd|><dd.button>Dropdown <span class="caret"></span></dd.button><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
 
     assert.dom('.dropdown-toggle').hasAttribute('aria-expanded', 'false');
@@ -107,7 +107,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
 
   test('opened dropdown will close on outside click', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+      hbs`<BsDropdown as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
 
     await click('a.dropdown-toggle');
@@ -119,7 +119,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
 
   test('clicking dropdown menu will close it', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+      hbs`<BsDropdown as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
     await click('a.dropdown-toggle');
     assert.dom('.dropdown-menu').exists();
@@ -138,9 +138,13 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       assert.ok('stopped event');
     });
 
-    await render(
-      hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}<div id="target" onclick={{action stopEvent}} />`
-    );
+    await render(hbs`
+      <BsDropdown as |dd|>
+        <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+        <dd.menu><li><a href="#">Something</a></li></dd.menu>
+      </BsDropdown>
+      <div id="target" role="button" onclick={{action stopEvent}} />
+    `);
 
     await click('a.dropdown-toggle');
     assert.dom(`.${openClass()}`).exists('Dropdown is open');
@@ -150,9 +154,12 @@ module('Integration | Component | bs-dropdown', function(hooks) {
   });
 
   test('clicking dropdown menu when closeOnMenuClick is false will not close it', async function(assert) {
-    await render(
-      hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
-    );
+    await render(hbs`
+      <BsDropdown @closeOnMenuClick={{false}} as |dd|>
+        <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+        <dd.menu><li><a href="#">Something</a></li></dd.menu>
+      </BsDropdown>
+      `);
     await click('a.dropdown-toggle');
     assert.dom('.dropdown-menu').exists();
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
@@ -163,9 +170,12 @@ module('Integration | Component | bs-dropdown', function(hooks) {
   });
 
   test('clicking dropdown menu when closeOnMenuClick is false will not close it, even after opening the menu again', async function (assert) {
-    await render(
-      hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
-    );
+    await render(hbs`
+      <BsDropdown @closeOnMenuClick={{false}} as |dd|>
+        <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+        <dd.menu><li><a href="#">Something</a></li></dd.menu>
+      </BsDropdown>
+    `);
     await click('a.dropdown-toggle');
     assert.dom('.dropdown-menu').exists();
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
@@ -190,7 +200,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
 
   test('clicking outside dropdown menu when closeOnMenuClick is false will close it', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+      hbs`<BsDropdown @closeOnMenuClick={{false}} as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
     await click('a.dropdown-toggle');
     assert.dom('.dropdown-menu').exists();
@@ -204,7 +214,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     await render(
       hbs`
         <div id="ember-bootstrap-wormhole"></div>
-        {{#bs-dropdown closeOnMenuClick=false as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu renderInPlace=false}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+        <BsDropdown @closeOnMenuClick={{false}} as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu @renderInPlace={{false}}><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
     await click('a.dropdown-toggle');
     assert.dom('.dropdown-menu').exists();
@@ -216,7 +226,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
 
   test('child components can access isOpen property', async function(assert) {
     await render(
-      hbs`{{#bs-dropdown as |dd|}}{{#dd.toggle}}<span id="toggleText">{{if dd.isOpen "open" "closed"}}</span>{{/dd.toggle}}{{/bs-dropdown}}`
+      hbs`<BsDropdown as |dd|><dd.toggle><span id="toggleText">{{if dd.isOpen "open" "closed"}}</span></dd.toggle></BsDropdown>`
     );
 
     assert.dom('#toggleText').hasText('closed', 'Dropdown is closed');
@@ -230,7 +240,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     let action = this.spy();
     this.actions.show = action;
     await render(
-      hbs`{{#bs-dropdown onShow=(action "show") as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+      hbs`<BsDropdown @onShow={{action "show"}} as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
 
     await click('a.dropdown-toggle');
@@ -241,7 +251,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     let action = this.spy();
     this.actions.hide = action;
     await render(
-      hbs`{{#bs-dropdown onHide=(action "hide") as |dd|}}{{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}{{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}{{/bs-dropdown}}`
+      hbs`<BsDropdown @onHide={{action "hide"}} as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
 
     await click('a.dropdown-toggle');
@@ -252,13 +262,13 @@ module('Integration | Component | bs-dropdown', function(hooks) {
   test('dropdown yields the openDropdown action', async function(assert) {
     let action = this.spy();
     this.actions.show = action;
-    await render(
-      hbs`{{#bs-dropdown onShow=(action 'show') as |dd|}}
-            {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-            {{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}
-            <a {{action dd.openDropdown}} class='custom-open'>Custom open link</a>
-          {{/bs-dropdown}}`
-    );
+    await render(hbs`
+      <BsDropdown @onShow={{action "show"}} as |dd|>
+        <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+        <dd.menu><li><a href="#">Something</a></li></dd.menu>
+        <a role="button" {{action dd.openDropdown}} class="custom-open">Custom open link</a>
+      </BsDropdown>
+    `);
 
     await click('a.custom-open');
     assert.ok(action.calledOnce);
@@ -267,17 +277,17 @@ module('Integration | Component | bs-dropdown', function(hooks) {
   test('dropdown yields the closeDropdown action', async function(assert) {
     let hide = this.spy();
     this.actions.hide = hide;
-    await render(
-      hbs`{{#bs-dropdown closeOnMenuClick=false onHide=(action 'hide') as |dd|}}
-            {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-            {{#dd.menu}}
-              <li>
-                <a href="#">Something</a>
-                <a {{action dd.closeDropdown}} class='custom-close'>Custom close link</a>
-              </li>
-            {{/dd.menu}}
-          {{/bs-dropdown}}`
-    );
+    await render(hbs`
+      <BsDropdown @closeOnMenuClick={{false}} @onHide={{action "hide"}} as |dd|>
+        <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+        <dd.menu>
+          <li>
+            <a href="#">Something</a>
+            <a role="button" {{action dd.closeDropdown}} class="custom-close">Custom close link</a>
+          </li>
+        </dd.menu>
+      </BsDropdown>
+    `);
 
     await click('a.dropdown-toggle');
     await click('.custom-close');
@@ -289,13 +299,13 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     let hide = this.spy();
     this.actions.hide = hide;
     this.actions.show = show;
-    await render(
-      hbs`{{#bs-dropdown onShow=(action 'show') onHide=(action 'hide') as |dd|}}
-            {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-            {{#dd.menu}}<li><a href="#">Something</a></li>{{/dd.menu}}
-            <a {{action dd.toggleDropdown}} class='custom-toggle'>Custom toggle link</a>
-          {{/bs-dropdown}}`
-    );
+    await render(hbs`
+      <BsDropdown @onShow={{action "show"}} @onHide={{action "hide"}} as |dd|>
+        <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+        <dd.menu><li><a href="#">Something</a></li></dd.menu>
+        <a {{action dd.toggleDropdown}} role="button" class="custom-toggle">Custom toggle link</a>
+      </BsDropdown>
+    `);
 
     await click('a.custom-toggle');
     assert.ok(show.calledOnce);
@@ -306,14 +316,14 @@ module('Integration | Component | bs-dropdown', function(hooks) {
 
   test('opening dropdown makes the menu visible', async function(assert) {
     await render(hbs`
-    {{#bs-dropdown as |dd|}}
-      {{#dd.toggle}}Dropdown{{/dd.toggle}}
-      {{#dd.menu as |menu|}}
-        {{#menu.item}}
+    <BsDropdown as |dd|>
+      <dd.toggle>Dropdown</dd.toggle>
+      <dd.menu as |menu|>
+        <menu.item>
           {{menu.link-to "Home" "index"}}
-        {{/menu.item}}
-      {{/dd.menu}}
-    {{/bs-dropdown}}`);
+        </menu.item>
+      </dd.menu>
+    </BsDropdown>`);
 
     assert.ok(isHidden(this.element.querySelector('.dropdown-menu')));
 
@@ -326,10 +336,10 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     await render(
       hbs`
         <div id="ember-bootstrap-wormhole"></div>
-        {{#bs-dropdown as |dd|}}
-          {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-          {{#dd.menu renderInPlace=false}}<li><a href="#">Something</a></li>{{/dd.menu}}
-        {{/bs-dropdown}}`
+        <BsDropdown as |dd|>
+          <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+          <dd.menu @renderInPlace={{false}}><li><a href="#">Something</a></li></dd.menu>
+        </BsDropdown>`
     );
 
     await click('a.dropdown-toggle');
@@ -505,17 +515,16 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       });
 
       test('should ignore keyboard events within <input>s and <textarea>s, except for escape key', async function(assert) {
-        await render(
-          hbs`
-        <BsDropdown as |dd|>
-          <dd.toggle>Dropdown</dd.toggle>
-          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
-            <a class="dropdown-item" href="#" id="item1">Something</a>
-            <input type="text" />
-            <textarea></textarea>
-          </dd.menu>
-        </BsDropdown>
-      `);
+        await render(hbs`
+          <BsDropdown as |dd|>
+            <dd.toggle>Dropdown</dd.toggle>
+            <dd.menu @renderInPlace={{this.renderInPlace}}>
+              <a class="dropdown-item" href="#" id="item1">Something</a>
+              <input type="text">
+              <textarea></textarea>
+            </dd.menu>
+          </BsDropdown>
+        `);
 
         await click('a.dropdown-toggle');
         await focus('input');
@@ -533,17 +542,16 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       });
 
       test('should skip disabled element when using keyboard navigation', async function(assert) {
-        await render(
-          hbs`
-        <BsDropdown as |dd|>
-          <dd.toggle>Dropdown</dd.toggle>
-          <dd.menu @renderInPlace={{this.renderInPlace}} as |menu|>
-            <a class="dropdown-item disabled" href="#sub1">Submenu 1</a>
-            <button class="dropdown-item" type="button" disabled>Disabled button</button>
-            <a class="dropdown-item" href="#" id="item1">Something</a>
-          </dd.menu>
-        </BsDropdown>
-      `);
+        await render(hbs`
+          <BsDropdown as |dd|>
+            <dd.toggle>Dropdown</dd.toggle>
+            <dd.menu @renderInPlace={{this.renderInPlace}}>
+              <a class="dropdown-item disabled" href="#sub1">Submenu 1</a>
+              <button class="dropdown-item" type="button" disabled>Disabled button</button>
+              <a class="dropdown-item" href="#" id="item1">Something</a>
+            </dd.menu>
+          </BsDropdown>
+        `);
 
         await click('a.dropdown-toggle');
 

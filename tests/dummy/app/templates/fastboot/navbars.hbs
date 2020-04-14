@@ -1,7 +1,7 @@
 <BsNavbar as |navbar|>
   <div class="navbar-header">
     {{navbar.toggle}}
-    {{#link-to "index" class="navbar-brand"}}Brand{{/link-to}}
+    <LinkTo @route="index" class="navbar-brand">Brand</LinkTo>
   </div>
   <navbar.content>
     <navbar.nav as |nav|>

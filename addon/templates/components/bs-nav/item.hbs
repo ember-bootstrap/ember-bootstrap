@@ -1,0 +1,4 @@
+{{!-- template-lint-disable no-invalid-interactive --}}
+<li class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "nav-item"}} {{if this.disabled "disabled"}} {{if this.active "active"}}" ...attributes {{on "click" this.handleClick}}>
+  {{yield}}
+</li>

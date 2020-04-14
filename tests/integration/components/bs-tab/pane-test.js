@@ -15,9 +15,9 @@ module('Integration | Component | bs-tab/pane', function(hooks) {
 
   test('it has correct markup', async function(assert) {
     await render(hbs`
-      {{#bs-tab/pane fade=true activeId="pane1" id="pane1"}}
+      <BsTab::Pane @fade={{true}} @activeId="pane1" @id="pane1">
         template block text
-      {{/bs-tab/pane}}
+      </BsTab::Pane>
     `);
 
     assert.dom('*').hasText('template block text', 'Shows block content');
@@ -29,9 +29,9 @@ module('Integration | Component | bs-tab/pane', function(hooks) {
   test('it has correct markup when switching active pane and fade=false', async function(assert) {
     this.set('activeId', null);
     await render(hbs`
-      {{#bs-tab/pane fade=false activeId=activeId id="pane1"}}
+      <BsTab::Pane @fade={{false}} @activeId={{activeId}} @id="pane1">
         template block text
-      {{/bs-tab/pane}}
+      </BsTab::Pane>
     `);
 
     assert.dom('div.tab-pane').hasNoClass('fade', 'tab-pane does not have fade class');
@@ -51,9 +51,9 @@ module('Integration | Component | bs-tab/pane', function(hooks) {
   testRequiringTransitions('it has correct markup when switching active pane and fade=true', async function(assert) {
     this.set('activeId', null);
     await render(hbs`
-      {{#bs-tab/pane fade=true activeId=activeId id="pane1"}}
+      <BsTab::Pane @fade={{true}} @activeId={{activeId}} @id="pane1">
         template block text
-      {{/bs-tab/pane}}
+      </BsTab::Pane>
     `);
 
     assert.dom('div.tab-pane').hasClass('fade', 'tab-pane has fade class');

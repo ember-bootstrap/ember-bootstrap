@@ -1,0 +1,6 @@
+<legend class="{{if this.invisibleLabel "sr-only"}} {{this.labelClass}} {{if this.isHorizontalAndNotCheckbox "col-form-label"}} {{this.sizeClass}}">
+  {{#if hasBlock}}
+    {{yield}}
+  {{/if}}
+  {{@label}}
+</legend>

@@ -1,0 +1,31 @@
+<div class="modal-header" ...attributes>
+  {{#if hasBlockParams}}
+    {{yield
+      (hash
+        title=(component this.titleComponent)
+        close=(component this.closeComponent onClick=@onClose)
+      )
+    }}
+  {{else}}
+    {{#if (macroCondition (macroGetOwnConfig "isBS4"))}}
+      {{#if hasBlock}}
+        {{yield}}
+      {{else}}
+        {{#component this.titleComponent}}{{@title}}{{/component}}
+      {{/if}}
+      {{#if this.closeButton}}
+        {{component this.closeComponent onClick=@onClose}}
+      {{/if}}
+    {{/if}}
+    {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
+      {{#if this.closeButton}}
+        {{component this.closeComponent onClick=@onClose}}
+      {{/if}}
+      {{#if hasBlock}}
+        {{yield}}
+      {{else}}
+        {{#component this.titleComponent}}{{@title}}{{/component}}
+      {{/if}}
+    {{/if}}
+  {{/if}}
+</div>

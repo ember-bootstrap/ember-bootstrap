@@ -30,34 +30,34 @@ module('Integration | Component | bs-form/group', function(hooks) {
   setupNoDeprecations(hooks);
 
   test('component has form-group bootstrap class', async function(assert) {
-    await render(hbs`{{bs-form/group}}`);
+    await render(hbs`<BsForm::Group />`);
     assert.dom('.form-group').exists('component has form-group class');
   });
 
   testBS4('component has row class for horizontal layouts', async function(assert) {
-    await render(hbs`{{bs-form/group formLayout="horizontal"}}`);
+    await render(hbs`<BsForm::Group @formLayout="horizontal" />`);
     assert.dom('.row').exists('component has row class');
   });
 
   testBS3('support size classes', async function(assert) {
-    await render(hbs`{{bs-form/group size="lg"}}`);
+    await render(hbs`<BsForm::Group @size="lg" />`);
     assert.dom('.form-group').hasClass('form-group-lg', 'form-group has large class');
 
-    await render(hbs`{{bs-form/group size="sm"}}`);
+    await render(hbs`<BsForm::Group @size="sm" />`);
     assert.dom('.form-group').hasClass('form-group-sm', 'form-group has small class');
   });
 
   testBS4('does not set size class for BS4', async function(assert) {
-    await render(hbs`{{bs-form/group size="lg"}}`);
+    await render(hbs`<BsForm::Group @size="lg" />`);
     assert.dom('.form-group').hasNoClass('form-group-lg', 'form-group has not large class');
 
-    await render(hbs`{{bs-form/group size="sm"}}`);
+    await render(hbs`<BsForm::Group @size="sm" />`);
     assert.dom('.form-group').hasNoClass('form-group-sm', 'form-group has not small class');
   });
 
   async function testValidationState(assert, state) {
     let validationConfig = validations[state];
-    await render(hbs`{{#bs-form/group validation=validation}}{{/bs-form/group}}`);
+    await render(hbs`<BsForm::Group @validation={{validation}}></BsForm::Group>`);
     this.set('validation', state);
     validationConfig.formGroupClasses.forEach((className) => {
       assert.dom(`.${className}`).exists(`component has ${className} class`);

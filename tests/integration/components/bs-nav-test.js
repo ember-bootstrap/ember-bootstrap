@@ -13,9 +13,9 @@ module('Integration | Component | bs-nav', function(hooks) {
   test('it has correct markup', async function(assert) {
     // Template block usage:
     await render(hbs`
-      {{#bs-nav}}
+      <BsNav>
         template block text
-      {{/bs-nav}}
+      </BsNav>
     `);
 
     assert.dom('*').hasText('template block text', 'Shows block content');
@@ -26,7 +26,7 @@ module('Integration | Component | bs-nav', function(hooks) {
   testBS3('it supports bootstrap options', async function(assert) {
     // Template block usage:
     await render(hbs`
-      {{bs-nav justified=true stacked=true type="pills"}}
+      <BsNav @justified={{true}} @stacked={{true}} @type="pills" />
     `);
 
     assert.dom('ul').hasClass('nav-pills', 'has pills class');
@@ -37,7 +37,7 @@ module('Integration | Component | bs-nav', function(hooks) {
   testBS4('it supports bootstrap options', async function(assert) {
     // Template block usage:
     await render(hbs`
-      {{bs-nav justified=true stacked=true fill=true type="pills"}}
+      <BsNav @justified={{true}} @stacked={{true}} @fill={{true}} @type="pills" />
     `);
 
     assert.dom('ul').hasClass('nav-pills', 'has pills class');
@@ -49,20 +49,20 @@ module('Integration | Component | bs-nav', function(hooks) {
   test('it exposes contextual components', async function(assert) {
     this.owner.lookup('router:main').setupRouter();
     await render(hbs`
-      {{#bs-nav as |nav|}}
-        {{#nav.item}}
+      <BsNav as |nav|>
+        <nav.item>
           {{#nav.link-to "application"}}Dummy{{/nav.link-to}}
-        {{/nav.item}}
-        {{#nav.item}}
+        </nav.item>
+        <nav.item>
           {{#nav.linkTo "application"}}Dummy{{/nav.linkTo}}
-        {{/nav.item}}
-        {{#nav.dropdown as |dd|}}
-          {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-          {{#dd.menu as |ddm|}}
-            {{#ddm.item}}{{#ddm.link-to "index"}}Home{{/ddm.link-to}}{{/ddm.item}}
-          {{/dd.menu}}
-        {{/nav.dropdown}}
-      {{/bs-nav}}
+        </nav.item>
+        <nav.dropdown as |dd|>
+          <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+          <dd.menu as |ddm|>
+            <ddm.item>{{#ddm.link-to "index"}}Home{{/ddm.link-to}}</ddm.item>
+          </dd.menu>
+        </nav.dropdown>
+      </BsNav>
     `);
 
     assert.dom('.nav').exists({ count: 1 }, 'it has the nav');
@@ -73,20 +73,20 @@ module('Integration | Component | bs-nav', function(hooks) {
 
   test('it passes accessibility checks', async function (assert) {
     await render(hbs`
-      {{#bs-nav as |nav|}}
-        {{#nav.item}}
+      <BsNav as |nav|>
+        <nav.item>
           {{#nav.link-to "application"}}Dummy{{/nav.link-to}}
-        {{/nav.item}}
-        {{#nav.item}}
+        </nav.item>
+        <nav.item>
           {{#nav.linkTo "application"}}Dummy{{/nav.linkTo}}
-        {{/nav.item}}
-        {{#nav.dropdown as |dd|}}
-          {{#dd.toggle}}Dropdown <span class="caret"></span>{{/dd.toggle}}
-          {{#dd.menu as |ddm|}}
-            {{#ddm.item}}{{#ddm.link-to "index"}}Home{{/ddm.link-to}}{{/ddm.item}}
-          {{/dd.menu}}
-        {{/nav.dropdown}}
-      {{/bs-nav}}
+        </nav.item>
+        <nav.dropdown as |dd|>
+          <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
+          <dd.menu as |ddm|>
+            <ddm.item>{{#ddm.link-to "index"}}Home{{/ddm.link-to}}</ddm.item>
+          </dd.menu>
+        </nav.dropdown>
+      </BsNav>
     `);
 
     await a11yAudit();

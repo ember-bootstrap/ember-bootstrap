@@ -1,0 +1,38 @@
+<div
+  tabindex={{this.tabindex}}
+  class="carousel slide {{if (macroCondition (macroGetOwnConfig "isBS4")) (if this.carouselFade "carousel-fade")}}"
+  ...attributes
+  {{on "keydown" this.handleKeyDown}}
+  {{on "mouseenter" this.handleMouseEnter}}
+  {{on "mouseleave" this.handleMouseLeave}}
+>
+  {{#if this.showIndicators}}
+    <ol class="carousel-indicators">
+      {{#each this.indicators as |indicator _index|}}
+        <li class={{if (bs-eq this.currentIndex _index) "active"}} onclick={{action "toSlide" _index}} role="button"></li>
+      {{/each}}
+    </ol>
+  {{/if}}
+
+  <div class="carousel-inner" role="listbox">
+    {{yield (hash slide=(component this.slideComponent
+      currentSlide=this.currentSlide
+      directionalClassName=this.directionalClassName
+      followingSlide=this.followingSlide
+      orderClassName=this.orderClassName
+      presentationState=this.presentationState
+    ))}}
+  </div>
+
+  {{#if this.showControls}}
+    <a class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "carousel-control-prev"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "carousel-control left"}}" href="#{{this.elementId}}" {{action this.toPrevSlide}} role="button">
+      <span aria-hidden="true" class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "carousel-control-prev-icon"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "icon-prev"}}"></span>
+      <span class="sr-only">{{this.prevControlLabel}}</span>
+    </a>
+    <a class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "carousel-control-next"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "carousel-control right"}}" href="#{{this.elementId}}" {{action this.toNextSlide}} role="button">
+      <span aria-hidden="true" class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "carousel-control-next-icon"}}{{if (macroCondition (macroGetOwnConfig "isBS3")) "icon-next"}}"></span>
+      <span class="sr-only">{{this.nextControlLabel}}</span>
+    </a>
+  {{/if}}
+
+</div>

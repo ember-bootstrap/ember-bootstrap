@@ -22,14 +22,13 @@ To switch Bootstrap version or preprocessor, see the [setup documentation](http:
 
 ## Compatibility
 
-ember-bootstrap works and is fully [tested](https://travis-ci.org/kaliber5/ember-bootstrap) with
+Ember Bootstrap works and is fully [tested](https://travis-ci.org/kaliber5/ember-bootstrap) with
 
-* Ember.js 2.18+ / Ember CLI 2.18+
-* Bootstrap 3 and 4.
-* all modern evergreen browsers (Chrome, Firefox, Safari, Edge) and IE 11 (the latter requires the use of the [Babel polyfill](https://github.com/babel/ember-cli-babel#polyfill)). 
-* FastBoot 1.0+ 
-* jQuery-less builds (using [ember-native-dom-event-dispatcher](https://github.com/rwjblue/ember-native-dom-event-dispatcher)
-or Ember 3.x)
+* Ember.js 3.15+ (including all optional features)
+* Ember CLI 3.15+
+* Bootstrap 3 and 4
+* all modern evergreen browsers (Chrome, Firefox, Safari, Edge) and IE 11 (the latter requires the use of the [Babel polyfill](https://github.com/babel/ember-cli-babel#polyfill)).
+* FastBoot 1.0+
 
 This project follows [Semantic Versioning](http://semver.org/).
 

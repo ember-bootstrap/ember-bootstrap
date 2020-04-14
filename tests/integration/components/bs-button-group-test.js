@@ -76,7 +76,7 @@ module('Integration | Component | bs-button-group', function(hooks) {
     );
     this.set('value', 1);
 
-    assert.equal(this.get('value'), 1, 'value must match set value');
+    assert.equal(this.value, 1, 'value must match set value');
 
     // check button's active property
     for (let k = 0; k < 3; k++) {
@@ -91,7 +91,7 @@ module('Integration | Component | bs-button-group', function(hooks) {
     );
     this.set('value', value);
 
-    assert.deepEqual(this.get('value'), value, 'value must match set value');
+    assert.deepEqual(this.value, value, 'value must match set value');
 
     // check button's active property
     for (let k = 0; k < 3; k++) {
@@ -106,7 +106,7 @@ module('Integration | Component | bs-button-group', function(hooks) {
 
     for (let i = 0; i < 3; i++) {
       this.set('value', i + 1);
-      assert.equal(this.get('value'), i + 1, 'value must match set value');
+      assert.equal(this.value, i + 1, 'value must match set value');
 
       // check button's active property
       for (let k = 0; k < 3; k++) {
@@ -122,7 +122,7 @@ module('Integration | Component | bs-button-group', function(hooks) {
 
     let value = A([1, 3]);
     this.set('value', value);
-    assert.deepEqual(this.get('value'), value, 'value must match set value');
+    assert.deepEqual(this.value, value, 'value must match set value');
 
     // check button's active property
     for (let k = 0; k < 3; k++) {
@@ -149,7 +149,7 @@ module('Integration | Component | bs-button-group', function(hooks) {
     for (let i = 0; i < 3; i++) {
       this.set('value', i + 1);
       this.set('value', null);
-      assert.equal(this.get('value'), null, 'value must be null');
+      assert.equal(this.value, null, 'value must be null');
       // check button's active property
       for (let k = 0; k < 3; k++) {
         assert.dom(`button:nth-child(${k + 1})`).hasNoClass('active', 'button active state is true');
@@ -165,7 +165,7 @@ module('Integration | Component | bs-button-group', function(hooks) {
     );
 
     await click('button:nth-child(3)');
-    assert.equal(this.get('value'), value, 'Does not change value property');
+    assert.equal(this.value, value, 'Does not change value property');
   });
 
   test('it passes accessibility checks', async function (assert) {

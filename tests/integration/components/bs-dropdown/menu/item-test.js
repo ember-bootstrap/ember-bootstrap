@@ -12,9 +12,9 @@ module('Integration | Component | bs-dropdown/menu/item', function(hooks) {
   testBS3('it has correct markup', async function(assert) {
     // Template block usage:
     await render(hbs`
-      {{#bs-dropdown/menu/item}}
+      <BsDropdown::Menu::Item>
         template block text
-      {{/bs-dropdown/menu/item}}
+      </BsDropdown::Menu::Item>
     `);
 
     assert.dom('li').exists({ count: 1 }, 'renders as <li> element');
@@ -25,9 +25,9 @@ module('Integration | Component | bs-dropdown/menu/item', function(hooks) {
     // Template block usage:
     await render(hbs`
       <span>
-      {{#bs-dropdown/menu/item}}
-        template block text
-      {{/bs-dropdown/menu/item}}
+        <BsDropdown::Menu::Item>
+          template block text
+        </BsDropdown::Menu::Item>
       </span>
     `);
 

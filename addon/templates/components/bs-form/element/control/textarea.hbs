@@ -1,0 +1,11 @@
+<textarea
+  id={{@id}}
+  disabled={{this.disabled}}
+  readonly={{this.readonly}}
+  aria-describedby={{this.ariaDescribedBy}}
+  value={{this.value}}
+  class="form-control {{if (macroCondition (macroGetOwnConfig "isBS4")) this.formValidationClass}}"
+  ...attributes
+  {{on "change" this.handleChange}}
+  {{on "input" this.handleInput}}>
+</textarea>

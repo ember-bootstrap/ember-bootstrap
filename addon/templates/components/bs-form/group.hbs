@@ -1,0 +1,9 @@
+<div
+  class="form-group {{if (macroCondition (macroGetOwnConfig "isBS3")) this.validationClass}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.hasFeedback "has-feedback")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.sizeClass}} {{if (macroCondition (macroGetOwnConfig "isBS4")) (if this.isHorizontal "row")}}"
+  ...attributes
+>
+  {{yield}}
+  {{#if this.hasFeedback}}
+    <span class="form-control-feedback {{this.iconName}}" aria-hidden="true"></span>
+  {{/if}}
+</div>

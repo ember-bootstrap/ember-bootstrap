@@ -1,0 +1,28 @@
+<div
+  role="dialog"
+  tabindex="-1"
+  aria-labelledby={{this.ariaLabelledby}}
+  class="modal {{if @fade "fade"}} {{if @showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}} {{if @inDom (if (macroCondition (macroGetOwnConfig "isBS4")) "d-block" "show")}}"
+  ...attributes
+  {{on "keydown" this.handleKeyDown}}
+  {{on "mousedown" this.handleMouseDown}}
+  {{on "mouseup" this.handleMouseUp}}
+  {{on "click" this.handleClick}}
+  {{style paddingLeft=(concat @paddingLeft "px") paddingRight=(concat @paddingRight "px") display=(if @inDom "block" "")}}
+  {{ref this "_element"}}
+  {{did-insert this.getOrSetTitleId}}
+  {{did-insert this.setInitialFocus}}
+>
+  <div class="modal-dialog {{this.sizeClass}} {{if @centered "modal-dialog-centered"}} {{if @scrollable "modal-dialog-scrollable"}}" role="document">
+    <div class="modal-content"
+      {{focus-trap
+        shouldSelfFocus=true
+        focusTrapOptions=(hash
+          clickOutsideDeactivates=true
+        )
+      }}
+    >
+      {{yield}}
+    </div>
+  </div>
+</div>

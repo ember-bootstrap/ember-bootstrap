@@ -1,0 +1,7 @@
+{{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
+  <li>
+    {{yield}}
+  </li>
+{{else}}
+  {{yield}}
+{{/if}}

@@ -1,0 +1,70 @@
+{{!-- template-lint-disable no-invalid-interactive --}}
+<div
+  class="form-group {{if this.disabled "disabled"}} {{if this.required "is-required"}} {{if this.isValidating "is-validating"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.validationClass}} {{if (macroCondition (macroGetOwnConfig "isBS3")) (if this.hasFeedback "has-feedback")}} {{if (macroCondition (macroGetOwnConfig "isBS3")) this.sizeClass}} {{if (macroCondition (macroGetOwnConfig "isBS4")) (if this.isHorizontal "row")}}"
+  ...attributes
+  {{ref this "_element"}}
+  {{on "focusout" this.showValidationOnHandler}}
+  {{on "change" this.showValidationOnHandler}}
+  {{on "input" this.showValidationOnHandler}}
+  {{did-insert this.adjustFeedbackIcons}}
+  {{did-update this.adjustFeedbackIcons this.hasFeedback this.formLayout}}
+>
+  {{#component this.layoutComponent
+    hasLabel=this.hasLabel
+    formElementId=this.formElementId
+    horizontalLabelGridClass=this.horizontalLabelGridClass
+    errorsComponent=(component this.errorsComponent
+      messages=this.validationMessages
+      show=this.showValidationMessages
+      showMultipleErrors=this.showMultipleErrors
+    )
+    feedbackIconComponent=(component this.feedbackIconComponent
+      iconName=@iconName
+      show=this.hasFeedback
+    )
+    labelComponent=(component this.labelComponent
+      label=@label
+      invisibleLabel=this.invisibleLabel
+      formElementId=this.formElementId
+      controlType=this.controlType
+      formLayout=this.formLayout
+      size=@size
+    )
+    helpTextComponent=(if this.hasHelpText
+      (component this.helpTextComponent
+        text=@helpText
+        id=this.ariaDescribedBy
+      )
+    )
+  }}
+    {{#let
+      (component this.controlComponent
+        value=this.value
+        id=this.formElementId
+        type=this.controlType
+        label=@label
+        disabled=@disabled
+        readonly=@readonly
+        required=@required
+        options=this.options
+        optionLabelPath=this.optionLabelPath
+        ariaDescribedBy=(if this.hasHelpText this.ariaDescribedBy)
+        onChange=(action this.doChange)
+        validationType=this.validation
+        size=this.size
+    ) as |Control|}}
+      {{#if hasBlock}}
+        {{yield
+          (hash
+            value=this.value
+            id=this.formElementId
+            validation=this.validation
+            control=Control
+          )
+        }}
+      {{else}}
+        <Control />
+      {{/if}}
+    {{/let}}
+  {{/component}}
+</div>

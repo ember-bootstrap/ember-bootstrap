@@ -16,11 +16,13 @@ module('Integration | Component | bs-modal', function(hooks) {
   });
 
   test('Modal yields header, footer and body components', async function(assert) {
-    await render(hbs`{{#bs-modal as |modal|}}
-      {{modal.header title="Dialog"}}
-      {{#modal.body}}Hello world!{{/modal.body}}
-      {{modal.footer}}
-    {{/bs-modal}}`);
+    await render(hbs`
+      <BsModal as |modal|>
+        <modal.header @title="Dialog" />
+        <modal.body>Hello world!</modal.body>
+        <modal.footer />
+      </BsModal>
+    `);
 
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     assert.dom('.modal .modal-header').exists({ count: 1 }, 'Modal has header.');
@@ -33,27 +35,29 @@ module('Integration | Component | bs-modal', function(hooks) {
   });
 
   test('Hidden modal does not render', async function(assert) {
-    await render(hbs`{{#bs-modal open=false as |modal|}}
-      {{modal.header title="Dialog"}}
-      {{#modal.body}}Hello world!{{/modal.body}}
-      {{modal.footer}}
-    {{/bs-modal}}`);
+    await render(hbs`
+      <BsModal @open={{false}} as |modal|>
+        <modal.header @title="Dialog" />
+        <modal.body>Hello world!</modal.body>
+        <modal.footer />
+      </BsModal>
+    `);
 
     assert.dom('.modal *').doesNotExist('Modal does not exist.');
   });
 
   test('clicking ok button closes modal when autoClose=true with custom component hierarchy', async function(assert) {
-    this.owner.register('component:my-component', Component.extend({
-      layout: hbs`{{yield}}`
-    }));
+    this.owner.register('component:my-component', class extends Component {
+      layout = hbs`{{yield}}`;
+    });
 
     await render(hbs`
-      {{#bs-modal title="Simple Dialog" body=false footer=false as |modal|}}
+      <BsModal @title="Simple Dialog" @body={{false}} @footer={{false}} as |modal|>
         {{#my-component}}
-          {{#modal.body}}Hello world!{{/modal.body}}
-          {{modal.footer}}
+          <modal.body>Hello world!</modal.body>
+          <modal.footer />
         {{/my-component}}
-      {{/bs-modal}}
+      </BsModal>
 
     `);
 
@@ -65,13 +69,15 @@ module('Integration | Component | bs-modal', function(hooks) {
     let closeAction = this.spy();
     this.actions.close = closeAction;
 
-    await render(hbs`{{#bs-modal onHide=(action "close") as |modal|}}
-      {{modal.header title="Dialog"}}
-      {{#modal.body}}Hello world!{{/modal.body}}
-      {{#modal.footer}}
-        <button id="close" {{action modal.close}}>Close</button>
-      {{/modal.footer}}
-    {{/bs-modal}}`);
+    await render(hbs`
+      <BsModal @onHide={{action "close"}} as |modal|>
+        <modal.header @title="Dialog" />
+        <modal.body>Hello world!</modal.body>
+        <modal.footer>
+          <button id="close" {{action modal.close}}>Close</button>
+        </modal.footer>
+      </BsModal>
+    `);
 
     await click('#close');
     assert.ok(closeAction.calledOnce, 'close action has been called.');
@@ -81,13 +87,15 @@ module('Integration | Component | bs-modal', function(hooks) {
     let submitAction = this.spy();
     this.actions.submit = submitAction;
 
-    await render(hbs`{{#bs-modal onSubmit=(action "submit") as |modal|}}
-      {{modal.header title="Dialog"}}
-      {{#modal.body}}Hello world!{{/modal.body}}
-      {{#modal.footer}}
-        <button id="submit" {{action modal.submit}}>Submit</button>
-      {{/modal.footer}}
-    {{/bs-modal}}`);
+    await render(hbs`
+      <BsModal @onSubmit={{action "submit"}} as |modal|>
+        <modal.header @title="Dialog" />
+        <modal.body>Hello world!</modal.body>
+        <modal.footer>
+          <button id="submit" {{action modal.submit}}>Submit</button>
+        </modal.footer>
+      </BsModal>
+    `);
 
     await click('#submit');
     assert.ok(submitAction.calledOnce, 'submit action has been called.');
@@ -95,15 +103,17 @@ module('Integration | Component | bs-modal', function(hooks) {
 
   test('Modal has accesibility attributes with custom title', async function(assert) {
 
-    await render(hbs`{{#bs-modal as |modal|}}
-      {{#modal.header}}
-        <h4 class="modal-title">
-          Custom Dialog title
-        </h4>
-      {{/modal.header}}
-      {{#modal.body}}Hello world!{{/modal.body}}
-      {{modal.footer}}
-    {{/bs-modal}}`);
+    await render(hbs`
+      <BsModal as |modal|>
+        <modal.header>
+          <h4 class="modal-title">
+            Custom Dialog title
+          </h4>
+        </modal.header>
+        <modal.body>Hello world!</modal.body>
+        <modal.footer />
+      </BsModal>
+    `);
 
     const modalTitleId = document.getElementsByClassName('modal-title')[0].id;
 
@@ -115,11 +125,13 @@ module('Integration | Component | bs-modal', function(hooks) {
 
   test('Modal has accesibility attributes with default title', async function(assert) {
 
-    await render(hbs`{{#bs-modal as |modal|}}
-      {{modal.header title="Some title"}}
-      {{#modal.body}}Hello world!{{/modal.body}}
-      {{modal.footer}}
-    {{/bs-modal}}`);
+    await render(hbs`
+      <BsModal as |modal|>
+        <modal.header @title="Some title" />
+        <modal.body>Hello world!</modal.body>
+        <modal.footer />
+      </BsModal>
+    `);
 
     const modalTitleId = document.getElementsByClassName('modal-title')[0].id;
 
@@ -131,9 +143,9 @@ module('Integration | Component | bs-modal', function(hooks) {
 
   test('it passes along class attribute', async function(assert) {
     await render(hbs`
-      {{#bs-modal fade=false class="custom"}}
+      <BsModal @fade={{false}} @class="custom">
         template block text
-      {{/bs-modal}}
+      </BsModal>
     `);
 
     assert.dom('.modal.custom').exists({ count: 1 });

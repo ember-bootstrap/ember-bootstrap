@@ -1,0 +1,12 @@
+<div
+  class="{{if (macroCondition (macroGetOwnConfig "isBS4")) "accordion"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "panel-group"}}"
+  role="tablist"
+  ...attributes
+>
+  {{yield
+    (hash
+      item=(component this.itemComponent selected=this.isSelected onClick=this.doChange)
+      change=this.doChange
+    )
+  }}
+</div>

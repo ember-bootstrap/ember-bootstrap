@@ -9,7 +9,8 @@ module.exports = {
     }
   },
   plugins: [
-    'ember'
+    'ember',
+    'hbs'
   ],
   extends: [
     'eslint:recommended',
@@ -20,7 +21,13 @@ module.exports = {
   },
   rules: {
     'ember/no-jquery': 'error',
-    'ember/no-observers': 'warn'
+    'ember/no-get': 'error',
+    'ember/no-get-with-default': 'error',
+    'ember/no-actions-hash': 'error',
+    'ember/no-classic-classes': 'error',
+    'ember/require-tagless-components': 'error',
+    'ember/no-observers': 'warn',
+    'hbs/check-hbs-template-literals': 'error'
   },
   overrides: [
     // node files

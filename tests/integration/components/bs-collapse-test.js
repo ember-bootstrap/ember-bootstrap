@@ -18,14 +18,14 @@ module('Integration | Component | bs-collapse', function(hooks) {
   });
 
   test('collapse has correct default markup', async function(assert) {
-    await render(hbs`{{#bs-collapse}}<p>Just some content</p>{{/bs-collapse}}`);
+    await render(hbs`<BsCollapse><p>Just some content</p></BsCollapse>`);
     assert.dom('.collapse').exists('collapse has collapse class');
     assert.dom('.collapse').hasNoClass(visibilityClass(), 'collapse does not have visibility class');
 
   });
 
   test('expanded collapse has correct default markup', async function(assert) {
-    await render(hbs`{{#bs-collapse collapsed=false}}<p>Just some content</p>{{/bs-collapse}}`);
+    await render(hbs`<BsCollapse @collapsed={{false}}><p>Just some content</p></BsCollapse>`);
     assert.dom('.collapse').hasClass('collapse', 'collapse has collapse class');
     assert.dom('.collapse').hasClass(visibilityClass(), 'collapse has visibility class');
   });
@@ -38,7 +38,7 @@ module('Integration | Component | bs-collapse', function(hooks) {
 
     this.set('collapsed', true);
     await render(
-      hbs`{{#bs-collapse collapsed=collapsed onShow=(action "show") onShown=(action "shown")}}<p>Just some content</p>{{/bs-collapse}}`
+      hbs`<BsCollapse @collapsed={{collapsed}} @onShow={{action "show"}} @onShown={{action "shown"}}><p>Just some content</p></BsCollapse>`
     );
     this.set('collapsed', false);
 
@@ -60,7 +60,7 @@ module('Integration | Component | bs-collapse', function(hooks) {
 
     this.set('collapsed', false);
     await render(
-      hbs`{{#bs-collapse collapsed=collapsed onHide=(action "hide") onHidden=(action "hidden")}}<p>Just some content</p>{{/bs-collapse}}`
+      hbs`<BsCollapse @collapsed={{collapsed}} @onHide={{action "hide"}} @onHidden={{action "hidden"}}><p>Just some content</p></BsCollapse>`
     );
     this.set('collapsed', true);
 
@@ -75,7 +75,7 @@ module('Integration | Component | bs-collapse', function(hooks) {
   });
 
   test('it passes accessibility checks', async function (assert) {
-    await render(hbs`<button>Test</button>{{#bs-collapse}}<p>Just some content</p>{{/bs-collapse}}`);
+    await render(hbs`<button>Test</button><BsCollapse><p>Just some content</p></BsCollapse>`);
 
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');

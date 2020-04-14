@@ -1,0 +1,21 @@
+<div
+  class="{{if this.disabled "disabled"}} {{this.typeClass}} {{if (macroCondition (macroGetOwnConfig "isBS4")) "card"}} {{if (macroCondition (macroGetOwnConfig "isBS3")) "panel"}}"
+  ...attributes
+>
+  {{#if hasBlockParams}}
+    {{yield
+      (hash
+        title=(component this.titleComponent collapsed=this.collapsed disabled=this.disabled onClick=(action onClick this.value))
+        body=(component this.bodyComponent collapsed=this.collapsed)
+      )
+    }}
+  {{else}}
+    {{#component this.titleComponent collapsed=this.collapsed disabled=this.disabled onClick=(action onClick this.value)}}
+      {{title}}
+    {{/component}}
+    {{#component this.bodyComponent collapsed=this.collapsed}}
+      {{yield}}
+    {{/component}}
+  {{/if}}
+
+</div>
