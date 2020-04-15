@@ -9,6 +9,15 @@ module.exports = async function() {
     command: 'ember test --filter !FastBoot',
     scenarios: [
       {
+        name: 'ember-lts-3.16',
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.16.0',
+            'bootstrap': bootstrapVersion
+          }
+        }
+      },
+      {
         name: 'ember-release',
         npm: {
           devDependencies: {

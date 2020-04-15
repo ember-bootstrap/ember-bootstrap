@@ -34,7 +34,7 @@ branches:
     - /^v\d+\.\d+\.\d+/
 
 jobs:
-  fail_fast: true
+  fast_finish: true
   allow_failures:
   - env: EMBER_TRY_SCENARIO=ember-canary
 
@@ -50,7 +50,8 @@ jobs:
     - yarn lint:js
     - yarn test
 
-  - name: "Floating Dependencies"
+  - stage: "Additional Tests"
+    name: "Floating Dependencies"
     script:
     - yarn test
 
@@ -67,8 +68,8 @@ jobs:
 
   # we recommend new addons test the current and previous LTS
   # as well as latest stable release (bonus points to beta/canary)
-  - stage: "Additional Tests"
-    env: EMBER_TRY_SCENARIO=ember-default BABELPOLYFILL=true BEFORE_SCRIPT="ember browserstack:connect" AFTER_SCRIPT="ember browserstack:disconnect" TEST_COMMAND="ember test --filter !FastBoot --config-file testem.browserstack.js"
+  - env: EMBER_TRY_SCENARIO=ember-default BABELPOLYFILL=true BEFORE_SCRIPT="ember browserstack:connect" AFTER_SCRIPT="ember browserstack:disconnect" TEST_COMMAND="ember test --filter !FastBoot --config-file testem.browserstack.js"
+  - env: EMBER_TRY_SCENARIO=ember-lts-3.16
   - env: EMBER_TRY_SCENARIO=ember-release
   - env: EMBER_TRY_SCENARIO=ember-beta
   - env: EMBER_TRY_SCENARIO=ember-canary
