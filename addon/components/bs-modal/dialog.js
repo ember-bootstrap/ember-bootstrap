@@ -4,6 +4,7 @@ import { readOnly } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
+import { next } from '@ember/runloop';
 
 /**
  Internal component for modal's markup and event handling. Should not be used directly.
@@ -73,7 +74,7 @@ export default class ModalDialog extends Component {
   setInitialFocus(element) {
     let autofocus = element && element.querySelector('[autofocus]');
     if (autofocus) {
-      autofocus.focus();
+      next(() => autofocus.focus());
     }
   }
 
