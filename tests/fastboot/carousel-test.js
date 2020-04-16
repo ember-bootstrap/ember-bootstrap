@@ -1,13 +1,13 @@
 import { module } from 'qunit';
-import { setup, visit, /* mockServer */ } from 'ember-cli-fastboot-testing/test-support';
+import { setup, visit /* mockServer */ } from 'ember-cli-fastboot-testing/test-support';
 import setupFastBootRootElement from '../helpers/setup-fastboot';
 import { testBS3, testBS4 } from '../helpers/bootstrap-test';
 
-module('FastBoot | carousel', function(hooks) {
+module('FastBoot | carousel', function (hooks) {
   setup(hooks);
   setupFastBootRootElement(hooks);
 
-  testBS4('it renders', async function(assert) {
+  testBS4('it renders', async function (assert) {
     await visit('/fastboot/carousel');
 
     assert.dom('.carousel.slide').exists();
@@ -16,7 +16,7 @@ module('FastBoot | carousel', function(hooks) {
     assert.dom('.carousel .carousel-inner .carousel-item').exists({ count: 3 });
   });
 
-  testBS3('it renders', async function(assert) {
+  testBS3('it renders', async function (assert) {
     await visit('/fastboot/carousel');
 
     assert.dom('.carousel.slide').exists();
@@ -24,5 +24,4 @@ module('FastBoot | carousel', function(hooks) {
     assert.dom('.carousel .left').exists();
     assert.dom('.carousel .carousel-inner .item').exists({ count: 3 });
   });
-
 });

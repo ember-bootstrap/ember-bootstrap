@@ -1,10 +1,9 @@
 import QUnit from 'qunit';
 
 export default function setupFastbootRootElement({ beforeEach, afterEach }) {
-
-  beforeEach(function() {
+  beforeEach(function () {
     Object.defineProperty(QUnit.assert.dom, 'rootElement', {
-      get: function() {
+      get: function () {
         return document.querySelector('#ember-testing [data-test-fastboot-container]');
       },
       enumerable: true,
@@ -12,9 +11,9 @@ export default function setupFastbootRootElement({ beforeEach, afterEach }) {
     });
   });
 
-  afterEach(function() {
+  afterEach(function () {
     Object.defineProperty(QUnit.assert.dom, 'rootElement', {
-      get: function() {
+      get: function () {
         return document.querySelector('#ember-testing');
       },
       enumerable: true,
@@ -22,4 +21,3 @@ export default function setupFastbootRootElement({ beforeEach, afterEach }) {
     });
   });
 }
-

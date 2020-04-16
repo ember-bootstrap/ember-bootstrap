@@ -6,8 +6,7 @@ let isRegistered = false;
 let deprecations;
 
 export default function setupNoDeprecations({ beforeEach, afterEach }) {
-
-  beforeEach(function() {
+  beforeEach(function () {
     deprecations = [];
     if (!isRegistered) {
       registerDeprecationHandler((message, options, next) => {
@@ -18,14 +17,17 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
     }
   });
 
-  afterEach(function(assert) {
+  afterEach(function (assert) {
     // guard in if instead of using assert.equal(), to not make assert.expect() fail
     if (config.failOnDeprecation && deprecations && deprecations.length > 0) {
-      assert.ok(false, `Expected no deprecations, found: ${deprecations.map(msg => `"${msg}"`).join(', ')}`);
+      assert.ok(
+        false,
+        `Expected no deprecations, found: ${deprecations.map((msg) => `"${msg}"`).join(', ')}`
+      );
     }
   });
 
-  QUnit.assert.deprecations = function(count) {
+  QUnit.assert.deprecations = function (count) {
     if (count === undefined) {
       this.ok(deprecations.length, 'Expected deprecations during test.');
     } else {
@@ -35,12 +37,14 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
     deprecations = [];
   };
 
-  QUnit.assert.deprecationsInclude = function(expected) {
+  QUnit.assert.deprecationsInclude = function (expected) {
     let found = deprecations.find((deprecation) => deprecation.includes(expected));
     this.pushResult({
       result: !!found,
       actual: deprecations,
-      message: `expected to find \`${expected}\` deprecation. Found ${deprecations.map(d => `!${d}`).join(', ')}`,
+      message: `expected to find \`${expected}\` deprecation. Found ${deprecations
+        .map((d) => `!${d}`)
+        .join(', ')}`,
     });
 
     if (found) {
@@ -48,4 +52,3 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
     }
   };
 }
-

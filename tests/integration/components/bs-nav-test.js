@@ -4,13 +4,13 @@ import { render } from '@ember/test-helpers';
 import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
-import a11yAudit from 'ember-a11y-testing/test-support/audit'
+import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
-module('Integration | Component | bs-nav', function(hooks) {
+module('Integration | Component | bs-nav', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  test('it has correct markup', async function(assert) {
+  test('it has correct markup', async function (assert) {
     // Template block usage:
     await render(hbs`
       <BsNav>
@@ -23,7 +23,7 @@ module('Integration | Component | bs-nav', function(hooks) {
     assert.dom('ul').hasClass('nav', 'has nav class');
   });
 
-  testBS3('it supports bootstrap options', async function(assert) {
+  testBS3('it supports bootstrap options', async function (assert) {
     // Template block usage:
     await render(hbs`
       <BsNav @justified={{true}} @stacked={{true}} @type="pills" />
@@ -34,7 +34,7 @@ module('Integration | Component | bs-nav', function(hooks) {
     assert.dom('ul').hasClass('nav-stacked', 'has stacked class');
   });
 
-  testBS4('it supports bootstrap options', async function(assert) {
+  testBS4('it supports bootstrap options', async function (assert) {
     // Template block usage:
     await render(hbs`
       <BsNav @justified={{true}} @stacked={{true}} @fill={{true}} @type="pills" />
@@ -46,7 +46,7 @@ module('Integration | Component | bs-nav', function(hooks) {
     assert.dom('ul').hasClass('flex-column', 'has stacked class');
   });
 
-  test('it exposes contextual components', async function(assert) {
+  test('it exposes contextual components', async function (assert) {
     this.owner.lookup('router:main').setupRouter();
     await render(hbs`
       <BsNav as |nav|>

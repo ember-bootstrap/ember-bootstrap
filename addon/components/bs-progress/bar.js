@@ -15,7 +15,7 @@ import { macroCondition, getOwnConfig } from '@embroider/macros';
  @extends Ember.Component
  @public
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class ProgressBar extends Component {
   /**

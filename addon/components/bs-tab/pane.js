@@ -20,7 +20,7 @@ import { guidFor } from '@ember/object/internals';
  @uses Mixins.ComponentChild
  @public
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class TabPane extends Component.extend(ComponentChild) {
   /**
@@ -138,15 +138,14 @@ export default class TabPane extends Component.extend(ComponentChild) {
    */
   show() {
     if (this.usesTransition) {
-      transitionEnd(this._element, this.fadeDuration)
-        .then(() => {
-          if (!this.isDestroyed) {
-            this.setProperties({
-              active: true,
-              showContent: true
-            });
-          }
-        });
+      transitionEnd(this._element, this.fadeDuration).then(() => {
+        if (!this.isDestroyed) {
+          this.setProperties({
+            active: true,
+            showContent: true,
+          });
+        }
+      });
     } else {
       this.set('active', true);
     }
@@ -160,12 +159,11 @@ export default class TabPane extends Component.extend(ComponentChild) {
    */
   hide() {
     if (this.usesTransition) {
-      transitionEnd(this._element, this.fadeDuration)
-        .then(() => {
-          if (!this.isDestroyed) {
-            this.set('active', false);
-          }
-        });
+      transitionEnd(this._element, this.fadeDuration).then(() => {
+        if (!this.isDestroyed) {
+          this.set('active', false);
+        }
+      });
       this.set('showContent', false);
     } else {
       this.set('active', false);

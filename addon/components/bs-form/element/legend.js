@@ -4,5 +4,4 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/legend'
 
 @templateLayout(layout)
 @tagName('')
-export default class FormElementLegend extends FormElementLabel {
-}
+export default class FormElementLegend extends FormElementLabel {}

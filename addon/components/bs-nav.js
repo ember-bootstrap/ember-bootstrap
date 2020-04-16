@@ -82,7 +82,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
  */
 @templateLayout(layout)
-@tagName("")
+@tagName('')
 export default class Nav extends Component {
   @computed('type')
   get typeClass() {

@@ -3,7 +3,7 @@
 const getChannelURL = require('ember-source-channel-url');
 const bootstrapVersion = process.env.BOOTSTRAPVERSION === '3' ? '^3.4.1' : '^4.3.1';
 
-module.exports = async function() {
+module.exports = async function () {
   return {
     useYarn: true,
     command: 'ember test --filter !FastBoot',
@@ -13,42 +13,42 @@ module.exports = async function() {
         npm: {
           devDependencies: {
             'ember-source': '~3.16.0',
-            'bootstrap': bootstrapVersion
-          }
-        }
+            bootstrap: bootstrapVersion,
+          },
+        },
       },
       {
         name: 'ember-release',
         npm: {
           devDependencies: {
             'ember-source': await getChannelURL('release'),
-            'bootstrap': bootstrapVersion
-          }
+            bootstrap: bootstrapVersion,
+          },
         },
         env: {
-          FAIL_ON_DEPRECATION: true
-        }
+          FAIL_ON_DEPRECATION: true,
+        },
       },
       {
         name: 'ember-beta',
         npm: {
           devDependencies: {
             'ember-source': await getChannelURL('beta'),
-            'bootstrap': bootstrapVersion
-          }
-        }
+            bootstrap: bootstrapVersion,
+          },
+        },
       },
       {
         name: 'ember-canary',
         npm: {
           devDependencies: {
             'ember-source': await getChannelURL('canary'),
-            'bootstrap': bootstrapVersion
-          }
+            bootstrap: bootstrapVersion,
+          },
         },
         env: {
-          FAIL_ON_DEPRECATION: true
-        }
+          FAIL_ON_DEPRECATION: true,
+        },
       },
       // The default `.travis.yml` runs this scenario via `npm test`,
       // not via `ember try`. It's still included here so that running
@@ -58,23 +58,23 @@ module.exports = async function() {
         name: 'ember-default',
         npm: {
           devDependencies: {
-            'bootstrap': bootstrapVersion
-          }
-        }
+            bootstrap: bootstrapVersion,
+          },
+        },
       },
       {
         name: 'ember-default-with-jquery',
         env: {
           EMBER_OPTIONAL_FEATURES: JSON.stringify({
-            'jquery-integration': true
-          })
+            'jquery-integration': true,
+          }),
         },
         npm: {
           devDependencies: {
             '@ember/jquery': '^0.5.1',
-            'bootstrap': bootstrapVersion
-          }
-        }
+            bootstrap: bootstrapVersion,
+          },
+        },
       },
       {
         name: 'ember-classic',
@@ -83,31 +83,31 @@ module.exports = async function() {
             // TODO: tests fail if optional feature application-template-wrapper is enabled
             // 'application-template-wrapper': true,
             'default-async-observers': false,
-            'template-only-glimmer-components': false
-          })
+            'template-only-glimmer-components': false,
+          }),
         },
         npm: {
           devDependencies: {
-            'bootstrap': bootstrapVersion
+            bootstrap: bootstrapVersion,
           },
           ember: {
-            edition: 'classic'
-          }
-        }
+            edition: 'classic',
+          },
+        },
       },
       {
         name: 'fastboot-tests',
         command: 'ember test --filter FastBoot',
         npm: {
           devDependencies: {
-            'bootstrap': bootstrapVersion
-          }
-        }
+            bootstrap: bootstrapVersion,
+          },
+        },
       },
       {
         name: 'node-tests',
-        command: 'yarn run nodetest'
-      }
-    ]
+        command: 'yarn run nodetest',
+      },
+    ],
   };
 };

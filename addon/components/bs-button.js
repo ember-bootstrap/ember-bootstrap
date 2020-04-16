@@ -103,7 +103,7 @@ import { macroCondition, getOwnConfig } from '@embroider/macros';
   @public
 */
 @templateLayout(layout)
-@tagName("")
+@tagName('')
 export default class Button extends Component {
   /**
    * Default label of the button. Not need if used as a block component
@@ -245,7 +245,7 @@ export default class Button extends Component {
    * @readonly
    * @public
    */
-  @overrideableCP('active', function() {
+  @overrideableCP('active', function () {
     return this.active ? this.iconActive : this.iconInactive;
   })
   icon;
@@ -383,7 +383,6 @@ export default class Button extends Component {
   @defaultValue
   outline = false;
 
-
   @typeClass('btn', 'type')
   typeClass;
 
@@ -440,18 +439,20 @@ export default class Button extends Component {
     }
 
     if (!preventConcurrency || !this.isPending) {
-      let promise = (onClick)(this.value);
+      let promise = onClick(this.value);
       if (promise && typeof promise.then === 'function' && !this.isDestroyed) {
         this.set('state', 'pending');
-        promise.then(() => {
-          if (!this.isDestroyed) {
-            this.set('state', 'fulfilled');
+        promise.then(
+          () => {
+            if (!this.isDestroyed) {
+              this.set('state', 'fulfilled');
+            }
+          },
+          () => {
+            if (!this.isDestroyed) {
+              this.set('state', 'rejected');
+            }
           }
-        }, () => {
-          if (!this.isDestroyed) {
-            this.set('state', 'rejected');
-          }
-        }
         );
       }
     }
@@ -479,7 +480,9 @@ export default class Button extends Component {
           `angle bracket  component invocation syntax instead:\n` +
           `Before:\n` +
           `  {{bs-button ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
-          `  <BsButton @${attribute}=${typeof value === 'string' ? `"${value}"`: `{{${value}}}`} />\n` +
+          `  <BsButton @${attribute}=${
+            typeof value === 'string' ? `"${value}"` : `{{${value}}}`
+          } />\n` +
           `After:\n` +
           `  <BsButton ${typeof value === 'boolean' ? attribute : `${attribute}="${value}"`} />`;
 

@@ -8,11 +8,11 @@ export function setupForPositioning(align = 'left') {
     [align]: 0,
     textAlign: 'right',
     width: '300px',
-    height: '300px'
+    height: '300px',
   });
 
   assign(document.getElementById('ember-testing').style, {
-    transform: 'none'
+    transform: 'none',
   });
 }
 
@@ -21,7 +21,7 @@ function offset(el) {
 
   return {
     top: rect.top + document.body.scrollTop,
-    left: rect.left + document.body.scrollLeft
+    left: rect.left + document.body.scrollLeft,
   };
 }
 
@@ -31,8 +31,13 @@ export function assertPositioning(assert, selector = '.tooltip') {
   let rootEl = getContext().element;
   let tooltip = rootEl.querySelector(selector);
   let trigger = rootEl.querySelector('#target');
-  let margin = -parseInt(window.getComputedStyle(tooltip).marginTop, 10) + parseInt(window.getComputedStyle(tooltip).marginBottom, 10);
+  let margin =
+    -parseInt(window.getComputedStyle(tooltip).marginTop, 10) +
+    parseInt(window.getComputedStyle(tooltip).marginBottom, 10);
   let tooltipPos = Math.round(offset(tooltip).top + tooltip.offsetHeight + margin);
   let triggerPos = Math.round(offset(trigger).top);
-  assert.ok(Math.abs(triggerPos - tooltipPos) <= 1, `Expected position: ${triggerPos}, actual: ${tooltipPos}`);
+  assert.ok(
+    Math.abs(triggerPos - tooltipPos) <= 1,
+    `Expected position: ${triggerPos}, actual: ${tooltipPos}`
+  );
 }

@@ -5,10 +5,10 @@ import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 
 const supportsAngleBracketsLinkTo = hasEmberVersion(3, 10);
 
-module('Acceptance | bs-nav-link', function(hooks) {
+module('Acceptance | bs-nav-link', function (hooks) {
   setupApplicationTest(hooks);
 
-  test('active link-to component marks nav item as active', async function(assert) {
+  test('active link-to component marks nav item as active', async function (assert) {
     await visit('/acceptance/link/1');
     assert.dom(this.element.querySelectorAll('.nav li')[0]).hasClass('active');
     assert.dom(this.element.querySelectorAll('.nav li')[1]).hasNoClass('active');
@@ -20,7 +20,7 @@ module('Acceptance | bs-nav-link', function(hooks) {
   });
 
   if (supportsAngleBracketsLinkTo) {
-    test('active @route property marks nav item as active', async function(assert) {
+    test('active @route property marks nav item as active', async function (assert) {
       await visit('/acceptance/linkto/1');
       assert.dom(this.element.querySelectorAll('.nav li')[0]).hasClass('active');
       assert.dom(this.element.querySelectorAll('.nav li')[1]).hasNoClass('active');

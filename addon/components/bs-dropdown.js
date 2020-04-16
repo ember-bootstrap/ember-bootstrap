@@ -5,17 +5,13 @@ import layout from 'ember-bootstrap/templates/components/bs-dropdown';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { assert } from '@ember/debug';
 
-const ESCAPE_KEYCODE           = 27; // KeyboardEvent.which value for Escape (Esc) key
-const SPACE_KEYCODE            = 32; // KeyboardEvent.which value for space key
-const TAB_KEYCODE              = 9;  // KeyboardEvent.which value for tab key
-const ARROW_UP_KEYCODE         = 38; // KeyboardEvent.which value for up arrow key
-const ARROW_DOWN_KEYCODE       = 40; // KeyboardEvent.which value for down arrow key
+const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
+const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
+const TAB_KEYCODE = 9; // KeyboardEvent.which value for tab key
+const ARROW_UP_KEYCODE = 38; // KeyboardEvent.which value for up arrow key
+const ARROW_DOWN_KEYCODE = 40; // KeyboardEvent.which value for down arrow key
 
-const SUPPORTED_KEYCODES = [
-  ESCAPE_KEYCODE,
-  ARROW_DOWN_KEYCODE,
-  ARROW_UP_KEYCODE,
-];
+const SUPPORTED_KEYCODES = [ESCAPE_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_UP_KEYCODE];
 
 /**
   Bootstrap style [dropdown menus](http://getbootstrap.com/components/#dropdowns), consisting
@@ -173,7 +169,7 @@ const SUPPORTED_KEYCODES = [
   @extends Ember.Component
   @public
 s*/
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class Dropdown extends Component {
   /**
@@ -315,11 +311,17 @@ export default class Dropdown extends Component {
     let { target } = e;
     let { toggleElement, menuElement } = this;
 
-    if (!this.isDestroyed
-      && (
-        (e.type === 'keyup' && e.which === TAB_KEYCODE && menuElement && !menuElement.contains(target))
-        || (e.type === 'click' && toggleElement && !toggleElement.contains(target) && ((menuElement && !menuElement.contains(target)) || this.closeOnMenuClick))
-      )) {
+    if (
+      !this.isDestroyed &&
+      ((e.type === 'keyup' &&
+        e.which === TAB_KEYCODE &&
+        menuElement &&
+        !menuElement.contains(target)) ||
+        (e.type === 'click' &&
+          toggleElement &&
+          !toggleElement.contains(target) &&
+          ((menuElement && !menuElement.contains(target)) || this.closeOnMenuClick)))
+    ) {
       this.closeDropdown();
     }
   }
@@ -333,11 +335,14 @@ export default class Dropdown extends Component {
     //  - If key is other than escape
     //    - If key is not up or down => not a dropdown command
     //    - If trigger inside the menu => not a dropdown command
-    if (['input', 'textarea'].includes(event.target.tagName.toLowerCase())
-      ? (
-        event.which === SPACE_KEYCODE
-        || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || this.menuElement.contains(event.target)))
-      : !SUPPORTED_KEYCODES.includes(event.which)) {
+    if (
+      ['input', 'textarea'].includes(event.target.tagName.toLowerCase())
+        ? event.which === SPACE_KEYCODE ||
+          (event.which !== ESCAPE_KEYCODE &&
+            ((event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE) ||
+              this.menuElement.contains(event.target)))
+        : !SUPPORTED_KEYCODES.includes(event.which)
+    ) {
       return;
     }
 
@@ -353,7 +358,9 @@ export default class Dropdown extends Component {
       return;
     }
 
-    let items = [].slice.call(this.menuElement.querySelectorAll('.dropdown-item:not(.disabled):not(:disabled)'));
+    let items = [].slice.call(
+      this.menuElement.querySelectorAll('.dropdown-item:not(.disabled):not(:disabled)')
+    );
 
     if (items.length === 0) {
       return;
@@ -361,11 +368,13 @@ export default class Dropdown extends Component {
 
     let index = items.indexOf(event.target);
 
-    if (event.which === ARROW_UP_KEYCODE && index > 0) { // Up
+    if (event.which === ARROW_UP_KEYCODE && index > 0) {
+      // Up
       index--;
     }
 
-    if (event.which === ARROW_DOWN_KEYCODE && index < items.length - 1) { // Down
+    if (event.which === ARROW_DOWN_KEYCODE && index < items.length - 1) {
+      // Down
       index++;
     }
 

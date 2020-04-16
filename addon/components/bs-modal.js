@@ -192,7 +192,7 @@ export default class Modal extends Component {
    * @public
    */
   @defaultValue
-  scrollable = false
+  scrollable = false;
 
   /**
    * @property dialogComponent
@@ -363,8 +363,7 @@ export default class Modal extends Component {
    * @type function
    * @public
    */
-  onSubmit() {
-  }
+  onSubmit() {}
 
   /**
    * The action to be sent when the modal is closing.
@@ -379,8 +378,7 @@ export default class Modal extends Component {
    * @type function
    * @public
    */
-  onHide() {
-  }
+  onHide() {}
 
   /**
    * The action to be sent after the modal has been completely hidden (including the CSS transition).
@@ -390,8 +388,7 @@ export default class Modal extends Component {
    * @default null
    * @public
    */
-  onHidden() {
-  }
+  onHidden() {}
 
   /**
    * The action to be sent when the modal is opening.
@@ -404,8 +401,7 @@ export default class Modal extends Component {
    * @default null
    * @public
    */
-  onShow() {
-  }
+  onShow() {}
 
   /**
    * The action to be sent after the modal has been completely shown (including the CSS transition).
@@ -414,8 +410,7 @@ export default class Modal extends Component {
    * @type function
    * @public
    */
-  onShown() {
-  }
+  onShown() {}
 
   @action
   close() {
@@ -476,10 +471,9 @@ export default class Modal extends Component {
         this.onShow();
 
         if (this.usesTransition) {
-          transitionEnd(this.modalElement, this.transitionDuration)
-            .then(() => {
-              this.onShown();
-            });
+          transitionEnd(this.modalElement, this.transitionDuration).then(() => {
+            this.onShown();
+          });
         } else {
           this.onShown();
         }
@@ -507,8 +501,7 @@ export default class Modal extends Component {
     this.set('showModal', false);
 
     if (this.usesTransition) {
-      transitionEnd(this.modalElement, this.transitionDuration)
-        .then(() => this.hideModal());
+      transitionEnd(this.modalElement, this.transitionDuration).then(() => this.hideModal());
     } else {
       this.hideModal();
     }
@@ -551,17 +544,15 @@ export default class Modal extends Component {
         return;
       }
 
-      schedule('afterRender', this, function() {
+      schedule('afterRender', this, function () {
         let backdrop = this.backdropElement;
         assert('Backdrop element should be in DOM', backdrop);
         if (doAnimate) {
-          transitionEnd(backdrop, this.backdropTransitionDuration)
-            .then(callback);
+          transitionEnd(backdrop, this.backdropTransitionDuration).then(callback);
         } else {
           callback();
         }
       });
-
     } else if (!this.isOpen && this.backdrop) {
       let backdrop = this.backdropElement;
       assert('Backdrop element should be in DOM', backdrop);
@@ -576,8 +567,7 @@ export default class Modal extends Component {
         }
       };
       if (doAnimate) {
-        transitionEnd(backdrop, this.backdropTransitionDuration)
-          .then(callbackRemove);
+        transitionEnd(backdrop, this.backdropTransitionDuration).then(callbackRemove);
       } else {
         callbackRemove();
       }
@@ -617,7 +607,7 @@ export default class Modal extends Component {
     let modalIsOverflowing = this.modalElement.scrollHeight > document.documentElement.clientHeight;
     this.setProperties({
       paddingLeft: !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : undefined,
-      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : undefined
+      paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : undefined,
     });
   }
 
@@ -628,7 +618,7 @@ export default class Modal extends Component {
   resetAdjustments() {
     this.setProperties({
       paddingLeft: undefined,
-      paddingRight: undefined
+      paddingRight: undefined,
     });
   }
 
@@ -638,7 +628,8 @@ export default class Modal extends Component {
    */
   checkScrollbar() {
     let fullWindowWidth = window.innerWidth;
-    if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
+    if (!fullWindowWidth) {
+      // workaround for missing window.innerWidth in IE8
       let documentElementRect = document.documentElement.getBoundingClientRect();
       fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
     }
@@ -651,7 +642,7 @@ export default class Modal extends Component {
    * @private
    */
   setScrollbar() {
-    let bodyPad = parseInt((document.body.style.paddingRight || 0), 10);
+    let bodyPad = parseInt(document.body.style.paddingRight || 0, 10);
     this._originalBodyPad = document.body.style.paddingRight || '';
     if (this.bodyIsOverflowing) {
       document.body.style.paddingRight = bodyPad + this.scrollbarWidth;
@@ -717,7 +708,7 @@ export default class Modal extends Component {
       showBackdrop: isOpen && backdrop,
       inDom: isOpen,
       fade,
-      destinationElement: getDestinationElement(this)
+      destinationElement: getDestinationElement(this),
     });
 
     addObserver(this, 'isOpen', null, this._observeOpen, true);

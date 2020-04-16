@@ -17,7 +17,7 @@ import { addObserver } from '@ember/object/observers';
   @extends Ember.Component
   @public
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class CarouselSlide extends Component.extend(ComponentChild) {
   /**
@@ -27,7 +27,7 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    * @type boolean
    * @private
    */
-  @overrideableCP('isCurrentSlide', 'presentationState', function() {
+  @overrideableCP('isCurrentSlide', 'presentationState', function () {
     return this.isCurrentSlide && this.presentationState === null;
   })
   active;
@@ -138,7 +138,7 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    */
   currentSlideWillTransit() {
     this.set('active', true);
-    next(this, function() {
+    next(this, function () {
       this.set(this.directionalClassName, true);
     });
   }
@@ -159,7 +159,7 @@ export default class CarouselSlide extends Component.extend(ComponentChild) {
    */
   followingSlideWillTransit() {
     this.set(this.orderClassName, true);
-    next(this, function() {
+    next(this, function () {
       this.reflow();
       this.set(this.directionalClassName, true);
     });

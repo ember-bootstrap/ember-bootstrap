@@ -11,6 +11,6 @@ import Component from '@ember/component';
  * @extends Components.Collapse
  * @public
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class NavbarContent extends Component {}

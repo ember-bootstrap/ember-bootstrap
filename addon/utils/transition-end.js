@@ -12,8 +12,8 @@ export default function waitForTransitionEnd(node, duration = 0) {
     duration = 0;
   }
 
-  return new Promise(function(resolve) {
-    let done = function() {
+  return new Promise(function (resolve) {
+    let done = function () {
       if (backup) {
         cancel(backup);
         backup = null;

@@ -4,11 +4,11 @@ import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
-module('Integration | Component | bs-navbar/nav', function(hooks) {
+module('Integration | Component | bs-navbar/nav', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     await render(hbs`<BsNavbar::Nav />`);
 
     assert.dom('*').hasText('');
@@ -23,7 +23,7 @@ module('Integration | Component | bs-navbar/nav', function(hooks) {
     assert.dom('*').hasText('template block text');
   });
 
-  test('it has correct markup', async function(assert) {
+  test('it has correct markup', async function (assert) {
     await render(hbs`
       <BsNavbar::Nav>
         Nav
@@ -31,11 +31,15 @@ module('Integration | Component | bs-navbar/nav', function(hooks) {
     `);
 
     assert.dom('*').hasText('Nav');
-    assert.dom('.navbar-nav').exists({ count: 1 }, 'there is only one element with the navbar-nav class');
-    assert.dom('.navbar-nav').hasClass('nav', 'it has the nav class indicating it derives from bs-nav');
+    assert
+      .dom('.navbar-nav')
+      .exists({ count: 1 }, 'there is only one element with the navbar-nav class');
+    assert
+      .dom('.navbar-nav')
+      .hasClass('nav', 'it has the nav class indicating it derives from bs-nav');
   });
 
-  test('it no longer supports the justified option', async function(assert) {
+  test('it no longer supports the justified option', async function (assert) {
     await render(hbs`<BsNavbar::Nav @justified={{true}} />`);
 
     assert.dom('.navbar-justified').doesNotExist('the justified class was not applied');

@@ -16,7 +16,7 @@ import { computed, action } from '@ember/object';
  @extends Ember.Component
  @publicø
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class DropdownToggle extends Component {
   /**

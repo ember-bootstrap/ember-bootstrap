@@ -11,6 +11,6 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/body';
  @extends Ember.Component
  @public
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class ModalBody extends Component {}

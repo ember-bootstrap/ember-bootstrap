@@ -9,7 +9,8 @@ import Mixin from '@ember/object/mixin';
  * @namespace Mixins
  * @private
  */
-export default Mixin.create({ // eslint-disable-line ember/no-new-mixins
+export default Mixin.create({
+  // eslint-disable-line ember/no-new-mixins
 
   /**
    * Array of registered child components
@@ -33,7 +34,7 @@ export default Mixin.create({ // eslint-disable-line ember/no-new-mixins
    * @public
    */
   registerChild(child) {
-    schedule('actions', this, function() {
+    schedule('actions', this, function () {
       this.children.addObject(child);
     });
   },
@@ -46,8 +47,8 @@ export default Mixin.create({ // eslint-disable-line ember/no-new-mixins
    * @public
    */
   removeChild(child) {
-    schedule('actions', this, function() {
+    schedule('actions', this, function () {
       this.children.removeObject(child);
     });
-  }
+  },
 });

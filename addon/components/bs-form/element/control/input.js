@@ -35,7 +35,7 @@ function canUseType(type) {
  @private
  */
 @templateLayout(layout)
-@tagName("")
+@tagName('')
 export default class FormElementControlInput extends Control {
   /**
    * @property type

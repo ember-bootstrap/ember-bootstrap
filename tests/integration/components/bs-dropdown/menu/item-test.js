@@ -5,11 +5,11 @@ import { testBS3, testBS4 } from '../../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../../helpers/setup-no-deprecations';
 
-module('Integration | Component | bs-dropdown/menu/item', function(hooks) {
+module('Integration | Component | bs-dropdown/menu/item', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  testBS3('it has correct markup', async function(assert) {
+  testBS3('it has correct markup', async function (assert) {
     // Template block usage:
     await render(hbs`
       <BsDropdown::Menu::Item>
@@ -21,7 +21,7 @@ module('Integration | Component | bs-dropdown/menu/item', function(hooks) {
     assert.dom('*').hasText('template block text');
   });
 
-  testBS4('it has correct markup', async function(assert) {
+  testBS4('it has correct markup', async function (assert) {
     // Template block usage:
     await render(hbs`
       <span>

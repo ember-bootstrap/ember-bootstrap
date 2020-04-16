@@ -1,17 +1,13 @@
 /* eslint-env node */
 module.exports = {
-  'test_page': 'tests/index.html?hidepassed',
-  'disable_watching': true,
-  'parallel': 5,
+  test_page: 'tests/index.html?hidepassed',
+  disable_watching: true,
+  parallel: 5,
   browser_start_timeout: 2000,
   browser_disconnect_timeout: 120,
-  'launch_in_ci': [
-    'BS_Safari_Current', 'BS_MS_Edge', 'BS_IE_11'
-  ],
+  launch_in_ci: ['BS_Safari_Current', 'BS_MS_Edge', 'BS_IE_11'],
 
-  'launch_in_dev': [
-    'Chrome'
-  ],
+  launch_in_dev: ['Chrome'],
 
   launchers: {
     BS_Chrome_Current: {
@@ -122,5 +118,5 @@ module.exports = {
       ],
       protocol: 'browser',
     },
-  }
+  },
 };

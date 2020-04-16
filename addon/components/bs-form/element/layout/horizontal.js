@@ -14,7 +14,7 @@ import { macroCondition, getOwnConfig } from '@embroider/macros';
  @extends Components.FormElementLayout
  @private
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class FormElementLayoutHorizontal extends FormElementLayout {
   /**
@@ -41,7 +41,10 @@ export default class FormElementLayoutHorizontal extends FormElementLayout {
       return undefined;
     }
     let parts = this.horizontalLabelGridClass.split('-');
-    assert('horizontalInputGridClass must match format bootstrap grid column class', parts.length === 3);
+    assert(
+      'horizontalInputGridClass must match format bootstrap grid column class',
+      parts.length === 3
+    );
     parts[2] = 12 - parts[2];
     return parts.join('-');
   }

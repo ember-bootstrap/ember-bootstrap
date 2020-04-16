@@ -1,4 +1,4 @@
-import { action } from "@ember/object";
+import { action } from '@ember/object';
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item/title';
@@ -13,7 +13,7 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/item/title
  @extends Ember.Component
  @public
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class AccordionItemTitle extends Component {
   /**
@@ -32,8 +32,7 @@ export default class AccordionItemTitle extends Component {
    * @event onClick
    * @public
    */
-  onClick() {
-  }
+  onClick() {}
 
   @action
   handleClick(e) {
