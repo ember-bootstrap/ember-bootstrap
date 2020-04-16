@@ -1,0 +1,5 @@
+# Git may be configured to convert the line endings from LF to CRLF globally.
+# This conflicts with ESLint setup, which lints for LF file endings. It causes
+# countless linting errors. As all relevant text editors support LF line
+# endings these days, disabling the feature should be safe.
+core.autocrlf=false
