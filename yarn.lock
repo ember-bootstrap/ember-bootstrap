@@ -6441,21 +6441,6 @@ ember-cli-preprocess-registry@^3.1.2, ember-cli-preprocess-registry@^3.3.0:
     debug "^3.0.1"
     process-relative-require "^1.0.0"
 
-ember-cli-release@^0.2.9:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/ember-cli-release/-/ember-cli-release-0.2.9.tgz#5e8de3d034c65597933748023058470ec1231adb"
-  integrity sha1-Xo3j0DTGVZeTN0gCMFhHDsEjGts=
-  dependencies:
-    chalk "^1.0.0"
-    git-tools "^0.1.4"
-    make-array "^0.1.2"
-    merge "^1.2.0"
-    moment-timezone "^0.3.0"
-    nopt "^3.0.3"
-    rsvp "^3.0.17"
-    semver "^4.3.1"
-    silent-error "^1.0.0"
-
 ember-cli-sri@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ember-cli-sri/-/ember-cli-sri-2.1.1.tgz#971620934a4b9183cf7923cc03e178b83aa907fd"
@@ -8379,13 +8364,6 @@ git-repo-version@^1.0.2:
   integrity sha512-OPtwtHx9E8/rTMcWT+BU6GNj6Kq/O40bHJZaZAGy+pN2RXGmeKcfr0ix4M+SQuFY8vl5L/wfPSGOAtvUT/e3Qg==
   dependencies:
     git-repo-info "^1.4.1"
-
-git-tools@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/git-tools/-/git-tools-0.1.4.tgz#5e43e59443b8a5dedb39dba663da49e79f943978"
-  integrity sha1-XkPllEO4pd7bOdumY9pJ55+UOXg=
-  dependencies:
-    spawnback "~1.0.0"
 
 git-transport-protocol@^0.1.0:
   version "0.1.0"
@@ -10566,11 +10544,6 @@ macos-release@^2.2.0:
   resolved "https://registry.yarnpkg.com/macos-release/-/macos-release-2.3.0.tgz#eb1930b036c0800adebccd5f17bc4c12de8bb71f"
   integrity sha512-OHhSbtcviqMPt7yfw5ef5aghS2jzFVKEFyCJndQt2YpSQ9qRVSEv2axSJI1paVThEu+FFGs584h/1YhxjVqajA==
 
-make-array@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/make-array/-/make-array-0.1.2.tgz#335e36ebb0c5a43154d21213a1ecaeae2a1bb3ef"
-  integrity sha1-M14267DFpDFU0hIToeyuriobs+8=
-
 make-dir@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"
@@ -10814,11 +10787,6 @@ merge2@^1.2.3, merge2@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.3.0.tgz#5b366ee83b2f1582c48f87e47cf1a9352103ca81"
   integrity sha512-2j4DAdlBOkiSZIsaXk4mTE3sRS02yBHAtfy127xRV3bQUFqXkjHCHLW6Scv7DwNRbIWNHH8zpnz9zMaKXIdvYw==
-
-merge@^1.2.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/merge/-/merge-1.2.1.tgz#38bebf80c3220a8a487b6fcfb3941bb11720c145"
-  integrity sha512-VjFo4P5Whtj4vsLzsYBu5ayHhoHJ0UqNm7ibvShmbmoz7tGi0vXaoJbGdB+GmDMLUdg8DpQXEIeVDAe8MaABvQ==
 
 methods@~1.1.2:
   version "1.1.2"
@@ -11077,18 +11045,6 @@ mocha@^6.1.4:
     yargs-parser "13.1.1"
     yargs-unparser "1.6.0"
 
-moment-timezone@^0.3.0:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.3.1.tgz#3ef47856b02d53b718a10a5ec2023aa299e07bf5"
-  integrity sha1-PvR4VrAtU7cYoQpewgI6opnge/U=
-  dependencies:
-    moment ">= 2.6.0"
-
-"moment@>= 2.6.0":
-  version "2.24.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
-  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
-
 morgan@^1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.9.1.tgz#0a8d16734a1d9afbc824b99df87e738e58e2da59"
@@ -11341,7 +11297,7 @@ node-watch@0.6.1:
   resolved "https://registry.yarnpkg.com/node-watch/-/node-watch-0.6.1.tgz#b9874111ce9f5841b1c7596120206c7b825be0e9"
   integrity sha512-gwQiR7weFRV8mAtT0x0kXkZ18dfRLB45xH7q0hCOVQMLfLb2f1ZaSvR57q4/b/Vj6B0RwMNJYbvb69e1yM7qEA==
 
-nopt@^3.0.3, nopt@^3.0.6:
+nopt@^3.0.6:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-3.0.6.tgz#c6465dbf08abcd4db359317f79ac68a646b28ff9"
   integrity sha1-xkZdvwirzU2zWTF/eaxopkayj/k=
@@ -13235,11 +13191,6 @@ semver@7.2.1:
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.2.1.tgz#d997aa36bdbb00b501ae4ac4c7d17e9f7a587ae5"
   integrity sha512-aHhm1pD02jXXkyIpq25qBZjr3CQgg8KST8uX0OWXch3xE6jw+1bfbWnCjzMwojsTquroUmKFHNzU6x26mEiRxw==
 
-semver@^4.3.1:
-  version "4.3.6"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-4.3.6.tgz#300bc6e0e86374f7ba61068b5b1ecd57fc6532da"
-  integrity sha1-MAvG4OhjdPe6YQaLWx7NV/xlMto=
-
 semver@^6.0.0, semver@^6.1.0, semver@^6.1.1, semver@^6.2.0, semver@^6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
@@ -13653,11 +13604,6 @@ spawn-args@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/spawn-args/-/spawn-args-0.2.0.tgz#fb7d0bd1d70fd4316bd9e3dec389e65f9d6361bb"
   integrity sha1-+30L0dcP1DFr2ePew4nmX51jYbs=
-
-spawnback@~1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/spawnback/-/spawnback-1.0.0.tgz#f73662f7e54d95367eca74d6426c677dd7ea686f"
-  integrity sha1-9zZi9+VNlTZ+ynTWQmxnfdfqaG8=
 
 spdx-correct@^3.0.0:
   version "3.1.0"

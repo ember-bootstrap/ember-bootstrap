@@ -84,7 +84,6 @@
     "ember-cli-fastboot": "^2.0.0",
     "ember-cli-fastboot-testing": "^0.2.0",
     "ember-cli-inject-live-reload": "^2.0.1",
-    "ember-cli-release": "^0.2.9",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-template-lint": "^1.0.0-beta.3",
     "ember-cli-test-loader": "^2.1.0",
