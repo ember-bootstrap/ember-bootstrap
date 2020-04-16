@@ -9,9 +9,8 @@ import ComponentParentMixin from 'ember-bootstrap/mixins/component-parent';
  * @namespace Mixins
  * @private
  */
+// eslint-disable-next-line ember/no-new-mixins
 export default Mixin.create({
-  // eslint-disable-line ember/no-new-mixins
-
   /**
    * The parent component
    *
