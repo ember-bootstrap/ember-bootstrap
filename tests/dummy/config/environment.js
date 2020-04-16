@@ -24,17 +24,6 @@ module.exports = function(environment) {
 
     bootstrapVersion: process.env.BOOTSTRAPVERSION || 4,
     failOnDeprecation: !!process.env.FAIL_ON_DEPRECATION,
-    contentSecurityPolicy: {
-      'script-src': [
-        "'self'"
-      ],
-      'img-src': [
-        "'self'",
-        // Bootstrap 4 uses data URL for some SVG images in CSS
-        "data:",
-      ]
-    },
-    contentSecurityPolicyMeta: true,
     fastboot: {
       hostWhitelist: [/^localhost:\d+$/]
     },
