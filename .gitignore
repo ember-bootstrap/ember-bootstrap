@@ -26,6 +26,7 @@
 .env
 *.pid
 *.log
+.eslintcache
 
 # ember-try
 /.node_modules.ember-try/
