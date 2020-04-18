@@ -1,0 +1,109 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - '*'
+  pull_request:
+  schedule:
+    - cron:  '0 4 * * 5' # Fridays at 4am
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Lint
+        run: yarn lint
+      - name: Test
+        run: yarn test:ember
+
+  test-no-lock:
+    name: Floating Dependencies
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+        with:
+          useLockFile: false
+      - name: Test
+        run: yarn test:ember
+
+  test-try:
+    name: Scenario Tests
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    strategy:
+      matrix:
+        scenario:
+          - ember-lts-3.16
+          - ember-release
+          - ember-beta
+          - ember-canary
+          - ember-default-with-jquery
+          - ember-classic
+        bootstrap:
+          - 3
+          - 4
+        include:
+          - scenario: fastboot-tests
+          - scenario: node-tests
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Test
+        run: yarn ember try:one ${{ matrix.scenario }}
+        env:
+          BOOTSTRAPVERSION: ${{ matrix.bootstrap }}
+
+  test-browserstack:
+    name: Browserstack Tests
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    env:
+      BROWSERSTACK_USERNAME: simonihmig1
+      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Connect to Browserstack
+        run: yarn ember browserstack:connect
+      - name: Test
+        run: yarn ember test --filter !FastBoot --config-file testem.browserstack.js
+        env:
+          BABELPOLYFILL: true
+      - name: Disconnect from Browserstack
+        if: always()
+        run: yarn ember browserstack:disconnect
