@@ -77,7 +77,7 @@ module('Integration | Component | bs-modal', function (hooks) {
         <modal.header @title="Dialog" />
         <modal.body>Hello world!</modal.body>
         <modal.footer>
-          <button id="close" {{action modal.close}}>Close</button>
+          <button type="button" id="close" {{action modal.close}}>Close</button>
         </modal.footer>
       </BsModal>
     `);
@@ -95,7 +95,7 @@ module('Integration | Component | bs-modal', function (hooks) {
         <modal.header @title="Dialog" />
         <modal.body>Hello world!</modal.body>
         <modal.footer>
-          <button id="submit" {{action modal.submit}}>Submit</button>
+          <button type="button" id="submit" {{action modal.submit}}>Submit</button>
         </modal.footer>
       </BsModal>
     `);

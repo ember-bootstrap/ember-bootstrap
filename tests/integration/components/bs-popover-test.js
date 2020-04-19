@@ -59,7 +59,7 @@ module('Integration | Component | bs-popover', function (hooks) {
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
         <p>
-          <button class="btn" id="target">
+          <button type="button" class="btn" id="target">
             Click me<BsPopover @placement="top" @title="very very very very very very very long popover" @fade={{false}}>very very very very very very very long popover</BsPopover>
           </button>
         </p>
@@ -80,7 +80,7 @@ module('Integration | Component | bs-popover', function (hooks) {
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
         <p>
-          <button class="btn" id="target">
+          <button type="button" class="btn" id="target">
             Click me<BsPopover @placement="top" @autoPlacement={{true}} @viewportSelector="#wrapper" @title="very very very very very very very long popover" @fade={{false}}>very very very very very very very long popover</BsPopover>
           </button>
         </p>
@@ -243,7 +243,7 @@ module('Integration | Component | bs-popover', function (hooks) {
 
   test('it passes accessibility checks', async function (assert) {
     await render(hbs`
-      <button>
+      <button type="button">
         Test
         <BsPopover @title="dummy title" @visible={{true}}>
           template block text

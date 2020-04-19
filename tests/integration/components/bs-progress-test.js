@@ -211,7 +211,7 @@ module('Integration | Component | bs-progress', function (hooks) {
       <BsProgress as |p|>
         <p.bar @value={{5}} @maxValue={{10}} />
       </BsProgress>
-      <button>Test</button>
+      <button type="button">Test</button>
     `);
 
     await a11yAudit();

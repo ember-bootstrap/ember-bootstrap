@@ -99,7 +99,9 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   testRequiringFocus('it shows and hides immediately when focusing [fade=false]', async function (assert) {
-    await render(hbs`<button class="btn" id="target"><BsTooltip @title="Dummy" @fade={{false}} /></button>`);
+    await render(
+      hbs`<button type="button" class="btn" id="target"><BsTooltip @title="Dummy" @fade={{false}} /></button>`
+    );
 
     await focus('#target');
     assert.dom('.tooltip').exists({ count: 1 }, 'tooltip is visible');
@@ -370,7 +372,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
         <p class="margin-top">
-          <button class="btn" id="target">
+          <button type="button" class="btn" id="target">
             Click me<BsTooltip @placement="top" @title="very very very very very very very long tooltip" @fade={{false}} />
           </button>
         </p>
@@ -395,7 +397,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
         <p class="margin-top">
-          <button class="btn" id="target">
+          <button type="button" class="btn" id="target">
             Click me<BsTooltip @autoPlacement={{true}} @viewportSelector="#wrapper" @placement="top" @title="very very very very very very very long tooltip" @fade={{false}} />
           </button>
         </p>
@@ -427,7 +429,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
       <div id="ember-bootstrap-wormhole"></div>
       <div id="wrapper">
         <p class="margin-top">
-          <button class="btn" id="target">
+          <button type="button" class="btn" id="target">
             Click me<BsTooltip @placement="bottom" @autoPlacement={{true}} @title="very very very very very very very long tooltip" @fade={{false}} />
           </button>
         </p>
@@ -483,7 +485,7 @@ module('Integration | Component | bs-tooltip', function (hooks) {
 
   test('it passes accessibility checks', async function (assert) {
     await render(hbs`
-    <button>
+    <button type="button">
       Test
       <BsTooltip @title="Dummy" @visible={{true}} />
     </button>`);

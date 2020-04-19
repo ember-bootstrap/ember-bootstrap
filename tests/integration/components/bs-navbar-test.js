@@ -355,7 +355,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
 
     await render(hbs`
       <BsNavbar @collapsed={{false}} @onCollapse={{action "action"}} as |navbar|>
-        <button {{action navbar.collapse}}>Collapse</button>
+        <button type="button" {{action navbar.collapse}}>Collapse</button>
       </BsNavbar>
     `);
 
@@ -369,7 +369,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
 
     await render(hbs`
       <BsNavbar @collapsed={{true}} @onExpand={{action "action"}} as |navbar|>
-        <button {{action navbar.expand}}>Expand</button>
+        <button type="button" {{action navbar.expand}}>Expand</button>
       </BsNavbar>
     `);
 
@@ -386,7 +386,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
 
     await render(hbs`
       <BsNavbar @collapsed={{true}} @onExpand={{action "expanded"}} @onCollapse={{action "collapsed"}} as |navbar|>
-        <button {{action navbar.toggleNavbar}}>Expand</button>
+        <button type="button" {{action navbar.toggleNavbar}}>Expand</button>
       </BsNavbar>
     `);
 

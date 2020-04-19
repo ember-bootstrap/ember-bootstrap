@@ -72,7 +72,7 @@ module('Integration | Component | bs-collapse', function (hooks) {
   });
 
   test('it passes accessibility checks', async function (assert) {
-    await render(hbs`<button>Test</button><BsCollapse><p>Just some content</p></BsCollapse>`);
+    await render(hbs`<button type="button">Test</button><BsCollapse><p>Just some content</p></BsCollapse>`);
 
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');

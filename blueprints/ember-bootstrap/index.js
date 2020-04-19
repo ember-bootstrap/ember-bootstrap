@@ -187,12 +187,12 @@ module.exports = {
     };
 
     if (bootstrapVersion === 3) {
-      settings.importBootstrapFont = config.hasOwnProperty('importBootstrapFont') ? config.importBootstrapFont : true;
+      settings.importBootstrapFont = Object.prototype.hasOwnProperty.call(config, 'importBootstrapFont') ? config.importBootstrapFont : true;
     }
 
     if (preprocessor !== 'none') {
       settings.importBootstrapCSS = false;
-    } else if (config.hasOwnProperty('importBootstrapCSS')) {
+    } else if (Object.prototype.hasOwnProperty.call(config,'importBootstrapCSS')) {
       settings.importBootstrapCSS = config.importBootstrapCSS;
     } else {
       settings.importBootstrapCSS = true;
