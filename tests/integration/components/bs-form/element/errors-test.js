@@ -29,9 +29,7 @@ module('Integration | Component | bs form/element/errors', function (hooks) {
 
   test('shows multiple errors', async function (assert) {
     this.set('messages', A(['foo', 'bar']));
-    await render(
-      hbs`<BsForm::Element::Errors @messages={{messages}} @show={{true}} @showMultipleErrors={{true}} />`
-    );
+    await render(hbs`<BsForm::Element::Errors @messages={{messages}} @show={{true}} @showMultipleErrors={{true}} />`);
     assert.dom(`.${formFeedbackClass()}`).exists({ count: 2 });
     assert.dom(`.${formFeedbackClass()}:first-child`).hasText('foo');
     assert.dom(`.${formFeedbackClass()}:last-child`).hasText('bar');

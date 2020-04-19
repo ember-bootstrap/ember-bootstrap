@@ -24,9 +24,7 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
     `);
 
     assert.dom('*').hasText('template block text');
-    assert
-      .dom('a.dropdown-item')
-      .doesNotExist('renders as plain element with no dropdown item class');
+    assert.dom('a.dropdown-item').doesNotExist('renders as plain element with no dropdown item class');
   });
 
   testBS4('it has correct markup', async function (assert) {
@@ -38,9 +36,7 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
     `);
 
     assert.dom('*').hasText('template block text');
-    assert
-      .dom('a.dropdown-item')
-      .exists({ count: 1 }, 'renders as plain element with dropdown item class');
+    assert.dom('a.dropdown-item').exists({ count: 1 }, 'renders as plain element with dropdown item class');
   });
 
   module('positional params', function () {
@@ -62,9 +58,7 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
     });
 
     test('disabled link', async function (assert) {
-      await render(
-        hbs`{{#bs-dropdown/menu/link-to "index" disabled=true}}Link{{/bs-dropdown/menu/link-to}}`
-      );
+      await render(hbs`{{#bs-dropdown/menu/link-to "index" disabled=true}}Link{{/bs-dropdown/menu/link-to}}`);
 
       assert.dom('a').hasClass('disabled');
     });
@@ -73,9 +67,7 @@ module('Integration | Component | bs-dropdown/menu/link-to', function (hooks) {
   if (supportsAngleBracketsLinkTo) {
     module('<LinkTo> properties', function () {
       test('simple route link', async function (assert) {
-        await render(
-          hbs`<BsDropdown::menu::link-to @route="index">Link</BsDropdown::menu::link-to>`
-        );
+        await render(hbs`<BsDropdown::menu::link-to @route="index">Link</BsDropdown::menu::link-to>`);
 
         assert.dom('a').exists({ count: 1 });
         assert.dom('a').hasText('Link');

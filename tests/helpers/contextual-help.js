@@ -36,8 +36,5 @@ export function assertPositioning(assert, selector = '.tooltip') {
     parseInt(window.getComputedStyle(tooltip).marginBottom, 10);
   let tooltipPos = Math.round(offset(tooltip).top + tooltip.offsetHeight + margin);
   let triggerPos = Math.round(offset(trigger).top);
-  assert.ok(
-    Math.abs(triggerPos - tooltipPos) <= 1,
-    `Expected position: ${triggerPos}, actual: ${tooltipPos}`
-  );
+  assert.ok(Math.abs(triggerPos - tooltipPos) <= 1, `Expected position: ${triggerPos}, actual: ${tooltipPos}`);
 }

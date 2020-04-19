@@ -2,12 +2,7 @@ import { module, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, triggerEvent, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import {
-  test,
-  versionDependent,
-  visibilityClass,
-  popoverPositionClass,
-} from '../../helpers/bootstrap-test';
+import { test, versionDependent, visibilityClass, popoverPositionClass } from '../../helpers/bootstrap-test';
 import { setupForPositioning, assertPositioning } from '../../helpers/contextual-help';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -31,18 +26,10 @@ module('Integration | Component | bs-popover', function (hooks) {
     assert.dom('.popover.wide').exists({ count: 1 }, 'it passes along class attribute');
     assert.dom('.popover').hasClass('fade', 'has fade class');
     assert.dom('.popover').hasClass(visibilityClass(), 'has visibility class');
-    assert.equal(
-      this.element.querySelector('.popover').getAttribute('role'),
-      'tooltip',
-      'has ARIA role'
-    );
+    assert.equal(this.element.querySelector('.popover').getAttribute('role'), 'tooltip', 'has ARIA role');
     assert.dom('.arrow').exists({ count: 1 }, 'has arrow');
-    assert
-      .dom(versionDependent('.popover-title', '.popover-header'))
-      .hasText('dummy title', 'shows title');
-    assert
-      .dom(versionDependent('.popover-content', '.popover-body'))
-      .hasText('template block text', 'shows content');
+    assert.dom(versionDependent('.popover-title', '.popover-header')).hasText('dummy title', 'shows title');
+    assert.dom(versionDependent('.popover-content', '.popover-body')).hasText('template block text', 'shows content');
   });
 
   skip('it supports different placements', async function (assert) {
@@ -207,9 +194,7 @@ module('Integration | Component | bs-popover', function (hooks) {
   });
 
   test('it passes along class attribute', async function (assert) {
-    await render(
-      hbs`<div id="target"><BsPopover @title="Dummy" @class="wide">test</BsPopover></div>`
-    );
+    await render(hbs`<div id="target"><BsPopover @title="Dummy" @class="wide">test</BsPopover></div>`);
     await click('#target');
     assert.dom('.popover').hasClass('wide');
   });
@@ -232,16 +217,12 @@ module('Integration | Component | bs-popover', function (hooks) {
     this.set('show', true);
     await settled();
 
-    assert
-      .dom('#ember-bootstrap-wormhole .popover')
-      .exists({ count: 1 }, 'Popover exists in wormhole');
+    assert.dom('#ember-bootstrap-wormhole .popover').exists({ count: 1 }, 'Popover exists in wormhole');
   });
 
   test('Renders in test container if renderInPlace is not set', async function (assert) {
     this.set('show', false);
-    await render(
-      hbs`{{#if show}}<BsPopover @title="Simple popover" @visible={{true}} @fade={{false}} />{{/if}}`
-    );
+    await render(hbs`{{#if show}}<BsPopover @title="Simple popover" @visible={{true}} @fade={{false}} />{{/if}}`);
     this.set('show', true);
     await settled();
 

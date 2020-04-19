@@ -50,9 +50,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
     formLayouts.forEach((layout) => {
       this.set('formLayout', layout);
-      assert
-        .dom(selector)
-        .exists({ count: 1 }, `component has ${controlType} control for form layout ${layout}`);
+      assert.dom(selector).exists({ count: 1 }, `component has ${controlType} control for form layout ${layout}`);
     });
   }
 
@@ -83,14 +81,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     });
   }
 
-  async function controlTypeUpdateTest(
-    assert,
-    controlType,
-    selector,
-    value,
-    oldValue = 'foo',
-    setValueFn = null
-  ) {
+  async function controlTypeUpdateTest(assert, controlType, selector, value, oldValue = 'foo', setValueFn = null) {
     this.set('controlType', controlType);
     let action = this.spy();
     this.set('change', action);
@@ -136,37 +127,19 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
   test('controlType "text" is supported', async function (assert) {
     await controlTypeLayoutTest.call(this, assert, 'text', 'input[type=text]');
-    await controlTypeValueTest.call(this, assert, 'text', 'input[type=text]', [
-      'myValue',
-      undefined,
-    ]);
+    await controlTypeValueTest.call(this, assert, 'text', 'input[type=text]', ['myValue', undefined]);
     await controlTypeUpdateTest.call(this, assert, 'text', 'input[type=text]', 'myValue');
     await labeledControlTest.call(this, assert, 'text', 'input[type=text]');
   });
 
   test('controlType "checkbox" is supported', async function (assert) {
     await controlTypeLayoutTest.call(this, assert, 'checkbox', 'input[type=checkbox]');
-    await controlTypeValueTest.call(
-      this,
-      assert,
-      'checkbox',
-      'input[type=checkbox]',
-      [true, false],
-      function () {
-        return this.checked;
-      }
-    );
-    await controlTypeUpdateTest.call(
-      this,
-      assert,
-      'checkbox',
-      'input[type=checkbox]',
-      true,
-      false,
-      function () {
-        return click(this);
-      }
-    );
+    await controlTypeValueTest.call(this, assert, 'checkbox', 'input[type=checkbox]', [true, false], function () {
+      return this.checked;
+    });
+    await controlTypeUpdateTest.call(this, assert, 'checkbox', 'input[type=checkbox]', true, false, function () {
+      return click(this);
+    });
   });
 
   test('controlType "textarea" is supported', async function (assert) {
@@ -203,16 +176,12 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
       formLayouts.forEach((layout) => {
         this.set('formLayout', layout);
-        assert
-          .dom('input[type=radio]')
-          .exists({ count: 2 }, `component has radio control for form layout ${layout}`);
+        assert.dom('input[type=radio]').exists({ count: 2 }, `component has radio control for form layout ${layout}`);
       });
     });
 
     test('it renders simple options', async function (assert) {
-      await render(
-        hbs`<BsForm::Element @controlType="radio" @formLayout="horizontal" @options={{simpleOptions}} />`
-      );
+      await render(hbs`<BsForm::Element @controlType="radio" @formLayout="horizontal" @options={{simpleOptions}} />`);
 
       assert.dom('input[type=radio]').exists({ count: 2 });
       assert.dom('label').exists({ count: 2 });
@@ -221,22 +190,14 @@ module('Integration | Component | bs-form/element', function (hooks) {
       assert.dom(this.element.querySelectorAll('label')[1]).hasText('bar');
       assert
         .dom(this.element.querySelectorAll('label')[0])
-        .hasAttribute(
-          'for',
-          this.element.querySelectorAll('input[type=radio]')[0].getAttribute('id')
-        );
+        .hasAttribute('for', this.element.querySelectorAll('input[type=radio]')[0].getAttribute('id'));
       assert
         .dom(this.element.querySelectorAll('label')[1])
-        .hasAttribute(
-          'for',
-          this.element.querySelectorAll('input[type=radio]')[1].getAttribute('id')
-        );
+        .hasAttribute('for', this.element.querySelectorAll('input[type=radio]')[1].getAttribute('id'));
     });
 
     test('it renders hash options', async function (assert) {
-      await render(
-        hbs`<BsForm::Element @controlType="radio" @options={{hashOptions}} @optionLabelPath="title" />`
-      );
+      await render(hbs`<BsForm::Element @controlType="radio" @options={{hashOptions}} @optionLabelPath="title" />`);
 
       assert.dom('input[type=radio]').exists({ count: 2 });
       assert.dom('label').exists({ count: 2 });
@@ -245,16 +206,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
       assert.dom(this.element.querySelectorAll('label')[1]).hasText('bar');
       assert
         .dom(this.element.querySelectorAll('label')[0])
-        .hasAttribute(
-          'for',
-          this.element.querySelectorAll('input[type=radio]')[0].getAttribute('id')
-        );
+        .hasAttribute('for', this.element.querySelectorAll('input[type=radio]')[0].getAttribute('id'));
       assert
         .dom(this.element.querySelectorAll('label')[1])
-        .hasAttribute(
-          'for',
-          this.element.querySelectorAll('input[type=radio]')[1].getAttribute('id')
-        );
+        .hasAttribute('for', this.element.querySelectorAll('input[type=radio]')[1].getAttribute('id'));
     });
 
     test('Block mode allows to customize label for each radio input', async function (assert) {
@@ -270,10 +225,10 @@ module('Integration | Component | bs-form/element', function (hooks) {
       assert.dom(this.element.querySelectorAll('label')[1]).hasText('1: bar');
     });
 
-    testBS3(
-      'Block mode allows to customize label for each radio input if used together with inline',
-      async function (assert) {
-        await render(hbs`
+    testBS3('Block mode allows to customize label for each radio input if used together with inline', async function (
+      assert
+    ) {
+      await render(hbs`
         <BsForm::Element @controlType="radio" @options={{simpleOptions}} as |Element|>
           <Element.control @inline={{true}} as |option index|>
             {{index}}: {{option}}
@@ -281,10 +236,9 @@ module('Integration | Component | bs-form/element', function (hooks) {
         </BsForm::Element>
       `);
 
-        assert.dom(this.element.querySelectorAll('label')[0]).hasText('0: foo');
-        assert.dom(this.element.querySelectorAll('label')[1]).hasText('1: bar');
-      }
-    );
+      assert.dom(this.element.querySelectorAll('label')[0]).hasText('0: foo');
+      assert.dom(this.element.querySelectorAll('label')[1]).hasText('1: bar');
+    });
 
     testBS3('has correct markup', async function (assert) {
       await render(hbs`<BsForm::Element @controlType="radio" @options={{simpleOptions}} />`);
@@ -323,29 +277,17 @@ module('Integration | Component | bs-form/element', function (hooks) {
       assert.dom(this.element.querySelectorAll('label')[1]).hasText('bar');
       assert
         .dom(this.element.querySelectorAll('label')[0])
-        .hasAttribute(
-          'for',
-          this.element.querySelectorAll('input[type=radio]')[0].getAttribute('id')
-        );
+        .hasAttribute('for', this.element.querySelectorAll('input[type=radio]')[0].getAttribute('id'));
       assert
         .dom(this.element.querySelectorAll('label')[1])
-        .hasAttribute(
-          'for',
-          this.element.querySelectorAll('input[type=radio]')[1].getAttribute('id')
-        );
+        .hasAttribute('for', this.element.querySelectorAll('input[type=radio]')[1].getAttribute('id'));
     });
 
     testBS4('has correct markup', async function (assert) {
-      await render(
-        hbs`<BsForm::Element @controlType="radio" @label="my radio group" @options={{simpleOptions}} />`
-      );
+      await render(hbs`<BsForm::Element @controlType="radio" @label="my radio group" @options={{simpleOptions}} />`);
 
-      assert
-        .dom('legend')
-        .exists({ count: 1 }, 'renders a <legend> instead of a <label> for radio group');
-      assert
-        .dom('legend')
-        .hasText('my radio group', 'renders value of label argument as text of <legend>');
+      assert.dom('legend').exists({ count: 1 }, 'renders a <legend> instead of a <label> for radio group');
+      assert.dom('legend').hasText('my radio group', 'renders value of label argument as text of <legend>');
       assert.dom('legend').doesNotHaveAttribute('for', '<legend> does not have a for attribute');
 
       assert.dom('.form-check').exists({ count: 2 });
@@ -404,10 +346,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await click(this.element.querySelectorAll('input[type=radio]')[1]);
 
       assert.equal(this.get('model.name'), 'foo', `radio value has not changed`);
-      assert.ok(
-        action.calledWith('bar', model, 'name'),
-        `onChange action of radio has been called with expected args`
-      );
+      assert.ok(action.calledWith('bar', model, 'name'), `onChange action of radio has been called with expected args`);
     });
   });
 
@@ -430,30 +369,14 @@ module('Integration | Component | bs-form/element', function (hooks) {
       hbs`<BsForm @horizontalLabelGridClass="col-sm-4" @formLayout={{formLayout}} as |form|><form.element @controlType="text" @label="myLabel" /></BsForm>`
     );
     assert.dom('form > div').hasClass('form-group', 'component has form-group class');
-    assert.equal(
-      this.element.querySelector('form > div > :nth-child(1)').tagName,
-      'LABEL',
-      'first child is a label'
-    );
-    assert.equal(
-      this.element.querySelector('form > div > :nth-child(2)').tagName,
-      'INPUT',
-      'second child is a input'
-    );
+    assert.equal(this.element.querySelector('form > div > :nth-child(1)').tagName, 'LABEL', 'first child is a label');
+    assert.equal(this.element.querySelector('form > div > :nth-child(2)').tagName, 'INPUT', 'second child is a input');
 
     this.set('formLayout', 'horizontal');
     assert.dom('form > div').hasClass('form-group', 'component has form-group class');
-    assert.equal(
-      this.element.querySelector('form > div > :nth-child(1)').tagName,
-      'LABEL',
-      'first child is a label'
-    );
+    assert.equal(this.element.querySelector('form > div > :nth-child(1)').tagName, 'LABEL', 'first child is a label');
     assert.dom('form > div > :nth-child(1)').hasClass('col-sm-4', 'label has grid class');
-    assert.equal(
-      this.element.querySelector('form > div > :nth-child(2)').tagName,
-      'DIV',
-      'second child is a div'
-    );
+    assert.equal(this.element.querySelector('form > div > :nth-child(2)').tagName, 'DIV', 'second child is a div');
     assert.dom('form > div > :nth-child(2)').hasClass('col-sm-8', 'div has grid class');
     assert.equal(
       this.element.querySelector('form > div > :nth-child(2) > :first-child').tagName,
@@ -555,8 +478,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       `${this.element.querySelector('.button .input-group-btn').offsetWidth}px`,
       'works for button on init'
     );
-    let expectedRightValue = this.element.querySelector('.addon .form-control-feedback').style
-      .right;
+    let expectedRightValue = this.element.querySelector('.addon .form-control-feedback').style.right;
 
     this.set('errors', A(['Some error']));
     assert.equal(
@@ -586,9 +508,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     );
   });
 
-  testRequiringFocus('shows validation state only when validator is present', async function (
-    assert
-  ) {
+  testRequiringFocus('shows validation state only when validator is present', async function (assert) {
     this.set(
       'model',
       EmberObject.create({
@@ -603,10 +523,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     await blur('input');
     assert
       .dom(formFeedbackElement())
-      .hasNoClass(
-        validationSuccessClass(),
-        "form group isn't shown as having errors if there is no validator"
-      );
+      .hasNoClass(validationSuccessClass(), "form group isn't shown as having errors if there is no validator");
   });
 
   test('shows validation success', async function (assert) {
@@ -616,10 +533,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     `);
     assert
       .dom(formFeedbackElement())
-      .hasClass(
-        validationSuccessClass(),
-        'validation succcess is shown when form signals to show all validations'
-      );
+      .hasClass(validationSuccessClass(), 'validation succcess is shown when form signals to show all validations');
   });
 
   testRequiringFocus('shows validation errors', async function (assert) {
@@ -635,20 +549,14 @@ module('Integration | Component | bs-form/element', function (hooks) {
     await blur('input');
     assert
       .dom(formFeedbackElement())
-      .hasClass(
-        validationErrorClass(),
-        'validation errors are shown after user interaction when errors are present'
-      );
+      .hasClass(validationErrorClass(), 'validation errors are shown after user interaction when errors are present');
     assert.dom(`.form-group .${formFeedbackClass()}`).hasText('Invalid');
     run(() => {
       this.set('errors', A());
     });
     assert
       .dom(formFeedbackElement())
-      .hasNoClass(
-        validationErrorClass(),
-        "form group isn't shown as having errors if there aren't any"
-      );
+      .hasNoClass(validationErrorClass(), "form group isn't shown as having errors if there aren't any");
   });
 
   testRequiringFocus('shows validation warnings', async function (assert) {
@@ -659,10 +567,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     `);
     assert
       .dom(formFeedbackElement())
-      .hasNoClass(
-        validationWarningClass(),
-        "validation warnings aren't shown before user interaction"
-      );
+      .hasNoClass(validationWarningClass(), "validation warnings aren't shown before user interaction");
     await focus('input');
     await blur('input');
     assert
@@ -677,10 +582,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     });
     assert
       .dom(formFeedbackElement())
-      .hasNoClass(
-        validationWarningClass(),
-        "form group isn't shown as having warnings if there are't any"
-      );
+      .hasNoClass(validationWarningClass(), "form group isn't shown as having warnings if there are't any");
   });
 
   test('shows custom error immediately', async function (assert) {
@@ -689,19 +591,14 @@ module('Integration | Component | bs-form/element', function (hooks) {
     await render(hbs`
         <BsForm::Element @property="name" @hasValidator={{true}} @customError={{error}} @model={{model}} />
     `);
-    assert
-      .dom(formFeedbackElement())
-      .hasClass(validationErrorClass(), 'custom error is shown immediately');
+    assert.dom(formFeedbackElement()).hasClass(validationErrorClass(), 'custom error is shown immediately');
     assert.dom(`.form-group .${formFeedbackClass()}`).hasText('some error');
     run(() => {
       this.set('error', null);
     });
     assert
       .dom(formFeedbackElement())
-      .hasNoClass(
-        validationErrorClass(),
-        "form group isn't shown as having errors if there aren't any"
-      );
+      .hasNoClass(validationErrorClass(), "form group isn't shown as having errors if there aren't any");
   });
 
   test('shows custom warning immediately', async function (assert) {
@@ -710,24 +607,17 @@ module('Integration | Component | bs-form/element', function (hooks) {
     await render(hbs`
         <BsForm::Element @property="name" @hasValidator={{true}} @customWarning={{warning}} @model={{model}} />
     `);
-    assert
-      .dom(formFeedbackElement())
-      .hasClass(validationWarningClass(), 'custom warning is shown immediately');
+    assert.dom(formFeedbackElement()).hasClass(validationWarningClass(), 'custom warning is shown immediately');
     assert.dom(`.form-group .${formFeedbackClass()}`).hasText('some warning');
     run(() => {
       this.set('warning', null);
     });
     assert
       .dom(formFeedbackElement())
-      .hasNoClass(
-        validationWarningClass(),
-        "form group isn't shown as having warning if there aren't any"
-      );
+      .hasNoClass(validationWarningClass(), "form group isn't shown as having warning if there aren't any");
   });
 
-  testRequiringFocus('shows validation errors in preference to custom warning', async function (
-    assert
-  ) {
+  testRequiringFocus('shows validation errors in preference to custom warning', async function (assert) {
     this.set('errors', A(['Invalid']));
     this.set('warning', 'some warning');
     this.set('model', EmberObject.create({ name: null }));
@@ -737,35 +627,23 @@ module('Integration | Component | bs-form/element', function (hooks) {
     assert
       .dom(formFeedbackElement())
       .hasNoClass(validationErrorClass(), "validation errors aren't shown before user interaction");
-    assert
-      .dom(formFeedbackElement())
-      .hasClass(validationWarningClass(), 'custom warning is shown immediately');
-    assert
-      .dom(`.form-group .${formFeedbackClass()}`)
-      .hasText('some warning', 'Custom Warning is shown');
+    assert.dom(formFeedbackElement()).hasClass(validationWarningClass(), 'custom warning is shown immediately');
+    assert.dom(`.form-group .${formFeedbackClass()}`).hasText('some warning', 'Custom Warning is shown');
     await focus('input');
     await blur('input');
     assert
       .dom(formFeedbackElement())
-      .hasClass(
-        validationErrorClass(),
-        'validation errors are shown after user interaction when errors are present'
-      );
+      .hasClass(validationErrorClass(), 'validation errors are shown after user interaction when errors are present');
     assert
       .dom(formFeedbackElement())
       .hasNoClass(validationWarningClass(), 'custom warning is removed when errors are shown');
-    assert
-      .dom(`.form-group .${formFeedbackClass()}`)
-      .hasText('Invalid', 'Validation error is shown');
+    assert.dom(`.form-group .${formFeedbackClass()}`).hasText('Invalid', 'Validation error is shown');
     run(() => {
       this.set('errors', A());
     });
     assert
       .dom(formFeedbackElement())
-      .hasNoClass(
-        validationErrorClass(),
-        "form group isn't shown as having errors if there aren't any"
-      );
+      .hasNoClass(validationErrorClass(), "form group isn't shown as having errors if there aren't any");
     assert
       .dom(formFeedbackElement())
       .hasClass(validationWarningClass(), 'custom warning is shown when errors are removed');
@@ -782,10 +660,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     `);
       assert
         .dom(formFeedbackElement())
-        .hasNoClass(
-          validationErrorClass(),
-          "validation warnings aren't shown before user interaction"
-        );
+        .hasNoClass(validationErrorClass(), "validation warnings aren't shown before user interaction");
       await focus('input');
       await blur('input');
       assert
@@ -795,10 +670,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await triggerEvent('input', 'change');
       assert
         .dom(formFeedbackElement())
-        .hasClass(
-          validationErrorClass(),
-          'events present in `showValidationOn` trigger validation'
-        );
+        .hasClass(validationErrorClass(), 'events present in `showValidationOn` trigger validation');
     }
   );
 
@@ -812,10 +684,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     `);
       assert
         .dom(formFeedbackElement())
-        .hasNoClass(
-          validationErrorClass(),
-          "validation warnings aren't shown before user interaction"
-        );
+        .hasNoClass(validationErrorClass(), "validation warnings aren't shown before user interaction");
       await focus('input');
       await blur('input');
       assert
@@ -824,19 +693,14 @@ module('Integration | Component | bs-form/element', function (hooks) {
       await triggerEvent('input', 'change');
       assert
         .dom(formFeedbackElement())
-        .hasClass(
-          validationErrorClass(),
-          'events present in `showValidationOn` trigger validation'
-        );
+        .hasClass(validationErrorClass(), 'events present in `showValidationOn` trigger validation');
     }
   );
 
-  testBS3RequiringFocus(
-    'event triggered on input group button does not enable validation',
-    async function (assert) {
-      this.set('errors', A(['Invalid']));
-      this.set('model', EmberObject.create({ name: null }));
-      await render(hbs`
+  testBS3RequiringFocus('event triggered on input group button does not enable validation', async function (assert) {
+    this.set('errors', A(['Invalid']));
+    this.set('model', EmberObject.create({ name: null }));
+    await render(hbs`
       <BsForm as |form|>
         <form.element @property="name" @hasValidator={{true}} @errors={{errors}} @model={{model}} as |el|>
           <div class="input-group">
@@ -848,22 +712,16 @@ module('Integration | Component | bs-form/element', function (hooks) {
         </form.element>
       </BsForm>
     `);
-      await click('button');
-      assert
-        .dom(formFeedbackElement())
-        .hasNoClass(
-          validationErrorClass(),
-          "validation warnings aren't shown before user interaction"
-        );
-    }
-  );
+    await click('button');
+    assert
+      .dom(formFeedbackElement())
+      .hasNoClass(validationErrorClass(), "validation warnings aren't shown before user interaction");
+  });
 
-  testBS4RequiringFocus(
-    'event triggered on input group button does not enable validation',
-    async function (assert) {
-      this.set('errors', A(['Invalid']));
-      this.set('model', EmberObject.create({ name: null }));
-      await render(hbs`
+  testBS4RequiringFocus('event triggered on input group button does not enable validation', async function (assert) {
+    this.set('errors', A(['Invalid']));
+    this.set('model', EmberObject.create({ name: null }));
+    await render(hbs`
       <BsForm as |form|>
         <form.element @property="name" @hasValidator={{true}} @errors={{errors}} @model={{model}} as |el|>
           <div class="input-group mb-3">
@@ -875,15 +733,11 @@ module('Integration | Component | bs-form/element', function (hooks) {
         </form.element>
       </BsForm>
     `);
-      await click('button');
-      assert
-        .dom(formFeedbackElement())
-        .hasNoClass(
-          validationErrorClass(),
-          "validation warnings aren't shown before user interaction"
-        );
-    }
-  );
+    await click('button');
+    assert
+      .dom(formFeedbackElement())
+      .hasNoClass(validationErrorClass(), "validation warnings aren't shown before user interaction");
+  });
 
   testRequiringFocus(
     'event targets not enabling validation are configurable per `doNotShowValidationForEventTargets`',

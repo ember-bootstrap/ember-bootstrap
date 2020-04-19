@@ -169,10 +169,6 @@ export default class ContextualHelpElement extends Component {
       return;
     }
     this.set('actualPlacement', popperDataObject.placement);
-    scheduleOnce(
-      'afterRender',
-      popperDataObject.instance,
-      popperDataObject.instance.scheduleUpdate
-    );
+    scheduleOnce('afterRender', popperDataObject.instance, popperDataObject.instance.scheduleUpdate);
   }
 }

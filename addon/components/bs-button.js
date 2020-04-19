@@ -480,9 +480,7 @@ export default class Button extends Component {
           `angle bracket  component invocation syntax instead:\n` +
           `Before:\n` +
           `  {{bs-button ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
-          `  <BsButton @${attribute}=${
-            typeof value === 'string' ? `"${value}"` : `{{${value}}}`
-          } />\n` +
+          `  <BsButton @${attribute}=${typeof value === 'string' ? `"${value}"` : `{{${value}}}`} />\n` +
           `After:\n` +
           `  <BsButton ${typeof value === 'boolean' ? attribute : `${attribute}="${value}"`} />`;
 

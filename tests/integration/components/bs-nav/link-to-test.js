@@ -25,9 +25,7 @@ module('Integration | Component | bs-nav/link-to', function (hooks) {
     });
 
     test('link with model', async function (assert) {
-      await render(
-        hbs`{{#bs-nav/link-to "acceptance.link" "1" (query-params foo="bar")}}Link{{/bs-nav/link-to}}`
-      );
+      await render(hbs`{{#bs-nav/link-to "acceptance.link" "1" (query-params foo="bar")}}Link{{/bs-nav/link-to}}`);
 
       assert.dom('a').exists({ count: 1 });
       assert.dom('a').hasAttribute('href', '/acceptance/link/1?foo=bar');

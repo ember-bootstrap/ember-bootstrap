@@ -269,9 +269,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
       hbs`<BsCarousel @interval={{0}} @transitionDuration={{transitionDuration}} as |car|>{{car.slide}}{{car.slide}}</BsCarousel>`
     );
     await clickIndicator(2);
-    assert
-      .dom('.carousel-indicators > li:nth-child(2).active')
-      .exists('indicators changes indicator index');
+    assert.dom('.carousel-indicators > li:nth-child(2).active').exists('indicators changes indicator index');
     assert.notOk(getActivatedSlide(1), 'indicators changes slide index');
     assert.ok(getActivatedSlide(2), 'indicators changes slide index');
   });

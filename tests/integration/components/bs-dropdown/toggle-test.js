@@ -26,9 +26,7 @@ module('Integration | Component | bs-dropdown/toggle', function (hooks) {
   test('clicking toggle sends onClick action', async function (assert) {
     let action = this.spy();
     this.actions.click = action;
-    await render(
-      hbs`<BsDropdown as |dd|><dd.toggle @onClick={{action "click"}}>Test</dd.toggle></BsDropdown>`
-    );
+    await render(hbs`<BsDropdown as |dd|><dd.toggle @onClick={{action "click"}}>Test</dd.toggle></BsDropdown>`);
     await click('a');
     assert.ok(action.calledOnce, 'onClick action has been called.');
   });

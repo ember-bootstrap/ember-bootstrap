@@ -2,10 +2,7 @@ import { computed } from '@ember/object';
 import { assert } from '@ember/debug';
 
 export default function formValidationClass(validationTypeProperty) {
-  assert(
-    'formValidationClass needs validationTypeProperty argument',
-    typeof validationTypeProperty === 'string'
-  );
+  assert('formValidationClass needs validationTypeProperty argument', typeof validationTypeProperty === 'string');
 
   return computed(validationTypeProperty, function () {
     let validationType = this.get(validationTypeProperty);

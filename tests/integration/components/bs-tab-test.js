@@ -18,17 +18,13 @@ module('Integration | Component | bs-tab', function (hooks) {
   function assertActiveTab(assert, tabIndex, active = true) {
     if (this.element.querySelectorAll('ul.nav.nav-tabs li').length > 0) {
       assert.equal(
-        this.element
-          .querySelector(`ul.nav.nav-tabs li:nth-child(${tabIndex + 1})`)
-          .classList.contains('active'),
+        this.element.querySelector(`ul.nav.nav-tabs li:nth-child(${tabIndex + 1})`).classList.contains('active'),
         active,
         active ? 'tab is active' : 'tab is inactive'
       );
     }
     assert.equal(
-      this.element
-        .querySelector(`.tab-content .tab-pane:nth-child(${tabIndex + 1})`)
-        .classList.contains('active'),
+      this.element.querySelector(`.tab-content .tab-pane:nth-child(${tabIndex + 1})`).classList.contains('active'),
       active,
       active ? 'tab pane is active' : 'tab pane is inactive'
     );
@@ -96,12 +92,8 @@ module('Integration | Component | bs-tab', function (hooks) {
 
     assert.dom('ul.nav.nav-tabs').exists({ count: 1 }, 'has tabs navigation');
     assert.dom('ul.nav.nav-tabs > li').exists({ count: 2 }, 'has tabs navigation items');
-    assert
-      .dom('ul.nav.nav-tabs > li:nth-child(1) > a')
-      .hasText('Tab 1', 'navigation item shows pane title');
-    assert
-      .dom('ul.nav.nav-tabs > li:nth-child(2) > a')
-      .hasText('Tab 2', 'navigation item shows pane title');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(1) > a').hasText('Tab 1', 'navigation item shows pane title');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(2) > a').hasText('Tab 2', 'navigation item shows pane title');
   });
 
   test('tabs have proper aria roles', async function (assert) {
@@ -179,23 +171,14 @@ module('Integration | Component | bs-tab', function (hooks) {
 
     assert.dom('ul.nav.nav-tabs').exists({ count: 1 }, 'has tabs navigation');
     assert.dom('ul.nav.nav-tabs > li').exists({ count: 3 }, 'has tabs navigation items');
-    assert
-      .dom('ul.nav.nav-tabs > li:nth-child(1) > a')
-      .hasText('Tab 1', 'navigation item shows pane title');
-    assert
-      .dom('ul.nav.nav-tabs > li:nth-child(2) > a')
-      .hasText('Tab 2', 'navigation item shows pane title');
-    assert
-      .dom('ul.nav.nav-tabs > li:nth-child(3)')
-      .hasClass('dropdown', 'adds dropdown for grouped items');
-    assert
-      .dom('ul.nav.nav-tabs > li:nth-child(3) > a')
-      .hasText('Dropdown', 'drop down item shows pane groupTitle');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(1) > a').hasText('Tab 1', 'navigation item shows pane title');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(2) > a').hasText('Tab 2', 'navigation item shows pane title');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(3)').hasClass('dropdown', 'adds dropdown for grouped items');
+    assert.dom('ul.nav.nav-tabs > li:nth-child(3) > a').hasText('Dropdown', 'drop down item shows pane groupTitle');
 
     await click('ul.nav.nav-tabs > li:nth-child(3) a');
     assert.equal(
-      this.element.querySelector('ul.nav.nav-tabs > li:nth-child(3) .dropdown-menu').children
-        .length,
+      this.element.querySelector('ul.nav.nav-tabs > li:nth-child(3) .dropdown-menu').children.length,
       2,
       'puts items with groupTitle under dropdown menu'
     );

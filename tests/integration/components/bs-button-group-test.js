@@ -168,9 +168,7 @@ module('Integration | Component | bs-button-group', function (hooks) {
       assert.equal(this.value, null, 'value must be null');
       // check button's active property
       for (let k = 0; k < 3; k++) {
-        assert
-          .dom(`button:nth-child(${k + 1})`)
-          .hasNoClass('active', 'button active state is true');
+        assert.dom(`button:nth-child(${k + 1})`).hasNoClass('active', 'button active state is true');
       }
     }
   });

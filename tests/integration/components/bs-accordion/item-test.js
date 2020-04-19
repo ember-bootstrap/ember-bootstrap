@@ -31,12 +31,8 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
     assert.dom(`.${accordionItemHeadClass()}`).hasClass('collapsed', `has collapsed class`);
     assert.dom('.collapse').exists();
     assert.dom('.collapse').hasNoClass(visibilityClass(), '.collapse is hidden');
-    assert
-      .dom(accordionTitleSelector())
-      .hasText('TITLE', `${accordionTitleSelector()} has correct title`);
-    assert
-      .dom(`.${accordionItemBodyClass()}`)
-      .hasText('CONTENT', `${accordionItemBodyClass()} has correct title`);
+    assert.dom(accordionTitleSelector()).hasText('TITLE', `${accordionTitleSelector()} has correct title`);
+    assert.dom(`.${accordionItemBodyClass()}`).hasText('CONTENT', `${accordionItemBodyClass()} has correct title`);
   });
 
   test('calls onClick action when clicking heading', async function (assert) {
@@ -58,12 +54,8 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
       </BsAccordion::Item>
     `);
 
-    assert
-      .dom(accordionTitleSelector())
-      .hasText('TITLE', `${accordionClassFor('title')} has correct title`);
-    assert
-      .dom(`.${accordionItemBodyClass()}`)
-      .hasText('CONTENT', `${accordionItemBodyClass()} has correct content`);
+    assert.dom(accordionTitleSelector()).hasText('TITLE', `${accordionClassFor('title')} has correct title`);
+    assert.dom(`.${accordionItemBodyClass()}`).hasText('CONTENT', `${accordionItemBodyClass()} has correct content`);
   });
 
   test('accordion items can be disabled', async function (assert) {

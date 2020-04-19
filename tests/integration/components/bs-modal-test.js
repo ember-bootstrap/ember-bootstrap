@@ -26,9 +26,7 @@ module('Integration | Component | bs-modal', function (hooks) {
 
     assert.dom('.modal').exists({ count: 1 }, 'Modal exists.');
     assert.dom('.modal .modal-header').exists({ count: 1 }, 'Modal has header.');
-    assert
-      .dom('.modal .modal-header .modal-title')
-      .hasText('Dialog', 'Modal header has correct title.');
+    assert.dom('.modal .modal-header .modal-title').hasText('Dialog', 'Modal header has correct title.');
     assert.dom('.modal .modal-footer').exists({ count: 1 }, 'Modal has footer.');
     assert.dom('.modal .modal-footer button').exists({ count: 1 }, 'Modal has button in footer.');
     assert.dom('.modal .modal-footer button').hasText('Ok', 'Modal button has default title.');

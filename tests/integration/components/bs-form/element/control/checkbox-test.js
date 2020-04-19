@@ -17,8 +17,6 @@ module('Integration | Component | bs form/element/control/checkbox', function (h
 
   testBS4('component has form-check-input class', async function (assert) {
     await render(hbs`<BsForm::Element::Control::Checkbox />`);
-    assert
-      .dom('input[type=checkbox]')
-      .hasClass('form-check-input', 'component has form-check-input class');
+    assert.dom('input[type=checkbox]').hasClass('form-check-input', 'component has form-check-input class');
   });
 });

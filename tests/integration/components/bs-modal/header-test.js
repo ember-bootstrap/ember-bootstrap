@@ -21,11 +21,7 @@ module('Integration | Component | bs-modal/header', function (hooks) {
     await render(hbs`<BsModal::Header @title="Test" />`);
 
     assert.dom('.modal-header').exists({ count: 1 }, 'Modal header is rendered.');
-    assert.equal(
-      this.element.querySelector('.modal-header .modal-title').innerHTML.trim(),
-      'Test',
-      'Title is shown.'
-    );
+    assert.equal(this.element.querySelector('.modal-header .modal-title').innerHTML.trim(), 'Test', 'Title is shown.');
     assert.dom('.modal-header button.close').exists({ count: 1 }, 'Modal header has close button.');
   });
 

@@ -31,9 +31,7 @@ module('Integration | Component | bs-navbar/content', function (hooks) {
     `);
 
     assert.dom('*').hasText('Content');
-    assert
-      .dom('.navbar-collapse')
-      .exists({ count: 1 }, 'there is only one element with the navbar-collapse class');
+    assert.dom('.navbar-collapse').exists({ count: 1 }, 'there is only one element with the navbar-collapse class');
     assert
       .dom('.navbar-collapse')
       .hasClass('collapse', 'it has the collapse class indicating it derives from bs-collapse');

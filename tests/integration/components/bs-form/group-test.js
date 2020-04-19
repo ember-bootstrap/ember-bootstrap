@@ -63,15 +63,11 @@ module('Integration | Component | bs-form/group', function (hooks) {
     });
   }
 
-  testBS3('component with successful validation has success classes and success icon', function (
-    assert
-  ) {
+  testBS3('component with successful validation has success classes and success icon', function (assert) {
     return testValidationState.call(this, assert, 'success');
   });
 
-  testBS3('component with warning validation has warning classes and warning icon', function (
-    assert
-  ) {
+  testBS3('component with warning validation has warning classes and warning icon', function (assert) {
     return testValidationState.call(this, assert, 'warning');
   });
 

@@ -20,10 +20,7 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
   afterEach(function (assert) {
     // guard in if instead of using assert.equal(), to not make assert.expect() fail
     if (config.failOnDeprecation && deprecations && deprecations.length > 0) {
-      assert.ok(
-        false,
-        `Expected no deprecations, found: ${deprecations.map((msg) => `"${msg}"`).join(', ')}`
-      );
+      assert.ok(false, `Expected no deprecations, found: ${deprecations.map((msg) => `"${msg}"`).join(', ')}`);
     }
   });
 
@@ -42,9 +39,7 @@ export default function setupNoDeprecations({ beforeEach, afterEach }) {
     this.pushResult({
       result: !!found,
       actual: deprecations,
-      message: `expected to find \`${expected}\` deprecation. Found ${deprecations
-        .map((d) => `!${d}`)
-        .join(', ')}`,
+      message: `expected to find \`${expected}\` deprecation. Found ${deprecations.map((d) => `!${d}`).join(', ')}`,
     });
 
     if (found) {

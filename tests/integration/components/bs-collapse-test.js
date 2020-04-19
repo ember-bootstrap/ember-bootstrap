@@ -18,9 +18,7 @@ module('Integration | Component | bs-collapse', function (hooks) {
   test('collapse has correct default markup', async function (assert) {
     await render(hbs`<BsCollapse><p>Just some content</p></BsCollapse>`);
     assert.dom('.collapse').exists('collapse has collapse class');
-    assert
-      .dom('.collapse')
-      .hasNoClass(visibilityClass(), 'collapse does not have visibility class');
+    assert.dom('.collapse').hasNoClass(visibilityClass(), 'collapse does not have visibility class');
   });
 
   test('expanded collapse has correct default markup', async function (assert) {

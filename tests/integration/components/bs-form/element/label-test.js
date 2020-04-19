@@ -32,16 +32,12 @@ module('Integration | Component | bs form/element/label', function (hooks) {
     assert.dom('label').hasClass('control-label', 'component has control-label class');
   });
 
-  testBS4('component has col-form-label class when using horizontal forms', async function (
-    assert
-  ) {
+  testBS4('component has col-form-label class when using horizontal forms', async function (assert) {
     await render(hbs`<BsForm::Element::Label @formLayout="horizontal" />`);
     assert.dom('label').hasClass('col-form-label', 'component has col-form-label class');
   });
 
-  testBS4('component has form-check-label class when using control type checkbox', async function (
-    assert
-  ) {
+  testBS4('component has form-check-label class when using control type checkbox', async function (assert) {
     await render(hbs`<BsForm::Element::Label @controlType="checkbox" />`);
     assert.dom('label').hasClass('form-check-label', 'component has form-check-label class');
   });

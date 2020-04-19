@@ -37,9 +37,7 @@ module('Integration | Component | bs-button', function (hooks) {
 
     assert.dom('button').hasClass('btn', 'button has btn class');
     assert.dom('button').hasClass('btn-primary', 'button has type class');
-    assert
-      .dom('button')
-      .doesNotHaveClass('btn-outline-primary', 'button does not have outline class');
+    assert.dom('button').doesNotHaveClass('btn-outline-primary', 'button does not have outline class');
   });
 
   test('button can be active', async function (assert) {
@@ -55,9 +53,7 @@ module('Integration | Component | bs-button', function (hooks) {
   });
 
   test('button has HTML attributes', async function (assert) {
-    await render(
-      hbs`<BsButton id="test" disabled={{true}} title="title" type="submit">Test</BsButton>`
-    );
+    await render(hbs`<BsButton id="test" disabled={{true}} title="title" type="submit">Test</BsButton>`);
 
     assert.equal(this.element.querySelector('button').getAttribute('id'), 'test');
     assert.equal(this.element.querySelector('button').getAttribute('disabled'), '');
@@ -97,9 +93,7 @@ module('Integration | Component | bs-button', function (hooks) {
 
   test('button with iconActive and iconInactive properties shows icon depending on active state', async function (assert) {
     this.set('active', false);
-    await render(
-      hbs`<BsButton @active={{active}} @iconInactive="fas fa-plus" @iconActive="fas fa-minus" />`
-    );
+    await render(hbs`<BsButton @active={{active}} @iconInactive="fas fa-plus" @iconActive="fas fa-minus" />`);
 
     assert.dom('button i').hasClass('fas');
     assert.dom('button i').hasClass('fa-plus');
@@ -336,9 +330,7 @@ module('Integration | Component | bs-button', function (hooks) {
     let parentClick = this.spy();
     this.actions.parentClick = parentClick;
 
-    await render(
-      hbs`<div {{action "parentClick"}} role="button"><BsButton>Button</BsButton></div>`
-    );
+    await render(hbs`<div {{action "parentClick"}} role="button"><BsButton>Button</BsButton></div>`);
 
     await click('button');
     assert.ok(parentClick.called);
@@ -385,10 +377,7 @@ module('Integration | Component | bs-button', function (hooks) {
       assert.step('onClick action');
     });
     await click('button');
-    assert.verifySteps(
-      ['onClick action'],
-      'onClick action is fired again after pending click action is settled'
-    );
+    assert.verifySteps(['onClick action'], 'onClick action is fired again after pending click action is settled');
   });
 
   test('preventConcurrency=false allows onClick action to be fired concurrently', async function (assert) {

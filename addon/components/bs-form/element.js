@@ -609,9 +609,9 @@ export default class FormElement extends FormGroup {
       // validation should not be shown for this event target
       (isArray(this.doNotShowValidationForEventTargets) &&
         this.get('doNotShowValidationForEventTargets.length') > 0 &&
-        [
-          ...this._element.querySelectorAll(this.doNotShowValidationForEventTargets.join(',')),
-        ].some((el) => el.contains(target)))
+        [...this._element.querySelectorAll(this.doNotShowValidationForEventTargets.join(','))].some((el) =>
+          el.contains(target)
+        ))
     ) {
       return;
     }
@@ -897,15 +897,11 @@ export default class FormElement extends FormGroup {
           `You should use  angle bracket  component invocation syntax instead:\n` +
           `Before:\n` +
           `  {{#bs-form as |form|}}\n` +
-          `    {{form.element ${attribute}=${
-            typeof value === 'string' ? `"${value}"` : value
-          }}}\n` +
+          `    {{form.element ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
           `  {{/bs-form}}\n` +
           `  <BsForm as |form|>\n` +
           `    <form.element as |el|>\n` +
-          `      <el.control @${attribute}=${
-            typeof value === 'string' ? `"${value}"` : `{{${value}}}`
-          } />\n` +
+          `      <el.control @${attribute}=${typeof value === 'string' ? `"${value}"` : `{{${value}}}`} />\n` +
           `    </form.element>\n` +
           `  </BsForm>\n` +
           `After:\n` +
@@ -949,9 +945,7 @@ export default class FormElement extends FormGroup {
         // an input-group
         el.querySelector('.input-group') &&
         // an addon or button on right side
-        el.querySelector(
-          '.input-group input + .input-group-addon, .input-group input + .input-group-btn'
-        ) &&
+        el.querySelector('.input-group input + .input-group-addon, .input-group input + .input-group-btn') &&
         // an icon showing validation state
         (feedbackIcon = el.querySelector('.form-control-feedback'))
       ) {
@@ -966,9 +960,7 @@ export default class FormElement extends FormGroup {
         // Bootstrap documentation:
         //  We do not support multiple add-ons (.input-group-addon or .input-group-btn) on a single side.
         // therefore we could rely on having only one input-group-addon or input-group-btn
-        let inputGroupWidth = el.querySelector(
-          'input + .input-group-addon, input + .input-group-btn'
-        ).offsetWidth;
+        let inputGroupWidth = el.querySelector('input + .input-group-addon, input + .input-group-btn').offsetWidth;
         let adjustedPosition = defaultPosition + inputGroupWidth;
 
         feedbackIcon.style.right = `${adjustedPosition}px`;

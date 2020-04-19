@@ -9,8 +9,7 @@ function promptForCompletion(project) {
     .prompt({
       type: 'confirm',
       name: 'answer',
-      message:
-        '[Changelog] Enter "y" when you have finished making any desired modifications to CHANGELOG.md',
+      message: '[Changelog] Enter "y" when you have finished making any desired modifications to CHANGELOG.md',
       choices: [
         { key: 'y', name: 'Yes, update', value: 'yes' },
         { key: 'n', name: 'No, cancel', value: 'no' },

@@ -37,10 +37,7 @@ module('Integration | Component | bs-navbar/toggle', function (hooks) {
     assert.dom('button').exists({ count: 1 }, 'there is exactly one button element');
     assert
       .dom('button')
-      .hasClass(
-        versionDependent('navbar-toggle', 'navbar-toggler'),
-        'the toggle has the appropriate toggle class'
-      );
+      .hasClass(versionDependent('navbar-toggle', 'navbar-toggler'), 'the toggle has the appropriate toggle class');
     assert.dom('button').hasClass('collapsed', 'the toggle has the collapsed class');
     assert.dom('button').doesNotHaveClass('btn', 'the toggle is a simple button without .btn');
   });

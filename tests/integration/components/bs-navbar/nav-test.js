@@ -31,12 +31,8 @@ module('Integration | Component | bs-navbar/nav', function (hooks) {
     `);
 
     assert.dom('*').hasText('Nav');
-    assert
-      .dom('.navbar-nav')
-      .exists({ count: 1 }, 'there is only one element with the navbar-nav class');
-    assert
-      .dom('.navbar-nav')
-      .hasClass('nav', 'it has the nav class indicating it derives from bs-nav');
+    assert.dom('.navbar-nav').exists({ count: 1 }, 'there is only one element with the navbar-nav class');
+    assert.dom('.navbar-nav').hasClass('nav', 'it has the nav class indicating it derives from bs-nav');
   });
 
   test('it no longer supports the justified option', async function (assert) {

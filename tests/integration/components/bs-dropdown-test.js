@@ -343,9 +343,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
     );
 
     await click('a.dropdown-toggle');
-    assert
-      .dom('#ember-bootstrap-wormhole .dropdown-menu')
-      .exists({ count: 1 }, 'Menu is rendered in wormhole');
+    assert.dom('#ember-bootstrap-wormhole .dropdown-menu').exists({ count: 1 }, 'Menu is rendered in wormhole');
   });
 
   module('keyboard control', function () {

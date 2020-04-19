@@ -128,8 +128,7 @@ module.exports = {
 
   findPreprocessor() {
     return supportedPreprocessors.find(
-      (name) =>
-        !!this.app.project.findAddonByName(`ember-cli-${name}`) && this.validatePreprocessor(name)
+      (name) => !!this.app.project.findAddonByName(`ember-cli-${name}`) && this.validatePreprocessor(name)
     );
   },
 
@@ -187,9 +186,7 @@ module.exports = {
   resolvePackagePath(pkgPath) {
     let parts = pkgPath.split('/');
     let pkg = parts[0];
-    let result = path.dirname(
-      resolve.sync(`${pkg}/package.json`, { basedir: this.app.project.root })
-    );
+    let result = path.dirname(resolve.sync(`${pkg}/package.json`, { basedir: this.app.project.root }));
 
     // add sub folders to path
     if (parts.length > 1) {

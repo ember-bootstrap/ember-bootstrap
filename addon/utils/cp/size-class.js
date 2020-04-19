@@ -8,10 +8,7 @@ export default function sizeClass(prefix, sizeProperty) {
 
   return computed('size', function () {
     let size = this.get(sizeProperty);
-    assert(
-      'The value of `size` must be a string',
-      !size || (typeof size === 'string' && size !== '')
-    );
+    assert('The value of `size` must be a string', !size || (typeof size === 'string' && size !== ''));
 
     return isBlank(size) ? null : `${prefix}-${size}`;
   });

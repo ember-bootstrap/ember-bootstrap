@@ -11,8 +11,6 @@ module('FastBoot | alert', function (hooks) {
 
     assert.dom('.alert').exists();
     assert.dom('.alert').hasClass('alert-success');
-    assert
-      .dom('.alert')
-      .includesText('Well done! You successfully read this important alert message.');
+    assert.dom('.alert').includesText('Well done! You successfully read this important alert message.');
   });
 });

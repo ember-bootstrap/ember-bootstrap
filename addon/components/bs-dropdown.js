@@ -313,10 +313,7 @@ export default class Dropdown extends Component {
 
     if (
       !this.isDestroyed &&
-      ((e.type === 'keyup' &&
-        e.which === TAB_KEYCODE &&
-        menuElement &&
-        !menuElement.contains(target)) ||
+      ((e.type === 'keyup' && e.which === TAB_KEYCODE && menuElement && !menuElement.contains(target)) ||
         (e.type === 'click' &&
           toggleElement &&
           !toggleElement.contains(target) &&
@@ -358,9 +355,7 @@ export default class Dropdown extends Component {
       return;
     }
 
-    let items = [].slice.call(
-      this.menuElement.querySelectorAll('.dropdown-item:not(.disabled):not(:disabled)')
-    );
+    let items = [].slice.call(this.menuElement.querySelectorAll('.dropdown-item:not(.disabled):not(:disabled)'));
 
     if (items.length === 0) {
       return;

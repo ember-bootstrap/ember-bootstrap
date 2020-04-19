@@ -33,62 +33,45 @@ module('Integration | Component | bs-tab/pane', function (hooks) {
     assert.dom('div.tab-pane').hasNoClass('fade', 'tab-pane does not have fade class');
 
     assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
-    assert
-      .dom('div.tab-pane')
-      .hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
     this.set('activeId', 'pane1');
     assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
-    assert
-      .dom('div.tab-pane')
-      .hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
     this.set('activeId', null);
     assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
-    assert
-      .dom('div.tab-pane')
-      .hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
   });
 
-  testRequiringTransitions(
-    'it has correct markup when switching active pane and fade=true',
-    async function (assert) {
-      this.set('activeId', null);
-      await render(hbs`
+  testRequiringTransitions('it has correct markup when switching active pane and fade=true', async function (assert) {
+    this.set('activeId', null);
+    await render(hbs`
       <BsTab::Pane @fade={{true}} @activeId={{activeId}} @id="pane1">
         template block text
       </BsTab::Pane>
     `);
 
-      assert.dom('div.tab-pane').hasClass('fade', 'tab-pane has fade class');
-      assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
-      assert
-        .dom('div.tab-pane')
-        .hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
+    assert.dom('div.tab-pane').hasClass('fade', 'tab-pane has fade class');
+    assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
-      this.set('activeId', 'pane1');
-      assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
-      assert
-        .dom('div.tab-pane')
-        .hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
+    this.set('activeId', 'pane1');
+    assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
-      // wait for fade animation
-      await settled();
-      assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
-      assert.dom('div.tab-pane').hasClass(visibilityClass(), 'tab-pane has visibility class');
+    // wait for fade animation
+    await settled();
+    assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
+    assert.dom('div.tab-pane').hasClass(visibilityClass(), 'tab-pane has visibility class');
 
-      this.set('activeId', null);
-      assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
-      assert
-        .dom('div.tab-pane')
-        .hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
+    this.set('activeId', null);
+    assert.dom('div.tab-pane').hasClass('active', 'tab-pane has active class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
 
-      // wait for fade animation
-      await settled();
-      assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
-      assert
-        .dom('div.tab-pane')
-        .hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
-    }
-  );
+    // wait for fade animation
+    await settled();
+    assert.dom('div.tab-pane').hasNoClass('active', 'tab-pane does not have active class');
+    assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
+  });
 });

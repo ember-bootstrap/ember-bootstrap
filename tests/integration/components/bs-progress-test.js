@@ -192,9 +192,7 @@ module('Integration | Component | bs-progress', function (hooks) {
     `);
 
     assert.dom('.progress-bar').hasClass('progress-bar-striped', 'Progress bar has type class');
-    assert
-      .dom('.progress-bar')
-      .hasClass('progress-bar-animated', 'Progress bar has animated class');
+    assert.dom('.progress-bar').hasClass('progress-bar-animated', 'Progress bar has animated class');
   });
 
   test('progress bar supports stacked bars', async function (assert) {

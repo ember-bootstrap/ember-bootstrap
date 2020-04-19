@@ -22,9 +22,7 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
     );
     assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
     assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
-    assert
-      .dom('.dropdown-menu')
-      .hasClass('dropdown-menu-right', 'menu has dropdown-menu-right class');
+    assert.dom('.dropdown-menu').hasClass('dropdown-menu-right', 'menu has dropdown-menu-right class');
     assert.dom('.dropdown-menu').hasText('Something');
   });
 
@@ -33,15 +31,9 @@ module('Integration | Component | bs-dropdown/menu', function (hooks) {
       hbs`<BsDropdown as |dd|><dd.menu @align="right" @isOpen={{true}} @toggleElement={{this.element}}>Something</dd.menu></BsDropdown>`
     );
 
-    assert.equal(
-      this.element.querySelector('.dropdown-menu').tagName,
-      'DIV',
-      'menu is a div (<div>) by default'
-    );
+    assert.equal(this.element.querySelector('.dropdown-menu').tagName, 'DIV', 'menu is a div (<div>) by default');
     assert.dom('.dropdown-menu').exists('menu has dropdown-menu class');
-    assert
-      .dom('.dropdown-menu')
-      .hasClass('dropdown-menu-right', 'menu has dropdown-menu-right class');
+    assert.dom('.dropdown-menu').hasClass('dropdown-menu-right', 'menu has dropdown-menu-right class');
     assert.dom('.dropdown-menu').hasText('Something');
   });
 
