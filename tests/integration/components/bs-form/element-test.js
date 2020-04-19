@@ -749,7 +749,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
       <BsForm as |form|>
         <form.element @property="name" @hasValidator={{true}} @errors={{errors}} @model={{model}} @doNotShowValidationForEventTargets={{doNotShowValidationForEventTargets}} as |el|>
           {{el.control}}
-          <button data-trigger-validation="false">Test</button>
+          <button type="button" data-trigger-validation="false">Test</button>
         </form.element>
       </BsForm>
     `);

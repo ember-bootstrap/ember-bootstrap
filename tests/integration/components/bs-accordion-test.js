@@ -180,7 +180,7 @@ module('Integration | Component | bs-accordion', function (hooks) {
     this.set('selected', 1);
     await render(hbs`
       <BsAccordion @selected={{1}} as |acc|>
-        <acc.item @value={{1}} @title="TITLE1">CONTENT1 <button id="btn" {{action acc.change 2}}>Next</button></acc.item>
+        <acc.item @value={{1}} @title="TITLE1">CONTENT1 <button type="button" id="btn" {{action acc.change 2}}>Next</button></acc.item>
         <acc.item @value={{2}} @title="TITLE2">CONTENT2</acc.item>
       </BsAccordion>
     `);

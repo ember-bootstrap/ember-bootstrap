@@ -347,7 +347,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   testRequiringFocus('focus is reset to previously focused element', async function (assert) {
     this.set('open', false);
     await render(hbs`
-      <button data-test-button>Open</button>
+      <button type="button" data-test-button>Open</button>
       <BsModalSimple @title="Simple Dialog" @fade={{false}} @open={{open}}>
         Hallo
       </BsModalSimple>
@@ -521,7 +521,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
     await render(hbs`
       <BsModalSimple @onHide={{action "close"}} as |modal|>
-        <button id="close" {{action modal.close}}>Close</button>
+        <button type="button" id="close" {{action modal.close}}>Close</button>
       </BsModalSimple>
     `);
     await settled();
@@ -536,7 +536,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
     await render(hbs`
       <BsModalSimple @onSubmit={{action "submit"}} as |modal|>
-        <button id="submit" {{action modal.submit}}>Submit</button>
+        <button type="button" id="submit" {{action modal.submit}}>Submit</button>
       </BsModalSimple>
     `);
     await settled();

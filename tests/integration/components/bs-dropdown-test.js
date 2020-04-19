@@ -266,7 +266,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
       <BsDropdown @onShow={{action "show"}} as |dd|>
         <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
         <dd.menu><li><a href="#">Something</a></li></dd.menu>
-        <a role="button" {{action dd.openDropdown}} class="custom-open">Custom open link</a>
+        <a href="#" role="button" {{action dd.openDropdown}} class="custom-open">Custom open link</a>
       </BsDropdown>
     `);
 
@@ -283,7 +283,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
         <dd.menu>
           <li>
             <a href="#">Something</a>
-            <a role="button" {{action dd.closeDropdown}} class="custom-close">Custom close link</a>
+            <a href="#" role="button" {{action dd.closeDropdown}} class="custom-close">Custom close link</a>
           </li>
         </dd.menu>
       </BsDropdown>
@@ -303,7 +303,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
       <BsDropdown @onShow={{action "show"}} @onHide={{action "hide"}} as |dd|>
         <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
         <dd.menu><li><a href="#">Something</a></li></dd.menu>
-        <a {{action dd.toggleDropdown}} role="button" class="custom-toggle">Custom toggle link</a>
+        <a href="#" {{action dd.toggleDropdown}} role="button" class="custom-toggle">Custom toggle link</a>
       </BsDropdown>
     `);
 
@@ -502,7 +502,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
             <menu.item><a class="dropdown-item" href="#" id="item1">Something</a></menu.item>
             <menu.item><a class="dropdown-item" href="#" id="item2">Something</a></menu.item>
           </dd.menu>
-          <button id="next">Next</button>
+          <button type="button" id="next">Next</button>
         </BsDropdown>
       `
         );

@@ -430,7 +430,7 @@ module('Integration | Component | bs-form', function (hooks) {
     this.actions.submit = submit;
     await render(hbs`
       <BsForm @onSubmit={{action "submit"}} as |form|>
-        <a role="button" onclick={{action form.submit}}>submit</a>
+        <a href="#" role="button" onclick={{action form.submit}}>submit</a>
       </BsForm>
     `);
 
