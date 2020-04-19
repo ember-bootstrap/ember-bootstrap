@@ -1,81 +1,15 @@
 {
   "name": "ember-bootstrap",
   "version": "3.1.3",
-  "scripts": {
-    "lint:hbs": "ember-template-lint .",
-    "lint:js": "eslint .",
-    "start": "ember serve",
-    "test": "ember test",
-    "test:all": "ember try:each",
-    "build": "ember build",
-    "nodetest": "mocha node-tests --recursive",
-    "docs": "gulp docs",
-    "changelog": "lerna-changelog"
-  },
-  "engines": {
-    "node": "10.* || >= 12.*"
-  },
-  "devDependencies": {
-    "@ember/optional-features": "^1.1.0",
-    "@glimmer/component": "^1.0.0",
-    "babel-eslint": "^10.0.3",
-    "bootstrap": "^4.0.0",
-    "bootstrap-sass": "^3.3.7",
-    "broccoli-asset-rev": "^3.0.0",
-    "chai": "^4.0.0",
-    "chai-things": "^0.2.0",
-    "ember-a11y-testing": "^1.1.1",
-    "ember-cli": "~3.15.1",
-    "ember-cli-app-version": "^3.0.0",
-    "ember-cli-blueprint-test-helpers": "^0.19.1",
-    "ember-cli-browserstack": "^0.0.7",
-    "ember-cli-content-security-policy": "^2.0.0-1",
-    "ember-cli-dependency-checker": "^3.2.0",
-    "ember-cli-eslint": "^5.1.0",
-    "ember-cli-fastboot": "^2.0.0",
-    "ember-cli-fastboot-testing": "^0.2.0",
-    "ember-cli-inject-live-reload": "^2.0.1",
-    "ember-cli-release": "^0.2.9",
-    "ember-cli-sri": "^2.1.1",
-    "ember-cli-template-lint": "^1.0.0-beta.3",
-    "ember-cli-test-loader": "^2.1.0",
-    "ember-cli-uglify": "^3.0.0",
-    "ember-cli-yuidoc": "^0.8.8",
-    "ember-compatibility-helpers": "^1.2.0",
-    "ember-disable-prototype-extensions": "^1.1.3",
-    "ember-export-application-global": "^2.0.1",
-    "ember-load-initializers": "^2.1.1",
-    "ember-maybe-import-regenerator": "^0.1.6",
-    "ember-qunit": "^4.6.0",
-    "ember-ref-modifier": "^1.0.0",
-    "ember-resolver": "^7.0.0",
-    "ember-sinon": "^4.0.0",
-    "ember-sinon-qunit": "^3.4.0",
-    "ember-source": "~3.16.0",
-    "ember-source-channel-url": "^2.0.1",
-    "ember-try": "^1.4.0",
-    "eslint-plugin-ember": "^7.7.1",
-    "eslint-plugin-hbs": "^1.0.0",
-    "eslint-plugin-node": "^10.0.0",
-    "execa": "^2.0.0",
-    "glob": "^7.1.1",
-    "gulp": "^4.0.0",
-    "gulp-gh-pages": "^0.6.0-6",
-    "gulp-insert": "^0.5.0",
-    "gulp-rename": "^1.4.0",
-    "gulp-transform": "^3.0.5",
-    "lerna-changelog": "^0.8.2",
-    "loader.js": "^4.7.0",
-    "merge-stream": "^1.0.1",
-    "mocha": "^6.1.4",
-    "qunit-dom": "^0.9.2",
-    "striptags": "^3.0.0"
-  },
   "description": "Bootstrap components for Ember.js",
   "keywords": [
     "ember-addon",
     "bootstrap"
   ],
+  "homepage": "https://www.ember-bootstrap.com/",
+  "bugs": {
+    "url": "https://github.com/kaliber5/ember-bootstrap/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/kaliber5/ember-bootstrap"
@@ -85,6 +19,22 @@
   "directories": {
     "doc": "docs",
     "test": "tests"
+  },
+  "scripts": {
+    "build": "ember build",
+    "changelog": "lerna-changelog",
+    "docs": "gulp docs",
+    "lint:hbs": "ember-template-lint .",
+    "lint:js": "eslint .",
+    "nodetest": "mocha node-tests --recursive",
+    "start": "ember serve",
+    "test": "ember test",
+    "test:all": "ember try:each"
+  },
+  "resolutions": {
+    "ember-cli-htmlbars/semver": "~7.0.0",
+    "ember-concurrency": "^1.0.0",
+    "ip-regex": "^2.1.0"
   },
   "dependencies": {
     "@ember/render-modifiers": "^1.0.2",
@@ -114,6 +64,77 @@
     "rsvp": "^4.0.1",
     "silent-error": "^1.0.1"
   },
+  "devDependencies": {
+    "@ember/optional-features": "^1.1.0",
+    "@glimmer/component": "^1.0.0",
+    "babel-eslint": "^10.0.3",
+    "bootstrap": "^4.0.0",
+    "bootstrap-sass": "^3.3.7",
+    "broccoli-asset-rev": "^3.0.0",
+    "chai": "^4.0.0",
+    "chai-things": "^0.2.0",
+    "ember-a11y-testing": "^1.1.1",
+    "ember-cli": "~3.15.1",
+    "ember-cli-app-version": "^3.0.0",
+    "ember-cli-blueprint-test-helpers": "^0.19.1",
+    "ember-cli-browserstack": "^0.0.7",
+    "ember-cli-content-security-policy": "^2.0.0-1",
+    "ember-cli-dependency-checker": "^3.2.0",
+    "ember-cli-eslint": "^5.1.0",
+    "ember-cli-fastboot": "^2.0.0",
+    "ember-cli-fastboot-testing": "^0.2.0",
+    "ember-cli-inject-live-reload": "^2.0.1",
+    "ember-cli-sri": "^2.1.1",
+    "ember-cli-template-lint": "^1.0.0-beta.3",
+    "ember-cli-test-loader": "^2.1.0",
+    "ember-cli-uglify": "^3.0.0",
+    "ember-cli-yuidoc": "^0.8.8",
+    "ember-compatibility-helpers": "^1.2.0",
+    "ember-disable-prototype-extensions": "^1.1.3",
+    "ember-export-application-global": "^2.0.1",
+    "ember-load-initializers": "^2.1.1",
+    "ember-maybe-import-regenerator": "^0.1.6",
+    "ember-qunit": "^4.6.0",
+    "ember-ref-modifier": "^1.0.0",
+    "ember-resolver": "^7.0.0",
+    "ember-sinon": "^4.0.0",
+    "ember-sinon-qunit": "^3.4.0",
+    "ember-source": "~3.16.0",
+    "ember-source-channel-url": "^2.0.1",
+    "ember-try": "^1.4.0",
+    "eslint-plugin-ember": "^7.7.1",
+    "eslint-plugin-hbs": "^1.0.0",
+    "eslint-plugin-node": "^10.0.0",
+    "execa": "^2.0.0",
+    "glob": "^7.1.1",
+    "gulp": "^4.0.0",
+    "gulp-gh-pages": "^0.6.0-6",
+    "gulp-insert": "^0.5.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-transform": "^3.0.5",
+    "loader.js": "^4.7.0",
+    "merge-stream": "^1.0.1",
+    "mocha": "^6.1.4",
+    "qunit-dom": "^0.9.2",
+    "release-it": "^13.5.1",
+    "release-it-lerna-changelog": "^2.1.2",
+    "striptags": "^3.0.0"
+  },
+  "engines": {
+    "node": "10.* || >= 12.*"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "changelog": {
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "enhancement": "Features",
+      "bug": "Bug Fixes",
+      "documentation": "Documentation",
+      "internal": "Internal"
+    }
+  },
   "ember": {
     "edition": "octane"
   },
@@ -124,22 +145,19 @@
     },
     "demoURL": "https://www.ember-bootstrap.com"
   },
-  "bugs": {
-    "url": "https://github.com/kaliber5/ember-bootstrap/issues"
-  },
-  "homepage": "https://www.ember-bootstrap.com/",
-  "changelog": {
-    "labels": {
-      "breaking": ":boom: Breaking Change",
-      "enhancement": "Features",
-      "bug": "Bug Fixes",
-      "documentation": "Documentation",
-      "internal": "Internal"
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
     }
-  },
-  "resolutions": {
-    "ip-regex": "^2.1.0",
-    "ember-concurrency": "^1.0.0",
-    "ember-cli-htmlbars/semver": "~7.0.0"
   }
 }
