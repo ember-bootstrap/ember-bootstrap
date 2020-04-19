@@ -1,4 +1,3 @@
-/* globals alert */
 import { oneWay } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import { A } from '@ember/array';
