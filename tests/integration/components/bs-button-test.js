@@ -8,31 +8,31 @@ import { gte } from 'ember-compatibility-helpers';
 
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
-import a11yAudit from 'ember-a11y-testing/test-support/audit'
+import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
-module('Integration | Component | bs-button', function(hooks) {
+module('Integration | Component | bs-button', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     this.actions = {};
     this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
   });
 
-  test('button has correct default markup', async function(assert) {
+  test('button has correct default markup', async function (assert) {
     await render(hbs`<BsButton>Test</BsButton>`);
 
     assert.dom('button').hasClass('btn', 'button has btn class');
     assert.dom('button').hasClass(defaultButtonClass(), 'button has type class');
   });
 
-  test('button has correct size', async function(assert) {
+  test('button has correct size', async function (assert) {
     await render(hbs`<BsButton @size="lg">Test</BsButton>`);
 
     assert.dom('button').hasClass('btn-lg', 'button has size class');
   });
 
-  test('button has correct type', async function(assert) {
+  test('button has correct type', async function (assert) {
     await render(hbs`<BsButton @type="primary">Test</BsButton>`);
 
     assert.dom('button').hasClass('btn', 'button has btn class');
@@ -40,19 +40,19 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.dom('button').doesNotHaveClass('btn-outline-primary', 'button does not have outline class');
   });
 
-  test('button can be active', async function(assert) {
+  test('button can be active', async function (assert) {
     await render(hbs`<BsButton @active={{true}}>Test</BsButton>`);
 
     assert.dom('button').hasClass('active', 'button has active class');
   });
 
-  test('button can be block', async function(assert) {
+  test('button can be block', async function (assert) {
     await render(hbs`<BsButton @block={{true}}>Test</BsButton>`);
 
     assert.dom('button').hasClass('btn-block', 'button has block class');
   });
 
-  test('button has HTML attributes', async function(assert) {
+  test('button has HTML attributes', async function (assert) {
     await render(hbs`<BsButton id="test" disabled={{true}} title="title" type="submit">Test</BsButton>`);
 
     assert.equal(this.element.querySelector('button').getAttribute('id'), 'test');
@@ -61,37 +61,37 @@ module('Integration | Component | bs-button', function(hooks) {
     // assert.equal(this.element.querySelector('button').getAttribute('type'), 'submit');
   });
 
-  test('button has default label', async function(assert) {
+  test('button has default label', async function (assert) {
     await render(hbs`<BsButton @defaultText="test" />`);
     assert.dom('button').hasText('test');
   });
 
-  test('button has default type "button"', async function(assert) {
+  test('button has default type "button"', async function (assert) {
     await render(hbs`<BsButton />`);
     assert.equal(this.element.querySelector('button').type, 'button');
   });
 
-  test('buttonType property allows changing button type', async function(assert) {
+  test('buttonType property allows changing button type', async function (assert) {
     await render(hbs`<BsButton @buttonType="submit" />`);
 
     assert.dom('button').hasAttribute('type', 'submit');
     // assert.deprecationsInclude('Argument buttonType of <BsButton> component is deprecated.');
   });
 
-  test('button with icon property shows icon', async function(assert) {
+  test('button with icon property shows icon', async function (assert) {
     await render(hbs`<BsButton @icon="fas fa-check" />`);
 
     assert.dom('button i').hasClass('fas');
     assert.dom('button i').hasClass('fa-check');
   });
 
-  testBS4('button with outline property shows as outline', async function(assert) {
+  testBS4('button with outline property shows as outline', async function (assert) {
     await render(hbs`<BsButton @type="primary" @outline={{true}} />`);
     assert.dom('button').hasClass('btn-outline-primary');
     assert.dom('button').doesNotHaveClass('btn-primary');
   });
 
-  test('button with iconActive and iconInactive properties shows icon depending on active state', async function(assert) {
+  test('button with iconActive and iconInactive properties shows icon depending on active state', async function (assert) {
     this.set('active', false);
     await render(hbs`<BsButton @active={{active}} @iconInactive="fas fa-plus" @iconActive="fas fa-minus" />`);
 
@@ -109,7 +109,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.dom('button i').hasClass('fa-plus');
   });
 
-  test('clicking a button sends onClick action with "value" property as a parameter', async function(assert) {
+  test('clicking a button sends onClick action with "value" property as a parameter', async function (assert) {
     let action = this.spy();
     this.actions.testAction = action;
     await render(hbs`<BsButton @onClick={{action "testAction"}} @value="dummy" />`);
@@ -118,7 +118,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.ok(action.calledWith('dummy'), 'onClick action has been called with button value');
   });
 
-  test('button text is changed according to button state', async function(assert) {
+  test('button text is changed according to button state', async function (assert) {
     let deferredClickAction = defer();
     this.set('clickAction', () => {
       return deferredClickAction.promise;
@@ -155,7 +155,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.dom('button').hasText('text for rejected state');
   });
 
-  test('button text remains to default if no state text wasn\'t set', async function (assert) {
+  test("button text remains to default if no state text wasn't set", async function (assert) {
     let deferredClickAction = defer();
     this.set('clickAction', () => {
       return deferredClickAction.promise;
@@ -184,7 +184,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.dom('button').hasText('default text');
   });
 
-  test('setting reset to true resets button text', async function(assert) {
+  test('setting reset to true resets button text', async function (assert) {
     this.set('clickAction', () => {
       return resolve();
     });
@@ -201,7 +201,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.dom('button').hasText('default text');
   });
 
-  test('button is disabled while in pending state', async function(assert) {
+  test('button is disabled while in pending state', async function (assert) {
     let deferredClickAction = defer();
     this.set('clickAction', () => {
       return deferredClickAction.promise;
@@ -218,7 +218,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.dom('button').isNotDisabled();
   });
 
-  test('button is not disabled while in pending state if preventConcurrency is false', async function(assert) {
+  test('button is not disabled while in pending state if preventConcurrency is false', async function (assert) {
     let deferredClickAction = defer();
     this.set('clickAction', () => {
       return deferredClickAction.promise;
@@ -232,7 +232,9 @@ module('Integration | Component | bs-button', function(hooks) {
     await settled();
   });
 
-  (gte('3.4.0') ? test : skip)('setting disabled HTML attribute to false prevents button from being disabled while in pending state', async function(assert) {
+  (gte('3.4.0')
+    ? test
+    : skip)('setting disabled HTML attribute to false prevents button from being disabled while in pending state', async function (assert) {
     let deferredClickAction = defer();
     this.set('clickAction', () => {
       return deferredClickAction.promise;
@@ -309,7 +311,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.dom('button').hasText('isSettled');
   });
 
-  test('clicking a button with onClick action will prevent event to bubble up', async function(assert) {
+  test('clicking a button with onClick action will prevent event to bubble up', async function (assert) {
     let buttonClick = this.spy();
     this.actions.buttonClick = buttonClick;
     let parentClick = this.spy();
@@ -324,7 +326,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.notOk(parentClick.called);
   });
 
-  test('clicking a button without onClick action will cause event to bubble up', async function(assert) {
+  test('clicking a button without onClick action will cause event to bubble up', async function (assert) {
     let parentClick = this.spy();
     this.actions.parentClick = parentClick;
 
@@ -334,7 +336,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.ok(parentClick.called);
   });
 
-  test('clicking a button with onClick action and bubble=true will cause event to bubble up', async function(assert) {
+  test('clicking a button with onClick action and bubble=true will cause event to bubble up', async function (assert) {
     let buttonClick = this.spy();
     this.actions.buttonClick = buttonClick;
     let parentClick = this.spy();
@@ -351,7 +353,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.ok(parentClick.called);
   });
 
-  test('prevents onClick action to be fired concurrently', async function(assert) {
+  test('prevents onClick action to be fired concurrently', async function (assert) {
     let deferredClickAction = defer();
     let clickActionHasBeenExecuted = false;
     this.set('clickAction', () => {
@@ -378,7 +380,7 @@ module('Integration | Component | bs-button', function(hooks) {
     assert.verifySteps(['onClick action'], 'onClick action is fired again after pending click action is settled');
   });
 
-  test('preventConcurrency=false allows onClick action to be fired concurrently', async function(assert) {
+  test('preventConcurrency=false allows onClick action to be fired concurrently', async function (assert) {
     let deferredClickAction = defer();
     let clickActionExecutionCount = 0;
 

@@ -14,7 +14,7 @@ import { next } from '@ember/runloop';
  @extends Ember.Component
  @private
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class ModalDialog extends Component {
   @readOnly('titleId')
@@ -102,8 +102,7 @@ export default class ModalDialog extends Component {
    * @event onClose
    * @public
    */
-  onClose() {
-  }
+  onClose() {}
 
   @action
   handleKeyDown(e) {

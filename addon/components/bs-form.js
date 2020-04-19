@@ -109,7 +109,7 @@ import { macroCondition, getOwnConfig } from '@embroider/macros';
   @public
 */
 @templateLayout(layout)
-@tagName("")
+@tagName('')
 export default class Form extends Component {
   /**
    * Bootstrap form class name (computed)
@@ -434,7 +434,7 @@ export default class Form extends Component {
               this.setProperties({
                 showAllValidations: true,
                 isRejected: true,
-                pendingSubmissions: this.pendingSubmissions - 1
+                pendingSubmissions: this.pendingSubmissions - 1,
               });
 
               if (throwValidationErrors) {
@@ -468,17 +468,20 @@ export default class Form extends Component {
     super.init(...arguments);
 
     let formLayout = this.formLayout;
-    assert(`Invalid formLayout property given: ${formLayout}`, ['vertical', 'horizontal', 'inline'].indexOf(formLayout) >= 0);
+    assert(
+      `Invalid formLayout property given: ${formLayout}`,
+      ['vertical', 'horizontal', 'inline'].indexOf(formLayout) >= 0
+    );
 
     warn(
       `Argument novalidate of <BsForm> component has been removed. ` +
-      `It's only purpose was setting the HTML attribute novalidate of the <form> element. ` +
-      `You should use  angle bracket component invocation syntax instead:\n` +
-      `Before:n` +
-      `  {{bs-form novalidate=true}}\n` +
-      `  <BsForm @novalidate={{true}} />\n` +
-      `After:\n` +
-      `  <BsForm novalidate>`,
+        `It's only purpose was setting the HTML attribute novalidate of the <form> element. ` +
+        `You should use  angle bracket component invocation syntax instead:\n` +
+        `Before:n` +
+        `  {{bs-form novalidate=true}}\n` +
+        `  <BsForm @novalidate={{true}} />\n` +
+        `After:\n` +
+        `  <BsForm novalidate>`,
       // eslint-disable-next-line ember/no-attrs-in-components
       !Object.keys(this.attrs).includes('novalidate'),
       {
@@ -489,7 +492,8 @@ export default class Form extends Component {
 
   @action
   elementChanged(value, model, property) {
-    assert('You cannot use the form element\'s default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!',
+    assert(
+      "You cannot use the form element's default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!",
       isPresent(model) && isPresent(property)
     );
     if (typeof model.set === 'function') {

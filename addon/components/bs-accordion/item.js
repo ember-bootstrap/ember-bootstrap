@@ -18,7 +18,7 @@ import { guidFor } from '@ember/object/internals';
  @extends Ember.Component
  @public
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class AccordionItem extends Component {
   /**
@@ -117,6 +117,5 @@ export default class AccordionItem extends Component {
    * @event onClick
    * @public
    */
-  onClick() {
-  }
+  onClick() {}
 }

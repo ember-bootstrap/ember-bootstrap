@@ -4,11 +4,11 @@ import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
-module('Integration | Component | bs-modal/header', function(hooks) {
+module('Integration | Component | bs-modal/header', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  test('Header has default markup', async function(assert) {
+  test('Header has default markup', async function (assert) {
     await render(hbs`<BsModal::Header @title="Header" />`);
 
     assert.dom('.modal-header').exists({ count: 1 }, 'Modal header exists.');
@@ -17,7 +17,7 @@ module('Integration | Component | bs-modal/header', function(hooks) {
     assert.dom('.modal-header .modal-title').hasText('Header', 'Footer title is correct.');
   });
 
-  test('Header can be rendered as non-block', async function(assert) {
+  test('Header can be rendered as non-block', async function (assert) {
     await render(hbs`<BsModal::Header @title="Test" />`);
 
     assert.dom('.modal-header').exists({ count: 1 }, 'Modal header is rendered.');
@@ -25,29 +25,39 @@ module('Integration | Component | bs-modal/header', function(hooks) {
     assert.dom('.modal-header button.close').exists({ count: 1 }, 'Modal header has close button.');
   });
 
-  test('Header can have custom block content', async function(assert) {
+  test('Header can have custom block content', async function (assert) {
     await render(hbs`<BsModal::Header><div id="custom">Test</div></BsModal::Header>`);
 
     assert.dom('.modal-header div#custom').exists({ count: 1 }, 'Modal header custom block.');
-    assert.equal(this.element.querySelector('.modal-header #custom').innerHTML.trim(), 'Test', 'Block content is shown.');
+    assert.equal(
+      this.element.querySelector('.modal-header #custom').innerHTML.trim(),
+      'Test',
+      'Block content is shown.'
+    );
     assert.dom('.modal-header button.close').exists({ count: 1 }, 'Modal header has close button.');
   });
 
-  test('Header can yield components when block', async function(assert) {
-    await render(hbs`<BsModal::Header as |header|><header.title><div id="custom">Test</div></header.title>{{header.close}}</BsModal::Header>`);
+  test('Header can yield components when block', async function (assert) {
+    await render(
+      hbs`<BsModal::Header as |header|><header.title><div id="custom">Test</div></header.title>{{header.close}}</BsModal::Header>`
+    );
 
     assert.dom('.modal-header div#custom').exists({ count: 1 }, 'Modal header custom block.');
-    assert.equal(this.element.querySelector('.modal-header #custom').innerHTML.trim(), 'Test', 'Block content is shown.');
+    assert.equal(
+      this.element.querySelector('.modal-header #custom').innerHTML.trim(),
+      'Test',
+      'Block content is shown.'
+    );
     assert.dom('.modal-header button.close').exists({ count: 1 }, 'Modal header has close button.');
   });
 
-  test('close button can be removed', async function(assert) {
+  test('close button can be removed', async function (assert) {
     await render(hbs`<BsModal::Header @title="Header" @closeButton={{false}} />`);
 
     assert.dom('.modal-header button.close').doesNotExist('Modal header has no close button.');
   });
 
-  test('close button can be removed in yield block form', async function(assert) {
+  test('close button can be removed in yield block form', async function (assert) {
     await render(hbs`
       {{! template-lint-disable no-unused-block-params }}
       <BsModal::Header as |header|><div id="custom">Test</div></BsModal::Header>
@@ -55,7 +65,11 @@ module('Integration | Component | bs-modal/header', function(hooks) {
     `);
 
     assert.dom('.modal-header div#custom').exists({ count: 1 }, 'Modal header custom block.');
-    assert.equal(this.element.querySelector('.modal-header #custom').innerHTML.trim(), 'Test', 'Block content is shown.');
+    assert.equal(
+      this.element.querySelector('.modal-header #custom').innerHTML.trim(),
+      'Test',
+      'Block content is shown.'
+    );
 
     assert.dom('.modal-header button.close').doesNotExist('Modal header has no close button.');
   });

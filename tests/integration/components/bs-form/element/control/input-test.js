@@ -1,27 +1,27 @@
 import { module, test } from 'qunit';
-import { testBS4 } from "../../../../../helpers/bootstrap-test";
+import { testBS4 } from '../../../../../helpers/bootstrap-test';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../../../helpers/setup-no-deprecations';
 
-module('Integration | Component | bs form/element/control/input', function(hooks) {
+module('Integration | Component | bs form/element/control/input', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     await render(hbs`<BsForm::Element::Control::Input />`);
 
     assert.dom('input[type=text]').exists({ count: 1 });
   });
 
-  test('it sets value', async function(assert) {
+  test('it sets value', async function (assert) {
     await render(hbs`<BsForm::Element::Control::Input @value="FOO" />`);
 
     assert.dom('input[type=text]').hasValue('FOO');
   });
 
-  test('it falls back to text if type is not supported by browser', async function(assert) {
+  test('it falls back to text if type is not supported by browser', async function (assert) {
     // This also asserts that IE 11 issue of throwing if setting an unsupported type
     // is set via DOM (e.g. document.createElement('input').type = "foo") is handled
     // well.
@@ -31,7 +31,7 @@ module('Integration | Component | bs form/element/control/input', function(hooks
     assert.equal(find('input').type, 'text');
   });
 
-  testBS4('support size classes', async function(assert) {
+  testBS4('support size classes', async function (assert) {
     await render(hbs`<BsForm::Element::Control::Input @size="lg" />`);
     assert.dom('input').hasClass('form-control-lg', 'input has large class');
 

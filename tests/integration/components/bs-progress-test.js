@@ -5,14 +5,14 @@ import { test, testBS3, testBS4 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
-import a11yAudit from 'ember-a11y-testing/test-support/audit'
+import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
-module('Integration | Component | bs-progress', function(hooks) {
+module('Integration | Component | bs-progress', function (hooks) {
   setupRenderingTest(hooks);
   setupStylesheetSupport(hooks);
   setupNoDeprecations(hooks);
 
-  test('bs-progress has correct markup', async function(assert) {
+  test('bs-progress has correct markup', async function (assert) {
     // Template block usage:
     await render(hbs`
       <BsProgress as |p|>
@@ -27,29 +27,27 @@ module('Integration | Component | bs-progress', function(hooks) {
     assert.dom('div.progress-bar').hasAttribute('aria-valuenow', '5');
     assert.dom('div.progress-bar').hasAttribute('aria-valuemin', '0');
     assert.dom('div.progress-bar').hasAttribute('aria-valuemax', '10');
-
   });
 
-  test('Progress bar has correct width according to value, minValue and maxValue', async function(assert) {
-
+  test('Progress bar has correct width according to value, minValue and maxValue', async function (assert) {
     let baseSize = 500;
     // some test data
     let testData = [
       {
         value: 60,
         minValue: 0,
-        maxValue: 100
+        maxValue: 100,
       },
       {
         value: 3,
         minValue: 0,
-        maxValue: 10
+        maxValue: 10,
       },
       {
         value: 6,
         minValue: 5,
-        maxValue: 10
-      }
+        maxValue: 10,
+      },
     ];
 
     this.insertCSSRule('.progress-bar { transition: none; }');
@@ -67,22 +65,30 @@ module('Integration | Component | bs-progress', function(hooks) {
       let { value } = data;
       let minValue = data.minValue || 0;
       let maxValue = data.maxValue || 100;
-      let expectedWidth = (value - minValue) / (maxValue - minValue) * baseSize;
+      let expectedWidth = ((value - minValue) / (maxValue - minValue)) * baseSize;
 
       this.setProperties(data);
 
-      assert.equal(this.element.querySelector('.progress-bar').offsetWidth, expectedWidth, 'Progress bar has expected width.');
+      assert.equal(
+        this.element.querySelector('.progress-bar').offsetWidth,
+        expectedWidth,
+        'Progress bar has expected width.'
+      );
     });
   });
 
-  test('progress bar has invisible label for screen readers', async function(assert) {
+  test('progress bar has invisible label for screen readers', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{5}} @maxValue={{10}} />
       </BsProgress>
     `);
 
-    assert.equal(this.element.querySelector('.progress-bar .sr-only').innerHTML.trim(), '50%', 'Progress bar shows correct default label');
+    assert.equal(
+      this.element.querySelector('.progress-bar .sr-only').innerHTML.trim(),
+      '50%',
+      'Progress bar shows correct default label'
+    );
 
     await render(hbs`
       <BsProgress as |p|>
@@ -90,18 +96,25 @@ module('Integration | Component | bs-progress', function(hooks) {
       </BsProgress>
     `);
 
-    assert.equal(this.element.querySelector('.progress-bar .sr-only').innerHTML.trim(), '5 (50%)', 'Progress bar shows correct custom label');
-
+    assert.equal(
+      this.element.querySelector('.progress-bar .sr-only').innerHTML.trim(),
+      '5 (50%)',
+      'Progress bar shows correct custom label'
+    );
   });
 
-  test('progress bar can show label', async function(assert) {
+  test('progress bar can show label', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{5}} @maxValue={{10}} @showLabel={{true}} />
       </BsProgress>
     `);
 
-    assert.equal(this.element.querySelector('.progress-bar').innerHTML.trim(), '50%', 'Progress bar shows correct default label');
+    assert.equal(
+      this.element.querySelector('.progress-bar').innerHTML.trim(),
+      '50%',
+      'Progress bar shows correct default label'
+    );
 
     await render(hbs`
       <BsProgress as |p|>
@@ -109,22 +122,28 @@ module('Integration | Component | bs-progress', function(hooks) {
       </BsProgress>
     `);
 
-    assert.equal(this.element.querySelector('.progress-bar').innerHTML.trim(), '5 (50%)', 'Progress bar shows correct custom label');
-
+    assert.equal(
+      this.element.querySelector('.progress-bar').innerHTML.trim(),
+      '5 (50%)',
+      'Progress bar shows correct custom label'
+    );
   });
 
-  test('progress bar can round label\'s percent value', async function(assert) {
+  test("progress bar can round label's percent value", async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{5}} @maxValue={{6}} @roundDigits={{2}} @showLabel={{true}} />
       </BsProgress>
     `);
 
-    assert.equal(this.element.querySelector('.progress-bar').innerHTML.trim(), '83.33%', 'Progress bar shows correct default label');
-
+    assert.equal(
+      this.element.querySelector('.progress-bar').innerHTML.trim(),
+      '83.33%',
+      'Progress bar shows correct default label'
+    );
   });
 
-  testBS3('progress bar supports type class', async function(assert) {
+  testBS3('progress bar supports type class', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{50}} @type="success" />
@@ -132,10 +151,9 @@ module('Integration | Component | bs-progress', function(hooks) {
     `);
 
     assert.dom('.progress-bar').hasClass('progress-bar-success', 'Progress bar has type class');
-
   });
 
-  testBS4('progress bar supports type class', async function(assert) {
+  testBS4('progress bar supports type class', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{50}} @type="success" />
@@ -143,10 +161,9 @@ module('Integration | Component | bs-progress', function(hooks) {
     `);
 
     assert.dom('.progress-bar').hasClass('bg-success', 'Progress bar has type class');
-
   });
 
-  test('progress bar supports striped style', async function(assert) {
+  test('progress bar supports striped style', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{50}} @type="success" @striped={{true}} />
@@ -154,10 +171,9 @@ module('Integration | Component | bs-progress', function(hooks) {
     `);
 
     assert.dom('.progress-bar').hasClass('progress-bar-striped', 'Progress bar has type class');
-
   });
 
-  testBS3('progress bar supports animated stripes', async function(assert) {
+  testBS3('progress bar supports animated stripes', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{50}} @type="success" @striped={{true}} @animate={{true}} />
@@ -166,10 +182,9 @@ module('Integration | Component | bs-progress', function(hooks) {
 
     assert.dom('.progress-bar').hasClass('progress-bar-striped', 'Progress bar has type class');
     assert.dom('.progress-bar').hasClass('active', 'Progress bar has active class');
-
   });
 
-  testBS4('progress bar supports animated stripes', async function(assert) {
+  testBS4('progress bar supports animated stripes', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{50}} @type="success" @striped={{true}} @animate={{true}} />
@@ -178,10 +193,9 @@ module('Integration | Component | bs-progress', function(hooks) {
 
     assert.dom('.progress-bar').hasClass('progress-bar-striped', 'Progress bar has type class');
     assert.dom('.progress-bar').hasClass('progress-bar-animated', 'Progress bar has animated class');
-
   });
 
-  test('progress bar supports stacked bars', async function(assert) {
+  test('progress bar supports stacked bars', async function (assert) {
     await render(hbs`
       <BsProgress as |p|>
         <p.bar @value={{50}} @type="success" />
@@ -190,7 +204,6 @@ module('Integration | Component | bs-progress', function(hooks) {
     `);
 
     assert.dom('.progress-bar').exists({ count: 2 }, 'Progress bar has two bars');
-
   });
 
   test('it passes accessibility checks', async function (assert) {

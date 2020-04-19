@@ -23,8 +23,7 @@ export default class NavbarLinkTo extends BsNavLinkToComponent {
    * @event onCollapse
    * @private
    */
-  onCollapse() {
-  }
+  onCollapse() {}
 
   click() {
     if (this.collapseNavbar) {

@@ -9,6 +9,6 @@ export default function defaultValue(target, key, descriptor) {
     },
     set(_, v) {
       return v;
-    }
+    },
   })(target, key, { ...descriptor, value: undefined, initializer: undefined });
 }

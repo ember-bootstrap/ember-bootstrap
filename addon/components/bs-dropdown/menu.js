@@ -73,8 +73,7 @@ export default class DropdownMenu extends Component {
    */
   @computed('renderInPlace')
   get _renderInPlace() {
-    return this.renderInPlace ||
-    !this.destinationElement;
+    return this.renderInPlace || !this.destinationElement;
   }
 
   /**
@@ -87,7 +86,7 @@ export default class DropdownMenu extends Component {
    */
   @computed
   get destinationElement() {
-    return getDestinationElement(this)
+    return getDestinationElement(this);
   }
 
   @computed('align')
@@ -153,11 +152,11 @@ export default class DropdownMenu extends Component {
     return {
       // @todo add offset config
       applyStyle: {
-        enabled: !this.inNav
+        enabled: !this.inNav,
       },
       flip: {
-        enabled: this.flip
-      }
+        enabled: this.flip,
+      },
     };
   }
 

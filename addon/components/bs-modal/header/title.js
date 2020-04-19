@@ -10,5 +10,5 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/header/title';
  @private
  */
 @templateLayout(layout)
-@tagName("")
+@tagName('')
 export default class ModalHeaderTitle extends Component {}

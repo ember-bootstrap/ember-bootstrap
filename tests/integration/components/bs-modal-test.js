@@ -6,16 +6,16 @@ import { test } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
-module('Integration | Component | bs-modal', function(hooks) {
+module('Integration | Component | bs-modal', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     this.actions = {};
     this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
   });
 
-  test('Modal yields header, footer and body components', async function(assert) {
+  test('Modal yields header, footer and body components', async function (assert) {
     await render(hbs`
       <BsModal as |modal|>
         <modal.header @title="Dialog" />
@@ -34,7 +34,7 @@ module('Integration | Component | bs-modal', function(hooks) {
     assert.dom('.modal .modal-body').hasText('Hello world!', 'Modal body has correct content.');
   });
 
-  test('Hidden modal does not render', async function(assert) {
+  test('Hidden modal does not render', async function (assert) {
     await render(hbs`
       <BsModal @open={{false}} as |modal|>
         <modal.header @title="Dialog" />
@@ -46,10 +46,13 @@ module('Integration | Component | bs-modal', function(hooks) {
     assert.dom('.modal *').doesNotExist('Modal does not exist.');
   });
 
-  test('clicking ok button closes modal when autoClose=true with custom component hierarchy', async function(assert) {
-    this.owner.register('component:my-component', class extends Component {
-      layout = hbs`{{yield}}`;
-    });
+  test('clicking ok button closes modal when autoClose=true with custom component hierarchy', async function (assert) {
+    this.owner.register(
+      'component:my-component',
+      class extends Component {
+        layout = hbs`{{yield}}`;
+      }
+    );
 
     await render(hbs`
       <BsModal @title="Simple Dialog" @body={{false}} @footer={{false}} as |modal|>
@@ -65,7 +68,7 @@ module('Integration | Component | bs-modal', function(hooks) {
     assert.dom('.modal').doesNotExist('Modal is hidden');
   });
 
-  test('Modal yields close action', async function(assert) {
+  test('Modal yields close action', async function (assert) {
     let closeAction = this.spy();
     this.actions.close = closeAction;
 
@@ -83,7 +86,7 @@ module('Integration | Component | bs-modal', function(hooks) {
     assert.ok(closeAction.calledOnce, 'close action has been called.');
   });
 
-  test('Modal yields submit action', async function(assert) {
+  test('Modal yields submit action', async function (assert) {
     let submitAction = this.spy();
     this.actions.submit = submitAction;
 
@@ -101,8 +104,7 @@ module('Integration | Component | bs-modal', function(hooks) {
     assert.ok(submitAction.calledOnce, 'submit action has been called.');
   });
 
-  test('Modal has accesibility attributes with custom title', async function(assert) {
-
+  test('Modal has accesibility attributes with custom title', async function (assert) {
     await render(hbs`
       <BsModal as |modal|>
         <modal.header>
@@ -123,8 +125,7 @@ module('Integration | Component | bs-modal', function(hooks) {
     assert.dom('.modal').hasAttribute('aria-labelledby', modalTitleId);
   });
 
-  test('Modal has accesibility attributes with default title', async function(assert) {
-
+  test('Modal has accesibility attributes with default title', async function (assert) {
     await render(hbs`
       <BsModal as |modal|>
         <modal.header @title="Some title" />
@@ -141,7 +142,7 @@ module('Integration | Component | bs-modal', function(hooks) {
     assert.dom('.modal').hasAttribute('aria-labelledby', modalTitleId);
   });
 
-  test('it passes along class attribute', async function(assert) {
+  test('it passes along class attribute', async function (assert) {
     await render(hbs`
       <BsModal @fade={{false}} @class="custom">
         template block text
@@ -151,7 +152,7 @@ module('Integration | Component | bs-modal', function(hooks) {
     assert.dom('.modal.custom').exists({ count: 1 });
   });
 
-  test('it passes along HTML attributes', async function(assert) {
+  test('it passes along HTML attributes', async function (assert) {
     await render(hbs`
       <BsModal @fade={{false}} class="custom" role="alert" data-test>
         template block text
@@ -165,7 +166,7 @@ module('Integration | Component | bs-modal', function(hooks) {
   });
 
   test('it keeps itself visible when mouse click is started from inside of the modal \
-    and dragged outside of the modal', async function(assert) {
+    and dragged outside of the modal', async function (assert) {
     await render(hbs`
       <BsModal>
         template block text
@@ -178,7 +179,7 @@ module('Integration | Component | bs-modal', function(hooks) {
     assert.dom('.modal').exists('Modal should be still visible');
   });
 
-  test('it closes itself when backdrop is clicked', async function(assert) {
+  test('it closes itself when backdrop is clicked', async function (assert) {
     await render(hbs`
       <BsModal>
         template block text

@@ -120,7 +120,7 @@ export default class ContextualHelpElement extends Component {
     let self = this;
     return {
       arrow: {
-        element: `.${this.arrowClass}`
+        element: `.${this.arrowClass}`,
       },
       offset: {
         fn(data) {
@@ -143,19 +143,19 @@ export default class ContextualHelpElement extends Component {
           data.offsets.popper.left += marginLeft;
 
           return window.Popper.Defaults.modifiers.offset.fn.apply(this, arguments);
-        }
+        },
       },
       preventOverflow: {
         enabled: this.autoPlacement,
         boundariesElement: this.viewportElement,
-        padding: this.viewportPadding
+        padding: this.viewportPadding,
       },
       hide: {
-        enabled: this.autoPlacement
+        enabled: this.autoPlacement,
       },
       flip: {
-        enabled: this.autoPlacement
-      }
+        enabled: this.autoPlacement,
+      },
     };
   }
 

@@ -1,7 +1,5 @@
 import { module } from 'qunit';
-import {
-  setupRenderingTest
-} from 'ember-qunit';
+import { setupRenderingTest } from 'ember-qunit';
 import { render, click, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import {
@@ -10,21 +8,21 @@ import {
   test,
   testBS3,
   testBS4,
-  visibilityClass
+  visibilityClass,
 } from '../../helpers/bootstrap-test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
-import a11yAudit from 'ember-a11y-testing/test-support/audit'
+import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
-module('Integration | Component | bs-accordion', function(hooks) {
+module('Integration | Component | bs-accordion', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     this.actions = {};
     this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
   });
 
-  testBS3('accordion has correct default markup', async function(assert) {
+  testBS3('accordion has correct default markup', async function (assert) {
     await render(hbs`
       <BsAccordion as |acc|>
         <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
@@ -34,7 +32,7 @@ module('Integration | Component | bs-accordion', function(hooks) {
     assert.dom('.panel-group').exists('accordion has panel-group class');
   });
 
-  testBS4('accordion has correct default markup', async function(assert) {
+  testBS4('accordion has correct default markup', async function (assert) {
     await render(hbs`
       <BsAccordion as |acc|>
         <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
@@ -44,7 +42,7 @@ module('Integration | Component | bs-accordion', function(hooks) {
     assert.dom('.accordion .card').exists('accordion has card within accordion');
   });
 
-  test('accordion yields items', async function(assert) {
+  test('accordion yields items', async function (assert) {
     await render(hbs`
       <BsAccordion as |acc|>
         <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
@@ -54,7 +52,7 @@ module('Integration | Component | bs-accordion', function(hooks) {
     assert.dom(`.${accordionClassFor()}`).exists({ count: 2 }, 'accordion yields item');
   });
 
-  test('accordion with preselected item has this item expanded', async function(assert) {
+  test('accordion with preselected item has this item expanded', async function (assert) {
     this.set('selected', 1);
     await render(hbs`
       <BsAccordion @selected={{selected}} as |acc|>
@@ -63,12 +61,16 @@ module('Integration | Component | bs-accordion', function(hooks) {
       </BsAccordion>
     `);
 
-    assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
+    assert
+      .dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`)
+      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
-    assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass(visibilityClass(), `tabpanel has ${visibilityClass()} class`);
+    assert
+      .dom(`.${accordionClassFor()}:first-child .collapse`)
+      .hasClass(visibilityClass(), `tabpanel has ${visibilityClass()} class`);
   });
 
-  test('changing selected item expands this item', async function(assert) {
+  test('changing selected item expands this item', async function (assert) {
     this.set('selected', 1);
     await render(hbs`
       <BsAccordion @selected={{selected}} as |acc|>
@@ -80,12 +82,14 @@ module('Integration | Component | bs-accordion', function(hooks) {
 
     // wait for transitions to complete
     await settled();
-    assert.dom(`.${accordionClassFor()}:last-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
+    assert
+      .dom(`.${accordionClassFor()}:last-child .${accordionItemHeadClass()}`)
+      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
     assert.dom(`.${accordionClassFor()}:last-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionClassFor()}:last-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
   });
 
-  test('clicking collapsed item expands it', async function(assert) {
+  test('clicking collapsed item expands it', async function (assert) {
     await render(hbs`
       <BsAccordion as |acc|>
         <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
@@ -94,12 +98,14 @@ module('Integration | Component | bs-accordion', function(hooks) {
     `);
     await click(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`);
 
-    assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
+    assert
+      .dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`)
+      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
   });
 
-  test('clicking expanded item collapses it', async function(assert) {
+  test('clicking expanded item collapses it', async function (assert) {
     await render(hbs`
       <BsAccordion @selected={{1}} as |acc|>
         <acc.item @value={{1}} @title="TITLE1">CONTENT1</acc.item>
@@ -107,18 +113,22 @@ module('Integration | Component | bs-accordion', function(hooks) {
       </BsAccordion>
     `);
 
-    assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
+    assert
+      .dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`)
+      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
 
     await click(`.${accordionItemHeadClass()}`);
 
-    assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasClass('collapsed', `${accordionItemHeadClass()} has collapsed class`);
+    assert
+      .dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`)
+      .hasClass('collapsed', `${accordionItemHeadClass()} has collapsed class`);
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasNoClass(visibilityClass(), 'tabpanel is hidden');
   });
 
-  test('calls onChange action when changing selection', async function(assert) {
+  test('calls onChange action when changing selection', async function (assert) {
     let action = this.spy();
     this.actions.change = action;
     await render(hbs`
@@ -132,7 +142,7 @@ module('Integration | Component | bs-accordion', function(hooks) {
     assert.ok(action.calledWith(1), 'onClick action has been called.');
   });
 
-  test('prevents changing selection when onChange returns false', async function(assert) {
+  test('prevents changing selection when onChange returns false', async function (assert) {
     let action = this.stub();
     action.returns(false);
     this.actions.change = action;
@@ -146,12 +156,14 @@ module('Integration | Component | bs-accordion', function(hooks) {
     await click(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`);
     assert.ok(action.calledWith(1), 'onClick action has been called.');
 
-    assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasClass('collapsed', `${accordionItemHeadClass()} has collapsed class`);
+    assert
+      .dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`)
+      .hasClass('collapsed', `${accordionItemHeadClass()} has collapsed class`);
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasNoClass(visibilityClass(), 'tabpanel is hidden');
   });
 
-  test('changing selection does not leak to public selected property (DDAU)', async function(assert) {
+  test('changing selection does not leak to public selected property (DDAU)', async function (assert) {
     this.set('selected', 1);
     await render(hbs`
       <BsAccordion @selected={{selected}} as |acc|>
@@ -164,7 +176,7 @@ module('Integration | Component | bs-accordion', function(hooks) {
     assert.equal(this.selected, 1, 'Does not modify public selected property');
   });
 
-  test('yields change action to add custom behaviour', async function(assert) {
+  test('yields change action to add custom behaviour', async function (assert) {
     this.set('selected', 1);
     await render(hbs`
       <BsAccordion @selected={{1}} as |acc|>
@@ -175,12 +187,14 @@ module('Integration | Component | bs-accordion', function(hooks) {
 
     await click('#btn');
 
-    assert.dom(`.${accordionClassFor()}:last-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
+    assert
+      .dom(`.${accordionClassFor()}:last-child .${accordionItemHeadClass()}`)
+      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
     assert.dom(`.${accordionClassFor()}:last-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionClassFor()}:last-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
   });
 
-  test('clicking collapsed item with contextual title expands it', async function(assert) {
+  test('clicking collapsed item with contextual title expands it', async function (assert) {
     await render(hbs`
       <BsAccordion as |acc|>
         <acc.item @value={{1}} as |aitem|>
@@ -193,12 +207,14 @@ module('Integration | Component | bs-accordion', function(hooks) {
 
     await click(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`);
 
-    assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
+    assert
+      .dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`)
+      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
   });
 
-  test('clicking expanded item with contextual title collapses it', async function(assert) {
+  test('clicking expanded item with contextual title collapses it', async function (assert) {
     await render(hbs`
       <BsAccordion @selected={{1}} as |acc|>
         <acc.item @value={{1}} as |aitem|>
@@ -209,13 +225,17 @@ module('Integration | Component | bs-accordion', function(hooks) {
       </BsAccordion>
     `);
 
-    assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
+    assert
+      .dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`)
+      .hasNoClass('collapsed', `${accordionItemHeadClass()} has not collapsed class`);
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass(visibilityClass(), 'tabpanel is visible');
 
     await click(`.${accordionItemHeadClass()}`);
 
-    assert.dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`).hasClass('collapsed', `${accordionItemHeadClass()} has collapsed class`);
+    assert
+      .dom(`.${accordionClassFor()}:first-child .${accordionItemHeadClass()}`)
+      .hasClass('collapsed', `${accordionItemHeadClass()} has collapsed class`);
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasClass('collapse', 'tabpanel has collapse class');
     assert.dom(`.${accordionClassFor()}:first-child .collapse`).hasNoClass(visibilityClass(), 'tabpanel is hidden');
   });

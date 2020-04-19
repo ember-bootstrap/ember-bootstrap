@@ -212,7 +212,7 @@ export default class ContextualHelp extends Component {
    */
   @computed
   get destinationElement() {
-    return getDestinationElement(this)
+    return getDestinationElement(this);
   }
 
   /**
@@ -367,8 +367,7 @@ export default class ContextualHelp extends Component {
    * @event onShow
    * @public
    */
-  onShow() {
-  }
+  onShow() {}
 
   /**
    * This action will be called when the tooltip/popover has been made visible to the user (will wait for CSS transitions to complete).
@@ -376,8 +375,7 @@ export default class ContextualHelp extends Component {
    * @event onShown
    * @public
    */
-  onShown() {
-  }
+  onShown() {}
 
   /**
    * This action is called immediately when the tooltip/popover is about to be hidden.
@@ -385,8 +383,7 @@ export default class ContextualHelp extends Component {
    * @event onHide
    * @public
    */
-  onHide() {
-  }
+  onHide() {}
 
   /**
    * This action is called when the tooltip/popover has finished being hidden from the user (will wait for CSS transitions to complete).
@@ -394,8 +391,7 @@ export default class ContextualHelp extends Component {
    * @event onHidden
    * @public
    */
-  onHidden() {
-  }
+  onHidden() {}
 
   /**
    * Called when a show event has been received
@@ -423,11 +419,15 @@ export default class ContextualHelp extends Component {
       return this.show();
     }
 
-    this.timer = later(this, function() {
-      if (this.hoverState === 'in') {
-        this.show();
-      }
-    }, this.delayShow);
+    this.timer = later(
+      this,
+      function () {
+        if (this.hoverState === 'in') {
+          this.show();
+        }
+      },
+      this.delayShow
+    );
   }
 
   /**
@@ -455,11 +455,15 @@ export default class ContextualHelp extends Component {
       return this.hide();
     }
 
-    this.timer = later(this, function() {
-      if (this.hoverState === 'out') {
-        this.hide();
-      }
-    }, this.delayHide);
+    this.timer = later(
+      this,
+      function () {
+        if (this.hoverState === 'out') {
+          this.hide();
+        }
+      },
+      this.delayHide
+    );
   }
 
   /**
@@ -503,9 +507,12 @@ export default class ContextualHelp extends Component {
 
     // this waits for the tooltip/popover element to be created. when animating a wormholed tooltip/popover we need to wait until
     // ember-wormhole has moved things in the DOM for the animation to be correct, so use Ember.run.next in this case
-    let delayFn = !this._renderInPlace && this.fade ? next : function(target, fn) {
-      schedule('afterRender', target, fn);
-    };
+    let delayFn =
+      !this._renderInPlace && this.fade
+        ? next
+        : function (target, fn) {
+            schedule('afterRender', target, fn);
+          };
 
     this.set('inDom', true);
     delayFn(this, this._show);
@@ -545,8 +552,7 @@ export default class ContextualHelp extends Component {
     };
 
     if (skipTransition === false && this.usesTransition) {
-      transitionEnd(this.overlayElement, this.transitionDuration)
-        .then(tooltipShowComplete);
+      transitionEnd(this.overlayElement, this.transitionDuration).then(tooltipShowComplete);
     } else {
       tooltipShowComplete();
     }
@@ -604,8 +610,7 @@ export default class ContextualHelp extends Component {
     }
 
     if (this.usesTransition) {
-      transitionEnd(this.overlayElement, this.transitionDuration)
-        .then(tooltipHideComplete);
+      transitionEnd(this.overlayElement, this.transitionDuration).then(tooltipHideComplete);
     } else {
       tooltipHideComplete();
     }
@@ -620,16 +625,15 @@ export default class ContextualHelp extends Component {
   addListeners() {
     let target = this.triggerTargetElement;
 
-    this._triggerEvents
-      .forEach((event) => {
-        if (isArray(event)) {
-          let [inEvent, outEvent] = event;
-          target.addEventListener(inEvent, this._handleEnter);
-          target.addEventListener(outEvent, this._handleLeave);
-        } else {
-          target.addEventListener(event, this._handleToggle);
-        }
-      });
+    this._triggerEvents.forEach((event) => {
+      if (isArray(event)) {
+        let [inEvent, outEvent] = event;
+        target.addEventListener(inEvent, this._handleEnter);
+        target.addEventListener(outEvent, this._handleLeave);
+      } else {
+        target.addEventListener(event, this._handleToggle);
+      }
+    });
   }
 
   /**
@@ -639,17 +643,16 @@ export default class ContextualHelp extends Component {
   removeListeners() {
     try {
       let target = this.triggerTargetElement;
-      this._triggerEvents
-        .forEach((event) => {
-          if (isArray(event)) {
-            let [inEvent, outEvent] = event;
-            target.removeEventListener(inEvent, this._handleEnter);
-            target.removeEventListener(outEvent, this._handleLeave);
-          } else {
-            target.removeEventListener(event, this._handleToggle);
-          }
-        });
-    } catch(e) {} // eslint-disable-line no-empty
+      this._triggerEvents.forEach((event) => {
+        if (isArray(event)) {
+          let [inEvent, outEvent] = event;
+          target.removeEventListener(inEvent, this._handleEnter);
+          target.removeEventListener(outEvent, this._handleLeave);
+        } else {
+          target.removeEventListener(event, this._handleToggle);
+        }
+      });
+    } catch (e) {} // eslint-disable-line no-empty
   }
 
   /**

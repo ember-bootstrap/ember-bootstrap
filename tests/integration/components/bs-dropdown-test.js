@@ -7,60 +7,60 @@ import {
   isVisible,
   openClass,
   test,
-  testBS4
+  testBS4,
 } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
-import a11yAudit from 'ember-a11y-testing/test-support/audit'
+import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
-module('Integration | Component | bs-dropdown', function(hooks) {
+module('Integration | Component | bs-dropdown', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     this.actions = {};
     this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
   });
 
-  test('dropdown container has dropdown class', async function(assert) {
+  test('dropdown container has dropdown class', async function (assert) {
     await render(hbs`<BsDropdown>Test</BsDropdown>`);
 
     assert.dom('.dropdown').exists('has dropdown class');
   });
 
-  test('dropdown container supports dropup style', async function(assert) {
+  test('dropdown container supports dropup style', async function (assert) {
     await render(hbs`<BsDropdown @direction="up">Test</BsDropdown>`);
 
     assert.dom('.dropup').exists('has dropup class');
   });
 
-  testBS4('dropdown container supports dropright style', async function(assert) {
+  testBS4('dropdown container supports dropright style', async function (assert) {
     await render(hbs`<BsDropdown @direction="right">Test</BsDropdown>`);
 
     assert.dom('.dropright').exists('has dropright class');
   });
 
-  testBS4('dropdown container supports dropleft style', async function(assert) {
+  testBS4('dropdown container supports dropleft style', async function (assert) {
     await render(hbs`<BsDropdown @direction="left">Test</BsDropdown>`);
 
     assert.dom('.dropleft').exists('has dropleft class');
   });
 
-  test('dropdown container with dropdown button has btn-group class', async function(assert) {
+  test('dropdown container with dropdown button has btn-group class', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.button>Dropdown <span class="caret"></span></dd.button><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
     assert.dom('.btn-group').exists('has btn-group class');
   });
 
-  test('dropdown container with block dropdown button has dropdown class', async function(assert) {
+  test('dropdown container with block dropdown button has dropdown class', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.button @block={{true}}>Dropdown <span class="caret"></span></dd.button><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
     assert.dom('.dropdown').exists('has dropdown class');
   });
 
-  test('dropdown container with dropdown button supports dropup style', async function(assert) {
+  test('dropdown container with dropdown button supports dropup style', async function (assert) {
     await render(
       hbs`<BsDropdown @direction="up" as |dd|><dd.button>Dropdown <span class="caret"></span></dd.button><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
@@ -68,7 +68,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom('.dropup').exists('has dropup class');
   });
 
-  test('dropdown-toggle toggles dropdown visibility', async function(assert) {
+  test('dropdown-toggle toggles dropdown visibility', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
@@ -81,7 +81,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom('.dropdown-menu').doesNotExist('Dropdown is closed');
   });
 
-  test('dropdown toggle has aria-expanded attribute', async function(assert) {
+  test('dropdown toggle has aria-expanded attribute', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
@@ -93,7 +93,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom('.dropdown-toggle').hasAttribute('aria-expanded', 'false');
   });
 
-  test('dropdown button has aria-expanded attribute', async function(assert) {
+  test('dropdown button has aria-expanded attribute', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.button>Dropdown <span class="caret"></span></dd.button><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
@@ -105,7 +105,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom('.dropdown-toggle').hasAttribute('aria-expanded', 'false');
   });
 
-  test('opened dropdown will close on outside click', async function(assert) {
+  test('opened dropdown will close on outside click', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
@@ -117,7 +117,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom('.dropdown-menu').doesNotExist('Dropdown is closed');
   });
 
-  test('clicking dropdown menu will close it', async function(assert) {
+  test('clicking dropdown menu will close it', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
@@ -129,7 +129,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom('.dropdown-menu').doesNotExist('Dropdown is closed');
   });
 
-  test('dropdown will close on click, when default is prevented, propagation is stopped', async function(assert) {
+  test('dropdown will close on click, when default is prevented, propagation is stopped', async function (assert) {
     assert.expect(3);
 
     this.set('stopEvent', (event) => {
@@ -153,7 +153,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom(`.${openClass()}`).doesNotExist('Dropdown is closed');
   });
 
-  test('clicking dropdown menu when closeOnMenuClick is false will not close it', async function(assert) {
+  test('clicking dropdown menu when closeOnMenuClick is false will not close it', async function (assert) {
     await render(hbs`
       <BsDropdown @closeOnMenuClick={{false}} as |dd|>
         <dd.toggle>Dropdown <span class="caret"></span></dd.toggle>
@@ -198,7 +198,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom(dropdownVisibilityElementSelector()).hasClass(openClass(), 'Dropdown is open');
   });
 
-  test('clicking outside dropdown menu when closeOnMenuClick is false will close it', async function(assert) {
+  test('clicking outside dropdown menu when closeOnMenuClick is false will close it', async function (assert) {
     await render(
       hbs`<BsDropdown @closeOnMenuClick={{false}} as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
     );
@@ -210,7 +210,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom('.dropdown-menu').doesNotExist();
   });
 
-  test('clicking outside dropdown menu when closeOnMenuClick is false and renderInPlace is false will close it', async function(assert) {
+  test('clicking outside dropdown menu when closeOnMenuClick is false and renderInPlace is false will close it', async function (assert) {
     await render(
       hbs`
         <div id="ember-bootstrap-wormhole"></div>
@@ -224,7 +224,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom('.dropdown-menu').doesNotExist();
   });
 
-  test('child components can access isOpen property', async function(assert) {
+  test('child components can access isOpen property', async function (assert) {
     await render(
       hbs`<BsDropdown as |dd|><dd.toggle><span id="toggleText">{{if dd.isOpen "open" "closed"}}</span></dd.toggle></BsDropdown>`
     );
@@ -236,7 +236,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom('#toggleText').hasText('closed', 'Dropdown is closed');
   });
 
-  test('opening dropdown calls onShow action', async function(assert) {
+  test('opening dropdown calls onShow action', async function (assert) {
     let action = this.spy();
     this.actions.show = action;
     await render(
@@ -247,7 +247,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.ok(action.calledOnce);
   });
 
-  test('closing dropdown calls onHide action', async function(assert) {
+  test('closing dropdown calls onHide action', async function (assert) {
     let action = this.spy();
     this.actions.hide = action;
     await render(
@@ -259,7 +259,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.ok(action.calledOnce);
   });
 
-  test('dropdown yields the openDropdown action', async function(assert) {
+  test('dropdown yields the openDropdown action', async function (assert) {
     let action = this.spy();
     this.actions.show = action;
     await render(hbs`
@@ -274,7 +274,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.ok(action.calledOnce);
   });
 
-  test('dropdown yields the closeDropdown action', async function(assert) {
+  test('dropdown yields the closeDropdown action', async function (assert) {
     let hide = this.spy();
     this.actions.hide = hide;
     await render(hbs`
@@ -294,7 +294,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.ok(hide.calledOnce);
   });
 
-  test('dropdown yields the toggleDropdown action', async function(assert) {
+  test('dropdown yields the toggleDropdown action', async function (assert) {
     let show = this.spy();
     let hide = this.spy();
     this.actions.hide = hide;
@@ -314,7 +314,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.ok(hide.calledOnce);
   });
 
-  test('opening dropdown makes the menu visible', async function(assert) {
+  test('opening dropdown makes the menu visible', async function (assert) {
     await render(hbs`
     <BsDropdown as |dd|>
       <dd.toggle>Dropdown</dd.toggle>
@@ -332,7 +332,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.ok(this.element.querySelector('.dropdown-menu').offsetParent !== null);
   });
 
-  test('dropdown menu can be rendered in a wormhole', async function(assert) {
+  test('dropdown menu can be rendered in a wormhole', async function (assert) {
     await render(
       hbs`
         <div id="ember-bootstrap-wormhole"></div>
@@ -346,10 +346,9 @@ module('Integration | Component | bs-dropdown', function(hooks) {
     assert.dom('#ember-bootstrap-wormhole .dropdown-menu').exists({ count: 1 }, 'Menu is rendered in wormhole');
   });
 
-  module('keyboard control', function() {
-
+  module('keyboard control', function () {
     function keyboardTest() {
-      test(`should have correct default element focused`, async function(assert) {
+      test(`should have correct default element focused`, async function (assert) {
         await render(
           hbs`
         <BsDropdown as |dd|>
@@ -358,7 +357,8 @@ module('Integration | Component | bs-dropdown', function(hooks) {
             <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
-      `);
+      `
+        );
 
         await click('a.dropdown-toggle');
         let expectedFocusElement = this.renderInPlace ? 'a.dropdown-toggle' : '.dropdown-menu';
@@ -366,7 +366,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         assert.dom(expectedFocusElement).isFocused();
       });
 
-      test('should show if down key is pressed on toggle', async function(assert) {
+      test('should show if down key is pressed on toggle', async function (assert) {
         await render(
           hbs`
         <BsDropdown as |dd|>
@@ -375,7 +375,8 @@ module('Integration | Component | bs-dropdown', function(hooks) {
             <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
-      `);
+      `
+        );
 
         await focus('a.dropdown-toggle');
         await triggerKeyEvent('a.dropdown-toggle', 'keydown', 40); // down
@@ -383,7 +384,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         assert.dom('.dropdown-menu').exists();
       });
 
-      test('should show if down key is pressed on button', async function(assert) {
+      test('should show if down key is pressed on button', async function (assert) {
         await render(
           hbs`
         <BsDropdown as |dd|>
@@ -392,7 +393,8 @@ module('Integration | Component | bs-dropdown', function(hooks) {
             <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
-      `);
+      `
+        );
 
         await focus('button.dropdown-toggle');
         await triggerKeyEvent('button.dropdown-toggle', 'keydown', 40); // down
@@ -400,7 +402,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         assert.dom('.dropdown-menu').exists();
       });
 
-      test('should hide if pressing escape', async function(assert) {
+      test('should hide if pressing escape', async function (assert) {
         await render(
           hbs`
         <BsDropdown as |dd|>
@@ -409,7 +411,8 @@ module('Integration | Component | bs-dropdown', function(hooks) {
             <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
-      `);
+      `
+        );
 
         await click('a.dropdown-toggle');
 
@@ -423,7 +426,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         assert.dom('a.dropdown-toggle').isFocused();
       });
 
-      test('should hide if tabbing outside of menu', async function(assert) {
+      test('should hide if tabbing outside of menu', async function (assert) {
         await render(
           hbs`
         <BsDropdown as |dd|>
@@ -432,7 +435,8 @@ module('Integration | Component | bs-dropdown', function(hooks) {
             <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
-      `);
+      `
+        );
 
         await click('a.dropdown-toggle');
 
@@ -443,7 +447,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         assert.dom('.dropdown-menu').doesNotExist();
       });
 
-      test('should not hide if tabbing inside of menu', async function(assert) {
+      test('should not hide if tabbing inside of menu', async function (assert) {
         await render(
           hbs`
         <BsDropdown as |dd|>
@@ -452,7 +456,8 @@ module('Integration | Component | bs-dropdown', function(hooks) {
             <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
-      `);
+      `
+        );
 
         await click('a.dropdown-toggle');
 
@@ -463,7 +468,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         assert.dom('.dropdown-menu').exists();
       });
 
-      test('should focus next/previous element when using keyboard navigation', async function(assert) {
+      test('should focus next/previous element when using keyboard navigation', async function (assert) {
         await render(
           hbs`
         <BsDropdown as |dd|>
@@ -473,7 +478,8 @@ module('Integration | Component | bs-dropdown', function(hooks) {
             <menu.item><a class="dropdown-item" href="#" id="item2">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
-      `);
+      `
+        );
 
         await click('a.dropdown-toggle');
 
@@ -487,7 +493,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         assert.dom('#item1').isFocused();
       });
 
-      test('should hide and focus next element when tabbing outside of menu ', async function(assert) {
+      test('should hide and focus next element when tabbing outside of menu ', async function (assert) {
         await render(
           hbs`
         <BsDropdown as |dd|>
@@ -498,11 +504,12 @@ module('Integration | Component | bs-dropdown', function(hooks) {
           </dd.menu>
           <button id="next">Next</button>
         </BsDropdown>
-      `);
+      `
+        );
 
         await click('a.dropdown-toggle');
 
-        await new Promise(resolve => setTimeout(resolve, 0));
+        await new Promise((resolve) => setTimeout(resolve, 0));
 
         await triggerKeyEvent(document.activeElement, 'keydown', 40); // down
         assert.dom('#item1').isFocused();
@@ -514,7 +521,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         assert.dom('#item1').isFocused();
       });
 
-      test('should ignore keyboard events within <input>s and <textarea>s, except for escape key', async function(assert) {
+      test('should ignore keyboard events within <input>s and <textarea>s, except for escape key', async function (assert) {
         await render(hbs`
           <BsDropdown as |dd|>
             <dd.toggle>Dropdown</dd.toggle>
@@ -541,7 +548,7 @@ module('Integration | Component | bs-dropdown', function(hooks) {
         assert.dom('.dropdown-menu').doesNotExist();
       });
 
-      test('should skip disabled element when using keyboard navigation', async function(assert) {
+      test('should skip disabled element when using keyboard navigation', async function (assert) {
         await render(hbs`
           <BsDropdown as |dd|>
             <dd.toggle>Dropdown</dd.toggle>
@@ -560,15 +567,15 @@ module('Integration | Component | bs-dropdown', function(hooks) {
       });
     }
 
-    module('in place', function(hooks) {
-      hooks.beforeEach(function() {
+    module('in place', function (hooks) {
+      hooks.beforeEach(function () {
         this.renderInPlace = true;
       });
       keyboardTest();
     });
 
-    module('in wormhole', function() {
-      hooks.beforeEach(function() {
+    module('in wormhole', function () {
+      hooks.beforeEach(function () {
         this.renderInPlace = false;
       });
       keyboardTest();
@@ -584,7 +591,8 @@ module('Integration | Component | bs-dropdown', function(hooks) {
             <menu.item><a class="dropdown-item" href="#">Something</a></menu.item>
           </dd.menu>
         </BsDropdown>
-      `);
+      `
+    );
 
     await a11yAudit();
     assert.ok(true, 'A11y audit passed');

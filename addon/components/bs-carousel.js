@@ -60,7 +60,7 @@ import { equal } from '@ember/object/computed';
   @extends Ember.Component
   @public
 */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class Carousel extends Component.extend(ComponentParent) {
   tabindex = '1';
@@ -103,7 +103,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
    * @readonly
    * @type array
    */
-  @(filter('children', function(view) {
+  @(filter('children', function (view) {
     return view instanceof CarouselSlide;
   }).readOnly())
   childSlides;
@@ -484,7 +484,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
     // Must change current index after execution of 'presentationStateObserver' method
     // from child components.
     yield new RSVP.Promise((resolve) => {
-      schedule('afterRender', this, function() {
+      schedule('afterRender', this, function () {
         this.set('currentIndex', this.followingIndex);
         resolve();
       });
@@ -560,7 +560,6 @@ export default class Carousel extends Component.extend(ComponentParent) {
     this.triggerChildSlidesObserver();
   }
 
-
   @action
   handleMouseEnter() {
     if (this.pauseOnMouseEnter) {
@@ -573,11 +572,8 @@ export default class Carousel extends Component.extend(ComponentParent) {
   @action
   handleMouseLeave() {
     if (
-      this.pauseOnMouseEnter
-      && (
-        this.get('transitioner.last') !== null
-        || this.get('waitIntervalToInitCycle.last') !== null
-      )
+      this.pauseOnMouseEnter &&
+      (this.get('transitioner.last') !== null || this.get('waitIntervalToInitCycle.last') !== null)
     ) {
       this.set('isMouseHovering', false);
       this.waitIntervalToInitCycle.perform();
@@ -587,10 +583,7 @@ export default class Carousel extends Component.extend(ComponentParent) {
   @action
   handleKeyDown(e) {
     let code = e.keyCode || e.which;
-    if (
-      this.keyboard === false
-      || /input|textarea/i.test(e.target.tagName)
-    ) {
+    if (this.keyboard === false || /input|textarea/i.test(e.target.tagName)) {
       return;
     }
     switch (code) {
@@ -600,7 +593,8 @@ export default class Carousel extends Component.extend(ComponentParent) {
       case 39:
         this.send('toNextSlide');
         break;
-      default: break;
+      default:
+        break;
     }
   }
 

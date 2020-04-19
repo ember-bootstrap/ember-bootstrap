@@ -1,36 +1,33 @@
 import { module } from 'qunit';
-import {
-  setupRenderingTest
-} from 'ember-qunit';
+import { setupRenderingTest } from 'ember-qunit';
 import { render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { test, visibilityClass } from '../../helpers/bootstrap-test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
-import a11yAudit from 'ember-a11y-testing/test-support/audit'
+import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
-module('Integration | Component | bs-collapse', function(hooks) {
+module('Integration | Component | bs-collapse', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     this.actions = {};
     this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
   });
 
-  test('collapse has correct default markup', async function(assert) {
+  test('collapse has correct default markup', async function (assert) {
     await render(hbs`<BsCollapse><p>Just some content</p></BsCollapse>`);
     assert.dom('.collapse').exists('collapse has collapse class');
     assert.dom('.collapse').hasNoClass(visibilityClass(), 'collapse does not have visibility class');
-
   });
 
-  test('expanded collapse has correct default markup', async function(assert) {
+  test('expanded collapse has correct default markup', async function (assert) {
     await render(hbs`<BsCollapse @collapsed={{false}}><p>Just some content</p></BsCollapse>`);
     assert.dom('.collapse').hasClass('collapse', 'collapse has collapse class');
     assert.dom('.collapse').hasClass(visibilityClass(), 'collapse has visibility class');
   });
 
-  test('setting collapse to false expands this item', async function(assert) {
+  test('setting collapse to false expands this item', async function (assert) {
     let showAction = this.spy();
     let shownAction = this.spy();
     this.actions.show = showAction;
@@ -52,7 +49,7 @@ module('Integration | Component | bs-collapse', function(hooks) {
     assert.dom('.collapse').hasClass(visibilityClass(), 'collapse has visibility class');
   });
 
-  test('setting collapse to true collapses this item', async function(assert) {
+  test('setting collapse to true collapses this item', async function (assert) {
     let hideAction = this.spy();
     let hiddenAction = this.spy();
     this.actions.hide = hideAction;

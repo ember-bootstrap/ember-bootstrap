@@ -1,19 +1,15 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, settled } from '@ember/test-helpers';
-import {
-  test,
-  testRequiringTransitions,
-  visibilityClass
-} from '../../../helpers/bootstrap-test';
+import { test, testRequiringTransitions, visibilityClass } from '../../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
-module('Integration | Component | bs-tab/pane', function(hooks) {
+module('Integration | Component | bs-tab/pane', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  test('it has correct markup', async function(assert) {
+  test('it has correct markup', async function (assert) {
     await render(hbs`
       <BsTab::Pane @fade={{true}} @activeId="pane1" @id="pane1">
         template block text
@@ -26,7 +22,7 @@ module('Integration | Component | bs-tab/pane', function(hooks) {
     assert.dom('div.tab-pane').hasClass(visibilityClass(), 'tab-pane has visibility class');
   });
 
-  test('it has correct markup when switching active pane and fade=false', async function(assert) {
+  test('it has correct markup when switching active pane and fade=false', async function (assert) {
     this.set('activeId', null);
     await render(hbs`
       <BsTab::Pane @fade={{false}} @activeId={{activeId}} @id="pane1">
@@ -48,7 +44,7 @@ module('Integration | Component | bs-tab/pane', function(hooks) {
     assert.dom('div.tab-pane').hasNoClass(visibilityClass(), 'tab-pane does not have visibility class');
   });
 
-  testRequiringTransitions('it has correct markup when switching active pane and fade=true', async function(assert) {
+  testRequiringTransitions('it has correct markup when switching active pane and fade=true', async function (assert) {
     this.set('activeId', null);
     await render(hbs`
       <BsTab::Pane @fade={{true}} @activeId={{activeId}} @id="pane1">

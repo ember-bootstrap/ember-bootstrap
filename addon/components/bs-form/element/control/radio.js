@@ -13,12 +13,12 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 @templateLayout(layout)
 @tagName('')
 export default class FormElementControlRadio extends Control {
- /**
-  * @property inline
-  * @type {Boolean}
-  * @default false
-  * @public
-  */
- @defaultValue
- inline = false;
+  /**
+   * @property inline
+   * @type {Boolean}
+   * @default false
+   * @public
+   */
+  @defaultValue
+  inline = false;
 }

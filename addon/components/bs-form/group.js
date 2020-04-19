@@ -30,7 +30,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @extends Ember.Component
   @public
 */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class FormGroup extends Component {
   /**
@@ -63,7 +63,6 @@ export default class FormGroup extends Component {
    * @type string
    * @public
    */
-
 
   /**
    * [BS3 only] Whether to show validation state icons.

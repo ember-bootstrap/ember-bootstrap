@@ -12,28 +12,28 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 @templateLayout(layout)
 @tagName('')
 export default class FormElementErrors extends Component {
- /**
-  * @property show
-  * @type {Boolean}
-  * @public
-  */
- @defaultValue
- show = false;
+  /**
+   * @property show
+   * @type {Boolean}
+   * @public
+   */
+  @defaultValue
+  show = false;
 
- /**
-  * @property messages
-  * @type {Ember.Array}
-  * @public
-  */
+  /**
+   * @property messages
+   * @type {Ember.Array}
+   * @public
+   */
 
- /**
-  * Whether or not should display several errors at the same time.
-  *
-  * @default false
-  * @property showMultipleErrors
-  * @public
-  * @type {Boolean}
-  */
- @defaultValue
- showMultipleErrors = false;
+  /**
+   * Whether or not should display several errors at the same time.
+   *
+   * @default false
+   * @property showMultipleErrors
+   * @public
+   * @type {Boolean}
+   */
+  @defaultValue
+  showMultipleErrors = false;
 }

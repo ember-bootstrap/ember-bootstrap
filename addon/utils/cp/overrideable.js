@@ -21,6 +21,6 @@ export default function overrideableCP() {
     set(key, value) {
       this[`__${key}`] = value;
       return value;
-    }
+    },
   });
 }

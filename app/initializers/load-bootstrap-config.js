@@ -7,5 +7,5 @@ export function initialize(/* container, application */) {
 
 export default {
   name: 'load-bootstrap-config',
-  initialize
+  initialize,
 };

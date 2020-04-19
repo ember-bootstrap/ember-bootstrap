@@ -9,6 +9,6 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/help-te
  @extends Ember.Component
  @private
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class FormElementHelpText extends Component {}

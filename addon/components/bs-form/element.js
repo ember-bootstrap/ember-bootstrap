@@ -11,9 +11,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { guidFor } from '@ember/object/internals';
 
-const nonDefaultLayouts = A([
-  'checkbox'
-]);
+const nonDefaultLayouts = A(['checkbox']);
 
 /**
   Sub class of `Components.FormGroup` that adds automatic form layout markup and form validation features.
@@ -200,13 +198,9 @@ const nonDefaultLayouts = A([
 @templateLayout(layout)
 export default class FormElement extends FormGroup {
   @defaultValue
-  doNotShowValidationForEventTargets = macroCondition(getOwnConfig().isBS3) ? [
-    '.input-group-addon',
-    '.input-group-btn',
-  ] : [
-    '.input-group-append',
-    '.input-group-prepend',
-  ];
+  doNotShowValidationForEventTargets = macroCondition(getOwnConfig().isBS3)
+    ? ['.input-group-addon', '.input-group-btn']
+    : ['.input-group-append', '.input-group-prepend'];
 
   /**
    * Text to display within a `<label>` tag.
@@ -513,12 +507,7 @@ export default class FormElement extends FormGroup {
    * @default false
    * @private
    */
-  @or(
-    'showOwnValidation',
-    'showAllValidations',
-    'hasCustomError',
-    'hasCustomWarning'
-  )
+  @or('showOwnValidation', 'showAllValidations', 'hasCustomError', 'hasCustomWarning')
   showValidation;
 
   /**
@@ -588,7 +577,10 @@ export default class FormElement extends FormGroup {
   get _showValidationOn() {
     let showValidationOn = this.showValidationOn;
 
-    assert('showValidationOn must be a String or an Array', isArray(showValidationOn) || typeOf(showValidationOn) === 'string');
+    assert(
+      'showValidationOn must be a String or an Array',
+      isArray(showValidationOn) || typeOf(showValidationOn) === 'string'
+    );
     if (isArray(showValidationOn)) {
       return showValidationOn.map((type) => {
         return type.toLowerCase();
@@ -615,12 +607,11 @@ export default class FormElement extends FormGroup {
       // validations should not be shown for this event type or
       this._showValidationOn.indexOf(type) === -1 ||
       // validation should not be shown for this event target
-      (
-        isArray(this.doNotShowValidationForEventTargets) &&
+      (isArray(this.doNotShowValidationForEventTargets) &&
         this.get('doNotShowValidationForEventTargets.length') > 0 &&
-        [...this._element.querySelectorAll(this.doNotShowValidationForEventTargets.join(','))]
-          .some((el) => el.contains(target))
-      )
+        [...this._element.querySelectorAll(this.doNotShowValidationForEventTargets.join(','))].some((el) =>
+          el.contains(target)
+        ))
     ) {
       return;
     }
@@ -669,7 +660,11 @@ export default class FormElement extends FormGroup {
       return null;
     } else if (this.showModelValidation) {
       /* The display of model validation messages has been triggered */
-      return this.hasErrors || this.hasCustomError ? 'error' : (this.hasWarnings || this.hasCustomWarning ? 'warning' : 'success');
+      return this.hasErrors || this.hasCustomError
+        ? 'error'
+        : this.hasWarnings || this.hasCustomWarning
+        ? 'warning'
+        : 'success';
     } else {
       /* If there are custom errors or warnings these should always be shown */
       return this.hasCustomError ? 'error' : 'warning';
@@ -806,7 +801,11 @@ export default class FormElement extends FormGroup {
    */
   @computed('controlType')
   get labelComponent() {
-    return macroCondition(getOwnConfig().isBS3) ? 'bs-form/element/label' : this.controlType === 'radio' ? 'bs-form/element/legend' : 'bs-form/element/label';
+    return macroCondition(getOwnConfig().isBS3)
+      ? 'bs-form/element/label'
+      : this.controlType === 'radio'
+      ? 'bs-form/element/legend'
+      : 'bs-form/element/label';
   }
 
   /**
@@ -824,8 +823,7 @@ export default class FormElement extends FormGroup {
    * @method setupValidations
    * @private
    */
-  setupValidations() {
-  }
+  setupValidations() {}
 
   /**
    * The action is called whenever the input value is changed, e.g. by typing text
@@ -852,7 +850,10 @@ export default class FormElement extends FormGroup {
       this.set('showValidationOn', ['focusOut']);
     }
     if (!isBlank(this.property)) {
-      assert('You cannot set both property and value on a form element', this.value === null || this.value === undefined);
+      assert(
+        'You cannot set both property and value on a form element',
+        this.value === null || this.value === undefined
+      );
       defineProperty(this, 'value', alias(`model.${this.property}`));
       this.setupValidations();
     }
@@ -900,13 +901,15 @@ export default class FormElement extends FormGroup {
           `  {{/bs-form}}\n` +
           `  <BsForm as |form|>\n` +
           `    <form.element as |el|>\n` +
-          `      <el.control @${attribute}=${typeof value === 'string' ? `"${value}"`: `{{${value}}}`} />\n` +
+          `      <el.control @${attribute}=${typeof value === 'string' ? `"${value}"` : `{{${value}}}`} />\n` +
           `    </form.element>\n` +
           `  </BsForm>\n` +
           `After:\n` +
           `  <BsForm as |form|>\n` +
           `    <form.element as |el|>\n` +
-          `      <el.control ${typeof value === 'boolean' ? ( value ? attribute : '' ) : `${attribute}="${value}"`} />\n` +
+          `      <el.control ${
+            typeof value === 'boolean' ? (value ? attribute : '') : `${attribute}="${value}"`
+          } />\n` +
           `    </form.element>\n` +
           `  </BsForm>`;
 
@@ -935,15 +938,16 @@ export default class FormElement extends FormGroup {
     if (macroCondition(getOwnConfig().isBS3)) {
       let feedbackIcon;
       // validation state icons are only shown if form element has feedback
-      if (!this.isDestroying
-        && this.hasFeedback
+      if (
+        !this.isDestroying &&
+        this.hasFeedback &&
         // and form group element has
         // an input-group
-        && el.querySelector('.input-group')
+        el.querySelector('.input-group') &&
         // an addon or button on right side
-        && el.querySelector('.input-group input + .input-group-addon, .input-group input + .input-group-btn')
+        el.querySelector('.input-group input + .input-group-addon, .input-group input + .input-group-btn') &&
         // an icon showing validation state
-        && (feedbackIcon = el.querySelector('.form-control-feedback'))
+        (feedbackIcon = el.querySelector('.form-control-feedback'))
       ) {
         // clear existing adjustment
         feedbackIcon.style.right = '';

@@ -9,6 +9,6 @@ import layout from 'ember-bootstrap/templates/components/bs-form/element/layout/
  @extends Components.FormElementLayout
  @private
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class FormElementLayoutVertical extends FormElementLayout {}

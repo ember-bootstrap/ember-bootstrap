@@ -29,7 +29,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @extends Ember.Component
   @public
 */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class Alert extends Component {
   /**
@@ -193,12 +193,16 @@ export default class Alert extends Component {
    */
   hide() {
     if (this.usesTransition) {
-      later(this, function() {
-        if (!this.isDestroyed) {
-          this.set('hidden', true);
-          this.onDismissed();
-        }
-      }, this.fadeDuration);
+      later(
+        this,
+        function () {
+          if (!this.isDestroyed) {
+            this.set('hidden', true);
+            this.onDismissed();
+          }
+        },
+        this.fadeDuration
+      );
     } else {
       this.set('hidden', true);
       this.onDismissed();

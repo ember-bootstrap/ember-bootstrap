@@ -12,13 +12,14 @@ import { computed } from '@ember/object';
  * @param {*} defaultValue
  * @private
  */
-export default function(dependentKey, defaultValue = null) {
+export default function (dependentKey, defaultValue = null) {
   return computed(dependentKey, {
     get() {
       return this[dependentKey] ?? defaultValue;
     },
-    set(key, value) { // eslint-disable-line no-unused-vars
+    set(key, value) {
+      // eslint-disable-line no-unused-vars
       return value;
-    }
+    },
   });
 }

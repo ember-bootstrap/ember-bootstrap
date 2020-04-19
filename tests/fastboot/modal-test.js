@@ -3,11 +3,11 @@ import { setup, visit } from 'ember-cli-fastboot-testing/test-support';
 import setupFastBootRootElement from '../helpers/setup-fastboot';
 import { visibilityClass } from '../helpers/bootstrap-test';
 
-module('FastBoot | modal', function(hooks) {
+module('FastBoot | modal', function (hooks) {
   setup(hooks);
   setupFastBootRootElement(hooks);
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     await visit('/fastboot/modal');
 
     assert.dom('.modal').exists();
@@ -17,5 +17,4 @@ module('FastBoot | modal', function(hooks) {
     assert.dom('.modal .modal-header .modal-title').hasText('Simple Modal');
     assert.dom('.modal .modal-body').hasText('Hi there');
   });
-
 });

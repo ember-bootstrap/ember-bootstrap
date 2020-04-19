@@ -9,7 +9,6 @@ import { assert } from '@ember/debug';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { isBlank } from '@ember/utils';
 
-
 /**
   Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
 
@@ -103,7 +102,7 @@ import { isBlank } from '@ember/utils';
   @public
 */
 @templateLayout(layout)
-@tagName("")
+@tagName('')
 export default class Navbar extends Component {
   /**
    * Manages the state for the responsive menu between the toggle and the content.
@@ -150,7 +149,9 @@ export default class Navbar extends Component {
   @computed('position')
   get positionClass() {
     let position = this.position;
-    let validPositions = macroCondition(getOwnConfig().isBS3) ? ['fixed-top', 'fixed-bottom', 'static-top'] : ['fixed-top', 'fixed-bottom', 'sticky-top'];
+    let validPositions = macroCondition(getOwnConfig().isBS3)
+      ? ['fixed-top', 'fixed-bottom', 'static-top']
+      : ['fixed-top', 'fixed-bottom', 'sticky-top'];
     let positionPrefix = macroCondition(getOwnConfig().isBS3) ? 'navbar-' : '';
 
     if (validPositions.indexOf(position) === -1) {

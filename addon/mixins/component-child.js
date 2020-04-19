@@ -9,15 +9,15 @@ import ComponentParentMixin from 'ember-bootstrap/mixins/component-parent';
  * @namespace Mixins
  * @private
  */
-export default Mixin.create({ // eslint-disable-line ember/no-new-mixins
-
+// eslint-disable-next-line ember/no-new-mixins
+export default Mixin.create({
   /**
    * The parent component
    *
    * @property _parent
    * @private
    */
-  _parent: computed(function() {
+  _parent: computed(function () {
     return this.nearestOfType(ComponentParentMixin);
   }),
 
@@ -73,5 +73,5 @@ export default Mixin.create({ // eslint-disable-line ember/no-new-mixins
   willDestroyElement() {
     this._super(...arguments);
     this._unregisterFromParent();
-  }
+  },
 });

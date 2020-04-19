@@ -12,7 +12,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @extends Ember.Component
  @public
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class ModalHeader extends Component {
   /**

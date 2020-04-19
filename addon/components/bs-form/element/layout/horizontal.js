@@ -14,7 +14,7 @@ import { macroCondition, getOwnConfig } from '@embroider/macros';
  @extends Components.FormElementLayout
  @private
  */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class FormElementLayoutHorizontal extends FormElementLayout {
   /**

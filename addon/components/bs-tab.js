@@ -112,7 +112,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @uses Mixins.ComponentParent
   @public
 */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class Tab extends Component.extend(ComponentParent) {
   /**
@@ -227,7 +227,7 @@ export default class Tab extends Component.extend(ComponentParent) {
    * @readonly
    * @private
    */
-  @filter('children', function(view) {
+  @filter('children', function (view) {
     return view instanceof TabPane;
   })
   childPanes;
@@ -256,7 +256,7 @@ export default class Tab extends Component.extend(ComponentParent) {
             isGroup: true,
             groupTitle,
             children: A([item]),
-            childIds: A([item.id])
+            childIds: A([item.id]),
           });
         }
       } else {

@@ -42,7 +42,8 @@ export function findElementById(doc, id) {
 // renderer, be it native browser DOM or Fastboot SimpleDOM
 export function getDOM(context) {
   let { renderer } = context;
-  if (!renderer._dom) { // pre glimmer2
+  if (!renderer._dom) {
+    // pre glimmer2
     let container = getOwner ? getOwner(context) : context.container;
     let documentService = container.lookup('service:-document');
 
@@ -66,19 +67,19 @@ export function getDestinationElement(context) {
 
   if (DEBUG && !destinationElement) {
     let config = getOwner(context).resolveRegistration('config:environment');
-    if (config.environment === 'test' && (typeof FastBoot === 'undefined')) {
+    if (config.environment === 'test' && typeof FastBoot === 'undefined') {
       let id;
       if (requirejs.has('@ember/test-helpers/dom/get-root-element')) {
         try {
           id = requirejs('@ember/test-helpers/dom/get-root-element').default().id;
-        } catch(ex) {
+        } catch (ex) {
           // no op
         }
       }
       if (!id) {
         return document.querySelector('#ember-testing > .ember-view');
       }
-      return document.getElementById(id)
+      return document.getElementById(id);
     }
 
     warn(

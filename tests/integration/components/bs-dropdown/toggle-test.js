@@ -5,16 +5,16 @@ import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 
-module('Integration | Component | bs-dropdown/toggle', function(hooks) {
+module('Integration | Component | bs-dropdown/toggle', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     this.actions = {};
     this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
   });
 
-  test('toggle has correct default markup', async function(assert) {
+  test('toggle has correct default markup', async function (assert) {
     await render(hbs`<BsDropdown as |dd|><dd.toggle>Test</dd.toggle></BsDropdown>`);
 
     assert.dom('a').exists('toggle is an anchor tag by default');
@@ -23,7 +23,7 @@ module('Integration | Component | bs-dropdown/toggle', function(hooks) {
     assert.dom('a').hasAttribute('role', 'button', 'has role=button');
   });
 
-  test('clicking toggle sends onClick action', async function(assert) {
+  test('clicking toggle sends onClick action', async function (assert) {
     let action = this.spy();
     this.actions.click = action;
     await render(hbs`<BsDropdown as |dd|><dd.toggle @onClick={{action "click"}}>Test</dd.toggle></BsDropdown>`);
@@ -31,4 +31,3 @@ module('Integration | Component | bs-dropdown/toggle', function(hooks) {
     assert.ok(action.calledOnce, 'onClick action has been called.');
   });
 });
-

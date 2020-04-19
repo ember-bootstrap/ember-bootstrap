@@ -21,7 +21,7 @@ import { assert } from '@ember/debug';
  @public
  */
 @templateLayout(layout)
-@tagName("")
+@tagName('')
 export default class NavItem extends Component.extend(ComponentParent) {
   /**
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).
@@ -32,7 +32,7 @@ export default class NavItem extends Component.extend(ComponentParent) {
    * @type boolean
    * @public
    */
-  @overrideableCP('_disabled', function() {
+  @overrideableCP('_disabled', function () {
     return this._disabled;
   })
   disabled;
@@ -49,7 +49,7 @@ export default class NavItem extends Component.extend(ComponentParent) {
    * @type boolean
    * @public
    */
-  @overrideableCP('_active', function() {
+  @overrideableCP('_active', function () {
     return this._active;
   })
   active;
@@ -62,7 +62,7 @@ export default class NavItem extends Component.extend(ComponentParent) {
    * @property childLinks
    * @private
    */
-  @filter('children', function(view) {
+  @filter('children', function (view) {
     return view instanceof LinkComponent;
   })
   childLinks;
@@ -85,8 +85,7 @@ export default class NavItem extends Component.extend(ComponentParent) {
    * @event onClick
    * @public
    */
-  onClick() {
-  }
+  onClick() {}
 
   @action
   handleClick() {

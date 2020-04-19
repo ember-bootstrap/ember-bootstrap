@@ -15,7 +15,7 @@ Config.reopenClass({
         this[property] = config[property];
       }
     }
-  }
+  },
 });
 
 export default Config;

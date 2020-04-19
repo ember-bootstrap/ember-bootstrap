@@ -1,4 +1,4 @@
-import { action } from "@ember/object";
+import { action } from '@ember/object';
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/header/close';
@@ -11,14 +11,13 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/header/close';
  @private
  */
 @templateLayout(layout)
-@tagName("")
+@tagName('')
 export default class ModalHeaderClose extends Component {
   /**
    * @event onClick
    * @public
    */
-  onClick() {
-  }
+  onClick() {}
 
   @action
   handleClick() {

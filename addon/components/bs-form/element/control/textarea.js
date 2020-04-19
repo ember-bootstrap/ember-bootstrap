@@ -1,4 +1,4 @@
-import { action } from "@ember/object";
+import { action } from '@ember/object';
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/control/textarea';
 import Control from '../control';
@@ -11,7 +11,7 @@ import Control from '../control';
  @private
  */
 @templateLayout(layout)
-@tagName("")
+@tagName('')
 export default class FormElementControlTextarea extends Control {
   @action
   handleChange(event) {

@@ -18,13 +18,10 @@ const defaultOptions = {
   importBootstrapCSS: true,
   importBootstrapFont: false,
   insertEmberWormholeElementToDom: true,
-  bootstrapVersion: 4
+  bootstrapVersion: 4,
 };
 
-const supportedPreprocessors = [
-  'less',
-  'sass'
-];
+const supportedPreprocessors = ['less', 'sass'];
 
 const componentDependencies = {
   'bs-button-group': ['bs-button'],
@@ -34,7 +31,7 @@ const componentDependencies = {
   'bs-navbar': ['bs-nav', 'bs-button'],
   'bs-popover': ['bs-contextual-help'],
   'bs-tab': ['bs-nav'],
-  'bs-tooltip': ['bs-contextual-help']
+  'bs-tooltip': ['bs-contextual-help'],
 };
 
 const minimumBS4Version = '4.0.0-beta';
@@ -49,7 +46,7 @@ module.exports = {
 
   includedCommands() {
     return {
-      'bootstrap:info': require('./lib/commands/info')
+      'bootstrap:info': require('./lib/commands/info'),
     };
   },
 
@@ -63,7 +60,7 @@ module.exports = {
     if (options.bootstrapVersion === 4 && options.importBootstrapFont) {
       this.warn(
         'Inclusion of the Glyphicon font is only supported for Bootstrap 3. ' +
-        'Set Ember Bootstrap\'s `importBootstrapFont` option to `false` to hide this warning.'
+          "Set Ember Bootstrap's `importBootstrapFont` option to `false` to hide this warning."
       );
     }
     if (process.env.BOOTSTRAPVERSION) {
@@ -104,8 +101,7 @@ module.exports = {
 
   options: {
     '@embroider/macros': {
-      setOwnConfig: {
-      }
+      setOwnConfig: {},
     },
   },
 
@@ -117,17 +113,23 @@ module.exports = {
       let dep = checker.for('bootstrap');
 
       if (!dep.gte(minimumBS4Version)) {
-        this.warn(`For Bootstrap 4 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS4Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`);
+        this.warn(
+          `For Bootstrap 4 support this version of ember-bootstrap requires at least Bootstrap ${minimumBS4Version}, but you have ${dep.version}. Please run \`ember generate ember-bootstrap\` to update your dependencies!`
+        );
       }
     }
 
     if ('bootstrap' in bowerDependencies || 'bootstrap-sass' in bowerDependencies) {
-      this.warn('The dependencies for ember-bootstrap may be outdated. Please run `ember generate ember-bootstrap` to install appropriate dependencies!');
+      this.warn(
+        'The dependencies for ember-bootstrap may be outdated. Please run `ember generate ember-bootstrap` to install appropriate dependencies!'
+      );
     }
   },
 
   findPreprocessor() {
-    return supportedPreprocessors.find((name) => !!this.app.project.findAddonByName(`ember-cli-${name}`) && this.validatePreprocessor(name));
+    return supportedPreprocessors.find(
+      (name) => !!this.app.project.findAddonByName(`ember-cli-${name}`) && this.validatePreprocessor(name)
+    );
   },
 
   validatePreprocessor(name) {
@@ -135,15 +137,21 @@ module.exports = {
     switch (name) {
       case 'sass':
         if (!('bootstrap-sass' in dependencies) && this.getBootstrapVersion() === 3) {
-          this.warn('Npm package "bootstrap-sass" is missing, but is typically required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
+          this.warn(
+            'Npm package "bootstrap-sass" is missing, but is typically required for SASS support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'
+          );
         }
         break;
       case 'less':
         if (this.getBootstrapVersion() === 4) {
-          throw new SilentError('There is no Less support for Bootstrap 4! Falling back to importing static CSS. Consider switching to Sass for preprocessor support!');
+          throw new SilentError(
+            'There is no Less support for Bootstrap 4! Falling back to importing static CSS. Consider switching to Sass for preprocessor support!'
+          );
         }
         if (!('bootstrap' in dependencies)) {
-          this.warn('Npm package "bootstrap" is missing, but is typically required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!');
+          this.warn(
+            'Npm package "bootstrap" is missing, but is typically required for Less support. Please run `ember generate ember-bootstrap` to install the missing dependencies!'
+          );
         }
         break;
     }
@@ -182,7 +190,7 @@ module.exports = {
 
     // add sub folders to path
     if (parts.length > 1) {
-      let args = parts.map((part, i) => i === 0 ? result : part);
+      let args = parts.map((part, i) => (i === 0 ? result : part));
       result = path.join.apply(path, args);
     }
     return result;
@@ -195,7 +203,7 @@ module.exports = {
   treeForStyles() {
     if (this.hasPreprocessor()) {
       return new Funnel(this.getBootstrapStylesPath(), {
-        destDir: 'ember-bootstrap'
+        destDir: 'ember-bootstrap',
       });
     }
   },
@@ -203,7 +211,7 @@ module.exports = {
   treeForPublic() {
     if (this.getBootstrapVersion() === 3 && this.bootstrapOptions.importBootstrapFont) {
       return new Funnel(this.getBootstrapFontPath(), {
-        destDir: 'fonts'
+        destDir: 'fonts',
       });
     }
   },
@@ -211,16 +219,20 @@ module.exports = {
   treeForVendor(tree) {
     let trees = [tree];
     let versionTree = rename(
-      map(tree, 'ember-bootstrap/register-version.template', (c) => c.replace('###VERSION###', require('./package.json').version)),
+      map(tree, 'ember-bootstrap/register-version.template', (c) =>
+        c.replace('###VERSION###', require('./package.json').version)
+      ),
       'register-version.template',
       'register-version.js'
     );
     trees.push(versionTree);
 
     if (!this.hasPreprocessor()) {
-      trees.push(new Funnel(this.getBootstrapStylesPath(), {
-        destDir: 'ember-bootstrap'
-      }));
+      trees.push(
+        new Funnel(this.getBootstrapStylesPath(), {
+          destDir: 'ember-bootstrap',
+        })
+      );
     }
     return mergeTrees(trees, { overwrite: true });
   },
@@ -243,11 +255,11 @@ module.exports = {
 
     tree = this.debugTree(tree, 'addon-tree:input');
     tree = replace(tree, {
-      files: [ 'compatibility-helpers.js' ],
+      files: ['compatibility-helpers.js'],
       pattern: {
         match: /BOOTSTRAP_VERSION/g,
-        replacement: bsVersion
-      }
+        replacement: bsVersion,
+      },
     });
 
     tree = this.filterComponents(tree);
@@ -270,7 +282,11 @@ module.exports = {
   },
 
   contentFor(type, config) {
-    if (type === 'body-footer' && config.environment !== 'test' && this.bootstrapOptions.insertEmberWormholeElementToDom !== false) {
+    if (
+      type === 'body-footer' &&
+      config.environment !== 'test' &&
+      this.bootstrapOptions.insertEmberWormholeElementToDom !== false
+    ) {
       return '<div id="ember-bootstrap-wormhole"></div>';
     }
   },
@@ -289,7 +305,7 @@ module.exports = {
     }
 
     return new Funnel(tree, {
-      exclude: [(name) => this.excludeComponent(name, whitelist, blacklist)]
+      exclude: [(name) => this.excludeComponent(name, whitelist, blacklist)],
     });
   },
 
@@ -341,5 +357,5 @@ module.exports = {
 
     whitelist.forEach(_addToWhitelist);
     return list;
-  }
+  },
 };

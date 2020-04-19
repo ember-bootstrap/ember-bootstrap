@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'dummy',
     environment,
@@ -13,8 +13,8 @@ module.exports = function(environment) {
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
 
     APP: {
@@ -25,7 +25,7 @@ module.exports = function(environment) {
     bootstrapVersion: process.env.BOOTSTRAPVERSION || 4,
     failOnDeprecation: !!process.env.FAIL_ON_DEPRECATION,
     fastboot: {
-      hostWhitelist: [/^localhost:\d+$/]
+      hostWhitelist: [/^localhost:\d+$/],
     },
     'ember-a11y-testing': {
       componentOptions: {
@@ -34,11 +34,11 @@ module.exports = function(environment) {
           checks: {
             // color checks unfortunately fail for colors defined in dummy app, but are controlled at the end by
             // the user, so not a primary concern of the addon
-            'color-contrast': { enabled: false }
-          }
-        }
-      }
-    }
+            'color-contrast': { enabled: false },
+          },
+        },
+      },
+    },
   };
 
   if (environment === 'development') {

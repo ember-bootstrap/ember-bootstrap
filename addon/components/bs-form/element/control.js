@@ -34,6 +34,5 @@ export default class FormElementControl extends Component {
    * @param {*} value
    * @public
    */
-  onChange() {
-  }
+  onChange() {}
 }

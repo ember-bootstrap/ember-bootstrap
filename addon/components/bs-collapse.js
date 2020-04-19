@@ -29,7 +29,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @extends Ember.Component
   @public
 */
-@tagName("")
+@tagName('')
 @templateLayout(layout)
 export default class Collapse extends Component {
   /**
@@ -129,7 +129,10 @@ export default class Collapse extends Component {
   setCollapseSize(size) {
     let dimension = this.collapseDimension;
 
-    assert(`collapseDimension must be either "width" or "height". ${dimension} given.`, ["width", "height"].indexOf(dimension) !== -1);
+    assert(
+      `collapseDimension must be either "width" or "height". ${dimension} given.`,
+      ['width', 'height'].indexOf(dimension) !== -1
+    );
 
     this.set('collapseSize', size);
   }
@@ -177,7 +180,7 @@ export default class Collapse extends Component {
 
     this.setProperties({
       transitioning: true,
-      active: true
+      active: true,
     });
     this.setCollapseSize(this.collapsedSize);
 
@@ -192,7 +195,7 @@ export default class Collapse extends Component {
       this.onShown();
     });
 
-    next(this, function() {
+    next(this, function () {
       if (!this.isDestroyed) {
         this.setCollapseSize(this.getExpandedSize('show'));
       }
@@ -230,7 +233,7 @@ export default class Collapse extends Component {
 
     this.setProperties({
       transitioning: true,
-      active: false
+      active: false,
     });
     this.setCollapseSize(this.getExpandedSize('hide'));
 
@@ -245,7 +248,7 @@ export default class Collapse extends Component {
       this.onHidden();
     });
 
-    next(this, function() {
+    next(this, function () {
       if (!this.isDestroyed) {
         this.setCollapseSize(this.collapsedSize);
       }
