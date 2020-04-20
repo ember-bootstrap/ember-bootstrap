@@ -54,6 +54,8 @@ jobs:
       - test
     strategy:
       matrix:
+        command:
+          - ember test
         scenario:
           - ember-lts-3.16
           - ember-release
@@ -65,6 +67,8 @@ jobs:
           - 3
           - 4
         include:
+          - scenario: ember-default
+            command: ember test --launch Firefox
           - scenario: fastboot-tests
           - scenario: node-tests
     steps:
@@ -77,7 +81,7 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Test
-        run: yarn ember try:one ${{ matrix.scenario }}
+        run: yarn ember try:one ${{ matrix.scenario }} --- ${{ matrix.command }}
         env:
           BOOTSTRAPVERSION: ${{ matrix.bootstrap }}
 
