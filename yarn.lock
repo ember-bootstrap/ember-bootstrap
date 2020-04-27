@@ -6278,27 +6278,7 @@ ember-cli-htmlbars-inline-precompile@^2.1.0:
     heimdalljs-logger "^0.1.9"
     silent-error "^1.1.0"
 
-ember-cli-htmlbars@^4.2.0:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-4.2.1.tgz#c74c5deba6025c8e80d84289a88901073e1ca1f7"
-  integrity sha512-jZ9LYO4R6ieYC5Bcei4RWbK2/SY0LDQ5cUIyt9YQpN/VU7A9G+es9w7FJYfHtDD+TxvaXDKMuXAeBwOz+mZKPA==
-  dependencies:
-    "@ember/edition-utils" "^1.2.0"
-    babel-plugin-htmlbars-inline-precompile "^3.0.1"
-    broccoli-debug "^0.6.5"
-    broccoli-persistent-filter "^2.3.1"
-    broccoli-plugin "^3.1.0"
-    common-tags "^1.8.0"
-    ember-cli-babel-plugin-helpers "^1.1.0"
-    fs-tree-diff "^2.0.1"
-    hash-for-dep "^1.5.1"
-    heimdalljs-logger "^0.1.10"
-    json-stable-stringify "^1.0.1"
-    semver "^7.0.0"
-    strip-bom "^4.0.0"
-    walk-sync "^2.0.2"
-
-ember-cli-htmlbars@^4.2.3:
+ember-cli-htmlbars@^4.2.0, ember-cli-htmlbars@^4.2.3:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-4.3.1.tgz#4af8adc21ab3c4953f768956b7f7d207782cb175"
   integrity sha512-CW6AY/yzjeVqoRtItOKj3hcYzc5dWPRETmeCzr2Iqjt5vxiVtpl0z5VTqHqIlT5fsFx6sGWBQXNHIe+ivYsxXQ==
@@ -6713,10 +6693,10 @@ ember-on-helper@^0.1.0:
   dependencies:
     ember-cli-babel "^7.7.3"
 
-ember-popper@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/ember-popper/-/ember-popper-0.11.0.tgz#90fb1aa4ae509562ddcca2c5f2a547bb1b57180d"
-  integrity sha512-dSKd9Ic6924kqxchCWzcPCRirnKo6YoDJTwP1cPs0nKTq/JC7J112SbkkrJFXPUuOncF2fe8lP5tzy0Ro7J+Yg==
+ember-popper@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/ember-popper/-/ember-popper-0.11.1.tgz#38800d417bfff19334aeb01b7f73df2bc502a0c0"
+  integrity sha512-YKAuVw6zUTBPFlWWTzfswcGyUfgtVkRYu2vJ/LDWRuc8rhgYEuaLi6nGCk/Nci3WtfVWJb5kMVOxMS1dyGK5Tg==
   dependencies:
     ember-cli-babel "^7.13.0"
     ember-cli-htmlbars "^4.2.0"
