@@ -42,7 +42,7 @@
     "@ember/render-modifiers": "^1.0.2",
     "@embroider/macros": "^0.14.0",
     "broccoli-debug": "^0.6.3",
-    "broccoli-funnel": "^2.0.0",
+    "broccoli-funnel": "^3.0.2",
     "broccoli-merge-trees": "^4.2.0",
     "broccoli-stew": "^2.0.0",
     "broccoli-string-replace": "^0.1.2",
