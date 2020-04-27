@@ -46,7 +46,7 @@
     "broccoli-merge-trees": "^4.2.0",
     "broccoli-stew": "^2.0.0",
     "broccoli-string-replace": "^0.1.2",
-    "chalk": "^2.1.0",
+    "chalk": "^4.0.0",
     "ember-cli-babel": "^7.18.0",
     "ember-cli-build-config-editor": "0.5.0",
     "ember-cli-htmlbars": "^4.2.3",
