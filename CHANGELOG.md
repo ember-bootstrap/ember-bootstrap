@@ -1,3 +1,47 @@
+## v4.0.0-rc.0 (2020-04-28)
+
+#### :boom: Breaking Change
+* [#1037](https://github.com/kaliber5/ember-bootstrap/pull/1037) Drop support for Ember 3.15 ([@simonihmig](https://github.com/simonihmig))
+* [#1004](https://github.com/kaliber5/ember-bootstrap/pull/1004) Drop deprecated arguments for HTML attributes of Form and Button components ([@simonihmig](https://github.com/simonihmig))
+* [#932](https://github.com/kaliber5/ember-bootstrap/pull/932) radio group should have a legend not a label ([@jelhan](https://github.com/jelhan))
+* [#965](https://github.com/kaliber5/ember-bootstrap/pull/965) drop support for ember < 3.15 and node 8 ([@jelhan](https://github.com/jelhan))
+
+#### Bug Fixes
+* [#1041](https://github.com/kaliber5/ember-bootstrap/pull/1041) Fix autofocus for Modals in IE11 ([@simonihmig](https://github.com/simonihmig))
+* [#982](https://github.com/kaliber5/ember-bootstrap/pull/982) Fix ARIA role of progress bars, convert to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#932](https://github.com/kaliber5/ember-bootstrap/pull/932) radio group should have a legend not a label ([@jelhan](https://github.com/jelhan))
+
+#### Internal
+* [#1045](https://github.com/kaliber5/ember-bootstrap/pull/1045) Add dependabot setup ([@simonihmig](https://github.com/simonihmig))
+* [#1043](https://github.com/kaliber5/ember-bootstrap/pull/1043) Add Github Actions setup ([@simonihmig](https://github.com/simonihmig))
+* [#1038](https://github.com/kaliber5/ember-bootstrap/pull/1038) setup prettier ([@jelhan](https://github.com/jelhan))
+* [#1040](https://github.com/kaliber5/ember-bootstrap/pull/1040) setup release-it with lerna-changelog integration ([@jelhan](https://github.com/jelhan))
+* [#1023](https://github.com/kaliber5/ember-bootstrap/pull/1023) Use `@embroider/macros` for built-time transforms ([@simonihmig](https://github.com/simonihmig))
+* [#1007](https://github.com/kaliber5/ember-bootstrap/pull/1007) Remove usage of `this.get()` ([@simonihmig](https://github.com/simonihmig))
+* [#1006](https://github.com/kaliber5/ember-bootstrap/pull/1006) Remove Bootstrap version specific trees ([@simonihmig](https://github.com/simonihmig))
+* [#1005](https://github.com/kaliber5/ember-bootstrap/pull/1005) Convert Form to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#1002](https://github.com/kaliber5/ember-bootstrap/pull/1002) Convert Carousel to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#1001](https://github.com/kaliber5/ember-bootstrap/pull/1001) Convert Accordion to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#998](https://github.com/kaliber5/ember-bootstrap/pull/998) Convert Tab to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#997](https://github.com/kaliber5/ember-bootstrap/pull/997) Convert Navbar to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#996](https://github.com/kaliber5/ember-bootstrap/pull/996) Convert Collapse to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#993](https://github.com/kaliber5/ember-bootstrap/pull/993) Use public in-element through polyfill ([@simonihmig](https://github.com/simonihmig))
+* [#992](https://github.com/kaliber5/ember-bootstrap/pull/992) Use build helpers / first set of migration ([@simonihmig](https://github.com/simonihmig))
+* [#988](https://github.com/kaliber5/ember-bootstrap/pull/988) Convert Navs to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#985](https://github.com/kaliber5/ember-bootstrap/pull/985) Convert ButtonGroup to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#981](https://github.com/kaliber5/ember-bootstrap/pull/981) Convert Modals to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#980](https://github.com/kaliber5/ember-bootstrap/pull/980) Convert Button and Dropdown to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#982](https://github.com/kaliber5/ember-bootstrap/pull/982) Fix ARIA role of progress bars, convert to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#976](https://github.com/kaliber5/ember-bootstrap/pull/976) Convert Alert to tag-less / outerHTML component ([@simonihmig](https://github.com/simonihmig))
+* [#970](https://github.com/kaliber5/ember-bootstrap/pull/970) add template linting for tests ([@jelhan](https://github.com/jelhan))
+* [#966](https://github.com/kaliber5/ember-bootstrap/pull/966) refactor component invocation in tests to angle brackets syntax ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 4
+- Jacob Jewell ([@jakesjews](https://github.com/jakesjews))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 
 ## 3.1.3 (2020-04-11)
 
