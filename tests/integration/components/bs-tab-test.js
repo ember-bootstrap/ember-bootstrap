@@ -1,6 +1,6 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click } from '@ember/test-helpers';
+import { render, click, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import test from 'ember-sinon-qunit/test-support/test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -146,6 +146,46 @@ module('Integration | Component | bs-tab', function (hooks) {
     assertActiveTab.call(this, assert, 1, false);
 
     this.set('paneId', 'pane2');
+    await settled();
+
+    assertActiveTab.call(this, assert, 0, false);
+    assertActiveTab.call(this, assert, 1, true);
+  });
+
+  test('first tab is active by default [fade]', async function (assert) {
+    await render(hbs`
+      <BsTab @fade={{true}} as |tab|>
+        <tab.pane @title="Tab 1">
+          tabcontent 1
+        </tab.pane>
+        <tab.pane @title="Tab 2">
+          tabcontent 2
+        </tab.pane>
+      </BsTab>
+    `);
+
+    assertActiveTab.call(this, assert, 0, true);
+    assertActiveTab.call(this, assert, 1, false);
+  });
+
+  test('activeId activates tabs [fade]', async function (assert) {
+    this.set('paneId', 'pane1');
+    await render(hbs`
+      <BsTab @fade={{true}} @activeId={{paneId}} as |tab|>
+        <tab.pane @id="pane1" @title="Tab 1">
+          tabcontent 1
+        </tab.pane>
+        <tab.pane @id="pane2" @title="Tab 2">
+          tabcontent 2
+        </tab.pane>
+      </BsTab>
+    `);
+
+    assertActiveTab.call(this, assert, 0, true);
+    assertActiveTab.call(this, assert, 1, false);
+
+    this.set('paneId', 'pane2');
+    await settled();
 
     assertActiveTab.call(this, assert, 0, false);
     assertActiveTab.call(this, assert, 1, true);
