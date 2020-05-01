@@ -1,3 +1,4 @@
+{{!-- template-lint-disable no-positive-tabindex --}}
 {{#each @options as |option index|}}
   {{#let (concat @id "-" index) as |id|}}
     {{#if (macroCondition (macroGetOwnConfig "isBS3"))}}
@@ -15,7 +16,6 @@
             required={{@required}}
             disabled={{@disabled}}
             autofocus={{@autofocus}}
-            {{!-- template-lint-disable no-positive-tabindex --}}
             tabindex={{@tabindex}}
             form={{@form}}
             title={{@title}}
@@ -46,7 +46,6 @@
               required={{@required}}
               disabled={{@disabled}}
               autofocus={{@autofocus}}
-              {{!-- template-lint-disable no-positive-tabindex --}}
               tabindex={{@tabindex}}
               form={{@form}}
               title={{@title}}
@@ -76,7 +75,6 @@
           required={{@required}}
           disabled={{@disabled}}
           autofocus={{@autofocus}}
-          {{!-- template-lint-disable no-positive-tabindex --}}
           tabindex={{@tabindex}}
           form={{@form}}
           title={{@title}}
