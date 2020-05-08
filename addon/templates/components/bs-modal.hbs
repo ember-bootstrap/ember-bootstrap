@@ -52,7 +52,7 @@
         </Dialog>
         <div>
           {{#if this.showBackdrop}}
-            <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal this.showClass}}" id={{this.backdropId}} ></div>
+            <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
           {{/if}}
         </div>
       {{/in-element}}
