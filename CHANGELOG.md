@@ -1,3 +1,17 @@
+## v4.0.0-rc.1 (2020-05-08)
+
+#### Bug Fixes
+* [#1068](https://github.com/kaliber5/ember-bootstrap/pull/1068) Fix modal backdrop visibility class ([@lolmaus](https://github.com/lolmaus))
+* [#1061](https://github.com/kaliber5/ember-bootstrap/pull/1061) Fix first tab pane being active by default ([@simonihmig](https://github.com/simonihmig))
+
+#### Internal
+* [#930](https://github.com/kaliber5/ember-bootstrap/pull/930) Test addon build with embroider ([@simonihmig](https://github.com/simonihmig))
+
+#### Committers: 3
+- Andrey Mikhaylov (lolmaus) ([@lolmaus](https://github.com/lolmaus))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.0.0-rc.0 (2020-04-28)
 
 #### :boom: Breaking Change
