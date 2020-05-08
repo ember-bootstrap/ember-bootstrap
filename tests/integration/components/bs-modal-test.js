@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, triggerEvent } from '@ember/test-helpers';
-import { test } from '../../helpers/bootstrap-test';
+import { test, visibilityClass } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 
@@ -188,5 +188,19 @@ module('Integration | Component | bs-modal', function (hooks) {
     await click('.modal');
 
     assert.dom('.modal').doesNotExist('Modal closes itself as normal');
+  });
+
+  test('backdrop=true adds backdrop element, renderInPlace = false', async function (assert) {
+    await render(hbs`<BsModal @backdrop={{true}}>Hello world!</BsModal>`);
+
+    assert.dom('.modal-backdrop').exists({ count: 1 }, 'Modal has backdrop element');
+    assert.dom('.modal-backdrop').hasClass(visibilityClass(), 'Modal backdrop has visibility class');
+  });
+
+  test('backdrop=true adds backdrop element, renderInPlace = true', async function (assert) {
+    await render(hbs`<BsModal @backdrop={{true}} @renderInPlace={{true}}>Hello world!</BsModal>`);
+
+    assert.dom('.modal-backdrop').exists({ count: 1 }, 'Modal has backdrop element');
+    assert.dom('.modal-backdrop').hasClass(visibilityClass(), 'Modal backdrop has visibility class');
   });
 });
