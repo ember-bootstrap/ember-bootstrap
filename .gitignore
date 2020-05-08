@@ -20,8 +20,6 @@
 /testem.log
 /yarn-error.log
 
-.idea
-*.iml
 .publish
 .env
 *.pid
@@ -33,3 +31,8 @@
 /bower.json.ember-try
 /package.json.ember-try
 
+# IDE
+/.idea/
+/*.iml
+/.vscode/
+/.history/
