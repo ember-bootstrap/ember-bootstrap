@@ -97,7 +97,7 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-qunit": "^4.6.0",
     "ember-ref-modifier": "^1.0.0",
-    "ember-resolver": "^7.0.0",
+    "ember-resolver": "^8.0.0",
     "ember-sinon": "^4.0.0",
     "ember-sinon-qunit": "^3.4.0",
     "ember-source": "~3.17.0",
