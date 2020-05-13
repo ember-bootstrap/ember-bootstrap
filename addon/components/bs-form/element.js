@@ -1,7 +1,8 @@
 import { layout as templateLayout } from '@ember-decorators/component';
 import { alias, and, equal, gt, notEmpty, or } from '@ember/object/computed';
 import { action, computed, defineProperty } from '@ember/object';
-import { assert, runInDebug, warn } from '@ember/debug';
+import { assert, warn } from '@ember/debug';
+import { DEBUG } from '@glimmer/env';
 import { isBlank, typeOf } from '@ember/utils';
 import { A, isArray } from '@ember/array';
 import { getOwner } from '@ember/application';
@@ -859,7 +860,7 @@ export default class FormElement extends FormGroup {
     }
 
     // deprecate arguments used for attribute bindings only
-    runInDebug(() => {
+    if (DEBUG) {
       [
         ['accept', 'image/png'],
         ['autocapitalize', 'words'],
@@ -922,7 +923,7 @@ export default class FormElement extends FormGroup {
           }
         );
       });
-    });
+    }
   }
 
   /*
