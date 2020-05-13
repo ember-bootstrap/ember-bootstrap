@@ -9,6 +9,7 @@ import layout from 'ember-bootstrap/templates/components/bs-form';
 import RSVP from 'rsvp';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
+import { DEBUG } from '@glimmer/env';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -473,21 +474,23 @@ export default class Form extends Component {
       ['vertical', 'horizontal', 'inline'].indexOf(formLayout) >= 0
     );
 
-    warn(
-      `Argument novalidate of <BsForm> component has been removed. ` +
-        `It's only purpose was setting the HTML attribute novalidate of the <form> element. ` +
-        `You should use  angle bracket component invocation syntax instead:\n` +
-        `Before:n` +
-        `  {{bs-form novalidate=true}}\n` +
-        `  <BsForm @novalidate={{true}} />\n` +
-        `After:\n` +
-        `  <BsForm novalidate>`,
-      // eslint-disable-next-line ember/no-attrs-in-components
-      !Object.keys(this.attrs).includes('novalidate'),
-      {
-        id: `ember-bootstrap.removed-argument.form#novalidate`,
-      }
-    );
+    if (DEBUG) {
+      warn(
+        `Argument novalidate of <BsForm> component has been removed. ` +
+          `It's only purpose was setting the HTML attribute novalidate of the <form> element. ` +
+          `You should use  angle bracket component invocation syntax instead:\n` +
+          `Before:n` +
+          `  {{bs-form novalidate=true}}\n` +
+          `  <BsForm @novalidate={{true}} />\n` +
+          `After:\n` +
+          `  <BsForm novalidate>`,
+        // eslint-disable-next-line ember/no-attrs-in-components
+        !Object.keys(this.attrs).includes('novalidate'),
+        {
+          id: `ember-bootstrap.removed-argument.form#novalidate`,
+        }
+      );
+    }
   }
 
   @action
