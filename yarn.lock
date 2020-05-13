@@ -5640,7 +5640,7 @@ ember-assign-polyfill@^2.6.0:
     ember-cli-babel "^6.16.0"
     ember-cli-version-checker "^2.0.0"
 
-ember-auto-import@^1.2.15, ember-auto-import@^1.4.1:
+ember-auto-import@^1.2.15, ember-auto-import@^1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/ember-auto-import/-/ember-auto-import-1.5.3.tgz#b32936f874d1ed7057ad2ed3f6116357820be44b"
   integrity sha512-7JfdunM1BmLy/lyUXu7uEoi0Gi4+dxkGM23FgIEyW5g7z4MidhP53Fc61t49oPSnq7+J4lLpbH1f6C+mDMgb4A==
@@ -6186,15 +6186,15 @@ ember-export-application-global@^2.0.1:
   resolved "https://registry.yarnpkg.com/ember-export-application-global/-/ember-export-application-global-2.0.1.tgz#b120a70e322ab208defc9e2daebe8d0dfc2dcd46"
   integrity sha512-B7wiurPgsxsSGzJuPFkpBWnaeuCu2PGpG2BjyrfA1VcL7//o+5RSnZqiCEY326y7qmxb2GoCgo0ft03KBU0rRw==
 
-ember-focus-trap@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/ember-focus-trap/-/ember-focus-trap-0.3.2.tgz#575239d2a2018b0cf17f825562396f15beb23c1b"
-  integrity sha512-tjJDZw1NJm0m6dlKswY/DuGTYD22yMUw8j3ZMsv5EbZ+/U+gB1ktyq2w5/mgvFVzRB4QmYxSr3h/tOGCkXy1yA==
+ember-focus-trap@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/ember-focus-trap/-/ember-focus-trap-0.4.0.tgz#b69a3a65a49784e2b3a19082655a585cfdaad473"
+  integrity sha512-NHKjTS1xoSS+fURDhAp5oyR7ZTTBnC4KVGw/VlUbFolx7jdLCePHuQdhnrhT02B1VP1dlX2RxnNvNiT2IcoA1w==
   dependencies:
-    ember-auto-import "^1.4.1"
-    ember-cli-babel "^7.11.0"
-    ember-modifier-manager-polyfill "^1.1.0"
-    focus-trap "^5.0.1"
+    ember-auto-import "^1.5.3"
+    ember-cli-babel "^7.18.0"
+    ember-modifier-manager-polyfill "^1.2.0"
+    focus-trap "^5.1.0"
 
 ember-get-config@^0.2.4:
   version "0.2.4"
@@ -7487,7 +7487,7 @@ flush-write-stream@^1.0.0, flush-write-stream@^1.0.2:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-focus-trap@^5.0.1:
+focus-trap@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-5.1.0.tgz#64a0bfabd95c382103397dbc96bfef3a3cf8e5ad"
   integrity sha512-CkB/nrO55069QAUjWFBpX6oc+9V90Qhgpe6fBWApzruMq5gnlh90Oo7iSSDK7pKiV5ugG6OY2AXM5mxcmL3lwQ==

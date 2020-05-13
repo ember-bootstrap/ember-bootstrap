@@ -54,7 +54,7 @@
     "ember-concurrency": "^1.1.7",
     "ember-decorators": "^6.1.0",
     "ember-element-helper": "^0.2.0",
-    "ember-focus-trap": "^0.3.2",
+    "ember-focus-trap": "^0.4.0",
     "ember-in-element-polyfill": "^1.0.0",
     "ember-on-helper": "^0.1.0",
     "ember-popper": "^0.11.2",
