@@ -653,10 +653,10 @@ export default class FormElement extends FormGroup {
     'showValidation',
     'showModelValidation',
     'isValidating',
-    '__disabled'
+    '_disabled'
   )
   get validation() {
-    if (!this.showValidation || !this.hasValidator || this.isValidating || this.disabled) {
+    if (!this.showValidation || !this.hasValidator || this.isValidating || this._disabled) {
       return null;
     } else if (this.showModelValidation) {
       /* The display of model validation messages has been triggered */
