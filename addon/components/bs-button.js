@@ -3,7 +3,8 @@ import { observes } from '@ember-decorators/object';
 import { computed, action } from '@ember/object';
 import { equal, or } from '@ember/object/computed';
 import { scheduleOnce } from '@ember/runloop';
-import { runInDebug, warn } from '@ember/debug';
+import { warn } from '@ember/debug';
+import { DEBUG } from '@glimmer/env';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-button';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
@@ -466,7 +467,7 @@ export default class Button extends Component {
     super.init(...arguments);
 
     // deprecate arguments used for attribute bindings only
-    runInDebug(() => {
+    if (DEBUG) {
       [
         // ['buttonType:type', 'submit'],
         ['disabled', true],
@@ -493,6 +494,6 @@ export default class Button extends Component {
           }
         );
       });
-    });
+    }
   }
 }
