@@ -1048,10 +1048,10 @@
   resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.42.2.tgz#9cf8d6f8f5eee6bfcfa36919ca68ae716e1f78db"
   integrity sha512-7LOuQd02cxxNNHChzdHMAU8/qOeQvTro141CU5tXITP7z6aOv2D2gkFdau97lLQiVxezGrh8J7h8GCuF7TEqtg==
 
-"@glimmer/interfaces@^0.50.4":
-  version "0.50.4"
-  resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.50.4.tgz#b92c92bce4afb2488f1335a2ac095c686d96812c"
-  integrity sha512-Unca/P41yhOTK9EVSoFdnKoAs5IY2NbXrBEhXhD5E+Sp76pux+4YknxD+sOuAynaxAcarUcj37u95ZO8TGGC1w==
+"@glimmer/interfaces@^0.51.1":
+  version "0.51.1"
+  resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.51.1.tgz#c5637669ff83c630d91c700598b9963225d656f2"
+  integrity sha512-ImwkFNj92RaeANQPlnSQ5kTtK18JzkY2FPE7N7Ktn3AvdXgM4P3puQzPuXhTn4UCBl6NZtN8YqCAy7kQ6eRC0w==
   dependencies:
     "@simple-dom/interface" "^1.4.0"
 
@@ -1099,13 +1099,13 @@
     handlebars "^4.0.13"
     simple-html-tokenizer "^0.5.8"
 
-"@glimmer/syntax@^0.50.3":
-  version "0.50.4"
-  resolved "https://registry.yarnpkg.com/@glimmer/syntax/-/syntax-0.50.4.tgz#974c7d98f281d688d02c456bb774099a4a48480b"
-  integrity sha512-LcxISf0Qs2uiSnKCflmkJIDkNreo72fKcfq3JfkGsIU3w4wWjr1rHVA17xWKSljCyb9NeFXGlzxu7/rwh8EApA==
+"@glimmer/syntax@^0.51.1":
+  version "0.51.1"
+  resolved "https://registry.yarnpkg.com/@glimmer/syntax/-/syntax-0.51.1.tgz#24cb4f01693bd934075d03087bdc76ab6bff0524"
+  integrity sha512-z5XSbLgMKGU8tgSm9Ju4mimSAJ6/SZrY2Xw2znEAmUJOIPte+tmkdpggpgj7lAjD5u2YVBVHDbz6RaZDhYASsw==
   dependencies:
-    "@glimmer/interfaces" "^0.50.4"
-    "@glimmer/util" "^0.50.4"
+    "@glimmer/interfaces" "^0.51.1"
+    "@glimmer/util" "^0.51.1"
     handlebars "^4.7.4"
     simple-html-tokenizer "^0.5.9"
 
@@ -1127,13 +1127,13 @@
   resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.44.0.tgz#45df98d73812440206ae7bda87cfe04aaae21ed9"
   integrity sha512-duAsm30uVK9jSysElCbLyU6QQYO2X9iLDLBIBUcCqck9qN1o3tK2qWiHbGK5d6g8E2AJ4H88UrfElkyaJlGrwg==
 
-"@glimmer/util@^0.50.4":
-  version "0.50.4"
-  resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.50.4.tgz#94a6a6a049c5c8af6e88f951d94a27d200700278"
-  integrity sha512-lKKGe5rbuSHRPBp4JdSyOVW4AvU/LONEtxuGsSVh0KltSR8zuEYPBjLIwe54g4Gumj9om5yg6zC/WNozKOjdzA==
+"@glimmer/util@^0.51.1":
+  version "0.51.1"
+  resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.51.1.tgz#db27afd2ee7191e8e399c272b9f7fbe05cc26691"
+  integrity sha512-MCwUvV3z4pqLpeXcv5Mbchdgw0GeEPH8jUEkUTG837b5XlC2M/NO893E5A8AZbGNSP7CDsYibDExz7mjaLqq/A==
   dependencies:
     "@glimmer/env" "0.1.7"
-    "@glimmer/interfaces" "^0.50.4"
+    "@glimmer/interfaces" "^0.51.1"
     "@simple-dom/interface" "^1.4.0"
 
 "@glimmer/validator@^0.44.0":
@@ -4567,6 +4567,11 @@ commander@^5.0.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-5.0.0.tgz#dbf1909b49e5044f8fdaf0adc809f0c0722bdfd0"
   integrity sha512-JrDGPAKjMGSP1G0DUoaceEJ3DZgAfr/q6X7FVk4+U5KxUSKviYGM2k6zWkfyyBHy5rAtzgYJFa1ro2O9PtoxwQ==
 
+commander@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
+  integrity sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==
+
 common-tags@^1.4.0, common-tags@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.8.0.tgz#8e3153e542d4a39e9b10554434afaaf98956a937"
@@ -6126,30 +6131,32 @@ ember-style-modifier@^0.5.0:
     ember-cli-babel "^7.11.1"
     ember-modifier "^1.0.2"
 
-ember-template-lint@^2.4.0:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-2.5.2.tgz#f1f9c3b1f3355f1a82870fbc81f672ae80e375fe"
-  integrity sha512-IwZziVgoWzqbfLCAQiCkwQ3jv6ZsPF2/pvu7ep3giAdNWbQKVx5NFrktQ+cy8tOG+QYmgrN9v7+8BkMgmE+21Q==
+ember-template-lint@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-2.8.0.tgz#01ddc6daf9c8497fe5cfcc55cde25f203a7d8bd3"
+  integrity sha512-tK4aJewdmtVUGSnX/1MR6TuSFAhmIL/CUsUeW33pQsf324l96XzhPP+66G06vjWw8iLW2zK2Rbh5HnEL+IDZsA==
   dependencies:
     chalk "^4.0.0"
-    ember-template-recast "^4.1.2"
+    ember-template-recast "^4.1.4"
     find-up "^4.1.0"
+    get-stdin "^8.0.0"
     globby "^11.0.0"
+    is-valid-glob "^1.0.0"
     micromatch "^4.0.2"
-    resolve "^1.15.1"
+    resolve "^1.17.0"
     yargs "^15.3.1"
 
-ember-template-recast@^4.1.2:
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/ember-template-recast/-/ember-template-recast-4.1.3.tgz#a2b925bd606a433de5b4826874f7f34f068af6ce"
-  integrity sha512-QxuAGZokAanPjaDrVLQb+IbtikSWdonheA2hPFEH0oTDCGwKNKOEQ85KoXEyhKDITFJ24EXLBfTwdRpxc+8q6Q==
+ember-template-recast@^4.1.4:
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/ember-template-recast/-/ember-template-recast-4.1.4.tgz#0552f4f27d33b17ac05a48107f369032eb45fb97"
+  integrity sha512-jw38ncM5uJu7INVWYCmm4GNIEdGVLkjABWbj451A83Ag4lBfXIbIHq+5IM7rFzUlw/Ho39WxeKhKZ5KTvIVljQ==
   dependencies:
-    "@glimmer/syntax" "^0.50.3"
+    "@glimmer/syntax" "^0.51.1"
     async-promise-queue "^1.0.5"
     colors "^1.4.0"
-    commander "^5.0.0"
+    commander "^5.1.0"
     globby "^11.0.0"
-    ora "^4.0.3"
+    ora "^4.0.4"
     slash "^3.0.0"
     tmp "^0.1.0"
     workerpool "^5.0.4"
@@ -7535,6 +7542,11 @@ get-stdin@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-6.0.0.tgz#9e09bf712b360ab9225e812048f71fde9c89657b"
   integrity sha512-jp4tHawyV7+fkkSKyvjuLZswblUtz+SQKzSWnBbii16BuZksJlU1wuBYXY75r+duh/llF1ur6oNwi+2ZzjKZ7g==
+
+get-stdin@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-8.0.0.tgz#cbad6a73feb75f6eeb22ba9e01f89aa28aa97a53"
+  integrity sha512-sY22aA6xchAzprjyqmSEQv4UbAAzRN0L2dQB0NlN5acTTK9Don6nhoc3eAbUnpZiCANAMfd/+40kVdKfFygohg==
 
 get-stream@3.0.0, get-stream@^3.0.0:
   version "3.0.0"
@@ -10907,7 +10919,7 @@ optionator@^0.8.1, optionator@^0.8.3:
     type-check "~0.3.2"
     word-wrap "~1.2.3"
 
-ora@4.0.4, ora@^4.0.3:
+ora@4.0.4, ora@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/ora/-/ora-4.0.4.tgz#e8da697cc5b6a47266655bf68e0fb588d29a545d"
   integrity sha512-77iGeVU1cIdRhgFzCK8aw1fbtT1B/iZAvWjS+l/o1x0RShMgxHUZaD2yDpWsNCPwXg9z1ZA78Kbdvr8kBmG/Ww==
