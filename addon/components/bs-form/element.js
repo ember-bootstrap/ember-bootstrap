@@ -1,6 +1,6 @@
 import { layout as templateLayout } from '@ember-decorators/component';
-import { alias, and, equal, gt, notEmpty, or } from '@ember/object/computed';
-import { action, computed, defineProperty } from '@ember/object';
+import { and, equal, gt, notEmpty, or } from '@ember/object/computed';
+import { action, computed, get } from '@ember/object';
 import { assert, warn } from '@ember/debug';
 import { DEBUG } from '@glimmer/env';
 import { isBlank, typeOf } from '@ember/utils';
@@ -271,6 +271,24 @@ export default class FormElement extends FormGroup {
    * @property value
    * @public
    */
+  get value() {
+    if (this.property && this.model) {
+      return get(this.model, this.property);
+    }
+    return this._value;
+  }
+
+  set value(value) {
+    this._value = value;
+  }
+
+  /**
+   * Cache for value
+   * @type {null}
+   * @private
+   */
+  @defaultValue
+  _value = null;
 
   /**
    The property name of the form element's `model` (by default the `model` of its parent `Components.Form`) that this
@@ -851,11 +869,7 @@ export default class FormElement extends FormGroup {
       this.set('showValidationOn', ['focusOut']);
     }
     if (!isBlank(this.property)) {
-      assert(
-        'You cannot set both property and value on a form element',
-        this.value === null || this.value === undefined
-      );
-      defineProperty(this, 'value', alias(`model.${this.property}`));
+      assert('You cannot set both property and value on a form element', this._value === null);
       this.setupValidations();
     }
 
