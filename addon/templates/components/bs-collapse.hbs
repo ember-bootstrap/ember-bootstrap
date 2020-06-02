@@ -3,8 +3,8 @@
   ...attributes
   {{ref this "_element"}}
   {{style
-    width=(if (bs-eq this.collapseDimension "width") (concat this.collapseSize "px"))
-    height=(if (bs-eq this.collapseDimension "height") (concat this.collapseSize "px"))
+    width=(if (bs-eq this.collapseDimension "height") (if this.width (concat this.collapseSize "px") ""))
+    height=(if (bs-eq this.collapseDimension "height") (if this.collapseSize (concat this.collapseSize "px") ""))
   }}
 >
   {{yield}}
