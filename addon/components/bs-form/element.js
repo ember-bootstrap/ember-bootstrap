@@ -871,7 +871,6 @@ export default class FormElement extends FormGroup {
       this.set('showValidationOn', ['focusOut']);
     }
     if (!isBlank(this.property)) {
-      assert('You cannot set both property and value on a form element', this._value === null);
       this.setupValidations();
     }
 
