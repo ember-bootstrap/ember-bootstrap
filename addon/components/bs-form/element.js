@@ -279,6 +279,8 @@ export default class FormElement extends FormGroup {
   }
 
   set value(value) {
+    assert('You cannot set both property and value on a form element', isBlank(this.property));
+
     this._value = value;
   }
 
