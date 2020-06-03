@@ -261,7 +261,7 @@ export default class FormElement extends FormGroup {
    * get/set the control element's value:
    *
    * ```hbs
-   * <form.element controlType="email" label="Email" value={{email}} />
+   * <form.element @controlType="email" @label="Email" @value={{this.email}} />
    * ```
    *
    * Note: you lose the ability to validate this form element by directly binding to its value. It is recommended
