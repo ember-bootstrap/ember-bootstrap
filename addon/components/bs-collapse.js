@@ -10,6 +10,7 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { assert } from '@ember/debug';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { computed } from '@ember/object';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -31,6 +32,7 @@ import { computed } from '@ember/object';
   @public
 */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class Collapse extends Component {
   /**

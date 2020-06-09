@@ -3,6 +3,7 @@ import { computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-nav';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)
@@ -83,6 +84,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class Nav extends Component {
   @computed('type')
   get typeClass() {

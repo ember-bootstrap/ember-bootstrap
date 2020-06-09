@@ -9,6 +9,7 @@ import layout from 'ember-bootstrap/templates/components/bs-nav/item';
 import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
 import { assert } from '@ember/debug';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
 
@@ -22,6 +23,7 @@ import { assert } from '@ember/debug';
  */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class NavItem extends Component.extend(ComponentParent) {
   /**
    * Render the nav item as disabled (see [Bootstrap docs](http://getbootstrap.com/components/#nav-disabled-links)).

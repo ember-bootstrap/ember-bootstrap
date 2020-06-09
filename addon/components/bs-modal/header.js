@@ -2,6 +2,7 @@ import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/header';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
 
@@ -13,6 +14,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  @public
  */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class ModalHeader extends Component {
   /**

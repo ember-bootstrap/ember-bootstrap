@@ -7,6 +7,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { guidFor } from '@ember/object/internals';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
  A collapsible/expandable item within an accordion
@@ -19,6 +20,7 @@ import { guidFor } from '@ember/object/internals';
  @public
  */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class AccordionItem extends Component {
   /**

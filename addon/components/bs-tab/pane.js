@@ -9,6 +9,7 @@ import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { guidFor } from '@ember/object/internals';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
  The tab pane of a tab component.
@@ -21,6 +22,7 @@ import { guidFor } from '@ember/object/internals';
  @public
  */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class TabPane extends Component.extend(ComponentChild) {
   /**

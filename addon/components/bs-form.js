@@ -10,6 +10,7 @@ import RSVP from 'rsvp';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { DEBUG } from '@glimmer/env';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -111,6 +112,7 @@ import { DEBUG } from '@glimmer/env';
 */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class Form extends Component {
   /**
    * Bootstrap form class name (computed)

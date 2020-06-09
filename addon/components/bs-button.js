@@ -12,6 +12,7 @@ import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import overrideableCP from 'ember-bootstrap/utils/cp/overrideable';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Implements a HTML button element, with support for all [Bootstrap button CSS styles](http://getbootstrap.com/css/#buttons)
@@ -105,6 +106,7 @@ import { macroCondition, getOwnConfig } from '@embroider/macros';
 */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class Button extends Component {
   /**
    * Default label of the button. Not need if used as a block component

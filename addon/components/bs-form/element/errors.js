@@ -2,6 +2,7 @@ import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/errors';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
  @class FormElementErrors
@@ -11,6 +12,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class FormElementErrors extends Component {
   /**
    * @property show

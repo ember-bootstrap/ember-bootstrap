@@ -13,6 +13,7 @@ import { guidFor } from '@ember/object/internals';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
 import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -56,6 +57,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class Modal extends Component {
   @service('-document')
   document;

@@ -1,6 +1,7 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion/item/body';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
  Component for an accordion item body.
@@ -14,6 +15,7 @@ import layout from 'ember-bootstrap/templates/components/bs-accordion/item/body'
  */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class AccordionItemBody extends Component {
   /**
    * @property collapsed

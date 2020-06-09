@@ -2,6 +2,7 @@ import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-progress';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.
@@ -37,6 +38,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @public
 */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class Progress extends Component {
   /**

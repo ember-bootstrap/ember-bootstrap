@@ -4,6 +4,7 @@ import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { assert } from '@ember/debug';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -170,6 +171,7 @@ const SUPPORTED_KEYCODES = [ESCAPE_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_UP_KEYCODE
   @public
 s*/
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class Dropdown extends Component {
   /**

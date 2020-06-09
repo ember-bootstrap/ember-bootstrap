@@ -3,6 +3,7 @@ import { computed } from '@ember/object';
 import ContextualHelp from './bs-contextual-help';
 import layout from 'ember-bootstrap/templates/components/bs-popover';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component that implements Bootstrap [popovers](http://getbootstrap.com/javascript/#popovers).
@@ -70,6 +71,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @public
 */
 @templateLayout(layout)
+@deprecateSubclassing
 export default class Popover extends ContextualHelp {
   /**
    * @property placement

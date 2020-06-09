@@ -2,6 +2,7 @@ import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal-simple';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with a some common default markup
@@ -82,6 +83,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class ModalSimple extends Component {
   /**
    * The title of the modal, visible in the modal header. Is ignored if `header` is false.

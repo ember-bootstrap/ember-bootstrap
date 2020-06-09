@@ -8,6 +8,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { assert } from '@ember/debug';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { isBlank } from '@ember/utils';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component to generate [Bootstrap navbars](http://getbootstrap.com/components/#navbar).
@@ -103,6 +104,7 @@ import { isBlank } from '@ember/utils';
 */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class Navbar extends Component {
   /**
    * Manages the state for the responsive menu between the toggle and the content.

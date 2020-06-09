@@ -6,6 +6,7 @@ import layout from 'ember-bootstrap/templates/components/bs-tooltip/element';
 import { assert } from '@ember/debug';
 import { scheduleOnce } from '@ember/runloop';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
  Internal (abstract) component for contextual help markup. Should not be used directly.
@@ -17,6 +18,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class ContextualHelpElement extends Component {
   ariaRole = 'tooltip';
 

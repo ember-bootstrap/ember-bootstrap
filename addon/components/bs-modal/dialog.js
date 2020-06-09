@@ -5,6 +5,7 @@ import { isBlank } from '@ember/utils';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/dialog';
 import { next } from '@ember/runloop';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
  Internal component for modal's markup and event handling. Should not be used directly.
@@ -15,6 +16,7 @@ import { next } from '@ember/runloop';
  @private
  */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class ModalDialog extends Component {
   @readOnly('titleId')
