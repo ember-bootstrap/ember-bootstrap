@@ -7,7 +7,6 @@ import Config from 'ember-bootstrap/config';
 import { isBlank } from '@ember/utils';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
-import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   This component renders a `<div class="form-group">` element, with support for validation states and feedback icons (only for BS3).
@@ -32,7 +31,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   @public
 */
 @tagName('')
-@deprecateSubclassing
 @templateLayout(layout)
 export default class FormGroup extends Component {
   /**

@@ -15,6 +15,8 @@ import { computed, action } from '@ember/object';
  */
 @templateLayout(layout)
 export default class DropdownButton extends Button {
+  '__ember-bootstrap_subclass' = true;
+
   @action
   handleKeyDown(e) {
     this.onKeyDown(e);

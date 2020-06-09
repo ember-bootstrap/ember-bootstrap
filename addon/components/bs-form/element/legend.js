@@ -6,4 +6,6 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 @templateLayout(layout)
 @tagName('')
 @deprecateSubclassing
-export default class FormElementLegend extends FormElementLabel {}
+export default class FormElementLegend extends FormElementLabel {
+  '__ember-bootstrap_subclass' = true;
+}
