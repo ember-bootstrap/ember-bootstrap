@@ -1,85 +1,35 @@
-{{#if inDom}}
-  {{#if this._renderInPlace}}
-    <BsModal::dialog
-      @onClose={{this.close}}
-      @fade={{this.fade}}
-      @showModal={{this.showModal}}
-      @keyboard={{this.keyboard}}
-      @size={{@size}}
-      @backdropClose={{this.backdropClose}}
-      @inDom={{this.inDom}}
-      @paddingLeft={{this.paddingLeft}}
-      @paddingRight={{this.paddingRight}}
-      @centered={{bs-eq this.position "center"}}
-      @scrollable={{this.scrollable}}
-      class={{@class}}
-      id={{this.modalId}}
-      ...attributes
-    >
-      <BsModal::header @title={{@title}} @closeButton={{this.closeButton}} @onClose={{this.close}} />
-      <BsModal::body>
-        {{yield
-          (hash
-            close=this.close
-            submit=this.doSubmit
-          )
-        }}
-      </BsModal::body>
-      <BsModal::footer
-        @closeTitle={{this.closeTitle}}
-        @submitTitle={{@submitTitle}}
-        @submitButtonType={{this.submitButtonType}}
-        @onClose={{this.close}}
-        @onSubmit={{this.doSubmit}}
-      />
-    </BsModal::dialog>
-
-    <div>
-      {{#if this.showBackdrop}}
-        <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
-      {{/if}}
-    </div>
-  {{else}}
-    {{#in-element this.destinationElement insertBefore=null}}
-      <BsModal::dialog
-        @onClose={{this.close}}
-        @fade={{this.fade}}
-        @showModal={{this.showModal}}
-        @keyboard={{this.keyboard}}
-        @size={{@size}}
-        @backdropClose={{this.backdropClose}}
-        @inDom={{this.inDom}}
-        @paddingLeft={{this.paddingLeft}}
-        @paddingRight={{this.paddingRight}}
-        @centered={{bs-eq this.position "center"}}
-        @scrollable={{this.scrollable}}
-        class={{@class}}
-        id={{this.modalId}}
-        ...attributes
-      >
-        <BsModal::header @title={{@title}} @closeButton={{this.closeButton}} @onClose={{this.close}} />
-        <BsModal::body>
-          {{yield
-            (hash
-              close=this.close
-              submit=this.doSubmit
-            )
-          }}
-        </BsModal::body>
-        <BsModal::footer
-          @closeTitle={{this.closeTitle}}
-          @submitTitle={{@submitTitle}}
-          @submitButtonType={{this.submitButtonType}}
-          @onClose={{this.close}}
-          @onSubmit={{this.doSubmit}}
-        />
-      </BsModal::dialog>
-
-      <div>
-        {{#if this.showBackdrop}}
-          <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
-        {{/if}}
-      </div>
-    {{/in-element}}
-  {{/if}}
-{{/if}}
+<BsModal
+  @open={{this.open}}
+  @fade={{this.fade}}
+  @backdrop={{this.backdrop}}
+  @keyboard={{this.keyboard}}
+  @position={{this.position}}
+  @scrollable={{this.scrollable}}
+  @size={{this.size}}
+  @backdropClose={{this.backdropClose}}
+  @renderInPlace={{this.renderInPlace}}
+  @transitionDuration={{this.transitionDuration}}
+  @backdropTransitionDuration={{this.backdropTransitionDuration}}
+  @onSubmit={{this.onSubmit}}
+  @onHide={{this.onHide}}
+  @onHidden={{this.onHidden}}
+  @onShow={{this.onShow}}
+  @onShown={{this.onShown}}
+  ...attributes
+  as |modal|
+>
+  <modal.header @title={{@title}} @closeButton={{this.closeButton}} />
+  <modal.body>
+    {{yield
+      (hash
+        close=modal.close
+        submit=modal.submit
+      )
+    }}
+  </modal.body>
+  <modal.footer
+    @closeTitle={{this.closeTitle}}
+    @submitTitle={{@submitTitle}}
+    @submitButtonType={{this.submitButtonType}}
+  />
+</BsModal>

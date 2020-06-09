@@ -572,16 +572,6 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
     assert.dom('.modal').hasAttribute('aria-labelledby', modalTitleId);
   });
 
-  test('it passes along class attribute', async function (assert) {
-    await render(hbs`
-      <BsModalSimple @fade={{false}} @class="custom">
-        template block text
-      </BsModalSimple>
-    `);
-
-    assert.dom('.modal.custom').exists({ count: 1 });
-  });
-
   test('it passes along HTML attributes', async function (assert) {
     await render(hbs`
       <BsModalSimple @fade={{false}} class="custom" role="alert" data-test>

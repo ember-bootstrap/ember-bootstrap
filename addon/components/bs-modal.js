@@ -1,6 +1,5 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
-import { not } from '@ember/object/computed';
 import { addObserver } from '@ember/object/observers';
 import { assert } from '@ember/debug';
 import Component from '@ember/component';
@@ -95,13 +94,10 @@ export default class Modal extends Component {
   @defaultValue
   fade = undefined;
 
-  /**
-   * @property notFade
-   * @type boolean
-   * @private
-   */
-  @not('fade')
-  notFade;
+  get _fade() {
+    let isFB = isFastBoot(this);
+    return this.fade === undefined ? !isFB : this.fade;
+  }
 
   /**
    * Used to apply Bootstrap's visibility classes.
@@ -326,7 +322,7 @@ export default class Modal extends Component {
    * @readonly
    * @private
    */
-  @usesTransition('fade')
+  @usesTransition('_fade')
   usesTransition;
 
   /**
@@ -698,16 +694,12 @@ export default class Modal extends Component {
 
   init() {
     super.init(...arguments);
-    let { isOpen, backdrop, fade } = this;
+    let { isOpen, backdrop, _fade: fade } = this;
     let isFB = isFastBoot(this);
-    if (fade === undefined) {
-      fade = !isFB;
-    }
     this.setProperties({
       showModal: isOpen && (!fade || isFB),
       showBackdrop: isOpen && backdrop,
       inDom: isOpen,
-      fade,
       destinationElement: getDestinationElement(this),
     });
 
