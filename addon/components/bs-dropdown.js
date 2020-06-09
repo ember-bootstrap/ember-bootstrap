@@ -165,6 +165,8 @@ const SUPPORTED_KEYCODES = [ESCAPE_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_UP_KEYCODE
   version does. This also allows you to set `renderInPlace=false` on the menu component to render it in a wormhole,
   which you might want to do if you experience clipping issues by an outer `overflow: hidden` element.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Dropdown
   @namespace Components
   @extends Ember.Component

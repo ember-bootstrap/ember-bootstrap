@@ -9,6 +9,7 @@ export default function deprecateSubclassing(target) {
       target.prototype.init = function () {
         deprecate(
           `Extending from ember-bootstrap component classes is not supported, and might break anytime. Detected subclassing of <Bs${target.name}> component.`,
+          // the `__ember-bootstrap_subclass` flag is an escape hatch for "priviliged" addons like validations addons that currently still have to rely on subclassing
           target === this.constructor || this['__ember-bootstrap_subclass'] === true,
           {
             id: `ember-bootstrap.subclassing#${target.name}`,

@@ -97,6 +97,8 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   Bootstrap 4 navbars are fluid by default without the need for an additional container. An
   additional container is added like with Bootstrap 3 if `fluid` is `false`.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Navbar
   @namespace Components
   @extends Ember.Component

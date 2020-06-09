@@ -76,6 +76,8 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   The `fill` styling is only available with Bootstrap 4
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Nav
   @namespace Components
   @extends Ember.Component

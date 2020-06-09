@@ -99,6 +99,8 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   You can `reset` the state represented by these properties and used for button's text by setting `reset` property to
   `true`.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Button
   @namespace Components
   @extends Ember.Component

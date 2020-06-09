@@ -32,6 +32,8 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   In the example above the first accordion item utilizes the yielded `change` action to add some custom behaviour.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Accordion
   @namespace Components
   @extends Ember.Component

@@ -26,6 +26,8 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   </BsCollapse>
   ```
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Collapse
   @namespace Components
   @extends Ember.Component

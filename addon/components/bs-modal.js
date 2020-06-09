@@ -50,6 +50,8 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   See the documentation of the [bs-modal-simple](Components.ModalSimple.html) component for further examples.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Modal
   @namespace Components
   @extends Ember.Component

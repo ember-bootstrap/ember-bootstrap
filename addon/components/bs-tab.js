@@ -107,6 +107,8 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   </div>
   ```
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Tab
   @namespace Components
   @extends Ember.Component

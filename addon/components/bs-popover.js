@@ -65,6 +65,8 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
   * `onHide`
   * `onHidden`
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Popover
   @namespace Components
   @extends Components.ContextualHelp

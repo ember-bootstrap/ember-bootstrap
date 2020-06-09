@@ -76,6 +76,8 @@ import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
   If you want the modal to render in place, rather than being wormholed, you can set renderInPlace=true.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class ModalSimple
   @namespace Components
   @extends Ember.Component
