@@ -5,6 +5,7 @@ import { addObserver } from '@ember/object/observers';
 import { assert } from '@ember/debug';
 import Component from '@ember/component';
 import { bind, next, schedule } from '@ember/runloop';
+import { inject as service } from '@ember/service';
 import layout from 'ember-bootstrap/templates/components/bs-modal';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
@@ -57,6 +58,9 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 @templateLayout(layout)
 @tagName('')
 export default class Modal extends Component {
+  @service('-document')
+  document;
+
   /**
    * Visibility of the modal. Toggle to show/hide with CSS transitions.
    *
@@ -447,8 +451,7 @@ export default class Modal extends Component {
     }
     this._isOpen = true;
 
-    document.body.classList.add('modal-open');
-
+    this.addBodyClass();
     this.resize();
 
     let callback = () => {
@@ -519,7 +522,7 @@ export default class Modal extends Component {
     }
 
     this.handleBackdrop(() => {
-      document.body.classList.remove('modal-open');
+      this.removeBodyClass();
       this.resetAdjustments();
       this.resetScrollbar();
       this.set('inDom', false);
@@ -657,6 +660,26 @@ export default class Modal extends Component {
     document.body.style.paddingRight = this._originalBodyPad;
   }
 
+  addBodyClass() {
+    // special handling for FastBoot, where real `document` is not available
+    if (isFastBoot(this)) {
+      // a SimpleDOM instance with just a subset of the DOM API!
+      let document = this.document;
+
+      let existingClasses = document.body.getAttribute('class') || '';
+      if (!existingClasses.includes('modal-open')) {
+        document.body.setAttribute('class', `modal-open ${existingClasses}`);
+      }
+    } else {
+      document.body.classList.add('modal-open');
+    }
+  }
+
+  removeBodyClass() {
+    // no need for FastBoot support here
+    document.body.classList.remove('modal-open');
+  }
+
   /**
    * @property scrollbarWidth
    * @type number
@@ -684,8 +707,26 @@ export default class Modal extends Component {
   willDestroyElement() {
     super.willDestroyElement(...arguments);
     window.removeEventListener('resize', this._handleUpdate, false);
-    document.body.classList.remove('modal-open');
+    this.removeBodyClass();
     this.resetScrollbar();
+  }
+
+  didReceiveAttrs() {
+    super.didReceiveAttrs(...arguments);
+
+    // add `.modal-open` to <body> even in FastBoot, to allow scrolling
+    if (this.isOpen) {
+      // a SimpleDOM instance with just a subset of the DOM API!
+      let document = this.document;
+
+      let existingClasses = document.body.getAttribute('class') || '';
+      if (!existingClasses.includes('modal-open')) {
+        console.log('huhu');
+
+        document.body.setAttribute('class', `modal-open ${existingClasses}`);
+      }
+      console.log(document.body.getAttribute('class'));
+    }
   }
 
   _observeOpen() {
