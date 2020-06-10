@@ -2,10 +2,7 @@
   class="{{if this.collapse "collapse"}} {{if this.collapsing "collapsing"}} {{if this.showContent (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}"
   ...attributes
   {{ref this "_element"}}
-  {{style
-    width=(if (bs-eq this.collapseDimension "height") (if this.width (concat this.collapseSize "px") ""))
-    height=(if (bs-eq this.collapseDimension "height") (if this.collapseSize (concat this.collapseSize "px") ""))
-  }}
+  {{style this.cssStyle}}
 >
   {{yield}}
 </div>
