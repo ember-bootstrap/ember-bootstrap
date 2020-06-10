@@ -71,6 +71,25 @@ module('Integration | Component | bs-collapse', function (hooks) {
     assert.dom('.collapse').hasNoClass('in', 'collapse does not have in class');
   });
 
+  test('after collapsing/expanding height/width is set correctly ', async function (assert) {
+    this.set('collapsed', true);
+    await render(
+      hbs`<BsCollapse @expandedSize={{200}} @transitionDuration={{500}} @collapsed={{collapsed}}><p>Just some content</p></BsCollapse>`
+    );
+    this.set('collapsed', false);
+
+    assert.equal(this.element.querySelector('div.collapsing').style.height, '200px', 'should have height of 200px');
+
+    // wait for transitions to complete
+    await settled();
+
+    assert.equal(
+      this.element.querySelector('div.collapse').style.height,
+      '',
+      'should have height removed after transition'
+    );
+  });
+
   test('it passes accessibility checks', async function (assert) {
     await render(hbs`<button type="button">Test</button><BsCollapse><p>Just some content</p></BsCollapse>`);
 
