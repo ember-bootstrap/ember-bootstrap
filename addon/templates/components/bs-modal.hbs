@@ -1,7 +1,7 @@
 {{#if this.inDom}}
   {{#let (component this.dialogComponent
     onClose=this.close
-    fade=this.fade
+    fade=this._fade
     showModal=this.showModal
     keyboard=this.keyboard
     size=@size
@@ -30,7 +30,7 @@
       </Dialog>
       <div>
         {{#if this.showBackdrop}}
-          <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
+          <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
         {{/if}}
       </div>
     {{else}}
@@ -52,7 +52,7 @@
         </Dialog>
         <div>
           {{#if this.showBackdrop}}
-            <div class="modal-backdrop {{if this.fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
+            <div class="modal-backdrop {{if this._fade "fade"}} {{if this.showModal (if (macroCondition (macroGetOwnConfig "isBS4")) "show" "in")}}" id={{this.backdropId}}></div>
           {{/if}}
         </div>
       {{/in-element}}
