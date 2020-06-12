@@ -40,6 +40,7 @@ module('Integration | Component | bs-collapse', function (hooks) {
     this.set('collapsed', false);
 
     assert.ok(showAction.calledOnce, 'onShow action has been called');
+    assert.notOk(shownAction.called, 'onShown action has not been called');
     assert.dom('.collapsing').exists('collapse has collapsing class while transition is running');
 
     // wait for transitions to complete
@@ -62,6 +63,7 @@ module('Integration | Component | bs-collapse', function (hooks) {
     this.set('collapsed', true);
 
     assert.ok(hideAction.calledOnce, 'onHide action has been called');
+    assert.notOk(hiddenAction.called, 'onHidden action has not been called');
     assert.dom('.collapsing').exists('collapse has collapsing class while transition is running');
 
     // wait for transitions to complete
