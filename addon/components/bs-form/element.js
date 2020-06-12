@@ -257,16 +257,16 @@ export default class FormElement extends FormGroup {
   controlType = 'text';
 
   /**
-   * The value of the control element is bound to this property. You can bind it to some controller property to
-   * get/set the control element's value:
+   * The value of the control element is bound to this property:
    *
    * ```hbs
    * <form.element @controlType="email" @label="Email" @value={{this.email}} />
    * ```
    *
-   * Note: you lose the ability to validate this form element by directly binding to its value. It is recommended
+   * Note two things:
+   * * the binding is uni-directional (DDAU), so you would have to use the `onChange` action to subscribe to changes.
+   * * you lose the ability to validate this form element by directly binding to its value. It is recommended
    * to use the `property` feature instead.
-   *
    *
    * @property value
    * @public
