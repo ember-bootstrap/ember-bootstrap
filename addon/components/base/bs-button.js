@@ -483,14 +483,15 @@ export default class Button extends Component {
         let argument = mapping.split(':')[0];
         let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
         let deprecationMessage =
-          `Argument ${argument} of <BsButton> component is deprecated. It's only purpose ` +
+          `Argument ${argument} of <BsButton> component is deprecated. Its only purpose ` +
           `was setting the HTML attribute ${attribute} of the control element. You should use ` +
-          `angle bracket  component invocation syntax instead:\n` +
+          `angle bracket component invocation syntax instead:\n` +
           `Before:\n` +
           `  {{bs-button ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
           `  <BsButton @${attribute}=${typeof value === 'string' ? `"${value}"`: `{{${value}}}`} />\n` +
           `After:\n` +
-          `  <BsButton ${typeof value === 'boolean' ? attribute : `${attribute}="${value}"`} />`;
+          `  <BsButton ${typeof value === 'boolean' ? attribute : `${attribute}="${value}"`} />\n` +
+          `A codemod is available to help with the required migration!`;
 
         deprecate(
           deprecationMessage,
@@ -499,6 +500,7 @@ export default class Button extends Component {
           {
             id: `ember-bootstrap.deprecated-argument.button#${argument}`,
             until: '4.0.0',
+            url: 'https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md',
           }
         );
       });
