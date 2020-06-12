@@ -476,7 +476,6 @@ export default class Button extends Component {
     // deprecate arguments used for attribute bindings only
     runInDebug(() => {
       [
-        ['buttonType:type', 'submit'],
         ['disabled', true],
         ['title', 'foo'],
       ].forEach(([mapping, value]) => {
