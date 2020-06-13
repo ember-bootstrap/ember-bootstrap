@@ -102,15 +102,6 @@ export default class Collapse extends Component {
       return {};
     }
 
-    if (this.transitionDuration) {
-      const transitionDurationS = this.transitionDuration / 1000;
-
-      return {
-        [this.collapseDimension]: `${this.collapseSize}px`,
-        transition: `${this.collapseDimension} ${transitionDurationS}s ease`,
-      };
-    }
-
     return {
       [this.collapseDimension]: `${this.collapseSize}px`,
     };
