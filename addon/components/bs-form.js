@@ -477,13 +477,14 @@ export default class Form extends Component {
     if (DEBUG) {
       warn(
         `Argument novalidate of <BsForm> component has been removed. ` +
-          `It's only purpose was setting the HTML attribute novalidate of the <form> element. ` +
-          `You should use  angle bracket component invocation syntax instead:\n` +
+          `Its only purpose was setting the HTML attribute novalidate of the <form> element. ` +
+          `You should use angle bracket component invocation syntax instead:\n` +
           `Before:n` +
           `  {{bs-form novalidate=true}}\n` +
           `  <BsForm @novalidate={{true}} />\n` +
           `After:\n` +
-          `  <BsForm novalidate>`,
+          `  <BsForm novalidate>\n` +
+          `A codemod is available to help with the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md`,
         // eslint-disable-next-line ember/no-attrs-in-components
         !Object.keys(this.attrs).includes('novalidate'),
         {

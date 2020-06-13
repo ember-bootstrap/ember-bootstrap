@@ -909,8 +909,8 @@ export default class FormElement extends FormGroup {
         let attribute = mapping.includes(':') ? mapping.split(':')[1] : argument;
         let warningMessage =
           `Argument ${argument} of <element> component yielded by <BsForm> has been removed. ` +
-          `It's only purpose was setting the HTML attribute ${attribute} of the control element. ` +
-          `You should use  angle bracket  component invocation syntax instead:\n` +
+          `Its only purpose was setting the HTML attribute ${attribute} of the control element. ` +
+          `You should use angle bracket  component invocation syntax instead:\n` +
           `Before:\n` +
           `  {{#bs-form as |form|}}\n` +
           `    {{form.element ${attribute}=${typeof value === 'string' ? `"${value}"` : value}}}\n` +
@@ -927,7 +927,8 @@ export default class FormElement extends FormGroup {
             typeof value === 'boolean' ? (value ? attribute : '') : `${attribute}="${value}"`
           } />\n` +
           `    </form.element>\n` +
-          `  </BsForm>`;
+          `  </BsForm>\n` +
+          `A codemod is available to help with the required migration. See https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md`;
 
         warn(
           warningMessage,
