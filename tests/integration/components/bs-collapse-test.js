@@ -1,6 +1,6 @@
 import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled } from '@ember/test-helpers';
+import { waitFor, render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { test, visibilityClass } from '../../helpers/bootstrap-test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
@@ -74,20 +74,17 @@ module('Integration | Component | bs-collapse', function (hooks) {
   test('after collapsing/expanding height/width is set correctly ', async function (assert) {
     this.set('collapsed', true);
     await render(
-      hbs`<BsCollapse @expandedSize={{200}} @transitionDuration={{500}} @collapsed={{collapsed}}><p>Just some content</p></BsCollapse>`
+      hbs`<BsCollapse @expandedSize={{200}} @transitionDuration={{200}} @collapsed={{collapsed}}><p>Just some content</p></BsCollapse>`
     );
     this.set('collapsed', false);
 
-    assert.equal(this.element.querySelector('div.collapsing').style.height, '200px', 'should have height of 200px');
+    await waitFor('.collapsing');
 
-    // wait for transitions to complete
-    await settled();
+    assert.dom('.collapsing').hasStyle({ height: '200px' });
 
-    assert.equal(
-      this.element.querySelector('div.collapse').style.height,
-      '',
-      'should have height removed after transition'
-    );
+    await waitFor('.collapse');
+
+    assert.dom('.collapse').doesNotHaveStyle({ height: '200px' });
   });
 
   test('it passes accessibility checks', async function (assert) {
