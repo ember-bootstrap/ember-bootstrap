@@ -8,7 +8,7 @@ module('FastBoot | modal', function (hooks) {
   setupFastBootRootElement(hooks);
 
   test('it renders', async function (assert) {
-    await visit('/fastboot/modal');
+    let { htmlDocument } = await visit('/fastboot/modal');
 
     assert.dom('.modal').exists();
     assert.dom('.modal').hasClass(visibilityClass());
@@ -16,5 +16,7 @@ module('FastBoot | modal', function (hooks) {
     assert.dom('.modal-backdrop').hasClass(visibilityClass());
     assert.dom('.modal .modal-header .modal-title').hasText('Simple Modal');
     assert.dom('.modal .modal-body').hasText('Hi there');
+
+    assert.dom('body', htmlDocument).hasClass('modal-open');
   });
 });
