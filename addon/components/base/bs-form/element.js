@@ -1163,7 +1163,8 @@ export default class FormElement extends FormGroup {
           `    <form.element as |el|>\n` +
           `      <el.control ${typeof value === 'boolean' ? ( value ? attribute : '' ) : `${attribute}="${value}"`} />\n` +
           `    </form.element>\n` +
-          `  </BsForm>`;
+          `  </BsForm>\n` +
+          `A codemod is available to help with the required migration!`;
 
         deprecate(
           deprecationMessage,
@@ -1172,6 +1173,7 @@ export default class FormElement extends FormGroup {
           {
             id: `ember-bootstrap.deprecated-argument.form-element#${argument}`,
             until: '4.0.0',
+            url: 'https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md',
           }
         );
       });

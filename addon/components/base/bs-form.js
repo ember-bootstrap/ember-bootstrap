@@ -487,12 +487,14 @@ export default class Form extends Component {
       `  {{bs-form novalidate=true}}\n` +
       `  <BsForm @novalidate={{true}} />\n` +
       `After:\n` +
-      `  <BsForm novalidate>`,
+      `  <BsForm novalidate>\n` +
+      `A codemod is available to help with the required migration!`,
       // eslint-disable-next-line ember/no-attrs-in-components
       !Object.keys(this.attrs).includes('novalidate'),
       {
         id: `ember-bootstrap.deprecated-argument.form#novalidate`,
         until: '4.0.0',
+        url: 'https://github.com/kaliber5/ember-bootstrap-codemods/blob/master/transforms/deprecated-attribute-arguments/README.md',
       }
     );
   }
