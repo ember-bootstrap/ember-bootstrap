@@ -1,6 +1,5 @@
 import config from 'dummy/config/environment';
-import test from 'ember-sinon-qunit/test-support/test';
-import { skip } from 'qunit';
+import { skip, test } from 'qunit';
 import { Promise } from 'rsvp';
 
 const currentBootstrapVersion = parseInt(config.bootstrapVersion);

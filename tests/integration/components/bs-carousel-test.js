@@ -6,6 +6,7 @@ import { test, testBS3, testBS4, delay } from '../../helpers/bootstrap-test';
 import { skip } from 'qunit';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import sinon from 'sinon';
 
 const TRANSITION_DURATION = 50;
 
@@ -134,7 +135,7 @@ module('Integration | Component | bs-carousel', function (hooks) {
   });
 
   test('carousel calls onSlideChanged when slide changes', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.set('action', action);
     await render(
       hbs`<BsCarousel @onSlideChanged={{this.action}} @wrap={{false}} @transitionDuration={{transitionDuration}} as |car|>{{car.slide}}{{car.slide}}</BsCarousel>`

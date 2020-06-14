@@ -1,9 +1,9 @@
-import { module } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
-import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-dropdown/toggle', function (hooks) {
   setupRenderingTest(hooks);
@@ -24,7 +24,7 @@ module('Integration | Component | bs-dropdown/toggle', function (hooks) {
   });
 
   test('clicking toggle sends onClick action', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.click = action;
     await render(hbs`<BsDropdown as |dd|><dd.toggle @onClick={{action "click"}}>Test</dd.toggle></BsDropdown>`);
     await click('a');

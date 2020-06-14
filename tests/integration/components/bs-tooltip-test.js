@@ -17,6 +17,7 @@ import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-tooltip', function (hooks) {
   setupRenderingTest(hooks);
@@ -151,9 +152,9 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('it calls onShow/onShown actions when showing tooltip [fade=false]', async function (assert) {
-    let showAction = this.spy();
+    let showAction = sinon.spy();
     this.actions.show = showAction;
-    let shownAction = this.spy();
+    let shownAction = sinon.spy();
     this.actions.shown = shownAction;
     await render(
       hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onShow={{action "show"}} @onShown={{action "shown"}} /></div>`
@@ -164,10 +165,10 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('it aborts showing if onShow action returns false', async function (assert) {
-    let showAction = this.stub();
+    let showAction = sinon.stub();
     showAction.returns(false);
     this.actions.show = showAction;
-    let shownAction = this.spy();
+    let shownAction = sinon.spy();
     this.actions.shown = shownAction;
     await render(
       hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onShow={{action "show"}} @onShown={{action "shown"}} /></div>`
@@ -179,9 +180,9 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('it calls onHide/onHidden actions when hiding tooltip [fade=false]', async function (assert) {
-    let hideAction = this.spy();
+    let hideAction = sinon.spy();
     this.actions.hide = hideAction;
-    let hiddenAction = this.spy();
+    let hiddenAction = sinon.spy();
     this.actions.hidden = hiddenAction;
     await render(
       hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onHide={{action "hide"}} @onHidden={{action "hidden"}} /></div>`
@@ -193,10 +194,10 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('it aborts hiding if onHide action returns false', async function (assert) {
-    let hideAction = this.stub();
+    let hideAction = sinon.stub();
     hideAction.returns(false);
     this.actions.hide = hideAction;
-    let hiddenAction = this.spy();
+    let hiddenAction = sinon.spy();
     this.actions.hidden = hiddenAction;
     await render(
       hbs`<div id="target"><BsTooltip @title="Dummy" @fade={{false}} @onHide={{action "hide"}} @onHidden={{action "hidden"}} /></div>`
@@ -444,9 +445,9 @@ module('Integration | Component | bs-tooltip', function (hooks) {
   });
 
   test('it yields close action', async function (assert) {
-    let hideAction = this.spy();
+    let hideAction = sinon.spy();
     this.set('hide', hideAction);
-    let hiddenAction = this.spy();
+    let hiddenAction = sinon.spy();
     this.set('hidden', hiddenAction);
     await render(hbs`
       <div id="target">

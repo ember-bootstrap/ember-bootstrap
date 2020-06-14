@@ -8,6 +8,7 @@ import setupStylesheetSupport from '../../helpers/setup-stylesheet-support';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-popover', function (hooks) {
   setupRenderingTest(hooks);
@@ -121,9 +122,9 @@ module('Integration | Component | bs-popover', function (hooks) {
   });
 
   test('it yields close action', async function (assert) {
-    let hideAction = this.spy();
+    let hideAction = sinon.spy();
     this.set('hide', hideAction);
-    let hiddenAction = this.spy();
+    let hiddenAction = sinon.spy();
     this.set('hidden', hiddenAction);
     await render(hbs`
       <div id="target">

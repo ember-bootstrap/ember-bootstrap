@@ -12,6 +12,7 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-navbar', function (hooks) {
   setupRenderingTest(hooks);
@@ -183,7 +184,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('setting collapse to false expands the navbar', async function (assert) {
-    let expandedAction = this.spy();
+    let expandedAction = sinon.spy();
     this.actions.expandedAction = expandedAction;
 
     this.set('collapsed', true);
@@ -208,7 +209,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('setting collapse to true collapses the navbar', async function (assert) {
-    let collapsedAction = this.spy();
+    let collapsedAction = sinon.spy();
     this.actions.collapsedAction = collapsedAction;
 
     this.set('collapsed', false);
@@ -235,8 +236,8 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('Expanding the navbar calls onExpand/onExpanded actions', async function (assert) {
-    let expandAction = this.spy();
-    let expandedAction = this.spy();
+    let expandAction = sinon.spy();
+    let expandedAction = sinon.spy();
     this.actions.expandAction = expandAction;
     this.actions.expandedAction = expandedAction;
 
@@ -263,8 +264,8 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('Collapsing the navbar calls onCollapse/onCollapsed actions', async function (assert) {
-    let collapseAction = this.spy();
-    let collapsedAction = this.spy();
+    let collapseAction = sinon.spy();
+    let collapsedAction = sinon.spy();
     this.actions.collapseAction = collapseAction;
     this.actions.collapsedAction = collapsedAction;
 
@@ -291,7 +292,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('navbar is not expanded when onExpand action returns false', async function (assert) {
-    let action = this.stub();
+    let action = sinon.stub();
     action.returns(false);
     this.actions.expandAction = action;
 
@@ -313,7 +314,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('navbar is not collapsed when onCollapse action returns false', async function (assert) {
-    let action = this.stub();
+    let action = sinon.stub();
     action.returns(false);
     this.actions.collapseAction = action;
 
@@ -350,7 +351,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('Navbar yields collapse action', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.action = action;
 
     await render(hbs`
@@ -364,7 +365,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('Navbar yields expand action', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.action = action;
 
     await render(hbs`
@@ -378,10 +379,10 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('Navbar yields toggleNavbar action', async function (assert) {
-    let expanded = this.spy();
+    let expanded = sinon.spy();
     this.actions.expanded = expanded;
 
-    let collapsed = this.spy();
+    let collapsed = sinon.spy();
     this.actions.collapsed = collapsed;
 
     await render(hbs`
@@ -398,7 +399,7 @@ module('Integration | Component | bs-navbar', function (hooks) {
   });
 
   test('Clicking expanded navbar link collapses navbar', async function (assert) {
-    let collapseAction = this.spy();
+    let collapseAction = sinon.spy();
     this.actions.collapseAction = collapseAction;
 
     await render(hbs`

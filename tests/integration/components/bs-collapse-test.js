@@ -6,6 +6,7 @@ import { test, visibilityClass, delay } from '../../helpers/bootstrap-test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import { skipTransition } from 'ember-bootstrap/utils/transition-end';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-collapse', function (hooks) {
   setupRenderingTest(hooks);
@@ -37,8 +38,8 @@ module('Integration | Component | bs-collapse', function (hooks) {
   });
 
   test('setting collapse to false expands this item', async function (assert) {
-    let showAction = this.spy();
-    let shownAction = this.spy();
+    let showAction = sinon.spy();
+    let shownAction = sinon.spy();
     this.actions.show = showAction;
     this.actions.shown = shownAction;
 
@@ -60,8 +61,8 @@ module('Integration | Component | bs-collapse', function (hooks) {
   });
 
   test('setting collapse to true collapses this item', async function (assert) {
-    let hideAction = this.spy();
-    let hiddenAction = this.spy();
+    let hideAction = sinon.spy();
+    let hiddenAction = sinon.spy();
     this.actions.hide = hideAction;
     this.actions.hidden = hiddenAction;
 

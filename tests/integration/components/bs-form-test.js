@@ -32,6 +32,8 @@ import { next, run } from '@ember/runloop';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import RSVP from 'rsvp';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import sinon from 'sinon';
+
 /* global Ember */
 
 const nextRunloop = function () {
@@ -92,9 +94,9 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Submitting the form calls onBeforeSubmit and onSubmit action', async function (assert) {
-    let submit = this.spy();
-    let before = this.spy();
-    let invalid = this.spy();
+    let submit = sinon.spy();
+    let before = sinon.spy();
+    let invalid = sinon.spy();
     let model = {};
     this.set('model', model);
     this.actions.before = before;
@@ -111,7 +113,7 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Clicking a submit button submits the form', async function (assert) {
-    let submit = this.spy();
+    let submit = sinon.spy();
     this.actions.submit = submit;
     await render(hbs`<BsForm @onSubmit={{action "submit"}}><BsButton @buttonType="submit">Submit</BsButton></BsForm>`);
 
@@ -136,9 +138,9 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Submitting the form with valid validation calls onBeforeSubmit and onSubmit action', async function (assert) {
-    let submit = this.spy();
-    let before = this.spy();
-    let invalid = this.spy();
+    let submit = sinon.spy();
+    let before = sinon.spy();
+    let invalid = sinon.spy();
     let model = {};
     this.set('model', model);
     this.actions.before = before;
@@ -170,16 +172,16 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Submitting the form with invalid validation calls onBeforeSubmit and onInvalid action', async function (assert) {
-    let submit = this.spy();
-    let before = this.spy();
-    let invalid = this.spy();
+    let submit = sinon.spy();
+    let before = sinon.spy();
+    let invalid = sinon.spy();
     let rejectsWith = new Error();
     let model = {};
     this.set('model', model);
     this.actions.before = before;
     this.actions.submit = submit;
     this.actions.invalid = invalid;
-    this.set('validateStub', this.fake.rejects(rejectsWith));
+    this.set('validateStub', sinon.fake.rejects(rejectsWith));
     await render(hbs`
       <BsForm @model={{model}} @hasValidator={{true}} @validate={{validateStub}} @onBefore={{action "before"}} @onSubmit={{action "submit"}} @onInvalid={{action "invalid"}}>Test</BsForm>
     `);
@@ -198,7 +200,7 @@ module('Integration | Component | bs-form', function (hooks) {
     let model = {};
     this.set('model', model);
     this.set('errors', A(['There is an error']));
-    this.set('validateStub', this.fake.rejects());
+    this.set('validateStub', sinon.fake.rejects());
     await render(
       hbs`<BsForm @model={{model}} @hasValidator={{true}} @validate={{validateStub}} as |form|><form.element @hasValidator={{true}} @errors={{errors}} /></BsForm>`
     );
@@ -218,7 +220,7 @@ module('Integration | Component | bs-form', function (hooks) {
     let model = {};
     this.set('model', model);
     this.set('errors', A(['There is an error']));
-    this.set('validateStub', this.fake.rejects());
+    this.set('validateStub', sinon.fake.rejects());
     let deferredInvalidAction = defer();
     this.set('invalid', () => deferredInvalidAction.promise);
 
@@ -242,10 +244,10 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('it does not catch errors thrown by onSubmit action', async function (assert) {
-    let onErrorStub = this.stub();
+    let onErrorStub = sinon.stub();
     let expectedError = new Error();
 
-    this.set('submitAction', this.fake.rejects(expectedError));
+    this.set('submitAction', sinon.fake.rejects(expectedError));
     Ember.onerror = onErrorStub;
 
     await render(hbs`
@@ -426,7 +428,7 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('it yields submit action', async function (assert) {
-    let submit = this.spy();
+    let submit = sinon.spy();
     this.actions.submit = submit;
     await render(hbs`
       <BsForm @onSubmit={{action "submit"}} as |form|>
@@ -461,9 +463,9 @@ module('Integration | Component | bs-form', function (hooks) {
   test('yielded submit action resolves for expected scenarios', async function (assert) {
     let scenarios = [
       { onSubmit() {} },
-      { onSubmit: this.fake.resolves() },
-      { onSubmit() {}, validate: this.fake.resolves() },
-      { onSubmit: this.fake.resolves(), validate: this.fake.resolves() },
+      { onSubmit: sinon.fake.resolves() },
+      { onSubmit() {}, validate: sinon.fake.resolves() },
+      { onSubmit: sinon.fake.resolves(), validate: sinon.fake.resolves() },
     ];
 
     class TestComponent extends Component {
@@ -497,8 +499,8 @@ module('Integration | Component | bs-form', function (hooks) {
 
   test('yielded submit action rejects for expected scenarios', async function (assert) {
     let scenarios = [
-      { validate: this.fake.rejects('rejected value') },
-      { onSubmit: this.fake.rejects('rejected value') },
+      { validate: sinon.fake.rejects('rejected value') },
+      { onSubmit: sinon.fake.rejects('rejected value') },
     ];
 
     class TestComponent extends Component {
@@ -691,7 +693,7 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Yielded #isSubmitted is true if onSubmit resolves', async function (assert) {
-    this.actions.submit = this.fake.resolves();
+    this.actions.submit = sinon.fake.resolves();
     await render(hbs`
       <BsForm @onSubmit={{action "submit"}} as |form|>
         <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
@@ -714,7 +716,7 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Yielded #isSubmitted is true if validation passes', async function (assert) {
-    this.actions.validate = this.fake.resolves();
+    this.actions.validate = sinon.fake.resolves();
     await render(hbs`
       <BsForm @validate={{action "validate"}} @hasValidator={{true}} as |form|>
         <button type="submit" class={{if form.isSubmitted "is-submitted"}}>submit</button>
@@ -726,7 +728,7 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('A change to a form elements resets yielded #isSubmitted', async function (assert) {
-    this.actions.submit = this.fake.resolves();
+    this.actions.submit = sinon.fake.resolves();
     await render(hbs`
       <BsForm @onSubmit={{action "submit"}} @model={{hash }} as |form|>
         <form.element @property="foo" />
@@ -750,7 +752,7 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     };
 
-    this.actions.submit = this.fake.rejects(expectedError);
+    this.actions.submit = sinon.fake.rejects(expectedError);
     await render(hbs`
       <BsForm @onSubmit={{action "submit"}} as |form|>
         <button type="submit" class={{if form.isRejected "is-rejected"}}>submit</button>
@@ -762,7 +764,7 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Yielded #isRejected is true if validation fails', async function (assert) {
-    this.actions.validate = this.fake.rejects();
+    this.actions.validate = sinon.fake.rejects();
     await render(hbs`
       <BsForm @validate={{action "validate"}} @hasValidator={{true}} as |form|>
         <button type="submit" class={{if form.isRejected "is-rejected"}}>submit</button>
@@ -782,7 +784,7 @@ module('Integration | Component | bs-form', function (hooks) {
       }
     };
 
-    this.actions.submit = this.fake.rejects(expectedError);
+    this.actions.submit = sinon.fake.rejects(expectedError);
     await render(hbs`
       <BsForm @onSubmit={{action "submit"}} @model={{hash }} as |form|>
         <form.element @property="foo" />
@@ -798,7 +800,7 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   test('Triggering resetSubmissionState resets submission state of form', async function (assert) {
-    this.actions.submit = this.fake.resolves();
+    this.actions.submit = sinon.fake.resolves();
     await render(hbs`
       <BsForm @onSubmit={{action "submit"}} @model={{hash }} as |form|>
         <input onchange={{form.resetSubmissionState}}>
@@ -832,7 +834,7 @@ module('Integration | Component | bs-form', function (hooks) {
   });
 
   testRequiringFocus('Pressing enter on a form with submitOnEnter submits the form', async function (assert) {
-    let submit = this.spy();
+    let submit = sinon.spy();
     this.actions.submit = submit;
     await render(hbs`<BsForm @onSubmit={{action "submit"}} @submitOnEnter={{true}}></BsForm>`);
     await triggerKeyEvent('form', 'keypress', 13);
@@ -885,8 +887,8 @@ module('Integration | Component | bs-form', function (hooks) {
     let deferredSubmitAction = defer();
     let submitActionExecutionCounter = 0;
 
-    let beforeActionFake = this.fake();
-    let validateFake = this.fake();
+    let beforeActionFake = sinon.fake();
+    let validateFake = sinon.fake();
 
     this.set('submitAction', () => {
       submitActionExecutionCounter++;

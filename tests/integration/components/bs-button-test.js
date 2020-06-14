@@ -5,10 +5,10 @@ import { setupRenderingTest } from 'ember-qunit';
 import { find, render, click, settled, waitUntil } from '@ember/test-helpers';
 import { test, testBS4, defaultButtonClass } from '../../helpers/bootstrap-test';
 import { gte } from 'ember-compatibility-helpers';
-
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-button', function (hooks) {
   setupRenderingTest(hooks);
@@ -110,7 +110,7 @@ module('Integration | Component | bs-button', function (hooks) {
   });
 
   test('clicking a button sends onClick action with "value" property as a parameter', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.testAction = action;
     await render(hbs`<BsButton @onClick={{action "testAction"}} @value="dummy" />`);
 
@@ -312,9 +312,9 @@ module('Integration | Component | bs-button', function (hooks) {
   });
 
   test('clicking a button with onClick action will prevent event to bubble up', async function (assert) {
-    let buttonClick = this.spy();
+    let buttonClick = sinon.spy();
     this.actions.buttonClick = buttonClick;
-    let parentClick = this.spy();
+    let parentClick = sinon.spy();
     this.actions.parentClick = parentClick;
 
     await render(
@@ -327,7 +327,7 @@ module('Integration | Component | bs-button', function (hooks) {
   });
 
   test('clicking a button without onClick action will cause event to bubble up', async function (assert) {
-    let parentClick = this.spy();
+    let parentClick = sinon.spy();
     this.actions.parentClick = parentClick;
 
     await render(hbs`<div {{action "parentClick"}} role="button"><BsButton>Button</BsButton></div>`);
@@ -337,9 +337,9 @@ module('Integration | Component | bs-button', function (hooks) {
   });
 
   test('clicking a button with onClick action and bubble=true will cause event to bubble up', async function (assert) {
-    let buttonClick = this.spy();
+    let buttonClick = sinon.spy();
     this.actions.buttonClick = buttonClick;
-    let parentClick = this.spy();
+    let parentClick = sinon.spy();
     this.actions.parentClick = parentClick;
 
     await render(hbs`

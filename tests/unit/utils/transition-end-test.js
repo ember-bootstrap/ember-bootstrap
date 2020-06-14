@@ -2,10 +2,11 @@ import { triggerEvent } from '@ember/test-helpers';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { module } from 'qunit';
 import { test, testRequiringTransitions } from '../../helpers/bootstrap-test';
+import sinon from 'sinon';
 
 module('Unit | Utility | transition end', function () {
   testRequiringTransitions('it triggers on event', async function (assert) {
-    let cb = this.spy();
+    let cb = sinon.spy();
     let node = document.createElement('div');
 
     transitionEnd(node, 0).then(cb);
@@ -14,7 +15,7 @@ module('Unit | Utility | transition end', function () {
   });
 
   test('it triggers on timeout', function (assert) {
-    let cb = this.spy();
+    let cb = sinon.spy();
     let node = document.createElement('div');
 
     transitionEnd(node, 0).then(cb);
@@ -27,7 +28,7 @@ module('Unit | Utility | transition end', function () {
   });
 
   test('it triggers just once', function (assert) {
-    let cb = this.spy();
+    let cb = sinon.spy();
     let node = document.createElement('div');
 
     transitionEnd(node, 0).then(cb);

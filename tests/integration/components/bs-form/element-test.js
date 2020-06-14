@@ -22,6 +22,7 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
 import { gte } from 'ember-compatibility-helpers';
+import sinon from 'sinon';
 
 const formLayouts = ['vertical', 'horizontal', 'inline'];
 
@@ -83,7 +84,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
 
   async function controlTypeUpdateTest(assert, controlType, selector, value, oldValue = 'foo', setValueFn = null) {
     this.set('controlType', controlType);
-    let action = this.spy();
+    let action = sinon.spy();
     this.set('change', action);
 
     let model = EmberObject.create({
@@ -333,7 +334,7 @@ module('Integration | Component | bs-form/element', function (hooks) {
     });
 
     test('sends updates', async function (assert) {
-      let action = this.spy();
+      let action = sinon.spy();
       this.set('change', action);
 
       let model = EmberObject.create({

@@ -1,10 +1,10 @@
-import { module } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import test from 'ember-sinon-qunit/test-support/test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-tab', function (hooks) {
   setupRenderingTest(hooks);
@@ -262,7 +262,7 @@ module('Integration | Component | bs-tab', function (hooks) {
   });
 
   test('calls onChange when changing active tab', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.change = action;
 
     await render(hbs`
@@ -284,7 +284,7 @@ module('Integration | Component | bs-tab', function (hooks) {
   });
 
   test('when onChange returns false active tab is not changed', async function (assert) {
-    let action = this.stub();
+    let action = sinon.stub();
     action.returns(false);
     this.actions.change = action;
 

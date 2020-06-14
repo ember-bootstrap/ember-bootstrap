@@ -13,6 +13,7 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-modal-simple', function (hooks) {
   setupRenderingTest(hooks);
@@ -173,7 +174,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   });
 
   test('clicking close button leaves modal open when onHide action returns false', async function (assert) {
-    let hideAction = this.stub();
+    let hideAction = sinon.stub();
     hideAction.returns(false);
     this.actions.hide = hideAction;
 
@@ -208,8 +209,8 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
   test('onShow/onShown actions fire correctly with fade=false', async function (assert) {
     this.set('open', false);
-    let showSpy = this.spy();
-    let shownSpy = this.spy();
+    let showSpy = sinon.spy();
+    let shownSpy = sinon.spy();
     this.actions.openAction = showSpy;
     this.actions.openedAction = shownSpy;
     await render(
@@ -224,8 +225,8 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
   testRequiringTransitions('onShow/onShown fire correctly with fade=true', async function (assert) {
     this.set('open', false);
-    let showSpy = this.spy();
-    let shownSpy = this.spy();
+    let showSpy = sinon.spy();
+    let shownSpy = sinon.spy();
     this.actions.openAction = showSpy;
     this.actions.openedAction = shownSpy;
     await render(
@@ -243,7 +244,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   });
 
   test('onHide is called when clicking close button', async function (assert) {
-    let hideSpy = this.spy();
+    let hideSpy = sinon.spy();
     this.actions.testAction = hideSpy;
     await render(
       hbs`<BsModalSimple @title="Simple Dialog" @fade={{false}} @onHide={{action "testAction"}}>Hello world!</BsModalSimple>`
@@ -254,7 +255,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
 
   test('onHidden is called after modal is closed', async function (assert) {
     this.set('open', true);
-    let hiddenSpy = this.spy();
+    let hiddenSpy = sinon.spy();
     this.actions.testAction = hiddenSpy;
     await render(
       hbs`<BsModalSimple @title="Simple Dialog" @onHidden={{action "testAction"}} @open={{open}}>Hello world!</BsModalSimple>`
@@ -267,7 +268,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   });
 
   test('onSubmit is called when clicking submit button', async function (assert) {
-    let submitSpy = this.spy();
+    let submitSpy = sinon.spy();
     this.actions.testAction = submitSpy;
     await render(
       hbs`<BsModalSimple @title="Simple Dialog" @closeTitle="Cancel" @submitTitle="Ok" @onSubmit={{action "testAction"}}>Hello world!</BsModalSimple>`
@@ -277,8 +278,8 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   });
 
   test('when modal has a form and the submit button is clicked, the form is submitted', async function (assert) {
-    let modalSpy = this.spy();
-    let formSpy = this.spy();
+    let modalSpy = sinon.spy();
+    let formSpy = sinon.spy();
     this.actions.modalSubmit = modalSpy;
     this.actions.formSubmit = formSpy;
     await render(
@@ -290,9 +291,9 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   });
 
   test('when modal has several forms and the submit button is clicked, those forms are submitted', async function (assert) {
-    let modalSpy = this.spy();
-    let formOneSpy = this.spy();
-    let formTwoSpy = this.spy();
+    let modalSpy = sinon.spy();
+    let formOneSpy = sinon.spy();
+    let formTwoSpy = sinon.spy();
     this.actions.modalSubmit = modalSpy;
     this.actions.formOneSubmit = formOneSpy;
     this.actions.formTwoSubmit = formTwoSpy;
@@ -364,7 +365,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   });
 
   testRequiringFocus('Pressing escape key will close the modal if keyboard=true', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.testAction = action;
     await render(
       hbs`<BsModalSimple @title="Simple Dialog" @onHide={{action "testAction"}} @keyboard={{true}}>Hello world!</BsModalSimple>`
@@ -385,7 +386,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   testRequiringFocus(
     'Pressing escape key will close the modal if keyboard=true and element is autofocused',
     async function (assert) {
-      let action = this.spy();
+      let action = sinon.spy();
       this.actions.testAction = action;
       await render(hbs`
       <BsModalSimple @title="Simple Dialog" @onHide={{action "testAction"}} @keyboard={{true}}>
@@ -408,7 +409,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   );
 
   testRequiringFocus('Pressing escape key is ignored if keyboard=false', async function (assert) {
-    let hideSpy = this.spy();
+    let hideSpy = sinon.spy();
     this.actions.testAction = hideSpy;
     await render(
       hbs`<BsModalSimple @title="Simple Dialog" @onHide={{action "testAction"}} @keyboard={{false}}>Hello world!</BsModalSimple>`
@@ -424,7 +425,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   });
 
   test('Clicking on the backdrop will close the modal', async function (assert) {
-    let hideSpy = this.spy();
+    let hideSpy = sinon.spy();
     this.actions.testAction = hideSpy;
     await render(
       hbs`<BsModalSimple @title="Simple Dialog" @onHide={{action "testAction"}}>Hello world!</BsModalSimple>`
@@ -441,7 +442,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   });
 
   test('Clicking on the backdrop is ignored when backdropClose=false', async function (assert) {
-    let hideSpy = this.spy();
+    let hideSpy = sinon.spy();
     this.actions.testAction = hideSpy;
     await render(
       hbs`<BsModalSimple @title="Simple Dialog" @onHide={{action "testAction"}} @backdropClose={{false}}>Hello world!</BsModalSimple>`
@@ -516,7 +517,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   });
 
   test('Modal yields close action', async function (assert) {
-    let closeAction = this.spy();
+    let closeAction = sinon.spy();
     this.actions.close = closeAction;
 
     await render(hbs`
@@ -531,7 +532,7 @@ module('Integration | Component | bs-modal-simple', function (hooks) {
   });
 
   test('Modal yields submit action', async function (assert) {
-    let submitAction = this.spy();
+    let submitAction = sinon.spy();
     this.actions.submit = submitAction;
 
     await render(hbs`
