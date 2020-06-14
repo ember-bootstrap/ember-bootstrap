@@ -1,10 +1,10 @@
 /* eslint-env node */
 const gulp = require('gulp');
-const ghPages = require('gulp-gh-pages');
 const execa = require('execa');
 const merge = require('merge-stream');
 const striptags = require('striptags');
 const transform = require('gulp-transform');
+const connect = require('gulp-connect');
 
 gulp.task('docs:api', function () {
   return execa('ember', ['ember-cli-yuidoc']);
@@ -17,14 +17,20 @@ gulp.task('docs:app', function () {
 });
 
 gulp.task(
-  'docs:publish',
+  'docs:build',
   gulp.series(gulp.parallel('docs:api', 'docs:app'), function () {
     return merge(
       gulp.src('docs/api/**/*', { base: 'docs' }),
       gulp.src('docs/dist/**/*'),
       gulp.src('CHANGELOG.md').pipe(transform(striptags, { encoding: 'utf8' }))
-    ).pipe(ghPages());
+    ).pipe(gulp.dest('docs/build'));
   })
 );
 
-gulp.task('docs', gulp.series('docs:publish'));
+gulp.task('connect', function () {
+  connect.server({
+    root: 'docs/build',
+  });
+});
+
+gulp.task('docs:serve', gulp.series('docs:build', 'connect'));
