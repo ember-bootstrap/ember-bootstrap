@@ -12,6 +12,7 @@ import {
   visibilityClass,
 } from '../../../helpers/bootstrap-test';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-accordion-item', function (hooks) {
   setupRenderingTest(hooks);
@@ -36,7 +37,7 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
   });
 
   test('calls onClick action when clicking heading', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.click = action;
     await render(
       hbs`<BsAccordion::Item @value={{1}} @onClick={{action "click"}} @title="TITLE">CONTENT</BsAccordion::Item>`
@@ -59,7 +60,7 @@ module('Integration | Component | bs-accordion-item', function (hooks) {
   });
 
   test('accordion items can be disabled', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.click = action;
     await render(
       hbs`<BsAccordion::Item @value={{1}} @disabled={{true}} @onClick={{action "click"}} @title="TITLE">CONTENT</BsAccordion::Item>`

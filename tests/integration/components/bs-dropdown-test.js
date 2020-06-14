@@ -12,6 +12,7 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-dropdown', function (hooks) {
   setupRenderingTest(hooks);
@@ -237,7 +238,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   });
 
   test('opening dropdown calls onShow action', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.show = action;
     await render(
       hbs`<BsDropdown @onShow={{action "show"}} as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
@@ -248,7 +249,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   });
 
   test('closing dropdown calls onHide action', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.hide = action;
     await render(
       hbs`<BsDropdown @onHide={{action "hide"}} as |dd|><dd.toggle>Dropdown <span class="caret"></span></dd.toggle><dd.menu><li><a href="#">Something</a></li></dd.menu></BsDropdown>`
@@ -260,7 +261,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   });
 
   test('dropdown yields the openDropdown action', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.show = action;
     await render(hbs`
       <BsDropdown @onShow={{action "show"}} as |dd|>
@@ -275,7 +276,7 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   });
 
   test('dropdown yields the closeDropdown action', async function (assert) {
-    let hide = this.spy();
+    let hide = sinon.spy();
     this.actions.hide = hide;
     await render(hbs`
       <BsDropdown @closeOnMenuClick={{false}} @onHide={{action "hide"}} as |dd|>
@@ -295,8 +296,8 @@ module('Integration | Component | bs-dropdown', function (hooks) {
   });
 
   test('dropdown yields the toggleDropdown action', async function (assert) {
-    let show = this.spy();
-    let hide = this.spy();
+    let show = sinon.spy();
+    let hide = sinon.spy();
     this.actions.hide = hide;
     this.actions.show = show;
     await render(hbs`

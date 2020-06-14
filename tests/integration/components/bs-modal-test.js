@@ -5,6 +5,7 @@ import { render, click, triggerEvent } from '@ember/test-helpers';
 import { test, visibilityClass } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-modal', function (hooks) {
   setupRenderingTest(hooks);
@@ -69,7 +70,7 @@ module('Integration | Component | bs-modal', function (hooks) {
   });
 
   test('Modal yields close action', async function (assert) {
-    let closeAction = this.spy();
+    let closeAction = sinon.spy();
     this.actions.close = closeAction;
 
     await render(hbs`
@@ -87,7 +88,7 @@ module('Integration | Component | bs-modal', function (hooks) {
   });
 
   test('Modal yields submit action', async function (assert) {
-    let submitAction = this.spy();
+    let submitAction = sinon.spy();
     this.actions.submit = submitAction;
 
     await render(hbs`

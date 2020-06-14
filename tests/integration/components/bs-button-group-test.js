@@ -1,12 +1,12 @@
 import { A } from '@ember/array';
-import { module } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
-import test from 'ember-sinon-qunit/test-support/test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import { testBS3 } from '../../helpers/bootstrap-test';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-button-group', function (hooks) {
   setupRenderingTest(hooks);
@@ -45,7 +45,7 @@ module('Integration | Component | bs-button-group', function (hooks) {
   });
 
   test('radio button group calls onChange with value of selected button', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.change = action;
     await render(
       hbs`{{#bs-button-group type="radio" value=value onChange=(action "change") as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`
@@ -147,7 +147,7 @@ module('Integration | Component | bs-button-group', function (hooks) {
   });
 
   test('when clicking active radio button, onChange must not be called', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.change = action;
     await render(
       hbs`{{#bs-button-group type="radio" value=1 as |bg|}}{{#bg.button value=1}}1{{/bg.button}}{{#bg.button value=2}}2{{/bg.button}}{{#bg.button value=3}}3{{/bg.button}}{{/bs-button-group}}`

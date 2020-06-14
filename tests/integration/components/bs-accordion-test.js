@@ -12,6 +12,7 @@ import {
 } from '../../helpers/bootstrap-test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-accordion', function (hooks) {
   setupRenderingTest(hooks);
@@ -129,7 +130,7 @@ module('Integration | Component | bs-accordion', function (hooks) {
   });
 
   test('calls onChange action when changing selection', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.change = action;
     await render(hbs`
       <BsAccordion @onChange={{action "change"}} as |acc|>
@@ -143,7 +144,7 @@ module('Integration | Component | bs-accordion', function (hooks) {
   });
 
   test('prevents changing selection when onChange returns false', async function (assert) {
-    let action = this.stub();
+    let action = sinon.stub();
     action.returns(false);
     this.actions.change = action;
     await render(hbs`

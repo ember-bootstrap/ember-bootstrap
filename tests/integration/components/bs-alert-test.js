@@ -5,6 +5,7 @@ import { test, testRequiringTransitions } from '../../helpers/bootstrap-test';
 import hbs from 'htmlbars-inline-precompile';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-alert', function (hooks) {
   setupRenderingTest(hooks);
@@ -61,7 +62,7 @@ module('Integration | Component | bs-alert', function (hooks) {
   });
 
   test('onDismiss is called when clicking the close button', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.dismiss = action;
     await render(hbs`<BsAlert @type="success" @fade={{false}} @onDismiss={{action "dismiss"}}>Test</BsAlert>`);
     await click('button.close');
@@ -69,7 +70,7 @@ module('Integration | Component | bs-alert', function (hooks) {
   });
 
   test('alert is not hidden after clicking the close button when onDismiss action return false', async function (assert) {
-    let action = this.stub();
+    let action = sinon.stub();
     action.returns(false);
     this.actions.dismiss = action;
     await render(hbs`<BsAlert @type="success" @fade={{false}} @onDismiss={{action "dismiss"}}>Test</BsAlert>`);
@@ -80,7 +81,7 @@ module('Integration | Component | bs-alert', function (hooks) {
   });
 
   test('onDismissed is called after modal is closed', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.dismissed = action;
     await render(hbs`<BsAlert @type="success" @fade={{false}} @onDismissed={{action "dismissed"}}>Test</BsAlert>`);
     await click('button.close');

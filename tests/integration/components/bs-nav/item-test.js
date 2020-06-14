@@ -1,9 +1,9 @@
-import { module } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { click, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import test from 'ember-sinon-qunit/test-support/test';
 import setupNoDeprecations from '../../../helpers/setup-no-deprecations';
+import sinon from 'sinon';
 
 module('Integration | Component | bs-nav/item', function (hooks) {
   setupRenderingTest(hooks);
@@ -58,7 +58,7 @@ module('Integration | Component | bs-nav/item', function (hooks) {
   });
 
   test('clicking item calls onClick action', async function (assert) {
-    let action = this.spy();
+    let action = sinon.spy();
     this.actions.click = action;
     await render(hbs`<BsNav::Item @onClick={{action "click"}} />`);
     await click('li');
