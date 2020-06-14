@@ -2,13 +2,22 @@ import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { waitFor, render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { test, visibilityClass } from '../../helpers/bootstrap-test';
+import { test, visibilityClass, delay } from '../../helpers/bootstrap-test';
 import setupNoDeprecations from '../../helpers/setup-no-deprecations';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import { skipTransition } from 'ember-bootstrap/utils/transition-end';
 
 module('Integration | Component | bs-collapse', function (hooks) {
   setupRenderingTest(hooks);
   setupNoDeprecations(hooks);
+
+  hooks.before(function () {
+    skipTransition(false);
+  });
+
+  hooks.after(function () {
+    skipTransition(undefined);
+  });
 
   hooks.beforeEach(function () {
     this.actions = {};
@@ -78,13 +87,14 @@ module('Integration | Component | bs-collapse', function (hooks) {
     );
     this.set('collapsed', false);
 
-    await waitFor('.collapsing');
+    await waitFor('.collapsing[style*=height]');
+    await delay(100);
 
-    assert.dom('.collapsing').hasStyle({ height: '200px' });
+    assert.dom('.collapsing').hasAttribute('style', 'height: 200px;');
 
     await waitFor('.collapse');
 
-    assert.dom('.collapse').doesNotHaveStyle({ height: '200px' });
+    assert.dom('.collapse').hasAttribute('style', '');
   });
 
   test('it passes accessibility checks', async function (assert) {
