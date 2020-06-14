@@ -3,12 +3,13 @@ import layout from 'ember-bootstrap/templates/components/bs-collapse';
 import { alias, and, not } from '@ember/object/computed';
 import { addObserver } from '@ember/object/observers';
 import Component from '@ember/component';
-import { isPresent } from '@ember/utils';
+import { isPresent, isNone } from '@ember/utils';
 import { next } from '@ember/runloop';
 import { camelize } from '@ember/string';
 import transitionEnd from 'ember-bootstrap/utils/transition-end';
 import { assert } from '@ember/debug';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import { computed } from '@ember/object';
 
 /**
   An Ember component that mimics the behaviour of [Bootstrap's collapse.js plugin](http://getbootstrap.com/javascript/#collapse)
@@ -91,6 +92,20 @@ export default class Collapse extends Component {
    * @public
    */
   expandedSize = null;
+
+  /**
+   * Calculates a hash for style attribute.
+   */
+  @computed('collapseDimension', 'collapseSize')
+  get cssStyle() {
+    if (isNone(this.collapseSize)) {
+      return {};
+    }
+
+    return {
+      [this.collapseDimension]: `${this.collapseSize}px`,
+    };
+  }
 
   /**
    * Usually the size (height) of the element is only set while transitioning, and reseted afterwards. Set to true to always set a size.
