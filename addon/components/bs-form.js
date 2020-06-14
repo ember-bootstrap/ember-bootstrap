@@ -10,6 +10,7 @@ import RSVP from 'rsvp';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
 import { DEBUG } from '@glimmer/env';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Render a form with the appropriate Bootstrap layout class (see `formLayout`).
@@ -104,6 +105,8 @@ import { DEBUG } from '@glimmer/env';
   </BsForm>
   ```
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Form
   @namespace Components
   @extends Ember.Component
@@ -111,6 +114,7 @@ import { DEBUG } from '@glimmer/env';
 */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class Form extends Component {
   /**
    * Bootstrap form class name (computed)

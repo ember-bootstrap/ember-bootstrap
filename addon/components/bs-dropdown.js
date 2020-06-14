@@ -4,6 +4,7 @@ import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { assert } from '@ember/debug';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 const ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 const SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
@@ -164,12 +165,15 @@ const SUPPORTED_KEYCODES = [ESCAPE_KEYCODE, ARROW_DOWN_KEYCODE, ARROW_UP_KEYCODE
   version does. This also allows you to set `renderInPlace=false` on the menu component to render it in a wormhole,
   which you might want to do if you experience clipping issues by an outer `overflow: hidden` element.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Dropdown
   @namespace Components
   @extends Ember.Component
   @public
 s*/
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class Dropdown extends Component {
   /**

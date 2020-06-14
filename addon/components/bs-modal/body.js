@@ -1,6 +1,7 @@
 import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/body';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
 
@@ -12,5 +13,6 @@ import layout from 'ember-bootstrap/templates/components/bs-modal/body';
  @public
  */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class ModalBody extends Component {}

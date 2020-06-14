@@ -4,6 +4,7 @@ import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-modal/footer';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
 
@@ -16,6 +17,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class ModalFooter extends Component {
   /**
    * The title of the default close button. Will be ignored (i.e. no close button) if you provide your own block

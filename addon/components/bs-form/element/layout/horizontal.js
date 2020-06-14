@@ -1,4 +1,4 @@
-import { layout as templateLayout, tagName } from '@ember-decorators/component';
+import { layout as templateLayout } from '@ember-decorators/component';
 import { computed } from '@ember/object';
 import { assert } from '@ember/debug';
 import { isBlank } from '@ember/utils';
@@ -14,7 +14,6 @@ import { macroCondition, getOwnConfig } from '@embroider/macros';
  @extends Components.FormElementLayout
  @private
  */
-@tagName('')
 @templateLayout(layout)
 export default class FormElementLayoutHorizontal extends FormElementLayout {
   /**

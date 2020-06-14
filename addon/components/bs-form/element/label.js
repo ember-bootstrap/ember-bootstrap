@@ -5,6 +5,7 @@ import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-form/element/label';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { isBlank } from '@ember/utils';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
 
@@ -15,6 +16,7 @@ import { isBlank } from '@ember/utils';
  */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class FormElementLabel extends Component {
   /**
    * @property label

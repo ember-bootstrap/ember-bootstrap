@@ -3,6 +3,7 @@ import { computed } from '@ember/object';
 import ContextualHelp from './bs-contextual-help';
 import layout from 'ember-bootstrap/templates/components/bs-tooltip';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component that implements Bootstrap [tooltips](http://getbootstrap.com/javascript/#tooltips).
@@ -74,12 +75,15 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   * `onHide`
   * `onHidden`
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Tooltip
   @namespace Components
   @extends Components.ContextualHelp
   @public
 */
 @templateLayout(layout)
+@deprecateSubclassing
 export default class Tooltip extends ContextualHelp {
   /**
    * @property elementComponent

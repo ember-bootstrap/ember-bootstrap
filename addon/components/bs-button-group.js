@@ -6,6 +6,7 @@ import { A, isArray } from '@ember/array';
 import layout from 'ember-bootstrap/templates/components/bs-button-group';
 import sizeClass from 'ember-bootstrap/utils/cp/size-class';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Bootstrap-style button group, that visually groups buttons, and optionally adds radio/checkbox like behaviour.
@@ -58,12 +59,15 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   </ul>
   ```
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class ButtonGroup
   @namespace Components
   @extends Ember.Component
   @public
 */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class ButtonGroup extends Component {
   ariaRole = 'group';

@@ -2,6 +2,7 @@ import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-progress';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component to display a Bootstrap progress bar, see http://getbootstrap.com/components/#progress.
@@ -31,12 +32,15 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   </BsProgress>
   ```
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Progress
   @namespace Components
   @extends Ember.Component
   @public
 */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class Progress extends Component {
   /**

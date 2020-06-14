@@ -9,6 +9,7 @@ import ComponentParent from 'ember-bootstrap/mixins/component-parent';
 import TabPane from 'ember-bootstrap/components/bs-tab/pane';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Tab component for dynamic tab functionality that mimics the behaviour of Bootstrap's tab.js plugin,
@@ -106,6 +107,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   </div>
   ```
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Tab
   @namespace Components
   @extends Ember.Component
@@ -113,6 +116,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   @public
 */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class Tab extends Component.extend(ComponentParent) {
   /**

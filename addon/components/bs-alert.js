@@ -9,6 +9,7 @@ import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Implements [Bootstrap alerts](http://getbootstrap.com/components/#alerts)
@@ -24,12 +25,15 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
   </BsAlert>
   ```
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Alert
   @namespace Components
   @extends Ember.Component
   @public
 */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class Alert extends Component {
   /**

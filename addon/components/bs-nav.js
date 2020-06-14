@@ -3,6 +3,7 @@ import { computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-nav';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component to generate [bootstrap navs](http://getbootstrap.com/components/#nav)
@@ -75,6 +76,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
   The `fill` styling is only available with Bootstrap 4
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Nav
   @namespace Components
   @extends Ember.Component
@@ -83,6 +86,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class Nav extends Component {
   @computed('type')
   get typeClass() {

@@ -4,6 +4,7 @@ import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-accordion';
 import listenTo from 'ember-bootstrap/utils/cp/listen-to';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Bootstrap-style [accordion group](http://getbootstrap.com/javascript/#collapse-example-accordion),
@@ -31,12 +32,15 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
   In the example above the first accordion item utilizes the yielded `change` action to add some custom behaviour.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Accordion
   @namespace Components
   @extends Ember.Component
   @public
 */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class Accordion extends Component {
   /**

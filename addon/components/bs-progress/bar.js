@@ -5,6 +5,7 @@ import layout from 'ember-bootstrap/templates/components/bs-progress/bar';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import typeClass from 'ember-bootstrap/utils/cp/type-class';
 import { macroCondition, getOwnConfig } from '@embroider/macros';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
 
@@ -16,6 +17,7 @@ import { macroCondition, getOwnConfig } from '@embroider/macros';
  @public
  */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class ProgressBar extends Component {
   /**

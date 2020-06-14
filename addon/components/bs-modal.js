@@ -13,6 +13,7 @@ import { guidFor } from '@ember/object/internals';
 import usesTransition from 'ember-bootstrap/utils/cp/uses-transition';
 import isFastBoot from 'ember-bootstrap/utils/is-fastboot';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
   Component for creating [Bootstrap modals](http://getbootstrap.com/javascript/#modals) with custom markup.
@@ -49,6 +50,8 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 
   See the documentation of the [bs-modal-simple](Components.ModalSimple.html) component for further examples.
 
+  *Note that only invoking the component in a template as shown above is considered part of its public API. Extending from it (subclassing) is generally not supported, and may break at any time.*
+
   @class Modal
   @namespace Components
   @extends Ember.Component
@@ -56,6 +59,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
 */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class Modal extends Component {
   @service('-document')
   document;

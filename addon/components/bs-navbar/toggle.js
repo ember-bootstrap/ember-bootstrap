@@ -3,6 +3,7 @@ import { layout as templateLayout, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import layout from 'ember-bootstrap/templates/components/bs-navbar/toggle';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
  * Component to implement the responsive menu toggle behavior in a [Components.Navbar](Components.Navbar.html)
@@ -20,6 +21,7 @@ import defaultValue from 'ember-bootstrap/utils/default-decorator';
  */
 @templateLayout(layout)
 @tagName('')
+@deprecateSubclassing
 export default class NavbarToggle extends Component {
   @defaultValue
   collapsed = true;

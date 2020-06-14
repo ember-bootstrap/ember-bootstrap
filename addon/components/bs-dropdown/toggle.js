@@ -4,6 +4,7 @@ import { layout as templateLayout } from '@ember-decorators/component';
 import layout from 'ember-bootstrap/templates/components/bs-dropdown/toggle';
 import defaultValue from 'ember-bootstrap/utils/default-decorator';
 import { computed, action } from '@ember/object';
+import deprecateSubclassing from 'ember-bootstrap/utils/deprecate-subclassing';
 
 /**
  Anchor element that triggers the parent dropdown to open.
@@ -17,6 +18,7 @@ import { computed, action } from '@ember/object';
  @publicø
  */
 @tagName('')
+@deprecateSubclassing
 @templateLayout(layout)
 export default class DropdownToggle extends Component {
   /**
